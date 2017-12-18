@@ -6562,7 +6562,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackGraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
+	///<summary>descriptor for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreDescriptor<T>  : RequestDescriptorBase<GraphExploreDescriptor<T>,GraphExploreRequestParameters, IGraphExploreRequest>, IGraphExploreRequest
 	{ 
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -6662,7 +6662,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{ 
 			
@@ -6683,7 +6683,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetLicenseDescriptor  : RequestDescriptorBase<GetLicenseDescriptor,GetLicenseRequestParameters, IGetLicenseRequest>, IGetLicenseRequest
 	{ 
 			
@@ -6707,7 +6707,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackLicensePost <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	///<summary>descriptor for XpackLicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseDescriptor  : RequestDescriptorBase<PostLicenseDescriptor,PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
 	{ 
 			
@@ -7509,7 +7509,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-authenticate.html</pre></summary>
+	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
 	{ 
 			
@@ -7530,7 +7530,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-change-password.html</pre></summary>
+	///<summary>descriptor for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
 	public partial class ChangePasswordDescriptor  : RequestDescriptorBase<ChangePasswordDescriptor,ChangePasswordRequestParameters, IChangePasswordRequest>, IChangePasswordRequest
 	{ 
 		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -7562,7 +7562,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/x-pack/current/security-api-clear-cache.html</pre></summary>
+	///<summary>descriptor for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
 	public partial class ClearCachedRealmsDescriptor  : RequestDescriptorBase<ClearCachedRealmsDescriptor,ClearCachedRealmsRequestParameters, IClearCachedRealmsRequest>, IClearCachedRealmsRequest
 	{ 
 		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
@@ -7592,7 +7592,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-clear-role-cache</pre></summary>
+	///<summary>descriptor for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache</pre></summary>
 	public partial class ClearCachedRolesDescriptor  : RequestDescriptorBase<ClearCachedRolesDescriptor,ClearCachedRolesRequestParameters, IClearCachedRolesRequest>, IClearCachedRolesRequest
 	{ 
 		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -7619,7 +7619,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-delete-role</pre></summary>
+	///<summary>descriptor for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role</pre></summary>
 	public partial class DeleteRoleDescriptor  : RequestDescriptorBase<DeleteRoleDescriptor,DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
 	{ 
 		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7649,7 +7649,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
+	///<summary>descriptor for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
 	public partial class DeleteRoleMappingDescriptor  : RequestDescriptorBase<DeleteRoleMappingDescriptor,DeleteRoleMappingRequestParameters, IDeleteRoleMappingRequest>, IDeleteRoleMappingRequest
 	{ 
 		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7679,7 +7679,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-delete-user</pre></summary>
+	///<summary>descriptor for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user</pre></summary>
 	public partial class DeleteUserDescriptor  : RequestDescriptorBase<DeleteUserDescriptor,DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
 	{ 
 		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -7709,7 +7709,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-disable-user.html</pre></summary>
+	///<summary>descriptor for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user</pre></summary>
 	public partial class DisableUserDescriptor  : RequestDescriptorBase<DisableUserDescriptor,DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
 	{ 
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -7741,7 +7741,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-enable-user.html</pre></summary>
+	///<summary>descriptor for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user</pre></summary>
 	public partial class EnableUserDescriptor  : RequestDescriptorBase<EnableUserDescriptor,EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
 	{ 
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -7773,7 +7773,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-get-role</pre></summary>
+	///<summary>descriptor for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role</pre></summary>
 	public partial class GetRoleDescriptor  : RequestDescriptorBase<GetRoleDescriptor,GetRoleRequestParameters, IGetRoleRequest>, IGetRoleRequest
 	{ 
 		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7802,7 +7802,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
+	///<summary>descriptor for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
 	public partial class GetRoleMappingDescriptor  : RequestDescriptorBase<GetRoleMappingDescriptor,GetRoleMappingRequestParameters, IGetRoleMappingRequest>, IGetRoleMappingRequest
 	{ 
 		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7831,7 +7831,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-get-token</pre></summary>
+	///<summary>descriptor for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token</pre></summary>
 	public partial class GetUserAccessTokenDescriptor  : RequestDescriptorBase<GetUserAccessTokenDescriptor,GetUserAccessTokenRequestParameters, IGetUserAccessTokenRequest>, IGetUserAccessTokenRequest
 	{ 
 			
@@ -7852,7 +7852,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-get-user</pre></summary>
+	///<summary>descriptor for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user</pre></summary>
 	public partial class GetUserDescriptor  : RequestDescriptorBase<GetUserDescriptor,GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
 	{ 
 		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
@@ -7881,7 +7881,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-tokens.html#security-api-invalidate-token</pre></summary>
+	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token</pre></summary>
 	public partial class InvalidateUserAccessTokenDescriptor  : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor,InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest
 	{ 
 			
@@ -7902,7 +7902,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-roles.html#security-api-put-role</pre></summary>
+	///<summary>descriptor for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role</pre></summary>
 	public partial class PutRoleDescriptor  : RequestDescriptorBase<PutRoleDescriptor,PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
 	{ 
 		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7932,7 +7932,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
+	///<summary>descriptor for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
 	public partial class PutRoleMappingDescriptor  : RequestDescriptorBase<PutRoleMappingDescriptor,PutRoleMappingRequestParameters, IPutRoleMappingRequest>, IPutRoleMappingRequest
 	{ 
 		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -7962,7 +7962,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/x-pack/master/security-api-users.html#security-api-put-user</pre></summary>
+	///<summary>descriptor for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user</pre></summary>
 	public partial class PutUserDescriptor  : RequestDescriptorBase<PutUserDescriptor,PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
 	{ 
 		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -8262,6 +8262,9 @@ namespace Nest
 		public WatcherStatsDescriptor WatcherStatsMetric(WatcherStatsMetric watcherStatsMetric) => Assign(a=>a.RouteValues.Optional("watcher_stats_metric", (Metrics)watcherStatsMetric));
 
 	
+		///<summary>Emits stack traces of currently running watches</summary>
+		public WatcherStatsDescriptor EmitStacktraces(bool emit_stacktraces = true) => AssignParam(p=>p.EmitStacktraces(emit_stacktraces));
+
 		///<summary>Pretty format the returned JSON response.</summary>
 		public WatcherStatsDescriptor Pretty(bool pretty = true) => AssignParam(p=>p.Pretty(pretty));
 

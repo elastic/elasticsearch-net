@@ -10,6 +10,7 @@ namespace ApiGenerator.Overrides.Descriptors
 			"end",
 			"start",
 			"calc_interim",
+			"skip_time"
 		};
 	}
 }

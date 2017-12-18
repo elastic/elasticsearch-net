@@ -37,6 +37,14 @@ namespace Nest
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
 		DateTimeOffset? Start { get; set; }
+
+		/// <summary>
+		/// Skips time to the given value without generating results or updating the model for the skipped interval
+		/// </summary>
+		[JsonProperty("skip_time")]
+		// Forced to prevent override, ML API always expects ISO8601 format
+		[JsonConverter(typeof(IsoDateTimeConverter))]
+		DateTimeOffset? SkipTime { get; set; }
 	}
 
 	public partial class FlushJobRequest
@@ -49,6 +57,8 @@ namespace Nest
 		public DateTimeOffset? End { get; set; }
 		/// <inheritdoc />
 		public DateTimeOffset? Start { get; set; }
+		/// <inheritdoc />
+		public DateTimeOffset? SkipTime { get; set; }
 	}
 
 	[DescriptorFor("XpackMlFlushJob")]
@@ -58,6 +68,7 @@ namespace Nest
 		bool? IFlushJobRequest.CalculateInterim { get; set; }
 		DateTimeOffset? IFlushJobRequest.End { get; set; }
 		DateTimeOffset? IFlushJobRequest.Start { get; set; }
+		DateTimeOffset? IFlushJobRequest.SkipTime { get; set; }
 
 		/// <inheritdoc />
 		public FlushJobDescriptor AdvanceTime(DateTimeOffset advanceTime) => Assign(a => a.AdvanceTime = advanceTime);
@@ -70,5 +81,8 @@ namespace Nest
 
 		/// <inheritdoc />
 		public FlushJobDescriptor Start(DateTimeOffset start) => Assign(a => a.Start = start);
+
+		/// <inheritdoc />
+		public FlushJobDescriptor SkipTime(DateTimeOffset skipTime) => Assign(a => a.SkipTime = skipTime);
 	}
 }
