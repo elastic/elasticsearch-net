@@ -80,9 +80,9 @@ namespace Tests.Search.Suggesters
 				.Confidence(1)
 				.Collate(c => c
 					.Query(q => q
-						.Inline("{ \"match_all\": { }}")
-						.Params(p => p.Add("field_name", _phraseSuggestField))
+						.Inline("{ \"match\": { \"{{field_name}}\" : \"{{suggestion}}\" }}")
 					)
+					.Params(p => p.Add("field_name", _phraseSuggestField))
 					.Prune()
 				)
 				.DirectGenerator(d => d
@@ -170,11 +170,11 @@ namespace Tests.Search.Suggesters
 								{
 									Query = new TemplateQuery
 									{
-										Inline = "{ \"match_all\": { }}",
-										Params = new Dictionary<string, object>
-										{
-											{"field_name", _phraseSuggestField}
-										}
+										Inline = "{ \"match\": { \"{{field_name}}\" : \"{{suggestion}}\" }}",
+									},
+									Params = new Dictionary<string, object>
+									{
+										{"field_name", _phraseSuggestField}
 									},
 									Prune = true
 								},
@@ -322,11 +322,11 @@ namespace Tests.Search.Suggesters
 						{
 							query = new
 							{
-								inline = "{ \"match_all\": { }}",
-								@params = new
-								{
-									field_name = _phraseSuggestField
-								}
+								inline = "{ \"match\": { \"{{field_name}}\" : \"{{suggestion}}\" }}",
+							},
+							@params = new
+							{
+								field_name = _phraseSuggestField
 							},
 							prune = true,
 						},
