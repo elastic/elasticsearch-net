@@ -31,6 +31,8 @@ namespace Nest
 
 	public partial class SearchTemplateRequest
 	{
+		protected sealed override void Initialize() => this.TypedKeys = true;
+
 		public string Source { get; set; }
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]
 		public string Inline { get => this.Source; set => this.Source = value; }
@@ -61,6 +63,8 @@ namespace Nest
 
 	public partial class SearchTemplateDescriptor<T> where T : class
 	{
+		protected sealed override void Initialize() => this.TypedKeys();
+
 		Type ICovariantSearchRequest.ClrType => typeof(T);
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
 

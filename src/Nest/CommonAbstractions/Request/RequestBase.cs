@@ -37,11 +37,17 @@ namespace Nest
 		[JsonIgnore]
 		protected IRequest<TParameters> RequestState => this;
 
-		protected RequestBase() { }
+		protected RequestBase()
+		{
+			Initialize();
+		}
 		protected RequestBase(Func<RouteValues, RouteValues> pathSelector)
 		{
 			pathSelector(RequestState.RouteValues);
+			Initialize();
 		}
+
+		protected virtual void Initialize() { }
 
 		protected virtual HttpMethod HttpMethod => RequestState.RequestParameters.DefaultHttpMethod;
 
@@ -71,8 +77,8 @@ namespace Nest
 		/// </summary>
 		public IRequestConfiguration RequestConfiguration
 		{
-			get { return RequestState.RequestParameters.RequestConfiguration;  }
-			set { RequestState.RequestParameters.RequestConfiguration = value; }
+			get => RequestState.RequestParameters.RequestConfiguration;
+			set => RequestState.RequestParameters.RequestConfiguration = value;
 		}
 	}
 
