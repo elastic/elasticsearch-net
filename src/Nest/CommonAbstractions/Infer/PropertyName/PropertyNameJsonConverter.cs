@@ -5,11 +5,11 @@ namespace Nest
 {
 	internal class PropertyNameJsonConverter : JsonConverter
 	{
-		public override bool CanRead => false;
+		public override bool CanRead => true;
 
 		public override bool CanWrite => true;
 
-		public override bool CanConvert(Type objectType) => true;
+		public override bool CanConvert(Type objectType) => objectType == typeof(PropertyName);
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -23,7 +23,9 @@ namespace Nest
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			return null;
+			if (reader.TokenType != JsonToken.String) return null;
+			var property = reader.Value.ToString();
+			return (PropertyName)property;
 		}
 	}
 }

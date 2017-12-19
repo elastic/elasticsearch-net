@@ -9,8 +9,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var marker = value as IndexName;
-			if (marker == null)
+			if (!(value is IndexName marker))
 			{
 				writer.WriteNull();
 				return;
