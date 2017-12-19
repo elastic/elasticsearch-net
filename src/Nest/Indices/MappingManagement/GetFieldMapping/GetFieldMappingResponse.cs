@@ -12,7 +12,6 @@ namespace Nest
 	{
 		protected override FieldMappingProperties Create(IConnectionSettingsValues s, Dictionary<Field, FieldMapping> d) =>
 			new FieldMappingProperties(s, d);
-
 	}
 	[JsonConverter(typeof(FieldMappingPropertiesJsonConverter))]
 	public class FieldMappingProperties : ResolvableDictionaryProxy<Field, FieldMapping> {

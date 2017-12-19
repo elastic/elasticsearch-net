@@ -7,28 +7,28 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[JsonConverter(typeof(GetAliasResponseConverter))]
 	public interface IGetAliasResponse : IResponse
 	{
-		IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; }
+		IReadOnlyDictionary<IndexName, IndexAliases> Indices { get; }
 	}
 
-	public class GetAliasResponse : ResponseBase, IGetAliasResponse
+	public class IndexAliases
 	{
-		public IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; internal set; } = EmptyReadOnly<string, IReadOnlyList<AliasDefinition>>.Dictionary;
+		[JsonProperty("aliases")]
+		public IReadOnlyDictionary<string, AliasDefinition> Aliases { get; internal set; } = EmptyReadOnly<string, AliasDefinition>.Dictionary;
+	}
+
+	[JsonConverter(typeof(GetAliasResponseConverter))]
+	public class GetAliasResponse : DictionaryResponseBase<IndexName, IndexAliases>, IGetAliasResponse
+	{
+		[JsonIgnore]
+		public IReadOnlyDictionary<IndexName, IndexAliases> Indices => Self.BackingDictionary;
 
 		public override bool IsValid => this.Indices.Count > 0;
 	}
 
-	internal class GetAliasResponseConverter : JsonConverter
+	internal class GetAliasResponseConverter : ResolvableDictionaryResponseJsonConverter<GetAliasResponse, IndexName, IndexAliases>
 	{
-		public override bool CanWrite => false;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
-
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var j = JObject.Load(reader);
@@ -47,32 +47,11 @@ namespace Nest
 				statusProperty.Remove();
 			}
 
-			//Read the remaining properties as aliases
-			var dict = serializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, AliasDefinition>>>>(j.CreateReader());
-			var indices = new Dictionary<string, IReadOnlyList<AliasDefinition>>();
-
-			foreach (var kv in dict)
-			{
-				var indexDict = kv.Key;
-				var aliases = new List<AliasDefinition>();
-				if (kv.Value != null && kv.Value.ContainsKey("aliases"))
-				{
-					var aliasDict = kv.Value["aliases"];
-					if (aliasDict != null)
-						aliases = aliasDict.Select(kva =>
-						{
-							var alias = kva.Value;
-							alias.Name = kva.Key;
-							return alias;
-						}).ToList();
-				}
-
-				indices.Add(indexDict, aliases);
-			}
-
-			return new GetAliasResponse { Indices = indices, Error = new Error { Reason = error }, StatusCode = statusCode};
+			var response = (GetAliasResponse)base.ReadJson(j.CreateReader(), objectType, existingValue, serializer);
+			response.Error = error.IsNullOrEmpty() ? null : new Error { Reason = error };
+			response.StatusCode = statusCode;
+			return response;
 		}
-
-		public override bool CanConvert(Type objectType) => true;
 	}
+
 }
