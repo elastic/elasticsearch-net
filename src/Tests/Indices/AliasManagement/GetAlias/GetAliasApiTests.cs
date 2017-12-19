@@ -8,13 +8,15 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
+using Tests.Framework.MockData;
 using Xunit;
+using static Nest.Infer;
 
 namespace Tests.Indices.AliasManagement.GetAlias
 {
 	public class GetAliasApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
-		private static readonly Names Names = Infer.Names(DefaultSeeder.ProjectsAliasName);
+		private static readonly Names Names = Names(DefaultSeeder.ProjectsAliasName);
 
 		public GetAliasApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -29,10 +31,15 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"_all/_alias/{DefaultSeeder.ProjectsAliasName}";
+
 		protected override void ExpectResponse(IGetAliasResponse response)
 		{
-			response.Indices.Should().NotBeNull();
-			response.Indices.Count.Should().BeGreaterThan(0);
+			response.Indices.Should().NotBeEmpty($"expect to find indices pointing to {DefaultSeeder.ProjectsAliasName}");
+			var indexAliases = response.Indices[Index<Project>()];
+			indexAliases.Should().NotBeNull("expect to find alias for project");
+			indexAliases.Aliases.Should().NotBeEmpty("expect to find aliases dictionary definitions for project");
+			var alias = indexAliases.Aliases[DefaultSeeder.ProjectsAliasName];
+			alias.Should().NotBeNull();
 		}
 		protected override bool SupportsDeserialization => false;
 
@@ -45,7 +52,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 
 	public class GetAliasPartialMatchApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
-		private static readonly Names Names = Infer.Names(DefaultSeeder.ProjectsAliasName,"x", "y");
+		private static readonly Names Names = Names(DefaultSeeder.ProjectsAliasName,"x", "y");
 
 		public GetAliasPartialMatchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -76,7 +83,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 
 	public class GetAliasNotFoundApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
-		private static readonly Names Names = Infer.Names("bad-alias");
+		private static readonly Names Names = Names("bad-alias");
 
 		public GetAliasNotFoundApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

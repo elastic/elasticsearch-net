@@ -45,26 +45,41 @@ namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 			}
 		}
 
-		[I]
-		public void ShouldGetAliasesPointingToIndex()
+		[I] public void ShouldGetAliasesPointingToIndex()
 		{
 			var aliasesPointingToIndex = _client.GetAliasesPointingToIndex(Index);
-
-			aliasesPointingToIndex.Should().NotBeEmpty().And.HaveCount(3);
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(1)).Should().NotBeNull();
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(2)).Should().NotBeNull();
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(3)).Should().NotBeNull();
+			AssertGetAliasesPointingToIndexResponse(aliasesPointingToIndex);
 		}
 
-		[I]
-		public async Task ShouldGetAliasesPointingToIndexAsync()
+		[I] public void ShouldGetIndicesPointingToAlias()
+		{
+			var indices = _client.GetIndicesPointingToAlias(Alias(3));
+			indices.Should().NotBeEmpty().And.Contain(Index);
+		}
+
+		[I] public async Task ShouldGetAliasesPointingToIndexAsync()
 		{
 			var aliasesPointingToIndex = await _client.GetAliasesPointingToIndexAsync(Index);
-
-			aliasesPointingToIndex.Should().NotBeEmpty().And.HaveCount(3);
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(1)).Should().NotBeNull();
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(2)).Should().NotBeNull();
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(3)).Should().NotBeNull();
+			AssertGetAliasesPointingToIndexResponse(aliasesPointingToIndex);
 		}
+		[I] public async Task ShouldGetIndicesPointingToAliasAsync()
+		{
+			var indices = await _client.GetIndicesPointingToAliasAsync(Alias(3));
+			indices.Should().NotBeEmpty().And.Contain(Index);
+		}
+
+		private static void AssertGetAliasesPointingToIndexResponse(IReadOnlyDictionary<string, AliasDefinition> aliasesPointingToIndex)
+		{
+			aliasesPointingToIndex.Should().NotBeEmpty().And.HaveCount(3)
+				.And.ContainKey(Alias(1))
+				.And.ContainKey(Alias(2))
+				.And.ContainKey(Alias(3));
+
+			aliasesPointingToIndex[Alias(1)].Should().NotBeNull();
+			aliasesPointingToIndex[Alias(2)].Should().NotBeNull();
+			aliasesPointingToIndex[Alias(3)].Should().NotBeNull();
+
+		}
+
 	}
 }

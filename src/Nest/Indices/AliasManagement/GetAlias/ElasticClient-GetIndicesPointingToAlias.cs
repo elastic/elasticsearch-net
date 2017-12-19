@@ -16,7 +16,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="client">The client</param>
 		/// <param name="alias">The alias name(s)</param>
-		public static IEnumerable<string> GetIndicesPointingToAlias(this IElasticClient client, Names alias)
+		public static IReadOnlyCollection<string> GetIndicesPointingToAlias(this IElasticClient client, Names alias)
 		{
 			var response = client.GetAlias(a => a.Name(alias));
 			return IndicesPointingToAlias(client.ConnectionSettings, alias, response);
@@ -27,23 +27,23 @@ namespace Nest
 		/// </summary>
 		/// <param name="client">The client</param>
 		/// <param name="alias">The alias name(s)</param>
-		public static async Task<IEnumerable<string>> GetIndicesPointingToAliasAsync(this IElasticClient client, Names alias)
+		public static async Task<IReadOnlyCollection<string>> GetIndicesPointingToAliasAsync(this IElasticClient client, Names alias)
 		{
 			var response = await client.GetAliasAsync(a => a.Name(alias)).ConfigureAwait(false);
 			return IndicesPointingToAlias(client.ConnectionSettings, alias, response);
 		}
 
-		private static IEnumerable<string> IndicesPointingToAlias(IConnectionConfigurationValues settings, Names alias, IGetAliasResponse aliasesResponse)
+		private static IReadOnlyCollection<string> IndicesPointingToAlias(IConnectionSettingsValues settings, Names alias, IGetAliasResponse aliasesResponse)
 		{
 			if (!aliasesResponse.IsValid
 			    || !aliasesResponse.Indices.HasAny())
-				return new string[] { };
+				return EmptyReadOnly<string>.Collection;
 
 			var aliases = alias.GetString(settings).Split(',');
 
 			var indices = from i in aliasesResponse.Indices
-				where i.Value.Any(a => aliases.Contains(a.Name))
-				select i.Key;
+				where i.Value?.Aliases?.Keys?.Any(key => aliases.Contains(key)) ?? false
+				select settings.Inferrer.IndexName(i.Key);
 
 			return indices.ToList();
 		}

@@ -8,40 +8,29 @@ namespace Nest
 	public static class AliasPointingToIndexExtensions
 	{
 		/// <summary>
-		/// Returns a collection of aliases that point to the specified index, simplified version of GetAlias.
+		/// Returns a dictionary of aliases that point to the specified index, simplified version of <see cref="IElasticClient.GetAlias(IGetAliasRequest)"/>..
 		/// </summary>
-		/// <param name="client">The client</param>
-		/// <param name="indices">The index name(s) we want to know aliases of</param>
-		public static IEnumerable<AliasDefinition> GetAliasesPointingToIndex(this IElasticClient client, Indices indices)
+		/// <param name="index">The index name we want to know aliases of</param>
+		public static IReadOnlyDictionary<string, AliasDefinition> GetAliasesPointingToIndex(this IElasticClient client, IndexName index)
 		{
-			var aliasesResponse = client.GetAlias(a => a.Index(indices));
-			return AliasesPointingToIndex(client.ConnectionSettings, indices, aliasesResponse);
+			var response = client.GetAlias(a => a.Index(index));
+			return AliasesPointingToIndex(index, response);
 		}
 
 		/// <summary>
-		/// Returns a collection of aliases that point to the specified index, simplified version of GetAlias.
+		/// Returns a dictionary of aliases that point to the specified index, simplified version of <see cref="IElasticClient.GetAlias(IGetAliasRequest)"/>.
 		/// </summary>
-		/// <param name="client">The client</param>
-		/// <param name="indices">The index name(s) we want to know aliases of</param>
-		public static async Task<IEnumerable<AliasDefinition>> GetAliasesPointingToIndexAsync(this IElasticClient client, Indices indices)
+		/// <param name="index">The index name we want to know aliases of</param>
+		public static async Task<IReadOnlyDictionary<string, AliasDefinition>> GetAliasesPointingToIndexAsync(this IElasticClient client, IndexName index)
 		{
-			var response = await client.GetAliasAsync(a => a.Index(indices)).ConfigureAwait(false);
-			return AliasesPointingToIndex(client.ConnectionSettings, indices, response);
+			var response = await client.GetAliasAsync(a => a.Index(index)).ConfigureAwait(false);
+			return AliasesPointingToIndex(index, response);
 		}
 
-		private static IEnumerable<AliasDefinition> AliasesPointingToIndex(IConnectionConfigurationValues settings, IUrlParameter indices, IGetAliasResponse aliasesResponse)
+		private static IReadOnlyDictionary<string, AliasDefinition> AliasesPointingToIndex(IndexName index, IGetAliasResponse response)
 		{
-			if (!aliasesResponse.IsValid || !aliasesResponse.Indices.HasAny())
-				return Enumerable.Empty<AliasDefinition>();
-
-			var indexNames = indices.GetString(settings).Split(',');
-
-			var aliases = new List<AliasDefinition>();
-			foreach (var indexName in indexNames)
-				if (aliasesResponse.Indices.ContainsKey(indexName))
-					aliases.AddRange(aliasesResponse.Indices[indexName]);
-
-			return aliases;
+			if (!response.IsValid || !response.Indices.HasAny()) return EmptyReadOnly<string, AliasDefinition>.Dictionary;
+			return response.Indices[index].Aliases;
 		}
 	}
 }
