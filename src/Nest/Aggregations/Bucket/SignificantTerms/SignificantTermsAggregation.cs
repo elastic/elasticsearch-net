@@ -34,8 +34,25 @@ namespace Nest
 		/// Return only terms that match equal to or more than a configurable
 		/// number of hits
 		/// </summary>
-		[JsonProperty("min_doc_count")]
+		[JsonIgnore]
+		[Obsolete("Use MinimumDocumentCountAsLong. Fixed in NEST 6.x")]
 		int? MinimumDocumentCount { get; set; }
+
+		/// <summary>
+		/// Return only terms that match equal to or more than a configurable
+		/// number of hits
+		/// </summary>
+		[JsonProperty("min_doc_count")]
+		long? MinimumDocumentCountAsLong { get; set; }
+
+		/// <summary>
+		/// Regulates the certainty a shard has if the term should actually be added to the candidate
+		/// list or not with respect to the <see cref="MinimumDocumentCountAsLong"/>.
+		/// Terms will only be considered if their local shard frequency within
+		/// the set is higher than the <see cref="ShardMinimumDocumentCount"/>.
+		/// </summary>
+		[JsonProperty("shard_min_doc_count")]
+		long? ShardMinimumDocumentCount { get; set; }
 
 		/// <summary>
 		/// Determines the mechanism by which aggregations are executed
@@ -103,7 +120,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("background_filter")]
 		QueryContainer BackgroundFilter { get; set; }
-
 	}
 
 	public class SignificantTermsAggregation : BucketAggregationBase, ISignificantTermsAggregation
@@ -114,8 +130,19 @@ namespace Nest
 		public int? Size { get; set; }
 		/// <inheritdoc />
 		public int? ShardSize { get; set; }
+
+		[Obsolete("Use MinimumDocumentCountAsLong. Fixed in NEST 6.x")]
 		/// <inheritdoc />
-		public int? MinimumDocumentCount { get; set; }
+		public int? MinimumDocumentCount
+		{
+			get => MinimumDocumentCountAsLong > int.MaxValue ? int.MaxValue : (int?)MinimumDocumentCountAsLong;
+			set => MinimumDocumentCountAsLong = value;
+		}
+
+		/// <inheritdoc />
+		public long? MinimumDocumentCountAsLong { get; set; }
+		/// <inheritdoc />
+		public long? ShardMinimumDocumentCount { get; set; }
 		/// <inheritdoc />
 		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
@@ -161,7 +188,16 @@ namespace Nest
 
 		int? ISignificantTermsAggregation.ShardSize { get; set; }
 
-		int? ISignificantTermsAggregation.MinimumDocumentCount { get; set; }
+		[Obsolete("Use MinimumDocumentCountAsLong. Fixed in NEST 6.x")]
+		int? ISignificantTermsAggregation.MinimumDocumentCount
+		{
+			get => Self.MinimumDocumentCountAsLong > int.MaxValue ? int.MaxValue : (int?)Self.MinimumDocumentCountAsLong;
+			set => Self.MinimumDocumentCountAsLong = value;
+		}
+
+		long? ISignificantTermsAggregation.MinimumDocumentCountAsLong { get; set; }
+
+		long? ISignificantTermsAggregation.ShardMinimumDocumentCount { get; set; }
 
 		TermsAggregationExecutionHint? ISignificantTermsAggregation.ExecutionHint { get; set; }
 
@@ -225,9 +261,18 @@ namespace Nest
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
 
+		[Obsolete("Use MinimumDocumentCountAsLong. Fixed in NEST 6.x")]
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
+
+		/// <inheritdoc />
+		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCountAsLong(long minimumDocumentCount) =>
+			Assign(a => a.MinimumDocumentCountAsLong = minimumDocumentCount);
+
+		/// <inheritdoc />
+		public SignificantTermsAggregationDescriptor<T> ShardMinimumDocumentCount(long shardMinimumDocumentCount) =>
+			Assign(a => a.ShardMinimumDocumentCount = shardMinimumDocumentCount);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> MutualInformation(Func<MutualInformationHeuristicDescriptor, IMutualInformationHeuristic> mutualInformationSelector = null) =>
