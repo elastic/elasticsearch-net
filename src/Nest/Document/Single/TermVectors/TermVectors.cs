@@ -11,7 +11,7 @@ namespace Nest
 		long Version { get; }
 		bool Found { get; }
 		long Took { get; }
-		IReadOnlyDictionary<string, TermVector> TermVectors { get; }
+		IReadOnlyDictionary<Field, TermVector> TermVectors { get; }
 	}
 
 	public class TermVectorsResult : ITermVectors
@@ -35,6 +35,7 @@ namespace Nest
 		public long Took { get; internal set; }
 
 		[JsonProperty("term_vectors")]
-		public IReadOnlyDictionary<string, TermVector> TermVectors { get; internal set; } = EmptyReadOnly<string, TermVector>.Dictionary;
+		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<Field, TermVector>))]
+		public IReadOnlyDictionary<Field, TermVector> TermVectors { get; internal set; } = EmptyReadOnly<Field, TermVector>.Dictionary;
 	}
 }

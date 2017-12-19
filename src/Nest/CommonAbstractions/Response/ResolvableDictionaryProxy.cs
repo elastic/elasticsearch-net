@@ -42,6 +42,7 @@ namespace Nest
 			this.BackingDictionary.TryGetValue(Sanitize(key), out value);
 
 		public TValue this[TKey key] => this.BackingDictionary[Sanitize(key)];
+		public TValue this[string key] => this.BackingDictionary[key];
 
 		public IEnumerable<TKey> Keys => this.Original.Keys;
 		public IEnumerable<string> ResolvedKeys => this.BackingDictionary.Keys;

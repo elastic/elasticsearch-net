@@ -63,6 +63,14 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");
 			var vectors = termvectorDoc.TermVectors["firstName"];
+			AssertTermVectors(vectors);
+
+			vectors = termvectorDoc.TermVectors[Field<Developer>(p=>p.FirstName)];
+			AssertTermVectors(vectors);
+		}
+
+		private static void AssertTermVectors(TermVector vectors)
+		{
 			vectors.Terms.Should().NotBeEmpty();
 			foreach (var vectorTerm in vectors.Terms)
 			{
