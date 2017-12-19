@@ -5,13 +5,13 @@ namespace Nest
 {
 	public interface IGetIndexSettingsResponse : IResponse
 	{
-		IReadOnlyDictionary<string, IndexState> Indices { get; }
+		IReadOnlyDictionary<IndexName, IndexState> Indices { get; }
 	}
 
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetIndexSettingsResponse, string, IndexState>))]
-	public class GetIndexSettingsResponse : DictionaryResponseBase<string, IndexState>, IGetIndexSettingsResponse
+	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetIndexSettingsResponse, IndexName, IndexState>))]
+	public class GetIndexSettingsResponse : DictionaryResponseBase<IndexName, IndexState>, IGetIndexSettingsResponse
 	{
 		[JsonIgnore]
-		public IReadOnlyDictionary<string, IndexState> Indices => Self.BackingDictionary;
+		public IReadOnlyDictionary<IndexName, IndexState> Indices => Self.BackingDictionary;
 	}
 }

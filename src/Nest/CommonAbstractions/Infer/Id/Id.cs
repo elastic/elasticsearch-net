@@ -10,7 +10,7 @@ namespace Nest
 	public class Id : IEquatable<Id>, IUrlParameter
 	{
 		internal object Value { get; set; }
-		internal object Document { get; set; }
+		internal object Document { get; }
 
 		public Id(string id) { Value = id; }
 		public Id(long id) { Value = id; }

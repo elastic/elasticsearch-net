@@ -102,8 +102,7 @@ namespace Nest
 
 		public string GetString(IConnectionConfigurationValues settings)
 		{
-			var nestSettings = settings as IConnectionSettingsValues;
-			if (nestSettings == null)
+			if (!(settings is IConnectionSettingsValues nestSettings))
 				throw new Exception("Tried to pass index name on querysting but it could not be resolved because no nest settings are available");
 
 			return nestSettings.Inferrer.IndexName(this);
