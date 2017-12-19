@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using static Nest.Infer;
 
 namespace Nest
 {
-	public class FieldMappingProperties : Dictionary<string, FieldMapping> { }
+	internal class FieldMappingPropertiesJsonConverter
+		: ResolvableDictionaryJsonConverterBase<FieldMappingProperties, Field, FieldMapping>
+	{
+		protected override FieldMappingProperties Create(IConnectionSettingsValues s, Dictionary<Field, FieldMapping> d) =>
+			new FieldMappingProperties(s, d);
+
+	}
+	[JsonConverter(typeof(FieldMappingPropertiesJsonConverter))]
+	public class FieldMappingProperties : ResolvableDictionaryProxy<Field, FieldMapping> {
+		internal FieldMappingProperties(IConnectionConfigurationValues connectionSettings, IReadOnlyDictionary<Field, FieldMapping> backingDictionary)
+			: base(connectionSettings, backingDictionary) { }
+	}
 
 	public class TypeFieldMappings
 	{
 		[JsonProperty("mappings")]
-		public IReadOnlyDictionary<string, FieldMappingProperties> Mappings { get; internal set; } = EmptyReadOnly<string, FieldMappingProperties>.Dictionary;
+		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<TypeName, FieldMappingProperties>))]
+		public IReadOnlyDictionary<TypeName, FieldMappingProperties> Mappings { get; internal set; } = EmptyReadOnly<TypeName, FieldMappingProperties>.Dictionary;
 	}
 
 	public class FieldMapping
@@ -22,89 +34,51 @@ namespace Nest
 
 		[JsonProperty("mapping")]
 		[JsonConverter(typeof(FieldMappingJsonConverter))]
-		public IReadOnlyDictionary<string, IFieldMapping> Mapping { get; internal set; } = EmptyReadOnly<string, IFieldMapping>.Dictionary;
+		public IReadOnlyDictionary<Field, IFieldMapping> Mapping { get; internal set; } = EmptyReadOnly<Field, IFieldMapping>.Dictionary;
 	}
 
 	public interface IGetFieldMappingResponse : IResponse
 	{
-		IReadOnlyDictionary<string, TypeFieldMappings> Indices { get; }
+		IReadOnlyDictionary<IndexName, TypeFieldMappings> Indices { get; }
 
-		IFieldMapping MappingFor(string indexName, string typeName, string fieldName);
+		IFieldMapping GetMapping(IndexName index, TypeName type, Field property);
 
-		IFieldMapping MappingFor<T>(string fieldName)
-			where T : class;
+		IFieldMapping MappingFor<T>(Field property, IndexName index = null, TypeName type = null);
 
-		IFieldMapping MappingFor<T>(Expression<Func<T, object>> fieldName)
-			where T : class;
-
-		FieldMappingProperties MappingsFor<T>(string indexName = null, string typeName = null)
-			where T : class;
-
-		FieldMappingProperties MappingsFor(string indexName, string typeName);
+		IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null, TypeName type = null) where T : class;
 	}
 
-	public class GetFieldMappingResponse : ResponseBase, IGetFieldMappingResponse
+	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetFieldMappingResponse, IndexName, TypeFieldMappings>))]
+	public class GetFieldMappingResponse : DictionaryResponseBase<IndexName, TypeFieldMappings>, IGetFieldMappingResponse
 	{
-		private Inferrer _inferrer { get; set; }
-
-		public GetFieldMappingResponse() { }
+		[JsonIgnore]
+		public IReadOnlyDictionary<IndexName, TypeFieldMappings> Indices => Self.BackingDictionary;
 
 		//if you call get mapping on an existing type and index but no fields match you still get back a 200.
 		public override bool IsValid => base.IsValid && this.Indices.HasAny();
 
-		internal GetFieldMappingResponse(IApiCallDetails status, IReadOnlyDictionary<string, TypeFieldMappings> dict, Inferrer inferrer)
+		private FieldMappingProperties MappingsFor(IndexName index, TypeName type)
 		{
-			this.Indices = dict ?? EmptyReadOnly<string, TypeFieldMappings>.Dictionary;
-			this._inferrer = inferrer;
+			if (!this.Indices.TryGetValue(index, out var indexMapping) || indexMapping.Mappings == null) return null;
+			return !indexMapping.Mappings.TryGetValue(type, out var typeFieldMapping) ? null : typeFieldMapping;
 		}
 
-		public IReadOnlyDictionary<string, TypeFieldMappings> Indices { get; internal set; } = EmptyReadOnly<string, TypeFieldMappings>.Dictionary;
-
-		public FieldMappingProperties MappingsFor(string indexName, string typeName)
+		public IFieldMapping GetMapping(IndexName index, TypeName type, Field property)
 		{
-			TypeFieldMappings index;
-			FieldMappingProperties type;
+			if (property == null) return null;
 
-			if (!this.Indices.TryGetValue(indexName, out index) || index.Mappings == null) return null;
-			return !index.Mappings.TryGetValue(typeName, out type) ? null : type;
+			var mappings = this.MappingsFor(index, type);
+			if (mappings == null) return null;
+
+			if (!mappings.TryGetValue(property, out var fieldMapping) || fieldMapping.Mapping == null) return null;
+			return fieldMapping.Mapping.TryGetValue(property, out var field) ? field : null;
 		}
 
-		public IFieldMapping MappingFor(string indexName, string typeName, string fieldName)
-		{
-			if (fieldName.IsNullOrEmpty()) return null;
+		public IFieldMapping MappingFor<T>(Field property, IndexName index, TypeName type) =>
+			this.GetMapping(index ?? Index<T>(), type ?? Type<T>(), property);
 
-			var type = this.MappingsFor(indexName, typeName);
-			if (type == null) return null;
-
-			FieldMapping field;
-			if (!type.TryGetValue(fieldName, out field) || field.Mapping == null) return null;
-
-			var name = fieldName.Split('.').Last();
-			return field.Mapping[name];
-		}
-
-		public IFieldMapping MappingFor<T>(string fieldName)
-			where T : class
-		{
-			var indexName = this._inferrer.IndexName<T>();
-			var typeName = this._inferrer.TypeName<T>();
-			return this.MappingFor(indexName, typeName, fieldName);
-		}
-
-		public IFieldMapping MappingFor<T>(Expression<Func<T, object>> fieldName)
-			where T : class
-		{
-			var path = this._inferrer.Field(fieldName);
-			return this.MappingFor<T>(path);
-		}
-
-		public FieldMappingProperties MappingsFor<T>(string indexName = null, string typeName = null)
-			where T : class
-		{
-			indexName = indexName ?? this._inferrer.IndexName<T>();
-			typeName = typeName ?? this._inferrer.TypeName<T>();
-
-			return this.MappingsFor(indexName, typeName);
-		}
+		public IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null, TypeName type = null)
+			where T : class =>
+			this.GetMapping(index ?? Index<T>(), type ?? Type<T>(), Field(objectPath));
 	}
 }

@@ -5,7 +5,7 @@ namespace Nest
 {
 	internal class FieldJsonConverter : JsonConverter
 	{
-		public override bool CanRead => false;
+		public override bool CanRead => true;
 
 		public override bool CanWrite => true;
 
@@ -24,7 +24,9 @@ namespace Nest
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			return null;
+			if (reader.TokenType != JsonToken.String) return null;
+			var field = reader.Value.ToString();
+			return (Field)field;
 		}
 	}
 }

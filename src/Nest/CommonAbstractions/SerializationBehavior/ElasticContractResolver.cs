@@ -55,7 +55,8 @@ namespace Nest
 					contract.Converter =
 						(JsonConverter)typeof(SuggestDictionaryConverter<>).CreateGenericInstance(o.GetGenericArguments());
 
-				else if ((typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
+				else if (contract.Converter == null &&
+					(typeof(IDictionary).IsAssignableFrom(o) || o.IsGenericDictionary()) && !typeof(IIsADictionary).IsAssignableFrom(o))
 				{
 					if (!o.TryGetGenericDictionaryArguments(out var genericArguments))
 						contract.Converter = new VerbatimDictionaryKeysJsonConverter();

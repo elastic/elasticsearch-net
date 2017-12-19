@@ -49,6 +49,37 @@ namespace Nest
 		public IEnumerable<TValue> Values => this.BackingDictionary.Values;
 	}
 
+	internal abstract class ResolvableDictionaryJsonConverterBase<TDictionary, TKey, TValue> : JsonConverter
+		where TDictionary : ResolvableDictionaryProxy<TKey, TValue>
+		where TKey : IUrlParameter
+	{
+		public override bool CanConvert(Type objectType) => true;
+		public override bool CanRead => true;
+		public override bool CanWrite => false;
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var d = new Dictionary<TKey, TValue>();
+			serializer.Populate(reader, d);
+			var settings = serializer.GetConnectionSettings();
+			var dict = Create(settings, d);
+			return dict;
+		}
+
+		protected abstract TDictionary Create(IConnectionSettingsValues settings, Dictionary<TKey, TValue> dictionary);
+
+	}
+
+	internal class ResolvableDictionaryJsonConverter<TKey, TValue>
+		: ResolvableDictionaryJsonConverterBase<ResolvableDictionaryProxy<TKey, TValue>,TKey, TValue>
+		where TKey : IUrlParameter
+	{
+		protected override ResolvableDictionaryProxy<TKey, TValue> Create(IConnectionSettingsValues s, Dictionary<TKey, TValue> d) =>
+			new ResolvableDictionaryProxy<TKey, TValue>(s, d);
+	}
+
 	internal class ResolvableDictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
 		where TResponse : IDictionaryResponse<TKey, TValue>, new() where TKey : IUrlParameter
 	{

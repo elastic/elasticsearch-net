@@ -1,6 +1,4 @@
 ﻿namespace Nest
 {
-	public interface IFieldMapping
-	{
-	}
+	public interface IFieldMapping { }
 }

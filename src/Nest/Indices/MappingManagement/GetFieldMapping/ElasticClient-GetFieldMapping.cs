@@ -2,13 +2,10 @@
 using System.IO;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
-	using System.Collections.Generic;
-	using System.Threading;
-	using GetFieldMappingConverter = Func<IApiCallDetails, Stream, GetFieldMappingResponse>;
-
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
@@ -37,7 +34,6 @@ namespace Nest
 		public IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest request) =>
 			this.Dispatcher.Dispatch<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
 				request,
-				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, request, s)),
 				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(p)
 			);
 
@@ -51,18 +47,8 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
 				request,
 				cancellationToken,
-				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, request, s)),
 				(p, d, c) => this.LowLevelDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(p, c)
 			);
-
-		//TODO DictionaryResponse!
-		private GetFieldMappingResponse DeserializeGetFieldMappingResponse(IApiCallDetails response, IGetFieldMappingRequest d, Stream stream)
-		{
-			var dict = response.Success
-				? this.RequestResponseSerializer.Deserialize<Dictionary<string, TypeFieldMappings>>(stream)
-				: null;
-			return new GetFieldMappingResponse(response, dict, this.ConnectionSettings.Inferrer);
-		}
 
 	}
 }
