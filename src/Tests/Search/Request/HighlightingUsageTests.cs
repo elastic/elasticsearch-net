@@ -29,9 +29,9 @@ namespace Tests.Search.Request
 		{
 			query = new
 			{
-				match = new JObject
+				match = new Dictionary<string, object>
 				{
-					{ "name.standard", new JObject
+					{ "name.standard", new Dictionary<string, object>
 						{
 							{ "query", "Upton Sons Shield Rice Rowe Roberts" }
 						}
@@ -42,9 +42,10 @@ namespace Tests.Search.Request
 			{
 				pre_tags = new[] { "<tag1>" },
 				post_tags = new[] { "</tag1>" },
-				fields = new JObject
+				encoder = "html",
+				fields = new Dictionary<string, object>
 				{
-					{ "name.standard", new JObject
+					{ "name.standard", new Dictionary<string, object>
 						{
 							{ "type", "plain" },
 							{ "force_source", true},
@@ -54,17 +55,18 @@ namespace Tests.Search.Request
 							{ "no_match_size", 150 }
 						}
 					},
-					{ "leadDeveloper.firstName", new JObject
+					{ "leadDeveloper.firstName", new Dictionary<string, object>
 						{
 							{ "type", "fvh" },
+							{ "phrase_limit", 10 },
 							{ "boundary_max_scan", 50 },
-							{ "pre_tags", new JArray { "<name>" } },
-							{ "post_tags", new JArray { "</name>" } },
-							{ "highlight_query", new JObject
+							{ "pre_tags", new [] { "<name>" } },
+							{ "post_tags", new [] { "</name>" } },
+							{ "highlight_query", new Dictionary<string, object>
 								{
-									{ "match", new JObject
+									{ "match", new Dictionary<string, object>
 										{
-											{ "leadDeveloper.firstName", new JObject
+											{ "leadDeveloper.firstName", new Dictionary<string, object>
 												{
 													{ "query", "Kurt Edgardo Naomi Dariana Justice Felton" }
 												}
@@ -75,16 +77,20 @@ namespace Tests.Search.Request
 							}
 						}
 					},
-					{ "state.offsets", new JObject
+					{ "leadDeveloper.lastName", new Dictionary<string, object>
 						{
-							{ "type", "postings" },
-							{ "pre_tags", new JArray { "<state>" } },
-							{ "post_tags", new JArray { "</state>" } },
-							{ "highlight_query", new JObject
+							{ "type", "unified" },
+							{ "pre_tags", new [] { "<name>" } },
+							{ "post_tags", new [] { "</name>" } },
+							{ "highlight_query", new Dictionary<string, object>
 								{
-									{ "terms", new JObject
+									{ "match", new Dictionary<string, object>
 										{
-											{ "state.offsets", new JArray { "stable" , "bellyup" } }
+											{ "leadDeveloper.lastName", new Dictionary<string, object>
+												{
+													{ "query", LastNameSearch }
+												}
+											}
 										}
 									}
 								}
@@ -105,6 +111,7 @@ namespace Tests.Search.Request
 			.Highlight(h => h
 				.PreTags("<tag1>")
 				.PostTags("</tag1>")
+				.Encoder("html")
 				.Fields(
 					fs => fs
 						.Field(p => p.Name.Suffix("standard"))
@@ -120,6 +127,7 @@ namespace Tests.Search.Request
 						.PreTags("<name>")
 						.PostTags("</name>")
 						.BoundaryMaxScan(50)
+						.PhraseLimit(10)
 						.HighlightQuery(q => q
 							.Match(m => m
 								.Field(p => p.LeadDeveloper.FirstName)
@@ -127,17 +135,14 @@ namespace Tests.Search.Request
 							)
 						),
 					fs => fs
-						.Field(p => p.State.Suffix("offsets"))
-						.Type(HighlighterType.Postings)
-						.PreTags("<state>")
-						.PostTags("</state>")
+						.Field(p => p.LeadDeveloper.LastName)
+						.Type(HighlighterType.Unified)
+						.PreTags("<name>")
+						.PostTags("</name>")
 						.HighlightQuery(q => q
-							.Terms(t => t
-								.Field(f => f.State.Suffix("offsets"))
-								.Terms(
-									StateOfBeing.Stable.ToString().ToLowerInvariant(),
-									StateOfBeing.BellyUp.ToString().ToLowerInvariant()
-								)
+							.Match(m => m
+								.Field(p => p.LeadDeveloper.LastName)
+								.Query(LastNameSearch)
 							)
 						)
 				)
@@ -155,6 +160,7 @@ namespace Tests.Search.Request
 				{
 					PreTags = new[] { "<tag1>" },
 					PostTags = new[] { "</tag1>" },
+					Encoder = "html",
 					Fields = new Dictionary<Field, IHighlightField>
 					{
 						{ "name.standard", new HighlightField
@@ -170,6 +176,7 @@ namespace Tests.Search.Request
 						{ "leadDeveloper.firstName", new HighlightField
 							{
 								Type = "fvh",
+								PhraseLimit = 10,
 								BoundaryMaxScan = 50,
 								PreTags = new[] { "<name>"},
 								PostTags = new[] { "</name>"},
@@ -180,15 +187,15 @@ namespace Tests.Search.Request
 								}
 							}
 						},
-						{ "state.offsets", new HighlightField
+						{ "leadDeveloper.lastName", new HighlightField
 							{
-								Type = HighlighterType.Postings,
-								PreTags = new[] { "<state>"},
-								PostTags = new[] { "</state>"},
-								HighlightQuery = new TermsQuery
+								Type = HighlighterType.Unified,
+								PreTags = new[] { "<name>"},
+								PostTags = new[] { "</name>"},
+								HighlightQuery = new MatchQuery
 								{
-									Field = "state.offsets",
-									Terms = new [] { "stable", "bellyup" }
+									Field = "leadDeveloper.lastName",
+									Query = LastNameSearch
 								}
 							}
 						}
