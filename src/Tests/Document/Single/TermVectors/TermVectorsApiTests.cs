@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -86,10 +87,25 @@ namespace Tests.Document.Single.TermVectors
 
 			foreach (var termVector in response.TermVectors)
 			{
-				termVector.Key.Should().NotBeNullOrEmpty();
+				termVector.Key.Should().NotBeNull();
 				termVector.Value.FieldStatistics.Should().NotBeNull();
 				termVector.Value.Terms.Should().NotBeEmpty();
 			}
+
+			var termvector = response.TermVectors[Field<Project>(p => p.LeadDeveloper.FirstName)];
+			AssertTermVector(termvector);
+			termvector = response.TermVectors["leadDeveloper.firstName"];
+			AssertTermVector(termvector);
+		}
+
+		private static void AssertTermVector(TermVector termvector)
+		{
+			termvector.Should().NotBeNull();
+			termvector.FieldStatistics.Should().NotBeNull();
+			termvector.FieldStatistics.DocumentCount.Should().BeGreaterThan(0);
+			termvector.FieldStatistics.SumOfDocumentFrequencies.Should().BeGreaterThan(0);
+			termvector.FieldStatistics.SumOfTotalTermFrequencies.Should().BeGreaterThan(0);
+			termvector.Terms.Should().NotBeNull();
 		}
 	}
 }
