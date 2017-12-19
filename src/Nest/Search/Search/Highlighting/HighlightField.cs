@@ -75,7 +75,8 @@ namespace Nest
 		/// Define how highlighted text will be encoded.
 		/// It can be either default (no encoding) or html (will escape html, if you use html highlighting tags).
 		/// </summary>
-		[JsonProperty("encoder")]
+		[JsonIgnore]
+		[Obsolete("Encoder not valid on highlight field. Removed in NEST 6.x")]
 		string Encoder { get; set; }
 
 		/// <summary>
@@ -133,6 +134,7 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("fragmenter")]
 		HighlighterFragmenter? Fragmenter { get; set; }
+
 		/// <summary>
 		/// The type of highlighter to use. Can be a defined or custom highlighter
 		/// </summary>
@@ -159,6 +161,15 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("highlight_query")]
 		QueryContainer HighlightQuery { get; set; }
+
+		/// <summary>
+		/// Controls the number of matching phrases in a document that are considered. Prevents the
+		/// <see cref="HighlighterType.Fvh"/> highlighter from analyzing too many phrases and consuming too much memory.
+		/// When using matched_fields, <see cref="PhraseLimit"/> phrases per matched field are considered. Raising the limit increases query time
+		/// and consumes more memory. Only supported by the <see cref="HighlighterType.Fvh"/> highlighter. Defaults to 256.
+		/// </summary>
+		[JsonProperty("phrase_limit")]
+		int? PhraseLimit { get; set; }
 	}
 
 	public class HighlightField : IHighlightField
@@ -180,6 +191,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public int? BoundaryMaxScan { get; set; }
 		/// <inheritdoc/>
+		[Obsolete("Encoder not valid on highlight field. Removed in NEST 6.x")]
 		public string Encoder { get; set; }
 		/// <inheritdoc/>
 		public string Order { get; set; }
@@ -205,6 +217,8 @@ namespace Nest
 		public Fields MatchedFields { get; set; }
 		/// <inheritdoc/>
 		public QueryContainer HighlightQuery { get; set; }
+		/// <inheritdoc/>
+		public int? PhraseLimit { get; set; }
 	}
 
 	public class HighlightFieldDescriptor<T> : DescriptorBase<HighlightFieldDescriptor<T>,IHighlightField>, IHighlightField
@@ -218,6 +232,7 @@ namespace Nest
 		int? IHighlightField.NumberOfFragments { get; set; }
 		int? IHighlightField.FragmentOffset { get; set; }
 		int? IHighlightField.BoundaryMaxScan { get; set; }
+		[Obsolete("Encoder not valid on highlight field. Removed in NEST 6.x")]
 		string IHighlightField.Encoder { get; set; }
 		string IHighlightField.Order { get; set; }
 		string IHighlightField.TagsSchema { get; set; }
@@ -231,6 +246,7 @@ namespace Nest
 		bool? IHighlightField.ForceSource { get; set; }
 		Fields IHighlightField.MatchedFields { get; set; }
 		QueryContainer IHighlightField.HighlightQuery { get; set; }
+		int? IHighlightField.PhraseLimit { get; set; }
 
 		/// <inheritdoc/>
 		public HighlightFieldDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
@@ -278,6 +294,7 @@ namespace Nest
 		public HighlightFieldDescriptor<T> FragmentOffset(int? fragmentOffset) => Assign(a => a.FragmentOffset = fragmentOffset);
 
 		/// <inheritdoc/>
+		[Obsolete("Encoder not valid on highlight field. Removed in NEST 6.x")]
 		public HighlightFieldDescriptor<T> Encoder(string encoder) => Assign(a => a.Encoder = encoder);
 
 		/// <inheritdoc/>
@@ -311,5 +328,8 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public HighlightFieldDescriptor<T> Fragmenter(HighlighterFragmenter? fragmenter) => Assign(a => a.Fragmenter = fragmenter);
+
+		/// <inheritdoc/>
+		public HighlightFieldDescriptor<T> PhraseLimit(int phraseLimit) => Assign(a => a.PhraseLimit = phraseLimit);
 	}
 }
