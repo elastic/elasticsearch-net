@@ -310,6 +310,10 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				.Name(p => p.FirstName)
 				.TermVector(TermVectorOption.WithPositionsOffsetsPayloads)
 			)
+			.String(s => s
+				.Name(p => p.LastName)
+				.IndexOptions(IndexOptions.Offsets)
+			)
 			.Ip(s => s
 				.Name(p => p.IPAddress)
 			)

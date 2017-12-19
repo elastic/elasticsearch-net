@@ -37,6 +37,7 @@ s => s
 .Highlight(h => h
     .PreTags("<tag1>")
     .PostTags("</tag1>")
+    .Encoder("html")
     .Fields(
         fs => fs
             .Field(p => p.Name.Suffix("standard"))
@@ -48,9 +49,10 @@ s => s
         fs => fs
             .Field(p => p.LeadDeveloper.FirstName)
             .Type(HighlighterType.Fvh)
-            .BoundaryMaxScan(50)
             .PreTags("<name>")
             .PostTags("</name>")
+            .BoundaryMaxScan(50)
+            .PhraseLimit(10)
             .HighlightQuery(q => q
                 .Match(m => m
                     .Field(p => p.LeadDeveloper.FirstName)
@@ -58,20 +60,17 @@ s => s
                 )
             ),
         fs => fs
-            .Field(p => p.State.Suffix("offsets"))
+            .Field(p => p.LeadDeveloper.LastName)
             .Type(HighlighterType.Postings)
-            .PreTags("<state>")
-            .PostTags("</state>")
+            .PreTags("<name>")
+            .PostTags("</name>")
             .HighlightQuery(q => q
-                .Terms(t => t
-                    .Field(f => f.State.Suffix("offsets"))
-                    .Terms(
-                        StateOfBeing.Stable.ToString().ToLowerInvariant(),
-                        StateOfBeing.BellyUp.ToString().ToLowerInvariant()
+                .Match(m => m
+                    .Field(p => p.LeadDeveloper.LastName)
+                    .Query(LastNameSearch)
                     )
                 )
             )
-    )
 )
 ----
 
@@ -91,6 +90,7 @@ new SearchRequest<Project>
     {
         PreTags = new[] { "<tag1>" },
         PostTags = new[] { "</tag1>" },
+        Encoder = "html",
         Fields = new Dictionary<Field, IHighlightField>
         {
             { "name.standard", new HighlightField
@@ -104,7 +104,8 @@ new SearchRequest<Project>
             },
             { "leadDeveloper.firstName", new HighlightField
                 {
-                    CustomType = "fvh",
+                    CustomType = "fvh", <1>
+                    PhraseLimit = 10,
                     BoundaryMaxScan = 50,
                     PreTags = new[] { "<name>"},
                     PostTags = new[] { "</name>"},
@@ -115,15 +116,15 @@ new SearchRequest<Project>
                     }
                 }
             },
-            { "state.offsets", new HighlightField
+            { "leadDeveloper.lastName", new HighlightField
                 {
                     Type = HighlighterType.Postings,
-                    PreTags = new[] { "<state>"},
-                    PostTags = new[] { "</state>"},
-                    HighlightQuery = new TermsQuery
+                    PreTags = new[] { "<name>"},
+                    PostTags = new[] { "</name>"},
+                    HighlightQuery = new MatchQuery
                     {
-                        Field = "state.offsets",
-                        Terms = new [] { "stable", "bellyup" }
+                        Field = "leadDeveloper.lastName",
+                        Query = LastNameSearch
                     }
                 }
             }
@@ -131,6 +132,7 @@ new SearchRequest<Project>
     }
 }
 ----
+<1> `CustomType` can be used to define a custom highlighter
 
 [source,javascript]
 .Example json output
@@ -150,6 +152,7 @@ new SearchRequest<Project>
     "post_tags": [
       "</tag1>"
     ],
+    "encoder": "html",
     "fields": {
       "name.standard": {
         "type": "plain",
@@ -160,6 +163,7 @@ new SearchRequest<Project>
       },
       "leadDeveloper.firstName": {
         "type": "fvh",
+        "phrase_limit": 10,
         "boundary_max_scan": 50,
         "pre_tags": [
           "<name>"
@@ -175,20 +179,19 @@ new SearchRequest<Project>
           }
         }
       },
-      "state.offsets": {
+      "leadDeveloper.lastName": {
         "type": "postings",
         "pre_tags": [
-          "<state>"
+          "<name>"
         ],
         "post_tags": [
-          "</state>"
+          "</name>"
         ],
         "highlight_query": {
-          "terms": {
-            "state.offsets": [
-              "stable",
-              "bellyup"
-            ]
+          "match": {
+            "leadDeveloper.lastName": {
+              "query": "Stokes"
+            }
           }
         }
       }
@@ -224,12 +227,12 @@ foreach (var highlightsByDocumentId in response.Highlights)
                 highlight.Should().Contain("</name>");
             }
         }
-        else if (highlightHit.Key == "state.offsets")
+        else if (highlightHit.Key == "leadDeveloper.lastName")
         {
             foreach (var highlight in highlightHit.Value.Highlights)
             {
-                highlight.Should().Contain("<state>");
-                highlight.Should().Contain("</state>");
+                highlight.Should().Contain("<name>");
+                highlight.Should().Contain("</name>");
             }
         }
         else

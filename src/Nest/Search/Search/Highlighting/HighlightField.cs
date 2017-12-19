@@ -79,7 +79,8 @@ namespace Nest
 		/// Define how highlighted text will be encoded.
 		/// It can be either default (no encoding) or html (will escape html, if you use html highlighting tags).
 		/// </summary>
-		[JsonProperty("encoder")]
+		[JsonIgnore]
+		[Obsolete("Encoder not valid on highlight field. Removed in NEST 6.x")]
 		string Encoder { get; set; }
 
 		/// <summary>
@@ -118,14 +119,14 @@ namespace Nest
 		/// <summary>
 		/// The type of highlighter to use
 		/// </summary>
-		HighlighterType? Type { get; set; }
+		[JsonProperty("type")]
+		[Obsolete("This is a temporary binary backwards compatible fix to make sure you can specify any custom highlighter type in 2.0.0. Removed in 5.0.0.")]
+		string CustomType { get; set; }
 
 		/// <summary>
 		/// The type of highlighter to use
 		/// </summary>
-		[JsonProperty("type")]
-		[Obsolete("This is a temporary binary backwards compatible fix to make sure you can specify any custom highlighter type in 2.0.0. Removed in 5.0.0.")]
-		string CustomType { get; set; }
+		HighlighterType? Type { get; set; }
 
 		/// <summary>
 		/// Forces the highlighting to highlight fields based on the source even if fields are stored separately.
@@ -147,6 +148,15 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("highlight_query")]
 		QueryContainer HighlightQuery { get; set; }
+
+		/// <summary>
+		/// Controls the number of matching phrases in a document that are considered. Prevents the
+		/// <see cref="HighlighterType.Fvh"/> highlighter from analyzing too many phrases and consuming too much memory.
+		/// When using matched_fields, <see cref="PhraseLimit"/> phrases per matched field are considered. Raising the limit increases query time
+		/// and consumes more memory. Only supported by the <see cref="HighlighterType.Fvh"/> highlighter. Defaults to 256.
+		/// </summary>
+		[JsonProperty("phrase_limit")]
+		int? PhraseLimit { get; set; }
 	}
 
 	public class HighlightField : IHighlightField
@@ -208,11 +218,8 @@ namespace Nest
 
 		[Obsolete("Use BoundaryMaxScan")]
 		public int? BoundaryMaxSize { get; set; }
-
-		/// <summary>
-		/// Define how highlighted text will be encoded.
-		/// It can be either default (no encoding) or html (will escape html, if you use html highlighting tags).
-		/// </summary>
+		/// <inheritdoc/>
+		[Obsolete("Encoder not valid on highlight field. Removed in NEST 6.x")]
 		public string Encoder { get; set; }
 
 		/// <summary>
@@ -247,16 +254,16 @@ namespace Nest
 		/// <summary>
 		/// The type of highlighter to use.
 		/// </summary>
+		public string CustomType { get; set; }
+
+		/// <summary>
+		/// The type of highlighter to use.
+		/// </summary>
 		public HighlighterType? Type
 		{
 			get { return this.CustomType.ToEnum<HighlighterType>(); }
 			set { this.CustomType = value.GetStringValue(); }
 		}
-
-		/// <summary>
-		/// The type of highlighter to use.
-		/// </summary>
-		public string CustomType { get; set; }
 
 		/// <summary>
 		/// Forces the highlighting to highlight fields based on the source even if fields are stored separately.
@@ -275,6 +282,9 @@ namespace Nest
 		/// The query to use for highlighting
 		/// </summary>
 		public QueryContainer HighlightQuery { get; set; }
+
+		/// <inheritdoc/>
+		public int? PhraseLimit { get; set; }
 	}
 
 	public class HighlightFieldDescriptor<T> : DescriptorBase<HighlightFieldDescriptor<T>,IHighlightField>, IHighlightField
@@ -289,11 +299,13 @@ namespace Nest
 		int? IHighlightField.FragmentOffset { get; set; }
 		int? IHighlightField.BoundaryMaxSize { get; set; }
 		int? IHighlightField.BoundaryMaxScan { get; set; }
+		[Obsolete("Encoder not valid on highlight field. Removed in NEST 6.x")]
 		string IHighlightField.Encoder { get; set; }
 		string IHighlightField.Order { get; set; }
 		string IHighlightField.TagsSchema { get; set; }
 		bool? IHighlightField.RequireFieldMatch { get; set; }
 		string IHighlightField.BoundaryChars { get; set; }
+		string IHighlightField.CustomType { get; set; }
 		HighlighterType? IHighlightField.Type
 		{
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -301,11 +313,10 @@ namespace Nest
 			set { Self.CustomType = value.GetStringValue(); }
 #pragma warning restore CS0618 // Type or member is obsolete
 		}
-		string IHighlightField.CustomType { get; set; }
 		bool? IHighlightField.ForceSource { get; set; }
 		Fields IHighlightField.MatchedFields { get; set; }
-
 		QueryContainer IHighlightField.HighlightQuery { get; set; }
+		int? IHighlightField.PhraseLimit { get; set; }
 
 		/// <summary>
 		/// The field on which to perform highlighting.
@@ -358,10 +369,10 @@ namespace Nest
 		/// </summary>
 		public HighlightFieldDescriptor<T> Type(HighlighterType type) => Assign(a => a.Type = type);
 
+#pragma warning disable CS0618 // Type or member is obsolete
 		/// <summary>
 		/// The type of highlighter to use
 		/// </summary>
-#pragma warning disable CS0618 // Type or member is obsolete
 		public HighlightFieldDescriptor<T> Type(string type) => Assign(a => a.CustomType = type);
 #pragma warning restore CS0618 // Type or member is obsolete
 
@@ -373,18 +384,18 @@ namespace Nest
 		public HighlightFieldDescriptor<T> PreTags(string preTags) => Assign(a => a.PreTags = new[] { preTags });
 
 		/// <summary>
-		/// Controls the pre tag in which to wrap highights.
-		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
-		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
-		/// </summary>
-		public HighlightFieldDescriptor<T> PreTags(IEnumerable<string> preTags) => Assign(a => a.PreTags = preTags);
-
-		/// <summary>
 		/// Controls the post tag in which to wrap highights.
 		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
 		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
 		/// </summary>
 		public HighlightFieldDescriptor<T> PostTags(IEnumerable<string> postTags) => Assign(a => a.PostTags = postTags);
+
+		/// <summary>
+		/// Controls the pre tag in which to wrap highights.
+		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
+		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
+		/// </summary>
+		public HighlightFieldDescriptor<T> PreTags(IEnumerable<string> preTags) => Assign(a => a.PreTags = preTags);
 
 		/// <summary>
 		/// Controls the post tag in which to wrap highights.
@@ -423,6 +434,7 @@ namespace Nest
 		/// Define how highlighted text will be encoded.
 		/// It can be either default (no encoding) or html (will escape html, if you use html highlighting tags).
 		/// </summary>
+		[Obsolete("Encoder not valid on highlight field. Removed in NEST 6.x")]
 		public HighlightFieldDescriptor<T> Encoder(string encoder) => Assign(a => a.Encoder = encoder);
 
 		/// <summary>
@@ -464,5 +476,13 @@ namespace Nest
 		/// </summary>
 		public HighlightFieldDescriptor<T> HighlightQuery(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
 			Assign(a => a.HighlightQuery = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+
+		/// <summary>
+		/// Controls the number of matching phrases in a document that are considered. Prevents the
+		/// <see cref="HighlighterType.Fvh"/> highlighter from analyzing too many phrases and consuming too much memory.
+		/// When using matched_fields, <see cref="PhraseLimit"/> phrases per matched field are considered. Raising the limit increases query time
+		/// and consumes more memory. Only supported by the <see cref="HighlighterType.Fvh"/> highlighter. Defaults to 256.
+		/// </summary>
+		public HighlightFieldDescriptor<T> PhraseLimit(int phraseLimit) => Assign(a => a.PhraseLimit = phraseLimit);
 	}
 }
