@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -6,7 +7,7 @@ namespace Nest
 	public interface IClusterHealthResponse : IResponse
 	{
 		string ClusterName { get; }
-		string Status { get; }
+		Health Status { get; }
 		bool TimedOut { get; }
 		int NumberOfNodes { get; }
 		int NumberOfDataNodes { get; }
@@ -16,7 +17,7 @@ namespace Nest
 		int InitializingShards { get; }
 		int UnassignedShards { get; }
 		int NumberOfPendingTasks { get; }
-		IReadOnlyDictionary<string, IndexHealthStats> Indices { get; }
+		IReadOnlyDictionary<IndexName, IndexHealthStats> Indices { get; }
 	}
 
 	[JsonObject]
@@ -25,7 +26,7 @@ namespace Nest
 		[JsonProperty("cluster_name")]
 		public string ClusterName { get; internal set; }
 		[JsonProperty("status")]
-		public string Status { get; internal set; }
+		public Health Status { get; internal set; }
 		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }
 
@@ -47,7 +48,7 @@ namespace Nest
 		[JsonProperty(PropertyName="number_of_pending_tasks")]
 		public int NumberOfPendingTasks { get; internal set; }
 		[JsonProperty("indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndexHealthStats>))]
-		public IReadOnlyDictionary<string, IndexHealthStats> Indices { get; internal set; } = EmptyReadOnly<string, IndexHealthStats>.Dictionary;
+		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<IndexName, IndexHealthStats>))]
+		public IReadOnlyDictionary<IndexName, IndexHealthStats> Indices { get; internal set; } = EmptyReadOnly<IndexName, IndexHealthStats>.Dictionary;
 	}
 }

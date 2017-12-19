@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -7,7 +8,7 @@ namespace Nest
 	public class IndexHealthStats
 	{
 		[JsonProperty("status")]
-		public string Status { get; internal set; }
+		public Health Status { get; internal set; }
 
 		[JsonProperty("number_of_shards")]
 		public int NumberOfShards { get; internal set; }
@@ -27,7 +28,6 @@ namespace Nest
 
 		[JsonProperty("shards")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardHealthStats>))]
-		public IReadOnlyDictionary<string, ShardHealthStats> Shards { get; internal set; } =
-			EmptyReadOnly<string, ShardHealthStats>.Dictionary;
+		public IReadOnlyDictionary<string, ShardHealthStats> Shards { get; internal set; } = EmptyReadOnly<string, ShardHealthStats>.Dictionary;
 	}
 }

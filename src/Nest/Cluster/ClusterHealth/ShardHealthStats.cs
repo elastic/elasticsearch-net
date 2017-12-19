@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -6,7 +7,7 @@ namespace Nest
 	public class ShardHealthStats
 	{
 		[JsonProperty("status")]
-		public string Status { get; internal set; }
+		public Health Status { get; internal set; }
 		[JsonProperty("primary_active")]
 		public bool PrimaryActive { get; internal set; }
 		[JsonProperty("active_shards")]
