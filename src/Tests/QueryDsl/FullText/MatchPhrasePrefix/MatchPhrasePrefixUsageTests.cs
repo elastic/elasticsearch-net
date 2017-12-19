@@ -24,7 +24,6 @@ namespace Tests.QueryDsl.FullText.MatchPhrasePrefix
 					slop = 2
 				}
 			}
-
 		};
 
 		protected override QueryContainer QueryInitializer => new MatchPhrasePrefixQuery

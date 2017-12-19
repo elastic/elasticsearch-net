@@ -13,6 +13,8 @@ namespace Tests.Indices.IndexManagement.GetIndex
 	public class GetIndexApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
 	{
+		private static readonly IndexName ProjectIndex = Index<Project>();
+
 		public GetIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetIndex(typeof(Project)),
@@ -26,13 +28,13 @@ namespace Tests.Indices.IndexManagement.GetIndex
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/project";
 
-		protected override GetIndexRequest Initializer => new GetIndexRequest(Index<Project>());
+		protected override GetIndexRequest Initializer => new GetIndexRequest(ProjectIndex);
 
 	    protected override void ExpectResponse(IGetIndexResponse response)
 	    {
 	        response.Indices.Should().NotBeNull();
 	        response.Indices.Count.Should().BeGreaterThan(0);
-	        var projectIndex = response.Indices["project"];
+	        var projectIndex = response.Indices[ProjectIndex];
 	        projectIndex.Should().NotBeNull();
 	    }
 	}

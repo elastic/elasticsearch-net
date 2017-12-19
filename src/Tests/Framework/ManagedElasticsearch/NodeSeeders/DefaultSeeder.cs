@@ -31,9 +31,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 			this.IndexSettings = indexSettings ?? _defaultIndexSettings;
 		}
 
-		public DefaultSeeder(ElasticsearchNode node) : this(node, null)
-		{
-		}
+		public DefaultSeeder(ElasticsearchNode node) : this(node, null) { }
 
 		public void SeedNode()
 		{
