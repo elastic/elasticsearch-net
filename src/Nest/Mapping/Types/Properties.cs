@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -11,13 +12,20 @@ namespace Nest
 
 	public class Properties : IsADictionaryBase<PropertyName, IProperty>, IProperties
 	{
+		private readonly IConnectionSettingsValues _settings;
 		public Properties() {}
 		public Properties(IDictionary<PropertyName, IProperty> container) : base(container) { }
 		public Properties(Dictionary<PropertyName, IProperty> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
 
-		public void Add(PropertyName name, IProperty property) => this.BackingDictionary.Add(name, property);
+		internal Properties(IConnectionSettingsValues values)
+		{
+			_settings = values;
+		}
+
+		protected override PropertyName Sanitize(PropertyName key) => this._settings?.Inferrer.PropertyName(key) ?? key;
+
+		public void Add(PropertyName name, IProperty property) => this.BackingDictionary.Add(Sanitize(name), property);
 	}
 
 	public class Properties<T> : IsADictionaryBase<PropertyName, IProperty>, IProperties
@@ -69,13 +77,10 @@ namespace Nest
 		TReturnType Join(Func<JoinPropertyDescriptor<T>, IJoinProperty> selector);
 	}
 
-	public partial class PropertiesDescriptor<T>
-		: IsADictionaryDescriptorBase<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>
-		where T : class
+	public partial class PropertiesDescriptor<T> where T : class
 	{
 		public PropertiesDescriptor() : base(new Properties<T>()) { }
 		public PropertiesDescriptor(IProperties properties) : base(properties ?? new Properties<T>()) { }
-
 
 		[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
 		public PropertiesDescriptor<T> String(Func<StringPropertyDescriptor<T>, IStringProperty> selector) => SetProperty(selector);

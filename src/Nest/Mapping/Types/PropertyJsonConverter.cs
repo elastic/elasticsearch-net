@@ -16,27 +16,30 @@ namespace Nest
 			throw new NotSupportedException();
 		}
 
+		private TProperty ReadProperty<TProperty>(JObject j, JsonSerializer s)
+			where TProperty : IProperty
+		{
+			return FromJson.ReadAs<TProperty>(j.CreateReader(), s);
+			//return j.ToObject<TProperty>(s);
+		}
+
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var jObject = JObject.Load(reader);
-			JToken typeToken;
-			JToken propertiesToken;
 
 			var type = FieldType.None;
-			if (jObject.TryGetValue("type", out typeToken))
+			if (jObject.TryGetValue("type", out var typeToken))
 				type = typeToken.Value<string>().ToEnum<FieldType>().GetValueOrDefault(type);
-			else if (jObject.TryGetValue("properties", out propertiesToken))
+			else if (jObject.TryGetValue("properties", out _))
 				type = FieldType.Object;
 
 			switch (type)
 			{
-				case FieldType.Text:
-					return jObject.ToObject<TextProperty>();
-				case FieldType.Keyword:
-					return jObject.ToObject<KeywordProperty>();
+				case FieldType.Text: return ReadProperty<TextProperty>(jObject, serializer);
+				case FieldType.Keyword: return ReadProperty<KeywordProperty>(jObject, serializer);
 				case FieldType.String:
 #pragma warning disable 618
-					return jObject.ToObject<StringProperty>();
+					return ReadProperty<StringProperty>(jObject, serializer);
 #pragma warning restore 618
 				case FieldType.Float:
 				case FieldType.Double:
@@ -46,45 +49,27 @@ namespace Nest
 				case FieldType.Long:
 				case FieldType.ScaledFloat:
 				case FieldType.HalfFloat:
-					var num = jObject.ToObject<NumberProperty>();
+					var num = ReadProperty<NumberProperty>(jObject, serializer);
 					num.Type = type.GetStringValue();
 					return num;
-				case FieldType.Date:
-					return jObject.ToObject<DateProperty>();
-				case FieldType.Boolean:
-					return jObject.ToObject<BooleanProperty>();
-				case FieldType.Binary:
-					return jObject.ToObject<BinaryProperty>();
-				case FieldType.Object:
-					return jObject.ToObject<ObjectProperty>();
-				case FieldType.Nested:
-					return jObject.ToObject<NestedProperty>();
-				case FieldType.Ip:
-					return jObject.ToObject<IpProperty>();
-				case FieldType.GeoPoint:
-					return jObject.ToObject<GeoPointProperty>();
-				case FieldType.GeoShape:
-					return jObject.ToObject<GeoShapeProperty>();
-				case FieldType.Completion:
-					return jObject.ToObject<CompletionProperty>();
-				case FieldType.TokenCount:
-					return jObject.ToObject<TokenCountProperty>();
-				case FieldType.Murmur3Hash:
-					return jObject.ToObject<Murmur3HashProperty>();
-				case FieldType.Percolator:
-					return jObject.ToObject<PercolatorProperty>();
-				case FieldType.DateRange:
-					return jObject.ToObject<DateRangeProperty>();
-				case FieldType.DoubleRange:
-					return jObject.ToObject<DoubleRangeProperty>();
-				case FieldType.FloatRange:
-					return jObject.ToObject<FloatRangeProperty>();
-				case FieldType.IntegerRange:
-					return jObject.ToObject<IntegerRangeProperty>();
-				case FieldType.LongRange:
-					return jObject.ToObject<LongRangeProperty>();
-				case FieldType.Join:
-					return jObject.ToObject<JoinProperty>();
+				case FieldType.Date: return ReadProperty<DateProperty>(jObject, serializer);
+				case FieldType.Boolean: return ReadProperty<BooleanProperty>(jObject, serializer);
+				case FieldType.Binary: return ReadProperty<BinaryProperty>(jObject, serializer);
+				case FieldType.Object: return ReadProperty<ObjectProperty>(jObject, serializer);
+				case FieldType.Nested: return ReadProperty<NestedProperty>(jObject, serializer);
+				case FieldType.Ip: return ReadProperty<IpProperty>(jObject, serializer);
+				case FieldType.GeoPoint: return ReadProperty<GeoPointProperty>(jObject, serializer);
+				case FieldType.GeoShape: return ReadProperty<GeoShapeProperty>(jObject, serializer);
+				case FieldType.Completion: return ReadProperty<CompletionProperty>(jObject, serializer);
+				case FieldType.TokenCount: return ReadProperty<TokenCountProperty>(jObject, serializer);
+				case FieldType.Murmur3Hash: return ReadProperty<Murmur3HashProperty>(jObject, serializer);
+				case FieldType.Percolator: return ReadProperty<PercolatorProperty>(jObject, serializer);
+				case FieldType.DateRange: return ReadProperty<DateRangeProperty>(jObject, serializer);
+				case FieldType.DoubleRange: return ReadProperty<DoubleRangeProperty>(jObject, serializer);
+				case FieldType.FloatRange: return ReadProperty<FloatRangeProperty>(jObject, serializer);
+				case FieldType.IntegerRange: return ReadProperty<IntegerRangeProperty>(jObject, serializer);
+				case FieldType.LongRange: return ReadProperty<LongRangeProperty>(jObject, serializer);
+				case FieldType.Join: return ReadProperty<JoinProperty>(jObject, serializer);
 				case FieldType.None:
 					break;
 				default:

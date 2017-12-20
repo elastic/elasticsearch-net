@@ -186,13 +186,13 @@ namespace Nest
 
 						break;
 					case "random_score":
-						function = FromJson.ReadAs<RandomScoreFunction>(prop.Value.Value<JObject>().CreateReader(), null, null, serializer);
+						function = FromJson.ReadAs<RandomScoreFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
 						break;
 					case "field_value_factor":
-						function = FromJson.ReadAs<FieldValueFactorFunction>(prop.Value.Value<JObject>().CreateReader(), null, null, serializer);
+						function = FromJson.ReadAs<FieldValueFactorFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
 						break;
 					case "script_score":
-						function = FromJson.ReadAs<ScriptScoreFunction>(prop.Value.Value<JObject>().CreateReader(), null, null, serializer);
+						function = FromJson.ReadAs<ScriptScoreFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
 						break;
 				}
 			}
@@ -231,7 +231,7 @@ namespace Nest
 					break;
 			}
 			var t = DecayTypeMapping[$"{type}_{subType}"];
-			return FromJson.Read(o.CreateReader(), t, null, serializer) as IDecayFunction;
+			return FromJson.Read(o.CreateReader(), t, serializer) as IDecayFunction;
 		}
 
 	}

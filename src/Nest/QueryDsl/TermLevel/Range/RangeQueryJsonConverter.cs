@@ -34,11 +34,11 @@ namespace Nest
 			IRangeQuery fq;
 			if (isNumeric)
 			{
-				fq = FromJson.ReadAs<NumericRangeQuery>(jo.CreateReader(), objectType, existingValue, serializer);
+				fq = FromJson.ReadAs<NumericRangeQuery>(jo.CreateReader(), serializer);
 			}
 			else
 			{
-				fq = FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), objectType, existingValue, serializer);
+				fq = FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), serializer);
 			}
 
 			fq.Name = GetPropValue<string>(jo, "_name");

@@ -19,8 +19,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var dict = value as IDictionary<PropertyName, IProperty>;
-			if (dict == null) return;
+			if (!(value is IDictionary<PropertyName, IProperty> dict)) return;
 			var settings = serializer.GetConnectionSettings();
 			var props = new Properties();
 			foreach (var kv in dict)
@@ -33,8 +32,7 @@ namespace Nest
 					continue;
 				}
 				// Check against connection settings mappings
-                IPropertyMapping propertyMapping;
-				if (settings.PropertyMappings.TryGetValue(propertyInfo, out propertyMapping))
+				if (settings.PropertyMappings.TryGetValue(propertyInfo, out var propertyMapping))
 				{
 					if (propertyMapping.Ignore) continue;
 					props.Add(propertyMapping.Name, kv.Value);
@@ -51,7 +49,8 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var r = new Properties();
+			var s = serializer.GetConnectionSettings();
+			var r = new Properties(s);
 			var o = JObject.Load(reader);
 
 			foreach (var p in o.Properties())
