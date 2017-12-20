@@ -1,49 +1,47 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface IGetMappingResponse : IResponse
 	{
-		IReadOnlyDictionary<string, IReadOnlyDictionary<string, TypeMapping>> Mappings { get; }
-
-		TypeMapping Mapping { get; }
+		IReadOnlyDictionary<IndexName, IndexMappings> Indices { get; }
+		[Obsolete("Renamed to Indices, will be deleted from NEST 7.x")]
+		IReadOnlyDictionary<IndexName, IndexMappings> Mappings { get; }
 
 		void Accept(IMappingVisitor visitor);
 	}
 
-	internal class GetRootObjectMappingWrapping : Dictionary<string, Dictionary<string, Dictionary<string, TypeMapping>>>
+	internal class TypeMappingsJsonConverter : ResolvableDictionaryJsonConverterBase<TypeMappings, TypeName, TypeMapping>
 	{
+		protected override TypeMappings Create(IConnectionSettingsValues s, Dictionary<TypeName, TypeMapping> d) =>
+			new TypeMappings(s, d);
+	}
+	public class IndexMappings
+	{
+		[JsonProperty("mappings")]
+		public TypeMappings Mappings { get; internal set; }
+
+		public TypeMapping this[TypeName type] => this.Mappings?[type];
 	}
 
-	public class GetMappingResponse : ResponseBase, IGetMappingResponse
+	[JsonConverter(typeof(TypeMappingsJsonConverter))]
+	public class TypeMappings : ResolvableDictionaryProxy<TypeName, TypeMapping>
 	{
-		public GetMappingResponse() { }
+		internal TypeMappings(IConnectionConfigurationValues connectionSettings, IReadOnlyDictionary<TypeName, TypeMapping> backingDictionary)
+			: base(connectionSettings, backingDictionary) { }
+	}
 
-		internal GetMappingResponse(GetRootObjectMappingWrapping dict)
-		{
-			if (dict == null) return;
-			foreach (var index in dict)
-			{
-				if (index.Value == null || !index.Value.TryGetValue("mappings", out var mappings)) continue;
-				this._mappings.Add(index.Key, new Dictionary<string, TypeMapping>());
-				foreach (var mapping in mappings)
-				{
-					if (mapping.Value == null) continue;
-					this._mappings[index.Key].Add(mapping.Key, mapping.Value);
-				}
-			}
-
-			this.Mapping = this.Mappings.Where(kv => kv.Value.HasAny(v => v.Value != null))
-				.SelectMany(kv => kv.Value)
-				.FirstOrDefault(t => t.Value != null).Value;
-		}
-
-		private readonly Dictionary<string, Dictionary<string, TypeMapping>> _mappings = new Dictionary<string, Dictionary<string, TypeMapping>>();
-		public IReadOnlyDictionary<string, IReadOnlyDictionary<string, TypeMapping>> Mappings => this._mappings
-			.ToDictionary(k=>k.Key, v=>(IReadOnlyDictionary<string, TypeMapping>)v.Value);
-
-		public TypeMapping Mapping { get; }
+	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetMappingResponse, IndexName, IndexMappings>))]
+	public class GetMappingResponse : DictionaryResponseBase<IndexName, IndexMappings>, IGetMappingResponse
+	{
+		[JsonIgnore]
+		public IReadOnlyDictionary<IndexName, IndexMappings> Indices => Self.BackingDictionary;
+		[JsonIgnore]
+		public IReadOnlyDictionary<IndexName, IndexMappings> Mappings => Indices;
 
 		public void Accept(IMappingVisitor visitor)
 		{

@@ -1,13 +1,11 @@
 ﻿using System;
+using System.Threading;
 using System.IO;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	using System.Threading;
-	using GetMappingConverter = Func<IApiCallDetails, Stream, GetMappingResponse>;
-
 	public partial interface IElasticClient
 	{
 		/// <summary>
@@ -39,7 +37,6 @@ namespace Nest
 		public IGetMappingResponse GetMapping(IGetMappingRequest request) =>
 			this.Dispatcher.Dispatch<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse>(
 				request,
-				new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, request, s)),
 				(p, d) => this.LowLevelDispatch.IndicesGetMappingDispatch<GetMappingResponse>(p)
 			);
 
@@ -53,25 +50,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
 				request,
 				cancellationToken,
-				new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, request, s)),
 				(p, d, c) => this.LowLevelDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(p, c)
 			);
-
-		private GetMappingResponse DeserializeGetMappingResponse(IApiCallDetails response, IGetMappingRequest d, Stream stream)
-		{
-			if (!response.Success)
-			{
-				var emptyResponse = this.RequestResponseSerializer.Deserialize<GetMappingResponse>(stream);
-				return TransferCallDetails(emptyResponse, response);
-			}
-			var dict = this.RequestResponseSerializer.Deserialize<GetRootObjectMappingWrapping>(stream);
-			return TransferCallDetails(new GetMappingResponse(dict), response);
-		}
-
-		private static GetMappingResponse TransferCallDetails(GetMappingResponse response, IApiCallDetails lowLevelResponse)
-		{
-			((IElasticsearchResponse) response).ApiCall = lowLevelResponse;
-			return response;
-		}
 	}
 }

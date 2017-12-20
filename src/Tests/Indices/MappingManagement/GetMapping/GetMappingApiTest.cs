@@ -47,6 +47,10 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.Accept(visitor);
 			var b = TestClient.Configuration.Random.SourceSerializer;
 
+			response.Indices["project"]["doc"].Properties.Should().NotBeEmpty();
+			response.Indices[Index<Project>()].Mappings[Type<Project>()].Properties.Should().NotBeEmpty();
+			response.Indices[Index<Project>()][Type<Project>()].Properties.Should().NotBeEmpty();
+
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			visitor.CountsShouldContainKeyAndCountBe("text", b ? 19 : 18);
 			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 19 : 18);
@@ -97,8 +101,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 		protected override void ExpectResponse(IGetMappingResponse response)
 		{
-			response.Mappings.Should().BeEmpty();
-			response.Mapping.Should().BeNull();
+			response.Indices.Should().BeEmpty();
 			response.ServerError.Should().NotBeNull();
 		}
 	}
