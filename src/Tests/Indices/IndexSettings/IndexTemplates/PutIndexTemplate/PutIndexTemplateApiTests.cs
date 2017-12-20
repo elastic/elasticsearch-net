@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -10,7 +11,7 @@ using Xunit;
 namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 {
 	public class PutIndexTemplateApiTests
-		: ApiTestBase<WritableCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
+		: ApiIntegrationTestBase<WritableCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
 	{
 		public PutIndexTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
@@ -24,14 +25,15 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			);
 
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}?create=false";
-
 		protected override bool SupportsDeserialization => false;
+		protected override int ExpectStatusCode => 200;
+		protected override bool ExpectIsValid => true;
 
 		protected override object ExpectJson { get; } = new
 		{
 			order = 1,
+			version = 2,
 			index_patterns = new [] {"nestx-*" },
 			settings = new Dictionary<string, object> { { "index.number_of_shards", 1 } },
 			mappings = new
@@ -61,6 +63,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 
 		protected override Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> Fluent => d => d
 			.Order(1)
+			.Version(2)
 			.IndexPatterns("nestx-*")
 			.Create(false)
 			.Settings(p=>p.NumberOfShards(1))
@@ -80,9 +83,12 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 				)
 			);
 
+
+
 		protected override PutIndexTemplateRequest Initializer => new PutIndexTemplateRequest(CallIsolatedValue)
 		{
 			Order = 1,
+			Version = 2,
 			IndexPatterns = new[] { "nestx-*" },
 			Create = false,
 			Settings = new Nest.IndexSettings
@@ -110,5 +116,11 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 				}
 			}
 		};
+
+		protected override void ExpectResponse(IPutIndexTemplateResponse response)
+		{
+			response.ShouldBeValid();
+			response.Acknowledged.Should().BeTrue();
+		}
 	}
 }

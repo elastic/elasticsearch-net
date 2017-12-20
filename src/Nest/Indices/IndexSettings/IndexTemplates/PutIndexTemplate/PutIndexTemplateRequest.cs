@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public partial interface IPutIndexTemplateRequest : ITemplateMapping
 	{
+		[JsonProperty("version")]
+		int? Version { get; set; }
 	}
 
 	public partial class PutIndexTemplateRequest
@@ -13,6 +16,8 @@ namespace Nest
 		public IReadOnlyCollection<string> IndexPatterns {get;set;}
 
 		public int? Order { get; set; }
+
+		public int? Version { get; set; }
 
 		public IIndexSettings Settings { get; set; }
 
@@ -26,17 +31,22 @@ namespace Nest
 	{
 		int? ITemplateMapping.Order { get; set; }
 
+		int? IPutIndexTemplateRequest.Version { get; set; }
+
 		IIndexSettings ITemplateMapping.Settings { get; set; }
 
 		IMappings ITemplateMapping.Mappings { get; set; }
 
 		IAliases ITemplateMapping.Aliases { get; set; }
 
-		IReadOnlyCollection<string> ITemplateMapping.IndexPatterns {get;set;}
+		IReadOnlyCollection<string> ITemplateMapping.IndexPatterns { get; set; }
 
 		public PutIndexTemplateDescriptor Order(int order) => Assign(a => a.Order = order);
 
+		public PutIndexTemplateDescriptor Version(int version) => Assign(a => a.Version = version);
+
 		public PutIndexTemplateDescriptor IndexPatterns(params string[] patterns)=> Assign(a => a.IndexPatterns = patterns);
+
 		public PutIndexTemplateDescriptor IndexPatterns(IEnumerable<string> patterns)=> Assign(a => a.IndexPatterns = patterns?.ToArray());
 
 		public PutIndexTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingsSelector) =>
