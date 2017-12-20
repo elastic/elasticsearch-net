@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -82,7 +83,7 @@ namespace Nest
 	}
 
 	internal class ResolvableDictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
-		where TResponse : IDictionaryResponse<TKey, TValue>, new() where TKey : IUrlParameter
+		where TResponse : ResponseBase, IDictionaryResponse<TKey, TValue> , new() where TKey : IUrlParameter
 	{
 		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => true;
@@ -90,12 +91,36 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
+			var j = JObject.Load(reader);
+			var errorProperty =j.Property("error");
+			Error error = null;
+			if (errorProperty?.Value?.Type == JTokenType.String)
+			{
+				var reason = errorProperty.Value.Value<string>();
+				error = new Error {Reason = reason};
+				errorProperty.Remove();
+			}
+			else if (errorProperty?.Value?.Type == JTokenType.Object && ((JObject)errorProperty.Value)["reason"] != null)
+			{
+				error = errorProperty.Value.ToObject<Error>();
+				errorProperty.Remove();
+			}
+			var statusProperty =j.Property("status");
+			int? statusCode = null;
+			if (statusProperty?.Value?.Type == JTokenType.Integer)
+			{
+				statusCode = statusProperty.Value.Value<int>();
+				statusProperty.Remove();
+			}
+
 			var response = new TResponse();
 			var d = new Dictionary<TKey, TValue>();
-			serializer.Populate(reader, d);
+			serializer.Populate(j.CreateReader(), d);
 			var settings = serializer.GetConnectionSettings();
 			var dict = new ResolvableDictionaryProxy<TKey, TValue>(settings, d);
 			response.BackingDictionary = dict;
+			response.Error = error;
+			response.StatusCode = statusCode;
 			return response;
 		}
 

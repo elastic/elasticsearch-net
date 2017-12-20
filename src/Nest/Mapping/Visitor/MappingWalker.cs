@@ -15,12 +15,12 @@ namespace Nest
 
 		public void Accept(IGetMappingResponse response)
 		{
-			if (response == null) return;
-
-			foreach (var indexMapping in response.Mappings)
-			foreach (var typeMapping in indexMapping.Value)
+			if (response?.Indices == null) return;
+			foreach (var indexMapping in response.Indices)
 			{
-				this.Accept(typeMapping.Value);
+				if (indexMapping.Value?.Mappings == null) continue;
+				foreach (var typeMapping in indexMapping.Value.Mappings)
+					this.Accept(typeMapping.Value);
 			}
 		}
 
@@ -32,11 +32,10 @@ namespace Nest
 		}
 
 
-		private void Visit<TProperty>(IProperty prop, Action<TProperty> act)
+		private static void Visit<TProperty>(IProperty prop, Action<TProperty> act)
 			where TProperty : class, IProperty
 		{
-			var t = prop as TProperty;
-			if (t == null) return;
+			if (!(prop is TProperty t)) return;
 			act(t);
 		}
 
@@ -51,14 +50,14 @@ namespace Nest
 				switch (ft)
 				{
 					case FieldType.Text:
-						this.Visit<ITextProperty>(field, t =>
+						Visit<ITextProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.Keyword:
-						this.Visit<IKeywordProperty>(field, t =>
+						Visit<IKeywordProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
@@ -66,7 +65,7 @@ namespace Nest
 						break;
 					case FieldType.String:
 #pragma warning disable 618
-						this.Visit<IStringProperty>(field, t =>
+						Visit<IStringProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
@@ -81,35 +80,35 @@ namespace Nest
 					case FieldType.Short:
 					case FieldType.Integer:
 					case FieldType.Long:
-						this.Visit<INumberProperty>(field, t =>
+						Visit<INumberProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.Date:
-						this.Visit<IDateProperty>(field, t =>
+						Visit<IDateProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.Boolean:
-						this.Visit<IBooleanProperty>(field, t =>
+						Visit<IBooleanProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.Binary:
-						this.Visit<IBinaryProperty>(field, t =>
+						Visit<IBinaryProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.Object:
-						this.Visit<IObjectProperty>(field, t =>
+						Visit<IObjectProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this._visitor.Depth += 1;
@@ -118,7 +117,7 @@ namespace Nest
 						});
 						break;
 					case FieldType.Nested:
-						this.Visit<INestedProperty>(field, t =>
+						Visit<INestedProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this._visitor.Depth += 1;
@@ -127,42 +126,42 @@ namespace Nest
 						});
 						break;
 					case FieldType.Ip:
-						this.Visit<IIpProperty>(field, t =>
+						Visit<IIpProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.GeoPoint:
-						this.Visit<IGeoPointProperty>(field, t =>
+						Visit<IGeoPointProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.GeoShape:
-						this.Visit<IGeoShapeProperty>(field, t =>
+						Visit<IGeoShapeProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.Completion:
-						this.Visit<ICompletionProperty>(field, t =>
+						Visit<ICompletionProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.Murmur3Hash:
-						this.Visit<IMurmur3HashProperty>(field, t =>
+						Visit<IMurmur3HashProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.TokenCount:
-						this.Visit<ITokenCountProperty>(field, t =>
+						Visit<ITokenCountProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
@@ -171,48 +170,48 @@ namespace Nest
 					case FieldType.None:
 						continue;
 					case FieldType.Percolator:
-						this.Visit<IPercolatorProperty>(field, t =>
+						Visit<IPercolatorProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 						});
 						break;
 					case FieldType.IntegerRange:
-						this.Visit<IIntegerRangeProperty>(field, t =>
+						Visit<IIntegerRangeProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.FloatRange:
-						this.Visit<IFloatRangeProperty>(field, t =>
+						Visit<IFloatRangeProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.LongRange:
-						this.Visit<ILongRangeProperty>(field, t =>
+						Visit<ILongRangeProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.DoubleRange:
-						this.Visit<IDoubleRangeProperty>(field, t =>
+						Visit<IDoubleRangeProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.DateRange:
-						this.Visit<IDateRangeProperty>(field, t =>
+						Visit<IDateRangeProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);
 						});
 						break;
 					case FieldType.Join:
-						this.Visit<IJoinProperty>(field, t =>
+						Visit<IJoinProperty>(field, t =>
 						{
 							this._visitor.Visit(t);
 						});
