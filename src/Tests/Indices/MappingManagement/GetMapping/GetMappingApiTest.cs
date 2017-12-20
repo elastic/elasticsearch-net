@@ -50,6 +50,10 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.Indices["project"]["doc"].Properties.Should().NotBeEmpty();
 			response.Indices[Index<Project>()].Mappings[Type<Project>()].Properties.Should().NotBeEmpty();
 			response.Indices[Index<Project>()][Type<Project>()].Properties.Should().NotBeEmpty();
+			var properties = response.Indices[Index<Project>()][Type<Project>()].Properties;
+
+			var leadDev = properties[Property<Project>(p => p.LeadDeveloper)];
+			leadDev.Should().NotBeNull();
 
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			visitor.CountsShouldContainKeyAndCountBe("text", b ? 19 : 18);

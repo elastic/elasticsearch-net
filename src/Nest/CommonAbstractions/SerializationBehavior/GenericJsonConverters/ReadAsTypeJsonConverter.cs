@@ -15,7 +15,7 @@ namespace Nest
 		{
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => 
-			FromJson.ReadAs<T>(reader, objectType, existingValue, serializer);
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
+			FromJson.ReadAs<T>(reader, serializer);
 	}
 }

@@ -47,7 +47,8 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var r = new Properties();
+			var s = serializer.GetConnectionSettings();
+			var r = new Properties(s);
 			var o = JObject.Load(reader);
 
 			foreach (var p in o.Properties())

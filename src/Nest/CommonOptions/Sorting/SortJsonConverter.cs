@@ -25,23 +25,23 @@ namespace Nest
 				var geoLocationProp = jObject.Properties().First(p => p.Value.Type == JTokenType.Array);
 				using (var r = jObject.CreateReader())
 				{
-					var s = FromJson.ReadAs<GeoDistanceSort>(r, objectType, existingValue, serializer);
+					var s = FromJson.ReadAs<GeoDistanceSort>(r, serializer);
 					s.Field = geoLocationProp.Name;
 					using (var rr = geoLocationProp.Value.CreateReader())
-						s.Points =FromJson.ReadAs<List<GeoLocation>>(rr, objectType, existingValue, serializer); 
+						s.Points =FromJson.ReadAs<List<GeoLocation>>(rr, serializer);
 					sort = s;
 				}
 			}
 			else if (field == "_script")
 			{
 				reader.Read();
-				var s = FromJson.ReadAs<ScriptSort>(reader, objectType, existingValue, serializer);
+				var s = FromJson.ReadAs<ScriptSort>(reader, serializer);
 				sort = s;
 			}
 			else
 			{
 				reader.Read();
-				var s = FromJson.ReadAs<SortField>(reader, objectType, existingValue, serializer);
+				var s = FromJson.ReadAs<SortField>(reader, serializer);
 				s.Field = field;
 				sort = s;
 			}
