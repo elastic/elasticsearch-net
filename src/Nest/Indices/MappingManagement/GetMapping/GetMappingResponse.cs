@@ -15,11 +15,6 @@ namespace Nest
 		void Accept(IMappingVisitor visitor);
 	}
 
-	internal class TypeMappingsJsonConverter : ResolvableDictionaryJsonConverterBase<TypeMappings, TypeName, TypeMapping>
-	{
-		protected override TypeMappings Create(IConnectionSettingsValues s, Dictionary<TypeName, TypeMapping> d) =>
-			new TypeMappings(s, d);
-	}
 	public class IndexMappings
 	{
 		[JsonProperty("mappings")]
@@ -33,6 +28,12 @@ namespace Nest
 	{
 		internal TypeMappings(IConnectionConfigurationValues connectionSettings, IReadOnlyDictionary<TypeName, TypeMapping> backingDictionary)
 			: base(connectionSettings, backingDictionary) { }
+
+		internal class TypeMappingsJsonConverter : ResolvableDictionaryJsonConverterBase<TypeMappings, TypeName, TypeMapping>
+		{
+			protected override TypeMappings Create(IConnectionSettingsValues s, Dictionary<TypeName, TypeMapping> d) =>
+				new TypeMappings(s, d);
+		}
 	}
 
 	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<GetMappingResponse, IndexName, IndexMappings>))]

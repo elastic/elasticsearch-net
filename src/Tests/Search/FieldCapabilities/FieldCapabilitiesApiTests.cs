@@ -54,6 +54,10 @@ namespace Tests.Search.FieldCapabilities
 			var stateCapabilities = response.Fields["state"].Keyword;
 			stateCapabilities.Aggregatable.Should().BeTrue();
 			stateCapabilities.Searchable.Should().BeTrue();
+
+			stateCapabilities = response.Fields[Field<Project>(p=>p.State)].Keyword;
+			stateCapabilities.Aggregatable.Should().BeTrue();
+			stateCapabilities.Searchable.Should().BeTrue();
 		}
 	}
 }

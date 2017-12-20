@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -7,13 +8,25 @@ namespace Nest
 	public interface IFieldCapabilitiesResponse : IResponse
 	{
 		[JsonProperty("fields")]
-		IReadOnlyDictionary<string, FieldTypes> Fields { get; }
+		FieldCapabilitiesFields Fields { get; }
 	}
 
 	public class FieldCapabilitiesResponse : ResponseBase, IFieldCapabilitiesResponse
 	{
 		public ShardStatistics Shards { get; internal set; }
-		public IReadOnlyDictionary<string, FieldTypes> Fields { get; internal set; } = EmptyReadOnly<string, FieldTypes>.Dictionary;
+		public FieldCapabilitiesFields Fields { get; internal set; }
+	}
+
+	[JsonConverter(typeof(FieldCapabilitiesFields.Converter))]
+	public class FieldCapabilitiesFields : ResolvableDictionaryProxy<Field, FieldTypes>
+	{
+		internal FieldCapabilitiesFields(IConnectionConfigurationValues c, IReadOnlyDictionary<Field, FieldTypes> b) : base(c, b) { }
+
+		internal class Converter : ResolvableDictionaryJsonConverterBase<FieldCapabilitiesFields, Field, FieldTypes>
+		{
+			protected override FieldCapabilitiesFields Create(IConnectionSettingsValues s, Dictionary<Field, FieldTypes> d) =>
+				new FieldCapabilitiesFields(s, d);
+		}
 	}
 
 	public class FieldTypes : IsADictionaryBase<string, FieldCapabilities>
