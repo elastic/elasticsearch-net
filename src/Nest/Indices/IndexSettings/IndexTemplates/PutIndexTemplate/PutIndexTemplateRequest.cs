@@ -7,8 +7,6 @@ namespace Nest
 {
 	public partial interface IPutIndexTemplateRequest : ITemplateMapping
 	{
-		[JsonProperty("version")]
-		int? Version { get; set; }
 	}
 
 	public partial class PutIndexTemplateRequest
@@ -31,7 +29,7 @@ namespace Nest
 	{
 		int? ITemplateMapping.Order { get; set; }
 
-		int? IPutIndexTemplateRequest.Version { get; set; }
+		int? ITemplateMapping.Version { get; set; }
 
 		IIndexSettings ITemplateMapping.Settings { get; set; }
 
