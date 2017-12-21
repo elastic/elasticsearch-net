@@ -49,7 +49,7 @@ namespace Tests.Aggregations.Metric.TopHits
 											script = new
 											{
 												lang = "groovy",
-												inline = "Math.sin(34*(double)doc['numberOfCommits'].value)"
+												inline = "sin(doc['numberOfCommits'].value)"
 											},
 											order = "desc"
 										}
@@ -103,7 +103,7 @@ namespace Tests.Aggregations.Metric.TopHits
 								.Script(ss => ss
 									.Type("number")
 									.Script(sss => sss
-										.Inline("Math.sin(34*(double)doc['numberOfCommits'].value)")
+										.Inline("sin(doc['numberOfCommits'].value)")
 										.Lang("groovy")
 									)
 									.Order(SortOrder.Descending)
@@ -155,7 +155,7 @@ namespace Tests.Aggregations.Metric.TopHits
 							new ScriptSort
 							{
 								Type = "number",
-								Script = new InlineScript("Math.sin(34*(double)doc['numberOfCommits'].value)") { Lang = "groovy" },
+								Script = new InlineScript("sin(doc['numberOfCommits'].value)") { Lang = "groovy" },
 								Order = SortOrder.Descending
 							},
 						},
