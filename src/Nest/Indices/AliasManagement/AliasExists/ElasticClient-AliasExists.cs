@@ -33,7 +33,6 @@ namespace Nest
 		public IExistsResponse AliasExists(IAliasExistsRequest request) =>
 			this.Dispatcher.Dispatch<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse>(
 				request,
-				new AliasExistConverter(DeserializeExistsResponse),
 				(p, d) => this.LowLevelDispatch.IndicesExistsAliasDispatch<ExistsResponse>(p)
 			);
 
@@ -46,7 +45,6 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				request,
 				cancellationToken,
-				new AliasExistConverter(DeserializeExistsResponse),
 				(p, d, c) => this.LowLevelDispatch.IndicesExistsAliasDispatchAsync<ExistsResponse>(p, c)
 			);
 	}

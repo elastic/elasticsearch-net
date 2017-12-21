@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -36,5 +37,11 @@ namespace Tests.Document.Single.Exists
 
 		protected override Func<DocumentExistsDescriptor<Project>, IDocumentExistsRequest> Fluent => null;
 		protected override DocumentExistsRequest<Project> Initializer => new DocumentExistsRequest<Project>(CallIsolatedValue);
+
+		protected override void ExpectResponse(IExistsResponse response)
+		{
+			response.Should().NotBeNull();
+			response.Exists.Should().BeTrue();
+		}
 	}
 }

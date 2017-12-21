@@ -40,7 +40,6 @@ namespace Nest
 		public IExistsResponse DocumentExists(IDocumentExistsRequest request) =>
 			this.Dispatcher.Dispatch<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse>(
 				request,
-				new ExistConverter(this.DeserializeExistsResponse),
 				(p, d) => this.LowLevelDispatch.ExistsDispatch<ExistsResponse>(p)
 			);
 
@@ -53,7 +52,6 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				request,
 				cancellationToken,
-				new ExistConverter(this.DeserializeExistsResponse),
 				(p, d, c) => this.LowLevelDispatch.ExistsDispatchAsync<ExistsResponse>(p, c)
 			);
 	}

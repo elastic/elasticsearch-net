@@ -13,11 +13,8 @@ namespace Tests.Indices.AliasManagement.AliasExists
 {
 	public class AliasExistsApiTests
 		: ApiIntegrationTestBase<WritableCluster, IExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
-
 	{
-		public AliasExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public AliasExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -45,15 +42,18 @@ namespace Tests.Indices.AliasManagement.AliasExists
 			.Name(CallIsolatedValue + "-alias");
 
 		protected override AliasExistsRequest Initializer => new AliasExistsRequest(Names(CallIsolatedValue + "-alias"));
+
+		protected override void ExpectResponse(IExistsResponse response)
+		{
+			response.Exists.Should().BeTrue();
+		}
 	}
 
 	public class AliasExistsNotFoundApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, IExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
 
 	{
-		public AliasExistsNotFoundApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public AliasExistsNotFoundApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.AliasExists(f),

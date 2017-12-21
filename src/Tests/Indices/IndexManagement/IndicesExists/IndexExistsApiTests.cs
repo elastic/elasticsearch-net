@@ -1,4 +1,5 @@
 ﻿using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -25,5 +26,10 @@ namespace Tests.Indices.IndexManagement.IndicesExists
 		protected override string UrlPath => $"/project";
 
 		protected override IndexExistsRequest Initializer => new IndexExistsRequest(Index<Project>());
+
+		protected override void ExpectResponse(IExistsResponse response)
+		{
+			response.Exists.Should().BeTrue();
+		}
 	}
 }
