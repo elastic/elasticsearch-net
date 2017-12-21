@@ -50,9 +50,9 @@ namespace Tests.Search.Request
 						collate = new {
 						  query = new {
 							source = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
-							@params = new {
-						      field_name = "title"
-							}
+						  },
+						  @params = new {
+					        field_name = "title"
 						  },
 						  prune = true,
 						},
@@ -81,7 +81,8 @@ namespace Tests.Search.Request
 						suggest_mode = "always"
 					  },
 					  text = "hello world"
-					} }
+					  }
+					}
 				  }
 			};
 
@@ -123,8 +124,8 @@ namespace Tests.Search.Request
 					.Collate(c => c
 						.Query(q => q
 							.Source("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
-							.Params(p => p.Add("field_name", "title"))
 						)
+						.Params(p => p.Add("field_name", "title"))
 						.Prune()
 					)
 					.Confidence(10.1)
@@ -190,13 +191,13 @@ namespace Tests.Search.Request
 						{
 							Collate = new PhraseSuggestCollate
 							{
-								Query = new TemplateQuery
+								Query = new PhraseSuggestCollateQuery
 								{
 									Source = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
-									Params = new Dictionary<string, object>
-									{
-										{ "field_name", "title" }
-									}
+								},
+								Params = new Dictionary<string, object>
+								{
+									{ "field_name", "title" }
 								},
 								Prune = true
 							},
