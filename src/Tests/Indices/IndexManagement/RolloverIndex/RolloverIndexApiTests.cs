@@ -62,7 +62,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			},
 			mappings = new
 			{
-				doc = new
+				project = new
 				{
 					properties = new
 					{
