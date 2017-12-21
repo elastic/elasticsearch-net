@@ -95,12 +95,16 @@ namespace Nest
 
 		public TopHitsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
+		[Obsolete("Use Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>>) that accepts multiple sort options")]
 		public TopHitsAggregationDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector) => Assign(a =>
 		{
 			a.Sort = a.Sort ?? new List<ISort>();
 			var sort = sortSelector?.Invoke(new SortFieldDescriptor<T>());
 			if (sort != null) a.Sort.Add(sort);
 		});
+
+		public TopHitsAggregationDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> sortSelector) =>
+			Assign(a => a.Sort = sortSelector?.Invoke(new SortDescriptor<T>())?.Value);
 
 		public TopHitsAggregationDescriptor<T> Source(bool enabled = true) =>
 			Assign(a => a.Source = enabled);
