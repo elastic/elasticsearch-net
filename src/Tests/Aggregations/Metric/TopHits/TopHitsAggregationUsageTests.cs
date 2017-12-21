@@ -40,6 +40,19 @@ namespace Tests.Aggregations.Metric.TopHits
 										{
 											order = "desc"
 										}
+									},
+									new
+									{
+										_script = new
+										{
+											type = "number",
+											script = new
+											{
+												lang = "painless",
+												inline = "Math.sin(34*(double)doc['numberOfCommits'].value)"
+											},
+											order = "desc"
+										}
 									}
 								},
 								_source = new
@@ -83,8 +96,18 @@ namespace Tests.Aggregations.Metric.TopHits
 					.Aggregations(aa => aa
 						.TopHits("top_state_hits", th => th
 							.Sort(srt => srt
-								.Field(p => p.StartedOn)
-								.Order(SortOrder.Descending)
+								.Field(sf => sf
+									.Field(p => p.StartedOn)
+									.Order(SortOrder.Descending)
+								)
+								.Script(ss => ss
+									.Type("number")
+									.Script(sss => sss
+										.Inline("Math.sin(34*(double)doc['numberOfCommits'].value)")
+										.Lang("painless")
+									)
+									.Order(SortOrder.Descending)
+								)
 							)
 							.Source(src => src
 								.Include(fs => fs
@@ -128,7 +151,13 @@ namespace Tests.Aggregations.Metric.TopHits
 					{
 						Sort = new List<ISort>
 						{
-							new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
+							new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending },
+							new ScriptSort
+							{
+								Type = "number",
+								Script = new InlineScript("Math.sin(34*(double)doc['numberOfCommits'].value)") { Lang = "painless" },
+								Order = SortOrder.Descending
+							},
 						},
 						Source = new SourceFilter
 						{
