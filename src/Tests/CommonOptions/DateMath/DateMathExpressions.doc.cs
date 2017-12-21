@@ -94,18 +94,18 @@ namespace Tests.CommonOptions.DateMath
 					.Subtract(TimeSpan.FromMinutes(1)));
 		}
 
+		/**
+		* ==== Fractional times
+		* DateMath expressions do not support fractional numbers so will
+		* pick the largest unit (up to days, `d`, when constructing a Time from a `TimeSpan` or `double`) in which the number can be expressed as an integer
+		*/
 		[U] public void FractionalsUnitsAreDroppedToIntegerPart()
 		{
-			/**
-			* ==== Fractional times
-			* DateMath expressions do not support fractional numbers so will
-			* pick the largest unit (up to days, `d`) in which the number can be expressed as an integer
-			*/
-			Expect("now+25h").WhenSerializing(
-				Nest.DateMath.Now.Add(TimeSpan.FromHours(25)));
-
-			/** where as `Time` on its own serializes like this */
-			Expect("25h").WhenSerializing(new Time(TimeSpan.FromHours(25)));
+			Expect("now+25h")
+				.WhenSerializing(Nest.DateMath.Now.Add(TimeSpan.FromHours(25)))
+				.WhenSerializing(Nest.DateMath.Now.Add(90000000))
+				.WhenSerializing(Nest.DateMath.Now.Add(new Time(25, Nest.TimeUnit.Hour)))
+				.WhenSerializing(Nest.DateMath.Now.Add("25h"));
 
 			Expect("now+90001s").WhenSerializing(
 				Nest.DateMath.Now.Add(TimeSpan.FromHours(25).Add(TimeSpan.FromSeconds(1))));
@@ -113,14 +113,15 @@ namespace Tests.CommonOptions.DateMath
 			Expect("now+90000001ms").WhenSerializing(
 				Nest.DateMath.Now.Add(TimeSpan.FromHours(25).Add(TimeSpan.FromMilliseconds(1))));
 
-			Expect("now+1y").WhenSerializing(
-				Nest.DateMath.Now.Add("1y"));
+			Expect("now+1y")
+				.WhenSerializing(Nest.DateMath.Now.Add("1y"))
+				.WhenSerializing(Nest.DateMath.Now.Add(new Time(1, Nest.TimeUnit.Year)));
 
-			Expect("now+364d").WhenSerializing(
-				Nest.DateMath.Now.Add(TimeSpan.FromDays(7 * 52)));
+			Expect("now+364d").WhenSerializing(Nest.DateMath.Now.Add(TimeSpan.FromDays(7 * 52)));
 
-			Expect("now+52w").WhenSerializing(
-				Nest.DateMath.Now.Add(new Time("52w")));
+			Expect("now+52w")
+				.WhenSerializing(Nest.DateMath.Now.Add(new Time("52w")))
+				.WhenSerializing(Nest.DateMath.Now.Add(new Time(52, Nest.TimeUnit.Week)));
 		}
 	}
 }
