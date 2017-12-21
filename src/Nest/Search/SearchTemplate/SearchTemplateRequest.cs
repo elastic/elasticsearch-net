@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchTemplateRequest>))]
 	public partial interface ISearchTemplateRequest : ICovariantSearchRequest
 	{
 		[JsonProperty("params")]
@@ -57,6 +58,7 @@ namespace Nest
 	public class SearchTemplateRequest<T> : SearchTemplateRequest
 		where T : class
 	{
+		public SearchTemplateRequest() : base(typeof(T)) { this.ClrType = typeof(T); }
 		public SearchTemplateRequest(Indices indices) : base(indices) { this.ClrType = typeof(T); }
 		public SearchTemplateRequest(Indices indices, Types types) : base(indices, types) { this.ClrType = typeof(T); }
 	}

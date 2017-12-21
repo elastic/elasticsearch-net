@@ -80,7 +80,6 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 			var id = response.GetResponse<Project>("id");
 			id.Should().NotBeNull();
 			id.ShouldNotBeValid();
-
 		}
 	}
 }
