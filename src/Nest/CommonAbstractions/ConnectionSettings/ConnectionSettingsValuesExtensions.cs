@@ -6,7 +6,7 @@ namespace Nest
 {
 	internal static class ConnectionSettingsValuesExtensions
 	{
-		public static JsonNetSerializer CreateStateful(this IConnectionSettingsValues settings, JsonConverter converter)
+		public static InternalSerializer CreateStateful(this IConnectionSettingsValues settings, JsonConverter converter)
 		{
 			var s = (settings as ConnectionSettings)
 				?? throw new NullReferenceException($"Stateful serializer expected {nameof(IConnectionSettingsValues)} to be {nameof(ConnectionSettings)}");

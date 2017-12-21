@@ -86,7 +86,7 @@ namespace Nest
 		)
 			: base(connectionPool, connection, null)
 		{
-			var defaultSerializer = new JsonNetSerializer(this);
+			var defaultSerializer = new InternalSerializer(this);
 			this._sourceSerializer = sourceSerializerFactory?.Invoke(defaultSerializer, this) ?? defaultSerializer;
 			this.UseThisRequestResponseSerializer = defaultSerializer;
 			this._propertyMappingProvider = propertyMappingProvider ?? new PropertyMappingProvider();

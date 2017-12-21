@@ -10,8 +10,8 @@ using Newtonsoft.Json.Linq;
 namespace Nest
 {
 
-	/// <summary> A JSON serializer that uses Json.NET for serialization </summary>
-	internal class JsonNetSerializer : IElasticsearchSerializer
+	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
+	internal class InternalSerializer : IElasticsearchSerializer
 	{
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 		private readonly JsonSerializer _indentedSerializer;
@@ -32,12 +32,12 @@ namespace Nest
 		// to be a good compromise buffer size for performance throughput and bytes allocated.
 		protected virtual int BufferSize => 1024;
 
-		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
+		public InternalSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
 
 		/// <summary>
 		/// this constructor is only here for stateful (de)serialization
 		/// </summary>
-		protected internal JsonNetSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter)
+		protected internal InternalSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter)
 		{
 			this.Settings = settings;
 			var piggyBackState = statefulConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = statefulConverter };

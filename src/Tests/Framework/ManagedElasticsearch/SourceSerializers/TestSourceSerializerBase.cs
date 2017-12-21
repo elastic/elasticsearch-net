@@ -28,7 +28,6 @@ namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
 		protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver)
 		{
 			resolver.NamingStrategy = new CamelCaseNamingStrategy();
-			base.ModifyContractResolver(resolver);
 		}
 	}
 }
