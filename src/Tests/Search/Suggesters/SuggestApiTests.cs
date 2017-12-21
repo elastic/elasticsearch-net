@@ -60,9 +60,9 @@ namespace Tests.Search.Suggesters
 						collate = new {
 						  query = new {
 							inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
-							@params = new {
-						      field_name = "title"
-							}
+						  },
+						  @params = new {
+							field_name = "title"
 						  },
 						  prune = true,
 						},
@@ -131,8 +131,8 @@ namespace Tests.Search.Suggesters
 					.Collate(c => c
 						.Query(q => q
 							.Inline("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
-							.Params(p => p.Add("field_name", "title"))
 						)
+						.Params(p => p.Add("field_name", "title"))
 						.Prune()
 					)
 					.Confidence(10.1)
@@ -195,12 +195,10 @@ namespace Tests.Search.Suggesters
 						{
 							Collate = new PhraseSuggestCollate
 							{
-								Query = new InlineScript("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
+								Query = new InlineScript("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}"),
+								Params = new Dictionary<string, object>
 								{
-									Params = new Dictionary<string, object>
-									{
-										{ "field_name", "title" }
-									}
+									{ "field_name", "title" }
 								},
 								Prune = true
 							},
