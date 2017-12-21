@@ -33,7 +33,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 
 		protected override GetIndexTemplateRequest Initializer => new GetIndexTemplateRequest(CallIsolatedValue);
 
-		protected override object ExpectJson => new object();
+		protected override object ExpectJson => null;
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
