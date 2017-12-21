@@ -21,7 +21,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 500;
 
-		//bad painless script
+		//bad Groovy script
 		protected override string GroovyScript { get; } = "if ctx._source.flag == 'bar') {ctx._source.remove('flag')}";
 
 		protected override void ExpectResponse(IReindexOnServerResponse response)
