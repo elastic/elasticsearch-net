@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -61,6 +62,7 @@ namespace Nest.JsonNetSerializer
 
 		//we still support net45 so Task.Completed is not available
 		private static readonly Task CompletedTask = Task.FromResult(false);
+
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
 			CancellationToken cancellationToken = default(CancellationToken))
 		{

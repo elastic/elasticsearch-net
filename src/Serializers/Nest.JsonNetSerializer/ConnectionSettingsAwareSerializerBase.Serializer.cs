@@ -10,15 +10,31 @@ namespace Nest.JsonNetSerializer
 {
 	public abstract partial class ConnectionSettingsAwareSerializerBase
 	{
+		protected Func<JsonSerializerSettings> JsonSerializerSettingsFactory { get; }
+		protected Action<ConnectionSettingsAwareContractResolver> ModifyContractResolverCallback { get; }
+		protected IEnumerable<JsonConverter> ContractJsonConverters { get; }
+
 		protected IConnectionSettingsValues ConnectionSettings { get; }
+
 		protected IElasticsearchSerializer BuiltinSerializer { get; }
 
 		private List<JsonConverter> Converters { get; }
 
-		protected ConnectionSettingsAwareSerializerBase(
+		protected ConnectionSettingsAwareSerializerBase(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
+			: this(builtinSerializer, connectionSettings, null, null, null) { }
+
+		internal ConnectionSettingsAwareSerializerBase(
 			IElasticsearchSerializer builtinSerializer,
-			IConnectionSettingsValues connectionSettings)
+			IConnectionSettingsValues connectionSettings,
+			Func<JsonSerializerSettings> jsonSerializerSettingsFactory,
+			Action<ConnectionSettingsAwareContractResolver> modifyContractResolver,
+			IEnumerable<JsonConverter> contractJsonConverters)
 		{
+
+			JsonSerializerSettingsFactory = jsonSerializerSettingsFactory;
+			ModifyContractResolverCallback = modifyContractResolver;
+			ContractJsonConverters = contractJsonConverters ?? Enumerable.Empty<JsonConverter>();
+
 			ConnectionSettings = connectionSettings;
 			BuiltinSerializer = builtinSerializer;
 			this.Converters = new List<JsonConverter>
@@ -28,12 +44,12 @@ namespace Nest.JsonNetSerializer
 			};
 			_serializer = CreateSerializer(SerializationFormatting.Indented);
 			_collapsedSerializer = CreateSerializer(SerializationFormatting.None);
-
 		}
+
 
 		private JsonSerializer CreateSerializer(SerializationFormatting formatting)
 		{
-			var s = CreateJsonSerializerSettings();
+			var s = CreateJsonSerializerSettings() ?? new JsonSerializerSettings();;
 			var converters = CreateJsonConverters() ?? Enumerable.Empty<JsonConverter>();
 			var contract = CreateContractResolver();
 			s.Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None;
@@ -41,6 +57,7 @@ namespace Nest.JsonNetSerializer
 			s.Converters = converters.Concat(this.Converters).ToList();
 			return JsonSerializer.Create(s);
 		}
+
 		private IContractResolver CreateContractResolver()
 		{
 			var contract = new ConnectionSettingsAwareContractResolver(this.ConnectionSettings);
@@ -48,42 +65,11 @@ namespace Nest.JsonNetSerializer
 			return contract;
 		}
 
-		protected abstract JsonSerializerSettings CreateJsonSerializerSettings();
+		protected virtual JsonSerializerSettings CreateJsonSerializerSettings() => JsonSerializerSettingsFactory?.Invoke();
 
-		//TODO
-		protected abstract IEnumerable<JsonConverter> CreateJsonConverters();
+		protected virtual IEnumerable<JsonConverter> CreateJsonConverters() => ContractJsonConverters;
 
-		protected virtual void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver) { }
-	}
-
-	public class JsonNetSerializer : ConnectionSettingsAwareSerializerBase
-	{
-		private readonly Func<JsonSerializerSettings> _jsonSerializerSettingsFactory;
-		private readonly Action<ConnectionSettingsAwareContractResolver> _modifyContractResolver;
-		private readonly IEnumerable<JsonConverter> _contractJsonConverters;
-
-		public static IElasticsearchSerializer Default(IElasticsearchSerializer builtin, IConnectionSettingsValues values)
-			=> new JsonNetSerializer(builtin, values);
-
-		public JsonNetSerializer(
-			IElasticsearchSerializer builtinSerializer,
-			IConnectionSettingsValues connectionSettings,
-			Func<JsonSerializerSettings> jsonSerializerSettingsFactory = null,
-			Action<ConnectionSettingsAwareContractResolver> modifyContractResolver = null,
-			IEnumerable<JsonConverter> contractJsonConverters = null)
-			: base(builtinSerializer, connectionSettings)
-		{
-			_jsonSerializerSettingsFactory = jsonSerializerSettingsFactory;
-			_modifyContractResolver = modifyContractResolver;
-			_contractJsonConverters = contractJsonConverters ?? Enumerable.Empty<JsonConverter>();
-		}
-
-		protected override JsonSerializerSettings CreateJsonSerializerSettings() => _jsonSerializerSettingsFactory?.Invoke();
-
-		protected override IEnumerable<JsonConverter> CreateJsonConverters() => _contractJsonConverters;
-
-		protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver) =>
-			_modifyContractResolver?.Invoke(resolver);
-
+		protected virtual void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver) =>
+			ModifyContractResolverCallback?.Invoke(resolver);
 	}
 }
