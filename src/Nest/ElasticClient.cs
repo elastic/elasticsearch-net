@@ -56,7 +56,7 @@ namespace Nest
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 
 			var response = dispatch(request, request);
-			return ResultsSelector(response);
+			return response;
 		}
 
 		Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
@@ -75,19 +75,7 @@ namespace Nest
 			request.RouteValues.Resolve(this.ConnectionSettings);
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 			var response = await dispatch(request, request, cancellationToken).ConfigureAwait(false);
-			return ResultsSelector(response);
-		}
-
-		private static TResponse ResultsSelector<TResponse>(TResponse c)
-			where TResponse : ResponseBase => c;
-			//c.Body ?? CreateInvalidInstance<TResponse>(c);
-
-		private static TResponse CreateInvalidInstance<TResponse>(IApiCallDetails response)
-			where TResponse : ResponseBase
-		{
-			var r = typeof(TResponse).CreateInstance<TResponse>();
-			((IElasticsearchResponse)r).ApiCall = response;
-			return r;
+			return response;
 		}
 
 		private static TRequest ForceConfiguration<TRequest, TParams>(TRequest request, Action<IRequestConfiguration> setter)
