@@ -137,8 +137,8 @@ Expect("2015-05-05T00:00:00||+1d-1m").WhenSerializing(
 
 ==== Fractional times
 
-DateMath expressions do not support fractional numbers so unlike `Time` DateMath will
-pick the biggest integer unit it can represent
+DateMath expressions do not support fractional numbers so will
+pick the largest unit (up to days, `d`) in which the number can be expressed as an integer
 
 [source,csharp]
 ----
@@ -150,7 +150,7 @@ where as `Time` on its own serializes like this
 
 [source,csharp]
 ----
-Expect("1.04166666666667d").WhenSerializing(new Time(TimeSpan.FromHours(25)));
+Expect("25h").WhenSerializing(new Time(TimeSpan.FromHours(25)));
 
 Expect("now+90001s").WhenSerializing(
     Nest.DateMath.Now.Add(TimeSpan.FromHours(25).Add(TimeSpan.FromSeconds(1))));
@@ -161,7 +161,10 @@ Expect("now+90000001ms").WhenSerializing(
 Expect("now+1y").WhenSerializing(
     Nest.DateMath.Now.Add("1y"));
 
-Expect("now+52w").WhenSerializing(
+Expect("now+364d").WhenSerializing(
     Nest.DateMath.Now.Add(TimeSpan.FromDays(7 * 52)));
+
+Expect("now+52w").WhenSerializing(
+    Nest.DateMath.Now.Add(new Time("52w")));
 ----
 

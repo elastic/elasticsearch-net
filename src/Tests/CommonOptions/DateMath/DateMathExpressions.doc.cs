@@ -94,18 +94,18 @@ namespace Tests.CommonOptions.DateMath
 					.Subtract(TimeSpan.FromMinutes(1)));
 		}
 
-		[U] public void FractionalsUnitsAreDroppeToIntegerPart()
+		[U] public void FractionalsUnitsAreDroppedToIntegerPart()
 		{
 			/**
 			* ==== Fractional times
-			* DateMath expressions do not support fractional numbers so unlike `Time` DateMath will
-			* pick the biggest integer unit it can represent
+			* DateMath expressions do not support fractional numbers so will
+			* pick the largest unit (up to days, `d`) in which the number can be expressed as an integer
 			*/
 			Expect("now+25h").WhenSerializing(
 				Nest.DateMath.Now.Add(TimeSpan.FromHours(25)));
 
 			/** where as `Time` on its own serializes like this */
-			Expect("1.04166666666667d").WhenSerializing(new Time(TimeSpan.FromHours(25)));
+			Expect("25h").WhenSerializing(new Time(TimeSpan.FromHours(25)));
 
 			Expect("now+90001s").WhenSerializing(
 				Nest.DateMath.Now.Add(TimeSpan.FromHours(25).Add(TimeSpan.FromSeconds(1))));
@@ -116,8 +116,11 @@ namespace Tests.CommonOptions.DateMath
 			Expect("now+1y").WhenSerializing(
 				Nest.DateMath.Now.Add("1y"));
 
-			Expect("now+52w").WhenSerializing(
+			Expect("now+364d").WhenSerializing(
 				Nest.DateMath.Now.Add(TimeSpan.FromDays(7 * 52)));
+
+			Expect("now+52w").WhenSerializing(
+				Nest.DateMath.Now.Add(new Time("52w")));
 		}
 	}
 }
