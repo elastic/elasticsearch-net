@@ -54,6 +54,6 @@ namespace Nest
 
 		private PreviewDatafeedResponse<T> PreviewDatafeedResponse<T>(IApiCallDetails response, Stream stream) => response.Success
 			? new PreviewDatafeedResponse<T> { Data = this.ConnectionSettings.RequestResponseSerializer.Deserialize<IReadOnlyCollection<T>>(stream) }
-			: new PreviewDatafeedResponse<T>();
+			: null;
 	}
 }
