@@ -26,6 +26,7 @@ namespace Tests.QueryDsl.Specialized.Template
 			}
 		};
 
+#pragma warning disable 618
 		protected override QueryContainer QueryInitializer => new TemplateQuery
 		{
 			Name = "named_query",
@@ -37,7 +38,6 @@ namespace Tests.QueryDsl.Specialized.Template
 			}
 		};
 
-#pragma warning disable 618
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Template(sn => sn
 				.Name("named_query")
@@ -45,20 +45,18 @@ namespace Tests.QueryDsl.Specialized.Template
 				.Source(_templateString)
 				.Params(p=>p.Add("query_string", "all about search"))
 			);
-#pragma warning restore 618
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITemplateQuery>(a => a.Template)
 		{
 			q => {
 				q.Source = "";
 				q.Id = null;
-				q.File = "";
 			},
 			q => {
 				q.Source = null;
 				q.Id = null;
-				q.File = null;
 			}
 		};
 	}
+#pragma warning restore 618
 }
