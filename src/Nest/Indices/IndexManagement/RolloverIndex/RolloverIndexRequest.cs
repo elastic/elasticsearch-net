@@ -8,10 +8,19 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<RolloverIndexRequest>))]
-	public partial interface IRolloverIndexRequest : IIndexState
+	public partial interface IRolloverIndexRequest
 	{
 		[JsonProperty("conditions")]
 		IRolloverConditions Conditions { get; set; }
+
+		[JsonProperty("settings")]
+		IIndexSettings Settings { get; set; }
+
+		[JsonProperty("aliases")]
+		IAliases Aliases { get; set; }
+
+		[JsonProperty("mappings")]
+		IMappings Mappings { get; set; }
 	}
 
 	public partial class RolloverIndexRequest
@@ -29,9 +38,9 @@ namespace Nest
 	public partial class RolloverIndexDescriptor
 	{
 		IRolloverConditions IRolloverIndexRequest.Conditions { get; set; }
-		IIndexSettings IIndexState.Settings { get; set; }
-		IMappings IIndexState.Mappings { get; set; }
-		IAliases IIndexState.Aliases { get; set; }
+		IIndexSettings IRolloverIndexRequest.Settings { get; set; }
+		IMappings IRolloverIndexRequest.Mappings { get; set; }
+		IAliases IRolloverIndexRequest.Aliases { get; set; }
 
 		public RolloverIndexDescriptor Conditions(Func<RolloverConditionsDescriptor, IRolloverConditions> selector) =>
 			Assign(a => a.Conditions = selector?.Invoke(new RolloverConditionsDescriptor()));
