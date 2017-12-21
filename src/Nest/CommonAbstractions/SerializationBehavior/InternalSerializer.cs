@@ -19,9 +19,7 @@ namespace Nest
 
 		protected IConnectionSettingsValues Settings { get; }
 
-		/// <summary>
-		/// Resolves JsonContracts for types
-		/// </summary>
+		/// <summary> Resolves JsonContracts for types </summary>
 		private ElasticContractResolver ContractResolver { get; }
 
 		/// <summary>

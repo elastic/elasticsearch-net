@@ -24,5 +24,6 @@ namespace Nest
 			serializer.Populate(reader, t);
 			return t;
 		}
+
 	}
 }

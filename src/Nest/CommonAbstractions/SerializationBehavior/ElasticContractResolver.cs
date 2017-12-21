@@ -20,6 +20,8 @@ namespace Nest
 		/// </summary>
 		public IConnectionSettingsValues ConnectionSettings { get; }
 
+		public bool UsingSourceSerializer { get; }
+
 		/// <summary>
 		/// Signals to custom converter that it can get serialization state from one of the converters. Ugly but massive performance gain
 		/// </summary>
@@ -28,6 +30,15 @@ namespace Nest
 		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
 		{
 			this.ConnectionSettings = connectionSettings;
+			this.UsingSourceSerializer = connectionSettings.RequestResponseSerializer != connectionSettings.SourceSerializer;
+		}
+
+
+		protected bool CanRemoveSourceConverter(JsonConverter converter)
+		{
+			if (UsingSourceSerializer || converter == null) return false;
+			var type = converter.GetType();
+			return type == typeof(SourceConverter) || type == typeof(CollapsedSourceConverter);
 		}
 
 		protected override JsonContract CreateContract(Type objectType)
@@ -39,6 +50,7 @@ namespace Nest
 
 				if (o == typeof(Error)) contract.Converter = new ErrorJsonConverter();
 				else if (o == typeof(ErrorCause)) contract.Converter = new ErrorCauseJsonConverter();
+				else if (CanRemoveSourceConverter(contract.Converter)) contract.Converter = null; //rely on defaults
 				else if (o.IsGeneric() && o.GetGenericTypeDefinition() == typeof(SuggestDictionary<>))
 					contract.Converter =
 						(JsonConverter)typeof(SuggestDictionaryConverter<>).CreateGenericInstance(o.GetGenericArguments());
@@ -166,6 +178,9 @@ namespace Nest
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{
 			var property = base.CreateProperty(member, memberSerialization);
+
+			if (CanRemoveSourceConverter(property.Converter)) property.Converter = null; //rely on defaults
+
 			//we don't have a chance to ignore this in the low level client
 			if (member.Name == nameof(IResponse.ApiCall) && typeof(IResponse).IsAssignableFrom(member.DeclaringType))
 				property.Ignored = true;
