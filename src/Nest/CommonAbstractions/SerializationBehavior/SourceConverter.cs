@@ -36,5 +36,4 @@ namespace Nest
 	{
 		public override SerializationFormatting? ForceFormatting { get; } = None;
 	}
-
 }
