@@ -34,7 +34,6 @@ namespace Nest
 		public IExistsResponse IndexTemplateExists(IIndexTemplateExistsRequest request) =>
 			this.Dispatcher.Dispatch<IIndexTemplateExistsRequest, IndexTemplateExistsRequestParameters, ExistsResponse>(
 				request,
-				new IndexTemplateExistConverter(DeserializeExistsResponse),
 				(p, d) => this.LowLevelDispatch.IndicesExistsTemplateDispatch<ExistsResponse>(p)
 			);
 
@@ -48,7 +47,6 @@ namespace Nest
 			return this.Dispatcher.DispatchAsync<IIndexTemplateExistsRequest, IndexTemplateExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				request,
 				cancellationToken,
-				new IndexTemplateExistConverter(DeserializeExistsResponse),
 				(p, d, c) => this.LowLevelDispatch.IndicesExistsTemplateDispatchAsync<ExistsResponse>(p, c)
 			);
 		}

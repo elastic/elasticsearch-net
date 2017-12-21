@@ -11,15 +11,6 @@ namespace Nest
 	[JsonObject]
 	public class ExistsResponse : ResponseBase, IExistsResponse
 	{
-		internal ExistsResponse(IApiCallDetails apiCallDetails)
-		{
-			this.Exists = apiCallDetails.Success && apiCallDetails.HttpStatusCode == 200;
-		}
-		public ExistsResponse()
-		{
-			this.Exists = false;
-		}
-
-		public bool Exists { get; internal set; }
+		public bool Exists => this.ApiCall != null && this.ApiCall.Success && this.ApiCall.HttpStatusCode == 200;
 	}
 }

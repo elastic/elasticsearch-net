@@ -30,8 +30,6 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		private ExistsResponse DeserializeExistsResponse(IApiCallDetails response, Stream stream) => new ExistsResponse(response);
-
 		/// <inheritdoc/>
 		public IExistsResponse IndexExists(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) =>
 			this.IndexExists(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)));
@@ -40,7 +38,6 @@ namespace Nest
 		public IExistsResponse IndexExists(IIndexExistsRequest request) =>
 			this.Dispatcher.Dispatch<IIndexExistsRequest, IndexExistsRequestParameters, ExistsResponse>(
 				request,
-				new IndexExistConverter(DeserializeExistsResponse),
 				(p, d) => this.LowLevelDispatch.IndicesExistsDispatch<ExistsResponse>(p)
 			);
 
@@ -53,7 +50,6 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IIndexExistsRequest, IndexExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				request,
 				cancellationToken,
-				new IndexExistConverter(DeserializeExistsResponse),
 				(p, d, c) => this.LowLevelDispatch.IndicesExistsDispatchAsync<ExistsResponse>(p, c)
 			);
 	}

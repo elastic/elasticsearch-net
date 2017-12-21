@@ -34,7 +34,6 @@ namespace Nest
 		public IExistsResponse TypeExists(ITypeExistsRequest request) =>
 			this.Dispatcher.Dispatch<ITypeExistsRequest, TypeExistsRequestParameters, ExistsResponse>(
 				request,
-				new TypeExistConverter(DeserializeExistsResponse),
 				(p, d) => this.LowLevelDispatch.IndicesExistsTypeDispatch<ExistsResponse>(p)
 			);
 
@@ -47,7 +46,6 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<ITypeExistsRequest, TypeExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				request,
 				cancellationToken,
-				new TypeExistConverter(DeserializeExistsResponse),
 				(p, d, c) => this.LowLevelDispatch.IndicesExistsTypeDispatchAsync<ExistsResponse>(p, c)
 			);
 	}
