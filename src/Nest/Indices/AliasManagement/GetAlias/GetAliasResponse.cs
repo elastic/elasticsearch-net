@@ -24,7 +24,6 @@ namespace Nest
 	{
 		public IReadOnlyDictionary<string, IReadOnlyList<AliasDefinition>> Indices { get; internal set; } = EmptyReadOnly<string, IReadOnlyList<AliasDefinition>>.Dictionary;
 
-
 		public override bool IsValid => this.Indices.Count > 0;
 		public string Error { get; internal set; }
 		public int? StatusCode { get; internal set; }
@@ -41,21 +40,7 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var j = JObject.Load(reader);
-			var errorProperty =j.Property("error");
-			string error = null;
-			if (errorProperty?.Value?.Type == JTokenType.String)
-			{
-				error = errorProperty.Value.Value<string>();
-				errorProperty.Remove();
-			}
-			var statusProperty =j.Property("status");
-			int? statusCode = null;
-			if (statusProperty?.Value?.Type == JTokenType.Integer)
-			{
-				statusCode = statusProperty.Value.Value<int>();
-				statusProperty.Remove();
-			}
+			var j = DictionaryResponseJsonConverterHelpers.ReadServerErrorFirst(reader, out var error, out var statusCode);
 
 			//Read the remaining properties as aliases
 			var dict = serializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, AliasDefinition>>>>(j.CreateReader());
@@ -80,7 +65,7 @@ namespace Nest
 				indices.Add(indexDict, aliases);
 			}
 
-			return new GetAliasResponse { Indices = indices, Error = error, StatusCode = statusCode};
+			return new GetAliasResponse { Indices = indices, Error = error?.Reason, StatusCode = statusCode};
 		}
 
 		public override bool CanConvert(Type objectType) => true;

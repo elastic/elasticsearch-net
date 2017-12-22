@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -13,6 +15,34 @@ namespace Nest
 	{
 		protected IDictionaryResponse<TKey, TValue> Self => this;
 		IReadOnlyDictionary<TKey, TValue> IDictionaryResponse<TKey, TValue>.BackingDictionary { get; set; }
+	}
+	internal class DictionaryResponseJsonConverterHelpers
+	{
+		public static JObject ReadServerErrorFirst(JsonReader reader, out Error error, out int? statusCode)
+		{
+			var j = JObject.Load(reader);
+			var errorProperty = j.Property("error");
+			error = null;
+			if (errorProperty?.Value?.Type == JTokenType.String)
+			{
+				var reason = errorProperty.Value.Value<string>();
+				error = new Error {Reason = reason};
+				errorProperty.Remove();
+			}
+			else if (errorProperty?.Value?.Type == JTokenType.Object && ((JObject) errorProperty.Value)["reason"] != null)
+			{
+				error = errorProperty.Value.ToObject<Error>();
+				errorProperty.Remove();
+			}
+			var statusProperty = j.Property("status");
+			statusCode = null;
+			if (statusProperty?.Value?.Type == JTokenType.Integer)
+			{
+				statusCode = statusProperty.Value.Value<int>();
+				statusProperty.Remove();
+			}
+			return j;
+		}
 	}
 
 	internal class DictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
