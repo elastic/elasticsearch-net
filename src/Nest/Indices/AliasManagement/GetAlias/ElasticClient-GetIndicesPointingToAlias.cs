@@ -18,7 +18,7 @@ namespace Nest
 		/// <param name="alias">The alias name(s)</param>
 		public static IReadOnlyCollection<string> GetIndicesPointingToAlias(this IElasticClient client, Names alias)
 		{
-			var response = client.GetAlias(a => a.Name(alias));
+			var response = client.GetAlias(a => a.Name(alias).RequestConfiguration(r=>r.ThrowExceptions()));
 			return IndicesPointingToAlias(client.ConnectionSettings, alias, response);
 		}
 
@@ -29,7 +29,7 @@ namespace Nest
 		/// <param name="alias">The alias name(s)</param>
 		public static async Task<IReadOnlyCollection<string>> GetIndicesPointingToAliasAsync(this IElasticClient client, Names alias)
 		{
-			var response = await client.GetAliasAsync(a => a.Name(alias)).ConfigureAwait(false);
+			var response = await client.GetAliasAsync(a => a.Name(alias).RequestConfiguration(r=>r.ThrowExceptions())).ConfigureAwait(false);
 			return IndicesPointingToAlias(client.ConnectionSettings, alias, response);
 		}
 

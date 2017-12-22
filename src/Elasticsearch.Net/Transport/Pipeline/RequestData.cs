@@ -40,6 +40,7 @@ namespace Elasticsearch.Net
 		public string ProxyUsername { get; }
 		public string ProxyPassword { get; }
 		public bool DisableAutomaticProxyDetection { get; }
+		public bool ThrowExceptions { get; }
 
 		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 		public IEnumerable<int> AllowedStatusCodes { get; }
@@ -81,6 +82,7 @@ namespace Elasticsearch.Net
 			this.Headers = global.Headers != null ? new NameValueCollection(global.Headers) : new NameValueCollection();
 			this.RunAs = local?.RunAs;
 			this.SkipDeserializationForStatusCodes = global?.SkipDeserializationForStatusCodes;
+			this.ThrowExceptions = local?.ThrowExceptions ?? global.ThrowExceptions;
 
 			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;
 			this.PingTimeout =

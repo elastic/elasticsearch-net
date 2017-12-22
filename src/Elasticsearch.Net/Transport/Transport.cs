@@ -176,7 +176,7 @@ namespace Elasticsearch.Net
 			if (response?.ApiCall == null)
 				pipeline.BadResponse(ref response, callDetails, requestData, clientException);
 
-			HandleElasticsearchClientException(clientException, response);
+			HandleElasticsearchClientException(requestData, clientException, response);
 			return response;
 		}
 
@@ -188,12 +188,12 @@ namespace Elasticsearch.Net
 		}
 
 
-		private void HandleElasticsearchClientException(ElasticsearchClientException clientException, IElasticsearchResponse response)
+		private void HandleElasticsearchClientException(RequestData data, Exception clientException, IElasticsearchResponse response)
 		{
 			if (clientException != null && response.ApiCall.OriginalException == null && response.ApiCall is ApiCallDetails a)
 				a.OriginalException = clientException;
 			this.Settings.OnRequestCompleted?.Invoke(response.ApiCall);
-			if (clientException != null && this.Settings.ThrowExceptions) throw clientException;
+			if (clientException != null && data.ThrowExceptions) throw clientException;
 		}
 
 		private static void Ping(IRequestPipeline pipeline, Node node)

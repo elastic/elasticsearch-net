@@ -25,7 +25,12 @@ namespace Nest
 		public static IEnumerable<IMultiGetHit<T>> GetMany<T>(this IElasticClient client, IEnumerable<string> ids, IndexName index = null, TypeName type = null)
 			where T : class
 		{
-			var result = client.MultiGet(s => s.GetMany<T>(ids).Index(index).Type(type));
+			var result = client.MultiGet(s => s
+				.RequestConfiguration(r=>r.ThrowExceptions())
+				.GetMany<T>(ids)
+				.Index(index)
+				.Type(type)
+			);
 			return result.GetMany<T>(ids);
 		}
 
@@ -61,7 +66,13 @@ namespace Nest
 			this IElasticClient client, IEnumerable<string> ids, IndexName index = null, TypeName type = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 		{
-			var response = await client.MultiGetAsync(s => s.GetMany<T>(ids).Index(index).Type(type), cancellationToken).ConfigureAwait(false);
+			var response = await client.MultiGetAsync(s => s
+				.RequestConfiguration(r=>r.ThrowExceptions())
+				.GetMany<T>(ids)
+				.Index(index)
+				.Type(type),
+				cancellationToken
+			) .ConfigureAwait(false);
 			return response.GetMany<T>(ids);
 		}
 
