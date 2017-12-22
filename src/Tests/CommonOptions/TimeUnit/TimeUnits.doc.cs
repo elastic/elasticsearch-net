@@ -298,7 +298,7 @@ namespace Tests.CommonOptions.TimeUnit
 				{ "2.2ms", "2200micros" },
 				{ "1.5d", "36h" },
 				{ "1y", "1y" },
-				{ "1.5y", "13140h" }, // cannot be expressed in days because 365 * 1.5
+				{ "1.5y", "18M" },
 				{ "1M", "1M" },
 				{ "1.5M", "45d" },
 				{ "1w", "1w" }

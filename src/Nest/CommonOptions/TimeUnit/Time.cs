@@ -138,7 +138,7 @@ namespace Nest
 
 		/// <summary>
 		/// Converts an instance of <see cref="Time"/> with a fractional value to an instance of <see cref="Time"/>
-		/// with a whole value. The largest unit is <see cref="TimeUnit.Day"/>. For fractional values in
+		/// with a whole value. For fractional values in
 		/// <see cref="TimeUnit.Nanoseconds"/>, value will be rounded to the nearest nanosecond.
 		/// </summary>
 		public static Time ToFirstUnitYieldingInteger(Time fractionalTime)
@@ -146,23 +146,35 @@ namespace Nest
 			var fraction = fractionalTime.Factor.GetValueOrDefault(double.Epsilon);
 			if (IsIntegerGreaterThanZero(fraction)) return fractionalTime;
 
+			// fractional year value to months
+			if (fractionalTime.Interval == TimeUnit.Year)
+			{
+				fraction = fraction * 12;
+				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Month);
+			}
+
 			var ms = fractionalTime.ApproximateMilliseconds;
-			if (ms > MillisecondsInADay)
+			if (ms >= MillisecondsInAWeek)
+			{
+				fraction = ms / MillisecondsInAWeek;
+				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Week);
+			}
+			if (ms >= MillisecondsInADay)
 			{
 				fraction = ms / MillisecondsInADay;
 				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Day);
 			}
-			if (ms > MillisecondsInAnHour)
+			if (ms >= MillisecondsInAnHour)
 			{
 				fraction = ms / MillisecondsInAnHour;
 				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Hour);
 			}
-			if (ms > MillisecondsInAMinute)
+			if (ms >= MillisecondsInAMinute)
 			{
 				fraction = ms / MillisecondsInAMinute;
 				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Minute);
 			}
-			if (ms > MillisecondsInASecond)
+			if (ms >= MillisecondsInASecond)
 			{
 				fraction = ms / MillisecondsInASecond;
 				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Second);
@@ -171,7 +183,7 @@ namespace Nest
 			{
 				return new Time(ms, TimeUnit.Millisecond);
 			}
-			if (ms > MillisecondsInAMicrosecond)
+			if (ms >= MillisecondsInAMicrosecond)
 			{
 				fraction = ms / MillisecondsInAMicrosecond;
 				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Microseconds);

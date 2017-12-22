@@ -97,7 +97,7 @@ namespace Tests.CommonOptions.DateMath
 		/**
 		* ==== Fractional times
 		* DateMath expressions do not support fractional numbers so will
-		* pick the largest unit (up to days, `d`, when constructing a Time from a `TimeSpan` or `double`) in which the number can be expressed as an integer
+		* pick the largest unit in which the number can be expressed as an integer
 		*/
 		[U] public void FractionalsUnitsAreDroppedToIntegerPart()
 		{
@@ -117,7 +117,14 @@ namespace Tests.CommonOptions.DateMath
 				.WhenSerializing(Nest.DateMath.Now.Add("1y"))
 				.WhenSerializing(Nest.DateMath.Now.Add(new Time(1, Nest.TimeUnit.Year)));
 
-			Expect("now+364d").WhenSerializing(Nest.DateMath.Now.Add(TimeSpan.FromDays(7 * 52)));
+			Expect("now+6M")
+				.WhenSerializing(Nest.DateMath.Now.Add("6M"))
+				.WhenSerializing(Nest.DateMath.Now.Add("0.5y"))
+				.WhenSerializing(Nest.DateMath.Now.Add(new Time(0.5, Nest.TimeUnit.Year)))
+				.WhenSerializing(Nest.DateMath.Now.Add(new Time(6, Nest.TimeUnit.Month)));
+
+			Expect("now+364d")
+				.WhenSerializing(Nest.DateMath.Now.Add(TimeSpan.FromDays(7 * 52)));
 
 			Expect("now+52w")
 				.WhenSerializing(Nest.DateMath.Now.Add(new Time("52w")))
