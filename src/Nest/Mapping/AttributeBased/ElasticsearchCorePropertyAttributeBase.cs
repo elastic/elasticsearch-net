@@ -10,10 +10,6 @@ namespace Nest
 	public abstract class ElasticsearchCorePropertyAttributeBase : ElasticsearchPropertyAttributeBase, ICoreProperty
 	{
 		protected ElasticsearchCorePropertyAttributeBase(FieldType type) : base(type) { }
-		[Obsolete("Please use overload taking FieldType")]
-		protected ElasticsearchCorePropertyAttributeBase(string typeName) : base(typeName) { }
-		[Obsolete("Please use overload taking FieldType")]
-		protected ElasticsearchCorePropertyAttributeBase(Type type) : base(type) { }
 
 		private ICoreProperty Self => this;
 

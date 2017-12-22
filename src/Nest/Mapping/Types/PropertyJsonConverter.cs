@@ -19,13 +19,11 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var jObject = JObject.Load(reader);
-			JToken typeToken;
-			JToken propertiesToken;
 
 			var type = FieldType.None;
-			if (jObject.TryGetValue("type", out typeToken))
+			if (jObject.TryGetValue("type", out var typeToken))
 				type = typeToken.Value<string>().ToEnum<FieldType>().GetValueOrDefault(type);
-			else if (jObject.TryGetValue("properties", out propertiesToken))
+			else if (jObject.TryGetValue("properties", out _))
 				type = FieldType.Object;
 
 			switch (type)
@@ -47,7 +45,7 @@ namespace Nest
 				case FieldType.ScaledFloat:
 				case FieldType.HalfFloat:
 					var num = jObject.ToObject<NumberProperty>();
-					num.Type = type.GetStringValue();
+					((IProperty)num).Type = type.GetStringValue();
 					return num;
 				case FieldType.Date:
 					return jObject.ToObject<DateProperty>();

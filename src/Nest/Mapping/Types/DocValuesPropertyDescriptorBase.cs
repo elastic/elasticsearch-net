@@ -11,8 +11,6 @@ namespace Nest
 	{
 		bool? IDocValuesProperty.DocValues { get; set; }
 
-		[Obsolete("Please use overload taking FieldType")]
-		protected DocValuesPropertyDescriptorBase(string type) : base(type) { }
 		protected DocValuesPropertyDescriptorBase(FieldType type) : base(type) { }
 
 		public TDescriptor DocValues(bool docValues = true) => Assign(a => a.DocValues = docValues);

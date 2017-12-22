@@ -14,7 +14,7 @@ namespace Nest
 		private IProperty Self => this;
 
 		PropertyName IProperty.Name { get; set; }
-		TypeName IProperty.Type { get; set; }
+		string IProperty.Type { get; set; }
 		IDictionary<string, object> IProperty.LocalMetadata { get; set; }
 
 		public string Name { get; set; }
@@ -23,18 +23,6 @@ namespace Nest
 		protected ElasticsearchPropertyAttributeBase(FieldType type)
 		{
 			Self.Type = type.GetStringValue();
-		}
-
-		[Obsolete("Please use overload taking FieldType")]
-		protected ElasticsearchPropertyAttributeBase(string typeName)
-		{
-			Self.Type = typeName;
-		}
-
-		[Obsolete("Please use overload taking FieldType")]
-		protected ElasticsearchPropertyAttributeBase(Type type)
-		{
-			Self.Type = type;
 		}
 
 		public static ElasticsearchPropertyAttributeBase From(MemberInfo memberInfo)
