@@ -35,10 +35,6 @@ namespace Elasticsearch.Net
 
 		protected readonly ConcurrentDictionary<int, HttpClient> Clients = new ConcurrentDictionary<int, HttpClient>();
 
-		private static readonly string CanNotUseStreamResponsesWithCurlHandler =
-				"Using Stream as TReturn does not work as expected on .NET core linux, because we can no longer guarantee this works it will be removed from the client in our 6.0 release"
-			;
-
 		private HttpClient GetClient(RequestData requestData)
 		{
 			var key = GetClientKey(requestData);

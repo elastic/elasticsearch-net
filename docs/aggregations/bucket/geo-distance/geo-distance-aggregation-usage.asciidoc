@@ -15,80 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[geo-distance-aggregation-usage]]
 === Geo Distance Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .GeoDistance("rings_around_amsterdam", g => g
-        .Field(p => p.Location)
-        .Origin(52.376, 4.894)
-        .Ranges(
-            r => r.To(100),
-            r => r.From(100).To(300),
-            r => r.From(300)
-        )
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new GeoDistanceAggregation("rings_around_amsterdam")
-    {
-        Field = Field((Project p) => p.Location),
-        Origin = "52.376, 4.894",
-        Ranges = new List<AggregationRange>
-        {
-            new AggregationRange { To = 100 },
-            new AggregationRange { From = 100, To = 300 },
-            new AggregationRange { From = 300 }
-        }
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "rings_around_amsterdam": {
-      "geo_distance": {
-        "field": "location",
-        "origin": {
-          "lat": 52.376,
-          "lon": 4.894
-        },
-        "ranges": [
-          {
-            "to": 100.0
-          },
-          {
-            "from": 100.0,
-            "to": 300.0
-          },
-          {
-            "from": 300.0
-          }
-        ]
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var ringsAroundAmsterdam = response.Aggs.GeoDistance("rings_around_amsterdam");
+var ringsAroundAmsterdam = response.Aggregations.GeoDistance("rings_around_amsterdam");
 ringsAroundAmsterdam.Should().NotBeNull();
 ringsAroundAmsterdam.Buckets.FirstOrDefault(r => r.Key == "*-100.0").Should().NotBeNull();
 ringsAroundAmsterdam.Buckets.FirstOrDefault(r => r.Key == "100.0-300.0").Should().NotBeNull();

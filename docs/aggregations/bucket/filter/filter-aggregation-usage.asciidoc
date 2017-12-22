@@ -20,61 +20,6 @@ Often this will be used to narrow down the current aggregation context to a spec
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filter-aggregation.html[Filter Aggregation]
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(aggs => aggs
-    .Filter("bethels_projects", date => date
-        .Filter(q => q.Term(p => p.LeadDeveloper.FirstName, FirstNameToFind))
-        .Aggregations(childAggs => childAggs
-            .Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
-        )
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new FilterAggregation("bethels_projects")
-    {
-        Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
-        Aggregations =
-            new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "bethels_projects": {
-      "filter": {
-        "term": {
-          "leadDeveloper.firstName": {
-            "value": "pierce"
-          }
-        }
-      },
-      "aggs": {
-        "project_tags": {
-          "terms": {
-            "field": "curatedTags.name.keyword"
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Handling Responses
 
 Using the `.Aggs` aggregation helper we can fetch our aggregation results easily
@@ -86,7 +31,7 @@ in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs
 ----
 response.ShouldBeValid();
 
-var filterAgg = response.Aggs.Filter("bethels_projects");
+var filterAgg = response.Aggregations.Filter("bethels_projects");
 filterAgg.Should().NotBeNull();
 filterAgg.DocCount.Should().BeGreaterThan(0);
 var tags = filterAgg.Terms("project_tags");
@@ -100,112 +45,14 @@ tags.Buckets.Should().NotBeEmpty();
 When the collection of filters is empty or all are conditionless, NEST will serialize them
 to an empty object.
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(aggs => aggs
-    .Filter("empty_filter", date => date
-        .Filter(f => f
-            .Bool(b => b
-                .Filter(new QueryContainer[0])
-            )
-        )
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new FilterAggregation("empty_filter")
-    {
-        Filter = new BoolQuery
-        {
-            Filter = new List<QueryContainer>()
-        }
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "empty_filter": {
-      "filter": {}
-    }
-  }
-}
-----
-
-==== Handling Responses
-
 [source,csharp]
 ----
 response.ShouldNotBeValid();
 ----
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(aggs => aggs
-    .Filter(_aggName, date => date
-        .Filter(f => f
-            .Script(b => b
-                .Source(_ctxNumberofCommits)
-            )
-        )
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new FilterAggregation(_aggName)
-    {
-        Filter = new ScriptQuery
-        {
-            Source = _ctxNumberofCommits
-        }
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "script_filter": {
-      "filter": {
-        "script": {
-          "script": {
-            "source": "_source.numberOfCommits > 0"
-          }
-        }
-      }
-    }
-  }
-}
-----
-
-==== Handling Responses
-
 [source,csharp]
 ----
 response.ShouldBeValid();
-response.Aggs.Filter(_aggName).DocCount.Should().BeGreaterThan(0);
+response.Aggregations.Filter(_aggName).DocCount.Should().BeGreaterThan(0);
 ----
 

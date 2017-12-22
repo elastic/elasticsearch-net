@@ -228,35 +228,18 @@ return s => s
         );
 ----
 <1> a list of aggregation functions to apply
-
 <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
 
-[[aggs-vs-aggregations]]
+[[Aggregate]]
 [float]
-=== Aggs vs. Aggregations
+=== Handling aggregate response
 
-The response exposes both `.Aggregations` and `.Aggs` properties for handling aggregations. Why two properties you ask?
-Well, the former is a dictionary of aggregation names to `IAggregate` types, a common interface for
-aggregation responses (termed __Aggregates__ in NEST), and the latter is a convenience helper to get the right type
-of aggregation response out of the dictionary based on a key name.
+The `SearchResponse` exposes an `AggregateDictionary` which is specialized dictionary over `<string, IAggregate>` that also
+exposes handy helper methods that automatically cast `IAggregate` to the expected aggregate response.
 
-This is better illustrated with an example. Let's imagine we make the following request
+Let's see this in action:
 
-[source,csharp]
-----
-s => s
-.Aggregations(aggs => aggs
-    .Children<CommitActivity>("name_of_child_agg", child => child
-        .Aggregations(childAggs => childAggs
-            .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-            .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-            .Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-        )
-    )
-)
-----
-
-Now, using `.Aggs`, we can easily get the `Children` aggregation response out and from that,
+Now, using `.Aggregations`, we can easily get the `Children` aggregation response out and from that,
 the `Average` and `Max` sub aggregations.
 
 ==== Handling Responses
@@ -265,7 +248,7 @@ the `Average` and `Max` sub aggregations.
 ----
 response.ShouldBeValid();
 
-var childAggregation = response.Aggs.Children("name_of_child_agg");
+var childAggregation = response.Aggregations.Children("name_of_child_agg");
 
 var averagePerChild = childAggregation.Average("average_per_child");
 
@@ -276,6 +259,5 @@ var maxPerChild = childAggregation.Max("max_per_child");
 maxPerChild.Should().NotBeNull(); <2>
 ----
 <1> Do something with the average per child. Here we just assert it's not null
-
 <2> Do something with the max per child. Here we just assert it's not null
 

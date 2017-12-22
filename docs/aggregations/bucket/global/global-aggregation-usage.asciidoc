@@ -15,63 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[global-aggregation-usage]]
 === Global Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .Global("all_projects", g => g
-        .Aggregations(aa => aa
-            .Terms("names", t => t
-                .Field(p => p.Name)
-            )
-        )
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new GlobalAggregation("all_projects")
-    {
-        Aggregations = new TermsAggregation("names")
-        {
-            Field = Field<Project>(p => p.Name)
-        }
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "all_projects": {
-      "global": {},
-      "aggs": {
-        "names": {
-          "terms": {
-            "field": "name"
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var allProjects = response.Aggs.Global("all_projects");
+var allProjects = response.Aggregations.Global("all_projects");
 allProjects.Should().NotBeNull();
 var names = allProjects.Terms("names");
 names.Should().NotBeNull();

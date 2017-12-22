@@ -107,7 +107,6 @@ var indexResponse = client.IndexDocument(person); <1>
 var asyncIndexResponse = await client.IndexDocumentAsync(person); <2>
 ----
 <1> synchronous method that returns an `IIndexResponse`
-
 <2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 
 NOTE: All methods available within NEST are exposed as both synchronous and asynchronous versions,
@@ -296,7 +295,7 @@ var searchResponse = await client.SearchAsync<Person>(s => s
     )
 );
 
-var termsAggregation = searchResponse.Aggs.Terms("last_names");
+var termsAggregation = searchResponse.Aggregations.Terms("last_names");
 ----
 
 In this example, a `match` query to search for people with the first name of "Martijn" is issued as before;

@@ -15,53 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[cardinality-aggregation-usage]]
 === Cardinality Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .Cardinality("state_count", c => c
-        .Field(p => p.State)
-        .PrecisionThreshold(100)
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new CardinalityAggregation("state_count", Field<Project>(p => p.State))
-    {
-        PrecisionThreshold = 100
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "state_count": {
-      "cardinality": {
-        "field": "state",
-        "precision_threshold": 100
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var projectCount = response.Aggs.Cardinality("state_count");
+var projectCount = response.Aggregations.Cardinality("state_count");
 projectCount.Should().NotBeNull();
 projectCount.Value.Should().Be(3);
 ----

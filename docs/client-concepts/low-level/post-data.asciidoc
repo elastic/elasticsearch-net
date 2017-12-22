@@ -16,8 +16,7 @@ please modify the original csharp file found at the link and submit the PR with 
 === Post data
 
 The low level client allows you to post a `string` or `byte[]` array directly. On top of this,
-if you pass a collection of `string` or `object` they will be serialized
-using Elasticsearch's special bulk/multi format.
+if you pass a collection of `string` or `object` they will be serialized using Elasticsearch's special bulk/multi format.
 
 [float]
 === Implicit Conversion
@@ -89,8 +88,7 @@ fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 fromObject.Type.Should().Be(PostType.Serializable);
 ----
 
-and passing a `PostData` instance to a method that accepts `PostData`
-as an argument does not wrap it again
+and passing a `PostData` instance to a method that accepts `PostData`  as an argument does not wrap it again 
 
 [source,csharp]
 ----
@@ -139,7 +137,7 @@ there is a trailing linefeed.
 await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: false, settings: settings);
 ----
 
-In all other cases, Post data is serialized as is and `WrittenBytes` is not assigned
+In all other cases, Post data is serialized as is and `WrittenBytes` is not assigned 
 
 [source,csharp]
 ----

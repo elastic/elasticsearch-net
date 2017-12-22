@@ -15,48 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[max-aggregation-usage]]
 === Max Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .Max("max_commits", m => m
-        .Field(p => p.NumberOfCommits)
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new MaxAggregation("max_commits", Field<Project>(p => p.NumberOfCommits))
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "max_commits": {
-      "max": {
-        "field": "numberOfCommits"
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var max = response.Aggs.Max("max_commits");
+var max = response.Aggregations.Max("max_commits");
 max.Should().NotBeNull();
 max.Value.Should().BeGreaterThan(0);
 ----

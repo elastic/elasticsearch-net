@@ -36,7 +36,7 @@ namespace Elasticsearch.Net
 
 	/// <summary>
 	/// A response from elasticsearch including details about the request/response life cycle. Base class for the built in low level response
-	/// types: <see cref="StringResponse"/> <see cref="BytesResponse"/> <see cref="StreamResponse"/> and <see cref="DynamicResponse"/>
+	/// types: <see cref="StringResponse"/> <see cref="BytesResponse"/> and <see cref="DynamicResponse"/>
 	/// </summary>
 	public abstract class ElasticsearchResponse<T> : ElasticsearchResponseBase
 	{

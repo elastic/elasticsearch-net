@@ -15,83 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[matrix-stats-aggregation-usage]]
 === Matrix Stats Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .MatrixStats("matrixstats", ms => ms
-        .Meta(m => m
-            .Add("foo", "bar")
-        )
-        .Fields(fs => fs
-            .Field(p => p.NumberOfCommits)
-            .Field(p => p.NumberOfContributors)
-        )
-        .Missing(m => m
-            .Add(Field<Project>(p => p.NumberOfCommits), 0)
-            .Add(Field<Project>(p => p.NumberOfContributors), 1)
-        )
-        .Mode(MatrixStatsMode.Median)
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new MatrixStatsAggregation("matrixstats", Field<Project>(p => p.NumberOfCommits))
-    {
-        Meta = new Dictionary<string, object>
-        {
-            { "foo", "bar" }
-        },
-        Missing = new Dictionary<Field, double>
-        {
-            { "numberOfCommits", 0.0 },
-            { "numberOfContributors", 1.0 },
-        },
-        Mode = MatrixStatsMode.Median,
-        Fields = Field<Project>(p => p.NumberOfCommits).And("numberOfContributors")
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "matrixstats": {
-      "meta": {
-        "foo": "bar"
-      },
-      "matrix_stats": {
-        "fields": [
-          "numberOfCommits",
-          "numberOfContributors"
-        ],
-        "missing": {
-          "numberOfCommits": 0.0,
-          "numberOfContributors": 1.0
-        },
-        "mode": "median"
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var matrix = response.Aggs.MatrixStats("matrixstats");
+var matrix = response.Aggregations.MatrixStats("matrixstats");
 matrix.Should().NotBeNull();
 matrix.Fields.Should().NotBeNull().And.HaveCount(2);
 

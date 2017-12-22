@@ -15,48 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[value-count-aggregation-usage]]
 === Value Count Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .ValueCount("commit_count", c => c
-        .Field(p => p.NumberOfCommits)
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new ValueCountAggregation("commit_count", Field<Project>(p => p.NumberOfCommits))
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "commit_count": {
-      "value_count": {
-        "field": "numberOfCommits"
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var commitCount = response.Aggs.ValueCount("commit_count");
+var commitCount = response.Aggregations.ValueCount("commit_count");
 commitCount.Should().NotBeNull();
 commitCount.Value.Should().BeGreaterThan(0);
 ----

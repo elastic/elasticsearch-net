@@ -15,48 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[sum-aggregation-usage]]
 === Sum Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .Sum("commits_sum", sm => sm
-        .Field(p => p.NumberOfCommits)
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new SumAggregation("commits_sum", Field<Project>(p => p.NumberOfCommits))
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "commits_sum": {
-      "sum": {
-        "field": "numberOfCommits"
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var commitsSum = response.Aggs.Sum("commits_sum");
+var commitsSum = response.Aggregations.Sum("commits_sum");
 commitsSum.Should().NotBeNull();
 commitsSum.Value.Should().BeGreaterThan(0);
 ----

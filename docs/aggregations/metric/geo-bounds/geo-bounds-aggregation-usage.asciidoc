@@ -15,53 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[geo-bounds-aggregation-usage]]
 === Geo Bounds Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .GeoBounds("viewport", gb => gb
-        .Field(p => p.Location)
-        .WrapLongitude(true)
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
-    {
-        WrapLongitude = true
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "viewport": {
-      "geo_bounds": {
-        "field": "location",
-        "wrap_longitude": true
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var viewport = response.Aggs.GeoBounds("viewport");
+var viewport = response.Aggregations.GeoBounds("viewport");
 viewport.Should().NotBeNull();
 viewport.Bounds.Should().NotBeNull();
 

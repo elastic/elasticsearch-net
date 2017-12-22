@@ -15,68 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[average-aggregation-usage]]
 === Average Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .Average("average_commits", avg => avg
-        .Meta(m => m
-            .Add("foo", "bar")
-        )
-        .Field(p => p.NumberOfCommits)
-        .Missing(10)
-        .Script(ss=>ss.Source("_value * 1.2"))
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new AverageAggregation("average_commits", Field<Project>(p => p.NumberOfCommits))
-    {
-        Meta = new Dictionary<string, object>
-        {
-            { "foo", "bar" }
-        },
-        Missing = 10,
-        Script = new InlineScript("_value * 1.2")
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "average_commits": {
-      "meta": {
-        "foo": "bar"
-      },
-      "avg": {
-        "field": "numberOfCommits",
-        "missing": 10.0,
-        "script": {
-          "source": "_value * 1.2"
-        }
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var commitsAvg = response.Aggs.Average("average_commits");
+var commitsAvg = response.Aggregations.Average("average_commits");
 commitsAvg.Should().NotBeNull();
 commitsAvg.Value.Should().BeGreaterThan(0);
 commitsAvg.Meta.Should().NotBeNull().And.HaveCount(1);

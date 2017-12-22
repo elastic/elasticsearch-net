@@ -15,76 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[percentile-ranks-aggregation-usage]]
 === Percentile Ranks Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .PercentileRanks("commits_outlier", pr => pr
-        .Field(p => p.NumberOfCommits)
-        .Values(15, 30)
-        .Method(m => m
-            .TDigest(td => td
-                .Compression(200)
-            )
-        )
-        .Script(ss => ss.Source("doc['numberOfCommits'].value * 1.2"))
-        .Missing(0)
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new PercentileRanksAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
-    {
-        Values = new List<double> { 15, 30 },
-        Method = new TDigestMethod
-        {
-            Compression = 200
-        },
-        Script = new InlineScript("doc['numberOfCommits'].value * 1.2"),
-        Missing = 0
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "commits_outlier": {
-      "percentile_ranks": {
-        "field": "numberOfCommits",
-        "values": [
-          15.0,
-          30.0
-        ],
-        "tdigest": {
-          "compression": 200.0
-        },
-        "script": {
-          "source": "doc['numberOfCommits'].value * 1.2"
-        },
-        "missing": 0.0
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var commitsOutlier = response.Aggs.PercentileRanks("commits_outlier");
+var commitsOutlier = response.Aggregations.PercentileRanks("commits_outlier");
 commitsOutlier.Should().NotBeNull();
 commitsOutlier.Items.Should().NotBeNullOrEmpty();
 foreach (var item in commitsOutlier.Items)

@@ -156,5 +156,13 @@ foreach (var query in queries)
 }
 
 breakingDescriptors.Should().BeEmpty();
+
+var processors = (
+    from t in typeof(IProcessor).Assembly().Types()
+    where typeof(IProcessor).IsAssignableFrom(t)
+    select t.Name).ToList();
+
+processors.Should().NotBeEmpty($"expected {nameof(IProcessor)} implementations");
+processors.Should().OnlyContain(p => p.Contains("Processor"));
 ----
 

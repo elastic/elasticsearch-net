@@ -15,50 +15,12 @@ please modify the original csharp file found at the link and submit the PR with 
 [[extended-stats-aggregation-usage]]
 === Extended Stats Aggregation Usage
 
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(a => a
-    .ExtendedStats("commit_stats", es => es
-        .Field(p => p.NumberOfCommits)
-        .Sigma(1)
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new ExtendedStatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits)) {  Sigma = 1 }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "commit_stats": {
-      "extended_stats": {
-        "field": "numberOfCommits",
-        "sigma": 1.0
-      }
-    }
-  }
-}
-----
-
 ==== Handling Responses
 
 [source,csharp]
 ----
 response.ShouldBeValid();
-var commitStats = response.Aggs.ExtendedStats("commit_stats");
+var commitStats = response.Aggregations.ExtendedStats("commit_stats");
 commitStats.Should().NotBeNull();
 commitStats.Average.Should().BeGreaterThan(0);
 commitStats.Max.Should().BeGreaterThan(0);
