@@ -95,25 +95,20 @@ namespace Nest
 				this.LowLevelDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>
 			);
 
-		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(IApiCallDetails response, Stream stream, ISearchTemplateRequest d)
+		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(Stream stream, ISearchTemplateRequest d)
 			where T : class
 			where TResult : class
 		{
 			var converter = this.CreateCovariantSearchSelector<T, TResult>(d);
-			var dict = response.Success
-				? this.ConnectionSettings.CreateStateful(converter).Deserialize<SearchResponse<TResult>>(stream)
-				: null;
-			return dict;
+			return this.ConnectionSettings.CreateStateful(converter).Deserialize<SearchResponse<TResult>>(stream);
 		}
 
 		private Func<IApiCallDetails, Stream, SearchResponse<TResult>> CreateSearchDeserializer<T, TResult>(ISearchTemplateRequest request)
 			where T : class
 			where TResult : class
 		{
-
-			Func<IApiCallDetails, Stream, SearchResponse<TResult>> responseCreator =
-					(r, s) => this.FieldsSearchDeserializer<T, TResult>(r, s, request);
-			return responseCreator;
+			SearchResponse<TResult> ResponseCreator(IApiCallDetails r, Stream s) => this.FieldsSearchDeserializer<T, TResult>(s, request);
+			return ResponseCreator;
 		}
 
 		private JsonConverter CreateCovariantSearchSelector<T, TResult>(ISearchTemplateRequest originalSearchDescriptor)

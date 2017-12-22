@@ -9,6 +9,7 @@ using Tests.Framework.MockData;
 
 namespace Tests.XPack.MachineLearning.PreviewDatafeed
 {
+	//TODO what does an invalid request return here? this API returns a json array for the happy path
 	public class PreviewDatafeedApiTests : MachineLearningIntegrationTestBase<IPreviewDatafeedResponse<Metric>, IPreviewDatafeedRequest, PreviewDatafeedDescriptor, PreviewDatafeedRequest>
 	{
 		public PreviewDatafeedApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -42,7 +43,6 @@ namespace Tests.XPack.MachineLearning.PreviewDatafeed
 		protected override void ExpectResponse(IPreviewDatafeedResponse<Metric> response)
 		{
 			response.IsValid.Should().BeTrue();
-
 			response.Data.Count.Should().BeGreaterThan(0);
 		}
 	}

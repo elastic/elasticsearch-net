@@ -72,16 +72,10 @@ namespace Nest
 		private SourceResponse<T> ToSourceResponse<T>(IApiCallDetails apiCallDetails, Stream stream) where T : class
 		{
 			var source = this.SourceSerializer.Deserialize<T>(stream);
-			return ToSourceBody(apiCallDetails, source);
-		}
-		private static SourceResponse<T> ToSourceBody<T>(IApiCallDetails apiCallDetails, T source) where T : class
-		{
-			var r = new SourceResponse<T>
+			return new SourceResponse<T>
 			{
 				Body = source,
 			};
-			((IElasticsearchResponse) r).ApiCall = apiCallDetails;
-			return r;
 		}
 	}
 }
