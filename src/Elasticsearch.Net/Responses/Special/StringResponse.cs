@@ -21,7 +21,7 @@ namespace Elasticsearch.Net
 		{
 			reason = null;
 			if (!this.TryGetServerError(out var serverError)) return false;
-			reason = serverError?.Error?.Reason;
+			reason = serverError?.Error?.ToString();
 			return !reason.IsNullOrEmpty();
 		}
 	}

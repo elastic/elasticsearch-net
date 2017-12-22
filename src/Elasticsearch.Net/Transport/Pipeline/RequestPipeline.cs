@@ -491,7 +491,7 @@ namespace Elasticsearch.Net
 
 			var exceptionMessage = innerException?.Message ?? $"Request failed to execute";
 			if (response.TryGetServerErrorReason(out var reason))
-				exceptionMessage += $". Error: {reason}";
+				exceptionMessage += $". ServerError: {reason}";
 
 			var pipelineFailure = data.OnFailurePipelineFailure;
 			if (pipelineExceptions.HasAny())

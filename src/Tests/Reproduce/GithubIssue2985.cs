@@ -34,7 +34,10 @@ namespace Tests.Reproduce
 			);
 			response.OriginalException.Should().NotBeNull().And.BeOfType<ElasticsearchClientException>();
 			response.OriginalException.Message.Should()
-				.Be("Request failed to execute. Error: Custom Analyzer [custom] failed to find filter under name [ascii_folding]");
+				.StartWith("Request failed to execute. ServerError: ")
+				.And.EndWith(
+					"Type: illegal_argument_exception Reason: \"Custom Analyzer [custom] failed to find filter under name [ascii_folding]\""
+				);
 
 			client.DeleteIndex(index);
 		}
