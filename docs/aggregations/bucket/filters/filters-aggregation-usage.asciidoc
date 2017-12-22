@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Aggregations/Bucket/Filters/FiltersAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Aggregations/Bucket/Filters/FiltersAggregationUsageTests.cs.
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -27,7 +27,8 @@ Be sure to read the Elasticsearch documentation {ref_current}/search-aggregation
 ==== Handling Responses
 
 Using the `.Agg` aggregation helper we can fetch our aggregation results easily
-in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
+in the correct type.
+//<<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
 [source,csharp]
 ----
@@ -59,7 +60,8 @@ namedResult.DocCount.Should().Be(0);
 ==== Handling Responses
 
 Using the `.Agg` aggregation helper we can fetch our aggregation results easily
-in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
+in the correct type.
+//<<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
 [source,csharp]
 ----
@@ -89,11 +91,10 @@ response.Aggregations.Filters("empty_filters").Buckets.Should().BeEmpty();
 ----
 
 [float]
-=== Conditionless Filters 
+=== Conditionless Filters
 
 [source,csharp]
 ----
 response.ShouldBeValid();
 response.Aggregations.Filters("conditionless_filters").Buckets.Should().BeEmpty();
 ----
-

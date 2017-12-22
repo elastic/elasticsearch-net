@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Aggregations/Bucket/Filter/FilterAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Aggregations/Bucket/Filter/FilterAggregationUsageTests.cs.
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -23,7 +23,8 @@ Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregat
 === Handling Responses
 
 Using the `.Aggs` aggregation helper we can fetch our aggregation results easily
-in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
+in the correct type.
+//<<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
 ==== Handling Responses
 
@@ -55,4 +56,3 @@ response.ShouldNotBeValid();
 response.ShouldBeValid();
 response.Aggregations.Filter(_aggName).DocCount.Should().BeGreaterThan(0);
 ----
-
