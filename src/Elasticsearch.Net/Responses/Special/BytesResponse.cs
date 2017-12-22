@@ -16,5 +16,13 @@ namespace Elasticsearch.Net
 				serverError = ServerError.Create(stream);
 			return true;
 		}
+
+		protected override bool TryGetServerErrorReason(out string reason)
+		{
+			reason = null;
+			if (!this.TryGetServerError(out var serverError)) return false;
+			reason = serverError?.Error?.Reason;
+			return !reason.IsNullOrEmpty();
+		}
 	}
 }

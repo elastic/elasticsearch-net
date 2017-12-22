@@ -55,6 +55,12 @@ namespace Nest
         [JsonIgnore]
 		IApiCallDetails IElasticsearchResponse.ApiCall { get => _originalApiCall; set => _originalApiCall = value; }
 
+		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason)
+		{
+			reason = this.ServerError?.Error?.Reason;
+			return !reason.IsNullOrEmpty();
+		}
+
 		public ServerError ServerError
 		{
 			get

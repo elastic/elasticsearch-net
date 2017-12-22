@@ -171,9 +171,8 @@ namespace Elasticsearch.Net
 				pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
 
 			var callDetails = GetMostRecentCallDetails(response, seenExceptions);
-			var clientException = pipeline.CreateClientException(callDetails, requestData, seenExceptions);
+			var clientException = pipeline.CreateClientException(response, requestData, seenExceptions);
 
-			//if (response?.ApiCall == null || !response.ApiCall.Success)
 			if (response?.ApiCall == null)
 				pipeline.BadResponse(ref response, callDetails, requestData, clientException);
 
