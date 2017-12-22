@@ -61,12 +61,12 @@ namespace Elasticsearch.Net
 			request.Accept = requestData.Accept;
 			request.ContentType = requestData.RequestMimeType;
 			request.MaximumResponseHeadersLength = -1;
+			request.AllowWriteStreamBuffering = false;
 			request.Pipelined = requestData.Pipelined;
 
 			if (requestData.HttpCompression)
 			{
 				request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-				request.Headers.Add("Accept-Encoding", "gzip,deflate");
 				request.Headers.Add("Content-Encoding", "gzip");
 			}
 			if (!requestData.RunAs.IsNullOrEmpty())
@@ -80,12 +80,18 @@ namespace Elasticsearch.Net
 			request.ReadWriteTimeout = timeout;
 
 			//WebRequest won't send Content-Length: 0 for empty bodies
-			//which goes against RFC's and might break i.e IIS hen used as a proxy.
-			//see: https://github.com/elasticsearch/elasticsearch-net/issues/562
-			var m = requestData.Method.GetStringValue();
-			request.Method = m;
-			if (m != "HEAD" && m != "GET" && (requestData.PostData == null))
-				request.ContentLength = 0;
+			//which goes against RFC's and might break i.e IIS when used as a proxy.
+			//see: https://github.com/elasticsearch/elasticsearch-net/issues/562.
+			//Transfer-Encoding: chunked must be set for POST and PUT where there is a body.
+			var method = requestData.Method.GetStringValue();
+			request.Method = method;
+			if (method != "HEAD" && method != "GET")
+			{
+				if (requestData.PostData == null)
+					request.ContentLength = 0;
+				else
+					request.SendChunked = true;
+			}
 
 			return request;
 		}
