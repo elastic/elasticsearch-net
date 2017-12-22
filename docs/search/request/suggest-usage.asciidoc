@@ -64,8 +64,8 @@ s => s
         .Collate(c => c
             .Query(q => q
                 .Inline("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
-                .Params(p => p.Add("field_name", "title"))
             )
+            .Params(p => p.Add("field_name", "title"))
             .Prune()
         )
         .Confidence(10.1)
@@ -139,10 +139,10 @@ new SearchRequest<Project>
                     Query = new TemplateQuery
                     {
                         Inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
-                        Params = new Dictionary<string, object>
-                        {
-                            { "field_name", "title" }
-                        }
+                    },
+                    Params = new Dictionary<string, object>
+                    {
+                        { "field_name", "title" }
                     },
                     Prune = true
                 },
@@ -191,10 +191,10 @@ new SearchRequest<Project>
       "phrase": {
         "collate": {
           "query": {
-            "inline": "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
-            "params": {
-              "field_name": "title"
-            }
+            "inline": "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}"
+          },
+          "params": {
+            "field_name": "title"
           },
           "prune": true
         },
