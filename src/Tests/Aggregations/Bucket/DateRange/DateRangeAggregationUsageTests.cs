@@ -77,8 +77,9 @@ namespace Tests.Aggregations.Bucket.DateRange
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** === Handling Responses
-			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily
-			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
+			* The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
+			* so we can fetch our aggregation results easily in the correct type.
+			 * <<handling-aggregate-response, Be sure to read more about these helper methods>>
 			*/
 			response.ShouldBeValid();
 

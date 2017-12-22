@@ -250,7 +250,6 @@ namespace Tests.Aggregations
 	}
 
 
-	//todo own documentation file (aggregation responses?)
 	/**[float]
 	* [[Aggregate]]
 	*=== Handling aggregate response
