@@ -33,7 +33,7 @@ namespace Nest
 			return IndicesPointingToAlias(client.ConnectionSettings, alias, response);
 		}
 
-		private static IReadOnlyCollection<string> IndicesPointingToAlias(IConnectionSettingsValues settings, Names alias, IGetAliasResponse aliasesResponse)
+		private static IReadOnlyCollection<string> IndicesPointingToAlias(IConnectionSettingsValues settings, IUrlParameter alias, IGetAliasResponse aliasesResponse)
 		{
 			if (!aliasesResponse.IsValid
 			    || !aliasesResponse.Indices.HasAny())
