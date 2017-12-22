@@ -81,6 +81,13 @@ namespace Elasticsearch.Net
 		/// Use the following client certificates to authenticate this single request
 		/// </summary>
 		X509CertificateCollection ClientCertificates { get; set; }
+
+		/// <summary>
+		/// Instead of following a c/go like error checking on response.IsValid always throw an exception
+		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server.
+		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
+		/// </summary>
+		bool ThrowExceptions { get; set; }
 	}
 
 	public class RequestConfiguration : IRequestConfiguration
@@ -105,6 +112,7 @@ namespace Elasticsearch.Net
 		public string RunAs { get; set; }
 
 		public X509CertificateCollection ClientCertificates { get; set; }
+		public bool ThrowExceptions { get; set; }
 	}
 
 	public class RequestConfigurationDescriptor : IRequestConfiguration
@@ -125,6 +133,7 @@ namespace Elasticsearch.Net
 		bool IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
 		string IRequestConfiguration.RunAs { get; set; }
 		X509CertificateCollection IRequestConfiguration.ClientCertificates { get; set; }
+		bool IRequestConfiguration.ThrowExceptions { get; set; }
 
 		public RequestConfigurationDescriptor(IRequestConfiguration config)
 		{
@@ -199,6 +208,12 @@ namespace Elasticsearch.Net
 		public RequestConfigurationDescriptor DisablePing(bool? disable = true)
 		{
 			Self.DisablePing = disable;
+			return this;
+		}
+
+		public RequestConfigurationDescriptor ThrowExceptions(bool throwExceptions = true)
+		{
+			Self.ThrowExceptions = throwExceptions;
 			return this;
 		}
 

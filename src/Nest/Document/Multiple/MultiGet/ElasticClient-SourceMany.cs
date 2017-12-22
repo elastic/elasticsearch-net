@@ -28,17 +28,13 @@ namespace Nest
 		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null)
 			where T : class
 		{
-			var result = client.MultiGet(s => s.GetMany<T>(ids, (gs, i) =>
-			{
-				if (!string.IsNullOrEmpty(index))
-					gs.Index(index);
-
-				if (!string.IsNullOrEmpty(type))
-					gs.Type(type);
-
-				return gs;
-			}));
-
+			var result = client.MultiGet(s => s
+				.RequestConfiguration(r=>r.ThrowExceptions())
+				.GetMany<T>(ids, (gs, i) => gs
+					.Index(index)
+					.Type(type)
+				)
+			);
 			return result.SourceMany<T>(ids);
 		}
 
@@ -80,7 +76,13 @@ namespace Nest
 			this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 		{
-			var response = await client.MultiGetAsync(s => s.GetMany<T>(ids, (gs, i) => gs.Index(index).Type(type)), cancellationToken).ConfigureAwait(false);
+			var response = await client.MultiGetAsync(s => s
+				.RequestConfiguration(r=>r.ThrowExceptions())
+				.GetMany<T>(ids, (gs, i) => gs
+					.Index(index)
+					.Type(type)
+				), cancellationToken)
+				.ConfigureAwait(false);
 			return response.SourceMany<T>(ids);
 		}
 
