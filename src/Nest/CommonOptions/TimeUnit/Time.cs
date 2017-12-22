@@ -45,16 +45,11 @@ namespace Nest
 		private double ApproximateMilliseconds { get; set; }
 
 		public static implicit operator Time(TimeSpan span) => new Time(span);
-
-		public static implicit operator Time(double milliseconds)
-		{
-			if (Math.Abs(milliseconds - (-1)) < FLOAT_TOLERANCE) return MinusOne;
-			if (Math.Abs(milliseconds) < FLOAT_TOLERANCE) return Zero;
-			return new Time(milliseconds);
-		}
+		public static implicit operator Time(double milliseconds) => new Time(milliseconds);
 		public static implicit operator Time(string expression) => new Time(expression);
 
 		public static Time MinusOne { get; } = new Time(-1, true);
+
 		public static Time Zero { get; } = new Time(0, true);
 
 		private Time(int specialFactor, bool specialValue)
@@ -141,6 +136,11 @@ namespace Nest
 			return 1;
 		}
 
+		/// <summary>
+		/// Converts an instance of <see cref="Time"/> with a fractional value to an instance of <see cref="Time"/>
+		/// with a whole value. The largest unit is <see cref="TimeUnit.Day"/>. For fractional values in
+		/// <see cref="TimeUnit.Nanoseconds"/>, value will be rounded to the nearest nanosecond.
+		/// </summary>
 		public static Time ToFirstUnitYieldingInteger(Time fractionalTime)
 		{
 			var fraction = fractionalTime.Factor.GetValueOrDefault(double.Epsilon);
@@ -173,12 +173,12 @@ namespace Nest
 			}
 			if (ms > MillisecondsInAMicrosecond)
 			{
-				fraction = ms * (1 / MillisecondsInAMicrosecond);
+				fraction = ms / MillisecondsInAMicrosecond;
 				if (IsIntegerGreaterThanZero(fraction)) return new Time(fraction, TimeUnit.Microseconds);
 			}
 
 			// when dealing with fractional nanoseconds, round to integer value
-			return new Time(Math.Round(ms * (1 / MillisecondsInANanosecond), MidpointRounding.AwayFromZero), TimeUnit.Nanoseconds);
+			return new Time(Math.Round(ms / MillisecondsInANanosecond, MidpointRounding.AwayFromZero), TimeUnit.Nanoseconds);
 		}
 
 		private static bool IsIntegerGreaterThanZero(double d) => Math.Abs(d % 1) < double.Epsilon;
@@ -194,20 +194,29 @@ namespace Nest
 
 		public static bool operator !=(Time left, Time right) => !(left == right);
 
+		/// <summary>
+		/// Converts this instance of <see cref="Time"/> to an instance of <see cref="TimeSpan"/>.
+		/// For values in <see cref="TimeUnit.Microseconds"/> and <see cref="TimeUnit.Nanoseconds"/>, value will be rounded to the nearest Tick.
+		/// All other values will be rounded to the nearest Millisecond.
+		/// </summary>
+		/// <exception cref="InvalidOperationException">
+		/// <para>special time values <see cref="MinusOne"/> and <see cref="Zero"/> do not have a <see cref="TimeSpan"/> representation.</para>
+		/// <para>instance of <see cref="Time"/> has no value for <see cref="Interval"/></para>
+		/// </exception>
 		public TimeSpan ToTimeSpan()
 		{
-			if (this.StaticTimeValue.HasValue) throw new Exception("Static time values like -1 or 0 have no logical TimeSpan representation");
+			if (this.StaticTimeValue.HasValue)
+				throw new InvalidOperationException("Static time values like -1 or 0 have no logical TimeSpan representation");
 			//should not happen will throw in constructor
-			if (!this.Interval.HasValue) throw new Exception("TimeUnit has no interval so you can not call ToTimeStamp on it");
+			if (!this.Interval.HasValue)
+				throw new InvalidOperationException("Time has no value for Interval so you can not call ToTimeStamp on it");
 
 			switch (this.Interval.Value)
 			{
 				case TimeUnit.Microseconds:
-					var microTicks = (long)(this.Factor.Value / MicrosecondsInATick);
-					return TimeSpan.FromTicks(microTicks);
+					return TimeSpan.FromTicks((long)(this.Factor.Value / MicrosecondsInATick));
 				case TimeUnit.Nanoseconds:
-					var nanoTicks = (long)(this.Factor.Value / NanosecondsInATick);
-					return TimeSpan.FromTicks(nanoTicks);
+					return TimeSpan.FromTicks((long)(this.Factor.Value / NanosecondsInATick));
 				default:
 					return TimeSpan.FromMilliseconds(this.ApproximateMilliseconds);
 			}
@@ -222,7 +231,7 @@ namespace Nest
 
 			var mantissa = ExponentFormat(this.Factor.Value);
 			var factor = this.Factor.Value.ToString("0." + mantissa, CultureInfo.InvariantCulture);
-			return (this.Interval.HasValue) ? factor + this.Interval.Value.GetStringValue() : factor;
+			return this.Interval.HasValue ? factor + this.Interval.Value.GetStringValue() : factor;
 		}
 
 		public bool Equals(Time other)
@@ -253,46 +262,6 @@ namespace Nest
 			var exactMilliseconds = GetExactMilliseconds(interval, factor);
 			this.Milliseconds = exactMilliseconds;
 			this.ApproximateMilliseconds = GetApproximateMilliseconds(interval, factor, exactMilliseconds);
-		}
-
-		private double GetExactMilliseconds(TimeUnit interval, double factor)
-		{
-			switch (interval)
-			{
-				case TimeUnit.Week:
-					return factor * MillisecondsInAWeek;
-				case TimeUnit.Day:
-					return factor * MillisecondsInADay;
-				case TimeUnit.Hour:
-					return factor * MillisecondsInAnHour;
-				case TimeUnit.Minute:
-					return factor * MillisecondsInAMinute;
-				case TimeUnit.Second:
-					return factor * MillisecondsInASecond;
-				case TimeUnit.Microseconds:
-					return factor / (1 / MillisecondsInAMicrosecond);
-				case TimeUnit.Nanoseconds:
-					return factor / (1 / MillisecondsInANanosecond);
-				case TimeUnit.Year:
-				case TimeUnit.Month:
-					// Cannot calculate exact milliseconds for non-fixed intervals
-					return -1;
-				default: // ms
-					return factor;
-			}
-		}
-
-		private double GetApproximateMilliseconds(TimeUnit interval, double factor, double fallback)
-		{
-			switch (interval)
-			{
-				case TimeUnit.Year:
-					return factor * MillisecondsInAYearApproximate;
-				case TimeUnit.Month:
-					return factor * MillisecondsInAMonthApproximate;
-				default:
-					return fallback;
-			}
 		}
 
 		private void Reduce(double ms)
@@ -348,7 +317,7 @@ namespace Nest
 				return;
 			}
 
-			fraction = ms * (1 / MillisecondsInAMicrosecond);
+			fraction = ms / MillisecondsInAMicrosecond;
 			if (IsIntegerGreaterThanZero(fraction))
 			{
 				Factor = fraction;
@@ -357,8 +326,48 @@ namespace Nest
 			}
 
 			// expressed as fraction of nanoseconds
-			Factor = ms * (1 / MillisecondsInANanosecond);
+			Factor = ms / MillisecondsInANanosecond;
 			Interval = TimeUnit.Nanoseconds;
+		}
+
+		private static double GetExactMilliseconds(TimeUnit interval, double factor)
+		{
+			switch (interval)
+			{
+				case TimeUnit.Week:
+					return factor * MillisecondsInAWeek;
+				case TimeUnit.Day:
+					return factor * MillisecondsInADay;
+				case TimeUnit.Hour:
+					return factor * MillisecondsInAnHour;
+				case TimeUnit.Minute:
+					return factor * MillisecondsInAMinute;
+				case TimeUnit.Second:
+					return factor * MillisecondsInASecond;
+				case TimeUnit.Microseconds:
+					return factor * MillisecondsInAMicrosecond;
+				case TimeUnit.Nanoseconds:
+					return factor * MillisecondsInANanosecond;
+				case TimeUnit.Year:
+				case TimeUnit.Month:
+					// Cannot calculate exact milliseconds for non-fixed intervals
+					return -1;
+				default: // ms
+					return factor;
+			}
+		}
+
+		private static double GetApproximateMilliseconds(TimeUnit interval, double factor, double fallback)
+		{
+			switch (interval)
+			{
+				case TimeUnit.Year:
+					return factor * MillisecondsInAYearApproximate;
+				case TimeUnit.Month:
+					return factor * MillisecondsInAMonthApproximate;
+				default:
+					return fallback;
+			}
 		}
 
 		private static string ExponentFormat(double d)
@@ -369,6 +378,5 @@ namespace Nest
 			var exponent = (int) ((bits >> 52) & 0x7ffL);
 			return new string('#', Math.Max(2, exponent));
 		}
-
 	}
 }

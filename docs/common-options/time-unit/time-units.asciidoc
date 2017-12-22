@@ -162,7 +162,7 @@ new Time("-1").Should().Be(Time.MinusOne);
 new Time(-1).Should().Be(Time.MinusOne);
 ((Time) (-1)).Should().Be(Time.MinusOne);
 ((Time) "-1").Should().Be(Time.MinusOne);
-((Time) (-1)).Should().Be("-1");
+((Time) (-1)).Should().Be((Time) "-1");
 ----
 
 Similarly, the following are all equal to `Time.Zero`
@@ -174,7 +174,7 @@ new Time("0").Should().Be(Time.Zero);
 new Time(0).Should().Be(Time.Zero);
 ((Time) 0).Should().Be(Time.Zero);
 ((Time) "0").Should().Be(Time.Zero);
-((Time) 0).Should().Be("0");
+((Time) 0).Should().Be((Time) "0");
 ----
 
 Special Time values `0` and `-1` can be compared against other Time values

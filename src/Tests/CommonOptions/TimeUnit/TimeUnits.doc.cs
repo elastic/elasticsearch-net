@@ -143,7 +143,7 @@ namespace Tests.CommonOptions.TimeUnit
 			new Time(-1).Should().Be(Time.MinusOne);
 			((Time) (-1)).Should().Be(Time.MinusOne);
 			((Time) "-1").Should().Be(Time.MinusOne);
-			((Time) (-1)).Should().Be("-1");
+			((Time) (-1)).Should().Be((Time) "-1");
 
 			/**
 			 * Similarly, the following are all equal to `Time.Zero`
@@ -153,7 +153,7 @@ namespace Tests.CommonOptions.TimeUnit
 			new Time(0).Should().Be(Time.Zero);
 			((Time) 0).Should().Be(Time.Zero);
 			((Time) "0").Should().Be(Time.Zero);
-			((Time) 0).Should().Be("0");
+			((Time) 0).Should().Be((Time) "0");
 
 			/** Special Time values `0` and `-1` can be compared against other Time values
 			 * although admittedly, this is a tad nonsensical.
@@ -248,7 +248,9 @@ namespace Tests.CommonOptions.TimeUnit
 			{
 				{ 1e-4, new TimeSpan(1) , "100nanos"}, // smallest value that can be represented with ticks
 				{ 1e-3, new TimeSpan(10), "1micros"},
+				{ 0.1, TimeSpan.FromTicks(1000), "100micros"},
 				{ 1, TimeSpan.FromMilliseconds(1), "1ms"},
+				{ 1.2, TimeSpan.FromTicks(12000), "1200micros"},
 				{ 10, TimeSpan.FromMilliseconds(10), "10ms"},
 				{ 100, TimeSpan.FromMilliseconds(100), "100ms"},
 				{ 1000, TimeSpan.FromSeconds(1), "1s" },
@@ -266,25 +268,43 @@ namespace Tests.CommonOptions.TimeUnit
 		}
 
 		// hide
-		[U]
-		public void DoubleImplicitConversionOneNanosecond()
+		[U] public void DoubleImplicitConversionOneNanosecond()
 		{
-			Time oneNanosecond = 1e-6; // cannot be expressed as a TimeSpan using ToTimeSpan(), as smaller than a one tick.
+			Time oneNanosecond = 1e-6;
+			// cannot be expressed as a TimeSpan using ToTimeSpan(), as smaller than a one tick.
+			oneNanosecond.ToTimeSpan().Should().Be(TimeSpan.Zero);
 			oneNanosecond.ToString().Should().Be("1nanos");
 		}
 
 		// hide
-		[U]public void TimeSpanZero()
+		private class ToFirstUnitYieldingIntegerTestCases : List<Tuple<Time, string>>
 		{
-			Time zero = TimeSpan.Zero;
-			zero.Should().Be(Time.Zero);
+			public void Add(Time time, string expected) =>
+				this.Add(Tuple.Create(time, expected));
 		}
 
 		// hide
-		[U]public void TimeSpanMinusOne()
+		[U] public void ToFirstUnitYieldingIntegerReturnsWholeValues()
 		{
-			Time minusOne = TimeSpan.FromMilliseconds(-1);
-			minusOne.Should().Be(Time.MinusOne);
+			var testCases = new ToFirstUnitYieldingIntegerTestCases
+			{
+				{ 1e-7, "0nanos"},
+				{ 1e-6, "1nanos" },
+				{ "1.2nanos", "1nanos" },
+				{ "1.5nanos", "2nanos" },
+				{ "1.5micros", "1500nanos" },
+				{ "1micros", "1micros" },
+				{ "2ms", "2ms" },
+				{ "2.2ms", "2200micros" },
+				{ "1.5d", "36h" },
+				{ "1y", "1y" },
+				{ "1.5y", "13140h" }, // cannot be expressed in days because 365 * 1.5
+				{ "1M", "1M" },
+				{ "1.5M", "45d" },
+				{ "1w", "1w" }
+			};
+			foreach (var testCase in testCases)
+				Time.ToFirstUnitYieldingInteger(testCase.Item1).Should().Be(testCase.Item2, "we passed in {0}", testCase.Item1);
 		}
 
 		[U] public void UsingInterval()
