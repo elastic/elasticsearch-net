@@ -4,7 +4,6 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	//TODO INTERNAL ?
 	public class RouteValues
 	{
 		private readonly Dictionary<string, IUrlParameter> _routeValues = new Dictionary<string, IUrlParameter>();

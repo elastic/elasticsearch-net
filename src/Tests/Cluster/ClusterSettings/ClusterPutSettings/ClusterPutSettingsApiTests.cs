@@ -1,4 +1,6 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using System.Collections.Generic;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -11,6 +13,43 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 	public class ClusterPutSettingsApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor, ClusterPutSettingsRequest>
 	{
 		public ClusterPutSettingsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.ClusterPutSettings(f),
+			fluentAsync: (client, f) => client.ClusterPutSettingsAsync(f),
+			request: (client, r) => client.ClusterPutSettings(r),
+			requestAsync: (client, r) => client.ClusterPutSettingsAsync(r)
+		);
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override string UrlPath => "/_cluster/settings";
+
+		protected override int ExpectStatusCode => 200;
+		protected override bool ExpectIsValid => true;
+
+		protected override Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> Fluent => c => c
+			.Transient(s => s
+				.Add("indices.recovery.max_bytes_per_sec", "41mb")
+			);
+
+		protected override ClusterPutSettingsRequest Initializer => new ClusterPutSettingsRequest
+		{
+			Transient = new Dictionary<string, object>
+			{
+				{"indices.recovery.max_bytes_per_sec" , "41mb"}
+			}
+		};
+
+		protected override void ExpectResponse(IClusterPutSettingsResponse response)
+		{
+			response.ShouldBeValid();
+			response.Acknowledged.Should().BeTrue();
+			response.Transient.Should().HaveCount(1);
+		}
+	}
+
+	public class ClusterPutSettingsNoopApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor, ClusterPutSettingsRequest>
+	{
+		public ClusterPutSettingsNoopApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClusterPutSettings(f),
 			fluentAsync: (client, f) => client.ClusterPutSettingsAsync(f),
@@ -38,7 +77,4 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 			response.ServerError.Error.Type.Should().Contain("action_request_validation_exception");
 		}
 	}
-
-	//TODO write a success test
-
 }

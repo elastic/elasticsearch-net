@@ -37,28 +37,34 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		*/
 		[U] public void SomePipelineFailuresAreRecoverable()
 		{
-			// TODO: Move
-			// /** To demonstrate this, first we need a collection of recoverable exceptions */
-			//var recoverablExceptions = new[]
-			//{
-			//	new PipelineException(PipelineFailure.BadResponse),
-			//	new PipelineException(PipelineFailure.PingFailure),
-			//};
-
-			//recoverablExceptions.Should().OnlyContain(e => e.Recoverable);
-
-			/** The following is a collection of unrecoverable exceptions */
-			var unrecoverableExceptions = new[]
+			var failures = Enum.GetValues(typeof(PipelineFailure)).Cast<PipelineFailure>();
+			foreach (var failure in failures)
 			{
-				new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup),
-				new PipelineException(PipelineFailure.SniffFailure),
-				new PipelineException(PipelineFailure.Unexpected),
-				new PipelineException(PipelineFailure.BadAuthentication),
-				new PipelineException(PipelineFailure.MaxRetriesReached),
-				new PipelineException(PipelineFailure.MaxTimeoutReached)
-			};
+				switch (failure)
+				{
+					/** The followinig pipeline failures are recoverable and will be retried */
+					case PipelineFailure.PingFailure:
+					case PipelineFailure.BadRequest:
+					case PipelineFailure.BadResponse:
+						var recoverable = new PipelineException(failure);
+						recoverable.Recoverable.Should().BeTrue(failure.GetStringValue());
+						break;
 
-			unrecoverableExceptions.Should().OnlyContain(e => !e.Recoverable);
+					/** The followinig pipeline failures are NOT recoverable and won't be retried */
+					case PipelineFailure.BadAuthentication:
+					case PipelineFailure.SniffFailure:
+					case PipelineFailure.CouldNotStartSniffOnStartup:
+					case PipelineFailure.MaxTimeoutReached:
+					case PipelineFailure.MaxRetriesReached:
+					case PipelineFailure.Unexpected:
+					case PipelineFailure.NoNodesAttempted:
+						var unrecoverable = new PipelineException(failure);
+						unrecoverable.Recoverable.Should().BeFalse(failure.GetStringValue());
+						break;
+					default:
+						throw new ArgumentOutOfRangeException(failure.GetStringValue());
+				}
+			}
 		}
 
 		/**

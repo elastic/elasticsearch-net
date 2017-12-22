@@ -5,7 +5,6 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	//TODO WRITE CODESTANDARDS TEST THAT THESE ARE ALL REFLECTED IN FieldTpe
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum NumberType
 	{

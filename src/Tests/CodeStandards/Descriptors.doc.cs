@@ -161,6 +161,18 @@ namespace Tests.CodeStandards
 			breakingDescriptors.Should().BeEmpty();
 		}
 
+		[U] public void ProcessorImplementationsNeedProcessorInTheirNames()
+		{
+
+			var processors = (
+				from t in typeof(IProcessor).Assembly().Types()
+				where typeof(IProcessor).IsAssignableFrom(t)
+				select t.Name).ToList();
+
+			processors.Should().NotBeEmpty($"expected {nameof(IProcessor)} implementations");
+			processors.Should().OnlyContain(p => p.Contains("Processor"));
+		}
+
 		//TODO descriptors taking a single valuetype parameter should always be nullable
 		//[U]
 		//public void DescriptorMethodsTakingSingleValueTypeShouldBeNullable()

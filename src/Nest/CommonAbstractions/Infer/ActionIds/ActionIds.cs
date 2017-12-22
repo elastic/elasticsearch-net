@@ -27,10 +27,9 @@ namespace Nest
 						   .ToList();
 		}
 
-		private string DebugDisplay => this.GetString(null);
+		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
-		//TODO explicit implemtation
-		public string GetString(IConnectionConfigurationValues settings) => string.Join(",", this._actionIds);
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => string.Join(",", this._actionIds);
 
 		public static implicit operator ActionIds(string actionIds) => new ActionIds(actionIds);
 

@@ -183,7 +183,8 @@ namespace Tests.Framework
 		private Auditor AssertAuditTrails(ClientCall callTrace, int nthCall)
 		{
 			this.AuditTrail.Count.Should()
-				.Be(this.AsyncAuditTrail.Count, "calling async should have the same audit trail length as the sync call");
+				.Be(this.AsyncAuditTrail.Count,
+					$"{nthCall} has a mismatch between sync and async. \r\nasync:{this.AuditTrail}\r\nsync:{this.AsyncAuditTrail}");
 
 			AssertTrailOnResponse(callTrace, this.AuditTrail, true, nthCall);
 			AssertTrailOnResponse(callTrace, this.AuditTrail, false, nthCall);
@@ -202,13 +203,19 @@ namespace Tests.Framework
 			{
 				var call = cluster.ClientCall();
 				var d = call.ApiCall;
-                var actualAuditTrail = d.AuditTrail.Aggregate(new StringBuilder(),
-                    (sb, a)=> sb.AppendLine($"-> {a}"),
-                    sb => sb.ToString());
+                var actualAuditTrail = AuditTrailToString(d.AuditTrail);
 				messages.Add($"{d.HttpMethod.GetStringValue()} ({d.Uri.Port})");
 				messages.Add(actualAuditTrail);
 			}
 			throw new Exception(string.Join(Environment.NewLine, messages));
+		}
+
+		private static string AuditTrailToString(List<Audit> auditTrail)
+		{
+			var actualAuditTrail = auditTrail.Aggregate(new StringBuilder(),
+				(sb, a) => sb.AppendLine($"-> {a}"),
+				sb => sb.ToString());
+			return actualAuditTrail;
 		}
 
 

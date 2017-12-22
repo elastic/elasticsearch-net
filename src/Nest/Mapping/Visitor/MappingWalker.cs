@@ -73,7 +73,6 @@ namespace Nest
 						});
 #pragma warning restore 618
 						break;
-					//TODO implement type specific visitors too!
 					case FieldType.HalfFloat:
 					case FieldType.ScaledFloat:
 					case FieldType.Float:

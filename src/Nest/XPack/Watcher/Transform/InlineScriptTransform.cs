@@ -32,9 +32,6 @@ namespace Nest
 			Self.Source = inline;
 		}
 
-		//TODO is this constructor needed?
-		public InlineScriptTransformDescriptor() {}
-
 		string IInlineScriptTransform.Inline { get => Self.Source; set => Self.Source = value; }
 		string IInlineScriptTransform.Source { get; set; }
 	}

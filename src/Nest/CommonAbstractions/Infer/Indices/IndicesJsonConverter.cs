@@ -8,13 +8,11 @@ namespace Nest
 {
 	internal class IndicesJsonConverter : JsonConverter
 	{
-		//TODO why is this checking Types?
-		public override bool CanConvert(Type objectType) => typeof(Types) == objectType;
+		public override bool CanConvert(Type objectType) => typeof(Indices) == objectType;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var marker = value as Indices;
-			if (marker == null)
+			if (!(value is Indices marker))
 			{
 				writer.WriteNull();
 				return;

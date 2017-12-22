@@ -352,7 +352,6 @@ namespace Elasticsearch.Net
 		{
 			var path = this.SniffPath;
 			var exceptions = new List<Exception>();
-			SniffResponse response = null;
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(SniffSuccess))
@@ -361,7 +360,7 @@ namespace Elasticsearch.Net
 					try
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, null, this._memoryStreamFactory) { Node = node };
-						response = this._connection.Request<SniffResponse>(requestData);
+						var response = this._connection.Request<SniffResponse>(requestData);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success) throw new PipelineException(requestData.OnFailurePipelineFailure) { ApiCall = response };
