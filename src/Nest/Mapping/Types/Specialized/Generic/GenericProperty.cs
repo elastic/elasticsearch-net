@@ -103,6 +103,8 @@ namespace Nest
 		public GenericPropertyDescriptor() : base(null) { }
 #pragma warning restore 618
 
+		public GenericPropertyDescriptor<T> Type(string type) => Assign(a => a.Type = type);
+
 		public GenericPropertyDescriptor<T> Index(FieldIndexOption? index = FieldIndexOption.NotAnalyzed) => Assign(a => a.Index = index);
 
 		public GenericPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
