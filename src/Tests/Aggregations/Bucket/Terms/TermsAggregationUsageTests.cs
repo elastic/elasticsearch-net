@@ -508,8 +508,6 @@ namespace Tests.Aggregations.Bucket.Terms
 	{
 		public TypedKeysTermsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search?typed_keys=true";
-
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => f => base.Fluent(f.TypedKeys());
 
 		protected override SearchRequest<Project> Initializer

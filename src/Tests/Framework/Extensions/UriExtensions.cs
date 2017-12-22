@@ -23,6 +23,10 @@ namespace Tests
 			var sanitizedQuery = u.Query
 				.Replace("pretty=true&", "")
 				.Replace("pretty=true", "")
+				.Replace("typed_keys=false&", "")
+				.Replace("typed_keys=false", "")
+				.Replace("typed_keys=true&", "")
+				.Replace("typed_keys=true", "")
 				.Replace("error_trace=true&", "")
 				.Replace("error_trace=true", "");
 			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, sanitizedQuery).Uri;

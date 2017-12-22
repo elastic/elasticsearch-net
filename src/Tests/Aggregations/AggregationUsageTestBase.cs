@@ -30,8 +30,7 @@ namespace Tests.Aggregations
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath =>
-			$"/project/doc/_search?typed_keys={AggregationsTests.UsesTypedKeys.ToString().ToLowerInvariant()}";
+		protected override string UrlPath => $"/project/doc/_search";
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>(this.AgainstIndex, Type<Project>())
@@ -65,8 +64,7 @@ namespace Tests.Aggregations
 
 	public abstract class ProjectsOnlyAggregationUsageTestBase : AggregationUsageTestBase
 	{
-		protected override string UrlPath =>
-			$"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search?typed_keys={AggregationsTests.UsesTypedKeys.ToString().ToLowerInvariant()}";
+		protected override string UrlPath => $"/{DefaultSeeder.ProjectsAliasFilter}/doc/_search";
 
 		protected ProjectsOnlyAggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
