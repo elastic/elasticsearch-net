@@ -194,7 +194,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			failure.Cause.IndexUniqueId.Should().NotBeNullOrWhiteSpace();
 			failure.Cause.Reason.Should().NotBeNullOrWhiteSpace();
 			failure.Cause.Index.Should().NotBeNullOrWhiteSpace();
-			failure.Cause.Shard.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.Shard.Should().NotBeNull();
 			failure.Cause.Type.Should().NotBeNullOrWhiteSpace();
 		}
 	}

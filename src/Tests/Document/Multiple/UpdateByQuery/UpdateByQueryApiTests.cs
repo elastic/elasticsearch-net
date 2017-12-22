@@ -195,7 +195,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			failure.Cause.IndexUniqueId.Should().NotBeNullOrWhiteSpace();
 			failure.Cause.Reason.Should().NotBeNullOrWhiteSpace();
 			failure.Cause.Index.Should().NotBeNullOrWhiteSpace();
-			failure.Cause.Shard.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.Shard.Should().NotBeNull();
 			failure.Cause.Type.Should().NotBeNullOrWhiteSpace();
 		}
 	}
