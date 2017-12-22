@@ -17,7 +17,7 @@ namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
+		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 		public static readonly ITestConfiguration Configuration = LoadConfiguration();
 
 		public static readonly ConnectionSettings GlobalDefaultSettings = CreateSettings();
