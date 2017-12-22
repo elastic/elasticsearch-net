@@ -23,7 +23,7 @@ namespace Tests.Search.Request
 	{
 		public HighlightingUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		public string LastNameSearch { get; } = Project.First.LeadDeveloper.LastName;
+		public string LastNameSearch { get; } = Project.Instance.LeadDeveloper.LastName;
 
 		protected override object ExpectJson => new
 		{
@@ -77,20 +77,16 @@ namespace Tests.Search.Request
 							}
 						}
 					},
-					{ "leadDeveloper.lastName", new Dictionary<string, object>
+					{ "state.offsets", new Dictionary<string, object>
 						{
-							{ "type", "unified" },
-							{ "pre_tags", new [] { "<name>" } },
-							{ "post_tags", new [] { "</name>" } },
+							{ "type", "postings" },
+							{ "pre_tags", new [] { "<state>" } },
+							{ "post_tags", new [] { "</state>" } },
 							{ "highlight_query", new Dictionary<string, object>
 								{
-									{ "match", new Dictionary<string, object>
+									{ "terms", new Dictionary<string, object>
 										{
-											{ "leadDeveloper.lastName", new Dictionary<string, object>
-												{
-													{ "query", LastNameSearch }
-												}
-											}
+											{ "state.offsets", new [] { "stable" , "bellyup" } }
 										}
 									}
 								}
@@ -135,14 +131,17 @@ namespace Tests.Search.Request
 							)
 						),
 					fs => fs
-						.Field(p => p.LeadDeveloper.LastName)
-						.Type(HighlighterType.Unified)
-						.PreTags("<name>")
-						.PostTags("</name>")
+						.Field(p => p.State.Suffix("offsets"))
+						.Type(HighlighterType.Postings)
+						.PreTags("<state>")
+						.PostTags("</state>")
 						.HighlightQuery(q => q
-							.Match(m => m
-								.Field(p => p.LeadDeveloper.LastName)
-								.Query(LastNameSearch)
+							.Terms(t => t
+								.Field(f => f.State.Suffix("offsets"))
+								.Terms(
+									StateOfBeing.Stable.ToString().ToLowerInvariant(),
+									StateOfBeing.BellyUp.ToString().ToLowerInvariant()
+								)
 							)
 						)
 				)
@@ -187,15 +186,15 @@ namespace Tests.Search.Request
 								}
 							}
 						},
-						{ "leadDeveloper.lastName", new HighlightField
+						{ "state.offsets", new HighlightField
 							{
-								Type = HighlighterType.Unified,
-								PreTags = new[] { "<name>"},
-								PostTags = new[] { "</name>"},
-								HighlightQuery = new MatchQuery
+								Type = HighlighterType.Postings,
+								PreTags = new[] { "<state>"},
+								PostTags = new[] { "</state>"},
+								HighlightQuery = new TermsQuery
 								{
-									Field = "leadDeveloper.lastName",
-									Query = LastNameSearch
+									Field = "state.offsets",
+									Terms = new [] { "stable", "bellyup" }
 								}
 							}
 						}
