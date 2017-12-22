@@ -8,9 +8,18 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// A response from elasticsearch including details about the request/response life cycle
 	/// </summary>
-	public class ElasticsearchResponseBase : IApiCallDetails, IElasticsearchResponse
+	public abstract class ElasticsearchResponseBase : IApiCallDetails, IElasticsearchResponse
 	{
 		public IApiCallDetails ApiCall { get; set; }
+
+		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => this.TryGetServerErrorReason(out reason);
+
+		protected virtual bool TryGetServerErrorReason(out string reason)
+		{
+			reason = null;
+			return false;
+		}
+
 		//ignored
 		List<Audit> IApiCallDetails.AuditTrail { get; set; }
 
@@ -26,12 +35,15 @@ namespace Elasticsearch.Net
 
 		/// <summary>The raw byte request message body, only set when DisableDirectStreaming() is set on Connection configuration</summary>
 		public byte[] RequestBodyInBytes => this.ApiCall.RequestBodyInBytes;
+
 		/// <summary>The raw byte response message body, only set when DisableDirectStreaming() is set on Connection configuration</summary>
 		public byte[] ResponseBodyInBytes => this.ApiCall.ResponseBodyInBytes;
 
 		public string DebugInformation => this.ApiCall.DebugInformation;
 
 		public override string ToString() => this.ApiCall.ToString();
+
+
 	}
 
 	/// <summary>

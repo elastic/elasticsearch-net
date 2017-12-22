@@ -10,5 +10,7 @@ namespace Elasticsearch.Net
 		/// Sets and returns the <see cref="IApiCallDetails"/> diagnostic information
 		/// </summary>
 		IApiCallDetails ApiCall { get; set; }
+
+		bool TryGetServerErrorReason(out string reason);
 	}
 }
