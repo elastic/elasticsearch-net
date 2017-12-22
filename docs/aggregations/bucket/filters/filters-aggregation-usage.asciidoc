@@ -26,8 +26,9 @@ Be sure to read the Elasticsearch documentation {ref_current}/search-aggregation
 
 ==== Handling Responses
 
-Using the `.Agg` aggregation helper we can fetch our aggregation results easily
-in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
+The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
+so we can fetch our aggregation results easily in the correct type.
+<<handling-aggregate-response, Be sure to read more about these helper methods>>
 
 [source,csharp]
 ----
@@ -58,8 +59,9 @@ namedResult.DocCount.Should().Be(0);
 
 ==== Handling Responses
 
-Using the `.Agg` aggregation helper we can fetch our aggregation results easily
-in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
+The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
+so we can fetch our aggregation results easily in the correct type.
+<<handling-aggregate-response, Be sure to read more about these helper methods>>
 
 [source,csharp]
 ----
