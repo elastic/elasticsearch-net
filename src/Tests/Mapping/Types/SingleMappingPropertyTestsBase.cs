@@ -10,7 +10,7 @@ using Tests.Framework.MockData;
 namespace Tests.Mapping.Types
 {
 	public abstract class SingleMappingPropertyTestsBase
-		: ApiTestBase<ReadOnlyCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
 	{
 		protected SingleMappingPropertyTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -24,6 +24,8 @@ namespace Tests.Mapping.Types
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}?create=false";
 		protected override bool SupportsDeserialization => false;
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
 
 		protected override object ExpectJson => new
 		{
