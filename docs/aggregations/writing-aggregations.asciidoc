@@ -230,7 +230,7 @@ return s => s
 <1> a list of aggregation functions to apply
 <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
 
-[[Aggregate]]
+[[handling-aggregate-response]]
 [float]
 === Handling aggregate response
 

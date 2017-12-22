@@ -251,7 +251,7 @@ namespace Tests.Aggregations
 
 
 	/**[float]
-	* [[Aggregate]]
+	* [[handling-aggregate-response]]
 	*=== Handling aggregate response
 	*
 	* The `SearchResponse` exposes an `AggregateDictionary` which is specialized dictionary over `<string, IAggregate>` that also
