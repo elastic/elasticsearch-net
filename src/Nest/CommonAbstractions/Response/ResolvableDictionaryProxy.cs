@@ -91,27 +91,7 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var j = JObject.Load(reader);
-			var errorProperty =j.Property("error");
-			Error error = null;
-			if (errorProperty?.Value?.Type == JTokenType.String)
-			{
-				var reason = errorProperty.Value.Value<string>();
-				error = new Error {Reason = reason};
-				errorProperty.Remove();
-			}
-			else if (errorProperty?.Value?.Type == JTokenType.Object && ((JObject)errorProperty.Value)["reason"] != null)
-			{
-				error = errorProperty.Value.ToObject<Error>();
-				errorProperty.Remove();
-			}
-			var statusProperty =j.Property("status");
-			int? statusCode = null;
-			if (statusProperty?.Value?.Type == JTokenType.Integer)
-			{
-				statusCode = statusProperty.Value.Value<int>();
-				statusProperty.Remove();
-			}
+			var j = DictionaryResponseJsonConverterHelpers.ReadServerErrorFirst(reader, out var error, out var statusCode);
 
 			var response = new TResponse();
 			var d = new Dictionary<TKey, TValue>();
@@ -123,6 +103,7 @@ namespace Nest
 			response.StatusCode = statusCode;
 			return response;
 		}
+
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
 	}
