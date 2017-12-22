@@ -57,7 +57,7 @@ namespace Nest
 
 		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason)
 		{
-			reason = this.ServerError?.Error?.Reason;
+			reason = this.ServerError?.Error?.ToString();
 			return !reason.IsNullOrEmpty();
 		}
 
