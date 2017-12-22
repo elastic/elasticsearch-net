@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.MockData;
 
 namespace Tests.Indices.IndexManagement.RolloverIndex
 {
@@ -53,6 +54,36 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			{
 				max_age = "7d",
 				max_docs = 1000
+			},
+			settings = new Dictionary<string, object>
+			{
+				{ "index.number_of_shards", 1 },
+				{ "index.number_of_replicas", 1 }
+			},
+			mappings = new
+			{
+				project = new
+				{
+					properties = new
+					{
+						branches = new
+						{
+							type = "text",
+							fields = new
+							{
+								keyword = new
+								{
+									type = "keyword",
+									ignore_above = 256
+								}
+							}
+						}
+					}
+				}
+			},
+			aliases = new
+			{
+				new_projects = new {}
 			}
 		};
 
@@ -62,6 +93,39 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			{
 				MaxAge = "7d",
 				MaxDocs = 1000
+			},
+			Settings = new Nest.IndexSettings
+			{
+				NumberOfShards = 1,
+				NumberOfReplicas = 1
+			},
+			Mappings = new Mappings
+			{
+				{ typeof(Project), new TypeMapping
+					{
+						Properties = new Properties<Project>
+						{
+							{
+								p => p.Branches, new TextProperty
+								{
+									Fields = new Properties
+									{
+										{
+											"keyword", new KeywordProperty
+											{
+												IgnoreAbove = 256
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			Aliases = new Aliases
+			{
+				{ "new_projects", new Alias() }
 			}
 		};
 
@@ -70,6 +134,28 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			.Conditions(c => c
 				.MaxAge("7d")
 				.MaxDocs(1000)
+			)
+			.Settings(s => s
+				.NumberOfShards(1)
+				.NumberOfReplicas(1)
+			)
+			.Mappings(m => m
+				.Map<Project>(p => p
+					.Properties(pp => pp
+						.Text(t => t
+							.Name(n => n.Branches)
+							.Fields(pf => pf
+								.Keyword(k => k
+									.Name("keyword")
+									.IgnoreAbove(256)
+								)
+							)
+						)
+					)
+				)
+			)
+			.Aliases(a => a
+				.Alias("new_projects")
 			);
 
 		protected override void ExpectResponse(IRolloverIndexResponse response)

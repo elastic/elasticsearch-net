@@ -18,6 +18,9 @@ namespace Nest
 
 		[JsonProperty("aliases")]
 		IAliases Aliases { get; set; }
+
+		[JsonProperty("version")]
+		int? Version { get; set; }
 	}
 
 	public class TemplateMapping : ITemplateMapping
@@ -31,5 +34,7 @@ namespace Nest
 		public IMappings Mappings { get; set; }
 
 		public IAliases Aliases { get; set; }
+
+		public int? Version { get; set; }
 	}
 }

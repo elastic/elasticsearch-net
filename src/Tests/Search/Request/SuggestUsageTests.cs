@@ -48,10 +48,10 @@ namespace Tests.Search.Request
 					  phrase = new {
 						collate = new {
 						  query = new {
-							inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
-							@params = new {
-						      field_name = "title"
-							}
+							inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}"
+						  },
+						  @params = new {
+							field_name = "title"
 						  },
 						  prune = true,
 						},
@@ -122,8 +122,8 @@ namespace Tests.Search.Request
 					.Collate(c => c
 						.Query(q => q
 							.Inline("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
-							.Params(p => p.Add("field_name", "title"))
 						)
+						.Params(p => p.Add("field_name", "title"))
 						.Prune()
 					)
 					.Confidence(10.1)
@@ -192,10 +192,10 @@ namespace Tests.Search.Request
 								Query = new TemplateQuery
 								{
 									Inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
-									Params = new Dictionary<string, object>
-									{
-										{ "field_name", "title" }
-									}
+								},
+								Params = new Dictionary<string, object>
+								{
+									{ "field_name", "title" }
 								},
 								Prune = true
 							},

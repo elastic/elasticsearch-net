@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -11,6 +12,8 @@ namespace Nest
 		public string Template { get; set; }
 
 		public int? Order { get; set; }
+
+		public int? Version { get; set; }
 
 		public IIndexSettings Settings { get; set; }
 
@@ -26,6 +29,8 @@ namespace Nest
 
 		int? ITemplateMapping.Order { get; set; }
 
+		int? ITemplateMapping.Version { get; set; }
+
 		IIndexSettings ITemplateMapping.Settings { get; set; }
 
 		IMappings ITemplateMapping.Mappings { get; set; }
@@ -33,6 +38,8 @@ namespace Nest
 		IAliases ITemplateMapping.Aliases { get; set; }
 
 		public PutIndexTemplateDescriptor Order(int order) => Assign(a => a.Order = order);
+
+		public PutIndexTemplateDescriptor Version(int version) => Assign(a => a.Version = version);
 
 		public PutIndexTemplateDescriptor Template(string template)=> Assign(a => a.Template = template);
 
