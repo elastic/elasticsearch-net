@@ -44,7 +44,7 @@ namespace Tests.CommonOptions.TimeUnit
 				.WhenSerializing(unitMilliseconds);
 
 			/**
-			* The `Milliseconds` property on `Time` is calculated even when not using the constructor that takes a double
+			* The `Milliseconds` property on `Time` is calculated even when not using the constructor that takes a `double`
 			*/
 			unitMilliseconds.Milliseconds.Should().Be(1000*60*60*24*2);
 			unitComposed.Milliseconds.Should().Be(1000*60*60*24*2);
@@ -53,62 +53,59 @@ namespace Tests.CommonOptions.TimeUnit
 		}
 		/**
 		* ==== Implicit conversion
-		* Alternatively to using the constructor, `string`, `TimeSpan` and `double` can be implicitly converted to `Time`
+		* There are implicit conversions from `string`, `TimeSpan` and `double` to an instance of `Time`, making them
+		 * easier to work with
 		*/
 		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
 		public void ImplicitConversion()
 		{
 			Time oneAndHalfYear = "1.5y";
-			Time twoWeeks = TimeSpan.FromDays(14);
+			Time fourteenDays = TimeSpan.FromDays(14);
 			Time twoDays = 1000*60*60*24*2;
 
 			Expect("1.5y").WhenSerializing(oneAndHalfYear);
-			Expect("2w").WhenSerializing(twoWeeks);
+			Expect("14d").WhenSerializing(fourteenDays);
 			Expect("2d").WhenSerializing(twoDays);
 		}
 
+		/**
+		 * ==== Equality and Comparison
+		 */
 		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
 		public void EqualityAndComparable()
 		{
+			/**
+			* Milliseconds are calculated even when values are not passed as `double` milliseconds
+			*/
+			Time fourteenDays = TimeSpan.FromDays(14);
+			fourteenDays.Milliseconds.Should().Be(1209600000);
+
+			/**
+			* When dealing with years or months however, whose millsecond value cannot
+			* be calculated *accurately*, `Milliseconds` will be -1. This is because
+			* they are not fixed durations. For example
+			*
+			* - 30 vs. 31 vs. 28 vs. 29 days in a month
+			* - 365 vs. 366 days in a year
+			*/
 			Time oneAndHalfYear = "1.5y";
-			Time twoWeeks = TimeSpan.FromDays(14);
-			Time twoDays = 1000*60*60*24*2;
-
-			/**
-			* Milliseconds are calculated even when values are not passed as long...
-			*/
-			twoWeeks.Milliseconds.Should().BeGreaterThan(1);
-
-			/**
-			* ...**except** when dealing with years or months, whose millsecond value cannot
-			* be calculated *accurately*, since they are not fixed durations. For instance,
-			* 30 vs 31 vs 28 days in a month, or 366 vs 365 days in a year.
-			* In this instance, Milliseconds will be -1.
-			*/
 			oneAndHalfYear.Milliseconds.Should().Be(-1);
 
 			/**
 			* This allows you to do comparisons on the expressions
 			*/
-			oneAndHalfYear.Should().BeGreaterThan(twoWeeks);
-			(oneAndHalfYear > twoWeeks).Should().BeTrue();
-			(oneAndHalfYear >= twoWeeks).Should().BeTrue();
+			Time twoDays = 1000*60*60*24*2;
+
+			oneAndHalfYear.Should().BeGreaterThan(fourteenDays);
+			(oneAndHalfYear > fourteenDays).Should().BeTrue();
+			(oneAndHalfYear >= fourteenDays).Should().BeTrue();
 		    (twoDays != null).Should().BeTrue();
             (twoDays >= new Time("2d")).Should().BeTrue();
 
-			twoDays.Should().BeLessThan(twoWeeks);
-			(twoDays < twoWeeks).Should().BeTrue();
-			(twoDays <= twoWeeks).Should().BeTrue();
+			twoDays.Should().BeLessThan(fourteenDays);
+			(twoDays < fourteenDays).Should().BeTrue();
+			(twoDays <= fourteenDays).Should().BeTrue();
 			(twoDays <= new Time("2d")).Should().BeTrue();
-
-			/**
-			* Special Time values `0` and `-1` can be compared against each other
-			* and other Time values although admittingly this is a tad non-sensical.
-			*/
-			Time.MinusOne.Should().BeLessThan(Time.Zero);
-			Time.Zero.Should().BeGreaterThan(Time.MinusOne);
-			Time.Zero.Should().BeLessThan(twoDays);
-			Time.MinusOne.Should().BeLessThan(twoDays);
 
 			/**
 			* And assert equality
@@ -117,9 +114,62 @@ namespace Tests.CommonOptions.TimeUnit
 			(twoDays == new Time("2d")).Should().BeTrue();
 			(twoDays != new Time("2.1d")).Should().BeTrue();
 			(new Time("2.1d") == new Time(TimeSpan.FromDays(2.1))).Should().BeTrue();
-			//the string "-1" is not the same as double -1 which is milliseconds
-			(new Time("-1") == new Time(-1)).Should().BeFalse();
-			(new Time("-1") == Time.MinusOne).Should().BeTrue();
+
+			/**
+			 * Equality has down to 1/10 nanosecond precision
+			 */
+			Time oneNanosecond = new Time(1, Nest.TimeUnit.Nanoseconds);
+			Time onePointNoughtNineNanoseconds = "1.09nanos";
+			Time onePointOneNanoseconds = "1.1nanos";
+
+			(oneNanosecond == onePointNoughtNineNanoseconds).Should().BeTrue();
+			(oneNanosecond == onePointOneNanoseconds).Should().BeFalse();
+		}
+
+		/** ==== Special Time values
+		 *
+		 * Elasticsearch has two special values that can sometimes be passed where a `Time` is accepted
+		 *
+		 * - `0` represented as `Time.Zero`
+		 * - `-1` represented as `Time.MinusOne`
+		 */
+		[U] public void SpecialTimeValues()
+		{
+			/**
+			 * The following are all equal to `Time.MinusOne`
+			 */
+			Time.MinusOne.Should().Be(Time.MinusOne);
+			new Time("-1").Should().Be(Time.MinusOne);
+			new Time(-1).Should().Be(Time.MinusOne);
+			((Time) (-1)).Should().Be(Time.MinusOne);
+			((Time) "-1").Should().Be(Time.MinusOne);
+			((Time) (-1)).Should().Be((Time) "-1");
+
+			/**
+			 * Similarly, the following are all equal to `Time.Zero`
+			 */
+			Time.Zero.Should().Be(Time.Zero);
+			new Time("0").Should().Be(Time.Zero);
+			new Time(0).Should().Be(Time.Zero);
+			((Time) 0).Should().Be(Time.Zero);
+			((Time) "0").Should().Be(Time.Zero);
+			((Time) 0).Should().Be((Time) "0");
+
+			/** Special Time values `0` and `-1` can be compared against other Time values
+			 * although admittedly, this is a tad nonsensical.
+			 */
+			var twoDays = new Time(2, Nest.TimeUnit.Day);
+			Time.MinusOne.Should().BeLessThan(Time.Zero);
+			Time.Zero.Should().BeGreaterThan(Time.MinusOne);
+			Time.Zero.Should().BeLessThan(twoDays);
+			Time.MinusOne.Should().BeLessThan(twoDays);
+
+			/**
+			 * If there is a need to construct a time of -1ms or 0ms, use the constructor
+			 * that accepts a factor and time unit, or specify a string with ms time units
+			 */
+			(new Time(-1, Nest.TimeUnit.Millisecond) == new Time("-1ms")).Should().BeTrue();
+			(new Time(0, Nest.TimeUnit.Millisecond) == new Time("0ms")).Should().BeTrue();
 		}
 
         // hide
@@ -180,12 +230,92 @@ namespace Tests.CommonOptions.TimeUnit
 			}
 		}
 
+		// hide
+		private class DoubleParsingTestCases : List<Tuple<double, TimeSpan, string>>
+		{
+			public void Add(double original, TimeSpan expect, string toString) =>
+				this.Add(Tuple.Create(original, expect, toString));
+		}
+
+		// hide
+		[U]public void DoubleImplicitConversionParsing()
+		{
+			// from: https://msdn.microsoft.com/en-us/library/system.timespan.frommilliseconds.aspx
+			// The value parameter is converted to ticks, and that number of ticks is used to initialize the new TimeSpan.
+			// Therefore, value will only be considered accurate to the nearest millisecond. This means that
+			// fractional millisecond values with TimeSpan.FromMilliseconds(fraction) will be rounded.
+			var testCases = new DoubleParsingTestCases
+			{
+				{ 1e-4, new TimeSpan(1) , "100nanos"}, // smallest value that can be represented with ticks
+				{ 1e-3, new TimeSpan(10), "1micros"},
+				{ 0.1, TimeSpan.FromTicks(1000), "100micros"},
+				{ 1, TimeSpan.FromMilliseconds(1), "1ms"},
+				{ 1.2, TimeSpan.FromTicks(12000), "1200micros"},
+				{ 10, TimeSpan.FromMilliseconds(10), "10ms"},
+				{ 100, TimeSpan.FromMilliseconds(100), "100ms"},
+				{ 1000, TimeSpan.FromSeconds(1), "1s" },
+				{ 60000, TimeSpan.FromMinutes(1), "1m" },
+				{ 3.6e+6, TimeSpan.FromHours(1), "1h" },
+				{ 8.64e+7, TimeSpan.FromDays(1), "1d" },
+				{ 1.296e+8, TimeSpan.FromDays(1.5), "36h" },
+			};
+			foreach (var testCase in testCases)
+			{
+				var time = new Time(testCase.Item1);
+				time.ToTimeSpan().Should().Be(testCase.Item2, "we passed in {0}", testCase.Item1);
+				time.ToString().Should().Be(testCase.Item3);
+			}
+		}
+
+		// hide
+		[U] public void DoubleImplicitConversionOneNanosecond()
+		{
+			Time oneNanosecond = 1e-6;
+			// cannot be expressed as a TimeSpan using ToTimeSpan(), as smaller than a one tick.
+			oneNanosecond.ToTimeSpan().Should().Be(TimeSpan.Zero);
+			oneNanosecond.ToString().Should().Be("1nanos");
+		}
+
+		// hide
+		private class ToFirstUnitYieldingIntegerTestCases : List<Tuple<Time, string>>
+		{
+			public void Add(Time time, string expected) =>
+				this.Add(Tuple.Create(time, expected));
+		}
+
+		// hide
+		[U] public void ToFirstUnitYieldingIntegerReturnsWholeValues()
+		{
+			var testCases = new ToFirstUnitYieldingIntegerTestCases
+			{
+				{ 1e-7, "0nanos"},
+				{ 1e-6, "1nanos" },
+				{ "1.2nanos", "1nanos" },
+				{ "1.5nanos", "2nanos" },
+				{ "1.5micros", "1500nanos" },
+				{ "1micros", "1micros" },
+				{ "2ms", "2ms" },
+				{ "2.2ms", "2200micros" },
+				{ "1.5d", "36h" },
+				{ "1y", "1y" },
+				{ "1.5y", "18M" },
+				{ "1M", "1M" },
+				{ "1.5M", "45d" },
+				{ "1w", "1w" }
+			};
+			foreach (var testCase in testCases)
+				Time.ToFirstUnitYieldingInteger(testCase.Item1).Should().Be(testCase.Item2, "we passed in {0}", testCase.Item1);
+		}
+
 		[U] public void UsingInterval()
 		{
 			/**
 			* ==== Units of Time
-			* Units of `Time` are specified as a union of either a `DateInterval` or `Time`,
-			* both of which implicitly convert to the `Union` of these two.
+			*
+			* Where Units of Time can be specified as a union of either a `DateInterval` or `Time`,
+			* a `DateInterval` or `Time` may be passed which will be implicity converted to a
+			* `Union<DateInterval, Time>`, the serialized form of which represents the initial value
+			* passed
 			*/
 			Expect("month").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Month);
 			Expect("day").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Day);
@@ -197,26 +327,28 @@ namespace Tests.CommonOptions.TimeUnit
 			Expect("year").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Year);
 
 			Expect("2d").WhenSerializing<Union<DateInterval, Time>>((Time)"2d");
-			Expect("1.15714285714286w").WhenSerializing<Union<DateInterval, Time>>((Time)TimeSpan.FromDays(8.1));
+			Expect("11664m").WhenSerializing<Union<DateInterval, Time>>((Time)TimeSpan.FromDays(8.1));
 		}
 
 		//hide
 		[U] public void MillisecondsNeverSerializeToMonthsOrYears()
 		{
 			double millisecondsInAMonth = 2592000000;
-			Expect("4.28571428571429w").WhenSerializing(new Time(millisecondsInAMonth));
-			Expect("8.57142857142857w").WhenSerializing(new Time(millisecondsInAMonth * 2));
-			Expect("51.4285714285714w").WhenSerializing(new Time(millisecondsInAMonth * 12));
-			Expect("102.857142857143w").WhenSerializing(new Time(millisecondsInAMonth * 24));
+			Expect("30d").WhenSerializing(new Time(millisecondsInAMonth));
+			Expect("60d").WhenSerializing(new Time(millisecondsInAMonth * 2));
+			Expect("360d").WhenSerializing(new Time(millisecondsInAMonth * 12));
+			Expect("720d").WhenSerializing(new Time(millisecondsInAMonth * 24));
 		}
 
 		//hide
 		[U] public void ExpectedValues()
 		{
-			Expect("0ms").WhenSerializing(new Time(0));
+			Expect(0).WhenSerializing(new Time(0));
+			Expect(0).WhenSerializing((Time)0);
 			Expect(0).WhenSerializing(new Time("0"));
 			Expect(0).WhenSerializing(Time.Zero);
-			Expect("-1ms").WhenSerializing(new Time(-1));
+			Expect(-1).WhenSerializing(new Time(-1));
+			Expect(-1).WhenSerializing((Time)(-1));
 			Expect(-1).WhenSerializing(new Time("-1"));
 			Expect(-1).WhenSerializing(Time.MinusOne);
 
@@ -235,8 +367,7 @@ namespace Tests.CommonOptions.TimeUnit
 			Assert(
 				1, Nest.TimeUnit.Week, TimeSpan.FromDays(7).TotalMilliseconds, "1w",
 				new Time(1, Nest.TimeUnit.Week),
-				new Time("1w"),
-				new Time(TimeSpan.FromDays(7).TotalMilliseconds)
+				new Time("1w")
 			);
 
 			Assert(
