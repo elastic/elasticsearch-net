@@ -482,15 +482,16 @@ namespace Elasticsearch.Net
 			response.ApiCall.AuditTrail = this.AuditTrail;
 		}
 
-		public ElasticsearchClientException CreateClientException<TResponse>(TResponse response, RequestData data, List<PipelineException> pipelineExceptions)
+		public ElasticsearchClientException CreateClientException<TResponse>(
+			TResponse response, IApiCallDetails callDetails, RequestData data, List<PipelineException> pipelineExceptions
+		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			var callDetails = response.ApiCall;
 			if (callDetails.Success) return null;
 			var innerException = pipelineExceptions.HasAny() ? new AggregateException(pipelineExceptions) : callDetails?.OriginalException;
 
 			var exceptionMessage = innerException?.Message ?? $"Request failed to execute";
-			if (response.TryGetServerErrorReason(out var reason))
+			if (response != null && response.TryGetServerErrorReason(out var reason))
 				exceptionMessage += $". ServerError: {reason}";
 
 			var pipelineFailure = data.OnFailurePipelineFailure;

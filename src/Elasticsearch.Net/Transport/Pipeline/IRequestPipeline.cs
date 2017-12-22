@@ -53,7 +53,7 @@ namespace Elasticsearch.Net
 
 		void AuditCancellationRequested();
 
-		ElasticsearchClientException CreateClientException<TResponse>(TResponse response, RequestData data, List<PipelineException> seenExceptions)
+		ElasticsearchClientException CreateClientException<TResponse>(TResponse response, IApiCallDetails callDetails, RequestData data, List<PipelineException> seenExceptions)
 			where TResponse : class, IElasticsearchResponse, new();
 	}
 }
