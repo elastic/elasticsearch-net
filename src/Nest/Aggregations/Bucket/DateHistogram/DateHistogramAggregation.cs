@@ -78,11 +78,13 @@ namespace Nest
 			set
 			{
 				_extendedBounds = value;
-				ExtendedBoundsDateMath = new ExtendedBounds<DateMath>
-				{
-					Minimum = value.Minimum,
-					Maximum = value.Maximum
-				};
+				ExtendedBoundsDateMath = value == null
+					? null
+					: new ExtendedBounds<DateMath>
+					{
+						Minimum = value.Minimum,
+						Maximum = value.Maximum
+					};
 			}
 		}
 
@@ -137,11 +139,13 @@ namespace Nest
 			set
 			{
 				_extendedBounds = value;
-				Self.ExtendedBoundsDateMath = new ExtendedBounds<DateMath>
-				{
-					Minimum = value.Minimum,
-					Maximum = value.Maximum
-				};
+				Self.ExtendedBoundsDateMath = value == null
+					? null
+					: new ExtendedBounds<DateMath>
+					{
+						Minimum = value.Minimum,
+						Maximum = value.Maximum
+					};
 			}
 		}
 
