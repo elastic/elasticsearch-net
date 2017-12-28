@@ -183,7 +183,7 @@ namespace Tests.Analysis.TokenFilters
 					{
 						type = "shingle",
 						min_shingle_size = 8,
-						max_shingle_size = 11,
+						max_shingle_size = 10,
 						output_unigrams = true,
 						output_unigrams_if_no_shingles = true,
 						token_separator = "|",
@@ -366,7 +366,7 @@ namespace Tests.Analysis.TokenFilters
 					.Reverse("rev")
 					.Shingle("shing", t => t
 						.FillerToken("x")
-						.MaxShingleSize(11)
+						.MaxShingleSize(10)
 						.MinShingleSize(8)
 						.OutputUnigrams()
 						.OutputUnigramsIfNoShingles()
@@ -515,7 +515,7 @@ namespace Tests.Analysis.TokenFilters
 							"shing", new ShingleTokenFilter
 							{
 								FillerToken = "x",
-								MaxShingleSize = 11,
+								MaxShingleSize = 10,
 								MinShingleSize = 8,
 								OutputUnigrams = true,
 								OutputUnigramsIfNoShingles = true,
