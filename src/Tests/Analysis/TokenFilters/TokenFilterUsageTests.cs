@@ -157,7 +157,7 @@ namespace Tests.Analysis.TokenFilters
 					{
 						type = "ngram",
 						min_gram = 3,
-						max_gram = 30
+						max_gram = 4
 					},
 					pc = new
 					{
@@ -352,7 +352,7 @@ namespace Tests.Analysis.TokenFilters
 					.Lowercase("lc")
 					.NGram("ngram", t => t
 						.MinGram(3)
-						.MaxGram(30)
+						.MaxGram(4)
 					)
 					.PatternCapture("pc", t => t
 						.Patterns(@"\d", @"\w")
@@ -506,7 +506,7 @@ namespace Tests.Analysis.TokenFilters
 						{"length", new LengthTokenFilter {Min = 10, Max = 200}},
 						{"limit", new LimitTokenCountTokenFilter {ConsumeAllTokens = true, MaxTokenCount = 12}},
 						{"lc", new LowercaseTokenFilter()},
-						{"ngram", new NGramTokenFilter {MinGram = 3, MaxGram = 30}},
+						{"ngram", new NGramTokenFilter {MinGram = 3, MaxGram = 4}},
 						{"pc", new PatternCaptureTokenFilter {Patterns = new[] {@"\d", @"\w"}, PreserveOriginal = true}},
 						{"pr", new PatternReplaceTokenFilter {Pattern = @"(\d|\w)", Replacement = "replacement"}},
 						{"porter", new PorterStemTokenFilter()},
