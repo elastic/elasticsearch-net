@@ -37,7 +37,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			settings = new Dictionary<string, object> { { "index.number_of_shards", 1 } },
 			mappings = new
 			{
-				_default_ = new
+				doc = new
 				{
 					dynamic_templates = new object[]
 					{
@@ -67,7 +67,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			.Create(false)
 			.Settings(p=>p.NumberOfShards(1))
 			.Mappings(m => m
-				.Map("_default_", tm => tm
+				.Map("doc", tm => tm
 					.DynamicTemplates(t => t
 						.DynamicTemplate("base", dt => dt
 							.Match("*")
@@ -96,7 +96,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			},
 			Mappings = new Mappings
 			{
-				{ "_default_", new TypeMapping
+				{ "doc", new TypeMapping
 					{
 						DynamicTemplates = new DynamicTemplateContainer
 						{
