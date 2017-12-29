@@ -7,12 +7,14 @@ namespace Nest
 	public interface ITermQuery : IFieldNameQuery
 	{
 		[JsonProperty("value")]
+		[JsonConverter(typeof(SourceValueWriteConverter))]
 		object Value { get; set; }
 	}
 
 	public class TermQuery : FieldNameQueryBase, ITermQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
+		[JsonConverter(typeof(SourceValueWriteConverter))]
 		public object Value { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Term = this;

@@ -82,6 +82,8 @@ namespace Tests.Framework
 			expected.ToString().Diff(actual.ToString(), "Expected serialization differs:");
 		}
 
+		public void WhenSerializingNoRoundtrip(object o) =>
+			ToSerializeTo(this.Client.RequestResponseSerializer.SerializeToString(o));
 		public virtual RoundTripper<T> WhenSerializing<T>(T actual)
 		{
 			var sut = this.AssertSerializesAndRoundTrips(actual);
