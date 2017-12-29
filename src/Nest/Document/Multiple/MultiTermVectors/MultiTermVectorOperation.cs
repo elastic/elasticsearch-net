@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -28,6 +29,12 @@ namespace Nest
 		bool? FieldStatistics { get; set; }
 		[JsonProperty("filter")]
 		ITermVectorFilter Filter { get; set; }
+		[JsonProperty("version")]
+		long? Version { get; set; }
+		[JsonProperty("version_type")]
+		VersionType? VersionType { get; set; }
+		[JsonProperty("routing")]
+		string Routing { get; set; }
 	}
 
 	public class MultiTermVectorOperation<T> : IMultiTermVectorOperation
@@ -51,6 +58,9 @@ namespace Nest
 		public bool? TermStatistics { get; set; }
 		public bool? FieldStatistics { get; set; }
 		public ITermVectorFilter Filter { get; set; }
+		public long? Version { get; set; }
+		public VersionType? VersionType { get; set; }
+		public string Routing { get; set; }
 	}
 
 	public class MultiTermVectorOperationDescriptor<T> : DescriptorBase<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation>, IMultiTermVectorOperation
@@ -67,6 +77,9 @@ namespace Nest
 		bool? IMultiTermVectorOperation.TermStatistics { get; set; }
 		bool? IMultiTermVectorOperation.FieldStatistics { get; set; }
 		ITermVectorFilter IMultiTermVectorOperation.Filter { get; set; }
+		long? IMultiTermVectorOperation.Version { get; set; }
+		VersionType? IMultiTermVectorOperation.VersionType { get; set; }
+		string IMultiTermVectorOperation.Routing { get; set; }
 
 		public MultiTermVectorOperationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
@@ -89,5 +102,11 @@ namespace Nest
 
 		public MultiTermVectorOperationDescriptor<T> Filter(Func<TermVectorFilterDescriptor, ITermVectorFilter> filterSelector) =>
 			Assign(a => a.Filter = filterSelector?.Invoke(new TermVectorFilterDescriptor()));
+
+		public MultiTermVectorOperationDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
+
+		public MultiTermVectorOperationDescriptor<T> VersionType(VersionType versionType) => Assign(a => a.VersionType = versionType);
+
+		public MultiTermVectorOperationDescriptor<T> Routing(string routing) => Assign(a => a.Routing = routing);
 	}
 }

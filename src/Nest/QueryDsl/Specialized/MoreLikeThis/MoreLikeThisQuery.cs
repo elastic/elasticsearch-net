@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -51,7 +52,21 @@ namespace Nest
 		[JsonProperty("include")]
 		bool? Include { get; set; }
 
+		/// <summary>
+		/// Provide a different analyzer than the one at the field.
+		/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
+		/// </summary>
+		[JsonProperty("per_field_analyzer")]
+		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
+		[JsonProperty("version")]
+		long? Version { get; set; }
+
+		[JsonProperty("version_type")]
+		VersionType? VersionType { get; set; }
+
+		[JsonProperty("routing")]
+		string Routing { get; set; }
 	}
 
 	public class MoreLikeThisQuery : QueryBase, IMoreLikeThisQuery
@@ -72,6 +87,12 @@ namespace Nest
 		public bool? Include { get; set; }
 		public IEnumerable<Like> Like { get; set; }
 		public IEnumerable<Like> Unlike { get; set; }
+		/// <inheritdoc/>
+		public IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
+
+		public long? Version { get; set; }
+		public VersionType? VersionType { get; set; }
+		public string Routing { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.MoreLikeThis = this;
 		internal static bool IsConditionless(IMoreLikeThisQuery q) => q.Fields.IsConditionless() || (!q.Like.HasAny() || q.Like.All(Nest.Like.IsConditionless));
@@ -94,6 +115,10 @@ namespace Nest
 		double? IMoreLikeThisQuery.BoostTerms { get; set; }
 		string IMoreLikeThisQuery.Analyzer { get; set; }
 		bool? IMoreLikeThisQuery.Include { get; set; }
+		IPerFieldAnalyzer IMoreLikeThisQuery.PerFieldAnalyzer { get; set; }
+		long? IMoreLikeThisQuery.Version { get; set; }
+		VersionType? IMoreLikeThisQuery.VersionType { get; set; }
+		string IMoreLikeThisQuery.Routing { get; set; }
 		IEnumerable<Like> IMoreLikeThisQuery.Like { get; set; }
 		IEnumerable<Like> IMoreLikeThisQuery.Unlike { get; set; }
 
@@ -137,5 +162,13 @@ namespace Nest
 		public MoreLikeThisQueryDescriptor<T> Unlike(Func<LikeDescriptor<T>, IPromise<List<Like>>> selector) =>
 			Assign(a => a.Unlike = selector?.Invoke(new LikeDescriptor<T>())?.Value);
 
+		public MoreLikeThisQueryDescriptor<T> PerFieldAnalyzer(Func<PerFieldAnalyzerDescriptor<T>, IPromise<IPerFieldAnalyzer>> analyzerSelector) =>
+			Assign(a => a.PerFieldAnalyzer = analyzerSelector?.Invoke(new PerFieldAnalyzerDescriptor<T>())?.Value);
+
+		public MoreLikeThisQueryDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
+
+		public MoreLikeThisQueryDescriptor<T> VersionType(VersionType versionType) => Assign(a => a.VersionType = versionType);
+
+		public MoreLikeThisQueryDescriptor<T> Routing(string routing) => Assign(a => a.Routing = routing);
 	}
 }

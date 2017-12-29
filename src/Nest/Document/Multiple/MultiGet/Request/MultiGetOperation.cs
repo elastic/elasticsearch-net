@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -12,6 +13,7 @@ namespace Nest
 			this.Type = typeof(T);
 		}
 
+		public VersionType? VersionType { get; set; }
 		Type IMultiGetOperation.ClrType => typeof(T);
 
 		public IndexName Index { get; set; }
@@ -23,6 +25,8 @@ namespace Nest
 		public Fields StoredFields { get; set; }
 
 		public Union<bool, ISourceFilter> Source { get; set; }
+
+		public long? Version { get; set; }
 
 		public string Routing { get; set; }
 
@@ -45,6 +49,8 @@ namespace Nest
 		Id IMultiGetOperation.Id { get; set; }
 		string IMultiGetOperation.Routing { get; set; }
 		Union<bool, ISourceFilter> IMultiGetOperation.Source { get; set; }
+		long? IMultiGetOperation.Version { get; set; }
+		VersionType? IMultiGetOperation.VersionType { get; set; }
 		Fields IMultiGetOperation.StoredFields { get; set; }
 		Type IMultiGetOperation.ClrType => typeof(T);
 
@@ -112,6 +118,10 @@ namespace Nest
 			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public MultiGetOperationDescriptor<T> StoredFields(Fields fields) => Assign(a => a.StoredFields = fields);
+
+		public MultiGetOperationDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
+
+		public MultiGetOperationDescriptor<T> VersionType(VersionType versionType) => Assign(a => a.VersionType = versionType);
 
 	}
 }
