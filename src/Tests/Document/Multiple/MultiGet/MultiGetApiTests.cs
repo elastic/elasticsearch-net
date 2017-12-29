@@ -83,7 +83,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override object ExpectJson { get; } = new
 		{
-			docs = Developer.Developers.Select(p => new { _type = "developer", _id = p.Id, _routing = p.Id.ToString(), _source = false }).Take(10)
+			docs = Developer.Developers.Select(p => new { _type = "developer", _id = p.Id, routing = p.Id.ToString(), _source = false }).Take(10)
 		};
 
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d
@@ -185,7 +185,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override object ExpectJson => new
 		{
-			docs = _activities.Select(p => new { _id = p.Id, _routing = p.ProjectName })
+			docs = _activities.Select(p => new { _id = p.Id, routing = p.ProjectName })
 		};
 
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d

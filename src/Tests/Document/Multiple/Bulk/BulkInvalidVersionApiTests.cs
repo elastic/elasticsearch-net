@@ -33,7 +33,7 @@ namespace Tests.Document.Multiple.Bulk
 		{
 			new Dictionary<string, object>{ { "index", new { _type="doc", _id = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "index", new { _type="doc", _id = Project.Instance.Name, _version = 0 } } },
+			new Dictionary<string, object>{ { "index", new { _type="doc", _id = Project.Instance.Name, version = 0 } } },
 			Project.InstanceAnonymous,
 		};
 
