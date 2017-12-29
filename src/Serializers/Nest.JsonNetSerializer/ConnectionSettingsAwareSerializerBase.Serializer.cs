@@ -39,7 +39,7 @@ namespace Nest.JsonNetSerializer
 			BuiltinSerializer = builtinSerializer;
 			this.Converters = new List<JsonConverter>
 			{
-				new RevertBackToBuiltinSerializer(BuiltinSerializer),
+				new HandleNestTypesOnSourceJsonConverter(BuiltinSerializer),
 				new TimeSpanToStringConverter()
 			};
 			_serializer = CreateSerializer(SerializationFormatting.Indented);

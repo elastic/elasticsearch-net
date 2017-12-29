@@ -9,13 +9,13 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.JsonNetSerializer.Converters
 {
-	internal class RevertBackToBuiltinSerializer : JsonConverter
+	public class HandleNestTypesOnSourceJsonConverter : JsonConverter
 	{
 		private readonly IElasticsearchSerializer _builtInSerializer;
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
 
-		public RevertBackToBuiltinSerializer(IElasticsearchSerializer builtInSerializer)
+		public HandleNestTypesOnSourceJsonConverter(IElasticsearchSerializer builtInSerializer)
 		{
 			_builtInSerializer = builtInSerializer;
 		}
@@ -49,8 +49,5 @@ namespace Nest.JsonNetSerializer.Converters
 		};
 
 		public override bool CanConvert(Type objectType) => NestTypesThatCanAppearInSource.Contains(objectType);
-
-
-
 	}
 }
