@@ -72,6 +72,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								.Name(p=>p.MyJoinField)
 								.Relations(r => r
 									.Join<MyDocument, MyChild>()
+									.Join<MyDocument>(typeof(MyChild), typeof(MyChild))
 								)
 							)
 						)
