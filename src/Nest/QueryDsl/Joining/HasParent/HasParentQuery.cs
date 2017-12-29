@@ -7,8 +7,8 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<HasParentQueryDescriptor<object>>))]
 	public interface IHasParentQuery : IQuery
 	{
-		[JsonProperty("type")]
-		TypeName Type { get; set; }
+		[JsonProperty("parent_type")]
+		TypeName ParentType { get; set; }
 
 		/// <summary>
 		/// Determines whether the score of the matching parent document is aggregated into the child documents belonging to the matching parent document.
@@ -30,7 +30,7 @@ namespace Nest
 	public class HasParentQuery : QueryBase, IHasParentQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
-		public TypeName Type { get; set; }
+		public TypeName ParentType { get; set; }
 
 		/// <summary>
 		/// Determines whether the score of the matching parent document is aggregated into the child documents belonging to the matching parent document.
@@ -42,7 +42,7 @@ namespace Nest
 		public bool? IgnoreUnmapped { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.HasParent = this;
-		internal static bool IsConditionless(IHasParentQuery q) => q.Query == null || q.Query.IsConditionless || q.Type == null;
+		internal static bool IsConditionless(IHasParentQuery q) => q.Query == null || q.Query.IsConditionless || q.ParentType == null;
 	}
 
 	public class HasParentQueryDescriptor<T>
@@ -50,7 +50,7 @@ namespace Nest
 		, IHasParentQuery where T : class
 	{
 		protected override bool Conditionless => HasParentQuery.IsConditionless(this);
-		TypeName IHasParentQuery.Type { get; set; }
+		TypeName IHasParentQuery.ParentType { get; set; }
 
 		/// <summary>
 		/// Determines whether the score of the matching parent document is aggregated into the child documents belonging to the matching parent document.
@@ -61,12 +61,12 @@ namespace Nest
 		QueryContainer IHasParentQuery.Query { get; set; }
 		bool? IHasParentQuery.IgnoreUnmapped { get; set; }
 
-		public HasParentQueryDescriptor() { Self.Type = TypeName.Create<T>(); }
+		public HasParentQueryDescriptor() { Self.ParentType = TypeName.Create<T>(); }
 
 		public HasParentQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public HasParentQueryDescriptor<T> Type(string type) => Assign(a => a.Type = type);
+		public HasParentQueryDescriptor<T> ParentType(string type) => Assign(a => a.ParentType = type);
 
 		/// <summary>
 		/// Determines whether the score of the matching parent document is aggregated into the child documents belonging to the matching parent document.
