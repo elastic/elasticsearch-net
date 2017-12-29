@@ -15,7 +15,7 @@ namespace Tests.QueryDsl.Joining.HasParent
 			{
 				_name = "named_query",
 				boost = 1.1,
-				type = "developer",
+				parent_type = "developer",
 				score = true,
 				ignore_unmapped = true,
 				query = new
@@ -33,7 +33,7 @@ namespace Tests.QueryDsl.Joining.HasParent
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Type = Infer.Type<Developer>(),
+			ParentType = Infer.Type<Developer>(),
 			InnerHits = new InnerHits { Explain = true },
 			Query = new MatchAllQuery(),
 			Score = true,
@@ -54,7 +54,7 @@ namespace Tests.QueryDsl.Joining.HasParent
 		{
 			q =>  q.Query = null,
 			q =>  q.Query = ConditionlessQuery,
-			q =>  q.Type = null,
+			q =>  q.ParentType = null,
 		};
 	}
 }
