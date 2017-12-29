@@ -11,9 +11,7 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => true;
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			FromJson.ReadAs<T>(reader, serializer);

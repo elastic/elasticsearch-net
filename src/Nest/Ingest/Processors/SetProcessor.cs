@@ -15,6 +15,7 @@ namespace Nest
 		Field Field { get; set; }
 
 		[JsonProperty("value")]
+		[JsonConverter(typeof(SourceValueWriteConverter))]
 		object Value { get; set; }
 	}
 

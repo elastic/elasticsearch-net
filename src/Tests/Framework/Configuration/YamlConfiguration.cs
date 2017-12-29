@@ -28,9 +28,8 @@ namespace Tests.Framework.Configuration
 
 			this.Mode = GetTestMode(_config["mode"]);
 			this.ElasticsearchVersion = ElasticsearchVersion.GetOrAdd(_config["elasticsearch_version"]);
-			this.ForceReseed = bool.Parse(_config["force_reseed"]);
-			this.TestAgainstAlreadyRunningElasticsearch =
-				_config.TryGetValue("test_against_already_running_elasticsearch", out var tar) && bool.Parse(tar);
+			this.ForceReseed = BoolConfig("force_reseed", false);
+			this.TestAgainstAlreadyRunningElasticsearch = BoolConfig("test_against_already_running_elasticsearch", false);
 			this.ClusterFilter = _config.ContainsKey("cluster_filter") ? _config["cluster_filter"] : null;
 			this.TestFilter = _config.ContainsKey("test_filter") ? _config["test_filter"] : null;
 
@@ -39,12 +38,15 @@ namespace Tests.Framework.Configuration
 			var randomizer = new Randomizer();
 			this.Random = new RandomConfiguration
 			{
-				SourceSerializer = BoolConfig("source_serializer", randomizer),
-				TypedKeys = BoolConfig("typed_keys", randomizer)
+				SourceSerializer = RandomBool("source_serializer", randomizer),
+				TypedKeys = RandomBool("typed_keys", randomizer)
 			};
 		}
 
-		private bool BoolConfig(string key, Randomizer randomizer) =>
+		private bool BoolConfig(string key, bool @default) =>
+			_config.TryGetValue(key, out var v) ? bool.Parse(v) : @default;
+
+		private bool RandomBool(string key, Randomizer randomizer) =>
 			_config.TryGetValue($"random_{key}", out var v) ? bool.Parse(v) : randomizer.Bool();
 
 		private static string ConfigName(string configLine) => Parse(configLine, 0);

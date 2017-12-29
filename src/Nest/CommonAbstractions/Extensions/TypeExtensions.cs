@@ -117,8 +117,7 @@ namespace Nest
 		internal static IList<JsonProperty> GetCachedObjectProperties(this Type t,
 			MemberSerialization memberSerialization = MemberSerialization.OptIn)
 		{
-			IList<JsonProperty> propertyDictionary;
-			if (CachedTypeProperties.TryGetValue(t, out propertyDictionary))
+			if (CachedTypeProperties.TryGetValue(t, out var propertyDictionary))
 				return propertyDictionary;
 			propertyDictionary = JsonContract.PropertiesOfAll(t, memberSerialization);
 			CachedTypeProperties.TryAdd(t, propertyDictionary);

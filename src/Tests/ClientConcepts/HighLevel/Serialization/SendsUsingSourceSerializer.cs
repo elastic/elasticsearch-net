@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.SourceSerializers;
+using Tests.Framework.MockData;
 using static Tests.Framework.RoundTripper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
@@ -42,6 +45,11 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				};
 			}
 
+			protected override IEnumerable<JsonConverter> CreateJsonConverters()
+			{
+				foreach (var c in base.CreateJsonConverters()) yield return c;
+				yield return new StringEnumConverter();
+			}
 		}
 
 		private static void CanAlterSource<T>(Func<IElasticClient, T> call, object usingDefaults, object withSourceSerializer)
@@ -52,6 +60,24 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			WithSourceSerializer((s, c) => new CustomSettingsSerializerBase(s, c))
 				.Expect(withSourceSerializer)
 				.FromRequest(call);
+		}
+
+		private static void Serializes<T>(T o, object usingDefaults, object withSourceSerializer)
+		{
+			SerializesDefault(o, usingDefaults);
+			SerializesSourceSerializer(o, withSourceSerializer);
+		}
+
+		private static void SerializesSourceSerializer<T>(T o, object withSourceSerializer)
+		{
+			WithSourceSerializer((s, c) => new CustomSettingsSerializerBase(s, c))
+				.Expect(withSourceSerializer)
+				.WhenSerializing(o);
+		}
+
+		private static void SerializesDefault<T>(T o, object usingDefaults)
+		{
+			Expect(usingDefaults).WhenSerializing(o);
 		}
 
 		[U] public void IndexRequest()
@@ -153,6 +179,36 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				),
 				usingDefaults: ExpectMultiTermVectors(DefaultSerialized),
 				withSourceSerializer: ExpectMultiTermVectors(IncludesNullAndType)
+			);
+		}
+
+		public enum SomeEnum
+		{
+			Value,
+			[EnumMember(Value = "different")]
+			AnotherValue
+		}
+
+		[U] public void TermQuery() =>
+			SerializesEnumValue(new TermQuery { Field = Infer.Field<Project>(p=>p.Name), Value = SomeEnum.AnotherValue});
+
+		[U] public void WildcardQuery() =>
+			SerializesEnumValue(new WildcardQuery {Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue});
+
+		[U] public void PrefixQuery() =>
+			SerializesEnumValue(new PrefixQuery { Field = Infer.Field<Project>(p=>p.Name), Value = SomeEnum.AnotherValue});
+
+		[U] public void SpanTermQueryInitializer() =>
+			SerializesEnumValue(new SpanTermQuery { Field = Infer.Field<Project>(p=>p.Name), Value = SomeEnum.AnotherValue});
+
+		[U] public void SpanTermQueryFluent() =>
+			SerializesEnumValue<ISpanTermQuery>(new SpanTermQueryDescriptor<Project>().Field(p=>p.Name).Value(SomeEnum.AnotherValue));
+
+		private static void SerializesEnumValue<T>(T query)
+		{
+			Serializes(query,
+				usingDefaults: new {name = new {value = 1}},
+				withSourceSerializer: new {name = new {value = "different"}}
 			);
 		}
 	}
