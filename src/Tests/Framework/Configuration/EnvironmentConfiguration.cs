@@ -39,13 +39,18 @@ namespace Tests.Framework.Configuration
 
 			this.Random = new RandomConfiguration
 			{
-				SourceSerializer = BoolConfig("SOURCESERIALIZER", randomizer),
-				TypedKeys = BoolConfig("TYPEDKEYS", randomizer),
+				SourceSerializer = RandomBoolConfig("SOURCESERIALIZER", randomizer),
+				TypedKeys = RandomBoolConfig("TYPEDKEYS", randomizer),
 			};
 		}
 
-		private static bool BoolConfig(string key, Randomizer randomizer) =>
-			(TryGetEnv("NEST_RANDOM_" + key, out var source) && bool.Parse(source)) || randomizer.Bool();
+		private static bool RandomBoolConfig(string key, Randomizer randomizer)
+		{
+			if (TryGetEnv("NEST_RANDOM_" + key, out var source) && bool.TryParse(source, out var b))
+				return b;
+			return randomizer.Bool();
+		}
+
 
 		private static bool TryGetEnv(string key, out string value)
 		{

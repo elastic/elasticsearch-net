@@ -2,17 +2,64 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
 	internal class AggregateDictionaryConverter : VerbatimDictionaryKeysJsonConverter<string, IAggregate>
 	{
+		private static readonly AggregateJsonConverter OldSchoolHeuristicsParser = new AggregateJsonConverter();
+
 		public override bool CanRead => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var dict = serializer.Deserialize<Dictionary<string, IAggregate>>(reader);
-			return new AggregateDictionary(dict);
+			var dictionary = new Dictionary<string, IAggregate>();
+			if (reader.TokenType != JsonToken.StartObject)
+			{
+				reader.Skip();
+				return new AggregateDictionary(dictionary);
+			}
+
+			var depth = reader.Depth;
+			while (reader.Depth >= depth)
+			{
+				reader.Read();
+				var typedProperty = reader.Value as string;
+				if (typedProperty.IsNullOrEmpty()) break;
+				var tokens = AggregateDictionary.TypedKeyTokens(typedProperty);
+				if (tokens.Length == 1)
+				{
+					ParseAggregate(reader, serializer, tokens[0], dictionary);
+				}
+				else
+				{
+					var name = tokens[1];
+					var type = tokens[0];
+					switch (type)
+					{
+							case "geo_centroid":
+								reader.Read();
+								var geoCentroid = serializer.Deserialize<GeoCentroidAggregate>(reader);
+								dictionary.Add(name, geoCentroid);
+								break;
+							default:
+								//still fall back to heuristics based parsed in case we do not know the key
+								ParseAggregate(reader, serializer, name, dictionary);
+								break;
+					}
+				}
+			}
+
+			//var dict = serializer.Deserialize<Dictionary<string, IAggregate>>(reader);
+			return new AggregateDictionary(dictionary);
+		}
+
+		private static void ParseAggregate(JsonReader reader, JsonSerializer serializer, string name, Dictionary<string, IAggregate> dictionary)
+		{
+			reader.Read();
+			var aggregate = OldSchoolHeuristicsParser.ReadJson(reader, typeof(IAggregate), null, serializer) as IAggregate;
+			dictionary.Add(name, aggregate);
 		}
 	}
 
@@ -23,16 +70,29 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregateDictionaryConverter))]
 	public class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
 	{
+		private static string TypedKeysTokens(string key)
+		{
+//typed_keys = true on results in aggregation keys being returned as "<type>#<name>"
+			var tokens = key.Split(TypedKeysSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
+			return tokens.Length > 1 ? tokens[1] : tokens[0];
+		}
+
 		public static AggregateDictionary Default { get; } = new AggregateDictionary(EmptyReadOnly<string, IAggregate>.Dictionary);
 
 		public AggregateDictionary(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary) { }
 
-		private static readonly char[] TypedKeysSeparator = {'#'};
 		protected override string Sanitize(string key)
 		{
 			//typed_keys = true on results in aggregation keys being returned as "<type>#<name>"
-			var tokens = key.Split(TypedKeysSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
+			var tokens = TypedKeyTokens(key);
 			return tokens.Length > 1 ? tokens[1] : tokens[0];
+		}
+
+		internal static readonly char[] TypedKeysSeparator = {'#'};
+		internal static string[] TypedKeyTokens(string key)
+		{
+			var tokens = key.Split(TypedKeysSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
+			return tokens;
 		}
 
 		public ValueAggregate Min(string key) => this.TryGet<ValueAggregate>(key);

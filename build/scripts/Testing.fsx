@@ -34,6 +34,7 @@ module Tests =
             let key = tokens.[0].ToUpper()
             let b = if tokens.Length = 1 then true else (bool.Parse (tokens.[1]))
             let v = sprintf "NEST_RANDOM_%s" key
+            printfn "%s = %O" v b
             setProcessEnvironVar v (if b then "true" else "false")
         ignore()
 
