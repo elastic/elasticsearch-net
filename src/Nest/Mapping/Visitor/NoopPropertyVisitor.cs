@@ -72,66 +72,53 @@ namespace Nest
 
 		public virtual IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => null;
 
+		public virtual bool SkipProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => false;
+
 		public void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
-			var nestedType = type as INestedProperty;
-			if (nestedType != null)
+			if (type is INestedProperty nestedType)
 				Visit(nestedType, propertyInfo, attribute);
 
-			var objectType = type as IObjectProperty;
-			if (objectType != null)
+			if (type is IObjectProperty objectType)
 				Visit(objectType, propertyInfo, attribute);
 
-			var binaryType = type as IBinaryProperty;
-			if (binaryType != null)
+			if (type is IBinaryProperty binaryType)
 				Visit(binaryType, propertyInfo, attribute);
 
-			var booleanType = type as IBooleanProperty;
-			if (booleanType != null)
+			if (type is IBooleanProperty booleanType)
 				Visit(booleanType, propertyInfo, attribute);
 
-			var dateType = type as IDateProperty;
-			if (dateType != null)
+			if (type is IDateProperty dateType)
 				Visit(dateType, propertyInfo, attribute);
 
-			var numberType = type as INumberProperty;
-			if (numberType != null)
+			if (type is INumberProperty numberType)
 				Visit(numberType, propertyInfo, attribute);
 
-			var textType = type as ITextProperty;
-			if (textType != null)
+			if (type is ITextProperty textType)
 				Visit(textType, propertyInfo, attribute);
 
-			var keywordType = type as IKeywordProperty;
-			if (keywordType != null)
+			if (type is IKeywordProperty keywordType)
 				Visit(keywordType, propertyInfo, attribute);
 
-			var attachmentType = type as IAttachmentProperty;
-			if (attachmentType != null)
+			if (type is IAttachmentProperty attachmentType)
 				Visit(attachmentType, propertyInfo, attribute);
 
-			var geoShapeType = type as IGeoShapeProperty;
-			if (geoShapeType != null)
+			if (type is IGeoShapeProperty geoShapeType)
 				Visit(geoShapeType, propertyInfo, attribute);
 
-			var geoPointType = type as IGeoPointProperty;
-			if (geoPointType != null)
+			if (type is IGeoPointProperty geoPointType)
 				Visit(geoPointType, propertyInfo, attribute);
 
-			var completionType = type as ICompletionProperty;
-			if (completionType != null)
+			if (type is ICompletionProperty completionType)
 				Visit(completionType, propertyInfo, attribute);
 
-			var ipType = type as IIpProperty;
-			if (ipType != null)
+			if (type is IIpProperty ipType)
 				Visit(ipType, propertyInfo, attribute);
 
-			var murmurType = type as IMurmur3HashProperty;
-			if (murmurType != null)
+			if (type is IMurmur3HashProperty murmurType)
 				Visit(murmurType, propertyInfo, attribute);
 
-			var tokenCountType = type as ITokenCountProperty;
-			if (tokenCountType != null)
+			if (type is ITokenCountProperty tokenCountType)
 				Visit(tokenCountType, propertyInfo, attribute);
 		}
 	}
