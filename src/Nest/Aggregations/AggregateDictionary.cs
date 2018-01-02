@@ -1,68 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class AggregateDictionaryConverter : VerbatimDictionaryKeysJsonConverter<string, IAggregate>
-	{
-		private static readonly AggregateJsonConverter OldSchoolHeuristicsParser = new AggregateJsonConverter();
-
-		public override bool CanRead => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			var dictionary = new Dictionary<string, IAggregate>();
-			if (reader.TokenType != JsonToken.StartObject)
-			{
-				reader.Skip();
-				return new AggregateDictionary(dictionary);
-			}
-
-			var depth = reader.Depth;
-			while (reader.Depth >= depth)
-			{
-				reader.Read();
-				var typedProperty = reader.Value as string;
-				if (typedProperty.IsNullOrEmpty()) break;
-				var tokens = AggregateDictionary.TypedKeyTokens(typedProperty);
-				if (tokens.Length == 1)
-				{
-					ParseAggregate(reader, serializer, tokens[0], dictionary);
-				}
-				else
-				{
-					var name = tokens[1];
-					var type = tokens[0];
-					switch (type)
-					{
-							case "geo_centroid":
-								reader.Read();
-								var geoCentroid = serializer.Deserialize<GeoCentroidAggregate>(reader);
-								dictionary.Add(name, geoCentroid);
-								break;
-							default:
-								//still fall back to heuristics based parsed in case we do not know the key
-								ParseAggregate(reader, serializer, name, dictionary);
-								break;
-					}
-				}
-			}
-
-			//var dict = serializer.Deserialize<Dictionary<string, IAggregate>>(reader);
-			return new AggregateDictionary(dictionary);
-		}
-
-		private static void ParseAggregate(JsonReader reader, JsonSerializer serializer, string name, Dictionary<string, IAggregate> dictionary)
-		{
-			reader.Read();
-			var aggregate = OldSchoolHeuristicsParser.ReadJson(reader, typeof(IAggregate), null, serializer) as IAggregate;
-			dictionary.Add(name, aggregate);
-		}
-	}
-
 	/// <summary>
 	/// Contains aggregates that are returned by Elasticsearch. In NEST `Aggregation` always refers to an aggregation
 	/// going to elasticsearch and an `Aggregate` describes an aggregation going out.

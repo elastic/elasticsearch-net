@@ -119,6 +119,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 		}
 	}
 
+	[NeedsTypedKeys]
 	public class GeoCentroidNoResultsAggregationUsageTests : AggregationUsageTestBase
 	{
 		public GeoCentroidNoResultsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
