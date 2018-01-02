@@ -38,7 +38,7 @@ new HasParentQuery
 {
     Name = "named_query",
     Boost = 1.1,
-    Type = Infer.Type<Developer>(),
+    ParentType = Infer.Type<Developer>(),
     InnerHits = new InnerHits { Explain = true },
     Query = new MatchAllQuery(),
     Score = true,
@@ -53,7 +53,7 @@ new HasParentQuery
   "has_parent": {
     "_name": "named_query",
     "boost": 1.1,
-    "type": "developer",
+    "parent_type": "developer",
     "score": true,
     "ignore_unmapped": true,
     "query": {

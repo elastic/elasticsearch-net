@@ -75,7 +75,9 @@ var descriptor = new CreateIndexDescriptor(Index<MyDocument>())
     );
 ----
 <1> Map all of the MyParent properties
+
 <2> Map all of the MyChild properties
+
 <3> Automap does not automatically translate `JoinField` since we are only allowed to have one.
 
 [source,javascript]
