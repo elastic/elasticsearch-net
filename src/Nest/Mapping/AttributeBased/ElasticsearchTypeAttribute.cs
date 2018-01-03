@@ -16,8 +16,7 @@ namespace Nest
 
 		public static ElasticsearchTypeAttribute From(Type type)
 		{
-			ElasticsearchTypeAttribute attr;
-			if (CachedTypeLookups.TryGetValue(type, out attr))
+			if (CachedTypeLookups.TryGetValue(type, out var attr))
 				return attr;
 
 			var attributes = type.GetTypeInfo().GetCustomAttributes(typeof(ElasticsearchTypeAttribute), true);

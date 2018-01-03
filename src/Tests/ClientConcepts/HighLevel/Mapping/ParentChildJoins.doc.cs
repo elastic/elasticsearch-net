@@ -21,7 +21,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	*
 	* Starting with 6.x indices, you may no longer have multiple types in a single index. One reason for this is that if for instance
 	* two types * have the same `name` property they need to be mapped exactly the same but all the API's acted as if you could map
-	* them individually which often lead to confusion.
+	* them individually which often lead to confusion. `_type` always acted as a discriminating column but was often explained as a table.
 	*
 	* So how do you create a parent join now that indices no longer allow you store different types in the same index and therefor also
 	* not on the same shard?
@@ -29,6 +29,16 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	*/
 	public class ParentChildJoins : DocumentationTestBase
 	{
+		/**
+		* ==== Parent And Child example
+		*
+		* In the following contrived example we create two .NET types called `MyParent` and `MyChild` both extending from `MyDocument`.
+		* There is no requirement that the parent and child .NET types are related at all. The types could be plain POCO's or `MyChild`
+		* could be a subclass of `MyParent`. The only requirement is that they have **a** property where the property type is `JoinField`.
+		*
+		* As per Elasticsearch's constraints you should only have **a single** property of type JoinField on your POCO.
+		*
+		*/
 		public abstract class MyDocument
 		{
 			public int Id { get; set; }
@@ -48,10 +58,14 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		}
 
 		/**
-		* ==== Default mapping for String properties
+		* ==== Parent And Child mapping
 		*
-		* When using <<auto-map, Auto Mapping>>, the inferred mapping for a `string`
-		* POCO type is a `text` datatype with multi fields including a `keyword` sub field
+		* In the following example we setup our client and give our types prefered index and type names. What's new is that we can
+		* also give a type a preferred `RelationName` as can be seen on the `InferMappingFor<MyParent>`.
+		*
+		* Also note that we give `MyChild` and `MyParent` the same default `doc` type name to make sure they end up in the same index
+		* under the same type.
+		*
 		*/
 		[U]
 		public void SimpleParentChildMapping()
@@ -62,6 +76,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				.InferMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
 				.InferMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
 
+			/**
+			* with the `connectionSettings` all setup we can proceed to map `MyParent` and `MyChild` as part of the create index request.
+			*/
 			var descriptor = new CreateIndexDescriptor(Index<MyDocument>())
 				.Mappings(ms => ms
 					.Map<MyDocument>(m => m
@@ -71,19 +88,28 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							.Join(j => j // <3> Automap does not automatically translate `JoinField` since we are only allowed to have one.
 								.Name(p=>p.MyJoinField)
 								.Relations(r => r
-									.Join<MyDocument, MyChild>()
+									.Join<MyParent, MyChild>()
 								)
 							)
 						)
 					)
 				);
 
+			/**
+			* We call `AutoMap()` for both types to discover properties of both .NET types. `AutoMap()` won't automatically setup the
+			* join field mapping though because NEST can not infer all the `Relations` that are required by your domain.
+			*
+			* In this case we setup `MyChild` to be child of `MyParent`. `.Join()` has many overloads so be sure to check them out if you
+			* need to map not one but multiple children.
+			*
+			*/
+
 			//json
 			var expected = new
 			{
 				mappings = new
 				{
-					mydocument = new
+					doc = new
 					{
 						properties = new
 						{
@@ -95,7 +121,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								type = "join",
 								relations = new
 								{
-									mydocument = "mychild"
+									parent = "mychild"
 								}
 							}
 						}
@@ -103,24 +129,50 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
+			/**
+			* Note how `MyParent`'s relation name is `parent` because of the mapping on connection settings. This also comes in handy
+			* later when doing strongly typed `has_child` and `has_parent` queries.
+			*/
+
 			//hide
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			WithConnectionSettings(s => connectionSettings)
+				.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
 		/**
-		 * Now that we have our join field set up we'll index our two subclasses under the same type `mydocument`
-		 */
+		* ==== Indexing parents or children
+		*
+		* Now that we have our join field mapping set up on the index we can proceed to index parents and children documents.
+		*/
 
 		[U]
 		public void Indexing()
 		{
 			// hide
 			var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
+			/**
+			* To mark a document with the relation name of the parent `MyParent` all of the following three ways are equivalent.
+			*
+			* In the first we explicitly call `JoinField.Root` to mark this document as the root of a parent child relationship namely
+			* that of `MyParent`. In the following examples we rely on implicit conversion from `string` and `Type` to do the same.
+			*/
 			var parentDocument = new MyParent
 			{
 				Id = 1,
 				ParentProperty = "a parent prop",
-				MyJoinField = JoinField.Root<MyParent>() // <1> this lets the join data type know this is a root document of type `myparent`
+				MyJoinField = JoinField.Root<MyParent>()
+			};
+			parentDocument = new MyParent
+			{
+				Id = 1,
+				ParentProperty = "a parent prop",
+				MyJoinField = typeof(MyParent) // <1> this lets the join data type know this is a root document of type `myparent`
+			};
+			parentDocument = new MyParent
+			{
+				Id = 1,
+				ParentProperty = "a parent prop",
+				MyJoinField = "parent" // <1> this lets the join data type know this is a root document of type `myparent`
 			};
 			var indexParent = client.IndexDocument<MyDocument>(parentDocument);
 			//json
@@ -132,10 +184,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 			Expect(expected).FromRequest(indexParent);
 
-			/**
-			* Note: you can simply implicitly convert from string to indicate the root name for the join field
-			*/
-			JoinField parentJoinField = "aparent";
 
 			/**
 			 * Linking the child document to its parent follows a similar pattern.
@@ -180,7 +228,43 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(childLink).WhenSerializing(JoinField.Link<MyChild, MyParent>(parentDocument));
 			Expect(childLink).WhenSerializing(JoinField.Link("mychild", 1));
 			Expect(childLink).WhenSerializing(JoinField.Link(typeof(MyChild), 1));
-
 		}
+
+		/**
+		 * ==== Routing parent child documents
+		 *
+		 * A parent and all of it's (grand)children still need to live on the same shard so you still need to take care of specifying routing.
+		 *
+		 * In the past you would have to provide the parent id on the request using `parent=<parentid>` this was always an alias for routing
+		 * and thus in Elasticsearch 6.x you need to provide `routing=<parentid>` instead.
+		 *
+		 * NEST has a handy helper to infer the correct routing value given a document that is smart enough to find the join field and infer
+		 * correct parent.
+		 */
+
+		[U] public void Inferrence()
+		{
+			// hide
+			var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
+			var infer = client.Infer;
+			var parentDocument = new MyParent { Id = 1337, MyJoinField = JoinField.Root<MyParent>() };
+			infer.JoinRouting(parentDocument).Should().Be("1337");
+
+			var child = new MyChild { Id =  1338, MyJoinField = JoinField.Link<MyChild>(parentId: "1337") };
+			infer.JoinRouting(child).Should().Be("1337");
+
+			child = new MyChild { Id =  1339, MyJoinField = JoinField.Link<MyChild, MyParent>(parentDocument) };
+			infer.JoinRouting(child).Should().Be("1337");
+
+			var indexResponse = client.Index<MyDocument>(parentDocument, i=>i.Routing(infer.JoinRouting(child)));
+			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+		}
+        /** [NOTE]
+         * --
+		 * If you use multiple levels of parent and child relations e.g `A => B => C` when you index `C` you
+		 * need to provide the id of `A` as the routing key but the id of `B` to set up the relation on the join field. In this case NEST
+         * `JoinRouting` helper is unable to resolve to the id of `A` and will return the id of `B`.
+		 *
+		 */
 	}
 }

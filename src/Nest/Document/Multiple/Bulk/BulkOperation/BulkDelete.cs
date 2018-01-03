@@ -14,8 +14,8 @@ namespace Nest
 		public BulkDeleteOperation(T document)
 		{
 			this.Document = document;
-		} 
-		
+		}
+
 		public BulkDeleteOperation(Id id) { this.Id = id; }
 
 		protected override string Operation => "delete";
@@ -28,6 +28,7 @@ namespace Nest
 
 		public T Document { get; set; }
 	}
+
 	public class BulkDeleteDescriptor<T> : BulkOperationDescriptorBase<BulkDeleteDescriptor<T>, IBulkDeleteOperation<T>>, IBulkDeleteOperation<T>
 		where T : class
 	{

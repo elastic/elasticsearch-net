@@ -17,6 +17,7 @@ namespace Nest
 		private TypeNameResolver TypeNameResolver { get; }
 		private RelationNameResolver RelationNameResolver { get; }
 		private FieldResolver FieldResolver { get; }
+		private JoinFieldRoutingResolver JoinFieldRoutingResolver { get; }
 
 		internal ConcurrentDictionary<Type, JsonContract> Contracts { get; }
 		internal ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>> CreateMultiHitDelegates { get; }
@@ -31,11 +32,13 @@ namespace Nest
 			this.TypeNameResolver = new TypeNameResolver(connectionSettings);
 			this.RelationNameResolver = new RelationNameResolver(connectionSettings);
 			this.FieldResolver = new FieldResolver(connectionSettings);
+			this.JoinFieldRoutingResolver = new JoinFieldRoutingResolver(connectionSettings, this.IdResolver);
 
 			this.Contracts = new ConcurrentDictionary<Type, JsonContract>();
 			this.CreateMultiHitDelegates = new ConcurrentDictionary<Type, Action<MultiGetHitJsonConverter.MultiHitTuple, JsonSerializer, ICollection<IMultiGetHit<object>>>>();
 			this.CreateSearchResponseDelegates = new ConcurrentDictionary<Type, Action<MultiSearchResponseJsonConverter.SearchHitTuple, JsonSerializer, IDictionary<string, object>>>();
 		}
+
 		public string Resolve(IUrlParameter urlParameter) => urlParameter.GetString(this._connectionSettings);
 
 		public string Field(Field field) => this.FieldResolver.Resolve(field);
@@ -57,5 +60,7 @@ namespace Nest
 		public string RelationName<T>() where T : class => this.RelationNameResolver.Resolve<T>();
 
 		public string RelationName(RelationName type) => this.RelationNameResolver.Resolve(type);
+
+		public string JoinRouting<T>(T document) => this.JoinFieldRoutingResolver.Resolve(document);
 	}
 }
