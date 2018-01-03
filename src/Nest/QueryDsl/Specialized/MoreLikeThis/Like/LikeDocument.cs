@@ -40,7 +40,12 @@ namespace Nest
 
 		public Fields Fields { get; set; }
 
-		public Routing Routing { get; set; }
+		private Routing _routing;
+		public Routing Routing
+		{
+			get => _routing ?? (Document == null ? null : new Routing(Document));
+			set => _routing = value;
+		}
 
 		public object Document { get; set; }
 
@@ -73,7 +78,14 @@ namespace Nest
 		IndexName ILikeDocument.Index { get; set; }
 		TypeName ILikeDocument.Type { get; set; }
 		Id ILikeDocument.Id { get; set; }
-		Routing ILikeDocument.Routing { get; set; }
+
+		private Routing _routing;
+		Routing ILikeDocument.Routing
+		{
+			get => _routing ?? (Self.Document == null ? null : new Routing(Self.Document));
+			set => _routing = value;
+		}
+
 		Fields ILikeDocument.Fields { get; set; }
 		object ILikeDocument.Document { get; set; }
 		IPerFieldAnalyzer ILikeDocument.PerFieldAnalyzer { get; set; }

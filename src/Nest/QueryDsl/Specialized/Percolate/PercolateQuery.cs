@@ -128,11 +128,16 @@ namespace Nest
 		/// </summary>
 		public TypeName Type { get; set; }
 
+		private Routing _routing;
 		/// <summary>
 		/// Routing to be used to fetch the document to percolate.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document"/>
 		/// </summary>
-		public Routing Routing { get; set; }
+		public Routing Routing
+		{
+			get => _routing ?? (Document == null ? null : new Routing(Document));
+			set => _routing = value;
+		}
 
 		/// <summary>
 		/// Preference to be used to fetch the document to percolate.
@@ -161,7 +166,14 @@ namespace Nest
 		Id IPercolateQuery.Id { get; set; }
 		IndexName IPercolateQuery.Index { get; set; }
 		TypeName IPercolateQuery.Type { get; set; }
-		Routing IPercolateQuery.Routing { get; set; }
+
+		private Routing _routing;
+		Routing IPercolateQuery.Routing
+		{
+			get => _routing ?? (Self.Document == null ? null : new Routing(Self.Document));
+			set => _routing = value;
+		}
+
 		string IPercolateQuery.Preference { get; set; }
 		long? IPercolateQuery.Version { get; set; }
 

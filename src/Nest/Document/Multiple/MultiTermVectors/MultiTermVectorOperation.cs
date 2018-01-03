@@ -40,6 +40,7 @@ namespace Nest
 	public class MultiTermVectorOperation<T> : IMultiTermVectorOperation
 		where T : class
 	{
+
 		public MultiTermVectorOperation(Id id)
 		{
 			this.Id = id;
@@ -60,7 +61,13 @@ namespace Nest
 		public ITermVectorFilter Filter { get; set; }
 		public long? Version { get; set; }
 		public VersionType? VersionType { get; set; }
-		public Routing Routing { get; set; }
+
+		private Routing _routing;
+		public Routing Routing
+		{
+			get => _routing ?? (Document == null ? null : new Routing(Document));
+			set => _routing = value;
+		}
 	}
 
 	public class MultiTermVectorOperationDescriptor<T> : DescriptorBase<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation>, IMultiTermVectorOperation
@@ -79,7 +86,13 @@ namespace Nest
 		ITermVectorFilter IMultiTermVectorOperation.Filter { get; set; }
 		long? IMultiTermVectorOperation.Version { get; set; }
 		VersionType? IMultiTermVectorOperation.VersionType { get; set; }
-		Routing IMultiTermVectorOperation.Routing { get; set; }
+
+		private Routing _routing;
+		Routing IMultiTermVectorOperation.Routing
+		{
+			get => _routing ?? (Self.Document == null ? null : new Routing(Self.Document));
+			set => _routing = value;
+		}
 
 		public MultiTermVectorOperationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
