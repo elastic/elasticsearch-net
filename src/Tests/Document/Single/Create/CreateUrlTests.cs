@@ -21,19 +21,19 @@ namespace Tests.Document.Single.Create
 					Document = new { }
 				}));
 
-			await PUT("/project/doc/NEST/_create")
+			await PUT("/project/doc/NEST/_create?routing=NEST")
 				.Fluent(c => c.CreateDocument(project))
 				.Request(c => c.Create(new CreateRequest<Project>(project)))
 				.FluentAsync(c => c.CreateDocumentAsync(project))
 				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project)));
 
-			await PUT("/project/project/NEST/_create")
+			await PUT("/project/project/NEST/_create?routing=NEST")
 				.Fluent(c => c.Create(project, cc=>cc.Index("project").Type("project")))
 				.Request(c => c.Create(new CreateRequest<Project>(project, "project", "project", "NEST") {Document = project}))
 				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project, "project", "project", "NEST") {Document = project}))
 				.FluentAsync(c => c.CreateAsync(project, cc=>cc.Index("project").Type("project")));
 
-			await PUT("/different-projects/project/elasticsearch/_create")
+			await PUT("/different-projects/project/elasticsearch/_create?routing=NEST")
 				.Request(c => c.Create(new CreateRequest<Project>("different-projects", "project", "elasticsearch") { Document = project }))
 				.Request(c => c.Create(new CreateRequest<Project>(project, "different-projects", "project", "elasticsearch")))
 				.RequestAsync(c => c.CreateAsync(new CreateRequest<Project>(project, "different-projects", "project", "elasticsearch")))

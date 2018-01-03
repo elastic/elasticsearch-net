@@ -9,12 +9,11 @@ namespace Tests.Document.Single.Update
 	public class UpdateUrlTests
 	{
 
-		[U]
-		public async Task Urls()
+		[U] public async Task Urls()
 		{
 			var document = new Project { Name = "foo" };
 
-			await POST($"/project/doc/foo/_update")
+			await POST($"/project/doc/foo/_update?routing=foo")
 				.Fluent(c => c.Update<Project>(document, u => u))
 				.Request(c => c.Update(new UpdateRequest<Project, object>(document)))
 				.FluentAsync(c => c.UpdateAsync<Project>(document, u => u))

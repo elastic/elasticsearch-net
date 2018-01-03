@@ -12,7 +12,7 @@ namespace Tests.Document.Single.Index
 		{
 			var project = new Project { Name = "NEST" };
 
-			await POST("/project/doc")
+			await POST("/project/doc?routing=NEST")
 				.Fluent(c => c.Index(project, i => i.Id(null)))
 				.Request(c => c.Index(new IndexRequest<Project>("project", "doc") { Document = project }))
 				.FluentAsync(c => c.IndexAsync(project, i => i.Id(null)))
@@ -32,7 +32,7 @@ namespace Tests.Document.Single.Index
 				}))
 				;
 
-			await PUT("/project/doc/NEST")
+			await PUT("/project/doc/NEST?routing=NEST")
 				.Fluent(c => c.IndexDocument(project))
 				.Request(c => c.Index(new IndexRequest<Project>("project", "doc", "NEST") { Document = project }))
 				.Request(c => c.Index(new IndexRequest<Project>(project)))

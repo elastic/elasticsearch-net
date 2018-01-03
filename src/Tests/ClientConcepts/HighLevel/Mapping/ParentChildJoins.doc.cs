@@ -111,6 +111,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				{
 					doc = new
 					{
+						_routing = new { required = true },
 						properties = new
 						{
 							parentProperty = new {type = "text"},
