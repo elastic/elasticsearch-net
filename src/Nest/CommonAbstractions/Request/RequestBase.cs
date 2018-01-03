@@ -62,7 +62,7 @@ namespace Nest
 
 		protected TOut Q<TOut>(string name) => RequestState.RequestParameters.GetQueryStringValue<TOut>(name);
 
-		protected void Q(string name, object value) => RequestState.RequestParameters.AddQueryStringValue(name, value);
+		protected void Q(string name, object value) => RequestState.RequestParameters.SetQueryStringValue(name, value);
 
 	}
 

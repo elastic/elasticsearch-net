@@ -21,7 +21,7 @@ namespace Nest
 	{
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
     {
-        if (!method.Url.Params.Any(p => p.Key.Contains("field") || p.Key.Contains("source_")))
+        if (!method.Url.Params.Any(p => p.Key.Contains("field") || p.Key.Contains("source_") || p.Key.Contains("routing")))
         {
             continue;
         }
@@ -36,7 +36,7 @@ namespace Nest
             var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
             var setter = mm;
             var isFields = (mm.Contains("fields") || mm.Contains("source_include") || mm.Contains("source_exclude"));
-            if (isFields && fieldType.Contains("string"))
+	        if (isFields && fieldType.Contains("string"))
             {
                 fieldType = "IEnumerable<Field>";
                 setter = mm + ".Select(f=>(Field)f)";
@@ -50,14 +50,21 @@ namespace Nest
 		<text>
 		///<summary>@kv.Value.Description</summary>
 		internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(this @method.QueryStringParamName qs, @Raw("IEnumerable<Expression<Func<T, object>>> ") @mm) where T : class =>
-			qs.AddQueryString("@kv.Value.OriginalQueryStringParamName", @mm@Raw(".Select(e=>(Field)e)"));</text>
+			qs.SetQueryString("@kv.Value.OriginalQueryStringParamName", @mm@Raw(".Select(e=>(Field)e)"));</text>
 		}
 		else if (mm.Contains("field") && fieldType.Contains("Field"))
 		{
 		<text>
 		///<summary>@kv.Value.Description</summary>
 		internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(this @method.QueryStringParamName qs, @Raw("Expression<Func<T, object>>") @mm) where T : class =>
-			qs.AddQueryString("@mm", (Field)@mm);</text>
+			qs.SetQueryString("@mm", (Field)@mm);</text>
+		}
+		else if (mm.Contains("routing"))
+		{
+		<text>
+		///<summary>@kv.Value.Description</summary>
+		internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(this @method.QueryStringParamName qs, @Raw("T") @mm) where T : class =>
+			qs.SetQueryString("@mm", new Routing(() => @mm));</text>
 		}
 	}
 	}

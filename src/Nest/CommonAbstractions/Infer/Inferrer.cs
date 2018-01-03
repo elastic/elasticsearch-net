@@ -49,9 +49,9 @@ namespace Nest
 
 		public string IndexName(IndexName index) => this.IndexNameResolver.Resolve(index);
 
-		public string Id<T>(T obj) where T : class => this.IdResolver.Resolve(obj);
+		public string Id<T>(T instance) where T : class => this.IdResolver.Resolve(instance);
 
-		public string Id(Type objType, object obj) => this.IdResolver.Resolve(objType, obj);
+		public string Id(Type type, object instance) => this.IdResolver.Resolve(type, instance);
 
 		public string TypeName<T>() where T : class => this.TypeNameResolver.Resolve<T>();
 
@@ -62,5 +62,6 @@ namespace Nest
 		public string RelationName(RelationName type) => this.RelationNameResolver.Resolve(type);
 
 		public string JoinRouting<T>(T document) => this.JoinFieldRoutingResolver.Resolve(document);
+		public string JoinRouting(Type type, object instance) => this.JoinFieldRoutingResolver.Resolve(type, instance);
 	}
 }

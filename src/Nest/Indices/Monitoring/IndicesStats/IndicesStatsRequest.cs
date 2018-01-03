@@ -2,12 +2,12 @@
 
 namespace Nest
 {
-	public partial interface IIndicesStatsRequest 
+	public partial interface IIndicesStatsRequest
 	{
 		IEnumerable<TypeName> Types { get; set; }
 	}
 
-	public partial class IndicesStatsRequest 
+	public partial class IndicesStatsRequest
 	{
 		private IEnumerable<TypeName> _types;
 		public IEnumerable<TypeName> Types
@@ -15,7 +15,7 @@ namespace Nest
 			get { return _types; }
 			set
 			{
-				if (value.HasAny()) this.RequestState.RequestParameters.AddQueryString("types", value);
+				if (value.HasAny()) this.RequestState.RequestParameters.SetQueryString("types", value);
 				else this.RequestState.RequestParameters.RemoveQueryString("types");
 				this._types = value;
 			}
@@ -23,15 +23,15 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesStats")]
-	public partial class IndicesStatsDescriptor 
+	public partial class IndicesStatsDescriptor
 	{
 		private IEnumerable<TypeName> _types;
-		IEnumerable<TypeName> IIndicesStatsRequest.Types 
+		IEnumerable<TypeName> IIndicesStatsRequest.Types
 		{
 			get { return _types; }
 			set
 			{
-				if (value.HasAny()) this.RequestState.RequestParameters.AddQueryString("types", value);
+				if (value.HasAny()) this.RequestState.RequestParameters.SetQueryString("types", value);
 				else this.RequestState.RequestParameters.RemoveQueryString("types");
 				this._types = value;
 			}

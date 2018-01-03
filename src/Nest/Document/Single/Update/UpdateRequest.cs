@@ -61,7 +61,7 @@ namespace Nest
 		public Fields Fields
 		{
 			get => Self.RequestParameters.GetQueryStringValue<Fields>("fields");
-			set => Self.RequestParameters.AddQueryString("fields", value);
+			set => Self.RequestParameters.SetQueryString("fields", value);
 		}
 	}
 
@@ -103,7 +103,7 @@ namespace Nest
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(Fields fields) =>
-			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
+			Assign(a => a.RequestParameters.SetQueryString("fields", fields));
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Source(bool enabled = true) => Assign(a => a.Source = enabled);
 
@@ -112,10 +112,10 @@ namespace Nest
 
 		[Obsolete("Removed in Elasticsearch 7.x, use source filtering instead")]
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) =>
-			Assign(a => a.RequestParameters.AddQueryString("fields", typedPathLookups));
+			Assign(a => a.RequestParameters.SetQueryString("fields", typedPathLookups));
 
 		[Obsolete("Removed in Elasticsearch 7.x, use source filtering instead")]
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params string[] fields) =>
-			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
+			Assign(a => a.RequestParameters.SetQueryString("fields", fields));
 	}
 }

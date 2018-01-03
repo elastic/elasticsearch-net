@@ -16,7 +16,7 @@ namespace ApiGenerator.Domain
 		public ApiQueryParameters()
 		{
 			FluentGenerator = (queryStringParamName, mm, original, setter) =>
-				$"public {queryStringParamName} {mm.ToPascalCase()}({CsharpType(mm)} {mm}) => this.AddQueryString(\"{original}\", {setter});";
+				$"public {queryStringParamName} {mm.ToPascalCase()}({CsharpType(mm)} {mm}) => this.SetQueryString(\"{original}\", {setter});";
 		}
 
 		public string CsharpType(string paramName)

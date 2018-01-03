@@ -26,6 +26,6 @@ namespace Elasticsearch.Net
 
 		TOut GetQueryStringValue<TOut>(string name);
 
-		void AddQueryStringValue(string name, object value);
+		void SetQueryStringValue(string name, object value);
 	}
 }
