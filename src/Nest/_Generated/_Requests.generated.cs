@@ -285,8 +285,14 @@ namespace Nest
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
@@ -344,7 +350,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
+			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public  string[] Nodes { get { return Q< string[]>("nodes"); } set { Q("nodes", value); } }
 		
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
@@ -731,7 +737,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
-		///<summary>A health status (&quot;green&quot;, &quot;yellow&quot;, or &quot;red&quot; to filter only indices matching the specified health status</summary>
+		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
 		public Health Health { get { return Q<Health>("health"); } set { Q("health", value); } }
 		
 		///<summary>Return help information</summary>
@@ -1289,7 +1295,7 @@ namespace Nest
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
 		
-		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public  string[] NodeId { get { return Q< string[]>("node_id"); } set { Q("node_id", value); } }
 		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
@@ -1749,7 +1755,7 @@ namespace Nest
 	public partial class ClusterAllocationExplainRequest  : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
 	{
 		protected IClusterAllocationExplainRequest Self => this;
-				///<summary>Return &#39;YES&#39; decisions in explanation (default: false)</summary>
+				///<summary>Return 'YES' decisions in explanation (default: false)</summary>
 		public bool IncludeYesDecisions { get { return Q<bool>("include_yes_decisions"); } set { Q("include_yes_decisions", value); } }
 		
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
@@ -2136,8 +2142,14 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
@@ -2215,8 +2227,14 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
@@ -2381,8 +2399,14 @@ namespace Nest
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
@@ -2558,8 +2582,14 @@ namespace Nest
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
@@ -2573,7 +2603,7 @@ namespace Nest
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long Size { get { return Q<long>("size"); } set { Q("size", value); } }
 		
-		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
+		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public  string[] Sort { get { return Q< string[]>("sort"); } set { Q("sort", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
@@ -2588,7 +2618,7 @@ namespace Nest
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
 		
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify whether to return document version as part of a hit</summary>
@@ -2615,7 +2645,7 @@ namespace Nest
 		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
 		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long Slices { get { return Q<long>("slices"); } set { Q("slices", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -2689,8 +2719,14 @@ namespace Nest
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
@@ -2704,7 +2740,7 @@ namespace Nest
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long Size { get { return Q<long>("size"); } set { Q("size", value); } }
 		
-		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
+		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public  string[] Sort { get { return Q< string[]>("sort"); } set { Q("sort", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
@@ -2719,7 +2755,7 @@ namespace Nest
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
 		
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify whether to return document version as part of a hit</summary>
@@ -2746,7 +2782,7 @@ namespace Nest
 		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
 		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long Slices { get { return Q<long>("slices"); } set { Q("slices", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -3127,8 +3163,14 @@ namespace Nest
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
@@ -3179,8 +3221,14 @@ namespace Nest
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
@@ -3548,8 +3596,14 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -3612,8 +3666,14 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -3780,8 +3840,14 @@ namespace Nest
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -4875,8 +4941,14 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -4939,8 +5011,14 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -5285,8 +5363,14 @@ namespace Nest
 		{}
 		
 
-			///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+			 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
@@ -5326,8 +5410,14 @@ namespace Nest
 		{}
 		
 
-			///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+			 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
@@ -5473,8 +5563,14 @@ namespace Nest
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
@@ -5710,7 +5806,7 @@ namespace Nest
 	public partial class ListTasksRequest  : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
 		protected IListTasksRequest Self => this;
-				///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
+				///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public  string[] Nodes { get { return Q< string[]>("nodes"); } set { Q("nodes", value); } }
 		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
@@ -5790,8 +5886,14 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -5858,7 +5960,7 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool TypedKeys { get { return Q<bool>("typed_keys"); } set { Q("typed_keys", value); } }
 		
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long PreFilterShardSize { get { return Q<long>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5964,31 +6066,37 @@ namespace Nest
 		{}
 		
 
-			///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+			///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
-		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
 		
-		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
-		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool Offsets { get { return Q<bool>("offsets"); } set { Q("offsets", value); } }
 		
-		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool Positions { get { return Q<bool>("positions"); } set { Q("positions", value); } }
 		
-		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool Payloads { get { return Q<bool>("payloads"); } set { Q("payloads", value); } }
 		
-		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
-		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
@@ -6047,7 +6155,7 @@ namespace Nest
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
 		public long Threads { get { return Q<long>("threads"); } set { Q("threads", value); } }
 		
-		///<summary>Don&#39;t show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
+		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
 		public bool IgnoreIdleThreads { get { return Q<bool>("ignore_idle_threads"); } set { Q("ignore_idle_threads", value); } }
 		
 		///<summary>The type to sample (default: cpu)</summary>
@@ -7102,7 +7210,7 @@ namespace Nest
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long Slices { get { return Q<long>("slices"); } set { Q("slices", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -7485,8 +7593,14 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
@@ -7494,7 +7608,7 @@ namespace Nest
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify which field to use for suggestions</summary>
@@ -7524,7 +7638,7 @@ namespace Nest
 		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
 		public long MaxConcurrentShardRequests { get { return Q<long>("max_concurrent_shard_requests"); } set { Q("max_concurrent_shard_requests", value); } }
 		
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long PreFilterShardSize { get { return Q<long>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -7594,8 +7708,14 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
@@ -7603,7 +7723,7 @@ namespace Nest
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify which field to use for suggestions</summary>
@@ -7633,7 +7753,7 @@ namespace Nest
 		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
 		public long MaxConcurrentShardRequests { get { return Q<long>("max_concurrent_shard_requests"); } set { Q("max_concurrent_shard_requests", value); } }
 		
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long PreFilterShardSize { get { return Q<long>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -7674,8 +7794,14 @@ namespace Nest
 			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
@@ -7724,8 +7850,14 @@ namespace Nest
 			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
@@ -7798,8 +7930,14 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
@@ -8108,8 +8246,14 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -8169,8 +8313,14 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -8245,8 +8395,14 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -8306,8 +8462,14 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
@@ -8561,8 +8723,14 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
-		///<summary>Specific routing value.</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Parent id of documents.</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
@@ -8705,8 +8873,14 @@ namespace Nest
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
@@ -8720,7 +8894,7 @@ namespace Nest
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long Size { get { return Q<long>("size"); } set { Q("size", value); } }
 		
-		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
+		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public  string[] Sort { get { return Q< string[]>("sort"); } set { Q("sort", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
@@ -8735,7 +8909,7 @@ namespace Nest
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
 		
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify whether to return document version as part of a hit</summary>
@@ -8765,7 +8939,7 @@ namespace Nest
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long Slices { get { return Q<long>("slices"); } set { Q("slices", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -8842,8 +9016,14 @@ namespace Nest
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
@@ -8857,7 +9037,7 @@ namespace Nest
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long Size { get { return Q<long>("size"); } set { Q("size", value); } }
 		
-		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
+		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public  string[] Sort { get { return Q< string[]>("sort"); } set { Q("sort", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
@@ -8872,7 +9052,7 @@ namespace Nest
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
 		
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify whether to return document version as part of a hit</summary>
@@ -8902,7 +9082,7 @@ namespace Nest
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public long RequestsPerSecond { get { return Q<long>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long Slices { get { return Q<long>("slices"); } set { Q("slices", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -9127,8 +9307,14 @@ namespace Nest
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
 		public long RetryOnConflict { get { return Q<long>("retry_on_conflict"); } set { Q("retry_on_conflict", value); } }
 		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		 ///<summary>
+		/// A document is routed to a particular shard in an index using the following formula
+		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
+		/// <para>Elasticsearch will use the document id if not provided. </para>
+		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		///</summary>
+		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }

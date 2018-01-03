@@ -69,6 +69,9 @@ namespace Nest
 		private readonly FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
 		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
 
+		private readonly FluentDictionary<Type, string> _routeProperties = new FluentDictionary<Type, string>();
+		FluentDictionary<Type, string> IConnectionSettingsValues.RouteProperties => _routeProperties;
+
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 
@@ -158,10 +161,7 @@ namespace Nest
 		/// Specify which property on a given POCO should be used to infer the id of the document when
 		/// indexed in Elasticsearch.
 		/// </summary>
-		/// <typeparam name="TDocument">The type of the document.</typeparam>
-		/// <param name="objectPath">The object path.</param>
-		/// <returns></returns>
-		private TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
+		private void MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
 
@@ -170,16 +170,31 @@ namespace Nest
 
 			if (this._idProperties.ContainsKey(typeof(TDocument)))
 			{
-				if (this._idProperties[typeof(TDocument)].Equals(fieldName))
-					return (TConnectionSettings) this;
+				if (this._idProperties[typeof(TDocument)].Equals(fieldName)) return;
 
 				throw new ArgumentException(
 					$"Cannot map '{fieldName}' as the id property for type '{typeof(TDocument).Name}': it already has '{this._idProperties[typeof(TDocument)]}' mapped.");
 			}
 
 			this._idProperties.Add(typeof(TDocument), fieldName);
+		}
 
-			return (TConnectionSettings) this;
+		private void MapRoutePropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
+		{
+			objectPath.ThrowIfNull(nameof(objectPath));
+
+			var memberInfo = new MemberInfoResolver(objectPath);
+			var fieldName = memberInfo.Members.Single().Name;
+
+			if (this._routeProperties.ContainsKey(typeof(TDocument)))
+			{
+				if (this._routeProperties[typeof(TDocument)].Equals(fieldName)) return;
+
+				throw new ArgumentException(
+					$"Cannot map '{fieldName}' as the route property for type '{typeof(TDocument).Name}': it already has '{this._routeProperties[typeof(TDocument)]}' mapped.");
+			}
+
+			this._routeProperties.Add(typeof(TDocument), fieldName);
 		}
 
 		private void ApplyPropertyMappings<TDocument>(IList<IClrPropertyMapping<TDocument>> mappings)
@@ -236,6 +251,9 @@ namespace Nest
 
 			if (inferMapping.IdProperty != null)
 				this.MapIdPropertyFor<TDocument>(inferMapping.IdProperty);
+
+			if (inferMapping.RoutingProperty != null)
+				this.MapRoutePropertyFor<TDocument>(inferMapping.RoutingProperty);
 
 			if (inferMapping.Properties != null)
 				this.ApplyPropertyMappings<TDocument>(inferMapping.Properties);

@@ -27,7 +27,7 @@ namespace Nest
 			if (id.Document != null)
 			{
 				var settings = serializer.GetConnectionSettings();
-				var documentId = settings.Inferrer.JoinRouting(id.Document.GetType(), id.Document);
+				var documentId = settings.Inferrer.Routing(id.Document.GetType(), id.Document);
 				writer.WriteValue(documentId);
 			}
 			else writer.WriteValue(id.Value);

@@ -29,10 +29,11 @@ namespace Nest
 
 	public interface IClrTypeMapping<TDocument> : IClrTypeMapping where TDocument : class
 	{
-		/// <summary>
-		/// Set a default Id property on CLR type <typeparamref name="TDocument" /> that NEST will evaluate
-		/// </summary>
+		/// <summary> Set a default Id property on CLR type <typeparamref name="TDocument" /> that NEST will evaluate </summary>
 		Expression<Func<TDocument, object>> IdProperty { get; set; }
+
+		/// <summary> Provide a default routing parameter lookup based on <typeparamref name="TDocument" /> </summary>
+		Expression<Func<TDocument, object>> RoutingProperty { get; set; }
 
 		/// <summary>
 		/// Ignore or rename certain properties of CLR type <typeparamref name="TDocument" />
@@ -66,6 +67,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Expression<Func<TDocument, object>> IdProperty { get; set; }
+
+		/// <inheritdoc />
+		public Expression<Func<TDocument, object>> RoutingProperty { get; set; }
 
 		/// <inheritdoc />
 		public IList<IClrPropertyMapping<TDocument>> Properties { get; set; }
@@ -111,6 +115,7 @@ namespace Nest
 		string IClrTypeMapping.TypeName { get; set; }
 		string IClrTypeMapping.RelationName { get; set; }
 		Expression<Func<TDocument, object>> IClrTypeMapping<TDocument>.IdProperty { get; set; }
+		Expression<Func<TDocument, object>> IClrTypeMapping<TDocument>.RoutingProperty { get; set; }
 		IList<IClrPropertyMapping<TDocument>> IClrTypeMapping<TDocument>.Properties { get; set; } = new List<IClrPropertyMapping<TDocument>>();
 
 		/// <summary>
@@ -132,6 +137,9 @@ namespace Nest
 		/// Set a default Id property on CLR type <typeparamref name="TDocument" /> that NEST will evaluate
 		/// </summary>
 		public ClrTypeMappingDescriptor<TDocument> IdProperty(Expression<Func<TDocument, object>> property) => Assign(a => a.IdProperty = property);
+
+		/// <summary> Provide a default routing parameter lookup based on <typeparamref name="TDocument" /> </summary>
+		public ClrTypeMappingDescriptor<TDocument> RoutingProperty(Expression<Func<TDocument, object>> property) => Assign(a => a.RoutingProperty = property);
 
 		/// <summary>
 		/// Ignore <paramref name="property" /> on CLR type <typeparamref name="TDocument" />

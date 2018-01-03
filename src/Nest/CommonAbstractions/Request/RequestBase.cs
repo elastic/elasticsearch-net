@@ -102,6 +102,12 @@ namespace Nest
 			return _descriptor;
 		}
 
+		protected TDescriptor Qs(string name, object value)
+		{
+			Q(name, value);
+			return _descriptor;
+		}
+
 		/// <summary>
 		/// Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
 		/// </summary>

@@ -249,26 +249,27 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
 			var infer = client.Infer;
 			var parent = new MyParent {Id = 1337, MyJoinField = JoinField.Root<MyParent>()};
-			infer.JoinRouting(parent).Should().Be("1337");
+			infer.Routing(parent).Should().Be("1337");
 
 			var child = new MyChild {Id = 1338, MyJoinField = JoinField.Link<MyChild>(parentId: "1337")};
-			infer.JoinRouting(child).Should().Be("1337");
+			infer.Routing(child).Should().Be("1337");
 
 			child = new MyChild {Id = 1339, MyJoinField = JoinField.Link<MyChild, MyParent>(parent)};
-			infer.JoinRouting(child).Should().Be("1337");
+			infer.Routing(child).Should().Be("1337");
 
 			/**
 			 * here we index `parent` and rather than fishing out the parent id by inspecting `parent` we just pass the instance
 			 * to `Routing` which can infer the correct routing key based on the JoinField property on the instance
 			 */
-			var indexResponse = client.Index(parent, i => i.Routing(parent));
+			var indexResponse = client.Index(parent, i => i.Routing(Routing.From(parent)));
 			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 
 			/**
 			 * The same goes for when we index a child, we can pass the instance directly to `Routing` and NEST will use the parent id
-			 * already specified on `child`
+			 * already specified on `child`. Here we use the static import `using static Nest.Infer` and it's `Route()` static method to
+			 * create an instance of `Routing`
 			 */
-			indexResponse = client.Index(child, i => i.Routing(child));
+			indexResponse = client.Index(child, i => i.Routing(Route(child)));
 			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
 
 			/** Wouldn't be handy if NEST does this automatically? It does! */

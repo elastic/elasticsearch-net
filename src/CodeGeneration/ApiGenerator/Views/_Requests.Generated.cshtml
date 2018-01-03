@@ -82,10 +82,17 @@ namespace Nest
 		{
 			setter += ".ToString()";
 		}
-		<text>///<summary>@kv.Value.Description</summary>
-		@if(!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
+		var desc = kv.Value.HighLevelTypeDescription(kv.Key).ToList();
+		<text>@if (desc.Count == 1) {
+<text>///<summary>@Raw(desc.First())</summary></text>
+		}
+		else 
+		{ <text>///<summary>
+		@Raw(string.Join("\r\n\t\t", desc.Select(d=> "/// " + d)))
+		///</summary></text>
+		}</text><text>@if(!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
 		{
-		<text>[Obsolete("Scheduled to be removed in 5.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
+		<text>[Obsolete("Scheduled to be removed in 7.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
 		}
 		@Raw(kv.Value.Generator.Invoke(fieldType, mm, original, setter))
 		</text>

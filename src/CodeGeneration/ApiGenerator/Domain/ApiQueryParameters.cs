@@ -49,13 +49,31 @@ namespace ApiGenerator.Domain
 			}
 		}
 
+		public IEnumerable<string> HighLevelTypeDescription(string paramName)
+		{
+			switch (paramName)
+			{
+				case "routing":
+					yield return "A document is routed to a particular shard in an index using the following formula";
+					yield return "<para> shard_num = hash(_routing) % num_primary_shards</para>";
+					yield return "<para>Elasticsearch will use the document id if not provided. </para>";
+					yield return "<para>For requests that are constructed from/for a document NEST will automatically infer the routing key";
+					yield return "if that document has a <see cref=\"Nest.JoinField\" /> or a routing mapping on for its type exists on <see cref=\"Nest.ConnectionSettings\" /></para> ";
+					yield break;
+				default:
+					yield return this.Description;
+					yield break;
+			}
+		}
+
 		public string HighLevelType(string paramName)
 		{
+			if (paramName == "routing") return "Routing";
+
 			var csharpType = this.CsharpType(paramName);
 			switch (csharpType)
 			{
-				case "TimeSpan":
-					return "Time";
+				case "TimeSpan": return "Time";
 				default:
 					return csharpType;
 			}
