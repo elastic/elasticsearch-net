@@ -146,8 +146,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		* Now that we have our join field mapping set up on the index we can proceed to index parents and children documents.
 		*/
 
-		[U]
-		public void Indexing()
+		[U] public void Indexing()
 		{
 			// hide
 			var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
@@ -185,7 +184,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 			Expect(expected).FromRequest(indexParent);
 
-
 			/**
 			 * Linking the child document to its parent follows a similar pattern.
 			 * Here we create a link by inferring the id from our parent instance `parentDocument`
@@ -215,14 +213,14 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 			Expect(childJson).FromRequest(indexChild);
 			/**
-			 * The mapping already links `parent` as the parent type so we only need to suply the parent id.
+			 * The mapping already links `myparent` as the parent type so we only need to suply the parent id.
 			 * In fact there are many ways to create join field:
 			 */
 
-			Expect("parent").WhenSerializing(JoinField.Root(typeof(MyParent)));
-			Expect("parent").WhenSerializing(JoinField.Root(Relation<MyParent>()));
-			Expect("parent").WhenSerializing(JoinField.Root<MyParent>());
-			Expect("parent").WhenSerializing(JoinField.Root("myparent"));
+			Expect("myparent").WhenSerializing(JoinField.Root(typeof(MyParent)));
+			Expect("myparent").WhenSerializing(JoinField.Root(Relation<MyParent>()));
+			Expect("myparent").WhenSerializing(JoinField.Root<MyParent>());
+			Expect("myparent").WhenSerializing(JoinField.Root("myparent"));
 
 			var childLink = new {name = "mychild", parent = "1"};
 			Expect(childLink).WhenSerializing(JoinField.Link<MyChild>(1));

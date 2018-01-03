@@ -34,7 +34,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IExplainResponse<TDocument> Explain<TDocument>(DocumentPath<TDocument> document, Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector)
 			where TDocument : class =>
-			this.Explain<TDocument>(selector?.Invoke(new ExplainDescriptor<TDocument>(document.Self.Index, document.Self.Type, document.Self.Id)));
+			this.Explain<TDocument>(selector?.Invoke(new ExplainDescriptor<TDocument>(document)));
 
 		/// <inheritdoc/>
 		public IExplainResponse<TDocument> Explain<TDocument>(IExplainRequest<TDocument> request)
@@ -47,7 +47,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(DocumentPath<TDocument> document, Func<ExplainDescriptor<TDocument>, IExplainRequest<TDocument>> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where TDocument : class =>
-			this.ExplainAsync<TDocument>(selector?.Invoke(new ExplainDescriptor<TDocument>(document.Self.Index, document.Self.Type, document.Self.Id)), cancellationToken);
+			this.ExplainAsync<TDocument>(selector?.Invoke(new ExplainDescriptor<TDocument>(document)), cancellationToken);
 
 		/// <inheritdoc/>
 		public Task<IExplainResponse<TDocument>> ExplainAsync<TDocument>(IExplainRequest<TDocument> request, CancellationToken cancellationToken = default(CancellationToken))

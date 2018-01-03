@@ -68,7 +68,7 @@ namespace Tests.Document.Multiple.Bulk
 		{
 			Operations = new List<IBulkOperation>
 			{
-				new BulkUpdateOperation<Project, object>(Project.Instance)
+				new BulkUpdateOperation<Project, object>(Project.Instance.Name)
 				{
 					Doc = new { leadDeveloper = new { firstName = "martijn" } }
 				},
