@@ -70,7 +70,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void SimpleParentChildMapping()
 		{
-
 			var connectionSettings = new ConnectionSettings()
 				.InferMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
 				.InferMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
@@ -82,10 +81,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			var descriptor = new CreateIndexDescriptor(Index<MyDocument>())
 				.Mappings(ms => ms
 					.Map<MyDocument>(m => m
-						.AutoMap<MyParent>() // <1> Map all of the MyParent properties
-						.AutoMap<MyChild>() // <2> Map all of the MyChild properties
+						.RoutingField(r=>r.Required()) // <1> recommended to make the routing non optional so you can not accidentally forget
+						.AutoMap<MyParent>() // <2> Map all of the MyParent properties
+						.AutoMap<MyChild>() // <3> Map all of the MyChild properties
 						.Properties(props => props
-							.Join(j => j // <3> Automap does not automatically translate `JoinField` since we are only allowed to have one.
+							.Join(j => j // <4> Automap does not automatically translate `JoinField` since we are only allowed to have one.
 								.Name(p=>p.MyJoinField)
 								.Relations(r => r
 									.Join<MyParent, MyChild>()
@@ -172,7 +172,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				Id = 1,
 				ParentProperty = "a parent prop",
-				MyJoinField = "parent" // <1> this lets the join data type know this is a root document of type `myparent`
+				MyJoinField = "myparent" // <1> this lets the join data type know this is a root document of type `myparent`
 			};
 			var indexParent = client.IndexDocument<MyDocument>(parentDocument);
 			//json
@@ -214,14 +214,14 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 			Expect(childJson).FromRequest(indexChild);
 			/**
-			 * The mapping already links `myparent` as the parent type so we only need to suply the parent id.
+			 * The mapping already links `parent` as the parent type so we only need to suply the parent id.
 			 * In fact there are many ways to create join field:
 			 */
 
-			Expect("myparent").WhenSerializing(JoinField.Root(typeof(MyParent)));
-			Expect("myparent").WhenSerializing(JoinField.Root(Relation<MyParent>()));
-			Expect("myparent").WhenSerializing(JoinField.Root<MyParent>());
-			Expect("myparent").WhenSerializing(JoinField.Root("myparent"));
+			Expect("parent").WhenSerializing(JoinField.Root(typeof(MyParent)));
+			Expect("parent").WhenSerializing(JoinField.Root(Relation<MyParent>()));
+			Expect("parent").WhenSerializing(JoinField.Root<MyParent>());
+			Expect("parent").WhenSerializing(JoinField.Root("myparent"));
 
 			var childLink = new {name = "mychild", parent = "1"};
 			Expect(childLink).WhenSerializing(JoinField.Link<MyChild>(1));

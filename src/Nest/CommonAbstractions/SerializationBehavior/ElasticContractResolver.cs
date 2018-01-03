@@ -175,6 +175,15 @@ namespace Nest
 			var q = prop.ValueProvider.GetValue(o) as IEnumerable<QueryContainer>;
 			return (q.AsInstanceOrToListOrNull()?.Any(qq=>qq != null && qq.IsWritable)).GetValueOrDefault(false);
 		}
+		protected bool ShouldSerializeRouting(object o, JsonProperty prop)
+		{
+			if (o == null) return false;
+			var q = prop.ValueProvider.GetValue(o) as Routing;
+			if (q == null) return false;
+			//not ideal to resolve twice but for now the only way not to send routing: null
+			var resolved = this.ConnectionSettings.Inferrer.Resolve(q);
+			return !resolved.IsNullOrEmpty();
+		}
 
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{
@@ -236,12 +245,14 @@ namespace Nest
 				property.Ignored = overrideIgnore.Value;
 		}
 
-		private static void ApplyShouldSerializer(JsonProperty property)
+		private void ApplyShouldSerializer(JsonProperty property)
 		{
 			if (property.PropertyType == typeof(QueryContainer))
 				property.ShouldSerialize = o => ShouldSerializeQueryContainer(o, property);
 			else if (property.PropertyType == typeof(IEnumerable<QueryContainer>))
 				property.ShouldSerialize = o => ShouldSerializeQueryContainers(o, property);
+			else if (property.PropertyType == typeof(Routing))
+				property.ShouldSerialize = o => ShouldSerializeRouting(o, property);
 
 			// Skip serialization of empty collections that have DefaultValueHandling set to Ignore.
 			else if (property.DefaultValueHandling.HasValue

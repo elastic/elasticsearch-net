@@ -44,7 +44,7 @@ namespace Tests.Search.MultiSearch
 			new { index = "devs", type = "developer" },
 			new { from = 0, size = 5, query = new { match_all = new {} } },
 			new { index = "queries", type = TestClient.PercolatorType },
-			new { query = new { percolate = new { document = Project.InstanceAnonymous, field = "query" } } },
+			new { query = new { percolate = new { document = Project.InstanceAnonymous, field = "query" , routing = Project.First.Name } } },
 			new { index = "queries", type = TestClient.PercolatorType },
 			new { query = new { percolate = new { index = "project", type = "doc", id = Project.First.Name, version = 1, field = "query" } } },
 		};

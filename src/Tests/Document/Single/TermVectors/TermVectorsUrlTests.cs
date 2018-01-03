@@ -38,14 +38,14 @@ namespace Tests.Document.Single.TermVectors
 
 			var document = new Project { Name = "foo" };
 
-			await POST($"/{index}/doc/_termvectors")
+			await POST($"/{index}/doc/_termvectors?routing=foo")
 				.Fluent(c => c.TermVectors<Project>(t => t.Index(index).Document(document)))
 				.Request(c => c.TermVectors(new TermVectorsRequest<Project>(new DocumentPath<Project>(document).Index(index))))
 				.FluentAsync(c => c.TermVectorsAsync<Project>(t => t.Index(index).Document(document)))
 				.RequestAsync(c => c.TermVectorsAsync(new TermVectorsRequest<Project>(new DocumentPath<Project>(document).Index(index))))
 				;
 
-			await POST($"/project/doc/_termvectors")
+			await POST($"/project/doc/_termvectors?routing=foo")
 				.Fluent(c=>c.TermVectors<Project>(t => t.Document(document)))
 				.Request(c=>c.TermVectors(new TermVectorsRequest<Project>(document)))
 				.FluentAsync(c=>c.TermVectorsAsync<Project>(t => t.Document(document)))
