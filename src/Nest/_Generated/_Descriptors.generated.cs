@@ -54,15 +54,15 @@ namespace Nest
 		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
 		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceEnabled(params string[] source_enabled) => Qs("source_enabled", source_enabled);
+		public BulkDescriptor SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude(params string[] source_exclude) => Qs("source_exclude", source_exclude);
+		public BulkDescriptor SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
 			
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._SourceExclude(fields));
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude(params string[] source_include) => Qs("source_include", source_include);
+		public BulkDescriptor SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
 			
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
@@ -1149,7 +1149,7 @@ namespace Nest
 		///</summary>
 		public CountDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public CountDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("query_on_query_string", query_on_query_string);
+		public CountDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
 		///<summary>The analyzer to use for the query string</summary>
 		public CountDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
@@ -1365,7 +1365,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public DeleteByQueryDescriptor<T> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("query_on_query_string", query_on_query_string);
+		public DeleteByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1385,15 +1385,15 @@ namespace Nest
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public DeleteByQueryDescriptor<T> Sort(params string[] sort) => Qs("sort", sort);
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public DeleteByQueryDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("source_enabled", source_enabled);
+		public DeleteByQueryDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("source_exclude", source_exclude);
+		public DeleteByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(params string[] source_include) => Qs("source_include", source_include);
+		public DeleteByQueryDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
@@ -1516,15 +1516,15 @@ namespace Nest
 		///</summary>
 		public DocumentExistsDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public DocumentExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("source_enabled", source_enabled);
+		public DocumentExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("source_exclude", source_exclude);
+		public DocumentExistsDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<T> SourceInclude(params string[] source_include) => Qs("source_include", source_include);
+		public DocumentExistsDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
@@ -1596,15 +1596,15 @@ namespace Nest
 		///</summary>
 		public SourceExistsDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SourceExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("source_enabled", source_enabled);
+		public SourceExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("source_exclude", source_exclude);
+		public SourceExistsDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<T> SourceInclude(params string[] source_include) => Qs("source_include", source_include);
+		public SourceExistsDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
@@ -1680,7 +1680,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public ExplainDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainDescriptor<TDocument> QueryOnQueryString(string query_on_query_string) => Qs("query_on_query_string", query_on_query_string);
+		public ExplainDescriptor<TDocument> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1690,15 +1690,15 @@ namespace Nest
 		///</summary>
 		public ExplainDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainDescriptor<TDocument> SourceEnabled(params string[] source_enabled) => Qs("source_enabled", source_enabled);
+		public ExplainDescriptor<TDocument> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(params string[] source_exclude) => Qs("source_exclude", source_exclude);
+		public ExplainDescriptor<TDocument> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(params string[] source_include) => Qs("source_include", source_include);
+		public ExplainDescriptor<TDocument> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  =>
@@ -1815,15 +1815,15 @@ namespace Nest
 		///</summary>
 		public GetDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("source_enabled", source_enabled);
+		public GetDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("source_exclude", source_exclude);
+		public GetDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params string[] source_include) => Qs("source_include", source_include);
+		public GetDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
@@ -1918,15 +1918,15 @@ namespace Nest
 		///</summary>
 		public SourceDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SourceDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("source_enabled", source_enabled);
+		public SourceDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("source_exclude", source_exclude);
+		public SourceDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params string[] source_include) => Qs("source_include", source_include);
+		public SourceDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
@@ -3481,7 +3481,7 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public ValidateQueryDescriptor<T> OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ValidateQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("query_on_query_string", query_on_query_string);
+		public ValidateQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
 		///<summary>The analyzer to use for the query string</summary>
 		public ValidateQueryDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
@@ -3692,15 +3692,15 @@ namespace Nest
 		///</summary>
 		public MultiGetDescriptor Routing(Routing routing) => Qs("routing", routing);
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MultiGetDescriptor SourceEnabled(params string[] source_enabled) => Qs("source_enabled", source_enabled);
+		public MultiGetDescriptor SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(params string[] source_exclude) => Qs("source_exclude", source_exclude);
+		public MultiGetDescriptor SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._SourceExclude(fields));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(params string[] source_include) => Qs("source_include", source_include);
+		public MultiGetDescriptor SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
@@ -3904,7 +3904,7 @@ namespace Nest
 		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
 		public NodesHotThreadsDescriptor IgnoreIdleThreads(bool ignore_idle_threads = true) => Qs("ignore_idle_threads", ignore_idle_threads = true);
 		///<summary>The type to sample (default: cpu)</summary>
-		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type) => Qs("thread_type", thread_type);
+		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type) => Qs("type", thread_type);
 		///<summary>Explicit operation timeout</summary>
 		public NodesHotThreadsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -4877,7 +4877,7 @@ namespace Nest
 			///<summary>Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> SourceEnabled(params string[] source_enabled) => Qs("source_enabled", source_enabled);
+		public UpdateDescriptor<TDocument, TPartialDocument> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>The script language (default: painless)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => Qs("lang", lang);
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
@@ -4971,7 +4971,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public UpdateByQueryDescriptor<T> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public UpdateByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("query_on_query_string", query_on_query_string);
+		public UpdateByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -4991,15 +4991,15 @@ namespace Nest
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public UpdateByQueryDescriptor<T> Sort(params string[] sort) => Qs("sort", sort);
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public UpdateByQueryDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("source_enabled", source_enabled);
+		public UpdateByQueryDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("source_exclude", source_exclude);
+		public UpdateByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
 			AssignParam(p=>p._SourceExclude(fields));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(params string[] source_include) => Qs("source_include", source_include);
+		public UpdateByQueryDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
