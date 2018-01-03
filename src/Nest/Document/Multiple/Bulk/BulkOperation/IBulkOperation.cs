@@ -28,7 +28,7 @@ namespace Nest
 		VersionType? VersionType { get; set; }
 
 		[JsonProperty("routing")]
-		string Routing { get; set; }
+		Routing Routing { get; set; }
 
 		[JsonProperty("parent")]
 		Id Parent { get; set; }
@@ -47,5 +47,6 @@ namespace Nest
 		object GetBody();
 
 		Id GetIdForOperation(Inferrer inferrer);
+		Routing GetRoutingForOperation(Inferrer settingsInferrer);
 	}
 }

@@ -22,6 +22,9 @@ namespace Nest
 
 			foreach (var operation in request.Operations.Values)
 			{
+				var p = operation.RequestParameters;
+				string GetString(string key) => p.GetResolvedQueryStringValue(key, settings);
+
 				IUrlParameter indices = request.Index == null || !request.Index.Equals(operation.Index)
 					? operation.Index
 					: null;
@@ -30,7 +33,7 @@ namespace Nest
 					? operation.Type
 					: null;
 
-				var searchType = operation.RequestParameters.GetQueryStringValue<SearchType>("search_type").GetStringValue();
+				var searchType = GetString("search_type");
 				if (searchType == "query_then_fetch")
 					searchType = null;
 
@@ -39,9 +42,9 @@ namespace Nest
 					index = indices?.GetString(settings),
 					type = types?.GetString(settings),
 					search_type = searchType,
-					preference = operation.Preference,
-					routing = operation.Routing,
-					ignore_unavailable = operation.IgnoreUnavalable
+					preference = GetString("preference"),
+					routing = GetString("routing"),
+					ignore_unavailable = GetString("ignore_unavailable")
 				};
 
 				var headerString = elasticsearchSerializer.SerializeToString(header, SerializationFormatting.None);

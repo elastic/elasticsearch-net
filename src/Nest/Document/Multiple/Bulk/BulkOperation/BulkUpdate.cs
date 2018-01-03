@@ -83,6 +83,9 @@ namespace Nest
 		protected override Id GetIdForOperation(Inferrer inferrer) =>
 			this.Id ?? new Id(new[] { this.IdFrom, this.Upsert }.FirstOrDefault(o=>o != null));
 
+		protected override Routing GetRoutingForOperation(Inferrer inferrer) =>
+			this.Routing ?? new Routing(new[] { this.IdFrom, this.Upsert }.FirstOrDefault(o=>o != null));
+
 		protected override object GetBody() =>
 			new BulkUpdateBody<TDocument, TPartialDocument>
 		{
@@ -155,6 +158,9 @@ namespace Nest
 
 		protected override Id GetIdForOperation(Inferrer inferrer) =>
 			Self.Id ?? new Id(new[] { Self.IdFrom, Self.Upsert }.FirstOrDefault(o=>o != null));
+
+		protected override Routing GetRoutingForOperation(Inferrer inferrer) =>
+			Self.Routing ?? new Routing(new[] { Self.IdFrom, Self.Upsert }.FirstOrDefault(o=>o != null));
 
 		/// <summary>
 		/// Infers the id of the object to update from the provided <param name="object">object</param>.

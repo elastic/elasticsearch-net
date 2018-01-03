@@ -25,6 +25,7 @@ namespace Nest
 		protected override object GetBody() => null;
 
 		protected override Id GetIdForOperation(Inferrer inferrer) => this.Id ?? new Id(this.Document);
+		protected override Routing GetRoutingForOperation(Inferrer inferrer) => this.Routing ?? new Routing(this.Document);
 
 		public T Document { get; set; }
 	}
@@ -40,6 +41,7 @@ namespace Nest
 		protected override object GetBulkOperationBody() => null;
 
 		protected override Id GetIdForOperation(Inferrer inferrer) => Self.Id ?? new Id(Self.Document);
+		protected override Routing GetRoutingForOperation(Inferrer inferrer) => Self.Routing ?? new Routing(Self.Document);
 
 		/// <summary>
 		/// The object to infer the id off, (if id is not passed using Id())

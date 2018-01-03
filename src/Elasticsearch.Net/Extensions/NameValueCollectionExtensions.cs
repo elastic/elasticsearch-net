@@ -27,7 +27,6 @@ namespace Elasticsearch.Net
 		}
 
 		private static string Encode(string s) => s;
-		//private static string Encode(string s) => s == null ? null : Uri.EscapeDataString(s);
 
 		internal static NameValueCollection ToNameValueCollection(this IDictionary<string, object> dict, IFormatProvider provider)
 		{

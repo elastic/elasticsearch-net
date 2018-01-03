@@ -30,6 +30,7 @@ namespace Nest
 		protected override object GetBody() => this.Document;
 
 		protected override Id GetIdForOperation(Inferrer inferrer) => this.Id ?? new Id(this.Document);
+		protected override Routing GetRoutingForOperation(Inferrer inferrer) => this.Routing ?? new Routing(this.Document);
 
 		public string Percolate { get; set; }
 
@@ -51,6 +52,7 @@ namespace Nest
 		protected override object GetBulkOperationBody() => Self.Document;
 
 		protected override Id GetIdForOperation(Inferrer inferrer) => Self.Id ?? new Id(Self.Document);
+		protected override Routing GetRoutingForOperation(Inferrer inferrer) => Self.Routing ?? new Routing(Self.Document);
 
 		/// <summary>
 		/// The object to index, if id is not manually set it will be inferred from the object
