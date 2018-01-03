@@ -17,7 +17,8 @@ namespace Nest
 		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IBulkRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/_bulk</summary>
-		public BulkDescriptor() : base(){}
+		public BulkDescriptor() : base()
+		{}
 		
 
 			///<summary>Default index for items which don't provide one</summary>
@@ -41,6 +42,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public BulkDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public BulkDescriptor Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Explicit operation timeout</summary>
 		public BulkDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
@@ -94,7 +99,8 @@ namespace Nest
 	{ 
 		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_cat/aliases</summary>
-		public CatAliasesDescriptor() : base(){}
+		public CatAliasesDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of alias names to return</summary>
@@ -144,7 +150,8 @@ namespace Nest
 	{ 
 		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_cat/allocation</summary>
-		public CatAllocationDescriptor() : base(){}
+		public CatAllocationDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information</summary>
@@ -197,7 +204,8 @@ namespace Nest
 	{ 
 		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cat/count</summary>
-		public CatCountDescriptor() : base(){}
+		public CatCountDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names to limit the returned information</summary>
@@ -253,7 +261,8 @@ namespace Nest
 	{ 
 		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 			/// <summary>/_cat/fielddata</summary>
-		public CatFielddataDescriptor() : base(){}
+		public CatFielddataDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of fields to return the fielddata size</summary>
@@ -381,7 +390,8 @@ namespace Nest
 	{ 
 		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cat/indices</summary>
-		public CatIndicesDescriptor() : base(){}
+		public CatIndicesDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names to limit the returned information</summary>
@@ -659,7 +669,8 @@ namespace Nest
 	{ 
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cat/recovery</summary>
-		public CatRecoveryDescriptor() : base(){}
+		public CatRecoveryDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names to limit the returned information</summary>
@@ -757,7 +768,8 @@ namespace Nest
 	{ 
 		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cat/segments</summary>
-		public CatSegmentsDescriptor() : base(){}
+		public CatSegmentsDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names to limit the returned information</summary>
@@ -810,7 +822,8 @@ namespace Nest
 	{ 
 		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cat/shards</summary>
-		public CatShardsDescriptor() : base(){}
+		public CatShardsDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names to limit the returned information</summary>
@@ -869,7 +882,8 @@ namespace Nest
 	{ 
 		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 			/// <summary>/_cat/snapshots</summary>
-		public CatSnapshotsDescriptor() : base(){}
+		public CatSnapshotsDescriptor() : base()
+		{}
 		
 
 			///<summary>Name of repository from which to fetch the snapshot information</summary>
@@ -970,7 +984,8 @@ namespace Nest
 	{ 
 		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_cat/templates</summary>
-		public CatTemplatesDescriptor() : base(){}
+		public CatTemplatesDescriptor() : base()
+		{}
 		
 
 			///<summary>A pattern that returned template names must match</summary>
@@ -1020,7 +1035,8 @@ namespace Nest
 	{ 
 		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
 			/// <summary>/_cat/thread_pool</summary>
-		public CatThreadPoolDescriptor() : base(){}
+		public CatThreadPoolDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of regular-expressions to filter the thread pools in the output</summary>
@@ -1072,7 +1088,8 @@ namespace Nest
 	public partial class ClearScrollDescriptor  : RequestDescriptorBase<ClearScrollDescriptor,ClearScrollRequestParameters, IClearScrollRequest>, IClearScrollRequest
 	{ 
 			/// <summary>/_search/scroll</summary>
-		public ClearScrollDescriptor() : base(){}
+		public ClearScrollDescriptor() : base()
+		{}
 		
 
 		
@@ -1158,7 +1175,8 @@ namespace Nest
 	{ 
 		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cluster/health</summary>
-		public ClusterHealthDescriptor() : base(){}
+		public ClusterHealthDescriptor() : base()
+		{}
 		
 
 			///<summary>Limit the information returned to a specific index</summary>
@@ -1338,7 +1356,8 @@ namespace Nest
 		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 			/// <summary>/_cluster/state</summary>
-		public ClusterStateDescriptor() : base(){}
+		public ClusterStateDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -1394,7 +1413,8 @@ namespace Nest
 	{ 
 		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_cluster/stats</summary>
-		public ClusterStatsDescriptor() : base(){}
+		public ClusterStatsDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
@@ -1430,7 +1450,8 @@ namespace Nest
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_count</summary>
-		public CountDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+		public CountDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T)))
+		{}
 		
 
 			///<summary>A comma-separated list of indices to restrict the results</summary>
@@ -1469,6 +1490,10 @@ namespace Nest
 
 		///<summary>A comma-separated list of specific routing values</summary>
 		public CountDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public CountDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Query in the Lucene query string syntax</summary>
 		public CountDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
@@ -1518,13 +1543,15 @@ namespace Nest
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
-		public CreateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		public CreateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		=> Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
 		/// <summary>/{index}/{type}/{id}/_create</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public CreateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public CreateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
+		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>The name of the index</summary>
@@ -1551,6 +1578,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public CreateDescriptor<TDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public CreateDescriptor<TDocument> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Explicit operation timeout</summary>
 		public CreateDescriptor<TDocument> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
@@ -1597,13 +1628,15 @@ namespace Nest
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
-		public DeleteDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		public DeleteDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		=> Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
-		public DeleteDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public DeleteDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
+		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(T document);
 
 			///<summary>The name of the index</summary>
@@ -1630,6 +1663,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public DeleteDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public DeleteDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Explicit operation timeout</summary>
 		public DeleteDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
@@ -1664,7 +1701,8 @@ namespace Nest
 		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_delete_by_query</summary>
 ///<param name="index"> this parameter is required</param>
-		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T))){}
+		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T)))
+		{}
 		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -1724,6 +1762,10 @@ namespace Nest
 
 		///<summary>A comma-separated list of specific routing values</summary>
 		public DeleteByQueryDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public DeleteByQueryDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public DeleteByQueryDescriptor<T> Scroll(Time scroll) => AssignParam(p=>p.Scroll(scroll.ToTimeSpan()));
@@ -1813,7 +1855,8 @@ namespace Nest
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_scripts/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public DeleteScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public DeleteScriptDescriptor(Id id) : base(r=>r.Required("id", id))
+		{}
 		
 
 		
@@ -1850,13 +1893,15 @@ namespace Nest
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
-		public DocumentExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		public DocumentExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		=> Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
-		public DocumentExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public DocumentExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
+		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(T document);
 
 			///<summary>The name of the index</summary>
@@ -1893,6 +1938,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public DocumentExistsDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public DocumentExistsDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public DocumentExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
@@ -1944,13 +1993,15 @@ namespace Nest
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
-		public SourceExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		public SourceExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		=> Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
 		/// <summary>/{index}/{type}/{id}/_source</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
-		public SourceExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public SourceExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
+		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(T document);
 
 			///<summary>The name of the index</summary>
@@ -1980,6 +2031,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public SourceExistsDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public SourceExistsDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public SourceExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
@@ -2031,13 +2086,15 @@ namespace Nest
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
-		public ExplainDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		public ExplainDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		=> Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
 		/// <summary>/{index}/{type}/{id}/_explain</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public ExplainDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public ExplainDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
+		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>The name of the index</summary>
@@ -2087,6 +2144,10 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public ExplainDescriptor<TDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public ExplainDescriptor<TDocument> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
+
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public ExplainDescriptor<TDocument> SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
 
@@ -2126,7 +2187,8 @@ namespace Nest
 	{ 
 		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_field_caps</summary>
-		public FieldCapabilitiesDescriptor() : base(){}
+		public FieldCapabilitiesDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -2182,13 +2244,15 @@ namespace Nest
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
-		public GetDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		public GetDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		=> Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
-		public GetDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public GetDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
+		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(T document);
 
 			///<summary>The name of the index</summary>
@@ -2225,6 +2289,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public GetDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public GetDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public GetDescriptor<T> SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
@@ -2272,7 +2340,8 @@ namespace Nest
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_scripts/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public GetScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public GetScriptDescriptor(Id id) : base(r=>r.Required("id", id))
+		{}
 		
 
 		
@@ -2303,13 +2372,15 @@ namespace Nest
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
-		public SourceDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		public SourceDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		=> Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
 		/// <summary>/{index}/{type}/{id}/_source</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
-		public SourceDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public SourceDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
+		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(T document);
 
 			///<summary>The name of the index</summary>
@@ -2339,6 +2410,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public SourceDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public SourceDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public SourceDescriptor<T> SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
@@ -2389,13 +2464,15 @@ namespace Nest
 			/// <summary>/{index}/{type}</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
-		public IndexDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
+		public IndexDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type))
+		=> Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
 		/// <summary>/{index}/{type}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public IndexDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public IndexDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
+		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Document ID</summary>
@@ -2428,6 +2505,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public IndexDescriptor<TDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public IndexDescriptor<TDocument> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Explicit operation timeout</summary>
 		public IndexDescriptor<TDocument> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
@@ -2469,7 +2550,8 @@ namespace Nest
 	{ 
 		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
 			/// <summary>/_analyze</summary>
-		public AnalyzeDescriptor() : base(){}
+		public AnalyzeDescriptor() : base()
+		{}
 		
 
 			///<summary>The name of the index to scope the operation</summary>
@@ -2507,7 +2589,8 @@ namespace Nest
 	{ 
 		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cache/clear</summary>
-		public ClearCacheDescriptor() : base(){}
+		public ClearCacheDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index name to limit the operation</summary>
@@ -2574,7 +2657,8 @@ namespace Nest
 		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}/_close</summary>
 ///<param name="index"> this parameter is required</param>
-		public CloseIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		public CloseIndexDescriptor(Indices index) : base(r=>r.Required("index", index))
+		{}
 		
 
 			///<summary>A comma separated list of indices to close</summary>
@@ -2625,7 +2709,8 @@ namespace Nest
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 			/// <summary>/{index}</summary>
 ///<param name="index"> this parameter is required</param>
-		public CreateIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		public CreateIndexDescriptor(IndexName index) : base(r=>r.Required("index", index))
+		{}
 		
 
 			///<summary>The name of the index</summary>
@@ -2670,7 +2755,8 @@ namespace Nest
 		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}</summary>
 ///<param name="index"> this parameter is required</param>
-		public DeleteIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		public DeleteIndexDescriptor(Indices index) : base(r=>r.Required("index", index))
+		{}
 		
 
 			///<summary>A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</summary>
@@ -2723,7 +2809,8 @@ namespace Nest
 			/// <summary>/{index}/_alias/{name}</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="name"> this parameter is required</param>
-		public DeleteAliasDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
+		public DeleteAliasDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name))
+		{}
 		
 
 			///<summary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
@@ -2765,7 +2852,8 @@ namespace Nest
 		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public DeleteIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public DeleteIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name))
+		{}
 		
 
 		
@@ -2798,7 +2886,8 @@ namespace Nest
 		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}</summary>
 ///<param name="index"> this parameter is required</param>
-		public IndexExistsDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		public IndexExistsDescriptor(Indices index) : base(r=>r.Required("index", index))
+		{}
 		
 
 			///<summary>A comma-separated list of index names</summary>
@@ -2852,7 +2941,8 @@ namespace Nest
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_alias/{name}</summary>
-		public AliasExistsDescriptor() : base(){}
+		public AliasExistsDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names to filter aliases</summary>
@@ -2903,7 +2993,8 @@ namespace Nest
 		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public IndexTemplateExistsDescriptor(Names name) : base(r=>r.Required("name", name)){}
+		public IndexTemplateExistsDescriptor(Names name) : base(r=>r.Required("name", name))
+		{}
 		
 
 		
@@ -2941,7 +3032,8 @@ namespace Nest
 			/// <summary>/{index}/_mapping/{type}</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
-		public TypeExistsDescriptor(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type)){}
+		public TypeExistsDescriptor(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type))
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use `_all` to check the types across all indices</summary>
@@ -2997,7 +3089,8 @@ namespace Nest
 	{ 
 		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_flush</summary>
-		public FlushDescriptor() : base(){}
+		public FlushDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
@@ -3047,7 +3140,8 @@ namespace Nest
 	{ 
 		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_flush/synced</summary>
-		public SyncedFlushDescriptor() : base(){}
+		public SyncedFlushDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
@@ -3091,7 +3185,8 @@ namespace Nest
 	{ 
 		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_forcemerge</summary>
-		public ForceMergeDescriptor() : base(){}
+		public ForceMergeDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -3151,7 +3246,8 @@ namespace Nest
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}</summary>
 ///<param name="index"> this parameter is required</param>
-		public GetIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		public GetIndexDescriptor(Indices index) : base(r=>r.Required("index", index))
+		{}
 		
 
 			///<summary>A comma-separated list of index names</summary>
@@ -3205,7 +3301,8 @@ namespace Nest
 		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetAliasRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_alias</summary>
-		public GetAliasDescriptor() : base(){}
+		public GetAliasDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names to filter aliases</summary>
@@ -3258,7 +3355,8 @@ namespace Nest
 		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 			/// <summary>/_mapping/field/{fields}</summary>
 ///<param name="fields"> this parameter is required</param>
-		public GetFieldMappingDescriptor(Fields fields) : base(r=>r.Required("fields", fields)){}
+		public GetFieldMappingDescriptor(Fields fields) : base(r=>r.Required("fields", fields))
+		{}
 		
 
 			///<summary>A comma-separated list of index names</summary>
@@ -3318,7 +3416,8 @@ namespace Nest
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_mapping</summary>
-		public GetMappingDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+		public GetMappingDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T)))
+		{}
 		
 
 			///<summary>A comma-separated list of index names</summary>
@@ -3375,7 +3474,8 @@ namespace Nest
 		Indices IGetIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_settings</summary>
-		public GetIndexSettingsDescriptor() : base(){}
+		public GetIndexSettingsDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -3431,7 +3531,8 @@ namespace Nest
 	{ 
 		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template</summary>
-		public GetIndexTemplateDescriptor() : base(){}
+		public GetIndexTemplateDescriptor() : base()
+		{}
 		
 
 			///<summary>The comma separated names of the index templates</summary>
@@ -3469,7 +3570,8 @@ namespace Nest
 	{ 
 		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_upgrade</summary>
-		public UpgradeStatusDescriptor() : base(){}
+		public UpgradeStatusDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -3514,7 +3616,8 @@ namespace Nest
 		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}/_open</summary>
 ///<param name="index"> this parameter is required</param>
-		public OpenIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		public OpenIndexDescriptor(Indices index) : base(r=>r.Required("index", index))
+		{}
 		
 
 			///<summary>A comma separated list of indices to open</summary>
@@ -3567,7 +3670,8 @@ namespace Nest
 			/// <summary>/{index}/_alias/{name}</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="name"> this parameter is required</param>
-		public PutAliasDescriptor(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name)){}
+		public PutAliasDescriptor(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name))
+		{}
 		
 
 			///<summary>A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</summary>
@@ -3610,7 +3714,8 @@ namespace Nest
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/_mapping</summary>
 ///<param name="type"> this parameter is required</param>
-		public PutMappingDescriptor(TypeName type) : base(r=>r.Required("type", type)){}
+		public PutMappingDescriptor(TypeName type) : base(r=>r.Required("type", type))
+		{}
 		
 
 			///<summary>A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</summary>
@@ -3669,7 +3774,8 @@ namespace Nest
 	{ 
 		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_settings</summary>
-		public UpdateIndexSettingsDescriptor() : base(){}
+		public UpdateIndexSettingsDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -3723,7 +3829,8 @@ namespace Nest
 		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public PutIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public PutIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name))
+		{}
 		
 
 		
@@ -3761,7 +3868,8 @@ namespace Nest
 	{ 
 		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_recovery</summary>
-		public RecoveryStatusDescriptor() : base(){}
+		public RecoveryStatusDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -3802,7 +3910,8 @@ namespace Nest
 	{ 
 		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_refresh</summary>
-		public RefreshDescriptor() : base(){}
+		public RefreshDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -3848,7 +3957,8 @@ namespace Nest
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
 			/// <summary>/{alias}/_rollover</summary>
 ///<param name="alias"> this parameter is required</param>
-		public RolloverIndexDescriptor(Name alias) : base(r=>r.Required("alias", alias)){}
+		public RolloverIndexDescriptor(Name alias) : base(r=>r.Required("alias", alias))
+		{}
 		
 
 			///<summary>The name of the rollover index</summary>
@@ -3889,7 +3999,8 @@ namespace Nest
 	{ 
 		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_segments</summary>
-		public SegmentsDescriptor() : base(){}
+		public SegmentsDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -3939,7 +4050,8 @@ namespace Nest
 	{ 
 		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_shard_stores</summary>
-		public IndicesShardStoresDescriptor() : base(){}
+		public IndicesShardStoresDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -3992,7 +4104,8 @@ namespace Nest
 			/// <summary>/{index}/_shrink/{target}</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="target"> this parameter is required</param>
-		public ShrinkIndexDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
+		public ShrinkIndexDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target))
+		{}
 		
 
 			///<summary>The name of the source index to shrink</summary>
@@ -4034,7 +4147,8 @@ namespace Nest
 		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Metrics IIndicesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 			/// <summary>/_stats</summary>
-		public IndicesStatsDescriptor() : base(){}
+		public IndicesStatsDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -4129,7 +4243,8 @@ namespace Nest
 	{ 
 		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_upgrade</summary>
-		public UpgradeDescriptor() : base(){}
+		public UpgradeDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -4180,7 +4295,8 @@ namespace Nest
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_validate/query</summary>
-		public ValidateQueryDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+		public ValidateQueryDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T)))
+		{}
 		
 
 			///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -4285,7 +4401,8 @@ namespace Nest
 		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public DeletePipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public DeletePipelineDescriptor(Id id) : base(r=>r.Required("id", id))
+		{}
 		
 
 		
@@ -4317,7 +4434,8 @@ namespace Nest
 	{ 
 		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline</summary>
-		public GetPipelineDescriptor() : base(){}
+		public GetPipelineDescriptor() : base()
+		{}
 		
 
 			///<summary>Comma separated list of pipeline ids. Wildcards supported</summary>
@@ -4371,7 +4489,8 @@ namespace Nest
 		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public PutPipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public PutPipelineDescriptor(Id id) : base(r=>r.Required("id", id))
+		{}
 		
 
 		
@@ -4403,7 +4522,8 @@ namespace Nest
 	{ 
 		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline/_simulate</summary>
-		public SimulatePipelineDescriptor() : base(){}
+		public SimulatePipelineDescriptor() : base()
+		{}
 		
 
 			///<summary>Pipeline ID</summary>
@@ -4436,7 +4556,8 @@ namespace Nest
 		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IMultiGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/_mget</summary>
-		public MultiGetDescriptor() : base(){}
+		public MultiGetDescriptor() : base()
+		{}
 		
 
 			///<summary>The name of the index</summary>
@@ -4470,6 +4591,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public MultiGetDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public MultiGetDescriptor Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public MultiGetDescriptor SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
@@ -4511,7 +4636,8 @@ namespace Nest
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_msearch</summary>
-		public MultiSearchDescriptor() {}
+		public MultiSearchDescriptor()
+		{}
 		
 
 			///<summary>A comma-separated list of index names to use as default</summary>
@@ -4568,7 +4694,8 @@ namespace Nest
 		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_msearch/template</summary>
-		public MultiSearchTemplateDescriptor() {}
+		public MultiSearchTemplateDescriptor()
+		{}
 		
 
 			///<summary>A comma-separated list of index names to use as default</summary>
@@ -4622,7 +4749,8 @@ namespace Nest
 		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IMultiTermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/_mtermvectors</summary>
-		public MultiTermVectorsDescriptor() : base(){}
+		public MultiTermVectorsDescriptor() : base()
+		{}
 		
 
 			///<summary>The index in which the document resides.</summary>
@@ -4666,6 +4794,10 @@ namespace Nest
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public MultiTermVectorsDescriptor Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
+
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
@@ -4700,7 +4832,8 @@ namespace Nest
 	{ 
 		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_cluster/nodes/hotthreads</summary>
-		public NodesHotThreadsDescriptor() : base(){}
+		public NodesHotThreadsDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
@@ -4748,7 +4881,8 @@ namespace Nest
 		NodeIds INodesInfoRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 			/// <summary>/_nodes</summary>
-		public NodesInfoDescriptor() : base(){}
+		public NodesInfoDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
@@ -4788,7 +4922,8 @@ namespace Nest
 		IndexMetrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<IndexMetrics>("index_metric");
 		NodeIds INodesStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_nodes/stats</summary>
-		public NodesStatsDescriptor() : base(){}
+		public NodesStatsDescriptor() : base()
+		{}
 		
 
 			///<summary>Limit the information returned to the specified metrics</summary>
@@ -4860,7 +4995,8 @@ namespace Nest
 		Metrics INodesUsageRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		NodeIds INodesUsageRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_nodes/usage</summary>
-		public NodesUsageDescriptor() : base(){}
+		public NodesUsageDescriptor() : base()
+		{}
 		
 
 			///<summary>Limit the information returned to the specified metrics</summary>
@@ -4918,7 +5054,8 @@ namespace Nest
 		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
 			/// <summary>/_scripts/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public PutScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public PutScriptDescriptor(Id id) : base(r=>r.Required("id", id))
+		{}
 		
 
 			///<summary>Script context</summary>
@@ -4989,7 +5126,8 @@ namespace Nest
 	{ 
 		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_reindex/{task_id}/_rethrottle</summary>
-		public ReindexRethrottleDescriptor() : base(){}
+		public ReindexRethrottleDescriptor() : base()
+		{}
 		
 
 			///<summary>The task id to rethrottle</summary>
@@ -5021,7 +5159,8 @@ namespace Nest
 	{ 
 		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_render/template</summary>
-		public RenderSearchTemplateDescriptor() : base(){}
+		public RenderSearchTemplateDescriptor() : base()
+		{}
 		
 
 			///<summary>The id of the stored search template</summary>
@@ -5049,7 +5188,8 @@ namespace Nest
 	public partial class ScrollDescriptor<T>  : RequestDescriptorBase<ScrollDescriptor<T>,ScrollRequestParameters, IScrollRequest>, IScrollRequest
 	{ 
 			/// <summary>/_search/scroll</summary>
-		public ScrollDescriptor() : base(){}
+		public ScrollDescriptor() : base()
+		{}
 		
 
 		
@@ -5076,7 +5216,8 @@ namespace Nest
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_search</summary>
-		public SearchDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+		public SearchDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T)))
+		{}
 		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -5134,6 +5275,10 @@ namespace Nest
 
 		///<summary>A comma-separated list of specific routing values</summary>
 		public SearchDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public SearchDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchDescriptor<T> Scroll(Time scroll) => AssignParam(p=>p.Scroll(scroll.ToTimeSpan()));
@@ -5197,7 +5342,8 @@ namespace Nest
 	{ 
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_search_shards</summary>
-		public SearchShardsDescriptor() : base(){}
+		public SearchShardsDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -5215,6 +5361,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public SearchShardsDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public SearchShardsDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public SearchShardsDescriptor<T> Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -5251,7 +5401,8 @@ namespace Nest
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/_search/template</summary>
-		public SearchTemplateDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+		public SearchTemplateDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T)))
+		{}
 		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -5287,6 +5438,10 @@ namespace Nest
 
 		///<summary>A comma-separated list of specific routing values</summary>
 		public SearchTemplateDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public SearchTemplateDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchTemplateDescriptor<T> Scroll(Time scroll) => AssignParam(p=>p.Scroll(scroll.ToTimeSpan()));
@@ -5328,7 +5483,8 @@ namespace Nest
 			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
 ///<param name="repository"> this parameter is required</param>		
 ///<param name="snapshot"> this parameter is required</param>
-		public SnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		public SnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
+		{}
 		
 
 		
@@ -5361,7 +5517,8 @@ namespace Nest
 		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 			/// <summary>/_snapshot/{repository}</summary>
 ///<param name="repository"> this parameter is required</param>
-		public CreateRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository)){}
+		public CreateRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository))
+		{}
 		
 
 		
@@ -5399,7 +5556,8 @@ namespace Nest
 			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
 ///<param name="repository"> this parameter is required</param>		
 ///<param name="snapshot"> this parameter is required</param>
-		public DeleteSnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		public DeleteSnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
+		{}
 		
 
 		
@@ -5429,7 +5587,8 @@ namespace Nest
 		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 			/// <summary>/_snapshot/{repository}</summary>
 ///<param name="repository"> this parameter is required</param>
-		public DeleteRepositoryDescriptor(Names repository) : base(r=>r.Required("repository", repository)){}
+		public DeleteRepositoryDescriptor(Names repository) : base(r=>r.Required("repository", repository))
+		{}
 		
 
 		
@@ -5464,7 +5623,8 @@ namespace Nest
 			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
 ///<param name="repository"> this parameter is required</param>		
 ///<param name="snapshot"> this parameter is required</param>
-		public GetSnapshotDescriptor(Name repository, Names snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		public GetSnapshotDescriptor(Name repository, Names snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
+		{}
 		
 
 		
@@ -5499,7 +5659,8 @@ namespace Nest
 	{ 
 		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 			/// <summary>/_snapshot</summary>
-		public GetRepositoryDescriptor() : base(){}
+		public GetRepositoryDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of repository names</summary>
@@ -5537,7 +5698,8 @@ namespace Nest
 			/// <summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
 ///<param name="repository"> this parameter is required</param>		
 ///<param name="snapshot"> this parameter is required</param>
-		public RestoreDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+		public RestoreDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
+		{}
 		
 
 		
@@ -5570,7 +5732,8 @@ namespace Nest
 		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 			/// <summary>/_snapshot/_status</summary>
-		public SnapshotStatusDescriptor() : base(){}
+		public SnapshotStatusDescriptor() : base()
+		{}
 		
 
 			///<summary>A repository name</summary>
@@ -5609,7 +5772,8 @@ namespace Nest
 		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 			/// <summary>/_snapshot/{repository}/_verify</summary>
 ///<param name="repository"> this parameter is required</param>
-		public VerifyRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository)){}
+		public VerifyRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository))
+		{}
 		
 
 		
@@ -5641,7 +5805,8 @@ namespace Nest
 	{ 
 		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks/_cancel</summary>
-		public CancelTasksDescriptor() : base(){}
+		public CancelTasksDescriptor() : base()
+		{}
 		
 
 			///<summary>Cancel the task with specified task id (node_id:task_number)</summary>
@@ -5682,7 +5847,8 @@ namespace Nest
 	{ 
 		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks/{task_id}</summary>
-		public GetTaskDescriptor() : base(){}
+		public GetTaskDescriptor() : base()
+		{}
 		
 
 			///<summary>Return the task with specified id (node_id:task_number)</summary>
@@ -5760,13 +5926,15 @@ namespace Nest
 			/// <summary>/{index}/{type}/_termvectors</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
-		public TermVectorsDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
+		public TermVectorsDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type))
+		=> Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
 		/// <summary>/{index}/{type}/_termvectors</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public TermVectorsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public TermVectorsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
+		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>The index in which the document resides.</summary>
@@ -5813,6 +5981,10 @@ namespace Nest
 		///<summary>Specific routing value.</summary>
 		public TermVectorsDescriptor<TDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public TermVectorsDescriptor<TDocument> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
+
 		///<summary>Parent id of documents.</summary>
 		public TermVectorsDescriptor<TDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
@@ -5852,13 +6024,15 @@ namespace Nest
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
 ///<param name="id"> this parameter is required</param>
-		public UpdateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+		public UpdateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		=> Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
 		/// <summary>/{index}/{type}/{id}/_update</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
-		public UpdateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public UpdateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
+		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>The name of the index</summary>
@@ -5894,6 +6068,10 @@ namespace Nest
 
 		///<summary>Specific routing value</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Explicit operation timeout</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
@@ -5934,7 +6112,8 @@ namespace Nest
 		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_update_by_query</summary>
 ///<param name="index"> this parameter is required</param>
-		public UpdateByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T))){}
+		public UpdateByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T)))
+		{}
 		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -5997,6 +6176,10 @@ namespace Nest
 
 		///<summary>A comma-separated list of specific routing values</summary>
 		public UpdateByQueryDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public UpdateByQueryDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public UpdateByQueryDescriptor<T> Scroll(Time scroll) => AssignParam(p=>p.Scroll(scroll.ToTimeSpan()));
@@ -6090,7 +6273,8 @@ namespace Nest
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_xpack/graph/_explore</summary>
 ///<param name="index"> this parameter is required</param>
-		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index))
+		{}
 		
 
 			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
@@ -6114,6 +6298,10 @@ namespace Nest
 	
 		///<summary>Specific routing value</summary>
 		public GraphExploreDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public GraphExploreDescriptor<T> Routing<TJoinDocument>(TJoinDocument routingDocument) where TJoinDocument : class =>
+			AssignParam(p=>p._Routing(routingDocument));
 
 		///<summary>Explicit operation timeout</summary>
 		public GraphExploreDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
@@ -6140,7 +6328,8 @@ namespace Nest
 	{ 
 		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
 			/// <summary>/_xpack/migration/deprecations</summary>
-		public DeprecationInfoDescriptor() : base(){}
+		public DeprecationInfoDescriptor() : base()
+		{}
 		
 
 			///<summary>Index pattern</summary>
@@ -6290,7 +6479,8 @@ namespace Nest
 		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_close</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public CloseJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public CloseJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 		
@@ -6323,7 +6513,8 @@ namespace Nest
 		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
-		public DeleteDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		public DeleteDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
+		{}
 		
 
 		
@@ -6374,7 +6565,8 @@ namespace Nest
 		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public DeleteJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public DeleteJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 		
@@ -6406,7 +6598,8 @@ namespace Nest
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
 ///<param name="job_id"> this parameter is required</param>		
 ///<param name="snapshot_id"> this parameter is required</param>
-		public DeleteModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		public DeleteModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
+		{}
 		
 
 		
@@ -6433,7 +6626,8 @@ namespace Nest
 		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_flush</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public FlushJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public FlushJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 		
@@ -6463,7 +6657,8 @@ namespace Nest
 		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/buckets</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public GetBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public GetBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 		
@@ -6491,7 +6686,8 @@ namespace Nest
 		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public GetCategoriesDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public GetCategoriesDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 			///<summary>The identifier of the category definition of interest</summary>
@@ -6520,7 +6716,8 @@ namespace Nest
 	{ 
 		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
-		public GetDatafeedsDescriptor() : base(){}
+		public GetDatafeedsDescriptor() : base()
+		{}
 		
 
 			///<summary>The ID of the datafeeds to fetch</summary>
@@ -6549,7 +6746,8 @@ namespace Nest
 	{ 
 		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stats</summary>
-		public GetDatafeedStatsDescriptor() : base(){}
+		public GetDatafeedStatsDescriptor() : base()
+		{}
 		
 
 			///<summary>The ID of the datafeeds stats to fetch</summary>
@@ -6579,7 +6777,8 @@ namespace Nest
 		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/influencers</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public GetInfluencersDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public GetInfluencersDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 		
@@ -6605,7 +6804,8 @@ namespace Nest
 	{ 
 		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-		public GetJobsDescriptor() : base(){}
+		public GetJobsDescriptor() : base()
+		{}
 		
 
 			///<summary>The ID of the jobs to fetch</summary>
@@ -6634,7 +6834,8 @@ namespace Nest
 	{ 
 		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/_stats</summary>
-		public GetJobStatsDescriptor() : base(){}
+		public GetJobStatsDescriptor() : base()
+		{}
 		
 
 			///<summary>The ID of the jobs stats to fetch</summary>
@@ -6665,7 +6866,8 @@ namespace Nest
 		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public GetModelSnapshotsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public GetModelSnapshotsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 			///<summary>The ID of the snapshot to fetch</summary>
@@ -6695,7 +6897,8 @@ namespace Nest
 		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/records</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public GetAnomalyRecordsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public GetAnomalyRecordsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 		
@@ -6722,7 +6925,8 @@ namespace Nest
 		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_open</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public OpenJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public OpenJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 		
@@ -6749,7 +6953,8 @@ namespace Nest
 		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_data</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public PostJobDataDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public PostJobDataDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 		
@@ -6782,7 +6987,8 @@ namespace Nest
 		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_preview</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
-		public PreviewDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		public PreviewDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
+		{}
 		
 
 		
@@ -6809,7 +7015,8 @@ namespace Nest
 		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}. Will infer the index and type from the generic type</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
-		public PutDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){ Self.Indices = typeof(T); Self.Types = typeof(T); }
+		public PutDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
+		{ Self.Indices = typeof(T); Self.Types = typeof(T);  }
 		
 
 		
@@ -6836,7 +7043,8 @@ namespace Nest
 		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public PutJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public PutJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 		
@@ -6865,7 +7073,8 @@ namespace Nest
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
 ///<param name="job_id"> this parameter is required</param>		
 ///<param name="snapshot_id"> this parameter is required</param>
-		public RevertModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		public RevertModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
+		{}
 		
 
 		
@@ -6892,7 +7101,8 @@ namespace Nest
 		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_start</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
-		public StartDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		public StartDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
+		{}
 		
 
 		
@@ -6919,7 +7129,8 @@ namespace Nest
 		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stop</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
-		public StopDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
+		public StopDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
+		{}
 		
 
 		
@@ -6946,7 +7157,8 @@ namespace Nest
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_update. Will infer the index and type from the generic type</summary>
 ///<param name="datafeed_id"> this parameter is required</param>
-		public UpdateDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){ Self.Indices = typeof(T); Self.Types = typeof(T); }
+		public UpdateDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
+		{ Self.Indices = typeof(T); Self.Types = typeof(T);  }
 		
 
 		
@@ -6973,7 +7185,8 @@ namespace Nest
 		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_update</summary>
 ///<param name="job_id"> this parameter is required</param>
-		public UpdateJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public UpdateJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
+		{}
 		
 
 		
@@ -7002,7 +7215,8 @@ namespace Nest
 			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
 ///<param name="job_id"> this parameter is required</param>		
 ///<param name="snapshot_id"> this parameter is required</param>
-		public UpdateModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+		public UpdateModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
+		{}
 		
 
 		
@@ -7091,7 +7305,8 @@ namespace Nest
 	{ 
 		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}/_password</summary>
-		public ChangePasswordDescriptor() : base(){}
+		public ChangePasswordDescriptor() : base()
+		{}
 		
 
 			///<summary>The username of the user to change the password for</summary>
@@ -7124,7 +7339,8 @@ namespace Nest
 		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
 			/// <summary>/_xpack/security/realm/{realms}/_clear_cache</summary>
 ///<param name="realms"> this parameter is required</param>
-		public ClearCachedRealmsDescriptor(Names realms) : base(r=>r.Required("realms", realms)){}
+		public ClearCachedRealmsDescriptor(Names realms) : base(r=>r.Required("realms", realms))
+		{}
 		
 
 		
@@ -7154,7 +7370,8 @@ namespace Nest
 		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_xpack/security/role/{name}/_clear_cache</summary>
 ///<param name="name"> this parameter is required</param>
-		public ClearCachedRolesDescriptor(Names name) : base(r=>r.Required("name", name)){}
+		public ClearCachedRolesDescriptor(Names name) : base(r=>r.Required("name", name))
+		{}
 		
 
 		
@@ -7181,7 +7398,8 @@ namespace Nest
 		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public DeleteRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public DeleteRoleDescriptor(Name name) : base(r=>r.Required("name", name))
+		{}
 		
 
 		
@@ -7211,7 +7429,8 @@ namespace Nest
 		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role_mapping/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public DeleteRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public DeleteRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name))
+		{}
 		
 
 		
@@ -7241,7 +7460,8 @@ namespace Nest
 		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}</summary>
 ///<param name="username"> this parameter is required</param>
-		public DeleteUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		public DeleteUserDescriptor(Name username) : base(r=>r.Required("username", username))
+		{}
 		
 
 		
@@ -7270,7 +7490,8 @@ namespace Nest
 	{ 
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}/_disable</summary>
-		public DisableUserDescriptor() : base(){}
+		public DisableUserDescriptor() : base()
+		{}
 		
 
 			///<summary>The username of the user to disable</summary>
@@ -7302,7 +7523,8 @@ namespace Nest
 	{ 
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}/_enable</summary>
-		public EnableUserDescriptor() : base(){}
+		public EnableUserDescriptor() : base()
+		{}
 		
 
 			///<summary>The username of the user to enable</summary>
@@ -7334,7 +7556,8 @@ namespace Nest
 	{ 
 		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role/{name}</summary>
-		public GetRoleDescriptor() : base(){}
+		public GetRoleDescriptor() : base()
+		{}
 		
 
 			///<summary>Role name</summary>
@@ -7363,7 +7586,8 @@ namespace Nest
 	{ 
 		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role_mapping/{name}</summary>
-		public GetRoleMappingDescriptor() : base(){}
+		public GetRoleMappingDescriptor() : base()
+		{}
 		
 
 			///<summary>Role-Mapping name</summary>
@@ -7413,7 +7637,8 @@ namespace Nest
 	{ 
 		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
 			/// <summary>/_xpack/security/user/{username}</summary>
-		public GetUserDescriptor() : base(){}
+		public GetUserDescriptor() : base()
+		{}
 		
 
 			///<summary>A comma-separated list of usernames</summary>
@@ -7464,7 +7689,8 @@ namespace Nest
 		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public PutRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public PutRoleDescriptor(Name name) : base(r=>r.Required("name", name))
+		{}
 		
 
 		
@@ -7494,7 +7720,8 @@ namespace Nest
 		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_xpack/security/role_mapping/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public PutRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public PutRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name))
+		{}
 		
 
 		
@@ -7524,7 +7751,8 @@ namespace Nest
 		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
 			/// <summary>/_xpack/security/user/{username}</summary>
 ///<param name="username"> this parameter is required</param>
-		public PutUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		public PutUserDescriptor(Name username) : base(r=>r.Required("username", username))
+		{}
 		
 
 		
@@ -7555,7 +7783,8 @@ namespace Nest
 		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
 			/// <summary>/_xpack/watcher/watch/{watch_id}/_ack</summary>
 ///<param name="watch_id"> this parameter is required</param>
-		public AcknowledgeWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		public AcknowledgeWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id))
+		{}
 		
 
 			///<summary>A comma-separated list of the action ids to be acked</summary>
@@ -7588,7 +7817,8 @@ namespace Nest
 		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 			/// <summary>/_xpack/watcher/watch/{watch_id}/_activate</summary>
 ///<param name="watch_id"> this parameter is required</param>
-		public ActivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		public ActivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id))
+		{}
 		
 
 		
@@ -7618,7 +7848,8 @@ namespace Nest
 		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 			/// <summary>/_xpack/watcher/watch/{watch_id}/_deactivate</summary>
 ///<param name="watch_id"> this parameter is required</param>
-		public DeactivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+		public DeactivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id))
+		{}
 		
 
 		
@@ -7648,7 +7879,8 @@ namespace Nest
 		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_xpack/watcher/watch/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public DeleteWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public DeleteWatchDescriptor(Id id) : base(r=>r.Required("id", id))
+		{}
 		
 
 		
@@ -7677,7 +7909,8 @@ namespace Nest
 	{ 
 		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_xpack/watcher/watch/{id}/_execute</summary>
-		public ExecuteWatchDescriptor() : base(){}
+		public ExecuteWatchDescriptor() : base()
+		{}
 		
 
 			///<summary>Watch ID</summary>
@@ -7710,7 +7943,8 @@ namespace Nest
 		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_xpack/watcher/watch/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public GetWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public GetWatchDescriptor(Id id) : base(r=>r.Required("id", id))
+		{}
 		
 
 		
@@ -7737,7 +7971,8 @@ namespace Nest
 		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_xpack/watcher/watch/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public PutWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public PutWatchDescriptor(Id id) : base(r=>r.Required("id", id))
+		{}
 		
 
 		
@@ -7811,7 +8046,8 @@ namespace Nest
 	{ 
 		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");
 			/// <summary>/_xpack/watcher/stats</summary>
-		public WatcherStatsDescriptor() : base(){}
+		public WatcherStatsDescriptor() : base()
+		{}
 		
 
 			///<summary>Controls what additional stat metrics should be include in the response</summary>

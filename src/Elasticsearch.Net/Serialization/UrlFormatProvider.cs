@@ -19,52 +19,35 @@ namespace Elasticsearch.Net
 		{
 			if (arg == null)
 				throw new ArgumentNullException();
-			if (format == "r")
-				return arg.ToString();
-			return Uri.EscapeDataString(this.GetStringValue(arg));
+			if (format == "r") return arg.ToString();
+			var value = this.GetStringValue(arg);
+			return value.IsNullOrEmpty() ? string.Empty : Uri.EscapeDataString(value);
 		}
 
 		public string GetStringValue(object valueType)
 		{
-			var s = valueType as string;
-			if (s != null)
-				return s;
+			if (valueType is string s) return s;
 
-			var ss = valueType as string[];
-			if (ss != null)
-				return string.Join(",", ss);
+			if (valueType is string[] ss) return string.Join(",", ss);
 
-			var pns = valueType as IEnumerable<object>;
-			if (pns != null)
+			if (valueType is IEnumerable<object> pns)
 				return string.Join(",", pns.Select(AttemptTheRightToString));
 
-			var e = valueType as Enum;
-			if (e != null) return e.GetStringValue();
+			if (valueType is Enum e) return e.GetStringValue();
 
-			if (valueType is bool)
-				return ((bool)valueType) ? "true" : "false";
+			if (valueType is bool b) return b ? "true" : "false";
 
-			if (valueType is DateTimeOffset)
-				return ((DateTimeOffset)valueType).ToString("o");
+			if (valueType is DateTimeOffset offset) return offset.ToString("o");
 
 			return AttemptTheRightToString(valueType);
 		}
 
 		public string AttemptTheRightToString(object value)
 		{
-			var explicitImplementation = this.QueryStringValueType(value as IUrlParameter);
-			if (explicitImplementation != null) return explicitImplementation;
-
-
+			if (value is IUrlParameter urlParam) return this.QueryStringValueType(urlParam);
 			return value.ToString();
 		}
 
-		public string QueryStringValueType(IUrlParameter value)
-		{
-			if (value == null) return null;
-			return value.GetString(this._settings);
-		}
-
-
+		public string QueryStringValueType(IUrlParameter value) => value?.GetString(this._settings);
 	}
 }

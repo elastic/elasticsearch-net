@@ -16,8 +16,8 @@ namespace Nest
 	{
 		
 		///<summary>Specific routing value</summary>
-		internal static BulkRequestParameters _Routing<T>(this BulkRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static BulkRequestParameters _Routing<T>(this BulkRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		internal static BulkRequestParameters _Fields<T>(this BulkRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
@@ -32,20 +32,20 @@ namespace Nest
 			qs.SetQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		internal static CountRequestParameters _Routing<T>(this CountRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static CountRequestParameters _Routing<T>(this CountRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>Specific routing value</summary>
-		internal static CreateRequestParameters _Routing<T>(this CreateRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static CreateRequestParameters _Routing<T>(this CreateRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>Specific routing value</summary>
-		internal static DeleteRequestParameters _Routing<T>(this DeleteRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static DeleteRequestParameters _Routing<T>(this DeleteRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		internal static DeleteByQueryRequestParameters _Routing<T>(this DeleteByQueryRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static DeleteByQueryRequestParameters _Routing<T>(this DeleteByQueryRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		internal static DeleteByQueryRequestParameters _SourceExclude<T>(this DeleteByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
@@ -60,8 +60,8 @@ namespace Nest
 			qs.SetQueryString("stored_fields", stored_fields.Select(e=>(Field)e));
 		
 		///<summary>Specific routing value</summary>
-		internal static DocumentExistsRequestParameters _Routing<T>(this DocumentExistsRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static DocumentExistsRequestParameters _Routing<T>(this DocumentExistsRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		internal static DocumentExistsRequestParameters _SourceExclude<T>(this DocumentExistsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
@@ -72,8 +72,8 @@ namespace Nest
 			qs.SetQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
 		///<summary>Specific routing value</summary>
-		internal static SourceExistsRequestParameters _Routing<T>(this SourceExistsRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static SourceExistsRequestParameters _Routing<T>(this SourceExistsRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		internal static SourceExistsRequestParameters _SourceExclude<T>(this SourceExistsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
@@ -88,8 +88,8 @@ namespace Nest
 			qs.SetQueryString("stored_fields", stored_fields.Select(e=>(Field)e));
 		
 		///<summary>Specific routing value</summary>
-		internal static ExplainRequestParameters _Routing<T>(this ExplainRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static ExplainRequestParameters _Routing<T>(this ExplainRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		internal static ExplainRequestParameters _SourceExclude<T>(this ExplainRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
@@ -108,8 +108,8 @@ namespace Nest
 			qs.SetQueryString("stored_fields", stored_fields.Select(e=>(Field)e));
 		
 		///<summary>Specific routing value</summary>
-		internal static GetRequestParameters _Routing<T>(this GetRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static GetRequestParameters _Routing<T>(this GetRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		internal static GetRequestParameters _SourceExclude<T>(this GetRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
@@ -120,8 +120,8 @@ namespace Nest
 			qs.SetQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
 		///<summary>Specific routing value</summary>
-		internal static SourceRequestParameters _Routing<T>(this SourceRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static SourceRequestParameters _Routing<T>(this SourceRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		internal static SourceRequestParameters _SourceExclude<T>(this SourceRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
@@ -132,8 +132,8 @@ namespace Nest
 			qs.SetQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
 		///<summary>Specific routing value</summary>
-		internal static IndexRequestParameters _Routing<T>(this IndexRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static IndexRequestParameters _Routing<T>(this IndexRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		internal static ClearCacheRequestParameters _Fields<T>(this ClearCacheRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
@@ -156,8 +156,8 @@ namespace Nest
 			qs.SetQueryString("stored_fields", stored_fields.Select(e=>(Field)e));
 		
 		///<summary>Specific routing value</summary>
-		internal static MultiGetRequestParameters _Routing<T>(this MultiGetRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static MultiGetRequestParameters _Routing<T>(this MultiGetRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		internal static MultiGetRequestParameters _SourceExclude<T>(this MultiGetRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
@@ -172,8 +172,8 @@ namespace Nest
 			qs.SetQueryString("fields", fields.Select(e=>(Field)e));
 		
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		internal static MultiTermVectorsRequestParameters _Routing<T>(this MultiTermVectorsRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static MultiTermVectorsRequestParameters _Routing<T>(this MultiTermVectorsRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		internal static NodesStatsRequestParameters _CompletionFields<T>(this NodesStatsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  completion_fields) where T : class =>
@@ -192,36 +192,36 @@ namespace Nest
 			qs.SetQueryString("docvalue_fields", docvalue_fields.Select(e=>(Field)e));
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		internal static SearchRequestParameters _Routing<T>(this SearchRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static SearchRequestParameters _Routing<T>(this SearchRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>Specify which field to use for suggestions</summary>
 		internal static SearchRequestParameters _SuggestField<T>(this SearchRequestParameters qs, Expression<Func<T, object>> suggest_field) where T : class =>
 			qs.SetQueryString("suggest_field", (Field)suggest_field);
 		
 		///<summary>Specific routing value</summary>
-		internal static SearchShardsRequestParameters _Routing<T>(this SearchShardsRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static SearchShardsRequestParameters _Routing<T>(this SearchShardsRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		internal static SearchTemplateRequestParameters _Routing<T>(this SearchTemplateRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static SearchTemplateRequestParameters _Routing<T>(this SearchTemplateRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A comma-separated list of fields to return.</summary>
 		internal static TermVectorsRequestParameters _Fields<T>(this TermVectorsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.SetQueryString("fields", fields.Select(e=>(Field)e));
 		
 		///<summary>Specific routing value.</summary>
-		internal static TermVectorsRequestParameters _Routing<T>(this TermVectorsRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static TermVectorsRequestParameters _Routing<T>(this TermVectorsRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>Specific routing value</summary>
-		internal static UpdateRequestParameters _Routing<T>(this UpdateRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static UpdateRequestParameters _Routing<T>(this UpdateRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		internal static UpdateByQueryRequestParameters _Routing<T>(this UpdateByQueryRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static UpdateByQueryRequestParameters _Routing<T>(this UpdateByQueryRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		internal static UpdateByQueryRequestParameters _SourceExclude<T>(this UpdateByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
@@ -232,8 +232,8 @@ namespace Nest
 			qs.SetQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
 		///<summary>Specific routing value</summary>
-		internal static GraphExploreRequestParameters _Routing<T>(this GraphExploreRequestParameters qs, T routing) where T : class =>
-			qs.SetQueryString("routing", new Routing(() => routing));
+		internal static GraphExploreRequestParameters _Routing<T>(this GraphExploreRequestParameters qs, T routingDocument) where T : class =>
+			qs.SetQueryString("routing", new Routing(() => routingDocument));
 	}
 }
  

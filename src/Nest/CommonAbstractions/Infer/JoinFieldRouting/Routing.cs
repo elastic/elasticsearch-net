@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IdJsonConverter))]
+	[JsonConverter(typeof(RoutingJsonConverter))]
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Routing : IEquatable<Routing>, IUrlParameter
 	{
@@ -34,7 +34,12 @@ namespace Nest
 
 		private string GetString(IConnectionSettingsValues nestSettings)
 		{
-			if (this.Document != null)
+			if (this.DocumentGetter != null)
+			{
+				var doc = this.DocumentGetter();
+				Value = nestSettings.Inferrer.JoinRouting(doc);
+			}
+			else if (this.Document != null)
 				Value = nestSettings.Inferrer.JoinRouting(this.Document);
 
 			var s = Value as string;

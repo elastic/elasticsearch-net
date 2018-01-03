@@ -52,6 +52,7 @@ namespace Nest
 		/// </summary>
 		public ITermVectorFilter Filter { get; set; }
 
+		private TDocument AutoRouteDocument() => Self.Document;
 		partial void DocumentFromPath(TDocument document)
 		{
 			Self.Document = document;
@@ -64,6 +65,7 @@ namespace Nest
 	public partial class TermVectorsDescriptor<TDocument> where TDocument : class
 	{
 		HttpMethod IRequest.HttpMethod => (Self.Document != null || Self.Filter != null) ? HttpMethod.POST : HttpMethod.GET;
+		private TDocument AutoRouteDocument() => Self.Document;
 
 		TDocument ITermVectorsRequest<TDocument>.Document { get; set; }
 

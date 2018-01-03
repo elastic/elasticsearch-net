@@ -17,6 +17,7 @@ namespace Nest
 			RequestState.RequestParameters?.ContainsKey("source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		public QueryContainer Query { get; set; }
+		private object AutoRouteDocument() => null;
 	}
 
 	[DescriptorFor("Explain")]
@@ -27,6 +28,7 @@ namespace Nest
 			RequestState.RequestParameters?.ContainsKey("source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		QueryContainer IExplainRequest<TDocument>.Query { get; set; }
+		private object AutoRouteDocument() => null;
 
 		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<TDocument>()));

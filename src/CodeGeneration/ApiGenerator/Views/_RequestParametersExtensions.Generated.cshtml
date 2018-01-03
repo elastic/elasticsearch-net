@@ -63,8 +63,8 @@ namespace Nest
 		{
 		<text>
 		///<summary>@kv.Value.Description</summary>
-		internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(this @method.QueryStringParamName qs, @Raw("T") @mm) where T : class =>
-			qs.SetQueryString("@mm", new Routing(() => @mm));</text>
+		internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(this @method.QueryStringParamName qs, @Raw("T") @(mm)Document) where T : class =>
+			qs.SetQueryString("@mm", new Routing(() => @(mm)Document));</text>
 		}
 	}
 	}

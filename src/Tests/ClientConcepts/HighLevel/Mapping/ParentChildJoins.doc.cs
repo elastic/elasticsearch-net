@@ -242,28 +242,67 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * correct parent.
 		 */
 
-		[U] public void Inferrence()
+		[U]
+		public void Inferrence()
 		{
 			// hide
 			var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
 			var infer = client.Infer;
-			var parentDocument = new MyParent { Id = 1337, MyJoinField = JoinField.Root<MyParent>() };
-			infer.JoinRouting(parentDocument).Should().Be("1337");
+			var parent = new MyParent {Id = 1337, MyJoinField = JoinField.Root<MyParent>()};
+			infer.JoinRouting(parent).Should().Be("1337");
 
-			var child = new MyChild { Id =  1338, MyJoinField = JoinField.Link<MyChild>(parentId: "1337") };
+			var child = new MyChild {Id = 1338, MyJoinField = JoinField.Link<MyChild>(parentId: "1337")};
 			infer.JoinRouting(child).Should().Be("1337");
 
-			child = new MyChild { Id =  1339, MyJoinField = JoinField.Link<MyChild, MyParent>(parentDocument) };
+			child = new MyChild {Id = 1339, MyJoinField = JoinField.Link<MyChild, MyParent>(parent)};
 			infer.JoinRouting(child).Should().Be("1337");
 
-			var indexResponse = client.Index<MyDocument>(parentDocument, i=>i.Routing(infer.JoinRouting(child)));
+			/**
+			 * here we index `parent` and rather than fishing out the parent id by inspecting `parent` we just pass the instance
+			 * to `Routing` which can infer the correct routing key based on the JoinField property on the instance
+			 */
+			var indexResponse = client.Index(parent, i => i.Routing(parent));
 			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+
+			/**
+			 * The same goes for when we index a child, we can pass the instance directly to `Routing` and NEST will use the parent id
+			 * already specified on `child`
+			 */
+			indexResponse = client.Index(child, i => i.Routing(child));
+			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+
+			/** Wouldn't be handy if NEST does this automatically? It does! */
+			indexResponse = client.IndexDocument(child);
+			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+
+			/** You can always override the default inferred routing though */
+			indexResponse = client.Index(child, i => i.Routing("explicit"));
+			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=explicit");
+
+			indexResponse = client.Index(child, i => i.Routing(null));
+			indexResponse.ApiCall.Uri.Query.Should().NotContain("routing");
+
+			/**
+			 * This works for both the fluent and object initializer syntax
+			 */
+
+			var indexRequest = new IndexRequest<MyChild>(child);
+			indexResponse = client.Index(indexRequest);
+			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=1337");
+			/**
+			 * Its important to note that the routing is resolved at request time, not instantation time
+			 * here we update the `child`'s `JoinField` after already creating the index request for `child`
+			 */
+			child.MyJoinField = JoinField.Link<MyChild>(parentId: "something-else");
+			indexResponse = client.Index(indexRequest);
+			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=something-else");
 		}
-        /** [NOTE]
-         * --
+
+		/** [NOTE]
+		 * --
 		 * If you use multiple levels of parent and child relations e.g `A => B => C` when you index `C` you
 		 * need to provide the id of `A` as the routing key but the id of `B` to set up the relation on the join field. In this case NEST
-         * `JoinRouting` helper is unable to resolve to the id of `A` and will return the id of `B`.
+		 * `JoinRouting` helper is unable to resolve to the id of `A` and will return the id of `B`.
 		 *
 		 */
 	}

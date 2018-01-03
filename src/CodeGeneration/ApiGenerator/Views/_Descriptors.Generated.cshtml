@@ -30,6 +30,7 @@ namespace Nest
     {
 	<text>	@(Raw(c.Description))
 		@(Raw(c.Generated))
+		@(Raw(c.Body.IsNullOrEmpty() ? "{}" : c.Body))
 		@(Raw(c.AdditionalCode))
 </text>
     }
@@ -71,6 +72,12 @@ namespace Nest
 		///<summary>@kv.Value.Description</summary>
 		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") =>
 			AssignParam(p=>p._@(mm)(field));</text>
+		}
+		else if (mm.ToLowerInvariant().Contains("routing") && t.Contains("string"))
+		{<text>
+		///<summary>Infer the routing using a document that has a JoinField property, this works for parents and children but not grandchildren</summary>
+		public @Raw(type) @mm@(Raw("<TJoinDocument>"))(@Raw("TJoinDocument") routingDocument) @Raw("where TJoinDocument : class") =>
+			AssignParam(p=>p._@(mm)(routingDocument));</text>
 		}
 	}
 	if (method.Unmapped)

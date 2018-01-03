@@ -27,7 +27,6 @@ namespace Elasticsearch.Net
 
 		void IRequestParameters.SetQueryStringValue(string name, object value)
 		{
-			if (value == null || name.IsNullOrEmpty()) return;
 			Self.QueryString[name] = value;
 		}
 
@@ -39,6 +38,7 @@ namespace Elasticsearch.Net
 
 		public T RemoveQueryString(string name)
 		{
+			if (!Self.QueryString.ContainsKey(name)) return (T) this;
 			Self.QueryString.Remove(name);
 			return (T)this;
 		}

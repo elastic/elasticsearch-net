@@ -15,6 +15,7 @@ namespace Nest
 		public TDocument Document { get; set; }
 
 		partial void DocumentFromPath(TDocument document) => this.Document = document;
+		private TDocument AutoRouteDocument() => this.Document;
 
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(this.Document, stream, formatting);
@@ -27,6 +28,7 @@ namespace Nest
 		TDocument ICreateRequest<TDocument>.Document { get; set; }
 
 		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
+		private TDocument AutoRouteDocument() => Self.Document;
 
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
