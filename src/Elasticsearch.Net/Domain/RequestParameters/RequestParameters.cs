@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using static Elasticsearch.Net.UrlFormatProvider;
 
 namespace Elasticsearch.Net
 {
@@ -13,28 +14,17 @@ namespace Elasticsearch.Net
 	{
 		private IRequestParameters Self => this;
 
-		IDictionary<string, object> IRequestParameters.QueryString { get; set; }
-		Func<IApiCallDetails, Stream, object> IRequestParameters.DeserializationOverride { get; set; }
-		IRequestConfiguration IRequestParameters.RequestConfiguration { get; set; }
+		public Func<IApiCallDetails, Stream, object> DeserializationOverride { get; set; }
+		public IRequestConfiguration RequestConfiguration { get; set; }
 
 		public abstract HttpMethod DefaultHttpMethod { get; }
+		public Dictionary<string, object> QueryString { get; set; } = new Dictionary<string, object>();
 
-		protected RequestParameters()
-		{
-			Self.QueryString = new Dictionary<string, object>();
-		}
-		public T RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> selector)
-		{
-			Self.RequestConfiguration = selector?.Invoke(new RequestConfigurationDescriptor(Self.RequestConfiguration)) ?? Self.RequestConfiguration;
-			return (T)this;
-		}
+		//These exists solely so the generated code can call these shortened methods
+		protected TOut Q<TOut>(string name) => this.GetQueryStringValue<TOut>(name);
+		protected void Q(string name, object value) => this.SetQueryString(name, value);
 
-		public T DeserializationOverride(Func<IApiCallDetails, Stream, object> customResponseCreator)
-		{
-			Self.DeserializationOverride = customResponseCreator;
-			return (T)this;
-		}
-
+		/// <inheritdoc />
 		public void SetQueryString(string name, object value)
 		{
 			if (value == null) this.RemoveQueryString(name);
@@ -45,19 +35,13 @@ namespace Elasticsearch.Net
 			if (!Self.QueryString.ContainsKey(name)) return;
 			Self.QueryString.Remove(name);
 		}
+		/// <inheritdoc />
+		public bool ContainsQueryString(string name) => Self.QueryString != null && Self.QueryString.ContainsKey(name);
 
-		protected TOut Q<TOut>(string name) => this.GetQueryStringValue<TOut>(name);
-
-		protected void Q(string name, object value) => this.SetQueryString(name, value);
-
-		public bool ContainsKey(string name)
-		{
-			return Self.QueryString != null && Self.QueryString.ContainsKey(name);
-		}
-
+		/// <inheritdoc />
 		public TOut GetQueryStringValue<TOut>(string name)
 		{
-			if (!this.ContainsKey(name))
+			if (!this.ContainsQueryString(name))
 				return default(TOut);
 			var value = Self.QueryString[name];
 			if (value == null)
@@ -65,6 +49,9 @@ namespace Elasticsearch.Net
 			return (TOut)value;
 		}
 
+		/// <inheritdoc />
+		public string GetResolvedQueryStringValue(string n, IConnectionConfigurationValues s) =>
+			GetUnescapedStringRepresentation(GetQueryStringValue<object>(n), s);
 	}
 
 }

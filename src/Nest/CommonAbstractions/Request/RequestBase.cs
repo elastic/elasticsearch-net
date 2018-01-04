@@ -118,7 +118,8 @@ namespace Nest
 		/// </summary>
 		public TDescriptor RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
 		{
-			RequestState.RequestParameters.RequestConfiguration(configurationSelector);
+			var rc = RequestState.RequestParameters.RequestConfiguration;
+			RequestState.RequestParameters.RequestConfiguration = configurationSelector?.Invoke(new RequestConfigurationDescriptor(rc)) ?? rc;
 			return _descriptor;
 		}
 

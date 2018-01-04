@@ -11,7 +11,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// The querystring that should be appended to the path of the request
 		/// </summary>
-		IDictionary<string, object> QueryString { get; set; }
+		Dictionary<string, object> QueryString { get; set; }
 
 		/// <summary>
 		/// A method that can be set on the request to take ownership of creating the response object.
@@ -24,8 +24,21 @@ namespace Elasticsearch.Net
 		/// </summary>
 		IRequestConfiguration RequestConfiguration { get; set; }
 
+		/// <summary> Sets a query string param. If <paramref name="value"/> is null and the parameter exists it will be removed </summary>
+		/// <param name="name">The query string parameter to add</param>
+		/// <param name="value">The value to set, if null removes <paramref name="name"/> from the query string if it exists</param>
+		void SetQueryString(string name, object value);
+
+		bool ContainsQueryString(string name);
+
+		/// <summary>
+		/// Get's the value as its stored on the querystring using its original type
+		/// </summary>
 		TOut GetQueryStringValue<TOut>(string name);
 
-		void SetQueryString(string name, object value);
+		/// <summary>
+		/// Gets the stringified representation of a query string value as it would be send to elasticsearch.
+		/// </summary>
+		string GetResolvedQueryStringValue(string n, IConnectionConfigurationValues s);
 	}
 }
