@@ -20,8 +20,9 @@ namespace Nest
 	public static class RequestPameterExtensions
 	{
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
-    {
-        if (!method.Url.Params.Any(p => p.Key.Contains("field") || p.Key.Contains("source_") || p.Key.Contains("routing")))
+	{
+		var containsParamThatNeedsExtension = method.Url.Params.Any(p => p.Key.Contains("field") || p.Key.Contains("source_") || p.Key.Contains("routing"));
+        if (!containsParamThatNeedsExtension)
         {
             continue;
         }

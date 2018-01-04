@@ -39,9 +39,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		/**
 		* ==== Inferring from a type
 		*
-		* The real power of the `Routing` comes from the fact that you can set up inference rules for a `POCO`.
-		*
-		* Without doing anything though the default inferred routing for an object will be `null`.
+		* The real power of the `Routing` is in the inference rules (the default inferred routing for an object will be null).
+		* Lets look at an example of this given the following POCO:
 		*/
 		class MyDTO
 		{
@@ -88,8 +87,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		/**
 		* ==== JoinField
 		*
-		* If your POCO has a `JoinField` property however NEST will automatically infer the parentid as the routing value.
-		* The name of this property can be anything.
+		* If your class has a property of type JoinField, NEST will automatically infer the parentid as the routing value.
+		 *
+		* The name of this property can be anything. Be sure the read the <<parent-child-joins, section on parent child joins>> to get a complete
+		 * walkthrough using Parent Child joins with NEST.
 		*/
 		class MyOtherDTO
 		{
@@ -112,8 +113,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("8080").WhenInferringRoutingOn(dto);
 
 			/**
-			 * here we link this instance as the root (parent) of the relation. Nest is smart enough to infer that the default routing
-			 * for this instance should be the `Id` of the document itself.`
+			 * Here we link this instance as the root (parent) of the relation. NEST infers that the default routing for this instance
+			 * should be the Id of the document itself.
 			 */
 			dto = new MyOtherDTO
 			{
@@ -127,7 +128,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/**
 			* ==== Precedence of ConnectionSettings
 			*
-			* The routing property configured on `ConnectionSettings` however always takes precedence.
+			* The routing property configured on `ConnectionSettings` always takes precedence.
 			*
 			*/
 			WithConnectionSettings(x => x
@@ -144,7 +145,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 		[U] public void DuplicateJoinField()
 		{
-			/** a property with more than one JoinField is not allowed */
+			/**
+			 * A class cannot contain more than one property of type JoinField, an exception is thrown in this case
+			 */
 			var dto = new BadDTO
 			{
 				SomeJoinField = JoinField.Link<MyOtherDTO>("8080"),
@@ -154,7 +157,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Action resolve = () => Expect("8080").WhenInferringRoutingOn(dto);
 			resolve.ShouldThrow<ArgumentException>().WithMessage("BadDTO has more than one JoinField property");
 
-			/** unless you configure NEST to look elsewhere */
+			/** unless you configure the ConnectionSettings to use an alternate property: */
 			WithConnectionSettings(x => x
 				.InferMappingFor<BadDTO>(m => m
 					.RoutingProperty(p => p.ParentName)
