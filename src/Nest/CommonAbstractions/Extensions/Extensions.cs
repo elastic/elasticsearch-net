@@ -128,6 +128,10 @@ namespace Nest
 		{
 			return value == null || value.GetHashCode() == 0;
 		}
+		internal static bool IsNullOrEmpty(this IndexName value)
+		{
+			return value == null || value.GetHashCode() == 0;
+		}
 		internal static bool IsValueType(this Type type)
 		{
 #if DOTNETCORE

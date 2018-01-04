@@ -41,7 +41,7 @@ namespace Nest
 	{
 		[JsonIgnore]
 		public IReadOnlyDictionary<IndexName, IndexMappings> Indices => Self.BackingDictionary;
-		
+
 		[JsonIgnore]
 		[Obsolete("Renamed to Indices, will be deleted from NEST 7.x")]
 		public IReadOnlyDictionary<IndexName, IndexMappings> Mappings => Indices;
@@ -49,14 +49,35 @@ namespace Nest
 		[Obsolete("Use GetMappingFor explicitly instead this is a leaky abstraction that returns the mapping of the first index's first type on the response")]
 		public ITypeMapping Mapping => this.Indices.FirstOrDefault().Value?.Mappings?.FirstOrDefault().Value;
 
-		public ITypeMapping GetMappingFor<T>() => this.Indices[typeof(T)]?[typeof(T)];
-		public ITypeMapping GetMappingFor(string index, string type) => this.Indices[index]?[type];
-		public ITypeMapping GetMappingFor(string index) => this.Indices[index]?.Mappings?.FirstOrDefault().Value;
 
 		public void Accept(IMappingVisitor visitor)
 		{
 			var walker = new MappingWalker(visitor);
 			walker.Accept(this);
 		}
+	}
+
+	public static class GetMappingResponseExtensions
+	{
+
+		public static ITypeMapping GetMappingFor<T>(this IGetMappingResponse response) => response.GetMappingFor(typeof(T), typeof(T));
+
+		public static ITypeMapping GetMappingFor(this IGetMappingResponse response, IndexName index, TypeName type)
+		{
+			if (index.IsNullOrEmpty() || type.IsNullOrEmpty()) return null;
+			TypeMapping mapping = null;
+			var hasValue = response.Indices.TryGetValue(index, out var typeMapping)
+			        && typeMapping?.Mappings != null
+			        && typeMapping.Mappings.TryGetValue(type, out mapping);
+			return mapping;
+		}
+
+		public static ITypeMapping GetMappingFor(this IGetMappingResponse response, IndexName index)
+		{
+			if (index.IsNullOrEmpty()) return null;
+			if (!response.Indices.TryGetValue(index, out var typeMapping)) return null;
+			return typeMapping?.Mappings?.FirstOrDefault().Value;
+		}
+
 	}
 }

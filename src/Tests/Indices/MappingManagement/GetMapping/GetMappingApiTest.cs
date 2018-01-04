@@ -51,17 +51,31 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			var leadDev = properties[Property<Project>(p => p.LeadDeveloper)];
 			leadDev.Should().NotBeNull();
 
+			var props = response.Indices["x"]?["y"].Properties;
+			props.Should().BeNull();
+
 			//hide
-			AssertBadDictionaryAccess(response);
+			AssertExtensionMethods(response);
 
 			//hide
 			AssertVisitedProperies(response);
 		}
 
 		//hide
-		private static void AssertBadDictionaryAccess(IGetMappingResponse response)
+		private static void AssertExtensionMethods(IGetMappingResponse response)
 		{
-			response.Indices[null].Should().BeNull();
+			/** The `GetMappingFor` extension method can be used to get a type mapping easily and safely */
+			response.GetMappingFor<Project>().Should().NotBeNull();
+			response.GetMappingFor(typeof(Project), typeof(Project)).Should().NotBeNull();
+			response.GetMappingFor(typeof(Project)).Should().NotBeNull();
+
+			/** The following should all return a `null` because we had asked for the mapping of type `doc` in index `project` */
+			response.GetMappingFor<Developer>().Should().BeNull();
+			response.GetMappingFor("dev", "dev").Should().BeNull();
+			response.GetMappingFor(typeof(Project), "x").Should().BeNull();
+			response.GetMappingFor("dev").Should().BeNull();
+
+
 
 		}
 		//hide
