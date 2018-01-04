@@ -12,13 +12,6 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregateDictionaryConverter))]
 	public class AggregateDictionary : IsAReadOnlyDictionaryBase<string, IAggregate>
 	{
-		private static string TypedKeysTokens(string key)
-		{
-//typed_keys = true on results in aggregation keys being returned as "<type>#<name>"
-			var tokens = key.Split(TypedKeysSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
-			return tokens.Length > 1 ? tokens[1] : tokens[0];
-		}
-
 		public static AggregateDictionary Default { get; } = new AggregateDictionary(EmptyReadOnly<string, IAggregate>.Dictionary);
 
 		public AggregateDictionary(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary) { }
