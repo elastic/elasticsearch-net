@@ -1,21 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class AggregateDictionaryConverter : VerbatimDictionaryKeysJsonConverter<string, IAggregate>
-	{
-		public override bool CanRead => true;
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			var dict = serializer.Deserialize<Dictionary<string, IAggregate>>(reader);
-			return new AggregateDictionary(dict);
-		}
-	}
-
 	/// <summary>
 	/// Contains aggregates that are returned by Elasticsearch. In NEST `Aggregation` always refers to an aggregation
 	/// going to elasticsearch and an `Aggregate` describes an aggregation going out.
@@ -27,12 +16,18 @@ namespace Nest
 
 		public AggregateDictionary(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary) { }
 
-		private static readonly char[] TypedKeysSeparator = {'#'};
 		protected override string Sanitize(string key)
 		{
 			//typed_keys = true on results in aggregation keys being returned as "<type>#<name>"
-			var tokens = key.Split(TypedKeysSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
+			var tokens = TypedKeyTokens(key);
 			return tokens.Length > 1 ? tokens[1] : tokens[0];
+		}
+
+		internal static readonly char[] TypedKeysSeparator = {'#'};
+		internal static string[] TypedKeyTokens(string key)
+		{
+			var tokens = key.Split(TypedKeysSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
+			return tokens;
 		}
 
 		public ValueAggregate Min(string key) => this.TryGet<ValueAggregate>(key);

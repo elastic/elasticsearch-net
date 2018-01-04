@@ -11,15 +11,13 @@ using Xunit;
 
 namespace Tests.Aggregations
 {
-	public static class AggregationsTests
-	{
-		public static bool UsesTypedKeys { get; } = Gimme.Random.Bool(TestClient.Configuration.Seed);
-	}
-
 	public abstract class AggregationUsageTestBase
 		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
@@ -35,10 +33,15 @@ namespace Tests.Aggregations
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>(this.AgainstIndex, Type<Project>())
 			{
-				Size =  0,
-				TypedKeys = AggregationsTests.UsesTypedKeys,
+				Query = QueryScope,
+				Size = 0,
+				TypedKeys = TestClient.Configuration.Random.TypedKeys,
 				Aggregations = InitializerAggs
 			};
+
+		protected virtual QueryContainer QueryScope { get; }
+
+		protected virtual object QueryScopeJson { get; }
 
 		protected virtual Nest.Indices AgainstIndex { get; } = Index<Project>();
 
@@ -48,16 +51,15 @@ namespace Tests.Aggregations
 			.Size(0)
 			.Index(AgainstIndex)
 			.Type<Project>()
-			.TypedKeys(AggregationsTests.UsesTypedKeys)
+			.TypedKeys(TestClient.Configuration.Random.TypedKeys)
+			.Query(q=> QueryScope)
 			.Aggregations(this.FluentAggs);
 
 		protected abstract Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs { get; }
 
-		protected sealed override object ExpectJson => new
-		{
-			size = 0,
-			aggs = AggregationJson
-		};
+		protected sealed override object ExpectJson => this.QueryScopeJson == null  ?
+			 (object) new { size = 0, aggs = AggregationJson }
+			 : new { size = 0, aggs = AggregationJson, query = QueryScopeJson };
 
 		protected abstract object AggregationJson { get;  }
 	}

@@ -25,5 +25,8 @@ namespace Tests.Framework
 				? Enumerable.Empty<IXunitTestCase>()
 				: new[] { new XunitTestCase(DiagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), testMethod) };
 
+		protected static bool SkipWhenNeedingTypedKeys(Type classOfMethod) =>
+			(!TestClient.Configuration.Random.TypedKeys && classOfMethod.GetAttributes<NeedsTypedKeysAttribute>().Any());
+
 	}
 }

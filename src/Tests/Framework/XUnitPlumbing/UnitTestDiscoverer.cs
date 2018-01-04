@@ -16,8 +16,10 @@ namespace Tests.Framework
 			var classOfMethod = Type.GetType(testMethod.TestClass.Class.Name, true, true);
 			return !TestClient.Configuration.RunUnitTests
 			       || ClassShouldSkipWhenPackageReference(classOfMethod)
-			       || ClassIsIntegrationOnly(classOfMethod);
+			       || ClassIsIntegrationOnly(classOfMethod)
+			       || SkipWhenNeedingTypedKeys(classOfMethod);
 		}
+
 
 		private static bool ClassShouldSkipWhenPackageReference(Type classOfMethod)
 		{

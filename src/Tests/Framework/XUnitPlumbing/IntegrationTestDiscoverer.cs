@@ -21,7 +21,8 @@ namespace Tests.Framework
 
 			return TypeSkipVersionAttributeSatisfies(classOfMethod)
 			       || MethodSkipVersionAttributeSatisfies(method)
-			       || SkipWhenRunOnTeamCity(classOfMethod, method);
+			       || SkipWhenRunOnTeamCity(classOfMethod, method)
+			       || SkipWhenNeedingTypedKeys(classOfMethod);
 		}
 
 		private bool SkipWhenRunOnTeamCity(Type classOfMethod, MethodInfo info)

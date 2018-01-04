@@ -33,6 +33,5 @@ namespace Nest
 			}
 			return null;
 		}
-
 	}
 }
