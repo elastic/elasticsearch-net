@@ -43,10 +43,6 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			response.ShouldBeValid();
 
-			var visitor = new TestVisitor();
-			response.Accept(visitor);
-			var b = TestClient.Configuration.Random.SourceSerializer;
-
 			response.Indices["project"]["doc"].Properties.Should().NotBeEmpty();
 			response.Indices[Index<Project>()].Mappings[Type<Project>()].Properties.Should().NotBeEmpty();
 			response.Indices[Index<Project>()][Type<Project>()].Properties.Should().NotBeEmpty();
@@ -55,6 +51,25 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			var leadDev = properties[Property<Project>(p => p.LeadDeveloper)];
 			leadDev.Should().NotBeNull();
 
+			//hide
+			AssertBadDictionaryAccess(response);
+
+			//hide
+			AssertVisitedProperies(response);
+		}
+
+		//hide
+		private static void AssertBadDictionaryAccess(IGetMappingResponse response)
+		{
+			response.Indices[null].Should().BeNull();
+
+		}
+		//hide
+		private static void AssertVisitedProperies(IGetMappingResponse response)
+		{
+			var visitor = new TestVisitor();
+			var b = TestClient.Configuration.Random.SourceSerializer;
+			response.Accept(visitor);
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			visitor.CountsShouldContainKeyAndCountBe("text", b ? 19 : 18);
 			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 19 : 18);
