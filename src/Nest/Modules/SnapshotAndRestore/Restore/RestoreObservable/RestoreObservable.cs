@@ -47,7 +47,7 @@ namespace Nest
 
 			try
 			{
-				_restoreRequest.RequestParameters.WaitForCompletion(false);
+				_restoreRequest.RequestParameters.WaitForCompletion = false;
 				var restoreResponse = this._elasticClient.Restore(_restoreRequest);
 
 				if (!restoreResponse.IsValid)

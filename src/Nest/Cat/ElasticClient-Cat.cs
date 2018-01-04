@@ -22,7 +22,7 @@ namespace Nest
 			Func<IRequest<TParams>, CatResponse<TCatRecord>> dispatch
 			)
 			where TCatRecord : ICatRecord
-			where TParams : FluentRequestParameters<TParams>, new()
+			where TParams : RequestParameters<TParams>, new()
 			where TRequest : IRequest<TParams> =>
 			this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
 				ForceConfiguration<TRequest, TParams>(request, c => {
@@ -39,7 +39,7 @@ namespace Nest
 			Func<IRequest<TParams>, CancellationToken, Task<CatResponse<TCatRecord>>> dispatch
 			)
 			where TCatRecord : ICatRecord
-			where TParams : FluentRequestParameters<TParams>, new()
+			where TParams : RequestParameters<TParams>, new()
 			where TRequest : IRequest<TParams> =>
 			this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
 				ForceConfiguration<TRequest, TParams>(request, c =>

@@ -13,11 +13,7 @@ namespace ApiGenerator.Domain
 		public string Obsolete { get; set; }
 		public IEnumerable<string> Options { get; set; }
 
-		public ApiQueryParameters()
-		{
-			FluentGenerator = (queryStringParamName, mm, original, setter) =>
-				$"public {queryStringParamName} {mm.ToPascalCase()}({CsharpType(mm)} {mm}) => this.SetQueryString(\"{original}\", {setter});";
-		}
+
 
 		public string CsharpType(string paramName)
 		{

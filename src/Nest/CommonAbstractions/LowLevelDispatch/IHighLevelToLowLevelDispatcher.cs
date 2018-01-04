@@ -12,7 +12,7 @@ namespace Nest
 			TRequest descriptor,
 			Func<TRequest, SerializableData<TRequest>, TResponse> dispatch
 		)
-			where TQueryString : FluentRequestParameters<TQueryString>, new()
+			where TQueryString : RequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
 			where TResponse : ResponseBase;
 
@@ -21,7 +21,7 @@ namespace Nest
 			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
 			Func<TRequest, SerializableData<TRequest>, TResponse> dispatch
 			)
-			where TQueryString : FluentRequestParameters<TQueryString>, new()
+			where TQueryString : RequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
 			where TResponse : ResponseBase;
 
@@ -30,7 +30,7 @@ namespace Nest
 			CancellationToken cancellationToken,
 			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
 			)
-			where TQueryString : FluentRequestParameters<TQueryString>, new()
+			where TQueryString : RequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
 			where TResponse : ResponseBase, TResponseInterface
 			where TResponseInterface : IResponse;
@@ -41,7 +41,7 @@ namespace Nest
 			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
 			Func<TRequest, SerializableData<TRequest>, CancellationToken, Task<TResponse>> dispatch
 		)
-			where TQueryString : FluentRequestParameters<TQueryString>, new()
+			where TQueryString : RequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
 			where TResponse : ResponseBase, TResponseInterface
 			where TResponseInterface : IResponse;

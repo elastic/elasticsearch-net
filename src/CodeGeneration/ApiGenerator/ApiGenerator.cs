@@ -22,7 +22,6 @@ namespace ApiGenerator
 			{
 				{  GenerateClientInterface, "Client interface" },
 				{  GenerateRequestParameters, "Request parameters" },
-				{  GenerateRequestParametersExtensions, "Request parameters override" },
 				{  GenerateDescriptors, "Descriptors" },
 				{  GenerateRequests, "Requests" },
 				{  GenerateEnums, "Enums" },
@@ -190,13 +189,6 @@ namespace ApiGenerator
 		{
 			var targetFile = CodeConfiguration.EsNetFolder + @"Domain\RequestParameters\RequestParameters.Generated.cs";
 			var source = RazorHelper.Execute(File.ReadAllText(CodeConfiguration.ViewFolder + @"RequestParameters.Generated.cshtml"), model).ToString();
-			File.WriteAllText(targetFile, source);
-		}
-
-		private static void GenerateRequestParametersExtensions(RestApiSpec model)
-		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_RequestParametersExtensions.Generated.cs";
-			var source = RazorHelper.Execute(File.ReadAllText(CodeConfiguration.ViewFolder + @"_RequestParametersExtensions.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 

@@ -62,7 +62,7 @@ namespace Nest
 
 		protected TOut Q<TOut>(string name) => RequestState.RequestParameters.GetQueryStringValue<TOut>(name);
 
-		protected void Q(string name, object value) => RequestState.RequestParameters.SetQueryStringValue(name, value);
+		protected void Q(string name, object value) => RequestState.RequestParameters.SetQueryString(name, value);
 
 	}
 
@@ -84,7 +84,7 @@ namespace Nest
 
 	public abstract class RequestDescriptorBase<TDescriptor, TParameters, TInterface> : RequestBase<TParameters>, IDescriptor
 		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters, TInterface>, TInterface
-		where TParameters : FluentRequestParameters<TParameters>, new()
+		where TParameters : RequestParameters<TParameters>, new()
 	{
 		private readonly TDescriptor _descriptor;
 
@@ -97,6 +97,11 @@ namespace Nest
 		protected TDescriptor Assign(Action<TInterface> assign) => Fluent.Assign(_descriptor, assign);
 
 		protected TDescriptor AssignParam(Action<TParameters> assigner)
+		{
+			assigner?.Invoke(this.RequestState.RequestParameters);
+			return _descriptor;
+		}
+		protected TDescriptor Qs(Action<TParameters> assigner)
 		{
 			assigner?.Invoke(this.RequestState.RequestParameters);
 			return _descriptor;
