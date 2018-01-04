@@ -39,8 +39,8 @@ namespace Nest
 			foreach (var propertyInfo in _type.AllPropertiesCached())
 			{
 				var attribute = ElasticsearchPropertyAttributeBase.From(propertyInfo);
-				if (attribute != null && attribute.Ignore)
-					continue;
+				if (attribute != null && attribute.Ignore) continue;
+				if (_visitor.SkipProperty(propertyInfo, attribute)) continue;
 
 				var property = GetProperty(propertyInfo, attribute);
 				if (property is IPropertyWithClrOrigin withCLrOrigin)

@@ -12,8 +12,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
      * === Applying conventions through the Visitor pattern
      * It is also possible to apply a transformation on all or specific properties.
      *
-     * `.AutoMap()` internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern]. 
-     * The default visitor, `NoopPropertyVisitor`, does nothing and acts as a blank canvas for you 
+     * `.AutoMap()` internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern].
+     * The default visitor, `NoopPropertyVisitor`, does nothing and acts as a blank canvas for you
      * to implement your own visiting methods.
      *
      * For instance, let's create a custom visitor that disables doc values for numeric and boolean types
@@ -121,8 +121,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         /**
 		 * ==== Visiting on PropertyInfo
 		 * You can even take the visitor approach a step further, and instead of visiting on `IProperty` types, visit
-		 * directly on your POCO reflected `PropertyInfo` properties. 
-         * 
+		 * directly on your POCO reflected `PropertyInfo` properties.
+         *
          * As an example, let's create a visitor that maps all CLR types to an Elasticsearch text datatype (`ITextProperty`).
 		 */
         public class EverythingIsATextPropertyVisitor : NoopPropertyVisitor
@@ -172,10 +172,59 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							salary = new
 							{
 								type = "text"
-							},							
+							},
                             hours = new
 							{
 								type = "text"
+							}
+						}
+					}
+				}
+			};
+
+            // hide
+		    Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+		}
+        /**
+		 * ==== Skip properties
+         *
+         * Through implementing `SkipProperty` on the visitor you can prevent certain properties from being mapped
+         *
+		 */
+		public class DictionaryDocument : SortedDictionary<string, dynamic>
+		{
+			public int Id { get; set; }
+		}
+
+        public class IgnoreInheritedPropertiesVisitor<T>  : NoopPropertyVisitor
+		{
+			public override bool SkipProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+			{
+				return propertyInfo?.DeclaringType != typeof(T);
+			}
+		}
+
+		[U] public void HidesInheritedMembers()
+		{
+			var descriptor = new CreateIndexDescriptor("myindex")
+				.Mappings(ms => ms
+					.Map<DictionaryDocument>(m => m.AutoMap(new IgnoreInheritedPropertiesVisitor<DictionaryDocument>()))
+				);
+
+            /**
+             */
+            // json
+			var expected = new
+			{
+				mappings = new
+				{
+					dictionarydocument = new
+					{
+						properties = new
+						{
+							id = new
+							{
+								type = "integer"
 							}
 						}
 					}
