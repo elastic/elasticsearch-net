@@ -43,10 +43,6 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			response.ShouldBeValid();
 
-			var visitor = new TestVisitor();
-			response.Accept(visitor);
-			var b = TestClient.Configuration.Random.SourceSerializer;
-
 			response.Indices["project"]["doc"].Properties.Should().NotBeEmpty();
 			response.Indices[Index<Project>()].Mappings[Type<Project>()].Properties.Should().NotBeEmpty();
 			response.Indices[Index<Project>()][Type<Project>()].Properties.Should().NotBeEmpty();
@@ -55,6 +51,39 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			var leadDev = properties[Property<Project>(p => p.LeadDeveloper)];
 			leadDev.Should().NotBeNull();
 
+			var props = response.Indices["x"]?["y"].Properties;
+			props.Should().BeNull();
+
+			//hide
+			AssertExtensionMethods(response);
+
+			//hide
+			AssertVisitedProperies(response);
+		}
+
+		//hide
+		private static void AssertExtensionMethods(IGetMappingResponse response)
+		{
+			/** The `GetMappingFor` extension method can be used to get a type mapping easily and safely */
+			response.GetMappingFor<Project>().Should().NotBeNull();
+			response.GetMappingFor(typeof(Project), typeof(Project)).Should().NotBeNull();
+			response.GetMappingFor(typeof(Project)).Should().NotBeNull();
+
+			/** The following should all return a `null` because we had asked for the mapping of type `doc` in index `project` */
+			response.GetMappingFor<Developer>().Should().BeNull();
+			response.GetMappingFor("dev", "dev").Should().BeNull();
+			response.GetMappingFor(typeof(Project), "x").Should().BeNull();
+			response.GetMappingFor("dev").Should().BeNull();
+
+
+
+		}
+		//hide
+		private static void AssertVisitedProperies(IGetMappingResponse response)
+		{
+			var visitor = new TestVisitor();
+			var b = TestClient.Configuration.Random.SourceSerializer;
+			response.Accept(visitor);
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			visitor.CountsShouldContainKeyAndCountBe("text", b ? 19 : 18);
 			visitor.CountsShouldContainKeyAndCountBe("keyword", b ? 19 : 18);

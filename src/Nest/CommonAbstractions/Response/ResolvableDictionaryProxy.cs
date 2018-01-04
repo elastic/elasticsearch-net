@@ -28,7 +28,7 @@ namespace Nest
 			this.BackingDictionary = dictionary;
 		}
 
-		private string Sanitize(TKey key) => key.GetString(_connectionSettings);
+		private string Sanitize(TKey key) => key?.GetString(_connectionSettings);
 
 		IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() =>
 			this.Original.GetEnumerator();
@@ -42,8 +42,8 @@ namespace Nest
 		public bool TryGetValue(TKey key, out TValue value) =>
 			this.BackingDictionary.TryGetValue(Sanitize(key), out value);
 
-		public TValue this[TKey key] => this.BackingDictionary[Sanitize(key)];
-		public TValue this[string key] => this.BackingDictionary[key];
+		public TValue this[TKey key] => this.BackingDictionary.TryGetValue(Sanitize(key), out var v) ? v : default(TValue);
+		public TValue this[string key] => this.BackingDictionary.TryGetValue(key, out var v) ? v : default(TValue);
 
 		public IEnumerable<TKey> Keys => this.Original.Keys;
 		public IEnumerable<string> ResolvedKeys => this.BackingDictionary.Keys;
