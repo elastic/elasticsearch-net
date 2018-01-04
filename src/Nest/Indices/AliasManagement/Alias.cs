@@ -10,34 +10,34 @@ namespace Nest
 		QueryContainer Filter { get; set; }
 
 		[JsonProperty("routing")]
-		string Routing { get; set; }
+		Routing Routing { get; set; }
 
 		[JsonProperty("index_routing")]
-		string IndexRouting { get; set; }
+		Routing IndexRouting { get; set; }
 
 		[JsonProperty("search_routing")]
-		string SearchRouting { get; set; }
+		Routing SearchRouting { get; set; }
 	}
 
 	public class Alias : IAlias
 	{
 		public QueryContainer Filter { get; set; }
-		public string Routing { get; set; }
-		public string IndexRouting { get; set; }
-		public string SearchRouting { get; set; }
+		public Routing Routing { get; set; }
+		public Routing IndexRouting { get; set; }
+		public Routing SearchRouting { get; set; }
 	}
 
 	public class AliasDescriptor : DescriptorBase<AliasDescriptor, IAlias>, IAlias
 	{
 		QueryContainer IAlias.Filter { get; set; }
-		string IAlias.Routing { get; set; }
-		string IAlias.IndexRouting { get; set; }
-		string IAlias.SearchRouting { get; set; }
+		Routing IAlias.Routing { get; set; }
+		Routing IAlias.IndexRouting { get; set; }
+		Routing IAlias.SearchRouting { get; set; }
 
-		public AliasDescriptor Routing(string routing) => Assign(a => a.Routing = routing);
-		public AliasDescriptor IndexRouting(string indexRouting) => Assign(a => a.IndexRouting = indexRouting);
-		public AliasDescriptor SearchRouting(string searchRouting) => Assign(a => a.SearchRouting = searchRouting);
-		public AliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) where T : class => 
+		public AliasDescriptor Routing(Routing routing) => Assign(a => a.Routing = routing);
+		public AliasDescriptor IndexRouting(Routing indexRouting) => Assign(a => a.IndexRouting = indexRouting);
+		public AliasDescriptor SearchRouting(Routing searchRouting) => Assign(a => a.SearchRouting = searchRouting);
+		public AliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) where T : class =>
 			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

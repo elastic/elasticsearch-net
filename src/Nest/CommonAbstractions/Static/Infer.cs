@@ -27,6 +27,8 @@ namespace Nest
 		public static RelationName Relation(Type type) => type;
 		public static RelationName Relation<T>() => typeof(T);
 
+		public static Routing Route<T>(T instance) where T : class => Nest.Routing.From<T>(instance);
+
 		public static Names Names(params string[] names) => string.Join(",", names);
 		public static Names Names(IEnumerable<string> names) => string.Join(",", names);
 
@@ -55,7 +57,6 @@ namespace Nest
 
 		public static PropertyName Property(string property) => property;
 
-		public static PropertyName Property<T>(Expression<Func<T, object>> path)
-			where T : class => path;
+		public static PropertyName Property<T>(Expression<Func<T, object>> path) where T : class => path;
 	}
 }

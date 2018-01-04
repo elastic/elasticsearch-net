@@ -15,11 +15,14 @@ namespace Nest
 	{
 		public TDocument Document { get; set; }
 
+		protected void DefaultRouting() => this.Self.RequestParameters.SetQueryString("routing", new Routing(() => Document));
+
 		protected override HttpMethod HttpMethod => GetHttpMethod(this);
 
 		internal static HttpMethod GetHttpMethod(IIndexRequest<TDocument> request) => request.Id?.Value != null ? HttpMethod.PUT : HttpMethod.POST;
 
 		partial void DocumentFromPath(TDocument document) => this.Document = document;
+		private TDocument AutoRouteDocument() => Self.Document;
 
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(this.Document, stream, formatting);
@@ -33,9 +36,11 @@ namespace Nest
 		protected override HttpMethod HttpMethod => IndexRequest<TDocument>.GetHttpMethod(this);
 
 		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
+		private TDocument AutoRouteDocument() => Self.Document;
 
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
 
 	}
+
 }

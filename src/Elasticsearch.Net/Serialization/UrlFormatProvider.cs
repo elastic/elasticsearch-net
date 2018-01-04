@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Elasticsearch.Net
 {
-	class UrlFormatProvider : IFormatProvider, ICustomFormatter
+	public class UrlFormatProvider : IFormatProvider, ICustomFormatter
 	{
 		private readonly IConnectionConfigurationValues _settings;
 
@@ -17,54 +17,30 @@ namespace Elasticsearch.Net
 
 		public string Format(string format, object arg, IFormatProvider formatProvider)
 		{
-			if (arg == null)
-				throw new ArgumentNullException();
-			if (format == "r")
-				return arg.ToString();
-			return Uri.EscapeDataString(this.GetStringValue(arg));
+			if (arg == null) throw new ArgumentNullException();
+			if (format == "r") return arg.ToString();
+			var value = GetUnescapedStringRepresentation(arg, this._settings);
+			return value.IsNullOrEmpty() ? string.Empty : Uri.EscapeDataString(value);
 		}
 
-		public string GetStringValue(object valueType)
+		public static string GetUnescapedStringRepresentation(object value, IConnectionConfigurationValues settings)
 		{
-			var s = valueType as string;
-			if (s != null)
-				return s;
-
-			var ss = valueType as string[];
-			if (ss != null)
-				return string.Join(",", ss);
-
-			var pns = valueType as IEnumerable<object>;
-			if (pns != null)
-				return string.Join(",", pns.Select(AttemptTheRightToString));
-
-			var e = valueType as Enum;
-			if (e != null) return e.GetStringValue();
-
-			if (valueType is bool)
-				return ((bool)valueType) ? "true" : "false";
-
-			if (valueType is DateTimeOffset)
-				return ((DateTimeOffset)valueType).ToString("o");
-
-			return AttemptTheRightToString(valueType);
+			switch (value)
+			{
+				case null: return null;
+				case string s: return s;
+				case string[] ss: return string.Join(",", ss);
+				case Enum e: return e.GetStringValue();
+				case bool b: return b ? "true" : "false";
+				case DateTimeOffset offset: return offset.ToString("o");
+				case IEnumerable<object> pns:
+					return string.Join(",", pns.Select(o=> ResolveUrlParameterOrDefault(o, settings)));
+				default:
+					return ResolveUrlParameterOrDefault(value, settings);
+			}
 		}
 
-		public string AttemptTheRightToString(object value)
-		{
-			var explicitImplementation = this.QueryStringValueType(value as IUrlParameter);
-			if (explicitImplementation != null) return explicitImplementation;
-
-
-			return value.ToString();
-		}
-
-		public string QueryStringValueType(IUrlParameter value)
-		{
-			if (value == null) return null;
-			return value.GetString(this._settings);
-		}
-
-
+		private static string ResolveUrlParameterOrDefault(object value, IConnectionConfigurationValues settings) =>
+			value is IUrlParameter urlParam ? urlParam?.GetString(settings) : value.ToString();
 	}
 }

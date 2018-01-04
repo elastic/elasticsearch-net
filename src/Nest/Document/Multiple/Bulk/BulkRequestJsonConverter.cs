@@ -25,6 +25,7 @@ namespace Nest
 				op.Type = op.Type ?? bulk.Type ?? op.ClrType;
 				if (op.Type.Equals(bulk.Type)) op.Type = null;
 				op.Id = op.GetIdForOperation(settings.Inferrer);
+				op.Routing = op.GetRoutingForOperation(settings.Inferrer);
 
 				var opJson = requestResponseSerializer.SerializeToString(op, SerializationFormatting.None);
 				writer.WriteRaw($"{{\"{op.Operation}\":" + opJson + "}\n");

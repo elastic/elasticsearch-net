@@ -34,12 +34,13 @@ namespace Nest
 		[JsonProperty("version_type")]
 		VersionType? VersionType { get; set; }
 		[JsonProperty("routing")]
-		string Routing { get; set; }
+		Routing Routing { get; set; }
 	}
 
 	public class MultiTermVectorOperation<T> : IMultiTermVectorOperation
 		where T : class
 	{
+
 		public MultiTermVectorOperation(Id id)
 		{
 			this.Id = id;
@@ -60,7 +61,13 @@ namespace Nest
 		public ITermVectorFilter Filter { get; set; }
 		public long? Version { get; set; }
 		public VersionType? VersionType { get; set; }
-		public string Routing { get; set; }
+
+		private Routing _routing;
+		public Routing Routing
+		{
+			get => _routing ?? (Document == null ? null : new Routing(Document));
+			set => _routing = value;
+		}
 	}
 
 	public class MultiTermVectorOperationDescriptor<T> : DescriptorBase<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation>, IMultiTermVectorOperation
@@ -79,7 +86,13 @@ namespace Nest
 		ITermVectorFilter IMultiTermVectorOperation.Filter { get; set; }
 		long? IMultiTermVectorOperation.Version { get; set; }
 		VersionType? IMultiTermVectorOperation.VersionType { get; set; }
-		string IMultiTermVectorOperation.Routing { get; set; }
+
+		private Routing _routing;
+		Routing IMultiTermVectorOperation.Routing
+		{
+			get => _routing ?? (Self.Document == null ? null : new Routing(Self.Document));
+			set => _routing = value;
+		}
 
 		public MultiTermVectorOperationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
@@ -107,6 +120,6 @@ namespace Nest
 
 		public MultiTermVectorOperationDescriptor<T> VersionType(VersionType versionType) => Assign(a => a.VersionType = versionType);
 
-		public MultiTermVectorOperationDescriptor<T> Routing(string routing) => Assign(a => a.Routing = routing);
+		public MultiTermVectorOperationDescriptor<T> Routing(Routing routing) => Assign(a => a.Routing = routing);
 	}
 }

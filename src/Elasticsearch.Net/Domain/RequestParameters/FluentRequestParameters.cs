@@ -25,20 +25,20 @@ namespace Elasticsearch.Net
 			Self.QueryString = new Dictionary<string, object>();
 		}
 
-		void IRequestParameters.AddQueryStringValue(string name, object value)
+		void IRequestParameters.SetQueryStringValue(string name, object value)
 		{
-			if (value == null || name.IsNullOrEmpty()) return;
 			Self.QueryString[name] = value;
 		}
 
-		public T AddQueryString(string name, object value)
+		public T SetQueryString(string name, object value)
 		{
-			Self.AddQueryStringValue(name, value);
+			Self.SetQueryStringValue(name, value);
 			return (T)this;
 		}
 
 		public T RemoveQueryString(string name)
 		{
+			if (!Self.QueryString.ContainsKey(name)) return (T) this;
 			Self.QueryString.Remove(name);
 			return (T)this;
 		}

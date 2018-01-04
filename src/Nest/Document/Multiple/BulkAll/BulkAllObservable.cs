@@ -107,7 +107,7 @@ namespace Nest
 					else s.IndexMany(buffer);
 					if (!string.IsNullOrEmpty(r.Pipeline)) s.Pipeline(r.Pipeline);
 					if (r.Refresh.HasValue) s.Refresh(r.Refresh.Value);
-					if (!string.IsNullOrEmpty(r.Routing)) s.Routing(r.Routing);
+					if (r.Routing != null) s.Routing(r.Routing);
 					if (r.WaitForActiveShards.HasValue) s.WaitForActiveShards(r.WaitForActiveShards.ToString());
 
 					return s;

@@ -66,7 +66,7 @@ namespace Nest
 		VersionType? VersionType { get; set; }
 
 		[JsonProperty("routing")]
-		string Routing { get; set; }
+		Routing Routing { get; set; }
 	}
 
 	public class MoreLikeThisQuery : QueryBase, IMoreLikeThisQuery
@@ -92,7 +92,7 @@ namespace Nest
 
 		public long? Version { get; set; }
 		public VersionType? VersionType { get; set; }
-		public string Routing { get; set; }
+		public Routing Routing { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.MoreLikeThis = this;
 		internal static bool IsConditionless(IMoreLikeThisQuery q) => q.Fields.IsConditionless() || (!q.Like.HasAny() || q.Like.All(Nest.Like.IsConditionless));
@@ -118,7 +118,7 @@ namespace Nest
 		IPerFieldAnalyzer IMoreLikeThisQuery.PerFieldAnalyzer { get; set; }
 		long? IMoreLikeThisQuery.Version { get; set; }
 		VersionType? IMoreLikeThisQuery.VersionType { get; set; }
-		string IMoreLikeThisQuery.Routing { get; set; }
+		Routing IMoreLikeThisQuery.Routing { get; set; }
 		IEnumerable<Like> IMoreLikeThisQuery.Like { get; set; }
 		IEnumerable<Like> IMoreLikeThisQuery.Unlike { get; set; }
 
@@ -169,6 +169,6 @@ namespace Nest
 
 		public MoreLikeThisQueryDescriptor<T> VersionType(VersionType versionType) => Assign(a => a.VersionType = versionType);
 
-		public MoreLikeThisQueryDescriptor<T> Routing(string routing) => Assign(a => a.Routing = routing);
+		public MoreLikeThisQueryDescriptor<T> Routing(Routing routing) => Assign(a => a.Routing = routing);
 	}
 }

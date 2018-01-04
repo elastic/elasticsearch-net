@@ -57,7 +57,7 @@ namespace Nest
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document"/>
 		/// </summary>
 		[JsonProperty("routing")]
-		string Routing { get; set; }
+		Routing Routing { get; set; }
 
 		/// <summary>
 		/// Preference to be used to fetch the document to percolate.
@@ -128,11 +128,16 @@ namespace Nest
 		/// </summary>
 		public TypeName Type { get; set; }
 
+		private Routing _routing;
 		/// <summary>
 		/// Routing to be used to fetch the document to percolate.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document"/>
 		/// </summary>
-		public string Routing { get; set; }
+		public Routing Routing
+		{
+			get => _routing ?? (Document == null ? null : new Routing(Document));
+			set => _routing = value;
+		}
 
 		/// <summary>
 		/// Preference to be used to fetch the document to percolate.
@@ -161,7 +166,14 @@ namespace Nest
 		Id IPercolateQuery.Id { get; set; }
 		IndexName IPercolateQuery.Index { get; set; }
 		TypeName IPercolateQuery.Type { get; set; }
-		string IPercolateQuery.Routing { get; set; }
+
+		private Routing _routing;
+		Routing IPercolateQuery.Routing
+		{
+			get => _routing ?? (Self.Document == null ? null : new Routing(Self.Document));
+			set => _routing = value;
+		}
+
 		string IPercolateQuery.Preference { get; set; }
 		long? IPercolateQuery.Version { get; set; }
 
@@ -232,7 +244,7 @@ namespace Nest
 		/// Routing to be used to fetch the document to percolate.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document{TDocument}"/>
 		/// </summary>
-		public PercolateQueryDescriptor<T> Routing(string routing) => Assign(a => a.Routing = routing);
+		public PercolateQueryDescriptor<T> Routing(Routing routing) => Assign(a => a.Routing = routing);
 
 		/// <summary>
 		/// Preference to be used to fetch the document to percolate.

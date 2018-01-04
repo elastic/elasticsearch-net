@@ -47,7 +47,7 @@ namespace Nest
 		bool RefreshOnCompleted { get; set; }
 
 		///<summary>Specific per bulk operation routing value</summary>
-		string Routing { get; set; }
+		Routing Routing { get; set; }
 
 		///<summary>Explicit per operation timeout</summary>
 		Time Timeout { get; set; }
@@ -99,7 +99,7 @@ namespace Nest
 		/// <inheritdoc />
 		public bool RefreshOnCompleted { get; set; }
 		/// <inheritdoc />
-		public string Routing { get; set; }
+		public Routing Routing { get; set; }
 		/// <inheritdoc />
 		public Time Timeout { get; set; }
 		/// <inheritdoc />
@@ -135,7 +135,7 @@ namespace Nest
 		int? IBulkAllRequest<T>.WaitForActiveShards { get; set; }
 		Refresh? IBulkAllRequest<T>.Refresh { get; set; }
 		bool IBulkAllRequest<T>.RefreshOnCompleted { get; set; }
-		string IBulkAllRequest<T>.Routing { get; set; }
+		Routing IBulkAllRequest<T>.Routing { get; set; }
 		Time IBulkAllRequest<T>.Timeout { get; set; }
 		string IBulkAllRequest<T>.Pipeline { get; set; }
 		Action<BulkDescriptor, IList<T>>  IBulkAllRequest<T>.BufferToBulk { get; set; }
@@ -182,7 +182,7 @@ namespace Nest
 		public BulkAllDescriptor<T> Refresh(Refresh refresh) => Assign(p => p.Refresh = refresh);
 
 		/// <inheritdoc />
-		public BulkAllDescriptor<T> Routing(string routing) => Assign(p => p.Routing = routing);
+		public BulkAllDescriptor<T> Routing(Routing routing) => Assign(p => p.Routing = routing);
 
 		/// <inheritdoc />
 		public BulkAllDescriptor<T> Timeout(Time timeout) => Assign(p => p.Timeout = timeout);

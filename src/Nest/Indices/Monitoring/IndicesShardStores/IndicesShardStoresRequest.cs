@@ -15,7 +15,7 @@ namespace Nest
 			get { return _types; }
 			set
 			{
-				if (value.HasAny()) this.RequestState.RequestParameters.AddQueryString("types", value);
+				if (value.HasAny()) this.RequestState.RequestParameters.SetQueryString("types", value);
 				else this.RequestState.RequestParameters.RemoveQueryString("types");
 				this._types = value;
 			}
@@ -31,7 +31,7 @@ namespace Nest
 			get { return _types; }
 			set
 			{
-				if (value.HasAny()) this.RequestState.RequestParameters.AddQueryString("types", value);
+				if (value.HasAny()) this.RequestState.RequestParameters.SetQueryString("types", value);
 				else this.RequestState.RequestParameters.RemoveQueryString("types");
 				this._types = value;
 			}

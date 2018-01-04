@@ -95,6 +95,11 @@ namespace Tests.Framework
 			this.Client.Infer.Id<T>(project).Should().Be((string)this.ExpectJson);
 			return this;
 		}
+		public RoundTripper WhenInferringRoutingOn<T>(T project) where T : class
+		{
+			this.Client.Infer.Routing<T>(project).Should().Be((string)this.ExpectJson);
+			return this;
+		}
 
 		public RoundTripper ForField(Field field)
 		{

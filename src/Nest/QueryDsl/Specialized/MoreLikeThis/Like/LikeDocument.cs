@@ -20,7 +20,7 @@ namespace Nest
 		Fields Fields { get; set; }
 
 		[JsonProperty("_routing")]
-		string Routing { get; set; }
+		Routing Routing { get; set; }
 
 		[JsonProperty("doc")]
 		[JsonConverter(typeof(SourceConverter))]
@@ -40,7 +40,12 @@ namespace Nest
 
 		public Fields Fields { get; set; }
 
-		public string Routing { get; set; }
+		private Routing _routing;
+		public Routing Routing
+		{
+			get => _routing ?? (Document == null ? null : new Routing(Document));
+			set => _routing = value;
+		}
 
 		public object Document { get; set; }
 
@@ -73,7 +78,14 @@ namespace Nest
 		IndexName ILikeDocument.Index { get; set; }
 		TypeName ILikeDocument.Type { get; set; }
 		Id ILikeDocument.Id { get; set; }
-		string ILikeDocument.Routing { get; set; }
+
+		private Routing _routing;
+		Routing ILikeDocument.Routing
+		{
+			get => _routing ?? (Self.Document == null ? null : new Routing(Self.Document));
+			set => _routing = value;
+		}
+
 		Fields ILikeDocument.Fields { get; set; }
 		object ILikeDocument.Document { get; set; }
 		IPerFieldAnalyzer ILikeDocument.PerFieldAnalyzer { get; set; }
@@ -90,7 +102,7 @@ namespace Nest
 
 		public LikeDocumentDescriptor<TDocument> Id(Id id) => Assign(a => a.Id = id);
 
-		public LikeDocumentDescriptor<TDocument> Routing(string routing) => Assign(a => a.Routing = routing);
+		public LikeDocumentDescriptor<TDocument> Routing(Routing routing) => Assign(a => a.Routing = routing);
 
 		public LikeDocumentDescriptor<TDocument> Fields(Func<FieldsDescriptor<TDocument>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<TDocument>())?.Value);

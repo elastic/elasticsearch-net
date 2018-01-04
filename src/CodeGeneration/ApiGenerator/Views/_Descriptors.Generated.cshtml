@@ -28,8 +28,9 @@ namespace Nest
 	}
 	@foreach (Constructor c in method.DescriptorConstructors())
     {
-	<text>	@(Raw(c.Description))
+	<text>@(Raw(c.Description))
 		@(Raw(c.Generated))
+		@(Raw(c.Body.IsNullOrEmpty() ? "{}" : c.Body))
 		@(Raw(c.AdditionalCode))
 </text>
     }
@@ -54,11 +55,18 @@ namespace Nest
 		var g = typed ? method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "") : "T";
 		var mml = mm.ToLowerInvariant();
 		var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
-		<text>
-		///<summary>@kv.Value.Description</summary>
-		@if (!string.IsNullOrWhiteSpace(kv.Value.Obsolete))
-		{<text>		[Obsolete("Scheduled to be removed in 6.0, @kv.Value.Obsolete")]</text>}
-		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => AssignParam(p=>p.@(m)(@kv.Key@tMethod));</text>
+		var desc = kv.Value.HighLevelTypeDescription(kv.Key).ToList();
+		var original = kv.Value.OriginalQueryStringParamName;
+		<text>@if (desc.Count == 1) {
+		<text>///<summary>@Raw(desc.First())</summary></text>
+		}
+		else 
+		{ <text>		///<summary>
+		@Raw(string.Join("\r\n\t\t", desc.Select(d=> "/// " + d)))
+		///</summary></text>
+		}</text><text>@if (!string.IsNullOrWhiteSpace(kv.Value.Obsolete))
+		{<text>		[Obsolete("Scheduled to be removed in 7.0, @kv.Value.Obsolete")]</text>}
+		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => Qs("@original", @(kv.Key));</text>
 		if (fieldMethod)
 		{
 			<text>

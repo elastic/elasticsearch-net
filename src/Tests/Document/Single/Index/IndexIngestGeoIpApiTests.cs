@@ -88,7 +88,7 @@ namespace Tests.Document.Single.Index
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override string UrlPath
-			=> $"/project/doc/{CallIsolatedValue}?refresh=true&pipeline={PipelineId}";
+			=> $"/project/doc/{CallIsolatedValue}?refresh=true&pipeline={PipelineId}&routing={CallIsolatedValue}";
 
 		protected override bool SupportsDeserialization => false;
 

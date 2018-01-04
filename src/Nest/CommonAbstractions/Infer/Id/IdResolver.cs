@@ -74,9 +74,7 @@ namespace Nest
 			// if the type specifies through ElasticAttribute what the id prop is
 			// use that no matter what
 
-			string propertyName;
-
-			this._connectionSettings.IdProperties.TryGetValue(type, out propertyName);
+			this._connectionSettings.IdProperties.TryGetValue(type, out var propertyName);
 			if (!propertyName.IsNullOrEmpty())
 				return GetPropertyCaseInsensitive(type, propertyName);
 

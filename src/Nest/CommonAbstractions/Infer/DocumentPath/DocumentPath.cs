@@ -17,7 +17,6 @@ namespace Nest
 		IndexName IDocumentPath.Index { get; set; }
 		TypeName IDocumentPath.Type { get; set; }
 
-
 		public DocumentPath(T document) : this(Nest.Id.From(document)) { this.Document = document; }
 		public DocumentPath(Id id)
 		{

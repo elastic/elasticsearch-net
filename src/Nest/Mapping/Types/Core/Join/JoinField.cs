@@ -40,6 +40,7 @@ namespace Nest
 
 		public static implicit operator JoinField(Parent parent) => new JoinField(parent);
 		public static implicit operator JoinField(string parentName) => new JoinField(new Parent(parentName));
+		public static implicit operator JoinField(Type parentType) => new JoinField(new Parent(parentType));
 		public static implicit operator JoinField(Child child) => new JoinField(child);
 
 		public T Match<T>(Func<Parent, T> first, Func<Child,T> second)

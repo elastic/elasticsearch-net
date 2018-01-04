@@ -62,7 +62,7 @@ namespace Nest
 
 		protected TOut Q<TOut>(string name) => RequestState.RequestParameters.GetQueryStringValue<TOut>(name);
 
-		protected void Q(string name, object value) => RequestState.RequestParameters.AddQueryStringValue(name, value);
+		protected void Q(string name, object value) => RequestState.RequestParameters.SetQueryStringValue(name, value);
 
 	}
 
@@ -99,6 +99,12 @@ namespace Nest
 		protected TDescriptor AssignParam(Action<TParameters> assigner)
 		{
 			assigner?.Invoke(this.RequestState.RequestParameters);
+			return _descriptor;
+		}
+
+		protected TDescriptor Qs(string name, object value)
+		{
+			Q(name, value);
 			return _descriptor;
 		}
 

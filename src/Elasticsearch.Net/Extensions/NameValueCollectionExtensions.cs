@@ -22,22 +22,23 @@ namespace Elasticsearch.Net
 				return null;
 
 			if (self.AllKeys.Length == 0) return string.Empty;
-			
+
 			return prefix + string.Join("&", self.AllKeys.Select(key => $"{Encode(key)}={Encode(self[key])}"));
 		}
 
 		private static string Encode(string s) => s;
-		//private static string Encode(string s) => s == null ? null : Uri.EscapeDataString(s);
 
 		internal static NameValueCollection ToNameValueCollection(this IDictionary<string, object> dict, IFormatProvider provider)
 		{
-			if (dict == null || dict.Count < 0)
-				return null;
-			
+			if (dict == null || dict.Count < 0) return null;
+
 			var nv = new NameValueCollection();
 			foreach (var kv in dict.Where(kv => !kv.Key.IsNullOrEmpty()))
 			{
-				nv.Add(kv.Key, string.Format(provider, "{0}", kv.Value));
+				if (kv.Value == null) continue;
+				var resolved = string.Format(provider, "{0}", kv.Value);
+				if (!resolved.IsNullOrEmpty())
+					nv.Add(kv.Key, resolved);
 			}
 			return nv;
 		}

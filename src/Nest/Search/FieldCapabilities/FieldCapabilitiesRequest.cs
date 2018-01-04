@@ -18,6 +18,6 @@ namespace Nest
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		public FieldCapabilitiesDescriptor Fields(Fields fields) =>
-			AssignParam(p=>p.AddQueryString("fields", fields));
+			AssignParam(p=>p.SetQueryString("fields", fields));
 	}
 }

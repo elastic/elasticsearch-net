@@ -81,13 +81,6 @@ namespace Nest
 		[JsonProperty("post_filter")]
 		QueryContainer PostFilter { get; set; }
 
-		string Preference { get; }
-
-		string Routing { get; }
-
-		SearchType? SearchType { get; }
-
-		bool? IgnoreUnavalable { get; }
 	}
 
 	public partial interface ISearchRequest<T> : ISearchRequest { }
@@ -126,16 +119,6 @@ namespace Nest
 		public IFieldCollapse Collapse { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
 
-		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
-
-		string ISearchRequest.Preference => RequestState.RequestParameters?.GetQueryStringValue<string>("preference");
-
-		string ISearchRequest.Routing => RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing") == null
-			? null
-			: string.Join(",", RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing"));
-
-		bool? ISearchRequest.IgnoreUnavalable => RequestState.RequestParameters?.GetQueryStringValue<bool?>("ignore_unavailable");
-
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
 
@@ -172,16 +155,6 @@ namespace Nest
 		public IFieldCollapse Collapse { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
 
-		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
-
-		string ISearchRequest.Preference => RequestState.RequestParameters?.GetQueryStringValue<string>("preference");
-
-		string ISearchRequest.Routing => RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing") == null
-			? null
-			: string.Join(",", RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing"));
-
-		bool? ISearchRequest.IgnoreUnavalable => RequestState.RequestParameters?.GetQueryStringValue<bool?>("ignore_unavailable");
-
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
 
@@ -197,15 +170,6 @@ namespace Nest
 			RequestState.RequestParameters?.ContainsKey("source") == true || RequestState.RequestParameters?.ContainsKey("q") == true ? HttpMethod.GET : HttpMethod.POST;
 
 		protected sealed override void Initialize() => this.TypedKeys();
-
-		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
-
-		string ISearchRequest.Preference => RequestState.RequestParameters.GetQueryStringValue<string>("preference");
-
-		string ISearchRequest.Routing => RequestState.RequestParameters.GetQueryStringValue<string[]>("routing") == null
-			? null : string.Join(",", RequestState.RequestParameters.GetQueryStringValue<string[]>("routing"));
-
-		bool? ISearchRequest.IgnoreUnavalable => RequestState.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		string ISearchRequest.Timeout { get; set; }
 		int? ISearchRequest.From { get; set; }

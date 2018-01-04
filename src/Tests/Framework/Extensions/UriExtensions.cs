@@ -31,6 +31,9 @@ namespace Tests
 				.Replace("error_trace=true", "");
 			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, sanitizedQuery).Uri;
 
+			because += $"\r\nExpected: {expectedUri.PathAndQuery}";
+			because += $"\r\nActual  : {u.PathAndQuery}\r\n";
+
 			var queries = new[] { u.Query, expectedUri.Query };
 			if (queries.All(string.IsNullOrWhiteSpace)) return;
 			if (queries.Any(string.IsNullOrWhiteSpace))

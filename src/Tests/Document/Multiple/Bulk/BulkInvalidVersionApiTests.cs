@@ -31,9 +31,9 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override object ExpectJson { get; } = new object[]
 		{
-			new Dictionary<string, object>{ { "index", new { _type="doc", _id = Project.Instance.Name } } },
+			new Dictionary<string, object>{ { "index", new { _type="doc", _id = Project.Instance.Name, routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "index", new { _type="doc", _id = Project.Instance.Name, version = 0 } } },
+			new Dictionary<string, object>{ { "index", new { _type="doc", _id = Project.Instance.Name, routing = Project.Instance.Name, version = 0 } } },
 			Project.InstanceAnonymous,
 		};
 
