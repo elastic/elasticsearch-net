@@ -65,12 +65,13 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				var metricsFile = Path.Combine(folder, $"server-metrics_{i}.json");
 				var bulkResponse = this.Client.LowLevel.Bulk<BulkResponse>(
 					File.ReadAllBytes(metricsFile),
-					new BulkRequestParameters()
-						.RequestConfiguration(rc => rc
-							.RequestTimeout(TimeSpan.FromMinutes(3)
-						)
-					)
-				);
+					new BulkRequestParameters
+					{
+						RequestConfiguration = new RequestConfiguration
+						{
+							RequestTimeout = TimeSpan.FromMinutes(3)
+						}
+					});
 
 				if (!bulkResponse.ApiCall.Success || (!bulkResponse.IsValid))
 				{

@@ -12,11 +12,10 @@ namespace Nest
 		private IEnumerable<TypeName> _types;
 		public IEnumerable<TypeName> Types
 		{
-			get { return _types; }
+			get => _types;
 			set
 			{
-				if (value.HasAny()) this.RequestState.RequestParameters.SetQueryString("types", value);
-				else this.RequestState.RequestParameters.RemoveQueryString("types");
+				this.RequestState.RequestParameters.SetQueryString("types", value.HasAny() ? value :  null);
 				this._types = value;
 			}
 		}
@@ -28,11 +27,10 @@ namespace Nest
 		private IEnumerable<TypeName> _types;
 		IEnumerable<TypeName> IIndicesStatsRequest.Types
 		{
-			get { return _types; }
+			get => _types;
 			set
 			{
-				if (value.HasAny()) this.RequestState.RequestParameters.SetQueryString("types", value);
-				else this.RequestState.RequestParameters.RemoveQueryString("types");
+				this.RequestState.RequestParameters.SetQueryString("types", value.HasAny() ? value :  null);
 				this._types = value;
 			}
 		}

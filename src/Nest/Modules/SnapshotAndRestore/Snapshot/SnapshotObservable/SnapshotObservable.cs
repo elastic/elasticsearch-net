@@ -45,7 +45,7 @@ namespace Nest
 
 			try
 			{
-				_snapshotRequest.RequestParameters.WaitForCompletion(false);
+				_snapshotRequest.RequestParameters.WaitForCompletion = false;
 				var snapshotResponse = this._elasticClient.Snapshot(_snapshotRequest);
 
 				if (!snapshotResponse.IsValid)

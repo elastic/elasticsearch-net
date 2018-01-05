@@ -14,7 +14,7 @@ namespace Nest
 		where TDocument : class
 	{
 		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsKey("source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
+			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		public QueryContainer Query { get; set; }
 		private object AutoRouteDocument() => null;
@@ -25,7 +25,7 @@ namespace Nest
 		where TDocument : class
 	{
 		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsKey("source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
+			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		QueryContainer IExplainRequest<TDocument>.Query { get; set; }
 		private object AutoRouteDocument() => null;

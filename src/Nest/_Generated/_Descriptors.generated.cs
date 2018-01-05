@@ -49,24 +49,18 @@ namespace Nest
 		public BulkDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public BulkDescriptor Fields(params string[] fields) => Qs("fields", fields);
-			
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
-		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._Fields(fields));
+		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
-			
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._SourceExclude(fields));
+		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
-			
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._SourceInclude(fields));
+		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public BulkDescriptor Pipeline(string pipeline) => Qs("pipeline", pipeline);
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -1388,16 +1382,12 @@ namespace Nest
 		public DeleteByQueryDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
-			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceExclude(fields));
+		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
-			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceInclude(fields));
+		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public DeleteByQueryDescriptor<T> TerminateAfter(long terminate_after) => Qs("terminate_after", terminate_after);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -1495,10 +1485,8 @@ namespace Nest
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public DocumentExistsDescriptor<T> StoredFields(params string[] stored_fields) => Qs("stored_fields", stored_fields);
-			
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public DocumentExistsDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._StoredFields(fields));
+		public DocumentExistsDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>The ID of the parent document</summary>
 		public DocumentExistsDescriptor<T> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1519,16 +1507,12 @@ namespace Nest
 		public DocumentExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DocumentExistsDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
-			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceExclude(fields));
+		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DocumentExistsDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
-			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceInclude(fields));
+		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public DocumentExistsDescriptor<T> Version(long version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -1599,16 +1583,12 @@ namespace Nest
 		public SourceExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceExistsDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
-			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceExclude(fields));
+		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceExistsDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
-			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceInclude(fields));
+		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceExistsDescriptor<T> Version(long version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -1669,10 +1649,8 @@ namespace Nest
 		public ExplainDescriptor<TDocument> Df(string df) => Qs("df", df);
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public ExplainDescriptor<TDocument> StoredFields(params string[] stored_fields) => Qs("stored_fields", stored_fields);
-			
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public ExplainDescriptor<TDocument> StoredFields(params Expression<Func<TDocument, object>>[] fields)  =>
-			AssignParam(p=>p._StoredFields(fields));
+		public ExplainDescriptor<TDocument> StoredFields(params Expression<Func<TDocument, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainDescriptor<TDocument> Lenient(bool lenient = true) => Qs("lenient", lenient);
 		///<summary>The ID of the parent document</summary>
@@ -1693,16 +1671,12 @@ namespace Nest
 		public ExplainDescriptor<TDocument> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainDescriptor<TDocument> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
-			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  =>
-			AssignParam(p=>p._SourceExclude(fields));
+		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor<TDocument> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
-			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  =>
-			AssignParam(p=>p._SourceInclude(fields));
+		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Pretty format the returned JSON response.</summary>
 		public ExplainDescriptor<TDocument> Pretty(bool pretty = true) => Qs("pretty", pretty);
 		///<summary>Return human readable values for statistics.</summary>
@@ -1736,10 +1710,8 @@ namespace Nest
 
 			///<summary>A comma-separated list of field names</summary>
 		public FieldCapabilitiesDescriptor Fields(params string[] fields) => Qs("fields", fields);
-			
 		///<summary>A comma-separated list of field names</summary>
-		public FieldCapabilitiesDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._Fields(fields));
+		public FieldCapabilitiesDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public FieldCapabilitiesDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -1794,10 +1766,8 @@ namespace Nest
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public GetDescriptor<T> StoredFields(params string[] stored_fields) => Qs("stored_fields", stored_fields);
-			
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public GetDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._StoredFields(fields));
+		public GetDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>The ID of the parent document</summary>
 		public GetDescriptor<T> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1818,16 +1788,12 @@ namespace Nest
 		public GetDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
-			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceExclude(fields));
+		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
-			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceInclude(fields));
+		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<T> Version(long version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -1921,16 +1887,12 @@ namespace Nest
 		public SourceDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
-			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceExclude(fields));
+		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
-			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceInclude(fields));
+		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceDescriptor<T> Version(long version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -2078,10 +2040,8 @@ namespace Nest
 		public ClearCacheDescriptor FieldData(bool field_data = true) => Qs("field_data", field_data);
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public ClearCacheDescriptor Fields(params string[] fields) => Qs("fields", fields);
-			
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public ClearCacheDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._Fields(fields));
+		public ClearCacheDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Clear query caches</summary>
 		public ClearCacheDescriptor Query(bool query = true) => Qs("query", query);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3346,22 +3306,16 @@ namespace Nest
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields) => Qs("completion_fields", completion_fields);
-			
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._CompletionFields(fields));
+		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("completion_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields(params string[] fielddata_fields) => Qs("fielddata_fields", fielddata_fields);
-			
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._FielddataFields(fields));
+		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fielddata_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields(params string[] fields) => Qs("fields", fields);
-			
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._Fields(fields));
+		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public IndicesStatsDescriptor Groups(params string[] groups) => Qs("groups", groups);
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
@@ -3673,10 +3627,8 @@ namespace Nest
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public MultiGetDescriptor StoredFields(params string[] stored_fields) => Qs("stored_fields", stored_fields);
-			
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public MultiGetDescriptor StoredFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._StoredFields(fields));
+		public MultiGetDescriptor StoredFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public MultiGetDescriptor Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -3695,16 +3647,12 @@ namespace Nest
 		public MultiGetDescriptor SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MultiGetDescriptor SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
-			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._SourceExclude(fields));
+		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
-			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._SourceInclude(fields));
+		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Pretty format the returned JSON response.</summary>
 		public MultiGetDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
 		///<summary>Return human readable values for statistics.</summary>
@@ -3842,10 +3790,8 @@ namespace Nest
 		public MultiTermVectorsDescriptor FieldStatistics(bool field_statistics = true) => Qs("field_statistics", field_statistics);
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public MultiTermVectorsDescriptor Fields(params string[] fields) => Qs("fields", fields);
-			
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._Fields(fields));
+		public MultiTermVectorsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public MultiTermVectorsDescriptor Offsets(bool offsets = true) => Qs("offsets", offsets);
 		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
@@ -3975,22 +3921,16 @@ namespace Nest
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields(params string[] completion_fields) => Qs("completion_fields", completion_fields);
-			
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._CompletionFields(fields));
+		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("completion_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields(params string[] fielddata_fields) => Qs("fielddata_fields", fielddata_fields);
-			
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._FielddataFields(fields));
+		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fielddata_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor Fields(params string[] fields) => Qs("fields", fields);
-			
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._Fields(fields));
+		public NodesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public NodesStatsDescriptor Groups(bool groups = true) => Qs("groups", groups);
 		///<summary>Return indices stats aggregated at index, node or shard level</summary>
@@ -4229,10 +4169,8 @@ namespace Nest
 		public SearchDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
 		public SearchDescriptor<T> DocvalueFields(params string[] docvalue_fields) => Qs("docvalue_fields", docvalue_fields);
-			
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public SearchDescriptor<T> DocvalueFields(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._DocvalueFields(fields));
+		public SearchDescriptor<T> DocvalueFields(params Expression<Func<T, object>>[] fields)  => Qs("docvalue_fields", fields?.Select(e=>(Field)e));
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -4261,8 +4199,7 @@ namespace Nest
 		public SearchDescriptor<T> SuggestField(string suggest_field) => Qs("suggest_field", suggest_field);
 
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> field)  =>
-			AssignParam(p=>p._SuggestField(field));
+		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> field)  => Qs("suggest_field", (Field)field);
 		///<summary>Specify suggest mode</summary>
 		public SearchDescriptor<T> SuggestMode(SuggestMode suggest_mode) => Qs("suggest_mode", suggest_mode);
 		///<summary>How many suggestions to return in response</summary>
@@ -4800,10 +4737,8 @@ namespace Nest
 		public TermVectorsDescriptor<TDocument> FieldStatistics(bool field_statistics = true) => Qs("field_statistics", field_statistics);
 		///<summary>A comma-separated list of fields to return.</summary>
 		public TermVectorsDescriptor<TDocument> Fields(params string[] fields) => Qs("fields", fields);
-			
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermVectorsDescriptor<TDocument> Fields(params Expression<Func<TDocument, object>>[] fields)  =>
-			AssignParam(p=>p._Fields(fields));
+		public TermVectorsDescriptor<TDocument> Fields(params Expression<Func<TDocument, object>>[] fields)  => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Specifies if term offsets should be returned.</summary>
 		public TermVectorsDescriptor<TDocument> Offsets(bool offsets = true) => Qs("offsets", offsets);
 		///<summary>Specifies if term positions should be returned.</summary>
@@ -4994,16 +4929,12 @@ namespace Nest
 		public UpdateByQueryDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
-			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceExclude(fields));
+		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
-			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
-			AssignParam(p=>p._SourceInclude(fields));
+		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public UpdateByQueryDescriptor<T> TerminateAfter(long terminate_after) => Qs("terminate_after", terminate_after);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
