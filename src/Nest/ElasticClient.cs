@@ -53,7 +53,7 @@ namespace Nest
 			)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
-			request.RequestParameters.DeserializationOverride(responseGenerator);
+			request.RequestParameters.DeserializationOverride = responseGenerator;
 
 			var response = dispatch(request, request);
 			return response;
@@ -73,7 +73,7 @@ namespace Nest
 			)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
-			request.RequestParameters.DeserializationOverride(responseGenerator);
+			request.RequestParameters.DeserializationOverride = responseGenerator;
 			var response = await dispatch(request, request, cancellationToken).ConfigureAwait(false);
 			return response;
 		}

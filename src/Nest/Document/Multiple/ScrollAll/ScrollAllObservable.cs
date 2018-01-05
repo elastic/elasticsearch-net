@@ -31,7 +31,7 @@ namespace Nest
 			this._searchRequest = scrollAllRequest?.Search ?? new SearchRequest<T>();
 			if (this._searchRequest.Sort == null)
 				this._searchRequest.Sort = SortField.ByDocumentOrder;
-			this._searchRequest.RequestParameters.Scroll(this._scrollAllRequest.ScrollTime.ToTimeSpan());
+			this._searchRequest.RequestParameters.Scroll = this._scrollAllRequest.ScrollTime.ToTimeSpan();
 			this._client = client;
 			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 			this._compositeCancelToken = this._compositeCancelTokenSource.Token;

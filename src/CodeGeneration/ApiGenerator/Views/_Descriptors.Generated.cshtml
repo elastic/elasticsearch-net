@@ -54,7 +54,7 @@ namespace Nest
 		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
 		var g = typed ? method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "") : "T";
 		var mml = mm.ToLowerInvariant();
-		var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
+		var fieldsMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
 		var desc = kv.Value.HighLevelTypeDescription(kv.Key).ToList();
 		var original = kv.Value.OriginalQueryStringParamName;
 		<text>@if (desc.Count == 1) {
@@ -67,18 +67,15 @@ namespace Nest
 		}</text><text>@if (!string.IsNullOrWhiteSpace(kv.Value.Obsolete))
 		{<text>		[Obsolete("Scheduled to be removed in 7.0, @kv.Value.Obsolete")]</text>}
 		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => Qs("@original", @(kv.Key));</text>
-		if (fieldMethod)
+		if (fieldsMethod)
 		{
-			<text>
-		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") =>
-			AssignParam(p=>p._@(mm)(fields));</text>
+		<text>///<summary>@kv.Value.Description</summary>
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));</text>
 		}
 		else if (mm.ToLowerInvariant().Contains("field") && t.Contains("string"))
 		{<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") =>
-			AssignParam(p=>p._@(mm)(field));</text>
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", (Field)field);</text>
 		}
 	}
 	if (method.Unmapped)
