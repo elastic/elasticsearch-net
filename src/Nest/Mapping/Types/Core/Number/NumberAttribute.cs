@@ -11,7 +11,7 @@ namespace Nest
 		private INumberProperty Self => this;
 
 		public NumberAttribute() : base(FieldType.Float) { }
-		protected NumberAttribute(NumberType type) : base(type.ToFieldType()) { }
+		public NumberAttribute(NumberType type) : base(type.ToFieldType()) { }
 
 		bool? INumberProperty.Index { get; set; }
 		double? INumberProperty.Boost { get; set; }
