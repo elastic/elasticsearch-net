@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Elasticsearch.Net
 {
-	public class UrlFormatProvider : IFormatProvider, ICustomFormatter
+	internal class UrlFormatProvider : IFormatProvider, ICustomFormatter
 	{
 		private readonly IConnectionConfigurationValues _settings;
 
