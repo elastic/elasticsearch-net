@@ -56,7 +56,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Union<bool, ISourceFilter> Source { get; set; }
 
-		private object AutoRouteDocument() => Self.Upsert;
+		private object AutoRouteDocument() => (object)Self.Upsert ?? Self.Doc;
 
 		/// <inheritdoc/>
 		[Obsolete("Removed in Elasticsearch 7.x, use source filtering instead")]
@@ -71,7 +71,7 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
-		private object AutoRouteDocument() => Self.Upsert;
+		private object AutoRouteDocument() => (object)Self.Upsert ?? Self.Doc;
 
 		IScript IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
 

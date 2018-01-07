@@ -26,13 +26,16 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}";
+		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}?routing={this.ProjectId}";
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => null;
+		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g=>g.Routing(this.ProjectId);
 
-		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId);
+		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId)
+		{
+			Routing = this.ProjectId
+		};
 
 		protected override void ExpectResponse(IGetResponse<Project> response)
 		{
@@ -57,13 +60,16 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}";
+		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}?routing={this.ProjectId}";
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => null;
+		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g.Routing(this.ProjectId);
 
-		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId);
+		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId)
+		{
+			Routing = this.ProjectId
+		};
 
 		protected override void ExpectResponse(IGetResponse<Project> response)
 		{
@@ -157,9 +163,10 @@ namespace Tests.Document.Single.Get
 	{
 		public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}?stored_fields=name%2CnumberOfCommits";
+		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}?stored_fields=name%2CnumberOfCommits&routing={UrlEncode(this.ProjectId)}";
 
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g
+			.Routing(this.ProjectId)
 			.StoredFields(
 				p => p.Name,
 				p => p.NumberOfCommits
@@ -167,6 +174,7 @@ namespace Tests.Document.Single.Get
 
 		protected override GetRequest<Project> Initializer => new GetRequest<Project>(ProjectId)
 		{
+			Routing = ProjectId,
 			StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
 		};
 

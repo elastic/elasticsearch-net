@@ -22,8 +22,8 @@ namespace Tests.Document.Single.Exists
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.DocumentExists<Project>(CallIsolatedValue),
-			fluentAsync: (client, f) => client.DocumentExistsAsync<Project>(CallIsolatedValue),
+			fluent: (client, f) => client.DocumentExists<Project>(CallIsolatedValue, f),
+			fluentAsync: (client, f) => client.DocumentExistsAsync<Project>(CallIsolatedValue, f),
 			request: (client, r) => client.DocumentExists(r),
 			requestAsync: (client, r) => client.DocumentExistsAsync(r)
 		);

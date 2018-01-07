@@ -25,7 +25,7 @@ namespace Tests.Document.Single.TermVectors
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/doc/{UrlEncode(Project.Instance.Name)}/_termvectors?offsets=true";
+		protected override string UrlPath => $"/project/doc/{UrlEncode(Project.Instance.Name)}/_termvectors?offsets=true&routing={Project.Routing}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -47,6 +47,7 @@ namespace Tests.Document.Single.TermVectors
 
 		protected override Func<TermVectorsDescriptor<Project>, ITermVectorsRequest<Project>> Fluent => d=>d
 			.Id(Id(Project.Instance))
+			.Routing(Project.Routing)
 			.Offsets()
 			.Filter(f => f
 				.MaximimumNumberOfTerms(3)
@@ -61,6 +62,7 @@ namespace Tests.Document.Single.TermVectors
 
 		protected override TermVectorsRequest<Project> Initializer => new TermVectorsRequest<Project>(Project.Instance.Name)
 		{
+			Routing = Project.Routing,
 			Offsets = true,
 			Filter = new TermVectorFilter
 			{

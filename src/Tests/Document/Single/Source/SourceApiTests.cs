@@ -14,7 +14,7 @@ namespace Tests.Document.Single.Source
 
 		[I] public void SourceReturnsDocument()
 		{
-			var project = this.Client.Source<Project>(Project.Instance.Name);
+			var project = this.Client.Source<Project>(Project.Instance.Name, s=>s.Routing(Project.Routing));
 			var p = Project.Projects.FirstOrDefault(i=>i.Name == Project.Instance.Name);
 			p.Should().NotBeNull("Test setup failure, project instance not found in projects indexed into readonly cluster");
 

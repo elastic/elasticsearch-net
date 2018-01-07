@@ -131,6 +131,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 				)
 				.Mappings(map => map
 					.Map<Project>(m => m
+						.RoutingField(r=>r.Required())
 						.AutoMap()
 						.Properties(ProjectProperties)
 						.Properties<CommitActivity>(props => props

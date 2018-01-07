@@ -61,8 +61,8 @@ namespace Tests.Document.Single.Delete
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Delete<Project>(CallIsolatedValue),
-			fluentAsync: (client, f) => client.DeleteAsync<Project>(CallIsolatedValue),
+			fluent: (client, f) => client.Delete<Project>(CallIsolatedValue, f),
+			fluentAsync: (client, f) => client.DeleteAsync<Project>(CallIsolatedValue, f),
 			request: (client, r) => client.Delete(r),
 			requestAsync: (client, r) => client.DeleteAsync(r)
 		);
@@ -74,8 +74,11 @@ namespace Tests.Document.Single.Delete
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => null;
-		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue);
+		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => d => d.Routing(CallIsolatedValue);
+		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue)
+		{
+			Routing = CallIsolatedValue
+		};
 
 		protected override void ExpectResponse(IDeleteResponse response)
 		{

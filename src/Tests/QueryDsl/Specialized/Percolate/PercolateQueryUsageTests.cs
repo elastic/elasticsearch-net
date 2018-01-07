@@ -181,6 +181,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				type = "doc",
 				index = "project",
 				id = Project.Instance.Name,
+				routing = Project.Instance.Name,
 				field = "query"
 			}
 		};
@@ -201,6 +202,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			Type = typeof(Project),
 			Index = IndexName.From<Project>(),
 			Id = Project.Instance.Name,
+			Routing = Project.Instance.Name,
 			Field = Infer.Field<ProjectPercolation>(f => f.Query)
 		};
 
@@ -209,6 +211,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				.Type<Project>()
 				.Index<Project>()
 				.Id(Project.Instance.Name)
+				.Routing(Project.Instance.Name)
 				.Field(f => f.Query)
 			);
 

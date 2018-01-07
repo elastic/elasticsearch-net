@@ -45,9 +45,9 @@ namespace Tests.Document.Single.Update
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() => new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
 
 		protected override Func<UpdateDescriptor<Project, Project>, IUpdateRequest<Project, Project>> Fluent => u => u
-			 .Doc(Project.Instance)
-			 .DocAsUpsert()
-			 .DetectNoop();
+			.Doc(Project.Instance)
+			.DocAsUpsert()
+			.DetectNoop();
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
 		{

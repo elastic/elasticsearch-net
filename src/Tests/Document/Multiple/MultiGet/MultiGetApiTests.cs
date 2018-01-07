@@ -141,11 +141,11 @@ namespace Tests.Document.Multiple.MultiGet
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d
 			.Index<Project>()
 			.Type<Project>()
-			.GetMany<Project>(this._ids);
+			.GetMany<Project>(this._ids, (op, id) =>op.Routing(id));
 
 		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>(), Type<Project>())
 		{
-			Documents = this._ids.Select(n => new MultiGetOperation<Project>(n))
+			Documents = this._ids.Select(n => new MultiGetOperation<Project>(n) { Routing = n })
 		};
 
 		protected override void ExpectResponse(IMultiGetResponse response)
