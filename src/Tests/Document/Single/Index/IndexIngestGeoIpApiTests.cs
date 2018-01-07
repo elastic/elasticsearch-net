@@ -124,7 +124,7 @@ namespace Tests.Document.Single.Index
 		{
 			response.ShouldBeValid();
 
-			var getResponse = this.Client.Get<Project>(response.Id);
+			var getResponse = this.Client.Get<Project>(response.Id, g=>g.Routing(CallIsolatedValue));
 
 			getResponse.ShouldBeValid();
 			getResponse.Source.Should().NotBeNull();
