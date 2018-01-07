@@ -35,6 +35,7 @@ namespace Tests.Document.Single.Delete
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override DeleteDescriptor<Project> NewDescriptor() => new DeleteDescriptor<Project>(CallIsolatedValue);
 		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => d => d.Routing(Project.Instance.Name);
 		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue)
 		{
@@ -70,10 +71,11 @@ namespace Tests.Document.Single.Delete
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}?routing={CallIsolatedValue}";
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override DeleteDescriptor<Project> NewDescriptor() => new DeleteDescriptor<Project>(CallIsolatedValue);
 		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => d => d.Routing(CallIsolatedValue);
 		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue)
 		{

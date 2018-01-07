@@ -135,7 +135,10 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override object ExpectJson => new
 		{
-			ids = this._ids
+			docs = this._ids.Select(i=> new
+			{
+				_id = i, routing = i
+			})
 		};
 
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d

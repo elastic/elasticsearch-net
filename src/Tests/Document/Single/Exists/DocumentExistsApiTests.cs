@@ -35,6 +35,7 @@ namespace Tests.Document.Single.Exists
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override DocumentExistsDescriptor<Project> NewDescriptor() => new DocumentExistsDescriptor<Project>(CallIsolatedValue);
 		protected override Func<DocumentExistsDescriptor<Project>, IDocumentExistsRequest> Fluent => d => d.Routing(Project.Routing);
 		protected override DocumentExistsRequest<Project> Initializer => new DocumentExistsRequest<Project>(CallIsolatedValue)
 		{

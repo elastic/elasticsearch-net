@@ -30,6 +30,7 @@ namespace Tests.Document.Single.Get
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(this.ProjectId);
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g=>g.Routing(this.ProjectId);
 
 		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId)
@@ -64,8 +65,8 @@ namespace Tests.Document.Single.Get
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(this.ProjectId);
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g.Routing(this.ProjectId);
-
 		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId)
 		{
 			Routing = this.ProjectId
