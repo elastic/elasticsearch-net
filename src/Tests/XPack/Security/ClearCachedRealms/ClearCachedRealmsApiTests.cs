@@ -27,7 +27,7 @@ namespace Tests.XPack.Security.ClearCachedRealms
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/_xpack/security/realm/{UrlEncode(this.Realm)}/_clear_cache";
+		protected override string UrlPath => $"/_xpack/security/realm/{U(this.Realm)}/_clear_cache";
 
 		protected override bool SupportsDeserialization => false;
 

@@ -29,7 +29,7 @@ namespace Tests.Document.Single.SourceExists
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_source?routing={Project.Routing}";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_source?routing={U(Project.Routing)}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -74,7 +74,7 @@ namespace Tests.Document.Single.SourceExists
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override string UrlPath => $"/{IndexWithNoSource.Name}/doc/{CallIsolatedValue}/_source?routing={Project.Routing}";
+		protected override string UrlPath => $"/{IndexWithNoSource.Name}/doc/{CallIsolatedValue}/_source?routing={U(Project.Routing)}";
 
 		protected override bool SupportsDeserialization => false;
 

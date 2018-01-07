@@ -57,7 +57,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_tasks/{UrlEncode(this.TaskId.ToString())}/_cancel";
+		protected override string UrlPath => $"/_tasks/{U(this.TaskId.ToString())}/_cancel";
 		protected override bool SupportsDeserialization => false;
 
 

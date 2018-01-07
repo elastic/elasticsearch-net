@@ -14,7 +14,7 @@ namespace Tests.Framework
 
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 		protected bool RanIntegrationSetup => this._usage?.CalledSetup ?? false;
-	    protected string UrlEncode(string s) => Uri.EscapeDataString(s);
+	    protected string U(string s) => Uri.EscapeDataString(s);
 
 		protected string CallIsolatedValue => UniqueValues.Value;
 		protected T ExtendedValue<T>(string key) where T : class => this.UniqueValues.ExtendedValue<T>(key);

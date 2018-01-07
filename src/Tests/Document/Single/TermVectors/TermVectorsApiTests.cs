@@ -25,7 +25,7 @@ namespace Tests.Document.Single.TermVectors
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/doc/{UrlEncode(Project.Instance.Name)}/_termvectors?offsets=true&routing={Project.Routing}";
+		protected override string UrlPath => $"/project/doc/{U(Project.Instance.Name)}/_termvectors?offsets=true&routing={U(Project.Routing)}";
 
 		protected override bool SupportsDeserialization => false;
 

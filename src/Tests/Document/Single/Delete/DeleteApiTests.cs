@@ -31,7 +31,7 @@ namespace Tests.Document.Single.Delete
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}?routing={Project.Instance.Name}";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}?routing={U(Project.Routing)}";
 
 		protected override bool SupportsDeserialization => false;
 

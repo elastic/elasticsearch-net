@@ -26,7 +26,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}?routing={this.ProjectId}";
+		protected override string UrlPath => $"/project/doc/{U(this.ProjectId)}?routing={this.ProjectId}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -61,7 +61,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}?routing={this.ProjectId}";
+		protected override string UrlPath => $"/project/doc/{U(this.ProjectId)}?routing={U(this.ProjectId)}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -97,7 +97,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/{BadIndex}/doc/{UrlEncode(this.ProjectId)}";
+		protected override string UrlPath => $"/{BadIndex}/doc/{U(this.ProjectId)}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -133,7 +133,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/doc/{UrlEncode(this.CommitActivityId)}?routing={UrlEncode(this.CommitActivity.ProjectName)}";
+		protected override string UrlPath => $"/project/doc/{U(this.CommitActivityId)}?routing={U(this.CommitActivity.ProjectName)}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -164,7 +164,7 @@ namespace Tests.Document.Single.Get
 	{
 		public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override string UrlPath => $"/project/doc/{UrlEncode(this.ProjectId)}?stored_fields=name%2CnumberOfCommits&routing={UrlEncode(this.ProjectId)}";
+		protected override string UrlPath => $"/project/doc/{U(this.ProjectId)}?stored_fields=name%2CnumberOfCommits&routing={U(this.ProjectId)}";
 
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g
 			.Routing(this.ProjectId)
