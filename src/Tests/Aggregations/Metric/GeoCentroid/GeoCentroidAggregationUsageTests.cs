@@ -133,7 +133,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 		};
 
 		protected override QueryContainer QueryScope => new TermQuery { Field = Infer.Field<Project>(p=>p.Name), Value = "noresult" };
-		protected override object QueryScopeJson { get; } = new {name = new {value = "noresult"}};
+		protected override object QueryScopeJson { get; } = new {term = new {name = new {value = "noresult"}}};
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.GeoCentroid("centroid", gb => gb
