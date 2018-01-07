@@ -26,7 +26,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/doc/{U(this.ProjectId)}?routing={this.ProjectId}";
+		protected override string UrlPath => $"/project/doc/{U(this.ProjectId)}?routing={U(this.ProjectId)}";
 
 		protected override bool SupportsDeserialization => false;
 
