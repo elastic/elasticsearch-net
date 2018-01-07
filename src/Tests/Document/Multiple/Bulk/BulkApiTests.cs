@@ -59,10 +59,10 @@ namespace Tests.Document.Multiple.Bulk
 			new { doc = new { leadDeveloper = new { firstName = "martijn" } } } ,
 			new Dictionary<string, object>{ { "create", new { _type="doc", _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "delete", new { _type="doc", _id = Project.Instance.Name + "1" } } },
+			new Dictionary<string, object>{ { "delete", new { _type="doc", _id = Project.Instance.Name + "1", routing = Project.Instance.Name  } } },
 			new Dictionary<string, object>{ { "create", new { _type="doc", _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "update", new { _type="doc", _id = Project.Instance.Name + "2" } } },
+			new Dictionary<string, object>{ { "update", new { _type="doc", _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
 			new Dictionary<string, object>{ { "script", new
 			{
 				source = "ctx._source.numberOfCommits = params.commits",
@@ -77,10 +77,11 @@ namespace Tests.Document.Multiple.Bulk
 			.Index<Project>(b => b.Document(Project.Instance).Pipeline("pipeline"))
 			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
 			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "1"))
-			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"))
+			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1").Routing(Project.Instance.Name))
 			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "2"))
 			.Update<Project>(b => b
 				.Id(Project.Instance.Name + "2")
+				.Routing(Project.Instance.Name)
 				.Script(s => s
 					.Source("ctx._source.numberOfCommits = params.commits")
 					.Params(p => p.Add("commits", 30))
@@ -103,13 +104,17 @@ namespace Tests.Document.Multiple.Bulk
 					{
 						Id = Project.Instance.Name + "1",
 					},
-					new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
-						new BulkCreateOperation<Project>(Project.Instance)
+					new BulkDeleteOperation<Project>(Project.Instance.Name + "1")
+					{
+						Routing = Project.Instance.Name
+					},
+					new BulkCreateOperation<Project>(Project.Instance)
 					{
 						Id = Project.Instance.Name + "2",
 					},
 					new BulkUpdateOperation<Project, object>(Project.Instance.Name + "2")
 					{
+						Routing = Project.Instance.Name,
 						Script = new InlineScript("ctx._source.numberOfCommits = params.commits")
 						{
 							Params = new Dictionary<string, object> { { "commits", 30 } },
@@ -144,7 +149,10 @@ namespace Tests.Document.Multiple.Bulk
 			project1.LeadDeveloper.FirstName.Should().Be("martijn");
 			project1.Description.Should().Be("Overridden");
 
-			var project2 = this.Client.Source<Project>(Project.Instance.Name + "2", p => p.Index(CallIsolatedValue));
+			var project2 = this.Client.Source<Project>(Project.Instance.Name + "2", p => p
+				.Index(CallIsolatedValue)
+				.Routing(Project.Instance.Name)
+			);
 			project2.Description.Should().Be("Default");
 			project2.NumberOfCommits.Should().Be(30);
 		}

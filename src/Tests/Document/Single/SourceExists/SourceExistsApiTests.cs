@@ -20,8 +20,8 @@ namespace Tests.Document.Single.SourceExists
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.SourceExists<Project>(CallIsolatedValue),
-			fluentAsync: (client, f) => client.SourceExistsAsync<Project>(CallIsolatedValue),
+			fluent: (client, f) => client.SourceExists<Project>(CallIsolatedValue, f),
+			fluentAsync: (client, f) => client.SourceExistsAsync<Project>(CallIsolatedValue, f),
 			request: (client, r) => client.SourceExists(r),
 			requestAsync: (client, r) => client.SourceExistsAsync(r)
 		);
@@ -29,12 +29,16 @@ namespace Tests.Document.Single.SourceExists
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_source";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_source?routing={Project.Routing}";
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => null;
-		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(CallIsolatedValue);
+		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d.Routing(Project.Routing);
+		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(CallIsolatedValue)
+		{
+			Routing = Project.Routing
+		};
+
 	}
 
 	public class SourceExistsNotFoundApiTests : ApiIntegrationTestBase<WritableCluster, IExistsResponse, ISourceExistsRequest, SourceExistsDescriptor<Project>, SourceExistsRequest<Project>>
@@ -69,12 +73,15 @@ namespace Tests.Document.Single.SourceExists
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override string UrlPath => $"/{IndexWithNoSource.Name}/doc/{CallIsolatedValue}/_source";
+		protected override string UrlPath => $"/{IndexWithNoSource.Name}/doc/{CallIsolatedValue}/_source?routing={Project.Routing}";
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => null;
-		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(Doc(CallIsolatedValue));
+		protected override Func<SourceExistsDescriptor<Project>, ISourceExistsRequest> Fluent => d => d.Routing(Project.Routing);
+		protected override SourceExistsRequest<Project> Initializer => new SourceExistsRequest<Project>(CallIsolatedValue)
+		{
+			Routing = Project.Routing
+		};
 	}
 
 
@@ -98,7 +105,7 @@ namespace Tests.Document.Single.SourceExists
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 404;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override string UrlPath => $"/{IndexWithNoSource.Name}/doc/{CallIsolatedValue}/_source";
+		protected override string UrlPath => $"/{IndexWithNoSource.Name}/doc/{CallIsolatedValue}/_source?routing={Project.Routing}";
 		protected override bool SupportsDeserialization => false;
 
 	}

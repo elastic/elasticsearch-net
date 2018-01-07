@@ -18,7 +18,7 @@ namespace Tests.Document.Single
 
 		protected override LazyResponses Exists() => Calls<DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>, IDocumentExistsRequest, IExistsResponse>(
 			id => new DocumentExistsRequest<Project>(Project.Instance, id: id),
-			(id, d) => d,
+			(id, d) => d.Routing(Project.Instance.Name),
 			fluent: (s, c, f) => c.DocumentExists<Project>(s, f),
 			fluentAsync: (s, c, f) => c.DocumentExistsAsync<Project>(s, f),
 			request: (s, c, r) => c.DocumentExists(r),
@@ -35,8 +35,8 @@ namespace Tests.Document.Single
 		);
 
 		protected override LazyResponses Read() => Calls<GetDescriptor<Project>, GetRequest<Project>, IGetRequest, IGetResponse<Project>>(
-			id => new GetRequest<Project>(id),
-			(id, d) => d,
+			id => new GetRequest<Project>(id) { Routing = Project.Instance.Name },
+			(id, d) => d.Routing(Project.Instance.Name),
 			fluent: (s, c, f) => c.Get<Project>(s, f),
 			fluentAsync: (s, c, f) => c.GetAsync<Project>(s, f),
 			request: (s, c, r) => c.Get<Project>(r),
@@ -49,8 +49,14 @@ namespace Tests.Document.Single
 			IUpdateRequest<Project, Project>,
 			IUpdateResponse<Project>
 			>(
-				id => new UpdateRequest<Project, Project>(id) { Doc = new Project { Description = id + " updated" } },
-				(id, d) => d.Doc(new Project { Description = id + " updated"} ),
+				id => new UpdateRequest<Project, Project>(id)
+				{
+					Routing = Project.Instance.Name,
+					Doc = new Project { Description = id + " updated" }
+				},
+				(id, d) => d
+					.Routing(Project.Instance.Name)
+					.Doc(new Project { Description = id + " updated"} ),
 				fluent: (s, c, f) => c.Update<Project, Project>(s, f),
 				fluentAsync: (s, c, f) => c.UpdateAsync<Project, Project>(s, f),
 				request: (s, c, r) => c.Update<Project, Project>(r),
@@ -58,8 +64,8 @@ namespace Tests.Document.Single
 			);
 
 		protected override LazyResponses Delete() => Calls<DeleteDescriptor<Project>, DeleteRequest<Project>, IDeleteRequest, IDeleteResponse>(
-			id => new DeleteRequest<Project>(id),
-			(id, d) => d,
+			id => new DeleteRequest<Project>(id) { Routing = Project.Instance.Name },
+			(id, d) => d.Routing(Project.Instance.Name),
 			fluent: (s, c, f) => c.Delete<Project>(s, f),
 			fluentAsync: (s, c, f) => c.DeleteAsync<Project>(s, f),
 			request: (s, c, r) => c.Delete(r),

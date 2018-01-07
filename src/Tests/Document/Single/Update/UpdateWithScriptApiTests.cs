@@ -29,7 +29,7 @@ namespace Tests.Document.Single.Update
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_update";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_update?routing={Project.Routing}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -47,9 +47,11 @@ namespace Tests.Document.Single.Update
 			}
 		};
 
-		protected override UpdateDescriptor<Project, Project> NewDescriptor() => new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
+		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>
+			new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
 
 		protected override Func<UpdateDescriptor<Project, Project>, IUpdateRequest<Project, Project>> Fluent => d => d
+			.Routing(Project.Routing)
 			.ScriptedUpsert()
 			.Script(s => s
 				.Source("ctx._source.name = \"params.name\"")
@@ -62,6 +64,7 @@ namespace Tests.Document.Single.Update
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
 		{
+			Routing = Project.Routing,
 			ScriptedUpsert = true,
 			Script = new InlineScript("ctx._source.name = \"params.name\"")
 			{

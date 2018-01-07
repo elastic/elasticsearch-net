@@ -79,6 +79,8 @@ namespace Tests.Framework.MockData
 			SourceOnly = TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
+		public static readonly string Routing = Project.Instance.Name;
+
 		public static object InstanceAnonymous => TestClient.Configuration.Random.SourceSerializer
 			? InstanceAnonymousSourceSerializer
 			: InstanceAnonymousDefault;

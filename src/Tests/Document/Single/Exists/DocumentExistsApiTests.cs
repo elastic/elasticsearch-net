@@ -31,12 +31,15 @@ namespace Tests.Document.Single.Exists
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}?routing={Project.Instance.Name}";
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<DocumentExistsDescriptor<Project>, IDocumentExistsRequest> Fluent => null;
-		protected override DocumentExistsRequest<Project> Initializer => new DocumentExistsRequest<Project>(CallIsolatedValue);
+		protected override Func<DocumentExistsDescriptor<Project>, IDocumentExistsRequest> Fluent => d => d.Routing(Project.Routing);
+		protected override DocumentExistsRequest<Project> Initializer => new DocumentExistsRequest<Project>(CallIsolatedValue)
+		{
+			Routing = Project.Routing
+		};
 
 		protected override void ExpectResponse(IExistsResponse response)
 		{

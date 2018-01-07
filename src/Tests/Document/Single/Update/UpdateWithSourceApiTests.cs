@@ -34,7 +34,7 @@ namespace Tests.Document.Single.Update
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_update";
+		protected override string UrlPath => $"/project/doc/{CallIsolatedValue}/_update?routing{Project.Routing}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -50,12 +50,14 @@ namespace Tests.Document.Single.Update
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() => new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
 
 		protected override Func<UpdateDescriptor<Project,Project>, IUpdateRequest<Project, Project>> Fluent => d=>d
+			.Routing(Project.Routing)
 			.Doc(Project.Instance)
 			.Source(s=>s.Includes(f=>f.Field(p=>p.Name).Field("sourceOnly")))
 			.DocAsUpsert();
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
 		{
+			Routing = Project.Routing,
 			Doc = Project.Instance,
 			DocAsUpsert = true,
 			Source = new SourceFilter
