@@ -11,6 +11,7 @@
 #load @"Benchmarking.fsx"
 #load @"Profiling.fsx"
 #load @"XmlDocPatcher.fsx"
+#load @"Differ.fsx"
 #nowarn "0044" //TODO sort out FAKE 5
 
 open System
@@ -28,6 +29,8 @@ open XmlDocPatcher
 open Documentation
 open Signing
 open Commandline
+open Differ
+open Differ.Differ
 
 Commandline.parse()
 
@@ -82,6 +85,47 @@ Target "Canary" <| fun _ ->
     let apiKey = (getBuildParam "apikey");
     let feed = (getBuildParamOrDefault "feed" "elasticsearch-net");
     if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey feed
+    
+Target "Diff" <| fun _ ->
+    let first = getBuildParam "first"
+    let second = getBuildParam "second"
+    let tempDir = System.IO.Path.GetTempPath()
+    let diff = 
+        match getBuildParam "diffType" with
+        | "github" -> 
+            let commit = {
+                Commit = ""
+                CompileTarget = Command("build.bat", ["skiptests"], fun o -> o @@ @"build\output\Nest\net46")
+                OutputTarget = "Nest.dll"
+            }
+            GitHub {
+                Url = new Uri(Paths.Repository)
+                TempDir = tempDir
+                FirstCommit = { commit with Commit = first }            
+                SecondCommit = { commit with Commit = second }            
+            }
+        | "nuget" ->
+            Nuget {
+                Package = "NEST"
+                TempDir = tempDir
+                FirstVersion = first
+                SecondVersion = second
+                FrameworkVersion = "net46"
+                Sources = []        
+            }
+        | "directories" ->
+           Directories {
+              FirstDir = first
+              SecondDir = second             
+           }          
+        | "assemblies" ->
+           Assemblies {
+              FirstPath = first
+              SecondPath = second             
+           }
+        | d -> failwith (sprintf "Unknown diff type: %s" d)    
+    tracefn "Performing diff using %A" diff
+    Differ.Generate(diff, Format.Xml)
 
 // Dependencies
 "Start"
@@ -92,7 +136,7 @@ Target "Canary" <| fun _ ->
   =?> ("Test", (not Commandline.skipTests))
   =?> ("InternalizeDependencies", (not isMono))
   ==> "InheritDoc"
-  =?> ("Documentation", (not isMono))
+  =?> ("Documentation", (not Commandline.skipDocs))
   ==> "Build"
 
 "Start"
@@ -118,6 +162,9 @@ Target "Canary" <| fun _ ->
 
 "Build"
   ==> "Release"
+  
+"Start"
+  ==> "Diff"
   
 RunTargetOrListTargets()
 

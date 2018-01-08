@@ -7,6 +7,7 @@ open System
 open System.IO
 open System.Diagnostics
 open System.Net
+open System.Text.RegularExpressions
 
 #load @"Paths.fsx"
 
@@ -143,7 +144,7 @@ module Tooling =
     let DotTraceSnapshotStats = new ProfilerTooling("SnapshotStat.exe")
 
     type DotNetTooling(exe) =
-       member this.Exec arguments =
+        member this.Exec arguments =
             this.ExecWithTimeout arguments (TimeSpan.FromMinutes 30.)
 
         member this.ExecWithTimeout arguments timeout =
@@ -151,3 +152,18 @@ module Tooling =
             if result <> 0 then failwith (sprintf "Failed to run dotnet tooling for %s args: %A" exe arguments)
 
     let DotNet = DotNetTooling("dotnet.exe")
+
+    type DiffTooling(exe) =       
+        let installPath = "C:\Program Files (x86)\Progress\JustAssembly\Libraries"  
+        let downloadPage = "https://www.telerik.com/download-trial-file/v2/justassembly"  
+        let toolPath = installPath @@ exe
+        
+        member this.Exec arguments =
+            if (directoryExists installPath |> not) then
+                failwith (sprintf "JustAssembly is not installed in the default location %s. Download and install from %s" installPath downloadPage)
+        
+            let result = execProcessWithTimeout toolPath arguments (TimeSpan.FromMinutes 5.) "."
+            if result <> 0 then failwith (sprintf "Failed to run diff tooling for %s args: %A" exe arguments)
+            
+    let JustAssembly = DiffTooling("JustAssembly.CommandLineTool.exe")      
+    
