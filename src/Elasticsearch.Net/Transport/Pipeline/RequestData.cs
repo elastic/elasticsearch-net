@@ -104,7 +104,6 @@ namespace Elasticsearch.Net
 
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request = null)
 		{
-
 			//Make sure we append global query string as well the request specific query string parameters
 			var copy = new NameValueCollection(global.QueryStringParameters);
 			var formatter = new UrlFormatProvider(this.ConnectionSettings);
