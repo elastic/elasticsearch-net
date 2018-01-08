@@ -38,7 +38,7 @@ namespace Elasticsearch.Net
 		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
-		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
+		public bool SourceEnabled { get { return Q<bool>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -1587,7 +1587,7 @@ namespace Elasticsearch.Net
 		public string[] Sort { get { return Q<string[]>("sort"); } set { Q("sort", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
+		public bool SourceEnabled { get { return Q<bool>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -1703,7 +1703,7 @@ namespace Elasticsearch.Net
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
+		public bool SourceEnabled { get { return Q<bool>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -1758,7 +1758,7 @@ namespace Elasticsearch.Net
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
+		public bool SourceEnabled { get { return Q<bool>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -1828,7 +1828,7 @@ namespace Elasticsearch.Net
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
+		public bool SourceEnabled { get { return Q<bool>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -1917,7 +1917,7 @@ namespace Elasticsearch.Net
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
+		public bool SourceEnabled { get { return Q<bool>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -1997,7 +1997,7 @@ namespace Elasticsearch.Net
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
+		public bool SourceEnabled { get { return Q<bool>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -3676,7 +3676,7 @@ namespace Elasticsearch.Net
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
+		public bool SourceEnabled { get { return Q<bool>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -4807,7 +4807,7 @@ namespace Elasticsearch.Net
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
+		public bool SourceEnabled { get { return Q<bool>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>The script language (default: painless)</summary>
 		public string Lang { get { return Q<string>("lang"); } set { Q("lang", value); } }
@@ -4922,7 +4922,7 @@ namespace Elasticsearch.Net
 		public string[] Sort { get { return Q<string[]>("sort"); } set { Q("sort", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
+		public bool SourceEnabled { get { return Q<bool>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }

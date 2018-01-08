@@ -325,6 +325,8 @@ namespace ApiGenerator.Domain
 				if (globalOverrides.RenderPartial.Contains(newName))
 					kv.Value.RenderPartial = true;
 
+				//make sure source_enabled takes a boolean only
+				if (newName == "source_enabled") kv.Value.Type = "boolean";
 
 				patchedParams.Add(newName, kv.Value);
 			}
