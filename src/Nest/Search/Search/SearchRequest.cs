@@ -60,9 +60,6 @@ namespace Nest
 		[JsonProperty("rescore")]
 		IList<IRescore> Rescore { get; set; }
 
-		[JsonProperty("stored_fields")]
-		Fields StoredFields { get; set; }
-
 		[JsonProperty("script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
