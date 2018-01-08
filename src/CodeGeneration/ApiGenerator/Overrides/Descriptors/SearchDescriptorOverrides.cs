@@ -15,7 +15,6 @@ namespace ApiGenerator.Overrides.Descriptors
 			"explain",
 			"version",
 			"q", //we dont support GET searches
-			"stored_fields",
 			"indices_boost",
 			"source",
 			"sort",
@@ -24,7 +23,6 @@ namespace ApiGenerator.Overrides.Descriptors
 			"_source_exclude",
 			"track_scores",
 			"terminate_after",
-			"fielddata_fields"
 		};
 	}
 }

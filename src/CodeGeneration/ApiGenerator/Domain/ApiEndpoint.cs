@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ApiGenerator.Overrides;
 using ApiGenerator.Overrides.Descriptors;
 using CsQuery.ExtensionMethods.Internal;
 
@@ -303,8 +304,7 @@ namespace ApiGenerator.Domain
 				var type = CodeConfiguration.Assembly.GetType(typeName);
 				if (type != null)
 				{
-					var overrides = Activator.CreateInstance(type) as IDescriptorOverrides;
-					if (overrides != null)
+					if (Activator.CreateInstance(type) is IDescriptorOverrides overrides)
 					{
 						skipList = overrides.SkipQueryStringParams ?? skipList;
 						queryStringParamsRenameList = overrides.RenameQueryStringParams ?? queryStringParamsRenameList;
@@ -318,26 +318,31 @@ namespace ApiGenerator.Domain
 					{"_source_include", "source_include"},
 					{"_source_exclude", "source_exclude"},
 					{"q", "query_on_query_string"},
+					{"docvalue_fields", "doc_value_fields"},
 				};
 
 				foreach (var kv in globalQueryStringRenames)
 					if (!queryStringParamsRenameList.ContainsKey(kv.Key))
 						queryStringParamsRenameList[kv.Key] = kv.Value;
 
+				var globalOverrides = new GlobalOverrides();
 				var patchedParams = new Dictionary<string, ApiQueryParameters>();
 				foreach (var kv in method.Url.Params)
 				{
 					if (kv.Value.OriginalQueryStringParamName.IsNullOrEmpty())
 						kv.Value.OriginalQueryStringParamName = kv.Key;
-					if (skipList.Contains(kv.Key))
-						continue;
+					if (skipList.Contains(kv.Key)) continue;
+					if (globalOverrides.RenderPartial.Contains(kv.Key))
+						kv.Value.RenderPartial = true;
 
-					string newName;
-					if (!queryStringParamsRenameList.TryGetValue(kv.Key, out newName))
+					if (!queryStringParamsRenameList.TryGetValue(kv.Key, out var newName))
 					{
 						patchedParams.Add(kv.Key, kv.Value);
 						continue;
 					}
+					if (globalOverrides.RenderPartial.Contains(newName))
+						kv.Value.RenderPartial = true;
+
 
 					patchedParams.Add(newName, kv.Value);
 				}

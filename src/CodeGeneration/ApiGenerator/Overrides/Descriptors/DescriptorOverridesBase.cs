@@ -7,6 +7,8 @@ namespace ApiGenerator.Overrides.Descriptors
 	{
 		public virtual IEnumerable<string> SkipQueryStringParams { get; } = null;
 
+		public virtual IEnumerable<string> RenderPartial { get; } = null;
+
 		public virtual IDictionary<string, string> RenameQueryStringParams { get; } = null;
 
 		public virtual CsharpMethod PatchMethod(CsharpMethod method)

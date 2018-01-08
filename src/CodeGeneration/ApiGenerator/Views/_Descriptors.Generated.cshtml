@@ -42,7 +42,13 @@ namespace Nest
     }
 	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
+		//skip parameters already part of the path portion of the url
         if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
+        {
+			continue;
+        }
+		//we prefer this parameter to be explictly implemented on the request body
+		if (kv.Value.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
         {
 			continue;
         }
@@ -54,7 +60,7 @@ namespace Nest
 		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
 		var g = typed ? method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "") : "T";
 		var mml = mm.ToLowerInvariant();
-		var fieldsMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
+		var fieldsMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("Fields");
 		var desc = kv.Value.HighLevelTypeDescription(kv.Key).ToList();
 		var original = kv.Value.OriginalQueryStringParamName;
 		<text>@if (desc.Count == 1) {
@@ -72,7 +78,7 @@ namespace Nest
 		<text>///<summary>@kv.Value.Description</summary>
 		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));</text>
 		}
-		else if (mm.ToLowerInvariant().Contains("field") && t.Contains("string"))
+		else if (mm.ToLowerInvariant().Contains("field") && t.Contains("Field"))
 		{<text>
 		///<summary>@kv.Value.Description</summary>
 		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", (Field)field);</text>

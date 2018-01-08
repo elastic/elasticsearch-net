@@ -40,7 +40,18 @@ namespace Nest
 	{
 		<text>@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }</text>
 	}
-	<text> } </text>
+	//render partial methods as interface properties forcing us to implement them on request and request descriptors
+	foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
+	{
+		if (kv.Value.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+		{
+			var fieldType = kv.Value.HighLevelType(kv.Key).Replace("params", "");
+			var cased = kv.Key.ToPascalCase();
+		<text>[JsonProperty("@(kv.Value.OriginalQueryStringParamName)")] @(Raw(fieldType)) @(cased) { get; set; }</text>
+	 	}
+	}
+	<text>}
+</text>
 	}
 	<text>///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
 	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(" : PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
@@ -60,23 +71,20 @@ namespace Nest
 	}
 	@foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
+		//skip parameters already part of the path portion of the url
 		if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
+        {
+			continue;
+        }
+		//we prefer this parameter to be explictly implemented on the request body
+		if (kv.Value.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
         {
 			continue;
         }
 		var original = kv.Value.OriginalQueryStringParamName;
 		var cased = kv.Key.ToPascalCase();
 		var mm = (cased != "Type" && cased != "Index" && cased != "Source" && cased != "Script") ? cased : cased + "QueryString";
-		var fieldType = kv.Value.HighLevelType(kv.Key).Replace("params", "");
-		var isFields = (original.Contains("fields") || original.Contains("source_include") || original.Contains("source_exclude"));
-		if (isFields && fieldType.Contains("string"))
-		{
-			fieldType = "Fields";
-		}
-		else if (original.Contains("field") && fieldType.Contains("string"))
-		{
-			fieldType = "Field";
-		}
+		var fieldType = kv.Value.HighLevelType(kv.Key).Replace("params ", "");
 		var setter = "value";
 		if (fieldType == "Time")
 		{

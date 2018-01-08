@@ -4181,8 +4181,11 @@ namespace Elasticsearch.Net
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
+		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
+		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
+		
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public IEnumerable<object> DocvalueFields { get { return Q<IEnumerable<object>>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
+		public IEnumerable<object> DocValueFields { get { return Q<IEnumerable<object>>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }

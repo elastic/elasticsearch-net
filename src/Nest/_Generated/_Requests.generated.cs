@@ -19,7 +19,8 @@ namespace Nest
 	{
 		Id WatchId { get; }
 		ActionIds ActionId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherAckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchRequest  : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
@@ -55,7 +56,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -63,7 +64,8 @@ namespace Nest
 	public partial interface IActivateWatchRequest : IRequest<ActivateWatchRequestParameters> 
 	{
 		Id WatchId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 	public partial class ActivateWatchRequest  : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
 	{
@@ -91,7 +93,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -100,7 +102,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Names Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class AliasExistsRequest  : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
 	{
@@ -145,7 +148,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -153,7 +156,8 @@ namespace Nest
 	public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters> 
 	{
 		IndexName Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public partial class AnalyzeRequest  : PlainRequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
@@ -189,14 +193,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IAuthenticateRequest : IRequest<AuthenticateRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateRequest  : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
@@ -214,14 +219,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class BulkAliasRequest  : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
@@ -245,7 +251,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -254,7 +260,8 @@ namespace Nest
 	{
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public partial class BulkRequest  : PlainRequestBase<BulkRequestParameters>, IBulkRequest
 	{
@@ -301,7 +308,7 @@ namespace Nest
 		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -325,7 +332,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -333,7 +340,8 @@ namespace Nest
 	public partial interface ICancelTasksRequest : IRequest<CancelTasksRequestParameters> 
 	{
 		TaskId TaskId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CancelTasksRequest  : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
 	{
@@ -351,10 +359,10 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public  string[] Nodes { get { return Q< string[]>("nodes"); } set { Q("nodes", value); } }
+		public string[] Nodes { get { return Q<string[]>("nodes"); } set { Q("nodes", value); } }
 		
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
-		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
+		public string[] Actions { get { return Q<string[]>("actions"); } set { Q("actions", value); } }
 		
 		///<summary>Cancel tasks with specified parent node.</summary>
 		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
@@ -375,7 +383,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -383,7 +391,8 @@ namespace Nest
 	public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters> 
 	{
 		Names Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesRequest  : PlainRequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
 	{
@@ -410,13 +419,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -434,7 +443,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -442,7 +451,8 @@ namespace Nest
 	public partial interface ICatAllocationRequest : IRequest<CatAllocationRequestParameters> 
 	{
 		NodeIds NodeId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationRequest  : PlainRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
 	{
@@ -472,13 +482,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -496,7 +506,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -504,7 +514,8 @@ namespace Nest
 	public partial interface ICatCountRequest : IRequest<CatCountRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountRequest  : PlainRequestBase<CatCountRequestParameters>, ICatCountRequest
 	{
@@ -531,13 +542,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -555,7 +566,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -563,7 +574,8 @@ namespace Nest
 	public partial interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters> 
 	{
 		Fields Fields { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataRequest  : PlainRequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
 	{
@@ -593,13 +605,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -617,14 +629,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatHealthRequest : IRequest<CatHealthRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public partial class CatHealthRequest  : PlainRequestBase<CatHealthRequestParameters>, ICatHealthRequest
 	{
@@ -639,13 +652,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Set to false to disable timestamping</summary>
 		public bool Ts { get { return Q<bool>("ts"); } set { Q("ts", value); } }
@@ -666,14 +679,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatHelpRequest : IRequest<CatHelpRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public partial class CatHelpRequest  : PlainRequestBase<CatHelpRequestParameters>, ICatHelpRequest
 	{
@@ -682,7 +696,7 @@ namespace Nest
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -697,7 +711,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -705,7 +719,8 @@ namespace Nest
 	public partial interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesRequest  : PlainRequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
 	{
@@ -735,7 +750,7 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
 		public Health Health { get { return Q<Health>("health"); } set { Q("health", value); } }
@@ -747,7 +762,7 @@ namespace Nest
 		public bool Pri { get { return Q<bool>("pri"); } set { Q("pri", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -765,14 +780,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatMasterRequest : IRequest<CatMasterRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public partial class CatMasterRequest  : PlainRequestBase<CatMasterRequestParameters>, ICatMasterRequest
 	{
@@ -787,13 +803,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -811,14 +827,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeAttributesRequest  : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 	{
@@ -833,13 +850,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -857,14 +874,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatNodesRequest : IRequest<CatNodesRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public partial class CatNodesRequest  : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
 	{
@@ -882,13 +900,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -906,14 +924,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksRequest  : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
 	{
@@ -928,13 +947,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -952,14 +971,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsRequest  : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
 	{
@@ -974,13 +994,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -998,7 +1018,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1006,7 +1026,8 @@ namespace Nest
 	public partial interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryRequest  : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
 	{
@@ -1033,13 +1054,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -1057,14 +1078,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatRepositoriesRequest : IRequest<CatRepositoriesRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for CatRepositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
 	public partial class CatRepositoriesRequest  : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
 	{
@@ -1079,13 +1101,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -1103,7 +1125,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1111,7 +1133,8 @@ namespace Nest
 	public partial interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsRequest  : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
 	{
@@ -1135,13 +1158,13 @@ namespace Nest
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -1159,7 +1182,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1167,7 +1190,8 @@ namespace Nest
 	public partial interface ICatShardsRequest : IRequest<CatShardsRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsRequest  : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
 	{
@@ -1197,13 +1221,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -1221,7 +1245,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1229,7 +1253,8 @@ namespace Nest
 	public partial interface ICatSnapshotsRequest : IRequest<CatSnapshotsRequestParameters> 
 	{
 		Names RepositoryName { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
 	public partial class CatSnapshotsRequest  : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
 	{
@@ -1256,13 +1281,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -1280,14 +1305,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatTasksRequest : IRequest<CatTasksRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for CatTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CatTasksRequest  : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
 	{
@@ -1296,10 +1322,10 @@ namespace Nest
 		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
 		
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public  string[] NodeId { get { return Q< string[]>("node_id"); } set { Q("node_id", value); } }
+		public string[] NodeId { get { return Q<string[]>("node_id"); } set { Q("node_id", value); } }
 		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
+		public string[] Actions { get { return Q<string[]>("actions"); } set { Q("actions", value); } }
 		
 		///<summary>Return detailed task information (default: false)</summary>
 		public bool Detailed { get { return Q<bool>("detailed"); } set { Q("detailed", value); } }
@@ -1311,13 +1337,13 @@ namespace Nest
 		public long ParentTask { get { return Q<long>("parent_task"); } set { Q("parent_task", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -1335,7 +1361,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1343,7 +1369,8 @@ namespace Nest
 	public partial interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters> 
 	{
 		Name Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public partial class CatTemplatesRequest  : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
 	{
@@ -1370,13 +1397,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -1394,7 +1421,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1402,7 +1429,8 @@ namespace Nest
 	public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters> 
 	{
 		Names ThreadPoolPatterns { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolRequest  : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
@@ -1432,13 +1460,13 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public  string[] S { get { return Q< string[]>("s"); } set { Q("s", value); } }
+		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
@@ -1456,7 +1484,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1464,7 +1492,8 @@ namespace Nest
 	public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequestParameters> 
 	{
 		Name Username { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
 	public partial class ChangePasswordRequest  : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
 	{
@@ -1497,7 +1526,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1505,7 +1534,8 @@ namespace Nest
 	public partial interface IClearCachedRealmsRequest : IRequest<ClearCachedRealmsRequestParameters> 
 	{
 		Names Realms { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
 	public partial class ClearCachedRealmsRequest  : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 	{
@@ -1518,7 +1548,7 @@ namespace Nest
 		
 
 			///<summary>Comma-separated list of usernames to clear from the cache</summary>
-		public  string[] Usernames { get { return Q< string[]>("usernames"); } set { Q("usernames", value); } }
+		public string[] Usernames { get { return Q<string[]>("usernames"); } set { Q("usernames", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -1533,7 +1563,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1541,7 +1571,8 @@ namespace Nest
 	public partial interface IClearCachedRolesRequest : IRequest<ClearCachedRolesRequestParameters> 
 	{
 		Names Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache</pre></summary>
 	public partial class ClearCachedRolesRequest  : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 	{
@@ -1566,7 +1597,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1574,7 +1605,8 @@ namespace Nest
 	public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheRequest  : PlainRequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
@@ -1631,14 +1663,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearScrollRequest : IRequest<ClearScrollRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ClearScrollRequest  : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
@@ -1656,7 +1689,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1664,7 +1697,8 @@ namespace Nest
 	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexRequest  : PlainRequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
@@ -1704,7 +1738,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1712,7 +1746,8 @@ namespace Nest
 	public partial interface ICloseJobRequest : IRequest<CloseJobRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
 	public partial class CloseJobRequest  : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
 	{
@@ -1743,14 +1778,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
 	public partial class ClusterAllocationExplainRequest  : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
 	{
@@ -1774,14 +1810,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsRequest  : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
@@ -1811,7 +1848,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1819,7 +1856,8 @@ namespace Nest
 	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthRequest  : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
@@ -1876,14 +1914,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksRequest  : PlainRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
 	{
@@ -1907,14 +1946,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterPutSettingsRequest : IRequest<ClusterPutSettingsRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterPutSettingsRequest  : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
 	{
@@ -1941,14 +1981,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteRequest  : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
@@ -1963,7 +2004,7 @@ namespace Nest
 		public bool RetryFailed { get { return Q<bool>("retry_failed"); } set { Q("retry_failed", value); } }
 		
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
-		public  string[] Metric { get { return Q< string[]>("metric"); } set { Q("metric", value); } }
+		public string[] Metric { get { return Q<string[]>("metric"); } set { Q("metric", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
@@ -1984,7 +2025,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1993,7 +2034,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Metrics Metric { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateRequest  : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
@@ -2049,7 +2091,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2057,7 +2099,8 @@ namespace Nest
 	public partial interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters> 
 	{
 		NodeIds NodeId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsRequest  : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
@@ -2093,7 +2136,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2102,7 +2145,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountRequest<T>  : PlainRequestBase<CountRequestParameters>, ICountRequest
 	{
@@ -2185,7 +2229,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
@@ -2270,7 +2314,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2278,7 +2322,8 @@ namespace Nest
 	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters> 
 	{
 		IndexName Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
 	public partial class CreateIndexRequest  : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
@@ -2315,7 +2360,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2323,7 +2368,8 @@ namespace Nest
 	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters> 
 	{
 		Name RepositoryName { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class CreateRepositoryRequest  : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
@@ -2357,7 +2403,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2367,7 +2413,8 @@ namespace Nest
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class CreateRequest<TDocument>  : PlainRequestBase<CreateRequestParameters>, ICreateRequest<TDocument>
 	{
@@ -2439,7 +2486,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2447,7 +2494,8 @@ namespace Nest
 	public partial interface IDeactivateWatchRequest : IRequest<DeactivateWatchRequestParameters> 
 	{
 		Id WatchId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherDeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 	public partial class DeactivateWatchRequest  : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
 	{
@@ -2475,7 +2523,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2484,7 +2532,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Names Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class DeleteAliasRequest  : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
 	{
@@ -2517,7 +2566,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2526,7 +2575,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest<T>  : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
@@ -2604,10 +2654,10 @@ namespace Nest
 		public long Size { get { return Q<long>("size"); } set { Q("size", value); } }
 		
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
-		public  string[] Sort { get { return Q< string[]>("sort"); } set { Q("sort", value); } }
+		public string[] Sort { get { return Q<string[]>("sort"); } set { Q("sort", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -2619,7 +2669,7 @@ namespace Nest
 		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
 		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
-		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
+		public string[] Stats { get { return Q<string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool Version { get { return Q<bool>("version"); } set { Q("version", value); } }
@@ -2661,7 +2711,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
@@ -2741,10 +2791,10 @@ namespace Nest
 		public long Size { get { return Q<long>("size"); } set { Q("size", value); } }
 		
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
-		public  string[] Sort { get { return Q< string[]>("sort"); } set { Q("sort", value); } }
+		public string[] Sort { get { return Q<string[]>("sort"); } set { Q("sort", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -2756,7 +2806,7 @@ namespace Nest
 		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
 		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
-		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
+		public string[] Stats { get { return Q<string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool Version { get { return Q<bool>("version"); } set { Q("version", value); } }
@@ -2798,7 +2848,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2806,7 +2856,8 @@ namespace Nest
 	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters> 
 	{
 		Id DatafeedId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public partial class DeleteDatafeedRequest  : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
 	{
@@ -2834,14 +2885,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteExpiredDataRequest : IRequest<DeleteExpiredDataRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlDeleteExpiredData <pre></pre></summary>
 	public partial class DeleteExpiredDataRequest  : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
 	{
@@ -2859,7 +2911,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2867,7 +2919,8 @@ namespace Nest
 	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexRequest  : PlainRequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
@@ -2907,7 +2960,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2915,7 +2968,8 @@ namespace Nest
 	public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters> 
 	{
 		Name Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class DeleteIndexTemplateRequest  : PlainRequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
 	{
@@ -2946,7 +3000,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2954,7 +3008,8 @@ namespace Nest
 	public partial interface IDeleteJobRequest : IRequest<DeleteJobRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 	public partial class DeleteJobRequest  : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
 	{
@@ -2982,14 +3037,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseRequest  : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
@@ -3007,7 +3063,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3016,7 +3072,8 @@ namespace Nest
 	{
 		Id JobId { get; }
 		Id SnapshotId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
 	public partial class DeleteModelSnapshotRequest  : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
 	{
@@ -3043,7 +3100,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3051,7 +3108,8 @@ namespace Nest
 	public partial interface IDeletePipelineRequest : IRequest<DeletePipelineRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class DeletePipelineRequest  : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
 	{
@@ -3082,7 +3140,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3090,7 +3148,8 @@ namespace Nest
 	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters> 
 	{
 		Names RepositoryName { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteRepositoryRequest  : PlainRequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
@@ -3121,7 +3180,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3131,7 +3190,8 @@ namespace Nest
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteRequest<T>  : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
@@ -3194,7 +3254,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
@@ -3252,7 +3312,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3260,7 +3320,8 @@ namespace Nest
 	public partial interface IDeleteRoleMappingRequest : IRequest<DeleteRoleMappingRequestParameters> 
 	{
 		Name Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
 	public partial class DeleteRoleMappingRequest  : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
 	{
@@ -3288,7 +3349,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3296,7 +3357,8 @@ namespace Nest
 	public partial interface IDeleteRoleRequest : IRequest<DeleteRoleRequestParameters> 
 	{
 		Name Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role</pre></summary>
 	public partial class DeleteRoleRequest  : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 	{
@@ -3324,7 +3386,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3332,7 +3394,8 @@ namespace Nest
 	public partial interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptRequest  : PlainRequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
@@ -3363,7 +3426,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3372,7 +3435,8 @@ namespace Nest
 	{
 		Name RepositoryName { get; }
 		Name Snapshot { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotRequest  : PlainRequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 	{
@@ -3402,7 +3466,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3410,7 +3474,8 @@ namespace Nest
 	public partial interface IDeleteUserRequest : IRequest<DeleteUserRequestParameters> 
 	{
 		Name Username { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user</pre></summary>
 	public partial class DeleteUserRequest  : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 	{
@@ -3438,7 +3503,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3446,7 +3511,8 @@ namespace Nest
 	public partial interface IDeleteWatchRequest : IRequest<DeleteWatchRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherDeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 	public partial class DeleteWatchRequest  : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
@@ -3474,7 +3540,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3482,7 +3548,8 @@ namespace Nest
 	public partial interface IDeprecationInfoRequest : IRequest<DeprecationInfoRequestParameters> 
 	{
 		IndexName Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackDeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
 	public partial class DeprecationInfoRequest  : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
@@ -3512,7 +3579,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3520,7 +3587,8 @@ namespace Nest
 	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters> 
 	{
 		Name Username { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user</pre></summary>
 	public partial class DisableUserRequest  : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
 	{
@@ -3548,7 +3616,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3558,7 +3626,8 @@ namespace Nest
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsRequest<T>  : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
@@ -3606,7 +3675,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -3633,7 +3702,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
@@ -3676,7 +3745,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -3703,7 +3772,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3711,7 +3780,8 @@ namespace Nest
 	public partial interface IEnableUserRequest : IRequest<EnableUserRequestParameters> 
 	{
 		Name Username { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user</pre></summary>
 	public partial class EnableUserRequest  : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
 	{
@@ -3739,7 +3809,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3747,7 +3817,8 @@ namespace Nest
 	public partial interface IExecuteWatchRequest : IRequest<ExecuteWatchRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 	public partial class ExecuteWatchRequest  : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
@@ -3780,7 +3851,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3790,7 +3861,9 @@ namespace Nest
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+		[JsonProperty("stored_fields")] Fields StoredFields { get; set; }
+	}
+
 	///<summary>Request parameters for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainRequest<TDocument>  : PlainRequestBase<ExplainRequestParameters>, IExplainRequest<TDocument>
 	{
@@ -3825,9 +3898,6 @@ namespace Nest
 		///<summary>The default field for query string query (default: _all)</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
@@ -3850,7 +3920,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -3871,7 +3941,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3879,7 +3949,8 @@ namespace Nest
 	public partial interface IFieldCapabilitiesRequest : IRequest<FieldCapabilitiesRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
 	public partial class FieldCapabilitiesRequest  : PlainRequestBase<FieldCapabilitiesRequestParameters>, IFieldCapabilitiesRequest
 	{
@@ -3921,7 +3992,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3929,7 +4000,8 @@ namespace Nest
 	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
 	public partial class FlushJobRequest  : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
 	{
@@ -3957,7 +4029,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3965,7 +4037,8 @@ namespace Nest
 	public partial interface IFlushRequest : IRequest<FlushRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 	public partial class FlushRequest  : PlainRequestBase<FlushRequestParameters>, IFlushRequest
 	{
@@ -4010,7 +4083,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4018,7 +4091,8 @@ namespace Nest
 	public partial interface IForceMergeRequest : IRequest<ForceMergeRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesForcemergeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
 	public partial class ForceMergeRequest  : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
 	{
@@ -4072,7 +4146,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4081,7 +4155,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Names Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasRequest  : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
 	{
@@ -4137,7 +4212,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4145,7 +4220,8 @@ namespace Nest
 	public partial interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
 	public partial class GetAnomalyRecordsRequest  : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
 	{
@@ -4170,7 +4246,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4178,7 +4254,8 @@ namespace Nest
 	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 	public partial class GetBucketsRequest  : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
 	{
@@ -4203,7 +4280,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4212,7 +4289,8 @@ namespace Nest
 	{
 		Id JobId { get; }
 		CategoryId CategoryId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesRequest  : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
 	{
@@ -4245,7 +4323,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4253,7 +4331,8 @@ namespace Nest
 	public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters> 
 	{
 		Id DatafeedId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
 	public partial class GetDatafeedsRequest  : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
 	{
@@ -4283,7 +4362,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4291,7 +4370,8 @@ namespace Nest
 	public partial interface IGetDatafeedStatsRequest : IRequest<GetDatafeedStatsRequestParameters> 
 	{
 		Id DatafeedId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
 	public partial class GetDatafeedStatsRequest  : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
 	{
@@ -4321,7 +4401,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4331,7 +4411,8 @@ namespace Nest
 		Indices Index { get; }
 		Types Type { get; }
 		Fields Fields { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingRequest  : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
@@ -4395,7 +4476,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4403,7 +4484,8 @@ namespace Nest
 	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public partial class GetIndexRequest  : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
@@ -4446,7 +4528,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4455,7 +4537,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Names Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsRequest  : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
@@ -4517,7 +4600,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4525,7 +4608,8 @@ namespace Nest
 	public partial interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters> 
 	{
 		Names Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class GetIndexTemplateRequest  : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
 	{
@@ -4564,7 +4648,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4572,7 +4656,8 @@ namespace Nest
 	public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 	public partial class GetInfluencersRequest  : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
 	{
@@ -4597,7 +4682,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4605,7 +4690,8 @@ namespace Nest
 	public partial interface IGetJobsRequest : IRequest<GetJobsRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
 	public partial class GetJobsRequest  : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
 	{
@@ -4635,7 +4721,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4643,7 +4729,8 @@ namespace Nest
 	public partial interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
 	public partial class GetJobStatsRequest  : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
 	{
@@ -4673,14 +4760,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetLicenseRequest  : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
@@ -4701,7 +4789,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4710,7 +4798,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingRequest  : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
@@ -4766,7 +4855,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4775,7 +4864,8 @@ namespace Nest
 	{
 		Id JobId { get; }
 		Id SnapshotId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
 	public partial class GetModelSnapshotsRequest  : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
 	{
@@ -4808,7 +4898,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4816,7 +4906,8 @@ namespace Nest
 	public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class GetPipelineRequest  : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
 	{
@@ -4849,7 +4940,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4857,7 +4948,8 @@ namespace Nest
 	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters> 
 	{
 		Names RepositoryName { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryRequest  : PlainRequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
 	{
@@ -4893,7 +4985,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4903,7 +4995,8 @@ namespace Nest
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetRequest<T>  : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
@@ -4951,7 +5044,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -4978,7 +5071,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
@@ -5021,7 +5114,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -5048,7 +5141,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5056,7 +5149,8 @@ namespace Nest
 	public partial interface IGetRoleMappingRequest : IRequest<GetRoleMappingRequestParameters> 
 	{
 		Name Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
 	public partial class GetRoleMappingRequest  : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
 	{
@@ -5086,7 +5180,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5094,7 +5188,8 @@ namespace Nest
 	public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters> 
 	{
 		Name Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role</pre></summary>
 	public partial class GetRoleRequest  : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 	{
@@ -5124,7 +5219,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5132,7 +5227,8 @@ namespace Nest
 	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class GetScriptRequest  : PlainRequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
@@ -5157,7 +5253,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5166,7 +5262,8 @@ namespace Nest
 	{
 		Name RepositoryName { get; }
 		Names Snapshot { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotRequest  : PlainRequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
@@ -5202,7 +5299,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5210,7 +5307,8 @@ namespace Nest
 	public partial interface IGetTaskRequest : IRequest<GetTaskRequestParameters> 
 	{
 		TaskId TaskId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class GetTaskRequest  : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
 	{
@@ -5238,14 +5336,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetUserAccessTokenRequest : IRequest<GetUserAccessTokenRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token</pre></summary>
 	public partial class GetUserAccessTokenRequest  : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
 	{
@@ -5263,7 +5362,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5271,7 +5370,8 @@ namespace Nest
 	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters> 
 	{
 		Names Username { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user</pre></summary>
 	public partial class GetUserRequest  : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 	{
@@ -5301,7 +5401,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5309,7 +5409,8 @@ namespace Nest
 	public partial interface IGetWatchRequest : IRequest<GetWatchRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherGetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 	public partial class GetWatchRequest  : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
@@ -5334,7 +5435,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5343,7 +5444,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreRequest<T>  : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
@@ -5388,7 +5490,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
@@ -5435,14 +5537,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGrokProcessorPatternsRequest : IRequest<GrokProcessorPatternsRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class GrokProcessorPatternsRequest  : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
 	{
@@ -5460,7 +5563,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5468,7 +5571,8 @@ namespace Nest
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
 	public partial class IndexExistsRequest  : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
@@ -5511,7 +5615,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5521,7 +5625,8 @@ namespace Nest
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class IndexRequest<TDocument>  : PlainRequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
 	{
@@ -5603,7 +5708,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5611,7 +5716,8 @@ namespace Nest
 	public partial interface IIndexTemplateExistsRequest : IRequest<IndexTemplateExistsRequestParameters> 
 	{
 		Names Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class IndexTemplateExistsRequest  : PlainRequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
 	{
@@ -5645,7 +5751,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5653,7 +5759,8 @@ namespace Nest
 	public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresRequest  : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 	{
@@ -5671,7 +5778,7 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
-		public  string[] Status { get { return Q< string[]>("status"); } set { Q("status", value); } }
+		public string[] Status { get { return Q<string[]>("status"); } set { Q("status", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
@@ -5698,7 +5805,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5707,7 +5814,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Metrics Metric { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsRequest  : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
@@ -5748,7 +5856,7 @@ namespace Nest
 		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public  string[] Groups { get { return Q< string[]>("groups"); } set { Q("groups", value); } }
+		public string[] Groups { get { return Q<string[]>("groups"); } set { Q("groups", value); } }
 		
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
 		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
@@ -5769,14 +5877,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IInvalidateUserAccessTokenRequest : IRequest<InvalidateUserAccessTokenRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token</pre></summary>
 	public partial class InvalidateUserAccessTokenRequest  : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
 	{
@@ -5794,23 +5903,24 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IListTasksRequest : IRequest<ListTasksRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class ListTasksRequest  : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
 		protected IListTasksRequest Self => this;
 				///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public  string[] Nodes { get { return Q< string[]>("nodes"); } set { Q("nodes", value); } }
+		public string[] Nodes { get { return Q<string[]>("nodes"); } set { Q("nodes", value); } }
 		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-		public  string[] Actions { get { return Q< string[]>("actions"); } set { Q("actions", value); } }
+		public string[] Actions { get { return Q<string[]>("actions"); } set { Q("actions", value); } }
 		
 		///<summary>Return detailed task information (default: false)</summary>
 		public bool Detailed { get { return Q<bool>("detailed"); } set { Q("detailed", value); } }
@@ -5840,7 +5950,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5849,7 +5959,9 @@ namespace Nest
 	{
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+		[JsonProperty("stored_fields")] Fields StoredFields { get; set; }
+	}
+
 	///<summary>Request parameters for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetRequest  : PlainRequestBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
@@ -5874,10 +5986,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -5896,7 +6005,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -5917,7 +6026,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5926,7 +6035,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchRequest  : PlainRequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
@@ -5976,7 +6086,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5985,7 +6095,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public partial class MultiSearchTemplateRequest  : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
 	{
@@ -6032,7 +6143,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6041,7 +6152,8 @@ namespace Nest
 	{
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsRequest  : PlainRequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
@@ -6121,7 +6233,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6129,7 +6241,8 @@ namespace Nest
 	public partial interface INodesHotThreadsRequest : IRequest<NodesHotThreadsRequestParameters> 
 	{
 		NodeIds NodeId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsRequest  : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
@@ -6177,7 +6290,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6186,7 +6299,8 @@ namespace Nest
 	{
 		NodeIds NodeId { get; }
 		Metrics Metric { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoRequest  : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
@@ -6236,7 +6350,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6246,7 +6360,8 @@ namespace Nest
 		Metrics Metric { get; }
 		IndexMetrics IndexMetric { get; }
 		NodeIds NodeId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsRequest  : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
@@ -6309,7 +6424,7 @@ namespace Nest
 		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public  string[] Types { get { return Q< string[]>("types"); } set { Q("types", value); } }
+		public string[] Types { get { return Q<string[]>("types"); } set { Q("types", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
@@ -6330,7 +6445,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6339,7 +6454,8 @@ namespace Nest
 	{
 		Metrics Metric { get; }
 		NodeIds NodeId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for NodesUsageForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 	public partial class NodesUsageRequest  : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
 	{
@@ -6386,7 +6502,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6394,7 +6510,8 @@ namespace Nest
 	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexRequest  : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
@@ -6434,7 +6551,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6442,7 +6559,8 @@ namespace Nest
 	public partial interface IOpenJobRequest : IRequest<OpenJobRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 	public partial class OpenJobRequest  : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
 	{
@@ -6467,14 +6585,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPingRequest : IRequest<PingRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingRequest  : PlainRequestBase<PingRequestParameters>, IPingRequest
 	{
@@ -6492,7 +6611,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6500,7 +6619,8 @@ namespace Nest
 	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataRequest  : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
 	{
@@ -6531,14 +6651,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackLicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseRequest  : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
@@ -6559,7 +6680,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6567,7 +6688,8 @@ namespace Nest
 	public partial interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedRequestParameters> 
 	{
 		Id DatafeedId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
 	public partial class PreviewDatafeedRequest  : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
 	{
@@ -6592,7 +6714,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6601,7 +6723,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Name Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class PutAliasRequest  : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
@@ -6634,7 +6757,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6642,7 +6765,8 @@ namespace Nest
 	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters> 
 	{
 		Id DatafeedId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 	public partial class PutDatafeedRequest  : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
 	{
@@ -6667,7 +6791,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6675,7 +6799,8 @@ namespace Nest
 	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters> 
 	{
 		Name Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class PutIndexTemplateRequest  : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
 	{
@@ -6712,7 +6837,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6720,7 +6845,8 @@ namespace Nest
 	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public partial class PutJobRequest  : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
 	{
@@ -6745,7 +6871,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6754,7 +6880,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest<T>  : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
@@ -6805,7 +6932,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
@@ -6858,7 +6985,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6866,7 +6993,8 @@ namespace Nest
 	public partial interface IPutPipelineRequest : IRequest<PutPipelineRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class PutPipelineRequest  : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
 	{
@@ -6897,7 +7025,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6905,7 +7033,8 @@ namespace Nest
 	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters> 
 	{
 		Name Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
 	public partial class PutRoleMappingRequest  : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
 	{
@@ -6933,7 +7062,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6941,7 +7070,8 @@ namespace Nest
 	public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters> 
 	{
 		Name Name { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role</pre></summary>
 	public partial class PutRoleRequest  : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 	{
@@ -6969,7 +7099,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6978,7 +7108,8 @@ namespace Nest
 	{
 		Id Id { get; }
 		Name Context { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptRequest  : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
@@ -7017,7 +7148,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7025,7 +7156,8 @@ namespace Nest
 	public partial interface IPutUserRequest : IRequest<PutUserRequestParameters> 
 	{
 		Name Username { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user</pre></summary>
 	public partial class PutUserRequest  : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 	{
@@ -7053,7 +7185,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7061,7 +7193,8 @@ namespace Nest
 	public partial interface IPutWatchRequest : IRequest<PutWatchRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherPutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 	public partial class PutWatchRequest  : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
@@ -7092,7 +7225,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7100,7 +7233,8 @@ namespace Nest
 	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusRequest  : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
@@ -7136,7 +7270,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7144,7 +7278,8 @@ namespace Nest
 	public partial interface IRefreshRequest : IRequest<RefreshRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 	public partial class RefreshRequest  : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
 	{
@@ -7183,14 +7318,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IReindexOnServerRequest : IRequest<ReindexOnServerRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for Reindex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexOnServerRequest  : PlainRequestBase<ReindexOnServerRequestParameters>, IReindexOnServerRequest
 	{
@@ -7223,7 +7359,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7231,7 +7367,8 @@ namespace Nest
 	public partial interface IReindexRethrottleRequest : IRequest<ReindexRethrottleRequestParameters> 
 	{
 		TaskId TaskId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexRethrottleRequest  : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
 	{
@@ -7259,14 +7396,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for ClusterRemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
 	public partial class RemoteInfoRequest  : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 	{
@@ -7284,7 +7422,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7292,7 +7430,8 @@ namespace Nest
 	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateRequest  : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
 	{
@@ -7322,14 +7461,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRestartWatcherRequest : IRequest<RestartWatcherRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
 	public partial class RestartWatcherRequest  : PlainRequestBase<RestartWatcherRequestParameters>, IRestartWatcherRequest
 	{
@@ -7347,7 +7487,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7356,7 +7496,8 @@ namespace Nest
 	{
 		Name RepositoryName { get; }
 		Name Snapshot { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class RestoreRequest  : PlainRequestBase<RestoreRequestParameters>, IRestoreRequest
 	{
@@ -7389,7 +7530,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7398,7 +7539,8 @@ namespace Nest
 	{
 		Id JobId { get; }
 		Id SnapshotId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
 	public partial class RevertModelSnapshotRequest  : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
 	{
@@ -7425,7 +7567,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7434,7 +7576,8 @@ namespace Nest
 	{
 		Name Alias { get; }
 		IndexName NewIndex { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesRolloverForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
 	public partial class RolloverIndexRequest  : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
 	{
@@ -7479,14 +7622,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for Info <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class RootNodeInfoRequest  : PlainRequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
 	{
@@ -7504,14 +7648,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IScrollRequest : IRequest<ScrollRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ScrollRequest  : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
@@ -7529,7 +7674,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7538,7 +7683,10 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+		[JsonProperty("stored_fields")] Fields StoredFields { get; set; }
+		[JsonProperty("docvalue_fields")] Fields DocValueFields { get; set; }
+	}
+
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest<T>  : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
@@ -7575,9 +7723,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -7609,7 +7754,7 @@ namespace Nest
 		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
-		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
+		public string[] Stats { get { return Q<string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify which field to use for suggestions</summary>
 		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q("suggest_field", value); } }
@@ -7651,7 +7796,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
@@ -7690,9 +7835,6 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public Fields DocvalueFields { get { return Q<Fields>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -7724,7 +7866,7 @@ namespace Nest
 		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
-		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
+		public string[] Stats { get { return Q<string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify which field to use for suggestions</summary>
 		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q("suggest_field", value); } }
@@ -7766,7 +7908,7 @@ namespace Nest
 		public bool ErrorTrace { get { return Q<bool>("error_trace"); } set { Q("error_trace", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7774,7 +7916,8 @@ namespace Nest
 	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest<T>  : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
@@ -7828,7 +7971,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
@@ -7884,7 +8027,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7893,7 +8036,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateRequest  : PlainRequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
@@ -7967,7 +8111,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7975,7 +8119,8 @@ namespace Nest
 	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
 	public partial class SegmentsRequest  : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
 	{
@@ -8020,7 +8165,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8029,7 +8174,8 @@ namespace Nest
 	{
 		IndexName Index { get; }
 		IndexName Target { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesShrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
 	public partial class ShrinkIndexRequest  : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
 	{
@@ -8065,7 +8211,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8073,7 +8219,8 @@ namespace Nest
 	public partial interface ISimulatePipelineRequest : IRequest<SimulatePipelineRequestParameters> 
 	{
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class SimulatePipelineRequest  : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
 	{
@@ -8106,7 +8253,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8115,7 +8262,8 @@ namespace Nest
 	{
 		Name RepositoryName { get; }
 		Name Snapshot { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotRequest  : PlainRequestBase<SnapshotRequestParameters>, ISnapshotRequest
 	{
@@ -8148,7 +8296,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8157,7 +8305,8 @@ namespace Nest
 	{
 		Name RepositoryName { get; }
 		Names Snapshot { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusRequest  : PlainRequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 	{
@@ -8201,7 +8350,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8211,7 +8360,8 @@ namespace Nest
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsRequest<T>  : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
@@ -8256,7 +8406,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -8283,7 +8433,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
@@ -8323,7 +8473,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -8350,7 +8500,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8360,7 +8510,8 @@ namespace Nest
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceRequest<T>  : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
@@ -8405,7 +8556,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -8432,7 +8583,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
@@ -8472,7 +8623,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -8499,7 +8650,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8507,7 +8658,8 @@ namespace Nest
 	public partial interface IStartDatafeedRequest : IRequest<StartDatafeedRequestParameters> 
 	{
 		Id DatafeedId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
 	public partial class StartDatafeedRequest  : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
 	{
@@ -8532,14 +8684,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherStart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public partial class StartWatcherRequest  : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
 	{
@@ -8557,7 +8710,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8565,7 +8718,8 @@ namespace Nest
 	public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters> 
 	{
 		Id DatafeedId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
 	public partial class StopDatafeedRequest  : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
 	{
@@ -8590,14 +8744,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherStop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 	public partial class StopWatcherRequest  : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
 	{
@@ -8615,7 +8770,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8623,7 +8778,8 @@ namespace Nest
 	public partial interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushRequest  : PlainRequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 	{
@@ -8662,7 +8818,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8672,7 +8828,8 @@ namespace Nest
 		IndexName Index { get; }
 		TypeName Type { get; }
 		Id Id { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsRequest<TDocument>  : PlainRequestBase<TermVectorsRequestParameters>, ITermVectorsRequest<TDocument>
 	{
@@ -8757,7 +8914,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8766,7 +8923,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsRequest  : PlainRequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
 	{
@@ -8805,7 +8963,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8814,7 +8972,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
 	public partial class UpdateByQueryRequest<T>  : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
@@ -8895,10 +9054,10 @@ namespace Nest
 		public long Size { get { return Q<long>("size"); } set { Q("size", value); } }
 		
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
-		public  string[] Sort { get { return Q< string[]>("sort"); } set { Q("sort", value); } }
+		public string[] Sort { get { return Q<string[]>("sort"); } set { Q("sort", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -8910,7 +9069,7 @@ namespace Nest
 		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
 		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
-		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
+		public string[] Stats { get { return Q<string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool Version { get { return Q<bool>("version"); } set { Q("version", value); } }
@@ -8955,7 +9114,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
@@ -9038,10 +9197,10 @@ namespace Nest
 		public long Size { get { return Q<long>("size"); } set { Q("size", value); } }
 		
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
-		public  string[] Sort { get { return Q< string[]>("sort"); } set { Q("sort", value); } }
+		public string[] Sort { get { return Q<string[]>("sort"); } set { Q("sort", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
@@ -9053,7 +9212,7 @@ namespace Nest
 		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
 		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
-		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
+		public string[] Stats { get { return Q<string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool Version { get { return Q<bool>("version"); } set { Q("version", value); } }
@@ -9098,7 +9257,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9106,7 +9265,8 @@ namespace Nest
 	public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters> 
 	{
 		Id DatafeedId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
 	public partial class UpdateDatafeedRequest  : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
 	{
@@ -9131,7 +9291,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9139,7 +9299,8 @@ namespace Nest
 	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateIndexSettingsRequest  : PlainRequestBase<UpdateIndexSettingsRequestParameters>, IUpdateIndexSettingsRequest
 	{
@@ -9187,7 +9348,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9195,7 +9356,8 @@ namespace Nest
 	public partial interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters> 
 	{
 		Id JobId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
 	public partial class UpdateJobRequest  : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
 	{
@@ -9220,7 +9382,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9229,7 +9391,8 @@ namespace Nest
 	{
 		Id JobId { get; }
 		Id SnapshotId { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
 	public partial class UpdateModelSnapshotRequest  : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
 	{
@@ -9256,7 +9419,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9266,7 +9429,8 @@ namespace Nest
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
 	public partial class UpdateRequest<TDocument, TPartialDocument>  : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
 	{
@@ -9293,7 +9457,7 @@ namespace Nest
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		public string[] SourceEnabled { get { return Q<string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>The script language (default: painless)</summary>
 		public string Lang { get { return Q<string>("lang"); } set { Q("lang", value); } }
@@ -9344,7 +9508,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9352,7 +9516,8 @@ namespace Nest
 	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeRequest  : PlainRequestBase<UpgradeRequestParameters>, IUpgradeRequest
 	{
@@ -9397,7 +9562,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9405,7 +9570,8 @@ namespace Nest
 	public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestParameters> 
 	{
 		Indices Index { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusRequest  : PlainRequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
 	{
@@ -9444,14 +9610,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IValidateDetectorRequest : IRequest<ValidateDetectorRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlValidateDetector <pre></pre></summary>
 	public partial class ValidateDetectorRequest  : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 	{
@@ -9469,14 +9636,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IValidateJobRequest : IRequest<ValidateJobRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackMlValidate <pre></pre></summary>
 	public partial class ValidateJobRequest  : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 	{
@@ -9494,7 +9662,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9503,7 +9671,8 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest<T>  : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
@@ -9580,7 +9749,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
@@ -9659,7 +9828,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9667,7 +9836,8 @@ namespace Nest
 	public partial interface IVerifyRepositoryRequest : IRequest<VerifyRepositoryRequestParameters> 
 	{
 		Name RepositoryName { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class VerifyRepositoryRequest  : PlainRequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
 	{
@@ -9698,7 +9868,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9706,7 +9876,8 @@ namespace Nest
 	public partial interface IWatcherStatsRequest : IRequest<WatcherStatsRequestParameters> 
 	{
 		Metrics WatcherStatsMetric { get; }
-	 } 
+	}
+
 	///<summary>Request parameters for XpackWatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public partial class WatcherStatsRequest  : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
@@ -9739,14 +9910,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IXPackInfoRequest : IRequest<XPackInfoRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public partial class XPackInfoRequest  : PlainRequestBase<XPackInfoRequestParameters>, IXPackInfoRequest
 	{
@@ -9755,7 +9927,7 @@ namespace Nest
 		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
-		public  string[] Categories { get { return Q< string[]>("categories"); } set { Q("categories", value); } }
+		public string[] Categories { get { return Q<string[]>("categories"); } set { Q("categories", value); } }
 		
 		///<summary>Pretty format the returned JSON response.</summary>
 		public bool Pretty { get { return Q<bool>("pretty"); } set { Q("pretty", value); } }
@@ -9767,14 +9939,15 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IXPackUsageRequest : IRequest<XPackUsageRequestParameters> 
 	{
-	 } 
+	}
+
 	///<summary>Request parameters for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
 	public partial class XPackUsageRequest  : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
 	{
@@ -9795,7 +9968,7 @@ namespace Nest
 		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public  string[] FilterPath { get { return Q< string[]>("filter_path"); } set { Q("filter_path", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 }
