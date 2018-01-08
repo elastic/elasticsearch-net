@@ -13,8 +13,6 @@ namespace ApiGenerator.Domain
 		public string Obsolete { get; set; }
 		public IEnumerable<string> Options { get; set; }
 
-
-
 		public string CsharpType(string paramName)
 		{
 			switch (this.Type)
@@ -86,10 +84,22 @@ namespace ApiGenerator.Domain
 					return csharpType;
 			}
 		}
+		private static string NullableCsharpType(string fieldType)
+		{
+			switch (fieldType)
+			{
+				case "bool": return "bool?";
+				case "integer": return "int?";
+				case "double": return "double?";
+				case "long": return "long?";
+				default:
+					return fieldType;
+			}
+		}
 
 		public Func<string, string, string, string, string> Generator { get; set; } =
 			(fieldType, mm, original, setter) =>
-				$"public {fieldType} {mm} {{ get {{ return Q<{fieldType}>(\"{original}\"); }} set {{ Q(\"{original}\", {setter}); }} }}";
+				$"public {NullableCsharpType(fieldType)} {mm} {{ get {{ return Q<{NullableCsharpType(fieldType)}>(\"{original}\"); }} set {{ Q(\"{original}\", {setter}); }} }}";
 
 		public Func<string, string, string, string, string> FluentGenerator { get; set; }
 
