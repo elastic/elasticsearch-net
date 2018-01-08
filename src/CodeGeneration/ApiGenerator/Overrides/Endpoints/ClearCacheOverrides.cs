@@ -7,7 +7,7 @@ namespace ApiGenerator.Overrides.Endpoints
 	{
 		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
-			"fielddata"
+			"field_data" //this API declares both field_data and fielddata, this is the odd one out.
 		};
 	}
 }
