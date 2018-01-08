@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace ApiGenerator.Overrides.Descriptors
+namespace ApiGenerator.Overrides.Endpoints
 {
-	public class FlushJobDescriptorOverrides : DescriptorOverridesBase
+	public class FlushJobOverrides : EndpointOverridesBase
 	{
 		public override IEnumerable<string> SkipQueryStringParams => new[]
 		{

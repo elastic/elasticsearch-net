@@ -3,7 +3,7 @@ using ApiGenerator.Overrides.Descriptors;
 
 namespace ApiGenerator.Overrides
 {
-	public class GlobalOverrides : DescriptorOverridesBase
+	public class GlobalOverrides : EndpointOverridesBase
 	{
 		/// <summary>
 		/// Force these be rendered as interface properties only, so that they'd have to be implemented manually

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using ApiGenerator.Domain;
 
-namespace ApiGenerator.Overrides.Descriptors
+namespace ApiGenerator.Overrides.Endpoints
 {
-	public class WatcherStatsDescriptorOverrides : DescriptorOverridesBase
+	public class WatcherStatsOverrides : EndpointOverridesBase
 	{
 		public override IEnumerable<string> SkipQueryStringParams => new[]
 		{

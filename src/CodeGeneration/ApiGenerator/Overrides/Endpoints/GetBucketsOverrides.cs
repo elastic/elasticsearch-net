@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using ApiGenerator.Domain;
 
-namespace ApiGenerator.Overrides.Descriptors
+namespace ApiGenerator.Overrides.Endpoints
 {
-	public class GetModelSnapshotsDescriptorOverrides : DescriptorOverridesBase
+	public class GetBucketsOverrides : EndpointOverridesBase
 	{
 		public override IEnumerable<string> SkipQueryStringParams => new[]
 		{
+			"expand",
+			"exclude_interim",
 			"from",
 			"size",
 			"start",
 			"end",
+			"anomaly_score",
 			"sort",
 			"desc"
 		};

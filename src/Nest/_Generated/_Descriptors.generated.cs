@@ -4089,17 +4089,7 @@ namespace Nest
 			///<summary>The id of the stored search template</summary>
 		public RenderSearchTemplateDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public RenderSearchTemplateDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RenderSearchTemplateDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RenderSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RenderSearchTemplateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RenderSearchTemplateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
@@ -5079,17 +5069,7 @@ namespace Nest
 	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteLicenseDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteLicenseDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteLicenseDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteLicenseDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteLicenseDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
@@ -5183,17 +5163,7 @@ namespace Nest
 	///<summary>descriptor for XpackMlDeleteExpiredData <pre></pre></summary>
 	public partial class DeleteExpiredDataDescriptor  : RequestDescriptorBase<DeleteExpiredDataDescriptor,DeleteExpiredDataRequestParameters, IDeleteExpiredDataRequest>, IDeleteExpiredDataRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteExpiredDataDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteExpiredDataDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteExpiredDataDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteExpiredDataDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteExpiredDataDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackMlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
@@ -5233,17 +5203,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteModelSnapshotDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteModelSnapshotDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteModelSnapshotDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteModelSnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteModelSnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
@@ -5333,17 +5293,7 @@ namespace Nest
 			///<summary>The ID of the datafeeds to fetch</summary>
 		public GetDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetDatafeedsDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetDatafeedsDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetDatafeedsDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDatafeedsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetDatafeedsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackMlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
@@ -5358,17 +5308,7 @@ namespace Nest
 			///<summary>The ID of the datafeeds stats to fetch</summary>
 		public GetDatafeedStatsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetDatafeedStatsDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetDatafeedStatsDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetDatafeedStatsDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDatafeedStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetDatafeedStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackMlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
@@ -5406,17 +5346,7 @@ namespace Nest
 			///<summary>The ID of the jobs to fetch</summary>
 		public GetJobsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetJobsDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetJobsDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetJobsDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetJobsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetJobsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackMlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
@@ -5431,17 +5361,7 @@ namespace Nest
 			///<summary>The ID of the jobs stats to fetch</summary>
 		public GetJobStatsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetJobStatsDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetJobStatsDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetJobStatsDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetJobStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetJobStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackMlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
@@ -5504,17 +5424,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public OpenJobDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public OpenJobDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public OpenJobDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public OpenJobDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public OpenJobDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
@@ -5554,17 +5464,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public PreviewDatafeedDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PreviewDatafeedDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PreviewDatafeedDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PreviewDatafeedDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PreviewDatafeedDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
@@ -5577,17 +5477,7 @@ namespace Nest
 		{ Self.Indices = typeof(T); Self.Types = typeof(T);  }
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public PutDatafeedDescriptor<T> Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutDatafeedDescriptor<T> Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutDatafeedDescriptor<T> ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutDatafeedDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutDatafeedDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
@@ -5600,17 +5490,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public PutJobDescriptor<T> Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutJobDescriptor<T> Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutJobDescriptor<T> ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutJobDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutJobDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
@@ -5694,17 +5574,7 @@ namespace Nest
 		{ Self.Indices = typeof(T); Self.Types = typeof(T);  }
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateDatafeedDescriptor<T> Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateDatafeedDescriptor<T> Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateDatafeedDescriptor<T> ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateDatafeedDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateDatafeedDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
@@ -5717,17 +5587,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateJobDescriptor<T> Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateJobDescriptor<T> Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateJobDescriptor<T> ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateJobDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateJobDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
