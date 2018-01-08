@@ -54,7 +54,7 @@ namespace Nest
         }
 		var t = @kv.Value.HighLevelType(kv.Key);
 		var tMethod = t == "Time" ? ".ToTimeSpan()" : "";
-		var tSuffix = (t == "bool") ? " = true" : "";
+		var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
 		var m = kv.Key.ToPascalCase();
 		var mm = (m != "Type" && m != "Index" && m != "Source" && m != "Script") ? m : m + "QueryString";
 		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();

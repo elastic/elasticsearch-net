@@ -81,7 +81,7 @@ namespace ApiGenerator.Domain
 				case "string" when isFields: return "Fields";
 				case "string" when o.Contains("field"): return "Field";
 				default:
-					return csharpType;
+					return NullableCsharpType(csharpType);
 			}
 		}
 		private static string NullableCsharpType(string fieldType)
