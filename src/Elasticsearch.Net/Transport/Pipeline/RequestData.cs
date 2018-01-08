@@ -13,10 +13,10 @@ namespace Elasticsearch.Net
 		public const string MimeType = "application/json";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
 
-		public Uri Uri => this.Node != null ? new Uri(this.Node.Uri, this.Path).Purify() : null;
+		public Uri Uri => this.Node != null ? new Uri(this.Node.Uri, this.PathAndQuery).Purify() : null;
 
 		public HttpMethod Method { get; private set; }
-		public string Path { get; }
+		public string PathAndQuery { get; }
 		public PostData PostData { get; }
 		public bool MadeItToResponse { get; set;}
 		public AuditEvent OnFailureAuditEvent => this.MadeItToResponse ? AuditEvent.BadResponse : AuditEvent.BadRequest;
@@ -51,15 +51,14 @@ namespace Elasticsearch.Net
 		public X509CertificateCollection ClientCertificates { get; }
 
 		public RequestData(HttpMethod method, string path, PostData data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
-			: this(method, path, data, global, local?.RequestConfiguration, memoryStreamFactory)
+			: this(method, data, global, local?.RequestConfiguration, memoryStreamFactory)
 		{
 			this.CustomConverter = local?.DeserializationOverride;
-			this.Path = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, local);
+			this.PathAndQuery = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, local);
 		}
 
 		private RequestData(
 			HttpMethod method,
-			string path,
 			PostData data,
 			IConnectionConfigurationValues global,
 			IRequestConfiguration local,
@@ -72,8 +71,6 @@ namespace Elasticsearch.Net
 
 			if (data != null)
 				data.DisableDirectStreaming = local?.DisableDirectStreaming ?? global.DisableDirectStreaming;
-
-			this.Path = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, null);
 
 			this.Pipelined = local?.EnableHttpPipelining ?? global.HttpPipeliningEnabled;
 			this.HttpCompression = global.EnableHttpCompression;
@@ -102,17 +99,19 @@ namespace Elasticsearch.Net
 			this.ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 		}
 
-		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request = null)
+		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)
 		{
+			path = path ?? string.Empty;
+			if (global.QueryStringParameters.Count == 0 && request.QueryString.Count == 0) return path;
+
 			//Make sure we append global query string as well the request specific query string parameters
 			var copy = new NameValueCollection(global.QueryStringParameters);
-			var formatter = new UrlFormatProvider(this.ConnectionSettings);
-			if (request != null)
-				copy.Add(request.QueryString.ToNameValueCollection(formatter));
+			var formatter = this.ConnectionSettings.UrlFormatter;
+			copy.SetLocalQueryString(request.QueryString, formatter);
 			if (!copy.HasKeys()) return path;
+			var queryString = copy.ToQueryString(formatter);
 
-			var queryString = copy.ToQueryString();
-			var tempUri = new Uri("http://localhost:9200/" + path).Purify();
+			var tempUri = new Uri("http://localhost:9200/" + path);
 			if (tempUri.Query.IsNullOrEmpty())
 				path += queryString;
 			else

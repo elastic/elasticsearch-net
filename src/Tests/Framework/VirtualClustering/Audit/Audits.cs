@@ -15,14 +15,14 @@ namespace Tests.Framework
 		public int? Port { get; set; }
 
 		public Action<Audit> SimpleAssert { get; set; }
-		
+
 		public Action<string, Audit> AssertWithBecause { get; set; }
 	}
 
 	public class ClientCall : List<CallTraceState>
 	{
 		public Func<RequestConfigurationDescriptor, IRequestConfiguration> RequestOverrides { get; }
-		public ClientCall() { } 
+		public ClientCall() { }
 
 		public ClientCall(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides)
 		{
@@ -32,8 +32,6 @@ namespace Tests.Framework
 		public Action<IConnectionPool> AssertPoolAfterCall { get; set; }
 
 		public void Add(AuditEvent key, Action<Audit> value) => this.Add(new CallTraceState(key) { SimpleAssert = value });
-
-		public void Add(AuditEvent key, Action<string, Audit> value) => this.Add(new CallTraceState(key) { AssertWithBecause = value });
 
 		public void Add(AuditEvent key, int port) => this.Add(new CallTraceState(key) { Port = port });
 

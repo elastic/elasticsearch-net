@@ -7,40 +7,34 @@ namespace Elasticsearch.Net
 {
 	internal static class NameValueCollectionExtensions
 	{
-		internal static void CopyKeyValues(this NameValueCollection source, NameValueCollection dest)
+		internal static string ToQueryString(this NameValueCollection nv, ElasticsearchUrlFormatter formatter, string prefix = "?")
 		{
-			foreach (var key in source.AllKeys)
-			{
-				if (dest[key] != null) throw new Exception(string.Format("Attempted to add duplicate key '{0}'", key));
+			if (nv == null) return null;
 
-				dest.Add(key, source[key]);
-			}
-		}
-		internal static string ToQueryString(this NameValueCollection self, string prefix = "?")
-		{
-			if (self == null)
-				return null;
+			if (nv.AllKeys.Length == 0) return string.Empty;
+			string E(string v) => Uri.EscapeDataString(v);
 
-			if (self.AllKeys.Length == 0) return string.Empty;
-
-			return prefix + string.Join("&", self.AllKeys.Select(key => $"{Encode(key)}={Encode(self[key])}"));
+			return prefix + string.Join("&", nv.AllKeys.Select(key => $"{E(key)}={nv[E(key)]}"));
 		}
 
-		private static string Encode(string s) => s;
-
-		internal static NameValueCollection ToNameValueCollection(this IDictionary<string, object> dict, IFormatProvider provider)
+		internal static void SetLocalQueryString(this NameValueCollection queryString, Dictionary<string, object> queryStringUpdates, ElasticsearchUrlFormatter provider)
 		{
-			if (dict == null || dict.Count < 0) return null;
+			if (queryString == null || queryString.Count < 0) return;
+			if (queryStringUpdates == null || queryStringUpdates.Count < 0) return;
 
-			var nv = new NameValueCollection();
-			foreach (var kv in dict.Where(kv => !kv.Key.IsNullOrEmpty()))
+			foreach (var kv in queryStringUpdates.Where(kv => !kv.Key.IsNullOrEmpty()))
 			{
-				if (kv.Value == null) continue;
-				var resolved = string.Format(provider, "{0}", kv.Value);
+				if (kv.Value == null)
+				{
+					queryString.Remove(kv.Key);
+					continue;
+				}
+				var resolved = provider.CreateString(kv.Value);
 				if (!resolved.IsNullOrEmpty())
-					nv.Add(kv.Key, resolved);
+					queryString[kv.Key] = resolved;
+				else
+					queryString.Remove(kv.Key);
 			}
-			return nv;
 		}
 	}
 }

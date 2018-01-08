@@ -9,7 +9,7 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public partial class ElasticLowLevelClient : IElasticLowLevelClient
 	{
-		private readonly UrlFormatProvider _formatter;
+		private readonly ElasticsearchUrlFormatter _formatter;
 
 		public IConnectionConfigurationValues Settings => this.Transport.Settings;
 		public IElasticsearchSerializer Serializer => this.Transport.Settings.RequestResponseSerializer;
@@ -34,7 +34,7 @@ namespace Elasticsearch.Net
 			transport.Settings.RequestResponseSerializer.ThrowIfNull(nameof(transport.Settings.RequestResponseSerializer));
 
 			this.Transport = transport;
-			this._formatter = new UrlFormatProvider(this.Transport.Settings);
+			this._formatter = this.Transport.Settings.UrlFormatter;
 		}
 
 		private string Url(FormattableString formattable) => formattable.ToString(_formatter);

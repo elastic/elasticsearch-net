@@ -13,7 +13,6 @@ namespace Tests
 		{
 			var expectedUri = CreateExpectedUri(actualUri, pathAndQueryString);
 
-
 			var actualParameters = ExplodeQueryString(actualUri);
 			var expectedParameters = ExplodeQueryString(expectedUri);
 

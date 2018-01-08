@@ -4,11 +4,15 @@ using System.Linq;
 
 namespace Elasticsearch.Net
 {
-	internal class UrlFormatProvider : IFormatProvider, ICustomFormatter
+	/// <summary>
+	/// A formatter that can utilize <see cref="IConnectionConfigurationValues" /> to resolve <see cref="IUrlParameter" />'s passed
+	/// as format arguments. It also handles known string representations for e.g bool/Enums/IEnumerable<object>.
+	/// </summary>
+	public class ElasticsearchUrlFormatter : IFormatProvider, ICustomFormatter
 	{
 		private readonly IConnectionConfigurationValues _settings;
 
-		public UrlFormatProvider(IConnectionConfigurationValues settings)
+		public ElasticsearchUrlFormatter(IConnectionConfigurationValues settings)
 		{
 			_settings = settings;
 		}
@@ -19,11 +23,19 @@ namespace Elasticsearch.Net
 		{
 			if (arg == null) throw new ArgumentNullException();
 			if (format == "r") return arg.ToString();
-			var value = GetUnescapedStringRepresentation(arg, this._settings);
+			var value = CreateString(arg, this._settings);
 			return value.IsNullOrEmpty() ? string.Empty : Uri.EscapeDataString(value);
 		}
 
-		public static string GetUnescapedStringRepresentation(object value, IConnectionConfigurationValues settings)
+		public string CreateEscapedString(object value)
+		{
+			var r = CreateString(value, this._settings);
+			return r.IsNullOrEmpty() ? string.Empty : Uri.EscapeDataString(r);
+		}
+
+		public string CreateString(object value) => CreateString(value, this._settings);
+
+		public static string CreateString(object value, IConnectionConfigurationValues settings)
 		{
 			switch (value)
 			{
