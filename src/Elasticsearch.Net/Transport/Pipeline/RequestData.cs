@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using Purify;
 
 namespace Elasticsearch.Net
@@ -102,21 +103,58 @@ namespace Elasticsearch.Net
 		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)
 		{
 			path = path ?? string.Empty;
-			if (global.QueryStringParameters.Count == 0 && request.QueryString.Count == 0) return path;
+			if (path.Contains("?"))
+				throw new ArgumentException($"{nameof(path)} can not contain querystring parmeters and needs to be already escaped");
 
-			//Make sure we append global query string as well the request specific query string parameters
-			var copy = new NameValueCollection(global.QueryStringParameters);
+			var g = global.QueryStringParameters;
+			var l = request?.QueryString;
+			if (g?.Count == 0 && l?.Count == 0) return path;
+
+			//create a copy of the global query string collection if needed.
+			var nv = g == null ? new NameValueCollection() : new NameValueCollection(g);
+
+			//set all querystring pairs from local `l` on the querystring collection
 			var formatter = this.ConnectionSettings.UrlFormatter;
-			copy.SetLocalQueryString(request.QueryString, formatter);
-			if (!copy.HasKeys()) return path;
-			var queryString = copy.ToQueryString(formatter);
+			nv.UpdateFromDictionary(l, formatter);
 
-			var tempUri = new Uri("http://localhost:9200/" + path);
-			if (tempUri.Query.IsNullOrEmpty())
-				path += queryString;
-			else
-				path += "&" + queryString.Substring(1, queryString.Length - 1);
+			//if nv has no keys simply return path as provided
+			if (!nv.HasKeys()) return path;
+
+			//create string for query string collection where key and value are escaped properly.
+			var queryString = nv.ToQueryString();
+			path += queryString;
 			return path;
+		}
+	}
+
+	internal static class NameValueCollectionExtensions
+	{
+		internal static string ToQueryString(this NameValueCollection nv)
+		{
+			if (nv == null) return string.Empty;
+			if (nv.AllKeys.Length == 0) return string.Empty;
+			string E(string v) => Uri.EscapeDataString(v);
+			return "?" + string.Join("&", nv.AllKeys.Select(key => $"{E(key)}={E(nv[key])}"));
+		}
+
+		internal static void UpdateFromDictionary(this NameValueCollection queryString, Dictionary<string, object> queryStringUpdates, ElasticsearchUrlFormatter provider)
+		{
+			if (queryString == null || queryString.Count < 0) return;
+			if (queryStringUpdates == null || queryStringUpdates.Count < 0) return;
+
+			foreach (var kv in queryStringUpdates.Where(kv => !kv.Key.IsNullOrEmpty()))
+			{
+				if (kv.Value == null)
+				{
+					queryString.Remove(kv.Key);
+					continue;
+				}
+				var resolved = provider.CreateString(kv.Value);
+				if (!resolved.IsNullOrEmpty())
+					queryString[kv.Key] = resolved;
+				else
+					queryString.Remove(kv.Key);
+			}
 		}
 	}
 }
