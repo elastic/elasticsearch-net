@@ -263,9 +263,6 @@ namespace ApiGenerator.Domain
 		private void PatchRequestParameters(IEndpointOverrides overrides)
 		{
 			if (this.Url.Params == null) return;
-			var declaredKeys = this.Url.Params.Select(p => p.Value.OriginalQueryStringParamName ?? p.Key).ToList();
-			IEnumerable<string> skipList = new List<string>();
-			IDictionary<string, string> queryStringParamsRenameList = new Dictionary<string, string>();
 			foreach (var param in RestApiSpec.CommonApiQueryParameters)
 			{
 				if (!this.Url.Params.ContainsKey(param.Key))
@@ -280,6 +277,9 @@ namespace ApiGenerator.Domain
 						this.Url.Params.Add(param.Key, param.Value);
 				}
 			}
+			var declaredKeys = this.Url.Params.Select(p => p.Value.OriginalQueryStringParamName ?? p.Key).ToList();
+			IEnumerable<string> skipList = new List<string>();
+			IDictionary<string, string> queryStringParamsRenameList = new Dictionary<string, string>();
 
 			if (overrides != null)
 			{
