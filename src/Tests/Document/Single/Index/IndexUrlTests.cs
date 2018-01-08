@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
@@ -39,6 +41,33 @@ namespace Tests.Document.Single.Index
 				.FluentAsync(c => c.IndexDocumentAsync(project))
 				.RequestAsync(c => c.IndexAsync(new IndexRequest<Project>(project)))
 				;
+		}
+
+		[U] public async Task CanIndexUrlIds()
+		{
+			var id = "http://my.local/id?qwe=2";
+			var escaped = Uri.EscapeDataString(id);
+			escaped.Should().NotContain("/").And.NotContain("?");
+			var project = new Project { Name = "name" };
+
+			await PUT($"/project/doc/{escaped}?routing=name")
+				.Fluent(c => c.Index(project, i => i.Id(id)))
+				.Request(c => c.Index(new IndexRequest<Project>("project", "doc", id) { Document = project }))
+				.FluentAsync(c => c.IndexAsync(project, i => i.Id(id)))
+				.RequestAsync(c => c.IndexAsync(new IndexRequest<Project>(typeof(Project), TypeName.From<Project>(), id)
+                {
+					Document = project
+				}));
+
+			project = new Project { Name = id };
+			await PUT($"/project/doc/{escaped}?routing={escaped}")
+				.Fluent(c => c.Index(project, i => i.Id(id)))
+				.Request(c => c.Index(new IndexRequest<Project>("project", "doc", id) { Document = project }))
+				.FluentAsync(c => c.IndexAsync(project, i => i.Id(id)))
+				.RequestAsync(c => c.IndexAsync(new IndexRequest<Project>(typeof(Project), TypeName.From<Project>(), id)
+                {
+					Document = project
+				}));
 		}
 	}
 }
