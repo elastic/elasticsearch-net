@@ -20,7 +20,6 @@ namespace Nest.Resolvers
 		public IConnectionSettingsValues ConnectionSettings { get; private set; }
 
 		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
-			: base(true)
 		{
 			this.ConnectionSettings = connectionSettings;
 		}
