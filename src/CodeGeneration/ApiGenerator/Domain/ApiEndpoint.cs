@@ -324,9 +324,9 @@ namespace ApiGenerator.Domain
 			{
 				kv.Value.OriginalQueryStringParamName = kv.Key;
 
-				if (!renameLookup.TryGetValue(kv.Key, out var key)) key = kv.Key;
+				if (skipList.Contains(kv.Key)) continue;
 
-				if (skipList.Contains(key)) continue;
+				if (!renameLookup.TryGetValue(kv.Key, out var key)) key = kv.Key;
 
 				if (partialList.Contains(key)) kv.Value.RenderPartial = true;
 
