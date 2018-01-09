@@ -48,17 +48,17 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public BulkDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
-		public BulkDescriptor Fields(params string[] fields) => Qs("fields", fields);
+		public BulkDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
+		public BulkDescriptor SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
+		public BulkDescriptor SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
@@ -1381,11 +1381,11 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public DeleteByQueryDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
+		public DeleteByQueryDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
+		public DeleteByQueryDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
@@ -1484,7 +1484,7 @@ namespace Nest
 		public DocumentExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public DocumentExistsDescriptor<T> StoredFields(params string[] stored_fields) => Qs("stored_fields", stored_fields);
+		public DocumentExistsDescriptor<T> StoredFields(Fields stored_fields) => Qs("stored_fields", stored_fields);
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public DocumentExistsDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>The ID of the parent document</summary>
@@ -1506,11 +1506,11 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public DocumentExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
+		public DocumentExistsDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
+		public DocumentExistsDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
@@ -1582,11 +1582,11 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public SourceExistsDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
+		public SourceExistsDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
+		public SourceExistsDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
@@ -1647,10 +1647,6 @@ namespace Nest
 		public ExplainDescriptor<TDocument> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
 		///<summary>The default field for query string query (default: _all)</summary>
 		public ExplainDescriptor<TDocument> Df(string df) => Qs("df", df);
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public ExplainDescriptor<TDocument> StoredFields(params string[] stored_fields) => Qs("stored_fields", stored_fields);
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public ExplainDescriptor<TDocument> StoredFields(params Expression<Func<TDocument, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainDescriptor<TDocument> Lenient(bool lenient = true) => Qs("lenient", lenient);
 		///<summary>The ID of the parent document</summary>
@@ -1670,11 +1666,11 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public ExplainDescriptor<TDocument> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
+		public ExplainDescriptor<TDocument> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
+		public ExplainDescriptor<TDocument> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -1709,7 +1705,7 @@ namespace Nest
 		public FieldCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
 
 			///<summary>A comma-separated list of field names</summary>
-		public FieldCapabilitiesDescriptor Fields(params string[] fields) => Qs("fields", fields);
+		public FieldCapabilitiesDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of field names</summary>
 		public FieldCapabilitiesDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1765,7 +1761,7 @@ namespace Nest
 		public GetDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public GetDescriptor<T> StoredFields(params string[] stored_fields) => Qs("stored_fields", stored_fields);
+		public GetDescriptor<T> StoredFields(Fields stored_fields) => Qs("stored_fields", stored_fields);
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public GetDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>The ID of the parent document</summary>
@@ -1787,11 +1783,11 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public GetDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
+		public GetDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
+		public GetDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
@@ -1886,11 +1882,11 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public SourceDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
+		public SourceDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
+		public SourceDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
@@ -2039,7 +2035,7 @@ namespace Nest
 			///<summary>Clear field data</summary>
 		public ClearCacheDescriptor FieldData(bool field_data = true) => Qs("field_data", field_data);
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public ClearCacheDescriptor Fields(params string[] fields) => Qs("fields", fields);
+		public ClearCacheDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public ClearCacheDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Clear query caches</summary>
@@ -3305,15 +3301,15 @@ namespace Nest
 		public IndicesStatsDescriptor Metric(IndicesStatsMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields) => Qs("completion_fields", completion_fields);
+		public IndicesStatsDescriptor CompletionFields(Fields completion_fields) => Qs("completion_fields", completion_fields);
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("completion_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor FielddataFields(params string[] fielddata_fields) => Qs("fielddata_fields", fielddata_fields);
+		public IndicesStatsDescriptor FielddataFields(Fields fielddata_fields) => Qs("fielddata_fields", fielddata_fields);
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fielddata_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor Fields(params string[] fields) => Qs("fields", fields);
+		public IndicesStatsDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
@@ -3625,11 +3621,7 @@ namespace Nest
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public MultiGetDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
-			///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public MultiGetDescriptor StoredFields(params string[] stored_fields) => Qs("stored_fields", stored_fields);
-		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public MultiGetDescriptor StoredFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("stored_fields", fields?.Select(e=>(Field)e));
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public MultiGetDescriptor Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public MultiGetDescriptor Realtime(bool realtime = true) => Qs("realtime", realtime);
@@ -3646,11 +3638,11 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public MultiGetDescriptor SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
+		public MultiGetDescriptor SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
+		public MultiGetDescriptor SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -3789,7 +3781,7 @@ namespace Nest
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public MultiTermVectorsDescriptor FieldStatistics(bool field_statistics = true) => Qs("field_statistics", field_statistics);
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		public MultiTermVectorsDescriptor Fields(params string[] fields) => Qs("fields", fields);
+		public MultiTermVectorsDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
@@ -3920,15 +3912,15 @@ namespace Nest
 		public NodesStatsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor CompletionFields(params string[] completion_fields) => Qs("completion_fields", completion_fields);
+		public NodesStatsDescriptor CompletionFields(Fields completion_fields) => Qs("completion_fields", completion_fields);
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("completion_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor FielddataFields(params string[] fielddata_fields) => Qs("fielddata_fields", fielddata_fields);
+		public NodesStatsDescriptor FielddataFields(Fields fielddata_fields) => Qs("fielddata_fields", fielddata_fields);
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fielddata_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor Fields(params string[] fields) => Qs("fields", fields);
+		public NodesStatsDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
@@ -4097,17 +4089,7 @@ namespace Nest
 			///<summary>The id of the stored search template</summary>
 		public RenderSearchTemplateDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public RenderSearchTemplateDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RenderSearchTemplateDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RenderSearchTemplateDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RenderSearchTemplateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RenderSearchTemplateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
@@ -4167,10 +4149,6 @@ namespace Nest
 		public SearchDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchDescriptor<T> Df(string df) => Qs("df", df);
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public SearchDescriptor<T> DocvalueFields(params string[] docvalue_fields) => Qs("docvalue_fields", docvalue_fields);
-		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public SearchDescriptor<T> DocvalueFields(params Expression<Func<T, object>>[] fields)  => Qs("docvalue_fields", fields?.Select(e=>(Field)e));
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -4196,7 +4174,7 @@ namespace Nest
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public SearchDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<T> SuggestField(string suggest_field) => Qs("suggest_field", suggest_field);
+		public SearchDescriptor<T> SuggestField(Field suggest_field) => Qs("suggest_field", suggest_field);
 
 		///<summary>Specify which field to use for suggestions</summary>
 		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> field)  => Qs("suggest_field", (Field)field);
@@ -4736,7 +4714,7 @@ namespace Nest
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public TermVectorsDescriptor<TDocument> FieldStatistics(bool field_statistics = true) => Qs("field_statistics", field_statistics);
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermVectorsDescriptor<TDocument> Fields(params string[] fields) => Qs("fields", fields);
+		public TermVectorsDescriptor<TDocument> Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of fields to return.</summary>
 		public TermVectorsDescriptor<TDocument> Fields(params Expression<Func<TDocument, object>>[] fields)  => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Specifies if term offsets should be returned.</summary>
@@ -4928,11 +4906,11 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public UpdateByQueryDescriptor<T> SourceEnabled(params string[] source_enabled) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => Qs("_source_exclude", source_exclude);
+		public UpdateByQueryDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(params string[] source_include) => Qs("_source_include", source_include);
+		public UpdateByQueryDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
@@ -5091,17 +5069,7 @@ namespace Nest
 	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteLicenseDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteLicenseDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteLicenseDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteLicenseDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteLicenseDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
@@ -5195,17 +5163,7 @@ namespace Nest
 	///<summary>descriptor for XpackMlDeleteExpiredData <pre></pre></summary>
 	public partial class DeleteExpiredDataDescriptor  : RequestDescriptorBase<DeleteExpiredDataDescriptor,DeleteExpiredDataRequestParameters, IDeleteExpiredDataRequest>, IDeleteExpiredDataRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteExpiredDataDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteExpiredDataDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteExpiredDataDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteExpiredDataDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteExpiredDataDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackMlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
@@ -5245,17 +5203,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteModelSnapshotDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteModelSnapshotDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteModelSnapshotDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteModelSnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteModelSnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
@@ -5345,17 +5293,7 @@ namespace Nest
 			///<summary>The ID of the datafeeds to fetch</summary>
 		public GetDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetDatafeedsDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetDatafeedsDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetDatafeedsDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDatafeedsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetDatafeedsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackMlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
@@ -5370,17 +5308,7 @@ namespace Nest
 			///<summary>The ID of the datafeeds stats to fetch</summary>
 		public GetDatafeedStatsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetDatafeedStatsDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetDatafeedStatsDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetDatafeedStatsDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDatafeedStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetDatafeedStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackMlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
@@ -5418,17 +5346,7 @@ namespace Nest
 			///<summary>The ID of the jobs to fetch</summary>
 		public GetJobsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetJobsDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetJobsDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetJobsDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetJobsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetJobsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackMlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
@@ -5443,17 +5361,7 @@ namespace Nest
 			///<summary>The ID of the jobs stats to fetch</summary>
 		public GetJobStatsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetJobStatsDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetJobStatsDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetJobStatsDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetJobStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetJobStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackMlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
@@ -5516,17 +5424,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public OpenJobDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public OpenJobDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public OpenJobDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public OpenJobDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public OpenJobDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
@@ -5566,17 +5464,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public PreviewDatafeedDescriptor Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PreviewDatafeedDescriptor Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PreviewDatafeedDescriptor ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PreviewDatafeedDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PreviewDatafeedDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
@@ -5589,17 +5477,7 @@ namespace Nest
 		{ Self.Indices = typeof(T); Self.Types = typeof(T);  }
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public PutDatafeedDescriptor<T> Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutDatafeedDescriptor<T> Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutDatafeedDescriptor<T> ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutDatafeedDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutDatafeedDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
@@ -5612,17 +5490,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public PutJobDescriptor<T> Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutJobDescriptor<T> Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutJobDescriptor<T> ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutJobDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutJobDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
@@ -5706,17 +5574,7 @@ namespace Nest
 		{ Self.Indices = typeof(T); Self.Types = typeof(T);  }
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateDatafeedDescriptor<T> Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateDatafeedDescriptor<T> Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateDatafeedDescriptor<T> ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateDatafeedDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateDatafeedDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
@@ -5729,17 +5587,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateJobDescriptor<T> Pretty(bool pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateJobDescriptor<T> Human(bool human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateJobDescriptor<T> ErrorTrace(bool error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateJobDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateJobDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>

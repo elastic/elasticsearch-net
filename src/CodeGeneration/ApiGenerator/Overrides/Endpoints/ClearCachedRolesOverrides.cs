@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using ApiGenerator.Domain;
 
-namespace ApiGenerator.Overrides.Descriptors
+namespace ApiGenerator.Overrides.Endpoints
 {
-	public class ClearCachedRealmsDescriptorOverrides : DescriptorOverridesBase
+	public class ClearCachedRolesOverrides : EndpointOverridesBase
 	{
 		public override CsharpMethod PatchMethod(CsharpMethod method)
 		{
-			var part = method.Parts.First(p => p.Name == "realms");
+			var part = method.Parts.First(p => p.Name == "name");
 			part.ClrTypeNameOverride = "Names";
 			return method;
 		}

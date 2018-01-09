@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace ApiGenerator.Overrides.Descriptors
+namespace ApiGenerator.Overrides.Endpoints
 {
-	public class StopDatafeedDescriptorOverrides : DescriptorOverridesBase
+	public class StopDatafeedOverrides : EndpointOverridesBase
 	{
 		public override IEnumerable<string> SkipQueryStringParams => new[]
 		{

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ApiGenerator.Domain;
+﻿using ApiGenerator.Domain;
 
-namespace ApiGenerator.Overrides.Descriptors
+namespace ApiGenerator.Overrides.Endpoints
 {
-	public class PostJobDataDescriptorOverrides : DescriptorOverridesBase
+	public class PostJobDataOverrides : EndpointOverridesBase
 	{
 		public override CsharpMethod PatchMethod(CsharpMethod method)
 		{

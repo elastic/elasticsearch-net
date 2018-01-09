@@ -6,7 +6,7 @@ namespace ApiGenerator.Overrides.Descriptors
 	/// <summary>
 	/// Tweaks the generated descriptors
 	/// </summary>
-	public interface IDescriptorOverrides
+	public interface IEndpointOverrides
 	{
 		/// <summary>
 		/// Sometimes params can be defined on the body as well as on the querystring

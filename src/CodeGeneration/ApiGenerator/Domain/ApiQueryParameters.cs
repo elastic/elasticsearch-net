@@ -65,11 +65,20 @@ namespace ApiGenerator.Domain
 		public string HighLevelType(string paramName)
 		{
 			if (paramName == "routing") return "Routing";
+			var o = OriginalQueryStringParamName;
+			var isFields = (o.Contains("fields") || o.Contains("source_include") || o.Contains("source_exclude"));
 
 			var csharpType = this.CsharpType(paramName);
 			switch (csharpType)
 			{
 				case "TimeSpan": return "Time";
+			}
+			switch (this.Type)
+			{
+
+				case "list" when isFields:
+				case "string" when isFields: return "Fields";
+				case "string" when o.Contains("field"): return "Field";
 				default:
 					return csharpType;
 			}
@@ -80,5 +89,7 @@ namespace ApiGenerator.Domain
 				$"public {fieldType} {mm} {{ get {{ return Q<{fieldType}>(\"{original}\"); }} set {{ Q(\"{original}\", {setter}); }} }}";
 
 		public Func<string, string, string, string, string> FluentGenerator { get; set; }
+
+		public bool RenderPartial { get; set; }
 	}
 }

@@ -17,6 +17,7 @@ namespace ApiGenerator
 
 		public static void Generate(string downloadBranch, params string[] folders)
 		{
+			Warnings = new List<string>();
 			var spec = CreateRestApiSpecModel(downloadBranch, folders);
 			var actions = new Dictionary<Action<RestApiSpec>, string>
 			{
@@ -38,7 +39,16 @@ namespace ApiGenerator
 					pbar.Tick("Generated " + kv.Value);
 				}
 			}
+
+			if (Warnings.Count == 0) return;
+
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			foreach (var warning in Warnings.Distinct().OrderBy(w=>w))
+				Console.WriteLine(warning);
+			Console.ResetColor();
 		}
+
+		public static List<string> Warnings { get; private set; }
 
 		private static string[] IgnoredApis { get; } =
 		{

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace ApiGenerator.Overrides.Descriptors
+namespace ApiGenerator.Overrides.Endpoints
 {
 	// ReSharper disable once UnusedMember.Global
-	public class ReindexOnServerDescriptorOverrides : DescriptorOverridesBase
+	public class ReindexOnServerOverrides : EndpointOverridesBase
 	{
 		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
