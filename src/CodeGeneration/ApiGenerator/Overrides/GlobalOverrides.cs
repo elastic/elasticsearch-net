@@ -5,15 +5,25 @@ namespace ApiGenerator.Overrides
 {
 	public class GlobalOverrides : EndpointOverridesBase
 	{
-		/// <summary>
-		/// Force these be rendered as interface properties only, so that they'd have to be implemented manually
-		/// and become part of the body. This only takes affect on requests that take a body (e.g not GET or HEAD).
-		/// </summary>
 		public override IEnumerable<string> RenderPartial => new[]
 		{
 			"stored_fields",
 			"script_fields",
 			"docvalue_fields"
+		};
+
+		public override IDictionary<string, string> RenameQueryStringParams { get; } = new Dictionary<string, string>
+		{
+			{"_source", "source_enabled"},
+			{"_source_include", "source_include"},
+			{"_source_exclude", "source_exclude"},
+			{"q", "query_on_query_string"},
+			{"docvalue_fields", "doc_value_fields"},
+		};
+
+		public override IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new Dictionary<string, string>
+		{
+			{ "parent", ""}
 		};
 	}
 }
