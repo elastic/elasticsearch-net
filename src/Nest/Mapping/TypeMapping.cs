@@ -31,9 +31,6 @@ namespace Nest
 		[JsonProperty("_all")]
 		IAllField AllField { get; set; }
 
-		[JsonProperty("_parent")]
-		IParentField ParentField { get; set; }
-
 		[JsonProperty("_routing")]
 		IRoutingField RoutingField { get; set; }
 
@@ -81,8 +78,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? NumericDetection { get; set; }
 		/// <inheritdoc/>
-		public IParentField ParentField { get; set; }
-		/// <inheritdoc/>
 		public IProperties Properties { get; set; }
 		/// <inheritdoc/>
 		public IRoutingField RoutingField { get; set; }
@@ -111,7 +106,6 @@ namespace Nest
 		IIndexField ITypeMapping.IndexField { get; set; }
 		IDictionary<string, object> ITypeMapping.Meta { get; set; }
 		bool? ITypeMapping.NumericDetection { get; set; }
-		IParentField ITypeMapping.ParentField { get; set; }
 		IProperties ITypeMapping.Properties { get; set; }
 		IRoutingField ITypeMapping.RoutingField { get; set; }
 		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
@@ -149,12 +143,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
-
-		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> Parent(TypeName parentType) => Assign(a => a.ParentField = new ParentField { Type = parentType });
-
-		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> Parent<TOther>() where TOther : class => Assign(a => a.ParentField = new ParentField { Type = typeof(TOther) });
 
 		/// <inheritdoc/>
 		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
