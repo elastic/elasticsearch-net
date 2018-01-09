@@ -13,8 +13,6 @@ namespace ApiGenerator.Domain
 		public string Obsolete { get; set; }
 		public IEnumerable<string> Options { get; set; }
 
-
-
 		public string CsharpType(string paramName)
 		{
 			switch (this.Type)
@@ -56,6 +54,9 @@ namespace ApiGenerator.Domain
 					yield return "<para>For requests that are constructed from/for a document NEST will automatically infer the routing key";
 					yield return "if that document has a <see cref=\"Nest.JoinField\" /> or a routing mapping on for its type exists on <see cref=\"Nest.ConnectionSettings\" /></para> ";
 					yield break;
+				case "source_enabled":
+					yield return "Whether the _source should be included in the response.";
+					yield break;
 				default:
 					yield return this.Description;
 					yield break;
@@ -80,13 +81,25 @@ namespace ApiGenerator.Domain
 				case "string" when isFields: return "Fields";
 				case "string" when o.Contains("field"): return "Field";
 				default:
-					return csharpType;
+					return NullableCsharpType(csharpType);
+			}
+		}
+		private static string NullableCsharpType(string fieldType)
+		{
+			switch (fieldType)
+			{
+				case "bool": return "bool?";
+				case "integer": return "int?";
+				case "double": return "double?";
+				case "long": return "long?";
+				default:
+					return fieldType;
 			}
 		}
 
 		public Func<string, string, string, string, string> Generator { get; set; } =
 			(fieldType, mm, original, setter) =>
-				$"public {fieldType} {mm} {{ get {{ return Q<{fieldType}>(\"{original}\"); }} set {{ Q(\"{original}\", {setter}); }} }}";
+				$"public {NullableCsharpType(fieldType)} {mm} {{ get {{ return Q<{NullableCsharpType(fieldType)}>(\"{original}\"); }} set {{ Q(\"{original}\", {setter}); }} }}";
 
 		public Func<string, string, string, string, string> FluentGenerator { get; set; }
 

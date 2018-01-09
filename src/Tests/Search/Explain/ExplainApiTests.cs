@@ -32,7 +32,7 @@ namespace Tests.Search.Explain
 
 		protected override ExplainDescriptor<Project> NewDescriptor() => new ExplainDescriptor<Project>(_project);
 
-		private Project _project = new Project { Name = Project.Instance.Name };
+		private readonly Project _project = new Project { Name = Project.Instance.Name };
 
 		protected override object ExpectJson => new
 		{
@@ -49,7 +49,7 @@ namespace Tests.Search.Explain
 		};
 
 		protected override Func<ExplainDescriptor<Project>, IExplainRequest<Project>> Fluent => e => e
-			.SourceEnabled("true") //TODO this should be generated as a bool
+			.SourceEnabled()
 			.Query(q => q
 				.Match(m => m
 					.Field(p => p.Name)
@@ -59,7 +59,7 @@ namespace Tests.Search.Explain
 
 		protected override ExplainRequest<Project> Initializer => new ExplainRequest<Project>(_project)
 		{
-			SourceEnabled = new [] { "true" },
+			SourceEnabled = true,
 			Query = new QueryContainer(new MatchQuery
 			{
 				Field = "name",
