@@ -35,7 +35,6 @@ module Projects =
         | Tests
         | DocGenerator
 
-
     type DotNetProject = 
         | Project of Project
         | PrivateProject of PrivateProject

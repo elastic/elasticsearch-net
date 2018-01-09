@@ -1,9 +1,11 @@
 #I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
+#r @"System.Xml.Linq"
 #nowarn "0044" //TODO sort out FAKE 5
 
 #load @"Paths.fsx"
 #load @"Tooling.fsx"
+#load @"Projects.fsx"
 
 open System
 open System.IO
@@ -13,6 +15,8 @@ open System
 open System.IO
 open System.Net
 open System.Text
+open System.Text.RegularExpressions
+open System.Xml.Linq
 open Fake.Git.CommandHelper
 
 open Paths
@@ -92,6 +96,7 @@ module Differ =
         | Assemblies of Assemblies
         | Directories of Directories
         
+    /// The two assemblies to diff
     type AssemblyDiff = {
          /// The path to the first assembly
          FirstPath: string;
@@ -99,18 +104,15 @@ module Differ =
          SecondPath: string;   
     }
     
-    let private tempDir = Path.GetTempPath() </> Path.GetRandomFileName()
-    
     let private downloadNugetPackages nuget =
         let tempDir = nuget.TempDir </> "nuget"
         DeleteDir tempDir
         CreateDir tempDir
         let versions = [nuget.FirstVersion; nuget.SecondVersion] 
+        
         versions
         |> Seq.map(fun v -> tempDir </> v)
         |> Seq.iter CreateDir
-    
-        let nugetExe = Tooling.Nuget
     
         let sources = 
             if List.isEmpty nuget.Sources then ["https://www.nuget.org/api/v2/";  "https://api.nuget.org/v3/index.json"]
@@ -122,7 +124,7 @@ module Differ =
                 let desiredFrameworkVersion = Directory.GetDirectories dir
                                               |> Array.tryFind (fun f -> nuget.FrameworkVersion = Path.GetFileName f)
                 match desiredFrameworkVersion with
-                | Some f ->  f |> Path.GetFullPath
+                | Some f -> f |> Path.GetFullPath
                 | _ -> failwith (sprintf "Nuget package %s, version %s, does not contain framework version %s in %s" 
                                           nuget.Package 
                                           packageVersion 
@@ -132,7 +134,7 @@ module Differ =
         versions
         |> Seq.map(fun v -> 
             let workingDir = tempDir @@ v
-            let exitCode =  nugetExe.ExecIn workingDir ["install"; nuget.Package; "-Version"; v; sources; "-ExcludeVersion -NonInteractive"]
+            let exitCode =  Tooling.Nuget.ExecIn workingDir ["install"; nuget.Package; "-Version"; v; sources; "-ExcludeVersion -NonInteractive"]
             if exitCode <> 0 then failwith (sprintf "Error downloading nuget package version: %s" v)
     
             // assumes DLLs are in the lib folder
@@ -166,7 +168,6 @@ module Differ =
     
     let private cloneAndBuildGitRepo (git:GitHub) =    
         let fullTempPath = git.TempDir |> Path.GetFullPath 
-        let gitDir = fullTempPath </> "nest-diff"
         let repo = fullTempPath  @@ "github"
     
         if (directoryExists repo |> not) then  
@@ -190,7 +191,7 @@ module Differ =
                                 p.WorkingDirectory <- repo
                                 p.FileName <- c
                                 p.Arguments <- String.concat " " a
-                            ) (TimeSpan.FromMinutes 5.)
+                            ) (TimeSpan.FromMinutes 10.)
                             |> failIfError 
     
                             let buildOutputPath = f(repo)
@@ -202,19 +203,114 @@ module Differ =
     
         [git.FirstCommit; git.SecondCommit] |> List.map checkoutAndBuild
         
-    let private convertToMarkdown path = trace "TODO: Convert to markdown"    
+    type DiffType = 
+        | Deleted
+        | Modified
+        | New
         
-    let private convertToAsciidoc path = trace "TODO: Convert to asciidoc"
+    let private convertDiffType = function
+        | "Deleted" -> Deleted
+        | "Modified" -> Modified
+        | "New" -> New
+        | d -> failwith (sprintf "unknown diff type: %s" d)
+        
+    let private attributeValue name (element:XElement) = 
+        let attribute = element.Attribute(XName.op_Implicit name)
+        if attribute <> null then attribute.Value else ""
+        
+    let private convertToMarkdown (path:string) first second =
+        let name = path |> Path.GetFileNameWithoutExtension
+        let doc = XDocument.Load path
+        let output = Path.ChangeExtension(path, "md")
+        use file = File.OpenWrite <| output
+        use writer = new StreamWriter(file)                
+        writer.WriteLine(sprintf "# Breaking changes for %s between %s and %s" name first second)
+        writer.WriteLine()
+                
+        for element in doc.Descendants(XName.op_Implicit "Type") do
+            let typeName = element |> attributeValue "Name" |> replace (sprintf "%s." name) ""
+            let diffType  = element |> attributeValue "DiffType" |> convertDiffType
+            match diffType with
+            | Deleted -> writer.WriteLine(sprintf "## `%s` is deleted" typeName)
+            | New -> writer.WriteLine(sprintf "## `%s` is added" typeName)
+            | Modified -> 
+                let members = 
+                    Seq.append 
+                        (element.Elements(XName.op_Implicit "Method")) 
+                        (element.Elements(XName.op_Implicit "Property")) 
+            
+                if Seq.isEmpty members |> not then          
+                    writer.WriteLine(sprintf "## `%s`" typeName)
+                    for m in members do
+                        let memberName = m |> attributeValue "Name"
+                        if isNotNullOrEmpty memberName then
+                            let diffType  = m |> attributeValue "DiffType"                         
+                            if isNotNullOrEmpty diffType then                    
+                                match convertDiffType diffType with
+                                        | Deleted -> writer.WriteLine(sprintf "### `%s` is deleted" memberName)
+                                        | New -> writer.WriteLine(sprintf "### `%s` is added" memberName)
+                                        | Modified -> 
+                                            match (m.Descendants(XName.op_Implicit "DiffItem") |> Seq.tryHead) with
+                                            | Some diffItem ->
+                                                writer.WriteLine(sprintf "### `%s`" memberName)                                                                                      
+                                                let diffDescription = diffItem.Value
+                                                writer.WriteLine(Regex.Replace(diffDescription, "changed from (.*?) to (.*).", "changed from `$1` to `$2`."))                                         
+                                            | None -> ()
+
+    let private convertToAsciidoc path first second = 
+        trace "TODO: Convert to asciidoc"
         
     /// Generates a diff between assembly files, assembly directories, assemblies in nuget packages
-    let Generate(diff: Diff, format:Format) =
+    let Generate(diffType:string, project:string, first:string, second:string, format:string) =
+        let tempDir = Path.GetTempPath() </> "nest-diff"
+        
+        let targetProject = 
+            match project |> toLower with
+            | "nest" -> (DotNetProject.Project Nest).Name 
+            | "nest.jsonnetserializer" -> (DotNetProject.Project NestJsonNetSerializer).Name 
+            | "elasticsearch.net" -> (DotNetProject.Project ElasticsearchNet).Name 
+            | _ -> ""
+            
+        let targetFormat =
+            match format |> toLower with
+            | "xml" -> Xml
+            | "markdown" -> Markdown
+            | "asciidoc" -> Asciidoc
+            | _ -> Xml
+        
+        let diff = 
+            match diffType with
+            | "github" -> 
+                let commit = {
+                    Commit = ""
+                    CompileTarget = Command("build.bat", ["skiptests"], fun o -> o @@ @"build\output\Nest\net46")
+                    OutputTarget = if isNotNullOrEmpty targetProject then sprintf "%s.dll" targetProject else targetProject
+                }
+                GitHub {
+                    Url = new Uri(Paths.Repository)
+                    TempDir = tempDir
+                    FirstCommit = { commit with Commit = first }            
+                    SecondCommit = { commit with Commit = second }            
+                }
+            | "nuget" ->
+                Nuget {
+                    Package = if isNullOrEmpty targetProject then "NEST" else targetProject
+                    TempDir = tempDir
+                    FirstVersion = first
+                    SecondVersion = second
+                    FrameworkVersion = "net46"
+                    Sources = []        
+                }
+            | "directories" -> Directories { FirstDir = first; SecondDir = second }          
+            | "assemblies" -> Assemblies { FirstPath = first; SecondPath = second }
+            | d -> failwith (sprintf "Unknown diff type: %s" d)  
+    
         let pairAssembliesInDirectories directories =
             let firstDirectory = directories |> Seq.head
             let lastDirectory = directories |> Seq.last
-            [ for file in Directory.EnumerateFiles firstDirectory do
+            [ for file in Directory.EnumerateFiles(firstDirectory, "*.dll") do
                 let otherFile = lastDirectory </> Path.GetFileName file 
-                if fileExists otherFile then 
-                    yield { FirstPath = file; SecondPath = otherFile } ]
+                if fileExists otherFile then yield { FirstPath = file; SecondPath = otherFile } ]
 
         let assemblies = 
             match diff with 
@@ -231,17 +327,15 @@ module Differ =
             | Assemblies a -> [{ FirstPath = a.FirstPath; SecondPath = a.SecondPath }]
             | Directories d -> pairAssembliesInDirectories [d.FirstDir; d.SecondDir]
                 
-        let appendIfNotNullOrEmpty v f b =
-            if (String.IsNullOrEmpty v = false) then Printf.bprintf b f v 
-            b    
-    
         for diff in assemblies do 
             let file = diff.FirstPath |> Path.GetFileNameWithoutExtension
-            let path = Paths.Output("diff") </> sprintf "%s.xml" file
-            Tooling.JustAssembly.Exec [diff.FirstPath; diff.SecondPath; path]
-            match format with
+            let outputFile = Paths.Output("diff") </> sprintf "%s.xml" file |> Path.GetFullPath
+            let outputDir = outputFile |> Path.GetDirectoryName
+            if directoryExists outputDir |> not then CreateDir outputDir      
+            Tooling.JustAssembly.Exec [diff.FirstPath; diff.SecondPath; outputFile]
+            match targetFormat with
             | Xml -> ()
-            | Markdown -> convertToMarkdown path
-            | Asciidoc -> convertToAsciidoc path
+            | Markdown -> convertToMarkdown outputFile first second
+            | Asciidoc -> convertToAsciidoc outputFile first second
     
     

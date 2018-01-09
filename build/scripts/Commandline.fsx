@@ -28,7 +28,7 @@ Targets:
 * canary [apikey] [feed]
   - create a canary nuget package based on the current version if [feed] and [apikey] are provided
     also pushes to upstream (myget)
-* diff <github|nuget|dir|assembly> <version|path 1> <version|path 2>
+* diff <github|nuget|dir|assembly> <version|path 1> <version|path 2> [format]
 
 NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to force the tests against all suported TFM's
 
@@ -110,7 +110,18 @@ module Commandline =
         match c with
         | "github" | "nuget" | "directories" | "assemblies" -> Some c
         | _ -> failwith (sprintf "Unknown diff type: %s" candidate)
-
+        
+    let private (|IsProject|_|) (candidate:string) =
+        let c = candidate |> toLower
+        match c with
+        | "nest" | "elasticsearch.net" | "nest.jsonnetserializer" -> Some c
+        | _ -> None     
+        
+    let private (|IsFormat|_|) (candidate:string) =
+        let c = candidate |> toLower
+        match c with
+        | "xml" | "markdown" | "asciidoc" -> Some c
+        | _ -> None 
 
     let parse () =
         setEnvironVar "FAKEBUILD" "1"
@@ -170,12 +181,28 @@ module Commandline =
             setBuildParam "esversions" esVersions
             setBuildParam "clusterfilter" "ConnectionReuse"
             setBuildParam "numberOfConnections" numberOfConnections
-            
+ 
+        | ["diff"; IsDiff diffType; IsProject project; firstVersionOrPath; secondVersionOrPath; IsFormat format] ->
+             setBuildParam "diffType" diffType
+             setBuildParam "project" project
+             setBuildParam "first" firstVersionOrPath
+             setBuildParam "second" secondVersionOrPath            
+             setBuildParam "format" format            
+        | ["diff"; IsDiff diffType; IsProject project; firstVersionOrPath; secondVersionOrPath] ->
+             setBuildParam "diffType" diffType
+             setBuildParam "project" project
+             setBuildParam "first" firstVersionOrPath
+             setBuildParam "second" secondVersionOrPath        
+        | ["diff"; IsDiff diffType; firstVersionOrPath; secondVersionOrPath; IsFormat format] ->
+             setBuildParam "diffType" diffType
+             setBuildParam "first" firstVersionOrPath
+             setBuildParam "second" secondVersionOrPath            
+             setBuildParam "format" format          
         | ["diff"; IsDiff diffType; firstVersionOrPath; secondVersionOrPath] ->
             setBuildParam "diffType" diffType
             setBuildParam "first" firstVersionOrPath
-            setBuildParam "second" secondVersionOrPath 
-            
+            setBuildParam "second" secondVersionOrPath         
+
         | ["temp"; ] -> ignore()
         | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->
