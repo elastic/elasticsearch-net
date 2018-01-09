@@ -23,7 +23,7 @@ namespace ApiGenerator.Overrides
 
 		public override IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new Dictionary<string, string>
 		{
-			{ "parent", ""}
+			{ "parent", "the parent parameter has been deprecated from elasticsearch, please use routing instead directly."}
 		};
 	}
 }

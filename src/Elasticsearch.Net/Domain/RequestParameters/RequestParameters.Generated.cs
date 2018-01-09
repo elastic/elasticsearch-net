@@ -1435,6 +1435,7 @@ namespace Elasticsearch.Net
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
@@ -1490,6 +1491,7 @@ namespace Elasticsearch.Net
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>ID of parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
@@ -1688,6 +1690,7 @@ namespace Elasticsearch.Net
 		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1743,6 +1746,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1816,6 +1820,7 @@ namespace Elasticsearch.Net
 		public bool? Lenient { get { return Q<bool?>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1902,6 +1907,7 @@ namespace Elasticsearch.Net
 		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1982,6 +1988,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -2043,6 +2050,7 @@ namespace Elasticsearch.Net
 		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
 		
 		///<summary>ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
@@ -3805,6 +3813,7 @@ namespace Elasticsearch.Net
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
@@ -4767,6 +4776,7 @@ namespace Elasticsearch.Net
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Parent id of documents.</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
@@ -4813,6 +4823,7 @@ namespace Elasticsearch.Net
 		public string Lang { get { return Q<string>("lang"); } set { Q("lang", value); } }
 		
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>

@@ -1205,7 +1205,7 @@ namespace Nest
 			///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public CreateDescriptor<TDocument> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
 		///<summary>ID of the parent document</summary>
-		public CreateDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public CreateDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public CreateDescriptor<TDocument> Refresh(Refresh refresh) => Qs("refresh", refresh);
  		///<summary>
@@ -1277,7 +1277,7 @@ namespace Nest
 			///<summary>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public DeleteDescriptor<T> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
 		///<summary>ID of parent document</summary>
-		public DeleteDescriptor<T> Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public DeleteDescriptor<T> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public DeleteDescriptor<T> Refresh(Refresh refresh) => Qs("refresh", refresh);
  		///<summary>
@@ -1488,7 +1488,7 @@ namespace Nest
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public DocumentExistsDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>The ID of the parent document</summary>
-		public DocumentExistsDescriptor<T> Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public DocumentExistsDescriptor<T> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public DocumentExistsDescriptor<T> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -1564,7 +1564,7 @@ namespace Nest
 		public SourceExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>The ID of the parent document</summary>
-		public SourceExistsDescriptor<T> Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public SourceExistsDescriptor<T> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SourceExistsDescriptor<T> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -1650,7 +1650,7 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>The ID of the parent document</summary>
-		public ExplainDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public ExplainDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public ExplainDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
@@ -1765,7 +1765,7 @@ namespace Nest
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public GetDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>The ID of the parent document</summary>
-		public GetDescriptor<T> Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public GetDescriptor<T> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public GetDescriptor<T> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -1864,7 +1864,7 @@ namespace Nest
 		public SourceDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>The ID of the parent document</summary>
-		public SourceDescriptor<T> Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public SourceDescriptor<T> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SourceDescriptor<T> Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
@@ -1946,7 +1946,7 @@ namespace Nest
 		///<summary>Explicit operation type</summary>
 		public IndexDescriptor<TDocument> OpType(OpType op_type) => Qs("op_type", op_type);
 		///<summary>ID of the parent document</summary>
-		public IndexDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public IndexDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public IndexDescriptor<TDocument> Refresh(Refresh refresh) => Qs("refresh", refresh);
  		///<summary>
@@ -3801,7 +3801,7 @@ namespace Nest
 		///</summary>
 		public MultiTermVectorsDescriptor Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		public MultiTermVectorsDescriptor Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public MultiTermVectorsDescriptor Parent(string parent) => Qs("parent", parent);
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
 		public MultiTermVectorsDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
 		///<summary>Explicit version number for concurrency control</summary>
@@ -4734,7 +4734,7 @@ namespace Nest
 		///</summary>
 		public TermVectorsDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Parent id of documents.</summary>
-		public TermVectorsDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public TermVectorsDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
 		public TermVectorsDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
 		///<summary>Explicit version number for concurrency control</summary>
@@ -4794,7 +4794,7 @@ namespace Nest
 		///<summary>The script language (default: painless)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => Qs("lang", lang);
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Parent(string parent) => Qs("parent", parent);
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been removed, please use routing instead directly.")]		public UpdateDescriptor<TDocument, TPartialDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Refresh(Refresh refresh) => Qs("refresh", refresh);
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
