@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using static Elasticsearch.Net.UrlFormatProvider;
+using static Elasticsearch.Net.ElasticsearchUrlFormatter;
 
 namespace Elasticsearch.Net
 {
@@ -51,7 +51,7 @@ namespace Elasticsearch.Net
 
 		/// <inheritdoc />
 		public string GetResolvedQueryStringValue(string n, IConnectionConfigurationValues s) =>
-			GetUnescapedStringRepresentation(GetQueryStringValue<object>(n), s);
+			CreateString(GetQueryStringValue<object>(n), s);
 	}
 
 }

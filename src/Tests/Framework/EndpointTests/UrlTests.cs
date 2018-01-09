@@ -27,10 +27,11 @@ namespace Tests.Framework
 
 		protected override object ExpectJson => null;
 
-		internal UrlTester(HttpMethod method, string expectedUrl)
+		internal UrlTester(HttpMethod method, string expectedUrl, Func<ConnectionSettings, ConnectionSettings> settingsModifier = null)
 		{
 			this.ExpectedHttpMethod = method;
 			this.ExpectedUrl = expectedUrl;
+			this.ConnectionSettingsModifier = settingsModifier;
 		}
 
 		public UrlTester Fluent<TResponse>(Func<IElasticClient, TResponse> call)
@@ -73,7 +74,9 @@ namespace Tests.Framework
 			return this;
 		}
 
-		public static UrlTester ExpectUrl(HttpMethod method, string url) =>  new UrlTester(method, url);
+		public static UrlTester ExpectUrl(HttpMethod method, string url, Func<ConnectionSettings, ConnectionSettings> settings = null) =>
+			new UrlTester(method, url, settings);
+
 		public static UrlTester POST(string url) =>  new UrlTester(HttpMethod.POST, url);
 		public static UrlTester PUT(string url) =>  new UrlTester(HttpMethod.PUT, url);
 		public static UrlTester GET(string url) =>  new UrlTester(HttpMethod.GET, url);

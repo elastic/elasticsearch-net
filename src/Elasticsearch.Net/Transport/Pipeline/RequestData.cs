@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using Purify;
 
 namespace Elasticsearch.Net
@@ -13,10 +14,10 @@ namespace Elasticsearch.Net
 		public const string MimeType = "application/json";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
 
-		public Uri Uri => this.Node != null ? new Uri(this.Node.Uri, this.Path).Purify() : null;
+		public Uri Uri => this.Node != null ? new Uri(this.Node.Uri, this.PathAndQuery).Purify() : null;
 
 		public HttpMethod Method { get; private set; }
-		public string Path { get; }
+		public string PathAndQuery { get; }
 		public PostData PostData { get; }
 		public bool MadeItToResponse { get; set;}
 		public AuditEvent OnFailureAuditEvent => this.MadeItToResponse ? AuditEvent.BadResponse : AuditEvent.BadRequest;
@@ -51,15 +52,14 @@ namespace Elasticsearch.Net
 		public X509CertificateCollection ClientCertificates { get; }
 
 		public RequestData(HttpMethod method, string path, PostData data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
-			: this(method, path, data, global, local?.RequestConfiguration, memoryStreamFactory)
+			: this(method, data, global, local?.RequestConfiguration, memoryStreamFactory)
 		{
 			this.CustomConverter = local?.DeserializationOverride;
-			this.Path = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, local);
+			this.PathAndQuery = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, local);
 		}
 
 		private RequestData(
 			HttpMethod method,
-			string path,
 			PostData data,
 			IConnectionConfigurationValues global,
 			IRequestConfiguration local,
@@ -72,8 +72,6 @@ namespace Elasticsearch.Net
 
 			if (data != null)
 				data.DisableDirectStreaming = local?.DisableDirectStreaming ?? global.DisableDirectStreaming;
-
-			this.Path = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, null);
 
 			this.Pipelined = local?.EnableHttpPipelining ?? global.HttpPipeliningEnabled;
 			this.HttpCompression = global.EnableHttpCompression;
@@ -102,23 +100,61 @@ namespace Elasticsearch.Net
 			this.ClientCertificates = local?.ClientCertificates ?? global.ClientCertificates;
 		}
 
-		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request = null)
+		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request)
 		{
+			path = path ?? string.Empty;
+			if (path.Contains("?"))
+				throw new ArgumentException($"{nameof(path)} can not contain querystring parmeters and needs to be already escaped");
 
-			//Make sure we append global query string as well the request specific query string parameters
-			var copy = new NameValueCollection(global.QueryStringParameters);
-			var formatter = new UrlFormatProvider(this.ConnectionSettings);
-			if (request != null)
-				copy.Add(request.QueryString.ToNameValueCollection(formatter));
-			if (!copy.HasKeys()) return path;
+			var g = global.QueryStringParameters;
+			var l = request?.QueryString;
+			if (g?.Count == 0 && l?.Count == 0) return path;
 
-			var queryString = copy.ToQueryString();
-			var tempUri = new Uri("http://localhost:9200/" + path).Purify();
-			if (tempUri.Query.IsNullOrEmpty())
-				path += queryString;
-			else
-				path += "&" + queryString.Substring(1, queryString.Length - 1);
+			//create a copy of the global query string collection if needed.
+			var nv = g == null ? new NameValueCollection() : new NameValueCollection(g);
+
+			//set all querystring pairs from local `l` on the querystring collection
+			var formatter = this.ConnectionSettings.UrlFormatter;
+			nv.UpdateFromDictionary(l, formatter);
+
+			//if nv has no keys simply return path as provided
+			if (!nv.HasKeys()) return path;
+
+			//create string for query string collection where key and value are escaped properly.
+			var queryString = nv.ToQueryString();
+			path += queryString;
 			return path;
+		}
+	}
+
+	internal static class NameValueCollectionExtensions
+	{
+		internal static string ToQueryString(this NameValueCollection nv)
+		{
+			if (nv == null) return string.Empty;
+			if (nv.AllKeys.Length == 0) return string.Empty;
+			string E(string v) => Uri.EscapeDataString(v);
+			return "?" + string.Join("&", nv.AllKeys.Select(key => $"{E(key)}={E(nv[key])}"));
+		}
+
+		internal static void UpdateFromDictionary(this NameValueCollection queryString, Dictionary<string, object> queryStringUpdates, ElasticsearchUrlFormatter provider)
+		{
+			if (queryString == null || queryString.Count < 0) return;
+			if (queryStringUpdates == null || queryStringUpdates.Count < 0) return;
+
+			foreach (var kv in queryStringUpdates.Where(kv => !kv.Key.IsNullOrEmpty()))
+			{
+				if (kv.Value == null)
+				{
+					queryString.Remove(kv.Key);
+					continue;
+				}
+				var resolved = provider.CreateString(kv.Value);
+				if (!resolved.IsNullOrEmpty())
+					queryString[kv.Key] = resolved;
+				else
+					queryString.Remove(kv.Key);
+			}
 		}
 	}
 }

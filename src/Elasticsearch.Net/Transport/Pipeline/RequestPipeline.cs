@@ -261,7 +261,9 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParameters = new RootNodeInfoRequestParameters { };
 			requestParameters.RequestConfiguration = requestOverrides;
 
-			return new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestParameters, this._memoryStreamFactory) { Node = node };
+			var data = new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestParameters, this._memoryStreamFactory) { Node = node };
+			audit.Path = data.PathAndQuery;
+			return data;
 		}
 
 		public void Ping(Node node)
@@ -322,7 +324,12 @@ namespace Elasticsearch.Net
 				};
 		}
 
-		public string SniffPath => "_nodes/http,settings?flat_settings&timeout=" + this.PingTimeout.ToTimeUnit();
+		public static string SniffPath => "_nodes/http,settings";
+		private NodesInfoRequestParameters SniffParameters => new NodesInfoRequestParameters
+		{
+			Timeout = this.PingTimeout,
+			FlatSettings = true
+		};
 
 		public IEnumerable<Node> SniffNodes => this._connectionPool
 			.CreateView(LazyAuditable)
@@ -350,7 +357,6 @@ namespace Elasticsearch.Net
 
 		public void Sniff()
 		{
-			var path = this.SniffPath;
 			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
@@ -359,7 +365,8 @@ namespace Elasticsearch.Net
 					audit.Node = node;
 					try
 					{
-						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, null, this._memoryStreamFactory) { Node = node };
+						var requestData = CreateSniffRequestData(node);
+						audit.Path = requestData.PathAndQuery;
 						var response = this._connection.Request<SniffResponse>(requestData);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
@@ -383,9 +390,7 @@ namespace Elasticsearch.Net
 
 		public async Task SniffAsync(CancellationToken cancellationToken)
 		{
-			var path = this.SniffPath;
 			var exceptions = new List<Exception>();
-			SniffResponse response = null;
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(SniffSuccess))
@@ -393,8 +398,9 @@ namespace Elasticsearch.Net
 					audit.Node = node;
 					try
 					{
-						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, null, this._memoryStreamFactory) { Node = node };
-						response = await this._connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
+						var requestData = CreateSniffRequestData(node);
+						audit.Path = requestData.PathAndQuery;
+						var response = await this._connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success) throw new PipelineException(requestData.OnFailurePipelineFailure) { ApiCall = response };
@@ -414,13 +420,19 @@ namespace Elasticsearch.Net
 			throw new PipelineException(PipelineFailure.SniffFailure, new AggregateException(exceptions));
 		}
 
+		private RequestData CreateSniffRequestData(Node node) =>
+			new RequestData(HttpMethod.GET, SniffPath, null, this._settings, this.SniffParameters, this._memoryStreamFactory)
+			{
+				Node = node
+			};
+
 		public TResponse CallElasticsearch<TResponse>(RequestData requestData)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			using (var audit = this.Audit(HealthyResponse))
 			{
 				audit.Node = requestData.Node;
-				audit.Path = requestData.Path;
+				audit.Path = requestData.PathAndQuery;
 
 				TResponse response = null;
 				try
@@ -447,7 +459,7 @@ namespace Elasticsearch.Net
 			using (var audit = this.Audit(HealthyResponse))
 			{
 				audit.Node = requestData.Node;
-				audit.Path = requestData.Path;
+				audit.Path = requestData.PathAndQuery;
 
 				TResponse response = null;
 				try
