@@ -49,21 +49,6 @@ namespace Elasticsearch.Net
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatAliases
@@ -94,21 +79,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -144,21 +114,6 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatCount
@@ -189,21 +144,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -242,21 +182,6 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of fields to return in the output</summary>
 		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatHealth
@@ -291,21 +216,6 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatHelp
@@ -321,21 +231,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -377,21 +272,6 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatMaster
@@ -423,21 +303,6 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatNodeattrs
@@ -468,21 +333,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -518,21 +368,6 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatPendingTasks
@@ -563,21 +398,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -610,21 +430,6 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatRecovery
@@ -655,21 +460,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -702,21 +492,6 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatSegments
@@ -744,21 +519,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -794,21 +554,6 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatSnapshots
@@ -839,21 +584,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -895,21 +625,6 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for CatTemplates
@@ -940,21 +655,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -990,21 +690,6 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for ClearScroll
@@ -1015,21 +700,6 @@ namespace Elasticsearch.Net
 	public class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for ClusterAllocationExplain
@@ -1045,21 +715,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public bool? IncludeDiskInfo { get { return Q<bool?>("include_disk_info"); } set { Q("include_disk_info", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -1082,21 +737,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Whether to return all default clusters setting.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -1135,21 +775,6 @@ namespace Elasticsearch.Net
 		///<summary>Wait until cluster is in a specific state</summary>
 		public WaitForStatus WaitForStatus { get { return Q<WaitForStatus>("wait_for_status"); } set { Q("wait_for_status", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for ClusterPendingTasks
@@ -1165,21 +790,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -1200,21 +810,6 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for ClusterRemoteInfo
@@ -1225,21 +820,6 @@ namespace Elasticsearch.Net
 	public class RemoteInfoRequestParameters : RequestParameters<RemoteInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for ClusterReroute
@@ -1267,21 +847,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -1311,21 +876,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for ClusterStats
@@ -1341,21 +891,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -1406,21 +941,6 @@ namespace Elasticsearch.Net
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get { return Q<long?>("terminate_after"); } set { Q("terminate_after", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for Create
@@ -1462,21 +982,6 @@ namespace Elasticsearch.Net
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for Delete
@@ -1508,21 +1013,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -1630,21 +1120,6 @@ namespace Elasticsearch.Net
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for DeleteScript
@@ -1660,21 +1135,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -1720,21 +1180,6 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for ExistsSource
@@ -1775,21 +1220,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -1841,21 +1271,6 @@ namespace Elasticsearch.Net
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for FieldCaps
@@ -1877,21 +1292,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -1937,21 +1337,6 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for GetScript
@@ -1962,21 +1347,6 @@ namespace Elasticsearch.Net
 	public class GetScriptRequestParameters : RequestParameters<GetScriptRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for GetSource
@@ -2017,21 +1387,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -2077,21 +1432,6 @@ namespace Elasticsearch.Net
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesAnalyzeForAll
@@ -2110,21 +1450,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Format of the output</summary>
 		public Format Format { get { return Q<Format>("format"); } set { Q("format", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -2166,21 +1491,6 @@ namespace Elasticsearch.Net
 		///<summary>Clear request cache</summary>
 		public bool? Request { get { return Q<bool?>("request"); } set { Q("request", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesClose
@@ -2206,21 +1516,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesCreate
@@ -2242,21 +1537,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get { return Q<bool?>("update_all_types"); } set { Q("update_all_types", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -2283,21 +1563,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesDeleteAlias
@@ -2314,21 +1579,6 @@ namespace Elasticsearch.Net
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesDeleteTemplateForAll
@@ -2344,21 +1594,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -2388,21 +1623,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesExistsAliasForAll
@@ -2425,21 +1645,6 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesExistsTemplateForAll
@@ -2458,21 +1663,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -2495,21 +1685,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -2536,21 +1711,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesFlushSyncedForAll
@@ -2569,21 +1729,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -2619,21 +1764,6 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public bool? WaitForMerge { get { return Q<bool?>("wait_for_merge"); } set { Q("wait_for_merge", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesGet
@@ -2662,21 +1792,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesGetAliasForAll
@@ -2698,21 +1813,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -2739,21 +1839,6 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesGetMappingForAll
@@ -2775,21 +1860,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -2819,21 +1889,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesGetTemplateForAll
@@ -2853,21 +1908,6 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesGetUpgradeForAll
@@ -2886,21 +1926,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -2927,21 +1952,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesPutAlias
@@ -2957,21 +1967,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -3001,21 +1996,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get { return Q<bool?>("update_all_types"); } set { Q("update_all_types", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesPutSettingsForAll
@@ -3044,21 +2024,6 @@ namespace Elasticsearch.Net
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesPutTemplateForAll
@@ -3081,21 +2046,6 @@ namespace Elasticsearch.Net
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesRecoveryForAll
@@ -3111,21 +2061,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public bool? ActiveOnly { get { return Q<bool?>("active_only"); } set { Q("active_only", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -3145,21 +2080,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -3182,21 +2102,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -3223,21 +2128,6 @@ namespace Elasticsearch.Net
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesShardStoresForAll
@@ -3263,21 +2153,6 @@ namespace Elasticsearch.Net
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesShrink
@@ -3296,21 +2171,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -3340,21 +2200,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get { return Q<bool?>("include_segment_file_sizes"); } set { Q("include_segment_file_sizes", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesUpdateAliasesForAll
@@ -3370,21 +2215,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -3410,21 +2240,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
 		public bool? OnlyAncientSegments { get { return Q<bool?>("only_ancient_segments"); } set { Q("only_ancient_segments", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -3475,21 +2290,6 @@ namespace Elasticsearch.Net
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards { get { return Q<bool?>("all_shards"); } set { Q("all_shards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for Info
@@ -3500,21 +2300,6 @@ namespace Elasticsearch.Net
 	public class RootNodeInfoRequestParameters : RequestParameters<RootNodeInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IngestDeletePipeline
@@ -3531,21 +2316,6 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IngestGetPipeline
@@ -3559,21 +2329,6 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IngestProcessorGrok
@@ -3584,21 +2339,6 @@ namespace Elasticsearch.Net
 	public class GrokProcessorPatternsRequestParameters : RequestParameters<GrokProcessorPatternsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IngestPutPipeline
@@ -3615,21 +2355,6 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for IngestSimulate
@@ -3642,21 +2367,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -3692,21 +2402,6 @@ namespace Elasticsearch.Net
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for Msearch
@@ -3729,21 +2424,6 @@ namespace Elasticsearch.Net
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long? PreFilterShardSize { get { return Q<long?>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for MsearchTemplate
@@ -3762,21 +2442,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get { return Q<long?>("max_concurrent_searches"); } set { Q("max_concurrent_searches", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -3825,21 +2490,6 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for NodesHotThreadsForAll
@@ -3868,21 +2518,6 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for NodesInfoForAll
@@ -3898,21 +2533,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -3948,21 +2568,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get { return Q<bool?>("include_segment_file_sizes"); } set { Q("include_segment_file_sizes", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for NodesUsageForAll
@@ -3979,18 +2584,6 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for Ping
@@ -4001,21 +2594,6 @@ namespace Elasticsearch.Net
 	public class PingRequestParameters : RequestParameters<PingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for PutScript
@@ -4034,21 +2612,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Context name to compile script against</summary>
 		public string Context { get { return Q<string>("context"); } set { Q("context", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4078,18 +2641,6 @@ namespace Elasticsearch.Net
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for ReindexRethrottle
@@ -4102,21 +2653,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond { get { return Q<long?>("requests_per_second"); } set { Q("requests_per_second", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4138,21 +2674,6 @@ namespace Elasticsearch.Net
 	public class ScrollRequestParameters : RequestParameters<ScrollRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for Search
@@ -4238,18 +2759,6 @@ namespace Elasticsearch.Net
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long? PreFilterShardSize { get { return Q<long?>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for SearchShards
@@ -4277,21 +2786,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4333,21 +2827,6 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get { return Q<bool?>("typed_keys"); } set { Q("typed_keys", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for SnapshotCreate
@@ -4363,21 +2842,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4398,21 +2862,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to verify the repository after creation</summary>
 		public bool? Verify { get { return Q<bool?>("verify"); } set { Q("verify", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for SnapshotDelete
@@ -4425,21 +2874,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4456,21 +2890,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4491,21 +2910,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for SnapshotGetRepository
@@ -4521,21 +2925,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4553,21 +2942,6 @@ namespace Elasticsearch.Net
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for SnapshotStatus
@@ -4584,21 +2958,6 @@ namespace Elasticsearch.Net
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for SnapshotVerifyRepository
@@ -4614,21 +2973,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4652,21 +2996,6 @@ namespace Elasticsearch.Net
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get { return Q<string>("parent_task_id"); } set { Q("parent_task_id", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for TasksGet
@@ -4679,21 +3008,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4725,21 +3039,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
 		public GroupBy GroupBy { get { return Q<GroupBy>("group_by"); } set { Q("group_by", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4788,21 +3087,6 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for Update
@@ -4849,21 +3133,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -4977,21 +3246,6 @@ namespace Elasticsearch.Net
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackGraphExplore
@@ -5008,21 +3262,6 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackDeprecationInfo
@@ -5033,21 +3272,6 @@ namespace Elasticsearch.Net
 	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackInfo
@@ -5064,18 +3288,6 @@ namespace Elasticsearch.Net
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get { return Q<string[]>("categories"); } set { Q("categories", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackUsage
@@ -5088,21 +3300,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify timeout for watch write operation</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -5127,21 +3324,6 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackLicensePost
@@ -5154,21 +3336,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get { return Q<bool?>("acknowledge"); } set { Q("acknowledge", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -5186,21 +3353,6 @@ namespace Elasticsearch.Net
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlDeleteDatafeed
@@ -5213,21 +3365,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>True if the datafeed should be forcefully deleted</summary>
 		public bool? Force { get { return Q<bool?>("force"); } set { Q("force", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -5252,21 +3389,6 @@ namespace Elasticsearch.Net
 		///<summary>True if the job should be forcefully deleted</summary>
 		public bool? Force { get { return Q<bool?>("force"); } set { Q("force", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlDeleteModelSnapshot
@@ -5290,21 +3412,6 @@ namespace Elasticsearch.Net
 		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public string SkipTime { get { return Q<string>("skip_time"); } set { Q("skip_time", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlGetBuckets
@@ -5315,21 +3422,6 @@ namespace Elasticsearch.Net
 	public class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlGetCategories
@@ -5340,21 +3432,6 @@ namespace Elasticsearch.Net
 	public class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlGetDatafeeds
@@ -5385,21 +3462,6 @@ namespace Elasticsearch.Net
 	public class GetInfluencersRequestParameters : RequestParameters<GetInfluencersRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlGetJobs
@@ -5430,21 +3492,6 @@ namespace Elasticsearch.Net
 	public class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlGetRecords
@@ -5455,21 +3502,6 @@ namespace Elasticsearch.Net
 	public class GetAnomalyRecordsRequestParameters : RequestParameters<GetAnomalyRecordsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlOpenJob
@@ -5495,21 +3527,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
 		public DateTimeOffset ResetEnd { get { return Q<DateTimeOffset>("reset_end"); } set { Q("reset_end", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -5551,21 +3568,6 @@ namespace Elasticsearch.Net
 	public class RevertModelSnapshotRequestParameters : RequestParameters<RevertModelSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlStartDatafeed
@@ -5576,21 +3578,6 @@ namespace Elasticsearch.Net
 	public class StartDatafeedRequestParameters : RequestParameters<StartDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlStopDatafeed
@@ -5601,21 +3588,6 @@ namespace Elasticsearch.Net
 	public class StopDatafeedRequestParameters : RequestParameters<StopDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlUpdateDatafeed
@@ -5646,21 +3618,6 @@ namespace Elasticsearch.Net
 	public class UpdateModelSnapshotRequestParameters : RequestParameters<UpdateModelSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlValidate
@@ -5671,21 +3628,6 @@ namespace Elasticsearch.Net
 	public class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackMlValidateDetector
@@ -5696,21 +3638,6 @@ namespace Elasticsearch.Net
 	public class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityAuthenticate
@@ -5721,21 +3648,6 @@ namespace Elasticsearch.Net
 	public class AuthenticateRequestParameters : RequestParameters<AuthenticateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityChangePassword
@@ -5748,21 +3660,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -5777,21 +3674,6 @@ namespace Elasticsearch.Net
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public string[] Usernames { get { return Q<string[]>("usernames"); } set { Q("usernames", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityClearCachedRoles
@@ -5802,21 +3684,6 @@ namespace Elasticsearch.Net
 	public class ClearCachedRolesRequestParameters : RequestParameters<ClearCachedRolesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteRole
@@ -5829,21 +3696,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -5858,21 +3710,6 @@ namespace Elasticsearch.Net
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityDeleteUser
@@ -5885,21 +3722,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -5914,21 +3736,6 @@ namespace Elasticsearch.Net
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityEnableUser
@@ -5942,21 +3749,6 @@ namespace Elasticsearch.Net
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetRole
@@ -5967,21 +3759,6 @@ namespace Elasticsearch.Net
 	public class GetRoleRequestParameters : RequestParameters<GetRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetRoleMapping
@@ -5992,21 +3769,6 @@ namespace Elasticsearch.Net
 	public class GetRoleMappingRequestParameters : RequestParameters<GetRoleMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetToken
@@ -6017,21 +3779,6 @@ namespace Elasticsearch.Net
 	public class GetUserAccessTokenRequestParameters : RequestParameters<GetUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityGetUser
@@ -6042,21 +3789,6 @@ namespace Elasticsearch.Net
 	public class GetUserRequestParameters : RequestParameters<GetUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityInvalidateToken
@@ -6067,21 +3799,6 @@ namespace Elasticsearch.Net
 	public class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityPutRole
@@ -6094,21 +3811,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -6123,21 +3825,6 @@ namespace Elasticsearch.Net
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackSecurityPutUser
@@ -6150,21 +3837,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -6179,21 +3851,6 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackWatcherActivateWatch
@@ -6206,21 +3863,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -6235,21 +3877,6 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackWatcherDeleteWatch
@@ -6262,21 +3889,6 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 	}
 	
@@ -6291,21 +3903,6 @@ namespace Elasticsearch.Net
 		///<summary>indicates whether the watch should execute in debug mode</summary>
 		public bool? Debug { get { return Q<bool?>("debug"); } set { Q("debug", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackWatcherGetWatch
@@ -6316,21 +3913,6 @@ namespace Elasticsearch.Net
 	public class GetWatchRequestParameters : RequestParameters<GetWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackWatcherPutWatch
@@ -6347,21 +3929,6 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get { return Q<bool?>("active"); } set { Q("active", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackWatcherRestart
@@ -6372,21 +3939,6 @@ namespace Elasticsearch.Net
 	public class RestartWatcherRequestParameters : RequestParameters<RestartWatcherRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackWatcherStart
@@ -6397,21 +3949,6 @@ namespace Elasticsearch.Net
 	public class StartWatcherRequestParameters : RequestParameters<StartWatcherRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackWatcherStats
@@ -6425,21 +3962,6 @@ namespace Elasticsearch.Net
 		///<summary>Emits stack traces of currently running watches</summary>
 		public bool? EmitStacktraces { get { return Q<bool?>("emit_stacktraces"); } set { Q("emit_stacktraces", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
 	///<summary>Request parameters descriptor for XpackWatcherStop
@@ -6450,20 +3972,5 @@ namespace Elasticsearch.Net
 	public class StopWatcherRequestParameters : RequestParameters<StopWatcherRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 }

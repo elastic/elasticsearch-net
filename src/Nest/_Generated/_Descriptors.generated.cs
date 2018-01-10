@@ -63,16 +63,6 @@ namespace Nest
 		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public BulkDescriptor Pipeline(string pipeline) => Qs("pipeline", pipeline);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public BulkDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public BulkDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public BulkDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public BulkDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public BulkDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -102,16 +92,6 @@ namespace Nest
 		public CatAliasesDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatAliasesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatAliasesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatAliasesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatAliasesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatAliasesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatAliasesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -143,16 +123,6 @@ namespace Nest
 		public CatAllocationDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatAllocationDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatAllocationDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatAllocationDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatAllocationDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatAllocationDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatAllocationDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -188,16 +158,6 @@ namespace Nest
 		public CatCountDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatCountDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatCountDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatCountDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatCountDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatCountDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatCountDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -232,16 +192,6 @@ namespace Nest
 		public CatFielddataDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatFielddataDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatFielddataDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatFielddataDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatFielddataDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatFielddataDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatFielddataDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -264,16 +214,6 @@ namespace Nest
 		public CatHealthDescriptor Ts(bool? ts = true) => Qs("ts", ts);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatHealthDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatHealthDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatHealthDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatHealthDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatHealthDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatHealthDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -284,16 +224,6 @@ namespace Nest
 		public CatHelpDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public CatHelpDescriptor S(params string[] s) => Qs("s", s);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatHelpDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatHelpDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatHelpDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatHelpDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatHelpDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -335,16 +265,6 @@ namespace Nest
 		public CatIndicesDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatIndicesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatIndicesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatIndicesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatIndicesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatIndicesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatIndicesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -365,16 +285,6 @@ namespace Nest
 		public CatMasterDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatMasterDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatMasterDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatMasterDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatMasterDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatMasterDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatMasterDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -395,16 +305,6 @@ namespace Nest
 		public CatNodeAttributesDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatNodeAttributesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatNodeAttributesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatNodeAttributesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatNodeAttributesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatNodeAttributesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatNodeAttributesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -427,16 +327,6 @@ namespace Nest
 		public CatNodesDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatNodesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatNodesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatNodesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatNodesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatNodesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatNodesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -457,16 +347,6 @@ namespace Nest
 		public CatPendingTasksDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatPendingTasksDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatPendingTasksDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatPendingTasksDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatPendingTasksDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatPendingTasksDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatPendingTasksDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -487,16 +367,6 @@ namespace Nest
 		public CatPluginsDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatPluginsDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatPluginsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatPluginsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatPluginsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatPluginsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatPluginsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -532,16 +402,6 @@ namespace Nest
 		public CatRecoveryDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatRecoveryDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatRecoveryDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatRecoveryDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatRecoveryDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatRecoveryDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatRecoveryDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -562,16 +422,6 @@ namespace Nest
 		public CatRepositoriesDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatRepositoriesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatRepositoriesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatRepositoriesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatRepositoriesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatRepositoriesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatRepositoriesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -605,16 +455,6 @@ namespace Nest
 		public CatSegmentsDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatSegmentsDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatSegmentsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatSegmentsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatSegmentsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatSegmentsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatSegmentsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -652,16 +492,6 @@ namespace Nest
 		public CatShardsDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatShardsDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatShardsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatShardsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatShardsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatShardsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatShardsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -691,16 +521,6 @@ namespace Nest
 		public CatSnapshotsDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatSnapshotsDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatSnapshotsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatSnapshotsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatSnapshotsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatSnapshotsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatSnapshotsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -727,16 +547,6 @@ namespace Nest
 		public CatTasksDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatTasksDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatTasksDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatTasksDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatTasksDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatTasksDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatTasksDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -766,16 +576,6 @@ namespace Nest
 		public CatTemplatesDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatTemplatesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatTemplatesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatTemplatesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatTemplatesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatTemplatesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatTemplatesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -807,16 +607,6 @@ namespace Nest
 		public CatThreadPoolDescriptor S(params string[] s) => Qs("s", s);
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatThreadPoolDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatThreadPoolDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatThreadPoolDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatThreadPoolDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatThreadPoolDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatThreadPoolDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -828,17 +618,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public ClearScrollDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClearScrollDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClearScrollDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearScrollDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClearScrollDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
@@ -848,16 +628,6 @@ namespace Nest
 		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? include_yes_decisions = true) => Qs("include_yes_decisions", include_yes_decisions);
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public ClusterAllocationExplainDescriptor IncludeDiskInfo(bool? include_disk_info = true) => Qs("include_disk_info", include_disk_info);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterAllocationExplainDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterAllocationExplainDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterAllocationExplainDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterAllocationExplainDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterAllocationExplainDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -872,16 +642,6 @@ namespace Nest
 		public ClusterGetSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Whether to return all default clusters setting.</summary>
 		public ClusterGetSettingsDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterGetSettingsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterGetSettingsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterGetSettingsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterGetSettingsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterGetSettingsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -921,16 +681,6 @@ namespace Nest
 		public ClusterHealthDescriptor WaitForNoRelocatingShards(bool? wait_for_no_relocating_shards = true) => Qs("wait_for_no_relocating_shards", wait_for_no_relocating_shards);
 		///<summary>Wait until cluster is in a specific state</summary>
 		public ClusterHealthDescriptor WaitForStatus(WaitForStatus wait_for_status) => Qs("wait_for_status", wait_for_status);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterHealthDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterHealthDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterHealthDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterHealthDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterHealthDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -941,16 +691,6 @@ namespace Nest
 		public ClusterPendingTasksDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
 		public ClusterPendingTasksDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterPendingTasksDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterPendingTasksDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterPendingTasksDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterPendingTasksDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterPendingTasksDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -963,33 +703,13 @@ namespace Nest
 		public ClusterPutSettingsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterPutSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterPutSettingsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterPutSettingsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterPutSettingsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterPutSettingsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterPutSettingsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for ClusterRemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
 	public partial class RemoteInfoDescriptor  : RequestDescriptorBase<RemoteInfoDescriptor,RemoteInfoRequestParameters, IRemoteInfoRequest>, IRemoteInfoRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public RemoteInfoDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RemoteInfoDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RemoteInfoDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RemoteInfoDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RemoteInfoDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
@@ -1007,16 +727,6 @@ namespace Nest
 		public ClusterRerouteDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterRerouteDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterRerouteDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterRerouteDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterRerouteDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterRerouteDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterRerouteDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1054,16 +764,6 @@ namespace Nest
 		public ClusterStateDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterStateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterStateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterStateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterStateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterStateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1083,16 +783,6 @@ namespace Nest
 		public ClusterStatsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterStatsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterStatsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterStatsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterStatsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1156,16 +846,6 @@ namespace Nest
 		public CountDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public CountDescriptor<T> TerminateAfter(long? terminate_after) => Qs("terminate_after", terminate_after);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CountDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CountDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CountDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CountDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CountDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1229,16 +909,6 @@ namespace Nest
 		public CreateDescriptor<TDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public CreateDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CreateDescriptor<TDocument> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CreateDescriptor<TDocument> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CreateDescriptor<TDocument> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateDescriptor<TDocument> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CreateDescriptor<TDocument> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1296,16 +966,6 @@ namespace Nest
 		public DeleteDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
 		public DeleteDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1412,16 +1072,6 @@ namespace Nest
 		public DeleteByQueryDescriptor<T> RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public DeleteByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteByQueryDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteByQueryDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteByQueryDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteByQueryDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteByQueryDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1439,16 +1089,6 @@ namespace Nest
 		public DeleteScriptDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteScriptDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteScriptDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteScriptDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteScriptDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteScriptDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteScriptDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1520,16 +1160,6 @@ namespace Nest
 		public DocumentExistsDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
 		public DocumentExistsDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DocumentExistsDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DocumentExistsDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DocumentExistsDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DocumentExistsDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DocumentExistsDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1597,16 +1227,6 @@ namespace Nest
 		public SourceExistsDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
 		public SourceExistsDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SourceExistsDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SourceExistsDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SourceExistsDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SourceExistsDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SourceExistsDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1678,16 +1298,6 @@ namespace Nest
 		public ExplainDescriptor<TDocument> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ExplainDescriptor<TDocument> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ExplainDescriptor<TDocument> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ExplainDescriptor<TDocument> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ExplainDescriptor<TDocument> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ExplainDescriptor<TDocument> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1719,16 +1329,6 @@ namespace Nest
 		public FieldCapabilitiesDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public FieldCapabilitiesDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public FieldCapabilitiesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public FieldCapabilitiesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public FieldCapabilitiesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FieldCapabilitiesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public FieldCapabilitiesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1800,16 +1400,6 @@ namespace Nest
 		public GetDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
 		public GetDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1823,17 +1413,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public GetScriptDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetScriptDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetScriptDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetScriptDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetScriptDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
@@ -1900,16 +1480,6 @@ namespace Nest
 		public SourceDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
 		public SourceDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SourceDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SourceDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SourceDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SourceDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SourceDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -1977,16 +1547,6 @@ namespace Nest
 		public IndexDescriptor<TDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public IndexDescriptor<TDocument> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public IndexDescriptor<TDocument> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public IndexDescriptor<TDocument> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexDescriptor<TDocument> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IndexDescriptor<TDocument> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2009,16 +1569,6 @@ namespace Nest
 		public AnalyzeDescriptor PreferLocal(bool? prefer_local = true) => Qs("prefer_local", prefer_local);
 		///<summary>Format of the output</summary>
 		public AnalyzeDescriptor Format(Format format) => Qs("format", format);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public AnalyzeDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public AnalyzeDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public AnalyzeDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AnalyzeDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public AnalyzeDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2060,16 +1610,6 @@ namespace Nest
 		public ClearCacheDescriptor RequestCache(bool? request_cache = true) => Qs("request_cache", request_cache);
 		///<summary>Clear request cache</summary>
 		public ClearCacheDescriptor Request(bool? request = true) => Qs("request", request);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClearCacheDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClearCacheDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClearCacheDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCacheDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClearCacheDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2102,16 +1642,6 @@ namespace Nest
 		public CloseIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CloseIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CloseIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CloseIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CloseIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CloseIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2139,16 +1669,6 @@ namespace Nest
 		public CreateIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public CreateIndexDescriptor UpdateAllTypes(bool? update_all_types = true) => Qs("update_all_types", update_all_types);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CreateIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CreateIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CreateIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CreateIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2181,16 +1701,6 @@ namespace Nest
 		public DeleteIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public DeleteIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2219,16 +1729,6 @@ namespace Nest
 		public DeleteAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteAliasDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteAliasDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteAliasDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteAliasDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteAliasDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteAliasDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2246,16 +1746,6 @@ namespace Nest
 		public DeleteIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteIndexTemplateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteIndexTemplateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteIndexTemplateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteIndexTemplateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteIndexTemplateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteIndexTemplateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2290,16 +1780,6 @@ namespace Nest
 		public IndexExistsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public IndexExistsDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public IndexExistsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public IndexExistsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public IndexExistsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexExistsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IndexExistsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2333,16 +1813,6 @@ namespace Nest
 		public AliasExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public AliasExistsDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public AliasExistsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public AliasExistsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public AliasExistsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AliasExistsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public AliasExistsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2362,16 +1832,6 @@ namespace Nest
 		public IndexTemplateExistsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexTemplateExistsDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public IndexTemplateExistsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public IndexTemplateExistsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public IndexTemplateExistsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexTemplateExistsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IndexTemplateExistsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2413,16 +1873,6 @@ namespace Nest
 		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public TypeExistsDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public TypeExistsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public TypeExistsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public TypeExistsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public TypeExistsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public TypeExistsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2454,16 +1904,6 @@ namespace Nest
 		public FlushDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public FlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public FlushDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public FlushDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public FlushDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FlushDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public FlushDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2491,16 +1931,6 @@ namespace Nest
 		public SyncedFlushDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public SyncedFlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SyncedFlushDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SyncedFlushDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SyncedFlushDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SyncedFlushDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SyncedFlushDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2538,16 +1968,6 @@ namespace Nest
 		public ForceMergeDescriptor OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public ForceMergeDescriptor WaitForMerge(bool? wait_for_merge = true) => Qs("wait_for_merge", wait_for_merge);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ForceMergeDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ForceMergeDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ForceMergeDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ForceMergeDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ForceMergeDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2582,16 +2002,6 @@ namespace Nest
 		public GetIndexDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public GetIndexDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2625,16 +2035,6 @@ namespace Nest
 		public GetAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetAliasDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetAliasDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetAliasDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetAliasDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetAliasDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetAliasDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2678,16 +2078,6 @@ namespace Nest
 		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetFieldMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetFieldMappingDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetFieldMappingDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetFieldMappingDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetFieldMappingDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetFieldMappingDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2727,16 +2117,6 @@ namespace Nest
 		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetMappingDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetMappingDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetMappingDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetMappingDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetMappingDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2774,16 +2154,6 @@ namespace Nest
 		public GetIndexSettingsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public GetIndexSettingsDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetIndexSettingsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetIndexSettingsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetIndexSettingsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexSettingsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetIndexSettingsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2805,16 +2175,6 @@ namespace Nest
 		public GetIndexTemplateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexTemplateDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetIndexTemplateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetIndexTemplateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetIndexTemplateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexTemplateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetIndexTemplateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2842,16 +2202,6 @@ namespace Nest
 		public UpgradeStatusDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public UpgradeStatusDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpgradeStatusDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpgradeStatusDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpgradeStatusDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpgradeStatusDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2884,16 +2234,6 @@ namespace Nest
 		public OpenIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public OpenIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public OpenIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public OpenIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public OpenIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public OpenIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2922,16 +2262,6 @@ namespace Nest
 		public PutAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
 		public PutAliasDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutAliasDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutAliasDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutAliasDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutAliasDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutAliasDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -2973,16 +2303,6 @@ namespace Nest
 		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public PutMappingDescriptor<T> UpdateAllTypes(bool? update_all_types = true) => Qs("update_all_types", update_all_types);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutMappingDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutMappingDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutMappingDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutMappingDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutMappingDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3016,16 +2336,6 @@ namespace Nest
 		public UpdateIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
 		public UpdateIndexSettingsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateIndexSettingsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateIndexSettingsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateIndexSettingsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateIndexSettingsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateIndexSettingsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3047,16 +2357,6 @@ namespace Nest
 		public PutIndexTemplateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Return settings in flat format (default: false)</summary>
 		public PutIndexTemplateDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutIndexTemplateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutIndexTemplateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutIndexTemplateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutIndexTemplateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutIndexTemplateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3082,16 +2382,6 @@ namespace Nest
 		public RecoveryStatusDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public RecoveryStatusDescriptor ActiveOnly(bool? active_only = true) => Qs("active_only", active_only);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RecoveryStatusDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RecoveryStatusDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RecoveryStatusDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RecoveryStatusDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RecoveryStatusDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3119,16 +2409,6 @@ namespace Nest
 		public RefreshDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public RefreshDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RefreshDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RefreshDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RefreshDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RefreshDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RefreshDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3154,16 +2434,6 @@ namespace Nest
 		public RolloverIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public RolloverIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RolloverIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RolloverIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RolloverIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RolloverIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RolloverIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3195,16 +2465,6 @@ namespace Nest
 		public SegmentsDescriptor OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public SegmentsDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SegmentsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SegmentsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SegmentsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SegmentsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SegmentsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3236,16 +2496,6 @@ namespace Nest
 		public IndicesShardStoresDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
 		///<summary>TODO: ?</summary>
 		public IndicesShardStoresDescriptor OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public IndicesShardStoresDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public IndicesShardStoresDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public IndicesShardStoresDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndicesShardStoresDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IndicesShardStoresDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3273,16 +2523,6 @@ namespace Nest
 		public ShrinkIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public ShrinkIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ShrinkIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ShrinkIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ShrinkIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ShrinkIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ShrinkIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3326,16 +2566,6 @@ namespace Nest
 		public IndicesStatsDescriptor Level(Level level) => Qs("level", level);
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public IndicesStatsDescriptor IncludeSegmentFileSizes(bool? include_segment_file_sizes = true) => Qs("include_segment_file_sizes", include_segment_file_sizes);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public IndicesStatsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public IndicesStatsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public IndicesStatsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndicesStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IndicesStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3346,16 +2576,6 @@ namespace Nest
 		public BulkAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
 		public BulkAliasDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public BulkAliasDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public BulkAliasDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public BulkAliasDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public BulkAliasDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public BulkAliasDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3387,16 +2607,6 @@ namespace Nest
 		public UpgradeDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
 		public UpgradeDescriptor OnlyAncientSegments(bool? only_ancient_segments = true) => Qs("only_ancient_segments", only_ancient_segments);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public UpgradeDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpgradeDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpgradeDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpgradeDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpgradeDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3454,33 +2664,13 @@ namespace Nest
 		public ValidateQueryDescriptor<T> Rewrite(bool? rewrite = true) => Qs("rewrite", rewrite);
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public ValidateQueryDescriptor<T> AllShards(bool? all_shards = true) => Qs("all_shards", all_shards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ValidateQueryDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ValidateQueryDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ValidateQueryDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateQueryDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ValidateQueryDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class RootNodeInfoDescriptor  : RequestDescriptorBase<RootNodeInfoDescriptor,RootNodeInfoRequestParameters, IRootNodeInfoRequest>, IRootNodeInfoRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public RootNodeInfoDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RootNodeInfoDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RootNodeInfoDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RootNodeInfoDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RootNodeInfoDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
@@ -3497,16 +2687,6 @@ namespace Nest
 		public DeletePipelineDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Explicit operation timeout</summary>
 		public DeletePipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeletePipelineDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeletePipelineDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeletePipelineDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeletePipelineDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeletePipelineDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3524,33 +2704,13 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetPipelineDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetPipelineDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetPipelineDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetPipelineDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetPipelineDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetPipelineDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class GrokProcessorPatternsDescriptor  : RequestDescriptorBase<GrokProcessorPatternsDescriptor,GrokProcessorPatternsRequestParameters, IGrokProcessorPatternsRequest>, IGrokProcessorPatternsRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public GrokProcessorPatternsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GrokProcessorPatternsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GrokProcessorPatternsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GrokProcessorPatternsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GrokProcessorPatternsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
@@ -3567,16 +2727,6 @@ namespace Nest
 		public PutPipelineDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Explicit operation timeout</summary>
 		public PutPipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutPipelineDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutPipelineDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutPipelineDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutPipelineDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutPipelineDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3594,16 +2744,6 @@ namespace Nest
 
 			///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public SimulatePipelineDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SimulatePipelineDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SimulatePipelineDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SimulatePipelineDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SimulatePipelineDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SimulatePipelineDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3653,16 +2793,6 @@ namespace Nest
 		public MultiGetDescriptor SourceInclude(Fields source_include) => Qs("_source_include", source_include);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
-		///<summary>Pretty format the returned JSON response.</summary>
-		public MultiGetDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public MultiGetDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public MultiGetDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiGetDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public MultiGetDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3702,16 +2832,6 @@ namespace Nest
 		public MultiSearchDescriptor TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public MultiSearchDescriptor PreFilterShardSize(long? pre_filter_shard_size) => Qs("pre_filter_shard_size", pre_filter_shard_size);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public MultiSearchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public MultiSearchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public MultiSearchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiSearchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public MultiSearchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3749,16 +2869,6 @@ namespace Nest
 		public MultiSearchTemplateDescriptor TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public MultiSearchTemplateDescriptor MaxConcurrentSearches(long? max_concurrent_searches) => Qs("max_concurrent_searches", max_concurrent_searches);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public MultiSearchTemplateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public MultiSearchTemplateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public MultiSearchTemplateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiSearchTemplateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public MultiSearchTemplateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3817,16 +2927,6 @@ namespace Nest
 		public MultiTermVectorsDescriptor Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
 		public MultiTermVectorsDescriptor VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public MultiTermVectorsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public MultiTermVectorsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public MultiTermVectorsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiTermVectorsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public MultiTermVectorsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3854,16 +2954,6 @@ namespace Nest
 		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type) => Qs("type", thread_type);
 		///<summary>Explicit operation timeout</summary>
 		public NodesHotThreadsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public NodesHotThreadsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public NodesHotThreadsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public NodesHotThreadsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesHotThreadsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public NodesHotThreadsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3887,16 +2977,6 @@ namespace Nest
 		public NodesInfoDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
 		///<summary>Explicit operation timeout</summary>
 		public NodesInfoDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public NodesInfoDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public NodesInfoDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public NodesInfoDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesInfoDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public NodesInfoDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3942,16 +3022,6 @@ namespace Nest
 		public NodesStatsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public NodesStatsDescriptor IncludeSegmentFileSizes(bool? include_segment_file_sizes = true) => Qs("include_segment_file_sizes", include_segment_file_sizes);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public NodesStatsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public NodesStatsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public NodesStatsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public NodesStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -3975,31 +3045,13 @@ namespace Nest
 		public NodesUsageDescriptor Human(bool? human = true) => Qs("human", human);
 		///<summary>Explicit operation timeout</summary>
 		public NodesUsageDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public NodesUsageDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public NodesUsageDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesUsageDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public NodesUsageDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingDescriptor  : RequestDescriptorBase<PingDescriptor,PingRequestParameters, IPingRequest>, IPingRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public PingDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PingDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PingDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PingDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PingDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
@@ -4020,16 +3072,6 @@ namespace Nest
 		public PutScriptDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
 		public PutScriptDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutScriptDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutScriptDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutScriptDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutScriptDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutScriptDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4048,14 +3090,6 @@ namespace Nest
 		public ReindexOnServerDescriptor RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public ReindexOnServerDescriptor Slices(long? slices) => Qs("slices", slices);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ReindexOnServerDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ReindexOnServerDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ReindexOnServerDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ReindexOnServerDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4073,16 +3107,6 @@ namespace Nest
 
 			///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public ReindexRethrottleDescriptor RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ReindexRethrottleDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ReindexRethrottleDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ReindexRethrottleDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ReindexRethrottleDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ReindexRethrottleDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4109,17 +3133,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public ScrollDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ScrollDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ScrollDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ScrollDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ScrollDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
@@ -4205,14 +3219,6 @@ namespace Nest
 		public SearchDescriptor<T> MaxConcurrentShardRequests(long? max_concurrent_shard_requests) => Qs("max_concurrent_shard_requests", max_concurrent_shard_requests);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public SearchDescriptor<T> PreFilterShardSize(long? pre_filter_shard_size) => Qs("pre_filter_shard_size", pre_filter_shard_size);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SearchDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SearchDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SearchDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SearchDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4252,16 +3258,6 @@ namespace Nest
 		public SearchShardsDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SearchShardsDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SearchShardsDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SearchShardsDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SearchShardsDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SearchShardsDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4319,16 +3315,6 @@ namespace Nest
 		public SearchTemplateDescriptor<T> Profile(bool? profile = true) => Qs("profile", profile);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public SearchTemplateDescriptor<T> TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SearchTemplateDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SearchTemplateDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SearchTemplateDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SearchTemplateDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SearchTemplateDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4348,16 +3334,6 @@ namespace Nest
 		public SnapshotDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public SnapshotDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SnapshotDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SnapshotDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SnapshotDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4377,16 +3353,6 @@ namespace Nest
 		public CreateRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Whether to verify the repository after creation</summary>
 		public CreateRepositoryDescriptor Verify(bool? verify = true) => Qs("verify", verify);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CreateRepositoryDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CreateRepositoryDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CreateRepositoryDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateRepositoryDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CreateRepositoryDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4404,16 +3370,6 @@ namespace Nest
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteSnapshotDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteSnapshotDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteSnapshotDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteSnapshotDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteSnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteSnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4431,16 +3387,6 @@ namespace Nest
 		public DeleteRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Explicit operation timeout</summary>
 		public DeleteRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteRepositoryDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteRepositoryDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteRepositoryDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRepositoryDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteRepositoryDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4462,16 +3408,6 @@ namespace Nest
 		public GetSnapshotDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public GetSnapshotDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetSnapshotDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetSnapshotDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetSnapshotDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetSnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetSnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4491,16 +3427,6 @@ namespace Nest
 		public GetRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetRepositoryDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetRepositoryDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetRepositoryDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetRepositoryDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRepositoryDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetRepositoryDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4520,16 +3446,6 @@ namespace Nest
 		public RestoreDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public RestoreDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RestoreDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RestoreDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RestoreDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RestoreDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RestoreDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4553,16 +3469,6 @@ namespace Nest
 		public SnapshotStatusDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public SnapshotStatusDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SnapshotStatusDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SnapshotStatusDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SnapshotStatusDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SnapshotStatusDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SnapshotStatusDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4580,16 +3486,6 @@ namespace Nest
 		public VerifyRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Explicit operation timeout</summary>
 		public VerifyRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public VerifyRepositoryDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public VerifyRepositoryDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public VerifyRepositoryDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public VerifyRepositoryDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public VerifyRepositoryDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4613,16 +3509,6 @@ namespace Nest
 		public CancelTasksDescriptor ParentNode(string parent_node) => Qs("parent_node", parent_node);
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public CancelTasksDescriptor ParentTaskId(string parent_task_id) => Qs("parent_task_id", parent_task_id);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CancelTasksDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CancelTasksDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CancelTasksDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CancelTasksDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CancelTasksDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4640,16 +3526,6 @@ namespace Nest
 
 			///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public GetTaskDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetTaskDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetTaskDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetTaskDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetTaskDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetTaskDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4670,16 +3546,6 @@ namespace Nest
 		public ListTasksDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
 		public ListTasksDescriptor GroupBy(GroupBy group_by) => Qs("group_by", group_by);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ListTasksDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ListTasksDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ListTasksDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ListTasksDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ListTasksDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4751,16 +3617,6 @@ namespace Nest
 		public TermVectorsDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
 		public TermVectorsDescriptor<TDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public TermVectorsDescriptor<TDocument> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public TermVectorsDescriptor<TDocument> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public TermVectorsDescriptor<TDocument> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public TermVectorsDescriptor<TDocument> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public TermVectorsDescriptor<TDocument> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4828,16 +3684,6 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -4948,16 +3794,6 @@ namespace Nest
 		public UpdateByQueryDescriptor<T> RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public UpdateByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateByQueryDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateByQueryDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateByQueryDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateByQueryDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateByQueryDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5000,16 +3836,6 @@ namespace Nest
 		public GraphExploreDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
 		public GraphExploreDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GraphExploreDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GraphExploreDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GraphExploreDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GraphExploreDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GraphExploreDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5028,17 +3854,7 @@ namespace Nest
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public DeprecationInfoDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public DeprecationInfoDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeprecationInfoDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeprecationInfoDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeprecationInfoDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeprecationInfoDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
@@ -5048,14 +3864,6 @@ namespace Nest
 		public XPackInfoDescriptor Human(bool? human = true) => Qs("human", human);
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public XPackInfoDescriptor Categories(params string[] categories) => Qs("categories", categories);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public XPackInfoDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public XPackInfoDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XPackInfoDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XPackInfoDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5064,16 +3872,6 @@ namespace Nest
 	{ 
 					///<summary>Specify timeout for watch write operation</summary>
 		public XPackUsageDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public XPackUsageDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public XPackUsageDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public XPackUsageDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XPackUsageDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XPackUsageDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5088,16 +3886,6 @@ namespace Nest
 	{ 
 					///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetLicenseDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetLicenseDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetLicenseDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetLicenseDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetLicenseDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetLicenseDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5106,16 +3894,6 @@ namespace Nest
 	{ 
 					///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public PostLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PostLicenseDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PostLicenseDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PostLicenseDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PostLicenseDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PostLicenseDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5133,16 +3911,6 @@ namespace Nest
 		public CloseJobDescriptor Force(bool? force = true) => Qs("force", force);
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public CloseJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CloseJobDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CloseJobDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CloseJobDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CloseJobDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CloseJobDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5158,16 +3926,6 @@ namespace Nest
 
 				///<summary>True if the datafeed should be forcefully deleted</summary>
 		public DeleteDatafeedDescriptor Force(bool? force = true) => Qs("force", force);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteDatafeedDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteDatafeedDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteDatafeedDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteDatafeedDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteDatafeedDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5189,16 +3947,6 @@ namespace Nest
 
 				///<summary>True if the job should be forcefully deleted</summary>
 		public DeleteJobDescriptor Force(bool? force = true) => Qs("force", force);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteJobDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteJobDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteJobDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteJobDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteJobDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5229,16 +3977,6 @@ namespace Nest
 
 				///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public FlushJobDescriptor SkipTime(string skip_time) => Qs("skip_time", skip_time);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public FlushJobDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public FlushJobDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public FlushJobDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FlushJobDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public FlushJobDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5252,17 +3990,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public GetBucketsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetBucketsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetBucketsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetBucketsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetBucketsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
@@ -5279,17 +4007,7 @@ namespace Nest
 			///<summary>The identifier of the category definition of interest</summary>
 		public GetCategoriesDescriptor CategoryId(CategoryId categoryId) => Assign(a=>a.RouteValues.Optional("category_id", categoryId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetCategoriesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetCategoriesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetCategoriesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetCategoriesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetCategoriesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackMlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
@@ -5332,17 +4050,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public GetInfluencersDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetInfluencersDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetInfluencersDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetInfluencersDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetInfluencersDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
@@ -5389,17 +4097,7 @@ namespace Nest
 			///<summary>The ID of the snapshot to fetch</summary>
 		public GetModelSnapshotsDescriptor SnapshotId(Id snapshotId) => Assign(a=>a.RouteValues.Optional("snapshot_id", snapshotId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetModelSnapshotsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetModelSnapshotsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetModelSnapshotsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetModelSnapshotsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetModelSnapshotsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackMlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
@@ -5412,17 +4110,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public GetAnomalyRecordsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetAnomalyRecordsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetAnomalyRecordsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetAnomalyRecordsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetAnomalyRecordsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
@@ -5452,16 +4140,6 @@ namespace Nest
 		public PostJobDataDescriptor ResetStart(DateTimeOffset reset_start) => Qs("reset_start", reset_start);
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
 		public PostJobDataDescriptor ResetEnd(DateTimeOffset reset_end) => Qs("reset_end", reset_end);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PostJobDataDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PostJobDataDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PostJobDataDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PostJobDataDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PostJobDataDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5516,17 +4194,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public RevertModelSnapshotDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RevertModelSnapshotDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RevertModelSnapshotDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RevertModelSnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RevertModelSnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
@@ -5539,17 +4207,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public StartDatafeedDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public StartDatafeedDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public StartDatafeedDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StartDatafeedDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public StartDatafeedDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
@@ -5562,17 +4220,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public StopDatafeedDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public StopDatafeedDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public StopDatafeedDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StopDatafeedDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public StopDatafeedDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
@@ -5613,65 +4261,25 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateModelSnapshotDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateModelSnapshotDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateModelSnapshotDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateModelSnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateModelSnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackMlValidate <pre></pre></summary>
 	public partial class ValidateJobDescriptor<T>  : RequestDescriptorBase<ValidateJobDescriptor<T>,ValidateJobRequestParameters, IValidateJobRequest>, IValidateJobRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public ValidateJobDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ValidateJobDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ValidateJobDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateJobDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ValidateJobDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackMlValidateDetector <pre></pre></summary>
 	public partial class ValidateDetectorDescriptor<T>  : RequestDescriptorBase<ValidateDetectorDescriptor<T>,ValidateDetectorRequestParameters, IValidateDetectorRequest>, IValidateDetectorRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public ValidateDetectorDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ValidateDetectorDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ValidateDetectorDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateDetectorDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ValidateDetectorDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public AuthenticateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public AuthenticateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public AuthenticateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AuthenticateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public AuthenticateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
@@ -5688,16 +4296,6 @@ namespace Nest
 
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public ChangePasswordDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ChangePasswordDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ChangePasswordDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ChangePasswordDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ChangePasswordDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ChangePasswordDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5713,16 +4311,6 @@ namespace Nest
 
 				///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public ClearCachedRealmsDescriptor Usernames(params string[] usernames) => Qs("usernames", usernames);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClearCachedRealmsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClearCachedRealmsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClearCachedRealmsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCachedRealmsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClearCachedRealmsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5736,17 +4324,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public ClearCachedRolesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClearCachedRolesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClearCachedRolesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCachedRolesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClearCachedRolesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role</pre></summary>
@@ -5761,16 +4339,6 @@ namespace Nest
 
 				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteRoleDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteRoleDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteRoleDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteRoleDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRoleDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteRoleDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5786,16 +4354,6 @@ namespace Nest
 
 				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteRoleMappingDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteRoleMappingDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteRoleMappingDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteRoleMappingDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRoleMappingDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteRoleMappingDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5811,16 +4369,6 @@ namespace Nest
 
 				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteUserDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteUserDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteUserDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteUserDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteUserDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5838,16 +4386,6 @@ namespace Nest
 
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DisableUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DisableUserDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DisableUserDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DisableUserDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DisableUserDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DisableUserDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5865,16 +4403,6 @@ namespace Nest
 
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public EnableUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public EnableUserDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public EnableUserDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public EnableUserDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public EnableUserDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public EnableUserDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -5890,17 +4418,7 @@ namespace Nest
 			///<summary>Role name</summary>
 		public GetRoleDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetRoleDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetRoleDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetRoleDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRoleDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetRoleDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
@@ -5915,33 +4433,13 @@ namespace Nest
 			///<summary>Role-Mapping name</summary>
 		public GetRoleMappingDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetRoleMappingDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetRoleMappingDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetRoleMappingDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRoleMappingDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetRoleMappingDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token</pre></summary>
 	public partial class GetUserAccessTokenDescriptor  : RequestDescriptorBase<GetUserAccessTokenDescriptor,GetUserAccessTokenRequestParameters, IGetUserAccessTokenRequest>, IGetUserAccessTokenRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public GetUserAccessTokenDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetUserAccessTokenDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetUserAccessTokenDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetUserAccessTokenDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetUserAccessTokenDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user</pre></summary>
@@ -5956,33 +4454,13 @@ namespace Nest
 			///<summary>A comma-separated list of usernames</summary>
 		public GetUserDescriptor Username(Names username) => Assign(a=>a.RouteValues.Optional("username", username));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetUserDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetUserDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetUserDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetUserDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetUserDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+		
 	}
 	
 	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token</pre></summary>
 	public partial class InvalidateUserAccessTokenDescriptor  : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor,InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public InvalidateUserAccessTokenDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public InvalidateUserAccessTokenDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public InvalidateUserAccessTokenDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public InvalidateUserAccessTokenDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public InvalidateUserAccessTokenDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role</pre></summary>
@@ -5997,16 +4475,6 @@ namespace Nest
 
 				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutRoleDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutRoleDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutRoleDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutRoleDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutRoleDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutRoleDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -6022,16 +4490,6 @@ namespace Nest
 
 				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutRoleMappingDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutRoleMappingDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutRoleMappingDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutRoleMappingDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutRoleMappingDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutRoleMappingDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -6047,16 +4505,6 @@ namespace Nest
 
 				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutUserDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutUserDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutUserDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutUserDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutUserDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -6076,16 +4524,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public AcknowledgeWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public AcknowledgeWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public AcknowledgeWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public AcknowledgeWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AcknowledgeWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public AcknowledgeWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -6101,16 +4539,6 @@ namespace Nest
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
 		public ActivateWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ActivateWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ActivateWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ActivateWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ActivateWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ActivateWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -6126,16 +4554,6 @@ namespace Nest
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeactivateWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeactivateWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeactivateWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeactivateWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeactivateWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeactivateWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -6151,16 +4569,6 @@ namespace Nest
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -6178,16 +4586,6 @@ namespace Nest
 
 			///<summary>indicates whether the watch should execute in debug mode</summary>
 		public ExecuteWatchDescriptor Debug(bool? debug = true) => Qs("debug", debug);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ExecuteWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ExecuteWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ExecuteWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ExecuteWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ExecuteWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
@@ -6201,17 +4599,7 @@ namespace Nest
 		{}
 		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public GetWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+			
 	}
 	
 	///<summary>descriptor for XpackWatcherPutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
@@ -6228,49 +4616,19 @@ namespace Nest
 		public PutWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public PutWatchDescriptor Active(bool? active = true) => Qs("active", active);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
 	public partial class RestartWatcherDescriptor  : RequestDescriptorBase<RestartWatcherDescriptor,RestartWatcherRequestParameters, IRestartWatcherRequest>, IRestartWatcherRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public RestartWatcherDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RestartWatcherDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RestartWatcherDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RestartWatcherDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RestartWatcherDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackWatcherStart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public partial class StartWatcherDescriptor  : RequestDescriptorBase<StartWatcherDescriptor,StartWatcherRequestParameters, IStartWatcherRequest>, IStartWatcherRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public StartWatcherDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public StartWatcherDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public StartWatcherDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StartWatcherDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public StartWatcherDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 	
 	///<summary>descriptor for XpackWatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
@@ -6287,32 +4645,12 @@ namespace Nest
 
 			///<summary>Emits stack traces of currently running watches</summary>
 		public WatcherStatsDescriptor EmitStacktraces(bool? emit_stacktraces = true) => Qs("emit_stacktraces", emit_stacktraces);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public WatcherStatsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public WatcherStatsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public WatcherStatsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public WatcherStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public WatcherStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherStop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 	public partial class StopWatcherDescriptor  : RequestDescriptorBase<StopWatcherDescriptor,StopWatcherRequestParameters, IStopWatcherRequest>, IStopWatcherRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public StopWatcherDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public StopWatcherDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public StopWatcherDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StopWatcherDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public StopWatcherDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
-	
+				
 	}
 }

@@ -1,12 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CsQuery.ExtensionMethods.Internal;
 
 namespace ApiGenerator.Domain
 {
 	public class ApiQueryParameters
 	{
 		public string OriginalQueryStringParamName { get; set; }
+
+		public string CsharpHighLevelType => this.HighLevelType(this.OriginalQueryStringParamName).Replace("params ", "");
+		public string CsharpName
+		{
+			get
+			{
+				var name = this.OriginalQueryStringParamName;
+				if (name.IsNullOrEmpty()) return "UNKNOWN";
+
+            	var cased = name.ToPascalCase();
+				switch (cased)
+				{
+					case "Type":
+					case "Index":
+					case "Source":
+					case "Script":
+						return cased + "QueryString";
+					default:
+						return cased;
+				}
+			}
+		}
+
+
 		public string DeprecatedInFavorOf { get; set; }
 		public string Type { get; set; }
 		public string Description { get; set; }

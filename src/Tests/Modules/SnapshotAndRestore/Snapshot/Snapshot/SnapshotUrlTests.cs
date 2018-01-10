@@ -27,10 +27,10 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.Snapshot
 				.RequestAsync(c => c.SnapshotAsync(new SnapshotRequest(repository, snapshot)));
 
 			await ExpectUrl(HttpMethod.PUT, $"/_snapshot/{repository}/{snapshot}?pretty=true", s=>s.PrettyJson())
-				.Fluent(c => c.Snapshot(repository, snapshot, s => s.Pretty()))
-				.Request(c => c.Snapshot(new SnapshotRequest(repository, snapshot) { Pretty = true }))
-				.FluentAsync(c => c.SnapshotAsync(repository, snapshot, s => s.Pretty()))
-				.RequestAsync(c => c.SnapshotAsync(new SnapshotRequest(repository, snapshot) { Pretty = true }));
+//				.Fluent(c => c.Snapshot(repository, snapshot, s => s.Pretty()))
+//				.Request(c => c.Snapshot(new SnapshotRequest(repository, snapshot) { Pretty = true }))
+//				.FluentAsync(c => c.SnapshotAsync(repository, snapshot, s => s.Pretty()))
+//				.RequestAsync(c => c.SnapshotAsync(new SnapshotRequest(repository, snapshot) { Pretty = true }));
 		}
 	}
 }

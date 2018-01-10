@@ -25,5 +25,10 @@ namespace ApiGenerator.Overrides
 		{
 			{ "parent", "the parent parameter has been deprecated from elasticsearch, please use routing instead directly."}
 		};
+
+		public override IEnumerable<string> SkipQueryStringParams { get; } = new[]
+		{
+			"source" // allows the body to be specified as a request param, we do not want to advertise this with a strongly typed method
+		};
 	}
 }

@@ -13,8 +13,12 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	public abstract partial class RequestBase<TParameters>
+	public abstract partial class PlainRequestBase<TParameters>
 	{
+		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
+		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
+		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
+		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 	}
 
 	
@@ -47,21 +51,6 @@ namespace Nest
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -83,21 +72,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -139,21 +113,6 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -184,21 +143,6 @@ namespace Nest
 		///<summary>Format of the output</summary>
 		public Format Format { get { return Q<Format>("format"); } set { Q("format", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -210,22 +154,7 @@ namespace Nest
 	public partial class AuthenticateRequest  : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
 		protected IAuthenticateRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters> 
@@ -241,21 +170,6 @@ namespace Nest
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -323,21 +237,6 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -373,21 +272,6 @@ namespace Nest
 		
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get { return Q<string>("parent_task_id"); } set { Q("parent_task_id", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -433,21 +317,6 @@ namespace Nest
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -497,21 +366,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -556,21 +410,6 @@ namespace Nest
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -620,21 +459,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -670,21 +494,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -701,21 +510,6 @@ namespace Nest
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -771,21 +565,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -818,21 +597,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -864,21 +628,6 @@ namespace Nest
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -915,21 +664,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -962,21 +696,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1008,21 +727,6 @@ namespace Nest
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1069,21 +773,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1115,21 +804,6 @@ namespace Nest
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1172,21 +846,6 @@ namespace Nest
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1236,21 +895,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1296,21 +940,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1351,21 +980,6 @@ namespace Nest
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1411,21 +1025,6 @@ namespace Nest
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1475,21 +1074,6 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1517,21 +1101,6 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1554,21 +1123,6 @@ namespace Nest
 			///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public string[] Usernames { get { return Q<string[]>("usernames"); } set { Q("usernames", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1588,22 +1142,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParameters> 
@@ -1654,21 +1193,6 @@ namespace Nest
 		///<summary>Clear request cache</summary>
 		public bool? Request { get { return Q<bool?>("request"); } set { Q("request", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1680,22 +1204,7 @@ namespace Nest
 	public partial class ClearScrollRequest  : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters> 
@@ -1729,21 +1238,6 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1769,21 +1263,6 @@ namespace Nest
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1800,21 +1279,6 @@ namespace Nest
 		
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public bool? IncludeDiskInfo { get { return Q<bool?>("include_disk_info"); } set { Q("include_disk_info", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1838,21 +1302,6 @@ namespace Nest
 		
 		///<summary>Whether to return all default clusters setting.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1905,21 +1354,6 @@ namespace Nest
 		///<summary>Wait until cluster is in a specific state</summary>
 		public WaitForStatus WaitForStatus { get { return Q<WaitForStatus>("wait_for_status"); } set { Q("wait_for_status", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1936,21 +1370,6 @@ namespace Nest
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1971,21 +1390,6 @@ namespace Nest
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2015,21 +1419,6 @@ namespace Nest
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2082,21 +1471,6 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2126,21 +1500,6 @@ namespace Nest
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2220,21 +1579,6 @@ namespace Nest
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get { return Q<long?>("terminate_after"); } set { Q("terminate_after", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountRequest  : PlainRequestBase<CountRequestParameters>, ICountRequest
@@ -2305,21 +1649,6 @@ namespace Nest
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get { return Q<long?>("terminate_after"); } set { Q("terminate_after", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2351,21 +1680,6 @@ namespace Nest
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get { return Q<bool?>("update_all_types"); } set { Q("update_all_types", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2393,21 +1707,6 @@ namespace Nest
 		
 		///<summary>Whether to verify the repository after creation</summary>
 		public bool? Verify { get { return Q<bool?>("verify"); } set { Q("verify", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2477,21 +1776,6 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2513,21 +1797,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2556,21 +1825,6 @@ namespace Nest
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2702,21 +1956,6 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest  : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
@@ -2839,21 +2078,6 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2875,21 +2099,6 @@ namespace Nest
 
 			///<summary>True if the datafeed should be forcefully deleted</summary>
 		public bool? Force { get { return Q<bool?>("force"); } set { Q("force", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2936,21 +2145,6 @@ namespace Nest
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2976,21 +2170,6 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3012,21 +2191,6 @@ namespace Nest
 
 			///<summary>True if the job should be forcefully deleted</summary>
 		public bool? Force { get { return Q<bool?>("force"); } set { Q("force", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3086,21 +2250,6 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3125,21 +2274,6 @@ namespace Nest
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3200,21 +2334,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteRequest  : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
@@ -3258,21 +2377,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3295,21 +2399,6 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3331,21 +2420,6 @@ namespace Nest
 
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3372,21 +2446,6 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3412,21 +2471,6 @@ namespace Nest
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3449,21 +2493,6 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3485,21 +2514,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3525,22 +2539,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters> 
@@ -3561,21 +2560,6 @@ namespace Nest
 
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3648,21 +2632,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsRequest  : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
@@ -3718,21 +2687,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3754,21 +2708,6 @@ namespace Nest
 
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3796,21 +2735,6 @@ namespace Nest
 
 			///<summary>indicates whether the watch should execute in debug mode</summary>
 		public bool? Debug { get { return Q<bool?>("debug"); } set { Q("debug", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3887,21 +2811,6 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3938,21 +2847,6 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3974,21 +2868,6 @@ namespace Nest
 
 			///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public string SkipTime { get { return Q<string>("skip_time"); } set { Q("skip_time", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4028,21 +2907,6 @@ namespace Nest
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4091,21 +2955,6 @@ namespace Nest
 		
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public bool? WaitForMerge { get { return Q<bool?>("wait_for_merge"); } set { Q("wait_for_merge", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4158,21 +3007,6 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4192,22 +3026,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters> 
@@ -4226,22 +3045,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters> 
@@ -4269,22 +3073,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters> 
@@ -4392,21 +3181,6 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4443,21 +3217,6 @@ namespace Nest
 		
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4516,21 +3275,6 @@ namespace Nest
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4564,21 +3308,6 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4598,22 +3327,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetJobsRequest : IRequest<GetJobsRequestParameters> 
@@ -4675,21 +3389,6 @@ namespace Nest
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4741,21 +3440,6 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4784,22 +3468,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters> 
@@ -4825,21 +3494,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4870,21 +3524,6 @@ namespace Nest
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4957,21 +3596,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetRequest  : PlainRequestBase<GetRequestParameters>, IGetRequest
@@ -5027,21 +3651,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5066,22 +3675,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters> 
@@ -5105,22 +3699,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters> 
@@ -5139,22 +3718,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters> 
@@ -5185,21 +3749,6 @@ namespace Nest
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5222,21 +3771,6 @@ namespace Nest
 			///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5248,22 +3782,7 @@ namespace Nest
 	public partial class GetUserAccessTokenRequest  : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
 	{
 		protected IGetUserAccessTokenRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters> 
@@ -5287,22 +3806,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetWatchRequest : IRequest<GetWatchRequestParameters> 
@@ -5321,22 +3825,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGraphExploreRequest : IRequest<GraphExploreRequestParameters> 
@@ -5376,21 +3865,6 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreRequest  : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
@@ -5423,21 +3897,6 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5449,22 +3908,7 @@ namespace Nest
 	public partial class GrokProcessorPatternsRequest  : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
 	{
 		protected IGrokProcessorPatternsRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters> 
@@ -5500,21 +3944,6 @@ namespace Nest
 		
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5594,21 +4023,6 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5636,21 +4050,6 @@ namespace Nest
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5690,21 +4089,6 @@ namespace Nest
 		
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5763,21 +4147,6 @@ namespace Nest
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get { return Q<bool?>("include_segment_file_sizes"); } set { Q("include_segment_file_sizes", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5789,22 +4158,7 @@ namespace Nest
 	public partial class InvalidateUserAccessTokenRequest  : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
 	{
 		protected IInvalidateUserAccessTokenRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IListTasksRequest : IRequest<ListTasksRequestParameters> 
@@ -5835,21 +4189,6 @@ namespace Nest
 		
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
 		public GroupBy GroupBy { get { return Q<GroupBy>("group_by"); } set { Q("group_by", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5912,21 +4251,6 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5972,21 +4296,6 @@ namespace Nest
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long? PreFilterShardSize { get { return Q<long?>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6028,21 +4337,6 @@ namespace Nest
 		
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get { return Q<long?>("max_concurrent_searches"); } set { Q("max_concurrent_searches", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6119,21 +4413,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6175,21 +4454,6 @@ namespace Nest
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6235,21 +4499,6 @@ namespace Nest
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6331,21 +4580,6 @@ namespace Nest
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get { return Q<bool?>("include_segment_file_sizes"); } set { Q("include_segment_file_sizes", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6391,18 +4625,6 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6437,21 +4659,6 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6482,22 +4689,7 @@ namespace Nest
 	public partial class PingRequest  : PlainRequestBase<PingRequestParameters>, IPingRequest
 	{
 		protected IPingRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters> 
@@ -6522,21 +4714,6 @@ namespace Nest
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
 		public DateTimeOffset ResetEnd { get { return Q<DateTimeOffset>("reset_end"); } set { Q("reset_end", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6550,21 +4727,6 @@ namespace Nest
 		protected IPostLicenseRequest Self => this;
 				///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get { return Q<bool?>("acknowledge"); } set { Q("acknowledge", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6612,21 +4774,6 @@ namespace Nest
 		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6677,21 +4824,6 @@ namespace Nest
 		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6758,21 +4890,6 @@ namespace Nest
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get { return Q<bool?>("update_all_types"); } set { Q("update_all_types", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest  : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
@@ -6811,21 +4928,6 @@ namespace Nest
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get { return Q<bool?>("update_all_types"); } set { Q("update_all_types", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6851,21 +4953,6 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6888,21 +4975,6 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6924,21 +4996,6 @@ namespace Nest
 
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -6974,21 +5031,6 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7010,21 +5052,6 @@ namespace Nest
 
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7050,21 +5077,6 @@ namespace Nest
 		
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get { return Q<bool?>("active"); } set { Q("active", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7095,21 +5107,6 @@ namespace Nest
 		
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public bool? ActiveOnly { get { return Q<bool?>("active_only"); } set { Q("active_only", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7144,21 +5141,6 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7188,18 +5170,6 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7222,21 +5192,6 @@ namespace Nest
 			///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond { get { return Q<long?>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7248,22 +5203,7 @@ namespace Nest
 	public partial class RemoteInfoRequest  : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 	{
 		protected IRemoteInfoRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters> 
@@ -7298,22 +5238,7 @@ namespace Nest
 	public partial class RestartWatcherRequest  : PlainRequestBase<RestartWatcherRequestParameters>, IRestartWatcherRequest
 	{
 		protected IRestartWatcherRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters> 
@@ -7341,21 +5266,6 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7378,22 +5288,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters> 
@@ -7433,21 +5328,6 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7459,22 +5339,7 @@ namespace Nest
 	public partial class RootNodeInfoRequest  : PlainRequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
 	{
 		protected IRootNodeInfoRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IScrollRequest : IRequest<ScrollRequestParameters> 
@@ -7485,22 +5350,7 @@ namespace Nest
 	public partial class ScrollRequest  : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		protected IScrollRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchRequest : IRequest<SearchRequestParameters> 
@@ -7610,18 +5460,6 @@ namespace Nest
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long? PreFilterShardSize { get { return Q<long?>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest  : PlainRequestBase<SearchRequestParameters>, ISearchRequest
@@ -7722,18 +5560,6 @@ namespace Nest
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long? PreFilterShardSize { get { return Q<long?>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7782,21 +5608,6 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest  : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
@@ -7837,21 +5648,6 @@ namespace Nest
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -7922,21 +5718,6 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get { return Q<bool?>("typed_keys"); } set { Q("typed_keys", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7976,21 +5757,6 @@ namespace Nest
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -8022,21 +5788,6 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -8063,21 +5814,6 @@ namespace Nest
 
 			///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8106,21 +5842,6 @@ namespace Nest
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8160,21 +5881,6 @@ namespace Nest
 		
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8244,21 +5950,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsRequest  : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
@@ -8310,21 +6001,6 @@ namespace Nest
 		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8394,21 +6070,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceRequest  : PlainRequestBase<SourceRequestParameters>, ISourceRequest
@@ -8461,21 +6122,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -8495,22 +6141,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters> 
@@ -8521,22 +6152,7 @@ namespace Nest
 	public partial class StartWatcherRequest  : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
 	{
 		protected IStartWatcherRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters> 
@@ -8555,22 +6171,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters> 
@@ -8581,22 +6182,7 @@ namespace Nest
 	public partial class StopWatcherRequest  : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
 	{
 		protected IStopWatcherRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters> 
@@ -8628,21 +6214,6 @@ namespace Nest
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8725,21 +6296,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -8773,21 +6329,6 @@ namespace Nest
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -8925,21 +6466,6 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
 	public partial class UpdateByQueryRequest  : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
@@ -9068,21 +6594,6 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -9144,21 +6655,6 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -9200,22 +6696,7 @@ namespace Nest
 		{}
 		
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IRequest<UpdateRequestParameters> 
@@ -9289,21 +6770,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -9343,21 +6809,6 @@ namespace Nest
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
 		public bool? OnlyAncientSegments { get { return Q<bool?>("only_ancient_segments"); } set { Q("only_ancient_segments", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -9391,21 +6842,6 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -9417,22 +6853,7 @@ namespace Nest
 	public partial class ValidateDetectorRequest  : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 	{
 		protected IValidateDetectorRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IValidateJobRequest : IRequest<ValidateJobRequestParameters> 
@@ -9443,22 +6864,7 @@ namespace Nest
 	public partial class ValidateJobRequest  : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 	{
 		protected IValidateJobRequest Self => this;
-				///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+				}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters> 
@@ -9530,21 +6936,6 @@ namespace Nest
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards { get { return Q<bool?>("all_shards"); } set { Q("all_shards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest  : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
@@ -9609,21 +7000,6 @@ namespace Nest
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards { get { return Q<bool?>("all_shards"); } set { Q("all_shards", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -9648,21 +7024,6 @@ namespace Nest
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -9691,21 +7052,6 @@ namespace Nest
 			///<summary>Emits stack traces of currently running watches</summary>
 		public bool? EmitStacktraces { get { return Q<bool?>("emit_stacktraces"); } set { Q("emit_stacktraces", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -9723,18 +7069,6 @@ namespace Nest
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get { return Q<string[]>("categories"); } set { Q("categories", value); } }
 		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -9748,21 +7082,6 @@ namespace Nest
 		protected IXPackUsageRequest Self => this;
 				///<summary>Specify timeout for watch write operation</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string SourceQueryString { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 }
