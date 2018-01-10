@@ -79,7 +79,7 @@ namespace Nest
 		}</text><text>@if(!string.IsNullOrWhiteSpace(param.Obsolete))
 		{<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
 </text>}
-		public @Raw(type) @(param.ClsName)(@param.TypeHighLevelArgument @param.ClsArgumentName@tSuffix) => Qs("@original", @(param.ClsArgumentName));</text>
+		public @Raw(type) @(param.ClsName)(@param.DescriptorArgumentType @param.ClsArgumentName@tSuffix) => Qs("@original", @(param.ClsArgumentName));</text>
 		if (param.IsFieldsParam)
 		{
 		<text>///<summary>@param.Description</summary>

@@ -88,11 +88,6 @@ namespace Nest
 		{
 			continue;
 		}
-		var setter = "value";
-		if (kv.TypeHighLevel == "Time")
-		{
-			setter += ".ToString()";
-		}
 		var desc = kv.DescriptionHighLevel.ToList();
 		<text>@if (desc.Count == 1) {
 <text>///<summary>@Raw(desc.First())</summary></text>
@@ -105,7 +100,7 @@ namespace Nest
 		{
 		<text>[Obsolete("Scheduled to be removed in 7.0, use @kv.DeprecatedInFavorOf instead")]</text>
 		}
-		@Raw(kv.Generator.Invoke(kv.TypeHighLevel, kv.ClsName, original, setter))
+		@Raw(kv.Generator.Invoke(kv.TypeHighLevel, kv.ClsName, original, kv.SetterHighLevel))
 		</text>
 	}
 	@if (method.RequestTypeUnmapped)

@@ -27,16 +27,11 @@ namespace Elasticsearch.Net
 	  @foreach (var param in method.Url.Params.Values)
       {
           var fieldType = param.TypeLowLevel;
-          var setter = "value";
-          if (fieldType == "TimeSpan")
-          {
-			  setter = "value.ToTimeUnit()";
-          }
 		<text>///<summary>@param.Description</summary>
 		@if (!string.IsNullOrWhiteSpace(param.Obsolete))
 		{<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
 </text>}
-		@Raw(param.Generator.Invoke(fieldType, param.ClsName, param.QueryStringKey, setter))
+		@Raw(param.Generator.Invoke(fieldType, param.ClsName, param.QueryStringKey, param.SetterLowLevel))
 		</text>
 	  }
 	}</text>

@@ -9,8 +9,9 @@ namespace ApiGenerator.Domain
 	{
 		public string QueryStringKey { get; set; }
 
+		public bool RenderPartial { get; set; }
+
 		public string ClsName { get; set; }
-		public string ClsArgumentName => this.ClsName.ToCamelCase();
 
 		public string DeprecatedInFavorOf { get; set; }
 		public string Obsolete { get; set; }
@@ -43,7 +44,28 @@ namespace ApiGenerator.Domain
 				}
 			}
 		}
-		public string TypeHighLevelArgument => this.Type == "list" && this.TypeHighLevel.EndsWith("[]") ? "params " + this.TypeHighLevel : TypeHighLevel;
+
+		public string ClsArgumentName => this.ClsName.ToCamelCase();
+		public string DescriptorArgumentType => this.Type == "list" && this.TypeHighLevel.EndsWith("[]") ? "params " + this.TypeHighLevel : TypeHighLevel;
+		public string SetterHighLevel
+		{
+			get
+			{
+				var setter = "value";
+				if (this.TypeHighLevel == "Time") setter += ".ToString()";
+				return setter;
+			}
+		}
+		public string SetterLowLevel
+		{
+			get
+			{
+				var setter = "value";
+				if (this.TypeLowLevel == "TimeSpan") setter += ".ToTimeUnit()";
+				return setter;
+			}
+		}
+
 		public bool IsFieldsParam => this.TypeHighLevel == "Fields";
 		public bool IsFieldParam => this.TypeHighLevel == "Field";
 
@@ -118,7 +140,5 @@ namespace ApiGenerator.Domain
 				$"public {NullableCsharpType(fieldType)} {mm} {{ get {{ return Q<{NullableCsharpType(fieldType)}>(\"{original}\"); }} set {{ Q(\"{original}\", {setter}); }} }}";
 
 		public Func<string, string, string, string, string> FluentGenerator { get; set; }
-
-		public bool RenderPartial { get; set; }
 	}
 }
