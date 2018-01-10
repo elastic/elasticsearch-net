@@ -80,7 +80,7 @@ public class AllowAllCertificatesCluster : SslAndKpiXPackCluster
 If your client application has access to the public CA certificate locally, Elasticsearch.NET and NEST ship with some handy helpers
 that can assert that a certificate the server presents is one that came from the local CA.
 
-If you use X-Pack's {ref_current}/certutil.html`certutil` tool] to generate SSL certificates, the generated node certificate
+If you use X-Pack's {ref_current}/certutil.html[certutil tool] to generate SSL certificates, the generated node certificate
 does not include the CA in the certificate chain, in order to cut down on SSL handshake size. In those case you can use`CertificateValidations.AuthorityIsRoot` and pass it your local copy of the CA public key to assert that
 the certificate the server presented was generated using it
 
