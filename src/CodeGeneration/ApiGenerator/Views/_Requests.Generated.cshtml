@@ -33,7 +33,7 @@ namespace Nest
 	{
 	@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
 	{
-		<text>@Raw(common.Generator.Invoke(common.TypeHighLevel, common.ClsName, common.QueryStringKey, "value"))</text>
+		<text>@Raw(common.InitializerGenerator.Invoke(common.TypeHighLevel, common.ClsName, common.QueryStringKey, "value"))</text>
 	}
 	}
 	@foreach (CsharpMethod method in methods)
@@ -100,7 +100,7 @@ namespace Nest
 		{
 		<text>[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]</text>
 		}
-		@Raw(param.Generator.Invoke(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel))
+		@Raw(param.InitializerGenerator.Invoke(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel))
 		</text>
 	}
 	@if (method.RequestTypeUnmapped)

@@ -31,7 +31,7 @@ namespace Elasticsearch.Net
 		@if (!string.IsNullOrWhiteSpace(param.Obsolete))
 		{<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
 </text>}
-		@Raw(param.Generator.Invoke(fieldType, param.ClsName, param.QueryStringKey, param.SetterLowLevel))
+		@Raw(param.InitializerGenerator.Invoke(fieldType, param.ClsName, param.QueryStringKey, param.SetterLowLevel))
 		</text>
 	  }
 	}</text>

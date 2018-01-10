@@ -134,9 +134,9 @@ namespace ApiGenerator.Domain
 			}
 		}
 
-		public Func<string, string, string, string, string> Generator { get; set; } =
+		public Func<string, string, string, string, string> InitializerGenerator { get; set; } =
 			(fieldType, mm, original, setter) =>
-				$"public {NullableCsharpType(fieldType)} {mm} {{ get {{ return Q<{NullableCsharpType(fieldType)}>(\"{original}\"); }} set {{ Q(\"{original}\", {setter}); }} }}";
+				$"public {NullableCsharpType(fieldType)} {mm} {{ get => Q<{NullableCsharpType(fieldType)}>(\"{original}\"); set => Q(\"{original}\", {setter}); }}";
 
 		public Func<string, string, string, string, string> FluentGenerator { get; set; }
 	}
