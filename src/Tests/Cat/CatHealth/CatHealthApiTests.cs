@@ -46,11 +46,11 @@ namespace Tests.Cat.CatHealth
 		protected override string UrlPath => "/_cat/health?ts=false";
 
 		protected override Func<CatHealthDescriptor, ICatHealthRequest> Fluent => s => s
-			.Ts(false);
+			.IncludeTimestamp(false);
 
 		protected override CatHealthRequest Initializer => new CatHealthRequest
 		{
-			Ts = false
+			IncludeTimestamp = false
 		};
 
 		protected override void ExpectResponse(ICatResponse<CatHealthRecord> response)

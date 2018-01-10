@@ -139,7 +139,7 @@ namespace ApiGenerator
 			var json = File.ReadAllText(jsonFile);
 			var jobject = JObject.Parse(json);
 			var commonParameters = jobject.Property("params").Value.ToObject<Dictionary<string, ApiQueryParameters>>();
-			return commonParameters;
+			return ApiQueryParametersPatcher.Patch(commonParameters, null);
 		}
 
 		private static string CreateMethodName(string apiEndpointKey)

@@ -259,86 +259,11 @@ namespace ApiGenerator.Domain
 			}
 		}
 
-		private IList<string> DeclaredKeys => this.Url.Params.Select(p => p.Value.OriginalQueryStringParamName ?? p.Key).ToList();
-
-		private IList<string> CreateList(IEndpointOverrides global, IEndpointOverrides local, string type, Func<IEndpointOverrides, IEnumerable<string>> from)
-		{
-			var list = new List<string>();
-			if (global != null) list.AddRange(from(global));
-			if (local != null)
-			{
-				var localList = from(local).ToList();
-				list.AddRange(localList);
-				var name = local.GetType().Name;
-				foreach (var p in localList.Except(DeclaredKeys))
-					ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
-			}
-			return list.Distinct().ToList();
-		}
-		private IList<string> CreateSkipList(IEndpointOverrides global, IEndpointOverrides local) =>
-			CreateList(global, local, "skip", e => e.SkipQueryStringParams);
-
-		private IList<string> CreatePartialList(IEndpointOverrides global, IEndpointOverrides local) =>
-			CreateList(global, local, "partial", e => e.RenderPartial);
-
-		private IDictionary<string, string> CreateLookup(
-			IEndpointOverrides global, IEndpointOverrides local, string type, Func<IEndpointOverrides, IDictionary<string, string>> from)
-		{
-			var d = new Dictionary<string, string>();
-			foreach (var kv in from(global)) d[kv.Key] = kv.Value;
-
-			if (local == null) return d;
-
-			var localDictionary = from(local);
-			foreach (var kv in localDictionary) d[kv.Key] = kv.Value;
-
-			var name = local.GetType().Name;
-			foreach (var p in localDictionary.Keys.Except(DeclaredKeys))
-				ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
-
-			return d;
-		}
-		private IDictionary<string, string> CreateRenameLookup(IEndpointOverrides global, IEndpointOverrides local) =>
-			CreateLookup(global, local, "rename", e => e.RenameQueryStringParams);
-
-		private IDictionary<string, string> CreateObsoleteLookup(IEndpointOverrides global, IEndpointOverrides local) =>
-			CreateLookup(global, local, "obsolete", e => e.ObsoleteQueryStringParams);
 
 		private void PatchRequestParameters(IEndpointOverrides overrides)
 		{
-			if (this.Url.Params == null) return; //TODO render common seperately, this causes common to sometimes not be rendered
-			foreach (var param in RestApiSpec.CommonApiQueryParameters)
-			{
-				if (!this.Url.Params.ContainsKey(param.Key))
-					this.Url.Params.Add(param.Key, param.Value);
-			}
-
-			var globalOverrides = new GlobalOverrides();
-			var skipList = CreateSkipList(globalOverrides, overrides);
-			var partialList = CreatePartialList(globalOverrides, overrides);
-			var renameLookup = CreateRenameLookup(globalOverrides, overrides);
-			var obsoleteLookup = CreateObsoleteLookup(globalOverrides, overrides);
-
-			var patchedParams = new Dictionary<string, ApiQueryParameters>();
-			foreach (var kv in this.Url.Params)
-			{
-				kv.Value.OriginalQueryStringParamName = kv.Key;
-
-				if (skipList.Contains(kv.Key)) continue;
-
-				if (!renameLookup.TryGetValue(kv.Key, out var key)) key = kv.Key;
-
-				if (partialList.Contains(key)) kv.Value.RenderPartial = true;
-
-				if (obsoleteLookup.TryGetValue(kv.Key, out var obsolete)) kv.Value.Obsolete = obsolete;
-
-				//make sure source_enabled takes a boolean only
-				if (key == "source_enabled") kv.Value.Type = "boolean";
-
-				patchedParams.Add(key, kv.Value);
-			}
-
-			this.Url.Params = patchedParams;
+			var newParams = ApiQueryParametersPatcher.Patch(this.Url.Params, overrides);
+			this.Url.Params = newParams;
 		}
 
 		private static string RenameMetricUrlPathParam(string path)

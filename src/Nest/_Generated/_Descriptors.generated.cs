@@ -10,31 +10,35 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public abstract partial class RequestDescriptorBase<TDescriptor, TParameters, TInterface>
+	{
+		public TDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
+		public TDescriptor Human(bool? human = true) => Qs("human", human);
+		public TDescriptor ErrorTrace(bool? errorTrace = true) => Qs("error_trace", errorTrace);
+		public TDescriptor FilterPath(string[] filterPath) => Qs("filter_path", filterPath);
+	}
 	
 	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public partial class BulkDescriptor  : RequestDescriptorBase<BulkDescriptor,BulkRequestParameters, IBulkRequest>, IBulkRequest
 	{ 
+		/// <summary>/_bulk</summary>
+		public BulkDescriptor() : base(){}
+
+		// values part of the url path
 		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IBulkRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		/// <summary>/_bulk</summary>
-		public BulkDescriptor() : base()
-		{}
-		
-
-			///<summary>Default index for items which don't provide one</summary>
+		///<summary>Default index for items which don't provide one</summary>
 		public BulkDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public BulkDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
-
 		///<summary>Default document type for items which don't provide one</summary>
 		public BulkDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public BulkDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public BulkDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		// Request parameters
+		///<summary>Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		public BulkDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public BulkDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
  		///<summary>
@@ -52,279 +56,210 @@ namespace Nest
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Whether the _source should be included in the response.</summary>
-		public BulkDescriptor SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public BulkDescriptor SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public BulkDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public BulkDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public BulkDescriptor Pipeline(string pipeline) => Qs("pipeline", pipeline);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public BulkDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public BulkDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public BulkDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public BulkDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public BulkDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesDescriptor  : RequestDescriptorBase<CatAliasesDescriptor,CatAliasesRequestParameters, ICatAliasesRequest>, ICatAliasesRequest
 	{ 
-		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 		/// <summary>/_cat/aliases</summary>
-		public CatAliasesDescriptor() : base()
-		{}
-		
+		public CatAliasesDescriptor() : base(){}
 
-			///<summary>A comma-separated list of alias names to return</summary>
+		// values part of the url path
+		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
+		///<summary>A comma-separated list of alias names to return</summary>
 		public CatAliasesDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatAliasesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAliasesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAliasesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatAliasesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatAliasesDescriptor H(params string[] h) => Qs("h", h);
+		public CatAliasesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatAliasesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatAliasesDescriptor S(params string[] s) => Qs("s", s);
+		public CatAliasesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatAliasesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatAliasesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatAliasesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatAliasesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatAliasesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatAliasesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatAliasesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationDescriptor  : RequestDescriptorBase<CatAllocationDescriptor,CatAllocationRequestParameters, ICatAllocationRequest>, ICatAllocationRequest
 	{ 
-		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		/// <summary>/_cat/allocation</summary>
-		public CatAllocationDescriptor() : base()
-		{}
-		
+		public CatAllocationDescriptor() : base(){}
 
-			///<summary>A comma-separated list of node IDs or names to limit the returned information</summary>
+		// values part of the url path
+		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+		///<summary>A comma-separated list of node IDs or names to limit the returned information</summary>
 		public CatAllocationDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatAllocationDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
 		public CatAllocationDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAllocationDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAllocationDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatAllocationDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatAllocationDescriptor H(params string[] h) => Qs("h", h);
+		public CatAllocationDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatAllocationDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatAllocationDescriptor S(params string[] s) => Qs("s", s);
+		public CatAllocationDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatAllocationDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatAllocationDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatAllocationDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatAllocationDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatAllocationDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatAllocationDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatAllocationDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountDescriptor  : RequestDescriptorBase<CatCountDescriptor,CatCountRequestParameters, ICatCountRequest>, ICatCountRequest
 	{ 
-		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_cat/count</summary>
-		public CatCountDescriptor() : base()
-		{}
-		
+		public CatCountDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names to limit the returned information</summary>
+		// values part of the url path
+		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names to limit the returned information</summary>
 		public CatCountDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CatCountDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatCountDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatCountDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatCountDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatCountDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatCountDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatCountDescriptor H(params string[] h) => Qs("h", h);
+		public CatCountDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatCountDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatCountDescriptor S(params string[] s) => Qs("s", s);
+		public CatCountDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatCountDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatCountDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatCountDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatCountDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatCountDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatCountDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatCountDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataDescriptor  : RequestDescriptorBase<CatFielddataDescriptor,CatFielddataRequestParameters, ICatFielddataRequest>, ICatFielddataRequest
 	{ 
-		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 		/// <summary>/_cat/fielddata</summary>
-		public CatFielddataDescriptor() : base()
-		{}
-		
+		public CatFielddataDescriptor() : base(){}
 
-			///<summary>A comma-separated list of fields to return the fielddata size</summary>
+		// values part of the url path
+		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
+		///<summary>A comma-separated list of fields to return the fielddata size</summary>
 		public CatFielddataDescriptor Fields(Fields fields) => Assign(a=>a.RouteValues.Optional("fields", fields));
-
 		///<summary>A comma-separated list of fields to return the fielddata size</summary>
 		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(a => a.RouteValues.Optional("fields", (Fields)fields));
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatFielddataDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
 		public CatFielddataDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatFielddataDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatFielddataDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatFielddataDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatFielddataDescriptor H(params string[] h) => Qs("h", h);
+		public CatFielddataDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatFielddataDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatFielddataDescriptor S(params string[] s) => Qs("s", s);
+		public CatFielddataDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatFielddataDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatFielddataDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatFielddataDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatFielddataDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatFielddataDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatFielddataDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatFielddataDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public partial class CatHealthDescriptor  : RequestDescriptorBase<CatHealthDescriptor,CatHealthRequestParameters, ICatHealthRequest>, ICatHealthRequest
 	{ 
-					///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatHealthDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatHealthDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatHealthDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatHealthDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatHealthDescriptor H(params string[] h) => Qs("h", h);
+		public CatHealthDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatHealthDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatHealthDescriptor S(params string[] s) => Qs("s", s);
+		public CatHealthDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Set to false to disable timestamping</summary>
-		public CatHealthDescriptor Ts(bool? ts = true) => Qs("ts", ts);
+		public CatHealthDescriptor IncludeTimestamp(bool? includeTimestamp = true) => Qs("ts", includeTimestamp);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatHealthDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatHealthDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatHealthDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatHealthDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatHealthDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatHealthDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatHealthDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public partial class CatHelpDescriptor  : RequestDescriptorBase<CatHelpDescriptor,CatHelpRequestParameters, ICatHelpRequest>, ICatHelpRequest
 	{ 
-					///<summary>Return help information</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return help information</summary>
 		public CatHelpDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatHelpDescriptor S(params string[] s) => Qs("s", s);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatHelpDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatHelpDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatHelpDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatHelpDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatHelpDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatHelpDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 	
 	}
 	
 	///<summary>descriptor for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesDescriptor  : RequestDescriptorBase<CatIndicesDescriptor,CatIndicesRequestParameters, ICatIndicesRequest>, ICatIndicesRequest
 	{ 
-		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_cat/indices</summary>
-		public CatIndicesDescriptor() : base()
-		{}
-		
+		public CatIndicesDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names to limit the returned information</summary>
+		// values part of the url path
+		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names to limit the returned information</summary>
 		public CatIndicesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CatIndicesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatIndicesDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatIndicesDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
 		public CatIndicesDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatIndicesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatIndicesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatIndicesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatIndicesDescriptor H(params string[] h) => Qs("h", h);
+		public CatIndicesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
 		public CatIndicesDescriptor Health(Health health) => Qs("health", health);
 		///<summary>Return help information</summary>
@@ -332,491 +267,366 @@ namespace Nest
 		///<summary>Set to true to return stats only for primary shards</summary>
 		public CatIndicesDescriptor Pri(bool? pri = true) => Qs("pri", pri);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatIndicesDescriptor S(params string[] s) => Qs("s", s);
+		public CatIndicesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatIndicesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatIndicesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatIndicesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatIndicesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatIndicesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatIndicesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatIndicesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public partial class CatMasterDescriptor  : RequestDescriptorBase<CatMasterDescriptor,CatMasterRequestParameters, ICatMasterRequest>, ICatMasterRequest
 	{ 
-					///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatMasterDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatMasterDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatMasterDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatMasterDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatMasterDescriptor H(params string[] h) => Qs("h", h);
+		public CatMasterDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatMasterDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatMasterDescriptor S(params string[] s) => Qs("s", s);
+		public CatMasterDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatMasterDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatMasterDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatMasterDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatMasterDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatMasterDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatMasterDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatMasterDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeAttributesDescriptor  : RequestDescriptorBase<CatNodeAttributesDescriptor,CatNodeAttributesRequestParameters, ICatNodeAttributesRequest>, ICatNodeAttributesRequest
 	{ 
-					///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatNodeAttributesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodeAttributesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodeAttributesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatNodeAttributesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatNodeAttributesDescriptor H(params string[] h) => Qs("h", h);
+		public CatNodeAttributesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatNodeAttributesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatNodeAttributesDescriptor S(params string[] s) => Qs("s", s);
+		public CatNodeAttributesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatNodeAttributesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatNodeAttributesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatNodeAttributesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatNodeAttributesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatNodeAttributesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatNodeAttributesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatNodeAttributesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public partial class CatNodesDescriptor  : RequestDescriptorBase<CatNodesDescriptor,CatNodesRequestParameters, ICatNodesRequest>, ICatNodesRequest
 	{ 
-					///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatNodesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
-		public CatNodesDescriptor FullId(bool? full_id = true) => Qs("full_id", full_id);
+		public CatNodesDescriptor FullId(bool? fullId = true) => Qs("full_id", fullId);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatNodesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatNodesDescriptor H(params string[] h) => Qs("h", h);
+		public CatNodesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatNodesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatNodesDescriptor S(params string[] s) => Qs("s", s);
+		public CatNodesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatNodesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatNodesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatNodesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatNodesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatNodesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatNodesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatNodesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksDescriptor  : RequestDescriptorBase<CatPendingTasksDescriptor,CatPendingTasksRequestParameters, ICatPendingTasksRequest>, ICatPendingTasksRequest
 	{ 
-					///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatPendingTasksDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPendingTasksDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatPendingTasksDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatPendingTasksDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatPendingTasksDescriptor H(params string[] h) => Qs("h", h);
+		public CatPendingTasksDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatPendingTasksDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatPendingTasksDescriptor S(params string[] s) => Qs("s", s);
+		public CatPendingTasksDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatPendingTasksDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatPendingTasksDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatPendingTasksDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatPendingTasksDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatPendingTasksDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatPendingTasksDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatPendingTasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsDescriptor  : RequestDescriptorBase<CatPluginsDescriptor,CatPluginsRequestParameters, ICatPluginsRequest>, ICatPluginsRequest
 	{ 
-					///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatPluginsDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPluginsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatPluginsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatPluginsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatPluginsDescriptor H(params string[] h) => Qs("h", h);
+		public CatPluginsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatPluginsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatPluginsDescriptor S(params string[] s) => Qs("s", s);
+		public CatPluginsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatPluginsDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatPluginsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatPluginsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatPluginsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatPluginsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatPluginsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatPluginsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryDescriptor  : RequestDescriptorBase<CatRecoveryDescriptor,CatRecoveryRequestParameters, ICatRecoveryRequest>, ICatRecoveryRequest
 	{ 
-		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_cat/recovery</summary>
-		public CatRecoveryDescriptor() : base()
-		{}
-		
+		public CatRecoveryDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names to limit the returned information</summary>
+		// values part of the url path
+		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names to limit the returned information</summary>
 		public CatRecoveryDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CatRecoveryDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatRecoveryDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatRecoveryDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
 		public CatRecoveryDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatRecoveryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatRecoveryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatRecoveryDescriptor H(params string[] h) => Qs("h", h);
+		public CatRecoveryDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatRecoveryDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatRecoveryDescriptor S(params string[] s) => Qs("s", s);
+		public CatRecoveryDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatRecoveryDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatRecoveryDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatRecoveryDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatRecoveryDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatRecoveryDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatRecoveryDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatRecoveryDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatRepositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
 	public partial class CatRepositoriesDescriptor  : RequestDescriptorBase<CatRepositoriesDescriptor,CatRepositoriesRequestParameters, ICatRepositoriesRequest>, ICatRepositoriesRequest
 	{ 
-					///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatRepositoriesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return local information, do not retrieve the state from master node</summary>
 		public CatRepositoriesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatRepositoriesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatRepositoriesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatRepositoriesDescriptor H(params string[] h) => Qs("h", h);
+		public CatRepositoriesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatRepositoriesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatRepositoriesDescriptor S(params string[] s) => Qs("s", s);
+		public CatRepositoriesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatRepositoriesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatRepositoriesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatRepositoriesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatRepositoriesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatRepositoriesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatRepositoriesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatRepositoriesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsDescriptor  : RequestDescriptorBase<CatSegmentsDescriptor,CatSegmentsRequestParameters, ICatSegmentsRequest>, ICatSegmentsRequest
 	{ 
-		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_cat/segments</summary>
-		public CatSegmentsDescriptor() : base()
-		{}
-		
+		public CatSegmentsDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names to limit the returned information</summary>
+		// values part of the url path
+		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names to limit the returned information</summary>
 		public CatSegmentsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CatSegmentsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatSegmentsDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSegmentsDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
 		public CatSegmentsDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatSegmentsDescriptor H(params string[] h) => Qs("h", h);
+		public CatSegmentsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatSegmentsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatSegmentsDescriptor S(params string[] s) => Qs("s", s);
+		public CatSegmentsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatSegmentsDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatSegmentsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatSegmentsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatSegmentsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatSegmentsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatSegmentsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatSegmentsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsDescriptor  : RequestDescriptorBase<CatShardsDescriptor,CatShardsRequestParameters, ICatShardsRequest>, ICatShardsRequest
 	{ 
-		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_cat/shards</summary>
-		public CatShardsDescriptor() : base()
-		{}
-		
+		public CatShardsDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names to limit the returned information</summary>
+		// values part of the url path
+		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names to limit the returned information</summary>
 		public CatShardsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CatShardsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CatShardsDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatShardsDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
 		public CatShardsDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatShardsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatShardsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatShardsDescriptor H(params string[] h) => Qs("h", h);
+		public CatShardsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatShardsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatShardsDescriptor S(params string[] s) => Qs("s", s);
+		public CatShardsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatShardsDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatShardsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatShardsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatShardsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatShardsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatShardsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatShardsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
 	public partial class CatSnapshotsDescriptor  : RequestDescriptorBase<CatSnapshotsDescriptor,CatSnapshotsRequestParameters, ICatSnapshotsRequest>, ICatSnapshotsRequest
 	{ 
-		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 		/// <summary>/_cat/snapshots</summary>
-		public CatSnapshotsDescriptor() : base()
-		{}
-		
+		public CatSnapshotsDescriptor() : base(){}
 
-			///<summary>Name of repository from which to fetch the snapshot information</summary>
+		// values part of the url path
+		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+		///<summary>Name of repository from which to fetch the snapshot information</summary>
 		public CatSnapshotsDescriptor RepositoryName(Names repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSnapshotsDescriptor Format(string format) => Qs("format", format);
 		///<summary>Set to true to ignore unavailable snapshots</summary>
-		public CatSnapshotsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public CatSnapshotsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatSnapshotsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatSnapshotsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatSnapshotsDescriptor H(params string[] h) => Qs("h", h);
+		public CatSnapshotsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatSnapshotsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatSnapshotsDescriptor S(params string[] s) => Qs("s", s);
+		public CatSnapshotsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatSnapshotsDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatSnapshotsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatSnapshotsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatSnapshotsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatSnapshotsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatSnapshotsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatSnapshotsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CatTasksDescriptor  : RequestDescriptorBase<CatTasksDescriptor,CatTasksRequestParameters, ICatTasksRequest>, ICatTasksRequest
 	{ 
-					///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatTasksDescriptor Format(string format) => Qs("format", format);
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public CatTasksDescriptor NodeId(params string[] node_id) => Qs("node_id", node_id);
+		public CatTasksDescriptor NodeId(params string[] nodeId) => Qs("node_id", nodeId);
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public CatTasksDescriptor Actions(params string[] actions) => Qs("actions", actions);
 		///<summary>Return detailed task information (default: false)</summary>
 		public CatTasksDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 		///<summary>Return tasks with specified parent node.</summary>
-		public CatTasksDescriptor ParentNode(string parent_node) => Qs("parent_node", parent_node);
+		public CatTasksDescriptor ParentNode(string parentNode) => Qs("parent_node", parentNode);
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public CatTasksDescriptor ParentTask(long? parent_task) => Qs("parent_task", parent_task);
+		public CatTasksDescriptor ParentTask(long? parentTask) => Qs("parent_task", parentTask);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatTasksDescriptor H(params string[] h) => Qs("h", h);
+		public CatTasksDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatTasksDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatTasksDescriptor S(params string[] s) => Qs("s", s);
+		public CatTasksDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatTasksDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatTasksDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatTasksDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatTasksDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatTasksDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatTasksDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatTasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public partial class CatTemplatesDescriptor  : RequestDescriptorBase<CatTemplatesDescriptor,CatTemplatesRequestParameters, ICatTemplatesRequest>, ICatTemplatesRequest
 	{ 
-		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
 		/// <summary>/_cat/templates</summary>
-		public CatTemplatesDescriptor() : base()
-		{}
-		
+		public CatTemplatesDescriptor() : base(){}
 
-			///<summary>A pattern that returned template names must match</summary>
+		// values part of the url path
+		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
+		///<summary>A pattern that returned template names must match</summary>
 		public CatTemplatesDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatTemplatesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatTemplatesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatTemplatesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatTemplatesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatTemplatesDescriptor H(params string[] h) => Qs("h", h);
+		public CatTemplatesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatTemplatesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatTemplatesDescriptor S(params string[] s) => Qs("s", s);
+		public CatTemplatesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatTemplatesDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatTemplatesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatTemplatesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatTemplatesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatTemplatesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatTemplatesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatTemplatesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
 	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolDescriptor  : RequestDescriptorBase<CatThreadPoolDescriptor,CatThreadPoolRequestParameters, ICatThreadPoolRequest>, ICatThreadPoolRequest
 	{ 
-		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
 		/// <summary>/_cat/thread_pool</summary>
-		public CatThreadPoolDescriptor() : base()
-		{}
-		
+		public CatThreadPoolDescriptor() : base(){}
 
-			///<summary>A comma-separated list of regular-expressions to filter the thread pools in the output</summary>
+		// values part of the url path
+		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
+		///<summary>A comma-separated list of regular-expressions to filter the thread pools in the output</summary>
 		public CatThreadPoolDescriptor ThreadPoolPatterns(Names threadPoolPatterns) => Assign(a=>a.RouteValues.Optional("thread_pool_patterns", threadPoolPatterns));
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatThreadPoolDescriptor Format(string format) => Qs("format", format);
 		///<summary>The multiplier in which to display values</summary>
 		public CatThreadPoolDescriptor Size(Size size) => Qs("size", size);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatThreadPoolDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatThreadPoolDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatThreadPoolDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatThreadPoolDescriptor H(params string[] h) => Qs("h", h);
+		public CatThreadPoolDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
 		public CatThreadPoolDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatThreadPoolDescriptor S(params string[] s) => Qs("s", s);
+		public CatThreadPoolDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatThreadPoolDescriptor V(bool? v = true) => Qs("v", v);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CatThreadPoolDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CatThreadPoolDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CatThreadPoolDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CatThreadPoolDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CatThreadPoolDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CatThreadPoolDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -824,314 +634,223 @@ namespace Nest
 	public partial class ClearScrollDescriptor  : RequestDescriptorBase<ClearScrollDescriptor,ClearScrollRequestParameters, IClearScrollRequest>, IClearScrollRequest
 	{ 
 		/// <summary>/_search/scroll</summary>
-		public ClearScrollDescriptor() : base()
-		{}
-		
+		public ClearScrollDescriptor() : base(){}
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public ClearScrollDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClearScrollDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClearScrollDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearScrollDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClearScrollDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
 	public partial class ClusterAllocationExplainDescriptor  : RequestDescriptorBase<ClusterAllocationExplainDescriptor,ClusterAllocationExplainRequestParameters, IClusterAllocationExplainRequest>, IClusterAllocationExplainRequest
 	{ 
-					///<summary>Return 'YES' decisions in explanation (default: false)</summary>
-		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? include_yes_decisions = true) => Qs("include_yes_decisions", include_yes_decisions);
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return 'YES' decisions in explanation (default: false)</summary>
+		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? includeYesDecisions = true) => Qs("include_yes_decisions", includeYesDecisions);
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
-		public ClusterAllocationExplainDescriptor IncludeDiskInfo(bool? include_disk_info = true) => Qs("include_disk_info", include_disk_info);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterAllocationExplainDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterAllocationExplainDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterAllocationExplainDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterAllocationExplainDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterAllocationExplainDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public ClusterAllocationExplainDescriptor IncludeDiskInfo(bool? includeDiskInfo = true) => Qs("include_disk_info", includeDiskInfo);
 	
 	}
 	
 	///<summary>descriptor for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsDescriptor  : RequestDescriptorBase<ClusterGetSettingsDescriptor,ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{ 
-					///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterGetSettingsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
+		public ClusterGetSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterGetSettingsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterGetSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterGetSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Whether to return all default clusters setting.</summary>
-		public ClusterGetSettingsDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterGetSettingsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterGetSettingsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterGetSettingsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterGetSettingsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterGetSettingsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public ClusterGetSettingsDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	
 	}
 	
 	///<summary>descriptor for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthDescriptor  : RequestDescriptorBase<ClusterHealthDescriptor,ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
 	{ 
-		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_cluster/health</summary>
-		public ClusterHealthDescriptor() : base()
-		{}
-		
+		public ClusterHealthDescriptor() : base(){}
 
-			///<summary>Limit the information returned to a specific index</summary>
+		// values part of the url path
+		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>Limit the information returned to a specific index</summary>
 		public ClusterHealthDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public ClusterHealthDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ClusterHealthDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Specify the level of detail for returned information</summary>
+		// Request parameters
+		///<summary>Specify the level of detail for returned information</summary>
 		public ClusterHealthDescriptor Level(Level level) => Qs("level", level);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterHealthDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterHealthDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterHealthDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterHealthDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Wait until the specified number of shards is active</summary>
-		public ClusterHealthDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public ClusterHealthDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Wait until the specified number of nodes is available</summary>
-		public ClusterHealthDescriptor WaitForNodes(string wait_for_nodes) => Qs("wait_for_nodes", wait_for_nodes);
+		public ClusterHealthDescriptor WaitForNodes(string waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 		///<summary>Wait until all currently queued events with the given priority are processed</summary>
-		public ClusterHealthDescriptor WaitForEvents(WaitForEvents wait_for_events) => Qs("wait_for_events", wait_for_events);
+		public ClusterHealthDescriptor WaitForEvents(WaitForEvents waitForEvents) => Qs("wait_for_events", waitForEvents);
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
-		public ClusterHealthDescriptor WaitForNoRelocatingShards(bool? wait_for_no_relocating_shards = true) => Qs("wait_for_no_relocating_shards", wait_for_no_relocating_shards);
+		public ClusterHealthDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
 		///<summary>Wait until cluster is in a specific state</summary>
-		public ClusterHealthDescriptor WaitForStatus(WaitForStatus wait_for_status) => Qs("wait_for_status", wait_for_status);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterHealthDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterHealthDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterHealthDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterHealthDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterHealthDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public ClusterHealthDescriptor WaitForStatus(WaitForStatus waitForStatus) => Qs("wait_for_status", waitForStatus);
 	
 	}
 	
 	///<summary>descriptor for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksDescriptor  : RequestDescriptorBase<ClusterPendingTasksDescriptor,ClusterPendingTasksRequestParameters, IClusterPendingTasksRequest>, IClusterPendingTasksRequest
 	{ 
-					///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterPendingTasksDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterPendingTasksDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterPendingTasksDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterPendingTasksDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterPendingTasksDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterPendingTasksDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterPendingTasksDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public ClusterPendingTasksDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterPutSettingsDescriptor  : RequestDescriptorBase<ClusterPutSettingsDescriptor,ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
 	{ 
-					///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterPutSettingsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
+		public ClusterPutSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterPutSettingsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterPutSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterPutSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterPutSettingsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterPutSettingsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterPutSettingsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterPutSettingsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterPutSettingsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for ClusterRemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
 	public partial class RemoteInfoDescriptor  : RequestDescriptorBase<RemoteInfoDescriptor,RemoteInfoRequestParameters, IRemoteInfoRequest>, IRemoteInfoRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public RemoteInfoDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RemoteInfoDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RemoteInfoDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RemoteInfoDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RemoteInfoDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteDescriptor  : RequestDescriptorBase<ClusterRerouteDescriptor,ClusterRerouteRequestParameters, IClusterRerouteRequest>, IClusterRerouteRequest
 	{ 
-					///<summary>Simulate the operation only and return the resulting state</summary>
-		public ClusterRerouteDescriptor DryRun(bool? dry_run = true) => Qs("dry_run", dry_run);
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Simulate the operation only and return the resulting state</summary>
+		public ClusterRerouteDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
 		public ClusterRerouteDescriptor Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Retries allocation of shards that are blocked due to too many subsequent allocation failures</summary>
-		public ClusterRerouteDescriptor RetryFailed(bool? retry_failed = true) => Qs("retry_failed", retry_failed);
+		public ClusterRerouteDescriptor RetryFailed(bool? retryFailed = true) => Qs("retry_failed", retryFailed);
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
 		public ClusterRerouteDescriptor Metric(params string[] metric) => Qs("metric", metric);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterRerouteDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterRerouteDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterRerouteDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterRerouteDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterRerouteDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterRerouteDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterRerouteDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterRerouteDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateDescriptor  : RequestDescriptorBase<ClusterStateDescriptor,ClusterStateRequestParameters, IClusterStateRequest>, IClusterStateRequest
 	{ 
+		/// <summary>/_cluster/state</summary>
+		public ClusterStateDescriptor() : base(){}
+
+		// values part of the url path
 		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-		/// <summary>/_cluster/state</summary>
-		public ClusterStateDescriptor() : base()
-		{}
-		
-
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ClusterStateDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public ClusterStateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ClusterStateDescriptor AllIndices() => this.Index(Indices.All);
-
 		///<summary>Limit the information returned to the specified metrics</summary>
 		public ClusterStateDescriptor Metric(ClusterStateMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterStateDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterStateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterStateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterStateDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public ClusterStateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ClusterStateDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public ClusterStateDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ClusterStateDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public ClusterStateDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterStateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterStateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterStateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterStateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterStateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
 	///<summary>descriptor for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsDescriptor  : RequestDescriptorBase<ClusterStatsDescriptor,ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
 	{ 
-		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		/// <summary>/_cluster/stats</summary>
-		public ClusterStatsDescriptor() : base()
-		{}
-		
+		public ClusterStatsDescriptor() : base(){}
 
-			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
+		// values part of the url path
+		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public ClusterStatsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
-			///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterStatsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
+		public ClusterStatsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterStatsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClusterStatsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClusterStatsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClusterStatsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClusterStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClusterStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountDescriptor<T>  : RequestDescriptorBase<CountDescriptor<T>,CountRequestParameters, ICountRequest>, ICountRequest
 	{ 
+		/// <summary>/_count</summary>
+		public CountDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+
+		// values part of the url path
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/_count</summary>
-		public CountDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T)))
-		{}
-		
-
-			///<summary>A comma-separated list of indices to restrict the results</summary>
+		///<summary>A comma-separated list of indices to restrict the results</summary>
 		public CountDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CountDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CountDescriptor<T> AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of types to restrict the results</summary>
 		public CountDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public CountDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public CountDescriptor<T> AllTypes() => this.Type(Types.All);
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public CountDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public CountDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public CountDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public CountDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public CountDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountDescriptor<T> MinScore(double? min_score) => Qs("min_score", min_score);
+		public CountDescriptor<T> MinScore(double? minScore) => Qs("min_score", minScore);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public CountDescriptor<T> Preference(string preference) => Qs("preference", preference);
  		///<summary>
@@ -1143,67 +862,54 @@ namespace Nest
 		///</summary>
 		public CountDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public CountDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
+		public CountDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
 		///<summary>The analyzer to use for the query string</summary>
 		public CountDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public CountDescriptor<T> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public CountDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public CountDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public CountDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public CountDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public CountDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
-		public CountDescriptor<T> TerminateAfter(long? terminate_after) => Qs("terminate_after", terminate_after);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CountDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CountDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CountDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CountDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CountDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CountDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 	
 	}
 	
 	///<summary>descriptor for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class CreateDescriptor<TDocument>  : RequestDescriptorBase<CreateDescriptor<TDocument>,CreateRequestParameters, ICreateRequest<TDocument>>, ICreateRequest<TDocument>
 	{ 
-		Id ICreateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-		IndexName ICreateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ICreateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 		/// <summary>/{index}/{type}/{id}/_create</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>		
-///<param name="id"> this parameter is required</param>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
+		///<param name="id"> this parameter is required</param>
 		public CreateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-	/// <summary>/{index}/{type}/{id}/_create</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		/// <summary>/{index}/{type}/{id}/_create</summary>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public CreateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>The name of the index</summary>
+		// values part of the url path
+		Id ICreateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ICreateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ICreateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		///<summary>The name of the index</summary>
 		public CreateDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CreateDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document</summary>
 		public CreateDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public CreateDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public CreateDescriptor<TDocument> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		// Request parameters
+		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		public CreateDescriptor<TDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public CreateDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
@@ -1226,57 +932,44 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public CreateDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public CreateDescriptor<TDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public CreateDescriptor<TDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public CreateDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CreateDescriptor<TDocument> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CreateDescriptor<TDocument> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CreateDescriptor<TDocument> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateDescriptor<TDocument> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CreateDescriptor<TDocument> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteDescriptor<T>  : RequestDescriptorBase<DeleteDescriptor<T>,DeleteRequestParameters, IDeleteRequest>, IDeleteRequest
 	{ 
-		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>		
-///<param name="id"> this parameter is required</param>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
+		///<param name="id"> this parameter is required</param>
 		public DeleteDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-	/// <summary>/{index}/{type}/{id}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		/// <summary>/{index}/{type}/{id}</summary>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DeleteDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(T document);
 
-			///<summary>The name of the index</summary>
+		// values part of the url path
+		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		///<summary>The name of the index</summary>
 		public DeleteDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public DeleteDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document</summary>
 		public DeleteDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public DeleteDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public DeleteDescriptor<T> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		// Request parameters
+		///<summary>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		public DeleteDescriptor<T> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>ID of parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public DeleteDescriptor<T> Parent(string parent) => Qs("parent", parent);
@@ -1295,73 +988,58 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public DeleteDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public DeleteDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
 	///<summary>descriptor for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryDescriptor<T>  : RequestDescriptorBase<DeleteByQueryDescriptor<T>,DeleteByQueryRequestParameters, IDeleteByQueryRequest>, IDeleteByQueryRequest
 	{ 
+		/// <summary>/{index}/_delete_by_query</summary>
+		///<param name="index"> this parameter is required</param>
+		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T))){}
+
+		// values part of the url path
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/{index}/_delete_by_query</summary>
-///<param name="index"> this parameter is required</param>
-		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T)))
-		{}
-		
-
-			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public DeleteByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public DeleteByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public DeleteByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
 		public DeleteByQueryDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public DeleteByQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public DeleteByQueryDescriptor<T> AllTypes() => this.Type(Types.All);
 
-			///<summary>The analyzer to use for the query string</summary>
+		// Request parameters
+		///<summary>The analyzer to use for the query string</summary>
 		public DeleteByQueryDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public DeleteByQueryDescriptor<T> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public DeleteByQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public DeleteByQueryDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Starting offset (default: 0)</summary>
 		public DeleteByQueryDescriptor<T> From(long? from) => Qs("from", from);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public DeleteByQueryDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public DeleteByQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>What to do when the delete-by-query hits version conflicts?</summary>
 		public DeleteByQueryDescriptor<T> Conflicts(Conflicts conflicts) => Qs("conflicts", conflicts);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public DeleteByQueryDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public DeleteByQueryDescriptor<T> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
+		public DeleteByQueryDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1373,120 +1051,98 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public DeleteByQueryDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public DeleteByQueryDescriptor<T> SearchType(SearchType search_type) => Qs("search_type", search_type);
+		public DeleteByQueryDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public DeleteByQueryDescriptor<T> SearchTimeout(Time search_timeout) => Qs("search_timeout", search_timeout);
+		public DeleteByQueryDescriptor<T> SearchTimeout(Time searchTimeout) => Qs("search_timeout", searchTimeout);
 		///<summary>Number of hits to return (default: 10)</summary>
 		public DeleteByQueryDescriptor<T> Size(long? size) => Qs("size", size);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public DeleteByQueryDescriptor<T> Sort(params string[] sort) => Qs("sort", sort);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public DeleteByQueryDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public DeleteByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public DeleteByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public DeleteByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public DeleteByQueryDescriptor<T> TerminateAfter(long? terminate_after) => Qs("terminate_after", terminate_after);
+		public DeleteByQueryDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public DeleteByQueryDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public DeleteByQueryDescriptor<T> Version(bool? version = true) => Qs("version", version);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public DeleteByQueryDescriptor<T> RequestCache(bool? request_cache = true) => Qs("request_cache", request_cache);
+		public DeleteByQueryDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public DeleteByQueryDescriptor<T> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public DeleteByQueryDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public DeleteByQueryDescriptor<T> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public DeleteByQueryDescriptor<T> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public DeleteByQueryDescriptor<T> ScrollSize(long? scroll_size) => Qs("scroll_size", scroll_size);
+		public DeleteByQueryDescriptor<T> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
 		///<summary>Should the request should block until the delete-by-query is complete.</summary>
-		public DeleteByQueryDescriptor<T> WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public DeleteByQueryDescriptor<T> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
-		public DeleteByQueryDescriptor<T> RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
+		public DeleteByQueryDescriptor<T> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public DeleteByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteByQueryDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteByQueryDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteByQueryDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteByQueryDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteByQueryDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptDescriptor  : RequestDescriptorBase<DeleteScriptDescriptor,DeleteScriptRequestParameters, IDeleteScriptRequest>, IDeleteScriptRequest
 	{ 
-		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_scripts/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public DeleteScriptDescriptor(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		///<param name="id"> this parameter is required</param>
+		public DeleteScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
 
-				///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public DeleteScriptDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteScriptDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteScriptDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteScriptDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteScriptDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteScriptDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteScriptDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public DeleteScriptDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsDescriptor<T>  : RequestDescriptorBase<DocumentExistsDescriptor<T>,DocumentExistsRequestParameters, IDocumentExistsRequest>, IDocumentExistsRequest
 	{ 
-		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>		
-///<param name="id"> this parameter is required</param>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
+		///<param name="id"> this parameter is required</param>
 		public DocumentExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-	/// <summary>/{index}/{type}/{id}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		/// <summary>/{index}/{type}/{id}</summary>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DocumentExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(T document);
 
-			///<summary>The name of the index</summary>
+		// values part of the url path
+		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		///<summary>The name of the index</summary>
 		public DocumentExistsDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public DocumentExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document (use `_all` to fetch the first document matching the ID across all types)</summary>
 		public DocumentExistsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public DocumentExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-			///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public DocumentExistsDescriptor<T> StoredFields(Fields stored_fields) => Qs("stored_fields", stored_fields);
+		// Request parameters
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public DocumentExistsDescriptor<T> StoredFields(Fields storedFields) => Qs("stored_fields", storedFields);
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public DocumentExistsDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>The ID of the parent document</summary>
@@ -1507,66 +1163,53 @@ namespace Nest
 		///</summary>
 		public DocumentExistsDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public DocumentExistsDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public DocumentExistsDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public DocumentExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public DocumentExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public DocumentExistsDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public DocumentExistsDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DocumentExistsDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DocumentExistsDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DocumentExistsDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DocumentExistsDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DocumentExistsDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public DocumentExistsDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
 	///<summary>descriptor for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsDescriptor<T>  : RequestDescriptorBase<SourceExistsDescriptor<T>,SourceExistsRequestParameters, ISourceExistsRequest>, ISourceExistsRequest
 	{ 
-		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName ISourceExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ISourceExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		/// <summary>/{index}/{type}/{id}/_source</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>		
-///<param name="id"> this parameter is required</param>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
+		///<param name="id"> this parameter is required</param>
 		public SourceExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-	/// <summary>/{index}/{type}/{id}/_source</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		/// <summary>/{index}/{type}/{id}/_source</summary>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(T document);
 
-			///<summary>The name of the index</summary>
+		// values part of the url path
+		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ISourceExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ISourceExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		///<summary>The name of the index</summary>
 		public SourceExistsDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public SourceExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document; use `_all` to fetch the first document matching the ID across all types</summary>
 		public SourceExistsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public SourceExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-			///<summary>The ID of the parent document</summary>
+		// Request parameters
+		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public SourceExistsDescriptor<T> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1584,71 +1227,58 @@ namespace Nest
 		///</summary>
 		public SourceExistsDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public SourceExistsDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public SourceExistsDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public SourceExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public SourceExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceExistsDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public SourceExistsDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SourceExistsDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SourceExistsDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SourceExistsDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SourceExistsDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SourceExistsDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public SourceExistsDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
 	///<summary>descriptor for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainDescriptor<TDocument>  : RequestDescriptorBase<ExplainDescriptor<TDocument>,ExplainRequestParameters, IExplainRequest<TDocument>>, IExplainRequest<TDocument>
 	{ 
-		Id IExplainRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IExplainRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IExplainRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 		/// <summary>/{index}/{type}/{id}/_explain</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>		
-///<param name="id"> this parameter is required</param>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
+		///<param name="id"> this parameter is required</param>
 		public ExplainDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-	/// <summary>/{index}/{type}/{id}/_explain</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		/// <summary>/{index}/{type}/{id}/_explain</summary>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public ExplainDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>The name of the index</summary>
+		// values part of the url path
+		Id IExplainRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IExplainRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IExplainRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		///<summary>The name of the index</summary>
 		public ExplainDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public ExplainDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document</summary>
 		public ExplainDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public ExplainDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public ExplainDescriptor<TDocument> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		// Request parameters
+		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
+		public ExplainDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The analyzer for the query string query</summary>
 		public ExplainDescriptor<TDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainDescriptor<TDocument> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public ExplainDescriptor<TDocument> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The default field for query string query (default: _all)</summary>
 		public ExplainDescriptor<TDocument> Df(string df) => Qs("df", df);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
@@ -1659,7 +1289,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public ExplainDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainDescriptor<TDocument> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
+		public ExplainDescriptor<TDocument> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1669,104 +1299,79 @@ namespace Nest
 		///</summary>
 		public ExplainDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public ExplainDescriptor<TDocument> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public ExplainDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public ExplainDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public ExplainDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ExplainDescriptor<TDocument> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ExplainDescriptor<TDocument> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ExplainDescriptor<TDocument> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ExplainDescriptor<TDocument> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ExplainDescriptor<TDocument> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
 	public partial class FieldCapabilitiesDescriptor  : RequestDescriptorBase<FieldCapabilitiesDescriptor,FieldCapabilitiesRequestParameters, IFieldCapabilitiesRequest>, IFieldCapabilitiesRequest
 	{ 
-		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_field_caps</summary>
-		public FieldCapabilitiesDescriptor() : base()
-		{}
-		
+		public FieldCapabilitiesDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		// values part of the url path
+		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public FieldCapabilitiesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public FieldCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public FieldCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>A comma-separated list of field names</summary>
+		// Request parameters
+		///<summary>A comma-separated list of field names</summary>
 		public FieldCapabilitiesDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of field names</summary>
 		public FieldCapabilitiesDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FieldCapabilitiesDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public FieldCapabilitiesDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FieldCapabilitiesDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public FieldCapabilitiesDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FieldCapabilitiesDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public FieldCapabilitiesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public FieldCapabilitiesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public FieldCapabilitiesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FieldCapabilitiesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public FieldCapabilitiesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public FieldCapabilitiesDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
 	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetDescriptor<T>  : RequestDescriptorBase<GetDescriptor<T>,GetRequestParameters, IGetRequest>, IGetRequest
 	{ 
-		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>		
-///<param name="id"> this parameter is required</param>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
+		///<param name="id"> this parameter is required</param>
 		public GetDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-	/// <summary>/{index}/{type}/{id}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		/// <summary>/{index}/{type}/{id}</summary>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public GetDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(T document);
 
-			///<summary>The name of the index</summary>
+		// values part of the url path
+		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		///<summary>The name of the index</summary>
 		public GetDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public GetDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document (use `_all` to fetch the first document matching the ID across all types)</summary>
 		public GetDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public GetDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-			///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public GetDescriptor<T> StoredFields(Fields stored_fields) => Qs("stored_fields", stored_fields);
+		// Request parameters
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
+		public GetDescriptor<T> StoredFields(Fields storedFields) => Qs("stored_fields", storedFields);
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public GetDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>The ID of the parent document</summary>
@@ -1787,89 +1392,67 @@ namespace Nest
 		///</summary>
 		public GetDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public GetDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public GetDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public GetDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public GetDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public GetDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public GetDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
 	///<summary>descriptor for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class GetScriptDescriptor  : RequestDescriptorBase<GetScriptDescriptor,GetScriptRequestParameters, IGetScriptRequest>, IGetScriptRequest
 	{ 
-		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_scripts/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public GetScriptDescriptor(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		///<param name="id"> this parameter is required</param>
+		public GetScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public GetScriptDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetScriptDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetScriptDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetScriptDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetScriptDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<T>  : RequestDescriptorBase<SourceDescriptor<T>,SourceRequestParameters, ISourceRequest>, ISourceRequest
 	{ 
-		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		/// <summary>/{index}/{type}/{id}/_source</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>		
-///<param name="id"> this parameter is required</param>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
+		///<param name="id"> this parameter is required</param>
 		public SourceDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-	/// <summary>/{index}/{type}/{id}/_source</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		/// <summary>/{index}/{type}/{id}/_source</summary>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(T document);
 
-			///<summary>The name of the index</summary>
+		// values part of the url path
+		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		///<summary>The name of the index</summary>
 		public SourceDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public SourceDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document; use `_all` to fetch the first document matching the ID across all types</summary>
 		public SourceDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public SourceDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-			///<summary>The ID of the parent document</summary>
+		// Request parameters
+		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public SourceDescriptor<T> Parent(string parent) => Qs("parent", parent);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1887,71 +1470,57 @@ namespace Nest
 		///</summary>
 		public SourceDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public SourceDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public SourceDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public SourceDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public SourceDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public SourceDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SourceDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SourceDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SourceDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SourceDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SourceDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public SourceDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
 	///<summary>descriptor for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class IndexDescriptor<TDocument>  : RequestDescriptorBase<IndexDescriptor<TDocument>,IndexRequestParameters, IIndexRequest<TDocument>>, IIndexRequest<TDocument>
 	{ 
-		Id IIndexRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IIndexRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IIndexRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 		/// <summary>/{index}/{type}</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
 		public IndexDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-	/// <summary>/{index}/{type}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		/// <summary>/{index}/{type}</summary>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public IndexDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>Document ID</summary>
+		// values part of the url path
+		Id IIndexRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IIndexRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IIndexRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		///<summary>Document ID</summary>
 		public IndexDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
-
 		///<summary>The name of the index</summary>
 		public IndexDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public IndexDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document</summary>
 		public IndexDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public IndexDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public IndexDescriptor<TDocument> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		// Request parameters
+		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		public IndexDescriptor<TDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Explicit operation type</summary>
-		public IndexDescriptor<TDocument> OpType(OpType op_type) => Qs("op_type", op_type);
+		public IndexDescriptor<TDocument> OpType(OpType opType) => Qs("op_type", opType);
 		///<summary>ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public IndexDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
@@ -1974,73 +1543,50 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public IndexDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public IndexDescriptor<TDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public IndexDescriptor<TDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public IndexDescriptor<TDocument> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public IndexDescriptor<TDocument> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public IndexDescriptor<TDocument> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexDescriptor<TDocument> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IndexDescriptor<TDocument> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public partial class AnalyzeDescriptor  : RequestDescriptorBase<AnalyzeDescriptor,AnalyzeRequestParameters, IAnalyzeRequest>, IAnalyzeRequest
 	{ 
-		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		/// <summary>/_analyze</summary>
-		public AnalyzeDescriptor() : base()
-		{}
-		
+		public AnalyzeDescriptor() : base(){}
 
-			///<summary>The name of the index to scope the operation</summary>
+		// values part of the url path
+		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>The name of the index to scope the operation</summary>
 		public AnalyzeDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public AnalyzeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
-			///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public AnalyzeDescriptor PreferLocal(bool? prefer_local = true) => Qs("prefer_local", prefer_local);
+		// Request parameters
+		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
+		public AnalyzeDescriptor PreferLocal(bool? preferLocal = true) => Qs("prefer_local", preferLocal);
 		///<summary>Format of the output</summary>
 		public AnalyzeDescriptor Format(Format format) => Qs("format", format);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public AnalyzeDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public AnalyzeDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public AnalyzeDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AnalyzeDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public AnalyzeDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheDescriptor  : RequestDescriptorBase<ClearCacheDescriptor,ClearCacheRequestParameters, IClearCacheRequest>, IClearCacheRequest
 	{ 
-		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_cache/clear</summary>
-		public ClearCacheDescriptor() : base()
-		{}
-		
+		public ClearCacheDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index name to limit the operation</summary>
+		// values part of the url path
+		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index name to limit the operation</summary>
 		public ClearCacheDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public ClearCacheDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ClearCacheDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Clear field data</summary>
+		// Request parameters
+		///<summary>Clear field data</summary>
 		public ClearCacheDescriptor Fielddata(bool? fielddata = true) => Qs("fielddata", fielddata);
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public ClearCacheDescriptor Fields(Fields fields) => Qs("fields", fields);
@@ -2049,1271 +1595,899 @@ namespace Nest
 		///<summary>Clear query caches</summary>
 		public ClearCacheDescriptor Query(bool? query = true) => Qs("query", query);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ClearCacheDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public ClearCacheDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ClearCacheDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public ClearCacheDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Clear the recycler cache</summary>
 		public ClearCacheDescriptor Recycler(bool? recycler = true) => Qs("recycler", recycler);
 		///<summary>Clear request cache</summary>
-		public ClearCacheDescriptor RequestCache(bool? request_cache = true) => Qs("request_cache", request_cache);
+		public ClearCacheDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>Clear request cache</summary>
 		public ClearCacheDescriptor Request(bool? request = true) => Qs("request", request);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClearCacheDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClearCacheDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClearCacheDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCacheDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClearCacheDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexDescriptor  : RequestDescriptorBase<CloseIndexDescriptor,CloseIndexRequestParameters, ICloseIndexRequest>, ICloseIndexRequest
 	{ 
-		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/{index}/_close</summary>
-///<param name="index"> this parameter is required</param>
-		public CloseIndexDescriptor(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		///<param name="index"> this parameter is required</param>
+		public CloseIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 
-			///<summary>A comma separated list of indices to close</summary>
+		// values part of the url path
+		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma separated list of indices to close</summary>
 		public CloseIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CloseIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public CloseIndexDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Explicit operation timeout</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public CloseIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public CloseIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CloseIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public CloseIndexDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public CloseIndexDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public CloseIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public CloseIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CloseIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CloseIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CloseIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CloseIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CloseIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
 	///<summary>descriptor for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
 	public partial class CreateIndexDescriptor  : RequestDescriptorBase<CreateIndexDescriptor,CreateIndexRequestParameters, ICreateIndexRequest>, ICreateIndexRequest
 	{ 
-		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		/// <summary>/{index}</summary>
-///<param name="index"> this parameter is required</param>
-		public CreateIndexDescriptor(IndexName index) : base(r=>r.Required("index", index))
-		{}
-		
+		///<param name="index"> this parameter is required</param>
+		public CreateIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 
-			///<summary>The name of the index</summary>
+		// values part of the url path
+		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>The name of the index</summary>
 		public CreateIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public CreateIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
-			///<summary>Set the number of active shards to wait for before the operation returns.</summary>
-		public CreateIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		// Request parameters
+		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
+		public CreateIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Explicit operation timeout</summary>
 		public CreateIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public CreateIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CreateIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		public CreateIndexDescriptor UpdateAllTypes(bool? update_all_types = true) => Qs("update_all_types", update_all_types);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CreateIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CreateIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CreateIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CreateIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CreateIndexDescriptor UpdateAllTypes(bool? updateAllTypes = true) => Qs("update_all_types", updateAllTypes);
 	
 	}
 	
 	///<summary>descriptor for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexDescriptor  : RequestDescriptorBase<DeleteIndexDescriptor,DeleteIndexRequestParameters, IDeleteIndexRequest>, IDeleteIndexRequest
 	{ 
-		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/{index}</summary>
-///<param name="index"> this parameter is required</param>
-		public DeleteIndexDescriptor(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		///<param name="index"> this parameter is required</param>
+		public DeleteIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 
-			///<summary>A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</summary>
+		// values part of the url path
+		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</summary>
 		public DeleteIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public DeleteIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public DeleteIndexDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Explicit operation timeout</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public DeleteIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public DeleteIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public DeleteIndexDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public DeleteIndexDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public DeleteIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public DeleteIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public DeleteIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public DeleteIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
 	///<summary>descriptor for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class DeleteAliasDescriptor  : RequestDescriptorBase<DeleteAliasDescriptor,DeleteAliasRequestParameters, IDeleteAliasRequest>, IDeleteAliasRequest
 	{ 
+		/// <summary>/{index}/_alias/{name}</summary>
+		///<param name="index"> this parameter is required</param>
+		///<param name="name"> this parameter is required</param>
+		public DeleteAliasDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
+
+		// values part of the url path
 		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
-		/// <summary>/{index}/_alias/{name}</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="name"> this parameter is required</param>
-		public DeleteAliasDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name))
-		{}
-		
-
-			///<summary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
+		///<summary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
 		public DeleteAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public DeleteAliasDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public DeleteAliasDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Explicit timestamp for the document</summary>
+		// Request parameters
+		///<summary>Explicit timestamp for the document</summary>
 		public DeleteAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteAliasDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteAliasDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteAliasDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteAliasDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteAliasDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteAliasDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public DeleteAliasDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class DeleteIndexTemplateDescriptor  : RequestDescriptorBase<DeleteIndexTemplateDescriptor,DeleteIndexTemplateRequestParameters, IDeleteIndexTemplateRequest>, IDeleteIndexTemplateRequest
 	{ 
-		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 		/// <summary>/_template/{name}</summary>
-///<param name="name"> this parameter is required</param>
-		public DeleteIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		///<param name="name"> this parameter is required</param>
+		public DeleteIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
 
-				///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public DeleteIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteIndexTemplateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteIndexTemplateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteIndexTemplateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteIndexTemplateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteIndexTemplateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteIndexTemplateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public DeleteIndexTemplateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
 	public partial class IndexExistsDescriptor  : RequestDescriptorBase<IndexExistsDescriptor,IndexExistsRequestParameters, IIndexExistsRequest>, IIndexExistsRequest
 	{ 
-		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/{index}</summary>
-///<param name="index"> this parameter is required</param>
-		public IndexExistsDescriptor(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		///<param name="index"> this parameter is required</param>
+		public IndexExistsDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 
-			///<summary>A comma-separated list of index names</summary>
+		// values part of the url path
+		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names</summary>
 		public IndexExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public IndexExistsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public IndexExistsDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexExistsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public IndexExistsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public IndexExistsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public IndexExistsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public IndexExistsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public IndexExistsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public IndexExistsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
-		public IndexExistsDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public IndexExistsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public IndexExistsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public IndexExistsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexExistsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IndexExistsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public IndexExistsDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	
 	}
 	
 	///<summary>descriptor for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class AliasExistsDescriptor  : RequestDescriptorBase<AliasExistsDescriptor,AliasExistsRequestParameters, IAliasExistsRequest>, IAliasExistsRequest
 	{ 
+		/// <summary>/_alias/{name}</summary>
+		public AliasExistsDescriptor() : base(){}
+
+		// values part of the url path
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
-		/// <summary>/_alias/{name}</summary>
-		public AliasExistsDescriptor() : base()
-		{}
-		
-
-			///<summary>A comma-separated list of index names to filter aliases</summary>
+		///<summary>A comma-separated list of index names to filter aliases</summary>
 		public AliasExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public AliasExistsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public AliasExistsDescriptor AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of alias names to return</summary>
 		public AliasExistsDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public AliasExistsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public AliasExistsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public AliasExistsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public AliasExistsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public AliasExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public AliasExistsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public AliasExistsDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public AliasExistsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public AliasExistsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public AliasExistsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AliasExistsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public AliasExistsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class IndexTemplateExistsDescriptor  : RequestDescriptorBase<IndexTemplateExistsDescriptor,IndexTemplateExistsRequestParameters, IIndexTemplateExistsRequest>, IIndexTemplateExistsRequest
 	{ 
-		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 		/// <summary>/_template/{name}</summary>
-///<param name="name"> this parameter is required</param>
-		public IndexTemplateExistsDescriptor(Names name) : base(r=>r.Required("name", name))
-		{}
-		
+		///<param name="name"> this parameter is required</param>
+		public IndexTemplateExistsDescriptor(Names name) : base(r=>r.Required("name", name)){}
 
-				///<summary>Return settings in flat format (default: false)</summary>
-		public IndexTemplateExistsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		// values part of the url path
+		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
+
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
+		public IndexTemplateExistsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IndexTemplateExistsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public IndexTemplateExistsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexTemplateExistsDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public IndexTemplateExistsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public IndexTemplateExistsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public IndexTemplateExistsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndexTemplateExistsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IndexTemplateExistsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsDescriptor  : RequestDescriptorBase<TypeExistsDescriptor,TypeExistsRequestParameters, ITypeExistsRequest>, ITypeExistsRequest
 	{ 
+		/// <summary>/{index}/_mapping/{type}</summary>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
+		public TypeExistsDescriptor(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type)){}
+
+		// values part of the url path
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/{index}/_mapping/{type}</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>
-		public TypeExistsDescriptor(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type))
-		{}
-		
-
-			///<summary>A comma-separated list of index names; use `_all` to check the types across all indices</summary>
+		///<summary>A comma-separated list of index names; use `_all` to check the types across all indices</summary>
 		public TypeExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public TypeExistsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public TypeExistsDescriptor AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types to check</summary>
 		public TypeExistsDescriptor Type(Types type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public TypeExistsDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public TypeExistsDescriptor AllTypes() => this.Type(Types.All);
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public TypeExistsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public TypeExistsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public TypeExistsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public TypeExistsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public TypeExistsDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public TypeExistsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public TypeExistsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public TypeExistsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public TypeExistsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public TypeExistsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 	public partial class FlushDescriptor  : RequestDescriptorBase<FlushDescriptor,FlushRequestParameters, IFlushRequest>, IFlushRequest
 	{ 
-		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_flush</summary>
-		public FlushDescriptor() : base()
-		{}
-		
+		public FlushDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
+		// values part of the url path
+		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
 		public FlushDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public FlushDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public FlushDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
+		// Request parameters
+		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public FlushDescriptor Force(bool? force = true) => Qs("force", force);
 		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is true. If set to false the flush will be skipped iff if another flush operation is already running.</summary>
-		public FlushDescriptor WaitIfOngoing(bool? wait_if_ongoing = true) => Qs("wait_if_ongoing", wait_if_ongoing);
+		public FlushDescriptor WaitIfOngoing(bool? waitIfOngoing = true) => Qs("wait_if_ongoing", waitIfOngoing);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FlushDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public FlushDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FlushDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public FlushDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public FlushDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public FlushDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public FlushDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FlushDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public FlushDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public FlushDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
 	///<summary>descriptor for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushDescriptor  : RequestDescriptorBase<SyncedFlushDescriptor,SyncedFlushRequestParameters, ISyncedFlushRequest>, ISyncedFlushRequest
 	{ 
-		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_flush/synced</summary>
-		public SyncedFlushDescriptor() : base()
-		{}
-		
+		public SyncedFlushDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
+		// values part of the url path
+		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All for all indices</summary>
 		public SyncedFlushDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public SyncedFlushDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SyncedFlushDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SyncedFlushDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SyncedFlushDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SyncedFlushDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public SyncedFlushDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SyncedFlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SyncedFlushDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SyncedFlushDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SyncedFlushDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SyncedFlushDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SyncedFlushDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public SyncedFlushDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
 	///<summary>descriptor for IndicesForcemergeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
 	public partial class ForceMergeDescriptor  : RequestDescriptorBase<ForceMergeDescriptor,ForceMergeRequestParameters, IForceMergeRequest>, IForceMergeRequest
 	{ 
-		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_forcemerge</summary>
-		public ForceMergeDescriptor() : base()
-		{}
-		
+		public ForceMergeDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		// values part of the url path
+		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ForceMergeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public ForceMergeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ForceMergeDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
+		// Request parameters
+		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public ForceMergeDescriptor Flush(bool? flush = true) => Qs("flush", flush);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ForceMergeDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public ForceMergeDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ForceMergeDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public ForceMergeDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ForceMergeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public ForceMergeDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public ForceMergeDescriptor MaxNumSegments(long? max_num_segments) => Qs("max_num_segments", max_num_segments);
+		public ForceMergeDescriptor MaxNumSegments(long? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public ForceMergeDescriptor OnlyExpungeDeletes(bool? only_expunge_deletes = true) => Qs("only_expunge_deletes", only_expunge_deletes);
+		public ForceMergeDescriptor OnlyExpungeDeletes(bool? onlyExpungeDeletes = true) => Qs("only_expunge_deletes", onlyExpungeDeletes);
 		///<summary>TODO: ?</summary>
-		public ForceMergeDescriptor OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
+		public ForceMergeDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public ForceMergeDescriptor WaitForMerge(bool? wait_for_merge = true) => Qs("wait_for_merge", wait_for_merge);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ForceMergeDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ForceMergeDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ForceMergeDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ForceMergeDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ForceMergeDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public ForceMergeDescriptor WaitForMerge(bool? waitForMerge = true) => Qs("wait_for_merge", waitForMerge);
 	
 	}
 	
 	///<summary>descriptor for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public partial class GetIndexDescriptor  : RequestDescriptorBase<GetIndexDescriptor,GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
 	{ 
-		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/{index}</summary>
-///<param name="index"> this parameter is required</param>
-		public GetIndexDescriptor(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		///<param name="index"> this parameter is required</param>
+		public GetIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 
-			///<summary>A comma-separated list of index names</summary>
+		// values part of the url path
+		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names</summary>
 		public GetIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public GetIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetIndexDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public GetIndexDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public GetIndexDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public GetIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public GetIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public GetIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public GetIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public GetIndexDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public GetIndexDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
-		public GetIndexDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public GetIndexDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	
 	}
 	
 	///<summary>descriptor for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasDescriptor  : RequestDescriptorBase<GetAliasDescriptor,GetAliasRequestParameters, IGetAliasRequest>, IGetAliasRequest
 	{ 
+		/// <summary>/_alias</summary>
+		public GetAliasDescriptor() : base(){}
+
+		// values part of the url path
 		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetAliasRequest.Name => Self.RouteValues.Get<Names>("name");
-		/// <summary>/_alias</summary>
-		public GetAliasDescriptor() : base()
-		{}
-		
-
-			///<summary>A comma-separated list of index names to filter aliases</summary>
+		///<summary>A comma-separated list of index names to filter aliases</summary>
 		public GetAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public GetAliasDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetAliasDescriptor AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of alias names to return</summary>
 		public GetAliasDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetAliasDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public GetAliasDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetAliasDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public GetAliasDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public GetAliasDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetAliasDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetAliasDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetAliasDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetAliasDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetAliasDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetAliasDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingDescriptor<T>  : RequestDescriptorBase<GetFieldMappingDescriptor<T>,GetFieldMappingRequestParameters, IGetFieldMappingRequest>, IGetFieldMappingRequest
 	{ 
+		/// <summary>/_mapping/field/{fields}</summary>
+		///<param name="fields"> this parameter is required</param>
+		public GetFieldMappingDescriptor(Fields fields) : base(r=>r.Required("fields", fields)){}
+
+		// values part of the url path
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
-		/// <summary>/_mapping/field/{fields}</summary>
-///<param name="fields"> this parameter is required</param>
-		public GetFieldMappingDescriptor(Fields fields) : base(r=>r.Required("fields", fields))
-		{}
-		
-
-			///<summary>A comma-separated list of index names</summary>
+		///<summary>A comma-separated list of index names</summary>
 		public GetFieldMappingDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public GetFieldMappingDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetFieldMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types</summary>
 		public GetFieldMappingDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public GetFieldMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public GetFieldMappingDescriptor<T> AllTypes() => this.Type(Types.All);
 
-			///<summary>Whether the default mapping values should be returned as well</summary>
-		public GetFieldMappingDescriptor<T> IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
+		// Request parameters
+		///<summary>Whether the default mapping values should be returned as well</summary>
+		public GetFieldMappingDescriptor<T> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetFieldMappingDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public GetFieldMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetFieldMappingDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public GetFieldMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetFieldMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetFieldMappingDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetFieldMappingDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetFieldMappingDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetFieldMappingDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetFieldMappingDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingDescriptor<T>  : RequestDescriptorBase<GetMappingDescriptor<T>,GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
 	{ 
+		/// <summary>/_mapping</summary>
+		public GetMappingDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+
+		// values part of the url path
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/_mapping</summary>
-		public GetMappingDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T)))
-		{}
-		
-
-			///<summary>A comma-separated list of index names</summary>
+		///<summary>A comma-separated list of index names</summary>
 		public GetMappingDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public GetMappingDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types</summary>
 		public GetMappingDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public GetMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public GetMappingDescriptor<T> AllTypes() => this.Type(Types.All);
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetMappingDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public GetMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetMappingDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public GetMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetMappingDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetMappingDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetMappingDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetMappingDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetMappingDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsDescriptor  : RequestDescriptorBase<GetIndexSettingsDescriptor,GetIndexSettingsRequestParameters, IGetIndexSettingsRequest>, IGetIndexSettingsRequest
 	{ 
+		/// <summary>/_settings</summary>
+		public GetIndexSettingsDescriptor() : base(){}
+
+		// values part of the url path
 		Indices IGetIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
-		/// <summary>/_settings</summary>
-		public GetIndexSettingsDescriptor() : base()
-		{}
-		
-
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public GetIndexSettingsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public GetIndexSettingsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GetIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
-
 		///<summary>The name of the settings that should be included</summary>
 		public GetIndexSettingsDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetIndexSettingsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public GetIndexSettingsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetIndexSettingsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public GetIndexSettingsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public GetIndexSettingsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public GetIndexSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexSettingsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
-		public GetIndexSettingsDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetIndexSettingsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetIndexSettingsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetIndexSettingsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexSettingsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetIndexSettingsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public GetIndexSettingsDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	
 	}
 	
 	///<summary>descriptor for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class GetIndexTemplateDescriptor  : RequestDescriptorBase<GetIndexTemplateDescriptor,GetIndexTemplateRequestParameters, IGetIndexTemplateRequest>, IGetIndexTemplateRequest
 	{ 
-		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
 		/// <summary>/_template</summary>
-		public GetIndexTemplateDescriptor() : base()
-		{}
-		
+		public GetIndexTemplateDescriptor() : base(){}
 
-			///<summary>The comma separated names of the index templates</summary>
+		// values part of the url path
+		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
+		///<summary>The comma separated names of the index templates</summary>
 		public GetIndexTemplateDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-			///<summary>Return settings in flat format (default: false)</summary>
-		public GetIndexTemplateDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
+		public GetIndexTemplateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetIndexTemplateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public GetIndexTemplateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexTemplateDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetIndexTemplateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetIndexTemplateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetIndexTemplateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetIndexTemplateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetIndexTemplateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusDescriptor  : RequestDescriptorBase<UpgradeStatusDescriptor,UpgradeStatusRequestParameters, IUpgradeStatusRequest>, IUpgradeStatusRequest
 	{ 
-		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_upgrade</summary>
-		public UpgradeStatusDescriptor() : base()
-		{}
-		
+		public UpgradeStatusDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		// values part of the url path
+		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpgradeStatusDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public UpgradeStatusDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpgradeStatusDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpgradeStatusDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public UpgradeStatusDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpgradeStatusDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public UpgradeStatusDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public UpgradeStatusDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpgradeStatusDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpgradeStatusDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpgradeStatusDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpgradeStatusDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
 	///<summary>descriptor for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexDescriptor  : RequestDescriptorBase<OpenIndexDescriptor,OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
 	{ 
-		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/{index}/_open</summary>
-///<param name="index"> this parameter is required</param>
-		public OpenIndexDescriptor(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		///<param name="index"> this parameter is required</param>
+		public OpenIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 
-			///<summary>A comma separated list of indices to open</summary>
+		// values part of the url path
+		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma separated list of indices to open</summary>
 		public OpenIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public OpenIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public OpenIndexDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Explicit operation timeout</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public OpenIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public OpenIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public OpenIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public OpenIndexDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public OpenIndexDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public OpenIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public OpenIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public OpenIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public OpenIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public OpenIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public OpenIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public OpenIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
 	///<summary>descriptor for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class PutAliasDescriptor  : RequestDescriptorBase<PutAliasDescriptor,PutAliasRequestParameters, IPutAliasRequest>, IPutAliasRequest
 	{ 
+		/// <summary>/{index}/_alias/{name}</summary>
+		///<param name="index"> this parameter is required</param>
+		///<param name="name"> this parameter is required</param>
+		public PutAliasDescriptor(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name)){}
+
+		// values part of the url path
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
-		/// <summary>/{index}/_alias/{name}</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="name"> this parameter is required</param>
-		public PutAliasDescriptor(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name))
-		{}
-		
-
-			///<summary>A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</summary>
+		///<summary>A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</summary>
 		public PutAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public PutAliasDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public PutAliasDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Explicit timestamp for the document</summary>
+		// Request parameters
+		///<summary>Explicit timestamp for the document</summary>
 		public PutAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public PutAliasDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutAliasDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutAliasDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutAliasDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutAliasDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutAliasDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public PutAliasDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingDescriptor<T>  : RequestDescriptorBase<PutMappingDescriptor<T>,PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
 	{ 
+		/// <summary>/{index}/{type}/_mapping</summary>
+		///<param name="type"> this parameter is required</param>
+		public PutMappingDescriptor(TypeName type) : base(r=>r.Required("type", type)){}
+
+		// values part of the url path
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		/// <summary>/{index}/{type}/_mapping</summary>
-///<param name="type"> this parameter is required</param>
-		public PutMappingDescriptor(TypeName type) : base(r=>r.Required("type", type))
-		{}
-		
-
-			///<summary>A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</summary>
+		///<summary>A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</summary>
 		public PutMappingDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public PutMappingDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public PutMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
-
 		///<summary>The name of the document type</summary>
 		public PutMappingDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-			///<summary>Explicit operation timeout</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public PutMappingDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public PutMappingDescriptor<T> MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public PutMappingDescriptor<T> MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PutMappingDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public PutMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PutMappingDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public PutMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		public PutMappingDescriptor<T> UpdateAllTypes(bool? update_all_types = true) => Qs("update_all_types", update_all_types);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutMappingDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutMappingDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutMappingDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutMappingDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutMappingDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public PutMappingDescriptor<T> UpdateAllTypes(bool? updateAllTypes = true) => Qs("update_all_types", updateAllTypes);
 	
 	}
 	
 	///<summary>descriptor for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateIndexSettingsDescriptor  : RequestDescriptorBase<UpdateIndexSettingsDescriptor,UpdateIndexSettingsRequestParameters, IUpdateIndexSettingsRequest>, IUpdateIndexSettingsRequest
 	{ 
-		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_settings</summary>
-		public UpdateIndexSettingsDescriptor() : base()
-		{}
-		
+		public UpdateIndexSettingsDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		// values part of the url path
+		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpdateIndexSettingsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public UpdateIndexSettingsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpdateIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Specify timeout for connection to master</summary>
-		public UpdateIndexSettingsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public UpdateIndexSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
-		public UpdateIndexSettingsDescriptor PreserveExisting(bool? preserve_existing = true) => Qs("preserve_existing", preserve_existing);
+		public UpdateIndexSettingsDescriptor PreserveExisting(bool? preserveExisting = true) => Qs("preserve_existing", preserveExisting);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpdateIndexSettingsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public UpdateIndexSettingsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpdateIndexSettingsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public UpdateIndexSettingsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public UpdateIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public UpdateIndexSettingsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateIndexSettingsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateIndexSettingsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateIndexSettingsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateIndexSettingsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateIndexSettingsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public UpdateIndexSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	
 	}
 	
 	///<summary>descriptor for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class PutIndexTemplateDescriptor  : RequestDescriptorBase<PutIndexTemplateDescriptor,PutIndexTemplateRequestParameters, IPutIndexTemplateRequest>, IPutIndexTemplateRequest
 	{ 
-		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 		/// <summary>/_template/{name}</summary>
-///<param name="name"> this parameter is required</param>
-		public PutIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		///<param name="name"> this parameter is required</param>
+		public PutIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
 
-				///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		// values part of the url path
+		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateDescriptor Create(bool? create = true) => Qs("create", create);
 		///<summary>Explicit operation timeout</summary>
 		public PutIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public PutIndexTemplateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public PutIndexTemplateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public PutIndexTemplateDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutIndexTemplateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutIndexTemplateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutIndexTemplateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutIndexTemplateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutIndexTemplateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public PutIndexTemplateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	
 	}
 	
 	///<summary>descriptor for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusDescriptor  : RequestDescriptorBase<RecoveryStatusDescriptor,RecoveryStatusRequestParameters, IRecoveryStatusRequest>, IRecoveryStatusRequest
 	{ 
-		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_recovery</summary>
-		public RecoveryStatusDescriptor() : base()
-		{}
-		
+		public RecoveryStatusDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		// values part of the url path
+		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public RecoveryStatusDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public RecoveryStatusDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public RecoveryStatusDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Whether to display detailed information about shard recovery</summary>
+		// Request parameters
+		///<summary>Whether to display detailed information about shard recovery</summary>
 		public RecoveryStatusDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 		///<summary>Display only those recoveries that are currently on-going</summary>
-		public RecoveryStatusDescriptor ActiveOnly(bool? active_only = true) => Qs("active_only", active_only);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RecoveryStatusDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RecoveryStatusDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RecoveryStatusDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RecoveryStatusDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RecoveryStatusDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public RecoveryStatusDescriptor ActiveOnly(bool? activeOnly = true) => Qs("active_only", activeOnly);
 	
 	}
 	
 	///<summary>descriptor for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 	public partial class RefreshDescriptor  : RequestDescriptorBase<RefreshDescriptor,RefreshRequestParameters, IRefreshRequest>, IRefreshRequest
 	{ 
-		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_refresh</summary>
-		public RefreshDescriptor() : base()
-		{}
-		
+		public RefreshDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		// values part of the url path
+		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public RefreshDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public RefreshDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public RefreshDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public RefreshDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public RefreshDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public RefreshDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public RefreshDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public RefreshDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RefreshDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RefreshDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RefreshDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RefreshDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RefreshDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public RefreshDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
 	///<summary>descriptor for IndicesRolloverForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
 	public partial class RolloverIndexDescriptor  : RequestDescriptorBase<RolloverIndexDescriptor,RolloverIndexRequestParameters, IRolloverIndexRequest>, IRolloverIndexRequest
 	{ 
+		/// <summary>/{alias}/_rollover</summary>
+		///<param name="alias"> this parameter is required</param>
+		public RolloverIndexDescriptor(Name alias) : base(r=>r.Required("alias", alias)){}
+
+		// values part of the url path
 		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
 		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
-		/// <summary>/{alias}/_rollover</summary>
-///<param name="alias"> this parameter is required</param>
-		public RolloverIndexDescriptor(Name alias) : base(r=>r.Required("alias", alias))
-		{}
-		
-
-			///<summary>The name of the rollover index</summary>
+		///<summary>The name of the rollover index</summary>
 		public RolloverIndexDescriptor NewIndex(IndexName newIndex) => Assign(a=>a.RouteValues.Optional("new_index", newIndex));
 
-			///<summary>Explicit operation timeout</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public RolloverIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
-		public RolloverIndexDescriptor DryRun(bool? dry_run = true) => Qs("dry_run", dry_run);
+		public RolloverIndexDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 		///<summary>Specify timeout for connection to master</summary>
-		public RolloverIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public RolloverIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
-		public RolloverIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RolloverIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RolloverIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RolloverIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RolloverIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RolloverIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public RolloverIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	
 	}
 	
 	///<summary>descriptor for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
 	public partial class SegmentsDescriptor  : RequestDescriptorBase<SegmentsDescriptor,SegmentsRequestParameters, ISegmentsRequest>, ISegmentsRequest
 	{ 
-		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_segments</summary>
-		public SegmentsDescriptor() : base()
-		{}
-		
+		public SegmentsDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		// values part of the url path
+		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SegmentsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public SegmentsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SegmentsDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SegmentsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SegmentsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SegmentsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public SegmentsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>TODO: ?</summary>
-		public SegmentsDescriptor OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
+		public SegmentsDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public SegmentsDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SegmentsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SegmentsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SegmentsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SegmentsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SegmentsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresDescriptor  : RequestDescriptorBase<IndicesShardStoresDescriptor,IndicesShardStoresRequestParameters, IIndicesShardStoresRequest>, IIndicesShardStoresRequest
 	{ 
-		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_shard_stores</summary>
-		public IndicesShardStoresDescriptor() : base()
-		{}
-		
+		public IndicesShardStoresDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		// values part of the url path
+		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesShardStoresDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public IndicesShardStoresDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public IndicesShardStoresDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
+		// Request parameters
+		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public IndicesShardStoresDescriptor Status(params string[] status) => Qs("status", status);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesShardStoresDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public IndicesShardStoresDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesShardStoresDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public IndicesShardStoresDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesShardStoresDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public IndicesShardStoresDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>TODO: ?</summary>
-		public IndicesShardStoresDescriptor OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public IndicesShardStoresDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public IndicesShardStoresDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public IndicesShardStoresDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndicesShardStoresDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IndicesShardStoresDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public IndicesShardStoresDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 	
 	}
 	
 	///<summary>descriptor for IndicesShrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
 	public partial class ShrinkIndexDescriptor  : RequestDescriptorBase<ShrinkIndexDescriptor,ShrinkIndexRequestParameters, IShrinkIndexRequest>, IShrinkIndexRequest
 	{ 
+		/// <summary>/{index}/_shrink/{target}</summary>
+		///<param name="index"> this parameter is required</param>
+		///<param name="target"> this parameter is required</param>
+		public ShrinkIndexDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
+
+		// values part of the url path
 		IndexName IShrinkIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
-		/// <summary>/{index}/_shrink/{target}</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="target"> this parameter is required</param>
-		public ShrinkIndexDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target))
-		{}
-		
-
-			///<summary>The name of the source index to shrink</summary>
+		///<summary>The name of the source index to shrink</summary>
 		public ShrinkIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public ShrinkIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
-			///<summary>Explicit operation timeout</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public ShrinkIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public ShrinkIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ShrinkIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
-		public ShrinkIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ShrinkIndexDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ShrinkIndexDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ShrinkIndexDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ShrinkIndexDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ShrinkIndexDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public ShrinkIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	
 	}
 	
 	///<summary>descriptor for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsDescriptor  : RequestDescriptorBase<IndicesStatsDescriptor,IndicesStatsRequestParameters, IIndicesStatsRequest>, IIndicesStatsRequest
 	{ 
+		/// <summary>/_stats</summary>
+		public IndicesStatsDescriptor() : base(){}
+
+		// values part of the url path
 		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Metrics IIndicesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-		/// <summary>/_stats</summary>
-		public IndicesStatsDescriptor() : base()
-		{}
-		
-
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public IndicesStatsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public IndicesStatsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public IndicesStatsDescriptor AllIndices() => this.Index(Indices.All);
-
 		///<summary>Limit the information returned the specific metrics.</summary>
 		public IndicesStatsDescriptor Metric(IndicesStatsMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
-			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor CompletionFields(Fields completion_fields) => Qs("completion_fields", completion_fields);
+		// Request parameters
+		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		public IndicesStatsDescriptor CompletionFields(Fields completionFields) => Qs("completion_fields", completionFields);
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("completion_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor FielddataFields(Fields fielddata_fields) => Qs("fielddata_fields", fielddata_fields);
+		public IndicesStatsDescriptor FielddataFields(Fields fielddataFields) => Qs("fielddata_fields", fielddataFields);
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fielddata_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
@@ -3325,127 +2499,93 @@ namespace Nest
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
 		public IndicesStatsDescriptor Level(Level level) => Qs("level", level);
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
-		public IndicesStatsDescriptor IncludeSegmentFileSizes(bool? include_segment_file_sizes = true) => Qs("include_segment_file_sizes", include_segment_file_sizes);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public IndicesStatsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public IndicesStatsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public IndicesStatsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public IndicesStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public IndicesStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public IndicesStatsDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	
 	}
 	
 	///<summary>descriptor for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class BulkAliasDescriptor  : RequestDescriptorBase<BulkAliasDescriptor,BulkAliasRequestParameters, IBulkAliasRequest>, IBulkAliasRequest
 	{ 
-					///<summary>Request timeout</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Request timeout</summary>
 		public BulkAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public BulkAliasDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public BulkAliasDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public BulkAliasDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public BulkAliasDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public BulkAliasDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public BulkAliasDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public BulkAliasDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeDescriptor  : RequestDescriptorBase<UpgradeDescriptor,UpgradeRequestParameters, IUpgradeRequest>, IUpgradeRequest
 	{ 
-		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_upgrade</summary>
-		public UpgradeDescriptor() : base()
-		{}
-		
+		public UpgradeDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		// values part of the url path
+		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpgradeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public UpgradeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpgradeDescriptor AllIndices() => this.Index(Indices.All);
 
-			///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpgradeDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public UpgradeDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpgradeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public UpgradeDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpgradeDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public UpgradeDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
-		public UpgradeDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public UpgradeDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
-		public UpgradeDescriptor OnlyAncientSegments(bool? only_ancient_segments = true) => Qs("only_ancient_segments", only_ancient_segments);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public UpgradeDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpgradeDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpgradeDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpgradeDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpgradeDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public UpgradeDescriptor OnlyAncientSegments(bool? onlyAncientSegments = true) => Qs("only_ancient_segments", onlyAncientSegments);
 	
 	}
 	
 	///<summary>descriptor for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryDescriptor<T>  : RequestDescriptorBase<ValidateQueryDescriptor<T>,ValidateQueryRequestParameters, IValidateQueryRequest>, IValidateQueryRequest
 	{ 
+		/// <summary>/_validate/query</summary>
+		public ValidateQueryDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+
+		// values part of the url path
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/_validate/query</summary>
-		public ValidateQueryDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T)))
-		{}
-		
-
-			///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to restrict the operation; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public ValidateQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public ValidateQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public ValidateQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</summary>
 		public ValidateQueryDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public ValidateQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public ValidateQueryDescriptor<T> AllTypes() => this.Type(Types.All);
 
-			///<summary>Return detailed information about the error</summary>
+		// Request parameters
+		///<summary>Return detailed information about the error</summary>
 		public ValidateQueryDescriptor<T> Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ValidateQueryDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public ValidateQueryDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ValidateQueryDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public ValidateQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>TODO: ?</summary>
-		public ValidateQueryDescriptor<T> OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
+		public ValidateQueryDescriptor<T> OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ValidateQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
+		public ValidateQueryDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
 		///<summary>The analyzer to use for the query string</summary>
 		public ValidateQueryDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public ValidateQueryDescriptor<T> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public ValidateQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ValidateQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public ValidateQueryDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public ValidateQueryDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
@@ -3453,183 +2593,118 @@ namespace Nest
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public ValidateQueryDescriptor<T> Rewrite(bool? rewrite = true) => Qs("rewrite", rewrite);
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
-		public ValidateQueryDescriptor<T> AllShards(bool? all_shards = true) => Qs("all_shards", all_shards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ValidateQueryDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ValidateQueryDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ValidateQueryDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateQueryDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ValidateQueryDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public ValidateQueryDescriptor<T> AllShards(bool? allShards = true) => Qs("all_shards", allShards);
 	
 	}
 	
 	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class RootNodeInfoDescriptor  : RequestDescriptorBase<RootNodeInfoDescriptor,RootNodeInfoRequestParameters, IRootNodeInfoRequest>, IRootNodeInfoRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public RootNodeInfoDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RootNodeInfoDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RootNodeInfoDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RootNodeInfoDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RootNodeInfoDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class DeletePipelineDescriptor  : RequestDescriptorBase<DeletePipelineDescriptor,DeletePipelineRequestParameters, IDeletePipelineRequest>, IDeletePipelineRequest
 	{ 
-		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_ingest/pipeline/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public DeletePipelineDescriptor(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		///<param name="id"> this parameter is required</param>
+		public DeletePipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeletePipelineDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// values part of the url path
+		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public DeletePipelineDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public DeletePipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeletePipelineDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeletePipelineDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeletePipelineDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeletePipelineDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeletePipelineDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class GetPipelineDescriptor  : RequestDescriptorBase<GetPipelineDescriptor,GetPipelineRequestParameters, IGetPipelineRequest>, IGetPipelineRequest
 	{ 
-		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_ingest/pipeline</summary>
-		public GetPipelineDescriptor() : base()
-		{}
-		
+		public GetPipelineDescriptor() : base(){}
 
-			///<summary>Comma separated list of pipeline ids. Wildcards supported</summary>
+		// values part of the url path
+		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+		///<summary>Comma separated list of pipeline ids. Wildcards supported</summary>
 		public GetPipelineDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetPipelineDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetPipelineDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetPipelineDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetPipelineDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetPipelineDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetPipelineDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public GetPipelineDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class GrokProcessorPatternsDescriptor  : RequestDescriptorBase<GrokProcessorPatternsDescriptor,GrokProcessorPatternsRequestParameters, IGrokProcessorPatternsRequest>, IGrokProcessorPatternsRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public GrokProcessorPatternsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GrokProcessorPatternsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GrokProcessorPatternsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GrokProcessorPatternsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GrokProcessorPatternsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class PutPipelineDescriptor  : RequestDescriptorBase<PutPipelineDescriptor,PutPipelineRequestParameters, IPutPipelineRequest>, IPutPipelineRequest
 	{ 
-		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_ingest/pipeline/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public PutPipelineDescriptor(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		///<param name="id"> this parameter is required</param>
+		public PutPipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public PutPipelineDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// values part of the url path
+		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public PutPipelineDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public PutPipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutPipelineDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutPipelineDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutPipelineDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutPipelineDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutPipelineDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public partial class SimulatePipelineDescriptor  : RequestDescriptorBase<SimulatePipelineDescriptor,SimulatePipelineRequestParameters, ISimulatePipelineRequest>, ISimulatePipelineRequest
 	{ 
-		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_ingest/pipeline/_simulate</summary>
-		public SimulatePipelineDescriptor() : base()
-		{}
-		
+		public SimulatePipelineDescriptor() : base(){}
 
-			///<summary>Pipeline ID</summary>
+		// values part of the url path
+		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+		///<summary>Pipeline ID</summary>
 		public SimulatePipelineDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-			///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
+		// Request parameters
+		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public SimulatePipelineDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SimulatePipelineDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SimulatePipelineDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SimulatePipelineDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SimulatePipelineDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SimulatePipelineDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetDescriptor  : RequestDescriptorBase<MultiGetDescriptor,MultiGetRequestParameters, IMultiGetRequest>, IMultiGetRequest
 	{ 
+		/// <summary>/_mget</summary>
+		public MultiGetDescriptor() : base(){}
+
+		// values part of the url path
 		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IMultiGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		/// <summary>/_mget</summary>
-		public MultiGetDescriptor() : base()
-		{}
-		
-
-			///<summary>The name of the index</summary>
+		///<summary>The name of the index</summary>
 		public MultiGetDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public MultiGetDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document</summary>
 		public MultiGetDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public MultiGetDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
-			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		// Request parameters
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public MultiGetDescriptor Preference(string preference) => Qs("preference", preference);
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public MultiGetDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
@@ -3644,150 +2719,107 @@ namespace Nest
 		///</summary>
 		public MultiGetDescriptor Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public MultiGetDescriptor SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public MultiGetDescriptor SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public MultiGetDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public MultiGetDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
-		///<summary>Pretty format the returned JSON response.</summary>
-		public MultiGetDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public MultiGetDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public MultiGetDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiGetDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public MultiGetDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchDescriptor  : RequestDescriptorBase<MultiSearchDescriptor,MultiSearchRequestParameters, IMultiSearchRequest>, IMultiSearchRequest
 	{ 
+		/// <summary>/_msearch</summary>
+		public MultiSearchDescriptor(){}
+
+		// values part of the url path
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/_msearch</summary>
-		public MultiSearchDescriptor()
-		{}
-		
-
-			///<summary>A comma-separated list of index names to use as default</summary>
+		///<summary>A comma-separated list of index names to use as default</summary>
 		public MultiSearchDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public MultiSearchDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public MultiSearchDescriptor AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types to use as default</summary>
 		public MultiSearchDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public MultiSearchDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public MultiSearchDescriptor AllTypes() => this.Type(Types.All);
 
-			///<summary>Search operation type</summary>
-		public MultiSearchDescriptor SearchType(SearchType search_type) => Qs("search_type", search_type);
+		// Request parameters
+		///<summary>Search operation type</summary>
+		public MultiSearchDescriptor SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
-		public MultiSearchDescriptor MaxConcurrentSearches(long? max_concurrent_searches) => Qs("max_concurrent_searches", max_concurrent_searches);
+		public MultiSearchDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public MultiSearchDescriptor TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
+		public MultiSearchDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
-		public MultiSearchDescriptor PreFilterShardSize(long? pre_filter_shard_size) => Qs("pre_filter_shard_size", pre_filter_shard_size);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public MultiSearchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public MultiSearchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public MultiSearchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiSearchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public MultiSearchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public MultiSearchDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	
 	}
 	
 	///<summary>descriptor for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public partial class MultiSearchTemplateDescriptor  : RequestDescriptorBase<MultiSearchTemplateDescriptor,MultiSearchTemplateRequestParameters, IMultiSearchTemplateRequest>, IMultiSearchTemplateRequest
 	{ 
+		/// <summary>/_msearch/template</summary>
+		public MultiSearchTemplateDescriptor(){}
+
+		// values part of the url path
 		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/_msearch/template</summary>
-		public MultiSearchTemplateDescriptor()
-		{}
-		
-
-			///<summary>A comma-separated list of index names to use as default</summary>
+		///<summary>A comma-separated list of index names to use as default</summary>
 		public MultiSearchTemplateDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public MultiSearchTemplateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public MultiSearchTemplateDescriptor AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types to use as default</summary>
 		public MultiSearchTemplateDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public MultiSearchTemplateDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public MultiSearchTemplateDescriptor AllTypes() => this.Type(Types.All);
 
-			///<summary>Search operation type</summary>
-		public MultiSearchTemplateDescriptor SearchType(SearchType search_type) => Qs("search_type", search_type);
+		// Request parameters
+		///<summary>Search operation type</summary>
+		public MultiSearchTemplateDescriptor SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public MultiSearchTemplateDescriptor TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
+		public MultiSearchTemplateDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
-		public MultiSearchTemplateDescriptor MaxConcurrentSearches(long? max_concurrent_searches) => Qs("max_concurrent_searches", max_concurrent_searches);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public MultiSearchTemplateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public MultiSearchTemplateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public MultiSearchTemplateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiSearchTemplateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public MultiSearchTemplateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public MultiSearchTemplateDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
 	
 	}
 	
 	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsDescriptor  : RequestDescriptorBase<MultiTermVectorsDescriptor,MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
 	{ 
+		/// <summary>/_mtermvectors</summary>
+		public MultiTermVectorsDescriptor() : base(){}
+
+		// values part of the url path
 		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IMultiTermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		/// <summary>/_mtermvectors</summary>
-		public MultiTermVectorsDescriptor() : base()
-		{}
-		
-
-			///<summary>The index in which the document resides.</summary>
+		///<summary>The index in which the document resides.</summary>
 		public MultiTermVectorsDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public MultiTermVectorsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document.</summary>
 		public MultiTermVectorsDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public MultiTermVectorsDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
-			///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		public MultiTermVectorsDescriptor TermStatistics(bool? term_statistics = true) => Qs("term_statistics", term_statistics);
+		// Request parameters
+		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		public MultiTermVectorsDescriptor TermStatistics(bool? termStatistics = true) => Qs("term_statistics", termStatistics);
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		public MultiTermVectorsDescriptor FieldStatistics(bool? field_statistics = true) => Qs("field_statistics", field_statistics);
+		public MultiTermVectorsDescriptor FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public MultiTermVectorsDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
@@ -3816,116 +2848,83 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public MultiTermVectorsDescriptor Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public MultiTermVectorsDescriptor VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public MultiTermVectorsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public MultiTermVectorsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public MultiTermVectorsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public MultiTermVectorsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public MultiTermVectorsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public MultiTermVectorsDescriptor VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
 	///<summary>descriptor for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsDescriptor  : RequestDescriptorBase<NodesHotThreadsDescriptor,NodesHotThreadsRequestParameters, INodesHotThreadsRequest>, INodesHotThreadsRequest
 	{ 
-		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		/// <summary>/_cluster/nodes/hotthreads</summary>
-		public NodesHotThreadsDescriptor() : base()
-		{}
-		
+		public NodesHotThreadsDescriptor() : base(){}
 
-			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
+		// values part of the url path
+		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesHotThreadsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
-			///<summary>The interval for the second sampling of threads</summary>
+		// Request parameters
+		///<summary>The interval for the second sampling of threads</summary>
 		public NodesHotThreadsDescriptor Interval(Time interval) => Qs("interval", interval);
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public NodesHotThreadsDescriptor Snapshots(long? snapshots) => Qs("snapshots", snapshots);
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
 		public NodesHotThreadsDescriptor Threads(long? threads) => Qs("threads", threads);
 		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
-		public NodesHotThreadsDescriptor IgnoreIdleThreads(bool? ignore_idle_threads = true) => Qs("ignore_idle_threads", ignore_idle_threads);
+		public NodesHotThreadsDescriptor IgnoreIdleThreads(bool? ignoreIdleThreads = true) => Qs("ignore_idle_threads", ignoreIdleThreads);
 		///<summary>The type to sample (default: cpu)</summary>
-		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type) => Qs("type", thread_type);
+		public NodesHotThreadsDescriptor ThreadType(ThreadType threadType) => Qs("type", threadType);
 		///<summary>Explicit operation timeout</summary>
 		public NodesHotThreadsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public NodesHotThreadsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public NodesHotThreadsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public NodesHotThreadsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesHotThreadsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public NodesHotThreadsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoDescriptor  : RequestDescriptorBase<NodesInfoDescriptor,NodesInfoRequestParameters, INodesInfoRequest>, INodesInfoRequest
 	{ 
+		/// <summary>/_nodes</summary>
+		public NodesInfoDescriptor() : base(){}
+
+		// values part of the url path
 		NodeIds INodesInfoRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-		/// <summary>/_nodes</summary>
-		public NodesInfoDescriptor() : base()
-		{}
-		
-
-			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesInfoDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
-
 		///<summary>A comma-separated list of metrics you wish returned. Leave empty to return all.</summary>
 		public NodesInfoDescriptor Metric(NodesInfoMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
-			///<summary>Return settings in flat format (default: false)</summary>
-		public NodesInfoDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
+		public NodesInfoDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout</summary>
 		public NodesInfoDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public NodesInfoDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public NodesInfoDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public NodesInfoDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesInfoDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public NodesInfoDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsDescriptor  : RequestDescriptorBase<NodesStatsDescriptor,NodesStatsRequestParameters, INodesStatsRequest>, INodesStatsRequest
 	{ 
+		/// <summary>/_nodes/stats</summary>
+		public NodesStatsDescriptor() : base(){}
+
+		// values part of the url path
 		Metrics INodesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		IndexMetrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<IndexMetrics>("index_metric");
 		NodeIds INodesStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-		/// <summary>/_nodes/stats</summary>
-		public NodesStatsDescriptor() : base()
-		{}
-		
-
-			///<summary>Limit the information returned to the specified metrics</summary>
+		///<summary>Limit the information returned to the specified metrics</summary>
 		public NodesStatsDescriptor Metric(NodesStatsMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
-
 		///<summary>Limit the information returned for `indices` metric to the specific index metrics. Isn't used if `indices` (or `all`) metric isn't specified.</summary>
 		public NodesStatsDescriptor IndexMetric(NodesStatsIndexMetric indexMetric) => Assign(a=>a.RouteValues.Optional("index_metric", (IndexMetrics)indexMetric));
-
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesStatsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
-			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor CompletionFields(Fields completion_fields) => Qs("completion_fields", completion_fields);
+		// Request parameters
+		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		public NodesStatsDescriptor CompletionFields(Fields completionFields) => Qs("completion_fields", completionFields);
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("completion_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor FielddataFields(Fields fielddata_fields) => Qs("fielddata_fields", fielddata_fields);
+		public NodesStatsDescriptor FielddataFields(Fields fielddataFields) => Qs("fielddata_fields", fielddataFields);
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fielddata_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
@@ -3941,229 +2940,164 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public NodesStatsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
-		public NodesStatsDescriptor IncludeSegmentFileSizes(bool? include_segment_file_sizes = true) => Qs("include_segment_file_sizes", include_segment_file_sizes);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public NodesStatsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public NodesStatsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public NodesStatsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public NodesStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public NodesStatsDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	
 	}
 	
 	///<summary>descriptor for NodesUsageForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 	public partial class NodesUsageDescriptor  : RequestDescriptorBase<NodesUsageDescriptor,NodesUsageRequestParameters, INodesUsageRequest>, INodesUsageRequest
 	{ 
+		/// <summary>/_nodes/usage</summary>
+		public NodesUsageDescriptor() : base(){}
+
+		// values part of the url path
 		Metrics INodesUsageRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		NodeIds INodesUsageRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-		/// <summary>/_nodes/usage</summary>
-		public NodesUsageDescriptor() : base()
-		{}
-		
-
-			///<summary>Limit the information returned to the specified metrics</summary>
+		///<summary>Limit the information returned to the specified metrics</summary>
 		public NodesUsageDescriptor Metric(NodesUsageMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
-
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesUsageDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
-			///<summary>Whether to return time and byte values in human-readable format.</summary>
+		// Request parameters
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public NodesUsageDescriptor Human(bool? human = true) => Qs("human", human);
 		///<summary>Explicit operation timeout</summary>
 		public NodesUsageDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public NodesUsageDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public NodesUsageDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public NodesUsageDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public NodesUsageDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingDescriptor  : RequestDescriptorBase<PingDescriptor,PingRequestParameters, IPingRequest>, IPingRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public PingDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PingDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PingDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PingDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PingDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptDescriptor  : RequestDescriptorBase<PutScriptDescriptor,PutScriptRequestParameters, IPutScriptRequest>, IPutScriptRequest
 	{ 
+		/// <summary>/_scripts/{id}</summary>
+		///<param name="id"> this parameter is required</param>
+		public PutScriptDescriptor(Id id) : base(r=>r.Required("id", id)){}
+
+		// values part of the url path
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
-		/// <summary>/_scripts/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public PutScriptDescriptor(Id id) : base(r=>r.Required("id", id))
-		{}
-		
-
-			///<summary>Script context</summary>
+		///<summary>Script context</summary>
 		public PutScriptDescriptor Context(Name context) => Assign(a=>a.RouteValues.Optional("context", context));
 
-			///<summary>Explicit operation timeout</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public PutScriptDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public PutScriptDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutScriptDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutScriptDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutScriptDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutScriptDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutScriptDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public PutScriptDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for Reindex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexOnServerDescriptor  : RequestDescriptorBase<ReindexOnServerDescriptor,ReindexOnServerRequestParameters, IReindexOnServerRequest>, IReindexOnServerRequest
 	{ 
-					///<summary>Should the effected indexes be refreshed?</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Should the effected indexes be refreshed?</summary>
 		public ReindexOnServerDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public ReindexOnServerDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public ReindexOnServerDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public ReindexOnServerDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Should the request should block until the reindex is complete.</summary>
-		public ReindexOnServerDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public ReindexOnServerDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
-		public ReindexOnServerDescriptor RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
+		public ReindexOnServerDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public ReindexOnServerDescriptor Slices(long? slices) => Qs("slices", slices);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ReindexOnServerDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ReindexOnServerDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ReindexOnServerDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ReindexOnServerDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexRethrottleDescriptor  : RequestDescriptorBase<ReindexRethrottleDescriptor,ReindexRethrottleRequestParameters, IReindexRethrottleRequest>, IReindexRethrottleRequest
 	{ 
-		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 		/// <summary>/_reindex/{task_id}/_rethrottle</summary>
-		public ReindexRethrottleDescriptor() : base()
-		{}
-		
+		public ReindexRethrottleDescriptor() : base(){}
 
-			///<summary>The task id to rethrottle</summary>
+		// values part of the url path
+		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+		///<summary>The task id to rethrottle</summary>
 		public ReindexRethrottleDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
-			///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
-		public ReindexRethrottleDescriptor RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ReindexRethrottleDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ReindexRethrottleDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ReindexRethrottleDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ReindexRethrottleDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ReindexRethrottleDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		public ReindexRethrottleDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 	
 	}
 	
 	///<summary>descriptor for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateDescriptor  : RequestDescriptorBase<RenderSearchTemplateDescriptor,RenderSearchTemplateRequestParameters, IRenderSearchTemplateRequest>, IRenderSearchTemplateRequest
 	{ 
-		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_render/template</summary>
-		public RenderSearchTemplateDescriptor() : base()
-		{}
-		
+		public RenderSearchTemplateDescriptor() : base(){}
 
-			///<summary>The id of the stored search template</summary>
+		// values part of the url path
+		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+		///<summary>The id of the stored search template</summary>
 		public RenderSearchTemplateDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-		
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ScrollDescriptor<T>  : RequestDescriptorBase<ScrollDescriptor<T>,ScrollRequestParameters, IScrollRequest>, IScrollRequest
 	{ 
 		/// <summary>/_search/scroll</summary>
-		public ScrollDescriptor() : base()
-		{}
-		
+		public ScrollDescriptor() : base(){}
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public ScrollDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ScrollDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ScrollDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ScrollDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ScrollDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchDescriptor<T>  : RequestDescriptorBase<SearchDescriptor<T>,SearchRequestParameters, ISearchRequest>, ISearchRequest
 	{ 
+		/// <summary>/_search</summary>
+		public SearchDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+
+		// values part of the url path
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/_search</summary>
-		public SearchDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T)))
-		{}
-		
-
-			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public SearchDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SearchDescriptor<T> AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
 		public SearchDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public SearchDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public SearchDescriptor<T> AllTypes() => this.Type(Types.All);
 
-			///<summary>The analyzer to use for the query string</summary>
+		// Request parameters
+		///<summary>The analyzer to use for the query string</summary>
 		public SearchDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchDescriptor<T> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public SearchDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public SearchDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public SearchDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public SearchDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public SearchDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -4179,62 +3113,52 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public SearchDescriptor<T> SearchType(SearchType search_type) => Qs("search_type", search_type);
+		public SearchDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public SearchDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<T> SuggestField(Field suggest_field) => Qs("suggest_field", suggest_field);
+		public SearchDescriptor<T> SuggestField(Field suggestField) => Qs("suggest_field", suggestField);
 
 		///<summary>Specify which field to use for suggestions</summary>
 		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> field)  => Qs("suggest_field", (Field)field);
 		///<summary>Specify suggest mode</summary>
-		public SearchDescriptor<T> SuggestMode(SuggestMode suggest_mode) => Qs("suggest_mode", suggest_mode);
+		public SearchDescriptor<T> SuggestMode(SuggestMode suggestMode) => Qs("suggest_mode", suggestMode);
 		///<summary>How many suggestions to return in response</summary>
-		public SearchDescriptor<T> SuggestSize(long? suggest_size) => Qs("suggest_size", suggest_size);
+		public SearchDescriptor<T> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public SearchDescriptor<T> SuggestText(string suggest_text) => Qs("suggest_text", suggest_text);
+		public SearchDescriptor<T> SuggestText(string suggestText) => Qs("suggest_text", suggestText);
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
-		public SearchDescriptor<T> TrackTotalHits(bool? track_total_hits = true) => Qs("track_total_hits", track_total_hits);
+		public SearchDescriptor<T> TrackTotalHits(bool? trackTotalHits = true) => Qs("track_total_hits", trackTotalHits);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public SearchDescriptor<T> TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
+		public SearchDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public SearchDescriptor<T> RequestCache(bool? request_cache = true) => Qs("request_cache", request_cache);
+		public SearchDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
-		public SearchDescriptor<T> BatchedReduceSize(long? batched_reduce_size) => Qs("batched_reduce_size", batched_reduce_size);
+		public SearchDescriptor<T> BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
 		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
-		public SearchDescriptor<T> MaxConcurrentShardRequests(long? max_concurrent_shard_requests) => Qs("max_concurrent_shard_requests", max_concurrent_shard_requests);
+		public SearchDescriptor<T> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
-		public SearchDescriptor<T> PreFilterShardSize(long? pre_filter_shard_size) => Qs("pre_filter_shard_size", pre_filter_shard_size);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SearchDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SearchDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SearchDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SearchDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public SearchDescriptor<T> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	
 	}
 	
 	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T>  : RequestDescriptorBase<SearchShardsDescriptor<T>,SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
 	{ 
-		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		/// <summary>/_search_shards</summary>
-		public SearchShardsDescriptor() : base()
-		{}
-		
+		public SearchShardsDescriptor() : base(){}
 
-			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		// values part of the url path
+		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchShardsDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public SearchShardsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SearchShardsDescriptor<T> AllIndices() => this.Index(Indices.All);
 
-			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		// Request parameters
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchShardsDescriptor<T> Preference(string preference) => Qs("preference", preference);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
@@ -4247,58 +3171,43 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public SearchShardsDescriptor<T> Local(bool? local = true) => Qs("local", local);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchShardsDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public SearchShardsDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchShardsDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public SearchShardsDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SearchShardsDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SearchShardsDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SearchShardsDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SearchShardsDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SearchShardsDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
 	///<summary>descriptor for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateDescriptor<T>  : RequestDescriptorBase<SearchTemplateDescriptor<T>,SearchTemplateRequestParameters, ISearchTemplateRequest>, ISearchTemplateRequest
 	{ 
+		/// <summary>/_search/template</summary>
+		public SearchTemplateDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
+
+		// values part of the url path
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/_search/template</summary>
-		public SearchTemplateDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T)))
-		{}
-		
-
-			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public SearchTemplateDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public SearchTemplateDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public SearchTemplateDescriptor<T> AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
 		public SearchTemplateDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public SearchTemplateDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public SearchTemplateDescriptor<T> AllTypes() => this.Type(Types.All);
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchTemplateDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public SearchTemplateDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchTemplateDescriptor<T> Preference(string preference) => Qs("preference", preference);
  		///<summary>
@@ -4312,416 +3221,291 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchTemplateDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public SearchTemplateDescriptor<T> SearchType(SearchType search_type) => Qs("search_type", search_type);
+		public SearchTemplateDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public SearchTemplateDescriptor<T> Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Specify whether to profile the query execution</summary>
 		public SearchTemplateDescriptor<T> Profile(bool? profile = true) => Qs("profile", profile);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public SearchTemplateDescriptor<T> TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SearchTemplateDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SearchTemplateDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SearchTemplateDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SearchTemplateDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SearchTemplateDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public SearchTemplateDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	
 	}
 	
 	///<summary>descriptor for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotDescriptor  : RequestDescriptorBase<SnapshotDescriptor,SnapshotRequestParameters, ISnapshotRequest>, ISnapshotRequest
 	{ 
+		/// <summary>/_snapshot/{repository}/{snapshot}</summary>
+		///<param name="repository"> this parameter is required</param>
+		///<param name="snapshot"> this parameter is required</param>
+		public SnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
+		// values part of the url path
 		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name ISnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
-		/// <summary>/_snapshot/{repository}/{snapshot}</summary>
-///<param name="repository"> this parameter is required</param>		
-///<param name="snapshot"> this parameter is required</param>
-		public SnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
-		{}
-		
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public SnapshotDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public SnapshotDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SnapshotDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SnapshotDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SnapshotDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public SnapshotDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	
 	}
 	
 	///<summary>descriptor for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class CreateRepositoryDescriptor  : RequestDescriptorBase<CreateRepositoryDescriptor,CreateRepositoryRequestParameters, ICreateRepositoryRequest>, ICreateRepositoryRequest
 	{ 
-		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		/// <summary>/_snapshot/{repository}</summary>
-///<param name="repository"> this parameter is required</param>
-		public CreateRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository))
-		{}
-		
+		///<param name="repository"> this parameter is required</param>
+		public CreateRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository)){}
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public CreateRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// values part of the url path
+		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CreateRepositoryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public CreateRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Whether to verify the repository after creation</summary>
 		public CreateRepositoryDescriptor Verify(bool? verify = true) => Qs("verify", verify);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CreateRepositoryDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CreateRepositoryDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CreateRepositoryDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CreateRepositoryDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CreateRepositoryDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotDescriptor  : RequestDescriptorBase<DeleteSnapshotDescriptor,DeleteSnapshotRequestParameters, IDeleteSnapshotRequest>, IDeleteSnapshotRequest
 	{ 
+		/// <summary>/_snapshot/{repository}/{snapshot}</summary>
+		///<param name="repository"> this parameter is required</param>
+		///<param name="snapshot"> this parameter is required</param>
+		public DeleteSnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
+		// values part of the url path
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
-		/// <summary>/_snapshot/{repository}/{snapshot}</summary>
-///<param name="repository"> this parameter is required</param>		
-///<param name="snapshot"> this parameter is required</param>
-		public DeleteSnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
-		{}
-		
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteSnapshotDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteSnapshotDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteSnapshotDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteSnapshotDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteSnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteSnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public DeleteSnapshotDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteRepositoryDescriptor  : RequestDescriptorBase<DeleteRepositoryDescriptor,DeleteRepositoryRequestParameters, IDeleteRepositoryRequest>, IDeleteRepositoryRequest
 	{ 
-		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 		/// <summary>/_snapshot/{repository}</summary>
-///<param name="repository"> this parameter is required</param>
-		public DeleteRepositoryDescriptor(Names repository) : base(r=>r.Required("repository", repository))
-		{}
-		
+		///<param name="repository"> this parameter is required</param>
+		public DeleteRepositoryDescriptor(Names repository) : base(r=>r.Required("repository", repository)){}
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// values part of the url path
+		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public DeleteRepositoryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public DeleteRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteRepositoryDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteRepositoryDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteRepositoryDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRepositoryDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteRepositoryDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotDescriptor  : RequestDescriptorBase<GetSnapshotDescriptor,GetSnapshotRequestParameters, IGetSnapshotRequest>, IGetSnapshotRequest
 	{ 
+		/// <summary>/_snapshot/{repository}/{snapshot}</summary>
+		///<param name="repository"> this parameter is required</param>
+		///<param name="snapshot"> this parameter is required</param>
+		public GetSnapshotDescriptor(Name repository, Names snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
+		// values part of the url path
 		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names IGetSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
-		/// <summary>/_snapshot/{repository}/{snapshot}</summary>
-///<param name="repository"> this parameter is required</param>		
-///<param name="snapshot"> this parameter is required</param>
-		public GetSnapshotDescriptor(Name repository, Names snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
-		{}
-		
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetSnapshotDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public GetSnapshotDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
-		public GetSnapshotDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public GetSnapshotDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public GetSnapshotDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetSnapshotDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetSnapshotDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetSnapshotDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetSnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetSnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryDescriptor  : RequestDescriptorBase<GetRepositoryDescriptor,GetRepositoryRequestParameters, IGetRepositoryRequest>, IGetRepositoryRequest
 	{ 
-		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 		/// <summary>/_snapshot</summary>
-		public GetRepositoryDescriptor() : base()
-		{}
-		
+		public GetRepositoryDescriptor() : base(){}
 
-			///<summary>A comma-separated list of repository names</summary>
+		// values part of the url path
+		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+		///<summary>A comma-separated list of repository names</summary>
 		public GetRepositoryDescriptor RepositoryName(Names repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public GetRepositoryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetRepositoryDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetRepositoryDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetRepositoryDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetRepositoryDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRepositoryDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetRepositoryDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class RestoreDescriptor  : RequestDescriptorBase<RestoreDescriptor,RestoreRequestParameters, IRestoreRequest>, IRestoreRequest
 	{ 
+		/// <summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
+		///<param name="repository"> this parameter is required</param>
+		///<param name="snapshot"> this parameter is required</param>
+		public RestoreDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
+		// values part of the url path
 		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IRestoreRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
-		/// <summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
-///<param name="repository"> this parameter is required</param>		
-///<param name="snapshot"> this parameter is required</param>
-		public RestoreDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
-		{}
-		
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public RestoreDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public RestoreDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public RestoreDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public RestoreDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RestoreDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RestoreDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RestoreDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RestoreDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public RestoreDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	
 	}
 	
 	///<summary>descriptor for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusDescriptor  : RequestDescriptorBase<SnapshotStatusDescriptor,SnapshotStatusRequestParameters, ISnapshotStatusRequest>, ISnapshotStatusRequest
 	{ 
+		/// <summary>/_snapshot/_status</summary>
+		public SnapshotStatusDescriptor() : base(){}
+
+		// values part of the url path
 		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
-		/// <summary>/_snapshot/_status</summary>
-		public SnapshotStatusDescriptor() : base()
-		{}
-		
-
-			///<summary>A repository name</summary>
+		///<summary>A repository name</summary>
 		public SnapshotStatusDescriptor RepositoryName(Name repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
-
 		///<summary>A comma-separated list of snapshot names</summary>
 		public SnapshotStatusDescriptor Snapshot(Names snapshot) => Assign(a=>a.RouteValues.Optional("snapshot", snapshot));
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotStatusDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public SnapshotStatusDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
-		public SnapshotStatusDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public SnapshotStatusDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public SnapshotStatusDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public SnapshotStatusDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public SnapshotStatusDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public SnapshotStatusDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public SnapshotStatusDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	
 	}
 	
 	///<summary>descriptor for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class VerifyRepositoryDescriptor  : RequestDescriptorBase<VerifyRepositoryDescriptor,VerifyRepositoryRequestParameters, IVerifyRepositoryRequest>, IVerifyRepositoryRequest
 	{ 
-		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		/// <summary>/_snapshot/{repository}/_verify</summary>
-///<param name="repository"> this parameter is required</param>
-		public VerifyRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository))
-		{}
-		
+		///<param name="repository"> this parameter is required</param>
+		public VerifyRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository)){}
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public VerifyRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// values part of the url path
+		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public VerifyRepositoryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public VerifyRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public VerifyRepositoryDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public VerifyRepositoryDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public VerifyRepositoryDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public VerifyRepositoryDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public VerifyRepositoryDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class CancelTasksDescriptor  : RequestDescriptorBase<CancelTasksDescriptor,CancelTasksRequestParameters, ICancelTasksRequest>, ICancelTasksRequest
 	{ 
-		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 		/// <summary>/_tasks/_cancel</summary>
-		public CancelTasksDescriptor() : base()
-		{}
-		
+		public CancelTasksDescriptor() : base(){}
 
-			///<summary>Cancel the task with specified task id (node_id:task_number)</summary>
+		// values part of the url path
+		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+		///<summary>Cancel the task with specified task id (node_id:task_number)</summary>
 		public CancelTasksDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
-			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
+		// Request parameters
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public CancelTasksDescriptor Nodes(params string[] nodes) => Qs("nodes", nodes);
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
 		public CancelTasksDescriptor Actions(params string[] actions) => Qs("actions", actions);
 		///<summary>Cancel tasks with specified parent node.</summary>
-		public CancelTasksDescriptor ParentNode(string parent_node) => Qs("parent_node", parent_node);
+		public CancelTasksDescriptor ParentNode(string parentNode) => Qs("parent_node", parentNode);
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public CancelTasksDescriptor ParentTaskId(string parent_task_id) => Qs("parent_task_id", parent_task_id);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CancelTasksDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CancelTasksDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CancelTasksDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CancelTasksDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CancelTasksDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public CancelTasksDescriptor ParentTaskId(string parentTaskId) => Qs("parent_task_id", parentTaskId);
 	
 	}
 	
 	///<summary>descriptor for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class GetTaskDescriptor  : RequestDescriptorBase<GetTaskDescriptor,GetTaskRequestParameters, IGetTaskRequest>, IGetTaskRequest
 	{ 
-		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 		/// <summary>/_tasks/{task_id}</summary>
-		public GetTaskDescriptor() : base()
-		{}
-		
+		public GetTaskDescriptor() : base(){}
 
-			///<summary>Return the task with specified id (node_id:task_number)</summary>
+		// values part of the url path
+		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+		///<summary>Return the task with specified id (node_id:task_number)</summary>
 		public GetTaskDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
-			///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public GetTaskDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetTaskDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetTaskDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetTaskDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetTaskDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetTaskDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
+		///<summary>Wait for the matching tasks to complete (default: false)</summary>
+		public GetTaskDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	
 	}
 	
 	///<summary>descriptor for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class ListTasksDescriptor  : RequestDescriptorBase<ListTasksDescriptor,ListTasksRequestParameters, IListTasksRequest>, IListTasksRequest
 	{ 
-					///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public ListTasksDescriptor Nodes(params string[] nodes) => Qs("nodes", nodes);
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public ListTasksDescriptor Actions(params string[] actions) => Qs("actions", actions);
 		///<summary>Return detailed task information (default: false)</summary>
 		public ListTasksDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 		///<summary>Return tasks with specified parent node.</summary>
-		public ListTasksDescriptor ParentNode(string parent_node) => Qs("parent_node", parent_node);
+		public ListTasksDescriptor ParentNode(string parentNode) => Qs("parent_node", parentNode);
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public ListTasksDescriptor ParentTaskId(string parent_task_id) => Qs("parent_task_id", parent_task_id);
+		public ListTasksDescriptor ParentTaskId(string parentTaskId) => Qs("parent_task_id", parentTaskId);
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public ListTasksDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public ListTasksDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
-		public ListTasksDescriptor GroupBy(GroupBy group_by) => Qs("group_by", group_by);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ListTasksDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ListTasksDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ListTasksDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ListTasksDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ListTasksDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public ListTasksDescriptor GroupBy(GroupBy groupBy) => Qs("group_by", groupBy);
 	
 	}
 	
 	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsDescriptor<TDocument>  : RequestDescriptorBase<TermVectorsDescriptor<TDocument>,TermVectorsRequestParameters, ITermVectorsRequest<TDocument>>, ITermVectorsRequest<TDocument>
 	{ 
-		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ITermVectorsRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
-		Id ITermVectorsRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/{index}/{type}/_termvectors</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
 		public TermVectorsDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-	/// <summary>/{index}/{type}/_termvectors</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		/// <summary>/{index}/{type}/_termvectors</summary>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public TermVectorsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>The index in which the document resides.</summary>
+		// values part of the url path
+		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ITermVectorsRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ITermVectorsRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		///<summary>The index in which the document resides.</summary>
 		public TermVectorsDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public TermVectorsDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document.</summary>
 		public TermVectorsDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public TermVectorsDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
-
 		///<summary>The id of the document, when not specified a doc param should be supplied.</summary>
 		public TermVectorsDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public TermVectorsDescriptor<TDocument> TermStatistics(bool? term_statistics = true) => Qs("term_statistics", term_statistics);
+		// Request parameters
+		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
+		public TermVectorsDescriptor<TDocument> TermStatistics(bool? termStatistics = true) => Qs("term_statistics", termStatistics);
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public TermVectorsDescriptor<TDocument> FieldStatistics(bool? field_statistics = true) => Qs("field_statistics", field_statistics);
+		public TermVectorsDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 		///<summary>A comma-separated list of fields to return.</summary>
 		public TermVectorsDescriptor<TDocument> Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of fields to return.</summary>
@@ -4750,57 +3534,44 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public TermVectorsDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public TermVectorsDescriptor<TDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public TermVectorsDescriptor<TDocument> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public TermVectorsDescriptor<TDocument> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public TermVectorsDescriptor<TDocument> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public TermVectorsDescriptor<TDocument> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public TermVectorsDescriptor<TDocument> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public TermVectorsDescriptor<TDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
 	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
 	public partial class UpdateDescriptor<TDocument, TPartialDocument>  : RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>,UpdateRequestParameters, IUpdateRequest<TDocument, TPartialDocument>>, IUpdateRequest<TDocument, TPartialDocument>
 	{ 
-		Id IUpdateRequest<TDocument, TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IUpdateRequest<TDocument, TPartialDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IUpdateRequest<TDocument, TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 		/// <summary>/{index}/{type}/{id}/_update</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="type"> this parameter is required</param>		
-///<param name="id"> this parameter is required</param>
+		///<param name="index"> this parameter is required</param>
+		///<param name="type"> this parameter is required</param>
+		///<param name="id"> this parameter is required</param>
 		public UpdateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		=> Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-	/// <summary>/{index}/{type}/{id}/_update</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		/// <summary>/{index}/{type}/{id}/_update</summary>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public UpdateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document));}
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>The name of the index</summary>
+		// values part of the url path
+		Id IUpdateRequest<TDocument, TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IUpdateRequest<TDocument, TPartialDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IUpdateRequest<TDocument, TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		///<summary>The name of the index</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
-
 		///<summary>The type of the document</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		// Request parameters
+		///<summary>Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public UpdateDescriptor<TDocument, TPartialDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>The script language (default: painless)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => Qs("lang", lang);
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
@@ -4809,7 +3580,7 @@ namespace Nest
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Refresh(Refresh refresh) => Qs("refresh", refresh);
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> RetryOnConflict(long? retry_on_conflict) => Qs("retry_on_conflict", retry_on_conflict);
+		public UpdateDescriptor<TDocument, TPartialDocument> RetryOnConflict(long? retryOnConflict) => Qs("retry_on_conflict", retryOnConflict);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -4827,67 +3598,52 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
 	///<summary>descriptor for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
 	public partial class UpdateByQueryDescriptor<T>  : RequestDescriptorBase<UpdateByQueryDescriptor<T>,UpdateByQueryRequestParameters, IUpdateByQueryRequest>, IUpdateByQueryRequest
 	{ 
+		/// <summary>/{index}/_update_by_query</summary>
+		///<param name="index"> this parameter is required</param>
+		public UpdateByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T))){}
+
+		// values part of the url path
 		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/{index}/_update_by_query</summary>
-///<param name="index"> this parameter is required</param>
-		public UpdateByQueryDescriptor(Indices index) : base(r=>r.Required("index", index).Required("type", (Types)typeof(T)))
-		{}
-		
-
-			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public UpdateByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public UpdateByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public UpdateByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
 		public UpdateByQueryDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public UpdateByQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public UpdateByQueryDescriptor<T> AllTypes() => this.Type(Types.All);
 
-			///<summary>The analyzer to use for the query string</summary>
+		// Request parameters
+		///<summary>The analyzer to use for the query string</summary>
 		public UpdateByQueryDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public UpdateByQueryDescriptor<T> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public UpdateByQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public UpdateByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public UpdateByQueryDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public UpdateByQueryDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Starting offset (default: 0)</summary>
 		public UpdateByQueryDescriptor<T> From(long? from) => Qs("from", from);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpdateByQueryDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public UpdateByQueryDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpdateByQueryDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public UpdateByQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>What to do when the update by query hits version conflicts?</summary>
 		public UpdateByQueryDescriptor<T> Conflicts(Conflicts conflicts) => Qs("conflicts", conflicts);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public UpdateByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public UpdateByQueryDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
@@ -4895,7 +3651,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public UpdateByQueryDescriptor<T> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public UpdateByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
+		public UpdateByQueryDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -4907,90 +3663,75 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public UpdateByQueryDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public UpdateByQueryDescriptor<T> SearchType(SearchType search_type) => Qs("search_type", search_type);
+		public UpdateByQueryDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public UpdateByQueryDescriptor<T> SearchTimeout(Time search_timeout) => Qs("search_timeout", search_timeout);
+		public UpdateByQueryDescriptor<T> SearchTimeout(Time searchTimeout) => Qs("search_timeout", searchTimeout);
 		///<summary>Number of hits to return (default: 10)</summary>
 		public UpdateByQueryDescriptor<T> Size(long? size) => Qs("size", size);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public UpdateByQueryDescriptor<T> Sort(params string[] sort) => Qs("sort", sort);
 		///<summary>Whether the _source should be included in the response.</summary>
-		public UpdateByQueryDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public UpdateByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public UpdateByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public UpdateByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public UpdateByQueryDescriptor<T> TerminateAfter(long? terminate_after) => Qs("terminate_after", terminate_after);
+		public UpdateByQueryDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public UpdateByQueryDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public UpdateByQueryDescriptor<T> Version(bool? version = true) => Qs("version", version);
 		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
-		public UpdateByQueryDescriptor<T> VersionType(bool? version_type = true) => Qs("version_type", version_type);
+		public UpdateByQueryDescriptor<T> VersionType(bool? versionType = true) => Qs("version_type", versionType);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public UpdateByQueryDescriptor<T> RequestCache(bool? request_cache = true) => Qs("request_cache", request_cache);
+		public UpdateByQueryDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public UpdateByQueryDescriptor<T> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public UpdateByQueryDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public UpdateByQueryDescriptor<T> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public UpdateByQueryDescriptor<T> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public UpdateByQueryDescriptor<T> ScrollSize(long? scroll_size) => Qs("scroll_size", scroll_size);
+		public UpdateByQueryDescriptor<T> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
 		///<summary>Should the request should block until the update by query operation is complete.</summary>
-		public UpdateByQueryDescriptor<T> WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public UpdateByQueryDescriptor<T> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
-		public UpdateByQueryDescriptor<T> RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
+		public UpdateByQueryDescriptor<T> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public UpdateByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateByQueryDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateByQueryDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateByQueryDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateByQueryDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateByQueryDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreDescriptor<T>  : RequestDescriptorBase<GraphExploreDescriptor<T>,GraphExploreRequestParameters, IGraphExploreRequest>, IGraphExploreRequest
 	{ 
+		/// <summary>/{index}/_xpack/graph/_explore</summary>
+		///<param name="index"> this parameter is required</param>
+		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+
+		// values part of the url path
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-		/// <summary>/{index}/_xpack/graph/_explore</summary>
-///<param name="index"> this parameter is required</param>
-		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
-
-			///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
 		public GraphExploreDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public GraphExploreDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public GraphExploreDescriptor<T> AllIndices() => this.Index(Indices.All);
-
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
 		public GraphExploreDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
 		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
 		public GraphExploreDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
 		///<summary>a shortcut into calling Type(Types.All)</summary>
 		public GraphExploreDescriptor<T> AllTypes() => this.Type(Types.All);
 
-	 		///<summary>
+		// Request parameters
+ 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
@@ -5000,1319 +3741,896 @@ namespace Nest
 		public GraphExploreDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
 		public GraphExploreDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GraphExploreDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GraphExploreDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GraphExploreDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GraphExploreDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GraphExploreDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackDeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
 	public partial class DeprecationInfoDescriptor  : RequestDescriptorBase<DeprecationInfoDescriptor,DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
 	{ 
-		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		/// <summary>/_xpack/migration/deprecations</summary>
-		public DeprecationInfoDescriptor() : base()
-		{}
-		
+		public DeprecationInfoDescriptor() : base(){}
 
-			///<summary>Index pattern</summary>
+		// values part of the url path
+		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>Index pattern</summary>
 		public DeprecationInfoDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
-
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
 		public DeprecationInfoDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public DeprecationInfoDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeprecationInfoDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeprecationInfoDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeprecationInfoDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeprecationInfoDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public partial class XPackInfoDescriptor  : RequestDescriptorBase<XPackInfoDescriptor,XPackInfoRequestParameters, IXPackInfoRequest>, IXPackInfoRequest
 	{ 
-					///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
 		public XPackInfoDescriptor Human(bool? human = true) => Qs("human", human);
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public XPackInfoDescriptor Categories(params string[] categories) => Qs("categories", categories);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public XPackInfoDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public XPackInfoDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XPackInfoDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XPackInfoDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
 	public partial class XPackUsageDescriptor  : RequestDescriptorBase<XPackUsageDescriptor,XPackUsageRequestParameters, IXPackUsageRequest>, IXPackUsageRequest
 	{ 
-					///<summary>Specify timeout for watch write operation</summary>
-		public XPackUsageDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public XPackUsageDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public XPackUsageDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public XPackUsageDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public XPackUsageDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public XPackUsageDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Specify timeout for watch write operation</summary>
+		public XPackUsageDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
 	{ 
-				
+		// values part of the url path
+
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class GetLicenseDescriptor  : RequestDescriptorBase<GetLicenseDescriptor,GetLicenseRequestParameters, IGetLicenseRequest>, IGetLicenseRequest
 	{ 
-					///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetLicenseDescriptor Local(bool? local = true) => Qs("local", local);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public GetLicenseDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetLicenseDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetLicenseDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetLicenseDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetLicenseDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackLicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseDescriptor  : RequestDescriptorBase<PostLicenseDescriptor,PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
 	{ 
-					///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public PostLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PostLicenseDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PostLicenseDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PostLicenseDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PostLicenseDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PostLicenseDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackMlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
 	public partial class CloseJobDescriptor  : RequestDescriptorBase<CloseJobDescriptor,CloseJobRequestParameters, ICloseJobRequest>, ICloseJobRequest
 	{ 
-		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_close</summary>
-///<param name="job_id"> this parameter is required</param>
-		public CloseJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id"> this parameter is required</param>
+		public CloseJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-				///<summary>True if the job should be forcefully closed</summary>
+		// values part of the url path
+		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>True if the job should be forcefully closed</summary>
 		public CloseJobDescriptor Force(bool? force = true) => Qs("force", force);
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public CloseJobDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public CloseJobDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public CloseJobDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public CloseJobDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public CloseJobDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public CloseJobDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackMlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public partial class DeleteDatafeedDescriptor  : RequestDescriptorBase<DeleteDatafeedDescriptor,DeleteDatafeedRequestParameters, IDeleteDatafeedRequest>, IDeleteDatafeedRequest
 	{ 
-		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
-///<param name="datafeed_id"> this parameter is required</param>
-		public DeleteDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{}
-		
+		///<param name="datafeed_id"> this parameter is required</param>
+		public DeleteDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 
-				///<summary>True if the datafeed should be forcefully deleted</summary>
+		// values part of the url path
+		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+		///<summary>True if the datafeed should be forcefully deleted</summary>
 		public DeleteDatafeedDescriptor Force(bool? force = true) => Qs("force", force);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteDatafeedDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteDatafeedDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteDatafeedDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteDatafeedDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteDatafeedDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackMlDeleteExpiredData <pre></pre></summary>
 	public partial class DeleteExpiredDataDescriptor  : RequestDescriptorBase<DeleteExpiredDataDescriptor,DeleteExpiredDataRequestParameters, IDeleteExpiredDataRequest>, IDeleteExpiredDataRequest
 	{ 
-				
+		// values part of the url path
+
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 	public partial class DeleteJobDescriptor  : RequestDescriptorBase<DeleteJobDescriptor,DeleteJobRequestParameters, IDeleteJobRequest>, IDeleteJobRequest
 	{ 
-		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-///<param name="job_id"> this parameter is required</param>
-		public DeleteJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id"> this parameter is required</param>
+		public DeleteJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-				///<summary>True if the job should be forcefully deleted</summary>
+		// values part of the url path
+		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>True if the job should be forcefully deleted</summary>
 		public DeleteJobDescriptor Force(bool? force = true) => Qs("force", force);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteJobDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteJobDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteJobDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteJobDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteJobDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackMlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
 	public partial class DeleteModelSnapshotDescriptor  : RequestDescriptorBase<DeleteModelSnapshotDescriptor,DeleteModelSnapshotRequestParameters, IDeleteModelSnapshotRequest>, IDeleteModelSnapshotRequest
 	{ 
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+		///<param name="job_id"> this parameter is required</param>
+		///<param name="snapshot_id"> this parameter is required</param>
+		public DeleteModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+
+		// values part of the url path
 		Id IDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IDeleteModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
-///<param name="job_id"> this parameter is required</param>		
-///<param name="snapshot_id"> this parameter is required</param>
-		public DeleteModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
-		{}
-		
 
-			
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
 	public partial class FlushJobDescriptor  : RequestDescriptorBase<FlushJobDescriptor,FlushJobRequestParameters, IFlushJobRequest>, IFlushJobRequest
 	{ 
-		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_flush</summary>
-///<param name="job_id"> this parameter is required</param>
-		public FlushJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id"> this parameter is required</param>
+		public FlushJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-				///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
-		public FlushJobDescriptor SkipTime(string skip_time) => Qs("skip_time", skip_time);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public FlushJobDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public FlushJobDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public FlushJobDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public FlushJobDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public FlushJobDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
+		public FlushJobDescriptor SkipTime(string skipTime) => Qs("skip_time", skipTime);
 	
 	}
 	
 	///<summary>descriptor for XpackMlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 	public partial class GetBucketsDescriptor  : RequestDescriptorBase<GetBucketsDescriptor,GetBucketsRequestParameters, IGetBucketsRequest>, IGetBucketsRequest
 	{ 
-		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/buckets</summary>
-///<param name="job_id"> this parameter is required</param>
-		public GetBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id"> this parameter is required</param>
+		public GetBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public GetBucketsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetBucketsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetBucketsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetBucketsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetBucketsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public partial class GetCategoriesDescriptor  : RequestDescriptorBase<GetCategoriesDescriptor,GetCategoriesRequestParameters, IGetCategoriesRequest>, IGetCategoriesRequest
 	{ 
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
+		///<param name="job_id"> this parameter is required</param>
+		public GetCategoriesDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+
+		// values part of the url path
 		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
-///<param name="job_id"> this parameter is required</param>
-		public GetCategoriesDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
-
-			///<summary>The identifier of the category definition of interest</summary>
+		///<summary>The identifier of the category definition of interest</summary>
 		public GetCategoriesDescriptor CategoryId(CategoryId categoryId) => Assign(a=>a.RouteValues.Optional("category_id", categoryId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetCategoriesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetCategoriesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetCategoriesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetCategoriesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetCategoriesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackMlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
 	public partial class GetDatafeedsDescriptor  : RequestDescriptorBase<GetDatafeedsDescriptor,GetDatafeedsRequestParameters, IGetDatafeedsRequest>, IGetDatafeedsRequest
 	{ 
-		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
-		public GetDatafeedsDescriptor() : base()
-		{}
-		
+		public GetDatafeedsDescriptor() : base(){}
 
-			///<summary>The ID of the datafeeds to fetch</summary>
+		// values part of the url path
+		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		///<summary>The ID of the datafeeds to fetch</summary>
 		public GetDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
-		
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
 	public partial class GetDatafeedStatsDescriptor  : RequestDescriptorBase<GetDatafeedStatsDescriptor,GetDatafeedStatsRequestParameters, IGetDatafeedStatsRequest>, IGetDatafeedStatsRequest
 	{ 
-		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stats</summary>
-		public GetDatafeedStatsDescriptor() : base()
-		{}
-		
+		public GetDatafeedStatsDescriptor() : base(){}
 
-			///<summary>The ID of the datafeeds stats to fetch</summary>
+		// values part of the url path
+		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+		///<summary>The ID of the datafeeds stats to fetch</summary>
 		public GetDatafeedStatsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
-		
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 	public partial class GetInfluencersDescriptor  : RequestDescriptorBase<GetInfluencersDescriptor,GetInfluencersRequestParameters, IGetInfluencersRequest>, IGetInfluencersRequest
 	{ 
-		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/influencers</summary>
-///<param name="job_id"> this parameter is required</param>
-		public GetInfluencersDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id"> this parameter is required</param>
+		public GetInfluencersDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public GetInfluencersDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetInfluencersDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetInfluencersDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetInfluencersDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetInfluencersDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackMlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
 	public partial class GetJobsDescriptor  : RequestDescriptorBase<GetJobsDescriptor,GetJobsRequestParameters, IGetJobsRequest>, IGetJobsRequest
 	{ 
-		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-		public GetJobsDescriptor() : base()
-		{}
-		
+		public GetJobsDescriptor() : base(){}
 
-			///<summary>The ID of the jobs to fetch</summary>
+		// values part of the url path
+		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		///<summary>The ID of the jobs to fetch</summary>
 		public GetJobsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
-		
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
 	public partial class GetJobStatsDescriptor  : RequestDescriptorBase<GetJobStatsDescriptor,GetJobStatsRequestParameters, IGetJobStatsRequest>, IGetJobStatsRequest
 	{ 
-		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/_stats</summary>
-		public GetJobStatsDescriptor() : base()
-		{}
-		
+		public GetJobStatsDescriptor() : base(){}
 
-			///<summary>The ID of the jobs stats to fetch</summary>
+		// values part of the url path
+		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		///<summary>The ID of the jobs stats to fetch</summary>
 		public GetJobStatsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
-		
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
 	public partial class GetModelSnapshotsDescriptor  : RequestDescriptorBase<GetModelSnapshotsDescriptor,GetModelSnapshotsRequestParameters, IGetModelSnapshotsRequest>, IGetModelSnapshotsRequest
 	{ 
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+		///<param name="job_id"> this parameter is required</param>
+		public GetModelSnapshotsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+
+		// values part of the url path
 		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
-///<param name="job_id"> this parameter is required</param>
-		public GetModelSnapshotsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
-
-			///<summary>The ID of the snapshot to fetch</summary>
+		///<summary>The ID of the snapshot to fetch</summary>
 		public GetModelSnapshotsDescriptor SnapshotId(Id snapshotId) => Assign(a=>a.RouteValues.Optional("snapshot_id", snapshotId));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetModelSnapshotsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetModelSnapshotsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetModelSnapshotsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetModelSnapshotsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetModelSnapshotsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackMlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
 	public partial class GetAnomalyRecordsDescriptor  : RequestDescriptorBase<GetAnomalyRecordsDescriptor,GetAnomalyRecordsRequestParameters, IGetAnomalyRecordsRequest>, IGetAnomalyRecordsRequest
 	{ 
-		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/records</summary>
-///<param name="job_id"> this parameter is required</param>
-		public GetAnomalyRecordsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id"> this parameter is required</param>
+		public GetAnomalyRecordsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public GetAnomalyRecordsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetAnomalyRecordsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetAnomalyRecordsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetAnomalyRecordsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetAnomalyRecordsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackMlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 	public partial class OpenJobDescriptor  : RequestDescriptorBase<OpenJobDescriptor,OpenJobRequestParameters, IOpenJobRequest>, IOpenJobRequest
 	{ 
-		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_open</summary>
-///<param name="job_id"> this parameter is required</param>
-		public OpenJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id"> this parameter is required</param>
+		public OpenJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-			
+		// values part of the url path
+		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public partial class PostJobDataDescriptor  : RequestDescriptorBase<PostJobDataDescriptor,PostJobDataRequestParameters, IPostJobDataRequest>, IPostJobDataRequest
 	{ 
-		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_data</summary>
-///<param name="job_id"> this parameter is required</param>
-		public PostJobDataDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id"> this parameter is required</param>
+		public PostJobDataDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-				///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
-		public PostJobDataDescriptor ResetStart(DateTimeOffset reset_start) => Qs("reset_start", reset_start);
+		// values part of the url path
+		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
+		public PostJobDataDescriptor ResetStart(DateTimeOffset resetStart) => Qs("reset_start", resetStart);
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
-		public PostJobDataDescriptor ResetEnd(DateTimeOffset reset_end) => Qs("reset_end", reset_end);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PostJobDataDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PostJobDataDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PostJobDataDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PostJobDataDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PostJobDataDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		public PostJobDataDescriptor ResetEnd(DateTimeOffset resetEnd) => Qs("reset_end", resetEnd);
 	
 	}
 	
 	///<summary>descriptor for XpackMlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
 	public partial class PreviewDatafeedDescriptor  : RequestDescriptorBase<PreviewDatafeedDescriptor,PreviewDatafeedRequestParameters, IPreviewDatafeedRequest>, IPreviewDatafeedRequest
 	{ 
-		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_preview</summary>
-///<param name="datafeed_id"> this parameter is required</param>
-		public PreviewDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{}
-		
+		///<param name="datafeed_id"> this parameter is required</param>
+		public PreviewDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 
-			
+		// values part of the url path
+		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 	public partial class PutDatafeedDescriptor<T>  : RequestDescriptorBase<PutDatafeedDescriptor<T>,PutDatafeedRequestParameters, IPutDatafeedRequest>, IPutDatafeedRequest
 	{ 
-		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}. Will infer the index and type from the generic type</summary>
-///<param name="datafeed_id"> this parameter is required</param>
+		///<param name="datafeed_id"> this parameter is required</param>
 		public PutDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
 		{ Self.Indices = typeof(T); Self.Types = typeof(T);  }
-		
 
-			
+		// values part of the url path
+		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public partial class PutJobDescriptor<T>  : RequestDescriptorBase<PutJobDescriptor<T>,PutJobRequestParameters, IPutJobRequest>, IPutJobRequest
 	{ 
-		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-///<param name="job_id"> this parameter is required</param>
-		public PutJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id"> this parameter is required</param>
+		public PutJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-			
+		// values part of the url path
+		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
 	public partial class RevertModelSnapshotDescriptor  : RequestDescriptorBase<RevertModelSnapshotDescriptor,RevertModelSnapshotRequestParameters, IRevertModelSnapshotRequest>, IRevertModelSnapshotRequest
 	{ 
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
+		///<param name="job_id"> this parameter is required</param>
+		///<param name="snapshot_id"> this parameter is required</param>
+		public RevertModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+
+		// values part of the url path
 		Id IRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
-///<param name="job_id"> this parameter is required</param>		
-///<param name="snapshot_id"> this parameter is required</param>
-		public RevertModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
-		{}
-		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public RevertModelSnapshotDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RevertModelSnapshotDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RevertModelSnapshotDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RevertModelSnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RevertModelSnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackMlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
 	public partial class StartDatafeedDescriptor  : RequestDescriptorBase<StartDatafeedDescriptor,StartDatafeedRequestParameters, IStartDatafeedRequest>, IStartDatafeedRequest
 	{ 
-		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_start</summary>
-///<param name="datafeed_id"> this parameter is required</param>
-		public StartDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{}
-		
+		///<param name="datafeed_id"> this parameter is required</param>
+		public StartDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public StartDatafeedDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public StartDatafeedDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public StartDatafeedDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StartDatafeedDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public StartDatafeedDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackMlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
 	public partial class StopDatafeedDescriptor  : RequestDescriptorBase<StopDatafeedDescriptor,StopDatafeedRequestParameters, IStopDatafeedRequest>, IStopDatafeedRequest
 	{ 
-		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stop</summary>
-///<param name="datafeed_id"> this parameter is required</param>
-		public StopDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{}
-		
+		///<param name="datafeed_id"> this parameter is required</param>
+		public StopDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public StopDatafeedDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public StopDatafeedDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public StopDatafeedDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StopDatafeedDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public StopDatafeedDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackMlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
 	public partial class UpdateDatafeedDescriptor<T>  : RequestDescriptorBase<UpdateDatafeedDescriptor<T>,UpdateDatafeedRequestParameters, IUpdateDatafeedRequest>, IUpdateDatafeedRequest
 	{ 
-		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_update. Will infer the index and type from the generic type</summary>
-///<param name="datafeed_id"> this parameter is required</param>
+		///<param name="datafeed_id"> this parameter is required</param>
 		public UpdateDatafeedDescriptor(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
 		{ Self.Indices = typeof(T); Self.Types = typeof(T);  }
-		
 
-			
+		// values part of the url path
+		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
 	public partial class UpdateJobDescriptor<T>  : RequestDescriptorBase<UpdateJobDescriptor<T>,UpdateJobRequestParameters, IUpdateJobRequest>, IUpdateJobRequest
 	{ 
-		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_update</summary>
-///<param name="job_id"> this parameter is required</param>
-		public UpdateJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id"> this parameter is required</param>
+		public UpdateJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-			
+		// values part of the url path
+		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	
 	}
 	
 	///<summary>descriptor for XpackMlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
 	public partial class UpdateModelSnapshotDescriptor  : RequestDescriptorBase<UpdateModelSnapshotDescriptor,UpdateModelSnapshotRequestParameters, IUpdateModelSnapshotRequest>, IUpdateModelSnapshotRequest
 	{ 
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
+		///<param name="job_id"> this parameter is required</param>
+		///<param name="snapshot_id"> this parameter is required</param>
+		public UpdateModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+
+		// values part of the url path
 		Id IUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IUpdateModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
-///<param name="job_id"> this parameter is required</param>		
-///<param name="snapshot_id"> this parameter is required</param>
-		public UpdateModelSnapshotDescriptor(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
-		{}
-		
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public UpdateModelSnapshotDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public UpdateModelSnapshotDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public UpdateModelSnapshotDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public UpdateModelSnapshotDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public UpdateModelSnapshotDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackMlValidate <pre></pre></summary>
 	public partial class ValidateJobDescriptor<T>  : RequestDescriptorBase<ValidateJobDescriptor<T>,ValidateJobRequestParameters, IValidateJobRequest>, IValidateJobRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public ValidateJobDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ValidateJobDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ValidateJobDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateJobDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ValidateJobDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackMlValidateDetector <pre></pre></summary>
 	public partial class ValidateDetectorDescriptor<T>  : RequestDescriptorBase<ValidateDetectorDescriptor<T>,ValidateDetectorRequestParameters, IValidateDetectorRequest>, IValidateDetectorRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public ValidateDetectorDescriptor<T> Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ValidateDetectorDescriptor<T> Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ValidateDetectorDescriptor<T> ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ValidateDetectorDescriptor<T> SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ValidateDetectorDescriptor<T> FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public AuthenticateDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public AuthenticateDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public AuthenticateDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AuthenticateDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public AuthenticateDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
 	public partial class ChangePasswordDescriptor  : RequestDescriptorBase<ChangePasswordDescriptor,ChangePasswordRequestParameters, IChangePasswordRequest>, IChangePasswordRequest
 	{ 
-		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
 		/// <summary>/_xpack/security/user/{username}/_password</summary>
-		public ChangePasswordDescriptor() : base()
-		{}
-		
+		public ChangePasswordDescriptor() : base(){}
 
-			///<summary>The username of the user to change the password for</summary>
+		// values part of the url path
+		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
+		///<summary>The username of the user to change the password for</summary>
 		public ChangePasswordDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public ChangePasswordDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ChangePasswordDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ChangePasswordDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ChangePasswordDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ChangePasswordDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ChangePasswordDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
 	public partial class ClearCachedRealmsDescriptor  : RequestDescriptorBase<ClearCachedRealmsDescriptor,ClearCachedRealmsRequestParameters, IClearCachedRealmsRequest>, IClearCachedRealmsRequest
 	{ 
-		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
 		/// <summary>/_xpack/security/realm/{realms}/_clear_cache</summary>
-///<param name="realms"> this parameter is required</param>
-		public ClearCachedRealmsDescriptor(Names realms) : base(r=>r.Required("realms", realms))
-		{}
-		
+		///<param name="realms"> this parameter is required</param>
+		public ClearCachedRealmsDescriptor(Names realms) : base(r=>r.Required("realms", realms)){}
 
-				///<summary>Comma-separated list of usernames to clear from the cache</summary>
+		// values part of the url path
+		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
+
+		// Request parameters
+		///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public ClearCachedRealmsDescriptor Usernames(params string[] usernames) => Qs("usernames", usernames);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ClearCachedRealmsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClearCachedRealmsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClearCachedRealmsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCachedRealmsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClearCachedRealmsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache</pre></summary>
 	public partial class ClearCachedRolesDescriptor  : RequestDescriptorBase<ClearCachedRolesDescriptor,ClearCachedRolesRequestParameters, IClearCachedRolesRequest>, IClearCachedRolesRequest
 	{ 
-		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
 		/// <summary>/_xpack/security/role/{name}/_clear_cache</summary>
-///<param name="name"> this parameter is required</param>
-		public ClearCachedRolesDescriptor(Names name) : base(r=>r.Required("name", name))
-		{}
-		
+		///<param name="name"> this parameter is required</param>
+		public ClearCachedRolesDescriptor(Names name) : base(r=>r.Required("name", name)){}
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public ClearCachedRolesDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ClearCachedRolesDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ClearCachedRolesDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ClearCachedRolesDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ClearCachedRolesDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role</pre></summary>
 	public partial class DeleteRoleDescriptor  : RequestDescriptorBase<DeleteRoleDescriptor,DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
 	{ 
-		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 		/// <summary>/_xpack/security/role/{name}</summary>
-///<param name="name"> this parameter is required</param>
-		public DeleteRoleDescriptor(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		///<param name="name"> this parameter is required</param>
+		public DeleteRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
 
-				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		// values part of the url path
+		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteRoleDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteRoleDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteRoleDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteRoleDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRoleDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteRoleDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
 	public partial class DeleteRoleMappingDescriptor  : RequestDescriptorBase<DeleteRoleMappingDescriptor,DeleteRoleMappingRequestParameters, IDeleteRoleMappingRequest>, IDeleteRoleMappingRequest
 	{ 
-		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 		/// <summary>/_xpack/security/role_mapping/{name}</summary>
-///<param name="name"> this parameter is required</param>
-		public DeleteRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		///<param name="name"> this parameter is required</param>
+		public DeleteRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
 
-				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		// values part of the url path
+		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteRoleMappingDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteRoleMappingDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteRoleMappingDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteRoleMappingDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteRoleMappingDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteRoleMappingDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user</pre></summary>
 	public partial class DeleteUserDescriptor  : RequestDescriptorBase<DeleteUserDescriptor,DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
 	{ 
-		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
 		/// <summary>/_xpack/security/user/{username}</summary>
-///<param name="username"> this parameter is required</param>
-		public DeleteUserDescriptor(Name username) : base(r=>r.Required("username", username))
-		{}
-		
+		///<param name="username"> this parameter is required</param>
+		public DeleteUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
 
-				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		// values part of the url path
+		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DeleteUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteUserDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteUserDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteUserDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteUserDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteUserDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user</pre></summary>
 	public partial class DisableUserDescriptor  : RequestDescriptorBase<DisableUserDescriptor,DisableUserRequestParameters, IDisableUserRequest>, IDisableUserRequest
 	{ 
-		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 		/// <summary>/_xpack/security/user/{username}/_disable</summary>
-		public DisableUserDescriptor() : base()
-		{}
-		
+		public DisableUserDescriptor() : base(){}
 
-			///<summary>The username of the user to disable</summary>
+		// values part of the url path
+		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		///<summary>The username of the user to disable</summary>
 		public DisableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public DisableUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DisableUserDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DisableUserDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DisableUserDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DisableUserDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DisableUserDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user</pre></summary>
 	public partial class EnableUserDescriptor  : RequestDescriptorBase<EnableUserDescriptor,EnableUserRequestParameters, IEnableUserRequest>, IEnableUserRequest
 	{ 
-		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
 		/// <summary>/_xpack/security/user/{username}/_enable</summary>
-		public EnableUserDescriptor() : base()
-		{}
-		
+		public EnableUserDescriptor() : base(){}
 
-			///<summary>The username of the user to enable</summary>
+		// values part of the url path
+		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+		///<summary>The username of the user to enable</summary>
 		public EnableUserDescriptor Username(Name username) => Assign(a=>a.RouteValues.Optional("username", username));
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public EnableUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public EnableUserDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public EnableUserDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public EnableUserDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public EnableUserDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public EnableUserDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role</pre></summary>
 	public partial class GetRoleDescriptor  : RequestDescriptorBase<GetRoleDescriptor,GetRoleRequestParameters, IGetRoleRequest>, IGetRoleRequest
 	{ 
-		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 		/// <summary>/_xpack/security/role/{name}</summary>
-		public GetRoleDescriptor() : base()
-		{}
-		
+		public GetRoleDescriptor() : base(){}
 
-			///<summary>Role name</summary>
+		// values part of the url path
+		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+		///<summary>Role name</summary>
 		public GetRoleDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetRoleDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetRoleDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetRoleDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRoleDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetRoleDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
 	public partial class GetRoleMappingDescriptor  : RequestDescriptorBase<GetRoleMappingDescriptor,GetRoleMappingRequestParameters, IGetRoleMappingRequest>, IGetRoleMappingRequest
 	{ 
-		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 		/// <summary>/_xpack/security/role_mapping/{name}</summary>
-		public GetRoleMappingDescriptor() : base()
-		{}
-		
+		public GetRoleMappingDescriptor() : base(){}
 
-			///<summary>Role-Mapping name</summary>
+		// values part of the url path
+		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+		///<summary>Role-Mapping name</summary>
 		public GetRoleMappingDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetRoleMappingDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetRoleMappingDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetRoleMappingDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetRoleMappingDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetRoleMappingDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token</pre></summary>
 	public partial class GetUserAccessTokenDescriptor  : RequestDescriptorBase<GetUserAccessTokenDescriptor,GetUserAccessTokenRequestParameters, IGetUserAccessTokenRequest>, IGetUserAccessTokenRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public GetUserAccessTokenDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetUserAccessTokenDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetUserAccessTokenDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetUserAccessTokenDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetUserAccessTokenDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user</pre></summary>
 	public partial class GetUserDescriptor  : RequestDescriptorBase<GetUserDescriptor,GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
 	{ 
-		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
 		/// <summary>/_xpack/security/user/{username}</summary>
-		public GetUserDescriptor() : base()
-		{}
-		
+		public GetUserDescriptor() : base(){}
 
-			///<summary>A comma-separated list of usernames</summary>
+		// values part of the url path
+		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
+		///<summary>A comma-separated list of usernames</summary>
 		public GetUserDescriptor Username(Names username) => Assign(a=>a.RouteValues.Optional("username", username));
 
-			///<summary>Pretty format the returned JSON response.</summary>
-		public GetUserDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetUserDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetUserDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetUserDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetUserDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token</pre></summary>
 	public partial class InvalidateUserAccessTokenDescriptor  : RequestDescriptorBase<InvalidateUserAccessTokenDescriptor,InvalidateUserAccessTokenRequestParameters, IInvalidateUserAccessTokenRequest>, IInvalidateUserAccessTokenRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public InvalidateUserAccessTokenDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public InvalidateUserAccessTokenDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public InvalidateUserAccessTokenDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public InvalidateUserAccessTokenDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public InvalidateUserAccessTokenDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role</pre></summary>
 	public partial class PutRoleDescriptor  : RequestDescriptorBase<PutRoleDescriptor,PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
 	{ 
-		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
 		/// <summary>/_xpack/security/role/{name}</summary>
-///<param name="name"> this parameter is required</param>
-		public PutRoleDescriptor(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		///<param name="name"> this parameter is required</param>
+		public PutRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
 
-				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		// values part of the url path
+		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutRoleDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutRoleDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutRoleDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutRoleDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutRoleDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutRoleDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
 	public partial class PutRoleMappingDescriptor  : RequestDescriptorBase<PutRoleMappingDescriptor,PutRoleMappingRequestParameters, IPutRoleMappingRequest>, IPutRoleMappingRequest
 	{ 
-		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
 		/// <summary>/_xpack/security/role_mapping/{name}</summary>
-///<param name="name"> this parameter is required</param>
-		public PutRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		///<param name="name"> this parameter is required</param>
+		public PutRoleMappingDescriptor(Name name) : base(r=>r.Required("name", name)){}
 
-				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		// values part of the url path
+		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutRoleMappingDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutRoleMappingDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutRoleMappingDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutRoleMappingDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutRoleMappingDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutRoleMappingDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user</pre></summary>
 	public partial class PutUserDescriptor  : RequestDescriptorBase<PutUserDescriptor,PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
 	{ 
-		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
 		/// <summary>/_xpack/security/user/{username}</summary>
-///<param name="username"> this parameter is required</param>
-		public PutUserDescriptor(Name username) : base(r=>r.Required("username", username))
-		{}
-		
+		///<param name="username"> this parameter is required</param>
+		public PutUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
 
-				///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+		// values part of the url path
+		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutUserDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutUserDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutUserDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutUserDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutUserDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherAckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchDescriptor  : RequestDescriptorBase<AcknowledgeWatchDescriptor,AcknowledgeWatchRequestParameters, IAcknowledgeWatchRequest>, IAcknowledgeWatchRequest
 	{ 
+		/// <summary>/_xpack/watcher/watch/{watch_id}/_ack</summary>
+		///<param name="watch_id"> this parameter is required</param>
+		public AcknowledgeWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
+
+		// values part of the url path
 		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
-		/// <summary>/_xpack/watcher/watch/{watch_id}/_ack</summary>
-///<param name="watch_id"> this parameter is required</param>
-		public AcknowledgeWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id))
-		{}
-		
-
-			///<summary>A comma-separated list of the action ids to be acked</summary>
+		///<summary>A comma-separated list of the action ids to be acked</summary>
 		public AcknowledgeWatchDescriptor ActionId(ActionIds actionId) => Assign(a=>a.RouteValues.Optional("action_id", actionId));
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
-		public AcknowledgeWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public AcknowledgeWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public AcknowledgeWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public AcknowledgeWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public AcknowledgeWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public AcknowledgeWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public AcknowledgeWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 	public partial class ActivateWatchDescriptor  : RequestDescriptorBase<ActivateWatchDescriptor,ActivateWatchRequestParameters, IActivateWatchRequest>, IActivateWatchRequest
 	{ 
-		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 		/// <summary>/_xpack/watcher/watch/{watch_id}/_activate</summary>
-///<param name="watch_id"> this parameter is required</param>
-		public ActivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id))
-		{}
-		
+		///<param name="watch_id"> this parameter is required</param>
+		public ActivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public ActivateWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ActivateWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ActivateWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ActivateWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ActivateWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ActivateWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public ActivateWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherDeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 	public partial class DeactivateWatchDescriptor  : RequestDescriptorBase<DeactivateWatchDescriptor,DeactivateWatchRequestParameters, IDeactivateWatchRequest>, IDeactivateWatchRequest
 	{ 
-		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
 		/// <summary>/_xpack/watcher/watch/{watch_id}/_deactivate</summary>
-///<param name="watch_id"> this parameter is required</param>
-		public DeactivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id))
-		{}
-		
+		///<param name="watch_id"> this parameter is required</param>
+		public DeactivateWatchDescriptor(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeactivateWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeactivateWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeactivateWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeactivateWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeactivateWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeactivateWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public DeactivateWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherDeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 	public partial class DeleteWatchDescriptor  : RequestDescriptorBase<DeleteWatchDescriptor,DeleteWatchRequestParameters, IDeleteWatchRequest>, IDeleteWatchRequest
 	{ 
-		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_xpack/watcher/watch/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public DeleteWatchDescriptor(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		///<param name="id"> this parameter is required</param>
+		public DeleteWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public DeleteWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public DeleteWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public DeleteWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public DeleteWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public DeleteWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public DeleteWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 	public partial class ExecuteWatchDescriptor  : RequestDescriptorBase<ExecuteWatchDescriptor,ExecuteWatchRequestParameters, IExecuteWatchRequest>, IExecuteWatchRequest
 	{ 
-		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_xpack/watcher/watch/{id}/_execute</summary>
-		public ExecuteWatchDescriptor() : base()
-		{}
-		
+		public ExecuteWatchDescriptor() : base(){}
 
-			///<summary>Watch ID</summary>
+		// values part of the url path
+		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+		///<summary>Watch ID</summary>
 		public ExecuteWatchDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
-			///<summary>indicates whether the watch should execute in debug mode</summary>
+		// Request parameters
+		///<summary>indicates whether the watch should execute in debug mode</summary>
 		public ExecuteWatchDescriptor Debug(bool? debug = true) => Qs("debug", debug);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public ExecuteWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public ExecuteWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public ExecuteWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public ExecuteWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public ExecuteWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherGetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 	public partial class GetWatchDescriptor  : RequestDescriptorBase<GetWatchDescriptor,GetWatchRequestParameters, IGetWatchRequest>, IGetWatchRequest
 	{ 
-		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_xpack/watcher/watch/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public GetWatchDescriptor(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		///<param name="id"> this parameter is required</param>
+		public GetWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
 
-				///<summary>Pretty format the returned JSON response.</summary>
-		public GetWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public GetWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public GetWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public GetWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public GetWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherPutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 	public partial class PutWatchDescriptor  : RequestDescriptorBase<PutWatchDescriptor,PutWatchRequestParameters, IPutWatchRequest>, IPutWatchRequest
 	{ 
-		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
 		/// <summary>/_xpack/watcher/watch/{id}</summary>
-///<param name="id"> this parameter is required</param>
-		public PutWatchDescriptor(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		///<param name="id"> this parameter is required</param>
+		public PutWatchDescriptor(Id id) : base(r=>r.Required("id", id)){}
 
-				///<summary>Explicit operation timeout for connection to master node</summary>
-		public PutWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		// values part of the url path
+		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public PutWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public PutWatchDescriptor Active(bool? active = true) => Qs("active", active);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public PutWatchDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public PutWatchDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public PutWatchDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public PutWatchDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public PutWatchDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
 	public partial class RestartWatcherDescriptor  : RequestDescriptorBase<RestartWatcherDescriptor,RestartWatcherRequestParameters, IRestartWatcherRequest>, IRestartWatcherRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public RestartWatcherDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public RestartWatcherDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public RestartWatcherDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public RestartWatcherDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public RestartWatcherDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherStart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public partial class StartWatcherDescriptor  : RequestDescriptorBase<StartWatcherDescriptor,StartWatcherRequestParameters, IStartWatcherRequest>, IStartWatcherRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public StartWatcherDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public StartWatcherDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public StartWatcherDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StartWatcherDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public StartWatcherDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public partial class WatcherStatsDescriptor  : RequestDescriptorBase<WatcherStatsDescriptor,WatcherStatsRequestParameters, IWatcherStatsRequest>, IWatcherStatsRequest
 	{ 
-		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");
 		/// <summary>/_xpack/watcher/stats</summary>
-		public WatcherStatsDescriptor() : base()
-		{}
-		
+		public WatcherStatsDescriptor() : base(){}
 
-			///<summary>Controls what additional stat metrics should be include in the response</summary>
+		// values part of the url path
+		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");
+		///<summary>Controls what additional stat metrics should be include in the response</summary>
 		public WatcherStatsDescriptor WatcherStatsMetric(WatcherStatsMetric watcherStatsMetric) => Assign(a=>a.RouteValues.Optional("watcher_stats_metric", (Metrics)watcherStatsMetric));
 
-			///<summary>Emits stack traces of currently running watches</summary>
-		public WatcherStatsDescriptor EmitStacktraces(bool? emit_stacktraces = true) => Qs("emit_stacktraces", emit_stacktraces);
-		///<summary>Pretty format the returned JSON response.</summary>
-		public WatcherStatsDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public WatcherStatsDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public WatcherStatsDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public WatcherStatsDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public WatcherStatsDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// Request parameters
+		///<summary>Emits stack traces of currently running watches</summary>
+		public WatcherStatsDescriptor EmitStacktraces(bool? emitStacktraces = true) => Qs("emit_stacktraces", emitStacktraces);
 	
 	}
 	
 	///<summary>descriptor for XpackWatcherStop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 	public partial class StopWatcherDescriptor  : RequestDescriptorBase<StopWatcherDescriptor,StopWatcherRequestParameters, IStopWatcherRequest>, IStopWatcherRequest
 	{ 
-					///<summary>Pretty format the returned JSON response.</summary>
-		public StopWatcherDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
-		///<summary>Return human readable values for statistics.</summary>
-		public StopWatcherDescriptor Human(bool? human = true) => Qs("human", human);
-		///<summary>Include the stack trace of returned errors.</summary>
-		public StopWatcherDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public StopWatcherDescriptor SourceQueryString(string source) => Qs("source", source);
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public StopWatcherDescriptor FilterPath(params string[] filter_path) => Qs("filter_path", filter_path);
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 }
