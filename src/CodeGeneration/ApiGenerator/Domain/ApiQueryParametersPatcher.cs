@@ -26,25 +26,45 @@ namespace ApiGenerator.Domain
 			var patchedParams = new Dictionary<string, ApiQueryParameters>();
 			foreach (var kv in source)
 			{
-				kv.Value.OriginalQueryStringParamName = kv.Key;
+				var queryStringKey = kv.Key;
+				kv.Value.OriginalQueryStringParamName = queryStringKey;
 
-				if (skipList.Contains(kv.Key)) continue;
+				if (!renameLookup.TryGetValue(queryStringKey, out var preferredName)) preferredName = kv.Key;
+				kv.Value.CsharpName = CreateCSharpName(preferredName);
 
-				if (!renameLookup.TryGetValue(kv.Key, out var key)) key = kv.Key;
+				if (skipList.Contains(queryStringKey)) continue;
 
-				if (partialList.Contains(key)) kv.Value.RenderPartial = true;
+				if (partialList.Contains(queryStringKey)) kv.Value.RenderPartial = true;
 
-				if (obsoleteLookup.TryGetValue(kv.Key, out var obsolete)) kv.Value.Obsolete = obsolete;
+				if (obsoleteLookup.TryGetValue(queryStringKey, out var obsolete)) kv.Value.Obsolete = obsolete;
 
 				//make sure source_enabled takes a boolean only
-				if (key == "source_enabled") kv.Value.Type = "boolean";
+				if (preferredName == "source_enabled") kv.Value.Type = "boolean";
 
-				patchedParams.Add(key, kv.Value);
+				patchedParams.Add(preferredName, kv.Value);
 			}
 
 			return patchedParams;
 
 		}
+
+		private static string CreateCSharpName(string queryStringKey)
+		{
+			if (string.IsNullOrWhiteSpace(queryStringKey)) return "UNKNOWN";
+
+            var cased = queryStringKey.ToPascalCase();
+			switch (cased)
+			{
+				case "Type":
+				case "Index":
+				case "Source":
+				case "Script":
+					return cased + "QueryString";
+				default:
+					return cased;
+			}
+		}
+
 		private static IList<string> CreateSkipList(IEndpointOverrides global, IEndpointOverrides local, ICollection<string> declaredKeys) =>
 			CreateList(global, local, "skip", e => e.SkipQueryStringParams, declaredKeys);
 

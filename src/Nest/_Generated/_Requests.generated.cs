@@ -20,17 +20,16 @@ namespace Nest
 		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
 		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
 	}
-
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IAcknowledgeWatchRequest : IRequest<AcknowledgeWatchRequestParameters> 
+	public partial interface IAcknowledgeWatchRequest : IRequest<AcknowledgeWatchRequestParameters>
 	{
 		Id WatchId { get; }
 		ActionIds ActionId { get; }
 	}
 
 	///<summary>Request parameters for XpackWatcherAckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
-	public partial class AcknowledgeWatchRequest  : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
+	public partial class AcknowledgeWatchRequest : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
 		protected IAcknowledgeWatchRequest Self => this;
 		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
@@ -51,16 +50,16 @@ namespace Nest
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IActivateWatchRequest : IRequest<ActivateWatchRequestParameters> 
+	public partial interface IActivateWatchRequest : IRequest<ActivateWatchRequestParameters>
 	{
 		Id WatchId { get; }
 	}
 
 	///<summary>Request parameters for XpackWatcherActivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
-	public partial class ActivateWatchRequest  : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
+	public partial class ActivateWatchRequest : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
 	{
 		protected IActivateWatchRequest Self => this;
 		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
@@ -73,17 +72,17 @@ namespace Nest
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters> 
+	public partial interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters>
 	{
 		Indices Index { get; }
 		Names Name { get; }
 	}
 
 	///<summary>Request parameters for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public partial class AliasExistsRequest  : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
+	public partial class AliasExistsRequest : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
 	{
 		protected IAliasExistsRequest Self => this;
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -113,16 +112,16 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters> 
+	public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters>
 	{
 		IndexName Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
-	public partial class AnalyzeRequest  : PlainRequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
+	public partial class AnalyzeRequest : PlainRequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
 		protected IAnalyzeRequest Self => this;
 		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -143,26 +142,26 @@ namespace Nest
 		///<summary>Format of the output</summary>
 		public Format Format { get { return Q<Format>("format"); } set { Q("format", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IAuthenticateRequest : IRequest<AuthenticateRequestParameters> 
+	public partial interface IAuthenticateRequest : IRequest<AuthenticateRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
-	public partial class AuthenticateRequest  : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
+	public partial class AuthenticateRequest : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
 		protected IAuthenticateRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters> 
+	public partial interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public partial class BulkAliasRequest  : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
+	public partial class BulkAliasRequest : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
 		protected IBulkAliasRequest Self => this;
 				///<summary>Request timeout</summary>
@@ -171,17 +170,17 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IBulkRequest : IRequest<BulkRequestParameters> 
+	public partial interface IBulkRequest : IRequest<BulkRequestParameters>
 	{
 		IndexName Index { get; }
 		TypeName Type { get; }
 	}
 
 	///<summary>Request parameters for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
-	public partial class BulkRequest  : PlainRequestBase<BulkRequestParameters>, IBulkRequest
+	public partial class BulkRequest : PlainRequestBase<BulkRequestParameters>, IBulkRequest
 	{
 		protected IBulkRequest Self => this;
 		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -237,16 +236,16 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICancelTasksRequest : IRequest<CancelTasksRequestParameters> 
+	public partial interface ICancelTasksRequest : IRequest<CancelTasksRequestParameters>
 	{
 		TaskId TaskId { get; }
 	}
 
 	///<summary>Request parameters for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class CancelTasksRequest  : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
+	public partial class CancelTasksRequest : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
 	{
 		protected ICancelTasksRequest Self => this;
 		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
@@ -273,16 +272,16 @@ namespace Nest
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get { return Q<string>("parent_task_id"); } set { Q("parent_task_id", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters> 
+	public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters>
 	{
 		Names Name { get; }
 	}
 
 	///<summary>Request parameters for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
-	public partial class CatAliasesRequest  : PlainRequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
+	public partial class CatAliasesRequest : PlainRequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
 	{
 		protected ICatAliasesRequest Self => this;
 		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -318,16 +317,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatAllocationRequest : IRequest<CatAllocationRequestParameters> 
+	public partial interface ICatAllocationRequest : IRequest<CatAllocationRequestParameters>
 	{
 		NodeIds NodeId { get; }
 	}
 
 	///<summary>Request parameters for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
-	public partial class CatAllocationRequest  : PlainRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
+	public partial class CatAllocationRequest : PlainRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
 	{
 		protected ICatAllocationRequest Self => this;
 		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
@@ -366,16 +365,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatCountRequest : IRequest<CatCountRequestParameters> 
+	public partial interface ICatCountRequest : IRequest<CatCountRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
-	public partial class CatCountRequest  : PlainRequestBase<CatCountRequestParameters>, ICatCountRequest
+	public partial class CatCountRequest : PlainRequestBase<CatCountRequestParameters>, ICatCountRequest
 	{
 		protected ICatCountRequest Self => this;
 		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -411,16 +410,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters> 
+	public partial interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters>
 	{
 		Fields Fields { get; }
 	}
 
 	///<summary>Request parameters for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
-	public partial class CatFielddataRequest  : PlainRequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
+	public partial class CatFielddataRequest : PlainRequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
 	{
 		protected ICatFielddataRequest Self => this;
 		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
@@ -459,15 +458,15 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatHealthRequest : IRequest<CatHealthRequestParameters> 
+	public partial interface ICatHealthRequest : IRequest<CatHealthRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
-	public partial class CatHealthRequest  : PlainRequestBase<CatHealthRequestParameters>, ICatHealthRequest
+	public partial class CatHealthRequest : PlainRequestBase<CatHealthRequestParameters>, ICatHealthRequest
 	{
 		protected ICatHealthRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -494,15 +493,15 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatHelpRequest : IRequest<CatHelpRequestParameters> 
+	public partial interface ICatHelpRequest : IRequest<CatHelpRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
-	public partial class CatHelpRequest  : PlainRequestBase<CatHelpRequestParameters>, ICatHelpRequest
+	public partial class CatHelpRequest : PlainRequestBase<CatHelpRequestParameters>, ICatHelpRequest
 	{
 		protected ICatHelpRequest Self => this;
 				///<summary>Return help information</summary>
@@ -511,16 +510,16 @@ namespace Nest
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters> 
+	public partial interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
-	public partial class CatIndicesRequest  : PlainRequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
+	public partial class CatIndicesRequest : PlainRequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
 	{
 		protected ICatIndicesRequest Self => this;
 		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -565,15 +564,15 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatMasterRequest : IRequest<CatMasterRequestParameters> 
+	public partial interface ICatMasterRequest : IRequest<CatMasterRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
-	public partial class CatMasterRequest  : PlainRequestBase<CatMasterRequestParameters>, ICatMasterRequest
+	public partial class CatMasterRequest : PlainRequestBase<CatMasterRequestParameters>, ICatMasterRequest
 	{
 		protected ICatMasterRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -597,15 +596,15 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters> 
+	public partial interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
-	public partial class CatNodeAttributesRequest  : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
+	public partial class CatNodeAttributesRequest : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 	{
 		protected ICatNodeAttributesRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -629,15 +628,15 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatNodesRequest : IRequest<CatNodesRequestParameters> 
+	public partial interface ICatNodesRequest : IRequest<CatNodesRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
-	public partial class CatNodesRequest  : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
+	public partial class CatNodesRequest : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
 	{
 		protected ICatNodesRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -664,15 +663,15 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters> 
+	public partial interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
-	public partial class CatPendingTasksRequest  : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
+	public partial class CatPendingTasksRequest : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
 	{
 		protected ICatPendingTasksRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -696,15 +695,15 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters> 
+	public partial interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
-	public partial class CatPluginsRequest  : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
+	public partial class CatPluginsRequest : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
 	{
 		protected ICatPluginsRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -728,16 +727,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters> 
+	public partial interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
-	public partial class CatRecoveryRequest  : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
+	public partial class CatRecoveryRequest : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
 	{
 		protected ICatRecoveryRequest Self => this;
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -773,15 +772,15 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatRepositoriesRequest : IRequest<CatRepositoriesRequestParameters> 
+	public partial interface ICatRepositoriesRequest : IRequest<CatRepositoriesRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for CatRepositories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
-	public partial class CatRepositoriesRequest  : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
+	public partial class CatRepositoriesRequest : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
 	{
 		protected ICatRepositoriesRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -805,16 +804,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters> 
+	public partial interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
-	public partial class CatSegmentsRequest  : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
+	public partial class CatSegmentsRequest : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
 	{
 		protected ICatSegmentsRequest Self => this;
 		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -847,16 +846,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatShardsRequest : IRequest<CatShardsRequestParameters> 
+	public partial interface ICatShardsRequest : IRequest<CatShardsRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
-	public partial class CatShardsRequest  : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
+	public partial class CatShardsRequest : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
 	{
 		protected ICatShardsRequest Self => this;
 		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -895,16 +894,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatSnapshotsRequest : IRequest<CatSnapshotsRequestParameters> 
+	public partial interface ICatSnapshotsRequest : IRequest<CatSnapshotsRequestParameters>
 	{
 		Names RepositoryName { get; }
 	}
 
 	///<summary>Request parameters for CatSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
-	public partial class CatSnapshotsRequest  : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
+	public partial class CatSnapshotsRequest : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
 	{
 		protected ICatSnapshotsRequest Self => this;
 		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
@@ -940,15 +939,15 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatTasksRequest : IRequest<CatTasksRequestParameters> 
+	public partial interface ICatTasksRequest : IRequest<CatTasksRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for CatTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class CatTasksRequest  : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
+	public partial class CatTasksRequest : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
 	{
 		protected ICatTasksRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -981,16 +980,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters> 
+	public partial interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters>
 	{
 		Name Name { get; }
 	}
 
 	///<summary>Request parameters for CatTemplates <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
-	public partial class CatTemplatesRequest  : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
+	public partial class CatTemplatesRequest : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
 	{
 		protected ICatTemplatesRequest Self => this;
 		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -1026,16 +1025,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters> 
+	public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters>
 	{
 		Names ThreadPoolPatterns { get; }
 	}
 
 	///<summary>Request parameters for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
-	public partial class CatThreadPoolRequest  : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
+	public partial class CatThreadPoolRequest : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
 		protected ICatThreadPoolRequest Self => this;
 		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
@@ -1074,16 +1073,16 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequestParameters> 
+	public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequestParameters>
 	{
 		Name Username { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityChangePassword <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
-	public partial class ChangePasswordRequest  : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
+	public partial class ChangePasswordRequest : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
 	{
 		protected IChangePasswordRequest Self => this;
 		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -1101,16 +1100,16 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClearCachedRealmsRequest : IRequest<ClearCachedRealmsRequestParameters> 
+	public partial interface IClearCachedRealmsRequest : IRequest<ClearCachedRealmsRequestParameters>
 	{
 		Names Realms { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityClearCachedRealms <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
-	public partial class ClearCachedRealmsRequest  : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
+	public partial class ClearCachedRealmsRequest : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 	{
 		protected IClearCachedRealmsRequest Self => this;
 		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
@@ -1123,16 +1122,16 @@ namespace Nest
 			///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public string[] Usernames { get { return Q<string[]>("usernames"); } set { Q("usernames", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClearCachedRolesRequest : IRequest<ClearCachedRolesRequestParameters> 
+	public partial interface IClearCachedRolesRequest : IRequest<ClearCachedRolesRequestParameters>
 	{
 		Names Name { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityClearCachedRoles <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache</pre></summary>
-	public partial class ClearCachedRolesRequest  : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
+	public partial class ClearCachedRolesRequest : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 	{
 		protected IClearCachedRolesRequest Self => this;
 		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -1142,16 +1141,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParameters> 
+	public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
-	public partial class ClearCacheRequest  : PlainRequestBase<ClearCacheRequestParameters>, IClearCacheRequest
+	public partial class ClearCacheRequest : PlainRequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
 		protected IClearCacheRequest Self => this;
 		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1193,27 +1192,27 @@ namespace Nest
 		///<summary>Clear request cache</summary>
 		public bool? Request { get { return Q<bool?>("request"); } set { Q("request", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClearScrollRequest : IRequest<ClearScrollRequestParameters> 
+	public partial interface IClearScrollRequest : IRequest<ClearScrollRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
-	public partial class ClearScrollRequest  : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
+	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters> 
+	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
-	public partial class CloseIndexRequest  : PlainRequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
+	public partial class CloseIndexRequest : PlainRequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
 		protected ICloseIndexRequest Self => this;
 		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1238,16 +1237,16 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICloseJobRequest : IRequest<CloseJobRequestParameters> 
+	public partial interface ICloseJobRequest : IRequest<CloseJobRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlCloseJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
-	public partial class CloseJobRequest  : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
+	public partial class CloseJobRequest : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
 	{
 		protected ICloseJobRequest Self => this;
 		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -1263,15 +1262,15 @@ namespace Nest
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters> 
+	public partial interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
-	public partial class ClusterAllocationExplainRequest  : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
+	public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
 	{
 		protected IClusterAllocationExplainRequest Self => this;
 				///<summary>Return 'YES' decisions in explanation (default: false)</summary>
@@ -1280,15 +1279,15 @@ namespace Nest
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public bool? IncludeDiskInfo { get { return Q<bool?>("include_disk_info"); } set { Q("include_disk_info", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters> 
+	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-	public partial class ClusterGetSettingsRequest  : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
+	public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
 		protected IClusterGetSettingsRequest Self => this;
 				///<summary>Return settings in flat format (default: false)</summary>
@@ -1303,16 +1302,16 @@ namespace Nest
 		///<summary>Whether to return all default clusters setting.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters> 
+	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
-	public partial class ClusterHealthRequest  : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
+	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
 		protected IClusterHealthRequest Self => this;
 		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1354,15 +1353,15 @@ namespace Nest
 		///<summary>Wait until cluster is in a specific state</summary>
 		public WaitForStatus WaitForStatus { get { return Q<WaitForStatus>("wait_for_status"); } set { Q("wait_for_status", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters> 
+	public partial interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
-	public partial class ClusterPendingTasksRequest  : PlainRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
+	public partial class ClusterPendingTasksRequest : PlainRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
 	{
 		protected IClusterPendingTasksRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1371,15 +1370,15 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterPutSettingsRequest : IRequest<ClusterPutSettingsRequestParameters> 
+	public partial interface IClusterPutSettingsRequest : IRequest<ClusterPutSettingsRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-	public partial class ClusterPutSettingsRequest  : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
+	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
 	{
 		protected IClusterPutSettingsRequest Self => this;
 				///<summary>Return settings in flat format (default: false)</summary>
@@ -1391,15 +1390,15 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters> 
+	public partial interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
-	public partial class ClusterRerouteRequest  : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
+	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		protected IClusterRerouteRequest Self => this;
 				///<summary>Simulate the operation only and return the resulting state</summary>
@@ -1420,17 +1419,17 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterStateRequest : IRequest<ClusterStateRequestParameters> 
+	public partial interface IClusterStateRequest : IRequest<ClusterStateRequestParameters>
 	{
 		Indices Index { get; }
 		Metrics Metric { get; }
 	}
 
 	///<summary>Request parameters for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
-	public partial class ClusterStateRequest  : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
+	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
 		protected IClusterStateRequest Self => this;
 		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1471,16 +1470,16 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters> 
+	public partial interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters>
 	{
 		NodeIds NodeId { get; }
 	}
 
 	///<summary>Request parameters for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
-	public partial class ClusterStatsRequest  : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
+	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
 		protected IClusterStatsRequest Self => this;
 		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
@@ -1501,17 +1500,17 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICountRequest : IRequest<CountRequestParameters> 
+	public partial interface ICountRequest : IRequest<CountRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	}
 
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
-	public partial class CountRequest<T>  : PlainRequestBase<CountRequestParameters>, ICountRequest
+	public partial class CountRequest<T> : PlainRequestBase<CountRequestParameters>, ICountRequest
 	{
 		protected ICountRequest Self => this;
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1579,9 +1578,9 @@ namespace Nest
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get { return Q<long?>("terminate_after"); } set { Q("terminate_after", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
-	public partial class CountRequest  : PlainRequestBase<CountRequestParameters>, ICountRequest
+	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
 	{
 		protected ICountRequest Self => this;
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1649,16 +1648,16 @@ namespace Nest
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get { return Q<long?>("terminate_after"); } set { Q("terminate_after", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters> 
+	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
 	{
 		IndexName Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
-	public partial class CreateIndexRequest  : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
+	public partial class CreateIndexRequest : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
 		protected ICreateIndexRequest Self => this;
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -1680,16 +1679,16 @@ namespace Nest
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get { return Q<bool?>("update_all_types"); } set { Q("update_all_types", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters> 
+	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
 	{
 		Name RepositoryName { get; }
 	}
 
 	///<summary>Request parameters for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public partial class CreateRepositoryRequest  : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
+	public partial class CreateRepositoryRequest : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
 		protected ICreateRepositoryRequest Self => this;
 		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -1708,10 +1707,10 @@ namespace Nest
 		///<summary>Whether to verify the repository after creation</summary>
 		public bool? Verify { get { return Q<bool?>("verify"); } set { Q("verify", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICreateRequest<TDocument> : IRequest<CreateRequestParameters> 
+	public partial interface ICreateRequest<TDocument> : IRequest<CreateRequestParameters>
 	{
 		Id Id { get; }
 		IndexName Index { get; }
@@ -1719,7 +1718,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for Create <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
-	public partial class CreateRequest<TDocument>  : PlainRequestBase<CreateRequestParameters>, ICreateRequest<TDocument>
+	public partial class CreateRequest<TDocument> : PlainRequestBase<CreateRequestParameters>, ICreateRequest<TDocument>
 	{
 		protected ICreateRequest<TDocument> Self => this;
 		Id ICreateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
@@ -1776,16 +1775,16 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeactivateWatchRequest : IRequest<DeactivateWatchRequestParameters> 
+	public partial interface IDeactivateWatchRequest : IRequest<DeactivateWatchRequestParameters>
 	{
 		Id WatchId { get; }
 	}
 
 	///<summary>Request parameters for XpackWatcherDeactivateWatch <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
-	public partial class DeactivateWatchRequest  : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
+	public partial class DeactivateWatchRequest : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
 	{
 		protected IDeactivateWatchRequest Self => this;
 		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
@@ -1798,17 +1797,17 @@ namespace Nest
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters> 
+	public partial interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters>
 	{
 		Indices Index { get; }
 		Names Name { get; }
 	}
 
 	///<summary>Request parameters for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public partial class DeleteAliasRequest  : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
+	public partial class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
 	{
 		protected IDeleteAliasRequest Self => this;
 		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1826,17 +1825,17 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters> 
+	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	}
 
 	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
-	public partial class DeleteByQueryRequest<T>  : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
+	public partial class DeleteByQueryRequest<T> : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		protected IDeleteByQueryRequest Self => this;
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1956,9 +1955,9 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
-	public partial class DeleteByQueryRequest  : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
+	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		protected IDeleteByQueryRequest Self => this;
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2078,16 +2077,16 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters> 
+	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlDeleteDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
-	public partial class DeleteDatafeedRequest  : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
+	public partial class DeleteDatafeedRequest : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
 	{
 		protected IDeleteDatafeedRequest Self => this;
 		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
@@ -2100,27 +2099,27 @@ namespace Nest
 			///<summary>True if the datafeed should be forcefully deleted</summary>
 		public bool? Force { get { return Q<bool?>("force"); } set { Q("force", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteExpiredDataRequest : IRequest<DeleteExpiredDataRequestParameters> 
+	public partial interface IDeleteExpiredDataRequest : IRequest<DeleteExpiredDataRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackMlDeleteExpiredData <pre></pre></summary>
-	public partial class DeleteExpiredDataRequest  : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
+	public partial class DeleteExpiredDataRequest : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
 	{
 		protected IDeleteExpiredDataRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters> 
+	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
-	public partial class DeleteIndexRequest  : PlainRequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
+	public partial class DeleteIndexRequest : PlainRequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
 		protected IDeleteIndexRequest Self => this;
 		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2145,16 +2144,16 @@ namespace Nest
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters> 
+	public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters>
 	{
 		Name Name { get; }
 	}
 
 	///<summary>Request parameters for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class DeleteIndexTemplateRequest  : PlainRequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
+	public partial class DeleteIndexTemplateRequest : PlainRequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
 	{
 		protected IDeleteIndexTemplateRequest Self => this;
 		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -2170,16 +2169,16 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteJobRequest : IRequest<DeleteJobRequestParameters> 
+	public partial interface IDeleteJobRequest : IRequest<DeleteJobRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlDeleteJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
-	public partial class DeleteJobRequest  : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
+	public partial class DeleteJobRequest : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
 	{
 		protected IDeleteJobRequest Self => this;
 		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -2192,28 +2191,28 @@ namespace Nest
 			///<summary>True if the job should be forcefully deleted</summary>
 		public bool? Force { get { return Q<bool?>("force"); } set { Q("force", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters> 
+	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackLicenseDelete <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class DeleteLicenseRequest  : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
+	public partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
 		protected IDeleteLicenseRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteModelSnapshotRequest : IRequest<DeleteModelSnapshotRequestParameters> 
+	public partial interface IDeleteModelSnapshotRequest : IRequest<DeleteModelSnapshotRequestParameters>
 	{
 		Id JobId { get; }
 		Id SnapshotId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlDeleteModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
-	public partial class DeleteModelSnapshotRequest  : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
+	public partial class DeleteModelSnapshotRequest : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
 	{
 		protected IDeleteModelSnapshotRequest Self => this;
 		Id IDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -2225,16 +2224,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeletePipelineRequest : IRequest<DeletePipelineRequestParameters> 
+	public partial interface IDeletePipelineRequest : IRequest<DeletePipelineRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class DeletePipelineRequest  : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
+	public partial class DeletePipelineRequest : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
 	{
 		protected IDeletePipelineRequest Self => this;
 		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2250,16 +2249,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters> 
+	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters>
 	{
 		Names RepositoryName { get; }
 	}
 
 	///<summary>Request parameters for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public partial class DeleteRepositoryRequest  : PlainRequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
+	public partial class DeleteRepositoryRequest : PlainRequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
 		protected IDeleteRepositoryRequest Self => this;
 		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
@@ -2275,10 +2274,10 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteRequest : IRequest<DeleteRequestParameters> 
+	public partial interface IDeleteRequest : IRequest<DeleteRequestParameters>
 	{
 		Id Id { get; }
 		IndexName Index { get; }
@@ -2286,7 +2285,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
-	public partial class DeleteRequest<T>  : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
+	public partial class DeleteRequest<T> : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
 		protected IDeleteRequest Self => this;
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2334,9 +2333,9 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
-	public partial class DeleteRequest  : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
+	public partial class DeleteRequest : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
 		protected IDeleteRequest Self => this;
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2377,16 +2376,16 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteRoleMappingRequest : IRequest<DeleteRoleMappingRequestParameters> 
+	public partial interface IDeleteRoleMappingRequest : IRequest<DeleteRoleMappingRequestParameters>
 	{
 		Name Name { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityDeleteRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
-	public partial class DeleteRoleMappingRequest  : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
+	public partial class DeleteRoleMappingRequest : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
 	{
 		protected IDeleteRoleMappingRequest Self => this;
 		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -2399,16 +2398,16 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteRoleRequest : IRequest<DeleteRoleRequestParameters> 
+	public partial interface IDeleteRoleRequest : IRequest<DeleteRoleRequestParameters>
 	{
 		Name Name { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityDeleteRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role</pre></summary>
-	public partial class DeleteRoleRequest  : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
+	public partial class DeleteRoleRequest : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 	{
 		protected IDeleteRoleRequest Self => this;
 		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -2421,16 +2420,16 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters> 
+	public partial interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
-	public partial class DeleteScriptRequest  : PlainRequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
+	public partial class DeleteScriptRequest : PlainRequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
 		protected IDeleteScriptRequest Self => this;
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2446,17 +2445,17 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequestParameters> 
+	public partial interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequestParameters>
 	{
 		Name RepositoryName { get; }
 		Name Snapshot { get; }
 	}
 
 	///<summary>Request parameters for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public partial class DeleteSnapshotRequest  : PlainRequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
+	public partial class DeleteSnapshotRequest : PlainRequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 	{
 		protected IDeleteSnapshotRequest Self => this;
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -2471,16 +2470,16 @@ namespace Nest
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteUserRequest : IRequest<DeleteUserRequestParameters> 
+	public partial interface IDeleteUserRequest : IRequest<DeleteUserRequestParameters>
 	{
 		Name Username { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityDeleteUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user</pre></summary>
-	public partial class DeleteUserRequest  : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
+	public partial class DeleteUserRequest : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 	{
 		protected IDeleteUserRequest Self => this;
 		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -2493,16 +2492,16 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteWatchRequest : IRequest<DeleteWatchRequestParameters> 
+	public partial interface IDeleteWatchRequest : IRequest<DeleteWatchRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for XpackWatcherDeleteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
-	public partial class DeleteWatchRequest  : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
+	public partial class DeleteWatchRequest : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
 		protected IDeleteWatchRequest Self => this;
 		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2515,16 +2514,16 @@ namespace Nest
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeprecationInfoRequest : IRequest<DeprecationInfoRequestParameters> 
+	public partial interface IDeprecationInfoRequest : IRequest<DeprecationInfoRequestParameters>
 	{
 		IndexName Index { get; }
 	}
 
 	///<summary>Request parameters for XpackDeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
-	public partial class DeprecationInfoRequest  : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
+	public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
 		protected IDeprecationInfoRequest Self => this;
 		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -2539,16 +2538,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters> 
+	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters>
 	{
 		Name Username { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityDisableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user</pre></summary>
-	public partial class DisableUserRequest  : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
+	public partial class DisableUserRequest : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
 	{
 		protected IDisableUserRequest Self => this;
 		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -2561,10 +2560,10 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters> 
+	public partial interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters>
 	{
 		Id Id { get; }
 		IndexName Index { get; }
@@ -2572,7 +2571,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public partial class DocumentExistsRequest<T>  : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
+	public partial class DocumentExistsRequest<T> : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 		protected IDocumentExistsRequest Self => this;
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2632,9 +2631,9 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public partial class DocumentExistsRequest  : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
+	public partial class DocumentExistsRequest : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 		protected IDocumentExistsRequest Self => this;
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2687,16 +2686,16 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IEnableUserRequest : IRequest<EnableUserRequestParameters> 
+	public partial interface IEnableUserRequest : IRequest<EnableUserRequestParameters>
 	{
 		Name Username { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityEnableUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user</pre></summary>
-	public partial class EnableUserRequest  : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
+	public partial class EnableUserRequest : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
 	{
 		protected IEnableUserRequest Self => this;
 		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -2709,16 +2708,16 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IExecuteWatchRequest : IRequest<ExecuteWatchRequestParameters> 
+	public partial interface IExecuteWatchRequest : IRequest<ExecuteWatchRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for XpackWatcherExecuteWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
-	public partial class ExecuteWatchRequest  : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
+	public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
 		protected IExecuteWatchRequest Self => this;
 		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -2736,10 +2735,10 @@ namespace Nest
 			///<summary>indicates whether the watch should execute in debug mode</summary>
 		public bool? Debug { get { return Q<bool?>("debug"); } set { Q("debug", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IExplainRequest<TDocument> : IRequest<ExplainRequestParameters> 
+	public partial interface IExplainRequest<TDocument> : IRequest<ExplainRequestParameters>
 	{
 		Id Id { get; }
 		IndexName Index { get; }
@@ -2748,7 +2747,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
-	public partial class ExplainRequest<TDocument>  : PlainRequestBase<ExplainRequestParameters>, IExplainRequest<TDocument>
+	public partial class ExplainRequest<TDocument> : PlainRequestBase<ExplainRequestParameters>, IExplainRequest<TDocument>
 	{
 		protected IExplainRequest<TDocument> Self => this;
 		Id IExplainRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
@@ -2811,16 +2810,16 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IFieldCapabilitiesRequest : IRequest<FieldCapabilitiesRequestParameters> 
+	public partial interface IFieldCapabilitiesRequest : IRequest<FieldCapabilitiesRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for FieldCaps <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
-	public partial class FieldCapabilitiesRequest  : PlainRequestBase<FieldCapabilitiesRequestParameters>, IFieldCapabilitiesRequest
+	public partial class FieldCapabilitiesRequest : PlainRequestBase<FieldCapabilitiesRequestParameters>, IFieldCapabilitiesRequest
 	{
 		protected IFieldCapabilitiesRequest Self => this;
 		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2847,16 +2846,16 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters> 
+	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlFlushJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
-	public partial class FlushJobRequest  : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
+	public partial class FlushJobRequest : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
 	{
 		protected IFlushJobRequest Self => this;
 		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -2869,16 +2868,16 @@ namespace Nest
 			///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public string SkipTime { get { return Q<string>("skip_time"); } set { Q("skip_time", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IFlushRequest : IRequest<FlushRequestParameters> 
+	public partial interface IFlushRequest : IRequest<FlushRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
-	public partial class FlushRequest  : PlainRequestBase<FlushRequestParameters>, IFlushRequest
+	public partial class FlushRequest : PlainRequestBase<FlushRequestParameters>, IFlushRequest
 	{
 		protected IFlushRequest Self => this;
 		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2908,16 +2907,16 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IForceMergeRequest : IRequest<ForceMergeRequestParameters> 
+	public partial interface IForceMergeRequest : IRequest<ForceMergeRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesForcemergeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
-	public partial class ForceMergeRequest  : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
+	public partial class ForceMergeRequest : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
 	{
 		protected IForceMergeRequest Self => this;
 		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2956,17 +2955,17 @@ namespace Nest
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public bool? WaitForMerge { get { return Q<bool?>("wait_for_merge"); } set { Q("wait_for_merge", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters> 
+	public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters>
 	{
 		Indices Index { get; }
 		Names Name { get; }
 	}
 
 	///<summary>Request parameters for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public partial class GetAliasRequest  : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
+	public partial class GetAliasRequest : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
 	{
 		protected IGetAliasRequest Self => this;
 		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3007,16 +3006,16 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsRequestParameters> 
+	public partial interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlGetRecords <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
-	public partial class GetAnomalyRecordsRequest  : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
+	public partial class GetAnomalyRecordsRequest : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
 	{
 		protected IGetAnomalyRecordsRequest Self => this;
 		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -3026,16 +3025,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters> 
+	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
-	public partial class GetBucketsRequest  : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
+	public partial class GetBucketsRequest : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
 	{
 		protected IGetBucketsRequest Self => this;
 		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -3045,17 +3044,17 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters> 
+	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters>
 	{
 		Id JobId { get; }
 		CategoryId CategoryId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlGetCategories <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
-	public partial class GetCategoriesRequest  : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
+	public partial class GetCategoriesRequest : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
 	{
 		protected IGetCategoriesRequest Self => this;
 		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -3073,16 +3072,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters> 
+	public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters>
 	{
 		Id DatafeedId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlGetDatafeeds <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
-	public partial class GetDatafeedsRequest  : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
+	public partial class GetDatafeedsRequest : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
 	{
 		protected IGetDatafeedsRequest Self => this;
 		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
@@ -3097,16 +3096,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetDatafeedStatsRequest : IRequest<GetDatafeedStatsRequestParameters> 
+	public partial interface IGetDatafeedStatsRequest : IRequest<GetDatafeedStatsRequestParameters>
 	{
 		Id DatafeedId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlGetDatafeedStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
-	public partial class GetDatafeedStatsRequest  : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
+	public partial class GetDatafeedStatsRequest : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
 	{
 		protected IGetDatafeedStatsRequest Self => this;
 		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
@@ -3121,10 +3120,10 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters> 
+	public partial interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
@@ -3132,7 +3131,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
-	public partial class GetFieldMappingRequest  : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
+	public partial class GetFieldMappingRequest : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
 		protected IGetFieldMappingRequest Self => this;
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3181,16 +3180,16 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters> 
+	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
-	public partial class GetIndexRequest  : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
+	public partial class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
 		protected IGetIndexRequest Self => this;
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3218,17 +3217,17 @@ namespace Nest
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters> 
+	public partial interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters>
 	{
 		Indices Index { get; }
 		Names Name { get; }
 	}
 
 	///<summary>Request parameters for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
-	public partial class GetIndexSettingsRequest  : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
+	public partial class GetIndexSettingsRequest : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
 		protected IGetIndexSettingsRequest Self => this;
 		Indices IGetIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3275,16 +3274,16 @@ namespace Nest
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters> 
+	public partial interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters>
 	{
 		Names Name { get; }
 	}
 
 	///<summary>Request parameters for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class GetIndexTemplateRequest  : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
+	public partial class GetIndexTemplateRequest : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
 	{
 		protected IGetIndexTemplateRequest Self => this;
 		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -3308,16 +3307,16 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters> 
+	public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlGetInfluencers <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
-	public partial class GetInfluencersRequest  : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
+	public partial class GetInfluencersRequest : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
 	{
 		protected IGetInfluencersRequest Self => this;
 		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -3327,16 +3326,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetJobsRequest : IRequest<GetJobsRequestParameters> 
+	public partial interface IGetJobsRequest : IRequest<GetJobsRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlGetJobs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
-	public partial class GetJobsRequest  : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
+	public partial class GetJobsRequest : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
 	{
 		protected IGetJobsRequest Self => this;
 		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -3351,16 +3350,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParameters> 
+	public partial interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlGetJobStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
-	public partial class GetJobStatsRequest  : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
+	public partial class GetJobStatsRequest : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
 	{
 		protected IGetJobStatsRequest Self => this;
 		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -3375,31 +3374,31 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters> 
+	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackLicenseGet <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class GetLicenseRequest  : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
+	public partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
 		protected IGetLicenseRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters> 
+	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	}
 
 	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
-	public partial class GetMappingRequest  : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
+	public partial class GetMappingRequest : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
 		protected IGetMappingRequest Self => this;
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3440,17 +3439,17 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetModelSnapshotsRequest : IRequest<GetModelSnapshotsRequestParameters> 
+	public partial interface IGetModelSnapshotsRequest : IRequest<GetModelSnapshotsRequestParameters>
 	{
 		Id JobId { get; }
 		Id SnapshotId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlGetModelSnapshots <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
-	public partial class GetModelSnapshotsRequest  : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
+	public partial class GetModelSnapshotsRequest : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
 	{
 		protected IGetModelSnapshotsRequest Self => this;
 		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -3468,16 +3467,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters> 
+	public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class GetPipelineRequest  : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
+	public partial class GetPipelineRequest : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
 	{
 		protected IGetPipelineRequest Self => this;
 		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3495,16 +3494,16 @@ namespace Nest
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters> 
+	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters>
 	{
 		Names RepositoryName { get; }
 	}
 
 	///<summary>Request parameters for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public partial class GetRepositoryRequest  : PlainRequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
+	public partial class GetRepositoryRequest : PlainRequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
 	{
 		protected IGetRepositoryRequest Self => this;
 		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
@@ -3525,10 +3524,10 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetRequest : IRequest<GetRequestParameters> 
+	public partial interface IGetRequest : IRequest<GetRequestParameters>
 	{
 		Id Id { get; }
 		IndexName Index { get; }
@@ -3536,7 +3535,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public partial class GetRequest<T>  : PlainRequestBase<GetRequestParameters>, IGetRequest
+	public partial class GetRequest<T> : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
 		protected IGetRequest Self => this;
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3596,9 +3595,9 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public partial class GetRequest  : PlainRequestBase<GetRequestParameters>, IGetRequest
+	public partial class GetRequest : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
 		protected IGetRequest Self => this;
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3651,16 +3650,16 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetRoleMappingRequest : IRequest<GetRoleMappingRequestParameters> 
+	public partial interface IGetRoleMappingRequest : IRequest<GetRoleMappingRequestParameters>
 	{
 		Name Name { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityGetRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
-	public partial class GetRoleMappingRequest  : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
+	public partial class GetRoleMappingRequest : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
 	{
 		protected IGetRoleMappingRequest Self => this;
 		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -3675,16 +3674,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters> 
+	public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters>
 	{
 		Name Name { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityGetRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role</pre></summary>
-	public partial class GetRoleRequest  : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
+	public partial class GetRoleRequest : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 	{
 		protected IGetRoleRequest Self => this;
 		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -3699,16 +3698,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters> 
+	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
-	public partial class GetScriptRequest  : PlainRequestBase<GetScriptRequestParameters>, IGetScriptRequest
+	public partial class GetScriptRequest : PlainRequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
 		protected IGetScriptRequest Self => this;
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3718,17 +3717,17 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters> 
+	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters>
 	{
 		Name RepositoryName { get; }
 		Names Snapshot { get; }
 	}
 
 	///<summary>Request parameters for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public partial class GetSnapshotRequest  : PlainRequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
+	public partial class GetSnapshotRequest : PlainRequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
 		protected IGetSnapshotRequest Self => this;
 		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -3749,16 +3748,16 @@ namespace Nest
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetTaskRequest : IRequest<GetTaskRequestParameters> 
+	public partial interface IGetTaskRequest : IRequest<GetTaskRequestParameters>
 	{
 		TaskId TaskId { get; }
 	}
 
 	///<summary>Request parameters for TasksGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class GetTaskRequest  : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
+	public partial class GetTaskRequest : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
 	{
 		protected IGetTaskRequest Self => this;
 		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
@@ -3771,27 +3770,27 @@ namespace Nest
 			///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetUserAccessTokenRequest : IRequest<GetUserAccessTokenRequestParameters> 
+	public partial interface IGetUserAccessTokenRequest : IRequest<GetUserAccessTokenRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackSecurityGetToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token</pre></summary>
-	public partial class GetUserAccessTokenRequest  : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
+	public partial class GetUserAccessTokenRequest : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
 	{
 		protected IGetUserAccessTokenRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters> 
+	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters>
 	{
 		Names Username { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityGetUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user</pre></summary>
-	public partial class GetUserRequest  : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
+	public partial class GetUserRequest : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 	{
 		protected IGetUserRequest Self => this;
 		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
@@ -3806,16 +3805,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetWatchRequest : IRequest<GetWatchRequestParameters> 
+	public partial interface IGetWatchRequest : IRequest<GetWatchRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for XpackWatcherGetWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
-	public partial class GetWatchRequest  : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
+	public partial class GetWatchRequest : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
 		protected IGetWatchRequest Self => this;
 		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3825,17 +3824,17 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGraphExploreRequest : IRequest<GraphExploreRequestParameters> 
+	public partial interface IGraphExploreRequest : IRequest<GraphExploreRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	}
 
 	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
-	public partial class GraphExploreRequest<T>  : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
+	public partial class GraphExploreRequest<T> : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3865,9 +3864,9 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
-	public partial class GraphExploreRequest  : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
+	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3897,27 +3896,27 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGrokProcessorPatternsRequest : IRequest<GrokProcessorPatternsRequestParameters> 
+	public partial interface IGrokProcessorPatternsRequest : IRequest<GrokProcessorPatternsRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for IngestProcessorGrok <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class GrokProcessorPatternsRequest  : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
+	public partial class GrokProcessorPatternsRequest : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
 	{
 		protected IGrokProcessorPatternsRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters> 
+	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
-	public partial class IndexExistsRequest  : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
+	public partial class IndexExistsRequest : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
 		protected IIndexExistsRequest Self => this;
 		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3945,10 +3944,10 @@ namespace Nest
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndexRequest<TDocument> : IRequest<IndexRequestParameters> 
+	public partial interface IIndexRequest<TDocument> : IRequest<IndexRequestParameters>
 	{
 		Id Id { get; }
 		IndexName Index { get; }
@@ -3956,7 +3955,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
-	public partial class IndexRequest<TDocument>  : PlainRequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
+	public partial class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
 	{
 		protected IIndexRequest<TDocument> Self => this;
 		Id IIndexRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
@@ -4023,16 +4022,16 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndexTemplateExistsRequest : IRequest<IndexTemplateExistsRequestParameters> 
+	public partial interface IIndexTemplateExistsRequest : IRequest<IndexTemplateExistsRequestParameters>
 	{
 		Names Name { get; }
 	}
 
 	///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class IndexTemplateExistsRequest  : PlainRequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
+	public partial class IndexTemplateExistsRequest : PlainRequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
 	{
 		protected IIndexTemplateExistsRequest Self => this;
 		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -4051,16 +4050,16 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters> 
+	public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
-	public partial class IndicesShardStoresRequest  : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
+	public partial class IndicesShardStoresRequest : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 	{
 		protected IIndicesShardStoresRequest Self => this;
 		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4090,17 +4089,17 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters> 
+	public partial interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters>
 	{
 		Indices Index { get; }
 		Metrics Metric { get; }
 	}
 
 	///<summary>Request parameters for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
-	public partial class IndicesStatsRequest  : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
+	public partial class IndicesStatsRequest : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
 		protected IIndicesStatsRequest Self => this;
 		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4147,26 +4146,26 @@ namespace Nest
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get { return Q<bool?>("include_segment_file_sizes"); } set { Q("include_segment_file_sizes", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IInvalidateUserAccessTokenRequest : IRequest<InvalidateUserAccessTokenRequestParameters> 
+	public partial interface IInvalidateUserAccessTokenRequest : IRequest<InvalidateUserAccessTokenRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackSecurityInvalidateToken <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token</pre></summary>
-	public partial class InvalidateUserAccessTokenRequest  : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
+	public partial class InvalidateUserAccessTokenRequest : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
 	{
 		protected IInvalidateUserAccessTokenRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IListTasksRequest : IRequest<ListTasksRequestParameters> 
+	public partial interface IListTasksRequest : IRequest<ListTasksRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public partial class ListTasksRequest  : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
+	public partial class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
 		protected IListTasksRequest Self => this;
 				///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
@@ -4190,10 +4189,10 @@ namespace Nest
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
 		public GroupBy GroupBy { get { return Q<GroupBy>("group_by"); } set { Q("group_by", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters> 
+	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
 	{
 		IndexName Index { get; }
 		TypeName Type { get; }
@@ -4201,7 +4200,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
-	public partial class MultiGetRequest  : PlainRequestBase<MultiGetRequestParameters>, IMultiGetRequest
+	public partial class MultiGetRequest : PlainRequestBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
 		protected IMultiGetRequest Self => this;
 		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -4251,17 +4250,17 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMultiSearchRequest : IRequest<MultiSearchRequestParameters> 
+	public partial interface IMultiSearchRequest : IRequest<MultiSearchRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	}
 
 	///<summary>Request parameters for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
-	public partial class MultiSearchRequest  : PlainRequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
+	public partial class MultiSearchRequest : PlainRequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
 		protected IMultiSearchRequest Self => this;
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4296,17 +4295,17 @@ namespace Nest
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long? PreFilterShardSize { get { return Q<long?>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMultiSearchTemplateRequest : IRequest<MultiSearchTemplateRequestParameters> 
+	public partial interface IMultiSearchTemplateRequest : IRequest<MultiSearchTemplateRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	}
 
 	///<summary>Request parameters for MsearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
-	public partial class MultiSearchTemplateRequest  : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
+	public partial class MultiSearchTemplateRequest : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
 	{
 		protected IMultiSearchTemplateRequest Self => this;
 		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4338,17 +4337,17 @@ namespace Nest
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get { return Q<long?>("max_concurrent_searches"); } set { Q("max_concurrent_searches", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters> 
+	public partial interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters>
 	{
 		IndexName Index { get; }
 		TypeName Type { get; }
 	}
 
 	///<summary>Request parameters for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
-	public partial class MultiTermVectorsRequest  : PlainRequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
+	public partial class MultiTermVectorsRequest : PlainRequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
 		protected IMultiTermVectorsRequest Self => this;
 		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -4413,16 +4412,16 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface INodesHotThreadsRequest : IRequest<NodesHotThreadsRequestParameters> 
+	public partial interface INodesHotThreadsRequest : IRequest<NodesHotThreadsRequestParameters>
 	{
 		NodeIds NodeId { get; }
 	}
 
 	///<summary>Request parameters for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
-	public partial class NodesHotThreadsRequest  : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
+	public partial class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
 		protected INodesHotThreadsRequest Self => this;
 		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
@@ -4455,17 +4454,17 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface INodesInfoRequest : IRequest<NodesInfoRequestParameters> 
+	public partial interface INodesInfoRequest : IRequest<NodesInfoRequestParameters>
 	{
 		NodeIds NodeId { get; }
 		Metrics Metric { get; }
 	}
 
 	///<summary>Request parameters for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
-	public partial class NodesInfoRequest  : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
+	public partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
 		protected INodesInfoRequest Self => this;
 		NodeIds INodesInfoRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
@@ -4500,10 +4499,10 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface INodesStatsRequest : IRequest<NodesStatsRequestParameters> 
+	public partial interface INodesStatsRequest : IRequest<NodesStatsRequestParameters>
 	{
 		Metrics Metric { get; }
 		IndexMetrics IndexMetric { get; }
@@ -4511,7 +4510,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
-	public partial class NodesStatsRequest  : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
+	public partial class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
 		protected INodesStatsRequest Self => this;
 		Metrics INodesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
@@ -4580,17 +4579,17 @@ namespace Nest
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get { return Q<bool?>("include_segment_file_sizes"); } set { Q("include_segment_file_sizes", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface INodesUsageRequest : IRequest<NodesUsageRequestParameters> 
+	public partial interface INodesUsageRequest : IRequest<NodesUsageRequestParameters>
 	{
 		Metrics Metric { get; }
 		NodeIds NodeId { get; }
 	}
 
 	///<summary>Request parameters for NodesUsageForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
-	public partial class NodesUsageRequest  : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
+	public partial class NodesUsageRequest : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
 	{
 		protected INodesUsageRequest Self => this;
 		Metrics INodesUsageRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
@@ -4625,16 +4624,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters> 
+	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
-	public partial class OpenIndexRequest  : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
+	public partial class OpenIndexRequest : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
 		protected IOpenIndexRequest Self => this;
 		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4659,16 +4658,16 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IOpenJobRequest : IRequest<OpenJobRequestParameters> 
+	public partial interface IOpenJobRequest : IRequest<OpenJobRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlOpenJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
-	public partial class OpenJobRequest  : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
+	public partial class OpenJobRequest : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
 	{
 		protected IOpenJobRequest Self => this;
 		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -4678,27 +4677,27 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPingRequest : IRequest<PingRequestParameters> 
+	public partial interface IPingRequest : IRequest<PingRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for Ping <pre>http://www.elastic.co/guide/</pre></summary>
-	public partial class PingRequest  : PlainRequestBase<PingRequestParameters>, IPingRequest
+	public partial class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
 	{
 		protected IPingRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters> 
+	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlPostData <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
-	public partial class PostJobDataRequest  : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
+	public partial class PostJobDataRequest : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
 	{
 		protected IPostJobDataRequest Self => this;
 		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -4714,30 +4713,30 @@ namespace Nest
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
 		public DateTimeOffset ResetEnd { get { return Q<DateTimeOffset>("reset_end"); } set { Q("reset_end", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters> 
+	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackLicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class PostLicenseRequest  : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
+	public partial class PostLicenseRequest : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
 		protected IPostLicenseRequest Self => this;
 				///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get { return Q<bool?>("acknowledge"); } set { Q("acknowledge", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedRequestParameters> 
+	public partial interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlPreviewDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
-	public partial class PreviewDatafeedRequest  : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
+	public partial class PreviewDatafeedRequest : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
 	{
 		protected IPreviewDatafeedRequest Self => this;
 		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
@@ -4747,17 +4746,17 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters> 
+	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
 	{
 		Indices Index { get; }
 		Name Name { get; }
 	}
 
 	///<summary>Request parameters for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public partial class PutAliasRequest  : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
+	public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
 		protected IPutAliasRequest Self => this;
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4775,16 +4774,16 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters> 
+	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlPutDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
-	public partial class PutDatafeedRequest  : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
+	public partial class PutDatafeedRequest : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
 	{
 		protected IPutDatafeedRequest Self => this;
 		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
@@ -4794,16 +4793,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters> 
+	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
 	{
 		Name Name { get; }
 	}
 
 	///<summary>Request parameters for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class PutIndexTemplateRequest  : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
+	public partial class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
 	{
 		protected IPutIndexTemplateRequest Self => this;
 		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -4825,16 +4824,16 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters> 
+	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlPutJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
-	public partial class PutJobRequest  : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
+	public partial class PutJobRequest : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
 	{
 		protected IPutJobRequest Self => this;
 		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -4844,17 +4843,17 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters> 
+	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
 	{
 		Indices Index { get; }
 		TypeName Type { get; }
 	}
 
 	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
-	public partial class PutMappingRequest<T>  : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
+	public partial class PutMappingRequest<T> : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		protected IPutMappingRequest Self => this;
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4890,9 +4889,9 @@ namespace Nest
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get { return Q<bool?>("update_all_types"); } set { Q("update_all_types", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
-	public partial class PutMappingRequest  : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
+	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		protected IPutMappingRequest Self => this;
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4928,16 +4927,16 @@ namespace Nest
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get { return Q<bool?>("update_all_types"); } set { Q("update_all_types", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutPipelineRequest : IRequest<PutPipelineRequestParameters> 
+	public partial interface IPutPipelineRequest : IRequest<PutPipelineRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class PutPipelineRequest  : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
+	public partial class PutPipelineRequest : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
 	{
 		protected IPutPipelineRequest Self => this;
 		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -4953,16 +4952,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters> 
+	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>
 	{
 		Name Name { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityPutRoleMapping <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
-	public partial class PutRoleMappingRequest  : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
+	public partial class PutRoleMappingRequest : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
 	{
 		protected IPutRoleMappingRequest Self => this;
 		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -4975,16 +4974,16 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters> 
+	public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters>
 	{
 		Name Name { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityPutRole <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role</pre></summary>
-	public partial class PutRoleRequest  : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
+	public partial class PutRoleRequest : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 	{
 		protected IPutRoleRequest Self => this;
 		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -4997,17 +4996,17 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters> 
+	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters>
 	{
 		Id Id { get; }
 		Name Context { get; }
 	}
 
 	///<summary>Request parameters for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
-	public partial class PutScriptRequest  : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
+	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
 		protected IPutScriptRequest Self => this;
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5031,16 +5030,16 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutUserRequest : IRequest<PutUserRequestParameters> 
+	public partial interface IPutUserRequest : IRequest<PutUserRequestParameters>
 	{
 		Name Username { get; }
 	}
 
 	///<summary>Request parameters for XpackSecurityPutUser <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user</pre></summary>
-	public partial class PutUserRequest  : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
+	public partial class PutUserRequest : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 	{
 		protected IPutUserRequest Self => this;
 		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
@@ -5053,16 +5052,16 @@ namespace Nest
 			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutWatchRequest : IRequest<PutWatchRequestParameters> 
+	public partial interface IPutWatchRequest : IRequest<PutWatchRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for XpackWatcherPutWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
-	public partial class PutWatchRequest  : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
+	public partial class PutWatchRequest : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
 		protected IPutWatchRequest Self => this;
 		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5078,16 +5077,16 @@ namespace Nest
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get { return Q<bool?>("active"); } set { Q("active", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters> 
+	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
-	public partial class RecoveryStatusRequest  : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
+	public partial class RecoveryStatusRequest : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
 		protected IRecoveryStatusRequest Self => this;
 		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -5108,16 +5107,16 @@ namespace Nest
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public bool? ActiveOnly { get { return Q<bool?>("active_only"); } set { Q("active_only", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRefreshRequest : IRequest<RefreshRequestParameters> 
+	public partial interface IRefreshRequest : IRequest<RefreshRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
-	public partial class RefreshRequest  : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
+	public partial class RefreshRequest : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
 	{
 		protected IRefreshRequest Self => this;
 		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -5141,15 +5140,15 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IReindexOnServerRequest : IRequest<ReindexOnServerRequestParameters> 
+	public partial interface IReindexOnServerRequest : IRequest<ReindexOnServerRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for Reindex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
-	public partial class ReindexOnServerRequest  : PlainRequestBase<ReindexOnServerRequestParameters>, IReindexOnServerRequest
+	public partial class ReindexOnServerRequest : PlainRequestBase<ReindexOnServerRequestParameters>, IReindexOnServerRequest
 	{
 		protected IReindexOnServerRequest Self => this;
 				///<summary>Should the effected indexes be refreshed?</summary>
@@ -5170,16 +5169,16 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IReindexRethrottleRequest : IRequest<ReindexRethrottleRequestParameters> 
+	public partial interface IReindexRethrottleRequest : IRequest<ReindexRethrottleRequestParameters>
 	{
 		TaskId TaskId { get; }
 	}
 
 	///<summary>Request parameters for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
-	public partial class ReindexRethrottleRequest  : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
+	public partial class ReindexRethrottleRequest : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
 	{
 		protected IReindexRethrottleRequest Self => this;
 		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
@@ -5192,27 +5191,27 @@ namespace Nest
 			///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond { get { return Q<long?>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters> 
+	public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for ClusterRemoteInfo <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
-	public partial class RemoteInfoRequest  : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
+	public partial class RemoteInfoRequest : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 	{
 		protected IRemoteInfoRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters> 
+	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public partial class RenderSearchTemplateRequest  : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
+	public partial class RenderSearchTemplateRequest : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
 	{
 		protected IRenderSearchTemplateRequest Self => this;
 		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5227,28 +5226,28 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRestartWatcherRequest : IRequest<RestartWatcherRequestParameters> 
+	public partial interface IRestartWatcherRequest : IRequest<RestartWatcherRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackWatcherRestart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
-	public partial class RestartWatcherRequest  : PlainRequestBase<RestartWatcherRequestParameters>, IRestartWatcherRequest
+	public partial class RestartWatcherRequest : PlainRequestBase<RestartWatcherRequestParameters>, IRestartWatcherRequest
 	{
 		protected IRestartWatcherRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters> 
+	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters>
 	{
 		Name RepositoryName { get; }
 		Name Snapshot { get; }
 	}
 
 	///<summary>Request parameters for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public partial class RestoreRequest  : PlainRequestBase<RestoreRequestParameters>, IRestoreRequest
+	public partial class RestoreRequest : PlainRequestBase<RestoreRequestParameters>, IRestoreRequest
 	{
 		protected IRestoreRequest Self => this;
 		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -5266,17 +5265,17 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters> 
+	public partial interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters>
 	{
 		Id JobId { get; }
 		Id SnapshotId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlRevertModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
-	public partial class RevertModelSnapshotRequest  : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
+	public partial class RevertModelSnapshotRequest : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
 	{
 		protected IRevertModelSnapshotRequest Self => this;
 		Id IRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -5288,17 +5287,17 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters> 
+	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters>
 	{
 		Name Alias { get; }
 		IndexName NewIndex { get; }
 	}
 
 	///<summary>Request parameters for IndicesRolloverForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
-	public partial class RolloverIndexRequest  : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
+	public partial class RolloverIndexRequest : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
 	{
 		protected IRolloverIndexRequest Self => this;
 		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
@@ -5328,32 +5327,32 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters> 
+	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for Info <pre>http://www.elastic.co/guide/</pre></summary>
-	public partial class RootNodeInfoRequest  : PlainRequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
+	public partial class RootNodeInfoRequest : PlainRequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
 	{
 		protected IRootNodeInfoRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IScrollRequest : IRequest<ScrollRequestParameters> 
+	public partial interface IScrollRequest : IRequest<ScrollRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
-	public partial class ScrollRequest  : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
+	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		protected IScrollRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISearchRequest : IRequest<SearchRequestParameters> 
+	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
@@ -5362,7 +5361,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
-	public partial class SearchRequest<T>  : PlainRequestBase<SearchRequestParameters>, ISearchRequest
+	public partial class SearchRequest<T> : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
 		protected ISearchRequest Self => this;
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -5460,9 +5459,9 @@ namespace Nest
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long? PreFilterShardSize { get { return Q<long?>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
-	public partial class SearchRequest  : PlainRequestBase<SearchRequestParameters>, ISearchRequest
+	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
 		protected ISearchRequest Self => this;
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -5560,16 +5559,16 @@ namespace Nest
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public long? PreFilterShardSize { get { return Q<long?>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters> 
+	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
-	public partial class SearchShardsRequest<T>  : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
+	public partial class SearchShardsRequest<T> : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		protected ISearchShardsRequest Self => this;
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -5608,9 +5607,9 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
-	public partial class SearchShardsRequest  : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
+	public partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		protected ISearchShardsRequest Self => this;
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -5649,17 +5648,17 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISearchTemplateRequest : IRequest<SearchTemplateRequestParameters> 
+	public partial interface ISearchTemplateRequest : IRequest<SearchTemplateRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	}
 
 	///<summary>Request parameters for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
-	public partial class SearchTemplateRequest  : PlainRequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
+	public partial class SearchTemplateRequest : PlainRequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
 		protected ISearchTemplateRequest Self => this;
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -5718,16 +5717,16 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get { return Q<bool?>("typed_keys"); } set { Q("typed_keys", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters> 
+	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
-	public partial class SegmentsRequest  : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
+	public partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
 	{
 		protected ISegmentsRequest Self => this;
 		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -5757,17 +5756,17 @@ namespace Nest
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IShrinkIndexRequest : IRequest<ShrinkIndexRequestParameters> 
+	public partial interface IShrinkIndexRequest : IRequest<ShrinkIndexRequestParameters>
 	{
 		IndexName Index { get; }
 		IndexName Target { get; }
 	}
 
 	///<summary>Request parameters for IndicesShrink <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
-	public partial class ShrinkIndexRequest  : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
+	public partial class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
 	{
 		protected IShrinkIndexRequest Self => this;
 		IndexName IShrinkIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -5788,16 +5787,16 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISimulatePipelineRequest : IRequest<SimulatePipelineRequestParameters> 
+	public partial interface ISimulatePipelineRequest : IRequest<SimulatePipelineRequestParameters>
 	{
 		Id Id { get; }
 	}
 
 	///<summary>Request parameters for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class SimulatePipelineRequest  : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
+	public partial class SimulatePipelineRequest : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
 	{
 		protected ISimulatePipelineRequest Self => this;
 		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5815,17 +5814,17 @@ namespace Nest
 			///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISnapshotRequest : IRequest<SnapshotRequestParameters> 
+	public partial interface ISnapshotRequest : IRequest<SnapshotRequestParameters>
 	{
 		Name RepositoryName { get; }
 		Name Snapshot { get; }
 	}
 
 	///<summary>Request parameters for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public partial class SnapshotRequest  : PlainRequestBase<SnapshotRequestParameters>, ISnapshotRequest
+	public partial class SnapshotRequest : PlainRequestBase<SnapshotRequestParameters>, ISnapshotRequest
 	{
 		protected ISnapshotRequest Self => this;
 		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -5843,17 +5842,17 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISnapshotStatusRequest : IRequest<SnapshotStatusRequestParameters> 
+	public partial interface ISnapshotStatusRequest : IRequest<SnapshotStatusRequestParameters>
 	{
 		Name RepositoryName { get; }
 		Names Snapshot { get; }
 	}
 
 	///<summary>Request parameters for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public partial class SnapshotStatusRequest  : PlainRequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
+	public partial class SnapshotStatusRequest : PlainRequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 	{
 		protected ISnapshotStatusRequest Self => this;
 		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -5882,10 +5881,10 @@ namespace Nest
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISourceExistsRequest : IRequest<SourceExistsRequestParameters> 
+	public partial interface ISourceExistsRequest : IRequest<SourceExistsRequestParameters>
 	{
 		Id Id { get; }
 		IndexName Index { get; }
@@ -5893,7 +5892,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public partial class SourceExistsRequest<T>  : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
+	public partial class SourceExistsRequest<T> : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
 		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -5950,9 +5949,9 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public partial class SourceExistsRequest  : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
+	public partial class SourceExistsRequest : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
 		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -6002,10 +6001,10 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISourceRequest : IRequest<SourceRequestParameters> 
+	public partial interface ISourceRequest : IRequest<SourceRequestParameters>
 	{
 		Id Id { get; }
 		IndexName Index { get; }
@@ -6013,7 +6012,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public partial class SourceRequest<T>  : PlainRequestBase<SourceRequestParameters>, ISourceRequest
+	public partial class SourceRequest<T> : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
 		protected ISourceRequest Self => this;
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -6070,9 +6069,9 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public partial class SourceRequest  : PlainRequestBase<SourceRequestParameters>, ISourceRequest
+	public partial class SourceRequest : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
 		protected ISourceRequest Self => this;
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -6122,16 +6121,16 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IStartDatafeedRequest : IRequest<StartDatafeedRequestParameters> 
+	public partial interface IStartDatafeedRequest : IRequest<StartDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlStartDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
-	public partial class StartDatafeedRequest  : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
+	public partial class StartDatafeedRequest : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
 	{
 		protected IStartDatafeedRequest Self => this;
 		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
@@ -6141,27 +6140,27 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters> 
+	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackWatcherStart <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
-	public partial class StartWatcherRequest  : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
+	public partial class StartWatcherRequest : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
 	{
 		protected IStartWatcherRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters> 
+	public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlStopDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
-	public partial class StopDatafeedRequest  : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
+	public partial class StopDatafeedRequest : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
 	{
 		protected IStopDatafeedRequest Self => this;
 		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
@@ -6171,27 +6170,27 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters> 
+	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackWatcherStop <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
-	public partial class StopWatcherRequest  : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
+	public partial class StopWatcherRequest : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
 	{
 		protected IStopWatcherRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters> 
+	public partial interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
-	public partial class SyncedFlushRequest  : PlainRequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
+	public partial class SyncedFlushRequest : PlainRequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 	{
 		protected ISyncedFlushRequest Self => this;
 		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -6215,10 +6214,10 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITermVectorsRequest<TDocument> : IRequest<TermVectorsRequestParameters> 
+	public partial interface ITermVectorsRequest<TDocument> : IRequest<TermVectorsRequestParameters>
 	{
 		IndexName Index { get; }
 		TypeName Type { get; }
@@ -6226,7 +6225,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
-	public partial class TermVectorsRequest<TDocument>  : PlainRequestBase<TermVectorsRequestParameters>, ITermVectorsRequest<TDocument>
+	public partial class TermVectorsRequest<TDocument> : PlainRequestBase<TermVectorsRequestParameters>, ITermVectorsRequest<TDocument>
 	{
 		protected ITermVectorsRequest<TDocument> Self => this;
 		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
@@ -6296,17 +6295,17 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters> 
+	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	}
 
 	///<summary>Request parameters for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
-	public partial class TypeExistsRequest  : PlainRequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
+	public partial class TypeExistsRequest : PlainRequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
 	{
 		protected ITypeExistsRequest Self => this;
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -6330,17 +6329,17 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateByQueryRequest : IRequest<UpdateByQueryRequestParameters> 
+	public partial interface IUpdateByQueryRequest : IRequest<UpdateByQueryRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	}
 
 	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
-	public partial class UpdateByQueryRequest<T>  : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
+	public partial class UpdateByQueryRequest<T> : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
 		protected IUpdateByQueryRequest Self => this;
 		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -6466,9 +6465,9 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
-	public partial class UpdateByQueryRequest  : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
+	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
 		protected IUpdateByQueryRequest Self => this;
 		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -6594,16 +6593,16 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters> 
+	public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlUpdateDatafeed <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
-	public partial class UpdateDatafeedRequest  : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
+	public partial class UpdateDatafeedRequest : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
 	{
 		protected IUpdateDatafeedRequest Self => this;
 		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
@@ -6613,16 +6612,16 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters> 
+	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
-	public partial class UpdateIndexSettingsRequest  : PlainRequestBase<UpdateIndexSettingsRequestParameters>, IUpdateIndexSettingsRequest
+	public partial class UpdateIndexSettingsRequest : PlainRequestBase<UpdateIndexSettingsRequestParameters>, IUpdateIndexSettingsRequest
 	{
 		protected IUpdateIndexSettingsRequest Self => this;
 		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -6655,16 +6654,16 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters> 
+	public partial interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters>
 	{
 		Id JobId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlUpdateJob <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
-	public partial class UpdateJobRequest  : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
+	public partial class UpdateJobRequest : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
 	{
 		protected IUpdateJobRequest Self => this;
 		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -6674,17 +6673,17 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnapshotRequestParameters> 
+	public partial interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnapshotRequestParameters>
 	{
 		Id JobId { get; }
 		Id SnapshotId { get; }
 	}
 
 	///<summary>Request parameters for XpackMlUpdateModelSnapshot <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
-	public partial class UpdateModelSnapshotRequest  : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
+	public partial class UpdateModelSnapshotRequest : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
 	{
 		protected IUpdateModelSnapshotRequest Self => this;
 		Id IUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
@@ -6696,10 +6695,10 @@ namespace Nest
 		{}
 		
 
-			}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IRequest<UpdateRequestParameters> 
+	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IRequest<UpdateRequestParameters>
 	{
 		Id Id { get; }
 		IndexName Index { get; }
@@ -6707,7 +6706,7 @@ namespace Nest
 	}
 
 	///<summary>Request parameters for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
-	public partial class UpdateRequest<TDocument, TPartialDocument>  : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
+	public partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
 	{
 		protected IUpdateRequest<TDocument, TPartialDocument> Self => this;
 		Id IUpdateRequest<TDocument, TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
@@ -6770,16 +6769,16 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters> 
+	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
-	public partial class UpgradeRequest  : PlainRequestBase<UpgradeRequestParameters>, IUpgradeRequest
+	public partial class UpgradeRequest : PlainRequestBase<UpgradeRequestParameters>, IUpgradeRequest
 	{
 		protected IUpgradeRequest Self => this;
 		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -6809,16 +6808,16 @@ namespace Nest
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
 		public bool? OnlyAncientSegments { get { return Q<bool?>("only_ancient_segments"); } set { Q("only_ancient_segments", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestParameters> 
+	public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestParameters>
 	{
 		Indices Index { get; }
 	}
 
 	///<summary>Request parameters for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
-	public partial class UpgradeStatusRequest  : PlainRequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
+	public partial class UpgradeStatusRequest : PlainRequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
 	{
 		protected IUpgradeStatusRequest Self => this;
 		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -6842,39 +6841,39 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IValidateDetectorRequest : IRequest<ValidateDetectorRequestParameters> 
+	public partial interface IValidateDetectorRequest : IRequest<ValidateDetectorRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackMlValidateDetector <pre></pre></summary>
-	public partial class ValidateDetectorRequest  : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
+	public partial class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 	{
 		protected IValidateDetectorRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IValidateJobRequest : IRequest<ValidateJobRequestParameters> 
+	public partial interface IValidateJobRequest : IRequest<ValidateJobRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackMlValidate <pre></pre></summary>
-	public partial class ValidateJobRequest  : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
+	public partial class ValidateJobRequest : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 	{
 		protected IValidateJobRequest Self => this;
-				}
+			}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters> 
+	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	}
 
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
-	public partial class ValidateQueryRequest<T>  : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
+	public partial class ValidateQueryRequest<T> : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
 		protected IValidateQueryRequest Self => this;
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -6936,9 +6935,9 @@ namespace Nest
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards { get { return Q<bool?>("all_shards"); } set { Q("all_shards", value); } }
 		
-		}
+	}
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
-	public partial class ValidateQueryRequest  : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
+	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
 		protected IValidateQueryRequest Self => this;
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -7000,16 +6999,16 @@ namespace Nest
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards { get { return Q<bool?>("all_shards"); } set { Q("all_shards", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IVerifyRepositoryRequest : IRequest<VerifyRepositoryRequestParameters> 
+	public partial interface IVerifyRepositoryRequest : IRequest<VerifyRepositoryRequestParameters>
 	{
 		Name RepositoryName { get; }
 	}
 
 	///<summary>Request parameters for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public partial class VerifyRepositoryRequest  : PlainRequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
+	public partial class VerifyRepositoryRequest : PlainRequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
 	{
 		protected IVerifyRepositoryRequest Self => this;
 		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -7025,16 +7024,16 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IWatcherStatsRequest : IRequest<WatcherStatsRequestParameters> 
+	public partial interface IWatcherStatsRequest : IRequest<WatcherStatsRequestParameters>
 	{
 		Metrics WatcherStatsMetric { get; }
 	}
 
 	///<summary>Request parameters for XpackWatcherStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
-	public partial class WatcherStatsRequest  : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
+	public partial class WatcherStatsRequest : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
 		protected IWatcherStatsRequest Self => this;
 		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");
@@ -7052,15 +7051,15 @@ namespace Nest
 			///<summary>Emits stack traces of currently running watches</summary>
 		public bool? EmitStacktraces { get { return Q<bool?>("emit_stacktraces"); } set { Q("emit_stacktraces", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXPackInfoRequest : IRequest<XPackInfoRequestParameters> 
+	public partial interface IXPackInfoRequest : IRequest<XPackInfoRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
-	public partial class XPackInfoRequest  : PlainRequestBase<XPackInfoRequestParameters>, IXPackInfoRequest
+	public partial class XPackInfoRequest : PlainRequestBase<XPackInfoRequestParameters>, IXPackInfoRequest
 	{
 		protected IXPackInfoRequest Self => this;
 				///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
@@ -7069,20 +7068,20 @@ namespace Nest
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get { return Q<string[]>("categories"); } set { Q("categories", value); } }
 		
-		}
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXPackUsageRequest : IRequest<XPackUsageRequestParameters> 
+	public partial interface IXPackUsageRequest : IRequest<XPackUsageRequestParameters>
 	{
 	}
 
 	///<summary>Request parameters for XpackUsage <pre>Retrieve information about xpack features usage</pre></summary>
-	public partial class XPackUsageRequest  : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
+	public partial class XPackUsageRequest : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
 	{
 		protected IXPackUsageRequest Self => this;
 				///<summary>Specify timeout for watch write operation</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
-		}
+	}
 }
  

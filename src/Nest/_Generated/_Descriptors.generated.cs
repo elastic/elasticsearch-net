@@ -51,7 +51,7 @@ namespace Nest
 		public BulkDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
-		///<summary>Whether the _source should be included in the response.</summary>
+		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
@@ -1040,7 +1040,7 @@ namespace Nest
 		public DeleteByQueryDescriptor<T> Size(long? size) => Qs("size", size);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public DeleteByQueryDescriptor<T> Sort(params string[] sort) => Qs("sort", sort);
-		///<summary>Whether the _source should be included in the response.</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public DeleteByQueryDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
@@ -1146,7 +1146,7 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public DocumentExistsDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>Whether the _source should be included in the response.</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public DocumentExistsDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DocumentExistsDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
@@ -1213,7 +1213,7 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public SourceExistsDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>Whether the _source should be included in the response.</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public SourceExistsDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceExistsDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
@@ -1288,7 +1288,7 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public ExplainDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>Whether the _source should be included in the response.</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public ExplainDescriptor<TDocument> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainDescriptor<TDocument> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
@@ -1386,7 +1386,7 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public GetDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>Whether the _source should be included in the response.</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public GetDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
@@ -1466,7 +1466,7 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public SourceDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>Whether the _source should be included in the response.</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public SourceDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
@@ -2783,7 +2783,7 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public MultiGetDescriptor Routing(Routing routing) => Qs("routing", routing);
-		///<summary>Whether the _source should be included in the response.</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public MultiGetDescriptor SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MultiGetDescriptor SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
@@ -3655,7 +3655,7 @@ namespace Nest
 
 			///<summary>Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
-		///<summary>Whether the _source should be included in the response.</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
 		///<summary>The script language (default: painless)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => Qs("lang", lang);
@@ -3760,7 +3760,7 @@ namespace Nest
 		public UpdateByQueryDescriptor<T> Size(long? size) => Qs("size", size);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public UpdateByQueryDescriptor<T> Sort(params string[] sort) => Qs("sort", sort);
-		///<summary>Whether the _source should be included in the response.</summary>
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public UpdateByQueryDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);

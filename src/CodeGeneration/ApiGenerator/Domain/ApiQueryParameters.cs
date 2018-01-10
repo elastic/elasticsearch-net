@@ -9,28 +9,8 @@ namespace ApiGenerator.Domain
 	{
 		public string OriginalQueryStringParamName { get; set; }
 
+		public string CsharpName { get; set; }
 		public string CsharpHighLevelType => this.HighLevelType(this.OriginalQueryStringParamName).Replace("params ", "");
-		public string CsharpName
-		{
-			get
-			{
-				var name = this.OriginalQueryStringParamName;
-				if (name.IsNullOrEmpty()) return "UNKNOWN";
-
-            	var cased = name.ToPascalCase();
-				switch (cased)
-				{
-					case "Type":
-					case "Index":
-					case "Source":
-					case "Script":
-						return cased + "QueryString";
-					default:
-						return cased;
-				}
-			}
-		}
-
 
 		public string DeprecatedInFavorOf { get; set; }
 		public string Type { get; set; }
@@ -62,7 +42,7 @@ namespace ApiGenerator.Domain
 				case "date":
 					return "DateTimeOffset";
 				case "enum":
-					return paramName.ToPascalCase();
+					return this.CsharpName;
 				default:
 					return this.Type;
 			}
@@ -79,7 +59,7 @@ namespace ApiGenerator.Domain
 					yield return "<para>For requests that are constructed from/for a document NEST will automatically infer the routing key";
 					yield return "if that document has a <see cref=\"Nest.JoinField\" /> or a routing mapping on for its type exists on <see cref=\"Nest.ConnectionSettings\" /></para> ";
 					yield break;
-				case "source_enabled":
+				case "_source":
 					yield return "Whether the _source should be included in the response.";
 					yield break;
 				default:

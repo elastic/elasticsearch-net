@@ -9,7 +9,7 @@ namespace ApiGenerator.Overrides
 		{
 			"stored_fields",
 			"script_fields",
-			"doc_value_fields"
+			"docvalue_fields"
 		};
 
 		public override IDictionary<string, string> RenameQueryStringParams { get; } = new Dictionary<string, string>
