@@ -32,37 +32,36 @@ namespace Nest
 	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
 	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type, method.QueryStringParamName, method.InterfaceType)))
 	{ 
-	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
-	{
-	<text>	@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
-	}
-	@foreach (Constructor c in method.DescriptorConstructors())
-    {
-	<text>@(Raw(c.Description))
-		@(Raw(c.Generated))
-		@(Raw(c.Body.IsNullOrEmpty() ? "{}" : c.Body))
-		@(Raw(c.AdditionalCode))
+@foreach (Constructor c in method.DescriptorConstructors())
+{
+<text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>
-    }
-	@foreach (FluentRouteSetter c in method.GetFluentRouteSetters())
-    {
-	<text>	@(Raw(c.XmlDoc))
-		@(Raw(c.Code))
+}
+		// values part of the url path
+@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
+{
+<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
+}
+@foreach (FluentRouteSetter c in method.GetFluentRouteSetters())
+{
+<text>		@(Raw(c.XmlDoc))
+		@(Raw(c.Code))</text>
+}
 </text>
-    }
-	</text>foreach (var param in method.Url.Params.Values)
-	{
-		var original = param.QueryStringKey;
-		//skip parameters already part of the path portion of the url
-        if (method.Url.Parts != null && method.Url.Parts.ContainsKey(original))
-        {
+<text>		// Request parameters</text>
+foreach (var param in method.Url.Params.Values)
+{
+	var original = param.QueryStringKey;
+	//skip parameters already part of the path portion of the url
+		if (method.Url.Parts != null && method.Url.Parts.ContainsKey(original))
+		{
 			continue;
-        }
+		}
 		//we prefer this parameter to be explictly implemented on the request body
 		if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
-        {
+		{
 			continue;
-        }
+		}
 		var t = @param.TypeHighLevel;
 		var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
 		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();

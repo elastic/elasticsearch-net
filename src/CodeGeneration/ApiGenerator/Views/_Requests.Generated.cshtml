@@ -63,39 +63,39 @@ namespace Nest
 	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
 	{
 		protected @(Raw(method.InterfaceType)) Self => this;
-	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
-	{
-	<text>	@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");</text>
-	}
-	@foreach (Constructor c in method.RequestConstructors())
-	{
-	<text>	@(Raw(c.Description))
-		@(Raw(c.Generated))
-		@(Raw(c.Body.IsNullOrEmpty() ? "{}" : c.Body))
-		@(Raw(c.AdditionalCode))
+@foreach (Constructor c in method.RequestConstructors())
+{
+<text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>
-	}
-	@foreach (var param in method.Url.Params.Values)
+}
+		// values part of the url path
+@foreach (var part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
+{
+<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");</text>
+}
+
+		// Request parameters
+@foreach (var param in method.Url.Params.Values)
+{
+	var original = param.QueryStringKey;
+	//skip parameters already part of the path portion of the url
+	if (method.Url.Parts != null && method.Url.Parts.ContainsKey(original))
 	{
-		var original = param.QueryStringKey;
-		//skip parameters already part of the path portion of the url
-		if (method.Url.Parts != null && method.Url.Parts.ContainsKey(original))
-		{
-			continue;
-		}
-		//we prefer this parameter to be explictly implemented on the request body
-		if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
-		{
-			continue;
-		}
-		var doc = param.DescriptionHighLevel.ToArray();
-		<text>@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))</text>
+		continue;
 	}
-	@if (method.RequestTypeUnmapped)
-	{<text>	//TODO THIS METHOD IS UNMAPPED!
-	</text>
+	//we prefer this parameter to be explictly implemented on the request body
+	if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+	{
+		continue;
 	}
-}</text>
-	}
+	var doc = param.DescriptionHighLevel.ToArray();
+<text>		@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))</text>
+}
+@if (method.RequestTypeUnmapped)
+{<text>		//TODO THIS METHOD IS UNMAPPED!
+</text>
+}
+	}</text>
+}
 }
  

@@ -36,22 +36,21 @@ namespace Nest
 	public partial class AcknowledgeWatchRequest : PlainRequestBase<AcknowledgeWatchRequestParameters>, IAcknowledgeWatchRequest
 	{
 		protected IAcknowledgeWatchRequest Self => this;
-		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
-		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
-			/// <summary>/_xpack/watcher/watch/{watch_id}/_ack</summary>
-///<param name="watch_id">this parameter is required</param>
-		public AcknowledgeWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id))
-		{}
-		
+		/// <summary>/_xpack/watcher/watch/{watch_id}/_ack</summary>
+		///<param name="watch_id">this parameter is required</param>
+		public AcknowledgeWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
 
 		/// <summary>/_xpack/watcher/watch/{watch_id}/_ack/{action_id}</summary>
-///<param name="watch_id">this parameter is required</param>		
-///<param name="action_id">Optional, accepts null</param>
-		public AcknowledgeWatchRequest(Id watch_id, ActionIds action_id) : base(r=>r.Required("watch_id", watch_id).Optional("action_id", action_id))
-		{}
-		
+		///<param name="watch_id">this parameter is required</param>
+		///<param name="action_id">Optional, accepts null</param>
+		public AcknowledgeWatchRequest(Id watch_id, ActionIds action_id) : base(r=>r.Required("watch_id", watch_id).Optional("action_id", action_id)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Id IAcknowledgeWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+		ActionIds IAcknowledgeWatchRequest.ActionId => Self.RouteValues.Get<ActionIds>("action_id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 	}
 	
@@ -65,14 +64,15 @@ namespace Nest
 	public partial class ActivateWatchRequest : PlainRequestBase<ActivateWatchRequestParameters>, IActivateWatchRequest
 	{
 		protected IActivateWatchRequest Self => this;
-		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
-			/// <summary>/_xpack/watcher/watch/{watch_id}/_activate</summary>
-///<param name="watch_id">this parameter is required</param>
-		public ActivateWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id))
-		{}
-		
+		/// <summary>/_xpack/watcher/watch/{watch_id}/_activate</summary>
+		///<param name="watch_id">this parameter is required</param>
+		public ActivateWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Id IActivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 	}
 	
@@ -87,22 +87,21 @@ namespace Nest
 	public partial class AliasExistsRequest : PlainRequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
 	{
 		protected IAliasExistsRequest Self => this;
-		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/_alias/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public AliasExistsRequest(Names name) : base(r=>r.Optional("name", name))
-		{}
-		
+		/// <summary>/_alias/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public AliasExistsRequest(Names name) : base(r=>r.Optional("name", name)){}
 
 		/// <summary>/{index}/_alias/{name}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="name">Optional, accepts null</param>
-		public AliasExistsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="name">Optional, accepts null</param>
+		public AliasExistsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -125,19 +124,18 @@ namespace Nest
 	public partial class AnalyzeRequest : PlainRequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
 		protected IAnalyzeRequest Self => this;
-		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
-			/// <summary>/_analyze</summary>
-		public AnalyzeRequest() : base()
-		{}
-		
+		/// <summary>/_analyze</summary>
+		public AnalyzeRequest() : base(){}
 
 		/// <summary>/{index}/_analyze</summary>
-///<param name="index">Optional, accepts null</param>
-		public AnalyzeRequest(IndexName index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public AnalyzeRequest(IndexName index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
+		// values part of the url path
+		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public bool? PreferLocal { get => Q<bool?>("prefer_local"); set => Q("prefer_local", value); }
 		///<summary>Format of the output</summary>
 		public Format Format { get => Q<Format>("format"); set => Q("format", value); }
@@ -152,7 +150,10 @@ namespace Nest
 	public partial class AuthenticateRequest : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
 		protected IAuthenticateRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters>
@@ -163,7 +164,10 @@ namespace Nest
 	public partial class BulkAliasRequest : PlainRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
 		protected IBulkAliasRequest Self => this;
-				///<summary>Request timeout</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Request timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -180,27 +184,24 @@ namespace Nest
 	public partial class BulkRequest : PlainRequestBase<BulkRequestParameters>, IBulkRequest
 	{
 		protected IBulkRequest Self => this;
-		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IBulkRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/_bulk</summary>
-		public BulkRequest() : base()
-		{}
-		
+		/// <summary>/_bulk</summary>
+		public BulkRequest() : base(){}
 
 		/// <summary>/{index}/_bulk</summary>
-///<param name="index">Optional, accepts null</param>
-		public BulkRequest(IndexName index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public BulkRequest(IndexName index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_bulk</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public BulkRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public BulkRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>
+		// values part of the url path
+		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IBulkRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard
 		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
 		/// shard (number of replicas + 1)
@@ -244,19 +245,18 @@ namespace Nest
 	public partial class CancelTasksRequest : PlainRequestBase<CancelTasksRequestParameters>, ICancelTasksRequest
 	{
 		protected ICancelTasksRequest Self => this;
-		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
-			/// <summary>/_tasks/_cancel</summary>
-		public CancelTasksRequest() : base()
-		{}
-		
+		/// <summary>/_tasks/_cancel</summary>
+		public CancelTasksRequest() : base(){}
 
 		/// <summary>/_tasks/{task_id}/_cancel</summary>
-///<param name="task_id">Optional, accepts null</param>
-		public CancelTasksRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id))
-		{}
-		
+		///<param name="task_id">Optional, accepts null</param>
+		public CancelTasksRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
 
-			///<summary>
+		// values part of the url path
+		TaskId ICancelTasksRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+
+		// Request parameters
+		///<summary>
 		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
 		/// connecting to, leave empty to get information from all nodes
 		///</summary>
@@ -279,19 +279,18 @@ namespace Nest
 	public partial class CatAliasesRequest : PlainRequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
 	{
 		protected ICatAliasesRequest Self => this;
-		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/_cat/aliases</summary>
-		public CatAliasesRequest() : base()
-		{}
-		
+		/// <summary>/_cat/aliases</summary>
+		public CatAliasesRequest() : base(){}
 
 		/// <summary>/_cat/aliases/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public CatAliasesRequest(Names name) : base(r=>r.Optional("name", name))
-		{}
-		
+		///<param name="name">Optional, accepts null</param>
+		public CatAliasesRequest(Names name) : base(r=>r.Optional("name", name)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -317,19 +316,18 @@ namespace Nest
 	public partial class CatAllocationRequest : PlainRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
 	{
 		protected ICatAllocationRequest Self => this;
-		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-			/// <summary>/_cat/allocation</summary>
-		public CatAllocationRequest() : base()
-		{}
-		
+		/// <summary>/_cat/allocation</summary>
+		public CatAllocationRequest() : base(){}
 
 		/// <summary>/_cat/allocation/{node_id}</summary>
-///<param name="node_id">Optional, accepts null</param>
-		public CatAllocationRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id))
-		{}
-		
+		///<param name="node_id">Optional, accepts null</param>
+		public CatAllocationRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
@@ -357,19 +355,18 @@ namespace Nest
 	public partial class CatCountRequest : PlainRequestBase<CatCountRequestParameters>, ICatCountRequest
 	{
 		protected ICatCountRequest Self => this;
-		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_cat/count</summary>
-		public CatCountRequest() : base()
-		{}
-		
+		/// <summary>/_cat/count</summary>
+		public CatCountRequest() : base(){}
 
 		/// <summary>/_cat/count/{index}</summary>
-///<param name="index">Optional, accepts null</param>
-		public CatCountRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public CatCountRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -395,19 +392,18 @@ namespace Nest
 	public partial class CatFielddataRequest : PlainRequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
 	{
 		protected ICatFielddataRequest Self => this;
-		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
-			/// <summary>/_cat/fielddata</summary>
-		public CatFielddataRequest() : base()
-		{}
-		
+		/// <summary>/_cat/fielddata</summary>
+		public CatFielddataRequest() : base(){}
 
 		/// <summary>/_cat/fielddata/{fields}</summary>
-///<param name="fields">Optional, accepts null</param>
-		public CatFielddataRequest(Fields fields) : base(r=>r.Optional("fields", fields))
-		{}
-		
+		///<param name="fields">Optional, accepts null</param>
+		public CatFielddataRequest(Fields fields) : base(r=>r.Optional("fields", fields)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
@@ -434,7 +430,10 @@ namespace Nest
 	public partial class CatHealthRequest : PlainRequestBase<CatHealthRequestParameters>, ICatHealthRequest
 	{
 		protected ICatHealthRequest Self => this;
-				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -461,7 +460,10 @@ namespace Nest
 	public partial class CatHelpRequest : PlainRequestBase<CatHelpRequestParameters>, ICatHelpRequest
 	{
 		protected ICatHelpRequest Self => this;
-				///<summary>Return help information</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
@@ -477,19 +479,18 @@ namespace Nest
 	public partial class CatIndicesRequest : PlainRequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
 	{
 		protected ICatIndicesRequest Self => this;
-		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_cat/indices</summary>
-		public CatIndicesRequest() : base()
-		{}
-		
+		/// <summary>/_cat/indices</summary>
+		public CatIndicesRequest() : base(){}
 
 		/// <summary>/_cat/indices/{index}</summary>
-///<param name="index">Optional, accepts null</param>
-		public CatIndicesRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public CatIndicesRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
@@ -520,7 +521,10 @@ namespace Nest
 	public partial class CatMasterRequest : PlainRequestBase<CatMasterRequestParameters>, ICatMasterRequest
 	{
 		protected ICatMasterRequest Self => this;
-				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -545,7 +549,10 @@ namespace Nest
 	public partial class CatNodeAttributesRequest : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 	{
 		protected ICatNodeAttributesRequest Self => this;
-				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -570,7 +577,10 @@ namespace Nest
 	public partial class CatNodesRequest : PlainRequestBase<CatNodesRequestParameters>, ICatNodesRequest
 	{
 		protected ICatNodesRequest Self => this;
-				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
 		public bool? FullId { get => Q<bool?>("full_id"); set => Q("full_id", value); }
@@ -597,7 +607,10 @@ namespace Nest
 	public partial class CatPendingTasksRequest : PlainRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
 	{
 		protected ICatPendingTasksRequest Self => this;
-				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -622,7 +635,10 @@ namespace Nest
 	public partial class CatPluginsRequest : PlainRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
 	{
 		protected ICatPluginsRequest Self => this;
-				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -648,19 +664,18 @@ namespace Nest
 	public partial class CatRecoveryRequest : PlainRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
 	{
 		protected ICatRecoveryRequest Self => this;
-		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_cat/recovery</summary>
-		public CatRecoveryRequest() : base()
-		{}
-		
+		/// <summary>/_cat/recovery</summary>
+		public CatRecoveryRequest() : base(){}
 
 		/// <summary>/_cat/recovery/{index}</summary>
-///<param name="index">Optional, accepts null</param>
-		public CatRecoveryRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public CatRecoveryRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
@@ -685,7 +700,10 @@ namespace Nest
 	public partial class CatRepositoriesRequest : PlainRequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
 	{
 		protected ICatRepositoriesRequest Self => this;
-				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -711,19 +729,18 @@ namespace Nest
 	public partial class CatSegmentsRequest : PlainRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
 	{
 		protected ICatSegmentsRequest Self => this;
-		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_cat/segments</summary>
-		public CatSegmentsRequest() : base()
-		{}
-		
+		/// <summary>/_cat/segments</summary>
+		public CatSegmentsRequest() : base(){}
 
 		/// <summary>/_cat/segments/{index}</summary>
-///<param name="index">Optional, accepts null</param>
-		public CatSegmentsRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public CatSegmentsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
@@ -747,19 +764,18 @@ namespace Nest
 	public partial class CatShardsRequest : PlainRequestBase<CatShardsRequestParameters>, ICatShardsRequest
 	{
 		protected ICatShardsRequest Self => this;
-		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_cat/shards</summary>
-		public CatShardsRequest() : base()
-		{}
-		
+		/// <summary>/_cat/shards</summary>
+		public CatShardsRequest() : base(){}
 
 		/// <summary>/_cat/shards/{index}</summary>
-///<param name="index">Optional, accepts null</param>
-		public CatShardsRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public CatShardsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
@@ -787,19 +803,18 @@ namespace Nest
 	public partial class CatSnapshotsRequest : PlainRequestBase<CatSnapshotsRequestParameters>, ICatSnapshotsRequest
 	{
 		protected ICatSnapshotsRequest Self => this;
-		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
-			/// <summary>/_cat/snapshots</summary>
-		public CatSnapshotsRequest() : base()
-		{}
-		
+		/// <summary>/_cat/snapshots</summary>
+		public CatSnapshotsRequest() : base(){}
 
 		/// <summary>/_cat/snapshots/{repository}</summary>
-///<param name="repository">Optional, accepts null</param>
-		public CatSnapshotsRequest(Names repository) : base(r=>r.Optional("repository", repository))
-		{}
-		
+		///<param name="repository">Optional, accepts null</param>
+		public CatSnapshotsRequest(Names repository) : base(r=>r.Optional("repository", repository)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Set to true to ignore unavailable snapshots</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -824,7 +839,10 @@ namespace Nest
 	public partial class CatTasksRequest : PlainRequestBase<CatTasksRequestParameters>, ICatTasksRequest
 	{
 		protected ICatTasksRequest Self => this;
-				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>
 		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
@@ -859,19 +877,18 @@ namespace Nest
 	public partial class CatTemplatesRequest : PlainRequestBase<CatTemplatesRequestParameters>, ICatTemplatesRequest
 	{
 		protected ICatTemplatesRequest Self => this;
-		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_cat/templates</summary>
-		public CatTemplatesRequest() : base()
-		{}
-		
+		/// <summary>/_cat/templates</summary>
+		public CatTemplatesRequest() : base(){}
 
 		/// <summary>/_cat/templates/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public CatTemplatesRequest(Name name) : base(r=>r.Optional("name", name))
-		{}
-		
+		///<param name="name">Optional, accepts null</param>
+		public CatTemplatesRequest(Name name) : base(r=>r.Optional("name", name)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		Name ICatTemplatesRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -897,19 +914,18 @@ namespace Nest
 	public partial class CatThreadPoolRequest : PlainRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
 		protected ICatThreadPoolRequest Self => this;
-		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
-			/// <summary>/_cat/thread_pool</summary>
-		public CatThreadPoolRequest() : base()
-		{}
-		
+		/// <summary>/_cat/thread_pool</summary>
+		public CatThreadPoolRequest() : base(){}
 
 		/// <summary>/_cat/thread_pool/{thread_pool_patterns}</summary>
-///<param name="thread_pool_patterns">Optional, accepts null</param>
-		public CatThreadPoolRequest(Names thread_pool_patterns) : base(r=>r.Optional("thread_pool_patterns", thread_pool_patterns))
-		{}
-		
+		///<param name="thread_pool_patterns">Optional, accepts null</param>
+		public CatThreadPoolRequest(Names thread_pool_patterns) : base(r=>r.Optional("thread_pool_patterns", thread_pool_patterns)){}
 
-			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		// values part of the url path
+		Names ICatThreadPoolRequest.ThreadPoolPatterns => Self.RouteValues.Get<Names>("thread_pool_patterns");
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The multiplier in which to display values</summary>
 		public Size Size { get => Q<Size>("size"); set => Q("size", value); }
@@ -937,19 +953,18 @@ namespace Nest
 	public partial class ChangePasswordRequest : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
 	{
 		protected IChangePasswordRequest Self => this;
-		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
-			/// <summary>/_xpack/security/user/{username}/_password</summary>
-///<param name="username">Optional, accepts null</param>
-		public ChangePasswordRequest(Name username) : base(r=>r.Optional("username", username))
-		{}
-		
+		/// <summary>/_xpack/security/user/{username}/_password</summary>
+		///<param name="username">Optional, accepts null</param>
+		public ChangePasswordRequest(Name username) : base(r=>r.Optional("username", username)){}
 
 		/// <summary>/_xpack/security/user/_password</summary>
-		public ChangePasswordRequest() : base()
-		{}
-		
+		public ChangePasswordRequest() : base(){}
 
-			///<summary>
+		// values part of the url path
+		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
@@ -966,14 +981,15 @@ namespace Nest
 	public partial class ClearCachedRealmsRequest : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 	{
 		protected IClearCachedRealmsRequest Self => this;
-		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
-			/// <summary>/_xpack/security/realm/{realms}/_clear_cache</summary>
-///<param name="realms">this parameter is required</param>
-		public ClearCachedRealmsRequest(Names realms) : base(r=>r.Required("realms", realms))
-		{}
-		
+		/// <summary>/_xpack/security/realm/{realms}/_clear_cache</summary>
+		///<param name="realms">this parameter is required</param>
+		public ClearCachedRealmsRequest(Names realms) : base(r=>r.Required("realms", realms)){}
 
-			///<summary>Comma-separated list of usernames to clear from the cache</summary>
+		// values part of the url path
+		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
+
+		// Request parameters
+		///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public string[] Usernames { get => Q<string[]>("usernames"); set => Q("usernames", value); }
 	}
 	
@@ -987,14 +1003,15 @@ namespace Nest
 	public partial class ClearCachedRolesRequest : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 	{
 		protected IClearCachedRolesRequest Self => this;
-		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/_xpack/security/role/{name}/_clear_cache</summary>
-///<param name="name">this parameter is required</param>
-		public ClearCachedRolesRequest(Names name) : base(r=>r.Required("name", name))
-		{}
-		
+		/// <summary>/_xpack/security/role/{name}/_clear_cache</summary>
+		///<param name="name">this parameter is required</param>
+		public ClearCachedRolesRequest(Names name) : base(r=>r.Required("name", name)){}
 
-		}
+		// values part of the url path
+		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParameters>
@@ -1006,19 +1023,18 @@ namespace Nest
 	public partial class ClearCacheRequest : PlainRequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
 		protected IClearCacheRequest Self => this;
-		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_cache/clear</summary>
-		public ClearCacheRequest() : base()
-		{}
-		
+		/// <summary>/_cache/clear</summary>
+		public ClearCacheRequest() : base(){}
 
 		/// <summary>/{index}/_cache/clear</summary>
-///<param name="index">Optional, accepts null</param>
-		public ClearCacheRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public ClearCacheRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Clear field data</summary>
+		// values part of the url path
+		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Clear field data</summary>
 		public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
@@ -1050,7 +1066,10 @@ namespace Nest
 	public partial class ClearScrollRequest : PlainRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters>
@@ -1062,14 +1081,15 @@ namespace Nest
 	public partial class CloseIndexRequest : PlainRequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
 		protected ICloseIndexRequest Self => this;
-		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/{index}/_close</summary>
-///<param name="index">this parameter is required</param>
-		public CloseIndexRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}/_close</summary>
+		///<param name="index">this parameter is required</param>
+		public CloseIndexRequest(Indices index) : base(r=>r.Required("index", index)){}
 
-			///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -1094,14 +1114,15 @@ namespace Nest
 	public partial class CloseJobRequest : PlainRequestBase<CloseJobRequestParameters>, ICloseJobRequest
 	{
 		protected ICloseJobRequest Self => this;
-		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_close</summary>
-///<param name="job_id">this parameter is required</param>
-		public CloseJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_close</summary>
+		///<param name="job_id">this parameter is required</param>
+		public CloseJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-			///<summary>True if the job should be forcefully closed</summary>
+		// values part of the url path
+		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>True if the job should be forcefully closed</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -1116,7 +1137,10 @@ namespace Nest
 	public partial class ClusterAllocationExplainRequest : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
 	{
 		protected IClusterAllocationExplainRequest Self => this;
-				///<summary>Return 'YES' decisions in explanation (default: false)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return 'YES' decisions in explanation (default: false)</summary>
 		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
@@ -1131,7 +1155,10 @@ namespace Nest
 	public partial class ClusterGetSettingsRequest : PlainRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
 		protected IClusterGetSettingsRequest Self => this;
-				///<summary>Return settings in flat format (default: false)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -1151,19 +1178,18 @@ namespace Nest
 	public partial class ClusterHealthRequest : PlainRequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
 		protected IClusterHealthRequest Self => this;
-		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_cluster/health</summary>
-		public ClusterHealthRequest() : base()
-		{}
-		
+		/// <summary>/_cluster/health</summary>
+		public ClusterHealthRequest() : base(){}
 
 		/// <summary>/_cluster/health/{index}</summary>
-///<param name="index">Optional, accepts null</param>
-		public ClusterHealthRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public ClusterHealthRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Specify the level of detail for returned information</summary>
+		// values part of the url path
+		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Specify the level of detail for returned information</summary>
 		public Level Level { get => Q<Level>("level"); set => Q("level", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -1192,7 +1218,10 @@ namespace Nest
 	public partial class ClusterPendingTasksRequest : PlainRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
 	{
 		protected IClusterPendingTasksRequest Self => this;
-				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -1207,7 +1236,10 @@ namespace Nest
 	public partial class ClusterPutSettingsRequest : PlainRequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
 	{
 		protected IClusterPutSettingsRequest Self => this;
-				///<summary>Return settings in flat format (default: false)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -1224,7 +1256,10 @@ namespace Nest
 	public partial class ClusterRerouteRequest : PlainRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		protected IClusterRerouteRequest Self => this;
-				///<summary>Simulate the operation only and return the resulting state</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Simulate the operation only and return the resulting state</summary>
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
@@ -1249,27 +1284,24 @@ namespace Nest
 	public partial class ClusterStateRequest : PlainRequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
 		protected IClusterStateRequest Self => this;
-		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-			/// <summary>/_cluster/state</summary>
-		public ClusterStateRequest() : base()
-		{}
-		
+		/// <summary>/_cluster/state</summary>
+		public ClusterStateRequest() : base(){}
 
 		/// <summary>/_cluster/state/{metric}</summary>
-///<param name="metric">Optional, accepts null</param>
-		public ClusterStateRequest(ClusterStateMetric metric) : base(r=>r.Optional("metric", (Metrics)metric))
-		{}
-		
+		///<param name="metric">Optional, accepts null</param>
+		public ClusterStateRequest(ClusterStateMetric metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
 
 		/// <summary>/_cluster/state/{metric}/{index}</summary>
-///<param name="metric">Optional, accepts null</param>		
-///<param name="index">Optional, accepts null</param>
-		public ClusterStateRequest(ClusterStateMetric metric, Indices index) : base(r=>r.Optional("metric", (Metrics)metric).Optional("index", index))
-		{}
-		
+		///<param name="metric">Optional, accepts null</param>
+		///<param name="index">Optional, accepts null</param>
+		public ClusterStateRequest(ClusterStateMetric metric, Indices index) : base(r=>r.Optional("metric", (Metrics)metric).Optional("index", index)){}
 
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		// values part of the url path
+		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -1296,19 +1328,18 @@ namespace Nest
 	public partial class ClusterStatsRequest : PlainRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
 		protected IClusterStatsRequest Self => this;
-		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-			/// <summary>/_cluster/stats</summary>
-		public ClusterStatsRequest() : base()
-		{}
-		
+		/// <summary>/_cluster/stats</summary>
+		public ClusterStatsRequest() : base(){}
 
 		/// <summary>/_cluster/stats/nodes/{node_id}</summary>
-///<param name="node_id">Optional, accepts null</param>
-		public ClusterStatsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id))
-		{}
-		
+		///<param name="node_id">Optional, accepts null</param>
+		public ClusterStatsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
 
-			///<summary>Return settings in flat format (default: false)</summary>
+		// values part of the url path
+		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -1325,27 +1356,24 @@ namespace Nest
 	public partial class CountRequest<T> : PlainRequestBase<CountRequestParameters>, ICountRequest
 	{
 		protected ICountRequest Self => this;
-		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
-			///<summary>/_count<para><typeparamref name="T"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>
-		public CountRequest() : this(typeof(T), typeof(T))
-		{}
-		
+		///<summary>/_count<para><typeparamref name="T"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>
+		public CountRequest() : this(typeof(T), typeof(T)){}
 
 		/// <summary>/{index}/_count</summary>
-///<param name="index">Optional, accepts null</param>
-		public CountRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public CountRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_count</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public CountRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public CountRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -1386,27 +1414,24 @@ namespace Nest
 	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
 	{
 		protected ICountRequest Self => this;
-		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_count</summary>
-		public CountRequest()
-		{}
-		
+		/// <summary>/_count</summary>
+		public CountRequest(){}
 
 		/// <summary>/{index}/_count</summary>
-///<param name="index">Optional, accepts null</param>
-		public CountRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public CountRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_count</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public CountRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public CountRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -1454,14 +1479,15 @@ namespace Nest
 	public partial class CreateIndexRequest : PlainRequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
 		protected ICreateIndexRequest Self => this;
-		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-			/// <summary>/{index}</summary>
-///<param name="index">this parameter is required</param>
-		public CreateIndexRequest(IndexName index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public CreateIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
 
-			///<summary>Set the number of active shards to wait for before the operation returns.</summary>
+		// values part of the url path
+		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -1481,14 +1507,15 @@ namespace Nest
 	public partial class CreateRepositoryRequest : PlainRequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
 		protected ICreateRepositoryRequest Self => this;
-		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
-			/// <summary>/_snapshot/{repository}</summary>
-///<param name="repository">this parameter is required</param>
-		public CreateRepositoryRequest(Name repository) : base(r=>r.Required("repository", repository))
-		{}
-		
+		/// <summary>/_snapshot/{repository}</summary>
+		///<param name="repository">this parameter is required</param>
+		public CreateRepositoryRequest(Name repository) : base(r=>r.Required("repository", repository)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -1508,25 +1535,26 @@ namespace Nest
 	public partial class CreateRequest<TDocument> : PlainRequestBase<CreateRequestParameters>, ICreateRequest<TDocument>
 	{
 		protected ICreateRequest<TDocument> Self => this;
-		Id ICreateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-		IndexName ICreateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ICreateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}/_create</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
+		/// <summary>/{index}/{type}/{id}/_create</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
 		public CreateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/{id}/_create</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public CreateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>
+		// values part of the url path
+		Id ICreateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ICreateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ICreateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard
 		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
 		/// shard (number of replicas + 1)
@@ -1573,14 +1601,15 @@ namespace Nest
 	public partial class DeactivateWatchRequest : PlainRequestBase<DeactivateWatchRequestParameters>, IDeactivateWatchRequest
 	{
 		protected IDeactivateWatchRequest Self => this;
-		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
-			/// <summary>/_xpack/watcher/watch/{watch_id}/_deactivate</summary>
-///<param name="watch_id">this parameter is required</param>
-		public DeactivateWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id))
-		{}
-		
+		/// <summary>/_xpack/watcher/watch/{watch_id}/_deactivate</summary>
+		///<param name="watch_id">this parameter is required</param>
+		public DeactivateWatchRequest(Id watch_id) : base(r=>r.Required("watch_id", watch_id)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Id IDeactivateWatchRequest.WatchId => Self.RouteValues.Get<Id>("watch_id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 	}
 	
@@ -1595,16 +1624,17 @@ namespace Nest
 	public partial class DeleteAliasRequest : PlainRequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
 	{
 		protected IDeleteAliasRequest Self => this;
+		/// <summary>/{index}/_alias/{name}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="name">this parameter is required</param>
+		public DeleteAliasRequest(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
+
+		// values part of the url path
 		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/{index}/_alias/{name}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="name">this parameter is required</param>
-		public DeleteAliasRequest(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name))
-		{}
-		
 
-			///<summary>Explicit timestamp for the document</summary>
+		// Request parameters
+		///<summary>Explicit timestamp for the document</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -1621,22 +1651,21 @@ namespace Nest
 	public partial class DeleteByQueryRequest<T> : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		protected IDeleteByQueryRequest Self => this;
-		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_delete_by_query</summary>
-///<param name="index">this parameter is required</param>
-		public DeleteByQueryRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}/_delete_by_query</summary>
+		///<param name="index">this parameter is required</param>
+		public DeleteByQueryRequest(Indices index) : base(r=>r.Required("index", index)){}
 
 		/// <summary>/{index}/{type}/_delete_by_query</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">Optional, accepts null</param>
-		public DeleteByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
+		public DeleteByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
 
-			///<summary>The analyzer to use for the query string</summary>
+		// values part of the url path
+		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -1719,22 +1748,21 @@ namespace Nest
 	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		protected IDeleteByQueryRequest Self => this;
-		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_delete_by_query</summary>
-///<param name="index">this parameter is required</param>
-		public DeleteByQueryRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}/_delete_by_query</summary>
+		///<param name="index">this parameter is required</param>
+		public DeleteByQueryRequest(Indices index) : base(r=>r.Required("index", index)){}
 
 		/// <summary>/{index}/{type}/_delete_by_query</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">Optional, accepts null</param>
-		public DeleteByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
+		public DeleteByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
 
-			///<summary>The analyzer to use for the query string</summary>
+		// values part of the url path
+		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -1824,14 +1852,15 @@ namespace Nest
 	public partial class DeleteDatafeedRequest : PlainRequestBase<DeleteDatafeedRequestParameters>, IDeleteDatafeedRequest
 	{
 		protected IDeleteDatafeedRequest Self => this;
-		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
-///<param name="datafeed_id">this parameter is required</param>
-		public DeleteDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{}
-		
+		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public DeleteDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 
-			///<summary>True if the datafeed should be forcefully deleted</summary>
+		// values part of the url path
+		Id IDeleteDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+		///<summary>True if the datafeed should be forcefully deleted</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
 	
@@ -1844,7 +1873,10 @@ namespace Nest
 	public partial class DeleteExpiredDataRequest : PlainRequestBase<DeleteExpiredDataRequestParameters>, IDeleteExpiredDataRequest
 	{
 		protected IDeleteExpiredDataRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
@@ -1856,14 +1888,15 @@ namespace Nest
 	public partial class DeleteIndexRequest : PlainRequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
 		protected IDeleteIndexRequest Self => this;
-		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/{index}</summary>
-///<param name="index">this parameter is required</param>
-		public DeleteIndexRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public DeleteIndexRequest(Indices index) : base(r=>r.Required("index", index)){}
 
-			///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -1885,14 +1918,15 @@ namespace Nest
 	public partial class DeleteIndexTemplateRequest : PlainRequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
 	{
 		protected IDeleteIndexTemplateRequest Self => this;
-		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_template/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public DeleteIndexTemplateRequest(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		/// <summary>/_template/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public DeleteIndexTemplateRequest(Name name) : base(r=>r.Required("name", name)){}
 
-			///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -1908,14 +1942,15 @@ namespace Nest
 	public partial class DeleteJobRequest : PlainRequestBase<DeleteJobRequestParameters>, IDeleteJobRequest
 	{
 		protected IDeleteJobRequest Self => this;
-		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-///<param name="job_id">this parameter is required</param>
-		public DeleteJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		public DeleteJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-			///<summary>True if the job should be forcefully deleted</summary>
+		// values part of the url path
+		Id IDeleteJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>True if the job should be forcefully deleted</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
 	
@@ -1928,7 +1963,10 @@ namespace Nest
 	public partial class DeleteLicenseRequest : PlainRequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
 	{
 		protected IDeleteLicenseRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteModelSnapshotRequest : IRequest<DeleteModelSnapshotRequestParameters>
@@ -1941,16 +1979,17 @@ namespace Nest
 	public partial class DeleteModelSnapshotRequest : PlainRequestBase<DeleteModelSnapshotRequestParameters>, IDeleteModelSnapshotRequest
 	{
 		protected IDeleteModelSnapshotRequest Self => this;
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">this parameter is required</param>
+		public DeleteModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+
+		// values part of the url path
 		Id IDeleteModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IDeleteModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
-///<param name="job_id">this parameter is required</param>		
-///<param name="snapshot_id">this parameter is required</param>
-		public DeleteModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
-		{}
-		
 
-		}
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeletePipelineRequest : IRequest<DeletePipelineRequestParameters>
@@ -1962,14 +2001,15 @@ namespace Nest
 	public partial class DeletePipelineRequest : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
 	{
 		protected IDeletePipelineRequest Self => this;
-		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_ingest/pipeline/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public DeletePipelineRequest(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		/// <summary>/_ingest/pipeline/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DeletePipelineRequest(Id id) : base(r=>r.Required("id", id)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -1985,14 +2025,15 @@ namespace Nest
 	public partial class DeleteRepositoryRequest : PlainRequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
 		protected IDeleteRepositoryRequest Self => this;
-		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
-			/// <summary>/_snapshot/{repository}</summary>
-///<param name="repository">this parameter is required</param>
-		public DeleteRepositoryRequest(Names repository) : base(r=>r.Required("repository", repository))
-		{}
-		
+		/// <summary>/_snapshot/{repository}</summary>
+		///<param name="repository">this parameter is required</param>
+		public DeleteRepositoryRequest(Names repository) : base(r=>r.Required("repository", repository)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -2010,25 +2051,26 @@ namespace Nest
 	public partial class DeleteRequest<T> : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
 		protected IDeleteRequest Self => this;
-		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
+		/// <summary>/{index}/{type}/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
 		public DeleteRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/{id}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DeleteRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(T document);
 
-			///<summary>
+		// values part of the url path
+		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard
 		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
 		/// shard (number of replicas + 1)
@@ -2062,18 +2104,20 @@ namespace Nest
 	public partial class DeleteRequest : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
 		protected IDeleteRequest Self => this;
+		/// <summary>/{index}/{type}/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public DeleteRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+
+		// values part of the url path
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
-		public DeleteRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
-		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-			///<summary>
+		// Request parameters
+		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard
 		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
 		/// shard (number of replicas + 1)
@@ -2114,14 +2158,15 @@ namespace Nest
 	public partial class DeleteRoleMappingRequest : PlainRequestBase<DeleteRoleMappingRequestParameters>, IDeleteRoleMappingRequest
 	{
 		protected IDeleteRoleMappingRequest Self => this;
-		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_xpack/security/role_mapping/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public DeleteRoleMappingRequest(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		/// <summary>/_xpack/security/role_mapping/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public DeleteRoleMappingRequest(Name name) : base(r=>r.Required("name", name)){}
 
-			///<summary>
+		// values part of the url path
+		Name IDeleteRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
@@ -2138,14 +2183,15 @@ namespace Nest
 	public partial class DeleteRoleRequest : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 	{
 		protected IDeleteRoleRequest Self => this;
-		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_xpack/security/role/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public DeleteRoleRequest(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		/// <summary>/_xpack/security/role/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public DeleteRoleRequest(Name name) : base(r=>r.Required("name", name)){}
 
-			///<summary>
+		// values part of the url path
+		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
@@ -2162,14 +2208,15 @@ namespace Nest
 	public partial class DeleteScriptRequest : PlainRequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
 		protected IDeleteScriptRequest Self => this;
-		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_scripts/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public DeleteScriptRequest(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		/// <summary>/_scripts/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DeleteScriptRequest(Id id) : base(r=>r.Required("id", id)){}
 
-			///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -2186,16 +2233,17 @@ namespace Nest
 	public partial class DeleteSnapshotRequest : PlainRequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 	{
 		protected IDeleteSnapshotRequest Self => this;
+		/// <summary>/_snapshot/{repository}/{snapshot}</summary>
+		///<param name="repository">this parameter is required</param>
+		///<param name="snapshot">this parameter is required</param>
+		public DeleteSnapshotRequest(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
+		// values part of the url path
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
-			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
-///<param name="repository">this parameter is required</param>		
-///<param name="snapshot">this parameter is required</param>
-		public DeleteSnapshotRequest(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
-		{}
-		
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 	}
 	
@@ -2209,14 +2257,15 @@ namespace Nest
 	public partial class DeleteUserRequest : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 	{
 		protected IDeleteUserRequest Self => this;
-		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
-			/// <summary>/_xpack/security/user/{username}</summary>
-///<param name="username">this parameter is required</param>
-		public DeleteUserRequest(Name username) : base(r=>r.Required("username", username))
-		{}
-		
+		/// <summary>/_xpack/security/user/{username}</summary>
+		///<param name="username">this parameter is required</param>
+		public DeleteUserRequest(Name username) : base(r=>r.Required("username", username)){}
 
-			///<summary>
+		// values part of the url path
+		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
@@ -2233,14 +2282,15 @@ namespace Nest
 	public partial class DeleteWatchRequest : PlainRequestBase<DeleteWatchRequestParameters>, IDeleteWatchRequest
 	{
 		protected IDeleteWatchRequest Self => this;
-		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_xpack/watcher/watch/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public DeleteWatchRequest(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		/// <summary>/_xpack/watcher/watch/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DeleteWatchRequest(Id id) : base(r=>r.Required("id", id)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Id IDeleteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 	}
 	
@@ -2254,19 +2304,18 @@ namespace Nest
 	public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
 		protected IDeprecationInfoRequest Self => this;
-		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
-			/// <summary>/_xpack/migration/deprecations</summary>
-		public DeprecationInfoRequest() : base()
-		{}
-		
+		/// <summary>/_xpack/migration/deprecations</summary>
+		public DeprecationInfoRequest() : base(){}
 
 		/// <summary>/{index}/_xpack/migration/deprecations</summary>
-///<param name="index">Optional, accepts null</param>
-		public DeprecationInfoRequest(IndexName index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public DeprecationInfoRequest(IndexName index) : base(r=>r.Optional("index", index)){}
 
-		}
+		// values part of the url path
+		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters>
@@ -2278,14 +2327,15 @@ namespace Nest
 	public partial class DisableUserRequest : PlainRequestBase<DisableUserRequestParameters>, IDisableUserRequest
 	{
 		protected IDisableUserRequest Self => this;
-		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
-			/// <summary>/_xpack/security/user/{username}/_disable</summary>
-///<param name="username">Optional, accepts null</param>
-		public DisableUserRequest(Name username) : base(r=>r.Optional("username", username))
-		{}
-		
+		/// <summary>/_xpack/security/user/{username}/_disable</summary>
+		///<param name="username">Optional, accepts null</param>
+		public DisableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
 
-			///<summary>
+		// values part of the url path
+		Name IDisableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
@@ -2304,25 +2354,26 @@ namespace Nest
 	public partial class DocumentExistsRequest<T> : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 		protected IDocumentExistsRequest Self => this;
-		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
+		/// <summary>/{index}/{type}/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
 		public DocumentExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/{id}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public DocumentExistsRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(T document);
 
-			///<summary>A comma-separated list of stored fields to return in the response</summary>
+		// values part of the url path
+		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
@@ -2357,18 +2408,20 @@ namespace Nest
 	public partial class DocumentExistsRequest : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 		protected IDocumentExistsRequest Self => this;
+		/// <summary>/{index}/{type}/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public DocumentExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+
+		// values part of the url path
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
-		public DocumentExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
-		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-			///<summary>A comma-separated list of stored fields to return in the response</summary>
+		// Request parameters
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
@@ -2410,14 +2463,15 @@ namespace Nest
 	public partial class EnableUserRequest : PlainRequestBase<EnableUserRequestParameters>, IEnableUserRequest
 	{
 		protected IEnableUserRequest Self => this;
-		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
-			/// <summary>/_xpack/security/user/{username}/_enable</summary>
-///<param name="username">Optional, accepts null</param>
-		public EnableUserRequest(Name username) : base(r=>r.Optional("username", username))
-		{}
-		
+		/// <summary>/_xpack/security/user/{username}/_enable</summary>
+		///<param name="username">Optional, accepts null</param>
+		public EnableUserRequest(Name username) : base(r=>r.Optional("username", username)){}
 
-			///<summary>
+		// values part of the url path
+		Name IEnableUserRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
@@ -2434,19 +2488,18 @@ namespace Nest
 	public partial class ExecuteWatchRequest : PlainRequestBase<ExecuteWatchRequestParameters>, IExecuteWatchRequest
 	{
 		protected IExecuteWatchRequest Self => this;
-		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_xpack/watcher/watch/{id}/_execute</summary>
-///<param name="id">Optional, accepts null</param>
-		public ExecuteWatchRequest(Id id) : base(r=>r.Optional("id", id))
-		{}
-		
+		/// <summary>/_xpack/watcher/watch/{id}/_execute</summary>
+		///<param name="id">Optional, accepts null</param>
+		public ExecuteWatchRequest(Id id) : base(r=>r.Optional("id", id)){}
 
 		/// <summary>/_xpack/watcher/watch/_execute</summary>
-		public ExecuteWatchRequest() : base()
-		{}
-		
+		public ExecuteWatchRequest() : base(){}
 
-			///<summary>indicates whether the watch should execute in debug mode</summary>
+		// values part of the url path
+		Id IExecuteWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>indicates whether the watch should execute in debug mode</summary>
 		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 	}
 	
@@ -2463,25 +2516,26 @@ namespace Nest
 	public partial class ExplainRequest<TDocument> : PlainRequestBase<ExplainRequestParameters>, IExplainRequest<TDocument>
 	{
 		protected IExplainRequest<TDocument> Self => this;
-		Id IExplainRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IExplainRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IExplainRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}/_explain</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
+		/// <summary>/{index}/{type}/{id}/_explain</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
 		public ExplainRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/{id}/_explain</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public ExplainRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
+		// values part of the url path
+		Id IExplainRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IExplainRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IExplainRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The analyzer for the query string query</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
@@ -2525,19 +2579,18 @@ namespace Nest
 	public partial class FieldCapabilitiesRequest : PlainRequestBase<FieldCapabilitiesRequestParameters>, IFieldCapabilitiesRequest
 	{
 		protected IFieldCapabilitiesRequest Self => this;
-		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_field_caps</summary>
-		public FieldCapabilitiesRequest() : base()
-		{}
-		
+		/// <summary>/_field_caps</summary>
+		public FieldCapabilitiesRequest() : base(){}
 
 		/// <summary>/{index}/_field_caps</summary>
-///<param name="index">Optional, accepts null</param>
-		public FieldCapabilitiesRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public FieldCapabilitiesRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>A comma-separated list of field names</summary>
+		// values part of the url path
+		Indices IFieldCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>A comma-separated list of field names</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -2560,14 +2613,15 @@ namespace Nest
 	public partial class FlushJobRequest : PlainRequestBase<FlushJobRequestParameters>, IFlushJobRequest
 	{
 		protected IFlushJobRequest Self => this;
-		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_flush</summary>
-///<param name="job_id">this parameter is required</param>
-		public FlushJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_flush</summary>
+		///<param name="job_id">this parameter is required</param>
+		public FlushJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-			///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
+		// values part of the url path
+		Id IFlushJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
 	}
 	
@@ -2581,19 +2635,18 @@ namespace Nest
 	public partial class FlushRequest : PlainRequestBase<FlushRequestParameters>, IFlushRequest
 	{
 		protected IFlushRequest Self => this;
-		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_flush</summary>
-		public FlushRequest() : base()
-		{}
-		
+		/// <summary>/_flush</summary>
+		public FlushRequest() : base(){}
 
 		/// <summary>/{index}/_flush</summary>
-///<param name="index">Optional, accepts null</param>
-		public FlushRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public FlushRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>
+		// values part of the url path
+		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
 		/// Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if
 		/// transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)
 		///</summary>
@@ -2624,19 +2677,18 @@ namespace Nest
 	public partial class ForceMergeRequest : PlainRequestBase<ForceMergeRequestParameters>, IForceMergeRequest
 	{
 		protected IForceMergeRequest Self => this;
-		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_forcemerge</summary>
-		public ForceMergeRequest() : base()
-		{}
-		
+		/// <summary>/_forcemerge</summary>
+		public ForceMergeRequest() : base(){}
 
 		/// <summary>/{index}/_forcemerge</summary>
-///<param name="index">Optional, accepts null</param>
-		public ForceMergeRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public ForceMergeRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
+		// values part of the url path
+		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -2668,33 +2720,28 @@ namespace Nest
 	public partial class GetAliasRequest : PlainRequestBase<GetAliasRequestParameters>, IGetAliasRequest
 	{
 		protected IGetAliasRequest Self => this;
-		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IGetAliasRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/_alias</summary>
-		public GetAliasRequest() : base()
-		{}
-		
+		/// <summary>/_alias</summary>
+		public GetAliasRequest() : base(){}
 
 		/// <summary>/_alias/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public GetAliasRequest(Names name) : base(r=>r.Optional("name", name))
-		{}
-		
+		///<param name="name">Optional, accepts null</param>
+		public GetAliasRequest(Names name) : base(r=>r.Optional("name", name)){}
 
 		/// <summary>/{index}/_alias/{name}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="name">Optional, accepts null</param>
-		public GetAliasRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="name">Optional, accepts null</param>
+		public GetAliasRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
 
 		/// <summary>/{index}/_alias</summary>
-///<param name="index">Optional, accepts null</param>
-		public GetAliasRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public GetAliasRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Names IGetAliasRequest.Name => Self.RouteValues.Get<Names>("name");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -2717,14 +2764,15 @@ namespace Nest
 	public partial class GetAnomalyRecordsRequest : PlainRequestBase<GetAnomalyRecordsRequestParameters>, IGetAnomalyRecordsRequest
 	{
 		protected IGetAnomalyRecordsRequest Self => this;
-		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/records</summary>
-///<param name="job_id">this parameter is required</param>
-		public GetAnomalyRecordsRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/records</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetAnomalyRecordsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-		}
+		// values part of the url path
+		Id IGetAnomalyRecordsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters>
@@ -2736,14 +2784,15 @@ namespace Nest
 	public partial class GetBucketsRequest : PlainRequestBase<GetBucketsRequestParameters>, IGetBucketsRequest
 	{
 		protected IGetBucketsRequest Self => this;
-		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/buckets</summary>
-///<param name="job_id">this parameter is required</param>
-		public GetBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/buckets</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-		}
+		// values part of the url path
+		Id IGetBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters>
@@ -2756,22 +2805,21 @@ namespace Nest
 	public partial class GetCategoriesRequest : PlainRequestBase<GetCategoriesRequestParameters>, IGetCategoriesRequest
 	{
 		protected IGetCategoriesRequest Self => this;
-		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
-///<param name="job_id">this parameter is required</param>		
-///<param name="category_id">Optional, accepts null</param>
-		public GetCategoriesRequest(Id job_id, CategoryId category_id) : base(r=>r.Required("job_id", job_id).Optional("category_id", category_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/{category_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="category_id">Optional, accepts null</param>
+		public GetCategoriesRequest(Id job_id, CategoryId category_id) : base(r=>r.Required("job_id", job_id).Optional("category_id", category_id)){}
 
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/categories/</summary>
-///<param name="job_id">this parameter is required</param>
-		public GetCategoriesRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id">this parameter is required</param>
+		public GetCategoriesRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-		}
+		// values part of the url path
+		Id IGetCategoriesRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		CategoryId IGetCategoriesRequest.CategoryId => Self.RouteValues.Get<CategoryId>("category_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters>
@@ -2783,19 +2831,18 @@ namespace Nest
 	public partial class GetDatafeedsRequest : PlainRequestBase<GetDatafeedsRequestParameters>, IGetDatafeedsRequest
 	{
 		protected IGetDatafeedsRequest Self => this;
-		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
-///<param name="datafeed_id">Optional, accepts null</param>
-		public GetDatafeedsRequest(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id))
-		{}
-		
+		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
+		///<param name="datafeed_id">Optional, accepts null</param>
+		public GetDatafeedsRequest(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id)){}
 
 		/// <summary>/_xpack/ml/datafeeds</summary>
-		public GetDatafeedsRequest() : base()
-		{}
-		
+		public GetDatafeedsRequest() : base(){}
 
-		}
+		// values part of the url path
+		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetDatafeedStatsRequest : IRequest<GetDatafeedStatsRequestParameters>
@@ -2807,19 +2854,18 @@ namespace Nest
 	public partial class GetDatafeedStatsRequest : PlainRequestBase<GetDatafeedStatsRequestParameters>, IGetDatafeedStatsRequest
 	{
 		protected IGetDatafeedStatsRequest Self => this;
-		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stats</summary>
-///<param name="datafeed_id">Optional, accepts null</param>
-		public GetDatafeedStatsRequest(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id))
-		{}
-		
+		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stats</summary>
+		///<param name="datafeed_id">Optional, accepts null</param>
+		public GetDatafeedStatsRequest(Id datafeed_id) : base(r=>r.Optional("datafeed_id", datafeed_id)){}
 
 		/// <summary>/_xpack/ml/datafeeds/_stats</summary>
-		public GetDatafeedStatsRequest() : base()
-		{}
-		
+		public GetDatafeedStatsRequest() : base(){}
 
-		}
+		// values part of the url path
+		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters>
@@ -2833,38 +2879,33 @@ namespace Nest
 	public partial class GetFieldMappingRequest : PlainRequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
 		protected IGetFieldMappingRequest Self => this;
+		/// <summary>/_mapping/field/{fields}</summary>
+		///<param name="fields">this parameter is required</param>
+		public GetFieldMappingRequest(Fields fields) : base(r=>r.Required("fields", fields)){}
+
+		/// <summary>/{index}/_mapping/field/{fields}</summary>
+		///<param name="index">Optional, accepts null</param>
+		///<param name="fields">this parameter is required</param>
+		public GetFieldMappingRequest(Indices index, Fields fields) : base(r=>r.Optional("index", index).Required("fields", fields)){}
+
+		/// <summary>/_mapping/{type}/field/{fields}</summary>
+		///<param name="type">Optional, accepts null</param>
+		///<param name="fields">this parameter is required</param>
+		public GetFieldMappingRequest(Types type, Fields fields) : base(r=>r.Optional("type", type).Required("fields", fields)){}
+
+		/// <summary>/{index}/_mapping/{type}/field/{fields}</summary>
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		///<param name="fields">this parameter is required</param>
+		public GetFieldMappingRequest(Indices index, Types type, Fields fields) : base(r=>r.Optional("index", index).Optional("type", type).Required("fields", fields)){}
+
+		// values part of the url path
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
-			/// <summary>/_mapping/field/{fields}</summary>
-///<param name="fields">this parameter is required</param>
-		public GetFieldMappingRequest(Fields fields) : base(r=>r.Required("fields", fields))
-		{}
-		
 
-		/// <summary>/{index}/_mapping/field/{fields}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="fields">this parameter is required</param>
-		public GetFieldMappingRequest(Indices index, Fields fields) : base(r=>r.Optional("index", index).Required("fields", fields))
-		{}
-		
-
-		/// <summary>/_mapping/{type}/field/{fields}</summary>
-///<param name="type">Optional, accepts null</param>		
-///<param name="fields">this parameter is required</param>
-		public GetFieldMappingRequest(Types type, Fields fields) : base(r=>r.Optional("type", type).Required("fields", fields))
-		{}
-		
-
-		/// <summary>/{index}/_mapping/{type}/field/{fields}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>		
-///<param name="fields">this parameter is required</param>
-		public GetFieldMappingRequest(Indices index, Types type, Fields fields) : base(r=>r.Optional("index", index).Optional("type", type).Required("fields", fields))
-		{}
-		
-
-			///<summary>Whether the default mapping values should be returned as well</summary>
+		// Request parameters
+		///<summary>Whether the default mapping values should be returned as well</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -2889,14 +2930,15 @@ namespace Nest
 	public partial class GetIndexRequest : PlainRequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
 		protected IGetIndexRequest Self => this;
-		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/{index}</summary>
-///<param name="index">this parameter is required</param>
-		public GetIndexRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public GetIndexRequest(Indices index) : base(r=>r.Required("index", index)){}
 
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		// values part of the url path
+		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -2921,33 +2963,28 @@ namespace Nest
 	public partial class GetIndexSettingsRequest : PlainRequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
 		protected IGetIndexSettingsRequest Self => this;
-		Indices IGetIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/_settings</summary>
-		public GetIndexSettingsRequest() : base()
-		{}
-		
+		/// <summary>/_settings</summary>
+		public GetIndexSettingsRequest() : base(){}
 
 		/// <summary>/{index}/_settings</summary>
-///<param name="index">Optional, accepts null</param>
-		public GetIndexSettingsRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public GetIndexSettingsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/_settings/{name}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="name">Optional, accepts null</param>
-		public GetIndexSettingsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="name">Optional, accepts null</param>
+		public GetIndexSettingsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
 
 		/// <summary>/_settings/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public GetIndexSettingsRequest(Names name) : base(r=>r.Optional("name", name))
-		{}
-		
+		///<param name="name">Optional, accepts null</param>
+		public GetIndexSettingsRequest(Names name) : base(r=>r.Optional("name", name)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices IGetIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -2974,19 +3011,18 @@ namespace Nest
 	public partial class GetIndexTemplateRequest : PlainRequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
 	{
 		protected IGetIndexTemplateRequest Self => this;
-		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/_template</summary>
-		public GetIndexTemplateRequest() : base()
-		{}
-		
+		/// <summary>/_template</summary>
+		public GetIndexTemplateRequest() : base(){}
 
 		/// <summary>/_template/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public GetIndexTemplateRequest(Names name) : base(r=>r.Optional("name", name))
-		{}
-		
+		///<param name="name">Optional, accepts null</param>
+		public GetIndexTemplateRequest(Names name) : base(r=>r.Optional("name", name)){}
 
-			///<summary>Return settings in flat format (default: false)</summary>
+		// values part of the url path
+		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
+
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -3004,14 +3040,15 @@ namespace Nest
 	public partial class GetInfluencersRequest : PlainRequestBase<GetInfluencersRequestParameters>, IGetInfluencersRequest
 	{
 		protected IGetInfluencersRequest Self => this;
-		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/influencers</summary>
-///<param name="job_id">this parameter is required</param>
-		public GetInfluencersRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/influencers</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetInfluencersRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-		}
+		// values part of the url path
+		Id IGetInfluencersRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetJobsRequest : IRequest<GetJobsRequestParameters>
@@ -3023,19 +3060,18 @@ namespace Nest
 	public partial class GetJobsRequest : PlainRequestBase<GetJobsRequestParameters>, IGetJobsRequest
 	{
 		protected IGetJobsRequest Self => this;
-		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-///<param name="job_id">Optional, accepts null</param>
-		public GetJobsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
+		///<param name="job_id">Optional, accepts null</param>
+		public GetJobsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
 
 		/// <summary>/_xpack/ml/anomaly_detectors/</summary>
-		public GetJobsRequest() : base()
-		{}
-		
+		public GetJobsRequest() : base(){}
 
-		}
+		// values part of the url path
+		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParameters>
@@ -3047,19 +3083,18 @@ namespace Nest
 	public partial class GetJobStatsRequest : PlainRequestBase<GetJobStatsRequestParameters>, IGetJobStatsRequest
 	{
 		protected IGetJobStatsRequest Self => this;
-		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/_stats</summary>
-		public GetJobStatsRequest() : base()
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/_stats</summary>
+		public GetJobStatsRequest() : base(){}
 
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_stats</summary>
-///<param name="job_id">Optional, accepts null</param>
-		public GetJobStatsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id))
-		{}
-		
+		///<param name="job_id">Optional, accepts null</param>
+		public GetJobStatsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
 
-		}
+		// values part of the url path
+		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters>
@@ -3070,7 +3105,10 @@ namespace Nest
 	public partial class GetLicenseRequest : PlainRequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
 	{
 		protected IGetLicenseRequest Self => this;
-				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
@@ -3085,33 +3123,28 @@ namespace Nest
 	public partial class GetMappingRequest : PlainRequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
 		protected IGetMappingRequest Self => this;
-		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_mapping</summary>
-		public GetMappingRequest()
-		{}
-		
+		/// <summary>/_mapping</summary>
+		public GetMappingRequest(){}
 
 		/// <summary>/{index}/_mapping</summary>
-///<param name="index">Optional, accepts null</param>
-		public GetMappingRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public GetMappingRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/_mapping/{type}</summary>
-///<param name="type">Optional, accepts null</param>
-		public GetMappingRequest(Types type) : base(r=>r.Optional("type", type))
-		{}
-		
+		///<param name="type">Optional, accepts null</param>
+		public GetMappingRequest(Types type) : base(r=>r.Optional("type", type)){}
 
 		/// <summary>/{index}/_mapping/{type}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public GetMappingRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public GetMappingRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -3135,22 +3168,21 @@ namespace Nest
 	public partial class GetModelSnapshotsRequest : PlainRequestBase<GetModelSnapshotsRequestParameters>, IGetModelSnapshotsRequest
 	{
 		protected IGetModelSnapshotsRequest Self => this;
-		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
-///<param name="job_id">this parameter is required</param>		
-///<param name="snapshot_id">Optional, accepts null</param>
-		public GetModelSnapshotsRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Optional("snapshot_id", snapshot_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">Optional, accepts null</param>
+		public GetModelSnapshotsRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Optional("snapshot_id", snapshot_id)){}
 
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots</summary>
-///<param name="job_id">this parameter is required</param>
-		public GetModelSnapshotsRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		///<param name="job_id">this parameter is required</param>
+		public GetModelSnapshotsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-		}
+		// values part of the url path
+		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters>
@@ -3162,19 +3194,18 @@ namespace Nest
 	public partial class GetPipelineRequest : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
 	{
 		protected IGetPipelineRequest Self => this;
-		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_ingest/pipeline</summary>
-		public GetPipelineRequest() : base()
-		{}
-		
+		/// <summary>/_ingest/pipeline</summary>
+		public GetPipelineRequest() : base(){}
 
 		/// <summary>/_ingest/pipeline/{id}</summary>
-///<param name="id">Optional, accepts null</param>
-		public GetPipelineRequest(Id id) : base(r=>r.Optional("id", id))
-		{}
-		
+		///<param name="id">Optional, accepts null</param>
+		public GetPipelineRequest(Id id) : base(r=>r.Optional("id", id)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 	}
 	
@@ -3188,19 +3219,18 @@ namespace Nest
 	public partial class GetRepositoryRequest : PlainRequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
 	{
 		protected IGetRepositoryRequest Self => this;
-		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
-			/// <summary>/_snapshot</summary>
-		public GetRepositoryRequest() : base()
-		{}
-		
+		/// <summary>/_snapshot</summary>
+		public GetRepositoryRequest() : base(){}
 
 		/// <summary>/_snapshot/{repository}</summary>
-///<param name="repository">Optional, accepts null</param>
-		public GetRepositoryRequest(Names repository) : base(r=>r.Optional("repository", repository))
-		{}
-		
+		///<param name="repository">Optional, accepts null</param>
+		public GetRepositoryRequest(Names repository) : base(r=>r.Optional("repository", repository)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -3218,25 +3248,26 @@ namespace Nest
 	public partial class GetRequest<T> : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
 		protected IGetRequest Self => this;
-		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
+		/// <summary>/{index}/{type}/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
 		public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/{id}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public GetRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(T document);
 
-			///<summary>A comma-separated list of stored fields to return in the response</summary>
+		// values part of the url path
+		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
@@ -3271,18 +3302,20 @@ namespace Nest
 	public partial class GetRequest : PlainRequestBase<GetRequestParameters>, IGetRequest
 	{
 		protected IGetRequest Self => this;
+		/// <summary>/{index}/{type}/{id}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+
+		// values part of the url path
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
-		public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
-		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-			///<summary>A comma-separated list of stored fields to return in the response</summary>
+		// Request parameters
+		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
@@ -3324,19 +3357,18 @@ namespace Nest
 	public partial class GetRoleMappingRequest : PlainRequestBase<GetRoleMappingRequestParameters>, IGetRoleMappingRequest
 	{
 		protected IGetRoleMappingRequest Self => this;
-		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_xpack/security/role_mapping/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public GetRoleMappingRequest(Name name) : base(r=>r.Optional("name", name))
-		{}
-		
+		/// <summary>/_xpack/security/role_mapping/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public GetRoleMappingRequest(Name name) : base(r=>r.Optional("name", name)){}
 
 		/// <summary>/_xpack/security/role_mapping</summary>
-		public GetRoleMappingRequest() : base()
-		{}
-		
+		public GetRoleMappingRequest() : base(){}
 
-		}
+		// values part of the url path
+		Name IGetRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters>
@@ -3348,19 +3380,18 @@ namespace Nest
 	public partial class GetRoleRequest : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 	{
 		protected IGetRoleRequest Self => this;
-		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_xpack/security/role/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public GetRoleRequest(Name name) : base(r=>r.Optional("name", name))
-		{}
-		
+		/// <summary>/_xpack/security/role/{name}</summary>
+		///<param name="name">Optional, accepts null</param>
+		public GetRoleRequest(Name name) : base(r=>r.Optional("name", name)){}
 
 		/// <summary>/_xpack/security/role</summary>
-		public GetRoleRequest() : base()
-		{}
-		
+		public GetRoleRequest() : base(){}
 
-		}
+		// values part of the url path
+		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters>
@@ -3372,14 +3403,15 @@ namespace Nest
 	public partial class GetScriptRequest : PlainRequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
 		protected IGetScriptRequest Self => this;
-		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_scripts/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public GetScriptRequest(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		/// <summary>/_scripts/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public GetScriptRequest(Id id) : base(r=>r.Required("id", id)){}
 
-		}
+		// values part of the url path
+		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters>
@@ -3392,16 +3424,17 @@ namespace Nest
 	public partial class GetSnapshotRequest : PlainRequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
 		protected IGetSnapshotRequest Self => this;
+		/// <summary>/_snapshot/{repository}/{snapshot}</summary>
+		///<param name="repository">this parameter is required</param>
+		///<param name="snapshot">this parameter is required</param>
+		public GetSnapshotRequest(Name repository, Names snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
+		// values part of the url path
 		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names IGetSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
-			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
-///<param name="repository">this parameter is required</param>		
-///<param name="snapshot">this parameter is required</param>
-		public GetSnapshotRequest(Name repository, Names snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
-		{}
-		
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -3419,14 +3452,15 @@ namespace Nest
 	public partial class GetTaskRequest : PlainRequestBase<GetTaskRequestParameters>, IGetTaskRequest
 	{
 		protected IGetTaskRequest Self => this;
-		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
-			/// <summary>/_tasks/{task_id}</summary>
-///<param name="task_id">Optional, accepts null</param>
-		public GetTaskRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id))
-		{}
-		
+		/// <summary>/_tasks/{task_id}</summary>
+		///<param name="task_id">Optional, accepts null</param>
+		public GetTaskRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
 
-			///<summary>Wait for the matching tasks to complete (default: false)</summary>
+		// values part of the url path
+		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+
+		// Request parameters
+		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	
@@ -3439,7 +3473,10 @@ namespace Nest
 	public partial class GetUserAccessTokenRequest : PlainRequestBase<GetUserAccessTokenRequestParameters>, IGetUserAccessTokenRequest
 	{
 		protected IGetUserAccessTokenRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters>
@@ -3451,19 +3488,18 @@ namespace Nest
 	public partial class GetUserRequest : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 	{
 		protected IGetUserRequest Self => this;
-		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
-			/// <summary>/_xpack/security/user/{username}</summary>
-///<param name="username">Optional, accepts null</param>
-		public GetUserRequest(Names username) : base(r=>r.Optional("username", username))
-		{}
-		
+		/// <summary>/_xpack/security/user/{username}</summary>
+		///<param name="username">Optional, accepts null</param>
+		public GetUserRequest(Names username) : base(r=>r.Optional("username", username)){}
 
 		/// <summary>/_xpack/security/user</summary>
-		public GetUserRequest() : base()
-		{}
-		
+		public GetUserRequest() : base(){}
 
-		}
+		// values part of the url path
+		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetWatchRequest : IRequest<GetWatchRequestParameters>
@@ -3475,14 +3511,15 @@ namespace Nest
 	public partial class GetWatchRequest : PlainRequestBase<GetWatchRequestParameters>, IGetWatchRequest
 	{
 		protected IGetWatchRequest Self => this;
-		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_xpack/watcher/watch/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public GetWatchRequest(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		/// <summary>/_xpack/watcher/watch/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public GetWatchRequest(Id id) : base(r=>r.Required("id", id)){}
 
-		}
+		// values part of the url path
+		Id IGetWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGraphExploreRequest : IRequest<GraphExploreRequestParameters>
@@ -3495,22 +3532,21 @@ namespace Nest
 	public partial class GraphExploreRequest<T> : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
-		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_xpack/graph/_explore</summary>
-///<param name="index">this parameter is required</param>
-		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}/_xpack/graph/_explore</summary>
+		///<param name="index">this parameter is required</param>
+		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
 
 		/// <summary>/{index}/{type}/_xpack/graph/_explore</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">Optional, accepts null</param>
-		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
+		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
 
-			///<summary>
+		// values part of the url path
+		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
@@ -3526,22 +3562,21 @@ namespace Nest
 	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
 	{
 		protected IGraphExploreRequest Self => this;
-		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_xpack/graph/_explore</summary>
-///<param name="index">this parameter is required</param>
-		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}/_xpack/graph/_explore</summary>
+		///<param name="index">this parameter is required</param>
+		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
 
 		/// <summary>/{index}/{type}/_xpack/graph/_explore</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">Optional, accepts null</param>
-		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
+		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
 
-			///<summary>
+		// values part of the url path
+		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
@@ -3563,7 +3598,10 @@ namespace Nest
 	public partial class GrokProcessorPatternsRequest : PlainRequestBase<GrokProcessorPatternsRequestParameters>, IGrokProcessorPatternsRequest
 	{
 		protected IGrokProcessorPatternsRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
@@ -3575,14 +3613,15 @@ namespace Nest
 	public partial class IndexExistsRequest : PlainRequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
 		protected IIndexExistsRequest Self => this;
-		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/{index}</summary>
-///<param name="index">this parameter is required</param>
-		public IndexExistsRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public IndexExistsRequest(Indices index) : base(r=>r.Required("index", index)){}
 
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		// values part of the url path
+		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -3608,32 +3647,32 @@ namespace Nest
 	public partial class IndexRequest<TDocument> : PlainRequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
 	{
 		protected IIndexRequest<TDocument> Self => this;
-		Id IIndexRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IIndexRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IIndexRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>
+		/// <summary>/{index}/{type}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
 		public IndexRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/{id}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">Optional, accepts null</param>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">Optional, accepts null</param>
 		public IndexRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public IndexRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>
+		// values part of the url path
+		Id IIndexRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IIndexRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IIndexRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard
 		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
 		/// shard (number of replicas + 1)
@@ -3682,14 +3721,15 @@ namespace Nest
 	public partial class IndexTemplateExistsRequest : PlainRequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
 	{
 		protected IIndexTemplateExistsRequest Self => this;
-		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/_template/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public IndexTemplateExistsRequest(Names name) : base(r=>r.Required("name", name))
-		{}
-		
+		/// <summary>/_template/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public IndexTemplateExistsRequest(Names name) : base(r=>r.Required("name", name)){}
 
-			///<summary>Return settings in flat format (default: false)</summary>
+		// values part of the url path
+		Names IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Names>("name");
+
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -3707,19 +3747,18 @@ namespace Nest
 	public partial class IndicesShardStoresRequest : PlainRequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 	{
 		protected IIndicesShardStoresRequest Self => this;
-		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_shard_stores</summary>
-		public IndicesShardStoresRequest() : base()
-		{}
-		
+		/// <summary>/_shard_stores</summary>
+		public IndicesShardStoresRequest() : base(){}
 
 		/// <summary>/{index}/_shard_stores</summary>
-///<param name="index">Optional, accepts null</param>
-		public IndicesShardStoresRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public IndicesShardStoresRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
+		// values part of the url path
+		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public string[] Status { get => Q<string[]>("status"); set => Q("status", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -3745,33 +3784,28 @@ namespace Nest
 	public partial class IndicesStatsRequest : PlainRequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
 		protected IIndicesStatsRequest Self => this;
-		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Metrics IIndicesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-			/// <summary>/_stats</summary>
-		public IndicesStatsRequest() : base()
-		{}
-		
+		/// <summary>/_stats</summary>
+		public IndicesStatsRequest() : base(){}
 
 		/// <summary>/_stats/{metric}</summary>
-///<param name="metric">Optional, accepts null</param>
-		public IndicesStatsRequest(IndicesStatsMetric metric) : base(r=>r.Optional("metric", (Metrics)metric))
-		{}
-		
+		///<param name="metric">Optional, accepts null</param>
+		public IndicesStatsRequest(IndicesStatsMetric metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
 
 		/// <summary>/{index}/_stats</summary>
-///<param name="index">Optional, accepts null</param>
-		public IndicesStatsRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public IndicesStatsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/_stats/{metric}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="metric">Optional, accepts null</param>
-		public IndicesStatsRequest(Indices index, IndicesStatsMetric metric) : base(r=>r.Optional("index", index).Optional("metric", (Metrics)metric))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="metric">Optional, accepts null</param>
+		public IndicesStatsRequest(Indices index, IndicesStatsMetric metric) : base(r=>r.Optional("index", index).Optional("metric", (Metrics)metric)){}
 
-			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		// values part of the url path
+		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Metrics IIndicesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+
+		// Request parameters
+		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public Fields CompletionFields { get => Q<Fields>("completion_fields"); set => Q("completion_fields", value); }
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public Fields FielddataFields { get => Q<Fields>("fielddata_fields"); set => Q("fielddata_fields", value); }
@@ -3794,7 +3828,10 @@ namespace Nest
 	public partial class InvalidateUserAccessTokenRequest : PlainRequestBase<InvalidateUserAccessTokenRequestParameters>, IInvalidateUserAccessTokenRequest
 	{
 		protected IInvalidateUserAccessTokenRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IListTasksRequest : IRequest<ListTasksRequestParameters>
@@ -3805,7 +3842,10 @@ namespace Nest
 	public partial class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
 		protected IListTasksRequest Self => this;
-				///<summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>
 		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
 		/// connecting to, leave empty to get information from all nodes
 		///</summary>
@@ -3836,27 +3876,24 @@ namespace Nest
 	public partial class MultiGetRequest : PlainRequestBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
 		protected IMultiGetRequest Self => this;
-		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IMultiGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/_mget</summary>
-		public MultiGetRequest() : base()
-		{}
-		
+		/// <summary>/_mget</summary>
+		public MultiGetRequest() : base(){}
 
 		/// <summary>/{index}/_mget</summary>
-///<param name="index">Optional, accepts null</param>
-		public MultiGetRequest(IndexName index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public MultiGetRequest(IndexName index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_mget</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public MultiGetRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public MultiGetRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		// values part of the url path
+		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IMultiGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
@@ -3890,27 +3927,24 @@ namespace Nest
 	public partial class MultiSearchRequest : PlainRequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
 		protected IMultiSearchRequest Self => this;
-		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_msearch</summary>
-		public MultiSearchRequest()
-		{}
-		
+		/// <summary>/_msearch</summary>
+		public MultiSearchRequest(){}
 
 		/// <summary>/{index}/_msearch</summary>
-///<param name="index">Optional, accepts null</param>
-		public MultiSearchRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public MultiSearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_msearch</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public MultiSearchRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public MultiSearchRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>Search operation type</summary>
+		// values part of the url path
+		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
@@ -3936,27 +3970,24 @@ namespace Nest
 	public partial class MultiSearchTemplateRequest : PlainRequestBase<MultiSearchTemplateRequestParameters>, IMultiSearchTemplateRequest
 	{
 		protected IMultiSearchTemplateRequest Self => this;
-		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IMultiSearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_msearch/template</summary>
-		public MultiSearchTemplateRequest()
-		{}
-		
+		/// <summary>/_msearch/template</summary>
+		public MultiSearchTemplateRequest(){}
 
 		/// <summary>/{index}/_msearch/template</summary>
-///<param name="index">Optional, accepts null</param>
-		public MultiSearchTemplateRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public MultiSearchTemplateRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_msearch/template</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public MultiSearchTemplateRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public MultiSearchTemplateRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>Search operation type</summary>
+		// values part of the url path
+		Indices IMultiSearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IMultiSearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
@@ -3975,27 +4006,24 @@ namespace Nest
 	public partial class MultiTermVectorsRequest : PlainRequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
 		protected IMultiTermVectorsRequest Self => this;
-		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IMultiTermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/_mtermvectors</summary>
-		public MultiTermVectorsRequest() : base()
-		{}
-		
+		/// <summary>/_mtermvectors</summary>
+		public MultiTermVectorsRequest() : base(){}
 
 		/// <summary>/{index}/_mtermvectors</summary>
-///<param name="index">Optional, accepts null</param>
-		public MultiTermVectorsRequest(IndexName index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public MultiTermVectorsRequest(IndexName index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_mtermvectors</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public MultiTermVectorsRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public MultiTermVectorsRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>
+		// values part of the url path
+		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IMultiTermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>
 		/// Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified
 		/// in body "params" or "docs".
 		///</summary>
@@ -4048,19 +4076,18 @@ namespace Nest
 	public partial class NodesHotThreadsRequest : PlainRequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
 		protected INodesHotThreadsRequest Self => this;
-		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-			/// <summary>/_cluster/nodes/hotthreads</summary>
-		public NodesHotThreadsRequest() : base()
-		{}
-		
+		/// <summary>/_cluster/nodes/hotthreads</summary>
+		public NodesHotThreadsRequest() : base(){}
 
 		/// <summary>/_cluster/nodes/{node_id}/hotthreads</summary>
-///<param name="node_id">Optional, accepts null</param>
-		public NodesHotThreadsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id))
-		{}
-		
+		///<param name="node_id">Optional, accepts null</param>
+		public NodesHotThreadsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
 
-			///<summary>The interval for the second sampling of threads</summary>
+		// values part of the url path
+		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+
+		// Request parameters
+		///<summary>The interval for the second sampling of threads</summary>
 		public Time Interval { get => Q<Time>("interval"); set => Q("interval", value.ToString()); }
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
@@ -4085,33 +4112,28 @@ namespace Nest
 	public partial class NodesInfoRequest : PlainRequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
 		protected INodesInfoRequest Self => this;
-		NodeIds INodesInfoRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-			/// <summary>/_nodes</summary>
-		public NodesInfoRequest() : base()
-		{}
-		
+		/// <summary>/_nodes</summary>
+		public NodesInfoRequest() : base(){}
 
 		/// <summary>/_nodes/{node_id}</summary>
-///<param name="node_id">Optional, accepts null</param>
-		public NodesInfoRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id))
-		{}
-		
+		///<param name="node_id">Optional, accepts null</param>
+		public NodesInfoRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
 
 		/// <summary>/_nodes/{metric}</summary>
-///<param name="metric">Optional, accepts null</param>
-		public NodesInfoRequest(NodesInfoMetric metric) : base(r=>r.Optional("metric", (Metrics)metric))
-		{}
-		
+		///<param name="metric">Optional, accepts null</param>
+		public NodesInfoRequest(NodesInfoMetric metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
 
 		/// <summary>/_nodes/{node_id}/{metric}</summary>
-///<param name="node_id">Optional, accepts null</param>		
-///<param name="metric">Optional, accepts null</param>
-		public NodesInfoRequest(NodeIds node_id, NodesInfoMetric metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric))
-		{}
-		
+		///<param name="node_id">Optional, accepts null</param>
+		///<param name="metric">Optional, accepts null</param>
+		public NodesInfoRequest(NodeIds node_id, NodesInfoMetric metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric)){}
 
-			///<summary>Return settings in flat format (default: false)</summary>
+		// values part of the url path
+		NodeIds INodesInfoRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+
+		// Request parameters
+		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -4129,49 +4151,40 @@ namespace Nest
 	public partial class NodesStatsRequest : PlainRequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
 		protected INodesStatsRequest Self => this;
+		/// <summary>/_nodes/stats</summary>
+		public NodesStatsRequest() : base(){}
+
+		/// <summary>/_nodes/{node_id}/stats</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		public NodesStatsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+
+		/// <summary>/_nodes/stats/{metric}</summary>
+		///<param name="metric">Optional, accepts null</param>
+		public NodesStatsRequest(NodesStatsMetric metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
+
+		/// <summary>/_nodes/{node_id}/stats/{metric}</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		///<param name="metric">Optional, accepts null</param>
+		public NodesStatsRequest(NodeIds node_id, NodesStatsMetric metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric)){}
+
+		/// <summary>/_nodes/stats/{metric}/{index_metric}</summary>
+		///<param name="metric">Optional, accepts null</param>
+		///<param name="index_metric">Optional, accepts null</param>
+		public NodesStatsRequest(NodesStatsMetric metric, NodesStatsIndexMetric index_metric) : base(r=>r.Optional("metric", (Metrics)metric).Optional("index_metric", (IndexMetrics)index_metric)){}
+
+		/// <summary>/_nodes/{node_id}/stats/{metric}/{index_metric}</summary>
+		///<param name="node_id">Optional, accepts null</param>
+		///<param name="metric">Optional, accepts null</param>
+		///<param name="index_metric">Optional, accepts null</param>
+		public NodesStatsRequest(NodeIds node_id, NodesStatsMetric metric, NodesStatsIndexMetric index_metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric).Optional("index_metric", (IndexMetrics)index_metric)){}
+
+		// values part of the url path
 		Metrics INodesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		IndexMetrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<IndexMetrics>("index_metric");
 		NodeIds INodesStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-			/// <summary>/_nodes/stats</summary>
-		public NodesStatsRequest() : base()
-		{}
-		
 
-		/// <summary>/_nodes/{node_id}/stats</summary>
-///<param name="node_id">Optional, accepts null</param>
-		public NodesStatsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id))
-		{}
-		
-
-		/// <summary>/_nodes/stats/{metric}</summary>
-///<param name="metric">Optional, accepts null</param>
-		public NodesStatsRequest(NodesStatsMetric metric) : base(r=>r.Optional("metric", (Metrics)metric))
-		{}
-		
-
-		/// <summary>/_nodes/{node_id}/stats/{metric}</summary>
-///<param name="node_id">Optional, accepts null</param>		
-///<param name="metric">Optional, accepts null</param>
-		public NodesStatsRequest(NodeIds node_id, NodesStatsMetric metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric))
-		{}
-		
-
-		/// <summary>/_nodes/stats/{metric}/{index_metric}</summary>
-///<param name="metric">Optional, accepts null</param>		
-///<param name="index_metric">Optional, accepts null</param>
-		public NodesStatsRequest(NodesStatsMetric metric, NodesStatsIndexMetric index_metric) : base(r=>r.Optional("metric", (Metrics)metric).Optional("index_metric", (IndexMetrics)index_metric))
-		{}
-		
-
-		/// <summary>/_nodes/{node_id}/stats/{metric}/{index_metric}</summary>
-///<param name="node_id">Optional, accepts null</param>		
-///<param name="metric">Optional, accepts null</param>		
-///<param name="index_metric">Optional, accepts null</param>
-		public NodesStatsRequest(NodeIds node_id, NodesStatsMetric metric, NodesStatsIndexMetric index_metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric).Optional("index_metric", (IndexMetrics)index_metric))
-		{}
-		
-
-			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		// Request parameters
+		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public Fields CompletionFields { get => Q<Fields>("completion_fields"); set => Q("completion_fields", value); }
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public Fields FielddataFields { get => Q<Fields>("fielddata_fields"); set => Q("fielddata_fields", value); }
@@ -4200,33 +4213,28 @@ namespace Nest
 	public partial class NodesUsageRequest : PlainRequestBase<NodesUsageRequestParameters>, INodesUsageRequest
 	{
 		protected INodesUsageRequest Self => this;
-		Metrics INodesUsageRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-		NodeIds INodesUsageRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
-			/// <summary>/_nodes/usage</summary>
-		public NodesUsageRequest() : base()
-		{}
-		
+		/// <summary>/_nodes/usage</summary>
+		public NodesUsageRequest() : base(){}
 
 		/// <summary>/_nodes/{node_id}/usage</summary>
-///<param name="node_id">Optional, accepts null</param>
-		public NodesUsageRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id))
-		{}
-		
+		///<param name="node_id">Optional, accepts null</param>
+		public NodesUsageRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
 
 		/// <summary>/_nodes/usage/{metric}</summary>
-///<param name="metric">Optional, accepts null</param>
-		public NodesUsageRequest(NodesUsageMetric metric) : base(r=>r.Optional("metric", (Metrics)metric))
-		{}
-		
+		///<param name="metric">Optional, accepts null</param>
+		public NodesUsageRequest(NodesUsageMetric metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
 
 		/// <summary>/_nodes/{node_id}/usage/{metric}</summary>
-///<param name="node_id">Optional, accepts null</param>		
-///<param name="metric">Optional, accepts null</param>
-		public NodesUsageRequest(NodeIds node_id, NodesUsageMetric metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric))
-		{}
-		
+		///<param name="node_id">Optional, accepts null</param>
+		///<param name="metric">Optional, accepts null</param>
+		public NodesUsageRequest(NodeIds node_id, NodesUsageMetric metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric)){}
 
-			///<summary>Whether to return time and byte values in human-readable format.</summary>
+		// values part of the url path
+		Metrics INodesUsageRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+		NodeIds INodesUsageRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+
+		// Request parameters
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -4242,14 +4250,15 @@ namespace Nest
 	public partial class OpenIndexRequest : PlainRequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
 		protected IOpenIndexRequest Self => this;
-		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/{index}/_open</summary>
-///<param name="index">this parameter is required</param>
-		public OpenIndexRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}/_open</summary>
+		///<param name="index">this parameter is required</param>
+		public OpenIndexRequest(Indices index) : base(r=>r.Required("index", index)){}
 
-			///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -4274,14 +4283,15 @@ namespace Nest
 	public partial class OpenJobRequest : PlainRequestBase<OpenJobRequestParameters>, IOpenJobRequest
 	{
 		protected IOpenJobRequest Self => this;
-		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_open</summary>
-///<param name="job_id">this parameter is required</param>
-		public OpenJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_open</summary>
+		///<param name="job_id">this parameter is required</param>
+		public OpenJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-		}
+		// values part of the url path
+		Id IOpenJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPingRequest : IRequest<PingRequestParameters>
@@ -4292,7 +4302,10 @@ namespace Nest
 	public partial class PingRequest : PlainRequestBase<PingRequestParameters>, IPingRequest
 	{
 		protected IPingRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
@@ -4304,14 +4317,15 @@ namespace Nest
 	public partial class PostJobDataRequest : PlainRequestBase<PostJobDataRequestParameters>, IPostJobDataRequest
 	{
 		protected IPostJobDataRequest Self => this;
-		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_data</summary>
-///<param name="job_id">this parameter is required</param>
-		public PostJobDataRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_data</summary>
+		///<param name="job_id">this parameter is required</param>
+		public PostJobDataRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-			///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
+		// values part of the url path
+		Id IPostJobDataRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
 		public DateTimeOffset ResetStart { get => Q<DateTimeOffset>("reset_start"); set => Q("reset_start", value); }
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
 		public DateTimeOffset ResetEnd { get => Q<DateTimeOffset>("reset_end"); set => Q("reset_end", value); }
@@ -4326,7 +4340,10 @@ namespace Nest
 	public partial class PostLicenseRequest : PlainRequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
 	{
 		protected IPostLicenseRequest Self => this;
-				///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
 	
@@ -4340,14 +4357,15 @@ namespace Nest
 	public partial class PreviewDatafeedRequest : PlainRequestBase<PreviewDatafeedRequestParameters>, IPreviewDatafeedRequest
 	{
 		protected IPreviewDatafeedRequest Self => this;
-		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_preview</summary>
-///<param name="datafeed_id">this parameter is required</param>
-		public PreviewDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{}
-		
+		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_preview</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public PreviewDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 
-		}
+		// values part of the url path
+		Id IPreviewDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
@@ -4360,16 +4378,17 @@ namespace Nest
 	public partial class PutAliasRequest : PlainRequestBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
 		protected IPutAliasRequest Self => this;
+		/// <summary>/{index}/_alias/{name}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="name">this parameter is required</param>
+		public PutAliasRequest(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name)){}
+
+		// values part of the url path
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/{index}/_alias/{name}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="name">this parameter is required</param>
-		public PutAliasRequest(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name))
-		{}
-		
 
-			///<summary>Explicit timestamp for the document</summary>
+		// Request parameters
+		///<summary>Explicit timestamp for the document</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -4385,14 +4404,15 @@ namespace Nest
 	public partial class PutDatafeedRequest : PlainRequestBase<PutDatafeedRequestParameters>, IPutDatafeedRequest
 	{
 		protected IPutDatafeedRequest Self => this;
-		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
-///<param name="datafeed_id">this parameter is required</param>
-		public PutDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{}
-		
+		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public PutDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 
-		}
+		// values part of the url path
+		Id IPutDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
@@ -4404,14 +4424,15 @@ namespace Nest
 	public partial class PutIndexTemplateRequest : PlainRequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
 	{
 		protected IPutIndexTemplateRequest Self => this;
-		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_template/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public PutIndexTemplateRequest(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		/// <summary>/_template/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public PutIndexTemplateRequest(Name name) : base(r=>r.Required("name", name)){}
 
-			///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		// values part of the url path
+		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -4431,14 +4452,15 @@ namespace Nest
 	public partial class PutJobRequest : PlainRequestBase<PutJobRequestParameters>, IPutJobRequest
 	{
 		protected IPutJobRequest Self => this;
-		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
-///<param name="job_id">this parameter is required</param>
-		public PutJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}</summary>
+		///<param name="job_id">this parameter is required</param>
+		public PutJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-		}
+		// values part of the url path
+		Id IPutJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
@@ -4451,22 +4473,21 @@ namespace Nest
 	public partial class PutMappingRequest<T> : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		protected IPutMappingRequest Self => this;
-		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
-		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/_mapping</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">this parameter is required</param>
-		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type))
-		{}
-		
+		/// <summary>/{index}/{type}/_mapping</summary>
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">this parameter is required</param>
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
 
 		/// <summary>/_mapping/{type}</summary>
-///<param name="type">this parameter is required</param>
-		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type))
-		{}
-		
+		///<param name="type">this parameter is required</param>
+		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type)){}
 
-			///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -4486,22 +4507,21 @@ namespace Nest
 	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		protected IPutMappingRequest Self => this;
-		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
-		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/_mapping</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">this parameter is required</param>
-		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type))
-		{}
-		
+		/// <summary>/{index}/{type}/_mapping</summary>
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">this parameter is required</param>
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
 
 		/// <summary>/_mapping/{type}</summary>
-///<param name="type">this parameter is required</param>
-		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type))
-		{}
-		
+		///<param name="type">this parameter is required</param>
+		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type)){}
 
-			///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -4528,14 +4548,15 @@ namespace Nest
 	public partial class PutPipelineRequest : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
 	{
 		protected IPutPipelineRequest Self => this;
-		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_ingest/pipeline/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public PutPipelineRequest(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		/// <summary>/_ingest/pipeline/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public PutPipelineRequest(Id id) : base(r=>r.Required("id", id)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -4551,14 +4572,15 @@ namespace Nest
 	public partial class PutRoleMappingRequest : PlainRequestBase<PutRoleMappingRequestParameters>, IPutRoleMappingRequest
 	{
 		protected IPutRoleMappingRequest Self => this;
-		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_xpack/security/role_mapping/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public PutRoleMappingRequest(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		/// <summary>/_xpack/security/role_mapping/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public PutRoleMappingRequest(Name name) : base(r=>r.Required("name", name)){}
 
-			///<summary>
+		// values part of the url path
+		Name IPutRoleMappingRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
@@ -4575,14 +4597,15 @@ namespace Nest
 	public partial class PutRoleRequest : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 	{
 		protected IPutRoleRequest Self => this;
-		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_xpack/security/role/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public PutRoleRequest(Name name) : base(r=>r.Required("name", name))
-		{}
-		
+		/// <summary>/_xpack/security/role/{name}</summary>
+		///<param name="name">this parameter is required</param>
+		public PutRoleRequest(Name name) : base(r=>r.Required("name", name)){}
 
-			///<summary>
+		// values part of the url path
+		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+
+		// Request parameters
+		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
@@ -4600,22 +4623,21 @@ namespace Nest
 	public partial class PutScriptRequest : PlainRequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
 		protected IPutScriptRequest Self => this;
-		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
-		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
-			/// <summary>/_scripts/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public PutScriptRequest(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		/// <summary>/_scripts/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public PutScriptRequest(Id id) : base(r=>r.Required("id", id)){}
 
 		/// <summary>/_scripts/{id}/{context}</summary>
-///<param name="id">this parameter is required</param>		
-///<param name="context">Optional, accepts null</param>
-		public PutScriptRequest(Id id, Name context) : base(r=>r.Required("id", id).Optional("context", context))
-		{}
-		
+		///<param name="id">this parameter is required</param>
+		///<param name="context">Optional, accepts null</param>
+		public PutScriptRequest(Id id, Name context) : base(r=>r.Required("id", id).Optional("context", context)){}
 
-			///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+		Name IPutScriptRequest.Context => Self.RouteValues.Get<Name>("context");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -4631,14 +4653,15 @@ namespace Nest
 	public partial class PutUserRequest : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 	{
 		protected IPutUserRequest Self => this;
-		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
-			/// <summary>/_xpack/security/user/{username}</summary>
-///<param name="username">this parameter is required</param>
-		public PutUserRequest(Name username) : base(r=>r.Required("username", username))
-		{}
-		
+		/// <summary>/_xpack/security/user/{username}</summary>
+		///<param name="username">this parameter is required</param>
+		public PutUserRequest(Name username) : base(r=>r.Required("username", username)){}
 
-			///<summary>
+		// values part of the url path
+		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
+
+		// Request parameters
+		///<summary>
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
@@ -4655,14 +4678,15 @@ namespace Nest
 	public partial class PutWatchRequest : PlainRequestBase<PutWatchRequestParameters>, IPutWatchRequest
 	{
 		protected IPutWatchRequest Self => this;
-		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_xpack/watcher/watch/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public PutWatchRequest(Id id) : base(r=>r.Required("id", id))
-		{}
-		
+		/// <summary>/_xpack/watcher/watch/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public PutWatchRequest(Id id) : base(r=>r.Required("id", id)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Id IPutWatchRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
@@ -4678,19 +4702,18 @@ namespace Nest
 	public partial class RecoveryStatusRequest : PlainRequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
 		protected IRecoveryStatusRequest Self => this;
-		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_recovery</summary>
-		public RecoveryStatusRequest() : base()
-		{}
-		
+		/// <summary>/_recovery</summary>
+		public RecoveryStatusRequest() : base(){}
 
 		/// <summary>/{index}/_recovery</summary>
-///<param name="index">Optional, accepts null</param>
-		public RecoveryStatusRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public RecoveryStatusRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Whether to display detailed information about shard recovery</summary>
+		// values part of the url path
+		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Whether to display detailed information about shard recovery</summary>
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
@@ -4706,19 +4729,18 @@ namespace Nest
 	public partial class RefreshRequest : PlainRequestBase<RefreshRequestParameters>, IRefreshRequest
 	{
 		protected IRefreshRequest Self => this;
-		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_refresh</summary>
-		public RefreshRequest() : base()
-		{}
-		
+		/// <summary>/_refresh</summary>
+		public RefreshRequest() : base(){}
 
 		/// <summary>/{index}/_refresh</summary>
-///<param name="index">Optional, accepts null</param>
-		public RefreshRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public RefreshRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -4738,7 +4760,10 @@ namespace Nest
 	public partial class ReindexOnServerRequest : PlainRequestBase<ReindexOnServerRequestParameters>, IReindexOnServerRequest
 	{
 		protected IReindexOnServerRequest Self => this;
-				///<summary>Should the effected indexes be refreshed?</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -4766,14 +4791,15 @@ namespace Nest
 	public partial class ReindexRethrottleRequest : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
 	{
 		protected IReindexRethrottleRequest Self => this;
-		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
-			/// <summary>/_reindex/{task_id}/_rethrottle</summary>
-///<param name="task_id">Optional, accepts null</param>
-		public ReindexRethrottleRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id))
-		{}
-		
+		/// <summary>/_reindex/{task_id}/_rethrottle</summary>
+		///<param name="task_id">Optional, accepts null</param>
+		public ReindexRethrottleRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
 
-			///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
+		// values part of the url path
+		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+
+		// Request parameters
+		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
 	
@@ -4786,7 +4812,10 @@ namespace Nest
 	public partial class RemoteInfoRequest : PlainRequestBase<RemoteInfoRequestParameters>, IRemoteInfoRequest
 	{
 		protected IRemoteInfoRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters>
@@ -4798,19 +4827,18 @@ namespace Nest
 	public partial class RenderSearchTemplateRequest : PlainRequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
 	{
 		protected IRenderSearchTemplateRequest Self => this;
-		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_render/template</summary>
-		public RenderSearchTemplateRequest() : base()
-		{}
-		
+		/// <summary>/_render/template</summary>
+		public RenderSearchTemplateRequest() : base(){}
 
 		/// <summary>/_render/template/{id}</summary>
-///<param name="id">Optional, accepts null</param>
-		public RenderSearchTemplateRequest(Id id) : base(r=>r.Optional("id", id))
-		{}
-		
+		///<param name="id">Optional, accepts null</param>
+		public RenderSearchTemplateRequest(Id id) : base(r=>r.Optional("id", id)){}
 
-		}
+		// values part of the url path
+		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRestartWatcherRequest : IRequest<RestartWatcherRequestParameters>
@@ -4821,7 +4849,10 @@ namespace Nest
 	public partial class RestartWatcherRequest : PlainRequestBase<RestartWatcherRequestParameters>, IRestartWatcherRequest
 	{
 		protected IRestartWatcherRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters>
@@ -4834,16 +4865,17 @@ namespace Nest
 	public partial class RestoreRequest : PlainRequestBase<RestoreRequestParameters>, IRestoreRequest
 	{
 		protected IRestoreRequest Self => this;
+		/// <summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
+		///<param name="repository">this parameter is required</param>
+		///<param name="snapshot">this parameter is required</param>
+		public RestoreRequest(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
+		// values part of the url path
 		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IRestoreRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
-			/// <summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
-///<param name="repository">this parameter is required</param>		
-///<param name="snapshot">this parameter is required</param>
-		public RestoreRequest(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
-		{}
-		
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -4860,16 +4892,17 @@ namespace Nest
 	public partial class RevertModelSnapshotRequest : PlainRequestBase<RevertModelSnapshotRequestParameters>, IRevertModelSnapshotRequest
 	{
 		protected IRevertModelSnapshotRequest Self => this;
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">this parameter is required</param>
+		public RevertModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+
+		// values part of the url path
 		Id IRevertModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IRevertModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_revert</summary>
-///<param name="job_id">this parameter is required</param>		
-///<param name="snapshot_id">this parameter is required</param>
-		public RevertModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
-		{}
-		
 
-		}
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters>
@@ -4882,22 +4915,21 @@ namespace Nest
 	public partial class RolloverIndexRequest : PlainRequestBase<RolloverIndexRequestParameters>, IRolloverIndexRequest
 	{
 		protected IRolloverIndexRequest Self => this;
-		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
-		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
-			/// <summary>/{alias}/_rollover</summary>
-///<param name="alias">this parameter is required</param>
-		public RolloverIndexRequest(Name alias) : base(r=>r.Required("alias", alias))
-		{}
-		
+		/// <summary>/{alias}/_rollover</summary>
+		///<param name="alias">this parameter is required</param>
+		public RolloverIndexRequest(Name alias) : base(r=>r.Required("alias", alias)){}
 
 		/// <summary>/{alias}/_rollover/{new_index}</summary>
-///<param name="alias">this parameter is required</param>		
-///<param name="new_index">Optional, accepts null</param>
-		public RolloverIndexRequest(Name alias, IndexName new_index) : base(r=>r.Required("alias", alias).Optional("new_index", new_index))
-		{}
-		
+		///<param name="alias">this parameter is required</param>
+		///<param name="new_index">Optional, accepts null</param>
+		public RolloverIndexRequest(Name alias, IndexName new_index) : base(r=>r.Required("alias", alias).Optional("new_index", new_index)){}
 
-			///<summary>Explicit operation timeout</summary>
+		// values part of the url path
+		Name IRolloverIndexRequest.Alias => Self.RouteValues.Get<Name>("alias");
+		IndexName IRolloverIndexRequest.NewIndex => Self.RouteValues.Get<IndexName>("new_index");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
@@ -4916,7 +4948,10 @@ namespace Nest
 	public partial class RootNodeInfoRequest : PlainRequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
 	{
 		protected IRootNodeInfoRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IScrollRequest : IRequest<ScrollRequestParameters>
@@ -4927,7 +4962,10 @@ namespace Nest
 	public partial class ScrollRequest : PlainRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		protected IScrollRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
@@ -4942,27 +4980,24 @@ namespace Nest
 	public partial class SearchRequest<T> : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
 		protected ISearchRequest Self => this;
-		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			///<summary>/_search<para><typeparamref name="T"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>
-		public SearchRequest() : this(typeof(T), typeof(T))
-		{}
-		
+		///<summary>/_search<para><typeparamref name="T"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>
+		public SearchRequest() : this(typeof(T), typeof(T)){}
 
 		/// <summary>/{index}/_search</summary>
-///<param name="index">Optional, accepts null</param>
-		public SearchRequest(Indices index) : this(index, typeof(T))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public SearchRequest(Indices index) : this(index, typeof(T)){}
 
 		/// <summary>/{index}/{type}/_search</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public SearchRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public SearchRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>The analyzer to use for the query string</summary>
+		// values part of the url path
+		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -5034,27 +5069,24 @@ namespace Nest
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
 		protected ISearchRequest Self => this;
-		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search</summary>
-		public SearchRequest()
-		{}
-		
+		/// <summary>/_search</summary>
+		public SearchRequest(){}
 
 		/// <summary>/{index}/_search</summary>
-///<param name="index">Optional, accepts null</param>
-		public SearchRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public SearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_search</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public SearchRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public SearchRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>The analyzer to use for the query string</summary>
+		// values part of the url path
+		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -5133,19 +5165,18 @@ namespace Nest
 	public partial class SearchShardsRequest<T> : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		protected ISearchShardsRequest Self => this;
-		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_search_shards</summary>
-		public SearchShardsRequest() : base()
-		{}
-		
+		/// <summary>/_search_shards</summary>
+		public SearchShardsRequest() : base(){}
 
 		/// <summary>/{index}/_search_shards</summary>
-///<param name="index">Optional, accepts null</param>
-		public SearchShardsRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public SearchShardsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		// values part of the url path
+		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
@@ -5172,19 +5203,18 @@ namespace Nest
 	public partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		protected ISearchShardsRequest Self => this;
-		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_search_shards</summary>
-		public SearchShardsRequest() : base()
-		{}
-		
+		/// <summary>/_search_shards</summary>
+		public SearchShardsRequest() : base(){}
 
 		/// <summary>/{index}/_search_shards</summary>
-///<param name="index">Optional, accepts null</param>
-		public SearchShardsRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public SearchShardsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		// values part of the url path
+		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
@@ -5219,27 +5249,24 @@ namespace Nest
 	public partial class SearchTemplateRequest : PlainRequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
 		protected ISearchTemplateRequest Self => this;
-		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search/template</summary>
-		public SearchTemplateRequest()
-		{}
-		
+		/// <summary>/_search/template</summary>
+		public SearchTemplateRequest(){}
 
 		/// <summary>/{index}/_search/template</summary>
-///<param name="index">Optional, accepts null</param>
-		public SearchTemplateRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public SearchTemplateRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_search/template</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public SearchTemplateRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public SearchTemplateRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -5281,19 +5308,18 @@ namespace Nest
 	public partial class SegmentsRequest : PlainRequestBase<SegmentsRequestParameters>, ISegmentsRequest
 	{
 		protected ISegmentsRequest Self => this;
-		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_segments</summary>
-		public SegmentsRequest() : base()
-		{}
-		
+		/// <summary>/_segments</summary>
+		public SegmentsRequest() : base(){}
 
 		/// <summary>/{index}/_segments</summary>
-///<param name="index">Optional, accepts null</param>
-		public SegmentsRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public SegmentsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -5319,16 +5345,17 @@ namespace Nest
 	public partial class ShrinkIndexRequest : PlainRequestBase<ShrinkIndexRequestParameters>, IShrinkIndexRequest
 	{
 		protected IShrinkIndexRequest Self => this;
+		/// <summary>/{index}/_shrink/{target}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="target">this parameter is required</param>
+		public ShrinkIndexRequest(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
+
+		// values part of the url path
 		IndexName IShrinkIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
-			/// <summary>/{index}/_shrink/{target}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="target">this parameter is required</param>
-		public ShrinkIndexRequest(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target))
-		{}
-		
 
-			///<summary>Explicit operation timeout</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
@@ -5346,19 +5373,18 @@ namespace Nest
 	public partial class SimulatePipelineRequest : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
 	{
 		protected ISimulatePipelineRequest Self => this;
-		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_ingest/pipeline/_simulate</summary>
-		public SimulatePipelineRequest() : base()
-		{}
-		
+		/// <summary>/_ingest/pipeline/_simulate</summary>
+		public SimulatePipelineRequest() : base(){}
 
 		/// <summary>/_ingest/pipeline/{id}/_simulate</summary>
-///<param name="id">Optional, accepts null</param>
-		public SimulatePipelineRequest(Id id) : base(r=>r.Optional("id", id))
-		{}
-		
+		///<param name="id">Optional, accepts null</param>
+		public SimulatePipelineRequest(Id id) : base(r=>r.Optional("id", id)){}
 
-			///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
+		// values part of the url path
+		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 	
@@ -5373,16 +5399,17 @@ namespace Nest
 	public partial class SnapshotRequest : PlainRequestBase<SnapshotRequestParameters>, ISnapshotRequest
 	{
 		protected ISnapshotRequest Self => this;
+		/// <summary>/_snapshot/{repository}/{snapshot}</summary>
+		///<param name="repository">this parameter is required</param>
+		///<param name="snapshot">this parameter is required</param>
+		public SnapshotRequest(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
+		// values part of the url path
 		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name ISnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
-			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
-///<param name="repository">this parameter is required</param>		
-///<param name="snapshot">this parameter is required</param>
-		public SnapshotRequest(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot))
-		{}
-		
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -5399,27 +5426,24 @@ namespace Nest
 	public partial class SnapshotStatusRequest : PlainRequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 	{
 		protected ISnapshotStatusRequest Self => this;
-		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
-		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
-			/// <summary>/_snapshot/_status</summary>
-		public SnapshotStatusRequest() : base()
-		{}
-		
+		/// <summary>/_snapshot/_status</summary>
+		public SnapshotStatusRequest() : base(){}
 
 		/// <summary>/_snapshot/{repository}/_status</summary>
-///<param name="repository">Optional, accepts null</param>
-		public SnapshotStatusRequest(Name repository) : base(r=>r.Optional("repository", repository))
-		{}
-		
+		///<param name="repository">Optional, accepts null</param>
+		public SnapshotStatusRequest(Name repository) : base(r=>r.Optional("repository", repository)){}
 
 		/// <summary>/_snapshot/{repository}/{snapshot}/_status</summary>
-///<param name="repository">Optional, accepts null</param>		
-///<param name="snapshot">Optional, accepts null</param>
-		public SnapshotStatusRequest(Name repository, Names snapshot) : base(r=>r.Optional("repository", repository).Optional("snapshot", snapshot))
-		{}
-		
+		///<param name="repository">Optional, accepts null</param>
+		///<param name="snapshot">Optional, accepts null</param>
+		public SnapshotStatusRequest(Name repository, Names snapshot) : base(r=>r.Optional("repository", repository).Optional("snapshot", snapshot)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -5437,25 +5461,26 @@ namespace Nest
 	public partial class SourceExistsRequest<T> : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
-		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName ISourceExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ISourceExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}/_source</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
+		/// <summary>/{index}/{type}/{id}/_source</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
 		public SourceExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/{id}/_source</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceExistsRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(T document);
 
-			///<summary>The ID of the parent document</summary>
+		// values part of the url path
+		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ISourceExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ISourceExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -5488,18 +5513,20 @@ namespace Nest
 	public partial class SourceExistsRequest : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
 	{
 		protected ISourceExistsRequest Self => this;
+		/// <summary>/{index}/{type}/{id}/_source</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public SourceExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+
+		// values part of the url path
 		Id ISourceExistsRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName ISourceExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ISourceExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}/_source</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
-		public SourceExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
-		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-			///<summary>The ID of the parent document</summary>
+		// Request parameters
+		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -5541,25 +5568,26 @@ namespace Nest
 	public partial class SourceRequest<T> : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
 		protected ISourceRequest Self => this;
-		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}/_source</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
+		/// <summary>/{index}/{type}/{id}/_source</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
 		public SourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/{id}/_source</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="T"/> from which the index, type and id can be inferred</param>
 		public SourceRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(T document);
 
-			///<summary>The ID of the parent document</summary>
+		// values part of the url path
+		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -5592,18 +5620,20 @@ namespace Nest
 	public partial class SourceRequest : PlainRequestBase<SourceRequestParameters>, ISourceRequest
 	{
 		protected ISourceRequest Self => this;
+		/// <summary>/{index}/{type}/{id}/_source</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
+		public SourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
+		 => Q("routing", new Routing(() => AutoRouteDocument()));
+
+		// values part of the url path
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}/_source</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
-		public SourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
-		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
-			///<summary>The ID of the parent document</summary>
+		// Request parameters
+		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -5643,14 +5673,15 @@ namespace Nest
 	public partial class StartDatafeedRequest : PlainRequestBase<StartDatafeedRequestParameters>, IStartDatafeedRequest
 	{
 		protected IStartDatafeedRequest Self => this;
-		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_start</summary>
-///<param name="datafeed_id">this parameter is required</param>
-		public StartDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{}
-		
+		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_start</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public StartDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 
-		}
+		// values part of the url path
+		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters>
@@ -5661,7 +5692,10 @@ namespace Nest
 	public partial class StartWatcherRequest : PlainRequestBase<StartWatcherRequestParameters>, IStartWatcherRequest
 	{
 		protected IStartWatcherRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters>
@@ -5673,14 +5707,15 @@ namespace Nest
 	public partial class StopDatafeedRequest : PlainRequestBase<StopDatafeedRequestParameters>, IStopDatafeedRequest
 	{
 		protected IStopDatafeedRequest Self => this;
-		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stop</summary>
-///<param name="datafeed_id">this parameter is required</param>
-		public StopDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{}
-		
+		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_stop</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public StopDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 
-		}
+		// values part of the url path
+		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
@@ -5691,7 +5726,10 @@ namespace Nest
 	public partial class StopWatcherRequest : PlainRequestBase<StopWatcherRequestParameters>, IStopWatcherRequest
 	{
 		protected IStopWatcherRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters>
@@ -5703,19 +5741,18 @@ namespace Nest
 	public partial class SyncedFlushRequest : PlainRequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 	{
 		protected ISyncedFlushRequest Self => this;
-		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_flush/synced</summary>
-		public SyncedFlushRequest() : base()
-		{}
-		
+		/// <summary>/_flush/synced</summary>
+		public SyncedFlushRequest() : base(){}
 
 		/// <summary>/{index}/_flush/synced</summary>
-///<param name="index">Optional, accepts null</param>
-		public SyncedFlushRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public SyncedFlushRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -5738,32 +5775,32 @@ namespace Nest
 	public partial class TermVectorsRequest<TDocument> : PlainRequestBase<TermVectorsRequestParameters>, ITermVectorsRequest<TDocument>
 	{
 		protected ITermVectorsRequest<TDocument> Self => this;
-		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ITermVectorsRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
-		Id ITermVectorsRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/{index}/{type}/_termvectors</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>
+		/// <summary>/{index}/{type}/_termvectors</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
 		public TermVectorsRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/{id}/_termvectors</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">Optional, accepts null</param>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">Optional, accepts null</param>
 		public TermVectorsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/_termvectors</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public TermVectorsRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
+		// values part of the url path
+		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ITermVectorsRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ITermVectorsRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
@@ -5808,16 +5845,17 @@ namespace Nest
 	public partial class TypeExistsRequest : PlainRequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
 	{
 		protected ITypeExistsRequest Self => this;
+		/// <summary>/{index}/_mapping/{type}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		public TypeExistsRequest(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type)){}
+
+		// values part of the url path
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_mapping/{type}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>
-		public TypeExistsRequest(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type))
-		{}
-		
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -5841,22 +5879,21 @@ namespace Nest
 	public partial class UpdateByQueryRequest<T> : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
 		protected IUpdateByQueryRequest Self => this;
-		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_update_by_query</summary>
-///<param name="index">this parameter is required</param>
-		public UpdateByQueryRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}/_update_by_query</summary>
+		///<param name="index">this parameter is required</param>
+		public UpdateByQueryRequest(Indices index) : base(r=>r.Required("index", index)){}
 
 		/// <summary>/{index}/{type}/_update_by_query</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">Optional, accepts null</param>
-		public UpdateByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
+		public UpdateByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
 
-			///<summary>The analyzer to use for the query string</summary>
+		// values part of the url path
+		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -5943,22 +5980,21 @@ namespace Nest
 	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
 		protected IUpdateByQueryRequest Self => this;
-		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_update_by_query</summary>
-///<param name="index">this parameter is required</param>
-		public UpdateByQueryRequest(Indices index) : base(r=>r.Required("index", index))
-		{}
-		
+		/// <summary>/{index}/_update_by_query</summary>
+		///<param name="index">this parameter is required</param>
+		public UpdateByQueryRequest(Indices index) : base(r=>r.Required("index", index)){}
 
 		/// <summary>/{index}/{type}/_update_by_query</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">Optional, accepts null</param>
-		public UpdateByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
+		public UpdateByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
 
-			///<summary>The analyzer to use for the query string</summary>
+		// values part of the url path
+		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -6052,14 +6088,15 @@ namespace Nest
 	public partial class UpdateDatafeedRequest : PlainRequestBase<UpdateDatafeedRequestParameters>, IUpdateDatafeedRequest
 	{
 		protected IUpdateDatafeedRequest Self => this;
-		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
-			/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_update</summary>
-///<param name="datafeed_id">this parameter is required</param>
-		public UpdateDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id))
-		{}
-		
+		/// <summary>/_xpack/ml/datafeeds/{datafeed_id}/_update</summary>
+		///<param name="datafeed_id">this parameter is required</param>
+		public UpdateDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 
-		}
+		// values part of the url path
+		Id IUpdateDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters>
@@ -6071,19 +6108,18 @@ namespace Nest
 	public partial class UpdateIndexSettingsRequest : PlainRequestBase<UpdateIndexSettingsRequestParameters>, IUpdateIndexSettingsRequest
 	{
 		protected IUpdateIndexSettingsRequest Self => this;
-		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_settings</summary>
-		public UpdateIndexSettingsRequest() : base()
-		{}
-		
+		/// <summary>/_settings</summary>
+		public UpdateIndexSettingsRequest() : base(){}
 
 		/// <summary>/{index}/_settings</summary>
-///<param name="index">Optional, accepts null</param>
-		public UpdateIndexSettingsRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public UpdateIndexSettingsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Specify timeout for connection to master</summary>
+		// values part of the url path
+		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
 		public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
@@ -6110,14 +6146,15 @@ namespace Nest
 	public partial class UpdateJobRequest : PlainRequestBase<UpdateJobRequestParameters>, IUpdateJobRequest
 	{
 		protected IUpdateJobRequest Self => this;
-		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_update</summary>
-///<param name="job_id">this parameter is required</param>
-		public UpdateJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id))
-		{}
-		
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_update</summary>
+		///<param name="job_id">this parameter is required</param>
+		public UpdateJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
-		}
+		// values part of the url path
+		Id IUpdateJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnapshotRequestParameters>
@@ -6130,16 +6167,17 @@ namespace Nest
 	public partial class UpdateModelSnapshotRequest : PlainRequestBase<UpdateModelSnapshotRequestParameters>, IUpdateModelSnapshotRequest
 	{
 		protected IUpdateModelSnapshotRequest Self => this;
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
+		///<param name="job_id">this parameter is required</param>
+		///<param name="snapshot_id">this parameter is required</param>
+		public UpdateModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id)){}
+
+		// values part of the url path
 		Id IUpdateModelSnapshotRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IUpdateModelSnapshotRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
-			/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update</summary>
-///<param name="job_id">this parameter is required</param>		
-///<param name="snapshot_id">this parameter is required</param>
-		public UpdateModelSnapshotRequest(Id job_id, Id snapshot_id) : base(r=>r.Required("job_id", job_id).Required("snapshot_id", snapshot_id))
-		{}
-		
 
-		}
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IRequest<UpdateRequestParameters>
@@ -6153,25 +6191,26 @@ namespace Nest
 	public partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
 	{
 		protected IUpdateRequest<TDocument, TPartialDocument> Self => this;
-		Id IUpdateRequest<TDocument, TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IUpdateRequest<TDocument, TPartialDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IUpdateRequest<TDocument, TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
-			/// <summary>/{index}/{type}/{id}/_update</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="type">this parameter is required</param>		
-///<param name="id">this parameter is required</param>
+		/// <summary>/{index}/{type}/{id}/_update</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">this parameter is required</param>
+		///<param name="id">this parameter is required</param>
 		public UpdateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id))
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
-		
 
 		/// <summary>/{index}/{type}/{id}/_update</summary>
-		
-///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
+		///<param name="document"> describes an elasticsearch document of type <typeparamref name="TDocument"/> from which the index, type and id can be inferred</param>
 		public UpdateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id))
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>
+		// values part of the url path
+		Id IUpdateRequest<TDocument, TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IUpdateRequest<TDocument, TPartialDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IUpdateRequest<TDocument, TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard
 		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
 		/// shard (number of replicas + 1)
@@ -6222,19 +6261,18 @@ namespace Nest
 	public partial class UpgradeRequest : PlainRequestBase<UpgradeRequestParameters>, IUpgradeRequest
 	{
 		protected IUpgradeRequest Self => this;
-		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_upgrade</summary>
-		public UpgradeRequest() : base()
-		{}
-		
+		/// <summary>/_upgrade</summary>
+		public UpgradeRequest() : base(){}
 
 		/// <summary>/{index}/_upgrade</summary>
-///<param name="index">Optional, accepts null</param>
-		public UpgradeRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public UpgradeRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>
+		// values part of the url path
+		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
 		/// been specified)
 		///</summary>
@@ -6259,19 +6297,18 @@ namespace Nest
 	public partial class UpgradeStatusRequest : PlainRequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
 	{
 		protected IUpgradeStatusRequest Self => this;
-		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_upgrade</summary>
-		public UpgradeStatusRequest() : base()
-		{}
-		
+		/// <summary>/_upgrade</summary>
+		public UpgradeStatusRequest() : base(){}
 
 		/// <summary>/{index}/_upgrade</summary>
-///<param name="index">Optional, accepts null</param>
-		public UpgradeStatusRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public UpgradeStatusRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		// values part of the url path
+		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
 		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
@@ -6291,7 +6328,10 @@ namespace Nest
 	public partial class ValidateDetectorRequest : PlainRequestBase<ValidateDetectorRequestParameters>, IValidateDetectorRequest
 	{
 		protected IValidateDetectorRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IValidateJobRequest : IRequest<ValidateJobRequestParameters>
@@ -6302,7 +6342,10 @@ namespace Nest
 	public partial class ValidateJobRequest : PlainRequestBase<ValidateJobRequestParameters>, IValidateJobRequest
 	{
 		protected IValidateJobRequest Self => this;
-			}
+		// values part of the url path
+
+		// Request parameters
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
@@ -6315,27 +6358,24 @@ namespace Nest
 	public partial class ValidateQueryRequest<T> : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
 		protected IValidateQueryRequest Self => this;
-		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			///<summary>/_validate/query<para><typeparamref name="T"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>
-		public ValidateQueryRequest() : this(typeof(T), typeof(T))
-		{}
-		
+		///<summary>/_validate/query<para><typeparamref name="T"/> describes an elasticsearch document type from which the index, type and id can be inferred</para></summary>
+		public ValidateQueryRequest() : this(typeof(T), typeof(T)){}
 
 		/// <summary>/{index}/_validate/query</summary>
-///<param name="index">Optional, accepts null</param>
-		public ValidateQueryRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public ValidateQueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_validate/query</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public ValidateQueryRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public ValidateQueryRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>Return detailed information about the error</summary>
+		// values part of the url path
+		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>Return detailed information about the error</summary>
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -6369,27 +6409,24 @@ namespace Nest
 	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
 		protected IValidateQueryRequest Self => this;
-		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_validate/query</summary>
-		public ValidateQueryRequest()
-		{}
-		
+		/// <summary>/_validate/query</summary>
+		public ValidateQueryRequest(){}
 
 		/// <summary>/{index}/_validate/query</summary>
-///<param name="index">Optional, accepts null</param>
-		public ValidateQueryRequest(Indices index) : base(r=>r.Optional("index", index))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		public ValidateQueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
 		/// <summary>/{index}/{type}/_validate/query</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public ValidateQueryRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type))
-		{}
-		
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public ValidateQueryRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 
-			///<summary>Return detailed information about the error</summary>
+		// values part of the url path
+		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		///<summary>Return detailed information about the error</summary>
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -6430,14 +6467,15 @@ namespace Nest
 	public partial class VerifyRepositoryRequest : PlainRequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
 	{
 		protected IVerifyRepositoryRequest Self => this;
-		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
-			/// <summary>/_snapshot/{repository}/_verify</summary>
-///<param name="repository">this parameter is required</param>
-		public VerifyRepositoryRequest(Name repository) : base(r=>r.Required("repository", repository))
-		{}
-		
+		/// <summary>/_snapshot/{repository}/_verify</summary>
+		///<param name="repository">this parameter is required</param>
+		public VerifyRepositoryRequest(Name repository) : base(r=>r.Required("repository", repository)){}
 
-			///<summary>Explicit operation timeout for connection to master node</summary>
+		// values part of the url path
+		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+
+		// Request parameters
+		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
@@ -6453,19 +6491,18 @@ namespace Nest
 	public partial class WatcherStatsRequest : PlainRequestBase<WatcherStatsRequestParameters>, IWatcherStatsRequest
 	{
 		protected IWatcherStatsRequest Self => this;
-		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");
-			/// <summary>/_xpack/watcher/stats</summary>
-		public WatcherStatsRequest() : base()
-		{}
-		
+		/// <summary>/_xpack/watcher/stats</summary>
+		public WatcherStatsRequest() : base(){}
 
 		/// <summary>/_xpack/watcher/stats/{watcher_stats_metric}</summary>
-///<param name="watcher_stats_metric">Optional, accepts null</param>
-		public WatcherStatsRequest(WatcherStatsMetric watcher_stats_metric) : base(r=>r.Optional("watcher_stats_metric", (Metrics)watcher_stats_metric))
-		{}
-		
+		///<param name="watcher_stats_metric">Optional, accepts null</param>
+		public WatcherStatsRequest(WatcherStatsMetric watcher_stats_metric) : base(r=>r.Optional("watcher_stats_metric", (Metrics)watcher_stats_metric)){}
 
-			///<summary>Emits stack traces of currently running watches</summary>
+		// values part of the url path
+		Metrics IWatcherStatsRequest.WatcherStatsMetric => Self.RouteValues.Get<Metrics>("watcher_stats_metric");
+
+		// Request parameters
+		///<summary>Emits stack traces of currently running watches</summary>
 		public bool? EmitStacktraces { get => Q<bool?>("emit_stacktraces"); set => Q("emit_stacktraces", value); }
 	}
 	
@@ -6478,7 +6515,10 @@ namespace Nest
 	public partial class XPackInfoRequest : PlainRequestBase<XPackInfoRequestParameters>, IXPackInfoRequest
 	{
 		protected IXPackInfoRequest Self => this;
-				///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
 		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
@@ -6493,7 +6533,10 @@ namespace Nest
 	public partial class XPackUsageRequest : PlainRequestBase<XPackUsageRequestParameters>, IXPackUsageRequest
 	{
 		protected IXPackUsageRequest Self => this;
-				///<summary>Specify timeout for watch write operation</summary>
+		// values part of the url path
+
+		// Request parameters
+		///<summary>Specify timeout for watch write operation</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 	}
 }
