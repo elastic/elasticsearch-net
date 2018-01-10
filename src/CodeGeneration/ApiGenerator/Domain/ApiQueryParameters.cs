@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using CsQuery.ExtensionMethods.Internal;
 
 namespace ApiGenerator.Domain
@@ -134,9 +135,44 @@ namespace ApiGenerator.Domain
 			}
 		}
 
-		public Func<string, string, string, string, string> InitializerGenerator { get; set; } =
-			(fieldType, mm, original, setter) =>
-				$"public {NullableCsharpType(fieldType)} {mm} {{ get => Q<{NullableCsharpType(fieldType)}>(\"{original}\"); set => Q(\"{original}\", {setter}); }}";
+		public static string[] WrapDocumentation(string documentation)
+		{
+			const int max = 140;
+			var lines = documentation.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+			var charCount = 0;
+			return lines.GroupBy(Wrap).Select(l => string.Join(" ", l.ToArray())).ToArray();
+			int Wrap(string w)
+			{
+				var increase = (charCount % max + w.Length + 1 >= max ? max - (charCount % max) : 0);
+				return (charCount += increase + w.Length + 1) / max;
+			}
+		}
+
+		public string InitializerGenerator(string type, string name, string key, string setter, params string[] doc)
+		{
+			var components = new List<string>();
+			doc = doc?.SelectMany(WrapDocumentation).ToArray();
+			if (doc?.Length > 0)
+			{
+				if (doc.Length == 1) A($"///<summary>{doc[0]}</summary>");
+				else
+				{
+					A("///<summary>");
+					foreach (var d in doc) A($"/// {d}");
+					A("///</summary>");
+				}
+			}
+			if (!string.IsNullOrWhiteSpace(this.Obsolete)) A($"[Obsolete(\"Scheduled to be removed in 7.0, {this.Obsolete}\")]");
+
+			A(InitializerPropertyGenerator(type, name, key, setter));
+			return string.Join("\r\n\t\t", components);
+
+			void A(string s) => components.Add(s);
+		}
+
+
+		public string InitializerPropertyGenerator(string type, string name, string key, string setter)  =>
+			$"public {NullableCsharpType(type)} {name} {{ get => Q<{NullableCsharpType(type)}>(\"{key}\"); set => Q(\"{key}\", {setter}); }}";
 
 		public Func<string, string, string, string, string> FluentGenerator { get; set; }
 	}

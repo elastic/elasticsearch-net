@@ -33,7 +33,7 @@ namespace Nest
 	{
 	@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
 	{
-		<text>@Raw(common.InitializerGenerator.Invoke(common.TypeHighLevel, common.ClsName, common.QueryStringKey, "value"))</text>
+		<text>@Raw(common.InitializerGenerator(common.TypeHighLevel, common.ClsName, common.QueryStringKey, "value", common.DescriptionHighLevel.ToArray()))</text>
 	}
 	}
 	@foreach (CsharpMethod method in methods)
@@ -88,20 +88,8 @@ namespace Nest
 		{
 			continue;
 		}
-		var desc = param.DescriptionHighLevel.ToList();
-		<text>@if (desc.Count == 1) {
-<text>///<summary>@Raw(desc.First())</summary></text>
-		}
-		else 
-		{ <text>///<summary>
-		@Raw(string.Join("\r\n\t\t", desc.Select(d=> "/// " + d)))
-		///</summary></text>
-		}</text><text>@if(!string.IsNullOrWhiteSpace(param.Obsolete))
-		{
-		<text>[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]</text>
-		}
-		@Raw(param.InitializerGenerator.Invoke(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel))
-		</text>
+		var doc = param.DescriptionHighLevel.ToArray();
+		<text>@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))</text>
 	}
 	@if (method.RequestTypeUnmapped)
 	{<text>	//TODO THIS METHOD IS UNMAPPED!

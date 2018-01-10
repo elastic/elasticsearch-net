@@ -20,7 +20,7 @@ namespace ApiGenerator.Overrides
 			{"docvalue_fields", "doc_value_fields"},
 			{"q", "query_on_query_string"},
 			//make cat parameters more descriptive
-			{"h", "columns"},
+			{"h", "Headers"},
 			{"s", "sort_by_columns"},
 			{"v", "verbose"},
 			{"ts", "include_timestamp"},

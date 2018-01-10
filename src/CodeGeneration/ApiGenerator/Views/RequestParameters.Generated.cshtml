@@ -16,24 +16,14 @@ namespace Elasticsearch.Net
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
 	{
 	<text>
-	///<summary>Request parameters descriptor for @method.FullName
-	///<pre>
-	///@method.Documentation
-	///</pre>
-	///</summary>
+	///<summary>Request options for @method.FullName<pre>@method.Documentation</pre></summary>
 	public class @method.QueryStringParamName : RequestParameters<@method.QueryStringParamName> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.@method.HttpMethod;
-	  @foreach (var param in method.Url.Params.Values)
-      {
-          var fieldType = param.TypeLowLevel;
-		<text>///<summary>@param.Description</summary>
-		@if (!string.IsNullOrWhiteSpace(param.Obsolete))
-		{<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
-</text>}
-		@Raw(param.InitializerGenerator.Invoke(fieldType, param.ClsName, param.QueryStringKey, param.SetterLowLevel))
-		</text>
-	  }
+		@foreach (var param in method.Url.Params.Values)
+		{
+		<text>@Raw(param.InitializerGenerator(param.TypeLowLevel, param.ClsName, param.QueryStringKey, param.SetterLowLevel, param.Description))</text>
+		}
 	}</text>
 	}
 }

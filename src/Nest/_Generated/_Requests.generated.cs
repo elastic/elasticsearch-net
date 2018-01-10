@@ -15,9 +15,13 @@ namespace Nest
 
 	public abstract partial class PlainRequestBase<TParameters>
 	{
+		///<summary>Pretty format the returned JSON response.</summary>
 		public bool? Pretty { get => Q<bool?>("pretty"); set => Q("pretty", value); }
+		///<summary>Return human readable values for statistics.</summary>
 		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
+		///<summary>Include the stack trace of returned errors.</summary>
 		public bool? ErrorTrace { get => Q<bool?>("error_trace"); set => Q("error_trace", value); }
+		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public string[] FilterPath { get => Q<string[]>("filter_path"); set => Q("filter_path", value); }
 	}
 	
@@ -49,7 +53,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -71,7 +74,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -102,16 +104,15 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -138,10 +139,8 @@ namespace Nest
 
 			///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public bool? PreferLocal { get => Q<bool?>("prefer_local"); set => Q("prefer_local", value); }
-		
 		///<summary>Format of the output</summary>
 		public Format Format { get => Q<Format>("format"); set => Q("format", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -166,10 +165,8 @@ namespace Nest
 		protected IBulkAliasRequest Self => this;
 				///<summary>Request timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -203,39 +200,38 @@ namespace Nest
 		{}
 		
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+			///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>
+		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -260,18 +256,17 @@ namespace Nest
 		{}
 		
 
-			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
+			///<summary>
+		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
+		/// connecting to, leave empty to get information from all nodes
+		///</summary>
 		public string[] Nodes { get => Q<string[]>("nodes"); set => Q("nodes", value); }
-		
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
-		
 		///<summary>Cancel tasks with specified parent node.</summary>
 		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
-		
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -298,25 +293,18 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -343,28 +331,20 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -391,25 +371,18 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -436,28 +409,20 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -471,28 +436,20 @@ namespace Nest
 		protected ICatHealthRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Set to false to disable timestamping</summary>
 		public bool? IncludeTimestamp { get => Q<bool?>("ts"); set => Q("ts", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -506,10 +463,8 @@ namespace Nest
 		protected ICatHelpRequest Self => this;
 				///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -536,34 +491,24 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
 		public Health Health { get => Q<Health>("health"); set => Q("health", value); }
-		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Set to true to return stats only for primary shards</summary>
 		public bool? Pri { get => Q<bool?>("pri"); set => Q("pri", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -577,25 +522,18 @@ namespace Nest
 		protected ICatMasterRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -609,25 +547,18 @@ namespace Nest
 		protected ICatNodeAttributesRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -641,28 +572,20 @@ namespace Nest
 		protected ICatNodesRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
 		public bool? FullId { get => Q<bool?>("full_id"); set => Q("full_id", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -676,25 +599,18 @@ namespace Nest
 		protected ICatPendingTasksRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -708,25 +624,18 @@ namespace Nest
 		protected ICatPluginsRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -753,25 +662,18 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -785,25 +687,18 @@ namespace Nest
 		protected ICatRepositoriesRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -830,22 +725,16 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -872,28 +761,20 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -920,25 +801,18 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Set to true to ignore unavailable snapshots</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -952,34 +826,27 @@ namespace Nest
 		protected ICatTasksRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
-		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
+		///<summary>
+		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
+		/// connecting to, leave empty to get information from all nodes
+		///</summary>
 		public string[] NodeId { get => Q<string[]>("node_id"); set => Q("node_id", value); }
-		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
-		
 		///<summary>Return detailed task information (default: false)</summary>
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
-		
 		///<summary>Return tasks with specified parent node.</summary>
 		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
-		
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
 		public long? ParentTask { get => Q<long?>("parent_task"); set => Q("parent_task", value); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1006,25 +873,18 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1051,28 +911,20 @@ namespace Nest
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
-		
 		///<summary>The multiplier in which to display values</summary>
 		public Size Size { get => Q<Size>("size"); set => Q("size", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
-		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
-		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1097,9 +949,11 @@ namespace Nest
 		{}
 		
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+			///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1121,7 +975,6 @@ namespace Nest
 
 			///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public string[] Usernames { get => Q<string[]>("usernames"); set => Q("usernames", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1167,31 +1020,25 @@ namespace Nest
 
 			///<summary>Clear field data</summary>
 		public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
-		
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
-		
 		///<summary>Clear query caches</summary>
 		public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Clear the recycler cache</summary>
 		public bool? Recycler { get => Q<bool?>("recycler"); set => Q("recycler", value); }
-		
 		///<summary>Clear request cache</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		
 		///<summary>Clear request cache</summary>
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1224,19 +1071,17 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1258,10 +1103,8 @@ namespace Nest
 
 			///<summary>True if the job should be forcefully closed</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-		
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1275,10 +1118,8 @@ namespace Nest
 		protected IClusterAllocationExplainRequest Self => this;
 				///<summary>Return 'YES' decisions in explanation (default: false)</summary>
 		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
-		
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1292,16 +1133,12 @@ namespace Nest
 		protected IClusterGetSettingsRequest Self => this;
 				///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Whether to return all default clusters setting.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1328,31 +1165,22 @@ namespace Nest
 
 			///<summary>Specify the level of detail for returned information</summary>
 		public Level Level { get => Q<Level>("level"); set => Q("level", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Wait until the specified number of shards is active</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>Wait until the specified number of nodes is available</summary>
 		public string WaitForNodes { get => Q<string>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
-		
 		///<summary>Wait until all currently queued events with the given priority are processed</summary>
 		public WaitForEvents WaitForEvents { get => Q<WaitForEvents>("wait_for_events"); set => Q("wait_for_events", value); }
-		
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
 		public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
-		
 		///<summary>Wait until cluster is in a specific state</summary>
 		public WaitForStatus WaitForStatus { get => Q<WaitForStatus>("wait_for_status"); set => Q("wait_for_status", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1366,10 +1194,8 @@ namespace Nest
 		protected IClusterPendingTasksRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1383,13 +1209,10 @@ namespace Nest
 		protected IClusterPutSettingsRequest Self => this;
 				///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1403,22 +1226,16 @@ namespace Nest
 		protected IClusterRerouteRequest Self => this;
 				///<summary>Simulate the operation only and return the resulting state</summary>
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
-		
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
-		
 		///<summary>Retries allocation of shards that are blocked due to too many subsequent allocation failures</summary>
 		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
-		
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
 		public string[] Metric { get => Q<string[]>("metric"); set => Q("metric", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1454,22 +1271,19 @@ namespace Nest
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1496,10 +1310,8 @@ namespace Nest
 
 			///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1535,49 +1347,40 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
 		public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-		
 	}
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountRequest : PlainRequestBase<CountRequestParameters>, ICountRequest
@@ -1605,49 +1408,40 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
 		public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1669,16 +1463,12 @@ namespace Nest
 
 			///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1700,13 +1490,10 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Whether to verify the repository after creation</summary>
 		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1739,43 +1526,41 @@ namespace Nest
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+			///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
-		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Explicit timestamp for the document</summary>
 		public Time Timestamp { get => Q<Time>("timestamp"); set => Q("timestamp", value.ToString()); }
-		
 		///<summary>Expiration time for the document</summary>
 		public Time Ttl { get => Q<Time>("ttl"); set => Q("ttl", value.ToString()); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1797,7 +1582,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1822,10 +1606,8 @@ namespace Nest
 
 			///<summary>Explicit timestamp for the document</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1856,106 +1638,82 @@ namespace Nest
 
 			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Starting offset (default: 0)</summary>
 		public long? From { get => Q<long?>("from"); set => Q("from", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>What to do when the delete-by-query hits version conflicts?</summary>
 		public Conflicts Conflicts { get => Q<Conflicts>("conflicts"); set => Q("conflicts", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
-		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
-		
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
 		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value.ToString()); }
-		
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
-		
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public string[] Sort { get => Q<string[]>("sort"); set => Q("sort", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
-		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
-		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
-		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the
+		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
+		/// copies for the shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
-		
 		///<summary>Should the request should block until the delete-by-query is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		
 		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
-		
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
-		
 	}
 	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest : PlainRequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
@@ -1978,106 +1736,82 @@ namespace Nest
 
 			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Starting offset (default: 0)</summary>
 		public long? From { get => Q<long?>("from"); set => Q("from", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>What to do when the delete-by-query hits version conflicts?</summary>
 		public Conflicts Conflicts { get => Q<Conflicts>("conflicts"); set => Q("conflicts", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
-		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
-		
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
 		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value.ToString()); }
-		
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
-		
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public string[] Sort { get => Q<string[]>("sort"); set => Q("sort", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
-		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
-		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
-		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the
+		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
+		/// copies for the shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
-		
 		///<summary>Should the request should block until the delete-by-query is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		
 		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
-		
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2099,7 +1833,6 @@ namespace Nest
 
 			///<summary>True if the datafeed should be forcefully deleted</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2132,19 +1865,14 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Ignore unavailable indexes (default: false)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2166,10 +1894,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2191,7 +1917,6 @@ namespace Nest
 
 			///<summary>True if the job should be forcefully deleted</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2246,10 +1971,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2271,10 +1994,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2307,34 +2028,35 @@ namespace Nest
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(T document);
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+			///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>ID of parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>
+		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteRequest : PlainRequestBase<DeleteRequestParameters>, IDeleteRequest
@@ -2351,34 +2073,35 @@ namespace Nest
 		 => Q("routing", new Routing(() => AutoRouteDocument()));
 		
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+			///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>ID of parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>
+		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2398,9 +2121,11 @@ namespace Nest
 		{}
 		
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+			///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2420,9 +2145,11 @@ namespace Nest
 		{}
 		
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+			///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2444,10 +2171,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2472,7 +2197,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2492,9 +2216,11 @@ namespace Nest
 		{}
 		
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+			///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2516,7 +2242,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2560,9 +2285,11 @@ namespace Nest
 		{}
 		
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+			///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2597,44 +2324,34 @@ namespace Nest
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
-		
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsRequest : PlainRequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
@@ -2653,44 +2370,34 @@ namespace Nest
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
-		
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2710,9 +2417,11 @@ namespace Nest
 		{}
 		
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+			///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2739,7 +2448,6 @@ namespace Nest
 
 			///<summary>indicates whether the watch should execute in debug mode</summary>
 		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2775,47 +2483,36 @@ namespace Nest
 
 			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The analyzer for the query string query</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The default field for query string query (default: _all)</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2842,16 +2539,15 @@ namespace Nest
 
 			///<summary>A comma-separated list of field names</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2873,7 +2569,6 @@ namespace Nest
 
 			///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2898,21 +2593,25 @@ namespace Nest
 		{}
 		
 
-			///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
+			///<summary>
+		/// Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if
+		/// transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)
+		///</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-		
-		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is true. If set to false the flush will be skipped iff if another flush operation is already running.</summary>
+		///<summary>
+		/// If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default
+		/// is true. If set to false the flush will be skipped iff if another flush operation is already running.
+		///</summary>
 		public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2939,28 +2638,23 @@ namespace Nest
 
 			///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
 		public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
-		
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
-		
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
-		
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public bool? WaitForMerge { get => Q<bool?>("wait_for_merge"); set => Q("wait_for_merge", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3002,16 +2696,15 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3173,19 +2866,17 @@ namespace Nest
 
 			///<summary>Whether the default mapping values should be returned as well</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3207,22 +2898,16 @@ namespace Nest
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Ignore unavailable indexes (default: false)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3264,22 +2949,19 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3306,13 +2988,10 @@ namespace Nest
 
 			///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3393,7 +3072,6 @@ namespace Nest
 		protected IGetLicenseRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3435,16 +3113,15 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3499,7 +3176,6 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3526,10 +3202,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3564,44 +3238,34 @@ namespace Nest
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
-		
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetRequest : PlainRequestBase<GetRequestParameters>, IGetRequest
@@ -3620,44 +3284,34 @@ namespace Nest
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public Fields StoredFields { get => Q<Fields>("stored_fields"); set => Q("stored_fields", value); }
-		
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3749,13 +3403,10 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3777,7 +3428,6 @@ namespace Nest
 
 			///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3860,18 +3510,17 @@ namespace Nest
 		{}
 		
 
-			 ///<summary>
+			///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
@@ -3892,18 +3541,17 @@ namespace Nest
 		{}
 		
 
-			 ///<summary>
+			///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3936,22 +3584,16 @@ namespace Nest
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Ignore unavailable indexes (default: false)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3991,46 +3633,43 @@ namespace Nest
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+			///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>Explicit operation type</summary>
 		public OpType OpType { get => Q<OpType>("op_type"); set => Q("op_type", value); }
-		
 		///<summary>ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
-		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Explicit timestamp for the document</summary>
 		public Time Timestamp { get => Q<Time>("timestamp"); set => Q("timestamp", value.ToString()); }
-		
 		///<summary>Expiration time for the document</summary>
 		public Time Ttl { get => Q<Time>("ttl"); set => Q("ttl", value.ToString()); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4052,13 +3691,10 @@ namespace Nest
 
 			///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4085,19 +3721,17 @@ namespace Nest
 
 			///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public string[] Status { get => Q<string[]>("status"); set => Q("status", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4139,22 +3773,16 @@ namespace Nest
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public Fields CompletionFields { get => Q<Fields>("completion_fields"); set => Q("completion_fields", value); }
-		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public Fields FielddataFields { get => Q<Fields>("fielddata_fields"); set => Q("fielddata_fields", value); }
-		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
-		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public string[] Groups { get => Q<string[]>("groups"); set => Q("groups", value); }
-		
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
 		public Level Level { get => Q<Level>("level"); set => Q("level", value); }
-		
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4177,27 +3805,23 @@ namespace Nest
 	public partial class ListTasksRequest : PlainRequestBase<ListTasksRequestParameters>, IListTasksRequest
 	{
 		protected IListTasksRequest Self => this;
-				///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
+				///<summary>
+		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
+		/// connecting to, leave empty to get information from all nodes
+		///</summary>
 		public string[] Nodes { get => Q<string[]>("nodes"); set => Q("nodes", value); }
-		
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
-		
 		///<summary>Return detailed task information (default: false)</summary>
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
-		
 		///<summary>Return tasks with specified parent node.</summary>
 		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
-		
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
-		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
 		public GroupBy GroupBy { get => Q<GroupBy>("group_by"); set => Q("group_by", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4234,31 +3858,25 @@ namespace Nest
 
 			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4294,16 +3912,17 @@ namespace Nest
 
 			///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
-		
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
-		
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-		
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		///<summary>
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
+		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// disjoint.
+		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4339,13 +3958,10 @@ namespace Nest
 
 			///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
-		
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-		
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4379,49 +3995,47 @@ namespace Nest
 		{}
 		
 
-			///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+			///<summary>
+		/// Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified
+		/// in body "params" or "docs".
+		///</summary>
 		public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
-		
-		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		///<summary>
+		/// Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned
+		/// documents unless otherwise specified in body "params" or "docs".
+		///</summary>
 		public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
-		
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
-		
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
-		
 		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
-		
 		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		///<summary>
+		/// Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise
+		/// specified in body "params" or "docs".
+		///</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4448,22 +4062,16 @@ namespace Nest
 
 			///<summary>The interval for the second sampling of threads</summary>
 		public Time Interval { get => Q<Time>("interval"); set => Q("interval", value.ToString()); }
-		
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
-		
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
 		public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
-		
 		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
 		public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
-		
 		///<summary>The type to sample (default: cpu)</summary>
 		public ThreadType ThreadType { get => Q<ThreadType>("type"); set => Q("type", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4505,10 +4113,8 @@ namespace Nest
 
 			///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4567,28 +4173,20 @@ namespace Nest
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public Fields CompletionFields { get => Q<Fields>("completion_fields"); set => Q("completion_fields", value); }
-		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public Fields FielddataFields { get => Q<Fields>("fielddata_fields"); set => Q("fielddata_fields", value); }
-		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
-		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public bool? Groups { get => Q<bool?>("groups"); set => Q("groups", value); }
-		
 		///<summary>Return indices stats aggregated at index, node or shard level</summary>
 		public Level Level { get => Q<Level>("level"); set => Q("level", value); }
-		
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public string[] Types { get => Q<string[]>("types"); set => Q("types", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4630,10 +4228,8 @@ namespace Nest
 
 			///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4655,19 +4251,17 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4719,10 +4313,8 @@ namespace Nest
 
 			///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
 		public DateTimeOffset ResetStart { get => Q<DateTimeOffset>("reset_start"); set => Q("reset_start", value); }
-		
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
 		public DateTimeOffset ResetEnd { get => Q<DateTimeOffset>("reset_end"); set => Q("reset_end", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4736,7 +4328,6 @@ namespace Nest
 		protected IPostLicenseRequest Self => this;
 				///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4780,10 +4371,8 @@ namespace Nest
 
 			///<summary>Explicit timestamp for the document</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4824,16 +4413,12 @@ namespace Nest
 
 			///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4883,22 +4468,19 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
-		
 	}
 	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest : PlainRequestBase<PutMappingRequestParameters>, IPutMappingRequest
@@ -4921,22 +4503,19 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4958,10 +4537,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4981,9 +4558,11 @@ namespace Nest
 		{}
 		
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+			///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5003,9 +4582,11 @@ namespace Nest
 		{}
 		
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+			///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5036,10 +4617,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5059,9 +4638,11 @@ namespace Nest
 		{}
 		
 
-			///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
+			///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5083,10 +4664,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5113,10 +4692,8 @@ namespace Nest
 
 			///<summary>Whether to display detailed information about shard recovery</summary>
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
-		
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5143,13 +4720,13 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5163,22 +4740,20 @@ namespace Nest
 		protected IReindexOnServerRequest Self => this;
 				///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
-		///<summary>Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
-		
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5200,7 +4775,6 @@ namespace Nest
 
 			///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5271,10 +4845,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5327,16 +4899,12 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5396,79 +4964,71 @@ namespace Nest
 
 			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
-		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
-		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
-		
 		///<summary>Specify which field to use for suggestions</summary>
 		public Field SuggestField { get => Q<Field>("suggest_field"); set => Q("suggest_field", value); }
-		
 		///<summary>Specify suggest mode</summary>
 		public SuggestMode SuggestMode { get => Q<SuggestMode>("suggest_mode"); set => Q("suggest_mode", value); }
-		
 		///<summary>How many suggestions to return in response</summary>
 		public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
-		
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public string SuggestText { get => Q<string>("suggest_text"); set => Q("suggest_text", value); }
-		
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
 		public bool? TrackTotalHits { get => Q<bool?>("track_total_hits"); set => Q("track_total_hits", value); }
-		
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		
-		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
+		///<summary>
+		/// The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism
+		/// to reduce the memory overhead per search request if the potential number of shards in the request can be large.
+		///</summary>
 		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
-		
-		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
+		///<summary>
+		/// The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on
+		/// the cluster in order to limit the number of concurrent shard requests
+		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-		
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		///<summary>
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
+		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// disjoint.
+		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
-		
 	}
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest : PlainRequestBase<SearchRequestParameters>, ISearchRequest
@@ -5496,79 +5056,71 @@ namespace Nest
 
 			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
-		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
-		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
-		
 		///<summary>Specify which field to use for suggestions</summary>
 		public Field SuggestField { get => Q<Field>("suggest_field"); set => Q("suggest_field", value); }
-		
 		///<summary>Specify suggest mode</summary>
 		public SuggestMode SuggestMode { get => Q<SuggestMode>("suggest_mode"); set => Q("suggest_mode", value); }
-		
 		///<summary>How many suggestions to return in response</summary>
 		public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
-		
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public string SuggestText { get => Q<string>("suggest_text"); set => Q("suggest_text", value); }
-		
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
 		public bool? TrackTotalHits { get => Q<bool?>("track_total_hits"); set => Q("track_total_hits", value); }
-		
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		
-		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
+		///<summary>
+		/// The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism
+		/// to reduce the memory overhead per search request if the potential number of shards in the request can be large.
+		///</summary>
 		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
-		
-		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
+		///<summary>
+		/// The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on
+		/// the cluster in order to limit the number of concurrent shard requests
+		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-		
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		///<summary>
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
+		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// disjoint.
+		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5595,28 +5147,26 @@ namespace Nest
 
 			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
@@ -5636,28 +5186,26 @@ namespace Nest
 
 			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5693,40 +5241,34 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
-		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
-		
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
-		
 		///<summary>Specify whether to profile the query execution</summary>
 		public bool? Profile { get => Q<bool?>("profile"); set => Q("profile", value); }
-		
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5753,19 +5295,17 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
-		
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5790,13 +5330,10 @@ namespace Nest
 
 			///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5823,7 +5360,6 @@ namespace Nest
 
 			///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5848,10 +5384,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5887,10 +5421,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -5926,40 +5458,31 @@ namespace Nest
 			///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	///<summary>Request parameters for ExistsSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceExistsRequest : PlainRequestBase<SourceExistsRequestParameters>, ISourceExistsRequest
@@ -5979,40 +5502,31 @@ namespace Nest
 			///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6048,40 +5562,31 @@ namespace Nest
 			///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceRequest : PlainRequestBase<SourceRequestParameters>, ISourceRequest
@@ -6101,40 +5606,31 @@ namespace Nest
 			///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6221,13 +5717,13 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6269,47 +5765,36 @@ namespace Nest
 
 			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
-		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
-		
 		///<summary>A comma-separated list of fields to return.</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
-		
 		///<summary>Specifies if term offsets should be returned.</summary>
 		public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
-		
 		///<summary>Specifies if term positions should be returned.</summary>
 		public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
-		
 		///<summary>Specifies if term payloads should be returned.</summary>
 		public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Parent id of documents.</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
 		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6334,16 +5819,15 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6374,112 +5858,86 @@ namespace Nest
 
 			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Starting offset (default: 0)</summary>
 		public long? From { get => Q<long?>("from"); set => Q("from", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>What to do when the update by query hits version conflicts?</summary>
 		public Conflicts Conflicts { get => Q<Conflicts>("conflicts"); set => Q("conflicts", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
-		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
-		
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
 		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value.ToString()); }
-		
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
-		
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public string[] Sort { get => Q<string[]>("sort"); set => Q("sort", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
-		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
-		
 		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
 		public bool? VersionType { get => Q<bool?>("version_type"); set => Q("version_type", value); }
-		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
-		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the
+		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
+		/// copies for the shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
-		
 		///<summary>Should the request should block until the update by query operation is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
-		
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
-		
 	}
 	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
 	public partial class UpdateByQueryRequest : PlainRequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
@@ -6502,112 +5960,86 @@ namespace Nest
 
 			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Starting offset (default: 0)</summary>
 		public long? From { get => Q<long?>("from"); set => Q("from", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>What to do when the update by query hits version conflicts?</summary>
 		public Conflicts Conflicts { get => Q<Conflicts>("conflicts"); set => Q("conflicts", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
-		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
-		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
-		
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
 		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value.ToString()); }
-		
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
-		
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public string[] Sort { get => Q<string[]>("sort"); set => Q("sort", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public Fields SourceExclude { get => Q<Fields>("_source_exclude"); set => Q("_source_exclude", value); }
-		
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
-		
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-		
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
-		
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
-		
 		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
 		public bool? VersionType { get => Q<bool?>("version_type"); set => Q("version_type", value); }
-		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-		
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
-		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the
+		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
+		/// copies for the shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
-		
 		///<summary>Should the request should block until the update by query operation is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
-		
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6653,22 +6085,19 @@ namespace Nest
 
 			///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
 		public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6742,49 +6171,45 @@ namespace Nest
 		{ this.DocumentFromPath(document.Document); Q("routing", new Routing(() => AutoRouteDocument() ?? document.Document)); }
 		partial void DocumentFromPath(TDocument document);
 
-			///<summary>Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
+			///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		
 		///<summary>Whether the _source should be included in the response.</summary>
 		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
-		
 		///<summary>The script language (default: painless)</summary>
 		public string Lang { get => Q<string>("lang"); set => Q("lang", value); }
-		
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
-		
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
+		///<summary>
+		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
 		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
-		
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
 		public long? RetryOnConflict { get => Q<long?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
-		
-		 ///<summary>
+		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
 		/// <para>Elasticsearch will use the document id if not provided. </para>
 		/// <para>For requests that are constructed from/for a document NEST will automatically infer the routing key
-		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
+		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings"
+		/// /></para>
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 		///<summary>Explicit timestamp for the document</summary>
 		public Time Timestamp { get => Q<Time>("timestamp"); set => Q("timestamp", value.ToString()); }
-		
 		///<summary>Expiration time for the document</summary>
 		public Time Ttl { get => Q<Time>("ttl"); set => Q("ttl", value.ToString()); }
-		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6809,21 +6234,19 @@ namespace Nest
 		{}
 		
 
-			///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+			///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
 		public bool? OnlyAncientSegments { get => Q<bool?>("only_ancient_segments"); set => Q("only_ancient_segments", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6850,13 +6273,13 @@ namespace Nest
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6914,43 +6337,33 @@ namespace Nest
 
 			///<summary>Return detailed information about the error</summary>
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
-		
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
-		
 	}
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest : PlainRequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
@@ -6978,43 +6391,33 @@ namespace Nest
 
 			///<summary>Return detailed information about the error</summary>
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
-		
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
-		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
-		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
-		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-		
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
-		
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7036,10 +6439,8 @@ namespace Nest
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7066,7 +6467,6 @@ namespace Nest
 
 			///<summary>Emits stack traces of currently running watches</summary>
 		public bool? EmitStacktraces { get => Q<bool?>("emit_stacktraces"); set => Q("emit_stacktraces", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7080,10 +6480,8 @@ namespace Nest
 		protected IXPackInfoRequest Self => this;
 				///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
 		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
-		
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
-		
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -7097,7 +6495,6 @@ namespace Nest
 		protected IXPackUsageRequest Self => this;
 				///<summary>Specify timeout for watch write operation</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		
 	}
 }
  
