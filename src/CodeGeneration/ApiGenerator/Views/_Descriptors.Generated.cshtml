@@ -15,6 +15,16 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public abstract partial class @Raw("RequestDescriptorBase<TDescriptor, TParameters, TInterface>")
+	{
+	@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
+	{
+		var original = common.OriginalQueryStringParamName;
+		var t = @common.CsharpHighLevelType;
+		var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
+		<text>		public TDescriptor @(common.CsharpName)(@common.CsharpHighLevelType @original@tSuffix) => Qs("@original", @(original));</text>
+	}
+	}
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
 	{
 		var type = method.DescriptorType + method.DescriptorTypeGeneric;

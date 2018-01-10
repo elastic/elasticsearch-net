@@ -10,6 +10,13 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public abstract partial class RequestDescriptorBase<TDescriptor, TParameters, TInterface>
+	{
+		public TDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
+		public TDescriptor Human(bool? human = true) => Qs("human", human);
+		public TDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
+		public TDescriptor FilterPath(string[] filter_path) => Qs("filter_path", filter_path);
+	}
 	
 	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public partial class BulkDescriptor  : RequestDescriptorBase<BulkDescriptor,BulkRequestParameters, IBulkRequest>, IBulkRequest
