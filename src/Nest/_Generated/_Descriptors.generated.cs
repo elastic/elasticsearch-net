@@ -14,8 +14,8 @@ namespace Nest
 	{
 		public TDescriptor Pretty(bool? pretty = true) => Qs("pretty", pretty);
 		public TDescriptor Human(bool? human = true) => Qs("human", human);
-		public TDescriptor ErrorTrace(bool? error_trace = true) => Qs("error_trace", error_trace);
-		public TDescriptor FilterPath(string[] filter_path) => Qs("filter_path", filter_path);
+		public TDescriptor ErrorTrace(bool? errorTrace = true) => Qs("error_trace", errorTrace);
+		public TDescriptor FilterPath(string[] filterPath) => Qs("filter_path", filterPath);
 	}
 	
 	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
@@ -41,7 +41,7 @@ namespace Nest
 		public BulkDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 			///<summary>Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public BulkDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public BulkDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public BulkDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
  		///<summary>
@@ -58,14 +58,14 @@ namespace Nest
 		public BulkDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
-		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		///<summary>Whether the _source should be included in the response.</summary>
+		public BulkDescriptor SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public BulkDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public BulkDescriptor SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public BulkDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
 		public BulkDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
@@ -90,15 +90,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAliasesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAliasesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatAliasesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatAliasesDescriptor H(params string[] h) => Qs("h", h);
+		public CatAliasesDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatAliasesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatAliasesDescriptor S(params string[] s) => Qs("s", s);
+		public CatAliasesDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatAliasesDescriptor V(bool? v = true) => Qs("v", v);
+		public CatAliasesDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -121,15 +121,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAllocationDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAllocationDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatAllocationDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatAllocationDescriptor H(params string[] h) => Qs("h", h);
+		public CatAllocationDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatAllocationDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatAllocationDescriptor S(params string[] s) => Qs("s", s);
+		public CatAllocationDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatAllocationDescriptor V(bool? v = true) => Qs("v", v);
+		public CatAllocationDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -156,15 +156,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatCountDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatCountDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatCountDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatCountDescriptor H(params string[] h) => Qs("h", h);
+		public CatCountDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatCountDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatCountDescriptor S(params string[] s) => Qs("s", s);
+		public CatCountDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatCountDescriptor V(bool? v = true) => Qs("v", v);
+		public CatCountDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -190,15 +190,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatFielddataDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatFielddataDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatFielddataDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatFielddataDescriptor H(params string[] h) => Qs("h", h);
+		public CatFielddataDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatFielddataDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatFielddataDescriptor S(params string[] s) => Qs("s", s);
+		public CatFielddataDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatFielddataDescriptor V(bool? v = true) => Qs("v", v);
+		public CatFielddataDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -210,17 +210,17 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatHealthDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatHealthDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatHealthDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatHealthDescriptor H(params string[] h) => Qs("h", h);
+		public CatHealthDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatHealthDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatHealthDescriptor S(params string[] s) => Qs("s", s);
+		public CatHealthDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Set to false to disable timestamping</summary>
 		public CatHealthDescriptor Ts(bool? ts = true) => Qs("ts", ts);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatHealthDescriptor V(bool? v = true) => Qs("v", v);
+		public CatHealthDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -230,7 +230,7 @@ namespace Nest
 					///<summary>Return help information</summary>
 		public CatHelpDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatHelpDescriptor S(params string[] s) => Qs("s", s);
+		public CatHelpDescriptor S(params string[] S) => Qs("s", S);
 	
 	}
 	
@@ -259,9 +259,9 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatIndicesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatIndicesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatIndicesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatIndicesDescriptor H(params string[] h) => Qs("h", h);
+		public CatIndicesDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
 		public CatIndicesDescriptor Health(Health health) => Qs("health", health);
 		///<summary>Return help information</summary>
@@ -269,9 +269,9 @@ namespace Nest
 		///<summary>Set to true to return stats only for primary shards</summary>
 		public CatIndicesDescriptor Pri(bool? pri = true) => Qs("pri", pri);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatIndicesDescriptor S(params string[] s) => Qs("s", s);
+		public CatIndicesDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatIndicesDescriptor V(bool? v = true) => Qs("v", v);
+		public CatIndicesDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -283,15 +283,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatMasterDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatMasterDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatMasterDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatMasterDescriptor H(params string[] h) => Qs("h", h);
+		public CatMasterDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatMasterDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatMasterDescriptor S(params string[] s) => Qs("s", s);
+		public CatMasterDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatMasterDescriptor V(bool? v = true) => Qs("v", v);
+		public CatMasterDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -303,15 +303,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodeAttributesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodeAttributesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatNodeAttributesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatNodeAttributesDescriptor H(params string[] h) => Qs("h", h);
+		public CatNodeAttributesDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatNodeAttributesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatNodeAttributesDescriptor S(params string[] s) => Qs("s", s);
+		public CatNodeAttributesDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatNodeAttributesDescriptor V(bool? v = true) => Qs("v", v);
+		public CatNodeAttributesDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -321,19 +321,19 @@ namespace Nest
 					///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatNodesDescriptor Format(string format) => Qs("format", format);
 		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
-		public CatNodesDescriptor FullId(bool? full_id = true) => Qs("full_id", full_id);
+		public CatNodesDescriptor FullId(bool? fullId = true) => Qs("full_id", fullId);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatNodesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatNodesDescriptor H(params string[] h) => Qs("h", h);
+		public CatNodesDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatNodesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatNodesDescriptor S(params string[] s) => Qs("s", s);
+		public CatNodesDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatNodesDescriptor V(bool? v = true) => Qs("v", v);
+		public CatNodesDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -345,15 +345,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPendingTasksDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatPendingTasksDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatPendingTasksDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatPendingTasksDescriptor H(params string[] h) => Qs("h", h);
+		public CatPendingTasksDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatPendingTasksDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatPendingTasksDescriptor S(params string[] s) => Qs("s", s);
+		public CatPendingTasksDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatPendingTasksDescriptor V(bool? v = true) => Qs("v", v);
+		public CatPendingTasksDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -365,15 +365,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPluginsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatPluginsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatPluginsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatPluginsDescriptor H(params string[] h) => Qs("h", h);
+		public CatPluginsDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatPluginsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatPluginsDescriptor S(params string[] s) => Qs("s", s);
+		public CatPluginsDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatPluginsDescriptor V(bool? v = true) => Qs("v", v);
+		public CatPluginsDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -400,15 +400,15 @@ namespace Nest
 		///<summary>The unit in which to display byte values</summary>
 		public CatRecoveryDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatRecoveryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatRecoveryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatRecoveryDescriptor H(params string[] h) => Qs("h", h);
+		public CatRecoveryDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatRecoveryDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatRecoveryDescriptor S(params string[] s) => Qs("s", s);
+		public CatRecoveryDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatRecoveryDescriptor V(bool? v = true) => Qs("v", v);
+		public CatRecoveryDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -420,15 +420,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node</summary>
 		public CatRepositoriesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatRepositoriesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatRepositoriesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatRepositoriesDescriptor H(params string[] h) => Qs("h", h);
+		public CatRepositoriesDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatRepositoriesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatRepositoriesDescriptor S(params string[] s) => Qs("s", s);
+		public CatRepositoriesDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatRepositoriesDescriptor V(bool? v = true) => Qs("v", v);
+		public CatRepositoriesDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -455,13 +455,13 @@ namespace Nest
 		///<summary>The unit in which to display byte values</summary>
 		public CatSegmentsDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatSegmentsDescriptor H(params string[] h) => Qs("h", h);
+		public CatSegmentsDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatSegmentsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatSegmentsDescriptor S(params string[] s) => Qs("s", s);
+		public CatSegmentsDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatSegmentsDescriptor V(bool? v = true) => Qs("v", v);
+		public CatSegmentsDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -490,15 +490,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatShardsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatShardsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatShardsDescriptor H(params string[] h) => Qs("h", h);
+		public CatShardsDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatShardsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatShardsDescriptor S(params string[] s) => Qs("s", s);
+		public CatShardsDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatShardsDescriptor V(bool? v = true) => Qs("v", v);
+		public CatShardsDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -517,17 +517,17 @@ namespace Nest
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSnapshotsDescriptor Format(string format) => Qs("format", format);
 		///<summary>Set to true to ignore unavailable snapshots</summary>
-		public CatSnapshotsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public CatSnapshotsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatSnapshotsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatSnapshotsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatSnapshotsDescriptor H(params string[] h) => Qs("h", h);
+		public CatSnapshotsDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatSnapshotsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatSnapshotsDescriptor S(params string[] s) => Qs("s", s);
+		public CatSnapshotsDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatSnapshotsDescriptor V(bool? v = true) => Qs("v", v);
+		public CatSnapshotsDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -537,23 +537,23 @@ namespace Nest
 					///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatTasksDescriptor Format(string format) => Qs("format", format);
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
-		public CatTasksDescriptor NodeId(params string[] node_id) => Qs("node_id", node_id);
+		public CatTasksDescriptor NodeId(params string[] nodeId) => Qs("node_id", nodeId);
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
 		public CatTasksDescriptor Actions(params string[] actions) => Qs("actions", actions);
 		///<summary>Return detailed task information (default: false)</summary>
 		public CatTasksDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 		///<summary>Return tasks with specified parent node.</summary>
-		public CatTasksDescriptor ParentNode(string parent_node) => Qs("parent_node", parent_node);
+		public CatTasksDescriptor ParentNode(string parentNode) => Qs("parent_node", parentNode);
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public CatTasksDescriptor ParentTask(long? parent_task) => Qs("parent_task", parent_task);
+		public CatTasksDescriptor ParentTask(long? parentTask) => Qs("parent_task", parentTask);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatTasksDescriptor H(params string[] h) => Qs("h", h);
+		public CatTasksDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatTasksDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatTasksDescriptor S(params string[] s) => Qs("s", s);
+		public CatTasksDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatTasksDescriptor V(bool? v = true) => Qs("v", v);
+		public CatTasksDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -574,15 +574,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatTemplatesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatTemplatesDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatTemplatesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatTemplatesDescriptor H(params string[] h) => Qs("h", h);
+		public CatTemplatesDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatTemplatesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatTemplatesDescriptor S(params string[] s) => Qs("s", s);
+		public CatTemplatesDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatTemplatesDescriptor V(bool? v = true) => Qs("v", v);
+		public CatTemplatesDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -605,15 +605,15 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatThreadPoolDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatThreadPoolDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CatThreadPoolDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatThreadPoolDescriptor H(params string[] h) => Qs("h", h);
+		public CatThreadPoolDescriptor H(params string[] H) => Qs("h", H);
 		///<summary>Return help information</summary>
 		public CatThreadPoolDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatThreadPoolDescriptor S(params string[] s) => Qs("s", s);
+		public CatThreadPoolDescriptor S(params string[] S) => Qs("s", S);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatThreadPoolDescriptor V(bool? v = true) => Qs("v", v);
+		public CatThreadPoolDescriptor V(bool? V = true) => Qs("v", V);
 	
 	}
 	
@@ -632,9 +632,9 @@ namespace Nest
 	public partial class ClusterAllocationExplainDescriptor  : RequestDescriptorBase<ClusterAllocationExplainDescriptor,ClusterAllocationExplainRequestParameters, IClusterAllocationExplainRequest>, IClusterAllocationExplainRequest
 	{ 
 					///<summary>Return 'YES' decisions in explanation (default: false)</summary>
-		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? include_yes_decisions = true) => Qs("include_yes_decisions", include_yes_decisions);
+		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool? includeYesDecisions = true) => Qs("include_yes_decisions", includeYesDecisions);
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
-		public ClusterAllocationExplainDescriptor IncludeDiskInfo(bool? include_disk_info = true) => Qs("include_disk_info", include_disk_info);
+		public ClusterAllocationExplainDescriptor IncludeDiskInfo(bool? includeDiskInfo = true) => Qs("include_disk_info", includeDiskInfo);
 	
 	}
 	
@@ -642,13 +642,13 @@ namespace Nest
 	public partial class ClusterGetSettingsDescriptor  : RequestDescriptorBase<ClusterGetSettingsDescriptor,ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{ 
 					///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterGetSettingsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public ClusterGetSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterGetSettingsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterGetSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterGetSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Whether to return all default clusters setting.</summary>
-		public ClusterGetSettingsDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
+		public ClusterGetSettingsDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	
 	}
 	
@@ -675,19 +675,19 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterHealthDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterHealthDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterHealthDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterHealthDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Wait until the specified number of shards is active</summary>
-		public ClusterHealthDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public ClusterHealthDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Wait until the specified number of nodes is available</summary>
-		public ClusterHealthDescriptor WaitForNodes(string wait_for_nodes) => Qs("wait_for_nodes", wait_for_nodes);
+		public ClusterHealthDescriptor WaitForNodes(string waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 		///<summary>Wait until all currently queued events with the given priority are processed</summary>
-		public ClusterHealthDescriptor WaitForEvents(WaitForEvents wait_for_events) => Qs("wait_for_events", wait_for_events);
+		public ClusterHealthDescriptor WaitForEvents(WaitForEvents waitForEvents) => Qs("wait_for_events", waitForEvents);
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
-		public ClusterHealthDescriptor WaitForNoRelocatingShards(bool? wait_for_no_relocating_shards = true) => Qs("wait_for_no_relocating_shards", wait_for_no_relocating_shards);
+		public ClusterHealthDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
 		///<summary>Wait until cluster is in a specific state</summary>
-		public ClusterHealthDescriptor WaitForStatus(WaitForStatus wait_for_status) => Qs("wait_for_status", wait_for_status);
+		public ClusterHealthDescriptor WaitForStatus(WaitForStatus waitForStatus) => Qs("wait_for_status", waitForStatus);
 	
 	}
 	
@@ -697,7 +697,7 @@ namespace Nest
 					///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterPendingTasksDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterPendingTasksDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterPendingTasksDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -705,9 +705,9 @@ namespace Nest
 	public partial class ClusterPutSettingsDescriptor  : RequestDescriptorBase<ClusterPutSettingsDescriptor,ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
 	{ 
 					///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterPutSettingsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public ClusterPutSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterPutSettingsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterPutSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterPutSettingsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -723,15 +723,15 @@ namespace Nest
 	public partial class ClusterRerouteDescriptor  : RequestDescriptorBase<ClusterRerouteDescriptor,ClusterRerouteRequestParameters, IClusterRerouteRequest>, IClusterRerouteRequest
 	{ 
 					///<summary>Simulate the operation only and return the resulting state</summary>
-		public ClusterRerouteDescriptor DryRun(bool? dry_run = true) => Qs("dry_run", dry_run);
+		public ClusterRerouteDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
 		public ClusterRerouteDescriptor Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Retries allocation of shards that are blocked due to too many subsequent allocation failures</summary>
-		public ClusterRerouteDescriptor RetryFailed(bool? retry_failed = true) => Qs("retry_failed", retry_failed);
+		public ClusterRerouteDescriptor RetryFailed(bool? retryFailed = true) => Qs("retry_failed", retryFailed);
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
 		public ClusterRerouteDescriptor Metric(params string[] metric) => Qs("metric", metric);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterRerouteDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterRerouteDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterRerouteDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -762,15 +762,15 @@ namespace Nest
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterStateDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterStateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ClusterStateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterStateDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public ClusterStateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ClusterStateDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public ClusterStateDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ClusterStateDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public ClusterStateDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -787,7 +787,7 @@ namespace Nest
 		public ClusterStatsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
 			///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterStatsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public ClusterStatsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout</summary>
 		public ClusterStatsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -822,13 +822,13 @@ namespace Nest
 		public CountDescriptor<T> AllTypes() => this.Type(Types.All);
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public CountDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public CountDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public CountDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public CountDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public CountDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountDescriptor<T> MinScore(double? min_score) => Qs("min_score", min_score);
+		public CountDescriptor<T> MinScore(double? minScore) => Qs("min_score", minScore);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public CountDescriptor<T> Preference(string preference) => Qs("preference", preference);
  		///<summary>
@@ -840,19 +840,19 @@ namespace Nest
 		///</summary>
 		public CountDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public CountDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
+		public CountDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
 		///<summary>The analyzer to use for the query string</summary>
 		public CountDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public CountDescriptor<T> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public CountDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public CountDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public CountDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public CountDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public CountDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
-		public CountDescriptor<T> TerminateAfter(long? terminate_after) => Qs("terminate_after", terminate_after);
+		public CountDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 	
 	}
 	
@@ -890,7 +890,7 @@ namespace Nest
 		public CreateDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public CreateDescriptor<TDocument> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public CreateDescriptor<TDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public CreateDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
@@ -913,7 +913,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public CreateDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public CreateDescriptor<TDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public CreateDescriptor<TDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public CreateDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
 	
@@ -953,7 +953,7 @@ namespace Nest
 		public DeleteDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public DeleteDescriptor<T> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public DeleteDescriptor<T> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>ID of parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public DeleteDescriptor<T> Parent(string parent) => Qs("parent", parent);
@@ -972,7 +972,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public DeleteDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public DeleteDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -1008,27 +1008,27 @@ namespace Nest
 			///<summary>The analyzer to use for the query string</summary>
 		public DeleteByQueryDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public DeleteByQueryDescriptor<T> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public DeleteByQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public DeleteByQueryDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Starting offset (default: 0)</summary>
 		public DeleteByQueryDescriptor<T> From(long? from) => Qs("from", from);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public DeleteByQueryDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public DeleteByQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>What to do when the delete-by-query hits version conflicts?</summary>
 		public DeleteByQueryDescriptor<T> Conflicts(Conflicts conflicts) => Qs("conflicts", conflicts);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public DeleteByQueryDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public DeleteByQueryDescriptor<T> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
+		public DeleteByQueryDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1040,43 +1040,43 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public DeleteByQueryDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public DeleteByQueryDescriptor<T> SearchType(SearchType search_type) => Qs("search_type", search_type);
+		public DeleteByQueryDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public DeleteByQueryDescriptor<T> SearchTimeout(Time search_timeout) => Qs("search_timeout", search_timeout);
+		public DeleteByQueryDescriptor<T> SearchTimeout(Time searchTimeout) => Qs("search_timeout", searchTimeout);
 		///<summary>Number of hits to return (default: 10)</summary>
 		public DeleteByQueryDescriptor<T> Size(long? size) => Qs("size", size);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public DeleteByQueryDescriptor<T> Sort(params string[] sort) => Qs("sort", sort);
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public DeleteByQueryDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		///<summary>Whether the _source should be included in the response.</summary>
+		public DeleteByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public DeleteByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DeleteByQueryDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public DeleteByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DeleteByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public DeleteByQueryDescriptor<T> TerminateAfter(long? terminate_after) => Qs("terminate_after", terminate_after);
+		public DeleteByQueryDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public DeleteByQueryDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public DeleteByQueryDescriptor<T> Version(bool? version = true) => Qs("version", version);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public DeleteByQueryDescriptor<T> RequestCache(bool? request_cache = true) => Qs("request_cache", request_cache);
+		public DeleteByQueryDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public DeleteByQueryDescriptor<T> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public DeleteByQueryDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public DeleteByQueryDescriptor<T> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public DeleteByQueryDescriptor<T> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public DeleteByQueryDescriptor<T> ScrollSize(long? scroll_size) => Qs("scroll_size", scroll_size);
+		public DeleteByQueryDescriptor<T> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
 		///<summary>Should the request should block until the delete-by-query is complete.</summary>
-		public DeleteByQueryDescriptor<T> WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public DeleteByQueryDescriptor<T> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
-		public DeleteByQueryDescriptor<T> RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
+		public DeleteByQueryDescriptor<T> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public DeleteByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
 	
@@ -1095,7 +1095,7 @@ namespace Nest
 				///<summary>Explicit operation timeout</summary>
 		public DeleteScriptDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteScriptDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public DeleteScriptDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -1133,7 +1133,7 @@ namespace Nest
 		public DocumentExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public DocumentExistsDescriptor<T> StoredFields(Fields stored_fields) => Qs("stored_fields", stored_fields);
+		public DocumentExistsDescriptor<T> StoredFields(Fields storedFields) => Qs("stored_fields", storedFields);
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public DocumentExistsDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>The ID of the parent document</summary>
@@ -1153,20 +1153,20 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public DocumentExistsDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public DocumentExistsDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		///<summary>Whether the _source should be included in the response.</summary>
+		public DocumentExistsDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public DocumentExistsDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public DocumentExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public DocumentExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public DocumentExistsDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public DocumentExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public DocumentExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public DocumentExistsDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public DocumentExistsDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public DocumentExistsDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -1220,20 +1220,20 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public SourceExistsDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SourceExistsDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		///<summary>Whether the _source should be included in the response.</summary>
+		public SourceExistsDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceExistsDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public SourceExistsDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceExistsDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceExistsDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public SourceExistsDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceExistsDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceExistsDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public SourceExistsDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public SourceExistsDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -1271,11 +1271,11 @@ namespace Nest
 		public ExplainDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public ExplainDescriptor<TDocument> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public ExplainDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The analyzer for the query string query</summary>
 		public ExplainDescriptor<TDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainDescriptor<TDocument> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public ExplainDescriptor<TDocument> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The default field for query string query (default: _all)</summary>
 		public ExplainDescriptor<TDocument> Df(string df) => Qs("df", df);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
@@ -1286,7 +1286,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public ExplainDescriptor<TDocument> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainDescriptor<TDocument> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
+		public ExplainDescriptor<TDocument> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1295,14 +1295,14 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public ExplainDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainDescriptor<TDocument> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		///<summary>Whether the _source should be included in the response.</summary>
+		public ExplainDescriptor<TDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<TDocument> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public ExplainDescriptor<TDocument> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainDescriptor<TDocument> SourceExclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<TDocument> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public ExplainDescriptor<TDocument> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor<TDocument> SourceInclude(params Expression<Func<TDocument, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 	
@@ -1331,11 +1331,11 @@ namespace Nest
 		///<summary>A comma-separated list of field names</summary>
 		public FieldCapabilitiesDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fields", fields?.Select(e=>(Field)e));
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FieldCapabilitiesDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public FieldCapabilitiesDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FieldCapabilitiesDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public FieldCapabilitiesDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FieldCapabilitiesDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public FieldCapabilitiesDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -1373,7 +1373,7 @@ namespace Nest
 		public GetDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public GetDescriptor<T> StoredFields(Fields stored_fields) => Qs("stored_fields", stored_fields);
+		public GetDescriptor<T> StoredFields(Fields storedFields) => Qs("stored_fields", storedFields);
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
 		public GetDescriptor<T> StoredFields(params Expression<Func<T, object>>[] fields)  => Qs("stored_fields", fields?.Select(e=>(Field)e));
 		///<summary>The ID of the parent document</summary>
@@ -1393,20 +1393,20 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public GetDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		///<summary>Whether the _source should be included in the response.</summary>
+		public GetDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public GetDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public GetDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public GetDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public GetDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -1473,20 +1473,20 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public SourceDescriptor<T> Routing(Routing routing) => Qs("routing", routing);
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SourceDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		///<summary>Whether the _source should be included in the response.</summary>
+		public SourceDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public SourceDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public SourceDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public SourceDescriptor<T> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public SourceDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -1526,9 +1526,9 @@ namespace Nest
 		public IndexDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public IndexDescriptor<TDocument> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public IndexDescriptor<TDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Explicit operation type</summary>
-		public IndexDescriptor<TDocument> OpType(OpType op_type) => Qs("op_type", op_type);
+		public IndexDescriptor<TDocument> OpType(OpType opType) => Qs("op_type", opType);
 		///<summary>ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public IndexDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
@@ -1551,7 +1551,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public IndexDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public IndexDescriptor<TDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public IndexDescriptor<TDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
 	
@@ -1573,7 +1573,7 @@ namespace Nest
 		public AnalyzeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 			///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public AnalyzeDescriptor PreferLocal(bool? prefer_local = true) => Qs("prefer_local", prefer_local);
+		public AnalyzeDescriptor PreferLocal(bool? preferLocal = true) => Qs("prefer_local", preferLocal);
 		///<summary>Format of the output</summary>
 		public AnalyzeDescriptor Format(Format format) => Qs("format", format);
 	
@@ -1606,15 +1606,15 @@ namespace Nest
 		///<summary>Clear query caches</summary>
 		public ClearCacheDescriptor Query(bool? query = true) => Qs("query", query);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ClearCacheDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public ClearCacheDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ClearCacheDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public ClearCacheDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Clear the recycler cache</summary>
 		public ClearCacheDescriptor Recycler(bool? recycler = true) => Qs("recycler", recycler);
 		///<summary>Clear request cache</summary>
-		public ClearCacheDescriptor RequestCache(bool? request_cache = true) => Qs("request_cache", request_cache);
+		public ClearCacheDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>Clear request cache</summary>
 		public ClearCacheDescriptor Request(bool? request = true) => Qs("request", request);
 	
@@ -1642,13 +1642,13 @@ namespace Nest
 			///<summary>Explicit operation timeout</summary>
 		public CloseIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public CloseIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CloseIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public CloseIndexDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public CloseIndexDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public CloseIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public CloseIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -1669,13 +1669,13 @@ namespace Nest
 		public CreateIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 			///<summary>Set the number of active shards to wait for before the operation returns.</summary>
-		public CreateIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public CreateIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Explicit operation timeout</summary>
 		public CreateIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public CreateIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CreateIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		public CreateIndexDescriptor UpdateAllTypes(bool? update_all_types = true) => Qs("update_all_types", update_all_types);
+		public CreateIndexDescriptor UpdateAllTypes(bool? updateAllTypes = true) => Qs("update_all_types", updateAllTypes);
 	
 	}
 	
@@ -1701,13 +1701,13 @@ namespace Nest
 			///<summary>Explicit operation timeout</summary>
 		public DeleteIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public DeleteIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public DeleteIndexDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public DeleteIndexDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public DeleteIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public DeleteIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public DeleteIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public DeleteIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -1735,7 +1735,7 @@ namespace Nest
 			///<summary>Explicit timestamp for the document</summary>
 		public DeleteAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteAliasDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public DeleteAliasDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -1752,7 +1752,7 @@ namespace Nest
 				///<summary>Explicit operation timeout</summary>
 		public DeleteIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteIndexTemplateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public DeleteIndexTemplateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -1778,15 +1778,15 @@ namespace Nest
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexExistsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public IndexExistsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public IndexExistsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public IndexExistsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public IndexExistsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public IndexExistsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public IndexExistsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
-		public IndexExistsDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
+		public IndexExistsDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	
 	}
 	
@@ -1813,11 +1813,11 @@ namespace Nest
 		public AliasExistsDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public AliasExistsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public AliasExistsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public AliasExistsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public AliasExistsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public AliasExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public AliasExistsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public AliasExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	
@@ -1834,9 +1834,9 @@ namespace Nest
 		
 
 				///<summary>Return settings in flat format (default: false)</summary>
-		public IndexTemplateExistsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public IndexTemplateExistsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IndexTemplateExistsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public IndexTemplateExistsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexTemplateExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	
@@ -1873,11 +1873,11 @@ namespace Nest
 		public TypeExistsDescriptor AllTypes() => this.Type(Types.All);
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public TypeExistsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public TypeExistsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public TypeExistsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public TypeExistsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public TypeExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	
@@ -1904,13 +1904,13 @@ namespace Nest
 			///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public FlushDescriptor Force(bool? force = true) => Qs("force", force);
 		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is true. If set to false the flush will be skipped iff if another flush operation is already running.</summary>
-		public FlushDescriptor WaitIfOngoing(bool? wait_if_ongoing = true) => Qs("wait_if_ongoing", wait_if_ongoing);
+		public FlushDescriptor WaitIfOngoing(bool? waitIfOngoing = true) => Qs("wait_if_ongoing", waitIfOngoing);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FlushDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public FlushDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FlushDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public FlushDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public FlushDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -1933,11 +1933,11 @@ namespace Nest
 		public SyncedFlushDescriptor AllIndices() => this.Index(Indices.All);
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SyncedFlushDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public SyncedFlushDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SyncedFlushDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public SyncedFlushDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SyncedFlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public SyncedFlushDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -1962,19 +1962,19 @@ namespace Nest
 			///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public ForceMergeDescriptor Flush(bool? flush = true) => Qs("flush", flush);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ForceMergeDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public ForceMergeDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ForceMergeDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public ForceMergeDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ForceMergeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public ForceMergeDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public ForceMergeDescriptor MaxNumSegments(long? max_num_segments) => Qs("max_num_segments", max_num_segments);
+		public ForceMergeDescriptor MaxNumSegments(long? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public ForceMergeDescriptor OnlyExpungeDeletes(bool? only_expunge_deletes = true) => Qs("only_expunge_deletes", only_expunge_deletes);
+		public ForceMergeDescriptor OnlyExpungeDeletes(bool? onlyExpungeDeletes = true) => Qs("only_expunge_deletes", onlyExpungeDeletes);
 		///<summary>TODO: ?</summary>
-		public ForceMergeDescriptor OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
+		public ForceMergeDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public ForceMergeDescriptor WaitForMerge(bool? wait_for_merge = true) => Qs("wait_for_merge", wait_for_merge);
+		public ForceMergeDescriptor WaitForMerge(bool? waitForMerge = true) => Qs("wait_for_merge", waitForMerge);
 	
 	}
 	
@@ -2000,15 +2000,15 @@ namespace Nest
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public GetIndexDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public GetIndexDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public GetIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public GetIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public GetIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public GetIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public GetIndexDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public GetIndexDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
-		public GetIndexDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
+		public GetIndexDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	
 	}
 	
@@ -2035,11 +2035,11 @@ namespace Nest
 		public GetAliasDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetAliasDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public GetAliasDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetAliasDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public GetAliasDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public GetAliasDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetAliasDescriptor Local(bool? local = true) => Qs("local", local);
 	
@@ -2076,13 +2076,13 @@ namespace Nest
 		public GetFieldMappingDescriptor<T> AllTypes() => this.Type(Types.All);
 
 			///<summary>Whether the default mapping values should be returned as well</summary>
-		public GetFieldMappingDescriptor<T> IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
+		public GetFieldMappingDescriptor<T> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetFieldMappingDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public GetFieldMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetFieldMappingDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public GetFieldMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetFieldMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
 	
@@ -2117,11 +2117,11 @@ namespace Nest
 		public GetMappingDescriptor<T> AllTypes() => this.Type(Types.All);
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetMappingDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public GetMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetMappingDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public GetMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
 	
@@ -2150,17 +2150,17 @@ namespace Nest
 		public GetIndexSettingsDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetIndexSettingsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public GetIndexSettingsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetIndexSettingsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public GetIndexSettingsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public GetIndexSettingsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public GetIndexSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexSettingsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
-		public GetIndexSettingsDescriptor IncludeDefaults(bool? include_defaults = true) => Qs("include_defaults", include_defaults);
+		public GetIndexSettingsDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	
 	}
 	
@@ -2177,9 +2177,9 @@ namespace Nest
 		public GetIndexTemplateDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 			///<summary>Return settings in flat format (default: false)</summary>
-		public GetIndexTemplateDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public GetIndexTemplateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetIndexTemplateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public GetIndexTemplateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexTemplateDescriptor Local(bool? local = true) => Qs("local", local);
 	
@@ -2204,11 +2204,11 @@ namespace Nest
 		public UpgradeStatusDescriptor AllIndices() => this.Index(Indices.All);
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpgradeStatusDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public UpgradeStatusDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpgradeStatusDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public UpgradeStatusDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -2234,13 +2234,13 @@ namespace Nest
 			///<summary>Explicit operation timeout</summary>
 		public OpenIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public OpenIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public OpenIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public OpenIndexDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public OpenIndexDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public OpenIndexDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public OpenIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -2268,7 +2268,7 @@ namespace Nest
 			///<summary>Explicit timestamp for the document</summary>
 		public PutAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public PutAliasDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public PutAliasDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -2301,15 +2301,15 @@ namespace Nest
 			///<summary>Explicit operation timeout</summary>
 		public PutMappingDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public PutMappingDescriptor<T> MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public PutMappingDescriptor<T> MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PutMappingDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public PutMappingDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PutMappingDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public PutMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		public PutMappingDescriptor<T> UpdateAllTypes(bool? update_all_types = true) => Qs("update_all_types", update_all_types);
+		public PutMappingDescriptor<T> UpdateAllTypes(bool? updateAllTypes = true) => Qs("update_all_types", updateAllTypes);
 	
 	}
 	
@@ -2332,17 +2332,17 @@ namespace Nest
 		public UpdateIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
 
 			///<summary>Specify timeout for connection to master</summary>
-		public UpdateIndexSettingsDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public UpdateIndexSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
-		public UpdateIndexSettingsDescriptor PreserveExisting(bool? preserve_existing = true) => Qs("preserve_existing", preserve_existing);
+		public UpdateIndexSettingsDescriptor PreserveExisting(bool? preserveExisting = true) => Qs("preserve_existing", preserveExisting);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpdateIndexSettingsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public UpdateIndexSettingsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpdateIndexSettingsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public UpdateIndexSettingsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public UpdateIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public UpdateIndexSettingsDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public UpdateIndexSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	
 	}
 	
@@ -2361,9 +2361,9 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public PutIndexTemplateDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public PutIndexTemplateDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public PutIndexTemplateDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return settings in flat format (default: false)</summary>
-		public PutIndexTemplateDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public PutIndexTemplateDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	
 	}
 	
@@ -2388,7 +2388,7 @@ namespace Nest
 			///<summary>Whether to display detailed information about shard recovery</summary>
 		public RecoveryStatusDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 		///<summary>Display only those recoveries that are currently on-going</summary>
-		public RecoveryStatusDescriptor ActiveOnly(bool? active_only = true) => Qs("active_only", active_only);
+		public RecoveryStatusDescriptor ActiveOnly(bool? activeOnly = true) => Qs("active_only", activeOnly);
 	
 	}
 	
@@ -2411,11 +2411,11 @@ namespace Nest
 		public RefreshDescriptor AllIndices() => this.Index(Indices.All);
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public RefreshDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public RefreshDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public RefreshDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public RefreshDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public RefreshDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public RefreshDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -2436,11 +2436,11 @@ namespace Nest
 			///<summary>Explicit operation timeout</summary>
 		public RolloverIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
-		public RolloverIndexDescriptor DryRun(bool? dry_run = true) => Qs("dry_run", dry_run);
+		public RolloverIndexDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 		///<summary>Specify timeout for connection to master</summary>
-		public RolloverIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public RolloverIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
-		public RolloverIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public RolloverIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	
 	}
 	
@@ -2463,13 +2463,13 @@ namespace Nest
 		public SegmentsDescriptor AllIndices() => this.Index(Indices.All);
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SegmentsDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public SegmentsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SegmentsDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public SegmentsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>TODO: ?</summary>
-		public SegmentsDescriptor OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
+		public SegmentsDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public SegmentsDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	
@@ -2496,13 +2496,13 @@ namespace Nest
 			///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public IndicesShardStoresDescriptor Status(params string[] status) => Qs("status", status);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesShardStoresDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public IndicesShardStoresDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesShardStoresDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public IndicesShardStoresDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesShardStoresDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public IndicesShardStoresDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>TODO: ?</summary>
-		public IndicesShardStoresDescriptor OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
+		public IndicesShardStoresDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 	
 	}
 	
@@ -2527,9 +2527,9 @@ namespace Nest
 			///<summary>Explicit operation timeout</summary>
 		public ShrinkIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public ShrinkIndexDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ShrinkIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
-		public ShrinkIndexDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public ShrinkIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	
 	}
 	
@@ -2556,11 +2556,11 @@ namespace Nest
 		public IndicesStatsDescriptor Metric(IndicesStatsMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor CompletionFields(Fields completion_fields) => Qs("completion_fields", completion_fields);
+		public IndicesStatsDescriptor CompletionFields(Fields completionFields) => Qs("completion_fields", completionFields);
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("completion_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor FielddataFields(Fields fielddata_fields) => Qs("fielddata_fields", fielddata_fields);
+		public IndicesStatsDescriptor FielddataFields(Fields fielddataFields) => Qs("fielddata_fields", fielddataFields);
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fielddata_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
@@ -2572,7 +2572,7 @@ namespace Nest
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
 		public IndicesStatsDescriptor Level(Level level) => Qs("level", level);
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
-		public IndicesStatsDescriptor IncludeSegmentFileSizes(bool? include_segment_file_sizes = true) => Qs("include_segment_file_sizes", include_segment_file_sizes);
+		public IndicesStatsDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	
 	}
 	
@@ -2582,7 +2582,7 @@ namespace Nest
 					///<summary>Request timeout</summary>
 		public BulkAliasDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public BulkAliasDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public BulkAliasDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -2605,15 +2605,15 @@ namespace Nest
 		public UpgradeDescriptor AllIndices() => this.Index(Indices.All);
 
 			///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpgradeDescriptor AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public UpgradeDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpgradeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public UpgradeDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpgradeDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public UpgradeDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
-		public UpgradeDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public UpgradeDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
-		public UpgradeDescriptor OnlyAncientSegments(bool? only_ancient_segments = true) => Qs("only_ancient_segments", only_ancient_segments);
+		public UpgradeDescriptor OnlyAncientSegments(bool? onlyAncientSegments = true) => Qs("only_ancient_segments", onlyAncientSegments);
 	
 	}
 	
@@ -2648,21 +2648,21 @@ namespace Nest
 			///<summary>Return detailed information about the error</summary>
 		public ValidateQueryDescriptor<T> Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ValidateQueryDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public ValidateQueryDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ValidateQueryDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public ValidateQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>TODO: ?</summary>
-		public ValidateQueryDescriptor<T> OperationThreading(string operation_threading) => Qs("operation_threading", operation_threading);
+		public ValidateQueryDescriptor<T> OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ValidateQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
+		public ValidateQueryDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
 		///<summary>The analyzer to use for the query string</summary>
 		public ValidateQueryDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public ValidateQueryDescriptor<T> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public ValidateQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ValidateQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public ValidateQueryDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public ValidateQueryDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
@@ -2670,7 +2670,7 @@ namespace Nest
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
 		public ValidateQueryDescriptor<T> Rewrite(bool? rewrite = true) => Qs("rewrite", rewrite);
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
-		public ValidateQueryDescriptor<T> AllShards(bool? all_shards = true) => Qs("all_shards", all_shards);
+		public ValidateQueryDescriptor<T> AllShards(bool? allShards = true) => Qs("all_shards", allShards);
 	
 	}
 	
@@ -2691,7 +2691,7 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeletePipelineDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public DeletePipelineDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public DeletePipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -2710,7 +2710,7 @@ namespace Nest
 		public GetPipelineDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetPipelineDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public GetPipelineDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -2731,7 +2731,7 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public PutPipelineDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public PutPipelineDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public PutPipelineDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -2790,14 +2790,14 @@ namespace Nest
 		/// if that document has a <see cref="Nest.JoinField" /> or a routing mapping on for its type exists on <see cref="Nest.ConnectionSettings" /></para> 
 		///</summary>
 		public MultiGetDescriptor Routing(Routing routing) => Qs("routing", routing);
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MultiGetDescriptor SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		///<summary>Whether the _source should be included in the response.</summary>
+		public MultiGetDescriptor SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public MultiGetDescriptor SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public MultiGetDescriptor SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("_source_include", fields?.Select(e=>(Field)e));
 	
@@ -2832,13 +2832,13 @@ namespace Nest
 		public MultiSearchDescriptor AllTypes() => this.Type(Types.All);
 
 			///<summary>Search operation type</summary>
-		public MultiSearchDescriptor SearchType(SearchType search_type) => Qs("search_type", search_type);
+		public MultiSearchDescriptor SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
-		public MultiSearchDescriptor MaxConcurrentSearches(long? max_concurrent_searches) => Qs("max_concurrent_searches", max_concurrent_searches);
+		public MultiSearchDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public MultiSearchDescriptor TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
+		public MultiSearchDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
-		public MultiSearchDescriptor PreFilterShardSize(long? pre_filter_shard_size) => Qs("pre_filter_shard_size", pre_filter_shard_size);
+		public MultiSearchDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	
 	}
 	
@@ -2871,11 +2871,11 @@ namespace Nest
 		public MultiSearchTemplateDescriptor AllTypes() => this.Type(Types.All);
 
 			///<summary>Search operation type</summary>
-		public MultiSearchTemplateDescriptor SearchType(SearchType search_type) => Qs("search_type", search_type);
+		public MultiSearchTemplateDescriptor SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public MultiSearchTemplateDescriptor TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
+		public MultiSearchTemplateDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
-		public MultiSearchTemplateDescriptor MaxConcurrentSearches(long? max_concurrent_searches) => Qs("max_concurrent_searches", max_concurrent_searches);
+		public MultiSearchTemplateDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
 	
 	}
 	
@@ -2902,9 +2902,9 @@ namespace Nest
 		public MultiTermVectorsDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 			///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		public MultiTermVectorsDescriptor TermStatistics(bool? term_statistics = true) => Qs("term_statistics", term_statistics);
+		public MultiTermVectorsDescriptor TermStatistics(bool? termStatistics = true) => Qs("term_statistics", termStatistics);
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
-		public MultiTermVectorsDescriptor FieldStatistics(bool? field_statistics = true) => Qs("field_statistics", field_statistics);
+		public MultiTermVectorsDescriptor FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
 		public MultiTermVectorsDescriptor Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
@@ -2933,7 +2933,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public MultiTermVectorsDescriptor Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public MultiTermVectorsDescriptor VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public MultiTermVectorsDescriptor VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -2956,9 +2956,9 @@ namespace Nest
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
 		public NodesHotThreadsDescriptor Threads(long? threads) => Qs("threads", threads);
 		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
-		public NodesHotThreadsDescriptor IgnoreIdleThreads(bool? ignore_idle_threads = true) => Qs("ignore_idle_threads", ignore_idle_threads);
+		public NodesHotThreadsDescriptor IgnoreIdleThreads(bool? ignoreIdleThreads = true) => Qs("ignore_idle_threads", ignoreIdleThreads);
 		///<summary>The type to sample (default: cpu)</summary>
-		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type) => Qs("type", thread_type);
+		public NodesHotThreadsDescriptor ThreadType(ThreadType threadType) => Qs("type", threadType);
 		///<summary>Explicit operation timeout</summary>
 		public NodesHotThreadsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -2981,7 +2981,7 @@ namespace Nest
 		public NodesInfoDescriptor Metric(NodesInfoMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
 			///<summary>Return settings in flat format (default: false)</summary>
-		public NodesInfoDescriptor FlatSettings(bool? flat_settings = true) => Qs("flat_settings", flat_settings);
+		public NodesInfoDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Explicit operation timeout</summary>
 		public NodesInfoDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -3008,11 +3008,11 @@ namespace Nest
 		public NodesStatsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor CompletionFields(Fields completion_fields) => Qs("completion_fields", completion_fields);
+		public NodesStatsDescriptor CompletionFields(Fields completionFields) => Qs("completion_fields", completionFields);
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("completion_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor FielddataFields(Fields fielddata_fields) => Qs("fielddata_fields", fielddata_fields);
+		public NodesStatsDescriptor FielddataFields(Fields fielddataFields) => Qs("fielddata_fields", fielddataFields);
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class => Qs("fielddata_fields", fields?.Select(e=>(Field)e));
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
@@ -3028,7 +3028,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public NodesStatsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
-		public NodesStatsDescriptor IncludeSegmentFileSizes(bool? include_segment_file_sizes = true) => Qs("include_segment_file_sizes", include_segment_file_sizes);
+		public NodesStatsDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	
 	}
 	
@@ -3078,7 +3078,7 @@ namespace Nest
 			///<summary>Explicit operation timeout</summary>
 		public PutScriptDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public PutScriptDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public PutScriptDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -3090,11 +3090,11 @@ namespace Nest
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public ReindexOnServerDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public ReindexOnServerDescriptor WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public ReindexOnServerDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Should the request should block until the reindex is complete.</summary>
-		public ReindexOnServerDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public ReindexOnServerDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
-		public ReindexOnServerDescriptor RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
+		public ReindexOnServerDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public ReindexOnServerDescriptor Slices(long? slices) => Qs("slices", slices);
 	
@@ -3113,7 +3113,7 @@ namespace Nest
 		public ReindexRethrottleDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 			///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
-		public ReindexRethrottleDescriptor RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
+		public ReindexRethrottleDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 	
 	}
 	
@@ -3174,17 +3174,17 @@ namespace Nest
 			///<summary>The analyzer to use for the query string</summary>
 		public SearchDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchDescriptor<T> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public SearchDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public SearchDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public SearchDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public SearchDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public SearchDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -3200,32 +3200,32 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public SearchDescriptor<T> SearchType(SearchType search_type) => Qs("search_type", search_type);
+		public SearchDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public SearchDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<T> SuggestField(Field suggest_field) => Qs("suggest_field", suggest_field);
+		public SearchDescriptor<T> SuggestField(Field suggestField) => Qs("suggest_field", suggestField);
 
 		///<summary>Specify which field to use for suggestions</summary>
 		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> field)  => Qs("suggest_field", (Field)field);
 		///<summary>Specify suggest mode</summary>
-		public SearchDescriptor<T> SuggestMode(SuggestMode suggest_mode) => Qs("suggest_mode", suggest_mode);
+		public SearchDescriptor<T> SuggestMode(SuggestMode suggestMode) => Qs("suggest_mode", suggestMode);
 		///<summary>How many suggestions to return in response</summary>
-		public SearchDescriptor<T> SuggestSize(long? suggest_size) => Qs("suggest_size", suggest_size);
+		public SearchDescriptor<T> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public SearchDescriptor<T> SuggestText(string suggest_text) => Qs("suggest_text", suggest_text);
+		public SearchDescriptor<T> SuggestText(string suggestText) => Qs("suggest_text", suggestText);
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
-		public SearchDescriptor<T> TrackTotalHits(bool? track_total_hits = true) => Qs("track_total_hits", track_total_hits);
+		public SearchDescriptor<T> TrackTotalHits(bool? trackTotalHits = true) => Qs("track_total_hits", trackTotalHits);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public SearchDescriptor<T> TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
+		public SearchDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public SearchDescriptor<T> RequestCache(bool? request_cache = true) => Qs("request_cache", request_cache);
+		public SearchDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
-		public SearchDescriptor<T> BatchedReduceSize(long? batched_reduce_size) => Qs("batched_reduce_size", batched_reduce_size);
+		public SearchDescriptor<T> BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
 		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
-		public SearchDescriptor<T> MaxConcurrentShardRequests(long? max_concurrent_shard_requests) => Qs("max_concurrent_shard_requests", max_concurrent_shard_requests);
+		public SearchDescriptor<T> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
-		public SearchDescriptor<T> PreFilterShardSize(long? pre_filter_shard_size) => Qs("pre_filter_shard_size", pre_filter_shard_size);
+		public SearchDescriptor<T> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	
 	}
 	
@@ -3260,11 +3260,11 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public SearchShardsDescriptor<T> Local(bool? local = true) => Qs("local", local);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchShardsDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public SearchShardsDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchShardsDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public SearchShardsDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -3297,11 +3297,11 @@ namespace Nest
 		public SearchTemplateDescriptor<T> AllTypes() => this.Type(Types.All);
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchTemplateDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public SearchTemplateDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchTemplateDescriptor<T> Preference(string preference) => Qs("preference", preference);
  		///<summary>
@@ -3315,13 +3315,13 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchTemplateDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public SearchTemplateDescriptor<T> SearchType(SearchType search_type) => Qs("search_type", search_type);
+		public SearchTemplateDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public SearchTemplateDescriptor<T> Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Specify whether to profile the query execution</summary>
 		public SearchTemplateDescriptor<T> Profile(bool? profile = true) => Qs("profile", profile);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public SearchTemplateDescriptor<T> TypedKeys(bool? typed_keys = true) => Qs("typed_keys", typed_keys);
+		public SearchTemplateDescriptor<T> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	
 	}
 	
@@ -3338,9 +3338,9 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public SnapshotDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public SnapshotDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public SnapshotDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	
 	}
 	
@@ -3355,7 +3355,7 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public CreateRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public CreateRepositoryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public CreateRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Whether to verify the repository after creation</summary>
@@ -3376,7 +3376,7 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteSnapshotDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public DeleteSnapshotDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -3391,7 +3391,7 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public DeleteRepositoryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public DeleteRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -3410,9 +3410,9 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetSnapshotDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public GetSnapshotDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
-		public GetSnapshotDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public GetSnapshotDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public GetSnapshotDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	
@@ -3431,7 +3431,7 @@ namespace Nest
 		public GetRepositoryDescriptor RepositoryName(Names repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public GetRepositoryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetRepositoryDescriptor Local(bool? local = true) => Qs("local", local);
 	
@@ -3450,9 +3450,9 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public RestoreDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public RestoreDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public RestoreDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public RestoreDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	
 	}
 	
@@ -3473,9 +3473,9 @@ namespace Nest
 		public SnapshotStatusDescriptor Snapshot(Names snapshot) => Assign(a=>a.RouteValues.Optional("snapshot", snapshot));
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotStatusDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public SnapshotStatusDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
-		public SnapshotStatusDescriptor IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public SnapshotStatusDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	
 	}
 	
@@ -3490,7 +3490,7 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public VerifyRepositoryDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public VerifyRepositoryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Explicit operation timeout</summary>
 		public VerifyRepositoryDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -3513,9 +3513,9 @@ namespace Nest
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
 		public CancelTasksDescriptor Actions(params string[] actions) => Qs("actions", actions);
 		///<summary>Cancel tasks with specified parent node.</summary>
-		public CancelTasksDescriptor ParentNode(string parent_node) => Qs("parent_node", parent_node);
+		public CancelTasksDescriptor ParentNode(string parentNode) => Qs("parent_node", parentNode);
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public CancelTasksDescriptor ParentTaskId(string parent_task_id) => Qs("parent_task_id", parent_task_id);
+		public CancelTasksDescriptor ParentTaskId(string parentTaskId) => Qs("parent_task_id", parentTaskId);
 	
 	}
 	
@@ -3532,7 +3532,7 @@ namespace Nest
 		public GetTaskDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 			///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public GetTaskDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public GetTaskDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	
 	}
 	
@@ -3546,13 +3546,13 @@ namespace Nest
 		///<summary>Return detailed task information (default: false)</summary>
 		public ListTasksDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);
 		///<summary>Return tasks with specified parent node.</summary>
-		public ListTasksDescriptor ParentNode(string parent_node) => Qs("parent_node", parent_node);
+		public ListTasksDescriptor ParentNode(string parentNode) => Qs("parent_node", parentNode);
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public ListTasksDescriptor ParentTaskId(string parent_task_id) => Qs("parent_task_id", parent_task_id);
+		public ListTasksDescriptor ParentTaskId(string parentTaskId) => Qs("parent_task_id", parentTaskId);
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public ListTasksDescriptor WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public ListTasksDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
-		public ListTasksDescriptor GroupBy(GroupBy group_by) => Qs("group_by", group_by);
+		public ListTasksDescriptor GroupBy(GroupBy groupBy) => Qs("group_by", groupBy);
 	
 	}
 	
@@ -3592,9 +3592,9 @@ namespace Nest
 		public TermVectorsDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
 			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public TermVectorsDescriptor<TDocument> TermStatistics(bool? term_statistics = true) => Qs("term_statistics", term_statistics);
+		public TermVectorsDescriptor<TDocument> TermStatistics(bool? termStatistics = true) => Qs("term_statistics", termStatistics);
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public TermVectorsDescriptor<TDocument> FieldStatistics(bool? field_statistics = true) => Qs("field_statistics", field_statistics);
+		public TermVectorsDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 		///<summary>A comma-separated list of fields to return.</summary>
 		public TermVectorsDescriptor<TDocument> Fields(Fields fields) => Qs("fields", fields);
 		///<summary>A comma-separated list of fields to return.</summary>
@@ -3623,7 +3623,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public TermVectorsDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public TermVectorsDescriptor<TDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public TermVectorsDescriptor<TDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -3661,9 +3661,9 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 			///<summary>Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		public UpdateDescriptor<TDocument, TPartialDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+		///<summary>Whether the _source should be included in the response.</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>The script language (default: painless)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => Qs("lang", lang);
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
@@ -3672,7 +3672,7 @@ namespace Nest
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Refresh(Refresh refresh) => Qs("refresh", refresh);
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> RetryOnConflict(long? retry_on_conflict) => Qs("retry_on_conflict", retry_on_conflict);
+		public UpdateDescriptor<TDocument, TPartialDocument> RetryOnConflict(long? retryOnConflict) => Qs("retry_on_conflict", retryOnConflict);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -3690,7 +3690,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType version_type) => Qs("version_type", version_type);
+		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -3726,21 +3726,21 @@ namespace Nest
 			///<summary>The analyzer to use for the query string</summary>
 		public UpdateByQueryDescriptor<T> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public UpdateByQueryDescriptor<T> AnalyzeWildcard(bool? analyze_wildcard = true) => Qs("analyze_wildcard", analyze_wildcard);
+		public UpdateByQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public UpdateByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => Qs("default_operator", default_operator);
+		public UpdateByQueryDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public UpdateByQueryDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Starting offset (default: 0)</summary>
 		public UpdateByQueryDescriptor<T> From(long? from) => Qs("from", from);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpdateByQueryDescriptor<T> IgnoreUnavailable(bool? ignore_unavailable = true) => Qs("ignore_unavailable", ignore_unavailable);
+		public UpdateByQueryDescriptor<T> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpdateByQueryDescriptor<T> AllowNoIndices(bool? allow_no_indices = true) => Qs("allow_no_indices", allow_no_indices);
+		public UpdateByQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>What to do when the update by query hits version conflicts?</summary>
 		public UpdateByQueryDescriptor<T> Conflicts(Conflicts conflicts) => Qs("conflicts", conflicts);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => Qs("expand_wildcards", expand_wildcards);
+		public UpdateByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public UpdateByQueryDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
@@ -3748,7 +3748,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public UpdateByQueryDescriptor<T> Preference(string preference) => Qs("preference", preference);
 		///<summary>Query in the Lucene query string syntax</summary>
-		public UpdateByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => Qs("q", query_on_query_string);
+		public UpdateByQueryDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -3760,45 +3760,45 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public UpdateByQueryDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public UpdateByQueryDescriptor<T> SearchType(SearchType search_type) => Qs("search_type", search_type);
+		public UpdateByQueryDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public UpdateByQueryDescriptor<T> SearchTimeout(Time search_timeout) => Qs("search_timeout", search_timeout);
+		public UpdateByQueryDescriptor<T> SearchTimeout(Time searchTimeout) => Qs("search_timeout", searchTimeout);
 		///<summary>Number of hits to return (default: 10)</summary>
 		public UpdateByQueryDescriptor<T> Size(long? size) => Qs("size", size);
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
 		public UpdateByQueryDescriptor<T> Sort(params string[] sort) => Qs("sort", sort);
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public UpdateByQueryDescriptor<T> SourceEnabled(bool? source_enabled = true) => Qs("_source", source_enabled);
+		///<summary>Whether the _source should be included in the response.</summary>
+		public UpdateByQueryDescriptor<T> SourceEnabled(bool? sourceEnabled = true) => Qs("_source", sourceEnabled);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceExclude(Fields source_exclude) => Qs("_source_exclude", source_exclude);
+		public UpdateByQueryDescriptor<T> SourceExclude(Fields sourceExclude) => Qs("_source_exclude", sourceExclude);
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_exclude", fields?.Select(e=>(Field)e));
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public UpdateByQueryDescriptor<T> SourceInclude(Fields source_include) => Qs("_source_include", source_include);
+		public UpdateByQueryDescriptor<T> SourceInclude(Fields sourceInclude) => Qs("_source_include", sourceInclude);
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  => Qs("_source_include", fields?.Select(e=>(Field)e));
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public UpdateByQueryDescriptor<T> TerminateAfter(long? terminate_after) => Qs("terminate_after", terminate_after);
+		public UpdateByQueryDescriptor<T> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public UpdateByQueryDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public UpdateByQueryDescriptor<T> Version(bool? version = true) => Qs("version", version);
 		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
-		public UpdateByQueryDescriptor<T> VersionType(bool? version_type = true) => Qs("version_type", version_type);
+		public UpdateByQueryDescriptor<T> VersionType(bool? versionType = true) => Qs("version_type", versionType);
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public UpdateByQueryDescriptor<T> RequestCache(bool? request_cache = true) => Qs("request_cache", request_cache);
+		public UpdateByQueryDescriptor<T> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public UpdateByQueryDescriptor<T> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
 		public UpdateByQueryDescriptor<T> Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public UpdateByQueryDescriptor<T> WaitForActiveShards(string wait_for_active_shards) => Qs("wait_for_active_shards", wait_for_active_shards);
+		public UpdateByQueryDescriptor<T> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public UpdateByQueryDescriptor<T> ScrollSize(long? scroll_size) => Qs("scroll_size", scroll_size);
+		public UpdateByQueryDescriptor<T> ScrollSize(long? scrollSize) => Qs("scroll_size", scrollSize);
 		///<summary>Should the request should block until the update by query operation is complete.</summary>
-		public UpdateByQueryDescriptor<T> WaitForCompletion(bool? wait_for_completion = true) => Qs("wait_for_completion", wait_for_completion);
+		public UpdateByQueryDescriptor<T> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
-		public UpdateByQueryDescriptor<T> RequestsPerSecond(long? requests_per_second) => Qs("requests_per_second", requests_per_second);
+		public UpdateByQueryDescriptor<T> RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public UpdateByQueryDescriptor<T> Slices(long? slices) => Qs("slices", slices);
 	
@@ -3878,7 +3878,7 @@ namespace Nest
 	public partial class XPackUsageDescriptor  : RequestDescriptorBase<XPackUsageDescriptor,XPackUsageRequestParameters, IXPackUsageRequest>, IXPackUsageRequest
 	{ 
 					///<summary>Specify timeout for watch write operation</summary>
-		public XPackUsageDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public XPackUsageDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -3983,7 +3983,7 @@ namespace Nest
 		
 
 				///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
-		public FlushJobDescriptor SkipTime(string skip_time) => Qs("skip_time", skip_time);
+		public FlushJobDescriptor SkipTime(string skipTime) => Qs("skip_time", skipTime);
 	
 	}
 	
@@ -4144,9 +4144,9 @@ namespace Nest
 		
 
 				///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
-		public PostJobDataDescriptor ResetStart(DateTimeOffset reset_start) => Qs("reset_start", reset_start);
+		public PostJobDataDescriptor ResetStart(DateTimeOffset resetStart) => Qs("reset_start", resetStart);
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
-		public PostJobDataDescriptor ResetEnd(DateTimeOffset reset_end) => Qs("reset_end", reset_end);
+		public PostJobDataDescriptor ResetEnd(DateTimeOffset resetEnd) => Qs("reset_end", resetEnd);
 	
 	}
 	
@@ -4530,7 +4530,7 @@ namespace Nest
 		public AcknowledgeWatchDescriptor ActionId(ActionIds actionId) => Assign(a=>a.RouteValues.Optional("action_id", actionId));
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public AcknowledgeWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public AcknowledgeWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -4545,7 +4545,7 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public ActivateWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public ActivateWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -4560,7 +4560,7 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeactivateWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public DeactivateWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -4575,7 +4575,7 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public DeleteWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	
 	}
 	
@@ -4620,7 +4620,7 @@ namespace Nest
 		
 
 				///<summary>Explicit operation timeout for connection to master node</summary>
-		public PutWatchDescriptor MasterTimeout(Time master_timeout) => Qs("master_timeout", master_timeout);
+		public PutWatchDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public PutWatchDescriptor Active(bool? active = true) => Qs("active", active);
 	
@@ -4651,7 +4651,7 @@ namespace Nest
 		public WatcherStatsDescriptor WatcherStatsMetric(WatcherStatsMetric watcherStatsMetric) => Assign(a=>a.RouteValues.Optional("watcher_stats_metric", (Metrics)watcherStatsMetric));
 
 			///<summary>Emits stack traces of currently running watches</summary>
-		public WatcherStatsDescriptor EmitStacktraces(bool? emit_stacktraces = true) => Qs("emit_stacktraces", emit_stacktraces);
+		public WatcherStatsDescriptor EmitStacktraces(bool? emitStacktraces = true) => Qs("emit_stacktraces", emitStacktraces);
 	
 	}
 	

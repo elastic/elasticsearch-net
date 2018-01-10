@@ -22,7 +22,7 @@ namespace Nest
 		var original = common.OriginalQueryStringParamName;
 		var t = @common.CsharpHighLevelType;
 		var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
-		<text>		public TDescriptor @(common.CsharpName)(@common.CsharpHighLevelType @original@tSuffix) => Qs("@original", @(original));</text>
+		<text>		public TDescriptor @(common.CsharpName)(@common.CsharpHighLevelType @common.CsharpArgumentName@tSuffix) => Qs("@original", @(common.CsharpArgumentName));</text>
 	}
 	}
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
@@ -50,29 +50,27 @@ namespace Nest
 		@(Raw(c.Code))
 </text>
     }
-	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
+	</text>foreach (var param in method.Url.Params.Values)
 	{
+		var original = param.OriginalQueryStringParamName;
 		//skip parameters already part of the path portion of the url
-        if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
+        if (method.Url.Parts != null && method.Url.Parts.ContainsKey(original))
         {
 			continue;
         }
 		//we prefer this parameter to be explictly implemented on the request body
-		if (kv.Value.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+		if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
         {
 			continue;
         }
-		var t = @kv.Value.HighLevelType(kv.Key);
+		var t = @param.HighLevelType(original);
 		var tMethod = t == "Time" ? ".ToTimeSpan()" : "";
 		var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
-		var m = kv.Key.ToPascalCase();
-		var mm = (m != "Type" && m != "Index" && m != "Source" && m != "Script") ? m : m + "QueryString";
 		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
 		var g = typed ? method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "") : "T";
-		var mml = mm.ToLowerInvariant();
+		var mml = param.CsharpName.ToLowerInvariant();
 		var fieldsMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("Fields");
-		var desc = kv.Value.HighLevelTypeDescription(kv.Key).ToList();
-		var original = kv.Value.OriginalQueryStringParamName;
+		var desc = param.HighLevelTypeDescription(original).ToList();
 		<text>@if (desc.Count == 1) {
 		<text>///<summary>@Raw(desc.First())</summary></text>
 		}
@@ -80,19 +78,19 @@ namespace Nest
 		{ <text>		///<summary>
 		@Raw(string.Join("\r\n\t\t", desc.Select(d=> "/// " + d)))
 		///</summary></text>
-		}</text><text>@if(!string.IsNullOrWhiteSpace(kv.Value.Obsolete))
-		{<text>		[Obsolete("Scheduled to be removed in 7.0, @kv.Value.Obsolete")]
+		}</text><text>@if(!string.IsNullOrWhiteSpace(param.Obsolete))
+		{<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
 </text>}
-		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => Qs("@original", @(kv.Key));</text>
+		public @Raw(type) @(param.CsharpName)(@t @param.CsharpArgumentName@tSuffix) => Qs("@original", @(param.CsharpArgumentName));</text>
 		if (fieldsMethod)
 		{
-		<text>///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));</text>
+		<text>///<summary>@param.Description</summary>
+		public @Raw(type) @param.CsharpName@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));</text>
 		}
-		else if (mm.ToLowerInvariant().Contains("field") && t.Contains("Field"))
+		else if (param.CsharpName.ToLowerInvariant().Contains("field") && t.Contains("Field"))
 		{<text>
-		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", (Field)field);</text>
+		///<summary>@param.Description</summary>
+		public @Raw(type) @param.CsharpName@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", (Field)field);</text>
 		}
 	}
 	if (method.Unmapped)

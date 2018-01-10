@@ -10,6 +10,7 @@ namespace ApiGenerator.Domain
 		public string OriginalQueryStringParamName { get; set; }
 
 		public string CsharpName { get; set; }
+		public string CsharpArgumentName => this.CsharpName.ToCamelCase();
 		public string CsharpHighLevelType => this.HighLevelType(this.OriginalQueryStringParamName).Replace("params ", "");
 
 		public string DeprecatedInFavorOf { get; set; }
