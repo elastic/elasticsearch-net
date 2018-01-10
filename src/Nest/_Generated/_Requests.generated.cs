@@ -1743,6 +1743,7 @@ namespace Nest
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
@@ -2310,6 +2311,7 @@ namespace Nest
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>ID of parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
@@ -2353,6 +2355,7 @@ namespace Nest
 		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>ID of parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
@@ -2596,6 +2599,7 @@ namespace Nest
 		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -2651,6 +2655,7 @@ namespace Nest
 		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -2784,6 +2789,7 @@ namespace Nest
 		public bool? Lenient { get { return Q<bool?>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -3560,6 +3566,7 @@ namespace Nest
 		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -3615,6 +3622,7 @@ namespace Nest
 		public Fields StoredFields { get { return Q<Fields>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -3990,6 +3998,7 @@ namespace Nest
 		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
 		
 		///<summary>ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
@@ -4401,6 +4410,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
@@ -5914,6 +5924,7 @@ namespace Nest
 		partial void DocumentFromPath(T document);
 
 			///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -5966,6 +5977,7 @@ namespace Nest
 		
 
 			///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -6034,6 +6046,7 @@ namespace Nest
 		partial void DocumentFromPath(T document);
 
 			///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -6086,6 +6099,7 @@ namespace Nest
 		
 
 			///<summary>The ID of the parent document</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -6284,6 +6298,7 @@ namespace Nest
 		public Routing Routing { get { return Q<Routing>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Parent id of documents.</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
@@ -6737,6 +6752,7 @@ namespace Nest
 		public string Lang { get { return Q<string>("lang"); } set { Q("lang", value); } }
 		
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>

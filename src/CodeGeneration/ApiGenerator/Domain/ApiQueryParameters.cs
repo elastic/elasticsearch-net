@@ -13,7 +13,6 @@ namespace ApiGenerator.Domain
 
 		public string ClsName { get; set; }
 
-		public string DeprecatedInFavorOf { get; set; }
 		public string Obsolete { get; set; }
 
 		public IEnumerable<string> Options { get; set; }
