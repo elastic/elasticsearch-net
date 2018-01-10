@@ -64,7 +64,6 @@ namespace ApiGenerator.Domain
 		public IDictionary<string, string> RemovedMethods { get; set; } = new Dictionary<string, string>();
 		public ApiUrl Url { get; set; }
 		public ApiBody Body { get; set; }
-		public IDictionary<string, ApiQueryParameters> ObsoleteQueryParameters { get; set; }
 
 		public string PascalCase(string s)
 		{
@@ -260,78 +259,11 @@ namespace ApiGenerator.Domain
 			}
 		}
 
+
 		private void PatchRequestParameters(IEndpointOverrides overrides)
 		{
-			if (this.Url.Params == null) return;
-			foreach (var param in RestApiSpec.CommonApiQueryParameters)
-			{
-				if (!this.Url.Params.ContainsKey(param.Key))
-					this.Url.Params.Add(param.Key, param.Value);
-			}
-
-			if (this.ObsoleteQueryParameters != null)
-			{
-				foreach (var param in this.ObsoleteQueryParameters)
-				{
-					if (!this.Url.Params.ContainsKey(param.Key))
-						this.Url.Params.Add(param.Key, param.Value);
-				}
-			}
-			var declaredKeys = this.Url.Params.Select(p => p.Value.OriginalQueryStringParamName ?? p.Key).ToList();
-			IEnumerable<string> skipList = new List<string>();
-			IDictionary<string, string> queryStringParamsRenameList = new Dictionary<string, string>();
-
-			if (overrides != null)
-			{
-				var name = overrides.GetType().Name;
-				skipList = overrides.SkipQueryStringParams ?? skipList;
-				queryStringParamsRenameList = overrides.RenameQueryStringParams ?? queryStringParamsRenameList;
-				foreach (var p in skipList.Except(declaredKeys))
-					ApiGenerator.Warnings.Add($"On {name} skip key '{p}' is not found in spec");
-				foreach (var p in queryStringParamsRenameList.Keys.Except(declaredKeys))
-					ApiGenerator.Warnings.Add($"On {name} rename key '{p}' is not found in spec");
-			}
-
-			var globalQueryStringRenames = new Dictionary<string, string>
-			{
-				{"_source", "source_enabled"},
-				{"_source_include", "source_include"},
-				{"_source_exclude", "source_exclude"},
-				{"q", "query_on_query_string"},
-				{"docvalue_fields", "doc_value_fields"},
-			};
-
-			foreach (var kv in globalQueryStringRenames)
-				if (!queryStringParamsRenameList.ContainsKey(kv.Key))
-					queryStringParamsRenameList[kv.Key] = kv.Value;
-
-			var globalOverrides = new GlobalOverrides();
-			var patchedParams = new Dictionary<string, ApiQueryParameters>();
-			foreach (var kv in this.Url.Params)
-			{
-				if (kv.Value.OriginalQueryStringParamName.IsNullOrEmpty())
-					kv.Value.OriginalQueryStringParamName = kv.Key;
-
-				if (skipList.Contains(kv.Key)) continue;
-				if (globalOverrides.RenderPartial.Contains(kv.Key))
-					kv.Value.RenderPartial = true;
-
-				if (!queryStringParamsRenameList.TryGetValue(kv.Key, out var newName))
-				{
-					patchedParams.Add(kv.Key, kv.Value);
-					continue;
-				}
-
-				if (globalOverrides.RenderPartial.Contains(newName))
-					kv.Value.RenderPartial = true;
-
-				//make sure source_enabled takes a boolean only
-				if (newName == "source_enabled") kv.Value.Type = "boolean";
-
-				patchedParams.Add(newName, kv.Value);
-			}
-
-			this.Url.Params = patchedParams;
+			var newParams = ApiQueryParametersPatcher.Patch(this.Url.Params, overrides);
+			this.Url.Params = newParams;
 		}
 
 		private static string RenameMetricUrlPathParam(string path)

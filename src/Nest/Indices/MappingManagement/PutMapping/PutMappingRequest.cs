@@ -39,8 +39,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? NumericDetection { get; set; }
 		/// <inheritdoc/>
-		public IParentField ParentField { get; set; }
-		/// <inheritdoc/>
 		public IProperties Properties { get; set; }
 		/// <inheritdoc/>
 		public IRoutingField RoutingField { get; set; }
@@ -77,8 +75,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? NumericDetection { get; set; }
 		/// <inheritdoc/>
-		public IParentField ParentField { get; set; }
-		/// <inheritdoc/>
 		public IProperties Properties { get; set; }
 		/// <inheritdoc/>
 		public IRoutingField RoutingField { get; set; }
@@ -107,7 +103,6 @@ namespace Nest
 		IIndexField ITypeMapping.IndexField { get; set; }
 		IDictionary<string, object> ITypeMapping.Meta { get; set; }
 		bool? ITypeMapping.NumericDetection { get; set; }
-		IParentField ITypeMapping.ParentField { get; set; }
 		IProperties ITypeMapping.Properties { get; set; }
 		IRoutingField ITypeMapping.RoutingField { get; set; }
 		ISizeField ITypeMapping.SizeField { get; set; }
@@ -130,12 +125,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
-
-		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Parent(TypeName parentType) => Assign(a => a.ParentField = new ParentField { Type = parentType });
-
-		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Parent<TParent>() where TParent : class => Assign(a => a.ParentField = new ParentField { Type = typeof(TParent) });
 
 #pragma warning disable 618
 		/// <inheritdoc/>

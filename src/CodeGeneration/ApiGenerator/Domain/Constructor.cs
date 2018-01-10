@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using CsQuery.ExtensionMethods.Internal;
 
 namespace ApiGenerator.Domain
 {
@@ -9,6 +9,8 @@ namespace ApiGenerator.Domain
 		public string Url { get; set; }
 		public string Description { get; set; }
 		public string AdditionalCode { get; set;}
+
+
 	}
 
 	public class FluentRouteSetter

@@ -40,7 +40,6 @@ namespace Nest
 					if (name == "_routing") mapping = po.ToObject<RoutingField>();
 					if (name == "_index") mapping = po.ToObject<IndexField>();
 					if (name == "_size") mapping = po.ToObject<SizeField>();
-					if (name == "_parent") mapping = po.ToObject<ParentField>();
 					//TODO _field_names does not seem to have a special mapping (just returns like _uid) needs CONFIRMATION
 				}
 				if (mapping == null) continue;

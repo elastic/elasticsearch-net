@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using CsQuery.ExtensionMethods.Internal;
 
 namespace ApiGenerator
 {
@@ -26,6 +27,13 @@ namespace ApiGenerator
 			if (removeLeadingUnderscore)
 				result = result.TrimStart('_');
 			return result;
+		}
+		public static string ToCamelCase(this string s)
+		{
+			if (string.IsNullOrEmpty(s)) return s;
+			var pascal = s.ToPascalCase(true);
+			if (pascal.Length <= 1) return pascal;
+			return pascal[0].ToLower() + s.Substring(1);
 		}
 	}
 }

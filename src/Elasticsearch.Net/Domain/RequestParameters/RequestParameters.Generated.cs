@@ -11,6448 +11,2726 @@ using System.Linq.Expressions;
 namespace Elasticsearch.Net
 {
 	
-	///<summary>Request parameters descriptor for Bulk
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Bulk<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public class BulkRequestParameters : RequestParameters<BulkRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+		///<summary>
+		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Default document type for items which don&#39;t provide one</summary>
-		public string Type { get { return Q<string>("type"); } set { Q("type", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		///<summary>Default document type for items which don't provide one</summary>
+		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
-		
+		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
 		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
-		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
-		
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
-		
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
-		
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
-		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatAliases
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatAliases<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public class CatAliasesRequestParameters : RequestParameters<CatAliasesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatAllocation
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatAllocation<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public class CatAllocationRequestParameters : RequestParameters<CatAllocationRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
-		
+		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatCount
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatCount<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public class CatCountRequestParameters : RequestParameters<CatCountRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatFielddata
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatFielddata<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public class CatFielddataRequestParameters : RequestParameters<CatFielddataRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
-		
+		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		///<summary>A comma-separated list of fields to return in the output</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatHealth
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatHealth<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public class CatHealthRequestParameters : RequestParameters<CatHealthRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Set to false to disable timestamping</summary>
-		public bool? Ts { get { return Q<bool?>("ts"); } set { Q("ts", value); } }
-		
+		public bool? IncludeTimestamp { get => Q<bool?>("ts"); set => Q("ts", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatHelp
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatHelp<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public class CatHelpRequestParameters : RequestParameters<CatHelpRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatIndices
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatIndices<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public class CatIndicesRequestParameters : RequestParameters<CatIndicesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
-		
+		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
-		///<summary>A health status (&quot;green&quot;, &quot;yellow&quot;, or &quot;red&quot; to filter only indices matching the specified health status</summary>
-		public Health Health { get { return Q<Health>("health"); } set { Q("health", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
+		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
+		public Health Health { get => Q<Health>("health"); set => Q("health", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Set to true to return stats only for primary shards</summary>
-		public bool? Pri { get { return Q<bool?>("pri"); } set { Q("pri", value); } }
-		
+		public bool? Pri { get => Q<bool?>("pri"); set => Q("pri", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatMaster
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatMaster<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public class CatMasterRequestParameters : RequestParameters<CatMasterRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatNodeattrs
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatNodeattrs<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public class CatNodeAttributesRequestParameters : RequestParameters<CatNodeAttributesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatNodes
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatNodes<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public class CatNodesRequestParameters : RequestParameters<CatNodesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return the full node ID instead of the shortened version (default: false)</summary>
-		public bool? FullId { get { return Q<bool?>("full_id"); } set { Q("full_id", value); } }
-		
+		public bool? FullId { get => Q<bool?>("full_id"); set => Q("full_id", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatPendingTasks
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatPendingTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public class CatPendingTasksRequestParameters : RequestParameters<CatPendingTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatPlugins
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatPlugins<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public class CatPluginsRequestParameters : RequestParameters<CatPluginsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatRecovery
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatRecovery<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public class CatRecoveryRequestParameters : RequestParameters<CatRecoveryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
-		
+		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatRepositories
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatRepositories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
 	public class CatRepositoriesRequestParameters : RequestParameters<CatRepositoriesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatSegments
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatSegments<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public class CatSegmentsRequestParameters : RequestParameters<CatSegmentsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
-		
+		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatShards
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatShards<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public class CatShardsRequestParameters : RequestParameters<CatShardsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
-		
+		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatSnapshots
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatSnapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
 	public class CatSnapshotsRequestParameters : RequestParameters<CatSnapshotsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Set to true to ignore unavailable snapshots</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatTasks
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public class CatTasksRequestParameters : RequestParameters<CatTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
-		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public string[] NodeId { get { return Q<string[]>("node_id"); } set { Q("node_id", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
+		///<summary>
+		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
+		/// connecting to, leave empty to get information from all nodes
+		///</summary>
+		public string[] NodeId { get => Q<string[]>("node_id"); set => Q("node_id", value); }
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-		public string[] Actions { get { return Q<string[]>("actions"); } set { Q("actions", value); } }
-		
+		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>Return detailed task information (default: false)</summary>
-		public bool? Detailed { get { return Q<bool?>("detailed"); } set { Q("detailed", value); } }
-		
+		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 		///<summary>Return tasks with specified parent node.</summary>
-		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
-		
+		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public long? ParentTask { get { return Q<long?>("parent_task"); } set { Q("parent_task", value); } }
-		
+		public long? ParentTask { get => Q<long?>("parent_task"); set => Q("parent_task", value); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatTemplates
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatTemplates<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public class CatTemplatesRequestParameters : RequestParameters<CatTemplatesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for CatThreadPool
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for CatThreadPool<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public class CatThreadPoolRequestParameters : RequestParameters<CatThreadPoolRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
-		
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The multiplier in which to display values</summary>
-		public Size Size { get { return Q<Size>("size"); } set { Q("size", value); } }
-		
+		public Size Size { get => Q<Size>("size"); set => Q("size", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get { return Q<string[]>("h"); } set { Q("h", value); } }
-		
+		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
-		public bool? Help { get { return Q<bool?>("help"); } set { Q("help", value); } }
-		
+		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get { return Q<string[]>("s"); } set { Q("s", value); } }
-		
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
 	
-	///<summary>Request parameters descriptor for ClearScroll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ClearScroll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for ClusterAllocationExplain
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ClusterAllocationExplain<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
 	public class ClusterAllocationExplainRequestParameters : RequestParameters<ClusterAllocationExplainRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Return &#39;YES&#39; decisions in explanation (default: false)</summary>
-		public bool? IncludeYesDecisions { get { return Q<bool?>("include_yes_decisions"); } set { Q("include_yes_decisions", value); } }
-		
+		///<summary>Return 'YES' decisions in explanation (default: false)</summary>
+		public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
-		public bool? IncludeDiskInfo { get { return Q<bool?>("include_disk_info"); } set { Q("include_disk_info", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
 	}
 	
-	///<summary>Request parameters descriptor for ClusterGetSettings
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ClusterGetSettings<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Whether to return all default clusters setting.</summary>
-		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
 	
-	///<summary>Request parameters descriptor for ClusterHealth
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ClusterHealth<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public class ClusterHealthRequestParameters : RequestParameters<ClusterHealthRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify the level of detail for returned information</summary>
-		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
-		
+		public Level Level { get => Q<Level>("level"); set => Q("level", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Wait until the specified number of shards is active</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Wait until the specified number of nodes is available</summary>
-		public string WaitForNodes { get { return Q<string>("wait_for_nodes"); } set { Q("wait_for_nodes", value); } }
-		
+		public string WaitForNodes { get => Q<string>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 		///<summary>Wait until all currently queued events with the given priority are processed</summary>
-		public WaitForEvents WaitForEvents { get { return Q<WaitForEvents>("wait_for_events"); } set { Q("wait_for_events", value); } }
-		
+		public WaitForEvents WaitForEvents { get => Q<WaitForEvents>("wait_for_events"); set => Q("wait_for_events", value); }
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
-		public bool? WaitForNoRelocatingShards { get { return Q<bool?>("wait_for_no_relocating_shards"); } set { Q("wait_for_no_relocating_shards", value); } }
-		
+		public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
 		///<summary>Wait until cluster is in a specific state</summary>
-		public WaitForStatus WaitForStatus { get { return Q<WaitForStatus>("wait_for_status"); } set { Q("wait_for_status", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public WaitForStatus WaitForStatus { get => Q<WaitForStatus>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
 	
-	///<summary>Request parameters descriptor for ClusterPendingTasks
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ClusterPendingTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public class ClusterPendingTasksRequestParameters : RequestParameters<ClusterPendingTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for ClusterPutSettings
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ClusterPutSettings<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public class ClusterPutSettingsRequestParameters : RequestParameters<ClusterPutSettingsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for ClusterRemoteInfo
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ClusterRemoteInfo<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
 	public class RemoteInfoRequestParameters : RequestParameters<RemoteInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for ClusterReroute
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ClusterReroute<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public class ClusterRerouteRequestParameters : RequestParameters<ClusterRerouteRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Simulate the operation only and return the resulting state</summary>
-		public bool? DryRun { get { return Q<bool?>("dry_run"); } set { Q("dry_run", value); } }
-		
+		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
-		public bool? Explain { get { return Q<bool?>("explain"); } set { Q("explain", value); } }
-		
+		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 		///<summary>Retries allocation of shards that are blocked due to too many subsequent allocation failures</summary>
-		public bool? RetryFailed { get { return Q<bool?>("retry_failed"); } set { Q("retry_failed", value); } }
-		
+		public bool? RetryFailed { get => Q<bool?>("retry_failed"); set => Q("retry_failed", value); }
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
-		public string[] Metric { get { return Q<string[]>("metric"); } set { Q("metric", value); } }
-		
+		public string[] Metric { get => Q<string[]>("metric"); set => Q("metric", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for ClusterState
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ClusterState<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public class ClusterStateRequestParameters : RequestParameters<ClusterStateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for ClusterStats
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ClusterStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public class ClusterStatsRequestParameters : RequestParameters<ClusterStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for Count
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Count<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public class CountRequestParameters : RequestParameters<CountRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double? MinScore { get { return Q<double?>("min_score"); } set { Q("min_score", value); } }
-		
+		public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>A comma-separated list of specific routing values</summary>
-		public string[] Routing { get { return Q<string[]>("routing"); } set { Q("routing", value); } }
-		
+		public string[] Routing { get => Q<string[]>("routing"); set => Q("routing", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
-		
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool? AnalyzeWildcard { get { return Q<bool?>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
+		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool? Lenient { get { return Q<bool?>("lenient"); } set { Q("lenient", value); } }
-		
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
-		public long? TerminateAfter { get { return Q<long?>("terminate_after"); } set { Q("terminate_after", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Create
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Create<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public class CreateRequestParameters : RequestParameters<CreateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
-		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
+		///<summary>
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Explicit timestamp for the document</summary>
-		public TimeSpan Timestamp { get { return Q<TimeSpan>("timestamp"); } set { Q("timestamp", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timestamp { get => Q<TimeSpan>("timestamp"); set => Q("timestamp", value.ToTimeUnit()); }
 		///<summary>Expiration time for the document</summary>
-		public TimeSpan Ttl { get { return Q<TimeSpan>("ttl"); } set { Q("ttl", value.ToTimeUnit()); } }
-		
+		public TimeSpan Ttl { get => Q<TimeSpan>("ttl"); set => Q("ttl", value.ToTimeUnit()); }
 		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
-		
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
+		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
-		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Delete
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Delete<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>ID of parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
+		///<summary>
+		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
-		
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
 	}
 	
-	///<summary>Request parameters descriptor for DeleteByQuery
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for DeleteByQuery<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
 	public class DeleteByQueryRequestParameters : RequestParameters<DeleteByQueryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool? AnalyzeWildcard { get { return Q<bool?>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
+		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Starting offset (default: 0)</summary>
-		public long? From { get { return Q<long?>("from"); } set { Q("from", value); } }
-		
+		public long? From { get => Q<long?>("from"); set => Q("from", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>What to do when the delete-by-query hits version conflicts?</summary>
-		public Conflicts Conflicts { get { return Q<Conflicts>("conflicts"); } set { Q("conflicts", value); } }
-		
+		public Conflicts Conflicts { get => Q<Conflicts>("conflicts"); set => Q("conflicts", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool? Lenient { get { return Q<bool?>("lenient"); } set { Q("lenient", value); } }
-		
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
-		
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
 		///<summary>A comma-separated list of specific routing values</summary>
-		public string[] Routing { get { return Q<string[]>("routing"); } set { Q("routing", value); } }
-		
+		public string[] Routing { get => Q<string[]>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll { get { return Q<TimeSpan>("scroll"); } set { Q("scroll", value.ToTimeUnit()); } }
-		
+		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
-		
+		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public TimeSpan SearchTimeout { get { return Q<TimeSpan>("search_timeout"); } set { Q("search_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan SearchTimeout { get => Q<TimeSpan>("search_timeout"); set => Q("search_timeout", value.ToTimeUnit()); }
 		///<summary>Number of hits to return (default: 10)</summary>
-		public long? Size { get { return Q<long?>("size"); } set { Q("size", value); } }
-		
-		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
-		public string[] Sort { get { return Q<string[]>("sort"); } set { Q("sort", value); } }
-		
+		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
+		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
+		public string[] Sort { get => Q<string[]>("sort"); set => Q("sort", value); }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
-		
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
-		
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
-		
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public long? TerminateAfter { get { return Q<long?>("terminate_after"); } set { Q("terminate_after", value); } }
-		
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public string[] Stats { get { return Q<string[]>("stats"); } set { Q("stats", value); } }
-		
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
+		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
 		///<summary>Specify whether to return document version as part of a hit</summary>
-		public bool? Version { get { return Q<bool?>("version"); } set { Q("version", value); } }
-		
+		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public bool? RequestCache { get { return Q<bool?>("request_cache"); } set { Q("request_cache", value); } }
-		
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>Should the effected indexes be refreshed?</summary>
-		public bool? Refresh { get { return Q<bool?>("refresh"); } set { Q("refresh", value); } }
-		
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the
+		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
+		/// copies for the shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public long? ScrollSize { get { return Q<long?>("scroll_size"); } set { Q("scroll_size", value); } }
-		
+		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 		///<summary>Should the request should block until the delete-by-query is complete.</summary>
-		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
-		public long? RequestsPerSecond { get { return Q<long?>("requests_per_second"); } set { Q("requests_per_second", value); } }
-		
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
-		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	
-	///<summary>Request parameters descriptor for DeleteScript
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for DeleteScript<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public class DeleteScriptRequestParameters : RequestParameters<DeleteScriptRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for Exists
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Exists<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public class DocumentExistsRequestParameters : RequestParameters<DocumentExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
-		
+		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool? Realtime { get { return Q<bool?>("realtime"); } set { Q("realtime", value); } }
-		
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool? Refresh { get { return Q<bool?>("refresh"); } set { Q("refresh", value); } }
-		
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
-		
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
-		
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
-		
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
-		
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
 	}
 	
-	///<summary>Request parameters descriptor for ExistsSource
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ExistsSource<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public class SourceExistsRequestParameters : RequestParameters<SourceExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool? Realtime { get { return Q<bool?>("realtime"); } set { Q("realtime", value); } }
-		
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool? Refresh { get { return Q<bool?>("refresh"); } set { Q("refresh", value); } }
-		
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
-		
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
-		
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
-		
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
-		
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Explain
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Explain<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public class ExplainRequestParameters : RequestParameters<ExplainRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public bool? AnalyzeWildcard { get { return Q<bool?>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The analyzer for the query string query</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
+		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The default field for query string query (default: _all)</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
-		
+		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool? Lenient { get { return Q<bool?>("lenient"); } set { Q("lenient", value); } }
-		
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
-		
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
-		
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
-		
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 	}
 	
-	///<summary>Request parameters descriptor for FieldCaps
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for FieldCaps<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
 	public class FieldCapabilitiesRequestParameters : RequestParameters<FieldCapabilitiesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>A comma-separated list of field names</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
-		
+		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Get
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Get<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public class GetRequestParameters : RequestParameters<GetRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
-		
+		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool? Realtime { get { return Q<bool?>("realtime"); } set { Q("realtime", value); } }
-		
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool? Refresh { get { return Q<bool?>("refresh"); } set { Q("refresh", value); } }
-		
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
-		
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
-		
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
-		
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
-		
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
 	}
 	
-	///<summary>Request parameters descriptor for GetScript
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for GetScript<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public class GetScriptRequestParameters : RequestParameters<GetScriptRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for GetSource
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for GetSource<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public class SourceRequestParameters : RequestParameters<SourceRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool? Realtime { get { return Q<bool?>("realtime"); } set { Q("realtime", value); } }
-		
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool? Refresh { get { return Q<bool?>("refresh"); } set { Q("refresh", value); } }
-		
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
-		
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
-		
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
-		
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
-		
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Index
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Index<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public class IndexRequestParameters : RequestParameters<IndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation type</summary>
-		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
-		
+		public OpType OpType { get => Q<OpType>("op_type"); set => Q("op_type", value); }
 		///<summary>ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
-		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
+		///<summary>
+		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Explicit timestamp for the document</summary>
-		public TimeSpan Timestamp { get { return Q<TimeSpan>("timestamp"); } set { Q("timestamp", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timestamp { get => Q<TimeSpan>("timestamp"); set => Q("timestamp", value.ToTimeUnit()); }
 		///<summary>Expiration time for the document</summary>
-		public TimeSpan Ttl { get { return Q<TimeSpan>("ttl"); } set { Q("ttl", value.ToTimeUnit()); } }
-		
+		public TimeSpan Ttl { get => Q<TimeSpan>("ttl"); set => Q("ttl", value.ToTimeUnit()); }
 		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
-		
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
+		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
-		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesAnalyzeForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesAnalyzeForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public class AnalyzeRequestParameters : RequestParameters<AnalyzeRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The name of the index to scope the operation</summary>
-		public string Index { get { return Q<string>("index"); } set { Q("index", value); } }
-		
+		public string IndexQueryString { get => Q<string>("index"); set => Q("index", value); }
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public bool? PreferLocal { get { return Q<bool?>("prefer_local"); } set { Q("prefer_local", value); } }
-		
+		public bool? PreferLocal { get => Q<bool?>("prefer_local"); set => Q("prefer_local", value); }
 		///<summary>Format of the output</summary>
-		public Format Format { get { return Q<Format>("format"); } set { Q("format", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public Format Format { get => Q<Format>("format"); set => Q("format", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesClearCacheForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesClearCacheForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public class ClearCacheRequestParameters : RequestParameters<ClearCacheRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Clear field data</summary>
-		public bool? Fielddata { get { return Q<bool?>("fielddata"); } set { Q("fielddata", value); } }
-		
+		public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
-		
+		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
 		///<summary>Clear query caches</summary>
-		public bool? Query { get { return Q<bool?>("query"); } set { Q("query", value); } }
-		
+		public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>A comma-separated list of index name to limit the operation</summary>
-		public string[] Index { get { return Q<string[]>("index"); } set { Q("index", value); } }
-		
+		public string[] IndexQueryString { get => Q<string[]>("index"); set => Q("index", value); }
 		///<summary>Clear the recycler cache</summary>
-		public bool? Recycler { get { return Q<bool?>("recycler"); } set { Q("recycler", value); } }
-		
+		public bool? Recycler { get => Q<bool?>("recycler"); set => Q("recycler", value); }
 		///<summary>Clear request cache</summary>
-		public bool? RequestCache { get { return Q<bool?>("request_cache"); } set { Q("request_cache", value); } }
-		
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>Clear request cache</summary>
-		public bool? Request { get { return Q<bool?>("request"); } set { Q("request", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesClose
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesClose<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public class CloseIndexRequestParameters : RequestParameters<CloseIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesCreate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesCreate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
 	public class CreateIndexRequestParameters : RequestParameters<CreateIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		public bool? UpdateAllTypes { get { return Q<bool?>("update_all_types"); } set { Q("update_all_types", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesDelete
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesDelete<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 	public class DeleteIndexRequestParameters : RequestParameters<DeleteIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesDeleteAlias
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesDeleteAlias<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public class DeleteAliasRequestParameters : RequestParameters<DeleteAliasRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit timestamp for the document</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesDeleteTemplateForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesDeleteTemplateForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public class DeleteIndexTemplateRequestParameters : RequestParameters<DeleteIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesExists
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesExists<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
 	public class IndexExistsRequestParameters : RequestParameters<IndexExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Whether to return all default setting for each of the indices.</summary>
-		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesExistsAliasForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesExistsAliasForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public class AliasExistsRequestParameters : RequestParameters<AliasExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesExistsTemplateForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesExistsTemplateForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public class IndexTemplateExistsRequestParameters : RequestParameters<IndexTemplateExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesExistsType
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesExistsType<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
 	public class TypeExistsRequestParameters : RequestParameters<TypeExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesFlushForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesFlushForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 	public class FlushRequestParameters : RequestParameters<FlushRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
-		public bool? Force { get { return Q<bool?>("force"); } set { Q("force", value); } }
-		
-		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is true. If set to false the flush will be skipped iff if another flush operation is already running.</summary>
-		public bool? WaitIfOngoing { get { return Q<bool?>("wait_if_ongoing"); } set { Q("wait_if_ongoing", value); } }
-		
+		///<summary>
+		/// Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if
+		/// transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)
+		///</summary>
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+		///<summary>
+		/// If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default
+		/// is true. If set to false the flush will be skipped iff if another flush operation is already running.
+		///</summary>
+		public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesFlushSyncedForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesFlushSyncedForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public class SyncedFlushRequestParameters : RequestParameters<SyncedFlushRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesForcemergeForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesForcemergeForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
 	public class ForceMergeRequestParameters : RequestParameters<ForceMergeRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public bool? Flush { get { return Q<bool?>("flush"); } set { Q("flush", value); } }
-		
+		public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public long? MaxNumSegments { get { return Q<long?>("max_num_segments"); } set { Q("max_num_segments", value); } }
-		
+		public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public bool? OnlyExpungeDeletes { get { return Q<bool?>("only_expunge_deletes"); } set { Q("only_expunge_deletes", value); } }
-		
+		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
 		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
-		
+		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public bool? WaitForMerge { get { return Q<bool?>("wait_for_merge"); } set { Q("wait_for_merge", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? WaitForMerge { get => Q<bool?>("wait_for_merge"); set => Q("wait_for_merge", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesGet<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public class GetIndexRequestParameters : RequestParameters<GetIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Whether to return all default setting for each of the indices.</summary>
-		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesGetAliasForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesGetAliasForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public class GetAliasRequestParameters : RequestParameters<GetAliasRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesGetFieldMappingForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesGetFieldMappingForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public class GetFieldMappingRequestParameters : RequestParameters<GetFieldMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether the default mapping values should be returned as well</summary>
-		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
-		
+		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesGetMappingForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesGetMappingForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public class GetMappingRequestParameters : RequestParameters<GetMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesGetSettingsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesGetSettingsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public class GetIndexSettingsRequestParameters : RequestParameters<GetIndexSettingsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Whether to return all default setting for each of the indices.</summary>
-		public bool? IncludeDefaults { get { return Q<bool?>("include_defaults"); } set { Q("include_defaults", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesGetTemplateForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesGetTemplateForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public class GetIndexTemplateRequestParameters : RequestParameters<GetIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesGetUpgradeForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesGetUpgradeForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public class UpgradeStatusRequestParameters : RequestParameters<UpgradeStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesOpen
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesOpen<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public class OpenIndexRequestParameters : RequestParameters<OpenIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesPutAlias
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesPutAlias<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public class PutAliasRequestParameters : RequestParameters<PutAliasRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit timestamp for the document</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesPutMapping
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesPutMapping<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public class PutMappingRequestParameters : RequestParameters<PutMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		public bool? UpdateAllTypes { get { return Q<bool?>("update_all_types"); } set { Q("update_all_types", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesPutSettingsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesPutSettingsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public class UpdateIndexSettingsRequestParameters : RequestParameters<UpdateIndexSettingsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
-		public bool? PreserveExisting { get { return Q<bool?>("preserve_existing"); } set { Q("preserve_existing", value); } }
-		
+		public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesPutTemplateForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesPutTemplateForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public class PutIndexTemplateRequestParameters : RequestParameters<PutIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public bool? Create { get { return Q<bool?>("create"); } set { Q("create", value); } }
-		
+		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesRecoveryForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesRecoveryForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public class RecoveryStatusRequestParameters : RequestParameters<RecoveryStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to display detailed information about shard recovery</summary>
-		public bool? Detailed { get { return Q<bool?>("detailed"); } set { Q("detailed", value); } }
-		
+		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 		///<summary>Display only those recoveries that are currently on-going</summary>
-		public bool? ActiveOnly { get { return Q<bool?>("active_only"); } set { Q("active_only", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesRefreshForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesRefreshForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 	public class RefreshRequestParameters : RequestParameters<RefreshRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesRolloverForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesRolloverForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
 	public class RolloverIndexRequestParameters : RequestParameters<RolloverIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
-		public bool? DryRun { get { return Q<bool?>("dry_run"); } set { Q("dry_run", value); } }
-		
+		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesSegmentsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesSegmentsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
 	public class SegmentsRequestParameters : RequestParameters<SegmentsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
-		
+		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 		///<summary>Includes detailed memory usage by Lucene.</summary>
-		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesShardStoresForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesShardStoresForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public class IndicesShardStoresRequestParameters : RequestParameters<IndicesShardStoresRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
-		public string[] Status { get { return Q<string[]>("status"); } set { Q("status", value); } }
-		
+		public string[] Status { get => Q<string[]>("status"); set => Q("status", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesShrink
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesShrink<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
 	public class ShrinkIndexRequestParameters : RequestParameters<ShrinkIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesStatsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesStatsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public class IndicesStatsRequestParameters : RequestParameters<IndicesStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IEnumerable<object> CompletionFields { get { return Q<IEnumerable<object>>("completion_fields"); } set { Q("completion_fields", value); } }
-		
+		public string[] CompletionFields { get => Q<string[]>("completion_fields"); set => Q("completion_fields", value); }
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IEnumerable<object> FielddataFields { get { return Q<IEnumerable<object>>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
-		
+		public string[] FielddataFields { get => Q<string[]>("fielddata_fields"); set => Q("fielddata_fields", value); }
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
-		
+		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public string[] Groups { get { return Q<string[]>("groups"); } set { Q("groups", value); } }
-		
+		public string[] Groups { get => Q<string[]>("groups"); set => Q("groups", value); }
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
-		
+		public Level Level { get => Q<Level>("level"); set => Q("level", value); }
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
-		public bool? IncludeSegmentFileSizes { get { return Q<bool?>("include_segment_file_sizes"); } set { Q("include_segment_file_sizes", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesUpdateAliasesForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesUpdateAliasesForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public class BulkAliasRequestParameters : RequestParameters<BulkAliasRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Request timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesUpgradeForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesUpgradeForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public class UpgradeRequestParameters : RequestParameters<UpgradeRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
-		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
-		public bool? OnlyAncientSegments { get { return Q<bool?>("only_ancient_segments"); } set { Q("only_ancient_segments", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? OnlyAncientSegments { get => Q<bool?>("only_ancient_segments"); set => Q("only_ancient_segments", value); }
 	}
 	
-	///<summary>Request parameters descriptor for IndicesValidateQueryForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IndicesValidateQueryForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public class ValidateQueryRequestParameters : RequestParameters<ValidateQueryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Return detailed information about the error</summary>
-		public bool? Explain { get { return Q<bool?>("explain"); } set { Q("explain", value); } }
-		
+		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
-		
+		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
-		
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool? AnalyzeWildcard { get { return Q<bool?>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
+		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool? Lenient { get { return Q<bool?>("lenient"); } set { Q("lenient", value); } }
-		
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
-		public bool? Rewrite { get { return Q<bool?>("rewrite"); } set { Q("rewrite", value); } }
-		
+		public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
-		public bool? AllShards { get { return Q<bool?>("all_shards"); } set { Q("all_shards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Info
-	///<pre>
-	///http://www.elastic.co/guide/
-	///</pre>
-	///</summary>
+	///<summary>Request options for Info<pre>http://www.elastic.co/guide/</pre></summary>
 	public class RootNodeInfoRequestParameters : RequestParameters<RootNodeInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for IngestDeletePipeline
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IngestDeletePipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public class DeletePipelineRequestParameters : RequestParameters<DeletePipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for IngestGetPipeline
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IngestGetPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public class GetPipelineRequestParameters : RequestParameters<GetPipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for IngestProcessorGrok
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IngestProcessorGrok<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public class GrokProcessorPatternsRequestParameters : RequestParameters<GrokProcessorPatternsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for IngestPutPipeline
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IngestPutPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public class PutPipelineRequestParameters : RequestParameters<PutPipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for IngestSimulate
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for IngestSimulate<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
 	public class SimulatePipelineRequestParameters : RequestParameters<SimulatePipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
-		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Mget
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Mget<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public class MultiGetRequestParameters : RequestParameters<MultiGetRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
-		
+		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool? Realtime { get { return Q<bool?>("realtime"); } set { Q("realtime", value); } }
-		
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool? Refresh { get { return Q<bool?>("refresh"); } set { Q("refresh", value); } }
-		
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
-		
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
-		
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Msearch
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Msearch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public class MultiSearchRequestParameters : RequestParameters<MultiSearchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
-		
+		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
-		public long? MaxConcurrentSearches { get { return Q<long?>("max_concurrent_searches"); } set { Q("max_concurrent_searches", value); } }
-		
+		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public bool? TypedKeys { get { return Q<bool?>("typed_keys"); } set { Q("typed_keys", value); } }
-		
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
-		public long? PreFilterShardSize { get { return Q<long?>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+		///<summary>
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
+		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// disjoint.
+		///</summary>
+		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 	}
 	
-	///<summary>Request parameters descriptor for MsearchTemplate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for MsearchTemplate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
 	public class MultiSearchTemplateRequestParameters : RequestParameters<MultiSearchTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
-		
+		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public bool? TypedKeys { get { return Q<bool?>("typed_keys"); } set { Q("typed_keys", value); } }
-		
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
-		public long? MaxConcurrentSearches { get { return Q<long?>("max_concurrent_searches"); } set { Q("max_concurrent_searches", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Mtermvectors
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Mtermvectors<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public class MultiTermVectorsRequestParameters : RequestParameters<MultiTermVectorsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool? TermStatistics { get { return Q<bool?>("term_statistics"); } set { Q("term_statistics", value); } }
-		
-		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool? FieldStatistics { get { return Q<bool?>("field_statistics"); } set { Q("field_statistics", value); } }
-		
-		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
-		
-		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool? Offsets { get { return Q<bool?>("offsets"); } set { Q("offsets", value); } }
-		
-		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool? Positions { get { return Q<bool?>("positions"); } set { Q("positions", value); } }
-		
-		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool? Payloads { get { return Q<bool?>("payloads"); } set { Q("payloads", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
+		///<summary>
+		/// Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified
+		/// in body "params" or "docs".
+		///</summary>
+		public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
+		///<summary>
+		/// Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned
+		/// documents unless otherwise specified in body "params" or "docs".
+		///</summary>
+		public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
+		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
+		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
+		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
+		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
+		///<summary>
+		/// Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise
+		/// specified in body "params" or "docs".
+		///</summary>
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
+		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
+		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body "params" or "docs".</summary>
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
-		public bool? Realtime { get { return Q<bool?>("realtime"); } set { Q("realtime", value); } }
-		
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
-		
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
 	}
 	
-	///<summary>Request parameters descriptor for NodesHotThreadsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for NodesHotThreadsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public class NodesHotThreadsRequestParameters : RequestParameters<NodesHotThreadsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The interval for the second sampling of threads</summary>
-		public TimeSpan Interval { get { return Q<TimeSpan>("interval"); } set { Q("interval", value.ToTimeUnit()); } }
-		
+		public TimeSpan Interval { get => Q<TimeSpan>("interval"); set => Q("interval", value.ToTimeUnit()); }
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
-		public long? Snapshots { get { return Q<long?>("snapshots"); } set { Q("snapshots", value); } }
-		
+		public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-		public long? Threads { get { return Q<long?>("threads"); } set { Q("threads", value); } }
-		
-		///<summary>Don&#39;t show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
-		public bool? IgnoreIdleThreads { get { return Q<bool?>("ignore_idle_threads"); } set { Q("ignore_idle_threads", value); } }
-		
+		public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
+		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
+		public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
 		///<summary>The type to sample (default: cpu)</summary>
-		public ThreadType ThreadType { get { return Q<ThreadType>("type"); } set { Q("type", value); } }
-		
+		public ThreadType ThreadType { get => Q<ThreadType>("type"); set => Q("type", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for NodesInfoForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for NodesInfoForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public class NodesInfoRequestParameters : RequestParameters<NodesInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool? FlatSettings { get { return Q<bool?>("flat_settings"); } set { Q("flat_settings", value); } }
-		
+		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for NodesStatsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for NodesStatsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public class NodesStatsRequestParameters : RequestParameters<NodesStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IEnumerable<object> CompletionFields { get { return Q<IEnumerable<object>>("completion_fields"); } set { Q("completion_fields", value); } }
-		
+		public string[] CompletionFields { get => Q<string[]>("completion_fields"); set => Q("completion_fields", value); }
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IEnumerable<object> FielddataFields { get { return Q<IEnumerable<object>>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
-		
+		public string[] FielddataFields { get => Q<string[]>("fielddata_fields"); set => Q("fielddata_fields", value); }
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
-		
+		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public bool? Groups { get { return Q<bool?>("groups"); } set { Q("groups", value); } }
-		
+		public bool? Groups { get => Q<bool?>("groups"); set => Q("groups", value); }
 		///<summary>Return indices stats aggregated at index, node or shard level</summary>
-		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
-		
+		public Level Level { get => Q<Level>("level"); set => Q("level", value); }
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public string[] Types { get { return Q<string[]>("types"); } set { Q("types", value); } }
-		
+		public string[] Types { get => Q<string[]>("types"); set => Q("types", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
-		public bool? IncludeSegmentFileSizes { get { return Q<bool?>("include_segment_file_sizes"); } set { Q("include_segment_file_sizes", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 	}
 	
-	///<summary>Request parameters descriptor for NodesUsageForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for NodesUsageForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
 	public class NodesUsageRequestParameters : RequestParameters<NodesUsageRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
+		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for Ping
-	///<pre>
-	///http://www.elastic.co/guide/
-	///</pre>
-	///</summary>
+	///<summary>Request options for Ping<pre>http://www.elastic.co/guide/</pre></summary>
 	public class PingRequestParameters : RequestParameters<PingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for PutScript
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for PutScript<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public class PutScriptRequestParameters : RequestParameters<PutScriptRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Context name to compile script against</summary>
-		public string Context { get { return Q<string>("context"); } set { Q("context", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string Context { get => Q<string>("context"); set => Q("context", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Reindex
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Reindex<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public class ReindexOnServerRequestParameters : RequestParameters<ReindexOnServerRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Should the effected indexes be refreshed?</summary>
-		public bool? Refresh { get { return Q<bool?>("refresh"); } set { Q("refresh", value); } }
-		
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Should the request should block until the reindex is complete.</summary>
-		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
-		public long? RequestsPerSecond { get { return Q<long?>("requests_per_second"); } set { Q("requests_per_second", value); } }
-		
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
-		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	
-	///<summary>Request parameters descriptor for ReindexRethrottle
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for ReindexRethrottle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public class ReindexRethrottleRequestParameters : RequestParameters<ReindexRethrottleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
-		public long? RequestsPerSecond { get { return Q<long?>("requests_per_second"); } set { Q("requests_per_second", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
 	
-	///<summary>Request parameters descriptor for RenderSearchTemplate
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for RenderSearchTemplate<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public class RenderSearchTemplateRequestParameters : RequestParameters<RenderSearchTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 	
-	///<summary>Request parameters descriptor for Scroll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Scroll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public class ScrollRequestParameters : RequestParameters<ScrollRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for Search
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Search<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public class SearchRequestParameters : RequestParameters<SearchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool? AnalyzeWildcard { get { return Q<bool?>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
+		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
-		
+		public string[] StoredFields { get => Q<string[]>("stored_fields"); set => Q("stored_fields", value); }
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public IEnumerable<object> DocValueFields { get { return Q<IEnumerable<object>>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
-		
+		public string[] DocValueFields { get => Q<string[]>("docvalue_fields"); set => Q("docvalue_fields", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool? Lenient { get { return Q<bool?>("lenient"); } set { Q("lenient", value); } }
-		
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>A comma-separated list of specific routing values</summary>
-		public string[] Routing { get { return Q<string[]>("routing"); } set { Q("routing", value); } }
-		
+		public string[] Routing { get => Q<string[]>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll { get { return Q<TimeSpan>("scroll"); } set { Q("scroll", value.ToTimeUnit()); } }
-		
+		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
-		
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public string[] Stats { get { return Q<string[]>("stats"); } set { Q("stats", value); } }
-		
+		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
+		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
 		///<summary>Specify which field to use for suggestions</summary>
-		public object SuggestField { get { return Q<object>("suggest_field"); } set { Q("suggest_field", value); } }
-		
+		public string SuggestField { get => Q<string>("suggest_field"); set => Q("suggest_field", value); }
 		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
-		
+		public SuggestMode SuggestMode { get => Q<SuggestMode>("suggest_mode"); set => Q("suggest_mode", value); }
 		///<summary>How many suggestions to return in response</summary>
-		public long? SuggestSize { get { return Q<long?>("suggest_size"); } set { Q("suggest_size", value); } }
-		
+		public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
-		
+		public string SuggestText { get => Q<string>("suggest_text"); set => Q("suggest_text", value); }
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
-		public bool? TrackTotalHits { get { return Q<bool?>("track_total_hits"); } set { Q("track_total_hits", value); } }
-		
+		public bool? TrackTotalHits { get => Q<bool?>("track_total_hits"); set => Q("track_total_hits", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public bool? TypedKeys { get { return Q<bool?>("typed_keys"); } set { Q("typed_keys", value); } }
-		
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public bool? RequestCache { get { return Q<bool?>("request_cache"); } set { Q("request_cache", value); } }
-		
-		///<summary>The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.</summary>
-		public long? BatchedReduceSize { get { return Q<long?>("batched_reduce_size"); } set { Q("batched_reduce_size", value); } }
-		
-		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
-		public long? MaxConcurrentShardRequests { get { return Q<long?>("max_concurrent_shard_requests"); } set { Q("max_concurrent_shard_requests", value); } }
-		
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the&#160;number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it&#39;s rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
-		public long? PreFilterShardSize { get { return Q<long?>("pre_filter_shard_size"); } set { Q("pre_filter_shard_size", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+		///<summary>
+		/// The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism
+		/// to reduce the memory overhead per search request if the potential number of shards in the request can be large.
+		///</summary>
+		public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
+		///<summary>
+		/// The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on
+		/// the cluster in order to limit the number of concurrent shard requests
+		///</summary>
+		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+		///<summary>
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
+		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
+		/// disjoint.
+		///</summary>
+		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 	}
 	
-	///<summary>Request parameters descriptor for SearchShards
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SearchShards<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public class SearchShardsRequestParameters : RequestParameters<SearchShardsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
-	///<summary>Request parameters descriptor for SearchTemplate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SearchTemplate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public class SearchTemplateRequestParameters : RequestParameters<SearchTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>A comma-separated list of specific routing values</summary>
-		public string[] Routing { get { return Q<string[]>("routing"); } set { Q("routing", value); } }
-		
+		public string[] Routing { get => Q<string[]>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll { get { return Q<TimeSpan>("scroll"); } set { Q("scroll", value.ToTimeUnit()); } }
-		
+		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
-		
+		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public bool? Explain { get { return Q<bool?>("explain"); } set { Q("explain", value); } }
-		
+		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 		///<summary>Specify whether to profile the query execution</summary>
-		public bool? Profile { get { return Q<bool?>("profile"); } set { Q("profile", value); } }
-		
+		public bool? Profile { get => Q<bool?>("profile"); set => Q("profile", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
-		public bool? TypedKeys { get { return Q<bool?>("typed_keys"); } set { Q("typed_keys", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
 	
-	///<summary>Request parameters descriptor for SnapshotCreate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SnapshotCreate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class SnapshotRequestParameters : RequestParameters<SnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	
-	///<summary>Request parameters descriptor for SnapshotCreateRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SnapshotCreateRepository<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class CreateRepositoryRequestParameters : RequestParameters<CreateRepositoryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Whether to verify the repository after creation</summary>
-		public bool? Verify { get { return Q<bool?>("verify"); } set { Q("verify", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 	}
 	
-	///<summary>Request parameters descriptor for SnapshotDelete
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SnapshotDelete<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class DeleteSnapshotRequestParameters : RequestParameters<DeleteSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for SnapshotDeleteRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SnapshotDeleteRepository<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class DeleteRepositoryRequestParameters : RequestParameters<DeleteRepositoryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for SnapshotGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SnapshotGet<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class GetSnapshotRequestParameters : RequestParameters<GetSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
-		public bool? Verbose { get { return Q<bool?>("verbose"); } set { Q("verbose", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
 	
-	///<summary>Request parameters descriptor for SnapshotGetRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SnapshotGetRepository<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class GetRepositoryRequestParameters : RequestParameters<GetRepositoryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
-	///<summary>Request parameters descriptor for SnapshotRestore
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SnapshotRestore<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class RestoreRequestParameters : RequestParameters<RestoreRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	
-	///<summary>Request parameters descriptor for SnapshotStatus
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SnapshotStatus<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class SnapshotStatusRequestParameters : RequestParameters<SnapshotStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
 	
-	///<summary>Request parameters descriptor for SnapshotVerifyRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for SnapshotVerifyRepository<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public class VerifyRepositoryRequestParameters : RequestParameters<VerifyRepositoryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for TasksCancel
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for TasksCancel<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public class CancelTasksRequestParameters : RequestParameters<CancelTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public string[] Nodes { get { return Q<string[]>("nodes"); } set { Q("nodes", value); } }
-		
+		///<summary>
+		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
+		/// connecting to, leave empty to get information from all nodes
+		///</summary>
+		public string[] Nodes { get => Q<string[]>("nodes"); set => Q("nodes", value); }
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
-		public string[] Actions { get { return Q<string[]>("actions"); } set { Q("actions", value); } }
-		
+		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>Cancel tasks with specified parent node.</summary>
-		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
-		
+		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
-		public string ParentTaskId { get { return Q<string>("parent_task_id"); } set { Q("parent_task_id", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
 	}
 	
-	///<summary>Request parameters descriptor for TasksGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for TasksGet<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public class GetTaskRequestParameters : RequestParameters<GetTaskRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	
-	///<summary>Request parameters descriptor for TasksList
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for TasksList<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public class ListTasksRequestParameters : RequestParameters<ListTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
-		public string[] Nodes { get { return Q<string[]>("nodes"); } set { Q("nodes", value); } }
-		
+		///<summary>
+		/// A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're
+		/// connecting to, leave empty to get information from all nodes
+		///</summary>
+		public string[] Nodes { get => Q<string[]>("nodes"); set => Q("nodes", value); }
 		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
-		public string[] Actions { get { return Q<string[]>("actions"); } set { Q("actions", value); } }
-		
+		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>Return detailed task information (default: false)</summary>
-		public bool? Detailed { get { return Q<bool?>("detailed"); } set { Q("detailed", value); } }
-		
+		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 		///<summary>Return tasks with specified parent node.</summary>
-		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
-		
+		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
-		public string ParentTaskId { get { return Q<string>("parent_task_id"); } set { Q("parent_task_id", value); } }
-		
+		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
-		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
-		public GroupBy GroupBy { get { return Q<GroupBy>("group_by"); } set { Q("group_by", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public GroupBy GroupBy { get => Q<GroupBy>("group_by"); set => Q("group_by", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Termvectors
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Termvectors<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public class TermVectorsRequestParameters : RequestParameters<TermVectorsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public bool? TermStatistics { get { return Q<bool?>("term_statistics"); } set { Q("term_statistics", value); } }
-		
+		public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public bool? FieldStatistics { get { return Q<bool?>("field_statistics"); } set { Q("field_statistics", value); } }
-		
+		public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
 		///<summary>A comma-separated list of fields to return.</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
-		
+		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
 		///<summary>Specifies if term offsets should be returned.</summary>
-		public bool? Offsets { get { return Q<bool?>("offsets"); } set { Q("offsets", value); } }
-		
+		public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
 		///<summary>Specifies if term positions should be returned.</summary>
-		public bool? Positions { get { return Q<bool?>("positions"); } set { Q("positions", value); } }
-		
+		public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 		///<summary>Specifies if term payloads should be returned.</summary>
-		public bool? Payloads { get { return Q<bool?>("payloads"); } set { Q("payloads", value); } }
-		
+		public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Specific routing value.</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Parent id of documents.</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
-		public bool? Realtime { get { return Q<bool?>("realtime"); } set { Q("realtime", value); } }
-		
+		public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
-		
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
 	}
 	
-	///<summary>Request parameters descriptor for Update
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for Update<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
 	public class UpdateRequestParameters : RequestParameters<UpdateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard
+		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
+		/// shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
-		
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>The script language (default: painless)</summary>
-		public string Lang { get { return Q<string>("lang"); } set { Q("lang", value); } }
-		
+		public string Lang { get => Q<string>("lang"); set => Q("lang", value); }
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
-		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
+		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
+		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
+		///<summary>
+		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
+		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public long? RetryOnConflict { get { return Q<long?>("retry_on_conflict"); } set { Q("retry_on_conflict", value); } }
-		
+		public long? RetryOnConflict { get => Q<long?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 		///<summary>Explicit timestamp for the document</summary>
-		public TimeSpan Timestamp { get { return Q<TimeSpan>("timestamp"); } set { Q("timestamp", value.ToTimeUnit()); } }
-		
+		public TimeSpan Timestamp { get => Q<TimeSpan>("timestamp"); set => Q("timestamp", value.ToTimeUnit()); }
 		///<summary>Expiration time for the document</summary>
-		public TimeSpan Ttl { get { return Q<TimeSpan>("ttl"); } set { Q("ttl", value.ToTimeUnit()); } }
-		
+		public TimeSpan Ttl { get => Q<TimeSpan>("ttl"); set => Q("ttl", value.ToTimeUnit()); }
 		///<summary>Explicit version number for concurrency control</summary>
-		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
-		
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
 	}
 	
-	///<summary>Request parameters descriptor for UpdateByQuery
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for UpdateByQuery<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
 	public class UpdateByQueryRequestParameters : RequestParameters<UpdateByQueryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
+		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool? AnalyzeWildcard { get { return Q<bool?>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
+		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
+		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
+		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Starting offset (default: 0)</summary>
-		public long? From { get { return Q<long?>("from"); } set { Q("from", value); } }
-		
+		public long? From { get => Q<long?>("from"); set => Q("from", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool? AllowNoIndices { get { return Q<bool?>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>What to do when the update by query hits version conflicts?</summary>
-		public Conflicts Conflicts { get { return Q<Conflicts>("conflicts"); } set { Q("conflicts", value); } }
-		
+		public Conflicts Conflicts { get => Q<Conflicts>("conflicts"); set => Q("conflicts", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
+		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool? Lenient { get { return Q<bool?>("lenient"); } set { Q("lenient", value); } }
-		
+		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
-		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
-		
+		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
+		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
-		
+		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
 		///<summary>A comma-separated list of specific routing values</summary>
-		public string[] Routing { get { return Q<string[]>("routing"); } set { Q("routing", value); } }
-		
+		public string[] Routing { get => Q<string[]>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll { get { return Q<TimeSpan>("scroll"); } set { Q("scroll", value.ToTimeUnit()); } }
-		
+		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
-		
+		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public TimeSpan SearchTimeout { get { return Q<TimeSpan>("search_timeout"); } set { Q("search_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan SearchTimeout { get => Q<TimeSpan>("search_timeout"); set => Q("search_timeout", value.ToTimeUnit()); }
 		///<summary>Number of hits to return (default: 10)</summary>
-		public long? Size { get { return Q<long?>("size"); } set { Q("size", value); } }
-		
-		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
-		public string[] Sort { get { return Q<string[]>("sort"); } set { Q("sort", value); } }
-		
+		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
+		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
+		public string[] Sort { get => Q<string[]>("sort"); set => Q("sort", value); }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
-		
+		public bool? SourceEnabled { get => Q<bool?>("_source"); set => Q("_source", value); }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
-		
+		public string[] SourceExclude { get => Q<string[]>("_source_exclude"); set => Q("_source_exclude", value); }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
-		
+		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public long? TerminateAfter { get { return Q<long?>("terminate_after"); } set { Q("terminate_after", value); } }
-		
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public string[] Stats { get { return Q<string[]>("stats"); } set { Q("stats", value); } }
-		
+		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
+		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
 		///<summary>Specify whether to return document version as part of a hit</summary>
-		public bool? Version { get { return Q<bool?>("version"); } set { Q("version", value); } }
-		
+		public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
 		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
-		public bool? VersionType { get { return Q<bool?>("version_type"); } set { Q("version_type", value); } }
-		
+		public bool? VersionType { get => Q<bool?>("version_type"); set => Q("version_type", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public bool? RequestCache { get { return Q<bool?>("request_cache"); } set { Q("request_cache", value); } }
-		
+		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>Should the effected indexes be refreshed?</summary>
-		public bool? Refresh { get { return Q<bool?>("refresh"); } set { Q("refresh", value); } }
-		
+		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
-		public string WaitForActiveShards { get { return Q<string>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		///<summary>
+		/// Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the
+		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
+		/// copies for the shard (number of replicas + 1)
+		///</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public long? ScrollSize { get { return Q<long?>("scroll_size"); } set { Q("scroll_size", value); } }
-		
+		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 		///<summary>Should the request should block until the update by query operation is complete.</summary>
-		public bool? WaitForCompletion { get { return Q<bool?>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>The throttle to set on this request in sub-requests per second. -1 means no throttle.</summary>
-		public long? RequestsPerSecond { get { return Q<long?>("requests_per_second"); } set { Q("requests_per_second", value); } }
-		
-		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn&#39;t sliced into subtasks.</summary>
-		public long? Slices { get { return Q<long?>("slices"); } set { Q("slices", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
+		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
+		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackGraphExplore
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackGraphExplore<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public class GraphExploreRequestParameters : RequestParameters<GraphExploreRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
+		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackDeprecationInfo
-	///<pre>
-	///http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackDeprecationInfo<pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
 	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackInfo
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackInfo<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public class XPackInfoRequestParameters : RequestParameters<XPackInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
+		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
-		public string[] Categories { get { return Q<string[]>("categories"); } set { Q("categories", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackUsage
-	///<pre>
-	///Retrieve information about xpack features usage
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackUsage<pre>Retrieve information about xpack features usage</pre></summary>
 	public class XPackUsageRequestParameters : RequestParameters<XPackUsageRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify timeout for watch write operation</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackLicenseDelete
-	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/current/license-management.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackLicenseDelete<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class DeleteLicenseRequestParameters : RequestParameters<DeleteLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 	
-	///<summary>Request parameters descriptor for XpackLicenseGet
-	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/current/license-management.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackLicenseGet<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class GetLicenseRequestParameters : RequestParameters<GetLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool? Local { get { return Q<bool?>("local"); } set { Q("local", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackLicensePost
-	///<pre>
-	///https://www.elastic.co/guide/en/x-pack/current/license-management.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackLicensePost<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class PostLicenseRequestParameters : RequestParameters<PostLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
-		public bool? Acknowledge { get { return Q<bool?>("acknowledge"); } set { Q("acknowledge", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlCloseJob
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlCloseJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
 	public class CloseJobRequestParameters : RequestParameters<CloseJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>True if the job should be forcefully closed</summary>
-		public bool? Force { get { return Q<bool?>("force"); } set { Q("force", value); } }
-		
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
-		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlDeleteDatafeed
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlDeleteDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
 	public class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>True if the datafeed should be forcefully deleted</summary>
-		public bool? Force { get { return Q<bool?>("force"); } set { Q("force", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlDeleteExpiredData
-	///<pre>
-	///
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlDeleteExpiredData<pre></pre></summary>
 	public class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlDeleteJob
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlDeleteJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
 	public class DeleteJobRequestParameters : RequestParameters<DeleteJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>True if the job should be forcefully deleted</summary>
-		public bool? Force { get { return Q<bool?>("force"); } set { Q("force", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlDeleteModelSnapshot
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlDeleteModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
 	public class DeleteModelSnapshotRequestParameters : RequestParameters<DeleteModelSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlFlushJob
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlFlushJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
 	public class FlushJobRequestParameters : RequestParameters<FlushJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
-		public string SkipTime { get { return Q<string>("skip_time"); } set { Q("skip_time", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlGetBuckets
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlGetBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 	public class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlGetCategories
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlGetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
 	public class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlGetDatafeeds
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlGetDatafeeds<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
 	public class GetDatafeedsRequestParameters : RequestParameters<GetDatafeedsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlGetDatafeedStats
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlGetDatafeedStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
 	public class GetDatafeedStatsRequestParameters : RequestParameters<GetDatafeedStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlGetInfluencers
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlGetInfluencers<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
 	public class GetInfluencersRequestParameters : RequestParameters<GetInfluencersRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlGetJobs
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlGetJobs<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
 	public class GetJobsRequestParameters : RequestParameters<GetJobsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlGetJobStats
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlGetJobStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
 	public class GetJobStatsRequestParameters : RequestParameters<GetJobStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlGetModelSnapshots
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlGetModelSnapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
 	public class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlGetRecords
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlGetRecords<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
 	public class GetAnomalyRecordsRequestParameters : RequestParameters<GetAnomalyRecordsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlOpenJob
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlOpenJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
 	public class OpenJobRequestParameters : RequestParameters<OpenJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlPostData
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlPostData<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
 	public class PostJobDataRequestParameters : RequestParameters<PostJobDataRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
-		public DateTimeOffset ResetStart { get { return Q<DateTimeOffset>("reset_start"); } set { Q("reset_start", value); } }
-		
+		public DateTimeOffset ResetStart { get => Q<DateTimeOffset>("reset_start"); set => Q("reset_start", value); }
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
-		public DateTimeOffset ResetEnd { get { return Q<DateTimeOffset>("reset_end"); } set { Q("reset_end", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public DateTimeOffset ResetEnd { get => Q<DateTimeOffset>("reset_end"); set => Q("reset_end", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlPreviewDatafeed
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlPreviewDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
 	public class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlPutDatafeed
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlPutDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
 	public class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlPutJob
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlPutJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
 	public class PutJobRequestParameters : RequestParameters<PutJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlRevertModelSnapshot
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlRevertModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
 	public class RevertModelSnapshotRequestParameters : RequestParameters<RevertModelSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlStartDatafeed
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlStartDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
 	public class StartDatafeedRequestParameters : RequestParameters<StartDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlStopDatafeed
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlStopDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
 	public class StopDatafeedRequestParameters : RequestParameters<StopDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlUpdateDatafeed
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlUpdateDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
 	public class UpdateDatafeedRequestParameters : RequestParameters<UpdateDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlUpdateJob
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlUpdateJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
 	public class UpdateJobRequestParameters : RequestParameters<UpdateJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlUpdateModelSnapshot
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlUpdateModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
 	public class UpdateModelSnapshotRequestParameters : RequestParameters<UpdateModelSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlValidate
-	///<pre>
-	///
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlValidate<pre></pre></summary>
 	public class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackMlValidateDetector
-	///<pre>
-	///
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackMlValidateDetector<pre></pre></summary>
 	public class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityAuthenticate
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityAuthenticate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public class AuthenticateRequestParameters : RequestParameters<AuthenticateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityChangePassword
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityChangePassword<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
 	public class ChangePasswordRequestParameters : RequestParameters<ChangePasswordRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityClearCachedRealms
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityClearCachedRealms<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
 	public class ClearCachedRealmsRequestParameters : RequestParameters<ClearCachedRealmsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
-		public string[] Usernames { get { return Q<string[]>("usernames"); } set { Q("usernames", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public string[] Usernames { get => Q<string[]>("usernames"); set => Q("usernames", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityClearCachedRoles
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityClearCachedRoles<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache</pre></summary>
 	public class ClearCachedRolesRequestParameters : RequestParameters<ClearCachedRolesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityDeleteRole
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityDeleteRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role</pre></summary>
 	public class DeleteRoleRequestParameters : RequestParameters<DeleteRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityDeleteRoleMapping
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityDeleteRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
 	public class DeleteRoleMappingRequestParameters : RequestParameters<DeleteRoleMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityDeleteUser
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityDeleteUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user</pre></summary>
 	public class DeleteUserRequestParameters : RequestParameters<DeleteUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityDisableUser
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityDisableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user</pre></summary>
 	public class DisableUserRequestParameters : RequestParameters<DisableUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityEnableUser
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityEnableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user</pre></summary>
 	public class EnableUserRequestParameters : RequestParameters<EnableUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityGetRole
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityGetRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role</pre></summary>
 	public class GetRoleRequestParameters : RequestParameters<GetRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityGetRoleMapping
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityGetRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
 	public class GetRoleMappingRequestParameters : RequestParameters<GetRoleMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityGetToken
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityGetToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token</pre></summary>
 	public class GetUserAccessTokenRequestParameters : RequestParameters<GetUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityGetUser
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityGetUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user</pre></summary>
 	public class GetUserRequestParameters : RequestParameters<GetUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityInvalidateToken
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityInvalidateToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token</pre></summary>
 	public class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityPutRole
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityPutRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role</pre></summary>
 	public class PutRoleRequestParameters : RequestParameters<PutRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityPutRoleMapping
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityPutRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
 	public class PutRoleMappingRequestParameters : RequestParameters<PutRoleMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackSecurityPutUser
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackSecurityPutUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user</pre></summary>
 	public class PutUserRequestParameters : RequestParameters<PutUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public Refresh Refresh { get { return Q<Refresh>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		///<summary>
+		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
+		/// to make this operation visible to search, if `false` then do nothing with refreshes.
+		///</summary>
+		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherAckWatch
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherAckWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public class AcknowledgeWatchRequestParameters : RequestParameters<AcknowledgeWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherActivateWatch
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherActivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
 	public class ActivateWatchRequestParameters : RequestParameters<ActivateWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherDeactivateWatch
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherDeactivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
 	public class DeactivateWatchRequestParameters : RequestParameters<DeactivateWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherDeleteWatch
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherDeleteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
 	public class DeleteWatchRequestParameters : RequestParameters<DeleteWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherExecuteWatch
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherExecuteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
 	public class ExecuteWatchRequestParameters : RequestParameters<ExecuteWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>indicates whether the watch should execute in debug mode</summary>
-		public bool? Debug { get { return Q<bool?>("debug"); } set { Q("debug", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherGetWatch
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherGetWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
 	public class GetWatchRequestParameters : RequestParameters<GetWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherPutWatch
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherPutWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
 	public class PutWatchRequestParameters : RequestParameters<PutWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value.ToTimeUnit()); } }
-		
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Specify whether the watch is in/active by default</summary>
-		public bool? Active { get { return Q<bool?>("active"); } set { Q("active", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherRestart
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherRestart<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
 	public class RestartWatcherRequestParameters : RequestParameters<RestartWatcherRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherStart
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherStart<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
 	public class StartWatcherRequestParameters : RequestParameters<StartWatcherRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherStats
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
 	public class WatcherStatsRequestParameters : RequestParameters<WatcherStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Emits stack traces of currently running watches</summary>
-		public bool? EmitStacktraces { get { return Q<bool?>("emit_stacktraces"); } set { Q("emit_stacktraces", value); } }
-		
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
+		public bool? EmitStacktraces { get => Q<bool?>("emit_stacktraces"); set => Q("emit_stacktraces", value); }
 	}
 	
-	///<summary>Request parameters descriptor for XpackWatcherStop
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html
-	///</pre>
-	///</summary>
+	///<summary>Request options for XpackWatcherStop<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
 	public class StopWatcherRequestParameters : RequestParameters<StopWatcherRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>Pretty format the returned JSON response.</summary>
-		public bool? Pretty { get { return Q<bool?>("pretty"); } set { Q("pretty", value); } }
-		
-		///<summary>Return human readable values for statistics.</summary>
-		public bool? Human { get { return Q<bool?>("human"); } set { Q("human", value); } }
-		
-		///<summary>Include the stack trace of returned errors.</summary>
-		public bool? ErrorTrace { get { return Q<bool?>("error_trace"); } set { Q("error_trace", value); } }
-		
-		///<summary>The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
-		public string[] FilterPath { get { return Q<string[]>("filter_path"); } set { Q("filter_path", value); } }
-		
 	}
 }

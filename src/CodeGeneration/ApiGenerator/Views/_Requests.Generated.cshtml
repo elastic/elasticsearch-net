@@ -1,3 +1,4 @@
+@using System
 @using System.Collections.Generic
 @using System.Linq
 @using System.Net.Cache
@@ -28,88 +29,73 @@ namespace Nest
 		)
 		.OrderBy(s=>s.RequestType);
 }
+	public abstract partial class @Raw("PlainRequestBase<TParameters>")
+	{
+	@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
+	{
+		<text>@Raw(common.InitializerGenerator(common.TypeHighLevel, common.ClsName, common.QueryStringKey, "value", common.DescriptionHighLevel.ToArray()))</text>
+	}
+	}
 	@foreach (CsharpMethod method in methods)
 	{
 	if (!method.SkipInterface)
 	{
 	<text>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface @(Raw(method.InterfaceType)) : IRequest@(Raw(string.Format("<{0}>", method.QueryStringParamName))) 
+	public partial interface @(Raw(method.InterfaceType)) : IRequest@(Raw(string.Format("<{0}>", method.QueryStringParamName)))
 	{</text>
 	foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 	{
 		<text>@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }</text>
 	}
 	//render partial methods as interface properties forcing us to implement them on request and request descriptors
-	foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
+	if (method.HttpMethod != "GET" && method.HttpMethod != "HEAD")
 	{
-		if (kv.Value.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+		foreach (var partialParam in method.Url.Params.Values.Where(p=>p.RenderPartial))
 		{
-			var fieldType = kv.Value.HighLevelType(kv.Key).Replace("params", "");
-			var cased = kv.Key.ToPascalCase();
-		<text>[JsonProperty("@(kv.Value.OriginalQueryStringParamName)")] @(Raw(fieldType)) @(cased) { get; set; }</text>
-	 	}
+		<text>[JsonProperty("@(partialParam.QueryStringKey)")] @(Raw(partialParam.TypeHighLevel)) @(partialParam.ClsName) { get; set; }</text>
+		}
 	}
 	<text>}
 </text>
 	}
 	<text>///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(" : PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
+	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
 	{
 		protected @(Raw(method.InterfaceType)) Self => this;
-	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
-	{
-	<text>	@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
-	}
-	@foreach (Constructor c in method.RequestConstructors())
-    {
-	<text>	@(Raw(c.Description))
-		@(Raw(c.Generated))
-		@(Raw(c.Body.IsNullOrEmpty() ? "{}" : c.Body))
-		@(Raw(c.AdditionalCode))
+@foreach (Constructor c in method.RequestConstructors())
+{
+<text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>
-	}
-	@foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
+}
+		// values part of the url path
+@foreach (var part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
+{
+<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");</text>
+}
+
+		// Request parameters
+@foreach (var param in method.Url.Params.Values)
+{
+	var original = param.QueryStringKey;
+	//skip parameters already part of the path portion of the url
+	if (method.Url.Parts != null && method.Url.Parts.ContainsKey(original))
 	{
-		//skip parameters already part of the path portion of the url
-		if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
-        {
-			continue;
-        }
-		//we prefer this parameter to be explictly implemented on the request body
-		if (kv.Value.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
-        {
-			continue;
-        }
-		var original = kv.Value.OriginalQueryStringParamName;
-		var cased = kv.Key.ToPascalCase();
-		var mm = (cased != "Type" && cased != "Index" && cased != "Source" && cased != "Script") ? cased : cased + "QueryString";
-		var fieldType = kv.Value.HighLevelType(kv.Key).Replace("params ", "");
-		var setter = "value";
-		if (fieldType == "Time")
-		{
-			setter += ".ToString()";
-		}
-		var desc = kv.Value.HighLevelTypeDescription(kv.Key).ToList();
-		<text>@if (desc.Count == 1) {
-<text>///<summary>@Raw(desc.First())</summary></text>
-		}
-		else 
-		{ <text>///<summary>
-		@Raw(string.Join("\r\n\t\t", desc.Select(d=> "/// " + d)))
-		///</summary></text>
-		}</text><text>@if(!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
-		{
-		<text>[Obsolete("Scheduled to be removed in 7.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
-		}
-		@Raw(kv.Value.Generator.Invoke(fieldType, mm, original, setter))
-		</text>
+		continue;
 	}
-	@if (method.RequestTypeUnmapped)
-	{<text>	//TODO THIS METHOD IS UNMAPPED!
-	</text>
+	//we prefer this parameter to be explictly implemented on the request body
+	if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+	{
+		continue;
 	}
+	var doc = param.DescriptionHighLevel.ToArray();
+<text>		@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))</text>
+}
+@if (method.RequestTypeUnmapped)
+{<text>		//TODO THIS METHOD IS UNMAPPED!
+</text>
+}
 	}</text>
-	}
+}
 }
  

@@ -15,6 +15,16 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public abstract partial class @Raw("RequestDescriptorBase<TDescriptor, TParameters, TInterface>")
+	{
+	@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
+	{
+		var original = common.QueryStringKey;
+		var t = @common.TypeHighLevel;
+		var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
+		<text>		public TDescriptor @(common.ClsName)(@common.TypeHighLevel @common.ClsArgumentName@tSuffix) => Qs("@original", @(common.ClsArgumentName));</text>
+	}
+	}
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
 	{
 		var type = method.DescriptorType + method.DescriptorTypeGeneric;
@@ -22,47 +32,42 @@ namespace Nest
 	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
 	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type, method.QueryStringParamName, method.InterfaceType)))
 	{ 
-	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
-	{
-	<text>	@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
-	}
-	@foreach (Constructor c in method.DescriptorConstructors())
-    {
-	<text>@(Raw(c.Description))
-		@(Raw(c.Generated))
-		@(Raw(c.Body.IsNullOrEmpty() ? "{}" : c.Body))
-		@(Raw(c.AdditionalCode))
+@foreach (Constructor c in method.DescriptorConstructors())
+{
+<text>		@(Raw(CodeGenerator.Constructor(c)))
 </text>
-    }
-	@foreach (FluentRouteSetter c in method.GetFluentRouteSetters())
-    {
-	<text>	@(Raw(c.XmlDoc))
-		@(Raw(c.Code))
+}
+		// values part of the url path
+@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
+{
+<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
+}
+@foreach (FluentRouteSetter c in method.GetFluentRouteSetters())
+{
+<text>		@(Raw(c.XmlDoc))
+		@(Raw(c.Code))</text>
+}
 </text>
-    }
-	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
-	{
-		//skip parameters already part of the path portion of the url
-        if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
-        {
+<text>		// Request parameters</text>
+foreach (var param in method.Url.Params.Values)
+{
+	var original = param.QueryStringKey;
+	//skip parameters already part of the path portion of the url
+		if (method.Url.Parts != null && method.Url.Parts.ContainsKey(original))
+		{
 			continue;
-        }
+		}
 		//we prefer this parameter to be explictly implemented on the request body
-		if (kv.Value.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
-        {
+		if (param.RenderPartial && (method.HttpMethod != "GET" && method.HttpMethod != "HEAD"))
+		{
 			continue;
-        }
-		var t = @kv.Value.HighLevelType(kv.Key);
-		var tMethod = t == "Time" ? ".ToTimeSpan()" : "";
+		}
+		var t = @param.TypeHighLevel;
 		var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
-		var m = kv.Key.ToPascalCase();
-		var mm = (m != "Type" && m != "Index" && m != "Source" && m != "Script") ? m : m + "QueryString";
 		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
 		var g = typed ? method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "") : "T";
-		var mml = mm.ToLowerInvariant();
-		var fieldsMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("Fields");
-		var desc = kv.Value.HighLevelTypeDescription(kv.Key).ToList();
-		var original = kv.Value.OriginalQueryStringParamName;
+		
+		var desc = param.DescriptionHighLevel.ToList();
 		<text>@if (desc.Count == 1) {
 		<text>///<summary>@Raw(desc.First())</summary></text>
 		}
@@ -70,18 +75,19 @@ namespace Nest
 		{ <text>		///<summary>
 		@Raw(string.Join("\r\n\t\t", desc.Select(d=> "/// " + d)))
 		///</summary></text>
-		}</text><text>@if (!string.IsNullOrWhiteSpace(kv.Value.Obsolete))
-		{<text>		[Obsolete("Scheduled to be removed in 7.0, @kv.Value.Obsolete")]</text>}
-		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => Qs("@original", @(kv.Key));</text>
-		if (fieldsMethod)
+		}</text><text>@if(!string.IsNullOrWhiteSpace(param.Obsolete))
+		{<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
+</text>}
+		public @Raw(type) @(param.ClsName)(@param.DescriptorArgumentType @param.ClsArgumentName@tSuffix) => Qs("@original", @(param.ClsArgumentName));</text>
+		if (param.IsFieldsParam)
 		{
-		<text>///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));</text>
+		<text>///<summary>@param.Description</summary>
+		public @Raw(type) @param.ClsName@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));</text>
 		}
-		else if (mm.ToLowerInvariant().Contains("field") && t.Contains("Field"))
+		else if (param.IsFieldParam)
 		{<text>
-		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", (Field)field);</text>
+		///<summary>@param.Description</summary>
+		public @Raw(type) @param.ClsName@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", (Field)field);</text>
 		}
 	}
 	if (method.Unmapped)

@@ -13,7 +13,6 @@ namespace ApiGenerator.Overrides.Endpoints
 			"explain",
 			"version",
 			"q", //we dont support GET searches
-			"source",
 			"sort",
 			"_source",
 			"_source_include",

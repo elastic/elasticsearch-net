@@ -17,10 +17,10 @@ namespace Tests.Cat.CatRepositories
 				;
 
 			await GET("/_cat/repositories?v=true")
-				.Fluent(c => c.CatRepositories(s=>s.V()))
-				.Request(c => c.CatRepositories(new CatRepositoriesRequest() { V = true }))
-				.FluentAsync(c => c.CatRepositoriesAsync(s=>s.V()))
-				.RequestAsync(c => c.CatRepositoriesAsync(new CatRepositoriesRequest() { V = true }))
+				.Fluent(c => c.CatRepositories(s=>s.Verbose()))
+				.Request(c => c.CatRepositories(new CatRepositoriesRequest() { Verbose = true }))
+				.FluentAsync(c => c.CatRepositoriesAsync(s=>s.Verbose()))
+				.RequestAsync(c => c.CatRepositoriesAsync(new CatRepositoriesRequest() { Verbose = true }))
 				;
 		}
 	}

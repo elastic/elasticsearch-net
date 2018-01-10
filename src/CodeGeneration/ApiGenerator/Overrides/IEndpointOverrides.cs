@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using ApiGenerator.Domain;
 
 namespace ApiGenerator.Overrides.Descriptors
@@ -15,9 +16,20 @@ namespace ApiGenerator.Overrides.Descriptors
 		IEnumerable<string> SkipQueryStringParams { get; }
 
 		/// <summary>
+		/// Force these be rendered as interface properties only, so that they'd have to be implemented manually
+		/// and become part of the body. This only takes affect on requests that take a body (e.g not GET or HEAD).
+		/// </summary>
+		IEnumerable<string> RenderPartial { get; }
+
+		/// <summary>
 		/// Override how the query param name is exposed to the client.
 		/// </summary>
 		IDictionary<string, string> RenameQueryStringParams { get; }
+
+		/// <summary>
+		/// A map of key -> obsolete message for properties in the spec that should not be used any longer
+		/// </summary>
+		IDictionary<string, string>  ObsoleteQueryStringParams { get; set; }
 
 		/// <summary>
 		/// Patch the CSharp method
