@@ -40,7 +40,7 @@ namespace ApiGenerator.Domain
 					case "string" when isFields: return "Fields";
 					case "string" when this.QueryStringKey.Contains("field"): return "Field";
 					default:
-						return NullableCsharpType(csharpType);
+						return csharpType;
 				}
 			}
 		}
@@ -119,19 +119,6 @@ namespace ApiGenerator.Domain
 						yield return this.Description;
 						yield break;
 				}
-			}
-		}
-
-		private static string NullableCsharpType(string fieldType)
-		{
-			switch (fieldType)
-			{
-				case "bool": return "bool?";
-				case "integer": return "int?";
-				case "double": return "double?";
-				case "long": return "long?";
-				default:
-					return fieldType;
 			}
 		}
 
