@@ -14,7 +14,7 @@ namespace Nest
 		Fields ICoreProperty.CopyTo { get; set; }
 		IProperties ICoreProperty.Fields { get; set; }
 
-		[Obsolete("Please use overload taking FieldType")]
+		[Obsolete("Removed in 6.0.")]
 		protected CorePropertyDescriptorBase(string type) : base(type) {}
 
 #pragma warning disable 618

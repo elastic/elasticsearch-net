@@ -115,6 +115,7 @@ namespace Elasticsearch.Net
 			: $"Type: {this.Type} Reason: \"{this.Reason}\" CausedBy: \"{this.CausedBy}\"";
 	}
 
+	[Obsolete("Removed in 6.0.")]
 	public class CausedBy
 	{
 		public string Reason { get; set; }

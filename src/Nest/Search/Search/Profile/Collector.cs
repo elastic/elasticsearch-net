@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -12,6 +13,7 @@ namespace Nest
 		public string Reason { get; internal set; }
 
 		[JsonProperty("time")]
+		[Obsolete("Removed in 6.0.")]
 		public Time Time { get; internal set; }
 
 		[JsonProperty("time_in_nanos")]

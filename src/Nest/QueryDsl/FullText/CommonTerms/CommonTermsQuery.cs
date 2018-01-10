@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -28,6 +29,7 @@ namespace Nest
 		string Analyzer { get; set; }
 
 		[JsonProperty(PropertyName = "disable_coord")]
+		[Obsolete("Removed in 6.0.")]
 		bool? DisableCoord { get; set; }
 	}
 
@@ -40,6 +42,8 @@ namespace Nest
 		public Operator? HighFrequencyOperator { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public string Analyzer { get; set; }
+
+		[Obsolete("Removed in 6.0.")]
 		public bool? DisableCoord { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.CommonTerms = this;

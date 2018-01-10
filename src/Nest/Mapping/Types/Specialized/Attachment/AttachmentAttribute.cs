@@ -1,5 +1,8 @@
-﻿namespace Nest
+﻿using System;
+
+namespace Nest
 {
+	[Obsolete("Removed in 6.0.")]
 	public class AttachmentAttribute : ElasticsearchDocValuesPropertyAttributeBase, IAttachmentProperty
 	{
 		public AttachmentAttribute() : base(FieldType.Attachment) { }
