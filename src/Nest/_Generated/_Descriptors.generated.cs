@@ -92,13 +92,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatAliasesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatAliasesDescriptor H(params string[] H) => Qs("h", H);
+		public CatAliasesDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatAliasesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatAliasesDescriptor S(params string[] S) => Qs("s", S);
+		public CatAliasesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatAliasesDescriptor V(bool? V = true) => Qs("v", V);
+		public CatAliasesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -123,13 +123,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatAllocationDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatAllocationDescriptor H(params string[] H) => Qs("h", H);
+		public CatAllocationDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatAllocationDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatAllocationDescriptor S(params string[] S) => Qs("s", S);
+		public CatAllocationDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatAllocationDescriptor V(bool? V = true) => Qs("v", V);
+		public CatAllocationDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -158,13 +158,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatCountDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatCountDescriptor H(params string[] H) => Qs("h", H);
+		public CatCountDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatCountDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatCountDescriptor S(params string[] S) => Qs("s", S);
+		public CatCountDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatCountDescriptor V(bool? V = true) => Qs("v", V);
+		public CatCountDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -192,13 +192,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatFielddataDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatFielddataDescriptor H(params string[] H) => Qs("h", H);
+		public CatFielddataDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatFielddataDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatFielddataDescriptor S(params string[] S) => Qs("s", S);
+		public CatFielddataDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatFielddataDescriptor V(bool? V = true) => Qs("v", V);
+		public CatFielddataDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -212,15 +212,15 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatHealthDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatHealthDescriptor H(params string[] H) => Qs("h", H);
+		public CatHealthDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatHealthDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatHealthDescriptor S(params string[] S) => Qs("s", S);
+		public CatHealthDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Set to false to disable timestamping</summary>
-		public CatHealthDescriptor Ts(bool? ts = true) => Qs("ts", ts);
+		public CatHealthDescriptor IncludeTimestamp(bool? includeTimestamp = true) => Qs("ts", includeTimestamp);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatHealthDescriptor V(bool? V = true) => Qs("v", V);
+		public CatHealthDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -230,7 +230,7 @@ namespace Nest
 					///<summary>Return help information</summary>
 		public CatHelpDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatHelpDescriptor S(params string[] S) => Qs("s", S);
+		public CatHelpDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 	
 	}
 	
@@ -261,7 +261,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatIndicesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatIndicesDescriptor H(params string[] H) => Qs("h", H);
+		public CatIndicesDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
 		public CatIndicesDescriptor Health(Health health) => Qs("health", health);
 		///<summary>Return help information</summary>
@@ -269,9 +269,9 @@ namespace Nest
 		///<summary>Set to true to return stats only for primary shards</summary>
 		public CatIndicesDescriptor Pri(bool? pri = true) => Qs("pri", pri);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatIndicesDescriptor S(params string[] S) => Qs("s", S);
+		public CatIndicesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatIndicesDescriptor V(bool? V = true) => Qs("v", V);
+		public CatIndicesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -285,13 +285,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatMasterDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatMasterDescriptor H(params string[] H) => Qs("h", H);
+		public CatMasterDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatMasterDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatMasterDescriptor S(params string[] S) => Qs("s", S);
+		public CatMasterDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatMasterDescriptor V(bool? V = true) => Qs("v", V);
+		public CatMasterDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -305,13 +305,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatNodeAttributesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatNodeAttributesDescriptor H(params string[] H) => Qs("h", H);
+		public CatNodeAttributesDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatNodeAttributesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatNodeAttributesDescriptor S(params string[] S) => Qs("s", S);
+		public CatNodeAttributesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatNodeAttributesDescriptor V(bool? V = true) => Qs("v", V);
+		public CatNodeAttributesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -327,13 +327,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatNodesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatNodesDescriptor H(params string[] H) => Qs("h", H);
+		public CatNodesDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatNodesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatNodesDescriptor S(params string[] S) => Qs("s", S);
+		public CatNodesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatNodesDescriptor V(bool? V = true) => Qs("v", V);
+		public CatNodesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -347,13 +347,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatPendingTasksDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatPendingTasksDescriptor H(params string[] H) => Qs("h", H);
+		public CatPendingTasksDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatPendingTasksDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatPendingTasksDescriptor S(params string[] S) => Qs("s", S);
+		public CatPendingTasksDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatPendingTasksDescriptor V(bool? V = true) => Qs("v", V);
+		public CatPendingTasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -367,13 +367,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatPluginsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatPluginsDescriptor H(params string[] H) => Qs("h", H);
+		public CatPluginsDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatPluginsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatPluginsDescriptor S(params string[] S) => Qs("s", S);
+		public CatPluginsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatPluginsDescriptor V(bool? V = true) => Qs("v", V);
+		public CatPluginsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -402,13 +402,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatRecoveryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatRecoveryDescriptor H(params string[] H) => Qs("h", H);
+		public CatRecoveryDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatRecoveryDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatRecoveryDescriptor S(params string[] S) => Qs("s", S);
+		public CatRecoveryDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatRecoveryDescriptor V(bool? V = true) => Qs("v", V);
+		public CatRecoveryDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -422,13 +422,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatRepositoriesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatRepositoriesDescriptor H(params string[] H) => Qs("h", H);
+		public CatRepositoriesDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatRepositoriesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatRepositoriesDescriptor S(params string[] S) => Qs("s", S);
+		public CatRepositoriesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatRepositoriesDescriptor V(bool? V = true) => Qs("v", V);
+		public CatRepositoriesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -455,13 +455,13 @@ namespace Nest
 		///<summary>The unit in which to display byte values</summary>
 		public CatSegmentsDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatSegmentsDescriptor H(params string[] H) => Qs("h", H);
+		public CatSegmentsDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatSegmentsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatSegmentsDescriptor S(params string[] S) => Qs("s", S);
+		public CatSegmentsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatSegmentsDescriptor V(bool? V = true) => Qs("v", V);
+		public CatSegmentsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -492,13 +492,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatShardsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatShardsDescriptor H(params string[] H) => Qs("h", H);
+		public CatShardsDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatShardsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatShardsDescriptor S(params string[] S) => Qs("s", S);
+		public CatShardsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatShardsDescriptor V(bool? V = true) => Qs("v", V);
+		public CatShardsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -521,13 +521,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatSnapshotsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatSnapshotsDescriptor H(params string[] H) => Qs("h", H);
+		public CatSnapshotsDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatSnapshotsDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatSnapshotsDescriptor S(params string[] S) => Qs("s", S);
+		public CatSnapshotsDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatSnapshotsDescriptor V(bool? V = true) => Qs("v", V);
+		public CatSnapshotsDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -547,13 +547,13 @@ namespace Nest
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
 		public CatTasksDescriptor ParentTask(long? parentTask) => Qs("parent_task", parentTask);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatTasksDescriptor H(params string[] H) => Qs("h", H);
+		public CatTasksDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatTasksDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatTasksDescriptor S(params string[] S) => Qs("s", S);
+		public CatTasksDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatTasksDescriptor V(bool? V = true) => Qs("v", V);
+		public CatTasksDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -576,13 +576,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatTemplatesDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatTemplatesDescriptor H(params string[] H) => Qs("h", H);
+		public CatTemplatesDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatTemplatesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatTemplatesDescriptor S(params string[] S) => Qs("s", S);
+		public CatTemplatesDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatTemplatesDescriptor V(bool? V = true) => Qs("v", V);
+		public CatTemplatesDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	
@@ -607,13 +607,13 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatThreadPoolDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatThreadPoolDescriptor H(params string[] H) => Qs("h", H);
+		public CatThreadPoolDescriptor Columns(params string[] columns) => Qs("h", columns);
 		///<summary>Return help information</summary>
 		public CatThreadPoolDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public CatThreadPoolDescriptor S(params string[] S) => Qs("s", S);
+		public CatThreadPoolDescriptor SortByColumns(params string[] sortByColumns) => Qs("s", sortByColumns);
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatThreadPoolDescriptor V(bool? V = true) => Qs("v", V);
+		public CatThreadPoolDescriptor Verbose(bool? verbose = true) => Qs("v", verbose);
 	
 	}
 	

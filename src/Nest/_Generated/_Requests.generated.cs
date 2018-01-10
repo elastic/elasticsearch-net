@@ -306,16 +306,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -354,16 +354,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -399,16 +399,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -447,16 +447,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -479,19 +479,19 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Set to false to disable timestamping</summary>
-		public bool? Ts { get => Q<bool?>("ts"); set => Q("ts", value); }
+		public bool? IncludeTimestamp { get => Q<bool?>("ts"); set => Q("ts", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -508,7 +508,7 @@ namespace Nest
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 	}
 	
@@ -547,7 +547,7 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
 		public Health Health { get => Q<Health>("health"); set => Q("health", value); }
@@ -559,10 +559,10 @@ namespace Nest
 		public bool? Pri { get => Q<bool?>("pri"); set => Q("pri", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -585,16 +585,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -617,16 +617,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -652,16 +652,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -684,16 +684,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -716,16 +716,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -761,16 +761,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -793,16 +793,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -835,16 +835,16 @@ namespace Nest
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -883,16 +883,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -928,16 +928,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -969,16 +969,16 @@ namespace Nest
 		public long? ParentTask { get => Q<long?>("parent_task"); set => Q("parent_task", value); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -1014,16 +1014,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -1062,16 +1062,16 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	

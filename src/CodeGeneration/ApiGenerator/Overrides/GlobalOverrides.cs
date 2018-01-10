@@ -17,8 +17,13 @@ namespace ApiGenerator.Overrides
 			{"_source", "source_enabled"},
 			{"_source_include", "source_include"},
 			{"_source_exclude", "source_exclude"},
-			{"q", "query_on_query_string"},
 			{"docvalue_fields", "doc_value_fields"},
+			{"q", "query_on_query_string"},
+			//make cat parameters more descriptive
+			{"h", "columns"},
+			{"s", "sort_by_columns"},
+			{"v", "verbose"},
+			{"ts", "include_timestamp"},
 		};
 
 		public override IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new Dictionary<string, string>

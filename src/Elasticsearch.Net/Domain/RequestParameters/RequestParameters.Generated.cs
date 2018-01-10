@@ -69,16 +69,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -103,16 +103,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -134,16 +134,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -168,16 +168,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 		///<summary>A comma-separated list of fields to return in the output</summary>
 		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
@@ -202,19 +202,19 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Set to false to disable timestamping</summary>
-		public bool? Ts { get => Q<bool?>("ts"); set => Q("ts", value); }
+		public bool? IncludeTimestamp { get => Q<bool?>("ts"); set => Q("ts", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -230,7 +230,7 @@ namespace Elasticsearch.Net
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 	}
 	
@@ -255,7 +255,7 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>A health status (&quot;green&quot;, &quot;yellow&quot;, or &quot;red&quot; to filter only indices matching the specified health status</summary>
 		public Health Health { get => Q<Health>("health"); set => Q("health", value); }
@@ -267,10 +267,10 @@ namespace Elasticsearch.Net
 		public bool? Pri { get => Q<bool?>("pri"); set => Q("pri", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -292,16 +292,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -323,16 +323,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -357,16 +357,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -388,16 +388,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -419,16 +419,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -450,16 +450,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -481,16 +481,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -509,16 +509,16 @@ namespace Elasticsearch.Net
 		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -543,16 +543,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -574,16 +574,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -614,16 +614,16 @@ namespace Elasticsearch.Net
 		public long? ParentTask { get => Q<long?>("parent_task"); set => Q("parent_task", value); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -645,16 +645,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
@@ -679,16 +679,16 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public string[] H { get => Q<string[]>("h"); set => Q("h", value); }
+		public string[] Columns { get => Q<string[]>("h"); set => Q("h", value); }
 		
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
-		public string[] S { get => Q<string[]>("s"); set => Q("s", value); }
+		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool? V { get => Q<bool?>("v"); set => Q("v", value); }
+		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 		
 	}
 	
