@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.1
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -80,8 +80,9 @@ public class AllowAllCertificatesCluster : SslAndKpiXPackCluster
 If your client application has access to the public CA certificate locally, Elasticsearch.NET and NEST ship with some handy helpers
 that can assert that a certificate the server presents is one that came from the local CA.
 
-If you use X-Pack's `certgen` tool to {xpack_current}/ssl-tls.html[generate SSL certificates], the generated node certificate
-does not include the CA in the certificate chain, in order to cut down on SSL handshake size. In those case you can use`CertificateValidations.AuthorityIsRoot` and pass it your local copy of the CA public key to assert that
+If you use X-Pack's {ref_current}/certutil.html[+certutil+ tool] to generate SSL certificates, the generated node certificate
+does not include the CA in the certificate chain, in order to cut down on SSL handshake size. In those case you can use
+`CertificateValidations.AuthorityIsRoot` and pass it your local copy of the CA public key to assert that
 the certificate the server presented was generated using it
 
 [source,csharp]
@@ -115,16 +116,16 @@ the local CA certificate is part of the chain that was used to generate the serv
 ==== Client Certificates
 
 X-Pack also allows you to configure a {xpack_current}/pki-realm.html[PKI realm] to enable user authentication
-through client certificates. The `certgen` tool included with X-Pack allows you to
-{ref_current}/certgen.html[generate client certificates as well] and assign the distinguished name (DN) of the
+through client certificates. The {ref_current}/certutil.html[+certutil+ tool] included with X-Pack allows you to
+generate client certificates as well and assign the distinguished name (DN) of the
 certificate to a user with a certain role.
 
-certgen by default only generates a public certificate `.cer`) and a private key `.key`. To authenticate with client certificates, you need to present both
+By default, the `certutil` tool only generates a public certificate `.cer`) and a private key `.key`. To authenticate with client certificates, you need to present both
 as one certificate. The easiest way to do this is to generate a `pfx` or `p12` file from the `.cer` and `.key`
 and attach these to requests using `new X509Certificate(pathToPfx)`.
 
 If you do not have a way to run `openssl` or `Pvk2Pfx` to do this as part of your deployments the clients ships with a handy helper to generate one
-on the fly by passing the paths to the `.cer`  and `.key` files that `certgen` outputs. Sadly, this functonality is not available on .NET Core because
+on the fly by passing the paths to the `.cer`  and `.key` files that `certutil` outputs. Sadly, this functonality is not available on .NET Core because
 the `PublicKey` property cannot be set on the crypto service provider that is used to generate the `pfx` file at runtime.
 
 You can set Client Certificates to use on all connections on `ConnectionSettings`
@@ -150,11 +151,8 @@ public class PkiCluster : CertgenCaCluster
 }
 ----
 <1> Set the client certificate on `ConnectionSettings`
-
 <2> The path to the `.cer` file
-
 <3> The path to the `.key` file
-
 <4> The password for the private key
 
 Or per request on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`

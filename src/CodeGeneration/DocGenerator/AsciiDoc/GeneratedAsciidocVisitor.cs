@@ -76,7 +76,7 @@ namespace DocGenerator.AsciiDoc
 
 			if (document.Attributes.All(a => a.Name != "ref_current"))
 			{
-				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/master"));
+				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/6.1"));
 			}
 
 			var github = "https://github.com/elastic/elasticsearch-net";
@@ -242,8 +242,7 @@ namespace DocGenerator.AsciiDoc
 			{
 				// Check for duplicate ids across documents
 				var key = sectionTitle.Attributes.Anchor.Id;
-				string existingFile;
-				if (Ids.TryGetValue(key, out existingFile))
+				if (Ids.TryGetValue(key, out var existingFile))
 				{
 					throw new Exception($"duplicate id {key} in {_destination.FullName}. Id already exists in {existingFile}");
 				}
