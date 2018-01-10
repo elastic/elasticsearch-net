@@ -132,6 +132,7 @@ Target "Diff" <| fun _ ->
   ==> "Release"
   
 "Start"
+  ==> "Clean"
   ==> "Diff"
   
 RunTargetOrListTargets()

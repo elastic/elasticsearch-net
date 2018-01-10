@@ -13,9 +13,11 @@ open System.IO
 open Fake 
 open System
 open System.IO
+open System.Linq
 open System.Net
 open System.Text
 open System.Text.RegularExpressions
+open System.Xml
 open System.Xml.Linq
 open Fake.Git.CommandHelper
 
@@ -33,13 +35,13 @@ module Differ =
     
     /// The github project compilation target. Determines how to compile the github commit
     type GitHubTarget =
-        | Command of command:string * args:string list * resolveAssembly:(string -> string)
+        | Command of command:string * args:string list * resolveAssemblies:(string -> string)
     
     // A github commit to diff
     type GitHubCommit = {
         /// The commit to diff against
         Commit: string;
-        /// The compilation target. If not specified, will use the first *.sln found
+        /// The compilation target.
         CompileTarget : GitHubTarget;
         /// The build output target. If not specified, a diff will be performed on all assemblies in the build output directories
         OutputTarget: string;
@@ -194,7 +196,7 @@ module Differ =
                             ) (TimeSpan.FromMinutes 10.)
                             |> failIfError 
     
-                            let buildOutputPath = f(repo)
+                            let buildOutputPath = f repo
                             CopyDir outputPath buildOutputPath (fun s -> true)
                             outputPath                          
     
@@ -212,63 +214,104 @@ module Differ =
         | "Deleted" -> Deleted
         | "Modified" -> Modified
         | "New" -> New
-        | d -> failwith (sprintf "unknown diff type: %s" d)
+        | d -> failwithf "unknown diff type: %s" d
         
     let private attributeValue name (element:XElement) = 
         let attribute = element.Attribute(XName.op_Implicit name)
         if attribute <> null then attribute.Value else ""
         
+    let private elements name (element:XContainer) = element.Elements(XName.op_Implicit name)
+    
+    let private descendents name (element:XContainer) = element.Descendants(XName.op_Implicit name)
+    
     let private convertToMarkdown (path:string) first second =
         let name = path |> Path.GetFileNameWithoutExtension
-        let doc = XDocument.Load path
-        let output = Path.ChangeExtension(path, "md")
-        use file = File.OpenWrite <| output
-        use writer = new StreamWriter(file)                
-        writer.WriteLine(sprintf "# Breaking changes for %s between %s and %s" name first second)
-        writer.WriteLine()
-                
-        for element in doc.Descendants(XName.op_Implicit "Type") do
-            let typeName = element |> attributeValue "Name" |> replace (sprintf "%s." name) ""
-            let diffType  = element |> attributeValue "DiffType" |> convertDiffType
-            match diffType with
-            | Deleted -> writer.WriteLine(sprintf "## `%s` is deleted" typeName)
-            | New -> writer.WriteLine(sprintf "## `%s` is added" typeName)
-            | Modified -> 
-                let members = 
-                    Seq.append 
-                        (element.Elements(XName.op_Implicit "Method")) 
-                        (element.Elements(XName.op_Implicit "Property")) 
-            
-                if Seq.isEmpty members |> not then          
-                    writer.WriteLine(sprintf "## `%s`" typeName)
-                    for m in members do
-                        let memberName = m |> attributeValue "Name"
-                        if isNotNullOrEmpty memberName then
-                            let diffType  = m |> attributeValue "DiffType"                         
-                            if isNotNullOrEmpty diffType then                    
-                                match convertDiffType diffType with
-                                        | Deleted -> writer.WriteLine(sprintf "### `%s` is deleted" memberName)
-                                        | New -> writer.WriteLine(sprintf "### `%s` is added" memberName)
-                                        | Modified -> 
-                                            match (m.Descendants(XName.op_Implicit "DiffItem") |> Seq.tryHead) with
-                                            | Some diffItem ->
-                                                writer.WriteLine(sprintf "### `%s`" memberName)                                                                                      
-                                                let diffDescription = diffItem.Value
-                                                writer.WriteLine(Regex.Replace(diffDescription, "changed from (.*?) to (.*).", "changed from `$1` to `$2`."))                                         
-                                            | None -> ()
+        try
+            let doc = XDocument.Load path
+            let output = Path.ChangeExtension(path, "md")
+            DeleteFile output
+            use file = File.OpenWrite <| output
+            use writer = new StreamWriter(file)                      
+            writer.WriteLine(sprintf "# Breaking changes for %s between %s and %s" name first second)
+            writer.WriteLine()
+                    
+            for element in (doc |> descendents "Type") do
+                let typeName = element |> attributeValue "Name" |> replace (sprintf "%s." name) ""
+                let diffType  = element |> attributeValue "DiffType" |> convertDiffType
+                match diffType with
+                | Deleted -> writer.WriteLine(sprintf "## `%s` is deleted" typeName)
+                | New -> writer.WriteLine(sprintf "## `%s` is added" typeName)
+                | Modified -> 
+                    let members = Seq.append (element |> elements "Method") (element |> elements "Property")               
+                    if Seq.isEmpty members |> not then          
+                        writer.WriteLine(sprintf "## `%s`" typeName)
+                        for m in members do
+                            let memberName = m |> attributeValue "Name"
+                            if isNotNullOrEmpty memberName then
+                                let diffType  = m |> attributeValue "DiffType"                         
+                                if isNotNullOrEmpty diffType then                    
+                                    match convertDiffType diffType with
+                                            | Deleted -> writer.WriteLine(sprintf "### `%s` is deleted" memberName)
+                                            | New -> writer.WriteLine(sprintf "### `%s` is added" memberName)
+                                            | Modified -> 
+                                                match (m.Descendants(XName.op_Implicit "DiffItem") |> Seq.tryHead) with
+                                                | Some diffItem ->
+                                                    writer.WriteLine(sprintf "### `%s`" memberName)                                                                                      
+                                                    let diffDescription = diffItem.Value
+                                                    writer.WriteLine(Regex.Replace(diffDescription, "changed from (.*?) to (.*).", "changed from `$1` to `$2`."))                                         
+                                                | None -> ()
+        with
+        | :? XmlException -> ignore()
 
     let private convertToAsciidoc path first second = 
-        trace "TODO: Convert to asciidoc"
+        let name = path |> Path.GetFileNameWithoutExtension
+        try
+            let doc = XDocument.Load path
+            let output = Path.ChangeExtension(path, "asciidoc")
+            DeleteFile output
+            use file = File.OpenWrite <| output
+            use writer = new StreamWriter(file)                
+            writer.WriteLine(name |> replace "." "-" |> sprintf "[[%s-breaking-changes]]")
+            writer.WriteLine(sprintf "== Breaking changes for %s between %s and %s" name first second)
+            writer.WriteLine()
+                    
+            for element in (doc |> descendents "Type") do
+                let typeName = element |> attributeValue "Name" |> replace (sprintf "%s." name) ""
+                let diffType  = element |> attributeValue "DiffType" |> convertDiffType
+                match diffType with
+                | Deleted -> writer.WriteLine(sprintf "[float]%s=== `%s` is deleted" Environment.NewLine typeName)
+                | New -> writer.WriteLine(sprintf "[float]%s=== `%s` is added" Environment.NewLine typeName)
+                | Modified -> 
+                    let members = Seq.append (element |> elements "Method") (element |> elements "Property")        
+                    if Seq.isEmpty members |> not then          
+                        writer.WriteLine(sprintf "[float]%s=== `%s`" Environment.NewLine typeName)
+                        for m in members do
+                            let memberName = m |> attributeValue "Name"
+                            if isNotNullOrEmpty memberName then
+                                let diffType  = m |> attributeValue "DiffType"                         
+                                if isNotNullOrEmpty diffType then                    
+                                    match convertDiffType diffType with
+                                            | Deleted -> writer.WriteLine(sprintf "[float]%s==== `%s` is deleted" Environment.NewLine memberName)
+                                            | New -> writer.WriteLine(sprintf "[float]%s==== `%s` is added" Environment.NewLine memberName)
+                                            | Modified -> 
+                                                match (m.Descendants(XName.op_Implicit "DiffItem") |> Seq.tryHead) with
+                                                | Some diffItem ->
+                                                    writer.WriteLine(sprintf "[float]%s==== `%s`" Environment.NewLine memberName)                                                                                      
+                                                    let diffDescription = diffItem.Value
+                                                    writer.WriteLine(Regex.Replace(diffDescription, "changed from (.*?) to (.*).", "changed from `$1` to `$2`."))                                         
+                                                | None -> ()
+        with
+        | :? XmlException -> ignore()
         
-    /// Generates a diff between assembly files, assembly directories, assemblies in nuget packages
+    /// Generates a diff between assemblies
     let Generate(diffType:string, project:string, first:string, second:string, format:string) =
         let tempDir = Path.GetTempPath() </> "nest-diff"
         
         let targetProject = 
             match project |> toLower with
-            | "nest" -> (DotNetProject.Project Nest).Name 
-            | "nest.jsonnetserializer" -> (DotNetProject.Project NestJsonNetSerializer).Name 
-            | "elasticsearch.net" -> (DotNetProject.Project ElasticsearchNet).Name 
+            | "nest" -> (Project Nest).Name 
+            | "nest.jsonnetserializer" -> (Project NestJsonNetSerializer).Name 
+            | "elasticsearch.net" -> (Project ElasticsearchNet).Name 
             | _ -> ""
             
         let targetFormat =
@@ -283,7 +326,14 @@ module Differ =
             | "github" -> 
                 let commit = {
                     Commit = ""
-                    CompileTarget = Command("build.bat", ["skiptests"], fun o -> o @@ @"build\output\Nest\net46")
+                    CompileTarget = Command(
+                                            "build.bat", 
+                                            ["skiptests"], 
+                                            fun o -> 
+                                                let outputDir = o @@ @"build\output\Nest\net46"
+                                                if directoryExists outputDir && Directory.EnumerateFileSystemEntries(outputDir).Any() then outputDir
+                                                else o @@ @"src\Nest\bin\Release\net46"
+                                            )
                     OutputTarget = if isNotNullOrEmpty targetProject then sprintf "%s.dll" targetProject else targetProject
                 }
                 GitHub {
@@ -312,6 +362,7 @@ module Differ =
                 let otherFile = lastDirectory </> Path.GetFileName file 
                 if fileExists otherFile then yield { FirstPath = file; SecondPath = otherFile } ]
 
+        /// returns a list of AssemblyDiff pairs
         let assemblies = 
             match diff with 
             | GitHub g ->
@@ -329,7 +380,7 @@ module Differ =
                 
         for diff in assemblies do 
             let file = diff.FirstPath |> Path.GetFileNameWithoutExtension
-            let outputFile = Paths.Output("diff") </> sprintf "%s.xml" file |> Path.GetFullPath
+            let outputFile = Paths.Output("Diffs") </> sprintf "%s.xml" file |> Path.GetFullPath
             let outputDir = outputFile |> Path.GetDirectoryName
             if directoryExists outputDir |> not then CreateDir outputDir      
             Tooling.JustAssembly.Exec [diff.FirstPath; diff.SecondPath; outputFile]
