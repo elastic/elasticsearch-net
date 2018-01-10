@@ -28,6 +28,13 @@ namespace Nest
 		)
 		.OrderBy(s=>s.RequestType);
 }
+	public abstract partial class @Raw("RequestBase<TParameters>")
+	{
+	@foreach (var param in RestApiSpec.CommonApiQueryParameters)
+	{
+	}
+	}
+
 	@foreach (CsharpMethod method in methods)
 	{
 	if (!method.SkipInterface)

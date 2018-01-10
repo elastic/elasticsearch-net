@@ -31,8 +31,7 @@ namespace Nest
 		void WriteJson(IElasticsearchSerializer sourceSerializer, Stream s, SerializationFormatting serializationFormatting);
 	}
 
-	public abstract class RequestBase<TParameters> : IRequest<TParameters>
-		where TParameters : IRequestParameters, new()
+	public abstract partial class RequestBase<TParameters> : IRequest<TParameters> where TParameters : IRequestParameters, new()
 	{
 		[JsonIgnore]
 		protected IRequest<TParameters> RequestState => this;

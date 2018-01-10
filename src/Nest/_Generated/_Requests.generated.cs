@@ -13,6 +13,10 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
+	public abstract partial class RequestBase<TParameters>
+	{
+	}
+
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IAcknowledgeWatchRequest : IRequest<AcknowledgeWatchRequestParameters> 
