@@ -57,6 +57,7 @@ new MoreLikeThisQuery
         "_index": "project",
         "_type": "doc",
         "_id": "Durgan LLC",
+        "_routing": "Durgan LLC",
         "doc": {
           "name": "Koch, Collier and Mohr",
           "state": "BellyUp",

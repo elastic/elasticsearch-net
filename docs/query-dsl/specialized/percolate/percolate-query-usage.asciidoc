@@ -115,6 +115,7 @@ q
     .Type<Project>()
     .Index<Project>()
     .Id(Project.Instance.Name)
+    .Routing(Project.Instance.Name)
     .Field(f => f.Query)
 )
 ----
@@ -128,6 +129,7 @@ new PercolateQuery
     Type = typeof(Project),
     Index = IndexName.From<Project>(),
     Id = Project.Instance.Name,
+    Routing = Project.Instance.Name,
     Field = Infer.Field<ProjectPercolation>(f => f.Query)
 }
 ----
@@ -140,6 +142,7 @@ new PercolateQuery
     "type": "doc",
     "index": "project",
     "id": "Durgan LLC",
+    "routing": "Durgan LLC",
     "field": "query"
   }
 }

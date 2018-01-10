@@ -89,8 +89,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*
 		* If your class has a property of type JoinField, NEST will automatically infer the parentid as the routing value.
 		 *
-		* The name of this property can be anything. Be sure the read the <<parent-child-joins, section on parent child joins>> to get a complete
-		 * walkthrough using Parent Child joins with NEST.
+		* The name of this property can be anything. Be sure the read the <<parent-child-relationships, section on Parent/Child relationships>> to get a complete
+		 * walkthrough on using Parent Child joins with NEST.
 		*/
 		class MyOtherDTO
 		{

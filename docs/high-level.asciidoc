@@ -130,6 +130,8 @@ There are several ways to control mapping in NEST
 
 * <<visitor-pattern-mapping, through the Visitor Pattern>>
 
+* <<parent-child-relationships, Parent/Child relationships>>
+
 and these can be combined to form an overall mapping approach. In addition, there are also ways to control
 
 * <<ignoring-properties, Ignoring properties>>
@@ -143,6 +145,8 @@ include::{output-dir}/mapping/attribute-mapping.asciidoc[]
 include::{output-dir}/mapping/fluent-mapping.asciidoc[]
 
 include::{output-dir}/mapping/visitor-pattern-mapping.asciidoc[]
+
+include::{output-dir}/mapping/parent-child-relationships.asciidoc[]
 
 include::{output-dir}/mapping/ignoring-properties.asciidoc[]
 
@@ -221,6 +225,8 @@ There are a number of conventions that NEST uses for inference of
 
 * <<property-inference, Properties>>
 
+* <<routing-inference, Routing>>
+
 :includes-from-dirs: client-concepts/high-level/inference
 
 include::client-concepts/high-level/inference/document-paths.asciidoc[]
@@ -237,6 +243,8 @@ include::client-concepts/high-level/inference/indices-paths.asciidoc[]
 
 include::client-concepts/high-level/inference/property-inference.asciidoc[]
 
+include::client-concepts/high-level/inference/routing-inference.asciidoc[]
+
 include::client-concepts/high-level/inference/types-and-relations-inference.asciidoc[]
 
 [[common-types]]
@@ -248,7 +256,7 @@ NEST has a number of types for working with Elasticsearch conventions for
 
 * <<distance-units, Distance units>>
 
-* <<date-math-expressions, Dat math expressions>>
+* <<date-math-expressions, Date Math expressions>>
 
 include::common-options/time-unit/time-units.asciidoc[]
 

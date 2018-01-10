@@ -58,3 +58,11 @@ foreach (var bucket in projects.Buckets)
 }
 ----
 
+[source,csharp]
+----
+response.ShouldBeValid();
+var centroid = response.Aggregations.GeoCentroid("centroid");
+centroid.Should().NotBeNull();
+centroid.Count.Should().Be(0);
+----
+

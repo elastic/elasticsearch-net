@@ -175,19 +175,29 @@ var audit = new Auditor(() => Framework.Cluster
         .Settings(s => s.SniffOnStartup(false))
 );
 
-Action<Audit, string, int> hostAssert = (a, host, expectedPort) =>
+void HostAssert(Audit a, string host, int expectedPort)
 {
     a.Node.Uri.Host.Should().Be(host);
     a.Node.Uri.Port.Should().Be(expectedPort);
-};
+}
+void SniffUrlAssert(Audit a, string host, int expectedPort)
+{
+    HostAssert(a, host, expectedPort);
+    var sniffUri = new UriBuilder(a.Node.Uri)
+    {
+        Path = RequestPipeline.SniffPath,
+        Query = "?flat_settings=true&timeout=2s"
+    }.Uri;
+    sniffUri.PathEquals(a.Path, nameof(SniffUrlAssert));
+}
 
 audit = await audit.TraceCalls(
     new ClientCall {
-        { PingFailure, a => hostAssert(a, "localhost", 9200)},
+        { PingFailure, a => HostAssert(a, "localhost", 9200)},
         { SniffOnFail },
-        { SniffSuccess, a => hostAssert(a, "localhost", 9200)},
-        { PingSuccess, a => hostAssert(a, "10.0.12.1", 9200)},
-        { HealthyResponse,  a => hostAssert(a, "10.0.12.1", 9200)},
+        { SniffSuccess, a => SniffUrlAssert(a, "localhost", 9200)},
+        { PingSuccess, a => HostAssert(a, "10.0.12.1", 9200)},
+        { HealthyResponse,  a => HostAssert(a, "10.0.12.1", 9200)},
         { pool =>  pool.Nodes.Count.Should().Be(10) } <1>
     }
 );
