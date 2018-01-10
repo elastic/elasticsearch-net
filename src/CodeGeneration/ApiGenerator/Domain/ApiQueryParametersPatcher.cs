@@ -27,10 +27,10 @@ namespace ApiGenerator.Domain
 			foreach (var kv in source)
 			{
 				var queryStringKey = kv.Key;
-				kv.Value.OriginalQueryStringParamName = queryStringKey;
+				kv.Value.QueryStringKey = queryStringKey;
 
 				if (!renameLookup.TryGetValue(queryStringKey, out var preferredName)) preferredName = kv.Key;
-				kv.Value.CsharpName = CreateCSharpName(preferredName);
+				kv.Value.ClsName = CreateCSharpName(preferredName);
 
 				if (skipList.Contains(queryStringKey)) continue;
 

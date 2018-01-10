@@ -27,7 +27,7 @@ namespace ApiGenerator.Domain
 					where m.Value.Type == "enum"
 					select new EnumDescription
 					{
-						Name = m.Value.CsharpType(m.Key),
+						Name = m.Value.ClsName,
 						Options = m.Value.Options
 					};
 

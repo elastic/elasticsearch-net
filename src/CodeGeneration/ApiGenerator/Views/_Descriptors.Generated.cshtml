@@ -19,10 +19,10 @@ namespace Nest
 	{
 	@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
 	{
-		var original = common.OriginalQueryStringParamName;
-		var t = @common.CsharpHighLevelType;
+		var original = common.QueryStringKey;
+		var t = @common.TypeHighLevel;
 		var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
-		<text>		public TDescriptor @(common.CsharpName)(@common.CsharpHighLevelType @common.CsharpArgumentName@tSuffix) => Qs("@original", @(common.CsharpArgumentName));</text>
+		<text>		public TDescriptor @(common.ClsName)(@common.TypeHighLevel @common.ClsArgumentName@tSuffix) => Qs("@original", @(common.ClsArgumentName));</text>
 	}
 	}
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
@@ -52,7 +52,7 @@ namespace Nest
     }
 	</text>foreach (var param in method.Url.Params.Values)
 	{
-		var original = param.OriginalQueryStringParamName;
+		var original = param.QueryStringKey;
 		//skip parameters already part of the path portion of the url
         if (method.Url.Parts != null && method.Url.Parts.ContainsKey(original))
         {
@@ -63,14 +63,12 @@ namespace Nest
         {
 			continue;
         }
-		var t = @param.HighLevelType(original);
-		var tMethod = t == "Time" ? ".ToTimeSpan()" : "";
+		var t = @param.TypeHighLevel;
 		var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
 		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
 		var g = typed ? method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "") : "T";
-		var mml = param.CsharpName.ToLowerInvariant();
-		var fieldsMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("Fields");
-		var desc = param.HighLevelTypeDescription(original).ToList();
+		
+		var desc = param.DescriptionHighLevel.ToList();
 		<text>@if (desc.Count == 1) {
 		<text>///<summary>@Raw(desc.First())</summary></text>
 		}
@@ -81,16 +79,16 @@ namespace Nest
 		}</text><text>@if(!string.IsNullOrWhiteSpace(param.Obsolete))
 		{<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
 </text>}
-		public @Raw(type) @(param.CsharpName)(@t @param.CsharpArgumentName@tSuffix) => Qs("@original", @(param.CsharpArgumentName));</text>
-		if (fieldsMethod)
+		public @Raw(type) @(param.ClsName)(@param.TypeHighLevelArgument @param.ClsArgumentName@tSuffix) => Qs("@original", @(param.ClsArgumentName));</text>
+		if (param.IsFieldsParam)
 		{
 		<text>///<summary>@param.Description</summary>
-		public @Raw(type) @param.CsharpName@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));</text>
+		public @Raw(type) @param.ClsName@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));</text>
 		}
-		else if (param.CsharpName.ToLowerInvariant().Contains("field") && t.Contains("Field"))
+		else if (param.IsFieldParam)
 		{<text>
 		///<summary>@param.Description</summary>
-		public @Raw(type) @param.CsharpName@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", (Field)field);</text>
+		public @Raw(type) @param.ClsName@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", (Field)field);</text>
 		}
 	}
 	if (method.Unmapped)

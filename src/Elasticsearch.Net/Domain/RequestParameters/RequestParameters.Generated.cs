@@ -32,19 +32,19 @@ namespace Elasticsearch.Net
 		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value.ToTimeUnit()); } }
 		
 		///<summary>Default document type for items which don&#39;t provide one</summary>
-		public string Type { get { return Q<string>("type"); } set { Q("type", value); } }
+		public string TypeQueryString { get { return Q<string>("type"); } set { Q("type", value); } }
 		
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
+		public string[] Fields { get { return Q<string[]>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</summary>
 		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public string[] SourceExclude { get { return Q<string[]>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
+		public string[] SourceInclude { get { return Q<string[]>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
@@ -180,7 +180,7 @@ namespace Elasticsearch.Net
 		public bool? V { get { return Q<bool?>("v"); } set { Q("v", value); } }
 		
 		///<summary>A comma-separated list of fields to return in the output</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
+		public string[] Fields { get { return Q<string[]>("fields"); } set { Q("fields", value); } }
 		
 	}
 	
@@ -1082,10 +1082,10 @@ namespace Elasticsearch.Net
 		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public string[] SourceExclude { get { return Q<string[]>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
+		public string[] SourceInclude { get { return Q<string[]>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get { return Q<long?>("terminate_after"); } set { Q("terminate_after", value); } }
@@ -1147,7 +1147,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
+		public string[] StoredFields { get { return Q<string[]>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
@@ -1169,10 +1169,10 @@ namespace Elasticsearch.Net
 		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public string[] SourceExclude { get { return Q<string[]>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
+		public string[] SourceInclude { get { return Q<string[]>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
@@ -1210,10 +1210,10 @@ namespace Elasticsearch.Net
 		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public string[] SourceExclude { get { return Q<string[]>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
+		public string[] SourceInclude { get { return Q<string[]>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
@@ -1244,7 +1244,7 @@ namespace Elasticsearch.Net
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
+		public string[] StoredFields { get { return Q<string[]>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get { return Q<bool?>("lenient"); } set { Q("lenient", value); } }
@@ -1266,10 +1266,10 @@ namespace Elasticsearch.Net
 		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public string[] SourceExclude { get { return Q<string[]>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
+		public string[] SourceInclude { get { return Q<string[]>("_source_include"); } set { Q("_source_include", value); } }
 		
 	}
 	
@@ -1282,7 +1282,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>A comma-separated list of field names</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
+		public string[] Fields { get { return Q<string[]>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
@@ -1304,7 +1304,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
+		public string[] StoredFields { get { return Q<string[]>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
@@ -1326,10 +1326,10 @@ namespace Elasticsearch.Net
 		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public string[] SourceExclude { get { return Q<string[]>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
+		public string[] SourceInclude { get { return Q<string[]>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
@@ -1377,10 +1377,10 @@ namespace Elasticsearch.Net
 		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public string[] SourceExclude { get { return Q<string[]>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
+		public string[] SourceInclude { get { return Q<string[]>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get { return Q<long?>("version"); } set { Q("version", value); } }
@@ -1443,7 +1443,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The name of the index to scope the operation</summary>
-		public string Index { get { return Q<string>("index"); } set { Q("index", value); } }
+		public string IndexQueryString { get { return Q<string>("index"); } set { Q("index", value); } }
 		
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public bool? PreferLocal { get { return Q<bool?>("prefer_local"); } set { Q("prefer_local", value); } }
@@ -1465,7 +1465,7 @@ namespace Elasticsearch.Net
 		public bool? Fielddata { get { return Q<bool?>("fielddata"); } set { Q("fielddata", value); } }
 		
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
+		public string[] Fields { get { return Q<string[]>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Clear query caches</summary>
 		public bool? Query { get { return Q<bool?>("query"); } set { Q("query", value); } }
@@ -1480,7 +1480,7 @@ namespace Elasticsearch.Net
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>A comma-separated list of index name to limit the operation</summary>
-		public string[] Index { get { return Q<string[]>("index"); } set { Q("index", value); } }
+		public string[] IndexQueryString { get { return Q<string[]>("index"); } set { Q("index", value); } }
 		
 		///<summary>Clear the recycler cache</summary>
 		public bool? Recycler { get { return Q<bool?>("recycler"); } set { Q("recycler", value); } }
@@ -2183,13 +2183,13 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IEnumerable<object> CompletionFields { get { return Q<IEnumerable<object>>("completion_fields"); } set { Q("completion_fields", value); } }
+		public string[] CompletionFields { get { return Q<string[]>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IEnumerable<object> FielddataFields { get { return Q<IEnumerable<object>>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
+		public string[] FielddataFields { get { return Q<string[]>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
+		public string[] Fields { get { return Q<string[]>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public string[] Groups { get { return Q<string[]>("groups"); } set { Q("groups", value); } }
@@ -2379,7 +2379,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
-		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
+		public string[] StoredFields { get { return Q<string[]>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
@@ -2397,10 +2397,10 @@ namespace Elasticsearch.Net
 		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public string[] SourceExclude { get { return Q<string[]>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
+		public string[] SourceInclude { get { return Q<string[]>("_source_include"); } set { Q("_source_include", value); } }
 		
 	}
 	
@@ -2460,7 +2460,7 @@ namespace Elasticsearch.Net
 		public bool? FieldStatistics { get { return Q<bool?>("field_statistics"); } set { Q("field_statistics", value); } }
 		
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
+		public string[] Fields { get { return Q<string[]>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public bool? Offsets { get { return Q<bool?>("offsets"); } set { Q("offsets", value); } }
@@ -2545,13 +2545,13 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IEnumerable<object> CompletionFields { get { return Q<IEnumerable<object>>("completion_fields"); } set { Q("completion_fields", value); } }
+		public string[] CompletionFields { get { return Q<string[]>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IEnumerable<object> FielddataFields { get { return Q<IEnumerable<object>>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
+		public string[] FielddataFields { get { return Q<string[]>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
+		public string[] Fields { get { return Q<string[]>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public bool? Groups { get { return Q<bool?>("groups"); } set { Q("groups", value); } }
@@ -2697,10 +2697,10 @@ namespace Elasticsearch.Net
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
-		public IEnumerable<object> StoredFields { get { return Q<IEnumerable<object>>("stored_fields"); } set { Q("stored_fields", value); } }
+		public string[] StoredFields { get { return Q<string[]>("stored_fields"); } set { Q("stored_fields", value); } }
 		
 		///<summary>A comma-separated list of fields to return as the docvalue representation of a field for each hit</summary>
-		public IEnumerable<object> DocValueFields { get { return Q<IEnumerable<object>>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
+		public string[] DocValueFields { get { return Q<string[]>("docvalue_fields"); } set { Q("docvalue_fields", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get { return Q<bool?>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
@@ -2730,7 +2730,7 @@ namespace Elasticsearch.Net
 		public string[] Stats { get { return Q<string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify which field to use for suggestions</summary>
-		public object SuggestField { get { return Q<object>("suggest_field"); } set { Q("suggest_field", value); } }
+		public string SuggestField { get { return Q<string>("suggest_field"); } set { Q("suggest_field", value); } }
 		
 		///<summary>Specify suggest mode</summary>
 		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
@@ -3057,7 +3057,7 @@ namespace Elasticsearch.Net
 		public bool? FieldStatistics { get { return Q<bool?>("field_statistics"); } set { Q("field_statistics", value); } }
 		
 		///<summary>A comma-separated list of fields to return.</summary>
-		public IEnumerable<object> Fields { get { return Q<IEnumerable<object>>("fields"); } set { Q("fields", value); } }
+		public string[] Fields { get { return Q<string[]>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specifies if term offsets should be returned.</summary>
 		public bool? Offsets { get { return Q<bool?>("offsets"); } set { Q("offsets", value); } }
@@ -3205,10 +3205,10 @@ namespace Elasticsearch.Net
 		public bool? SourceEnabled { get { return Q<bool?>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IEnumerable<object> SourceExclude { get { return Q<IEnumerable<object>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public string[] SourceExclude { get { return Q<string[]>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IEnumerable<object> SourceInclude { get { return Q<IEnumerable<object>>("_source_include"); } set { Q("_source_include", value); } }
+		public string[] SourceInclude { get { return Q<string[]>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
 		public long? TerminateAfter { get { return Q<long?>("terminate_after"); } set { Q("terminate_after", value); } }

@@ -24,30 +24,19 @@ namespace Elasticsearch.Net
 	public class @method.QueryStringParamName : RequestParameters<@method.QueryStringParamName> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.@method.HttpMethod;
-	  @foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
+	  @foreach (var param in method.Url.Params.Values)
       {
-          var mm = kv.Key;
-          var cased = kv.Key.ToPascalCase();
-          var fieldType = kv.Value.CsharpType(kv.Key).Replace("params ", "");
+          var fieldType = param.TypeLowLevel;
           var setter = "value";
-          var isFields = (mm.Contains("fields") || mm.Contains("source_include") || mm.Contains("source_exclude"));
-          if (isFields && fieldType.Contains("string"))
-          {
-              fieldType = "IEnumerable<object>";
-          }
-          else if (mm.Contains("field") && fieldType.Contains("string"))
-          {
-              fieldType = "object";
-          }
           if (fieldType == "TimeSpan")
           {
 			  setter = "value.ToTimeUnit()";
           }
-		<text>///<summary>@kv.Value.Description</summary>
-		@if (!string.IsNullOrWhiteSpace(kv.Value.Obsolete))
-		{<text>		[Obsolete("Scheduled to be removed in 7.0, @kv.Value.Obsolete")]
+		<text>///<summary>@param.Description</summary>
+		@if (!string.IsNullOrWhiteSpace(param.Obsolete))
+		{<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
 </text>}
-		@Raw(kv.Value.Generator.Invoke(fieldType, cased, kv.Value.OriginalQueryStringParamName, setter))
+		@Raw(param.Generator.Invoke(fieldType, param.ClsName, param.QueryStringKey, setter))
 		</text>
 	  }
 	}</text>
