@@ -10,31 +10,31 @@ namespace Nest
 	public interface IDateMath
 	{
 		Union<DateTime, string> Anchor { get; }
-		IList<Tuple<DateMathOperation, Time>> Ranges { get; }
-		TimeUnit? Round { get; }
+		IList<Tuple<DateMathOperation, DateMathTime>> Ranges { get; }
+		DateMathTimeUnit? Round { get; }
 	}
 
 	[JsonConverter(typeof(DateMath.Json))]
 	public abstract class DateMath : IDateMath
 	{
+		private static readonly Regex DateMathRegex =
+			new Regex(@"^(?<anchor>now|.+(?:\|\||$))(?<ranges>(?:(?:\+|\-)[^\/]*))?(?<rounding>\/(?:y|M|w|d|h|m|s))?$");
+
+		Union<DateTime, string> IDateMath.Anchor => Anchor;
+		DateMathTimeUnit? IDateMath.Round => Round;
+		IList<Tuple<DateMathOperation, DateMathTime>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, DateMathTime>>();
+
 		protected IDateMath Self => this;
 
 		protected Union<DateTime, string> Anchor;
-		Union<DateTime, string> IDateMath.Anchor => Anchor;
 
-		protected TimeUnit? Round;
-		TimeUnit? IDateMath.Round => Round;
-
-		IList<Tuple<DateMathOperation, Time>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, Time>>();
-
-		protected DateMath() { }
+		protected DateMathTimeUnit? Round;
 
 		public static DateMathExpression Now => new DateMathExpression("now");
-		public static DateMathExpression Anchored(DateTime anchor) => new DateMathExpression(anchor);
-		public static DateMathExpression Anchored(string dateAnchor) => new DateMathExpression(dateAnchor);
 
-		private static readonly Regex _dateMathRe =
-			new Regex(@"^(?<anchor>now|.+(?:\|\||$))(?<ranges>(?:(?:\+|\-)[^\/]*))?(?<rounding>\/(?:y|M|w|d|h|m|s))?$");
+		public static DateMathExpression Anchored(DateTime anchor) => new DateMathExpression(anchor);
+
+		public static DateMathExpression Anchored(string dateAnchor) => new DateMathExpression(dateAnchor);
 
 		public static implicit operator DateMath(DateTime dateTime) => DateMath.Anchored(dateTime);
 		public static implicit operator DateMath(string dateMath) => DateMath.FromString(dateMath);
@@ -43,8 +43,8 @@ namespace Nest
 		{
 			if (dateMath == null) return null;
 
-			var match = _dateMathRe.Match(dateMath);
-			if (!match.Success) throw new ArgumentException($"Cannot create a DateMathExpression out of '{dateMath}'");
+			var match = DateMathRegex.Match(dateMath);
+			if (!match.Success) throw new ArgumentException($"Cannot create a {nameof(DateMathExpression)} out of '{dateMath}'");
 
 			var math = new DateMathExpression(match.Groups["anchor"].Value);
 
@@ -72,7 +72,7 @@ namespace Nest
 
 			if (match.Groups["rounding"].Success)
 			{
-				var rounding = match.Groups["rounding"].Value.Substring(1).ToEnum<TimeUnit>(StringComparison.Ordinal);
+				var rounding = match.Groups["rounding"].Value.Substring(1).ToEnum<DateMathTimeUnit>(StringComparison.Ordinal);
 				if (rounding.HasValue)
 					return math.RoundTo(rounding.Value);
 			}
@@ -82,7 +82,7 @@ namespace Nest
 		public override string ToString()
 		{
 			var isValid = Self.Anchor.Match(d => d != default(DateTime), s => !s.IsNullOrEmpty());
-			if (!isValid) return null;
+			if (!isValid) return string.Empty;
 
 			var separator = Self.Round.HasValue || Self.Ranges.HasAny() ? "||" : string.Empty;
 
@@ -96,7 +96,7 @@ namespace Nest
 			{
 				sb.Append(r.Item1.GetStringValue());
 				//date math does not support fractional time units so e.g TimeSpan.FromHours(25) should not yield 1.04d
-				sb.Append(Time.ToFirstUnitYieldingInteger(r.Item2));
+				sb.Append(r.Item2);
 			}
 			if (Self.Round.HasValue)
 				sb.Append("/" + Self.Round.Value.GetStringValue());

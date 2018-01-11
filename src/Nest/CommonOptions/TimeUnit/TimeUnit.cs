@@ -21,13 +21,7 @@ namespace Nest
 		[EnumMember(Value = "h")]
 		Hour,
 		[EnumMember(Value = "d")]
-		Day,
-		[EnumMember(Value = "w")]
-		Week,
-		[EnumMember(Value = "M")]
-		Month,
-		[EnumMember(Value = "y")]
-		Year
+		Day
 	}
 
 	public static class TimeUnitExtensions
@@ -50,12 +44,6 @@ namespace Nest
 					return "h";
 				case TimeUnit.Day:
 					return "d";
-				case TimeUnit.Week:
-					return "w";
-				case TimeUnit.Month:
-					return "M";
-				case TimeUnit.Year:
-					return "y";
 				default:
 					throw new ArgumentOutOfRangeException(nameof(value), value, null);
 			}

@@ -50,7 +50,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 				.Field(p => p.StartedOn)
 				.Ranges(
 					r => r.From(DateMath.Anchored(FixedDate).Add("2d")).To(DateMath.Now),
-					r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
+					r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(DateMathTimeUnit.Hour)),
 					r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
 				)
 				.TimeZone("CET")
@@ -66,7 +66,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 				Ranges = new List<DateRangeExpression>
 				{
 					new DateRangeExpression {From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now},
-					new DateRangeExpression {To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)},
+					new DateRangeExpression {To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(DateMathTimeUnit.Hour)},
 					new DateRangeExpression {From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m")}
 				},
 				TimeZone = "CET",

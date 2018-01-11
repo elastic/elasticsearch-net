@@ -53,11 +53,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 
 		}
 
-		/**[float] 
+		/**[float]
         * === Connect timeouts
-        * 
-		* Connect timeouts can be overridden on a per request basis. 
-        * 
+        *
+		* Connect timeouts can be overridden on a per request basis.
+        *
         * Whilst the underlying `WebRequest` in the case of Desktop CLR
 		* and `HttpClient` in the case of Core CLR cannot distinguish between connect and retry timeouts,
 		* we use a separate configuration value for ping requests to allow ping to be configured
@@ -88,7 +88,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 					{ MaxTimeoutReached }
 				},
 				/**
-				* On the second request we set a request ping timeout override of 2seconds
+				* On the second request we set a request ping timeout override of 2 seconds
 				* We should now see more nodes being tried before the request timeout is hit.
 				*/
 				new ClientCall(r => r.PingTimeout(TimeSpan.FromSeconds(2)))
