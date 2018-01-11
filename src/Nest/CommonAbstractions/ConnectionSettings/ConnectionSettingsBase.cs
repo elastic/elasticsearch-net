@@ -19,6 +19,13 @@ namespace Nest
 		public ConnectionSettings(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
+		/// <summary>
+		/// Instantiate connection settings using a <see cref="SingleNodeConnectionPool"/> using the provided
+		/// <see cref="InMemoryConnection"/> that never uses any IO.
+		/// </summary>
+		public ConnectionSettings(InMemoryConnection connection)
+			: this(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), connection) { }
+
 		public ConnectionSettings(IConnectionPool connectionPool) : this(connectionPool, null, null) { }
 
 		public ConnectionSettings(IConnectionPool connectionPool, SourceSerializerFactory sourceSerializer)

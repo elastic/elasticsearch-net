@@ -42,8 +42,7 @@ namespace Nest
 				return this.Resolve(field.Expression, field.Property);
 			}
 
-			string fieldName;
-			if (this.Fields.TryGetValue(field, out fieldName))
+			if (this.Fields.TryGetValue(field, out var fieldName))
 				return fieldName;
 
 			fieldName = this.Resolve(field.Expression, field.Property);
@@ -61,8 +60,7 @@ namespace Nest
 				return this.Resolve(property.Expression, property.Property);
 			}
 
-			string propertyName;
-			if (this.Properties.TryGetValue(property, out propertyName))
+			if (this.Properties.TryGetValue(property, out var propertyName))
 				return propertyName;
 
 			propertyName = this.Resolve(property.Expression, property.Property, true);

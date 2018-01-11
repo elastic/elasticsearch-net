@@ -25,9 +25,9 @@ namespace Nest
 			return idSelector;
 		}
 
-		internal static Func<object, object> MakeDelegate<T, U>(MethodInfo @get)
+		internal static Func<object, object> MakeDelegate<T, TReturn>(MethodInfo @get)
 		{
-			var f = (Func<T, U>)@get.CreateDelegate(typeof(Func<T, U>));
+			var f = (Func<T, TReturn>)@get.CreateDelegate(typeof(Func<T, TReturn>));
 			return t => f((T)t);
 		}
 
@@ -37,12 +37,9 @@ namespace Nest
 		{
 			if (type == null || @object == null) return null;
 
-			Func<object, string> cachedLookup;
-			string field;
+			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out _);
 
-			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out field);
-
-			if (LocalIdDelegates.TryGetValue(type, out cachedLookup))
+			if (LocalIdDelegates.TryGetValue(type, out var cachedLookup))
 				return cachedLookup(@object);
 
 			if (!preferLocal && IdDelegates.TryGetValue(type, out cachedLookup))
@@ -55,7 +52,7 @@ namespace Nest
 			}
 			var getMethod = idProperty.GetGetMethod();
 			var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
-			var func = (Func<object, object>)generic.Invoke(null, new[] { getMethod });
+			var func = (Func<object, object>)generic.Invoke(null, new object[] { getMethod });
 			cachedLookup = o =>
 			{
 				var v = func(o);
