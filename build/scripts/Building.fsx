@@ -92,7 +92,8 @@ module Build =
             | ex -> 
                 AssemblyDefinition.ReadAssembly(Path.Combine(folder, "Elasticsearch.Net.dll"));
 
-    let RewriteNamespace nest f = 
+    let private rewriteNamespace nest f = 
+        trace "Rewriting namespaces"
         let folder = Paths.ProjectOutputFolder nest f
         let nestDll = sprintf "%s/%s.dll" folder nest.Name
         let nestRewrittenDll = sprintf "%s/%s-rewriten.dll" folder nest.Name
@@ -101,28 +102,55 @@ module Build =
         use nestAssembly = AssemblyDefinition.ReadAssembly(nestDll, readerParams);
         
         for item in nestAssembly.MainModule.Types do
-            item.Namespace <- 
-                match item.Namespace.StartsWith("Newtonsoft.Json") with
-                | false -> item.Namespace
-                | true -> item.Namespace.Replace("Newtonsoft.Json", "Nest.Json")
+            if item.Namespace.StartsWith("Newtonsoft.Json") then
+                item.Namespace <- item.Namespace.Replace("Newtonsoft.Json", "Nest.Json")
                 
-        //touch custom attribute arguments (not updated automatically)
-        let touchAttributes (attributes :Mono.Collections.Generic.Collection<CustomAttribute>) = 
+        // Touch custom attribute arguments 
+        // Cecil does not update the types referenced within these attributes automatically,
+        // so enumerate them to ensure namespace renaming is reflected in these references.
+        let touchAttributes (attributes:Mono.Collections.Generic.Collection<CustomAttribute>) = 
             for attr in attributes do
                 if attr.HasConstructorArguments then
                     for constArg in attr.ConstructorArguments do
-                        let isType = constArg.Type.Name = "Type"
-                        ignore()
+                        if constArg.Type.Name = "Type" then ignore()    
+
+        // rewrite explicitly implemented interface definitions defined
+        // in Newtonsoft.Json
+        let rewriteName (method:IMemberDefinition) =
+            if method.Name.Contains("Newtonsoft.Json") then
+                method.Name <- method.Name.Replace("Newtonsoft.Json", "Nest.Json")
+             
+        // recurse through all types and nested types   
+        let rec rewriteTypes (types:Mono.Collections.Generic.Collection<TypeDefinition>) =
+            for t in types do
+                touchAttributes t.CustomAttributes
+                for prop in t.Properties do 
+                    touchAttributes prop.CustomAttributes
+                    rewriteName prop
+                    if prop.GetMethod <> null then rewriteName prop.GetMethod
+                    if prop.SetMethod <> null then rewriteName prop.SetMethod
+                for method in t.Methods do 
+                    touchAttributes method.CustomAttributes
+                    rewriteName method
+                    for over in method.Overrides do rewriteName method
+                for field in t.Fields do touchAttributes field.CustomAttributes
+                for interf in t.Interfaces do touchAttributes interf.CustomAttributes
+                for event in t.Events do touchAttributes event.CustomAttributes
+                if t.HasNestedTypes then rewriteTypes t.NestedTypes
+                
+        nestAssembly.MainModule.Types |> rewriteTypes
         
-        for t in nestAssembly.MainModule.Types do
-            touchAttributes t.CustomAttributes
-            for prop in t.Properties do 
-                touchAttributes prop.CustomAttributes
+        let resources = nestAssembly.MainModule.Resources
+        for i = resources.Count-1 downto 0 do
+            let resource = resources.[i]
+            // remove the Newtonsoft signing key
+            if resource.Name = "Newtonsoft.Json.Dynamic.snk" then resources.Remove(resource) |> ignore
 
         let key = File.ReadAllBytes(Paths.Keys("keypair.snk"))
         let kp = StrongNameKeyPair(key)
         let wp = WriterParameters ( StrongNameKeyPair = kp);
         nestAssembly.Write(wp) |> ignore;
+        trace "Finished rewriting namespaces"
 
     let private ilRepackInternal() =
         let fw = if isMono then [DotNetFramework.NetStandard1_3] else DotNetFramework.All
@@ -145,7 +173,7 @@ module Build =
             let args = [nestDll; jsonDll;] |> List.append options;
             
             Tooling.ILRepack.Exec args |> ignore
-            RewriteNamespace nest f |> ignore
+            rewriteNamespace nest f |> ignore
     
     let ILRepack() = 
         //ilrepack on mono crashes pretty hard on my machine
