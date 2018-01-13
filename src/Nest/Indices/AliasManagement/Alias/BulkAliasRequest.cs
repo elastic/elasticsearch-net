@@ -28,7 +28,7 @@ namespace Nest
 
 		public BulkAliasDescriptor Remove(Func<AliasRemoveDescriptor, IAliasRemoveAction> removeSelector)=> Add(removeSelector?.Invoke(new AliasRemoveDescriptor()));
 
-		public IBulkAliasRequest RemoveIndex(Func<AliasRemoveIndexDescriptor, IAliasRemoveIndexAction> removeIndexSelector) =>
+		public BulkAliasDescriptor RemoveIndex(Func<AliasRemoveIndexDescriptor, IAliasRemoveIndexAction> removeIndexSelector) =>
 			Add(removeIndexSelector?.Invoke(new AliasRemoveIndexDescriptor()));
 	}
 }

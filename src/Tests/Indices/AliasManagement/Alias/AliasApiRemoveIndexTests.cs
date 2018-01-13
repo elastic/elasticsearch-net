@@ -44,22 +44,22 @@ namespace Tests.Indices.AliasManagement.Alias
 		{
 			actions = new object[]
 			{
-				new Dictionary<string, object> { { "add", new { alias = CallIsolatedValue + "-1", index = CallIsolatedValue + "-2" } } },
 				new Dictionary<string, object> { { "remove_index", new { index = CallIsolatedValue + "-1"} } },
+				new Dictionary<string, object> { { "add", new { alias = CallIsolatedValue + "-1", index = CallIsolatedValue + "-2" } } },
 			}
 		};
 
 		protected override Func<BulkAliasDescriptor, IBulkAliasRequest> Fluent => d => d
-			.Add(a=>a.Alias(CallIsolatedValue + "-1").Index(CallIsolatedValue + "-2"))
 			.RemoveIndex(a => a.Index(CallIsolatedValue + "-1"))
+			.Add(a=>a.Alias(CallIsolatedValue + "-1").Index(CallIsolatedValue + "-2"))
 		;
 
 		protected override BulkAliasRequest Initializer => new BulkAliasRequest
 		{
 			Actions = new List<IAliasAction>
 			{
+				new AliasRemoveIndexAction { RemoveIndex = new AliasRemoveIndexOperation { Index = Infer.Index(CallIsolatedValue + "-1") } },
 				new AliasAddAction { Add = new AliasAddOperation {Alias = CallIsolatedValue + "-1", Index = CallIsolatedValue + "-2"} },
-				new AliasRemoveIndexAction {RemoveIndex = new AliasRemoveIndexOperation {Index = Infer.Index(CallIsolatedValue + "-1") }},
 			}
 		};
 	}
