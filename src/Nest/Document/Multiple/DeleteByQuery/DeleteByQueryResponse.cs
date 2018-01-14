@@ -17,6 +17,9 @@ namespace Nest
 		[JsonProperty("timed_out")]
 		bool TimedOut { get; }
 
+		[JsonProperty("slice_id")]
+		int? SliceId { get; }
+
 		[JsonProperty("deleted")]
 		long Deleted { get; }
 
@@ -57,6 +60,8 @@ namespace Nest
 		public TaskId Task { get; internal set; }
 
 		public bool TimedOut { get; internal set; }
+
+		public int? SliceId { get; internal set; }
 
 		public long Deleted { get; internal set; }
 
