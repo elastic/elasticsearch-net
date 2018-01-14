@@ -28,6 +28,7 @@ Targets:
 * canary [apikey] [feed]
   - create a canary nuget package based on the current version if [feed] and [apikey] are provided
     also pushes to upstream (myget)
+* diff <github|nuget|dir|assembly> <version|path 1> <version|path 2> [format]
 
 NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to force the tests against all suported TFM's
 
@@ -43,6 +44,7 @@ module Commandline =
     let private args = getBuildParamOrDefault "cmdline" "build" |> split ' '
     
     let skipTests = args |> List.exists (fun x -> x = "skiptests")
+    let skipDocs = args |> List.exists (fun x -> x = "skipdocs") || isMono
     let seed = 
         match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
         | Some t -> t.Replace("seed:", "")
@@ -57,7 +59,7 @@ module Commandline =
         args 
         |> List.filter (
             fun x -> 
-                x <> "skiptests" && x <> "source_serialization" && not (x.StartsWith("seed:")) && not (x.StartsWith("random:"))
+                x <> "skiptests" && x <> "skipdocs" && x <> "source_serialization" && not (x.StartsWith("seed:")) && not (x.StartsWith("random:"))
         )
 
     let multiTarget =
@@ -102,6 +104,24 @@ module Commandline =
         match Uri.TryCreate(candidate, UriKind.RelativeOrAbsolute) with
         | true, _ -> Some candidate
         | _ -> None
+        
+    let private (|IsDiff|_|) (candidate:string) =
+        let c = candidate |> toLower
+        match c with
+        | "github" | "nuget" | "directories" | "assemblies" -> Some c
+        | _ -> failwith (sprintf "Unknown diff type: %s" candidate)
+        
+    let private (|IsProject|_|) (candidate:string) =
+        let c = candidate |> toLower
+        match c with
+        | "nest" | "elasticsearch.net" | "nest.jsonnetserializer" -> Some c
+        | _ -> None     
+        
+    let private (|IsFormat|_|) (candidate:string) =
+        let c = candidate |> toLower
+        match c with
+        | "xml" | "markdown" | "asciidoc" -> Some c
+        | _ -> None 
 
     let parse () =
         setEnvironVar "FAKEBUILD" "1"
@@ -161,7 +181,28 @@ module Commandline =
             setBuildParam "esversions" esVersions
             setBuildParam "clusterfilter" "ConnectionReuse"
             setBuildParam "numberOfConnections" numberOfConnections
-            
+ 
+        | ["diff"; IsDiff diffType; IsProject project; firstVersionOrPath; secondVersionOrPath; IsFormat format] ->
+             setBuildParam "diffType" diffType
+             setBuildParam "project" project
+             setBuildParam "first" firstVersionOrPath
+             setBuildParam "second" secondVersionOrPath            
+             setBuildParam "format" format            
+        | ["diff"; IsDiff diffType; IsProject project; firstVersionOrPath; secondVersionOrPath] ->
+             setBuildParam "diffType" diffType
+             setBuildParam "project" project
+             setBuildParam "first" firstVersionOrPath
+             setBuildParam "second" secondVersionOrPath        
+        | ["diff"; IsDiff diffType; firstVersionOrPath; secondVersionOrPath; IsFormat format] ->
+             setBuildParam "diffType" diffType
+             setBuildParam "first" firstVersionOrPath
+             setBuildParam "second" secondVersionOrPath            
+             setBuildParam "format" format          
+        | ["diff"; IsDiff diffType; firstVersionOrPath; secondVersionOrPath] ->
+            setBuildParam "diffType" diffType
+            setBuildParam "first" firstVersionOrPath
+            setBuildParam "second" secondVersionOrPath         
+
         | ["temp"; ] -> ignore()
         | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->
