@@ -291,16 +291,5 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			(dateTime.Now() - staticPipeline.StartedOn).Should().BePositive().And.BeCloseTo(TimeSpan.FromHours(2));
 			(dateTime.Now() - sniffingPipeline.StartedOn).Should().BePositive().And.BeCloseTo(TimeSpan.FromHours(2));
 		}
-
-		// hide
-		[U]
-		public void SetsSniffPathUsingToTimespan()
-		{
-			var dateTime = new TestableDateTimeProvider();
-			var sniffingPipeline = CreatePipeline(uris =>
-				new SniffingConnectionPool(uris, dateTimeProvider: dateTime), dateTimeProvider: dateTime) as RequestPipeline;
-
-			sniffingPipeline.SniffPath.Should().Be("_nodes/http,settings?flat_settings&timeout=2s");
-		}
 	}
 }

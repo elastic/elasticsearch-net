@@ -9,51 +9,105 @@ namespace Tests
 {
 	public static class UriExtensions
 	{
-		public static void PathEquals(this Uri u, string pathAndQueryString, string because)
+		public static void PathEquals(this Uri actualUri, string pathAndQueryString, string origin)
 		{
-			var paths = (pathAndQueryString ?? "").Split(new[] { '?' }, 2);
+			var expectedUri = CreateExpectedUri(actualUri, pathAndQueryString);
 
-			string path = paths.First(), query = string.Empty;
-			if (paths.Length > 1)
-				query = paths.Last();
+			var actualParameters = ExplodeQueryString(actualUri);
+			var expectedParameters = ExplodeQueryString(expectedUri);
 
-			var expectedUri = new UriBuilder("http", "localhost", u.Port, path, "?" + query).Uri;
+			AssertSpecialQueryStringValues(expectedUri, expectedParameters, actualUri, actualParameters, origin);
 
-			u.AbsolutePath.Should().Be(expectedUri.AbsolutePath, because);
-			var sanitizedQuery = u.Query
-				.Replace("pretty=true&", "")
-				.Replace("pretty=true", "")
-				.Replace("typed_keys=false&", "")
-				.Replace("typed_keys=false", "")
-				.Replace("typed_keys=true&", "")
-				.Replace("typed_keys=true", "")
-				.Replace("error_trace=true&", "")
-				.Replace("error_trace=true", "");
-			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, sanitizedQuery).Uri;
+			actualUri = CreateUri(actualUri, actualParameters);
+			expectedUri = CreateUri(expectedUri, expectedParameters);
 
-			because += $"\r\nExpected: {expectedUri.PathAndQuery}";
-			because += $"\r\nActual  : {u.PathAndQuery}\r\n";
+			AssertQueryString(actualUri, expectedUri, origin);
 
-			var queries = new[] { u.Query, expectedUri.Query };
-			if (queries.All(string.IsNullOrWhiteSpace)) return;
-			if (queries.Any(string.IsNullOrWhiteSpace))
+			ComparePaths(actualUri, expectedUri, origin);
+		}
+
+		private static Uri CreateUri(Uri baseUri, Dictionary<string, string> newQueryString)
+		{
+			var uriBuilder = new UriBuilder(baseUri) {Query = FlattenQueryString(newQueryString)};
+			return uriBuilder.Uri;
+		}
+
+		private static void AssertQueryString(Uri actualUri, Uri expectedUri, string origin)
+		{
+			var because = $"\r\nExpected query string from {origin}: {expectedUri.Query} on {expectedUri.PathAndQuery}";
+			because += $"\r\nActual querystring from {origin}  : {actualUri.Query} on {actualUri.PathAndQuery}\r\n";
+
+			var actualParameters = ExplodeQueryString(actualUri);
+			var expectedParameters = ExplodeQueryString(expectedUri);
+
+			actualParameters.Keys.Should()
+				.BeEquivalentTo(expectedParameters.Keys, "All query string parameters need to be asserted.\r\n{0}", because);
+
+			//actualParameters.Count.Should().Be(expectedParameters.Count, "All query string parameters need to be asserted.\r\n{0}", because);
+			if (actualParameters.Count == 0) return;
+			actualParameters.Should().ContainKeys(expectedParameters.Keys.ToArray(), because);
+			actualParameters.Should().Equal(expectedParameters, because);
+		}
+
+		private static void AssertSpecialQueryStringValues(
+			Uri expectedUri,
+			Dictionary<string, string> expectedParameters,
+			Uri actualUri,
+			Dictionary<string, string> actualParameters,
+			string origin)
+		{
+			var because = $"\r\nExpected query string from {origin}: {expectedUri.Query} on {expectedUri.PathAndQuery}";
+			because += $"\r\nActual query string from {origin}: {actualUri.Query} on {actualUri.PathAndQuery}\r\n";
+
+			//only assert these if they appear in expectedUri
+			var specialQueryStringParameters = new[] {"pretty", "typed_keys", "error_trace"};
+			foreach (var key in specialQueryStringParameters)
 			{
-				queries.Last().Should().Be(queries.First(), because);
-				return;
+				if (!expectedParameters.ContainsKey(key)) continue;
+				var expected = expectedParameters[key];
+				actualParameters.Should().ContainKey(key, "query value for '{0}' expected to exist\r\n{1}", key, because);
+				var actual = actualParameters[key];
+				new[] {key, actual}.Should().BeEquivalentTo(new[] {key, expected}, "query value for '{0}' should be equal\r\n{1}", key, because);
 			}
 
-			var clientKeyValues = u.Query.Substring(1).Split('&')
-				.Select(v => v.Split('='))
-				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
-				.ToDictionary(k => k[0], v => v.Last());
-			var expectedKeyValues = expectedUri.Query.Substring(1).Split('&')
-				.Select(v => v.Split('='))
-				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
-				.ToDictionary(k => k[0], v => v.Last());
+			foreach (var key in specialQueryStringParameters)
+			{
+				if (actualParameters.ContainsKey(key)) actualParameters.Remove(key);
+				if (expectedParameters.ContainsKey(key)) expectedParameters.Remove(key);
+			}
+		}
 
-			clientKeyValues.Count.Should().Be(expectedKeyValues.Count, because);
-			clientKeyValues.Should().ContainKeys(expectedKeyValues.Keys.ToArray(), because);
-			clientKeyValues.Should().Equal(expectedKeyValues, because);
+		private static void ComparePaths(Uri actualUri, Uri expectedUri, string origin)
+		{
+			var because = $"\r\nExpected from {origin}: {expectedUri.PathAndQuery}";
+			because += $"\r\nActual from {origin}: {actualUri.PathAndQuery}\r\n";
+			actualUri.AbsolutePath.Should().Be(expectedUri.AbsolutePath, because);
+		}
+
+		private static Uri CreateExpectedUri(Uri u, string pathAndQueryString)
+		{
+			var paths = (pathAndQueryString ?? "").Split(new[] {'?'}, 2);
+
+			string path = paths.First(), query = string.Empty;
+			if (paths.Length > 1) query = paths.Last();
+
+			var expectedUri = new UriBuilder("http", "localhost", u.Port, path, "?" + query).Uri;
+			return expectedUri;
+		}
+		private static string FlattenQueryString(Dictionary<string, string> queryString)
+		{
+			if (queryString == null || queryString.Count == 0) return string.Empty;
+			return "?" + string.Join("&", queryString.Select(kv => $"{kv.Key}={kv.Value}"));
+		}
+
+		private static Dictionary<string, string> ExplodeQueryString(Uri u)
+		{
+			var query = u.Query;
+			if (string.IsNullOrEmpty(query) || query.Length <= 1) return new Dictionary<string, string>();
+			return query.Substring(1).Split('&')
+				.Select(v => v.Split('='))
+				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
+				.ToDictionary(k => k[0], v => v.Last());
 		}
 	}
 }

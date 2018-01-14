@@ -162,6 +162,9 @@ namespace Elasticsearch.Net
 		private X509CertificateCollection _clientCertificates;
 		X509CertificateCollection IConnectionConfigurationValues.ClientCertificates => _clientCertificates;
 
+		private ElasticsearchUrlFormatter _urlFormatter;
+		ElasticsearchUrlFormatter IConnectionConfigurationValues.UrlFormatter => _urlFormatter;
+
 		/// <summary>
 		/// The default predicate for <see cref="IConnectionPool"/> implementations that return true for <see cref="IConnectionPool.SupportsReseeding"/>
 		/// in which case master only nodes are excluded from API calls.
@@ -202,6 +205,8 @@ namespace Elasticsearch.Net
 			this._sniffLifeSpan = TimeSpan.FromHours(1);
 			if (this._connectionPool.SupportsReseeding)
 				this._nodePredicate = DefaultReseedableNodePredicate;
+
+			this._urlFormatter = new ElasticsearchUrlFormatter(this);
 		}
 
 		private T Assign(Action<ConnectionConfiguration<T>> assigner) => Fluent.Assign((T)this, assigner);

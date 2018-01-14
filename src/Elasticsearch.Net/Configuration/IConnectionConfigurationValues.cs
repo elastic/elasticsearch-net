@@ -197,5 +197,7 @@ namespace Elasticsearch.Net
 		/// Configure the client to skip deserialization of certain status codes e.g: you run elasticsearch behind a proxy that returns an unexpected json format
 		/// </summary>
 		IReadOnlyCollection<int> SkipDeserializationForStatusCodes { get; }
+
+		ElasticsearchUrlFormatter UrlFormatter { get; }
 	}
 }

@@ -37,8 +37,8 @@ namespace Tests.Framework
 			}
 		}
 
-		public bool IsSniffRequest(RequestData requestData) => requestData.Path.StartsWith("_nodes/http,settings", StringComparison.Ordinal);
-		public bool IsPingRequest(RequestData requestData) => requestData.Path == "/" && requestData.Method == HttpMethod.HEAD;
+		public bool IsSniffRequest(RequestData requestData) => requestData.PathAndQuery.StartsWith(RequestPipeline.SniffPath, StringComparison.Ordinal);
+		public bool IsPingRequest(RequestData requestData) => requestData.PathAndQuery == "/" && requestData.Method == HttpMethod.HEAD;
 
 		public override TResponse Request<TResponse>(RequestData requestData)
 		{

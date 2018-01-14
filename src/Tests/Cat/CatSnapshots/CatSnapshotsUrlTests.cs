@@ -17,10 +17,10 @@ namespace Tests.Cat.CatSnapshots
 				;
 
 			await GET("/_cat/snapshots/foo?v=true")
-				.Fluent(c => c.CatSnapshots("foo", s=>s.V()))
-				.Request(c => c.CatSnapshots(new CatSnapshotsRequest("foo") { V = true }))
-				.FluentAsync(c => c.CatSnapshotsAsync("foo", s=>s.V()))
-				.RequestAsync(c => c.CatSnapshotsAsync(new CatSnapshotsRequest("foo") { V = true }))
+				.Fluent(c => c.CatSnapshots("foo", s=>s.Verbose()))
+				.Request(c => c.CatSnapshots(new CatSnapshotsRequest("foo") { Verbose = true }))
+				.FluentAsync(c => c.CatSnapshotsAsync("foo", s=>s.Verbose()))
+				.RequestAsync(c => c.CatSnapshotsAsync(new CatSnapshotsRequest("foo") { Verbose = true }))
 				;
 		}
 	}

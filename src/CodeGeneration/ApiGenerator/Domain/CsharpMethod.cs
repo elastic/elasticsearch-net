@@ -112,7 +112,7 @@ namespace ApiGenerator.Domain
 				var doc = $@"/// <summary>{url}</summary>";
 				if (urlRouteParameters.Any())
 				{
-					doc += "\r\n" + string.Join("\t\t\r\n", urlRouteParameters.Select(p => $"///<param name=\"{p.Key}\">{(p.Value.Required ? "this parameter is required" : "Optional, accepts null")}</param>"));
+					doc += "\r\n\t\t" + string.Join("\r\n\t\t", urlRouteParameters.Select(p => $"///<param name=\"{p.Key}\">{(p.Value.Required ? "this parameter is required" : "Optional, accepts null")}</param>"));
 				}
 				var generated = $"public {m}({par}) : base({routing})";
 
@@ -142,8 +142,8 @@ namespace ApiGenerator.Domain
 			if (IsDocumentPath && !string.IsNullOrEmpty(this.RequestTypeGeneric))
 			{
 				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
-				var doc = $@"/// <summary>{this.Url.Path}</summary>";
-				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type <typeparamref name=\"{documentPathGeneric}\"/> from which the index, type and id can be inferred</param>";
+				var doc = $"/// <summary>{this.Url.Path}</summary>";
+				doc += "\r\n\t\t" + $"///<param name=\"document\"> describes an elasticsearch document of type <typeparamref name=\"{documentPathGeneric}\"/> from which the index, type and id can be inferred</param>";
 				var documentRoute = "r=>r.Required(\"index\", index ?? document.Self.Index).Required(\"type\", type ?? document.Self.Type).Required(\"id\", id ?? document.Self.Id)";
 				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
 
@@ -222,7 +222,7 @@ namespace ApiGenerator.Domain
 				var doc = $@"/// <summary>{url}</summary>";
 				if (requiredUrlRouteParameters.Any())
 				{
-					doc += "\r\n" + string.Join("\t\t\r\n", requiredUrlRouteParameters.Select(p => $"///<param name=\"{p.Key}\"> this parameter is required</param>"));
+					doc += "\r\n\t\t" + string.Join("\r\n\t\t", requiredUrlRouteParameters.Select(p => $"///<param name=\"{p.Key}\"> this parameter is required</param>"));
 				}
 
 				var generated = $"public {m}({par}) : base({routing})";
@@ -263,8 +263,8 @@ namespace ApiGenerator.Domain
 			if (IsDocumentPath && !string.IsNullOrEmpty(this.DescriptorTypeGeneric))
 			{
 				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
-				var doc = $@"/// <summary>{this.Url.Path}</summary>";
-				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type <typeparamref name=\"{documentPathGeneric}\"/> from which the index, type and id can be inferred</param>";
+				var doc = $"/// <summary>{this.Url.Path}</summary>";
+				doc += "\r\n\t\t" + $"///<param name=\"document\"> describes an elasticsearch document of type <typeparamref name=\"{documentPathGeneric}\"/> from which the index, type and id can be inferred</param>";
 				var documentRoute = "r=>r.Required(\"index\", document.Self.Index).Required(\"type\", document.Self.Type).Required(\"id\", document.Self.Id)";
 				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
 				var autoRoute = this.IsDocumentRequest ? $"Q(\"routing\", new Routing(() => AutoRouteDocument() ?? document.Document));" : string.Empty;

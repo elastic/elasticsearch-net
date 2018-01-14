@@ -36,12 +36,11 @@ namespace Tests.Cat.CatThreadPool
 			requestAsync: (client, r) => client.CatThreadPoolAsync(r)
 		);
 
-		protected override Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> Fluent => f => f
-			.H("*");
+		protected override Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> Fluent => f => f.Headers("*");
 
 		protected override CatThreadPoolRequest Initializer { get; } = new CatThreadPoolRequest
 		{
-			H = new[] { "*" }
+			Headers = new[] { "*" }
 		};
 
 		protected override bool ExpectIsValid => true;

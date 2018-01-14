@@ -16,8 +16,5 @@ namespace Nest
 	public partial class FieldCapabilitiesDescriptor
 	{
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-
-		public FieldCapabilitiesDescriptor Fields(Fields fields) =>
-			AssignParam(p=>p.SetQueryString("fields", fields));
 	}
 }

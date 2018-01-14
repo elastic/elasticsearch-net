@@ -17,6 +17,7 @@ namespace ApiGenerator
 
 		public static void Generate(string downloadBranch, params string[] folders)
 		{
+			Warnings = new List<string>();
 			var spec = CreateRestApiSpecModel(downloadBranch, folders);
 			var actions = new Dictionary<Action<RestApiSpec>, string>
 			{
@@ -38,7 +39,16 @@ namespace ApiGenerator
 					pbar.Tick("Generated " + kv.Value);
 				}
 			}
+
+			if (Warnings.Count == 0) return;
+
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			foreach (var warning in Warnings.Distinct().OrderBy(w=>w))
+				Console.WriteLine(warning);
+			Console.ResetColor();
 		}
+
+		public static List<string> Warnings { get; private set; }
 
 		private static string[] IgnoredApis { get; } =
 		{
@@ -107,7 +117,6 @@ namespace ApiGenerator
 			PatchOfficialSpec(officialJsonSpec, jsonFile);
 			var endpoint = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
 			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
-			AddObsoletes(jsonFile, endpoint.Value);
 			return endpoint;
 		}
 
@@ -125,24 +134,12 @@ namespace ApiGenerator
 			});
 		}
 
-		private static void AddObsoletes(string jsonFile, ApiEndpoint endpoint)
-		{
-			var directory = Path.GetDirectoryName(jsonFile);
-			var obsoleteFile = Path.Combine(directory, Path.GetFileNameWithoutExtension(jsonFile)) + ".obsolete.json";
-			if (!File.Exists(obsoleteFile)) return;
-
-			var json = File.ReadAllText(obsoleteFile);
-			var endpointOverride = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
-			endpoint.ObsoleteQueryParameters = endpointOverride.Value?.Url?.Params ?? new Dictionary<string, ApiQueryParameters>();
-			endpoint.RemovedMethods = endpointOverride.Value?.RemovedMethods ?? new Dictionary<string, string>();
-		}
-
 		private static Dictionary<string, ApiQueryParameters> CreateCommonApiQueryParameters(string jsonFile)
 		{
 			var json = File.ReadAllText(jsonFile);
 			var jobject = JObject.Parse(json);
 			var commonParameters = jobject.Property("params").Value.ToObject<Dictionary<string, ApiQueryParameters>>();
-			return commonParameters;
+			return ApiQueryParametersPatcher.Patch(commonParameters, null);
 		}
 
 		private static string CreateMethodName(string apiEndpointKey)

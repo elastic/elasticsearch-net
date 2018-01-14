@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.1
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -57,6 +57,7 @@ new MoreLikeThisQuery
         "_index": "project",
         "_type": "doc",
         "_id": "Durgan LLC",
+        "_routing": "Durgan LLC",
         "doc": {
           "name": "Koch, Collier and Mohr",
           "state": "BellyUp",

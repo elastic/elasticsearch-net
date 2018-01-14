@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.1
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -115,6 +115,7 @@ q
     .Type<Project>()
     .Index<Project>()
     .Id(Project.Instance.Name)
+    .Routing(Project.Instance.Name)
     .Field(f => f.Query)
 )
 ----
@@ -128,6 +129,7 @@ new PercolateQuery
     Type = typeof(Project),
     Index = IndexName.From<Project>(),
     Id = Project.Instance.Name,
+    Routing = Project.Instance.Name,
     Field = Infer.Field<ProjectPercolation>(f => f.Query)
 }
 ----
@@ -140,6 +142,7 @@ new PercolateQuery
     "type": "doc",
     "index": "project",
     "id": "Durgan LLC",
+    "routing": "Durgan LLC",
     "field": "query"
   }
 }

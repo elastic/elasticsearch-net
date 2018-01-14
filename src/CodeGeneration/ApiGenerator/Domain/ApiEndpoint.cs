@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ApiGenerator.Overrides;
 using ApiGenerator.Overrides.Descriptors;
 using CsQuery.ExtensionMethods.Internal;
 
@@ -63,7 +64,6 @@ namespace ApiGenerator.Domain
 		public IDictionary<string, string> RemovedMethods { get; set; } = new Dictionary<string, string>();
 		public ApiUrl Url { get; set; }
 		public ApiBody Body { get; set; }
-		public IDictionary<string, ApiQueryParameters> ObsoleteQueryParameters { get; set; }
 
 		public string PascalCase(string s)
 		{
@@ -160,12 +160,11 @@ namespace ApiGenerator.Domain
 								Description = this.Body.Description
 							});
 						}
-						var queryStringParamName = "FluentQueryString";
 						if (this.Url.Params == null || !this.Url.Params.Any())
 						{
 							this.Url.Params = new Dictionary<string, ApiQueryParameters>();
 						}
-						queryStringParamName = this.CsharpMethodName + "RequestParameters";
+						var queryStringParamName = this.CsharpMethodName + "RequestParameters";
 						var apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
@@ -222,8 +221,25 @@ namespace ApiGenerator.Domain
 			}
 		}
 
+		private IEndpointOverrides GetOverrides()
+		{
+			var method = this.CsharpMethodName;
+			if (CodeConfiguration.MethodNameOverrides.TryGetValue(method, out var manualOverride))
+				method = manualOverride;
+
+			var typeName = "ApiGenerator.Overrides.Endpoints." + method + "Overrides";
+			var type = CodeConfiguration.Assembly.GetType(typeName);
+			if (type != null && Activator.CreateInstance(type) is IEndpointOverrides overrides)
+				return overrides;
+			return null;
+		}
+
+
 		private void PatchEndpoint()
 		{
+			var overrides = this.GetOverrides();
+			PatchRequestParameters(overrides);
+
 			//rename the {metric} route param to something more specific on XpackWatcherStats
 			// TODO: find a better place to do this
 			if (this.CsharpMethodName == "XpackWatcherStats")
@@ -243,6 +259,13 @@ namespace ApiGenerator.Domain
 			}
 		}
 
+
+		private void PatchRequestParameters(IEndpointOverrides overrides)
+		{
+			var newParams = ApiQueryParametersPatcher.Patch(this.Url.Params, overrides);
+			this.Url.Params = newParams;
+		}
+
 		private static string RenameMetricUrlPathParam(string path)
 		{
 			return path.Replace("{metric}", "{watcher_stats_metric}");
@@ -252,6 +275,7 @@ namespace ApiGenerator.Domain
 		//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
 		public void PatchMethod(CsharpMethod method)
 		{
+			if (method == null) return;
 			Func<string, bool> ms = s => method.FullName.StartsWith(s);
 			Func<string, bool> pc = s => method.Path.Contains(s);
 
@@ -266,19 +290,7 @@ namespace ApiGenerator.Domain
 			method.FullName =
 				Regex.Replace(method.FullName, m, a => a.Index != method.FullName.IndexOf(m, StringComparison.Ordinal) ? "" : m);
 
-			foreach (var param in RestApiSpec.CommonApiQueryParameters)
-			{
-				if (!method.Url.Params.ContainsKey(param.Key))
-					method.Url.Params.Add(param.Key, param.Value);
-			}
-			if (this.ObsoleteQueryParameters != null)
-			{
-				foreach (var param in this.ObsoleteQueryParameters)
-				{
-					if (!method.Url.Params.ContainsKey(param.Key))
-						method.Url.Params.Add(param.Key, param.Value);
-				}
-			}
+			method = this.GetOverrides()?.PatchMethod(method) ?? method;
 
 			var key = method.QueryStringParamName.Replace("RequestParameters", "");
 			if (CodeConfiguration.MethodNameOverrides.TryGetValue(key, out var manualOverride))
@@ -294,60 +306,6 @@ namespace ApiGenerator.Domain
 				method.DescriptorTypeGeneric = generic;
 			else method.Unmapped = true;
 
-			try
-			{
-				IEnumerable<string> skipList = new List<string>();
-				IDictionary<string, string> queryStringParamsRenameList = new Dictionary<string, string>();
-
-				var typeName = "ApiGenerator.Overrides.Descriptors." + method.DescriptorType + "Overrides";
-				var type = CodeConfiguration.Assembly.GetType(typeName);
-				if (type != null)
-				{
-					var overrides = Activator.CreateInstance(type) as IDescriptorOverrides;
-					if (overrides != null)
-					{
-						skipList = overrides.SkipQueryStringParams ?? skipList;
-						queryStringParamsRenameList = overrides.RenameQueryStringParams ?? queryStringParamsRenameList;
-						method = overrides.PatchMethod(method);
-					}
-				}
-
-				var globalQueryStringRenames = new Dictionary<string, string>
-				{
-					{"_source", "source_enabled"},
-					{"_source_include", "source_include"},
-					{"_source_exclude", "source_exclude"},
-					{"q", "query_on_query_string"},
-				};
-
-				foreach (var kv in globalQueryStringRenames)
-					if (!queryStringParamsRenameList.ContainsKey(kv.Key))
-						queryStringParamsRenameList[kv.Key] = kv.Value;
-
-				var patchedParams = new Dictionary<string, ApiQueryParameters>();
-				foreach (var kv in method.Url.Params)
-				{
-					if (kv.Value.OriginalQueryStringParamName.IsNullOrEmpty())
-						kv.Value.OriginalQueryStringParamName = kv.Key;
-					if (skipList.Contains(kv.Key))
-						continue;
-
-					string newName;
-					if (!queryStringParamsRenameList.TryGetValue(kv.Key, out newName))
-					{
-						patchedParams.Add(kv.Key, kv.Value);
-						continue;
-					}
-
-					patchedParams.Add(newName, kv.Value);
-				}
-
-				method.Url.Params = patchedParams;
-			}
-			// ReSharper disable once EmptyGeneralCatchClause
-			catch
-			{
-			}
 		}
 	}
 }
