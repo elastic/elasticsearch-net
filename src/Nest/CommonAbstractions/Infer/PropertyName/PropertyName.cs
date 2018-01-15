@@ -33,10 +33,9 @@ namespace Nest
 
 		public PropertyName(Expression expression)
 		{
-			Type type;
 			Expression = expression;
 			CacheableExpression = !new HasVariableExpressionVisitor(expression).Found;
-			_comparisonValue = expression.ComparisonValueFromExpression(out type);
+			_comparisonValue = expression.ComparisonValueFromExpression(out var type);
 			_type = type;
 		}
 
@@ -86,10 +85,8 @@ namespace Nest
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
 			var nestSettings = settings as IConnectionSettingsValues;
-			if (nestSettings == null)
-				throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
-			var infer = new Inferrer(nestSettings);
-			return infer.PropertyName(this);
+
+			return nestSettings?.Inferrer.PropertyName(this);
 		}
 	}
 }
