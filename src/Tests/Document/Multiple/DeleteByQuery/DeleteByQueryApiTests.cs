@@ -224,7 +224,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}/project/_delete_by_query";
+		protected override string UrlPath => $"/{CallIsolatedValue}/doc/_delete_by_query";
 
 		protected override object ExpectJson =>
 			new
