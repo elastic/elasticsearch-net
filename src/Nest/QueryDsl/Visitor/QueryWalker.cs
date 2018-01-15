@@ -108,14 +108,6 @@ namespace Nest
 				v.Visit(d);
 				Accept(v, d.Query);
 			});
-#pragma warning disable 618
-			VisitQuery(qd.Indices, visitor, (v, d) =>
-			{
-				v.Visit(d);
-				Accept(v, d.Query);
-				Accept(v, d.NoMatchQuery, VisitorScope.NoMatchQuery);
-			});
-#pragma warning restore 618
 			VisitQuery(qd.Nested, visitor, (v, d) =>
 			{
 				v.Visit(d);

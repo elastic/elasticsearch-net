@@ -130,15 +130,6 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The indices query can be used when executed across multiple indices, allowing to have a query that executes
-		/// only when executed on an index that matches a specific list of indices, and another query that executes
-		/// when it is executed on an index that does not match the listed indices.
-		/// </summary>
-		[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
-		public QueryContainer Indices(Func<IndicesQueryDescriptor<T>, IIndicesQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.Indices = query);
-
-		/// <summary>
 		/// Matches documents with fields that have terms within a certain numeric range.
 		/// </summary>
 		public QueryContainer Range(Func<NumericRangeQueryDescriptor<T>, INumericRangeQuery> selector) =>

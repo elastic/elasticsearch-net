@@ -39,17 +39,12 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 			Analyzer = "standard",
 			DefaultOperator = Operator.Or,
 			Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
-#pragma warning disable 618
-			Locale = "en_US",
-			LowercaseExpandedTerms = true,
-#pragma warning restore 618
 			Lenient = true,
 			AnalyzeWildcard = true,
 			MinimumShouldMatch = "30%"
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-#pragma warning disable 618
 			.SimpleQueryString(c => c
 				.Name("named_query")
 				.Boost(1.1)
@@ -58,13 +53,10 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				.Analyzer("standard")
 				.DefaultOperator(Operator.Or)
 				.Flags(SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near)
-				.Locale("en_US")
-				.LowercaseExpandedTerms()
 				.Lenient()
 				.AnalyzeWildcard()
 				.MinimumShouldMatch("30%")
 			);
-#pragma warning restore 618
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISimpleQueryStringQuery>(a => a.SimpleQueryString)
 		{

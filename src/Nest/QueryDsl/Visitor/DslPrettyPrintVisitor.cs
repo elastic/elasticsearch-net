@@ -99,10 +99,6 @@ namespace Nest
 
 		public virtual void Visit(IIdsQuery query) => Write("ids");
 
-#pragma warning disable 618
-		public virtual void Visit(IIndicesQuery query) => Write("indices");
-#pragma warning restore 618
-
 		public virtual void Visit(IMatchQuery query) => Write("match", query.Field);
 
 		public virtual void Visit(IMatchPhraseQuery query) => Write("match_phrase", query.Field);
