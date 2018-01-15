@@ -277,8 +277,11 @@ var descriptor = new CreateIndexDescriptor("myindex")
     );
 ----
 <1> Automap company
+
 <2> Override company inferred mappings
+
 <3> Auto map employee
+
 <4> Override employee inferred mappings
 
 [source,javascript]
@@ -401,8 +404,11 @@ var descriptor = new CreateIndexDescriptor("myindex")
     );
 ----
 <1> Automap `Company`
+
 <2> Override specific `Company` mappings
+
 <3> Automap `Employees` property
+
 <4> Override specific `Employee` properties
 
 [source,javascript]

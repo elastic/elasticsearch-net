@@ -11,12 +11,21 @@ namespace Nest
 	/// </summary>
 	public interface IDFRSimilarity : ISimilarity
 	{
+		/// <summary>
+		/// The basic model
+		/// </summary>
 		[JsonProperty("basic_model")]
 		DFRBasicModel? BasicModel { get; set; }
 
+		/// <summary>
+		/// The after effect
+		/// </summary>
 		[JsonProperty("after_effect")]
 		DFRAfterEffect? AfterEffect { get; set; }
 
+		/// <summary>
+		/// The normalization
+		/// </summary>
 		[JsonProperty("normalization")]
 		Normalization? Normalization { get; set; }
 
@@ -44,25 +53,35 @@ namespace Nest
 		[JsonProperty("normalization.z.z")]
 		double? NormalizationZZ { get; set; }
 	}
+
+	/// <inheritdoc/>
 	public class DFRSimilarity : IDFRSimilarity
 	{
 		public string Type => "DFR";
 
+		/// <inheritdoc/>
 		public DFRBasicModel? BasicModel { get; set; }
 
+		/// <inheritdoc/>
 		public DFRAfterEffect? AfterEffect { get; set; }
 
+		/// <inheritdoc/>
 		public Normalization? Normalization { get; set; }
 
+		/// <inheritdoc/>
 		public double? NormalizationH1C { get; set; }
 
+		/// <inheritdoc/>
 		public double? NormalizationH2C { get; set; }
 
+		/// <inheritdoc/>
 		public double? NormalizationH3C { get; set; }
 
+		/// <inheritdoc/>
 		public double? NormalizationZZ { get; set; }
 	}
 
+	/// <inheritdoc/>
 	public class DFRSimilarityDescriptor
 		: DescriptorBase<DFRSimilarityDescriptor, IDFRSimilarity>, IDFRSimilarity
 	{

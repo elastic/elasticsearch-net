@@ -8,13 +8,13 @@ namespace Nest
 	public interface IDynamicIndexSettings : IIsADictionary<string, object>
 	{
 		/// <summary>
-		///The number of replicas each primary shard has. Defaults to 1. 
+		///The number of replicas each primary shard has. Defaults to 1.
 		/// </summary>
 		int? NumberOfReplicas { get; set; }
 
 		/// <summary>
-		///Auto-expand the number of replicas based on the number of available nodes. 
-		/// Set to a dash delimited lower and upper bound (e.g. 0-5) or use all for the upper bound (e.g. 0-all). Defaults to false (i.e. disabled). 
+		///Auto-expand the number of replicas based on the number of available nodes.
+		/// Set to a dash delimited lower and upper bound (e.g. 0-5) or use all for the upper bound (e.g. 0-all). Defaults to false (i.e. disabled).
 		/// </summary>
 		//TODO SPECIAL TYPE FOR THIS INSTEAD OF JUST STRING
 		string AutoExpandReplicas { get; set; }
@@ -51,17 +51,17 @@ namespace Nest
 		int? Priority { get; set; }
 
 		/// <summary>
-		/// Index warmup can be disabled by setting index.warmer.enabled to false. This can be handy when 
-		/// doing initial bulk indexing: disable pre registered warmers to make indexing faster 
+		/// Index warmup can be disabled by setting index.warmer.enabled to false. This can be handy when
+		/// doing initial bulk indexing: disable pre registered warmers to make indexing faster
 		/// and less expensive and then enable it.
 		/// </summary>
 		bool? WarmersEnabled { get; set; }
 
 		/// <summary>
 		/// When a search request is run against an index or against many indices, each involved shard executes the search locally and
-	   ///  returns its local results to the coordinating node, which combines these shard-level results into a ìglobalî result set.
+	   ///  returns its local results to the coordinating node, which combines these shard-level results into a ‚Äúglobal‚Äù result set.
 		///<para>
-		/// The shard-level request cache module caches the local results on each shard.This allows frequently used 
+		/// The shard-level request cache module caches the local results on each shard.This allows frequently used
 		/// (and potentially heavy) search requests to return results almost instantly.</para>
 		/// </summary>
 		bool? RequestCacheEnabled { get; set; }
@@ -73,7 +73,7 @@ namespace Nest
 		Union<int, RecoveryInitialShards> RecoveryInitialShards { get; set; }
 
 		/// <summary>
-		/// The allocation of replica shards which become unassigned because a node has left can be 
+		/// The allocation of replica shards which become unassigned because a node has left can be
 		/// delayed with this dynamic setting, which defaults to 1m.
 		/// </summary>
 		Time UnassignedNodeLeftDelayedTimeout { get; set; }
@@ -99,6 +99,11 @@ namespace Nest
 		ITranslogSettings Translog { get; set; }
 
 		IAnalysis Analysis { get; set; }
+
+		/// <summary>
+		/// Configure similarity
+		/// </summary>
+		ISimilarities Similarity { get; set; }
 	}
 
 	public class DynamicIndexSettings : IsADictionaryBase<string, object>, IDynamicIndexSettings
@@ -120,45 +125,48 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public bool? BlocksReadOnly { get; set; }
-		
+
 		/// <inheritdoc/>
 		public bool? BlocksWrite { get; set; }
-		
+
 		/// <inheritdoc/>
 		public int? Priority { get; set; }
-		
+
 		/// <inheritdoc/>
 		public bool? WarmersEnabled { get; set; }
-		
+
 		/// <inheritdoc/>
 		public bool? RequestCacheEnabled { get; set; }
-		
+
 		/// <inheritdoc/>
 		public IMergeSettings Merge { get; set; }
-		
+
 		/// <inheritdoc/>
 		public int? NumberOfReplicas { get; set; }
-		
+
 		/// <inheritdoc/>
 		public Union<int, RecoveryInitialShards> RecoveryInitialShards { get; set; }
-		
+
 		/// <inheritdoc/>
 		public Time RefreshInterval { get; set; }
-		
+
 		/// <inheritdoc/>
 		public int? RoutingAllocationTotalShardsPerNode { get; set; }
-		
+
 		/// <inheritdoc/>
 		public ISlowLog SlowLog { get; set; }
-		
+
 		/// <inheritdoc/>
 		public ITranslogSettings Translog { get; set; }
-		
+
 		/// <inheritdoc/>
 		public Time UnassignedNodeLeftDelayedTimeout { get; set; }
 
 		/// <inheritdoc/>
 		public IAnalysis Analysis { get; set; }
+
+		/// <inheritdoc/>
+		public ISimilarities Similarity { get; set; }
 
 		/// <summary>
 		/// Add any setting to the index
@@ -242,8 +250,13 @@ namespace Nest
 		public TDescriptor UnassignedNodeLeftDelayedTimeout(Time time) =>
 			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
 
+		/// <inheritdoc/>
 		public TDescriptor Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
 			Assign(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
+
+		/// <inheritdoc/>
+		public TDescriptor Similarity(Func<SimilaritiesDescriptor, IPromise<ISimilarities>> selector) =>
+			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor())?.Value);
 	}
 
 }
