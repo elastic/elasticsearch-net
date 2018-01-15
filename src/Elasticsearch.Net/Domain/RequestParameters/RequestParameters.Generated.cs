@@ -649,10 +649,6 @@ namespace Elasticsearch.Net
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
-		///<summary>Explicit timestamp for the document</summary>
-		public TimeSpan Timestamp { get => Q<TimeSpan>("timestamp"); set => Q("timestamp", value.ToTimeUnit()); }
-		///<summary>Expiration time for the document</summary>
-		public TimeSpan Ttl { get => Q<TimeSpan>("ttl"); set => Q("ttl", value.ToTimeUnit()); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -968,10 +964,6 @@ namespace Elasticsearch.Net
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
-		///<summary>Explicit timestamp for the document</summary>
-		public TimeSpan Timestamp { get => Q<TimeSpan>("timestamp"); set => Q("timestamp", value.ToTimeUnit()); }
-		///<summary>Expiration time for the document</summary>
-		public TimeSpan Ttl { get => Q<TimeSpan>("ttl"); set => Q("ttl", value.ToTimeUnit()); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2172,10 +2164,6 @@ namespace Elasticsearch.Net
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
-		///<summary>Explicit timestamp for the document</summary>
-		public TimeSpan Timestamp { get => Q<TimeSpan>("timestamp"); set => Q("timestamp", value.ToTimeUnit()); }
-		///<summary>Expiration time for the document</summary>
-		public TimeSpan Ttl { get => Q<TimeSpan>("ttl"); set => Q("ttl", value.ToTimeUnit()); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
