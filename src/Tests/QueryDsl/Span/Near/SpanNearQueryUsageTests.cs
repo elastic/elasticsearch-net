@@ -24,7 +24,6 @@ namespace Tests.QueryDsl.Joining.SpanNear
 				},
 				slop = 12,
 				in_order = false,
-				collect_payloads = false,
 				_name = "named_query",
 				boost = 1.1
 			}
@@ -43,7 +42,6 @@ namespace Tests.QueryDsl.Joining.SpanNear
 			},
 			Slop = 12,
 			InOrder = false,
-			CollectPayloads = false
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -57,7 +55,6 @@ namespace Tests.QueryDsl.Joining.SpanNear
 				)
 				.Slop(12)
 				.InOrder(false)
-				.CollectPayloads(false)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanNearQuery>(a => a.SpanNear)
