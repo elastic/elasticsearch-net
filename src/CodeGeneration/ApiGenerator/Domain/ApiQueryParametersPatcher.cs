@@ -11,7 +11,8 @@ namespace ApiGenerator.Domain
 
 		public static Dictionary<string, ApiQueryParameters> Patch(
 			IDictionary<string, ApiQueryParameters> source,
-			IEndpointOverrides overrides)
+			IEndpointOverrides overrides,
+			bool checkCommon = true)
 		{
 			if (source == null) return null;
 
@@ -24,10 +25,17 @@ namespace ApiGenerator.Domain
 			var obsoleteLookup = CreateObsoleteLookup(globalOverrides, overrides, declaredKeys);
 
 			var patchedParams = new Dictionary<string, ApiQueryParameters>();
+			var name = overrides?.GetType().Name ?? "unkown";
 			foreach (var kv in source)
 			{
 				var queryStringKey = kv.Key;
 				kv.Value.QueryStringKey = queryStringKey;
+
+				if (checkCommon && RestApiSpec.CommonApiQueryParameters.Keys.Contains(queryStringKey))
+				{
+					ApiGenerator.Warnings.Add($"key '{queryStringKey}' in {name} is already declared in _common.json");
+					continue;
+				}
 
 				if (!renameLookup.TryGetValue(queryStringKey, out var preferredName)) preferredName = kv.Key;
 				kv.Value.ClsName = CreateCSharpName(preferredName);

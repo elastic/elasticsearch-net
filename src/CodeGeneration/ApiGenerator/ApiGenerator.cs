@@ -71,13 +71,17 @@ namespace ApiGenerator
 					.Where(f => f.EndsWith(".json") && !IgnoredApis.Contains(new FileInfo(f).Name))
 					.ToList()
 				);
+				var commonFile = Path.Combine(CodeConfiguration.RestSpecificationFolder, "Core", "_common") + ".json";
+				if (!File.Exists(commonFile)) throw new Exception($"Expected to find {commonFile}");
+				RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(commonFile);
+
 				foreach (var jsonFiles in folderFiles)
 				{
 					using (var fileProgress = pbar.Spawn(jsonFiles.Count, $"Listing {jsonFiles.Count} files", new ProgressBarOptions { ProgressCharacter = '─', BackgroundColor = ConsoleColor.DarkGray }))
 					{
 						foreach (var file in jsonFiles)
 						{
-							if (file.EndsWith("_common.json")) RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(file);
+							if (file.EndsWith("_common.json")) continue;
 							else if (file.EndsWith(".obsolete.json")) continue;
 							else if (file.EndsWith(".patch.json")) continue;
 							else if (file.EndsWith(".replace.json")) continue;
@@ -139,7 +143,7 @@ namespace ApiGenerator
 			var json = File.ReadAllText(jsonFile);
 			var jobject = JObject.Parse(json);
 			var commonParameters = jobject.Property("params").Value.ToObject<Dictionary<string, ApiQueryParameters>>();
-			return ApiQueryParametersPatcher.Patch(commonParameters, null);
+			return ApiQueryParametersPatcher.Patch(commonParameters, null, checkCommon: false);
 		}
 
 		private static string CreateMethodName(string apiEndpointKey)

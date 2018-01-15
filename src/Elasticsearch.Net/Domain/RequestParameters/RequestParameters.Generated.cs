@@ -1789,8 +1789,6 @@ namespace Elasticsearch.Net
 	public class NodesUsageRequestParameters : RequestParameters<NodesUsageRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
@@ -2285,8 +2283,6 @@ namespace Elasticsearch.Net
 	public class XPackInfoRequestParameters : RequestParameters<XPackInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
-		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
 	}
