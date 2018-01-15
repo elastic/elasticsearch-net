@@ -34,7 +34,6 @@ namespace Nest
 
 		public const string UnassignedNodeLeftDelayedTimeout = "index.unassigned.node_left.delayed_timeout";
 
-		public const string TtlDisablePurge = "index.ttl.disable_purge";
 		public const string CompoundFormat = "index.compound_format";
 		public const string CompoundOnFlush = "index.compound_on_flush";
 		public const string Analysis = "analysis";

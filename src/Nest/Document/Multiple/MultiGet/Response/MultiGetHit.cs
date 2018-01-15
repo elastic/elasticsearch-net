@@ -18,18 +18,12 @@ namespace Nest
 
 		string Id { get; }
 
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 6.x and up")]
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 6.x and up, use Routing instead.")]
 		string Parent { get; }
 
 		string Routing { get; }
 
 		Error Error { get; }
-
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
-		long? Timestamp { get; }
-
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
-		long? Ttl { get; }
 	}
 
 	[JsonObject]
@@ -65,13 +59,5 @@ namespace Nest
 
 		[JsonProperty("error")]
 		public Error Error { get; internal set; }
-
-		[JsonProperty("_timestamp")]
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
-		public long? Timestamp { get; internal set; }
-
-		[JsonProperty("_ttl")]
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
-		public long? Ttl { get; internal set; }
 	}
 }

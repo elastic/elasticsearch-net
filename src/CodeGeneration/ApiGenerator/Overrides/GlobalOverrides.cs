@@ -33,7 +33,9 @@ namespace ApiGenerator.Overrides
 
 		public override IEnumerable<string> SkipQueryStringParams { get; } = new[]
 		{
-			"source" // allows the body to be specified as a request param, we do not want to advertise this with a strongly typed method
+			"source", // allows the body to be specified as a request param, we do not want to advertise this with a strongly typed method
+			"ttl",
+			"timestamp",
 		};
 	}
 }

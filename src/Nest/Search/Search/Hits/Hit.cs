@@ -12,7 +12,7 @@ namespace Nest
 		long? Version { get; }
 		string Routing { get; }
 		string Id { get; }
-		[Obsolete("No longer returned on indexes created in Elasticsearch 6.x and up")]
+		[Obsolete("No longer returned on indexes created in Elasticsearch 6.x and up, use Routing instead")]
 		string Parent { get; }
 		[JsonConverter(typeof(SourceConverter))]
 		TDocument Source { get; }
@@ -41,12 +41,6 @@ namespace Nest
 	[ContractJsonConverter(typeof(DefaultHitJsonConverter))]
 	public interface IHit<out TDocument> : IHitMetadata<TDocument> where TDocument : class
 	{
-		//technically metadata but we have no intention on preserving these
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
-		long? Timestamp { get; }
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 5.x and up")]
-		long? Ttl { get; }
-
 		//search/get related features on hits
 		double? Score { get; }
 		FieldValues Fields { get; }
@@ -90,19 +84,11 @@ namespace Nest
 		public NestedIdentity Nested { get; internal set; }
 
 		[JsonProperty("_parent")]
-		[Obsolete("This property is no longer returned on indices created in Elasticsearch 6.0.0 and up")]
+		[Obsolete("This property is no longer returned on indices created in Elasticsearch 6.0.0 and up, use Routing instead")]
 		public string Parent { get; internal set; }
 
 		[JsonProperty("_routing")]
 		public string Routing { get; internal set; }
-
-		[JsonProperty("_timestamp")]
-		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.0.0 and up")]
-		public long? Timestamp { get; internal set; }
-
-		[JsonProperty("_ttl")]
-		[Obsolete("This property is no longer returned on indices created in Elasticsearch 5.0.0 and up")]
-		public long? Ttl { get; internal set; }
 
 		[JsonProperty("sort")]
 		public IReadOnlyCollection<object> Sorts { get; internal set; } = EmptyReadOnly<object>.Collection;
