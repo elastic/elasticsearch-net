@@ -226,7 +226,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			new
 			{
 				slice = new { id = 0, max = 2 },
-				query = new { terms = new { name = new { terms = FirstTenProjectNames } } }
+				query = new { terms = new { name = FirstTenProjectNames } }
 			};
 
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.CallIsolatedValue);
