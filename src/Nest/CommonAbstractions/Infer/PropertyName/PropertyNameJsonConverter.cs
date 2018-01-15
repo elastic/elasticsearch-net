@@ -19,7 +19,8 @@ namespace Nest
 				writer.WriteNull();
 				return;
 			}
-			writer.WriteValue(new Inferrer(serializer.GetConnectionSettings()).PropertyName(property));
+			var infer = serializer.GetConnectionSettings().Inferrer;
+			writer.WriteValue(infer.PropertyName(property));
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

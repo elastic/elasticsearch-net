@@ -24,11 +24,11 @@ namespace Nest
 		/// </summary>
 		private class SuffixExpressionVisitor : ExpressionVisitor
 		{
-			private readonly string suffix;
+			private readonly string _suffix;
 
 			public SuffixExpressionVisitor(string suffix)
 			{
-				this.suffix = suffix;
+				this._suffix = suffix;
 			}
 
 			public override Expression Visit(Expression node)
@@ -38,13 +38,10 @@ namespace Nest
 					nameof(SuffixExtensions.Suffix),
 					null,
 					node,
-					Expression.Constant(suffix));
+					Expression.Constant(_suffix));
 			}
 
-			protected override Expression VisitUnary(UnaryExpression node)
-			{
-				return node;
-			}
+			protected override Expression VisitUnary(UnaryExpression node) => node;
 		}
 
 		private static readonly Regex ExpressionRegex = new Regex(@"^\s*(.*)\s*\=\>\s*\1\.");
@@ -56,14 +53,12 @@ namespace Nest
 
 			if (expression == null) return null;
 
-			var lambda = expression as LambdaExpression;
-			if (lambda == null)
+			if (!(expression is LambdaExpression lambda))
 				return ExpressionRegex.Replace(expression.ToString(), string.Empty);
 
 			type = lambda.Parameters.FirstOrDefault()?.Type;
 
-			var memberExpression = lambda.Body as MemberExpression;
-			return memberExpression != null
+			return lambda.Body is MemberExpression memberExpression
 				? MemberExpressionRegex.Replace(memberExpression.ToString(), string.Empty)
 				: ExpressionRegex.Replace(expression.ToString(), string.Empty);
 		}
