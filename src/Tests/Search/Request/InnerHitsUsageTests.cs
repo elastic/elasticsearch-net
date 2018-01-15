@@ -172,22 +172,34 @@ namespace Tests.Search.Request
 			{
 				@bool = new
 				{
-					should = new object[] {
-					new {
-						has_child = new {
-							type = "prince",
-							query = new { match_all = new {} },
-							inner_hits = new { name = "princes" }
-						}
-					},
-					new {
-						nested = new {
-							query = new { match_all = new {} },
-							path = "foes",
-							inner_hits = new {}
+					should = new object[]
+					{
+						new
+						{
+							has_child = new
+							{
+								type = "prince",
+								query = new
+								{
+									match_all = new { }
+								},
+								inner_hits = new
+								{
+									name = "princes",
+									docvalue_fields = new []{"name"},
+								}
+							}
+						},
+						new
+						{
+							nested = new
+							{
+								query = new { match_all = new { } },
+								path = "foes",
+								inner_hits = new { }
+							}
 						}
 					}
-				}
 				}
 			}
 		};
@@ -197,7 +209,11 @@ namespace Tests.Search.Request
 			.Query(q =>
 				q.HasChild<Prince>(hc => hc
 					.Query(hcq => hcq.MatchAll())
-					.InnerHits(ih => ih.Name("princes"))
+					.InnerHits(ih => ih
+						.DocValueFields(f=>f.Field(p=>p.Name))
+						.Name("princes")
+					)
+
 				) || q.Nested(n => n
 					.Path(p => p.Foes)
 					.Query(nq => nq.MatchAll())
@@ -211,7 +227,11 @@ namespace Tests.Search.Request
 			{
 				Type = typeof(Prince),
 				Query = new MatchAllQuery(),
-				InnerHits = new InnerHits { Name = "princes" }
+				InnerHits = new InnerHits
+				{
+					Name = "princes",
+					DocValueFields = Field<Prince>(p=>p.Name),
+				}
 			} || new NestedQuery
 			{
 				Path = Field<King>(p => p.Foes),
@@ -227,6 +247,13 @@ namespace Tests.Search.Request
 			{
 				var princes = hit.InnerHits["princes"].Documents<Prince>();
 				princes.Should().NotBeEmpty();
+				foreach (var princeHit in hit.InnerHits["princes"].Hits.Hits)
+				{
+					princeHit.Fields.Should().NotBeNull("all princes have a keyword name so fields should be returned");
+					var docValueName = princeHit.Fields.ValueOf<Prince, string>(p=>p.Name);
+					docValueName.Should().NotBeNullOrWhiteSpace("value of name on Fields");
+
+				}
 
 				var foes = hit.InnerHits["foes"].Documents<King>();
 				foes.Should().NotBeEmpty();
