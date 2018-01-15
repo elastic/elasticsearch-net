@@ -240,6 +240,7 @@ namespace Tests.Search.Request
 								inner_hits = new
 								{
 									name = "princes",
+									docvalue_fields = new []{"name"},
 									highlight = new
 									{
 										fields = new { fullTextField = new { } }
@@ -268,6 +269,7 @@ namespace Tests.Search.Request
 				q.HasChild<Prince>(hc => hc
 					.Query(hcq => hcq.Match(m => m.Field(p => p.FullTextField).Query("default")))
 					.InnerHits(ih => ih
+						.DocValueFields(f=>f.Field(p=>p.Name))
 						.Name("princes")
 						.Highlight(h=>h.Fields(f=>f.Field(p=>p.FullTextField)))
 					)
@@ -288,6 +290,7 @@ namespace Tests.Search.Request
 				InnerHits = new InnerHits
 				{
 					Name = "princes",
+					DocValueFields = Field<Prince>(p=>p.Name),
 					Highlight = Highlight.Field(Field<Prince>(p=>p.FullTextField))
 				}
 			} || new NestedQuery
@@ -313,6 +316,11 @@ namespace Tests.Search.Request
 					var hl = highlights["fullTextField"];
 					hl.Highlights.Should().NotBeEmpty("all docs have the same text so should all highlight")
 						.And.Contain(s => s.Contains("<em>default</em>"), "default to be highlighted as its part of the query");
+
+					princeHit.Fields.Should().NotBeNull("all princes have a keyword name so fields should be returned");
+					var docValueName = princeHit.Fields.ValueOf<Prince, string>(p=>p.Name);
+					docValueName.Should().NotBeNullOrWhiteSpace("value of name on Fields");
+
 				}
 
 				var foes = hit.InnerHits["foes"].Documents<King>();
