@@ -151,8 +151,7 @@ namespace Nest
 		private static void VisitConstantOrVariable(MethodCallExpression methodCall, Stack<string> stack)
 		{
 			var lastArg = methodCall.Arguments.Last();
-			var constantExpression = lastArg as ConstantExpression;
-			var value = constantExpression != null
+			var value = lastArg is ConstantExpression constantExpression
 				? constantExpression.Value.ToString()
 				: Expression.Lambda(lastArg).Compile().DynamicInvoke().ToString();
 			stack.Push(value);
