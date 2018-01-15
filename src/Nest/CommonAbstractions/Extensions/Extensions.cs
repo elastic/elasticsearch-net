@@ -79,8 +79,7 @@ namespace Nest
 
 			var enumType = typeof(T);
 			var key = $"{enumType.Name}.{str}";
-			object value;
-			if (_enumCache.TryGetValue(key, out value))
+			if (_enumCache.TryGetValue(key, out var value))
 				return (T)value;
 
 			foreach (var name in Enum.GetNames(enumType))

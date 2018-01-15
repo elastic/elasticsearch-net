@@ -7,7 +7,7 @@ namespace Nest
 		public DateMathExpression(string anchor) { this.Anchor = anchor; }
 		public DateMathExpression(DateTime anchor) { this.Anchor = anchor; }
 
-		public DateMathExpression(Union<DateTime, string> anchor, Time range, DateMathOperation operation)
+		public DateMathExpression(Union<DateTime, string> anchor, DateMathTime range, DateMathOperation operation)
 		{
 			anchor.ThrowIfNull(nameof(anchor));
 			range.ThrowIfNull(nameof(range));
@@ -16,25 +16,25 @@ namespace Nest
 			Self.Ranges.Add(Tuple.Create(operation, range));
 		}
 
-		public DateMathExpression Add(Time expression)
+		public DateMathExpression Add(DateMathTime expression)
 		{
 			Self.Ranges.Add(Tuple.Create(DateMathOperation.Add, expression));
 			return this;
 		}
 
-		public DateMathExpression Subtract(Time expression)
+		public DateMathExpression Subtract(DateMathTime expression)
 		{
 			Self.Ranges.Add(Tuple.Create(DateMathOperation.Subtract, expression));
 			return this;
 		}
 
-		public DateMathExpression Operation(Time expression, DateMathOperation operation)
+		public DateMathExpression Operation(DateMathTime expression, DateMathOperation operation)
 		{
 			Self.Ranges.Add(Tuple.Create(operation, expression));
 			return this;
 		}
 
-		public DateMath RoundTo(TimeUnit round)
+		public DateMath RoundTo(DateMathTimeUnit round)
 		{
 			this.Round = round;
 			return this;

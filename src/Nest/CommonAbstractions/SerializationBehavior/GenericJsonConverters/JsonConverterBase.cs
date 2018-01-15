@@ -17,10 +17,7 @@ namespace Nest
 
 		public abstract void WriteJson(JsonWriter writer, T value, JsonSerializer serializer);
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			throw new NotSupportedException();
-		}
-
 	}
 }
