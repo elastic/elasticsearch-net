@@ -14,7 +14,6 @@ namespace Nest
 		Subtract
 	}
 
-	[JsonConverter(typeof(StringEnumConverter))]
 	public static class DateMathOperationExtensions
 	{
 		public static string GetStringValue(this DateMathOperation value)

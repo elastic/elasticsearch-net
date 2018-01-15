@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(EnumMemberValueCasingJsonConverter<TimeUnit>))]
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum TimeUnit
 	{
 		[EnumMember(Value = "nanos")]

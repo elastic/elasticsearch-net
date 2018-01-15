@@ -33,23 +33,44 @@ namespace Nest
 
 		private double _approximateSeconds;
 
+		/// <summary>
+		/// The numeric time factor
+		/// </summary>
 		public int Factor { get; private set; }
 
+		/// <summary>
+		/// The time units
+		/// </summary>
 		public DateMathTimeUnit Interval { get; private set; }
 
 		public static implicit operator DateMathTime(TimeSpan span) => new DateMathTime(span);
 		public static implicit operator DateMathTime(double milliseconds) => new DateMathTime(milliseconds);
 		public static implicit operator DateMathTime(string expression) => new DateMathTime(expression);
 
+		/// <summary>
+		/// Instantiates a new instance of <see cref="DateMathTime"/> from a TimeSpan.
+		/// Rounding can be specified to determine how fractional second values should be rounded.
+		/// </summary>
 		public DateMathTime(TimeSpan timeSpan, MidpointRounding rounding = MidpointRounding.AwayFromZero)
 			: this(timeSpan.TotalMilliseconds, rounding) { }
 
+		/// <summary>
+		/// Instantiates a new instance of <see cref="DateMathTime"/> from a milliseconds value.
+		/// Rounding can be specified to determine how fractional second values should be rounded.
+		/// </summary>
 		public DateMathTime(double milliseconds, MidpointRounding rounding = MidpointRounding.AwayFromZero) =>
 			SetWholeFactorIntervalAndSeconds(milliseconds, rounding);
 
+		/// <summary>
+		/// Instantiates a new instance of <see cref="DateMathTime"/> from a factor and interval.
+		/// </summary>
 		public DateMathTime(int factor, DateMathTimeUnit interval) =>
 			SetWholeFactorIntervalAndSeconds(factor, interval, MidpointRounding.AwayFromZero);
 
+		/// <summary>
+		/// Instantiates a new instance of <see cref="DateMathTime"/> from the timeUnit string expression.
+		/// Rounding can be specified to determine how fractional second values should be rounded.
+		/// </summary>
 		public DateMathTime(string timeUnit, MidpointRounding rounding = MidpointRounding.AwayFromZero)
 		{
 			if (timeUnit == null) throw new ArgumentNullException(nameof(timeUnit));
