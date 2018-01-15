@@ -43,9 +43,6 @@ namespace Nest
 		private INestedQuery _nested;
 
 		private IFunctionScoreQuery _functionScore;
-#pragma warning disable 618
-		private ITemplateQuery _template;
-#pragma warning restore 618
 		private IGeoBoundingBoxQuery _geoBoundingBox;
 		private IGeoDistanceQuery _geoDistance;
 		private IGeoPolygonQuery _geoPolygon;
@@ -106,9 +103,6 @@ namespace Nest
 		ISpanFieldMaskingQuery IQueryContainer.SpanFieldMasking { get { return _spanFieldMasking; } set { _spanFieldMasking = Set(value); } }
 		INestedQuery IQueryContainer.Nested { get { return _nested; } set { _nested = Set(value); } }
 		IFunctionScoreQuery IQueryContainer.FunctionScore { get { return _functionScore; } set { _functionScore = Set(value); } }
-#pragma warning disable 618
-		ITemplateQuery IQueryContainer.Template { get { return _template; } set { _template = Set(value); } }
-#pragma warning restore 618
 		IGeoBoundingBoxQuery IQueryContainer.GeoBoundingBox { get { return _geoBoundingBox; } set { _geoBoundingBox = Set(value); } }
 		IGeoDistanceQuery IQueryContainer.GeoDistance { get { return _geoDistance; } set { _geoDistance = Set(value); } }
 		IGeoPolygonQuery IQueryContainer.GeoPolygon { get { return _geoPolygon; } set { _geoPolygon = Set(value); } }

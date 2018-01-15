@@ -61,7 +61,6 @@ namespace Nest
 			VisitQuery(qd.GeoDistance, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoBoundingBox, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoHashCell, visitor, (v, d) => v.Visit(d));
-			VisitQuery(qd.Template, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.RawQuery, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Percolate, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.ParentId, visitor, (v, d) => v.Visit(d));

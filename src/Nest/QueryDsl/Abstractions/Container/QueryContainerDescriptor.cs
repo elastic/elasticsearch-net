@@ -482,14 +482,6 @@ namespace Nest
 		public QueryContainer FunctionScore(Func<FunctionScoreQueryDescriptor<T>, IFunctionScoreQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.FunctionScore = query);
 
-		/// <summary>
-		/// A query that accepts a query template and a map of key/value pairs to fill in template parameters.
-		/// Templating is based on Mustache.
-		/// </summary>
-		[Obsolete("Deprecated in 5.0.0. Use Search Template API instead")]
-		public QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.Template = query);
-
 		public QueryContainer Script(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Script = query);
 
