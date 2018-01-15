@@ -24,7 +24,7 @@ namespace Tests.IndexModules.Similarity
 				def = new
 				{
 					discount_overlaps = true,
-					type = "classic"
+					type = "default"
 				},
 				dfi = new
 				{

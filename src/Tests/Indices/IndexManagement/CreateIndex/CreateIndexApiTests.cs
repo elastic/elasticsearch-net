@@ -43,7 +43,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						tfidf = new
 						{
 							discount_overlaps = true,
-							type = "classic"
+							type = "default"
 						},
 						dfi = new
 						{
