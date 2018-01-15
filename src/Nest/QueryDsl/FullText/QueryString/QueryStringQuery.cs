@@ -8,6 +8,9 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<QueryStringQueryDescriptor<object>>))]
 	public interface IQueryStringQuery : IQuery
 	{
+		[JsonProperty("type")]
+		TextQueryType? Type { get; set; }
+
 		[JsonProperty("query")]
 		string Query { get; set; }
 
@@ -25,10 +28,6 @@ namespace Nest
 
 		[JsonProperty("allow_leading_wildcard")]
 		bool? AllowLeadingWildcard { get; set; }
-
-		[JsonProperty("lowercase_expanded_terms")]
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		bool? LowercaseExpandedTerms { get; set; }
 
 		[JsonProperty("enable_position_increments")]
 		bool? EnablePositionIncrements { get; set; }
@@ -57,10 +56,6 @@ namespace Nest
 		[JsonProperty("lenient")]
 		bool? Lenient { get; set; }
 
-		[JsonProperty("locale")]
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		string Locale { get; set; }
-
 		[JsonProperty("time_zone")]
 		string Timezone { get; set; }
 
@@ -86,11 +81,10 @@ namespace Nest
 	public class QueryStringQuery : QueryBase, IQueryStringQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
+		public TextQueryType? Type { get; set; }
 		public int? FuzzyMaxExpansions { get; set; }
 		public Fuzziness Fuzziness { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public string Locale { get; set; }
 		public MultiTermQueryRewrite Rewrite { get; set; }
 		public MultiTermQueryRewrite FuzzyRewrite { get; set; }
 		public string QuoteFieldSuffix { get; set; }
@@ -103,8 +97,6 @@ namespace Nest
 		public string Analyzer { get; set; }
 		public string QuoteAnalyzer { get; set; }
 		public bool? AllowLeadingWildcard { get; set; }
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public bool? LowercaseExpandedTerms { get; set; }
 		public bool? EnablePositionIncrements { get; set; }
 		public int? FuzzyPrefixLength { get; set; }
 		public double? PhraseSlop { get; set; }
@@ -124,9 +116,9 @@ namespace Nest
 	{
 		protected override bool Conditionless => QueryStringQuery.IsConditionless(this);
 
+		TextQueryType? IQueryStringQuery.Type { get; set; }
 		string IQueryStringQuery.Query { get; set; }
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		string IQueryStringQuery.Locale { get; set; }
 		string IQueryStringQuery.Timezone { get; set; }
 		Field IQueryStringQuery.DefaultField { get; set; }
 		Fields IQueryStringQuery.Fields { get; set; }
@@ -135,7 +127,6 @@ namespace Nest
 		string IQueryStringQuery.QuoteAnalyzer { get; set; }
 		bool? IQueryStringQuery.AllowLeadingWildcard { get; set; }
 		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		bool? IQueryStringQuery.LowercaseExpandedTerms { get; set; }
 		bool? IQueryStringQuery.EnablePositionIncrements { get; set; }
 		int? IQueryStringQuery.FuzzyMaxExpansions { get; set; }
 		Fuzziness IQueryStringQuery.Fuzziness { get; set; }
@@ -159,10 +150,9 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
 
-		public QueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
+		public QueryStringQueryDescriptor<T> Type(TextQueryType? type) => Assign(a => a.Type = type);
 
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public QueryStringQueryDescriptor<T> Locale(string locale) => Assign(a => a.Locale = locale);
+		public QueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
 		public QueryStringQueryDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
 
@@ -174,10 +164,6 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool? allowLeadingWildcard = true) =>
 			Assign(a => a.AllowLeadingWildcard = allowLeadingWildcard);
-
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public QueryStringQueryDescriptor<T> LowercaseExpandedTerms(bool? lowercaseExpandedTerms = true) =>
-			Assign(a => a.LowercaseExpandedTerms = lowercaseExpandedTerms);
 
 		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) =>
 			Assign(a => a.EnablePositionIncrements = enablePositionIncrements);
