@@ -2959,8 +2959,6 @@ namespace Nest
 		public NodesUsageDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
 		// Request parameters
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public NodesUsageDescriptor Human(bool? human = true) => Qs("human", human);
 		///<summary>Explicit operation timeout</summary>
 		public NodesUsageDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -3767,8 +3765,6 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
-		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
-		public XPackInfoDescriptor Human(bool? human = true) => Qs("human", human);
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public XPackInfoDescriptor Categories(params string[] categories) => Qs("categories", categories);
 	

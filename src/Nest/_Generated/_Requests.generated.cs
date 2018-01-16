@@ -4234,8 +4234,6 @@ namespace Nest
 		NodeIds INodesUsageRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 
 		// Request parameters
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
 	}
@@ -6518,8 +6516,6 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
-		///<summary>Presents additional info for humans (feature descriptions and X-Pack tagline)</summary>
-		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
 	}
