@@ -1579,10 +1579,6 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		///<summary>Explicit timestamp for the document</summary>
-		public Time Timestamp { get => Q<Time>("timestamp"); set => Q("timestamp", value.ToString()); }
-		///<summary>Expiration time for the document</summary>
-		public Time Ttl { get => Q<Time>("ttl"); set => Q("ttl", value.ToString()); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -3699,10 +3695,6 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		///<summary>Explicit timestamp for the document</summary>
-		public Time Timestamp { get => Q<Time>("timestamp"); set => Q("timestamp", value.ToString()); }
-		///<summary>Expiration time for the document</summary>
-		public Time Ttl { get => Q<Time>("ttl"); set => Q("ttl", value.ToString()); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -6239,10 +6231,6 @@ namespace Nest
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		///<summary>Explicit timestamp for the document</summary>
-		public Time Timestamp { get => Q<Time>("timestamp"); set => Q("timestamp", value.ToString()); }
-		///<summary>Expiration time for the document</summary>
-		public Time Ttl { get => Q<Time>("ttl"); set => Q("ttl", value.ToString()); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>

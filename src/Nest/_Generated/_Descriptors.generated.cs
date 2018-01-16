@@ -925,10 +925,6 @@ namespace Nest
 		public CreateDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
 		public CreateDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Explicit timestamp for the document</summary>
-		public CreateDescriptor<TDocument> Timestamp(Time timestamp) => Qs("timestamp", timestamp);
-		///<summary>Expiration time for the document</summary>
-		public CreateDescriptor<TDocument> Ttl(Time ttl) => Qs("ttl", ttl);
 		///<summary>Explicit version number for concurrency control</summary>
 		public CreateDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -1536,10 +1532,6 @@ namespace Nest
 		public IndexDescriptor<TDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
 		public IndexDescriptor<TDocument> Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Explicit timestamp for the document</summary>
-		public IndexDescriptor<TDocument> Timestamp(Time timestamp) => Qs("timestamp", timestamp);
-		///<summary>Expiration time for the document</summary>
-		public IndexDescriptor<TDocument> Ttl(Time ttl) => Qs("ttl", ttl);
 		///<summary>Explicit version number for concurrency control</summary>
 		public IndexDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
@@ -3589,10 +3581,6 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> Routing(Routing routing) => Qs("routing", routing);
 		///<summary>Explicit operation timeout</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Timeout(Time timeout) => Qs("timeout", timeout);
-		///<summary>Explicit timestamp for the document</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Timestamp(Time timestamp) => Qs("timestamp", timestamp);
-		///<summary>Expiration time for the document</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Ttl(Time ttl) => Qs("ttl", ttl);
 		///<summary>Explicit version number for concurrency control</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
