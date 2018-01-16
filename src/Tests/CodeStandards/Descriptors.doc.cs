@@ -173,34 +173,32 @@ namespace Tests.CodeStandards
 			processors.Should().OnlyContain(p => p.Contains("Processor"));
 		}
 
-		//TODO descriptors taking a single valuetype parameter should always be nullable
-		//[U]
-		//public void DescriptorMethodsTakingSingleValueTypeShouldBeNullable()
-		//{
-		//	var descriptors =
-		//		from t in typeof(DescriptorBase<,>).Assembly().Types()
-		//		where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
-		//		where !t.IsAbstract()
-		//		select t;
+		[U] public void DescriptorMethodsTakingSingleValueTypeShouldBeNullable()
+		{
+			var descriptors =
+				from t in typeof(DescriptorBase<,>).Assembly().Types()
+				where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+				where !t.IsAbstract()
+				select t;
 
-		//	var breakingDescriptors = new List<string>();
+			var breakingDescriptors = new List<string>();
 
-		//	foreach (var descriptor in descriptors)
-		//	{
-		//		foreach (var descriptorMethod in descriptor.Methods().Where(
-		//			m => m.GetParameters().Length == 1 &&
-		//			m.GetParameters().Any(p => p.ParameterType.IsValueType())))
-		//		{
-		//			foreach (var parameter in descriptorMethod.GetParameters())
-		//			{
-		//				if (!parameter.ParameterType.IsGenericType() || parameter.ParameterType.GetGenericTypeDefinition() != typeof(Nullable<>))
-		//					breakingDescriptors.Add($"{parameter.Name} on method {descriptorMethod.Name} of {descriptor.FullName} is not nullable");
-		//			}
-		//		}
-		//	}
+			foreach (var descriptor in descriptors)
+			{
+				foreach (var descriptorMethod in descriptor.Methods().Where(
+					m => m.GetParameters().Length == 1 &&
+					m.GetParameters().Any(p => p.ParameterType.IsValueType())))
+				{
+					foreach (var parameter in descriptorMethod.GetParameters())
+					{
+						if (!parameter.ParameterType.IsGenericType() || parameter.ParameterType.GetGenericTypeDefinition() != typeof(Nullable<>))
+							breakingDescriptors.Add($"{parameter.Name} on method {descriptorMethod.Name} of {descriptor.FullName} is not nullable");
+					}
+				}
+			}
 
-		//	breakingDescriptors.Should().BeEmpty();
-		//}
+			breakingDescriptors.Should().BeEmpty();
+		}
 
 		//TODO methods taking params should also have a version taking IEnumerable
 

@@ -69,7 +69,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="otherBucket">whether to set the other bucket</param>
 		/// <returns>the <see cref="FiltersAggregationDescriptor{T}"/></returns>
-		public FiltersAggregationDescriptor<T> OtherBucket(bool otherBucket = true) =>
+		public FiltersAggregationDescriptor<T> OtherBucket(bool? otherBucket = true) =>
 			Assign(a => a.OtherBucket = otherBucket);
 
 		/// <summary>

@@ -46,7 +46,8 @@ namespace ApiGenerator.Domain
 		}
 
 		public string ClsArgumentName => this.ClsName.ToCamelCase();
-		public string DescriptorArgumentType => this.Type == "list" && this.TypeHighLevel.EndsWith("[]") ? "params " + this.TypeHighLevel : TypeHighLevel;
+		public string DescriptorArgumentType =>
+			this.Type == "list" && this.TypeHighLevel.EndsWith("[]") ? "params " + this.TypeHighLevel : TypeHighLevel;
 		public string SetterHighLevel
 		{
 			get

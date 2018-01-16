@@ -52,11 +52,11 @@ namespace Nest
 
 		public GeoHashGridAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public GeoHashGridAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public GeoHashGridAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
-		public GeoHashGridAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
+		public GeoHashGridAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
 
-		public GeoHashGridAggregationDescriptor<T> GeoHashPrecision(GeoHashPrecision precision) =>
+		public GeoHashGridAggregationDescriptor<T> GeoHashPrecision(GeoHashPrecision? precision) =>
 			Assign(a => a.Precision = precision);
 	}
 }

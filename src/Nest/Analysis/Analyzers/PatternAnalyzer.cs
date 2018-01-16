@@ -61,7 +61,7 @@ namespace Nest
 
 		public PatternAnalyzerDescriptor Flags(string flags) => Assign(a => a.Flags = flags);
 
-		public PatternAnalyzerDescriptor Lowercase(bool lowercase = true) => Assign(a => a.Lowercase = lowercase);
+		public PatternAnalyzerDescriptor Lowercase(bool? lowercase = true) => Assign(a => a.Lowercase = lowercase);
 
 	}
 }

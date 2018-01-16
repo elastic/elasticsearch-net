@@ -30,7 +30,7 @@ namespace Nest
 
 		[JsonProperty("type")]
 		HoltWintersType? Type { get; set; }
-		
+
 		[JsonProperty("pad")]
 		bool? Pad { get; set; }
 	}
@@ -58,16 +58,16 @@ namespace Nest
 		int? IHoltWintersModel.Period { get; set; }
 		HoltWintersType? IHoltWintersModel.Type { get; set; }
 
-		public HoltWintersModelDescriptor Alpha(float alpha) => Assign(a => a.Alpha = alpha);
+		public HoltWintersModelDescriptor Alpha(float? alpha) => Assign(a => a.Alpha = alpha);
 
-		public HoltWintersModelDescriptor Beta(float beta) => Assign(a => a.Beta = beta);
+		public HoltWintersModelDescriptor Beta(float? beta) => Assign(a => a.Beta = beta);
 
-		public HoltWintersModelDescriptor Gamma(float gamma) => Assign(a => a.Gamma = gamma);
+		public HoltWintersModelDescriptor Gamma(float? gamma) => Assign(a => a.Gamma = gamma);
 
-		public HoltWintersModelDescriptor Pad(bool pad) => Assign(a => a.Pad = pad);
+		public HoltWintersModelDescriptor Pad(bool? pad) => Assign(a => a.Pad = pad);
 
-		public HoltWintersModelDescriptor Period(int period) => Assign(a => a.Period = period);
+		public HoltWintersModelDescriptor Period(int? period) => Assign(a => a.Period = period);
 
-		public HoltWintersModelDescriptor Type(HoltWintersType type) => Assign(a => a.Type = type);
+		public HoltWintersModelDescriptor Type(HoltWintersType? type) => Assign(a => a.Type = type);
 	}
 }

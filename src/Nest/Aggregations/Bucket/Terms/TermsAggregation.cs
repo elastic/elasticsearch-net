@@ -105,14 +105,14 @@ namespace Nest
 		public TermsAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
-		public TermsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public TermsAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
-		public TermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
+		public TermsAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
 
-		public TermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+		public TermsAggregationDescriptor<T> MinimumDocumentCount(int? minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
-		public TermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint executionHint) =>
+		public TermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint? executionHint) =>
 			Assign(a => a.ExecutionHint = executionHint);
 
 		public TermsAggregationDescriptor<T> Order(Func<TermsOrderDescriptor<T>, IPromise<IList<TermsOrder>>> selector) =>
@@ -133,7 +133,7 @@ namespace Nest
 		public TermsAggregationDescriptor<T> Exclude(IEnumerable<string> values) =>
 			Assign(a => a.Exclude = new TermsExclude(values));
 
-		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode collectMode) =>
+		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode? collectMode) =>
 			Assign(a => a.CollectMode = collectMode);
 
 		public TermsAggregationDescriptor<T> Missing(object missing) => Assign(a => a.Missing = missing);

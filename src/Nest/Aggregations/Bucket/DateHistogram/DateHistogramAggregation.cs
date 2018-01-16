@@ -127,7 +127,7 @@ namespace Nest
 
 		public DateHistogramAggregationDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 
-		public DateHistogramAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+		public DateHistogramAggregationDescriptor<T> MinimumDocumentCount(int? minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
 		public DateHistogramAggregationDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
@@ -145,6 +145,6 @@ namespace Nest
 		public DateHistogramAggregationDescriptor<T> ExtendedBounds(DateMath min, DateMath max) =>
 			Assign(a=>a.ExtendedBounds = new ExtendedBounds<DateMath> { Minimum = min, Maximum = max });
 
-		public DateHistogramAggregationDescriptor<T> Missing(DateTime missing) => Assign(a => a.Missing = missing);
+		public DateHistogramAggregationDescriptor<T> Missing(DateTime? missing) => Assign(a => a.Missing = missing);
 	}
 }

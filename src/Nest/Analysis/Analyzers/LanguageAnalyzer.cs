@@ -67,22 +67,13 @@ namespace Nest
 		IEnumerable<string> ILanguageAnalyzer.StemExclusionList { get; set; }
 		string ILanguageAnalyzer.StopwordsPath { get; set; }
 
-		public LanguageAnalyzerDescriptor Language(Language language)
-		{
-			language.ThrowIfNull(nameof(language));
-			var langName = language.GetStringValue().ToLowerInvariant();
-			_type = langName;
-			return this;
-		}
+		public LanguageAnalyzerDescriptor Language(Language? language) => Assign(a => this._type = language?.GetStringValue());
 
-		public LanguageAnalyzerDescriptor StopWords(StopWords stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+		public LanguageAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
 
-		public LanguageAnalyzerDescriptor StopWords(params string[] stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+		public LanguageAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords);
 
-		public LanguageAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) =>
-			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+		public LanguageAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) => Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
 
 	}
 }

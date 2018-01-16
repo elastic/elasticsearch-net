@@ -21,14 +21,14 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.GeoBounds = this;
 	}
 
-	public class GeoBoundsAggregationDescriptor<T> 
+	public class GeoBoundsAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<GeoBoundsAggregationDescriptor<T>, IGeoBoundsAggregation, T>
 			, IGeoBoundsAggregation
 		where T : class
 	{
 		bool? IGeoBoundsAggregation.WrapLongitude { get; set; }
 
-		public GeoBoundsAggregationDescriptor<T> WrapLongitude(bool wrapLongitude = true) =>
+		public GeoBoundsAggregationDescriptor<T> WrapLongitude(bool? wrapLongitude = true) =>
 			Assign(a => a.WrapLongitude = wrapLongitude);
 	}
 }

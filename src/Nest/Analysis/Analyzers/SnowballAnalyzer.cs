@@ -38,7 +38,7 @@ namespace Nest
 		public SnowballAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) => Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
 		public SnowballAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
 
-		public SnowballAnalyzerDescriptor Language(SnowballLanguage language) => Assign(a => a.Language = language);
+		public SnowballAnalyzerDescriptor Language(SnowballLanguage? language) => Assign(a => a.Language = language);
 
 	}
 }

@@ -19,6 +19,6 @@ namespace Nest
 	{
 		double? ITDigestMethod.Compression { get; set; }
 
-		public TDigestMethodDescriptor Compression(double compression) => Assign(a => a.Compression = compression);
+		public TDigestMethodDescriptor Compression(double? compression) => Assign(a => a.Compression = compression);
 	}
 }

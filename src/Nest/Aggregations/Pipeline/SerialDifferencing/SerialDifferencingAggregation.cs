@@ -29,6 +29,6 @@ namespace Nest
 	{
 		int? ISerialDifferencingAggregation.Lag { get; set; }
 
-		public SerialDifferencingAggregationDescriptor Lag(int lag) => Assign(a => a.Lag = lag);
+		public SerialDifferencingAggregationDescriptor Lag(int? lag) => Assign(a => a.Lag = lag);
 	}
 }
