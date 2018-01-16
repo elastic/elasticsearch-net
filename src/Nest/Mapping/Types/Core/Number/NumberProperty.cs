@@ -66,7 +66,7 @@ namespace Nest
 
 		public TDescriptor Type(NumberType? type) => Assign(a => a.Type = type?.GetStringValue());
 
-		public TDescriptor Index(bool? index) => Assign(a => a.Index = index);
+		public TDescriptor Index(bool? index = true) => Assign(a => a.Index = index);
 
 		public TDescriptor Boost(double? boost) => Assign(a => a.Boost = boost);
 

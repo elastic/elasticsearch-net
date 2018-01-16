@@ -44,7 +44,7 @@ namespace Nest
 		public BooleanPropertyDescriptor() : base(FieldType.Boolean) { }
 
 		public BooleanPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
-		public BooleanPropertyDescriptor<T> Index(bool? index) => Assign(a => a.Index = index);
+		public BooleanPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
 		public BooleanPropertyDescriptor<T> NullValue(bool? nullValue) => Assign(a => a.NullValue = nullValue);
 		public BooleanPropertyDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
 			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));

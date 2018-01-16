@@ -45,7 +45,6 @@ namespace Nest
 		public bool? StoreTermVectorOffsets { get; set; }
 		public bool? StoreTermVectorPositions { get; set; }
 		public bool? StoreTermVectorPayloads { get; set; }
-		public TermVectorOption? TermVector { get; set; }
 		public bool? OmitNorms { get; set; }
 		public string Analyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
@@ -62,7 +61,7 @@ namespace Nest
 		bool? IAllField.StoreTermVectorOffsets { get; set; }
 		bool? IAllField.StoreTermVectorPositions { get; set; }
 		bool? IAllField.StoreTermVectorPayloads { get; set; }
-		public bool? OmitNorms { get; set; }
+		bool? IAllField.OmitNorms { get; set; }
 		string IAllField.Analyzer { get; set; }
 		string IAllField.SearchAnalyzer { get; set; }
 		string IAllField.Similarity { get; set; }

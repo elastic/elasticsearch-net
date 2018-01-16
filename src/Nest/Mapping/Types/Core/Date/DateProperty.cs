@@ -81,7 +81,7 @@ namespace Nest
 		public DatePropertyDescriptor() : base(FieldType.Date) { }
 
 		/// <inheritdoc/>
-		public DatePropertyDescriptor<T> Index(bool? index) => Assign(a => a.Index = index);
+		public DatePropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
 		/// <inheritdoc/>
 		public DatePropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
 		/// <inheritdoc/>

@@ -61,7 +61,7 @@ namespace Nest
 		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
 			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
 
-		public NestedQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = false) =>
+		public NestedQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) =>
 			Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }

@@ -36,7 +36,7 @@ namespace Nest
 		public string MaxBytesPerSecond { get; set; }
 	}
 
-	public class IndicesRecoverySettingsDescriptor 
+	public class IndicesRecoverySettingsDescriptor
 		: DescriptorBase<IndicesRecoverySettingsDescriptor, IIndicesRecoverySettings>, IIndicesRecoverySettings
 	{
 		int? IIndicesRecoverySettings.ConcurrentStreams { get; set; }
@@ -58,7 +58,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IndicesRecoverySettingsDescriptor TranslogSize(string size) => Assign(a => a.TranslogSize = size);
 		/// <inheritdoc/>
-		public IndicesRecoverySettingsDescriptor Compress(bool? compress) => Assign(a => a.Compress = compress);
+		public IndicesRecoverySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
 		/// <inheritdoc/>
 		public IndicesRecoverySettingsDescriptor MaxBytesPerSecond(string max) => Assign(a => a.MaxBytesPerSecond = max);
 	}

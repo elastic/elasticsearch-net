@@ -173,15 +173,10 @@ namespace Tests.CodeStandards
 			processors.Should().OnlyContain(p => p.Contains("Processor"));
 		}
 
-		[U] public void DescriptorMethodsTakingSingleValueTypeShouldBeNullable()
+		[U]
+		public void DescriptorMethodsTakingSingleValueTypeShouldBeNullable()
 		{
-			var descriptors =
-				from t in typeof(DescriptorBase<,>).Assembly().Types()
-				where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
-				where !t.IsAbstract()
-				select t;
-
-			var methods = from d in descriptors
+			var methods = from d in YieldAllDescriptors()
 				from m in d.GetMethods()
 				let ps = m.GetParameters()
 				where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
@@ -191,13 +186,13 @@ namespace Tests.CodeStandards
 				let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
 
 				//skips
-				where !(new [] {"metric", "indexMetric", "watcherStatsMetric"}.Contains(p.Name))
+				where !(new[] {"metric", "indexMetric", "watcherStatsMetric"}.Contains(p.Name))
 				where !(m.Name == "Interval" && d == typeof(DateHistogramAggregationDescriptor<>))
 				where !(m.Name == "Lang" && dt == typeof(ScriptDescriptorBase<,>))
 				where !(m.Name == "Lang" && dt == typeof(StoredScriptDescriptor))
 				where !(m.Name == "Lang" && dt == typeof(ScriptQueryDescriptor<>))
 				where !(m.Name == "RefreshOnCompleted" && dt == typeof(BulkAllDescriptor<>))
-				where !(m.Name == nameof(ReindexDescriptor<object,object>.OmitIndexCreation) && dt == typeof(ReindexDescriptor<,>))
+				where !(m.Name == nameof(ReindexDescriptor<object, object>.OmitIndexCreation) && dt == typeof(ReindexDescriptor<,>))
 				where !(m.Name == nameof(PutMappingDescriptor<object>.AutoMap))
 				where !(m.Name == nameof(PutMappingDescriptor<object>.Dynamic))
 				where !(m.Name == "Strict" && dt == typeof(QueryDescriptorBase<,>))
@@ -227,20 +222,56 @@ namespace Tests.CodeStandards
 			}
 
 			breakingDescriptors.Should().BeEmpty();
+		}
 
+		[U] public void NullableBooleansShouldDefaultToTrue()
+		{
+			var methods = from d in YieldAllDescriptors()
+				from m in d.GetMethods()
+				let ps = m.GetParameters()
+				where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
+				let p = ps.First()
+				let pt = p.ParameterType
+				where pt == typeof(bool?)
+				let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
+				where !(m.Name == nameof(BooleanPropertyDescriptor<object>.NullValue) && dt == typeof(BooleanPropertyDescriptor<>))
+				select new {m, d, p};
 
 			var nullableBools = new List<string>();
-			foreach (var info in methods.Where(p=>p.p.ParameterType == typeof(bool?)))
+			foreach (var info in methods)
 			{
 				var m = info.m;
 				var d = info.d;
 				var p = info.p;
 				if (!p.HasDefaultValue)
 					nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} is has no default value");
-				if (!((bool)p.RawDefaultValue))
-					nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} defaults to false");
-			}
 
+				try
+				{
+
+					var b = ((bool?) p.RawDefaultValue);
+					if (!b.HasValue)
+						nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} defaults to null");
+					else if (!b.Value)
+						nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} default to false");
+				}
+				catch (Exception e)
+				{
+					nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} defaults to unknown");
+				}
+			}
+			nullableBools.Should().BeEmpty();
+
+		}
+
+		private static IEnumerable<Type> YieldAllDescriptors()
+		{
+			var descriptors =
+				from t in typeof(DescriptorBase<,>).Assembly().Types()
+				where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+				where !t.IsAbstract()
+				select t;
+			return descriptors;
 		}
 
 		//TODO methods taking params should also have a version taking IEnumerable

@@ -90,7 +90,7 @@ namespace Nest
 		public HasChildQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
 			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
 
-		public HasChildQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = false) =>
+		public HasChildQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) =>
 			Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }

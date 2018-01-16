@@ -64,7 +64,7 @@ namespace Nest
 
 		public HoltWintersModelDescriptor Gamma(float? gamma) => Assign(a => a.Gamma = gamma);
 
-		public HoltWintersModelDescriptor Pad(bool? pad) => Assign(a => a.Pad = pad);
+		public HoltWintersModelDescriptor Pad(bool? pad = true) => Assign(a => a.Pad = pad);
 
 		public HoltWintersModelDescriptor Period(int? period) => Assign(a => a.Period = period);
 

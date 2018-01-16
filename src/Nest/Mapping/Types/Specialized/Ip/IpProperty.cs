@@ -37,7 +37,7 @@ namespace Nest
 
 		public IpPropertyDescriptor() : base(FieldType.Ip) { }
 
-		public IpPropertyDescriptor<T> Index(bool? index) => Assign(a => a.Index = index);
+		public IpPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
 
 		public IpPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
 
