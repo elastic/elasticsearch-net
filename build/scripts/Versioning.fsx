@@ -52,7 +52,7 @@ module Versioning =
             v
         | ("canary", Some v) -> failwithf "cannot run canary release, expected no version number to specified but received %s" (v.ToString())
         | ("canary", None) -> 
-            let timestampedVersion = (sprintf "ci%s" (DateTime.UtcNow.ToString("MMddHHmmss")))
+            let timestampedVersion = (sprintf "ci%s" (DateTime.UtcNow.ToString("yyyyMMddHHmmss")))
             tracefn "Canary suffix %s " timestampedVersion
             let canaryVersion = parse ((sprintf "%d.%d.0-%s" currentVersion.Major (currentVersion.Minor + 1) timestampedVersion).Trim())
             tracefn "Canary build increased currentVersion (%s) to (%s) " (currentVersion.ToString()) (canaryVersion.ToString())
