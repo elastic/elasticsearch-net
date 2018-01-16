@@ -24,6 +24,12 @@ namespace Nest
 		[JsonProperty("cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
 
+		[JsonProperty("prefix_length")]
+		int? PrefixLength { get; set; }
+
+		[JsonProperty("max_expansions")]
+ 		int? MaxExpansions { get; set; }
+
 		[JsonProperty("lenient")]
 		bool? Lenient { get; set; }
 
@@ -51,6 +57,8 @@ namespace Nest
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
+		public int? PrefixLength { get; set; }
+		public int? MaxExpansions { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Match = this;
 
@@ -74,6 +82,8 @@ namespace Nest
 		bool? IMatchQuery.Lenient { get; set; }
 		Operator? IMatchQuery.Operator { get; set; }
 		ZeroTermsQuery? IMatchQuery.ZeroTermsQuery { get; set; }
+		int? IMatchQuery.PrefixLength { get; set; }
+		int? IMatchQuery.MaxExpansions { get; set; }
 
 		public MatchQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
@@ -94,5 +104,9 @@ namespace Nest
 		public MatchQueryDescriptor<T> Operator(Operator? op) => Assign(a => a.Operator = op);
 
 		public MatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(a => a.ZeroTermsQuery = zeroTermsQuery);
+
+		public MatchQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(a => a.PrefixLength = prefixLength);
+
+		public MatchQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
 	}
 }
