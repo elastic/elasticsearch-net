@@ -71,7 +71,7 @@ namespace ApiGenerator
 					.Where(f => f.EndsWith(".json") && !IgnoredApis.Contains(new FileInfo(f).Name))
 					.ToList()
 				);
-				var commonFile = Path.Combine(CodeConfiguration.RestSpecificationFolder, "Core", "_common") + ".json";
+				var commonFile = Path.Combine(CodeConfiguration.RestSpecificationFolder, "Core", "_common.json");
 				if (!File.Exists(commonFile)) throw new Exception($"Expected to find {commonFile}");
 				RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(commonFile);
 
