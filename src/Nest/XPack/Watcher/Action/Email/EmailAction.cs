@@ -107,7 +107,7 @@ namespace Nest
 		public EmailActionDescriptor Body(Func<EmailBodyDescriptor, IEmailBody> selector) =>
 			Assign(a => a.Body = selector.InvokeOrDefault(new EmailBodyDescriptor()));
 
-		public EmailActionDescriptor Priority(EmailPriority priority) => Assign(a => a.Priority = priority);
+		public EmailActionDescriptor Priority(EmailPriority? priority) => Assign(a => a.Priority = priority);
 
 		public EmailActionDescriptor Attachments(Func<EmailAttachmentsDescriptor, IPromise<IEmailAttachments>> selector) =>
 			Assign(a => a.Attachments = selector?.Invoke(new EmailAttachmentsDescriptor())?.Value);

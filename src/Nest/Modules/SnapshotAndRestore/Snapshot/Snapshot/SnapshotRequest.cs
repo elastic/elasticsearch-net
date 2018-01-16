@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public partial interface ISnapshotRequest 
+	public partial interface ISnapshotRequest
 	{
 		[JsonProperty("indices")]
 		[JsonConverter(typeof(IndicesMultiSyntaxJsonConverter))]
@@ -18,7 +18,7 @@ namespace Nest
 		bool? Partial { get; set; }
 	}
 
-	public partial class SnapshotRequest 
+	public partial class SnapshotRequest
 	{
 		public Indices Indices { get; set; }
 
@@ -31,7 +31,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("SnapshotCreate")]
-	public partial class SnapshotDescriptor 
+	public partial class SnapshotDescriptor
 	{
 		Indices ISnapshotRequest.Indices { get; set; }
 		bool? ISnapshotRequest.IgnoreUnavailable { get; set; }
@@ -46,10 +46,10 @@ namespace Nest
 
 		public SnapshotDescriptor Indices(Indices indices) => Assign(a => a.Indices = indices);
 
-		public SnapshotDescriptor IgnoreUnavailable(bool ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
+		public SnapshotDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
 
-		public SnapshotDescriptor IncludeGlobalState(bool includeGlobalState = true) => Assign(a => a.IncludeGlobalState = includeGlobalState);
+		public SnapshotDescriptor IncludeGlobalState(bool? includeGlobalState = true) => Assign(a => a.IncludeGlobalState = includeGlobalState);
 
-		public SnapshotDescriptor Partial(bool partial = true) => Assign(a => a.Partial = partial);
+		public SnapshotDescriptor Partial(bool? partial = true) => Assign(a => a.Partial = partial);
 	}
 }

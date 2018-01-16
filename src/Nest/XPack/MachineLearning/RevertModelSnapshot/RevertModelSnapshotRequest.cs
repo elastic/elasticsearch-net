@@ -30,7 +30,7 @@ namespace Nest
 		bool? IRevertModelSnapshotRequest.DeleteInterveningResults { get; set; }
 
 		/// <inheritdoc />
-		public RevertModelSnapshotDescriptor DeleteInterveningResults(bool deleteInterveningResults = true) =>
+		public RevertModelSnapshotDescriptor DeleteInterveningResults(bool? deleteInterveningResults = true) =>
 			Assign(a => a.DeleteInterveningResults = deleteInterveningResults);
 	}
 }

@@ -143,6 +143,6 @@ namespace Nest
 
 		public SlackAttachmentDescriptor FooterIcon(string footerIcon) => Assign(a => a.FooterIcon = footerIcon);
 
-		public SlackAttachmentDescriptor Ts(DateTimeOffset ts) => Assign(a => a.Ts = ts);
+		public SlackAttachmentDescriptor Ts(DateTimeOffset? ts) => Assign(a => a.Ts = ts);
 	}
 }

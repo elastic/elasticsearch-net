@@ -138,7 +138,7 @@ namespace Nest
 		/// </summary>
 		public MultiMatchQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 
-		public MultiMatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
+		public MultiMatchQueryDescriptor<T> CutoffFrequency(double? cutoffFrequency)
 			=> Assign(a => a.CutoffFrequency = cutoffFrequency);
 
 		public MultiMatchQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch)

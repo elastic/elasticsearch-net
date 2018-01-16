@@ -44,6 +44,6 @@ namespace Nest
 
 		public MatchPhraseQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
-		public MatchPhraseQueryDescriptor<T> Slop(int slop) => Assign(a => a.Slop = slop);
+		public MatchPhraseQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
 	}
 }

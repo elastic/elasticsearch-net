@@ -113,22 +113,11 @@ namespace Nest
 		private IList<QueryContainer> _mustNot;
 		private IList<QueryContainer> _should;
 		private IList<QueryContainer> _filter;
-		IEnumerable<QueryContainer> IBoolQuery.Must {
-			get { return _must; }
-			set { _must = value.AsInstanceOrToListOrNull(); }
+		IEnumerable<QueryContainer> IBoolQuery.Must { get => _must; set => _must = value.AsInstanceOrToListOrNull();
 		}
-		IEnumerable<QueryContainer> IBoolQuery.MustNot {
-			get { return _mustNot; }
-			set { _mustNot = value.AsInstanceOrToListOrNull(); }
-		}
-		IEnumerable<QueryContainer> IBoolQuery.Should {
-			get { return _should; }
-			set { _should = value.AsInstanceOrToListOrNull(); }
-		}
-		IEnumerable<QueryContainer> IBoolQuery.Filter {
-			get { return _filter; }
-			set { _filter = value.AsInstanceOrToListOrNull(); }
-		}
+		IEnumerable<QueryContainer> IBoolQuery.MustNot { get => _mustNot; set => _mustNot = value.AsInstanceOrToListOrNull(); }
+		IEnumerable<QueryContainer> IBoolQuery.Should { get => _should; set => _should = value.AsInstanceOrToListOrNull(); }
+		IEnumerable<QueryContainer> IBoolQuery.Filter { get => _filter; set => _filter = value.AsInstanceOrToListOrNull(); }
 		MinimumShouldMatch IBoolQuery.MinimumShouldMatch { get; set; }
 
 		/// <summary>

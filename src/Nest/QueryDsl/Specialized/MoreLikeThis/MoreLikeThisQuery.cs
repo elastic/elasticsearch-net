@@ -167,7 +167,7 @@ namespace Nest
 
 		public MoreLikeThisQueryDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
 
-		public MoreLikeThisQueryDescriptor<T> VersionType(VersionType versionType) => Assign(a => a.VersionType = versionType);
+		public MoreLikeThisQueryDescriptor<T> VersionType(VersionType? versionType) => Assign(a => a.VersionType = versionType);
 
 		public MoreLikeThisQueryDescriptor<T> Routing(Routing routing) => Assign(a => a.Routing = routing);
 	}

@@ -111,12 +111,12 @@ namespace Nest
 			Assign(a => a.ModelPlotConfig = selector?.Invoke(new ModelPlotConfigEnabledDescriptor<T>()));
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> ModelSnapshotRetentionDays(long modelSnapshotRetentionDays) => Assign(a => a.ModelSnapshotRetentionDays = modelSnapshotRetentionDays);
+		public UpdateJobDescriptor<T> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) => Assign(a => a.ModelSnapshotRetentionDays = modelSnapshotRetentionDays);
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> RenormalizationWindowDays(long renormalizationWindowDays) => Assign(a => a.RenormalizationWindowDays = renormalizationWindowDays);
+		public UpdateJobDescriptor<T> RenormalizationWindowDays(long? renormalizationWindowDays) => Assign(a => a.RenormalizationWindowDays = renormalizationWindowDays);
 
 		/// <inheritdoc />
-		public UpdateJobDescriptor<T> ResultsRetentionDays(long resultsRetentionDays) => Assign(a => a.ResultsRetentionDays = resultsRetentionDays);
+		public UpdateJobDescriptor<T> ResultsRetentionDays(long? resultsRetentionDays) => Assign(a => a.ResultsRetentionDays = resultsRetentionDays);
 	}
 }

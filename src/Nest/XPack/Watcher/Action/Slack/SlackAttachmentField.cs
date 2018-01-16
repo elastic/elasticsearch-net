@@ -47,6 +47,6 @@ namespace Nest
 
 		public SlackAttachmentFieldDescriptor Value(string value) => Assign(a => a.Value = value);
 
-		public SlackAttachmentFieldDescriptor Short(bool @short = true) => Assign(a => a.Short = @short);
+		public SlackAttachmentFieldDescriptor Short(bool? @short = true) => Assign(a => a.Short = @short);
 	}
 }

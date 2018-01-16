@@ -60,7 +60,7 @@ namespace Nest
 
 		public virtual TDescriptor Descending() => Assign(a => a.Order = SortOrder.Descending);
 
-		public virtual TDescriptor Order(SortOrder order) => Assign(a => a.Order = order);
+		public virtual TDescriptor Order(SortOrder? order) => Assign(a => a.Order = order);
 
 		public virtual TDescriptor Mode(SortMode? mode) => Assign(a => a.Mode = mode);
 

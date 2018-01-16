@@ -157,7 +157,7 @@ namespace Nest
 			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		/// <inheritdoc />
-		public UpdateDatafeedDescriptor<T> ScrollSize(int scrollSize) => Assign(a => a.ScrollSize = scrollSize);
+		public UpdateDatafeedDescriptor<T> ScrollSize(int? scrollSize) => Assign(a => a.ScrollSize = scrollSize);
 
 		/// <inheritdoc />
 		public UpdateDatafeedDescriptor<T> Types(Types types) => Assign(a => a.Types = types);

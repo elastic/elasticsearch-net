@@ -48,6 +48,6 @@ namespace Nest
 
 		public FuzzySuggestDescriptor<T> MinLength(int? length) => Assign(a => a.MinLength = length);
 
-		public FuzzySuggestDescriptor<T> PrefixLength(int length) => Assign(a => a.PrefixLength = length);
+		public FuzzySuggestDescriptor<T> PrefixLength(int? length) => Assign(a => a.PrefixLength = length);
 	}
 }

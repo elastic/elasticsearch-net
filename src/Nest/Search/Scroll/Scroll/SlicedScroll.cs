@@ -30,9 +30,9 @@ namespace Nest
 		int? ISlicedScroll.Max { get; set; }
 		Field ISlicedScroll.Field { get; set; }
 
-		public SlicedScrollDescriptor<T> Id(int id) => Assign(a => a.Id = id);
+		public SlicedScrollDescriptor<T> Id(int? id) => Assign(a => a.Id = id);
 
-		public SlicedScrollDescriptor<T> Max(int max) => Assign(a => a.Max = max);
+		public SlicedScrollDescriptor<T> Max(int? max) => Assign(a => a.Max = max);
 
 		public SlicedScrollDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 

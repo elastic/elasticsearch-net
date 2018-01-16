@@ -103,7 +103,7 @@ namespace Nest
 		public ValidateJobDescriptor<T> ModelPlot(Func<ModelPlotConfigDescriptor<T>, IModelPlotConfig> selector) => Assign(a => a.ModelPlotConfig = selector?.Invoke(new ModelPlotConfigDescriptor<T>()));
 
 		/// <inheritdoc />
-		public ValidateJobDescriptor<T> ModelSnapshotRetentionDays(long modelSnapshotRetentionDays) => Assign(a => a.ModelSnapshotRetentionDays = modelSnapshotRetentionDays);
+		public ValidateJobDescriptor<T> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays) => Assign(a => a.ModelSnapshotRetentionDays = modelSnapshotRetentionDays);
 
 		/// <inheritdoc />
 		public ValidateJobDescriptor<T> ResultsIndexName(IndexName indexName) => Assign(a => a.ResultsIndexName = indexName);

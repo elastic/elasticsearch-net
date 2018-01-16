@@ -36,7 +36,7 @@ namespace Nest
 		string IRegexpQuery.Flags { get; set; }
 		int? IRegexpQuery.MaximumDeterminizedStates { get; set; }
 
-		public RegexpQueryDescriptor<T> MaximumDeterminizedStates(int maxDeterminizedStates) =>
+		public RegexpQueryDescriptor<T> MaximumDeterminizedStates(int? maxDeterminizedStates) =>
 			Assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
 
 		public RegexpQueryDescriptor<T> Value(string regex) => Assign(a => a.Value = regex);

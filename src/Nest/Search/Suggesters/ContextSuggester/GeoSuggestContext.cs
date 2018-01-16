@@ -10,7 +10,7 @@ namespace Nest
 		IEnumerable<string> Precision { get; set; }
 
 		[JsonProperty("neighbors")]
-		bool Neighbors { get; set; }
+		bool? Neighbors { get; set; }
 	}
 
 	[JsonObject]
@@ -20,7 +20,7 @@ namespace Nest
 
 		public IEnumerable<string> Precision { get; set; }
 
-		public bool Neighbors { get; set; }
+		public bool? Neighbors { get; set; }
 
 	}
 
@@ -29,10 +29,10 @@ namespace Nest
 	{
 		protected override string Type => "geo";
 		IEnumerable<string> IGeoSuggestContext.Precision { get; set; }
-		bool IGeoSuggestContext.Neighbors { get; set; }
+		bool? IGeoSuggestContext.Neighbors { get; set; }
 
 		public GeoSuggestContextDescriptor<T> Precision(params string[] precisions) => Assign(a => a.Precision = precisions);
 
-		public GeoSuggestContextDescriptor<T> Neighbors(bool neighbors = true) => Assign(a => a.Neighbors = neighbors);
+		public GeoSuggestContextDescriptor<T> Neighbors(bool? neighbors = true) => Assign(a => a.Neighbors = neighbors);
 	}
 }

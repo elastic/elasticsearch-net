@@ -62,11 +62,11 @@ namespace Nest
 
 		public HipChatMessageDescriptor Body(string body) => Assign(a => a.Body = body);
 
-		public HipChatMessageDescriptor Format(HipChatMessageFormat format) => Assign(a => a.Format = format);
+		public HipChatMessageDescriptor Format(HipChatMessageFormat? format) => Assign(a => a.Format = format);
 
-		public HipChatMessageDescriptor Color(HipChatMessageColor color) => Assign(a => a.Color = color);
+		public HipChatMessageDescriptor Color(HipChatMessageColor? color) => Assign(a => a.Color = color);
 
-		public HipChatMessageDescriptor Notify(bool notify = true) => Assign(a => a.Notify = notify);
+		public HipChatMessageDescriptor Notify(bool? notify = true) => Assign(a => a.Notify = notify);
 
 		public HipChatMessageDescriptor From(string from) => Assign(a => a.From = from);
 

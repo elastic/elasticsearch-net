@@ -191,14 +191,26 @@ namespace Tests.CodeStandards
 				let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
 
 				//skips
+				where !(new [] {"metric", "indexMetric", "watcherStatsMetric"}.Contains(p.Name))
 				where !(m.Name == "Interval" && d == typeof(DateHistogramAggregationDescriptor<>))
-				where !(new [] {"metric", "indexMetric"}.Contains(p.Name))
 				where !(m.Name == "Lang" && dt == typeof(ScriptDescriptorBase<,>))
 				where !(m.Name == "Lang" && dt == typeof(StoredScriptDescriptor))
+				where !(m.Name == "Lang" && dt == typeof(ScriptQueryDescriptor<>))
 				where !(m.Name == "RefreshOnCompleted" && dt == typeof(BulkAllDescriptor<>))
 				where !(m.Name == nameof(ReindexDescriptor<object,object>.OmitIndexCreation) && dt == typeof(ReindexDescriptor<,>))
 				where !(m.Name == nameof(PutMappingDescriptor<object>.AutoMap))
 				where !(m.Name == nameof(PutMappingDescriptor<object>.Dynamic))
+				where !(m.Name == "Strict" && dt == typeof(QueryDescriptorBase<,>))
+				where !(m.Name == "Verbatim" && dt == typeof(QueryDescriptorBase<,>))
+				where !(m.Name == nameof(FunctionScoreQueryDescriptor<object>.ConditionlessWhen) && dt == typeof(FunctionScoreQueryDescriptor<>))
+				where !(m.Name == nameof(ScoreFunctionsDescriptor<object>.RandomScore) && dt == typeof(ScoreFunctionsDescriptor<>))
+				where !(m.Name == nameof(GeoHashCellQueryDescriptor<object>.Precision) && dt == typeof(GeoHashCellQueryDescriptor<>))
+				where !(m.Name == nameof(HighlightFieldDescriptor<object>.Type) && dt == typeof(HighlightFieldDescriptor<>))
+				where !(m.Name == nameof(InnerHitsDescriptor<object>.Source) && dt == typeof(InnerHitsDescriptor<>))
+				where !(m.Name == nameof(SearchDescriptor<object>.Source) && dt == typeof(SearchDescriptor<>))
+				where !(m.Name == nameof(ScoreFunctionsDescriptor<object>.Weight) && dt == typeof(ScoreFunctionsDescriptor<>))
+				where !(m.Name == nameof(SortDescriptor<object>.Ascending) && dt == typeof(SortDescriptor<>))
+				where !(m.Name == nameof(SortDescriptor<object>.Descending) && dt == typeof(SortDescriptor<>))
 
 
 				select new {m, d, p};

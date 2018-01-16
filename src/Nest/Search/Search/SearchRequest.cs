@@ -208,22 +208,22 @@ namespace Nest
 		/// <summary>
 		/// The number of hits to return. Defaults to 10.
 		/// </summary>
-		public SearchDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public SearchDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
 		/// <summary>
 		/// The number of hits to return. Alias for <see cref="Size"/>. Defaults to 10.
 		/// </summary>
-		public SearchDescriptor<T> Take(int take) => this.Size(take);
+		public SearchDescriptor<T> Take(int? take) => this.Size(take);
 
 		/// <summary>
 		/// The starting from index of the hits to return. Defaults to 0.
 		/// </summary>
-		public SearchDescriptor<T> From(int from) => Assign(a => a.From = from);
+		public SearchDescriptor<T> From(int? from) => Assign(a => a.From = from);
 
 		/// <summary>
 		/// The starting from index of the hits to return. Alias for <see cref="From"/>. Defaults to 0.
 		/// </summary>
-		public SearchDescriptor<T> Skip(int skip) => this.From(skip);
+		public SearchDescriptor<T> Skip(int? skip) => this.From(skip);
 
 		/// <summary>
 		/// A search timeout, bounding the search request to be executed within the
@@ -236,35 +236,35 @@ namespace Nest
 		/// Enables explanation for each hit on how its score was computed.
 		/// (Use .DocumentsWithMetadata on the return results)
 		/// </summary>
-		public SearchDescriptor<T> Explain(bool explain = true) => Assign(a => a.Explain = explain);
+		public SearchDescriptor<T> Explain(bool? explain = true) => Assign(a => a.Explain = explain);
 
 		/// <summary>
 		/// Returns a version for each search hit. (Use .DocumentsWithMetadata on the return results)
 		/// </summary>
-		public SearchDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
+		public SearchDescriptor<T> Version(bool? version = true) => Assign(a => a.Version = version);
 
 		/// <summary>
 		/// Make sure we keep calculating score even if we are sorting on a field.
 		/// </summary>
-		public SearchDescriptor<T> TrackScores(bool trackscores = true) => Assign(a => a.TrackScores = trackscores);
+		public SearchDescriptor<T> TrackScores(bool? trackscores = true) => Assign(a => a.TrackScores = trackscores);
 
 		/// <summary>
 		/// The Profile API provides detailed timing information about the execution of individual components in a query.
 		/// It gives the user insight into how queries are executed at a low level so that the user can understand
 		/// why certain queries are slow, and take steps to improve their slow queries.
 		/// </summary>
-		public SearchDescriptor<T> Profile(bool profile = true) => Assign(a => a.Profile = profile);
+		public SearchDescriptor<T> Profile(bool? profile = true) => Assign(a => a.Profile = profile);
 
 		/// <summary>
 		/// Allows to filter out documents based on a minimum score:
 		/// </summary>
-		public SearchDescriptor<T> MinScore(double minScore) => Assign(a => a.MinScore = minScore);
+		public SearchDescriptor<T> MinScore(double? minScore) => Assign(a => a.MinScore = minScore);
 
 		/// <summary>
 		/// The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.
 		/// If set, the response will have a boolean field terminated_early to indicate whether the query execution has actually terminated_early.
 		/// </summary>
-		public SearchDescriptor<T> TerminateAfter(long terminateAfter) => Assign(a => a.TerminateAfter = terminateAfter);
+		public SearchDescriptor<T> TerminateAfter(long? terminateAfter) => Assign(a => a.TerminateAfter = terminateAfter);
 
 		/// <summary>
 		/// <para>

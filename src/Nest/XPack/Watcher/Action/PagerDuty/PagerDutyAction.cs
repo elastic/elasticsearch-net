@@ -53,7 +53,7 @@ namespace Nest
 
 		public PagerDutyActionDescriptor Description(string description) => Assign(a => a.Description = description);
 
-		public PagerDutyActionDescriptor EventType(PagerDutyEventType eventType) => Assign(a => a.EventType = eventType);
+		public PagerDutyActionDescriptor EventType(PagerDutyEventType? eventType) => Assign(a => a.EventType = eventType);
 
 		public PagerDutyActionDescriptor IncidentKey(string incidentKey) => Assign(a => a.IncidentKey = incidentKey);
 
@@ -61,7 +61,7 @@ namespace Nest
 
 		public PagerDutyActionDescriptor ClientUrl(string url) => Assign(a => a.ClientUrl = url);
 
-		public PagerDutyActionDescriptor AttachPayload(bool attach = true) => Assign(a => a.AttachPayload = attach);
+		public PagerDutyActionDescriptor AttachPayload(bool? attach = true) => Assign(a => a.AttachPayload = attach);
 
 		public PagerDutyActionDescriptor Context(Func<PagerDutyContextsDescriptor, IPromise<IList<IPagerDutyContext>>> selector) =>
 			Assign(a => a.Context = selector?.Invoke(new PagerDutyContextsDescriptor())?.Value);

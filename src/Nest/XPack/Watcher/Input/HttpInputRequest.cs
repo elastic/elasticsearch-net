@@ -182,7 +182,7 @@ namespace Nest
 		public HttpInputRequestDescriptor Host(string host) => Assign(a => a.Host = host);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor Method(HttpInputMethod method) => Assign(a => a.Method = method);
+		public HttpInputRequestDescriptor Method(HttpInputMethod? method) => Assign(a => a.Method = method);
 
 		/// <inheritdoc />
 		public HttpInputRequestDescriptor Path(string path) => Assign(a => a.Path = path);
@@ -196,7 +196,7 @@ namespace Nest
 			Assign(a => a.Params = paramsDictionary);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor Port(int port) => Assign(a => a.Port = port);
+		public HttpInputRequestDescriptor Port(int? port) => Assign(a => a.Port = port);
 
 		/// <inheritdoc />
 		public HttpInputRequestDescriptor Proxy(Func<HttpInputProxyDescriptor, IHttpInputProxy> proxySelector) =>
@@ -206,7 +206,7 @@ namespace Nest
 		public HttpInputRequestDescriptor ReadTimeout(Time readTimeout) => Assign(a => a.ReadTimeout = readTimeout);
 
 		/// <inheritdoc />
-		public HttpInputRequestDescriptor Scheme(ConnectionScheme scheme) => Assign(a => a.Scheme = scheme);
+		public HttpInputRequestDescriptor Scheme(ConnectionScheme? scheme) => Assign(a => a.Scheme = scheme);
 
 		/// <inheritdoc />
 		public HttpInputRequestDescriptor Url(string url) => Assign(a => a.Url = url);

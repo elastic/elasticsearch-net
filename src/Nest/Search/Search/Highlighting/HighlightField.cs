@@ -309,6 +309,6 @@ namespace Nest
 		public HighlightFieldDescriptor<T> Fragmenter(HighlighterFragmenter? fragmenter) => Assign(a => a.Fragmenter = fragmenter);
 
 		/// <inheritdoc/>
-		public HighlightFieldDescriptor<T> PhraseLimit(int phraseLimit) => Assign(a => a.PhraseLimit = phraseLimit);
+		public HighlightFieldDescriptor<T> PhraseLimit(int? phraseLimit) => Assign(a => a.PhraseLimit = phraseLimit);
 	}
 }

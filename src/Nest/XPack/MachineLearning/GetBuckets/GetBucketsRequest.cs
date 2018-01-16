@@ -108,19 +108,19 @@ namespace Nest
 		DateTimeOffset? IGetBucketsRequest.Timestamp { get; set; }
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor AnomalyScore(double anomalyScore) => Assign(a => a.AnomalyScore = anomalyScore);
+		public GetBucketsDescriptor AnomalyScore(double? anomalyScore) => Assign(a => a.AnomalyScore = anomalyScore);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor Descending(bool descending = true) => Assign(a => a.Descending = descending);
+		public GetBucketsDescriptor Descending(bool? descending = true) => Assign(a => a.Descending = descending);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor End(DateTimeOffset end) => Assign(a => a.End = end);
+		public GetBucketsDescriptor End(DateTimeOffset? end) => Assign(a => a.End = end);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor ExcludeInterim(bool excludeInterim = true) => Assign(a => a.ExcludeInterim = excludeInterim);
+		public GetBucketsDescriptor ExcludeInterim(bool? excludeInterim = true) => Assign(a => a.ExcludeInterim = excludeInterim);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor Expand(bool expand = true) => Assign(a => a.Expand = expand);
+		public GetBucketsDescriptor Expand(bool? expand = true) => Assign(a => a.Expand = expand);
 
 		/// <inheritdoc />
 		public GetBucketsDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(a => a.Page = selector?.Invoke(new PageDescriptor()));
@@ -129,7 +129,7 @@ namespace Nest
 		public GetBucketsDescriptor Sort(Field field) => Assign(a => a.Sort = field);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor Start(DateTimeOffset start) => Assign(a => a.Start = start);
+		public GetBucketsDescriptor Start(DateTimeOffset? start) => Assign(a => a.Start = start);
 
 		/// <inheritdoc />
 		public GetBucketsDescriptor Timestamp(DateTimeOffset? timestamp) => Assign(a => a.Timestamp = timestamp);

@@ -109,10 +109,10 @@ namespace Nest
 
 		public TermSuggesterDescriptor<T> MaxTermFrequency(decimal? frequency) => Assign(a => a.MaxTermFrequency = frequency);
 
-		public TermSuggesterDescriptor<T> Sort(SuggestSort sort) => Assign(a => a.Sort = sort);
+		public TermSuggesterDescriptor<T> Sort(SuggestSort? sort) => Assign(a => a.Sort = sort);
 
-		public TermSuggesterDescriptor<T> LowercaseTerms(bool lowercaseTerms = true) => Assign(a => a.LowercaseTerms = lowercaseTerms);
+		public TermSuggesterDescriptor<T> LowercaseTerms(bool? lowercaseTerms = true) => Assign(a => a.LowercaseTerms = lowercaseTerms);
 
-		public TermSuggesterDescriptor<T> StringDistance(StringDistance distance) => Assign(a => a.StringDistance = distance);
+		public TermSuggesterDescriptor<T> StringDistance(StringDistance? distance) => Assign(a => a.StringDistance = distance);
 	}
 }

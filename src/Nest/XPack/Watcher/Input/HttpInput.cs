@@ -69,7 +69,7 @@ namespace Nest
 			Assign(a => a.Extract = extract);
 
 		/// <inheritdoc />
-		public HttpInputDescriptor ResponseContentType(ResponseContentType responseContentType) =>
+		public HttpInputDescriptor ResponseContentType(ResponseContentType? responseContentType) =>
 			Assign(a => a.ResponseContentType = responseContentType);
 	}
 }

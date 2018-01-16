@@ -50,7 +50,7 @@ namespace Nest
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(Func<BoundingBoxDescriptor, IBoundingBox> boundingBoxSelector) =>
 			Assign(a => a.BoundingBox = boundingBoxSelector?.Invoke(new BoundingBoxDescriptor()));
 
-		public GeoBoundingBoxQueryDescriptor<T> Type(GeoExecution type) => Assign(a => a.Type = type);
+		public GeoBoundingBoxQueryDescriptor<T> Type(GeoExecution? type) => Assign(a => a.Type = type);
 
 		public GeoBoundingBoxQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);
 	}
