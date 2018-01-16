@@ -35,6 +35,9 @@ namespace Nest
 
 		[JsonProperty("script_fields")]
 		IScriptFields ScriptFields { get; set; }
+
+		[JsonProperty("docvalue_fields")]
+		Fields DocValueFields { get; set; }
 	}
 
 	public class InnerHits : IInnerHits
@@ -56,6 +59,8 @@ namespace Nest
 		public bool? Version { get; set; }
 
 		public IScriptFields ScriptFields { get; set; }
+
+		public Fields DocValueFields { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -70,6 +75,7 @@ namespace Nest
 		Union<bool, ISourceFilter> IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
 		IScriptFields IInnerHits.ScriptFields { get; set; }
+		Fields IInnerHits.DocValueFields { get; set; }
 
 		public InnerHitsDescriptor<T> From(int? from) => Assign(a => a.From = from);
 
@@ -96,5 +102,10 @@ namespace Nest
 
 		public InnerHitsDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
 			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
+
+		public InnerHitsDescriptor<T> DocValueFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+			Assign(a => a.DocValueFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+
+		public InnerHitsDescriptor<T> DocValueFields(Fields fields) => Assign(a => a.DocValueFields = fields);
 	}
 }
