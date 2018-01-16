@@ -227,6 +227,20 @@ namespace Tests.CodeStandards
 			}
 
 			breakingDescriptors.Should().BeEmpty();
+
+
+			var nullableBools = new List<string>();
+			foreach (var info in methods.Where(p=>p.p.ParameterType == typeof(bool?)))
+			{
+				var m = info.m;
+				var d = info.d;
+				var p = info.p;
+				if (!p.HasDefaultValue)
+					nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} is has no default value");
+				if (!((bool)p.RawDefaultValue))
+					nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} defaults to false");
+			}
+
 		}
 
 		//TODO methods taking params should also have a version taking IEnumerable
