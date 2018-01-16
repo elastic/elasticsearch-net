@@ -25,7 +25,7 @@ namespace Elasticsearch.Net
 		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
@@ -71,7 +71,7 @@ namespace Elasticsearch.Net
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
+		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -113,7 +113,7 @@ namespace Elasticsearch.Net
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
+		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -169,7 +169,7 @@ namespace Elasticsearch.Net
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
+		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -177,7 +177,7 @@ namespace Elasticsearch.Net
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
-		public Health Health { get => Q<Health>("health"); set => Q("health", value); }
+		public Health? Health { get => Q<Health?>("health"); set => Q("health", value); }
 		///<summary>Return help information</summary>
 		public bool? Help { get => Q<bool?>("help"); set => Q("help", value); }
 		///<summary>Set to true to return stats only for primary shards</summary>
@@ -297,7 +297,7 @@ namespace Elasticsearch.Net
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
+		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
 		///<summary>Comma-separated list of column names to display</summary>
@@ -337,7 +337,7 @@ namespace Elasticsearch.Net
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
+		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -355,7 +355,7 @@ namespace Elasticsearch.Net
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get => Q<Bytes>("bytes"); set => Q("bytes", value); }
+		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -446,7 +446,7 @@ namespace Elasticsearch.Net
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get => Q<string>("format"); set => Q("format", value); }
 		///<summary>The multiplier in which to display values</summary>
-		public Size Size { get => Q<Size>("size"); set => Q("size", value); }
+		public Size? Size { get => Q<Size?>("size"); set => Q("size", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -496,7 +496,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify the level of detail for returned information</summary>
-		public Level Level { get => Q<Level>("level"); set => Q("level", value); }
+		public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -508,11 +508,11 @@ namespace Elasticsearch.Net
 		///<summary>Wait until the specified number of nodes is available</summary>
 		public string WaitForNodes { get => Q<string>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 		///<summary>Wait until all currently queued events with the given priority are processed</summary>
-		public WaitForEvents WaitForEvents { get => Q<WaitForEvents>("wait_for_events"); set => Q("wait_for_events", value); }
+		public WaitForEvents? WaitForEvents { get => Q<WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
 		public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
 		///<summary>Wait until cluster is in a specific state</summary>
-		public WaitForStatus WaitForStatus { get => Q<WaitForStatus>("wait_for_status"); set => Q("wait_for_status", value); }
+		public WaitForStatus? WaitForStatus { get => Q<WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
 	
 	///<summary>Request options for ClusterPendingTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
@@ -579,7 +579,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
 	///<summary>Request options for ClusterStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
@@ -604,7 +604,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
 		public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -618,7 +618,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
@@ -644,7 +644,7 @@ namespace Elasticsearch.Net
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
@@ -652,7 +652,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
@@ -674,7 +674,7 @@ namespace Elasticsearch.Net
 		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
@@ -682,7 +682,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	
 	///<summary>Request options for DeleteByQuery<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
@@ -694,7 +694,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Starting offset (default: 0)</summary>
@@ -707,9 +707,9 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>What to do when the delete-by-query hits version conflicts?</summary>
-		public Conflicts Conflicts { get => Q<Conflicts>("conflicts"); set => Q("conflicts", value); }
+		public Conflicts? Conflicts { get => Q<Conflicts?>("conflicts"); set => Q("conflicts", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -721,7 +721,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
 		public TimeSpan SearchTimeout { get => Q<TimeSpan>("search_timeout"); set => Q("search_timeout", value.ToTimeUnit()); }
 		///<summary>Number of hits to return (default: 10)</summary>
@@ -798,7 +798,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	
 	///<summary>Request options for ExistsSource<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
@@ -825,7 +825,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	
 	///<summary>Request options for Explain<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
@@ -837,7 +837,7 @@ namespace Elasticsearch.Net
 		///<summary>The analyzer for the query string query</summary>
 		public string Analyzer { get => Q<string>("analyzer"); set => Q("analyzer", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The default field for query string query (default: _all)</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
@@ -875,7 +875,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
 	///<summary>Request options for Get<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
@@ -904,7 +904,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	
 	///<summary>Request options for GetScript<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
@@ -937,7 +937,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	
 	///<summary>Request options for Index<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
@@ -951,7 +951,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation type</summary>
-		public OpType OpType { get => Q<OpType>("op_type"); set => Q("op_type", value); }
+		public OpType? OpType { get => Q<OpType?>("op_type"); set => Q("op_type", value); }
 		///<summary>ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public string Parent { get => Q<string>("parent"); set => Q("parent", value); }
@@ -959,7 +959,7 @@ namespace Elasticsearch.Net
 		/// If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 		///<summary>Specific routing value</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
@@ -967,7 +967,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
@@ -981,7 +981,7 @@ namespace Elasticsearch.Net
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public bool? PreferLocal { get => Q<bool?>("prefer_local"); set => Q("prefer_local", value); }
 		///<summary>Format of the output</summary>
-		public Format Format { get => Q<Format>("format"); set => Q("format", value); }
+		public Format? Format { get => Q<Format?>("format"); set => Q("format", value); }
 	}
 	
 	///<summary>Request options for IndicesClearCacheForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
@@ -1002,7 +1002,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>A comma-separated list of index name to limit the operation</summary>
 		public string[] IndexQueryString { get => Q<string[]>("index"); set => Q("index", value); }
 		///<summary>Clear the recycler cache</summary>
@@ -1029,7 +1029,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
 	///<summary>Request options for IndicesCreate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
@@ -1059,7 +1059,7 @@ namespace Elasticsearch.Net
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
 	///<summary>Request options for IndicesDeleteAlias<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
@@ -1093,7 +1093,7 @@ namespace Elasticsearch.Net
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Whether to return all default setting for each of the indices.</summary>
@@ -1112,7 +1112,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -1141,7 +1141,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -1168,7 +1168,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
 	///<summary>Request options for IndicesFlushSyncedForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
@@ -1183,7 +1183,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
 	///<summary>Request options for IndicesForcemergeForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
@@ -1200,7 +1200,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
 		public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
@@ -1222,7 +1222,7 @@ namespace Elasticsearch.Net
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Whether to return all default setting for each of the indices.</summary>
@@ -1241,7 +1241,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -1260,7 +1260,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -1277,7 +1277,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -1294,7 +1294,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1327,7 +1327,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
 	///<summary>Request options for IndicesOpen<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
@@ -1346,7 +1346,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
 	///<summary>Request options for IndicesPutAlias<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
@@ -1375,7 +1375,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
@@ -1396,7 +1396,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 	}
@@ -1437,7 +1437,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
 	///<summary>Request options for IndicesRolloverForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
@@ -1466,7 +1466,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 		///<summary>Includes detailed memory usage by Lucene.</summary>
@@ -1487,7 +1487,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 	}
@@ -1517,7 +1517,7 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public string[] Groups { get => Q<string[]>("groups"); set => Q("groups", value); }
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public Level Level { get => Q<Level>("level"); set => Q("level", value); }
+		public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 	}
@@ -1542,7 +1542,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
@@ -1565,7 +1565,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
@@ -1575,7 +1575,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
@@ -1661,7 +1661,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
@@ -1680,7 +1680,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
@@ -1724,7 +1724,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	
 	///<summary>Request options for NodesHotThreadsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
@@ -1740,7 +1740,7 @@ namespace Elasticsearch.Net
 		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
 		public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
 		///<summary>The type to sample (default: cpu)</summary>
-		public ThreadType ThreadType { get => Q<ThreadType>("type"); set => Q("type", value); }
+		public ThreadType? ThreadType { get => Q<ThreadType?>("type"); set => Q("type", value); }
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
@@ -1768,7 +1768,7 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public bool? Groups { get => Q<bool?>("groups"); set => Q("groups", value); }
 		///<summary>Return indices stats aggregated at index, node or shard level</summary>
-		public Level Level { get => Q<Level>("level"); set => Q("level", value); }
+		public Level? Level { get => Q<Level?>("level"); set => Q("level", value); }
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public string[] Types { get => Q<string[]>("types"); set => Q("types", value); }
 		///<summary>Explicit operation timeout</summary>
@@ -1854,7 +1854,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>A comma-separated list of stored fields to return as part of a hit</summary>
@@ -1869,7 +1869,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1879,13 +1879,13 @@ namespace Elasticsearch.Net
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public string[] Stats { get => Q<string[]>("stats"); set => Q("stats", value); }
 		///<summary>Specify which field to use for suggestions</summary>
 		public string SuggestField { get => Q<string>("suggest_field"); set => Q("suggest_field", value); }
 		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode { get => Q<SuggestMode>("suggest_mode"); set => Q("suggest_mode", value); }
+		public SuggestMode? SuggestMode { get => Q<SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 		///<summary>How many suggestions to return in response</summary>
 		public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 		///<summary>The source text for which the suggestions should be returned</summary>
@@ -1933,7 +1933,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
 	
 	///<summary>Request options for SearchTemplate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
@@ -1948,7 +1948,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get => Q<string>("preference"); set => Q("preference", value); }
 		///<summary>A comma-separated list of specific routing values</summary>
@@ -1956,7 +1956,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 		///<summary>Specify whether to profile the query execution</summary>
@@ -2102,7 +2102,7 @@ namespace Elasticsearch.Net
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
-		public GroupBy GroupBy { get => Q<GroupBy>("group_by"); set => Q("group_by", value); }
+		public GroupBy? GroupBy { get => Q<GroupBy?>("group_by"); set => Q("group_by", value); }
 	}
 	
 	///<summary>Request options for Termvectors<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
@@ -2133,7 +2133,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	
 	///<summary>Request options for Update<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
@@ -2157,7 +2157,7 @@ namespace Elasticsearch.Net
 		/// If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this
 		/// operation visible to search, if `false` (the default) then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
 		public long? RetryOnConflict { get => Q<long?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
 		///<summary>Specific routing value</summary>
@@ -2167,7 +2167,7 @@ namespace Elasticsearch.Net
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get => Q<VersionType>("version_type"); set => Q("version_type", value); }
+		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	
 	///<summary>Request options for UpdateByQuery<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
@@ -2179,7 +2179,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get => Q<DefaultOperator>("default_operator"); set => Q("default_operator", value); }
+		public DefaultOperator? DefaultOperator { get => Q<DefaultOperator?>("default_operator"); set => Q("default_operator", value); }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public string Df { get => Q<string>("df"); set => Q("df", value); }
 		///<summary>Starting offset (default: 0)</summary>
@@ -2192,9 +2192,9 @@ namespace Elasticsearch.Net
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>What to do when the update by query hits version conflicts?</summary>
-		public Conflicts Conflicts { get => Q<Conflicts>("conflicts"); set => Q("conflicts", value); }
+		public Conflicts? Conflicts { get => Q<Conflicts?>("conflicts"); set => Q("conflicts", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get => Q<ExpandWildcards>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
@@ -2208,7 +2208,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get => Q<SearchType>("search_type"); set => Q("search_type", value); }
+		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
 		public TimeSpan SearchTimeout { get => Q<TimeSpan>("search_timeout"); set => Q("search_timeout", value.ToTimeUnit()); }
 		///<summary>Number of hits to return (default: 10)</summary>
@@ -2416,9 +2416,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
-		public DateTimeOffset ResetStart { get => Q<DateTimeOffset>("reset_start"); set => Q("reset_start", value); }
+		public DateTimeOffset? ResetStart { get => Q<DateTimeOffset?>("reset_start"); set => Q("reset_start", value); }
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
-		public DateTimeOffset ResetEnd { get => Q<DateTimeOffset>("reset_end"); set => Q("reset_end", value); }
+		public DateTimeOffset? ResetEnd { get => Q<DateTimeOffset?>("reset_end"); set => Q("reset_end", value); }
 	}
 	
 	///<summary>Request options for XpackMlPreviewDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
@@ -2501,7 +2501,7 @@ namespace Elasticsearch.Net
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	
 	///<summary>Request options for XpackSecurityClearCachedRealms<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
@@ -2526,7 +2526,7 @@ namespace Elasticsearch.Net
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	
 	///<summary>Request options for XpackSecurityDeleteRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
@@ -2537,7 +2537,7 @@ namespace Elasticsearch.Net
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	
 	///<summary>Request options for XpackSecurityDeleteUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user</pre></summary>
@@ -2548,7 +2548,7 @@ namespace Elasticsearch.Net
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	
 	///<summary>Request options for XpackSecurityDisableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user</pre></summary>
@@ -2559,7 +2559,7 @@ namespace Elasticsearch.Net
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	
 	///<summary>Request options for XpackSecurityEnableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user</pre></summary>
@@ -2570,7 +2570,7 @@ namespace Elasticsearch.Net
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	
 	///<summary>Request options for XpackSecurityGetRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role</pre></summary>
@@ -2611,7 +2611,7 @@ namespace Elasticsearch.Net
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	
 	///<summary>Request options for XpackSecurityPutRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
@@ -2622,7 +2622,7 @@ namespace Elasticsearch.Net
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	
 	///<summary>Request options for XpackSecurityPutUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user</pre></summary>
@@ -2633,7 +2633,7 @@ namespace Elasticsearch.Net
 		/// If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
-		public Refresh Refresh { get => Q<Refresh>("refresh"); set => Q("refresh", value); }
+		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	
 	///<summary>Request options for XpackWatcherAckWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>

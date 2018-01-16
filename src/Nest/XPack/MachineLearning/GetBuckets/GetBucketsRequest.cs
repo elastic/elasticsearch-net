@@ -132,6 +132,6 @@ namespace Nest
 		public GetBucketsDescriptor Start(DateTimeOffset start) => Assign(a => a.Start = start);
 
 		/// <inheritdoc />
-		public GetBucketsDescriptor Timestamp(DateTimeOffset timestamp) => Assign(a => a.Timestamp = timestamp);
+		public GetBucketsDescriptor Timestamp(DateTimeOffset? timestamp) => Assign(a => a.Timestamp = timestamp);
 	}
 }

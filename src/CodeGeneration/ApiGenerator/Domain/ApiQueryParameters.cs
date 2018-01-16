@@ -79,8 +79,8 @@ namespace ApiGenerator.Domain
 					case "boolean": return "bool?";
 					case "list": return "string[]";
 					case "integer": return "int?";
-					case "date": return "DateTimeOffset";
-					case "enum": return this.ClsName;
+					case "date": return "DateTimeOffset?";
+					case "enum": return $"{this.ClsName}?";
 					case "number":
 						return new[] {"boost", "percen", "score"}.Any(s => this.QueryStringKey.ToLowerInvariant().Contains(s))
 							? "double?"

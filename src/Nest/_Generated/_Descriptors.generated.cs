@@ -40,7 +40,7 @@ namespace Nest
 		///<summary>Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public BulkDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public BulkDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public BulkDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -114,7 +114,7 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatAllocationDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
-		public CatAllocationDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
+		public CatAllocationDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAllocationDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -180,7 +180,7 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatFielddataDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
-		public CatFielddataDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
+		public CatFielddataDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatFielddataDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -253,7 +253,7 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatIndicesDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
-		public CatIndicesDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
+		public CatIndicesDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatIndicesDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -261,7 +261,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatIndicesDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
-		public CatIndicesDescriptor Health(Health health) => Qs("health", health);
+		public CatIndicesDescriptor Health(Health? health) => Qs("health", health);
 		///<summary>Return help information</summary>
 		public CatIndicesDescriptor Help(bool? help = true) => Qs("help", help);
 		///<summary>Set to true to return stats only for primary shards</summary>
@@ -409,7 +409,7 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatRecoveryDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
-		public CatRecoveryDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
+		public CatRecoveryDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatRecoveryDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Comma-separated list of column names to display</summary>
@@ -465,7 +465,7 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatSegmentsDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
-		public CatSegmentsDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
+		public CatSegmentsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatSegmentsDescriptor Headers(params string[] headers) => Qs("h", headers);
 		///<summary>Return help information</summary>
@@ -496,7 +496,7 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatShardsDescriptor Format(string format) => Qs("format", format);
 		///<summary>The unit in which to display byte values</summary>
-		public CatShardsDescriptor Bytes(Bytes bytes) => Qs("bytes", bytes);
+		public CatShardsDescriptor Bytes(Bytes? bytes) => Qs("bytes", bytes);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -614,7 +614,7 @@ namespace Nest
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public CatThreadPoolDescriptor Format(string format) => Qs("format", format);
 		///<summary>The multiplier in which to display values</summary>
-		public CatThreadPoolDescriptor Size(Size size) => Qs("size", size);
+		public CatThreadPoolDescriptor Size(Size? size) => Qs("size", size);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatThreadPoolDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -689,7 +689,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Specify the level of detail for returned information</summary>
-		public ClusterHealthDescriptor Level(Level level) => Qs("level", level);
+		public ClusterHealthDescriptor Level(Level? level) => Qs("level", level);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterHealthDescriptor Local(bool? local = true) => Qs("local", local);
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -701,11 +701,11 @@ namespace Nest
 		///<summary>Wait until the specified number of nodes is available</summary>
 		public ClusterHealthDescriptor WaitForNodes(string waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 		///<summary>Wait until all currently queued events with the given priority are processed</summary>
-		public ClusterHealthDescriptor WaitForEvents(WaitForEvents waitForEvents) => Qs("wait_for_events", waitForEvents);
+		public ClusterHealthDescriptor WaitForEvents(WaitForEvents? waitForEvents) => Qs("wait_for_events", waitForEvents);
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
 		public ClusterHealthDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
 		///<summary>Wait until cluster is in a specific state</summary>
-		public ClusterHealthDescriptor WaitForStatus(WaitForStatus waitForStatus) => Qs("wait_for_status", waitForStatus);
+		public ClusterHealthDescriptor WaitForStatus(WaitForStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
 	
 	}
 	
@@ -797,7 +797,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public ClusterStateDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -848,7 +848,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public CountDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public CountDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
 		public CountDescriptor<T> MinScore(double? minScore) => Qs("min_score", minScore);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -868,7 +868,7 @@ namespace Nest
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public CountDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public CountDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
+		public CountDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public CountDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
@@ -914,7 +914,7 @@ namespace Nest
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public CreateDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public CreateDescriptor<TDocument> Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public CreateDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -928,7 +928,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public CreateDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public CreateDescriptor<TDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
+		public CreateDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public CreateDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
 	
@@ -970,7 +970,7 @@ namespace Nest
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public DeleteDescriptor<T> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public DeleteDescriptor<T> Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public DeleteDescriptor<T> Refresh(Refresh? refresh) => Qs("refresh", refresh);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -984,7 +984,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public DeleteDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
+		public DeleteDescriptor<T> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -1017,7 +1017,7 @@ namespace Nest
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public DeleteByQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
+		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public DeleteByQueryDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Starting offset (default: 0)</summary>
@@ -1027,9 +1027,9 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public DeleteByQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>What to do when the delete-by-query hits version conflicts?</summary>
-		public DeleteByQueryDescriptor<T> Conflicts(Conflicts conflicts) => Qs("conflicts", conflicts);
+		public DeleteByQueryDescriptor<T> Conflicts(Conflicts? conflicts) => Qs("conflicts", conflicts);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public DeleteByQueryDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1047,7 +1047,7 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public DeleteByQueryDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public DeleteByQueryDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
+		public DeleteByQueryDescriptor<T> SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
 		public DeleteByQueryDescriptor<T> SearchTimeout(Time searchTimeout) => Qs("search_timeout", searchTimeout);
 		///<summary>Number of hits to return (default: 10)</summary>
@@ -1171,7 +1171,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public DocumentExistsDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public DocumentExistsDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
+		public DocumentExistsDescriptor<T> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -1235,7 +1235,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceExistsDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public SourceExistsDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
+		public SourceExistsDescriptor<T> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -1274,7 +1274,7 @@ namespace Nest
 		///<summary>The analyzer for the query string query</summary>
 		public ExplainDescriptor<TDocument> Analyzer(string analyzer) => Qs("analyzer", analyzer);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainDescriptor<TDocument> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
+		public ExplainDescriptor<TDocument> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The default field for query string query (default: _all)</summary>
 		public ExplainDescriptor<TDocument> Df(string df) => Qs("df", df);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
@@ -1332,7 +1332,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public FieldCapabilitiesDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FieldCapabilitiesDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public FieldCapabilitiesDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -1400,7 +1400,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public GetDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
+		public GetDescriptor<T> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -1478,7 +1478,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceDescriptor<T> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public SourceDescriptor<T> VersionType(VersionType versionType) => Qs("version_type", versionType);
+		public SourceDescriptor<T> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -1516,12 +1516,12 @@ namespace Nest
 		///<summary>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
 		public IndexDescriptor<TDocument> WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 		///<summary>Explicit operation type</summary>
-		public IndexDescriptor<TDocument> OpType(OpType opType) => Qs("op_type", opType);
+		public IndexDescriptor<TDocument> OpType(OpType? opType) => Qs("op_type", opType);
 		///<summary>ID of the parent document</summary>
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public IndexDescriptor<TDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public IndexDescriptor<TDocument> Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public IndexDescriptor<TDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
  		///<summary>
 		/// A document is routed to a particular shard in an index using the following formula
 		/// <para> shard_num = hash(_routing) % num_primary_shards</para>
@@ -1535,7 +1535,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public IndexDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public IndexDescriptor<TDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
+		public IndexDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public IndexDescriptor<TDocument> Pipeline(string pipeline) => Qs("pipeline", pipeline);
 	
@@ -1558,7 +1558,7 @@ namespace Nest
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public AnalyzeDescriptor PreferLocal(bool? preferLocal = true) => Qs("prefer_local", preferLocal);
 		///<summary>Format of the output</summary>
-		public AnalyzeDescriptor Format(Format format) => Qs("format", format);
+		public AnalyzeDescriptor Format(Format? format) => Qs("format", format);
 	
 	}
 	
@@ -1591,7 +1591,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public ClearCacheDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Clear the recycler cache</summary>
 		public ClearCacheDescriptor Recycler(bool? recycler = true) => Qs("recycler", recycler);
 		///<summary>Clear request cache</summary>
@@ -1627,7 +1627,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public CloseIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -1683,7 +1683,7 @@ namespace Nest
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public DeleteIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public DeleteIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public DeleteIndexDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -1755,7 +1755,7 @@ namespace Nest
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public IndexExistsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
 		public IndexExistsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
@@ -1787,7 +1787,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public AliasExistsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public AliasExistsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public AliasExistsDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public AliasExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	
@@ -1843,7 +1843,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public TypeExistsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public TypeExistsDescriptor Local(bool? local = true) => Qs("local", local);
 	
@@ -1874,7 +1874,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public FlushDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FlushDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public FlushDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -1899,7 +1899,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SyncedFlushDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SyncedFlushDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public SyncedFlushDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -1926,7 +1926,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public ForceMergeDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ForceMergeDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ForceMergeDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
 		public ForceMergeDescriptor MaxNumSegments(long? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
@@ -1962,7 +1962,7 @@ namespace Nest
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
 		public GetIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public GetIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetIndexDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
 		public GetIndexDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
@@ -1994,7 +1994,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public GetAliasDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetAliasDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetAliasDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetAliasDescriptor Local(bool? local = true) => Qs("local", local);
 	
@@ -2032,7 +2032,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public GetFieldMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetFieldMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
 	
@@ -2066,7 +2066,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public GetMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
 	
@@ -2096,7 +2096,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public GetIndexSettingsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
 		public GetIndexSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -2148,7 +2148,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpgradeStatusDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -2178,7 +2178,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public OpenIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -2239,7 +2239,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public PutMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public PutMappingDescriptor<T> UpdateAllTypes(bool? updateAllTypes = true) => Qs("update_all_types", updateAllTypes);
 	
@@ -2270,7 +2270,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpdateIndexSettingsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public UpdateIndexSettingsDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Return settings in flat format (default: false)</summary>
 		public UpdateIndexSettingsDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	
@@ -2342,7 +2342,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public RefreshDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public RefreshDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public RefreshDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -2392,7 +2392,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SegmentsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public SegmentsDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>TODO: ?</summary>
 		public SegmentsDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 		///<summary>Includes detailed memory usage by Lucene.</summary>
@@ -2423,7 +2423,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public IndicesShardStoresDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesShardStoresDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public IndicesShardStoresDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>TODO: ?</summary>
 		public IndicesShardStoresDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 	
@@ -2489,7 +2489,7 @@ namespace Nest
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public IndicesStatsDescriptor Groups(params string[] groups) => Qs("groups", groups);
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public IndicesStatsDescriptor Level(Level level) => Qs("level", level);
+		public IndicesStatsDescriptor Level(Level? level) => Qs("level", level);
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public IndicesStatsDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	
@@ -2527,7 +2527,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpgradeDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpgradeDescriptor ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public UpgradeDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public UpgradeDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
@@ -2567,7 +2567,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public ValidateQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>TODO: ?</summary>
 		public ValidateQueryDescriptor<T> OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 		///<summary>Query in the Lucene query string syntax</summary>
@@ -2577,7 +2577,7 @@ namespace Nest
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public ValidateQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ValidateQueryDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
+		public ValidateQueryDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public ValidateQueryDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
@@ -2747,7 +2747,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Search operation type</summary>
-		public MultiSearchDescriptor SearchType(SearchType searchType) => Qs("search_type", searchType);
+		public MultiSearchDescriptor SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public MultiSearchDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
@@ -2781,7 +2781,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Search operation type</summary>
-		public MultiSearchTemplateDescriptor SearchType(SearchType searchType) => Qs("search_type", searchType);
+		public MultiSearchTemplateDescriptor SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public MultiSearchTemplateDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
@@ -2840,7 +2840,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public MultiTermVectorsDescriptor Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public MultiTermVectorsDescriptor VersionType(VersionType versionType) => Qs("version_type", versionType);
+		public MultiTermVectorsDescriptor VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -2865,7 +2865,7 @@ namespace Nest
 		///<summary>Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
 		public NodesHotThreadsDescriptor IgnoreIdleThreads(bool? ignoreIdleThreads = true) => Qs("ignore_idle_threads", ignoreIdleThreads);
 		///<summary>The type to sample (default: cpu)</summary>
-		public NodesHotThreadsDescriptor ThreadType(ThreadType threadType) => Qs("type", threadType);
+		public NodesHotThreadsDescriptor ThreadType(ThreadType? threadType) => Qs("type", threadType);
 		///<summary>Explicit operation timeout</summary>
 		public NodesHotThreadsDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 	
@@ -2926,7 +2926,7 @@ namespace Nest
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public NodesStatsDescriptor Groups(bool? groups = true) => Qs("groups", groups);
 		///<summary>Return indices stats aggregated at index, node or shard level</summary>
-		public NodesStatsDescriptor Level(Level level) => Qs("level", level);
+		public NodesStatsDescriptor Level(Level? level) => Qs("level", level);
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public NodesStatsDescriptor Types(params string[] types) => Qs("types", types);
 		///<summary>Explicit operation timeout</summary>
@@ -3079,7 +3079,7 @@ namespace Nest
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public SearchDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
+		public SearchDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3087,7 +3087,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public SearchDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -3103,7 +3103,7 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public SearchDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
+		public SearchDescriptor<T> SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
 		public SearchDescriptor<T> Stats(params string[] stats) => Qs("stats", stats);
 		///<summary>Specify which field to use for suggestions</summary>
@@ -3112,7 +3112,7 @@ namespace Nest
 		///<summary>Specify which field to use for suggestions</summary>
 		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> field)  => Qs("suggest_field", (Field)field);
 		///<summary>Specify suggest mode</summary>
-		public SearchDescriptor<T> SuggestMode(SuggestMode suggestMode) => Qs("suggest_mode", suggestMode);
+		public SearchDescriptor<T> SuggestMode(SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 		///<summary>How many suggestions to return in response</summary>
 		public SearchDescriptor<T> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
 		///<summary>The source text for which the suggestions should be returned</summary>
@@ -3165,7 +3165,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchShardsDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	
 	}
 	
@@ -3197,7 +3197,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchTemplateDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchTemplateDescriptor<T> Preference(string preference) => Qs("preference", preference);
  		///<summary>
@@ -3211,7 +3211,7 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchTemplateDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public SearchTemplateDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
+		public SearchTemplateDescriptor<T> SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public SearchTemplateDescriptor<T> Explain(bool? explain = true) => Qs("explain", explain);
 		///<summary>Specify whether to profile the query execution</summary>
@@ -3457,7 +3457,7 @@ namespace Nest
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public ListTasksDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
-		public ListTasksDescriptor GroupBy(GroupBy groupBy) => Qs("group_by", groupBy);
+		public ListTasksDescriptor GroupBy(GroupBy? groupBy) => Qs("group_by", groupBy);
 	
 	}
 	
@@ -3524,7 +3524,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public TermVectorsDescriptor<TDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public TermVectorsDescriptor<TDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
+		public TermVectorsDescriptor<TDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -3568,7 +3568,7 @@ namespace Nest
 		[Obsolete("Scheduled to be removed in 7.0, the parent parameter has been deprecated from elasticsearch, please use routing instead directly.")]
 		public UpdateDescriptor<TDocument, TPartialDocument> Parent(string parent) => Qs("parent", parent);
 		///<summary>If `true` then refresh the effected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public UpdateDescriptor<TDocument, TPartialDocument> Refresh(Refresh? refresh) => Qs("refresh", refresh);
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> RetryOnConflict(long? retryOnConflict) => Qs("retry_on_conflict", retryOnConflict);
  		///<summary>
@@ -3584,7 +3584,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Version(long? version) => Qs("version", version);
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType versionType) => Qs("version_type", versionType);
+		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType? versionType) => Qs("version_type", versionType);
 	
 	}
 	
@@ -3617,7 +3617,7 @@ namespace Nest
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public UpdateByQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public UpdateByQueryDescriptor<T> DefaultOperator(DefaultOperator defaultOperator) => Qs("default_operator", defaultOperator);
+		public UpdateByQueryDescriptor<T> DefaultOperator(DefaultOperator? defaultOperator) => Qs("default_operator", defaultOperator);
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public UpdateByQueryDescriptor<T> Df(string df) => Qs("df", df);
 		///<summary>Starting offset (default: 0)</summary>
@@ -3627,9 +3627,9 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpdateByQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>What to do when the update by query hits version conflicts?</summary>
-		public UpdateByQueryDescriptor<T> Conflicts(Conflicts conflicts) => Qs("conflicts", conflicts);
+		public UpdateByQueryDescriptor<T> Conflicts(Conflicts? conflicts) => Qs("conflicts", conflicts);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public UpdateByQueryDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public UpdateByQueryDescriptor<T> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
@@ -3649,7 +3649,7 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public UpdateByQueryDescriptor<T> Scroll(Time scroll) => Qs("scroll", scroll);
 		///<summary>Search operation type</summary>
-		public UpdateByQueryDescriptor<T> SearchType(SearchType searchType) => Qs("search_type", searchType);
+		public UpdateByQueryDescriptor<T> SearchType(SearchType? searchType) => Qs("search_type", searchType);
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
 		public UpdateByQueryDescriptor<T> SearchTimeout(Time searchTimeout) => Qs("search_timeout", searchTimeout);
 		///<summary>Number of hits to return (default: 10)</summary>
@@ -4053,9 +4053,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
-		public PostJobDataDescriptor ResetStart(DateTimeOffset resetStart) => Qs("reset_start", resetStart);
+		public PostJobDataDescriptor ResetStart(DateTimeOffset? resetStart) => Qs("reset_start", resetStart);
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
-		public PostJobDataDescriptor ResetEnd(DateTimeOffset resetEnd) => Qs("reset_end", resetEnd);
+		public PostJobDataDescriptor ResetEnd(DateTimeOffset? resetEnd) => Qs("reset_end", resetEnd);
 	
 	}
 	
@@ -4231,7 +4231,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public ChangePasswordDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public ChangePasswordDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	
 	}
 	
@@ -4277,7 +4277,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public DeleteRoleDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public DeleteRoleDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	
 	}
 	
@@ -4293,7 +4293,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public DeleteRoleMappingDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public DeleteRoleMappingDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	
 	}
 	
@@ -4309,7 +4309,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public DeleteUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public DeleteUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	
 	}
 	
@@ -4326,7 +4326,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public DisableUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public DisableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	
 	}
 	
@@ -4343,7 +4343,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public EnableUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public EnableUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	
 	}
 	
@@ -4422,7 +4422,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public PutRoleDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public PutRoleDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	
 	}
 	
@@ -4438,7 +4438,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public PutRoleMappingDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public PutRoleMappingDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	
 	}
 	
@@ -4454,7 +4454,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
-		public PutUserDescriptor Refresh(Refresh refresh) => Qs("refresh", refresh);
+		public PutUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	
 	}
 	
