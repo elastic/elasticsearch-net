@@ -22,7 +22,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				analyzer = "standard",
 				quote_analyzer = "quote-an",
 				allow_leading_wildcard = true,
-				lowercase_expanded_terms = true,
 				enable_position_increments = true,
 				fuzzy_max_expansions = 3,
 				fuzziness = "AUTO",
@@ -54,10 +53,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 			QuoteAnalyzer = "quote-an",
 			AllowLeadingWildcard = true,
 			MaximumDeterminizedStates = 2,
-#pragma warning disable 618 // usage of lowercase_expanded_terms and locale
-			LowercaseExpandedTerms = true,
-			Locale = "en_US",
-#pragma warning restore 618 // usage of lowercase_expanded_terms and locale
 			EnablePositionIncrements = true,
 			Escape = true,
 			FuzzyPrefixLength = 2,
@@ -86,7 +81,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.QuoteAnalyzer("quote-an")
 				.AllowLeadingWildcard()
 				.MaximumDeterminizedStates(2)
-				.LowercaseExpandedTerms()
 				.EnablePositionIncrements()
 				.Escape()
 				.FuzzyPrefixLength(2)
@@ -99,7 +93,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.MinimumShouldMatch(2)
 				.QuoteFieldSuffix("'")
 				.Lenient()
-				.Locale("en_US")
 				.Timezone("root")
 			);
 #pragma warning restore 618 // usage of lowercase_expanded_terms and locale
