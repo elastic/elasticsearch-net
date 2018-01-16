@@ -32,6 +32,6 @@ namespace Nest
 		double? ILMJelinekMercerSimilarity.Lambda { get; set; }
 
 		/// <inheritdoc />
-		public LMJelinekMercerSimilarityDescriptor Lamdba(double lamda) => Assign(a => a.Lambda = lamda);
+		public LMJelinekMercerSimilarityDescriptor Lamdba(double? lamda) => Assign(a => a.Lambda = lamda);
 	}
 }

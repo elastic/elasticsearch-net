@@ -181,20 +181,37 @@ namespace Tests.CodeStandards
 				where !t.IsAbstract()
 				select t;
 
+			var methods = from d in descriptors
+				from m in d.GetMethods()
+				let ps = m.GetParameters()
+				where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
+				let p = ps.First()
+				let pt = p.ParameterType
+				where (!pt.IsGenericType() || pt.GetGenericTypeDefinition() != typeof(Nullable<>))
+				let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
+
+				//skips
+				where !(m.Name == "Interval" && d == typeof(DateHistogramAggregationDescriptor<>))
+				where !(new [] {"metric", "indexMetric"}.Contains(p.Name))
+				where !(m.Name == "Lang" && dt == typeof(ScriptDescriptorBase<,>))
+				where !(m.Name == "Lang" && dt == typeof(StoredScriptDescriptor))
+				where !(m.Name == "RefreshOnCompleted" && dt == typeof(BulkAllDescriptor<>))
+				where !(m.Name == nameof(ReindexDescriptor<object,object>.OmitIndexCreation) && dt == typeof(ReindexDescriptor<,>))
+				where !(m.Name == nameof(PutMappingDescriptor<object>.AutoMap))
+				where !(m.Name == nameof(PutMappingDescriptor<object>.Dynamic))
+
+
+				select new {m, d, p};
+
 			var breakingDescriptors = new List<string>();
 
-			foreach (var descriptor in descriptors)
+			foreach (var info in methods)
 			{
-				foreach (var descriptorMethod in descriptor.Methods().Where(
-					m => m.GetParameters().Length == 1 &&
-					m.GetParameters().Any(p => p.ParameterType.IsValueType())))
-				{
-					foreach (var parameter in descriptorMethod.GetParameters())
-					{
-						if (!parameter.ParameterType.IsGenericType() || parameter.ParameterType.GetGenericTypeDefinition() != typeof(Nullable<>))
-							breakingDescriptors.Add($"{parameter.Name} on method {descriptorMethod.Name} of {descriptor.FullName} is not nullable");
-					}
-				}
+				var m = info.m;
+				var d = info.d;
+				var p = info.p;
+
+				breakingDescriptors.Add($"{p.Name} on method {m.Name} of {d.FullName} is not nullable");
 			}
 
 			breakingDescriptors.Should().BeEmpty();

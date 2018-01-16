@@ -50,11 +50,11 @@ namespace Nest
 		double? IBM25Similarity.B { get; set; }
 
 		/// <inheritdoc/>
-		public BM25SimilarityDescriptor DiscountOverlaps(bool discount = true) => Assign(a => a.DiscountOverlaps = discount);
+		public BM25SimilarityDescriptor DiscountOverlaps(bool? discount = true) => Assign(a => a.DiscountOverlaps = discount);
 		/// <inheritdoc/>
-		public BM25SimilarityDescriptor K1(double k1) => Assign(a => a.K1 = k1);
+		public BM25SimilarityDescriptor K1(double? k1) => Assign(a => a.K1 = k1);
 		/// <inheritdoc/>
-		public BM25SimilarityDescriptor B(double b) => Assign(a => a.B = b);
+		public BM25SimilarityDescriptor B(double? b) => Assign(a => a.B = b);
 	}
 
 }

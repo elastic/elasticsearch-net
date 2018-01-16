@@ -63,7 +63,7 @@ namespace Nest
 
 		public TDescriptor Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
 
-		public TDescriptor Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
+		public TDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
 
 		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, IPromise<IProperties>> selector) =>
 			Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties))?.Value);

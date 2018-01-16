@@ -68,20 +68,20 @@ namespace Nest
 
 		public GeoShapePropertyDescriptor() : base(FieldType.GeoShape) { }
 
-		public GeoShapePropertyDescriptor<T> Tree(GeoTree tree) => Assign(a => a.Tree = tree);
+		public GeoShapePropertyDescriptor<T> Tree(GeoTree? tree) => Assign(a => a.Tree = tree);
 
-		public GeoShapePropertyDescriptor<T> TreeLevels(int treeLevels) => Assign(a => a.TreeLevels = treeLevels);
+		public GeoShapePropertyDescriptor<T> TreeLevels(int? treeLevels) => Assign(a => a.TreeLevels = treeLevels);
 
-		public GeoShapePropertyDescriptor<T> Strategy(GeoStrategy strategy) => Assign(a => a.Strategy = strategy);
+		public GeoShapePropertyDescriptor<T> Strategy(GeoStrategy? strategy) => Assign(a => a.Strategy = strategy);
 
 		public GeoShapePropertyDescriptor<T> Precision(double precision, DistanceUnit unit) =>
 			Assign(a => a.Precision = new Distance(precision, unit));
 
-		public GeoShapePropertyDescriptor<T> Orientation(GeoOrientation orientation) => Assign(a => a.Orientation = orientation);
+		public GeoShapePropertyDescriptor<T> Orientation(GeoOrientation? orientation) => Assign(a => a.Orientation = orientation);
 
-		public GeoShapePropertyDescriptor<T> DistanceErrorPercentage(double distanceErrorPercentage) =>
+		public GeoShapePropertyDescriptor<T> DistanceErrorPercentage(double? distanceErrorPercentage) =>
 			Assign(a => a.DistanceErrorPercentage = distanceErrorPercentage);
 
-		public GeoShapePropertyDescriptor<T> PointsOnly(bool pointsOnly = true) => Assign(a => a.PointsOnly = pointsOnly);
+		public GeoShapePropertyDescriptor<T> PointsOnly(bool? pointsOnly = true) => Assign(a => a.PointsOnly = pointsOnly);
 	}
 }

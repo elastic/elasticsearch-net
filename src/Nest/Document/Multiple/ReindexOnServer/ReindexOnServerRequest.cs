@@ -56,6 +56,6 @@ namespace Nest
 
 		public ReindexOnServerDescriptor Size(long? size) => Assign(a => a.Size = size);
 
-        public ReindexOnServerDescriptor Conflicts(Conflicts conflicts) => Assign(a => a.Conflicts = conflicts);
+        public ReindexOnServerDescriptor Conflicts(Conflicts? conflicts) => Assign(a => a.Conflicts = conflicts);
 	}
 }

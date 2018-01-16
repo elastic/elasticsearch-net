@@ -52,6 +52,7 @@ namespace Nest
 		public string Similarity { get; set; }
 	}
 
+	//OBSOLETE
 	public class AllFieldDescriptor
 		: DescriptorBase<AllFieldDescriptor, IAllField>, IAllField
 	{
@@ -66,17 +67,17 @@ namespace Nest
 		string IAllField.SearchAnalyzer { get; set; }
 		string IAllField.Similarity { get; set; }
 
-		public AllFieldDescriptor Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
+		public AllFieldDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
 
-		public AllFieldDescriptor Store(bool store = true) => Assign(a => a.Store = store);
+		public AllFieldDescriptor Store(bool? store = true) => Assign(a => a.Store = store);
 
-		public AllFieldDescriptor StoreTermVectors(bool store = true) => Assign(a => a.StoreTermVectors = store);
+		public AllFieldDescriptor StoreTermVectors(bool? store = true) => Assign(a => a.StoreTermVectors = store);
 
-		public AllFieldDescriptor StoreTermVectorOffsets(bool store = true) => Assign(a => a.StoreTermVectorOffsets = store);
+		public AllFieldDescriptor StoreTermVectorOffsets(bool? store = true) => Assign(a => a.StoreTermVectorOffsets = store);
 
-		public AllFieldDescriptor StoreTermVectorPositions(bool store = true) => Assign(a => a.StoreTermVectorPositions = store);
+		public AllFieldDescriptor StoreTermVectorPositions(bool? store = true) => Assign(a => a.StoreTermVectorPositions = store);
 
-		public AllFieldDescriptor StoreTermVectorPayloads(bool store = true) => Assign(a => a.StoreTermVectorPayloads = store);
+		public AllFieldDescriptor StoreTermVectorPayloads(bool? store = true) => Assign(a => a.StoreTermVectorPayloads = store);
 
 		public AllFieldDescriptor Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 

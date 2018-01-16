@@ -9,7 +9,7 @@ namespace Nest
 		IndexName Index { get; set; }
 
 		[JsonProperty("shard")]
-		int Shard { get; set; }
+		int? Shard { get; set; }
 
 		[JsonProperty("node")]
 		string Node { get; set; }
@@ -23,21 +23,21 @@ namespace Nest
 
 		public IndexName Index { get; set; }
 
-		public int Shard { get; set; }
+		public int? Shard { get; set; }
 
 		public string Node { get; set; }
 
 		public bool? AllowPrimary { get; set; }
 	}
 
-	public class CancelClusterRerouteCommandDescriptor 
+	public class CancelClusterRerouteCommandDescriptor
 		: DescriptorBase<CancelClusterRerouteCommandDescriptor, ICancelClusterRerouteCommand>, ICancelClusterRerouteCommand
 	{
 		string IClusterRerouteCommand.Name => "cancel";
 
 		IndexName ICancelClusterRerouteCommand.Index { get; set; }
 
-		int ICancelClusterRerouteCommand.Shard { get; set; }
+		int? ICancelClusterRerouteCommand.Shard { get; set; }
 
 		string ICancelClusterRerouteCommand.Node { get; set; }
 
@@ -47,7 +47,7 @@ namespace Nest
 
 		public CancelClusterRerouteCommandDescriptor Index<T>() where T : class => Assign(a => a.Index = typeof(T));
 
-		public CancelClusterRerouteCommandDescriptor Shard(int shard) => Assign(a => a.Shard = shard);
+		public CancelClusterRerouteCommandDescriptor Shard(int? shard) => Assign(a => a.Shard = shard);
 
 		public CancelClusterRerouteCommandDescriptor Node(string node) => Assign(a => a.Node = node);
 

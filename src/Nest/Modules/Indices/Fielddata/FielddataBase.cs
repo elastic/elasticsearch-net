@@ -30,6 +30,6 @@ namespace Nest
 		public TDescriptor Filter(Func<FielddataFilterDescriptor, IFielddataFilter> filterSelector) =>
 			Assign(a => a.Filter = filterSelector(new FielddataFilterDescriptor()));
 
-		public TDescriptor Loading(FielddataLoading loading) => Assign(a => a.Loading = loading);
+		public TDescriptor Loading(FielddataLoading? loading) => Assign(a => a.Loading = loading);
 	}
 }

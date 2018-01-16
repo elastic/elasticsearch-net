@@ -31,6 +31,6 @@ namespace Nest
 		int? ILMDirichletSimilarity.Mu { get; set; }
 
 		/// <inheritdoc />
-		public LMDirichletSimilarityDescriptor Mu(int mu) => Assign(a => a.Mu = mu);
+		public LMDirichletSimilarityDescriptor Mu(int? mu) => Assign(a => a.Mu = mu);
 	}
 }

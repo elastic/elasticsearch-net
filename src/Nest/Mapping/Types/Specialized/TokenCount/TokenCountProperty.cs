@@ -48,8 +48,8 @@ namespace Nest
 		double? ITokenCountProperty.NullValue { get; set; }
 
 		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
-		public TokenCountPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
-		public TokenCountPropertyDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
-		public TokenCountPropertyDescriptor<T> NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
+		public TokenCountPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+		public TokenCountPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+		public TokenCountPropertyDescriptor<T> NullValue(double? nullValue) => Assign(a => a.NullValue = nullValue);
 	}
 }

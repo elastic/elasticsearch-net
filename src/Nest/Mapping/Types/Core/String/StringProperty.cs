@@ -86,25 +86,25 @@ namespace Nest
 		/// </summary>
 		public StringPropertyDescriptor<T> NotAnalyzed() => Index(FieldIndexOption.NotAnalyzed);
 
-		public StringPropertyDescriptor<T> Index(FieldIndexOption index) => Assign(a => a.Index = index);
+		public StringPropertyDescriptor<T> Index(FieldIndexOption? index) => Assign(a => a.Index = index);
 
-		public StringPropertyDescriptor<T> TermVector(TermVectorOption termVector) => Assign(a => a.TermVector = termVector);
+		public StringPropertyDescriptor<T> TermVector(TermVectorOption? termVector) => Assign(a => a.TermVector = termVector);
 
-		public StringPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
+		public StringPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
 
 		public StringPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
 
-		public StringPropertyDescriptor<T> IndexOptions(IndexOptions indexOptions) => Assign(a => a.IndexOptions = indexOptions);
+		public StringPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(a => a.IndexOptions = indexOptions);
 
 		public StringPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
 		public StringPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
 
-		public StringPropertyDescriptor<T> Norms(bool enabled = true) => Assign(a => a.Norms = enabled);
+		public StringPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(a => a.Norms = enabled);
 
-		public StringPropertyDescriptor<T> IgnoreAbove(int ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
+		public StringPropertyDescriptor<T> IgnoreAbove(int? ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
 
-		public StringPropertyDescriptor<T> PositionIncrementGap(int positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
+		public StringPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
 
 		public StringPropertyDescriptor<T> Fielddata(Func<StringFielddataDescriptor, IStringFielddata> selector) =>
 			Assign(a => a.Fielddata = selector?.Invoke(new StringFielddataDescriptor()));

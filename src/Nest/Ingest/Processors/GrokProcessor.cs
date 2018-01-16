@@ -61,7 +61,7 @@ namespace Nest
 		public GrokProcessorDescriptor<T> PatternDefinitions(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> patternDefinitions) =>
 			Assign(a => a.PatternDefinitions = patternDefinitions?.Invoke(new FluentDictionary<string, string>()));
 
-		public GrokProcessorDescriptor<T> TraceMatch(bool traceMatch = true) =>
+		public GrokProcessorDescriptor<T> TraceMatch(bool? traceMatch = true) =>
 			Assign(a => a.TraceMatch = traceMatch);
 	}
 }

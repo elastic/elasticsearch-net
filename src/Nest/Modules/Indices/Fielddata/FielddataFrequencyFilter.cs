@@ -30,10 +30,10 @@ namespace Nest
 		double? IFielddataFrequencyFilter.Max { get; set; }
 		int? IFielddataFrequencyFilter.MinSegmentSize { get; set; }
 
-		public FielddataFrequencyFilterDescriptor Min(double min) => Assign(a => a.Min = min);
+		public FielddataFrequencyFilterDescriptor Min(double? min) => Assign(a => a.Min = min);
 
-		public FielddataFrequencyFilterDescriptor Max(double max) => Assign(a => a.Max = max);
+		public FielddataFrequencyFilterDescriptor Max(double? max) => Assign(a => a.Max = max);
 
-		public FielddataFrequencyFilterDescriptor MinSegmentSize(int minSegmentSize) => Assign(a => a.MinSegmentSize = minSegmentSize);
+		public FielddataFrequencyFilterDescriptor MinSegmentSize(int? minSegmentSize) => Assign(a => a.MinSegmentSize = minSegmentSize);
 	}
 }

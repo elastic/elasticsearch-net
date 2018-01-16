@@ -86,7 +86,7 @@ namespace Nest
 
 		public TDescriptor Version(long? version) => Assign(a => a.Version = version);
 
-		public TDescriptor VersionType(VersionType versionType) => Assign(a => a.VersionType = versionType);
+		public TDescriptor VersionType(VersionType? versionType) => Assign(a => a.VersionType = versionType);
 
 		public TDescriptor Routing(Routing routing) => Assign(a => a.Routing = routing);
 

@@ -64,22 +64,22 @@ namespace Nest
 		INumericFielddata INumberProperty.Fielddata { get; set; }
 		double? INumberProperty.ScalingFactor { get; set; }
 
-		public TDescriptor Type(NumberType type) => Assign(a => a.Type = type.GetStringValue());
+		public TDescriptor Type(NumberType? type) => Assign(a => a.Type = type?.GetStringValue());
 
-		public TDescriptor Index(bool index) => Assign(a => a.Index = index);
+		public TDescriptor Index(bool? index) => Assign(a => a.Index = index);
 
-		public TDescriptor Boost(double boost) => Assign(a => a.Boost = boost);
+		public TDescriptor Boost(double? boost) => Assign(a => a.Boost = boost);
 
-		public TDescriptor NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
+		public TDescriptor NullValue(double? nullValue) => Assign(a => a.NullValue = nullValue);
 
-		public TDescriptor IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
+		public TDescriptor IgnoreMalformed(bool? ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 
-		public TDescriptor Coerce(bool coerce = true) => Assign(a => a.Coerce = coerce);
+		public TDescriptor Coerce(bool? coerce = true) => Assign(a => a.Coerce = coerce);
 
 		public TDescriptor Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
 			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
 
-		public TDescriptor ScalingFactor(double scalingFactor) => Assign(a => a.ScalingFactor = scalingFactor);
+		public TDescriptor ScalingFactor(double? scalingFactor) => Assign(a => a.ScalingFactor = scalingFactor);
 	}
 
 	public class NumberPropertyDescriptor<T> : NumberPropertyDescriptorBase<NumberPropertyDescriptor<T>, INumberProperty, T>

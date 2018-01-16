@@ -57,7 +57,7 @@ namespace Nest
 		public virtual TMetricAggregation Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
-		public TMetricAggregation Missing(double missing) => Assign(a => a.Missing = missing);
+		public TMetricAggregation Missing(double? missing) => Assign(a => a.Missing = missing);
 
 		public TMetricAggregation Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
 			Assign(a => a.Meta = selector?.Invoke(new FluentDictionary<string, object>()));

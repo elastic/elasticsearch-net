@@ -50,9 +50,9 @@ namespace Nest
 
 		public ReindexDestinationDescriptor Routing(ReindexRouting routing) => Assign(a => a.Routing = routing);
 
-		public ReindexDestinationDescriptor OpType(OpType opType) => Assign(a => a.OpType = opType);
+		public ReindexDestinationDescriptor OpType(OpType? opType) => Assign(a => a.OpType = opType);
 
-		public ReindexDestinationDescriptor VersionType(VersionType versionType) => Assign(a => a.VersionType = versionType);
+		public ReindexDestinationDescriptor VersionType(VersionType? versionType) => Assign(a => a.VersionType = versionType);
 
 		public ReindexDestinationDescriptor Index(IndexName index) => Assign(a => a.Index = index);
 

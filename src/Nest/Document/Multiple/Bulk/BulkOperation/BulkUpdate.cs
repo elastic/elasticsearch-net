@@ -187,14 +187,14 @@ namespace Nest
 		/// with <see cref="Upsert(TDocument)"/>, setting <see cref="DocAsUpsert"/> to <c>true</c> will
 		/// use the contents of doc as the upsert value.
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool partialDocumentAsUpsert = true) =>
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? partialDocumentAsUpsert = true) =>
 			Assign(a => a.DocAsUpsert = partialDocumentAsUpsert);
 
 		/// <summary>
 		/// If you would like your script to run regardless of whether the document exists or not — i.e. the script handles
 		/// initializing the document instead of the upsert element — then set scripted_upsert to true
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool scriptedUpsert = true) =>
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true) =>
 			Assign(a => a.ScriptedUpsert = scriptedUpsert);
 
 		/// <summary>

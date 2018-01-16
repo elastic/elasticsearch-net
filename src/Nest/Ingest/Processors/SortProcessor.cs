@@ -49,7 +49,7 @@ namespace Nest
 		public SortProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);
 
-		public SortProcessorDescriptor<T> Order(SortOrder order = SortOrder.Ascending) =>
+		public SortProcessorDescriptor<T> Order(SortOrder? order = SortOrder.Ascending) =>
 			Assign(a => a.Order = order);
 	}
 }

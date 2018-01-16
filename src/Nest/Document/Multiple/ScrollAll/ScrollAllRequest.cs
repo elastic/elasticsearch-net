@@ -84,7 +84,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc/>
-		public ScrollAllDescriptor<T> MaxDegreeOfParallelism(int maxDegreeOfParallelism) =>
+		public ScrollAllDescriptor<T> MaxDegreeOfParallelism(int? maxDegreeOfParallelism) =>
 			Assign(a => a.MaxDegreeOfParallelism = maxDegreeOfParallelism);
 
 		/// <inheritdoc/>

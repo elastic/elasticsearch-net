@@ -179,7 +179,7 @@ namespace Nest
 		public BulkAllDescriptor<T> RefreshOnCompleted(bool refresh = true) => Assign(p => p.RefreshOnCompleted = refresh);
 
 		/// <inheritdoc />
-		public BulkAllDescriptor<T> Refresh(Refresh refresh) => Assign(p => p.Refresh = refresh);
+		public BulkAllDescriptor<T> Refresh(Refresh? refresh) => Assign(p => p.Refresh = refresh);
 
 		/// <inheritdoc />
 		public BulkAllDescriptor<T> Routing(Routing routing) => Assign(p => p.Routing = routing);

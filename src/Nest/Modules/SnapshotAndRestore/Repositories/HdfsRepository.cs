@@ -88,7 +88,7 @@ namespace Nest
 		/// whether to load the default Hadoop configuration (default) or not
 		/// </summary>
 		/// <param name="loadDefaults"></param>
-		public HdfsRepositorySettingsDescriptor LoadDefaults(bool loadDefaults = true) => Assign(a => a.LoadDefaults = loadDefaults);
+		public HdfsRepositorySettingsDescriptor LoadDefaults(bool? loadDefaults = true) => Assign(a => a.LoadDefaults = loadDefaults);
 
 		/// <summary>
 		/// Hadoop configuration XML to be loaded (use commas for multi values)
@@ -109,13 +109,13 @@ namespace Nest
 		/// affect index files that are already compressed by default. Defaults to false.
 		/// </summary>
 		/// <param name="compress"></param>
-		public HdfsRepositorySettingsDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
+		public HdfsRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
-		public HdfsRepositorySettingsDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+		public HdfsRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 
 		/// <summary>
 		///  Big files can be broken down into chunks during snapshotting if needed.
@@ -129,7 +129,7 @@ namespace Nest
 	public class HdfsRepositoryDescriptor
 		: DescriptorBase<HdfsRepositoryDescriptor, IHdfsRepository>, IHdfsRepository
 	{
-		string ISnapshotRepository.Type { get { return "hdfs"; } }
+		string ISnapshotRepository.Type => "hdfs";
 
 		IHdfsRepositorySettings IRepository<IHdfsRepositorySettings>.Settings { get; set; }
 

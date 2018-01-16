@@ -81,13 +81,13 @@ namespace Nest
 		public DatePropertyDescriptor() : base(FieldType.Date) { }
 
 		/// <inheritdoc/>
-		public DatePropertyDescriptor<T> Index(bool index) => Assign(a => a.Index = index);
+		public DatePropertyDescriptor<T> Index(bool? index) => Assign(a => a.Index = index);
 		/// <inheritdoc/>
-		public DatePropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
+		public DatePropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
 		/// <inheritdoc/>
-		public DatePropertyDescriptor<T> NullValue(DateTime nullValue) => Assign(a => a.NullValue = nullValue);
+		public DatePropertyDescriptor<T> NullValue(DateTime? nullValue) => Assign(a => a.NullValue = nullValue);
 		/// <inheritdoc/>
-		public DatePropertyDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
+		public DatePropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 		/// <inheritdoc/>
 		public DatePropertyDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 		/// <inheritdoc/>

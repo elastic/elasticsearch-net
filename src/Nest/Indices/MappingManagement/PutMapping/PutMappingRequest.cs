@@ -124,7 +124,7 @@ namespace Nest
 		public PutMappingDescriptor<T> Dynamic(Union<bool, DynamicMapping> dynamic) => Assign(a => a.Dynamic = dynamic);
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
+		public PutMappingDescriptor<T> Dynamic(bool? dynamic = true) => Assign(a => a.Dynamic = dynamic);
 
 #pragma warning disable 618
 		/// <inheritdoc/>
@@ -144,19 +144,19 @@ namespace Nest
 		public PutMappingDescriptor<T> SizeField(Func<SizeFieldDescriptor, ISizeField> sizeFieldSelector) => Assign(a => a.SizeField = sizeFieldSelector?.Invoke(new SizeFieldDescriptor()));
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> DisableSizeField(bool disabled = true) => Assign(a => a.SizeField = new SizeField { Enabled = !disabled });
+		public PutMappingDescriptor<T> DisableSizeField(bool? disabled = true) => Assign(a => a.SizeField = new SizeField { Enabled = !disabled });
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> DisableIndexField(bool disabled = true) => Assign(a => a.IndexField = new IndexField { Enabled = !disabled });
+		public PutMappingDescriptor<T> DisableIndexField(bool? disabled = true) => Assign(a => a.IndexField = new IndexField { Enabled = !disabled });
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> DynamicDateFormats(IEnumerable<string> dateFormats) => Assign(a => a.DynamicDateFormats = dateFormats);
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> DateDetection(bool detect = true) => Assign(a => a.DateDetection = detect);
+		public PutMappingDescriptor<T> DateDetection(bool? detect = true) => Assign(a => a.DateDetection = detect);
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> NumericDetection(bool detect = true) => Assign(a => a.NumericDetection = detect);
+		public PutMappingDescriptor<T> NumericDetection(bool? detect = true) => Assign(a => a.NumericDetection = detect);
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> SourceField(Func<SourceFieldDescriptor, ISourceField> sourceFieldSelector) => Assign(a => a.SourceField = sourceFieldSelector?.Invoke(new SourceFieldDescriptor()));

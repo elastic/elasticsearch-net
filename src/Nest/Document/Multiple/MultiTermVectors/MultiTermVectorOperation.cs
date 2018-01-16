@@ -103,22 +103,22 @@ namespace Nest
 
 		public MultiTermVectorOperationDescriptor<T> Document(T document) => Assign(a => a.Document = document);
 
-		public MultiTermVectorOperationDescriptor<T> Offsets(bool offsets = true) => Assign(a => a.Offsets = offsets);
+		public MultiTermVectorOperationDescriptor<T> Offsets(bool? offsets = true) => Assign(a => a.Offsets = offsets);
 
-		public MultiTermVectorOperationDescriptor<T> Payloads(bool payloads = true) => Assign(a => a.Payloads = payloads);
+		public MultiTermVectorOperationDescriptor<T> Payloads(bool? payloads = true) => Assign(a => a.Payloads = payloads);
 
-		public MultiTermVectorOperationDescriptor<T> Positions(bool positions = true) => Assign(a => a.Positions = positions);
+		public MultiTermVectorOperationDescriptor<T> Positions(bool? positions = true) => Assign(a => a.Positions = positions);
 
-		public MultiTermVectorOperationDescriptor<T> TermStatistics(bool termStatistics = true) => Assign(a => a.TermStatistics = termStatistics);
+		public MultiTermVectorOperationDescriptor<T> TermStatistics(bool? termStatistics = true) => Assign(a => a.TermStatistics = termStatistics);
 
-		public MultiTermVectorOperationDescriptor<T> FieldStatistics(bool fieldStatistics = true) => Assign(a => a.FieldStatistics = fieldStatistics);
+		public MultiTermVectorOperationDescriptor<T> FieldStatistics(bool? fieldStatistics = true) => Assign(a => a.FieldStatistics = fieldStatistics);
 
 		public MultiTermVectorOperationDescriptor<T> Filter(Func<TermVectorFilterDescriptor, ITermVectorFilter> filterSelector) =>
 			Assign(a => a.Filter = filterSelector?.Invoke(new TermVectorFilterDescriptor()));
 
 		public MultiTermVectorOperationDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
 
-		public MultiTermVectorOperationDescriptor<T> VersionType(VersionType versionType) => Assign(a => a.VersionType = versionType);
+		public MultiTermVectorOperationDescriptor<T> VersionType(VersionType? versionType) => Assign(a => a.VersionType = versionType);
 
 		public MultiTermVectorOperationDescriptor<T> Routing(Routing routing) => Assign(a => a.Routing = routing);
 	}

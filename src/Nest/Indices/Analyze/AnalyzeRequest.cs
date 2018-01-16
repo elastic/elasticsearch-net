@@ -145,7 +145,7 @@ namespace Nest
 		public AnalyzeDescriptor Text(IEnumerable<string> text) => Assign(a => a.Text = text);
 
 		///<summary>Return more details, and output the analyzer chain per step in the process</summary>
-		public AnalyzeDescriptor Explain(bool explain = true) => Assign(a => a.Explain = explain);
+		public AnalyzeDescriptor Explain(bool? explain = true) => Assign(a => a.Explain = explain);
 
 		///<summary>Filter only certain token attributes to be returned</summary>
 		public AnalyzeDescriptor Attributes(params string[] attributes) => Assign(a => a.Attributes = attributes);
