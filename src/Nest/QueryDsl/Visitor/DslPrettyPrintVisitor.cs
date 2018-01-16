@@ -99,10 +99,6 @@ namespace Nest
 
 		public virtual void Visit(IIdsQuery query) => Write("ids");
 
-#pragma warning disable 618
-		public virtual void Visit(IIndicesQuery query) => Write("indices");
-#pragma warning restore 618
-
 		public virtual void Visit(IMatchQuery query) => Write("match", query.Field);
 
 		public virtual void Visit(IMatchPhraseQuery query) => Write("match_phrase", query.Field);
@@ -154,10 +150,6 @@ namespace Nest
 		public virtual void Visit(IGeoDistanceQuery query) => Write("geo_distance");
 
 		public virtual void Visit(IGeoHashCellQuery filter) => Write("geohash_cell");
-
-#pragma warning disable 618
-		public virtual void Visit(ITemplateQuery query) => Write("template");
-#pragma warning restore 618
 
 		public virtual void Visit(ISpanMultiTermQuery query) => Write("span_multi_term");
 

@@ -164,9 +164,7 @@ namespace Nest
 		{
 			if (o == null) return false;
 			if (!(prop.ValueProvider.GetValue(o) is QueryContainer q)) return false;
-			if (q.IsWritable) return true;
-			var nq = q as NoMatchQueryContainer;
-			return nq?.Shortcut != null;
+			return q.IsWritable;
 		}
 
 		protected static bool ShouldSerializeQueryContainers(object o, JsonProperty prop)

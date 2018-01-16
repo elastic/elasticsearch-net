@@ -56,10 +56,8 @@ namespace Nest.JsonNetSerializer
 		private static bool ShouldSerializeQueryContainer(object o, JsonProperty prop)
 		{
 			if (o == null) return false;
-			if (!(prop.ValueProvider.GetValue(o) is QueryContainer q)) return false;
-			if (((IQueryContainer)q).IsWritable) return true;
-			var nq = q as NoMatchQueryContainer;
-			return nq?.Shortcut != null;
+			if (!(prop.ValueProvider.GetValue(o) is IQueryContainer q)) return false;
+			return q.IsWritable;
 		}
 
 		private static bool ShouldSerializeQueryContainers(object o, JsonProperty prop)

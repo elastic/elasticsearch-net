@@ -10,7 +10,6 @@
 		Should,
 		PositiveQuery,
 		NegativeQuery,
-		NoMatchQuery,
 		Span,
 
 	}

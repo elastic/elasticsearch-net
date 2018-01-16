@@ -130,17 +130,8 @@ namespace Nest
 		[JsonProperty("nested")]
 		INestedQuery Nested { get; set; }
 
-		[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
-		[JsonProperty("indices")]
-		IIndicesQuery Indices { get; set; }
-
 		[JsonProperty("function_score")]
 		IFunctionScoreQuery FunctionScore { get; set; }
-
-#pragma warning disable 618
-		[JsonProperty("template")]
-		ITemplateQuery Template { get; set; }
-#pragma warning restore 618
 
 		[JsonProperty("geo_bounding_box")]
 		IGeoBoundingBoxQuery GeoBoundingBox { get; set; }

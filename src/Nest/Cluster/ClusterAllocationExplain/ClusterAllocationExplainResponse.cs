@@ -202,20 +202,6 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]
-	[Obsolete("Removed in Elasticsearch 5.2")]
-	public enum FinalDecision
-	{
-		[EnumMember(Value = "YES")]
-		Yes,
-
-		[EnumMember(Value = "NO")]
-		No,
-
-		[EnumMember(Value = "ALREADY_ASSIGNED")]
-		AlreadyAssigned
-	}
-
-	[JsonConverter(typeof(StringEnumConverter))]
 	public enum StoreCopy
 	{
 		[EnumMember(Value = "NONE")]

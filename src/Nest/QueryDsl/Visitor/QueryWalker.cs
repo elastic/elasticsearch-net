@@ -61,7 +61,6 @@ namespace Nest
 			VisitQuery(qd.GeoDistance, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoBoundingBox, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoHashCell, visitor, (v, d) => v.Visit(d));
-			VisitQuery(qd.Template, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.RawQuery, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Percolate, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.ParentId, visitor, (v, d) => v.Visit(d));
@@ -108,14 +107,6 @@ namespace Nest
 				v.Visit(d);
 				Accept(v, d.Query);
 			});
-#pragma warning disable 618
-			VisitQuery(qd.Indices, visitor, (v, d) =>
-			{
-				v.Visit(d);
-				Accept(v, d.Query);
-				Accept(v, d.NoMatchQuery, VisitorScope.NoMatchQuery);
-			});
-#pragma warning restore 618
 			VisitQuery(qd.Nested, visitor, (v, d) =>
 			{
 				v.Visit(d);

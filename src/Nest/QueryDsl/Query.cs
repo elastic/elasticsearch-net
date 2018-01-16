@@ -83,10 +83,6 @@ namespace Nest
 		public static QueryContainer Ids(Func<IdsQueryDescriptor, IIdsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Ids(selector);
 
-		[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
-		public static QueryContainer Indices(Func<IndicesQueryDescriptor<T>, IIndicesQuery> selector) =>
-			new QueryContainerDescriptor<T>().Indices(selector);
-
 		public static QueryContainer Match(Func<MatchQueryDescriptor<T>, IMatchQuery> selector) =>
 			new QueryContainerDescriptor<T>().Match(selector);
 
@@ -167,10 +163,6 @@ namespace Nest
 
 		public static QueryContainer SpanFieldMasking(Func<SpanFieldMaskingQueryDescriptor<T>, ISpanFieldMaskingQuery> selector) =>
 			new QueryContainerDescriptor<T>().SpanFieldMasking(selector);
-
-		[Obsolete("Deprecated in 5.0.0. Use Search Template API instead")]
-		public static QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
-			new QueryContainerDescriptor<T>().Template(selector);
 
 		public static QueryContainer Term(Expression<Func<T, object>> fieldDescriptor, object value, double? boost = null, string name = null) =>
 			new QueryContainerDescriptor<T>().Term(fieldDescriptor, value, boost, name);

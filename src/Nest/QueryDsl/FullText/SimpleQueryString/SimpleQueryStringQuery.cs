@@ -22,14 +22,6 @@ namespace Nest
 		[JsonProperty("flags")]
 		SimpleQueryStringFlags? Flags { get; set; }
 
-		[JsonProperty("locale")]
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		string Locale { get; set; }
-
-		[JsonProperty("lowercase_expanded_terms")]
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		bool? LowercaseExpandedTerms { get; set; }
-
 		[JsonProperty("lenient")]
 		bool? Lenient { get; set; }
 
@@ -51,10 +43,6 @@ namespace Nest
 		public string Analyzer { get; set; }
 		public Operator? DefaultOperator { get; set; }
 		public SimpleQueryStringFlags? Flags { get; set; }
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public string Locale { get; set; }
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public bool? LowercaseExpandedTerms { get; set; }
 		public bool? Lenient { get; set; }
 		public bool? AnalyzeWildcard { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
@@ -74,10 +62,6 @@ namespace Nest
 		string ISimpleQueryStringQuery.Analyzer { get; set; }
 		Operator? ISimpleQueryStringQuery.DefaultOperator { get; set; }
 		SimpleQueryStringFlags? ISimpleQueryStringQuery.Flags { get; set; }
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		string ISimpleQueryStringQuery.Locale { get; set; }
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		bool? ISimpleQueryStringQuery.LowercaseExpandedTerms { get; set; }
 		bool? ISimpleQueryStringQuery.AnalyzeWildcard { get; set; }
 		bool? ISimpleQueryStringQuery.Lenient { get; set; }
 		MinimumShouldMatch ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
@@ -95,13 +79,6 @@ namespace Nest
 		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator? op) => Assign(a => a.DefaultOperator = op);
 
 		public SimpleQueryStringQueryDescriptor<T> Flags(SimpleQueryStringFlags? flags) => Assign(a => a.Flags = flags);
-
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public SimpleQueryStringQueryDescriptor<T> Locale(string locale) => Assign(a => a.Locale = locale);
-
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		public SimpleQueryStringQueryDescriptor<T> LowercaseExpandedTerms(bool? lowercaseExpandedTerms = true) =>
-			Assign(a => a.LowercaseExpandedTerms = lowercaseExpandedTerms);
 
 		public SimpleQueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) =>
 			Assign(a => a.AnalyzeWildcard = analyzeWildcard);

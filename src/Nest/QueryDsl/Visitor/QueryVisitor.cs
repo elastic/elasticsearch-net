@@ -37,9 +37,6 @@
 		void Visit(IHasChildQuery query);
 		void Visit(IHasParentQuery query);
 		void Visit(IIdsQuery query);
-#pragma warning disable 618
-		void Visit(IIndicesQuery query);
-#pragma warning restore 618
 		void Visit(IMatchQuery query);
 		void Visit(IMatchPhraseQuery query);
 		void Visit(IMatchPhrasePrefixQuery query);
@@ -66,9 +63,6 @@
 		void Visit(IDateRangeQuery query);
 		void Visit(INumericRangeQuery query);
 		void Visit(ITermRangeQuery query);
-#pragma warning disable 618
-		void Visit(ITemplateQuery query);
-#pragma warning restore 618
 		void Visit(ISpanFirstQuery query);
 		void Visit(ISpanNearQuery query);
 		void Visit(ISpanNotQuery query);
@@ -149,10 +143,6 @@
 
 		public virtual void Visit(IIdsQuery query) { }
 
-#pragma warning disable 618
-		public virtual void Visit(IIndicesQuery query) { }
-#pragma warning restore 618
-
 		public virtual void Visit(IMatchQuery query) { }
 
 		public virtual void Visit(IMatchPhraseQuery query) { }
@@ -210,10 +200,6 @@
 		public virtual void Visit(IGeoDistanceQuery query) { }
 
 		public virtual void Visit(IGeoHashCellQuery query) { }
-
-#pragma warning disable 618
-		public virtual void Visit(ITemplateQuery query) { }
-#pragma warning restore 618
 
 		public virtual void Visit(IGeoShapeMultiPointQuery query) { }
 
