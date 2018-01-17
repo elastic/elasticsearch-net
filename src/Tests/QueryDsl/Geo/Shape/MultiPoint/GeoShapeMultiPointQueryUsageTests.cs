@@ -30,7 +30,6 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 			Field = Field<Project>(p=>p.Location),
 			Shape = new MultiPointGeoShape(this._coordinates),
 			Relation = GeoShapeRelation.Intersects,
-			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -40,7 +39,6 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
 				.Relation(GeoShapeRelation.Intersects)
-				.IgnoreUnmapped()
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeMultiPointQuery>(a => a.GeoShape as IGeoShapeMultiPointQuery)

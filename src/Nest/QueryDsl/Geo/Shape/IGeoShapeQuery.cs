@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof (CompositeJsonConverter<GeoShapeQueryJsonConverter, FieldNameQueryJsonConverter<GeoShapeCircleQuery>>))]
+	[JsonConverter(typeof (CompositeJsonConverter<GeoShapeQueryJsonConverter, GeoShapeQueryFieldNameConverter>))]
 	public interface IGeoShapeQuery : IFieldNameQuery
 	{
 		/// <summary>
@@ -12,12 +12,6 @@ namespace Nest
 		[JsonProperty("relation")]
 		GeoShapeRelation? Relation { get; set; }
 
-		/// <summary>
-		/// Will ignore an unmapped field and will not match any documents for this query.
-		/// This can be useful when querying multiple indexes which might have different mappings.
-		/// </summary>
-		[JsonProperty("ignore_unmapped")]
-		bool? IgnoreUnmapped { get; set; }
 	}
 
 	public abstract class GeoShapeQueryBase : FieldNameQueryBase, IGeoShapeQuery
@@ -27,11 +21,6 @@ namespace Nest
 		/// </summary>
 		public GeoShapeRelation? Relation { get; set; }
 
-		/// <summary>
-		/// Will ignore an unmapped field and will not match any documents for this query.
-		/// This can be useful when querying multiple indexes which might have different mappings.
-		/// </summary>
-		public bool? IgnoreUnmapped { get; set; }
 	}
 
 	public abstract class GeoShapeQueryDescriptorBase<TDescriptor, TInterface, T>
@@ -40,7 +29,6 @@ namespace Nest
 		where TInterface : class, IGeoShapeQuery
 		where T : class
 	{
-		bool? IGeoShapeQuery.IgnoreUnmapped { get; set; }
 		GeoShapeRelation? IGeoShapeQuery.Relation { get; set; }
 
 		/// <summary>
@@ -48,10 +36,10 @@ namespace Nest
 		/// </summary>
 		public TDescriptor Relation(GeoShapeRelation? relation) => Assign(a => a.Relation = relation);
 
-		/// <summary>
-		/// Will ignore an unmapped field and will not match any documents for this query.
-		/// This can be useful when querying multiple indexes which might have different mappings.
-		/// </summary>
-		public TDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+//		/// <summary>
+//		/// Will ignore an unmapped field and will not match any documents for this query.
+//		/// This can be useful when querying multiple indexes which might have different mappings.
+//		/// </summary>
+//		public TDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }

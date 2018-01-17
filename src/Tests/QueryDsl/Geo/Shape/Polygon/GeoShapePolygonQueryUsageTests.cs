@@ -26,6 +26,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 		protected override object ShapeJson => new
 		{
 			type = "polygon",
+			ignore_unmapped = true,
 			coordinates = this._coordinates
 		};
 
@@ -34,9 +35,8 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p => p.Location),
-			Shape = new PolygonGeoShape(this._coordinates),
+			Shape = new PolygonGeoShape(this._coordinates) { IgnoreUnmapped = true},
 			Relation = GeoShapeRelation.Intersects,
-			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -44,9 +44,8 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.Location)
-				.Coordinates(this._coordinates)
+				.Coordinates(this._coordinates, ignoreUnmapped: true)
 				.Relation(GeoShapeRelation.Intersects)
-				.IgnoreUnmapped()
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapePolygonQuery>(a => a.GeoShape as IGeoShapePolygonQuery)

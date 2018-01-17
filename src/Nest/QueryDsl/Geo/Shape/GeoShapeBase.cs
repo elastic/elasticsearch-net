@@ -6,6 +6,9 @@ namespace Nest
 	{
 		[JsonProperty("type")]
 		string Type { get; }
+
+		[JsonProperty("ignore_unmapped")]
+		bool? IgnoreUnmapped { get; set; }
 	}
 
 	public abstract class GeoShapeBase : IGeoShape
@@ -16,5 +19,12 @@ namespace Nest
 		}
 
 		public string Type { get; protected set; }
+
+		/// <summary>
+		/// Will ignore an unmapped field and will not match any documents for this query.
+		/// This can be useful when querying multiple indexes which might have different mappings.
+		/// </summary>
+		[JsonProperty("ignore_unmapped")]
+		public bool? IgnoreUnmapped { get; set; }
 	}
 }

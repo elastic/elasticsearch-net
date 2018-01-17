@@ -6,6 +6,35 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
+	/// <summary>
+	/// Marks an instance where _name and boost do not exist as children of the variable field but as sibblings
+	/// </summary>
+	internal class GeoShapeQueryFieldNameConverter : FieldNameQueryJsonConverter<GeoShapeCircleQuery>
+	{
+		private static string[] SkipProperties = {"boost", "_name"};
+		protected override bool SkipWriteProperty(string propertyName) => SkipProperties.Contains(propertyName);
+
+		protected override void SerializeJson(JsonWriter writer, object value, IFieldNameQuery castValue, JsonSerializer serializer)
+		{
+			var fieldName = castValue.Field;
+			if (fieldName == null) return;
+
+
+			var settings = serializer.GetConnectionSettings();
+
+			var field = settings?.Inferrer.Field(fieldName);
+			if (field.IsNullOrEmpty()) return;
+
+			writer.WriteStartObject();
+			var name = castValue.Name;
+			var boost = castValue.Boost;
+			if (!name.IsNullOrEmpty()) writer.WriteProperty(serializer, "_name", name);
+			if (boost != null) writer.WriteProperty(serializer, "boost", boost);
+			writer.WritePropertyName(field);
+			this.Reserialize(writer, value, serializer);
+			writer.WriteEndObject();
+		}
+	}
 	internal class GeoShapeQueryJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
@@ -23,9 +52,20 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var j = JObject.Load(reader);
-			if (j == null || !j.HasValues)
-				return null;
+			if (j == null || !j.HasValues) return null;
 
+			double? boost = null;
+			string name  = null;
+			if (j.TryGetValue("boost", out var b) && (b.Type != JTokenType.Array && b.Type != JTokenType.Object))
+			{
+				j.Remove("boost");
+				boost = b.Value<double?>();
+			}
+			if (j.TryGetValue("_name", out var n) && n.Type == JTokenType.String)
+			{
+				j.Remove("_name");
+				name = n.Value<string>();
+			}
 			var firstProp = j.Properties().FirstOrDefault();
 			if (firstProp == null) return null;
 
@@ -33,25 +73,19 @@ namespace Nest
 			var jo = firstProp.Value.Value<JObject>();
 			if (jo == null) return null;
 
-			JToken shape;
-			JToken indexedShape;
 			IGeoShapeQuery query = null;
 
-			if (jo.TryGetValue("shape", out shape))
+			if (jo.TryGetValue("shape", out var shape))
 				query = ParseShapeQuery(shape, serializer);
-			else if (jo.TryGetValue("indexed_shape", out indexedShape))
+			else if (jo.TryGetValue("indexed_shape", out var indexedShape))
 				query = ParseIndexedShapeQuery(indexedShape);
 
 			if (query == null) return null;
-			var boost = jo["boost"]?.Value<double>();
-			var name = jo["_name"]?.Value<string>();
 			var relation = jo["relation"]?.Value<string>().ToEnum<GeoShapeRelation>();
-			var ignoreUnmapped = jo["ignore_unmapped"]?.Value<bool>();
 			query.Boost = boost;
 			query.Name = name;
 			query.Field = field;
 			query.Relation = relation;
-			query.IgnoreUnmapped = ignoreUnmapped;
 			return query;
 		}
 
@@ -62,48 +96,49 @@ namespace Nest
 		{
 			var type = shape["type"];
 			var typeName = type?.Value<string>();
+			var ignoreUnmapped = shape["ignore_unmapped"]?.Value<bool?>();
 			switch (typeName)
 			{
 				case "circle":
 					var radius = shape["radius"];
 					return new GeoShapeCircleQuery
 					{
-						Shape = ParseCircleGeoShape(shape, serializer, radius)
+						Shape = ParseShape(ParseCircleGeoShape(shape, serializer, radius), ignoreUnmapped)
 					};
 				case "envelope":
 					return new GeoShapeEnvelopeQuery
 					{
-						Shape = ParseEnvelopeGeoShape(shape, serializer)
+						Shape = ParseShape(ParseEnvelopeGeoShape(shape, serializer), ignoreUnmapped)
 					};
 				case "linestring":
 					return new GeoShapeLineStringQuery
 					{
-						Shape = ParseLineStringGeoShape(shape, serializer)
+						Shape = ParseShape(ParseLineStringGeoShape(shape, serializer), ignoreUnmapped)
 					};
 				case "multilinestring":
 					return new GeoShapeMultiLineStringQuery
 					{
-						Shape = ParseMultiLineStringGeoShape(shape, serializer)
+						Shape = ParseShape(ParseMultiLineStringGeoShape(shape, serializer), ignoreUnmapped)
 					};
 				case "point":
 					return new GeoShapePointQuery
 					{
-						Shape = ParsePointGeoShape(shape, serializer)
+						Shape = ParseShape(ParsePointGeoShape(shape, serializer), ignoreUnmapped)
 					};
 				case "multipoint":
 					return new GeoShapeMultiPointQuery
 					{
-						Shape = ParseMultiPointGeoShape(shape, serializer)
+						Shape = ParseShape(ParseMultiPointGeoShape(shape, serializer), ignoreUnmapped)
 					};
 				case "polygon":
 					return new GeoShapePolygonQuery
 					{
-						Shape = ParsePolygonGeoShape(shape, serializer)
+						Shape = ParseShape(ParsePolygonGeoShape(shape, serializer), ignoreUnmapped)
 					};
 				case "multipolygon":
 					return new GeoShapeMultiPolygonQuery
 					{
-						Shape = ParseMultiPolygonGeoShape(shape, serializer)
+						Shape = ParseShape(ParseMultiPolygonGeoShape(shape, serializer), ignoreUnmapped)
 					};
 				case "geometrycollection":
 					return new GeoShapeGeometryCollectionQuery
@@ -117,41 +152,47 @@ namespace Nest
 
 		private GeometryCollection ParseGeometryCollection(JToken shape, JsonSerializer serializer)
 		{
-			var geometries = shape["geometries"] as JArray;
-			if (geometries == null)
+			if (!(shape["geometries"] is JArray geometries))
 				return new GeometryCollection { Geometries = Enumerable.Empty<IGeoShape>() };
 
 			var geoShapes = new List<IGeoShape>(geometries.Count);
+
+			void A<TShape>(TShape s, bool? i) where TShape : IGeoShape
+			{
+				s.IgnoreUnmapped = i;
+				geoShapes.Add(s);
+			}
 			foreach (var geometry in geometries)
 			{
+				var ignoreUnmapped = geometry["ignore_unmapped"]?.Value<bool?>();
 				var type = geometry["type"];
 				var typeName = type?.Value<string>();
 				switch (typeName)
 				{
 					case "circle":
 						var radius = geometry["radius"];
-						geoShapes.Add(ParseCircleGeoShape(geometry, serializer, radius));
+						A(ParseCircleGeoShape(geometry, serializer, radius), ignoreUnmapped);
 						break;
 					case "envelope":
-						geoShapes.Add(ParseEnvelopeGeoShape(geometry, serializer));
+						A(ParseEnvelopeGeoShape(geometry, serializer), ignoreUnmapped);
 						break;
 					case "linestring":
-						geoShapes.Add(ParseLineStringGeoShape(geometry, serializer));
+						A(ParseLineStringGeoShape(geometry, serializer), ignoreUnmapped);
 						break;
 					case "multilinestring":
-						geoShapes.Add(ParseMultiLineStringGeoShape(geometry, serializer));
+						A(ParseMultiLineStringGeoShape(geometry, serializer), ignoreUnmapped);
 						break;
 					case "point":
-						geoShapes.Add(ParsePointGeoShape(geometry, serializer));
+						A(ParsePointGeoShape(geometry, serializer), ignoreUnmapped);
 						break;
 					case "multipoint":
-						geoShapes.Add(ParseMultiPointGeoShape(geometry, serializer));
+						A(ParseMultiPointGeoShape(geometry, serializer), ignoreUnmapped);
 						break;
 					case "polygon":
-						geoShapes.Add(ParsePolygonGeoShape(geometry, serializer));
+						A(ParsePolygonGeoShape(geometry, serializer), ignoreUnmapped);
 						break;
 					case "multipolygon":
-						geoShapes.Add(ParseMultiPolygonGeoShape(geometry, serializer));
+						A(ParseMultiPolygonGeoShape(geometry, serializer), ignoreUnmapped);
 						break;
 					default:
 						throw new ArgumentException($"cannot parse geo_shape. unknown type '{typeName}'");
@@ -161,54 +202,42 @@ namespace Nest
 			return new GeometryCollection { Geometries = geoShapes };
 		}
 
-		private MultiPolygonGeoShape ParseMultiPolygonGeoShape(JToken shape, JsonSerializer serializer)
+		private MultiPolygonGeoShape ParseMultiPolygonGeoShape(JToken shape, JsonSerializer serializer) =>
+			new MultiPolygonGeoShape
 		{
-			return new MultiPolygonGeoShape
-			{
-				Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>>>(shape, serializer)
-			};
-		}
+			Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>>>(shape, serializer)
+		};
 
-		private PolygonGeoShape ParsePolygonGeoShape(JToken shape, JsonSerializer serializer)
-		{
-			return new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)};
-		}
+		private PolygonGeoShape ParsePolygonGeoShape(JToken shape, JsonSerializer serializer) =>
+			new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)};
 
-		private MultiPointGeoShape ParseMultiPointGeoShape(JToken shape, JsonSerializer serializer)
-		{
-			return new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
-		}
+		private MultiPointGeoShape ParseMultiPointGeoShape(JToken shape, JsonSerializer serializer) =>
+			new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
 
-		private PointGeoShape ParsePointGeoShape(JToken shape, JsonSerializer serializer)
-		{
-			return new PointGeoShape {Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer)};
-		}
+		private PointGeoShape ParsePointGeoShape(JToken shape, JsonSerializer serializer) =>
+			new PointGeoShape {Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer)};
 
-		private MultiLineStringGeoShape ParseMultiLineStringGeoShape(JToken shape, JsonSerializer serializer)
+		private MultiLineStringGeoShape ParseMultiLineStringGeoShape(JToken shape, JsonSerializer serializer) => new MultiLineStringGeoShape
 		{
-			return new MultiLineStringGeoShape
-			{
-				Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)
-			};
-		}
+			Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)
+		};
 
-		private LineStringGeoShape ParseLineStringGeoShape(JToken shape, JsonSerializer serializer)
-		{
-			return new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
-		}
+		private LineStringGeoShape ParseLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
+			new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
 
-		private EnvelopeGeoShape ParseEnvelopeGeoShape(JToken shape, JsonSerializer serializer)
-		{
-			return new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
-		}
+		private EnvelopeGeoShape ParseEnvelopeGeoShape(JToken shape, JsonSerializer serializer) =>
+			new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
 
-		private CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer, JToken radius)
+		private CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer, JToken radius) => new CircleGeoShape
 		{
-			return new CircleGeoShape
-			{
-				Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer),
-				Radius = radius?.Value<string>()
-			};
+			Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer),
+			Radius = radius?.Value<string>()
+		};
+
+		private TShape ParseShape<TShape>(TShape shape, bool? ignoreUnmapped ) where TShape : IGeoShape
+		{
+			shape.IgnoreUnmapped = ignoreUnmapped;
+			return shape;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

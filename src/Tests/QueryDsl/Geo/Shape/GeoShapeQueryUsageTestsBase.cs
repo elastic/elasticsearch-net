@@ -12,11 +12,10 @@ namespace Tests.QueryDsl
 		{
 			geo_shape = new
 			{
+				_name="named_query",
+				boost = 1.1,
 				location = new
 				{
-					_name="named_query",
-					boost = 1.1,
-					ignore_unmapped = true,
 					relation = "intersects",
 					shape = this.ShapeJson
 				}
