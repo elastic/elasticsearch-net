@@ -9,6 +9,7 @@ namespace Nest
 		public IpAttribute() : base(FieldType.Ip) { }
 
 		double? IIpProperty.Boost { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IIpProperty.IncludeInAll { get; set; }
 		bool? IIpProperty.Index { get; set; }
 		string IIpProperty.NullValue { get; set; }

@@ -85,6 +85,7 @@ namespace Nest
 			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
 		///<inheritdoc/>
+		[Obsolete("Removed in 6.0.")]
 		public CommonTermsQueryDescriptor<T> DisableCoord(bool? disable = true) => Assign(a => a.DisableCoord = disable);
 	}
 }

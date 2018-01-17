@@ -82,6 +82,8 @@ namespace Nest
 		bool? ITextProperty.EagerGlobalOrdinals { get; set; }
 		bool? ITextProperty.Fielddata { get; set; }
 		IFielddataFrequencyFilter ITextProperty.FielddataFrequencyFilter { get; set; }
+
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? ITextProperty.IncludeInAll { get; set; }
 		bool? ITextProperty.Index { get; set; }
 		IndexOptions? ITextProperty.IndexOptions { get; set; }

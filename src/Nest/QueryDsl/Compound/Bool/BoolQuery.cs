@@ -48,6 +48,7 @@ namespace Nest
 		/// the greater the chances that the document is a good match for the query.
 		/// </summary>
 		[JsonProperty("disable_coord")]
+		[Obsolete("Removed in 6.0.")]
 		bool? DisableCoord { get; set; }
 
 		bool Locked { get; }

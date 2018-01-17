@@ -68,6 +68,7 @@ namespace Nest
 		bool? INumberProperty.Index { get; set; }
 		double? INumberProperty.Boost { get; set; }
 		double? INumberProperty.NullValue { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? INumberProperty.IncludeInAll { get; set; }
 		bool? INumberProperty.IgnoreMalformed { get; set; }
 		bool? INumberProperty.Coerce { get; set; }

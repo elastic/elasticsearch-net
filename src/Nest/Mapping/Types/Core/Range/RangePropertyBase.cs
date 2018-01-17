@@ -59,6 +59,7 @@ namespace Nest
 	{
 		bool? IRangeProperty.Coerce { get; set; }
 		double? IRangeProperty.Boost { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IRangeProperty.IncludeInAll { get; set; }
 		bool? IRangeProperty.Index { get; set; }
 

@@ -12,6 +12,7 @@ namespace Nest
 		bool? ITokenCountProperty.Index { get; set; }
 		double? ITokenCountProperty.Boost { get; set; }
 		double? ITokenCountProperty.NullValue { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? ITokenCountProperty.IncludeInAll { get; set; }
 
 		public string Analyzer { get { return Self.Analyzer; } set { Self.Analyzer = value; } }

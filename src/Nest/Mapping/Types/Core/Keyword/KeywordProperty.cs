@@ -65,6 +65,7 @@ namespace Nest
 		double? IKeywordProperty.Boost { get; set; }
 		bool? IKeywordProperty.EagerGlobalOrdinals{ get; set; }
 		int? IKeywordProperty.IgnoreAbove{ get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IKeywordProperty.IncludeInAll{ get; set; }
 		bool? IKeywordProperty.Index{ get; set; }
 		IndexOptions? IKeywordProperty.IndexOptions{ get; set; }

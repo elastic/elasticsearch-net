@@ -5,6 +5,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof (VariableFieldNameQueryJsonConverter<GeoDistanceRangeQuery, IGeoDistanceRangeQuery>))]
+	[Obsolete("Scheduled to be removed in 6.0")]
 	public interface IGeoDistanceRangeQuery : IFieldNameQuery
 	{
 		[VariableField]
@@ -41,6 +42,7 @@ namespace Nest
 
 	}
 
+	[Obsolete("Scheduled to be removed in 6.0")]
 	public class GeoDistanceRangeQuery : FieldNameQueryBase, IGeoDistanceRangeQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
@@ -66,6 +68,7 @@ namespace Nest
 			|| (q.LessThan == null && q.LessThanOrEqualTo == null && q.GreaterThanOrEqualTo == null && q.GreaterThan == null);
 	}
 
+	[Obsolete("Scheduled to be removed in 6.0")]
 	public class GeoDistanceRangeQueryDescriptor<T> : FieldNameQueryDescriptorBase<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery, T>
 		, IGeoDistanceRangeQuery where T : class
 	{

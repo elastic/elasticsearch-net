@@ -21,6 +21,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? DateDetection { get; set; }
 		/// <inheritdoc/>
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool? IncludeInAll { get; set; }
 		/// <inheritdoc/>
 		public IEnumerable<string> DynamicDateFormats { get; set; }
@@ -61,6 +62,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? DateDetection { get; set; }
 		/// <inheritdoc/>
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool? IncludeInAll { get; set; }
 		/// <inheritdoc/>
 		public IEnumerable<string> DynamicDateFormats { get; set; }
@@ -102,6 +104,7 @@ namespace Nest
 
 		IAllField ITypeMapping.AllField { get; set; }
 		bool? ITypeMapping.DateDetection { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? ITypeMapping.IncludeInAll { get; set; }
 		IEnumerable<string> ITypeMapping.DynamicDateFormats { get; set; }
 		string ITypeMapping.Analyzer { get; set; }
@@ -137,6 +140,7 @@ namespace Nest
 		public PutMappingDescriptor<T> Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
 
 		/// <inheritdoc/>
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public PutMappingDescriptor<T> IncludeInAll(bool include = true) => Assign(a => a.IncludeInAll = include);
 
 		/// <inheritdoc/>

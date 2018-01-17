@@ -14,10 +14,12 @@ namespace Nest
 
 		Union<bool, DynamicMapping> IObjectProperty.Dynamic { get; set; }
 		bool? IObjectProperty.Enabled { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IObjectProperty.IncludeInAll { get; set; }
 		IProperties IObjectProperty.Properties { get; set; }
 
 		public bool Enabled { get { return Self.Enabled.GetValueOrDefault(); } set { Self.Enabled = value; } }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
 
 	}

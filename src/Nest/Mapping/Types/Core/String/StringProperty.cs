@@ -95,6 +95,8 @@ namespace Nest
 		IndexOptions? IStringProperty.IndexOptions { get; set; }
 		string IStringProperty.Analyzer { get; set; }
 		string IStringProperty.SearchAnalyzer { get; set; }
+
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IStringProperty.IncludeInAll { get; set; }
 		int? IStringProperty.IgnoreAbove { get; set; }
 		int? IStringProperty.PositionIncrementGap { get; set; }

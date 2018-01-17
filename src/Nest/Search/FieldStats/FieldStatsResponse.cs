@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject]
+	[Obsolete("Scheduled to be removed in 6.0")]
 	public interface IFieldStatsResponse : IResponse
 	{
 		[JsonProperty("_shards")]
@@ -13,6 +15,7 @@ namespace Nest
 		IReadOnlyDictionary<string, FieldStats> Indices { get; }
 	}
 
+	[Obsolete("Scheduled to be removed in 6.0")]
 	public class FieldStatsResponse : ResponseBase, IFieldStatsResponse
 	{
 		public ShardsMetaData Shards { get; internal set; }
@@ -21,12 +24,14 @@ namespace Nest
 	}
 
 	[JsonObject]
+	[Obsolete("Scheduled to be removed in 6.0")]
 	public class FieldStats
 	{
 		[JsonProperty("fields")]
 		public IReadOnlyDictionary<string, FieldStatsField> Fields { get; internal set; } = EmptyReadOnly<string, FieldStatsField>.Dictionary;
 	}
 
+	[Obsolete("Scheduled to be removed in 6.0")]
 	public class FieldStatsField
 	{
 		[JsonProperty("max_doc")]
