@@ -36,7 +36,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 			Field = Field<Project>(p => p.Location),
 			Shape = new PolygonGeoShape(this._coordinates),
 			Relation = GeoShapeRelation.Intersects,
-			IgnoreUnmapped = false
+			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q

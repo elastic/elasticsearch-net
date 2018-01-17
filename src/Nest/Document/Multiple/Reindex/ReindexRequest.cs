@@ -142,7 +142,7 @@ namespace Nest
 			Assign(a => this._createBulkAll = selector);
 
 		/// <inheritdoc/>
-		public ReindexDescriptor<TSource, TTarget> OmitIndexCreation(bool omit = true) => Assign(a => a.OmitIndexCreation = true);
+		public ReindexDescriptor<TSource, TTarget> OmitIndexCreation(bool omit = true) => Assign(a => a.OmitIndexCreation = omit);
 
 		/// <inheritdoc/>
 		public ReindexDescriptor<TSource, TTarget> CreateIndex(Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector) =>

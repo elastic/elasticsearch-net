@@ -25,6 +25,6 @@ namespace Nest
 
 		public HttpInputProxyDescriptor Host(string host) => Assign(a => a.Host = host);
 
-		public HttpInputProxyDescriptor Port(int port) => Assign(a => a.Port = port);
+		public HttpInputProxyDescriptor Port(int? port) => Assign(a => a.Port = port);
 	}
 }

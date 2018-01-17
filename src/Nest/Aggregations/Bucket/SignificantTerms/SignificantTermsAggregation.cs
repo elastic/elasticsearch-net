@@ -186,7 +186,7 @@ namespace Nest
 		public SignificantTermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
 		/// <inheritdoc />
-		public SignificantTermsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public SignificantTermsAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint? hint) => Assign(a => a.ExecutionHint = hint);
@@ -208,14 +208,14 @@ namespace Nest
 			Assign(a => a.Exclude = new SignificantTermsIncludeExclude(values));
 
 		/// <inheritdoc />
-		public SignificantTermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
+		public SignificantTermsAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
 
 		/// <inheritdoc />
-		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(long minimumDocumentCount) =>
+		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(long? minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
 		/// <inheritdoc />
-		public SignificantTermsAggregationDescriptor<T> ShardMinimumDocumentCount(long shardMinimumDocumentCount) =>
+		public SignificantTermsAggregationDescriptor<T> ShardMinimumDocumentCount(long? shardMinimumDocumentCount) =>
 			Assign(a => a.ShardMinimumDocumentCount = shardMinimumDocumentCount);
 
 		/// <inheritdoc />

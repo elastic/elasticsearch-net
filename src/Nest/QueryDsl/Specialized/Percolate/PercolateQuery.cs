@@ -256,6 +256,6 @@ namespace Nest
 		/// The expected version of the document to be fetched for percolation.
 		/// Can be specified to percolate an existing document instead of providing <see cref="Document{TDocument}"/>
 		/// </summary>
-		public PercolateQueryDescriptor<T> Version(long version) => Assign(a => a.Version = version);
+		public PercolateQueryDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
 	}
 }

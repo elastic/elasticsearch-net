@@ -44,7 +44,7 @@ namespace Nest
 		Time IChunkingConfig.TimeSpan { get; set; }
 
 		/// <inheritdoc />
-		public ChunkingConfigDescriptor Mode(ChunkingMode mode) => Assign(a => a.Mode = mode);
+		public ChunkingConfigDescriptor Mode(ChunkingMode? mode) => Assign(a => a.Mode = mode);
 
 		/// <inheritdoc />
 		public ChunkingConfigDescriptor TimeSpan(Time timeSpan) => Assign(a => a.TimeSpan = timeSpan);

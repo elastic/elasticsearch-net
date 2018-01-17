@@ -14,11 +14,11 @@ namespace Nest
 		public bool? Enabled { get; set; }
 	}
 
-	public class SizeFieldDescriptor 
+	public class SizeFieldDescriptor
 		: DescriptorBase<SizeFieldDescriptor, ISizeField>, ISizeField
 	{
 		bool? ISizeField.Enabled { get; set; }
 
-		public SizeFieldDescriptor Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
+		public SizeFieldDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
 	}
 }

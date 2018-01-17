@@ -33,6 +33,6 @@ namespace Nest
 	{
 		MatrixStatsMode? IMatrixStatsAggregation.Mode { get; set; }
 
-		public MatrixStatsAggregationDescriptor<T> Mode(MatrixStatsMode mode) => Assign(a => a.Mode = mode);
+		public MatrixStatsAggregationDescriptor<T> Mode(MatrixStatsMode? mode) => Assign(a => a.Mode = mode);
 	}
 }

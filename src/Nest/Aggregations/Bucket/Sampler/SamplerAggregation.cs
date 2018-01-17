@@ -44,16 +44,16 @@ namespace Nest
 		IScript ISamplerAggregation.Script { get; set; }
 		int? ISamplerAggregation.ShardSize { get; set; }
 
-		public SamplerAggregationDescriptor<T> ExecutionHint(SamplerAggregationExecutionHint executionHint) =>
+		public SamplerAggregationDescriptor<T> ExecutionHint(SamplerAggregationExecutionHint? executionHint) =>
 			Assign(a => a.ExecutionHint = executionHint);
 
-		public SamplerAggregationDescriptor<T> MaxDocsPerValue(int maxDocs) => Assign(a => a.MaxDocsPerValue = maxDocs);
+		public SamplerAggregationDescriptor<T> MaxDocsPerValue(int? maxDocs) => Assign(a => a.MaxDocsPerValue = maxDocs);
 
 		public SamplerAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
 
 		public SamplerAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
-		public SamplerAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
+		public SamplerAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
 	}
 }

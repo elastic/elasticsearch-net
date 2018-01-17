@@ -31,7 +31,7 @@ namespace Nest
 		public IEnumerable<string> Excludes { get; set; }
 	}
 
-	public class SourceFieldDescriptor 
+	public class SourceFieldDescriptor
 		: DescriptorBase<SourceFieldDescriptor, ISourceField>, ISourceField
 	{
         bool? ISourceField.Enabled { get; set; }
@@ -40,9 +40,9 @@ namespace Nest
 		IEnumerable<string> ISourceField.Includes { get; set; }
 		IEnumerable<string> ISourceField.Excludes { get; set; }
 
-		public SourceFieldDescriptor Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
+		public SourceFieldDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
 
-		public SourceFieldDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
+		public SourceFieldDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
 
 		public SourceFieldDescriptor CompressionThreshold(string compressionThreshold) =>
 			Assign(a => { a.Compress = true; a.CompressThreshold = compressionThreshold; });

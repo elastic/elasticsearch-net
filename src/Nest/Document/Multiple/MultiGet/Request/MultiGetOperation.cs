@@ -121,7 +121,7 @@ namespace Nest
 
 		public MultiGetOperationDescriptor<T> Version(long? version) => Assign(a => a.Version = version);
 
-		public MultiGetOperationDescriptor<T> VersionType(VersionType versionType) => Assign(a => a.VersionType = versionType);
+		public MultiGetOperationDescriptor<T> VersionType(VersionType? versionType) => Assign(a => a.VersionType = versionType);
 
 	}
 }

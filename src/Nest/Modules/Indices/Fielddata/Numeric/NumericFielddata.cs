@@ -20,6 +20,6 @@ namespace Nest
 	{
 		NumericFielddataFormat? INumericFielddata.Format { get; set; }
 
-		public NumericFielddataDescriptor Format(NumericFielddataFormat format) => Assign(a => a.Format = format);
+		public NumericFielddataDescriptor Format(NumericFielddataFormat? format) => Assign(a => a.Format = format);
 	}
 }

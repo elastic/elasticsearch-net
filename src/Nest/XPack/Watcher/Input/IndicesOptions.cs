@@ -35,13 +35,13 @@ namespace Nest
 		bool? IIndicesOptions.IgnoreUnavailable { get; set; }
 		bool? IIndicesOptions.AllowNoIndices { get; set; }
 
-		public IndicesOptionsDescriptor ExpandWildcards(ExpandWildcards expandWildcards) =>
+		public IndicesOptionsDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) =>
 			Assign(a => a.ExpandWildcards = expandWildcards);
 
-		public IndicesOptionsDescriptor IgnoreUnavailable(bool ignoreUnavailable = true) =>
+		public IndicesOptionsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) =>
 			Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
 
-		public IndicesOptionsDescriptor AllowNoIndices(bool allowNoIndices = true) =>
+		public IndicesOptionsDescriptor AllowNoIndices(bool? allowNoIndices = true) =>
 			Assign(a => a.AllowNoIndices = allowNoIndices);
 	}
 }

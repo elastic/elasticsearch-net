@@ -29,13 +29,13 @@ namespace Nest
 		Union<DateTimeOffset, string> IScheduleTriggerEvent.TriggeredTime { get; set; }
 		Union<DateTimeOffset, string> IScheduleTriggerEvent.ScheduledTime { get; set; }
 
-		public ScheduleTriggerEventDescriptor TriggeredTime(DateTimeOffset triggeredTime) =>
+		public ScheduleTriggerEventDescriptor TriggeredTime(DateTimeOffset? triggeredTime) =>
 			Assign(a => a.TriggeredTime = triggeredTime);
 
 		public ScheduleTriggerEventDescriptor TriggeredTime(string triggeredTime) =>
 			Assign(a => a.TriggeredTime = triggeredTime);
 
-		public ScheduleTriggerEventDescriptor ScheduledTime(DateTimeOffset scheduledTime) =>
+		public ScheduleTriggerEventDescriptor ScheduledTime(DateTimeOffset? scheduledTime) =>
 			Assign(a => a.ScheduledTime = scheduledTime);
 
 		public ScheduleTriggerEventDescriptor ScheduledTime(string scheduledTime) =>

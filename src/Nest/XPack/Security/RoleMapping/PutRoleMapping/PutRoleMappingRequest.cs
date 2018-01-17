@@ -14,7 +14,7 @@ namespace Nest
 		IDictionary<string, object> Metadata { get; set; }
 
 		[JsonProperty("enabled")]
-		bool Enabled { get; set; }
+		bool? Enabled { get; set; }
 
 		[JsonProperty("roles")]
 		IEnumerable<string> Roles { get; set; }
@@ -29,7 +29,7 @@ namespace Nest
 
 		public IDictionary<string, object> Metadata { get; set; }
 
-		public bool Enabled { get; set; }
+		public bool? Enabled { get; set; }
 
 		public IEnumerable<string> Roles { get; set; }
 
@@ -42,7 +42,7 @@ namespace Nest
 		IEnumerable<string> IPutRoleMappingRequest.Roles { get; set; }
 		IEnumerable<string> IPutRoleMappingRequest.RunAs { get; set; }
 		IDictionary<string, object> IPutRoleMappingRequest.Metadata { get; set; }
-		bool IPutRoleMappingRequest.Enabled { get; set; }
+		bool? IPutRoleMappingRequest.Enabled { get; set; }
 		RoleMappingRuleBase IPutRoleMappingRequest.Rules { get; set; }
 
 		/// <inheritdoc/>
@@ -68,7 +68,7 @@ namespace Nest
 		public PutRoleMappingDescriptor RunAs(params string[] users) => Assign(a => a.RunAs = users);
 
 		/// <inheritdoc/>
-		public PutRoleMappingDescriptor Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
+		public PutRoleMappingDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
 
 		/// <inheritdoc/>
 		public PutRoleMappingDescriptor Metadata(IDictionary<string, object> metadata) => Assign(a => a.Metadata = metadata);

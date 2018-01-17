@@ -7,7 +7,7 @@ namespace Nest
 	public interface IExtendedStatsAggregation : IMetricAggregation
 	{
 		[JsonProperty("sigma")]
-		double Sigma { get; set; }
+		double? Sigma { get; set; }
 	}
 
 	public class ExtendedStatsAggregation : MetricAggregationBase, IExtendedStatsAggregation
@@ -16,7 +16,7 @@ namespace Nest
 
 		public ExtendedStatsAggregation(string name, Field field) : base(name, field) { }
 
-		public double Sigma { get; set; }
+		public double? Sigma { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ExtendedStats = this;
 	}
@@ -26,9 +26,9 @@ namespace Nest
 			, IExtendedStatsAggregation
 		where T : class
 	{
-		double IExtendedStatsAggregation.Sigma { get; set; }
+		double? IExtendedStatsAggregation.Sigma { get; set; }
 
-		public ExtendedStatsAggregationDescriptor<T> Sigma(double sigma) =>
+		public ExtendedStatsAggregationDescriptor<T> Sigma(double? sigma) =>
 			Assign(a => a.Sigma = sigma);
 	}
 }

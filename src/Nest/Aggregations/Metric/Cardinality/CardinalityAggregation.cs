@@ -25,19 +25,19 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Cardinality = this;
 	}
 
-	public class CardinalityAggregationDescriptor<T> 
+	public class CardinalityAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<CardinalityAggregationDescriptor<T>, ICardinalityAggregation, T>
-			, ICardinalityAggregation 
+			, ICardinalityAggregation
 		where T : class
 	{
 		int? ICardinalityAggregation.PrecisionThreshold { get; set; }
 
 		bool? ICardinalityAggregation.Rehash { get; set; }
 
-		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int precisionThreshold)
+		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int? precisionThreshold)
 			=> Assign(a => a.PrecisionThreshold = precisionThreshold);
 
-		public CardinalityAggregationDescriptor<T> Rehash(bool rehash = true) => Assign(a => a.Rehash = rehash);
+		public CardinalityAggregationDescriptor<T> Rehash(bool? rehash = true) => Assign(a => a.Rehash = rehash);
 
 	}
 }

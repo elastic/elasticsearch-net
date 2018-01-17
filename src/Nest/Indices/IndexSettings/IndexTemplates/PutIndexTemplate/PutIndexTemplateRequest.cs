@@ -39,9 +39,9 @@ namespace Nest
 
 		IReadOnlyCollection<string> ITemplateMapping.IndexPatterns { get; set; }
 
-		public PutIndexTemplateDescriptor Order(int order) => Assign(a => a.Order = order);
+		public PutIndexTemplateDescriptor Order(int? order) => Assign(a => a.Order = order);
 
-		public PutIndexTemplateDescriptor Version(int version) => Assign(a => a.Version = version);
+		public PutIndexTemplateDescriptor Version(int? version) => Assign(a => a.Version = version);
 
 		public PutIndexTemplateDescriptor IndexPatterns(params string[] patterns)=> Assign(a => a.IndexPatterns = patterns);
 

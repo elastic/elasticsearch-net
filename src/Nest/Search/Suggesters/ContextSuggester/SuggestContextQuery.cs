@@ -49,9 +49,9 @@ namespace Nest
 		Union<Distance, int> ISuggestContextQuery.Precision { get; set; }
 		bool? ISuggestContextQuery.Prefix { get; set; }
 
-		public SuggestContextQueryDescriptor<T> Prefix(bool prefix) => Assign(a => a.Prefix = prefix);
+		public SuggestContextQueryDescriptor<T> Prefix(bool? prefix = true) => Assign(a => a.Prefix = prefix);
 
-		public SuggestContextQueryDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
+		public SuggestContextQueryDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
 
 		public SuggestContextQueryDescriptor<T> Context(string context) => Assign(a => a.Context = context);
 
@@ -59,7 +59,7 @@ namespace Nest
 
 		public SuggestContextQueryDescriptor<T> Precision(Distance precision) => Assign(a => a.Precision = precision);
 
-		public SuggestContextQueryDescriptor<T> Precision(int precision) => Assign(a => a.Precision = precision);
+		public SuggestContextQueryDescriptor<T> Precision(int? precision) => Assign(a => a.Precision = precision);
 
 		public SuggestContextQueryDescriptor<T> Neighbours(params int[] neighbours) => Assign(a => a.Neighbours = neighbours);
 

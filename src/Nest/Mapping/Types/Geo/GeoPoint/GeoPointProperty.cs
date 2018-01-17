@@ -28,6 +28,6 @@ namespace Nest
 
 		public GeoPointPropertyDescriptor() : base(FieldType.GeoPoint) { }
 
-		public GeoPointPropertyDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
+		public GeoPointPropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 	}
 }

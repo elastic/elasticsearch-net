@@ -97,11 +97,11 @@ namespace Nest
 		/// </summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument @object) => Assign(a => a.Doc = @object);
 
-		public UpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool docAsUpsert = true) => Assign(a => a.DocAsUpsert = docAsUpsert);
+		public UpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true) => Assign(a => a.DocAsUpsert = docAsUpsert);
 
-		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool detectNoop = true) => Assign(a => a.DetectNoop = detectNoop);
+		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool? detectNoop = true) => Assign(a => a.DetectNoop = detectNoop);
 
-		public UpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool scriptedUpsert = true) => Assign(a => a.ScriptedUpsert = scriptedUpsert);
+		public UpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true) => Assign(a => a.ScriptedUpsert = scriptedUpsert);
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
@@ -109,7 +109,7 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(Fields fields) =>
 			Assign(a => a.RequestParameters.SetQueryString("fields", fields));
 
-		public UpdateDescriptor<TDocument, TPartialDocument> Source(bool enabled = true) => Assign(a => a.Source = enabled);
+		public UpdateDescriptor<TDocument, TPartialDocument> Source(bool? enabled = true) => Assign(a => a.Source = enabled);
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Source(Func<SourceFilterDescriptor<TDocument>, ISourceFilter> selector) =>
 			Assign(a => a.Source = new Union<bool, ISourceFilter>(selector?.Invoke(new SourceFilterDescriptor<TDocument>())));

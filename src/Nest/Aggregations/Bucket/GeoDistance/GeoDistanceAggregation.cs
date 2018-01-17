@@ -74,7 +74,7 @@ namespace Nest
 
 		public GeoDistanceAggregationDescriptor<T> Origin(GeoLocation geoLocation) => Assign(a => a.Origin = geoLocation);
 
-		public GeoDistanceAggregationDescriptor<T> Unit(DistanceUnit unit) => Assign(a => a.Unit = unit);
+		public GeoDistanceAggregationDescriptor<T> Unit(DistanceUnit? unit) => Assign(a => a.Unit = unit);
 
 		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistanceType? geoDistance) => Assign(a => a.DistanceType = geoDistance);
 

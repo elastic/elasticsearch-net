@@ -13,6 +13,6 @@ namespace Nest
 
 		protected DocValuesPropertyDescriptorBase(FieldType type) : base(type) { }
 
-		public TDescriptor DocValues(bool docValues = true) => Assign(a => a.DocValues = docValues);
+		public TDescriptor DocValues(bool? docValues = true) => Assign(a => a.DocValues = docValues);
 	}
 }

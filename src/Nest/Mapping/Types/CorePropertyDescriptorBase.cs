@@ -16,11 +16,11 @@ namespace Nest
 
 		protected CorePropertyDescriptorBase(FieldType type) : base(type) {}
 
-		public TDescriptor Store(bool store = true) => Assign(a => a.Store = store);
+		public TDescriptor Store(bool? store = true) => Assign(a => a.Store = store);
 
 		public TDescriptor Fields(Func<PropertiesDescriptor<T>, IPromise<IProperties>> selector) => Assign(a => a.Fields = selector?.Invoke(new PropertiesDescriptor<T>())?.Value);
 
-		public TDescriptor Similarity(SimilarityOption similarity) => Assign(a => a.Similarity = similarity);
+		public TDescriptor Similarity(SimilarityOption? similarity) => Assign(a => a.Similarity = similarity);
 
 		public TDescriptor Similarity(string similarity) => Assign(a => a.Similarity = similarity);
 

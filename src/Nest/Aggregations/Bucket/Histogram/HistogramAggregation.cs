@@ -80,9 +80,9 @@ namespace Nest
 		public HistogramAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
-		public HistogramAggregationDescriptor<T> Interval(double interval) => Assign(a => a.Interval = interval);
+		public HistogramAggregationDescriptor<T> Interval(double? interval) => Assign(a => a.Interval = interval);
 
-		public HistogramAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+		public HistogramAggregationDescriptor<T> MinimumDocumentCount(int? minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
 		public HistogramAggregationDescriptor<T> Order(HistogramOrder order) => Assign(a => a.Order = order);
@@ -96,8 +96,8 @@ namespace Nest
 		public HistogramAggregationDescriptor<T> ExtendedBounds(double min, double max) =>
 			Assign(a => a.ExtendedBounds = new ExtendedBounds<double> { Minimum = min, Maximum = max });
 
-		public HistogramAggregationDescriptor<T> Offset(double offset) => Assign(a => a.Offset = offset);
+		public HistogramAggregationDescriptor<T> Offset(double? offset) => Assign(a => a.Offset = offset);
 
-		public HistogramAggregationDescriptor<T> Missing(double missing) => Assign(a => a.Missing = missing);
+		public HistogramAggregationDescriptor<T> Missing(double? missing) => Assign(a => a.Missing = missing);
 	}
 }

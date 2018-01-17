@@ -15,7 +15,7 @@ namespace Nest
 		/// The shard id to provide an explanation for
 		/// </summary>
 		[JsonProperty("shard")]
-		int Shard { get; set; }
+		int? Shard { get; set; }
 
 		/// <summary>
 		/// Whether to explain a primary or replica shard
@@ -34,7 +34,7 @@ namespace Nest
 		/// <summary>
 		/// The shard id to provide an explanation for
 		/// </summary>
-		public int Shard { get; set; }
+		public int? Shard { get; set; }
 
 		/// <summary>
 		/// Whether to explain a primary or replica shard
@@ -45,7 +45,7 @@ namespace Nest
 	public partial class ClusterAllocationExplainDescriptor
 	{
 		IndexName IClusterAllocationExplainRequest.Index { get; set; }
-		int IClusterAllocationExplainRequest.Shard { get; set; }
+		int? IClusterAllocationExplainRequest.Shard { get; set; }
 		bool? IClusterAllocationExplainRequest.Primary { get; set; }
 
 		/// <summary>
@@ -61,11 +61,11 @@ namespace Nest
 		/// <summary>
 		/// Whether to explain a primary or replica shard
 		/// </summary>
-		public ClusterAllocationExplainDescriptor Primary(bool primary = true) => Assign(a => a.Primary = primary);
+		public ClusterAllocationExplainDescriptor Primary(bool? primary = true) => Assign(a => a.Primary = primary);
 
 		/// <summary>
 		/// The shard id to provide an explanation for
 		/// </summary>
-		public ClusterAllocationExplainDescriptor Shard(int shard) => Assign(a => a.Shard = shard);
+		public ClusterAllocationExplainDescriptor Shard(int? shard) => Assign(a => a.Shard = shard);
 	}
 }

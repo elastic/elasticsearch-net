@@ -67,12 +67,12 @@ namespace Nest
 
 		public KeywordPropertyDescriptor() : base(FieldType.Keyword) { }
 
-		public KeywordPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
-		public KeywordPropertyDescriptor<T> EagerGlobalOrdinals(bool eagerGlobalOrdinals = true) => Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);
-		public KeywordPropertyDescriptor<T> IgnoreAbove(int ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
-		public KeywordPropertyDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
-		public KeywordPropertyDescriptor<T> IndexOptions(IndexOptions indexOptions) => Assign(a => a.IndexOptions = indexOptions);
-		public KeywordPropertyDescriptor<T> Norms(bool enabled = true) => Assign(a => a.Norms = enabled);
+		public KeywordPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+		public KeywordPropertyDescriptor<T> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true) => Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);
+		public KeywordPropertyDescriptor<T> IgnoreAbove(int? ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
+		public KeywordPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+		public KeywordPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(a => a.IndexOptions = indexOptions);
+		public KeywordPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(a => a.Norms = enabled);
 		public KeywordPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
 		public KeywordPropertyDescriptor<T> Normalizer(string normalizer) => Assign(a => a.Normalizer = normalizer);
 	}

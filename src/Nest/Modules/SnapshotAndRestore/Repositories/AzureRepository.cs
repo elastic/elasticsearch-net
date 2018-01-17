@@ -73,7 +73,7 @@ namespace Nest
 		/// affect index files that are already compressed by default. Defaults to false.
 		/// </summary>
 		/// <param name="compress"></param>
-		public AzureRepositorySettingsDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
+		public AzureRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
 
 		/// <summary>
 		///  Big files can be broken down into chunks during snapshotting if needed.

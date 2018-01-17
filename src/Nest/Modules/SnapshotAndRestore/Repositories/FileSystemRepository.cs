@@ -78,13 +78,13 @@ namespace Nest
 		/// Turns on compression of the snapshot files. Defaults to true.
 		/// </summary>
 		/// <param name="compress"></param>
-		public FileSystemRepositorySettingsDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
+		public FileSystemRepositorySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
-		public FileSystemRepositorySettingsDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+		public FileSystemRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 
 		/// <summary>
 		/// Big files can be broken down into chunks during snapshotting if needed.

@@ -22,8 +22,6 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				analyzer = "standard",
 				default_operator = "or",
 				flags = "AND|NEAR",
-				locale = "en_US",
-				lowercase_expanded_terms = true,
 				lenient = true,
 				analyze_wildcard = true,
 				minimum_should_match = "30%"

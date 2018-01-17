@@ -66,6 +66,6 @@ namespace Nest
 
 		public ParentIdQueryDescriptor<T> Type<TChild>() => Assign(a => a.Type = typeof(TChild));
 
-		public ParentIdQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = false) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+		public ParentIdQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }

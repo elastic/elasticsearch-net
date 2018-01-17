@@ -134,7 +134,7 @@ namespace Nest
 		public AnalysisConfigDescriptor<T> Latency(Time latency) => Assign(a => a.Latency = latency);
 
 		/// <inheritdoc />
-		public AnalysisConfigDescriptor<T> MultivariateByFields(bool multivariateByFields = true) => Assign(a => a.MultivariateByFields = multivariateByFields);
+		public AnalysisConfigDescriptor<T> MultivariateByFields(bool? multivariateByFields = true) => Assign(a => a.MultivariateByFields = multivariateByFields);
 
 		/// <inheritdoc />
 		public AnalysisConfigDescriptor<T> SummaryCountFieldName(Field summaryCountFieldName) => Assign(a => a.SummaryCountFieldName = summaryCountFieldName);

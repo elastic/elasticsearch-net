@@ -14,7 +14,7 @@ namespace Nest
 		/// If true, the datafeed is stopped forcefully.
 		/// </summary>
 		[JsonProperty("force")]
-		bool Force { get; set; }
+		bool? Force { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -24,7 +24,7 @@ namespace Nest
 		public Time Timeout { get; set; }
 
 		/// <inheritdoc />
-		public bool Force { get; set; }
+		public bool? Force { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -32,12 +32,12 @@ namespace Nest
 	public partial class StopDatafeedDescriptor
 	{
 		Time IStopDatafeedRequest.Timeout { get; set; }
-		bool IStopDatafeedRequest.Force { get; set; }
+		bool? IStopDatafeedRequest.Force { get; set; }
 
 		/// <inheritdoc />
 		public StopDatafeedDescriptor Timeout(Time timeout) => Assign(a => a.Timeout = timeout);
 
 		/// <inheritdoc />
-		public StopDatafeedDescriptor Force(bool force) => Assign(a => a.Force = force);
+		public StopDatafeedDescriptor Force(bool? force = true) => Assign(a => a.Force = force);
 	}
 }

@@ -53,7 +53,7 @@ namespace Nest
 
 		public GeoDistanceQueryDescriptor<T> Distance(double distance, DistanceUnit unit) => Assign(a => a.Distance = new Distance(distance, unit));
 
-		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistanceType type) => Assign(a => a.DistanceType = type);
+		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistanceType? type) => Assign(a => a.DistanceType = type);
 
 		public GeoDistanceQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);
 	}

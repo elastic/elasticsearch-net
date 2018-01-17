@@ -45,13 +45,13 @@ namespace Nest
 		public bool? StoreTermVectorOffsets { get; set; }
 		public bool? StoreTermVectorPositions { get; set; }
 		public bool? StoreTermVectorPayloads { get; set; }
-		public TermVectorOption? TermVector { get; set; }
 		public bool? OmitNorms { get; set; }
 		public string Analyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
 		public string Similarity { get; set; }
 	}
 
+	//OBSOLETE
 	public class AllFieldDescriptor
 		: DescriptorBase<AllFieldDescriptor, IAllField>, IAllField
 	{
@@ -61,22 +61,22 @@ namespace Nest
 		bool? IAllField.StoreTermVectorOffsets { get; set; }
 		bool? IAllField.StoreTermVectorPositions { get; set; }
 		bool? IAllField.StoreTermVectorPayloads { get; set; }
-		public bool? OmitNorms { get; set; }
+		bool? IAllField.OmitNorms { get; set; }
 		string IAllField.Analyzer { get; set; }
 		string IAllField.SearchAnalyzer { get; set; }
 		string IAllField.Similarity { get; set; }
 
-		public AllFieldDescriptor Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
+		public AllFieldDescriptor Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
 
-		public AllFieldDescriptor Store(bool store = true) => Assign(a => a.Store = store);
+		public AllFieldDescriptor Store(bool? store = true) => Assign(a => a.Store = store);
 
-		public AllFieldDescriptor StoreTermVectors(bool store = true) => Assign(a => a.StoreTermVectors = store);
+		public AllFieldDescriptor StoreTermVectors(bool? store = true) => Assign(a => a.StoreTermVectors = store);
 
-		public AllFieldDescriptor StoreTermVectorOffsets(bool store = true) => Assign(a => a.StoreTermVectorOffsets = store);
+		public AllFieldDescriptor StoreTermVectorOffsets(bool? store = true) => Assign(a => a.StoreTermVectorOffsets = store);
 
-		public AllFieldDescriptor StoreTermVectorPositions(bool store = true) => Assign(a => a.StoreTermVectorPositions = store);
+		public AllFieldDescriptor StoreTermVectorPositions(bool? store = true) => Assign(a => a.StoreTermVectorPositions = store);
 
-		public AllFieldDescriptor StoreTermVectorPayloads(bool store = true) => Assign(a => a.StoreTermVectorPayloads = store);
+		public AllFieldDescriptor StoreTermVectorPayloads(bool? store = true) => Assign(a => a.StoreTermVectorPayloads = store);
 
 		public AllFieldDescriptor Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 

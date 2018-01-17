@@ -25,7 +25,7 @@ namespace Nest
 		GeoPointFielddataFormat? IGeoPointFielddata.Format { get; set; }
 		Distance IGeoPointFielddata.Precision { get; set; }
 
-		public GeoPointFielddataDescriptor Format(GeoPointFielddataFormat format) => Assign(a => a.Format = format);
+		public GeoPointFielddataDescriptor Format(GeoPointFielddataFormat? format) => Assign(a => a.Format = format);
 
 		public GeoPointFielddataDescriptor Precision(Distance distance) => Assign(a => a.Precision = distance);
 	}

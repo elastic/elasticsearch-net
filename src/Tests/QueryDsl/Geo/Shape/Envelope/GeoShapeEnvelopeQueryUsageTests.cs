@@ -30,7 +30,7 @@ namespace Tests.QueryDsl.Geo.Shape.Envelope
 			Field = Field<Project>(p=>p.Location),
 			Shape = new EnvelopeGeoShape(this._coordinates),
 			Relation = GeoShapeRelation.Intersects,
-			IgnoreUnmapped = false
+			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q

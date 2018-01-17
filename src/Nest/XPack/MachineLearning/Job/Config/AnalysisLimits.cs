@@ -45,7 +45,7 @@ namespace Nest
 		string IAnalysisLimits.ModelMemoryLimit { get; set; }
 
 		/// <inheritdoc />
-		public AnalysisLimitsDescriptor CategorizationExamplesLimit(long categorizationExamplesLimit) =>
+		public AnalysisLimitsDescriptor CategorizationExamplesLimit(long? categorizationExamplesLimit) =>
 			Assign(a => a.CategorizationExamplesLimit = categorizationExamplesLimit);
 
 		/// <inheritdoc />

@@ -84,7 +84,7 @@ namespace Nest
 		public WebhookActionDescriptor Host(string host) => Assign(a => a.Host = host);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor Method(HttpInputMethod method) => Assign(a => a.Method = method);
+		public WebhookActionDescriptor Method(HttpInputMethod? method) => Assign(a => a.Method = method);
 
 		/// <inheritdoc />
 		public WebhookActionDescriptor Path(string path) => Assign(a => a.Path = path);
@@ -98,7 +98,7 @@ namespace Nest
 			Assign(a => a.Params = paramsDictionary);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor Port(int port) => Assign(a => a.Port = port);
+		public WebhookActionDescriptor Port(int? port) => Assign(a => a.Port = port);
 
 		/// <inheritdoc />
 		public WebhookActionDescriptor Proxy(Func<HttpInputProxyDescriptor, IHttpInputProxy> proxySelector) =>
@@ -108,7 +108,7 @@ namespace Nest
 		public WebhookActionDescriptor ReadTimeout(Time readTimeout) => Assign(a => a.ReadTimeout = readTimeout);
 
 		/// <inheritdoc />
-		public WebhookActionDescriptor Scheme(ConnectionScheme scheme) => Assign(a => a.Scheme = scheme);
+		public WebhookActionDescriptor Scheme(ConnectionScheme? scheme) => Assign(a => a.Scheme = scheme);
 
 		/// <inheritdoc />
 		public WebhookActionDescriptor Url(string url) => Assign(a => a.Url = url);

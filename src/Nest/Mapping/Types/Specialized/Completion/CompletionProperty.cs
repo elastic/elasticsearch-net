@@ -61,13 +61,13 @@ namespace Nest
 
 		public CompletionPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
-		public CompletionPropertyDescriptor<T> PreserveSeparators(bool preserveSeparators = true) =>
+		public CompletionPropertyDescriptor<T> PreserveSeparators(bool? preserveSeparators = true) =>
 			Assign(a => a.PreserveSeparators = preserveSeparators);
 
-		public CompletionPropertyDescriptor<T> PreservePositionIncrements(bool preservePositionIncrements = true) =>
+		public CompletionPropertyDescriptor<T> PreservePositionIncrements(bool? preservePositionIncrements = true) =>
 			Assign(a => a.PreservePositionIncrements = preservePositionIncrements);
 
-		public CompletionPropertyDescriptor<T> MaxInputLength(int maxInputLength) => Assign(a => a.MaxInputLength = maxInputLength);
+		public CompletionPropertyDescriptor<T> MaxInputLength(int? maxInputLength) => Assign(a => a.MaxInputLength = maxInputLength);
 
 		public CompletionPropertyDescriptor<T> Contexts(Func<SuggestContextsDescriptor<T>, IPromise<IList<ISuggestContext>>> contexts) =>
 			Assign(a => a.Contexts = contexts?.Invoke(new SuggestContextsDescriptor<T>()).Value);

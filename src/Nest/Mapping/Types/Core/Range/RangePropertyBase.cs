@@ -50,10 +50,10 @@ namespace Nest
 		protected RangePropertyDescriptorBase(RangeType type) : base(type.ToFieldType()) { }
 
 		/// <inheritdoc/>
-		public TDescriptor Coerce(bool coerce = true) => Assign(a => a.Coerce = coerce);
+		public TDescriptor Coerce(bool? coerce = true) => Assign(a => a.Coerce = coerce);
 		/// <inheritdoc/>
-		public TDescriptor Boost(double boost) => Assign(a => a.Boost = boost);
+		public TDescriptor Boost(double? boost) => Assign(a => a.Boost = boost);
 		/// <inheritdoc/>
-		public TDescriptor Index(bool index = true) => Assign(a => a.Index = index);
+		public TDescriptor Index(bool? index = true) => Assign(a => a.Index = index);
 	}
 }

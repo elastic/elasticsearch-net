@@ -27,8 +27,8 @@ namespace Nest
 		float? IHoltLinearModel.Alpha { get; set; }
 		float? IHoltLinearModel.Beta { get; set; }
 
-		public HoltLinearModelDescriptor Alpha(float alpha) => Assign(a => a.Alpha = alpha);
+		public HoltLinearModelDescriptor Alpha(float? alpha) => Assign(a => a.Alpha = alpha);
 
-		public HoltLinearModelDescriptor Beta(float beta) => Assign(a => a.Beta = beta);
+		public HoltLinearModelDescriptor Beta(float? beta) => Assign(a => a.Beta = beta);
 	}
 }

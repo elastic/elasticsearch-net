@@ -30,7 +30,7 @@ namespace Nest
 		public GapPolicy? GapPolicy { get; set; }
 	}
 
-	public abstract class PipelineAggregationDescriptorBase<TPipelineAggregation, TPipelineAggregationInterface, TBucketsPath> 
+	public abstract class PipelineAggregationDescriptorBase<TPipelineAggregation, TPipelineAggregationInterface, TBucketsPath>
 		: DescriptorBase<TPipelineAggregation, TPipelineAggregationInterface>, IPipelineAggregation
 		where TPipelineAggregation : PipelineAggregationDescriptorBase<TPipelineAggregation, TPipelineAggregationInterface, TBucketsPath>
 			, TPipelineAggregationInterface, IPipelineAggregation
@@ -47,7 +47,7 @@ namespace Nest
 
 		public TPipelineAggregation Format(string format) => Assign(a => a.Format = format);
 
-		public TPipelineAggregation GapPolicy(GapPolicy gapPolicy) => Assign(a => a.GapPolicy = gapPolicy);
+		public TPipelineAggregation GapPolicy(GapPolicy? gapPolicy) => Assign(a => a.GapPolicy = gapPolicy);
 
 		public TPipelineAggregation BucketsPath(TBucketsPath bucketsPath) => Assign(a => a.BucketsPath = bucketsPath);
 

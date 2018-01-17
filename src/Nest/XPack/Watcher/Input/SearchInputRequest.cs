@@ -75,7 +75,7 @@ namespace Nest
 		public SearchInputRequestDescriptor Types<T>() =>
 			Assign(a => a.Types = new[] { (TypeName)typeof(T) });
 
-		public SearchInputRequestDescriptor SearchType(SearchType searchType) =>
+		public SearchInputRequestDescriptor SearchType(SearchType? searchType) =>
 			Assign(a => a.SearchType = searchType);
 
 		public SearchInputRequestDescriptor IndicesOptions(Func<IndicesOptionsDescriptor, IIndicesOptions> selector) =>

@@ -37,7 +37,7 @@ namespace Nest
 		Fields IModelPlotConfig.Terms { get; set; }
 
 		/// <inheritdoc />
-		public ModelPlotConfigDescriptor<T> Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
+		public ModelPlotConfigDescriptor<T> Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
 
 		/// <inheritdoc />
 		public ModelPlotConfigDescriptor<T> Terms(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
@@ -75,6 +75,6 @@ namespace Nest
 		bool? IModelPlotConfigEnabled.Enabled { get; set; }
 
 		/// <inheritdoc />
-		public ModelPlotConfigEnabledDescriptor<T> Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
+		public ModelPlotConfigEnabledDescriptor<T> Enabled(bool? enabled = true) => Assign(a => a.Enabled = enabled);
 	}
 }

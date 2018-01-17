@@ -85,14 +85,14 @@ namespace Nest
 
 		bool? ITopHitsAggregation.TrackScores { get; set; }
 
-		public TopHitsAggregationDescriptor<T> From(int from) => Assign(a => a.From = from);
+		public TopHitsAggregationDescriptor<T> From(int? from) => Assign(a => a.From = from);
 
-		public TopHitsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public TopHitsAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
 		public TopHitsAggregationDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> sortSelector) =>
 			Assign(a => a.Sort = sortSelector?.Invoke(new SortDescriptor<T>())?.Value);
 
-		public TopHitsAggregationDescriptor<T> Source(bool enabled = true) =>
+		public TopHitsAggregationDescriptor<T> Source(bool? enabled = true) =>
 			Assign(a => a.Source = enabled);
 
 		public TopHitsAggregationDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> selector) =>
@@ -101,7 +101,7 @@ namespace Nest
 		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
 
-		public TopHitsAggregationDescriptor<T> Explain(bool explain = true) => Assign(a => a.Explain = explain);
+		public TopHitsAggregationDescriptor<T> Explain(bool? explain = true) => Assign(a => a.Explain = explain);
 
 		public TopHitsAggregationDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> scriptFieldsSelector) =>
 			Assign(a => a.ScriptFields = scriptFieldsSelector?.Invoke(new ScriptFieldsDescriptor())?.Value);
@@ -109,8 +109,8 @@ namespace Nest
 		public TopHitsAggregationDescriptor<T> StoredFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.StoredFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public TopHitsAggregationDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
+		public TopHitsAggregationDescriptor<T> Version(bool? version = true) => Assign(a => a.Version = version);
 
-		public TopHitsAggregationDescriptor<T> TrackScores(bool trackScores = true) => Assign(a => a.TrackScores = trackScores);
+		public TopHitsAggregationDescriptor<T> TrackScores(bool? trackScores = true) => Assign(a => a.TrackScores = trackScores);
 	}
 }

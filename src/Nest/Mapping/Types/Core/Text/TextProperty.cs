@@ -83,18 +83,18 @@ namespace Nest
 
 		public TextPropertyDescriptor() : base(FieldType.Text) { }
 
-		public TextPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
-		public TextPropertyDescriptor<T> EagerGlobalOrdinals(bool eagerGlobalOrdinals = true) => Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);
- 		public TextPropertyDescriptor<T> Fielddata(bool fielddata = true) => Assign(a => a.Fielddata = fielddata);
+		public TextPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+		public TextPropertyDescriptor<T> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true) => Assign(a => a.EagerGlobalOrdinals = eagerGlobalOrdinals);
+ 		public TextPropertyDescriptor<T> Fielddata(bool? fielddata = true) => Assign(a => a.Fielddata = fielddata);
 		public TextPropertyDescriptor<T> FielddataFrequencyFilter(Func<FielddataFrequencyFilterDescriptor, IFielddataFrequencyFilter> selector) =>
 			Assign(a => a.FielddataFrequencyFilter = selector?.Invoke(new FielddataFrequencyFilterDescriptor()));
-		public TextPropertyDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
-		public TextPropertyDescriptor<T> IndexOptions(IndexOptions indexOptions) => Assign(a => a.IndexOptions = indexOptions);
-		public TextPropertyDescriptor<T> Norms(bool enabled = true) => Assign(a => a.Norms = enabled);
-		public TextPropertyDescriptor<T> PositionIncrementGap(int positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
+		public TextPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+		public TextPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(a => a.IndexOptions = indexOptions);
+		public TextPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(a => a.Norms = enabled);
+		public TextPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
 		public TextPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 		public TextPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
 		public TextPropertyDescriptor<T> SearchQuoteAnalyzer(string searchQuoteAnalyzer) => Assign(a => a.SearchQuoteAnalyzer = searchQuoteAnalyzer);
-		public TextPropertyDescriptor<T> TermVector(TermVectorOption termVector) => Assign(a => a.TermVector = termVector);
+		public TextPropertyDescriptor<T> TermVector(TermVectorOption? termVector) => Assign(a => a.TermVector = termVector);
 	}
 }

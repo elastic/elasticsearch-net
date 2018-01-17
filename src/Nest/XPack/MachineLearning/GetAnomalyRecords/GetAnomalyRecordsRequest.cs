@@ -93,10 +93,10 @@ namespace Nest
 		double? IGetAnomalyRecordsRequest.RecordScore { get; set; }
 
 		/// <inheritdoc />
-		public GetAnomalyRecordsDescriptor Descending(bool descending = true) => Assign(a => a.Descending = descending);
+		public GetAnomalyRecordsDescriptor Descending(bool? descending = true) => Assign(a => a.Descending = descending);
 
 		/// <inheritdoc />
-		public GetAnomalyRecordsDescriptor End(DateTimeOffset end) => Assign(a => a.End = end);
+		public GetAnomalyRecordsDescriptor End(DateTimeOffset? end) => Assign(a => a.End = end);
 
 		/// <inheritdoc />
 		public GetAnomalyRecordsDescriptor Page(Func<PageDescriptor, IPage> selector) =>
@@ -106,14 +106,14 @@ namespace Nest
 		public GetAnomalyRecordsDescriptor Sort(Field field) => Assign(a => a.Sort = field);
 
 		/// <inheritdoc />
-		public GetAnomalyRecordsDescriptor Start(DateTimeOffset end) => Assign(a => a.Start = end);
+		public GetAnomalyRecordsDescriptor Start(DateTimeOffset? end) => Assign(a => a.Start = end);
 
 		/// <inheritdoc />
-		public GetAnomalyRecordsDescriptor ExcludeInterim(bool excludeInterim = true) =>
+		public GetAnomalyRecordsDescriptor ExcludeInterim(bool? excludeInterim = true) =>
 			Assign(a => a.ExcludeInterim = excludeInterim);
 
 		/// <inheritdoc />
-		public GetAnomalyRecordsDescriptor RecordScore(double recordScore) =>
+		public GetAnomalyRecordsDescriptor RecordScore(double? recordScore) =>
 			Assign(a => a.RecordScore = recordScore);
 	}
 }

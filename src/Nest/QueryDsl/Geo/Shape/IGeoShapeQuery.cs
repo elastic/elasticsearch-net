@@ -46,12 +46,12 @@ namespace Nest
 		/// <summary>
 		/// Controls the spatial relation operator to used at search time.
 		/// </summary>
-		public TDescriptor Relation(GeoShapeRelation relation) => Assign(a => a.Relation = relation);
+		public TDescriptor Relation(GeoShapeRelation? relation) => Assign(a => a.Relation = relation);
 
 		/// <summary>
 		/// Will ignore an unmapped field and will not match any documents for this query.
 		/// This can be useful when querying multiple indexes which might have different mappings.
 		/// </summary>
-		public TDescriptor IgnoreUnmapped(bool? ignoreUnmapped = false) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+		public TDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }

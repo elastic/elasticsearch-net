@@ -34,10 +34,10 @@ namespace Nest
 
 		public NestedPropertyDescriptor() : base(FieldType.Nested) { }
 
-		public NestedPropertyDescriptor<TParent, TChild> IncludeInParent(bool includeInParent = true) =>
+		public NestedPropertyDescriptor<TParent, TChild> IncludeInParent(bool? includeInParent = true) =>
 			Assign(a => a.IncludeInParent = includeInParent);
 
-		public NestedPropertyDescriptor<TParent, TChild> IncludeInRoot(bool includeInRoot = true) =>
+		public NestedPropertyDescriptor<TParent, TChild> IncludeInRoot(bool? includeInRoot = true) =>
 			Assign(a => a.IncludeInRoot = includeInRoot);
 	}
 }

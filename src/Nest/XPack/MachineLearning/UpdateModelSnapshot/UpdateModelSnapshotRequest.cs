@@ -42,6 +42,6 @@ namespace Nest
 		public UpdateModelSnapshotDescriptor Description(string description) => Assign(a => a.Description = description);
 
 		/// <inheritdoc />
-		public UpdateModelSnapshotDescriptor Retain(bool retain = true) => Assign(a => a.Retain = retain);
+		public UpdateModelSnapshotDescriptor Retain(bool? retain = true) => Assign(a => a.Retain = retain);
 	}
 }

@@ -54,8 +54,8 @@ namespace Nest
 		double? IRange.To { get; set; }
 
 		public RangeDescriptor Key(string key) => Assign(a => a.Key = key);
-		public RangeDescriptor From(double from) => Assign(a => a.From = from);
-		public RangeDescriptor To(double to) => Assign(a => a.To = to);
+		public RangeDescriptor From(double? from) => Assign(a => a.From = from);
+		public RangeDescriptor To(double? to) => Assign(a => a.To = to);
 	}
 
 	/// <inheritdoc/>

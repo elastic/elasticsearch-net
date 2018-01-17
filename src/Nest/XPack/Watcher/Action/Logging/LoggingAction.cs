@@ -35,7 +35,7 @@ namespace Nest
 
 		public LoggingActionDescriptor(string name) : base(name) {}
 
-		public LoggingActionDescriptor Level(LogLevel level) => Assign(a => a.Level = level);
+		public LoggingActionDescriptor Level(LogLevel? level) => Assign(a => a.Level = level);
 
 		public LoggingActionDescriptor Text(string text) => Assign(a => a.Text = text);
 

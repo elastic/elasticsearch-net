@@ -41,9 +41,9 @@ namespace Nest
 
 		public SortGeoDistanceDescriptor<T> Points(IEnumerable<GeoLocation> geoLocations) => Assign(a => a.Points = geoLocations);
 
-		public SortGeoDistanceDescriptor<T> Unit(DistanceUnit unit) => Assign(a => a.GeoUnit = unit);
+		public SortGeoDistanceDescriptor<T> Unit(DistanceUnit? unit) => Assign(a => a.GeoUnit = unit);
 
-		public SortGeoDistanceDescriptor<T> DistanceType(GeoDistanceType distanceType) => Assign(a => a.DistanceType = distanceType);
+		public SortGeoDistanceDescriptor<T> DistanceType(GeoDistanceType? distanceType) => Assign(a => a.DistanceType = distanceType);
 
 		public SortGeoDistanceDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 

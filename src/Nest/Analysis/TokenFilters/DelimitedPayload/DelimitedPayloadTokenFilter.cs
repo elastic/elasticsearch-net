@@ -11,10 +11,10 @@ namespace Nest
 		/// Character used for splitting the tokens.
 		/// </summary>
 		[JsonProperty("delimiter")]
-		char Delimiter { get; set; }
+		char? Delimiter { get; set; }
 
 		/// <summary>
-		/// The type of the payload. int for integer, float for float and identity for characters. 
+		/// The type of the payload. int for integer, float for float and identity for characters.
 		/// </summary>
 		[JsonProperty("encoding")]
 		DelimitedPayloadEncoding? Encoding { get; set; }
@@ -27,7 +27,7 @@ namespace Nest
 		public DelimitedPayloadTokenFilter() : base("delimited_payload_filter") { }
 
 		/// <inheritdoc/>
-		public char Delimiter { get; set; }
+		public char? Delimiter { get; set; }
 
 		/// <inheritdoc/>
 		public DelimitedPayloadEncoding? Encoding { get; set; }
@@ -35,16 +35,16 @@ namespace Nest
 	}
 
 	///<inheritdoc/>
-	public class DelimitedPayloadTokenFilterDescriptor 
+	public class DelimitedPayloadTokenFilterDescriptor
 		: TokenFilterDescriptorBase<DelimitedPayloadTokenFilterDescriptor, IDelimitedPayloadTokenFilter>, IDelimitedPayloadTokenFilter
 	{
 		protected override string Type => "delimited_payload_filter";
 
-		char IDelimitedPayloadTokenFilter.Delimiter { get; set; }
+		char? IDelimitedPayloadTokenFilter.Delimiter { get; set; }
 		DelimitedPayloadEncoding? IDelimitedPayloadTokenFilter.Encoding { get; set; }
 
 		///<inheritdoc/>
-		public DelimitedPayloadTokenFilterDescriptor Delimiter(char delimiter) => Assign(a => a.Delimiter = delimiter);
+		public DelimitedPayloadTokenFilterDescriptor Delimiter(char? delimiter) => Assign(a => a.Delimiter = delimiter);
 
 		///<inheritdoc/>
 		public DelimitedPayloadTokenFilterDescriptor Encoding(DelimitedPayloadEncoding? encoding) => Assign(a => a.Encoding = encoding);

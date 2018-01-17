@@ -134,7 +134,7 @@ namespace Nest
 		/// The number of chars being used for extraction to prevent huge fields. Use -1 for no limit.
 		/// Defaults to 100000.
 		/// </summary>
-		public AttachmentProcessorDescriptor<T> IndexedCharacters(long indexedCharacters) => Assign(a => a.IndexedCharacters = indexedCharacters);
+		public AttachmentProcessorDescriptor<T> IndexedCharacters(long? indexedCharacters) => Assign(a => a.IndexedCharacters = indexedCharacters);
 
 		/// <inheritdoc/>
 		public AttachmentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);

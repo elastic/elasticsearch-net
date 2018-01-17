@@ -31,12 +31,12 @@ namespace Nest
 		/// How to round the date when formatting the date into the index name.
 		/// </summary>
 		[JsonProperty("date_rounding")]
-		DateRounding DateRounding { get; set; }
+		DateRounding? DateRounding { get; set; }
 
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-ddâ€™T'HH:mm:ss.SSSZ
 		/// </summary>
 		[JsonProperty("date_formats")]
 		IEnumerable<string> DateFormats { get; set; }
@@ -82,12 +82,12 @@ namespace Nest
 		/// <summary>
 		/// How to round the date when formatting the date into the index name.
 		/// </summary>
-		public DateRounding DateRounding { get; set; }
+		public DateRounding? DateRounding { get; set; }
 
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-ddâ€™T'HH:mm:ss.SSSZ
 		/// </summary>
 		public IEnumerable<string> DateFormats { get; set; }
 
@@ -120,7 +120,7 @@ namespace Nest
 
 		Field IDateIndexNameProcessor.Field { get; set; }
 		string IDateIndexNameProcessor.IndexNamePrefix { get; set; }
-		DateRounding IDateIndexNameProcessor.DateRounding { get; set; }
+		DateRounding? IDateIndexNameProcessor.DateRounding { get; set; }
 		IEnumerable<string> IDateIndexNameProcessor.DateFormats { get; set; }
 		string IDateIndexNameProcessor.TimeZone { get; set; }
 		string IDateIndexNameProcessor.Locale { get; set; }
@@ -146,13 +146,13 @@ namespace Nest
 		/// <summary>
 		/// How to round the date when formatting the date into the index name.
 		/// </summary>
-		public DateIndexNameProcessorDescriptor<T> DateRounding(DateRounding dateRounding) =>
+		public DateIndexNameProcessorDescriptor<T> DateRounding(DateRounding? dateRounding) =>
 			Assign(a => a.DateRounding = dateRounding);
 
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-ddâ€™T'HH:mm:ss.SSSZ
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> DateFormats(IEnumerable<string> dateFormats) =>
 			Assign(a => a.DateFormats = dateFormats);
@@ -160,7 +160,7 @@ namespace Nest
 		/// <summary>
 		/// An array of the expected date formats for parsing
 		/// dates / timestamps in the document being preprocessed.
-		/// Default is yyyy-MM-dd’T'HH:mm:ss.SSSZ
+		/// Default is yyyy-MM-ddâ€™T'HH:mm:ss.SSSZ
 		/// </summary>
 		public DateIndexNameProcessorDescriptor<T> DateFormats(params string[] dateFormats) =>
 			Assign(a => a.DateFormats = dateFormats);

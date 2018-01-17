@@ -92,16 +92,16 @@ namespace Nest
 		DateTimeOffset? IGetInfluencersRequest.Start { get; set; }
 
 		/// <inheritdoc />
-		public GetInfluencersDescriptor InfluencerScore(double influencerScore) => Assign(a => a.InfluencerScore = influencerScore);
+		public GetInfluencersDescriptor InfluencerScore(double? influencerScore) => Assign(a => a.InfluencerScore = influencerScore);
 
 		/// <inheritdoc />
-		public GetInfluencersDescriptor Desc(bool descending = true) => Assign(a => a.Descending = descending);
+		public GetInfluencersDescriptor Desc(bool? descending = true) => Assign(a => a.Descending = descending);
 
 		/// <inheritdoc />
-		public GetInfluencersDescriptor End(DateTimeOffset end) => Assign(a => a.End = end);
+		public GetInfluencersDescriptor End(DateTimeOffset? end) => Assign(a => a.End = end);
 
 		/// <inheritdoc />
-		public GetInfluencersDescriptor ExcludeInterim(bool excludeInterim = true) => Assign(a => a.ExcludeInterim = excludeInterim);
+		public GetInfluencersDescriptor ExcludeInterim(bool? excludeInterim = true) => Assign(a => a.ExcludeInterim = excludeInterim);
 
 		/// <inheritdoc />
 		public GetInfluencersDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(a => a.Page = selector?.Invoke(new PageDescriptor()));
@@ -110,6 +110,6 @@ namespace Nest
 		public GetInfluencersDescriptor Sort(Field field) => Assign(a => a.Sort = field);
 
 		/// <inheritdoc />
-		public GetInfluencersDescriptor Start(DateTimeOffset end) => Assign(a => a.Start = end);
+		public GetInfluencersDescriptor Start(DateTimeOffset? end) => Assign(a => a.Start = end);
 	}
 }

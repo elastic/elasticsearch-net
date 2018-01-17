@@ -89,10 +89,10 @@ namespace Nest
 		public ExecuteWatchDescriptor TriggerData(Func<ScheduleTriggerEventDescriptor, IScheduleTriggerEvent> selector) =>
 			Assign(a => a.TriggerData = selector?.InvokeOrDefault(new ScheduleTriggerEventDescriptor()));
 
-		public ExecuteWatchDescriptor IgnoreCondition(bool ignore = true) =>
+		public ExecuteWatchDescriptor IgnoreCondition(bool? ignore = true) =>
 			Assign(a => a.IgnoreCondition = ignore);
 
-		public ExecuteWatchDescriptor RecordExecution(bool record = true) =>
+		public ExecuteWatchDescriptor RecordExecution(bool? record = true) =>
 			Assign(a => a.RecordExecution = record);
 
 		public ExecuteWatchDescriptor ActionModes(Func<FluentDictionary<string, ActionExecutionMode>, FluentDictionary<string, ActionExecutionMode>> actionModesDictionary) =>

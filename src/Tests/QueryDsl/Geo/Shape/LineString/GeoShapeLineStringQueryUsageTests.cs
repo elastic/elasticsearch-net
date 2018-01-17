@@ -30,7 +30,7 @@ namespace Tests.QueryDsl.Geo.Shape.LineString
 			Field = Field<Project>(p=>p.Location),
 			Shape = new LineStringGeoShape(this._coordinates),
 			Relation = GeoShapeRelation.Intersects,
-			IgnoreUnmapped = false
+			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q

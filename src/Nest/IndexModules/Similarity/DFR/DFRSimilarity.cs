@@ -95,10 +95,10 @@ namespace Nest
 		double? IDFRSimilarity.NormalizationZZ { get; set; }
 
 		/// <inheritdoc/>
-		public DFRSimilarityDescriptor BasicModel(DFRBasicModel model) => Assign(a => a.BasicModel = model);
+		public DFRSimilarityDescriptor BasicModel(DFRBasicModel? model) => Assign(a => a.BasicModel = model);
 
 		/// <inheritdoc/>
-		public DFRSimilarityDescriptor AfterEffect(DFRAfterEffect afterEffect) => Assign(a => a.AfterEffect = afterEffect);
+		public DFRSimilarityDescriptor AfterEffect(DFRAfterEffect? afterEffect) => Assign(a => a.AfterEffect = afterEffect);
 
 		/// <inheritdoc/>
 		public DFRSimilarityDescriptor NoNormalization() => Assign(a => a.Normalization = Normalization.No);
@@ -107,9 +107,9 @@ namespace Nest
 		/// Normalization model that assumes a uniform distribution of the term frequency.
 		/// </summary>
 		/// <param name="c">hyper-parameter that controls the term frequency normalization with respect to the document length.</param>
-		public DFRSimilarityDescriptor NormalizationH1(double c) => Assign(a =>
+		public DFRSimilarityDescriptor NormalizationH1(double? c) => Assign(a =>
 		{
-			a.Normalization = Normalization.H1;
+			a.Normalization = c == null ? (Normalization?) null : Normalization.H1;
 			a.NormalizationH1C = c;
 		});
 
@@ -117,9 +117,9 @@ namespace Nest
 		/// Normalization model in which the term frequency is inversely related to the length.
 		/// </summary>
 		/// <param name="c">hyper-parameter that controls the term frequency normalization with respect to the document length.</param>
-		public DFRSimilarityDescriptor NormalizationH2(double c) => Assign(a =>
+		public DFRSimilarityDescriptor NormalizationH2(double? c) => Assign(a =>
 		{
-			a.Normalization = Normalization.H2;
+			a.Normalization = c == null ? (Normalization?) null : Normalization.H2;
 			a.NormalizationH1C = c;
 		});
 
@@ -127,19 +127,17 @@ namespace Nest
 		/// Dirichlet Priors normalization
 		/// </summary>
 		/// <param name="mu">smoothing parameter μ.</param>
-		public DFRSimilarityDescriptor NormalizationH3(double mu) => Assign(a =>
+		public DFRSimilarityDescriptor NormalizationH3(double? mu) => Assign(a =>
 		{
-			a.Normalization = Normalization.H3;
+			a.Normalization = mu == null ? (Normalization?) null : Normalization.H3;
 			a.NormalizationH1C = mu;
 		});
 
-		/// <summary>
-		/// Pareto-Zipf Normalization
-		/// </summary>
+		/// <summary> Pareto-Zipf Normalization </summary>
 		/// <param name="z">represents A/(A+1) where A measures the specificity of the language..</param>
-		public DFRSimilarityDescriptor NormalizationZ(double z) => Assign(a =>
+		public DFRSimilarityDescriptor NormalizationZ(double? z) => Assign(a =>
 		{
-			a.Normalization = Normalization.Z;
+			a.Normalization = z == null ? (Normalization?) null : Normalization.Z;
 			a.NormalizationH1C = z;
 		});
 	}

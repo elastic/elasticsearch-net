@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IRestoreRequest 
+	public partial interface IRestoreRequest
 	{
 		[JsonProperty("indices")]
 		Indices Indices { get; set; }
@@ -22,23 +22,23 @@ namespace Nest
 		List<string> IgnoreIndexSettings { get; set; }
 	}
 
-	public partial class RestoreRequest 
+	public partial class RestoreRequest
 	{
 		public Indices Indices { get; set; }
-		
+
 		public bool? IgnoreUnavailable { get; set; }
-		
+
 		public bool? IncludeGlobalState { get; set; }
-		
+
 		public string RenamePattern { get; set; }
-		
+
 		public string RenameReplacement { get; set; }
 		public IUpdateIndexSettingsRequest IndexSettings { get; set; }
 		public List<string> IgnoreIndexSettings { get; set; }
 	}
 
 	[DescriptorFor("SnapshotRestore")]
-	public partial class RestoreDescriptor 
+	public partial class RestoreDescriptor
 	{
 		Indices IRestoreRequest.Indices { get; set; }
 		bool? IRestoreRequest.IgnoreUnavailable { get; set; }
@@ -54,9 +54,9 @@ namespace Nest
 
 		public RestoreDescriptor Indices(Indices indices) => Assign(a => a.Indices = indices);
 
-		public RestoreDescriptor IgnoreUnavailable(bool ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
+		public RestoreDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
 
-		public RestoreDescriptor IncludeGlobalState(bool includeGlobalState = true) => Assign(a => a.IncludeGlobalState = includeGlobalState);
+		public RestoreDescriptor IncludeGlobalState(bool? includeGlobalState = true) => Assign(a => a.IncludeGlobalState = includeGlobalState);
 
 		public RestoreDescriptor RenamePattern(string renamePattern) => Assign(a => a.RenamePattern = renamePattern);
 

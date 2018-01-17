@@ -52,7 +52,7 @@ namespace Nest
 		public NestedQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public NestedQueryDescriptor<T> ScoreMode(NestedScoreMode scoreMode) => Assign(a => a.ScoreMode = scoreMode);
+		public NestedQueryDescriptor<T> ScoreMode(NestedScoreMode? scoreMode) => Assign(a => a.ScoreMode = scoreMode);
 
 		public NestedQueryDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
 
@@ -61,7 +61,7 @@ namespace Nest
 		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
 			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
 
-		public NestedQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = false) =>
+		public NestedQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) =>
 			Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }

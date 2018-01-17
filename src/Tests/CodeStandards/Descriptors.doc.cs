@@ -173,34 +173,106 @@ namespace Tests.CodeStandards
 			processors.Should().OnlyContain(p => p.Contains("Processor"));
 		}
 
-		//TODO descriptors taking a single valuetype parameter should always be nullable
-		//[U]
-		//public void DescriptorMethodsTakingSingleValueTypeShouldBeNullable()
-		//{
-		//	var descriptors =
-		//		from t in typeof(DescriptorBase<,>).Assembly().Types()
-		//		where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
-		//		where !t.IsAbstract()
-		//		select t;
+		[U]
+		public void DescriptorMethodsTakingSingleValueTypeShouldBeNullable()
+		{
+			var methods = from d in YieldAllDescriptors()
+				from m in d.GetMethods()
+				let ps = m.GetParameters()
+				where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
+				let p = ps.First()
+				let pt = p.ParameterType
+				where (!pt.IsGenericType() || pt.GetGenericTypeDefinition() != typeof(Nullable<>))
+				let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
 
-		//	var breakingDescriptors = new List<string>();
+				//skips
+				where !(new[] {"metric", "indexMetric", "watcherStatsMetric"}.Contains(p.Name))
+				where !(m.Name == "Interval" && d == typeof(DateHistogramAggregationDescriptor<>))
+				where !(m.Name == "Lang" && dt == typeof(ScriptDescriptorBase<,>))
+				where !(m.Name == "Lang" && dt == typeof(StoredScriptDescriptor))
+				where !(m.Name == "Lang" && dt == typeof(ScriptQueryDescriptor<>))
+				where !(m.Name == "RefreshOnCompleted" && dt == typeof(BulkAllDescriptor<>))
+				where !(m.Name == nameof(ReindexDescriptor<object, object>.OmitIndexCreation) && dt == typeof(ReindexDescriptor<,>))
+				where !(m.Name == nameof(PutMappingDescriptor<object>.AutoMap))
+				where !(m.Name == nameof(PutMappingDescriptor<object>.Dynamic))
+				where !(m.Name == "Strict" && dt == typeof(QueryDescriptorBase<,>))
+				where !(m.Name == "Verbatim" && dt == typeof(QueryDescriptorBase<,>))
+				where !(m.Name == nameof(FunctionScoreQueryDescriptor<object>.ConditionlessWhen) && dt == typeof(FunctionScoreQueryDescriptor<>))
+				where !(m.Name == nameof(ScoreFunctionsDescriptor<object>.RandomScore) && dt == typeof(ScoreFunctionsDescriptor<>))
+				where !(m.Name == nameof(GeoHashCellQueryDescriptor<object>.Precision) && dt == typeof(GeoHashCellQueryDescriptor<>))
+				where !(m.Name == nameof(HighlightFieldDescriptor<object>.Type) && dt == typeof(HighlightFieldDescriptor<>))
+				where !(m.Name == nameof(InnerHitsDescriptor<object>.Source) && dt == typeof(InnerHitsDescriptor<>))
+				where !(m.Name == nameof(SearchDescriptor<object>.Source) && dt == typeof(SearchDescriptor<>))
+				where !(m.Name == nameof(ScoreFunctionsDescriptor<object>.Weight) && dt == typeof(ScoreFunctionsDescriptor<>))
+				where !(m.Name == nameof(SortDescriptor<object>.Ascending) && dt == typeof(SortDescriptor<>))
+				where !(m.Name == nameof(SortDescriptor<object>.Descending) && dt == typeof(SortDescriptor<>))
 
-		//	foreach (var descriptor in descriptors)
-		//	{
-		//		foreach (var descriptorMethod in descriptor.Methods().Where(
-		//			m => m.GetParameters().Length == 1 &&
-		//			m.GetParameters().Any(p => p.ParameterType.IsValueType())))
-		//		{
-		//			foreach (var parameter in descriptorMethod.GetParameters())
-		//			{
-		//				if (!parameter.ParameterType.IsGenericType() || parameter.ParameterType.GetGenericTypeDefinition() != typeof(Nullable<>))
-		//					breakingDescriptors.Add($"{parameter.Name} on method {descriptorMethod.Name} of {descriptor.FullName} is not nullable");
-		//			}
-		//		}
-		//	}
 
-		//	breakingDescriptors.Should().BeEmpty();
-		//}
+				select new {m, d, p};
+
+			var breakingDescriptors = new List<string>();
+
+			foreach (var info in methods)
+			{
+				var m = info.m;
+				var d = info.d;
+				var p = info.p;
+
+				breakingDescriptors.Add($"{p.Name} on method {m.Name} of {d.FullName} is not nullable");
+			}
+
+			breakingDescriptors.Should().BeEmpty();
+		}
+
+		[U] public void NullableBooleansShouldDefaultToTrue()
+		{
+			var methods = from d in YieldAllDescriptors()
+				from m in d.GetMethods()
+				let ps = m.GetParameters()
+				where ps.Length == 1 && ps.Any(pp => pp.ParameterType.IsValueType())
+				let p = ps.First()
+				let pt = p.ParameterType
+				where pt == typeof(bool?)
+				let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
+				where !(m.Name == nameof(BooleanPropertyDescriptor<object>.NullValue) && dt == typeof(BooleanPropertyDescriptor<>))
+				select new {m, d, p};
+
+			var nullableBools = new List<string>();
+			foreach (var info in methods)
+			{
+				var m = info.m;
+				var d = info.d;
+				var p = info.p;
+				if (!p.HasDefaultValue)
+					nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} is has no default value");
+
+				try
+				{
+
+					var b = ((bool?) p.RawDefaultValue);
+					if (!b.HasValue)
+						nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} defaults to null");
+					else if (!b.Value)
+						nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} default to false");
+				}
+				catch (Exception e)
+				{
+					nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} defaults to unknown");
+				}
+			}
+			nullableBools.Should().BeEmpty();
+
+		}
+
+		private static IEnumerable<Type> YieldAllDescriptors()
+		{
+			var descriptors =
+				from t in typeof(DescriptorBase<,>).Assembly().Types()
+				where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+				where !t.IsAbstract()
+				select t;
+			return descriptors;
+		}
 
 		//TODO methods taking params should also have a version taking IEnumerable
 

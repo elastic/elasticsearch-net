@@ -5,12 +5,12 @@ namespace Nest
 		/// <summary>Defaults to true. Set to false to disable the disk allocation decider.</summary>
 		bool? ThresholdEnabled { get; set; }
 
-		/// <summary>Controls the low watermark for disk usage. It defaults to 85%, meaning ES will not allocate new shards to nodes once they have more than 85% disk used. It can also be set 
+		/// <summary>Controls the low watermark for disk usage. It defaults to 85%, meaning ES will not allocate new shards to nodes once they have more than 85% disk used. It can also be set
 		/// to an absolute byte value (like 500mb) to prevent ES from allocating shards if less than the configured amount of space is available.</summary>
 		string LowWatermark { get; set; }
 
-		/// <summary> 
-		/// Controls the high watermark. It defaults to 90%, meaning ES will attempt to relocate shards to another node if the node disk usage rises above 90%. 
+		/// <summary>
+		/// Controls the high watermark. It defaults to 90%, meaning ES will attempt to relocate shards to another node if the node disk usage rises above 90%.
 		/// It can also be set to an absolute byte value (similar to the low watermark) to relocate shards once less than the
 		///  configured amount of space is available on the node.</summary>
 		string HighWatermark { get; set; }
@@ -19,9 +19,9 @@ namespace Nest
 		Time UpdateInterval { get; set; }
 
 		/// <summary>
-		/// Defaults to true, which means that Elasticsearch will take into account shards that are currently being relocated to the target node when computing 
-		/// a node’s disk usage. Taking relocating shards' sizes into account may, however, mean that the disk usage for a node is incorrectly estimated on the high side,
-		/// since the relocation could be 90% complete and a recently retrieved disk usage would include the total size of the 
+		/// Defaults to true, which means that Elasticsearch will take into account shards that are currently being relocated to the target node when computing
+		/// a nodeâ€™s disk usage. Taking relocating shards' sizes into account may, however, mean that the disk usage for a node is incorrectly estimated on the high side,
+		/// since the relocation could be 90% complete and a recently retrieved disk usage would include the total size of the
 		/// relocating shard as well as the space already used by the running relocation.
 		/// </summary>
 		bool? IncludeRelocations { get; set; }
@@ -45,7 +45,7 @@ namespace Nest
 		public bool? IncludeRelocations { get; set; }
 	}
 
-	public class DiskBasedShardAllocationSettingsDescriptor 
+	public class DiskBasedShardAllocationSettingsDescriptor
 		: DescriptorBase<DiskBasedShardAllocationSettingsDescriptor, IDiskBasedShardAllocationSettings>, IDiskBasedShardAllocationSettings
 	{
 		bool? IDiskBasedShardAllocationSettings.ThresholdEnabled { get; set; }
@@ -59,7 +59,7 @@ namespace Nest
 		bool? IDiskBasedShardAllocationSettings.IncludeRelocations { get; set; }
 
 		///<inheritdoc/>
-		public DiskBasedShardAllocationSettingsDescriptor ThresholdEnabled(bool? enable) => Assign(a => a.ThresholdEnabled = enable);
+		public DiskBasedShardAllocationSettingsDescriptor ThresholdEnabled(bool? enable = true) => Assign(a => a.ThresholdEnabled = enable);
 
 		///<inheritdoc/>
 		public DiskBasedShardAllocationSettingsDescriptor LowWatermark(string low) => Assign(a => a.LowWatermark = low);
@@ -71,7 +71,7 @@ namespace Nest
 		public DiskBasedShardAllocationSettingsDescriptor UpdateInterval(Time time) => Assign(a => a.UpdateInterval = time);
 
 		///<inheritdoc/>
-		public DiskBasedShardAllocationSettingsDescriptor IncludeRelocations(bool? include) => Assign(a => a.IncludeRelocations = include);
+		public DiskBasedShardAllocationSettingsDescriptor IncludeRelocations(bool? include = true) => Assign(a => a.IncludeRelocations = include);
 
 
 	}

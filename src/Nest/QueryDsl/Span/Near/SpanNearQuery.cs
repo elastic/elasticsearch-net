@@ -49,7 +49,7 @@ namespace Nest
 
 		public SpanNearQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
 
-		public SpanNearQueryDescriptor<T> InOrder(bool? inOrder = false) => Assign(a => a.InOrder = inOrder);
+		public SpanNearQueryDescriptor<T> InOrder(bool? inOrder = true) => Assign(a => a.InOrder = inOrder);
 
 	}
 }
