@@ -46,7 +46,6 @@ namespace Nest
 		private IGeoBoundingBoxQuery _geoBoundingBox;
 		private IGeoDistanceQuery _geoDistance;
 		private IGeoPolygonQuery _geoPolygon;
-		private IGeoHashCellQuery _geoHashCell;
 		private IScriptQuery _script;
 		private IExistsQuery _exists;
 		private ITypeQuery _type;
@@ -106,7 +105,6 @@ namespace Nest
 		IGeoBoundingBoxQuery IQueryContainer.GeoBoundingBox { get { return _geoBoundingBox; } set { _geoBoundingBox = Set(value); } }
 		IGeoDistanceQuery IQueryContainer.GeoDistance { get { return _geoDistance; } set { _geoDistance = Set(value); } }
 		IGeoPolygonQuery IQueryContainer.GeoPolygon { get { return _geoPolygon; } set { _geoPolygon = Set(value); } }
-		IGeoHashCellQuery IQueryContainer.GeoHashCell { get { return _geoHashCell; } set { _geoHashCell = Set(value); } }
 		IScriptQuery IQueryContainer.Script { get { return _script; } set { _script = Set(value); } }
 		IExistsQuery IQueryContainer.Exists { get { return _exists; } set { _exists = Set(value); } }
 		ITypeQuery IQueryContainer.Type { get { return _type; } set { _type = Set(value); } }

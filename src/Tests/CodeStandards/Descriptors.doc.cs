@@ -199,7 +199,6 @@ namespace Tests.CodeStandards
 				where !(m.Name == "Verbatim" && dt == typeof(QueryDescriptorBase<,>))
 				where !(m.Name == nameof(FunctionScoreQueryDescriptor<object>.ConditionlessWhen) && dt == typeof(FunctionScoreQueryDescriptor<>))
 				where !(m.Name == nameof(ScoreFunctionsDescriptor<object>.RandomScore) && dt == typeof(ScoreFunctionsDescriptor<>))
-				where !(m.Name == nameof(GeoHashCellQueryDescriptor<object>.Precision) && dt == typeof(GeoHashCellQueryDescriptor<>))
 				where !(m.Name == nameof(HighlightFieldDescriptor<object>.Type) && dt == typeof(HighlightFieldDescriptor<>))
 				where !(m.Name == nameof(InnerHitsDescriptor<object>.Source) && dt == typeof(InnerHitsDescriptor<>))
 				where !(m.Name == nameof(SearchDescriptor<object>.Source) && dt == typeof(SearchDescriptor<>))
@@ -255,7 +254,7 @@ namespace Tests.CodeStandards
 					else if (!b.Value)
 						nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} default to false");
 				}
-				catch (Exception e)
+				catch
 				{
 					nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} defaults to unknown");
 				}

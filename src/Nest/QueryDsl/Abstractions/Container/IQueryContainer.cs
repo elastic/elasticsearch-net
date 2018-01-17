@@ -142,9 +142,6 @@ namespace Nest
 		[JsonProperty("geo_polygon")]
 		IGeoPolygonQuery GeoPolygon { get; set; }
 
-		[JsonProperty("geohash_cell")]
-		IGeoHashCellQuery GeoHashCell { get; set; }
-
 		[JsonProperty("script")]
 		IScriptQuery Script { get; set; }
 
