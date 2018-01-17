@@ -33,7 +33,7 @@ namespace Tests.QueryDsl.Joining.Nested
 						{ "curatedTags.name", new [] {"lorem", "ipsum"} }
 					}
 				},
-				ignore_unmapped = false,
+				ignore_unmapped = true,
 				path = "curatedTags",
 				inner_hits = new
 				{
@@ -53,7 +53,7 @@ namespace Tests.QueryDsl.Joining.Nested
 				Field = Field<Project>(p => p.CuratedTags.First().Name),
 				Terms = new[] { "lorem", "ipsum" }
 			},
-			IgnoreUnmapped = false
+			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q

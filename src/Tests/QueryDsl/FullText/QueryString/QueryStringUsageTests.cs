@@ -30,7 +30,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				max_determinized_states = 2,
 				minimum_should_match = 2,
 				lenient = true,
-				locale = "en_US",
 				time_zone = "root",
 				fields = new[] { "description", "myOtherField" },
 				tie_breaker = 1.2,

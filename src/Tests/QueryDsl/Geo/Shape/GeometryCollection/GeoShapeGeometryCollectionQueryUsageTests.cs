@@ -121,7 +121,7 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 				}
 			},
 			Relation = GeoShapeRelation.Intersects,
-			IgnoreUnmapped = false
+			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
