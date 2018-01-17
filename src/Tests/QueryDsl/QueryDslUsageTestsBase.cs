@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -13,7 +14,10 @@ namespace Tests.QueryDsl
 {
 	public abstract class QueryDslUsageTestsBase : ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected QueryDslUsageTestsBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected QueryDslUsageTestsBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+
+		}
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
@@ -43,7 +47,7 @@ namespace Tests.QueryDsl
 		}
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Query(this.QueryFluent);
+			.Query(q => this.QueryFluent(q));
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
@@ -93,7 +97,12 @@ namespace Tests.QueryDsl
 				when(query);
 			}
 		}
+		[I] protected async Task AssertQueryResponse() => await this.AssertOnAllResponses(r =>
+		{
+			r.IsValid.Should().BeTrue();
+		});
 
-		private void IsConditionless(IQueryContainer q, bool be) => q.IsConditionless.Should().Be(be);
+
+
 	}
 }
