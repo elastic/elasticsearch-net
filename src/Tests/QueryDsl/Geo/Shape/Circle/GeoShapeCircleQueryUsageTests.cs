@@ -26,7 +26,6 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 			Field = Field<Project>(p=>p.Location),
 			Shape = new CircleGeoShape(this._coordinates) { Radius = "100m" },
 			Relation = GeoShapeRelation.Intersects,
-			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -34,7 +33,6 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
-				.IgnoreUnmapped()
 				.Coordinates(this._coordinates)
 				.Radius("100m")
 				.Relation(GeoShapeRelation.Intersects)

@@ -149,8 +149,6 @@ namespace Nest
 
 		public virtual void Visit(IGeoDistanceQuery query) => Write("geo_distance");
 
-		public virtual void Visit(IGeoHashCellQuery filter) => Write("geohash_cell");
-
 		public virtual void Visit(ISpanMultiTermQuery query) => Write("span_multi_term");
 
 		public virtual void Visit(IGeoShapeMultiPointQuery query)=> Write("geo_multi_point");

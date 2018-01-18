@@ -20,23 +20,23 @@ namespace Tests.QueryDsl.Joining.ParentId
 			parent_id = new
 			{
 				_name = "named_query",
-				type = "developer",
-				id = Project.First.Name
+				type = "commits",
+				id = Project.Instance.Name
 			}
 		};
 
 		protected override QueryContainer QueryInitializer => new ParentIdQuery
 		{
 			Name = "named_query",
-			Type = Infer.Relation<Developer>(),
-			Id = Project.First.Name
+			Type = Infer.Relation<CommitActivity>(),
+			Id = Project.Instance.Name
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.ParentId(p => p
 				.Name("named_query")
-				.Type<Developer>()
-				.Id(Project.First.Name)
+				.Type<CommitActivity>()
+				.Id(Project.Instance.Name)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IParentIdQuery>(a => a.ParentId)

@@ -9,6 +9,8 @@ namespace Tests.QueryDsl.Joining.SpanNot
 	{
 		public SpanNotUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		protected override bool KnownParseException => true; //using both pre/post AND dist needs to be split up in to two.
+
 		protected override object QueryJson => new
 		{
 			span_not = new
@@ -27,7 +29,6 @@ namespace Tests.QueryDsl.Joining.SpanNot
 				post = 13,
 				dist = 12
 			}
-
 		};
 
 		protected override QueryContainer QueryInitializer => new SpanNotQuery

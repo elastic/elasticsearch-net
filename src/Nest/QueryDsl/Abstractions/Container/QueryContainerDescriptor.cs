@@ -229,9 +229,6 @@ namespace Nest
 		public QueryContainer GeoPolygon(Func<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.GeoPolygon = query);
 
-		public QueryContainer GeoHashCell(Func<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoHashCell = query);
-
 		/// <summary>
 		/// Matches documents with a geo_point type field to include only those
 		/// that exist within a specific distance from a given geo_point

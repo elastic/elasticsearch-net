@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -14,6 +15,7 @@ namespace Tests.QueryDsl
 	public abstract class QueryDslUsageTestsBase : ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected QueryDslUsageTestsBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
@@ -43,7 +45,7 @@ namespace Tests.QueryDsl
 		}
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Query(this.QueryFluent);
+			.Query(q => this.QueryFluent(q));
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
@@ -94,6 +96,17 @@ namespace Tests.QueryDsl
 			}
 		}
 
-		private void IsConditionless(IQueryContainer q, bool be) => q.IsConditionless.Should().Be(be);
+		protected virtual bool KnownParseException => false;
+
+		[I] protected async Task AssertQueryResponse() => await this.AssertOnAllResponses(r =>
+		{
+			var validOrNotParseExceptionOrKnownParseException = r.IsValid || r.ServerError?.Error.Type != "parsing_exception" || KnownParseException;
+			validOrNotParseExceptionOrKnownParseException.Should().BeTrue("query should be valid or when not valid not a parsing_exception.");
+
+			//TODO only assert IsValid == true and remove corner cases we don't have time to fix now.
+		});
+
+
+
 	}
 }

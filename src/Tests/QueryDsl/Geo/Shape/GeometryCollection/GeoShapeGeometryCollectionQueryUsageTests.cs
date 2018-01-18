@@ -121,7 +121,6 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 				}
 			},
 			Relation = GeoShapeRelation.Intersects,
-			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -138,7 +137,6 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 					new MultiPolygonGeoShape(this._multiPolygonCoordinates)
 				)
 				.Relation(GeoShapeRelation.Intersects)
-				.IgnoreUnmapped()
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeGeometryCollectionQuery>(a => a.GeoShape as IGeoShapeGeometryCollectionQuery)

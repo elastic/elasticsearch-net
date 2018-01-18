@@ -21,10 +21,10 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 		{
 			geo_shape = new
 			{
+				_name="named_query",
+				boost = 1.1,
 				location = new
 				{
-					_name="named_query",
-					boost = 1.1,
 					indexed_shape = new
 					{
 						id = 2,

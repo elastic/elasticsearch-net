@@ -26,10 +26,11 @@ namespace Nest
 		protected override bool Conditionless => GeoShapeEnvelopeQuery.IsConditionless(this);
 		IEnvelopeGeoShape IGeoShapeEnvelopeQuery.Shape { get; set; }
 
-		public GeoShapeEnvelopeQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates) => Assign(a =>
+		public GeoShapeEnvelopeQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates, bool? ignoreUnmapped = null) => Assign(a =>
 		{
 			a.Shape = a.Shape ?? new EnvelopeGeoShape();
 			a.Shape.Coordinates = coordinates;
+			a.Shape.IgnoreUnmapped = ignoreUnmapped;
 		});
 	}
 }

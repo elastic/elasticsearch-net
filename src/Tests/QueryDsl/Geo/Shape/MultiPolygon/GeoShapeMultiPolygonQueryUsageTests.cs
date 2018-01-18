@@ -46,7 +46,6 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPolygon
 			Field = Field<Project>(p => p.Location),
 			Shape = new MultiPolygonGeoShape(this._coordinates),
 			Relation = GeoShapeRelation.Intersects,
-			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -56,7 +55,6 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPolygon
 				.Field(p => p.Location)
 				.Coordinates(this._coordinates)
 				.Relation(GeoShapeRelation.Intersects)
-				.IgnoreUnmapped()
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeMultiPolygonQuery>(a => a.GeoShape as IGeoShapeMultiPolygonQuery)

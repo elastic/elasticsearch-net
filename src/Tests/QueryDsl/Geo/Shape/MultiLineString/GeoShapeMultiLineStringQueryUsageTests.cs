@@ -31,7 +31,6 @@ namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 			Field = Field<Project>(p=>p.Location),
 			Shape = new MultiLineStringGeoShape(this._coordinates),
 			Relation = GeoShapeRelation.Intersects,
-			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -41,7 +40,6 @@ namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
 				.Relation(GeoShapeRelation.Intersects)
-				.IgnoreUnmapped()
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeMultiLineStringQuery>(a => a.GeoShape as IGeoShapeMultiLineStringQuery)
