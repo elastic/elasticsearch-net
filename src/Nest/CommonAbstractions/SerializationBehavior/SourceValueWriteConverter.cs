@@ -26,9 +26,7 @@ namespace Nest
 			writer.WriteRawValue(v);
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			throw new NotImplementedException("CanRead is false so this is not expected to be called");
-		}
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
+			throw new NotSupportedException();
 	}
 }
