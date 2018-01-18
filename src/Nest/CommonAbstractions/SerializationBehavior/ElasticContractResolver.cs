@@ -82,6 +82,27 @@ namespace Nest
 			});
 		}
 
+		private static Type _readAsType = typeof(ReadAsTypeJsonConverter<>);
+		protected override JsonConverter ResolveContractConverter(Type objectType)
+		{
+			var info = objectType.GetTypeInfo();
+			var attribute = info.GetCustomAttribute<ReadAsAttribute>();
+			if (attribute == null)
+				return base.ResolveContractConverter(objectType);
+
+			var readAsType = attribute.Type;
+			var readAsTypeInfo = readAsType.GetTypeInfo();
+			if (!readAsTypeInfo.IsGenericType || !readAsTypeInfo.IsGenericTypeDefinition)
+				return (JsonConverter) _readAsType.CreateGenericInstance(objectType);
+
+			var targetType = objectType;
+			if (info.IsGenericType) targetType = targetType.GetGenericArguments().First();
+
+			var concreteType = readAsType.MakeGenericType(targetType);
+			return (JsonConverter) _readAsType.CreateGenericInstance(concreteType);
+
+		}
+
 		private static bool ApplyExactContractJsonAttribute(Type objectType, JsonContract contract)
 		{
 			var attribute = (ExactContractJsonConverterAttribute)objectType.GetTypeInfo().GetCustomAttributes(typeof(ExactContractJsonConverterAttribute)).FirstOrDefault();
