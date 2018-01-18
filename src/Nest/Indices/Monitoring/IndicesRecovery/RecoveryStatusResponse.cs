@@ -6,16 +6,14 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IRecoveryStatusResponse : IResponse
 	{
-		IReadOnlyDictionary<string, RecoveryStatus> Indices { get; }
+		IReadOnlyDictionary<IndexName, RecoveryStatus> Indices { get; }
 	}
 
-	//TODO change to resolvable dictionary response when that PR lands in master and add response assertions
-	//in the usage tests for this API
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<RecoveryStatusResponse, string, RecoveryStatus>))]
-	public class RecoveryStatusResponse : DictionaryResponseBase<string, RecoveryStatus>, IRecoveryStatusResponse
+	[JsonConverter(typeof(ResolvableDictionaryResponseJsonConverter<RecoveryStatusResponse, IndexName, RecoveryStatus>))]
+	public class RecoveryStatusResponse : DictionaryResponseBase<IndexName, RecoveryStatus>, IRecoveryStatusResponse
 	{
 		[JsonIgnore]
-		public IReadOnlyDictionary<string, RecoveryStatus> Indices => Self.BackingDictionary;
+		public IReadOnlyDictionary<IndexName, RecoveryStatus> Indices => Self.BackingDictionary;
 
 	}
 }

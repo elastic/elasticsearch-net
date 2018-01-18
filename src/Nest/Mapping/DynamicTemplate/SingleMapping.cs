@@ -4,10 +4,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	//TODO make this implement SelectorBase when that PR is moved
-	public class SingleMappingDescriptor<T> :
-		DescriptorBase<SingleMappingDescriptor<T>, IPropertiesDescriptor<T, IProperty>>, IPropertiesDescriptor<T, IProperty>
-		where T : class
+	public class SingleMappingDescriptor<T> : SelectorBase<IProperty>, IPropertiesDescriptor<T, IProperty> where T : class
 	{
 		[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
 		public IProperty String(Func<StringPropertyDescriptor<T>, IStringProperty> selector) =>
