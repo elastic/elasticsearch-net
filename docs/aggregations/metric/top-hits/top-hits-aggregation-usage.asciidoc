@@ -35,7 +35,7 @@ s => s
                     .Script(ss => ss
                         .Type("number")
                         .Script(sss => sss
-                            .Inline("Math.sin(34*(double)doc['numberOfCommits'].value)")
+                            .Inline("sin(doc['numberOfCommits'].value)")
                             .Lang("groovy")
                         )
                         .Order(SortOrder.Descending)
@@ -91,7 +91,7 @@ new SearchRequest<Project>
                 new ScriptSort
                 {
                     Type = "number",
-                    Script = new InlineScript("Math.sin(34*(double)doc['numberOfCommits'].value)") { Lang = "groovy" },
+                    Script = new InlineScript("sin(doc['numberOfCommits'].value)") { Lang = "groovy" },
                     Order = SortOrder.Descending
                 },
             },
@@ -144,7 +144,7 @@ new SearchRequest<Project>
                   "type": "number",
                   "script": {
                     "lang": "groovy",
-                    "inline": "Math.sin(34*(double)doc['numberOfCommits'].value)"
+                    "inline": "sin(doc['numberOfCommits'].value)"
                   },
                   "order": "desc"
                 }
