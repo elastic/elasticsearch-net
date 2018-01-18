@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public interface IClrTypeDefault
+	public interface IClrTypeDefaults
 	{
 		/// <summary>
 		/// The CLR type the mapping relates to
@@ -26,13 +26,9 @@ namespace Nest
 		/// </summary>
 		string RelationName { get; set; }
 
-		/// <summary>
-		/// The default query to inject if constraint to
-		/// </summary>
-		QueryContainer Query { get; set; }
 	}
 
-	public interface IClrTypeDefaults<TDocument> : IClrTypeDefault where TDocument : class
+	public interface IClrTypeDefaults<TDocument> : IClrTypeDefaults where TDocument : class
 	{
 		/// <summary> Set a default Id property on CLR type <typeparamref name="TDocument" /> that NEST will evaluate </summary>
 		Expression<Func<TDocument, object>> IdProperty { get; set; }
@@ -46,7 +42,7 @@ namespace Nest
 		IList<IClrPropertyMapping<TDocument>> Properties { get; set; }
 	}
 
-	public class ClrTypeDefaults : IClrTypeDefault
+	public class ClrTypeDefaults : IClrTypeDefaults
 	{
 		/// <summary>
 		/// Initializes a new instance of <see cref="ClrTypeDefaults"/>
@@ -80,7 +76,7 @@ namespace Nest
 		public IList<IClrPropertyMapping<TDocument>> Properties { get; set; }
 	}
 
-	public class ClrTypeDefaultsDescriptor : DescriptorBase<ClrTypeDefaultsDescriptor,IClrTypeDefault> , IClrTypeDefault
+	public class ClrTypeDefaultsDescriptor : DescriptorBase<ClrTypeDefaultsDescriptor,IClrTypeDefaults> , IClrTypeDefaults
 	{
 		private readonly Type _type;
 
@@ -90,10 +86,10 @@ namespace Nest
 		/// <param name="type">The CLR type to map</param>
 		public ClrTypeDefaultsDescriptor(Type type) => _type = type;
 
-		Type IClrTypeDefault.ClrType => _type;
-		string IClrTypeDefault.IndexName { get; set; }
-		string IClrTypeDefault.TypeName { get; set; }
-		string IClrTypeDefault.RelationName { get; set; }
+		Type IClrTypeDefaults.ClrType => _type;
+		string IClrTypeDefaults.IndexName { get; set; }
+		string IClrTypeDefaults.TypeName { get; set; }
+		string IClrTypeDefaults.RelationName { get; set; }
 
 		/// <summary>
 		/// The default Elasticsearch index name for the CLR type
@@ -115,10 +111,10 @@ namespace Nest
 		: DescriptorBase<ClrTypeDefaultsDescriptor<TDocument>,IClrTypeDefaults<TDocument>>, IClrTypeDefaults<TDocument>
 		where TDocument : class
 	{
-		Type IClrTypeDefault.ClrType { get; } = typeof (TDocument);
-		string IClrTypeDefault.IndexName { get; set; }
-		string IClrTypeDefault.TypeName { get; set; }
-		string IClrTypeDefault.RelationName { get; set; }
+		Type IClrTypeDefaults.ClrType { get; } = typeof (TDocument);
+		string IClrTypeDefaults.IndexName { get; set; }
+		string IClrTypeDefaults.TypeName { get; set; }
+		string IClrTypeDefaults.RelationName { get; set; }
 		Expression<Func<TDocument, object>> IClrTypeDefaults<TDocument>.IdProperty { get; set; }
 		Expression<Func<TDocument, object>> IClrTypeDefaults<TDocument>.RoutingProperty { get; set; }
 		IList<IClrPropertyMapping<TDocument>> IClrTypeDefaults<TDocument>.Properties { get; set; } = new List<IClrPropertyMapping<TDocument>>();

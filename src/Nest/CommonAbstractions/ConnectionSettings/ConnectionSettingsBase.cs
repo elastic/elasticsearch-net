@@ -274,7 +274,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="documentType">The type of the POCO you wish to configure</param>
 		/// <param name="selector">describe the POCO configuration</param>
-		public TConnectionSettings DefaultsFor(Type documentType, Func<ClrTypeDefaultsDescriptor, IClrTypeDefault> selector)
+		public TConnectionSettings DefaultsFor(Type documentType, Func<ClrTypeDefaultsDescriptor, IClrTypeDefaults> selector)
 		{
 			var inferMapping = selector(new ClrTypeDefaultsDescriptor(documentType));
 			if (!inferMapping.IndexName.IsNullOrEmpty())
