@@ -67,27 +67,27 @@ namespace Tests.Framework
 
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
-			.InferMappingFor<Project>(map => map
+			.DefaultsFor<Project>(map => map
 				.IndexName(DefaultSeeder.ProjectsIndex)
 				.IdProperty(p => p.Name)
 				.RelationName("project")
 				.TypeName("doc")
 			)
-			.InferMappingFor<CommitActivity>(map => map
+			.DefaultsFor<CommitActivity>(map => map
 				.IndexName(DefaultSeeder.ProjectsIndex)
 				.RelationName("commits")
 				.TypeName("doc")
 			)
-			.InferMappingFor<Developer>(map => map
+			.DefaultsFor<Developer>(map => map
 				.IndexName("devs")
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
-			.InferMappingFor<ProjectPercolation>(map => map
+			.DefaultsFor<ProjectPercolation>(map => map
 				.IndexName("queries")
 				.TypeName(PercolatorType)
 			)
-			.InferMappingFor<Metric>(map => map
+			.DefaultsFor<Metric>(map => map
 				.IndexName("server-metrics")
 				.TypeName("metric")
 			)

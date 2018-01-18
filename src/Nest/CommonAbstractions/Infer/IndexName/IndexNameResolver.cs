@@ -42,7 +42,7 @@ namespace Nest
 			if (string.IsNullOrWhiteSpace(indexName))
 				throw new ArgumentException(
 					"Index name is null for the given type and no default index is set. "
-					+ "Map an index name using ConnectionSettings.MapDefaultTypeIndices(), ConnectionSettings.InferMappingFor<TDocument>() "
+					+ "Map an index name using ConnectionSettings.MapDefaultTypeIndices(), ConnectionSettings.DefaultsFor<TDocument>() "
 					+ "or set a default index using ConnectionSettings.DefaultIndex()."
 				);
 		}

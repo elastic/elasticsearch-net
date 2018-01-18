@@ -52,7 +52,7 @@ namespace Tests.ClientConcepts.Connection
 			 * And with the high level client
 			 */
 			var connectionSettings = new ConnectionSettings()
-				.InferMappingFor<Project>(i => i
+				.DefaultsFor<Project>(i => i
 					.IndexName("my-projects")
 					.TypeName("project")
 				)
