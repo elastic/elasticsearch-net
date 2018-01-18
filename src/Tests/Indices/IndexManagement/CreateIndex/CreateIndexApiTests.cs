@@ -94,9 +94,6 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 					.Default("tfidf", c => c
 						.DiscountOverlaps()
 					)
-					.DFI("dfi", df => df
-						.IndependenceMeasure(DFIIndependenceMeasure.ChiSquared)
-					)
 					.DFR("dfr", df => df
 						.AfterEffect(DFRAfterEffect.B)
 						.BasicModel(DFRBasicModel.D)
@@ -134,11 +131,6 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 					{ "tfidf", new DefaultSimilarity
 						{
 							DiscountOverlaps = true
-						}
-					},
-					{ "dfi", new DFISimilarity
-						{
-							IndependenceMeasure = DFIIndependenceMeasure.ChiSquared
 						}
 					},
 					{ "dfr", new DFRSimilarity
@@ -190,11 +182,95 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			similarities.Should().NotBeNull();
 			similarities.Should().ContainKey("bm25").WhichValue.Should().BeOfType<BM25Similarity>();
 			similarities.Should().ContainKey("tfidf").WhichValue.Should().BeOfType<DefaultSimilarity>();
-			similarities.Should().ContainKey("dfi").WhichValue.Should().BeOfType<DFISimilarity>();
 			similarities.Should().ContainKey("dfr").WhichValue.Should().BeOfType<DFRSimilarity>();
 			similarities.Should().ContainKey("ib").WhichValue.Should().BeOfType<IBSimilarity>();
 			similarities.Should().ContainKey("lmd").WhichValue.Should().BeOfType<LMDirichletSimilarity>();
 			similarities.Should().ContainKey("lmj").WhichValue.Should().BeOfType<LMJelinekMercerSimilarity>();
+		}
+	}
+
+	[SkipVersion("<2.3.0", "DFI Not supported prior to 2.3.0")]
+	public class CreateIndexDFIApiTests : ApiIntegrationTestBase<WritableCluster, ICreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	{
+		public CreateIndexDFIApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.CreateIndex(CallIsolatedValue, f),
+			fluentAsync: (client, f) => client.CreateIndexAsync(CallIsolatedValue, f),
+			request: (client, r) => client.CreateIndex(r),
+			requestAsync: (client, r) => client.CreateIndexAsync(r)
+		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override string UrlPath => $"/{CallIsolatedValue}";
+
+		protected override object ExpectJson { get; } = new
+		{
+			settings = new Dictionary<string, object>
+			{
+				{ "index.number_of_replicas", 1 },
+				{ "index.number_of_shards", 1 },
+				{ "similarity", new
+					{
+						dfi = new
+						{
+							independence_measure = "chisquared",
+							type = "DFI"
+						}
+					}
+				}
+			}
+		};
+
+		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(CallIsolatedValue);
+
+		protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d
+			.Settings(s => s
+				.NumberOfReplicas(1)
+				.NumberOfShards(1)
+				.Similarity(si => si
+					.DFI("dfi", df => df
+						.IndependenceMeasure(DFIIndependenceMeasure.ChiSquared)
+					)
+				)
+			);
+
+		protected override CreateIndexRequest Initializer => new CreateIndexRequest(CallIsolatedValue)
+		{
+			Settings = new Nest.IndexSettings()
+			{
+				NumberOfReplicas = 1,
+				NumberOfShards = 1,
+				Similarity = new Similarities
+				{
+					{ "dfi", new DFISimilarity
+						{
+							IndependenceMeasure = DFIIndependenceMeasure.ChiSquared
+						}
+					}
+				}
+			}
+		};
+
+		protected override void ExpectResponse(ICreateIndexResponse response)
+		{
+			response.ShouldBeValid();
+			response.Acknowledged.Should().BeTrue();
+
+			var indexSettings = this.Client.GetIndexSettings(g => g.Index(CallIsolatedValue));
+
+			indexSettings.ShouldBeValid();
+			indexSettings.Indices.Should().NotBeEmpty().And.ContainKey(CallIsolatedValue);
+
+			var settings = indexSettings.Indices[CallIsolatedValue];
+
+			settings.Settings.NumberOfShards.Should().Be(1);
+			settings.Settings.NumberOfReplicas.Should().Be(1);
+			var similarities = settings.Settings.Similarity;
+
+			similarities.Should().NotBeNull();
+			similarities.Should().ContainKey("dfi").WhichValue.Should().BeOfType<DFISimilarity>();
 		}
 	}
 }
