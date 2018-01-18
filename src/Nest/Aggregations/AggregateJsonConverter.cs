@@ -314,7 +314,7 @@ namespace Nest
 			reader.Read();
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			reader.Read();
-			long? bgCount = null;
+			long bgCount = 0;
 			if ((string)reader.Value == Parser.BgCount)
 			{
 				reader.Read();
