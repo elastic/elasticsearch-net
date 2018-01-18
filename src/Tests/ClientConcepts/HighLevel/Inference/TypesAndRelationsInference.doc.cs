@@ -27,6 +27,19 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var index = resolver.Resolve<Project>();
 			index.Should().Be("project");
 		}
+		/**
+		* [[default-type-name]]
+		* ==== Default Type Name
+		* With Elasticsearch 6.x you can only have a single type per index and in the long run types will be phased out.
+		* The need to tag types is no longer necessary so in many cases it makes sense to use a single fixed type.
+		*/
+		[U] public void DefaultTypeName()
+		{
+			var settings = new ConnectionSettings().DefaultTypeName("doc");
+			var resolver = new TypeNameResolver(settings);
+			var index = resolver.Resolve<Project>();
+			index.Should().Be("doc");
+		}
 
 		/**
 		* [[type-name-inferrer]]
@@ -40,21 +53,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var resolver = new TypeNameResolver(settings);
 			var type = resolver.Resolve<Project>();
 			type.Should().Be("project-suffix");
-		}
-		/**
-		* [[pluralize-type-names]]
-		* ==== Pluralize type names
-		* The default behaviour in older versions of NEST was to pluralize typenames
-		*
-		* You can still opt in to this old behaviour as followed:
-		*/
-		[U] public void PluralizeTypeNames()
-		{
-			var settings = new ConnectionSettings()
-				.PluralizeTypeNames();
-			var resolver = new TypeNameResolver(settings);
-			var index = resolver.Resolve<Project>();
-			index.Should().Be("projects");
 		}
 
 		/**
