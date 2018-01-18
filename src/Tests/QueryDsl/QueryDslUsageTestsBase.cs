@@ -14,10 +14,8 @@ namespace Tests.QueryDsl
 {
 	public abstract class QueryDslUsageTestsBase : ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected QueryDslUsageTestsBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage)
-		{
+		protected QueryDslUsageTestsBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		}
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
