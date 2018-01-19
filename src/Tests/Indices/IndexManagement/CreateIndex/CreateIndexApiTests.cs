@@ -45,11 +45,6 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 							discount_overlaps = true,
 							type = "default"
 						},
-						dfi = new
-						{
-							independence_measure = "chisquared",
-							type = "DFI"
-						},
 						dfr = new Dictionary<string, object>{
 							{ "basic_model", "d" },
 							{ "after_effect", "b" },
