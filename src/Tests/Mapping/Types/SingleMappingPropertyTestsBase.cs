@@ -72,7 +72,7 @@ namespace Tests.Mapping.Types
 				)
 			);
 
-		protected abstract Func<SingleMappingDescriptor<object>, IProperty> FluentSingleMapping { get; }
+		protected abstract Func<SingleMappingSelector<object>, IProperty> FluentSingleMapping { get; }
 		protected abstract IProperty InitializerSingleMapping { get; }
 
 		protected override PutIndexTemplateRequest Initializer => new PutIndexTemplateRequest(CallIsolatedValue)

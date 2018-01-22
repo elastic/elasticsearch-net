@@ -12,7 +12,7 @@ namespace Tests.Mapping.Types.Specialized.Generic
 
 		protected override object SingleMappingJson { get; } = new {index = "no", type= GenericType};
 
-		protected override Func<SingleMappingDescriptor<object>, IProperty> FluentSingleMapping => m => m
+		protected override Func<SingleMappingSelector<object>, IProperty> FluentSingleMapping => m => m
 			.Generic(g => g
 				.Type(GenericType)
 				.Index(FieldIndexOption.No)

@@ -61,6 +61,6 @@ namespace Nest
 
 		public DynamicTemplateDescriptor<T> PathUnmatch(string pathUnmatch) => Assign(a => a.PathUnmatch = pathUnmatch);
 
-		public DynamicTemplateDescriptor<T> Mapping(Func<SingleMappingDescriptor<T>, IProperty> mappingSelector) => Assign(a => a.Mapping = mappingSelector?.Invoke(new SingleMappingDescriptor<T>()));
+		public DynamicTemplateDescriptor<T> Mapping(Func<SingleMappingSelector<T>, IProperty> mappingSelector) => Assign(a => a.Mapping = mappingSelector?.Invoke(new SingleMappingSelector<T>()));
 	}
 }
