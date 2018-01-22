@@ -15,7 +15,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
     * - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to
     * the property that should be ignored on the POCO
     *
-    * - Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>>
+    * - Using the `.DefaultsFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>>
     * selector)` on `ConnectionSettings`
     *
     * - Using an ignore attribute applied to the POCO property that is understood by
@@ -55,7 +55,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				);
 
             var settings = WithConnectionSettings(s => s
-                .InferMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(i => i
+                .DefaultMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(i => i
                     .Ignore(p => p.AnotherPropertyToIgnore)
                 )
             );
@@ -119,7 +119,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				);
 
             var settings = WithConnectionSettings(s => s
-                .InferMappingFor<Child>(m => m
+                .DefaultMappingFor<Child>(m => m
                     .Rename(p => p.Description, "desc")
                     .Ignore(p => p.IgnoreMe)
                 )

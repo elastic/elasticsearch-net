@@ -25,6 +25,7 @@ namespace Nest
 		/// The relation name for <see cref="ClrType"/> to resolve to.
 		/// </summary>
 		string RelationName { get; set; }
+
 	}
 
 	public interface IClrTypeMapping<TDocument> : IClrTypeMapping where TDocument : class

@@ -73,12 +73,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U] public void RelationNameConfiguration()
 		{
 			var settings = new ConnectionSettings()
-				.InferMappingFor<CommitActivity>(m => m
+				.DefaultMappingFor<CommitActivity>(m => m
 					.IndexName("projects-and-commits")
 					.TypeName("doc")
 					.RelationName("commits")
 				)
-				.InferMappingFor<Project>(m => m
+				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects-and-commits")
 					.TypeName("doc")
 					.RelationName("projects")
@@ -101,7 +101,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U] public void TypeNameExplicitConfigurationDoesNotAffectRelationName()
 		{
 			var settings = new ConnectionSettings()
-				.InferMappingFor<Project>(m => m
+				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects-and-commits")
 					.TypeName("doc")
 				);

@@ -63,7 +63,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		* ==== Parent And Child mapping
 		*
 		* In the following example we setup our client and give our types prefered index and type names.  Starting with NEST 6.x we can
-		* also give a type a preferred `RelationName` as can be seen on the `InferMappingFor<MyParent>`.
+		* also give a type a preferred `RelationName` as can be seen on the `DefaultsFor<MyParent>`.
 		*
 		* Also note that we give `MyChild` and `MyParent` the same default `doc` type name to make sure they end up in the same index
 		* under the same type.
@@ -74,9 +74,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var connectionSettings = new ConnectionSettings(connectionPool, new InMemoryConnection()) // <1> for the purposes of this example, an in memory connection is used which doesn't actually send a request. In your application, you'd use the default connection or your own implementation that actually sends a request.
-				.InferMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
-				.InferMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
-				.InferMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
+				.DefaultMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
+				.DefaultMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
+				.DefaultMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
 
 			var client = new ElasticClient(connectionSettings);
 

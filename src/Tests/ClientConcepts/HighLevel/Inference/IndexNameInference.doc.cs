@@ -41,7 +41,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U] public void ExplicitMappingIsInferredUsingMapDefaultTypeIndices()
 		{
 			var settings = new ConnectionSettings()
-				.InferMappingFor<Project>(m => m
+				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects")
 				);
 			var resolver = new IndexNameResolver(settings);
@@ -50,14 +50,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		/**
-		 * `.InferMappingFor<T>()` can also be used to specify the index name, as well as be used
+		 * `.DefaultsFor<T>()` can also be used to specify the index name, as well as be used
 		 * to specify the type name and POCO property that should be used as the id for the document
 		 */
 		[U]
-		public void ExplicitMappingIsInferredUsingInferMappingFor()
+		public void ExplicitMappingIsInferredUsingDefaultsFor()
 		{
 			var settings = new ConnectionSettings()
-				.InferMappingFor<Project>(m => m
+				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects")
 				);
 			var resolver = new IndexNameResolver(settings);
@@ -65,7 +65,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			index.Should().Be("projects");
 		}
 
-		/** An index name for a POCO provided using `.MapDefaultTypeIndices()` or `.InferMappingFor<T>()` **will take precedence** over
+		/** An index name for a POCO provided using `.MapDefaultTypeIndices()` or `.DefaultsFor<T>()` **will take precedence** over
 		* the default index name set on `ConnectionSettings`. This way, the client can be configured with a default index to use if no
 		* index is specified, and a specific index to use for different POCO types.
 		*/
@@ -73,7 +73,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			var settings = new ConnectionSettings()
 				.DefaultIndex("defaultindex")
-				.InferMappingFor<Project>(m => m
+				.DefaultMappingFor<Project>(m => m
 					.IndexName("projects")
 				);
 			var resolver = new IndexNameResolver(settings);
@@ -99,14 +99,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		/** When an index name is provided on a request, it **will take precedence** over the default
 		* index name and any index name specified for the POCO type using `.MapDefaultTypeIndices()` or
-		* `.InferMappingFor<T>()`
+		* `.DefaultsFor<T>()`
 		*/
 		[U] public void ExplicitIndexOnRequestTakesPrecedence()
 		{
 			var client = TestClient.GetInMemoryClient(s=>
 				new ConnectionSettings()
 					.DefaultIndex("defaultindex")
-					.InferMappingFor<Project>(m => m
+					.DefaultMappingFor<Project>(m => m
 						.IndexName("projects")
 					)
 			);
@@ -120,7 +120,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		/** In summary, the order of precedence for determining the index name for a request is
 		 *
 		 * . Index name specified  on the request
-		 * . Index name specified for the generic type parameter in the request using `.MapDefaultTypeIndices()` or `.InferMappingFor<T>()`
+		 * . Index name specified for the generic type parameter in the request using `.MapDefaultTypeIndices()` or `.DefaultsFor<T>()`
 		 * . Default index name specified on `ConnectionSettings`
 		 */
 

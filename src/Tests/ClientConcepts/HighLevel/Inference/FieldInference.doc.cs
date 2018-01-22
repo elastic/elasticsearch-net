@@ -376,7 +376,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* for property `C` on `B`
 			*/
 			var newConnectionSettings = TestClient.CreateSettings(modifySettings: s => s
-				.InferMappingFor<A>(m => m
+				.DefaultMappingFor<A>(m => m
 					.Rename(p => p.C, "d")
 				)
 			);
@@ -448,7 +448,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			*/
 			var usingSettings = WithConnectionSettings(s => s
 
-				.InferMappingFor<Precedence>(m => m
+				.DefaultMappingFor<Precedence>(m => m
 					.Rename(p => p.RenamedOnConnectionSettings, "renamed")
 				)
 				.DefaultFieldNameInferrer(p => p.ToUpperInvariant())
@@ -492,7 +492,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			/** Inherited properties can be ignored and renamed just as one would expect */
 			var usingSettings = WithConnectionSettings(s => s
-				.InferMappingFor<Child>(m => m
+				.DefaultMappingFor<Child>(m => m
 					.Rename(p => p.Description, "desc")
 					.Ignore(p => p.IgnoreMe)
 				)
