@@ -70,7 +70,6 @@ namespace Nest
 			where TResult : class =>
 			this.Dispatcher.Dispatch<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>>(
 				request,
-				this.CreateSearchDeserializer<T, TResult>(request),
 				this.LowLevelDispatch.SearchTemplateDispatch<SearchResponse<TResult>>
 			);
 
@@ -91,33 +90,8 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
 				request,
 				cancellationToken,
-				this.CreateSearchDeserializer<T, TResult>(request),
 				this.LowLevelDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>
 			);
-
-		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(Stream stream, ISearchTemplateRequest d)
-			where T : class
-			where TResult : class
-		{
-			var converter = this.CreateCovariantSearchSelector<T, TResult>(d);
-			return this.ConnectionSettings.CreateStateful(converter).Deserialize<SearchResponse<TResult>>(stream);
-		}
-
-		private Func<IApiCallDetails, Stream, SearchResponse<TResult>> CreateSearchDeserializer<T, TResult>(ISearchTemplateRequest request)
-			where T : class
-			where TResult : class
-		{
-			SearchResponse<TResult> ResponseCreator(IApiCallDetails r, Stream s) => this.FieldsSearchDeserializer<T, TResult>(s, request);
-			return ResponseCreator;
-		}
-
-		private JsonConverter CreateCovariantSearchSelector<T, TResult>(ISearchTemplateRequest originalSearchDescriptor)
-			where T : class
-			where TResult : class
-		{
-			CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, originalSearchDescriptor);
-			return originalSearchDescriptor.TypeSelector == null ? null : new ConcreteTypeConverter<TResult>(originalSearchDescriptor.TypeSelector);
-		}
 
 	}
 }

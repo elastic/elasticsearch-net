@@ -51,10 +51,9 @@ namespace Nest
 
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
-			ObjectActivator<object> activator;
 			var argKey = args.Length;
 			var key = argKey + "--" + t.FullName;
-			if (CachedActivators.TryGetValue(key, out activator))
+			if (CachedActivators.TryGetValue(key, out var activator))
 				return activator(args);
 
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
@@ -67,7 +66,7 @@ namespace Nest
 			var ctor = constructors.FirstOrDefault();
 			if (ctor == null)
 				throw new Exception($"Cannot create an instance of {t.FullName} because it has no constructor taking {args.Length} arguments");
-			activator = (ObjectActivator<object>) generic.Invoke(null, new[] {ctor});
+			activator = (ObjectActivator<object>) generic.Invoke(null, new object[] {ctor});
 			CachedActivators.TryAdd(key, activator);
 			return activator(args);
 		}

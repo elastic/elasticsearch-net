@@ -34,7 +34,6 @@ namespace Nest
 		protected Type ClrType { get; set; }
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		Type ICovariantSearchRequest.ClrType => this.ClrType;
-		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
 
 	}
 
@@ -51,9 +50,6 @@ namespace Nest
 		protected sealed override void Initialize() => this.TypedKeys();
 
 		Type ICovariantSearchRequest.ClrType => typeof(T);
-		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
-
-		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
@@ -75,7 +71,5 @@ namespace Nest
 		IDictionary<string, object> ISearchTemplateRequest.Params { get; set; }
 		public SearchTemplateDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>
 			Assign(a => a.Params = paramDictionary?.Invoke(new FluentDictionary<string, object>()));
-
-		public SearchTemplateDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) => Assign(a => a.TypeSelector = typeSelector);
 	}
 }

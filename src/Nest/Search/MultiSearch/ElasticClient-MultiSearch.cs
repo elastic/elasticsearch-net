@@ -74,12 +74,6 @@ namespace Nest
 
 		private JsonConverter CreateMultiSearchDeserializer(IMultiSearchRequest request)
 		{
-			if (request.Operations != null)
-			{
-				foreach (var operation in request.Operations.Values)
-					CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, operation);
-			}
-
 			return new MultiSearchResponseJsonConverter(this.ConnectionSettings, request);
 		}
 	}

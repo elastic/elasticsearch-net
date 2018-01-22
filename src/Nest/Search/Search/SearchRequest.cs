@@ -84,7 +84,6 @@ namespace Nest
 	{
 		private Type _clrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => this._clrType;
-		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true ? HttpMethod.GET : HttpMethod.POST;
 
@@ -121,7 +120,6 @@ namespace Nest
 	public partial class SearchRequest<T>
 	{
 		Type ICovariantSearchRequest.ClrType => typeof(T);
-		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true ? HttpMethod.GET : HttpMethod.POST;
 
@@ -161,8 +159,6 @@ namespace Nest
 	public partial class SearchDescriptor<T> where T : class
 	{
 		Type ICovariantSearchRequest.ClrType => typeof(T);
-		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
-		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true ? HttpMethod.GET : HttpMethod.POST;
 
@@ -414,10 +410,5 @@ namespace Nest
 		public SearchDescriptor<T> Rescore(Func<RescoringDescriptor<T>, IPromise<IList<IRescore>>> rescoreSelector) =>
 			Assign(a => a.Rescore = rescoreSelector?.Invoke(new RescoringDescriptor<T>()).Value);
 
-		/// <summary>
-		/// Specify the concrete types to deserialize to when returning covariant search results
-		/// </summary>
-		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
-			Assign(a => a.TypeSelector = typeSelector);
 	}
 }

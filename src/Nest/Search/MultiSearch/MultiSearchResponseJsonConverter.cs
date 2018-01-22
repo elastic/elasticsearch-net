@@ -64,7 +64,6 @@ namespace Nest
 			foreach (var m in withMeta)
 			{
 				var descriptor = m.Descriptor.Value;
-				var concreteTypeSelector = descriptor.TypeSelector;
 				var baseType = m.Descriptor.Value.ClrType ?? typeof(object);
 				var cachedDelegate = serializer.GetConnectionSettings().Inferrer.CreateSearchResponseDelegates.GetOrAdd(baseType, t =>
 				{
@@ -78,20 +77,6 @@ namespace Nest
 					var lambda = Expression.Lambda<Action<SearchHitTuple, JsonSerializer, IDictionary<string, object>>>(call, parameterExpressions);
 					return lambda.Compile();
 				});
-
-				if (concreteTypeSelector != null)
-				{
-					var state = (JsonConverter)typeof(ConcreteTypeConverter<>).CreateGenericInstance(baseType, concreteTypeSelector);
-					if (state != null)
-					{
-						var elasticSerializer = this._settings.CreateStateful(state);
-						if (elasticSerializer != null)
-						{
-							cachedDelegate(m, elasticSerializer.Serializer, response.Responses);
-							continue;
-						}
-					}
-				}
 
 				cachedDelegate(m, serializer, response.Responses);
 			}

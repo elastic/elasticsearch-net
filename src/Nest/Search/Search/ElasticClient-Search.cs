@@ -71,10 +71,8 @@ namespace Nest
 			where TResult : class =>
 			this.Dispatcher.Dispatch<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>>(
 				request,
-				(p, d) => this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(
-					this.CovariantConverterWhenNeeded<T, TResult, ISearchRequest, SearchRequestParameters>(p.RouteValues, request), d
-					)
-				);
+				(p, d) => this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(p, d)
+			);
 
 		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -98,10 +96,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(
-					this.CovariantConverterWhenNeeded<T, TResult, ISearchRequest, SearchRequestParameters>(p.RouteValues, request), d, c
-					)
-				);
-
+				(p, d, c) => this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(p, d, c)
+			);
 	}
 }

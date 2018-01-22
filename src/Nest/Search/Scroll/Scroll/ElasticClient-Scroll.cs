@@ -39,9 +39,7 @@ namespace Nest
 		public ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class =>
 			this.Dispatcher.Dispatch<IScrollRequest, ScrollRequestParameters, SearchResponse<T>>(
 				request,
-				(p, d) => this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(
-					this.CovariantConverterWhenNeeded<T, T, IScrollRequest, ScrollRequestParameters>(p.RouteValues, request), d
-				)
+				(p, d) => this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(p, d)
 			);
 
 		/// <inheritdoc/>
@@ -53,9 +51,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IScrollRequest, ScrollRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(
-					this.CovariantConverterWhenNeeded<T, T, IScrollRequest, ScrollRequestParameters>(p.RouteValues, request), d, c
-				)
+				(p, d, c) => this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, d, c)
 			);
 
 		/// <inheritdoc/>

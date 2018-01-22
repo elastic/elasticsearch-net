@@ -38,7 +38,7 @@ namespace Nest
 		}
 	}
 
-	[ContractJsonConverter(typeof(DefaultHitJsonConverter))]
+	[ReadAs(typeof(Hit<>))]
 	public interface IHit<out TDocument> : IHitMetadata<TDocument> where TDocument : class
 	{
 		//search/get related features on hits

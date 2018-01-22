@@ -16,4 +16,14 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			FromJson.ReadAs<T>(reader, serializer);
 	}
+
+	internal class ReadAsAttribute : Attribute
+	{
+		public Type Type { get; }
+
+		public ReadAsAttribute(Type readAs)
+		{
+			this.Type = readAs;
+		}
+	}
 }
