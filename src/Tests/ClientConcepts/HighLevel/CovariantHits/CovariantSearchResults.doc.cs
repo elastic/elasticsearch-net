@@ -12,7 +12,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 		 *
 		 * NEST used to have a feature that allowed you to map multiple types in an index back into a covariant list.
 		 *
-		 * Since types are on the way in Elasticsearch itself this feature is no longer supported. Because you can
+		 * Since types are removed in Elasticsearch 6.0 this feature is no longer supported. Because you can
 		 * now explicitly inject a serializer for user types only (_source, fields etcetera) please rely on a JsonConverter that
 		 * can do this out of the box e.g `TypeNameHandling.All` from `Json.NET`
 		 *
