@@ -6,7 +6,7 @@ namespace Nest
 	public class TypeNameResolver
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
-		private readonly ConcurrentDictionary<Type, string> TypeNames = new ConcurrentDictionary<Type, string>();
+		private readonly ConcurrentDictionary<Type, string> _typeNames = new ConcurrentDictionary<Type, string>();
 
 		public TypeNameResolver(IConnectionSettingsValues connectionSettings)
 		{
@@ -21,14 +21,12 @@ namespace Nest
 		private string ResolveType(Type type)
 		{
 			if (type == null) return null;
-			string typeName;
 
-			if (TypeNames.TryGetValue(type, out typeName))
-				return typeName;
+			if (_typeNames.TryGetValue(type, out var typeName)) return typeName;
 
 			if (_connectionSettings.DefaultTypeNames.TryGetValue(type, out typeName))
 			{
-				TypeNames.TryAdd(type, typeName);
+				_typeNames.TryAdd(type, typeName);
 				return typeName;
 			}
 
@@ -36,11 +34,14 @@ namespace Nest
 			if (att != null && !att.Name.IsNullOrEmpty())
 				typeName = att.Name;
 			else
-				typeName = _connectionSettings.DefaultTypeNameInferrer(type);
+			{
+				var inferredType =_connectionSettings.DefaultTypeNameInferrer(type);
+				typeName = !inferredType.IsNullOrEmpty() ? inferredType : _connectionSettings.DefaultTypeName;
+			}
+			if (typeName.IsNullOrEmpty()) throw new ArgumentNullException($"{type.FullName} resolved to an empty string or null");
 
-			TypeNames.TryAdd(type, typeName);
+			_typeNames.TryAdd(type, typeName);
 			return typeName;
 		}
-
 	}
 }

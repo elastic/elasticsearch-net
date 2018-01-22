@@ -55,6 +55,9 @@ namespace Nest
 		private string _defaultIndex;
 		string IConnectionSettingsValues.DefaultIndex => this._defaultIndex;
 
+		private string _defaultTypeName;
+		string IConnectionSettingsValues.DefaultTypeName => this._defaultTypeName;
+
 		private readonly Inferrer _inferrer;
 		Inferrer IConnectionSettingsValues.Inferrer => _inferrer;
 
@@ -101,25 +104,13 @@ namespace Nest
 			this.UseThisRequestResponseSerializer = defaultSerializer;
 			this._propertyMappingProvider = propertyMappingProvider ?? new PropertyMappingProvider();
 
-			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant());
+			this._defaultTypeNameInferrer = (t => !this._defaultTypeName.IsNullOrEmpty() ? this._defaultTypeName : t.Name.ToLowerInvariant());
 			this._defaultFieldNameInferrer = (p => p.ToCamelCase());
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
 			this._defaultRelationNames = new FluentDictionary<Type, string>();
 
 			this._inferrer = new Inferrer(this);
-		}
-
-		/// <summary>
-		/// Pluralize type names when inferring from POCO type names.
-		/// <para></para>
-		/// This calls <see cref="DefaultTypeNameInferrer"/> with an implementation that will pluralize type names.
-		/// This used to be the default prior to Nest 0.90
-		/// </summary>
-		public TConnectionSettings PluralizeTypeNames()
-		{
-			this._defaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
-			return (TConnectionSettings) this;
 		}
 
 		/// <summary>
@@ -134,10 +125,15 @@ namespace Nest
 			return (TConnectionSettings) this;
 		}
 
-		private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
+		/// <summary>
+		/// Sets a default type name to use within Elasticsearch for all CLR types. If <see cref="DefaultTypeNameInferrer"/> is also set, a configured
+		/// default type name will only be used when <see cref="DefaultTypeNameInferrer"/>returns null or empty. If unset, the default type
+		/// name for types will be the lowercased CLR type name.
+		/// </summary>
+		public TConnectionSettings DefaultTypeName(string defaultTypeName)
 		{
-			type.ThrowIfNull(nameof(type));
-			return type.Name.MakePlural().ToLowerInvariant();
+			this._defaultTypeName = defaultTypeName;
+			return (TConnectionSettings) this;
 		}
 
 		/// <summary>
