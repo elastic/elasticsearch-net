@@ -74,9 +74,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var connectionSettings = new ConnectionSettings(connectionPool, new InMemoryConnection()) // <1> for the purposes of this example, an in memory connection is used which doesn't actually send a request. In your application, you'd use the default connection or your own implementation that actually sends a request.
-				.DefaultsFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
-				.DefaultsFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
-				.DefaultsFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
+				.DefaultMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
+				.DefaultMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
+				.DefaultMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
 
 			var client = new ElasticClient(connectionSettings);
 

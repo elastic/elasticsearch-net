@@ -239,12 +239,12 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="TDocument">The type of the document.</typeparam>
 		/// <param name="selector">The selector.</param>
-		[Obsolete("Please use DefaultsFor")]
+		[Obsolete("Please use DefaultMappingFor")]
 		public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingsDescriptor<TDocument>, IClrTypeMappings<TDocument>> selector)
 			where TDocument : class =>
-			DefaultsFor<TDocument>(selector);
+			DefaultMappingFor<TDocument>(selector);
 
-		public TConnectionSettings DefaultsFor<TDocument>(Func<ClrTypeMappingsDescriptor<TDocument>, IClrTypeMappings<TDocument>> selector)
+		public TConnectionSettings DefaultMappingFor<TDocument>(Func<ClrTypeMappingsDescriptor<TDocument>, IClrTypeMappings<TDocument>> selector)
 			where TDocument : class
 		{
 			var inferMapping = selector(new ClrTypeMappingsDescriptor<TDocument>());
@@ -274,7 +274,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="documentType">The type of the POCO you wish to configure</param>
 		/// <param name="selector">describe the POCO configuration</param>
-		public TConnectionSettings DefaultsFor(Type documentType, Func<ClrTypeMappingsDescriptor, IClrTypeMappings> selector)
+		public TConnectionSettings DefaultMappingFor(Type documentType, Func<ClrTypeMappingsDescriptor, IClrTypeMappings> selector)
 		{
 			var inferMapping = selector(new ClrTypeMappingsDescriptor(documentType));
 			if (!inferMapping.IndexName.IsNullOrEmpty())
@@ -294,7 +294,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="documentType">The type of the POCO you wish to configure</param>
 		/// <param name="selector">describe the POCO configuration</param>
-		public TConnectionSettings DefaultsFor(IEnumerable<ClrTypeMappings> typeMappings)
+		public TConnectionSettings DefaultMappingFor(IEnumerable<ClrTypeMappings> typeMappings)
 		{
 			if (typeMappings == null) return (TConnectionSettings) this;
 			foreach (var inferMapping in typeMappings)

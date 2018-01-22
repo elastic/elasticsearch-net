@@ -69,7 +69,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* Here we instruct NEST to infer the Id for `MyDTO` based on its `Name` property
 			*/
 			WithConnectionSettings(x => x
-				.DefaultsFor<MyDTO>(m => m
+				.DefaultMappingFor<MyDTO>(m => m
 					.IdProperty(p => p.Name)
 				)
 			).Expect("x").WhenInferringIdOn(dto);
@@ -80,7 +80,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* with different inference rules
 			*/
 			WithConnectionSettings(x => x
-				.DefaultsFor<MyDTO>(m => m
+				.DefaultMappingFor<MyDTO>(m => m
 					.IdProperty(p => p.OtherName)
 				)
 			).Expect("y").WhenInferringIdOn(dto);
@@ -120,7 +120,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* that will infer the document id from the property `OtherName`:
 			*/
 			WithConnectionSettings(x => x
-				.DefaultsFor<MyOtherDTO>(m => m
+				.DefaultMappingFor<MyOtherDTO>(m => m
 					.IdProperty(p => p.OtherName)
 				)
 			).Expect("y").WhenInferringIdOn(dto);

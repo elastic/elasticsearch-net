@@ -67,7 +67,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* Here we instruct NEST to infer the Routing for `MyDTO` based on its `Name` property
 			*/
 			WithConnectionSettings(x => x
-				.DefaultsFor<MyDTO>(m => m
+				.DefaultMappingFor<MyDTO>(m => m
 					.RoutingProperty(p => p.Name)
 				)
 			).Expect("x").WhenInferringRoutingOn(dto);
@@ -78,7 +78,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* with different inference rules
 			*/
 			WithConnectionSettings(x => x
-				.DefaultsFor<MyDTO>(m => m
+				.DefaultMappingFor<MyDTO>(m => m
 					.RoutingProperty(p => p.OtherName)
 				)
 			).Expect("y").WhenInferringRoutingOn(dto);
@@ -132,7 +132,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			*
 			*/
 			WithConnectionSettings(x => x
-				.DefaultsFor<MyOtherDTO>(m => m
+				.DefaultMappingFor<MyOtherDTO>(m => m
 					.RoutingProperty(p => p.OtherName)
 				)
 			).Expect("y").WhenInferringRoutingOn(dto);
@@ -159,7 +159,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			/** unless you configure the ConnectionSettings to use an alternate property: */
 			WithConnectionSettings(x => x
-				.DefaultsFor<BadDTO>(m => m
+				.DefaultMappingFor<BadDTO>(m => m
 					.RoutingProperty(p => p.ParentName)
 				)
 			).Expect("my-parent").WhenInferringRoutingOn(dto);

@@ -38,7 +38,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			 */
 			var pool = new SniffingConnectionPool(new []{ new Uri($"http://{TestClient.DefaultHost}:9200") });
 		    var connectionSettings = new ConnectionSettings(pool)
-				.DefaultsFor<Project>(i => i
+				.DefaultMappingFor<Project>(i => i
 					.IndexName("project")
 				);
 

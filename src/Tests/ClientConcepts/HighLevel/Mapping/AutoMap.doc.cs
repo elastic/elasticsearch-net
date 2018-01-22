@@ -186,7 +186,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 			var settings = WithConnectionSettings(s => s
-				.DefaultsFor<ParentWithStringId>(m => m
+				.DefaultMappingFor<ParentWithStringId>(m => m
 					.TypeName("parent")
 					.Ignore(p => p.Description)
 					.Ignore(p => p.IgnoreMe)

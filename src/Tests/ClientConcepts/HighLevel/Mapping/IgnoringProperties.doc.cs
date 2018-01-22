@@ -55,7 +55,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				);
 
             var settings = WithConnectionSettings(s => s
-                .DefaultsFor<CompanyWithAttributesAndPropertiesToIgnore>(i => i
+                .DefaultMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(i => i
                     .Ignore(p => p.AnotherPropertyToIgnore)
                 )
             );
@@ -119,7 +119,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				);
 
             var settings = WithConnectionSettings(s => s
-                .DefaultsFor<Child>(m => m
+                .DefaultMappingFor<Child>(m => m
                     .Rename(p => p.Description, "desc")
                     .Ignore(p => p.IgnoreMe)
                 )
