@@ -240,14 +240,14 @@ namespace Nest
 		/// <typeparam name="TDocument">The type of the document.</typeparam>
 		/// <param name="selector">The selector.</param>
 		[Obsolete("Please use DefaultMappingFor")]
-		public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingsDescriptor<TDocument>, IClrTypeMappings<TDocument>> selector)
+		public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
 			where TDocument : class =>
 			DefaultMappingFor<TDocument>(selector);
 
-		public TConnectionSettings DefaultMappingFor<TDocument>(Func<ClrTypeMappingsDescriptor<TDocument>, IClrTypeMappings<TDocument>> selector)
+		public TConnectionSettings DefaultMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
 			where TDocument : class
 		{
-			var inferMapping = selector(new ClrTypeMappingsDescriptor<TDocument>());
+			var inferMapping = selector(new ClrTypeMappingDescriptor<TDocument>());
 			if (!inferMapping.IndexName.IsNullOrEmpty())
 				this._defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
 
@@ -274,9 +274,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="documentType">The type of the POCO you wish to configure</param>
 		/// <param name="selector">describe the POCO configuration</param>
-		public TConnectionSettings DefaultMappingFor(Type documentType, Func<ClrTypeMappingsDescriptor, IClrTypeMappings> selector)
+		public TConnectionSettings DefaultMappingFor(Type documentType, Func<ClrTypeMappingDescriptor, IClrTypeMapping> selector)
 		{
-			var inferMapping = selector(new ClrTypeMappingsDescriptor(documentType));
+			var inferMapping = selector(new ClrTypeMappingDescriptor(documentType));
 			if (!inferMapping.IndexName.IsNullOrEmpty())
 				this._defaultIndices.Add(inferMapping.ClrType, inferMapping.IndexName);
 
@@ -294,7 +294,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="documentType">The type of the POCO you wish to configure</param>
 		/// <param name="selector">describe the POCO configuration</param>
-		public TConnectionSettings DefaultMappingFor(IEnumerable<ClrTypeMappings> typeMappings)
+		public TConnectionSettings DefaultMappingFor(IEnumerable<ClrTypeMapping> typeMappings)
 		{
 			if (typeMappings == null) return (TConnectionSettings) this;
 			foreach (var inferMapping in typeMappings)

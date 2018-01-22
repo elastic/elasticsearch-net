@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public interface IClrTypeMappings
+	public interface IClrTypeMapping
 	{
 		/// <summary>
 		/// The CLR type the mapping relates to
@@ -28,7 +28,7 @@ namespace Nest
 
 	}
 
-	public interface IClrTypeMappings<TDocument> : IClrTypeMappings where TDocument : class
+	public interface IClrTypeMapping<TDocument> : IClrTypeMapping where TDocument : class
 	{
 		/// <summary> Set a default Id property on CLR type <typeparamref name="TDocument" /> that NEST will evaluate </summary>
 		Expression<Func<TDocument, object>> IdProperty { get; set; }
@@ -42,12 +42,12 @@ namespace Nest
 		IList<IClrPropertyMapping<TDocument>> Properties { get; set; }
 	}
 
-	public class ClrTypeMappings : IClrTypeMappings
+	public class ClrTypeMapping : IClrTypeMapping
 	{
 		/// <summary>
-		/// Initializes a new instance of <see cref="ClrTypeMappings"/>
+		/// Initializes a new instance of <see cref="ClrTypeMapping"/>
 		/// </summary>
-		public ClrTypeMappings(Type type) => ClrType = type;
+		public ClrTypeMapping(Type type) => ClrType = type;
 
 		/// <inheritdoc />
 		public Type ClrType { get; }
@@ -62,9 +62,9 @@ namespace Nest
 		public string RelationName { get; set; }
 
 	}
-	public class ClrTypeMappings<TDocument> : ClrTypeMappings, IClrTypeMappings<TDocument> where TDocument : class
+	public class ClrTypeMapping<TDocument> : ClrTypeMapping, IClrTypeMapping<TDocument> where TDocument : class
 	{
-		public ClrTypeMappings() : base(typeof(TDocument)) { }
+		public ClrTypeMapping() : base(typeof(TDocument)) { }
 
 		/// <inheritdoc />
 		public Expression<Func<TDocument, object>> IdProperty { get; set; }
@@ -76,82 +76,82 @@ namespace Nest
 		public IList<IClrPropertyMapping<TDocument>> Properties { get; set; }
 	}
 
-	public class ClrTypeMappingsDescriptor : DescriptorBase<ClrTypeMappingsDescriptor,IClrTypeMappings> , IClrTypeMappings
+	public class ClrTypeMappingDescriptor : DescriptorBase<ClrTypeMappingDescriptor,IClrTypeMapping> , IClrTypeMapping
 	{
 		private readonly Type _type;
 
 		/// <summary>
-		/// Instantiates a new instance of <see cref="ClrTypeMappingsDescriptor"/>
+		/// Instantiates a new instance of <see cref="ClrTypeMappingDescriptor"/>
 		/// </summary>
 		/// <param name="type">The CLR type to map</param>
-		public ClrTypeMappingsDescriptor(Type type) => _type = type;
+		public ClrTypeMappingDescriptor(Type type) => _type = type;
 
-		Type IClrTypeMappings.ClrType => _type;
-		string IClrTypeMappings.IndexName { get; set; }
-		string IClrTypeMappings.TypeName { get; set; }
-		string IClrTypeMappings.RelationName { get; set; }
+		Type IClrTypeMapping.ClrType => _type;
+		string IClrTypeMapping.IndexName { get; set; }
+		string IClrTypeMapping.TypeName { get; set; }
+		string IClrTypeMapping.RelationName { get; set; }
 
 		/// <summary>
 		/// The default Elasticsearch index name for the CLR type
 		/// </summary>
-		public ClrTypeMappingsDescriptor IndexName(string indexName) => Assign(a => a.IndexName = indexName);
+		public ClrTypeMappingDescriptor IndexName(string indexName) => Assign(a => a.IndexName = indexName);
 
 		/// <summary>
 		/// The default Elasticsearch type name for the CLR type
 		/// </summary>
-		public ClrTypeMappingsDescriptor TypeName(string typeName) => Assign(a => a.TypeName = typeName);
+		public ClrTypeMappingDescriptor TypeName(string typeName) => Assign(a => a.TypeName = typeName);
 
 		/// <summary>
 		/// The relation name for the CLR type to resolve to.
 		/// </summary>
-		public ClrTypeMappingsDescriptor RelationName(string relationName) => Assign(a => a.RelationName = relationName);
+		public ClrTypeMappingDescriptor RelationName(string relationName) => Assign(a => a.RelationName = relationName);
 	}
 
-	public class ClrTypeMappingsDescriptor<TDocument>
-		: DescriptorBase<ClrTypeMappingsDescriptor<TDocument>,IClrTypeMappings<TDocument>>, IClrTypeMappings<TDocument>
+	public class ClrTypeMappingDescriptor<TDocument>
+		: DescriptorBase<ClrTypeMappingDescriptor<TDocument>,IClrTypeMapping<TDocument>>, IClrTypeMapping<TDocument>
 		where TDocument : class
 	{
-		Type IClrTypeMappings.ClrType { get; } = typeof (TDocument);
-		string IClrTypeMappings.IndexName { get; set; }
-		string IClrTypeMappings.TypeName { get; set; }
-		string IClrTypeMappings.RelationName { get; set; }
-		Expression<Func<TDocument, object>> IClrTypeMappings<TDocument>.IdProperty { get; set; }
-		Expression<Func<TDocument, object>> IClrTypeMappings<TDocument>.RoutingProperty { get; set; }
-		IList<IClrPropertyMapping<TDocument>> IClrTypeMappings<TDocument>.Properties { get; set; } = new List<IClrPropertyMapping<TDocument>>();
+		Type IClrTypeMapping.ClrType { get; } = typeof (TDocument);
+		string IClrTypeMapping.IndexName { get; set; }
+		string IClrTypeMapping.TypeName { get; set; }
+		string IClrTypeMapping.RelationName { get; set; }
+		Expression<Func<TDocument, object>> IClrTypeMapping<TDocument>.IdProperty { get; set; }
+		Expression<Func<TDocument, object>> IClrTypeMapping<TDocument>.RoutingProperty { get; set; }
+		IList<IClrPropertyMapping<TDocument>> IClrTypeMapping<TDocument>.Properties { get; set; } = new List<IClrPropertyMapping<TDocument>>();
 
 		/// <summary>
 		/// The default Elasticsearch index name for <typeparamref name="TDocument"/>
 		/// </summary>
-		public ClrTypeMappingsDescriptor<TDocument> IndexName(string indexName) => Assign(a => a.IndexName = indexName);
+		public ClrTypeMappingDescriptor<TDocument> IndexName(string indexName) => Assign(a => a.IndexName = indexName);
 
 		/// <summary>
 		/// The default Elasticsearch type name for <typeparamref name="TDocument" />
 		/// </summary>
-		public ClrTypeMappingsDescriptor<TDocument> TypeName(string typeName) => Assign(a => a.TypeName = typeName);
+		public ClrTypeMappingDescriptor<TDocument> TypeName(string typeName) => Assign(a => a.TypeName = typeName);
 
 		/// <summary>
 		/// The relation name for <typeparamref name="TDocument" /> to resolve to.
 		/// </summary>
-		public ClrTypeMappingsDescriptor<TDocument> RelationName(string relationName) => Assign(a => a.RelationName = relationName);
+		public ClrTypeMappingDescriptor<TDocument> RelationName(string relationName) => Assign(a => a.RelationName = relationName);
 
 		/// <summary>
 		/// Set a default Id property on CLR type <typeparamref name="TDocument" /> that NEST will evaluate
 		/// </summary>
-		public ClrTypeMappingsDescriptor<TDocument> IdProperty(Expression<Func<TDocument, object>> property) => Assign(a => a.IdProperty = property);
+		public ClrTypeMappingDescriptor<TDocument> IdProperty(Expression<Func<TDocument, object>> property) => Assign(a => a.IdProperty = property);
 
 		/// <summary> Provide a default routing parameter lookup based on <typeparamref name="TDocument" /> </summary>
-		public ClrTypeMappingsDescriptor<TDocument> RoutingProperty(Expression<Func<TDocument, object>> property) => Assign(a => a.RoutingProperty = property);
+		public ClrTypeMappingDescriptor<TDocument> RoutingProperty(Expression<Func<TDocument, object>> property) => Assign(a => a.RoutingProperty = property);
 
 		/// <summary>
 		/// Ignore <paramref name="property" /> on CLR type <typeparamref name="TDocument" />
 		/// </summary>
-		public ClrTypeMappingsDescriptor<TDocument> Ignore(Expression<Func<TDocument, object>> property) =>
+		public ClrTypeMappingDescriptor<TDocument> Ignore(Expression<Func<TDocument, object>> property) =>
 			Assign(a => a.Properties.Add(new IgnoreClrPropertyMapping<TDocument>(property)));
 
 		/// <summary>
 		/// Rename <paramref name="property" /> on CLR type <typeparamref name="TDocument" />
 		/// </summary>
-		public ClrTypeMappingsDescriptor<TDocument> Rename(Expression<Func<TDocument, object>> property, string newName) =>
+		public ClrTypeMappingDescriptor<TDocument> Rename(Expression<Func<TDocument, object>> property, string newName) =>
 			Assign(a => a.Properties.Add(new RenameClrPropertyMapping<TDocument>(property, newName)));
 
 	}
