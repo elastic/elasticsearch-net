@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -12,17 +13,14 @@ namespace Nest
 
 		public NodeIds(IEnumerable<string> nodeIds) { this._nodeIds = nodeIds; }
 
-		private string DebugDisplay => GetString(null);
+		private string DebugDisplay => ((IUrlParameter)this).GetString(null);
 
-		//TODO to explicit private implementation
-		public string GetString(IConnectionConfigurationValues settings) =>
-			string.Join(",", this._nodeIds);
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings) => string.Join(",", this._nodeIds);
 
 		public static NodeIds Parse(string nodeIds)
 		{
-			//TODO trim()?
 			if (nodeIds.IsNullOrEmpty()) throw new ArgumentException("can not create NodeIds on an empty enumerable of ", nameof(nodeIds));
-			var nodes = nodeIds.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+			var nodes = nodeIds.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(s=>s.Trim());
 			return new NodeIds(nodes);
 		}
 
