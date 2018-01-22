@@ -126,8 +126,9 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// A default Elasticsearch type name to use for CLR types. If you also set <see cref="DefaultTypeNameInferrer"/> this will only take affect if your callback
-		/// returns null or empty.
+		/// Sets a default type name to use within Elasticsearch for all CLR types. If <see cref="DefaultTypeNameInferrer"/> is also set, a configured
+		/// default type name will only be used when <see cref="DefaultTypeNameInferrer"/>returns null or empty. If unset, the default type
+		/// name for types will be the lowercased CLR type name.
 		/// </summary>
 		public TConnectionSettings DefaultTypeName(string defaultTypeName)
 		{
