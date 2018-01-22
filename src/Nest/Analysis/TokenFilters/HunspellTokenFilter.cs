@@ -75,6 +75,8 @@ namespace Nest
 
 		bool? IHunspellTokenFilter.LongestOnly { get; set; }
 		bool? IHunspellTokenFilter.Dedup { get; set; }
+
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool? IHunspellTokenFilter.IgnoreCase { get; set; }
 		string IHunspellTokenFilter.Locale { get; set; }
 		string IHunspellTokenFilter.Dictionary { get; set; }

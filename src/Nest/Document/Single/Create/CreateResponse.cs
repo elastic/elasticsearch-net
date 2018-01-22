@@ -9,6 +9,7 @@ namespace Nest
 		string Index { get; }
 		string Type { get; }
 		long Version { get; }
+		[Obsolete("Removed in 6.0")]
 		bool Created { get; }
 		Result Result { get; }
 	}

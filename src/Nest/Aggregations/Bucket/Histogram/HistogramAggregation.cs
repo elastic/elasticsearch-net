@@ -79,8 +79,10 @@ namespace Nest
 
 		ExtendedBounds<double> IHistogramAggregation.ExtendedBounds { get; set; }
 
+		[Obsolete("Removed in Elasticsearch 2.0. Will be removed in the next major version of NEST")]
 		long? IHistogramAggregation.PreOffset { get; set; }
 
+		[Obsolete("Removed in Elasticsearch 2.0. Will be removed in the next major version of NEST")]
 		long? IHistogramAggregation.PostOffset { get; set; }
 
 		double? IHistogramAggregation.Offset { get; set; }

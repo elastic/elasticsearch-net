@@ -44,6 +44,7 @@ namespace Nest
 		[JsonProperty("skip_time")]
 		// Forced to prevent override, ML API always expects ISO8601 format
 		[JsonConverter(typeof(IsoDateTimeConverter))]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		DateTimeOffset? SkipTime { get; set; }
 	}
 
@@ -58,6 +59,7 @@ namespace Nest
 		/// <inheritdoc />
 		public DateTimeOffset? Start { get; set; }
 		/// <inheritdoc />
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public DateTimeOffset? SkipTime { get; set; }
 	}
 
@@ -68,6 +70,8 @@ namespace Nest
 		bool? IFlushJobRequest.CalculateInterim { get; set; }
 		DateTimeOffset? IFlushJobRequest.End { get; set; }
 		DateTimeOffset? IFlushJobRequest.Start { get; set; }
+
+		[Obsolete("Scheduled to be removed in 6.0")]
 		DateTimeOffset? IFlushJobRequest.SkipTime { get; set; }
 
 		/// <inheritdoc />
@@ -83,6 +87,7 @@ namespace Nest
 		public FlushJobDescriptor Start(DateTimeOffset start) => Assign(a => a.Start = start);
 
 		/// <inheritdoc />
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public FlushJobDescriptor SkipTime(DateTimeOffset skipTime) => Assign(a => a.SkipTime = skipTime);
 	}
 }

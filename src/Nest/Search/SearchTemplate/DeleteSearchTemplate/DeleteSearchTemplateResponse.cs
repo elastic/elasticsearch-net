@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
+	[Obsolete("Scheduled to be removed in 6.0")]
 	public interface IDeleteSearchTemplateResponse : IAcknowledgedResponse { }
 
+	[Obsolete("Scheduled to be removed in 6.0")]
 	public class DeleteSearchTemplateResponse : AcknowledgedResponseBase, IDeleteSearchTemplateResponse { }
 }
