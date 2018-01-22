@@ -25,7 +25,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 		public string RoamingFolder { get; }
 		public string AnalysisFolder => Path.Combine(this.ConfigPath, "analysis");
-		public string DownloadZipLocation => Path.Combine(this.RoamingFolder, this._version.Zip);
+		public string DownloadZipLocation => Path.Combine(this.RoamingFolder, this._version.ZipFilename);
 		public string TaskRunnerFile => Path.Combine(this.RoamingFolder, "taskrunner.log");
 
 
@@ -55,7 +55,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			this._clusterName = clusterName;
 
 			var appData = GetApplicationDataDirectory() ?? "/tmp/NEST";
-			this.RoamingFolder = Path.Combine(appData, "NEST", this._version.FullyQualifiedVersion);
+			this.RoamingFolder = Path.Combine(appData, "NEST", this._version.LocalFolderName);
 			this.ElasticsearchHome = Path.Combine(this.RoamingFolder, this._version.FolderInZip);
 		}
 

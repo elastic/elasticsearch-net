@@ -1,9 +1,6 @@
 using System;
 using System.Linq;
-using Elasticsearch.Net;
 using Nest;
-using Tests.Framework.Configuration;
-using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Nodes;
 using Tests.Framework.ManagedElasticsearch.Plugins;
 
@@ -14,9 +11,6 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.ValidationTasks
 		public override void Validate(IElasticClient client, NodeConfiguration configuration)
 		{
 			var v = configuration.ElasticsearchVersion;
-			//if the version we are running against is a s snapshot version we do not validate plugins
-			//because we can not reliably install plugins against snapshots
-			if (v.IsSnapshot) return;
 
 			var requiredMonikers = ElasticsearchPluginCollection.Supported
 				.Where(plugin => plugin.IsValid(v) && configuration.RequiredPlugins.Contains(plugin.Plugin))

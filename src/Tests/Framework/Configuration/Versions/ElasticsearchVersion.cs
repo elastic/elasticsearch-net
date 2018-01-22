@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Concurrent;
-using System.Linq;
 using System.Net;
-using System.Threading;
-using System.Xml.Linq;
+using System.Text.RegularExpressions;
 using Nest;
 using Version = SemVer.Version;
 
@@ -11,126 +9,116 @@ namespace Tests.Framework.Versions
 {
 	public class ElasticsearchVersion : Version
 	{
-		private static readonly Lazy<string> LatestVersion = new Lazy<string>(ResolveLatestVersion, LazyThreadSafetyMode.ExecutionAndPublication);
-		private static readonly Lazy<string> LatestSnapshot = new Lazy<string>(ResolveLatestSnapshot, LazyThreadSafetyMode.ExecutionAndPublication);
-		private static readonly object _lock = new { };
-		private static readonly ConcurrentDictionary<string, string> SnapshotVersions = new ConcurrentDictionary<string, string>();
-		private static readonly string SonaTypeUrl = "https://oss.sonatype.org/content/repositories/snapshots/org/elasticsearch/distribution/zip/elasticsearch";
+		private readonly ElasticsearchVersionResolver _resolver;
+
 		private static readonly ConcurrentDictionary<string, ElasticsearchVersion> Versions = new ConcurrentDictionary<string, ElasticsearchVersion>();
 
-		private string RootUrl => this.IsSnapshot
-			? SonaTypeUrl
-			: TestClient.VersionUnderTestSatisfiedBy("<5.0.0")
-				? "https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch"
-				: "https://artifacts.elastic.co/downloads/elasticsearch";
+		private const string ArtifactsUrl = "https://artifacts.elastic.co/downloads/elasticsearch";
+		private const string StagingUrlFormat = "https://staging.elastic.co/{0}-{1}";
 
-		private static string ResolveLatestSnapshot()
-		{
-			var version = LatestVersion.Value;
-			return ResolveLatestSnapshotFor(version);
-		}
-
-		private static string ResolveLatestSnapshotFor(string version)
-		{
-			var url = $"{SonaTypeUrl}/{version}/maven-metadata.xml";
-			try
-			{
-				var mavenMetadata = XElement.Load(url);
-				var snapshot = mavenMetadata.Descendants("versioning").Descendants("snapshot").FirstOrDefault();
-				var snapshotTimestamp = snapshot.Descendants("timestamp").FirstOrDefault().Value;
-				var snapshotBuildNumber = snapshot.Descendants("buildNumber").FirstOrDefault().Value;
-				var identifier = $"{snapshotTimestamp}-{snapshotBuildNumber}";
-				var zip = $"elasticsearch-{version.Replace("SNAPSHOT", "")}{identifier}.zip";
-				return zip;
-
-			}
-			catch (Exception e)
-			{
-				throw new Exception($"Can not download maven data from {url}", e);
-			}
-		}
-
-		private static string ResolveLatestVersion()
-		{
-			var url = $"{SonaTypeUrl}/maven-metadata.xml";
-			try
-			{
-                var versions = XElement.Load(url)
-                    .Descendants("version")
-                    .Select(n => new Version(n.Value))
-                    .OrderByDescending(n => n);
-                return versions.First().ToString();
-			}
-			catch (Exception e)
-			{
-				throw new Exception($"Can not download maven data from {url}", e);
-			}
-		}
-
-		private static string TranslateConfigVersion(string configMoniker) => configMoniker == "latest" ? LatestVersion.Value : configMoniker;
-
-		public ElasticsearchVersion(string version) : base(TranslateConfigVersion(version))
-		{
-			this.Version = version;
-			if (this.Version.Equals("latest", StringComparison.OrdinalIgnoreCase))
-			{
-				this.Version = LatestVersion.Value;
-				this.Zip = LatestSnapshot.Value;
-			}
-			else if (this.IsSnapshot)
-			{
-				lock (_lock)
-				{
-					string zipLocation;
-					if (SnapshotVersions.TryGetValue(version, out zipLocation))
-						this.Zip = zipLocation;
-					else
-					{
-						zipLocation = ResolveLatestSnapshotFor(version);
-						SnapshotVersions.TryAdd(version, zipLocation);
-						this.Zip = zipLocation;
-					}
-				}
-			}
-
-			this.Zip = this.Zip ?? $"elasticsearch-{this.Version}.zip";
-		}
-
-		private string _downloadUrl;
-		public string DownloadUrl
-		{
-			get
-			{
-				if (!string.IsNullOrWhiteSpace(this._downloadUrl)) return this._downloadUrl;
-                this._downloadUrl = this.IsSnapshot
-	                ? $"{this.RootUrl}/{this.Version}/{this.Zip}"
-	                : $"{this.RootUrl}/{this.Zip}";
-				return this._downloadUrl;
-
-			}
-		}
-		public string Zip { get; }
+		public enum ReleaseState { Released, Snapshot, BuildCandidate }
+		public ReleaseState State { get; set; }
 		public string Version { get; }
 
-		/// <summary>
-		/// Returns the version in elasticsearch-{version} format, for SNAPSHOTS this includes a
-		/// datetime suffix
-		/// </summary>
-		public string FullyQualifiedVersion => this.Zip?.Replace(".zip", "").Replace("elasticsearch-", "");
-
-		/// <summary>
-		/// The folder name to expect to be in the zip distribution
-		/// </summary>
+		private string RootUrl { get; }
+		public string ElasticsearchDownloadUrl { get; }
+		public string ZipFilename { get; }
+		/// <summary> The folder name to expect to be in the zip distribution </summary>
 		public string FolderInZip => $"elasticsearch-{this.Version}";
 
+		/// <summary> The local folder name to extract too </summary>
+		public string LocalFolderName { get; }
+
 		/// <summary>
-		/// Whether this version is a snapshot or officicially released distribution
+		/// Represents an Elasticsearch version and its download locations
+		/// <pre>Follows a static factory pattern to create new instances because based on the version it calls out to the internet to learn more</pre>
 		/// </summary>
-		public bool IsSnapshot => this.Version?.ToLower().Contains("snapshot") ?? false;
+		/// <param name="version">Can be either a released version, snapshot version or a build candidate following a githash:version pattern</param>
+		/// <param name="resolver">A resolver that can find out the latest elasticsearch version</param>
+		/// <returns></returns>
+		public static ElasticsearchVersion Create(string version, ElasticsearchVersionResolver resolver = null)
+		{
+			return resolver == null
+				? Versions.GetOrAdd(version, v => new ElasticsearchVersion(v, ElasticsearchVersionResolver.Default))
+				: new ElasticsearchVersion(version, resolver);
+		}
+
+		internal ElasticsearchVersion(string version, ElasticsearchVersionResolver resolver)
+			: base(TranslateConfigVersion(version, resolver))
+		{
+			this._resolver = resolver;
+			this.Version = version;
+			this.ZipFilename = $"elasticsearch-{this.Version}.zip";
+			switch (version)
+			{
+				case "latest":
+					this.State = ReleaseState.Released;
+					this.Version = _resolver.LatestVersion;
+					this.ZipFilename = _resolver.LatestSnapshot;
+					this.RootUrl = ArtifactsUrl;
+					this.LocalFolderName = this.Version;
+					break;
+				case string snapShotVersion when version.EndsWith("-snapshot", StringComparison.OrdinalIgnoreCase):
+					this.State = ReleaseState.Snapshot;
+					this.RootUrl = ElasticsearchVersionResolver.SonaTypeUrl;
+					this.ZipFilename = resolver.SnapshotZipFilename(version);
+					this.LocalFolderName = this.ZipFilename?.Replace(".zip", "").Replace("elasticsearch-", "");
+					this.ElasticsearchDownloadUrl = $"{this.RootUrl}/{this.Version}/{this.ZipFilename}";
+					break;
+				case string bcVersion when TryParseBuildCandidate(version, out var v, out var gitHash):
+					this.State = ReleaseState.BuildCandidate;
+					this.Version = v;
+					this.RootUrl = string.Format(StagingUrlFormat, v, gitHash);
+					this.ZipFilename = $"elasticsearch-{this.Version}.zip";
+					this.ElasticsearchDownloadUrl = $"{this.RootUrl}/downloads/elasticsearch/{this.ZipFilename}";
+					this.LocalFolderName = $"{v}-bc+{gitHash}";
+					break;
+				default:
+					this.State = ReleaseState.Released;
+					this.RootUrl = ArtifactsUrl;
+					break;
+			}
+
+
+			this.ElasticsearchDownloadUrl = this.ElasticsearchDownloadUrl ?? $"{this.RootUrl}/{this.ZipFilename}";
+			this.LocalFolderName = this.LocalFolderName ?? this.Version;
+		}
+
+		public string PluginDownloadUrl(string moniker)
+		{
+			var zip = $"{moniker}-{this.Version}.zip";
+			switch (State)
+			{
+				case ReleaseState.Snapshot: return $"https://snapshots.elastic.co/downloads/elasticsearch-plugins/{moniker}/{zip}";
+				case ReleaseState.BuildCandidate:
+					return $"{this.RootUrl}/downloads/elasticsearch-plugins/{moniker}/{zip}";
+			}
+			return moniker;
+		}
+
+		private static string TranslateConfigVersion(string configMoniker, ElasticsearchVersionResolver resolver)
+		{
+			switch (configMoniker)
+			{
+				case "latest" : return resolver.LatestVersion;
+				case string _ when TryParseBuildCandidate(configMoniker, out var version, out _):
+					return version;
+				default: return configMoniker;
+
+			}
+		}
+
+		private static bool TryParseBuildCandidate(string passedVersion, out string version, out string gitHash)
+		{
+			version = null;
+			gitHash = null;
+			var tokens = passedVersion.Split(':');
+			if (tokens.Length < 2) return false;
+			version = tokens[1].Trim();
+			gitHash = tokens[0].Trim();
+			return true;
+		}
 
 		public override string ToString() => this.Version;
-
-		public static ElasticsearchVersion GetOrAdd(string version) =>
-			Versions.GetOrAdd(version, v => new ElasticsearchVersion(v));
 	}
 }

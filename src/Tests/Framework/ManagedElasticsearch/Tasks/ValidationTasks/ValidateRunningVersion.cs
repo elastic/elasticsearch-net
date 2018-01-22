@@ -17,8 +17,8 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.ValidationTasks
 			if (!alreadyUp.IsValid) return;
 			var v = configuration.ElasticsearchVersion;
 
-			var alreadyUpVersion = ElasticsearchVersion.GetOrAdd(alreadyUp.Version.Number);
-			var alreadyUpSnapshotVersion = ElasticsearchVersion.GetOrAdd(alreadyUp.Version.Number + "-SNAPSHOT");
+			var alreadyUpVersion = ElasticsearchVersion.Create(alreadyUp.Version.Number);
+			var alreadyUpSnapshotVersion = ElasticsearchVersion.Create(alreadyUp.Version.Number + "-SNAPSHOT");
 			if (v != alreadyUpVersion && v != alreadyUpSnapshotVersion)
 				throw new Exception($"running elasticsearch is version {alreadyUpVersion} but the test config dictates {v}");
 		}

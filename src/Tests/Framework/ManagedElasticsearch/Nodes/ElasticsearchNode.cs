@@ -157,7 +157,7 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 
 			if (this.ProcessId == null && consoleOut.TryParseNodeInfo(out version, out pid))
 			{
-				var startedVersion = ElasticsearchVersion.GetOrAdd(version);
+				var startedVersion = ElasticsearchVersion.Create(version);
 				this.ProcessId = pid;
 				if (this.Version != startedVersion)
 					throw new Exception($"Booted elasticsearch is version {startedVersion} but the test config dictates {this.Version}");
