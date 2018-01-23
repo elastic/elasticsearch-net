@@ -185,6 +185,14 @@ By default, NEST camel cases property names e.g. EmailAddress POCO property => "
 
 The default index to use when no index is specified.
 
+`DefaultMappingFor`::
+
+Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type, and relation names.
+
+`DefaultTypeName`::
+
+Sets a default type name to use within Elasticsearch for all CLR types. If `DefaultTypeNameInferrer` is also set, a configured             default type name will only be used when `DefaultTypeNameInferrer` returns null or empty. If unset, the default type             name for types will be the lowercased CLR type name.
+
 `DefaultTypeNameInferrer`::
 
 Specify how type names are inferred from POCO types. By default, type names are inferred by calling `ToLowerInvariant` on the type's name.
@@ -192,16 +200,6 @@ Specify how type names are inferred from POCO types. By default, type names are 
 `InferMappingFor`::
 
 Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type and relation names. The generic version also allows you to set a default id property and control serialization behavior for properties for the POCO. The type of the document.
-
-`InferMappingFor`::
-
-Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type, and relation names.
-
-`PluralizeTypeNames`::
-
-Pluralize type names when inferring from POCO type names.
-+
-This calls `DefaultTypeNameInferrer` with an implementation that will pluralize type names.             This used to be the default prior to Nest 0.90
 
 :xml-docs: Nest:ConnectionSettingsBase`1
 
@@ -224,7 +222,7 @@ And with the high level client
 [source,csharp]
 ----
 var connectionSettings = new ConnectionSettings()
-    .InferMappingFor<Project>(i => i
+    .DefaultMappingFor<Project>(i => i
         .IndexName("my-projects")
         .TypeName("project")
     )

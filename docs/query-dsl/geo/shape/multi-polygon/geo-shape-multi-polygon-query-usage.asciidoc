@@ -26,7 +26,6 @@ q
     .Field(p => p.Location)
     .Coordinates(this._coordinates)
     .Relation(GeoShapeRelation.Intersects)
-    .IgnoreUnmapped()
 )
 ----
 
@@ -41,7 +40,6 @@ new GeoShapeMultiPolygonQuery
     Field = Field<Project>(p => p.Location),
     Shape = new MultiPolygonGeoShape(this._coordinates),
     Relation = GeoShapeRelation.Intersects,
-    IgnoreUnmapped = false
 }
 ----
 

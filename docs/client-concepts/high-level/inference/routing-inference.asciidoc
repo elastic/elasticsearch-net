@@ -78,7 +78,7 @@ Here we instruct NEST to infer the Routing for `MyDTO` based on its `Name` prope
 [source,csharp]
 ----
 WithConnectionSettings(x => x
-    .InferMappingFor<MyDTO>(m => m
+    .DefaultMappingFor<MyDTO>(m => m
         .RoutingProperty(p => p.Name)
     )
 ).Expect("x").WhenInferringRoutingOn(dto);
@@ -92,7 +92,7 @@ with different inference rules
 [source,csharp]
 ----
 WithConnectionSettings(x => x
-    .InferMappingFor<MyDTO>(m => m
+    .DefaultMappingFor<MyDTO>(m => m
         .RoutingProperty(p => p.OtherName)
     )
 ).Expect("y").WhenInferringRoutingOn(dto);
@@ -152,7 +152,7 @@ The routing property configured on `ConnectionSettings` always takes precedence.
 [source,csharp]
 ----
 WithConnectionSettings(x => x
-    .InferMappingFor<MyOtherDTO>(m => m
+    .DefaultMappingFor<MyOtherDTO>(m => m
         .RoutingProperty(p => p.OtherName)
     )
 ).Expect("y").WhenInferringRoutingOn(dto);
@@ -184,7 +184,7 @@ unless you configure the ConnectionSettings to use an alternate property:
 [source,csharp]
 ----
 WithConnectionSettings(x => x
-    .InferMappingFor<BadDTO>(m => m
+    .DefaultMappingFor<BadDTO>(m => m
         .RoutingProperty(p => p.ParentName)
     )
 ).Expect("my-parent").WhenInferringRoutingOn(dto);

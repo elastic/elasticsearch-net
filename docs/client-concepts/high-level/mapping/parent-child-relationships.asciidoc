@@ -58,7 +58,7 @@ public class MyChild : MyDocument
 ==== Parent And Child mapping
 
 In the following example we setup our client and give our types prefered index and type names.  Starting with NEST 6.x we can
-also give a type a preferred `RelationName` as can be seen on the `InferMappingFor<MyParent>`.
+also give a type a preferred `RelationName` as can be seen on the `DefaultMappingFor<MyParent>`.
 
 Also note that we give `MyChild` and `MyParent` the same default `doc` type name to make sure they end up in the same index
 under the same type.
@@ -67,9 +67,9 @@ under the same type.
 ----
 var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 var connectionSettings = new ConnectionSettings(connectionPool, new InMemoryConnection()) <1>
-    .InferMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
-    .InferMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
-    .InferMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
+    .DefaultMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
+    .DefaultMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
+    .DefaultMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
 
 var client = new ElasticClient(connectionSettings);
 ----
@@ -99,8 +99,11 @@ var createIndexResponse = client.CreateIndex("index", c => c
 );
 ----
 <1> recommended to make the routing field mandatory so you can not accidentally forget
+
 <2> Map all of the `MyParent` properties
+
 <3> Map all of the `MyChild` properties
+
 <4> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
 
 We call `AutoMap()` for both types to discover properties of both .NET types. `AutoMap()` won't automatically setup the
@@ -176,6 +179,7 @@ parentDocument = new MyParent
 var indexParent = client.IndexDocument<MyDocument>(parentDocument);
 ----
 <1> this lets the join data type know this is a root document of type `myparent`
+
 <2> this lets the join data type know this is a root document of type `myparent`
 
 [source,javascript]

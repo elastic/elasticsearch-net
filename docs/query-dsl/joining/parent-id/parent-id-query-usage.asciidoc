@@ -26,8 +26,8 @@ See the Elasticsearch documentation on {ref_current}/query-dsl-parent-id-query.h
 q
 .ParentId(p => p
     .Name("named_query")
-    .Type<Developer>()
-    .Id(Project.First.Name)
+    .Type<CommitActivity>()
+    .Id(Project.Instance.Name)
 )
 ----
 
@@ -38,8 +38,8 @@ q
 new ParentIdQuery
 {
     Name = "named_query",
-    Type = Infer.Relation<Developer>(),
-    Id = Project.First.Name
+    Type = Infer.Relation<CommitActivity>(),
+    Id = Project.Instance.Name
 }
 ----
 
@@ -49,8 +49,8 @@ new ParentIdQuery
 {
   "parent_id": {
     "_name": "named_query",
-    "type": "developer",
-    "id": "Lesch Group"
+    "type": "commits",
+    "id": "Durgan LLC"
   }
 }
 ----

@@ -56,7 +56,7 @@ new NestedQuery
         Field = Field<Project>(p => p.CuratedTags.First().Name),
         Terms = new[] { "lorem", "ipsum" }
     },
-    IgnoreUnmapped = false
+    IgnoreUnmapped = true
 }
 ----
 
@@ -75,7 +75,7 @@ new NestedQuery
         ]
       }
     },
-    "ignore_unmapped": false,
+    "ignore_unmapped": true,
     "path": "curatedTags",
     "inner_hits": {
       "explain": true

@@ -186,7 +186,7 @@ var expected = new
     };
 
 var settings = WithConnectionSettings(s => s
-        .InferMappingFor<ParentWithStringId>(m => m
+        .DefaultMappingFor<ParentWithStringId>(m => m
             .TypeName("parent")
             .Ignore(p => p.Description)
             .Ignore(p => p.IgnoreMe)

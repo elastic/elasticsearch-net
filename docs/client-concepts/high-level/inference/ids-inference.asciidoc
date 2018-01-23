@@ -81,7 +81,7 @@ Here we instruct NEST to infer the Id for `MyDTO` based on its `Name` property
 [source,csharp]
 ----
 WithConnectionSettings(x => x
-    .InferMappingFor<MyDTO>(m => m
+    .DefaultMappingFor<MyDTO>(m => m
         .IdProperty(p => p.Name)
     )
 ).Expect("x").WhenInferringIdOn(dto);
@@ -95,7 +95,7 @@ with different inference rules
 [source,csharp]
 ----
 WithConnectionSettings(x => x
-    .InferMappingFor<MyDTO>(m => m
+    .DefaultMappingFor<MyDTO>(m => m
         .IdProperty(p => p.OtherName)
     )
 ).Expect("y").WhenInferringIdOn(dto);
@@ -140,7 +140,7 @@ that will infer the document id from the property `OtherName`:
 [source,csharp]
 ----
 WithConnectionSettings(x => x
-    .InferMappingFor<MyOtherDTO>(m => m
+    .DefaultMappingFor<MyOtherDTO>(m => m
         .IdProperty(p => p.OtherName)
     )
 ).Expect("y").WhenInferringIdOn(dto);

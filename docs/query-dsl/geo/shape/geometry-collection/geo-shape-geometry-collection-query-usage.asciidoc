@@ -33,7 +33,6 @@ q
         new MultiPolygonGeoShape(this._multiPolygonCoordinates)
     )
     .Relation(GeoShapeRelation.Intersects)
-    .IgnoreUnmapped()
 )
 ----
 
@@ -59,7 +58,6 @@ new GeoShapeGeometryCollectionQuery
         }
     },
     Relation = GeoShapeRelation.Intersects,
-    IgnoreUnmapped = false
 }
 ----
 

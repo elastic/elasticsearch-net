@@ -28,8 +28,6 @@ q
     .Analyzer("standard")
     .DefaultOperator(Operator.Or)
     .Flags(SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near)
-    .Locale("en_US")
-    .LowercaseExpandedTerms()
     .Lenient()
     .AnalyzeWildcard()
     .MinimumShouldMatch("30%")
@@ -49,8 +47,6 @@ new SimpleQueryStringQuery
     Analyzer = "standard",
     DefaultOperator = Operator.Or,
     Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
-    Locale = "en_US",
-    LowercaseExpandedTerms = true,
     Lenient = true,
     AnalyzeWildcard = true,
     MinimumShouldMatch = "30%"
@@ -72,8 +68,6 @@ new SimpleQueryStringQuery
     "analyzer": "standard",
     "default_operator": "or",
     "flags": "AND|NEAR",
-    "locale": "en_US",
-    "lowercase_expanded_terms": true,
     "lenient": true,
     "analyze_wildcard": true,
     "minimum_should_match": "30%"

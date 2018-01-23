@@ -411,7 +411,7 @@ for property `C` on `B`
 [source,csharp]
 ----
 var newConnectionSettings = TestClient.CreateSettings(modifySettings: s => s
-    .InferMappingFor<A>(m => m
+    .DefaultMappingFor<A>(m => m
         .Rename(p => p.C, "d")
     )
 );
@@ -472,9 +472,13 @@ class Precedence
 }
 ----
 <1> Even though this property has a NEST property mapping _and_ a `JsonProperty` attribute, We are going to provide a hard rename for it on ConnectionSettings later that should win.
+
 <2> This property has both a NEST attribute and a `JsonProperty`, NEST should win.
+
 <3> We should take the json property into account by itself
+
 <4> This property we are going to special case in our custom serializer to resolve to ask
+
 <5> We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
 
 Here we create a custom serializer that renames any property named `AskSerializer` to `ask`
@@ -499,7 +503,7 @@ and all properties that are not mapped verbatim should be uppercased
 ----
 var usingSettings = WithConnectionSettings(s => s
 
-    .InferMappingFor<Precedence>(m => m
+    .DefaultMappingFor<Precedence>(m => m
         .Rename(p => p.RenamedOnConnectionSettings, "renamed")
     )
     .DefaultFieldNameInferrer(p => p.ToUpperInvariant())
@@ -547,7 +551,7 @@ Inherited properties can be ignored and renamed just as one would expect
 [source,csharp]
 ----
 var usingSettings = WithConnectionSettings(s => s
-    .InferMappingFor<Child>(m => m
+    .DefaultMappingFor<Child>(m => m
         .Rename(p => p.Description, "desc")
         .Ignore(p => p.IgnoreMe)
     )

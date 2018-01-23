@@ -26,7 +26,7 @@ first usage, so we can get an audit trail with a few events out
 ----
 var pool = new SniffingConnectionPool(new []{ new Uri($"http://{TestClient.DefaultHost}:9200") });
 var connectionSettings = new ConnectionSettings(pool)
-    .InferMappingFor<Project>(i => i
+    .DefaultMappingFor<Project>(i => i
         .IndexName("project")
     );
 

@@ -31,7 +31,6 @@ q
     .QuoteAnalyzer("quote-an")
     .AllowLeadingWildcard()
     .MaximumDeterminizedStates(2)
-    .LowercaseExpandedTerms()
     .EnablePositionIncrements()
     .Escape()
     .FuzzyPrefixLength(2)
@@ -44,7 +43,6 @@ q
     .MinimumShouldMatch(2)
     .QuoteFieldSuffix("'")
     .Lenient()
-    .Locale("en_US")
     .Timezone("root")
 )
 ----
@@ -65,8 +63,6 @@ new QueryStringQuery
     QuoteAnalyzer = "quote-an",
     AllowLeadingWildcard = true,
     MaximumDeterminizedStates = 2,
-    LowercaseExpandedTerms = true,
-    Locale = "en_US",
     EnablePositionIncrements = true,
     Escape = true,
     FuzzyPrefixLength = 2,
@@ -96,7 +92,6 @@ new QueryStringQuery
     "analyzer": "standard",
     "quote_analyzer": "quote-an",
     "allow_leading_wildcard": true,
-    "lowercase_expanded_terms": true,
     "enable_position_increments": true,
     "fuzzy_max_expansions": 3,
     "fuzziness": "AUTO",
@@ -105,7 +100,6 @@ new QueryStringQuery
     "max_determinized_states": 2,
     "minimum_should_match": 2,
     "lenient": true,
-    "locale": "en_US",
     "time_zone": "root",
     "fields": [
       "description",
