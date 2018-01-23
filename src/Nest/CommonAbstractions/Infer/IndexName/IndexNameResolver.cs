@@ -28,8 +28,7 @@ namespace Nest
 			var defaultIndices = this._connectionSettings.DefaultIndices;
 			if (defaultIndices != null && type != null)
 			{
-				string value;
-				if (defaultIndices.TryGetValue(type, out value) && !string.IsNullOrEmpty(value))
+				if (defaultIndices.TryGetValue(type, out var value) && !string.IsNullOrEmpty(value))
 					indexName = value;
 			}
 			ValidateIndexName(indexName);
@@ -42,7 +41,7 @@ namespace Nest
 			if (string.IsNullOrWhiteSpace(indexName))
 				throw new ArgumentException(
 					"Index name is null for the given type and no default index is set. "
-					+ "Map an index name using ConnectionSettings.MapDefaultTypeIndices(), ConnectionSettings.DefaultsFor<TDocument>() "
+					+ "Map an index name using ConnectionSettings.DefaultMappingFor<TDocument>() "
 					+ "or set a default index using ConnectionSettings.DefaultIndex()."
 				);
 		}

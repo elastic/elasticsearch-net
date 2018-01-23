@@ -40,7 +40,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			Nest.Indices allWithOthersFromString = "_all, name2"; //<1> `_all` will override any specific index names here
 
-			Nest.Indices singleIndexFromType = typeof(Project); //<2> The `Project` type has been mapped to a specific index name using <<index-name-type-mapping,`.DefaultsFor<Project>`>>
+			Nest.Indices singleIndexFromType = typeof(Project); //<2> The `Project` type has been mapped to a specific index name using <<index-name-type-mapping,`.DefaultMappingFor<Project>`>>
 
 			Nest.Indices singleIndexFromIndexName = IndexName.From<Project>();
 

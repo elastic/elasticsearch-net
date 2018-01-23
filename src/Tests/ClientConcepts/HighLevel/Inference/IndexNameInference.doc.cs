@@ -50,11 +50,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		/**
-		 * `.DefaultsFor<T>()` can also be used to specify the index name, as well as be used
+		 * `.DefaultMappingFor<T>()` can also be used to specify the index name, as well as be used
 		 * to specify the type name and POCO property that should be used as the id for the document
 		 */
 		[U]
-		public void ExplicitMappingIsInferredUsingDefaultsFor()
+		public void ExplicitMappingIsInferredUsingDefaultMappingFor()
 		{
 			var settings = new ConnectionSettings()
 				.DefaultMappingFor<Project>(m => m
@@ -65,7 +65,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			index.Should().Be("projects");
 		}
 
-		/** An index name for a POCO provided using `.MapDefaultTypeIndices()` or `.DefaultsFor<T>()` **will take precedence** over
+		/** An index name for a POCO provided using `.MapDefaultTypeIndices()` or `.DefaultMappingFor<T>()` **will take precedence** over
 		* the default index name set on `ConnectionSettings`. This way, the client can be configured with a default index to use if no
 		* index is specified, and a specific index to use for different POCO types.
 		*/
@@ -99,7 +99,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		/** When an index name is provided on a request, it **will take precedence** over the default
 		* index name and any index name specified for the POCO type using `.MapDefaultTypeIndices()` or
-		* `.DefaultsFor<T>()`
+		* `.DefaultMappingFor<T>()`
 		*/
 		[U] public void ExplicitIndexOnRequestTakesPrecedence()
 		{
@@ -120,7 +120,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		/** In summary, the order of precedence for determining the index name for a request is
 		 *
 		 * . Index name specified  on the request
-		 * . Index name specified for the generic type parameter in the request using `.MapDefaultTypeIndices()` or `.DefaultsFor<T>()`
+		 * . Index name specified for the generic type parameter in the request using `.MapDefaultTypeIndices()` or `.DefaultMappingFor<T>()`
 		 * . Default index name specified on `ConnectionSettings`
 		 */
 

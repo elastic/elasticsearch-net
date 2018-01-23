@@ -63,7 +63,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		* ==== Parent And Child mapping
 		*
 		* In the following example we setup our client and give our types prefered index and type names.  Starting with NEST 6.x we can
-		* also give a type a preferred `RelationName` as can be seen on the `DefaultsFor<MyParent>`.
+		* also give a type a preferred `RelationName` as can be seen on the `DefaultMappingFor<MyParent>`.
 		*
 		* Also note that we give `MyChild` and `MyParent` the same default `doc` type name to make sure they end up in the same index
 		* under the same type.

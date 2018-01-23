@@ -15,7 +15,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
     * - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to
     * the property that should be ignored on the POCO
     *
-    * - Using the `.DefaultsFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>>
+    * - Using the `.DefaultMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>>
     * selector)` on `ConnectionSettings`
     *
     * - Using an ignore attribute applied to the POCO property that is understood by

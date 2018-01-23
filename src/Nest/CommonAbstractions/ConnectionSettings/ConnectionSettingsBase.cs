@@ -239,7 +239,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="TDocument">The type of the document.</typeparam>
 		/// <param name="selector">The selector.</param>
-		[Obsolete("Please use DefaultMappingFor")]
+		[Obsolete("Please use " + nameof(DefaultMappingFor))]
 		public TConnectionSettings InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)
 			where TDocument : class =>
 			DefaultMappingFor<TDocument>(selector);
@@ -292,9 +292,8 @@ namespace Nest
 		/// <summary>
 		/// Specify how the mapping is inferred for a given POCO type. Can be used to infer the index, type, and relation names.
 		/// </summary>
-		/// <param name="documentType">The type of the POCO you wish to configure</param>
-		/// <param name="selector">describe the POCO configuration</param>
-		public TConnectionSettings DefaultMappingFor(IEnumerable<ClrTypeMapping> typeMappings)
+		/// <param name="typeMappings">The mappings for the POCO types you wish to configure</param>
+		public TConnectionSettings DefaultMappingFor(IEnumerable<IClrTypeMapping> typeMappings)
 		{
 			if (typeMappings == null) return (TConnectionSettings) this;
 			foreach (var inferMapping in typeMappings)
