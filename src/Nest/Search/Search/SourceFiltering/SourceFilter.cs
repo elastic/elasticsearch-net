@@ -29,7 +29,6 @@ namespace Nest
 
 		Fields ISourceFilter.Excludes { get; set; }
 
-
 		public SourceFilterDescriptor<T> Includes(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Includes = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 

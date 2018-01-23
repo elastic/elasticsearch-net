@@ -15,8 +15,7 @@ namespace Nest
 
 		public static UnionJsonConverterBase CreateConverter(Type t)
 		{
-			UnionJsonConverterBase conversion;
-			if (KnownTypes.TryGetValue(t, out conversion))
+			if (KnownTypes.TryGetValue(t, out var conversion))
 				return conversion;
 
 			var genericArguments = t.GetTypeInfo().GenericTypeArguments;
@@ -55,9 +54,11 @@ namespace Nest
 				v = serializer.Deserialize<T>(reader);
 				return true;
 			}
-			catch {}
-			v= default(T);
-			return false;
+			catch
+			{
+				v = default(T);
+				return false;
+			}
 		}
 
 		public abstract void WriteJson(JsonWriter writer, object v, JsonSerializer serializer);
