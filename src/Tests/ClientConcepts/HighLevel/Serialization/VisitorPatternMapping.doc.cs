@@ -12,60 +12,52 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 {
     /**[[extending-nest-types]]
      * === Extending NEST types
+     *
+     * Although of course NEST should always be up to date with a 100% API coverage of the Elasticsearch API, sometimes you might want to work around a bug
+     * or maybe use types from a 3rd party plugin that NEST does not support.
      */
     public class ExtendingNestTypes
 	{
-        public class MyTermQuery : TermQuery
+		/* === Creating your own property mapping
+		*
+		 * Here we implement a custom `IProperty` implementation so that we can use a mapping type provided by a plugin.
+		*/
+		public class MyPluginProperty : IProperty
 		{
-			public string AdditionalProperty { get; set; }
-		}
+			IDictionary<string, object> IProperty.LocalMetadata { get; set; }
+			string IProperty.Type { get; set; } = "my_plugin_property";
+			PropertyName IProperty.Name { get; set; }
 
-		public class IcuCollationKeywordProperty : IProperty
-		{
-			public IcuCollationKeywordProperty(string name, string language)
+			public MyPluginProperty(string name, string language)
 			{
-				this.Name = name;
-				this.Type = "icu_collation_keyword";
+				((IProperty)this).Name = name;
 				this.Language = language;
-				this.Variant = "@collation=standard";
-				this.Strength = "primary";
 				this.Numeric = true;
 			}
 
-			public string Type { get; set; }
-			public PropertyName Name { get; set; }
-			public IDictionary<string, object> LocalMetadata { get; set; }
-
-			[Rename("language")]
+			[PropertyName("language")]
 			public string Language { get; set; }
 
-			[Rename("strength")]
-			public string Strength { get; set; }
-
-			[Rename("variant")]
-			public string Variant { get; set; }
-
-			[Rename("numeric")]
+			[PropertyName("numeric")]
 			public bool Numeric { get; set; }
 		}
 
-		[U]
-		public void InjectACustomIPropertyImplementation()
+		[U] public void InjectACustomIPropertyImplementation()
 		{
-			/** Now we can pass an instance of our custom visitor to `.AutoMap()` */
+			/**
+			 * `PropertyNameAttribute` can be used to mark properties that should be serialized. Without this attribute NEST won't pick up the property for serialization.
+			 *
+			 * Now that we have our own `IProperty` implementation we can add it to our propertes mapping when creating an index
+			 */
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
 					.Map<Project>(m => m
 						.Properties(props => props
-							.Custom(new IcuCollationKeywordProperty("fieldName", "dutch"))
+							.Custom(new MyPluginProperty("fieldName", "dutch"))
 						)
 					)
 				);
 
-			/** and any time the client maps a property of the POCO (Employee in this example) as a number (INumberProperty) or boolean (IBooleanProperty),
-			 * it will apply the transformation defined in each `Visit()` call respectively, which in this example
-			 * disables {ref_current}/doc-values.html[doc_values].
-			 */
 			var expected = new
 			{
 				mappings = new
@@ -76,10 +68,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 						{
 							fieldName = new
 							{
-								type = "icu_collation_keyword",
+								type = "my_plugin_property",
 								language = "dutch",
-								variant = "@collation=standard",
-								strength = "primary",
 								numeric = true
 							}
 						}
@@ -88,7 +78,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			};
 
 		    Expect(expected)
-			    .NoRoundTrip()
+			    .NoRoundTrip() // <1> while we can serialize our `my_plugin_property` NEST does not know how to read it, for NEST 7.x we plan to make this more plugable.
 			    .WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 	}

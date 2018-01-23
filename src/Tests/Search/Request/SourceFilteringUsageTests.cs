@@ -95,7 +95,7 @@ namespace Tests.Search.Request
 	{
 		internal class WithSourceFilterProperty
 		{
-			[Rename("_source"), JsonProperty("_source")]
+			[PropertyName("_source"), JsonProperty("_source")]
 			public Union<bool, ISourceFilter> SourceFilter { get; set; }
 		}
 
