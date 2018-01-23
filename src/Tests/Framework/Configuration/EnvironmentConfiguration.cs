@@ -27,7 +27,7 @@ namespace Tests.Framework.Configuration
 			var version = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 			if (!string.IsNullOrEmpty(version)) Mode = TestMode.Integration;
 
-			this.ElasticsearchVersion = ElasticsearchVersion.GetOrAdd(string.IsNullOrWhiteSpace(version) ? DefaultVersion : version);
+			this.ElasticsearchVersion = ElasticsearchVersion.Create(string.IsNullOrWhiteSpace(version) ? DefaultVersion : version);
 			this.ClusterFilter = Environment.GetEnvironmentVariable("NEST_INTEGRATION_CLUSTER");
 			this.TestFilter = Environment.GetEnvironmentVariable("NEST_TEST_FILTER");
 

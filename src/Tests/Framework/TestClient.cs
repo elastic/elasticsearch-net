@@ -104,7 +104,7 @@ namespace Tests.Framework
 			})
 			.OnRequestDataCreated(data => data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
 
-		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.GetOrAdd("5.0.0-alpha1")
+		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.Create("5.0.0-alpha1")
 			? ".percolator"
 			: "query";
 
@@ -112,7 +112,9 @@ namespace Tests.Framework
 		{
 			var versionRange = new SemVer.Range(range);
 			var satisfied = versionRange.IsSatisfied(version.Version);
-			if (!version.IsSnapshot || satisfied) return satisfied;
+			if (version.State != ElasticsearchVersion.ReleaseState.Released || satisfied)
+				return satisfied;
+
 			//Semver can only match snapshot version with ranges on the same major and minor
 			//anything else fails but we want to know e.g 2.4.5-SNAPSHOT satisfied by <5.0.0;
 			var wholeVersion = $"{version.Major}.{version.Minor}.{version.Patch}";

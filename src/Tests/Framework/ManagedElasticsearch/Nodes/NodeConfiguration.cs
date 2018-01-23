@@ -60,9 +60,9 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			this.DesiredPort = cluster.DesiredPort;
 
 			var attr = v.Major >= 5 ? "attr." : "";
-			var indexedOrStored = v > ElasticsearchVersion.GetOrAdd("5.0.0-alpha1") ? "stored" : "indexed";
-			var shieldOrSecurity = v > ElasticsearchVersion.GetOrAdd("5.0.0-alpha1") ? "xpack.security" : "shield";
-			var es = v > ElasticsearchVersion.GetOrAdd("5.0.0-alpha2") ? "" : "es.";
+			var indexedOrStored = v > ElasticsearchVersion.Create("5.0.0-alpha1") ? "stored" : "indexed";
+			var shieldOrSecurity = v > ElasticsearchVersion.Create("5.0.0-alpha1") ? "xpack.security" : "shield";
+			var es = v > ElasticsearchVersion.Create("5.0.0-alpha2") ? "" : "es.";
 			var b = this.XPackEnabled.ToString().ToLowerInvariant();
 			var sslEnabled = this.EnableSsl.ToString().ToLowerInvariant();
 			this.DefaultNodeSettings = new List<string>
@@ -80,12 +80,12 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 				$"{es}search.remote.connect=true"
 			};
 			//script.max_compilations_rate
-			if (v < ElasticsearchVersion.GetOrAdd("6.0.0-rc1"))
+			if (v < ElasticsearchVersion.Create("6.0.0-rc1"))
 				this.DefaultNodeSettings.Add($"{es}script.max_compilations_per_minute=10000");
 			else
 				this.DefaultNodeSettings.Add($"{es}script.max_compilations_rate=10000/1m");
 
-			if (v < ElasticsearchVersion.GetOrAdd("5.5.0"))
+			if (v < ElasticsearchVersion.Create("5.5.0"))
 			{
 				this.DefaultNodeSettings.AddRange(new [] {
 					$"{es}script.inline=true",

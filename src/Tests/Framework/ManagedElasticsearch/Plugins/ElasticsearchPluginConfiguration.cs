@@ -31,9 +31,8 @@ namespace Tests.Framework.ManagedElasticsearch.Plugins
 
 		public bool IsValid(ElasticsearchVersion version) => _isValid(version);
 
-		public string SnapshotDownloadUrl(ElasticsearchVersion version)  =>
-			$"https://snapshots.elastic.co/downloads/elasticsearch-plugins/{Moniker}/{SnapshotZip(version)}";
+		public string DownloadUrl(ElasticsearchVersion version)  => version.PluginDownloadUrl(this.Moniker);
 
-		public string SnapshotZip(ElasticsearchVersion version) => $"{Moniker}-{version.Version}.zip";
+
 	}
 }

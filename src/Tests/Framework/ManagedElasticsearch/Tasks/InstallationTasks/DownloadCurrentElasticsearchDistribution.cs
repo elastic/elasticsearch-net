@@ -11,7 +11,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
 		{
 			var v = config.ElasticsearchVersion;
-			var from = v.DownloadUrl;
+			var from = v.ElasticsearchDownloadUrl;
 			var to = fileSystem.DownloadZipLocation;
 			if (File.Exists(to)) return;
 			Console.WriteLine($"Download elasticsearch: {v} from {from}");
