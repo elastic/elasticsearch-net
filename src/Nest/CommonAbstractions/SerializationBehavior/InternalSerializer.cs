@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Concurrent;
 using System.IO;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +16,10 @@ namespace Nest
 	internal class InternalSerializer : IElasticsearchSerializer
 	{
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
+
+		//we still support net45 so Task.Completed is not available
+		private static readonly Task CompletedTask = Task.FromResult(false);
+
 		private readonly JsonSerializer _indentedSerializer;
 		internal JsonSerializer Serializer { get; }
 
@@ -66,8 +72,7 @@ namespace Nest
 			}
 		}
 
-		//we still support net45 so Task.Completed is not available
-		private static readonly Task CompletedTask = Task.FromResult(false);
+
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
 			CancellationToken cancellationToken = default(CancellationToken))
 		{
@@ -77,13 +82,11 @@ namespace Nest
 			return CompletedTask;
 		}
 
-		public object Default(Type type) => type.IsValueType() ? type.CreateInstance() : null;
+		public T Deserialize<T>(Stream stream) => (T) this.Deserialize(typeof(T), stream);
 
-		public virtual T Deserialize<T>(Stream stream) => (T) this.Deserialize(typeof(T), stream);
-
-		public virtual object Deserialize(Type type, Stream stream)
+		public object Deserialize(Type type, Stream stream)
 		{
-			if (stream == null) return Default(type);
+			if (stream == null) return type.DefaultValue();
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
@@ -92,8 +95,9 @@ namespace Nest
 			}
 		}
 
-		public virtual async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
+			if (stream == null) return default(T);
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
@@ -108,18 +112,26 @@ namespace Nest
 				}
 				catch
 				{
-					return await Task.FromResult(default(T)).ConfigureAwait(false);
+					return default(T);
 				}
 			}
 		}
 
-		public virtual async Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public async Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
+			if (stream == null) return type.DefaultValue();
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
-				return token.ToObject(type, this.Serializer);
+				try
+				{
+					var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
+					return token.ToObject(type, this.Serializer);
+				}
+				catch
+				{
+					return type.DefaultValue();
+				}
 			}
 		}
 

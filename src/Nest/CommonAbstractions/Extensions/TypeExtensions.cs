@@ -15,6 +15,9 @@ namespace Nest
 		private static readonly MethodInfo GetActivatorMethodInfo =
 			typeof(TypeExtensions).GetMethod(nameof(GetActivator), BindingFlags.Static | BindingFlags.NonPublic);
 
+		private static readonly ConcurrentDictionary<Type, Func<object>> CachedDefaultValues =
+			new ConcurrentDictionary<Type, Func<object>>();
+
 		private static readonly ConcurrentDictionary<string, ObjectActivator<object>> CachedActivators =
 			new ConcurrentDictionary<string, ObjectActivator<object>>();
 
@@ -29,17 +32,14 @@ namespace Nest
 
 		private delegate T ObjectActivator<out T>(params object[] args);
 
-		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
-		{
-			return t.CreateGenericInstance(new[] {closeOver}, args);
-		}
+		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args) =>
+			t.CreateGenericInstance(new[] {closeOver}, args);
 
 		internal static object CreateGenericInstance(this Type t, Type[] closeOver, params object[] args)
 		{
 			var argKey = closeOver.Aggregate(new StringBuilder(), (sb, gt) => sb.Append("--" + gt.FullName), sb => sb.ToString());
 			var key = t.FullName + argKey;
-			Type closedType;
-			if (!CachedGenericClosedTypes.TryGetValue(key, out closedType))
+			if (!CachedGenericClosedTypes.TryGetValue(key, out var closedType))
 			{
 				closedType = t.MakeGenericType(closeOver);
 				CachedGenericClosedTypes.TryAdd(key, closedType);
@@ -71,6 +71,15 @@ namespace Nest
 			return activator(args);
 		}
 
+		internal static object DefaultValue(this Type type) =>
+			type.IsValueType()
+				? CachedDefaultValues.GetOrAdd(type, t =>
+					Expression.Lambda<Func<object>>(
+						Expression.Convert(Expression.Default(type), typeof(object))
+					).Compile()
+				).Invoke()
+				: null;
+
 		//do not remove this is referenced through GetActivatorMethod
 		private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
 		{
@@ -88,11 +97,8 @@ namespace Nest
 			{
 				var index = Expression.Constant(i);
 				var paramType = paramsInfo[i].ParameterType;
-
 				var paramAccessorExp = Expression.ArrayIndex(param, index);
-
 				var paramCastExp = Expression.Convert(paramAccessorExp, paramType);
-
 				argsExp[i] = paramCastExp;
 			}
 
@@ -125,8 +131,7 @@ namespace Nest
 
 		internal static IList<PropertyInfo> AllPropertiesCached(this Type t)
 		{
-			IList<PropertyInfo> propertyInfos;
-			if (CachedTypePropertyInfos.TryGetValue(t, out propertyInfos))
+			if (CachedTypePropertyInfos.TryGetValue(t, out var propertyInfos))
 				return propertyInfos;
 			propertyInfos = t.AllPropertiesNotCached().ToList();
 			CachedTypePropertyInfos.TryAdd(t, propertyInfos);
