@@ -1,0 +1,95 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.1
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/CommonOptions/Union/Union.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[union]]
+=== Union type
+
+Some API parameters within Elasticsearch can accept more than one JSON data structure, for example, source filtering on
+a search request can accept
+
+* a `bool` value to disable `_source` retrieval
+
+* a `string` value representing a wildcard pattern to control what parts of `_source` to return
+
+* an array of `string` values representing multiple wildcard patterns to control what parts of `_source` to return
+
+* an `object` with `includes` and `excludes` properties that each accept an array of wildcard patterns to control
+what parts of `_source` to include and exclude, respectively.
+
+That's a lot of different flexibility! NEST includes a `Union<TFirst,TSecond>` type to make it easier to work with
+these kinds of parameters, forming the union of two types, `TFirst` and `TSecond`.
+
+==== Implicit conversion
+
+The `Union<TFirst,TSecond>` has implicit operators to convert from an instance of `TFirst` or `TSecond` to an
+instance of `Union<TFirst,TSecond>`. This is often the easiest way of construction an instance
+
+[source,csharp]
+----
+Union<bool, ISourceFilter> sourceFilterFalse = false;
+
+Union<bool, ISourceFilter> sourceFilterInterface = new SourceFilter
+{
+    Includes = new [] { "foo.*" }
+};
+----
+
+==== Constructor
+
+Sometimes, the constructor of `Union<TFirst,TSecond>` may be required in cases where the compiler is
+unable to infer the correct implicit conversion
+
+[source,csharp]
+----
+var sourceFilterTrue = new Union<bool, ISourceFilter>(true);
+
+var sourceFilterInterface = new Union<bool, ISourceFilter>(new SourceFilter
+{
+    Includes = new [] { "foo.*" }
+});
+----
+
+==== Match
+
+The `Match` method can be used to operate on the value encapsulated by the instance of `Union<TFirst,TSecond>`.
+Two delegates are passed; one to operate on a `TFirst` value and the other toe operate on a `TSecond` value.
+
+[source,csharp]
+----
+sourceFilterTrue.Match(
+    b => b.Should().BeTrue(),
+    s => s.Should().BeNull());
+
+sourceFilterInterface.Match(
+    b => b.Should().BeFalse(),
+    s => s.Should().NotBeNull());
+----
+
+The delegates can also return a value
+
+[source,csharp]
+----
+var serializedFilterTrue = sourceFilterTrue.Match(
+    b => serializer.SerializeToString(b),
+    s => null);
+
+serializedFilterTrue.Should().Be("true");
+
+var serializedFilterInterface = sourceFilterTrue.Match(
+    b => null,
+    s => serializer.SerializeToString(s));
+
+serializedFilterInterface.Should().Be("{\"includes\":[\"foo.*\"]}");
+----
+

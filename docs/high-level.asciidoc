@@ -49,6 +49,8 @@ As well as a number of types for working with
 
 * <<date-math-expressions, Date Math>>
 
+* <<union, Union types>>
+
 And features such as
 
 * <<mapping, Mapping CLR POCO types to JSON documents>>
@@ -258,9 +260,13 @@ NEST has a number of types for working with Elasticsearch conventions for
 
 * <<date-math-expressions, Date Math expressions>>
 
+* <<union, Union types>>
+
 include::common-options/time-unit/time-units.asciidoc[]
 
 include::common-options/distance-unit/distance-units.asciidoc[]
 
 include::common-options/date-math/date-math-expressions.asciidoc[]
+
+include::common-options/union/union.asciidoc[]
 
