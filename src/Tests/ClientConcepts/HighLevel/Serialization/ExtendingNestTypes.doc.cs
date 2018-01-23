@@ -25,12 +25,12 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		public class MyPluginProperty : IProperty
 		{
 			IDictionary<string, object> IProperty.LocalMetadata { get; set; }
-			string IProperty.Type { get; set; } = "my_plugin_property";
-			PropertyName IProperty.Name { get; set; }
+			public string Type { get; set; } = "my_plugin_property";
+			public PropertyName Name { get; set; }
 
 			public MyPluginProperty(string name, string language)
 			{
-				((IProperty)this).Name = name;
+				this.Name = name;
 				this.Language = language;
 				this.Numeric = true;
 			}
