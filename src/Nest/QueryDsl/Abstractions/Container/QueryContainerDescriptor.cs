@@ -16,11 +16,14 @@ namespace Nest
 			where TQuery : class, TQueryInterface, IQuery, new()
 			where TQueryInterface : class, IQuery
 		{
+			// Invoke the create delegate before assigning container; the create delegate 
+			// may mutate the current QueryContainerDescriptor<T> instance such that it 
+			// contains a query. See https://github.com/elastic/elasticsearch-net/issues/2875
+			var query = create.InvokeOrDefault(new TQuery());
+
 			var container = this.ContainedQuery == null
 				? this
 				: new QueryContainerDescriptor<T>();
-
-			var query = create.InvokeOrDefault(new TQuery());
 
 			IQueryContainer c = container;
 			c.IsVerbatim = query.IsVerbatim;
