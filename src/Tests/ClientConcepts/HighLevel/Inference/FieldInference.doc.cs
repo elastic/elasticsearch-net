@@ -412,17 +412,17 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			[Text(Name = "renamedIgnoresNest")]
 			[PropertyName("renamedIgnoresJsonProperty"),JsonProperty("renamedIgnoresJsonProperty")]
-			public string RenamedOnConnectionSettings { get; set; } //<1> Even though this property has a NEST property mapping _and_ a `JsonProperty` attribute, We are going to provide a hard rename for it on ConnectionSettings later that should win.
+			public string RenamedOnConnectionSettings { get; set; } //<1> Even though this property has various attributes applied we provide an override on ConnectionSettings later that takes precedence.
 
 			[Text(Name = "nestAtt")]
 			[PropertyName("nestProp"),JsonProperty("jsonProp")]
-			public string NestAttribute { get; set; } //<2> This property has both a NEST attribute and property and a `JsonProperty`, NEST should win.
+			public string NestAttribute { get; set; } //<2> Has a `TextAttribute`, `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `TextAttribute` takes precedence.
 
 			[PropertyName("nestProp"),JsonProperty("jsonProp")]
-			public string NestProperty { get; set; } //<3> This property has both a NEST property and a `JsonProperty`, NEST should win.
+			public string NestProperty { get; set; } //<3> Has both a `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `TextAttribute` takes precedence.
 
 			[JsonProperty("jsonProp")]
-			public string JsonProperty { get; set; } //<4>  We should take the json property into account by itself
+			public string JsonProperty { get; set; } //<4> `JsonPropertyAttribute` takes precedence.
 
 			[PropertyName("dontaskme"),JsonProperty("dontaskme")]
 			public string AskSerializer { get; set; } //<5> This property we are going to hard code in our custom serializer to resolve to ask.
