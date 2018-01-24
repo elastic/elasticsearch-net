@@ -96,6 +96,8 @@ own serializer, or by modifying how NEST's serializer behaves.
 
 * <<custom-serialization,Custom Serialization>>
 
+* <<extending-nest-types,Extending Nest Types>>
+
 * <<modifying-default-serializer,Modifying Default Serializer>>
 
 :includes-from-dirs: client-concepts/high-level/serialization
@@ -103,6 +105,8 @@ own serializer, or by modifying how NEST's serializer behaves.
 include::client-concepts/high-level/serialization/changing-serializers.asciidoc[]
 
 include::client-concepts/high-level/serialization/custom-serialization.asciidoc[]
+
+include::client-concepts/high-level/serialization/extending-nest-types.asciidoc[]
 
 include::client-concepts/high-level/serialization/modifying-default-serializer.asciidoc[]
 

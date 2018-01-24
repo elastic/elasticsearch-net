@@ -310,7 +310,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*/
 		public class SerializerSpecific
 		{
-			[Rename("nameInJson"), JsonProperty("nameInJson")]
+			[PropertyName("nameInJson"), JsonProperty("nameInJson")]
 			public string Name { get; set; }
 		}
 		[U]
@@ -326,7 +326,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		public class Both
 		{
 			[Text(Name = "naam")]
-			[Rename("nameInJson"), JsonProperty("nameInJson")]
+			[PropertyName("nameInJson"), JsonProperty("nameInJson")]
 			public string Name { get; set; }
 		}
 		[U]
@@ -411,20 +411,23 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		class Precedence
 		{
 			[Text(Name = "renamedIgnoresNest")]
-			[Rename("renamedIgnoresJsonProperty"),JsonProperty("renamedIgnoresJsonProperty")]
+			[PropertyName("renamedIgnoresJsonProperty"),JsonProperty("renamedIgnoresJsonProperty")]
 			public string RenamedOnConnectionSettings { get; set; } //<1> Even though this property has a NEST property mapping _and_ a `JsonProperty` attribute, We are going to provide a hard rename for it on ConnectionSettings later that should win.
 
 			[Text(Name = "nestAtt")]
-			[Rename("jsonProp"),JsonProperty("jsonProp")]
-			public string NestAttribute { get; set; } //<2> This property has both a NEST attribute and a `JsonProperty`, NEST should win.
+			[PropertyName("nestProp"),JsonProperty("jsonProp")]
+			public string NestAttribute { get; set; } //<2> This property has both a NEST attribute and property and a `JsonProperty`, NEST should win.
 
-			[Rename("jsonProp"),JsonProperty("jsonProp")]
-			public string JsonProperty { get; set; } //<3>  We should take the json property into account by itself
+			[PropertyName("nestProp"),JsonProperty("jsonProp")]
+			public string NestProperty { get; set; } //<3> This property has both a NEST property and a `JsonProperty`, NEST should win.
 
-			[Rename("dontaskme"),JsonProperty("dontaskme")]
-			public string AskSerializer { get; set; } //<4> This property we are going to special case in our custom serializer to resolve to ask
+			[JsonProperty("jsonProp")]
+			public string JsonProperty { get; set; } //<4>  We should take the json property into account by itself
 
-			public string DefaultFieldNameInferrer { get; set; } //<5>  We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
+			[PropertyName("dontaskme"),JsonProperty("dontaskme")]
+			public string AskSerializer { get; set; } //<5> This property we are going to hard code in our custom serializer to resolve to ask.
+
+			public string DefaultFieldNameInferrer { get; set; } //<6>  We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
 		}
 
 		/**
@@ -456,9 +459,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			usingSettings.Expect("renamed").ForField(Field<Precedence>(p => p.RenamedOnConnectionSettings));
 			usingSettings.Expect("nestAtt").ForField(Field<Precedence>(p => p.NestAttribute));
+			usingSettings.Expect("nestProp").ForField(Field<Precedence>(p => p.NestProperty));
 			usingSettings.Expect("jsonProp").ForField(Field<Precedence>(p => p.JsonProperty));
 			usingSettings.Expect("ask").ForField(Field<Precedence>(p => p.AskSerializer));
 			usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
+
 
 			/** The same naming rules also apply when indexing a document */
 			usingSettings.Expect(new []
@@ -466,12 +471,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				"ask",
 				"DEFAULTFIELDNAMEINFERRER",
 				"jsonProp",
+				"nestProp",
 				"nestAtt",
 				"renamed"
 			}).AsPropertiesOf(new Precedence
 			{
 				RenamedOnConnectionSettings = "renamed on connection settings",
 				NestAttribute = "using a nest attribute",
+				NestProperty = "using a nest property",
 				JsonProperty = "the default serializer resolves json property attributes",
 				AskSerializer = "serializer fiddled with this one",
 				DefaultFieldNameInferrer = "shouting much?"

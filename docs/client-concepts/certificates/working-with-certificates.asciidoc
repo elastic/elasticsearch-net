@@ -81,8 +81,7 @@ If your client application has access to the public CA certificate locally, Elas
 that can assert that a certificate the server presents is one that came from the local CA.
 
 If you use X-Pack's {ref_current}/certutil.html[+certutil+ tool] to generate SSL certificates, the generated node certificate
-does not include the CA in the certificate chain, in order to cut down on SSL handshake size. In those case you can use
-`CertificateValidations.AuthorityIsRoot` and pass it your local copy of the CA public key to assert that
+does not include the CA in the certificate chain, in order to cut down on SSL handshake size. In those case you can use`CertificateValidations.AuthorityIsRoot` and pass it your local copy of the CA public key to assert that
 the certificate the server presented was generated using it
 
 [source,csharp]
@@ -151,8 +150,11 @@ public class PkiCluster : CertgenCaCluster
 }
 ----
 <1> Set the client certificate on `ConnectionSettings`
+
 <2> The path to the `.cer` file
+
 <3> The path to the `.key` file
+
 <4> The password for the private key
 
 Or per request on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`

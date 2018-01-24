@@ -129,6 +129,25 @@ namespace Nest
 			foreach (var i in objectType.GetInterfaces()) yield return i;
 		}
 
+		private static readonly Assembly ThisAssembly = typeof(ElasticContractResolver).Assembly();
+
+		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+		{
+			var property = base.CreateProperty(member, memberSerialization);
+
+			if (CanRemoveSourceConverter(property.Converter)) property.Converter = null; //rely on defaults
+
+			//we don't have a chance to ignore this in the low level client
+			if (member.Name == nameof(IResponse.ApiCall) && typeof(IResponse).IsAssignableFrom(member.DeclaringType))
+				property.Ignored = true;
+
+			ApplyShouldSerializer(property);
+			ApplyPropertyOverrides(member, property);
+			ApplyBuildInSerializers(member, property);
+			return property;
+		}
+
+
 		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
 		{
 			// Only serialize explicitly implemented IProperty properties on attribute types
@@ -136,8 +155,11 @@ namespace Nest
 				return PropertiesOfInterface<IProperty>(type, memberSerialization);
 
 			// Descriptors implement properties explicitly, these are not picked up by default
-			if (typeof(IDescriptor).IsAssignableFrom(type))
-				return PropertiesOfAll(type, memberSerialization);
+			if (typeof(IDescriptor).IsAssignableFrom(type)) return PropertiesOfAll(type, memberSerialization);
+
+			var nativeType = type.Assembly() == ThisAssembly;
+			if (nativeType)
+				return base.CreateProperties(type, memberSerialization);
 
 			return base.CreateProperties(type, memberSerialization);
 		}
@@ -202,22 +224,6 @@ namespace Nest
 			//not ideal to resolve twice but for now the only way not to send routing: null
 			var resolved = this.ConnectionSettings.Inferrer.Resolve(q);
 			return !resolved.IsNullOrEmpty();
-		}
-
-		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-		{
-			var property = base.CreateProperty(member, memberSerialization);
-
-			if (CanRemoveSourceConverter(property.Converter)) property.Converter = null; //rely on defaults
-
-			//we don't have a chance to ignore this in the low level client
-			if (member.Name == nameof(IResponse.ApiCall) && typeof(IResponse).IsAssignableFrom(member.DeclaringType))
-				property.Ignored = true;
-
-			ApplyShouldSerializer(property);
-			ApplyPropertyOverrides(member, property);
-			ApplyBuildInSerializers(member, property);
-			return property;
 		}
 
 		private static readonly StringEnumConverter StringEnumConverter = new StringEnumConverter();
