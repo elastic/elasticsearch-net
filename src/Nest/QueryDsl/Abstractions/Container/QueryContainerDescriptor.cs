@@ -16,7 +16,9 @@ namespace Nest
 			where TQuery : class, TQueryInterface, IQuery, new()
 			where TQueryInterface : class, IQuery
 		{
-			// The invocation of the create delegate has to happen first since it mutates the outer query.
+			// Invoke the create delegate before assigning container; the create delegate 
+			// may mutate the current QueryContainerDescriptor<T> instance such that it 
+			// contains a query. See https://github.com/elastic/elasticsearch-net/issues/2875
 			var query = create.InvokeOrDefault(new TQuery());
 
 			var container = this.ContainedQuery == null
