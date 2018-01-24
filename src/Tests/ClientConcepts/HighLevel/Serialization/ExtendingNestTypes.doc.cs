@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using Nest;
 using Newtonsoft.Json;
 using Tests.ClientConcepts.HighLevel.Mapping;
@@ -14,13 +15,15 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
      * === Extending NEST types
      *
      * Although of course NEST should always be up to date with a 100% API coverage of the Elasticsearch API, sometimes you might want to work around a bug
-     * or maybe use types from a 3rd party plugin that NEST does not support.
+     * or maybe use types from a third party plugin that NEST does not support.
      */
     public class ExtendingNestTypes
 	{
+		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+
 		/* === Creating your own property mapping
 		*
-		 * Here we implement a custom `IProperty` implementation so that we can use a mapping type provided by a plugin.
+		 * Here we implement a custom `IProperty` implementation so that we can consume a field mapping type provided by a plugin.
 		*/
 		public class MyPluginProperty : IProperty
 		{
@@ -45,19 +48,25 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		[U] public void InjectACustomIPropertyImplementation()
 		{
 			/**
-			 * `PropertyNameAttribute` can be used to mark properties that should be serialized. Without this attribute NEST won't pick up the property for serialization.
+			 * `PropertyNameAttribute` can be used to mark properties that should be serialized. Without this attribute,
+			 * NEST won't pick up the property for serialization.
 			 *
 			 * Now that we have our own `IProperty` implementation we can add it to our propertes mapping when creating an index
 			 */
-			var descriptor = new CreateIndexDescriptor("myindex")
+			var createIndexResponse = client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<Project>(m => m
 						.Properties(props => props
 							.Custom(new MyPluginProperty("fieldName", "dutch"))
 						)
 					)
-				);
+				)
+			);
 
+			/**
+			 * which will serialize to the following JSON request
+			 */
+			// json
 			var expected = new
 			{
 				mappings = new
@@ -77,9 +86,14 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				}
 			};
 
+			/**
+			 * Whilst NEST can serialize our `my_plugin_property`, it does not know how to deserialize it;
+			 * We plan to make this more pluggable in the future
+			 */
+			// hide
 		    Expect(expected)
-			    .NoRoundTrip() // <1> while we can serialize our `my_plugin_property` NEST does not know how to read it, for NEST 7.x we plan to make this more plugable.
-			    .WhenSerializing((ICreateIndexRequest) descriptor);
+			    .NoRoundTrip()
+			    .WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
 		}
 	}
 }
