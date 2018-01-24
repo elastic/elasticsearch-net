@@ -4,6 +4,12 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	/// <summary>
+	/// Signals that this date time property is used in Machine learning API's some of which will always return the date as epoch.
+	/// </summary>
+	[AttributeUsage(AttributeTargets.Property)]
+	public class MachineLearningDateTimeAttribute : Attribute { }
+
 	internal class MachineLearningDateTimeConverter : IsoDateTimeConverter
 	{
 		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);

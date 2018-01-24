@@ -59,7 +59,7 @@ namespace Nest
 		private static IPropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
 		{
 			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
-			var rename = memberInfo.GetCustomAttribute<RenameAttribute>(true);
+			var rename = memberInfo.GetCustomAttribute<PropertyNameAttribute>(true);
 			var ignore = memberInfo.GetCustomAttribute<IgnoreAttribute>(true);
 			if (jsonProperty == null && ignore == null && rename == null) return null;
 			return new PropertyMapping {Name = rename?.Name ?? jsonProperty?.PropertyName, Ignore = ignore != null};
