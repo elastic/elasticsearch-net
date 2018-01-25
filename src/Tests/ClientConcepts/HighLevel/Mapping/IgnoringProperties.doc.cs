@@ -120,7 +120,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
             var settings = WithConnectionSettings(s => s
                 .DefaultMappingFor<Child>(m => m
-                    .Rename(p => p.Description, "desc")
+                    .PropertyName(p => p.Description, "desc")
                     .Ignore(p => p.IgnoreMe)
                 )
             );

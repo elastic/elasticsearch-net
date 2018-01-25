@@ -151,7 +151,7 @@ namespace Nest
 		/// <summary>
 		/// Rename <paramref name="property" /> on CLR type <typeparamref name="TDocument" />
 		/// </summary>
-		public ClrTypeMappingDescriptor<TDocument> Rename(Expression<Func<TDocument, object>> property, string newName) =>
+		public ClrTypeMappingDescriptor<TDocument> PropertyName(Expression<Func<TDocument, object>> property, string newName) =>
 			Assign(a => a.Properties.Add(new RenameClrPropertyMapping<TDocument>(property, newName)));
 
 	}
