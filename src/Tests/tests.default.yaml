@@ -17,5 +17,5 @@ elasticsearch_version: 6.0.0
 # this is opt in during development in CI we never want to see our tests running against an already running node
 test_against_already_running_elasticsearch: true
 
-#force_custom_source_serializer: true
+#random_source_serializer: true
 seed: 69819
