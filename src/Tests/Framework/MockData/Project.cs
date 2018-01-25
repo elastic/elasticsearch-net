@@ -30,7 +30,7 @@ namespace Tests.Framework.MockData
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
 				.UseSeed(TestClient.Configuration.Seed)
-				.RuleFor(p => p.Name, f => f.Person.Company.Name)
+				.RuleFor(p => p.Name, f => f.Person.Company.Name + f.UniqueIndex.ToString())
 				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
 				.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
 				.RuleFor(p => p.StartedOn, p => p.Date.Past())
