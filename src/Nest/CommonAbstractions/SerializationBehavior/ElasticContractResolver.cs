@@ -155,7 +155,8 @@ namespace Nest
 				return PropertiesOfInterface<IProperty>(type, memberSerialization);
 
 			// Descriptors implement properties explicitly, these are not picked up by default
-			if (typeof(IDescriptor).IsAssignableFrom(type)) return PropertiesOfAll(type, memberSerialization);
+			if (typeof(IDescriptor).IsAssignableFrom(type))
+				return PropertiesOfAll(type, memberSerialization);
 
 			var nativeType = type.Assembly() == ThisAssembly;
 			if (nativeType)

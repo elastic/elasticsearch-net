@@ -81,7 +81,7 @@ namespace Tests.Framework
 			.DefaultMappingFor<Developer>(map => map
 				.IndexName("devs")
 				.Ignore(p => p.PrivateValue)
-				.Rename(p => p.OnlineHandle, "nickname")
+				.PropertyName(p => p.OnlineHandle, "nickname")
 			)
 			.DefaultMappingFor<ProjectPercolation>(map => map
 				.IndexName("queries")
