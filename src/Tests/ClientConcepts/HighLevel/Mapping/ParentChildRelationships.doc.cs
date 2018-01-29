@@ -90,11 +90,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				.Index<MyDocument>()
 				.Mappings(ms => ms
 					.Map<MyDocument>(m => m
-						.RoutingField(r => r.Required()) // <1> recommended to make the routing field mandatory so you can not accidentally forget
-						.AutoMap<MyParent>() // <2> Map all of the `MyParent` properties
-						.AutoMap<MyChild>() // <3> Map all of the `MyChild` properties
+						.AutoMap<MyParent>() // <1> Map all of the `MyParent` properties
+						.AutoMap<MyChild>() // <2> Map all of the `MyChild` properties
 						.Properties(props => props
-							.Join(j => j // <4> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
+							.Join(j => j // <3> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
 								.Name(p => p.MyJoinField)
 								.Relations(r => r
 									.Join<MyParent, MyChild>()
@@ -112,6 +111,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			* In this case we setup `MyChild` to be child of `MyParent`. `.Join()` has many overloads so be sure to check them out if you
 			* need to map not one but multiple children.
 			*
+			* The resulting mapping request JSON looks as follows
 			*/
 
 			//json
