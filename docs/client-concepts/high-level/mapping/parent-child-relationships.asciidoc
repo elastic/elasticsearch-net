@@ -83,11 +83,10 @@ var createIndexResponse = client.CreateIndex("index", c => c
     .Index<MyDocument>()
     .Mappings(ms => ms
         .Map<MyDocument>(m => m
-            .RoutingField(r => r.Required()) <1>
-            .AutoMap<MyParent>() <2>
-            .AutoMap<MyChild>() <3>
+            .AutoMap<MyParent>() <1>
+            .AutoMap<MyChild>() <2>
             .Properties(props => props
-                .Join(j => j <4>
+                .Join(j => j <3>
                     .Name(p => p.MyJoinField)
                     .Relations(r => r
                         .Join<MyParent, MyChild>()
@@ -98,19 +97,19 @@ var createIndexResponse = client.CreateIndex("index", c => c
     )
 );
 ----
-<1> recommended to make the routing field mandatory so you can not accidentally forget
+<1> Map all of the `MyParent` properties
 
-<2> Map all of the `MyParent` properties
+<2> Map all of the `MyChild` properties
 
-<3> Map all of the `MyChild` properties
-
-<4> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
+<3> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
 
 We call `AutoMap()` for both types to discover properties of both .NET types. `AutoMap()` won't automatically setup the
 join field mapping though because NEST can not infer all the `Relations` that are required by your domain.
 
 In this case we setup `MyChild` to be child of `MyParent`. `.Join()` has many overloads so be sure to check them out if you
 need to map not one but multiple children.
+
+The resulting mapping request JSON looks as follows
 
 [source,javascript]
 ----
