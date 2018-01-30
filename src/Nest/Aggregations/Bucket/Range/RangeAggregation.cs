@@ -17,19 +17,14 @@ namespace Nest
 		IScript Script { get; set; }
 
 		[JsonProperty("ranges")]
-#pragma warning disable 618
-		IEnumerable<IRange> Ranges { get; set; }
-#pragma warning restore 618
+		IEnumerable<IAggregationRange> Ranges { get; set; }
 	}
 
 	public class RangeAggregation : BucketAggregationBase, IRangeAggregation
 	{
 		public Field Field { get; set; }
 		public IScript Script { get; set; }
-#pragma warning disable 618
-		public IEnumerable<IRange> Ranges { get; set; }
-#pragma warning restore 618
-
+		public IEnumerable<IAggregationRange> Ranges { get; set; }
 		internal RangeAggregation() { }
 
 		public RangeAggregation(string name) : base(name) { }
@@ -45,9 +40,7 @@ namespace Nest
 
 		IScript IRangeAggregation.Script { get; set; }
 
-#pragma warning disable 618
-		IEnumerable<IRange> IRangeAggregation.Ranges { get; set; }
-#pragma warning restore 618
+		IEnumerable<IAggregationRange> IRangeAggregation.Ranges { get; set; }
 
 		public RangeAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
@@ -58,9 +51,7 @@ namespace Nest
 		public RangeAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
-#pragma warning disable 618
-		public RangeAggregationDescriptor<T> Ranges(params Func<RangeDescriptor, IRange>[] ranges) =>
-			Assign(a => a.Ranges = ranges.Select(r => r(new RangeDescriptor())));
-#pragma warning restore 618
+		public RangeAggregationDescriptor<T> Ranges(params Func<AggregationRangeDescriptor, IAggregationRange>[] ranges) =>
+			Assign(a => a.Ranges = ranges.Select(r => r(new AggregationRangeDescriptor())));
 	}
 }

@@ -45,9 +45,6 @@ namespace Nest
 		where T : class
 		where TReturnType : class
 	{
-
-		[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
-		TReturnType String(Func<StringPropertyDescriptor<T>, IStringProperty> selector);
 		TReturnType Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector);
 		TReturnType Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector);
 		/// <summary>
@@ -81,9 +78,6 @@ namespace Nest
 	{
 		public PropertiesDescriptor() : base(new Properties<T>()) { }
 		public PropertiesDescriptor(IProperties properties) : base(properties ?? new Properties<T>()) { }
-
-		[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
-		public PropertiesDescriptor<T> String(Func<StringPropertyDescriptor<T>, IStringProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector) => SetProperty(selector);
 

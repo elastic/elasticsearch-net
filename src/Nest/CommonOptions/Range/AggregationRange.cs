@@ -9,9 +9,8 @@ namespace Nest
 	/// part of your document please use explicit range class e.g DateRange, FloatRange etc
 	/// </summary>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<Range>))]
-	[Obsolete("Renamed to IAggregationRange scheduled for removal in 6.0")]
-	public interface IRange
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<AggregationRange>))]
+	public interface IAggregationRange
 	{
 		[JsonProperty("from")]
 		double? From { get; set; }
@@ -23,19 +22,8 @@ namespace Nest
 		string Key { get; set; }
 	}
 
-	/// <summary>
-	/// Range that defines a bucket for either the <see cref="RangeAggregation"/> or
-	/// <see cref="GeoDistanceAggregation"/>. If you are looking to store ranges as
-	/// part of your document please use explicit range class e.g DateRange, FloatRange etc
-	/// </summary>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<AggregationRange>))]
-#pragma warning disable 618
-	public interface IAggregationRange : IRange {}
-
 	/// <inheritdoc/>
-	[Obsolete("Renamed to AggregationRange, scheduled for removal in 6.0")]
-	public class Range : IRange
+	public class AggregationRange : IAggregationRange
 	{
 		public double? From { get; set; }
 		public double? To { get; set; }
@@ -43,22 +31,14 @@ namespace Nest
 	}
 
 	/// <inheritdoc/>
-	public class AggregationRange : Range, IAggregationRange { }
-
-	/// <inheritdoc/>
-	[Obsolete("Renamed to AggregationRangeDescriptor, scheduled for removal in 6.0")]
-	public class RangeDescriptor : DescriptorBase<RangeDescriptor, IRange>, IRange
+	public class AggregationRangeDescriptor : DescriptorBase<AggregationRangeDescriptor, IAggregationRange>, IAggregationRange
 	{
-		double? IRange.From { get; set; }
-		string IRange.Key { get; set; }
-		double? IRange.To { get; set; }
+		double? IAggregationRange.From { get; set; }
+		string IAggregationRange.Key { get; set; }
+		double? IAggregationRange.To { get; set; }
 
-		public RangeDescriptor Key(string key) => Assign(a => a.Key = key);
-		public RangeDescriptor From(double? from) => Assign(a => a.From = from);
-		public RangeDescriptor To(double? to) => Assign(a => a.To = to);
+		public AggregationRangeDescriptor Key(string key) => Assign(a => a.Key = key);
+		public AggregationRangeDescriptor From(double? from) => Assign(a => a.From = from);
+		public AggregationRangeDescriptor To(double? to) => Assign(a => a.To = to);
 	}
-
-	/// <inheritdoc/>
-	public class AggregationRangeDescriptor : RangeDescriptor, IAggregationRange { }
-#pragma warning restore 618
 }

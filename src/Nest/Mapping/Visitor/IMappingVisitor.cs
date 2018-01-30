@@ -6,9 +6,6 @@ namespace Nest
 	{
 		int Depth { get; set; }
 		void Visit(ITypeMapping mapping);
-#pragma warning disable 618
-		void Visit(IStringProperty property);
-#pragma warning restore 618
 		void Visit(ITextProperty property);
 		void Visit(IKeywordProperty property);
 		void Visit(IDateProperty property);
@@ -37,10 +34,6 @@ namespace Nest
 		public virtual int Depth { get; set; }
 
 		public virtual void Visit(ITypeMapping mapping) { }
-
-#pragma warning disable 618
-		public virtual void Visit(IStringProperty property ) { }
-#pragma warning restore 618
 
 		public virtual void Visit(ITextProperty property) { }
 

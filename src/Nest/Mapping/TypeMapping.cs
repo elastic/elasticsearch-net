@@ -17,14 +17,6 @@ namespace Nest
 		[JsonProperty("numeric_detection")]
 		bool? NumericDetection { get; set; }
 
-		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
-		[JsonProperty("analyzer")]
-		string Analyzer { get; set; }
-
-		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
-		[JsonProperty("search_analyzer")]
-		string SearchAnalyzer { get; set; }
-
 		[JsonProperty("_source")]
 		ISourceField SourceField { get; set; }
 
@@ -82,12 +74,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public IRoutingField RoutingField { get; set; }
 		/// <inheritdoc/>
-		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
-		public string Analyzer { get; set; }
-		/// <inheritdoc/>
-		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
-		public string SearchAnalyzer { get; set; }
-		/// <inheritdoc/>
 		public ISizeField SizeField { get; set; }
 		/// <inheritdoc/>
 		public ISourceField SourceField { get; set; }
@@ -108,10 +94,6 @@ namespace Nest
 		bool? ITypeMapping.NumericDetection { get; set; }
 		IProperties ITypeMapping.Properties { get; set; }
 		IRoutingField ITypeMapping.RoutingField { get; set; }
-		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
-		string ITypeMapping.Analyzer { get; set; }
-		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
-		string ITypeMapping.SearchAnalyzer { get; set; }
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
 
@@ -143,14 +125,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
-
-		/// <inheritdoc/>
-		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
-		public TypeMappingDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
-
-		/// <inheritdoc/>
-		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
-		public TypeMappingDescriptor<T> SearchAnalyzer(string searchAnalyzer)=> Assign(a => a.SearchAnalyzer = searchAnalyzer);
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> AllField(Func<AllFieldDescriptor, IAllField> allFieldSelector) => Assign(a => a.AllField = allFieldSelector?.Invoke(new AllFieldDescriptor()));

@@ -29,9 +29,6 @@ namespace Nest
 		[JsonProperty("allow_leading_wildcard")]
 		bool? AllowLeadingWildcard { get; set; }
 
-		[JsonProperty("enable_position_increments")]
-		bool? EnablePositionIncrements { get; set; }
-
 		[JsonProperty("fuzzy_max_expansions")]
 		int? FuzzyMaxExpansions { get; set; }
 
@@ -55,9 +52,6 @@ namespace Nest
 
 		[JsonProperty("lenient")]
 		bool? Lenient { get; set; }
-
-		[JsonProperty("time_zone")]
-		string Timezone { get; set; }
 
 		[JsonProperty("fields")]
 		Fields Fields { get; set; }
@@ -118,16 +112,12 @@ namespace Nest
 
 		TextQueryType? IQueryStringQuery.Type { get; set; }
 		string IQueryStringQuery.Query { get; set; }
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		string IQueryStringQuery.Timezone { get; set; }
 		Field IQueryStringQuery.DefaultField { get; set; }
 		Fields IQueryStringQuery.Fields { get; set; }
 		Operator? IQueryStringQuery.DefaultOperator { get; set; }
 		string IQueryStringQuery.Analyzer { get; set; }
 		string IQueryStringQuery.QuoteAnalyzer { get; set; }
 		bool? IQueryStringQuery.AllowLeadingWildcard { get; set; }
-		[Obsolete("Deprecated in Elasticsearch 5.1.1. Can be performed by the analyzer applied")]
-		bool? IQueryStringQuery.EnablePositionIncrements { get; set; }
 		int? IQueryStringQuery.FuzzyMaxExpansions { get; set; }
 		Fuzziness IQueryStringQuery.Fuzziness { get; set; }
 		int? IQueryStringQuery.FuzzyPrefixLength { get; set; }
@@ -154,8 +144,6 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
-		public QueryStringQueryDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
-
 		public QueryStringQueryDescriptor<T> DefaultOperator(Operator? op) => Assign(a => a.DefaultOperator = op);
 
 		public QueryStringQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
@@ -164,9 +152,6 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool? allowLeadingWildcard = true) =>
 			Assign(a => a.AllowLeadingWildcard = allowLeadingWildcard);
-
-		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) =>
-			Assign(a => a.EnablePositionIncrements = enablePositionIncrements);
 
 		public QueryStringQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 

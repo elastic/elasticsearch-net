@@ -36,10 +36,6 @@ namespace Nest
 			{
 				case FieldType.Text: return ReadProperty<TextProperty>(jObject, serializer);
 				case FieldType.Keyword: return ReadProperty<KeywordProperty>(jObject, serializer);
-				case FieldType.String:
-#pragma warning disable 618
-					return ReadProperty<StringProperty>(jObject, serializer);
-#pragma warning restore 618
 				case FieldType.Float:
 				case FieldType.Double:
 				case FieldType.Byte:

@@ -230,9 +230,7 @@ namespace Nest
 		private static readonly StringEnumConverter StringEnumConverter = new StringEnumConverter();
 		private static readonly StringTimeSpanConverter StringTimeSpanConverter = new StringTimeSpanConverter();
 		private static readonly MachineLearningDateTimeConverter MachineLearningDateTimeConverter = new MachineLearningDateTimeConverter();
-#pragma warning disable 618
-		private static readonly Type[] StringSignalTypes = {typeof(KeywordAttribute), typeof(StringAttribute), typeof(TextAttribute)};
-#pragma warning restore 618
+		private static readonly Type[] StringSignalTypes = {typeof(KeywordAttribute), typeof(TextAttribute)};
 		private static void ApplyBuildInSerializers(MemberInfo member, JsonProperty property)
 		{
 			var attributes = member.GetCustomAttributes().ToList();

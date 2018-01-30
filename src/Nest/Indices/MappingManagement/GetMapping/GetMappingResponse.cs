@@ -46,9 +46,8 @@ namespace Nest
 		[Obsolete("Renamed to Indices, will be deleted from NEST 7.x")]
 		public IReadOnlyDictionary<IndexName, IndexMappings> Mappings => Indices;
 
-		[Obsolete("Use GetMappingFor explicitly instead this is a leaky abstraction that returns the mapping of the first index's first type on the response")]
+		[Obsolete("Recommended to use GetMappingFor, this is a leaky abstraction that returns the mapping of the first index's first type on the response")]
 		public ITypeMapping Mapping => this.Indices.FirstOrDefault().Value?.Mappings?.FirstOrDefault().Value;
-
 
 		public void Accept(IMappingVisitor visitor)
 		{

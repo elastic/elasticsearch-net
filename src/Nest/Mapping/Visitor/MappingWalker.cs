@@ -63,15 +63,6 @@ namespace Nest
 							this.Accept(t.Fields);
 						});
 						break;
-					case FieldType.String:
-#pragma warning disable 618
-						Visit<IStringProperty>(field, t =>
-						{
-							this._visitor.Visit(t);
-							this.Accept(t.Fields);
-						});
-#pragma warning restore 618
-						break;
 					case FieldType.HalfFloat:
 					case FieldType.ScaledFloat:
 					case FieldType.Float:

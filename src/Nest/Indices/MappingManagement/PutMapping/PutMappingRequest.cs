@@ -27,10 +27,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public Union<bool, DynamicMapping> Dynamic { get; set; }
 		/// <inheritdoc/>
-		public string Analyzer { get; set; }
-		/// <inheritdoc/>
-		public string SearchAnalyzer { get; set; }
-		/// <inheritdoc/>
 		public IFieldNamesField FieldNamesField { get; set; }
 		/// <inheritdoc/>
 		public IIndexField IndexField { get; set; }
@@ -63,10 +59,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public Union<bool, DynamicMapping> Dynamic { get; set; }
 		/// <inheritdoc/>
-		public string Analyzer { get; set; }
-		/// <inheritdoc/>
-		public string SearchAnalyzer { get; set; }
-		/// <inheritdoc/>
 		public IFieldNamesField FieldNamesField { get; set; }
 		/// <inheritdoc/>
 		public IIndexField IndexField { get; set; }
@@ -95,8 +87,6 @@ namespace Nest
 		IAllField ITypeMapping.AllField { get; set; }
 		bool? ITypeMapping.DateDetection { get; set; }
 		IEnumerable<string> ITypeMapping.DynamicDateFormats { get; set; }
-		string ITypeMapping.Analyzer { get; set; }
-		string ITypeMapping.SearchAnalyzer { get; set; }
 		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get; set; }
 		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get; set; }
 		IFieldNamesField ITypeMapping.FieldNamesField { get; set; }
@@ -125,14 +115,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Dynamic(bool? dynamic = true) => Assign(a => a.Dynamic = dynamic);
-
-#pragma warning disable 618
-		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
-
-		/// <inheritdoc/>
-		public PutMappingDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
-#pragma warning restore 618
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> AllField(Func<AllFieldDescriptor, IAllField> allFieldSelector) => Assign(a => a.AllField = allFieldSelector?.Invoke(new AllFieldDescriptor()));
