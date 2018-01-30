@@ -9,6 +9,6 @@ There are a number of breaking changes when going from 2.x to 5.x
 * <<nest-breaking-changes, NEST breaking changes>>
 --
 
-include::5.0-breaking-changes/elasticsearch-net-breaking-changes.asciidoc[]
+include::6.0-breaking-changes/elasticsearch-net-breaking-changes.asciidoc[]
 
-include::5.0-breaking-changes/nest-breaking-changes.asciidoc[]
+include::6.0-breaking-changes/nest-breaking-changes.asciidoc[]
