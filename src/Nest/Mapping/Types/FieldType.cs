@@ -29,8 +29,6 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "binary")]
 		Binary,
-		[EnumMember(Value = "string")]
-		String,
 		[EnumMember(Value = "keyword")]
 		Keyword,
 		[EnumMember(Value = "text")]

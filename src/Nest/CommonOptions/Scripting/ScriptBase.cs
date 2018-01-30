@@ -103,7 +103,7 @@ namespace Nest
 	{
 		public IndexedScriptDescriptor Id(string id) => new IndexedScriptDescriptor(id);
 
-		[Obsolete("Use Id(). Indexed() sets a property named id, which is confusing. Will be removed in the next major version")]
+		[Obsolete("Use Id(). Indexed() sets a property named id, which is confusing. Will be removed in NEST 7.x")]
 		public IndexedScriptDescriptor Indexed(string id) => new IndexedScriptDescriptor(id);
 
 		[Obsolete("Use Source(). Inline() is deprecated and scheduled to be removed in Elasticsearch 7.0")]

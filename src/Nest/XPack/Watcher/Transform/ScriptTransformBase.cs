@@ -46,7 +46,7 @@ namespace Nest
 	{
 		public IndexedScriptTransformDescriptor Id(string id) => new IndexedScriptTransformDescriptor(id);
 
-		[Obsolete("Indexed() sets a property named id, this is confusing and thats why we intent to remove this in NEST 7.x please use Id()")]
+		[Obsolete("Indexed() sets a property named id, this is confusing and thats why we intend to remove this in NEST 7.x please use Id()")]
 		public IndexedScriptTransformDescriptor Indexed(string id) => new IndexedScriptTransformDescriptor(id);
 
 		[Obsolete("Inline is being deprecated for Source and will be removed in Elasticsearch 7.0")]

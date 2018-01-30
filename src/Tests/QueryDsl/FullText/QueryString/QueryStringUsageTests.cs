@@ -22,7 +22,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				analyzer = "standard",
 				quote_analyzer = "quote-an",
 				allow_leading_wildcard = true,
-				enable_position_increments = true,
 				fuzzy_max_expansions = 3,
 				fuzziness = "AUTO",
 				fuzzy_prefix_length = 2,
@@ -30,7 +29,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				max_determinized_states = 2,
 				minimum_should_match = 2,
 				lenient = true,
-				time_zone = "root",
 				fields = new[] { "description", "myOtherField" },
 				tie_breaker = 1.2,
 				rewrite = "constant_score",
@@ -52,7 +50,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 			QuoteAnalyzer = "quote-an",
 			AllowLeadingWildcard = true,
 			MaximumDeterminizedStates = 2,
-			EnablePositionIncrements = true,
 			Escape = true,
 			FuzzyPrefixLength = 2,
 			FuzzyMaxExpansions = 3,
@@ -64,11 +61,9 @@ namespace Tests.QueryDsl.FullText.QueryString
 			MinimumShouldMatch = 2,
 			QuoteFieldSuffix = "'",
 			Lenient = true,
-			Timezone = "root"
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-#pragma warning disable 618 // usage of lowercase_expanded_terms and locale
 			.QueryString(c => c
 				.Name("named_query")
 				.Boost(1.1)
@@ -80,7 +75,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.QuoteAnalyzer("quote-an")
 				.AllowLeadingWildcard()
 				.MaximumDeterminizedStates(2)
-				.EnablePositionIncrements()
 				.Escape()
 				.FuzzyPrefixLength(2)
 				.FuzzyMaxExpansions(3)
@@ -92,7 +86,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.MinimumShouldMatch(2)
 				.QuoteFieldSuffix("'")
 				.Lenient()
-				.Timezone("root")
 			);
 #pragma warning restore 618 // usage of lowercase_expanded_terms and locale
 
