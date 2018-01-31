@@ -10,7 +10,7 @@ please modify the original csharp file found at the link and submit the PR with 
 
 [partintro]
 --
-There are a number of breaking changes when going from 2.x to 5.x
+There are a number of breaking changes when going from 5.x to 6.x
 
 * <<elasticsearch-net-breaking-changes, Elasticsearch.Net breaking changes>>
 
@@ -18,7 +18,7 @@ There are a number of breaking changes when going from 2.x to 5.x
 
 --
 
-include::5.0-breaking-changes/elasticsearch-net-breaking-changes.asciidoc[]
+include::6.0-breaking-changes/elasticsearch-net-breaking-changes.asciidoc[]
 
-include::5.0-breaking-changes/nest-breaking-changes.asciidoc[]
+include::6.0-breaking-changes/nest-breaking-changes.asciidoc[]
 

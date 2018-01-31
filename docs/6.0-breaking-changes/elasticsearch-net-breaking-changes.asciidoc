@@ -1,6 +1,8 @@
-= Breaking Changes 
+[[elasticsearch-net-breaking-changes]]
+== Elasticsearch.Net Breaking Changes 
  
-== Code Generation fixes 
+[float]
+=== Code Generation fixes 
  
 Our code that takes the elasticsearch REST spec and generates the low level client had been mostly untouched since `1.x`. 
 With this release we fixed several outstanding issues 
@@ -9,7 +11,8 @@ With this release we fixed several outstanding issues
 the high level client but was never truely needed so now the low level client is using 
 `client.Operation&lt;DynamicResponse&gt;(new OperationRequestParameters { Parameter = .. })`. 
 
-== Response types 
+[float]
+=== Response types 
 
 In previous version any `client.Operation&lt;T&gt;(..)` accepted `string` `byte[]`, `dynamic`, `Stream`, `VoidResponse`, or any object to 
 deserialize the response into as `T` and returned an `ElasticsearchResponse&lt;T&gt;`.
@@ -39,7 +42,8 @@ NEST is in charge of deserializing the server error and not the low level client
 Lastly we removed support for return the raw response stream, this was a dangerous feature because the onous on disposing 
 that stream lied with the user. If you need to access the response stream directly inject a custom `IElasticsearchSerializer`. 
  
-= Unclassified 
+[float]
+=== Unclassified 
  
 Listed here unfiltered, we'll make another pass to group these and add an explanation where it makes sense. 
  
