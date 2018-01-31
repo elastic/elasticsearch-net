@@ -1,29 +1,35 @@
-= Breaking Changes 
+[[nest-breaking-changes]]
+== NEST Breaking Changes 
 
 Oh my goodness, this looks like a lot of breaking changes! This is true but please take note that this list is very very extensive
 It includes every single _binary_ breaking change. In a lot of cases these will not necessarily equate to compiler errors.
 
-== Nullable changes 
+[float]
+=== Nullable changes 
 
 Quite a few places are now nullable (arguments, properties) while technically a binary breaking change this is not something
 you will hit during upgrade compilation so these have been removed from this listing. 
 
-== Routing 
+[float]
+=== Routing 
  
 Various places that use to take a `string` for routing now take a `Routing`.
 `string` is implicitly convertable though so should not be an issue during upgrade.
  
-== Fields 
+[float] 
+=== Fields 
  
 Various places that took fields as a `string[]` now explicitly accept a `Fields` instance. 
 This comes from improvements in the generator. 
- 
-== Cat 
+
+[float]
+=== Cat 
 
 The generated methods for `_cat` related API's had there `H`, `S`, `V` and `Ts` methods renamed to 
 a more descriptive variant e.g `V` is now `Verbose`. 
- 
-= unclassified 
+
+[float] 
+=== Unclassified 
  
 Listed here unfiltered, we'll make another pass to group these and add an explanation where it makes sense. + + 
  + 

@@ -2,7 +2,7 @@
 
 [partintro]
 --
-There are a number of breaking changes when going from 2.x to 5.x
+There are a number of breaking changes when going from 5.x to 6.x
 
 * <<elasticsearch-net-breaking-changes, Elasticsearch.Net breaking changes>>
 
