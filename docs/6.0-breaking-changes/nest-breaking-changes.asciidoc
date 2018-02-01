@@ -75,9 +75,9 @@ Parameter name change
 +
 [source,csharp]
 ----
-// before in C:\Users\russ\Desktop\5.x\net46
+// before in 5.x
 master_timeout
-// now in C:\Users\russ\Desktop\6.x\net46
+// now in 6.x
 masterTimeout
 ----
   * `Pretty(Boolean)` deleted
@@ -118,9 +118,9 @@ Member type change
 +
 [source,csharp]
 ----
-// before in C:\Users\russ\Desktop\5.x\net46
+// before in 5.x
 String
-// now in C:\Users\russ\Desktop\6.x\net46
+// now in 6.x
 Routing
 ----
   * `Routing`
