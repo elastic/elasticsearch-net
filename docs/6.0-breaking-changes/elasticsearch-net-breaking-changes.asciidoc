@@ -1,8 +1,9 @@
 [[elasticsearch-net-breaking-changes]]
 == Elasticsearch.Net Breaking Changes 
 
-This lists *all* the binary breaking changes in Elasticsearch.Net from 5.x to 6.x. The intention in providing such a list
-is to allow one to quickly search
+This lists *all* the binary breaking changes in Elasticsearch.Net from 5.x ({github}/tree/e8013698ab5e4fec1b310ecd724f66f472746fed[last commit in 5.x at time of 6.0.0 GA release]) to 6.x ({github}/tree/6.0.0[6.0.0 GA release]). The intention in providing such a large list
+is to allow you to quickly and easily search the changes between the two major versions, to understand what has been removed and 
+equally importantly, what has been added.
 
 [float]
 === Requests
@@ -137,7 +138,7 @@ Since 1.x, request parameters were fluent e.g.
 
 [source,csharp]
 ----
-client.Search&lt;dynamic&gt;(r=&gt;r.Parameter())`
+client.Search<dynamic>(r => r.Parameter())`
 ----
 
 This was done back in the day to facilitate the high-level client but was never truly needed. 
@@ -145,7 +146,7 @@ Now, the low-level client is using
 
 [source,csharp]
 ----
-client.Search&lt;DynamicResponse&gt;(new SearchRequestParameters { Parameter = .. })`. 
+client.Search<DynamicResponse>(new SearchRequestParameters { Parameter = .. })`. 
 ----
 
 This change affects the following:
@@ -2700,13 +2701,13 @@ Dictionary<String, Object>
 [float]
 === Responses 
 
-In previous version any `client.Operation&lt;T&gt;(..)` accepted `string` `byte[]`, `dynamic`, `Stream`, `VoidResponse`, or any object to 
-deserialize the response into as `T` and returned an `ElasticsearchResponse&lt;T&gt;`.
+In previous version any `client.Operation<T>(..)` accepted `string` `byte[]`, `dynamic`, `Stream`, `VoidResponse`, or any object to 
+deserialize the response into as `T` and returned an `ElasticsearchResponse<T>`.
  
 We are now stricter and constrained `T` to `IElasticsearchResponse` and always return T directly.  
 
 To help ease the common use cases we ship with an `BytesResponse`, `StringResponse`, `DynamicResponse`, 
-`VoidResponse` and `ElasticsearchResponse&lt;T&gt;` where `T` can again be any object to deserialize the response into.
+`VoidResponse` and `ElasticsearchResponse<T>` where `T` can again be any object to deserialize the response into.
 
 In previous versions the low level client was in charge of reading deserialized exceptions from Elasticsearch 
 and short circuited if a bad HTTP status code was returned to do so. Omitting the deserializer all together.  

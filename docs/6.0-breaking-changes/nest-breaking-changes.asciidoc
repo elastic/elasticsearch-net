@@ -1,7 +1,9 @@
 [[nest-breaking-changes]]
 == NEST Breaking Changes 
 
-This lists *all* the binary breaking changes in NEST from 5.x to 6.x.
+This lists *all* the binary breaking changes in NEST from 5.x ({github}/tree/e8013698ab5e4fec1b310ecd724f66f472746fed[last commit in 5.x at time of 6.0.0 GA release]) to 6.x ({github}/tree/6.0.0[6.0.0 GA release]). The intention in providing such a large list
+is to allow you to quickly and easily search the changes between the two major versions, to understand what has been removed and 
+equally importantly, what has been added.
 
 Oh my goodness, this looks like a lot of breaking changes! In a lot of cases however, 
 changes will not necessarily equate to compiler errors and therefore no action would be required on upgrade.
