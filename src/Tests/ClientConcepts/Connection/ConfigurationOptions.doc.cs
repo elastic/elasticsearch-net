@@ -1,12 +1,7 @@
 ﻿using System;
-using System.IO;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.MockData;
-
-#if DOTNETCORE
-using System.Net.Http;
-#endif
 
 namespace Tests.ClientConcepts.Connection
 {

@@ -10,45 +10,26 @@ namespace Elasticsearch.Net
 	{
 		internal static bool IsGeneric(this Type type)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().IsGenericType;
-#else
-			return type.IsGenericType;
-#endif
 		}
 
 		internal static bool AssignableFrom(this Type type, Type from)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().IsAssignableFrom(from.GetTypeInfo());
-#else
-			return type.IsAssignableFrom(from);
-#endif
 		}
-		
+
 		internal static Assembly Assembly(this Type type)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().Assembly;
-#else
-			return type.Assembly;
-#endif
 		}
 
 		internal static bool IsValue(this Type type)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().IsValueType;
-#else
-			return type.IsValueType;
-#endif
 		}
 
 		internal static TypeCode GetTypeCode(this Type type)
 		{
-#if !DOTNETCORE
-			return Type.GetTypeCode(type);
-#else
 			if (type == null)
 				return TypeCode.Empty;
 			else if (type == typeof(bool))
@@ -85,7 +66,6 @@ namespace Elasticsearch.Net
 				return GetTypeCode(Enum.GetUnderlyingType(type));
 			else
 				return TypeCode.Object;
-#endif
 		}
 	}
 }

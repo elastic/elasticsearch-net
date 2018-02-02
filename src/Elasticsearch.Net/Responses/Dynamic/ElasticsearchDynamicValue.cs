@@ -52,7 +52,7 @@ namespace Elasticsearch.Net
 				result = new ElasticsearchDynamicValue(ds[name]);
 				return true;
 			}
-			
+
 			result = new ElasticsearchDynamicValue(this.Value);
 			return true;
 		}
@@ -144,7 +144,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Attempts to convert the value to type of T, failing to do so will return the defaultValue. 
+		/// Attempts to convert the value to type of T, failing to do so will return the defaultValue.
 		/// </summary>
 		/// <typeparam name="T">When no default value is supplied, required to supply the default type</typeparam>
 		/// <param name="defaultValue">Optional parameter for default value, if not given it returns default of type T</param>
@@ -175,15 +175,7 @@ namespace Elasticsearch.Net
 					else if (stringValue != null)
 					{
 						var converter = TypeDescriptor.GetConverter(TType);
-
-#if DOTNETCORE
 						return (T)converter.ConvertFromInvariantString(stringValue);
-#else
-						if (converter.IsValid(stringValue))
-						{
-							return (T)converter.ConvertFromInvariantString(stringValue);
-						}
-#endif
 					}
 					else if (TType == typeof(string))
 					{
@@ -214,7 +206,7 @@ namespace Elasticsearch.Net
 			return !(dynamicValue == compareValue);
 		}
 
-		
+
 		/// <summary>
 		/// Indicates whether the current object is equal to another object of the same type.
 		/// </summary>
@@ -255,7 +247,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Serves as a hash function for a particular type. 
+		/// Serves as a hash function for a particular type.
 		/// </summary>
 		/// <returns>A hash code for the current instance.</returns>
 		public override int GetHashCode()
@@ -353,11 +345,7 @@ namespace Elasticsearch.Net
 						return false;
 					}
 				}
-#if DOTNETCORE
 				result = Convert.ChangeType(value, binderType);
-#else
-				result = Convert.ChangeType(value, typeCode);
-#endif
 
 				return true;
 			}

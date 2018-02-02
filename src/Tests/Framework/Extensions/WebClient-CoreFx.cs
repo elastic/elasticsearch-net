@@ -1,4 +1,3 @@
-#if DOTNETCORE
 using System;
 using System.IO;
 using System.Net.Http;
@@ -19,4 +18,3 @@ namespace Tests.Framework
 		}
 	}
 }
-#endif

@@ -38,7 +38,7 @@ module Build =
         if not (DotNetCli.isInstalled()) then failwith  "You need to install the dotnet command line SDK to build for .NET Core"
         let runningSdkVersion = DotNetCli.getVersion()
         if (runningSdkVersion <> pinnedSdkVersion) then failwithf "Attempting to run with dotnet.exe with %s but global.json mandates %s" runningSdkVersion pinnedSdkVersion
-        let incrementalFramework = DotNetFramework.Net45
+        let incrementalFramework = DotNetFramework.NetStandard1_3
         let sourceLink = if not incremental && not isMono && runningRelease then "1" else ""
         let props = 
             [ 
@@ -153,7 +153,7 @@ module Build =
         trace "Finished rewriting namespaces"
 
     let private ilRepackInternal() =
-        let fw = if isMono then [DotNetFramework.NetStandard1_3] else DotNetFramework.All
+        let fw = DotNetFramework.All
         for f in fw do 
             let nest = Project Project.Nest
             let folder = Paths.ProjectOutputFolder nest f

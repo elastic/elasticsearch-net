@@ -154,10 +154,8 @@ namespace Tests.CodeStandards
 			{
 				nestAssembly.GetType("System.AssemblyVersionInformation", throwOnError: false),
 				nestAssembly.GetType("System.Runtime.Serialization.Formatters.FormatterAssemblyStyle", throwOnError: false),
-#if DOTNETCORE
 				typeof(SynchronizedCollection<>),
 				nestAssembly.GetType("System.ComponentModel.Browsable", throwOnError: false)
-#endif
 			};
 
 			var types = nestAssembly.GetTypes();
@@ -190,9 +188,7 @@ namespace Tests.CodeStandards
 				elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierDotNet"),
 				elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierMono"),
 				elasticsearchNetAssembly.GetType("Purify.Purifier+UriInfo"),
-#if DOTNETCORE
 				elasticsearchNetAssembly.GetType("System.ComponentModel.Browsable")
-#endif
 			};
 
 			var types = elasticsearchNetAssembly.GetTypes();
@@ -215,11 +211,7 @@ namespace Tests.CodeStandards
 			for (int index = 0; index < value.Length; ++index)
 			{
 				var character = value[index];
-#if DOTNETCORE
 				var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);
-#else
-				var unicodeCategory = char.GetUnicodeCategory(character);
-#endif
 				switch (unicodeCategory)
 				{
 					case UnicodeCategory.UppercaseLetter:

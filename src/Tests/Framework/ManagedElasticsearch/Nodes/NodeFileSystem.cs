@@ -59,13 +59,6 @@ namespace Tests.Framework.ManagedElasticsearch.Nodes
 			this.ElasticsearchHome = Path.Combine(this.RoamingFolder, this._version.FolderInZip);
 		}
 
-		private static string GetApplicationDataDirectory()
-		{
-#if DOTNETCORE
-			return Environment.GetEnvironmentVariable("APPDATA");
-#else
-			return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-#endif
-		}
+		private static string GetApplicationDataDirectory() => Environment.GetEnvironmentVariable("APPDATA");
 	}
 }

@@ -55,14 +55,7 @@ namespace Elasticsearch.Net
 				errors == SslPolicyErrors.None
 				|| ValidRootCa(caCertificate, cert, chain, trustRoot, revocationMode);
 
-		private static X509Certificate2 to2(X509Certificate certificate)
-		{
-			#if DOTNETCORE
-				return new X509Certificate2(certificate.Export(X509ContentType.Cert));
-			#else
-				return new X509Certificate2(certificate);
-			#endif
-		}
+		private static X509Certificate2 to2(X509Certificate certificate) => new X509Certificate2(certificate.Export(X509ContentType.Cert));
 
 		private static bool ValidRootCa(X509Certificate caCertificate, X509Certificate certificate, X509Chain chain, bool trustRoot,
 			X509RevocationMode revocationMode)

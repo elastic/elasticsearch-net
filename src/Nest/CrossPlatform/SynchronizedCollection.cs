@@ -1,87 +1,71 @@
-﻿#if DOTNETCORE
-using System;
-using System.Collections;
-using System.Diagnostics;
-using Nest;
+﻿using Nest;
 
 namespace System.Collections.Generic
 {
 
+	//TODO see if we can get rid of this
 	[System.Runtime.InteropServices.ComVisible(false)]
 	public class SynchronizedCollection<T> : IList<T>, IList
 	{
-		List<T> items;
-		object sync;
+		readonly List<T> _items;
+		readonly object _sync;
 
 		public SynchronizedCollection()
 		{
-			this.items = new List<T>();
-			this.sync = new Object();
+			this._items = new List<T>();
+			this._sync = new object();
 		}
 
 		public SynchronizedCollection(object syncRoot)
 		{
-			if (syncRoot == null)
-				throw new ArgumentNullException("syncRoot");
-
-			this.items = new List<T>();
-			this.sync = syncRoot;
+			this._sync = syncRoot ?? throw new ArgumentNullException(nameof(syncRoot));
+			this._items = new List<T>();
 		}
 
 		public SynchronizedCollection(object syncRoot, IEnumerable<T> list)
 		{
-			if (syncRoot == null)
-				throw new ArgumentNullException("syncRoot");
-			if (list == null)
-				throw new ArgumentNullException("list");
+			if (list == null) throw new ArgumentNullException(nameof(list));
 
-			this.items = new List<T>(list);
-			this.sync = syncRoot;
+			this._items = new List<T>(list);
+			this._sync = syncRoot ?? throw new ArgumentNullException(nameof(syncRoot));
 		}
 
 		public SynchronizedCollection(object syncRoot, params T[] list)
 		{
 			if (syncRoot == null)
-				throw new ArgumentNullException("syncRoot");
+				throw new ArgumentNullException(nameof(syncRoot));
 			if (list == null)
-				throw new ArgumentNullException("list");
+				throw new ArgumentNullException(nameof(list));
 
-			this.items = new List<T>(list.Length);
-			for (int i = 0; i < list.Length; i++)
-				this.items.Add(list[i]);
+			this._items = new List<T>(list.Length);
+			this._items.AddRange(list);
 
-			this.sync = syncRoot;
+			this._sync = syncRoot;
 		}
 
 		public int Count
 		{
-			get { lock (this.sync) { return this.items.Count; } }
+			get { lock (this._sync) { return this._items.Count; } }
 		}
 
-		protected List<T> Items
-		{
-			get { return this.items; }
-		}
+		protected List<T> Items => this._items;
 
-		public object SyncRoot
-		{
-			get { return this.sync; }
-		}
+		public object SyncRoot => this._sync;
 
 		public T this[int index]
 		{
 			get
 			{
-				lock (this.sync)
+				lock (this._sync)
 				{
-					return this.items[index];
+					return this._items[index];
 				}
 			}
 			set
 			{
-				lock (this.sync)
+				lock (this._sync)
 				{
-					if (index < 0 || index >= this.items.Count)
+					if (index < 0 || index >= this._items.Count)
 						throw new ArgumentOutOfRangeException("index", index, $"value {index} must be in range of {this.Items.Count}");
 
 					this.SetItem(index, value);
@@ -91,16 +75,16 @@ namespace System.Collections.Generic
 
 		public void Add(T item)
 		{
-			lock (this.sync)
+			lock (this._sync)
 			{
-				int index = this.items.Count;
+				var index = this._items.Count;
 				this.InsertItem(index, item);
 			}
 		}
 
 		public void Clear()
 		{
-			lock (this.sync)
+			lock (this._sync)
 			{
 				this.ClearItems();
 			}
@@ -108,31 +92,31 @@ namespace System.Collections.Generic
 
 		public void CopyTo(T[] array, int index)
 		{
-			lock (this.sync)
+			lock (this._sync)
 			{
-				this.items.CopyTo(array, index);
+				this._items.CopyTo(array, index);
 			}
 		}
 
 		public bool Contains(T item)
 		{
-			lock (this.sync)
+			lock (this._sync)
 			{
-				return this.items.Contains(item);
+				return this._items.Contains(item);
 			}
 		}
 
 		public IEnumerator<T> GetEnumerator()
 		{
-			lock (this.sync)
+			lock (this._sync)
 			{
-				return this.items.GetEnumerator();
+				return this._items.GetEnumerator();
 			}
 		}
 
 		public int IndexOf(T item)
 		{
-			lock (this.sync)
+			lock (this._sync)
 			{
 				return this.InternalIndexOf(item);
 			}
@@ -140,9 +124,9 @@ namespace System.Collections.Generic
 
 		public void Insert(int index, T item)
 		{
-			lock (this.sync)
+			lock (this._sync)
 			{
-				if (index < 0 || index > this.items.Count)
+				if (index < 0 || index > this._items.Count)
 						throw new ArgumentOutOfRangeException("index", index, $"value {index} must be in range of {this.Items.Count}");
 
 				this.InsertItem(index, item);
@@ -151,11 +135,11 @@ namespace System.Collections.Generic
 
 		int InternalIndexOf(T item)
 		{
-			int count = items.Count;
+			int count = _items.Count;
 
 			for (int i = 0; i < count; i++)
 			{
-				if (object.Equals(items[i], item))
+				if (object.Equals(_items[i], item))
 				{
 					return i;
 				}
@@ -165,7 +149,7 @@ namespace System.Collections.Generic
 
 		public bool Remove(T item)
 		{
-			lock (this.sync)
+			lock (this._sync)
 			{
 				int index = this.InternalIndexOf(item);
 				if (index < 0)
@@ -178,9 +162,9 @@ namespace System.Collections.Generic
 
 		public void RemoveAt(int index)
 		{
-			lock (this.sync)
+			lock (this._sync)
 			{
-				if (index < 0 || index >= this.items.Count)
+				if (index < 0 || index >= this._items.Count)
 					throw new ArgumentOutOfRangeException("index", index, $"value {index} must be in range of {this.Items.Count}");
 
 
@@ -190,22 +174,22 @@ namespace System.Collections.Generic
 
 		protected virtual void ClearItems()
 		{
-			this.items.Clear();
+			this._items.Clear();
 		}
 
 		protected virtual void InsertItem(int index, T item)
 		{
-			this.items.Insert(index, item);
+			this._items.Insert(index, item);
 		}
 
 		protected virtual void RemoveItem(int index)
 		{
-			this.items.RemoveAt(index);
+			this._items.RemoveAt(index);
 		}
 
 		protected virtual void SetItem(int index, T item)
 		{
-			this.items[index] = item;
+			this._items[index] = item;
 		}
 
 		bool ICollection<T>.IsReadOnly
@@ -215,24 +199,18 @@ namespace System.Collections.Generic
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return ((IList)this.items).GetEnumerator();
+			return ((IList)this._items).GetEnumerator();
 		}
 
-		bool ICollection.IsSynchronized
-		{
-			get { return true; }
-		}
+		bool ICollection.IsSynchronized => true;
 
-		object ICollection.SyncRoot
-		{
-			get { return this.sync; }
-		}
+		object ICollection.SyncRoot => this._sync;
 
 		void ICollection.CopyTo(Array array, int index)
 		{
-			lock (this.sync)
+			lock (this._sync)
 			{
-				((IList)this.items).CopyTo(array, index);
+				((IList)this._items).CopyTo(array, index);
 			}
 		}
 
@@ -263,7 +241,7 @@ namespace System.Collections.Generic
 		{
 			VerifyValueType(value);
 
-			lock (this.sync)
+			lock (this._sync)
 			{
 				this.Add((T)value);
 				return this.Count - 1;
@@ -294,7 +272,7 @@ namespace System.Collections.Generic
 			this.Remove((T)value);
 		}
 
-		static void VerifyValueType(object value)
+		private static void VerifyValueType(object value)
 		{
 			if (value == null)
 			{
@@ -310,4 +288,3 @@ namespace System.Collections.Generic
 		}
 	}
 }
-#endif

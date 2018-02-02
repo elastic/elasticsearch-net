@@ -1,4 +1,3 @@
-#if !DOTNETCORE
 using System.IO;
 using JetBrains.Profiler.Windows.Api;
 using JetBrains.Profiler.Windows.SelfApi;
@@ -44,4 +43,3 @@ namespace Tests.Framework.Profiling.Timeline
 		}
 	}
 }
-#endif

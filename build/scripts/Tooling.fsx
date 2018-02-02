@@ -109,12 +109,12 @@ module Tooling =
 
     let jetBrainsTools = [{ 
                             DotTraceTool.Name = "JetBrains DotTrace Self-Profile API";
-                            Download = "https://download-cf.jetbrains.com/resharper/JetBrains.Profiler.SelfSdk.2016.3.2.zip";
+                            Download = "https://download-cf.jetbrains.com/resharper/JetBrains.Profiler.SelfSdk.2017.3.2.zip";
                             TargetDir = "dottrace-selfprofile";
                          };
                          { 
                             DotTraceTool.Name = "JetBrains DotTrace Commandline Tools";
-                            Download = "https://download-cf.jetbrains.com/resharper/JetBrains.dotTrace.CommandLineTools.2016.3.20170126.121657.zip";
+                            Download = "https://download-cf.jetbrains.com/resharper/JetBrains.dotTrace.CommandLineTools.2017.3.2.zip";
                             TargetDir = "dottrace-commandline";
                          }]
 
@@ -139,7 +139,6 @@ module Tooling =
         let toolPath = commandLineTool @@ path
         member this.Exec arguments = execAt Environment.CurrentDirectory toolPath arguments
 
-    let DotTraceProfiler = new ProfilerTooling("ConsoleProfiler.exe")
     let DotTraceReporter = new ProfilerTooling("Reporter.exe")
     let DotTraceSnapshotStats = new ProfilerTooling("SnapshotStat.exe")
 
@@ -165,5 +164,5 @@ module Tooling =
             let result = execProcessWithTimeout toolPath arguments (TimeSpan.FromMinutes 5.) "."
             if result <> 0 then failwith (sprintf "Failed to run diff tooling for %s args: %A" exe arguments)
             
-    let JustAssembly = DiffTooling("JustAssembly.CommandLineTool.exe")      
+    let JustAssembly = DiffTooling("JustAssembly.CommandLineTool.exe")
     

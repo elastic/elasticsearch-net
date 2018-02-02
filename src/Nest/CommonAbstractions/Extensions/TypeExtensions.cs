@@ -160,13 +160,8 @@ namespace Nest
 						propertiesByName.Add(propertyInfo.Name, propertyInfo);
 					}
 				}
-#if DOTNETCORE
 				type = type.GetTypeInfo()?.BaseType;
 			} while (type?.GetTypeInfo()?.BaseType != null);
-#else
-				type = type.BaseType;
-			} while (type?.BaseType != null);
-#endif
 			return propertiesByName.Values;
 		}
 
@@ -175,11 +170,7 @@ namespace Nest
 		/// </summary>
 		private static bool IsHidingMember(PropertyInfo propertyInfo)
 		{
-#if DOTNETCORE
 			var baseType = propertyInfo.DeclaringType?.GetTypeInfo()?.BaseType;
-#else
-			var baseType = propertyInfo.DeclaringType?.BaseType;
-#endif
 			var baseProperty = baseType?.GetProperty(propertyInfo.Name);
 			if (baseProperty == null) return false;
 			var derivedGetMethod = propertyInfo.GetGetMethod().GetBaseDefinition();

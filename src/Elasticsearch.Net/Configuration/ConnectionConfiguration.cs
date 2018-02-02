@@ -4,15 +4,10 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-
-#if DOTNETCORE
-using System.Net;
 using System.Net.Http;
-#endif
 
 
 namespace Elasticsearch.Net
@@ -23,12 +18,7 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
-		internal static bool IsCurlHandler { get; } =
-            #if DOTNETCORE
-                typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
-            #else
-                 false;
-            #endif
+		internal static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
 		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
 		public static readonly TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
 		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);

@@ -1,4 +1,3 @@
-#if DOTNETCORE
 using System;
 using System.Threading;
 using System.Diagnostics;
@@ -18,4 +17,3 @@ namespace Tests.Framework
 		}
 	}
 }
-#endif

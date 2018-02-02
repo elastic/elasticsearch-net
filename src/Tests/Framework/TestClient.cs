@@ -101,8 +101,7 @@ namespace Tests.Framework
 				//hack to prevent the deprecation warnings from the deprecation response test to be reported
 				if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
 				foreach (var d in r.DeprecationWarnings) SeenDeprecations.Add(d);
-			})
-			.OnRequestDataCreated(data => data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
+			});
 
 		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.Create("5.0.0-alpha1")
 			? ".percolator"
@@ -232,35 +231,5 @@ namespace Tests.Framework
 			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
-
-		private static string ExpensiveTestNameForIntegrationTests()
-		{
-			if (!Configuration.RunIntegrationTests) return "ignore";
-
-#if DOTNETCORE
-			return "UNKNOWN";
-#else
-			var st = new StackTrace();
-			var types = GetTypes(st);
-			var name = types
-				.LastOrDefault(type => type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework."));
-			return name?.FullName ?? string.Join(": ", types.Select(n => n.Name));
-#endif
-		}
-
-#if !DOTNETCORE
-
-		private static List<Type> GetTypes(StackTrace st)
-		{
-			var types = (from f in st.GetFrames()
-				let method = f.GetMethod()
-				where method != null
-				let type = method.DeclaringType
-				where type != null
-				select type).ToList();
-			return types;
-		}
-
-#endif
 	}
 }

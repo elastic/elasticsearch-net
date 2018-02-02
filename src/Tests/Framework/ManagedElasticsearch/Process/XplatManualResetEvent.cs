@@ -1,4 +1,3 @@
-#if DOTNETCORE
 using System;
 using System.Threading;
 
@@ -38,4 +37,3 @@ namespace Tests.Framework.Integration
 			}
 		}
 }
-#endif

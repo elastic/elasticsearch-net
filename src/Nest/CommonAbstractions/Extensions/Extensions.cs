@@ -112,11 +112,7 @@ namespace Nest
 			return null;
 		}
 
-#if !DOTNETCORE
-		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes);
-#else
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-#endif
 
 		internal static byte[] Utf8Bytes(this string s)
 		{
@@ -133,11 +129,7 @@ namespace Nest
 		}
 		internal static bool IsValueType(this Type type)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().IsValueType;
-#else
-			return type.IsValueType;
-#endif
 		}
 
 		internal static void ThrowIfNullOrEmpty(this string @object, string parameterName, string when = null)

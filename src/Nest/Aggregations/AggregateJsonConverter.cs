@@ -76,11 +76,7 @@ namespace Nest
 			AllReservedAggregationNames = typeof(Parser)
 				.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
 				.Where(f => f.IsLiteral && !f.IsInitOnly)
-#if DOTNETCORE
 				.Select(f => (string)f.GetValue(null))
-#else
-				.Select(f => (string) f.GetRawConstantValue())
-#endif
 				.ToArray();
 
 			var allKeys = string.Join(", ", AllReservedAggregationNames);
