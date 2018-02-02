@@ -4,7 +4,6 @@
   <PropertyGroup>
     <TargetFrameworks>net46</TargetFrameworks>
     <!--<CopyLocalLockFileAssemblies Condition="'$(TargetFramework)'=='netstandard1.3'">true</CopyLocalLockFileAssemblies>-->
-    <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj" />

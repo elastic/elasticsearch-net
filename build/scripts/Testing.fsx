@@ -43,7 +43,7 @@ module Tests =
             let p = ["xunit"; "-parallel"; "all"; "-xml"; "../.." @@ Paths.Output("TestResults-Desktop-Clr.xml")] 
             match (target, buildingOnTravis) with 
             | (_, true) 
-            | (Commandline.MultiTarget.One, _) -> ["-framework"; "netcoreapp1.1"] |> List.append p
+            | (Commandline.MultiTarget.One, _) -> ["-framework"; "netcoreapp2.0"] |> List.append p
             | _  -> p
 
         let dotnet = Tooling.BuildTooling("dotnet")
