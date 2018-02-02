@@ -92,7 +92,7 @@ namespace Tests.Reproduce
 					RemoteStackIndex = remoteStackIndex,
 					HResult = hresult,
 					HelpURL = helpUrl,
-					ExceptionMethod = this.WriteStructuredExceptionMethod(exceptionMethod)
+					//ExceptionMethod = this.WriteStructuredExceptionMethod(exceptionMethod)
 				};
 				depth++;
 				e = e.InnerException;
