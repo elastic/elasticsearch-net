@@ -46,7 +46,7 @@ module Build =
                 "CurrentAssemblyVersion", (Versioning.CurrentAssemblyVersion.ToString());
                 "CurrentAssemblyFileVersion", (Versioning.CurrentAssemblyFileVersion.ToString());
                 "DoSourceLink", sourceLink;
-                "DotNetCoreOnly", if buildingOnTravis then "1" else "";
+                "FakeBuild", "1";
                 "OutputPathBaseDir", Path.GetFullPath Paths.BuildOutput;
             ] 
             |> List.map (fun (p,v) -> sprintf "%s=%s" p v)

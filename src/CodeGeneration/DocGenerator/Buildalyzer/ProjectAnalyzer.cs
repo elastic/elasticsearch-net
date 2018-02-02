@@ -72,7 +72,8 @@ namespace DocGenerator.Buildalyzer
 		{
 			Manager = manager;
 			ProjectFilePath = projectFilePath;
-			_projectDocument = TweakProjectDocument(projectDocument);
+			var projectFolder = Path.GetDirectoryName(projectFilePath);
+			_projectDocument = TweakProjectDocument(projectDocument, projectFolder);
 
 			// Get the paths
 			_buildEnvironment = EnvironmentFactory.GetBuildEnvironment(projectFilePath, _projectDocument);
@@ -80,8 +81,8 @@ namespace DocGenerator.Buildalyzer
 			// Preload/enforce referencing some required asemblies
 			Copy copy = new Copy();
 
-			// Set global properties
-			string solutionDir = manager.SolutionDirectory ?? Path.GetDirectoryName(projectFilePath);
+
+			string solutionDir = manager.SolutionDirectory ?? projectFolder;
 			_globalProperties = _buildEnvironment.GetGlobalProperties(solutionDir);
 
 			// Create the logger
@@ -119,8 +120,19 @@ namespace DocGenerator.Buildalyzer
 		}
 
 		// Tweaks the project file a bit to ensure a succesfull build
-		private static XDocument TweakProjectDocument(XDocument projectDocument)
+		private static XDocument TweakProjectDocument(XDocument projectDocument, string projectFolder)
 		{
+			foreach (XElement import in projectDocument.GetDescendants("Import").ToArray())
+			{
+				var att = import.Attribute("Project");
+				if (att == null) continue;
+
+				var project = att.Value;
+				if (project.EndsWith("Clients.Common.targets"))
+					att.Value = Path.GetFullPath(Path.Combine(projectFolder, att.Value));
+				else if (project.EndsWith("outputpath.props"))
+					att.Value = Path.GetFullPath(Path.Combine(projectFolder, att.Value));
+			}
 			// Add SkipGetTargetFrameworkProperties to every ProjectReference
 			foreach (XElement projectReference in projectDocument.GetDescendants("ProjectReference").ToArray())
 			{

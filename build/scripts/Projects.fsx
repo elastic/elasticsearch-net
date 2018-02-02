@@ -20,9 +20,9 @@ module Projects =
         static member All = [NetStandard1_3] 
         member this.Identifier = 
             match this with
-            | Net46 -> { MSBuild = "v4.6"; Nuget = "net46"; }
-            | NetStandard1_3 -> { MSBuild = "netstandard1.3"; Nuget = "netstandard1.3"; }
-            | NetCoreApp2_0 -> { MSBuild = "netcoreapp2.0"; Nuget = "netcoreapp2.0"; }
+            | Net46 -> { MSBuild = "v4.6"; Nuget = "net46"; DefineConstants = ""; }
+            | NetStandard1_3 -> { MSBuild = "netstandard1.3"; Nuget = "netstandard1.3"; DefineConstants = ""; }
+            | NetCoreApp2_0 -> { MSBuild = "netcoreapp2.0"; Nuget = "netcoreapp2.0"; DefineConstants = ""; }
 
     type Project =
         | Nest

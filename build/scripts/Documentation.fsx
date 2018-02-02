@@ -16,12 +16,13 @@ module Documentation =
 
     let Generate() = 
         let docGenerator = PrivateProject(DocGenerator)
-        let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.Net46
-        let generator = sprintf "%s/%s.exe" path docGenerator.Name
-        ExecProcess (fun p ->
-            p.WorkingDirectory <- Paths.Source("CodeGeneration") @@ docGenerator.Name
-            p.FileName <- generator
-        ) (TimeSpan.FromMinutes 3.) |> ignore
+        let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.NetCoreApp2_0
+        let generator = sprintf "%s.dll" docGenerator.Name
+        
+        DotNetCli.RunCommand(fun p ->
+            { p with
+                WorkingDir = path
+            }) generator
 
     // TODO: hook documentation validation into the process
     let Validate() = 

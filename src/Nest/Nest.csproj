@@ -3,7 +3,7 @@
   <Import Project="..\..\build\Clients.Common.targets" />
   <PropertyGroup>
     <TargetFrameworks>netstandard1.3</TargetFrameworks>
-    <!--<CopyLocalLockFileAssemblies Condition="'$(TargetFramework)'=='netstandard1.3'">true</CopyLocalLockFileAssemblies>-->
+    <CopyLocalLockFileAssemblies Condition="'$(FakeBuild)'=='1'">true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
