@@ -10,15 +10,17 @@ namespace DocGenerator
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
             if (currentDirectory.Name == "DocGenerator" && currentDirectory.Parent.Name == "CodeGeneration")
 			{
+				Console.WriteLine("IDE: " + currentDirectory);
                 InputDirPath = @"..\..\";
 				OutputDirPath = @"..\..\..\docs";
                 BuildOutputPath = @"..\..\..\build\output";
 			}
 			else
 			{
-				InputDirPath = @"..\..\..\..\..\src";
-				OutputDirPath = @"..\..\..\..\..\docs";
-                BuildOutputPath = @"..\..\..\..\..\build\output";
+				Console.WriteLine("CMD: " + currentDirectory);
+				InputDirPath = @"..\..\..\..\src";
+				OutputDirPath = @"..\..\..\..\docs";
+                BuildOutputPath = @"..\..\..\..\build\output";
 			}
         }
 
