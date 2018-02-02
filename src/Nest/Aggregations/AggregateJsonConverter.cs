@@ -488,7 +488,7 @@ namespace Nest
 			{
 				reader.Read();
 				var aggs = new Dictionary<string, IAggregate>();
-				while (reader.TokenType != JsonToken.EndObject);
+				while (reader.TokenType != JsonToken.EndObject)
 				{
 					var name = reader.Value.ToString();
 					reader.Read();
