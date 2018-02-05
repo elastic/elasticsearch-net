@@ -54,17 +54,20 @@ for the base class and then call AutoMap foreach of the types we want it it the 
 
 [source,csharp]
 ----
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Document>(m => m
             .AutoMap<Company>() <1>
-            .AutoMap<Employee>() <2>
+            .AutoMap(typeof(Employee)) <2>
         )
-    );
+    )
+);
 ----
-<1> Auto map `Company`
+<1> Auto map `Company` using the generic method
 
-<2> Auto map `Employee`
+<2> Auto map `Employee` using the non-generic method
+
+This produces the following JSON request
 
 [source,javascript]
 ----
@@ -153,47 +156,47 @@ public class ParentWithStringId : IgnoringProperties.Parent
     public new string Id { get; set; }
 }
 
-var descriptor = new CreateIndexDescriptor("myindex")
-        .Mappings(ms => ms
-            .Map<ParentWithStringId>(m => m
-                .AutoMap()
-            )
-        );
-
-var expected = new
-    {
-        mappings = new
-        {
-            parent = new
-            {
-                properties = new
-                {
-                    id = new
-                    {
-                        type = "text",
-                        fields = new
-                        {
-                            keyword = new
-                            {
-                                ignore_above = 256,
-                                type = "keyword"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    };
-
-var settings = WithConnectionSettings(s => s
+var connectionSettings = new ConnectionSettings(new InMemoryConnection()) <1>
+        .DisableDirectStreaming() <2>
         .DefaultMappingFor<ParentWithStringId>(m => m
             .TypeName("parent")
             .Ignore(p => p.Description)
             .Ignore(p => p.IgnoreMe)
+        );
+
+var client = new ElasticClient(connectionSettings);
+
+var createIndexResponse = client.CreateIndex("myindex", c => c
+        .Mappings(ms => ms
+            .Map<ParentWithStringId>(m => m
+                .AutoMap()
+            )
         )
     );
+----
+<1> we're using an _in memory_ connection for this example. In your production application though, you'll want to use an `IConnection` that actually sends a request.
 
-settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+<2> we disable direct streaming here to capture the request and response bytes. In your production application however, you'll likely not want to do this, since it causes the request and response bytes to be buffered in memory.
+
+[source,javascript]
+----
+{
+  "mappings": {
+    "parent": {
+      "properties": {
+        "id": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "ignore_above": 256,
+              "type": "keyword"
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ----
 
 Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.
@@ -214,57 +217,105 @@ sub field.
 
 NEST has inferred mapping support for the following .NET types
 
-* `String` maps to `"text"` with a `"keyword"` sub field. See <<multi-fields, Multi Fields>>.
+[horizontal]
+`String`::
 
-* `Int32` maps to `"integer"`
+maps to `"text"` with a `"keyword"` sub field. See <<multi-fields, Multi Fields>>.
 
-* `UInt16` maps to `"integer"`
+`Int32`::
 
-* `Int16` maps to `"short"`
+maps to `"integer"`
 
-* `Byte` maps to `"short"`
+`UInt16`::
 
-* `Int64` maps to `"long"`
+maps to `"integer"`
 
-* `UInt32` maps to `"long"`
+`Int16`::
 
-* `TimeSpan` maps to `"long"`
+maps to `"short"`
 
-* `Single` maps to `"float"`
+`Byte`::
 
-* `Double` maps to `"double"`
+maps to `"short"`
 
-* `Decimal` maps to `"double"`
+`Int64`::
 
-* `UInt64` maps to `"double"`
+maps to `"long"`
 
-* `DateTime` maps to `"date"`
+`UInt32`::
 
-* `DateTimeOffset` maps to `"date"`
+maps to `"long"`
 
-* `Boolean` maps to `"boolean"`
+`TimeSpan`::
 
-* `Char` maps to `"keyword"`
+maps to `"long"`
 
-* `Guid` maps to `"keyword"`
+`Single`::
+
+maps to `"float"`
+
+`Double`::
+
+maps to `"double"`
+
+`Decimal`::
+
+maps to `"double"`
+
+`UInt64`::
+
+maps to `"double"`
+
+`DateTime`::
+
+maps to `"date"`
+
+`DateTimeOffset`::
+
+maps to `"date"`
+
+`Boolean`::
+
+maps to `"boolean"`
+
+`Char`::
+
+maps to `"keyword"`
+
+`Guid`::
+
+maps to `"keyword"`
 
 and supports a number of special types defined in NEST
 
-* `Nest.GeoLocation` maps to `"geo_point"`
+[horizontal]
+`Nest.GeoLocation`::
 
-* `Nest.CompletionField` maps to `"completion"`
+maps to `"geo_point"`
 
-* `Nest.Attachment` maps to `"attachment"`
+`Nest.CompletionField`::
 
-* `Nest.DateRange` maps to `"date_range"`
+maps to `"completion"`
 
-* `Nest.DoubleRange` maps to `"double_range"`
+`Nest.DateRange`::
 
-* `Nest.FloatRange` maps to `"float_range"`
+maps to `"date_range"`
 
-* `Nest.IntegerRange` maps to `"integer_range"`
+`Nest.DoubleRange`::
 
-* `Nest.LongRange` maps to `"long_range"`
+maps to `"double_range"`
+
+`Nest.FloatRange`::
+
+maps to `"float_range"`
+
+`Nest.IntegerRange`::
+
+maps to `"integer_range"`
+
+`Nest.LongRange`::
+
+maps to `"long_range"`
 
 All other types map to `"object"` by default.
 
@@ -319,10 +370,11 @@ By default, `.AutoMap()` only goes as far as depth 1
 
 [source,csharp]
 ----
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<A>(m => m.AutoMap())
-    );
+    )
+);
 ----
 
 Thus we do not map properties on the second occurrence of our Child property 
@@ -347,10 +399,11 @@ Now let's specify a maxRecursion of `3`
 
 [source,csharp]
 ----
-var withMaxRecursionDescriptor = new CreateIndexDescriptor("myindex")
+createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<A>(m => m.AutoMap(3))
-    );
+    )
+);
 ----
 
 `.AutoMap()` has now mapped three levels of our Child property 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
@@ -19,6 +20,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
     public class FluentMapping
     {
+	    private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+
         /**
 		* To demonstrate, we'll define two POCOs
         *
@@ -49,15 +52,15 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * To create a mapping for our Company type, we can use the fluent API
 			 * and map each property explicitly
 			 */
-            var descriptor = new CreateIndexDescriptor("myindex")
+            var createIndexResponse = client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<Company>(m => m
                         .Properties(ps => ps
                             .Text(s => s
-                                .Name(c => c.Name)
+                                .Name(n => n.Name)
                             )
                             .Object<Employee>(o => o
-                                .Name(c => c.Employees)
+                                .Name(n => n.Employees)
                                 .Properties(eps => eps
                                     .Text(s => s
                                         .Name(e => e.FirstName)
@@ -73,7 +76,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
                             )
                         )
                     )
-                );
+                )
+		    );
 
             /**
              * Here, the Name property of the `Company` type has been mapped as a {ref_current}/text.html[text datatype] and
@@ -120,7 +124,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             };
 
             // hide
-            Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
         }
 
         /** Manual mapping in this way is powerful but can become verbose and unwieldy for
@@ -147,17 +151,18 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             * {ref_current}/nested.html[nested datatype], since by default `.AutoMap()` will infer the
             * `List<Employee>` property as an `object` datatype
 			*/
-            var descriptor = new CreateIndexDescriptor("myindex")
+            var createIndexResponse = client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<Company>(m => m
                         .AutoMap()
                         .Properties(ps => ps
                             .Nested<Employee>(n => n
-                                .Name(c => c.Employees)
+                                .Name(nn => nn.Employees)
                             )
                         )
                     )
-                );
+                )
+		    );
 
             //json
             var expected = new
@@ -190,27 +195,28 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             };
 
             //hide
-            Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
 
             /**
 			 * `.AutoMap()` __**is idempotent**__ therefore calling it _before_ or _after_
              * manually mapped properties will still yield the same result. The next example
              * generates the same mapping as the previous
 			 */
-            descriptor = new CreateIndexDescriptor("myindex")
+            createIndexResponse = client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<Company>(m => m
                         .Properties(ps => ps
                             .Nested<Employee>(n => n
-                                .Name(c => c.Employees)
+                                .Name(nn => nn.Employees)
                             )
                         )
                         .AutoMap()
                     )
-                );
+                )
+		    );
 
             //hide
-            Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
         }
 
         /**
@@ -252,7 +258,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             public bool IsManager { get; set; }
 
             [Nested]
-            [PropertyName("empl"), JsonProperty("empl")]
+            [PropertyName("empl")]
             public List<Employee> Employees { get; set; }
         }
 
@@ -263,13 +269,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         [U]
         public void OverridingAutoMappedAttributes()
         {
-            var descriptor = new CreateIndexDescriptor("myindex")
+            var createIndexResponse = client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<CompanyWithAttributes>(m => m
                         .AutoMap() // <1> Automap company
                         .Properties(ps => ps // <2> Override company inferred mappings
                             .Nested<Employee>(n => n
-                                .Name(c => c.Employees)
+                                .Name(nn => nn.Employees)
                             )
                         )
                     )
@@ -299,7 +305,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
                             )
                         )
                     )
-                );
+                )
+		    );
 
             //json
             var expected = new
@@ -424,7 +431,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             };
 
             // hide
-            Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
         }
 
 
@@ -442,13 +449,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         [U]
         public void OverridingDescendingAutoMappedProperties()
         {
-            var descriptor = new CreateIndexDescriptor("myindex")
+            var createIndexResponse = client.CreateIndex("myindex", c => c
                 .Mappings(m => m
                     .Map<Company>(mm => mm
                         .AutoMap() // <1> Automap `Company`
                         .Properties(p => p // <2> Override specific `Company` mappings
                             .Nested<Employee>(n => n
-                                .Name(c => c.Employees)
+                                .Name(nn => nn.Employees)
                                 .AutoMap() // <3> Automap `Employees` property
                                 .Properties(pp => pp // <4> Override specific `Employee` properties
                                     .Text(t => t
@@ -464,7 +471,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
                             )
                         )
                     )
-                );
+                )
+		    );
 
             //json
             var expected = new
@@ -528,7 +536,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             };
 
             //hide
-            Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
         }
     }
 }
