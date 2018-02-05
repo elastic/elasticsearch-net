@@ -171,7 +171,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				var sniffUri = new UriBuilder(a.Node.Uri)
 				{
 					Path = RequestPipeline.SniffPath,
-					Query = "?flat_settings=true&timeout=2s"
+					Query = "flat_settings=true&timeout=2s"
 				}.Uri;
 				sniffUri.PathEquals(a.Path, nameof(SniffUrlAssert));
 			}

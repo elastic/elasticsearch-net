@@ -28,6 +28,7 @@ module Projects =
         | Nest
         | ElasticsearchNet
         | NestJsonNetSerializer
+        | ElasticsearchNetHttpWebRequestConnection
 
     type PrivateProject =
         | Tests
@@ -41,11 +42,18 @@ module Projects =
             seq [
                 Project Project.ElasticsearchNet; 
                 Project Project.Nest; 
+                Project Project.NestJsonNetSerializer;
+                Project ElasticsearchNetHttpWebRequestConnection;
                 PrivateProject PrivateProject.Tests
             ]
 
         static member AllPublishable = 
-            seq [Project Project.ElasticsearchNet; Project Project.Nest; Project Project.NestJsonNetSerializer;] 
+            seq [
+                Project Project.ElasticsearchNet; 
+                Project Project.Nest; 
+                Project Project.NestJsonNetSerializer;
+                Project ElasticsearchNetHttpWebRequestConnection;
+            ] 
         static member Tests = seq [PrivateProject PrivateProject.Tests;] 
 
         member this.Name =
@@ -55,6 +63,7 @@ module Projects =
                 | Nest -> "Nest"
                 | ElasticsearchNet -> "Elasticsearch.Net"
                 | NestJsonNetSerializer -> "Nest.JsonNetSerializer"
+                | ElasticsearchNetHttpWebRequestConnection -> "Elasticsearch.Net.Connections.HttpWebRequestConnection"
             | PrivateProject p ->
                 match p with
                 | Tests -> "Tests"

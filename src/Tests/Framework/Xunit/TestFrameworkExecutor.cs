@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using Tests.Framework;
+using Tests.Framework.Configuration;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
@@ -77,8 +78,11 @@ namespace Xunit
 			var sb = new StringBuilder("build ")
 				.Append($"seed:{config.Seed} ");
 
-			AppendExplictConfig("SourceSerializer", sb);
-			AppendExplictConfig("TypedKeys", sb);
+			AppendExplictConfig(nameof(RandomConfiguration.SourceSerializer), sb);
+			AppendExplictConfig(nameof(RandomConfiguration.TypedKeys), sb);
+#if FEATURE_HTTPWEBREQUEST
+			AppendExplictConfig(nameof(RandomConfiguration.OldConnection), sb);
+#endif
 
 			if (runningIntegrations)
 				sb.Append("integrate ")
