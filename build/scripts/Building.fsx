@@ -29,10 +29,9 @@ module Build =
     type private GlobalJson = JsonProvider<"../../global.json">
     let private pinnedSdkVersion = GlobalJson.GetSample().Sdk.Version
     if isMono then setProcessEnvironVar "TRAVIS" "true"
-
     let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS" 
 
-    let private sln = sprintf "src/Elasticsearch%s.sln" (if buildingOnTravis then ".DotNetCoreOnly" else "")
+    let private sln = "src/Elasticsearch.sln"
     
     let private compileCore incremental =
         if not (DotNetCli.isInstalled()) then failwith  "You need to install the dotnet command line SDK to build for .NET Core"
