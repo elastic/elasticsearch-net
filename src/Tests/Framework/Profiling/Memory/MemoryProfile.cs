@@ -51,3 +51,4 @@ namespace Tests.Framework.Profiling.Memory
 		}
 	}
 }
+#endif
