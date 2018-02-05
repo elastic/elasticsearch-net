@@ -50,7 +50,12 @@ namespace DocGenerator
 			//.NET core csprojects are not supported all that well.
 			// https://github.com/dotnet/roslyn/issues/21660 :sadpanda:
 			// Use Buildalyzer to get a workspace from the solution.
-			var analyzer = new AnalyzerManager(Path.Combine(Program.InputDirPath, "Elasticsearch.DotNetCoreOnly.sln"));
+			var analyzer = new AnalyzerManager(Path.Combine(Program.InputDirPath, "Elasticsearch.sln"), new[]
+			{
+				"Elasticsearch.Net",
+				"Nest",
+				"Tests"
+			});
 
 			var workspace = analyzer.GetWorkspace();
 

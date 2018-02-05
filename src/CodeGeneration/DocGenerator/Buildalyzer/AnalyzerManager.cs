@@ -47,7 +47,7 @@ namespace DocGenerator.Buildalyzer
         public string SolutionDirectory { get; }
 
         public AnalyzerManager(ILoggerFactory loggerFactory = null, LoggerVerbosity loggerVerbosity = LoggerVerbosity.Normal)
-            : this(null, loggerFactory, loggerVerbosity)
+            : this(null, null, loggerFactory, loggerVerbosity)
         {
         }
 
@@ -56,7 +56,7 @@ namespace DocGenerator.Buildalyzer
         {
         }
 
-        public AnalyzerManager(string solutionFilePath, ILoggerFactory loggerFactory = null, LoggerVerbosity loggerVerbosity = LoggerVerbosity.Normal)
+        public AnalyzerManager(string solutionFilePath, string[] projects, ILoggerFactory loggerFactory = null, LoggerVerbosity loggerVerbosity = LoggerVerbosity.Normal)
         {
             LoggerVerbosity = loggerVerbosity;
             ProjectLogger = loggerFactory?.CreateLogger<ProjectAnalyzer>();
@@ -65,7 +65,7 @@ namespace DocGenerator.Buildalyzer
             {
                 solutionFilePath = ValidatePath(solutionFilePath, true);
                 SolutionDirectory = Path.GetDirectoryName(solutionFilePath);
-                GetProjectsInSolution(solutionFilePath);
+                GetProjectsInSolution(solutionFilePath, projects);
             }
         }
 
@@ -87,8 +87,9 @@ namespace DocGenerator.Buildalyzer
             }
         }
 
-        private void GetProjectsInSolution(string solutionFilePath)
+        private void GetProjectsInSolution(string solutionFilePath, string[] projects = null)
         {
+	        projects = projects ?? new string[] { };
             var supportedType = new[]
             {
                 SolutionProjectType.KnownToBeMSBuildFormat,
@@ -98,8 +99,8 @@ namespace DocGenerator.Buildalyzer
             SolutionFile solution = SolutionFile.Parse(solutionFilePath);
             foreach(ProjectInSolution project in solution.ProjectsInOrder)
             {
-                if (!supportedType.Contains(project.ProjectType))
-                    continue;
+                if (!supportedType.Contains(project.ProjectType)) continue;
+	            if (projects.Length > 0 && !projects.Contains(project.ProjectName)) continue;
                 GetProject(project.AbsolutePath);
             }
         }
