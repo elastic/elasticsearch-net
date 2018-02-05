@@ -60,8 +60,8 @@ namespace Tests
 
 		private const string SelfProfileSdkDirectory = "dottrace-selfprofile";
 
-		private static  string SdkPath { get; }
-		private static  string OutputPath { get; }
+		private static string SdkPath { get; }
+		private static string OutputPath { get; }
 
 		public static void Main(string[] args)
 		{
