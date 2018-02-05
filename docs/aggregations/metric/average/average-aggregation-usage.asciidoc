@@ -15,6 +15,51 @@ please modify the original csharp file found at the link and submit the PR with 
 [[average-aggregation-usage]]
 === Average Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Average("average_commits", avg => avg
+    .Meta(m => m
+        .Add("foo", "bar")
+    )
+    .Field(p => p.NumberOfCommits)
+    .Missing(10)
+    .Script(ss => ss.Source("_value * 1.2"))
+)
+----
+
+[source,csharp]
+----
+new AverageAggregation("average_commits", Field<Project>(p => p.NumberOfCommits))
+{
+    Meta = new Dictionary<string, object>
+    {
+        {"foo", "bar"}
+    },
+    Missing = 10,
+    Script = new InlineScript("_value * 1.2")
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "average_commits": {
+    "meta": {
+      "foo": "bar"
+    },
+    "avg": {
+      "field": "numberOfCommits",
+      "missing": 10.0,
+      "script": {
+        "source": "_value * 1.2"
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

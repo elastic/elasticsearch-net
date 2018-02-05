@@ -15,6 +15,65 @@ please modify the original csharp file found at the link and submit the PR with 
 [[adjacency-matrix-usage]]
 === Adjacency Matrix Usage
 
+[source,csharp]
+----
+a => a
+.AdjacencyMatrix("interactions", am => am
+    .Filters(fs => fs
+        .Filter("grpA", f => f.Term(p => p.State, StateOfBeing.BellyUp))
+        .Filter("grpB", f => f.Term(p => p.State, StateOfBeing.Stable))
+        .Filter("grpC", f => f.Term(p => p.State, StateOfBeing.VeryActive))
+    )
+)
+----
+
+[source,csharp]
+----
+new AdjacencyMatrixAggregation("interactions")
+{
+    Filters = new NamedFiltersContainer
+    {
+        {"grpA", new TermQuery {Field = "state", Value = StateOfBeing.BellyUp}},
+        {"grpB", new TermQuery {Field = "state", Value = StateOfBeing.Stable}},
+        {"grpC", new TermQuery {Field = "state", Value = StateOfBeing.VeryActive}},
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "interactions": {
+    "adjacency_matrix": {
+      "filters": {
+        "grpA": {
+          "term": {
+            "state": {
+              "value": "BellyUp"
+            }
+          }
+        },
+        "grpB": {
+          "term": {
+            "state": {
+              "value": "Stable"
+            }
+          }
+        },
+        "grpC": {
+          "term": {
+            "state": {
+              "value": "VeryActive"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

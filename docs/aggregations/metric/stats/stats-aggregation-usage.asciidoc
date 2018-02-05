@@ -15,6 +15,31 @@ please modify the original csharp file found at the link and submit the PR with 
 [[stats-aggregation-usage]]
 === Stats Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Stats("commit_stats", st => st
+    .Field(p => p.NumberOfCommits)
+)
+----
+
+[source,csharp]
+----
+new StatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits))
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commit_stats": {
+    "stats": {
+      "field": "numberOfCommits"
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

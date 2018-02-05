@@ -15,6 +15,46 @@ please modify the original csharp file found at the link and submit the PR with 
 [[global-aggregation-usage]]
 === Global Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Global("all_projects", g => g
+    .Aggregations(aa => aa
+        .Terms("names", t => t
+            .Field(p => p.Name)
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new GlobalAggregation("all_projects")
+{
+    Aggregations = new TermsAggregation("names")
+    {
+        Field = Field<Project>(p => p.Name)
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "all_projects": {
+    "global": {},
+    "aggs": {
+      "names": {
+        "terms": {
+          "field": "name"
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

@@ -15,6 +15,78 @@ please modify the original csharp file found at the link and submit the PR with 
 [[reverse-nested-aggregation-usage]]
 === Reverse Nested Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Nested("tags", n => n
+    .Path(p => p.Tags)
+    .Aggregations(aa => aa
+        .Terms("tag_names", t => t
+            .Field(p => p.Tags.Suffix("name"))
+            .Aggregations(aaa => aaa
+                .ReverseNested("tags_to_project", r => r
+                    .Aggregations(aaaa => aaaa
+                        .Terms("top_projects_per_tag", tt => tt
+                            .Field(p => p.Name)
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new NestedAggregation("tags")
+{
+    Path = "tags",
+    Aggregations = new TermsAggregation("tag_names")
+    {
+        Field = "tags.name",
+        Aggregations = new ReverseNestedAggregation("tags_to_project")
+        {
+            Aggregations = new TermsAggregation("top_projects_per_tag")
+            {
+                Field = Field<Project>(p => p.Name)
+            }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "tags": {
+    "nested": {
+      "path": "tags"
+    },
+    "aggs": {
+      "tag_names": {
+        "terms": {
+          "field": "tags.name"
+        },
+        "aggs": {
+          "tags_to_project": {
+            "reverse_nested": {},
+            "aggs": {
+              "top_projects_per_tag": {
+                "terms": {
+                  "field": "name"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

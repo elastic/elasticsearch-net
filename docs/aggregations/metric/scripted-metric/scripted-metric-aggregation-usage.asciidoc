@@ -27,6 +27,51 @@ class Scripted
 }
 ----
 
+[source,csharp]
+----
+a => a
+.ScriptedMetric("sum_the_hard_way", sm => sm
+    .InitScript(ss => ss.Source(Script.Init))
+    .MapScript(ss => ss.Source(Script.Map))
+    .CombineScript(ss => ss.Source(Script.Combine))
+    .ReduceScript(ss => ss.Source(Script.Reduce))
+)
+----
+
+[source,csharp]
+----
+new ScriptedMetricAggregation("sum_the_hard_way")
+{
+    InitScript = new InlineScript(Script.Init),
+    MapScript = new InlineScript(Script.Map),
+    CombineScript = new InlineScript(Script.Combine),
+    ReduceScript = new InlineScript(Script.Reduce)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "sum_the_hard_way": {
+    "scripted_metric": {
+      "init_script": {
+        "source": "params._agg.commits = []"
+      },
+      "map_script": {
+        "source": "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }"
+      },
+      "combine_script": {
+        "source": "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum"
+      },
+      "reduce_script": {
+        "source": "def sum = 0.0; for (a in params._aggs) { sum += a } return sum"
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
@@ -35,6 +80,82 @@ response.ShouldBeValid();
 var sumTheHardWay = response.Aggregations.ScriptedMetric("sum_the_hard_way");
 sumTheHardWay.Should().NotBeNull();
 sumTheHardWay.Value<int>().Should().BeGreaterThan(0);
+----
+
+[source,csharp]
+----
+a => a
+.ScriptedMetric("by_state_total", sm => sm
+    .InitScript(ss => ss.Source(First.Init).Lang(First.Language))
+    .MapScript(ss => ss.Source(First.Map).Lang(First.Language))
+    .ReduceScript(ss => ss.Source(First.Reduce).Lang(First.Language))
+)
+.ScriptedMetric("total_commits", sm => sm
+    .InitScript(ss => ss.Source(Second.Init).Lang(Second.Language))
+    .MapScript(ss => ss.Source(Second.Map).Lang(Second.Language))
+    .CombineScript(ss => ss.Source(Second.Combine).Lang(Second.Language))
+    .ReduceScript(ss => ss.Source(Second.Reduce).Lang(Second.Language))
+)
+----
+
+[source,csharp]
+----
+new ScriptedMetricAggregation("by_state_total")
+{
+    InitScript = new InlineScript(First.Init) {Lang = First.Language},
+    MapScript = new InlineScript(First.Map) {Lang = First.Language},
+    ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
+}
+&& new ScriptedMetricAggregation("total_commits")
+{
+    InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
+    MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
+    CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
+    ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "by_state_total": {
+    "scripted_metric": {
+      "init_script": {
+        "source": "params._agg.map = [:]",
+        "lang": "painless"
+      },
+      "map_script": {
+        "source": "if (params._agg.map.containsKey(doc['state'].value)) params._agg.map[doc['state'].value] += 1 else params._agg.map[doc['state'].value] = 1;",
+        "lang": "painless"
+      },
+      "reduce_script": {
+        "source": "def reduce = [:]; for (agg in params._aggs) { for (entry in agg.map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); } } return reduce;",
+        "lang": "painless"
+      }
+    }
+  },
+  "total_commits": {
+    "scripted_metric": {
+      "init_script": {
+        "source": "params._agg.commits = []",
+        "lang": "painless"
+      },
+      "map_script": {
+        "source": "if (doc['state'].value == \"Stable\") { params._agg.commits.add(doc['numberOfCommits'].value) }",
+        "lang": "painless"
+      },
+      "combine_script": {
+        "source": "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
+        "lang": "painless"
+      },
+      "reduce_script": {
+        "source": "def sum = 0.0; for (a in params._aggs) { sum += a } return sum",
+        "lang": "painless"
+      }
+    }
+  }
+}
 ----
 
 [source,csharp]

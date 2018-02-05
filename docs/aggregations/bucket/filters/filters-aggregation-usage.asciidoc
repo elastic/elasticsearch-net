@@ -24,6 +24,83 @@ Be sure to read the Elasticsearch documentation {ref_current}/search-aggregation
 [float]
 === Named filters
 
+[source,csharp]
+----
+a => a
+.Filters("projects_by_state", agg => agg
+    .OtherBucket()
+    .OtherBucketKey("other_states_of_being")
+    .NamedFilters(filters => filters
+        .Filter("belly_up", f => f.Term(p => p.State, StateOfBeing.BellyUp))
+        .Filter("stable", f => f.Term(p => p.State, StateOfBeing.Stable))
+        .Filter("very_active", f => f.Term(p => p.State, StateOfBeing.VeryActive))
+    )
+    .Aggregations(childAggs => childAggs
+        .Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
+    )
+)
+----
+
+[source,csharp]
+----
+new FiltersAggregation("projects_by_state")
+{
+    OtherBucket = true,
+    OtherBucketKey = "other_states_of_being",
+    Filters = new NamedFiltersContainer
+    {
+        {"belly_up", Query<Project>.Term(p => p.State, StateOfBeing.BellyUp)},
+        {"stable", Query<Project>.Term(p => p.State, StateOfBeing.Stable)},
+        {"very_active", Query<Project>.Term(p => p.State, StateOfBeing.VeryActive)}
+    },
+    Aggregations =
+        new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_by_state": {
+    "filters": {
+      "other_bucket": true,
+      "other_bucket_key": "other_states_of_being",
+      "filters": {
+        "belly_up": {
+          "term": {
+            "state": {
+              "value": "BellyUp"
+            }
+          }
+        },
+        "stable": {
+          "term": {
+            "state": {
+              "value": "Stable"
+            }
+          }
+        },
+        "very_active": {
+          "term": {
+            "state": {
+              "value": "VeryActive"
+            }
+          }
+        }
+      }
+    },
+    "aggs": {
+      "project_tags": {
+        "terms": {
+          "field": "curatedTags.name.keyword"
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
@@ -57,6 +134,80 @@ namedResult.DocCount.Should().Be(0);
 [float]
 === Anonymous filters
 
+[source,csharp]
+----
+a => a
+.Filters("projects_by_state", agg => agg
+    .OtherBucket()
+    .AnonymousFilters(
+        f => f.Term(p => p.State, StateOfBeing.BellyUp),
+        f => f.Term(p => p.State, StateOfBeing.Stable),
+        f => f.Term(p => p.State, StateOfBeing.VeryActive)
+    )
+    .Aggregations(childAggs => childAggs
+        .Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
+    )
+)
+----
+
+[source,csharp]
+----
+new FiltersAggregation("projects_by_state")
+{
+    OtherBucket = true,
+    Filters = new List<QueryContainer>
+    {
+        Query<Project>.Term(p => p.State, StateOfBeing.BellyUp),
+        Query<Project>.Term(p => p.State, StateOfBeing.Stable),
+        Query<Project>.Term(p => p.State, StateOfBeing.VeryActive)
+    },
+    Aggregations =
+        new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_by_state": {
+    "filters": {
+      "other_bucket": true,
+      "filters": [
+        {
+          "term": {
+            "state": {
+              "value": "BellyUp"
+            }
+          }
+        },
+        {
+          "term": {
+            "state": {
+              "value": "Stable"
+            }
+          }
+        },
+        {
+          "term": {
+            "state": {
+              "value": "VeryActive"
+            }
+          }
+        }
+      ]
+    },
+    "aggs": {
+      "project_tags": {
+        "terms": {
+          "field": "curatedTags.name.keyword"
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
@@ -86,12 +237,73 @@ results.Last().DocCount.Should().Be(0); <1>
 
 [source,csharp]
 ----
+a => a
+.Filters("empty_filters", agg => agg
+    .AnonymousFilters()
+)
+----
+
+[source,csharp]
+----
+new FiltersAggregation("empty_filters")
+{
+    Filters = new List<QueryContainer>()
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "empty_filters": {
+    "filters": {
+      "filters": []
+    }
+  }
+}
+----
+
+[source,csharp]
+----
 response.ShouldBeValid();
 response.Aggregations.Filters("empty_filters").Buckets.Should().BeEmpty();
 ----
 
 [float]
 === Conditionless Filters 
+
+[source,csharp]
+----
+a => a
+.Filters("conditionless_filters", agg => agg
+    .AnonymousFilters(
+        q => new QueryContainer()
+    )
+)
+----
+
+[source,csharp]
+----
+new FiltersAggregation("conditionless_filters")
+{
+    Filters = new List<QueryContainer>
+    {
+        new QueryContainer()
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "conditionless_filters": {
+    "filters": {
+      "filters": []
+    }
+  }
+}
+----
 
 [source,csharp]
 ----

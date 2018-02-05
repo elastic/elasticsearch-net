@@ -15,6 +15,60 @@ please modify the original csharp file found at the link and submit the PR with 
 [[percentiles-aggregation-usage]]
 === Percentiles Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Percentiles("commits_outlier", pr => pr
+    .Field(p => p.NumberOfCommits)
+    .Percents(95, 99, 99.9)
+    .Method(m => m
+        .HDRHistogram(hdr => hdr
+            .NumberOfSignificantValueDigits(3)
+        )
+    )
+    .Script(ss => ss.Source("doc['numberOfCommits'].value * 1.2"))
+    .Missing(0)
+)
+----
+
+[source,csharp]
+----
+new PercentilesAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
+{
+    Percents = new[] {95, 99, 99.9},
+    Method = new HDRHistogramMethod
+    {
+        NumberOfSignificantValueDigits = 3
+    },
+    Script = new InlineScript("doc['numberOfCommits'].value * 1.2"),
+    Missing = 0
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commits_outlier": {
+    "percentiles": {
+      "field": "numberOfCommits",
+      "percents": [
+        95.0,
+        99.0,
+        99.9
+      ],
+      "hdr": {
+        "number_of_significant_value_digits": 3
+      },
+      "script": {
+        "source": "doc['numberOfCommits'].value * 1.2"
+      },
+      "missing": 0.0
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

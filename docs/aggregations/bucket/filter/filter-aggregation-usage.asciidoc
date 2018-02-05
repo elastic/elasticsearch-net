@@ -20,6 +20,50 @@ Often this will be used to narrow down the current aggregation context to a spec
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filter-aggregation.html[Filter Aggregation]
 
+[source,csharp]
+----
+a => a
+.Filter("bethels_projects", date => date
+    .Filter(q => q.Term(p => p.LeadDeveloper.FirstName, FirstNameToFind))
+    .Aggregations(childAggs => childAggs
+        .Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
+    )
+)
+----
+
+[source,csharp]
+----
+new FilterAggregation("bethels_projects")
+{
+    Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
+    Aggregations =
+        new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword"))}
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "bethels_projects": {
+    "filter": {
+      "term": {
+        "leadDeveloper.firstName": {
+          "value": "pierce"
+        }
+      }
+    },
+    "aggs": {
+      "project_tags": {
+        "terms": {
+          "field": "curatedTags.name.keyword"
+        }
+      }
+    }
+  }
+}
+----
+
 === Handling Responses
 
 The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
@@ -48,7 +92,79 @@ to an empty object.
 
 [source,csharp]
 ----
+a => a
+.Filter("empty_filter", date => date
+    .Filter(f => f
+        .Bool(b => b
+            .Filter(new QueryContainer[0])
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new FilterAggregation("empty_filter")
+{
+    Filter = new BoolQuery
+    {
+        Filter = new List<QueryContainer>()
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "empty_filter": {
+    "filter": {}
+  }
+}
+----
+
+[source,csharp]
+----
 response.ShouldNotBeValid();
+----
+
+[source,csharp]
+----
+a => a
+.Filter(_aggName, date => date
+    .Filter(f => f
+        .Script(b => b
+            .Source(_ctxNumberofCommits)
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new FilterAggregation(_aggName)
+{
+    Filter = new ScriptQuery
+    {
+        Source = _ctxNumberofCommits
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "script_filter": {
+    "filter": {
+      "script": {
+        "script": {
+          "source": "_source.numberOfCommits > 0"
+        }
+      }
+    }
+  }
+}
 ----
 
 [source,csharp]

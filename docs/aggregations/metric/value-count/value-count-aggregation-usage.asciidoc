@@ -15,6 +15,31 @@ please modify the original csharp file found at the link and submit the PR with 
 [[value-count-aggregation-usage]]
 === Value Count Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.ValueCount("commit_count", c => c
+    .Field(p => p.NumberOfCommits)
+)
+----
+
+[source,csharp]
+----
+new ValueCountAggregation("commit_count", Field<Project>(p => p.NumberOfCommits))
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commit_count": {
+    "value_count": {
+      "field": "numberOfCommits"
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

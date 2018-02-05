@@ -228,7 +228,6 @@ return s => s
         );
 ----
 <1> a list of aggregation functions to apply
-
 <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
 
 [[handling-aggregate-response]]
@@ -239,6 +238,18 @@ The `SearchResponse` exposes an `AggregateDictionary` which is specialized dicti
 exposes handy helper methods that automatically cast `IAggregate` to the expected aggregate response.
 
 Let's see this in action:
+
+[source,csharp]
+----
+a => a
+.Children<CommitActivity>("name_of_child_agg", child => child
+    .Aggregations(childAggs => childAggs
+        .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+        .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+        .Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+    )
+)
+----
 
 Now, using `.Aggregations`, we can easily get the `Children` aggregation response out and from that,
 the `Average` and `Max` sub aggregations.
@@ -260,6 +271,5 @@ var maxPerChild = childAggregation.Max("max_per_child");
 maxPerChild.Should().NotBeNull(); <2>
 ----
 <1> Do something with the average per child. Here we just assert it's not null
-
 <2> Do something with the max per child. Here we just assert it's not null
 

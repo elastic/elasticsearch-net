@@ -15,6 +15,36 @@ please modify the original csharp file found at the link and submit the PR with 
 [[cardinality-aggregation-usage]]
 === Cardinality Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Cardinality("state_count", c => c
+    .Field(p => p.State)
+    .PrecisionThreshold(100)
+)
+----
+
+[source,csharp]
+----
+new CardinalityAggregation("state_count", Field<Project>(p => p.State))
+{
+    PrecisionThreshold = 100
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "state_count": {
+    "cardinality": {
+      "field": "state",
+      "precision_threshold": 100
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

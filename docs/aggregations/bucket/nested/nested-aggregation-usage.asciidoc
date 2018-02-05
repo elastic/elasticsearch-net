@@ -15,6 +15,50 @@ please modify the original csharp file found at the link and submit the PR with 
 [[nested-aggregation-usage]]
 === Nested Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Nested("tags", n => n
+    .Path(p => p.Tags)
+    .Aggregations(aa => aa
+        .Terms("tag_names", t => t
+            .Field(p => p.Tags.Suffix("name"))
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new NestedAggregation("tags")
+{
+    Path = "tags",
+    Aggregations = new TermsAggregation("tag_names")
+    {
+        Field = "tags.name"
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "tags": {
+    "nested": {
+      "path": "tags"
+    },
+    "aggs": {
+      "tag_names": {
+        "terms": {
+          "field": "tags.name"
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

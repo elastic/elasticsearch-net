@@ -27,6 +27,50 @@ As a result, the API for this feature may change in non-backwards compatible way
 
 See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-significantterms-aggregation.html[significant terms aggregation] for more detail.
 
+[source,csharp]
+----
+a => a
+.SignificantTerms("significant_names", st => st
+    .Field(p => p.Name)
+    .MinimumDocumentCount(10)
+    .MutualInformation(mi => mi
+        .BackgroundIsSuperSet()
+        .IncludeNegatives()
+    )
+)
+----
+
+[source,csharp]
+----
+new SignificantTermsAggregation("significant_names")
+{
+    Field = Field<Project>(p => p.Name),
+    MinimumDocumentCount = 10,
+    MutualInformation = new MutualInformationHeuristic
+    {
+        BackgroundIsSuperSet = true,
+        IncludeNegatives = true
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "significant_names": {
+    "significant_terms": {
+      "field": "name",
+      "min_doc_count": 10,
+      "mutual_information": {
+        "background_is_superset": true,
+        "include_negatives": true
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
@@ -45,6 +89,53 @@ Using significant terms aggregation with filtering to include values using a reg
 
 [source,csharp]
 ----
+a => a
+.SignificantTerms("significant_names", st => st
+    .Field(p => p.Name)
+    .MinimumDocumentCount(10)
+    .MutualInformation(mi => mi
+        .BackgroundIsSuperSet()
+        .IncludeNegatives()
+    )
+    .Include("pi*")
+)
+----
+
+[source,csharp]
+----
+new SignificantTermsAggregation("significant_names")
+{
+    Field = Field<Project>(p => p.Name),
+    MinimumDocumentCount = 10,
+    MutualInformation = new MutualInformationHeuristic
+    {
+        BackgroundIsSuperSet = true,
+        IncludeNegatives = true
+    },
+    Include = new SignificantTermsIncludeExclude("pi*")
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "significant_names": {
+    "significant_terms": {
+      "field": "name",
+      "min_doc_count": 10,
+      "mutual_information": {
+        "background_is_superset": true,
+        "include_negatives": true
+      },
+      "include": "pi*"
+    }
+  }
+}
+----
+
+[source,csharp]
+----
 response.ShouldBeValid();
 var sigNames = response.Aggregations.SignificantTerms("significant_names");
 sigNames.Should().NotBeNull();
@@ -56,6 +147,55 @@ sigNames.DocCount.Should().BeGreaterThan(0);
 == Filtering with exact values
 
 Using significant terms aggregation with filtering to exclude specific values
+
+[source,csharp]
+----
+a => a
+.SignificantTerms("significant_names", st => st
+    .Field(p => p.Name)
+    .MinimumDocumentCount(10)
+    .MutualInformation(mi => mi
+        .BackgroundIsSuperSet()
+        .IncludeNegatives()
+    )
+    .Exclude(new[] {"pierce"})
+)
+----
+
+[source,csharp]
+----
+new SignificantTermsAggregation("significant_names")
+{
+    Field = Field<Project>(p => p.Name),
+    MinimumDocumentCount = 10,
+    MutualInformation = new MutualInformationHeuristic
+    {
+        BackgroundIsSuperSet = true,
+        IncludeNegatives = true
+    },
+    Exclude = new SignificantTermsIncludeExclude(new[] {"pierce"})
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "significant_names": {
+    "significant_terms": {
+      "field": "name",
+      "min_doc_count": 10,
+      "mutual_information": {
+        "background_is_superset": true,
+        "include_negatives": true
+      },
+      "exclude": [
+        "pierce"
+      ]
+    }
+  }
+}
+----
 
 [source,csharp]
 ----
