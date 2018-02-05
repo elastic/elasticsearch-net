@@ -26,7 +26,8 @@ namespace DocGenerator.Documentation.Files
 		{
 			var testFullPath = this.FileLocation.FullName;
 
-			var testInDocumenationFolder = Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "")
+			var p = "\\" + Path.DirectorySeparatorChar.ToString();
+			var testInDocumenationFolder = Regex.Replace(testFullPath, $@"(^.+{p}Tests{p}|\" + this.Extension + "$)", "")
 				.PascalToHyphen() + this.Extension;
 
 			var documentationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputDirPath, testInDocumenationFolder));
