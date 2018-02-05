@@ -71,6 +71,7 @@ namespace Tests
 			var arguments = args.Skip(1).ToArray();
 			if (args[0].Equals("Profile", StringComparison.OrdinalIgnoreCase))
 			{
+#if FEATURE_PROFILING
 				var configuration = ProfileConfiguration.Parse(arguments);
 				Console.WriteLine("Running Profiling with the following:");
 				Console.WriteLine($"- SdkPath: {SdkPath}");
@@ -85,6 +86,12 @@ namespace Tests
 						profilingFactory.RunAsync(configuration).Wait();
 					}
 				}
+#else
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine("Tests.exe is not built with Profiling support");
+				Console.ResetColor();
+				Environment.Exit(9);
+#endif
 			}
 			else if (args[0].Equals("Benchmark", StringComparison.OrdinalIgnoreCase))
 			{
@@ -105,13 +112,14 @@ namespace Tests
 			}
 		}
 
+#if FEATURE_PROFILING
 		private static IEnumerable<IProfileFactory> CreateProfilingFactory(ClusterBase cluster)
 		{
 			yield return new PerformanceProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());
 			yield return new TimelineProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());
 			yield return new MemoryProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());
 		}
-
+#endif
 		private static Type[] GetBenchmarkTypes()
 		{
 			IEnumerable<Type> types;

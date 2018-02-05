@@ -1,5 +1,6 @@
 using System.IO;
 using System.Threading;
+#if FEATURE_PROFILING
 using JetBrains.Profiler.Windows.Api;
 using JetBrains.Profiler.Windows.SelfApi;
 using JetBrains.Profiler.Windows.SelfApi.Config;

@@ -205,6 +205,7 @@ module Commandline =
             setBuildParam "first" firstVersionOrPath
             setBuildParam "second" secondVersionOrPath         
 
+        | ["touch"; ] -> ignore()
         | ["temp"; ] -> ignore()
         | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->

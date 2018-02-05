@@ -34,6 +34,7 @@ open Differ.Differ
 
 Commandline.parse()
 
+Target "Touch" <| fun _ -> traceHeader "Touching build"
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
 Target "Start" <| fun _ -> 
     match (isMono, Commandline.validMonoTarget) with
@@ -134,6 +135,7 @@ Target "Diff" <| fun _ ->
 "Build"
   ==> "Release"
   
+"Touch"
 "Start"
   ==> "Clean"
   ==> "Diff"
