@@ -77,57 +77,64 @@ Now we can pass an instance of our custom visitor to `.AutoMap()`
 
 [source,csharp]
 ----
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
-    );
+    )
+);
 ----
 
 and any time the client maps a property of the POCO (Employee in this example) as a number (INumberProperty) or boolean (IBooleanProperty),
 it will apply the transformation defined in each `Visit()` call respectively, which in this example
 disables {ref_current}/doc-values.html[doc_values].
 
-[source,csharp]
+[source,javascript]
 ----
-var expected = new
 {
-    mappings = new
-    {
-        employee = new
-        {
-            properties = new
-            {
-                birthday = new
-                {
-                    type = "date"
-                },
-                employees = new
-                {
-                    properties = new { },
-                    type = "object"
-                },
-                firstName = new
-                {
-                    type = "string"
-                },
-                isManager = new
-                {
-                    doc_values = false,
-                    type = "boolean"
-                },
-                lastName = new
-                {
-                    type = "string"
-                },
-                salary = new
-                {
-                    doc_values = false,
-                    type = "integer"
-                }
+  "mappings": {
+    "employee": {
+      "properties": {
+        "birthday": {
+          "type": "date"
+        },
+        "employees": {
+          "properties": {},
+          "type": "object"
+        },
+        "firstName": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
             }
+          }
+        },
+        "isManager": {
+          "doc_values": false,
+          "type": "boolean"
+        },
+        "lastName": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "salary": {
+          "doc_values": false,
+          "type": "integer"
+        },
+        "hours": {
+          "doc_values": false,
+          "type": "long"
         }
+      }
     }
-};
+  }
+}
 ----
 
 ==== Visiting on PropertyInfo
@@ -144,10 +151,11 @@ public class EverythingIsATextPropertyVisitor : NoopPropertyVisitor
     public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => new TextProperty();
 }
 
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
         .Mappings(ms => ms
             .Map<Employee>(m => m.AutoMap(new EverythingIsATextPropertyVisitor()))
-        );
+        )
+    );
 ----
 
 [source,javascript]
@@ -185,7 +193,9 @@ var descriptor = new CreateIndexDescriptor("myindex")
 
 ==== Skip properties
 
-Through implementing `SkipProperty` on the visitor you can prevent certain properties from being mapped
+Through implementing `SkipProperty` on the visitor, you can prevent certain properties from being mapped.
+
+In this example, we skip the inherited properties of the type from which `DictionaryDocument` is derived
 
 [source,csharp]
 ----
@@ -202,10 +212,11 @@ public class IgnoreInheritedPropertiesVisitor<T>  : NoopPropertyVisitor
     }
 }
 
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
         .Mappings(ms => ms
             .Map<DictionaryDocument>(m => m.AutoMap(new IgnoreInheritedPropertiesVisitor<DictionaryDocument>()))
-        );
+        )
+    );
 ----
 
 [source,javascript]
