@@ -25,6 +25,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
     public class MultiFields
     {
+	    private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+
         public class Person
         {
             public string Name { get; set; }
@@ -39,14 +41,16 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         [U]
         public void DefaultMultiFields()
         {
-            var descriptor = new CreateIndexDescriptor("myindex")
+            var createIndexResponse = client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<Person>(m => m
                         .AutoMap()
                     )
-                );
+                )
+		    );
 
             /**
+             * This results in the following JSON request
              */
             //json
             var expected = new
@@ -75,20 +79,16 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             };
 
             //hide
-            Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
         }
 
         /**
          * This is useful because the property can be used for both full text search
          * as well as for structured search, sorting and aggregations
          */
-
         [U]
         public void Searching()
         {
-            // hide
-            var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
-
             var searchResponse = client.Search<Person>(s => s
                 .Query(q => q
                     .Match(m => m
@@ -141,7 +141,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             };
 
             // hide
-            JObject.DeepEquals(JObject.FromObject(expected), JObject.Parse(Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes))).Should().BeTrue();
+            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes));
         }
 
 
@@ -161,7 +161,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         [U]
         public void CreatingMultiFields()
         {
-            var descriptor = new CreateIndexDescriptor("myindex")
+            var createIndexResponse = client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<Person>(m => m
                         .Properties(p => p
@@ -184,7 +184,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
                             )
                         )
                     )
-                );
+                )
+		    );
 
             /**
              */
@@ -225,7 +226,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             };
 
             //hide
-            Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
         }
     }
 }
