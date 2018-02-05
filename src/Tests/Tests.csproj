@@ -2,11 +2,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netcoreapp2.0;net46</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.0</TargetFrameworks>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <StartupObject>Tests.BenchmarkProgram</StartupObject>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
+    <DefineConstants Condition="'$(TargetFramework)'=='net46'">$(DefineConstants);FEATURE_HTTPWEBREQUEST</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TestPackageVersion)'!=''">
     <RestoreSources>../../build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
@@ -15,17 +17,18 @@
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
     <PackageReference Include="NEST" Version="$(TestPackageVersion)" />
     <PackageReference Include="NEST.JsonNetSerializer" Version="$(TestPackageVersion)" />
-    <PackageReference Include="Elasticsearch.Net.Connections.HttpWebRequestConnection" Version="$(TestPackageVersion)" />
+    <PackageReference Condition="'$(TargetFramework)'=='net46'" Include="Elasticsearch.Net.Connections.HttpWebRequestConnection" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
     <ProjectReference Include="..\Nest\Nest.csproj" />
     <ProjectReference Include="..\Serializers\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
-    <ProjectReference Include="..\Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj" />
+    <ProjectReference Condition="'$(TargetFramework)'=='net46'" Include="..\Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
   </ItemGroup>
   <ItemGroup>
+    <!-- These get placed into build\tools by FAKE from our command line build -->
     <Reference Include="..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll" />
     <Reference Include="..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.Api.dll" />
     <Reference Include="..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.SelfApi.dll" />

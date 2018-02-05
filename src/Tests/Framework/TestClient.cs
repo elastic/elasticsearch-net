@@ -13,6 +13,11 @@ using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.MockData;
 using Tests.Framework.Versions;
 
+#if FEATURE_HTTPWEBREQUEST
+using Elasticsearch.Net.Connections.HttpWebRequestConnection;
+#endif
+
+
 namespace Tests.Framework
 {
 	public static class TestClient
@@ -44,8 +49,8 @@ namespace Tests.Framework
 			// If running the classic .NET solution, tests run from bin/{config} directory,
 			// but when running DNX solution, tests run from the test project root
 			var yamlConfigurationPath = (directoryInfo.Name == "Tests"
-				&& directoryInfo.Parent != null
-				&& directoryInfo.Parent.Name == "src")
+			                             && directoryInfo.Parent != null
+			                             && directoryInfo.Parent.Name == "src")
 				? "."
 				: @"../../../";
 
@@ -62,8 +67,8 @@ namespace Tests.Framework
 
 		private static int ConnectionLimitDefault =>
 			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out int x)
-			? x
-			: ConnectionConfiguration.DefaultConnectionLimit;
+				? x
+				: ConnectionConfiguration.DefaultConnectionLimit;
 
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
@@ -118,7 +123,6 @@ namespace Tests.Framework
 			//anything else fails but we want to know e.g 2.4.5-SNAPSHOT satisfied by <5.0.0;
 			var wholeVersion = $"{version.Major}.{version.Minor}.{version.Patch}";
 			return versionRange.IsSatisfied(wholeVersion);
-
 		}
 
 		public static bool VersionUnderTestSatisfiedBy(string range) =>
@@ -142,16 +146,15 @@ namespace Tests.Framework
 			{
 				if (sourceSerializerFactory != null) return sourceSerializerFactory(builtin, values);
 
-                return !Configuration.Random.SourceSerializer
-                	? null
-	                : new TestSourceSerializerBase(builtin, values);
+				return !Configuration.Random.SourceSerializer
+					? null
+					: new TestSourceSerializerBase(builtin, values);
 			}, propertyMappingProvider);
 
 			var defaultSettings = DefaultSettings(s);
 
 			modifySettings = modifySettings ?? ((m) =>
 			{
-
 				//only enable debug mode when running in DEBUG mode (always) or optionally wheter we are executing unit tests
 				//during RELEASE builds tests
 #if !DEBUG
@@ -177,7 +180,7 @@ namespace Tests.Framework
 			new ElasticClient(
 				CreateSettings(modifySettings, forceInMemory: true, sourceSerializerFactory: sourceSerializerFactory,
 					propertyMappingProvider: propertyMappingProvider)
-				);
+			);
 
 		public static IElasticClient GetClient(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
@@ -191,14 +194,21 @@ namespace Tests.Framework
 		public static IElasticClient GetClient(
 			Func<Uri, IConnectionPool> createPool,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
-
 			int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, createPool: createPool));
 
 		public static IConnection CreateConnection(ConnectionSettings settings = null, bool forceInMemory = false) =>
-			Configuration.RunIntegrationTests && !forceInMemory
-				? ((IConnection) new HttpConnection())
-				: new InMemoryConnection();
+			Configuration.RunIntegrationTests && !forceInMemory ? CreateLiveConnection() : new InMemoryConnection();
+
+		private static IConnection CreateLiveConnection()
+		{
+#if FEATURE_HTTPWEBREQUEST
+			if (Configuration.Random.OldConnection) return new HttpWebRequestConnection();
+			return new HttpConnection();
+#else
+			return new HttpConnection();
+#endif
+		}
 
 		public static IElasticClient GetFixedReturnClient(
 			object response,
@@ -221,8 +231,10 @@ namespace Tests.Framework
 			var serializer = Default.RequestResponseSerializer;
 			byte[] fixedResult = null;
 			if (response is string s) fixedResult = Encoding.UTF8.GetBytes(s);
-			else if (contentType == RequestData.MimeType) fixedResult = serializer.SerializeToBytes(response);
-			else fixedResult = Encoding.UTF8.GetBytes(response.ToString());
+			else if (contentType == RequestData.MimeType)
+				fixedResult = serializer.SerializeToBytes(response);
+			else
+				fixedResult = Encoding.UTF8.GetBytes(response.ToString());
 
 			var connection = new InMemoryConnection(fixedResult, statusCode, exception, contentType);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));

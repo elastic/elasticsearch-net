@@ -42,6 +42,7 @@ namespace Xunit
 			WriteLine($" - Random:");
 			WriteLine($" \t- {nameof(config.Random.SourceSerializer)}: {config.Random.SourceSerializer}");
 			WriteLine($" \t- {nameof(config.Random.TypedKeys)}: {config.Random.TypedKeys}");
+			WriteLine($" \t- {nameof(config.Random.OldConnection)}: {config.Random.OldConnection}");
 			WriteLine(new string('-', 20));
 
 

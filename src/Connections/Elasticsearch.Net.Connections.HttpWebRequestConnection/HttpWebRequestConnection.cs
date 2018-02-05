@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if FEATURE_HTTPWEBREQUEST
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -9,11 +10,14 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+#endif
 
-//THIS FILE is included as <None/> on non windows platforms and won't actually compile.
-
-namespace Elasticsearch.Net.Connections.WebRequestConnection
+namespace Elasticsearch.Net.Connections.HttpWebRequestConnection
 {
+
+#if !FEATURE_HTTPWEBREQUEST
+	public class HttpWebRequestConnection : HttpConnection {}
+#else
 	public class HttpWebRequestConnection : IConnection
 	{
 		internal static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
@@ -275,4 +279,5 @@ namespace Elasticsearch.Net.Connections.WebRequestConnection
 
 		protected virtual void DisposeManagedResources() { }
 	}
+#endif
 }
