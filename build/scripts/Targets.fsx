@@ -79,8 +79,8 @@ Target "Release" <| fun _ ->
 
 Target "TestNugetPackage" <| fun _ -> 
     //RunReleaseUnitTests restores the canary nugetpackages in tests, since these end up being cached
-    //its too evasive to run on development machines.
-    if isLocalBuild then Tests.RunUnitTests()
+    //its too evasive to run on development machines or TC, Run only on AppVeyor containers.
+    if buildServer <> AppVeyor then Tests.RunUnitTests()
     else Tests.RunReleaseUnitTests()
     
 Target "Canary" <| fun _ -> 
