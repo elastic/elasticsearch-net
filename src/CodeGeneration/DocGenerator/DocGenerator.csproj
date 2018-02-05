@@ -5,22 +5,16 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
-    <NoWarn>NU1701</NoWarn>
+    <NoWarn>NU1701,NU1605</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="2.3.2" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.2" />
     <ProjectReference Include="..\..\Nest\Nest.csproj" />
     <PackageReference Include="AsciiDocNet" Version="1.0.0-alpha5" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.3.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic" Version="2.3.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.3.2" />
-    <PackageReference Include="Microsoft.Build" Version="15.3.409" />
     <PackageReference Include="Microsoft.Build.Runtime" Version="15.3.409" />
-    <PackageReference Include="Microsoft.Build.Framework" Version="15.3.409" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="15.3.409" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.3.409" />
     <PackageReference Include="NuDoq" Version="1.2.5" />
-    <PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
   </ItemGroup>
   <Import Project="..\..\outputpath.props" />

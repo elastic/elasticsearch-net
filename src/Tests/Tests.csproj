@@ -15,10 +15,12 @@
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
     <PackageReference Include="NEST" Version="$(TestPackageVersion)" />
     <PackageReference Include="NEST.JsonNetSerializer" Version="$(TestPackageVersion)" />
+    <PackageReference Include="Elasticsearch.Net.Connections.HttpWebRequestConnection" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
     <ProjectReference Include="..\Nest\Nest.csproj" />
     <ProjectReference Include="..\Serializers\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
+    <ProjectReference Include="..\Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />

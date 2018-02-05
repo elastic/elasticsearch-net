@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+//THIS FILE is included as <None/> on non windows platforms and won't actually compile.
+
 namespace Elasticsearch.Net.Connections.WebRequestConnection
 {
 	public class HttpWebRequestConnection : IConnection

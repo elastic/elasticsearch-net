@@ -14,7 +14,7 @@
     <!-- File version reflects actual version number without prelease since that not allowed in its struct -->
     <FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
 
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly Condition="'$(OS)' == 'Windows_NT'">true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\keys\keypair.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>

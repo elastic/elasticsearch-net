@@ -2,11 +2,16 @@
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="..\..\..\build\Clients.Common.targets" />
   <PropertyGroup>
-    <TargetFrameworks>net46</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">net46</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
     <!--<CopyLocalLockFileAssemblies Condition="'$(TargetFramework)'=='netstandard1.3'">true</CopyLocalLockFileAssemblies>-->
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
+    <Compile Condition="'$(OS)' != 'Windows_NT'" Remove="HttpWebRequestConnection.cs" />
+    <Compile Condition="'$(OS)' == 'Windows_NT'" Remove="FakeHttpWebRequestConnection.cs" />
+    <None Condition="'$(OS)' != 'Windows_NT'" Include="HttpWebRequestConnection.cs" />
+    <None Condition="'$(OS)' == 'Windows_NT'" Remove="FakeHttpWebRequestConnection.cs" />
   </ItemGroup>
   <Import Project="..\..\outputpath.props" />
 </Project>
