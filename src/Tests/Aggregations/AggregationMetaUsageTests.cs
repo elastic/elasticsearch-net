@@ -23,15 +23,15 @@ namespace Tests.Aggregations
 			{
 				min = new
 				{
-					field = "lastActivity",
-					meta = new
+					field = "lastActivity"
+				},
+				meta = new
+				{
+					meta_1 = "value_1",
+					meta_2 = 2,
+					meta_3 = new
 					{
-						meta_1 = "value_1",
-						meta_2 = 2,
-						meta_3 = new
-						{
-							meta_3 = "value_3"
-						}
+						meta_3 = "value_3"
 					}
 				}
 			}
