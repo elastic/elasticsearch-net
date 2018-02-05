@@ -19,7 +19,7 @@ namespace DocGenerator
 				
                 InputDirPath = P(@"..\..\");
 				OutputDirPath = P(@"..\..\..\docs");
-                BuildOutputPath = P(@"..\..\..\build\output");
+                BuildOutputPath = P(@"..\..\..\src");
 			}
 			else
 			{
