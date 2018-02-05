@@ -56,7 +56,16 @@ namespace Nest
 #if DOTNETCORE
 			return type.GetTypeInfo().IsValueType;
 #else
-		return type.IsValueType;
+			return type.IsValueType;
+#endif
+		}
+
+		internal static bool IsClass(this Type type)
+		{
+#if DOTNETCORE
+			return type.GetTypeInfo().IsClass;
+#else
+			return type.IsClass;
 #endif
 		}
 

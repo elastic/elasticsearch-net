@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -152,11 +153,10 @@ namespace Nest
 
 	internal static class PropertiesExtensions
 	{
-		internal static IProperties AutoMap<T>(this IProperties existingProperties, IPropertyVisitor visitor = null, int maxRecursion = 0)
-			where T : class
+		internal static IProperties AutoMap(this IProperties existingProperties, Type documentType, IPropertyVisitor visitor = null, int maxRecursion = 0)
 		{
 			var properties = new Properties();
-			var autoProperties = new PropertyWalker(typeof(T), visitor, maxRecursion).GetProperties();
+			var autoProperties = new PropertyWalker(documentType, visitor, maxRecursion).GetProperties();
 			foreach (var autoProperty in autoProperties)
 				properties[autoProperty.Key] = autoProperty.Value;
 
@@ -168,5 +168,8 @@ namespace Nest
 
 			return properties;
 		}
+
+		internal static IProperties AutoMap<T>(this IProperties existingProperties, IPropertyVisitor visitor = null, int maxRecursion = 0)
+			where T : class => existingProperties.AutoMap(typeof(T), visitor, maxRecursion);
 	}
 }
