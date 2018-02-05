@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net.Connections.WebRequestConnection
 {
-	public class WebRequestConnection : IConnection
+	public class HttpWebRequestConnection : IConnection
 	{
 		internal static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
 
-		static WebRequestConnection()
+		static HttpWebRequestConnection()
 		{
 			//Not available under mono
 			if (!IsMono) HttpWebRequest.DefaultMaximumErrorResponseLength = -1;

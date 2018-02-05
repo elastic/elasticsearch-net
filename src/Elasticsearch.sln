@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.JsonNetSerializer", "S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connections", "Connections", "{694887B9-6687-4AB1-BE30-2877656DF55D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connections.WebRequestConnection", "Connections\Elasticsearch.Net.Connections.WebRequestConnection\Elasticsearch.Net.Connections.WebRequestConnection.csproj", "{A44DBED2-D976-4CDE-8E26-DC60B49EF92F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connections.HttpWebRequestConnection", "Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj", "{A44DBED2-D976-4CDE-8E26-DC60B49EF92F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
