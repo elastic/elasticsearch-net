@@ -42,6 +42,7 @@ namespace Nest
 
 	public class ScriptDescriptor : DescriptorBase<ScriptDescriptor, IDescriptor>
 	{
+		[Obsolete("Removed in NEST 6.x.")]
 		public FileScriptDescriptor File(string file) => new FileScriptDescriptor(file);
 
 		public IndexedScriptDescriptor Indexed(string id) => new IndexedScriptDescriptor(id);

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[Obsolete("Removed in NEST 6.x")]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<TemplateQuery>))]
 	public interface ITemplateQuery : IQuery
@@ -18,9 +19,10 @@ namespace Nest
 		Id Id { get; set; }
 
 		[JsonProperty("params")]
-		IDictionary<string, object> Params { get; set; } 
+		IDictionary<string, object> Params { get; set; }
 	}
 
+	[Obsolete("Removed in NEST 6.x")]
 	public class TemplateQuery : QueryBase, ITemplateQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
@@ -33,7 +35,8 @@ namespace Nest
 		internal static bool IsConditionless(ITemplateQuery q) => q.File.IsNullOrEmpty() && q.Id == null && q.Inline.IsNullOrEmpty();
 	}
 
-	public class TemplateQueryDescriptor<T> 
+	[Obsolete("Removed in NEST 6.x")]
+	public class TemplateQueryDescriptor<T>
 		: QueryDescriptorBase<TemplateQueryDescriptor<T>, ITemplateQuery>
 		, ITemplateQuery where T : class
 	{

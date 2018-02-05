@@ -44,6 +44,7 @@ namespace Nest
 
 	public class ScriptTransformDescriptor : DescriptorBase<ScriptTransformDescriptor, IDescriptor>
 	{
+		[Obsolete("Removed in NEST 6.x.")]
 		public FileScriptTransformDescriptor File(string file) => new FileScriptTransformDescriptor(file);
 
 		public IndexedScriptTransformDescriptor Indexed(string id) => new IndexedScriptTransformDescriptor(id);

@@ -27,6 +27,7 @@ namespace Nest
 
 	public class ScriptConditionDescriptor : DescriptorBase<ScriptConditionDescriptor, IDescriptor>
 	{
+		[Obsolete("Removed in NEST 6.x.")]
 		public FileScriptConditionDescriptor File(string file) => new FileScriptConditionDescriptor(file);
 
 		public IndexedScriptConditionDescriptor Indexed(string id) => new IndexedScriptConditionDescriptor(id);

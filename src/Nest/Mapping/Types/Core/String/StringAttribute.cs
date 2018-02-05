@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use Text or Keyword attribute instead.")]
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in NEST 6.x.  For newly created indices, use Text or Keyword attribute instead.")]
 	public class StringAttribute : ElasticsearchDocValuesPropertyAttributeBase, IStringProperty
 	{
 		IStringProperty Self => this;
@@ -41,7 +41,7 @@ namespace Nest
 		public bool Fielddata { get { return Self.FielddataUpgrade.GetValueOrDefault(true); } set { Self.FielddataUpgrade = value; } }
 		public bool EagerGlobalOrdinals { get { return Self.EagerGlobalOrdinals.GetValueOrDefault(true); } set { Self.EagerGlobalOrdinals = value; } }
 
-		[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use Text or Keyword attribute instead.")]
+		[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in NEST 6.x.  For newly created indices, use Text or Keyword attribute instead.")]
 		public StringAttribute() : base("string") { }
 	}
 }

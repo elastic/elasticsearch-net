@@ -21,6 +21,7 @@ namespace Nest
 		[JsonProperty("bucket")]
 		string Bucket { get; set; }
 
+		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("region")]
 		string Region { get; set; }
 
@@ -53,6 +54,7 @@ namespace Nest
 		}
 
 		public string Bucket { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		public string Region { get; set; }
 		public string BasePath { get; set; }
 		public string AccessKey { get; set; }
@@ -62,10 +64,11 @@ namespace Nest
 		public string ChunkSize { get; set; }
 	}
 
-	public class S3RepositorySettingsDescriptor 
+	public class S3RepositorySettingsDescriptor
 		: DescriptorBase<S3RepositorySettingsDescriptor, IS3RepositorySettings>, IS3RepositorySettings
 	{
 		string IS3RepositorySettings.Bucket { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		string IS3RepositorySettings.Region { get; set; }
 		string IS3RepositorySettings.BasePath { get; set; }
 		string IS3RepositorySettings.AccessKey { get; set; }
@@ -85,6 +88,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="region"></param>
 		/// <returns></returns>
+		[Obsolete("Removed in NEST 6.x.")]
 		public S3RepositorySettingsDescriptor Region(string region) => Assign(a => a.Region = region);
 
 		/// <summary>
@@ -109,7 +113,7 @@ namespace Nest
 		public S3RepositorySettingsDescriptor SecretKey(string secretKey) => Assign(a => a.SecretKey = secretKey);
 
 		/// <summary>
-		/// When set to true metadata files are stored in compressed format. This setting doesn't 
+		/// When set to true metadata files are stored in compressed format. This setting doesn't
 		/// affect index files that are already compressed by default. Defaults to false.
 		/// </summary>
 		/// <param name="compress"></param>
@@ -122,15 +126,15 @@ namespace Nest
 		public S3RepositorySettingsDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 
 		/// <summary>
-		///  Big files can be broken down into chunks during snapshotting if needed. 
-		/// The chunk size can be specified in bytes or by using size value notation, 
+		///  Big files can be broken down into chunks during snapshotting if needed.
+		/// The chunk size can be specified in bytes or by using size value notation,
 		/// i.e. 1g, 10m, 5k. Defaults to 100m.
 		/// </summary>
 		/// <param name="chunkSize"></param>
 		public S3RepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
 	}
 
-	public class S3RepositoryDescriptor 
+	public class S3RepositoryDescriptor
 		: DescriptorBase<S3RepositoryDescriptor, IS3Repository>, IS3Repository
 	{
 		string ISnapshotRepository.Type { get; } = "s3";

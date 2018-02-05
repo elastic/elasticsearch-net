@@ -23,6 +23,7 @@ namespace Nest
 		/// <summary>
 		/// The script file to refer to
 		/// </summary>
+		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("file")]
 		string File { get; set; }
 
@@ -61,6 +62,7 @@ namespace Nest
 		/// <summary>
 		/// The script file to refer to
 		/// </summary>
+		[Obsolete("Removed in NEST 6.x.")]
 		public string File { get; set; }
 
 		/// <summary>
@@ -88,6 +90,7 @@ namespace Nest
 		protected override string Name => "script";
 
 		string IScriptProcessor.Lang { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		string IScriptProcessor.File{ get; set; }
 		string IScriptProcessor.Id{ get; set; }
 		string IScriptProcessor.Inline { get; set; }
@@ -101,6 +104,7 @@ namespace Nest
 		/// <summary>
 		/// The script file to refer to
 		/// </summary>
+		[Obsolete("Removed in NEST 6.x.")]
 		public ScriptProcessorDescriptor File(string file) => Assign(a => a.File = file);
 
 		/// <summary>
