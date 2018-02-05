@@ -105,7 +105,7 @@ namespace Nest
 				aggregate = GetPercentilesAggregate(reader, serializer, oldFormat: true);
 
 			var meta = propertyName == Parser.Meta
-				? GetMetadata(reader)
+				? GetMetadata(serializer, reader)
 				: null;
 
 			if (aggregate != null)
@@ -183,19 +183,12 @@ namespace Nest
 			return item;
 		}
 
-		private Dictionary<string, object> GetMetadata(JsonReader reader)
+		private Dictionary<string, object> GetMetadata(JsonSerializer serializer, JsonReader reader)
 		{
-			var meta = new Dictionary<string, object>();
+			// read past "meta" property name to start of object
 			reader.Read();
-			reader.Read();
-			while (reader.TokenType != JsonToken.EndObject)
-			{
-				var key = (string)reader.Value;
-				reader.Read();
-				var value = reader.Value;
-				meta.Add(key, value);
-				reader.Read();
-			}
+			var meta = serializer.Deserialize<Dictionary<string, object>>(reader);
+			// read past the closing end object of "meta" object
 			reader.Read();
 			return meta;
 		}
