@@ -39,13 +39,16 @@ POCO type is a `text` datatype with multi fields including a `keyword` sub field
 
 [source,csharp]
 ----
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Person>(m => m
             .AutoMap()
         )
-    );
+    )
+            );
 ----
+
+This results in the following JSON request
 
 [source,javascript]
 ----
@@ -134,7 +137,7 @@ Multi fields can be created on a mapping using the `.Fields()` method within a f
 
 [source,csharp]
 ----
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Person>(m => m
             .Properties(p => p
@@ -157,7 +160,8 @@ var descriptor = new CreateIndexDescriptor("myindex")
                 )
             )
         )
-    );
+    )
+            );
 ----
 <1> Use the stop analyzer on this sub field
 
