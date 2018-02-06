@@ -10,20 +10,12 @@ namespace Nest
 	{
 		internal static bool IsGeneric(this Type type)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().IsGenericType;
-#else
-			return type.IsGenericType;
-#endif
 		}
 
 		internal static Assembly Assembly(this Type type)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().Assembly;
-#else
-			return type.Assembly;
-#endif
 		}
 
 		internal static bool IsGenericDictionary(this Type type)
@@ -53,11 +45,7 @@ namespace Nest
 
 		internal static bool IsValue(this Type type)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().IsValueType;
-#else
-			return type.IsValueType;
-#endif
 		}
 
 		internal static bool IsClass(this Type type)
@@ -71,9 +59,6 @@ namespace Nest
 
 		internal static TypeCode GetTypeCode(this Type type)
 		{
-#if !DOTNETCORE
-			return Type.GetTypeCode(type);
-#else
 			if (type == null)
 				return TypeCode.Empty;
 			else if (type == typeof(bool))
@@ -110,37 +95,24 @@ namespace Nest
 				return GetTypeCode(Enum.GetUnderlyingType(type));
 			else
 				return TypeCode.Object;
-#endif
 		}
 
-#if DOTNETCORE
 		internal static bool IsAssignableFrom(this Type t, Type other) => t.GetTypeInfo().IsAssignableFrom(other.GetTypeInfo());
-#endif
 
 		internal static bool IsEnumType(this Type type)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().IsEnum;
-#else
-			return type.IsEnum;
-#endif
 		}
 
-#if DOTNETCORE
 		internal static IEnumerable<Type> GetInterfaces(this Type type)
 		{
 			return type.GetTypeInfo().ImplementedInterfaces;
 		}
-#endif
 
 		internal static IEnumerable<TAttribute> GetAttributes<TAttribute>(this Type t)
 			where TAttribute : Attribute
 		{
-#if !DOTNETCORE
-			var attributes = Attribute.GetCustomAttributes(t, typeof(TAttribute), true);
-#else
 			var attributes =  t.GetTypeInfo().GetCustomAttributes(typeof(TAttribute), true);
-#endif
 			return attributes.Cast<TAttribute>();
 		}
 	}

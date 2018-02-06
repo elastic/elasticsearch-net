@@ -77,11 +77,7 @@ namespace Tests.Framework
 					CallResponse
 				);
 			}
-#if DOTNETCORE
 			catch (System.Net.Http.HttpRequestException e)
-#else
-			catch (WebException e)
-#endif
 			{
 				return ResponseBuilder.ToResponse<TResponse>(requestData, e, null, null, Stream.Null);
 			}
@@ -133,11 +129,7 @@ namespace Tests.Framework
 				var time = timeout < rule.Takes.Value ? timeout: rule.Takes.Value;
 				this._dateTimeProvider.ChangeTime(d=> d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-#if DOTNETCORE
 					throw new System.Net.Http.HttpRequestException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
-#else
-					throw new WebException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
-#endif
 			}
 
 			return rule.Succeeds
@@ -155,11 +147,7 @@ namespace Tests.Framework
 				var time = timeout < rule.Takes.Value ? timeout : rule.Takes.Value;
 				this._dateTimeProvider.ChangeTime(d=> d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-#if DOTNETCORE
 					throw new System.Net.Http.HttpRequestException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
-#else
-					throw new WebException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
-#endif
 			}
 
 			if (rule.Succeeds && times >= state.Successes)
@@ -183,11 +171,7 @@ namespace Tests.Framework
 			var ret = returnOverride ?? rule.Return;
 
 			if (ret == null)
-#if DOTNETCORE
 				throw new System.Net.Http.HttpRequestException();
-#else
-				throw new WebException();
-#endif
 			return ret.Match(
 				(e) => throw e,
 				(statusCode) => this.ReturnConnectionStatus<TResponse>(requestData, CallResponse(rule),

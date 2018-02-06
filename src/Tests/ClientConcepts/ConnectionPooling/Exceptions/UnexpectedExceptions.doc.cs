@@ -68,11 +68,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
-#if DOTNETCORE
 				.ClientCalls(r => r.OnPort(9200).FailAlways(new System.Net.Http.HttpRequestException("recover")))
-#else
-				.ClientCalls(r => r.OnPort(9200).FailAlways(new WebException("recover"))) // <1> calls on 9200 set up to throw a `WebException`
-#endif
 				.ClientCalls(r => r.OnPort(9201).FailAlways(new Exception("boom!"))) // <2> calls on 9201 set up to throw an `Exception`
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())

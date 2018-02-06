@@ -42,11 +42,7 @@ namespace Elasticsearch.Net
 		}
 		internal static bool IsValueType(this Type type)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().IsValueType;
-#else
-			return type.IsValueType;
-#endif
 		}
 
 		//do not remove this is referenced through GetActivatorMethod

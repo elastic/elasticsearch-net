@@ -41,6 +41,11 @@ namespace Tests.Framework.Configuration
 			{
 				SourceSerializer = RandomBoolConfig("SOURCESERIALIZER", randomizer),
 				TypedKeys = RandomBoolConfig("TYPEDKEYS", randomizer),
+#if FEATURE_HTTPWEBREQUEST
+				OldConnection = RandomBoolConfig("OLDCONNECTION", randomizer),
+#else
+				OldConnection = false
+#endif
 			};
 		}
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+	<metadata>
+		<id>Elasticsearch.Net.Connections.HttpWebRequestConnection</id>
+		<version>$version$</version>
+		<title>Elasticsearch.Net HttpWebRequestConnection - Legacy IConnection implementation</title>
+		<authors>Elastic and contributors</authors>
+		<owners>Elastic</owners>
+		<licenseUrl>https://github.com/elastic/elasticsearch-net/blob/master/license.txt</licenseUrl>
+		<projectUrl>https://github.com/elastic/elasticsearch-net</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Elasticsearch.Net</description>
+		<summary>An IConnection implemenation for Elasticsearch.Net and NEST that still utilizes HttpWebRequest and ServicePoints to call Elasticsearch</summary>
+		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
+		<copyright>2014-$year$ Elasticsearch BV</copyright>
+		<tags>elasticsearch,elastic,search,lucene,nest</tags>
+		<dependencies>
+			<group targetFramework="net46">
+				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="output\Elasticsearch.Net.Connections.HttpWebRequestConnection\net46\Elasticsearch.Net.Connections.HttpWebRequestConnection.dll" target="lib\net46"/>
+		<file src="output\Elasticsearch.Net.Connections.HttpWebRequestConnection\net46\Elasticsearch.Net.Connections.HttpWebRequestConnection.xml" target="lib\net46"/>
+	</files>
+</package>

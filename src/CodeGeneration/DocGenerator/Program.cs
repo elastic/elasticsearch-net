@@ -7,18 +7,26 @@ namespace DocGenerator
 	{
 		static Program()
 		{
+			string P(string path)
+			{
+				return path.Replace(@"\", Path.DirectorySeparatorChar.ToString());
+			}
+			
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
             if (currentDirectory.Name == "DocGenerator" && currentDirectory.Parent.Name == "CodeGeneration")
 			{
-                InputDirPath = @"..\..\";
-				OutputDirPath = @"..\..\..\docs";
-                BuildOutputPath = @"..\..\..\build\output";
+				Console.WriteLine("IDE: " + currentDirectory);
+				
+                InputDirPath = P(@"..\..\");
+				OutputDirPath = P(@"..\..\..\docs");
+                BuildOutputPath = P(@"..\..\..\src");
 			}
 			else
 			{
-				InputDirPath = @"..\..\..\..\..\src";
-				OutputDirPath = @"..\..\..\..\..\docs";
-                BuildOutputPath = @"..\..\..\..\..\build\output";
+				Console.WriteLine("CMD: " + currentDirectory);
+				InputDirPath = P(@"..\..\..\..\src");
+				OutputDirPath = P(@"..\..\..\..\docs");
+                BuildOutputPath = P(@"..\..\..\..\build\output");
 			}
         }
 

@@ -28,7 +28,8 @@ namespace Tests
 
 		private static Uri CreateUri(Uri baseUri, Dictionary<string, string> newQueryString)
 		{
-			var uriBuilder = new UriBuilder(baseUri) {Query = FlattenQueryString(newQueryString)};
+			var newQs = FlattenQueryString(newQueryString);
+			var uriBuilder = new UriBuilder(baseUri) {Query = newQs };
 			return uriBuilder.Uri;
 		}
 
@@ -97,7 +98,7 @@ namespace Tests
 		private static string FlattenQueryString(Dictionary<string, string> queryString)
 		{
 			if (queryString == null || queryString.Count == 0) return string.Empty;
-			return "?" + string.Join("&", queryString.Select(kv => $"{kv.Key}={kv.Value}"));
+			return string.Join("&", queryString.Select(kv => $"{kv.Key}={kv.Value}"));
 		}
 
 		private static Dictionary<string, string> ExplodeQueryString(Uri u)

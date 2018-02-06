@@ -52,13 +52,6 @@ namespace Tests.Framework
 			});
 		}
 
-		private static bool IsNotRequestExceptionType(Type exceptionType)
-		{
-#if DOTNETCORE
-			return exceptionType != typeof(System.Net.Http.HttpRequestException);
-#else
-			return exceptionType != typeof(WebException);
-#endif
-		}
+		private static bool IsNotRequestExceptionType(Type exceptionType) => exceptionType != typeof(System.Net.Http.HttpRequestException);
 	}
 }

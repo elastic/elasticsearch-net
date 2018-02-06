@@ -29,6 +29,7 @@ namespace Tests.Framework.Configuration
 	{
 		public bool SourceSerializer { get; set; }
 		public bool TypedKeys { get; set; }
+		public bool OldConnection { get; set; }
 	}
 
 }

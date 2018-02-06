@@ -2,14 +2,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
+    <NoWarn>NU1701</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
     <PackageReference Include="RazorMachine" Version="2.6.1" />
-    <!-- TODO the following packages prevent us to jump to netcoreapp1.0 -->
     <PackageReference Include="CsQuery" Version="1.3.4" />
     <PackageReference Include="ShellProgressBar" Version="3.0.0" />
   </ItemGroup>

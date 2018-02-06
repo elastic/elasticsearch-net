@@ -29,12 +29,12 @@ namespace DocGenerator.AsciiDoc
 	/// </summary>
 	public class GeneratedAsciidocVisitor : NoopVisitor
 	{
-		private static readonly Dictionary<string,string> Ids = new Dictionary<string, string>();
+		private static readonly Dictionary<string, string> Ids = new Dictionary<string, string>();
 
 		private readonly FileInfo _source;
 		private readonly FileInfo _destination;
-	    private readonly Dictionary<string, Project> _projects;
-	    private int _topSectionTitleLevel;
+		private readonly Dictionary<string, Project> _projects;
+		private int _topSectionTitleLevel;
 		private Document _document;
 		private Document _newDocument;
 		private bool _topLevel = true;
@@ -43,7 +43,7 @@ namespace DocGenerator.AsciiDoc
 		{
 			_source = source;
 			_destination = destination;
-		    _projects = projects;
+			_projects = projects;
 		}
 
 		public Document Convert(Document document)
@@ -76,7 +76,8 @@ namespace DocGenerator.AsciiDoc
 
 			if (document.Attributes.All(a => a.Name != "ref_current"))
 			{
-				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/6.1"));
+				_newDocument.Attributes.Add(new AttributeEntry("ref_current",
+					"https://www.elastic.co/guide/en/elasticsearch/reference/6.1"));
 			}
 
 			var github = "https://github.com/elastic/elasticsearch-net";
@@ -90,18 +91,19 @@ namespace DocGenerator.AsciiDoc
 				_newDocument.Attributes.Add(new AttributeEntry("nuget", "https://www.nuget.org/packages"));
 			}
 
-			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)", $"{github}/tree/master/src/Tests/");
+			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)",
+				$"{github}/tree/master/src/Tests/");
 			_newDocument.Insert(0, new Comment
 			{
 				Style = CommentStyle.MultiLine,
 				Text = $"IMPORTANT NOTE\r\n==============\r\nThis file has been generated from {originalFile}. \r\n" +
-					   "If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,\r\n" +
-					   "please modify the original csharp file found at the link and submit the PR with that change. Thanks!"
+				       "If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,\r\n" +
+				       "please modify the original csharp file found at the link and submit the PR with that change. Thanks!"
 			});
 
 			_topSectionTitleLevel = _source.Directory.Name.Equals("request", StringComparison.OrdinalIgnoreCase) &&
-				_source.Directory.Parent != null &&
-				_source.Directory.Parent.Name.Equals("search", StringComparison.OrdinalIgnoreCase)
+			                        _source.Directory.Parent != null &&
+			                        _source.Directory.Parent.Name.Equals("search", StringComparison.OrdinalIgnoreCase)
 				? 2
 				: 3;
 
@@ -153,9 +155,10 @@ namespace DocGenerator.AsciiDoc
 							continue;
 						}
 
-                        // if there is a section title since the last source block, don't add one
-                        var lastSourceBlock = _newDocument.LastOrDefault(e => e is Source);
-						var lastSectionTitle = _newDocument.OfType<SectionTitle>().LastOrDefault(e => e.Level == _topSectionTitleLevel + 1);
+						// if there is a section title since the last source block, don't add one
+						var lastSourceBlock = _newDocument.LastOrDefault(e => e is Source);
+						var lastSectionTitle =
+							_newDocument.OfType<SectionTitle>().LastOrDefault(e => e.Level == _topSectionTitleLevel + 1);
 						if (lastSourceBlock != null && lastSectionTitle != null)
 						{
 							var lastSectionTitleIndex = _newDocument.IndexOf(lastSectionTitle);
@@ -177,18 +180,19 @@ namespace DocGenerator.AsciiDoc
 								}
 
 								_newDocument.Add(source);
-                                break;
+								break;
 							case "initializer":
-                            case "queryinitializer":
-                                _newDocument.Add(CreateSubsectionTitle("Object Initializer syntax example"));
+							case "queryinitializer":
+								_newDocument.Add(CreateSubsectionTitle("Object Initializer syntax example"));
 								_newDocument.Add(source);
-                                break;
+								break;
 							case "expectresponse":
 								// Don't add the Handlng Response section title if it was the last title (it might be defined in the doc already)
 								if (!LastSectionTitleMatches(text => text.Equals("Handling responses", StringComparison.OrdinalIgnoreCase)))
 								{
 									_newDocument.Add(CreateSubsectionTitle("Handling Responses"));
 								}
+
 								_newDocument.Add(source);
 								break;
 							default:
@@ -231,7 +235,7 @@ namespace DocGenerator.AsciiDoc
 				var builder = new StringBuilder();
 				using (var writer = new AsciiDocVisitor(new StringWriter(builder)))
 				{
-					writer.Visit((InlineContainer)sectionTitle);
+					writer.Visit((InlineContainer) sectionTitle);
 				}
 
 				var title = builder.ToString().PascalToHyphen();
@@ -253,86 +257,104 @@ namespace DocGenerator.AsciiDoc
 			base.Visit(sectionTitle);
 		}
 
-	    public override void Visit(AttributeEntry attributeEntry)
-	    {
-	        if (attributeEntry.Name == "xml-docs")
-	        {
-                var value = attributeEntry.Value;
+		public override void Visit(AttributeEntry attributeEntry)
+		{
+			if (attributeEntry.Name != "xml-docs") return;
+			//true when running from the IDE, build/output might have not been created
+			string configuration = null;
+			if (Program.BuildOutputPath.Contains("src"))
+			{
+				//bin/Debug|Release/netcoreapp2.0
+				configuration = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)).Parent?.Name;
+				return;
+			}
 
-                if (string.IsNullOrEmpty(value))
-                {
-                    base.Visit(attributeEntry);
-                    return;
-                }
+			string XmlFile(string project)
+			{
+				if (configuration == null)
+					return Path.Combine(Program.BuildOutputPath, project, "netstandard1.3", $"{project}.XML");
+				return Path.Combine(Program.BuildOutputPath, project, "bin", configuration, "netstandard1.3",
+					$"{project}.XML");
+			}
 
-                var parts = value.Split(':');
-                var assemblyName = parts[0];
-                var typeName = parts[1];
+			var value = attributeEntry.Value;
 
-                string xmlDocsFile;
-                Assembly assembly;
-                string assemblyNamespace;
+			if (string.IsNullOrEmpty(value))
+			{
+				base.Visit(attributeEntry);
+				return;
+			}
 
-                //TODO: tidy this up
-                switch (assemblyName.ToLowerInvariant())
-                {
-                    case "elasticsearch.net":
-                        xmlDocsFile = Path.GetFullPath(Path.Combine(Program.BuildOutputPath, "Elasticsearch.Net", "net46", "Elasticsearch.Net.XML"));
-                        assembly = typeof(ElasticLowLevelClient).Assembly;
-                        assemblyNamespace = typeof(ElasticLowLevelClient).Namespace;
-                        break;
-                    default:
-                        xmlDocsFile = Path.GetFullPath(Path.Combine(Program.BuildOutputPath, "Nest", "net46", "Nest.XML"));
-                        assembly = typeof(ElasticClient).Assembly;
-                        assemblyNamespace = typeof(ElasticClient).Namespace;
-                        break;
-                }
+			var parts = value.Split(':');
+			var assemblyName = parts[0];
+			var typeName = parts[1];
 
-                // build xml documentation file on the fly if it doesn't exist
-	            if (!File.Exists(xmlDocsFile))
-	            {
-                    var project = _projects[assemblyName];
-                    var compilation = project.GetCompilationAsync().Result;
+			string xmlDocsFile;
+			Assembly assembly;
+			string assemblyNamespace;
 
-                    using (var peStream = new MemoryStream())
-                    using (var commentStream = File.Create(xmlDocsFile))
-                    {
-                        var emitResult = compilation.Emit(peStream, null, commentStream);
+			//TODO: tidy this up
+			switch (assemblyName.ToLowerInvariant())
+			{
+				case "elasticsearch.net":
+					xmlDocsFile = Path.GetFullPath(XmlFile("Elasticsearch.Net"));
+					assembly = typeof(ElasticLowLevelClient).Assembly;
+					assemblyNamespace = typeof(ElasticLowLevelClient).Namespace;
+					break;
+				default:
+					xmlDocsFile = Path.GetFullPath(XmlFile("Nest"));
+					assembly = typeof(ElasticClient).Assembly;
+					assemblyNamespace = typeof(ElasticClient).Namespace;
+					break;
+			}
 
-                        if (!emitResult.Success)
-                        {
-                            var failures = emitResult.Diagnostics.Where(diagnostic =>
-                                diagnostic.IsWarningAsError ||
-                                diagnostic.Severity == DiagnosticSeverity.Error);
+			// build xml documentation file on the fly if it doesn't exist
+			if (!File.Exists(xmlDocsFile))
+			{
+				var project = _projects[assemblyName];
 
-                            var builder = new StringBuilder($"Unable to emit compilation for: {assemblyName}");
-                            foreach (var diagnostic in failures)
-                            {
-                                builder.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
-                            }
-                            builder.AppendLine(new string('-', 30));
+				var compilation = project.GetCompilationAsync().Result;
 
-                            throw new Exception(builder.ToString());
-                        }
-                    }
-                }
+				using (var peStream = new MemoryStream())
+				using (var commentStream = File.Create(xmlDocsFile))
+				{
+					var emitResult = compilation.Emit(peStream, null, commentStream);
 
-                var assemblyMembers = DocReader.Read(assembly, xmlDocsFile);
-                var type = assembly.GetType(assemblyNamespace + "." + typeName);
-                var visitor = new XmlDocsVisitor(type);
+					if (!emitResult.Success)
+					{
+						var failures = emitResult.Diagnostics.Where(diagnostic =>
+							diagnostic.IsWarningAsError ||
+							diagnostic.Severity == DiagnosticSeverity.Error);
 
-                visitor.VisitAssembly(assemblyMembers);
-                if (visitor.LabeledListItems.Any())
-                {
-                    var labeledList = new LabeledList();
-                    foreach (var item in visitor.LabeledListItems.OrderBy(l => l.Label))
-                    {
-                        labeledList.Items.Add(item);
-                    }
-                    _newDocument.Insert(_newDocument.IndexOf(attributeEntry), labeledList);
-                }
-            }
-	    }
+						var builder = new StringBuilder($"Unable to emit compilation for: {assemblyName}");
+						foreach (var diagnostic in failures)
+						{
+							builder.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
+						}
+
+						builder.AppendLine(new string('-', 30));
+
+						throw new Exception(builder.ToString());
+					}
+				}
+			}
+
+			var assemblyMembers = DocReader.Read(assembly, xmlDocsFile);
+			var type = assembly.GetType(assemblyNamespace + "." + typeName);
+			var visitor = new XmlDocsVisitor(type);
+
+			visitor.VisitAssembly(assemblyMembers);
+			if (visitor.LabeledListItems.Any())
+			{
+				var labeledList = new LabeledList();
+				foreach (var item in visitor.LabeledListItems.OrderBy(l => l.Label))
+				{
+					labeledList.Items.Add(item);
+				}
+
+				_newDocument.Insert(_newDocument.IndexOf(attributeEntry), labeledList);
+			}
+		}
 
 		private void RemoveDocDirectoryAttribute(Document document)
 		{
@@ -351,7 +373,7 @@ namespace DocGenerator.AsciiDoc
 				var builder = new StringBuilder();
 				using (var visitor = new AsciiDocVisitor(new StringWriter(builder)))
 				{
-					visitor.Visit((InlineContainer)lastSectionTitle);
+					visitor.Visit((InlineContainer) lastSectionTitle);
 				}
 
 				return predicate(builder.ToString());
@@ -365,8 +387,8 @@ namespace DocGenerator.AsciiDoc
 			var level = _topSectionTitleLevel + 1;
 			var sectionTitle = new SectionTitle(title, level);
 
-            // levels 1-3 need to be floating so the Elasticsearch docs generation does not
-            // split into separate file
+			// levels 1-3 need to be floating so the Elasticsearch docs generation does not
+			// split into separate file
 			if (level < 4)
 				sectionTitle.IsFloating = true;
 

@@ -34,6 +34,7 @@ open Differ.Differ
 
 Commandline.parse()
 
+Target "Touch" <| fun _ -> traceHeader "Touching build"
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
 Target "Start" <| fun _ -> 
     match (isMono, Commandline.validMonoTarget) with
@@ -78,7 +79,10 @@ Target "Release" <| fun _ ->
     StrongName.ValidateDllsInNugetPackage()
 
 Target "TestNugetPackage" <| fun _ -> 
-    Tests.RunReleaseUnitTests()
+    //RunReleaseUnitTests restores the canary nugetpackages in tests, since these end up being cached
+    //its too evasive to run on development machines or TC, Run only on AppVeyor containers.
+    if buildServer <> AppVeyor then Tests.RunUnitTests()
+    else Tests.RunReleaseUnitTests()
     
 Target "Canary" <| fun _ -> 
     trace "Running canary build" 
@@ -101,7 +105,7 @@ Target "Diff" <| fun _ ->
   =?> ("Version", hasBuildParam "version")
   ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
-  =?> ("Test", (not Commandline.skipTests))
+  =?> ("Test", (not Commandline.skipTests && Commandline.target <> "canary"))
   =?> ("InternalizeDependencies", (not isMono))
   ==> "InheritDoc"
   =?> ("Documentation", (not Commandline.skipDocs))
@@ -119,7 +123,7 @@ Target "Diff" <| fun _ ->
 
 "Version"
   ==> "Release"
-  =?> ("TestNugetPackage", (not isMono))
+  =?> ("TestNugetPackage", (not isMono && not Commandline.skipTests))
   ==> "Canary"
 
 "Start"
@@ -131,6 +135,7 @@ Target "Diff" <| fun _ ->
 "Build"
   ==> "Release"
   
+"Touch"
 "Start"
   ==> "Clean"
   ==> "Diff"

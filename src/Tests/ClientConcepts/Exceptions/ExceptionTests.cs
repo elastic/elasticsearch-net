@@ -26,12 +26,8 @@ namespace Tests.ClientConcepts.Exceptions
 				.ThrowExceptions();
 			var client = new ElasticClient(settings);
 			var exception = Assert.Throws<ElasticsearchClientException>(() => client.GetMapping<Project>(s => s.Index("doesntexist")));
-#if DOTNETCORE
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus the inner exception should not be set
 			exception.InnerException.Should().BeNull();
-#else
-			exception.InnerException.Should().NotBeNull();
-#endif
 			exception.Response.Should().NotBeNull();
 		}
 
@@ -43,12 +39,8 @@ namespace Tests.ClientConcepts.Exceptions
 			var client = new ElasticClient(settings);
 			var exception = Assert.Throws<ElasticsearchClientException>(() => client.RootNodeInfo());
 			var inner = exception.InnerException;
-#if DOTNETCORE
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
 			inner.Should().BeNull();
-#else
-			inner.Should().NotBeNull();
-#endif
 		}
 
 		//[I]
@@ -57,12 +49,8 @@ namespace Tests.ClientConcepts.Exceptions
 			var settings = new ConnectionSettings(TestClient.CreateUri(_port));
 			var client = new ElasticClient(settings);
 			var response = client.GetMapping<Project>(s => s.Index("doesntexist"));
-#if DOTNETCORE
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
 			response.ApiCall.OriginalException.Should().BeNull();
-#else
-			response.ApiCall.OriginalException.Should().NotBeNull();
-#endif
 		}
 
 		//[I]
@@ -71,12 +59,8 @@ namespace Tests.ClientConcepts.Exceptions
 			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"));
 			var client = new ElasticClient(settings);
 			var response = client.RootNodeInfo();
-#if DOTNETCORE
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
 			response.ApiCall.OriginalException.Should().BeNull();
-#else
-			response.ApiCall.OriginalException.Should().NotBeNull();
-#endif
 		}
 
 		//TODO figure out a way to trigger this again

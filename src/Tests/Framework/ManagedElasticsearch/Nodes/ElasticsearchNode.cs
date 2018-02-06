@@ -1,24 +1,15 @@
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using Bogus;
 using Elasticsearch.Net;
 using Nest;
-using Newtonsoft.Json;
-using Tests.Framework.Configuration;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Process;
 using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.Versions;
-#if !DOTNETCORE
-using XplatManualResetEvent = System.Threading.ManualResetEvent;
-
-#endif
 
 namespace Tests.Framework.ManagedElasticsearch.Nodes
 {

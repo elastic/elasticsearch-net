@@ -25,27 +25,19 @@ namespace Nest
 				Model = GetModel(ps)
 			};
 
-#if DOTNETCORE
-			JToken value;
-			if (ps.TryGetValue("buckets_path", out value) && value != null)
-			{
+			if (ps.TryGetValue("buckets_path", out var value) && value != null)
 				aggregation.BucketsPath = new SingleBucketsPath((string)value);
-			}
 			else
-			{
 				aggregation.BucketsPath = default(SingleBucketsPath);
-			}
 
-#else
-			aggregation.BucketsPath = GetOrDefault<SingleBucketsPath>("buckets_path", ps);
-#endif
+			//TODO does this work on .NET core?
+			//aggregation.BucketsPath = GetOrDefault<SingleBucketsPath>("buckets_path", ps);
 			return aggregation;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var movingAvg = value as IMovingAverageAggregation;
-			if (movingAvg == null) return;
+			if (!(value is IMovingAverageAggregation movingAvg)) return;
 			writer.WriteStartObject();
 			writer.WritePropertyName("buckets_path");
 			serializer.Serialize(writer, movingAvg.BucketsPath);
@@ -87,11 +79,9 @@ namespace Nest
 		private T GetOrDefault<T>(string key, Dictionary<string, JToken> properties)
 		{
 			if (!properties.ContainsKey(key)) return default(T);
-#if DOTNETCORE
 			return properties[key].ToObject<T>();
-#else
-			return (T)Convert.ChangeType(properties[key], typeof(T));
-#endif
+			//TODO decide if this works too for .NET core, looks like it
+			//return (T)Convert.ChangeType(properties[key], typeof(T));
 		}
 
 		private GapPolicy? GetGapPolicy(Dictionary<string, JToken> properties)

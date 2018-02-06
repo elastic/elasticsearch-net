@@ -1,8 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Nest;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using Tests.Framework.Profiling.Performance;

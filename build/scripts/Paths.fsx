@@ -39,6 +39,7 @@ module Paths =
         match project with 
         | Project p -> 
             match p with 
+            | ElasticsearchNetHttpWebRequestConnection -> sprintf "%s/Connections/%s/%s.csproj" SourceFolder project.Name project.Name
             | NestJsonNetSerializer -> sprintf "%s/Serializers/%s/%s.csproj" SourceFolder project.Name project.Name
             | _ -> sprintf "%s/%s/%s.csproj" SourceFolder project.Name project.Name
         | PrivateProject p ->

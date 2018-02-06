@@ -16,12 +16,6 @@
 		<copyright>2014-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<dependencies>
-			<group targetFramework=".NETFramework4.5">
-				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
-			</group>
-			<group targetFramework=".NETFramework4.6">
-				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
-			</group>
 			<group targetFramework=".NETStandard1.3">
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
 				<dependency id="NETStandard.Library" version="[1.6.0, )" />
@@ -38,12 +32,6 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\Nest\net45\Nest.dll" target="lib\net45"/>
-		<file src="output\Nest\net45\Nest.XML" target="lib\net45"/>
-
-		<file src="output\Nest\net46\Nest.dll" target="lib\net46"/>
-		<file src="output\Nest\net46\Nest.XML" target="lib\net46"/>
-
 		<file src="output\Nest\netstandard1.3\Nest.dll" target="lib\netstandard1.3"/>
 		<file src="output\Nest\netstandard1.3\Nest.xml" target="lib\netstandard1.3"/>
 	</files>

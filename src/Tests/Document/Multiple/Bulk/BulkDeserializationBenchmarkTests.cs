@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using Elasticsearch.Net;
 using Nest;
@@ -12,9 +8,6 @@ using Tests.Framework;
 using System.Text;
 using Tests.Framework.Benchmarks;
 
-#if !DOTNETCORE
-using System.Buffers;
-#endif
 
 namespace Tests.Document.Multiple.Bulk
 {
@@ -84,18 +77,6 @@ namespace Tests.Document.Multiple.Bulk
 				return _jsonSerializer.Deserialize<BulkResponse>(reader);
 		}
 
-#if !DOTNETCORE
-		[Benchmark(Description = "deserialize 100,000 items in bulk string response with array pool")]
-		public BulkResponse HugeResponseWithStringAndArrayPool()
-		{
-			using (var reader = new JsonTextReader(new StringReader(Encoding.UTF8.GetString(_hugeResponse))))
-			{
-				reader.ArrayPool = JsonArrayPool.Instance;
-				return _jsonSerializer.Deserialize<BulkResponse>(reader);
-			}
-		}
-#endif
-
 		[Benchmark(Description = "Baseline", Baseline = true)]
 		public BulkResponse Baseline()
 		{
@@ -140,23 +121,5 @@ namespace Tests.Document.Multiple.Bulk
 			};
 		}
 
-#if !DOTNETCORE
-		public class JsonArrayPool : IArrayPool<char>
-		{
-			public static readonly JsonArrayPool Instance = new JsonArrayPool();
-
-			public char[] Rent(int minimumLength)
-			{
-				// get char array from System.Buffers shared pool
-				return ArrayPool<char>.Shared.Rent(minimumLength);
-			}
-
-			public void Return(char[] array)
-			{
-				// return char array to System.Buffers shared pool
-				ArrayPool<char>.Shared.Return(array);
-			}
-		}
-#endif
 	}
 }

@@ -16,12 +16,7 @@ namespace Tests.Framework
 		{
 			Self.Times = times;
 			Self.Succeeds = false;
-			Self.Return = errorState ??
-#if DOTNETCORE
-			new System.Net.Http.HttpRequestException();
-#else
-			new WebException();
-#endif
+			Self.Return = errorState ?? new System.Net.Http.HttpRequestException();
 			return this;
 		}
 
@@ -39,12 +34,7 @@ namespace Tests.Framework
 		}
 		public ClientCallRule ThrowsAfterSucceeds()
 		{
-			Self.AfterSucceeds =
-                #if DOTNETCORE
-                    new System.Net.Http.HttpRequestException();
-                #else
-                    new WebException();
-                #endif
+			Self.AfterSucceeds = new System.Net.Http.HttpRequestException();
 			return this;
 		}
 

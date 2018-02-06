@@ -17,11 +17,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.ValidationTasks
 			if (license.IsValid && license.License.Status == LicenseStatus.Active) return;
 
 			var exceptionMessageStart = "Server has license plugin installed, ";
-#if DOTNETCORE
 			var licenseFile = Environment.GetEnvironmentVariable("ES_LICENSE_FILE");
-#else
-			var licenseFile = Environment.GetEnvironmentVariable("ES_LICENSE_FILE", EnvironmentVariableTarget.Machine);
-#endif
 			if (!string.IsNullOrWhiteSpace(licenseFile))
 			{
 				var putLicense = client.PostLicense(new PostLicenseRequest

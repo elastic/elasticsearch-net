@@ -202,11 +202,7 @@ namespace Xunit
 		private static IEnumerable<string> GetAllClustersFromAssembly()
 		{
 			var clusters =
-#if DOTNETCORE
 				typeof(ClusterBase).Assembly()
-#else
-				typeof(ClusterBase).Assembly
-#endif
 					.GetTypes()
 					.Where(t => typeof(ClusterBase).IsAssignableFrom(t) && t != typeof(ClusterBase))
 					.Select(c => c.Name.Replace("Cluster", "").ToLowerInvariant());
