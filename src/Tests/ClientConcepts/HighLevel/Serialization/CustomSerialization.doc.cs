@@ -44,7 +44,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 * ==== Injecting a new serializer
 		 *
 		 * Starting with NEST 6.x you can inject a serializer that is isolated to only be called
-		 * for the (de)serialization of `_source`, `_fields`, or whereever a user provided value is expected
+		 * for the (de)serialization of `_source`, `_fields`, or wherever a user provided value is expected
 		 * to be written and returned.
 		 *
 		 * Within NEST, we refer to this serializer as the `SourceSerializer`.
