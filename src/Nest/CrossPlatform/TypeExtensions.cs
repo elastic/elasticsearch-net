@@ -50,11 +50,7 @@ namespace Nest
 
 		internal static bool IsClass(this Type type)
 		{
-#if DOTNETCORE
 			return type.GetTypeInfo().IsClass;
-#else
-			return type.IsClass;
-#endif
 		}
 
 		internal static TypeCode GetTypeCode(this Type type)
