@@ -39,8 +39,6 @@ There are a number of conventions that NEST uses for inference of
 
 * <<document-paths, Building a URI path to a document>>
 
-* <<features-inference, API features>>
-
 As well as a number of types for working with
 
 * <<time-units, Time Units>>
@@ -92,23 +90,15 @@ own serializer, or by modifying how NEST's serializer behaves.
 
 :anchor-list: client-concepts/high-level/serialization
 
-* <<changing-serializers,Changing Serializers>>
-
 * <<custom-serialization,Custom Serialization>>
 
 * <<extending-nest-types,Extending Nest Types>>
 
-* <<modifying-default-serializer,Modifying Default Serializer>>
-
 :includes-from-dirs: client-concepts/high-level/serialization
-
-include::client-concepts/high-level/serialization/changing-serializers.asciidoc[]
 
 include::client-concepts/high-level/serialization/custom-serialization.asciidoc[]
 
 include::client-concepts/high-level/serialization/extending-nest-types.asciidoc[]
-
-include::client-concepts/high-level/serialization/modifying-default-serializer.asciidoc[]
 
 [[mapping]]
 == Mapping
@@ -219,8 +209,6 @@ There are a number of conventions that NEST uses for inference of
 
 * <<document-paths, Document paths>>
 
-* <<features-inference, API features>>
-
 * <<field-inference, Fields>>
 
 * <<ids-inference, Ids>>
@@ -236,8 +224,6 @@ There are a number of conventions that NEST uses for inference of
 :includes-from-dirs: client-concepts/high-level/inference
 
 include::client-concepts/high-level/inference/document-paths.asciidoc[]
-
-include::client-concepts/high-level/inference/features-inference.asciidoc[]
 
 include::client-concepts/high-level/inference/field-inference.asciidoc[]
 

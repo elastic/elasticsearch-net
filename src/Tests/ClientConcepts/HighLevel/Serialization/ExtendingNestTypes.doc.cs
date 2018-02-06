@@ -14,17 +14,19 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
     /**[[extending-nest-types]]
      * === Extending NEST types
      *
-     * Although of course NEST should always be up to date with a 100% API coverage of the Elasticsearch API, sometimes you might want to work around a bug
-     * or maybe use types from a third party plugin that NEST does not support.
+     * Sometimes you might want to provide a custom implementation of a type perhaps to work around an issue or because
+     * you're using a third-party plugin that extends the features of Elasticsearch, and NEST does not provide support out of the box.
      */
     public class ExtendingNestTypes
 	{
 		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
 
-		/* === Creating your own property mapping
-		*
-		 * Here we implement a custom `IProperty` implementation so that we can consume a field mapping type provided by a plugin.
-		*/
+		/* ==== Creating your own property mapping
+		 *
+		 * As an example, let's imagine we're using a third party plugin that provides support for additional data type
+		 * for field mapping. We can implement a custom `IProperty` implementation so that we can use the field mapping
+		 * type with NEST.
+		 */
 		public class MyPluginProperty : IProperty
 		{
 			IDictionary<string, object> IProperty.LocalMetadata { get; set; }
@@ -87,7 +89,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			};
 
 			/**
-			 * Whilst NEST can serialize our `my_plugin_property`, it does not know how to deserialize it;
+			 * Whilst NEST can _serialize_ our `my_plugin_property`, it does not know how to _deserialize_ it;
 			 * We plan to make this more pluggable in the future
 			 */
 			// hide

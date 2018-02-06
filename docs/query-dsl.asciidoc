@@ -180,10 +180,6 @@ NEST exposes all of the term queries available in Elasticsearch
 
 * <<function-score-query-usage,Function Score Query Usage>>
 
-* <<indices-no-match-query-usage,Indices No Match Query Usage>>
-
-* <<indices-query-usage,Indices Query Usage>>
-
 See the Elasticsearch documentation on {ref_current}/compound-queries.html[Compound queries] for more details.
 
 :includes-from-dirs: query-dsl/compound
@@ -199,10 +195,6 @@ include::query-dsl/compound/constant-score/constant-score-query-usage.asciidoc[]
 include::query-dsl/compound/dismax/dismax-query-usage.asciidoc[]
 
 include::query-dsl/compound/function-score/function-score-query-usage.asciidoc[]
-
-include::query-dsl/compound/indices/indices-no-match-query-usage.asciidoc[]
-
-include::query-dsl/compound/indices/indices-query-usage.asciidoc[]
 
 [[joining-queries]]
 == Joining queries
@@ -244,8 +236,6 @@ which support lat/lon pairs, and {ref_current}/geo-shape.html[geo_shape] fields,
 
 * <<geo-distance-query-usage,Geo Distance Query Usage>>
 
-* <<geo-hash-cell-query-usage,Geo Hash Cell Query Usage>>
-
 * <<geo-polygon-query-usage,Geo Polygon Query Usage>>
 
 * <<geo-shape-circle-query-usage,Geo Shape Circle Query Usage>>
@@ -275,8 +265,6 @@ See the Elasticsearch documentation on {ref_current}/geo-queries.html[Geo querie
 include::query-dsl/geo/bounding-box/geo-bounding-box-query-usage.asciidoc[]
 
 include::query-dsl/geo/distance/geo-distance-query-usage.asciidoc[]
-
-include::query-dsl/geo/hash-cell/geo-hash-cell-query-usage.asciidoc[]
 
 include::query-dsl/geo/polygon/geo-polygon-query-usage.asciidoc[]
 
@@ -315,8 +303,6 @@ Specialized types of queries that do not fit into other groups
 
 * <<script-query-usage,Script Query Usage>>
 
-* <<template-query-usage,Template Query Usage>>
-
 See the Elasticsearch documentation on {ref_current}/specialized-queries.html[Specialized queries] for more details.
 
 :includes-from-dirs: query-dsl/specialized
@@ -328,8 +314,6 @@ include::query-dsl/specialized/more-like-this/more-like-this-query-usage.asciido
 include::query-dsl/specialized/percolate/percolate-query-usage.asciidoc[]
 
 include::query-dsl/specialized/script/script-query-usage.asciidoc[]
-
-include::query-dsl/specialized/template/template-query-usage.asciidoc[]
 
 [[span-queries]]
 == Span queries

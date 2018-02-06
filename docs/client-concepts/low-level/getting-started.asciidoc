@@ -217,7 +217,7 @@ the bytes of the response from Elasticsearch.
 Elasticsearch.Net does not provide typed objects to represent responses; if you need this, you should consider
 using <<nest, NEST>>, that does map all requests and responses to types. You can work with
 strong types with Elasticsearch.Net but it will be up to you as the developer to configure Elasticsearch.Net so that
-it understands how to deserialize your types, most likely by providing your own <<changing-serializers, IElasticsearchSerializer>> implementation
+it understands how to deserialize your types, most likely by providing your own <<custom-serialization, IElasticsearchSerializer>> implementation
 to `ConnectionConfiguration`.
 
 --

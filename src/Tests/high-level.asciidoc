@@ -26,7 +26,6 @@ There are a number of conventions that NEST uses for inference of
 - <<field-inference, Field names>> and <<property-inference, Property names>>
 - <<ids-inference, Document IDs>>
 - <<document-paths, Building a URI path to a document>>
-- <<features-inference, API features>>
 
 As well as a number of types for working with
 
@@ -159,7 +158,6 @@ include::aggregations/reserved-aggregation-names.asciidoc[]
 There are a number of conventions that NEST uses for inference of
 
 - <<document-paths, Document paths>>
-- <<features-inference, API features>>
 - <<field-inference, Fields>>
 - <<ids-inference, Ids>>
 - <<index-name-inference, Index names>>
