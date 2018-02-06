@@ -15,6 +15,74 @@ please modify the original csharp file found at the link and submit the PR with 
 [[moving-average-simple-aggregation-usage]]
 === Moving Average Simple Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.DateHistogram("projects_started_per_month", dh => dh
+    .Field(p => p.StartedOn)
+    .Interval(DateInterval.Month)
+    .Aggregations(aa => aa
+        .Sum("commits", sm => sm
+            .Field(p => p.NumberOfCommits)
+        )
+        .MovingAverage("commits_moving_avg", mv => mv
+            .BucketsPath("commits")
+            .Window(30)
+            .Predict(10)
+            .Model(m => m
+                .Simple()
+            )
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new DateHistogramAggregation("projects_started_per_month")
+{
+    Field = "startedOn",
+    Interval = DateInterval.Month,
+    Aggregations =
+        new SumAggregation("commits", "numberOfCommits")
+        && new MovingAverageAggregation("commits_moving_avg", "commits")
+        {
+            Window = 30,
+            Predict = 10,
+            Model = new SimpleModel()
+        }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      },
+      "commits_moving_avg": {
+        "moving_avg": {
+          "buckets_path": "commits",
+          "model": "simple",
+          "window": 30,
+          "predict": 10,
+          "settings": {}
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

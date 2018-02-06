@@ -15,6 +15,59 @@ please modify the original csharp file found at the link and submit the PR with 
 [[percentile-ranks-aggregation-usage]]
 === Percentile Ranks Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.PercentileRanks("commits_outlier", pr => pr
+    .Field(p => p.NumberOfCommits)
+    .Values(15, 30)
+    .Method(m => m
+        .TDigest(td => td
+            .Compression(200)
+        )
+    )
+    .Script(ss => ss.Source("doc['numberOfCommits'].value * 1.2"))
+    .Missing(0)
+)
+----
+
+[source,csharp]
+----
+new PercentileRanksAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
+{
+    Values = new List<double> {15, 30},
+    Method = new TDigestMethod
+    {
+        Compression = 200
+    },
+    Script = new InlineScript("doc['numberOfCommits'].value * 1.2"),
+    Missing = 0
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commits_outlier": {
+    "percentile_ranks": {
+      "field": "numberOfCommits",
+      "values": [
+        15.0,
+        30.0
+      ],
+      "tdigest": {
+        "compression": 200.0
+      },
+      "script": {
+        "source": "doc['numberOfCommits'].value * 1.2"
+      },
+      "missing": 0.0
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

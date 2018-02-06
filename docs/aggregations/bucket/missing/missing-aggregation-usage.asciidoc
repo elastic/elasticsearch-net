@@ -15,6 +15,34 @@ please modify the original csharp file found at the link and submit the PR with 
 [[missing-aggregation-usage]]
 === Missing Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Missing("projects_without_a_description", m => m
+    .Field(p => p.Description.Suffix("keyword"))
+)
+----
+
+[source,csharp]
+----
+new MissingAggregation("projects_without_a_description")
+{
+    Field = Field<Project>(p => p.Description.Suffix("keyword"))
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_without_a_description": {
+    "missing": {
+      "field": "description.keyword"
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

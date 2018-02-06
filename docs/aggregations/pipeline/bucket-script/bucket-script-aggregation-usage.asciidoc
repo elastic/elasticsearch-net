@@ -15,6 +15,112 @@ please modify the original csharp file found at the link and submit the PR with 
 [[bucket-script-aggregation-usage]]
 === Bucket Script Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.DateHistogram("projects_started_per_month", dh => dh
+    .Field(p => p.StartedOn)
+    .Interval(DateInterval.Month)
+    .Aggregations(aa => aa
+        .Sum("commits", sm => sm
+            .Field(p => p.NumberOfCommits)
+        )
+        .Filter("stable_state", f => f
+            .Filter(ff => ff
+                .Term(p => p.State, "Stable")
+            )
+            .Aggregations(aaa => aaa
+                .Sum("commits", sm => sm
+                    .Field(p => p.NumberOfCommits)
+                )
+            )
+        )
+        .BucketScript("stable_percentage", bs => bs
+            .BucketsPath(bp => bp
+                .Add("totalCommits", "commits")
+                .Add("stableCommits", "stable_state>commits")
+            )
+            .Script(ss => ss.Source("params.stableCommits / params.totalCommits * 100"))
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new DateHistogramAggregation("projects_started_per_month")
+{
+    Field = "startedOn",
+    Interval = DateInterval.Month,
+    Aggregations =
+        new SumAggregation("commits", "numberOfCommits") &&
+        new FilterAggregation("stable_state")
+        {
+            Filter = new TermQuery
+            {
+                Field = "state",
+                Value = "Stable"
+            },
+            Aggregations = new SumAggregation("commits", "numberOfCommits")
+        }
+        && new BucketScriptAggregation("stable_percentage", new MultiBucketsPath
+        {
+            {"totalCommits", "commits"},
+            {"stableCommits", "stable_state>commits"}
+        })
+        {
+            Script = new InlineScript("params.stableCommits / params.totalCommits * 100")
+        }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      },
+      "stable_state": {
+        "filter": {
+          "term": {
+            "state": {
+              "value": "Stable"
+            }
+          }
+        },
+        "aggs": {
+          "commits": {
+            "sum": {
+              "field": "numberOfCommits"
+            }
+          }
+        }
+      },
+      "stable_percentage": {
+        "bucket_script": {
+          "buckets_path": {
+            "totalCommits": "commits",
+            "stableCommits": "stable_state>commits"
+          },
+          "script": {
+            "source": "params.stableCommits / params.totalCommits * 100"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

@@ -35,3 +35,57 @@ foreach (var item in projectsPerMonth.Buckets.Skip(1))
 }
 ----
 
+[source,csharp]
+----
+a => a
+.DateHistogram("projects_started_per_month", dh => dh
+    .Field(p => p.StartedOn)
+    .Interval(DateInterval.Month)
+    .Aggregations(aa => aa
+        .Sum("commits", sm => sm
+            .Field(p => p.NumberOfCommits)
+        )
+        .Derivative("commits_derivative", d => d
+            .BucketsPath("commits")
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new DateHistogramAggregation("projects_started_per_month")
+{
+    Field = "startedOn",
+    Interval = DateInterval.Month,
+    Aggregations =
+        new SumAggregation("commits", "numberOfCommits") &&
+        new DerivativeAggregation("commits_derivative", "commits")
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      },
+      "commits_derivative": {
+        "derivative": {
+          "buckets_path": "commits"
+        }
+      }
+    }
+  }
+}
+----
+

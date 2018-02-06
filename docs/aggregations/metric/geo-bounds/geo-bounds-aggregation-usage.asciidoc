@@ -15,6 +15,36 @@ please modify the original csharp file found at the link and submit the PR with 
 [[geo-bounds-aggregation-usage]]
 === Geo Bounds Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.GeoBounds("viewport", gb => gb
+    .Field(p => p.Location)
+    .WrapLongitude(true)
+)
+----
+
+[source,csharp]
+----
+new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
+{
+    WrapLongitude = true
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "viewport": {
+    "geo_bounds": {
+      "field": "location",
+      "wrap_longitude": true
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

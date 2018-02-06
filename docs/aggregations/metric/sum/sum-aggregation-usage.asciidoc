@@ -15,6 +15,31 @@ please modify the original csharp file found at the link and submit the PR with 
 [[sum-aggregation-usage]]
 === Sum Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Sum("commits_sum", sm => sm
+    .Field(p => p.NumberOfCommits)
+)
+----
+
+[source,csharp]
+----
+new SumAggregation("commits_sum", Field<Project>(p => p.NumberOfCommits))
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commits_sum": {
+    "sum": {
+      "field": "numberOfCommits"
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

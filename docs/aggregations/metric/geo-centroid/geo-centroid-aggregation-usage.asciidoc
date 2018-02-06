@@ -20,6 +20,31 @@ for a Geo-point datatype field.
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geocentroid-aggregation.html[Geo Centroid Aggregation]
 
+[source,csharp]
+----
+a => a
+.GeoCentroid("centroid", gb => gb
+    .Field(p => p.Location)
+)
+----
+
+[source,csharp]
+----
+new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "centroid": {
+    "geo_centroid": {
+      "field": "location"
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
@@ -42,6 +67,47 @@ The `geo_centroid` aggregation is more interesting when combined as a sub-aggreg
 
 [source,csharp]
 ----
+a => a
+.Terms("projects", t => t
+    .Field(p => p.Name)
+    .Aggregations(sa => sa
+        .GeoCentroid("centroid", gb => gb
+            .Field(p => p.Location)
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new TermsAggregation("projects")
+{
+    Field = Infer.Field<Project>(p => p.Name),
+    Aggregations = new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects": {
+    "terms": {
+      "field": "name"
+    },
+    "aggs": {
+      "centroid": {
+        "geo_centroid": {
+          "field": "location"
+        }
+      }
+    }
+  }
+}
+----
+
+[source,csharp]
+----
 response.ShouldBeValid();
 
 var projects = response.Aggregations.Terms("projects");
@@ -55,6 +121,31 @@ foreach (var bucket in projects.Buckets)
 
     centroid.Location.Latitude.Should().NotBe(0);
     centroid.Location.Longitude.Should().NotBe(0);
+}
+----
+
+[source,csharp]
+----
+a => a
+.GeoCentroid("centroid", gb => gb
+    .Field(p => p.Location)
+)
+----
+
+[source,csharp]
+----
+new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "centroid": {
+    "geo_centroid": {
+      "field": "location"
+    }
+  }
 }
 ----
 

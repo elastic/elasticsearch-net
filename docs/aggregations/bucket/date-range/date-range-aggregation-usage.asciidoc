@@ -23,6 +23,72 @@ IMPORTANT: this aggregation includes the `from` value and excludes the `to` valu
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-daterange-aggregation.html[Date Range Aggregation]
 
+[source,csharp]
+----
+a => a
+.DateRange("projects_date_ranges", date => date
+    .Field(p => p.StartedOn)
+    .Ranges(
+        r => r.From(DateMath.Anchored(FixedDate).Add("2d")).To(DateMath.Now),
+        r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(DateMathTimeUnit.Hour)),
+        r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
+    )
+    .TimeZone("CET")
+    .Aggregations(childAggs => childAggs
+        .Terms("project_tags", avg => avg.Field(p => p.Tags))
+    )
+)
+----
+
+[source,csharp]
+----
+new DateRangeAggregation("projects_date_ranges")
+{
+    Field = Field<Project>(p => p.StartedOn),
+    Ranges = new List<DateRangeExpression>
+    {
+        new DateRangeExpression {From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now},
+        new DateRangeExpression {To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(DateMathTimeUnit.Hour)},
+        new DateRangeExpression {From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m")}
+    },
+    TimeZone = "CET",
+    Aggregations =
+        new TermsAggregation("project_tags") {Field = Field<Project>(p => p.Tags)}
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_date_ranges": {
+    "date_range": {
+      "field": "startedOn",
+      "ranges": [
+        {
+          "to": "now",
+          "from": "2015-06-06T12:01:02.123||+2d"
+        },
+        {
+          "to": "now+1d-30m/h"
+        },
+        {
+          "from": "2012-05-05||+1d-1m"
+        }
+      ],
+      "time_zone": "CET"
+    },
+    "aggs": {
+      "project_tags": {
+        "terms": {
+          "field": "tags"
+        }
+      }
+    }
+  }
+}
+----
+
 === Handling Responses
 
 The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods

@@ -15,6 +15,36 @@ please modify the original csharp file found at the link and submit the PR with 
 [[extended-stats-aggregation-usage]]
 === Extended Stats Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.ExtendedStats("commit_stats", es => es
+    .Field(p => p.NumberOfCommits)
+    .Sigma(1)
+)
+----
+
+[source,csharp]
+----
+new ExtendedStatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits))
+{
+    Sigma = 1
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commit_stats": {
+    "extended_stats": {
+      "field": "numberOfCommits",
+      "sigma": 1.0
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
