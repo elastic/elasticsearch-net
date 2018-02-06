@@ -123,7 +123,7 @@ namespace ApiGenerator.Domain
 					generated = $"public {m}({par}) : this({urlRouteParameters.First().Key}, typeof({generic}))";
 				}
 
-				if ((m == "SuggestRequest") && string.IsNullOrEmpty(par) && !string.IsNullOrEmpty(this.RequestTypeGeneric))
+				if (string.IsNullOrEmpty(par) && !string.IsNullOrEmpty(this.RequestTypeGeneric))
 				{
 					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
 					doc = AppendToSummary(doc, ". Will infer the index from the generic type");
