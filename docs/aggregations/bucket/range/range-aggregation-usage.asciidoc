@@ -15,6 +15,57 @@ please modify the original csharp file found at the link and submit the PR with 
 [[range-aggregation-usage]]
 === Range Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Range("commit_ranges", ra => ra
+    .Field(p => p.NumberOfCommits)
+    .Ranges(
+        r => r.To(100),
+        r => r.From(100).To(500),
+        r => r.From(500)
+    )
+)
+----
+
+[source,csharp]
+----
+new RangeAggregation("commit_ranges")
+{
+    Field = Field<Project>(p => p.NumberOfCommits),
+    Ranges = new List<AggregationRange>
+    {
+        {new AggregationRange {To = 100}},
+        {new AggregationRange {From = 100, To = 500}},
+        {new AggregationRange {From = 500}}
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "commit_ranges": {
+    "range": {
+      "field": "numberOfCommits",
+      "ranges": [
+        {
+          "to": 100.0
+        },
+        {
+          "from": 100.0,
+          "to": 500.0
+        },
+        {
+          "from": 500.0
+        }
+      ]
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

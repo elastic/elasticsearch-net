@@ -15,6 +15,59 @@ please modify the original csharp file found at the link and submit the PR with 
 [[max-bucket-aggregation-usage]]
 === Max Bucket Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.DateHistogram("projects_started_per_month", dh => dh
+    .Field(p => p.StartedOn)
+    .Interval(DateInterval.Month)
+    .Aggregations(aa => aa
+        .Sum("commits", sm => sm
+            .Field(p => p.NumberOfCommits)
+        )
+    )
+)
+.MaxBucket("max_commits_per_month", aaa => aaa
+    .BucketsPath("projects_started_per_month>commits")
+)
+----
+
+[source,csharp]
+----
+new DateHistogramAggregation("projects_started_per_month")
+{
+    Field = "startedOn",
+    Interval = DateInterval.Month,
+    Aggregations = new SumAggregation("commits", "numberOfCommits")
+}
+&& new MaxBucketAggregation("max_commits_per_month", "projects_started_per_month>commits")
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      }
+    }
+  },
+  "max_commits_per_month": {
+    "max_bucket": {
+      "buckets_path": "projects_started_per_month>commits"
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

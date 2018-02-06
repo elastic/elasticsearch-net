@@ -15,6 +15,50 @@ please modify the original csharp file found at the link and submit the PR with 
 [[sampler-aggregation-usage]]
 === Sampler Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.Sampler("sample", sm => sm
+    .ShardSize(200)
+    .Aggregations(aa => aa
+        .SignificantTerms("significant_names", st => st
+            .Field(p => p.Name)
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new SamplerAggregation("sample")
+{
+    ShardSize = 200,
+    Aggregations = new SignificantTermsAggregation("significant_names")
+    {
+        Field = "name"
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "sample": {
+    "sampler": {
+      "shard_size": 200
+    },
+    "aggs": {
+      "significant_names": {
+        "significant_terms": {
+          "field": "name"
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

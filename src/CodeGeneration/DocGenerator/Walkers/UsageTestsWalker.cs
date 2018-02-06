@@ -15,16 +15,20 @@ namespace DocGenerator.Walkers
         private static readonly string[] ConvertToJson = {
             "ExpectJson",
             "QueryJson",
+	        "AggregationJson"
         };
 
         private static readonly string[] MembersOfInterest = {
             "ExpectJson",
             "QueryJson",
+	        "AggregationJson",
             "Fluent",
             "Initializer",
             "QueryFluent",
             "QueryInitializer",
-            "ExpectResponse"
+            "ExpectResponse",
+	        "FluentAggs",
+	        "InitializerAggs"
         };
 
         public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
@@ -46,19 +50,17 @@ namespace DocGenerator.Walkers
         protected override bool SerializePropertyDeclarationToJson(PropertyDeclarationSyntax node) =>
             SerializeToJson(node, node.Identifier.Text);
 
-        protected override bool SerializeMethodDeclarationToJson(MethodDeclarationSyntax node) => 
+        protected override bool SerializeMethodDeclarationToJson(MethodDeclarationSyntax node) =>
             SerializeToJson(node, node.Identifier.Text);
 
         private bool SerializeToJson(SyntaxNode node, string memberName)
         {
             if (!ConvertToJson.Contains(memberName)) return false;
 
-            string json;
-            if (node.TryGetJsonForSyntaxNode(out json))
+	        if (node.TryGetJsonForSyntaxNode(out var json))
             {
                 var startingLine = node.StartingLine();
                 Blocks.Add(new JavaScriptBlock(json, startingLine, ClassDepth, memberName));
-                return true;
             }
 
             return true;

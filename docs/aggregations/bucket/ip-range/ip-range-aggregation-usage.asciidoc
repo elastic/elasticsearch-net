@@ -15,6 +15,51 @@ please modify the original csharp file found at the link and submit the PR with 
 [[ip-range-aggregation-usage]]
 === Ip Range Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.IpRange("ip_ranges", ip => ip
+    .Field(p => p.LeadDeveloper.IpAddress)
+    .Ranges(
+        r => r.To("10.0.0.5"),
+        r => r.From("10.0.0.5")
+    )
+)
+----
+
+[source,csharp]
+----
+new IpRangeAggregation("ip_ranges")
+{
+    Field = Field((Project p) => p.LeadDeveloper.IpAddress),
+    Ranges = new List<Nest.IpRange>
+    {
+        new Nest.IpRange {To = "10.0.0.5"},
+        new Nest.IpRange {From = "10.0.0.5"}
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "ip_ranges": {
+    "ip_range": {
+      "field": "leadDeveloper.ipAddress",
+      "ranges": [
+        {
+          "to": "10.0.0.5"
+        },
+        {
+          "from": "10.0.0.5"
+        }
+      ]
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

@@ -15,6 +15,65 @@ please modify the original csharp file found at the link and submit the PR with 
 [[serial-differencing-aggregation-usage]]
 === Serial Differencing Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.DateHistogram("projects_started_per_month", dh => dh
+    .Field(p => p.StartedOn)
+    .Interval(DateInterval.Month)
+    .Aggregations(aa => aa
+        .Sum("commits", sm => sm
+            .Field(p => p.NumberOfCommits)
+        )
+        .SerialDifferencing("second_difference", d => d
+            .BucketsPath("commits")
+            .Lag(2)
+        )
+    )
+)
+----
+
+[source,csharp]
+----
+new DateHistogramAggregation("projects_started_per_month")
+{
+    Field = "startedOn",
+    Interval = DateInterval.Month,
+    Aggregations =
+        new SumAggregation("commits", "numberOfCommits")
+        && new SerialDifferencingAggregation("second_difference", "commits")
+        {
+            Lag = 2
+        }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      },
+      "second_difference": {
+        "serial_diff": {
+          "buckets_path": "commits",
+          "lag": 2
+        }
+      }
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

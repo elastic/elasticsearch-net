@@ -15,6 +15,43 @@ please modify the original csharp file found at the link and submit the PR with 
 [[geo-hash-grid-aggregation-usage]]
 === Geo Hash Grid Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.GeoHash("my_geohash_grid", g => g
+    .Field(p => p.Location)
+    .GeoHashPrecision(GeoHashPrecision.Precision3)
+    .Size(1000)
+    .ShardSize(100)
+)
+----
+
+[source,csharp]
+----
+new GeoHashGridAggregation("my_geohash_grid")
+{
+    Field = Field<Project>(p => p.Location),
+    Precision = GeoHashPrecision.Precision3,
+    Size = 1000,
+    ShardSize = 100
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "my_geohash_grid": {
+    "geohash_grid": {
+      "field": "location",
+      "precision": 3,
+      "size": 1000,
+      "shard_size": 100
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]

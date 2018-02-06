@@ -15,6 +15,64 @@ please modify the original csharp file found at the link and submit the PR with 
 [[average-bucket-aggregation-usage]]
 === Average Bucket Aggregation Usage
 
+[source,csharp]
+----
+a => a
+.DateHistogram("projects_started_per_month", dh => dh
+    .Field(p => p.StartedOn)
+    .Interval(DateInterval.Month)
+    .Aggregations(aa => aa
+        .Sum("commits", sm => sm
+            .Field(p => p.NumberOfCommits)
+        )
+    )
+)
+.AverageBucket("average_commits_per_month", aaa => aaa
+    .BucketsPath("projects_started_per_month>commits")
+    .GapPolicy(GapPolicy.InsertZeros)
+)
+----
+
+[source,csharp]
+----
+new DateHistogramAggregation("projects_started_per_month")
+{
+    Field = "startedOn",
+    Interval = DateInterval.Month,
+    Aggregations = new SumAggregation("commits", "numberOfCommits")
+}
+&& new AverageBucketAggregation("average_commits_per_month", "projects_started_per_month>commits")
+{
+    GapPolicy = GapPolicy.InsertZeros
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      }
+    }
+  },
+  "average_commits_per_month": {
+    "avg_bucket": {
+      "buckets_path": "projects_started_per_month>commits",
+      "gap_policy": "insert_zeros"
+    }
+  }
+}
+----
+
 ==== Handling Responses
 
 [source,csharp]
