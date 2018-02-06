@@ -17,8 +17,6 @@ NEST exposes all of the search request parameters available in Elasticsearch
 
 * <<explain-usage,Explain Usage>>
 
-* <<fielddata-fields-usage,Fielddata Fields Usage>>
-
 * <<fields-usage,Fields Usage>>
 
 * <<from-and-size-usage,From And Size Usage>>
@@ -56,8 +54,6 @@ See the documentation on <<writing-queries, Writing queries>> for how to use the
 :includes-from-dirs: search/request
 
 include::search/request/explain-usage.asciidoc[]
-
-include::search/request/fielddata-fields-usage.asciidoc[]
 
 include::search/request/fields-usage.asciidoc[]
 
