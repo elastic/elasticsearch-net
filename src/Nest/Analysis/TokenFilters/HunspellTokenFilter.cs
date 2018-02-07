@@ -13,7 +13,7 @@ namespace Nest
 		/// If true, dictionary matching will be case insensitive.
 		/// </summary>
 		[JsonProperty("ignore_case")]
-		[Obsolete("Scheduled to be removed in 6.0")]
+		[Obsolete("Scheduled to be removed in 6.x - consider using a lowercase token filter before a hunspell token filter.")]
 		bool? IgnoreCase { get; set; }
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace Nest
 		public HunspellTokenFilter() : base("hunspell") { }
 
 		/// <inheritdoc/>
-		[Obsolete("Scheduled to be removed in 6.0")]
+		[Obsolete("Scheduled to be removed in 6.x - consider using a lowercase token filter before a hunspell token filter.")]
 		public bool? IgnoreCase { get; set; }
 
 		/// <inheritdoc/>
@@ -76,7 +76,7 @@ namespace Nest
 		bool? IHunspellTokenFilter.LongestOnly { get; set; }
 		bool? IHunspellTokenFilter.Dedup { get; set; }
 
-		[Obsolete("Scheduled to be removed in 6.0")]
+		[Obsolete("Scheduled to be removed in 6.x - consider using a lowercase token filter before a hunspell token filter.")]
 		bool? IHunspellTokenFilter.IgnoreCase { get; set; }
 		string IHunspellTokenFilter.Locale { get; set; }
 		string IHunspellTokenFilter.Dictionary { get; set; }
@@ -88,7 +88,7 @@ namespace Nest
 		public HunspellTokenFilterDescriptor Dedup(bool? dedup = true) => Assign(a => a.Dedup = dedup);
 
 		///<inheritdoc/>
-		[Obsolete("Scheduled to be removed in 6.0")]
+		[Obsolete("Scheduled to be removed in 6.x - consider using a lowercase token filter before a hunspell token filter.")]
 		public HunspellTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
 
 		///<inheritdoc/>

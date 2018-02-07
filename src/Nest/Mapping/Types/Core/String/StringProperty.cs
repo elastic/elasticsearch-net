@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in NEST 6.x.  For newly created indices, use `text` or `keyword` instead.")]
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
 	public interface IStringProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]
@@ -56,7 +56,7 @@ namespace Nest
 		bool? EagerGlobalOrdinals { get; set; }
 	}
 
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in NEST 6.x.  For newly created indices, use `text` or `keyword` instead.")]
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class StringProperty : DocValuesPropertyBase, IStringProperty
 	{
@@ -81,7 +81,7 @@ namespace Nest
 		public bool? EagerGlobalOrdinals { get; set; }
 	}
 
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in NEST 6.x.  For newly created indices, use `text` or `keyword` instead.")]
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class StringPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<StringPropertyDescriptor<T>, IStringProperty, T>, IStringProperty

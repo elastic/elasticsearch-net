@@ -35,7 +35,7 @@ namespace Nest
 		/// number of hits
 		/// </summary>
 		[JsonIgnore]
-		[Obsolete("Use MinimumDocumentCountAsLong. Removed in NEST 6.x")]
+		[Obsolete("Use MinimumDocumentCountAsLong. Fixed in NEST 6.x")]
 		int? MinimumDocumentCount { get; set; }
 
 		/// <summary>
@@ -131,7 +131,7 @@ namespace Nest
 		/// <inheritdoc />
 		public int? ShardSize { get; set; }
 
-		[Obsolete("Use MinimumDocumentCountAsLong. Removed in NEST 6.x")]
+		[Obsolete("Use MinimumDocumentCountAsLong. Fixed in NEST 6.x")]
 		/// <inheritdoc />
 		public int? MinimumDocumentCount
 		{
@@ -188,7 +188,7 @@ namespace Nest
 
 		int? ISignificantTermsAggregation.ShardSize { get; set; }
 
-		[Obsolete("Use MinimumDocumentCountAsLong. Removed in NEST 6.x")]
+		[Obsolete("Use MinimumDocumentCountAsLong. Fixed in NEST 6.x")]
 		int? ISignificantTermsAggregation.MinimumDocumentCount
 		{
 			get => Self.MinimumDocumentCountAsLong > int.MaxValue ? int.MaxValue : (int?)Self.MinimumDocumentCountAsLong;

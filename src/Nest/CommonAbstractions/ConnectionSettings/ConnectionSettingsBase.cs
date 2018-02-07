@@ -164,7 +164,7 @@ namespace Nest
         /// Specify the default index names for a given POCO type.
         /// Takes precedence over the global <see cref="DefaultIndex"/>
         /// </summary>
-        [Obsolete("Removed in 6.0.")]
+        /// <remarks>Removed in 6.x.</remarks>
         public TConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull(nameof(mappingSelector));
@@ -176,7 +176,7 @@ namespace Nest
 		/// Specify the default type names for a given POCO type.
 		/// Takes precedence over the global <see cref="DefaultTypeNameInferrer"/>
 		/// </summary>
-		[Obsolete("Removed in 6.0.")]
+		/// <remarks>Removed in 6.x.</remarks>
 		public TConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull(nameof(mappingSelector));
@@ -191,7 +191,7 @@ namespace Nest
         /// <typeparam name="TDocument">The type of the document.</typeparam>
         /// <param name="objectPath">The object path.</param>
         /// <returns></returns>
-        [Obsolete("Removed in 6.0.")]
+        /// <remarks>Removed in 6.x.</remarks>
         public TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
@@ -218,7 +218,7 @@ namespace Nest
         /// <typeparam name="TDocument">The type of the document.</typeparam>
         /// <param name="propertiesSelector">The properties selector.</param>
         /// <returns></returns>
-        [Obsolete("Removed in 6.0.")]
+        /// <remarks>Removed in 6.x.</remarks>
         public TConnectionSettings MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
 			where TDocument : class
 		{
