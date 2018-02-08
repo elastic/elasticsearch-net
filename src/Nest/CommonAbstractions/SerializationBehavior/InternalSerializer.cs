@@ -98,41 +98,25 @@ namespace Nest
 		public async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			if (stream == null) return default(T);
-			using (var streamReader = new StreamReader(stream))
-			using (var jsonTextReader = new JsonTextReader(streamReader))
-			{
-				//JsonSerializerInternalReader that's is used in `Deserialize()` from the synchronous codepath
-				// has the same try catch
-				// https://github.com/JamesNK/Newtonsoft.Json/blob/master/Src/Newtonsoft.Json/Serialization/JsonSerializerInternalReader.cs#L145
-				// :/
-				try
-				{
-					var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
-					return token.ToObject<T>(this.Serializer);
-				}
-				catch
-				{
-					return default(T);
-				}
-			}
+			var bytes = await ReadToBytesAsync(stream, cancellationToken);
+
+			if (bytes == null || bytes.Length == 0) return default(T);
+            using (var ms  = new MemoryStream(bytes))
+            using (var sr = new StreamReader(ms))
+            using (var jtr = new JsonTextReader(sr))
+				return this.Serializer.Deserialize<T>(jtr);
 		}
 
 		public async Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			if (stream == null) return type.DefaultValue();
-			using (var streamReader = new StreamReader(stream))
-			using (var jsonTextReader = new JsonTextReader(streamReader))
-			{
-				try
-				{
-					var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
-					return token.ToObject(type, this.Serializer);
-				}
-				catch
-				{
-					return type.DefaultValue();
-				}
-			}
+			var bytes = await ReadToBytesAsync(stream, cancellationToken);
+
+			if (bytes == null || bytes.Length == 0) return type.DefaultValue();
+            using (var ms  = new MemoryStream(bytes))
+            using (var sr = new StreamReader(ms))
+            using (var jtr = new JsonTextReader(sr))
+				return this.Serializer.Deserialize(jtr, type);
 		}
 
 		private JsonSerializerSettings CreateSettings(SerializationFormatting formatting)
@@ -149,6 +133,16 @@ namespace Nest
 				throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
 
 			return settings;
+		}
+
+		private static async Task<byte[]> ReadToBytesAsync(Stream stream, CancellationToken cancellationToken)
+		{
+			if (stream is MemoryStream o) return o.ToArray();
+			using (var ms = new MemoryStream())
+			{
+				await stream.CopyToAsync(ms, ResponseBuilder.BufferSize, cancellationToken);
+				return ms.ToArray();
+			}
 		}
 	}
 }
