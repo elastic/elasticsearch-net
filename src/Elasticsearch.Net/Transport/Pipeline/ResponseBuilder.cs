@@ -10,7 +10,7 @@ namespace Elasticsearch.Net
 {
 	public static class ResponseBuilder
 	{
-		private const int BufferSize = 81920;
+		public const int BufferSize = 81920;
 
 		public static TResponse ToResponse<TResponse>(
 			RequestData requestData,
