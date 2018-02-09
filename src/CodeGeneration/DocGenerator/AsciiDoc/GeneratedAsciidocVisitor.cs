@@ -30,8 +30,8 @@ namespace DocGenerator.AsciiDoc
 	public class GeneratedAsciidocVisitor : NoopVisitor
 	{
 		private static readonly Dictionary<string,string> Ids = new Dictionary<string, string>();
-
 		private readonly FileInfo _destination;
+
 		private readonly FileInfo _source;
 	    private readonly Dictionary<string, Project> _projects;
 	    private int _topSectionTitleLevel;
@@ -76,12 +76,13 @@ namespace DocGenerator.AsciiDoc
 
 			if (!document.Attributes.Any(a => a.Name == "ref_current"))
 			{
-				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/2.4"));
+				_newDocument.Attributes.Add(new AttributeEntry("ref_current",
+					$"https://www.elastic.co/guide/en/elasticsearch/reference/{Program.DocVersion}"));
 			}
 			
 			if (document.Attributes.All(a => a.Name != "xpack_current"))
 			{
-				_newDocument.Attributes.Add(new AttributeEntry("xpack_current", "https://www.elastic.co/guide/en/x-pack/2.4"));
+				_newDocument.Attributes.Add(new AttributeEntry("xpack_current", "https://www.elastic.co/guide/en/x-pack/{Program.DocVersion}"));
 			}
 
 			var github = "https://github.com/elastic/elasticsearch-net";
@@ -96,7 +97,9 @@ namespace DocGenerator.AsciiDoc
 				_newDocument.Attributes.Add(new AttributeEntry("nuget", "https://www.nuget.org/packages"));
 			}
 
-			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)", $"{github}/tree/2.x/src/Tests/");
+			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)",
+				$"{github}/tree/{Program.BranchName}/src/Tests/");
+
 			_newDocument.Insert(0, new Comment
 			{
 				Style = CommentStyle.MultiLine,
