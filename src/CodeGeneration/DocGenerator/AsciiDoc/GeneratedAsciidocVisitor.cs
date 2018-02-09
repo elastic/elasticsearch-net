@@ -53,7 +53,7 @@ namespace DocGenerator.AsciiDoc
 			return _newDocument;
 		}
 
-		public override void Visit(Document document)
+		public override void VisitDocument(Document document)
 		{
 			_newDocument = new Document
 			{
@@ -127,10 +127,10 @@ namespace DocGenerator.AsciiDoc
 				}
 			}
 
-			base.Visit(document);
+			base.VisitDocument(document);
 		}
 
-		public override void Visit(Container elements)
+		public override void VisitContainer(Container elements)
 		{
 			if (_topLevel)
 			{
@@ -207,10 +207,10 @@ namespace DocGenerator.AsciiDoc
 				}
 			}
 
-			base.Visit(elements);
+			base.VisitContainer(elements);
 		}
 
-		public override void Visit(Source source)
+		public override void VisitSource(Source source)
 		{
 			// remove method attributes as the elastic doc generation doesn't like them; it
 			// expects a linenumbering in the index 2 position of a source block
@@ -224,10 +224,10 @@ namespace DocGenerator.AsciiDoc
 			// (elastic docs generation does not like this callout format)
 			source.Text = Regex.Replace(source.Text.Replace("\t", "    "), @"//[ \t]*\<(\d+)\>.*", "<$1>");
 
-			base.Visit(source);
+			base.VisitSource(source);
 		}
 
-		public override void Visit(SectionTitle sectionTitle)
+		public override void VisitSectionTitle(SectionTitle sectionTitle)
 		{
 			// Generate an anchor for all top level section titles
 			if (this._document.IndexOf(sectionTitle) == 0 && !sectionTitle.Attributes.HasAnchor)
@@ -235,7 +235,7 @@ namespace DocGenerator.AsciiDoc
 				var builder = new StringBuilder();
 				using (var writer = new AsciiDocVisitor(new StringWriter(builder)))
 				{
-					writer.Visit((InlineContainer) sectionTitle);
+					writer.VisitInlineContainer(sectionTitle);
 				}
 
 				var title = builder.ToString().PascalToHyphen();
@@ -254,10 +254,10 @@ namespace DocGenerator.AsciiDoc
 				Ids.Add(key, _destination.FullName);
 			}
 
-			base.Visit(sectionTitle);
+			base.VisitSectionTitle(sectionTitle);
 		}
 
-		public override void Visit(AttributeEntry attributeEntry)
+		public override void VisitAttributeEntry(AttributeEntry attributeEntry)
 		{
 			if (attributeEntry.Name != "xml-docs") return;
 			//true when running from the IDE, build/output might have not been created
@@ -281,7 +281,7 @@ namespace DocGenerator.AsciiDoc
 
 			if (string.IsNullOrEmpty(value))
 			{
-				base.Visit(attributeEntry);
+				base.VisitAttributeEntry(attributeEntry);
 				return;
 			}
 
@@ -373,7 +373,7 @@ namespace DocGenerator.AsciiDoc
 				var builder = new StringBuilder();
 				using (var visitor = new AsciiDocVisitor(new StringWriter(builder)))
 				{
-					visitor.Visit((InlineContainer) lastSectionTitle);
+					visitor.VisitInlineContainer(lastSectionTitle);
 				}
 
 				return predicate(builder.ToString());
