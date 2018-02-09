@@ -56,7 +56,7 @@ We set up a cluster with 4 nodes all having a different rack id
 				our Sticky Sniffing Connection Pool gives the most weight to rack_2 and rack_11.
 				We initially only seed nodes `9200-9203` in racks 0 to 3. So we should be sticky on rack_2.
 				We setup node 9202 to fail after two client calls in which case we sniff and find nodes
-			 `9210-9213` in which case we should become sticky on rack_11.
+				`9210-9213` in which case we should become sticky on rack_11.
 
 [source,csharp]
 ----

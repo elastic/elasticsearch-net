@@ -109,7 +109,8 @@ var request = new IndexRequest<Project>(2) { Document = project };
 request = new IndexRequest<Project>(project) { };
 ----
 
-when comparing with the full blown constructor and passing document manually,`DocumentPath<T>`'s benefits become apparent. Compare the following request that doesn't
+when comparing with the full blown constructor and passing document manually,
+`DocumentPath<T>`'s benefits become apparent. Compare the following request that doesn't
 use `DocumentPath<T>` with the former examples
 
 [source,csharp]

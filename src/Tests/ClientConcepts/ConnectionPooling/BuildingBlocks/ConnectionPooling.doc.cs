@@ -19,8 +19,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
          * Despite the name, a connection pool in NEST is **not** like connection pooling that you may be familiar with from
          * https://msdn.microsoft.com/en-us/library/bb399543(v=vs.110).aspx[interacting with a database using ADO.Net]; for example,
          * a connection pool in NEST is **not** responsible for managing an underlying pool of TCP connections to Elasticsearch,
-         * this is https://blogs.msdn.microsoft.com/adarshk/2005/01/02/understanding-system-net-connection-management-and-servicepointmanager/[handled by the ServicePointManager in Desktop CLR]
-         * and can be controlled by <<servicepoint-behaviour,changing the ServicePoint behaviour>> on `HttpConnection`.
+         * this is https://blogs.msdn.microsoft.com/adarshk/2005/01/02/understanding-system-net-connection-management-and-servicepointmanager/[handled by the ServicePointManager in Desktop CLR].
          * --
          *
          * So, what is a connection pool in NEST responsible for? It is responsible for managing the nodes in an Elasticsearch

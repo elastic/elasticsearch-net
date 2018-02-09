@@ -145,10 +145,8 @@ var exceptions = new List<Type>
 {
     nestAssembly.GetType("System.AssemblyVersionInformation", throwOnError: false),
     nestAssembly.GetType("System.Runtime.Serialization.Formatters.FormatterAssemblyStyle", throwOnError: false),
-#if DOTNETCORE
     typeof(SynchronizedCollection<>),
     nestAssembly.GetType("System.ComponentModel.Browsable", throwOnError: false)
-#endif
 };
 
 var types = nestAssembly.GetTypes();
@@ -177,9 +175,7 @@ var exceptions = new List<Type>
     elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierDotNet"),
     elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierMono"),
     elasticsearchNetAssembly.GetType("Purify.Purifier+UriInfo"),
-#if DOTNETCORE
     elasticsearchNetAssembly.GetType("System.ComponentModel.Browsable")
-#endif
 };
 
 var types = elasticsearchNetAssembly.GetTypes();
@@ -198,11 +194,7 @@ if (value.Length == 0)
 for (int index = 0; index < value.Length; ++index)
 {
     var character = value[index];
-#if DOTNETCORE
     var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);
-#else
-    var unicodeCategory = char.GetUnicodeCategory(character);
-#endif
     switch (unicodeCategory)
     {
         case UnicodeCategory.UppercaseLetter:

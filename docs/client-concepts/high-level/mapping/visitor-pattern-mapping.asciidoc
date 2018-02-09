@@ -71,6 +71,7 @@ public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
 }
 ----
 <1> Override the `Visit` method on `INumberProperty` and set `DocValues = false`
+
 <2> Similarily, override the `Visit` method on `IBooleanProperty` and set `DocValues = false`
 
 Now we can pass an instance of our custom visitor to `.AutoMap()` 
@@ -142,7 +143,7 @@ disables {ref_current}/doc-values.html[doc_values].
 You can even take the visitor approach a step further, and instead of visiting on `IProperty` types, visit
 directly on your POCO reflected `PropertyInfo` properties.
 
-As an example, let's create a visitor that maps all CLR types to an Elasticsearch text datatype `ITextProperty`).
+As an example, let's create a visitor that maps all CLR types to an Elasticsearch text datatype (`ITextProperty`).
 
 [source,csharp]
 ----

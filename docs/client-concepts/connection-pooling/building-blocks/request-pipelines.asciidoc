@@ -101,7 +101,8 @@ sniffingPipeline.FirstPoolUsageNeedsSniffing.Should().BeFalse();
 
 ==== Wait for first sniff
 
-All threads wait for the sniff on startup to finish, waiting the request timeout period. A https://msdn.microsoft.com/en-us/library/system.threading.semaphoreslim(v=vs.110).aspx[`SemaphoreSlim`]
+All threads wait for the sniff on startup to finish, waiting the request timeout period. A
+https://msdn.microsoft.com/en-us/library/system.threading.semaphoreslim(v=vs.110).aspx[`SemaphoreSlim`]
 is used to block threads until the sniff finishes and waiting threads release the `SemaphoreSlim` appropriately.
 
 We can demonstrate this with the following example. First, let's configure

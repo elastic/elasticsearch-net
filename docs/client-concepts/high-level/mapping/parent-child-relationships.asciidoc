@@ -16,7 +16,8 @@ please modify the original csharp file found at the link and submit the PR with 
 === Parent/Child relationships
 
 Prior to Elasticsearch 6.x you could have multiple types in a single index. Through the special `_parent` field mapping of a given type,
-one could create 1 to N relationships of parent => children documents. This worked because when indexing children, you passed a`_parent` id which acted as the routing key, ensuring a parent, its children and any ancestors all lived on the same shard.
+one could create 1 to N relationships of parent => children documents. This worked because when indexing children, you passed a
+`_parent` id which acted as the routing key, ensuring a parent, its children and any ancestors all lived on the same shard.
 
 Starting with 6.x indices, multiple types are no longer suppported in a single index. One reason for this is that if for instance
 two types have the same `name` property, this property needed to be mapped exactly the same for both types, but all the APIs act as if you can map
@@ -99,8 +100,11 @@ var createIndexResponse = client.CreateIndex("index", c => c
 );
 ----
 <1> recommended to make the routing field mandatory so you can not accidentally forget
+
 <2> Map all of the `MyParent` properties
+
 <3> Map all of the `MyChild` properties
+
 <4> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
 
 We call `AutoMap()` for both types to discover properties of both .NET types. `AutoMap()` won't automatically setup the
@@ -176,6 +180,7 @@ parentDocument = new MyParent
 var indexParent = client.IndexDocument<MyDocument>(parentDocument);
 ----
 <1> this lets the join data type know this is a root document of type `myparent`
+
 <2> this lets the join data type know this is a root document of type `myparent`
 
 [source,javascript]

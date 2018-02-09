@@ -98,7 +98,8 @@ requestUri.LocalPath.Should().StartWith("/some-other-index/");
 <1> Provide the index name on the request
 
 When an index name is provided on a request, it **will take precedence** over the default
-index name and any index name specified for the POCO type using `.MapDefaultTypeIndices()` or`.DefaultMappingFor<T>()`
+index name and any index name specified for the POCO type using `.MapDefaultTypeIndices()` or
+`.DefaultMappingFor<T>()`
 
 [source,csharp]
 ----
