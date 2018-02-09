@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/ClientConcepts/Certificates/WorkingWithCertificates.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/ClientConcepts/Certificates/WorkingWithCertificates.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -80,7 +80,7 @@ public class AllowAllCertificatesCluster : SslAndKpiXPackCluster
 If your client application has access to the public CA certificate locally, Elasticsearch.NET and NEST ship with some handy helpers
 that can assert that a certificate the server presents is one that came from the local CA.
 
-If you use X-Pack's {ref_current}/certutil.html[+certutil+ tool] to generate SSL certificates, the generated node certificate
+If you use X-Pack's {ref_current}/certutil.html`certutil` tool] to generate SSL certificates, the generated node certificate
 does not include the CA in the certificate chain, in order to cut down on SSL handshake size. In those case you can use`CertificateValidations.AuthorityIsRoot` and pass it your local copy of the CA public key to assert that
 the certificate the server presented was generated using it
 
@@ -115,7 +115,7 @@ the local CA certificate is part of the chain that was used to generate the serv
 ==== Client Certificates
 
 X-Pack also allows you to configure a {xpack_current}/pki-realm.html[PKI realm] to enable user authentication
-through client certificates. The {ref_current}/certutil.html[+certutil+ tool] included with X-Pack allows you to
+through client certificates. The {ref_current}/certutil.html`certutil` tool] included with X-Pack allows you to
 generate client certificates as well and assign the distinguished name (DN) of the
 certificate to a user with a certain role.
 
