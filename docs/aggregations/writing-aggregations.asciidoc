@@ -202,7 +202,7 @@ s => s
 
 An advanced scenario may involve an existing collection of aggregation functions that should be set as aggregations
 on the request. Using LINQ's `.Aggregate()` method, each function can be applied to the aggregation descriptor
-`childAggs` below) in turn, returning the descriptor after each function application.
+(`childAggs` below) in turn, returning the descriptor after each function application.
 
 [source,csharp]
 ----
@@ -228,6 +228,7 @@ return s => s
         );
 ----
 <1> a list of aggregation functions to apply
+
 <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
 
 [[handling-aggregate-response]]
@@ -271,5 +272,6 @@ var maxPerChild = childAggregation.Max("max_per_child");
 maxPerChild.Should().NotBeNull(); <2>
 ----
 <1> Do something with the average per child. Here we just assert it's not null
+
 <2> Do something with the max per child. Here we just assert it's not null
 

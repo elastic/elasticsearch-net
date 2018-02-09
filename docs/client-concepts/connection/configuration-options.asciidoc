@@ -22,7 +22,8 @@ how the clients interact with Elasticsearch.
 
 ==== Options on ConnectionConfiguration
 
-The following is a list of available connection configuration options on `ConnectionConfiguration`; since`ConnectionSettings` derives from `ConnectionConfiguration`, these options are available for both
+The following is a list of available connection configuration options on `ConnectionConfiguration`; since
+`ConnectionSettings` derives from `ConnectionConfiguration`, these options are available for both
 Elasticsearch.Net and NEST:
 
 `BasicAuthentication`::

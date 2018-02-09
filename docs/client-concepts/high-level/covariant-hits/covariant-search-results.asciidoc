@@ -21,7 +21,7 @@ Since types are removed in Elasticsearch 6.0 this feature is no longer supported
 now explicitly inject a serializer for user types only (_source, fields etcetera) please rely on a JsonConverter that
 can do this out of the box e.g `TypeNameHandling.All` from `Json.NET`
 
-https://www.newtonsoft.com/json/help/html/SerializeTypeNameHandling.htm[]
+https://www.newtonsoft.com/json/help/html/SerializeTypeNameHandling.htm
 
 [source,csharp]
 ----
