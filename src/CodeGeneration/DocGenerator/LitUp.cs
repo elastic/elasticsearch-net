@@ -15,8 +15,6 @@ namespace DocGenerator
 {
 	public static class LitUp
 	{
-		public const string DocumentationVersion = "5.6";
-
 		private static readonly string[] SkipFolders = { "Debug", "Release" };
 
         private static string GetProjectDir(string projectName) => Path.Combine(Program.InputDirPath, projectName);

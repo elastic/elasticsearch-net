@@ -61,7 +61,7 @@ namespace DocGenerator
 
 		public static string BranchName { get; }
 
-		public static string DocVersion => "6.1";
+		public static string DocVersion => "5.6";
 
 		static int Main(string[] args)
 		{

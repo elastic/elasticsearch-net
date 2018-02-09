@@ -76,7 +76,7 @@ namespace DocGenerator.AsciiDoc
 
 			if (document.Attributes.All(a => a.Name != "ref_current"))
 			{
-				_newDocument.Attributes.Add(new AttributeEntry("ref_current", $"https://www.elastic.co/guide/en/elasticsearch/reference/{LitUp.DocumentationVersion}"));
+				_newDocument.Attributes.Add(new AttributeEntry("ref_current", $"https://www.elastic.co/guide/en/elasticsearch/reference/{Program.DocVersion}"));
 			}
 
 			if (document.Attributes.All(a => a.Name != "xpack_current"))
