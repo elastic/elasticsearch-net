@@ -82,7 +82,7 @@ namespace DocGenerator.AsciiDoc
 			if (document.Attributes.All(a => a.Name != "xpack_current"))
 			{
 				_newDocument.Attributes.Add(new AttributeEntry("xpack_current",
-					$"https://www.elastic.co/guide/en/elasticsearch/reference/{Program.DocVersion}"));
+					$"https://www.elastic.co/guide/en/x-pack/{Program.DocVersion}"));
 			}
 
 			var github = "https://github.com/elastic/elasticsearch-net";

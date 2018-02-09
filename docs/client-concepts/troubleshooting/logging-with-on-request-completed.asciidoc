@@ -39,9 +39,7 @@ await client.RootNodeInfoAsync(); <3>
 counter.Should().Be(2);
 ----
 <1> Construct a client
-
 <2> Make a synchronous call and assert the counter is incremented
-
 <3> Make an asynchronous call and assert the counter is incremented
 
 `OnRequestCompleted` is called even when an exception is thrown, so it can be used even if the client is
@@ -65,9 +63,7 @@ await Assert.ThrowsAsync<ElasticsearchClientException>(async () => await client.
 counter.Should().Be(2);
 ----
 <1> Configure a client with a connection that **always returns a HTTP 500 response
-
 <2> Always throw exceptions when a call results in an exception
-
 <3> Assert an exception is thrown and the counter is incremented
 
 Here's an example using `OnRequestCompleted()` for more complex logging
@@ -148,15 +144,10 @@ list.ShouldAllBeEquivalentTo(new[] <6>
 });
 ----
 <1> Here we use `InMemoryConnection` but in a real application, you'd use an `IConnection` that _actually_ sends the request, such as `HttpConnection`
-
 <2> Disable direct streaming so we can capture the request and response bytes
-
 <3> Perform some action when a request completes. Here, we're just adding to a list, but in your application you may be logging to a file.
-
 <4> Make a synchronous call
-
 <5> Make an asynchronous call
-
 <6> Assert the list contains the contents written in the delegate passed to `OnRequestCompleted`
 
 When running an application in production, you probably don't want to disable direct streaming for _all_
@@ -236,10 +227,7 @@ list.ShouldAllBeEquivalentTo(new[]
 });
 ----
 <1> Make a synchronous call where the request and response bytes will not be buffered
-
 <2> Make an asynchronous call where `DisableDirectStreaming()` is enabled
-
 <3> Only the method and url for the first request is captured
-
 <4> the body of the second request is captured
 
