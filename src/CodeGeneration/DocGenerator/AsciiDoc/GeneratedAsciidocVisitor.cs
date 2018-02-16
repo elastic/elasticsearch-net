@@ -76,7 +76,8 @@ namespace DocGenerator.AsciiDoc
 
 			if (document.Attributes.All(a => a.Name != "ref_current"))
 			{
-				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/6.1"));
+				_newDocument.Attributes.Add(new AttributeEntry("ref_current",
+					$"https://www.elastic.co/guide/en/elasticsearch/reference/{Program.DocVersion}"));
 			}
 
 			var github = "https://github.com/elastic/elasticsearch-net";
@@ -90,7 +91,9 @@ namespace DocGenerator.AsciiDoc
 				_newDocument.Attributes.Add(new AttributeEntry("nuget", "https://www.nuget.org/packages"));
 			}
 
-			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)", $"{github}/tree/master/src/Tests/");
+			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)",
+				$"{github}/tree/{Program.BranchName}/src/Tests/");
+
 			_newDocument.Insert(0, new Comment
 			{
 				Style = CommentStyle.MultiLine,
