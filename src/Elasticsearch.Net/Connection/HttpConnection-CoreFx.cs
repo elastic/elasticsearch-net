@@ -241,14 +241,16 @@ namespace Elasticsearch.Net
 					data.Write(stream, requestData.ConnectionSettings);
 				stream.Position = 0;
 			}
-			else
+			// HttpClient does not allow any Content for GET and HEAD requests
+			else if ((requestMessage.Method != System.Net.Http.HttpMethod.Get) && (requestMessage.Method != System.Net.Http.HttpMethod.Head))
 			{
 				// Set content in order to set a Content-Type header.
 				// Content gets diposed so can't be shared instance
 				requestMessage.Content = new ByteArrayContent(new byte[0]);
 			}
 
-			requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
+			if (requestMessage.Content != null)
+				requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
 
 			return requestMessage;
 		}
