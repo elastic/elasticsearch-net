@@ -242,7 +242,7 @@ namespace Elasticsearch.Net
 				stream.Position = 0;
 			}
 			// HttpClient does not allow any Content for GET and HEAD requests
-			else if ((requestMessage.Method != System.Net.Http.HttpMethod.Get) && (requestMessage.Method != System.Net.Http.HttpMethod.Head))
+			else if (requestMessage.Method != System.Net.Http.HttpMethod.Get && requestMessage.Method != System.Net.Http.HttpMethod.Head)
 			{
 				// Set content in order to set a Content-Type header.
 				// Content gets diposed so can't be shared instance
