@@ -53,7 +53,7 @@ namespace DocGenerator.AsciiDoc
 			return _newDocument;
 		}
 
-		public override void Visit(Document document)
+		public override void VisitDocument(Document document)
 		{
 			_newDocument = new Document
 			{
@@ -128,10 +128,10 @@ namespace DocGenerator.AsciiDoc
 				}
 			}
 
-			base.Visit(document);
+			base.VisitDocument(document);
 		}
 
-		public override void Visit(Container elements)
+		public override void VisitContainer(Container elements)
 		{
 			if (_topLevel)
 			{
@@ -206,10 +206,10 @@ namespace DocGenerator.AsciiDoc
 				}
 			}
 
-			base.Visit(elements);
+			base.VisitContainer(elements);
 		}
 
-		public override void Visit(Source source)
+		public override void VisitSource(Source source)
 		{
 			// remove method attributes as the elastic doc generation doesn't like them; it
 			// expects a linenumbering in the index 2 position of a source block
@@ -223,10 +223,10 @@ namespace DocGenerator.AsciiDoc
 			// (elastic docs generation does not like this callout format)
 			source.Text = Regex.Replace(source.Text.Replace("\t", "    "), @"//[ \t]*\<(\d+)\>.*", "<$1>");
 
-			base.Visit(source);
+			base.VisitSource(source);
 		}
 
-		public override void Visit(SectionTitle sectionTitle)
+		public override void VisitSectionTitle(SectionTitle sectionTitle)
 		{
 			// Generate an anchor for all top level section titles
 			if (this._document.IndexOf(sectionTitle) == 0 && !sectionTitle.Attributes.HasAnchor)
@@ -234,7 +234,7 @@ namespace DocGenerator.AsciiDoc
 				var builder = new StringBuilder();
 				using (var writer = new AsciiDocVisitor(new StringWriter(builder)))
 				{
-					writer.Visit((InlineContainer)sectionTitle);
+					writer.VisitInlineContainer(sectionTitle);
 				}
 
 				var title = builder.ToString().PascalToHyphen();
@@ -253,88 +253,87 @@ namespace DocGenerator.AsciiDoc
 				Ids.Add(key, _destination.FullName);
 			}
 
-			base.Visit(sectionTitle);
+			base.VisitSectionTitle(sectionTitle);
 		}
 
-	    public override void Visit(AttributeEntry attributeEntry)
+	    public override void VisitAttributeEntry(AttributeEntry attributeEntry)
 	    {
-	        if (attributeEntry.Name == "xml-docs")
-	        {
-                var value = attributeEntry.Value;
+		    if (attributeEntry.Name != "xml-docs") return;
 
-                if (string.IsNullOrEmpty(value))
-                {
-                    base.Visit(attributeEntry);
-                    return;
-                }
+		    var value = attributeEntry.Value;
 
-                var parts = value.Split(':');
-                var assemblyName = parts[0];
-                var typeName = parts[1];
+		    if (string.IsNullOrEmpty(value))
+		    {
+			    base.VisitAttributeEntry(attributeEntry);
+			    return;
+		    }
 
-                string xmlDocsFile;
-                Assembly assembly;
-                string assemblyNamespace;
+		    var parts = value.Split(':');
+		    var assemblyName = parts[0];
+		    var typeName = parts[1];
 
-                //TODO: tidy this up
-                switch (assemblyName.ToLowerInvariant())
-                {
-                    case "elasticsearch.net":
-                        xmlDocsFile = Path.GetFullPath(Path.Combine(Program.BuildOutputPath, "Elasticsearch.Net", "net46", "Elasticsearch.Net.XML"));
-                        assembly = typeof(ElasticLowLevelClient).Assembly;
-                        assemblyNamespace = typeof(ElasticLowLevelClient).Namespace;
-                        break;
-                    default:
-                        xmlDocsFile = Path.GetFullPath(Path.Combine(Program.BuildOutputPath, "Nest", "net46", "Nest.XML"));
-                        assembly = typeof(ElasticClient).Assembly;
-                        assemblyNamespace = typeof(ElasticClient).Namespace;
-                        break;
-                }
+		    string xmlDocsFile;
+		    Assembly assembly;
+		    string assemblyNamespace;
 
-                // build xml documentation file on the fly if it doesn't exist
-	            if (!File.Exists(xmlDocsFile))
-	            {
-                    var project = _projects[assemblyName];
-                    var compilation = project.GetCompilationAsync().Result;
+		    //TODO: tidy this up
+		    switch (assemblyName.ToLowerInvariant())
+		    {
+			    case "elasticsearch.net":
+				    xmlDocsFile = Path.GetFullPath(Path.Combine(Program.BuildOutputPath, "Elasticsearch.Net", "net46", "Elasticsearch.Net.XML"));
+				    assembly = typeof(ElasticLowLevelClient).Assembly;
+				    assemblyNamespace = typeof(ElasticLowLevelClient).Namespace;
+				    break;
+			    default:
+				    xmlDocsFile = Path.GetFullPath(Path.Combine(Program.BuildOutputPath, "Nest", "net46", "Nest.XML"));
+				    assembly = typeof(ElasticClient).Assembly;
+				    assemblyNamespace = typeof(ElasticClient).Namespace;
+				    break;
+		    }
 
-                    using (var peStream = new MemoryStream())
-                    using (var commentStream = File.Create(xmlDocsFile))
-                    {
-                        var emitResult = compilation.Emit(peStream, null, commentStream);
+		    // build xml documentation file on the fly if it doesn't exist
+		    if (!File.Exists(xmlDocsFile))
+		    {
+			    var project = _projects[assemblyName];
+			    var compilation = project.GetCompilationAsync().Result;
 
-                        if (!emitResult.Success)
-                        {
-                            var failures = emitResult.Diagnostics.Where(diagnostic =>
-                                diagnostic.IsWarningAsError ||
-                                diagnostic.Severity == DiagnosticSeverity.Error);
+			    using (var peStream = new MemoryStream())
+			    using (var commentStream = File.Create(xmlDocsFile))
+			    {
+				    var emitResult = compilation.Emit(peStream, null, commentStream);
 
-                            var builder = new StringBuilder($"Unable to emit compilation for: {assemblyName}");
-                            foreach (var diagnostic in failures)
-                            {
-                                builder.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
-                            }
-                            builder.AppendLine(new string('-', 30));
+				    if (!emitResult.Success)
+				    {
+					    var failures = emitResult.Diagnostics.Where(diagnostic =>
+						    diagnostic.IsWarningAsError ||
+						    diagnostic.Severity == DiagnosticSeverity.Error);
 
-                            throw new Exception(builder.ToString());
-                        }
-                    }
-                }
+					    var builder = new StringBuilder($"Unable to emit compilation for: {assemblyName}");
+					    foreach (var diagnostic in failures)
+					    {
+						    builder.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
+					    }
+					    builder.AppendLine(new string('-', 30));
 
-                var assemblyMembers = DocReader.Read(assembly, xmlDocsFile);
-                var type = assembly.GetType(assemblyNamespace + "." + typeName);
-                var visitor = new XmlDocsVisitor(type);
+					    throw new Exception(builder.ToString());
+				    }
+			    }
+		    }
 
-                visitor.VisitAssembly(assemblyMembers);
-                if (visitor.LabeledListItems.Any())
-                {
-                    var labeledList = new LabeledList();
-                    foreach (var item in visitor.LabeledListItems.OrderBy(l => l.Label))
-                    {
-                        labeledList.Items.Add(item);
-                    }
-                    _newDocument.Insert(_newDocument.IndexOf(attributeEntry), labeledList);
-                }
-            }
+		    var assemblyMembers = DocReader.Read(assembly, xmlDocsFile);
+		    var type = assembly.GetType(assemblyNamespace + "." + typeName);
+		    var visitor = new XmlDocsVisitor(type);
+
+		    visitor.VisitAssembly(assemblyMembers);
+		    if (visitor.LabeledListItems.Any())
+		    {
+			    var labeledList = new LabeledList();
+			    foreach (var item in visitor.LabeledListItems.OrderBy(l => l.Label))
+			    {
+				    labeledList.Items.Add(item);
+			    }
+			    _newDocument.Insert(_newDocument.IndexOf(attributeEntry), labeledList);
+		    }
 	    }
 
 		private void RemoveDocDirectoryAttribute(Document document)
@@ -354,7 +353,7 @@ namespace DocGenerator.AsciiDoc
 				var builder = new StringBuilder();
 				using (var visitor = new AsciiDocVisitor(new StringWriter(builder)))
 				{
-					visitor.Visit((InlineContainer)lastSectionTitle);
+					visitor.VisitInlineContainer(lastSectionTitle);
 				}
 
 				return predicate(builder.ToString());
