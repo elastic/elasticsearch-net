@@ -72,7 +72,8 @@ var createIndexResponse = client.CreateIndex("my-index", c => c
 
 ==== Configuring a built-in analyzer
 
-Several built-in analyzers can be configured to alter their behaviour. For example, the`standard` analyzer can be configured to support a list of stop words with the stop word token filter
+Several built-in analyzers can be configured to alter their behaviour. For example, the
+`standard` analyzer can be configured to support a list of stop words with the stop word token filter
 it contains.
 
 Configuring a built-in analyzer requires creating an analyzer based on the built-in one
@@ -156,7 +157,9 @@ public class Question
 ----
 
 Based on our domain knowledge of programming languages, we would like to be able to search questions
-that contain `"C#"`, but using the `standard` analyzer, `"C#"` will be analyzed and produce the token`"c"`. This won't work for our use case as there will be no way to distinguish questions about`"C#"` from questions about another popular programming language, `"C"`.
+that contain `"C#"`, but using the `standard` analyzer, `"C#"` will be analyzed and produce the token
+`"c"`. This won't work for our use case as there will be no way to distinguish questions about
+`"C#"` from questions about another popular programming language, `"C"`.
 
 We can solve our issue with a custom analyzer
 

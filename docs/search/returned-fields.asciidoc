@@ -50,7 +50,8 @@ Seriously consider whether disabling source is what you really want to do for yo
 
 --
 
-When storing fields in this manner, the individual field values to return can be specified using`.StoredFields` on the search request
+When storing fields in this manner, the individual field values to return can be specified using
+`.StoredFields` on the search request
 
 [source,csharp]
 ----

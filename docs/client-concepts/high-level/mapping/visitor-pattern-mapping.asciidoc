@@ -132,7 +132,7 @@ disables {ref_current}/doc-values.html[doc_values].
 You can even take the visitor approach a step further, and instead of visiting on `IProperty` types, visit
 directly on your POCO reflected `PropertyInfo` properties.
 
-As an example, let's create a visitor that maps all CLR types to an Elasticsearch string datatype `IStringProperty`).
+As an example, let's create a visitor that maps all CLR types to an Elasticsearch string datatype (`IStringProperty`).
 
 [source,csharp]
 ----

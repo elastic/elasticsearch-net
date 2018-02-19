@@ -159,7 +159,8 @@ Elasticsearch allows searching across multiple indices using the special `_all` 
 
 NEST exposes the `_all` marker with `Indices.All` and `Indices.AllIndices`. Why expose it in two ways, you ask?
 Well, you may be using both `Nest.Indices` and `Nest.Types` in the same file and you may also be using C#6
-static imports too; in this scenario, the `All` property becomes ambiguous between `Indices.All` and `Types.All`, so the`_all` marker for indices is exposed as `Indices.AllIndices`, to alleviate this ambiguity
+static imports too; in this scenario, the `All` property becomes ambiguous between `Indices.All` and `Types.All`, so the
+`_all` marker for indices is exposed as `Indices.AllIndices`, to alleviate this ambiguity
 
 [source,csharp]
 ----

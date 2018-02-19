@@ -17,7 +17,8 @@ please modify the original csharp file found at the link and submit the PR with 
 [[verbatim-and-strict-query-usage]]
 === Verbatim and Strict Query Usage
 
-NEST has the concept of conditionless queries; if the input to a query is determined to be __empty__, for example,`null` or `""` for a string input, then the query will not be serialized and sent to Elasticsearch. If a conditionless
+NEST has the concept of conditionless queries; if the input to a query is determined to be __empty__, for example,
+`null` or `""` for a string input, then the query will not be serialized and sent to Elasticsearch. If a conditionless
 query is part of a compound query then the query will not be part of the json query dsl sent to Elasticsearch.
 
 Conditionless behavior can be controlled on individual queries by using Strict and Verbatim queries

@@ -29,7 +29,8 @@ selector)` on `ConnectionSettings`
 the `IElasticsearchSerializer` used, and inspected inside of the `CreatePropertyMapping()` on
 the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
 
-This example demonstrates all ways, using the `Ignore` property on the attribute to ignore the property`PropertyToIgnore`, the infer mapping to ignore the property `AnotherPropertyToIgnore` and the
+This example demonstrates all ways, using the `Ignore` property on the attribute to ignore the property
+`PropertyToIgnore`, the infer mapping to ignore the property `AnotherPropertyToIgnore` and the
 json serializer specific attribute  to ignore the property `JsonIgnoredProperty`
 
 [source,csharp]

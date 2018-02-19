@@ -472,7 +472,8 @@ bool
 ....
 
 Why is this? Well, when a `bool` query has **only** `should` clauses, **__at least one__** of them must match.
-However, when that `bool` query also has a `must` clause, the `should` clauses instead now act as a_boost_ factor, meaning none of them have to match but if they do, the relevancy score for that document
+However, when that `bool` query also has a `must` clause, the `should` clauses instead now act as a
+_boost_ factor, meaning none of them have to match but if they do, the relevancy score for that document
 will be boosted and thus appear higher in the results. The semantics for how `should` clauses behave then
 changes based on the presence of the `must` clause.
 
@@ -512,7 +513,8 @@ TIP: *Add parentheses to force evaluation order*
 Using `should` clauses as boost factors can be a really powerful construct when building
 search queries, and remember, you can mix and match an actual `bool` query with NEST's operator overloading.
 
-There is another subtle situation where NEST will not blindly merge two `bool` queries with only`should` clauses. Consider the following
+There is another subtle situation where NEST will not blindly merge two `bool` queries with only
+`should` clauses. Consider the following
 
 [source,sh]
 ----

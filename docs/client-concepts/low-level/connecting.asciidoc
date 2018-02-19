@@ -256,7 +256,8 @@ list.ShouldAllBeEquivalentTo(new[]
 SSL can be configured via the `ServerCertificateValidationCallback` property on either `ServerPointManager` or `HttpClientHandler`
 depending on which version of the .NET framework is in use.
 
-On the full .NET Framework, this must be done outside of the client using .NET's built-in http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager] class:
+On the full .NET Framework, this must be done outside of the client using .NET's built-in
+http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager] class:
 
 [source,csharp]
 ----

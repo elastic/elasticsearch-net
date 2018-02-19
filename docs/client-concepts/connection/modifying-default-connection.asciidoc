@@ -31,7 +31,8 @@ The Desktop CLR implementation using `WebRequest` is the most mature implementat
 in production since the beginning of NEST. For this reason, we aren't quite ready to it give up in favour of
 a `HttpClient` implementation across all CLR versions.
 
-In addition to production usage, there are also a couple of important toggles that are easy to set against a`ServicePoint` that are not possible to set as yet on `HttpClient`.
+In addition to production usage, there are also a couple of important toggles that are easy to set against a
+`ServicePoint` that are not possible to set as yet on `HttpClient`.
 
 Finally, another limitation is that `HttpClient` has no synchronous code paths, so supporting these means
 doing hacky async patches which definitely need time to bake.
@@ -139,7 +140,8 @@ var settings = new ConnectionSettings(connectionPool, connection);
 var client = new ElasticClient(settings);
 ----
 
-The Connection limit has been increased from the default 80 to much higher and https://en.wikipedia.org/wiki/Nagle's_algorithm[nagling] has been enabled, which is disabled by default in the client.
+The Connection limit has been increased from the default 80 to much higher and
+https://en.wikipedia.org/wiki/Nagle's_algorithm[nagling] has been enabled, which is disabled by default in the client.
 
 NOTE: The client reuses TCP connections through .NET's internal connection pooling,
 so changing the connection limit to something really high should only be done with careful
