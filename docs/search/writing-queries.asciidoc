@@ -279,7 +279,9 @@ var searchResponse = client.Search<Project>(s => s
 );
 ----
 <1> match documents where lead developer first name contains Russ
+
 <2> ...and where the lead developer last name contains Cam
+
 <3> ...and where the project started in 2017
 
 which yields the following query JSON
@@ -330,7 +332,8 @@ the relevancy score calculated, since both queries are running in a query contex
 so no score is calculated for matching documents (all documents have the same score
 of 1.0 for this query).
 
-Because `bool` queries are so common, NEST overloads operators on queries to make forming`bool` queries much more succinct. The previous `bool` query can be more concisely
+Because `bool` queries are so common, NEST overloads operators on queries to make forming
+`bool` queries much more succinct. The previous `bool` query can be more concisely
 expressed as
 
 [source,csharp]
@@ -354,6 +357,7 @@ searchResponse = client.Search<Project>(s => s
 );
 ----
 <1> combine queries using the binary `&&` operator
+
 <2> wrap a query in a `bool` query filter clause using the unary `+` operator and combine using the binary `&&` operator
 
 Take a look at the dedicated section on <<bool-queries, writing `bool` queries>> for more detail

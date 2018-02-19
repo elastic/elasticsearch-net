@@ -134,7 +134,8 @@ In this case, it's possible to use `.AutoMap()` in conjunction with explicitly m
 
 Here we are using `.AutoMap()` to automatically infer the mapping of our `Company` type from the
 CLR property types, but then we're overriding the `Employees` property to make it a
-{ref_current}/nested.html[nested datatype], since by default `.AutoMap()` will infer the`List<Employee>` property as an `object` datatype
+{ref_current}/nested.html[nested datatype], since by default `.AutoMap()` will infer the
+`List<Employee>` property as an `object` datatype
 
 [source,csharp]
 ----
@@ -286,8 +287,11 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
             );
 ----
 <1> Automap company
+
 <2> Override company inferred mappings
+
 <3> Auto map employee
+
 <4> Override employee inferred mappings
 
 [source,javascript]
@@ -390,7 +394,8 @@ You may have noticed in the <<auto-map-with-overrides, Automap with fluent overr
 that the properties of the `Employees` property on `Company` were not mapped. This is because the automapping
 was applied only at the root level of the `Company` mapping.
 
-By calling `.AutoMap()` inside of the `.Nested<Employee>` mapping, it is possible to auto map the`Employee` nested properties and again, override any inferred mapping from the automapping process,
+By calling `.AutoMap()` inside of the `.Nested<Employee>` mapping, it is possible to auto map the
+`Employee` nested properties and again, override any inferred mapping from the automapping process,
 through manual mapping
 
 [source,csharp]
@@ -421,8 +426,11 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
             );
 ----
 <1> Automap `Company`
+
 <2> Override specific `Company` mappings
+
 <3> Automap `Employees` property
+
 <4> Override specific `Employee` properties
 
 [source,javascript]

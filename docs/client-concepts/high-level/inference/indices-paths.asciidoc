@@ -90,6 +90,7 @@ singleIndexFromIndexName.Match(
 );
 ----
 <1> `_all` will override any specific index names here
+
 <2> The `Project` type has been mapped to a specific index name using <<index-name-type-mapping,`.InferMappingFor<Project>`>>
 
 [[nest-indices]]
@@ -122,7 +123,9 @@ ISearchRequest singleTypedRequest = new SearchDescriptor<Project>().Index(single
 var invalidSingleString = Index("name1, name2"); <3>
 ----
 <1> specifying a single index using a string
+
 <2> specifying a single index using a type
+
 <3> an **invalid** single index name
 
 ===== Multiple indices
@@ -148,7 +151,9 @@ manyStringRequest = new SearchDescriptor<Project>().Type(new[] { "name1", "name2
 ((IUrlParameter)manyStringRequest.Type).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
 ----
 <1> specifying multiple indices using strings
+
 <2> specifying multiple indices using types
+
 <3> The index names here come from the Connection Settings passed to `TestClient`. See the documentation on <<index-name-inference, Index Name Inference>> for more details.
 
 ===== All Indices
@@ -157,7 +162,8 @@ Elasticsearch allows searching across multiple indices using the special `_all` 
 
 NEST exposes the `_all` marker with `Indices.All` and `Indices.AllIndices`. Why expose it in two ways, you ask?
 Well, you may be using both `Nest.Indices` and `Nest.Types` in the same file and you may also be using C#6
-static imports too; in this scenario, the `All` property becomes ambiguous between `Indices.All` and `Types.All`, so the`_all` marker for indices is exposed as `Indices.AllIndices`, to alleviate this ambiguity
+static imports too; in this scenario, the `All` property becomes ambiguous between `Indices.All` and `Types.All`, so the
+`_all` marker for indices is exposed as `Indices.AllIndices`, to alleviate this ambiguity
 
 [source,csharp]
 ----

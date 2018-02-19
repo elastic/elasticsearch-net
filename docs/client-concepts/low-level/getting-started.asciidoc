@@ -108,6 +108,7 @@ var asyncIndexResponse = await lowlevelClient.IndexAsync<string>("people", "pers
 string responseString = asyncIndexResponse.Body;
 ----
 <1> synchronous method that returns an `IIndexResponse`
+
 <2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 
 NOTE: All available methods within Elasticsearch.Net are exposed as both synchronous and asynchronous versions,
@@ -187,7 +188,8 @@ var successful = searchResponse.Success;
 var responseJson = searchResponse.Body;
 ----
 
-`responseJson` now holds a JSON string for the response. The search endpoint for this query is`/people/person/_search` and it's possible to search over multiple indices and types by changing the arguments
+`responseJson` now holds a JSON string for the response. The search endpoint for this query is
+`/people/person/_search` and it's possible to search over multiple indices and types by changing the arguments
 supplied in the request for `index` and `type`, respectively.
 
 Strings can also be used to express the request
@@ -243,8 +245,11 @@ var serverError = searchResponse.ServerError; <3>
 var exception = searchResponse.OriginalException; <4>
 ----
 <1> Response is in the 200 range, or an expected response for the given request
+
 <2> Response is successful, or has a response code between 400-599 that indicates the request cannot be retried.
+
 <3> Details of any error returned from Elasticsearch
+
 <4> If the response is unsuccessful, will hold the original exception.
 
 Using these details, it is possible to make decisions around what should be done in your application.
@@ -259,7 +264,8 @@ var settings = new ConnectionConfiguration(new Uri("http://example.com:9200"))
 var lowlevelClient = new ElasticLowLevelClient(settings);
 ----
 
-And if more fine grained control is required, custom exceptions can be thrown using `.OnRequestCompleted()` on`ConnectionConfiguration`
+And if more fine grained control is required, custom exceptions can be thrown using `.OnRequestCompleted()` on
+`ConnectionConfiguration`
 
 [source,csharp]
 ----
