@@ -25,12 +25,14 @@ NEST heavily relied on the fact that the `IContractResolver` used by the configu
 an instance of `ElasticContractResolver`, so if you wanted to deserialize your `_source` or `_fields`
 using your own resolver, you were out of luck. In addition, continued improvements to NEST's serialization pipeline
 was stymied by this dependency and as client authors, we wanted to unhinder ourselves from this in order to explore the myriad
-of exciting developments happening in the .NET ecosystem around performance with the likes of `Span<T>`,`ArrayPool<T>` and a more compact UTF-8 string representation.
+of exciting developments happening in the .NET ecosystem around performance with the likes of `Span<T>`,
+`ArrayPool<T>` and a more compact UTF-8 string representation.
 
 So what did we do in 6.x and how does it affect you?
 
 The `NEST` nuget package from 6.0.0 onwards will use the internal Json.NET serializer and will in effect, behave the same
-as it did in previous releases. If you previously relied on custom Json.NET serialization and configuration with custom`JsonSerializerSettings` and `JsonConverter` types for example, things have changed a bit. The following section explains
+as it did in previous releases. If you previously relied on custom Json.NET serialization and configuration with custom
+`JsonSerializerSettings` and `JsonConverter` types for example, things have changed a bit. The following section explains
 how to continue working with these with NEST 6.x.
 
 [float]
@@ -106,7 +108,8 @@ back to NEST's built-in serializer.
 ==== JsonNetSerializer
 
 We ship a separate {nuget}/NEST.JsonNetSerializer[NEST.JsonNetSerializer] package that helps in composing a custom `SourceSerializer`
-using `Json.NET`, that is smart enough to delegate the serialization of known NEST types back to the built-in`RequestResponseSerializer`. This package is also useful if you want to control how your documents and values are stored
+using `Json.NET`, that is smart enough to delegate the serialization of known NEST types back to the built-in
+`RequestResponseSerializer`. This package is also useful if you want to control how your documents and values are stored
 and retreived from Elasticsearch using `Json.NET`, without intervering with the way NEST uses `Json.NET` internally.
 
 The easiest way to hook this custom source serializer is as follows

@@ -16,7 +16,8 @@ please modify the original csharp file found at the link and submit the PR with 
 === Multi fields
 
 It is often useful to index the same field in Elasticsearch in different ways, to
-serve different purposes, for example, mapping a POCO `string` property as a`text` datatype for full text search as well as mapping as a `keyword` datatype for
+serve different purposes, for example, mapping a POCO `string` property as a
+`text` datatype for full text search as well as mapping as a `keyword` datatype for
 structured search, sorting and aggregations. Another example is mapping a POCO `string`
 property to use different analyzers, to serve different full text search needs.
 
@@ -162,7 +163,9 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
             );
 ----
 <1> Use the stop analyzer on this sub field
+
 <2> Use a custom analyzer named "named_shingles" that is configured in the index
+
 <3> Index as not analyzed
 
 [source,javascript]

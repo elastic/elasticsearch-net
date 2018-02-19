@@ -107,6 +107,7 @@ var indexResponse = client.IndexDocument(person); <1>
 var asyncIndexResponse = await client.IndexDocumentAsync(person); <2>
 ----
 <1> synchronous method that returns an `IIndexResponse`
+
 <2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 
 NOTE: All methods available within NEST are exposed as both synchronous and asynchronous versions,
@@ -141,7 +142,8 @@ var searchResponse = client.Search<Person>(s => s
 var people = searchResponse.Documents;
 ----
 
-`people` now holds the first ten people whose first name is Martijn. The search endpoint for this query is`/people/person/_search` and the index `"people"`) and type `"person"`) values has been determined from
+`people` now holds the first ten people whose first name is Martijn. The search endpoint for this query is
+`/people/person/_search` and the index (`"people"`) and type (`"person"`) values has been determined from
 
 . the default index on `ConnectionSettings`
 

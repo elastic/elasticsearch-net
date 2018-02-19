@@ -27,8 +27,10 @@ selector)` on `ConnectionSettings`
 the `IElasticsearchSerializer` used, and inspected inside of the `CreatePropertyMapping()` on
 the serializer. Using the builtin `SourceSerializer` this would be the `IgnoreProperty`
 
-This example demonstrates all ways, using the `Ignore` property on the attribute to ignore the property`PropertyToIgnore`, the infer mapping to ignore the property `AnotherPropertyToIgnore` and the
-json serializer specific attribute  to ignore the property either `IgnoreProperty` or `JsonIgnoredProperty` depending on which`SourceSerializer` we configured.
+This example demonstrates all ways, using the `Ignore` property on the attribute to ignore the property
+`PropertyToIgnore`, the infer mapping to ignore the property `AnotherPropertyToIgnore` and the
+json serializer specific attribute  to ignore the property either `IgnoreProperty` or `JsonIgnoredProperty` depending on which
+`SourceSerializer` we configured.
 
 [source,csharp]
 ----
@@ -68,6 +70,7 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
 );
 ----
 <1> we're using an in-memory connection, but in your application, you'll want to use an `IConnection` that actually sends a request.
+
 <2> we disable direct streaming here to capture the request and response bytes. In your application however, you'll like not want to do this in production.
 
 The JSON output for the mapping does not contain the ignored properties
