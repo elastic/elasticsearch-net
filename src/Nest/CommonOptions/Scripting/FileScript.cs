@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[Obsolete("Scheduled to be removed in 6.0")]
+	/// <remarks>Removed in 6.x</remarks>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFileScript : IScript
 	{
@@ -11,7 +11,7 @@ namespace Nest
 		string File { get; set; }
 	}
 
-	[Obsolete("Scheduled to be removed in 6.0")]
+	/// <remarks>Removed in 6.x</remarks>
 	public class FileScript : ScriptBase, IFileScript
 	{
 		public FileScript(string file)
@@ -22,7 +22,7 @@ namespace Nest
 		public string File { get; set; }
 	}
 
-	[Obsolete("Scheduled to be removed in 6.0")]
+	/// <remarks>Removed in 6.x</remarks>
 	public class FileScriptDescriptor
 		: ScriptDescriptorBase<FileScriptDescriptor, IFileScript>, IFileScript
 	{
