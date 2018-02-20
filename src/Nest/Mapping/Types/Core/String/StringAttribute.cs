@@ -15,7 +15,7 @@ namespace Nest
 		IndexOptions? IStringProperty.IndexOptions { get; set; }
 		string IStringProperty.Analyzer { get; set; }
 		string IStringProperty.SearchAnalyzer { get; set; }
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		bool? IStringProperty.IncludeInAll { get; set; }
 		int? IStringProperty.IgnoreAbove { get; set; }
 		int? IStringProperty.PositionIncrementGap { get; set; }
@@ -29,7 +29,7 @@ namespace Nest
 		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
 		public int IgnoreAbove { get { return Self.IgnoreAbove.GetValueOrDefault(); } set { Self.IgnoreAbove = value; } }
 
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
 		public FieldIndexOption Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
 		public IndexOptions IndexOptions { get { return Self.IndexOptions.GetValueOrDefault(); } set { Self.IndexOptions = value; } }

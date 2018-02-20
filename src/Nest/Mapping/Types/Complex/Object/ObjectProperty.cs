@@ -16,7 +16,7 @@ namespace Nest
 		bool? Enabled { get; set; }
 
 		[JsonProperty("include_in_all")]
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
@@ -37,7 +37,7 @@ namespace Nest
 
 		public Union<bool, DynamicMapping> Dynamic { get; set; }
 		public bool? Enabled { get; set; }
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		public bool? IncludeInAll { get; set; }
 		public IProperties Properties { get; set; }
 	}
@@ -62,7 +62,7 @@ namespace Nest
 
 		Union<bool, DynamicMapping> IObjectProperty.Dynamic { get; set; }
 		bool? IObjectProperty.Enabled { get; set; }
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		bool? IObjectProperty.IncludeInAll { get; set; }
 		IProperties IObjectProperty.Properties { get; set; }
 
@@ -87,7 +87,7 @@ namespace Nest
 		public TDescriptor Enabled(bool enabled = true) =>
 			Assign(a => a.Enabled = enabled);
 
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		public TDescriptor IncludeInAll(bool includeInAll = true) =>
 			Assign(a => a.IncludeInAll = includeInAll);
 
