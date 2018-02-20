@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
+using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
@@ -28,6 +30,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
     */
     public class IgnoringProperties
 	{
+		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+
 		[ElasticsearchType(Name = "company")]
 		public class CompanyWithAttributesAndPropertiesToIgnore
 		{
@@ -46,16 +50,19 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void Ignoring()
 		{
 			/** All of the properties except `Name` have been ignored in the mapping */
-			var descriptor = new CreateIndexDescriptor("myindex")
+			var connectionSettings = new ConnectionSettings(new InMemoryConnection()) // <1> we're using an in-memory connection, but in your application, you'll want to use an `IConnection` that actually sends a request.
+				.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In your application however, you'll like not want to do this in production.
+				.InferMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(m => m
+					.Ignore(p => p.AnotherPropertyToIgnore)
+				);
+
+			var client = new ElasticClient(connectionSettings);
+
+			var createIndexResponse = client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
 						.AutoMap()
 					)
-				);
-
-            var settings = WithConnectionSettings(s => s
-                .InferMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(i => i
-                    .Ignore(p => p.AnotherPropertyToIgnore)
                 )
             );
 
@@ -89,7 +96,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
             //hide
-			settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
 		}
 
         /**==== Ignoring inherited properties
@@ -110,17 +117,20 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void IgnoringInheritedProperties()
 		{
-			var descriptor = new CreateIndexDescriptor("myindex")
+			var connectionSettings = new ConnectionSettings(new InMemoryConnection())
+				.DisableDirectStreaming()
+				.InferMappingFor<Child>(m => m
+					.Rename(p => p.Description, "desc")
+					.Ignore(p => p.IgnoreMe)
+				);
+
+			var client = new ElasticClient(connectionSettings);
+
+			var createIndexResponse = client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
                     .Map<Child>(m => m
 						.AutoMap()
 					)
-				);
-
-            var settings = WithConnectionSettings(s => s
-                .InferMappingFor<Child>(m => m
-                    .Rename(p => p.Description, "desc")
-                    .Ignore(p => p.IgnoreMe)
                 )
             );
 
@@ -153,7 +163,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
             //hide
-			settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
 		}
 	}
 }

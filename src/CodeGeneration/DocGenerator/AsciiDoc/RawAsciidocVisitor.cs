@@ -22,7 +22,7 @@ namespace DocGenerator.AsciiDoc
 			_destination = destination;
 		}
 
-		public override void Visit(Document document)
+		public override void VisitDocument(Document document)
 		{
 			_document = document;
 
@@ -42,10 +42,10 @@ namespace DocGenerator.AsciiDoc
 					   "please modify the original csharp file found at the link and submit the PR with that change. Thanks!"
 			});
 
-			base.Visit(document);
+			base.VisitDocument(document);
 		}
 
-		public override void Visit(AttributeEntry attributeEntry)
+		public override void VisitAttributeEntry(AttributeEntry attributeEntry)
 		{
 			if (attributeEntry.Name == "includes-from-dirs")
 			{
@@ -106,7 +106,7 @@ namespace DocGenerator.AsciiDoc
 				}
 			}
 
-			base.Visit(attributeEntry);
+			base.VisitAttributeEntry(attributeEntry);
 		}
 	}
 }

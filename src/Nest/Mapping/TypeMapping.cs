@@ -139,6 +139,30 @@ namespace Nest
 		public TypeMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) =>
 			Assign(a => a.Properties = a.Properties.AutoMap<T>(visitor, maxRecursion));
 
+		/// <summary>
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute"/> attributes set on the type.
+		/// This particular overload is useful for automapping any children
+		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etc)</pre>
+		/// <pre>Class types default to object and Enums to int</pre>
+		/// <pre>Later calls can override whatever is set is by this call.</pre>
+		/// </summary>
+		public TypeMappingDescriptor<T> AutoMap(Type documentType, IPropertyVisitor visitor = null, int maxRecursion = 0)
+		{
+			if (!documentType.IsClass()) throw new ArgumentException("must be a reference type", nameof(documentType));
+			return Assign(a => a.Properties = a.Properties.AutoMap(documentType, visitor, maxRecursion));
+		}
+
+		/// <summary>
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute"/> attributes set on the type.
+		/// This particular overload is useful for automapping any children
+		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etc)</pre>
+		/// <pre>Class types default to object and Enums to int</pre>
+		/// <pre>Later calls can override whatever is set is by this call.</pre>
+		/// </summary>
+		public TypeMappingDescriptor<T> AutoMap<TDocument>(IPropertyVisitor visitor = null, int maxRecursion = 0)
+			where TDocument : class =>
+			Assign(a => a.Properties = a.Properties.AutoMap<TDocument>(visitor, maxRecursion));
+
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 

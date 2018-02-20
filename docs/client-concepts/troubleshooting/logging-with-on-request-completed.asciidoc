@@ -17,7 +17,8 @@ please modify the original csharp file found at the link and submit the PR with 
 [[logging-with-on-request-completed]]
 === Logging with OnRequestCompleted
 
-When constructing the connection settings to pass to the client, you can pass a callback of type`Action<IApiCallDetails>` to the `OnRequestCompleted` method that can eavesdrop every time a
+When constructing the connection settings to pass to the client, you can pass a callback of type
+`Action<IApiCallDetails>` to the `OnRequestCompleted` method that can eavesdrop every time a
 response(good or bad) is received.
 
 If you have complex logging needs this is a good place to add that in

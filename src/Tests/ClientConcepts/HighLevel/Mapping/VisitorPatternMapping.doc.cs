@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
@@ -21,6 +22,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
      */
     public class VisitorPattern
 	{
+		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+
         /**
 		* Using the following two POCOs as in previous examples,
 		*/
@@ -68,15 +71,17 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void UsingACustomPropertyVisitor()
 		{
 			/** Now we can pass an instance of our custom visitor to `.AutoMap()` */
-			var descriptor = new CreateIndexDescriptor("myindex")
+			var createIndexResponse = client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
-				);
+				)
+			);
 
 			/** and any time the client maps a property of the POCO (Employee in this example) as a number (INumberProperty) or boolean (IBooleanProperty),
 			 * it will apply the transformation defined in each `Visit()` call respectively, which in this example
 			 * disables {ref_current}/doc-values.html[doc_values].
 			 */
+			// json
 			var expected = new
 			{
 				mappings = new
@@ -96,7 +101,15 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							firstName = new
 							{
-								type = "string"
+								type = "text",
+								fields = new
+								{
+									keyword = new
+									{
+										type = "keyword",
+										ignore_above = 256
+									}
+								}
 							},
 							isManager = new
 							{
@@ -105,17 +118,33 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							lastName = new
 							{
-								type = "string"
+								type = "text",
+								fields = new
+								{
+									keyword = new
+									{
+										type = "keyword",
+										ignore_above = 256
+									}
+								}
 							},
 							salary = new
 							{
 								doc_values = false,
 								type = "integer"
+							},
+							hours = new
+							{
+								doc_values = false,
+								type = "long"
 							}
 						}
 					}
 				}
 			};
+
+			// hide
+			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
 		}
 
         /**
@@ -133,10 +162,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void UsingACustomPropertyVisitorOnPropertyInfo()
 		{
-			var descriptor = new CreateIndexDescriptor("myindex")
+			var createIndexResponse = client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<Employee>(m => m.AutoMap(new EverythingIsATextPropertyVisitor()))
-				);
+				)
+			);
 
             /**
              */
@@ -182,13 +212,15 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-            // hide
-		    Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			// hide
+			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
 		}
         /**
 		 * ==== Skip properties
          *
-         * Through implementing `SkipProperty` on the visitor you can prevent certain properties from being mapped
+         * Through implementing `SkipProperty` on the visitor, you can prevent certain properties from being mapped.
+         *
+         * In this example, we skip the inherited properties of the type from which `DictionaryDocument` is derived
          *
 		 */
 		public class DictionaryDocument : SortedDictionary<string, dynamic>
@@ -206,10 +238,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 		[U] public void HidesInheritedMembers()
 		{
-			var descriptor = new CreateIndexDescriptor("myindex")
+			var createIndexResponse = client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<DictionaryDocument>(m => m.AutoMap(new IgnoreInheritedPropertiesVisitor<DictionaryDocument>()))
-				);
+				)
+			);
 
             /**
              */
@@ -231,8 +264,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-            // hide
-		    Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			// hide
+			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
 		}
 	}
 }

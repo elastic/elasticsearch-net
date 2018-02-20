@@ -204,7 +204,7 @@ s => s
 
 An advanced scenario may involve an existing collection of aggregation functions that should be set as aggregations
 on the request. Using LINQ's `.Aggregate()` method, each function can be applied to the aggregation descriptor
-`childAggs` below) in turn, returning the descriptor after each function application.
+(`childAggs` below) in turn, returning the descriptor after each function application.
 
 [source,csharp]
 ----

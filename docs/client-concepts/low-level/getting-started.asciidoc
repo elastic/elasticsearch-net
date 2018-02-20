@@ -188,7 +188,8 @@ var successful = searchResponse.Success;
 var responseJson = searchResponse.Body;
 ----
 
-`responseJson` now holds a JSON string for the response. The search endpoint for this query is`/people/person/_search` and it's possible to search over multiple indices and types by changing the arguments
+`responseJson` now holds a JSON string for the response. The search endpoint for this query is
+`/people/person/_search` and it's possible to search over multiple indices and types by changing the arguments
 supplied in the request for `index` and `type`, respectively.
 
 Strings can also be used to express the request
@@ -263,7 +264,8 @@ var settings = new ConnectionConfiguration(new Uri("http://example.com:9200"))
 var lowlevelClient = new ElasticLowLevelClient(settings);
 ----
 
-And if more fine grained control is required, custom exceptions can be thrown using `.OnRequestCompleted()` on`ConnectionConfiguration`
+And if more fine grained control is required, custom exceptions can be thrown using `.OnRequestCompleted()` on
+`ConnectionConfiguration`
 
 [source,csharp]
 ----

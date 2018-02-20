@@ -144,7 +144,8 @@ var searchResponse = client.Search<Person>(s => s
 var people = searchResponse.Documents;
 ----
 
-`people` now holds the first ten people whose first name is Martijn. The search endpoint for this query is`/people/person/_search` and the index `"people"`) and type `"person"`) values has been determined from
+`people` now holds the first ten people whose first name is Martijn. The search endpoint for this query is
+`/people/person/_search` and the index (`"people"`) and type (`"person"`) values has been determined from
 
 . the default index on `ConnectionSettings`
 

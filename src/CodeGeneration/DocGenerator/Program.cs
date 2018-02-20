@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace DocGenerator
@@ -20,6 +21,36 @@ namespace DocGenerator
 				OutputDirPath = @"..\..\..\..\..\docs";
                 BuildOutputPath = @"..\..\..\..\..\build\output";
 			}
+
+			var process = new Process
+			{
+				StartInfo = new ProcessStartInfo
+				{
+					UseShellExecute = false,
+					RedirectStandardOutput = true,
+					FileName = "git.exe",
+					CreateNoWindow = true,
+					WorkingDirectory = Environment.CurrentDirectory,
+					Arguments = "rev-parse --abbrev-ref HEAD"
+				}
+			};
+
+			try
+			{
+				process.Start();
+				BranchName = process.StandardOutput.ReadToEnd().Trim();
+				Console.WriteLine($"Using branch name {BranchName} in documentation");
+				process.WaitForExit();
+			}
+			catch (Exception)
+			{
+				BranchName = "master";
+				Console.WriteLine($"Could not get the git branch name. Assuming {BranchName}");
+			}
+			finally
+			{
+				process.Dispose();
+			}
         }
 
         public static string BuildOutputPath { get; }
@@ -27,6 +58,10 @@ namespace DocGenerator
 		public static string InputDirPath { get; }
 
 		public static string OutputDirPath { get; }
+
+		public static string BranchName { get; }
+
+		public static string DocVersion => "5.6";
 
 		static int Main(string[] args)
 		{
@@ -44,3 +79,5 @@ namespace DocGenerator
 		}
 	}
 }
+
+

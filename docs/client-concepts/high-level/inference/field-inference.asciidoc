@@ -41,7 +41,8 @@ Expect("name")
     .WhenSerializing(fieldProperty);
 ----
 
-When using the constructor and passing a value for `Name`, `Property` or `Expression`,`ComparisonValue` is also set on the `Field` instance; this is used when
+When using the constructor and passing a value for `Name`, `Property` or `Expression`,
+`ComparisonValue` is also set on the `Field` instance; this is used when
 
 * determining `Field` equality
 

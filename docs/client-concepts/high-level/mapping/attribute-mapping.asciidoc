@@ -76,11 +76,12 @@ Then we map the types by calling `.AutoMap()`
 
 [source,csharp]
 ----
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Company>(m => m.AutoMap())
         .Map<Employee>(m => m.AutoMap())
-    );
+    )
+);
 ----
 
 [source,javascript]

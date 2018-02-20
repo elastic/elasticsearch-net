@@ -1,0 +1,89 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
+
+:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/5.x/src/Tests/Aggregations/AggregationMetaUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[aggregation-metadata]]
+=== Aggregation Metadata
+
+Metadata can be provided per aggregation, and will be returned in the aggregation response
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .Min("min_last_activity", m => m
+        .Field(p => p.LastActivity)
+        .Meta(d => d
+            .Add("meta_1", "value_1")
+            .Add("meta_2", 2)
+            .Add("meta_3", new { meta_3 = "value_3" })
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new SearchRequest<Project>()
+{
+    Size = 0,
+    Aggregations = new MinAggregation("min_last_activity", Infer.Field<Project>(p => p.LastActivity))
+    {
+        Meta = new Dictionary<string,object>
+        {
+            { "meta_1", "value_1" },
+            { "meta_2", 2 },
+            { "meta_3", new { meta_3 = "value_3" } }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "min_last_activity": {
+      "min": {
+        "field": "lastActivity"
+      },
+      "meta": {
+        "meta_1": "value_1",
+        "meta_2": 2,
+        "meta_3": {
+          "meta_3": "value_3"
+        }
+      }
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+var min = response.Aggs.Min("min_last_activity");
+min.Meta.Should().NotBeNull().And.ContainKeys("meta_1", "meta_2", "meta_3");
+----
+

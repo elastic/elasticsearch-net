@@ -54,15 +54,15 @@ and map each property explicitly
 
 [source,csharp]
 ----
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Company>(m => m
             .Properties(ps => ps
                 .Text(s => s
-                    .Name(c => c.Name)
+                    .Name(n => n.Name)
                 )
                 .Object<Employee>(o => o
-                    .Name(c => c.Employees)
+                    .Name(n => n.Employees)
                     .Properties(eps => eps
                         .Text(s => s
                             .Name(e => e.FirstName)
@@ -78,7 +78,8 @@ var descriptor = new CreateIndexDescriptor("myindex")
                 )
             )
         )
-    );
+    )
+            );
 ----
 
 Here, the Name property of the `Company` type has been mapped as a {ref_current}/text.html[text datatype] and
@@ -133,21 +134,23 @@ In this case, it's possible to use `.AutoMap()` in conjunction with explicitly m
 
 Here we are using `.AutoMap()` to automatically infer the mapping of our `Company` type from the
 CLR property types, but then we're overriding the `Employees` property to make it a
-{ref_current}/nested.html[nested datatype], since by default `.AutoMap()` will infer the`List<Employee>` property as an `object` datatype
+{ref_current}/nested.html[nested datatype], since by default `.AutoMap()` will infer the
+`List<Employee>` property as an `object` datatype
 
 [source,csharp]
 ----
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Company>(m => m
             .AutoMap()
             .Properties(ps => ps
                 .Nested<Employee>(n => n
-                    .Name(c => c.Employees)
+                    .Name(nn => nn.Employees)
                 )
             )
         )
-    );
+    )
+            );
 ----
 
 [source,javascript]
@@ -180,17 +183,18 @@ generates the same mapping as the previous
 
 [source,csharp]
 ----
-descriptor = new CreateIndexDescriptor("myindex")
+createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Company>(m => m
             .Properties(ps => ps
                 .Nested<Employee>(n => n
-                    .Name(c => c.Employees)
+                    .Name(nn => nn.Employees)
                 )
             )
             .AutoMap()
         )
-    );
+    )
+            );
 ----
 
 Just as we were able to override the inferred properties from auto mapping in the previous example,
@@ -243,13 +247,13 @@ attributes, and inferred mappings are overridden with fluent mapping
 
 [source,csharp]
 ----
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<CompanyWithAttributes>(m => m
             .AutoMap() <1>
             .Properties(ps => ps <2>
                 .Nested<Employee>(n => n
-                    .Name(c => c.Employees)
+                    .Name(nn => nn.Employees)
                 )
             )
         )
@@ -279,7 +283,8 @@ var descriptor = new CreateIndexDescriptor("myindex")
                 )
             )
         )
-    );
+    )
+            );
 ----
 <1> Automap company
 
@@ -389,18 +394,19 @@ You may have noticed in the <<auto-map-with-overrides, Automap with fluent overr
 that the properties of the `Employees` property on `Company` were not mapped. This is because the automapping
 was applied only at the root level of the `Company` mapping.
 
-By calling `.AutoMap()` inside of the `.Nested<Employee>` mapping, it is possible to auto map the`Employee` nested properties and again, override any inferred mapping from the automapping process,
+By calling `.AutoMap()` inside of the `.Nested<Employee>` mapping, it is possible to auto map the
+`Employee` nested properties and again, override any inferred mapping from the automapping process,
 through manual mapping
 
 [source,csharp]
 ----
-var descriptor = new CreateIndexDescriptor("myindex")
+var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(m => m
         .Map<Company>(mm => mm
             .AutoMap() <1>
             .Properties(p => p <2>
                 .Nested<Employee>(n => n
-                    .Name(c => c.Employees)
+                    .Name(nn => nn.Employees)
                     .AutoMap() <3>
                     .Properties(pp => pp <4>
                         .Text(t => t
@@ -416,7 +422,8 @@ var descriptor = new CreateIndexDescriptor("myindex")
                 )
             )
         )
-    );
+    )
+            );
 ----
 <1> Automap `Company`
 

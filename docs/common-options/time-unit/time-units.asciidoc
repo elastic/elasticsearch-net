@@ -201,7 +201,8 @@ that accepts a factor and time unit, or specify a string with ms time units
 ==== Units of Time
 
 Where Units of Time can be specified as a union of either a `DateInterval` or `Time`,
-a `DateInterval` or `Time` may be passed which will be implicity converted to a`Union<DateInterval, Time>`, the serialized form of which represents the initial value
+a `DateInterval` or `Time` may be passed which will be implicity converted to a
+`Union<DateInterval, Time>`, the serialized form of which represents the initial value
 passed
 
 [source,csharp]

@@ -5,8 +5,6 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
-using static Nest.Infer;
 
 namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 {
@@ -41,7 +39,8 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 		protected override object ExpectJson { get; } = new Dictionary<string, object>
 		{
 			{ "index.blocks.write", false },
-			{ "index.number_of_replicas", 2 }
+			{ "index.number_of_replicas", 2 },
+			{ "index.priority", 2 }
 		};
 
 		protected override Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> Fluent => d => d
@@ -49,14 +48,19 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 			.IndexSettings(i => i
 				.BlocksWrite(false)
 				.NumberOfReplicas(2)
+				.Priority(2)
 			);
 
 		protected override UpdateIndexSettingsRequest Initializer => new UpdateIndexSettingsRequest(CallIsolatedValue)
 		{
-			IndexSettings = new Nest.IndexSettings
+			IndexSettings = new Nest.IndexSettings(new Dictionary<string, object>
+			{
+				{ "index.number_of_replicas", 3 },
+				{ "index.priority", 2 }
+			})
 			{
 				BlocksWrite = false,
-				NumberOfReplicas = 2
+				NumberOfReplicas = 2, //this should win from the value provided in the base dictionary
 			}
 		};
 	}

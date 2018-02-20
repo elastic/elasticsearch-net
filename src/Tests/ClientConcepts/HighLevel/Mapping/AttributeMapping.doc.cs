@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
@@ -29,6 +30,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	*/
     public class AttributeMapping
 	{
+		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+
         [ElasticsearchType(Name = "company")]
         public class Company
         {
@@ -69,11 +72,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void UsingAutoMapWithAttributes()
 		{
-			var descriptor = new CreateIndexDescriptor("myindex")
+			var createIndexResponse = client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<Company>(m => m.AutoMap())
 					.Map<Employee>(m => m.AutoMap())
-				);
+				)
+			);
 
             /**
              */
@@ -178,7 +182,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
             // hide
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
 		}
         /**
          * Attribute mapping can be a convenient way to control how POCOs are mapped with minimal code, however
