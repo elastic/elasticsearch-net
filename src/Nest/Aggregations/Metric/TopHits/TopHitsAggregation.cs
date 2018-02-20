@@ -30,6 +30,7 @@ namespace Nest
 		[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptFields>))]
 		IScriptFields ScriptFields { get; set; }
 
+		[Obsolete("Removed in NEST 6.x")]
 		[JsonProperty("fielddata_fields")]
 		Fields FielddataFields { get; set; }
 
@@ -52,6 +53,8 @@ namespace Nest
 		public IHighlight Highlight { get; set; }
 		public bool? Explain { get; set; }
 		public IScriptFields ScriptFields { get; set; }
+
+		[Obsolete("Removed in NEST 6.x")]
 		public Fields FielddataFields { get; set; }
 		public Fields StoredFields { get; set; }
 		public bool? Version { get; set; }
@@ -83,6 +86,7 @@ namespace Nest
 
 		IScriptFields ITopHitsAggregation.ScriptFields { get; set; }
 
+		[Obsolete("Removed in NEST 6.x")]
 		Fields ITopHitsAggregation.FielddataFields { get; set; }
 
 		Fields ITopHitsAggregation.StoredFields { get; set; }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -7,7 +8,10 @@ namespace Nest
 	public class BulkDeleteResponseItem : BulkResponseItemBase
 	{
 		public override string Operation { get; internal set; }
+
 		[JsonProperty("found")]
+
+		[Obsolete("Removed in 6.0.")]
 		public bool Found { get; internal set; }
 	}
 }

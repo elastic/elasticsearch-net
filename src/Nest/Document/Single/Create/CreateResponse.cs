@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -8,6 +9,7 @@ namespace Nest
 		string Index { get; }
 		string Type { get; }
 		long Version { get; }
+		[Obsolete("Removed in 6.0")]
 		bool Created { get; }
 		Result Result { get; }
 	}
@@ -28,6 +30,7 @@ namespace Nest
 		public long Version { get; internal set; }
 
 		[JsonProperty("created")]
+		[Obsolete("Removed in 6.0")]
 		public bool Created { get; internal set; }
 
 		[JsonProperty("result")]

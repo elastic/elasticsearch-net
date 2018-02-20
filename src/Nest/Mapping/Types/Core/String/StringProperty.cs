@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
 	public interface IStringProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]
@@ -33,7 +33,7 @@ namespace Nest
 		string SearchAnalyzer { get; set; }
 
 		[JsonProperty("include_in_all")]
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		bool? IncludeInAll { get; set; }
 
 		[JsonProperty("ignore_above")]
@@ -56,7 +56,7 @@ namespace Nest
 		bool? EagerGlobalOrdinals { get; set; }
 	}
 
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class StringProperty : DocValuesPropertyBase, IStringProperty
 	{
@@ -70,7 +70,7 @@ namespace Nest
 		public IndexOptions? IndexOptions { get; set; }
 		public string Analyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		public bool? IncludeInAll { get; set; }
 		public int? IgnoreAbove { get; set; }
 		public int? PositionIncrementGap { get; set; }
@@ -81,7 +81,7 @@ namespace Nest
 		public bool? EagerGlobalOrdinals { get; set; }
 	}
 
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use `text` or `keyword` instead.")]
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class StringPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<StringPropertyDescriptor<T>, IStringProperty, T>, IStringProperty
@@ -95,6 +95,8 @@ namespace Nest
 		IndexOptions? IStringProperty.IndexOptions { get; set; }
 		string IStringProperty.Analyzer { get; set; }
 		string IStringProperty.SearchAnalyzer { get; set; }
+
+		/// <remarks>Removed in 6.x</remarks>
 		bool? IStringProperty.IncludeInAll { get; set; }
 		int? IStringProperty.IgnoreAbove { get; set; }
 		int? IStringProperty.PositionIncrementGap { get; set; }
@@ -129,7 +131,7 @@ namespace Nest
 
 		public StringPropertyDescriptor<T> IgnoreAbove(int ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
 
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		public StringPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
 		public StringPropertyDescriptor<T> PositionIncrementGap(int positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);

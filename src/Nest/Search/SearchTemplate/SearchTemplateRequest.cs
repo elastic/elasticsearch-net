@@ -13,6 +13,7 @@ namespace Nest
 		[JsonProperty("inline")]
 		string Inline { get; set; }
 
+		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("file")]
 		string File { get; set; }
 
@@ -31,6 +32,7 @@ namespace Nest
 	public partial class SearchTemplateRequest
 	{
 		public string Inline { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		public string File { get; set; }
 		public string Id { get; set; }
 		public IDictionary<string, object> Params { get; set; }
@@ -82,7 +84,10 @@ namespace Nest
 		string ISearchTemplateRequest.Inline { get; set; }
 		public SearchTemplateDescriptor<T> Inline(string template) => Assign(a => a.Inline = template);
 
+
+		[Obsolete("Removed in NEST 6.x.")]
 		string ISearchTemplateRequest.File { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		public SearchTemplateDescriptor<T> File(string file) => Assign(a => a.File = file);
 
 		string ISearchTemplateRequest.Id { get; set; }

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[Obsolete("Removed in Elasticsearch 6.0, please consider using the ingest-attachment plugin.")]
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IAttachmentProperty : IDocValuesProperty
 	{
@@ -19,6 +20,7 @@ namespace Nest
 		ITextProperty LanguageField { get; set; }
 	}
 
+	[Obsolete("Removed in Elasticsearch 6.0, please consider using the ingest-attachment plugin.")]
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class AttachmentProperty : DocValuesPropertyBase, IAttachmentProperty
 	{
@@ -81,6 +83,7 @@ namespace Nest
 		}
 	}
 
+	[Obsolete("Removed in Elasticsearch 6.0, please consider using the ingest-attachment plugin.")]
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class AttachmentPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<AttachmentPropertyDescriptor<T>, IAttachmentProperty, T>, IAttachmentProperty

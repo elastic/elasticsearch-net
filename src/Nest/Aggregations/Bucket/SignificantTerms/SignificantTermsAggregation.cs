@@ -201,12 +201,12 @@ namespace Nest
 
 		TermsAggregationExecutionHint? ISignificantTermsAggregation.ExecutionHint { get; set; }
 
-		[Obsolete("Deprecated and will be fixed in 6.0. Use IncludeTerms")]
+		[Obsolete("Deprecated, will be fixed in 6.0. Use IncludeTerms")]
 		IDictionary<string, string> ISignificantTermsAggregation.Include { get; set; }
 
 		SignificantTermsIncludeExclude ISignificantTermsAggregation.IncludeTerms { get; set; }
 
-		[Obsolete("Deprecated and will be fixed in 6.0. Use ExcludeTerms")]
+		[Obsolete("Deprecated, will be fixed in 6.0. Use ExcludeTerms")]
 		IDictionary<string, string> ISignificantTermsAggregation.Exclude { get; set; }
 
 		SignificantTermsIncludeExclude ISignificantTermsAggregation.ExcludeTerms { get; set; }

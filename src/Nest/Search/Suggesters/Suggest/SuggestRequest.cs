@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
 {
+	[Obsolete("Removed in NEST 6.x, consider using suggesters on the Search() endpoint.")]
 	[JsonConverter(typeof(SuggestRequestJsonConverter))]
 	public partial interface ISuggestRequest
 	{
@@ -11,14 +11,17 @@ namespace Nest
 		ISuggestContainer Suggest { get; set; }
 	}
 
+	[Obsolete("Removed in NEST 6.x, consider using suggesters on the Search() endpoint.")]
 	public partial class SuggestRequest
 	{
 		public string GlobalText { get; set; }
 		public ISuggestContainer Suggest { get; set; }
 	}
 
+	[Obsolete("Removed in NEST 6.x, consider using suggesters on the Search() endpoint.")]
 	public partial interface ISuggestRequest<T> : ISearchRequest { }
 
+	[Obsolete("Removed in NEST 6.x, consider using suggesters on the Search() endpoint.")]
 	public partial class SuggestRequest<T>
 	{
 		public string GlobalText { get; set; }
@@ -26,6 +29,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("Suggest")]
+	[Obsolete("Removed in NEST 6.x, consider using suggesters on the Search() endpoint.")]
 	public partial class SuggestDescriptor<T> where T : class
 	{
 		string ISuggestRequest.GlobalText { get; set; }

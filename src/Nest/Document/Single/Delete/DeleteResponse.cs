@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -27,6 +28,7 @@ namespace Nest
 		/// <summary>
 		/// Whether or not the document was found and deleted from the index.
 		/// </summary>
+		[Obsolete("Scheduled to be removed in 6.0")]
 		bool Found { get; }
 
 		/// <summary>
@@ -52,6 +54,7 @@ namespace Nest
 		public string Version { get; internal set; }
 
 		[JsonProperty("found")]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public bool Found { get; internal set; }
 
 		[JsonProperty("result")]

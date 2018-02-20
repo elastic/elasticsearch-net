@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Nest
 {
 	public interface ITemplateMapping
 	{
+		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("template")]
 		string Template { get; set; }
 
@@ -25,6 +27,7 @@ namespace Nest
 
 	public class TemplateMapping : ITemplateMapping
 	{
+		[Obsolete("Removed in NEST 6.x.")]
 		public string Template { get; set; }
 
 		public int? Order { get; set; }

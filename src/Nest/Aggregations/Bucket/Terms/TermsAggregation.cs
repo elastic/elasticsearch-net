@@ -124,12 +124,14 @@ namespace Nest
 			a.Order.Add(order);
 		});
 
+		[Obsolete("Removed in NEST 6.x, use Order()")]
 		public TermsAggregationDescriptor<T> OrderAscending(string key) => Assign(a =>
 		{
 			a.Order = a.Order ?? new List<TermsOrder>();
 			a.Order.Add(new TermsOrder { Key = key, Order = SortOrder.Ascending });
 		});
 
+		[Obsolete("Removed in NEST 6.x, use Order()")]
 		public TermsAggregationDescriptor<T> OrderDescending(string key) => Assign(a =>
 		{
 			a.Order = a.Order ?? new List<TermsOrder>();

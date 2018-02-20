@@ -16,6 +16,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "id")]
 		Id Id { get; set; }
 
+		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("file")]
 		string File { get; set; }
 
@@ -32,6 +33,8 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public string Inline { get; set; }
 		public Id Id { get; set; }
+
+		[Obsolete("Removed in NEST 6.x.")]
 		public string File { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public string Lang { get; set; }
@@ -49,6 +52,7 @@ namespace Nest
 		protected override bool Conditionless => ScriptQuery.IsConditionless(this);
 		string IScriptQuery.Inline { get; set; }
 		Id IScriptQuery.Id { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		string IScriptQuery.File { get; set; }
 		string IScriptQuery.Lang { get; set; }
 		Dictionary<string, object> IScriptQuery.Params { get; set; }
@@ -66,6 +70,7 @@ namespace Nest
 		/// <summary>
 		/// File name of a script to execute
 		/// </summary>
+		[Obsolete("Removed in NEST 6.x.")]
 		public ScriptQueryDescriptor<T> File(string scriptFile) => Assign(a => a.File = scriptFile);
 
 		/// <summary>

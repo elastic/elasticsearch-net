@@ -48,6 +48,7 @@ namespace Nest
 		[JsonProperty("analyze_wildcard")]
 		bool? AnalyzeWildcard { get; set; }
 
+		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("auto_generate_phrase_queries")]
 		bool? AutoGeneratePhraseQueries { get; set; }
 
@@ -71,6 +72,7 @@ namespace Nest
 		Fields Fields { get; set; }
 
 		[JsonProperty("use_dis_max")]
+		[Obsolete("Removed in NEST 6.x.")]
 		bool? UseDisMax { get; set; }
 
 		[JsonProperty("tie_breaker")]
@@ -96,9 +98,11 @@ namespace Nest
 		[JsonProperty("escape")]
 		bool? Escape { get; set; }
 
+		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("all_fields")]
 		bool? AllFields { get; set; }
 
+		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("split_on_whitespace")]
 		bool? SplitOnWhitespace { get; set; }
 	}
@@ -143,11 +147,15 @@ namespace Nest
 		public double? PhraseSlop { get; set; }
 		public bool? Lenient { get; set; }
 		public bool? AnalyzeWildcard { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		public bool? AutoGeneratePhraseQueries { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		public bool? UseDisMax { get; set; }
 		public double? TieBreaker { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		public bool? AllFields { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		public bool? SplitOnWhitespace { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.QueryString = this;
@@ -181,7 +189,9 @@ namespace Nest
 		MinimumShouldMatch IQueryStringQuery.MinimumShouldMatch { get; set; }
 		bool? IQueryStringQuery.Lenient { get; set; }
 		bool? IQueryStringQuery.AnalyzeWildcard { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		bool? IQueryStringQuery.AutoGeneratePhraseQueries { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		bool? IQueryStringQuery.UseDisMax { get; set; }
 		double? IQueryStringQuery.TieBreaker { get; set; }
 		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
@@ -201,6 +211,7 @@ namespace Nest
 		MultiTermQueryRewrite IQueryStringQuery.MultiTermQueryRewrite { get; set; }
 		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
 		bool? IQueryStringQuery.Escape { get; set; }
+		[Obsolete("Removed in NEST 6.x.")]
 		bool? IQueryStringQuery.AllFields { get; set; }
 		bool? IQueryStringQuery.SplitOnWhitespace { get; set; }
 
@@ -252,6 +263,7 @@ namespace Nest
 		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool? autoGeneratePhraseQueries = true) =>
 			Assign(a => a.AutoGeneratePhraseQueries = autoGeneratePhraseQueries);
 
+		[Obsolete("Removed in NEST 6.x.")]
 		public QueryStringQueryDescriptor<T> UseDisMax(bool? useDismax = true) => Assign(a => a.UseDisMax = useDismax);
 
 		public QueryStringQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
@@ -278,17 +290,18 @@ namespace Nest
 					: null;
 			});
 
-		public QueryStringQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => 
+		public QueryStringQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) =>
 			Assign(a => Self.MultiTermQueryRewrite = rewrite);
 
-		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) => 
+		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) =>
 			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
 
 		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(a => a.Escape = escape);
 
 		public QueryStringQueryDescriptor<T> AllFields(bool? allFields = true) => Assign(a => a.AllFields = allFields);
 
-		public QueryStringQueryDescriptor<T> SplitOnWhitespace(bool? splitOnWhitespace = true) => 
+		[Obsolete("Removed in NEST 6.x.")]
+		public QueryStringQueryDescriptor<T> SplitOnWhitespace(bool? splitOnWhitespace = true) =>
 			Assign(a => a.SplitOnWhitespace = splitOnWhitespace);
 	}
 }

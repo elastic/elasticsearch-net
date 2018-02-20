@@ -26,7 +26,7 @@ namespace Nest
 		/// Otherwise defaults to true.
 		/// </summary>
 		[JsonProperty("include_in_all")]
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		bool? IncludeInAll { get; set; }
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public double? Boost { get; set; }
 		/// <inheritdoc/>
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		public bool? IncludeInAll { get; set; }
 		/// <inheritdoc/>
 		public bool? Index { get; set; }
@@ -59,6 +59,7 @@ namespace Nest
 	{
 		bool? IRangeProperty.Coerce { get; set; }
 		double? IRangeProperty.Boost { get; set; }
+		/// <remarks>Removed in 6.x</remarks>
 		bool? IRangeProperty.IncludeInAll { get; set; }
 		bool? IRangeProperty.Index { get; set; }
 
@@ -69,7 +70,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public TDescriptor Boost(double boost) => Assign(a => a.Boost = boost);
 		/// <inheritdoc/>
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		public TDescriptor IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 		/// <inheritdoc/>
 		public TDescriptor Index(bool index = true) => Assign(a => a.Index = index);

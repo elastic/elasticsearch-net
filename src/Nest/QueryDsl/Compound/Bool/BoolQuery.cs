@@ -48,6 +48,7 @@ namespace Nest
 		/// the greater the chances that the document is a good match for the query.
 		/// </summary>
 		[JsonProperty("disable_coord")]
+		[Obsolete("Removed in 6.0.")]
 		bool? DisableCoord { get; set; }
 
 		bool Locked { get; }
@@ -109,6 +110,7 @@ namespace Nest
 		/// percentage of the query terms. The more query terms that appear in the document,
 		/// the greater the chances that the document is a good match for the query.
 		/// </summary>
+		[Obsolete("Removed in 6.0.")]
 		public bool? DisableCoord { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Bool = this;
@@ -147,6 +149,8 @@ namespace Nest
 			set { _filter = value.AsInstanceOrToListOrNull(); }
 		}
 		MinimumShouldMatch IBoolQuery.MinimumShouldMatch { get; set; }
+
+		[Obsolete("Removed in 6.0.")]
 		bool? IBoolQuery.DisableCoord { get; set; }
 
 		/// <summary>
@@ -156,6 +160,7 @@ namespace Nest
 		/// the greater the chances that the document is a good match for the query.
 		/// </summary>
 		/// <returns></returns>
+		[Obsolete("Removed in 6.0.")]
 		public BoolQueryDescriptor<T> DisableCoord(bool? disableCoord = true) => Assign(a => a.DisableCoord = disableCoord);
 
 		/// <summary>

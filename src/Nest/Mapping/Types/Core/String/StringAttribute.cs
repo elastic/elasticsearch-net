@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use Text or Keyword attribute instead.")]
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0.  For newly created indices, use Text or Keyword attribute instead.")]
 	public class StringAttribute : ElasticsearchDocValuesPropertyAttributeBase, IStringProperty
 	{
 		IStringProperty Self => this;
@@ -15,6 +15,7 @@ namespace Nest
 		IndexOptions? IStringProperty.IndexOptions { get; set; }
 		string IStringProperty.Analyzer { get; set; }
 		string IStringProperty.SearchAnalyzer { get; set; }
+		/// <remarks>Removed in 6.x</remarks>
 		bool? IStringProperty.IncludeInAll { get; set; }
 		int? IStringProperty.IgnoreAbove { get; set; }
 		int? IStringProperty.PositionIncrementGap { get; set; }
@@ -27,6 +28,8 @@ namespace Nest
 		public string Analyzer { get { return Self.Analyzer; } set { Self.Analyzer = value; } }
 		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
 		public int IgnoreAbove { get { return Self.IgnoreAbove.GetValueOrDefault(); } set { Self.IgnoreAbove = value; } }
+
+		/// <remarks>Removed in 6.x</remarks>
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
 		public FieldIndexOption Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
 		public IndexOptions IndexOptions { get { return Self.IndexOptions.GetValueOrDefault(); } set { Self.IndexOptions = value; } }
@@ -38,7 +41,7 @@ namespace Nest
 		public bool Fielddata { get { return Self.FielddataUpgrade.GetValueOrDefault(true); } set { Self.FielddataUpgrade = value; } }
 		public bool EagerGlobalOrdinals { get { return Self.EagerGlobalOrdinals.GetValueOrDefault(true); } set { Self.EagerGlobalOrdinals = value; } }
 
-		[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use Text or Keyword attribute instead.")]
+		[Obsolete("Only valid for indices created before Elasticsearch 5.0, removed in Elasticsearch 6.0. For newly created indices, use Text or Keyword attribute instead.")]
 		public StringAttribute() : base("string") { }
 	}
 }

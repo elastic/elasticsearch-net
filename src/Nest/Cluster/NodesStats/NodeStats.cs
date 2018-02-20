@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -391,6 +392,7 @@ namespace Nest
 			[JsonProperty("type")]
 			public string Type { get; internal set; }
 			[JsonProperty("spins")]
+			[Obsolete("Scheduled to be removed in 6.0")]
 			public bool? Spins { get; internal set; }
 			[JsonProperty("total")]
 			public string Total { get; internal set; }

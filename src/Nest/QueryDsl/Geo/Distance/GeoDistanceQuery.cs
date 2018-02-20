@@ -37,6 +37,8 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public GeoLocation Location { get; set; }
 		public Distance Distance { get; set; }
+
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 		public GeoDistanceType? DistanceType { get; set; }
 
@@ -75,6 +77,7 @@ namespace Nest
 
 		public GeoDistanceQueryDescriptor<T> Distance(double distance, DistanceUnit unit) => Assign(a => a.Distance = new Distance(distance, unit));
 
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public GeoDistanceQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize) => Assign(a => a.OptimizeBoundingBox = optimize);
 
 		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistanceType type) => Assign(a => a.DistanceType = type);

@@ -18,6 +18,7 @@ namespace Nest
 		bool? NumericDetection { get; set; }
 
 		[JsonProperty("include_in_all")]
+		/// <remarks>Removed in 6.x</remarks>
 		bool? IncludeInAll { get; set; }
 
 		[Obsolete("Scheduled to be removed in 6.0. Default analyzers can no longer be specified at the type level.  Use an index or field level analyzer instead.")]
@@ -70,6 +71,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? DateDetection { get; set; }
 		/// <inheritdoc/>
+		/// <remarks>Removed in 6.x</remarks>
 		public bool? IncludeInAll { get; set; }
 		/// <inheritdoc/>
 		public Union<bool, DynamicMapping> Dynamic { get; set; }
@@ -109,6 +111,7 @@ namespace Nest
 	{
 		IAllField ITypeMapping.AllField { get; set; }
 		bool? ITypeMapping.DateDetection { get; set; }
+		/// <remarks>Removed in 6.x</remarks>
 		bool? ITypeMapping.IncludeInAll { get; set; }
 		Union<bool, DynamicMapping> ITypeMapping.Dynamic { get; set; }
 		IEnumerable<string> ITypeMapping.DynamicDateFormats { get; set; }
@@ -170,6 +173,7 @@ namespace Nest
 		public TypeMappingDescriptor<T> Dynamic(bool dynamic = true) => Assign(a => a.Dynamic = dynamic);
 
 		/// <inheritdoc/>
+		/// <remarks>Removed in 6.x</remarks>
 		public TypeMappingDescriptor<T> IncludeInAll(bool include = true) => Assign(a => a.IncludeInAll = include);
 
 		/// <inheritdoc/>

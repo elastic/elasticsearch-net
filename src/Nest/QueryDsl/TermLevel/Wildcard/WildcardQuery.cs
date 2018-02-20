@@ -10,7 +10,7 @@ namespace Nest
 	public interface IWildcardQuery : ITermQuery
 	{
 		[JsonIgnore]
-		[Obsolete("Use MultiTermQueryRewrite")]
+		[Obsolete("Use MultiTermQueryRewrite, Fixed in NEST 6.x")]
 		RewriteMultiTerm? Rewrite { get; set; }
 
 		[JsonProperty("rewrite")]
@@ -28,7 +28,7 @@ namespace Nest
 		protected override bool Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }
 
-		[Obsolete("Use MultiTermQueryRewrite")]
+		[Obsolete("Use MultiTermQueryRewrite, Fixed in NEST 6.x")]
 		public RewriteMultiTerm? Rewrite
 		{
 			get => MultiTermQueryRewrite?.Rewrite;
@@ -54,7 +54,7 @@ namespace Nest
 
 		MultiTermQueryRewrite IWildcardQuery.MultiTermQueryRewrite { get; set; }
 
-		[Obsolete("Use Rewrite(MultiTermQueryRewrite rewrite)")]
+		[Obsolete("Use MultiTermQueryRewrite, Fixed in NEST 6.x")]
 		public WildcardQueryDescriptor<T> Rewrite(RewriteMultiTerm? rewrite)
 		{
 			Self.MultiTermQueryRewrite = rewrite != null

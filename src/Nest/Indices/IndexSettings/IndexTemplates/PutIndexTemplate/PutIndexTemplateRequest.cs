@@ -9,6 +9,7 @@ namespace Nest
 
 	public partial class PutIndexTemplateRequest
 	{
+		[Obsolete("Removed in NEST 6.x.")]
 		public string Template { get; set; }
 
 		public int? Order { get; set; }
@@ -25,6 +26,7 @@ namespace Nest
 	[DescriptorFor("IndicesPutTemplate")]
 	public partial class PutIndexTemplateDescriptor
 	{
+		[Obsolete("Removed in NEST 6.x.")]
 		string ITemplateMapping.Template { get; set; }
 
 		int? ITemplateMapping.Order { get; set; }

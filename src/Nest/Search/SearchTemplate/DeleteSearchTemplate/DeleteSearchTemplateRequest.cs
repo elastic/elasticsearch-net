@@ -1,15 +1,20 @@
-﻿namespace Nest
+﻿using System;
+
+namespace Nest
 {
-	public partial interface IDeleteSearchTemplateRequest 
+	/// <remarks>Removed in 6.x</remarks>
+	public partial interface IDeleteSearchTemplateRequest
 	{
 	}
 
-	public partial class DeleteSearchTemplateRequest 
+	/// <remarks>Removed in 6.x</remarks>
+	public partial class DeleteSearchTemplateRequest
 	{
 	}
 
 	[DescriptorFor("DeleteTemplate")]
-	public partial class DeleteSearchTemplateDescriptor 
+	/// <remarks>Removed in 6.x</remarks>
+	public partial class DeleteSearchTemplateDescriptor
 	{
 	}
 }

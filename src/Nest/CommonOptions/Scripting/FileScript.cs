@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <remarks>Removed in 6.x</remarks>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFileScript : IScript
 	{
@@ -9,6 +11,7 @@ namespace Nest
 		string File { get; set; }
 	}
 
+	/// <remarks>Removed in 6.x</remarks>
 	public class FileScript : ScriptBase, IFileScript
 	{
 		public FileScript(string file)
@@ -19,6 +22,7 @@ namespace Nest
 		public string File { get; set; }
 	}
 
+	/// <remarks>Removed in 6.x</remarks>
 	public class FileScriptDescriptor
 		: ScriptDescriptorBase<FileScriptDescriptor, IFileScript>, IFileScript
 	{

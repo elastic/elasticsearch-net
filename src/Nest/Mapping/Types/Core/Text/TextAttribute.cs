@@ -17,7 +17,7 @@ namespace Nest
 		bool? ITextProperty.EagerGlobalOrdinals { get; set; }
 		bool? ITextProperty.Fielddata { get; set; }
 		IFielddataFrequencyFilter ITextProperty.FielddataFrequencyFilter { get; set; }
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		bool? ITextProperty.IncludeInAll { get; set; }
 		bool? ITextProperty.Index { get; set; }
 		IndexOptions? ITextProperty.IndexOptions { get; set; }
@@ -31,7 +31,7 @@ namespace Nest
 		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
 		public bool EagerGlobalOrdinals { get { return Self.EagerGlobalOrdinals.GetValueOrDefault(); } set { Self.EagerGlobalOrdinals = value; } }
 		public bool Fielddata { get { return Self.Fielddata.GetValueOrDefault(); } set { Self.Fielddata = value; } }
-		[Obsolete("Scheduled to be removed in 6.0")]
+		/// <remarks>Removed in 6.x</remarks>
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
 		public bool Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
 		public IndexOptions IndexOptions { get { return Self.IndexOptions.GetValueOrDefault(); } set { Self.IndexOptions = value; } }

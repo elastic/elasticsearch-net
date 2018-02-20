@@ -116,7 +116,7 @@ namespace Nest
 		/// <summary>
 		/// Pluralize type names when inferring from POCO type names.
 		/// <para></para>
-		/// This calls <see cref="DefaultTypeNameInferrer"/> with an implementation that will pluralize type names. 
+		/// This calls <see cref="DefaultTypeNameInferrer"/> with an implementation that will pluralize type names.
 		/// This used to be the default prior to Nest 0.90
 		/// </summary>
 		public TConnectionSettings PluralizeTypeNames()
@@ -146,7 +146,7 @@ namespace Nest
 		/// <summary>
 		/// Specify how field names are inferred from POCO property names.
 		/// <para></para>
-		/// By default, NEST camel cases property names 
+		/// By default, NEST camel cases property names
 		/// e.g. EmailAddress POCO property => "emailAddress" Elasticsearch document field name
 		/// </summary>
 		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
@@ -156,7 +156,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Specify how type names are inferred from POCO types. 
+		/// Specify how type names are inferred from POCO types.
 		/// By default, type names are inferred by calling <see cref="string.ToLowerInvariant"/>
 		///  on the type's name.
 		/// </summary>
@@ -168,9 +168,10 @@ namespace Nest
 		}
 
         /// <summary>
-        /// Specify the default index names for a given POCO type. 
+        /// Specify the default index names for a given POCO type.
         /// Takes precedence over the global <see cref="DefaultIndex"/>
         /// </summary>
+        /// <remarks>Removed in 6.x.</remarks>
         public TConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull(nameof(mappingSelector));
@@ -179,9 +180,10 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Specify the default type names for a given POCO type. 
+		/// Specify the default type names for a given POCO type.
 		/// Takes precedence over the global <see cref="DefaultTypeNameInferrer"/>
 		/// </summary>
+		/// <remarks>Removed in 6.x.</remarks>
 		public TConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull(nameof(mappingSelector));
@@ -190,12 +192,13 @@ namespace Nest
 		}
 
         /// <summary>
-        /// Specify which property on a given POCO should be used to infer the id of the document when 
+        /// Specify which property on a given POCO should be used to infer the id of the document when
         /// indexed in Elasticsearch.
         /// </summary>
         /// <typeparam name="TDocument">The type of the document.</typeparam>
         /// <param name="objectPath">The object path.</param>
         /// <returns></returns>
+        /// <remarks>Removed in 6.x.</remarks>
         public TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
@@ -222,6 +225,7 @@ namespace Nest
         /// <typeparam name="TDocument">The type of the document.</typeparam>
         /// <param name="propertiesSelector">The properties selector.</param>
         /// <returns></returns>
+        /// <remarks>Removed in 6.x.</remarks>
         public TConnectionSettings MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
 			where TDocument : class
 		{
@@ -264,7 +268,7 @@ namespace Nest
 		}
 
         /// <summary>
-        /// Specify how the mapping is inferred for a given POCO type. 
+        /// Specify how the mapping is inferred for a given POCO type.
         /// Can be used to infer the index, type, id property and properties for the POCO.
         /// </summary>
         /// <typeparam name="TDocument">The type of the document.</typeparam>
