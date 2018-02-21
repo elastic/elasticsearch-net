@@ -82,6 +82,10 @@ Take a look at the [blog post for details around the evolution of NEST 2.x](http
 
 Take a look at the [blog post for the release of NEST 5.x](https://www.elastic.co/blog/nest-5-0-released), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/master/docs/5.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/master/docs/5.0-breaking-changes/elasticsearch-net-breaking-changes.md).
 
+### Upgrading from 5.x to 6.x
+
+Take a look at the [blog post for the GA release of Elasticsearch.Net and NEST 6.0](https://www.elastic.co/blog/nest-elasticsearch-net-6-0-ga), in addition to the list of breaking changes for [NEST](https://www.elastic.co/guide/en/elasticsearch/client/net-api/6.x/nest-breaking-changes.html) and [Elasticsearch.Net](https://www.elastic.co/guide/en/elasticsearch/client/net-api/6.x/elasticsearch-net-breaking-changes.html).
+
 # [NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest)
 
 NEST is the official high-level .NET client of [Elasticsearch](https://github.com/elasticsearch/elasticsearch).  It aims to be a solid, strongly typed client with a very concise API.
@@ -89,7 +93,7 @@ NEST is the official high-level .NET client of [Elasticsearch](https://github.co
 * High-level client that internally uses the low-level **Elasticsearch.Net** client
 * Maps requests and responses to strongly typed objects with both fluent interface and object initializer syntaxes to build them
 * Comes with a very powerful query DSL that maps one-to-one with Elasticsearch
-* Takes advantage of .NET features where they make sense (i.e., covariant `T` collection result types, type and index inference)
+* Takes advantage of .NET features where they make sense (e.g. type and index inference, inferred mapping from POCO properties)
 * All calls have async variants with support for cancellation
 
 ## Getting Started
@@ -133,7 +137,7 @@ var client = new ElasticClient(settings);
 
 ### Indexing
 
-Indexing a document is as simple as:
+Indexing a document is as simple as (with 6.x):
 
 ```csharp
 var tweet = new Tweet
@@ -144,13 +148,13 @@ var tweet = new Tweet
     Message = "Trying out NEST, so far so good?"
 };
 
-var response = client.Index(tweet, idx => idx.Index("mytweetindex")); //or specify index via settings.DefaultIndex("mytweetindex");
+var response = client.IndexDocument(tweet, idx => idx.Index("mytweetindex")); //or specify index via settings.DefaultIndex("mytweetindex");
 ```
 
 All the calls have async variants:
 
 ```csharp
-var response = client.IndexAsync(tweet, idx => idx.Index("mytweetindex")); // returns a Task<IndexResponse>
+var response = client.IndexDocumentAsync(tweet, idx => idx.Index("mytweetindex")); // returns a Task<IndexResponse>
 ```
 
 ### Getting a document
@@ -195,7 +199,8 @@ NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.
 
 ```csharp
 //.LowLevel is of type IElasticLowLevelClient
-var response = client.LowLevel.SearchPost("myindex","elasticsearchprojects", new
+// Generic parameter of Search<> is the type of .Body on response
+var response = client.LowLevel.Search<SearchResponse<Tweet>>("myindex","elasticsearchprojects", PostData.Serializable(new
 {
 	from = 0,
 	size = 10,
@@ -208,7 +213,7 @@ var response = client.LowLevel.SearchPost("myindex","elasticsearchprojects", new
 			}
 		}
 	}
-});
+}));
 ```
 
 #### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/nest.html](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/nest.html) 
