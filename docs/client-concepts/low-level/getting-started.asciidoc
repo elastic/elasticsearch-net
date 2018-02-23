@@ -51,7 +51,7 @@ There are many other <<configuration-options,configuration options>> on `Connect
 * whether HTTP compression support should be enabled on the client
 
 [float]
-==== Connecton pools
+==== Connection pools
 
 `ConnectionConfiguration` is not restricted to being passed a single address for Elasticsearch. There are several different
 types of <<connection-pooling,Connection pool>> available, each with different characteristics that can be used to
@@ -157,7 +157,7 @@ var indexResponse = lowlevelClient.Bulk<StringResponse>(PostData.MultiJson(peopl
 string responseStream = indexResponse.Body;
 ----
 
-The client will serialize each item seperately and join items up using the `\n` character as required by the Bulk API. Refer to the
+The client will serialize each item separately and join items up using the `\n` character as required by the Bulk API. Refer to the
 Elasticsearch Bulk API documentation for further details and supported operations.
 
 [float]
