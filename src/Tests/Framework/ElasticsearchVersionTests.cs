@@ -5,10 +5,7 @@ namespace Tests.Framework
 {
 	public class MockElasticsearchVersionResolver : ElasticsearchVersionResolver
 	{
-		public MockElasticsearchVersionResolver()
-		{
-
-		}
+		public MockElasticsearchVersionResolver() { }
 
 		public override string LatestSnapshot => "7.3.1-SNAPSHOT";
 		public override string LatestVersion => "7.3.1";
@@ -17,8 +14,6 @@ namespace Tests.Framework
 			return $"{version}.zip";
 		}
 	}
-
-
 
 	public class ElasticsearchVersionTests
 	{

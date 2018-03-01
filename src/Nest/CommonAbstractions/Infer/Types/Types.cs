@@ -88,15 +88,22 @@ namespace Nest
 
 		public override bool Equals(object obj)
 		{
-			var other = obj as Types;
-			if (other == null) return false;
+			if (!(obj is Types other)) return false;
 			return this.Match(
 				all => other.Match(a => true, m => false),
 				many => other.Match(
 					a => false,
-					m => this.GetHashCode().Equals(other.GetHashCode())
+					m => EqualsAllTypes(m.Types, many.Types)
 				)
 			);
+		}
+
+		private static bool EqualsAllTypes(IReadOnlyList<TypeName> indicesCurrent, IReadOnlyList<TypeName> indicesOther)
+		{
+			if (indicesCurrent == null && indicesOther == null) return true;
+			if (indicesCurrent == null || indicesOther == null) return false;
+			if (indicesCurrent.Count != indicesOther.Count) return false;
+			return indicesCurrent.Zip(indicesOther, Tuple.Create).All(t=>t.Item1.Equals(t.Item2));
 		}
 
 		public override int GetHashCode()
