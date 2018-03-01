@@ -170,6 +170,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			var clusterIndex = (IndexName)"cluster_one:p";
 			var index = (IndexName)"p";
+			Index<Project>("cluster_one").Should().NotBe(Index<Project>("cluster_two"));
 
 			clusterIndex.Should().NotBe(index);
 			clusterIndex.Should().Be("cluster_one:p");
@@ -177,7 +178,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			Index<Project>().Should().Be(Index<Project>());
 			Index<Project>().Should().NotBe(Index<Project>("cluster_two"));
-			Index<Project>("cluster_one").Should().NotBe(Index<Project>("cluster_two"));
 			Index<Project>("cluster_one").Should().NotBe("cluster_one:project");
 			Index<Project>().Should().NotBe(Index<Developer>());
 			Index<Project>("cluster_one").Should().NotBe(Index<Developer>("cluster_one"));
