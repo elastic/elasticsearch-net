@@ -6,7 +6,7 @@ group build
 
     nuget FAKE prerelease
     nuget ILRepack prerelease
-    nuget FSharp.Data
+    nuget FSharp.Data 
     nuget Mono.Cecil prerelease
 
     #Profiling.fsx uses this
