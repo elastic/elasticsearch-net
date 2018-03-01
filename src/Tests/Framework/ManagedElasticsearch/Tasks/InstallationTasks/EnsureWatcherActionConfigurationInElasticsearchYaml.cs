@@ -27,7 +27,6 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 					"  account:",
 					"    notify-monitoring:",
 					"      profile: user",
-					"      user: watcher-user@example.com",
 					"      auth_token: hipchat_auth_token",
 					string.Empty
 				});
