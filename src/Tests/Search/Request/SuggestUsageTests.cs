@@ -60,7 +60,9 @@ namespace Tests.Search.Request
 						},
 						field = "name",
 						gram_size = 1,
-						real_word_error_likelihood = 0.5
+						real_word_error_likelihood = 0.5,
+						token_limit = 5,
+						force_unigrams = false
 					  },
 					  text = "hello world"
 					} },
@@ -133,6 +135,8 @@ namespace Tests.Search.Request
 					.Field(p => p.Name)
 					.Text("hello world")
 					.RealWordErrorLikelihood(0.5)
+					.TokenLimit(5)
+					.ForceUnigrams(false)
 				)
 			);
 
@@ -208,7 +212,9 @@ namespace Tests.Search.Request
 								},
 								GramSize = 1,
 								Field = "name",
-								RealWordErrorLikelihood = 0.5
+								RealWordErrorLikelihood = 0.5,
+								TokenLimit = 5,
+								ForceUnigrams = false
 							}
 						}
 					},

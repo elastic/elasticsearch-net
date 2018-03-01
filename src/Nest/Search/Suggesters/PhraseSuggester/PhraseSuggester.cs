@@ -35,6 +35,12 @@ namespace Nest
 
 		[JsonProperty("smoothing")]
 		SmoothingModelContainer Smoothing { get; set; }
+
+		[JsonProperty("token_limit")]
+		int? TokenLimit { get; set; }
+
+		[JsonProperty("force_unigrams")]
+		bool? ForceUnigrams { get; set; }
 	}
 
 	public class PhraseSuggester : SuggesterBase, IPhraseSuggester
@@ -48,6 +54,8 @@ namespace Nest
 		public IPhraseSuggestHighlight Highlight { get; set; }
 		public IPhraseSuggestCollate Collate { get; set; }
 		public SmoothingModelContainer Smoothing { get; set; }
+		public int? TokenLimit { get; set; }
+		public bool? ForceUnigrams { get; set; }
 	}
 
 	public class PhraseSuggesterDescriptor<T> : SuggestDescriptorBase<PhraseSuggesterDescriptor<T>, IPhraseSuggester, T>, IPhraseSuggester
@@ -62,6 +70,8 @@ namespace Nest
 		IPhraseSuggestHighlight IPhraseSuggester.Highlight { get; set; }
 		IPhraseSuggestCollate IPhraseSuggester.Collate { get; set; }
 		SmoothingModelContainer IPhraseSuggester.Smoothing { get; set; }
+		int? IPhraseSuggester.TokenLimit { get; set; }
+		bool? IPhraseSuggester.ForceUnigrams { get; set; }
 
 		public PhraseSuggesterDescriptor<T> GramSize(int? gramSize) => Assign(a => a.GramSize = gramSize);
 
@@ -85,5 +95,9 @@ namespace Nest
 
 		public PhraseSuggesterDescriptor<T> Smoothing(Func<SmoothingModelContainerDescriptor, SmoothingModelContainer> selector) =>
 			Assign(a => a.Smoothing = selector?.Invoke(new SmoothingModelContainerDescriptor()));
+
+		public PhraseSuggesterDescriptor<T> TokenLimit(int? tokenLimit) => Assign(a => a.TokenLimit = tokenLimit);
+
+		public PhraseSuggesterDescriptor<T> ForceUnigrams(bool? forceUnigrams = true) => Assign(a => a.ForceUnigrams = forceUnigrams);
 	}
 }
