@@ -32,7 +32,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     <tr>
     	<td><code>2.x</code></td>
     	<td><code>2.x</code></td>
-    	<td>:white_check_mark:</td>
+    	<td>:x:</td>
       <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/2.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=2.x&svg=true"></a></td>
       <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=2.x"></a></td>
     	<td><a href="https://www.nuget.org/packages/NEST/2.5.7"><img src="https://img.shields.io/badge/nuget-v2.5.7-blue.svg?style=flat-square"></a>
@@ -148,13 +148,13 @@ var tweet = new Tweet
     Message = "Trying out NEST, so far so good?"
 };
 
-var response = client.IndexDocument(tweet, idx => idx.Index("mytweetindex")); //or specify index via settings.DefaultIndex("mytweetindex");
+var response = client.Index(tweet, idx => idx.Index("mytweetindex")); //or specify index via settings.DefaultIndex("mytweetindex");
 ```
 
 All the calls have async variants:
 
 ```csharp
-var response = client.IndexDocumentAsync(tweet, idx => idx.Index("mytweetindex")); // returns a Task<IndexResponse>
+var response = client.IndexAsync(tweet, idx => idx.Index("mytweetindex")); // returns a Task<IndexResponse>
 ```
 
 ### Getting a document
@@ -170,13 +170,13 @@ NEST exposes a fluent interface and a [powerful query DSL](https://www.elastic.c
 
 ```csharp
 var response = client.Search<Tweet>(s => s
-	.From(0)
-	.Size(10)
-	.Query(q =>
-			q.Term(t => t.User, "kimchy")
-			|| q.Match(mq => mq.Field(f => f.User).Query("nest"))
-		)
-	);
+    .From(0)
+    .Size(10)
+    .Query(q => q
+        .Term(t => t.User, "kimchy") || q
+        .Match(mq => mq.Field(f => f.User).Query("nest"))
+    )
+);
 ```
 
 As well as an object initializer syntax if lambdas aren't your thing:
@@ -184,10 +184,10 @@ As well as an object initializer syntax if lambdas aren't your thing:
 ```csharp
 var request = new SearchRequest
 {
-	From = 0,
-	Size = 10,
-	Query = new TermQuery { Field = "user", Value = "kimchy" } 
-		|| new MatchQuery { Field = "description", Query = "nest" }
+    From = 0,
+    Size = 10,
+    Query = new TermQuery { Field = "user", Value = "kimchy" } || 
+            new MatchQuery { Field = "description", Query = "nest" }
 };
 
 var response = client.Search<Tweet>(request);
