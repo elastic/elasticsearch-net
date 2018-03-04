@@ -1347,6 +1347,8 @@ namespace Elasticsearch.Net
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	
 	///<summary>Request options for IndicesPutAlias<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
@@ -1494,6 +1496,18 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request options for IndicesShrink<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
 	public class ShrinkIndexRequestParameters : RequestParameters<ShrinkIndexRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		///<summary>Specify timeout for connection to master</summary>
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+	}
+	
+	///<summary>Request options for IndicesSplit<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
+	public class IndicesSplitRequestParameters : RequestParameters<IndicesSplitRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
@@ -2261,12 +2275,6 @@ namespace Elasticsearch.Net
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
 	}
 	
-	///<summary>Request options for XpackDeprecationInfo<pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
-	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-	}
-	
 	///<summary>Request options for XpackInfo<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public class XPackInfoRequestParameters : RequestParameters<XPackInfoRequestParameters> 
 	{
@@ -2297,6 +2305,12 @@ namespace Elasticsearch.Net
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
 	
+	///<summary>Request options for XpackLicenseGetTrialStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public class XpackLicenseGetTrialStatusRequestParameters : RequestParameters<XpackLicenseGetTrialStatusRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	
 	///<summary>Request options for XpackLicensePost<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public class PostLicenseRequestParameters : RequestParameters<PostLicenseRequestParameters> 
 	{
@@ -2305,10 +2319,18 @@ namespace Elasticsearch.Net
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
 	
+	///<summary>Request options for XpackLicensePostStartTrial<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public class XpackLicensePostStartTrialRequestParameters : RequestParameters<XpackLicensePostStartTrialRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	
 	///<summary>Request options for XpackMlCloseJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
 	public class CloseJobRequestParameters : RequestParameters<CloseJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 		///<summary>True if the job should be forcefully closed</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
@@ -2351,6 +2373,16 @@ namespace Elasticsearch.Net
 		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
 	}
 	
+	///<summary>Request options for XpackMlForecast<pre></pre></summary>
+	public class XpackMlForecastRequestParameters : RequestParameters<XpackMlForecastRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>The duration of the forecast</summary>
+		public TimeSpan Duration { get => Q<TimeSpan>("duration"); set => Q("duration", value.ToTimeUnit()); }
+		///<summary>The time interval after which the forecast expires. Expired forecasts will be deleted at the first opportunity.</summary>
+		public TimeSpan ExpiresIn { get => Q<TimeSpan>("expires_in"); set => Q("expires_in", value.ToTimeUnit()); }
+	}
+	
 	///<summary>Request options for XpackMlGetBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 	public class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters> 
 	{
@@ -2367,12 +2399,16 @@ namespace Elasticsearch.Net
 	public class GetDatafeedsRequestParameters : RequestParameters<GetDatafeedsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
 	
 	///<summary>Request options for XpackMlGetDatafeedStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
 	public class GetDatafeedStatsRequestParameters : RequestParameters<GetDatafeedStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
 	
 	///<summary>Request options for XpackMlGetInfluencers<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
@@ -2385,18 +2421,42 @@ namespace Elasticsearch.Net
 	public class GetJobsRequestParameters : RequestParameters<GetJobsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
 	
 	///<summary>Request options for XpackMlGetJobStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
 	public class GetJobStatsRequestParameters : RequestParameters<GetJobStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
 	
 	///<summary>Request options for XpackMlGetModelSnapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
 	public class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	
+	///<summary>Request options for XpackMlGetOverallBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
+	public class XpackMlGetOverallBucketsRequestParameters : RequestParameters<XpackMlGetOverallBucketsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>The number of top job bucket scores to be used in the overall_score calculation</summary>
+		public int TopN { get => Q<int>("top_n"); set => Q("top_n", value); }
+		///<summary>The span of the overall buckets. Defaults to the longest job bucket_span</summary>
+		public string BucketSpan { get => Q<string>("bucket_span"); set => Q("bucket_span", value); }
+		///<summary>Returns overall buckets with overall scores higher than this value</summary>
+		public double OverallScore { get => Q<double>("overall_score"); set => Q("overall_score", value); }
+		///<summary>If true overall buckets that include interim buckets will be excluded</summary>
+		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
+		///<summary>Returns overall buckets with timestamps after this time</summary>
+		public string Start { get => Q<string>("start"); set => Q("start", value); }
+		///<summary>Returns overall buckets with timestamps earlier than this time</summary>
+		public string End { get => Q<string>("end"); set => Q("end", value); }
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
 	
 	///<summary>Request options for XpackMlGetRecords<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
@@ -2455,6 +2515,8 @@ namespace Elasticsearch.Net
 	public class StopDatafeedRequestParameters : RequestParameters<StopDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
 	
 	///<summary>Request options for XpackMlUpdateDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
@@ -2485,6 +2547,35 @@ namespace Elasticsearch.Net
 	public class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	
+	///<summary>Request options for XpackMigrationDeprecations<pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	
+	///<summary>Request options for XpackMigrationGetAssistance<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	public class XpackMigrationGetAssistanceRequestParameters : RequestParameters<XpackMigrationGetAssistanceRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+	}
+	
+	///<summary>Request options for XpackMigrationUpgrade<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	public class XpackMigrationUpgradeRequestParameters : RequestParameters<XpackMigrationUpgradeRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Should the request block until the upgrade operation is completed</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	
 	///<summary>Request options for XpackSecurityAuthenticate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>

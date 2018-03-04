@@ -1917,6 +1917,38 @@ namespace Elasticsearch.Net
 		public Task<TResponse> IndicesShrinkPostAsync<TResponse>(string index, string target, PostData body, ShrinkIndexRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"{index.NotNull("index")}/_shrink/{target.NotNull("target")}"), ctx, body, _params(requestParameters));
 		
+		///<summary>PUT on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
+		///<param name="index">The name of the source index to split</param>
+		///<param name="target">The name of the target index to split into</param>
+		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse IndicesSplit<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(PUT, Url($"{index.NotNull("index")}/_split/{target.NotNull("target")}"), body, _params(requestParameters));
+		
+		///<summary>PUT on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
+		///<param name="index">The name of the source index to split</param>
+		///<param name="target">The name of the target index to split into</param>
+		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> IndicesSplitAsync<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(PUT, Url($"{index.NotNull("index")}/_split/{target.NotNull("target")}"), ctx, body, _params(requestParameters));
+		
+		///<summary>POST on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
+		///<param name="index">The name of the source index to split</param>
+		///<param name="target">The name of the target index to split into</param>
+		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse IndicesSplitPost<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"{index.NotNull("index")}/_split/{target.NotNull("target")}"), body, _params(requestParameters));
+		
+		///<summary>POST on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
+		///<param name="index">The name of the source index to split</param>
+		///<param name="target">The name of the target index to split into</param>
+		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> IndicesSplitPostAsync<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"{index.NotNull("index")}/_split/{target.NotNull("target")}"), ctx, body, _params(requestParameters));
+		
 		///<summary>GET on /_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public TResponse IndicesStatsForAll<TResponse>(IndicesStatsRequestParameters requestParameters = null)
@@ -3363,7 +3395,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="id">Document ID</param>
-		///<param name="body">The request definition using either `script` or partial `doc`</param>
+		///<param name="body">The request definition requires either `script` or partial `doc`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public TResponse Update<TResponse>(string index, string type, string id, PostData body, UpdateRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_update"), body, _params(requestParameters));
@@ -3372,7 +3404,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="id">Document ID</param>
-		///<param name="body">The request definition using either `script` or partial `doc`</param>
+		///<param name="body">The request definition requires either `script` or partial `doc`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> UpdateAsync<TResponse>(string index, string type, string id, PostData body, UpdateRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_update"), ctx, body, _params(requestParameters));
@@ -3463,28 +3495,6 @@ namespace Elasticsearch.Net
 		public Task<TResponse> XpackGraphExploreAsync<TResponse>(string index, string type, PostData body, GraphExploreRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_xpack/graph/_explore"), ctx, body, _params(requestParameters));
 		
-		///<summary>GET on /_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse XpackDeprecationInfo<TResponse>(DeprecationInfoRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/migration/deprecations"), null, _params(requestParameters));
-		
-		///<summary>GET on /_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> XpackDeprecationInfoAsync<TResponse>(DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
-			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/migration/deprecations"), ctx, null, _params(requestParameters));
-		
-		///<summary>GET on /{index}/_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
-		///<param name="index">Index pattern</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse XpackDeprecationInfo<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"{index.NotNull("index")}/_xpack/migration/deprecations"), null, _params(requestParameters));
-		
-		///<summary>GET on /{index}/_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
-		///<param name="index">Index pattern</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> XpackDeprecationInfoAsync<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
-			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"{index.NotNull("index")}/_xpack/migration/deprecations"), ctx, null, _params(requestParameters));
-		
 		///<summary>GET on /_xpack <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public TResponse XpackInfo<TResponse>(XPackInfoRequestParameters requestParameters = null)
@@ -3525,6 +3535,16 @@ namespace Elasticsearch.Net
 		public Task<TResponse> XpackLicenseGetAsync<TResponse>(GetLicenseRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/license"), ctx, null, _params(requestParameters));
 		
+		///<summary>GET on /_xpack/license/trial_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackLicenseGetTrialStatus<TResponse>(XpackLicenseGetTrialStatusRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/license/trial_status"), null, _params(requestParameters));
+		
+		///<summary>GET on /_xpack/license/trial_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackLicenseGetTrialStatusAsync<TResponse>(XpackLicenseGetTrialStatusRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/license/trial_status"), ctx, null, _params(requestParameters));
+		
 		///<summary>PUT on /_xpack/license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name="body">licenses to be installed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -3536,6 +3556,16 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> XpackLicensePostAsync<TResponse>(PostData body, PostLicenseRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(PUT, Url($"_xpack/license"), ctx, body, _params(requestParameters));
+		
+		///<summary>POST on /_xpack/license/start_trial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackLicensePostStartTrial<TResponse>(XpackLicensePostStartTrialRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/license/start_trial"), null, _params(requestParameters));
+		
+		///<summary>POST on /_xpack/license/start_trial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackLicensePostStartTrialAsync<TResponse>(XpackLicensePostStartTrialRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/license/start_trial"), ctx, null, _params(requestParameters));
 		
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_close <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
 		///<param name="job_id">The name of the job to close</param>
@@ -3610,6 +3640,18 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> XpackMlFlushJobAsync<TResponse>(string job_id, PostData body, FlushJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_flush"), ctx, body, _params(requestParameters));
+		
+		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_forecast <para></para></summary>
+		///<param name="job_id">The ID of the job to forecast for</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackMlForecast<TResponse>(string job_id, XpackMlForecastRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_forecast"), null, _params(requestParameters));
+		
+		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_forecast <para></para></summary>
+		///<param name="job_id">The ID of the job to forecast for</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackMlForecastAsync<TResponse>(string job_id, XpackMlForecastRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_forecast"), ctx, null, _params(requestParameters));
 		
 		///<summary>GET on /_xpack/ml/anomaly_detectors/{job_id}/results/buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
 		///<param name="job_id">ID of the job to get bucket results from</param>
@@ -3775,15 +3817,15 @@ namespace Elasticsearch.Net
 		public Task<TResponse> XpackMlGetJobsAsync<TResponse>(string job_id, GetJobsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}"), ctx, null, _params(requestParameters));
 		
-		///<summary>GET on /_xpack/ml/anomaly_detectors/ <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
+		///<summary>GET on /_xpack/ml/anomaly_detectors <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public TResponse XpackMlGetJobs<TResponse>(GetJobsRequestParameters requestParameters = null)
-			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/ml/anomaly_detectors/"), null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/ml/anomaly_detectors"), null, _params(requestParameters));
 		
-		///<summary>GET on /_xpack/ml/anomaly_detectors/ <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
+		///<summary>GET on /_xpack/ml/anomaly_detectors <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> XpackMlGetJobsAsync<TResponse>(GetJobsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
-			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/ml/anomaly_detectors/"), ctx, null, _params(requestParameters));
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/ml/anomaly_detectors"), ctx, null, _params(requestParameters));
 		
 		///<summary>GET on /_xpack/ml/anomaly_detectors/_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -3862,6 +3904,32 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> XpackMlGetModelSnapshotsAsync<TResponse>(string job_id, PostData body, GetModelSnapshotsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/model_snapshots"), ctx, body, _params(requestParameters));
+		
+		///<summary>GET on /_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
+		///<param name="job_id">The job IDs for which to calculate overall bucket results</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackMlGetOverallBuckets<TResponse>(string job_id, XpackMlGetOverallBucketsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/overall_buckets"), null, _params(requestParameters));
+		
+		///<summary>GET on /_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
+		///<param name="job_id">The job IDs for which to calculate overall bucket results</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackMlGetOverallBucketsAsync<TResponse>(string job_id, XpackMlGetOverallBucketsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/overall_buckets"), ctx, null, _params(requestParameters));
+		
+		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
+		///<param name="job_id">The job IDs for which to calculate overall bucket results</param>
+		///<param name="body">Overall bucket selection details if not provided in URI</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackMlGetOverallBuckets<TResponse>(string job_id, PostData body, XpackMlGetOverallBucketsRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/overall_buckets"), body, _params(requestParameters));
+		
+		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
+		///<param name="job_id">The job IDs for which to calculate overall bucket results</param>
+		///<param name="body">Overall bucket selection details if not provided in URI</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackMlGetOverallBucketsAsync<TResponse>(string job_id, PostData body, XpackMlGetOverallBucketsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/results/overall_buckets"), ctx, body, _params(requestParameters));
 		
 		///<summary>GET on /_xpack/ml/anomaly_detectors/{job_id}/results/records <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</para></summary>
 		///<param name="job_id"></param>
@@ -4064,6 +4132,62 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> XpackMlValidateDetectorAsync<TResponse>(PostData body, ValidateDetectorRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/_validate/detector"), ctx, body, _params(requestParameters));
+		
+		///<summary>GET on /_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackMigrationDeprecations<TResponse>(DeprecationInfoRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/migration/deprecations"), null, _params(requestParameters));
+		
+		///<summary>GET on /_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackMigrationDeprecationsAsync<TResponse>(DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/migration/deprecations"), ctx, null, _params(requestParameters));
+		
+		///<summary>GET on /{index}/_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
+		///<param name="index">Index pattern</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackMigrationDeprecations<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"{index.NotNull("index")}/_xpack/migration/deprecations"), null, _params(requestParameters));
+		
+		///<summary>GET on /{index}/_xpack/migration/deprecations <para>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</para></summary>
+		///<param name="index">Index pattern</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackMigrationDeprecationsAsync<TResponse>(string index, DeprecationInfoRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"{index.NotNull("index")}/_xpack/migration/deprecations"), ctx, null, _params(requestParameters));
+		
+		///<summary>GET on /_xpack/migration/assistance <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackMigrationGetAssistance<TResponse>(XpackMigrationGetAssistanceRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/migration/assistance"), null, _params(requestParameters));
+		
+		///<summary>GET on /_xpack/migration/assistance <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackMigrationGetAssistanceAsync<TResponse>(XpackMigrationGetAssistanceRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/migration/assistance"), ctx, null, _params(requestParameters));
+		
+		///<summary>GET on /_xpack/migration/assistance/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackMigrationGetAssistance<TResponse>(string index, XpackMigrationGetAssistanceRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/migration/assistance/{index.NotNull("index")}"), null, _params(requestParameters));
+		
+		///<summary>GET on /_xpack/migration/assistance/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
+		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackMigrationGetAssistanceAsync<TResponse>(string index, XpackMigrationGetAssistanceRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/migration/assistance/{index.NotNull("index")}"), ctx, null, _params(requestParameters));
+		
+		///<summary>POST on /_xpack/migration/upgrade/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</para></summary>
+		///<param name="index">The name of the index</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackMigrationUpgrade<TResponse>(string index, XpackMigrationUpgradeRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/migration/upgrade/{index.NotNull("index")}"), null, _params(requestParameters));
+		
+		///<summary>POST on /_xpack/migration/upgrade/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</para></summary>
+		///<param name="index">The name of the index</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackMigrationUpgradeAsync<TResponse>(string index, XpackMigrationUpgradeRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/migration/upgrade/{index.NotNull("index")}"), ctx, null, _params(requestParameters));
 		
 		///<summary>GET on /_xpack/security/_authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
