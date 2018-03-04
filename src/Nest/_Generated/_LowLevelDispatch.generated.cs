@@ -1325,7 +1325,7 @@ namespace Nest
 			{
 				case HEAD:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesExistsAlias<TResponse>(p.RouteValues.Index,p.RouteValues.Name,p.RequestParameters);
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasForAll<TResponse>(p.RouteValues.Name,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasForAll<TResponse>(p.RouteValues.Name,p.RequestParameters);
 					break;
 
 			}
@@ -1338,7 +1338,7 @@ namespace Nest
 			{
 				case HEAD:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Name,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasForAllAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasForAllAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
 					break;
 
 			}
@@ -1977,6 +1977,38 @@ namespace Nest
 			throw InvalidDispatch("IndicesShrink", p, new [] { PUT, POST }, "/{index}/_shrink/{target}");
 		}
 		
+		internal TResponse IndicesSplitDispatch<TResponse>(IRequest<IndicesSplitRequestParameters> p,SerializableData<IIndicesSplitRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Target)) return _lowLevel.IndicesSplit<TResponse>(p.RouteValues.Index,p.RouteValues.Target,body,p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Target)) return _lowLevel.IndicesSplitPost<TResponse>(p.RouteValues.Index,p.RouteValues.Target,body,p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("IndicesSplit", p, new [] { PUT, POST }, "/{index}/_split/{target}");
+		}
+		
+		internal Task<TResponse> IndicesSplitDispatchAsync<TResponse>(IRequest<IndicesSplitRequestParameters> p,SerializableData<IIndicesSplitRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Target)) return _lowLevel.IndicesSplitAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Target,body,p.RequestParameters,ct);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Target)) return _lowLevel.IndicesSplitPostAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Target,body,p.RequestParameters,ct);
+					break;
+
+			}
+			throw InvalidDispatch("IndicesSplit", p, new [] { PUT, POST }, "/{index}/_split/{target}");
+		}
+		
 		internal TResponse IndicesStatsDispatch<TResponse>(IRequest<IndicesStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -2576,7 +2608,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
 					break;
 
 			}
@@ -2588,7 +2620,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
 					break;
 
 			}
@@ -3022,7 +3054,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.TasksGet<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.TasksGet<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
 					break;
 
 			}
@@ -3034,7 +3066,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.TasksGetAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.TasksGetAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
 					break;
 
 			}
@@ -3185,30 +3217,6 @@ namespace Nest
 			throw InvalidDispatch("XpackGraphExplore", p, new [] { GET, POST }, "/{index}/_xpack/graph/_explore", "/{index}/{type}/_xpack/graph/_explore");
 		}
 		
-		internal TResponse XpackDeprecationInfoDispatch<TResponse>(IRequest<DeprecationInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.XpackDeprecationInfo<TResponse>(p.RouteValues.Index,p.RequestParameters);
-					return _lowLevel.XpackDeprecationInfo<TResponse>(p.RequestParameters);
-
-			}
-			throw InvalidDispatch("XpackDeprecationInfo", p, new [] { GET }, "/_xpack/migration/deprecations", "/{index}/_xpack/migration/deprecations");
-		}
-		
-		internal Task<TResponse> XpackDeprecationInfoDispatchAsync<TResponse>(IRequest<DeprecationInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.XpackDeprecationInfoAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
-					return _lowLevel.XpackDeprecationInfoAsync<TResponse>(p.RequestParameters,ct);
-
-			}
-			throw InvalidDispatch("XpackDeprecationInfo", p, new [] { GET }, "/_xpack/migration/deprecations", "/{index}/_xpack/migration/deprecations");
-		}
-		
 		internal TResponse XpackInfoDispatch<TResponse>(IRequest<XPackInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3297,6 +3305,28 @@ namespace Nest
 			throw InvalidDispatch("XpackLicenseGet", p, new [] { GET }, "/_xpack/license");
 		}
 		
+		internal TResponse XpackLicenseGetTrialStatusDispatch<TResponse>(IRequest<XpackLicenseGetTrialStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.XpackLicenseGetTrialStatus<TResponse>(p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackLicenseGetTrialStatus", p, new [] { GET }, "/_xpack/license/trial_status");
+		}
+		
+		internal Task<TResponse> XpackLicenseGetTrialStatusDispatchAsync<TResponse>(IRequest<XpackLicenseGetTrialStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.XpackLicenseGetTrialStatusAsync<TResponse>(p.RequestParameters,ct);
+
+			}
+			throw InvalidDispatch("XpackLicenseGetTrialStatus", p, new [] { GET }, "/_xpack/license/trial_status");
+		}
+		
 		internal TResponse XpackLicensePostDispatch<TResponse>(IRequest<PostLicenseRequestParameters> p,SerializableData<IPostLicenseRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
@@ -3317,6 +3347,28 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("XpackLicensePost", p, new [] { PUT }, "/_xpack/license");
+		}
+		
+		internal TResponse XpackLicensePostStartTrialDispatch<TResponse>(IRequest<XpackLicensePostStartTrialRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackLicensePostStartTrial<TResponse>(p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackLicensePostStartTrial", p, new [] { POST }, "/_xpack/license/start_trial");
+		}
+		
+		internal Task<TResponse> XpackLicensePostStartTrialDispatchAsync<TResponse>(IRequest<XpackLicensePostStartTrialRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.XpackLicensePostStartTrialAsync<TResponse>(p.RequestParameters,ct);
+
+			}
+			throw InvalidDispatch("XpackLicensePostStartTrial", p, new [] { POST }, "/_xpack/license/start_trial");
 		}
 		
 		internal TResponse XpackMlCloseJobDispatch<TResponse>(IRequest<CloseJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -3459,6 +3511,30 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("XpackMlFlushJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_flush");
+		}
+		
+		internal TResponse XpackMlForecastDispatch<TResponse>(IRequest<XpackMlForecastRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlForecast<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlForecast", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_forecast");
+		}
+		
+		internal Task<TResponse> XpackMlForecastDispatchAsync<TResponse>(IRequest<XpackMlForecastRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlForecastAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlForecast", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_forecast");
 		}
 		
 		internal TResponse XpackMlGetBucketsDispatch<TResponse>(IRequest<GetBucketsRequestParameters> p,SerializableData<IGetBucketsRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -3618,7 +3694,7 @@ namespace Nest
 					return _lowLevel.XpackMlGetJobs<TResponse>(p.RequestParameters);
 
 			}
-			throw InvalidDispatch("XpackMlGetJobs", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/{job_id}", "/_xpack/ml/anomaly_detectors/");
+			throw InvalidDispatch("XpackMlGetJobs", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/{job_id}", "/_xpack/ml/anomaly_detectors");
 		}
 		
 		internal Task<TResponse> XpackMlGetJobsDispatchAsync<TResponse>(IRequest<GetJobsRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
@@ -3630,7 +3706,7 @@ namespace Nest
 					return _lowLevel.XpackMlGetJobsAsync<TResponse>(p.RequestParameters,ct);
 
 			}
-			throw InvalidDispatch("XpackMlGetJobs", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/{job_id}", "/_xpack/ml/anomaly_detectors/");
+			throw InvalidDispatch("XpackMlGetJobs", p, new [] { GET }, "/_xpack/ml/anomaly_detectors/{job_id}", "/_xpack/ml/anomaly_detectors");
 		}
 		
 		internal TResponse XpackMlGetJobStatsDispatch<TResponse>(IRequest<GetJobStatsRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
@@ -3691,6 +3767,38 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("XpackMlGetModelSnapshots", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots");
+		}
+		
+		internal TResponse XpackMlGetOverallBucketsDispatch<TResponse>(IRequest<XpackMlGetOverallBucketsRequestParameters> p,SerializableData<IXpackMlGetOverallBucketsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetOverallBuckets<TResponse>(p.RouteValues.JobId,p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetOverallBuckets<TResponse>(p.RouteValues.JobId,body,p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetOverallBuckets", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets");
+		}
+		
+		internal Task<TResponse> XpackMlGetOverallBucketsDispatchAsync<TResponse>(IRequest<XpackMlGetOverallBucketsRequestParameters> p,SerializableData<IXpackMlGetOverallBucketsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetOverallBucketsAsync<TResponse>(p.RouteValues.JobId,p.RequestParameters,ct);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.JobId)) return _lowLevel.XpackMlGetOverallBucketsAsync<TResponse>(p.RouteValues.JobId,body,p.RequestParameters,ct);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMlGetOverallBuckets", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets");
 		}
 		
 		internal TResponse XpackMlGetRecordsDispatch<TResponse>(IRequest<GetAnomalyRecordsRequestParameters> p,SerializableData<IGetAnomalyRecordsRequest> body) where TResponse : class, IElasticsearchResponse, new()
@@ -4031,6 +4139,78 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("XpackMlValidateDetector", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/_validate/detector");
+		}
+		
+		internal TResponse XpackMigrationDeprecationsDispatch<TResponse>(IRequest<DeprecationInfoRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.XpackMigrationDeprecations<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					return _lowLevel.XpackMigrationDeprecations<TResponse>(p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackMigrationDeprecations", p, new [] { GET }, "/_xpack/migration/deprecations", "/{index}/_xpack/migration/deprecations");
+		}
+		
+		internal Task<TResponse> XpackMigrationDeprecationsDispatchAsync<TResponse>(IRequest<DeprecationInfoRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.XpackMigrationDeprecationsAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					return _lowLevel.XpackMigrationDeprecationsAsync<TResponse>(p.RequestParameters,ct);
+
+			}
+			throw InvalidDispatch("XpackMigrationDeprecations", p, new [] { GET }, "/_xpack/migration/deprecations", "/{index}/_xpack/migration/deprecations");
+		}
+		
+		internal TResponse XpackMigrationGetAssistanceDispatch<TResponse>(IRequest<XpackMigrationGetAssistanceRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.XpackMigrationGetAssistance<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					return _lowLevel.XpackMigrationGetAssistance<TResponse>(p.RequestParameters);
+
+			}
+			throw InvalidDispatch("XpackMigrationGetAssistance", p, new [] { GET }, "/_xpack/migration/assistance", "/_xpack/migration/assistance/{index}");
+		}
+		
+		internal Task<TResponse> XpackMigrationGetAssistanceDispatchAsync<TResponse>(IRequest<XpackMigrationGetAssistanceRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.XpackMigrationGetAssistanceAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					return _lowLevel.XpackMigrationGetAssistanceAsync<TResponse>(p.RequestParameters,ct);
+
+			}
+			throw InvalidDispatch("XpackMigrationGetAssistance", p, new [] { GET }, "/_xpack/migration/assistance", "/_xpack/migration/assistance/{index}");
+		}
+		
+		internal TResponse XpackMigrationUpgradeDispatch<TResponse>(IRequest<XpackMigrationUpgradeRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackMigrationUpgrade<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMigrationUpgrade", p, new [] { POST }, "/_xpack/migration/upgrade/{index}");
+		}
+		
+		internal Task<TResponse> XpackMigrationUpgradeDispatchAsync<TResponse>(IRequest<XpackMigrationUpgradeRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackMigrationUpgradeAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+
+			}
+			throw InvalidDispatch("XpackMigrationUpgrade", p, new [] { POST }, "/_xpack/migration/upgrade/{index}");
 		}
 		
 		internal TResponse XpackSecurityAuthenticateDispatch<TResponse>(IRequest<AuthenticateRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
