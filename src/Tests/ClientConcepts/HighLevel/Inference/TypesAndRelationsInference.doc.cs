@@ -129,6 +129,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			Relation<Project>().Should().Be(Relation<Project>());
 			Relation<Project>().Should().NotBe(Relation<Developer>());
+
+
+			Nest.Types types1 = "foo,bar";
+			Nest.Types types2 = "bar,foo";
+			types1.Should().Be(types2);
+			(types1 == types2).Should().BeTrue();
 		}
 
 		//hide

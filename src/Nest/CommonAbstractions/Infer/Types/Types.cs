@@ -85,6 +85,9 @@ namespace Nest
 			);
 
 		}
+		public static bool operator ==(Types left, Types right) => Equals(left, right);
+
+		public static bool operator !=(Types left, Types right) => !Equals(left, right);
 
 		public override bool Equals(object obj)
 		{
@@ -98,12 +101,12 @@ namespace Nest
 			);
 		}
 
-		private static bool EqualsAllTypes(IReadOnlyList<TypeName> indicesCurrent, IReadOnlyList<TypeName> indicesOther)
+		private static bool EqualsAllTypes(IReadOnlyList<TypeName> thisTypes, IReadOnlyList<TypeName> otherTypes)
 		{
-			if (indicesCurrent == null && indicesOther == null) return true;
-			if (indicesCurrent == null || indicesOther == null) return false;
-			if (indicesCurrent.Count != indicesOther.Count) return false;
-			return indicesCurrent.Zip(indicesOther, Tuple.Create).All(t=>t.Item1.Equals(t.Item2));
+			if (thisTypes == null && otherTypes == null) return true;
+			if (thisTypes == null || otherTypes == null) return false;
+			if (thisTypes.Count != otherTypes.Count) return false;
+			return thisTypes.Count == otherTypes.Count && !thisTypes.Except(otherTypes).Any();
 		}
 
 		public override int GetHashCode()

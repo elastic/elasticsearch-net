@@ -74,8 +74,7 @@ namespace Nest
 				all => "_all",
 				many =>
 				{
-					var nestSettings = settings as IConnectionSettingsValues;
-					if (nestSettings == null)
+					if (!(settings is IConnectionSettingsValues nestSettings))
 						throw new Exception("Tried to pass index names on querysting but it could not be resolved because no nest settings are available");
 
 					var infer = nestSettings.Inferrer;
@@ -84,6 +83,10 @@ namespace Nest
 				}
 			);
 		}
+
+		public static bool operator ==(Indices left, Indices right) => Equals(left, right);
+
+		public static bool operator !=(Indices left, Indices right) => !Equals(left, right);
 
 		public override bool Equals(object obj)
 		{
@@ -97,12 +100,11 @@ namespace Nest
 			);
 		}
 
-		private static bool EqualsAllIndices(IReadOnlyList<IndexName> indicesCurrent, IReadOnlyList<IndexName> indicesOther)
+		private static bool EqualsAllIndices(IReadOnlyList<IndexName> thisIndices, IReadOnlyList<IndexName> otherIndices)
 		{
-			if (indicesCurrent == null && indicesOther == null) return true;
-			if (indicesCurrent == null || indicesOther == null) return false;
-			if (indicesCurrent.Count != indicesOther.Count) return false;
-			return indicesCurrent.Zip(indicesOther, Tuple.Create).All(t=>t.Item1.Equals(t.Item2));
+			if (thisIndices == null && otherIndices == null) return true;
+			if (thisIndices == null || otherIndices == null) return false;
+			return thisIndices.Count == otherIndices.Count && !thisIndices.Except(otherIndices).Any();
 		}
 
 		public override int GetHashCode()
