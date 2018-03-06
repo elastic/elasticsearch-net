@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.Net;
-using System.Text.RegularExpressions;
-using Nest;
 using Version = SemVer.Version;
 
 namespace Tests.Framework.Versions
