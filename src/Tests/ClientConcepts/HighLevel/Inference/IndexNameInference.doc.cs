@@ -181,6 +181,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Index<Project>("cluster_one").Should().NotBe("cluster_one:project");
 			Index<Project>().Should().NotBe(Index<Developer>());
 			Index<Project>("cluster_one").Should().NotBe(Index<Developer>("cluster_one"));
+
+			Nest.Indices indices1 = "foo,bar";
+			Nest.Indices indices2 = "bar,foo";
+			indices1.Should().Be(indices2);
+			(indices1 == indices2).Should().BeTrue();
 		}
 
 		//hide
