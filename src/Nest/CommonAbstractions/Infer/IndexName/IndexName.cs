@@ -72,12 +72,13 @@ namespace Nest
 
 		public bool EqualsMarker(IndexName other)
 		{
-			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
+			if (other == null) return false;
+			if (!this.Name.IsNullOrEmpty() && !other.Name.IsNullOrEmpty())
 				return EqualsString(PrefixClusterName(other,other.Name));
 
-			if (this.Type != null && other != null && other.Type != null)
-				return this.GetHashCode() == other.GetHashCode();
-			return false;
+			if ((!this.Cluster.IsNullOrEmpty() || !other.Cluster.IsNullOrEmpty()) && this.Cluster != other.Cluster) return false;
+
+			return this.Type != null && other?.Type != null && this.Type == other.Type;
 		}
 
 		public string GetString(IConnectionConfigurationValues settings)

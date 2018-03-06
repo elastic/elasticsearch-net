@@ -73,8 +73,8 @@ namespace Nest
 		{
 			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
 				return EqualsString(other.Name);
-			if (this.Type != null && other != null && other.Type != null)
-				return this.GetHashCode() == other.GetHashCode();
+			if (this.Type != null && other?.Type != null)
+				return this.Type == other.Type;
 			return false;
 		}
 
