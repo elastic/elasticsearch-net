@@ -146,7 +146,7 @@ namespace Elasticsearch.Net
 
 			if (responseType == typeof(StringResponse))
 				cs = new StringResponse(bytes.Utf8String()) as TResponse;
-			else if (responseType == typeof(byte[]))
+			else if (responseType == typeof(BytesResponse))
 				cs = new BytesResponse(bytes) as TResponse;
 			else if (responseType == typeof(VoidResponse))
 				cs = StaticVoid as TResponse;

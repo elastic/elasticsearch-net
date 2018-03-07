@@ -85,18 +85,28 @@ namespace Nest
 			);
 
 		}
+		public static bool operator ==(Types left, Types right) => Equals(left, right);
+
+		public static bool operator !=(Types left, Types right) => !Equals(left, right);
 
 		public override bool Equals(object obj)
 		{
-			var other = obj as Types;
-			if (other == null) return false;
+			if (!(obj is Types other)) return false;
 			return this.Match(
 				all => other.Match(a => true, m => false),
 				many => other.Match(
 					a => false,
-					m => this.GetHashCode().Equals(other.GetHashCode())
+					m => EqualsAllTypes(m.Types, many.Types)
 				)
 			);
+		}
+
+		private static bool EqualsAllTypes(IReadOnlyList<TypeName> thisTypes, IReadOnlyList<TypeName> otherTypes)
+		{
+			if (thisTypes == null && otherTypes == null) return true;
+			if (thisTypes == null || otherTypes == null) return false;
+			if (thisTypes.Count != otherTypes.Count) return false;
+			return thisTypes.Count == otherTypes.Count && !thisTypes.Except(otherTypes).Any();
 		}
 
 		public override int GetHashCode()
