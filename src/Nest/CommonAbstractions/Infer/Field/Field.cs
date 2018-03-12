@@ -50,19 +50,16 @@ namespace Nest
 
 		public Field(Expression expression, double? boost = null)
 		{
-			if (expression == null) throw new ArgumentNullException(nameof(expression));
-			Expression = expression;
+			Expression = expression ?? throw new ArgumentNullException(nameof(expression));
 			Boost = boost;
-			Type type;
-			_comparisonValue = expression.ComparisonValueFromExpression(out type);
+			_comparisonValue = expression.ComparisonValueFromExpression(out var type);
 			_type = type;
 			CachableExpression = !new HasVariableExpressionVisitor(expression).Found;
 		}
 
 		public Field(PropertyInfo property, double? boost = null)
 		{
-			if (property == null) throw new ArgumentNullException(nameof(property));
-			Property = property;
+			Property = property ?? throw new ArgumentNullException(nameof(property));
 			Boost = boost;
 			_comparisonValue = property;
 			_type = property.DeclaringType;
@@ -74,26 +71,17 @@ namespace Nest
 			if (name == null) return null;
 
 			var parts = name.Split(new [] { '^' }, StringSplitOptions.RemoveEmptyEntries);
-			if (parts.Length <= 1) return name.Trim();
+			if (parts.Length <= 1) return name;
 			name = parts[0];
 			boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
-			return name.Trim();
+			return name;
 		}
 
-		public static implicit operator Field(string name)
-		{
-			return name.IsNullOrEmpty() ? null : new Field(name);
-		}
+		public static implicit operator Field(string name) => name.IsNullOrEmpty() ? null : new Field(name);
 
-		public static implicit operator Field(Expression expression)
-		{
-			return expression == null ? null : new Field(expression);
-		}
+		public static implicit operator Field(Expression expression) => expression == null ? null : new Field(expression);
 
-		public static implicit operator Field(PropertyInfo property)
-		{
-			return property == null ? null : new Field(property);
-		}
+		public static implicit operator Field(PropertyInfo property) => property == null ? null : new Field(property);
 
 		public override int GetHashCode()
 		{
@@ -108,33 +96,29 @@ namespace Nest
 		public bool Equals(Field other)
 		{
 			return _type != null
-				? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
-				: other != null && _comparisonValue.Equals(other._comparisonValue);
+				? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue) && Boost.Equals(other.Boost)
+				: other != null && _comparisonValue.Equals(other._comparisonValue) && Boost.Equals(other.Boost);
 		}
 
 		public override bool Equals(object obj)
 		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != GetType()) return false;
-			return this.Equals(obj as Field);
+			switch (obj)
+			{
+				case string s: return this.Equals(s);
+				case PropertyInfo p: return this.Equals(p);
+				case Field f: return this.Equals(f);
+				default: return false;
+			}
 		}
 
-		public static bool operator ==(Field x, Field y)
-		{
-			return Equals(x, y);
-		}
+		public static bool operator ==(Field x, Field y) => Equals(x, y);
 
-		public static bool operator !=(Field x, Field y)
-		{
-			return !(x == y);
-		}
+		public static bool operator !=(Field x, Field y)=> !Equals(x, y);
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
-			var nestSettings = settings as IConnectionSettingsValues;
-			if (nestSettings == null)
-				throw new Exception("Tried to pass field name on querystring but it could not be resolved because no nest settings are available");
+			if (!(settings is IConnectionSettingsValues nestSettings))
+				throw new ArgumentNullException(nameof(settings), $"Can not resolve {nameof(Field)} if no {nameof(IConnectionSettingsValues)} is provided");
 
 			return nestSettings.Inferrer.Field(this);
 		}

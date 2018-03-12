@@ -23,10 +23,14 @@ namespace Tests.Document.Single.Index
 					Document = project
 				}));
 
-			await POST("/project/doc")
+			//no explit ID is provided and none can be inferred on the anonymous object so this falls back to a PUT to /index/type
+			await PUT("/project/doc")
 				.Fluent(c => c.Index(new { }, i => i.Index(typeof(Project)).Type(typeof(Project))))
+				.FluentAsync(c => c.IndexAsync(new { }, i => i.Index(typeof(Project)).Type(typeof(Project))));
+
+			//no explit ID is provided and document is not fed into DocumentPath using explicit OIS.
+			await POST("/project/doc")
 				.Request(c => c.Index(new IndexRequest<object>("project", "doc") {Document = new { }}))
-				.FluentAsync(c => c.IndexAsync(new { }, i => i.Index(typeof(Project)).Type(typeof(Project))))
 				.RequestAsync(c => c.IndexAsync(new IndexRequest<object>(typeof(Project), TypeName.From<Project>())
 				{
 					Document = new { }
