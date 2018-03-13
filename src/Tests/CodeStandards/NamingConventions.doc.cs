@@ -154,6 +154,8 @@ namespace Tests.CodeStandards
 			{
 				nestAssembly.GetType("System.AssemblyVersionInformation", throwOnError: false),
 				nestAssembly.GetType("System.Runtime.Serialization.Formatters.FormatterAssemblyStyle", throwOnError: false),
+				nestAssembly.GetType("Microsoft.CodeAnalysis.EmbeddedAttribute", throwOnError: false),
+				nestAssembly.GetType("System.Runtime.CompilerServices.IsReadOnlyAttribute", throwOnError: false),
 #if DOTNETCORE
 				typeof(SynchronizedCollection<>),
 				nestAssembly.GetType("System.ComponentModel.Browsable", throwOnError: false)
