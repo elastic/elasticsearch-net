@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!-- TODO could be netcoreapp1.0 but we have 3 compiler issues, 
@@ -22,7 +22,7 @@
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.3.409" />
     <PackageReference Include="NuDoq" Version="1.2.5" />
     <PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
   <Import Project="..\..\outputpath.props" />
 </Project>

@@ -27,7 +27,7 @@
 			<group targetFramework=".NETStandard1.3">
 				<dependency id="NETStandard.Library" version="[1.6.0, )" />
 				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
-				<dependency id="Newtonsoft.Json" version="[$jsonDotNetCurrentVersion$, $jsonDotNetNextVersion$)" />
+				<dependency id="Newtonsoft.Json" version="$jsonDotNetCurrentVersion$" />
 			</group>
 		</dependencies>
 	</metadata>
