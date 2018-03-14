@@ -66,9 +66,7 @@ var descriptor = new CreateIndexDescriptor("myindex")
     );
 ----
 <1> Use the stop analyzer on this sub field
-
 <2> Use a custom analyzer named "named_shingles" that is configured in the index
-
 <3> Index as not analyzed
 
 [source,javascript]
@@ -138,7 +136,6 @@ var searchResponse = client.Search<Person>(s => s
 );
 ----
 <1> Use the shingles subfield on `Name`
-
 <2> Use the keyword subfield on `Name`
 
 [source,javascript]

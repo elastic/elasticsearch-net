@@ -105,15 +105,15 @@ private class MethodWithRequestParameter
         {
 public string Name { get; }
 
-    public MethodInfo MethodInfo { get; }
+            public MethodInfo MethodInfo { get; }
 
 public bool IsAsync { get; }
 
 public ClientMethodType MethodType { get; }
 
-    public ParameterInfo Parameter { get; }
+            public ParameterInfo Parameter { get; }
 
-    public MethodWithRequestParameter(MethodInfo methodInfo)
+            public MethodWithRequestParameter(MethodInfo methodInfo)
             {
      Name = methodInfo.Name.EndsWith("Async")
          ? methodInfo.Name.Substring(0, methodInfo.Name.Length - "Async".Length)

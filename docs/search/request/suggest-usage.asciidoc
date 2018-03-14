@@ -76,6 +76,8 @@ s => s
         .Field(p => p.Name)
         .Text("hello world")
         .RealWordErrorLikelihood(0.5)
+        .TokenLimit(5)
+        .ForceUnigrams(false)
     )
 )
 ----
@@ -156,7 +158,9 @@ new SearchRequest<Project>
                     },
                     GramSize = 1,
                     Field = "name",
-                    RealWordErrorLikelihood = 0.5
+                    RealWordErrorLikelihood = 0.5,
+                    TokenLimit = 5,
+                    ForceUnigrams = false
                 }
             }
         },
@@ -207,7 +211,9 @@ new SearchRequest<Project>
         ],
         "field": "name",
         "gram_size": 1,
-        "real_word_error_likelihood": 0.5
+        "real_word_error_likelihood": 0.5,
+        "token_limit": 5,
+        "force_unigrams": false
       },
       "text": "hello world"
     },

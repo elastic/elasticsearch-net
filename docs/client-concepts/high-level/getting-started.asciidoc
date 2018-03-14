@@ -109,7 +109,6 @@ var indexResponse = client.Index(person); <1>
 var asyncIndexResponse = await client.IndexAsync(person); <2>
 ----
 <1> synchronous method that returns an `IIndexResponse`
-
 <2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 
 NOTE: All methods available within NEST are exposed as both synchronous and asynchronous versions,
