@@ -147,6 +147,8 @@ namespace Tests.CodeStandards
 			var exceptions = new List<Type>
 			{
 				nestAssembly.GetType("System.AssemblyVersionInformation"),
+				nestAssembly.GetType("Microsoft.CodeAnalysis.EmbeddedAttribute", throwOnError: false),
+				nestAssembly.GetType("System.Runtime.CompilerServices.IsReadOnlyAttribute", throwOnError: false),
 #if DOTNETCORE
 				typeof(SynchronizedCollection<>),
 				nestAssembly.GetType("System.ComponentModel.Browsable")
