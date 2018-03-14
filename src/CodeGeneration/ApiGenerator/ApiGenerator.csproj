@@ -6,7 +6,7 @@
     <VersionSuffix>alpha</VersionSuffix>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
     <PackageReference Include="RazorMachine" Version="2.6.1" />
     <!-- TODO the following packages prevent us to jump to netcoreapp1.0 -->
     <PackageReference Include="CsQuery" Version="1.3.4" />
