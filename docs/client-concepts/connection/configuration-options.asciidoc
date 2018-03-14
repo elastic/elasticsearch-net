@@ -174,7 +174,7 @@ The following is a list of available connection configuration options on `Connec
 
 Specify how field names are inferred from POCO property names.
 +
-By default, NEST camel cases property names  e.g. EmailAddress POCO property => "emailAddress" Elasticsearch document field name
+By default, NEST camel cases property names e.g. EmailAddress POCO property => "emailAddress" Elasticsearch document field name
 
 `DefaultIndex`::
 
@@ -182,29 +182,29 @@ The default index to use when no index is specified.
 
 `DefaultTypeNameInferrer`::
 
-Specify how type names are inferred from POCO types.  By default, type names are inferred by calling `ToLowerInvariant` on the type's name.
+Specify how type names are inferred from POCO types. By default, type names are inferred by calling `ToLowerInvariant` on the type's name.
 
 `MapDefaultTypeIndices`::
 
-Specify the default index names for a given POCO type.  Takes precedence over the global `DefaultIndex`
+Specify the default index names for a given POCO type. Takes precedence over the global `DefaultIndex` Removed in 6.x.
 
 `MapDefaultTypeNames`::
 
-Specify the default type names for a given POCO type.  Takes precedence over the global `DefaultTypeNameInferrer`
+Specify the default type names for a given POCO type. Takes precedence over the global `DefaultTypeNameInferrer` Removed in 6.x.
 
 `MapIdPropertyFor`::
 
-Specify which property on a given POCO should be used to infer the id of the document when  indexed in Elasticsearch. The type of the document.
+Specify which property on a given POCO should be used to infer the id of the document when indexed in Elasticsearch. The type of the document. Removed in 6.x.
 
 `MapPropertiesFor`::
 
-Specify how the properties are mapped for a given POCO type. The type of the document.
+Specify how the properties are mapped for a given POCO type. The type of the document. Removed in 6.x.
 
 `PluralizeTypeNames`::
 
 Pluralize type names when inferring from POCO type names.
 +
-This calls `DefaultTypeNameInferrer` with an implementation that will pluralize type names.              This used to be the default prior to Nest 0.90
+This calls `DefaultTypeNameInferrer` with an implementation that will pluralize type names.             This used to be the default prior to Nest 0.90
 
 :xml-docs: Nest:ConnectionSettingsBase`1
 

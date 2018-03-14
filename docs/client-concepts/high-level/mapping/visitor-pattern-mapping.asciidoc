@@ -73,7 +73,6 @@ public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
 }
 ----
 <1> Override the `Visit` method on `INumberProperty` and set `DocValues = false`
-
 <2> Similarily, override the `Visit` method on `IBooleanProperty` and set `DocValues = false`
 
 Now we can pass an instance of our custom visitor to `.AutoMap()` 
