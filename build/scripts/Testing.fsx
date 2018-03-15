@@ -1,5 +1,4 @@
 ﻿#I @"../../packages/build/FAKE/tools"
-open Fake.Core
 #r @"FakeLib.dll"
 
 #load @"Commandline.fsx"
