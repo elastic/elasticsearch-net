@@ -195,6 +195,7 @@ namespace Xunit
 			Console.WriteLine("--------");
 
 
+
 			return new RunSummary()
 			{
 				Total = summaries.Sum(s => s.Total),
