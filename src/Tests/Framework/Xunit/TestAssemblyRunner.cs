@@ -108,11 +108,21 @@ namespace Xunit
 				//in parallel
 				using (@group.Key ?? Disposable.Empty)
 				{
-					@group.Key?.Start();
+					try
+					{
+						@group.Key?.Start();
+					}
+					catch (Exception e)
+					{
+						messageBus.QueueMessage(new ErrorMessage(new ITestCase[] { }, e));
+						throw;
+					}
+
 					await @group.ForEachAsync(dop, async g => { await RunTestCollections(messageBus, ctx, g, testFilters); });
 				}
 				this.ClusterTotals[clusterName].Stop();
 			}
+
 
 			return new RunSummary()
 			{
