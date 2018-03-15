@@ -1,4 +1,5 @@
 ﻿#I @"../../packages/build/FAKE/tools"
+open Fake.Core
 #r @"FakeLib.dll"
 
 #load @"Commandline.fsx"
@@ -48,7 +49,8 @@ module Tests =
             | _  -> p
 
         let dotnet = Tooling.BuildTooling("dotnet")
-        dotnet.ExecWithTimeoutIn "src/Tests" command (TimeSpan.FromMinutes 30.) |> ignore
+        let exitCode = dotnet.ExecWithTimeoutIn "src/Tests" command (TimeSpan.FromMinutes 30.) 
+        if exitCode > 0 then raise (Exception <| (sprintf "test finished with exitCode %d" exitCode))
 
     let RunReleaseUnitTests() =
         setLocalEnvVars()
