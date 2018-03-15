@@ -234,6 +234,7 @@ namespace Elasticsearch.Net
 			{
 				var stream = requestData.MemoryStreamFactory.Create();
 				requestMessage.Content = new StreamContent(stream);
+				requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.ContentType);
 				if (requestData.HttpCompression)
 				{
 					requestMessage.Content.Headers.Add("Content-Encoding", "gzip");
