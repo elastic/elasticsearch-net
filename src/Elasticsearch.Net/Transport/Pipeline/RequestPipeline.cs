@@ -499,7 +499,7 @@ namespace Elasticsearch.Net
 		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			if (callDetails.Success) return null;
+			if (callDetails?.Success ?? false) return null;
 			var innerException = pipelineExceptions.HasAny() ? new AggregateException(pipelineExceptions) : callDetails?.OriginalException;
 
 			var exceptionMessage = innerException?.Message ?? $"Request failed to execute";

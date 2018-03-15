@@ -229,6 +229,7 @@ namespace Elasticsearch.Net
 			{
 				var stream = requestData.MemoryStreamFactory.Create();
 				requestMessage.Content = new StreamContent(stream);
+				requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
 				if (requestData.HttpCompression)
 				{
 					requestMessage.Content.Headers.Add("Content-Encoding", "gzip");
@@ -241,14 +242,6 @@ namespace Elasticsearch.Net
 					data.Write(stream, requestData.ConnectionSettings);
 				stream.Position = 0;
 			}
-			else
-			{
-				// Set content in order to set a Content-Type header.
-				// Content gets diposed so can't be shared instance
-				requestMessage.Content = new ByteArrayContent(new byte[0]);
-			}
-
-			requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.RequestMimeType);
 
 			return requestMessage;
 		}
