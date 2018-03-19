@@ -38,6 +38,9 @@ namespace Nest
 
 		[JsonProperty("docvalue_fields")]
 		Fields DocValueFields { get; set; }
+
+		[JsonProperty("ignore_unmapped")]
+		bool? IgnoreUnmapped { get; set; }
 	}
 
 	public class InnerHits : IInnerHits
@@ -61,6 +64,8 @@ namespace Nest
 		public IScriptFields ScriptFields { get; set; }
 
 		public Fields DocValueFields { get; set; }
+
+		public bool? IgnoreUnmapped { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -76,6 +81,7 @@ namespace Nest
 		bool? IInnerHits.Version { get; set; }
 		IScriptFields IInnerHits.ScriptFields { get; set; }
 		Fields IInnerHits.DocValueFields { get; set; }
+		bool? IInnerHits.IgnoreUnmapped { get; set; }
 
 		public InnerHitsDescriptor<T> From(int? from) => Assign(a => a.From = from);
 
@@ -107,5 +113,7 @@ namespace Nest
 			Assign(a => a.DocValueFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public InnerHitsDescriptor<T> DocValueFields(Fields fields) => Assign(a => a.DocValueFields = fields);
+
+		public InnerHitsDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }
