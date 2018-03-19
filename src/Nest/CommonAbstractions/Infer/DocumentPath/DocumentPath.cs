@@ -9,7 +9,7 @@ namespace Nest
 		TypeName Type { get; set; }
 	}
 
-	public class DocumentPath<T> : IDocumentPath where T : class
+	public class DocumentPath<T> : IEquatable<DocumentPath<T>>, IDocumentPath where T : class
 	{
 		internal IDocumentPath Self => this;
 		internal T Document { get; set; }
@@ -28,10 +28,10 @@ namespace Nest
 		public static DocumentPath<T> Id(Id id) => new DocumentPath<T>(id);
 		public static DocumentPath<T> Id(T @object) => new DocumentPath<T>(@object);
 
-		public static implicit operator DocumentPath<T>(T @object) => new DocumentPath<T>(@object);
-		public static implicit operator DocumentPath<T>(Id id) => new DocumentPath<T>(id);
+		public static implicit operator DocumentPath<T>(T @object) => @object == null ? null : new DocumentPath<T>(@object);
+		public static implicit operator DocumentPath<T>(Id id) => id == null ? null : new DocumentPath<T>(id);
 		public static implicit operator DocumentPath<T>(long id) => new DocumentPath<T>(id);
-		public static implicit operator DocumentPath<T>(string id) => new DocumentPath<T>(id);
+		public static implicit operator DocumentPath<T>(string id) => id.IsNullOrEmpty() ? null : new DocumentPath<T>(id);
 		public static implicit operator DocumentPath<T>(Guid id) => new DocumentPath<T>(id);
 
 		public DocumentPath<T> Index(IndexName index)
@@ -46,5 +46,36 @@ namespace Nest
 			Self.Type = type;
 			return this;
 		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				var hashCode = Self.Type?.GetHashCode() ?? 0;
+				hashCode = (hashCode * 397) ^ (Self.Index?.GetHashCode() ?? 0);
+				hashCode = (hashCode * 397) ^ (Self.Id?.GetHashCode() ?? 0);
+				return hashCode;
+			}
+		}
+
+		public bool Equals(DocumentPath<T> other)
+		{
+			IDocumentPath o = other, s = Self;
+			return s.Index.NullOrEquals(o.Index) && s.Type.NullOrEquals(o.Type) && s.Id.NullOrEquals(o.Id)
+			       && (this.Document?.Equals(other.Document) ?? true);
+		}
+
+		public override bool Equals(object obj)
+		{
+			switch (obj)
+			{
+				case DocumentPath<T> d: return this.Equals(d);
+				default: return false;
+			}
+		}
+
+		public static bool operator ==(DocumentPath<T> x, DocumentPath<T> y) => Equals(x, y);
+
+		public static bool operator !=(DocumentPath<T> x, DocumentPath<T> y)=> !Equals(x, y);
 	}
 }

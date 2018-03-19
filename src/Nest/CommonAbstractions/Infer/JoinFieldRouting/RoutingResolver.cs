@@ -62,13 +62,8 @@ namespace Nest
 			return true;
 		}
 
-		private string ResolveId(Id id, IConnectionSettingsValues nestSettings)
-		{
-			if (id.Document != null) return nestSettings.Inferrer.Id(id.Document);
-
-			var s = id.Value as string;
-			return s ?? id.Value?.ToString();
-		}
+		private string ResolveId(Id id, IConnectionSettingsValues nestSettings) =>
+			id.Document != null ? nestSettings.Inferrer.Id(id.Document) : id.StringOrLongValue;
 
 		private static JoinField GetJoinFieldFromObject(Type type, object @object)
 		{

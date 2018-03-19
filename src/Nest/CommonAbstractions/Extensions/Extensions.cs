@@ -183,6 +183,13 @@ namespace Nest
 			return list != null && list.Any();
 		}
 
+		internal static bool IsEmpty<T>(this IEnumerable<T> list)
+		{
+			if (list == null) return true;
+			var enumerable = list as T[] ?? list.ToArray();
+			return !enumerable.Any() || enumerable.All(t => t == null);
+		}
+
 		internal static void ThrowIfNull<T>(this T value, string name, string message = null)
 		{
 			if (value == null && message.IsNullOrEmpty()) throw new ArgumentNullException(name);
@@ -192,6 +199,16 @@ namespace Nest
 		internal static bool IsNullOrEmpty(this string value)
 		{
 			return string.IsNullOrWhiteSpace(value);
+		}
+		internal static bool IsNullOrEmptyCommaSeparatedList(this string value, out string[] split)
+		{
+			split = null;
+			if (string.IsNullOrWhiteSpace(value)) return true;
+			split = value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+				.Where(t=>!t.IsNullOrEmpty())
+				.Select(t=>t.Trim())
+				.ToArray();
+			return split.Length == 0;
 		}
 
 		internal static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> handler)
@@ -282,5 +299,13 @@ namespace Nest
 				additionalRateLimiter?.Release();
 			}
 		}
+
+		internal static bool NullOrEquals<T>(this T o, T other)
+		{
+			if (o == null && other == null) return true;
+			if (o == null || other == null) return false;
+			return o.Equals(other);
+		}
+
 	}
 }

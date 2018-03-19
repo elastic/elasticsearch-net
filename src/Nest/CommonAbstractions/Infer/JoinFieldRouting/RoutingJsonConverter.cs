@@ -23,14 +23,22 @@ namespace Nest
 				return;
 			}
 
-			var id = (Routing)value;
-			if (id.Document != null)
+			var routing = (Routing)value;
+			if (routing.Document != null)
 			{
 				var settings = serializer.GetConnectionSettings();
-				var documentId = settings.Inferrer.Routing(id.Document.GetType(), id.Document);
+				var documentId = settings.Inferrer.Routing(routing.Document.GetType(), routing.Document);
 				writer.WriteValue(documentId);
 			}
-			else writer.WriteValue(id.Value);
+			else if (routing.DocumentGetter != null)
+			{
+				var settings = serializer.GetConnectionSettings();
+				var doc = routing.DocumentGetter();
+				var documentId = settings.Inferrer.Routing(doc.GetType(), doc);
+				writer.WriteValue(documentId);
+			}
+			else if (routing.LongValue != null) writer.WriteValue(routing.LongValue);
+			else writer.WriteValue(routing.StringValue);
 		}
 	}
 }

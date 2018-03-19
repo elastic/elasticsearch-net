@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -9,20 +10,23 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Id : IEquatable<Id>, IUrlParameter
 	{
-		internal object Value { get; set; }
+		internal string StringValue { get; }
+		internal long? LongValue { get; }
+		internal string StringOrLongValue => this.StringValue ?? this.LongValue?.ToString(CultureInfo.InvariantCulture);
 		internal object Document { get; }
+		internal int Tag { get; }
 
-		public Id(string id) { Value = id; }
-		public Id(long id) { Value = id; }
-		public Id(object document) { Document = document; }
+		public Id(string id) { Tag = 0; StringValue = id; }
+		public Id(long id) { Tag = 1; LongValue = id; }
+		public Id(object document) { Tag = 2; Document = document; }
 
-		public static implicit operator Id(string id) => new Id(id);
+		public static implicit operator Id(string id) => id.IsNullOrEmpty() ? null : new Id(id);
 		public static implicit operator Id(long id) => new Id(id);
 		public static implicit operator Id(Guid id) => new Id(id.ToString("D"));
 
 		public static Id From<T>(T document) where T : class => new Id(document);
 
-		private string DebugDisplay => Value?.ToString() ?? "Id from instance typeof: " + Document?.GetType().Name;
+		private string DebugDisplay => StringOrLongValue ?? "Id from instance typeof: " + Document?.GetType().Name;
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
@@ -30,47 +34,52 @@ namespace Nest
 			return GetString(nestSettings);
 		}
 
-		private string GetString(IConnectionSettingsValues nestSettings)
-		{
-			if (this.Document != null)
-			{
-				Value = nestSettings.Inferrer.Id(this.Document);
-			}
-
-			var s = Value as string;
-			return s ?? this.Value?.ToString();
-		}
+		private string GetString(IConnectionSettingsValues nestSettings) =>
+			this.Document != null ? nestSettings.Inferrer.Id(this.Document) : this.StringOrLongValue;
 
 		public bool Equals(Id other)
 		{
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return Equals(Value, other.Value) && Equals(Document, other.Document);
+			if (this.Tag + other.Tag == 1)
+				return this.StringOrLongValue == other.StringOrLongValue;
+			else if (this.Tag != other.Tag) return false;
+			switch (this.Tag)
+			{
+				case 0:
+				case 1:
+					return this.StringOrLongValue == other.StringOrLongValue;
+				default:
+					return this.Document?.Equals(other.Document) ?? false;
+			}
 		}
 
 		public override bool Equals(object obj)
 		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			return obj.GetType() == this.GetType() && Equals((Id)obj);
+			switch (obj)
+			{
+				case Id r: return Equals(r);
+				case string s: return Equals(s);
+				case int l: return Equals(l);
+				case long l: return Equals(l);
+				case Guid g: return Equals(g);
+			}
+			return Equals(new Id(obj));
 		}
 
+		private static int TypeHashCode { get; } = typeof(Id).GetHashCode();
 		public override int GetHashCode()
 		{
 			unchecked
 			{
-				return ((Value?.GetHashCode() ?? 0) * 397) ^ (Document?.GetHashCode() ?? 0);
+				var result = TypeHashCode;
+				result = (result * 397) ^ (this.StringValue?.GetHashCode() ?? 0);
+				result = (result * 397) ^ (this.LongValue?.GetHashCode() ?? 0);
+				result = (result * 397) ^ (this.Document?.GetHashCode() ?? 0);
+				return result;
 			}
 		}
 
-		public static bool operator ==(Id left, Id right)
-		{
-			return Equals(left, right);
-		}
+		public static bool operator ==(Id left, Id right) => Equals(left, right);
 
-		public static bool operator !=(Id left, Id right)
-		{
-			return !Equals(left, right);
-		}
+		public static bool operator !=(Id left, Id right) => !Equals(left, right);
 	}
 }
