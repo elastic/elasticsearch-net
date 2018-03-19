@@ -38,6 +38,16 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			t1 = Infer.Field<Project>(p => p.Name, 1.1); t2 = Infer.Field<Project>(p => p.Name, 1.1);
 			(t1 == t2).ShouldBeTrue(t2);
 			t1.Should().BeEquivalentTo(t2);
+
+			// boost factor is not taken into account when comparing fields
+			t1 = Infer.Field<Project>(p => p.Name, 2.1); t2 = Infer.Field<Project>(p => p.Name, 1.1);
+			(t1 == t2).ShouldBeTrue(t2);
+			t1.Should().BeEquivalentTo(t2);
+
+			// boost factor is not taken into account when comparing fields
+			t1 = Infer.Field<Project>(p => p.Name); t2 = Infer.Field<Project>(p => p.Name, 1.1);
+			(t1 == t2).ShouldBeTrue(t2);
+			t1.Should().BeEquivalentTo(t2);
 		}
 
 		[U] public void TypedNotEq()
@@ -46,11 +56,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			(t1 != t2).ShouldBeTrue(t2);
 			t1.Should().NotBeEquivalentTo(t2);
 
-			t1 = Infer.Field<Project>(p => p.Name); t2 = Infer.Field<Project>(p => p.Name, 2.0);
-			(t1 != t2).ShouldBeTrue(t2);
-			t1.Should().NotBeEquivalentTo(t2);
-
-			t1 = Infer.Field<Project>(p => p.Name, 1.0); t2 = Infer.Field<Project>(p => p.Name, 2.0);
+			t1 = Infer.Field<Project>(p => p.Name, 1.0); t2 = Infer.Field<Project>(p => p.Location, 1.0);
 			(t1 != t2).ShouldBeTrue(t2);
 			t1.Should().NotBeEquivalentTo(t2);
 		}

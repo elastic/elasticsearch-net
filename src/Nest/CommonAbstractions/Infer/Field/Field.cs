@@ -96,8 +96,8 @@ namespace Nest
 		public bool Equals(Field other)
 		{
 			return _type != null
-				? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue) && Boost.Equals(other.Boost)
-				: other != null && _comparisonValue.Equals(other._comparisonValue) && Boost.Equals(other.Boost);
+				? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
+				: other != null && _comparisonValue.Equals(other._comparisonValue);
 		}
 
 		public override bool Equals(object obj)
