@@ -113,7 +113,7 @@ namespace Tests.Search.Request
 	}
 
 	/**
-	 * [[inner-hits-usage]]
+	* [[inner-hits-usage]]
 	*== Inner Hits Usage
 	*
 	* The {ref_current}/mapping-parent-field.html[parent/child] and {ref_current}/nested.html[nested] features allow the
@@ -187,6 +187,7 @@ namespace Tests.Search.Request
 								{
 									name = "princes",
 									docvalue_fields = new []{"name"},
+									ignore_unmapped = false
 								}
 							}
 						},
@@ -212,6 +213,7 @@ namespace Tests.Search.Request
 					.InnerHits(ih => ih
 						.DocValueFields(f=>f.Field(p=>p.Name))
 						.Name("princes")
+						.IgnoreUnmapped(false)
 					)
 
 				) || q.Nested(n => n
@@ -231,6 +233,7 @@ namespace Tests.Search.Request
 				{
 					Name = "princes",
 					DocValueFields = Field<Prince>(p=>p.Name),
+					IgnoreUnmapped = false
 				}
 			} || new NestedQuery
 			{
