@@ -54,8 +54,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			*
 			* - determining `Field` equality
 			* - getting the hash code for a `Field` instance
-			*
-			* IMPORTANT: Boost values are **not** taken into account when determining equality.
 			*/
 			var fieldStringWithBoostTwo = new Field("name^2");
 			var fieldStringWithBoostThree = new Field("name^3");
@@ -70,7 +68,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldExpression.GetHashCode().Should().NotBe(0);
 			fieldProperty.GetHashCode().Should().NotBe(0);
 
-			fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostThree); //<1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
+			fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostTwo); //<1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
 		}
 
 		/**

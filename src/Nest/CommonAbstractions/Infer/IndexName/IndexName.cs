@@ -19,24 +19,25 @@ namespace Nest
 
 		private IndexName(string index, string cluster = null)
 		{
-			this.Name = index?.Trim();
-			this.Cluster = cluster?.Trim();
+			this.Name = index;
+			this.Cluster = cluster;
 		}
 		private IndexName(Type type, string cluster = null)
 		{
 			this.Type = type;
-			this.Cluster = cluster?.Trim();
+			this.Cluster = cluster;
 		}
 		private IndexName(string index, Type type, string cluster = null)
 		{
 			this.Name = index;
 			this.Type = type;
-			this.Cluster = cluster?.Trim();
+			this.Cluster = cluster;
 		}
 
 		public static IndexName From<T>() => typeof(T);
 		public static IndexName From<T>(string clusterName) => From(typeof(T), clusterName);
 		private static IndexName From(Type t, string clusterName) => new IndexName(t, clusterName);
+		// TODO private?
 		public static IndexName Rebuild(string index, Type t, string clusterName = null) => new IndexName(index, t, clusterName);
 
 		public Indices And<T>() => new Indices(new[] { this, typeof(T) });
@@ -57,13 +58,7 @@ namespace Nest
 
 		bool IEquatable<IndexName>.Equals(IndexName other) => EqualsMarker(other);
 
-		public override bool Equals(object obj)
-		{
-			var s = obj as string;
-			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
-			var pp = obj as IndexName;
-			return EqualsMarker(pp);
-		}
+		public override bool Equals(object obj) => obj is string s ? this.EqualsString(s) : obj is IndexName i && EqualsMarker(i);
 
 		public override int GetHashCode()
 		{
@@ -76,6 +71,10 @@ namespace Nest
 			}
 		}
 
+		public static bool operator ==(IndexName left, IndexName right) => Equals(left, right);
+
+		public static bool operator !=(IndexName left, IndexName right) => !Equals(left, right);
+
 		public override string ToString()
 		{
 			if (!this.Name.IsNullOrEmpty())
@@ -85,10 +84,7 @@ namespace Nest
 		private string PrefixClusterName(string name) => PrefixClusterName(this, name);
 		private static string PrefixClusterName(IndexName i, string name) => i.Cluster.IsNullOrEmpty() ? name : $"{i.Cluster}:{name}";
 
-		private bool EqualsString(string other)
-		{
-			return !other.IsNullOrEmpty() && other == PrefixClusterName(this.Name);
-		}
+		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == PrefixClusterName(this.Name);
 
 		private bool EqualsMarker(IndexName other)
 		{

@@ -14,14 +14,9 @@ namespace Nest
 		public string Name { get; }
 		public Type Type { get; }
 
-		private TypeName(string type)
-		{
-			this.Name = type;
-		}
-		private TypeName(Type type)
-		{
-			this.Type = type;
-		}
+		private TypeName(string type) => this.Name = type;
+
+		private TypeName(Type type) => this.Type = type;
 
 		internal string DebugDisplay => Type == null ? Name : $"{nameof(TypeName)} for typeof: {Type?.Name}";
 
@@ -31,7 +26,7 @@ namespace Nest
 
 		private static TypeName GetTypeNameForType(Type type) => new TypeName(type);
 
-		public static implicit operator TypeName(string typeName) => typeName == null ? null : new TypeName(typeName);
+		public static implicit operator TypeName(string typeName) => typeName.IsNullOrEmpty() ? null : new TypeName(typeName);
 
 		public static implicit operator TypeName(Type type) => type == null ? null : new TypeName(type);
 
@@ -44,8 +39,11 @@ namespace Nest
 				return result;
 			}
 		}
+		public static bool operator ==(TypeName left, TypeName right) => Equals(left, right);
 
-		bool IEquatable<TypeName>.Equals(TypeName other) => Equals(other);
+		public static bool operator !=(TypeName left, TypeName right) => !Equals(left, right);
+
+		public bool Equals(TypeName other) => EqualsMarker(other);
 
 		public override bool Equals(object obj)
 		{
@@ -78,9 +76,8 @@ namespace Nest
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
-			var nestSettings = settings as IConnectionSettingsValues;
-			if (nestSettings == null)
-				throw new Exception("Tried to pass type name on querystring but it could not be resolved because no nest settings are available");
+			if (!(settings is IConnectionSettingsValues nestSettings))
+				throw new ArgumentNullException(nameof(settings), $"Can not resolve {nameof(TypeName)} if no {nameof(IConnectionSettingsValues)} is provided");
 
 			return nestSettings.Inferrer.TypeName(this);
 		}

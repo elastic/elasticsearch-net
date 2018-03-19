@@ -9,7 +9,7 @@ namespace Nest
     {
 		internal static bool IsConditionless(this Id id)
 		{
-			return id == null || (id.Value == null && id.Document == null);
+			return id == null || (id.StringOrLongValue == null && id.Document == null);
 		}
 	}
 }

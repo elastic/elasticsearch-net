@@ -10,7 +10,7 @@ namespace Nest
 	{
 		public string NodeId { get; }
 		public long TaskNumber { get; }
-		public string FullyQualifiedId => $"{NodeId}:{TaskNumber.ToString(CultureInfo.InvariantCulture)}";
+		public string FullyQualifiedId { get; }
 
 		private string DebugDisplay => FullyQualifiedId;
 
@@ -28,9 +28,11 @@ namespace Nest
 				throw new ArgumentException($"TaskId:{taskId} not in expected format of <node_id>:<task_id>", nameof(taskId));
 
 			this.NodeId = tokens[0];
-			long t;
-			if (!long.TryParse(tokens[1], NumberStyles.Any, CultureInfo.InvariantCulture, out t) || t < -1 || t == 0)
+			this.FullyQualifiedId = taskId;
+
+			if (!long.TryParse(tokens[1].Trim(), NumberStyles.Any, CultureInfo.InvariantCulture, out var t) || t < -1 || t == 0)
 				throw new ArgumentException($"TaskId task component:{tokens[1]} could not be parsed to long or is out of range", nameof(taskId));
+
 			this.TaskNumber = t;
 		}
 
@@ -38,22 +40,18 @@ namespace Nest
 
 		public string GetString(IConnectionConfigurationValues settings) => FullyQualifiedId;
 
-		public static implicit operator TaskId(string taskId) => new TaskId(taskId);
+		public static implicit operator TaskId(string taskId) => taskId.IsNullOrEmpty() ? null : new TaskId(taskId);
 
-		public bool Equals(TaskId other)
-		{
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return string.Equals(NodeId, other.NodeId) && TaskNumber == other.TaskNumber;
-		}
+		public static bool operator ==(TaskId left, TaskId right) => Equals(left, right);
 
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != this.GetType()) return false;
-			return Equals((TaskId) obj);
-		}
+		public static bool operator !=(TaskId left, TaskId right) => !Equals(left, right);
+
+		public bool Equals(TaskId other) => EqualsString(other?.FullyQualifiedId);
+
+		public override bool Equals(object obj) =>
+			obj != null && obj is string s ? this.EqualsString(s) : (obj is TaskId i) && this.EqualsString(i.FullyQualifiedId);
+
+		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == this.FullyQualifiedId;
 
 		public override int GetHashCode()
 		{
@@ -62,9 +60,5 @@ namespace Nest
 				return (NodeId.GetHashCode()*397) ^ TaskNumber.GetHashCode();
 			}
 		}
-
-		public static bool operator ==(TaskId left, TaskId right) => Equals(left, right);
-
-		public static bool operator !=(TaskId left, TaskId right) => !Equals(left, right);
 	}
 }
