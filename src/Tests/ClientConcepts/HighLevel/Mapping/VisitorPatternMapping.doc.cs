@@ -17,22 +17,16 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
      * The default visitor, `NoopPropertyVisitor`, does nothing and acts as a blank canvas for you
      * to implement your own visiting methods.
      *
-     * For instance, let's create a custom visitor that disables doc values for numeric and boolean types
-     * (Not really a good idea in practice, but let's do it anyway for the sake of a clear example.)
+     * For instance, let's create a custom visitor that disables doc values for numeric and boolean types -
+     * __This is not really a good idea in practice, but let's do it anyway for the sake of a clear example.__
      */
     public class VisitorPattern
 	{
 		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
 
         /**
-		* Using the following two POCOs as in previous examples,
+		* Using the following POCO
 		*/
-        public class Company
-		{
-			public string Name { get; set; }
-			public List<Employee> Employees { get; set; }
-		}
-
 		public class Employee
 		{
 			public string FirstName { get; set; }

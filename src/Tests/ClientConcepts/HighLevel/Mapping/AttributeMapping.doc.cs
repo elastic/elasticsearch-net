@@ -26,29 +26,16 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
     * When you use attributes, you *must* also call `.AutoMap()` for the attributes to be applied.
     * --
     *
-    * Here we define the same two types as before, but this time using attributes to define the mappings.
+    * Here we define an `Employee` type and use attributes to define the mappings.
 	*/
     public class AttributeMapping
 	{
 		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
 
-        [ElasticsearchType(Name = "company")]
-        public class Company
-        {
-            [Keyword(NullValue = "null", Similarity = "BM25")]
-            public string Name { get; set; }
-
-            [Text(Name = "office_hours")]
-            public TimeSpan? HeadOfficeHours { get; set; }
-
-            [Object(Store = false)]
-            public List<Employee> Employees { get; set; }
-        }
-
         [ElasticsearchType(Name = "employee")]
         public class Employee
         {
-            [Text(Name = "first_name")]
+            [Text(Name = "first_name", Norms = false, Similarity = "LMDirichlet")]
             public string FirstName { get; set; }
 
             [Text(Name = "last_name")]
@@ -66,7 +53,22 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             [Nested]
             [PropertyName("empl")]
             public List<Employee> Employees { get; set; }
+
+	        [Text(Name = "office_hours")]
+	        public TimeSpan? OfficeHours { get; set; }
+
+	        [Object(Store = false)]
+	        public List<Skill> Skills { get; set; }
         }
+
+		public class Skill
+		{
+			[Text]
+			public string Name { get; set; }
+
+			[Number(NumberType.Byte, Name = "level")]
+			public int Proficiency { get; set; }
+		}
 
 		/**Then we map the types by calling `.AutoMap()` */
 		[U]
@@ -74,7 +76,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			var createIndexResponse = client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
-					.Map<Company>(m => m.AutoMap())
 					.Map<Employee>(m => m.AutoMap())
 				)
 			);
@@ -86,61 +87,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			{
 				mappings = new
 				{
-					company = new
-					{
-						properties = new
-						{
-                            employees = new
-                            {
-                                properties = new
-                                {
-                                    birthday = new
-                                    {
-                                        format = "MMddyyyy",
-                                        type = "date"
-                                    },
-                                    empl = new
-                                    {
-                                        properties = new {},
-                                        type = "nested"
-                                    },
-                                    first_name = new
-                                    {
-                                        type = "text"
-                                    },
-                                    isManager = new
-                                    {
-                                        null_value = false,
-                                        store = true,
-                                        type = "boolean"
-                                    },
-                                    last_name = new
-                                    {
-                                        type = "text"
-                                    },
-                                    salary = new
-                                    {
-                                        coerce = true,
-                                        doc_values = false,
-                                        ignore_malformed = true,
-                                        type = "float"
-                                    }
-                                },
-                                type = "object",
-                                store = false
-                            },
-                            name = new
-							{
-								null_value = "null",
-								similarity = "BM25",
-								type = "keyword"
-							},
-							office_hours = new
-							{
-								type = "text"
-							}
-						}
-					},
 					employee = new
 					{
 						properties = new
@@ -157,7 +103,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							first_name = new
 							{
-								type = "text"
+								type = "text",
+								norms = false,
+								similarity = "LMDirichlet"
 							},
 							isManager = new
 							{
@@ -169,12 +117,32 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							{
 								type = "text"
 							},
+							office_hours = new
+							{
+								type = "text"
+							},
 							salary = new
 							{
 								coerce = true,
 								doc_values = false,
 								ignore_malformed = true,
 								type = "float"
+							},
+							skills = new
+							{
+								properties = new
+								{
+									level = new
+									{
+										type = "byte"
+									},
+									name = new
+									{
+										type = "text"
+									}
+								},
+								type = "object",
+								store = false
 							}
 						}
 					}
