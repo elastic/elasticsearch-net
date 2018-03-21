@@ -36,6 +36,7 @@ namespace Nest
 		/// <summary>
 		/// Whether duplicate suggestions should be filtered out. Defaults to <c>false</c>
 		/// </summary>
+		/// <remarks>Only available in Elasticsearch 6.1.0+</remarks>
 		[JsonProperty("skip_duplicates")]
 		bool? SkipDuplicates { get; set; }
 	}
@@ -92,6 +93,7 @@ namespace Nest
 		/// <summary>
 		/// Whether duplicate suggestions should be filtered out. Defaults to <c>false</c>
 		/// </summary>
+		/// <remarks>Only available in Elasticsearch 6.1.0+</remarks>
 		public CompletionSuggesterDescriptor<T> SkipDuplicates(bool? skipDuplicates = true) => Assign(a => a.SkipDuplicates = skipDuplicates);
 	}
 }
