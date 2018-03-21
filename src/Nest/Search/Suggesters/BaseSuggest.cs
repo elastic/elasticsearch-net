@@ -6,12 +6,18 @@ namespace Nest
 {
 	public interface ISuggester
 	{
+		/// <summary>
+		/// The name of the field on which to run the query
+		/// </summary>
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
+		/// <summary>
+		/// The number of suggestions to return. Defaults to 5
+		/// </summary>
 		[JsonProperty("size")]
 		int? Size { get; set; }
 }
