@@ -57,7 +57,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	        [Text(Name = "office_hours")]
 	        public TimeSpan? OfficeHours { get; set; }
 
-	        [Object(Store = false)]
+	        [Object]
 	        public List<Skill> Skills { get; set; }
         }
 
@@ -141,8 +141,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										type = "text"
 									}
 								},
-								type = "object",
-								store = false
+								type = "object"
 							}
 						}
 					}
