@@ -220,6 +220,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         }
 
         /**
+         * ==== Auto mapping overrides down the object graph
+         *
          * Just as we were able to override the inferred properties from auto mapping in the previous example,
          * fluent mapping also takes precedence over <<attribute-mapping, Attribute Mapping>>.
          * In this way, fluent, attribute and auto mapping can be combined. We'll demonstrate with an example.
@@ -236,7 +238,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             public TimeSpan? HeadOfficeHours { get; set; }
 
             [Object(Store = false)]
-            public List<Employee> Employees { get; set; }
+            public List<EmployeeWithAttributes> Employees { get; set; }
         }
 
         [ElasticsearchType(Name = "employee")]
@@ -274,34 +276,32 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
                     .Map<CompanyWithAttributes>(m => m
                         .AutoMap() // <1> Automap company
                         .Properties(ps => ps // <2> Override company inferred mappings
-                            .Nested<Employee>(n => n
+                            .Nested<EmployeeWithAttributes>(n => n
                                 .Name(nn => nn.Employees)
-                            )
-                        )
-                    )
-                    .Map<EmployeeWithAttributes>(m => m
-                        .AutoMap() // <3> Auto map employee
-                        .Properties(ps => ps // <4> Override employee inferred mappings
-                            .Text(s => s
-                                .Name(e => e.FirstName)
-                                .Fields(fs => fs
-                                    .Keyword(ss => ss
-                                        .Name("firstNameRaw")
-                                    )
-                                    .TokenCount(t => t
-                                        .Name("length")
-                                        .Analyzer("standard")
-                                    )
-                                )
-                            )
-                            .Number(n => n
-                                .Name(e => e.Salary)
-                                .Type(NumberType.Double)
-                                .IgnoreMalformed(false)
-                            )
-                            .Date(d => d
-                                .Name(e => e.Birthday)
-                                .Format("MM-dd-yy")
+				            	.AutoMap() // <3> Automap nested employee type
+					            .Properties(pps => pps // <4> Override employee inferred mappings
+						            .Text(s => s
+							            .Name(e => e.FirstName)
+							            .Fields(fs => fs
+								            .Keyword(ss => ss
+									            .Name("firstNameRaw")
+								            )
+								            .TokenCount(t => t
+									            .Name("length")
+									            .Analyzer("standard")
+								            )
+							            )
+						            )
+						            .Number(nu => nu
+							            .Name(e => e.Salary)
+							            .Type(NumberType.Double)
+							            .IgnoreMalformed(false)
+						            )
+						            .Date(d => d
+							            .Name(e => e.Birthday)
+							            .Format("MM-dd-yy")
+						            )
+					            )
                             )
                         )
                     )
@@ -319,7 +319,98 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
                         {
                             employees = new
                             {
-                                type = "nested"
+                                type = "nested",
+	                            properties = new
+								{
+									birthday = new
+									{
+										format = "MM-dd-yy",
+										type = "date"
+									},
+									empl = new
+									{
+										properties = new
+										{
+											birthday = new
+											{
+												type = "date"
+											},
+											employees = new
+											{
+												properties = new {},
+												type = "object"
+											},
+											firstName = new
+											{
+												fields = new
+												{
+													keyword = new
+													{
+														type = "keyword",
+														ignore_above = 256
+													}
+												},
+												type = "text"
+											},
+											hours = new
+											{
+												type = "long"
+											},
+											isManager = new
+											{
+												type = "boolean"
+											},
+											lastName = new
+											{
+												fields = new
+												{
+													keyword = new
+													{
+														type = "keyword",
+														ignore_above = 256
+													}
+												},
+												type = "text"
+											},
+											salary = new
+											{
+												type = "integer"
+											}
+										},
+										type = "nested"
+									},
+									first_name = new
+									{
+										fields = new
+										{
+											firstNameRaw = new
+											{
+												type = "keyword"
+											},
+											length = new
+											{
+												analyzer = "standard",
+												type = "token_count"
+											}
+										},
+										type = "text"
+									},
+									isManager = new
+									{
+										null_value = false,
+										store = true,
+										type = "boolean"
+									},
+									last_name = new
+									{
+										type = "text"
+									},
+									salary = new
+									{
+										ignore_malformed = false,
+										type = "double"
+									}
+								}
                             },
                             name = new
                             {
@@ -332,210 +423,16 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
                                 type = "text"
                             }
                         }
-                    },
-                    employee = new
-                    {
-                        properties = new
-                        {
-                            birthday = new
-                            {
-                                format = "MM-dd-yy",
-                                type = "date"
-                            },
-                            empl = new
-                            {
-                                properties = new
-                                {
-                                    birthday = new
-                                    {
-                                        type = "date"
-                                    },
-                                    employees = new
-                                    {
-                                        properties = new { },
-                                        type = "object"
-                                    },
-                                    firstName = new
-                                    {
-                                        fields = new
-                                        {
-                                            keyword = new
-                                            {
-                                                type = "keyword",
-                                                ignore_above = 256
-                                            }
-                                        },
-                                        type = "text"
-                                    },
-                                    hours = new
-                                    {
-                                        type = "long"
-                                    },
-                                    isManager = new
-                                    {
-                                        type = "boolean"
-                                    },
-                                    lastName = new
-                                    {
-                                        fields = new
-                                        {
-                                            keyword = new
-                                            {
-                                                type = "keyword",
-                                                ignore_above = 256
-                                            }
-                                        },
-                                        type = "text"
-                                    },
-                                    salary = new
-                                    {
-                                        type = "integer"
-                                    }
-                                },
-                                type = "nested"
-                            },
-                            first_name = new
-                            {
-                                fields = new
-                                {
-                                    firstNameRaw = new
-                                    {
-                                        type = "keyword"
-                                    },
-                                    length = new
-                                    {
-                                        analyzer = "standard",
-                                        type = "token_count"
-                                    }
-                                },
-                                type = "text"
-                            },
-                            isManager = new
-                            {
-                                null_value = false,
-                                store = true,
-                                type = "boolean"
-                            },
-                            last_name = new
-                            {
-                                type = "text"
-                            },
-                            salary = new
-                            {
-                                ignore_malformed = false,
-                                type = "double"
-                            }
-                        }
                     }
                 }
             };
 
+	        /**
+	        * As demonstrated, by calling `.AutoMap()` inside of the `.Nested<Employee>` mapping, it is possible to auto map the
+	        * `Employee` nested properties and again, override any inferred mapping from the automapping process,
+	        * through manual mapping
+	        */
             // hide
-            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
-        }
-
-
-        /**
-        * ==== Auto mapping overrides down the object graph
-        *
-        * You may have noticed in the <<auto-map-with-overrides, Automap with fluent overrides example>>
-        * that the properties of the `Employees` property on `Company` were not mapped. This is because the automapping
-        * was applied only at the root level of the `Company` mapping.
-        *
-        * By calling `.AutoMap()` inside of the `.Nested<Employee>` mapping, it is possible to auto map the
-        * `Employee` nested properties and again, override any inferred mapping from the automapping process,
-        * through manual mapping
-        */
-        [U]
-        public void OverridingDescendingAutoMappedProperties()
-        {
-            var createIndexResponse = client.CreateIndex("myindex", c => c
-                .Mappings(m => m
-                    .Map<Company>(mm => mm
-                        .AutoMap() // <1> Automap `Company`
-                        .Properties(p => p // <2> Override specific `Company` mappings
-                            .Nested<Employee>(n => n
-                                .Name(nn => nn.Employees)
-                                .AutoMap() // <3> Automap `Employees` property
-                                .Properties(pp => pp // <4> Override specific `Employee` properties
-                                    .Text(t => t
-                                        .Name(e => e.FirstName)
-                                    )
-                                    .Text(t => t
-                                        .Name(e => e.LastName)
-                                    )
-                                    .Nested<Employee>(nn => nn
-                                        .Name(e => e.Employees)
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-		    );
-
-            //json
-            var expected = new
-            {
-                mappings = new
-                {
-                    company = new
-                    {
-                        properties = new
-                        {
-                            name = new
-                            {
-                                type = "text",
-                                fields = new
-                                {
-                                    keyword = new
-                                    {
-                                        type = "keyword",
-                                        ignore_above = 256
-                                    }
-                                }
-                            },
-                            employees = new
-                            {
-                                type = "nested",
-                                properties = new
-                                {
-                                    firstName = new
-                                    {
-                                        type = "text"
-                                    },
-                                    lastName = new
-                                    {
-                                        type = "text"
-                                    },
-                                    salary = new
-                                    {
-                                        type = "integer"
-                                    },
-                                    birthday = new
-                                    {
-                                        type = "date"
-                                    },
-                                    isManager = new
-                                    {
-                                        type = "boolean"
-                                    },
-                                    employees = new
-                                    {
-                                        type = "nested"
-                                    },
-                                    hours = new
-                                    {
-                                        type = "long"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-
-            //hide
             Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
         }
     }
