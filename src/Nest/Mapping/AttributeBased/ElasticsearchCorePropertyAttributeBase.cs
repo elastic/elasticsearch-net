@@ -21,12 +21,14 @@ namespace Nest
 
 		Union<SimilarityOption, string> ICoreProperty.Similarity { get; set; }
 
+		/// <inheritdoc cref="ICoreProperty" />
 		public string Similarity
 		{
 			set => Self.Similarity = value;
 			get => Self.Similarity?.Match(f => f.GetStringValue(), str => str);
 		}
 
+		/// <inheritdoc cref="ICoreProperty" />
 		public bool Store
 		{
 			get => Self.Store.GetValueOrDefault();
