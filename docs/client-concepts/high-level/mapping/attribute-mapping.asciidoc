@@ -29,27 +29,14 @@ When you use attributes, you *must* also call `.AutoMap()` for the attributes to
 
 --
 
-Here we define the same two types as before, but this time using attributes to define the mappings.
+Here we define an `Employee` type and use attributes to define the mappings.
 
 [source,csharp]
 ----
-[ElasticsearchType(Name = "company")]
-public class Company
-{
-    [Keyword(NullValue = "null", Similarity = "BM25")]
-    public string Name { get; set; }
-
-    [Text(Name = "office_hours")]
-    public TimeSpan? HeadOfficeHours { get; set; }
-
-    [Object(Store = false)]
-    public List<Employee> Employees { get; set; }
-}
-
 [ElasticsearchType(Name = "employee")]
 public class Employee
 {
-    [Text(Name = "first_name")]
+    [Text(Name = "first_name", Norms = false, Similarity = "LMDirichlet")]
     public string FirstName { get; set; }
 
     [Text(Name = "last_name")]
@@ -67,6 +54,21 @@ public class Employee
     [Nested]
     [PropertyName("empl")]
     public List<Employee> Employees { get; set; }
+
+     [Text(Name = "office_hours")]
+     public TimeSpan? OfficeHours { get; set; }
+
+     [Object]
+     public List<Skill> Skills { get; set; }
+}
+
+public class Skill
+{
+    [Text]
+    public string Name { get; set; }
+
+    [Number(NumberType.Byte, Name = "level")]
+    public int Proficiency { get; set; }
 }
 ----
 
@@ -76,7 +78,6 @@ Then we map the types by calling `.AutoMap()`
 ----
 var createIndexResponse = client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
-        .Map<Company>(m => m.AutoMap())
         .Map<Employee>(m => m.AutoMap())
     )
 );
@@ -86,49 +87,6 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
 ----
 {
   "mappings": {
-    "company": {
-      "properties": {
-        "employees": {
-          "properties": {
-            "birthday": {
-              "format": "MMddyyyy",
-              "type": "date"
-            },
-            "empl": {
-              "properties": {},
-              "type": "nested"
-            },
-            "first_name": {
-              "type": "text"
-            },
-            "isManager": {
-              "null_value": false,
-              "store": true,
-              "type": "boolean"
-            },
-            "last_name": {
-              "type": "text"
-            },
-            "salary": {
-              "coerce": true,
-              "doc_values": false,
-              "ignore_malformed": true,
-              "type": "float"
-            }
-          },
-          "type": "object",
-          "store": false
-        },
-        "name": {
-          "null_value": "null",
-          "similarity": "BM25",
-          "type": "keyword"
-        },
-        "office_hours": {
-          "type": "text"
-        }
-      }
-    },
     "employee": {
       "properties": {
         "birthday": {
@@ -140,7 +98,9 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
           "type": "nested"
         },
         "first_name": {
-          "type": "text"
+          "type": "text",
+          "norms": false,
+          "similarity": "LMDirichlet"
         },
         "isManager": {
           "null_value": false,
@@ -150,11 +110,25 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
         "last_name": {
           "type": "text"
         },
+        "office_hours": {
+          "type": "text"
+        },
         "salary": {
           "coerce": true,
           "doc_values": false,
           "ignore_malformed": true,
           "type": "float"
+        },
+        "skills": {
+          "properties": {
+            "level": {
+              "type": "byte"
+            },
+            "name": {
+              "type": "text"
+            }
+          },
+          "type": "object"
         }
       }
     }

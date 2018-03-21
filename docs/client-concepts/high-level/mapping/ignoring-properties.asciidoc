@@ -70,6 +70,7 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
 );
 ----
 <1> we're using an in-memory connection, but in your application, you'll want to use an `IConnection` that actually sends a request.
+
 <2> we disable direct streaming here to capture the request and response bytes. In your application however, you'll like not want to do this in production.
 
 The JSON output for the mapping does not contain the ignored properties

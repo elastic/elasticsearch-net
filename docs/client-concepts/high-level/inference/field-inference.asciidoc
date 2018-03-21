@@ -473,10 +473,15 @@ class Precedence
 }
 ----
 <1> Even though this property has various attributes applied we provide an override on ConnectionSettings later that takes precedence.
+
 <2> Has a `TextAttribute`, `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `TextAttribute` takes precedence.
+
 <3> Has both a `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `PropertyNameAttribute` takes precedence.
+
 <4> `JsonPropertyAttribute` takes precedence.
+
 <5> This property we are going to hard code in our custom serializer to resolve to ask.
+
 <6> We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
 
 Here we create a custom serializer that renames any property named `AskSerializer` to `ask`
