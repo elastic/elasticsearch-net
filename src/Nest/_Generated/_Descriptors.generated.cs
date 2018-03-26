@@ -3161,8 +3161,8 @@ namespace Nest
 	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T>  : RequestDescriptorBase<SearchShardsDescriptor<T>,SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
 	{ 
-		/// <summary>/_search_shards</summary>
-		public SearchShardsDescriptor() : base(){}
+		/// <summary>/_search_shards. Will infer the index from the generic type</summary>
+		public SearchShardsDescriptor() : base(r => r.Optional("index", (Indices)typeof(T))){}
 
 		// values part of the url path
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");

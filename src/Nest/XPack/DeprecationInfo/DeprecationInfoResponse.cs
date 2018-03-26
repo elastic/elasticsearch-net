@@ -7,19 +7,38 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	/// <summary>
+	/// The deprecation warning level
+	/// </summary>
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum DeprecationWarningLevel
 	{
+		/// <summary>
+		/// Everything is good
+		/// </summary>
 		[EnumMember(Value = "none")]
 		None,
+		/// <summary>
+		/// An advisory note that something has changed. No action needed.
+		/// </summary>
 		[EnumMember(Value = "info")]
 		Information,
+		/// <summary>
+		/// You can upgrade directly, but you are using deprecated functionality
+		/// which will not be available in the next major version.
+		/// </summary>
 		[EnumMember(Value = "warning")]
 		Warning,
+		/// <summary>
+		/// You cannot upgrade without fixing this problem.
+		/// </summary>
 		[EnumMember(Value = "critical")]
 		Critical
 	}
 
+	/// <summary>
+	/// Information about a deprecation
+	/// </summary>
 	public class DeprecationInfo
 	{
 		[JsonProperty("level")]
@@ -49,8 +68,11 @@ namespace Nest
 
 	public class DeprecationInfoResponse : ResponseBase, IDeprecationInfoResponse
 	{
-		public IReadOnlyCollection<DeprecationInfo> ClusterSettings { get; internal set; } = EmptyReadOnly<DeprecationInfo>.Collection;
-		public IReadOnlyCollection<DeprecationInfo> NodeSettings { get; internal set; } = EmptyReadOnly<DeprecationInfo>.Collection;
-		public IReadOnlyDictionary<string, IReadOnlyCollection<DeprecationInfo>> IndexSettings { get; internal set; } = EmptyReadOnly<string, IReadOnlyCollection<DeprecationInfo>>.Dictionary;
+		public IReadOnlyCollection<DeprecationInfo> ClusterSettings { get; internal set; } =
+			EmptyReadOnly<DeprecationInfo>.Collection;
+		public IReadOnlyCollection<DeprecationInfo> NodeSettings { get; internal set; } =
+			EmptyReadOnly<DeprecationInfo>.Collection;
+		public IReadOnlyDictionary<string, IReadOnlyCollection<DeprecationInfo>> IndexSettings { get; internal set; } =
+			EmptyReadOnly<string, IReadOnlyCollection<DeprecationInfo>>.Dictionary;
 	}
 }

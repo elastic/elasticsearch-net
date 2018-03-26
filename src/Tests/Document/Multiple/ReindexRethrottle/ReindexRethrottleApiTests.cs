@@ -74,8 +74,8 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Rethrottle(f),
-			fluentAsync: (client, f) => client.RethrottleAsync(f),
+			fluent: (client, f) => client.Rethrottle(TaskId, f),
+			fluentAsync: (client, f) => client.RethrottleAsync(TaskId, f),
 			request: (client, r) => client.Rethrottle(r),
 			requestAsync: (client, r) => client.RethrottleAsync(r)
 		);

@@ -19,7 +19,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		public IGetTaskResponse GetTask(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null) =>
-			this.GetTask(selector.InvokeOrDefault(new GetTaskDescriptor().TaskId(id)));
+			this.GetTask(selector.InvokeOrDefault(new GetTaskDescriptor(id)));
 
 		public IGetTaskResponse GetTask(IGetTaskRequest request) =>
 			this.Dispatcher.Dispatch<IGetTaskRequest, GetTaskRequestParameters, GetTaskResponse>(
@@ -28,7 +28,7 @@ namespace Nest
 			);
 
 		public Task<IGetTaskResponse> GetTaskAsync(TaskId id, Func<GetTaskDescriptor, IGetTaskRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor().TaskId(id)), cancellationToken);
+			this.GetTaskAsync(selector.InvokeOrDefault(new GetTaskDescriptor(id)), cancellationToken);
 
 		public Task<IGetTaskResponse> GetTaskAsync(IGetTaskRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IGetTaskRequest, GetTaskRequestParameters, GetTaskResponse, IGetTaskResponse>(
