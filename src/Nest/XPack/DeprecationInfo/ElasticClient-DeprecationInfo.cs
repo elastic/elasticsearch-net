@@ -7,16 +7,28 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <summary>
+		/// Retrieves information about different cluster, node, and index level settings that use deprecated
+		/// features that will be removed or changed in the next major version.
+		/// </summary>
 		IDeprecationInfoResponse DeprecationInfo(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <summary>
+		/// Retrieves information about different cluster, node, and index level settings that use deprecated
+		/// features that will be removed or changed in the next major version.
+		/// </summary>
 		IDeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request);
 
-		/// <inheritdoc/>
+		/// <summary>
+		/// Retrieves information about different cluster, node, and index level settings that use deprecated
+		/// features that will be removed or changed in the next major version.
+		/// </summary>
 		Task<IDeprecationInfoResponse> DeprecationInfoAsync(Func<DeprecationInfoDescriptor, IDeprecationInfoRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
-		/// <inheritdoc/>
+		/// <summary>
+		/// Retrieves information about different cluster, node, and index level settings that use deprecated
+		/// features that will be removed or changed in the next major version.
+		/// </summary>
 		Task<IDeprecationInfoResponse> DeprecationInfoAsync(IDeprecationInfoRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
@@ -30,7 +42,7 @@ namespace Nest
 		public IDeprecationInfoResponse DeprecationInfo(IDeprecationInfoRequest request) =>
 			this.Dispatcher.Dispatch<IDeprecationInfoRequest, DeprecationInfoRequestParameters, DeprecationInfoResponse>(
 				request,
-				(p, d) =>this.LowLevelDispatch.XpackDeprecationInfoDispatch<DeprecationInfoResponse>(p)
+				(p, d) =>this.LowLevelDispatch.XpackMigrationDeprecationsDispatch<DeprecationInfoResponse>(p)
 			);
 
 		/// <inheritdoc/>
@@ -42,7 +54,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IDeprecationInfoRequest, DeprecationInfoRequestParameters, DeprecationInfoResponse, IDeprecationInfoResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.XpackDeprecationInfoDispatchAsync<DeprecationInfoResponse>(p, c)
+				(p, d, c) => this.LowLevelDispatch.XpackMigrationDeprecationsDispatchAsync<DeprecationInfoResponse>(p, c)
 			);
 	}
 }
