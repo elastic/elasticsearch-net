@@ -1507,7 +1507,7 @@ namespace Elasticsearch.Net
 	}
 	
 	///<summary>Request options for IndicesSplit<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
-	public class IndicesSplitRequestParameters : RequestParameters<IndicesSplitRequestParameters> 
+	public class SplitIndexRequestParameters : RequestParameters<SplitIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
