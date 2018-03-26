@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static Nest.FixedIndexSettings;
+using static Nest.IndexSortSettings;
 using static Nest.UpdatableIndexSettings;
 
 namespace Nest
@@ -87,15 +89,16 @@ namespace Nest
 
             Set(StoreType, indexSettings?.FileSystemStorageImplementation);
             Set(QueriesCacheEnabled, indexSettings?.Queries?.Cache?.Enabled);
-			Set(FixedIndexSettings.NumberOfShards, indexSettings?.NumberOfShards);
-            Set(FixedIndexSettings.RoutingPartitionSize, indexSettings?.RoutingPartitionSize);
+			Set(NumberOfShards, indexSettings?.NumberOfShards);
+			Set(NumberOfRoutingShards, indexSettings?.NumberOfRoutingShards);
+            Set(RoutingPartitionSize, indexSettings?.RoutingPartitionSize);
 
 			if (indexSettings?.Sorting != null)
 			{
 				Set(IndexSortSettings.Fields, AsArrayOrSingleItem(indexSettings.Sorting.Fields));
-				Set(IndexSortSettings.Order, AsArrayOrSingleItem(indexSettings.Sorting.Order));
-				Set(IndexSortSettings.Mode, AsArrayOrSingleItem(indexSettings.Sorting.Mode));
-				Set(IndexSortSettings.Missing, AsArrayOrSingleItem(indexSettings.Sorting.Missing));
+				Set(Order, AsArrayOrSingleItem(indexSettings.Sorting.Order));
+				Set(Mode, AsArrayOrSingleItem(indexSettings.Sorting.Mode));
+				Set(Missing, AsArrayOrSingleItem(indexSettings.Sorting.Missing));
 			}
 
 			base.WriteJson(writer, d, serializer);
@@ -208,15 +211,16 @@ namespace Nest
 				v => indexing.ThresholdTrace = v);
 			Set<LogLevel?>(s, settings, SlowlogIndexingLevel, v => indexing.LogLevel = v);
 			Set<int?>(s, settings, SlowlogIndexingSource, v => indexing.Source = v);
-			Set<int?>(s, settings, FixedIndexSettings.NumberOfShards, v => s.NumberOfShards = v);
-			Set<int?>(s, settings, FixedIndexSettings.RoutingPartitionSize, v => s.RoutingPartitionSize = v);
+			Set<int?>(s, settings, NumberOfShards, v => s.NumberOfShards = v);
+			Set<int?>(s, settings, NumberOfRoutingShards, v => s.NumberOfRoutingShards = v);
+			Set<int?>(s, settings, RoutingPartitionSize, v => s.RoutingPartitionSize = v);
 			Set<FileSystemStorageImplementation?>(s, settings, StoreType, v => s.FileSystemStorageImplementation = v, serializer);
 
 			var sorting = s.Sorting = new SortingSettings();
 			SetArray<string[], string>(s, settings, IndexSortSettings.Fields, v => sorting.Fields = v, v => sorting.Fields = new [] { v });
-			SetArray<IndexSortOrder[], IndexSortOrder>(s, settings, IndexSortSettings.Order, v => sorting.Order = v, v => sorting.Order = new [] { v });
-			SetArray<IndexSortMode[], IndexSortMode>(s, settings, IndexSortSettings.Mode, v => sorting.Mode = v, v => sorting.Mode = new [] { v });
-			SetArray<IndexSortMissing[], IndexSortMissing>(s, settings, IndexSortSettings.Missing, v => sorting.Missing = v, v => sorting.Missing = new [] { v });
+			SetArray<IndexSortOrder[], IndexSortOrder>(s, settings, Order, v => sorting.Order = v, v => sorting.Order = new [] { v });
+			SetArray<IndexSortMode[], IndexSortMode>(s, settings, Mode, v => sorting.Mode = v, v => sorting.Mode = new [] { v });
+			SetArray<IndexSortMissing[], IndexSortMissing>(s, settings, Missing, v => sorting.Missing = v, v => sorting.Missing = new [] { v });
 
 			var queries = s.Queries = new QueriesSettings();
 			var queriesCache = s.Queries.Cache = new QueriesCacheSettings();

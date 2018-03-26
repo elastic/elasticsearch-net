@@ -1977,7 +1977,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesShrink", p, new [] { PUT, POST }, "/{index}/_shrink/{target}");
 		}
 		
-		internal TResponse IndicesSplitDispatch<TResponse>(IRequest<IndicesSplitRequestParameters> p,SerializableData<IIndicesSplitRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse IndicesSplitDispatch<TResponse>(IRequest<SplitIndexRequestParameters> p,SerializableData<ISplitIndexRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -1993,7 +1993,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesSplit", p, new [] { PUT, POST }, "/{index}/_split/{target}");
 		}
 		
-		internal Task<TResponse> IndicesSplitDispatchAsync<TResponse>(IRequest<IndicesSplitRequestParameters> p,SerializableData<IIndicesSplitRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> IndicesSplitDispatchAsync<TResponse>(IRequest<SplitIndexRequestParameters> p,SerializableData<ISplitIndexRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{

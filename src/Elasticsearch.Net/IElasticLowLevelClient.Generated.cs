@@ -1613,28 +1613,28 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to split into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesSplit<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		TResponse IndicesSplit<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
 		
 		///<summary>PUT on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
 		///<param name="index">The name of the source index to split</param>
 		///<param name="target">The name of the target index to split into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesSplitAsync<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		Task<TResponse> IndicesSplitAsync<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		
 		///<summary>POST on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
 		///<param name="index">The name of the source index to split</param>
 		///<param name="target">The name of the target index to split into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse IndicesSplitPost<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		TResponse IndicesSplitPost<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
 		
 		///<summary>POST on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
 		///<param name="index">The name of the source index to split</param>
 		///<param name="target">The name of the target index to split into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> IndicesSplitPostAsync<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		Task<TResponse> IndicesSplitPostAsync<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		
 		///<summary>GET on /_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>

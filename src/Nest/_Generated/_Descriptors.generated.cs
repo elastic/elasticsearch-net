@@ -2457,31 +2457,28 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesSplit <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
-	public partial class IndicesSplitDescriptor  : RequestDescriptorBase<IndicesSplitDescriptor,IndicesSplitRequestParameters, IIndicesSplitRequest>, IIndicesSplitRequest
+	public partial class SplitIndexDescriptor  : RequestDescriptorBase<SplitIndexDescriptor,SplitIndexRequestParameters, ISplitIndexRequest>, ISplitIndexRequest
 	{ 
 		/// <summary>/{index}/_split/{target}</summary>
 		///<param name="index"> this parameter is required</param>
 		///<param name="target"> this parameter is required</param>
-		public IndicesSplitDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
+		public SplitIndexDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
 
 		// values part of the url path
-		IndexName IIndicesSplitRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		IndexName IIndicesSplitRequest.Target => Self.RouteValues.Get<IndexName>("target");
+		IndexName ISplitIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		IndexName ISplitIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 		///<summary>The name of the source index to split</summary>
-		public IndicesSplitDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public SplitIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public IndicesSplitDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public SplitIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public IndicesSplitDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		public SplitIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesSplitDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		public SplitIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
-		public IndicesSplitDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public SplitIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	
 	}
 	
