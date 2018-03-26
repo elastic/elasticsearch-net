@@ -262,7 +262,7 @@ namespace ApiGenerator.Domain
 
 		private void PatchRequestParameters(IEndpointOverrides overrides)
 		{
-			var newParams = ApiQueryParametersPatcher.Patch(this.Url.Params, overrides);
+			var newParams = ApiQueryParametersPatcher.Patch(this.Url.Path, this.Url.Params, overrides);
 			this.Url.Params = newParams;
 		}
 
