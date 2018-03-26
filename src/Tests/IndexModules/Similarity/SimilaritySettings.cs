@@ -59,6 +59,14 @@ namespace Tests.IndexModules.Similarity
 				{
 					type = "plugin_sim",
 					some_property = "some value"
+				},
+				scripted_tfidf = new
+				{
+					type = "scripted",
+					script = new
+					{
+						source = "double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;"
+					}
 				}
 			};
 
@@ -89,6 +97,11 @@ namespace Tests.IndexModules.Similarity
 				.LMJelinek("lmj", d => d.Lamdba(2.0))
 				.Custom("my_name", "plugin_sim", d => d
 					.Add("some_property", "some value")
+				)
+				.Scripted("scripted_tfidf", sc => sc
+					.Script(ssc => ssc
+						.Source("double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
+					)
 				);
 			/**
 			 */
@@ -141,6 +154,11 @@ namespace Tests.IndexModules.Similarity
 					{ "my_name", new CustomSimilarity("plugin_sim")
 						{
 							{ "some_property", "some value" }
+						}
+					},
+					{ "scripted_tfidf", new ScriptedSimilarity
+						{
+							Script = new InlineScript("double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
 						}
 					}
 				};
