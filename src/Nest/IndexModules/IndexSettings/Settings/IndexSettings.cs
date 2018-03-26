@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Nest
 {
+	/// <summary>
+	/// The settings for an index
+	/// </summary>
 	[ContractJsonConverter(typeof(IndexSettingsConverter))]
 	public interface IIndexSettings : IDynamicIndexSettings
 	{
@@ -12,6 +15,13 @@ namespace Nest
 		/// This setting can only be set at index creation time. It cannot be changed on a closed index.
 		/// </summary>
 		int? NumberOfShards { get; set; }
+
+
+		/// <summary>
+		/// The number of routing shards. Used in conjunction with the Split Index API. If specified, must be
+		/// greater than or equal to <see cref="NumberOfShards"/>
+		/// </summary>
+		int? NumberOfRoutingShards { get; set; }
 
 		/// <summary>
 		/// By defaulting, routing resolves to a single shard. Use this settings to have it resolve to a set of shards instead.
@@ -37,7 +47,7 @@ namespace Nest
 		ISortingSettings Sorting { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IIndexSettings"/>
 	public class IndexSettings: DynamicIndexSettings, IIndexSettings
 	{
 		public IndexSettings() { }
@@ -45,6 +55,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public int? NumberOfShards { get; set; }
+
+		/// <inheritdoc />
+		public int? NumberOfRoutingShards { get; set; }
 
 		/// <inheritdoc />
 		public int? RoutingPartitionSize { get; set; }
@@ -59,26 +72,32 @@ namespace Nest
 		public ISortingSettings Sorting { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IIndexSettings"/>
 	public class IndexSettingsDescriptor: DynamicIndexSettingsDescriptorBase<IndexSettingsDescriptor, IndexSettings>
 	{
 		public IndexSettingsDescriptor() : base(new IndexSettings()) { }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IIndexSettings.NumberOfShards"/>
 		public IndexSettingsDescriptor NumberOfShards(int? numberOfShards) =>
 			Assign(a => a.NumberOfShards = numberOfShards);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IIndexSettings.NumberOfRoutingShards"/>
+		public IndexSettingsDescriptor NumberOfRoutingShards(int? numberOfRoutingShards) =>
+			Assign(a => a.NumberOfRoutingShards = numberOfRoutingShards);
+
+		/// <inheritdoc cref="IIndexSettings.RoutingPartitionSize"/>
 		public IndexSettingsDescriptor RoutingPartitionSize(int? routingPartitionSize) =>
 			Assign(a => a.RoutingPartitionSize = routingPartitionSize);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IIndexSettings.FileSystemStorageImplementation"/>
 		public IndexSettingsDescriptor FileSystemStorageImplementation(FileSystemStorageImplementation? fs) =>
 			Assign(a => a.FileSystemStorageImplementation = fs);
 
+		/// <inheritdoc cref="IIndexSettings.Queries"/>
 		public IndexSettingsDescriptor Queries(Func<QueriesSettingsDescriptor, IQueriesSettings> selector) =>
 			Assign(a => a.Queries = selector?.Invoke(new QueriesSettingsDescriptor()));
 
+		/// <inheritdoc cref="IIndexSettings.Sorting"/>
 		public IndexSettingsDescriptor Sorting<T>(Func<SortingSettingsDescriptor<T>, ISortingSettings> selector) where T : class =>
 			Assign(a => a.Sorting = selector?.Invoke(new SortingSettingsDescriptor<T>()));
 	}

@@ -1922,7 +1922,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to split into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse IndicesSplit<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null)
+		public TResponse IndicesSplit<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(PUT, Url($"{index.NotNull("index")}/_split/{target.NotNull("target")}"), body, _params(requestParameters));
 		
 		///<summary>PUT on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
@@ -1930,7 +1930,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to split into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> IndicesSplitAsync<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> IndicesSplitAsync<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(PUT, Url($"{index.NotNull("index")}/_split/{target.NotNull("target")}"), ctx, body, _params(requestParameters));
 		
 		///<summary>POST on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
@@ -1938,7 +1938,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to split into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse IndicesSplitPost<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null)
+		public TResponse IndicesSplitPost<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"{index.NotNull("index")}/_split/{target.NotNull("target")}"), body, _params(requestParameters));
 		
 		///<summary>POST on /{index}/_split/{target} <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</para></summary>
@@ -1946,7 +1946,7 @@ namespace Elasticsearch.Net
 		///<param name="target">The name of the target index to split into</param>
 		///<param name="body">The configuration for the target index (`settings` and `aliases`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> IndicesSplitPostAsync<TResponse>(string index, string target, PostData body, IndicesSplitRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> IndicesSplitPostAsync<TResponse>(string index, string target, PostData body, SplitIndexRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"{index.NotNull("index")}/_split/{target.NotNull("target")}"), ctx, body, _params(requestParameters));
 		
 		///<summary>GET on /_stats <para>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</para></summary>

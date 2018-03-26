@@ -3776,37 +3776,6 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndicesSplitRequest : IRequest<IndicesSplitRequestParameters>
-	{
-		IndexName Index { get; }
-		IndexName Target { get; }
-	}
-
-	///<summary>Request parameters for IndicesSplit <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
-	public partial class IndicesSplitRequest : PlainRequestBase<IndicesSplitRequestParameters>, IIndicesSplitRequest
-	{
-		protected IIndicesSplitRequest Self => this;
-		/// <summary>/{index}/_split/{target}</summary>
-		///<param name="index">this parameter is required</param>
-		///<param name="target">this parameter is required</param>
-		public IndicesSplitRequest(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
-
-		// values part of the url path
-		IndexName IIndicesSplitRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		IndexName IIndicesSplitRequest.Target => Self.RouteValues.Get<IndexName>("target");
-
-		// Request parameters
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
-		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
-		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
-		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		//TODO THIS METHOD IS UNMAPPED!
-
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters>
 	{
 		Indices Index { get; }
@@ -5694,6 +5663,35 @@ namespace Nest
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISplitIndexRequest : IRequest<SplitIndexRequestParameters>
+	{
+		IndexName Index { get; }
+		IndexName Target { get; }
+	}
+
+	///<summary>Request parameters for IndicesSplit <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
+	public partial class SplitIndexRequest : PlainRequestBase<SplitIndexRequestParameters>, ISplitIndexRequest
+	{
+		protected ISplitIndexRequest Self => this;
+		/// <summary>/{index}/_split/{target}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="target">this parameter is required</param>
+		public SplitIndexRequest(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
+
+		// values part of the url path
+		IndexName ISplitIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		IndexName ISplitIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
