@@ -24,7 +24,10 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				flags = "AND|NEAR",
 				lenient = true,
 				analyze_wildcard = true,
-				minimum_should_match = "30%"
+				minimum_should_match = "30%",
+				fuzzy_prefix_length = 0,
+				fuzzy_max_expansions = 50,
+				fuzzy_transpositions = true
 			}
 		};
 
@@ -39,7 +42,10 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 			Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
 			Lenient = true,
 			AnalyzeWildcard = true,
-			MinimumShouldMatch = "30%"
+			MinimumShouldMatch = "30%",
+			FuzzyPrefixLength = 0,
+			FuzzyMaxExpansions = 50,
+			FuzzyTranspositions = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -54,6 +60,9 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				.Lenient()
 				.AnalyzeWildcard()
 				.MinimumShouldMatch("30%")
+				.FuzzyPrefixLength(0)
+				.FuzzyMaxExpansions(50)
+				.FuzzyTranspositions()
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISimpleQueryStringQuery>(a => a.SimpleQueryString)
