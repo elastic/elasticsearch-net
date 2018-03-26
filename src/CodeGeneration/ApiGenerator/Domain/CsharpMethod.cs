@@ -235,12 +235,20 @@ namespace ApiGenerator.Domain
 					generated = $"public {m}({par}) : base({routing}.Required(\"type\", (Types)typeof({generic})))";
 				}
 
+				// TODO: Don't think this is required anymore, now that Suggest in on search endpoint.
 				// Add typeof(T) as the default index to use for Suggest
 				if ((m == "SuggestDescriptor") && !string.IsNullOrEmpty(this.RequestTypeGeneric))
 				{
 					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
 					doc = AppendToSummary(doc, ". Will infer the index from the generic type");
 					generated = $"public {m}({par}) : base(r => r.Required(\"index\", (Indices)typeof({generic})))";
+				}
+
+				if ((m == "SearchShardsDescriptor") && !string.IsNullOrEmpty(this.RequestTypeGeneric))
+				{
+					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
+					doc = AppendToSummary(doc, ". Will infer the index from the generic type");
+					generated = $"public {m}({par}) : base(r => r.Optional(\"index\", (Indices)typeof({generic})))";
 				}
 
 				// Use generic T to set the Indices and Types by default in the ctor
