@@ -1325,7 +1325,7 @@ namespace Nest
 			{
 				case HEAD:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesExistsAlias<TResponse>(p.RouteValues.Index,p.RouteValues.Name,p.RequestParameters);
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasForAll<TResponse>(p.RouteValues.Name,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasForAll<TResponse>(p.RouteValues.Name,p.RequestParameters);
 					break;
 
 			}
@@ -1338,7 +1338,7 @@ namespace Nest
 			{
 				case HEAD:
 					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Name,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasForAllAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesExistsAliasForAllAsync<TResponse>(p.RouteValues.Name,p.RequestParameters,ct);
 					break;
 
 			}
@@ -2576,7 +2576,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottle<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
 					break;
 
 			}
@@ -2588,7 +2588,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottleAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
 					break;
 
 			}
@@ -3022,7 +3022,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.TasksGet<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.TasksGet<TResponse>(p.RouteValues.TaskId,p.RequestParameters);
 					break;
 
 			}
@@ -3034,7 +3034,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.TasksGetAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.TaskId)) return _lowLevel.TasksGetAsync<TResponse>(p.RouteValues.TaskId,p.RequestParameters,ct);
 					break;
 
 			}
