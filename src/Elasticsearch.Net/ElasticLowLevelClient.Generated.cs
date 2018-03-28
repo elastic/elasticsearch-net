@@ -3644,13 +3644,13 @@ namespace Elasticsearch.Net
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_forecast <para></para></summary>
 		///<param name="job_id">The ID of the job to forecast for</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse XpackMlForecast<TResponse>(string job_id, XpackMlForecastRequestParameters requestParameters = null)
+		public TResponse XpackMlForecast<TResponse>(string job_id, ForecastJobRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_forecast"), null, _params(requestParameters));
 		
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_forecast <para></para></summary>
 		///<param name="job_id">The ID of the job to forecast for</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> XpackMlForecastAsync<TResponse>(string job_id, XpackMlForecastRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> XpackMlForecastAsync<TResponse>(string job_id, ForecastJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/ml/anomaly_detectors/{job_id.NotNull("job_id")}/_forecast"), ctx, null, _params(requestParameters));
 		
 		///<summary>GET on /_xpack/ml/anomaly_detectors/{job_id}/results/buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>

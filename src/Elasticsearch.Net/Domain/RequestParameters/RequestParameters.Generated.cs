@@ -2374,13 +2374,9 @@ namespace Elasticsearch.Net
 	}
 	
 	///<summary>Request options for XpackMlForecast<pre></pre></summary>
-	public class XpackMlForecastRequestParameters : RequestParameters<XpackMlForecastRequestParameters> 
+	public class ForecastJobRequestParameters : RequestParameters<ForecastJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>The duration of the forecast</summary>
-		public TimeSpan Duration { get => Q<TimeSpan>("duration"); set => Q("duration", value.ToTimeUnit()); }
-		///<summary>The time interval after which the forecast expires. Expired forecasts will be deleted at the first opportunity.</summary>
-		public TimeSpan ExpiresIn { get => Q<TimeSpan>("expires_in"); set => Q("expires_in", value.ToTimeUnit()); }
 	}
 	
 	///<summary>Request options for XpackMlGetBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
