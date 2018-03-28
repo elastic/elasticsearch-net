@@ -127,5 +127,10 @@ namespace Nest
 		public ProcessorsDescriptor KeyValue<T>(Func<UserAgentProcessorDescriptor<T>, IUserAgentProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new UserAgentProcessorDescriptor<T>())));
 
+		/// <summary>
+		/// URL-decodes a string
+		/// </summary>
+		public ProcessorsDescriptor UrlDecode<T>(Func<UrlDecodeProcessorDescriptor<T>, IUrlDecodeProcessor> selector) where T : class  =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new UrlDecodeProcessorDescriptor<T>())));
 	}
 }
