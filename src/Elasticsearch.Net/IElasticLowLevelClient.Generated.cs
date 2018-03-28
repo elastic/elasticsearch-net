@@ -3063,12 +3063,12 @@ namespace Elasticsearch.Net
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_forecast <para></para></summary>
 		///<param name="job_id">The ID of the job to forecast for</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse XpackMlForecast<TResponse>(string job_id, XpackMlForecastRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		TResponse XpackMlForecast<TResponse>(string job_id, ForecastJobRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
 		
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_forecast <para></para></summary>
 		///<param name="job_id">The ID of the job to forecast for</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> XpackMlForecastAsync<TResponse>(string job_id, XpackMlForecastRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		Task<TResponse> XpackMlForecastAsync<TResponse>(string job_id, ForecastJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		
 		///<summary>GET on /_xpack/ml/anomaly_detectors/{job_id}/results/buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</para></summary>
 		///<param name="job_id">ID of the job to get bucket results from</param>

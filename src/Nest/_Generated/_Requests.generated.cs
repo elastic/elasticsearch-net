@@ -2708,6 +2708,26 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IForecastJobRequest : IRequest<ForecastJobRequestParameters>
+	{
+		Id JobId { get; }
+	}
+
+	///<summary>Request parameters for XpackMlForecast <pre></pre></summary>
+	public partial class ForecastJobRequest : PlainRequestBase<ForecastJobRequestParameters>, IForecastJobRequest
+	{
+		protected IForecastJobRequest Self => this;
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast</summary>
+		///<param name="job_id">this parameter is required</param>
+		public ForecastJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+
+		// values part of the url path
+		Id IForecastJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters>
 	{
 		Indices Index { get; }
@@ -6631,33 +6651,6 @@ namespace Nest
 		// Request parameters
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
-	}
-	
-	}
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXpackMlForecastRequest : IRequest<XpackMlForecastRequestParameters>
-	{
-		Id JobId { get; }
-	}
-
-	///<summary>Request parameters for XpackMlForecast <pre></pre></summary>
-	public partial class XpackMlForecastRequest : PlainRequestBase<XpackMlForecastRequestParameters>, IXpackMlForecastRequest
-	{
-		protected IXpackMlForecastRequest Self => this;
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast</summary>
-		///<param name="job_id">this parameter is required</param>
-		public XpackMlForecastRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-
-		// values part of the url path
-		Id IXpackMlForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-		///<summary>The duration of the forecast</summary>
-		public Time Duration { get => Q<Time>("duration"); set => Q("duration", value.ToString()); }
-		///<summary>The time interval after which the forecast expires. Expired forecasts will be deleted at the first opportunity.</summary>
-		public Time ExpiresIn { get => Q<Time>("expires_in"); set => Q("expires_in", value.ToString()); }
-		//TODO THIS METHOD IS UNMAPPED!
-
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

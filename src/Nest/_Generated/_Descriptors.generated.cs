@@ -3920,23 +3920,16 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for XpackMlForecast <pre></pre></summary>
-	public partial class XpackMlForecastDescriptor  : RequestDescriptorBase<XpackMlForecastDescriptor,XpackMlForecastRequestParameters, IXpackMlForecastRequest>, IXpackMlForecastRequest
+	public partial class ForecastJobDescriptor  : RequestDescriptorBase<ForecastJobDescriptor,ForecastJobRequestParameters, IForecastJobRequest>, IForecastJobRequest
 	{ 
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public XpackMlForecastDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public ForecastJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
 		// values part of the url path
-		Id IXpackMlForecastRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IForecastJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
-		///<summary>The duration of the forecast</summary>
-		public XpackMlForecastDescriptor Duration(Time duration) => Qs("duration", duration);
-		///<summary>The time interval after which the forecast expires. Expired forecasts will be deleted at the first opportunity.</summary>
-		public XpackMlForecastDescriptor ExpiresIn(Time expiresIn) => Qs("expires_in", expiresIn);
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
 	
 	}
 	
