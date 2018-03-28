@@ -186,5 +186,7 @@ namespace Nest
 		public virtual void Visit(IPercolateQuery query) => Write("percolate");
 
 		public virtual void Visit(IParentIdQuery query) => Write("parent_id");
+
+		public virtual void Visit(ITermsSetQuery query) => Write("terms_set");
 	}
 }

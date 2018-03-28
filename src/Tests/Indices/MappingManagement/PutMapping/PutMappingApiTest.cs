@@ -115,6 +115,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					},
 					type = "object"
 				},
+				requiredBranches = new
+				{
+					type = "integer"
+				},
 				tags = new
 				{
 					properties = new
@@ -273,6 +277,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						}
 					}
 				},
+				{p => p.RequiredBranches, new NumberProperty(NumberType.Integer)},
 				{
 					p => p.Tags, new ObjectProperty
 					{

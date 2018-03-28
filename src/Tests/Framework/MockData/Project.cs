@@ -32,6 +32,7 @@ namespace Tests.Framework.MockData
 		public CompletionField Suggest { get; set; }
 		public IEnumerable<string> Branches { get; set; }
 		public Ranges Ranges { get; set; }
+		public int? RequiredBranches => Branches?.Count();
 
 		public SourceOnlyObject SourceOnly { get; set; }
 
@@ -52,6 +53,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
 				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 200))
 				.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())
+				.RuleFor(p => p.Branches, f => Gimme.Random.ListItems(new List<string> { "master", "dev", "release", "qa", "test" }, 2))
 				.RuleFor(p => p.SourceOnly, f =>
 					TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
 				)
