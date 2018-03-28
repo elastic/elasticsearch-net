@@ -2436,23 +2436,9 @@ namespace Elasticsearch.Net
 	}
 	
 	///<summary>Request options for XpackMlGetOverallBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
-	public class XpackMlGetOverallBucketsRequestParameters : RequestParameters<XpackMlGetOverallBucketsRequestParameters> 
+	public class GetOverallBucketsRequestParameters : RequestParameters<GetOverallBucketsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>The number of top job bucket scores to be used in the overall_score calculation</summary>
-		public int TopN { get => Q<int>("top_n"); set => Q("top_n", value); }
-		///<summary>The span of the overall buckets. Defaults to the longest job bucket_span</summary>
-		public string BucketSpan { get => Q<string>("bucket_span"); set => Q("bucket_span", value); }
-		///<summary>Returns overall buckets with overall scores higher than this value</summary>
-		public double OverallScore { get => Q<double>("overall_score"); set => Q("overall_score", value); }
-		///<summary>If true overall buckets that include interim buckets will be excluded</summary>
-		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
-		///<summary>Returns overall buckets with timestamps after this time</summary>
-		public string Start { get => Q<string>("start"); set => Q("start", value); }
-		///<summary>Returns overall buckets with timestamps earlier than this time</summary>
-		public string End { get => Q<string>("end"); set => Q("end", value); }
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
 	
 	///<summary>Request options for XpackMlGetRecords<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>

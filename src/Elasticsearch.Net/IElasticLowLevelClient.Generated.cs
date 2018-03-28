@@ -3285,24 +3285,24 @@ namespace Elasticsearch.Net
 		///<summary>GET on /_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
 		///<param name="job_id">The job IDs for which to calculate overall bucket results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse XpackMlGetOverallBuckets<TResponse>(string job_id, XpackMlGetOverallBucketsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		TResponse XpackMlGetOverallBuckets<TResponse>(string job_id, GetOverallBucketsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
 		
 		///<summary>GET on /_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
 		///<param name="job_id">The job IDs for which to calculate overall bucket results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> XpackMlGetOverallBucketsAsync<TResponse>(string job_id, XpackMlGetOverallBucketsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		Task<TResponse> XpackMlGetOverallBucketsAsync<TResponse>(string job_id, GetOverallBucketsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
 		///<param name="job_id">The job IDs for which to calculate overall bucket results</param>
 		///<param name="body">Overall bucket selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		TResponse XpackMlGetOverallBuckets<TResponse>(string job_id, PostData body, XpackMlGetOverallBucketsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		TResponse XpackMlGetOverallBuckets<TResponse>(string job_id, PostData body, GetOverallBucketsRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
 		
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</para></summary>
 		///<param name="job_id">The job IDs for which to calculate overall bucket results</param>
 		///<param name="body">Overall bucket selection details if not provided in URI</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<TResponse> XpackMlGetOverallBucketsAsync<TResponse>(string job_id, PostData body, XpackMlGetOverallBucketsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		Task<TResponse> XpackMlGetOverallBucketsAsync<TResponse>(string job_id, PostData body, GetOverallBucketsRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		
 		///<summary>GET on /_xpack/ml/anomaly_detectors/{job_id}/results/records <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</para></summary>
 		///<param name="job_id"></param>
