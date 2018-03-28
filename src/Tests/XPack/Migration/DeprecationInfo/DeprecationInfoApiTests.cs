@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 
-namespace Tests.XPack.DeprecationInfo
+namespace Tests.XPack.Migration.DeprecationInfo
 {
-	public class DeprecationInfoUnitTests
+	public class DeprecationInfoApiTests
 	{
 		[U]
 		public void ShouldDeserialize()
