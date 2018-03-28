@@ -105,15 +105,15 @@ namespace Nest
 					case "uppercase":
 						processors.Add(jsonProcessor.ToObject<UppercaseProcessor>(serializer));
 						break;
-					default:
+					case "urldecode":
+						processors.Add(jsonProcessor.ToObject<UrlDecodeProcessor>(serializer));
 						break;
 				}
 			}
 			return processors;
 		}
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
 			throw new NotSupportedException();
-		}
 	}
 }
