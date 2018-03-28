@@ -44,6 +44,14 @@ namespace Tests.XPack.MachineLearning
 			return openJobResponse;
 		}
 
+		protected IFlushJobResponse FlushJob(IElasticClient client, string jobId, bool calculateInterim)
+		{
+			var flushJobResponse = client.FlushJob(jobId, f => f.CalculateInterim(calculateInterim));
+			if (!flushJobResponse.IsValid || flushJobResponse.Flushed == false)
+				throw new Exception($"Problem flushing job {jobId} for integration test: {flushJobResponse.DebugInformation}");
+			return flushJobResponse;
+		}
+
 		protected ICloseJobResponse CloseJob(IElasticClient client, string jobId)
 		{
 			var closeJobResponse = client.CloseJob(jobId);

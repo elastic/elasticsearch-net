@@ -3769,7 +3769,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetModelSnapshots", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}", "/_xpack/ml/anomaly_detectors/{job_id}/model_snapshots");
 		}
 		
-		internal TResponse XpackMlGetOverallBucketsDispatch<TResponse>(IRequest<XpackMlGetOverallBucketsRequestParameters> p,SerializableData<IXpackMlGetOverallBucketsRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackMlGetOverallBucketsDispatch<TResponse>(IRequest<GetOverallBucketsRequestParameters> p,SerializableData<IGetOverallBucketsRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3785,7 +3785,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlGetOverallBuckets", p, new [] { GET, POST }, "/_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets");
 		}
 		
-		internal Task<TResponse> XpackMlGetOverallBucketsDispatchAsync<TResponse>(IRequest<XpackMlGetOverallBucketsRequestParameters> p,SerializableData<IXpackMlGetOverallBucketsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackMlGetOverallBucketsDispatchAsync<TResponse>(IRequest<GetOverallBucketsRequestParameters> p,SerializableData<IGetOverallBucketsRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
