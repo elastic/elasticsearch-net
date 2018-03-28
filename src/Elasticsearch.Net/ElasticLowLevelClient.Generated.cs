@@ -3537,12 +3537,12 @@ namespace Elasticsearch.Net
 		
 		///<summary>GET on /_xpack/license/trial_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse XpackLicenseGetTrialStatus<TResponse>(XpackLicenseGetTrialStatusRequestParameters requestParameters = null)
+		public TResponse XpackLicenseGetTrialStatus<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/license/trial_status"), null, _params(requestParameters));
 		
 		///<summary>GET on /_xpack/license/trial_status <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> XpackLicenseGetTrialStatusAsync<TResponse>(XpackLicenseGetTrialStatusRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> XpackLicenseGetTrialStatusAsync<TResponse>(GetTrialLicenseStatusRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/license/trial_status"), ctx, null, _params(requestParameters));
 		
 		///<summary>PUT on /_xpack/license <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
@@ -3559,12 +3559,12 @@ namespace Elasticsearch.Net
 		
 		///<summary>POST on /_xpack/license/start_trial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse XpackLicensePostStartTrial<TResponse>(XpackLicensePostStartTrialRequestParameters requestParameters = null)
+		public TResponse XpackLicensePostStartTrial<TResponse>(StartTrialLicenseRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/license/start_trial"), null, _params(requestParameters));
 		
 		///<summary>POST on /_xpack/license/start_trial <para>https://www.elastic.co/guide/en/x-pack/current/license-management.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> XpackLicensePostStartTrialAsync<TResponse>(XpackLicensePostStartTrialRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> XpackLicensePostStartTrialAsync<TResponse>(StartTrialLicenseRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/license/start_trial"), ctx, null, _params(requestParameters));
 		
 		///<summary>POST on /_xpack/ml/anomaly_detectors/{job_id}/_close <para>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</para></summary>
