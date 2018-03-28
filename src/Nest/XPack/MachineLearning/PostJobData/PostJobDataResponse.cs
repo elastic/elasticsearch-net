@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// The Post Job Data API response
+	/// </summary>
 	public interface IPostJobDataResponse : IResponse
 	{
 		/// <summary>
@@ -83,9 +86,23 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("input_record_count")]
 		long InputRecordCount { get; }
+
+		/// <summary>
+		/// The earliest record timestamp
+		/// </summary>
+		[JsonProperty("earliest_record_timestamp")]
+		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		DateTimeOffset? EarliestRecordTimestamp { get; }
+
+		/// <summary>
+		/// The latest record timestamp
+		/// </summary>
+		[JsonProperty("latest_record_timestamp")]
+		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		DateTimeOffset? LatestRecordTimestamp { get; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="IPostJobDataResponse" />
 	public class PostJobDataResponse : ResponseBase, IPostJobDataResponse
 	{
 		/// <inheritdoc />
@@ -126,5 +143,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		public long InputRecordCount { get; internal set; }
+
+		/// <inheritdoc />
+		public DateTimeOffset? EarliestRecordTimestamp { get; internal set;}
+
+		/// <inheritdoc />
+		public DateTimeOffset? LatestRecordTimestamp { get; internal set; }
 	}
 }
