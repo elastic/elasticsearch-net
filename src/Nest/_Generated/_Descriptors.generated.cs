@@ -4064,33 +4064,16 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for XpackMlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
-	public partial class XpackMlGetOverallBucketsDescriptor  : RequestDescriptorBase<XpackMlGetOverallBucketsDescriptor,XpackMlGetOverallBucketsRequestParameters, IXpackMlGetOverallBucketsRequest>, IXpackMlGetOverallBucketsRequest
+	public partial class GetOverallBucketsDescriptor  : RequestDescriptorBase<GetOverallBucketsDescriptor,GetOverallBucketsRequestParameters, IGetOverallBucketsRequest>, IGetOverallBucketsRequest
 	{ 
 		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
 		///<param name="job_id"> this parameter is required</param>
-		public XpackMlGetOverallBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+		public GetOverallBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
 
 		// values part of the url path
-		Id IXpackMlGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+		Id IGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
-		///<summary>The number of top job bucket scores to be used in the overall_score calculation</summary>
-		public XpackMlGetOverallBucketsDescriptor TopN(int topN) => Qs("top_n", topN);
-		///<summary>The span of the overall buckets. Defaults to the longest job bucket_span</summary>
-		public XpackMlGetOverallBucketsDescriptor BucketSpan(string bucketSpan) => Qs("bucket_span", bucketSpan);
-		///<summary>Returns overall buckets with overall scores higher than this value</summary>
-		public XpackMlGetOverallBucketsDescriptor OverallScore(double overallScore) => Qs("overall_score", overallScore);
-		///<summary>If true overall buckets that include interim buckets will be excluded</summary>
-		public XpackMlGetOverallBucketsDescriptor ExcludeInterim(bool? excludeInterim = true) => Qs("exclude_interim", excludeInterim);
-		///<summary>Returns overall buckets with timestamps after this time</summary>
-		public XpackMlGetOverallBucketsDescriptor Start(string start) => Qs("start", start);
-		///<summary>Returns overall buckets with timestamps earlier than this time</summary>
-		public XpackMlGetOverallBucketsDescriptor End(string end) => Qs("end", end);
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public XpackMlGetOverallBucketsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
 	
 	}
 	

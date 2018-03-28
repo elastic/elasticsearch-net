@@ -3211,6 +3211,26 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetOverallBucketsRequest : IRequest<GetOverallBucketsRequestParameters>
+	{
+		Id JobId { get; }
+	}
+
+	///<summary>Request parameters for XpackMlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
+	public partial class GetOverallBucketsRequest : PlainRequestBase<GetOverallBucketsRequestParameters>, IGetOverallBucketsRequest
+	{
+		protected IGetOverallBucketsRequest Self => this;
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetOverallBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+
+		// values part of the url path
+		Id IGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters>
 	{
 		Id Id { get; }
@@ -6651,42 +6671,6 @@ namespace Nest
 		// Request parameters
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXpackMlGetOverallBucketsRequest : IRequest<XpackMlGetOverallBucketsRequestParameters>
-	{
-		Id JobId { get; }
-	}
-
-	///<summary>Request parameters for XpackMlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
-	public partial class XpackMlGetOverallBucketsRequest : PlainRequestBase<XpackMlGetOverallBucketsRequestParameters>, IXpackMlGetOverallBucketsRequest
-	{
-		protected IXpackMlGetOverallBucketsRequest Self => this;
-		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
-		///<param name="job_id">this parameter is required</param>
-		public XpackMlGetOverallBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
-
-		// values part of the url path
-		Id IXpackMlGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
-
-		// Request parameters
-		///<summary>The number of top job bucket scores to be used in the overall_score calculation</summary>
-		public int TopN { get => Q<int>("top_n"); set => Q("top_n", value); }
-		///<summary>The span of the overall buckets. Defaults to the longest job bucket_span</summary>
-		public string BucketSpan { get => Q<string>("bucket_span"); set => Q("bucket_span", value); }
-		///<summary>Returns overall buckets with overall scores higher than this value</summary>
-		public double OverallScore { get => Q<double>("overall_score"); set => Q("overall_score", value); }
-		///<summary>If true overall buckets that include interim buckets will be excluded</summary>
-		public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
-		///<summary>Returns overall buckets with timestamps after this time</summary>
-		public string Start { get => Q<string>("start"); set => Q("start", value); }
-		///<summary>Returns overall buckets with timestamps earlier than this time</summary>
-		public string End { get => Q<string>("end"); set => Q("end", value); }
-		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
-		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
-		//TODO THIS METHOD IS UNMAPPED!
-
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
