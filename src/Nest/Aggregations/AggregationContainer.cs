@@ -27,8 +27,7 @@ namespace Nest
 		public static implicit operator AggregationDictionary(AggregationBase aggregator)
 		{
 			IAggregation b;
-			var combinator = aggregator as AggregationCombinator;
-			if (combinator != null)
+			if (aggregator is AggregationCombinator combinator)
 			{
 				var dict = new AggregationDictionary();
 				foreach (var agg in combinator.Aggregations)
@@ -193,6 +192,9 @@ namespace Nest
 		[JsonProperty("bucket_selector")]
 		IBucketSelectorAggregation BucketSelector { get; set; }
 
+		[JsonProperty("bucket_sort")]
+		IBucketSortAggregation BucketSort { get; set; }
+
 		[JsonProperty("sampler")]
 		ISamplerAggregation Sampler { get; set; }
 
@@ -290,6 +292,8 @@ namespace Nest
 		public IBucketScriptAggregation BucketScript { get; set; }
 
 		public IBucketSelectorAggregation BucketSelector { get; set; }
+
+		public IBucketSortAggregation BucketSort { get; set; }
 
 		public ISamplerAggregation Sampler { get; set; }
 
@@ -419,6 +423,8 @@ namespace Nest
 		IBucketScriptAggregation IAggregationContainer.BucketScript { get; set; }
 
 		IBucketSelectorAggregation IAggregationContainer.BucketSelector { get; set; }
+
+		IBucketSortAggregation IAggregationContainer.BucketSort { get; set; }
 
 		ISamplerAggregation IAggregationContainer.Sampler { get; set; }
 
@@ -596,6 +602,10 @@ namespace Nest
 			Func<BucketSelectorAggregationDescriptor, IBucketSelectorAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.BucketSelector = d);
 
+		public AggregationContainerDescriptor<T> BucketSort(string name,
+			Func<BucketSortAggregationDescriptor<T>, IBucketSortAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.BucketSort = d);
+
 		public AggregationContainerDescriptor<T> Sampler(string name,
 			Func<SamplerAggregationDescriptor<T>, ISamplerAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Sampler = d);
@@ -626,7 +636,7 @@ namespace Nest
 			var aggregator = selector(new TAggregator());
 
 			//create new isolated container for new aggregator and assign to the right property
-			var container = new AggregationContainer() { Meta = aggregator.Meta };
+			var container = new AggregationContainer { Meta = aggregator.Meta };
 
 			assignToProperty(container, aggregator);
 
@@ -635,8 +645,7 @@ namespace Nest
 			if (self.Aggregations == null) self.Aggregations = new Dictionary<string, IAggregationContainer>();
 
 			//if the aggregator is a bucket aggregator (meaning it contains nested aggregations);
-			var bucket = aggregator as IBucketAggregation;
-			if (bucket != null && bucket.Aggregations.HasAny())
+			if (aggregator is IBucketAggregation bucket && bucket.Aggregations.HasAny())
 			{
 				//make sure we copy those aggregations to the isolated container's
 				//own .Aggregations container (the one that gets serialized to "aggs")
@@ -659,7 +668,6 @@ namespace Nest
 
 		//always evaluate to false so that each side of && equation is evaluated
 		public static bool operator true(AggregationContainerDescriptor<T> a) => false;
-
 
 		public static AggregationContainerDescriptor<T> operator &(AggregationContainerDescriptor<T> left, AggregationContainerDescriptor<T> right)
 		{

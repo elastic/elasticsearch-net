@@ -16,8 +16,8 @@ namespace Nest
 			where TQuery : class, TQueryInterface, IQuery, new()
 			where TQueryInterface : class, IQuery
 		{
-			// Invoke the create delegate before assigning container; the create delegate 
-			// may mutate the current QueryContainerDescriptor<T> instance such that it 
+			// Invoke the create delegate before assigning container; the create delegate
+			// may mutate the current QueryContainerDescriptor<T> instance such that it
 			// contains a query. See https://github.com/elastic/elasticsearch-net/issues/2875
 			var query = create.InvokeOrDefault(new TQuery());
 
@@ -506,5 +506,14 @@ namespace Nest
 		/// </summary>
 		public QueryContainer ParentId(Func<ParentIdQueryDescriptor<T>, IParentIdQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.ParentId = query);
+
+		/// <summary>
+		/// Returns any documents that match with at least one or more of the provided terms.
+		/// The terms are not analyzed and thus must match exactly. The number of terms that must match varies
+		/// per document and is either controlled by a minimum should match field or
+		/// computed per document in a minimum should match script.
+		/// </summary>
+		public QueryContainer TermsSet(Func<TermsSetQueryDescriptor<T>, ITermsSetQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.TermsSet = query);
 	}
 }
