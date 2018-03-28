@@ -4323,53 +4323,47 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for XpackMigrationGetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
-	public partial class XpackMigrationGetAssistanceDescriptor  : RequestDescriptorBase<XpackMigrationGetAssistanceDescriptor,XpackMigrationGetAssistanceRequestParameters, IXpackMigrationGetAssistanceRequest>, IXpackMigrationGetAssistanceRequest
+	public partial class MigrationAssistanceDescriptor  : RequestDescriptorBase<MigrationAssistanceDescriptor,MigrationAssistanceRequestParameters, IMigrationAssistanceRequest>, IMigrationAssistanceRequest
 	{ 
 		/// <summary>/_xpack/migration/assistance</summary>
-		public XpackMigrationGetAssistanceDescriptor() : base(){}
+		public MigrationAssistanceDescriptor() : base(){}
 
 		// values part of the url path
-		Indices IXpackMigrationGetAssistanceRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Indices IMigrationAssistanceRequest.Index => Self.RouteValues.Get<Indices>("index");
 		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
-		public XpackMigrationGetAssistanceDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public MigrationAssistanceDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public XpackMigrationGetAssistanceDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public MigrationAssistanceDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
-		public XpackMigrationGetAssistanceDescriptor AllIndices() => this.Index(Indices.All);
+		public MigrationAssistanceDescriptor AllIndices() => this.Index(Indices.All);
 
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public XpackMigrationGetAssistanceDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		public MigrationAssistanceDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public XpackMigrationGetAssistanceDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		public MigrationAssistanceDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public XpackMigrationGetAssistanceDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public MigrationAssistanceDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	
 	}
 	
 	///<summary>descriptor for XpackMigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
-	public partial class XpackMigrationUpgradeDescriptor  : RequestDescriptorBase<XpackMigrationUpgradeDescriptor,XpackMigrationUpgradeRequestParameters, IXpackMigrationUpgradeRequest>, IXpackMigrationUpgradeRequest
+	public partial class MigrationUpgradeDescriptor  : RequestDescriptorBase<MigrationUpgradeDescriptor,MigrationUpgradeRequestParameters, IMigrationUpgradeRequest>, IMigrationUpgradeRequest
 	{ 
 		/// <summary>/_xpack/migration/upgrade/{index}</summary>
 		///<param name="index"> this parameter is required</param>
-		public XpackMigrationUpgradeDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		public MigrationUpgradeDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 
 		// values part of the url path
-		IndexName IXpackMigrationUpgradeRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		IndexName IMigrationUpgradeRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		///<summary>The name of the index</summary>
-		public XpackMigrationUpgradeDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		public MigrationUpgradeDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
 		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public XpackMigrationUpgradeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+		public MigrationUpgradeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
 
 		// Request parameters
 		///<summary>Should the request block until the upgrade operation is completed</summary>
-		public XpackMigrationUpgradeDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public MigrationUpgradeDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	
 	}
 	
