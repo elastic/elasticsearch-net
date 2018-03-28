@@ -4165,7 +4165,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMigrationDeprecations", p, new [] { GET }, "/_xpack/migration/deprecations", "/{index}/_xpack/migration/deprecations");
 		}
 		
-		internal TResponse XpackMigrationGetAssistanceDispatch<TResponse>(IRequest<XpackMigrationGetAssistanceRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackMigrationGetAssistanceDispatch<TResponse>(IRequest<MigrationAssistanceRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4177,7 +4177,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMigrationGetAssistance", p, new [] { GET }, "/_xpack/migration/assistance", "/_xpack/migration/assistance/{index}");
 		}
 		
-		internal Task<TResponse> XpackMigrationGetAssistanceDispatchAsync<TResponse>(IRequest<XpackMigrationGetAssistanceRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackMigrationGetAssistanceDispatchAsync<TResponse>(IRequest<MigrationAssistanceRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4189,7 +4189,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMigrationGetAssistance", p, new [] { GET }, "/_xpack/migration/assistance", "/_xpack/migration/assistance/{index}");
 		}
 		
-		internal TResponse XpackMigrationUpgradeDispatch<TResponse>(IRequest<XpackMigrationUpgradeRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackMigrationUpgradeDispatch<TResponse>(IRequest<MigrationUpgradeRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -4201,7 +4201,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMigrationUpgrade", p, new [] { POST }, "/_xpack/migration/upgrade/{index}");
 		}
 		
-		internal Task<TResponse> XpackMigrationUpgradeDispatchAsync<TResponse>(IRequest<XpackMigrationUpgradeRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackMigrationUpgradeDispatchAsync<TResponse>(IRequest<MigrationUpgradeRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{

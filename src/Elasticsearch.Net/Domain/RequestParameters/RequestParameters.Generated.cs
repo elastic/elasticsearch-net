@@ -2556,7 +2556,7 @@ namespace Elasticsearch.Net
 	}
 	
 	///<summary>Request options for XpackMigrationGetAssistance<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
-	public class XpackMigrationGetAssistanceRequestParameters : RequestParameters<XpackMigrationGetAssistanceRequestParameters> 
+	public class MigrationAssistanceRequestParameters : RequestParameters<MigrationAssistanceRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>
@@ -2571,7 +2571,7 @@ namespace Elasticsearch.Net
 	}
 	
 	///<summary>Request options for XpackMigrationUpgrade<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
-	public class XpackMigrationUpgradeRequestParameters : RequestParameters<XpackMigrationUpgradeRequestParameters> 
+	public class MigrationUpgradeRequestParameters : RequestParameters<MigrationUpgradeRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Should the request block until the upgrade operation is completed</summary>
