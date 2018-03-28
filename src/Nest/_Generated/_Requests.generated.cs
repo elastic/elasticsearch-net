@@ -3867,6 +3867,60 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
+	{
+		Indices Index { get; }
+	}
+
+	///<summary>Request parameters for XpackMigrationGetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	public partial class MigrationAssistanceRequest : PlainRequestBase<MigrationAssistanceRequestParameters>, IMigrationAssistanceRequest
+	{
+		protected IMigrationAssistanceRequest Self => this;
+		/// <summary>/_xpack/migration/assistance</summary>
+		public MigrationAssistanceRequest() : base(){}
+
+		/// <summary>/_xpack/migration/assistance/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public MigrationAssistanceRequest(Indices index) : base(r=>r.Optional("index", index)){}
+
+		// values part of the url path
+		Indices IMigrationAssistanceRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMigrationUpgradeRequest : IRequest<MigrationUpgradeRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+
+	///<summary>Request parameters for XpackMigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	public partial class MigrationUpgradeRequest : PlainRequestBase<MigrationUpgradeRequestParameters>, IMigrationUpgradeRequest
+	{
+		protected IMigrationUpgradeRequest Self => this;
+		/// <summary>/_xpack/migration/upgrade/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public MigrationUpgradeRequest(IndexName index) : base(r=>r.Required("index", index)){}
+
+		// values part of the url path
+		IndexName IMigrationUpgradeRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+		///<summary>Should the request block until the upgrade operation is completed</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
 	{
 		IndexName Index { get; }
@@ -6582,65 +6636,6 @@ namespace Nest
 		//TODO THIS METHOD IS UNMAPPED!
 
 	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXpackMigrationGetAssistanceRequest : IRequest<XpackMigrationGetAssistanceRequestParameters>
-	{
-		Indices Index { get; }
-	}
-
-	///<summary>Request parameters for XpackMigrationGetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
-	public partial class XpackMigrationGetAssistanceRequest : PlainRequestBase<XpackMigrationGetAssistanceRequestParameters>, IXpackMigrationGetAssistanceRequest
-	{
-		protected IXpackMigrationGetAssistanceRequest Self => this;
-		/// <summary>/_xpack/migration/assistance</summary>
-		public XpackMigrationGetAssistanceRequest() : base(){}
-
-		/// <summary>/_xpack/migration/assistance/{index}</summary>
-		///<param name="index">Optional, accepts null</param>
-		public XpackMigrationGetAssistanceRequest(Indices index) : base(r=>r.Optional("index", index)){}
-
-		// values part of the url path
-		Indices IXpackMigrationGetAssistanceRequest.Index => Self.RouteValues.Get<Indices>("index");
-
-		// Request parameters
-		///<summary>
-		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
-		/// been specified)
-		///</summary>
-		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-		//TODO THIS METHOD IS UNMAPPED!
-
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXpackMigrationUpgradeRequest : IRequest<XpackMigrationUpgradeRequestParameters>
-	{
-		IndexName Index { get; }
-	}
-
-	///<summary>Request parameters for XpackMigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
-	public partial class XpackMigrationUpgradeRequest : PlainRequestBase<XpackMigrationUpgradeRequestParameters>, IXpackMigrationUpgradeRequest
-	{
-		protected IXpackMigrationUpgradeRequest Self => this;
-		/// <summary>/_xpack/migration/upgrade/{index}</summary>
-		///<param name="index">this parameter is required</param>
-		public XpackMigrationUpgradeRequest(IndexName index) : base(r=>r.Required("index", index)){}
-
-		// values part of the url path
-		IndexName IXpackMigrationUpgradeRequest.Index => Self.RouteValues.Get<IndexName>("index");
-
-		// Request parameters
-		///<summary>Should the request block until the upgrade operation is completed</summary>
-		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-		//TODO THIS METHOD IS UNMAPPED!
-
-	}
-	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IXpackMlForecastRequest : IRequest<XpackMlForecastRequestParameters>
 	{

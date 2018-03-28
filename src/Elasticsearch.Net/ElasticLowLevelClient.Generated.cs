@@ -4157,36 +4157,36 @@ namespace Elasticsearch.Net
 		
 		///<summary>GET on /_xpack/migration/assistance <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse XpackMigrationGetAssistance<TResponse>(XpackMigrationGetAssistanceRequestParameters requestParameters = null)
+		public TResponse XpackMigrationGetAssistance<TResponse>(MigrationAssistanceRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/migration/assistance"), null, _params(requestParameters));
 		
 		///<summary>GET on /_xpack/migration/assistance <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> XpackMigrationGetAssistanceAsync<TResponse>(XpackMigrationGetAssistanceRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> XpackMigrationGetAssistanceAsync<TResponse>(MigrationAssistanceRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/migration/assistance"), ctx, null, _params(requestParameters));
 		
 		///<summary>GET on /_xpack/migration/assistance/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse XpackMigrationGetAssistance<TResponse>(string index, XpackMigrationGetAssistanceRequestParameters requestParameters = null)
+		public TResponse XpackMigrationGetAssistance<TResponse>(string index, MigrationAssistanceRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/migration/assistance/{index.NotNull("index")}"), null, _params(requestParameters));
 		
 		///<summary>GET on /_xpack/migration/assistance/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</para></summary>
 		///<param name="index">A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> XpackMigrationGetAssistanceAsync<TResponse>(string index, XpackMigrationGetAssistanceRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> XpackMigrationGetAssistanceAsync<TResponse>(string index, MigrationAssistanceRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/migration/assistance/{index.NotNull("index")}"), ctx, null, _params(requestParameters));
 		
 		///<summary>POST on /_xpack/migration/upgrade/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</para></summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public TResponse XpackMigrationUpgrade<TResponse>(string index, XpackMigrationUpgradeRequestParameters requestParameters = null)
+		public TResponse XpackMigrationUpgrade<TResponse>(string index, MigrationUpgradeRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/migration/upgrade/{index.NotNull("index")}"), null, _params(requestParameters));
 		
 		///<summary>POST on /_xpack/migration/upgrade/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</para></summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<TResponse> XpackMigrationUpgradeAsync<TResponse>(string index, XpackMigrationUpgradeRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+		public Task<TResponse> XpackMigrationUpgradeAsync<TResponse>(string index, MigrationUpgradeRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/migration/upgrade/{index.NotNull("index")}"), ctx, null, _params(requestParameters));
 		
 		///<summary>GET on /_xpack/security/_authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</para></summary>
