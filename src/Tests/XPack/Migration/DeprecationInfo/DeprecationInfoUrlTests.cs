@@ -1,11 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.MockData;
-using static Nest.Infer;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.XPack.DeprecationInfo
+namespace Tests.XPack.Migration.DeprecationInfo
 {
 	public class DeprecationInfoUrlTests : IUrlTests
 	{
