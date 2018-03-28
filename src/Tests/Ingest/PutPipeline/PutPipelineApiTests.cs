@@ -178,6 +178,14 @@ namespace Tests.Ingest.PutPipeline
 					{
 						source = "ctx.numberOfCommits++"
 					}
+				},
+				new
+				{
+					urldecode = new
+					{
+						field = "description",
+						ignore_missing = true
+					}
 				}
 			}
 		};
@@ -259,6 +267,10 @@ namespace Tests.Ingest.PutPipeline
 				)
 				.Script(s => s
 					.Source("ctx.numberOfCommits++")
+				)
+				.UrlDecode<Project>(ud => ud
+					.Field(p => p.Description)
+					.IgnoreMissing()
 				)
 			);
 
@@ -356,6 +368,11 @@ namespace Tests.Ingest.PutPipeline
 				new ScriptProcessor
 				{
 					Source = "ctx.numberOfCommits++"
+				},
+				new UrlDecodeProcessor
+				{
+					Field = "description",
+					IgnoreMissing = true
 				}
 			}
 		};
