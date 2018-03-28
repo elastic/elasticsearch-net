@@ -3513,7 +3513,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlFlushJob", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_flush");
 		}
 		
-		internal TResponse XpackMlForecastDispatch<TResponse>(IRequest<XpackMlForecastRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackMlForecastDispatch<TResponse>(IRequest<ForecastJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3525,7 +3525,7 @@ namespace Nest
 			throw InvalidDispatch("XpackMlForecast", p, new [] { POST }, "/_xpack/ml/anomaly_detectors/{job_id}/_forecast");
 		}
 		
-		internal Task<TResponse> XpackMlForecastDispatchAsync<TResponse>(IRequest<XpackMlForecastRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackMlForecastDispatchAsync<TResponse>(IRequest<ForecastJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
