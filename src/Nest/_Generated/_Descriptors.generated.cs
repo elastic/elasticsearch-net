@@ -3798,14 +3798,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for XpackLicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class XpackLicenseGetTrialStatusDescriptor  : RequestDescriptorBase<XpackLicenseGetTrialStatusDescriptor,XpackLicenseGetTrialStatusRequestParameters, IXpackLicenseGetTrialStatusRequest>, IXpackLicenseGetTrialStatusRequest
+	public partial class GetTrialLicenseStatusDescriptor  : RequestDescriptorBase<GetTrialLicenseStatusDescriptor,GetTrialLicenseStatusRequestParameters, IGetTrialLicenseStatusRequest>, IGetTrialLicenseStatusRequest
 	{ 
 		// values part of the url path
 
 		// Request parameters
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
 	
 	}
 	
@@ -3821,14 +3818,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for XpackLicensePostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class XpackLicensePostStartTrialDescriptor  : RequestDescriptorBase<XpackLicensePostStartTrialDescriptor,XpackLicensePostStartTrialRequestParameters, IXpackLicensePostStartTrialRequest>, IXpackLicensePostStartTrialRequest
+	public partial class StartTrialLicenseDescriptor  : RequestDescriptorBase<StartTrialLicenseDescriptor,StartTrialLicenseRequestParameters, IStartTrialLicenseRequest>, IStartTrialLicenseRequest
 	{ 
 		// values part of the url path
 
 		// Request parameters
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
 	
 	}
 	

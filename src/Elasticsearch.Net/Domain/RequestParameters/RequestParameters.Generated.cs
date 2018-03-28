@@ -2306,7 +2306,7 @@ namespace Elasticsearch.Net
 	}
 	
 	///<summary>Request options for XpackLicenseGetTrialStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class XpackLicenseGetTrialStatusRequestParameters : RequestParameters<XpackLicenseGetTrialStatusRequestParameters> 
+	public class GetTrialLicenseStatusRequestParameters : RequestParameters<GetTrialLicenseStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
@@ -2320,7 +2320,7 @@ namespace Elasticsearch.Net
 	}
 	
 	///<summary>Request options for XpackLicensePostStartTrial<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class XpackLicensePostStartTrialRequestParameters : RequestParameters<XpackLicensePostStartTrialRequestParameters> 
+	public class StartTrialLicenseRequestParameters : RequestParameters<StartTrialLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
