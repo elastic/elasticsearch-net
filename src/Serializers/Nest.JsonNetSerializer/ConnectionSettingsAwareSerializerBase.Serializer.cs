@@ -54,7 +54,9 @@ namespace Nest.JsonNetSerializer
 			var contract = CreateContractResolver();
 			s.Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None;
 			s.ContractResolver = contract;
-			s.Converters = converters.Concat(this.Converters).ToList();
+			foreach (var converter in converters.Concat(this.Converters))
+				s.Converters.Add(converter);
+
 			return JsonSerializer.Create(s);
 		}
 

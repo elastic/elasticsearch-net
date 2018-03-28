@@ -51,6 +51,7 @@ namespace Nest
 		private IRawQuery _raw;
 		private IPercolateQuery _percolate;
 		private IParentIdQuery _parentId;
+		private ITermsSetQuery _termsSet;
 		private IQueryContainer Self => this;
 
 		internal IQuery ContainedQuery { get; set; }
@@ -108,5 +109,6 @@ namespace Nest
 		ITypeQuery IQueryContainer.Type { get => _type; set => _type = Set(value); }
 		IPercolateQuery IQueryContainer.Percolate { get => _percolate; set => _percolate = Set(value); }
 		IParentIdQuery IQueryContainer.ParentId { get => _parentId; set => _parentId = Set(value); }
+		ITermsSetQuery IQueryContainer.TermsSet { get => _termsSet; set => _termsSet = Set(value); }
 	}
 }
