@@ -154,6 +154,9 @@ namespace Nest
 		[JsonProperty("percolate")]
 		IPercolateQuery Percolate { get; set; }
 
+		[JsonProperty("terms_set")]
+		ITermsSetQuery TermsSet { get; set; }
+
 		void Accept(IQueryVisitor visitor);
 	}
 }
