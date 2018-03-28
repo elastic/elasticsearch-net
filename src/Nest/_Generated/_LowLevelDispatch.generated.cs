@@ -3305,7 +3305,7 @@ namespace Nest
 			throw InvalidDispatch("XpackLicenseGet", p, new [] { GET }, "/_xpack/license");
 		}
 		
-		internal TResponse XpackLicenseGetTrialStatusDispatch<TResponse>(IRequest<XpackLicenseGetTrialStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackLicenseGetTrialStatusDispatch<TResponse>(IRequest<GetTrialLicenseStatusRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3316,7 +3316,7 @@ namespace Nest
 			throw InvalidDispatch("XpackLicenseGetTrialStatus", p, new [] { GET }, "/_xpack/license/trial_status");
 		}
 		
-		internal Task<TResponse> XpackLicenseGetTrialStatusDispatchAsync<TResponse>(IRequest<XpackLicenseGetTrialStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackLicenseGetTrialStatusDispatchAsync<TResponse>(IRequest<GetTrialLicenseStatusRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3349,7 +3349,7 @@ namespace Nest
 			throw InvalidDispatch("XpackLicensePost", p, new [] { PUT }, "/_xpack/license");
 		}
 		
-		internal TResponse XpackLicensePostStartTrialDispatch<TResponse>(IRequest<XpackLicensePostStartTrialRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse XpackLicensePostStartTrialDispatch<TResponse>(IRequest<StartTrialLicenseRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -3360,7 +3360,7 @@ namespace Nest
 			throw InvalidDispatch("XpackLicensePostStartTrial", p, new [] { POST }, "/_xpack/license/start_trial");
 		}
 		
-		internal Task<TResponse> XpackLicensePostStartTrialDispatchAsync<TResponse>(IRequest<XpackLicensePostStartTrialRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> XpackLicensePostStartTrialDispatchAsync<TResponse>(IRequest<StartTrialLicenseRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{

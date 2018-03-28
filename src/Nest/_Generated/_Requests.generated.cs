@@ -3471,6 +3471,20 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetTrialLicenseStatusRequest : IRequest<GetTrialLicenseStatusRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for XpackLicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public partial class GetTrialLicenseStatusRequest : PlainRequestBase<GetTrialLicenseStatusRequestParameters>, IGetTrialLicenseStatusRequest
+	{
+		protected IGetTrialLicenseStatusRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetUserAccessTokenRequest : IRequest<GetUserAccessTokenRequestParameters>
 	{
 	}
@@ -5769,6 +5783,20 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStartTrialLicenseRequest : IRequest<StartTrialLicenseRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for XpackLicensePostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public partial class StartTrialLicenseRequest : PlainRequestBase<StartTrialLicenseRequestParameters>, IStartTrialLicenseRequest
+	{
+		protected IStartTrialLicenseRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters>
 	{
 	}
@@ -6605,36 +6633,6 @@ namespace Nest
 		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
 	}
 	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXpackLicenseGetTrialStatusRequest : IRequest<XpackLicenseGetTrialStatusRequestParameters>
-	{
-	}
-
-	///<summary>Request parameters for XpackLicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class XpackLicenseGetTrialStatusRequest : PlainRequestBase<XpackLicenseGetTrialStatusRequestParameters>, IXpackLicenseGetTrialStatusRequest
-	{
-		protected IXpackLicenseGetTrialStatusRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
-
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IXpackLicensePostStartTrialRequest : IRequest<XpackLicensePostStartTrialRequestParameters>
-	{
-	}
-
-	///<summary>Request parameters for XpackLicensePostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public partial class XpackLicensePostStartTrialRequest : PlainRequestBase<XpackLicensePostStartTrialRequestParameters>, IXpackLicensePostStartTrialRequest
-	{
-		protected IXpackLicensePostStartTrialRequest Self => this;
-		// values part of the url path
-
-		// Request parameters
-		//TODO THIS METHOD IS UNMAPPED!
-
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IXpackMlForecastRequest : IRequest<XpackMlForecastRequestParameters>
