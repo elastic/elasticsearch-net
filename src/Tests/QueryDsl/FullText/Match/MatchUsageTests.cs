@@ -26,7 +26,8 @@ namespace Tests.QueryDsl.FullText.Match
 					cutoff_frequency = 0.001,
 					lenient = true,
 					minimum_should_match = 2,
-			        @operator = "or"
+			        @operator = "or",
+					auto_generate_synonyms_phrase_query = false
 				}
 			}
 
@@ -46,6 +47,7 @@ namespace Tests.QueryDsl.FullText.Match
 			FuzzyRewrite = MultiTermQueryRewrite.TopTermsBlendedFreqs(10),
 			Lenient = true,
 			Operator = Operator.Or,
+			AutoGenerateSynonymsPhraseQuery = false
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -62,6 +64,7 @@ namespace Tests.QueryDsl.FullText.Match
 				.Operator(Operator.Or)
 				.FuzzyRewrite(MultiTermQueryRewrite.TopTermsBlendedFreqs(10))
 				.Name("named_query")
+				.AutoGenerateSynonymsPhraseQuery(false)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMatchQuery>(a => a.Match)

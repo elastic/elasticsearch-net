@@ -33,6 +33,9 @@ namespace Nest
 
 		[JsonProperty("quote_field_suffix")]
 		string QuoteFieldSuffix { get; set; }
+
+		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 	}
 
 	public class SimpleQueryStringQuery : QueryBase, ISimpleQueryStringQuery
@@ -47,6 +50,7 @@ namespace Nest
 		public bool? AnalyzeWildcard { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public string QuoteFieldSuffix { get; set; }
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.SimpleQueryString = this;
 		internal static bool IsConditionless(ISimpleQueryStringQuery q) => q.Query.IsNullOrEmpty();
@@ -66,6 +70,7 @@ namespace Nest
 		bool? ISimpleQueryStringQuery.Lenient { get; set; }
 		MinimumShouldMatch ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
 		string ISimpleQueryStringQuery.QuoteFieldSuffix { get; set; }
+		bool? ISimpleQueryStringQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		public SimpleQueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
@@ -90,5 +95,8 @@ namespace Nest
 
 		public SimpleQueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) =>
 			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
+
+		public SimpleQueryStringQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
+			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
 	}
 }

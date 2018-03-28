@@ -41,6 +41,9 @@ namespace Nest
 
 		[JsonProperty("zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
+
+		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 	}
 
 	public class MatchQuery : FieldNameQueryBase, IMatchQuery
@@ -57,6 +60,7 @@ namespace Nest
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 		public int? PrefixLength { get; set; }
 		public int? MaxExpansions { get; set; }
 
@@ -84,6 +88,7 @@ namespace Nest
 		ZeroTermsQuery? IMatchQuery.ZeroTermsQuery { get; set; }
 		int? IMatchQuery.PrefixLength { get; set; }
 		int? IMatchQuery.MaxExpansions { get; set; }
+		bool? IMatchQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		public MatchQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
@@ -93,13 +98,15 @@ namespace Nest
 
 		public MatchQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 
-		public MatchQueryDescriptor<T> FuzzyTranspositions(bool? fuzzyTranspositions = true) => Assign(a => a.FuzzyTranspositions = fuzzyTranspositions);
+		public MatchQueryDescriptor<T> FuzzyTranspositions(bool? fuzzyTranspositions = true) =>
+			Assign(a => a.FuzzyTranspositions = fuzzyTranspositions);
 
 		public MatchQueryDescriptor<T> CutoffFrequency(double? cutoffFrequency) => Assign(a => a.CutoffFrequency = cutoffFrequency);
 
 		public MatchQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.FuzzyRewrite = rewrite);
 
-		public MatchQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) => Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+		public MatchQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
+			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
 		public MatchQueryDescriptor<T> Operator(Operator? op) => Assign(a => a.Operator = op);
 
@@ -108,5 +115,8 @@ namespace Nest
 		public MatchQueryDescriptor<T> PrefixLength(int? prefixLength) => Assign(a => a.PrefixLength = prefixLength);
 
 		public MatchQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
+
+		public MatchQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
+			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
 	}
 }

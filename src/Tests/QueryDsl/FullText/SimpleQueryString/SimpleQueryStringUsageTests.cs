@@ -24,7 +24,8 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				flags = "AND|NEAR",
 				lenient = true,
 				analyze_wildcard = true,
-				minimum_should_match = "30%"
+				minimum_should_match = "30%",
+				auto_generate_synonyms_phrase_query = false
 			}
 		};
 
@@ -39,7 +40,8 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 			Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
 			Lenient = true,
 			AnalyzeWildcard = true,
-			MinimumShouldMatch = "30%"
+			MinimumShouldMatch = "30%",
+			AutoGenerateSynonymsPhraseQuery = false
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -54,6 +56,7 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				.Lenient()
 				.AnalyzeWildcard()
 				.MinimumShouldMatch("30%")
+				.AutoGenerateSynonymsPhraseQuery(false)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISimpleQueryStringQuery>(a => a.SimpleQueryString)

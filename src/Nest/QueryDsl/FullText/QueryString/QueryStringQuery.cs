@@ -70,6 +70,9 @@ namespace Nest
 
 		[JsonProperty("escape")]
 		bool? Escape { get; set; }
+
+		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 	}
 
 	public class QueryStringQuery : QueryBase, IQueryStringQuery
@@ -83,6 +86,7 @@ namespace Nest
 		public MultiTermQueryRewrite FuzzyRewrite { get; set; }
 		public string QuoteFieldSuffix { get; set; }
 		public bool? Escape { get; set; }
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 		public string Query { get; set; }
 		public string Timezone { get; set; }
 		public Field DefaultField { get; set; }
@@ -131,6 +135,7 @@ namespace Nest
 		MultiTermQueryRewrite IQueryStringQuery.Rewrite { get; set; }
 		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
 		bool? IQueryStringQuery.Escape { get; set; }
+		bool? IQueryStringQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(a => a.DefaultField = field);
 		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(a => a.DefaultField = field);
@@ -179,5 +184,8 @@ namespace Nest
 			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
 
 		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(a => a.Escape = escape);
+
+		public QueryStringQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
+			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
 	}
 }

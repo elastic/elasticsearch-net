@@ -62,6 +62,9 @@ namespace Nest
 
 		[JsonProperty("zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
+
+		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 	}
 
 	public class MultiMatchQuery : QueryBase, IMultiMatchQuery
@@ -91,6 +94,7 @@ namespace Nest
 		public Operator? Operator { get; set; }
 		public Fields Fields { get; set; }
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.MultiMatch = this;
 
@@ -119,6 +123,7 @@ namespace Nest
 		Operator? IMultiMatchQuery.Operator { get; set; }
 		Fields IMultiMatchQuery.Fields { get; set; }
 		ZeroTermsQuery? IMultiMatchQuery.ZeroTermsQuery { get; set; }
+		bool? IMultiMatchQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		public MultiMatchQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
@@ -162,6 +167,10 @@ namespace Nest
 
 		public MultiMatchQueryDescriptor<T> UseDisMax(bool? useDisMax = true) => Assign(a => a.UseDisMax = useDisMax);
 
-		public MultiMatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(a => a.ZeroTermsQuery = zeroTermsQuery);
+		public MultiMatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) =>
+			Assign(a => a.ZeroTermsQuery = zeroTermsQuery);
+
+		public MultiMatchQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
+			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
 	}
 }
