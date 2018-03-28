@@ -112,9 +112,9 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		 * We ship a separate {nuget}/NEST.JsonNetSerializer[NEST.JsonNetSerializer] package that helps in composing a custom `SourceSerializer`
 		 * using `Json.NET`, that is smart enough to delegate the serialization of known NEST types back to the built-in
 		 * `RequestResponseSerializer`. This package is also useful if you want to control how your documents and values are stored
-		 * and retreived from Elasticsearch using `Json.NET`, without intervering with the way NEST uses `Json.NET` internally.
+		 * and retrieved from Elasticsearch using `Json.NET`, without interfering with the way NEST uses `Json.NET` internally.
 		 *
-		 * The easiest way to hook this custom source serializer is as follows
+		 * The easiest way to hook this custom source serializer up is as follows
 		 */
 		public void DefaultJsonNetSerializer()
 		{
