@@ -11,13 +11,19 @@ namespace Nest
 	[ContractJsonConverter(typeof(PropertyJsonConverter))]
 	public interface IProperty : IFieldMapping
 	{
+		/// <summary>
+		/// The name of the property
+		/// </summary>
 		PropertyName Name { get; set; }
 
+		/// <summary>
+		/// The datatype of the property
+		/// </summary>
 		[JsonProperty("type")]
 		string Type { get; set; }
 
 		/// <summary>
-		/// Local property metadata that will NOT be stored in Elasticsearch with the mappings
+		/// Local property metadata that will not be stored in Elasticsearch with the mappings
 		/// </summary>
 		[JsonIgnore]
 		IDictionary<string, object> LocalMetadata { get; set; }
@@ -32,11 +38,7 @@ namespace Nest
 	public abstract class PropertyBase : IProperty, IPropertyWithClrOrigin
 	{
 		private string _type;
-		protected string TypeOverride
-		{
-			get => _type;
-			set => _type = value;
-		}
+		protected string TypeOverride { get => _type; set => _type = value; }
 
 		string IProperty.Type { get => _type; set => _type = value; }
 
@@ -49,6 +51,7 @@ namespace Nest
 
 		protected string DebugDisplay => $"Type: {((IProperty)this).Type ?? "<empty>"}, Name: {Name.DebugDisplay} ";
 
+		/// <inheritdoc />
 		public PropertyName Name { get; set; }
 
 		/// <inheritdoc />

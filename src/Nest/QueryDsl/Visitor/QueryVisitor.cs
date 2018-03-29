@@ -88,6 +88,7 @@
 		void Visit(IRawQuery query);
 		void Visit(IPercolateQuery query);
 		void Visit(IParentIdQuery query);
+		void Visit(ITermsSetQuery query);
 	}
 
 	public class QueryVisitor : IQueryVisitor
@@ -227,5 +228,7 @@
 		public virtual void Visit(IPercolateQuery query) { }
 
 		public virtual void Visit(IParentIdQuery query) { }
+
+		public virtual void Visit(ITermsSetQuery query) { }
 	}
 }

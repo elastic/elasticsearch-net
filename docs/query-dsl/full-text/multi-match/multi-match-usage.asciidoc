@@ -37,6 +37,7 @@ q
     .Lenient()
     .ZeroTermsQuery(ZeroTermsQuery.All)
     .Name("named_query")
+    .AutoGenerateSynonymsPhraseQuery(false)
 )
 ----
 
@@ -62,6 +63,7 @@ new MultiMatchQuery
     Lenient = true,
     ZeroTermsQuery = ZeroTermsQuery.All,
     Name = "named_query",
+    AutoGenerateSynonymsPhraseQuery = false
 }
 ----
 
@@ -88,7 +90,8 @@ new MultiMatchQuery
       "description",
       "myOtherField"
     ],
-    "zero_terms_query": "all"
+    "zero_terms_query": "all",
+    "auto_generate_synonyms_phrase_query": false
   }
 }
 ----
@@ -102,7 +105,6 @@ new MultiMatchQuery
 ----
 q
 .MultiMatch(c => c
-    //.Fields(f => f.Field(p=>p.Description, 2.2).Field("myOtherField^0.3"))
     .Fields(Field<Project>(p=>p.Description, 2.2).And("myOtherField^0.3"))
     .Query("hello world")
 )

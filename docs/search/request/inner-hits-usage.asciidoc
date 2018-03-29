@@ -48,6 +48,7 @@ s => s
             .DocValueFields(f=>f.Field(p=>p.Name))
             .Name("princes")
             .Highlight(h=>h.Fields(f=>f.Field(p=>p.FullTextField)))
+            .IgnoreUnmapped(false)
         )
 
     ) || q.Nested(n => n
@@ -73,7 +74,8 @@ new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
         {
             Name = "princes",
             DocValueFields = Field<Prince>(p=>p.Name),
-            Highlight = Highlight.Field(Field<Prince>(p=>p.FullTextField))
+            Highlight = Highlight.Field(Field<Prince>(p=>p.FullTextField)),
+            IgnoreUnmapped = false
         }
     } || new NestedQuery
     {
@@ -110,7 +112,8 @@ new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
                 "fields": {
                   "fullTextField": {}
                 }
-              }
+              },
+              "ignore_unmapped": false
             }
           }
         },

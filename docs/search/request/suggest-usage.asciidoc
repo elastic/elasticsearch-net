@@ -57,6 +57,7 @@ s => s
         .Field(p => p.Suggest)
         .Size(8)
         .Prefix(Project.Instance.Name)
+        .SkipDuplicates()
     )
     .Phrase("my-phrase-suggest", ph => ph
         .Collate(c => c
@@ -127,6 +128,7 @@ new SearchRequest<Project>
                 Analyzer = "simple",
                 Field = Field<Project>(p=>p.Suggest),
                 Size = 8,
+                SkipDuplicates = true
             }
         } },
         { "my-phrase-suggest", new SuggestBucket
@@ -185,7 +187,8 @@ new SearchRequest<Project>
           "transpositions": true,
           "unicode_aware": false
         },
-        "size": 8
+        "size": 8,
+        "skip_duplicates": true
       },
       "prefix": "Durgan LLC"
     },

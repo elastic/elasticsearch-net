@@ -34,7 +34,8 @@ namespace Tests.QueryDsl.FullText.QueryString
 				rewrite = "constant_score",
 				fuzzy_rewrite = "constant_score",
 				quote_field_suffix = "'",
-				escape = true
+				escape = true,
+				auto_generate_synonyms_phrase_query = false
 			}
 		};
 
@@ -61,6 +62,7 @@ namespace Tests.QueryDsl.FullText.QueryString
 			MinimumShouldMatch = 2,
 			QuoteFieldSuffix = "'",
 			Lenient = true,
+			AutoGenerateSynonymsPhraseQuery = false
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -86,6 +88,7 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.MinimumShouldMatch(2)
 				.QuoteFieldSuffix("'")
 				.Lenient()
+				.AutoGenerateSynonymsPhraseQuery(false)
 			);
 #pragma warning restore 618 // usage of lowercase_expanded_terms and locale
 

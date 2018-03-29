@@ -39,24 +39,18 @@ namespace Nest
 		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer) =>
 			And(leftContainer, rightContainer);
 
-		internal static QueryContainer And(QueryContainer leftContainer, QueryContainer rightContainer)
-		{
-			QueryContainer queryContainer;
-			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)
+		internal static QueryContainer And(QueryContainer leftContainer, QueryContainer rightContainer) =>
+			IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out var queryContainer)
 				? queryContainer
 				: leftContainer.CombineAsMust(rightContainer);
-		}
 
 		public static QueryContainer operator |(QueryContainer leftContainer, QueryContainer rightContainer) =>
 			Or(leftContainer, rightContainer);
 
-		internal static QueryContainer Or(QueryContainer leftContainer, QueryContainer rightContainer)
-		{
-			QueryContainer queryContainer;
-			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)
+		internal static QueryContainer Or(QueryContainer leftContainer, QueryContainer rightContainer) =>
+			IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out var queryContainer)
 				? queryContainer
 				: leftContainer.CombineAsShould(rightContainer);
-		}
 
 		private static bool IfEitherIsEmptyReturnTheOtherOrEmpty(QueryContainer leftContainer, QueryContainer rightContainer, out QueryContainer queryContainer)
 		{
