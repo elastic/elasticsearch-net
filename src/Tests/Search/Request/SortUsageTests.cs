@@ -95,22 +95,22 @@ namespace Tests.Search.Request
 				}
 			};
 
+#pragma warning disable 618 // uses NestedPath and NestedFilter
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Sort(ss => ss
 				.Ascending(p => p.StartedOn)
 				.Descending(p => p.Name)
 				.Descending(SortSpecialField.Score)
 				.Ascending(SortSpecialField.DocumentIndexOrder)
+
 				.Field(f => f
 					.Field(p => p.Tags.First().Added)
 					.Order(SortOrder.Descending)
 					.MissingLast()
 					.UnmappedType(FieldType.Date)
 					.Mode(SortMode.Average)
-#pragma warning disable 618
 					.NestedPath(p => p.Tags)
 					.NestedFilter(q => q.MatchAll())
-#pragma warning restore 618
 				)
 				.Field(f => f
 					.Field(p => p.NumberOfCommits)
@@ -134,6 +134,7 @@ namespace Tests.Search.Request
 					)
 				)
 			);
+#pragma warning restore 618
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
