@@ -74,6 +74,14 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						{
 							lambda = 2.0,
 							type = "LMJelinekMercer"
+						},
+						scripted_tfidf = new
+						{
+							type = "scripted",
+							script = new
+							{
+								source = "double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;"
+							}
 						}
 					}
 				}
@@ -118,6 +126,11 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 					)
 					.LMJelinek("lmj", lm => lm
 						.Lamdba(2.0)
+					)
+					.Scripted("scripted_tfidf", sc => sc
+						.Script(ssc => ssc
+							.Source("double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
+						)
 					)
 				)
 			);
@@ -179,6 +192,11 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						{
 							Lambda = 2.0
 						}
+					},
+					{ "scripted_tfidf", new ScriptedSimilarity
+						{
+							Script = new InlineScript("double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
+						}
 					}
 				}
 			}
@@ -211,6 +229,11 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			similarities.Should().ContainKey("ib").WhichValue.Should().BeOfType<IBSimilarity>();
 			similarities.Should().ContainKey("lmd").WhichValue.Should().BeOfType<LMDirichletSimilarity>();
 			similarities.Should().ContainKey("lmj").WhichValue.Should().BeOfType<LMJelinekMercerSimilarity>();
+			similarities.Should().ContainKey("scripted_tfidf").WhichValue.Should().BeOfType<ScriptedSimilarity>();
+
+			var scriptedSimilarity = (ScriptedSimilarity) similarities["scripted_tfidf"];
+			scriptedSimilarity.Script.Should().NotBeNull();
+			((InlineScript) scriptedSimilarity.Script).Source.Should().NotBeNullOrEmpty();
 		}
 	}
 }
