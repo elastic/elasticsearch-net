@@ -25,6 +25,9 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				lenient = true,
 				analyze_wildcard = true,
 				minimum_should_match = "30%",
+				fuzzy_prefix_length = 0,
+				fuzzy_max_expansions = 50,
+				fuzzy_transpositions = true,
 				auto_generate_synonyms_phrase_query = false
 			}
 		};
@@ -41,6 +44,9 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 			Lenient = true,
 			AnalyzeWildcard = true,
 			MinimumShouldMatch = "30%",
+			FuzzyPrefixLength = 0,
+			FuzzyMaxExpansions = 50,
+			FuzzyTranspositions = true,
 			AutoGenerateSynonymsPhraseQuery = false
 		};
 
@@ -56,6 +62,9 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				.Lenient()
 				.AnalyzeWildcard()
 				.MinimumShouldMatch("30%")
+				.FuzzyPrefixLength(0)
+				.FuzzyMaxExpansions(50)
+				.FuzzyTranspositions()
 				.AutoGenerateSynonymsPhraseQuery(false)
 			);
 
