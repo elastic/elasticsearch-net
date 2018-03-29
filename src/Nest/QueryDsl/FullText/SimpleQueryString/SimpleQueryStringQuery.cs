@@ -96,6 +96,10 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("fuzzy_transpositions")]
 		bool? FuzzyTranspositions { get; set; }
+
+    /// <summary></summary>
+		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 	}
 
 	/// <inheritdoc cref="ISimpleQueryStringQuery"/>
@@ -126,6 +130,8 @@ namespace Nest
 		public int? FuzzyMaxExpansions { get; set; }
 		/// <inheritdoc />
 		public bool? FuzzyTranspositions { get; set; }
+    /// <inheritdoc />
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.SimpleQueryString = this;
 		internal static bool IsConditionless(ISimpleQueryStringQuery q) => q.Query.IsNullOrEmpty();
@@ -149,6 +155,7 @@ namespace Nest
 		int? ISimpleQueryStringQuery.FuzzyPrefixLength { get; set; }
 		int? ISimpleQueryStringQuery.FuzzyMaxExpansions { get; set; }
 		bool? ISimpleQueryStringQuery.FuzzyTranspositions { get; set; }
+		bool? ISimpleQueryStringQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		/// <inheritdoc cref="ISimpleQueryStringQuery.Fields"/>
 		public SimpleQueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
@@ -193,5 +200,9 @@ namespace Nest
 		/// <inheritdoc cref="ISimpleQueryStringQuery.FuzzyTranspositions"/>
 		public SimpleQueryStringQueryDescriptor<T> FuzzyTranspositions(bool? fuzzyTranspositions = true) =>
 			Assign(a => a.FuzzyTranspositions = fuzzyTranspositions);
+
+    /// <inheritdoc cref="ISimpleQueryStringQuery.AutoGenerateSynonymsPhraseQuery"/>
+		public SimpleQueryStringQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
+			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
 	}
 }

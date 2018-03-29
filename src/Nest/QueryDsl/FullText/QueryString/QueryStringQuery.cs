@@ -176,6 +176,10 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("enable_position_increments")]
 		bool? EnablePositionIncrements { get; set; }
+
+    /// <summary></summary>
+		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 	}
 
 	/// <inheritdoc cref="IQueryStringQuery"/>
@@ -199,6 +203,8 @@ namespace Nest
 		/// <inheritdoc />
 		public bool? Escape { get; set; }
 		/// <inheritdoc />
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+    /// <inheritdoc />
 		public string Query { get; set; }
 		/// <inheritdoc />
 		public string Timezone { get; set; }
@@ -267,6 +273,7 @@ namespace Nest
 		bool? IQueryStringQuery.Escape { get; set; }
 		bool? IQueryStringQuery.EnablePositionIncrements { get; set; }
 		string IQueryStringQuery.Timezone { get; set; }
+		bool? IQueryStringQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		/// <inheritdoc cref="IQueryStringQuery.DefaultField"/>
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(a => a.DefaultField = field);
@@ -350,5 +357,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IQueryStringQuery.Timezone"/>
 		public QueryStringQueryDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
+      
+    /// <inheritdoc cref="IQueryStringQuery.AutoGenerateSynonymsPhraseQuery"/>
+		public QueryStringQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
+			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
 	}
 }

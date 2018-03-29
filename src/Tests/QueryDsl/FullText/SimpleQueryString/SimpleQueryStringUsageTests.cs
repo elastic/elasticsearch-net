@@ -27,7 +27,8 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				minimum_should_match = "30%",
 				fuzzy_prefix_length = 0,
 				fuzzy_max_expansions = 50,
-				fuzzy_transpositions = true
+				fuzzy_transpositions = true,
+				auto_generate_synonyms_phrase_query = false
 			}
 		};
 
@@ -45,7 +46,8 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 			MinimumShouldMatch = "30%",
 			FuzzyPrefixLength = 0,
 			FuzzyMaxExpansions = 50,
-			FuzzyTranspositions = true
+			FuzzyTranspositions = true,
+			AutoGenerateSynonymsPhraseQuery = false
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -63,6 +65,7 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				.FuzzyPrefixLength(0)
 				.FuzzyMaxExpansions(50)
 				.FuzzyTranspositions()
+				.AutoGenerateSynonymsPhraseQuery(false)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISimpleQueryStringQuery>(a => a.SimpleQueryString)

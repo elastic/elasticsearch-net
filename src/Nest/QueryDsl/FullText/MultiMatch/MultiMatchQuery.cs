@@ -141,6 +141,10 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
+
+    /// <summary></summary>
+		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 	}
 
 	/// <inheritdoc cref="IMultiMatchQuery" />
@@ -181,6 +185,8 @@ namespace Nest
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 		/// <inheritdoc />
 		public bool? FuzzyTranspositions { get; set; }
+    /// <inheritdoc />
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.MultiMatch = this;
 		internal static bool IsConditionless(IMultiMatchQuery q) => q.Fields.IsConditionless() || q.Query.IsNullOrEmpty();
@@ -210,6 +216,7 @@ namespace Nest
 		Fields IMultiMatchQuery.Fields { get; set; }
 		ZeroTermsQuery? IMultiMatchQuery.ZeroTermsQuery { get; set; }
 		bool? IMultiMatchQuery.FuzzyTranspositions { get; set; }
+		bool? IMultiMatchQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		/// <inheritdoc cref="IMultiMatchQuery.Fields"/>
 		public MultiMatchQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
@@ -268,5 +275,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IMultiMatchQuery.ZeroTermsQuery"/>
 		public MultiMatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(a => a.ZeroTermsQuery = zeroTermsQuery);
+
+    /// <inheritdoc cref="IMultiMatchQuery.AutoGenerateSynonymsPhraseQuery"/>
+		public MultiMatchQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
+			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
 	}
 }

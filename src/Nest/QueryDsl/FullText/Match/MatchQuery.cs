@@ -95,6 +95,10 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
+
+    /// <summary></summary>
+		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 	}
 
 	/// <inheritdoc cref="IMatchQuery" />
@@ -122,6 +126,8 @@ namespace Nest
 		/// <inheritdoc />
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 		/// <inheritdoc />
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+    /// <inheritdoc />
 		public int? PrefixLength { get; set; }
 		/// <inheritdoc />
 		public int? MaxExpansions { get; set; }
@@ -151,6 +157,7 @@ namespace Nest
 		ZeroTermsQuery? IMatchQuery.ZeroTermsQuery { get; set; }
 		int? IMatchQuery.PrefixLength { get; set; }
 		int? IMatchQuery.MaxExpansions { get; set; }
+		bool? IMatchQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		/// <inheritdoc cref="IMatchQuery.Query" />
 		public MatchQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
@@ -187,5 +194,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IMatchQuery.MaxExpansions" />
 		public MatchQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
+
+    /// <inheritdoc cref="IMatchQuery.AutoGenerateSynonymsPhraseQuery" />
+		public MatchQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
+			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
 	}
 }
