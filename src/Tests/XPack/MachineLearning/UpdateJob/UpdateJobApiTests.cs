@@ -24,9 +24,13 @@ namespace Tests.XPack.MachineLearning.UpdateJob
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var callUniqueValue in values)
-			{
 				PutJob(client, callUniqueValue.Value);
-			}
+		}
+
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values)
+				DeleteJob(client, callUniqueValue.Value);
 		}
 
 		protected override bool ExpectIsValid => true;
