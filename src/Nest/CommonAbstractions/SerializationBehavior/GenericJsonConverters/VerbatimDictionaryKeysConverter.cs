@@ -114,10 +114,8 @@ namespace Nest
 
 		public override bool CanRead => false;
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			throw new NotSupportedException();
-		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -209,5 +207,4 @@ namespace Nest
 	{
 		protected override bool SkipValue(JsonSerializer serializer, KeyValuePair<TKey, TValue> entry) => false;
 	}
-
 }
