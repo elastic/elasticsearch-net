@@ -1347,6 +1347,8 @@ namespace Elasticsearch.Net
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	
 	///<summary>Request options for IndicesPutAlias<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
@@ -1667,7 +1669,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
 		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
@@ -1907,7 +1909,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
 		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.

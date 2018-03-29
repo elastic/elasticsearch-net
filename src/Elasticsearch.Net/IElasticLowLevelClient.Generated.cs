@@ -2826,7 +2826,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="id">Document ID</param>
-		///<param name="body">The request definition using either `script` or partial `doc`</param>
+		///<param name="body">The request definition requires either `script` or partial `doc`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		TResponse Update<TResponse>(string index, string type, string id, PostData body, UpdateRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
 		
@@ -2834,7 +2834,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="id">Document ID</param>
-		///<param name="body">The request definition using either `script` or partial `doc`</param>
+		///<param name="body">The request definition requires either `script` or partial `doc`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> UpdateAsync<TResponse>(string index, string type, string id, PostData body, UpdateRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		

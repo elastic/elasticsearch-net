@@ -88,13 +88,13 @@ namespace Nest
 	{
 		protected IAliasExistsRequest Self => this;
 		/// <summary>/_alias/{name}</summary>
-		///<param name="name">Optional, accepts null</param>
-		public AliasExistsRequest(Names name) : base(r=>r.Optional("name", name)){}
+		///<param name="name">this parameter is required</param>
+		public AliasExistsRequest(Names name) : base(r=>r.Required("name", name)){}
 
 		/// <summary>/{index}/_alias/{name}</summary>
 		///<param name="index">Optional, accepts null</param>
-		///<param name="name">Optional, accepts null</param>
-		public AliasExistsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
+		///<param name="name">this parameter is required</param>
+		public AliasExistsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Required("name", name)){}
 
 		// values part of the url path
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3449,8 +3449,8 @@ namespace Nest
 	{
 		protected IGetTaskRequest Self => this;
 		/// <summary>/_tasks/{task_id}</summary>
-		///<param name="task_id">Optional, accepts null</param>
-		public GetTaskRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
+		///<param name="task_id">this parameter is required</param>
+		public GetTaskRequest(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
 
 		// values part of the url path
 		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
@@ -3943,7 +3943,7 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
 		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
@@ -4261,6 +4261,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4782,8 +4784,8 @@ namespace Nest
 	{
 		protected IReindexRethrottleRequest Self => this;
 		/// <summary>/_reindex/{task_id}/_rethrottle</summary>
-		///<param name="task_id">Optional, accepts null</param>
-		public ReindexRethrottleRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
+		///<param name="task_id">this parameter is required</param>
+		public ReindexRethrottleRequest(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
 
 		// values part of the url path
 		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
@@ -5048,7 +5050,7 @@ namespace Nest
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
 		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
@@ -5137,7 +5139,7 @@ namespace Nest
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
 		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
@@ -5155,8 +5157,8 @@ namespace Nest
 	public partial class SearchShardsRequest<T> : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		protected ISearchShardsRequest Self => this;
-		/// <summary>/_search_shards</summary>
-		public SearchShardsRequest() : base(){}
+		/// <summary>/_search_shards. Will infer the index from the generic type</summary>
+		public SearchShardsRequest() : this(typeof(T)){}
 
 		/// <summary>/{index}/_search_shards</summary>
 		///<param name="index">Optional, accepts null</param>
