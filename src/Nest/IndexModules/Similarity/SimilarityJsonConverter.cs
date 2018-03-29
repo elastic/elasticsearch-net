@@ -38,6 +38,8 @@ namespace Nest
 					return o.ToObject<IBSimilarity>(ElasticContractResolver.Empty);
 				case "LMJELINEKMERCER":
 					return o.ToObject<LMJelinekMercerSimilarity>(ElasticContractResolver.Empty);
+				case "SCRIPTED":
+					return o.ToObject<ScriptedSimilarity>(ElasticContractResolver.Empty);
 				default:
 					var dict = o.ToObject<Dictionary<string, object>>();
 					return new CustomSimilarity(dict);
