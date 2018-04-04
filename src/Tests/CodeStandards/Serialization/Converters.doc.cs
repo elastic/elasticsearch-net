@@ -7,6 +7,7 @@ using Nest;
 using Tests.Framework;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 
 namespace Tests.CodeStandards.Serialization
 {

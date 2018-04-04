@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Nest;
 using Tests.Framework.Integration;
+using Elastic.Xunit;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {
-	public abstract class RequestResponseApiTestBase<TResponse, TInterface, TDescriptor, TInitializer>
-		: SerializationTestBase where TResponse : class, IResponse where TInterface : class where TDescriptor : class, TInterface where TInitializer : class, TInterface
+	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
+		: SerializationTestBase
+		where TCluster : ClientTestClusterBase, new()
+		where TResponse : class, IResponse
+		where TInterface : class
+		where TDescriptor : class, TInterface
+		where TInitializer : class, TInterface
 	{
 		private readonly EndpointUsage _usage;
 
@@ -32,13 +38,13 @@ namespace Tests.Framework
 		protected CallUniqueValues UniqueValues { get; }
 		protected LazyResponses Responses { get; }
 
-		protected override IElasticClient Client => TestClient.DefaultInMemoryClient;
+		public override IElasticClient Client => TestClient.DefaultInMemoryClient;
 
 		protected abstract LazyResponses ClientUsage();
 
-        protected ClusterBase Cluster { get; }
+        public TCluster Cluster { get; }
 
-		protected RequestResponseApiTestBase(ClusterBase cluster, EndpointUsage usage) : base(usage)
+		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage) : base(usage)
 		{
 			this._usage = usage ?? throw new ArgumentNullException(nameof(usage));
 

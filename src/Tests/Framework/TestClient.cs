@@ -12,6 +12,7 @@ using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.MockData;
 using Tests.Framework.Versions;
+using Elastic.Xunit.XunitPlumbing;
 
 #if FEATURE_HTTPWEBREQUEST
 using Elasticsearch.Net.Connections.HttpWebRequestConnection;
@@ -20,6 +21,16 @@ using Elasticsearch.Net.Connections.HttpWebRequestConnection;
 
 namespace Tests.Framework
 {
+	public class IntegrationOnlyAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip { get; }
+	}
+	public class RequiresPlugin : SkipTestAttributeBase
+	{
+		public override bool Skip { get; }
+	}
+
+
 	public static class TestClient
 	{
 		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();

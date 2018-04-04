@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

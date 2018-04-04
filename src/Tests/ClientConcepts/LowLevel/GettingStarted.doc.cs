@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elastic.Xunit.Sdk;
 using Elasticsearch.Net;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;

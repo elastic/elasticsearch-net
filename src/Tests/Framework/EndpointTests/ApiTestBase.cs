@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
+using Elastic.Xunit;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Framework
 {
 	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		: RequestResponseApiTestBase<TResponse, TInterface, TDescriptor, TInitializer>, IClusterFixture<TCluster>
-		where TCluster : ClusterBase, new()
+		: RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>, IClusterFixture<TCluster>
+		where TCluster : ClientTestClusterBase, new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
@@ -21,7 +23,7 @@ namespace Tests.Framework
 		protected abstract string UrlPath { get; }
 		protected abstract HttpMethod HttpMethod { get; }
 
-		protected ApiTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage)
+		protected ApiTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 			this.SetupSerialization();
 		}

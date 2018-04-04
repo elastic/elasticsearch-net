@@ -25,13 +25,13 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		private IIndexSettings IndexSettings { get; }
 
-		public DefaultSeeder(ElasticsearchNode node, IIndexSettings indexSettings)
+		public DefaultSeeder(IElasticClient client, IIndexSettings indexSettings)
 		{
-			this.Client = node.Client;
+			this.Client = client;
 			this.IndexSettings = indexSettings ?? _defaultIndexSettings;
 		}
 
-		public DefaultSeeder(ElasticsearchNode node) : this(node, null) { }
+		public DefaultSeeder(IElasticClient client) : this(client, null) { }
 
 		public void SeedNode()
 		{

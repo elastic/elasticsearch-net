@@ -22,7 +22,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			}
 			: new string[] {} ;
 
-		protected override void SeedNode() => new MachineLearningSeeder(this.Node).SeedNode();
+		protected override void SeedCluster() => new MachineLearningSeeder(this.Client, this.ClusterConfiguration.FileSystem).SeedNode();
 
 		public override int MaxConcurrency => 1;
 

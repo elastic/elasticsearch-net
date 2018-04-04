@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Elastic.Managed.FileSystem;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.ManagedElasticsearch.Nodes;
@@ -18,10 +19,10 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		private IElasticClient Client { get; }
 		public string RoamingFolder { get; }
 
-		public MachineLearningSeeder(ElasticsearchNode node)
+		public MachineLearningSeeder(IElasticClient client, INodeFileSystem fileSystem)
 		{
-			this.RoamingFolder = node.FileSystem.RoamingFolder;
-			this.Client = node.Client;
+			this.RoamingFolder = fileSystem.LocalFolder;
+			this.Client = client;
 		}
 
 		// Sometimes we run against an manually started elasticsearch when

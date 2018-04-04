@@ -11,6 +11,8 @@ using Nest;
 using FluentAssertions;
 using System.Threading;
 using System.Reactive.Linq;
+using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 

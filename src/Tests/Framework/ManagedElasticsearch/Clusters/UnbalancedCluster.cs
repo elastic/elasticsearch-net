@@ -3,10 +3,11 @@ using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
+	//TODO does this need a whole separate cluster?
 	public class UnbalancedCluster : ReadOnlyCluster
 	{
-		protected override void SeedNode() =>
-			new DefaultSeeder(this.Node, new IndexSettings { NumberOfShards = 3, NumberOfReplicas = 2 })
+		protected override void SeedCluster() =>
+			new DefaultSeeder(this.Client, new IndexSettings { NumberOfShards = 3, NumberOfReplicas = 2 })
 				.SeedNode();
 	}
 }

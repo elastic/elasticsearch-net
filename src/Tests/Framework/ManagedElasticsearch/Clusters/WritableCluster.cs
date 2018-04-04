@@ -14,13 +14,16 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		ElasticsearchPlugin.AnalysisPhonetic,
 		ElasticsearchPlugin.IngestAttachment
 	)]
-	public class WritableCluster : ClusterBase
+	public class WritableCluster : ClientTestClusterBase
 	{
-		public override int MaxConcurrency => 4;
-
-		protected override void SeedNode()
+		public WritableCluster() : base(new ClientTestClusterConfiguration
 		{
-			var seeder = new DefaultSeeder(this.Node);
+			MaxConcurrencySetter = 4
+		}) { }
+
+		protected override void SeedCluster()
+		{
+			var seeder = new DefaultSeeder(this.Client);
 			seeder.SeedNode();
 		}
 	}

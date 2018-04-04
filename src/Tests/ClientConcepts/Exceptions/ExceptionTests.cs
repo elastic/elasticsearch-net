@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Nest;
 using System;
+using Elastic.Xunit.Sdk;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
