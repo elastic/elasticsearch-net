@@ -113,7 +113,7 @@ namespace Tests
 		}
 
 #if FEATURE_PROFILING
-		private static IEnumerable<IProfileFactory> CreateProfilingFactory(ClusterBase cluster)
+		private static IEnumerable<IProfileFactory> CreateProfilingFactory(ProfilingCluster cluster)
 		{
 			yield return new PerformanceProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());
 			yield return new TimelineProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());

@@ -27,7 +27,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			SearchRequest<ProjectPercolation>
 		>
 	{
-		protected PercolateQueryUsageTestsBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected PercolateQueryUsageTestsBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected static readonly string PercolatorId = RandomString();
 

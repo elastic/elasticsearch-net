@@ -1,18 +1,20 @@
 using System.IO;
-using Tests.Framework.Configuration;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Nodes;
+using Elastic.Managed.Ephemeral;
+using Elastic.Managed.Ephemeral.Tasks;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 {
-	public class WriteAnalysisFiles : InstallationTaskBase
+	public class WriteAnalysisFiles : ClusterComposeTask
 	{
-		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
+		public override void Run(IEphemeralCluster<EphemeralClusterConfiguration> cluster)
 		{
-			var analysisPath = fileSystem.AnalysisFolder;
+			if (!(cluster.ClusterConfiguration is ClientTestClusterConfiguration config)) return;
+
+			var analysisPath = config.AnalysisFolder;
 			if (!Directory.Exists(analysisPath)) Directory.CreateDirectory(analysisPath);
-			SetupHunspellFiles(fileSystem.ConfigPath);
-			SetupIcuFiles(fileSystem.ConfigPath);
+			SetupHunspellFiles(cluster.FileSystem.ConfigPath);
+			SetupIcuFiles(cluster.FileSystem.ConfigPath);
 			SetupCompoundTokenFilterFopFile(analysisPath);
 			SetupCustomStemming(analysisPath);
 			SetupStopwordsFile(analysisPath);

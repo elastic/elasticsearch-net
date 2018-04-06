@@ -12,7 +12,7 @@ namespace Tests.Document.Multiple.Bulk
         private readonly IElasticClient _client;
         private static readonly string IndexName = "bulk-profile";
 
-        public BulkProfileTests(ClusterBase cluster)
+        public BulkProfileTests(ClientTestClusterBase cluster)
         {
             _client = cluster.Client;
 

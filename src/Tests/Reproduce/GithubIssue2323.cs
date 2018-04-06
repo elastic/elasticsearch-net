@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using Elastic.Xunit;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -9,19 +11,14 @@ using Xunit;
 
 namespace Tests.Reproduce
 {
-	public class GithubIssue2323 : IClusterFixture<ReadOnlyCluster>
+	public class GithubIssue2323 : ClusterTestClassBase<ReadOnlyCluster>
 	{
-		private readonly ReadOnlyCluster _cluster;
-
-		public GithubIssue2323(ReadOnlyCluster cluster)
-		{
-			_cluster = cluster;
-		}
+		public GithubIssue2323(ReadOnlyCluster cluster) : base(cluster) { }
 
 		[I]
 		public void NestedInnerHitsShouldIncludedNestedProperty()
 		{
-			var client = _cluster.Client;
+			var client = this.Client;
 			var response = client.Search<Project>(s => s
 					.Query(q => q
 							.Nested(n => n

@@ -2,6 +2,8 @@
 using FluentAssertions;
 using Nest;
 using System;
+using System.Linq;
+using Elastic.Xunit;
 using Elastic.Xunit.Sdk;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -11,13 +13,13 @@ using Xunit;
 
 namespace Tests.ClientConcepts.Exceptions
 {
-	public class ExceptionTests : IClusterFixture<WritableCluster>
+	public class ExceptionTests : ClusterTestClassBase<WritableCluster>
 	{
 		private readonly int _port;
 
-		public ExceptionTests(WritableCluster cluster)
+		public ExceptionTests(WritableCluster cluster) : base(cluster)
 		{
-			_port = cluster.Node.Port;
+			_port = cluster.Nodes.First().Port ?? 9200;
 		}
 
 		//[I]

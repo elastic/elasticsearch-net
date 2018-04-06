@@ -9,7 +9,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 	{
 		public IntrusiveOperationCluster() : base(new ClientTestClusterConfiguration
 		{
-			MaxConcurrencySetter = 1
+			MaxConcurrency= 1
 		}) { }
 	}
 }

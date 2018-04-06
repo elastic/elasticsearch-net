@@ -1,16 +1,24 @@
 using System.IO;
 using System.Linq;
-using Tests.Framework.Configuration;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Nodes;
+using Elastic.Managed.Configuration;
+using Elastic.Managed.Ephemeral;
+using Elastic.Managed.Ephemeral.Tasks;
+using Elastic.Managed.FileSystem;
 
 namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 {
-	public class EnsureSecurityRealms : InstallationTaskBase
+    public static class SecurityRealms
+    {
+        public const string FileRealm = "file1";
+
+        public const string PkiRealm = "pki1";
+
+    }
+	public class EnsureSecurityRealms : ClusterComposeTask
 	{
-		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
+		public override void Run(IEphemeralCluster<EphemeralClusterConfiguration> cluster)
 		{
-			var configFile = Path.Combine(fileSystem.ElasticsearchHome, "config", "elasticsearch.yml");
+			var configFile = Path.Combine(cluster.FileSystem.ElasticsearchHome, "config", "elasticsearch.yml");
 			var lines = File.ReadAllLines(configFile).ToList();
 			var saveFile = false;
 

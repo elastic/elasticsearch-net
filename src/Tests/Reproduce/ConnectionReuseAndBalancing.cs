@@ -11,6 +11,7 @@ using Nest;
 using FluentAssertions;
 using System.Threading;
 using System.Reactive.Linq;
+using Elastic.Xunit;
 using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework.ManagedElasticsearch.Clusters;
@@ -18,19 +19,13 @@ using static Nest.Infer;
 
 namespace Tests.Reproduce
 {
-	public class ConnectionReuseCluster : ClusterBase { }
+	public class ConnectionReuseCluster : ClientTestClusterBase { }
 
-	public class ConnectionReuseAndBalancing : IClusterFixture<ConnectionReuseCluster>
+	public class ConnectionReuseAndBalancing : ClusterTestClassBase<ConnectionReuseCluster>
 	{
-
 		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
 
-		private readonly ConnectionReuseCluster _cluster;
-
-		public ConnectionReuseAndBalancing(ConnectionReuseCluster cluster)
-		{
-			_cluster = cluster;
-		}
+		public ConnectionReuseAndBalancing(ConnectionReuseCluster cluster) : base(cluster) { }
 
 		public IEnumerable<Project> MockDataGenerator(int numDocuments)
 		{
@@ -41,7 +36,7 @@ namespace Tests.Reproduce
 		[I] public async Task IndexAndSearchABunch()
 		{
 			const int requestsPerIteration = 1000;
-			var client = _cluster.Client;
+			var client = this.Client;
 
 			await IndexMockData(client, requestsPerIteration);
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -8,8 +8,6 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
-using Tests.XPack.Security;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.XPack.Graph.Explore

@@ -1,9 +1,7 @@
 using Nest;
 using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
+using Tests.Framework.Profiling;
 using Tests.Framework.Profiling.Timeline;
 
 namespace Tests.Search.Search
@@ -12,7 +10,7 @@ namespace Tests.Search.Search
     {
         private readonly IElasticClient _client;
 
-        public SearchProfileTests(ClusterBase cluster)
+        public SearchProfileTests(ProfilingCluster cluster)
         {
             _client = cluster.Client;
         }
@@ -29,4 +27,5 @@ namespace Tests.Search.Search
             TestClient.DefaultInMemoryClient.Search<Developer>();
         }
     }
+
 }

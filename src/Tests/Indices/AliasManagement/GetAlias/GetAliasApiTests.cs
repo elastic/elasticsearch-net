@@ -64,7 +64,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		);
 
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => TestClient.VersionUnderTestSatisfiedBy("<5.5.0") ? 200 : 404;
+		protected override int ExpectStatusCode => TestClient.Configuration.ElasticsearchVersion.InRange("<5.5.0") ? 200 : 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"_all/_alias/{DefaultSeeder.ProjectsAliasName}%2Cx%2Cy";
 		protected override void ExpectResponse(IGetAliasResponse response)

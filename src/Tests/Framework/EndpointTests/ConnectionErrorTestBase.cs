@@ -1,6 +1,9 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Elastic.Managed;
+using Elastic.Managed.Configuration;
+using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -12,9 +15,9 @@ namespace Tests.Framework
 {
 	public abstract class ConnectionErrorTestBase<TCluster>
 		: ApiTestBase<TCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
-		where TCluster : ClusterBase, new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration> , new()
 	{
-		protected ConnectionErrorTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected ConnectionErrorTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.RootNodeInfo(f),
@@ -23,7 +26,7 @@ namespace Tests.Framework
 			requestAsync: (client, r) => client.RootNodeInfoAsync(r)
 		);
 
-		protected override IElasticClient Client => this.Cluster.Client;
+		public override IElasticClient Client => this.Cluster.Client;
 		protected override RootNodeInfoRequest Initializer => new RootNodeInfoRequest();
 
 		protected override string UrlPath => "";

@@ -1,4 +1,5 @@
 using System;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -16,7 +17,7 @@ namespace Tests.XPack.MachineLearning
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		protected MachineLearningIntegrationTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected MachineLearningIntegrationTestBase(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected IPutJobResponse PutJob(IElasticClient client, string jobId)
 		{

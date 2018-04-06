@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Elastic.Managed;
+using Elastic.Managed.Configuration;
+using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
-using Elastic.Xunit;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {
 	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>, IClusterFixture<TCluster>
-		where TCluster : ClientTestClusterBase, new()
+		where TCluster : ICluster<EphemeralClusterConfiguration> , new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface

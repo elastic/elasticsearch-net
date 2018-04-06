@@ -1,23 +1,23 @@
 using System.IO;
 using System.Linq;
-using Tests.Framework.Configuration;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Nodes;
+using Elastic.Managed.Ephemeral;
+using Elastic.Managed.Ephemeral.Tasks;
 
 namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 {
-	public class EnsureSecurityRolesFileExists : InstallationTaskBase
+	public class EnsureSecurityRolesFileExists : ClusterComposeTask
 	{
-		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
+		public override void Run(IEphemeralCluster<EphemeralClusterConfiguration> cluster)
 		{
 			//2.x tests only use prebaked roles
-			if (config.ElasticsearchVersion.Major < 5) return;
-			var folder = config.ElasticsearchVersion.Major >= 5 ? "x-pack" : "shield";
-			var rolesConfig = Path.Combine(fileSystem.ElasticsearchHome, "config", folder, "roles.yml");
+			var v = cluster.ClusterConfiguration.Version;
+			if (v.Major < 5) return;
+			var folder = v.Major >= 5 ? "x-pack" : "shield";
+			var rolesConfig = Path.Combine(cluster.FileSystem.ElasticsearchHome, "config", folder, "roles.yml");
 
 			if (!File.Exists(rolesConfig))
 			{
-				Directory.CreateDirectory(Path.Combine(fileSystem.ElasticsearchHome, "config", folder));
+				Directory.CreateDirectory(Path.Combine(cluster.FileSystem.ElasticsearchHome, "config", folder));
 				File.WriteAllText(rolesConfig, string.Empty);
 			}
 

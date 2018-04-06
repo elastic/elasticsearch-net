@@ -1,21 +1,21 @@
 using System.IO;
 using System.Linq;
-using Tests.Framework.Configuration;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Nodes;
+using Elastic.Managed.Ephemeral;
+using Elastic.Managed.Ephemeral.Tasks;
 
 namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 {
-	public class EnsureWatcherActionConfigurationInElasticsearchYaml : InstallationTaskBase
+	public class EnsureWatcherActionConfigurationInElasticsearchYaml : ClusterComposeTask
 	{
-		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
+		public override void Run(IEphemeralCluster<EphemeralClusterConfiguration> cluster)
 		{
-			var rolesConfig = Path.Combine(fileSystem.ElasticsearchHome, "config", "elasticsearch.yml");
+			var rolesConfig = Path.Combine(cluster.FileSystem.ElasticsearchHome, "config", "elasticsearch.yml");
 			var lines = File.ReadAllLines(rolesConfig).ToList();
 			var saveFile = false;
 
-			var prefix = config.ElasticsearchVersion.Major >= 5 ? "xpack.notification" : "watcher.actions";
-			var postfix = config.ElasticsearchVersion.Major >= 5 ? string.Empty : ".service";
+			var v = cluster.ClusterConfiguration.Version;
+			var prefix = v.Major >= 5 ? "xpack.notification" : "watcher.actions";
+			var postfix = v.Major >= 5 ? string.Empty : ".service";
 
 			// set up for Watcher HipChat action
 			if (!lines.Any(line => line.StartsWith($"{prefix}.hipchat{postfix}:")))

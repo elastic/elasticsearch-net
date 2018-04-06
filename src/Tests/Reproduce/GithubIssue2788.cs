@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.Sdk;
 using Elasticsearch.Net;
 using FluentAssertions;
 using FluentAssertions.Common;

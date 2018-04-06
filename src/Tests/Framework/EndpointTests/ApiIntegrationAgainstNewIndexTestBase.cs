@@ -1,4 +1,5 @@
 using System.Linq;
+using Elastic.Managed.Ephemeral;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Integration;
@@ -8,13 +9,13 @@ namespace Tests.Framework
 {
 	public abstract class ApiIntegrationAgainstNewIndexTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiIntegrationTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		where TCluster : ClusterBase, new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration> , new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		protected ApiIntegrationAgainstNewIndexTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected ApiIntegrationAgainstNewIndexTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

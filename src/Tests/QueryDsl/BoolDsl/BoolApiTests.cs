@@ -28,7 +28,7 @@ namespace Tests.QueryDsl.BoolDsl
 		public static QueryContainer O(this QueryContainerDescriptor<A> q, E option) => q.Term(p => p.Option, option);
 	}
 
-	public class BoolCluster : ClusterBase
+	public class BoolCluster : ClientTestClusterBase
 	{
 		[JsonConverter(typeof(StringEnumConverter))]
 		public enum E { Option1, Option2 }
@@ -42,9 +42,9 @@ namespace Tests.QueryDsl.BoolDsl
 			public static IList<A> Documents => Enumerable.Range(0, 20).Select(i => new A { Id = i + 1, Option = Options[i % 2] }).ToList();
 		}
 
-		protected override void SeedNode()
+		protected override void SeedCluster()
 		{
-			var client = this.Node.Client;
+			var client = this.Client;
 			var index = client.CreateIndex(Index<A>(), i => i
 				.Mappings(map => map
 					.Map<A>(m => m

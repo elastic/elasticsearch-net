@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;

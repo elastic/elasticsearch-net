@@ -1,6 +1,5 @@
-﻿using Tests.Framework.Integration;
+﻿using Elastic.Managed.Ephemeral.Plugins;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Tests.Framework.ManagedElasticsearch.Plugins;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {

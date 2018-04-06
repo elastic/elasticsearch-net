@@ -16,7 +16,7 @@ namespace Tests.Framework.Profiling
 
 		protected ProfileFactory(string sdkPath,
 			string outputPath,
-			ClusterBase cluster,
+			ProfilingCluster cluster,
 			Assembly assembly,
 			IColoredWriter output)
 		{
@@ -32,7 +32,7 @@ namespace Tests.Framework.Profiling
 
 		protected Assembly Assembly { get; }
 
-		protected ClusterBase Cluster { get; }
+		protected ProfilingCluster Cluster { get; }
 
 		protected IColoredWriter Output { get; }
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Elastic.Managed;
+using Elastic.Managed.Configuration;
 using Nest;
 using Tests.Framework.Integration;
 using Elastic.Xunit;
@@ -10,7 +12,7 @@ namespace Tests.Framework
 {
 	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: SerializationTestBase
-		where TCluster : ClientTestClusterBase, new()
+		where TCluster : ICluster<ClusterConfiguration> , new()
 		where TResponse : class, IResponse
 		where TInterface : class
 		where TDescriptor : class, TInterface
@@ -48,7 +50,8 @@ namespace Tests.Framework
 		{
 			this._usage = usage ?? throw new ArgumentNullException(nameof(usage));
 
-			this.Cluster = cluster ?? throw new ArgumentNullException(nameof(cluster));
+			if (cluster == null) throw new ArgumentNullException(nameof(cluster));
+			this.Cluster = cluster;
 			this.Responses = usage.CallOnce(this.ClientUsage);
 			this.UniqueValues = usage.CallUniqueValues;
 		}

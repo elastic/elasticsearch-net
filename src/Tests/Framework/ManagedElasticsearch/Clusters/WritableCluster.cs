@@ -1,6 +1,6 @@
-﻿using Tests.Framework.Integration;
+﻿using Elastic.Managed.Ephemeral.Plugins;
+using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Tests.Framework.ManagedElasticsearch.Plugins;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
@@ -18,7 +18,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 	{
 		public WritableCluster() : base(new ClientTestClusterConfiguration
 		{
-			MaxConcurrencySetter = 4
+			MaxConcurrency= 4
 		}) { }
 
 		protected override void SeedCluster()

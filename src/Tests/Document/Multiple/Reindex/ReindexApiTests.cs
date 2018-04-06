@@ -17,21 +17,21 @@ using Xunit;
 
 namespace Tests.Document.Multiple.Reindex
 {
-	public class ReindexCluster : ClusterBase
+	public class ReindexCluster : ClientTestClusterBase
 	{
-		protected override void SeedNode()
+		protected override void SeedCluster()
 		{
-			var seeder = new DefaultSeeder(this.Node);
+			var seeder = new DefaultSeeder(this.Client);
 			seeder.DeleteIndicesAndTemplates();
 			seeder.CreateIndices();
 		}
 	}
 
-	public class ManualReindexCluster : ClusterBase
+	public class ManualReindexCluster : ClientTestClusterBase
 	{
-		protected override void SeedNode()
+		protected override void SeedCluster()
 		{
-			var seeder = new DefaultSeeder(this.Node);
+			var seeder = new DefaultSeeder(this.Client);
 			seeder.DeleteIndicesAndTemplates();
 			seeder.CreateIndices();
 		}

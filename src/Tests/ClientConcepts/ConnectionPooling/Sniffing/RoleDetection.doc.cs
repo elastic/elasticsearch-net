@@ -4,18 +4,15 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
+using Elastic.Managed.Configuration;
 using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.Versions;
-using Xunit;
 using static Tests.Framework.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
-using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
@@ -351,22 +348,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 	}
 
 	// hide
-	public class SniffRoleDetectionCluster : ClusterBase
+	public class SniffRoleDetectionCluster : ClientTestClusterBase
 	{
-		protected override string[] AdditionalServerSettings
+		public SniffRoleDetectionCluster() : base(new ClientTestClusterConfiguration
 		{
-			get
+			ClusterNodeSettings =
 			{
-				var es = this.Node.Version > ElasticsearchVersion.Create("5.0.0-alpha2") ? "" : "es.";
-
-				return new[]
-				{
-					$"{es}node.data=false",
-					$"{es}node.master=true",
-					$"{es}node.attr.rack_id=rack_one"
-				};
+				{"node.data", "false"},
+				{"node.master", "true"},
+				{"node.attr.rack_id", "rack_one"}
 			}
-		}
+		}) { }
 	}
 
 	//hide
@@ -411,7 +403,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 		private RequestPipeline CreatePipeline()
 		{
-			var uri = TestClient.CreateUri(this._cluster.Node.Port);
+			var uri = TestClient.CreateUri(this._cluster.Nodes.First().Port ?? 9200);
 			this._settings = new ConnectionSettings(new SniffingConnectionPool(new[] { uri }));
 			var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new MemoryStreamFactory(),
 				new SearchRequestParameters());

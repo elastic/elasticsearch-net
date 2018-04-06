@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using FluentAssertions;
 using Nest;
-using Tests.Framework.ManagedElasticsearch.Nodes;
 using Tests.Framework.MockData;
 
 namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
@@ -167,7 +165,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 					)
 				);
 			//normalizers are a new feature since 5.2.0
-			if (TestClient.VersionUnderTestSatisfiedBy(">=5.2.0"))
+			if (TestClient.Configuration.ElasticsearchVersion.InRange(">=5.2.0"))
 				analysis.Normalizers(analyzers => analyzers
 					.Custom("my_normalizer", n => n
 						.Filters("lowercase", "asciifolding")

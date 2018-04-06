@@ -5,13 +5,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Elastic.Managed.Configuration;
+using Elastic.Managed.Ephemeral.Plugins;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.MockData;
-using Tests.Framework.Versions;
 using Elastic.Xunit.XunitPlumbing;
 
 #if FEATURE_HTTPWEBREQUEST
@@ -27,9 +28,26 @@ namespace Tests.Framework
 	}
 	public class RequiresPlugin : SkipTestAttributeBase
 	{
+		public RequiresPlugin(params ElasticsearchPlugin[] plugins)
+		{
+		}
+
 		public override bool Skip { get; }
 	}
+	public class NeedsTypedKeysAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip { get; }
+	}
+	public class ProjectReferenceOnlyAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip { get; }
+	}
+	public class SkipOnTeamCityAttribute : SkipTestAttributeBase
+	{
+		public SkipOnTeamCityAttribute(string message) { }
 
+		public override bool Skip { get; }
+	}
 
 	public static class TestClient
 	{
@@ -123,25 +141,9 @@ namespace Tests.Framework
 				foreach (var d in r.DeprecationWarnings) SeenDeprecations.Add(d);
 			});
 
-		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.Create("5.0.0-alpha1")
+		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.From("5.0.0-alpha1")
 			? ".percolator"
 			: "query";
-
-		private static bool VersionSatisfiedBy(string range, ElasticsearchVersion version)
-		{
-			var versionRange = new SemVer.Range(range);
-			var satisfied = versionRange.IsSatisfied(version.Version);
-			if (version.State != ElasticsearchVersion.ReleaseState.Released || satisfied)
-				return satisfied;
-
-			//Semver can only match snapshot version with ranges on the same major and minor
-			//anything else fails but we want to know e.g 2.4.5-SNAPSHOT satisfied by <5.0.0;
-			var wholeVersion = $"{version.Major}.{version.Minor}.{version.Patch}";
-			return versionRange.IsSatisfied(wholeVersion);
-		}
-
-		public static bool VersionUnderTestSatisfiedBy(string range) =>
-			VersionSatisfiedBy(range, TestClient.Configuration.ElasticsearchVersion);
 
 		public static ConnectionSettings CreateSettings(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
