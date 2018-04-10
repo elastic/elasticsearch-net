@@ -28,6 +28,8 @@ namespace Nest
 		[EnumMember(Value = "haasephonetik")]
 		HaasePhonetik,
 		[EnumMember(Value = "beidermorse")]
-		Beidermorse
+		Beidermorse,
+		[EnumMember(Value = "daitch_mokotoff")]
+		DaitchMokotoff
 	}
 }
