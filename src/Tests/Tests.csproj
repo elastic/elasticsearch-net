@@ -42,10 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bogus" Version="21.0.2" />
-    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180406T124908" />
+    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180410T144442" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="DiffPlex" Version="1.4.1" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
     <PackageReference Include="System.Buffers" Version="4.3.0" />
@@ -55,9 +53,15 @@
     <PackageReference Include="System.Diagnostics.FileVersionInfo" Version="4.3.0" />
     <PackageReference Include="SemanticVersioning" Version="0.8.0" />
     <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties" />
   </ItemGroup>
   <Import Project="..\outputpath.props" />
 </Project>

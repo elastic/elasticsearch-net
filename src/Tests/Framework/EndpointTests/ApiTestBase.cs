@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.Framework
 {
 	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		: RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>, IClusterFixture<TCluster>
+		: RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		where TCluster : ICluster<EphemeralClusterConfiguration> , new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface

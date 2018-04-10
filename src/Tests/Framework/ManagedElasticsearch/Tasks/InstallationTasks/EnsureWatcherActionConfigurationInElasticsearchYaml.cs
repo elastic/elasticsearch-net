@@ -9,7 +9,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 	{
 		public override void Run(IEphemeralCluster<EphemeralClusterConfiguration> cluster)
 		{
-			var rolesConfig = Path.Combine(cluster.FileSystem.ElasticsearchHome, "config", "elasticsearch.yml");
+			var rolesConfig = Path.Combine(cluster.FileSystem.ConfigPath, "elasticsearch.yml");
 			var lines = File.ReadAllLines(rolesConfig).ToList();
 			var saveFile = false;
 

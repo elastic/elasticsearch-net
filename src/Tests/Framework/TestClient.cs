@@ -146,18 +146,53 @@ namespace Tests.Framework
 			: "query";
 
 		public static ConnectionSettings CreateSettings(
+			Func<ConnectionSettings, ConnectionSettings> modifySettings,
+			IConnection connection,
+			IConnectionPool connectionPool,
+			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
+			IPropertyMappingProvider propertyMappingProvider = null
+			)
+		{
+			var s = new ConnectionSettings(connectionPool, connection, (builtin, values) =>
+			{
+				if (sourceSerializerFactory != null) return sourceSerializerFactory(builtin, values);
+
+				return !Configuration.Random.SourceSerializer
+					? null
+					: new TestSourceSerializerBase(builtin, values);
+			}, propertyMappingProvider);
+
+			var defaultSettings = DefaultSettings(s);
+
+			modifySettings = modifySettings ?? ((m) =>
+			{
+				//only enable debug mode when running in DEBUG mode (always) or optionally wheter we are executing unit tests
+				//during RELEASE builds tests
+#if !DEBUG
+			if (TestClient.Configuration.RunUnitTests)
+#endif
+				m.EnableDebugMode();
+				return m;
+			});
+
+			var settings = modifySettings(defaultSettings);
+			return settings;
+
+		}
+
+		public static ConnectionSettings CreateSettings(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			int port = 9200,
 			bool forceInMemory = false,
 			bool forceSsl = false,
-			Func<Uri, IConnectionPool> createPool = null,
+			Func<ICollection<Uri>, IConnectionPool> createPool = null,
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null
 		)
 		{
-			createPool = createPool ?? (u => new SingleNodeConnectionPool(u));
+			createPool = createPool ?? (uris => new SingleNodeConnectionPool(uris.First()));
 
-			var connectionPool = createPool(CreateUri(port, forceSsl));
+			var connectionPool = createPool(new [] {CreateUri(port, forceSsl)});
 			var connection = CreateConnection(forceInMemory: forceInMemory);
 			var s = new ConnectionSettings(connectionPool, connection, (builtin, values) =>
 			{
@@ -209,7 +244,7 @@ namespace Tests.Framework
 			);
 
 		public static IElasticClient GetClient(
-			Func<Uri, IConnectionPool> createPool,
+			Func<ICollection<Uri>, IConnectionPool> createPool,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, createPool: createPool));
@@ -217,7 +252,7 @@ namespace Tests.Framework
 		public static IConnection CreateConnection(ConnectionSettings settings = null, bool forceInMemory = false) =>
 			Configuration.RunIntegrationTests && !forceInMemory ? CreateLiveConnection() : new InMemoryConnection();
 
-		private static IConnection CreateLiveConnection()
+		public static IConnection CreateLiveConnection()
 		{
 #if FEATURE_HTTPWEBREQUEST
 			if (Configuration.Random.OldConnection) return new HttpWebRequestConnection();

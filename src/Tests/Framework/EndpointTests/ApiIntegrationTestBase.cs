@@ -7,6 +7,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
 using Elastic.Xunit;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
@@ -25,7 +26,7 @@ namespace Tests.Framework
 
 		protected ApiIntegrationTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		public override IElasticClient Client => this.Cluster.Client;
+		public override IElasticClient Client => this.Cluster.GetOrAddClient();
 		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
 
 		[I] public async Task ReturnsExpectedStatusCode() =>

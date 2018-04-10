@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.Managed;
 using Elastic.Managed.Configuration;
+using Elastic.Managed.Ephemeral;
 using Nest;
 using Tests.Framework.Integration;
 using Elastic.Xunit;
+using Elastic.Xunit.Sdk;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using Xunit;
 
 namespace Tests.Framework
 {
 	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		: SerializationTestBase
-		where TCluster : ICluster<ClusterConfiguration> , new()
+		: SerializationTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
+		where TCluster : ICluster<EphemeralClusterConfiguration> , new()
 		where TResponse : class, IResponse
 		where TInterface : class
 		where TDescriptor : class, TInterface
@@ -63,11 +66,9 @@ namespace Tests.Framework
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
 		)
 		{
-			//this client is outside the lambda so that the callstack is one where we can get the method name
-			//of the current running test and send that as a header, great for e.g fiddler to relate requests with the test that sent it
-			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
+				var client = this.Client;
 				if (TestClient.Configuration.RunIntegrationTests)
 				{
 					this.IntegrationSetup(client, UniqueValues);

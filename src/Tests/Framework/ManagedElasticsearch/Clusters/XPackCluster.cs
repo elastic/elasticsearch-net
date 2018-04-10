@@ -49,17 +49,17 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 
 
 	[RequiresPlugin(ElasticsearchPlugin.XPack)]
-	public class XPackCluster : XunitClusterBase<XPackClusterConfiguration>
+	public class XPackCluster : XunitClusterBase<XPackClusterConfiguration>, INestTestCluster
 	{
 		public XPackCluster() : this(new XPackClusterConfiguration()) { }
 		public XPackCluster(XPackClusterConfiguration configuration) : base(configuration) { }
-
-		protected override ConnectionSettings CreateConnectionSettings(ConnectionSettings s) => this.ConnectionSettings(Authenticate(s));
 
 		protected virtual ConnectionSettings Authenticate(ConnectionSettings s) => s
 			.BasicAuthentication("es_admin", "es_admin");
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
+
+		public IElasticClient Client => this.Started ? this.GetOrAddClient(ConnectionSettings) : null;
 	}
 }

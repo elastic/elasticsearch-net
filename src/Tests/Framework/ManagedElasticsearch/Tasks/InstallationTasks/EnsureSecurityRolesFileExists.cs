@@ -13,11 +13,11 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 			var v = cluster.ClusterConfiguration.Version;
 			if (v.Major < 5) return;
 			var folder = v.Major >= 5 ? "x-pack" : "shield";
-			var rolesConfig = Path.Combine(cluster.FileSystem.ElasticsearchHome, "config", folder, "roles.yml");
+			var rolesConfig = Path.Combine(cluster.FileSystem.ConfigPath, folder, "roles.yml");
 
 			if (!File.Exists(rolesConfig))
 			{
-				Directory.CreateDirectory(Path.Combine(cluster.FileSystem.ElasticsearchHome, "config", folder));
+				Directory.CreateDirectory(Path.Combine(cluster.FileSystem.ConfigPath, folder));
 				File.WriteAllText(rolesConfig, string.Empty);
 			}
 

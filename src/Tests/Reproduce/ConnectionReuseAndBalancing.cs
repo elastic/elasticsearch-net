@@ -5,15 +5,13 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Tests.Framework;
 using Tests.Framework.MockData;
-using Xunit;
 using Elasticsearch.Net;
 using Nest;
 using FluentAssertions;
 using System.Threading;
 using System.Reactive.Linq;
-using Elastic.Xunit;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
