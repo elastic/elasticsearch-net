@@ -88,8 +88,9 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override ReindexRethrottleDescriptor NewDescriptor() => new ReindexRethrottleDescriptor(TaskId);
+
 		protected override Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> Fluent => d => d
-			.TaskId(TaskId)
 			.RequestsPerSecond(-1);
 
 		protected override ReindexRethrottleRequest Initializer => new ReindexRethrottleRequest(TaskId)

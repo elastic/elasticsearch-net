@@ -32,6 +32,8 @@ namespace Tests.Cluster.TaskManagement.GetTask
 
 		protected override GetTaskRequest Initializer => new GetTaskRequest(_taskId);
 
+		protected override GetTaskDescriptor NewDescriptor() => new GetTaskDescriptor(_taskId);
+
 		protected override void ExpectResponse(IGetTaskResponse response)
 		{
 			response.ShouldBeValid();
