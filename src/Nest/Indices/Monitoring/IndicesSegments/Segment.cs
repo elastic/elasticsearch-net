@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -15,15 +17,29 @@ namespace Nest
 		public long DeletedDocuments { get; internal set; }
 
 		[JsonProperty("size")]
+		[Obsolete("Unused. Will be removed in the next major release")]
 		public string Size { get; internal set; }
 
 		[JsonProperty("size_in_bytes")]
 		public double SizeInBytes { get; internal set; }
 
+		[JsonProperty("memory_in_bytes")]
+		public double MemoryInBytes { get; internal set; }
+
 		[JsonProperty("committed")]
 		public bool Committed { get; internal set; }
 
-		[JsonProperty("Search")]
+		[JsonProperty("search")]
 		public bool Search { get; internal set; }
+
+		[JsonProperty("version")]
+		public string Version { get; internal set; }
+
+		[JsonProperty("compound")]
+		public bool Compound { get; internal set; }
+
+		[JsonProperty("attributes")]
+		public IReadOnlyDictionary<string, string> Attributes { get; internal set; } =
+			EmptyReadOnly<string, string>.Dictionary;
 	}
 }
