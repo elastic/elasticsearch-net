@@ -186,8 +186,7 @@ namespace Tests.Search.Request
 								inner_hits = new
 								{
 									name = "princes",
-									docvalue_fields = new []{"name"},
-									ignore_unmapped = false
+									docvalue_fields = new []{"name"}
 								}
 							}
 						},
@@ -213,9 +212,7 @@ namespace Tests.Search.Request
 					.InnerHits(ih => ih
 						.DocValueFields(f=>f.Field(p=>p.Name))
 						.Name("princes")
-						.IgnoreUnmapped(false)
 					)
-
 				) || q.Nested(n => n
 					.Path(p => p.Foes)
 					.Query(nq => nq.MatchAll())
@@ -232,8 +229,7 @@ namespace Tests.Search.Request
 				InnerHits = new InnerHits
 				{
 					Name = "princes",
-					DocValueFields = Field<Prince>(p=>p.Name),
-					IgnoreUnmapped = false
+					DocValueFields = Field<Prince>(p=>p.Name)
 				}
 			} || new NestedQuery
 			{
