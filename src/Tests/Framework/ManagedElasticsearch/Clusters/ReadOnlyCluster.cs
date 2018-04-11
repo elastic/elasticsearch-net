@@ -3,9 +3,13 @@ using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
-	[RequiresPlugin(ElasticsearchPlugin.MapperMurmer3)]
 	public class ReadOnlyCluster : ClientTestClusterBase
 	{
+		public ReadOnlyCluster()
+		{
+			this.Plugins.Add(ElasticsearchPlugin.MapperMurmur3);
+		}
+
 		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
 	}
 }

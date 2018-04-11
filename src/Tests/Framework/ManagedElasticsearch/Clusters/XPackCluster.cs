@@ -14,6 +14,8 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 
 		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features, 1)
 		{
+			this.ShowElasticsearchOutputAfterStarted = false;
+
 			this.Add("xpack.ssl.key", this.NodePrivateKey);
 			this.Add("xpack.ssl.certificate", this.NodeCertificate);
 			this.Add("xpack.ssl.certificate_authorities", this.CaCertificate);
@@ -48,11 +50,14 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 	}
 
 
-	[RequiresPlugin(ElasticsearchPlugin.XPack)]
 	public class XPackCluster : XunitClusterBase<XPackClusterConfiguration>, INestTestCluster
 	{
 		public XPackCluster() : this(new XPackClusterConfiguration()) { }
-		public XPackCluster(XPackClusterConfiguration configuration) : base(configuration) { }
+
+		public XPackCluster(XPackClusterConfiguration configuration) : base(configuration)
+		{
+			this.Plugins.Add(ElasticsearchPlugin.XPack);
+		}
 
 		protected virtual ConnectionSettings Authenticate(ConnectionSettings s) => s
 			.BasicAuthentication("es_admin", "es_admin");

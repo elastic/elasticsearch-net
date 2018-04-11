@@ -22,10 +22,11 @@ namespace Tests.ClientConcepts.Certificates
 		}
 	}
 
-	[IntegrationOnly, RequiresPlugin(ElasticsearchPlugin.XPack)]
+	[IntegrationOnly]
 	public abstract class SslAndKpiXPackCluster : XPackCluster
 	{
 		public SslAndKpiXPackCluster() : this(new SslAndKpiClusterConfiguration()) { }
+
 		public SslAndKpiXPackCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
 	}
 

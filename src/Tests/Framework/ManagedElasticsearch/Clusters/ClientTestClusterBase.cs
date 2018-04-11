@@ -26,6 +26,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			: base(TestClient.Configuration.ElasticsearchVersion, features, numberOfNodes)
 		{
 			this.TestConfiguration = TestClient.Configuration;
+			this.ShowElasticsearchOutputAfterStarted = false;
 
 			this.Add(this.AttributeKey("testingcluster"), "true");
 			this.Add(this.AttributeKey("gateway"), "true");

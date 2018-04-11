@@ -26,14 +26,6 @@ namespace Tests.Framework
 	{
 		public override bool Skip { get; }
 	}
-	public class RequiresPlugin : SkipTestAttributeBase
-	{
-		public RequiresPlugin(params ElasticsearchPlugin[] plugins)
-		{
-		}
-
-		public override bool Skip { get; }
-	}
 	public class NeedsTypedKeysAttribute : SkipTestAttributeBase
 	{
 		public override bool Skip { get; }
