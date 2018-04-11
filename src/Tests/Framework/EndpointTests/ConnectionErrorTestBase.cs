@@ -1,21 +1,17 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Elastic.Managed;
-using Elastic.Managed.Configuration;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {
 	public abstract class ConnectionErrorTestBase<TCluster>
-		: ApiTestBase<TCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
+		: RequestResponseApiTestBase<TCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster , new()
 	{
 		protected ConnectionErrorTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -29,9 +25,6 @@ namespace Tests.Framework
 
 		public override IElasticClient Client => this.Cluster.Client;
 		protected override RootNodeInfoRequest Initializer => new RootNodeInfoRequest();
-
-		protected override string UrlPath => "";
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		[I] public async Task IsValidIsFalse() => await this.AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(false));
 

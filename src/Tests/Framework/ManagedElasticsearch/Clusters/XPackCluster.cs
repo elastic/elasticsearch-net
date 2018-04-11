@@ -60,6 +60,6 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 
-		public IElasticClient Client => this.Started ? this.GetOrAddClient(ConnectionSettings) : null;
+		public IElasticClient Client => this.GetOrAddClient(ConnectionSettings);
 	}
 }

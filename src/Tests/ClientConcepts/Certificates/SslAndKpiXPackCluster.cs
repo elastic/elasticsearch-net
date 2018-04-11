@@ -13,7 +13,7 @@ namespace Tests.ClientConcepts.Certificates
 {
 	public class SslAndKpiClusterConfiguration : XPackClusterConfiguration
 	{
-		public SslAndKpiClusterConfiguration() : base()
+		public SslAndKpiClusterConfiguration()
 		{
 			// Skipping bootstrap validation because they call out to elasticsearch and would force
 			// The ServerCertificateValidationCallback to return true. Since its cached this would mess with later assertations.
@@ -21,7 +21,6 @@ namespace Tests.ClientConcepts.Certificates
 			this.AdditionalInstallationTasks.Add(new EnableSslAndKpiOnCluster());
 		}
 	}
-
 
 	[IntegrationOnly, RequiresPlugin(ElasticsearchPlugin.XPack)]
 	public abstract class SslAndKpiXPackCluster : XPackCluster
@@ -35,9 +34,7 @@ namespace Tests.ClientConcepts.Certificates
 
 		public override void Run(IEphemeralCluster<EphemeralClusterConfiguration> cluster)
 		{
-			//TODO in a bind here where I shouldn't be
-			var config = cluster.ClusterConfiguration as XPackClusterConfiguration;
-			if (config == null) return;
+			if (!(cluster.ClusterConfiguration is XPackClusterConfiguration config)) return;
 
 			var fileSystem = cluster.FileSystem;
 			//due to a bug in certgen this file needs to live in two places

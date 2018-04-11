@@ -13,7 +13,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration) { }
 		public ClientTestClusterBase() : base(new ClientTestClusterConfiguration()) { }
 
-		public IElasticClient Client => this.Started ? this.GetOrAddClient(ConnectionSettings) : null;
+		public IElasticClient Client => this.GetOrAddClient(ConnectionSettings);
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s;
 	}
