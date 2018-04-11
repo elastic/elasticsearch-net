@@ -13,7 +13,7 @@ namespace Nest
 		public IndexStats Total { get; set; }
 
 		[JsonProperty("shards")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndicesStats>))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndicesStats[]>))]
 		public IReadOnlyDictionary<string, ShardStats[]> Shards { get; set; } = EmptyReadOnly<string, ShardStats[]>.Dictionary;
 	}
 }
