@@ -48,6 +48,7 @@ s => s
         .InnerHits(ih => ih
             .DocValueFields(f=>f.Field(p=>p.Name))
             .Name("princes")
+            .IgnoreUnmapped(false)
         )
 
     ) || q.Nested(n => n
@@ -73,6 +74,7 @@ new SearchRequest<King>(Index, typeof(King))
         {
             Name = "princes",
             DocValueFields = Field<Prince>(p=>p.Name),
+            IgnoreUnmapped = false
         }
     } || new NestedQuery
     {
@@ -100,7 +102,8 @@ new SearchRequest<King>(Index, typeof(King))
               "name": "princes",
               "docvalue_fields": [
                 "name"
-              ]
+              ],
+              "ignore_unmapped": false
             }
           }
         },
