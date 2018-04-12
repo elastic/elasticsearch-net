@@ -4,6 +4,6 @@
 
 	public partial class DeprecationInfoRequest { }
 
-	[DescriptorFor("XpackDeprecationInfo")]
+	[DescriptorFor("XpackMigrationDeprecations")]
 	public partial class DeprecationInfoDescriptor : IDeprecationInfoRequest { }
 }

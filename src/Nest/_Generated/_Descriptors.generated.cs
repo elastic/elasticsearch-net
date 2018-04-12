@@ -1767,7 +1767,8 @@ namespace Nest
 	public partial class AliasExistsDescriptor  : RequestDescriptorBase<AliasExistsDescriptor,AliasExistsRequestParameters, IAliasExistsRequest>, IAliasExistsRequest
 	{ 
 		/// <summary>/_alias/{name}</summary>
-		public AliasExistsDescriptor() : base(){}
+		///<param name="name"> this parameter is required</param>
+		public AliasExistsDescriptor(Names name) : base(r=>r.Required("name", name)){}
 
 		// values part of the url path
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1778,8 +1779,6 @@ namespace Nest
 		public AliasExistsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 		///<summary>A shortcut into calling Index(Indices.All)</summary>
 		public AliasExistsDescriptor AllIndices() => this.Index(Indices.All);
-		///<summary>A comma-separated list of alias names to return</summary>
-		public AliasExistsDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 		// Request parameters
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2179,6 +2178,8 @@ namespace Nest
 		public OpenIndexDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		public OpenIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	
 	}
 	
@@ -2452,6 +2453,32 @@ namespace Nest
 		public ShrinkIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public ShrinkIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+	
+	}
+	
+	///<summary>descriptor for IndicesSplit <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
+	public partial class SplitIndexDescriptor  : RequestDescriptorBase<SplitIndexDescriptor,SplitIndexRequestParameters, ISplitIndexRequest>, ISplitIndexRequest
+	{ 
+		/// <summary>/{index}/_split/{target}</summary>
+		///<param name="index"> this parameter is required</param>
+		///<param name="target"> this parameter is required</param>
+		public SplitIndexDescriptor(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
+
+		// values part of the url path
+		IndexName ISplitIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		IndexName ISplitIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
+		///<summary>The name of the source index to split</summary>
+		public SplitIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public SplitIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
+		public SplitIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
+		///<summary>Specify timeout for connection to master</summary>
+		public SplitIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
+		public SplitIndexDescriptor WaitForActiveShards(string waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	
 	}
 	
@@ -3011,12 +3038,11 @@ namespace Nest
 	public partial class ReindexRethrottleDescriptor  : RequestDescriptorBase<ReindexRethrottleDescriptor,ReindexRethrottleRequestParameters, IReindexRethrottleRequest>, IReindexRethrottleRequest
 	{ 
 		/// <summary>/_reindex/{task_id}/_rethrottle</summary>
-		public ReindexRethrottleDescriptor() : base(){}
+		///<param name="task_id"> this parameter is required</param>
+		public ReindexRethrottleDescriptor(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
 
 		// values part of the url path
 		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
-		///<summary>The task id to rethrottle</summary>
-		public ReindexRethrottleDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 		// Request parameters
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
@@ -3127,7 +3153,7 @@ namespace Nest
 		public SearchDescriptor<T> BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
 		///<summary>The number of concurrent shard requests this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</summary>
 		public SearchDescriptor<T> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public SearchDescriptor<T> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	
 	}
@@ -3135,8 +3161,8 @@ namespace Nest
 	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T>  : RequestDescriptorBase<SearchShardsDescriptor<T>,SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
 	{ 
-		/// <summary>/_search_shards</summary>
-		public SearchShardsDescriptor() : base(){}
+		/// <summary>/_search_shards. Will infer the index from the generic type</summary>
+		public SearchShardsDescriptor() : base(r => r.Optional("index", (Indices)typeof(T))){}
 
 		// values part of the url path
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3425,12 +3451,11 @@ namespace Nest
 	public partial class GetTaskDescriptor  : RequestDescriptorBase<GetTaskDescriptor,GetTaskRequestParameters, IGetTaskRequest>, IGetTaskRequest
 	{ 
 		/// <summary>/_tasks/{task_id}</summary>
-		public GetTaskDescriptor() : base(){}
+		///<param name="task_id"> this parameter is required</param>
+		public GetTaskDescriptor(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
 
 		// values part of the url path
 		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
-		///<summary>Return the task with specified id (node_id:task_number)</summary>
-		public GetTaskDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 		// Request parameters
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
@@ -3730,23 +3755,6 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for XpackDeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
-	public partial class DeprecationInfoDescriptor  : RequestDescriptorBase<DeprecationInfoDescriptor,DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
-	{ 
-		/// <summary>/_xpack/migration/deprecations</summary>
-		public DeprecationInfoDescriptor() : base(){}
-
-		// values part of the url path
-		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		///<summary>Index pattern</summary>
-		public DeprecationInfoDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
-		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
-		public DeprecationInfoDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
-
-		// Request parameters
-	
-	}
-	
 	///<summary>descriptor for XpackInfo <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
 	public partial class XPackInfoDescriptor  : RequestDescriptorBase<XPackInfoDescriptor,XPackInfoRequestParameters, IXPackInfoRequest>, IXPackInfoRequest
 	{ 
@@ -3789,6 +3797,15 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for XpackLicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public partial class GetTrialLicenseStatusDescriptor  : RequestDescriptorBase<GetTrialLicenseStatusDescriptor,GetTrialLicenseStatusRequestParameters, IGetTrialLicenseStatusRequest>, IGetTrialLicenseStatusRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+	
+	}
+	
 	///<summary>descriptor for XpackLicensePost <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
 	public partial class PostLicenseDescriptor  : RequestDescriptorBase<PostLicenseDescriptor,PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
 	{ 
@@ -3797,6 +3814,15 @@ namespace Nest
 		// Request parameters
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public PostLicenseDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
+	
+	}
+	
+	///<summary>descriptor for XpackLicensePostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public partial class StartTrialLicenseDescriptor  : RequestDescriptorBase<StartTrialLicenseDescriptor,StartTrialLicenseRequestParameters, IStartTrialLicenseRequest>, IStartTrialLicenseRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
 	
 	}
 	
@@ -3811,6 +3837,8 @@ namespace Nest
 		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public CloseJobDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
 		///<summary>True if the job should be forcefully closed</summary>
 		public CloseJobDescriptor Force(bool? force = true) => Qs("force", force);
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
@@ -3891,6 +3919,20 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for XpackMlForecast <pre></pre></summary>
+	public partial class ForecastJobDescriptor  : RequestDescriptorBase<ForecastJobDescriptor,ForecastJobRequestParameters, IForecastJobRequest>, IForecastJobRequest
+	{ 
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast</summary>
+		///<param name="job_id"> this parameter is required</param>
+		public ForecastJobDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+
+		// values part of the url path
+		Id IForecastJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	
+	}
+	
 	///<summary>descriptor for XpackMlGetBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
 	public partial class GetBucketsDescriptor  : RequestDescriptorBase<GetBucketsDescriptor,GetBucketsRequestParameters, IGetBucketsRequest>, IGetBucketsRequest
 	{ 
@@ -3934,6 +3976,8 @@ namespace Nest
 		public GetDatafeedsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public GetDatafeedsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
 	
 	}
 	
@@ -3949,6 +3993,8 @@ namespace Nest
 		public GetDatafeedStatsDescriptor DatafeedId(Id datafeedId) => Assign(a=>a.RouteValues.Optional("datafeed_id", datafeedId));
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public GetDatafeedStatsDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
 	
 	}
 	
@@ -3978,6 +4024,8 @@ namespace Nest
 		public GetJobsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public GetJobsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
 	
 	}
 	
@@ -3993,6 +4041,8 @@ namespace Nest
 		public GetJobStatsDescriptor JobId(Id jobId) => Assign(a=>a.RouteValues.Optional("job_id", jobId));
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public GetJobStatsDescriptor AllowNoJobs(bool? allowNoJobs = true) => Qs("allow_no_jobs", allowNoJobs);
 	
 	}
 	
@@ -4008,6 +4058,20 @@ namespace Nest
 		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
 		///<summary>The ID of the snapshot to fetch</summary>
 		public GetModelSnapshotsDescriptor SnapshotId(Id snapshotId) => Assign(a=>a.RouteValues.Optional("snapshot_id", snapshotId));
+
+		// Request parameters
+	
+	}
+	
+	///<summary>descriptor for XpackMlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
+	public partial class GetOverallBucketsDescriptor  : RequestDescriptorBase<GetOverallBucketsDescriptor,GetOverallBucketsRequestParameters, IGetOverallBucketsRequest>, IGetOverallBucketsRequest
+	{ 
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
+		///<param name="job_id"> this parameter is required</param>
+		public GetOverallBucketsDescriptor(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+
+		// values part of the url path
+		Id IGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 	
@@ -4143,6 +4207,8 @@ namespace Nest
 		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public StopDatafeedDescriptor AllowNoDatafeeds(bool? allowNoDatafeeds = true) => Qs("allow_no_datafeeds", allowNoDatafeeds);
 	
 	}
 	
@@ -4206,6 +4272,68 @@ namespace Nest
 		// values part of the url path
 
 		// Request parameters
+	
+	}
+	
+	///<summary>descriptor for XpackMigrationDeprecations <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	public partial class DeprecationInfoDescriptor  : RequestDescriptorBase<DeprecationInfoDescriptor,DeprecationInfoRequestParameters, IDeprecationInfoRequest>, IDeprecationInfoRequest
+	{ 
+		/// <summary>/_xpack/migration/deprecations</summary>
+		public DeprecationInfoDescriptor() : base(){}
+
+		// values part of the url path
+		IndexName IDeprecationInfoRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>Index pattern</summary>
+		public DeprecationInfoDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public DeprecationInfoDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+
+		// Request parameters
+	
+	}
+	
+	///<summary>descriptor for XpackMigrationGetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	public partial class MigrationAssistanceDescriptor  : RequestDescriptorBase<MigrationAssistanceDescriptor,MigrationAssistanceRequestParameters, IMigrationAssistanceRequest>, IMigrationAssistanceRequest
+	{ 
+		/// <summary>/_xpack/migration/assistance</summary>
+		public MigrationAssistanceDescriptor() : base(){}
+
+		// values part of the url path
+		Indices IMigrationAssistanceRequest.Index => Self.RouteValues.Get<Indices>("index");
+		///<summary>A comma-separated list of index names; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		public MigrationAssistanceDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public MigrationAssistanceDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public MigrationAssistanceDescriptor AllIndices() => this.Index(Indices.All);
+
+		// Request parameters
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public MigrationAssistanceDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public MigrationAssistanceDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public MigrationAssistanceDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	
+	}
+	
+	///<summary>descriptor for XpackMigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	public partial class MigrationUpgradeDescriptor  : RequestDescriptorBase<MigrationUpgradeDescriptor,MigrationUpgradeRequestParameters, IMigrationUpgradeRequest>, IMigrationUpgradeRequest
+	{ 
+		/// <summary>/_xpack/migration/upgrade/{index}</summary>
+		///<param name="index"> this parameter is required</param>
+		public MigrationUpgradeDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+
+		// values part of the url path
+		IndexName IMigrationUpgradeRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		///<summary>The name of the index</summary>
+		public MigrationUpgradeDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public MigrationUpgradeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		// Request parameters
+		///<summary>Should the request block until the upgrade operation is completed</summary>
+		public MigrationUpgradeDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	
 	}
 	

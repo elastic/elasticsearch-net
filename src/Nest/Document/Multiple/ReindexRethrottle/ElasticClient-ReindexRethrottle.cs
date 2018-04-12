@@ -10,7 +10,7 @@ namespace Nest
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
-		IReindexRethrottleResponse Rethrottle(Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector);
+		IReindexRethrottleResponse Rethrottle(TaskId id, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null);
 
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
@@ -20,7 +20,7 @@ namespace Nest
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
-		Task<IReindexRethrottleResponse> RethrottleAsync(Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IReindexRethrottleResponse> RethrottleAsync(TaskId id, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
@@ -33,8 +33,8 @@ namespace Nest
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
-		public IReindexRethrottleResponse Rethrottle(Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector) =>
-			this.Rethrottle(selector.InvokeOrDefault(new ReindexRethrottleDescriptor()));
+		public IReindexRethrottleResponse Rethrottle(TaskId id, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null) =>
+			this.Rethrottle(selector.InvokeOrDefault(new ReindexRethrottleDescriptor(id)));
 
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
@@ -48,8 +48,8 @@ namespace Nest
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task
 		/// </summary>
-		public Task<IReindexRethrottleResponse> RethrottleAsync(Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.RethrottleAsync(selector.InvokeOrDefault(new ReindexRethrottleDescriptor()), cancellationToken);
+		public Task<IReindexRethrottleResponse> RethrottleAsync(TaskId id, Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.RethrottleAsync(selector.InvokeOrDefault(new ReindexRethrottleDescriptor(id)), cancellationToken);
 
 		/// <summary>
 		/// Rethrottle an existing reindex or update by query task

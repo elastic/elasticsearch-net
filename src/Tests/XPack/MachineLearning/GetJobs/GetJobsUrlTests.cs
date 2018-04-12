@@ -10,7 +10,7 @@ namespace Tests.XPack.MachineLearning.GetJobs
 	{
 		[U] public async Task Urls()
 		{
-			await GET("/_xpack/ml/anomaly_detectors/")
+			await GET("/_xpack/ml/anomaly_detectors")
 				.Fluent(c => c.GetJobs())
 				.Request(c => c.GetJobs(new GetJobsRequest()))
 				.FluentAsync(c => c.GetJobsAsync())

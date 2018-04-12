@@ -12,19 +12,18 @@ namespace Tests.Indices.AliasManagement.AliasExists
 			Name name = "hardcoded";
 			IndexName index = "index";
 			await HEAD($"/_alias/hardcoded")
-				.Fluent(c=>c.AliasExists(b=>b.Name(name)))
+				.Fluent(c=>c.AliasExists(name))
 				.Request(c=>c.AliasExists(new AliasExistsRequest(name)))
-				.FluentAsync(c=>c.AliasExistsAsync(b=>b.Name(name)))
+				.FluentAsync(c=>c.AliasExistsAsync(name))
 				.RequestAsync(c=>c.AliasExistsAsync(new AliasExistsRequest(name)))
 				;
 
 			await HEAD($"/index/_alias/hardcoded")
-				.Fluent(c=>c.AliasExists(b=>b.Index(index).Name(name)))
+				.Fluent(c=>c.AliasExists(name, b=>b.Index(index)))
 				.Request(c=>c.AliasExists(new AliasExistsRequest(index, name)))
-				.FluentAsync(c=>c.AliasExistsAsync(b=>b.Index(index).Name(name)))
+				.FluentAsync(c=>c.AliasExistsAsync(name, b=>b.Index(index)))
 				.RequestAsync(c=>c.AliasExistsAsync(new AliasExistsRequest(index, name)))
 				;
-
 		}
 	}
 }

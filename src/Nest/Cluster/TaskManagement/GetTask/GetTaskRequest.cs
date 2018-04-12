@@ -11,5 +11,7 @@ namespace Nest
 	public partial class GetTaskRequest { }
 
 	[DescriptorFor("TasksGet")]
-	public partial class GetTaskDescriptor { }
+	public partial class GetTaskDescriptor
+	{
+	}
 }
