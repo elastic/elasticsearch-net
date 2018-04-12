@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -29,6 +30,7 @@ namespace Nest
 		public long FixedBitMemoryInBytes { get; set; }
 		[JsonProperty("max_unsafe_auto_id_timestamp")]
 		public long MaxUnsafeAutoIdTimeStamp { get; set; }
-		// TODO! [string, long] [JsonProperty("file_sizes")]
+		[JsonProperty("file_sizes")]
+		public IReadOnlyDictionary<string, ShardFileSizeInfo> FileSizes { get; set; } = EmptyReadOnly<string, ShardFileSizeInfo>.Dictionary;
 	}
 }
