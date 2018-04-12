@@ -75,6 +75,8 @@ namespace Elasticsearch.Net
 
 		public IEnumerable<string> DeprecationWarnings { get; internal set; } = Enumerable.Empty<string>();
 
+		public string ResponseMimeType { get; internal set; }
+
 		internal bool AllowAllStatusCodes { get; }
 
 		/// <summary>

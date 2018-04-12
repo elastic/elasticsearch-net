@@ -22,6 +22,7 @@ namespace Elasticsearch.Net
 		public Exception Exception { get; set; }
 		public int? StatusCode { get; set; }
 		public Stream Stream { get; set; }
+		public string ResponseMimeType { get; set; } = RequestData.MimeType;
 
 		public IEnumerable<string> DeprecationWarnings { get; set; }
 
@@ -61,6 +62,7 @@ namespace Elasticsearch.Net
 			response.HttpMethod = this._requestData.Method;
 			response.OriginalException = exception;
 			response.DeprecationWarnings = this.DeprecationWarnings ?? Enumerable.Empty<string>();
+			response.ResponseMimeType = this.ResponseMimeType;
 			return response;
 		}
 
