@@ -7,16 +7,19 @@ using Tests.Framework.MockData;
 
 namespace Tests.Search.Request
 {
-	public class IndexBoostUsageTests : SearchUsageTestBase
+	public class IndicesBoostUsageTests : SearchUsageTestBase
 	{
-		public IndexBoostUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public IndicesBoostUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new
 		{
-			indices_boost = new
+			indices_boost = new object[] {
+				new { project = 1.4 },
+				new { devs = 1.3 }
+			},
+			query = new
 			{
-				project = 1.4,
-				devs = 1.3
+				match_all = new {}
 			}
 		};
 
@@ -24,6 +27,9 @@ namespace Tests.Search.Request
 			.IndicesBoost(b => b
 				.Add("project", 1.4)
 				.Add("devs", 1.3)
+			)
+			.Query(q => q
+				.MatchAll()
 			);
 
 		protected override SearchRequest<Project> Initializer =>
@@ -33,7 +39,8 @@ namespace Tests.Search.Request
 				{
 					{ "project", 1.4 },
 					{ "devs", 1.3 }
-				}
+				},
+				Query = new MatchAllQuery()
 			};
 	}
 }

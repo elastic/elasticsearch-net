@@ -27,9 +27,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var callUniqueValue in values)
-			{
 				CloseJob(client, callUniqueValue.Value);
-			}
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -99,7 +97,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 			response.EmptyBucketCount.Should().Be(0);
 			response.SparseBucketCount.Should().Be(0);
 			response.BucketCount.Should().Be(0);
-			response.LastDataTime.Should().BeAfter(new DateTime(2017, 9, 1));
+			response.LastDataTime.Should().BeBefore(DateTimeOffset.UtcNow);
 			response.InputRecordCount.Should().Be(1);
 		}
 	}

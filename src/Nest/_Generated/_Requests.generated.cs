@@ -88,13 +88,13 @@ namespace Nest
 	{
 		protected IAliasExistsRequest Self => this;
 		/// <summary>/_alias/{name}</summary>
-		///<param name="name">Optional, accepts null</param>
-		public AliasExistsRequest(Names name) : base(r=>r.Optional("name", name)){}
+		///<param name="name">this parameter is required</param>
+		public AliasExistsRequest(Names name) : base(r=>r.Required("name", name)){}
 
 		/// <summary>/{index}/_alias/{name}</summary>
 		///<param name="index">Optional, accepts null</param>
-		///<param name="name">Optional, accepts null</param>
-		public AliasExistsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
+		///<param name="name">this parameter is required</param>
+		public AliasExistsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Required("name", name)){}
 
 		// values part of the url path
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1122,6 +1122,8 @@ namespace Nest
 		Id ICloseJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 		///<summary>True if the job should be forcefully closed</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
@@ -2296,7 +2298,7 @@ namespace Nest
 		IndexName Index { get; }
 	}
 
-	///<summary>Request parameters for XpackDeprecationInfo <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
+	///<summary>Request parameters for XpackMigrationDeprecations <pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
 	public partial class DeprecationInfoRequest : PlainRequestBase<DeprecationInfoRequestParameters>, IDeprecationInfoRequest
 	{
 		protected IDeprecationInfoRequest Self => this;
@@ -2706,6 +2708,26 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IForecastJobRequest : IRequest<ForecastJobRequestParameters>
+	{
+		Id JobId { get; }
+	}
+
+	///<summary>Request parameters for XpackMlForecast <pre></pre></summary>
+	public partial class ForecastJobRequest : PlainRequestBase<ForecastJobRequestParameters>, IForecastJobRequest
+	{
+		protected IForecastJobRequest Self => this;
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/_forecast</summary>
+		///<param name="job_id">this parameter is required</param>
+		public ForecastJobRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+
+		// values part of the url path
+		Id IForecastJobRequest.JobId => Self.RouteValues.Get<Id>("job_id");
+
+		// Request parameters
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters>
 	{
 		Indices Index { get; }
@@ -2838,6 +2860,8 @@ namespace Nest
 		Id IGetDatafeedsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2861,6 +2885,8 @@ namespace Nest
 		Id IGetDatafeedStatsRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3060,13 +3086,15 @@ namespace Nest
 		///<param name="job_id">Optional, accepts null</param>
 		public GetJobsRequest(Id job_id) : base(r=>r.Optional("job_id", job_id)){}
 
-		/// <summary>/_xpack/ml/anomaly_detectors/</summary>
+		/// <summary>/_xpack/ml/anomaly_detectors</summary>
 		public GetJobsRequest() : base(){}
 
 		// values part of the url path
 		Id IGetJobsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3090,6 +3118,8 @@ namespace Nest
 		Id IGetJobStatsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
+		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3176,6 +3206,26 @@ namespace Nest
 		// values part of the url path
 		Id IGetModelSnapshotsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 		Id IGetModelSnapshotsRequest.SnapshotId => Self.RouteValues.Get<Id>("snapshot_id");
+
+		// Request parameters
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetOverallBucketsRequest : IRequest<GetOverallBucketsRequestParameters>
+	{
+		Id JobId { get; }
+	}
+
+	///<summary>Request parameters for XpackMlGetOverallBuckets <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
+	public partial class GetOverallBucketsRequest : PlainRequestBase<GetOverallBucketsRequestParameters>, IGetOverallBucketsRequest
+	{
+		protected IGetOverallBucketsRequest Self => this;
+		/// <summary>/_xpack/ml/anomaly_detectors/{job_id}/results/overall_buckets</summary>
+		///<param name="job_id">this parameter is required</param>
+		public GetOverallBucketsRequest(Id job_id) : base(r=>r.Required("job_id", job_id)){}
+
+		// values part of the url path
+		Id IGetOverallBucketsRequest.JobId => Self.RouteValues.Get<Id>("job_id");
 
 		// Request parameters
 	}
@@ -3449,8 +3499,8 @@ namespace Nest
 	{
 		protected IGetTaskRequest Self => this;
 		/// <summary>/_tasks/{task_id}</summary>
-		///<param name="task_id">Optional, accepts null</param>
-		public GetTaskRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
+		///<param name="task_id">this parameter is required</param>
+		public GetTaskRequest(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
 
 		// values part of the url path
 		TaskId IGetTaskRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
@@ -3458,6 +3508,20 @@ namespace Nest
 		// Request parameters
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetTrialLicenseStatusRequest : IRequest<GetTrialLicenseStatusRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for XpackLicenseGetTrialStatus <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public partial class GetTrialLicenseStatusRequest : PlainRequestBase<GetTrialLicenseStatusRequestParameters>, IGetTrialLicenseStatusRequest
+	{
+		protected IGetTrialLicenseStatusRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3854,6 +3918,60 @@ namespace Nest
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
 		public GroupBy? GroupBy { get => Q<GroupBy?>("group_by"); set => Q("group_by", value); }
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
+	{
+		Indices Index { get; }
+	}
+
+	///<summary>Request parameters for XpackMigrationGetAssistance <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
+	public partial class MigrationAssistanceRequest : PlainRequestBase<MigrationAssistanceRequestParameters>, IMigrationAssistanceRequest
+	{
+		protected IMigrationAssistanceRequest Self => this;
+		/// <summary>/_xpack/migration/assistance</summary>
+		public MigrationAssistanceRequest() : base(){}
+
+		/// <summary>/_xpack/migration/assistance/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public MigrationAssistanceRequest(Indices index) : base(r=>r.Optional("index", index)){}
+
+		// values part of the url path
+		Indices IMigrationAssistanceRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+		///<summary>
+		/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have
+		/// been specified)
+		///</summary>
+		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IMigrationUpgradeRequest : IRequest<MigrationUpgradeRequestParameters>
+	{
+		IndexName Index { get; }
+	}
+
+	///<summary>Request parameters for XpackMigrationUpgrade <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
+	public partial class MigrationUpgradeRequest : PlainRequestBase<MigrationUpgradeRequestParameters>, IMigrationUpgradeRequest
+	{
+		protected IMigrationUpgradeRequest Self => this;
+		/// <summary>/_xpack/migration/upgrade/{index}</summary>
+		///<param name="index">this parameter is required</param>
+		public MigrationUpgradeRequest(IndexName index) : base(r=>r.Required("index", index)){}
+
+		// values part of the url path
+		IndexName IMigrationUpgradeRequest.Index => Self.RouteValues.Get<IndexName>("index");
+
+		// Request parameters
+		///<summary>Should the request block until the upgrade operation is completed</summary>
+		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4261,6 +4379,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4782,8 +4902,8 @@ namespace Nest
 	{
 		protected IReindexRethrottleRequest Self => this;
 		/// <summary>/_reindex/{task_id}/_rethrottle</summary>
-		///<param name="task_id">Optional, accepts null</param>
-		public ReindexRethrottleRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
+		///<param name="task_id">this parameter is required</param>
+		public ReindexRethrottleRequest(TaskId task_id) : base(r=>r.Required("task_id", task_id)){}
 
 		// values part of the url path
 		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
@@ -5048,7 +5168,7 @@ namespace Nest
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
 		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
@@ -5137,7 +5257,7 @@ namespace Nest
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
 		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
@@ -5155,8 +5275,8 @@ namespace Nest
 	public partial class SearchShardsRequest<T> : PlainRequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		protected ISearchShardsRequest Self => this;
-		/// <summary>/_search_shards</summary>
-		public SearchShardsRequest() : base(){}
+		/// <summary>/_search_shards. Will infer the index from the generic type</summary>
+		public SearchShardsRequest() : this(typeof(T)){}
 
 		/// <summary>/{index}/_search_shards</summary>
 		///<param name="index">Optional, accepts null</param>
@@ -5654,6 +5774,35 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISplitIndexRequest : IRequest<SplitIndexRequestParameters>
+	{
+		IndexName Index { get; }
+		IndexName Target { get; }
+	}
+
+	///<summary>Request parameters for IndicesSplit <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
+	public partial class SplitIndexRequest : PlainRequestBase<SplitIndexRequestParameters>, ISplitIndexRequest
+	{
+		protected ISplitIndexRequest Self => this;
+		/// <summary>/{index}/_split/{target}</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="target">this parameter is required</param>
+		public SplitIndexRequest(IndexName index, IndexName target) : base(r=>r.Required("index", index).Required("target", target)){}
+
+		// values part of the url path
+		IndexName ISplitIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		IndexName ISplitIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
+
+		// Request parameters
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
+		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartDatafeedRequest : IRequest<StartDatafeedRequestParameters>
 	{
 		Id DatafeedId { get; }
@@ -5669,6 +5818,20 @@ namespace Nest
 
 		// values part of the url path
 		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStartTrialLicenseRequest : IRequest<StartTrialLicenseRequestParameters>
+	{
+	}
+
+	///<summary>Request parameters for XpackLicensePostStartTrial <pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
+	public partial class StartTrialLicenseRequest : PlainRequestBase<StartTrialLicenseRequestParameters>, IStartTrialLicenseRequest
+	{
+		protected IStartTrialLicenseRequest Self => this;
+		// values part of the url path
 
 		// Request parameters
 	}
@@ -5705,6 +5868,8 @@ namespace Nest
 		Id IStopDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
 
 		// Request parameters
+		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
+		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
