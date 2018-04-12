@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -7,7 +8,12 @@ namespace Nest
 	{
 		[JsonProperty("primaries")]
 		public IndexStats Primaries { get; set; }
+
 		[JsonProperty("total")]
 		public IndexStats Total { get; set; }
+
+		[JsonProperty("shards")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndicesStats[]>))]
+		public IReadOnlyDictionary<string, ShardStats[]> Shards { get; set; } = EmptyReadOnly<string, ShardStats[]>.Dictionary;
 	}
 }
