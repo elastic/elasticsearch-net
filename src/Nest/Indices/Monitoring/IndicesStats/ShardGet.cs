@@ -6,24 +6,24 @@ namespace Nest
 	public class ShardGet
 	{
 		[JsonProperty("total")]
-		public long Total { get; set; }
+		public long Total { get; internal set; }
 
 		[JsonProperty("time_in_millis")]
-		public long TimeInMilliseconds { get; set; }
+		public long TimeInMilliseconds { get; internal set; }
 
 		[JsonProperty("exists_total")]
-		public long ExistsTotal { get; set; }
+		public long ExistsTotal { get; internal set; }
 
 		[JsonProperty("exists_time_in_millis")]
-		public long ExistsTimeInMilliseconds { get; set; }
+		public long ExistsTimeInMilliseconds { get; internal set; }
 
 		[JsonProperty("missing_total")]
-		public long MissingTotal { get; set; }
+		public long MissingTotal { get; internal set; }
 
 		[JsonProperty("missing_time_in_millis")]
-		public long MissingTimeInMilliseconds { get; set; }
+		public long MissingTimeInMilliseconds { get; internal set; }
 
 		[JsonProperty("current")]
-		public long Current { get; set; }
+		public long Current { get; internal set; }
 	}
 }

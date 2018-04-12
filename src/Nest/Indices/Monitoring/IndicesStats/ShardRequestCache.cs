@@ -6,12 +6,12 @@ namespace Nest
 	public class ShardRequestCache
 	{
 		[JsonProperty("memory_size_in_bytes")]
-		public long MemorySizeInBytes { get; set; }
+		public long MemorySizeInBytes { get; internal set; }
 		[JsonProperty("evictions")]
-		public long Evictions { get; set; }
+		public long Evictions { get; internal set; }
 		[JsonProperty("hit_count")]
-		public long HitCount { get; set; }
+		public long HitCount { get; internal set; }
 		[JsonProperty("miss_count")]
-		public long MissCount { get; set; }
+		public long MissCount { get; internal set; }
 	}
 }

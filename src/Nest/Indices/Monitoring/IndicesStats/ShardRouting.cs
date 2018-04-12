@@ -6,15 +6,15 @@ namespace Nest
 	public class ShardRouting
 	{
 		[JsonProperty("state")]
-		public ShardRoutingState State { get; set; }
+		public ShardRoutingState State { get; internal set; }
 
 		[JsonProperty("primary")]
-		public bool Primary { get; set; }
+		public bool Primary { get; internal set; }
 
 		[JsonProperty("node")]
-		public string Node { get; set; }
+		public string Node { get; internal set; }
 
 		[JsonProperty("relocating_node")]
-		public string RelocatingNode { get; set; }
+		public string RelocatingNode { get; internal set; }
 	}
 }

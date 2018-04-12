@@ -6,12 +6,12 @@ namespace Nest
 	public class ShardTransactionLog
 	{
 		[JsonProperty("operations")]
-		public long Operations { get; set; }
+		public long Operations { get; internal set; }
 		[JsonProperty("size_in_bytes")]
-		public long SizeInBytes { get; set; }
+		public long SizeInBytes { get; internal set; }
 		[JsonProperty("uncommitted_operations")]
-		public long UncommittedOperations { get; set; }
+		public long UncommittedOperations { get; internal set; }
 		[JsonProperty("uncommitted_size_in_bytes")]
-		public long UncommittedSizeInBytes { get; set; }
+		public long UncommittedSizeInBytes { get; internal set; }
 	}
 }

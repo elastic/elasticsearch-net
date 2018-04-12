@@ -6,30 +6,30 @@ namespace Nest
 	public class ShardSearch
 	{
 		[JsonProperty("open_contexts")]
-		public long OpenContexts { get; set; }
+		public long OpenContexts { get; internal set; }
 		[JsonProperty("query_total")]
-		public long QueryTotal { get; set; }
+		public long QueryTotal { get; internal set; }
 		[JsonProperty("query_time_in_millis")]
-		public long QueryTimeInMilliseconds { get; set; }
+		public long QueryTimeInMilliseconds { get; internal set; }
 		[JsonProperty("query_current")]
-		public long QueryCurrent { get; set; }
+		public long QueryCurrent { get; internal set; }
 		[JsonProperty("fetch_total")]
-		public long FetchTotal { get; set; }
+		public long FetchTotal { get; internal set; }
 		[JsonProperty("fetch_time_in_millis")]
-		public long FetchTimeInMilliseconds { get; set; }
+		public long FetchTimeInMilliseconds { get; internal set; }
 		[JsonProperty("fetch_current")]
-		public long FetchCurrent { get; set; }
+		public long FetchCurrent { get; internal set; }
 		[JsonProperty("scroll_total")]
-		public long ScrollTotal { get; set; }
+		public long ScrollTotal { get; internal set; }
 		[JsonProperty("scroll_time_in_millis")]
-		public long ScrollTimeInMilliseconds { get; set; }
+		public long ScrollTimeInMilliseconds { get; internal set; }
 		[JsonProperty("scroll_current")]
-		public long ScrollCurrent { get; set; }
+		public long ScrollCurrent { get; internal set; }
 		[JsonProperty("suggest_total")]
-		public long SuggestTotal { get; set; }
+		public long SuggestTotal { get; internal set; }
 		[JsonProperty("suggest_time_in_millis")]
-		public long SuggestTimeInMilliseconds { get; set; }
+		public long SuggestTimeInMilliseconds { get; internal set; }
 		[JsonProperty("suggest_current")]
-		public long SuggestCurrent { get; set; }
+		public long SuggestCurrent { get; internal set; }
 	}
 }

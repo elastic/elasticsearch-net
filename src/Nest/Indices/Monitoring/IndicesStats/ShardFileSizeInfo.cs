@@ -6,8 +6,8 @@ namespace Nest
 	public class ShardFileSizeInfo
 	{
 		[JsonProperty("size_in_bytes")]
-		public long SizeInBytes { get; set; }
+		public long SizeInBytes { get; internal set; }
 		[JsonProperty("description")]
-		public string Description { get; set; }
+		public string Description { get; internal set; }
 	}
 }

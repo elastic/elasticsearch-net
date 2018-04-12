@@ -7,15 +7,15 @@ namespace Nest
 	public class ShardCommit
 	{
 		[JsonProperty("id")]
-		public string Id { get; set; }
+		public string Id { get; internal set; }
 
 		[JsonProperty("generation")]
-		public int Generation { get; set; }
+		public int Generation { get; internal set; }
 
-		[JsonProperty("headers")]
-		public IDictionary<string, string> UserData { get; set; }
+		[JsonProperty("user_data")]
+		public IDictionary<string, string> UserData { get; internal set; }
 
 		[JsonProperty("num_docs")]
-		public long NumberOfDocuments { get; set; }
+		public long NumberOfDocuments { get; internal set; }
 	}
 }
