@@ -9,11 +9,11 @@ namespace Nest
 	{
 		[EnumMember(Value = "metaphone")]
 		Metaphone,
-		[EnumMember(Value = "doublemetaphone")]
+		[EnumMember(Value = "double_metaphone")]
 		DoubleMetaphone,
 		[EnumMember(Value = "soundex")]
 		Soundex,
-		[EnumMember(Value = "refinedsoundex")]
+		[EnumMember(Value = "refined_soundex")]
 		RefinedSoundex,
 		[EnumMember(Value = "caverphone1")]
 		Caverphone1,
@@ -27,7 +27,9 @@ namespace Nest
 		KoelnerPhonetik,
 		[EnumMember(Value = "haasephonetik")]
 		HaasePhonetik,
-		[EnumMember(Value = "beidermorse")]
-		Beidermorse
+		[EnumMember(Value = "beider_morse")]
+		Beidermorse,
+		[EnumMember(Value = "daitch_mokotoff")]
+		DaitchMokotoff
 	}
 }

@@ -12,7 +12,8 @@ namespace Tests.Framework.ManagedElasticsearch.Plugins
 		[Moniker("ingest-geoip")] IngestGeoIp,
 		[Moniker("ingest-attachment")] IngestAttachment,
 		[Moniker("analysis-kuromoji")] AnalysisKuromoji,
-		[Moniker("analysis-icu")] AnalysisIcu
+		[Moniker("analysis-icu")] AnalysisIcu,
+		[Moniker("analysis-phonetic")] AnalysisPhonetic
 	}
 }
 
