@@ -75,7 +75,7 @@ namespace Elasticsearch.Net
 				statusCode = (int) responseMessage.StatusCode;
 
 				responseMessage.Headers.TryGetValues("Warning", out warnings);
-				mimeType = responseMessage.Content.Headers.ContentType.ToString();
+				mimeType = responseMessage.Content.Headers.ContentType?.MediaType;
 
 				if (responseMessage.Content != null)
 					responseStream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
