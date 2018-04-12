@@ -10,12 +10,12 @@ namespace Nest
 		public string Id { get; set; }
 
 		[JsonProperty("generation")]
-		public int Generation { get; internal set; }
+		public int Generation { get; set; }
 
 		[JsonProperty("headers")]
 		public IDictionary<string, string> UserData { get; set; }
 
 		[JsonProperty("num_docs")]
-		public long TotalDocuments { get; internal set; }
+		public long NumberOfDocuments { get; set; }
 	}
 }

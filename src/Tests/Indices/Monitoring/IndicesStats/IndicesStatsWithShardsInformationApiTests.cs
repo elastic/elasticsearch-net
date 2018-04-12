@@ -23,9 +23,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			if (this.Client.IndexExists(typeof(NoopClass)).Exists)
-			{
 				return;
-			}
 
 			var createShardedIndex = this.Client.CreateIndex(typeof(NoopClass), c => c
 				.Settings(settings => settings
