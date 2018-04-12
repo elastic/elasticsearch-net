@@ -21,11 +21,10 @@ namespace Tests.Framework.Integration
 		public LazyResponses CallOnce(Func<LazyResponses> clientUsage, int? k = null)
 		{
 			var key = k ?? clientUsage.GetHashCode();
-			LazyResponses r;
-			if (_usages.TryGetValue(key, out r)) return r;
+			if (_usages.TryGetValue(key, out var lazyResponses)) return lazyResponses;
 			lock (_lock)
 			{
-				if (_usages.TryGetValue(key, out r)) return r;
+				if (_usages.TryGetValue(key, out lazyResponses)) return lazyResponses;
 				var response = clientUsage();
 				_usages.TryAdd(key, response);
 				return response;

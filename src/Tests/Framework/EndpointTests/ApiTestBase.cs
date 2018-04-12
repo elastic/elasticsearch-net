@@ -41,8 +41,6 @@ namespace Tests.Framework
 			this.AssertSerializesAndRoundTrips(this.Fluent?.Invoke(NewDescriptor()));
 
 		private void AssertUrl(Uri u) => u.PathEquals(this.UrlPath, this.UniqueValues.CurrentView.GetStringValue());
-
-
 	}
 
 }
