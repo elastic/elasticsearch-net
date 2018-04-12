@@ -6,9 +6,9 @@ namespace Nest
 	public class ShardStatsStore
 	{
 		[JsonProperty("size_in_bytes")]
-		public long SizeInBytes { get; set; }
+		public long SizeInBytes { get; internal set; }
 
 		[JsonProperty("throttle_time_in_millis")]
-		public long ThrottleTimeInMilliseconds { get; set; }
+		public long ThrottleTimeInMilliseconds { get; internal set; }
 	}
 }

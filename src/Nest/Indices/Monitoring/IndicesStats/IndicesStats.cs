@@ -7,13 +7,13 @@ namespace Nest
 	public class IndicesStats
 	{
 		[JsonProperty(PropertyName = "primaries")]
-		public IndexStats Primaries { get; set; }
+		public IndexStats Primaries { get; internal set; }
 
 		[JsonProperty(PropertyName = "total")]
-		public IndexStats Total { get; set; }
+		public IndexStats Total { get; internal set; }
 
 		[JsonProperty("shards")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IndicesStats[]>))]
-		public IReadOnlyDictionary<string, ShardStats[]> Shards { get; set; } = EmptyReadOnly<string, ShardStats[]>.Dictionary;
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, ShardStats[]>))]
+		public IReadOnlyDictionary<string, ShardStats[]> Shards { get; internal set; } = EmptyReadOnly<string, ShardStats[]>.Dictionary;
 	}
 }
