@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;

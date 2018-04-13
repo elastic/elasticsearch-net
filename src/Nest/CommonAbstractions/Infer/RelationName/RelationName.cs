@@ -59,7 +59,7 @@ namespace Nest
 			return false;
 		}
 
-		public bool EqualsString(string other) => !other.IsNullOrEmpty() && other == this.Name;
+		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == this.Name;
 
 		public override string ToString()
 		{
