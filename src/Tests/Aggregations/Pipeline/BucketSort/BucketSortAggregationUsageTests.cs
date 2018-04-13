@@ -9,6 +9,7 @@ using Tests.Framework.MockData;
 
 namespace Tests.Aggregations.Pipeline.BucketSort
 {
+	[SkipVersion("<6.1.0", "Only valid in Elasticsearch 6.1.0+")]
 	public class BucketSortAggregationUsageTests : AggregationUsageTestBase
 	{
 		public BucketSortAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
