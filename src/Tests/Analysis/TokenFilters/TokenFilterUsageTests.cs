@@ -281,6 +281,14 @@ namespace Tests.Analysis.TokenFilters
 						split_on_numerics = true,
 						stem_english_possessive = true,
 						protected_words = new[] {"x", "y", "z"}
+					},
+					phonetic = new
+					{
+						type = "phonetic",
+						encoder = "beider_morse",
+						rule_type = "exact",
+						name_type = "sephardic",
+						languageset = new [] { "cyrillic", "english", "hebrew" }
 					}
 				}
 			}
@@ -456,6 +464,12 @@ namespace Tests.Analysis.TokenFilters
 						.Direction(IcuTransformDirection.Forward)
 						.Id("Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC")
 					)
+					.Phonetic("phonetic", t => t
+						.Encoder(PhoneticEncoder.Beidermorse)
+						.RuleType(PhoneticRuleType.Exact)
+						.NameType(PhoneticNameType.Sephardic)
+						.LanguageSet(PhoneticLanguage.Cyrillic, PhoneticLanguage.English, PhoneticLanguage.Hebrew)
+					)
 				)
 			);
 
@@ -621,6 +635,13 @@ namespace Tests.Analysis.TokenFilters
 						{
 							Direction = IcuTransformDirection.Forward,
 							Id = "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC"
+						}},
+						{ "phonetic", new PhoneticTokenFilter
+						{
+							Encoder = PhoneticEncoder.Beidermorse,
+							RuleType = PhoneticRuleType.Exact,
+							NameType = PhoneticNameType.Sephardic,
+							LanguageSet = new [] { PhoneticLanguage.Cyrillic, PhoneticLanguage.English, PhoneticLanguage.Hebrew }
 						}},
 					}
 				}
