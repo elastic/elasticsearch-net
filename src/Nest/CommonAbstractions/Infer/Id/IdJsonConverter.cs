@@ -30,7 +30,8 @@ namespace Nest
 				var documentId = settings.Inferrer.Id(id.Document.GetType(), id.Document);
 				writer.WriteValue(documentId);
 			}
-			else writer.WriteValue(id.Value);
+			else if (id.LongValue != null) writer.WriteValue(id.LongValue);
+			else writer.WriteValue(id.StringValue);
 		}
 	}
 }

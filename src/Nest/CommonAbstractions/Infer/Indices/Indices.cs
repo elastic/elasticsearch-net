@@ -50,18 +50,16 @@ namespace Nest
 
 		public static Indices Parse(string indicesString)
 		{
-			if (indicesString.IsNullOrEmpty()) throw new Exception("can not parse an empty string to Indices");
-			var indices = indicesString.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-			if (indices.Contains("_all")) return Indices.All;
-			return Index(indices.Select(i => (IndexName)i));
+			if (indicesString.IsNullOrEmptyCommaSeparatedList(out var indices)) return null;
+			return indices.Contains("_all") ? All : Index(indices.Select(i => (IndexName)i));
 		}
 
 		public static implicit operator Indices(string indicesString) => Parse(indicesString);
-		public static implicit operator Indices(ManyIndices many) => new Indices(many);
-		public static implicit operator Indices(string[] many) => new ManyIndices(many);
-		public static implicit operator Indices(IndexName[] many) => new ManyIndices(many);
-		public static implicit operator Indices(IndexName index) => new ManyIndices(new[] { index });
-		public static implicit operator Indices(Type type) => new ManyIndices(new IndexName[] { type });
+		public static implicit operator Indices(ManyIndices many) => many == null ? null : new Indices(many);
+		public static implicit operator Indices(string[] many) => many.IsEmpty() ? null : new ManyIndices(many);
+		public static implicit operator Indices(IndexName[] many) => many.IsEmpty()? null : new ManyIndices(many);
+		public static implicit operator Indices(IndexName index) => index == null ? null : new ManyIndices(new[] { index });
+		public static implicit operator Indices(Type type) => type == null ? null : new ManyIndices(new IndexName[] { type });
 
 		private string DebugDisplay => this.Match(
 			all => "_all",

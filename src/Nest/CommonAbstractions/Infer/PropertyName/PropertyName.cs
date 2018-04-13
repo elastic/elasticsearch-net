@@ -46,7 +46,7 @@ namespace Nest
 			_type = property.DeclaringType;
 		}
 
-		public static implicit operator PropertyName(string name) => name == null ? null : new PropertyName(name);
+		public static implicit operator PropertyName(string name) => name.IsNullOrEmpty() ? null : new PropertyName(name);
 
 		public static implicit operator PropertyName(Expression expression) => expression == null ? null : new PropertyName(expression);
 
@@ -63,30 +63,30 @@ namespace Nest
 			}
 		}
 
-		public bool Equals(PropertyName other)
+		public bool Equals(PropertyName other) => EqualsMarker(other);
+
+		public override bool Equals(object obj) =>
+			obj is string s ? this.EqualsString(s) : (obj is PropertyName r) && this.EqualsMarker(r);
+
+		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == this.Name;
+
+		public bool EqualsMarker(PropertyName other)
 		{
 			return _type != null
 				? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
 				: other != null && _comparisonValue.Equals(other._comparisonValue);
 		}
 
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != GetType()) return false;
-			return this.Equals(obj as PropertyName);
-		}
+		public static bool operator ==(PropertyName left, PropertyName right) => Equals(left, right);
 
-		public static bool operator ==(PropertyName x, PropertyName y) => Equals(x, y);
-
-		public static bool operator !=(PropertyName x, PropertyName y) => !(x == y);
+		public static bool operator !=(PropertyName left, PropertyName right) => !Equals(left, right);
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
-			var nestSettings = settings as IConnectionSettingsValues;
+			if (!(settings is IConnectionSettingsValues nestSettings))
+				throw new ArgumentNullException(nameof(settings), $"Can not resolve {nameof(PropertyName)} if no {nameof(IConnectionSettingsValues)} is provided");
 
-			return nestSettings?.Inferrer.PropertyName(this);
+			return nestSettings.Inferrer.PropertyName(this);
 		}
 	}
 }

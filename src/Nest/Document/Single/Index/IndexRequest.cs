@@ -19,9 +19,10 @@ namespace Nest
 
 		protected override HttpMethod HttpMethod => GetHttpMethod(this);
 
-		internal static HttpMethod GetHttpMethod(IIndexRequest<TDocument> request) => request.Id?.Value != null ? HttpMethod.PUT : HttpMethod.POST;
+		internal static HttpMethod GetHttpMethod(IIndexRequest<TDocument> request) => request.Id.IsConditionless() ? HttpMethod.POST : HttpMethod.PUT;
 
 		partial void DocumentFromPath(TDocument document) => this.Document = document;
+
 		private TDocument AutoRouteDocument() => Self.Document;
 
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>

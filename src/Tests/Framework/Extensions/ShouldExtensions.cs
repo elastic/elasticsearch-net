@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework.MockData;
 
@@ -29,5 +30,8 @@ namespace Tests.Framework
 			project.SourceOnly.NotWrittenByDefaultSerializer.Should().Be("written");
 			project.SourceOnly.NotReadByDefaultSerializer.Should().Be("read");
 		}
+
+		public static void ShouldBeTrue(this bool b, IUrlParameter p) =>
+			b.Should().BeTrue(p?.GetString(TestClient.GlobalDefaultSettings) ?? "NULL");
 	}
 }
