@@ -13,8 +13,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexOnServer
 {
-	[SkipVersion("<2.3.0", "")]
-	public class ReindexOnServerApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
+	public class ReindexOnServerSliceApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
 	{
 		public class Test
 		{
@@ -22,14 +21,21 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			public string Flag { get; set; }
 		}
 
-		public ReindexOnServerApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ReindexOnServerSliceApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 			{
-				this.Client.Index(new Test { Id = 1, Flag = "bar" }, i => i.Index(index).Refresh(Refresh.True));
-				this.Client.Index(new Test { Id = 2, Flag = "bar" }, i => i.Index(index).Refresh(Refresh.True));
+				this.Client.Bulk(b => b
+					.Index(index)
+					.IndexMany(new []
+					{
+						new Test { Id = 1, Flag = "bar" },
+						new Test { Id = 2, Flag = "bar" }
+					})
+					.Refresh(Refresh.WaitFor)
+				);
 			}
 		}
 		protected override LazyResponses ClientUsage() => Calls(
@@ -38,7 +44,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			request: (client, r) => client.ReindexOnServer(r),
 			requestAsync: (client, r) => client.ReindexOnServerAsync(r)
 		);
-		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
@@ -48,21 +53,21 @@ namespace Tests.Document.Multiple.ReindexOnServer
 
 		protected override bool SupportsDeserialization => false;
 
-		protected virtual string PainlessScript { get; } = "if (ctx._source.flag == 'bar') {ctx._source.remove('flag')}";
-
 		protected override Func<ReindexOnServerDescriptor, IReindexOnServerRequest> Fluent => d => d
 			.Source(s => s
 				.Index(CallIsolatedValue)
 				.Type("test")
 				.Size(100)
 				.Query<Test>(q => q
-					.Match(m => m
-						.Field(p => p.Flag)
-						.Query("bar")
-					)
+					.MatchAll()
 				)
 				.Sort<Test>(sort => sort
 					.Ascending("id")
+				)
+				.Slice<Test>(ss => ss
+					.Field(f => f.Id)
+					.Id(0)
+					.Max(2)
 				)
 			)
 			.Destination(s => s
@@ -72,20 +77,19 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				.VersionType(VersionType.Internal)
 				.Routing(ReindexRouting.Discard)
 			)
-			.Script(ss => ss.Source(PainlessScript))
 			.Conflicts(Conflicts.Proceed)
 			.Refresh();
 
-		protected override ReindexOnServerRequest Initializer => new ReindexOnServerRequest()
+		protected override ReindexOnServerRequest Initializer => new ReindexOnServerRequest
 		{
 			Source = new ReindexSource
 			{
 				Index = CallIsolatedValue,
 				Type = "test",
-				Query = new MatchQuery { Field = Field<Test>(p => p.Flag), Query = "bar" },
+				Query = new MatchAllQuery(),
 				Sort = new List<ISort> { new SortField { Field = "id", Order = SortOrder.Ascending } },
-				Size = 100
-
+				Size = 100,
+				Slice = new SlicedScroll { Field = "id", Id = 0, Max = 2 }
 			},
 			Destination = new ReindexDestination
 			{
@@ -95,25 +99,13 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				VersionType = VersionType.Internal,
 				Routing = ReindexRouting.Discard
 			},
-			Script = new InlineScript(PainlessScript),
 			Conflicts = Conflicts.Proceed,
 			Refresh = true,
 		};
 
 		protected override void ExpectResponse(IReindexOnServerResponse response)
 		{
-			response.Task.Should().BeNull();
-			response.Took.Should().BeGreaterThan(TimeSpan.FromMilliseconds(0));
-			response.Total.Should().Be(2);
-			response.Updated.Should().Be(0);
-			response.Created.Should().Be(2);
-			response.Batches.Should().Be(1);
-
-			var search = this.Client.Search<Test>(s => s
-				.Index(CallIsolatedValue + "-clone")
-			);
-			search.Total.Should().BeGreaterThan(0);
-			search.Documents.Should().OnlyContain(t => string.IsNullOrWhiteSpace(t.Flag));
+			response.SliceId.Should().Be(0);
 		}
 
 		protected override object ExpectJson =>
@@ -127,17 +119,19 @@ namespace Tests.Document.Multiple.ReindexOnServer
 					type = "test",
 					version_type = "internal"
 				},
-				script = new
-				{
-					source = this.PainlessScript,
-				},
 				source = new
 				{
 					index = CallIsolatedValue,
-					query = new { match = new { flag = new { query = "bar" } } },
+					query = new { match_all = new { } },
 					sort = new[] { new { id = new { order = "asc" } } },
 					type = new[] { "test" },
-					size = 100
+					size = 100,
+					slice = new
+					{
+						field = "id",
+						id = 0,
+						max = 2
+					}
 				},
 				conflicts = "proceed"
 			};
