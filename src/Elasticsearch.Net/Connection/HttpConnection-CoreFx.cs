@@ -36,14 +36,14 @@ namespace Elasticsearch.Net
 		protected readonly ConcurrentDictionary<int, HttpClient> Clients = new ConcurrentDictionary<int, HttpClient>();
 
 		private static readonly string CanNotUseStreamResponsesWithCurlHandler =
-				"Using Stream as TReturn does not work as expected on .NET core linux, because we can no longer guarantee this works it will be removed from the client in our 6.0 release"
+				"Using Stream as TReturn does not work as expected on .NET core linux. " +
+				"Because we can no longer guarantee this works it will be removed from the client in our 6.0 release"
 			;
 
 		private HttpClient GetClient(RequestData requestData)
 		{
 			var key = GetClientKey(requestData);
-			HttpClient client;
-			if (this.Clients.TryGetValue(key, out client)) return client;
+			if (this.Clients.TryGetValue(key, out var client)) return client;
 			lock (_lock)
 			{
 				client = this.Clients.GetOrAdd(key, h =>
@@ -64,8 +64,6 @@ namespace Elasticsearch.Net
 
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
 		{
-			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
-			//but not on .NET core on linux HttpClient which proxies to curl.
 			if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
 				throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
 
@@ -78,9 +76,10 @@ namespace Elasticsearch.Net
 				responseMessage = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				requestData.MadeItToResponse = true;
 				builder.StatusCode = (int) responseMessage.StatusCode;
-				IEnumerable<string> warnings;
-				if (responseMessage.Headers.TryGetValues("Warning", out warnings))
+				if (responseMessage.Headers.TryGetValues("Warning", out var warnings))
 					builder.DeprecationWarnings = warnings;
+
+				builder.ResponseMimeType = responseMessage.Content.Headers.ContentType?.MediaType;
 
 				if (responseMessage.Content != null)
 					builder.Stream = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
@@ -107,8 +106,6 @@ namespace Elasticsearch.Net
 		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData,
 			CancellationToken cancellationToken) where TReturn : class
 		{
-			//TODO remove Stream response support in 6.0, closing the stream is sufficient on desktop/mono
-			//but not on .NET core on linux HttpClient which proxies to curl.
 			if (typeof(TReturn) == typeof(Stream) && ConnectionConfiguration.IsCurlHandler)
 				throw new Exception(CanNotUseStreamResponsesWithCurlHandler);
 
@@ -121,9 +118,10 @@ namespace Elasticsearch.Net
 				responseMessage = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
 				requestData.MadeItToResponse = true;
 				builder.StatusCode = (int) responseMessage.StatusCode;
-				IEnumerable<string> warnings;
-				if (responseMessage.Headers.TryGetValues("Warning", out warnings))
+				if (responseMessage.Headers.TryGetValues("Warning", out var warnings))
 					builder.DeprecationWarnings = warnings;
+
+				builder.ResponseMimeType = responseMessage.Content.Headers.ContentType?.MediaType;
 
 				if (responseMessage.Content != null)
 					builder.Stream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
@@ -250,7 +248,7 @@ namespace Elasticsearch.Net
 			else
 			{
 				// Set content in order to set a Content-Type header.
-				// Content gets diposed so can't be shared instance
+				// Content gets disposed so can't be shared instance
 				requestMessage.Content = new ByteArrayContent(new byte[0]);
 			}
 
