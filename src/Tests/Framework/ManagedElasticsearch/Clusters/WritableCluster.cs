@@ -11,6 +11,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		ElasticsearchPlugin.IngestGeoIp,
 		ElasticsearchPlugin.AnalysisKuromoji,
 		ElasticsearchPlugin.AnalysisIcu,
+		ElasticsearchPlugin.AnalysisPhonetic,
 		ElasticsearchPlugin.IngestAttachment
 	)]
 	public class WritableCluster : ClusterBase
