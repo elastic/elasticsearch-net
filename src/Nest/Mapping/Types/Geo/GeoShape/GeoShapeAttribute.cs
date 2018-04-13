@@ -1,5 +1,6 @@
 ﻿namespace Nest
 {
+	/// <inheritdoc cref="IGeoShapeProperty"/>
 	public class GeoShapeAttribute : ElasticsearchDocValuesPropertyAttributeBase, IGeoShapeProperty
 	{
 		private IGeoShapeProperty Self => this;
@@ -13,13 +14,27 @@
 		GeoStrategy? IGeoShapeProperty.Strategy { get; set; }
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
 		bool? IGeoShapeProperty.PointsOnly { get; set; }
+		bool? IGeoShapeProperty.IgnoreMalformed { get; set; }
 
-		public GeoTree Tree { get { return Self.Tree.GetValueOrDefault(GeoTree.Geohash); } set { Self.Tree = value; } }
-		public GeoOrientation Orientation { get { return Self.Orientation.GetValueOrDefault(GeoOrientation.CounterClockWise); } set { Self.Orientation = value; } }
-		public int TreeLevels { get { return Self.TreeLevels.GetValueOrDefault(50); } set { Self.TreeLevels = value; } }
-		public GeoStrategy Strategy {  get { return Self.Strategy.GetValueOrDefault(GeoStrategy.Recursive); } set { Self.Strategy = value; } }
-		public double DistanceErrorPercentage { get { return Self.DistanceErrorPercentage.GetValueOrDefault(); } set { Self.DistanceErrorPercentage = value; } }
-		public bool PointsOnly { get { return Self.PointsOnly.GetValueOrDefault(); } set { Self.PointsOnly = value; } }
-
+		/// <inheritdoc cref="IGeoShapeProperty.Tree"/>
+		public GeoTree Tree { get => Self.Tree.GetValueOrDefault(GeoTree.Geohash); set => Self.Tree = value; }
+		/// <inheritdoc cref="IGeoShapeProperty.Orientation"/>
+		public GeoOrientation Orientation { get => Self.Orientation.GetValueOrDefault(GeoOrientation.CounterClockWise); set => Self.Orientation = value; }
+		/// <inheritdoc cref="IGeoShapeProperty.TreeLevels"/>
+		public int TreeLevels { get => Self.TreeLevels.GetValueOrDefault(50); set => Self.TreeLevels = value; }
+		/// <inheritdoc cref="IGeoShapeProperty.Strategy"/>
+		public GeoStrategy Strategy {  get => Self.Strategy.GetValueOrDefault(GeoStrategy.Recursive); set => Self.Strategy = value; }
+		/// <inheritdoc cref="IGeoShapeProperty.DistanceErrorPercentage"/>
+		public double DistanceErrorPercentage
+		{
+			get => Self.Precision != null | Self.TreeLevels != null
+				? Self.DistanceErrorPercentage.GetValueOrDefault(0)
+				: Self.DistanceErrorPercentage.GetValueOrDefault(0.025);
+			set => Self.DistanceErrorPercentage = value;
+		}
+		/// <inheritdoc cref="IGeoShapeProperty.PointsOnly"/>
+		public bool PointsOnly { get => Self.PointsOnly.GetValueOrDefault(false); set => Self.PointsOnly = value; }
+		/// <inheritdoc cref="IGeoShapeProperty.IgnoreMalformed"/>
+		public bool IgnoreMalformed { get => Self.IgnoreMalformed.GetValueOrDefault(false); set => Self.IgnoreMalformed = value; }
 	}
 }
