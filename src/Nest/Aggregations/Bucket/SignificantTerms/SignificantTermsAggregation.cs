@@ -56,13 +56,13 @@ namespace Nest
 		/// Include term values for which buckets will be created.
 		/// </summary>
 		[JsonProperty("include")]
-		SignificantTermsIncludeExclude Include { get; set; }
+		IncludeExclude Include { get; set; }
 
 		/// <summary>
 		/// Exclude term values for which buckets will be created.
 		/// </summary>
 		[JsonProperty("exclude")]
-		SignificantTermsIncludeExclude Exclude { get; set; }
+		IncludeExclude Exclude { get; set; }
 
 		/// <summary>
 		/// Use mutual information to calculate significance score
@@ -123,9 +123,9 @@ namespace Nest
 		/// <inheritdoc />
 		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
 		/// <inheritdoc />
-		public SignificantTermsIncludeExclude Include { get; set; }
+		public IncludeExclude Include { get; set; }
 		/// <inheritdoc />
-		public SignificantTermsIncludeExclude Exclude { get; set; }
+		public IncludeExclude Exclude { get; set; }
 		/// <inheritdoc />
 		public IMutualInformationHeuristic MutualInformation { get; set; }
 		/// <inheritdoc />
@@ -163,9 +163,9 @@ namespace Nest
 
 		TermsAggregationExecutionHint? ISignificantTermsAggregation.ExecutionHint { get; set; }
 
-		SignificantTermsIncludeExclude ISignificantTermsAggregation.Include { get; set; }
+		IncludeExclude ISignificantTermsAggregation.Include { get; set; }
 
-		SignificantTermsIncludeExclude ISignificantTermsAggregation.Exclude { get; set; }
+		IncludeExclude ISignificantTermsAggregation.Exclude { get; set; }
 
 		IMutualInformationHeuristic ISignificantTermsAggregation.MutualInformation { get; set; }
 
@@ -193,19 +193,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> Include(string includePattern) =>
-			Assign(a => a.Include = new SignificantTermsIncludeExclude(includePattern));
+			Assign(a => a.Include = new IncludeExclude(includePattern));
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> Include(IEnumerable<string> values) =>
-			Assign(a => a.Include = new SignificantTermsIncludeExclude(values));
+			Assign(a => a.Include = new IncludeExclude(values));
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> Exclude(string excludePattern) =>
-			Assign(a => a.Exclude = new SignificantTermsIncludeExclude(excludePattern));
+			Assign(a => a.Exclude = new IncludeExclude(excludePattern));
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> Exclude(IEnumerable<string> values) =>
-			Assign(a => a.Exclude = new SignificantTermsIncludeExclude(values));
+			Assign(a => a.Exclude = new IncludeExclude(values));
 
 		/// <inheritdoc />
 		public SignificantTermsAggregationDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);

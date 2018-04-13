@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(SignificantTermsIncludeExcludeJsonConverter))]
-	public class SignificantTermsIncludeExclude
+	[JsonConverter(typeof(IncludeExcludeJsonConverter))]
+	public class IncludeExclude
 	{
 		[JsonIgnore]
 		public string Pattern { get; set; }
@@ -13,18 +13,12 @@ namespace Nest
 		[JsonIgnore]
 		public IEnumerable<string> Values { get; set; }
 
-		public SignificantTermsIncludeExclude(string pattern)
-		{
-			Pattern = pattern;
-		}
+		public IncludeExclude(string pattern) => Pattern = pattern;
 
-		public SignificantTermsIncludeExclude(IEnumerable<string> values)
-		{
-			Values = values;
-		}
+		public IncludeExclude(IEnumerable<string> values) => Values = values;
 	}
 
-	internal class SignificantTermsIncludeExcludeJsonConverter : JsonConverter
+	internal class IncludeExcludeJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 
@@ -32,19 +26,19 @@ namespace Nest
 		{
 			if (reader.TokenType == JsonToken.Null) return null;
 
-			SignificantTermsIncludeExclude termsInclude;
+			IncludeExclude termsInclude;
 
 			switch (reader.TokenType)
 			{
 				case JsonToken.StartArray:
-					termsInclude = new SignificantTermsIncludeExclude(serializer.Deserialize<IEnumerable<string>>(reader));
+					termsInclude = new IncludeExclude(serializer.Deserialize<IEnumerable<string>>(reader));
 					break;
 				case JsonToken.String:
-					termsInclude = new SignificantTermsIncludeExclude((string)reader.Value);
+					termsInclude = new IncludeExclude((string)reader.Value);
 					break;
 				default:
 					throw new JsonSerializationException(
-						$"Unexpected token {reader.TokenType} when deserializing {nameof(SignificantTermsIncludeExclude)}");
+						$"Unexpected token {reader.TokenType} when deserializing {nameof(IncludeExclude)}");
 			}
 
 			return termsInclude;
@@ -52,7 +46,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var termsIncludeExclude = (SignificantTermsIncludeExclude)value;
+			var termsIncludeExclude = (IncludeExclude)value;
 
 			if (termsIncludeExclude == null)
 				writer.WriteNull();

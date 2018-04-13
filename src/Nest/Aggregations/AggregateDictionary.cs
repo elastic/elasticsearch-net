@@ -129,6 +129,20 @@ namespace Nest
 				};
 		}
 
+		public SignificantTermsAggregate SignificantText(string key)
+		{
+			var bucket = this.TryGet<BucketAggregate>(key);
+			return bucket == null
+				? null
+				: new SignificantTermsAggregate
+				{
+					BgCount = bucket.BgCount,
+					DocCount = bucket.DocCount,
+					Buckets = bucket.Items.OfType<SignificantTermsBucket>().ToList(),
+					Meta = bucket.Meta
+				};
+		}
+
 		public TermsAggregate<TKey> Terms<TKey>(string key)
 		{
 			var bucket = this.TryGet<BucketAggregate>(key);
