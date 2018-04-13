@@ -46,6 +46,9 @@ namespace Nest
 
 		[JsonProperty("failures")]
 		IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; }
+
+		[JsonProperty("slice_id")]
+		int? SliceId { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -77,5 +80,7 @@ namespace Nest
 		public Retries Retries { get; internal set; }
 
 		public IReadOnlyCollection<BulkIndexByScrollFailure> Failures { get; internal set; } = EmptyReadOnly<BulkIndexByScrollFailure>.Collection;
+
+		public int? SliceId { get; internal set; }
 	}
 }

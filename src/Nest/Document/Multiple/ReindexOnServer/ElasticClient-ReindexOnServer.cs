@@ -8,18 +8,29 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <summary>
+		/// Reindexes documents from one or more indices to another. the reindex operation takes place
+		/// within Elasticsearch
+		/// </summary>
 		IReindexOnServerResponse ReindexOnServer(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector);
 
-		/// <inheritdoc/>
+		/// <summary>
+		/// Reindexes documents from one or more indices to another. the reindex operation takes place
+		/// within Elasticsearch
+		/// </summary>
 		IReindexOnServerResponse ReindexOnServer(IReindexOnServerRequest request);
 
-		/// <inheritdoc/>
+		/// <summary>
+		/// Reindexes documents from one or more indices to another. the reindex operation takes place
+		/// within Elasticsearch
+		/// </summary>
 		Task<IReindexOnServerResponse> ReindexOnServerAsync(Func<ReindexOnServerDescriptor, IReindexOnServerRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
 
-		/// <inheritdoc/>
+		/// <summary>
+		/// Reindexes documents from one or more indices to another. the reindex operation takes place
+		/// within Elasticsearch
+		/// </summary>
 		Task<IReindexOnServerResponse> ReindexOnServerAsync(IReindexOnServerRequest request, CancellationToken cancellationToken = default(CancellationToken));
-
 	}
 
 	public partial class ElasticClient

@@ -87,13 +87,13 @@ namespace Tests.Framework
 				dict.Add(ClientMethod.InitializerAsync, await requestAsync(client, this.Initializer));
 				OnAfterCall(client);
 
-				if (!TestClient.Configuration.RunIntegrationTests) return dict;
-
-				this.IntegrationTeardown(client, UniqueValues);
-				this._usage.CalledTeardown = true;
+				if (TestClient.Configuration.RunIntegrationTests)
+				{
+					this.IntegrationTeardown(client, UniqueValues);
+					this._usage.CalledTeardown = true;
+				}
 
 				return dict;
-
 			});
 		}
 
