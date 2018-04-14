@@ -38,9 +38,11 @@ module Versioning =
         newGlobalJson.JsonValue.WriteTo(tw, JsonSaveOptions.None)
         tracefn "Written (%s) to global.json as the current version will use this version from now on as current in the build" (version.ToString()) 
 
+    let GlobalJsonVersion = parse(globalJson.Version)
+
     let CurrentVersion =
         Commandline.parse()
-        let currentVersion = parse(globalJson.Version)
+        let currentVersion = GlobalJsonVersion
         let bv = getBuildParam "version"
         let buildVersion = if (isNullOrEmpty bv) then None else Some(parse(bv)) 
         match (getBuildParam "target", buildVersion) with

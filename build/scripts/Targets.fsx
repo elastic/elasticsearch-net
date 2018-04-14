@@ -77,6 +77,7 @@ Target "Release" <| fun _ ->
     Release.NugetPack()   
     Versioning.ValidateArtifacts()
     StrongName.ValidateDllsInNugetPackage()
+    Release.GenerateNotes()
 
 Target "TestNugetPackage" <| fun _ -> 
     //RunReleaseUnitTests restores the canary nugetpackages in tests, since these end up being cached
