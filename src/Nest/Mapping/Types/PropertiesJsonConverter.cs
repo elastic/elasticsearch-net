@@ -54,14 +54,10 @@ namespace Nest
 			foreach (var p in o.Properties())
 			{
 				var name = p.Name;
-				var po = p.First as JObject;
-				if (po == null) continue;
-
-				var mapping = _elasticTypeConverter.ReadJson(po.CreateReader(), objectType, existingValue, serializer) as IProperty;
-				if (mapping == null) continue;
+				if (!(p.First is JObject po)) continue;
+				if (!(_elasticTypeConverter.ReadJson(po.CreateReader(), objectType, existingValue, serializer) is IProperty mapping)) continue;
 
 				mapping.Name = name;
-
 				r.Add(name, mapping);
 			}
 			return r;
