@@ -252,13 +252,13 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 			type = "s3",
 			settings = new {
 				bucket = "foobucket",
-				region = "us-east",
 				base_path = "some/path",
-				access_key = "fooaccess",
-				secret_key = "foosecret",
 				compress = true,
-				concurrent_streams = 5,
-				chunk_size = "64mb"
+				chunk_size = "64mb",
+				server_side_encryption = true,
+				buffer_size = "100mb",
+				canned_acl = "authenticated-read",
+				storage_class = "standard"
 			}
 		};
 
@@ -267,13 +267,13 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> Fluent => d => d
 			.S3(fs => fs
 				.Settings("foobucket", s => s
-					.Region("us-east")
 					.BasePath("some/path")
-					.AccessKey("fooaccess")
-					.SecretKey("foosecret")
 					.Compress()
-					.ConcurrentStreams(5)
 					.ChunkSize("64mb")
+					.ServerSideEncryption()
+					.BufferSize("100mb")
+					.CannedAcl("authenticated-read")
+					.StorageClass("standard")
 				)
 			);
 
@@ -281,13 +281,13 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		{
 			Repository = new S3Repository(new S3RepositorySettings("foobucket")
 			{
-				Region = "us-east",
 				BasePath = "some/path",
-				AccessKey = "fooaccess",
-				SecretKey = "foosecret",
 				Compress = true,
-				ConcurrentStreams = 5,
-				ChunkSize = "64mb"
+				ChunkSize = "64mb",
+				ServerSideEncryption = true,
+				BufferSize = "100mb",
+				CannedAcl = "authenticated-read",
+				StorageClass = "standard"
 			})
 		};
 	}
