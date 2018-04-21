@@ -71,6 +71,7 @@ namespace Nest
 			AcceptAggregation(aggregation.ScriptedMetric, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.SerialDifferencing, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.SignificantTerms, visitor, (v, d) => { v.Visit(d); this.Accept(v, d.Aggregations); });
+			AcceptAggregation(aggregation.SignificantText, visitor, (v, d) => { v.Visit(d); this.Accept(v, d.Aggregations); });
 			AcceptAggregation(aggregation.Stats, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.Sum, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.SumBucket, visitor, (v, d) => v.Visit(d));
