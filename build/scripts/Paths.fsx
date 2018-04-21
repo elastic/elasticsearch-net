@@ -15,7 +15,9 @@ open Projects
 
 module Paths =
 
-    let Repository = "https://github.com/elastic/elasticsearch-net"
+    let OwnerName = "elastic"
+    let RepositoryName = "elasticsearch-net"
+    let Repository = sprintf "https://github.com/%s/%s" OwnerName RepositoryName
 
     let BuildFolder = "build"
     let BuildOutput = sprintf "%s/output" BuildFolder

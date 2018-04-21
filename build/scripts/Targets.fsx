@@ -76,6 +76,7 @@ Target "Release" <| fun _ ->
     Release.NugetPack()   
     Versioning.ValidateArtifacts()
     StrongName.ValidateDllsInNugetPackage()
+    Release.GenerateNotes()
 
 Target "TestNugetPackage" <| fun _ -> 
     Tests.RunReleaseUnitTests()
