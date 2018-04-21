@@ -9,5 +9,7 @@ group build
     nuget FSharp.Data 
     nuget Mono.Cecil prerelease
 
-    #Profiling.fsx uses this
+    # persisting profiling results
     nuget Nest framework: net45
+	
+	nuget Octokit
