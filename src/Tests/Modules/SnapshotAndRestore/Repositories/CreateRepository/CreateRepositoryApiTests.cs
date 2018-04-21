@@ -252,12 +252,14 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 			type = "s3",
 			settings = new {
 				bucket = "foobucket",
+				client = "default",
 				base_path = "some/path",
-				access_key = "fooaccess",
-				secret_key = "foosecret",
 				compress = true,
-				concurrent_streams = 5,
-				chunk_size = "64mb"
+				chunk_size = "64mb",
+				server_side_encryption = true,
+				buffer_size = "100mb",
+				canned_acl = "authenticated-read",
+				storage_class = "standard"
 			}
 		};
 
@@ -267,11 +269,13 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 			.S3(fs => fs
 				.Settings("foobucket", s => s
 					.BasePath("some/path")
-					.AccessKey("fooaccess")
-					.SecretKey("foosecret")
+					.Client("default")
 					.Compress()
-					.ConcurrentStreams(5)
 					.ChunkSize("64mb")
+					.ServerSideEncryption()
+					.BufferSize("100mb")
+					.CannedAcl("authenticated-read")
+					.StorageClass("standard")
 				)
 			);
 
@@ -280,11 +284,13 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 			Repository = new S3Repository(new S3RepositorySettings("foobucket")
 			{
 				BasePath = "some/path",
-				AccessKey = "fooaccess",
-				SecretKey = "foosecret",
+				Client = "default",
 				Compress = true,
-				ConcurrentStreams = 5,
-				ChunkSize = "64mb"
+				ChunkSize = "64mb",
+				ServerSideEncryption = true,
+				BufferSize = "100mb",
+				CannedAcl = "authenticated-read",
+				StorageClass = "standard"
 			})
 		};
 	}
