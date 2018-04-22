@@ -13,15 +13,9 @@ namespace Nest
 		[JsonIgnore]
 		public IEnumerable<string> Values { get; set; }
 
-		public SignificantTermsIncludeExclude(string pattern)
-		{
-			Pattern = pattern;
-		}
+		public SignificantTermsIncludeExclude(string pattern) => Pattern = pattern;
 
-		public SignificantTermsIncludeExclude(IEnumerable<string> values)
-		{
-			Values = values;
-		}
+		public SignificantTermsIncludeExclude(IEnumerable<string> values) => Values = values;
 	}
 
 	internal class SignificantTermsIncludeExcludeJsonConverter : JsonConverter
