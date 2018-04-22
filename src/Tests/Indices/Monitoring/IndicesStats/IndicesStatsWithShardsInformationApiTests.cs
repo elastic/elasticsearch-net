@@ -16,32 +16,14 @@ namespace Tests.Indices.Monitoring.IndicesStats
 		{
 		}
 
-		private class NoopClass
-		{
-		}
-
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			if (this.Client.IndexExists(typeof(NoopClass)).Exists)
-				return;
-
-			var createShardedIndex = this.Client.CreateIndex(typeof(NoopClass), c => c
+			var createShardedIndex = this.Client.CreateIndex(values.Value, c => c
 				.Settings(settings => settings
 					.NumberOfShards(3)
 				)
-				.Mappings(map => map
-					.Map<NoopClass>(m => m
-						.AutoMap()
-					)
-				)
 			);
 			createShardedIndex.ShouldBeValid();
-		}
-
-		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
-		{
-			var deleteShardedIndex = client.DeleteIndex(typeof(NoopClass));
-			deleteShardedIndex.ShouldBeValid();
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(

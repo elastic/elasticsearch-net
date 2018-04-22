@@ -13,7 +13,7 @@ namespace Nest
 		public int Generation { get; internal set; }
 
 		[JsonProperty("user_data")]
-		public IDictionary<string, string> UserData { get; internal set; }
+		public IReadOnlyDictionary<string, string> UserData { get; internal set; }
 
 		[JsonProperty("num_docs")]
 		public long NumberOfDocuments { get; internal set; }
