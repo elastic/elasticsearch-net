@@ -49,7 +49,6 @@ namespace Tests.Indices.Monitoring.IndicesStats
 		{
 			var firstIndex = response.Indices.First().Value;
 			firstIndex.Shards.Should().NotBeNull();
-			firstIndex.Shards.Count.Should().Be(3);
 
 			var firstShard = firstIndex.Shards.Values.First();
 			firstShard.Length.Should().Be(1);
