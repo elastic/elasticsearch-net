@@ -36,7 +36,7 @@ namespace Tests.Indices.Monitoring.IndicesStats
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => "/_stats/store?level=shards";
+		protected override string UrlPath => "/_stats?level=shards";
 
 		protected override Func<IndicesStatsDescriptor, IIndicesStatsRequest> Fluent => d => d.Level(Level.Shards);
 
