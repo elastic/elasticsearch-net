@@ -7,7 +7,7 @@ namespace Nest
 
 	public class S3Repository : IS3Repository
 	{
-		public S3Repository(IS3RepositorySettings settings) => Settings = settings;
+		public S3Repository(S3RepositorySettings settings) => Settings = settings;
 
 		public IS3RepositorySettings Settings { get; set; }
 		public string Type { get; } = "s3";
@@ -16,15 +16,15 @@ namespace Nest
 	public interface IS3RepositorySettings : IRepositorySettings
 	{
 		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore. See https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html")]
-		[JsonIgnore]
+		[JsonProperty("access_key")]
 		string AccessKey { get; set; }
 
 		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore. See https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html")]
-		[JsonIgnore]
+		[JsonProperty("secret_key")]
 		string SecretKey { get; set; }
 
 		[Obsolete("Removed in Elasticsearch 6.0")]
-		[JsonIgnore]
+		[JsonProperty("concurrent_streams")]
 		int? ConcurrentStreams { get; set; }
 
 		/// <summary>
@@ -149,10 +149,15 @@ namespace Nest
 
 #pragma warning disable 618
 		/// <inheritdoc cref="IS3RepositorySettings.AccessKey"/>
+		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore. See https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html")]
 		public S3RepositorySettingsDescriptor AccessKey(string accessKey) => Assign(a => a.AccessKey = accessKey);
+
 		/// <inheritdoc cref="IS3RepositorySettings.SecretKey"/>
+		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore. See https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html")]
 		public S3RepositorySettingsDescriptor SecretKey(string secretKey) => Assign(a => a.SecretKey = secretKey);
+
 		/// <inheritdoc cref="IS3RepositorySettings.ConcurrentStreams"/>
+		[Obsolete("Removed in Elasticsearch 6.0")]
 		public S3RepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 #pragma warning restore 618
 
