@@ -52,14 +52,12 @@ namespace Nest
 		/// <summary>
 		/// The access key to use for authentication. Defaults to value of cloud.aws.access_key.
 		/// </summary>
-		[Obsolete("Removed in NEST 6.x. Sensitive settings must be stored in the elasticsearch keystore. See https://www.elastic.co/guide/en/elasticsearch/plugins/current/repository-s3-client.html")]
 		[JsonProperty("access_key")]
 		string AccessKey { get; set; }
 
 		/// <summary>
 		/// The secret key to use for authentication. Defaults to value of cloud.aws.secret_key.
 		/// </summary>
-		[Obsolete("Removed in NEST 6.x. Sensitive settings must be stored in the elasticsearch keystore. See https://www.elastic.co/guide/en/elasticsearch/plugins/current/repository-s3-client.html")]
 		[JsonProperty("secret_key")]
 		string SecretKey { get; set; }
 
@@ -169,6 +167,8 @@ namespace Nest
 		/// <inheritdoc />
 		public bool? Compress { get; set; }
 		/// <inheritdoc />
+		public int? ConcurrentStreams { get; set; }
+		/// <inheritdoc />
 		public bool? ServerSideEncryption { get; set; }
 		/// <inheritdoc />
 		public string BufferSize { get; set; }
@@ -197,6 +197,7 @@ namespace Nest
 		string IS3RepositorySettings.AccessKey { get; set; }
 		string IS3RepositorySettings.SecretKey { get; set; }
 		string IS3RepositorySettings.ChunkSize { get; set; }
+		int? IS3RepositorySettings.ConcurrentStreams { get; set; }
 		bool? IS3RepositorySettings.Compress { get; set; }
 		bool? IS3RepositorySettings.ServerSideEncryption { get; set; }
 		string IS3RepositorySettings.BufferSize { get; set; }
