@@ -7,7 +7,7 @@ namespace Nest
 
 	public class S3Repository : IS3Repository
 	{
-		public S3Repository(IS3RepositorySettings settings) => Settings = settings;
+		public S3Repository(S3RepositorySettings settings) => Settings = settings;
 
 		public IS3RepositorySettings Settings { get; set; }
 		public string Type { get; } = "s3";
@@ -31,14 +31,14 @@ namespace Nest
 		/// <summary>
 		/// The endpoint to the S3 API. Defaults to AWS’s default S3 endpoint. Note that setting a region overrides the endpoint setting.
 		/// </summary>
-		[Obsolete("Removed in NEST 6.x.")]
+		[Obsolete("Removed in NEST 6.x, but can be specified on client settings in elasticsearch.yml configuration.")]
 		[JsonProperty("endpoint")]
 		string Endpoint { get; set; }
 
 		/// <summary>
 		/// The protocol to use (http or https). Defaults to value of cloud.aws.protocol or cloud.aws.s3.protocol.
 		/// </summary>
-		[Obsolete("Removed in NEST 6.x.")]
+		[Obsolete("Removed in NEST 6.x, but can be specified on client settings in elasticsearch.yml configuration.")]
 		[JsonProperty("protocol")]
 		string Protocol { get; set; }
 
@@ -78,6 +78,9 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("compress")]
 		bool? Compress { get; set; }
+
+		[JsonProperty("concurrent_streams")]
+		int? ConcurrentStreams { get; set; }
 
 		/// <summary>
 		/// When set to true files are encrypted on server side using AES256 algorithm.
@@ -229,6 +232,9 @@ namespace Nest
 
 		/// <inheritdoc cref="IS3RepositorySettings.SecretKey"/>
 		public S3RepositorySettingsDescriptor SecretKey(string secretKey) => Assign(a => a.SecretKey = secretKey);
+
+		/// <inheritdoc cref="IS3RepositorySettings.ConcurrentStreams"/>
+		public S3RepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 #pragma warning restore 618
 
 		/// <inheritdoc cref="IS3RepositorySettings.ChunkSize"/>
