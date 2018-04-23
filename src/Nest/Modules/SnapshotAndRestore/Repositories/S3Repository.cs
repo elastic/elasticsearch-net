@@ -15,6 +15,18 @@ namespace Nest
 
 	public interface IS3RepositorySettings : IRepositorySettings
 	{
+		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore. See https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html")]
+		[JsonIgnore]
+		string AccessKey { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore. See https://www.elastic.co/guide/en/elasticsearch/reference/6.x/secure-settings.html")]
+		[JsonIgnore]
+		string SecretKey { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.0")]
+		[JsonIgnore]
+		int? ConcurrentStreams { get; set; }
+
 		/// <summary>
 		/// The name of the bucket to be used for snapshots. This field is required
 		/// </summary>
@@ -91,6 +103,12 @@ namespace Nest
 		public S3RepositorySettings(string bucket) => this.Bucket = bucket;
 
 		/// <inheritdoc />
+		public string AccessKey { get; set; }
+		/// <inheritdoc />
+		public string SecretKey { get; set; }
+		/// <inheritdoc />
+		public int? ConcurrentStreams { get; set; }
+		/// <inheritdoc />
 		public string Bucket { get; set; }
 		/// <inheritdoc />
 		public string Client { get; set; }
@@ -113,6 +131,10 @@ namespace Nest
 	public class S3RepositorySettingsDescriptor
 		: DescriptorBase<S3RepositorySettingsDescriptor, IS3RepositorySettings>, IS3RepositorySettings
 	{
+		string IS3RepositorySettings.AccessKey { get; set; }
+		string IS3RepositorySettings.SecretKey { get; set; }
+		int? IS3RepositorySettings.ConcurrentStreams { get; set; }
+
 		string IS3RepositorySettings.Bucket { get; set; }
 		string IS3RepositorySettings.Client { get; set; }
 		string IS3RepositorySettings.BasePath { get; set; }
@@ -124,6 +146,15 @@ namespace Nest
 		string IS3RepositorySettings.StorageClass { get; set; }
 
 		public S3RepositorySettingsDescriptor(string bucket) => Self.Bucket = bucket;
+
+#pragma warning disable 618
+		/// <inheritdoc cref="IS3RepositorySettings.AccessKey"/>
+		public S3RepositorySettingsDescriptor AccessKey(string accessKey) => Assign(a => a.AccessKey = accessKey);
+		/// <inheritdoc cref="IS3RepositorySettings.SecretKey"/>
+		public S3RepositorySettingsDescriptor SecretKey(string secretKey) => Assign(a => a.SecretKey = secretKey);
+		/// <inheritdoc cref="IS3RepositorySettings.ConcurrentStreams"/>
+		public S3RepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+#pragma warning restore 618
 
 		/// <inheritdoc cref="IS3RepositorySettings.Bucket"/>
 		public S3RepositorySettingsDescriptor Bucket(string bucket) => Assign(a => a.Bucket = bucket);
