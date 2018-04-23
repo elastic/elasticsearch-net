@@ -96,6 +96,10 @@ namespace Tests.Framework
 				.IndexName("server-metrics")
 				.TypeName("metric")
 			)
+			.DefaultMappingFor<Shape>(map => map
+				.IndexName("shapes")
+				.TypeName("doc")
+			)
 			.ConnectionLimit(ConnectionLimitDefault)
 			//TODO make this random
 			//.EnableHttpCompression()

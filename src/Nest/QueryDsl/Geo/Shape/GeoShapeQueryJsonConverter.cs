@@ -11,7 +11,7 @@ namespace Nest
 	/// </summary>
 	internal class GeoShapeQueryFieldNameConverter : FieldNameQueryJsonConverter<GeoShapeCircleQuery>
 	{
-		private static string[] SkipProperties = {"boost", "_name"};
+		private static readonly string[] SkipProperties = {"boost", "_name"};
 		protected override bool SkipWriteProperty(string propertyName) => SkipProperties.Contains(propertyName);
 
 		protected override void SerializeJson(JsonWriter writer, object value, IFieldNameQuery castValue, JsonSerializer serializer)
@@ -33,19 +33,12 @@ namespace Nest
 			writer.WriteEndObject();
 		}
 	}
+
 	internal class GeoShapeQueryJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
-
-		public virtual T GetCoordinates<T>(JToken shape, JsonSerializer serializer)
-		{
-			var coordinates = shape["coordinates"];
-			return coordinates != null
-				? coordinates.ToObject<T>(serializer)
-				: default(T);
-		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -87,159 +80,80 @@ namespace Nest
 			return query;
 		}
 
-		private IGeoShapeQuery ParseIndexedShapeQuery(JToken indexedShape) =>
+		private static IGeoShapeQuery ParseIndexedShapeQuery(JToken indexedShape) =>
 			new GeoIndexedShapeQuery {IndexedShape = (indexedShape as JObject)?.ToObject<FieldLookup>()};
 
-		private IGeoShapeQuery ParseShapeQuery(JToken shape, JsonSerializer serializer)
+		private static IGeoShapeQuery ParseShapeQuery(JToken shape, JsonSerializer serializer)
 		{
 			var type = shape["type"];
 			var typeName = type?.Value<string>();
 			var ignoreUnmapped = shape["ignore_unmapped"]?.Value<bool?>();
+
+			var geometry = GeoShapeConverter.ReadJToken(shape, serializer);
+
 			switch (typeName)
 			{
 				case "circle":
-					var radius = shape["radius"];
 					return new GeoShapeCircleQuery
 					{
-						Shape = SetIgnoreUnmapped(ParseCircleGeoShape(shape, serializer, radius), ignoreUnmapped)
+						Shape = SetIgnoreUnmapped(geometry as ICircleGeoShape, ignoreUnmapped)
 					};
 				case "envelope":
 					return new GeoShapeEnvelopeQuery
 					{
-						Shape = SetIgnoreUnmapped(ParseEnvelopeGeoShape(shape, serializer), ignoreUnmapped)
+						Shape = SetIgnoreUnmapped(geometry as IEnvelopeGeoShape, ignoreUnmapped)
 					};
 				case "linestring":
 					return new GeoShapeLineStringQuery
 					{
-						Shape = SetIgnoreUnmapped(ParseLineStringGeoShape(shape, serializer), ignoreUnmapped)
+						Shape = SetIgnoreUnmapped(geometry as ILineStringGeoShape, ignoreUnmapped)
 					};
 				case "multilinestring":
 					return new GeoShapeMultiLineStringQuery
 					{
-						Shape = SetIgnoreUnmapped(ParseMultiLineStringGeoShape(shape, serializer), ignoreUnmapped)
+						Shape = SetIgnoreUnmapped(geometry as IMultiLineStringGeoShape, ignoreUnmapped)
 					};
 				case "point":
 					return new GeoShapePointQuery
 					{
-						Shape = SetIgnoreUnmapped(ParsePointGeoShape(shape, serializer), ignoreUnmapped)
+						Shape = SetIgnoreUnmapped(geometry as IPointGeoShape, ignoreUnmapped)
 					};
 				case "multipoint":
 					return new GeoShapeMultiPointQuery
 					{
-						Shape = SetIgnoreUnmapped(ParseMultiPointGeoShape(shape, serializer), ignoreUnmapped)
+						Shape = SetIgnoreUnmapped(geometry as IMultiPointGeoShape, ignoreUnmapped)
 					};
 				case "polygon":
 					return new GeoShapePolygonQuery
 					{
-						Shape = SetIgnoreUnmapped(ParsePolygonGeoShape(shape, serializer), ignoreUnmapped)
+						Shape = SetIgnoreUnmapped(geometry as IPolygonGeoShape, ignoreUnmapped)
 					};
 				case "multipolygon":
 					return new GeoShapeMultiPolygonQuery
 					{
-						Shape = SetIgnoreUnmapped(ParseMultiPolygonGeoShape(shape, serializer), ignoreUnmapped)
+						Shape = SetIgnoreUnmapped(geometry as IMultiPolygonGeoShape, ignoreUnmapped)
 					};
 				case "geometrycollection":
-					return new GeoShapeGeometryCollectionQuery
+					var geometryCollection = geometry as IGeometryCollection;
+					if (geometryCollection != null)
 					{
-						Shape = ParseGeometryCollection(shape, serializer)
-					};
+						foreach (var innerGeometry in geometryCollection.Geometries)
+							SetIgnoreUnmapped(innerGeometry, ignoreUnmapped);
+					}
+
+					return new GeoShapeGeometryCollectionQuery { Shape = geometryCollection };
 				default:
 					return null;
 			}
 		}
-
-		private GeometryCollection ParseGeometryCollection(JToken shape, JsonSerializer serializer)
-		{
-			if (!(shape["geometries"] is JArray geometries))
-				return new GeometryCollection { Geometries = Enumerable.Empty<IGeoShape>() };
-
-			var geoShapes = new List<IGeoShape>(geometries.Count);
-
-			void AddGeoShape<TShape>(TShape s, bool? ignoreUnmapped) where TShape : IGeoShape
-			{
-				s = SetIgnoreUnmapped(s, ignoreUnmapped);
-				geoShapes.Add(s);
-			}
-
-			foreach (var geometry in geometries)
-			{
-				var ignoreUnmapped = geometry["ignore_unmapped"]?.Value<bool?>();
-				var type = geometry["type"];
-				var typeName = type?.Value<string>();
-				switch (typeName)
-				{
-					case "circle":
-						var radius = geometry["radius"];
-						AddGeoShape(ParseCircleGeoShape(geometry, serializer, radius), ignoreUnmapped);
-						break;
-					case "envelope":
-						AddGeoShape(ParseEnvelopeGeoShape(geometry, serializer), ignoreUnmapped);
-						break;
-					case "linestring":
-						AddGeoShape(ParseLineStringGeoShape(geometry, serializer), ignoreUnmapped);
-						break;
-					case "multilinestring":
-						AddGeoShape(ParseMultiLineStringGeoShape(geometry, serializer), ignoreUnmapped);
-						break;
-					case "point":
-						AddGeoShape(ParsePointGeoShape(geometry, serializer), ignoreUnmapped);
-						break;
-					case "multipoint":
-						AddGeoShape(ParseMultiPointGeoShape(geometry, serializer), ignoreUnmapped);
-						break;
-					case "polygon":
-						AddGeoShape(ParsePolygonGeoShape(geometry, serializer), ignoreUnmapped);
-						break;
-					case "multipolygon":
-						AddGeoShape(ParseMultiPolygonGeoShape(geometry, serializer), ignoreUnmapped);
-						break;
-					default:
-						throw new ArgumentException($"cannot parse geo_shape. unknown type '{typeName}'");
-				}
-			}
-
-			return new GeometryCollection { Geometries = geoShapes };
-		}
-
-		private MultiPolygonGeoShape ParseMultiPolygonGeoShape(JToken shape, JsonSerializer serializer) =>
-			new MultiPolygonGeoShape
-		{
-			Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>>>(shape, serializer)
-		};
-
-		private PolygonGeoShape ParsePolygonGeoShape(JToken shape, JsonSerializer serializer) =>
-			new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)};
-
-		private MultiPointGeoShape ParseMultiPointGeoShape(JToken shape, JsonSerializer serializer) =>
-			new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
-
-		private PointGeoShape ParsePointGeoShape(JToken shape, JsonSerializer serializer) =>
-			new PointGeoShape {Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer)};
-
-		private MultiLineStringGeoShape ParseMultiLineStringGeoShape(JToken shape, JsonSerializer serializer) => new MultiLineStringGeoShape
-		{
-			Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)
-		};
-
-		private LineStringGeoShape ParseLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
-			new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
-
-		private EnvelopeGeoShape ParseEnvelopeGeoShape(JToken shape, JsonSerializer serializer) =>
-			new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
-
-		private CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer, JToken radius) => new CircleGeoShape
-		{
-			Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer),
-			Radius = radius?.Value<string>()
-		};
-
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
 			throw new NotSupportedException();
 
 		private static TShape SetIgnoreUnmapped<TShape>(TShape shape, bool? ignoreUnmapped) where TShape : IGeoShape
 		{
-			shape.IgnoreUnmapped = ignoreUnmapped;
+			if (shape != null)
+				shape.IgnoreUnmapped = ignoreUnmapped;
 			return shape;
 		}
 	}

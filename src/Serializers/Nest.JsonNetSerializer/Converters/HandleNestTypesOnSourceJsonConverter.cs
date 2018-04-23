@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -40,14 +41,19 @@ namespace Nest.JsonNetSerializer.Converters
 				return _builtInSerializer.Deserialize(objectType, ms);
 		}
 
-		private static readonly Type[] NestTypesThatCanAppearInSource = {
+		private static readonly HashSet<Type> NestTypesThatCanAppearInSource = new HashSet<Type>
+		{
 			typeof(JoinField),
 			typeof(QueryContainer),
 			typeof(CompletionField),
 			typeof(Attachment),
-			typeof(ILazyDocument)
+			typeof(ILazyDocument),
+			typeof(GeoCoordinate)
 		};
 
-		public override bool CanConvert(Type objectType) => NestTypesThatCanAppearInSource.Contains(objectType);
+		public override bool CanConvert(Type objectType) =>
+			NestTypesThatCanAppearInSource.Contains(objectType) ||
+		    typeof(IGeoShape).IsAssignableFrom(objectType) ||
+		    typeof(IGeometryCollection).IsAssignableFrom(objectType);
 	}
 }
