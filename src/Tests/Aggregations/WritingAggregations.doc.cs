@@ -85,9 +85,9 @@ namespace Tests.Aggregations
 		* === Object Initializer syntax
 		* The object initializer syntax (OIS) is a one-to-one mapping with how aggregations
 		* have to be represented in the Elasticsearch API. While it has the benefit of being a one-to-one
-		* mapping, being dictionary based in C# means it can gow verbose rather quickly.
+		* mapping, being dictionary based in C# means it can grow verbose rather quickly.
 		*
-		* Here's the same aggregations as expressed in the Fluent API above, with the dictionary-based
+		* Here are the same aggregations as expressed in the Fluent API above, with the dictionary-based
 		* object initializer syntax
 		*/
 		protected override SearchRequest<Project> Initializer =>
@@ -108,9 +108,11 @@ namespace Tests.Aggregations
 					}
 				}
 			};
-
 		/**
-		 * This starts to get hard to read, wouldn't you agree? There is a better way however...
+		 * As you can see, the key in the dictionary is repeated as the name passed to the aggregation constructor.
+		 * This starts to get hard to read and a little error prone, wouldn't you agree?
+		 *
+		 * There is a better way however...
 		 */
 	}
 
@@ -164,9 +166,10 @@ namespace Tests.Aggregations
 		/**[float]
 		* === Binary operators off the same descriptor
 		*
-		* For dynamic aggregation building using the fluent syntax it can be useful to abstract to methods as much as possible.
-		* You can use the binary operator `&&` on the same descriptor to compose the graph. Each side of the
-		* binary operation can return null dynamically.
+		* For dynamic aggregation building using the fluent syntax,
+		* it can be useful to abstract the construction to methods as much as possible.
+		* You can use the binary operator `&&` on the same aggregation descriptor to compose the graph.
+		* Each side of the binary operation can return null dynamically.
 		*/
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
@@ -252,7 +255,7 @@ namespace Tests.Aggregations
 
 	/**[float]
 	* [[handling-aggregate-response]]
-	*=== Handling aggregate response
+	*=== Handling responses
 	*
 	* The `SearchResponse` exposes an `AggregateDictionary` which is specialized dictionary over `<string, IAggregate>` that also
 	* exposes handy helper methods that automatically cast `IAggregate` to the expected aggregate response.
