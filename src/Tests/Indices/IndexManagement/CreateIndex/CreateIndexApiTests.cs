@@ -74,14 +74,6 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						{
 							lambda = 2.0,
 							type = "LMJelinekMercer"
-						},
-						scripted_tfidf = new
-						{
-							type = "scripted",
-							script = new
-							{
-								source = "double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;"
-							}
 						}
 					}
 				}
@@ -126,11 +118,6 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 					)
 					.LMJelinek("lmj", lm => lm
 						.Lamdba(2.0)
-					)
-					.Scripted("scripted_tfidf", sc => sc
-						.Script(ssc => ssc
-							.Source("double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
-						)
 					)
 				)
 			);
@@ -192,11 +179,6 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 						{
 							Lambda = 2.0
 						}
-					},
-					{ "scripted_tfidf", new ScriptedSimilarity
-						{
-							Script = new InlineScript("double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
-						}
 					}
 				}
 			}
@@ -229,6 +211,93 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			similarities.Should().ContainKey("ib").WhichValue.Should().BeOfType<IBSimilarity>();
 			similarities.Should().ContainKey("lmd").WhichValue.Should().BeOfType<LMDirichletSimilarity>();
 			similarities.Should().ContainKey("lmj").WhichValue.Should().BeOfType<LMJelinekMercerSimilarity>();
+		}
+	}
+
+	[SkipVersion("<6.1.0", "Scripted Similarity introduced in 6.1.0")]
+	public class CreateIndexWithScriptedSimilarityApiTests : ApiIntegrationTestBase<WritableCluster, ICreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	{
+		public CreateIndexWithScriptedSimilarityApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.CreateIndex(CallIsolatedValue, f),
+			fluentAsync: (client, f) => client.CreateIndexAsync(CallIsolatedValue, f),
+			request: (client, r) => client.CreateIndex(r),
+			requestAsync: (client, r) => client.CreateIndexAsync(r)
+		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override string UrlPath => $"/{CallIsolatedValue}";
+
+		protected override object ExpectJson { get; } = new
+		{
+			settings = new Dictionary<string, object>
+			{
+				{ "index.number_of_replicas", 0 },
+				{ "index.number_of_shards", 1 },
+				{ "similarity", new
+					{
+						scripted_tfidf = new
+						{
+							type = "scripted",
+							script = new
+							{
+								source = "double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;"
+							}
+						}
+					}
+				}
+			}
+		};
+
+		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(CallIsolatedValue);
+
+		protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d
+			.Settings(s => s
+				.NumberOfReplicas(0)
+				.NumberOfShards(1)
+				.Similarity(si => si
+					.Scripted("scripted_tfidf", sc => sc
+						.Script(ssc => ssc
+							.Source("double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
+						)
+					)
+				)
+			);
+
+		protected override CreateIndexRequest Initializer => new CreateIndexRequest(CallIsolatedValue)
+		{
+			Settings = new Nest.IndexSettings
+			{
+				NumberOfReplicas = 0,
+				NumberOfShards = 1,
+				Similarity = new Similarities
+				{
+					{ "scripted_tfidf", new ScriptedSimilarity
+						{
+							Script = new InlineScript("double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
+						}
+					}
+				}
+			}
+		};
+
+		protected override void ExpectResponse(ICreateIndexResponse response)
+		{
+			response.ShouldBeValid();
+			response.Acknowledged.Should().BeTrue();
+			response.ShardsAcknowledged.Should().BeTrue();
+
+			var indexSettings = this.Client.GetIndexSettings(g => g.Index(CallIsolatedValue));
+
+			indexSettings.ShouldBeValid();
+			indexSettings.Indices.Should().NotBeEmpty().And.ContainKey(CallIsolatedValue);
+
+			var settings = indexSettings.Indices[CallIsolatedValue];
+			var similarities = settings.Settings.Similarity;
+
+			similarities.Should().NotBeNull();
 			similarities.Should().ContainKey("scripted_tfidf").WhichValue.Should().BeOfType<ScriptedSimilarity>();
 
 			var scriptedSimilarity = (ScriptedSimilarity) similarities["scripted_tfidf"];

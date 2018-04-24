@@ -41,8 +41,7 @@ namespace Tests.Search.Request
 						  transpositions = true,
 						  unicode_aware = false
 						},
-						size = 8,
-						skip_duplicates = true
+						size = 8
 					  },
 					  prefix = Project.Instance.Name
 					} },
@@ -122,7 +121,6 @@ namespace Tests.Search.Request
 					.Field(p => p.Suggest)
 					.Size(8)
 					.Prefix(Project.Instance.Name)
-					.SkipDuplicates()
 				)
 				.Phrase("my-phrase-suggest", ph => ph
 					.Collate(c => c
@@ -187,8 +185,7 @@ namespace Tests.Search.Request
 							},
 							Analyzer = "simple",
 							Field = Field<Project>(p=>p.Suggest),
-							Size = 8,
-							SkipDuplicates = true
+							Size = 8
 						}
 					} },
 					{ "my-phrase-suggest", new SuggestBucket

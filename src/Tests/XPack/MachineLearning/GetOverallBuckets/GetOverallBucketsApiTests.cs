@@ -10,6 +10,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.GetOverallBuckets
 {
+	[SkipVersion("<6.1.0", "Only exists in Elasticsearch 6.1.0+")]
 	public class GetOverallBucketsApiTests : MachineLearningIntegrationTestBase<IGetOverallBucketsResponse, IGetOverallBucketsRequest, GetOverallBucketsDescriptor, GetOverallBucketsRequest>
 	{
 		private const int BucketSpanSeconds = 3600;

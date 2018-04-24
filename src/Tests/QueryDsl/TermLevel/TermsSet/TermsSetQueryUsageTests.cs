@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
@@ -19,6 +20,7 @@ namespace Tests.QueryDsl.TermLevel.TermsSet
 	*
 	* The field that controls the number of required terms that must match must be a number field
 	*/
+	[SkipVersion("<6.1.0", "terms set query was added in 6.1.0")]
 	public class TermsSetQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public TermsSetQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
@@ -77,6 +79,7 @@ namespace Tests.QueryDsl.TermLevel.TermsSet
 	* The `params.num_terms` parameter is available in the script to indicate the number of
 	* terms that have been specified in the query.
 	*/
+	[SkipVersion("<6.1.0", "terms set query was added in 6.1.0")]
 	public class TermsSetScriptQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public TermsSetScriptQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}

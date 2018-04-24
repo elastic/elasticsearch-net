@@ -1,4 +1,5 @@
 ﻿using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
@@ -32,8 +33,7 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 					"description",
 					"myOtherField"
 				},
-				zero_terms_query = "all",
-				auto_generate_synonyms_phrase_query = false
+				zero_terms_query = "all"
 			}
 		};
 
@@ -54,8 +54,7 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 			CutoffFrequency = 0.001,
 			Lenient = true,
 			ZeroTermsQuery = ZeroTermsQuery.All,
-			Name = "named_query",
-			AutoGenerateSynonymsPhraseQuery = false
+			Name = "named_query"
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -76,7 +75,6 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 				.Lenient()
 				.ZeroTermsQuery(ZeroTermsQuery.All)
 				.Name("named_query")
-				.AutoGenerateSynonymsPhraseQuery(false)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMultiMatchQuery>(a => a.MultiMatch)
@@ -125,6 +123,7 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 	 * When no fields are provided the Multi Match query will use the fields defined in the index setting `index.query.default_field`
 	 * (which in turns defaults to `*`).
 	 */
+	[SkipVersion("<6.1.0", "No field specified on mulit match is new in 6.1.0")]
 	public class MultiMatchWithNoFieldsSpecifiedUsageTests : QueryDslUsageTestsBase
 	{
 		public MultiMatchWithNoFieldsSpecifiedUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

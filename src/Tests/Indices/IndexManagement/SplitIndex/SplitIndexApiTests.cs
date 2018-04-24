@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Tests.Indices.IndexManagement.SplitIndex
 {
+	[SkipVersion("<6.1.0", "split index api was added in 6.1.0")]
 	public class SplitIndexApiTests : ApiIntegrationTestBase<WritableCluster, ISplitIndexResponse, ISplitIndexRequest, SplitIndexDescriptor, SplitIndexRequest>
 	{
 		public SplitIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
