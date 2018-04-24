@@ -85,7 +85,7 @@ s => s
 
 The object initializer syntax (OIS) is a one-to-one mapping with how aggregations
 have to be represented in the Elasticsearch API. While it has the benefit of being a one-to-one
-mapping, being dictionary based in C# means it can gow verbose rather quickly.
+mapping, being dictionary based in C# means it can grow verbose rather quickly.
 
 Here's the same aggregations as expressed in the Fluent API above, with the dictionary-based
 object initializer syntax
