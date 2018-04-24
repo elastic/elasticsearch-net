@@ -31,14 +31,12 @@ namespace Nest
 		/// <summary>
 		/// The endpoint to the S3 API. Defaults to AWS's default S3 endpoint. Note that setting a region overrides the endpoint setting.
 		/// </summary>
-		[Obsolete("Removed in NEST 6.x, but can be specified on client settings in elasticsearch.yml configuration.")]
 		[JsonProperty("endpoint")]
 		string Endpoint { get; set; }
 
 		/// <summary>
 		/// The protocol to use (http or https). Defaults to value of cloud.aws.protocol or cloud.aws.s3.protocol from elasticsearch.yml configuration.
 		/// </summary>
-		[Obsolete("Removed in NEST 6.x, but can be specified on client settings in elasticsearch.yml configuration.")]
 		[JsonProperty("protocol")]
 		string Protocol { get; set; }
 
@@ -101,21 +99,18 @@ namespace Nest
 		/// <summary>
 		/// Number of retries in case of S3 errors. Defaults to 3.
 		/// </summary>
-		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("max_retries")]
 		int? MaximumRetries { get; set; }
 
 		/// <summary>
 		/// Set to true if you want to throttle retries. Defaults to AWS SDK default value (true).
 		/// </summary>
-		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("use_throttle_retries")]
 		bool? UseThrottleRetries { get; set; }
 
 		/// <summary>
 		/// Makes repository read-only. Defaults to false.
 		/// </summary>
-		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("readonly")]
 		bool? ReadOnly { get; set; }
 
@@ -137,7 +132,6 @@ namespace Nest
 		/// <summary>
 		/// Activate path style access for virtual hosting of buckets. The default behaviour is to detect which access style to use based on the configured endpoint (an IP will result in path-style access) and the bucket being accessed (some buckets are not valid DNS names). Defaults to false.
 		/// </summary>
-		[Obsolete("Removed in NEST 6.x.")]
 		[JsonProperty("path_style_access")]
 		bool? PathStyleAccess { get; set; }
 	}
@@ -208,12 +202,15 @@ namespace Nest
 		string IS3RepositorySettings.StorageClass { get; set; }
 		bool? IS3RepositorySettings.PathStyleAccess { get; set; }
 
+		public S3RepositorySettingsDescriptor() { }
+
 		public S3RepositorySettingsDescriptor(string bucket) => Self.Bucket = bucket;
 
 		/// <inheritdoc cref="IS3RepositorySettings.Bucket"/>
 		public S3RepositorySettingsDescriptor Bucket(string bucket) => Assign(a => a.Bucket = bucket);
 
 		/// <inheritdoc cref="IS3RepositorySettings.Region"/>
+		[Obsolete("Removed in NEST 6.x")]
 		public S3RepositorySettingsDescriptor Region(string region) => Assign(a => a.Region = region);
 
 		/// <inheritdoc cref="IS3RepositorySettings.Endpoint"/>
@@ -269,8 +266,6 @@ namespace Nest
 	public class S3RepositoryDescriptor
 		: DescriptorBase<S3RepositoryDescriptor, IS3Repository>, IS3Repository
 	{
-		public S3RepositoryDescriptor() { }
-
 		string ISnapshotRepository.Type { get; } = "s3";
 		IS3RepositorySettings IRepository<IS3RepositorySettings>.Settings { get; set; }
 
