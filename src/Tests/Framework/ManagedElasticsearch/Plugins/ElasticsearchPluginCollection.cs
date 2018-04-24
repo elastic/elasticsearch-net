@@ -15,7 +15,8 @@ namespace Tests.Framework.ManagedElasticsearch.Plugins
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.IngestGeoIp, version => version >= ElasticsearchVersion.GetOrAdd("5.0.0-alpha3")),
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.IngestAttachment, version => version >= ElasticsearchVersion.GetOrAdd("5.0.0-alpha3")),
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.AnalysisKuromoji),
-				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.AnalysisIcu)
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.AnalysisIcu),
+				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.AnalysisPhonetic)
 			};
 
 		protected override ElasticsearchPlugin GetKeyForItem(ElasticsearchPluginConfiguration item) => item.Plugin;
