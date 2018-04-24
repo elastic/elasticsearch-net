@@ -184,7 +184,7 @@ namespace DocGenerator.AsciiDoc
                                 break;
 							case "initializer":
                             case "queryinitializer":
-	                        case "initializeraggs"
+	                        case "initializeraggs":
                                 _newDocument.Add(CreateSubsectionTitle("Object Initializer syntax example"));
 								_newDocument.Add(source);
                                 break;
