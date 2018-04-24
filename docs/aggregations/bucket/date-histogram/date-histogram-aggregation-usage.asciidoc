@@ -25,6 +25,8 @@ as part of the `format` value.
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[Date Histogram Aggregation].
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -46,6 +48,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

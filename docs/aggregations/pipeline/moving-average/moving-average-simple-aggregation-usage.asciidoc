@@ -15,6 +15,8 @@ please modify the original csharp file found at the link and submit the PR with 
 [[moving-average-simple-aggregation-usage]]
 === Moving Average Simple Aggregation Usage
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -36,6 +38,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

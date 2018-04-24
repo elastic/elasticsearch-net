@@ -20,6 +20,8 @@ for a Geo-point datatype field.
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geocentroid-aggregation.html[Geo Centroid Aggregation]
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -27,6 +29,8 @@ a => a
     .Field(p => p.Location)
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -65,6 +69,8 @@ centroid.Location.Longitude.Should().NotBe(0);
 
 The `geo_centroid` aggregation is more interesting when combined as a sub-aggregation to other bucket aggregations
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -77,6 +83,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -106,6 +114,8 @@ new TermsAggregation("projects")
 }
 ----
 
+==== Handling Responses
+
 [source,csharp]
 ----
 response.ShouldBeValid();
@@ -124,6 +134,8 @@ foreach (var bucket in projects.Buckets)
 }
 ----
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -131,6 +143,8 @@ a => a
     .Field(p => p.Location)
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -148,6 +162,8 @@ new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
   }
 }
 ----
+
+==== Handling Responses
 
 [source,csharp]
 ----

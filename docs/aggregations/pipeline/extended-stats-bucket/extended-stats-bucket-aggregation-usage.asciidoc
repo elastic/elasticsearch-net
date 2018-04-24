@@ -15,6 +15,8 @@ please modify the original csharp file found at the link and submit the PR with 
 [[extended-stats-bucket-aggregation-usage]]
 === Extended Stats Bucket Aggregation Usage
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -32,6 +34,8 @@ a => a
     .Sigma(2.0)
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
