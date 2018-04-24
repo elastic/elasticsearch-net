@@ -29,14 +29,14 @@ namespace Nest
 		string Region { get; set; }
 
 		/// <summary>
-		/// The endpoint to the S3 API. Defaults to AWS’s default S3 endpoint. Note that setting a region overrides the endpoint setting.
+		/// The endpoint to the S3 API. Defaults to AWS's default S3 endpoint. Note that setting a region overrides the endpoint setting.
 		/// </summary>
 		[Obsolete("Removed in NEST 6.x, but can be specified on client settings in elasticsearch.yml configuration.")]
 		[JsonProperty("endpoint")]
 		string Endpoint { get; set; }
 
 		/// <summary>
-		/// The protocol to use (http or https). Defaults to value of cloud.aws.protocol or cloud.aws.s3.protocol.
+		/// The protocol to use (http or https). Defaults to value of cloud.aws.protocol or cloud.aws.s3.protocol from elasticsearch.yml configuration.
 		/// </summary>
 		[Obsolete("Removed in NEST 6.x, but can be specified on client settings in elasticsearch.yml configuration.")]
 		[JsonProperty("protocol")]
@@ -50,13 +50,13 @@ namespace Nest
 		string BasePath { get; set; }
 
 		/// <summary>
-		/// The access key to use for authentication. Defaults to value of cloud.aws.access_key.
+		/// The access key to use for authentication. Defaults to value of cloud.aws.access_key from elasticsearch.yml configuration.
 		/// </summary>
 		[JsonProperty("access_key")]
 		string AccessKey { get; set; }
 
 		/// <summary>
-		/// The secret key to use for authentication. Defaults to value of cloud.aws.secret_key.
+		/// The secret key to use for authentication. Defaults to value of cloud.aws.secret_key from elasticsearch.yml configuration.
 		/// </summary>
 		[JsonProperty("secret_key")]
 		string SecretKey { get; set; }
@@ -213,7 +213,6 @@ namespace Nest
 		/// <inheritdoc cref="IS3RepositorySettings.Bucket"/>
 		public S3RepositorySettingsDescriptor Bucket(string bucket) => Assign(a => a.Bucket = bucket);
 
-#pragma warning disable 618
 		/// <inheritdoc cref="IS3RepositorySettings.Region"/>
 		public S3RepositorySettingsDescriptor Region(string region) => Assign(a => a.Region = region);
 
@@ -222,12 +221,10 @@ namespace Nest
 
 		/// <inheritdoc cref="IS3RepositorySettings.Protocol"/>
 		public S3RepositorySettingsDescriptor Protocol(string protocol) => Assign(a => a.Protocol = protocol);
-#pragma warning restore 618
 
 		/// <inheritdoc cref="IS3RepositorySettings.BasePath"/>
 		public S3RepositorySettingsDescriptor BasePath(string basePath) => Assign(a => a.BasePath = basePath);
 
-#pragma warning disable 618
 		/// <inheritdoc cref="IS3RepositorySettings.AccessKey"/>
 		public S3RepositorySettingsDescriptor AccessKey(string accessKey) => Assign(a => a.AccessKey = accessKey);
 
@@ -236,7 +233,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IS3RepositorySettings.ConcurrentStreams"/>
 		public S3RepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
-#pragma warning restore 618
 
 		/// <inheritdoc cref="IS3RepositorySettings.ChunkSize"/>
 		public S3RepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
@@ -251,7 +247,6 @@ namespace Nest
 		/// <inheritdoc cref="IS3RepositorySettings.BufferSize"/>
 		public S3RepositorySettingsDescriptor BufferSize(string bufferSize) => Assign(a => a.BufferSize = bufferSize);
 
-#pragma warning disable 618
 		/// <inheritdoc cref="IS3RepositorySettings.MaximumRetries"/>
 		public S3RepositorySettingsDescriptor MaximumRetries(int maximumRetries) => Assign(a => a.MaximumRetries = maximumRetries);
 
@@ -260,7 +255,6 @@ namespace Nest
 
 		/// <inheritdoc cref="IS3RepositorySettings.ReadOnly"/>
 		public S3RepositorySettingsDescriptor ReadOnly(bool? @readonly = true) => Assign(a => a.ReadOnly = @readonly);
-#pragma warning restore 618
 
 		/// <inheritdoc cref="IS3RepositorySettings.CannedAcl"/>
 		public S3RepositorySettingsDescriptor CannedAcl(string cannedAcl) => Assign(a => a.CannedAcl = cannedAcl);
@@ -268,15 +262,15 @@ namespace Nest
 		/// <inheritdoc cref="IS3RepositorySettings.StorageClass"/>
 		public S3RepositorySettingsDescriptor StorageClass(string storageClass) => Assign(a => a.StorageClass = storageClass);
 
-#pragma warning disable 618
 		/// <inheritdoc cref="IS3RepositorySettings.PathStyleAccess"/>
 		public S3RepositorySettingsDescriptor PathStyleAccess(bool? pathStyleAccess = true) => Assign(a => a.PathStyleAccess = pathStyleAccess);
-#pragma warning restore 618
 	}
 
 	public class S3RepositoryDescriptor
 		: DescriptorBase<S3RepositoryDescriptor, IS3Repository>, IS3Repository
 	{
+		public S3RepositoryDescriptor() { }
+
 		string ISnapshotRepository.Type { get; } = "s3";
 		IS3RepositorySettings IRepository<IS3RepositorySettings>.Settings { get; set; }
 
