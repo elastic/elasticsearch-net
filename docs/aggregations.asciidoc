@@ -138,6 +138,8 @@ In addition to the buckets themselves, the bucket aggregations also compute and 
 
 * <<significant-terms-aggregation-usage,Significant Terms Aggregation Usage>>
 
+* <<significant-text-aggregation-usage,Significant Text Aggregation Usage>>
+
 * <<terms-aggregation-usage,Terms Aggregation Usage>>
 
 [NOTE]
@@ -187,6 +189,8 @@ include::aggregations/bucket/sampler/sampler-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/significant-terms/significant-terms-aggregation-usage.asciidoc[]
 
+include::aggregations/bucket/significant-text/significant-text-aggregation-usage.asciidoc[]
+
 include::aggregations/bucket/terms/terms-aggregation-usage.asciidoc[]
 
 [[pipeline-aggregations]]
@@ -202,6 +206,8 @@ There are many different types of pipeline aggregation, each computing different
 * <<bucket-script-aggregation-usage,Bucket Script Aggregation Usage>>
 
 * <<bucket-selector-aggregation-usage,Bucket Selector Aggregation Usage>>
+
+* <<bucket-sort-aggregation-usage,Bucket Sort Aggregation Usage>>
 
 * <<cumulative-sum-aggregation-usage,Cumulative Sum Aggregation Usage>>
 
@@ -240,6 +246,8 @@ include::aggregations/pipeline/average-bucket/average-bucket-aggregation-usage.a
 include::aggregations/pipeline/bucket-script/bucket-script-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/bucket-selector/bucket-selector-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/bucket-sort/bucket-sort-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/cumulative-sum/cumulative-sum-aggregation-usage.asciidoc[]
 

@@ -112,7 +112,7 @@ new SignificantTermsAggregation("significant_names")
         BackgroundIsSuperSet = true,
         IncludeNegatives = true
     },
-    Include = new SignificantTermsIncludeExclude("pi*")
+    Include = new IncludeExclude("pi*")
 }
 ----
 
@@ -173,7 +173,7 @@ new SignificantTermsAggregation("significant_names")
         BackgroundIsSuperSet = true,
         IncludeNegatives = true
     },
-    Exclude = new SignificantTermsIncludeExclude(new[] {"pierce"})
+    Exclude = new IncludeExclude(new[] {"pierce"})
 }
 ----
 
