@@ -174,6 +174,7 @@ namespace DocGenerator.AsciiDoc
 						{
 							case "fluent":
 							case "queryfluent":
+							case "fluentaggs":
 								if (!LastSectionTitleMatches(text => text.StartsWith("Fluent DSL", StringComparison.OrdinalIgnoreCase)))
 								{
 									_newDocument.Add(CreateSubsectionTitle("Fluent DSL example"));
@@ -183,6 +184,7 @@ namespace DocGenerator.AsciiDoc
                                 break;
 							case "initializer":
                             case "queryinitializer":
+	                        case "initializeraggs"
                                 _newDocument.Add(CreateSubsectionTitle("Object Initializer syntax example"));
 								_newDocument.Add(source);
                                 break;

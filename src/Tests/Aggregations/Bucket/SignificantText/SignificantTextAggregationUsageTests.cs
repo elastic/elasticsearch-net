@@ -13,11 +13,11 @@ namespace Tests.Aggregations.Bucket.SignificantText
 	 * An aggregation that returns interesting or unusual occurrences of free-text
 	 * terms in a set. It is like the significant terms aggregation but differs in that:
 	 *
-	 * . It is specifically designed for use on type text fields
-	 * . It does not require field data or doc-values
-	 * . It re-analyzes text content on-the-fly meaning it can also filter duplicate sections of noisy text that otherwise tend to skew statistics.
+	 * * It is specifically designed for use on type `text` fields
+	 * * It does not require field data or doc-values
+	 * * It re-analyzes text content on-the-fly meaning it can also filter duplicate sections of noisy text that otherwise tend to skew statistics.
 	 *
-	 * WARNING
+	 * [WARNING]
 	 * --
 	 * Re-analyzing large result sets will require a lot of time and memory.
 	 * It is recommended that the significant_text aggregation is used
