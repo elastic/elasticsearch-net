@@ -145,6 +145,8 @@ namespace Nest
 		string IS3RepositorySettings.CannedAcl { get; set; }
 		string IS3RepositorySettings.StorageClass { get; set; }
 
+		public S3RepositorySettingsDescriptor() { }
+
 		public S3RepositorySettingsDescriptor(string bucket) => Self.Bucket = bucket;
 
 		/// <inheritdoc cref="IS3RepositorySettings.AccessKey"/>
