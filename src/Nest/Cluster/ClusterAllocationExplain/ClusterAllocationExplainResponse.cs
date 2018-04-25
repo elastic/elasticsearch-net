@@ -251,7 +251,25 @@ namespace Nest
 		Yes,
 
 		[EnumMember(Value = "no")]
-		No
+		No,
+
+		[EnumMember(Value = "worse_balance")]
+		WorseBalance,
+
+		[EnumMember(Value = "throttled")]
+		Throttled,
+
+		[EnumMember(Value = "awaiting_info")]
+		AwaitingInfo,
+
+		[EnumMember(Value = "allocation_delayed")]
+		AllocationDelayed,
+
+		[EnumMember(Value = "no_valid_shard_copy")]
+		NoValidShardCopy,
+
+		[EnumMember(Value = "no_attempt")]
+		NoAttempt
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]
