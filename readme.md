@@ -142,7 +142,7 @@ Indexing a document is as simple as (with 6.x):
 ```csharp
 var tweet = new Tweet
 {
-	Id = 1,
+    Id = 1,
     User = "kimchy",
     PostDate = new DateTime(2009, 11, 15),
     Message = "Trying out NEST, so far so good?"
