@@ -31,8 +31,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var v = value as TInterface;
-			if (v == null) return;
+			if (!(value is TInterface v)) return;
 			this.SerializeJson(writer, value, v, serializer);
 		}
 
@@ -40,6 +39,8 @@ namespace Nest
 		{
 			this.Reserialize(writer, value, serializer);
 		}
+
+		protected virtual bool SkipWriteProperty(string propertyName) => false;
 
 		protected void Reserialize(JsonWriter writer, object value, JsonSerializer serializer, Action<JsonWriter> inlineWriter = null)
 		{
@@ -49,7 +50,7 @@ namespace Nest
 			inlineWriter?.Invoke(writer);
 			foreach (var p in properties)
 			{
-				if (p.Ignored) continue;
+				if (p.Ignored || SkipWriteProperty(p.PropertyName)) continue;
 				var vv = p.ValueProvider.GetValue(value);
 				if (vv == null) continue;
 				writer.WritePropertyName(p.PropertyName);
