@@ -11,8 +11,25 @@ namespace Nest
 
 	public class GeoShapeCircleQuery : GeoShapeQueryBase, IGeoShapeCircleQuery
 	{
+		private ICircleGeoShape _shape;
 		protected override bool Conditionless => IsConditionless(this);
-		public ICircleGeoShape Shape { get; set; }
+
+		public ICircleGeoShape Shape
+		{
+			get => _shape;
+			set
+			{
+#pragma warning disable 618
+				if (value?.IgnoreUnmapped != null)
+				{
+
+					IgnoreUnmapped = value.IgnoreUnmapped;
+					value.IgnoreUnmapped = null;
+				}
+#pragma warning restore 618
+				_shape = value;
+			}
+		}
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
 
@@ -30,21 +47,21 @@ namespace Nest
 		{
 			a.Shape = a.Shape ?? new CircleGeoShape();
 			a.Shape.Coordinates = coordinates;
-			a.Shape.IgnoreUnmapped = ignoreUnmapped;
+			a.IgnoreUnmapped = ignoreUnmapped;
 		});
 
 		public GeoShapeCircleQueryDescriptor<T> Coordinates(double longitude, double latitude, bool? ignoreUnmapped = null) => Assign(a =>
 		{
 			a.Shape = a.Shape ?? new CircleGeoShape();
 			a.Shape.Coordinates = new GeoCoordinate(latitude, longitude);
-			a.Shape.IgnoreUnmapped = ignoreUnmapped;
+			a.IgnoreUnmapped = ignoreUnmapped;
 		});
 
 		public GeoShapeCircleQueryDescriptor<T> Radius(string radius, bool? ignoreUnmapped = null) => Assign(a =>
 		{
 			a.Shape = a.Shape ?? new CircleGeoShape();
 			a.Shape.Radius = radius;
-			a.Shape.IgnoreUnmapped = ignoreUnmapped;
+			a.IgnoreUnmapped = ignoreUnmapped;
 		});
 	}
 }

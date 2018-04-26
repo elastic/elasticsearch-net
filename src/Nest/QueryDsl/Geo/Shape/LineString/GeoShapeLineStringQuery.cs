@@ -12,8 +12,25 @@ namespace Nest
 
 	public class GeoShapeLineStringQuery : GeoShapeQueryBase, IGeoShapeLineStringQuery
 	{
+		private ILineStringGeoShape _shape;
 		protected override bool Conditionless => IsConditionless(this);
-		public ILineStringGeoShape Shape { get; set; }
+
+		public ILineStringGeoShape Shape
+		{
+			get => _shape;
+			set
+			{
+#pragma warning disable 618
+				if (value?.IgnoreUnmapped != null)
+				{
+
+					IgnoreUnmapped = value.IgnoreUnmapped;
+					value.IgnoreUnmapped = null;
+				}
+#pragma warning restore 618
+				_shape = value;
+			}
+		}
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
 		internal static bool IsConditionless(IGeoShapeLineStringQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
@@ -30,7 +47,7 @@ namespace Nest
 		{
 			a.Shape = a.Shape ?? new LineStringGeoShape();
 			a.Shape.Coordinates = coordinates;
-			a.Shape.IgnoreUnmapped = ignoreUnmapped;
+			a.IgnoreUnmapped = ignoreUnmapped;
 		});
 	}
 }

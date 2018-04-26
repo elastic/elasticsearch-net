@@ -6,7 +6,7 @@ namespace Tests.QueryDsl
 {
 	public abstract class GeoShapeQueryUsageTestsBase : QueryDslUsageTestsBase
 	{
-		public GeoShapeQueryUsageTestsBase(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		protected GeoShapeQueryUsageTestsBase(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object QueryJson => new
 		{
