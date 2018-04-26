@@ -23,7 +23,6 @@ namespace Nest
 #pragma warning disable 618
 				if (value?.IgnoreUnmapped != null)
 				{
-
 					IgnoreUnmapped = value.IgnoreUnmapped;
 					value.IgnoreUnmapped = null;
 				}
