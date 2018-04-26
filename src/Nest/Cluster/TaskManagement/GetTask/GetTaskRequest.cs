@@ -15,5 +15,8 @@ namespace Nest
 	{
 		[Obsolete("Maintained for binary compatibility. Use the constructor that accepts a task id. Will be removed in 7.0")]
 		public GetTaskDescriptor() { }
+
+		[Obsolete("Maintained for binary compatibility. Use the constructor that accepts a task id. Will be removed in 7.0")]
+		public GetTaskDescriptor TaskId(TaskId taskId) => this.Assign(a => a.RouteValues.Required("task_id", taskId));
 	}
 }
