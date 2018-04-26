@@ -29,6 +29,7 @@ Targets:
 * canary [apikey] [feed]
   - create a canary nuget package based on the current version if [feed] and [apikey] are provided
     also pushes to upstream (myget)
+* diff <github|nuget|directories|assemblies> <version|path 1> <version|path 2> [format]
 
 NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to force the tests against all suported TFM's
 """
@@ -38,7 +39,8 @@ module Commandline =
 
     let private args = getBuildParamOrDefault "cmdline" "build" |> split ' '
     let skipTests = args |> List.exists (fun x -> x = "skiptests")
-    let private filteredArgs = args |> List.filter (fun x -> x <> "skiptests")
+    let skipDocs = args |> List.exists (fun x -> x = "skipdocs") || isMono
+    let private filteredArgs = args |> List.filter (fun x -> x <> "skiptests" && x <> "skipdocs")
 
     let multiTarget =
         match (filteredArgs |> List.tryHead) with
@@ -57,7 +59,7 @@ module Commandline =
         | ("test", _)
         | ("integrate", _) -> false
         | _ -> true
-
+        
     let arguments =
         match filteredArgs with
         | _ :: tail -> target :: tail
@@ -67,6 +69,24 @@ module Commandline =
         match Uri.TryCreate(candidate, UriKind.RelativeOrAbsolute) with
         | true, _ -> Some candidate
         | _ -> None
+
+    let private (|IsDiff|_|) (candidate:string) =
+        let c = candidate |> toLower
+        match c with
+        | "github" | "nuget" | "directories" | "assemblies" -> Some c
+        | _ -> failwith (sprintf "Unknown diff type: %s" candidate)
+        
+    let private (|IsProject|_|) (candidate:string) =
+        let c = candidate |> toLower
+        match c with
+        | "nest" | "elasticsearch.net" -> Some c
+        | _ -> None     
+        
+    let private (|IsFormat|_|) (candidate:string) =
+        let c = candidate |> toLower
+        match c with
+        | "xml" | "markdown" | "asciidoc" -> Some c
+        | _ -> None 
 
     let parse () =
         setEnvironVar "FAKEBUILD" "1"
@@ -131,6 +151,28 @@ module Commandline =
             setBuildParam "clusterfilter" "ConnectionReuse"
             setBuildParam "numberOfConnections" numberOfConnections
             
+        | ["diff"; IsDiff diffType; IsProject project; firstVersionOrPath; secondVersionOrPath; IsFormat format] ->
+             setBuildParam "diffType" diffType
+             setBuildParam "project" project
+             setBuildParam "first" firstVersionOrPath
+             setBuildParam "second" secondVersionOrPath            
+             setBuildParam "format" format            
+        | ["diff"; IsDiff diffType; IsProject project; firstVersionOrPath; secondVersionOrPath] ->
+             setBuildParam "diffType" diffType
+             setBuildParam "project" project
+             setBuildParam "first" firstVersionOrPath
+             setBuildParam "second" secondVersionOrPath        
+        | ["diff"; IsDiff diffType; firstVersionOrPath; secondVersionOrPath; IsFormat format] ->
+             setBuildParam "diffType" diffType
+             setBuildParam "first" firstVersionOrPath
+             setBuildParam "second" secondVersionOrPath            
+             setBuildParam "format" format          
+        | ["diff"; IsDiff diffType; firstVersionOrPath; secondVersionOrPath] ->
+            setBuildParam "diffType" diffType
+            setBuildParam "first" firstVersionOrPath
+            setBuildParam "second" secondVersionOrPath         
+
+        | ["temp"; ] -> ignore()
         | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->
             setBuildParam "apiKey" apiKey

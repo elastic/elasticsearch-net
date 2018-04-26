@@ -11,6 +11,8 @@
 #load @"Benchmarking.fsx"
 #load @"Profiling.fsx"
 #load @"XmlDocPatcher.fsx"
+#load @"Differ.fsx"
+#nowarn "0044" //TODO sort out FAKE 5
 
 open System
 open Fake
@@ -27,6 +29,8 @@ open XmlDocPatcher
 open Documentation
 open Signing
 open Commandline
+open Differ
+open Differ.Differ
 
 Commandline.parse()
 
@@ -73,6 +77,15 @@ Target "Canary" <| fun _ ->
     let feed = (getBuildParamOrDefault "feed" "elasticsearch-net");
     if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey feed
 
+Target "Diff" <| fun _ ->
+    let diffType = getBuildParam "diffType"
+    let project = getBuildParam "project"
+    let first = getBuildParam "first"
+    let second = getBuildParam "second"
+    let format = getBuildParam "format"
+    tracefn "Performing %s diff %s using %s with %s and %s" format project diffType first second
+    Differ.Generate(diffType, project, first, second, format)
+
 // Dependencies
 "Clean" 
   =?> ("Version", hasBuildParam "version")
@@ -80,7 +93,7 @@ Target "Canary" <| fun _ ->
   =?> ("FullBuild", Commandline.needsFullBuild)
   =?> ("Test", (not Commandline.skipTests))
   ==> "InheritDoc"
-  ==> "Documentation"
+  =?> ("Documentation", (not Commandline.skipDocs))
   ==> "Build"
 
 "Clean"
@@ -103,6 +116,9 @@ Target "Canary" <| fun _ ->
 
 "Build"
   ==> "Release"
-
+  
+"Clean"
+  ==> "Diff"
+  
 RunTargetOrListTargets()
 
