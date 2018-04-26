@@ -83,8 +83,8 @@ namespace Nest
 		public IProperty LongRange(Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector) =>
 			selector?.Invoke(new LongRangePropertyDescriptor<T>());
 
-		public IProperty IpRange(Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector) =>
-			selector?.Invoke(new IpRangePropertyDescriptor<T>());
+		public IProperty IpRange(Func<IpAddressRangePropertyDescriptor<T>, IIpAddressRangeProperty> selector) =>
+			selector?.Invoke(new IpAddressRangePropertyDescriptor<T>());
 
 #pragma warning disable CS3001 // Argument type is not CLS-compliant
 		public IProperty Scalar(Expression<Func<T, int>> field, Func<NumberPropertyDescriptor<T>, INumberProperty> selector = null) =>
@@ -249,8 +249,8 @@ namespace Nest
 			selector.InvokeOrDefault(new IntegerRangePropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, FloatRange>> field, Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector = null) =>
 			selector.InvokeOrDefault(new FloatRangePropertyDescriptor<T>().Name(field));
-		public IProperty Scalar(Expression<Func<T, IpAddressRange>> field, Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector = null) =>
-			selector.InvokeOrDefault(new IpRangePropertyDescriptor<T>().Name(field));
+		public IProperty Scalar(Expression<Func<T, IpAddressRange>> field, Func<IpAddressRangePropertyDescriptor<T>, IIpAddressRangeProperty> selector = null) =>
+			selector.InvokeOrDefault(new IpAddressRangePropertyDescriptor<T>().Name(field));
 #pragma warning restore CS3001 // Argument type is not CLS-compliant
 	}
 }

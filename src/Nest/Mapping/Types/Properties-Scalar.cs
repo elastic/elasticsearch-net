@@ -100,7 +100,7 @@ namespace Nest
 		TReturnType Scalar(Expression<Func<T, LongRange>> field, Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector = null);
 		TReturnType Scalar(Expression<Func<T, IntegerRange>> field, Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector = null);
 		TReturnType Scalar(Expression<Func<T, FloatRange>> field, Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector = null);
-		TReturnType Scalar(Expression<Func<T, IpAddressRange>> field, Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector = null);
+		TReturnType Scalar(Expression<Func<T, IpAddressRange>> field, Func<IpAddressRangePropertyDescriptor<T>, IIpAddressRangeProperty> selector = null);
 #pragma warning restore CS3001 // Argument type is not CLS-compliant
 	}
 
@@ -270,8 +270,8 @@ namespace Nest
 			SetProperty(selector.InvokeOrDefault(new IntegerRangePropertyDescriptor<T>().Name(field)));
 		public PropertiesDescriptor<T> Scalar(Expression<Func<T, FloatRange>> field, Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector = null) =>
 			SetProperty(selector.InvokeOrDefault(new FloatRangePropertyDescriptor<T>().Name(field)));
-		public PropertiesDescriptor<T> Scalar(Expression<Func<T, IpAddressRange>> field, Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector = null) =>
-			SetProperty(selector.InvokeOrDefault(new IpRangePropertyDescriptor<T>().Name(field)));
+		public PropertiesDescriptor<T> Scalar(Expression<Func<T, IpAddressRange>> field, Func<IpAddressRangePropertyDescriptor<T>, IIpAddressRangeProperty> selector = null) =>
+			SetProperty(selector.InvokeOrDefault(new IpAddressRangePropertyDescriptor<T>().Name(field)));
 
 #pragma warning restore CS3001 // Argument type is not CLS-compliant
 	}

@@ -57,7 +57,7 @@ namespace Tests.Mapping.Types.Core.Range.IpRange
 					Properties = new Properties
 					{
 						{
-							"ips", new IpRangeProperty
+							"ips", new IpAddressRangeProperty
 							{
 								Store = true,
 								Index = false,

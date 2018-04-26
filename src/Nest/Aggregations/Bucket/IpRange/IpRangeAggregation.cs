@@ -14,13 +14,13 @@ namespace Nest
 		Field Field { get; set; }
 
 		[JsonProperty("ranges")]
-		IEnumerable<IIpRangeAggregationRange> Ranges { get; set; }
+		IEnumerable<IIpRange> Ranges { get; set; }
 	}
 
 	public class IpRangeAggregation : BucketAggregationBase, IIpRangeAggregation
 	{
 		public Field Field { get; set; }
-		public IEnumerable<IIpRangeAggregationRange> Ranges { get; set; }
+		public IEnumerable<IIpRange> Ranges { get; set; }
 
 		internal IpRangeAggregation() { }
 
@@ -36,13 +36,13 @@ namespace Nest
 	{
 		Field IIpRangeAggregation.Field { get; set; }
 
-		IEnumerable<IIpRangeAggregationRange> IIpRangeAggregation.Ranges { get; set; }
+		IEnumerable<IIpRange> IIpRangeAggregation.Ranges { get; set; }
 
 		public IpRangeAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public IpRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public IpRangeAggregationDescriptor<T> Ranges(params Func<IpRangeAggregationRangeDescriptor, IIpRangeAggregationRange>[] ranges) =>
-			Assign(a => a.Ranges = ranges?.Select(r => r(new IpRangeAggregationRangeDescriptor())));
+		public IpRangeAggregationDescriptor<T> Ranges(params Func<IpRangeDescriptor, IIpRange>[] ranges) =>
+			Assign(a => a.Ranges = ranges?.Select(r => r(new IpRangeDescriptor())));
 	}
 }

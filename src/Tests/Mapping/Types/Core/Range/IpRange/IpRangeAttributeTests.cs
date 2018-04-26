@@ -5,7 +5,7 @@ namespace Tests.Mapping.Types.Core.Range.IpRange
 {
 	public class IpRangeTest
 	{
-		[IpRange]
+		[IpAddressRange]
 		public Nest.IpAddressRange Range { get; set; }
 	}
 
