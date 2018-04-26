@@ -8,9 +8,9 @@ using Tests.Framework.MockData;
 namespace Tests.Mapping.Types.Core.Range.IpRange
 {
 	[SkipVersion("<5.5.0", "ip range type is a new 5.5.0 feature")]
-	public class IpRangePropertyTests : PropertyTestsBase
+	public class IpAddressRangePropertyTests : PropertyTestsBase
 	{
-		public IpRangePropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public IpAddressRangePropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new
 		{
