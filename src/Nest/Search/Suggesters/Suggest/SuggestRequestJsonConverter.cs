@@ -18,7 +18,9 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
+#pragma warning disable 618
 			var suggestRequest = value as ISuggestRequest;
+#pragma warning restore 618
 			if (suggestRequest == null) return;
 
 			writer.WriteStartObject();

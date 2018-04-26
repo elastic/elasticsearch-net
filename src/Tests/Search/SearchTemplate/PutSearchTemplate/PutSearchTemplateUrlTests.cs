@@ -2,6 +2,7 @@
 using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
+#pragma warning disable 618
 
 namespace Tests.Search.SearchTemplate.PutSearchTemplate
 {

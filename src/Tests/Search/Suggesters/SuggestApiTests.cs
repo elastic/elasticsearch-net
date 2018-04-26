@@ -26,18 +26,16 @@ namespace Tests.Search.Suggesters
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-#pragma warning disable 618
 			fluent: (c, f) => c.Search<Project>(f),
 			fluentAsync: (c, f) => c.SearchAsync<Project>(f),
 			request: (c, r) => c.Search<Project>(r),
 			requestAsync: (c, r) => c.SearchAsync<Project>(r)
-#pragma warning restore 618
 		);
 
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/_search";
+		protected override string UrlPath => "/project/project/_search";
 		protected override bool SupportsDeserialization => false;
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s

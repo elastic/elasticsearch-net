@@ -41,7 +41,11 @@ namespace Nest
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Script = this;
 		internal static bool IsConditionless(IScriptQuery q) =>
-			q.Inline.IsNullOrEmpty() && q.Id == null && q.File.IsNullOrEmpty();
+			q.Inline.IsNullOrEmpty() &&
+			q.Id == null &&
+#pragma warning disable 618
+			q.File.IsNullOrEmpty();
+#pragma warning restore 618
 
 	}
 

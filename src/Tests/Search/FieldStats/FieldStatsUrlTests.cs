@@ -3,6 +3,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
+#pragma warning disable 618
 
 namespace Tests.Search.FieldStats
 {

@@ -90,6 +90,7 @@ namespace Tests.Aggregations.Metric.TopHits
 			}
 		};
 
+#pragma warning disable 618 // Use of FielddataFields
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(a => a
 				.Terms("states", t => t
@@ -143,6 +144,7 @@ namespace Tests.Aggregations.Metric.TopHits
 					)
 				)
 			);
+#pragma warning restore 618
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
@@ -170,7 +172,9 @@ namespace Tests.Aggregations.Metric.TopHits
 						Version = true,
 						TrackScores = true,
 						Explain = true,
+#pragma warning disable 618
 						FielddataFields = new [] { "state", "numberOfCommits" },
+#pragma warning restore 618
 						StoredFields = new[] { "startedOn" },
 						Highlight = new Highlight
 						{

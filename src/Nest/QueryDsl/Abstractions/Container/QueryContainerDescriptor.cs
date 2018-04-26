@@ -245,6 +245,7 @@ namespace Nest
 		/// Matches documents with a geo_point type field to include only those
 		/// that exist within a specific distance range from a given geo_point
 		/// </summary>
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public QueryContainer GeoDistanceRange(Func<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.GeoDistanceRange = query);
 

@@ -55,15 +55,15 @@ namespace Tests.QueryDsl.FullText.QueryString
 			Analyzer = "standard",
 			QuoteAnalyzer = "quote-an",
 			AllowLeadingWildcard = true,
-			AutoGeneratePhraseQueries = true,
 			MaximumDeterminizedStates = 2,
-#pragma warning disable 618 // usage of lowercase_expanded_terms and locale
+#pragma warning disable 618 // Removed in NEST 6.x
+			AutoGeneratePhraseQueries = true,
 			LowercaseExpendedTerms = true,
 			Locale = "en_US",
-#pragma warning restore 618 // usage of lowercase_expanded_terms and locale
+			UseDisMax = true,
+#pragma warning restore 618
 			EnablePositionIncrements = true,
 			Escape = true,
-			UseDisMax = true,
 			FuzzyPrefixLength = 2,
 			FuzzyMaxExpansions = 3,
 			FuzzyMultiTermQueryRewrite = MultiTermQueryRewrite.ConstantScore,
@@ -73,7 +73,7 @@ namespace Tests.QueryDsl.FullText.QueryString
 			AnalyzeWildcard = true,
 			MinimumShouldMatch = 2,
 			QuoteFieldSuffix = "'",
-			Lenient = true,			
+			Lenient = true,
 			Timezone = "root"
 		};
 
@@ -89,12 +89,13 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.Analyzer("standard")
 				.QuoteAnalyzer("quote-an")
 				.AllowLeadingWildcard()
-				.AutoGeneratePhraseQueries()
 				.MaximumDeterminizedStates(2)
+				.AutoGeneratePhraseQueries()
 				.LowercaseExpendedTerms()
+				.Locale("en_US")
+				.UseDisMax()
 				.EnablePositionIncrements()
 				.Escape()
-				.UseDisMax()
 				.FuzzyPrefixLength(2)
 				.FuzzyMaxExpansions(3)
 				.FuzzyRewrite(MultiTermQueryRewrite.ConstantScore)
@@ -105,7 +106,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.MinimumShouldMatch(2)
 				.QuoteFieldSuffix("'")
 				.Lenient()
-				.Locale("en_US")
 				.Timezone("root")
 			);
 #pragma warning restore 618 // usage of lowercase_expanded_terms and locale

@@ -109,7 +109,9 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 				new RandomScoreFunction { Seed = 1337 },
 				new RandomScoreFunction { Seed = "randomstring" },
 				new WeightFunction { Weight = 1.0},
+#pragma warning disable 618
 				new ScriptScoreFunction { Script = new ScriptQuery { File = "x" } }
+#pragma warning restore 618
 			}
 		};
 
@@ -130,7 +132,9 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 					.RandomScore(1337)
 					.RandomScore("randomstring")
 					.Weight(1.0)
+#pragma warning disable 618
 					.ScriptScore(ss => ss.Script(s => s.File("x")))
+#pragma warning restore 618
 				)
 			);
 

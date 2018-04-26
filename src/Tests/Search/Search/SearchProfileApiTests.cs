@@ -81,7 +81,9 @@ namespace Tests.Search.Search
 					{
 						collector.Name.Should().NotBeNullOrEmpty();
 						collector.Reason.Should().NotBeNullOrEmpty();
+#pragma warning disable 618
 						collector.Time.Should().NotBeNull();
+#pragma warning restore 618
 						if (TestClient.VersionUnderTestSatisfiedBy(">=5.3.0"))
 							collector.TimeInNanoseconds.Should().BeGreaterThan(0);
 						var children = collector.Children;
@@ -91,7 +93,9 @@ namespace Tests.Search.Search
 							child.Should().NotBeNull();
 							child.Name.Should().NotBeNullOrEmpty();
 							child.Reason.Should().NotBeNullOrEmpty();
+#pragma warning disable 618
 							child.Time.Should().NotBeNull();
+#pragma warning restore 618
 							if (TestClient.VersionUnderTestSatisfiedBy(">=5.3.0"))
 								child.TimeInNanoseconds.Should().BeGreaterThan(0);
 							var grandchildren = child.Children;
@@ -100,7 +104,9 @@ namespace Tests.Search.Search
 							{
 								grandchild.Name.Should().NotBeNullOrEmpty();
 								grandchild.Reason.Should().NotBeNullOrEmpty();
+#pragma warning disable 618
 								grandchild.Time.Should().NotBeNull();
+#pragma warning restore 618
 								if (TestClient.VersionUnderTestSatisfiedBy(">=5.3.0"))
 									grandchild.TimeInNanoseconds.Should().BeGreaterThan(0);
 							}

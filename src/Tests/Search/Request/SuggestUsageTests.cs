@@ -193,7 +193,9 @@ namespace Tests.Search.Request
 						{
 							Collate = new PhraseSuggestCollate
 							{
+#pragma warning disable 618
 								Query = new TemplateQuery
+#pragma warning restore 618
 								{
 									Inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
 								},

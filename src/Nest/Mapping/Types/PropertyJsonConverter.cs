@@ -66,7 +66,9 @@ namespace Nest
 				case FieldType.GeoShape:
 					return jObject.ToObject<GeoShapeProperty>();
 				case FieldType.Attachment:
+#pragma warning disable 618
 					return jObject.ToObject<AttachmentProperty>();
+#pragma warning restore 618
 				case FieldType.Completion:
 					return jObject.ToObject<CompletionProperty>();
 				case FieldType.TokenCount:

@@ -54,6 +54,8 @@ namespace Tests.Mapping.Types
 		protected abstract object SingleMappingJson { get;  }
 
 		protected override PutIndexTemplateDescriptor NewDescriptor() => new PutIndexTemplateDescriptor(CallIsolatedValue);
+
+#pragma warning disable 618 // Use of Template
 		protected override Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> Fluent => d => d
 			.Order(1)
 			.Template("nestx-*")
@@ -70,6 +72,7 @@ namespace Tests.Mapping.Types
 					)
 				)
 			);
+#pragma warning restore 618
 
 		protected abstract Func<SingleMappingDescriptor<object>, IProperty> FluentSingleMapping { get; }
 		protected abstract IProperty InitializerSingleMapping { get; }
@@ -77,7 +80,9 @@ namespace Tests.Mapping.Types
 		protected override PutIndexTemplateRequest Initializer => new PutIndexTemplateRequest(CallIsolatedValue)
 		{
 			Order = 1,
+#pragma warning disable 618
 			Template = "nestx-*",
+#pragma warning restore 618
 			Create = false,
 			Settings = new Nest.IndexSettings
 			{

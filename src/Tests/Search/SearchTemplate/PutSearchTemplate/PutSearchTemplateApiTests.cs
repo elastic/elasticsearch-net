@@ -5,6 +5,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
+#pragma warning disable 618 // PutSearchTemplate is deleted in 6.x
 
 namespace Tests.Search.SearchTemplate.PutSearchTemplate
 {

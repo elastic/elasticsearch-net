@@ -131,6 +131,7 @@ namespace Nest
 		[JsonProperty("function_score")]
 		IFunctionScoreQuery FunctionScore { get; set; }
 
+		[Obsolete("Removed in NEST 6.x")]
 		[JsonProperty("template")]
 		ITemplateQuery Template { get; set; }
 
@@ -143,6 +144,7 @@ namespace Nest
 		[JsonProperty("geo_polygon")]
 		IGeoPolygonQuery GeoPolygon { get; set; }
 
+		[Obsolete("Removed in NEST 6.x")]
 		[JsonProperty("geo_distance_range")]
 		IGeoDistanceRangeQuery GeoDistanceRange { get; set; }
 

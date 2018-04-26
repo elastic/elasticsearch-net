@@ -24,7 +24,9 @@ namespace Nest
 			writer.WriteStartObject();
 			{
 				if (v.Id != null) writer.WriteProperty(serializer, "id", v.Id);
+#pragma warning disable 618
 				if (v.File != null) writer.WriteProperty(serializer, "file", v.File);
+#pragma warning restore 618
 				if (v.Inline != null) writer.WriteProperty(serializer, "inline", v.Inline);
 				if (v.Lang != null) writer.WriteProperty(serializer, "lang", v.Lang);
 				if (v.Params != null) writer.WriteProperty(serializer, "params", v.Params);
@@ -56,7 +58,9 @@ namespace Nest
 						r.Id = p.Value.Value<string>();
 						break;
 					case "file":
+#pragma warning disable 618
 						r.File = p.Value.Value<string>();
+#pragma warning restore 618
 						break;
 					case "inline":
 						r.Inline = p.Value.Value<string>();

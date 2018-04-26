@@ -36,9 +36,11 @@ namespace Nest
 		{
 		}
 
+#pragma warning disable 618
 		public virtual void Visit(IAttachmentProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
 		}
+#pragma warning restore 618
 
 		public virtual void Visit(IGeoPointProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
@@ -100,8 +102,10 @@ namespace Nest
 			if (type is IKeywordProperty keywordType)
 				Visit(keywordType, propertyInfo, attribute);
 
+#pragma warning disable 618
 			if (type is IAttachmentProperty attachmentType)
 				Visit(attachmentType, propertyInfo, attribute);
+#pragma warning restore 618
 
 			if (type is IGeoShapeProperty geoShapeType)
 				Visit(geoShapeType, propertyInfo, attribute);

@@ -140,7 +140,9 @@ namespace Nest
 				return new CompletionProperty();
 
 			if (type == typeof(Attachment))
+#pragma warning disable 618
 				return new AttachmentProperty();
+#pragma warning restore 618
 
 			if (type == typeof(DateRange))
 				return new DateRangeProperty();

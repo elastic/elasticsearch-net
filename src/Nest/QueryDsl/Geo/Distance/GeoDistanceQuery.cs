@@ -14,6 +14,7 @@ namespace Nest
 		Distance Distance { get; set; }
 
 		[JsonProperty("optimize_bbox")]
+		[Obsolete("Scheduled to be removed in 6.0")]
 		GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 
 		[JsonProperty("distance_type")]
@@ -64,6 +65,7 @@ namespace Nest
 		GeoLocation IGeoDistanceQuery.Location { get; set; }
 		Distance IGeoDistanceQuery.Distance { get; set; }
 		GeoDistanceType? IGeoDistanceQuery.DistanceType { get; set; }
+		[Obsolete("Scheduled to be removed in 6.0")]
 		GeoOptimizeBBox? IGeoDistanceQuery.OptimizeBoundingBox { get; set; }
 		bool? IGeoDistanceQuery.Coerce { get; set; }
 		bool? IGeoDistanceQuery.IgnoreMalformed { get; set; }

@@ -76,7 +76,9 @@ namespace Nest
 			if (dict.ContainsKey("file"))
 			{
 				var file = dict["file"].ToString();
+#pragma warning disable 618
 				scriptCondition = new FileScriptCondition(file);
+#pragma warning restore 618
 			}
 			if (dict.ContainsKey("id"))
 			{

@@ -39,11 +39,13 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 		{
 			foreach (var callUniqueValue in values)
 			{
+#pragma warning disable 618
 				var putTemplateResponse = client.PutIndexTemplate(callUniqueValue.Value, d =>
 					d.Template("nestx-*")
 				     .Settings(s => s.NumberOfShards(2))
 					 .Version(1)
 					);
+#pragma warning restore 618
 
 				if (!putTemplateResponse.IsValid)
 					throw new Exception($"Problem putting index template for integration test: {putTemplateResponse.DebugInformation}");
@@ -59,8 +61,10 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 
 			var responseTemplateMapping = response.TemplateMappings[CallIsolatedValue];
 
+#pragma warning disable 618
 			responseTemplateMapping.Template.Should().NotBeNull();
 			responseTemplateMapping.Template.Should().Be("nestx-*");
+#pragma warning restore 618
 
 			responseTemplateMapping.Version.Should().Be(1);
 

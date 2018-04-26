@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using System.Threading;
+#pragma warning disable 618
 
 namespace Nest
 {

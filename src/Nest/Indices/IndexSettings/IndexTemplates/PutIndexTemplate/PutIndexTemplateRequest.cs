@@ -43,6 +43,7 @@ namespace Nest
 
 		public PutIndexTemplateDescriptor Version(int version) => Assign(a => a.Version = version);
 
+		[Obsolete("Removed in NEST 6.x.")]
 		public PutIndexTemplateDescriptor Template(string template)=> Assign(a => a.Template = template);
 
 		public PutIndexTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingsSelector) =>
