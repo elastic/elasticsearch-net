@@ -20,6 +20,8 @@ Often this will be used to narrow down the current aggregation context to a spec
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filter-aggregation.html[Filter Aggregation]
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -30,6 +32,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -90,6 +94,8 @@ tags.Buckets.Should().NotBeEmpty();
 When the collection of filters is empty or all are conditionless, NEST will serialize them
 to an empty object.
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -101,6 +107,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -123,10 +131,14 @@ new FilterAggregation("empty_filter")
 }
 ----
 
+==== Handling Responses
+
 [source,csharp]
 ----
 response.ShouldNotBeValid();
 ----
+
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -139,6 +151,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -166,6 +180,8 @@ new FilterAggregation(_aggName)
   }
 }
 ----
+
+==== Handling Responses
 
 [source,csharp]
 ----

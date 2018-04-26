@@ -1,0 +1,132 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.1
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/TermLevel/TermsSet/TermsSetQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[terms-set-query-usage]]
+=== Terms Set Query Usage
+
+Returns any documents that match with at least one or more of the provided terms. The terms are not
+analyzed and thus must match exactly. The number of terms that must match varies per document and
+is either controlled by a minimum should match field or computed per document in a minimum should match script.
+
+Be sure to read the Elasticsearch documentation on {ref_current}/query-dsl-terms-set-query.html[Terms Set query] for more information.
+
+[float]
+=== Minimum should match with field
+
+The field that controls the number of required terms that must match must be a number field
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.TermsSet(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Branches)
+    .Terms("master", "dev")
+    .MinimumShouldMatchField(p => p.RequiredBranches)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new TermsSetQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.Branches),
+    Terms = new [] { "master", "dev" },
+    MinimumShouldMatchField = Infer.Field<Project>(p => p.RequiredBranches)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "terms_set": {
+    "branches": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "terms": [
+        "master",
+        "dev"
+      ],
+      "minimum_should_match_field": "requiredBranches"
+    }
+  }
+}
+----
+
+[float]
+=== Minimum should match with script
+
+Scripts can also be used to control how many terms are required to match in a more dynamic way.
+
+The `params.num_terms` parameter is available in the script to indicate the number of
+terms that have been specified in the query.
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.TermsSet(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Branches)
+    .Terms("master", "dev")
+    .MinimumShouldMatchScript(s => s
+        .Source("Math.min(params.num_terms, doc['requiredBranches'].value)")
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new TermsSetQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Infer.Field<Project>(p => p.Branches),
+    Terms = new [] { "master", "dev" },
+    MinimumShouldMatchScript = new InlineScript("Math.min(params.num_terms, doc['requiredBranches'].value)")
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "terms_set": {
+    "branches": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "terms": [
+        "master",
+        "dev"
+      ],
+      "minimum_should_match_script": {
+        "source": "Math.min(params.num_terms, doc['requiredBranches'].value)"
+      }
+    }
+  }
+}
+----
+

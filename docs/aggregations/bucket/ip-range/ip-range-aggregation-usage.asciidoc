@@ -15,17 +15,21 @@ please modify the original csharp file found at the link and submit the PR with 
 [[ip-range-aggregation-usage]]
 === Ip Range Aggregation Usage
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
 .IpRange("ip_ranges", ip => ip
     .Field(p => p.LeadDeveloper.IpAddress)
     .Ranges(
-        r => r.To("10.0.0.5"),
-        r => r.From("10.0.0.5")
+        r => r.To("127.0.0.1"),
+        r => r.From("127.0.0.1")
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -34,8 +38,8 @@ new IpRangeAggregation("ip_ranges")
     Field = Field((Project p) => p.LeadDeveloper.IpAddress),
     Ranges = new List<Nest.IpRange>
     {
-        new Nest.IpRange {To = "10.0.0.5"},
-        new Nest.IpRange {From = "10.0.0.5"}
+        new Nest.IpRange {To = "127.0.0.1"},
+        new Nest.IpRange {From = "127.0.0.1"}
     }
 }
 ----
@@ -49,10 +53,10 @@ new IpRangeAggregation("ip_ranges")
       "field": "leadDeveloper.ipAddress",
       "ranges": [
         {
-          "to": "10.0.0.5"
+          "to": "127.0.0.1"
         },
         {
-          "from": "10.0.0.5"
+          "from": "127.0.0.1"
         }
       ]
     }

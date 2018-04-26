@@ -123,7 +123,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 					BackgroundIsSuperSet = true,
 					IncludeNegatives = true
 				},
-				Include = new SignificantTermsIncludeExclude("pi*")
+				Include = new IncludeExclude("pi*")
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -185,7 +185,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 					BackgroundIsSuperSet = true,
 					IncludeNegatives = true
 				},
-				Exclude = new SignificantTermsIncludeExclude(new[] {"pierce"})
+				Exclude = new IncludeExclude(new[] {"pierce"})
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

@@ -1,0 +1,122 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.1
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Aggregations/Pipeline/BucketSort/BucketSortAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[bucket-sort-aggregation-usage]]
+=== Bucket Sort Aggregation Usage
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.DateHistogram("projects_started_per_month", dh => dh
+    .Field(p => p.StartedOn)
+    .Interval(DateInterval.Month)
+    .Aggregations(aa => aa
+        .Sum("commits", sm => sm
+            .Field(p => p.NumberOfCommits)
+        )
+        .BucketSort("commits_bucket_sort", bs => bs
+            .Sort(s => s
+                .Descending("commits")
+            )
+            .From(0)
+            .Size(3)
+            .GapPolicy(GapPolicy.InsertZeros)
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new DateHistogramAggregation("projects_started_per_month")
+{
+    Field = "startedOn",
+    Interval = DateInterval.Month,
+    Aggregations =
+        new SumAggregation("commits", "numberOfCommits") &&
+        new BucketSortAggregation("commits_bucket_sort")
+        {
+            Sort = new List<ISort>
+            {
+                new SortField { Field = "commits", Order = SortOrder.Descending }
+            },
+            From = 0,
+            Size = 3,
+            GapPolicy = GapPolicy.InsertZeros
+        }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      },
+      "commits_bucket_sort": {
+        "bucket_sort": {
+          "sort": [
+            {
+              "commits": {
+                "order": "desc"
+              }
+            }
+          ],
+          "from": 0,
+          "size": 3,
+          "gap_policy": "insert_zeros"
+        }
+      }
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().Be(3);
+
+double previousCommits = -1;
+
+// sum of commits should descend over buckets
+foreach(var item in projectsPerMonth.Buckets)
+{
+    var numberOfCommits = item.Sum("commits").Value.Value;
+    if (previousCommits != -1)
+        numberOfCommits.Should().BeLessOrEqualTo(previousCommits);
+
+    previousCommits = numberOfCommits;
+}
+----
+

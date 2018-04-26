@@ -142,7 +142,7 @@ Indexing a document is as simple as (with 6.x):
 ```csharp
 var tweet = new Tweet
 {
-	Id = 1,
+    Id = 1,
     User = "kimchy",
     PostDate = new DateTime(2009, 11, 15),
     Message = "Trying out NEST, so far so good?"
@@ -323,12 +323,6 @@ and a small HTTP server will be spun up locally on port 8000 through which you c
 
 [Pull Requests](https://github.com/elastic/elasticsearch-net/pulls) are most welcome for areas of documentation that need improving.
 
-## Blog posts 
-
-Starting this section (2016) to list blogposts from our users that might be super helpful in your journey to learn Elasticsearch from a .NET perspective
-
-- Read how buildclassifieds are using [ElasticSearch with ServiceStack (.NET)](http://buildclassifieds.com/2016/01/22/elasticsearch-and-servicestack/) in helping build a Classifieds Site.
-
 #### Many thanks to:
 * [Q42](https://q42.nl/) for supporting the development of NEST
 * [redgate](http://www.red-gate.com) for supplying @Mpdreamz with an ANTS Memory Profiler 8 & ANTS Performance Profiler 8 licenses
@@ -338,6 +332,6 @@ Starting this section (2016) to list blogposts from our users that might be supe
 
 ## Copyright and License
 
-This software is Copyright (c) 2014-2015 by Elasticsearch BV.
+This software is Copyright (c) 2014-2018 by Elasticsearch BV.
 
 This is free software, licensed under: [The Apache License Version 2.0](https://github.com/elasticsearch/elasticsearch-net/blob/develop/license.txt).

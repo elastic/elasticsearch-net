@@ -27,6 +27,8 @@ As a result, the API for this feature may change in non-backwards compatible way
 
 See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-significantterms-aggregation.html[significant terms aggregation] for more detail.
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -39,6 +41,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -87,6 +91,8 @@ sigNames.DocCount.Should().BeGreaterThan(0);
 
 Using significant terms aggregation with filtering to include values using a regular expression pattern
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -101,6 +107,8 @@ a => a
 )
 ----
 
+==== Object Initializer syntax example
+
 [source,csharp]
 ----
 new SignificantTermsAggregation("significant_names")
@@ -112,7 +120,7 @@ new SignificantTermsAggregation("significant_names")
         BackgroundIsSuperSet = true,
         IncludeNegatives = true
     },
-    Include = new SignificantTermsIncludeExclude("pi*")
+    Include = new IncludeExclude("pi*")
 }
 ----
 
@@ -134,6 +142,8 @@ new SignificantTermsAggregation("significant_names")
 }
 ----
 
+==== Handling Responses
+
 [source,csharp]
 ----
 response.ShouldBeValid();
@@ -147,6 +157,8 @@ sigNames.DocCount.Should().BeGreaterThan(0);
 == Filtering with exact values
 
 Using significant terms aggregation with filtering to exclude specific values
+
+==== Fluent DSL example
 
 [source,csharp]
 ----
@@ -162,6 +174,8 @@ a => a
 )
 ----
 
+==== Object Initializer syntax example
+
 [source,csharp]
 ----
 new SignificantTermsAggregation("significant_names")
@@ -173,7 +187,7 @@ new SignificantTermsAggregation("significant_names")
         BackgroundIsSuperSet = true,
         IncludeNegatives = true
     },
-    Exclude = new SignificantTermsIncludeExclude(new[] {"pierce"})
+    Exclude = new IncludeExclude(new[] {"pierce"})
 }
 ----
 
@@ -196,6 +210,8 @@ new SignificantTermsAggregation("significant_names")
   }
 }
 ----
+
+==== Handling Responses
 
 [source,csharp]
 ----

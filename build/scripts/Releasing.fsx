@@ -1,5 +1,7 @@
 ﻿#I @"../../packages/build/FAKE/tools"
+#I @"../../packages/build/Octokit/lib/net45"
 #r @"FakeLib.dll"
+#r "Octokit.dll"
 #nowarn "0044" //TODO sort out FAKE 5
 
 #load @"Projects.fsx"
@@ -8,6 +10,7 @@
 #load @"Versioning.fsx"
 
 open System
+open System.Collections.Generic
 open System.IO
 open System.Linq
 open System.Text
@@ -15,6 +18,7 @@ open System.Xml.Linq
 open Microsoft.FSharp.Quotations
 open Microsoft.FSharp.Quotations.Patterns
 open Fake
+open Octokit
 
 open Paths
 open Projects
@@ -91,3 +95,56 @@ module Release =
             | 0 -> traceFAKE "publish to myget succeeded" |> ignore
             | _ -> failwith "publish to myget failed" |> ignore
         )
+        
+    let GenerateNotes() = 
+        let previousVersion = Versioning.GlobalJsonVersion.ToString()
+        let currentVersion = Versioning.CurrentVersion.ToString()
+        let label = sprintf "v%s" currentVersion
+        let releaseNotes = sprintf "ReleaseNotes-%s.md" currentVersion |> Paths.Output      
+        let client = new GitHubClient(new ProductHeaderValue("ReleaseNotesGenerator"))
+        client.Credentials <- Credentials.Anonymous
+              
+        let filter = new RepositoryIssueRequest()
+        filter.Labels.Add label
+        filter.State <- ItemStateFilter.Closed
+        
+        let labelHeaders =
+           [("Feature", "Features & Enhancements");
+            ("Bug", "Bug Fixes");
+            ("Deprecation", "Deprecations");]
+           |> Map.ofList
+           
+        let groupByLabel (issues:IReadOnlyList<Issue>) =
+            let dict = new Dictionary<string, Issue list>()         
+            for issue in issues do
+                for labelHeader in labelHeaders do
+                    if issue.Labels.Any(fun l -> l.Name = labelHeader.Key) then
+                        let exists,list = dict.TryGetValue(labelHeader.Key)
+                        match exists with 
+                        | true -> dict.[labelHeader.Key] <- issue :: list
+                        | false -> dict.Add(labelHeader.Key, [issue])
+            dict
+        
+        let closedIssues = client.Issue.GetAllForRepository(Paths.OwnerName, Paths.RepositoryName, filter)
+                           |> Async.AwaitTask
+                           |> Async.RunSynchronously
+                           |> groupByLabel
+                              
+        use file = File.OpenWrite <| releaseNotes
+        use writer = new StreamWriter(file)                   
+        writer.WriteLine(sprintf "%s/compare/%s...%s" Paths.Repository previousVersion currentVersion)
+        writer.WriteLine()
+        for closedIssue in closedIssues do
+            labelHeaders.[closedIssue.Key] |> sprintf "## %s" |> writer.WriteLine    
+            writer.WriteLine()
+            for issue in closedIssue.Value do
+                sprintf "- #%i %s" issue.Number issue.Title |> writer.WriteLine
+            writer.WriteLine()
+              
+        sprintf "### [View the full list of issues and PRs](%s/issues?utf8=%%E2%%9C%%93&q=label%%3A%s)" Paths.Repository label
+        |> writer.WriteLine
+        
+                           
+                      
+        
+        

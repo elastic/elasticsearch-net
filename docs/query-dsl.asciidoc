@@ -118,6 +118,8 @@ NEST exposes all of the term queries available in Elasticsearch
 
 * <<terms-query-usage,Terms Query Usage>>
 
+* <<terms-set-query-usage,Terms Set Query Usage>>
+
 * <<type-query-usage,Type Query Usage>>
 
 * <<wildcard-query-usage,Wildcard Query Usage>>
@@ -153,6 +155,8 @@ include::query-dsl/term-level/terms/terms-list-query-usage.asciidoc[]
 include::query-dsl/term-level/terms/terms-lookup-query-usage.asciidoc[]
 
 include::query-dsl/term-level/terms/terms-query-usage.asciidoc[]
+
+include::query-dsl/term-level/terms-set/terms-set-query-usage.asciidoc[]
 
 include::query-dsl/term-level/type/type-query-usage.asciidoc[]
 

@@ -138,6 +138,9 @@ namespace Nest
 		[JsonProperty("significant_terms")]
 		ISignificantTermsAggregation SignificantTerms { get; set; }
 
+		[JsonProperty("significant_text")]
+		ISignificantTextAggregation SignificantText { get; set; }
+
 		[JsonProperty("value_count")]
 		IValueCountAggregation ValueCount { get; set; }
 
@@ -258,6 +261,8 @@ namespace Nest
 		public ITermsAggregation Terms { get; set; }
 
 		public ISignificantTermsAggregation SignificantTerms { get; set; }
+
+		public ISignificantTextAggregation SignificantText { get; set; }
 
 		public IPercentileRanksAggregation PercentileRanks { get; set; }
 
@@ -387,6 +392,8 @@ namespace Nest
 		IValueCountAggregation IAggregationContainer.ValueCount { get; set; }
 
 		ISignificantTermsAggregation IAggregationContainer.SignificantTerms { get; set; }
+
+		ISignificantTextAggregation IAggregationContainer.SignificantText { get; set; }
 
 		IPercentileRanksAggregation IAggregationContainer.PercentileRanks { get; set; }
 
@@ -533,6 +540,10 @@ namespace Nest
 		public AggregationContainerDescriptor<T> SignificantTerms(string name,
 			Func<SignificantTermsAggregationDescriptor<T>, ISignificantTermsAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.SignificantTerms = d);
+
+		public AggregationContainerDescriptor<T> SignificantText(string name,
+			Func<SignificantTextAggregationDescriptor<T>, ISignificantTextAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.SignificantText = d);
 
 		public AggregationContainerDescriptor<T> ValueCount(string name,
 			Func<ValueCountAggregationDescriptor<T>, IValueCountAggregation> selector) =>
