@@ -111,7 +111,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						doubles = new { type = "double_range" },
 						floats = new { type = "float_range" },
 						integers = new { type = "integer_range" },
-						longs = new { type = "long_range" }
+						longs = new { type = "long_range" },
+						ips = new { type = "ip_range" }
 					},
 					type = "object"
 				},
@@ -274,6 +275,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 							{p => p.Floats, new FloatRangeProperty()},
 							{p => p.Integers, new IntegerRangeProperty()},
 							{p => p.Longs, new LongRangeProperty()},
+							{p => p.Ips, new IpAddressRangeProperty()},
 						}
 					}
 				},

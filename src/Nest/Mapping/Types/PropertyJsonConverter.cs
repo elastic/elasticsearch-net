@@ -11,16 +11,11 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => objectType == typeof(IProperty);
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
 			throw new NotSupportedException();
-		}
 
-		private TProperty ReadProperty<TProperty>(JObject j, JsonSerializer s)
-			where TProperty : IProperty
-		{
-			return FromJson.ReadAs<TProperty>(j.CreateReader(), s);
-		}
+		private TProperty ReadProperty<TProperty>(JObject j, JsonSerializer s) where TProperty : IProperty =>
+			FromJson.ReadAs<TProperty>(j.CreateReader(), s);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -64,6 +59,7 @@ namespace Nest
 				case FieldType.FloatRange: return ReadProperty<FloatRangeProperty>(jObject, serializer);
 				case FieldType.IntegerRange: return ReadProperty<IntegerRangeProperty>(jObject, serializer);
 				case FieldType.LongRange: return ReadProperty<LongRangeProperty>(jObject, serializer);
+				case FieldType.IpRange: return ReadProperty<IpAddressRangeProperty>(jObject, serializer);
 				case FieldType.Join: return ReadProperty<JoinProperty>(jObject, serializer);
 				case FieldType.None:
 					break;
