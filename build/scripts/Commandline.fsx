@@ -36,6 +36,8 @@ Execution hints can be provided anywhere on the command line
 - skiptests : skip running tests as part of the target chain
 - source_serialization : force tests to use a client with custom source serialization
 - seed:<N> : provide a seed to run the tests with.
+- random:<K><:B> : sets random K to bool B if if B is omitted will default to true
+  K can be: sourceserializer, typedkeys or oldconnection (only valid on windows)
 """
 
 module Commandline =
