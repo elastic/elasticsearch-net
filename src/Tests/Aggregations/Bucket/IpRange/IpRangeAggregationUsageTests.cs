@@ -44,10 +44,10 @@ namespace Tests.Aggregations.Bucket.IpRange
 			new IpRangeAggregation("ip_ranges")
 			{
 				Field = Field((Project p) => p.LeadDeveloper.IpAddress),
-				Ranges = new List<Nest.IpRange>
+				Ranges = new List<Nest.IpRangeAggregationRange>
 				{
-					new Nest.IpRange {To = "127.0.0.1"},
-					new Nest.IpRange {From = "127.0.0.1"}
+					new Nest.IpRangeAggregationRange {To = "127.0.0.1"},
+					new Nest.IpRangeAggregationRange {From = "127.0.0.1"}
 				}
 			};
 
