@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
 	/// <summary>
 	/// Represents a Latitude/Longitude as a 2 dimensional point that gets serialized as { lat, lon }
 	/// </summary>
@@ -18,18 +17,16 @@ namespace Nest
 		/// Latitude
 		/// </summary>
 		[JsonProperty("lat")]
-		public double Latitude => _latitude;
-		private readonly double _latitude;
+		public double Latitude { get; }
 
 		/// <summary>
 		/// Longitude
 		/// </summary>
 		[JsonProperty("lon")]
-		public double Longitude => _longitude;
-		private readonly double _longitude;
+		public double Longitude { get; }
 
 		/// <summary>
-		/// Represents a Latitude/Longitude as a 2 dimensional point. 
+		/// Represents a Latitude/Longitude as a 2 dimensional point.
 		/// </summary>
 		/// <param name="latitude">Value between -90 and 90</param>
 		/// <param name="longitude">Value between -180 and 180</param>
@@ -42,8 +39,8 @@ namespace Nest
 			if (!IsValidLongitude(longitude))
 				throw new ArgumentOutOfRangeException(string.Format(CultureInfo.InvariantCulture,
 					"Invalid longitude '{0}'. Valid values are between -180 and 180", longitude));
-			_latitude = latitude;
-			_longitude = longitude;
+			Latitude = latitude;
+			Longitude = longitude;
 		}
 
 		/// <summary>
@@ -51,23 +48,17 @@ namespace Nest
 		/// </summary>
 		/// <param name="latitude"></param>
 		/// <returns></returns>
-		public static bool IsValidLatitude(double latitude)
-		{
-			return latitude >= -90 && latitude <= 90;
-		}
+		public static bool IsValidLatitude(double latitude) => latitude >= -90 && latitude <= 90;
 
 		/// <summary>
 		/// True if <paramref name="longitude"/> is a valid longitude. Otherwise false.
 		/// </summary>
 		/// <param name="longitude"></param>
 		/// <returns></returns>
-		public static bool IsValidLongitude(double longitude)
-		{
-			return longitude >= -180 && longitude <= 180;
-		}
+		public static bool IsValidLongitude(double longitude) => longitude >= -180 && longitude <= 180;
 
 		/// <summary>
-		/// Try to create a <see cref="GeoLocation"/>. 
+		/// Try to create a <see cref="GeoLocation"/>.
 		/// Return <value>null</value> if either <paramref name="latitude"/> or <paramref name="longitude"/> are invalid.
 		/// </summary>
 		/// <param name="latitude">Value between -90 and 90</param>
@@ -80,10 +71,9 @@ namespace Nest
 			return null;
 		}
 
-		public override string ToString()
-		{
-            return _latitude.ToString("#0.0#######", CultureInfo.InvariantCulture) + "," + _longitude.ToString("#0.0#######", CultureInfo.InvariantCulture);
-		}
+		public override string ToString() =>
+			Latitude.ToString("#0.0#######", CultureInfo.InvariantCulture) + "," +
+			Longitude.ToString("#0.0#######", CultureInfo.InvariantCulture);
 
 		public bool Equals(GeoLocation other)
 		{
@@ -91,7 +81,7 @@ namespace Nest
 				return false;
 			if (ReferenceEquals(this, other))
 				return true;
-			return _latitude.Equals(other._latitude) && _longitude.Equals(other._longitude);
+			return Latitude.Equals(other.Latitude) && Longitude.Equals(other.Longitude);
 		}
 
 		public override bool Equals(object obj)
@@ -106,7 +96,7 @@ namespace Nest
 		}
 
 		public override int GetHashCode() =>
-			unchecked((_latitude.GetHashCode() * 397) ^ _longitude.GetHashCode());
+			unchecked((Latitude.GetHashCode() * 397) ^ Longitude.GetHashCode());
 
 		public string ToString(string format, IFormatProvider formatProvider) => ToString();
 
@@ -117,21 +107,18 @@ namespace Nest
 
 			var parts = latLon.Split(',');
 			if (parts.Length != 2) throw new ArgumentException("Invalid format: string must be in the form of lat,lon");
-			double lat;
-			if (!double.TryParse(parts[0], NumberStyles.Any, CultureInfo.InvariantCulture, out lat))
+			if (!double.TryParse(parts[0], NumberStyles.Any, CultureInfo.InvariantCulture, out var lat))
 				throw new ArgumentException("Invalid latitude value");
-			double lon;
-			if (!double.TryParse(parts[1], NumberStyles.Any, CultureInfo.InvariantCulture, out lon))
+			if (!double.TryParse(parts[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var lon))
 				throw new ArgumentException("Invalid longitude value");
 			return new GeoLocation(lat, lon);
 		}
 
 		public static implicit operator GeoLocation(double[] lonLat)
 		{
-			if (lonLat.Length != 2)
-				return null;
-			
-			return new GeoLocation(lonLat[1], lonLat[0]);
+			return lonLat.Length != 2
+				? null
+				: new GeoLocation(lonLat[1], lonLat[0]);
 		}
 	}
 
@@ -141,14 +128,21 @@ namespace Nest
 	[JsonConverter(typeof(GeoCoordinateJsonConverter))]
 	public class GeoCoordinate : GeoLocation
 	{
-		public GeoCoordinate(double latitude, double longitude) : base(latitude, longitude)
-		{
-		}
+		/// <summary>
+		/// Creates a new instance of <see cref="GeoCoordinate"/>
+		/// </summary>
+		public GeoCoordinate(double latitude, double longitude) : base(latitude, longitude) { }
 
+		/// <summary>
+		/// Creates a new instance of <see cref="GeoCoordinate"/> from a pair of coordinates
+		/// in the order Latitude then Longitude.
+		/// </summary>
 		public static implicit operator GeoCoordinate(double[] coordinates)
 		{
 			if (coordinates == null || coordinates.Length != 2)
-				throw new ArgumentOutOfRangeException(nameof(coordinates), "Can not create a GeoCoordinate from an array that does not have two doubles");
+				throw new ArgumentOutOfRangeException(
+					nameof(coordinates),
+					$"Can not create a {nameof(GeoCoordinate)} from an array that does not have two doubles");
 
 			return new GeoCoordinate(coordinates[0], coordinates[1]);
 		}
