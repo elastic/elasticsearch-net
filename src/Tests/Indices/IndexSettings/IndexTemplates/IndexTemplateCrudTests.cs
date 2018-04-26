@@ -25,7 +25,9 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 
 		protected PutIndexTemplateRequest CreateInitializer(string name) => new PutIndexTemplateRequest(name)
 		{
+#pragma warning disable 618
 			Template = "startingwiththis-*",
+#pragma warning restore 618
 			Settings = new Nest.IndexSettings
 			{
 				NumberOfShards = 2
@@ -54,7 +56,9 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 		{
 			response.TemplateMappings.Should().NotBeNull().And.HaveCount(1);
 			var templateMapping = response.TemplateMappings.First().Value;
+#pragma warning disable 618
 			templateMapping.Template.Should().StartWith("startingwith");
+#pragma warning restore 618
 			templateMapping.Settings.Should().NotBeNull().And.NotBeEmpty();
 			templateMapping.Settings.NumberOfShards.Should().Be(2);
 		}
@@ -69,7 +73,9 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 		);
 		protected PutIndexTemplateRequest PutInitializer(string name) => new PutIndexTemplateRequest(name)
 		{
+#pragma warning disable 618
 			Template = "startingwiththis-*",
+#pragma warning restore 618
 			Settings = new Nest.IndexSettings
 			{
 				NumberOfShards = 1
@@ -85,7 +91,9 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 		{
 			response.TemplateMappings.Should().NotBeNull().And.HaveCount(1);
 			var templateMapping = response.TemplateMappings.First().Value;
+#pragma warning disable 618
 			templateMapping.Template.Should().StartWith("startingwith");
+#pragma warning restore 618
 			templateMapping.Settings.Should().NotBeNull().And.NotBeEmpty();
 			templateMapping.Settings.NumberOfShards.Should().Be(1);
 		}

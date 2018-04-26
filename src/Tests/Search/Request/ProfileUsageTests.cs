@@ -79,7 +79,9 @@ namespace Tests.Search.Request
 			var firstCollector = firstSearch.Collector.First();
 			firstCollector.Name.Should().NotBeNullOrEmpty();
 			firstCollector.Reason.Should().NotBeNullOrEmpty();
+#pragma warning disable 618
 			firstCollector.Time.Should().BeGreaterOrEqualTo(TimeSpan.FromMilliseconds(0.000001));
+#pragma warning restore 618
 		});
 	}
 }
