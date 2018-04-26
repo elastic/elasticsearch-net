@@ -13,9 +13,6 @@ namespace Nest
 		/// The /_search/template endpoint allows to use the mustache language to pre render search
 		/// requests, before they are executed and fill existing templates with template parameters.
 		/// </summary>
-		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
-		/// <param name="selector">A descriptor that describes the parameters for the search operation</param>
-		/// <returns></returns>
 		ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class;
 
