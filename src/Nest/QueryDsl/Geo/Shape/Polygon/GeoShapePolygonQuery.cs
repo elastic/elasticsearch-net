@@ -12,8 +12,24 @@ namespace Nest
 
 	public class GeoShapePolygonQuery : GeoShapeQueryBase, IGeoShapePolygonQuery
 	{
+		private IPolygonGeoShape _shape;
 		protected override bool Conditionless => IsConditionless(this);
-		public IPolygonGeoShape Shape { get; set; }
+
+		public IPolygonGeoShape Shape
+		{
+			get => _shape;
+			set
+			{
+#pragma warning disable 618
+				if (value?.IgnoreUnmapped != null)
+				{
+					IgnoreUnmapped = value.IgnoreUnmapped;
+					value.IgnoreUnmapped = null;
+				}
+#pragma warning restore 618
+				_shape = value;
+			}
+		}
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
 		internal static bool IsConditionless(IGeoShapePolygonQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
@@ -27,6 +43,11 @@ namespace Nest
 		IPolygonGeoShape IGeoShapePolygonQuery.Shape { get; set; }
 
 		public GeoShapePolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<GeoCoordinate>> coordinates, bool? ignoreUnmapped = null) =>
-			Assign(a => a.Shape = new PolygonGeoShape { Coordinates = coordinates, IgnoreUnmapped = ignoreUnmapped });
+			Assign(a =>
+			{
+				a.Shape = a.Shape ?? new PolygonGeoShape();
+				a.Shape.Coordinates = coordinates;
+				a.IgnoreUnmapped = ignoreUnmapped;
+			});
 	}
 }

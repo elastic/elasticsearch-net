@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -33,6 +34,7 @@ namespace Nest
 		string IGeoShape.Type => this.Type;
 
 		/// <inheritdoc />
+		[Obsolete("Removed in NEST 7.x. Use IgnoreUnmapped on IGeoShapeQuery")]
 		public bool? IgnoreUnmapped { get; set; }
 
 		/// <inheritdoc />

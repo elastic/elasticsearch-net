@@ -20,6 +20,7 @@ namespace Nest
 		/// This can be useful when querying multiple indexes which might have different mappings.
 		/// </summary>
 		[JsonProperty("ignore_unmapped")]
+		[Obsolete("Removed in NEST 7.x. Use IgnoreUnmapped on IGeoShapeQuery")]
 		bool? IgnoreUnmapped { get; set; }
 	}
 
@@ -31,6 +32,7 @@ namespace Nest
 		public string Type { get; protected set; }
 
 		/// <inheritdoc />
+		[Obsolete("Removed in NEST 7.x. Use IgnoreUnmapped on IGeoShapeQuery")]
 		public bool? IgnoreUnmapped { get; set; }
 	}
 
