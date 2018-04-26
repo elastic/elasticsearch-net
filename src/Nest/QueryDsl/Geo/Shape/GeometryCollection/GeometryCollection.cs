@@ -22,7 +22,6 @@ namespace Nest
 		IEnumerable<IGeoShape> Geometries { get; set; }
 	}
 
-	// TODO: IGeometryCollection should implement IGeoShape
 	/// <inheritdoc cref="IGeometryCollection"/>
 	public class GeometryCollection : IGeometryCollection, IGeoShape
 	{
@@ -31,9 +30,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		string IGeoShape.Type => this.Type;
-
-		/// <inheritdoc />
-		public bool? IgnoreUnmapped { get; set; }
 
 		/// <inheritdoc />
 		public IEnumerable<IGeoShape> Geometries { get; set; }

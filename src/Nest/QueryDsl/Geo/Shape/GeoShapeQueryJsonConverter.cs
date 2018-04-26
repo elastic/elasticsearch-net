@@ -84,9 +84,9 @@ namespace Nest
 			var relation = jo["relation"]?.Value<string>().ToEnum<GeoShapeRelation>();
 			query.Boost = boost;
 			query.Name = name;
-			query.IgnoreUnmapped = ignoreUnmapped;
 			query.Field = field;
 			query.Relation = relation;
+			query.IgnoreUnmapped = ignoreUnmapped;
 			return query;
 		}
 
@@ -98,49 +98,24 @@ namespace Nest
 			var type = shape["type"];
 			var typeName = type?.Value<string>();
 			var geometry = GeoShapeConverter.ReadJToken(shape, serializer);
-
 			switch (typeName)
 			{
 				case "circle":
-					return new GeoShapeCircleQuery
-					{
-						Shape = geometry as ICircleGeoShape
-					};
+					return new GeoShapeCircleQuery { Shape = geometry as ICircleGeoShape };
 				case "envelope":
-					return new GeoShapeEnvelopeQuery
-					{
-						Shape = geometry as IEnvelopeGeoShape
-					};
+					return new GeoShapeEnvelopeQuery { Shape = geometry as IEnvelopeGeoShape };
 				case "linestring":
-					return new GeoShapeLineStringQuery
-					{
-						Shape = geometry as ILineStringGeoShape
-					};
+					return new GeoShapeLineStringQuery { Shape = geometry as ILineStringGeoShape };
 				case "multilinestring":
-					return new GeoShapeMultiLineStringQuery
-					{
-						Shape = geometry as IMultiLineStringGeoShape
-					};
+					return new GeoShapeMultiLineStringQuery { Shape = geometry as IMultiLineStringGeoShape };
 				case "point":
-					return new GeoShapePointQuery
-					{
-						Shape = geometry as IPointGeoShape
-					};
+					return new GeoShapePointQuery { Shape = geometry as IPointGeoShape };
 				case "multipoint":
-					return new GeoShapeMultiPointQuery
-					{
-						Shape = geometry as IMultiPointGeoShape
-					};
+					return new GeoShapeMultiPointQuery { Shape = geometry as IMultiPointGeoShape };
 				case "polygon":
-					return new GeoShapePolygonQuery
-					{
-						Shape = geometry as IPolygonGeoShape
-					};
+					return new GeoShapePolygonQuery { Shape = geometry as IPolygonGeoShape };
 				case "multipolygon":
-					return new GeoShapeMultiPolygonQuery
-					{
-						Shape = geometry as IMultiPolygonGeoShape
-					};
+					return new GeoShapeMultiPolygonQuery { Shape = geometry as IMultiPolygonGeoShape };
 				case "geometrycollection":
 					return new GeoShapeGeometryCollectionQuery { Shape = geometry as IGeometryCollection };
 				default:

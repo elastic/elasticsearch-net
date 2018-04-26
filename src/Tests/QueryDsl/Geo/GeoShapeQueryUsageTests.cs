@@ -77,6 +77,9 @@ namespace Tests.QueryDsl.Geo
 			{
 				geo_shape = new
 				{
+					_name="named_query",
+					boost = 1.1,
+					ignore_unmapped = true,
 					envelope = new
 					{
 						relation = "intersects",
@@ -99,18 +102,24 @@ namespace Tests.QueryDsl.Geo
 		{
 			Query = new GeoShapeEnvelopeQuery
 			{
+				Name = "named_query",
+				Boost = 1.1,
 				Field = Infer.Field<Framework.MockData.Shape>(p => p.Envelope),
 				Shape = new EnvelopeGeoShape(this._coordinates),
-				Relation = GeoShapeRelation.Intersects
+				Relation = GeoShapeRelation.Intersects,
+				IgnoreUnmapped = true
 			}
 		};
 
 		protected override Func<SearchDescriptor<Framework.MockData.Shape>, ISearchRequest> Fluent => s => s
 			.Query(q => q
 				.GeoShapeEnvelope(c => c
+					.Name("named_query")
+					.Boost(1.1)
 					.Field(p => p.Envelope)
 					.Coordinates(this._coordinates)
 					.Relation(GeoShapeRelation.Intersects)
+					.IgnoreUnmapped(true)
 				)
 			);
 
