@@ -32,6 +32,10 @@ Targets:
 * diff <github|nuget|directories|assemblies> <version|path 1> <version|path 2> [format]
 
 NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to force the tests against all suported TFM's
+
+Execution hints can be provided anywhere on the command line
+- skiptests : skip running tests as part of the target chain
+- skipdocs : skip generating documentation
 """
 
 module Commandline =
@@ -41,7 +45,7 @@ module Commandline =
     let skipTests = args |> List.exists (fun x -> x = "skiptests")
     let skipDocs = args |> List.exists (fun x -> x = "skipdocs") || isMono
     let private filteredArgs = args |> List.filter (fun x -> x <> "skiptests" && x <> "skipdocs")
-
+        
     let multiTarget =
         match (filteredArgs |> List.tryHead) with
         | Some t when t.EndsWith("-all") -> MultiTarget.All
@@ -69,7 +73,7 @@ module Commandline =
         match Uri.TryCreate(candidate, UriKind.RelativeOrAbsolute) with
         | true, _ -> Some candidate
         | _ -> None
-
+        
     let private (|IsDiff|_|) (candidate:string) =
         let c = candidate |> toLower
         match c with
@@ -150,7 +154,7 @@ module Commandline =
             setBuildParam "esversions" esVersions
             setBuildParam "clusterfilter" "ConnectionReuse"
             setBuildParam "numberOfConnections" numberOfConnections
-            
+ 
         | ["diff"; IsDiff diffType; IsProject project; firstVersionOrPath; secondVersionOrPath; IsFormat format] ->
              setBuildParam "diffType" diffType
              setBuildParam "project" project

@@ -84,6 +84,10 @@ namespace Tests.Framework
 				.IndexName("server-metrics")
 				.TypeName("metric")
 			)
+			.InferMappingFor<Shape>(map => map
+				.IndexName("shapes")
+				.TypeName("doc")
+			)
 			.ConnectionLimit(ConnectionLimitDefault)
 			//.Proxy(new Uri("http://127.0.0.1:8888"), "", "")
 			//.EnableTcpKeepAlive(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(2))

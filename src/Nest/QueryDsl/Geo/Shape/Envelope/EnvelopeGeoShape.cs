@@ -13,11 +13,8 @@ namespace Nest
 	{
 		public EnvelopeGeoShape() : this(null) { }
 
-		public EnvelopeGeoShape(IEnumerable<GeoCoordinate> coordinates) 
-			: base("envelope") 
-		{
+		public EnvelopeGeoShape(IEnumerable<GeoCoordinate> coordinates) : base("envelope") =>
 			this.Coordinates = coordinates;
-		}
 
 		public IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}
