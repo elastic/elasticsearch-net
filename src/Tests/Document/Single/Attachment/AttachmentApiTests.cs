@@ -45,6 +45,8 @@ namespace Tests.Document.Single.Attachment
 			foreach (var callUniqueValue in values)
 			{
 				var index = callUniqueValue.Value;
+
+#pragma warning disable 618 // Use of Attachment mapping
 				var indexResponse = client.CreateIndex(index, c => c
 					.Mappings(m => m
 						.Map<Document>(mm => mm
@@ -92,6 +94,7 @@ namespace Tests.Document.Single.Attachment
 						)
 					)
 				);
+#pragma warning restore 618
 
 				if (!indexResponse.IsValid)
 				{

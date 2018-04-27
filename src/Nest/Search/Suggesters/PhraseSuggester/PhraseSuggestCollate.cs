@@ -19,7 +19,9 @@ namespace Nest
 		/// Query parameters should be specified using <see cref="Params"/>
 		/// </remarks>
 		[JsonProperty("query")]
+#pragma warning disable 618
 		ITemplateQuery Query { get; set; }
+#pragma warning restore 618
 
 		/// <summary>
 		/// Controls if all phrase suggestions will be returned. When set to <c>true</c>, the suggestions will have
@@ -39,10 +41,12 @@ namespace Nest
 	/// <inheritdoc />
 	public class PhraseSuggestCollate : IPhraseSuggestCollate
 	{
+#pragma warning disable 618
 		private ITemplateQuery _query;
 
 		/// <inheritdoc />
 		public ITemplateQuery Query
+#pragma warning restore 618
 		{
 			get => _query;
 			set
@@ -62,7 +66,9 @@ namespace Nest
 	public class PhraseSuggestCollateDescriptor<T> : DescriptorBase<PhraseSuggestCollateDescriptor<T>, IPhraseSuggestCollate>, IPhraseSuggestCollate
 		where T : class
 	{
+#pragma warning disable 618
 		ITemplateQuery IPhraseSuggestCollate.Query { get; set; }
+#pragma warning restore 618
 		IDictionary<string, object> IPhraseSuggestCollate.Params { get; set; }
 		bool? IPhraseSuggestCollate.Prune { get; set; }
 
@@ -73,6 +79,7 @@ namespace Nest
 		/// Query parameters should be specified using <see cref="Params(IDictionary&lt;string, object&gt;)"/> or
 		/// Params(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt;)
 		/// </remarks>
+#pragma warning disable 618
 		public PhraseSuggestCollateDescriptor<T> Query(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
 			Assign(a =>
 			{
@@ -80,6 +87,7 @@ namespace Nest
 				a.Query = templateQuery;
 				if (templateQuery != null) Self.Params = templateQuery.Params;
 			});
+#pragma warning restore 618
 
 		/// <summary>
 		/// Controls if all phrase suggestions will be returned. When set to <c>true</c>, the suggestions will have

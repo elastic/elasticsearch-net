@@ -132,12 +132,10 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		}
 
 #pragma warning disable 618
-
 		public void Visit(IStringProperty mapping)
 		{
 			Increment("string");
 		}
-
 #pragma warning restore 618
 
 		public void Visit(IDateProperty mapping)
@@ -160,10 +158,12 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			Increment("geo_point");
 		}
 
+#pragma warning disable 618
 		public void Visit(IAttachmentProperty mapping)
 		{
 			Increment("attachment");
 		}
+#pragma warning restore 618
 
 		public void Visit(ICompletionProperty mapping)
 		{

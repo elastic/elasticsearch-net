@@ -32,8 +32,6 @@ namespace DocGenerator.Buildalyzer.Environment
 {
 	internal class FrameworkEnvironment : BuildEnvironment
 	{
-		private readonly bool _sdkProject;
-
 		public string ToolsPath { get; }
 		public string ExtensionsPath { get; }
 		public string SDKsPath { get; }

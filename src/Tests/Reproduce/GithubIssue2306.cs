@@ -24,7 +24,9 @@ namespace Tests.Reproduce
 			var response = client.Delete<Project>("non-existent-id");
 
 			response.ShouldBeValid();
+#pragma warning disable 618
 			response.Found.Should().BeFalse();
+#pragma warning restore 618
 			response.Result.Should().Be(Result.NotFound);
 			response.Index.Should().Be("project");
 			response.Type.Should().Be("project");

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[Obsolete("Scheduled to be removed in 6.0")]
+	[Obsolete("Scheduled to be removed in 6.0. Use FieldCapabilities instead")]
 	public partial interface IFieldStatsRequest
 	{
 		[JsonProperty("fields")]
@@ -15,7 +15,7 @@ namespace Nest
 		IIndexConstraints IndexConstraints { get; set; }
 	}
 
-	[Obsolete("Scheduled to be removed in 6.0")]
+	[Obsolete("Scheduled to be removed in 6.0. Use FieldCapabilities instead")]
 	public partial class FieldStatsRequest
 	{
 		public Fields Fields { get; set; }
@@ -23,7 +23,7 @@ namespace Nest
 	}
 
 
-	[Obsolete("Scheduled to be removed in 6.0")]
+	[Obsolete("Scheduled to be removed in 6.0. Use FieldCapabilities instead")]
 	public partial class FieldStatsDescriptor
 	{
 		Fields IFieldStatsRequest.Fields { get; set; }

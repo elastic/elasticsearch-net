@@ -85,7 +85,9 @@ namespace Tests.Document.Single.Create
 			);
 			createResponse.ShouldBeValid();
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
+#pragma warning disable 618
 			createResponse.Created.Should().BeTrue();
+#pragma warning restore 618
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
 			createResponse.Type.Should().Be(this.Client.Infer.TypeName<Project>());
@@ -96,7 +98,9 @@ namespace Tests.Document.Single.Create
 			);
 
 			createResponse.ShouldNotBeValid();
+#pragma warning disable 618
 			createResponse.Created.Should().BeFalse();
+#pragma warning restore 618
 			createResponse.ApiCall.HttpStatusCode.Should().Be(409);
 		}
 	}
@@ -135,7 +139,9 @@ namespace Tests.Document.Single.Create
 
 			createResponse.ShouldBeValid();
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
+#pragma warning disable 618
 			createResponse.Created.Should().BeTrue();
+#pragma warning restore 618
 			createResponse.Index.Should().Be(index);
 			createResponse.Type.Should().Be("jobject");
 
@@ -182,7 +188,9 @@ namespace Tests.Document.Single.Create
 
 			createResponse.ShouldBeValid();
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
+#pragma warning disable 618
 			createResponse.Created.Should().BeTrue();
+#pragma warning restore 618
 			createResponse.Index.Should().Be(index);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Type.Should().StartWith("<>");

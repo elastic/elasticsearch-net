@@ -56,7 +56,14 @@ namespace Nest
 
 	public class BoolQuery : QueryBase, IBoolQuery
 	{
-		internal static bool Locked(IBoolQuery q) => !q.Name.IsNullOrEmpty() || q.Boost.HasValue || q.DisableCoord.HasValue || q.MinimumShouldMatch != null;
+		internal static bool Locked(IBoolQuery q) =>
+			!q.Name.IsNullOrEmpty() ||
+			q.Boost.HasValue ||
+#pragma warning disable 618
+			q.DisableCoord.HasValue ||
+#pragma warning restore 618
+			q.MinimumShouldMatch != null;
+
 		bool IBoolQuery.Locked => BoolQuery.Locked(this);
 
 		private IList<QueryContainer> _must;

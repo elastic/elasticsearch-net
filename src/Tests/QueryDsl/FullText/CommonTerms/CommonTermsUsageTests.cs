@@ -35,7 +35,9 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 			Analyzer = "standard",
 			Boost = 1.1,
 			CutoffFrequency = 0.001,
+#pragma warning disable 618 // DisableCoord removed in 6.x
 			DisableCoord = true,
+#pragma warning restore 618
 			HighFrequencyOperator = Operator.And,
 			LowFrequencyOperator = Operator.Or,
 			MinimumShouldMatch = 1,
@@ -43,6 +45,7 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 			Query = "nelly the elephant not as a"
 		};
 
+#pragma warning disable 618 // DisableCoord removed in 6.x
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.CommonTerms(c => c
 				.Field(p => p.Description)
@@ -56,6 +59,7 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 				.Name("named_query")
 				.Query("nelly the elephant not as a")
 			);
+#pragma warning restore 618
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ICommonTermsQuery>(a => a.CommonTerms)
 		{

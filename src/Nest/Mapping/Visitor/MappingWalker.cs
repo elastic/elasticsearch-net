@@ -149,7 +149,9 @@ namespace Nest
 						});
 						break;
 					case FieldType.Attachment:
+#pragma warning disable 618
 						this.Visit<IAttachmentProperty>(field, t =>
+#pragma warning restore 618
 						{
 							this._visitor.Visit(t);
 							this.Accept(t.Fields);

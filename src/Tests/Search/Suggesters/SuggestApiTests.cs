@@ -17,7 +17,7 @@ namespace Tests.Search.Suggesters
 
 	*/
 	public class SuggestApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISuggestResponse<Project>, ISuggestRequest, SuggestDescriptor<Project>, SuggestRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		private string _phraseSuggestField = "description.shingle";
 
@@ -26,79 +26,79 @@ namespace Tests.Search.Suggesters
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-#pragma warning disable 618
-			fluent: (c, f) => c.Suggest<Project>(f),
-			fluentAsync: (c, f) => c.SuggestAsync<Project>(f),
-			request: (c, r) => c.Suggest<Project>(r),
-			requestAsync: (c, r) => c.SuggestAsync<Project>(r)
-#pragma warning restore 618
+			fluent: (c, f) => c.Search<Project>(f),
+			fluentAsync: (c, f) => c.SearchAsync<Project>(f),
+			request: (c, r) => c.Search<Project>(r),
+			requestAsync: (c, r) => c.SearchAsync<Project>(r)
 		);
 
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/_suggest";
+		protected override string UrlPath => "/project/project/_search";
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<SuggestDescriptor<Project>, ISuggestRequest> Fluent => s => s
-			.Term("my-term-suggest", t => t
-				.MaxEdits(1)
-				.MaxInspections(20)
-				.MaxTermFrequency(300000)
-				.MinDocFrequency(1)
-				.MinWordLength(2)
-				.PrefixLength(1)
-				.SuggestMode(SuggestMode.Always)
-				.Analyzer("standard")
-				.Field(p => p.Description)
-				.ShardSize(7)
-				.Size(8)
-				.Text(SuggestText)
-			)
-			.Completion("my-completion-suggest", c => c
-				.Contexts(ctxs => ctxs
-					.Context("color", ctx => ctx.Context(Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()))
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Suggest(su => su
+				.Term("my-term-suggest", t => t
+					.MaxEdits(1)
+					.MaxInspections(20)
+					.MaxTermFrequency(300000)
+					.MinDocFrequency(1)
+					.MinWordLength(2)
+					.PrefixLength(1)
+					.SuggestMode(SuggestMode.Always)
+					.Analyzer("standard")
+					.Field(p => p.Description)
+					.ShardSize(7)
+					.Size(8)
+					.Text(SuggestText)
 				)
-				.Fuzzy(f => f
-					.Fuzziness(Fuzziness.Auto)
-					.MinLength(1)
-					.PrefixLength(2)
-					.Transpositions()
-					.UnicodeAware(false)
-				)
-				.Analyzer("simple")
-				.Field(p => p.Suggest)
-				.Size(8)
-				.Prefix(Project.First.Name)
-			)
-			.Phrase("my-phrase-suggest", ph => ph
-				.Text(PhraseSuggest)
-				.Field(p => p.Description.Suffix("shingle"))
-				.GramSize(4)
-				.RealWordErrorLikelihood(0.95)
-				.MaxErrors(1)
-				.Confidence(1)
-				.Collate(c => c
-					.Query(q => q
-						.Inline("{ \"match\": { \"{{field_name}}\" : \"{{suggestion}}\" }}")
+				.Completion("my-completion-suggest", c => c
+					.Contexts(ctxs => ctxs
+						.Context("color", ctx => ctx.Context(Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()))
 					)
-					.Params(p => p.Add("field_name", _phraseSuggestField))
-					.Prune()
+					.Fuzzy(f => f
+						.Fuzziness(Fuzziness.Auto)
+						.MinLength(1)
+						.PrefixLength(2)
+						.Transpositions()
+						.UnicodeAware(false)
+					)
+					.Analyzer("simple")
+					.Field(p => p.Suggest)
+					.Size(8)
+					.Prefix(Project.First.Name)
 				)
-				.DirectGenerator(d => d
+				.Phrase("my-phrase-suggest", ph => ph
+					.Text(PhraseSuggest)
 					.Field(p => p.Description.Suffix("shingle"))
-				)
-				.Highlight(h => h
-					.PreTag("<em>")
-					.PostTag("</em>")
-				)
-				.Smoothing(smoothing => smoothing
-					.StupidBackoff(b => b.Discount(0.4))
+					.GramSize(4)
+					.RealWordErrorLikelihood(0.95)
+					.MaxErrors(1)
+					.Confidence(1)
+					.Collate(c => c
+						.Query(q => q
+							.Inline("{ \"match\": { \"{{field_name}}\" : \"{{suggestion}}\" }}")
+						)
+						.Params(p => p.Add("field_name", _phraseSuggestField))
+						.Prune()
+					)
+					.DirectGenerator(d => d
+						.Field(p => p.Description.Suffix("shingle"))
+					)
+					.Highlight(h => h
+						.PreTag("<em>")
+						.PostTag("</em>")
+					)
+					.Smoothing(smoothing => smoothing
+						.StupidBackoff(b => b.Discount(0.4))
+					)
 				)
 			);
 
-		protected override SuggestRequest<Project> Initializer =>
-			new SuggestRequest<Project>
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>
 			{
 				Suggest = new SuggestContainer
 				{
@@ -168,7 +168,9 @@ namespace Tests.Search.Suggesters
 								Confidence = 1.0,
 								Collate = new PhraseSuggestCollate
 								{
+#pragma warning disable 618
 									Query = new TemplateQuery
+#pragma warning restore 618
 									{
 										Inline = "{ \"match\": { \"{{field_name}}\" : \"{{suggestion}}\" }}",
 									},
@@ -212,7 +214,7 @@ namespace Tests.Search.Suggesters
 		}
 
 
-		protected override void ExpectResponse(ISuggestResponse<Project> response)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** === Handling Responses
 			* Get the suggestions for a suggester by indexing into
@@ -223,9 +225,9 @@ namespace Tests.Search.Suggesters
 			AssertPhraseSuggestResponse(response);
 		}
 
-		private static void AssertPhraseSuggestResponse(ISuggestResponse<Project> response)
+		private static void AssertPhraseSuggestResponse(ISearchResponse<Project> response)
 		{
-			var myTermSuggest = response.Suggestions["my-phrase-suggest"];
+			var myTermSuggest = response.Suggest["my-phrase-suggest"];
 			myTermSuggest.Should().NotBeNull();
 
 			var suggest = myTermSuggest.First();
@@ -242,9 +244,9 @@ namespace Tests.Search.Suggesters
 			}
 		}
 
-		private static void AssertTermSuggestResponse(ISuggestResponse<Project> response)
+		private static void AssertTermSuggestResponse(ISearchResponse<Project> response)
 		{
-			var myTermSuggest = response.Suggestions["my-term-suggest"];
+			var myTermSuggest = response.Suggest["my-term-suggest"];
 			myTermSuggest.Should().NotBeNull();
 
 			var suggest = myTermSuggest.First();
@@ -260,9 +262,9 @@ namespace Tests.Search.Suggesters
 			}
 		}
 
-		private static void AssertCompletionSuggestResponse(ISuggestResponse<Project> response)
+		private static void AssertCompletionSuggestResponse(ISearchResponse<Project> response)
 		{
-			var myCompletionSuggest = response.Suggestions["my-completion-suggest"];
+			var myCompletionSuggest = response.Suggest["my-completion-suggest"];
 			myCompletionSuggest.Should().NotBeNull();
 
 			var suggest = myCompletionSuggest.First();
@@ -284,85 +286,88 @@ namespace Tests.Search.Suggesters
 			colorContexts.First().Category.Should().Be((Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()));
 		}
 
-		protected override object ExpectJson => new Dictionary<string, object>
+		protected override object ExpectJson => new
 		{
+			suggest = new Dictionary<string, object>
 			{
-				"my-completion-suggest", new
 				{
-					completion = new
+					"my-completion-suggest", new
 					{
-						analyzer = "simple",
-						contexts = new
+						completion = new
 						{
-							color = new[]
+							analyzer = "simple",
+							contexts = new
 							{
-								new {context = Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()}
-							}
-						},
-						field = "suggest",
-						fuzzy = new
-						{
-							fuzziness = "AUTO",
-							min_length = 1,
-							prefix_length = 2,
-							transpositions = true,
-							unicode_aware = false
-						},
-						size = 8,
-					},
-					prefix = Project.Instance.Name
-				}
-			},
-			{
-				"my-phrase-suggest", new
-				{
-					phrase = new
-					{
-						collate = new
-						{
-							query = new
-							{
-								inline = "{ \"match\": { \"{{field_name}}\" : \"{{suggestion}}\" }}",
+								color = new[]
+								{
+									new {context = Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()}
+								}
 							},
-							@params = new
+							field = "suggest",
+							fuzzy = new
 							{
-								field_name = _phraseSuggestField
+								fuzziness = "AUTO",
+								min_length = 1,
+								prefix_length = 2,
+								transpositions = true,
+								unicode_aware = false
 							},
-							prune = true,
+							size = 8,
 						},
-						confidence = 1.0,
-						max_errors = 1.0,
-						direct_generator = new[]
-						{
-							new {field = _phraseSuggestField}
-						},
-						highlight = new {post_tag = "</em>", pre_tag = "<em>"},
-						smoothing = new { stupid_backoff = new { discount = 0.4 }},
-						field = _phraseSuggestField,
-						gram_size = 4,
-						real_word_error_likelihood = 0.95
-					},
-					text = PhraseSuggest
-				}
-			},
-			{
-				"my-term-suggest", new
+						prefix = Project.Instance.Name
+					}
+				},
 				{
-					term = new
+					"my-phrase-suggest", new
 					{
-						analyzer = "standard",
-						field = "description",
-						max_edits = 1,
-						max_inspections = 20,
-						max_term_freq = 300000.0,
-						min_doc_freq = 1.0,
-						min_word_length = 2,
-						prefix_length = 1,
-						shard_size = 7,
-						size = 8,
-						suggest_mode = "always"
-					},
-					text = SuggestText
+						phrase = new
+						{
+							collate = new
+							{
+								query = new
+								{
+									inline = "{ \"match\": { \"{{field_name}}\" : \"{{suggestion}}\" }}",
+								},
+								@params = new
+								{
+									field_name = _phraseSuggestField
+								},
+								prune = true,
+							},
+							confidence = 1.0,
+							max_errors = 1.0,
+							direct_generator = new[]
+							{
+								new {field = _phraseSuggestField}
+							},
+							highlight = new {post_tag = "</em>", pre_tag = "<em>"},
+							smoothing = new { stupid_backoff = new { discount = 0.4 }},
+							field = _phraseSuggestField,
+							gram_size = 4,
+							real_word_error_likelihood = 0.95
+						},
+						text = PhraseSuggest
+					}
+				},
+				{
+					"my-term-suggest", new
+					{
+						term = new
+						{
+							analyzer = "standard",
+							field = "description",
+							max_edits = 1,
+							max_inspections = 20,
+							max_term_freq = 300000.0,
+							min_doc_freq = 1.0,
+							min_word_length = 2,
+							prefix_length = 1,
+							shard_size = 7,
+							size = 8,
+							suggest_mode = "always"
+						},
+						text = SuggestText
+					}
 				}
 			}
 		};

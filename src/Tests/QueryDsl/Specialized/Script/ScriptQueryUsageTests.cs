@@ -61,12 +61,16 @@ namespace Tests.QueryDsl.Specialized.Script
 			q => {
 				q.Inline = "";
 				q.Id = null;
+#pragma warning disable 618
 				q.File = "";
+#pragma warning restore 618
 			},
 			q => {
 				q.Inline = null;
 				q.Id = null;
+#pragma warning disable 618
 				q.File = null;
+#pragma warning restore 618
 			}
 		};
 	}

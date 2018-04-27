@@ -41,6 +41,7 @@ namespace Nest
 		public static QueryContainer GeoDistance(Func<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery> selector) =>
 			new QueryContainerDescriptor<T>().GeoDistance(selector);
 
+		[Obsolete("Scheduled to be removed in 6.0")]
 		public static QueryContainer GeoDistanceRange(Func<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery> selector) =>
 			new QueryContainerDescriptor<T>().GeoDistanceRange(selector);
 

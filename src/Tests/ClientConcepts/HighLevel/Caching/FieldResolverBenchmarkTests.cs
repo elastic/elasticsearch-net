@@ -19,7 +19,9 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 		private static readonly Field PropertyField = typeof(Project).GetProperty(nameof(Project.Name));
 		private static readonly Field InferredField = Infer.Field<Project>(p => p.Name);
 
+#pragma warning disable 618
 		[Setup]
+#pragma warning restore 618
 		public void Setup()
 		{
 			_expressionResolver = new FieldResolver(new ConnectionSettings());

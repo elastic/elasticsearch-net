@@ -326,6 +326,7 @@ namespace Tests.Analysis.TokenFilters
 					.Elision("elision", t => t
 						.Articles("a", "b", "c")
 					)
+#pragma warning disable 618 // Use of HunSpell IgnoreCase
 					.Hunspell("hunspell", t => t
 						.Dedup()
 						.Dictionary("path_to_dict")
@@ -333,6 +334,7 @@ namespace Tests.Analysis.TokenFilters
 						.Locale("en_US")
 						.LongestOnly()
 					)
+#pragma warning restore 618
 					.HyphenationDecompounder("hypdecomp", t => t
 						.MaxSubwordSize(2)
 						.MinSubwordSize(2)
@@ -504,7 +506,9 @@ namespace Tests.Analysis.TokenFilters
 							{
 								Dedup = true,
 								Dictionary = "path_to_dict",
+#pragma warning disable 618
 								IgnoreCase = true,
+#pragma warning restore 618
 								Locale = "en_US",
 								LongestOnly = true
 							}

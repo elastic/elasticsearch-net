@@ -41,7 +41,9 @@ namespace Tests.Document.Single.Delete
 		protected override void ExpectResponse(IDeleteResponse response)
 		{
 			response.ShouldBeValid();
+#pragma warning disable 618
 			response.Found.Should().BeTrue();
+#pragma warning restore 618
 			response.Result.Should().Be(Result.Deleted);
 		}
 	}
@@ -69,7 +71,9 @@ namespace Tests.Document.Single.Delete
 
 		protected override void ExpectResponse(IDeleteResponse response)
 		{
+#pragma warning disable 618
 			response.Found.Should().BeFalse();
+#pragma warning restore 618
 			response.Index.Should().Be("project");
 			response.Type.Should().Be("project");
 			response.Id.Should().Be(this.CallIsolatedValue);

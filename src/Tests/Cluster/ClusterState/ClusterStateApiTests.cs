@@ -54,7 +54,9 @@ namespace Tests.Cluster.ClusterState
 			meta.Templates.Should().NotBeEmpty().And.ContainKey("nest_tests");
 
 			var rawFieldsTemplate = meta.Templates["nest_tests"];
+#pragma warning disable 618
 			rawFieldsTemplate.Template.Should().NotBeNullOrWhiteSpace();
+#pragma warning restore 618
 			rawFieldsTemplate.Settings.Should().NotBeNull();
 			rawFieldsTemplate.Settings.NumberOfShards.Should().Be(2);
 

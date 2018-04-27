@@ -91,7 +91,9 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 		{
 			var putTemplateResult = this.Client.PutIndexTemplate(new PutIndexTemplateRequest(TestsIndexTemplateName)
 			{
+#pragma warning disable 618
 				Template = "*",
+#pragma warning restore 618
 				Settings = this.IndexSettings
 			});
 			putTemplateResult.ShouldBeValid();

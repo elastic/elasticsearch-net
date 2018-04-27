@@ -6,6 +6,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
+#pragma warning disable 618
 
 namespace Tests.Indices.IndexSettings.IndexTemplates
 {
@@ -67,6 +68,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			request: (s, c, r) => c.PutIndexTemplate(r),
 			requestAsync: (s, c, r) => c.PutIndexTemplateAsync(r)
 		);
+
 		protected PutIndexTemplateRequest PutInitializer(string name) => new PutIndexTemplateRequest(name)
 		{
 			Template = "startingwiththis-*",

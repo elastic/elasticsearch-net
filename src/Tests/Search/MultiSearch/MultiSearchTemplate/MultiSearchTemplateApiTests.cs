@@ -53,7 +53,9 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 				)
 			)
 			.Template<Project>("id", s => s.Index("devs").Id("template-id"))
+#pragma warning disable 618
 			.Template<Project>("file", s => s.Index("devs").File("template-file"));
+#pragma warning restore 618
 
 		protected override MultiSearchTemplateRequest Initializer => new MultiSearchTemplateRequest(typeof(Project), typeof(Project))
 		{
@@ -69,7 +71,9 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 					}
 				},
 				{ "id", new SearchTemplateRequest<Project>("devs") { Id = "template-id" } },
+#pragma warning disable 618
 				{ "file", new SearchTemplateRequest<Project>("devs") { File = "template-file" } }
+#pragma warning restore 618
 
 			}
 		};

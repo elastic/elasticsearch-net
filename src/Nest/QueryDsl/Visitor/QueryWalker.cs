@@ -56,11 +56,15 @@ namespace Nest
 			VisitQuery(qd.Script, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Exists, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoPolygon, visitor, (v, d) => v.Visit(d));
+#pragma warning disable 618
 			VisitQuery(qd.GeoDistanceRange, visitor, (v, d) => v.Visit(d));
+#pragma warning restore 618
 			VisitQuery(qd.GeoDistance, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoBoundingBox, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoHashCell, visitor, (v, d) => v.Visit(d));
+#pragma warning disable 618
 			VisitQuery(qd.Template, visitor, (v, d) => v.Visit(d));
+#pragma warning restore 618
 			VisitQuery(qd.RawQuery, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Percolate, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.ParentId, visitor, (v, d) => v.Visit(d));

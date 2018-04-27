@@ -19,7 +19,9 @@ namespace Nest
 		void Visit(IIpProperty property);
 		void Visit(IGeoPointProperty property);
 		void Visit(IGeoShapeProperty property);
+#pragma warning disable 618
 		void Visit(IAttachmentProperty property);
+#pragma warning restore 618
 		void Visit(INumberProperty property);
 		void Visit(ICompletionProperty property);
 		void Visit(IMurmur3HashProperty property);
@@ -64,7 +66,9 @@ namespace Nest
 
 		public virtual void Visit(IGeoShapeProperty property) { }
 
+#pragma warning disable 618
 		public virtual void Visit(IAttachmentProperty property) { }
+#pragma warning restore 618
 
 		public virtual void Visit(ICompletionProperty property) { }
 

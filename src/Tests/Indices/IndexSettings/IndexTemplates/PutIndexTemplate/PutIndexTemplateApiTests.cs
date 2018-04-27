@@ -63,6 +63,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 
 		protected override PutIndexTemplateDescriptor NewDescriptor() => new PutIndexTemplateDescriptor(CallIsolatedValue);
 
+#pragma warning disable 618
 		protected override Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> Fluent => d => d
 			.Order(1)
 			.Version(2)
@@ -84,14 +85,16 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 					)
 				)
 			);
-
+#pragma warning restore 618
 
 
 		protected override PutIndexTemplateRequest Initializer => new PutIndexTemplateRequest(CallIsolatedValue)
 		{
 			Order = 1,
 			Version = 2,
+#pragma warning disable 618
 			Template = "nestx-*",
+#pragma warning restore 618
 			Create = false,
 			Settings = new Nest.IndexSettings
 			{

@@ -57,7 +57,9 @@
 		void Visit(ITypeQuery query);
 		void Visit(IScriptQuery query);
 		void Visit(IGeoPolygonQuery query);
+#pragma warning disable 618
 		void Visit(IGeoDistanceRangeQuery query);
+#pragma warning restore 618
 		void Visit(IGeoDistanceQuery query);
 		void Visit(IGeoBoundingBoxQuery query);
 		void Visit(IGeoHashCellQuery query);
@@ -65,7 +67,9 @@
 		void Visit(IDateRangeQuery query);
 		void Visit(INumericRangeQuery query);
 		void Visit(ITermRangeQuery query);
+#pragma warning disable 618
 		void Visit(ITemplateQuery query);
+#pragma warning restore 618
 		void Visit(ISpanFirstQuery query);
 		void Visit(ISpanNearQuery query);
 		void Visit(ISpanNotQuery query);
@@ -200,13 +204,17 @@
 
 		public virtual void Visit(IGeoPolygonQuery query) { }
 
+#pragma warning disable 618
 		public virtual void Visit(IGeoDistanceRangeQuery query) { }
+#pragma warning restore 618
 
 		public virtual void Visit(IGeoDistanceQuery query) { }
 
 		public virtual void Visit(IGeoHashCellQuery query) { }
 
+#pragma warning disable 618
 		public virtual void Visit(ITemplateQuery query) { }
+#pragma warning restore 618
 
 		public virtual void Visit(IGeoShapeMultiPointQuery query) { }
 

@@ -35,10 +35,13 @@ namespace Tests.QueryDsl.Geo.Distance
 			DistanceType = GeoDistanceType.Arc,
 			Location = new GeoLocation(34,-34),
 			Distance = "200.0m",
+#pragma warning disable 618
 			OptimizeBoundingBox = GeoOptimizeBBox.Memory,
+#pragma warning restore 618
 			ValidationMethod = GeoValidationMethod.IgnoreMalformed
 		};
 
+#pragma warning disable 618 // use of GeoOptimizeBBox
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.GeoDistance(g=>g
 				.Boost(1.1)
@@ -50,6 +53,7 @@ namespace Tests.QueryDsl.Geo.Distance
 				.Optimize(GeoOptimizeBBox.Memory)
 				.ValidationMethod(GeoValidationMethod.IgnoreMalformed)
 			);
+#pragma warning restore 618
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoDistanceQuery>(a => a.GeoDistance)
 		{

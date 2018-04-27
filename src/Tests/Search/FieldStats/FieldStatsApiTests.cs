@@ -9,6 +9,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
+#pragma warning disable 618
 
 namespace Tests.Search.FieldStats
 {

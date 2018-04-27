@@ -260,6 +260,7 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(a => a.AnalyzeWildcard = analyzeWildcard);
 
+		[Obsolete("Removed in NEST 6.x.")]
 		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool? autoGeneratePhraseQueries = true) =>
 			Assign(a => a.AutoGeneratePhraseQueries = autoGeneratePhraseQueries);
 
@@ -298,6 +299,7 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(a => a.Escape = escape);
 
+		[Obsolete("Removed in NEST 6.x.")]
 		public QueryStringQueryDescriptor<T> AllFields(bool? allFields = true) => Assign(a => a.AllFields = allFields);
 
 		[Obsolete("Removed in NEST 6.x.")]
