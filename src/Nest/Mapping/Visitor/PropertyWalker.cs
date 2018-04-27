@@ -158,6 +158,9 @@ namespace Nest
 			if (type == typeof(IpAddressRange))
 				return new IpRangeProperty();
 
+			if (type == typeof(QueryContainer))
+				return new PercolatorProperty();
+
 			return new ObjectProperty();
 		}
 
