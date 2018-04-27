@@ -59,7 +59,7 @@ namespace Nest
 				case FieldType.FloatRange: return ReadProperty<FloatRangeProperty>(jObject, serializer);
 				case FieldType.IntegerRange: return ReadProperty<IntegerRangeProperty>(jObject, serializer);
 				case FieldType.LongRange: return ReadProperty<LongRangeProperty>(jObject, serializer);
-				case FieldType.IpRange: return ReadProperty<IpAddressRangeProperty>(jObject, serializer);
+				case FieldType.IpRange: return ReadProperty<IpRangeProperty>(jObject, serializer);
 				case FieldType.Join: return ReadProperty<JoinProperty>(jObject, serializer);
 				case FieldType.None:
 					break;

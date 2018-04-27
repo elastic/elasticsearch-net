@@ -72,7 +72,7 @@ namespace Nest
 		TReturnType FloatRange(Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector);
 		TReturnType IntegerRange(Func<IntegerRangePropertyDescriptor<T>, IIntegerRangeProperty> selector);
 		TReturnType LongRange(Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector);
-		TReturnType IpRange(Func<IpAddressRangePropertyDescriptor<T>, IIpAddressRangeProperty> selector);
+		TReturnType IpRange(Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector);
 		TReturnType Join(Func<JoinPropertyDescriptor<T>, IJoinProperty> selector);
 	}
 
@@ -128,7 +128,7 @@ namespace Nest
 
 		public PropertiesDescriptor<T> LongRange(Func<LongRangePropertyDescriptor<T>, ILongRangeProperty> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> IpRange(Func<IpAddressRangePropertyDescriptor<T>, IIpAddressRangeProperty> selector) => SetProperty(selector);
+		public PropertiesDescriptor<T> IpRange(Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Join(Func<JoinPropertyDescriptor<T>, IJoinProperty> selector) => SetProperty(selector);
 

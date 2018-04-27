@@ -5,17 +5,17 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IIpAddressRangeProperty : IRangeProperty { }
+	public interface IIpRangeProperty : IRangeProperty { }
 
-	public class IpAddressRangeProperty : RangePropertyBase, IIpAddressRangeProperty
+	public class IpRangeProperty : RangePropertyBase, IIpRangeProperty
 	{
-		public IpAddressRangeProperty() : base(RangeType.IpRange) { }
+		public IpRangeProperty() : base(RangeType.IpRange) { }
 	}
 
-	public class IpAddressRangePropertyDescriptor<T>
-		: RangePropertyDescriptorBase<IpAddressRangePropertyDescriptor<T>, IIpAddressRangeProperty, T>, IIpAddressRangeProperty
+	public class IpRangePropertyDescriptor<T>
+		: RangePropertyDescriptorBase<IpRangePropertyDescriptor<T>, IIpRangeProperty, T>, IIpRangeProperty
 		where T : class
 	{
-		public IpAddressRangePropertyDescriptor() : base(RangeType.IpRange) { }
+		public IpRangePropertyDescriptor() : base(RangeType.IpRange) { }
 	}
 }
