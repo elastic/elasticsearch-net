@@ -201,6 +201,13 @@ namespace Nest
 							this.Accept(t.Fields);
 						});
 						break;
+					case FieldType.IpRange:
+						Visit<IIpRangeProperty>(field, t =>
+						{
+							this._visitor.Visit(t);
+							this.Accept(t.Fields);
+						});
+						break;
 					case FieldType.Join:
 						Visit<IJoinProperty>(field, t =>
 						{
