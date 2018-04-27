@@ -17,8 +17,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 
 		protected override object ExpectJson => new
 		{
-			aggs = new
-			{
+			aggs = new {
 				ip_ranges = new
 				{
 					ip_range = new
@@ -26,24 +25,22 @@ namespace Tests.Aggregations.Bucket.IpRange
 						field = "leadDeveloper.iPAddress",
 						ranges = new object[]
 						{
-							new { to = "10.0.0.5" },
-							new { from = "10.0.0.5" }
+							new {to = "127.0.0.1"},
+							new {from = "127.0.0.1"}
 						}
 					}
-				}
+					}
 			}
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Aggregations(a => a
-				.IpRange("ip_ranges", ip => ip
-					.Field(p => p.LeadDeveloper.IPAddress)
-					.Ranges(
-						r => r.To("10.0.0.5"),
-						r => r.From("10.0.0.5")
-					)
+			.Aggregations(a => a.IpRange("ip_ranges", ip => ip
+				.Field(p => p.LeadDeveloper.IPAddress)
+				.Ranges(
+					r => r.To("127.0.0.1"),
+					r => r.From("127.0.0.1")
 				)
-			);
+			));
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
@@ -53,8 +50,8 @@ namespace Tests.Aggregations.Bucket.IpRange
 					Field = Field((Project p) => p.LeadDeveloper.IPAddress),
 					Ranges = new List<Nest.IpRange>
 					{
-						new Nest.IpRange { To = "10.0.0.5" },
-						new Nest.IpRange { From = "10.0.0.5" }
+						new Nest.IpRange {To = "127.0.0.1"},
+						new Nest.IpRange {From = "127.0.0.1"}
 					}
 				}
 			};
