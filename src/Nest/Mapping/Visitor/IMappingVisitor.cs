@@ -32,6 +32,7 @@ namespace Nest
 		void Visit(ILongRangeProperty property);
 		void Visit(IDoubleRangeProperty property);
 		void Visit(IDateRangeProperty property);
+		void Visit(IIpRangeProperty property);
 	}
 
 	public class NoopMappingVisitor : IMappingVisitor
@@ -87,5 +88,7 @@ namespace Nest
 		public virtual void Visit(IDoubleRangeProperty property) { }
 
 		public virtual void Visit(IDateRangeProperty property) { }
+
+		public virtual void Visit(IIpRangeProperty property) { }
 	}
 }

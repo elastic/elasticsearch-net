@@ -32,6 +32,34 @@ namespace Nest
 		{
 		}
 
+		public void Visit(IPercolatorProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		{
+		}
+
+		public void Visit(IIntegerRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		{
+		}
+
+		public void Visit(IFloatRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		{
+		}
+
+		public void Visit(ILongRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		{
+		}
+
+		public void Visit(IDoubleRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		{
+		}
+
+		public void Visit(IDateRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		{
+		}
+
+		public void Visit(IIpRangeProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		{
+		}
+
 		public virtual void Visit(IIpProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
 		}
@@ -78,52 +106,72 @@ namespace Nest
 
 		public void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
-			if (type is INestedProperty nestedType)
-				Visit(nestedType, propertyInfo, attribute);
-
-			if (type is IObjectProperty objectType)
-				Visit(objectType, propertyInfo, attribute);
-
-			if (type is IBinaryProperty binaryType)
-				Visit(binaryType, propertyInfo, attribute);
-
-			if (type is IBooleanProperty booleanType)
-				Visit(booleanType, propertyInfo, attribute);
-
-			if (type is IDateProperty dateType)
-				Visit(dateType, propertyInfo, attribute);
-
-			if (type is INumberProperty numberType)
-				Visit(numberType, propertyInfo, attribute);
-
-			if (type is ITextProperty textType)
-				Visit(textType, propertyInfo, attribute);
-
-			if (type is IKeywordProperty keywordType)
-				Visit(keywordType, propertyInfo, attribute);
-
-#pragma warning disable 618
-			if (type is IAttachmentProperty attachmentType)
-				Visit(attachmentType, propertyInfo, attribute);
-#pragma warning restore 618
-
-			if (type is IGeoShapeProperty geoShapeType)
-				Visit(geoShapeType, propertyInfo, attribute);
-
-			if (type is IGeoPointProperty geoPointType)
-				Visit(geoPointType, propertyInfo, attribute);
-
-			if (type is ICompletionProperty completionType)
-				Visit(completionType, propertyInfo, attribute);
-
-			if (type is IIpProperty ipType)
-				Visit(ipType, propertyInfo, attribute);
-
-			if (type is IMurmur3HashProperty murmurType)
-				Visit(murmurType, propertyInfo, attribute);
-
-			if (type is ITokenCountProperty tokenCountType)
-				Visit(tokenCountType, propertyInfo, attribute);
+			switch (type)
+			{
+				case INestedProperty nestedType:
+					Visit(nestedType, propertyInfo, attribute);
+					break;
+				case IObjectProperty objectType:
+					Visit(objectType, propertyInfo, attribute);
+					break;
+				case IBinaryProperty binaryType:
+					Visit(binaryType, propertyInfo, attribute);
+					break;
+				case IBooleanProperty booleanType:
+					Visit(booleanType, propertyInfo, attribute);
+					break;
+				case IDateProperty dateType:
+					Visit(dateType, propertyInfo, attribute);
+					break;
+				case INumberProperty numberType:
+					Visit(numberType, propertyInfo, attribute);
+					break;
+				case ITextProperty textType:
+					Visit(textType, propertyInfo, attribute);
+					break;
+				case IKeywordProperty keywordType:
+					Visit(keywordType, propertyInfo, attribute);
+					break;
+				case IGeoShapeProperty geoShapeType:
+					Visit(geoShapeType, propertyInfo, attribute);
+					break;
+				case IGeoPointProperty geoPointType:
+					Visit(geoPointType, propertyInfo, attribute);
+					break;
+				case ICompletionProperty completionType:
+					Visit(completionType, propertyInfo, attribute);
+					break;
+				case IIpProperty ipType:
+					Visit(ipType, propertyInfo, attribute);
+					break;
+				case IMurmur3HashProperty murmurType:
+					Visit(murmurType, propertyInfo, attribute);
+					break;
+				case ITokenCountProperty tokenCountType:
+					Visit(tokenCountType, propertyInfo, attribute);
+					break;
+				case IPercolatorProperty percolatorType:
+					Visit(percolatorType, propertyInfo, attribute);
+					break;
+				case IIntegerRangeProperty integerRangeType:
+					Visit(integerRangeType, propertyInfo, attribute);
+					break;
+				case ILongRangeProperty longRangeType:
+					Visit(longRangeType, propertyInfo, attribute);
+					break;
+				case IDoubleRangeProperty doubleRangeType:
+					Visit(doubleRangeType, propertyInfo, attribute);
+					break;
+				case IFloatRangeProperty floatRangeType:
+					Visit(floatRangeType, propertyInfo, attribute);
+					break;
+				case IDateRangeProperty dateRangeType:
+					Visit(dateRangeType, propertyInfo, attribute);
+					break;
+				case IIpRangeProperty ipRangeType:
+					Visit(ipRangeType, propertyInfo, attribute);
+					break;
+			}
 		}
 	}
 }

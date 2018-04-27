@@ -63,6 +63,9 @@ namespace Tests.Indices.MappingManagement.GetMapping
 				visitor.CountsShouldContainKeyAndCountBe("integer_range", 1);
 				visitor.CountsShouldContainKeyAndCountBe("double_range", 1);
 				visitor.CountsShouldContainKeyAndCountBe("long_range", 1);
+
+				if (TestClient.VersionUnderTestSatisfiedBy(">=5.5.0"))
+					visitor.CountsShouldContainKeyAndCountBe("ip_range", 1);
 			}
 		}
 	}
@@ -203,6 +206,11 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		public void Visit(IDateRangeProperty property)
 		{
 			Increment("date_range");
+		}
+
+		public void Visit(IIpRangeProperty property)
+		{
+			Increment("ip_range");
 		}
 
 		public void Visit(IMurmur3HashProperty mapping)
