@@ -3,14 +3,14 @@ using Tests.Framework;
 
 namespace Tests.Mapping.Types.Core.Range.IpRange
 {
-	public class IpAddressRangeTest
+	public class IpRangeTest
 	{
-		[IpAddressRange]
+		[IpRange]
 		public Nest.IpAddressRange Range { get; set; }
 	}
 
 	[SkipVersion("<5.5.0", "ip range type is a new 5.5.0 feature")]
-	public class IpAddressRangeAttributeTests : AttributeTestsBase<IpAddressRangeTest>
+	public class IpRangeAttributeTests : AttributeTestsBase<IpRangeTest>
 	{
 		protected override object ExpectJson => new
 		{

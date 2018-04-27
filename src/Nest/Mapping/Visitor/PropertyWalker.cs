@@ -158,7 +158,7 @@ namespace Nest
 				return new LongRangeProperty();
 
 			if (type == typeof(IpAddressRange))
-				return new IpAddressRangeProperty();
+				return new IpRangeProperty();
 
 			return new ObjectProperty();
 		}

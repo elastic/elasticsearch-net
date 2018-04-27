@@ -319,7 +319,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 								{ p => p.Floats, new FloatRangeProperty() },
 								{ p => p.Integers, new IntegerRangeProperty() },
 								{ p => p.Longs, new LongRangeProperty() },
-								{ p => p.Ips, new IpAddressRangeProperty() },
+								{ p => p.Ips, new IpRangeProperty() },
 							}
 						}
 				},
