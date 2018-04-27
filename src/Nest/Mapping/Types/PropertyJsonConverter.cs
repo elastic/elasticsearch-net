@@ -87,6 +87,8 @@ namespace Nest
 					return jObject.ToObject<IntegerRangeProperty>();
 				case FieldType.LongRange:
 					return jObject.ToObject<LongRangeProperty>();
+				case FieldType.IpRange:
+					return jObject.ToObject<IpRangeProperty>();
 				case FieldType.None:
 					break;
 				default:

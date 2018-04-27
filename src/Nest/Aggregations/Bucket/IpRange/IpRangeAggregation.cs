@@ -13,7 +13,7 @@ namespace Nest
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
-		[JsonProperty(PropertyName = "ranges")]
+		[JsonProperty("ranges")]
 		IEnumerable<IIpRange> Ranges { get; set; }
 	}
 

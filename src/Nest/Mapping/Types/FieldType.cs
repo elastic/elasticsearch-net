@@ -91,5 +91,7 @@ namespace Nest
 		DoubleRange,
 		[EnumMember(Value = "date_range")]
 		DateRange,
+		[EnumMember(Value = "ip_range")]
+		IpRange
 	}
 }
