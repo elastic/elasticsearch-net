@@ -7,14 +7,15 @@ using Newtonsoft.Json.Linq;
 namespace Nest
 {
 	/// <summary>
-	/// Marks an instance where _name and boost do not exist as children of the variable field but as siblings
+	/// Marks an instance where _name, boost and ignore_unmapped do
+	/// not exist as children of the variable field but as siblings
 	/// </summary>
-	internal class GeoShapeQueryFieldNameConverter : FieldNameQueryJsonConverter<GeoShapeCircleQuery>
+	internal class GeoShapeQueryFieldNameConverter : ReserializeJsonConverter<GeoShapeCircleQuery, IGeoShapeQuery>
 	{
-		private static readonly string[] SkipProperties = {"boost", "_name"};
+		private static readonly string[] SkipProperties = {"boost", "_name", "ignore_unmapped"};
 		protected override bool SkipWriteProperty(string propertyName) => SkipProperties.Contains(propertyName);
 
-		protected override void SerializeJson(JsonWriter writer, object value, IFieldNameQuery castValue, JsonSerializer serializer)
+		protected override void SerializeJson(JsonWriter writer, object value, IGeoShapeQuery castValue, JsonSerializer serializer)
 		{
 			var fieldName = castValue.Field;
 			if (fieldName == null) return;
@@ -26,8 +27,10 @@ namespace Nest
 			writer.WriteStartObject();
 			var name = castValue.Name;
 			var boost = castValue.Boost;
+			var ignoreUnmapped = castValue.IgnoreUnmapped;
 			if (!name.IsNullOrEmpty()) writer.WriteProperty(serializer, "_name", name);
 			if (boost != null) writer.WriteProperty(serializer, "boost", boost);
+			if (ignoreUnmapped != null) writer.WriteProperty(serializer, "ignore_unmapped", ignoreUnmapped);
 			writer.WritePropertyName(field);
 			this.Reserialize(writer, value, serializer);
 			writer.WriteEndObject();
@@ -47,15 +50,21 @@ namespace Nest
 
 			double? boost = null;
 			string name  = null;
-			if (j.TryGetValue("boost", out var b) && (b.Type != JTokenType.Array && b.Type != JTokenType.Object))
+			bool? ignoreUnmapped = null;
+			if (j.TryGetValue("boost", out var boostToken) && (boostToken.Type != JTokenType.Array && boostToken.Type != JTokenType.Object))
 			{
 				j.Remove("boost");
-				boost = b.Value<double?>();
+				boost = boostToken.Value<double?>();
 			}
-			if (j.TryGetValue("_name", out var n) && n.Type == JTokenType.String)
+			if (j.TryGetValue("_name", out var nameToken) && nameToken.Type == JTokenType.String)
 			{
 				j.Remove("_name");
-				name = n.Value<string>();
+				name = nameToken.Value<string>();
+			}
+			if (j.TryGetValue("ignore_unmapped", out var ignoreUnmappedToken) && ignoreUnmappedToken.Type == JTokenType.Boolean)
+			{
+				j.Remove("ignore_unmapped");
+				ignoreUnmapped = ignoreUnmappedToken.Value<bool?>();
 			}
 			var firstProp = j.Properties().FirstOrDefault();
 			if (firstProp == null) return null;
@@ -77,6 +86,7 @@ namespace Nest
 			query.Name = name;
 			query.Field = field;
 			query.Relation = relation;
+			query.IgnoreUnmapped = ignoreUnmapped;
 			return query;
 		}
 
@@ -87,61 +97,27 @@ namespace Nest
 		{
 			var type = shape["type"];
 			var typeName = type?.Value<string>();
-			var ignoreUnmapped = shape["ignore_unmapped"]?.Value<bool?>();
-
 			var geometry = GeoShapeConverter.ReadJToken(shape, serializer);
-
 			switch (typeName)
 			{
 				case "circle":
-					return new GeoShapeCircleQuery
-					{
-						Shape = SetIgnoreUnmapped(geometry as ICircleGeoShape, ignoreUnmapped)
-					};
+					return new GeoShapeCircleQuery { Shape = geometry as ICircleGeoShape };
 				case "envelope":
-					return new GeoShapeEnvelopeQuery
-					{
-						Shape = SetIgnoreUnmapped(geometry as IEnvelopeGeoShape, ignoreUnmapped)
-					};
+					return new GeoShapeEnvelopeQuery { Shape = geometry as IEnvelopeGeoShape };
 				case "linestring":
-					return new GeoShapeLineStringQuery
-					{
-						Shape = SetIgnoreUnmapped(geometry as ILineStringGeoShape, ignoreUnmapped)
-					};
+					return new GeoShapeLineStringQuery { Shape = geometry as ILineStringGeoShape };
 				case "multilinestring":
-					return new GeoShapeMultiLineStringQuery
-					{
-						Shape = SetIgnoreUnmapped(geometry as IMultiLineStringGeoShape, ignoreUnmapped)
-					};
+					return new GeoShapeMultiLineStringQuery { Shape = geometry as IMultiLineStringGeoShape };
 				case "point":
-					return new GeoShapePointQuery
-					{
-						Shape = SetIgnoreUnmapped(geometry as IPointGeoShape, ignoreUnmapped)
-					};
+					return new GeoShapePointQuery { Shape = geometry as IPointGeoShape };
 				case "multipoint":
-					return new GeoShapeMultiPointQuery
-					{
-						Shape = SetIgnoreUnmapped(geometry as IMultiPointGeoShape, ignoreUnmapped)
-					};
+					return new GeoShapeMultiPointQuery { Shape = geometry as IMultiPointGeoShape };
 				case "polygon":
-					return new GeoShapePolygonQuery
-					{
-						Shape = SetIgnoreUnmapped(geometry as IPolygonGeoShape, ignoreUnmapped)
-					};
+					return new GeoShapePolygonQuery { Shape = geometry as IPolygonGeoShape };
 				case "multipolygon":
-					return new GeoShapeMultiPolygonQuery
-					{
-						Shape = SetIgnoreUnmapped(geometry as IMultiPolygonGeoShape, ignoreUnmapped)
-					};
+					return new GeoShapeMultiPolygonQuery { Shape = geometry as IMultiPolygonGeoShape };
 				case "geometrycollection":
-					var geometryCollection = geometry as IGeometryCollection;
-					if (geometryCollection != null)
-					{
-						foreach (var innerGeometry in geometryCollection.Geometries)
-							SetIgnoreUnmapped(innerGeometry, ignoreUnmapped);
-					}
-
-					return new GeoShapeGeometryCollectionQuery { Shape = geometryCollection };
+					return new GeoShapeGeometryCollectionQuery { Shape = geometry as IGeometryCollection };
 				default:
 					return null;
 			}
@@ -149,12 +125,5 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
 			throw new NotSupportedException();
-
-		private static TShape SetIgnoreUnmapped<TShape>(TShape shape, bool? ignoreUnmapped) where TShape : IGeoShape
-		{
-			if (shape != null)
-				shape.IgnoreUnmapped = ignoreUnmapped;
-			return shape;
-		}
 	}
 }

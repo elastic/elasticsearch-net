@@ -25,10 +25,10 @@ namespace Nest
 		protected override bool Conditionless => GeoShapePointQuery.IsConditionless(this);
 		IPointGeoShape IGeoShapePointQuery.Shape { get; set; }
 
-		public GeoShapePointQueryDescriptor<T> Coordinates(GeoCoordinate coordinates, bool? ignoreUnmapped = null) =>
+		public GeoShapePointQueryDescriptor<T> Coordinates(GeoCoordinate coordinates) =>
 			Assign(a => a.Shape = new PointGeoShape { Coordinates = coordinates });
 
-		public GeoShapePointQueryDescriptor<T> Coordinates(double longitude, double latitude, bool? ignoreUnmapped = null) =>
-			Assign(a => a.Shape = new PointGeoShape { Coordinates = new GeoCoordinate(latitude, longitude), IgnoreUnmapped = ignoreUnmapped});
+		public GeoShapePointQueryDescriptor<T> Coordinates(double longitude, double latitude) =>
+			Assign(a => a.Shape = new PointGeoShape { Coordinates = new GeoCoordinate(latitude, longitude) });
 	}
 }

@@ -26,7 +26,7 @@ namespace Nest
 		protected override bool Conditionless => GeoShapePolygonQuery.IsConditionless(this);
 		IPolygonGeoShape IGeoShapePolygonQuery.Shape { get; set; }
 
-		public GeoShapePolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<GeoCoordinate>> coordinates, bool? ignoreUnmapped = null) =>
-			Assign(a => a.Shape = new PolygonGeoShape { Coordinates = coordinates, IgnoreUnmapped = ignoreUnmapped });
+		public GeoShapePolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<GeoCoordinate>> coordinates) =>
+			Assign(a => a.Shape = new PolygonGeoShape { Coordinates = coordinates });
 	}
 }
