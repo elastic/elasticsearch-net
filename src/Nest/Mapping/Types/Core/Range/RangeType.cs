@@ -32,7 +32,12 @@ namespace Nest
 		/// A range of date values represented as unsigned 64-bit integer milliseconds elapsed since system epoch.
 		/// </summary>
 		[EnumMember(Value = "date_range")]
-		DateRange
+		DateRange,
+		/// <summary>
+		/// A range of ip values supporting either IPv4 or IPv6 (or mixed) addresses.
+		/// </summary>
+		[EnumMember(Value = "ip_range")]
+		IpRange
 	}
 	internal static class RangeTypeExtensions
 	{
@@ -45,6 +50,7 @@ namespace Nest
 				case RangeType.LongRange: return FieldType.LongRange;
 				case RangeType.DoubleRange: return FieldType.DoubleRange;
 				case RangeType.DateRange: return FieldType.DateRange;
+				case RangeType.IpRange: return FieldType.IpRange;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(rangeType), rangeType, null);
 			}
