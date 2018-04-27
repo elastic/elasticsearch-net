@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -10,13 +11,10 @@ namespace Nest
 
 	public class PointGeoShape : GeoShapeBase, IPointGeoShape
 	{
-		public PointGeoShape() : this(null) { }
+		internal PointGeoShape() : base("point") { }
 
-		public PointGeoShape(GeoCoordinate coordinates) 
-			: base("point") 
-		{
-			this.Coordinates = coordinates;
-		}
+		public PointGeoShape(GeoCoordinate coordinates) : this() =>
+			this.Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
 
 		public GeoCoordinate Coordinates { get; set; }
 	}

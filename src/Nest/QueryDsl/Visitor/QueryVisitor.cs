@@ -73,18 +73,7 @@
 		void Visit(ISpanWithinQuery query);
 		void Visit(ISpanMultiTermQuery query);
 		void Visit(ISpanFieldMaskingQuery query);
-
-		void Visit(IGeoIndexedShapeQuery query);
 		void Visit(IGeoShapeQuery query);
-		void Visit(IGeoShapeMultiPointQuery query);
-		void Visit(IGeoShapeMultiPolygonQuery query);
-		void Visit(IGeoShapePolygonQuery query);
-		void Visit(IGeoShapePointQuery query);
-		void Visit(IGeoShapeMultiLineStringQuery query);
-		void Visit(IGeoShapeLineStringQuery query);
-		void Visit(IGeoShapeEnvelopeQuery query);
-		void Visit(IGeoShapeCircleQuery query);
-		void Visit(IGeoShapeGeometryCollectionQuery query);
 		void Visit(IRawQuery query);
 		void Visit(IPercolateQuery query);
 		void Visit(IParentIdQuery query);
@@ -112,8 +101,6 @@
 		public virtual void Visit(IConstantScoreQuery query) { }
 
 		public virtual void Visit(IDisMaxQuery query) { }
-
-		public virtual void Visit(IGeoIndexedShapeQuery query) { }
 
 		public virtual void Visit(ISpanContainingQuery query) { }
 
@@ -198,24 +185,6 @@
 		public virtual void Visit(IGeoPolygonQuery query) { }
 
 		public virtual void Visit(IGeoDistanceQuery query) { }
-
-		public virtual void Visit(IGeoShapeMultiPointQuery query) { }
-
-		public virtual void Visit(IGeoShapeMultiPolygonQuery query) { }
-
-		public virtual void Visit(IGeoShapePolygonQuery query) { }
-
-		public virtual void Visit(IGeoShapePointQuery query) { }
-
-		public virtual void Visit(IGeoShapeMultiLineStringQuery query) { }
-
-		public virtual void Visit(IGeoShapeLineStringQuery query) { }
-
-		public virtual void Visit(IGeoShapeEnvelopeQuery query) { }
-
-		public virtual void Visit(IGeoShapeCircleQuery query) { }
-
-		public virtual void Visit(IGeoShapeGeometryCollectionQuery query) { }
 
 		public virtual void Visit(ISpanQuery query) { }
 

@@ -44,32 +44,8 @@ namespace Nest
 		public static QueryContainer GeoPolygon(Func<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery> selector) =>
 			new QueryContainerDescriptor<T>().GeoPolygon(selector);
 
-		public static QueryContainer GeoShapeCircle(Func<GeoShapeCircleQueryDescriptor<T>, IGeoShapeCircleQuery> selector) =>
-			new QueryContainerDescriptor<T>().GeoShapeCircle(selector);
-
-		public static QueryContainer GeoShapeEnvelope(Func<GeoShapeEnvelopeQueryDescriptor<T>, IGeoShapeEnvelopeQuery> selector) =>
-			new QueryContainerDescriptor<T>().GeoShapeEnvelope(selector);
-
-		public static QueryContainer GeoShapeLineString(Func<GeoShapeLineStringQueryDescriptor<T>, IGeoShapeLineStringQuery> selector) =>
-			new QueryContainerDescriptor<T>().GeoShapeLineString(selector);
-
-		public static QueryContainer GeoShapeMultiLineString(Func<GeoShapeMultiLineStringQueryDescriptor<T>, IGeoShapeMultiLineStringQuery> selector) =>
-			new QueryContainerDescriptor<T>().GeoShapeMultiLineString(selector);
-
-		public static QueryContainer GeoShapeMultiPoint(Func<GeoShapeMultiPointQueryDescriptor<T>, IGeoShapeMultiPointQuery> selector) =>
-			new QueryContainerDescriptor<T>().GeoShapeMultiPoint(selector);
-
-		public static QueryContainer GeoShapeMultiPolygon(Func<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery> selector) =>
-			new QueryContainerDescriptor<T>().GeoShapeMultiPolygon(selector);
-
-		public static QueryContainer GeoShapePoint(Func<GeoShapePointQueryDescriptor<T>, IGeoShapePointQuery> selector) =>
-			new QueryContainerDescriptor<T>().GeoShapePoint(selector);
-
-		public static QueryContainer GeoShapePolygon(Func<GeoShapePolygonQueryDescriptor<T>, IGeoShapePolygonQuery> selector) =>
-			new QueryContainerDescriptor<T>().GeoShapePolygon(selector);
-
-		public static QueryContainer GeoShapeGeometryCollection(Func<GeoShapeGeometryCollectionQueryDescriptor<T>, IGeoShapeGeometryCollectionQuery> selector) =>
-			new QueryContainerDescriptor<T>().GeoShapeGeometryCollection(selector);
+		public static QueryContainer GeoShape(Func<GeoShapeQueryDescriptor<T>, IGeoShapeQuery> selector) =>
+			new QueryContainerDescriptor<T>().GeoShape(selector);
 
 		public static QueryContainer HasChild<TChild>(Func<HasChildQueryDescriptor<TChild>, IHasChildQuery> selector) where TChild : class =>
 			new QueryContainerDescriptor<T>().HasChild<TChild>(selector);

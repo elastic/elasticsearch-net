@@ -19,30 +19,31 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 			coordinates = this._coordinates
 		};
 
-		protected override QueryContainer QueryInitializer => new GeoShapeCircleQuery
+		protected override QueryContainer QueryInitializer => new GeoShapeQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
-			Shape = new CircleGeoShape(this._coordinates) { Radius = "100m" },
+			Shape = new CircleGeoShape(this._coordinates, "100m"),
 			Relation = GeoShapeRelation.Intersects,
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoShapeCircle(c => c
+			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
-				.Coordinates(this._coordinates)
-				.Radius("100m")
+				.Shape(s => s
+					.Circle(this._coordinates, "100m")
+				)
 				.Relation(GeoShapeRelation.Intersects)
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeCircleQuery>(a => a.GeoShape as IGeoShapeCircleQuery)
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeQuery>(a => a.GeoShape)
 		{
 			q =>  q.Field = null,
 			q =>  q.Shape = null,
-			q =>  q.Shape.Coordinates = null,
+			q =>  ((ICircleGeoShape)q.Shape).Coordinates = null,
 		};
 	}
 }

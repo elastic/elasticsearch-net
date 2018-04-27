@@ -18,7 +18,7 @@ namespace Tests.QueryDsl.Geo.Shape.Point
 			coordinates = this._coordinates
 		};
 
-		protected override QueryContainer QueryInitializer => new GeoShapePointQuery
+		protected override QueryContainer QueryInitializer => new GeoShapeQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
@@ -28,19 +28,21 @@ namespace Tests.QueryDsl.Geo.Shape.Point
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoShapePoint(c => c
+			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
-				.Coordinates(this._coordinates)
+				.Shape(s => s
+					.Point(this._coordinates)
+				)
 				.Relation(GeoShapeRelation.Intersects)
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapePointQuery>(a => a.GeoShape as IGeoShapePointQuery)
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeQuery>(a => a.GeoShape)
 		{
 			q =>  q.Field = null,
 			q =>  q.Shape = null,
-			q =>  q.Shape.Coordinates = null,
+			q =>  ((IPointGeoShape)q.Shape).Coordinates = null,
 		};
 	}
 }

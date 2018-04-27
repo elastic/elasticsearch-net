@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -11,13 +12,10 @@ namespace Nest
 
 	public class LineStringGeoShape : GeoShapeBase, ILineStringGeoShape
 	{
-		public LineStringGeoShape() : this(null) { }
+		internal LineStringGeoShape() : base("linestring") { }
 
-		public LineStringGeoShape(IEnumerable<GeoCoordinate> coordinates) 
-			: base("linestring") 
-		{
-			this.Coordinates = coordinates;
-		}
+		public LineStringGeoShape(IEnumerable<GeoCoordinate> coordinates) : this() =>
+			this.Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
 
 		public IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}

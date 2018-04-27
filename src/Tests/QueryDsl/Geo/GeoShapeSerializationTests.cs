@@ -100,7 +100,7 @@ namespace Tests.QueryDsl.Geo
 
 		protected override SearchRequest<Framework.MockData.Shape> Initializer => new SearchRequest<Framework.MockData.Shape>
 		{
-			Query = new GeoShapeEnvelopeQuery
+			Query = new GeoShapeQuery
 			{
 				Name = "named_query",
 				Boost = 1.1,
@@ -113,11 +113,13 @@ namespace Tests.QueryDsl.Geo
 
 		protected override Func<SearchDescriptor<Framework.MockData.Shape>, ISearchRequest> Fluent => s => s
 			.Query(q => q
-				.GeoShapeEnvelope(c => c
+				.GeoShape(c => c
 					.Name("named_query")
 					.Boost(1.1)
 					.Field(p => p.Envelope)
-					.Coordinates(this._coordinates)
+					.Shape(sh => sh
+						.Envelope(this._coordinates)
+					)
 					.Relation(GeoShapeRelation.Intersects)
 					.IgnoreUnmapped()
 				)

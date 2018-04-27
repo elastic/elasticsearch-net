@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -11,13 +12,10 @@ namespace Nest
 
 	public class PolygonGeoShape : GeoShapeBase, IPolygonGeoShape
 	{
-		public PolygonGeoShape() : this(null) { }
+		internal PolygonGeoShape() : base("polygon")  { }
 
-		public PolygonGeoShape(IEnumerable<IEnumerable<GeoCoordinate>> coordinates) 
-			: base("polygon") 
-		{
-			this.Coordinates = coordinates;
-		}
+		public PolygonGeoShape(IEnumerable<IEnumerable<GeoCoordinate>> coordinates) : this() =>
+			this.Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
 
 		public IEnumerable<IEnumerable<GeoCoordinate>> Coordinates { get; set; }
 	}

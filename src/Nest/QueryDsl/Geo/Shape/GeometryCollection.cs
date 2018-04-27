@@ -19,7 +19,10 @@ namespace Nest
 	/// <inheritdoc cref="IGeometryCollection"/>
 	public class GeometryCollection : GeoShapeBase, IGeometryCollection
 	{
-		public GeometryCollection() : base("geometrycollection") { }
+		public GeometryCollection(IEnumerable<IGeoShape> geometries) : this() =>
+			this.Geometries = geometries ?? throw new ArgumentNullException(nameof(geometries));
+
+		internal GeometryCollection() : base("geometrycollection") { }
 
 		/// <inheritdoc />
 		public IEnumerable<IGeoShape> Geometries { get; set; }

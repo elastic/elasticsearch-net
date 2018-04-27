@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -11,13 +12,10 @@ namespace Nest
 
 	public class MultiPointGeoShape : GeoShapeBase, IMultiPointGeoShape
 	{
-		public MultiPointGeoShape() : this(null) { }
+		internal MultiPointGeoShape() : base("multipoint") { }
 
-		public MultiPointGeoShape(IEnumerable<GeoCoordinate> coordinates) 
-			: base("multipoint")
-		{
-			this.Coordinates = coordinates;
-		}
+		public MultiPointGeoShape(IEnumerable<GeoCoordinate> coordinates) : this() =>
+			this.Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
 
 		public IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}

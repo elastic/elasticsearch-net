@@ -43,7 +43,7 @@ namespace Nest
 			return ReadJToken(shape, serializer);
 		}
 
-		internal static object ReadJToken(JToken shape, JsonSerializer serializer)
+		internal static IGeoShape ReadJToken(JToken shape, JsonSerializer serializer)
 		{
 			var typeName = shape["type"]?.Value<string>();
 			switch (typeName)
