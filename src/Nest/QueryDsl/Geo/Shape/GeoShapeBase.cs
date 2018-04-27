@@ -14,24 +14,17 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("type")]
 		string Type { get; }
-
-		/// <summary>
-		/// Will ignore an unmapped field and will not match any documents for this query.
-		/// This can be useful when querying multiple indexes which might have different mappings.
-		/// </summary>
-		[JsonProperty("ignore_unmapped")]
-		bool? IgnoreUnmapped { get; set; }
 	}
 
+	/// <summary>
+	/// Base type for geo shapes
+	/// </summary>
 	public abstract class GeoShapeBase : IGeoShape
 	{
 	    protected GeoShapeBase(string type) => this.Type = type;
 
 		/// <inheritdoc />
 		public string Type { get; protected set; }
-
-		/// <inheritdoc />
-		public bool? IgnoreUnmapped { get; set; }
 	}
 
 	internal class GeoShapeConverter : JsonConverter
@@ -52,13 +45,11 @@ namespace Nest
 
 		internal static object ReadJToken(JToken shape, JsonSerializer serializer)
 		{
-			var type = shape["type"];
-			var typeName = type?.Value<string>();
+			var typeName = shape["type"]?.Value<string>();
 			switch (typeName)
 			{
 				case "circle":
-					var radius = shape["radius"];
-					return ParseCircleGeoShape(shape, serializer, radius);
+					return ParseCircleGeoShape(shape, serializer);
 				case "envelope":
 					return ParseEnvelopeGeoShape(shape, serializer);
 				case "linestring":
@@ -80,8 +71,7 @@ namespace Nest
 			}
 		}
 
-		public override bool CanConvert(Type objectType) => typeof(IGeoShape).IsAssignableFrom(objectType) ||
-		                                                    typeof(IGeometryCollection).IsAssignableFrom(objectType);
+		public override bool CanConvert(Type objectType) => typeof(IGeoShape).IsAssignableFrom(objectType);
 
 		private static GeometryCollection ParseGeometryCollection(JToken shape, JsonSerializer serializer)
 		{
@@ -126,11 +116,11 @@ namespace Nest
 		private static EnvelopeGeoShape ParseEnvelopeGeoShape(JToken shape, JsonSerializer serializer) =>
 			new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
 
-		private static CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer, JToken radius) =>
+		private static CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer) =>
 			new CircleGeoShape
 			{
 				Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer),
-				Radius = radius?.Value<string>()
+				Radius = shape["radius"]?.Value<string>()
 			};
 
 		private static T GetCoordinates<T>(JToken shape, JsonSerializer serializer)

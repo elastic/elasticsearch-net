@@ -26,11 +26,7 @@ namespace Nest
 		protected override bool Conditionless => GeoShapeLineStringQuery.IsConditionless(this);
 		ILineStringGeoShape IGeoShapeLineStringQuery.Shape { get; set; }
 
-		public GeoShapeLineStringQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates, bool? ignoreUnmapped = null) => Assign(a =>
-		{
-			a.Shape = a.Shape ?? new LineStringGeoShape();
-			a.Shape.Coordinates = coordinates;
-			a.Shape.IgnoreUnmapped = ignoreUnmapped;
-		});
+		public GeoShapeLineStringQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates) =>
+			Assign(a => a.Shape = new LineStringGeoShape { Coordinates = coordinates });
 	}
 }

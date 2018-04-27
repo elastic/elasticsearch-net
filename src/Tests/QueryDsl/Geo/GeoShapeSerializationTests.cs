@@ -79,13 +79,13 @@ namespace Tests.QueryDsl.Geo
 				{
 					_name="named_query",
 					boost = 1.1,
+					ignore_unmapped = true,
 					envelope = new
 					{
 						relation = "intersects",
 						shape = new
 						{
 							type = "envelope",
-							ignore_unmapped = true,
 							coordinates = this._coordinates
 						}
 					}
@@ -105,8 +105,9 @@ namespace Tests.QueryDsl.Geo
 				Name = "named_query",
 				Boost = 1.1,
 				Field = Infer.Field<Framework.MockData.Shape>(p => p.Envelope),
-				Shape = new EnvelopeGeoShape(this._coordinates) { IgnoreUnmapped = true},
+				Shape = new EnvelopeGeoShape(this._coordinates),
 				Relation = GeoShapeRelation.Intersects,
+				IgnoreUnmapped = true
 			}
 		};
 
@@ -116,8 +117,9 @@ namespace Tests.QueryDsl.Geo
 					.Name("named_query")
 					.Boost(1.1)
 					.Field(p => p.Envelope)
-					.Coordinates(this._coordinates, ignoreUnmapped: true)
+					.Coordinates(this._coordinates)
 					.Relation(GeoShapeRelation.Intersects)
+					.IgnoreUnmapped()
 				)
 			);
 
