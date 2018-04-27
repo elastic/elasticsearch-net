@@ -81,13 +81,16 @@ namespace Tests.Framework.MockData
 			var highBytes = IPAddress.Parse(high).GetAddressBytes();
 			for (int i = 0; i < lowBytes.Length; i++)
 			{
-				if (lowBytes[i] > highBytes[i])
+				var comparison = lowBytes[i].CompareTo(highBytes[i]);
+				if (comparison == 0) continue;
+				if (comparison > 0)
 				{
 					var s = low;
 					low = high;
 					high = s;
-					break;
 				}
+
+				break;
 			}
 			var d = new IpAddressRange();
 			SwapAssign(r(), low, v => d.GreaterThan = v, v => d.GreaterThanOrEqualTo = v);
