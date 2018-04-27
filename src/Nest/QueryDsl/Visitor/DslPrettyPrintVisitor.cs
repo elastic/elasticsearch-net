@@ -69,8 +69,6 @@ namespace Nest
 
 		public virtual void Visit(IDisMaxQuery query) => Write("dis_max");
 
-		public virtual void Visit(IGeoIndexedShapeQuery query) => Write("geo_indexed_shape");
-
 		public virtual void Visit(ISpanContainingQuery query) => Write("span_containing");
 
 		public virtual void Visit(ISpanWithinQuery query) => Write("span_within");
@@ -91,7 +89,46 @@ namespace Nest
 
 		public virtual void Visit(IFuzzyStringQuery query) => Write("fuzzy_string", query.Field);
 
-		public virtual void Visit(IGeoShapeQuery query) => Write("geo_shape", query.Field);
+		public virtual void Visit(IGeoShapeQuery query)
+		{
+			switch (query.Shape)
+			{
+				case null when query.IndexedShape != null:
+					Write("geo_indexed_shape");
+					break;
+				case ICircleGeoShape circleGeoShape:
+					Write("geo_shape_circle");
+					break;
+				case IEnvelopeGeoShape envelopeGeoShape:
+					Write("geo_shape_envelope");
+					break;
+				case IGeometryCollection geometryCollection:
+					Write("geo_shape_geometrycollection");
+					break;
+				case ILineStringGeoShape lineStringGeoShape:
+					Write("geo_shape_linestring");
+					break;
+				case IMultiLineStringGeoShape multiLineStringGeoShape:
+					Write("geo_shape_multi_linestring");
+					break;
+				case IMultiPointGeoShape multiPointGeoShape:
+					Write("geo_shape_multi_point");
+					break;
+				case IMultiPolygonGeoShape multiPolygonGeoShape:
+					Write("geo_shape_multi_polygon");
+					break;
+				case IPointGeoShape pointGeoShape:
+					Write("geo_shape_point");
+					break;
+				case IPolygonGeoShape polygonGeoShape:
+					Write("geo_shape_polygon");
+					break;
+				default:
+					Write("geo_shape", query.Field);
+					break;
+			}
+
+		}
 
 		public virtual void Visit(IHasChildQuery query) => Write("has_child");
 
@@ -151,25 +188,7 @@ namespace Nest
 
 		public virtual void Visit(ISpanMultiTermQuery query) => Write("span_multi_term");
 
-		public virtual void Visit(IGeoShapeMultiPointQuery query)=> Write("geo_multi_point");
-
-		public virtual void Visit(IGeoShapeMultiPolygonQuery query)=> Write("geo_shape_multi_polygon");
-
-		public virtual void Visit(IGeoShapePolygonQuery query)=> Write("geo_shape_polygon");
-
-		public virtual void Visit(IGeoShapePointQuery query)=> Write("geo_shape_point");
-
-		public virtual void Visit(IGeoShapeMultiLineStringQuery query)=> Write("geo_shape_multi_line");
-
-		public virtual void Visit(IGeoShapeLineStringQuery query)=> Write("geo_shape_line");
-
-		public virtual void Visit(IGeoShapeEnvelopeQuery query)=> Write("geo_shape_envelope");
-
-		public virtual void Visit(IGeoShapeGeometryCollectionQuery query)=> Write("geo_shape_geometrycollection");
-
 		public virtual void Visit(ISpanSubQuery query)=> Write("span_sub");
-
-		public virtual void Visit(IGeoShapeCircleQuery query)=> Write("geo_shape");
 
 		public virtual void Visit(IConditionlessQuery query)=> Write("conditonless_query");
 

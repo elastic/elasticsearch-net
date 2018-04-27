@@ -21,39 +21,34 @@ namespace Tests.Framework.MockData
 				.UseSeed(TestClient.Configuration.Seed)
 				.RuleFor(p => p.Id, p => Interlocked.Increment(ref _idState))
 				.RuleFor(p => p.GeometryCollection, p =>
-					new GeometryCollection
+					new GeometryCollection(new List<IGeoShape>
 					{
-						Geometries = new List<IGeoShape>
-						{
-							GenerateRandomPoint(p),
-							GenerateRandomMultiPoint(p),
-							GenerateLineString(p),
-							GenerateMultiLineString(p),
-							GeneratePolygon(p),
-							GenerateMultiPolygon(p)
-						}
+						GenerateRandomPoint(p),
+						GenerateRandomMultiPoint(p),
+						GenerateLineString(p),
+						GenerateMultiLineString(p),
+						GeneratePolygon(p),
+						GenerateMultiPolygon(p)
 					})
+				)
 				.RuleFor(p => p.Envelope, p => new EnvelopeGeoShape(new []
 				{
 					new GeoCoordinate(0, 0),
 					new GeoCoordinate(45, 45)
 				}))
-				.RuleFor(p => p.Circle, p => new CircleGeoShape(GenerateGeoCoordinate(p))
-				{
-					Radius = $"{p.Random.Int(1, 100)}km"
-				})
+				.RuleFor(p => p.Circle, p => new CircleGeoShape(GenerateGeoCoordinate(p), $"{p.Random.Int(1, 100)}km"))
 			;
 
 		public static IList<Shape> Shapes { get; } = Shape.Generator.Clone().Generate(10);
 
 		private static IPointGeoShape GenerateRandomPoint(Faker p) =>
-			new PointGeoShape { Coordinates = GenerateGeoCoordinate(p) };
+			new PointGeoShape(GenerateGeoCoordinate(p));
 
 		private static IMultiPointGeoShape GenerateRandomMultiPoint(Faker p) =>
-			new MultiPointGeoShape { Coordinates = GenerateGeoCoordinates(p,  p.Random.Int(1, 5)) };
+			new MultiPointGeoShape(GenerateGeoCoordinates(p,  p.Random.Int(1, 5)));
 
 		private static ILineStringGeoShape GenerateLineString(Faker p) =>
-			new LineStringGeoShape { Coordinates = GenerateGeoCoordinates(p, 3) };
+			new LineStringGeoShape(GenerateGeoCoordinates(p, 3));
 
 		private static IMultiLineStringGeoShape GenerateMultiLineString(Faker p)
 		{
@@ -61,29 +56,23 @@ namespace Tests.Framework.MockData
 			for (var i = 0; i < p.Random.Int(1, 5); i++)
 				coordinates.Add(GenerateGeoCoordinates(p, 3));
 
-			return new MultiLineStringGeoShape {Coordinates = coordinates };
+			return new MultiLineStringGeoShape(coordinates);
 		}
 
 		private static IPolygonGeoShape GeneratePolygon(Faker p)
 		{
-			return new PolygonGeoShape
+			return new PolygonGeoShape(new List<IEnumerable<GeoCoordinate>>
 			{
-				Coordinates = new List<IEnumerable<GeoCoordinate>>
-				{
-					GeneratePolygonCoordinates(p, GenerateGeoCoordinate(p))
-				}
-			};
+				GeneratePolygonCoordinates(p, GenerateGeoCoordinate(p))
+			});
 		}
 
 		private static IMultiPolygonGeoShape GenerateMultiPolygon(Faker p)
 		{
-			return new MultiPolygonGeoShape
+			return new MultiPolygonGeoShape(new List<IEnumerable<IEnumerable<GeoCoordinate>>>
 			{
-				Coordinates = new List<IEnumerable<IEnumerable<GeoCoordinate>>>
-				{
-					new [] { GeneratePolygonCoordinates(p, GenerateGeoCoordinate(p)) }
-				}
-			};
+				new [] { GeneratePolygonCoordinates(p, GenerateGeoCoordinate(p)) }
+			});
 		}
 
 		private static GeoCoordinate GenerateGeoCoordinate(Faker p) =>

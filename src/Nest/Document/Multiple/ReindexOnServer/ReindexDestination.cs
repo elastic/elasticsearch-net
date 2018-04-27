@@ -38,7 +38,7 @@ namespace Nest
 		OpType? OpType { get; set; }
 
 		/// <summary>
-		/// Setting to <see cref="Elastisearch.Net.VersionType.External"/> will cause Elasticsearch
+		/// Setting to <see cref="Elasticsearch.Net.VersionType.External"/> will cause Elasticsearch
 		/// to preserve the version from the source, create any documents that are missing,
 		/// and update any documents that have an older version in the destination index
 		/// than they do in the source index

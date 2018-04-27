@@ -37,7 +37,7 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new GeoIndexedShapeQuery
+		protected override QueryContainer QueryInitializer => new GeoShapeQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
@@ -53,7 +53,7 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoIndexedShape(c => c
+			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
@@ -64,7 +64,7 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 				.Relation(GeoShapeRelation.Intersects)
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoIndexedShapeQuery>(a => a.GeoShape as IGeoIndexedShapeQuery)
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeQuery>(a => a.GeoShape)
 		{
 			q =>  q.Field = null,
 			q =>  q.IndexedShape = null,

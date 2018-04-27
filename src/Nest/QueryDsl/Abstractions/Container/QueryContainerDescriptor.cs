@@ -157,73 +157,10 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.MoreLikeThis = query);
 
 		/// <summary>
-		/// A geo_shape query with an envelope finds documents
-		/// that have a geometry that matches for the given spatial relation and input envelope
-		/// </summary>
-		public QueryContainer GeoShapeEnvelope(Func<GeoShapeEnvelopeQueryDescriptor<T>, IGeoShapeEnvelopeQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoShape = query);
-
-		/// <summary>
-		/// A geo_shape query with a circle finds documents
-		/// that have a geometry that matches for the given spatial relation and input circle
-		/// </summary>
-		public QueryContainer GeoShapeCircle(Func<GeoShapeCircleQueryDescriptor<T>, IGeoShapeCircleQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoShape = query);
-
-		/// <summary>
 		/// A geo_shape query that finds documents
-		/// that have a geometry that matches for the given spatial relation and an indexed geo_shape
+		/// that have a geometry that matches for the given spatial relation and input shape
 		/// </summary>
-		public QueryContainer GeoIndexedShape(Func<GeoIndexedShapeQueryDescriptor<T>, IGeoIndexedShapeQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoShape = query);
-
-		/// <summary>
-		/// A geo_shape query with a linestring finds documents
-		/// that have a geometry that matches for the given spatial relation and input linestring
-		/// </summary>
-		public QueryContainer GeoShapeLineString(Func<GeoShapeLineStringQueryDescriptor<T>, IGeoShapeLineStringQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoShape = query);
-
-		/// <summary>
-		/// A geo_shape query with a multi linestring finds documents
-		/// that have a geometry that matches for the given spatial relation and input multi linestring
-		/// </summary>
-		public QueryContainer GeoShapeMultiLineString(Func<GeoShapeMultiLineStringQueryDescriptor<T>, IGeoShapeMultiLineStringQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoShape = query);
-
-		/// <summary>
-		/// A geo_shape query with a point finds documents
-		/// that have a geometry that matches for the given spatial relation and input point
-		/// </summary>
-		public QueryContainer GeoShapePoint(Func<GeoShapePointQueryDescriptor<T>, IGeoShapePointQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoShape = query);
-
-		/// <summary>
-		/// A geo_shape query with a multi point finds documents
-		/// that have a geometry that matches for the given spatial relation and input multi point
-		/// </summary>
-		public QueryContainer GeoShapeMultiPoint(Func<GeoShapeMultiPointQueryDescriptor<T>, IGeoShapeMultiPointQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoShape = query);
-
-		/// <summary>
-		/// A geo_shape query with a polygon finds documents
-		/// that have a geometry that matches for the given spatial relation and input polygon
-		/// </summary>
-		public QueryContainer GeoShapePolygon(Func<GeoShapePolygonQueryDescriptor<T>, IGeoShapePolygonQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoShape = query);
-
-		/// <summary>
-		/// A geo_shape query with a multi polygon finds documents
-		/// that have a geometry that matches for the given spatial relation and input multi polygon
-		/// </summary>
-		public QueryContainer GeoShapeMultiPolygon(Func<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery> selector) =>
-			WrapInContainer(selector, (query, container) => container.GeoShape = query);
-
-		/// <summary>
-		/// A geo_shape query with a geometry collection finds documents
-		/// that have a geometry that matches for the given spatial relation and input geometry collection
-		/// </summary>
-		public QueryContainer GeoShapeGeometryCollection(Func<GeoShapeGeometryCollectionQueryDescriptor<T>, IGeoShapeGeometryCollectionQuery> selector) =>
+		public QueryContainer GeoShape(Func<GeoShapeQueryDescriptor<T>, IGeoShapeQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>

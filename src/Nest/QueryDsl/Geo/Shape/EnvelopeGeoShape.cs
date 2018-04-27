@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -11,10 +12,10 @@ namespace Nest
 
 	public class EnvelopeGeoShape : GeoShapeBase, IEnvelopeGeoShape
 	{
-		public EnvelopeGeoShape() : this(null) { }
+		internal EnvelopeGeoShape() : base("envelope") { }
 
-		public EnvelopeGeoShape(IEnumerable<GeoCoordinate> coordinates) : base("envelope") =>
-			this.Coordinates = coordinates;
+		public EnvelopeGeoShape(IEnumerable<GeoCoordinate> coordinates) : this() =>
+			this.Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
 
 		public IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}

@@ -10,9 +10,13 @@ namespace Nest
 	/// Marks an instance where _name, boost and ignore_unmapped do
 	/// not exist as children of the variable field but as siblings
 	/// </summary>
-	internal class GeoShapeQueryFieldNameConverter : ReserializeJsonConverter<GeoShapeCircleQuery, IGeoShapeQuery>
+	internal class GeoShapeQueryFieldNameConverter : ReserializeJsonConverter<GeoShapeQuery, IGeoShapeQuery>
 	{
-		private static readonly string[] SkipProperties = {"boost", "_name", "ignore_unmapped"};
+		private static readonly string Boost = "boost";
+		private static readonly string Name = "_name";
+		private static readonly string IgnoreUnmapped = "ignore_unmapped";
+		private static readonly string[] SkipProperties = {Boost, Name, IgnoreUnmapped};
+
 		protected override bool SkipWriteProperty(string propertyName) => SkipProperties.Contains(propertyName);
 
 		protected override void SerializeJson(JsonWriter writer, object value, IGeoShapeQuery castValue, JsonSerializer serializer)
@@ -28,9 +32,9 @@ namespace Nest
 			var name = castValue.Name;
 			var boost = castValue.Boost;
 			var ignoreUnmapped = castValue.IgnoreUnmapped;
-			if (!name.IsNullOrEmpty()) writer.WriteProperty(serializer, "_name", name);
-			if (boost != null) writer.WriteProperty(serializer, "boost", boost);
-			if (ignoreUnmapped != null) writer.WriteProperty(serializer, "ignore_unmapped", ignoreUnmapped);
+			if (!name.IsNullOrEmpty()) writer.WriteProperty(serializer, Name, name);
+			if (boost != null) writer.WriteProperty(serializer, Boost, boost);
+			if (ignoreUnmapped != null) writer.WriteProperty(serializer, IgnoreUnmapped, ignoreUnmapped);
 			writer.WritePropertyName(field);
 			this.Reserialize(writer, value, serializer);
 			writer.WriteEndObject();
@@ -91,36 +95,12 @@ namespace Nest
 		}
 
 		private static IGeoShapeQuery ParseIndexedShapeQuery(JToken indexedShape) =>
-			new GeoIndexedShapeQuery {IndexedShape = (indexedShape as JObject)?.ToObject<FieldLookup>()};
+			new GeoShapeQuery { IndexedShape = indexedShape.ToObject<FieldLookup>()};
 
 		private static IGeoShapeQuery ParseShapeQuery(JToken shape, JsonSerializer serializer)
 		{
-			var type = shape["type"];
-			var typeName = type?.Value<string>();
 			var geometry = GeoShapeConverter.ReadJToken(shape, serializer);
-			switch (typeName)
-			{
-				case "circle":
-					return new GeoShapeCircleQuery { Shape = geometry as ICircleGeoShape };
-				case "envelope":
-					return new GeoShapeEnvelopeQuery { Shape = geometry as IEnvelopeGeoShape };
-				case "linestring":
-					return new GeoShapeLineStringQuery { Shape = geometry as ILineStringGeoShape };
-				case "multilinestring":
-					return new GeoShapeMultiLineStringQuery { Shape = geometry as IMultiLineStringGeoShape };
-				case "point":
-					return new GeoShapePointQuery { Shape = geometry as IPointGeoShape };
-				case "multipoint":
-					return new GeoShapeMultiPointQuery { Shape = geometry as IMultiPointGeoShape };
-				case "polygon":
-					return new GeoShapePolygonQuery { Shape = geometry as IPolygonGeoShape };
-				case "multipolygon":
-					return new GeoShapeMultiPolygonQuery { Shape = geometry as IMultiPolygonGeoShape };
-				case "geometrycollection":
-					return new GeoShapeGeometryCollectionQuery { Shape = geometry as IGeometryCollection };
-				default:
-					return null;
-			}
+			return new GeoShapeQuery { Shape = geometry };
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>

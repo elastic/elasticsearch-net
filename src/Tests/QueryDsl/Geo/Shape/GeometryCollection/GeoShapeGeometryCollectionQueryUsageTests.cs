@@ -103,14 +103,12 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new GeoShapeGeometryCollectionQuery
+		protected override QueryContainer QueryInitializer => new GeoShapeQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Infer.Field<Project>(p=>p.Location),
-			Shape = new Nest.GeometryCollection
-			{
-				Geometries = new IGeoShape[]
+			Shape = new Nest.GeometryCollection(new IGeoShape[]
 				{
 					new PointGeoShape(this._pointCoordinates),
 					new MultiPointGeoShape(this._multiPointCoordinates),
@@ -118,32 +116,33 @@ namespace Tests.QueryDsl.Geo.Shape.GeometryCollection
 					new MultiLineStringGeoShape(_multiLineStringCoordinates),
 					new PolygonGeoShape(this._polygonCoordinates),
 					new MultiPolygonGeoShape(this._multiPolygonCoordinates),
-				}
-			},
+				}),
 			Relation = GeoShapeRelation.Intersects,
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoShapeGeometryCollection(c => c
+			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
-				.Geometries(
-					new PointGeoShape(this._pointCoordinates),
-					new MultiPointGeoShape(this._multiPointCoordinates),
-					new LineStringGeoShape(this._lineStringCoordinates),
-					new MultiLineStringGeoShape(this._multiLineStringCoordinates),
-					new PolygonGeoShape(this._polygonCoordinates),
-					new MultiPolygonGeoShape(this._multiPolygonCoordinates)
+				.Shape(s => s
+					.GeometryCollection(
+						new PointGeoShape(this._pointCoordinates),
+						new MultiPointGeoShape(this._multiPointCoordinates),
+						new LineStringGeoShape(this._lineStringCoordinates),
+						new MultiLineStringGeoShape(this._multiLineStringCoordinates),
+						new PolygonGeoShape(this._polygonCoordinates),
+						new MultiPolygonGeoShape(this._multiPolygonCoordinates)
+					)
 				)
 				.Relation(GeoShapeRelation.Intersects)
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeGeometryCollectionQuery>(a => a.GeoShape as IGeoShapeGeometryCollectionQuery)
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeQuery>(a => a.GeoShape)
 		{
 			q =>  q.Field = null,
 			q =>  q.Shape = null,
-			q =>  q.Shape.Geometries = null,
+			q =>  ((IGeometryCollection)q.Shape).Geometries = null,
 		};
 	}
 }

@@ -42,7 +42,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new GeoShapePolygonQuery
+		protected override QueryContainer QueryInitializer => new GeoShapeQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
@@ -53,20 +53,22 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoShapePolygon(c => c
+			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.Location)
-				.Coordinates(this._polygonCoordinates)
+				.Shape(s => s
+					.Polygon(this._polygonCoordinates)
+				)
 				.IgnoreUnmapped()
 				.Relation(GeoShapeRelation.Intersects)
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapePolygonQuery>(a => a.GeoShape as IGeoShapePolygonQuery)
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeQuery>(a => a.GeoShape)
 		{
 			q =>  q.Field = null,
 			q =>  q.Shape = null,
-			q =>  q.Shape.Coordinates = null
+			q =>  ((IPolygonGeoShape)q.Shape).Coordinates = null
 		};
 	}
 }

@@ -39,7 +39,7 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPolygon
 			coordinates = this._coordinates
 		};
 
-		protected override QueryContainer QueryInitializer => new GeoShapeMultiPolygonQuery
+		protected override QueryContainer QueryInitializer => new GeoShapeQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
@@ -49,19 +49,21 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPolygon
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoShapeMultiPolygon(c => c
+			.GeoShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.Location)
-				.Coordinates(this._coordinates)
+				.Shape(s => s
+					.MultiPolygon(this._coordinates)
+				)
 				.Relation(GeoShapeRelation.Intersects)
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeMultiPolygonQuery>(a => a.GeoShape as IGeoShapeMultiPolygonQuery)
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeQuery>(a => a.GeoShape)
 		{
 			q =>  q.Field = null,
 			q =>  q.Shape = null,
-			q =>  q.Shape.Coordinates = null
+			q =>  ((IMultiPolygonGeoShape)q.Shape).Coordinates = null
 		};
 	}
 }

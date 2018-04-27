@@ -28,20 +28,7 @@ namespace Nest
 				VisitQuery(d as INumericRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as ITermRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 			});
-			VisitQuery(qd.GeoShape, visitor, (v, d) =>
-			{
-				v.Visit(d);
-				VisitQuery(d as IGeoIndexedShapeQuery, visitor, (vv, dd) => v.Visit(dd));
-				VisitQuery(d as IGeoShapeMultiPointQuery, visitor, (vv, dd) => v.Visit(dd));
-				VisitQuery(d as IGeoShapeMultiPolygonQuery, visitor, (vv, dd) => v.Visit(dd));
-				VisitQuery(d as IGeoShapePolygonQuery, visitor, (vv, dd) => v.Visit(dd));
-				VisitQuery(d as IGeoShapePointQuery, visitor, (vv, dd) => v.Visit(dd));
-				VisitQuery(d as IGeoShapeMultiLineStringQuery, visitor, (vv, dd) => v.Visit(dd));
-				VisitQuery(d as IGeoShapeLineStringQuery, visitor, (vv, dd) => v.Visit(dd));
-				VisitQuery(d as IGeoShapeEnvelopeQuery, visitor, (vv, dd) => v.Visit(dd));
-				VisitQuery(d as IGeoShapeCircleQuery, visitor, (vv, dd) => v.Visit(dd));
-				VisitQuery(d as IGeoShapeGeometryCollectionQuery, visitor, (vv, dd) => v.Visit(dd));
-			});
+			VisitQuery(qd.GeoShape, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Ids, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Prefix, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.QueryString, visitor, (v, d) => v.Visit(d));
