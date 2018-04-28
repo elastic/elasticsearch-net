@@ -19,7 +19,8 @@ namespace Nest
 
 		protected override HttpMethod HttpMethod => GetHttpMethod(this);
 
-		internal static HttpMethod GetHttpMethod(IIndexRequest<TDocument> request) => request.Id.IsConditionless() ? HttpMethod.POST : HttpMethod.PUT;
+		internal static HttpMethod GetHttpMethod(IIndexRequest<TDocument> request) =>
+			request.Id?.StringOrLongValue != null || request.RouteValues.Id != null ? HttpMethod.PUT: HttpMethod.POST;
 
 		partial void DocumentFromPath(TDocument document) => this.Document = document;
 
@@ -27,7 +28,6 @@ namespace Nest
 
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(this.Document, stream, formatting);
-
 	}
 
 	public partial class IndexDescriptor<TDocument>  where TDocument : class
@@ -41,7 +41,5 @@ namespace Nest
 
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
-
 	}
-
 }
