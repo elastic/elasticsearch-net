@@ -12,7 +12,7 @@ namespace Nest
 	public interface IGenericProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]
-		FieldIndexOption? Index { get; set; }
+		bool? Index { get; set; }
 
 		[JsonProperty("term_vector")]
 		TermVectorOption? TermVector { get; set; }
@@ -60,7 +60,7 @@ namespace Nest
 		public int? IgnoreAbove { get; set; }
 		public int? PositionIncrementGap { get; set; }
 		public IStringFielddata Fielddata { get; set; }
-		public FieldIndexOption? Index { get; set; }
+		public bool? Index { get; set; }
 		public string NullValue { get; set; }
 		public bool? Norms { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
@@ -82,7 +82,7 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<GenericPropertyDescriptor<T>, IGenericProperty, T>, IGenericProperty
 		where T : class
 	{
-		FieldIndexOption? IGenericProperty.Index { get; set; }
+		bool? IGenericProperty.Index { get; set; }
 		TermVectorOption? IGenericProperty.TermVector { get; set; }
 		double? IGenericProperty.Boost { get; set; }
 		string IGenericProperty.NullValue { get; set; }
@@ -98,13 +98,11 @@ namespace Nest
 
 		public GenericPropertyDescriptor<T> Type(string type) => Assign(a => this.TypeOverride = type);
 
-		public GenericPropertyDescriptor<T> Index(FieldIndexOption? index = FieldIndexOption.NotAnalyzed) => Assign(a => a.Index = index);
+		public GenericPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
 
 		public GenericPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
 
 		public GenericPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
-
-		public GenericPropertyDescriptor<T> NotAnalyzed() => Index(FieldIndexOption.NotAnalyzed);
 
 		public GenericPropertyDescriptor<T> TermVector(TermVectorOption? termVector) => Assign(a => a.TermVector = termVector);
 
