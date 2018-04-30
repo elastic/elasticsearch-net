@@ -312,6 +312,17 @@ InitializerExample
           "y",
           "z"
         ]
+      },
+      "phonetic": {
+        "type": "phonetic",
+        "encoder": "beider_morse",
+        "rule_type": "exact",
+        "name_type": "sephardic",
+        "languageset": [
+          "cyrillic",
+          "english",
+          "hebrew"
+        ]
       }
     }
   }

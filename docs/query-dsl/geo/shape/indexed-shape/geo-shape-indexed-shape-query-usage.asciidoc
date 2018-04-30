@@ -65,9 +65,9 @@ new GeoIndexedShapeQuery
 ----
 {
   "geo_shape": {
+    "_name": "named_query",
+    "boost": 1.1,
     "location": {
-      "_name": "named_query",
-      "boost": 1.1,
       "indexed_shape": {
         "id": 2,
         "type": "project",

@@ -32,12 +32,13 @@ q
     .Analyzer("standard")
     .QuoteAnalyzer("quote-an")
     .AllowLeadingWildcard()
-    .AutoGeneratePhraseQueries()
     .MaximumDeterminizedStates(2)
+    .AutoGeneratePhraseQueries()
     .LowercaseExpendedTerms()
+    .Locale("en_US")
+    .UseDisMax()
     .EnablePositionIncrements()
     .Escape()
-    .UseDisMax()
     .FuzzyPrefixLength(2)
     .FuzzyMaxExpansions(3)
     .FuzzyRewrite(MultiTermQueryRewrite.ConstantScore)
@@ -48,7 +49,6 @@ q
     .MinimumShouldMatch(2)
     .QuoteFieldSuffix("'")
     .Lenient()
-    .Locale("en_US")
     .Timezone("root")
 )
 ----
@@ -68,13 +68,13 @@ new QueryStringQuery
     Analyzer = "standard",
     QuoteAnalyzer = "quote-an",
     AllowLeadingWildcard = true,
-    AutoGeneratePhraseQueries = true,
     MaximumDeterminizedStates = 2,
+    AutoGeneratePhraseQueries = true,
     LowercaseExpendedTerms = true,
     Locale = "en_US",
+    UseDisMax = true,
     EnablePositionIncrements = true,
     Escape = true,
-    UseDisMax = true,
     FuzzyPrefixLength = 2,
     FuzzyMaxExpansions = 3,
     FuzzyMultiTermQueryRewrite = MultiTermQueryRewrite.ConstantScore,
@@ -84,7 +84,7 @@ new QueryStringQuery
     AnalyzeWildcard = true,
     MinimumShouldMatch = 2,
     QuoteFieldSuffix = "'",
-    Lenient = true,            
+    Lenient = true,
     Timezone = "root"
 }
 ----
