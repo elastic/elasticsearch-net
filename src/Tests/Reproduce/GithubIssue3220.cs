@@ -10,12 +10,7 @@ namespace Tests.Reproduce
 	{
 		[U] public void CanExplicitCastTimeFromString()
 		{
-			var client = TestClient.GetInMemoryClient();
-
-			var searchRequest = new SearchRequest<Project>
-			{
-				Scroll = "1s"
-			};
+			var searchRequest = new SearchRequest<Project> { Scroll = "1s" };
 
 			Action getScroll = () => { var scroll = searchRequest.Scroll; };
 
