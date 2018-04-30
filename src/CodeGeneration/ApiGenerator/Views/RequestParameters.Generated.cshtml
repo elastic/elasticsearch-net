@@ -39,10 +39,6 @@ namespace Elasticsearch.Net
           {
               fieldType = "object";
           }
-          if (fieldType == "TimeSpan")
-          {
-			  setter = mm + ".ToTimeUnit()";
-          }
 		<text>
 		///<summary>@kv.Value.Description</summary>
 		@if (!string.IsNullOrWhiteSpace(kv.Value.Obsolete))

@@ -34,7 +34,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public BulkRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public BulkRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Default document type for items which don&#39;t provide one</summary>
@@ -100,7 +100,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAliasesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatAliasesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -162,7 +162,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAllocationRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatAllocationRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -220,7 +220,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatCountRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatCountRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -282,7 +282,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatFielddataRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatFielddataRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -344,7 +344,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatHealthRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatHealthRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -448,7 +448,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatIndicesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatIndicesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -514,7 +514,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatMasterRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatMasterRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -572,7 +572,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodeAttributesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatNodeAttributesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -634,7 +634,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatNodesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -692,7 +692,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatPendingTasksRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatPendingTasksRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -750,7 +750,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatPluginsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatPluginsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -808,7 +808,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatRecoveryRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatRecoveryRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -866,7 +866,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatRepositoriesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatRepositoriesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -982,7 +982,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatShardsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatShardsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1040,7 +1040,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatSnapshotsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatSnapshotsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1168,7 +1168,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatTemplatesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatTemplatesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1230,7 +1230,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatThreadPoolRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatThreadPoolRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -1357,11 +1357,11 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterGetSettingsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public ClusterGetSettingsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public ClusterGetSettingsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public ClusterGetSettingsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Whether to return all default clusters setting.</summary>
@@ -1407,11 +1407,11 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterHealthRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public ClusterHealthRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public ClusterHealthRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public ClusterHealthRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Wait until the specified number of shards is active</summary>
@@ -1469,7 +1469,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterPendingTasksRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public ClusterPendingTasksRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -1507,11 +1507,11 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterPutSettingsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public ClusterPutSettingsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public ClusterPutSettingsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public ClusterPutSettingsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -1591,11 +1591,11 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterRerouteRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public ClusterRerouteRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public ClusterRerouteRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public ClusterRerouteRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -1633,7 +1633,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterStateRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public ClusterStateRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -1687,7 +1687,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public ClusterStatsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public ClusterStatsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -1890,15 +1890,15 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public CreateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public CreateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public CreateRequestParameters Timestamp(TimeSpan timestamp) => this.AddQueryString("timestamp", timestamp.ToTimeUnit());
+		public CreateRequestParameters Timestamp(TimeSpan timestamp) => this.AddQueryString("timestamp", timestamp);
 		
 		
 		///<summary>Expiration time for the document</summary>
-		public CreateRequestParameters Ttl(TimeSpan ttl) => this.AddQueryString("ttl", ttl.ToTimeUnit());
+		public CreateRequestParameters Ttl(TimeSpan ttl) => this.AddQueryString("ttl", ttl);
 		
 		
 		///<summary>Explicit version number for concurrency control</summary>
@@ -1960,7 +1960,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public DeleteRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public DeleteRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Explicit version number for concurrency control</summary>
@@ -2054,7 +2054,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public DeleteByQueryRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll.ToTimeUnit());
+		public DeleteByQueryRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll);
 		
 		
 		///<summary>Search operation type</summary>
@@ -2062,7 +2062,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public DeleteByQueryRequestParameters SearchTimeout(TimeSpan search_timeout) => this.AddQueryString("search_timeout", search_timeout.ToTimeUnit());
+		public DeleteByQueryRequestParameters SearchTimeout(TimeSpan search_timeout) => this.AddQueryString("search_timeout", search_timeout);
 		
 		
 		///<summary>Number of hits to return (default: 10)</summary>
@@ -2106,7 +2106,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public DeleteByQueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public DeleteByQueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
@@ -2205,11 +2205,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
 		///<summary>Explicit operation timeout</summary>
-		public DeleteScriptRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public DeleteScriptRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteScriptRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public DeleteScriptRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -2820,15 +2820,15 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public IndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public IndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public IndexRequestParameters Timestamp(TimeSpan timestamp) => this.AddQueryString("timestamp", timestamp.ToTimeUnit());
+		public IndexRequestParameters Timestamp(TimeSpan timestamp) => this.AddQueryString("timestamp", timestamp);
 		
 		
 		///<summary>Expiration time for the document</summary>
-		public IndexRequestParameters Ttl(TimeSpan ttl) => this.AddQueryString("ttl", ttl.ToTimeUnit());
+		public IndexRequestParameters Ttl(TimeSpan ttl) => this.AddQueryString("ttl", ttl);
 		
 		
 		///<summary>Explicit version number for concurrency control</summary>
@@ -2994,11 +2994,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Explicit operation timeout</summary>
-		public CloseIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public CloseIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public CloseIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CloseIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3048,11 +3048,11 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public CreateIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public CreateIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public CreateIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CreateIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
@@ -3090,11 +3090,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
 		///<summary>Explicit operation timeout</summary>
-		public DeleteIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public DeleteIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public DeleteIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -3128,11 +3128,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public DeleteAliasRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public DeleteAliasRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteAliasRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public DeleteAliasRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -3166,11 +3166,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
 		///<summary>Explicit operation timeout</summary>
-		public DeleteIndexTemplateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public DeleteIndexTemplateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteIndexTemplateRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public DeleteIndexTemplateRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -3308,7 +3308,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IndexTemplateExistsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public IndexTemplateExistsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -3800,7 +3800,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetIndexTemplateRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public GetIndexTemplateRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -3880,11 +3880,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Explicit operation timeout</summary>
-		public OpenIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public OpenIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public OpenIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public OpenIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3930,11 +3930,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public PutAliasRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public PutAliasRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public PutAliasRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public PutAliasRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -3968,11 +3968,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout</summary>
-		public PutMappingRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public PutMappingRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public PutMappingRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public PutMappingRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -4022,7 +4022,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public UpdateIndexSettingsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public UpdateIndexSettingsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
@@ -4080,11 +4080,11 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public PutIndexTemplateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public PutIndexTemplateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public PutIndexTemplateRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public PutIndexTemplateRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -4212,7 +4212,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Explicit operation timeout</summary>
-		public RolloverIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public RolloverIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
@@ -4220,7 +4220,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public RolloverIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public RolloverIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
@@ -4358,11 +4358,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout</summary>
-		public ShrinkIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public ShrinkIndexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public ShrinkIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public ShrinkIndexRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
@@ -4454,11 +4454,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Request timeout</summary>
-		public BulkAliasRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public BulkAliasRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public BulkAliasRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public BulkAliasRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -4659,11 +4659,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeletePipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public DeletePipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public DeletePipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public DeletePipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -4697,7 +4697,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public GetPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -4761,11 +4761,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public PutPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public PutPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public PutPipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public PutPipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5103,7 +5103,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>The interval for the second sampling of threads</summary>
-		public NodesHotThreadsRequestParameters Interval(TimeSpan interval) => this.AddQueryString("interval", interval.ToTimeUnit());
+		public NodesHotThreadsRequestParameters Interval(TimeSpan interval) => this.AddQueryString("interval", interval);
 		
 		
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
@@ -5123,7 +5123,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public NodesHotThreadsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public NodesHotThreadsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5161,7 +5161,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public NodesInfoRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public NodesInfoRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5219,7 +5219,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public NodesStatsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public NodesStatsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
@@ -5365,11 +5365,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout</summary>
-		public PutScriptRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public PutScriptRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public PutScriptRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public PutScriptRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5437,7 +5437,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public ReindexOnServerRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public ReindexOnServerRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
@@ -5621,7 +5621,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll.ToTimeUnit());
+		public SearchRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll);
 		
 		
 		///<summary>Search operation type</summary>
@@ -5774,7 +5774,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchTemplateRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll.ToTimeUnit());
+		public SearchTemplateRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll);
 		
 		
 		///<summary>Search operation type</summary>
@@ -5824,7 +5824,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public SnapshotRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
@@ -5862,11 +5862,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CreateRepositoryRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CreateRepositoryRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public CreateRepositoryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public CreateRepositoryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Whether to verify the repository after creation</summary>
@@ -5904,7 +5904,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteSnapshotRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public DeleteSnapshotRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5938,11 +5938,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteRepositoryRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public DeleteRepositoryRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public DeleteRepositoryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public DeleteRepositoryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -5976,7 +5976,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetSnapshotRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public GetSnapshotRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
@@ -6018,7 +6018,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetRepositoryRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public GetRepositoryRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -6056,7 +6056,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public RestoreRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public RestoreRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
@@ -6094,7 +6094,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotStatusRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public SnapshotStatusRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
@@ -6132,11 +6132,11 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public VerifyRepositoryRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public VerifyRepositoryRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public VerifyRepositoryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public VerifyRepositoryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -6464,15 +6464,15 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public UpdateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public UpdateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdateRequestParameters Timestamp(TimeSpan timestamp) => this.AddQueryString("timestamp", timestamp.ToTimeUnit());
+		public UpdateRequestParameters Timestamp(TimeSpan timestamp) => this.AddQueryString("timestamp", timestamp);
 		
 		
 		///<summary>Expiration time for the document</summary>
-		public UpdateRequestParameters Ttl(TimeSpan ttl) => this.AddQueryString("ttl", ttl.ToTimeUnit());
+		public UpdateRequestParameters Ttl(TimeSpan ttl) => this.AddQueryString("ttl", ttl);
 		
 		
 		///<summary>Explicit version number for concurrency control</summary>
@@ -6570,7 +6570,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public UpdateByQueryRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll.ToTimeUnit());
+		public UpdateByQueryRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll);
 		
 		
 		///<summary>Search operation type</summary>
@@ -6578,7 +6578,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public UpdateByQueryRequestParameters SearchTimeout(TimeSpan search_timeout) => this.AddQueryString("search_timeout", search_timeout.ToTimeUnit());
+		public UpdateByQueryRequestParameters SearchTimeout(TimeSpan search_timeout) => this.AddQueryString("search_timeout", search_timeout);
 		
 		
 		///<summary>Number of hits to return (default: 10)</summary>
@@ -6626,7 +6626,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public UpdateByQueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public UpdateByQueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</summary>
@@ -6729,7 +6729,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public GraphExploreRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public GraphExploreRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -6797,7 +6797,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>Specify timeout for watch write operation</summary>
-		public XPackUsageRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public XPackUsageRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -6933,7 +6933,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
-		public CloseJobRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public CloseJobRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -8449,7 +8449,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public AcknowledgeWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public AcknowledgeWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -8483,7 +8483,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ActivateWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public ActivateWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -8517,7 +8517,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeactivateWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public DeactivateWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -8551,7 +8551,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public DeleteWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Pretty format the returned JSON response.</summary>
@@ -8649,7 +8649,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public PutWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public PutWatchRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		
 		///<summary>Specify whether the watch is in/active by default</summary>
