@@ -229,13 +229,13 @@ namespace Nest
 		public S3RepositorySettingsDescriptor SecretKey(string secretKey) => Assign(a => a.SecretKey = secretKey);
 
 		/// <inheritdoc cref="IS3RepositorySettings.ConcurrentStreams"/>
-		public S3RepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+		public S3RepositorySettingsDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 
 		/// <inheritdoc cref="IS3RepositorySettings.ChunkSize"/>
 		public S3RepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
 
 		/// <inheritdoc cref="IS3RepositorySettings.Compress"/>
-		public S3RepositorySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
+		public S3RepositorySettingsDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
 
 		/// <inheritdoc cref="IS3RepositorySettings.ServerSideEncryption"/>
 		public S3RepositorySettingsDescriptor ServerSideEncryption(bool? serverSideEncryption = true) =>
