@@ -10,18 +10,18 @@ namespace Tests.Mapping.Types.Specialized.Generic
 		private const string GenericType = "{dynamic_type}";
 		public GenericPropertyTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object SingleMappingJson { get; } = new {index = "no", type= GenericType};
+		protected override object SingleMappingJson { get; } = new {index = false, type= GenericType};
 
 		protected override Func<SingleMappingSelector<object>, IProperty> FluentSingleMapping => m => m
 			.Generic(g => g
 				.Type(GenericType)
-				.Index(FieldIndexOption.No)
+				.Index(false)
 			);
 
 		protected override IProperty InitializerSingleMapping { get; } = new GenericProperty
 		{
 			Type = GenericType,
-			Index = FieldIndexOption.No
+			Indexed = false
 		};
 	}
 }
