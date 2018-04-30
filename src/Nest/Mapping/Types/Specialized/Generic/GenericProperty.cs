@@ -174,6 +174,7 @@ namespace Nest
 		[Obsolete("Deprecated. Will be removed in NEST 7.x")]
 		public GenericPropertyDescriptor<T> NotAnalyzed() => Index(FieldIndexOption.NotAnalyzed);
 
+		[Obsolete("Please use the overload that accepts bool?. Will be fixed in NEST 7.x")]
 		public GenericPropertyDescriptor<T> Index(FieldIndexOption index) => Assign(a => a.Index = index);
 
 		public GenericPropertyDescriptor<T> TermVector(TermVectorOption termVector) => Assign(a => a.TermVector = termVector);
