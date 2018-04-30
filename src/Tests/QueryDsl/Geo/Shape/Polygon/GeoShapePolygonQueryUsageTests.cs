@@ -11,7 +11,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 	{
 		public GeoShapePolygonQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private readonly IEnumerable<IEnumerable<GeoCoordinate>> _coordinates = new[]
+		private readonly IEnumerable<IEnumerable<GeoCoordinate>> _polygonCoordinates = new[]
 		{
 			new GeoCoordinate[]
 			{
@@ -27,7 +27,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 		{
 			type = "polygon",
 			ignore_unmapped = true,
-			coordinates = this._coordinates
+			coordinates = this._polygonCoordinates
 		};
 
 		protected override QueryContainer QueryInitializer => new GeoShapePolygonQuery
@@ -35,7 +35,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p => p.Location),
-			Shape = new PolygonGeoShape(this._coordinates) { IgnoreUnmapped = true},
+			Shape = new PolygonGeoShape(this._polygonCoordinates) { IgnoreUnmapped = true},
 			Relation = GeoShapeRelation.Intersects,
 		};
 
@@ -44,7 +44,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.Location)
-				.Coordinates(this._coordinates, ignoreUnmapped: true)
+				.Coordinates(this._polygonCoordinates, ignoreUnmapped: true)
 				.Relation(GeoShapeRelation.Intersects)
 			);
 
