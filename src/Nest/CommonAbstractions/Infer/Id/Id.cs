@@ -30,12 +30,9 @@ namespace Nest
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
-			var nestSettings = settings as IConnectionSettingsValues;
-			return GetString(nestSettings);
+			var nestSettings = (IConnectionSettingsValues)settings;
+			return nestSettings.Inferrer.Id(this.Document) ?? this.StringOrLongValue;
 		}
-
-		private string GetString(IConnectionSettingsValues nestSettings) =>
-			this.Document != null ? nestSettings.Inferrer.Id(this.Document) : this.StringOrLongValue;
 
 		public bool Equals(Id other)
 		{
