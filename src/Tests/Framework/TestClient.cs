@@ -67,6 +67,7 @@ namespace Tests.Framework
 			.DefaultIndex("default-index")
 			.PrettyJson()
 			.InferMappingFor<Project>(ProjectMapping)
+			.InferMappingFor<Ranges>(RangesMapping)
 			.InferMappingFor<CommitActivity>(map => map
 				.IndexName("project")
 				.TypeName("commits")
@@ -104,6 +105,15 @@ namespace Tests.Framework
 				m.Ignore(p => p.Ranges);
 			return m;
 		}
+
+		private static IClrTypeMapping<Ranges> RangesMapping(ClrTypeMappingDescriptor<Ranges> m)
+		{
+			//ip_range type only available since 5.5.0 so we ignore them when running integration tests
+			if (VersionUnderTestSatisfiedBy("<5.5.0") && Configuration.RunIntegrationTests)
+				m.Ignore(p => p.Ips);
+			return m;
+		}
+
 		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.GetOrAdd("5.0.0-alpha1")
 			? ".percolator"
 			: "query";
