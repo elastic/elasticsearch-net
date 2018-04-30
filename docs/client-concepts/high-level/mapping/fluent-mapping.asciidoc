@@ -285,11 +285,8 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
             );
 ----
 <1> Automap company
-
 <2> Override company inferred mappings
-
 <3> Automap nested employee type
-
 <4> Override employee inferred mappings
 
 [source,javascript]

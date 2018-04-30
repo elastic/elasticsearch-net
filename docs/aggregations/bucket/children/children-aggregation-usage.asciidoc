@@ -20,6 +20,8 @@ buckets on child documents.
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-children-aggregation.html[Children Aggregation]
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -31,6 +33,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

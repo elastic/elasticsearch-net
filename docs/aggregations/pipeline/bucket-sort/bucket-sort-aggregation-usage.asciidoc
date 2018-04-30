@@ -7,13 +7,13 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Aggregations/Pipeline/MovingAverage/MovingAverageLinearAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Aggregations/Pipeline/BucketSort/BucketSortAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[moving-average-linear-aggregation-usage]]
-=== Moving Average Linear Aggregation Usage
+[[bucket-sort-aggregation-usage]]
+=== Bucket Sort Aggregation Usage
 
 ==== Fluent DSL example
 
@@ -27,12 +27,13 @@ a => a
         .Sum("commits", sm => sm
             .Field(p => p.NumberOfCommits)
         )
-        .MovingAverage("commits_moving_avg", mv => mv
-            .BucketsPath("commits")
-            .GapPolicy(GapPolicy.InsertZeros)
-            .Model(m => m
-                .Linear()
+        .BucketSort("commits_bucket_sort", bs => bs
+            .Sort(s => s
+                .Descending("commits")
             )
+            .From(0)
+            .Size(3)
+            .GapPolicy(GapPolicy.InsertZeros)
         )
     )
 )
@@ -48,10 +49,15 @@ new DateHistogramAggregation("projects_started_per_month")
     Interval = DateInterval.Month,
     Aggregations =
         new SumAggregation("commits", "numberOfCommits") &&
-        new MovingAverageAggregation("commits_moving_avg", "commits")
+        new BucketSortAggregation("commits_bucket_sort")
         {
-            GapPolicy = GapPolicy.InsertZeros,
-            Model = new LinearModel()
+            Sort = new List<ISort>
+            {
+                new SortField { Field = "commits", Order = SortOrder.Descending }
+            },
+            From = 0,
+            Size = 3,
+            GapPolicy = GapPolicy.InsertZeros
         }
 }
 ----
@@ -71,12 +77,18 @@ new DateHistogramAggregation("projects_started_per_month")
           "field": "numberOfCommits"
         }
       },
-      "commits_moving_avg": {
-        "moving_avg": {
-          "buckets_path": "commits",
-          "gap_policy": "insert_zeros",
-          "model": "linear",
-          "settings": {}
+      "commits_bucket_sort": {
+        "bucket_sort": {
+          "sort": [
+            {
+              "commits": {
+                "order": "desc"
+              }
+            }
+          ],
+          "from": 0,
+          "size": 3,
+          "gap_policy": "insert_zeros"
         }
       }
     }
@@ -93,14 +105,18 @@ response.ShouldBeValid();
 var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
 projectsPerMonth.Should().NotBeNull();
 projectsPerMonth.Buckets.Should().NotBeNull();
-projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+projectsPerMonth.Buckets.Count.Should().Be(3);
 
-// average not calculated for the first bucket
-foreach(var item in projectsPerMonth.Buckets.Skip(1))
+double previousCommits = -1;
+
+// sum of commits should descend over buckets
+foreach(var item in projectsPerMonth.Buckets)
 {
-    var movingAvg = item.MovingAverage("commits_moving_avg");
-    movingAvg.Should().NotBeNull();
-    movingAvg.Value.Should().BeGreaterThan(0);
+    var numberOfCommits = item.Sum("commits").Value.Value;
+    if (previousCommits != -1)
+        numberOfCommits.Should().BeLessOrEqualTo(previousCommits);
+
+    previousCommits = numberOfCommits;
 }
 ----
 

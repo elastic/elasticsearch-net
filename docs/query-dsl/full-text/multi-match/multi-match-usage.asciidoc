@@ -37,7 +37,6 @@ q
     .Lenient()
     .ZeroTermsQuery(ZeroTermsQuery.All)
     .Name("named_query")
-    .AutoGenerateSynonymsPhraseQuery(false)
 )
 ----
 
@@ -62,8 +61,7 @@ new MultiMatchQuery
     CutoffFrequency = 0.001,
     Lenient = true,
     ZeroTermsQuery = ZeroTermsQuery.All,
-    Name = "named_query",
-    AutoGenerateSynonymsPhraseQuery = false
+    Name = "named_query"
 }
 ----
 
@@ -90,8 +88,7 @@ new MultiMatchQuery
       "description",
       "myOtherField"
     ],
-    "zero_terms_query": "all",
-    "auto_generate_synonyms_phrase_query": false
+    "zero_terms_query": "all"
   }
 }
 ----
@@ -131,6 +128,43 @@ new MultiMatchQuery
       "description^2.2",
       "myOtherField^0.3"
     ]
+  }
+}
+----
+
+[float]
+=== Multi match with no fields specified
+
+Starting with Elasticsearch 6.1.0+, it's possible to send a Multi Match query without providing any fields.
+When no fields are provided the Multi Match query will use the fields defined in the index setting `index.query.default_field`
+(which in turns defaults to `*`).
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.MultiMatch(c => c
+    .Query("hello world")
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new MultiMatchQuery
+{
+    Query = "hello world",
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "multi_match": {
+    "query": "hello world"
   }
 }
 ----

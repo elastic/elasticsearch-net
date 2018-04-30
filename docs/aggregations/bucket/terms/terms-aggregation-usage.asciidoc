@@ -19,6 +19,8 @@ A multi-bucket value source based aggregation where buckets are dynamically buil
 
 See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-terms-aggregation.html[terms aggregation] for more detail.
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -39,6 +41,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -120,6 +124,8 @@ states.Meta["foo"].Should().Be("bar");
 
 Using terms aggregation with filtering to include values using a regular expression pattern
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -140,6 +146,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -193,6 +201,8 @@ new TermsAggregation("states")
 }
 ----
 
+==== Handling Responses
+
 [source,csharp]
 ----
 response.ShouldBeValid();
@@ -217,6 +227,8 @@ states.Meta["foo"].Should().Be("bar");
 
 Using terms aggregation with filtering to include only specific values
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -237,6 +249,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -293,6 +307,8 @@ new TermsAggregation("states")
 }
 ----
 
+==== Handling Responses
+
 [source,csharp]
 ----
 response.ShouldBeValid();
@@ -323,6 +339,8 @@ Partitioning is available only in Elasticsearch 5.2.0+
 
 --
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -332,6 +350,8 @@ a => a
     .Size(5)
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -360,6 +380,8 @@ new TermsAggregation("commits")
 }
 ----
 
+==== Handling Responses
+
 [source,csharp]
 ----
 response.ShouldBeValid();
@@ -381,6 +403,8 @@ foreach (var item in commits.Buckets)
 
 A terms aggregation on a numeric field
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -390,6 +414,8 @@ a => a
     .ShowTermDocCountError()
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -415,6 +441,8 @@ new TermsAggregation("commits")
 }
 ----
 
+==== Handling Responses
+
 [source,csharp]
 ----
 response.ShouldBeValid();
@@ -437,6 +465,8 @@ commits.Buckets.Should().Contain(b => b.DocCountErrorUpperBound.HasValue);
 
 A terms aggregation returns buckets that can contain more aggregations
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -450,6 +480,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
@@ -485,6 +517,8 @@ new TermsAggregation("commits")
   }
 }
 ----
+
+==== Handling Responses
 
 [source,csharp]
 ----

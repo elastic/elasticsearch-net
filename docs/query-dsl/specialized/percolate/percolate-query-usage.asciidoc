@@ -160,3 +160,112 @@ match.Id.Should().Be(PercolatorId);
 ((IQueryContainer)match.Query).Match.Should().NotBeNull();
 ----
 
+[float]
+== Percolate multiple documents
+
+The percolate query can match multiple documents simultaneously with the indexed percolator queries.
+Percolating multiple documents in a single request can improve performance as queries
+only need to be parsed and matched once instead of multiple times.
+
+See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.Percolate(p => p
+    .Documents(Project.Instance, Project.Instance, Project.Instance)
+    .Field(f => f.Query)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new PercolateQuery
+{
+    Documents = new [] { Project.Instance, Project.Instance, Project.Instance },
+    Field = Infer.Field<ProjectPercolation>(f => f.Query)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "percolate": {
+    "documents": [
+      {
+        "name": "Koch, Collier and Mohr",
+        "state": "BellyUp",
+        "startedOn": "2015-01-01T00:00:00",
+        "lastActivity": "0001-01-01T00:00:00",
+        "leadDeveloper": {
+          "gender": "Male",
+          "id": 0,
+          "firstName": "Martijn",
+          "lastName": "Laarman"
+        },
+        "location": {
+          "lat": 42.1523,
+          "lon": -80.321
+        }
+      },
+      {
+        "name": "Koch, Collier and Mohr",
+        "state": "BellyUp",
+        "startedOn": "2015-01-01T00:00:00",
+        "lastActivity": "0001-01-01T00:00:00",
+        "leadDeveloper": {
+          "gender": "Male",
+          "id": 0,
+          "firstName": "Martijn",
+          "lastName": "Laarman"
+        },
+        "location": {
+          "lat": 42.1523,
+          "lon": -80.321
+        }
+      },
+      {
+        "name": "Koch, Collier and Mohr",
+        "state": "BellyUp",
+        "startedOn": "2015-01-01T00:00:00",
+        "lastActivity": "0001-01-01T00:00:00",
+        "leadDeveloper": {
+          "gender": "Male",
+          "id": 0,
+          "firstName": "Martijn",
+          "lastName": "Laarman"
+        },
+        "location": {
+          "lat": 42.1523,
+          "lon": -80.321
+        }
+      }
+    ],
+    "field": "query"
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.Total.Should().Be(1);
+response.Hits.Should().NotBeNull();
+response.Hits.Count.Should().Be(1);
+response.Fields.Count.Should().Be(1);
+
+var field = response.Fields.ElementAt(0);
+var values = field.ValuesOf<int>("_percolator_document_slot");
+values.Should().Contain(new[] {0, 1, 2});
+
+var match = response.Documents.First();
+match.Id.Should().Be(PercolatorId);
+((IQueryContainer)match.Query).Match.Should().NotBeNull();
+----
+

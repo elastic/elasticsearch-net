@@ -15,6 +15,8 @@ please modify the original csharp file found at the link and submit the PR with 
 [[max-bucket-aggregation-usage]]
 === Max Bucket Aggregation Usage
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -31,6 +33,8 @@ a => a
     .BucketsPath("projects_started_per_month>commits")
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

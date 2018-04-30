@@ -15,6 +15,8 @@ please modify the original csharp file found at the link and submit the PR with 
 [[average-bucket-aggregation-usage]]
 === Average Bucket Aggregation Usage
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -32,6 +34,8 @@ a => a
     .GapPolicy(GapPolicy.InsertZeros)
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

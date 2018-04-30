@@ -46,8 +46,6 @@ When using the constructor and passing a value for `Name`, `Property` or `Expres
 
 * getting the hash code for a `Field` instance
 
-IMPORTANT: Boost values are **not** taken into account when determining equality.
-
 [source,csharp]
 ----
 var fieldStringWithBoostTwo = new Field("name^2");
@@ -63,7 +61,7 @@ fieldStringWithBoostThree.GetHashCode().Should().NotBe(0);
 fieldExpression.GetHashCode().Should().NotBe(0);
 fieldProperty.GetHashCode().Should().NotBe(0);
 
-fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostThree); <1>
+fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostTwo); <1>
 ----
 <1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
 
@@ -473,15 +471,10 @@ class Precedence
 }
 ----
 <1> Even though this property has various attributes applied we provide an override on ConnectionSettings later that takes precedence.
-
 <2> Has a `TextAttribute`, `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `TextAttribute` takes precedence.
-
 <3> Has both a `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `PropertyNameAttribute` takes precedence.
-
 <4> `JsonPropertyAttribute` takes precedence.
-
 <5> This property we are going to hard code in our custom serializer to resolve to ask.
-
 <6> We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
 
 Here we create a custom serializer that renames any property named `AskSerializer` to `ask`

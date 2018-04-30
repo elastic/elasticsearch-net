@@ -23,6 +23,8 @@ IMPORTANT: this aggregation includes the `from` value and excludes the `to` valu
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-daterange-aggregation.html[Date Range Aggregation]
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -39,6 +41,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

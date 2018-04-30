@@ -35,6 +35,8 @@ foreach (var item in projectsPerMonth.Buckets.Skip(1))
 }
 ----
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -51,6 +53,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----

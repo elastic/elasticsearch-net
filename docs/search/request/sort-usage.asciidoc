@@ -29,8 +29,9 @@ s => s
     .Descending(p => p.Name)
     .Descending(SortSpecialField.Score)
     .Ascending(SortSpecialField.DocumentIndexOrder)
+
     .Field(f => f
-        .Field(p => p.LastActivity)
+        .Field(p => p.Tags.First().Added)
         .Order(SortOrder.Descending)
         .MissingLast()
         .UnmappedType(FieldType.Date)
@@ -77,7 +78,7 @@ new SearchRequest<Project>
         new SortField { Field = "_doc", Order = SortOrder.Ascending },
         new SortField
         {
-            Field = Field<Project>(p=>p.LastActivity),
+            Field = Field<Project>(p=>p.Tags.First().Added),
             Order = SortOrder.Descending,
             Missing = "_last",
             UnmappedType = FieldType.Date,
@@ -87,7 +88,7 @@ new SearchRequest<Project>
         },
         new SortField
         {
-            Field = Field<Project>(p=>p.NumberOfCommits),
+            Field = Field<Project>(p => p.NumberOfCommits),
             Order = SortOrder.Descending,
             Missing = -1
         },
@@ -98,17 +99,17 @@ new SearchRequest<Project>
             DistanceType = GeoDistanceType.Arc,
             GeoUnit = DistanceUnit.Centimeters,
             Mode = SortMode.Min,
-            Points = new [] {new GeoLocation(70, -70), new GeoLocation(-12, 12) }
+            Points = new[] {new GeoLocation(70, -70), new GeoLocation(-12, 12)}
         },
         new ScriptSort
         {
             Type = "number",
             Order = SortOrder.Ascending,
-            Script =  new InlineScript("doc['numberOfCommits'].value * params.factor")
+            Script = new InlineScript("doc['numberOfCommits'].value * params.factor")
             {
                 Params = new Dictionary<string, object>
                 {
-                    { "factor", 1.1 }
+                    {"factor", 1.1}
                 }
             }
         }
@@ -142,14 +143,14 @@ new SearchRequest<Project>
       }
     },
     {
-      "lastActivity": {
+      "tags.added": {
         "missing": "_last",
         "order": "desc",
         "mode": "avg",
+        "nested_path": "tags",
         "nested_filter": {
           "match_all": {}
         },
-        "nested_path": "tags",
         "unmapped_type": "date"
       }
     },
@@ -187,6 +188,81 @@ new SearchRequest<Project>
           },
           "source": "doc['numberOfCommits'].value * params.factor"
         }
+      }
+    }
+  ]
+}
+----
+
+[float]
+=== Nested sort usage
+
+In Elasticsearch 6.1.0+, using `nested_path` and `nested_filter` for sorting on fields mapped as
+`nested` types is deprecated. Instead, you should use the `nested` sort instead.
+
+[source,csharp]
+----
+s => s
+.Sort(ss => ss
+    .Field(f => f
+        .Field(p => p.Tags.First().Added)
+        .Order(SortOrder.Descending)
+        .MissingLast()
+        .UnmappedType(FieldType.Date)
+        .Mode(SortMode.Average)
+        .Nested(n => n
+            .Path(p => p.Tags)
+            .Filter(ff => ff
+                .MatchAll()
+            )
+        )
+    )
+)
+----
+
+[float]
+=== Object Initializer syntax example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Sort = new List<ISort>
+    {
+        new SortField
+        {
+            Field = Field<Project>(p => p.Tags.First().Added),
+            Order = SortOrder.Descending,
+            Missing = "_last",
+            UnmappedType = FieldType.Date,
+            Mode = SortMode.Average,
+            Nested = new NestedSort
+            {
+                Path = Field<Project>(p => p.Tags),
+                Filter = new MatchAllQuery()
+            }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "sort": [
+    {
+      "tags.added": {
+        "missing": "_last",
+        "order": "desc",
+        "mode": "avg",
+        "nested": {
+          "path": "tags",
+          "filter": {
+            "match_all": {}
+          }
+        },
+        "unmapped_type": "date"
       }
     }
   ]

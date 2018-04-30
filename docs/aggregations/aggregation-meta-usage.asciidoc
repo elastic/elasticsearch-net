@@ -17,6 +17,8 @@ please modify the original csharp file found at the link and submit the PR with 
 
 Metadata can be provided per aggregation, and will be returned in the aggregation response
 
+==== Fluent DSL example
+
 [source,csharp]
 ----
 a => a
@@ -29,6 +31,8 @@ a => a
     )
 )
 ----
+
+==== Object Initializer syntax example
 
 [source,csharp]
 ----
