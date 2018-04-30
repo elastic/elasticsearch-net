@@ -48,24 +48,9 @@ namespace ApiGenerator.Domain
 		public string ClsArgumentName => this.ClsName.ToCamelCase();
 		public string DescriptorArgumentType =>
 			this.Type == "list" && this.TypeHighLevel.EndsWith("[]") ? "params " + this.TypeHighLevel : TypeHighLevel;
-		public string SetterHighLevel
-		{
-			get
-			{
-				var setter = "value";
-				if (this.TypeHighLevel == "Time") setter += ".ToString()";
-				return setter;
-			}
-		}
-		public string SetterLowLevel
-		{
-			get
-			{
-				var setter = "value";
-				if (this.TypeLowLevel == "TimeSpan") setter += ".ToTimeUnit()";
-				return setter;
-			}
-		}
+		public string SetterHighLevel => "value";
+
+		public string SetterLowLevel => "value";
 
 		public bool IsFieldsParam => this.TypeHighLevel == "Fields";
 		public bool IsFieldParam => this.TypeHighLevel == "Field";

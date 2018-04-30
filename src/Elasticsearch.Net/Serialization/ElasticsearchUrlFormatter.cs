@@ -47,12 +47,13 @@ namespace Elasticsearch.Net
 				case DateTimeOffset offset: return offset.ToString("o");
 				case IEnumerable<object> pns:
 					return string.Join(",", pns.Select(o=> ResolveUrlParameterOrDefault(o, settings)));
+				case TimeSpan timeSpan: return timeSpan.ToTimeUnit();
 				default:
 					return ResolveUrlParameterOrDefault(value, settings);
 			}
 		}
 
 		private static string ResolveUrlParameterOrDefault(object value, IConnectionConfigurationValues settings) =>
-			value is IUrlParameter urlParam ? urlParam?.GetString(settings) : value.ToString();
+			value is IUrlParameter urlParam ? urlParam.GetString(settings) : value.ToString();
 	}
 }

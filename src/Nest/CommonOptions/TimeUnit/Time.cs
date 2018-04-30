@@ -10,7 +10,7 @@ namespace Nest
 	/// Represents a time value
 	/// </summary>
 	[JsonConverter(typeof(TimeJsonConverter))]
-	public class Time : IComparable<Time>, IEquatable<Time>
+	public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 	{
 		private const double MillisecondsInADay = MillisecondsInAnHour * 24;
 		private const double MillisecondsInAnHour = MillisecondsInAMinute * 60;
@@ -167,6 +167,14 @@ namespace Nest
 			var mantissa = ExponentFormat(this.Factor.Value);
 			var factor = this.Factor.Value.ToString("0." + mantissa, CultureInfo.InvariantCulture);
 			return this.Interval.HasValue ? factor + this.Interval.Value.GetStringValue() : factor;
+		}
+
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
+		{
+			if (this == Time.MinusOne) return "-1";
+			if (this == Time.Zero) return "0";
+			if (this.Factor.HasValue && this.Interval.HasValue) return this.ToString();
+			return this.Milliseconds.ToString();
 		}
 
 		public bool Equals(Time other)

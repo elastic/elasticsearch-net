@@ -51,7 +51,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -73,7 +73,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -168,9 +168,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Request timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -222,7 +222,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
 		public Fields Fields { get => Q<Fields>("fields"); set => Q("fields", value); }
 		///<summary>Whether the _source should be included in the response.</summary>
@@ -295,7 +295,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -334,7 +334,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -371,7 +371,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -410,7 +410,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -438,7 +438,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -497,7 +497,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
@@ -529,7 +529,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -557,7 +557,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -587,7 +587,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -615,7 +615,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -643,7 +643,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -680,7 +680,7 @@ namespace Nest
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -708,7 +708,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -782,7 +782,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -819,7 +819,7 @@ namespace Nest
 		///<summary>Set to true to ignore unavailable snapshots</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -893,7 +893,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -932,7 +932,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -1090,9 +1090,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -1127,7 +1127,7 @@ namespace Nest
 		///<summary>True if the job should be forcefully closed</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1163,9 +1163,9 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Whether to return all default clusters setting.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
@@ -1196,9 +1196,9 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Wait until the specified number of shards is active</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Wait until the specified number of nodes is available</summary>
@@ -1226,7 +1226,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1244,9 +1244,9 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1270,9 +1270,9 @@ namespace Nest
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
 		public string[] Metric { get => Q<string[]>("metric"); set => Q("metric", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1306,7 +1306,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1344,7 +1344,7 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1492,9 +1492,9 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
@@ -1518,9 +1518,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Whether to verify the repository after creation</summary>
 		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 	}
@@ -1580,7 +1580,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -1608,7 +1608,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1633,9 +1633,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit timestamp for the document</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -1700,11 +1700,11 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value.ToString()); }
+		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value); }
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
@@ -1726,7 +1726,7 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the
 		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
@@ -1797,11 +1797,11 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value.ToString()); }
+		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value); }
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
@@ -1823,7 +1823,7 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the
 		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
@@ -1895,9 +1895,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
@@ -1925,9 +1925,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2008,9 +2008,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2032,9 +2032,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2092,7 +2092,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2139,7 +2139,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2215,9 +2215,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2242,7 +2242,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2289,7 +2289,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3047,7 +3047,7 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -3252,7 +3252,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3277,7 +3277,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -3481,7 +3481,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
@@ -3616,7 +3616,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	///<summary>Request parameters for XpackGraphExplore <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
 	public partial class GraphExploreRequest : PlainRequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
@@ -3646,7 +3646,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -3758,7 +3758,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -3788,7 +3788,7 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -4198,7 +4198,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>The interval for the second sampling of threads</summary>
-		public Time Interval { get => Q<Time>("interval"); set => Q("interval", value.ToString()); }
+		public Time Interval { get => Q<Time>("interval"); set => Q("interval", value); }
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
@@ -4208,7 +4208,7 @@ namespace Nest
 		///<summary>The type to sample (default: cpu)</summary>
 		public ThreadType? ThreadType { get => Q<ThreadType?>("type"); set => Q("type", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4246,7 +4246,7 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4307,7 +4307,7 @@ namespace Nest
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public string[] Types { get => Q<string[]>("types"); set => Q("types", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 	}
@@ -4345,7 +4345,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4367,9 +4367,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -4499,9 +4499,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit timestamp for the document</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4545,9 +4545,9 @@ namespace Nest
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 	}
@@ -4598,9 +4598,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -4632,9 +4632,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -4667,9 +4667,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4748,9 +4748,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -4797,7 +4797,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
 	}
@@ -4876,7 +4876,7 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard
 		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
@@ -4986,7 +4986,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
@@ -5040,11 +5040,11 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
@@ -5138,7 +5138,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -5227,7 +5227,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -5397,7 +5397,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
@@ -5466,9 +5466,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
@@ -5520,7 +5520,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
@@ -5554,7 +5554,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
@@ -5795,9 +5795,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
@@ -6087,11 +6087,11 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value.ToString()); }
+		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value); }
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
@@ -6115,7 +6115,7 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the
 		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
@@ -6188,11 +6188,11 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value.ToString()); }
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value.ToString()); }
+		public Time SearchTimeout { get => Q<Time>("search_timeout"); set => Q("search_timeout", value); }
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
@@ -6216,7 +6216,7 @@ namespace Nest
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the
 		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
@@ -6275,7 +6275,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
 		public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -6395,7 +6395,7 @@ namespace Nest
 		///</summary>
 		public Routing Routing { get => Q<Routing>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -6627,9 +6627,9 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value.ToString()); }
+		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -6686,7 +6686,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>Specify timeout for watch write operation</summary>
-		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value.ToString()); }
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 }
  
