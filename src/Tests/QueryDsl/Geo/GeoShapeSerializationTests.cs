@@ -10,14 +10,14 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Geo
 {
-	public class GeoShapeQueryUsageTests :
+	public class GeoShapeSerializationTests :
 		ApiIntegrationTestBase<IntrusiveOperationCluster,
 			ISearchResponse<Framework.MockData.Shape>,
 			ISearchRequest,
 			SearchDescriptor<Framework.MockData.Shape>,
 			SearchRequest<Framework.MockData.Shape>>
 	{
-		public GeoShapeQueryUsageTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
+		public GeoShapeSerializationTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
 		private const string Index = "shapes";

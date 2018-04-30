@@ -11,7 +11,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 	{
 		public GeoShapePolygonQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private readonly IEnumerable<IEnumerable<GeoCoordinate>> _coordinates = new[]
+		private readonly IEnumerable<IEnumerable<GeoCoordinate>> _polygonCoordinates = new[]
 		{
 			new GeoCoordinate[]
 			{
@@ -26,7 +26,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 		protected override object ShapeJson => new
 		{
 			type = "polygon",
-			coordinates = this._coordinates
+			coordinates = this._polygonCoordinates
 		};
 
 		protected override QueryContainer QueryInitializer => new GeoShapePolygonQuery
@@ -34,7 +34,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p => p.Location),
-			Shape = new PolygonGeoShape(this._coordinates),
+			Shape = new PolygonGeoShape(this._polygonCoordinates),
 			Relation = GeoShapeRelation.Intersects,
 			IgnoreUnmapped = false
 		};
@@ -44,9 +44,9 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.Location)
-				.Coordinates(this._coordinates)
+				.Coordinates(this._polygonCoordinates)
 				.Relation(GeoShapeRelation.Intersects)
-				.IgnoreUnmapped()
+				.IgnoreUnmapped(false)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapePolygonQuery>(a => a.GeoShape as IGeoShapePolygonQuery)

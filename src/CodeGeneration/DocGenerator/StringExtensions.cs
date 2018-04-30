@@ -156,6 +156,11 @@ namespace DocGenerator
 			{ "Second.Init", "\"params._agg.commits = []\"" },
 			{ "Second.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
 			{ "Second.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
+			{ "this._polygonCoordinates", @"new[]{
+										new []{ new [] {10.0, -17.0}, new [] {15.0, 16.0}, new [] {0.0, 12.0}, new [] {-15.0, 16.0}, new [] {-10.0, -17.0},new [] {10.0, -17.0}},
+										new []{ new [] {8.2, 18.2}, new [] {8.2, -18.8}, new [] {-8.8, -10.8}, new [] {8.8, 18.2}}
+									}"
+			}
 		};
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)
