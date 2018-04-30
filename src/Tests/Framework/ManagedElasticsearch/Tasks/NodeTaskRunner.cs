@@ -29,6 +29,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 			new EnsureJavaHomeEnvironmentVariableIsSet(),
 			new DownloadCurrentElasticsearchDistribution(),
 			new UnzipCurrentElasticsearchDistribution(),
+			new EnsureElasticsearchBatWorksAcrossDrives(),
 			new CreateEasyRunBatFile(),
 			new InstallPlugins(),
 			new WriteAnalysisFiles(),
@@ -41,6 +42,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks
 		{
 			new CreateEasyRunClusterBatFile()
 		};
+
 		private static IEnumerable<AfterNodeStoppedTaskBase> NodeStoppedTasks { get; } = new List<AfterNodeStoppedTaskBase>
 		{
 			new CleanUpDirectoriesAfterNodeStopped()
