@@ -52,7 +52,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 								match_mapping_type = "*",
 								mapping = new
 								{
-									index = "no"
+									index = false
 								}
 							}
 						}
@@ -78,7 +78,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 							.MatchMappingType("*")
 							.Mapping(mm => mm
 								.Generic(g => g
-									.Index(FieldIndexOption.No)
+									.Index(false)
 								)
 							)
 						)
@@ -112,7 +112,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 									MatchMappingType = "*",
 									Mapping = new GenericProperty
 									{
-										Index = FieldIndexOption.No
+										Indexed = false
 									}
 								}
 							}

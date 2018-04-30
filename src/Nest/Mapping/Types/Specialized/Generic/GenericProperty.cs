@@ -11,8 +11,12 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGenericProperty : IDocValuesProperty
 	{
-		[JsonProperty("index")]
+		[JsonIgnore]
+		[Obsolete("Please use Indexed. Will be fixed in NEST 7.x")]
 		FieldIndexOption? Index { get; set; }
+
+		[JsonProperty("index")]
+		bool? Indexed { get; set; }
 
 		[JsonProperty("term_vector")]
 		TermVectorOption? TermVector { get; set; }
@@ -56,6 +60,8 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class GenericProperty : DocValuesPropertyBase, IGenericProperty
 	{
+		private FieldIndexOption? _index;
+
 #pragma warning disable 618
 		public GenericProperty() : base(null) { }
 #pragma warning restore 618
@@ -68,7 +74,31 @@ namespace Nest
 		public int? IgnoreAbove { get; set; }
 		public int? PositionIncrementGap { get; set; }
 		public IStringFielddata Fielddata { get; set; }
-		public FieldIndexOption? Index { get; set; }
+
+		[Obsolete("Please use Indexed. Will be fixed in NEST 7.x")]
+		public FieldIndexOption? Index
+		{
+			get => _index;
+			set
+			{
+				_index = value;
+				switch (_index)
+				{
+					case FieldIndexOption.Analyzed:
+					case FieldIndexOption.NotAnalyzed:
+						Indexed = true;
+						break;
+					case FieldIndexOption.No:
+						Indexed = false;
+						break;
+					default:
+						Indexed = null;
+						break;
+				}
+			}
+		}
+
+		public bool? Indexed { get; set; }
 		public string NullValue { get; set; }
 		public bool? Norms { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
@@ -85,7 +115,31 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<GenericPropertyDescriptor<T>, IGenericProperty, T>, IGenericProperty
 		where T : class
 	{
-		FieldIndexOption? IGenericProperty.Index { get; set; }
+		private FieldIndexOption? _index;
+
+		FieldIndexOption? IGenericProperty.Index
+		{
+			get => _index;
+			set
+			{
+				_index = value;
+				switch (_index)
+				{
+					case FieldIndexOption.Analyzed:
+					case FieldIndexOption.NotAnalyzed:
+						Self.Indexed = true;
+						break;
+					case FieldIndexOption.No:
+						Self.Indexed = false;
+						break;
+					default:
+						Self.Indexed = null;
+						break;
+				}
+			}
+		}
+
+		bool? IGenericProperty.Indexed { get; set; }
 		TermVectorOption? IGenericProperty.TermVector { get; set; }
 		double? IGenericProperty.Boost { get; set; }
 		string IGenericProperty.NullValue { get; set; }
@@ -105,7 +159,10 @@ namespace Nest
 
 		public GenericPropertyDescriptor<T> Type(string type) => Assign(a => a.Type = type);
 
+		[Obsolete("Please use the overload that accepts bool?. Will be fixed in NEST 7.x")]
 		public GenericPropertyDescriptor<T> Index(FieldIndexOption? index = FieldIndexOption.NotAnalyzed) => Assign(a => a.Index = index);
+
+		public GenericPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Indexed = index);
 
 		public GenericPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 
@@ -114,6 +171,7 @@ namespace Nest
 		/// <remarks>Removed in 6.x</remarks>
 		public GenericPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
+		[Obsolete("Deprecated. Will be removed in NEST 7.x")]
 		public GenericPropertyDescriptor<T> NotAnalyzed() => Index(FieldIndexOption.NotAnalyzed);
 
 		public GenericPropertyDescriptor<T> Index(FieldIndexOption index) => Assign(a => a.Index = index);
