@@ -22,6 +22,14 @@ namespace Tests.XPack.MachineLearning.PutJob
 			requestAsync: (client, r) => client.PutJobAsync(r)
 		);
 
+		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var callUniqueValue in values.Values)
+			{
+				DeleteJob(client, callUniqueValue);
+			}
+		}
+
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;

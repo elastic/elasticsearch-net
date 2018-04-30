@@ -36,6 +36,14 @@ namespace Tests.XPack.MachineLearning
 			return putJobResponse;
 		}
 
+		protected IDeleteJobResponse DeleteJob(IElasticClient client, string jobId)
+		{
+			var deleteJobResponse = client.DeleteJob(jobId);
+			if (!deleteJobResponse.IsValid || deleteJobResponse.Acknowledged == false)
+				throw new Exception($"Problem deleting job {jobId} for integration test: {deleteJobResponse.DebugInformation}");
+			return deleteJobResponse;
+		}
+
 		protected IOpenJobResponse OpenJob(IElasticClient client, string jobId)
 		{
 			var openJobResponse = client.OpenJob(jobId);
