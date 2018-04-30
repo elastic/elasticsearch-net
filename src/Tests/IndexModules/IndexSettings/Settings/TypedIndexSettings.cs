@@ -17,7 +17,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				{"any.setting", "can be set"},
 				{"doubles", 1.1},
 				{"bools", false},
-				{"enums", "analyzed"},
+				{"enums", "offsets"},
 				{"index.number_of_replicas", 2},
 				{"index.auto_expand_replicas", "1-3" },
 				{"index.refresh_interval", -1 },
@@ -42,7 +42,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				.Setting("any.setting", "can be set")
 				.Setting("doubles", 1.1)
 				.Setting("bools", false)
-				.Setting("enums", FieldIndexOption.Analyzed)
+				.Setting("enums", IndexOptions.Offsets)
 				.NumberOfShards(1)
 				.NumberOfReplicas(2)
 				.AutoExpandReplicas("1-3")
@@ -67,7 +67,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 					{ "any.setting", "can be set" },
 					{ "doubles", 1.1 },
 					{ "bools", false },
-					{ "enums", FieldIndexOption.Analyzed },
+					{ "enums", IndexOptions.Offsets },
 				})
 				{
 					NumberOfShards = 1,
