@@ -29,7 +29,7 @@ namespace Elasticsearch.Net
 		///<summary>Specific routing value</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Default document type for items which don't provide one</summary>
 		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
 		///<summary>Default comma-separated list of fields to return in the response for updates, can be overridden on each sub-request</summary>
@@ -53,7 +53,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -75,7 +75,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -95,7 +95,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -117,7 +117,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -139,7 +139,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -173,7 +173,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>A health status ("green", "yellow", or "red" to filter only indices matching the specified health status</summary>
@@ -197,7 +197,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -217,7 +217,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -239,7 +239,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -259,7 +259,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -279,7 +279,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -299,7 +299,7 @@ namespace Elasticsearch.Net
 		///<summary>The unit in which to display byte values</summary>
 		public Bytes? Bytes { get => Q<Bytes?>("bytes"); set => Q("bytes", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -319,7 +319,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -359,7 +359,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -379,7 +379,7 @@ namespace Elasticsearch.Net
 		///<summary>Set to true to ignore unavailable snapshots</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -428,7 +428,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -450,7 +450,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Comma-separated list of column names to display</summary>
 		public string[] Headers { get => Q<string[]>("h"); set => Q("h", value); }
 		///<summary>Return help information</summary>
@@ -484,9 +484,9 @@ namespace Elasticsearch.Net
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Whether to return all default clusters setting.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
@@ -500,9 +500,9 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Wait until the specified number of shards is active</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Wait until the specified number of nodes is available</summary>
@@ -522,7 +522,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for ClusterPutSettings<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
@@ -532,9 +532,9 @@ namespace Elasticsearch.Net
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for ClusterRemoteInfo<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
@@ -556,9 +556,9 @@ namespace Elasticsearch.Net
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
 		public string[] Metric { get => Q<string[]>("metric"); set => Q("metric", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for ClusterState<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
@@ -568,7 +568,7 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -589,7 +589,7 @@ namespace Elasticsearch.Net
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for Count<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
@@ -648,7 +648,7 @@ namespace Elasticsearch.Net
 		///<summary>Specific routing value</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -678,7 +678,7 @@ namespace Elasticsearch.Net
 		///<summary>Specific routing value</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -719,11 +719,11 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of specific routing values</summary>
 		public string[] Routing { get => Q<string[]>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
+		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public TimeSpan SearchTimeout { get => Q<TimeSpan>("search_timeout"); set => Q("search_timeout", value.ToTimeUnit()); }
+		public TimeSpan SearchTimeout { get => Q<TimeSpan>("search_timeout"); set => Q("search_timeout", value); }
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
@@ -745,7 +745,7 @@ namespace Elasticsearch.Net
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the
 		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
@@ -767,9 +767,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for Exists<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
@@ -963,7 +963,7 @@ namespace Elasticsearch.Net
 		///<summary>Specific routing value</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -1018,9 +1018,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -1039,9 +1039,9 @@ namespace Elasticsearch.Net
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
@@ -1051,9 +1051,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
@@ -1067,9 +1067,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit timestamp for the document</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for IndicesDeleteTemplateForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
@@ -1077,9 +1077,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for IndicesExists<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
@@ -1124,7 +1124,7 @@ namespace Elasticsearch.Net
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -1310,7 +1310,7 @@ namespace Elasticsearch.Net
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -1335,9 +1335,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -1356,9 +1356,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit timestamp for the document</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for IndicesPutMapping<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
@@ -1366,9 +1366,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -1387,7 +1387,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
 		public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1410,9 +1410,9 @@ namespace Elasticsearch.Net
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 	}
@@ -1447,11 +1447,11 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</summary>
 		public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
@@ -1499,9 +1499,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
@@ -1511,9 +1511,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
@@ -1541,9 +1541,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Request timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for IndicesUpgradeForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
@@ -1611,9 +1611,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for IngestGetPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
@@ -1621,7 +1621,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for IngestProcessorGrok<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
@@ -1635,9 +1635,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for IngestSimulate<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
@@ -1746,7 +1746,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The interval for the second sampling of threads</summary>
-		public TimeSpan Interval { get => Q<TimeSpan>("interval"); set => Q("interval", value.ToTimeUnit()); }
+		public TimeSpan Interval { get => Q<TimeSpan>("interval"); set => Q("interval", value); }
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
@@ -1756,7 +1756,7 @@ namespace Elasticsearch.Net
 		///<summary>The type to sample (default: cpu)</summary>
 		public ThreadType? ThreadType { get => Q<ThreadType?>("type"); set => Q("type", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for NodesInfoForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
@@ -1766,7 +1766,7 @@ namespace Elasticsearch.Net
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for NodesStatsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
@@ -1786,7 +1786,7 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public string[] Types { get => Q<string[]>("types"); set => Q("types", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 	}
@@ -1796,7 +1796,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for Ping<pre>http://www.elastic.co/guide/</pre></summary>
@@ -1810,9 +1810,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Context name to compile script against</summary>
 		public string Context { get => Q<string>("context"); set => Q("context", value); }
 	}
@@ -1824,7 +1824,7 @@ namespace Elasticsearch.Net
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard
 		/// only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the
@@ -1891,7 +1891,7 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of specific routing values</summary>
 		public string[] Routing { get => Q<string[]>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
+		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Specific 'tag' of the request for logging and statistical purposes</summary>
@@ -1968,7 +1968,7 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of specific routing values</summary>
 		public string[] Routing { get => Q<string[]>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
+		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
@@ -1984,7 +1984,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
@@ -1994,9 +1994,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Whether to verify the repository after creation</summary>
 		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 	}
@@ -2006,7 +2006,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for SnapshotDeleteRepository<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
@@ -2014,9 +2014,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for SnapshotGet<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
@@ -2024,7 +2024,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
@@ -2036,7 +2036,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -2046,7 +2046,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
@@ -2056,7 +2056,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
@@ -2066,9 +2066,9 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for TasksCancel<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
@@ -2177,7 +2177,7 @@ namespace Elasticsearch.Net
 		///<summary>Specific routing value</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Explicit version number for concurrency control</summary>
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
@@ -2220,11 +2220,11 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of specific routing values</summary>
 		public string[] Routing { get => Q<string[]>("routing"); set => Q("routing", value); }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value.ToTimeUnit()); }
+		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value); }
 		///<summary>Search operation type</summary>
 		public SearchType? SearchType { get => Q<SearchType?>("search_type"); set => Q("search_type", value); }
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public TimeSpan SearchTimeout { get => Q<TimeSpan>("search_timeout"); set => Q("search_timeout", value.ToTimeUnit()); }
+		public TimeSpan SearchTimeout { get => Q<TimeSpan>("search_timeout"); set => Q("search_timeout", value); }
 		///<summary>Number of hits to return (default: 10)</summary>
 		public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 		///<summary>A comma-separated list of <field>:<direction> pairs</summary>
@@ -2248,7 +2248,7 @@ namespace Elasticsearch.Net
 		///<summary>Should the effected indexes be refreshed?</summary>
 		public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>
 		/// Sets the number of shard copies that must be active before proceeding with the update by query operation. Defaults to 1, meaning the
 		/// primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of
@@ -2272,7 +2272,7 @@ namespace Elasticsearch.Net
 		///<summary>Specific routing value</summary>
 		public string Routing { get => Q<string>("routing"); set => Q("routing", value); }
 		///<summary>Explicit operation timeout</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for XpackInfo<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
@@ -2288,7 +2288,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify timeout for watch write operation</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for XpackLicenseDelete<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
@@ -2334,7 +2334,7 @@ namespace Elasticsearch.Net
 		///<summary>True if the job should be forcefully closed</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
-		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value.ToTimeUnit()); }
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	
 	///<summary>Request options for XpackMlDeleteDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
@@ -2714,7 +2714,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for XpackWatcherActivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
@@ -2722,7 +2722,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for XpackWatcherDeactivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
@@ -2730,7 +2730,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for XpackWatcherDeleteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
@@ -2738,7 +2738,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	
 	///<summary>Request options for XpackWatcherExecuteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
@@ -2760,7 +2760,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value.ToTimeUnit()); }
+		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
 	}
