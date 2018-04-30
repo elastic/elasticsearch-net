@@ -77,10 +77,6 @@ namespace Nest
 			fieldType = "Field";
 		}
 		var setter = "value";
-		if (fieldType == "Time")
-		{
-			setter += ".ToString()";
-		}
 		<text>///<summary>@kv.Value.Description</summary>
 		@if(!string.IsNullOrWhiteSpace(kv.Value.Obsolete))
 		{

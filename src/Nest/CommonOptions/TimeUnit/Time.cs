@@ -1,12 +1,13 @@
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonConverter(typeof(TimeJsonConverter))]
-	public class Time : IComparable<Time>, IEquatable<Time>
+	public class Time : IComparable<Time>, IEquatable<Time>, IUrlParameter
 	{
 		private const double MillisecondsInAYearApproximate = MillisecondsInADay * 365;
 		private const double MillisecondsInAMonthApproximate = MillisecondsInADay * 30;
@@ -268,6 +269,14 @@ namespace Nest
 		public override int GetHashCode() => this.StaticTimeValue.HasValue
 			? this.StaticTimeValue.Value.GetHashCode()
 			: this.ApproximateMilliseconds.GetHashCode();
+
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
+		{
+			if (this == Time.MinusOne) return "-1";
+			if (this == Time.Zero) return "0";
+			if (this.Factor.HasValue && this.Interval.HasValue) return this.ToString();
+			return this.ApproximateMilliseconds.ToString(CultureInfo.InvariantCulture);
+		}
 
 		private void SetMilliseconds(TimeUnit interval, double factor)
 		{
