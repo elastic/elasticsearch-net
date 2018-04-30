@@ -40,6 +40,10 @@ namespace Tests.Framework.Versions
 				: new ElasticsearchVersion(version, resolver);
 		}
 
+		public static implicit operator ElasticsearchVersion(string version) => string.IsNullOrWhiteSpace(version)
+			? null
+			: Create(version);
+
 		internal ElasticsearchVersion(string version, ElasticsearchVersionResolver resolver)
 			: base(TranslateConfigVersion(version, resolver))
 		{
