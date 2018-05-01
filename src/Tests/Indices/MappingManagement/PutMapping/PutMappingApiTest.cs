@@ -10,7 +10,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.PutMapping
 {
-	[SkipVersion("<5.2.0", "This uses the range types introduced in 5.2.0")]
+	[SkipVersion("<5.5.0", "This uses the ip_range type introduced in 5.5.0")]
 	public class PutMappingApiTests
 		: ApiIntegrationAgainstNewIndexTestBase
 			<WritableCluster, IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
