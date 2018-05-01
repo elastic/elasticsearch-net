@@ -104,7 +104,6 @@ var createIndexResponse = client.CreateIndex("my-index", c => c
 );
 ----
 <1> Pre-defined list of English stopwords within Elasticsearch
-
 <2> Use the `standard_english` analyzer configured
 
 [source,javascript]
@@ -272,7 +271,6 @@ var createIndexResponse = client.CreateIndex("questions", c => c
 );
 ----
 <1> Use an analyzer at index time that strips HTML tags
-
 <2> Use an analyzer at search time that does not strip HTML tags
 
 With this in place, the text of a question body will be analyzed with the `index_question` analyzer

@@ -163,9 +163,7 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
             );
 ----
 <1> Use the stop analyzer on this sub field
-
 <2> Use a custom analyzer named "named_shingles" that is configured in the index
-
 <3> Index as not analyzed
 
 [source,javascript]
