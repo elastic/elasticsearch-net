@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
-namespace Tests.QueryDsl.Geo
+namespace Tests.QueryDsl.Geo.Shape
 {
 	public class GeoShapeSerializationTests :
 		ApiIntegrationTestBase<IntrusiveOperationCluster,
