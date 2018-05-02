@@ -242,25 +242,7 @@ which support lat/lon pairs, and {ref_current}/geo-shape.html[geo_shape] fields,
 
 * <<geo-polygon-query-usage,Geo Polygon Query Usage>>
 
-* <<geo-shape-circle-query-usage,Geo Shape Circle Query Usage>>
-
-* <<geo-shape-envelope-query-usage,Geo Shape Envelope Query Usage>>
-
-* <<geo-shape-geometry-collection-query-usage,Geo Shape Geometry Collection Query Usage>>
-
-* <<geo-shape-indexed-shape-query-usage,Geo Shape Indexed Shape Query Usage>>
-
-* <<geo-shape-line-string-query-usage,Geo Shape Line String Query Usage>>
-
-* <<geo-shape-multi-line-string-query-usage,Geo Shape Multi Line String Query Usage>>
-
-* <<geo-shape-multi-point-query-usage,Geo Shape Multi Point Query Usage>>
-
-* <<geo-shape-multi-polygon-query-usage,Geo Shape Multi Polygon Query Usage>>
-
-* <<geo-shape-point-query-usage,Geo Shape Point Query Usage>>
-
-* <<geo-shape-polygon-query-usage,Geo Shape Polygon Query Usage>>
+* <<geo-shape-query-usage,Geo Shape Query Usage>>
 
 See the Elasticsearch documentation on {ref_current}/geo-queries.html[Geo queries] for more details.
 
@@ -272,25 +254,7 @@ include::query-dsl/geo/distance/geo-distance-query-usage.asciidoc[]
 
 include::query-dsl/geo/polygon/geo-polygon-query-usage.asciidoc[]
 
-include::query-dsl/geo/shape/circle/geo-shape-circle-query-usage.asciidoc[]
-
-include::query-dsl/geo/shape/envelope/geo-shape-envelope-query-usage.asciidoc[]
-
-include::query-dsl/geo/shape/geometry-collection/geo-shape-geometry-collection-query-usage.asciidoc[]
-
-include::query-dsl/geo/shape/indexed-shape/geo-shape-indexed-shape-query-usage.asciidoc[]
-
-include::query-dsl/geo/shape/line-string/geo-shape-line-string-query-usage.asciidoc[]
-
-include::query-dsl/geo/shape/multi-line-string/geo-shape-multi-line-string-query-usage.asciidoc[]
-
-include::query-dsl/geo/shape/multi-point/geo-shape-multi-point-query-usage.asciidoc[]
-
-include::query-dsl/geo/shape/multi-polygon/geo-shape-multi-polygon-query-usage.asciidoc[]
-
-include::query-dsl/geo/shape/point/geo-shape-point-query-usage.asciidoc[]
-
-include::query-dsl/geo/shape/polygon/geo-shape-polygon-query-usage.asciidoc[]
+include::query-dsl/geo/shape/geo-shape-query-usage.asciidoc[]
 
 [[specialized-queries]]
 == Specialized queries
