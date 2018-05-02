@@ -191,7 +191,7 @@ namespace Tests.ClientConcepts.Certificates
 		{
 			public PkiCluster() : base(new SslAndKpiClusterConfiguration
 			{
-				ClusterNodeSettings =
+				DefaultNodeSettings =
 				{
 					{"xpack.security.authc.realms.file1.enabled", "false"},
 					{"xpack.security.http.ssl.client_authentication", "required"}

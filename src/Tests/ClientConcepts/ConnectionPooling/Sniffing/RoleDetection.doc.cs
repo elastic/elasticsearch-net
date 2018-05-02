@@ -352,7 +352,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 	{
 		public SniffRoleDetectionCluster() : base(new ClientTestClusterConfiguration
 		{
-			ClusterNodeSettings =
+			DefaultNodeSettings =
 			{
 				{"node.data", "false"},
 				{"node.master", "true"},

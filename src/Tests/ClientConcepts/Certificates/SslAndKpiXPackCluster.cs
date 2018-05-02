@@ -17,7 +17,7 @@ namespace Tests.ClientConcepts.Certificates
 		{
 			// Skipping bootstrap validation because they call out to elasticsearch and would force
 			// The ServerCertificateValidationCallback to return true. Since its cached this would mess with later assertations.
-			this.SkipValidation = true;
+			this.SkipBuiltInAfterStartTasks = true;
 			this.AdditionalInstallationTasks.Add(new EnableSslAndKpiOnCluster());
 		}
 	}
@@ -30,7 +30,7 @@ namespace Tests.ClientConcepts.Certificates
 		public SslAndKpiXPackCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
 	}
 
-	public class EnableSslAndKpiOnCluster : ClusterComposeTask<EphemeralClusterConfiguration>
+	public class EnableSslAndKpiOnCluster : ClusterComposeTask
 	{
 
 		public override void Run(IEphemeralCluster<EphemeralClusterConfiguration> cluster)

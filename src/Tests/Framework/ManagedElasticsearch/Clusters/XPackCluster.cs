@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Elastic.Managed.Ephemeral;
-using Elastic.Managed.Ephemeral.Plugins;
 using Elastic.Xunit;
 using Elasticsearch.Net;
 using Nest;
@@ -49,15 +48,10 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		public string UnusedClientCertificate => Path.Combine(this.UnusedCertificatesPath, this.ClientCertificateFilename, this.ClientCertificateFilename) + ".crt";
 	}
 
-
 	public class XPackCluster : XunitClusterBase<XPackClusterConfiguration>, INestTestCluster
 	{
 		public XPackCluster() : this(new XPackClusterConfiguration()) { }
-
-		public XPackCluster(XPackClusterConfiguration configuration) : base(configuration)
-		{
-			this.Plugins.Add(ElasticsearchPlugin.XPack);
-		}
+		public XPackCluster(XPackClusterConfiguration configuration) : base(configuration) { }
 
 		protected virtual ConnectionSettings Authenticate(ConnectionSettings s) => s
 			.BasicAuthentication("es_admin", "es_admin");

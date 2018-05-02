@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Elastic.Managed.Ephemeral;
+using Elastic.Managed.Ephemeral.Plugins;
 using Elastic.Xunit;
 using Nest;
 using Tests.Framework.Configuration;
@@ -12,6 +13,8 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 	{
 		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration) { }
 		public ClientTestClusterBase() : base(new ClientTestClusterConfiguration()) { }
+		public ClientTestClusterBase(params ElasticsearchPlugin[] plugins)
+			: base(new ClientTestClusterConfiguration(plugins: plugins)) { }
 
 		public IElasticClient Client => this.GetOrAddClient(ConnectionSettings);
 
@@ -22,8 +25,10 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 	{
 		public ITestConfiguration TestConfiguration { get; }
 
-		public ClientTestClusterConfiguration(ClusterFeatures features = ClusterFeatures.None, int numberOfNodes = 1)
-			: base(TestClient.Configuration.ElasticsearchVersion, features, numberOfNodes)
+		public ClientTestClusterConfiguration(params ElasticsearchPlugin[] plugins) : this(numberOfNodes: 1, plugins: plugins) { }
+
+		public ClientTestClusterConfiguration(ClusterFeatures features = ClusterFeatures.None, int numberOfNodes = 1, params ElasticsearchPlugin[] plugins)
+			: base(TestClient.Configuration.ElasticsearchVersion, features, new ElasticsearchPlugins(plugins), numberOfNodes)
 		{
 			this.TestConfiguration = TestClient.Configuration;
 			this.ShowElasticsearchOutputAfterStarted = false;
@@ -47,6 +52,5 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		public string BinarySuffix => IsMono || Path.PathSeparator == '/' ? "" : ".bat";
 
 		public string AnalysisFolder => Path.Combine(this.FileSystem.ConfigPath, "analysis");
-
 	}
 }
