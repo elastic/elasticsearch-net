@@ -46,13 +46,11 @@ namespace DocGenerator
 			{
 				process.Start();
 				BranchName = process.StandardOutput.ReadToEnd().Trim();
-				Console.WriteLine($"Using branch name {BranchName} in documentation");
 				process.WaitForExit();
 			}
 			catch (Exception)
 			{
 				BranchName = "master";
-				Console.WriteLine($"Could not get the git branch name. Assuming {BranchName}");
 			}
 			finally
 			{
@@ -66,7 +64,7 @@ namespace DocGenerator
 
 		public static string OutputDirPath { get; }
 
-		public static string BranchName { get; }
+		public static string BranchName { get; set; }
 
 		public static string DocVersion => "6.1";
 
@@ -74,6 +72,11 @@ namespace DocGenerator
 		{
 		    try
 		    {
+			    if (args.Length > 0)
+				    BranchName = args[0];
+
+			    Console.WriteLine($"Using branch name {BranchName} in documentation");
+
                 LitUp.GoAsync(args).Wait();
 			    return 0;
 		    }

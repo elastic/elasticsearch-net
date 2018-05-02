@@ -57,11 +57,20 @@ module Commandline =
         |> List.filter (fun x -> (x.StartsWith("random:")))
         |> List.map (fun x -> (x.Replace("random:", "")))
         
+    let docsBranch = 
+        match args |> List.tryFind (fun x -> x.StartsWith("docs:")) with
+        | Some t -> t.Replace("docs:", "")
+        | _ -> ""
+             
     let private filteredArgs = 
         args 
         |> List.filter (
             fun x -> 
-                x <> "skiptests" && x <> "skipdocs" && not (x.StartsWith("seed:")) && not (x.StartsWith("random:"))
+                x <> "skiptests" && 
+                x <> "skipdocs" && 
+                not (x.StartsWith("seed:")) && 
+                not (x.StartsWith("random:")) && 
+                not (x.StartsWith("docs:"))
         )
 
     let multiTarget =

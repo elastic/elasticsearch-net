@@ -3,6 +3,7 @@
 #nowarn "0044" //TODO sort out FAKE 5
 
 #load @"Paths.fsx"
+#load @"Commandline.fsx"
 
 open System
 open System.IO
@@ -11,13 +12,14 @@ open Fake
 
 open Paths
 open Projects
+open Commandline
 
 module Documentation = 
 
     let Generate() = 
         let docGenerator = PrivateProject(DocGenerator)
         let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.NetCoreApp2_0
-        let generator = sprintf "%s.dll" docGenerator.Name
+        let generator = sprintf "%s.dll %s" docGenerator.Name Commandline.docsBranch
         
         DotNetCli.RunCommand(fun p ->
             { p with
