@@ -27,7 +27,7 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 
 		protected override string UrlPath => $"/_xpack/migration/upgrade/{index}";
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override int ExpectStatusCode => 500;
+		protected override int ExpectStatusCode => 400;
 		protected override bool ExpectIsValid => false;
 
 		protected override object ExpectJson => null;
@@ -40,10 +40,8 @@ namespace Tests.XPack.Migration.MigrationUpgrade
 
 		protected override void ExpectResponse(IMigrationUpgradeResponse response)
 		{
-			// Index [.watches] cannot be upgraded, it is up to date
 			response.ShouldNotBeValid();
-			response.ServerError.Should().NotBeNull();
-			response.ServerError.Status.Should().Be(500);
+			response.ServerError.Should().BeNull();
 		}
 	}
 }

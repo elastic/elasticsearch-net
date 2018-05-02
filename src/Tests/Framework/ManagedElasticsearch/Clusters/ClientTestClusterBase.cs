@@ -11,10 +11,14 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
 	public class ClientTestClusterBase : XunitClusterBase<ClientTestClusterConfiguration>, INestTestCluster
 	{
-		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration) { }
-		public ClientTestClusterBase() : base(new ClientTestClusterConfiguration()) { }
-		public ClientTestClusterBase(params ElasticsearchPlugin[] plugins)
-			: base(new ClientTestClusterConfiguration(plugins: plugins)) { }
+		public ClientTestClusterBase() : this(new ClientTestClusterConfiguration()) { }
+
+		public ClientTestClusterBase(params ElasticsearchPlugin[] plugins) : this(new ClientTestClusterConfiguration(plugins: plugins)) { }
+
+		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration)
+		{
+			this.ClusterConfiguration.AdditionalInstallationTasks.Add(new EnsureElasticsearchBatWorksAcrossDrives());
+		}
 
 		public IElasticClient Client => this.GetOrAddClient(ConnectionSettings);
 

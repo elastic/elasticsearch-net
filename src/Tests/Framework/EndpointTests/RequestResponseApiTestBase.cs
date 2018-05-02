@@ -119,8 +119,10 @@ namespace Tests.Framework
 					assert(response);
 				}
 #pragma warning disable 7095 //enable this if you expect a single overload to act up
+#pragma warning disable 8360
 				catch (Exception ex) when (false)
 #pragma warning restore 7095
+#pragma warning restore 8360
 #pragma warning disable 0162 //dead code while the previous exception filter is false
 				{
 					throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);

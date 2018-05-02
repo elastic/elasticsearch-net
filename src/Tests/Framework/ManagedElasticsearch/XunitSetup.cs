@@ -34,7 +34,6 @@ namespace Tests.Framework.ManagedElasticsearch
 
 			Randomizer.Seed = new Random(config.Seed);
 
-
 			WriteLine(new string('-', 20));
 			WriteLine("Starting tests using config:");
 			WriteLine($" - {nameof(config.TestAgainstAlreadyRunningElasticsearch)}: {config.TestAgainstAlreadyRunningElasticsearch}");
@@ -104,7 +103,7 @@ namespace Tests.Framework.ManagedElasticsearch
 			var config = TestClient.Configuration;
 			var runningIntegrations = config.RunIntegrationTests;
 			ForegroundColor = ConsoleColor.Yellow;
-			WriteLine("--------");
+			WriteLine("---Reproduce: -----");
 			var sb = new StringBuilder("build ")
 				.Append($"seed:{config.Seed} ");
 

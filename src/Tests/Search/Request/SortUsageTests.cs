@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;

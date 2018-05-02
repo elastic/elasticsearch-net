@@ -1,31 +1,29 @@
 ﻿using System.IO;
-using Tests.Framework.ManagedElasticsearch.Nodes;
-using Tests.Framework.Versions;
+using Elastic.Managed.Configuration;
+using Elastic.Managed.Ephemeral;
+using Elastic.Managed.Ephemeral.Tasks;
 
 namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 {
 	/// <summary>
 	/// Fixes https://github.com/elastic/elasticsearch/issues/29057
 	/// </summary>
-	public class EnsureElasticsearchBatWorksAcrossDrives : InstallationTaskBase
+	public class EnsureElasticsearchBatWorksAcrossDrives : ClusterComposeTask
 	{
-		private readonly ElasticsearchVersion _sixTwoZero = "6.2.0";
-		private readonly ElasticsearchVersion _sixThreeZero = "6.3.0";
-
-		public override void Run(NodeConfiguration config, NodeFileSystem fileSystem)
+		public override void Run(IEphemeralCluster<EphemeralClusterConfiguration> cluster)
 		{
-			if (config.ElasticsearchVersion < _sixTwoZero || config.ElasticsearchVersion >= _sixThreeZero)
+			var config = cluster.ClusterConfiguration;
+			if (config.Version < "6.2.0" || config.Version >= "6.3.0")
 				return;
 
-			var batFile = Path.Combine(fileSystem.ElasticsearchHome, "bin", "elasticsearch.bat");
+			var batFile = cluster.FileSystem.Binary;
 			var contents = File.ReadAllLines(batFile);
 			for (var i = 0; i < contents.Length; i++)
 			{
-				if (contents[i] == "cd \"%ES_HOME%\"")
-				{
-					contents[i] = "cd /d \"%ES_HOME%\"";
-					break;
-				}
+				if (contents[i] != "cd \"%ES_HOME%\"") continue;
+
+				contents[i] = "cd /d \"%ES_HOME%\"";
+				break;
 			}
 
 			File.WriteAllLines(batFile, contents);
