@@ -6,6 +6,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
+	/// <summary>
+	/// A lazily deserialized document
+	/// </summary>
 	[ContractJsonConverter(typeof(LazyDocumentJsonConverter))]
 	public interface ILazyDocument
 	{
@@ -24,7 +27,7 @@ namespace Nest
 		object As(Type objectType);
 	}
 
-
+	/// <inheritdoc />
 	public class LazyDocument : ILazyDocument
 	{
 		internal JToken Token { get; }

@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Describes aggregations that we would like to execute on elasticsearch. In NEST `Aggregation` always refers to an aggregation
-	/// going to elasticsearch and an `Aggregate` describes an aggregation going out.
+	/// Describes aggregations that we would like to execute on Elasticsearch. In NEST `Aggregation` always refers to an aggregation
+	/// going to Elasticsearch and an `Aggregate` describes an aggregation going out.
 	/// </summary>
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IAggregationContainer>))]
 	public class AggregationDictionary : IsADictionaryBase<string, IAggregationContainer>
@@ -210,6 +210,9 @@ namespace Nest
 		[JsonProperty("adjacency_matrix")]
 		IAdjacencyMatrixAggregation AdjacencyMatrix { get; set; }
 
+		[JsonProperty("composite")]
+		ICompositeAggregation Composite { get; set; }
+
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
@@ -307,6 +310,8 @@ namespace Nest
 		public IMatrixStatsAggregation MatrixStats { get; set; }
 
 		public IAdjacencyMatrixAggregation AdjacencyMatrix { get; set; }
+
+		public ICompositeAggregation Composite { get; set; }
 
 		public AggregationDictionary Aggregations { get; set; }
 
@@ -440,6 +445,8 @@ namespace Nest
 		IMatrixStatsAggregation IAggregationContainer.MatrixStats { get; set; }
 
 		IAdjacencyMatrixAggregation IAggregationContainer.AdjacencyMatrix { get; set; }
+
+		ICompositeAggregation IAggregationContainer.Composite { get; set; }
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
@@ -632,6 +639,10 @@ namespace Nest
 		public AggregationContainerDescriptor<T> AdjacencyMatrix(string name,
 			Func<AdjacencyMatrixAggregationDescriptor<T>, IAdjacencyMatrixAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.AdjacencyMatrix = d);
+
+		public AggregationContainerDescriptor<T> Composite(string name,
+			Func<CompositeAggregationDescriptor<T>, ICompositeAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Composite = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
