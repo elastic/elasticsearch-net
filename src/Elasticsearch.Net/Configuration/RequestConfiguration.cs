@@ -69,7 +69,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Whether or not this request should be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining defaults to true
 		/// </summary>
-		bool EnableHttpPipelining { get; set; }
+		bool? EnableHttpPipelining { get; set; }
 
 		/// <summary>
 		/// Submit the request on behalf in the context of a different shield user
@@ -87,7 +87,7 @@ namespace Elasticsearch.Net
 		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server.
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
-		bool ThrowExceptions { get; set; }
+		bool? ThrowExceptions { get; set; }
 	}
 
 	public class RequestConfiguration : IRequestConfiguration
@@ -103,7 +103,7 @@ namespace Elasticsearch.Net
 		public bool? DisableDirectStreaming { get; set; }
 		public IEnumerable<int> AllowedStatusCodes { get; set; }
 		public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
-		public bool EnableHttpPipelining { get; set; } = true;
+		public bool? EnableHttpPipelining { get; set; } = true;
 		public CancellationToken CancellationToken { get; set; }
 		/// <summary>
 		/// Submit the request on behalf in the context of a different user
@@ -112,7 +112,7 @@ namespace Elasticsearch.Net
 		public string RunAs { get; set; }
 
 		public X509CertificateCollection ClientCertificates { get; set; }
-		public bool ThrowExceptions { get; set; }
+		public bool? ThrowExceptions { get; set; }
 	}
 
 	public class RequestConfigurationDescriptor : IRequestConfiguration
@@ -130,10 +130,10 @@ namespace Elasticsearch.Net
 		bool? IRequestConfiguration.DisableDirectStreaming { get; set; }
 		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
 		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
-		bool IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
+		bool? IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
 		string IRequestConfiguration.RunAs { get; set; }
 		X509CertificateCollection IRequestConfiguration.ClientCertificates { get; set; }
-		bool IRequestConfiguration.ThrowExceptions { get; set; }
+		bool? IRequestConfiguration.ThrowExceptions { get; set; }
 
 		public RequestConfigurationDescriptor(IRequestConfiguration config)
 		{
@@ -151,6 +151,7 @@ namespace Elasticsearch.Net
 			Self.EnableHttpPipelining = config?.EnableHttpPipelining ?? true;
 			Self.RunAs = config?.RunAs;
 			Self.ClientCertificates = config?.ClientCertificates;
+			Self.ThrowExceptions = config?.ThrowExceptions;
 		}
 
 		/// <summary>
