@@ -7,7 +7,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 	public class WritableCluster : ClientTestClusterBase
 	{
 		public WritableCluster() : base(new ClientTestClusterConfiguration(
-			IngestGeoIp, IngestAttachment, AnalysisKuromoji, AnalysisIcu, AnalysisPhonetic
+			IngestGeoIp, IngestAttachment, AnalysisKuromoji, AnalysisIcu, AnalysisPhonetic, MapperMurmur3
 		)
 		{
 			MaxConcurrency = 4

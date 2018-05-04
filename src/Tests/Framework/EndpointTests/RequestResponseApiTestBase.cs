@@ -55,7 +55,7 @@ namespace Tests.Framework
 
 			if (cluster == null) throw new ArgumentNullException(nameof(cluster));
 			this.Cluster = cluster;
-			this.Responses = usage.CallOnce(this.ClientUsage);
+			this.Responses = usage.CallOnce(this.ClientUsage, 0);
 			this.UniqueValues = usage.CallUniqueValues;
 		}
 

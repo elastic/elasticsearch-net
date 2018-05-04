@@ -16,7 +16,7 @@ using Xunit;
 
 namespace Tests.Document.Multiple.BulkAll
 {
-	public class BulkAllApiTests : SerializationTestBase, IClusterFixture<IntrusiveOperationCluster>
+	public class BulkAllApiTests : SerializationTestBase, IClusterFixture<IntrusiveOperationCluster>, IClassFixture<EndpointUsage>
 	{
 		private class SmallObject
 		{

@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bogus" Version="21.0.2" />
-    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180501T150606" />
+    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180502T143446" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />
     <PackageReference Include="DiffPlex" Version="1.4.1" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
