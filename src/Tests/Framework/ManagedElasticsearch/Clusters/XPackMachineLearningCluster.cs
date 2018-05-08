@@ -20,7 +20,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 				{ "node.attr.ml.max_open_jobs", "30", ">=5.4.0 <6.0.0"},
 				{ "xpack.ml.max_open_jobs", "30", ">=6.0.0"}
 			},
-			AdditionalInstallationTasks =
+			AdditionalBeforeNodeStartedTasks =
 			{
 				new DownloadMachineLearningSampleDataDistribution()
 			},

@@ -6,9 +6,7 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
-using Elastic.Xunit;
 using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {

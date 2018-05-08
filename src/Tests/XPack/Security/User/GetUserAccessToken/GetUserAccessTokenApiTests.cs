@@ -6,7 +6,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using static Tests.XPack.Security.ShieldInformation;
+using static Elastic.Managed.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.User.GetUserAccessToken
 {

@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bogus" Version="21.0.2" />
-    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180502T143446" />
+    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180508T112817" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />
     <PackageReference Include="DiffPlex" Version="1.4.1" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
@@ -59,9 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties" />
   </ItemGroup>
   <Import Project="..\outputpath.props" />
 </Project>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Elastic.Managed.Ephemeral;
+using Elastic.Xunit;
 using Elasticsearch.Net;
 using Nest;
 
@@ -11,16 +12,15 @@ namespace Tests.Framework.ManagedElasticsearch
 {
 	internal static class EphemeralClusterExtensions
 	{
-		private static readonly ConcurrentDictionary<IEphemeralCluster, IElasticClient> Clients = new ConcurrentDictionary<IEphemeralCluster, IElasticClient>();
-
 		public static bool RunningFiddler => Process.GetProcessesByName("fiddler").Any();
 
-		public static IElasticClient GetOrAddClient(
-			this IEphemeralCluster cluster,
+		public static IElasticClient GetOrAddClient<TConfig>(
+			this IEphemeralCluster<TConfig> cluster,
 			Func<ConnectionSettings, ConnectionSettings> createSettings = null,
 			Func<ICollection<Uri>, IConnectionPool> createPool = null)
+			where TConfig : EphemeralClusterConfiguration
 		{
-			return Clients.GetOrAdd(cluster, (c) =>
+			return cluster.GetOrAddClient(c =>
 			{
 				var host = (RunningFiddler) ? "ipv4.fiddler" : "localhost";
 				createSettings = createSettings ?? (s => s);
@@ -30,10 +30,11 @@ namespace Tests.Framework.ManagedElasticsearch
 					? TestClient.CreateLiveConnection()
 					: new InMemoryConnection();
 				var settings = TestClient.CreateSettings(createSettings, connection, connectionPool);
+				if (cluster.ClusterConfiguration.EnableSecurity)
+					settings = settings.BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password);
 				var client = new ElasticClient(settings);
 				return client;
 			});
-
 		}
 	}
 }

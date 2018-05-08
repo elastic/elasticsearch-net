@@ -5,7 +5,7 @@ using Elastic.Managed.Ephemeral.Plugins;
 using Elastic.Xunit;
 using Nest;
 using Tests.Framework.Configuration;
-using Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks;
+using Tests.Framework.ManagedElasticsearch.Tasks;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
@@ -17,7 +17,6 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 
 		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration)
 		{
-			this.ClusterConfiguration.AdditionalInstallationTasks.Add(new EnsureElasticsearchBatWorksAcrossDrives());
 		}
 
 		public IElasticClient Client => this.GetOrAddClient(ConnectionSettings);
@@ -49,11 +48,8 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			this.Add($"script.indexed", "true", "<5.0.0-alpha1");
 			this.Add($"script.allowed_types", "inline,stored", ">=5.5.0");
 
-			this.AdditionalInstallationTasks.Add(new WriteAnalysisFiles());
+			this.AdditionalBeforeNodeStartedTasks.Add(new WriteAnalysisFiles());
 		}
-
-		private static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
-		public string BinarySuffix => IsMono || Path.PathSeparator == '/' ? "" : ".bat";
 
 		public string AnalysisFolder => Path.Combine(this.FileSystem.ConfigPath, "analysis");
 	}

@@ -120,7 +120,7 @@ namespace Tests.ClientConcepts.Certificates
             public CertgenCaCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 				.ServerCertificateValidationCallback(
-					CertificateValidations.AuthorityIsRoot(new X509Certificate(this.ClusterConfiguration.CaCertificate))
+					CertificateValidations.AuthorityIsRoot(new X509Certificate(this.ClusterConfiguration.FileSystem.CaCertificate))
 				);
 		}
 
@@ -143,7 +143,7 @@ namespace Tests.ClientConcepts.Certificates
 		{
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 				.ServerCertificateValidationCallback(
-					CertificateValidations.AuthorityPartOfChain(new X509Certificate(this.ClusterConfiguration.UnusedCaCertificate))
+					CertificateValidations.AuthorityPartOfChain(new X509Certificate(this.ClusterConfiguration.FileSystem.UnusedCaCertificate))
 				);
 		}
 
@@ -199,7 +199,7 @@ namespace Tests.ClientConcepts.Certificates
 			}) { }
 
 			protected override ConnectionSettings Authenticate(ConnectionSettings s) => s // <1> Set the client certificate on `ConnectionSettings`
-				.ClientCertificate(new X509Certificate2(this.ClusterConfiguration.ClientCertificate));
+				.ClientCertificate(new X509Certificate2(this.ClusterConfiguration.FileSystem.ClientCertificate));
 		}
 
 		//hide
@@ -227,7 +227,7 @@ namespace Tests.ClientConcepts.Certificates
 
 		// a bad certificate
 		// hide
-		private string Certificate => this.Cluster.ClusterConfiguration.ClientCertificate;
+		private string Certificate => this.Cluster.ClusterConfiguration.FileSystem.ClientCertificate;
 
 		/**
 		 * ==== Object Initializer syntax example */

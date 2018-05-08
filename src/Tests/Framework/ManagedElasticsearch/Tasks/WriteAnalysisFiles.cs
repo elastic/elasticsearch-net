@@ -1,9 +1,10 @@
 using System.IO;
+using Elastic.Managed.ConsoleWriters;
 using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Tasks;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
-namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
+namespace Tests.Framework.ManagedElasticsearch.Tasks
 {
 	public class WriteAnalysisFiles : ClusterComposeTask
 	{
@@ -13,6 +14,7 @@ namespace Tests.Framework.ManagedElasticsearch.Tasks.InstallationTasks
 
 			var analysisPath = config.AnalysisFolder;
 			if (!Directory.Exists(analysisPath)) Directory.CreateDirectory(analysisPath);
+			cluster.Writer.WriteDiagnostic($"{{{nameof(WriteAnalysisFiles)}}} writing analysis files to watcher config [{analysisPath}]");
 			SetupHunspellFiles(cluster.FileSystem.ConfigPath);
 			SetupIcuFiles(cluster.FileSystem.ConfigPath);
 			SetupCompoundTokenFilterFopFile(analysisPath);

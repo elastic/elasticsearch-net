@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -81,8 +82,8 @@ namespace Tests.XPack.Security.User.PutUser
 	{
 		public PutUserRunAsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
-			var x = this.Client.GetUser(new GetUserRequest(ShieldInformation.User.Username));
-			var y = this.Client.GetRole(new GetRoleRequest(ShieldInformation.User.Role));
+			var x = this.Client.GetUser(new GetUserRequest(ClusterAuthentication.User.Username));
+			var y = this.Client.GetRole(new GetRoleRequest(ClusterAuthentication.User.Role));
 		}
 
 		protected override bool ExpectIsValid => false;
@@ -95,7 +96,7 @@ namespace Tests.XPack.Security.User.PutUser
 				var request = base.Initializer;
 				request.RequestConfiguration = new RequestConfiguration
 				{
-					RunAs = ShieldInformation.User.Username
+					RunAs = ClusterAuthentication.User.Username
 				};
 				return request;
 			}
@@ -103,7 +104,7 @@ namespace Tests.XPack.Security.User.PutUser
 
 		protected override Func<PutUserDescriptor, IPutUserRequest> Fluent => f => base.Fluent(f
 			.RequestConfiguration(c => c
-				.RunAs(ShieldInformation.User.Username)
+				.RunAs(ClusterAuthentication.User.Username)
 			));
 
 		protected override void ExpectResponse(IPutUserResponse response)

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
@@ -11,8 +12,8 @@ namespace Tests.XPack.Security.User.GetUserAccessToken
 		[U]
 		public async Task Urls()
 		{
-			var u = ShieldInformation.Admin.Username;
-			var p = ShieldInformation.Admin.Password;
+			var u = ClusterAuthentication.Admin.Username;
+			var p = ClusterAuthentication.Admin.Password;
 			await POST("/_xpack/security/oauth2/token")
 				.Fluent(c => c.GetUserAccessToken(u,p))
 				.Request(c => c.GetUserAccessToken(new GetUserAccessTokenRequest(u,p)))
