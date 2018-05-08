@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit;
 using Elasticsearch.Net;
@@ -32,6 +33,11 @@ namespace Tests.Framework.ManagedElasticsearch
 				var settings = TestClient.CreateSettings(createSettings, connection, connectionPool);
 				if (cluster.ClusterConfiguration.EnableSecurity)
 					settings = settings.BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password);
+				if (cluster.ClusterConfiguration.EnableSsl && !cluster.ClusterConfiguration.SkipBuiltInAfterStartTasks)
+				{
+					var ca = new X509Certificate2(cluster.ClusterConfiguration.FileSystem.CaCertificate);
+					settings = settings.ServerCertificateValidationCallback(CertificateValidations.AuthorityIsRoot(ca));
+				}
 				var client = new ElasticClient(settings);
 				return client;
 			});
