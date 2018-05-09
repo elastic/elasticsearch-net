@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Tasks;
 using ICSharpCode.SharpZipLib.GZip;
@@ -9,9 +8,9 @@ using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
-	public class XPackMachineLearningCluster : XPackCluster
+	public class MachineLearningCluster : XPackCluster
 	{
-		public XPackMachineLearningCluster() : base(new XPackClusterConfiguration
+		public MachineLearningCluster() : base(new XPackClusterConfiguration
 		{
 			MaxConcurrency = 1,
 			DefaultNodeSettings =

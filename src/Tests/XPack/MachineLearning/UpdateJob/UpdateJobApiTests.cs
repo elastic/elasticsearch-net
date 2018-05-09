@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.UpdateJob
 {
 	public class UpdateJobApiTests : MachineLearningIntegrationTestBase<IUpdateJobResponse, IUpdateJobRequest, UpdateJobDescriptor<Metric>, UpdateJobRequest>
 	{
-		public UpdateJobApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UpdateJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.UpdateJob(CallIsolatedValue, f),

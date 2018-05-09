@@ -11,13 +11,13 @@ namespace Tests.XPack.MachineLearning
 {
 	[SkipVersion("<5.5.0", "Machine Learning does not exist in previous versions")]
 	public abstract class MachineLearningIntegrationTestBase<TResponse, TInterface, TDescriptor, TInitializer>
-		: ApiIntegrationTestBase<XPackMachineLearningCluster, TResponse, TInterface, TDescriptor, TInitializer>
+		: ApiIntegrationTestBase<MachineLearningCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		protected MachineLearningIntegrationTestBase(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected MachineLearningIntegrationTestBase(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected IPutJobResponse PutJob(IElasticClient client, string jobId)
 		{

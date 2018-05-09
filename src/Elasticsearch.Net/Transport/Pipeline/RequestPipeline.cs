@@ -502,9 +502,13 @@ namespace Elasticsearch.Net
 			if (callDetails?.Success ?? false) return null;
 			var innerException = pipelineExceptions.HasAny() ? new AggregateException(pipelineExceptions) : callDetails?.OriginalException;
 
+			var statusCode = callDetails?.HttpStatusCode != null ? callDetails.HttpStatusCode.Value.ToString() : "unknown";
+			var resource = callDetails == null
+				? "unknown resource"
+				: $"Status code {statusCode} from: {callDetails.HttpMethod} {callDetails.Uri.PathAndQuery}";
+
+
 			var exceptionMessage = innerException?.Message ?? $"Request failed to execute";
-			if (response != null && response.TryGetServerErrorReason(out var reason))
-				exceptionMessage += $". ServerError: {reason}";
 
 			var pipelineFailure = data.OnFailurePipelineFailure;
 			if (pipelineExceptions.HasAny())
@@ -520,8 +524,13 @@ namespace Elasticsearch.Net
 			{
 				pipelineFailure = PipelineFailure.MaxRetriesReached;
 				this.Audit(MaxRetriesReached);
-				exceptionMessage = "Maximum number of retries reached.";
+				exceptionMessage = "Maximum number of retries reached";
 			}
+
+			exceptionMessage += $". Call: {resource}";
+			if (response != null && response.TryGetServerErrorReason(out var reason))
+				exceptionMessage += $". ServerError: {reason}";
+
 
 			var clientException = new ElasticsearchClientException(pipelineFailure, exceptionMessage, innerException)
 			{

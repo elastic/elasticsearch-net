@@ -114,7 +114,7 @@ namespace Tests.Document.Multiple.BulkAll
 			throw e;
 		}
 
-		[I, SkipOnTeamCity("this test is extremely flakey on TC, but never fails localy")]
+		[I, SkipOnTeamCity]
 		public void DisposingObservableCancelsBulkAll()
 		{
 			var index = CreateIndexName();
@@ -159,7 +159,7 @@ namespace Tests.Document.Multiple.BulkAll
 			bulkObserver.TotalNumberOfFailedBuffers.Should().Be(0);
 		}
 
-		[I, SkipOnTeamCity("this test is extremely flakey on TC, but never fails localy")]
+		[I, SkipOnTeamCity]
 		public void CancelBulkAll()
 		{
 			var index = CreateIndexName();

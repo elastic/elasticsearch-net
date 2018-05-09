@@ -13,9 +13,9 @@ using static Nest.Infer;
 namespace Tests.XPack.Graph.Explore
 {
 	[SkipVersion("<2.3.0", "")]
-	public class GraphExploreApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGraphExploreResponse, IGraphExploreRequest, GraphExploreDescriptor<Project>, GraphExploreRequest>
+	public class GraphExploreApiTests : ApiIntegrationTestBase<XPackCluster, IGraphExploreResponse, IGraphExploreRequest, GraphExploreDescriptor<Project>, GraphExploreRequest>
 	{
-		public GraphExploreApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GraphExploreApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GraphExplore<Project>(f),

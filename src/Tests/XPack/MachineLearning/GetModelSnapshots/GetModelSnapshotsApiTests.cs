@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.GetModelSnapshots
 {
 	public class GetModelSnapshotsApiTests : MachineLearningIntegrationTestBase<IGetModelSnapshotsResponse, IGetModelSnapshotsRequest, GetModelSnapshotsDescriptor, GetModelSnapshotsRequest>
 	{
-		public GetModelSnapshotsApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetModelSnapshotsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -57,7 +57,7 @@ namespace Tests.XPack.MachineLearning.GetModelSnapshots
 
 	public class GetModelSnapshotsWithSnapshotIdApiTests : MachineLearningIntegrationTestBase<IGetModelSnapshotsResponse, IGetModelSnapshotsRequest, GetModelSnapshotsDescriptor, GetModelSnapshotsRequest>
 	{
-		public GetModelSnapshotsWithSnapshotIdApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetModelSnapshotsWithSnapshotIdApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

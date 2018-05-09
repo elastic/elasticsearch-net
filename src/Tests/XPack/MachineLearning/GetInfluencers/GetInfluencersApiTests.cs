@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.GetInfluencers
 {
 	public class GetInfluencersApiTests : MachineLearningIntegrationTestBase<IGetInfluencersResponse, IGetInfluencersRequest, GetInfluencersDescriptor, GetInfluencersRequest>
 	{
-		public GetInfluencersApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetInfluencersApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

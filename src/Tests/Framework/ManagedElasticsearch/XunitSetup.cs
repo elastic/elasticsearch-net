@@ -24,7 +24,7 @@ namespace Tests.Framework.ManagedElasticsearch
 			this.RunUnitTests = TestClient.Configuration.RunUnitTests;
 			this.ClusterFilter = TestClient.Configuration.ClusterFilter;
 			this.TestFilter = TestClient.Configuration.TestFilter;
-
+			this.Version = TestClient.Configuration.ElasticsearchVersion;
 		}
 
 		public override void OnBeforeTestsRun() => DumpConfiguration();

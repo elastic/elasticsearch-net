@@ -11,7 +11,7 @@ namespace Tests.XPack.MachineLearning.DeleteModelSnapshot
 {
 	public class DeleteModelSnapshotApiTests : MachineLearningIntegrationTestBase<IDeleteModelSnapshotResponse, IDeleteModelSnapshotRequest, DeleteModelSnapshotDescriptor, DeleteModelSnapshotRequest>
 	{
-		public DeleteModelSnapshotApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteModelSnapshotApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

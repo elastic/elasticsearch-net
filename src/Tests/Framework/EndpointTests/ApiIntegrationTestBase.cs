@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
@@ -41,10 +42,10 @@ namespace Tests.Framework
 
 			return base.AssertOnAllResponses((r) =>
 			{
-				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-					&& IsNotRequestExceptionType(r.ApiCall.OriginalException.GetType()))
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null)
+					//&& IsNotRequestExceptionType(r.ApiCall.OriginalException.GetType()))
 				{
-					ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException).Throw();
+					ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify()).Throw();
 					return;
 				}
 

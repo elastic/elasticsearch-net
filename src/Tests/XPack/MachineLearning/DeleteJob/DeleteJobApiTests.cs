@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.DeleteJob
 {
 	public class DeleteJobApiTests : MachineLearningIntegrationTestBase<IDeleteJobResponse, IDeleteJobRequest, DeleteJobDescriptor, DeleteJobRequest>
 	{
-		public DeleteJobApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

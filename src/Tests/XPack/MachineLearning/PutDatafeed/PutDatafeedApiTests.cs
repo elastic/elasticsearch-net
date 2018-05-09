@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 	public class PutDatafeedApiTests : MachineLearningIntegrationTestBase<IPutDatafeedResponse,
 		IPutDatafeedRequest, PutDatafeedDescriptor<Metric>, PutDatafeedRequest>
 	{
-		public PutDatafeedApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public PutDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.PutDatafeed(CallIsolatedValue, f),
