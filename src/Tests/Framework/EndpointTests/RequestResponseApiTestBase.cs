@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.Managed;
-using Elastic.Managed.Configuration;
 using Elastic.Managed.Ephemeral;
 using Nest;
 using Tests.Framework.Integration;
-using Elastic.Xunit;
 using Elastic.Xunit.Sdk;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Framework

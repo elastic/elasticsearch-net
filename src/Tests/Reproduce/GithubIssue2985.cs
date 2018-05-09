@@ -31,7 +31,7 @@ namespace Tests.Reproduce
 			);
 			response.OriginalException.Should().NotBeNull().And.BeOfType<ElasticsearchClientException>();
 			response.OriginalException.Message.Should()
-				.StartWith("Request failed to execute. ServerError: ")
+				.StartWith("Request failed to execute")
 				.And.EndWith(
 					"Type: illegal_argument_exception Reason: \"Custom Analyzer [custom] failed to find filter under name [ascii_folding]\""
 				);

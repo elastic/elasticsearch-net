@@ -8,12 +8,13 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {
 	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration> , new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster , new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
@@ -25,7 +26,7 @@ namespace Tests.Framework
 
 		protected ApiIntegrationTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		public override IElasticClient Client => this.Cluster.GetOrAddClient();
+		public override IElasticClient Client => this.Cluster.Client;
 		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
 
 		[I] public async Task ReturnsExpectedStatusCode() =>

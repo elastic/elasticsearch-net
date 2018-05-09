@@ -150,7 +150,6 @@ namespace Tests.XPack.Graph.Explore
 			response.Vertices.Should().OnlyContain(c => c.Term !=  null);
 			response.Vertices.Should().Contain(c => c.Depth > 0);
 			response.Vertices.Should().OnlyContain(c => c.Weight > 0);
-
 		}
 	}
 }

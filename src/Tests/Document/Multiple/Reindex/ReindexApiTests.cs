@@ -52,7 +52,7 @@ namespace Tests.Document.Multiple.Reindex
 
 		private static string IndexName { get; } = "project";
 
-		public ReindexApiTests(ManualReindexCluster cluster, EndpointUsage usage)
+		public ReindexApiTests(ManualReindexCluster cluster)
 		{
 			this._client = cluster.Client;
 

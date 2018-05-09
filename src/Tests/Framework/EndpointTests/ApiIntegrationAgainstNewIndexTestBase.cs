@@ -9,7 +9,7 @@ namespace Tests.Framework
 {
 	public abstract class ApiIntegrationAgainstNewIndexTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiIntegrationTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration> , new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface

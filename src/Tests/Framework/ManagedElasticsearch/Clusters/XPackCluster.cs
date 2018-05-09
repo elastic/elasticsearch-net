@@ -2,6 +2,7 @@
 using Elastic.Xunit;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.ManagedElasticsearch.Tasks;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
@@ -23,11 +24,14 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		public XPackCluster() : this(new XPackClusterConfiguration()) { }
 		public XPackCluster(XPackClusterConfiguration configuration) : base(configuration) { }
 
-		protected virtual ConnectionSettings Authenticate(ConnectionSettings s) => s.BasicAuthentication("es_admin", "es_admin");
+		protected virtual ConnectionSettings Authenticate(ConnectionSettings s) => s
+			.BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password);
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 
-		public IElasticClient Client => this.GetOrAddClient(ConnectionSettings);
+		public virtual IElasticClient Client => this.GetOrAddClient(ConnectionSettings);
+
+		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
 	}
 }

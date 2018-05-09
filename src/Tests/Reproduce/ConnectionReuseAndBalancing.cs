@@ -56,12 +56,13 @@ namespace Tests.Reproduce
 			const int leeWay = 10;
 			var connectionLimit = c.ConnectionSettings.ConnectionLimit;
 			var maxCurrent = connectionLimit;
+			var maxCurrentOpen = connectionLimit + 1; //cluster bootstrap opens it own connections
 
 			foreach (var node in r.Nodes.Values) //in our cluster we only have 1 node
 			{
 				node.Http.TotalOpened.Should().BeGreaterThan(2, "We want to see some concurrency");
 				var h = node.Http;
-				node.Http.CurrentOpen.Should().BeLessOrEqualTo(maxCurrent, $"CurrentOpen exceed our connection limit {maxCurrent}");
+				node.Http.CurrentOpen.Should().BeLessOrEqualTo(maxCurrentOpen, $"CurrentOpen exceed our connection limit {maxCurrent}");
 
 				string errorMessage;
 				int iterationMax;

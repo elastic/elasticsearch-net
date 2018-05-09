@@ -21,10 +21,10 @@ namespace Tests.Framework.ManagedElasticsearch
 			Func<ICollection<Uri>, IConnectionPool> createPool = null)
 			where TConfig : EphemeralClusterConfiguration
 		{
+			createSettings = createSettings ?? (s => s);
 			return cluster.GetOrAddClient(c =>
 			{
 				var host = (RunningFiddler) ? "ipv4.fiddler" : "localhost";
-				createSettings = createSettings ?? (s => s);
 				createPool = createPool ?? (uris => new StaticConnectionPool(uris));
 				var connectionPool = createPool(c.NodesUris(host));
 				var connection = TestClient.Configuration.RunIntegrationTests
@@ -36,7 +36,7 @@ namespace Tests.Framework.ManagedElasticsearch
 				if (cluster.ClusterConfiguration.EnableSsl && !cluster.ClusterConfiguration.SkipBuiltInAfterStartTasks)
 				{
 					var ca = new X509Certificate2(cluster.ClusterConfiguration.FileSystem.CaCertificate);
-					settings = settings.ServerCertificateValidationCallback(CertificateValidations.AuthorityIsRoot(ca));
+					settings = settings.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 				}
 				var client = new ElasticClient(settings);
 				return client;

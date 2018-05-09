@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
@@ -32,11 +33,21 @@ namespace Tests.Framework
 		{
 			var e = r.OriginalException;
 			e.Should().NotBeNull();
-			if (e is WebException) this.AssertWebException((WebException) e);
-			else if (e is System.Net.Http.HttpRequestException)
-				this.AssertHttpRequestException((System.Net.Http.HttpRequestException) e);
-			else throw new Exception("Response orginal exception is not one of the expected connection exception but" + e.GetType().FullName);
+			FindUnderlyingException(e, e);
+
 		});
+
+		private void FindUnderlyingException(Exception mainException, Exception currentException)
+		{
+			mainException.Should().NotBeNull();
+			currentException.Should().NotBeNull();
+			if (currentException is WebException exception) this.AssertWebException(exception);
+			else if (currentException is HttpRequestException requestException) this.AssertHttpRequestException(requestException);
+			else if (currentException.InnerException != null)
+				FindUnderlyingException(mainException, currentException.InnerException);
+			else
+				throw new Exception("Unable to find WebException or HttpRequestException on" + mainException.GetType().FullName);
+		}
 
 		protected abstract void AssertWebException(WebException e);
 		protected abstract void AssertHttpRequestException(System.Net.Http.HttpRequestException e);

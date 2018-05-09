@@ -278,7 +278,7 @@ namespace Elasticsearch.Net
 					var response = this._connection.Request<VoidResponse>(pingData);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
-					if (!response.Success) throw new PipelineException(pingData.OnFailurePipelineFailure) { ApiCall = response };
+					if (!response.Success) throw new PipelineException(pingData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
 				}
 				catch (Exception e)
 				{
@@ -302,7 +302,7 @@ namespace Elasticsearch.Net
 					var response = await this._connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
-					if (!response.Success) throw new PipelineException(pingData.OnFailurePipelineFailure) { ApiCall = response };
+					if (!response.Success) throw new PipelineException(pingData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
 				}
 				catch (Exception e)
 				{
@@ -370,7 +370,7 @@ namespace Elasticsearch.Net
 						var response = this._connection.Request<SniffResponse>(requestData);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
-						if (!response.Success) throw new PipelineException(requestData.OnFailurePipelineFailure) { ApiCall = response };
+						if (!response.Success) throw new PipelineException(requestData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
 						var nodes = response.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						this.Refresh = true;
@@ -385,7 +385,7 @@ namespace Elasticsearch.Net
 					}
 				}
 			}
-			throw new PipelineException(PipelineFailure.SniffFailure, new AggregateException(exceptions));
+			throw new PipelineException(PipelineFailure.SniffFailure, exceptions.AsAggregateOrFirst());
 		}
 
 		public async Task SniffAsync(CancellationToken cancellationToken)
@@ -403,7 +403,7 @@ namespace Elasticsearch.Net
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
-						if (!response.Success) throw new PipelineException(requestData.OnFailurePipelineFailure) { ApiCall = response };
+						if (!response.Success) throw new PipelineException(requestData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
 						this._connectionPool.Reseed(response.ToNodes(this._connectionPool.UsingSsl));
 						this.Refresh = true;
 						return;
@@ -417,7 +417,7 @@ namespace Elasticsearch.Net
 					}
 				}
 			}
-			throw new PipelineException(PipelineFailure.SniffFailure, new AggregateException(exceptions));
+			throw new PipelineException(PipelineFailure.SniffFailure, exceptions.AsAggregateOrFirst());
 		}
 
 		private RequestData CreateSniffRequestData(Node node) =>
@@ -500,7 +500,7 @@ namespace Elasticsearch.Net
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			if (callDetails?.Success ?? false) return null;
-			var innerException = pipelineExceptions.HasAny() ? new AggregateException(pipelineExceptions) : callDetails?.OriginalException;
+			var innerException = pipelineExceptions.HasAny() ? pipelineExceptions.AsAggregateOrFirst() : callDetails?.OriginalException;
 
 			var statusCode = callDetails?.HttpStatusCode != null ? callDetails.HttpStatusCode.Value.ToString() : "unknown";
 			var resource = callDetails == null

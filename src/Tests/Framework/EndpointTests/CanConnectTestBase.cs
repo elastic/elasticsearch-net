@@ -3,12 +3,13 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {
 	public abstract class CanConnectTestBase<TCluster> :
 		ApiIntegrationTestBase<TCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
-		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration> , new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 	{
 		protected CanConnectTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
