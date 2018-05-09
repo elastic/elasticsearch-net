@@ -34,7 +34,7 @@ namespace Tests.Framework
 	}
 	public class ProjectReferenceOnlyAttribute : SkipTestAttributeBase
 	{
-		public override bool Skip => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TESTINGNUGETPACKAGE"));
+		public override bool Skip => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TestPackageVersion"));
 		public override string Reason { get; } = "This test can only be run if client dependencies are project references";
 	}
 	public class SkipOnTeamCityAttribute : SkipTestAttributeBase
