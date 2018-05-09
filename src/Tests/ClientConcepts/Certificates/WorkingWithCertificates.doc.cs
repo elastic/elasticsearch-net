@@ -204,7 +204,6 @@ namespace Tests.ClientConcepts.Certificates
 
 		//hide
 		[IntegrationOnly]
-		[SkipVersion(">2.0.0", "Skipping this tests for now investigating over at Elastic.Managed.Ephemeral why client certs are not generated correctly")]
 		public class PkiApiTests : CanConnectTestBase<PkiCluster>
 		{
 			public PkiApiTests(PkiCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

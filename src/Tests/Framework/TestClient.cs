@@ -24,22 +24,22 @@ namespace Tests.Framework
 {
 	public class IntegrationOnlyAttribute : SkipTestAttributeBase
 	{
-		public override bool Skip { get; }
-		public override string Reason { get; } = "Integration only";
+		public override bool Skip => TestClient.Configuration.RunUnitTests;
+		public override string Reason { get; } = "Inherited unit tests are ignored on this integration test class";
 	}
 	public class NeedsTypedKeysAttribute : SkipTestAttributeBase
 	{
-		public override bool Skip { get; }
+		public override bool Skip => !TestClient.Configuration.Random.TypedKeys;
 		public override string Reason { get; } = "Random Configuration dictates no typed keys but this tests relies on it being set";
 	}
 	public class ProjectReferenceOnlyAttribute : SkipTestAttributeBase
 	{
-		public override bool Skip { get; }
+		public override bool Skip => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TESTINGNUGETPACKAGE"));
 		public override string Reason { get; } = "This test can only be run if client dependencies are project references";
 	}
 	public class SkipOnTeamCityAttribute : SkipTestAttributeBase
 	{
-		public override bool Skip { get; }
+		public override bool Skip => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION"));
 		public override string Reason { get; } = "Skip running this test on TeamCity, this is usually a sign this test is flakey?";
 	}
 
