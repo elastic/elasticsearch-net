@@ -14,6 +14,7 @@ namespace Nest
 		bool? Inline { get; set; }
 
 		[JsonProperty("request")]
+		[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputRequest>))]
 		IHttpInputRequest Request { get; set; }
 	}
 
