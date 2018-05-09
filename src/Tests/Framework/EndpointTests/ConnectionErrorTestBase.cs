@@ -34,7 +34,6 @@ namespace Tests.Framework
 			var e = r.OriginalException;
 			e.Should().NotBeNull();
 			FindUnderlyingException(e, e);
-
 		});
 
 		private void FindUnderlyingException(Exception mainException, Exception currentException)

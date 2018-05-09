@@ -58,7 +58,7 @@ namespace Elasticsearch.Net
 		internal static Exception AsAggregateOrFirst(this IEnumerable<Exception> exceptions)
 		{
 			var es= exceptions as Exception[] ?? exceptions?.ToArray();
-			if (exceptions == null || es .Any()) return null;
+			if (es == null || es.Length == 0) return null;
 			return es.Length == 1 ? es[0] : new AggregateException(es);
 		}
 

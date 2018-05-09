@@ -31,9 +31,14 @@ namespace Tests.Framework.ManagedElasticsearch
 					? TestClient.CreateLiveConnection()
 					: new InMemoryConnection();
 				var settings = TestClient.CreateSettings(createSettings, connection, connectionPool);
-				if (cluster.ClusterConfiguration.EnableSecurity)
+
+				var current = (IConnectionConfigurationValues) settings;
+				var notAlreadyAuthenticated = current.BasicAuthenticationCredentials == null && current.ClientCertificates == null;
+				var noCertValidation = current.ServerCertificateValidationCallback == null;
+
+				if (cluster.ClusterConfiguration.EnableSecurity && notAlreadyAuthenticated)
 					settings = settings.BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password);
-				if (cluster.ClusterConfiguration.EnableSsl && !cluster.ClusterConfiguration.SkipBuiltInAfterStartTasks)
+				if (cluster.ClusterConfiguration.EnableSsl && noCertValidation)
 				{
 					var ca = new X509Certificate2(cluster.ClusterConfiguration.FileSystem.CaCertificate);
 					settings = settings.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
