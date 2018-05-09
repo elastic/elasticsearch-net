@@ -35,7 +35,7 @@ namespace Nest
 		Time Timeout { get; set; }
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="ISearchInput"/>
 	public class SearchInput : InputBase, ISearchInput
 	{
 		/// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Nest
 		internal override void WrapInContainer(IInputContainer container) => container.Search = this;
 	}
 
-	/// <inheritdoc />
+	/// <inheritdoc cref="ISearchInput"/>
 	public class SearchInputDescriptor
 		: DescriptorBase<SearchInputDescriptor, ISearchInput>, ISearchInput
 	{
@@ -58,17 +58,17 @@ namespace Nest
 		ISearchInputRequest ISearchInput.Request { get; set; }
 		Time ISearchInput.Timeout { get; set; }
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISearchInput.Request"/>
 		public SearchInputDescriptor Request(Func<SearchInputRequestDescriptor, ISearchInputRequest> selector) =>
 			Assign(a => a.Request = selector?.InvokeOrDefault(new SearchInputRequestDescriptor()));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISearchInput.Extract"/>
 		public SearchInputDescriptor Extract(IEnumerable<string> extract) => Assign(a => a.Extract = extract);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISearchInput.Extract"/>
 		public SearchInputDescriptor Extract(params string[] extract) => Assign(a => a.Extract = extract);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="ISearchInput.Timeout"/>
 		public SearchInputDescriptor Timeout(Time timeout) => Assign(a => a.Timeout = timeout);
 	}
 }

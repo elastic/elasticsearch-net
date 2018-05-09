@@ -6,7 +6,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputRequest>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputRequest>))]
 	public interface IHttpInputRequest
 	{
 		/// <summary>

@@ -7,6 +7,7 @@ namespace Nest
 	/// The Authentication mechanism for a request to a HTTP endpoint
 	/// </summary>
 	[JsonObject]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<HttpInputAuthentication>))]
 	public interface IHttpInputAuthentication
 	{
 		/// <summary>

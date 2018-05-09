@@ -7,6 +7,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject]
+	[ExactContractJsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyAction>))]
 	public interface IPagerDutyAction : IAction, IPagerDutyEvent { }
 
 	public class PagerDutyAction : ActionBase, IPagerDutyAction

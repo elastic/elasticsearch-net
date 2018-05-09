@@ -43,7 +43,7 @@
     <!-- Step 1 Check if lockfile is properly restored -->
     <PropertyGroup>
       <PaketRestoreRequired>true</PaketRestoreRequired>
-      <NoWarn>$(NoWarn);NU1603</NoWarn>
+      <NoWarn>$(NoWarn);NU1603;NU1604;NU1605;NU1608</NoWarn>
     </PropertyGroup>
 
     <!-- Because ReadAllText is slow on osx/linux, try to find shasum and awk -->
@@ -69,9 +69,11 @@
       <PaketRestoreRequired Condition=" '$(PaketRestoreLockFileHash)' == '' ">true</PaketRestoreRequired>
     </PropertyGroup>
 
+
     <!-- Do a global restore if required -->
     <Exec Command='$(PaketBootStrapperCommand)' Condition="Exists('$(PaketBootStrapperExePath)') AND !(Exists('$(PaketExePath)'))" ContinueOnError="false" />
-    <Exec Command='$(PaketCommand) restore' Condition=" '$(PaketRestoreRequired)' == 'true' " ContinueOnError="false" />
+    <Exec Command='$(PaketCommand) restore --target-framework "$(TargetFrameworks)"' Condition=" '$(PaketRestoreRequired)' == 'true' AND '$(TargetFramework)' == '' " ContinueOnError="false" />
+    <Exec Command='$(PaketCommand) restore --target-framework "$(TargetFramework)"' Condition=" '$(PaketRestoreRequired)' == 'true' AND '$(TargetFramework)' != '' " ContinueOnError="false" />
 
     <!-- Step 2 Detect project specific changes -->
     <PropertyGroup>

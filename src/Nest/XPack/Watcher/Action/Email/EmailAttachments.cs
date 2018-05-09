@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace Nest
 {
+	[JsonConverter(typeof(EmailAttachmentsJsonConverter))]
 	public interface IEmailAttachments : IIsADictionary<string, IEmailAttachment> {}
 
-	[JsonConverter(typeof(EmailAttachmentsJsonConverter))]
 	public class EmailAttachments : IsADictionaryBase<string, IEmailAttachment>, IEmailAttachments
 	{
 		public EmailAttachments() {}
@@ -34,7 +34,7 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			writer.WriteStartObject();
-			var attachments = value as IDictionary<string, IEmailAttachment>;
+			var attachments = (IDictionary<string, IEmailAttachment>)value;
 			if (attachments != null)
 			{
 				foreach (var attachment in attachments)
@@ -67,9 +67,12 @@ namespace Nest
 				{
 					var name = (string)reader.Value;
 					IEmailAttachment attachment;
+
+					reader.Read();
+					reader.Read();
+					var type = (string)reader.Value;
 					reader.Read();
 
-					var type = reader.ReadAsString();
 					switch (type)
 					{
 						case "http":

@@ -25,10 +25,9 @@ namespace Nest
 
 	public abstract class ActionBase : IAction
 	{
-		protected ActionBase(string name)
-		{
-			this.Name = name;
-		}
+		internal ActionBase() {}
+
+		protected ActionBase(string name) => this.Name = name;
 
 		public string Name { get; set; }
 
@@ -42,10 +41,8 @@ namespace Nest
 
 		public static bool operator true(ActionBase a) => false;
 
-		public static ActionBase operator &(ActionBase left, ActionBase right)
-		{
-			return new ActionCombinator(left, right);
-		}
+		public static ActionBase operator &(ActionBase left, ActionBase right) =>
+			new ActionCombinator(left, right);
 	}
 
 	internal class ActionCombinator : ActionBase, IAction

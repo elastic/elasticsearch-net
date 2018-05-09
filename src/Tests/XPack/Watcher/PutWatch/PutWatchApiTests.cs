@@ -310,6 +310,26 @@ namespace Tests.XPack.Watcher.PutWatch
 								notify = true
 							}
 						}
+					},
+					webhook = new
+					{
+						webhook = new
+						{
+							scheme = "https",
+							host = "localhost",
+							port = 9200,
+							method = "post",
+							path = "/_bulk",
+							authentication = new
+							{
+								basic = new
+								{
+									username = "username",
+									password = "password"
+								}
+							},
+							body = "{{ctx.payload._value}}"
+						}
 					}
 				}
 			};
@@ -491,6 +511,20 @@ namespace Tests.XPack.Watcher.PutWatch
 						.Room("nest")
 						.Notify()
 					)
+				)
+				.Webhook("webhook", w => w
+					.Scheme(ConnectionScheme.Https)
+					.Host("localhost")
+					.Port(9200)
+					.Method(HttpInputMethod.Post)
+					.Path("/_bulk")
+					.Authentication(au => au
+						.Basic(b => b
+							.Username("username")
+							.Password("password")
+						)
+					)
+					.Body("{{ctx.payload._value}}")
 				)
 			);
 
@@ -685,7 +719,23 @@ namespace Tests.XPack.Watcher.PutWatch
 							Room = new [] { "nest" },
 							Notify = true
 						}
-				    }
+				    } && new WebhookAction("webhook")
+					{
+						Scheme = ConnectionScheme.Https,
+						Host = "localhost",
+						Port = 9200,
+						Method = HttpInputMethod.Post,
+						Path = "/_bulk",
+						Authentication = new HttpInputAuthentication
+						{
+							Basic = new HttpInputBasicAuthentication
+							{
+								Username = "username",
+								Password = "password"
+							}
+						},
+						Body = "{{ctx.payload._value}}"
+					}
 			};
 
 		protected override void ExpectResponse(IPutWatchResponse response)
