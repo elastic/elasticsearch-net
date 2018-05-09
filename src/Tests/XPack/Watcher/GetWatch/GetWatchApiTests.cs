@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -21,8 +22,67 @@ namespace Tests.XPack.Watcher.GetWatch
 			{
 				var putWatchResponse = client.PutWatch(callUniqueValue.Value, p => p
 					.Input(i => i
-						.Simple(s => s
-							.Add("key", "value")
+						.Chain(c => c
+							.Input("simple", ci => ci
+								.Simple(s => s
+									.Add("str", "val1")
+									.Add("num", 23)
+									.Add("obj", new { str = "val2" })
+								)
+							)
+							.Input("http", ci => ci
+								.Http(h => h
+									.Request(r => r
+										.Host("localhost")
+										.Port(8080)
+										.Method(HttpInputMethod.Post)
+										.Path("/path.html")
+										.Proxy(pr => pr
+											.Host("proxy")
+											.Port(6000)
+										)
+										.Scheme(ConnectionScheme.Https)
+										.Authentication(a => a
+											.Basic(b => b
+												.Username("Username123")
+												.Password("Password123")
+											)
+										)
+										.Body("{\"query\" : {\"range\": {\"@timestamp\" : {\"from\": \"{{ctx.trigger.triggered_time}}||-5m\",\"to\": \"{{ctx.trigger.triggered_time}}\"}}}}")
+										.Headers(he => he
+											.Add("header1", "value1")
+										)
+										.Params(pa => pa
+											.Add("lat", "52.374031")
+											.Add("lon", "4.88969")
+											.Add("appid", "appid")
+										)
+										.ConnectionTimeout("3s")
+										.ReadTimeout(TimeSpan.FromMilliseconds(500))
+									)
+									.ResponseContentType(ResponseContentType.Text)
+								)
+							)
+							.Input("search", ci => ci
+								.Search(s => s
+									.Request(si => si
+										.Indices<Project>()
+										.Body<Project>(b => b
+											.Size(0)
+											.Aggregations(a => a
+												.Nested("nested_tags", n => n
+													.Path(np => np.Tags)
+													.Aggregations(aa => aa
+														.Terms("top_project_tags", ta => ta
+															.Field(f => f.Tags.First().Name)
+														)
+													)
+												)
+											)
+										)
+									)
+								)
+							)
 						)
 					)
 					.Trigger(t => t
@@ -67,6 +127,75 @@ namespace Tests.XPack.Watcher.GetWatch
 							.Body(b => b
 								.Text("Dear {{ctx.payload.name}}, by the time you read these lines, I'll be gone")
 							)
+							.Attachments(ea => ea
+								.HttpAttachment("http_attachment", ha => ha
+									.Inline()
+									.ContentType(RequestData.MimeType)
+									.Request(r => r
+										.Url("http://localhost:8080/http_attachment")
+									)
+								)
+								.DataAttachment("data_attachment", da => da
+									.Format(DataAttachmentFormat.Json)
+								)
+							)
+						)
+						.Index("reminder_index", i => i
+							.Index("put-watch-test-index")
+							.DocType("reminder")
+							.ExecutionTimeField("execution_time")
+						)
+						.PagerDuty("reminder_pagerduty", pd => pd
+							.Account("my_pagerduty_account")
+							.Description("pager duty description")
+							.AttachPayload()
+							.EventType(PagerDutyEventType.Trigger)
+							.IncidentKey("incident_key")
+							.Context(c => c
+								.Context(PagerDutyContextType.Image, cd => cd
+									.Src("http://example.com/image")
+								)
+								.Context(PagerDutyContextType.Link, cd => cd
+									.Href("http://example.com/link")
+								)
+							)
+						)
+						.Slack("reminder_slack", sl => sl
+							.Account("monitoring")
+							.Message(sm => sm
+								.From("nest integration test")
+								.To("#nest")
+								.Text("slack message")
+								.Attachments(sa => sa
+									.Attachment(saa => saa
+										.Title("Attachment 1")
+										.AuthorName("Russ Cam")
+									)
+								)
+							)
+						)
+						.HipChat("reminder_hipchat", hc => hc
+							.Account("notify-monitoring")
+							.Message(hm => hm
+								.Body("hipchat message")
+								.Color(HipChatMessageColor.Purple)
+								.Room("nest")
+								.Notify()
+							)
+						)
+						.Webhook("webhook", w => w
+							.Scheme(ConnectionScheme.Https)
+							.Host("localhost")
+							.Port(9200)
+							.Method(HttpInputMethod.Post)
+							.Path("/_bulk")
+							.Authentication(au => au
+								.Basic(b => b
+									.Username("username")
+									.Password("password")
+								)
+							)
+							.Body("{{ctx.payload._value}}")
 						)
 					)
 				);
@@ -128,21 +257,46 @@ namespace Tests.XPack.Watcher.GetWatch
 			trigger.Schedule.Cron.ToString().Should().Be("0 5 9 * * ?");
 
 			watch.Input.Should().NotBeNull();
-			var simpleInput = watch.Input.Simple;
+			var chainInput = watch.Input.Chain;
+			chainInput.Should().NotBeNull();
+			chainInput.Inputs.Should().NotBeNull().And.HaveCount(3);
+
+			var simpleInput = ((IInputContainer)chainInput.Inputs["simple"]).Simple;
 			simpleInput.Should().NotBeNull();
-			simpleInput.Payload.Should().ContainKey("key");
+			simpleInput.Payload.Should().NotBeNull();
+
+			var httpInput = ((IInputContainer)chainInput.Inputs["http"]).Http;
+			httpInput.Should().NotBeNull();
+			httpInput.Request.Should().NotBeNull();
+
+			var searchInput = ((IInputContainer)chainInput.Inputs["search"]).Search;
+			searchInput.Should().NotBeNull();
+			searchInput.Request.Should().NotBeNull();
 
 			watch.Transform.Should().NotBeNull();
 			watch.Transform.Chain.Should().NotBeNull();
 			var chainTransforms = watch.Transform.Chain.Transforms;
 			chainTransforms.Should().NotBeNull().And.HaveCount(2);
-			//chainTransforms.First().Should().NotBeNull().And.BeOfType<ISearchTransform>();
-			//chainTransforms.Last().Should().NotBeNull().And.BeOfType<IScriptTransform>();
+			var firstTransform = chainTransforms.First();
+			firstTransform.Should().NotBeNull();
+			((ITransformContainer)firstTransform).Search.Should().NotBeNull();
+
+			var lastTransform = chainTransforms.Last();
+			lastTransform.Should().NotBeNull();
+			((ITransformContainer)lastTransform).Script.Should().NotBeNull();
 
 			watch.Condition.Should().NotBeNull();
 			watch.Condition.Always.Should().NotBeNull();
 
 			watch.Actions.Should().NotBeNull().And.ContainKey("reminder_email");
+			watch.Actions.Should().NotBeNull().And.ContainKey("reminder_index");
+			watch.Actions.Should().NotBeNull().And.ContainKey("reminder_pagerduty");
+			watch.Actions.Should().NotBeNull().And.ContainKey("reminder_slack");
+			watch.Actions.Should().NotBeNull().And.ContainKey("reminder_hipchat");
+			watch.Actions.Should().NotBeNull().And.ContainKey("webhook");
+
+			var webhook = (IWebhookAction)watch.Actions["webhook"];
+			webhook.Authentication.Should().NotBeNull();
 		}
 	}
 

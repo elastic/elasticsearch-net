@@ -94,7 +94,9 @@ namespace Nest
 			{
 				if (reader.TokenType == JsonToken.StartObject)
 				{
-					var name = reader.ReadAsString();
+					reader.Read();
+					var name = (string)reader.Value;
+					reader.Read();
 					var input = (InputContainer)serializer.Deserialize<IInputContainer>(reader);
 
 					inputs.Add(name, input);
