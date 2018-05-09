@@ -320,7 +320,7 @@ namespace Tests.XPack.Watcher.PutWatch
 							port = 9200,
 							method = "post",
 							path = "/_bulk",
-							authentication = new
+							auth = new
 							{
 								basic = new
 								{
