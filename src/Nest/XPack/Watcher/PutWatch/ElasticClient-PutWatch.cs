@@ -14,13 +14,13 @@ namespace Nest
 		/// </summary>
 		IPutWatchResponse PutWatch(Id watchId, Func<PutWatchDescriptor, IPutWatchRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="PutWatch(Nest.Id,System.Func{Nest.PutWatchDescriptor,Nest.IPutWatchRequest})"/>
 		IPutWatchResponse PutWatch(IPutWatchRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="PutWatch(Nest.Id,System.Func{Nest.PutWatchDescriptor,Nest.IPutWatchRequest})"/>
 		Task<IPutWatchResponse> PutWatchAsync(Id watchId, Func<PutWatchDescriptor, IPutWatchRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="PutWatch(Nest.Id,System.Func{Nest.PutWatchDescriptor,Nest.IPutWatchRequest})"/>
 		Task<IPutWatchResponse> PutWatchAsync(IPutWatchRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 

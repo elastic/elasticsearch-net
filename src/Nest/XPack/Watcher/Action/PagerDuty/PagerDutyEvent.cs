@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyEvent>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<PagerDutyEvent>))]
 	public interface IPagerDutyEvent
 	{
 		[JsonProperty("account")]

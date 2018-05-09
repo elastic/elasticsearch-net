@@ -5,6 +5,7 @@ using System.Collections.Generic;
 namespace Nest
 {
 	[JsonObject]
+	[ExactContractJsonConverter(typeof(ReadAsTypeJsonConverter<WebhookAction>))]
 	public interface IWebhookAction : IAction, IHttpInputRequest
 	{
 	}
