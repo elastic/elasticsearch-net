@@ -11,7 +11,7 @@ namespace Tests.XPack.MachineLearning.OpenJob
 {
 	public class OpenJobApiTests : MachineLearningIntegrationTestBase<IOpenJobResponse, IOpenJobRequest, OpenJobDescriptor, OpenJobRequest>
 	{
-		public OpenJobApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public OpenJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

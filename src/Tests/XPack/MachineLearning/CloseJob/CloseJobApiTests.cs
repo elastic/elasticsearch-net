@@ -10,7 +10,7 @@ namespace Tests.XPack.MachineLearning.CloseJob
 {
 	public class CloseJobApiTests : MachineLearningIntegrationTestBase<ICloseJobResponse, ICloseJobRequest, CloseJobDescriptor, CloseJobRequest>
 	{
-		public CloseJobApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CloseJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

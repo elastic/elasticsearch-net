@@ -2,9 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <!-- Default Version numbers -->
-    <CurrentVersion>0.0.0-bad</CurrentVersion>
-    <CurrentAssemblyVersion>0.0.0</CurrentAssemblyVersion>
-    <CurrentAssemblyFileVersion>0.0.0.0</CurrentAssemblyFileVersion>
+    <CurrentVersion>6.0.0</CurrentVersion>
+    <CurrentAssemblyVersion>6.0.0</CurrentAssemblyVersion>
+    <CurrentAssemblyFileVersion>6.0.0</CurrentAssemblyFileVersion>
     
     <!-- Version and Informational reflect actual version -->
     <Version>$(CurrentVersion)</Version>
@@ -20,7 +20,7 @@
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>embedded</DebugType>
+    <DebugType>portable</DebugType>
     
     <DoSourceLink></DoSourceLink>
     <SourceLink Condition="'$(DoSourceLink)'!=''">$(BaseIntermediateOutputPath)\sl-$(MsBuildProjectName)-$(TargetFramework).json</SourceLink>

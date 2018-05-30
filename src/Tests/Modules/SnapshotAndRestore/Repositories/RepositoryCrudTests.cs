@@ -14,7 +14,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 	{
 		public RepositoryCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
-			_rootRepositoryPath = cluster.Node.FileSystem.RepositoryPath;
+			_rootRepositoryPath = cluster.FileSystem.RepositoryPath;
 		}
 
 		protected override LazyResponses Create() => Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, ICreateRepositoryResponse>(

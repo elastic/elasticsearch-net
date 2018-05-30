@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json.Linq;
-using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
-	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>
+	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>, IClassFixture<EndpointUsage>
 	{
 		private readonly IElasticClient _client;
 

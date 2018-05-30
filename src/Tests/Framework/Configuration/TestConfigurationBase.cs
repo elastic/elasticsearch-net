@@ -1,4 +1,4 @@
-﻿using Tests.Framework.Versions;
+﻿using Elastic.Managed.Configuration;
 
 namespace Tests.Framework.Configuration
 {

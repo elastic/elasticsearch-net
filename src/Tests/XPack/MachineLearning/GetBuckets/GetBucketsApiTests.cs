@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 {
 	public class GetBucketsApiTests : MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
 	{
-		public GetBucketsApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetBucketsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -61,7 +61,7 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 
 	public class GetBucketsWithTimestampApiTests : MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
 	{
-		public GetBucketsWithTimestampApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetBucketsWithTimestampApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

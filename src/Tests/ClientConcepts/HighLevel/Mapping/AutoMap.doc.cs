@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;

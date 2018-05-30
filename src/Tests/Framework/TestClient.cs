@@ -5,13 +5,15 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Elastic.Managed.Configuration;
+using Elastic.Managed.Ephemeral.Plugins;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.MockData;
-using Tests.Framework.Versions;
+using Elastic.Xunit.XunitPlumbing;
 
 #if FEATURE_HTTPWEBREQUEST
 using Elasticsearch.Net.Connections.HttpWebRequestConnection;
@@ -20,6 +22,27 @@ using Elasticsearch.Net.Connections.HttpWebRequestConnection;
 
 namespace Tests.Framework
 {
+	public class IntegrationOnlyAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip => TestClient.Configuration.RunUnitTests;
+		public override string Reason { get; } = "Inherited unit tests are ignored on this integration test class";
+	}
+	public class NeedsTypedKeysAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip => !TestClient.Configuration.Random.TypedKeys;
+		public override string Reason { get; } = "Random Configuration dictates no typed keys but this tests relies on it being set";
+	}
+	public class ProjectReferenceOnlyAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TestPackageVersion"));
+		public override string Reason { get; } = "This test can only be run if client dependencies are project references";
+	}
+	public class SkipOnTeamCityAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION"));
+		public override string Reason { get; } = "Skip running this test on TeamCity, this is usually a sign this test is flakey?";
+	}
+
 	public static class TestClient
 	{
 		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
@@ -112,39 +135,58 @@ namespace Tests.Framework
 				foreach (var d in r.DeprecationWarnings) SeenDeprecations.Add(d);
 			});
 
-		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.Create("5.0.0-alpha1")
+		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.From("5.0.0-alpha1")
 			? ".percolator"
 			: "query";
 
-		private static bool VersionSatisfiedBy(string range, ElasticsearchVersion version)
+		public static ConnectionSettings CreateSettings(
+			Func<ConnectionSettings, ConnectionSettings> modifySettings,
+			IConnection connection,
+			IConnectionPool connectionPool,
+			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
+			IPropertyMappingProvider propertyMappingProvider = null
+			)
 		{
-			var versionRange = new SemVer.Range(range);
-			var satisfied = versionRange.IsSatisfied(version.Version);
-			if (version.State != ElasticsearchVersion.ReleaseState.Released || satisfied)
-				return satisfied;
+			var s = new ConnectionSettings(connectionPool, connection, (builtin, values) =>
+			{
+				if (sourceSerializerFactory != null) return sourceSerializerFactory(builtin, values);
 
-			//Semver can only match snapshot version with ranges on the same major and minor
-			//anything else fails but we want to know e.g 2.4.5-SNAPSHOT satisfied by <5.0.0;
-			var wholeVersion = $"{version.Major}.{version.Minor}.{version.Patch}";
-			return versionRange.IsSatisfied(wholeVersion);
+				return !Configuration.Random.SourceSerializer
+					? null
+					: new TestSourceSerializerBase(builtin, values);
+			}, propertyMappingProvider);
+
+			var defaultSettings = DefaultSettings(s);
+
+			modifySettings = modifySettings ?? ((m) =>
+			{
+				//only enable debug mode when running in DEBUG mode (always) or optionally wheter we are executing unit tests
+				//during RELEASE builds tests
+#if !DEBUG
+			if (TestClient.Configuration.RunUnitTests)
+#endif
+				m.EnableDebugMode();
+				return m;
+			});
+
+			var settings = modifySettings(defaultSettings);
+			return settings;
+
 		}
-
-		public static bool VersionUnderTestSatisfiedBy(string range) =>
-			VersionSatisfiedBy(range, TestClient.Configuration.ElasticsearchVersion);
 
 		public static ConnectionSettings CreateSettings(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			int port = 9200,
 			bool forceInMemory = false,
 			bool forceSsl = false,
-			Func<Uri, IConnectionPool> createPool = null,
+			Func<ICollection<Uri>, IConnectionPool> createPool = null,
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null
 		)
 		{
-			createPool = createPool ?? (u => new SingleNodeConnectionPool(u));
+			createPool = createPool ?? (uris => new SingleNodeConnectionPool(uris.First()));
 
-			var connectionPool = createPool(CreateUri(port, forceSsl));
+			var connectionPool = createPool(new [] {CreateUri(port, forceSsl)});
 			var connection = CreateConnection(forceInMemory: forceInMemory);
 			var s = new ConnectionSettings(connectionPool, connection, (builtin, values) =>
 			{
@@ -196,7 +238,7 @@ namespace Tests.Framework
 			);
 
 		public static IElasticClient GetClient(
-			Func<Uri, IConnectionPool> createPool,
+			Func<ICollection<Uri>, IConnectionPool> createPool,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, createPool: createPool));
@@ -204,7 +246,7 @@ namespace Tests.Framework
 		public static IConnection CreateConnection(ConnectionSettings settings = null, bool forceInMemory = false) =>
 			Configuration.RunIntegrationTests && !forceInMemory ? CreateLiveConnection() : new InMemoryConnection();
 
-		private static IConnection CreateLiveConnection()
+		public static IConnection CreateLiveConnection()
 		{
 #if FEATURE_HTTPWEBREQUEST
 			if (Configuration.Random.OldConnection) return new HttpWebRequestConnection();

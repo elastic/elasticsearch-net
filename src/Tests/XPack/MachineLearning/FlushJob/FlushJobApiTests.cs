@@ -10,7 +10,7 @@ namespace Tests.XPack.MachineLearning.FlushJob
 {
 	public class FlushJobApiTests : MachineLearningIntegrationTestBase<IFlushJobResponse, IFlushJobRequest, FlushJobDescriptor, FlushJobRequest>
 	{
-		public FlushJobApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public FlushJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

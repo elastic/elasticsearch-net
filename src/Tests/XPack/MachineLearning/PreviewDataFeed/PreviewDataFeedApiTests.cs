@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.PreviewDatafeed
 	//TODO what does an invalid request return here? this API returns a json array for the happy path
 	public class PreviewDatafeedApiTests : MachineLearningIntegrationTestBase<IPreviewDatafeedResponse<Metric>, IPreviewDatafeedRequest, PreviewDatafeedDescriptor, PreviewDatafeedRequest>
 	{
-		public PreviewDatafeedApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PreviewDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

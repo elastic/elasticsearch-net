@@ -10,7 +10,7 @@ namespace Tests.XPack.MachineLearning.StopDatafeed
 {
 	public class StopDatafeedApiTests : MachineLearningIntegrationTestBase<IStopDatafeedResponse, IStopDatafeedRequest, StopDatafeedDescriptor, StopDatafeedRequest>
 	{
-		public StopDatafeedApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public StopDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

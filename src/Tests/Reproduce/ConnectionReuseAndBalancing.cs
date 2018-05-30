@@ -5,30 +5,25 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Tests.Framework;
 using Tests.Framework.MockData;
-using Xunit;
 using Elasticsearch.Net;
 using Nest;
 using FluentAssertions;
 using System.Threading;
 using System.Reactive.Linq;
+using Elastic.Xunit.XunitPlumbing;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Reproduce
 {
-	public class ConnectionReuseCluster : ClusterBase { }
+	public class ConnectionReuseCluster : ClientTestClusterBase { }
 
-	public class ConnectionReuseAndBalancing : IClusterFixture<ConnectionReuseCluster>
+	public class ConnectionReuseAndBalancing : ClusterTestClassBase<ConnectionReuseCluster>
 	{
-
 		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
 
-		private readonly ConnectionReuseCluster _cluster;
-
-		public ConnectionReuseAndBalancing(ConnectionReuseCluster cluster)
-		{
-			_cluster = cluster;
-		}
+		public ConnectionReuseAndBalancing(ConnectionReuseCluster cluster) : base(cluster) { }
 
 		public IEnumerable<Project> MockDataGenerator(int numDocuments)
 		{
@@ -39,7 +34,7 @@ namespace Tests.Reproduce
 		[I] public async Task IndexAndSearchABunch()
 		{
 			const int requestsPerIteration = 1000;
-			var client = _cluster.Client;
+			var client = this.Client;
 
 			await IndexMockData(client, requestsPerIteration);
 
@@ -61,12 +56,13 @@ namespace Tests.Reproduce
 			const int leeWay = 10;
 			var connectionLimit = c.ConnectionSettings.ConnectionLimit;
 			var maxCurrent = connectionLimit;
+			var maxCurrentOpen = connectionLimit + 1; //cluster bootstrap opens it own connections
 
 			foreach (var node in r.Nodes.Values) //in our cluster we only have 1 node
 			{
 				node.Http.TotalOpened.Should().BeGreaterThan(2, "We want to see some concurrency");
 				var h = node.Http;
-				node.Http.CurrentOpen.Should().BeLessOrEqualTo(maxCurrent, $"CurrentOpen exceed our connection limit {maxCurrent}");
+				node.Http.CurrentOpen.Should().BeLessOrEqualTo(maxCurrentOpen, $"CurrentOpen exceed our connection limit {maxCurrent}");
 
 				string errorMessage;
 				int iterationMax;

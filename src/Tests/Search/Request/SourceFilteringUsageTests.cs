@@ -1,4 +1,5 @@
 using System;
+using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Nest;
