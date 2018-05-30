@@ -33,17 +33,17 @@ namespace Tests.Framework
 		{
 			var e = r.OriginalException;
 			e.Should().NotBeNull();
-			FindUnderlyingException(e, e);
+			FindWebExceptionOrHttpRequestException(e, e);
 		});
 
-		private void FindUnderlyingException(Exception mainException, Exception currentException)
+		private void FindWebExceptionOrHttpRequestException(Exception mainException, Exception currentException)
 		{
 			mainException.Should().NotBeNull();
 			currentException.Should().NotBeNull();
 			if (currentException is WebException exception) this.AssertWebException(exception);
 			else if (currentException is HttpRequestException requestException) this.AssertHttpRequestException(requestException);
 			else if (currentException.InnerException != null)
-				FindUnderlyingException(mainException, currentException.InnerException);
+				FindWebExceptionOrHttpRequestException(mainException, currentException.InnerException);
 			else
 				throw new Exception("Unable to find WebException or HttpRequestException on" + mainException.GetType().FullName);
 		}

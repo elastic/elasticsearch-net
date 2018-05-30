@@ -141,8 +141,8 @@ namespace Tests.Framework
 
 		protected virtual string Sanitize(string randomString) => randomString + "-" + this.GetType().Name.Replace("CrudTests", "").ToLowerInvariant();
 
-		public TCluster Cluster { get; }
-		public virtual IElasticClient Client => this.Cluster.Client;
+		protected TCluster Cluster { get; }
+		protected virtual IElasticClient Client => this.Cluster.Client;
 
 		protected async Task AssertOnAllResponses<TResponse>(LazyResponses responses, Action<TResponse> assert)
 			where TResponse : class, IResponse

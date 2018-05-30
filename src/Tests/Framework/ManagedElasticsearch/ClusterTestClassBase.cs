@@ -1,5 +1,5 @@
 ﻿using Elastic.Managed.Ephemeral;
-using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
@@ -15,6 +15,7 @@ namespace Tests.Framework.ManagedElasticsearch
 		{
 			this.Cluster = cluster;
 			this.Cluster.ClusterConfiguration.ShowElasticsearchOutputAfterStarted = false;
+			this.Cluster.ClusterConfiguration.CacheEsHomeInstallation = true;
 		}
 	}
 }

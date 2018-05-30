@@ -7,7 +7,6 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
@@ -44,7 +43,6 @@ namespace Tests.Framework
 			return base.AssertOnAllResponses((r) =>
 			{
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null)
-					//&& IsNotRequestExceptionType(r.ApiCall.OriginalException.GetType()))
 				{
 					ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify()).Throw();
 					return;
@@ -53,7 +51,5 @@ namespace Tests.Framework
 				assert(r);
 			});
 		}
-
-		private static bool IsNotRequestExceptionType(Type exceptionType) => exceptionType != typeof(System.Net.Http.HttpRequestException);
 	}
 }

@@ -6,6 +6,7 @@ using Elastic.Managed.Ephemeral;
 using Nest;
 using Tests.Framework.Integration;
 using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using Xunit;
 
 namespace Tests.Framework

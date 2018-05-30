@@ -36,6 +36,8 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			this.TestConfiguration = TestClient.Configuration;
 			this.ShowElasticsearchOutputAfterStarted = false;
 
+			this.CacheEsHomeInstallation = true;
+
 			this.Add(this.AttributeKey("testingcluster"), "true");
 			this.Add(this.AttributeKey("gateway"), "true");
 			this.Add("search.remote.connect", "true");
