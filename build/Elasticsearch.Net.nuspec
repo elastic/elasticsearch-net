@@ -30,9 +30,6 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\Elasticsearch.Net\net45\Elasticsearch.Net.dll" target="lib\net45"/>
-		<file src="output\Elasticsearch.Net\net45\Elasticsearch.Net.XML" target="lib\net45"/>
-
 		<file src="output\Elasticsearch.Net\net46\Elasticsearch.Net.dll" target="lib\net46"/>
 		<file src="output\Elasticsearch.Net\net46\Elasticsearch.Net.XML" target="lib\net46"/>
 

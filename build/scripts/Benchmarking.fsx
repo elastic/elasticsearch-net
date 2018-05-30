@@ -1,5 +1,5 @@
-﻿#r "../../packages/build/NEST/lib/net45/Nest.dll"
-#r "../../packages/build/Elasticsearch.Net/lib/net45/Elasticsearch.Net.dll"
+﻿#r "../../packages/build/NEST/lib/net46/Nest.dll"
+#r "../../packages/build/Elasticsearch.Net/lib/net46/Elasticsearch.Net.dll"
 #r "../../packages/build/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
 #r "../../packages/build/FSharp.Data/lib/net40/FSharp.Data.dll"
 #I @"../../packages/build/FAKE/tools"

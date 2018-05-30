@@ -38,7 +38,7 @@ module Build =
         if not (DotNetCli.isInstalled()) then failwith  "You need to install the dotnet command line SDK to build for .NET Core"
         let runningSdkVersion = DotNetCli.getVersion()
         if (runningSdkVersion <> pinnedSdkVersion) then failwithf "Attempting to run with dotnet.exe with %s but global.json mandates %s" runningSdkVersion pinnedSdkVersion
-        let incrementalFramework = DotNetFramework.Net45
+        let incrementalFramework = DotNetFramework.Net46
         let sourceLink = if not incremental && not isMono && runningRelease then "1" else ""
         let props = 
             [ 

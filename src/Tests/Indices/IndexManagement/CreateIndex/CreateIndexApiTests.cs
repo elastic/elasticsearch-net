@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.IndexManagement.CreateIndex
 {

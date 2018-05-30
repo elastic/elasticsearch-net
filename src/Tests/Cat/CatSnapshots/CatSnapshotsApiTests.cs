@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -23,7 +24,7 @@ namespace Tests.Cat.CatSnapshots
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			if (!TestClient.Configuration.RunIntegrationTests) return;
-			var repositoryLocation = Path.Combine(this.Cluster.Node.FileSystem.RepositoryPath, RandomString());
+			var repositoryLocation = Path.Combine(this.Cluster.FileSystem.RepositoryPath, RandomString());
 
 			var create = this.Client.CreateRepository(RepositoryName, cr => cr
 				.FileSystem(fs => fs

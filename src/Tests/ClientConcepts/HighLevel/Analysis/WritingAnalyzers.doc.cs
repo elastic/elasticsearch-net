@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using Tests.Framework;

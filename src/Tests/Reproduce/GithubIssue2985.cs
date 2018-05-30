@@ -1,12 +1,9 @@
 using System;
-using System.Linq;
+using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
-using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
-using Xunit;
 
 namespace Tests.Reproduce
 {
@@ -34,7 +31,7 @@ namespace Tests.Reproduce
 			);
 			response.OriginalException.Should().NotBeNull().And.BeOfType<ElasticsearchClientException>();
 			response.OriginalException.Message.Should()
-				.StartWith("Request failed to execute. ServerError: ")
+				.StartWith("Request failed to execute")
 				.And.EndWith(
 					"Type: illegal_argument_exception Reason: \"Custom Analyzer [custom] failed to find filter under name [ascii_folding]\""
 				);

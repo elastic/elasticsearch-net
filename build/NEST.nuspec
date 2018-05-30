@@ -38,9 +38,6 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\Nest\net45\Nest.dll" target="lib\net45"/>
-		<file src="output\Nest\net45\Nest.XML" target="lib\net45"/>
-
 		<file src="output\Nest\net46\Nest.dll" target="lib\net46"/>
 		<file src="output\Nest\net46\Nest.XML" target="lib\net46"/>
 

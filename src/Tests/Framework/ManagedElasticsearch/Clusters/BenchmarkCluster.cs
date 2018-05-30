@@ -1,6 +1,11 @@
-﻿using Tests.Framework.Integration;
+﻿using System.Collections.Generic;
+using Elastic.Managed.Configuration;
+using Elastic.Xunit.XunitPlumbing;
+using Elastic.Managed.FileSystem;
+using Xunit.Abstractions;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
-	public class BenchmarkCluster : ClusterBase { }
+	public class BenchmarkCluster : ClientTestClusterBase { }
+
 }

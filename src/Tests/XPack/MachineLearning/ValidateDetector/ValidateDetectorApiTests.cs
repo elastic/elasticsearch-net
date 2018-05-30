@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.ValidateDetector
 {
 	public class ValidateDetectorApiTests : MachineLearningIntegrationTestBase<IValidateDetectorResponse, IValidateDetectorRequest, ValidateDetectorDescriptor<Project>, ValidateDetectorRequest>
 	{
-		public ValidateDetectorApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ValidateDetectorApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ValidateDetector(f),

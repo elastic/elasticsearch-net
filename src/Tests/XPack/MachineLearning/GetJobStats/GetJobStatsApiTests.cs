@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 {
 	public class GetJobStatsApiTests : MachineLearningIntegrationTestBase<IGetJobStatsResponse, IGetJobStatsRequest, GetJobStatsDescriptor, GetJobStatsRequest>
 	{
-		public GetJobStatsApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetJobStatsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -75,7 +75,7 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 
 	public class GetJobStatsWithJobIdApiTests : MachineLearningIntegrationTestBase<IGetJobStatsResponse, IGetJobStatsRequest, GetJobStatsDescriptor, GetJobStatsRequest>
 	{
-		public GetJobStatsWithJobIdApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetJobStatsWithJobIdApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

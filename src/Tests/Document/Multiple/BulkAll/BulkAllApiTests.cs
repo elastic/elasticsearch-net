@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -14,7 +16,7 @@ using Xunit;
 
 namespace Tests.Document.Multiple.BulkAll
 {
-	public class BulkAllApiTests : SerializationTestBase, IClusterFixture<IntrusiveOperationCluster>
+	public class BulkAllApiTests : SerializationTestBase, IClusterFixture<IntrusiveOperationCluster>, IClassFixture<EndpointUsage>
 	{
 		private class SmallObject
 		{
@@ -112,7 +114,7 @@ namespace Tests.Document.Multiple.BulkAll
 			throw e;
 		}
 
-		[I, SkipOnTeamCity("this test is extremely flakey on TC, but never fails localy")]
+		[I, SkipOnTeamCity]
 		public void DisposingObservableCancelsBulkAll()
 		{
 			var index = CreateIndexName();
@@ -157,7 +159,7 @@ namespace Tests.Document.Multiple.BulkAll
 			bulkObserver.TotalNumberOfFailedBuffers.Should().Be(0);
 		}
 
-		[I, SkipOnTeamCity("this test is extremely flakey on TC, but never fails localy")]
+		[I, SkipOnTeamCity]
 		public void CancelBulkAll()
 		{
 			var index = CreateIndexName();

@@ -11,7 +11,7 @@ namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 {
 	public class RevertModelSnapshotApiTests : MachineLearningIntegrationTestBase<IRevertModelSnapshotResponse, IRevertModelSnapshotRequest, RevertModelSnapshotDescriptor, RevertModelSnapshotRequest>
 	{
-		public RevertModelSnapshotApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public RevertModelSnapshotApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

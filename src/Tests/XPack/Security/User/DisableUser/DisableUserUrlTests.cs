@@ -1,5 +1,6 @@
 ﻿using Nest;
 using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
 

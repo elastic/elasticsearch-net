@@ -1,4 +1,4 @@
-﻿#if DOTNETCORE
+﻿#if !FEATURE_HTTPWEBREQUEST
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -193,10 +193,9 @@ namespace Elasticsearch.Net
 			if (callback != null && handler.ServerCertificateCustomValidationCallback == null)
 				handler.ServerCertificateCustomValidationCallback = callback;
 
-
 			if (requestData.ClientCertificates != null)
 			{
-				handler.ClientCertificateOptions = ClientCertificateOption.Automatic;
+				handler.ClientCertificateOptions = ClientCertificateOption.Manual;
 				handler.ClientCertificates.AddRange(requestData.ClientCertificates);
 			}
 

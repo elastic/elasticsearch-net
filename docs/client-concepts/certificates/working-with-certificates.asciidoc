@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/ClientConcepts/Certificates/WorkingWithCertificates.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/feature/net-abstractions-6x/src/Tests/ClientConcepts/Certificates/WorkingWithCertificates.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -91,9 +91,11 @@ the certificate the server presented was generated using it
 ----
 public class CertgenCaCluster : SslAndKpiXPackCluster
 {
+    public CertgenCaCluster() : this(new SslAndKpiClusterConfiguration()) { }
+    public CertgenCaCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
     protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
         .ServerCertificateValidationCallback(
-            CertificateValidations.AuthorityIsRoot(new X509Certificate(this.Node.FileSystem.CaCertificate))
+            CertificateValidations.AuthorityIsRoot(new X509Certificate(this.ClusterConfiguration.FileSystem.CaCertificate))
         );
 }
 ----
@@ -106,7 +108,7 @@ public class BadCertgenCaCluster : SslAndKpiXPackCluster
 {
     protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
         .ServerCertificateValidationCallback(
-            CertificateValidations.AuthorityPartOfChain(new X509Certificate(this.Node.FileSystem.UnusedCaCertificate))
+            CertificateValidations.AuthorityPartOfChain(new X509Certificate(this.ClusterConfiguration.FileSystem.UnusedCaCertificate))
         );
 }
 ----
@@ -136,20 +138,23 @@ You can set Client Certificates to use on all connections on `ConnectionSettings
 ----
 public class PkiCluster : CertgenCaCluster
 {
+    public PkiCluster() : base(new SslAndKpiClusterConfiguration
+    {
+        DefaultNodeSettings =
+        {
+            {"xpack.security.authc.realms.file1.enabled", "false"},
+            {"xpack.security.http.ssl.client_authentication", "required"}
+        }
+    }) { }
+
     protected override ConnectionSettings Authenticate(ConnectionSettings s) => s <1>
         .ClientCertificate(
             ClientCertificate.LoadWithPrivateKey(
-                this.Node.FileSystem.ClientCertificate, <2>
-                this.Node.FileSystem.ClientPrivateKey, <3>
+                this.ClusterConfiguration.FileSystem.ClientCertificate, <2>
+                this.ClusterConfiguration.FileSystem.ClientPrivateKey, <3>
                 "") <4>
         );
 
-    //hide
-    protected override string[] AdditionalServerSettings => base.AdditionalServerSettings.Concat(new[]
-    {
-        "xpack.security.authc.realms.file1.enabled=false",
-        "xpack.security.http.ssl.client_authentication=required"
-    }).ToArray();
 }
 ----
 <1> Set the client certificate on `ConnectionSettings`
