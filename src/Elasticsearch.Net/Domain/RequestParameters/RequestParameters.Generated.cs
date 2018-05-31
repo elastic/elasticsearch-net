@@ -511,6 +511,8 @@ namespace Elasticsearch.Net
 		public WaitForEvents? WaitForEvents { get => Q<WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
 		public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
+		///<summary>Whether to wait until there are no initializing shards in the cluster</summary>
+		public bool? WaitForNoInitializingShards { get => Q<bool?>("wait_for_no_initializing_shards"); set => Q("wait_for_no_initializing_shards", value); }
 		///<summary>Wait until cluster is in a specific state</summary>
 		public WaitForStatus? WaitForStatus { get => Q<WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
@@ -1205,10 +1207,6 @@ namespace Elasticsearch.Net
 		public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
-		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public bool? WaitForMerge { get => Q<bool?>("wait_for_merge"); set => Q("wait_for_merge", value); }
 	}
 	
 	///<summary>Request options for IndicesGet<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
@@ -1469,8 +1467,6 @@ namespace Elasticsearch.Net
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
@@ -1490,8 +1486,6 @@ namespace Elasticsearch.Net
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 	}
 	
 	///<summary>Request options for IndicesShrink<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
@@ -1580,8 +1574,6 @@ namespace Elasticsearch.Net
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
 		///<summary>The analyzer to use for the query string</summary>
@@ -1681,7 +1673,7 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
 		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
@@ -1815,6 +1807,12 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Context name to compile script against</summary>
 		public string Context { get => Q<string>("context"); set => Q("context", value); }
+	}
+	
+	///<summary>Request options for RankEval<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</pre></summary>
+	public class RankEvalRequestParameters : RequestParameters<RankEvalRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 	
 	///<summary>Request options for Reindex<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>

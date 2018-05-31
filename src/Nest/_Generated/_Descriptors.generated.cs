@@ -704,6 +704,8 @@ namespace Nest
 		public ClusterHealthDescriptor WaitForEvents(WaitForEvents? waitForEvents) => Qs("wait_for_events", waitForEvents);
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
 		public ClusterHealthDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
+		///<summary>Whether to wait until there are no initializing shards in the cluster</summary>
+		public ClusterHealthDescriptor WaitForNoInitializingShards(bool? waitForNoInitializingShards = true) => Qs("wait_for_no_initializing_shards", waitForNoInitializingShards);
 		///<summary>Wait until cluster is in a specific state</summary>
 		public ClusterHealthDescriptor WaitForStatus(WaitForStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
 	
@@ -1930,10 +1932,6 @@ namespace Nest
 		public ForceMergeDescriptor MaxNumSegments(long? maxNumSegments) => Qs("max_num_segments", maxNumSegments);
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public ForceMergeDescriptor OnlyExpungeDeletes(bool? onlyExpungeDeletes = true) => Qs("only_expunge_deletes", onlyExpungeDeletes);
-		///<summary>TODO: ?</summary>
-		public ForceMergeDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
-		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public ForceMergeDescriptor WaitForMerge(bool? waitForMerge = true) => Qs("wait_for_merge", waitForMerge);
 	
 	}
 	
@@ -2394,8 +2392,6 @@ namespace Nest
 		public SegmentsDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public SegmentsDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		///<summary>TODO: ?</summary>
-		public SegmentsDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public SegmentsDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 	
@@ -2425,8 +2421,6 @@ namespace Nest
 		public IndicesShardStoresDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public IndicesShardStoresDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		///<summary>TODO: ?</summary>
-		public IndicesShardStoresDescriptor OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 	
 	}
 	
@@ -2595,8 +2589,6 @@ namespace Nest
 		public ValidateQueryDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-		///<summary>TODO: ?</summary>
-		public ValidateQueryDescriptor<T> OperationThreading(string operationThreading) => Qs("operation_threading", operationThreading);
 		///<summary>Query in the Lucene query string syntax</summary>
 		public ValidateQueryDescriptor<T> QueryOnQueryString(string queryOnQueryString) => Qs("q", queryOnQueryString);
 		///<summary>The analyzer to use for the query string</summary>
@@ -2779,7 +2771,7 @@ namespace Nest
 		public MultiSearchDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public MultiSearchDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
+		///<summary>A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.</summary>
 		public MultiSearchDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	
 	}
@@ -3010,6 +3002,35 @@ namespace Nest
 		public PutScriptDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
 		public PutScriptDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
+	
+	}
+	
+	///<summary>descriptor for RankEval <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</pre></summary>
+	public partial class RankEvalDescriptor  : RequestDescriptorBase<RankEvalDescriptor,RankEvalRequestParameters, IRankEvalRequest>, IRankEvalRequest
+	{ 
+		/// <summary>/_rank_eval</summary>
+		public RankEvalDescriptor(){}
+
+		// values part of the url path
+		Indices IRankEvalRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IRankEvalRequest.Type => Self.RouteValues.Get<Types>("type");
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		public RankEvalDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RankEvalDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public RankEvalDescriptor AllIndices() => this.Index(Indices.All);
+		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
+		public RankEvalDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
+		public RankEvalDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		///<summary>a shortcut into calling Type(Types.All)</summary>
+		public RankEvalDescriptor AllTypes() => this.Type(Types.All);
+
+		// Request parameters
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	
 	}
 	
