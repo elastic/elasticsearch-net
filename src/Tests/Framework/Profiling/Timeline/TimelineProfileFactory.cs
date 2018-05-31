@@ -11,7 +11,7 @@ namespace Tests.Framework.Profiling.Timeline
 		public TimelineProfileFactory(
 			string sdkPath,
 			string outputPath,
-			ClusterBase cluster,
+			ProfilingCluster cluster,
 			Assembly assembly,
 			IColoredWriter output) : base(sdkPath, outputPath, cluster, assembly, output)
 		{ }

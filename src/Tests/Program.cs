@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using FluentAssertions;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch;
@@ -66,7 +67,7 @@ namespace Tests
 		public static void Main(string[] args)
 		{
 			if (args.Length == 0)
-				Console.WriteLine("Must specify at least one argument: TestAssemblyPath, Profile or Benchmark ");
+				Console.WriteLine("Must specify at least one argument: Profile/Benchmark");
 
 			var arguments = args.Skip(1).ToArray();
 			if (args[0].Equals("Profile", StringComparison.OrdinalIgnoreCase))
@@ -113,7 +114,7 @@ namespace Tests
 		}
 
 #if FEATURE_PROFILING
-		private static IEnumerable<IProfileFactory> CreateProfilingFactory(ClusterBase cluster)
+		private static IEnumerable<IProfileFactory> CreateProfilingFactory(ProfilingCluster cluster)
 		{
 			yield return new PerformanceProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());
 			yield return new TimelineProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());

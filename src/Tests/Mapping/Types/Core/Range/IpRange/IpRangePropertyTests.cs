@@ -1,6 +1,6 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Reflection;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -8,8 +9,7 @@ namespace Tests.Aggregations
 {
     public class AggregationVisitorTests
     {
-		[U]
-		public void VisitMethodForEachTypeOfAggregation()
+		[U] public void VisitMethodForEachTypeOfAggregation()
 		{
 			var aggregationTypes =
 				from t in typeof(IAggregation).Assembly().Types()

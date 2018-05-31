@@ -8,6 +8,8 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
+    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.0"/> 
+    
   </ItemGroup>
   <Import Project="..\..\outputpath.props" />
 </Project>

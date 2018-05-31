@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Bogus;
-using Tests.Framework.Versions;
+using Elastic.Managed.Configuration;
 
 namespace Tests.Framework.Configuration
 {
@@ -27,7 +27,7 @@ namespace Tests.Framework.Configuration
 				.ToDictionary(ConfigName, ConfigValue);
 
 			this.Mode = GetTestMode(_config["mode"]);
-			this.ElasticsearchVersion = ElasticsearchVersion.Create(_config["elasticsearch_version"]);
+			this.ElasticsearchVersion = ElasticsearchVersion.From(_config["elasticsearch_version"]);
 			this.ForceReseed = BoolConfig("force_reseed", false);
 			this.TestAgainstAlreadyRunningElasticsearch = BoolConfig("test_against_already_running_elasticsearch", false);
 			this.ClusterFilter = _config.ContainsKey("cluster_filter") ? _config["cluster_filter"] : null;

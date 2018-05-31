@@ -44,7 +44,7 @@ namespace Tests.Framework
 
 		private readonly object _clientLock = new object();
 		private volatile IElasticClient _client;
-		protected virtual IElasticClient Client
+		public virtual IElasticClient Client
 		{
 			get
 			{

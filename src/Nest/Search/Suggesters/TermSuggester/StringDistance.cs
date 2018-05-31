@@ -16,8 +16,8 @@ namespace Nest
 		Internal,
 		[EnumMember(Value = "damerau_levenshtein")]
 		DamerauLevenshtein,
-		[EnumMember(Value = "levenstein")]
-		Levenstein,
+		[EnumMember(Value = "levenshtein")]
+		Levenshtein,
 		[EnumMember(Value = "jaro_winkler")]
 		Jarowinkler,
 		[EnumMember(Value = "ngram")]

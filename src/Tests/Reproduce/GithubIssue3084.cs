@@ -1,13 +1,11 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
-using Xunit;
 
 namespace Tests.Reproduce
 {
@@ -29,7 +27,6 @@ namespace Tests.Reproduce
 			public int Id { get; set; }
 			public int Numeric { get; set; }
 		}
-
 
 		[I]
 		public void DeserializeErrorIsTheSameForAsync()

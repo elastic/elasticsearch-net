@@ -6,18 +6,13 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-#endif
 
 namespace Elasticsearch.Net.Connections.HttpWebRequestConnection
 {
 
-#if !FEATURE_HTTPWEBREQUEST
-	public class HttpWebRequestConnection : HttpConnection {}
-#else
 	public class HttpWebRequestConnection : IConnection
 	{
 		internal static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
@@ -279,5 +274,5 @@ namespace Elasticsearch.Net.Connections.HttpWebRequestConnection
 
 		protected virtual void DisposeManagedResources() { }
 	}
-#endif
 }
+#endif

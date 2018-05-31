@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 	public class UpdateDatafeedApiTests : MachineLearningIntegrationTestBase<IUpdateDatafeedResponse,
 		IUpdateDatafeedRequest, UpdateDatafeedDescriptor<Metric>, UpdateDatafeedRequest>
 	{
-		public UpdateDatafeedApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public UpdateDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 

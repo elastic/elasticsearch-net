@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -26,7 +27,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			SearchRequest<ProjectPercolation>
 		>
 	{
-		protected PercolateQueryUsageTestsBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected PercolateQueryUsageTestsBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected static readonly string PercolatorId = RandomString();
 
