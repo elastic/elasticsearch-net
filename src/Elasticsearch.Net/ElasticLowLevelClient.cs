@@ -45,7 +45,8 @@ namespace Elasticsearch.Net
 			if (contentType.IsNullOrEmpty()) return requestParams;
 
 			requestParams = requestParams ?? new TRequestParams();
-			if (requestParams.RequestConfiguration == null) requestParams.RequestConfiguration = new RequestConfiguration();
+			if (requestParams.RequestConfiguration == null)
+				requestParams.RequestConfiguration = new RequestConfiguration { EnableHttpPipelining = Settings.HttpPipeliningEnabled, ThrowExceptions = Settings.ThrowExceptions };
 			if (!contentType.IsNullOrEmpty() && requestParams.RequestConfiguration.ContentType.IsNullOrEmpty())
 				requestParams.RequestConfiguration.ContentType = contentType;
 			if (!accept.IsNullOrEmpty() && requestParams.RequestConfiguration.Accept.IsNullOrEmpty())
