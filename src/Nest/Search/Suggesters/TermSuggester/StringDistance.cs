@@ -16,10 +16,17 @@ namespace Nest
 		Internal,
 		[EnumMember(Value = "damerau_levenshtein")]
 		DamerauLevenshtein,
+		/// <summary>
+		/// Use for Elasticsearch 6.2.0+
+		/// </summary>
+		/// <remarks>Use Levenstein for Elasticsearch < 6.2.0</remarks>
 		[EnumMember(Value = "levenshtein")]
 		Levenshtein,
-		[Obsolete("Use Levenshtein - this value is incorrectly spelt.")]
-		[EnumMember(Value = "levenshtein")]
+		/// <summary>
+		/// Use for Elasticsearch < 6.2.0
+		/// </summary>
+		/// <remarks>Use Levenshtein for Elasticsearch 6.2.0+</remarks>
+		[EnumMember(Value = "levenstein")]
 		Levenstein,
 		[EnumMember(Value = "jaro_winkler")]
 		Jarowinkler,
