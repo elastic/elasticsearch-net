@@ -21,7 +21,7 @@ namespace Nest
 		[Obsolete("Use Levenshtein - this value is incorrectly spelt.")]
 		[EnumMember(Value = "levenshtein")]
 		Levenstein,
-		[EnumMember(Value = "jarowinkler")]
+		[EnumMember(Value = "jaro_winkler")]
 		Jarowinkler,
 		[EnumMember(Value = "ngram")]
 		Ngram
