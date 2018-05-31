@@ -73,12 +73,17 @@ namespace Nest
 				var inline = dict["inline"].ToString();
 				scriptTransform = new InlineScriptTransform(inline);
 			}
-			if (dict.ContainsKey("file"))
+			else if (dict.ContainsKey("source"))
+			{
+				var inline = dict["source"].ToString();
+				scriptTransform = new InlineScriptTransform(inline);
+			}
+			else if (dict.ContainsKey("file"))
 			{
 				var file = dict["file"].ToString();
 				scriptTransform = new FileScriptTransform(file);
 			}
-			if (dict.ContainsKey("id"))
+			else if (dict.ContainsKey("id"))
 			{
 				var id = dict["id"].ToString();
 				scriptTransform = new IndexedScriptTransform(id);
