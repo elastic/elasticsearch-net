@@ -22,7 +22,7 @@ namespace Nest
 			{
 				case "asciifolding": return o.ToObject<AsciiFoldingTokenFilter>(ElasticContractResolver.Empty);
 				case "common_grams": return o.ToObject<CommonGramsTokenFilter>(ElasticContractResolver.Empty);
-				case "delimited_payload_filter": return o.ToObject<DelimitedPayloadTokenFilter>(ElasticContractResolver.Empty);
+				case "delimited_payload": return o.ToObject<DelimitedPayloadTokenFilter>(ElasticContractResolver.Empty);
 				case "dictionary_decompounder": return o.ToObject<DictionaryDecompounderTokenFilter>(ElasticContractResolver.Empty);
 				case "edge_ngram": return o.ToObject<EdgeNGramTokenFilter>(ElasticContractResolver.Empty);
 				case "elision": return o.ToObject<ElisionTokenFilter>(ElasticContractResolver.Empty);
