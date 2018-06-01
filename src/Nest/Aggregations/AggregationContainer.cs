@@ -6,8 +6,10 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Describes aggregations that we would like to execute on Elasticsearch. In NEST `Aggregation` always refers to an aggregation
-	/// going to Elasticsearch and an `Aggregate` describes an aggregation going out.
+	/// Describes aggregations that we would like to execute on Elasticsearch.
+	/// <para />
+	/// In NEST Aggregation always refers to an aggregation
+	/// sent to Elasticsearch and an Aggregate describes an aggregation returned from Elasticsearch.
 	/// </summary>
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, IAggregationContainer>))]
 	public class AggregationDictionary : IsADictionaryBase<string, IAggregationContainer>
