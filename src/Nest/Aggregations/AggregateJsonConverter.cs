@@ -722,7 +722,7 @@ namespace Nest
 
 		private IBucket GetCompositeBucket(JsonReader reader, JsonSerializer serializer)
 		{
-			var key = new LazyDocument(JObject.Load(reader), serializer.GetConnectionSettings().SourceSerializer);
+			var key = new CompositeKey(serializer.Deserialize<IReadOnlyDictionary<string, object>>(reader));
 			reader.Read();
 			long? docCount = null;
 			if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == Parser.DocCount)

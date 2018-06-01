@@ -150,19 +150,9 @@ namespace Tests.Aggregations.Bucket.Composite
 			};
 
 		/**==== Handling Responses
-		 * Each Composite aggregation buckey key is an `ILazyDocument` that can be converted
-		 * to a type of your choosing. Here, we demonstrate converting to
-		 * an `IDictionary<string, object>` and a `CompositeKey` type we have
-		 * defined.
+		 * Each Composite aggregation bucket key is an `CompositeKey`, a specialized
+		 * `IReadOnlyDictionary<string, object>` type with methods to convert values to supported types
 		 */
-		public class CompositeKey
-		{
-			public string Branches { get; set; }
-			public long Started { get; set; }
-			[PropertyName("branch_count"), JsonProperty("branch_count")]
-			public double BranchCount { get; set; }
-		}
-
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();
@@ -170,24 +160,19 @@ namespace Tests.Aggregations.Bucket.Composite
 			var composite = response.Aggregations.Composite("my_buckets");
 			composite.Should().NotBeNull();
 			composite.Buckets.Should().NotBeNullOrEmpty();
-			var count = 0;
 			foreach (var item in composite.Buckets)
 			{
-				count++;
-				if (count % 2 == 0)
-				{
-					var key = item.Key.As<IDictionary<string, object>>();
-					key.Should().NotBeNull().And.ContainKeys("branches", "started", "branch_count");
-				}
-				else
-				{
-					var key = item.Key.As<CompositeKey>();
-					key.Should().NotBeNull();
-					key.Branches.Should().NotBeNullOrEmpty();
-					/** note that date values are returned as `long` */
-					key.Started.Should().BeGreaterThan(0);
-					key.BranchCount.Should().BeGreaterThan(0);
-				}
+				var key = item.Key;
+				key.Should().NotBeNull();
+
+				key.TryGetValue("branches", out string branches).Should().BeTrue();
+				branches.Should().NotBeNullOrEmpty();
+
+				key.TryGetValue("started", out DateTime started).Should().BeTrue();
+				started.Should().BeAfter(default(DateTime));
+
+				key.TryGetValue("branch_count", out int branchCount).Should().BeTrue();
+				branchCount.Should().BeGreaterThan(0);
 
 				item.DocCount.Should().BeGreaterThan(0);
 
