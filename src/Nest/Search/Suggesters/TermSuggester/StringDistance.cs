@@ -28,8 +28,18 @@ namespace Nest
 		/// <remarks>Use Levenshtein for Elasticsearch 6.2.0+</remarks>
 		[EnumMember(Value = "levenstein")]
 		Levenstein,
-		[EnumMember(Value = "jaro_winkler")]
+		/// <summary>
+		/// Use for Elasticsearch < 6.2.0
+		/// </summary>
+		/// <remarks>Use Jaro_winkler for Elasticsearch 6.2.0+</remarks>
+		[EnumMember(Value = "jarowinkler")]
 		Jarowinkler,
+		/// <summary>
+		/// Use for Elasticsearch 6.2.0+
+		/// </summary>
+		/// <remarks>Use Jarowinkler for Elasticsearch < 6.2.0</remarks>
+		[EnumMember(Value = "jaro_winkler")]
+		Jaro_winkler,
 		[EnumMember(Value = "ngram")]
 		Ngram
 	}
