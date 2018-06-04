@@ -16,7 +16,7 @@ using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
-	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>
+	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>, IClassFixture<EndpointUsage>
 	{
 		private IElasticClient _client;
 

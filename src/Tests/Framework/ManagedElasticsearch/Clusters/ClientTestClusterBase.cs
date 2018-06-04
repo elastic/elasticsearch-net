@@ -45,10 +45,10 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			this.Add($"script.max_compilations_per_minute", "10000", "<6.0.0-rc1");
 			this.Add($"script.max_compilations_rate", "10000/1m", ">=6.0.0-rc1");
 
-			this.Add($"script.inline", "true", "<5.5.0");
-			this.Add($"script.stored", "true", ">5.0.0-alpha1 <5.5.0");
+			this.Add($"script.inline", "true", "<6.0.0");
+			this.Add($"script.stored", "true", ">5.0.0-alpha1 <6.0.0");
 			this.Add($"script.indexed", "true", "<5.0.0-alpha1");
-			this.Add($"script.allowed_types", "inline,stored", ">=5.5.0");
+			this.Add($"script.allowed_types", "inline,stored", ">=6.0.0");
 
 			this.AdditionalBeforeNodeStartedTasks.Add(new WriteAnalysisFiles());
 		}
