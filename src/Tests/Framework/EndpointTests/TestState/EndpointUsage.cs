@@ -18,16 +18,14 @@ namespace Tests.Framework.Integration
 			this.CallUniqueValues = new CallUniqueValues();
 		}
 
-		public LazyResponses CallOnce(Func<LazyResponses> clientUsage, int? k = null)
+		public LazyResponses CallOnce(Func<LazyResponses> clientUsage, int k)
 		{
-			var key = k ?? clientUsage.GetHashCode();
-			LazyResponses r;
-			if (_usages.TryGetValue(key, out r)) return r;
+			if (_usages.TryGetValue(k, out var r)) return r;
 			lock (_lock)
 			{
-				if (_usages.TryGetValue(key, out r)) return r;
+				if (_usages.TryGetValue(k, out r)) return r;
 				var response = clientUsage();
-				_usages.TryAdd(key, response);
+				_usages.TryAdd(k, response);
 				return response;
 			}
 		}
