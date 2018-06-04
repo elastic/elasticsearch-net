@@ -37,7 +37,7 @@ namespace Tests.Framework
 		}
 	}
 
-	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse> : IClusterFixture<TCluster>
+	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse> : IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
 			where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse

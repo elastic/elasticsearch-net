@@ -10,11 +10,12 @@ using Tests.Framework.Integration;
 using Elastic.Managed;
 using Elastic.Managed.Configuration;
 using Elastic.Managed.Ephemeral;
+using Xunit;
 
 namespace Tests.Framework
 {
 	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		: SerializationTestBase, IClusterFixture<TCluster>
+		: SerializationTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
 		where TCluster : ICluster<EphemeralClusterConfiguration> , new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
