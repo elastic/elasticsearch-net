@@ -27,7 +27,7 @@ namespace Tests.Framework.Profiling
 			SetupMethod = setupMethod;
 		}
 
-		public object CreateInstance(ClusterBase cluster)
+		public object CreateInstance(ProfilingCluster cluster)
 		{
 			if (_instance == null)
 			{
@@ -37,7 +37,7 @@ namespace Tests.Framework.Profiling
 				{
 					var parameters = c.GetParameters();
 					return parameters.Length == 1 &&
-						   typeof(ClusterBase).IsAssignableFrom(parameters[0].ParameterType);
+						   typeof(ProfilingCluster).IsAssignableFrom(parameters[0].ParameterType);
 				});
 
 				_instance = clusterConstructor != null

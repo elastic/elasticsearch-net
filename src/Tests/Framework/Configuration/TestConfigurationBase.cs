@@ -1,4 +1,4 @@
-﻿using Tests.Framework.Versions;
+﻿using Elastic.Managed.Configuration;
 
 namespace Tests.Framework.Configuration
 {
@@ -10,9 +10,11 @@ namespace Tests.Framework.Configuration
 		public abstract TestMode Mode { get; protected set; }
 		public abstract string ClusterFilter { get; protected set; }
 		public abstract string TestFilter { get; protected set; }
-		public int Seed { get; } = 1337;
 
 		public virtual bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
 		public virtual bool RunUnitTests => Mode == TestMode.Mixed || Mode == TestMode.Unit;
+
+		public abstract int Seed { get; protected set; }
+		public RandomConfiguration Random { get; protected set; }
 	}
 }

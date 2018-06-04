@@ -11,16 +11,17 @@ using Nest;
 using FluentAssertions;
 using System.Threading;
 using System.Reactive.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Reproduce
 {
-	public class ConnectionReuseCluster : ClusterBase { }
+	public class ConnectionReuseCluster : ClientTestClusterBase { }
 
 	public class ConnectionReuseAndBalancing : IClusterFixture<ConnectionReuseCluster>
 	{
-		
+
 		private static bool IsCurlHandler { get; } =
             #if DOTNETCORE
                 typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
@@ -78,7 +79,7 @@ namespace Tests.Reproduce
 
 				if (!IsCurlHandler)
 				{
-					//on non curl connections we expect full connection reuse 
+					//on non curl connections we expect full connection reuse
 					//we allow some leeway on the maxOpened because of connections setup and teared down
 					//during the initial bootstrap procudure from the test framework getting the cluster up.
 					iterationMax = maxCurrent + leeWay;
@@ -99,7 +100,7 @@ namespace Tests.Reproduce
 			}
 		}
 
-		private async Task IndexMockData(IElasticClient c, int requestsPerIteration) 
+		private async Task IndexMockData(IElasticClient c, int requestsPerIteration)
 		{
 			var tokenSource = new CancellationTokenSource();
 			await c.DeleteIndexAsync(Index<Project>(), cancellationToken: tokenSource.Token);

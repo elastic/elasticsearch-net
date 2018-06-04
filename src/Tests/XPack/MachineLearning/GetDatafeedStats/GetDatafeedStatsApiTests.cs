@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeedStats
 {
 	public class GetDatafeedStatsApiTests : MachineLearningIntegrationTestBase<IGetDatafeedStatsResponse, IGetDatafeedStatsRequest, GetDatafeedStatsDescriptor, GetDatafeedStatsRequest>
 	{
-		public GetDatafeedStatsApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetDatafeedStatsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -48,7 +48,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeedStats
 
 	public class GetDatafeedStatsWithDatafeedIdApiTests : MachineLearningIntegrationTestBase<IGetDatafeedStatsResponse, IGetDatafeedStatsRequest, GetDatafeedStatsDescriptor, GetDatafeedStatsRequest>
 	{
-		public GetDatafeedStatsWithDatafeedIdApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetDatafeedStatsWithDatafeedIdApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

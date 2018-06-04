@@ -13,7 +13,7 @@ namespace Tests.XPack.MachineLearning.PutJob
 {
 	public class PutJobApiTests : MachineLearningIntegrationTestBase<IPutJobResponse, IPutJobRequest, PutJobDescriptor<Metric>, PutJobRequest>
 	{
-		public PutJobApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.PutJob(CallIsolatedValue, f),

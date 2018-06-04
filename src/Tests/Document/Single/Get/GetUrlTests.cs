@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;

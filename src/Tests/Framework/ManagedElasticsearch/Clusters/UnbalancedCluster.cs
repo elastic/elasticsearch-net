@@ -1,12 +1,13 @@
 ﻿using Nest;
-using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
-	public class UnbalancedCluster : ReadOnlyCluster
+	//TODO does this need a whole separate cluster?
+	public class UnbalancedCluster : ClientTestClusterBase
 	{
-		protected override void SeedNode() =>
-			new DefaultSeeder(this.Node, new IndexSettings { NumberOfShards = 3, NumberOfReplicas = 2 }).SeedNode();
+		protected override void SeedCluster() =>
+			new DefaultSeeder(this.Client, new IndexSettings { NumberOfShards = 3, NumberOfReplicas = 2 })
+				.SeedNode();
 	}
 }

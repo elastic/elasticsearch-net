@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using Elastic.Managed;
+using Elastic.Managed.Ephemeral;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -29,6 +31,8 @@ namespace Tests.Framework
 
 		protected IElasticsearchSerializer Serializer => Client.Serializer;
 
+		protected static bool TestingAgainst(string range) => TestClient.Configuration.ElasticsearchVersion.InRange(range);
+
 		protected virtual IElasticClient Client =>
 			_connectionSettingsModifier == null && _serializerFactory == null
 			? TestClient.DefaultInMemoryClient
@@ -39,7 +43,7 @@ namespace Tests.Framework
 			SetupSerialization();
 		}
 
-		protected SerializationTestBase(ClusterBase cluster)
+		protected SerializationTestBase(ICluster<EphemeralClusterConfiguration> cluster)
 		{
 		}
 

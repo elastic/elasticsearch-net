@@ -8,6 +8,7 @@ using Nest;
 using Tests.Framework;
 using System.Reflection;
 using System.Threading;
+using Elastic.Xunit.XunitPlumbing;
 
 namespace Tests.CodeStandards
 {

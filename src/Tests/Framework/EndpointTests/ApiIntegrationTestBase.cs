@@ -2,17 +2,18 @@
 using System.Net;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
+using Elastic.Managed.Ephemeral;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {
 	public abstract class ApiIntegrationTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		where TCluster : ClusterBase, new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster , new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
@@ -22,7 +23,7 @@ namespace Tests.Framework
 		protected abstract bool ExpectIsValid { get; }
 		protected virtual void ExpectResponse(TResponse response) { }
 
-		protected ApiIntegrationTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected ApiIntegrationTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override IElasticClient Client => this.Cluster.Client;
 		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();

@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
+using Elastic.Managed;
+using Elastic.Managed.Configuration;
+using Elastic.Managed.Ephemeral;
 
 namespace Tests.Framework
 {
 	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: SerializationTestBase, IClusterFixture<TCluster>
-		where TCluster : ClusterBase, new()
+		where TCluster : ICluster<EphemeralClusterConfiguration> , new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
@@ -28,7 +29,7 @@ namespace Tests.Framework
 		protected bool RanIntegrationSetup => this._usage?.CalledSetup ?? false;
 	    protected string UrlEncode(string s) => Uri.EscapeDataString(s);
 
-        protected ClusterBase Cluster { get; }
+        protected TCluster Cluster { get; }
 
 		protected string CallIsolatedValue => _uniqueValues.Value;
 		protected T ExtendedValue<T>(string key) where T : class => this._uniqueValues.ExtendedValue<T>(key);
@@ -48,10 +49,11 @@ namespace Tests.Framework
 		protected abstract string UrlPath { get; }
 		protected abstract HttpMethod HttpMethod { get; }
 
-		protected ApiTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster)
+		protected ApiTestBase(TCluster cluster, EndpointUsage usage) : base(cluster)
 		{
 			this._usage = usage ?? throw new ArgumentNullException(nameof(usage));
-			this.Cluster = cluster ?? throw new ArgumentNullException(nameof(cluster));
+			if (cluster == null) throw new ArgumentNullException(nameof(cluster));
+			this.Cluster = cluster;
 
 			this._responses = usage.CallOnce(this.ClientUsage);
 			this._uniqueValues = usage.CallUniqueValues;
@@ -135,9 +137,11 @@ namespace Tests.Framework
 					this._uniqueValues.CurrentView = kv.Key;
 					assert(response);
 				}
+#pragma warning disable 8360 //enable this if you expect a single overload to act up
 #pragma warning disable 7095 //enable this if you expect a single overload to act up
 				catch (Exception ex) when (false)
 #pragma warning restore 7095
+#pragma warning restore 8360
 #pragma warning disable 0162 //dead code while the previous exception filter is false
 				{
 					throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);

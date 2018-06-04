@@ -5,11 +5,11 @@ using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Framework.Profiling
 {
-	public class ProfilingCluster : ClusterBase
+	public class ProfilingCluster : ClientTestClusterBase
 	{
-		protected override void SeedNode()
+		protected override void SeedCluster()
 		{
-			var seeder = new DefaultSeeder(this.Node);
+			var seeder = new DefaultSeeder(this.Client);
 			seeder.DeleteIndicesAndTemplates();
 			seeder.CreateIndices();
 		}

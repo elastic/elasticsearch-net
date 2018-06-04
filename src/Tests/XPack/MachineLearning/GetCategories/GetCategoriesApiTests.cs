@@ -13,7 +13,7 @@ namespace Tests.XPack.MachineLearning.GetCategories
 {
 	public class GetCategoriesApiTests : MachineLearningIntegrationTestBase<IGetCategoriesResponse, IGetCategoriesRequest, GetCategoriesDescriptor, GetCategoriesRequest>
 	{
-		public GetCategoriesApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetCategoriesApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -66,7 +66,7 @@ namespace Tests.XPack.MachineLearning.GetCategories
 
 	public class GetCategoriesWithCategoriesApiTests : MachineLearningIntegrationTestBase<IGetCategoriesResponse, IGetCategoriesRequest, GetCategoriesDescriptor, GetCategoriesRequest>
 	{
-		public GetCategoriesWithCategoriesApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetCategoriesWithCategoriesApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

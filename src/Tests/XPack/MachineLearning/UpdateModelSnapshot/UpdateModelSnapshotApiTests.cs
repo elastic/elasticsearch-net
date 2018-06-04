@@ -11,7 +11,7 @@ namespace Tests.XPack.MachineLearning.UpdateModelSnapshot
 {
 	public class UpdateModelSnapshotApiTests : MachineLearningIntegrationTestBase<IUpdateModelSnapshotResponse, IUpdateModelSnapshotRequest, UpdateModelSnapshotDescriptor, UpdateModelSnapshotRequest>
 	{
-		public UpdateModelSnapshotApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UpdateModelSnapshotApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.UpdateModelSnapshot(CallIsolatedValue, CallIsolatedValue + "-snapshot", f),

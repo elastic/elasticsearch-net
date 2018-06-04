@@ -10,7 +10,7 @@ namespace Tests.XPack.MachineLearning.StartDatafeed
 {
 	public class StartDatafeedApiTests : MachineLearningIntegrationTestBase<IStartDatafeedResponse, IStartDatafeedRequest, StartDatafeedDescriptor, StartDatafeedRequest>
 	{
-		public StartDatafeedApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public StartDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

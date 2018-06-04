@@ -18,7 +18,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 
 		public SnapshotCrudTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
-			_repositoryLocation = Path.Combine(cluster.Node.FileSystem.RepositoryPath, RandomString());
+			_repositoryLocation = Path.Combine(cluster.FileSystem.RepositoryPath, RandomString());
 
 			var create = this.Client.CreateRepository(_repositoryName, cr => cr
 				.FileSystem(fs => fs

@@ -46,7 +46,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
 			//ranges property is ignored on versions before 5.2.0
-			var supportsRanges = TestClient.VersionUnderTestSatisfiedBy(">=5.2.0");
+			var supportsRanges = TestingAgainst(">=5.2.0");
 			visitor.CountsShouldContainKeyAndCountBe("object", supportsRanges ? 5 : 4);
 			visitor.CountsShouldContainKeyAndCountBe("date", 4);
 			visitor.CountsShouldContainKeyAndCountBe("text", 11);
@@ -64,7 +64,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 				visitor.CountsShouldContainKeyAndCountBe("double_range", 1);
 				visitor.CountsShouldContainKeyAndCountBe("long_range", 1);
 
-				if (TestClient.VersionUnderTestSatisfiedBy(">=5.5.0"))
+				if (TestingAgainst(">=5.5.0"))
 					visitor.CountsShouldContainKeyAndCountBe("ip_range", 1);
 			}
 		}

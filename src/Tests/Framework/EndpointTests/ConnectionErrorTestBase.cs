@@ -1,19 +1,22 @@
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using Elastic.Managed.Ephemeral;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
+using HttpMethod = Elasticsearch.Net.HttpMethod;
 
 namespace Tests.Framework
 {
 	public abstract class ConnectionErrorTestBase<TCluster>
 		: ApiTestBase<TCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
-		where TCluster : ClusterBase, new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster , new()
 	{
-		protected ConnectionErrorTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected ConnectionErrorTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.RootNodeInfo(f),
@@ -34,14 +37,22 @@ namespace Tests.Framework
 		{
 			var e = r.OriginalException;
 			e.Should().NotBeNull();
-			if (e is WebException) this.AssertException((WebException) e);
-			else if (e is System.Net.Http.HttpRequestException)
-				this.AssertException((System.Net.Http.HttpRequestException) e);
-			else throw new Exception("Response orginal exception is not one of the expected connection exception but" + e.GetType().FullName);
+			FindWebExceptionOrHttpRequestException(e, e);
 		});
 
-		protected abstract void AssertException(WebException e);
-		protected abstract void AssertException(System.Net.Http.HttpRequestException e);
+		private void FindWebExceptionOrHttpRequestException(Exception mainException, Exception currentException)
+		{
+			mainException.Should().NotBeNull();
+			currentException.Should().NotBeNull();
+			if (currentException is WebException exception) this.AssertWebException(exception);
+			else if (currentException is HttpRequestException requestException) this.AssertHttpRequestException(requestException);
+			else if (currentException.InnerException != null)
+				FindWebExceptionOrHttpRequestException(mainException, currentException.InnerException);
+			else
+				throw new Exception("Unable to find WebException or HttpRequestException on" + mainException.GetType().FullName);
+		}
+		protected abstract void AssertWebException(WebException e);
+		protected abstract void AssertHttpRequestException(HttpRequestException e);
 
 	}
 }

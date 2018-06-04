@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Nest;
 using System;
+using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit;

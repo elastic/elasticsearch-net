@@ -10,6 +10,7 @@ using Xunit;
 using Nest;
 using Newtonsoft.Json;
 using System.Text;
+using Elastic.Xunit.XunitPlumbing;
 
 namespace Tests.ClientConcepts.Serializer
 {

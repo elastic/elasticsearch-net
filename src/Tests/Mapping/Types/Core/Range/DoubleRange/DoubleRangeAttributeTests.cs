@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Nest;
 using Tests.Framework;
 
 namespace Tests.Mapping.Types.Core.Range.DoubleRange

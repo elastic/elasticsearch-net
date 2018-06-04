@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.ValidateJob
 {
 	public class ValidateJobApiTests : MachineLearningIntegrationTestBase<IValidateJobResponse, IValidateJobRequest, ValidateJobDescriptor<Metric>, ValidateJobRequest>
 	{
-		public ValidateJobApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ValidateJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ValidateJob(f),

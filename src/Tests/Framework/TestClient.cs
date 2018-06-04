@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -7,14 +8,35 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
+using Elastic.Managed.Configuration;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.MockData;
-using Tests.Framework.Versions;
+using Elastic.Xunit.XunitPlumbing;
 
 namespace Tests.Framework
 {
+	public class IntegrationOnlyAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip => TestClient.Configuration.RunUnitTests;
+		public override string Reason { get; } = "Inherited unit tests are ignored on this integration test class";
+	}
+	public class NeedsTypedKeysAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip => !TestClient.Configuration.Random.TypedKeys;
+		public override string Reason { get; } = "Random Configuration dictates no typed keys but this tests relies on it being set";
+	}
+	public class ProjectReferenceOnlyAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TestPackageVersion"));
+		public override string Reason { get; } = "This test can only be run if client dependencies are project references";
+	}
+	public class SkipOnTeamCityAttribute : SkipTestAttributeBase
+	{
+		public override bool Skip => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION"));
+		public override string Reason { get; } = "Skip running this test on TeamCity, this is usually a sign this test is flakey?";
+	}
 	public static class TestClient
 	{
 		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
@@ -23,6 +45,8 @@ namespace Tests.Framework
 		public static ConnectionSettings GlobalDefaultSettings = CreateSettings();
 		public static IElasticClient Default = new ElasticClient(GlobalDefaultSettings);
 		public static IElasticClient DefaultInMemoryClient = GetInMemoryClient();
+
+		public static ConcurrentBag<string> SeenDeprecations { get; } = new ConcurrentBag<string>();
 
 		public static Uri CreateUri(int port = 9200, bool forceSsl = false) =>
 			new UriBuilder(forceSsl ? "https" : "http", Host, port).Uri;
@@ -95,13 +119,21 @@ namespace Tests.Framework
 			//.PrettyJson()
 			//TODO make this random
 			//.EnableHttpCompression()
+			.OnRequestCompleted(r =>
+			{
+				if (!r.DeprecationWarnings.Any()) return;
+				var q = r.Uri.Query;
+				//hack to prevent the deprecation warnings from the deprecation response test to be reported
+				if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
+				foreach (var d in r.DeprecationWarnings) SeenDeprecations.Add(d);
+			})
 			.OnRequestDataCreated(data => data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
 
 		private static IClrTypeMapping<Project> ProjectMapping(ClrTypeMappingDescriptor<Project> m)
 		{
 			m.IndexName("project").IdProperty(p => p.Name);
 			//*_range type only available since 5.2.0 so we ignore them when running integration tests
-			if (VersionUnderTestSatisfiedBy("<5.2.0") && Configuration.RunIntegrationTests)
+			if (TestClient.Configuration.ElasticsearchVersion.InRange("<5.2.0") && Configuration.RunIntegrationTests)
 				m.Ignore(p => p.Ranges);
 			return m;
 		}
@@ -109,29 +141,23 @@ namespace Tests.Framework
 		private static IClrTypeMapping<Ranges> RangesMapping(ClrTypeMappingDescriptor<Ranges> m)
 		{
 			//ip_range type only available since 5.5.0 so we ignore them when running integration tests
-			if (VersionUnderTestSatisfiedBy("<5.5.0") && Configuration.RunIntegrationTests)
+			if (TestClient.Configuration.ElasticsearchVersion.InRange("<5.5.0") && Configuration.RunIntegrationTests)
 				m.Ignore(p => p.Ips);
 			return m;
 		}
 
-		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.GetOrAdd("5.0.0-alpha1")
+		public static string PercolatorType => Configuration.ElasticsearchVersion <= "5.0.0-alpha1"
 			? ".percolator"
 			: "query";
 
-		public static bool VersionSatisfiedBy(string range, ElasticsearchVersion version)
+		public static ConnectionSettings CreateSettings(Func<ConnectionSettings, ConnectionSettings> modifySettings, IConnection connection, IConnectionPool connectionPool)
 		{
-			var versionRange = new SemVer.Range(range);
-			var satisfied = versionRange.IsSatisfied(version.Version);
-			if (!version.IsSnapshot || satisfied) return satisfied;
-			//Semver can only match snapshot version with ranges on the same major and minor
-			//anything else fails but we want to know e.g 2.4.5-SNAPSHOT satisfied by <5.0.0;
-			var wholeVersion = $"{version.Major}.{version.Minor}.{version.Patch}";
-			return versionRange.IsSatisfied(wholeVersion);
-
+#pragma warning disable CS0618 // Type or member is obsolete
+			var defaultSettings = DefaultSettings(new ConnectionSettings(connectionPool, connection));
+#pragma warning restore CS0618 // Type or member is obsolete
+			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
+			return settings;
 		}
-
-		public static bool VersionUnderTestSatisfiedBy(string range) =>
-			VersionSatisfiedBy(range, TestClient.Configuration.ElasticsearchVersion);
 
 		public static ConnectionSettings CreateSettings(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,

@@ -2,6 +2,8 @@
 using FluentAssertions;
 using Nest;
 using System;
+using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
@@ -16,7 +18,7 @@ namespace Tests.ClientConcepts.Exceptions
 
 		public ExceptionTests(WritableCluster cluster)
 		{
-			_port = cluster.Node.Port;
+			_port = cluster.Nodes.First().Port ?? 9200;
 		}
 
 		//[I]
