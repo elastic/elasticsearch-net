@@ -35,7 +35,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:x:</td>
       <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/2.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=2.x&svg=true"></a></td>
       <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=2.x"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST/2.5.7"><img src="https://img.shields.io/badge/nuget-v2.5.7-blue.svg?style=flat-square"></a>
+    	<td><a href="https://www.nuget.org/packages/NEST/2.5.8"><img src="https://img.shields.io/badge/nuget-v2.5.8-blue.svg?style=flat-square"></a>
     	<td>:heavy_minus_sign:</td>
     	</td>  
     </tr>
