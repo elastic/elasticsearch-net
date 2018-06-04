@@ -1,3 +1,4 @@
+#if FEATURE_PROFILING
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
@@ -29,3 +30,4 @@ namespace Tests.Search.Search
     }
 
 }
+#endif
