@@ -1,6 +1,7 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 #load @"Paths.fsx"
+#nowarn "0044" //TODO sort out FAKE 5
 
 open System
 open Fake 

@@ -35,6 +35,10 @@ open Differ.Differ
 Commandline.parse()
 
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
+Target "Start" <| fun _ -> 
+    match (isMono, Commandline.validMonoTarget) with
+    | (true, false) -> failwithf "%s is not a valid target on mono because it can not call ILRepack" (Commandline.target)
+    | _ -> traceHeader "STARTING BUILD"
 
 Target "Clean" Build.Clean
 
@@ -49,7 +53,7 @@ Target "Profile" <| fun _ ->
     let url = getBuildParam "elasticsearch"
     Profiler.IndexResults url
 
-Target "Integrate" <| Tests.RunIntegrationTests
+Target "Integrate" Tests.RunIntegrationTests
 
 Target "Benchmark" <| fun _ ->
     let runInteractive = ((getBuildParam "nonInteractive") <> "1")
@@ -59,7 +63,9 @@ Target "Benchmark" <| fun _ ->
     let password = getBuildParam "password"
     Benchmarker.IndexResults (url, username, password)
 
-Target "InheritDoc"  InheritDoc.PatchInheritDocs
+Target "InternalizeDependencies" Build.ILRepack
+
+Target "InheritDoc" InheritDoc.PatchInheritDocs
 
 Target "Documentation" Documentation.Generate
 
@@ -72,12 +78,15 @@ Target "Release" <| fun _ ->
     StrongName.ValidateDllsInNugetPackage()
     Release.GenerateNotes()
 
+Target "TestNugetPackage" <| fun _ -> 
+    Tests.RunReleaseUnitTests()
+    
 Target "Canary" <| fun _ -> 
     trace "Running canary build" 
     let apiKey = (getBuildParam "apikey");
     let feed = (getBuildParamOrDefault "feed" "elasticsearch-net");
     if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey feed
-
+    
 Target "Diff" <| fun _ ->
     let diffType = getBuildParam "diffType"
     let project = getBuildParam "project"
@@ -88,29 +97,34 @@ Target "Diff" <| fun _ ->
     Differ.Generate(diffType, project, first, second, format)
 
 // Dependencies
-"Clean" 
+"Start"
+  =?> ("Clean", Commandline.needsClean )
   =?> ("Version", hasBuildParam "version")
   ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
   =?> ("Test", (not Commandline.skipTests))
+  =?> ("InternalizeDependencies", (not isMono))
   ==> "InheritDoc"
   =?> ("Documentation", (not Commandline.skipDocs))
   ==> "Build"
 
-"Clean"
+"Start"
+  =?> ("Clean", Commandline.needsClean )
   =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Profile"
 
-"Clean" 
-  ==> "Restore"
+"Start"
+  =?> ("Clean", Commandline.needsClean )
   =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Benchmark"
 
 "Version"
   ==> "Release"
+  =?> ("TestNugetPackage", (not isMono))
   ==> "Canary"
 
-"Clean"
+"Start"
+  =?> ("Clean", Commandline.needsClean )
   ==> "Restore"
   =?> ("FullBuild", Commandline.needsFullBuild)
   ==> "Integrate"
@@ -118,7 +132,8 @@ Target "Diff" <| fun _ ->
 "Build"
   ==> "Release"
   
-"Clean"
+"Start"
+  ==> "Clean"
   ==> "Diff"
   
 RunTargetOrListTargets()

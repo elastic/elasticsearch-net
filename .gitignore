@@ -41,7 +41,6 @@ packages/*
 paket.exe
 paket-files/*.cached
 
-
 build/*
 !build/tools
 !build/keys

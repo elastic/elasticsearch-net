@@ -1,14 +1,15 @@
 Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasticsearch](https://github.com/elastic/elasticsearch) .NET clients.
 
-### Compatibility Matrix
+## Compatibility Matrix
 <table>
     <tr>
         <th><b>Elasticsearch<b></th>
-        <th><b>.NET clients<b></th>
+        <th><b>Clients<b></th>
         <th><b>Supported<b></th>
-        <th><b>Build Status</b></th>
-        <th><b>Myget Feed<b></th>
-        <th><b>Nuget Feed<b></th>
+        <th><b>Windows CI</b></th>
+        <th><b>Linux CI</b></th>
+        <th><b>Nuget<b></th>
+        <th><b>CI Feed<b></th>
     </tr>
     <tr>
     	<td><code>0.x</code></td>
@@ -17,51 +18,83 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:heavy_minus_sign:</td>
     	<td>:heavy_minus_sign:</td>
     	<td>:heavy_minus_sign:</td>
+    	<td>:heavy_minus_sign:</td>
     </tr>
     <tr>
     	<td><code>1.x</code></td>
     	<td><code>1.x</code></td>
-    	<td>:white_check_mark:</td>
-    	<td><a href="http://elastic-dotnet.westeurope.cloudapp.azure.com/project.html?projectId=Nest1x&tab=projectOverview&guest=1"><img src="http://elastic-dotnet.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest1x_RunBuildBat)/statusIcon.svg"></a></td>
-    	<td><a href="https://www.myget.org/gallery/elasticsearch-net-legacy"><img src="https://www.myget.org/BuildSource/Badge/elasticsearch-net-legacy?identifier=46420967-3fd2-4104-b600-fab20d2b0d62"></a></td>
-    	<td>
-    	<a href="https://www.nuget.org/packages/NEST/1.8.2"><img src="https://img.shields.io/badge/nuget-v1.8.2-blue.svg?style=flat-square">
-    	</td>
+    	<td>:x:</td>
+    	<td>:heavy_minus_sign:</td>
+    	<td>:heavy_minus_sign:</td>
+    	<td><a href="https://www.nuget.org/packages/NEST/1.9.2"><img src="https://img.shields.io/badge/nuget-v1.9.2-blue.svg?style=flat-square"></td>
+    	<td>:heavy_minus_sign:</td>
     </tr>
     <tr>
     	<td><code>2.x</code></td>
     	<td><code>2.x</code></td>
     	<td>:white_check_mark:</td>
-    	<td><a href="http://elastic-dotnet.westeurope.cloudapp.azure.com/project.html?projectId=Nest2x&tab=projectOverview&guest=1"><img src="http://elastic-dotnet.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest2x_CanaryBuild_Fake)/statusIcon.svg"></a></td>
-    	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://www.myget.org/Content/images/badges/pending.svg"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST"><img src="https://img.shields.io/nuget/v/NEST.svg?style=flat-square"></a>
+      <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/2.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=2.x&svg=true"></a></td>
+      <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=2.x"></a></td>
+    	<td><a href="https://www.nuget.org/packages/NEST/2.5.5"><img src="https://img.shields.io/badge/nuget-v2.5.5-blue.svg?style=flat-square"></a>
+    	<td>:heavy_minus_sign:</td>
     	</td>  
     </tr>
     <tr>
     	<td><code>5.x</code></td>
     	<td><code>5.x</code></td>
     	<td>:white_check_mark:</td>
-    	<td><a href="http://elastic-dotnet.westeurope.cloudapp.azure.com/project.html?projectId=Nest5x&tab=projectOverview&guest=1"><img src="http://elastic-dotnet.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest5x_CanaryBuild_Fake)/statusIcon.svg"></a></td>
-    	<td><a href="https://www.myget.org/gallery/elasticsearch-net-next"><img src="https://www.myget.org/Content/images/badges/pending.svg"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST/5.0.0-alpha1"><img src="https://img.shields.io/nuget/vpre/NEST.svg"></a> </td>
+        <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/5.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=5.x&svg=true"></a></td>
+        <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=5.x"></a></td>
+    	<td><a href="https://www.nuget.org/packages/NEST/5.5.0"><img src="https://img.shields.io/badge/nuget-v5.5.0-blue.svg?style=flat-square"></a> </td>
+    	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://img.shields.io/myget/elasticsearch-net-legacy/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
+    </tr>
+    <tr>
+    	<td><code>6.x</code></td>
+    	<td><code>6.x</code></td>
+    	<td>:white_check_mark:</td>
+        <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/6.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=6.x&svg=true"></a></td>
+        <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=6.x"></a></td>
+    	<td><a href="https://www.nuget.org/packages/NEST"><img src="https://img.shields.io/badge/nuget-v5.5.0-blue.svg?style=flat-square"></a> </td>
+    	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://img.shields.io/myget/elasticsearch-net/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
+    </tr>
+    <tr>
+    	<td><code>master</code></td>
+    	<td><code>master</code></td>
+    	<td>:x:</td>
+        <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/master"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=master&svg=true"></a></td>
+        <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=master"></a></td>
+    	<td>:heavy_minus_sign:</td>
+    	<td><a href="https://www.myget.org/gallery/elasticsearch-net-next"><img src="https://img.shields.io/myget/elasticsearch-net-next/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
     </tr>
 </table>
+          
+### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
 
-## Upgrading from 1.x to 2.x
+## Upgrading
+
+Please consult the [current upgrading Elasticsearch guidelines](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) to understand what you should consider when upgrading from an older version of Elasticsearch to a newer one.
+
+### Upgrading from 1.x to 2.x
 
 Take a look at the [blog post for details around the evolution of NEST 2.x](https://www.elastic.co/blog/ga-release-of-nest-2-0-our-dot-net-client-for-elasticsearch), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/master/docs/2.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/master/docs/2.0-breaking-changes/elasticsearch-net-breaking-changes.md).
 
-#[NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest#nest-)
+### Upgrading from 2.x to 5.x
 
-NEST is the official high-level .NET client of [elasticsearch](https://github.com/elasticsearch/elasticsearch).  It aims to be a solid, strongly typed client with a very concise API.
+Take a look at the [blog post for the release of NEST 5.x](https://www.elastic.co/blog/nest-5-0-released), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/master/docs/5.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/master/docs/5.0-breaking-changes/elasticsearch-net-breaking-changes.md).
+
+# [NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest)
+
+NEST is the official high-level .NET client of [Elasticsearch](https://github.com/elasticsearch/elasticsearch).  It aims to be a solid, strongly typed client with a very concise API.
 
 * High-level client that internally uses the low-level **Elasticsearch.Net** client
-* Maps requests and responses to strongly typed objects with a fluent interface and object initializer syntax to build them
+* Maps requests and responses to strongly typed objects with both fluent interface and object initializer syntaxes to build them
 * Comes with a very powerful query DSL that maps one-to-one with Elasticsearch
-* Takes advantage of .NET features where they make sense (i.e., covariant `IEnumerable<T>` result types, type and index inference)
-* All calls have async variants
+* Takes advantage of .NET features where they make sense (i.e., covariant `T` collection result types, type and index inference)
+* All calls have async variants with support for cancellation
 
 ## Getting Started
+
+For a comprehensive, walkthrough-styled tutorial, check out the [NuSearch example repository](https://github.com/elastic/elasticsearch-net-example).
 
 ### Installing
 
@@ -178,9 +211,9 @@ var response = client.LowLevel.SearchPost("myindex","elasticsearchprojects", new
 });
 ```
 
-#### [Read the full documentation here](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
+#### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/nest.html](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/nest.html) 
 
-#[Elasticsearch.Net](src/Elasticsearch.Net)
+# [Elasticsearch.Net](src/Elasticsearch.Net)
 
 A low-level, dependency free, client that has no opinions how you build and represent your requests and responses.
 
@@ -255,6 +288,8 @@ client.Index("myindex","mytype","1", myJson);
 
 This will execute the same request, but this time `myJson` will be serialized by the registered `ISerializer`.
 
+#### [Full documentation at https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/elasticsearch-net.html) 
+
 ## Contributing
 
 [Pull requests](https://github.com/elastic/elasticsearch-net/pulls) and [issues](https://github.com/elastic/elasticsearch-net/issues) are very much welcomed and appreciated.  If you'd like to report a bug or submit a feature/bug fix then please read our [contributing guide](contributing.md) first!
@@ -268,7 +303,7 @@ Text within multi-line comments conforms to [asciidoc](http://asciidoc.org/), a 
 ```sh
 cd /cygdrive/c/source/elastic-docs
 
-./build_docs.pl --doc /cygdrive/c/source/elasticsearch-net-master/docs/index.asciidoc
+./build_docs.pl --doc /cygdrive/c/source/elasticsearch-net-master/docs/index.asciidoc --chunk=1 --open
 ```
 
 the result of running this for a successful build will be
@@ -278,6 +313,8 @@ Building HTML from /cygdrive/c/source/elasticsearch-net-master/docs/index.asciid
 Done
 See: /cygdrive/c/source/elasticsearch-docs/html_docs/index.html
 ```
+
+and a small HTTP server will be spun up locally on port 8000 through which you can view the documentation.
 
 [Pull Requests](https://github.com/elastic/elasticsearch-net/pulls) are most welcome for areas of documentation that need improving.
 

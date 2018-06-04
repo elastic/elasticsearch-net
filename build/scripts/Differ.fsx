@@ -7,11 +7,9 @@
 #load @"Tooling.fsx"
 #load @"Projects.fsx"
 
+open Microsoft.FSharp.Reflection
 open System
-open System.IO
-
-open Fake 
-open System
+open System.Collections.Generic
 open System.IO
 open System.Linq
 open System.Net
@@ -19,8 +17,8 @@ open System.Text
 open System.Text.RegularExpressions
 open System.Xml
 open System.Xml.Linq
+open Fake 
 open Fake.Git.CommandHelper
-
 open Paths
 open Projects
 open Tooling
@@ -127,16 +125,11 @@ module Differ =
                                               |> Array.tryFind (fun f -> nuget.FrameworkVersion = Path.GetFileName f)
                 match desiredFrameworkVersion with
                 | Some f -> f |> Path.GetFullPath
-                | _ -> 
-                    // TODO: resolve the dependency compatible framework version for the target framework.
-                    // May want to remove this for dependencies as they are not required for JustAssembly,
-                    // but are for BitDiffer, which was originally used.
-                    traceFAKE "Nuget package %s, version %s, does not contain framework version %s in %s" 
-                        nuget.Package 
-                        packageVersion 
-                        nuget.FrameworkVersion
-                        dir
-                    String.Empty
+                | _ -> failwith (sprintf "Nuget package %s, version %s, does not contain framework version %s in %s" 
+                                          nuget.Package 
+                                          packageVersion 
+                                          nuget.FrameworkVersion
+                                          dir)
     
         versions
         |> Seq.map(fun v -> 
@@ -167,8 +160,7 @@ module Differ =
             // copy all dependent package assemblies into target dir
             for packageDir in packageDirs do
                 let path = packageVersionPath packageDir v
-                if isNotNullOrEmpty path then
-                    path |> Directory.GetFiles |> CopyFiles targetPath
+                path |> Directory.GetFiles |> CopyFiles targetPath
     
             target
         )
@@ -270,6 +262,25 @@ module Differ =
         | :? XmlException -> ignore()
 
     let private convertToAsciidoc path first second = 
+        let createDiffDescription description (writer:TextWriter) =
+            let m = Regex.Match(description, "(.*?) changed from (.*?) to (.*).")
+            if m.Success then
+                let memberType = m.Groups.[1].Value
+                let o = m.Groups.[2].Value
+                let n = m.Groups.[3].Value
+                writer.WriteLine("+")
+                writer.WriteLine(sprintf "%s change" memberType)
+                writer.WriteLine("+")
+                writer.WriteLine("[source,csharp]")
+                writer.WriteLine("----")
+                writer.WriteLine(sprintf "// before in %s" first)
+                writer.WriteLine(sprintf "%s" o)
+                writer.WriteLine(sprintf "// now in %s" second)
+                writer.WriteLine(sprintf "%s" n)
+                writer.WriteLine("----")
+            else
+                writer.WriteLine(sprintf "%s" description)
+                               
         let name = path |> Path.GetFileNameWithoutExtension
         try
             let doc = XDocument.Load path
@@ -277,35 +288,37 @@ module Differ =
             DeleteFile output
             use file = File.OpenWrite <| output
             use writer = new StreamWriter(file)                
-            writer.WriteLine(name |> replace "." "-" |> sprintf "[[%s-breaking-changes]]")
+            writer.WriteLine(name |> replace "." "-" |> toLower |> sprintf "[[%s-breaking-changes]]")
             writer.WriteLine(sprintf "== Breaking changes for %s between %s and %s" name first second)
             writer.WriteLine()
                     
             for element in (doc |> descendents "Type") do
                 let typeName = element |> attributeValue "Name" |> replace (sprintf "%s." name) ""
                 let diffType  = element |> attributeValue "DiffType" |> convertDiffType
+                
                 match diffType with
-                | Deleted -> writer.WriteLine(sprintf "[float]%s=== `%s` is deleted" Environment.NewLine typeName)
-                | New -> writer.WriteLine(sprintf "[float]%s=== `%s` is added" Environment.NewLine typeName)
+                | Deleted -> writer.WriteLine(sprintf "`%s`:: deleted" typeName)
+                | New -> writer.WriteLine(sprintf "`%s`:: added" typeName)
                 | Modified -> 
                     let members = Seq.append (element |> elements "Method") (element |> elements "Property")        
                     if Seq.isEmpty members |> not then          
-                        writer.WriteLine(sprintf "[float]%s=== `%s`" Environment.NewLine typeName)
+                        writer.WriteLine(sprintf "`%s`::" typeName)
                         for m in members do
                             let memberName = m |> attributeValue "Name"
                             if isNotNullOrEmpty memberName then
                                 let diffType  = m |> attributeValue "DiffType"                         
                                 if isNotNullOrEmpty diffType then                    
                                     match convertDiffType diffType with
-                                            | Deleted -> writer.WriteLine(sprintf "[float]%s==== `%s` is deleted" Environment.NewLine memberName)
-                                            | New -> writer.WriteLine(sprintf "[float]%s==== `%s` is added" Environment.NewLine memberName)
+                                            | Deleted -> writer.WriteLine(sprintf "  * `%s` deleted" memberName)
+                                            | New -> writer.WriteLine(sprintf "  * `%s` added" memberName)
                                             | Modified -> 
                                                 match (m.Descendants(XName.op_Implicit "DiffItem") |> Seq.tryHead) with
                                                 | Some diffItem ->
-                                                    writer.WriteLine(sprintf "[float]%s==== `%s`" Environment.NewLine memberName)                                                                                      
+                                                    writer.WriteLine(sprintf "  * `%s`" memberName)                                                                                      
                                                     let diffDescription = diffItem.Value
-                                                    writer.WriteLine(Regex.Replace(diffDescription, "changed from (.*?) to (.*).", "changed from `$1` to `$2`."))                                         
+                                                    writer |> createDiffDescription diffDescription                                    
                                                 | None -> ()
+                writer.WriteLine()
         with
         | :? XmlException -> ignore()
         

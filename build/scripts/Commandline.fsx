@@ -1,9 +1,9 @@
 #I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
+#nowarn "0044" //TODO sort out FAKE 5
 
 open System
 open Fake
-
 
 //this is ugly but a direct port of what used to be duplicated in our DOS and bash scripts
 
@@ -19,11 +19,10 @@ Targets:
 * clean
   - cleans build output folders
 * test [testfilter]
-  - incremental build and unit test for .NET 4.5, [testfilter] allows you to do
-    a contains match on the tests to be run.
+  - incremental build and unit test for .NET 4.5, [testfilter] allows you to do a contains match on the tests to be run.
 * release <version>
   - 0 create a release worthy nuget packages for [version] under build\output
-* integrate <elasticsearch_versions> [clustername] [testfilter]  -
+* integrate <elasticsearch_versions> [clustername] [testfilter] 
   - run integration tests for <elasticsearch_versions> which is a semicolon separated list of
     elasticsearch versions to test or `latest`. Can filter tests by <clustername> and <testfilter>
 * canary [apikey] [feed]
@@ -36,16 +35,36 @@ NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to for
 Execution hints can be provided anywhere on the command line
 - skiptests : skip running tests as part of the target chain
 - skipdocs : skip generating documentation
+- source_serialization : force tests to use a client with custom source serialization
+- seed:<N> : provide a seed to run the tests with.
+- random:<K><:B> : sets random K to bool B if if B is omitted will default to true
+  K can be: sourceserializer, typedkeys or oldconnection (only valid on windows)
 """
 
 module Commandline =
     type MultiTarget = All | One
 
     let private args = getBuildParamOrDefault "cmdline" "build" |> split ' '
+    
     let skipTests = args |> List.exists (fun x -> x = "skiptests")
     let skipDocs = args |> List.exists (fun x -> x = "skipdocs") || isMono
-    let private filteredArgs = args |> List.filter (fun x -> x <> "skiptests" && x <> "skipdocs")
+    let seed = 
+        match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
+        | Some t -> t.Replace("seed:", "")
+        | _ -> ""
         
+    let randomArgs = 
+        args 
+        |> List.filter (fun x -> (x.StartsWith("random:")))
+        |> List.map (fun x -> (x.Replace("random:", "")))
+        
+    let private filteredArgs = 
+        args 
+        |> List.filter (
+            fun x -> 
+                x <> "skiptests" && x <> "skipdocs" && x <> "source_serialization" && not (x.StartsWith("seed:")) && not (x.StartsWith("random:"))
+        )
+
     let multiTarget =
         match (filteredArgs |> List.tryHead) with
         | Some t when t.EndsWith("-all") -> MultiTarget.All
@@ -56,6 +75,12 @@ module Commandline =
         | Some t -> t.Replace("-all", "")
         | _ -> "build"
 
+    let validMonoTarget =
+        match target with
+        | "release"
+        | "canary" -> false
+        | _ -> true
+        
     let needsFullBuild =
         match (target, skipTests) with
         | (_, true) -> true
@@ -64,6 +89,15 @@ module Commandline =
         | ("integrate", _) -> false
         | _ -> true
         
+    let needsClean =
+        match (target, skipTests) with
+        | ("release", _) -> true
+        //dotnet-xunit needs to a build of its own anyways
+        | ("test", _)
+        | ("integrate", _) 
+        | ("build", _) -> false
+        | _ -> true
+
     let arguments =
         match filteredArgs with
         | _ :: tail -> target :: tail
@@ -94,13 +128,9 @@ module Commandline =
 
     let parse () =
         setEnvironVar "FAKEBUILD" "1"
+        printfn "%A" arguments
         match arguments with
-        | [] 
-        | ["build"] 
-        | ["test"] 
-        | ["clean"] 
-        | ["benchmark"] 
-        | ["profile"] -> ignore()
+        | [] | ["build"] | ["test"] | ["clean"] | ["benchmark"] | ["profile"] -> ignore()
         | ["release"; version] -> setBuildParam "version" version
 
         | ["test"; testFilter] -> setBuildParam "testfilter" testFilter
