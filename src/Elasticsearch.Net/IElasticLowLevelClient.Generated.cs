@@ -2354,6 +2354,42 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> PutScriptPostAsync<TResponse>(string id, string context, PostData body, PutScriptRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		
+		///<summary>POST on /_rank_eval <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</para></summary>
+		///<param name="body">The search definition using the Query DSL and the prototype for the eval request.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse RankEval<TResponse>(PostData body, RankEvalRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		
+		///<summary>POST on /_rank_eval <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</para></summary>
+		///<param name="body">The search definition using the Query DSL and the prototype for the eval request.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> RankEvalAsync<TResponse>(PostData body, RankEvalRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		
+		///<summary>POST on /{index}/_rank_eval <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</para></summary>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name="body">The search definition using the Query DSL and the prototype for the eval request.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse RankEval<TResponse>(string index, PostData body, RankEvalRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		
+		///<summary>POST on /{index}/_rank_eval <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</para></summary>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name="body">The search definition using the Query DSL and the prototype for the eval request.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> RankEvalAsync<TResponse>(string index, PostData body, RankEvalRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		
+		///<summary>POST on /{index}/{type}/_rank_eval <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</para></summary>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+		///<param name="body">The search definition using the Query DSL and the prototype for the eval request.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse RankEval<TResponse>(string index, string type, PostData body, RankEvalRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		
+		///<summary>POST on /{index}/{type}/_rank_eval <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</para></summary>
+		///<param name="index">A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+		///<param name="body">The search definition using the Query DSL and the prototype for the eval request.</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> RankEvalAsync<TResponse>(string index, string type, PostData body, RankEvalRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		
 		///<summary>POST on /_reindex <para>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</para></summary>
 		///<param name="body">The search definition using the Query DSL and the prototype for the index request.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
