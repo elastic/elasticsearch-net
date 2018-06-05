@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public class ResponseBuilder<TReturn> 
+	public class ResponseBuilder<TReturn>
 		where TReturn : class
-		
+
 	{
 		private const int BufferSize = 81920;
 		private static readonly VoidResponse Void = new VoidResponse();
@@ -86,7 +86,7 @@ namespace Elasticsearch.Net
 						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
 						else response.Body = this._requestData.ConnectionSettings.Serializer.Deserialize<TReturn>(stream);
 					}
-					if (response.AllowAllStatusCodes) 
+					if (response.AllowAllStatusCodes)
 						ReadServerError(response, new MemoryStream(bytes), bytes);
 				}
 				else if (response.HttpStatusCode != null)
@@ -115,10 +115,10 @@ namespace Elasticsearch.Net
 						else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._cancellationToken).ConfigureAwait(false);
 					}
 					if (response.AllowAllStatusCodes)
-						await ReadServerErrorAsync(response, new MemoryStream(bytes), bytes);
+						await ReadServerErrorAsync(response, new MemoryStream(bytes), bytes).ConfigureAwait(false);
 				}
 				else if (response.HttpStatusCode != null)
-					await ReadServerErrorAsync(response, stream, bytes);
+					await ReadServerErrorAsync(response, stream, bytes).ConfigureAwait(false);
 			}
 		}
 
