@@ -442,7 +442,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			}
 		}
 
-		[U(Skip = "The Tests use Newtonsoft.Json.JsonPropertyAttribute, the CI builds use the Nest.Json.JsonPropertyAttribute, so the behaviour changes.")]
+		[U]
+		[SkipOnTeamCity("The Tests use Newtonsoft.Json.JsonPropertyAttribute, the CI builds use the Nest.Json.JsonPropertyAttribute, so the behaviour changes.")]
 		public void PrecedenceIsAsExpected()
 		{
 			/** Here we provide an explicit rename of a property on `ConnectionSettings` using `.PropertyName()`
