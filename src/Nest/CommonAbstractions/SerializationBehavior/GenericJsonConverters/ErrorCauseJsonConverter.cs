@@ -134,13 +134,11 @@ namespace Nest
 			}
 			return true;
 		}
-		private static readonly IReadOnlyCollection<ShardFailure> DefaultFailedShards =
-			new ReadOnlyCollection<ShardFailure>(new ShardFailure[0] { });
 
 		protected static IReadOnlyCollection<ShardFailure> ExtractFailedShards(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
-			if (reader.TokenType != JsonToken.StartArray) return DefaultFailedShards;
+			if (reader.TokenType != JsonToken.StartArray) return EmptyReadOnly<ShardFailure>.Collection;
 			var shardFailures = serializer.Deserialize<List<ShardFailure>>(reader);
 			return new ReadOnlyCollection<ShardFailure>(shardFailures);
 		}
