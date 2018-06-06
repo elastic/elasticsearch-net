@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Elasticsearch.Net
 {
+	/// <summary>
+	/// A connection pool to a single node or endpoint
+	/// </summary>
 	public class SingleNodeConnectionPool : IConnectionPool
 	{
 		/// <inheritdoc/>
@@ -21,7 +24,7 @@ namespace Elasticsearch.Net
 		public bool UsingSsl { get; }
 
 		/// <inheritdoc/>
-		public bool SniffedOnStartup { get { return true; } set {  } }
+		public bool SniffedOnStartup { get => true; set {  } }
 
 		/// <inheritdoc/>
 		public IReadOnlyCollection<Node> Nodes { get; }
