@@ -36,5 +36,8 @@ namespace Nest
 
 		[JsonProperty("cancellable")]
 		public bool Cancellable { get; internal set; }
+
+		[JsonProperty("headers")]
+		public IReadOnlyDictionary<string, string> Headers { get; internal set; } = EmptyReadOnly<string, string>.Dictionary;
 	}
 }
