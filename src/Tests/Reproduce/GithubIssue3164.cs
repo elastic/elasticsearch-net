@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -16,7 +17,7 @@ namespace Tests.Reproduce
 		{
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 
-			// simluate a request rather than using the source serializer directly, so that
+			// simulate a request rather than using the source serializer directly, so that
 			// the SourceConverter is invoked.
 			var json = @"{
 				""_index"" : ""dates"",
