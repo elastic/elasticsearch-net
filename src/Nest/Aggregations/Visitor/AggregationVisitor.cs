@@ -75,6 +75,7 @@ namespace Nest
 		void Visit(IBucketSortAggregation aggregation);
 		void Visit(ISamplerAggregation aggregation);
 		void Visit(IGeoCentroidAggregation aggregation);
+		void Visit(ICompositeAggregation aggregation);
 	}
 
 	public class AggregationVisitor : IAggregationVisitor
@@ -264,6 +265,10 @@ namespace Nest
 		}
 
 		public virtual void Visit(IGeoCentroidAggregation aggregation)
+		{
+		}
+
+		public virtual void Visit(ICompositeAggregation aggregation)
 		{
 		}
 

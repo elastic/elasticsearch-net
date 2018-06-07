@@ -20,10 +20,8 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => objectType == typeof(IAggregate);
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
 			throw new NotSupportedException();
-		}
 
 		private static class Parser
 		{
@@ -682,6 +680,10 @@ namespace Nest
 		private IBucket GetKeyedBucket(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
+
+			if (reader.TokenType == JsonToken.StartObject)
+				return GetCompositeBucket(reader, serializer);
+
 			var key = reader.Value;
 			reader.Read();
 			var propertyName = (string) reader.Value;
@@ -711,8 +713,8 @@ namespace Nest
 				docCountErrorUpperBound = reader.Value as long?;
 				reader.Read();
 			}
-			var nestedAgregates = this.GetSubAggregates(reader, serializer);
-			var bucket = new KeyedBucket<object>(nestedAgregates)
+			var nestedAggregates = this.GetSubAggregates(reader, serializer);
+			var bucket = new KeyedBucket<object>(nestedAggregates)
 			{
 				Key = key,
 				KeyAsString = keyAsString,
@@ -720,6 +722,22 @@ namespace Nest
 				DocCountErrorUpperBound = docCountErrorUpperBound
 			};
 			return bucket;
+		}
+
+		private IBucket GetCompositeBucket(JsonReader reader, JsonSerializer serializer)
+		{
+			var key = new CompositeKey(serializer.Deserialize<IReadOnlyDictionary<string, object>>(reader));
+			reader.Read();
+			long? docCount = null;
+			if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == Parser.DocCount)
+			{
+				reader.Read();
+				docCount = reader.Value as long?;
+				reader.Read();
+			}
+			
+			var nestedAggregates = this.GetSubAggregates(reader, serializer);
+			return new CompositeBucket(nestedAggregates, key) { DocCount = docCount };
 		}
 
 		private IBucket GetSignificantTermsBucket(JsonReader reader, JsonSerializer serializer, object key, string keyAsString, long? docCount)
