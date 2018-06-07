@@ -26,8 +26,12 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
+			// https://github.com/JamesNK/Newtonsoft.Json/issues/862
+			var dateParseHandling = reader.DateParseHandling;
+			reader.DateParseHandling = DateParseHandling.None;
 			var token = JToken.ReadFrom(reader);
-			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(token.ToString())))
+			reader.DateParseHandling = dateParseHandling;
+			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(token.ToString(Formatting.None))))
 				return serializer.GetConnectionSettings().SourceSerializer.Deserialize(objectType, ms);
 		}
 	}
