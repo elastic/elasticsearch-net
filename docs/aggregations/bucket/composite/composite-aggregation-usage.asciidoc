@@ -1,0 +1,181 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.1
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Aggregations/Bucket/Composite/CompositeAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[composite-aggregation-usage]]
+=== Composite Aggregation Usage
+
+A multi-bucket aggregation that creates composite buckets from different sources.
+
+Unlike the other multi-bucket aggregation the composite aggregation can be
+used to paginate all buckets from a multi-level aggregation efficiently.
+This aggregation provides a way to stream all buckets of a specific aggregation
+similarly to what scroll does for documents.
+
+The composite buckets are built from the combinations of the values extracted/created
+for each document and each combination is considered as a composite bucket.
+
+NOTE: Only available in Elasticsearch 6.1.0+
+
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-composite-aggregation.html[Composite Aggregation].
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.Composite("my_buckets", date => date
+    .Sources(s => s
+        .Terms("branches", t => t
+            .Field(f => f.Branches.Suffix("keyword"))
+        )
+        .DateHistogram("started", d => d
+            .Field(f => f.StartedOn)
+            .Interval(DateInterval.Month)
+        )
+        .Histogram("branch_count", h => h
+            .Field(f => f.RequiredBranches)
+            .Interval(1)
+        )
+    )
+    .Aggregations(childAggs => childAggs
+        .Nested("project_tags", n => n
+            .Path(p => p.Tags)
+            .Aggregations(nestedAggs => nestedAggs
+                .Terms("tags", avg => avg.Field(p => p.Tags.First().Name))
+            )
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new CompositeAggregation("my_buckets")
+{
+    Sources = new List<ICompositeAggregationSource>
+    {
+        new TermsCompositeAggregationSource("branches")
+        {
+            Field = Infer.Field<Project>(f => f.Branches.Suffix("keyword"))
+        },
+        new DateHistogramCompositeAggregationSource("started")
+        {
+            Field = Infer.Field<Project>(f => f.StartedOn),
+            Interval = DateInterval.Month
+        },
+        new HistogramCompositeAggregationSource("branch_count")
+        {
+            Field = Infer.Field<Project>(f => f.RequiredBranches),
+            Interval = 1
+        }
+    },
+    Aggregations = new NestedAggregation("project_tags")
+    {
+        Path = Field<Project>(p => p.Tags),
+        Aggregations = new TermsAggregation("tags")
+        {
+            Field = Field<Project>(p => p.Tags.First().Name)
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "my_buckets": {
+    "composite": {
+      "sources": [
+        {
+          "branches": {
+            "terms": {
+              "field": "branches.keyword"
+            }
+          }
+        },
+        {
+          "started": {
+            "date_histogram": {
+              "field": "startedOn",
+              "interval": "month"
+            }
+          }
+        },
+        {
+          "branch_count": {
+            "histogram": {
+              "field": "requiredBranches",
+              "interval": 1.0
+            }
+          }
+        }
+      ]
+    },
+    "aggs": {
+      "project_tags": {
+        "nested": {
+          "path": "tags"
+        },
+        "aggs": {
+          "tags": {
+            "terms": {
+              "field": "tags.name"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+Each Composite aggregation bucket key is an `CompositeKey`, a specialized
+`IReadOnlyDictionary<string, object>` type with methods to convert values to supported types
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+var composite = response.Aggregations.Composite("my_buckets");
+composite.Should().NotBeNull();
+composite.Buckets.Should().NotBeNullOrEmpty();
+foreach (var item in composite.Buckets)
+{
+    var key = item.Key;
+    key.Should().NotBeNull();
+
+    key.TryGetValue("branches", out string branches).Should().BeTrue();
+    branches.Should().NotBeNullOrEmpty();
+
+    key.TryGetValue("started", out DateTime started).Should().BeTrue();
+    started.Should().BeAfter(default(DateTime));
+
+    key.TryGetValue("branch_count", out int branchCount).Should().BeTrue();
+    branchCount.Should().BeGreaterThan(0);
+
+    item.DocCount.Should().BeGreaterThan(0);
+
+    var nested = item.Nested("project_tags");
+    nested.Should().NotBeNull();
+
+    var nestedTerms = nested.Terms("tags");
+    nestedTerms.Buckets.Count.Should().BeGreaterThan(0);
+}
+----
+

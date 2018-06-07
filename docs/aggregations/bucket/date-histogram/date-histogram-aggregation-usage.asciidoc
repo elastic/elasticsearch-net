@@ -130,8 +130,6 @@ var dateHistogram = response.Aggregations.DateHistogram("projects_started_per_mo
 dateHistogram.Should().NotBeNull();
 dateHistogram.Buckets.Should().NotBeNull();
 dateHistogram.Buckets.Count.Should().BeGreaterThan(10);
-dateHistogram.Buckets.Should().NotBeNull();
-dateHistogram.Buckets.Count.Should().BeGreaterThan(0);
 foreach (var item in dateHistogram.Buckets)
 {
     item.Date.Should().NotBe(default(DateTime));

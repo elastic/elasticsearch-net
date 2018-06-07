@@ -55,8 +55,8 @@ namespace Nest
 			where TAggregate : IAggregate
 		{
 			reader.Read();
-			var geoCentroid = serializer.Deserialize<TAggregate>(reader);
-			dictionary.Add(name, geoCentroid);
+			var aggregate = serializer.Deserialize<TAggregate>(reader);
+			dictionary.Add(name, aggregate);
 		}
 
 		private static void ParseAggregate(JsonReader reader, JsonSerializer serializer, string name, Dictionary<string, IAggregate> dictionary)
