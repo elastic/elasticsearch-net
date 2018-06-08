@@ -16,7 +16,7 @@ namespace Nest
 		public static MemoryStream ToStream(this JToken token)
 		{
 			var ms = new MemoryStream();
-			using (var streamWriter = new StreamWriter(ms, InternalSerializer.ExpectedEncoding, 1024, leaveOpen: true))
+			using (var streamWriter = new StreamWriter(ms, InternalSerializer.ExpectedEncoding, InternalSerializer.DefaultBufferSize, leaveOpen: true))
 			using (var writer = new JsonTextWriter(streamWriter))
 			{
 				token.WriteTo(writer);
@@ -32,7 +32,7 @@ namespace Nest
 		public static async Task<MemoryStream> ToStreamAsync(this JToken token, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			var ms = new MemoryStream();
-			using (var streamWriter = new StreamWriter(ms, InternalSerializer.ExpectedEncoding, 1024, leaveOpen: true))
+			using (var streamWriter = new StreamWriter(ms, InternalSerializer.ExpectedEncoding, InternalSerializer.DefaultBufferSize, leaveOpen: true))
 			using (var writer = new JsonTextWriter(streamWriter))
 			{
 				await token.WriteToAsync(writer, cancellationToken).ConfigureAwait(false);

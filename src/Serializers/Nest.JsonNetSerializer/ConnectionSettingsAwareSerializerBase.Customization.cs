@@ -12,8 +12,11 @@ namespace Nest.JsonNetSerializer
 {
 	public abstract partial class ConnectionSettingsAwareSerializerBase : IElasticsearchSerializer
 	{
+		// Default buffer size of StreamWriter, which is private :(
+		internal const int DefaultBufferSize = 1024;
+
 		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
-		protected virtual int BufferSize => 1024;
+		protected virtual int BufferSize => DefaultBufferSize;
 
 		private readonly JsonSerializer _serializer;
 		private readonly JsonSerializer _collapsedSerializer;

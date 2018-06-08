@@ -11,6 +11,9 @@ namespace Nest
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
 	internal class InternalSerializer : IElasticsearchSerializer
 	{
+		// Default buffer size of StreamWriter, which is private :(
+		internal const int DefaultBufferSize = 1024;
+
 		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 
 		private static readonly Task CompletedTask = Task.CompletedTask;
@@ -29,7 +32,7 @@ namespace Nest
 		/// </summary>
 		// Performance tests as part of https://github.com/elastic/elasticsearch-net/issues/1899 indicate this
 		// to be a good compromise buffer size for performance throughput and bytes allocated.
-		protected virtual int BufferSize => 1024;
+		protected virtual int BufferSize => DefaultBufferSize;
 
 		public InternalSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
 
