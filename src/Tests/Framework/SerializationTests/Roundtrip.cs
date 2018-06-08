@@ -32,8 +32,8 @@ namespace Tests.Framework
 
 		public virtual void DeserializesTo<T>(Action<string, T> assert)
 		{
-			var json = (this.ExpectJson is string)
-				? (string) ExpectJson
+			var json = (this.ExpectJson is string s)
+				? s
 				: JsonConvert.SerializeObject(this.ExpectJson, NullValueSettings);
 
 			T sut;

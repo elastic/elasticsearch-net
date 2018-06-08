@@ -1,9 +1,19 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
 	internal static class JsonReaderExtensions
 	{
+		public static JToken ReadTokenWithDateParseHandlingNone(this JsonReader reader)
+		{
+			var dateParseHandling = reader.DateParseHandling;
+			reader.DateParseHandling = DateParseHandling.None;
+			var token = JToken.ReadFrom(reader);
+			reader.DateParseHandling = dateParseHandling;
+			return token;
+		}
+
 		public static T ReadToEnd<T>(this JsonReader reader, int depth, T r = null)
 			where T : class
 		{
@@ -14,6 +24,7 @@ namespace Nest
 			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
 			return r;
 		}
+
 		public static T ExhaustTo<T>(this JsonReader reader, int depth, T r = null, JsonToken endType = JsonToken.EndObject)
 			where T : class
 		{

@@ -23,8 +23,8 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var token = JToken.ReadFrom(reader);
-			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(token.ToString())))
+			var token = reader.ReadTokenWithDateParseHandlingNone();
+			using (var ms = token.ToStream())
 			{
                 //not optimized but deserializing create requests is far from common practice
                 var genericType = objectType.GetTypeInfo().GenericTypeArguments[0];

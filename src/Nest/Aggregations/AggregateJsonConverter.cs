@@ -583,10 +583,7 @@ namespace Nest
 				return valueMetric;
 			}
 
-
-			//var scriptedMetric = serializer.Deserialize(reader);
-			var scriptedMetric = JToken.ReadFrom(reader);
-
+			var scriptedMetric = reader.ReadTokenWithDateParseHandlingNone();
 			reader.Read();
 			if (scriptedMetric != null)
 			{

@@ -11,7 +11,7 @@ namespace Nest
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
 	internal class InternalSerializer : IElasticsearchSerializer
 	{
-		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
+		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 
 		private static readonly Task CompletedTask = Task.CompletedTask;
 

@@ -21,7 +21,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var sourceSerializer = serializer.GetConnectionSettings().SourceSerializer;
-			var token = JToken.ReadFrom(reader);
+			var token = reader.ReadTokenWithDateParseHandlingNone();
 			return new LazyDocument(token, sourceSerializer);
 		}
 

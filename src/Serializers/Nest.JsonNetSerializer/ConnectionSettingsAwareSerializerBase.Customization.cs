@@ -12,7 +12,7 @@ namespace Nest.JsonNetSerializer
 {
 	public abstract partial class ConnectionSettingsAwareSerializerBase : IElasticsearchSerializer
 	{
-		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
+		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 		protected virtual int BufferSize => 1024;
 
 		private readonly JsonSerializer _serializer;
@@ -37,7 +37,7 @@ namespace Nest.JsonNetSerializer
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
+				var token = await jsonTextReader.ReadTokenWithDateParseHandlingNoneAsync(cancellationToken).ConfigureAwait(false);
 				return token.ToObject<T>(this._serializer);
 			}
 		}
@@ -47,7 +47,7 @@ namespace Nest.JsonNetSerializer
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var token = await JToken.LoadAsync(jsonTextReader, cancellationToken).ConfigureAwait(false);
+				var token = await jsonTextReader.ReadTokenWithDateParseHandlingNoneAsync(cancellationToken).ConfigureAwait(false);
 				return token.ToObject(type, this._serializer);
 			}
 		}
@@ -56,8 +56,10 @@ namespace Nest.JsonNetSerializer
 		{
 			using (var writer = new StreamWriter(stream, ExpectedEncoding, BufferSize, leaveOpen: true))
 			using (var jsonWriter = new JsonTextWriter(writer))
-				(formatting == SerializationFormatting.Indented ? _serializer : _collapsedSerializer)
-					.Serialize(jsonWriter, data);
+			{
+				var serializer = formatting == SerializationFormatting.Indented ? _serializer : _collapsedSerializer;
+				serializer.Serialize(jsonWriter, data);
+			}
 		}
 
 		private static readonly Task CompletedTask = Task.CompletedTask;
