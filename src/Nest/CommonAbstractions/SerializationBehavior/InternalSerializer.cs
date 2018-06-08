@@ -79,6 +79,10 @@ namespace Nest
 			return CompletedTask;
 		}
 
+		public T Deserialize<T>(JsonReader reader) => this.Serializer.Deserialize<T>(reader);
+
+		public object Deserialize(JsonReader reader, Type objectType) => this.Serializer.Deserialize(reader, objectType);
+
 		public T Deserialize<T>(Stream stream)
 		{
 			if (stream == null || stream.Length == 0) return default(T);
