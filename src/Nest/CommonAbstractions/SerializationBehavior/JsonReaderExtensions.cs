@@ -5,6 +5,7 @@ namespace Nest
 {
 	internal static class JsonReaderExtensions
 	{
+		// https://github.com/JamesNK/Newtonsoft.Json/issues/862
 		public static JToken ReadTokenWithDateParseHandlingNone(this JsonReader reader)
 		{
 			var dateParseHandling = reader.DateParseHandling;
