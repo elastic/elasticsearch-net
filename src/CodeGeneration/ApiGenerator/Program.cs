@@ -42,9 +42,6 @@ namespace ApiGenerator
 				RestSpecDownloader.Download(downloadBranch);
 
 			ApiGenerator.Generate(downloadBranch, "Core", "Graph", "License", "Security", "Watcher", "Info", "MachineLearning", "Migration");
-
-			//ApiGenerator.Generate(); //generates everything under ApiSpecification
 		}
-
 	}
 }

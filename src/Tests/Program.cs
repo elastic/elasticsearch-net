@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using Elastic.Managed;
 using FluentAssertions;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -21,7 +22,7 @@ namespace Tests
 	// (Relates to this issue: https://youtrack.jetbrains.com/issue/RSRP-464233)
 	// (See also https://github.com/elastic/elasticsearch-net/pull/2793)
 	// We provide an alternative StartupObject as part of the csproj for e.g `dotnet run` or executable output
-	// That will run the benchmarking/profiling.public class Program{ }
+	// That will run the benchmarking/profiling.
 	public class Program { }
 
 	public class BenchmarkProgram
