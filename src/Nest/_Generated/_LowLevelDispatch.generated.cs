@@ -2581,7 +2581,7 @@ namespace Nest
 			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{id}", "/_scripts/{id}/{context}");
 		}
 		
-		internal TResponse RankEvalDispatch<TResponse>(IRequest<RankEvalRequestParameters> p,SerializableData<IRankEvalRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		internal TResponse RankEvalDispatch<TResponse>(IRequest<RankingEvaluationRequestParameters> p,SerializableData<IRankingEvaluationRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
@@ -2594,7 +2594,7 @@ namespace Nest
 			throw InvalidDispatch("RankEval", p, new [] { POST }, "/_rank_eval", "/{index}/_rank_eval", "/{index}/{type}/_rank_eval");
 		}
 		
-		internal Task<TResponse> RankEvalDispatchAsync<TResponse>(IRequest<RankEvalRequestParameters> p,SerializableData<IRankEvalRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		internal Task<TResponse> RankEvalDispatchAsync<TResponse>(IRequest<RankingEvaluationRequestParameters> p,SerializableData<IRankingEvaluationRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
 			{
