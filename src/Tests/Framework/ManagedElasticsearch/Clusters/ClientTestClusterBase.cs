@@ -40,7 +40,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 
 			this.Add(this.AttributeKey("testingcluster"), "true");
 			this.Add(this.AttributeKey("gateway"), "true");
-			this.Add("search.remote.connect", "true");
+			this.Add("search.remote.connect", "true", ">=5.3.0");
 
 			this.Add($"script.max_compilations_per_minute", "10000", "<6.0.0-rc1");
 			this.Add($"script.max_compilations_rate", "10000/1m", ">=6.0.0-rc1");
