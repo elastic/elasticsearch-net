@@ -16,13 +16,13 @@ module Projects =
     type DotNetFramework = 
         | Net46 
         | NetStandard1_3
-        | NetCoreApp2_0
+        | NetCoreApp2_1
         static member All = [Net46; NetStandard1_3] 
         member this.Identifier = 
             match this with
             | Net46 -> { MSBuild = "v4.6"; Nuget = "net46"; DefineConstants = if not isMono then "TRACE;NET46" else "NET46"; }
             | NetStandard1_3 -> { MSBuild = "netstandard1.3"; Nuget = "netstandard1.3"; DefineConstants = if not isMono then "TRACE;DOTNETCORE" else "DOTNETCORE"; }
-            | NetCoreApp2_0 -> { MSBuild = "netcoreapp2.0"; Nuget = "netcoreapp2.0"; DefineConstants = if not isMono then "TRACE;DOTNETCORE" else "DOTNETCORE"; }
+            | NetCoreApp2_1 -> { MSBuild = "netcoreapp2.1"; Nuget = "netcoreapp2.1"; DefineConstants = if not isMono then "TRACE;DOTNETCORE" else "DOTNETCORE"; }
 
     type Project =
         | Nest
