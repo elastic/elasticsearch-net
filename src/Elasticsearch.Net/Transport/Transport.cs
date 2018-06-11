@@ -43,7 +43,7 @@ namespace Elasticsearch.Net
 			this.Settings = configurationValues;
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
 			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net.DateTimeProvider.Default;
-			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
+			this.MemoryStreamFactory = memoryStreamFactory ?? configurationValues.MemoryStreamFactory;
 		}
 
 		public TResponse Request<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)

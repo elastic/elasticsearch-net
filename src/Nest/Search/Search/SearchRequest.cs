@@ -154,7 +154,7 @@ namespace Nest
 	}
 
 	/// <summary>
-	/// A descriptor wich describes a search operation for _search and _msearch
+	/// A descriptor which describes a search operation for _search and _msearch
 	/// </summary>
 	public partial class SearchDescriptor<T> where T : class
 	{

@@ -107,6 +107,7 @@ namespace Elasticsearch.Net
 
 		public bool Refresh { get; private set; }
 
+		// TODO: rename to DepeletedRetries in 7.x
 		public bool DepleededRetries => this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong;
 
 		private Auditable Audit(AuditEvent type) => new Auditable(type, this.AuditTrail, this._dateTimeProvider);
@@ -258,7 +259,7 @@ namespace Elasticsearch.Net
 				EnableHttpPipelining = this.RequestConfiguration?.EnableHttpPipelining ?? this._settings.HttpPipeliningEnabled,
 				ForceNode = this.RequestConfiguration?.ForceNode
 			};
-			IRequestParameters requestParameters = new RootNodeInfoRequestParameters { };
+			IRequestParameters requestParameters = new RootNodeInfoRequestParameters();
 			requestParameters.RequestConfiguration = requestOverrides;
 
 			var data = new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestParameters, this._memoryStreamFactory) { Node = node };

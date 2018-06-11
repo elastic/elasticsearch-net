@@ -104,7 +104,7 @@ namespace Tests.XPack.Watcher.DeleteWatch
 
 		protected override void ExpectResponse(IDeleteWatchResponse response)
 		{
-			//This API returns different results depending on wheter `.watches` exists or not
+			//This API returns different results depending on whether `.watches` exists or not
 			if (response.ServerError?.Status == 404)
 			{
 				response.ServerError.Error.Reason.Should().Be("no such index");

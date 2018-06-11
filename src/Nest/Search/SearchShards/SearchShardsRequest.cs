@@ -7,7 +7,7 @@
 	public partial class SearchShardsRequest<T> where T : class { }
 
 	/// <summary>
-	/// A descriptor wich describes a search operation for _search_shards
+	/// A descriptor which describes a search operation for _search_shards
 	/// </summary>
 	public partial class SearchShardsDescriptor<T> where T : class { }
 }

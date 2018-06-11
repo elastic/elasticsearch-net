@@ -198,7 +198,7 @@ namespace Tests.Framework
 			modifySettings = modifySettings ?? ((m) =>
 			{
 
-				//only enable debug mode when running in DEBUG mode (always) or optionally wheter we are executing unit tests
+				//only enable debug mode when running in DEBUG mode (always) or optionally whether we are executing unit tests
 				//during RELEASE builds tests
 #if !DEBUG
 			if (TestClient.Configuration.RunUnitTests)

@@ -19,6 +19,5 @@ namespace Nest.JsonNetSerializer
 			: base(builtinSerializer, connectionSettings, jsonSerializerSettingsFactory, modifyContractResolver, contractJsonConverters)
 		{
 		}
-
 	}
 }
