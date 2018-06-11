@@ -1,5 +1,5 @@
 ﻿#I @"../../packages/build/FAKE/tools"
-#I @"../../packages/build/FSharp.Data/lib/net40"
+#I @"../../packages/build/FSharp.Data/lib/net45"
 #I @"../../packages/build/Mono.Cecil/lib/net40"
 #r @"FakeLib.dll"
 #r @"Mono.Cecil.dll"
