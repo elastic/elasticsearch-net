@@ -88,7 +88,7 @@ namespace DocGenerator.Buildalyzer.Environment
 				sw.Start();
 				while (!process.HasExited)
 				{
-					if (sw.ElapsedMilliseconds > 1000)
+					if (sw.ElapsedMilliseconds > 4000)
 					{
 						break;
 					}
