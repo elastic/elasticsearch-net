@@ -143,12 +143,12 @@ module Benchmarker =
                 DotNetCli.RunCommand(fun p ->
                     { p with
                         WorkingDir = testsProjectDirectory
-                    }) "run -f net46 -c Release Benchmark"
+                    }) "run -f netcoreapp2.1 -c Release Benchmark"
              else
                 DotNetCli.RunCommand(fun p ->
                     { p with
                         WorkingDir = testsProjectDirectory
-                    }) "run -f net46 -c Release Benchmark non-interactive"
+                    }) "run -f netcoreapp2.1 -c Release Benchmark non-interactive"
         finally
             // running benchmarks can timeout so clean up any generated benchmark files
             let benchmarkOutputFiles =
