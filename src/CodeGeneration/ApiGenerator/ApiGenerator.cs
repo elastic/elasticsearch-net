@@ -55,6 +55,7 @@ namespace ApiGenerator
 			"xpack.ml.delete_filter.json",
 			"xpack.ml.get_filters.json",
 			"xpack.ml.put_filter.json",
+			"rank_eval.json"
 		};
 
 		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)

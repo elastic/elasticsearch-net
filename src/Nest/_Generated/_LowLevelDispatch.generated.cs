@@ -2581,32 +2581,6 @@ namespace Nest
 			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{id}", "/_scripts/{id}/{context}");
 		}
 		
-		internal TResponse RankEvalDispatch<TResponse>(IRequest<RankEvalRequestParameters> p,SerializableData<IRankEvalRequest> body) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.RankEval<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.RankEval<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
-					return _lowLevel.RankEval<TResponse>(body,p.RequestParameters);
-
-			}
-			throw InvalidDispatch("RankEval", p, new [] { POST }, "/_rank_eval", "/{index}/_rank_eval", "/{index}/{type}/_rank_eval");
-		}
-		
-		internal Task<TResponse> RankEvalDispatchAsync<TResponse>(IRequest<RankEvalRequestParameters> p,SerializableData<IRankEvalRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.RankEvalAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.RankEvalAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
-					return _lowLevel.RankEvalAsync<TResponse>(body,p.RequestParameters,ct);
-
-			}
-			throw InvalidDispatch("RankEval", p, new [] { POST }, "/_rank_eval", "/{index}/_rank_eval", "/{index}/{type}/_rank_eval");
-		}
-		
 		internal TResponse ReindexDispatch<TResponse>(IRequest<ReindexOnServerRequestParameters> p,SerializableData<IReindexOnServerRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
