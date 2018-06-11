@@ -14,6 +14,6 @@ namespace Tests.Framework.MockData
 				.UseSeed(TestClient.Configuration.Seed)
 				.RuleFor(p => p.Name, p => p.Lorem.Words(1).First())
 				.RuleFor(p => p.Added, p => p.Date.Recent())
-			;
+			.Clone();
 	}
 }
