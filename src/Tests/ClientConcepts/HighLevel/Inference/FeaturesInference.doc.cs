@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using static Nest.Indices;

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework;
 using static Elasticsearch.Net.AuditEvent;
 

@@ -1,6 +1,7 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 #r "System.Xml.Linq.dll"
+#nowarn "0044" //TODO sort out FAKE 5
 
 #load @"Paths.fsx"
 

@@ -18,10 +18,10 @@ namespace Tests.Framework
 	{
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 
-		readonly ClusterBase _cluster;
+		readonly ClientTestClusterBase _cluster;
 		protected IElasticClient Client => this._cluster.Client;
 
-		protected IntegrationDocumentationTestBase(ClusterBase cluster)
+		protected IntegrationDocumentationTestBase(ClientTestClusterBase cluster)
 		{
 			this._cluster = cluster;
 		}

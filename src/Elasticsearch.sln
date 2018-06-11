@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nest", "Nest\Nest.csproj", "{072BA7DA-7B60-407D-8B6E-95E3186BE70C}"
 EndProject
@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\.editorconfig = ..\.editorconfig
 		..\.gitignore = ..\.gitignore
 		..\.travis.yml = ..\.travis.yml
+		..\appveyor.yml = ..\appveyor.yml
 		..\build.bat = ..\build.bat
 		..\build.sh = ..\build.sh
 		..\build\Clients.Common.targets = ..\build\Clients.Common.targets
@@ -18,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\global.json = ..\global.json
 		..\license.txt = ..\license.txt
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
+		..\NuGet.config = ..\NuGet.config
 		..\paket.bat = ..\paket.bat
 		..\paket.dependencies = ..\paket.dependencies
 		..\readme.md = ..\readme.md

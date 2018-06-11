@@ -18,7 +18,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 
 			var createRepository = this.Client.CreateRepository(RepositoryName, r => r
 				.FileSystem(fs => fs
-					.Settings(Path.Combine(cluster.Node.FileSystem.RepositoryPath, RepositoryName))
+					.Settings(Path.Combine(cluster.FileSystem.RepositoryPath, RepositoryName))
 				)
 			);
 			if (!createRepository.IsValid)

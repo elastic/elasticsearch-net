@@ -1,6 +1,7 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 #r @"System.IO.Compression.FileSystem.dll"
+#nowarn "0044" //TODO sort out FAKE 5
 
 open System
 open System.IO
@@ -17,10 +18,6 @@ Fake.ProcessHelper.redirectOutputToTrace <-true
 module Tooling = 
     open Paths
     open Projects
-
-    let private fileDoesNotExist path = path |> Path.GetFullPath |> File.Exists |> not
-    let private dirDoesNotExist path = path |> Path.GetFullPath |> Directory.Exists |> not
-    let private doesNotExist path = (fileDoesNotExist path) && (dirDoesNotExist path)
 
     (* helper functions *)
     #if mono_posix
@@ -80,7 +77,6 @@ module Tooling =
 
     let execProcess proc arguments = execProcessInDirectory proc arguments "."
 
-
     let execProcessAndReturnMessages proc arguments =
         execProcessWithTimeoutAndReturnMessages proc arguments defaultTimeout
 
@@ -101,6 +97,9 @@ module Tooling =
         member this.Exec arguments = execProcess this.Path arguments
         member this.ExecIn workingDirectory arguments = this.ExecWithTimeoutIn workingDirectory arguments defaultTimeout
         member this.ExecWithTimeoutIn workingDirectory arguments timeout = execProcessWithTimeout this.Path arguments timeout workingDirectory
+
+    let Nuget = new BuildTooling(nugetFile)
+    let ILRepack = new BuildTooling("packages/build/ILRepack/tools/ILRepack.exe")
 
     type DotTraceTool = {
         Name:string;
@@ -140,76 +139,19 @@ module Tooling =
         let toolPath = commandLineTool @@ path
         member this.Exec arguments = execAt Environment.CurrentDirectory toolPath arguments
 
-    let Nuget = new BuildTooling(nugetFile)
-    let GitLink = new BuildTooling(Paths.Tool("gitlink/lib/net45/gitlink.exe"))
-    let Node = new BuildTooling(Paths.Tool("Node.js/node.exe"))
-    let Npm = new BuildTooling(Paths.Tool("Npm/node_modules/npm/cli.js"))
-    let XUnit = new BuildTooling(Paths.Tool("xunit.runner.console/tools/xunit.console.exe"))
     let DotTraceProfiler = new ProfilerTooling("ConsoleProfiler.exe")
     let DotTraceReporter = new ProfilerTooling("Reporter.exe")
     let DotTraceSnapshotStats = new ProfilerTooling("SnapshotStat.exe")
 
-    //only used to boostrap fake itself
-    let Fake = new BuildTooling("FAKE/tools/FAKE.exe")
-
-    type DotNetRuntime = | Desktop | Core | Both
-
     type DotNetTooling(exe) =
-       member this.Exec arguments =
+        member this.Exec arguments =
             this.ExecWithTimeout arguments (TimeSpan.FromMinutes 30.)
 
         member this.ExecWithTimeout arguments timeout =
             let result = execProcessWithTimeout exe arguments timeout "."
             if result <> 0 then failwith (sprintf "Failed to run dotnet tooling for %s args: %A" exe arguments)
 
-    let DotNet = new DotNetTooling("dotnet.exe")
-
-    type MsBuildTooling() =
-        // Exclude DocGenerator from .NET 4.5 build as it depends on a Roslyn library
-        // that is built against .NET 4.5.2
-        let solutionForFramework framework =
-            match framework with
-            | Net45 -> Paths.Source "Elasticsearch.Net45.sln"
-            | _ -> Paths.Source "Elasticsearch.sln"  
-
-        member this.Build (framework:Projects.DotNetFramework) =            
-            let solution = solutionForFramework framework 
-            let identifier = framework.Identifier
-            let setParams defaults =
-                { defaults with
-                    Verbosity = Some(Quiet)
-                    Targets = ["Build"]
-                    Properties =
-                        [
-                            "OutputPathBaseDir", Path.GetFullPath "build\\output"
-                            "Optimize", "True"
-                            "Configuration", "Release"
-                            "TargetFrameworkVersion", identifier.MSBuild
-                            "DefineConstants", identifier.DefineConstants
-                        ]
-                 }
-            build setParams solution 
-
-        member this.Rebuild (framework:Projects.DotNetFramework) = 
-            let solution = solutionForFramework framework              
-            let identifier = framework.Identifier               
-            let setParams defaults =
-                { defaults with
-                    Verbosity = Some(Quiet)
-                    Targets = ["Rebuild"]
-                    Properties =
-                        [
-                            "OutputPathBaseDir", Path.GetFullPath "build\\output"
-                            "Optimize", "True"
-                            "Configuration", "Release"
-                            "TargetFrameworkVersion", identifier.MSBuild
-                            "DefineConstants", identifier.DefineConstants
-                        ]
-                 }
-        
-            build setParams solution 
-
-    let MsBuild = new MsBuildTooling()
+    let DotNet = DotNetTooling("dotnet.exe")
 
     type DiffTooling(exe) =       
         let installPath = "C:\Program Files (x86)\Progress\JustAssembly\Libraries"  
@@ -223,5 +165,5 @@ module Tooling =
             let result = execProcessWithTimeout toolPath arguments (TimeSpan.FromMinutes 5.) "."
             if result <> 0 then failwith (sprintf "Failed to run diff tooling for %s args: %A" exe arguments)
             
-    let JustAssembly = new DiffTooling("JustAssembly.CommandLineTool.exe")      
+    let JustAssembly = DiffTooling("JustAssembly.CommandLineTool.exe")      
     

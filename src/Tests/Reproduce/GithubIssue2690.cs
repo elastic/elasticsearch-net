@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
 using Tests.Framework;
 
 namespace Tests.Reproduce

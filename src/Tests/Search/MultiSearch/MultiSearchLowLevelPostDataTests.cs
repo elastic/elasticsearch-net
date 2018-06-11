@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -15,7 +16,7 @@ using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
-	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>
+	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>, IClassFixture<EndpointUsage>
 	{
 		private IElasticClient _client;
 

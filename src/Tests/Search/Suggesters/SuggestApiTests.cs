@@ -16,6 +16,8 @@ namespace Tests.Search.Suggesters
 	/** == Suggest API
 
 	*/
+	//TODO build seed:85405 integrate 5.6.0 "readonly" "suggest"
+	// selects a phrase suggest text that returns no options
 	public class SuggestApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{

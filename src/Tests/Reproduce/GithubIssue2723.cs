@@ -4,6 +4,7 @@ using FluentAssertions;
 using Tests.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 
 namespace Tests.Reproduce

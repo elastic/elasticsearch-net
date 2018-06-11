@@ -1,10 +1,11 @@
 ﻿#I @"../../packages/build/FAKE/tools"
-#r "../../packages/build/FSharp.Data/lib/net40/FSharp.Data.dll"
-#r "../../packages/build/NEST/lib/net45/Nest.dll"
-#r "../../packages/build/Elasticsearch.Net/lib/net45/Elasticsearch.Net.dll"
+#r "../../packages/build/FSharp.Data/lib/net45/FSharp.Data.dll"
+#r "../../packages/build/NEST/lib/net46/Nest.dll"
+#r "../../packages/build/Elasticsearch.Net/lib/net46/Elasticsearch.Net.dll"
 #r "../../packages/build/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
 #r @"FakeLib.dll"
 #r @"System.Xml.Linq.dll"
+#nowarn "0044" //TODO sort out FAKE 5
 
 #load @"Projects.fsx"
 #load @"Paths.fsx"

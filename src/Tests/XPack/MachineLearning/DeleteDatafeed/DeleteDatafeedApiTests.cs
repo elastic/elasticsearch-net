@@ -11,7 +11,7 @@ namespace Tests.XPack.MachineLearning.DeleteDatafeed
 {
 	public class DeleteDatafeedApiTests : MachineLearningIntegrationTestBase<IDeleteDatafeedResponse, IDeleteDatafeedRequest, DeleteDatafeedDescriptor, DeleteDatafeedRequest>
 	{
-		public DeleteDatafeedApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

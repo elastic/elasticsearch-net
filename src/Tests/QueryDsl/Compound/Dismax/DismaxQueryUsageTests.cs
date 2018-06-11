@@ -4,6 +4,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Tests.Framework;
 using System;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 

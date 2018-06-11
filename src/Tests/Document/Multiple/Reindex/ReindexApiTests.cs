@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -15,27 +16,27 @@ using Xunit;
 
 namespace Tests.Document.Multiple.Reindex
 {
-	public class ReindexCluster : ClusterBase
+	public class ReindexCluster : ClientTestClusterBase
 	{
-		protected override void SeedNode()
+		protected override void SeedCluster()
 		{
-			var seeder = new DefaultSeeder(this.Node);
+			var seeder = new DefaultSeeder(this.Client);
 			seeder.DeleteIndicesAndTemplates();
 			seeder.CreateIndices();
 		}
 	}
 
-	public class ManualReindexCluster : ClusterBase
+	public class ManualReindexCluster : ClientTestClusterBase
 	{
-		protected override void SeedNode()
+		protected override void SeedCluster()
 		{
-			var seeder = new DefaultSeeder(this.Node);
+			var seeder = new DefaultSeeder(this.Client);
 			seeder.DeleteIndicesAndTemplates();
 			seeder.CreateIndices();
 		}
 	}
 
-	public class ReindexApiTests : SerializationTestBase, IClusterFixture<ManualReindexCluster>
+	public class ReindexApiTests : SerializationTestBase, IClusterFixture<ManualReindexCluster>, IClassFixture<EndpointUsage>
 	{
 		private readonly IObservable<IBulkAllResponse> _reindexManyTypesResult;
 		private readonly IObservable<IBulkAllResponse> _reindexSingleTypeResult;

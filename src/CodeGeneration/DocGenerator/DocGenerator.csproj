@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!-- TODO could be netcoreapp1.0 but we have 3 compiler issues, 
     since a huge refactoring is going on in a branch not attemping to fix these right now-->

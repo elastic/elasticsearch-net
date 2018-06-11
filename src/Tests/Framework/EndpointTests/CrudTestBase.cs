@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using Elastic.Managed.Ephemeral;
+using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -18,7 +21,7 @@ namespace Tests.Framework
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
 	{
-	    protected CrudWithNoDeleteTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
+	    protected CrudWithNoDeleteTestBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsDeletes => false;
 	}
 
@@ -29,13 +32,13 @@ namespace Tests.Framework
 			where TUpdateResponse : class, IResponse
 			where TDeleteResponse : class, IResponse
 	{
-		protected CrudTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage)
+		protected CrudTestBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 	}
 
-	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse> : IClusterFixture<TCluster>
-			where TCluster : ClusterBase, new()
+	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse> : IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
+			where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
@@ -48,13 +51,12 @@ namespace Tests.Framework
 		private readonly LazyResponses _deleteResponse;
 		private readonly LazyResponses _deleteGetResponse;
 
-		private readonly ClusterBase _cluster;
+		private readonly TCluster _cluster;
 
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "Expected behaviour")]
-		protected CrudTestBase(ClusterBase cluster, EndpointUsage usage)
+		protected CrudTestBase(TCluster cluster, EndpointUsage usage)
 		{
 			this._cluster = cluster;
-			this.IntegrationPort = cluster.Node.Port;
 			this._createResponse = usage.CallOnce(this.Create, 1);
 			this._createGetResponse = usage.CallOnce(this.Read, 2);
 			this._updateResponse = usage.CallOnce(this.Update, 3);
@@ -110,7 +112,6 @@ namespace Tests.Framework
 
 		protected virtual string Sanitize(string randomString) => randomString + "-" + this.GetType().Name.Replace("CrudTests", "").ToLowerInvariant();
 
-		protected int IntegrationPort { get; set; } = 9200;
 		protected virtual IElasticClient Client => this._cluster.Client;
 
 		protected async Task AssertOnAllResponses<TResponse>(LazyResponses responses, Action<TResponse> assert)

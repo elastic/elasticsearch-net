@@ -1,12 +1,12 @@
-﻿using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Tests.Framework.ManagedElasticsearch.Plugins;
+﻿using Tests.Framework.ManagedElasticsearch.NodeSeeders;
+using static Elastic.Managed.Ephemeral.Plugins.ElasticsearchPlugin;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
-	[RequiresPlugin(ElasticsearchPlugin.MapperMurmer3)]
-	public class ReadOnlyCluster : ClusterBase
+	public class ReadOnlyCluster : ClientTestClusterBase
 	{
-		protected override void SeedNode() => new DefaultSeeder(this.Node).SeedNode();
+		public ReadOnlyCluster() : base(MapperMurmur3) { }
+
+		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
 	}
 }

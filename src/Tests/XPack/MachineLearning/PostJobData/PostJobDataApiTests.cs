@@ -12,7 +12,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 {
 	public class PostJobDataApiTests : MachineLearningIntegrationTestBase<IPostJobDataResponse, IPostJobDataRequest, PostJobDataDescriptor, PostJobDataRequest>
 	{
-		public PostJobDataApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PostJobDataApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -105,7 +105,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 
 	public class PostJobDataWithResetStartAndResetEndApiTests : MachineLearningIntegrationTestBase<IPostJobDataResponse, IPostJobDataRequest, PostJobDataDescriptor, PostJobDataRequest>
 	{
-		public PostJobDataWithResetStartAndResetEndApiTests(XPackMachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PostJobDataWithResetStartAndResetEndApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
