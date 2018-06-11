@@ -1,6 +1,6 @@
 language: csharp
 solution: src/Elasticsearch.sln
-script: ./build.sh test
+script: ./build.sh test-one skipdocs
 dist: trusty
 mono: 4.6.2
 dotnet: 2.1.300
