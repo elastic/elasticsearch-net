@@ -12,10 +12,13 @@ namespace Elasticsearch.Net
 		/// <summary> Provides a semaphoreslim to transport implementations that need to limit access to a resource</summary>
 		SemaphoreSlim BootstrapLock { get; }
 
-		/// <summary> The connection pool to use when talking with elasticsearch </summary>
+		/// <summary> Provides a memory stream factory</summary>
+		IMemoryStreamFactory MemoryStreamFactory { get; }
+
+		/// <summary> The connection pool to use when talking with Elasticsearch </summary>
 		IConnectionPool ConnectionPool { get; }
 
-		/// <summary> The connection implementation to use when talking with elasticsearch </summary>
+		/// <summary> The connection implementation to use when talking with Elasticsearch </summary>
 		IConnection Connection { get; }
 
 		/// <summary>The serializer to use to serialize requests and deserialize responses</summary>

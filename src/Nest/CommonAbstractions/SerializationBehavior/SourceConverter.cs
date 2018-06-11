@@ -27,7 +27,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var token = reader.ReadTokenWithDateParseHandlingNone();
-			using (var ms = token.ToStream())
+			using (var ms = token.ToStream(serializer.GetConnectionSettings().MemoryStreamFactory))
 				return serializer.GetConnectionSettings().SourceSerializer.Deserialize(objectType, ms);
 		}
 	}

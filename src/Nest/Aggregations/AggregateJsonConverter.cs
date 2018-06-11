@@ -248,16 +248,14 @@ namespace Nest
 			if (o == null)
 				return null;
 			var geoBoundsMetric = new GeoBoundsAggregate();
-			JToken topLeftToken;
-			if (o.TryGetValue(Parser.TopLeft, out topLeftToken) && topLeftToken != null)
+			if (o.TryGetValue(Parser.TopLeft, out var topLeftToken) && topLeftToken != null)
 			{
 				var topLeft = topLeftToken.ToObject<LatLon>();
 				if (topLeft != null)
 					geoBoundsMetric.Bounds.TopLeft = topLeft;
 			}
 
-			JToken bottomRightToken;
-			if (o.TryGetValue(Parser.BottomRight, out bottomRightToken) && bottomRightToken != null)
+			if (o.TryGetValue(Parser.BottomRight, out var bottomRightToken) && bottomRightToken != null)
 			{
 				var bottomRight = bottomRightToken.ToObject<LatLon>();
 				if (bottomRight != null)

@@ -2,13 +2,19 @@
 
 namespace Elasticsearch.Net
 {
+	/// <summary>
+	/// A factory for creating memory streams
+	/// </summary>
 	public interface IMemoryStreamFactory
 	{
+		/// <summary>
+		/// Creates a memory stream
+		/// </summary>
 		MemoryStream Create();
-	}
 
-	public class MemoryStreamFactory : IMemoryStreamFactory
-	{
-		public MemoryStream Create() => new MemoryStream();
+		/// <summary>
+		/// Creates a memory stream with the bytes written to the stream
+		/// </summary>
+		MemoryStream Create(byte[] bytes);
 	}
 }

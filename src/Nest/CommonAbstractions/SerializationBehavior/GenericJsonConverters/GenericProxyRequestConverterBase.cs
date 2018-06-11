@@ -12,10 +12,8 @@ namespace Nest
 	{
 		private readonly Type _genericRequestType;
 
-		protected GenericProxyRequestConverterBase(Type genericRequestType)
-		{
+		protected GenericProxyRequestConverterBase(Type genericRequestType) =>
 			_genericRequestType = genericRequestType;
-		}
 
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
@@ -24,7 +22,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var token = reader.ReadTokenWithDateParseHandlingNone();
-			using (var ms = token.ToStream())
+			using (var ms = token.ToStream(serializer.GetConnectionSettings().MemoryStreamFactory))
 			{
                 //not optimized but deserializing create requests is far from common practice
                 var genericType = objectType.GetTypeInfo().GenericTypeArguments[0];

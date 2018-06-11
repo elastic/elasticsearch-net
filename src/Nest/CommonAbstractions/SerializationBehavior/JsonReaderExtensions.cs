@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
@@ -6,6 +7,7 @@ namespace Nest
 	internal static class JsonReaderExtensions
 	{
 		// https://github.com/JamesNK/Newtonsoft.Json/issues/862
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static JToken ReadTokenWithDateParseHandlingNone(this JsonReader reader)
 		{
 			var dateParseHandling = reader.DateParseHandling;

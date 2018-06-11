@@ -47,7 +47,7 @@ namespace Elasticsearch.Net
 			var data = requestData.PostData;
 			if (data != null)
 			{
-				using (var stream = new MemoryStream())
+				using (var stream = requestData.MemoryStreamFactory.Create())
 				{
 					if (requestData.HttpCompression)
 						using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
@@ -59,7 +59,7 @@ namespace Elasticsearch.Net
 			requestData.MadeItToResponse = true;
 
 			var sc = statusCode ?? this._statusCode;
-			Stream s = (body != null) ? new MemoryStream(body) : new MemoryStream(EmptyBody);
+			Stream s = (body != null) ? requestData.MemoryStreamFactory.Create(body) : requestData.MemoryStreamFactory.Create(EmptyBody);
 			return ResponseBuilder.ToResponse<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType ?? RequestData.MimeType);
 		}
 
@@ -70,7 +70,7 @@ namespace Elasticsearch.Net
 			var data = requestData.PostData;
 			if (data != null)
 			{
-				using (var stream = new MemoryStream())
+				using (var stream = requestData.MemoryStreamFactory.Create())
 				{
 					if (requestData.HttpCompression)
 						using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
@@ -82,7 +82,7 @@ namespace Elasticsearch.Net
 			requestData.MadeItToResponse = true;
 
 			var sc = statusCode ?? this._statusCode;
-			Stream s = (body != null) ? new MemoryStream(body) : new MemoryStream(EmptyBody);
+			Stream s = (body != null) ? requestData.MemoryStreamFactory.Create(body) : requestData.MemoryStreamFactory.Create(EmptyBody);
 			return await ResponseBuilder.ToResponseAsync<TResponse>(requestData, _exception, sc, null, s, contentType ?? _contentType, cancellationToken)
 				.ConfigureAwait(false);
 		}
