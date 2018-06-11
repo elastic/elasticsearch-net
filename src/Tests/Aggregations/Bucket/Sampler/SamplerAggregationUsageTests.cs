@@ -62,7 +62,7 @@ namespace Tests.Aggregations.Bucket.Sampler
 			var sigTags = sample.SignificantTerms("significant_names");
 			sigTags.Should().NotBeNull();
 			sigTags.DocCount.Should().BeGreaterThan(0);
-			if (TestClient.VersionUnderTestSatisfiedBy(">=5.5.0"))
+			if (TestClient.Configuration.ElasticsearchVersion.InRange(">=5.5.0"))
 				sigTags.BgCount.Should().BeGreaterThan(0);
 		}
 	}

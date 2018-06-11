@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Aggregations/Bucket/Sampler/SamplerAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/feature/net-abstractions-6x/src/Tests/Aggregations/Bucket/Sampler/SamplerAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -74,7 +74,7 @@ sample.Should().NotBeNull();
 var sigTags = sample.SignificantTerms("significant_names");
 sigTags.Should().NotBeNull();
 sigTags.DocCount.Should().BeGreaterThan(0);
-if (TestClient.VersionUnderTestSatisfiedBy(">=5.5.0"))
+if (TestClient.Configuration.ElasticsearchVersion.InRange(">=5.5.0"))
     sigTags.BgCount.Should().BeGreaterThan(0);
 ----
 

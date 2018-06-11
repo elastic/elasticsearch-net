@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+using System.Reflection;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;

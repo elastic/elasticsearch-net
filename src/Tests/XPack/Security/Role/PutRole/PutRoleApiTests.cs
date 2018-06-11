@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elastic.Managed.Ephemeral;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -117,7 +119,7 @@ namespace Tests.XPack.Security.Role.PutRole
 				var request = base.Initializer;
 				request.RequestConfiguration = new RequestConfiguration
 				{
-					RunAs = ShieldInformation.User.Username
+					RunAs = ClusterAuthentication.User.Username
 				};
 				return request;
 			}
@@ -125,7 +127,7 @@ namespace Tests.XPack.Security.Role.PutRole
 
 		protected override Func<PutRoleDescriptor, IPutRoleRequest> Fluent => f => base.Fluent(f
 			.RequestConfiguration(c => c
-				.RunAs(ShieldInformation.User.Username)
+				.RunAs(ClusterAuthentication.User.Username)
 			));
 
 		protected override void ExpectResponse(IPutRoleResponse response)

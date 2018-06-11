@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;

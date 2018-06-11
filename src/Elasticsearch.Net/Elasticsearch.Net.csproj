@@ -2,8 +2,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\build\Clients.Common.targets" />
   <PropertyGroup>
-    <TargetFrameworks Condition="'$(DotNetCoreOnly)'==''">net45;net46;netstandard1.3</TargetFrameworks>
-    <TargetFrameworks Condition="'$(DotNetCoreOnly)'=='1'">netstandard1.3</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard1.3;net46</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.3</TargetFrameworks>
+    <DefineConstants Condition="'$(TargetFramework)'=='net46'">$(DefineConstants);FEATURE_HTTPWEBREQUEST</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard1.3'">
     <Reference Include="Microsoft.CSharp" />

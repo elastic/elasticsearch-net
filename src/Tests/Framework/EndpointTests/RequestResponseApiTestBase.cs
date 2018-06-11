@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Elastic.Managed;
+using Elastic.Managed.Ephemeral;
 using Nest;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
+using Xunit;
 
 namespace Tests.Framework
 {
-	public abstract class RequestResponseApiTestBase<TResponse, TInterface, TDescriptor, TInitializer>
-		: SerializationTestBase where TResponse : class, IResponse where TInterface : class where TDescriptor : class, TInterface where TInitializer : class, TInterface
+	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
+		: SerializationTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
+		where TCluster : ICluster<EphemeralClusterConfiguration> , new()
+		where TResponse : class, IResponse
+		where TInterface : class
+		where TDescriptor : class, TInterface
+		where TInitializer : class, TInterface
 	{
 		private readonly EndpointUsage _usage;
 
@@ -32,18 +41,19 @@ namespace Tests.Framework
 		protected CallUniqueValues UniqueValues { get; }
 		protected LazyResponses Responses { get; }
 
-		protected override IElasticClient Client => TestClient.DefaultInMemoryClient;
+		public override IElasticClient Client => TestClient.DefaultInMemoryClient;
 
 		protected abstract LazyResponses ClientUsage();
 
-        protected ClusterBase Cluster { get; }
+        public TCluster Cluster { get; }
 
-		protected RequestResponseApiTestBase(ClusterBase cluster, EndpointUsage usage) : base(usage)
+		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage) : base(usage)
 		{
 			this._usage = usage ?? throw new ArgumentNullException(nameof(usage));
 
-			this.Cluster = cluster ?? throw new ArgumentNullException(nameof(cluster));
-			this.Responses = usage.CallOnce(this.ClientUsage);
+			if (cluster == null) throw new ArgumentNullException(nameof(cluster));
+			this.Cluster = cluster;
+			this.Responses = usage.CallOnce(this.ClientUsage, 0);
 			this.UniqueValues = usage.CallUniqueValues;
 		}
 
@@ -54,11 +64,9 @@ namespace Tests.Framework
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
 		)
 		{
-			//this client is outside the lambda so that the callstack is one where we can get the method name
-			//of the current running test and send that as a header, great for e.g fiddler to relate requests with the test that sent it
-			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
+				var client = this.Client;
 				if (TestClient.Configuration.RunIntegrationTests)
 				{
 					this.IntegrationSetup(client, UniqueValues);
@@ -109,8 +117,10 @@ namespace Tests.Framework
 					assert(response);
 				}
 #pragma warning disable 7095 //enable this if you expect a single overload to act up
+#pragma warning disable 8360
 				catch (Exception ex) when (false)
 #pragma warning restore 7095
+#pragma warning restore 8360
 #pragma warning disable 0162 //dead code while the previous exception filter is false
 				{
 					throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);

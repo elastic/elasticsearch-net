@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;

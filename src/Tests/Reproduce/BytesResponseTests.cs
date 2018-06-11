@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Reactive.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using Elastic.Xunit.Sdk;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
-using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
-using Xunit;
 
 namespace Tests.Reproduce
 {
@@ -33,7 +26,7 @@ namespace Tests.Reproduce
 
 		[I] public void NonNullBytesLowLevelResponse()
 		{
-			var settings  = new ConnectionConfiguration(new Uri($"http://localhost:{_cluster.DesiredPort}"));
+			var settings  = new ConnectionConfiguration(new Uri($"http://localhost:{_cluster.Nodes.First().Port ?? 9200}"));
 			var lowLevelClient = new ElasticLowLevelClient(settings);
 
 			var bytesResponse = lowLevelClient.Search<BytesResponse>("project", "project", PostData.Serializable(new { }));

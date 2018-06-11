@@ -1,11 +1,13 @@
 ﻿using System;
+using Elastic.Managed.Ephemeral;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
+using static Elastic.Managed.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.Authenticate
 {
@@ -31,8 +33,8 @@ namespace Tests.XPack.Security.Authenticate
 
 		protected override void ExpectResponse(IAuthenticateResponse response)
 		{
-			response.Username.Should().Be(ShieldInformation.Admin.Username);
-			response.Roles.Should().Contain(ShieldInformation.Admin.Role);
+			response.Username.Should().Be(Admin.Username);
+			response.Roles.Should().Contain(Admin.Role);
 		}
 	}
 
@@ -47,21 +49,21 @@ namespace Tests.XPack.Security.Authenticate
 			{
 				BasicAuthenticationCredentials = new BasicAuthenticationCredentials
 				{
-					Username = ShieldInformation.User.Username,
-					Password = ShieldInformation.User.Password
+					Username = ClusterAuthentication.User.Username,
+					Password = ClusterAuthentication.User.Password
 				}
 			}
 		};
 
 		protected override Func<AuthenticateDescriptor, IAuthenticateRequest> Fluent => f => f
 			.RequestConfiguration(c=>c
-				.BasicAuthentication(ShieldInformation.User.Username, ShieldInformation.User.Password)
+				.BasicAuthentication(ClusterAuthentication.User.Username, ClusterAuthentication.User.Password)
 			);
 
 		protected override void ExpectResponse(IAuthenticateResponse response)
 		{
-			response.Username.Should().Be(ShieldInformation.User.Username);
-			response.Roles.Should().Contain(ShieldInformation.User.Role);
+			response.Username.Should().Be(ClusterAuthentication.User.Username);
+			response.Roles.Should().Contain(ClusterAuthentication.User.Role);
 		}
 	}
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -46,11 +47,11 @@ namespace Tests.XPack.Security.Role.ClearCachedRoles
 
 		protected override void ExpectResponse(IClearCachedRolesResponse response)
 		{
-			response.ClusterName.Should().StartWith("xpack-cluster-");
+			response.ClusterName.Should().NotBeNullOrWhiteSpace();
 			response.Nodes.Should().NotBeEmpty().And.HaveCount(1);
 			var node = response.Nodes.First().Value;
 			node.Should().NotBeNull();
-			node.Name.Should().StartWith("xpack-node-");
+			node.Name.Should().NotBeNullOrWhiteSpace();
 		}
 	}
 

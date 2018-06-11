@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -77,7 +78,7 @@ namespace Tests.Cluster.TaskManagement.TasksList
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var seeder = new DefaultSeeder(this.Cluster.Node);
+			var seeder = new DefaultSeeder(this.Cluster.Client);
 			seeder.SeedNode();
 
 			// get a suitable load of projects in order to get a decent task status out

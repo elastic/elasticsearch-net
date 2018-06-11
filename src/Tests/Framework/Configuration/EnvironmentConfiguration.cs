@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bogus;
-using Tests.Framework.Versions;
+using Elastic.Managed.Configuration;
 
 namespace Tests.Framework.Configuration
 {
@@ -27,7 +27,7 @@ namespace Tests.Framework.Configuration
 			var version = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 			if (!string.IsNullOrEmpty(version)) Mode = TestMode.Integration;
 
-			this.ElasticsearchVersion = ElasticsearchVersion.Create(string.IsNullOrWhiteSpace(version) ? DefaultVersion : version);
+			this.ElasticsearchVersion = ElasticsearchVersion.From(string.IsNullOrWhiteSpace(version) ? DefaultVersion : version);
 			this.ClusterFilter = Environment.GetEnvironmentVariable("NEST_INTEGRATION_CLUSTER");
 			this.TestFilter = Environment.GetEnvironmentVariable("NEST_TEST_FILTER");
 

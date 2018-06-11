@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -117,9 +118,11 @@ namespace Tests.ClientConcepts.Certificates
 		 */
 		public class CertgenCaCluster : SslAndKpiXPackCluster
 		{
+            public CertgenCaCluster() : this(new SslAndKpiClusterConfiguration()) { }
+            public CertgenCaCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 				.ServerCertificateValidationCallback(
-					CertificateValidations.AuthorityIsRoot(new X509Certificate(this.Node.FileSystem.CaCertificate))
+					CertificateValidations.AuthorityIsRoot(new X509Certificate(this.ClusterConfiguration.FileSystem.CaCertificate))
 				);
 		}
 
@@ -142,7 +145,7 @@ namespace Tests.ClientConcepts.Certificates
 		{
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 				.ServerCertificateValidationCallback(
-					CertificateValidations.AuthorityPartOfChain(new X509Certificate(this.Node.FileSystem.UnusedCaCertificate))
+					CertificateValidations.AuthorityPartOfChain(new X509Certificate(this.ClusterConfiguration.FileSystem.UnusedCaCertificate))
 				);
 		}
 
@@ -192,20 +195,23 @@ namespace Tests.ClientConcepts.Certificates
 		 */
 		public class PkiCluster : CertgenCaCluster
 		{
+			public PkiCluster() : base(new SslAndKpiClusterConfiguration
+			{
+				DefaultNodeSettings =
+				{
+					{"xpack.security.authc.realms.file1.enabled", "false"},
+					{"xpack.security.http.ssl.client_authentication", "required"}
+				}
+			}) { }
+
 			protected override ConnectionSettings Authenticate(ConnectionSettings s) => s // <1> Set the client certificate on `ConnectionSettings`
 				.ClientCertificate(
 					ClientCertificate.LoadWithPrivateKey(
-						this.Node.FileSystem.ClientCertificate, // <2> The path to the `.cer` file
-						this.Node.FileSystem.ClientPrivateKey, // <3> The path to the `.key` file
+						this.ClusterConfiguration.FileSystem.ClientCertificate, // <2> The path to the `.cer` file
+						this.ClusterConfiguration.FileSystem.ClientPrivateKey, // <3> The path to the `.key` file
 						"") // <4> The password for the private key
 				);
 
-			//hide
-			protected override string[] AdditionalServerSettings => base.AdditionalServerSettings.Concat(new[]
-			{
-				"xpack.security.authc.realms.file1.enabled=false",
-				"xpack.security.http.ssl.client_authentication=required"
-			}).ToArray();
 		}
 
 		//hide
@@ -243,7 +249,7 @@ namespace Tests.ClientConcepts.Certificates
 
 		// a bad certificate
 		// hide
-		private string Certificate => this.Cluster.Node.FileSystem.ClientCertificate;
+		private string Certificate => this.Cluster.ClusterConfiguration.FileSystem.ClientCertificate;
 
 		/**
 		 * ==== Object Initializer syntax example */

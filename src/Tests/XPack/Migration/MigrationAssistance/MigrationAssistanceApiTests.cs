@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -8,8 +9,7 @@ namespace Tests.XPack.Migration.MigrationAssistance
 {
 	public class MigrationAssistanceApiTests
 	{
-		[U]
-		public void ShouldDeserialize()
+		[U] public void ShouldDeserialize()
 		{
 			var fixedResponse = new
 			{

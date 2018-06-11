@@ -102,7 +102,7 @@ namespace Tests.Cluster.NodesInfo
 			jvm.GCCollectors.Should().NotBeEmpty();
 			jvm.MemoryPools.Should().NotBeEmpty();
 			jvm.Memory.Should().NotBeNull();
-			jvm.Memory.DirectMaxInBytes.Should().BeGreaterThan(0);
+			jvm.Memory.DirectMaxInBytes.Should().BeGreaterOrEqualTo(0);
 			jvm.Memory.NonHeapMaxInBytes.Should().BeGreaterOrEqualTo(0);
 			jvm.Memory.NonHeapInitInBytes.Should().BeGreaterThan(0);
 			jvm.Memory.HeapMaxInBytes.Should().BeGreaterThan(0);

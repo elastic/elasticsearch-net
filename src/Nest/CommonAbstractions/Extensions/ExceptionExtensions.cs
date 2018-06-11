@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 
@@ -12,16 +14,8 @@ namespace Nest
 
 		public static void RethrowKeepingStackTrace(this Exception exception)
 		{
-			// In .Net 4.5 ExceptionDispatchInfo.Capture(exception).Throw();
-			// But as NEST also still targets .NET 4.0 the old internal hack must be used
 			if (preserveStackTraceMethodInfo.Value != null)
-			{
-#if NET45
-				preserveStackTraceMethodInfo.Value.Invoke(exception, null);
-#else
 				ExceptionDispatchInfo.Capture(exception).Throw();
-#endif
-			}
 			throw exception;
 		}
 
@@ -33,5 +27,6 @@ namespace Nest
 
 			return @object;
 		}
+
 	}
 }

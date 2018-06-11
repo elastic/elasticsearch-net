@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using FluentAssertions;
 using Nest;
-using Tests.Framework.ManagedElasticsearch.Nodes;
 using Tests.Framework.MockData;
 
 namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
@@ -25,13 +23,13 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		private IIndexSettings IndexSettings { get; }
 
-		public DefaultSeeder(ElasticsearchNode node, IIndexSettings indexSettings)
+		public DefaultSeeder(IElasticClient client, IIndexSettings indexSettings)
 		{
-			this.Client = node.Client;
+			this.Client = client;
 			this.IndexSettings = indexSettings ?? _defaultIndexSettings;
 		}
 
-		public DefaultSeeder(ElasticsearchNode node) : this(node, null) { }
+		public DefaultSeeder(IElasticClient client) : this(client, null) { }
 
 		public void SeedNode()
 		{
@@ -167,7 +165,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 					)
 				);
 			//normalizers are a new feature since 5.2.0
-			if (TestClient.VersionUnderTestSatisfiedBy(">=5.2.0"))
+			if (TestClient.Configuration.ElasticsearchVersion.InRange(">=5.2.0"))
 				analysis.Normalizers(analyzers => analyzers
 					.Custom("my_normalizer", n => n
 						.Filters("lowercase", "asciifolding")

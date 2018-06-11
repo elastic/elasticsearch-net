@@ -37,7 +37,7 @@ using System.Security.Cryptography.X509Certificates;
 namespace Elasticsearch.Net
 {
 //.NET removed the setter for PrivateKey for X509Certificate, you'll have to manually convert to pfx/p12 or add the key to the machine store
-#if !DOTNETCORE
+#if FEATURE_HTTPWEBREQUEST
 
 	public class ClientCertificate
 	{

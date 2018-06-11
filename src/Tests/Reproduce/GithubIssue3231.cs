@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Net;
 using FluentAssertions;
 using System;
+using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;

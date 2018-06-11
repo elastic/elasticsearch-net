@@ -6,6 +6,7 @@ using Tests.Framework.Integration;
 using Xunit;
 using Tests.Framework.MockData;
 using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Ingest.PutPipeline

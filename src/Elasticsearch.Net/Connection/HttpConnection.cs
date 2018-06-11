@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if FEATURE_HTTPWEBREQUEST
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -10,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 // ReSharper disable VirtualMemberNeverOverriden.Global
-#if !DOTNETCORE
 namespace Elasticsearch.Net
 {
 	public class HttpConnection : IConnection

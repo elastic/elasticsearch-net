@@ -32,9 +32,6 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\Nest.JsonNetSerializer\net45\Nest.JsonNetSerializer.dll" target="lib\net45"/>
-		<file src="output\Nest.JsonNetSerializer\net45\Nest.JsonNetSerializer.XML" target="lib\net45"/>
-
 		<file src="output\Nest.JsonNetSerializer\net46\Nest.JsonNetSerializer.dll" target="lib\net46"/>
 		<file src="output\Nest.JsonNetSerializer\net46\Nest.JsonNetSerializer.XML" target="lib\net46"/>
 

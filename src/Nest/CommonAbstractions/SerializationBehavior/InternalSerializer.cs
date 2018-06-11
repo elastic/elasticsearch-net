@@ -17,8 +17,7 @@ namespace Nest
 	{
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 
-		//we still support net45 so Task.Completed is not available
-		private static readonly Task CompletedTask = Task.FromResult(false);
+		private static readonly Task CompletedTask = Task.CompletedTask;
 
 		private readonly JsonSerializer _indentedSerializer;
 		internal JsonSerializer Serializer { get; }
