@@ -63,7 +63,7 @@ namespace Nest
 		long PrimaryTerm { get; }
 
 		/// <summary>
-		/// Specifies wheter this particular bulk operation succeeded or not
+		/// Specifies whether this particular bulk operation succeeded or not
 		/// </summary>
 		bool IsValid { get; }
 	}

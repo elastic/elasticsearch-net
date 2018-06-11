@@ -23,21 +23,31 @@ namespace Nest.JsonNetSerializer.Converters
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var v = _builtInSerializer.SerializeToString(value);
-			var token = JToken.Parse(v);
-			writer.WriteToken(token.CreateReader(), true);
+			var formatting = serializer.Formatting == Formatting.Indented
+				? SerializationFormatting.Indented
+				: SerializationFormatting.None;
+
+			using (var ms = new MemoryStream())
+			using (var streamReader = new StreamReader(ms, ConnectionSettingsAwareSerializerBase.ExpectedEncoding))
+			using (var reader = new JsonTextReader(streamReader))
+			{
+				_builtInSerializer.Serialize(value, ms, formatting);
+				ms.Position = 0;
+				var token = reader.ReadTokenWithDateParseHandlingNone();
+				writer.WriteToken(token.CreateReader(), true);
+			}
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var token = JToken.ReadFrom(reader);
+			var token = reader.ReadTokenWithDateParseHandlingNone();
 			//in place because JsonConverter.Deserialize() only works on full json objects.
 			//even though we pass type JSON.NET won't try the registered converter for that type
 			//even if it can handle string tokens :(
 			if (objectType == typeof(JoinField) && token.Type == JTokenType.String)
-				return JoinField.Root(token.ToString());
+				return JoinField.Root(token.ToString(Formatting.None));
 
-			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(token.ToString())))
+			using (var ms = token.ToStream())
 				return _builtInSerializer.Deserialize(objectType, ms);
 		}
 

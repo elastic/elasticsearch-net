@@ -11,6 +11,6 @@ namespace Tests.Framework.MockData
 			new Faker<SimpleGeoPoint>()
 				.RuleFor(p => p.Lat, f => f.Address.Latitude())
 				.RuleFor(p => p.Lon, f => f.Address.Longitude())
-			;
+			.Clone();
 	}
 }

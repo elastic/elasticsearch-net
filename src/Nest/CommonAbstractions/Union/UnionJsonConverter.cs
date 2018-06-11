@@ -84,7 +84,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			Union<TFirst, TSecond> u = null;
-			using (var r = JToken.Load(reader).CreateReader())
+			using (var r = reader.ReadTokenWithDateParseHandlingNone().CreateReader())
 			{
 				if (this.TryRead(r, serializer, out TFirst first)) u = first;
 				else if (this.TryRead(r, serializer, out TSecond second)) u = second;

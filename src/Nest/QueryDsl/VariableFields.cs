@@ -49,8 +49,8 @@ namespace Nest
 			if (locationField == null) return query;
 
 			var propertyValue = jo.Property(fieldProperty).Value;
-			var o = JToken.ReadFrom(propertyValue.CreateReader()).Value<JObject>();
-			var r = (deeperPropertyName.IsNullOrEmpty() ? (JToken)o : o.Property(deeperPropertyName).Value).CreateReader();
+			var o = propertyValue.CreateReader().ReadTokenWithDateParseHandlingNone().Value<JObject>();
+			var r = (deeperPropertyName.IsNullOrEmpty() ? o : o.Property(deeperPropertyName).Value).CreateReader();
 
 			var locationValue = serializer.Deserialize(r, locationField.PropertyType);
 			locationField.ValueProvider.SetValue(query, locationValue);
@@ -96,8 +96,7 @@ namespace Nest
 
 		private static Tuple<JsonProperty, VariableFieldAttribute> GetOrCreateTypeInfo(Type t)
 		{
-			Tuple<JsonProperty, VariableFieldAttribute> info;
-			if (!VariableFields.CachedTypeInformation.TryGetValue(t, out info))
+			if (!VariableFields.CachedTypeInformation.TryGetValue(t, out var info))
 			{
 				var properties = from prop in t.GetCachedObjectProperties(MemberSerialization.OptOut)
 					let attributes = prop.AttributeProvider.GetAttributes(typeof (VariableFieldAttribute), true)

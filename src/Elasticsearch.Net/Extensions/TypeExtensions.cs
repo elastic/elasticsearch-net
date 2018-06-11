@@ -20,10 +20,9 @@ namespace Elasticsearch.Net
 
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
-			ObjectActivator<object> activator;
 			var argKey = args.Length;
 			var key = argKey + "--" + t.FullName;
-			if (CachedActivators.TryGetValue(key, out activator))
+			if (CachedActivators.TryGetValue(key, out var activator))
 				return activator(args);
 
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);

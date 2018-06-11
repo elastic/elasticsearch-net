@@ -6,8 +6,9 @@ namespace Elasticsearch.Net
 	public interface IConnectionPool : IDisposable
 	{
 		/// <summary>
-		/// Returns a readonly constant view of all the nodes in the cluster, this might involve creating copies of the nodes e.g
-		/// if you are using the sniffing connectionpool. If you do not need an isolated copy of the nodes please read <see cref="CreateView"/> to completion
+		/// Returns a read only view of all the nodes in the cluster, which might involve creating copies of nodes e.g
+		/// if you are using <see cref="SniffingConnectionPool"/>.
+		/// If you do not need an isolated copy of the nodes, please read <see cref="CreateView"/> to completion
 		/// </summary>
 		IReadOnlyCollection<Node> Nodes { get; }
 
@@ -19,33 +20,40 @@ namespace Elasticsearch.Net
 		int MaxRetries { get; }
 
 		/// <summary>
-		/// Signals that this implemenation can accept new nodes
+		/// Whether reseeding with new nodes is supported
 		/// </summary>
 		bool SupportsReseeding { get; }
 
+		/// <summary>
+		/// Whether pinging is supported
+		/// </summary>
 		bool SupportsPinging { get; }
 
+		/// <summary>
+		/// The last time that this instance was updated
+		/// </summary>
 		DateTime LastUpdate { get; }
 
 		/// <summary>
-		/// Whether or not SSL is being using
+		/// Whether SSL/TLS is being used
 		/// </summary>
 		bool UsingSsl { get; }
 
 		/// <summary>
-		/// Bookkeeps wheter this connectionpool has seen a sniff on startup. its up to to the callee to set this in a threadsafe fashion
+		/// Whether a sniff is seen on startup. The implementation is
+		/// responsible for setting this in a thread safe fashion.
 		/// </summary>
 		bool SniffedOnStartup { get; set; }
 
 		/// <summary>
-		/// Creates a view with changing starting positions that wraps over on each call
+		/// Creates a view over the nodes, with changing starting positions, that wraps over on each call
 		/// e.g Thread A might get 1,2,3,4,5 and thread B will get 2,3,4,5,1.
 		/// if there are no live nodes yields a different dead node to try once
 		/// </summary>
 		IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null);
 
 		/// <summary>
-		/// Update the node list, it's the IConnectionPool's responsibility to do so in a threadsafe fashion
+		/// Reseeds the nodes. The implementation is responsible for thread safety
 		/// </summary>
 		void Reseed(IEnumerable<Node> nodes);
 

@@ -21,6 +21,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 
 		private class TrackDisposeStream : MemoryStream
 		{
+			public TrackDisposeStream()
+			{
+			}
+
+			public TrackDisposeStream(byte[] bytes) : base(bytes)
+			{
+			}
+
 			public bool IsDisposed { get; private set; }
 			protected override void Dispose(bool disposing)
 			{
@@ -36,6 +44,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 			public MemoryStream Create()
 			{
 				var stream = new TrackDisposeStream();
+				this.Created.Add(stream);
+				return stream;
+			}
+
+			public MemoryStream Create(byte[] bytes)
+			{
+				var stream = new TrackDisposeStream(bytes);
 				this.Created.Add(stream);
 				return stream;
 			}

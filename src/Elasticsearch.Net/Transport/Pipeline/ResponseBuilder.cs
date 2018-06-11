@@ -42,8 +42,7 @@ namespace Elasticsearch.Net
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
 			var details = Initialize(requestData, ex, statusCode, warnings, mimeType);
-			var response = (await SetBodyAsync<TResponse>(details, requestData, responseStream, mimeType, cancellationToken)
-				               .ConfigureAwait(false))
+			var response = await SetBodyAsync<TResponse>(details, requestData, responseStream, mimeType, cancellationToken).ConfigureAwait(false)
 				?? new TResponse();
 			response.ApiCall = details;
 			return response;

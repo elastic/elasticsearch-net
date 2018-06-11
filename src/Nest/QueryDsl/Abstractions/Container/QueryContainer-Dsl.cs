@@ -5,12 +5,12 @@ namespace Nest
 {
 	internal static class QueryContainerExtensions
 	{
-		public static bool IsConditionless(this QueryContainer q) => q == null || (q.IsConditionless);
+		public static bool IsConditionless(this QueryContainer q) => q == null || q.IsConditionless;
 	}
 
 	public partial class QueryContainer : IQueryContainer, IDescriptor
 	{
-		bool IQueryContainer.IsConditionless => (ContainedQuery?.Conditionless).GetValueOrDefault(true);
+		bool IQueryContainer.IsConditionless => ContainedQuery?.Conditionless ?? true;
 		internal bool IsConditionless => Self.IsConditionless;
 
 		bool IQueryContainer.IsStrict { get; set; }
@@ -56,8 +56,8 @@ namespace Nest
 		{
 			queryContainer = null;
 			if (leftContainer == null && rightContainer == null) return true;
-			var leftWritable = (leftContainer?.IsWritable).GetValueOrDefault(false);
-			var rightWritable = (rightContainer?.IsWritable).GetValueOrDefault(false);
+			var leftWritable = leftContainer?.IsWritable ?? false;
+			var rightWritable = rightContainer?.IsWritable ?? false;
 			if (leftWritable && rightWritable) return false;
 			if (!leftWritable && !rightWritable) return true;
 

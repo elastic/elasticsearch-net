@@ -1,21 +1,20 @@
 using System;
-using System.Collections.Concurrent;
 using System.IO;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
 	internal class InternalSerializer : IElasticsearchSerializer
 	{
-		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
+		// Default buffer size of StreamWriter, which is private :(
+		internal const int DefaultBufferSize = 1024;
+
+		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 
 		//we still support net45 so Task.Completed is not available
 		private static readonly Task CompletedTask = Task.FromResult(false);
@@ -34,7 +33,7 @@ namespace Nest
 		/// </summary>
 		// Performance tests as part of https://github.com/elastic/elasticsearch-net/issues/1899 indicate this
 		// to be a good compromise buffer size for performance throughput and bytes allocated.
-		protected virtual int BufferSize => 1024;
+		protected virtual int BufferSize => DefaultBufferSize;
 
 		public InternalSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
 
@@ -72,7 +71,6 @@ namespace Nest
 			}
 		}
 
-
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
 			CancellationToken cancellationToken = default(CancellationToken))
 		{
@@ -82,46 +80,49 @@ namespace Nest
 			return CompletedTask;
 		}
 
-		public T Deserialize<T>(Stream stream) => (T) this.Deserialize(typeof(T), stream);
+		public T Deserialize<T>(JsonReader reader) => this.Serializer.Deserialize<T>(reader);
+
+		public object Deserialize(JsonReader reader, Type objectType) => this.Serializer.Deserialize(reader, objectType);
+
+		public T Deserialize<T>(Stream stream)
+		{
+			if (stream == null || stream.Length == 0) return default(T);
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+				return this.Serializer.Deserialize<T>(jsonTextReader);
+		}
 
 		public object Deserialize(Type type, Stream stream)
 		{
-			if (stream == null) return type.DefaultValue();
+			if (stream == null || stream.Length == 0) return type.DefaultValue();
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
-			{
-				var t = this.Serializer.Deserialize(jsonTextReader, type);
-				return t;
-			}
+				return this.Serializer.Deserialize(jsonTextReader, type);
 		}
 
+#pragma warning disable 1998 // we know this is not an async operation
 		public async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+#pragma warning restore 1998
 		{
-			if (stream == null) return default(T);
-			var bytes = await ReadToBytesAsync(stream, cancellationToken);
-
-			if (bytes == null || bytes.Length == 0) return default(T);
-            using (var ms  = new MemoryStream(bytes))
-            using (var sr = new StreamReader(ms))
+			if (stream == null || stream.Length == 0) return default(T);
+            using (var sr = new StreamReader(stream))
             using (var jtr = new JsonTextReader(sr))
 				return this.Serializer.Deserialize<T>(jtr);
 		}
 
+#pragma warning disable 1998 // we know this is not an async operation
 		public async Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+#pragma warning restore 1998
 		{
-			if (stream == null) return type.DefaultValue();
-			var bytes = await ReadToBytesAsync(stream, cancellationToken);
-
-			if (bytes == null || bytes.Length == 0) return type.DefaultValue();
-            using (var ms  = new MemoryStream(bytes))
-            using (var sr = new StreamReader(ms))
+			if (stream == null || stream.Length == 0) return type.DefaultValue();
+            using (var sr = new StreamReader(stream))
             using (var jtr = new JsonTextReader(sr))
 				return this.Serializer.Deserialize(jtr, type);
 		}
 
 		private JsonSerializerSettings CreateSettings(SerializationFormatting formatting)
 		{
-			var settings = new JsonSerializerSettings()
+			var settings = new JsonSerializerSettings
 			{
 				Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None,
 				ContractResolver = this.ContractResolver,
@@ -129,20 +130,10 @@ namespace Nest
 				NullValueHandling = NullValueHandling.Ignore
 			};
 
-			if (!(settings.ContractResolver is ElasticContractResolver contract))
+			if (!(settings.ContractResolver is ElasticContractResolver))
 				throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
 
 			return settings;
-		}
-
-		private static async Task<byte[]> ReadToBytesAsync(Stream stream, CancellationToken cancellationToken)
-		{
-			if (stream is MemoryStream o) return o.ToArray();
-			using (var ms = new MemoryStream())
-			{
-				await stream.CopyToAsync(ms, ResponseBuilder.BufferSize, cancellationToken);
-				return ms.ToArray();
-			}
 		}
 	}
 }

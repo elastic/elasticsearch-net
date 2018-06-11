@@ -72,8 +72,8 @@ namespace Tests.Framework
 			// If running the classic .NET solution, tests run from bin/{config} directory,
 			// but when running DNX solution, tests run from the test project root
 			var yamlConfigurationPath = (directoryInfo.Name == "Tests"
-			                             && directoryInfo.Parent != null
-			                             && directoryInfo.Parent.Name == "src")
+				&& directoryInfo.Parent != null
+				&& directoryInfo.Parent.Name == "src")
 				? "."
 				: @"../../../";
 
@@ -90,8 +90,8 @@ namespace Tests.Framework
 
 		private static int ConnectionLimitDefault =>
 			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out int x)
-				? x
-				: ConnectionConfiguration.DefaultConnectionLimit;
+			? x
+			: ConnectionConfiguration.DefaultConnectionLimit;
 
 		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
@@ -201,7 +201,8 @@ namespace Tests.Framework
 
 			modifySettings = modifySettings ?? ((m) =>
 			{
-				//only enable debug mode when running in DEBUG mode (always) or optionally wheter we are executing unit tests
+
+				//only enable debug mode when running in DEBUG mode (always) or optionally whether we are executing unit tests
 				//during RELEASE builds tests
 #if !DEBUG
 			if (TestClient.Configuration.RunUnitTests)

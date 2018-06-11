@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
@@ -44,7 +45,7 @@ namespace Nest
 		public T As<T>()
 		{
 			if (Token == null) return default(T);
-			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(Token.ToString())))
+			using (var ms = Token.ToStream())
 				return _serializer.Deserialize<T>(ms);
 		}
 
@@ -52,7 +53,7 @@ namespace Nest
 		public object As(Type objectType)
 		{
 			if (Token == null) return null;
-			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(Token.ToString())))
+			using (var ms = Token.ToStream())
 				return _serializer.Deserialize(objectType, ms);
 		}
 	}

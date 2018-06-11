@@ -24,13 +24,11 @@ namespace Nest
 
 		public SuggestDictionary(IReadOnlyDictionary<string, Suggest<T>[]> backingDictionary) : base(backingDictionary) { }
 
-		private static readonly char[] TypedKeysSeparator = {'#'};
 		protected override string Sanitize(string key)
 		{
 			//typed_keys = true results in suggest keys being returned as "<type>#<name>"
-			var tokens = key.Split(TypedKeysSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
-			return tokens.Length > 1 ? tokens[1] : tokens[0];
+			var hashIndex = key.IndexOf('#');
+			return hashIndex > -1 ? key.Substring(hashIndex + 1) : key;
 		}
-
 	}
 }

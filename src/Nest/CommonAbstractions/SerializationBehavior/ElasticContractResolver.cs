@@ -13,6 +13,8 @@ namespace Nest
 {
 	internal class ElasticContractResolver : DefaultContractResolver
 	{
+		private readonly Lazy<bool> _usingSourceSerializer;
+
 		public static JsonSerializer Empty { get; } = new JsonSerializer();
 
 		/// <summary>
@@ -20,7 +22,7 @@ namespace Nest
 		/// </summary>
 		public IConnectionSettingsValues ConnectionSettings { get; }
 
-		public bool UsingSourceSerializer { get; }
+		public bool UsingSourceSerializer => _usingSourceSerializer.Value;
 
 		/// <summary>
 		/// Signals to custom converter that it can get serialization state from one of the converters. Ugly but massive performance gain
@@ -30,15 +32,13 @@ namespace Nest
 		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
 		{
 			this.ConnectionSettings = connectionSettings;
-			this.UsingSourceSerializer = connectionSettings.RequestResponseSerializer != connectionSettings.SourceSerializer;
+			_usingSourceSerializer = new Lazy<bool>(() => connectionSettings.RequestResponseSerializer != connectionSettings.SourceSerializer);
 		}
-
 
 		protected bool CanRemoveSourceConverter(JsonConverter converter)
 		{
 			if (UsingSourceSerializer || converter == null) return false;
-			var type = converter.GetType();
-			return type == typeof(SourceConverter) || type == typeof(CollapsedSourceConverter);
+			return converter is SourceConverter;
 		}
 
 		protected override JsonContract CreateContract(Type objectType)
