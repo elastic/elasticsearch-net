@@ -18,6 +18,7 @@ namespace Tests.Framework.MockData
 
 		public static Faker<Person> Generator { get; } =
 			new Faker<Person>()
+				.UseSeed(TestClient.Configuration.Seed)
 				.RuleFor(p => p.Id, p => Interlocked.Increment(ref IdState))
 				.RuleFor(p => p.FirstName, p => p.Name.FirstName())
 				.RuleFor(p => p.LastName, p => p.Name.LastName())
