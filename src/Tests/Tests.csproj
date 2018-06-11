@@ -38,7 +38,7 @@
     <Compile Remove="Framework\Profiling\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="21.0.2" />
+    <PackageReference Include="Bogus" Version="22.1.2" />
     <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180604T145809" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />
     <PackageReference Include="DiffPlex" Version="1.4.1" />
