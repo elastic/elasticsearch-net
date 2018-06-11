@@ -242,7 +242,7 @@ namespace Nest
 			selector.InvokeOrDefault(new IntegerRangePropertyDescriptor<T>().Name(field));
 		public IProperty Scalar(Expression<Func<T, FloatRange>> field, Func<FloatRangePropertyDescriptor<T>, IFloatRangeProperty> selector = null) =>
 			selector.InvokeOrDefault(new FloatRangePropertyDescriptor<T>().Name(field));
-		public IProperty Scalar(Expression<Func<T, IpRange>> field, Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector = null) =>
+		public IProperty Scalar(Expression<Func<T, IpAddressRange>> field, Func<IpRangePropertyDescriptor<T>, IIpRangeProperty> selector = null) =>
 			selector.InvokeOrDefault(new IpRangePropertyDescriptor<T>().Name(field));
 #pragma warning restore CS3001 // Argument type is not CLS-compliant
 	}

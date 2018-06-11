@@ -27,9 +27,7 @@ namespace Tests.Framework.ManagedElasticsearch
 				var host = (RunningFiddler) ? "ipv4.fiddler" : "localhost";
 				createPool = createPool ?? (uris => new StaticConnectionPool(uris));
 				var connectionPool = createPool(c.NodesUris(host));
-				var connection = TestClient.Configuration.RunIntegrationTests
-					? TestClient.CreateLiveConnection()
-					: new InMemoryConnection();
+				var connection = TestClient.Configuration.RunIntegrationTests ? TestClient.CreateLiveConnection() : new InMemoryConnection();
 				var settings = TestClient.CreateSettings(createSettings, connection, connectionPool);
 
 				var current = (IConnectionConfigurationValues) settings;

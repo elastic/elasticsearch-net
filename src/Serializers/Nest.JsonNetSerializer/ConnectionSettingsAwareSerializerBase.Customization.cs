@@ -65,8 +65,7 @@ namespace Nest.JsonNetSerializer
 			}
 		}
 
-		//we still support net45 so Task.Completed is not available
-		private static readonly Task CompletedTask = Task.FromResult(false);
+		private static readonly Task CompletedTask = Task.CompletedTask;
 
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
 			CancellationToken cancellationToken = default(CancellationToken))
