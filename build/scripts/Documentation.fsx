@@ -18,7 +18,7 @@ module Documentation =
 
     let Generate() = 
         let docGenerator = PrivateProject(DocGenerator)
-        let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.NetCoreApp2_0
+        let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.NetCoreApp2_1
         let generator = sprintf "%s.dll %s" docGenerator.Name Commandline.docsBranch
         
         DotNetCli.RunCommand(fun p ->
