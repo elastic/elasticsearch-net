@@ -1,4 +1,6 @@
 @using System
+@using RazorLight
+@inherits TemplatePage<RestApiSpec>
 @using System.Collections.Generic
 @using System.Linq
 @using System.Net.Cache
@@ -33,7 +35,8 @@ namespace Nest
 	{
 	@foreach (var common in RestApiSpec.CommonApiQueryParameters.Values)
 	{
-		<text>@Raw(common.InitializerGenerator(common.TypeHighLevel, common.ClsName, common.QueryStringKey, "value", common.DescriptionHighLevel.ToArray()))</text>
+<text>		@Raw(common.InitializerGenerator(common.TypeHighLevel, common.ClsName, common.QueryStringKey, "value", common.DescriptionHighLevel.ToArray()))
+</text>
 	}
 	}
 	@foreach (CsharpMethod method in methods)
@@ -43,10 +46,12 @@ namespace Nest
 	<text>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface @(Raw(method.InterfaceType)) : IRequest@(Raw(string.Format("<{0}>", method.QueryStringParamName)))
-	{</text>
+	{
+</text>
 	foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 	{
-		<text>@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }</text>
+<text>		@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }
+</text>
 	}
 	//render partial methods as interface properties forcing us to implement them on request and request descriptors
 	if (method.HttpMethod != "GET" && method.HttpMethod != "HEAD")
@@ -56,10 +61,10 @@ namespace Nest
 		<text>[JsonProperty("@(partialParam.QueryStringKey)")] @(Raw(partialParam.TypeHighLevel)) @(partialParam.ClsName) { get; set; }</text>
 		}
 	}
-	<text>}
+<text>	}
 </text>
 	}
-	<text>///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
+<text>	///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
 	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(": PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
 	{
 		protected @(Raw(method.InterfaceType)) Self => this;
@@ -71,7 +76,8 @@ namespace Nest
 		// values part of the url path
 @foreach (var part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 {
-<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");</text>
+<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>", part.ClrTypeName)))("@(part.Name)");
+</text>
 }
 
 		// Request parameters
@@ -89,7 +95,8 @@ namespace Nest
 		continue;
 	}
 	var doc = param.DescriptionHighLevel.ToArray();
-<text>		@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))</text>
+<text>		@Raw(param.InitializerGenerator(param.TypeHighLevel, param.ClsName, original, param.SetterHighLevel, doc))
+</text>
 }
 @if (method.RequestTypeUnmapped)
 {<text>		//TODO THIS METHOD IS UNMAPPED!
@@ -98,4 +105,3 @@ namespace Nest
 	}</text>
 }
 }
- 

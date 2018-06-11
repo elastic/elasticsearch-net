@@ -109,7 +109,7 @@ namespace ApiGenerator.Domain
 						);
 				}
 
-				var doc = $@"/// <summary>{url}</summary>";
+				var doc = $@"///<summary>{url}</summary>";
 				if (urlRouteParameters.Any())
 				{
 					doc += "\r\n\t\t" + string.Join("\r\n\t\t", urlRouteParameters.Select(p => $"///<param name=\"{p.Key}\">{(p.Value.Required ? "this parameter is required" : "Optional, accepts null")}</param>"));

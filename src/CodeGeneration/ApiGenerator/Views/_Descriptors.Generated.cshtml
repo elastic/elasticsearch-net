@@ -1,3 +1,5 @@
+@using RazorLight
+@inherits TemplatePage<RestApiSpec>
 @using System.Collections.Generic
 @using System.Linq
 @using CsQuery.ExtensionMethods.Internal
@@ -40,15 +42,19 @@ namespace Nest
 		// values part of the url path
 @foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 {
-<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
+<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");
+</text>
 }
 @foreach (FluentRouteSetter c in method.GetFluentRouteSetters())
 {
-<text>		@(Raw(c.XmlDoc))
-		@(Raw(c.Code))</text>
+<text>
+		@(Raw(c.XmlDoc))
+		@(Raw(c.Code))
+</text>
 }
 </text>
-<text>		// Request parameters</text>
+<text>		// Request parameters
+</text>
 foreach (var param in method.Url.Params.Values)
 {
 	var original = param.QueryStringKey;
@@ -69,20 +75,27 @@ foreach (var param in method.Url.Params.Values)
 		
 		var desc = param.DescriptionHighLevel.ToList();
 		<text>@if (desc.Count == 1) {
-		<text>///<summary>@Raw(desc.First())</summary></text>
+<text>
+		///<summary>@Raw(desc.First())</summary>
+</text>
 		}
 		else 
-		{ <text>		///<summary>
-		@Raw(string.Join("\r\n\t\t", desc.Select(d=> "/// " + d)))
-		///</summary></text>
+		{ 
+<text>
+		///<summary>
+		@Raw(string.Join("\r\n\t\t", desc.Select(d => "/// " + d)))
+		///</summary>
+</text>
 		}</text><text>@if(!string.IsNullOrWhiteSpace(param.Obsolete))
 		{<text>		[Obsolete("Scheduled to be removed in 7.0, @param.Obsolete")]
 </text>}
 		public @Raw(type) @(param.ClsName)(@param.DescriptorArgumentType @param.ClsArgumentName@tSuffix) => Qs("@original", @(param.ClsArgumentName));</text>
 		if (param.IsFieldsParam)
 		{
-		<text>///<summary>@param.Description</summary>
-		public @Raw(type) @param.ClsName@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));</text>
+<text>
+		///<summary>@param.Description</summary>
+		public @Raw(type) @param.ClsName@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where " + g + " : class") => Qs("@original", fields?@Raw(".Select(e=>(Field)e)"));
+</text>
 		}
 		else if (param.IsFieldParam)
 		{<text>

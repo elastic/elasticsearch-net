@@ -6,13 +6,16 @@
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <NoWarn>NU1701</NoWarn>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="ShellProgressBar" Version="4.0.0" />
     <PackageReference Include="CsQuery.Core" Version="2.0.1" />
-    <!-- TODO the following packages prevent us to jump to netcoreapp1.0 -->
-    <PackageReference Include="RazorLight" Version="2.0.0-beta1" />
+
+    <!-- https://github.com/toddams/RazorLight/issues/172 -->
+    <PackageReference Include="RazorLight.Unofficial" Version="2.0.0-beta1.1" />
+    <!--<PackageReference Include="RazorLight" Version="2.0.0-beta1" />-->
   </ItemGroup>
   <Import Project="..\..\outputpath.props" />
 </Project>
