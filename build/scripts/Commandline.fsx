@@ -28,13 +28,13 @@ Targets:
 * canary [apikey] [feed]
   - create a canary nuget package based on the current version if [feed] and [apikey] are provided
     also pushes to upstream (myget)
-* diff <github|nuget|directories|assemblies> <version|path 1> <version|path 2> [format]
+* diff <github|nuget|dir|assembly> <version|path 1> <version|path 2> [format]
 
 NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to force the tests against all suported TFM's
 
 Execution hints can be provided anywhere on the command line
 - skiptests : skip running tests as part of the target chain
-- source_serialization : force tests to use a client with custom source serialization
+- skipdocs : skip generating documentation
 - seed:<N> : provide a seed to run the tests with.
 - random:<K><:B> : sets random K to bool B if if B is omitted will default to true
   K can be: sourceserializer, typedkeys or oldconnection (only valid on windows)
@@ -57,21 +57,30 @@ module Commandline =
         |> List.filter (fun x -> (x.StartsWith("random:")))
         |> List.map (fun x -> (x.Replace("random:", "")))
         
+    let docsBranch = 
+        match args |> List.tryFind (fun x -> x.StartsWith("docs:")) with
+        | Some t -> t.Replace("docs:", "")
+        | _ -> ""
+             
     let private filteredArgs = 
         args 
         |> List.filter (
             fun x -> 
-                x <> "skiptests" && x <> "skipdocs" && x <> "source_serialization" && not (x.StartsWith("seed:")) && not (x.StartsWith("random:"))
+                x <> "skiptests" && 
+                x <> "skipdocs" && 
+                not (x.StartsWith("seed:")) && 
+                not (x.StartsWith("random:")) && 
+                not (x.StartsWith("docs:"))
         )
 
     let multiTarget =
         match (filteredArgs |> List.tryHead) with
-        | Some t when t.EndsWith("-all") -> MultiTarget.All
-        | _ -> MultiTarget.One
+        | Some t when t.EndsWith("-one") -> MultiTarget.One
+        | _ -> MultiTarget.All
 
     let target =
         match (filteredArgs |> List.tryHead) with
-        | Some t -> t.Replace("-all", "")
+        | Some t -> t.Replace("-one", "")
         | _ -> "build"
 
     let validMonoTarget =
@@ -205,6 +214,7 @@ module Commandline =
             setBuildParam "first" firstVersionOrPath
             setBuildParam "second" secondVersionOrPath         
 
+        | ["touch"; ] -> ignore()
         | ["temp"; ] -> ignore()
         | ["canary"; ] -> ignore()
         | ["canary"; apiKey ] ->
