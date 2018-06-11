@@ -8,6 +8,7 @@ using Bogus;
 using Elastic.Xunit;
 using Tests.Framework.Configuration;
 using Tests.Framework.ManagedElasticsearch;
+using Tests.Framework.MockData;
 using static System.Console;
 
 [assembly: Xunit.TestFrameworkAttribute("Elastic.Xunit.Sdk.ElasticTestFramework", "Elastic.Xunit")]
@@ -25,6 +26,8 @@ namespace Tests.Framework.ManagedElasticsearch
 			this.ClusterFilter = TestClient.Configuration.ClusterFilter;
 			this.TestFilter = TestClient.Configuration.TestFilter;
 			this.Version = TestClient.Configuration.ElasticsearchVersion;
+
+			Generators.Initialize();
 		}
 
 		public override void OnBeforeTestsRun() => DumpConfiguration();
@@ -32,8 +35,6 @@ namespace Tests.Framework.ManagedElasticsearch
 		private static void DumpConfiguration()
 		{
 			var config = TestClient.Configuration;
-
-			Randomizer.Seed = new Random(config.Seed);
 
 			WriteLine(new string('-', 20));
 			WriteLine("Starting tests using config:");
