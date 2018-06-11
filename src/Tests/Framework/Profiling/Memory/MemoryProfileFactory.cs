@@ -1,4 +1,3 @@
-#if !DOTNETCORE
 using System;
 using System.Reflection;
 using Tests.Framework.Integration;
@@ -24,4 +23,3 @@ namespace Tests.Framework.Profiling.Memory
 		}
 	}
 }
-#endif

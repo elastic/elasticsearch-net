@@ -24,12 +24,13 @@ namespace ApiGenerator
 			{
 				{  GenerateClientInterface, "Client interface" },
 				{  GenerateRequestParameters, "Request parameters" },
-				{  GenerateRequestParametersExtensions, "Request parameters override" },
-				{  GenerateEnums, "Enums" },
-				{  GenerateRawDispatch, "Dispatch" },
-				{  GenerateRequests, "Requests" },
-				{  GenerateRawClient, "Lowlevel client" },
 				{  GenerateDescriptors, "Descriptors" },
+				{  GenerateRequests, "Requests" },
+				{  GenerateEnums, "Enums" },
+				{  GenerateRawClient, "Lowlevel client" },
+				{  GenerateRawDispatch, "Dispatch" },
+				{  GenerateRequestParametersExtensions, "Request parameters override" },
+
 			};
 
 			using (var pbar = new ProgressBar(actions.Count, "Generating code", new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray }))

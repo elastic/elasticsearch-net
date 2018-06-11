@@ -14,12 +14,12 @@ namespace DocGenerator
 {
 	public static class LitUp
 	{
-		private static readonly string[] SkipFolders = { "Debug", "Release" };
+		private static readonly string[] SkipFolders = {"Debug", "Release"};
 
-        private static string GetProjectDir(string projectName) => Path.Combine(Program.InputDirPath, projectName);
-        private static string GetProjectFile(string projectName) => Path.Combine(GetProjectDir(projectName), $"{projectName}.csproj");
+		private static string GetProjectDir(string projectName) => Path.Combine(Program.InputDirPath, projectName);
+		private static string GetProjectFile(string projectName) => Path.Combine(GetProjectDir(projectName), $"{projectName}.csproj");
 
-        public static IEnumerable<DocumentationFile> InputFiles(string path) =>
+		public static IEnumerable<DocumentationFile> InputFiles(string path) =>
 			from f in Directory.GetFiles(GetProjectDir("Tests"), $"{path}", SearchOption.AllDirectories)
 			let dir = new DirectoryInfo(f)
 			where dir?.Parent != null && !SkipFolders.Contains(dir.Parent.Name)
@@ -27,11 +27,11 @@ namespace DocGenerator
 
 		public static IEnumerable<IEnumerable<DocumentationFile>> GetDocumentFiles(Dictionary<string, Project> projects)
 		{
-		    var testProject = projects["Tests"];
+			var testProject = projects["Tests"];
 
 			yield return testProject.Documents
-			   .Where(d => d.Name.EndsWith(".doc.cs", StringComparison.OrdinalIgnoreCase))
-			   .Select(d => new CSharpDocumentationFile(d, projects));
+				.Where(d => d.Name.EndsWith(".doc.cs", StringComparison.OrdinalIgnoreCase))
+				.Select(d => new CSharpDocumentationFile(d, projects));
 
 			yield return testProject.Documents
 				.Where(d => d.Name.EndsWith("UsageTests.cs", StringComparison.OrdinalIgnoreCase))
@@ -43,29 +43,32 @@ namespace DocGenerator
 			// process asciidocs last as they may have generated
 			// includes to other output asciidocs
 			yield return InputFiles("*.asciidoc");
-	    }
+		}
 
 		public static async Task GoAsync(string[] args)
 		{
 			//.NET core csprojects are not supported all that well.
 			// https://github.com/dotnet/roslyn/issues/21660 :sadpanda:
 			// Use Buildalyzer to get a workspace from the solution.
-			var analyzer = new AnalyzerManager(Path.Combine(Program.InputDirPath, "Elasticsearch.DotNetCoreOnly.sln"));
+			var analyzer = new AnalyzerManager(Path.Combine(Program.InputDirPath, "Elasticsearch.sln"), new[]
+			{
+				"Elasticsearch.Net",
+				"Nest",
+				"Tests"
+			});
+
 			var workspace = analyzer.GetWorkspace();
 
-			workspace.WorkspaceFailed += (s, e) =>
-			{
-				Console.Error.WriteLine(e.Diagnostic.Message);
-			};
+			workspace.WorkspaceFailed += (s, e) => { Console.Error.WriteLine(e.Diagnostic.Message); };
 
 			// Buildalyzer, similar to MsBuildWorkspace with the new csproj file format, does
 			// not pick up source documents in the project directory. Manually add them
 			AddDocumentsToWorkspace(workspace);
 
-		    var projects = workspace.CurrentSolution.Projects
-			    .ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
+			var projects = workspace.CurrentSolution.Projects
+				.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
 
-            foreach (var file in GetDocumentFiles(projects).SelectMany(s => s))
+			foreach (var file in GetDocumentFiles(projects).SelectMany(s => s))
 			{
 				await file.SaveToDocumentationFolderAsync();
 			}

@@ -32,7 +32,8 @@ namespace DocGenerator.Documentation.Files
 		protected override FileInfo CreateDocumentationLocation()
 		{
 			var testFullPath = this.FileLocation.FullName;
-			var testInDocumenationFolder = Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "").PascalToHyphen() + this.Extension;
+			var p = "\\" + Path.DirectorySeparatorChar.ToString();
+			var testInDocumenationFolder = Regex.Replace(testFullPath, $@"(^.+{p}Tests{p}|\" + this.Extension + "$)", "").PascalToHyphen() + this.Extension;
 
 			var documenationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputDirPath, testInDocumenationFolder));
 			var fileInfo = new FileInfo(documenationTargetPath);

@@ -8,7 +8,7 @@
     <VersionSuffix>alpha</VersionSuffix>
     <StartupObject>Tests.BenchmarkProgram</StartupObject>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
-    <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
+    <!--<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>-->
     <DefineConstants Condition="'$(TargetFramework)'=='net46'">$(DefineConstants);FEATURE_HTTPWEBREQUEST</DefineConstants>
     <DefineConstants Condition="Exists('..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll')">$(DefineConstants);FEATURE_PROFILING</DefineConstants>
   </PropertyGroup>
@@ -16,14 +16,14 @@
     <RestoreSources>../../build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
     <DefineConstants>$(DefineConstants);TESTINGNUGETPACKAGE</DefineConstants>
   </PropertyGroup>
-  <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
+  <ItemGroup Condition="'$(TestPackageVersion)'!=''">
+    <PackageReference Include="NEST" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
     <ProjectReference Include="..\Nest\Nest.csproj" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TestPackageVersion)'!=''">
-    <PackageReference Include="NEST" Version="$(TestPackageVersion)" />
+  <ItemGroup>
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
   </ItemGroup>
   <ItemGroup Condition="Exists('..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll')">
     <!-- 

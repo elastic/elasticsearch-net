@@ -8,18 +8,25 @@ namespace DocGenerator
 	{
 		static Program()
 		{
+			string P(string path)
+			{
+				return path.Replace(@"\", Path.DirectorySeparatorChar.ToString());
+			}
+
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
             if (currentDirectory.Name == "DocGenerator" && currentDirectory.Parent.Name == "CodeGeneration")
 			{
-                InputDirPath = @"..\..\";
-				OutputDirPath = @"..\..\..\docs";
-                BuildOutputPath = @"..\..\..\build\output";
+				Console.WriteLine("IDE: " + currentDirectory);
+                InputDirPath = P(@"..\..\");
+				OutputDirPath = P(@"..\..\..\docs");
+                BuildOutputPath = P(@"..\..\..\src");
 			}
 			else
 			{
-				InputDirPath = @"..\..\..\..\..\src";
-				OutputDirPath = @"..\..\..\..\..\docs";
-                BuildOutputPath = @"..\..\..\..\..\build\output";
+				Console.WriteLine("CMD: " + currentDirectory);
+				InputDirPath = P(@"..\..\..\..\src");
+				OutputDirPath = P(@"..\..\..\..\docs");
+                BuildOutputPath = P(@"..\..\..\..\build\output");
 			}
 
 			var process = new Process
@@ -39,13 +46,11 @@ namespace DocGenerator
 			{
 				process.Start();
 				BranchName = process.StandardOutput.ReadToEnd().Trim();
-				Console.WriteLine($"Using branch name {BranchName} in documentation");
 				process.WaitForExit();
 			}
 			catch (Exception)
 			{
 				BranchName = "master";
-				Console.WriteLine($"Could not get the git branch name. Assuming {BranchName}");
 			}
 			finally
 			{
@@ -59,7 +64,7 @@ namespace DocGenerator
 
 		public static string OutputDirPath { get; }
 
-		public static string BranchName { get; }
+		public static string BranchName { get; set; }
 
 		public static string DocVersion => "5.6";
 
@@ -67,6 +72,11 @@ namespace DocGenerator
 		{
 		    try
 		    {
+			    if (args.Length > 0)
+				    BranchName = args[0];
+
+			    Console.WriteLine($"Using branch name {BranchName} in documentation");
+
                 LitUp.GoAsync(args).Wait();
 			    return 0;
 		    }

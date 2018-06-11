@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 
 namespace Tests.Framework.Benchmarks
 {
-#if NET46
 	public class CustomJsonExporter : BenchmarkDotNet.Exporters.ExporterBase
 	{
 		protected override string FileExtension => "json";
@@ -55,7 +54,7 @@ namespace Tests.Framework.Benchmarks
 
 				return data;
 			});
-			
+
 			logger.WriteLine(JsonConvert.SerializeObject(new Dictionary<string, object>
 			{
 				{ "Title", summary.Title },
@@ -65,7 +64,6 @@ namespace Tests.Framework.Benchmarks
 			}));
 		}
 	}
-#endif
 	public class BenchmarkConfigAttribute : Attribute, IConfigSource
 	{
 		public IConfig Config { get; }
@@ -74,17 +72,13 @@ namespace Tests.Framework.Benchmarks
 		{
 			var jobs = new[] {
 				Job.Dry.With(Runtime.Core).With(Jit.RyuJit).WithTargetCount(runCount),
-				Job.Dry.With(Runtime.Clr).With(Jit.RyuJit).WithTargetCount(runCount), 
+				Job.Dry.With(Runtime.Clr).With(Jit.RyuJit).WithTargetCount(runCount),
 				Job.Dry.With(Runtime.Clr).With(Jit.LegacyJit).WithTargetCount(runCount)
 			};
-#if !NET46
-			Config = DefaultConfig.Instance.With(jobs).With(JsonExporter.Brief);
-#else
 			Config = DefaultConfig.Instance
 				.With(jobs)
 				.With(new CustomJsonExporter())
 				.With(MemoryDiagnoser.Default);
-#endif
 		}
 	}
 }
