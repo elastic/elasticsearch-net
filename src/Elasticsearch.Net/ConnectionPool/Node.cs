@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Purify;
 
 namespace Elasticsearch.Net
 {
@@ -13,7 +12,7 @@ namespace Elasticsearch.Net
 			//http://my-saas-provider.com/instance
 			if (!uri.OriginalString.EndsWith("/", StringComparison.Ordinal))
 				uri = new Uri(uri.OriginalString + "/");
-			this.Uri = uri.Purify();
+			this.Uri = uri;
 			this.IsAlive = true;
 			this.HoldsData = true;
 			this.MasterEligible = true;
@@ -74,7 +73,7 @@ namespace Elasticsearch.Net
 			this.DeadUntil = default(DateTime);
 		}
 
-		public Uri CreatePath(string path) => new Uri(this.Uri, path).Purify();
+		public Uri CreatePath(string path) => new Uri(this.Uri, path);
 
 		public Node Clone() =>
 			new Node(this.Uri)

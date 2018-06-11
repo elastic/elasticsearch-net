@@ -174,7 +174,7 @@ namespace Tests.ClientConcepts.Certificates
 		* the local CA certificate is part of the chain that was used to generate the servers key.
 		*/
 
-#if !DOTNETCORE
+#if FEATURE_HTTPWEBREQUEST
 		/**
 		 * ==== Client Certificates
 		 *
@@ -227,7 +227,7 @@ namespace Tests.ClientConcepts.Certificates
 #endif
 	}
 
-#if !DOTNETCORE
+#if FEATURE_HTTPWEBREQUEST
 	/**
 	 * Or per request on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`
 	 */

@@ -444,6 +444,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		[U]
+		[ProjectReferenceOnly]
 		public void PrecedenceIsAsExpected()
 		{
 			/** Here we provide an explicit rename of a property on `ConnectionSettings` using `.Rename()`
