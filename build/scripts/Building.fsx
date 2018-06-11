@@ -26,7 +26,7 @@ module Build =
 
     let private runningRelease = hasBuildParam "version" || hasBuildParam "apikey" || getBuildParam "target" = "canary" || getBuildParam "target" = "release"
 
-    type private GlobalJson = JsonProvider<"../../global.json">
+    type private GlobalJson = JsonProvider<"../../global.json", InferTypesFromValues=false>
     let private pinnedSdkVersion = GlobalJson.GetSample().Sdk.Version
     if isMono then setProcessEnvironVar "TRAVIS" "true"
     let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS" 
