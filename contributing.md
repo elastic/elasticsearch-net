@@ -4,7 +4,7 @@ Contributing back to `Elasticsearch.Net` and `NEST` is very much appreciated.
 Whether you [feel the need to change one character](https://github.com/elasticsearch/elasticsearch-net/pull/536) or have a go at 
 [mapping new API's](http://github.com/elasticsearch/elasticsearch-net/pull/376) no PR is too small or too big. 
 
-In fact many of our most aweseome features/fixes have been provided to us by [these wonderful folks](https://github.com/elasticsearch/elasticsearch-net/graphs/contributors) to which we are forever indebted 
+In fact many of our most awesome features/fixes have been provided to us by [these wonderful folks](https://github.com/elasticsearch/elasticsearch-net/graphs/contributors) to which we are forever indebted 
 
 ## Sign the CLA
 
@@ -12,24 +12,25 @@ We do ask that you sign the [Elasticsearch CLA](http://www.elasticsearch.org/con
 
 ## Coding Styleguide
 
-Please install the [editorconfig vs extension](https://visualstudiogallery.msdn.microsoft.com/c8bccfe2-650c-4b42-bc5c-845e21f96328)
+Please install the [Editorconfig vs extension](https://visualstudiogallery.msdn.microsoft.com/c8bccfe2-650c-4b42-bc5c-845e21f96328)
 this will automatically switch to our indentation, whitespace, newlines settings while working on our project
 **while leaving your default settings intact**.
 
-In most cases we won't shun a PR just because it uses the wrong indentation settings though it'll be **very** much appreciated!
+In most cases we won't shun a PR just because it uses the wrong indentation settings, though it'll be **very** much appreciated if it is already done!
 
 ## Tests
 
-PR's with tests are more likely to be reviewed faster because it makes our jobs that much more easy, that being said
+PR's with tests are more likely to be reviewed faster because it makes the job or reviewing the PR much easier. That being said,
 we respect that you are fixing a bug in your own time and might not have the time/energy to submit a PR with complete tests. 
-In those cases we tend to pull your bits locally and write tests ourselves but this may mean your PR might sit idle longer then you would like.
+In those cases we tend to pull your bits locally and write tests ourselves, but this may mean your PR might sit idle longer than you would like.
 
 ## Branches
 
-- `1.x` for latest 1.x compatible client
-- `2.x` for 2.x compatible client
+- `master` for the latest client (currently _7.x alpha_)
+- `6.x` for 6.x compatible client
 - `5.x` for 5.x compatible client
-- `master` for the latest client (currently _6.x alpha_)
+- `2.x` for 2.x compatible client (no longer maintained)
+- `1.x` for 1.x compatible client (no longer maintained)
 
 ## Git
 
@@ -38,9 +39,8 @@ We do not require rebased/squashed commits although we do very much appreciate i
 Please submit your [Pull Requests](https://help.github.com/articles/creating-a-pull-request/) to 
 
 - [`master`](https://github.com/elastic/elasticsearch-net/tree/master) branch for master
+- [`6.x`](https://github.com/elastic/elasticsearch-net/tree/6.x) branch for 6.x
 - [`5.x`](https://github.com/elastic/elasticsearch-net/tree/5.x) branch for 5.x
-- [`2.x`](https://github.com/elastic/elasticsearch-net/tree/2.x) branch for 2.x
-- [`1.x`](https://github.com/elastic/elasticsearch-net/tree/1.x) branch for 1.x
 
 # Building the solution
 
@@ -100,7 +100,7 @@ This compiles the solution and skips running tests
 ### Quick Compile and run integration tests
 
 ```bash
-build.bat Integrate [Elasticsearch Version Number e.g. 5.0.0]
+build.bat integrate [Elasticsearch Version Number e.g. 5.0.0]
 ```
 will quick compile the solution and run integration tests against the target Elasticsearch version. The first time this is run for a version of Elasticsearch, it will download Elasticsearch and unzip Elasticsearch, install the plugins necessary to run the integration tests, and start the node. Because of this, the first run may take some time to start.
 

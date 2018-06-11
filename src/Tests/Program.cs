@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using Elastic.Managed;
 using FluentAssertions;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -62,8 +61,8 @@ namespace Tests
 
 		private const string SelfProfileSdkDirectory = "dottrace-selfprofile";
 
-		private static  string SdkPath { get; }
-		private static  string OutputPath { get; }
+		private static string SdkPath { get; }
+		private static string OutputPath { get; }
 
 		public static void Main(string[] args)
 		{
@@ -73,10 +72,7 @@ namespace Tests
 			var arguments = args.Skip(1).ToArray();
 			if (args[0].Equals("Profile", StringComparison.OrdinalIgnoreCase))
 			{
-#if DOTNETCORE
-				Console.Error.WriteLine("DotTrace Profiling is not currently supported on .NET Core");
-				return;
-#else
+#if FEATURE_PROFILING
 				var configuration = ProfileConfiguration.Parse(arguments);
 				Console.WriteLine("Running Profiling with the following:");
 				Console.WriteLine($"- SdkPath: {SdkPath}");
@@ -91,6 +87,11 @@ namespace Tests
 						profilingFactory.RunAsync(configuration).Wait();
 					}
 				}
+#else
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine("Tests.exe is not built with Profiling support");
+				Console.ResetColor();
+				Environment.Exit(9);
 #endif
 			}
 			else if (args[0].Equals("Benchmark", StringComparison.OrdinalIgnoreCase))
@@ -112,15 +113,14 @@ namespace Tests
 			}
 		}
 
-#if !DOTNETCORE
+#if FEATURE_PROFILING
 		private static IEnumerable<IProfileFactory> CreateProfilingFactory(ProfilingCluster cluster)
 		{
-			yield return new PerformanceProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetExecutingAssembly(), new ColoredConsoleWriter());
-			yield return new TimelineProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetExecutingAssembly(), new ColoredConsoleWriter());
-			yield return new MemoryProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetExecutingAssembly(), new ColoredConsoleWriter());
+			yield return new PerformanceProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());
+			yield return new TimelineProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());
+			yield return new MemoryProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());
 		}
 #endif
-
 		private static Type[] GetBenchmarkTypes()
 		{
 			IEnumerable<Type> types;

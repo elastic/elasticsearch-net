@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using Purify;
 
 namespace Elasticsearch.Net
 {
@@ -14,7 +13,7 @@ namespace Elasticsearch.Net
 		public const string MimeType = "application/json";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
 
-		public Uri Uri => this.Node != null ? new Uri(this.Node.Uri, this.PathAndQuery).Purify() : null;
+		public Uri Uri => this.Node != null ? new Uri(this.Node.Uri, this.PathAndQuery) : null;
 
 		public HttpMethod Method { get; private set; }
 		public string PathAndQuery { get; }

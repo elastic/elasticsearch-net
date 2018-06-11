@@ -151,6 +151,7 @@ namespace Elasticsearch.Net
 			Self.EnableHttpPipelining = config?.EnableHttpPipelining ?? true;
 			Self.RunAs = config?.RunAs;
 			Self.ClientCertificates = config?.ClientCertificates;
+			Self.ThrowExceptions = config?.ThrowExceptions;
 		}
 
 		/// <summary>

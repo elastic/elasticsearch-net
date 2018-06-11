@@ -58,7 +58,7 @@ namespace Nest
 				return this.Type == other.Type;
 			return false;
 		}
-
+		//already private in master, breaking change to change in 6.x
 		public bool EqualsString(string other) => !other.IsNullOrEmpty() && other == this.Name;
 
 		public override string ToString()

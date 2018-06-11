@@ -54,6 +54,7 @@ namespace Tests.Framework.ManagedElasticsearch
 			WriteLine($" - Random:");
 			WriteLine($" \t- {nameof(config.Random.SourceSerializer)}: {config.Random.SourceSerializer}");
 			WriteLine($" \t- {nameof(config.Random.TypedKeys)}: {config.Random.TypedKeys}");
+			WriteLine($" \t- {nameof(config.Random.OldConnection)}: {config.Random.OldConnection}");
 			WriteLine(new string('-', 20));
 
 		}
@@ -110,6 +111,9 @@ namespace Tests.Framework.ManagedElasticsearch
 
 			AppendExplictConfig(nameof(RandomConfiguration.SourceSerializer), sb);
 			AppendExplictConfig(nameof(RandomConfiguration.TypedKeys), sb);
+#if FEATURE_HTTPWEBREQUEST
+			AppendExplictConfig(nameof(RandomConfiguration.OldConnection), sb);
+#endif
 
 			if (runningIntegrations)
 				sb.Append("integrate ")
