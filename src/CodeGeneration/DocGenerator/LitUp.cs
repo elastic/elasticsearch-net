@@ -8,7 +8,6 @@ using DocGenerator.Buildalyzer;
 using DocGenerator.Documentation.Files;
 using Microsoft.Build.Framework;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.Extensions.Logging;
 
 namespace DocGenerator
