@@ -7,7 +7,7 @@ namespace ApiGenerator.Domain
 		public string Generated { get; set; }
 		public string Url { get; set; }
 		public string Description { get; set; }
-		public string AdditionalCode { get; set;}
+		public string AdditionalCode { get; set; } = string.Empty;
 	}
 
 	public class FluentRouteSetter

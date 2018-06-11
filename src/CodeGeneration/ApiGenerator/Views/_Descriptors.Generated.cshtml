@@ -1,3 +1,5 @@
+@using RazorLight
+@inherits TemplatePage<RestApiSpec>
 @using System.Collections.Generic
 @using System.Linq
 @using CsQuery.ExtensionMethods.Internal
@@ -25,27 +27,28 @@ namespace Nest
 	{ 
 	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 	{
-	<text>	@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
+<text>		@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");
+</text>
 	}
 	@foreach (Constructor c in method.DescriptorConstructors())
-    {
-	<text>	@(Raw(c.Description))
+	{
+<text>		@(Raw(c.Description))
 		@(Raw(c.Generated))
 		@(Raw(c.AdditionalCode))
 </text>
-    }
+	}
 	@foreach (FluentRouteSetter c in method.GetFluentRouteSetters())
-    {
-	<text>	@(Raw(c.XmlDoc))
+	{
+<text>		@(Raw(c.XmlDoc))
 		@(Raw(c.Code))
 </text>
-    }
+	}
 	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
-        if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
-        {
+		if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
+		{
 			continue;
-        }
+		}
 		var t = @kv.Value.HighLevelType(kv.Key);
 		var tMethod = t == "Time" ? ".ToTimeSpan()" : "";
 		var tSuffix = (t == "bool") ? " = true" : "";
