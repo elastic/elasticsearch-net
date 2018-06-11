@@ -201,13 +201,6 @@ namespace ApiGenerator
 			File.WriteAllText(targetFile, source);
 		}
 
-		private static void GenerateRequestParametersExtensions(RestApiSpec model)
-		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_RequestParametersExtensions.Generated.cs";
-			var source = RazorHelper.Execute(File.ReadAllText(CodeConfiguration.ViewFolder + @"_RequestParametersExtensions.Generated.cshtml"), model).ToString();
-			File.WriteAllText(targetFile, source);
-		}
-
 		private static void GenerateEnums(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.EsNetFolder + @"Domain\Enums.Generated.cs";
