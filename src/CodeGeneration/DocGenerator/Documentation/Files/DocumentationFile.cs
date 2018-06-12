@@ -41,9 +41,9 @@ namespace DocGenerator.Documentation.Files
 		protected virtual FileInfo CreateDocumentationLocation()
 		{
 			var testFullPath = this.FileLocation.FullName;
-
+			var p = "\\" + Path.DirectorySeparatorChar.ToString();
 			var testInDocumentationFolder =
-				Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "")
+				Regex.Replace(testFullPath, $@"(^.+{p}Tests{p}|\" + this.Extension + "$)", "")
 				.TrimEnd(".doc")
 				.TrimEnd("Tests")
 				.PascalToHyphen() + ".asciidoc";

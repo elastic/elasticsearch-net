@@ -161,11 +161,55 @@ namespace DocGenerator
 			{ "Script.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
 			{ "Script.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
 			{ "Script.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
-			{ "this._polygonCoordinates", @"new[]{
+			{ "EnvelopeCoordinates", @"new [] { new [] { 45.0, -45.0 }, new [] { -45.0, 45.0 }}" },
+			{ "CircleCoordinates", @"new [] { 45.0, -45.0 }" },
+			{ "MultiPointCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
+			{ "MultiLineStringCoordinates", @"new[]
+											{
+												new [] { new [] { 2.0, 12.0 }, new [] { 2.0, 13.0 },new [] { 3.0, 13.0 }, new []{ 3.0, 12.0 } },
+												new [] { new [] { 0.0, 10.0 }, new [] { 0.0, 11.0 },new [] { 1.0, 11.0 }, new []{ 1.0, 10.0 } },
+												new [] { new [] { 0.2, 10.2 }, new [] { 0.2, 10.8 },new [] { 0.8, 10.8 }, new []{ 0.8, 12.0 } },
+											}" },
+			{ "MultiPolygonCoordinates", @"new[]
+											{
+												new []
+												{
+													new []
+													{
+														new [] { 10.0, -17.0},
+														new [] {15.0, 16.0},
+														new [] {0.0, 12.0},
+														new [] {-15.0, 16.0},
+														new [] { -10.0, -17.0},
+														new [] { 10.0, -17.0}
+													},
+													new []
+													{
+														new [] {8.2  , 18.2},
+														new [] { 8.2 , -18.8},
+														new [] { -8.8, -10.8},
+														new [] {8.8  , 18.2}
+													}
+												},
+												new []
+												{
+													new []
+													{
+														new [] { 8.0, -15.0},
+														new [] {15.0, 16.0},
+														new [] {0.0, 12.0},
+														new [] {-15.0, 16.0},
+														new [] { -10.0, -17.0},
+														new [] { 8.0, -15.0}
+													}
+												}
+											}" },
+			{ "PolygonCoordinates", @"new[]{
 										new []{ new [] {10.0, -17.0}, new [] {15.0, 16.0}, new [] {0.0, 12.0}, new [] {-15.0, 16.0}, new [] {-10.0, -17.0},new [] {10.0, -17.0}},
 										new []{ new [] {8.2, 18.2}, new [] {8.2, -18.8}, new [] {-8.8, -10.8}, new [] {8.8, 18.2}}
-									}"
-			}
+									}" },
+			{ "LineStringCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
+			{ "PointCoordinates", "new[] { 38.897676, -77.03653 }" },
 		};
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)
@@ -200,13 +244,26 @@ namespace DocGenerator
 
 			var syntaxTree = CSharpSyntaxTree.ParseText(text);
 			var assemblyName = Path.GetRandomFileName();
-			var references = new MetadataReference[]
+			var references = new List<MetadataReference>
 			{
 				MetadataReference.CreateFromFile(typeof(object).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(Enumerable).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(JsonConvert).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(ITypedList).GetTypeInfo().Assembly.Location),
 			};
+			var systemReferences = new string[]
+			{
+				"System.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+				"System.ObjectModel, Version=4.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+				"System.Dynamic.Runtime, Version=4.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+				"System.Linq.Expressions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+				"netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+			};
+			foreach (var r in systemReferences)
+			{
+				var location = Assembly.Load(r).Location;
+				references.Add(MetadataReference.CreateFromFile(location));
+			}
 
 			var compilation =
 				CSharpCompilation.Create(

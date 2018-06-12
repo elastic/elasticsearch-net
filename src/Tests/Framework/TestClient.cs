@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elastic.Managed.Configuration;
@@ -41,7 +40,7 @@ namespace Tests.Framework
 	public static class TestClient
 	{
 		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
-		public static readonly ITestConfiguration Configuration = LoadConfiguration();
+		public static readonly ITestConfiguration Configuration = ConfigurationLoader.LoadConfiguration();
 
 		public static readonly ConnectionSettings GlobalDefaultSettings = CreateSettings();
 		public static readonly IElasticClient Default = new ElasticClient(GlobalDefaultSettings);
@@ -54,34 +53,6 @@ namespace Tests.Framework
 
 		public static string DefaultHost => "localhost";
 		private static string Host => (RunningFiddler) ? "ipv4.fiddler" : DefaultHost;
-
-		private static ITestConfiguration LoadConfiguration()
-		{
-			// The build script sets a FAKEBUILD env variable, so if it exists then
-			// we must be running tests from the build script
-			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("FAKEBUILD")))
-				return new EnvironmentConfiguration();
-
-			var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
-
-			// If running the classic .NET solution, tests run from bin/{config} directory,
-			// but when running DNX solution, tests run from the test project root
-			var yamlConfigurationPath = (directoryInfo.Name == "Tests"
-				&& directoryInfo.Parent != null
-				&& directoryInfo.Parent.Name == "src")
-				? "."
-				: @"../../../";
-
-			var localYamlFile = Path.GetFullPath(Path.Combine(yamlConfigurationPath, "tests.yaml"));
-			if (File.Exists(localYamlFile))
-				return new YamlConfiguration(localYamlFile);
-
-			var defaultYamlFile = Path.GetFullPath(Path.Combine(yamlConfigurationPath, "tests.default.yaml"));
-			if (File.Exists(defaultYamlFile))
-				return new YamlConfiguration(defaultYamlFile);
-
-			throw new Exception($"Tried to load a yaml file from {yamlConfigurationPath} but it does not exist : pwd:{directoryInfo.FullName}");
-		}
 
 		private static int ConnectionLimitDefault =>
 			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out int x)
@@ -128,8 +99,7 @@ namespace Tests.Framework
 				//hack to prevent the deprecation warnings from the deprecation response test to be reported
 				if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
 				foreach (var d in r.DeprecationWarnings) SeenDeprecations.Add(d);
-			})
-			.OnRequestDataCreated(data => data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
+			});
 
 		public static string PercolatorType => Configuration.ElasticsearchVersion <= ElasticsearchVersion.From("5.0.0-alpha1")
 			? ".percolator"
@@ -188,9 +158,9 @@ namespace Tests.Framework
 			{
 				if (sourceSerializerFactory != null) return sourceSerializerFactory(builtin, values);
 
-                return !Configuration.Random.SourceSerializer
-                	? null
-	                : new TestSourceSerializerBase(builtin, values);
+				return !Configuration.Random.SourceSerializer
+					? null
+					: new TestSourceSerializerBase(builtin, values);
 			}, propertyMappingProvider);
 
 			var defaultSettings = DefaultSettings(s);
@@ -223,7 +193,7 @@ namespace Tests.Framework
 			new ElasticClient(
 				CreateSettings(modifySettings, forceInMemory: true, sourceSerializerFactory: sourceSerializerFactory,
 					propertyMappingProvider: propertyMappingProvider)
-				);
+			);
 
 		public static IElasticClient GetClient(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
@@ -237,7 +207,6 @@ namespace Tests.Framework
 		public static IElasticClient GetClient(
 			Func<ICollection<Uri>, IConnectionPool> createPool,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
-
 			int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, createPool: createPool));
 
@@ -277,35 +246,5 @@ namespace Tests.Framework
 			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
-
-		private static string ExpensiveTestNameForIntegrationTests()
-		{
-			if (!Configuration.RunIntegrationTests) return "ignore";
-
-#if DOTNETCORE
-			return "UNKNOWN";
-#else
-			var st = new StackTrace();
-			var types = GetTypes(st);
-			var name = types
-				.LastOrDefault(type => type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework."));
-			return name?.FullName ?? string.Join(": ", types.Select(n => n.Name));
-#endif
-		}
-
-#if !DOTNETCORE
-
-		private static List<Type> GetTypes(StackTrace st)
-		{
-			var types = (from f in st.GetFrames()
-				let method = f.GetMethod()
-				where method != null
-				let type = method.DeclaringType
-				where type != null
-				select type).ToList();
-			return types;
-		}
-
-#endif
 	}
 }

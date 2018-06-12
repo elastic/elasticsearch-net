@@ -1,3 +1,5 @@
+@using RazorLight
+@inherits TemplatePage<RestApiSpec>
 @using System
 @using System.Collections.Generic
 @using System.Linq
@@ -10,7 +12,7 @@
 	private string CreateEnum(string enumName, string value, int? i)
 	{
 		var enumValue = (enumName == SizeEnum && value == string.Empty) ? RawSize : value.ToPascalCase(true);
-		return string.Format("[EnumMember(Value = \"{0}\")]\r\n\t\t{1}{2}", value, enumValue, i.HasValue ? " = 1 << " + i.Value : null);
+		return string.Format("[EnumMember(Value = \"{0}\")] {1}{2}", value, enumValue, i.HasValue ? " = 1 << " + i.Value : null);
 	}
 	private string CreateCase(string e, string o)
 	{
@@ -54,13 +56,24 @@ namespace Elasticsearch.Net
 	<text>
 	@(isFlag ? "[Flags]" : string.Empty)public enum @e.Name
 	{
-	@Raw(string.Join(",\r\n\t\t", e.Options.OrderBy(s => s == "_all" ? 1 : 0).Select((s, i) => CreateEnum(e.Name, s, isFlag ? (int?)i : null))))
+		@Raw(string.Join(",\r\n\t\t", e.Options.OrderBy(s => s == "_all" ? 1 : 0).Select((s, i) => CreateEnum(e.Name, s, isFlag ? (int?)i : null))))
 	}</text>
 }
 
 	public static class KnownEnums
-    { 
-        private class EnumDictionary : @(Raw("Dictionary<Enum, string>"))
+	{
+		private static readonly @(Raw("ConcurrentDictionary<Type, Func<Enum, string>>")) EnumStringResolvers = new @(Raw("ConcurrentDictionary<Type, Func<Enum, string>>"))();
+
+		static KnownEnums()
+		{
+		@foreach (EnumDescription e in Model.EnumsInTheSpec)
+		{
+<text>			EnumStringResolvers.TryAdd(typeof(@(e.Name)), (e) => GetStringValue((@(e.Name))e));
+</text>
+		}
+		}
+
+		private class EnumDictionary : @(Raw("Dictionary<Enum, string>"))
 		{	
 			public EnumDictionary(int capacity) : base(capacity) {}
 			public @(Raw("Func<Enum, string>")) Resolver { get; set; }
@@ -78,37 +91,29 @@ namespace Elasticsearch.Net
 			var allOption = e.Options.FirstOrDefault(o => o == "_all");
 			if (allOption != null)
 			{
-	        <text>if ((enumValue & @(e.Name).All) != 0) return "_all";</text>
+<text>	if ((enumValue & @(e.Name).All) != 0) return "_all";
+</text>
 			}
-			<text>var list = new @(Raw("List<string>()"));</text>
+<text>			var list = new @(Raw("List<string>()"));
+</text>
 			foreach (var option in e.Options.Where(o => o != "_all"))
 			{
-			<text>if ((enumValue & @(e.Name).@(GetEnumValue(e.Name, option))) != 0) list.Add("@(option)");</text>
+<text>			if ((enumValue & @(e.Name).@(GetEnumValue(e.Name, option))) != 0) list.Add("@(option)");
+</text>
 			}
-			<text>return string.Join(",", list);
+<text>			return string.Join(",", list);
 		}</text>
 		}
 		else
 		{
-			<text>switch (enumValue)
+			<text>	switch (enumValue)
 			{
 				@Raw(string.Join("\r\n\t\t\t\t", e.Options.Select(o => CreateCase(e.Name, o))))
 			}
-			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum '@(e.Name)'");		
+			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum '@(e.Name)'");
 		}</text>
 		}
 	}
-
-		private static readonly @(Raw("ConcurrentDictionary<Type, Func<Enum, string>>")) EnumStringResolvers =
-			new @(Raw("ConcurrentDictionary<Type, Func<Enum, string>>"))();
-
-		static KnownEnums()
-		{
-		@foreach (EnumDescription e in Model.EnumsInTheSpec)
-		{
-			<text>EnumStringResolvers.TryAdd(typeof(@(e.Name)), (e) => GetStringValue((@(e.Name))e));</text>
-		}
-		}
 
 		public static string GetStringValue(this Enum e)
 		{

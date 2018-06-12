@@ -45,6 +45,7 @@ namespace Elasticsearch.Net
 			if (contentType.IsNullOrEmpty()) return requestParams;
 
 			requestParams = requestParams ?? new TRequestParams();
+			//The properties are set here on RequestConfiguration here because they are not nullable (fixed in master).
 			if (requestParams.RequestConfiguration == null)
 				requestParams.RequestConfiguration = new RequestConfiguration { EnableHttpPipelining = Settings.HttpPipeliningEnabled, ThrowExceptions = Settings.ThrowExceptions };
 			if (!contentType.IsNullOrEmpty() && requestParams.RequestConfiguration.ContentType.IsNullOrEmpty())

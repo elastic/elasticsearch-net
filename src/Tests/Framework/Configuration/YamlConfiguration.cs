@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Bogus;
 using Elastic.Managed.Configuration;
+using Tests.Framework.MockData;
 
 namespace Tests.Framework.Configuration
 {
@@ -27,19 +28,19 @@ namespace Tests.Framework.Configuration
 				.ToDictionary(ConfigName, ConfigValue);
 
 			this.Mode = GetTestMode(_config["mode"]);
-			this.ElasticsearchVersion = ElasticsearchVersion.From(_config["elasticsearch_version"]);
+			this.ElasticsearchVersion = _config["elasticsearch_version"];
 			this.ForceReseed = BoolConfig("force_reseed", false);
 			this.TestAgainstAlreadyRunningElasticsearch = BoolConfig("test_against_already_running_elasticsearch", false);
 			this.ClusterFilter = _config.ContainsKey("cluster_filter") ? _config["cluster_filter"] : null;
 			this.TestFilter = _config.ContainsKey("test_filter") ? _config["test_filter"] : null;
 
 			this.Seed = _config.TryGetValue("seed", out var seed) ? int.Parse(seed) : 1337;
-		    Randomizer.Seed = new Random(this.Seed);
-			var randomizer = new Randomizer();
+			var randomizer = new Randomizer(this.Seed);
 			this.Random = new RandomConfiguration
 			{
 				SourceSerializer = RandomBool("source_serializer", randomizer),
-				TypedKeys = RandomBool("typed_keys", randomizer)
+				TypedKeys = RandomBool("typed_keys", randomizer),
+				OldConnection = RandomBool("old_connection", randomizer)
 			};
 		}
 

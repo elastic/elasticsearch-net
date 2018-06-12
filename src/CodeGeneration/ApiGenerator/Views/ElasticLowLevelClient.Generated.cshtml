@@ -1,3 +1,5 @@
+@using RazorLight
+@inherits TemplatePage<RestApiSpec>
 @using System
 @using System.Collections.Generic
 @using System.Globalization
@@ -20,7 +22,7 @@ using static Elasticsearch.Net.HttpMethod;
 
 @{
 	RestApiSpec model = Model;
-	<text>
+<text>
 namespace Elasticsearch.Net
 {
 	///<summary>
@@ -28,7 +30,7 @@ namespace Elasticsearch.Net
 	///</summary>
 	public partial class ElasticLowLevelClient : IElasticLowLevelClient
 	{
-	</text>
+</text>
 	foreach (var kv in model.Endpoints)
 	{
 		var endpoint = kv.Value;
@@ -43,25 +45,29 @@ namespace Elasticsearch.Net
 				? string.Join("|", method.Url.Parts.Where(p => !partsNotToReplace.Contains(p.Key)).Select(p => p.Key))
 				: @"\w+";
 			var pattern = string.IsNullOrEmpty(partNames) ? @"\w+" : partNames;
-			var patchedUrl = Regex.Replace(url, "{(" + pattern + ")}", "{$1.NotNull(\"$1\")}");		
+			var patchedUrl = Regex.Replace(url, "{(" + pattern + ")}", "{$1.NotNull(\"$1\")}");
 			bool isAsync = method.ReturnType.StartsWith("Task<");
 			string requestMethod = isAsync ? "DoRequestAsync" : "DoRequest";
-		<text>///<summary>@method.HttpMethod on @method.Path <para>@method.Documentation</para></summary></text>
+<text>		///<summary>@method.HttpMethod on @method.Path <para>@method.Documentation</para></summary>
+</text>
 			foreach (var part in method.Parts)
 			{
-		<text>@Raw("///<param name=\"" + part.Name + "\">")@part.Description@Raw("</param>")</text>
+<text>		@Raw("///<param name=\"" + part.Name + "\">")@part.Description@Raw("</param>")
+</text>
 			}
-		<text>@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")</text>
+<text>		@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")
+</text>
 		if (!string.IsNullOrEmpty(method.ObsoleteMethodVersion))
-		{<text>		[Obsolete("Scheduled to be removed in 7.0, @method.ObsoleteMethodVersion removed this method from the rest specification")]
+		{
+<text>		[Obsolete("Scheduled to be removed in 7.0, @method.ObsoleteMethodVersion removed this method from the rest specification")]
 </text>}
-		<text>public @Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments))
+<text>		public @Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments))
 			where @method.CallTypeGeneric : class, IElasticsearchResponse, new() => this.@(requestMethod)@(Raw("<" + method.CallTypeGeneric +">"))(@method.HttpMethod, Url($"@(Raw(patchedUrl))"), @(method.FullName.Contains("Async") ? "ctx, " : string.Empty)@(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(Raw(url.StartsWith("_cat") ? ", contentType: \"text/plain\", accept: \"text/plain\"" : ""))));
-		</text>
+</text>
 		}
 	}
 	<text>
-	  }
-	  }
+	}
+	}
 	</text>
 }

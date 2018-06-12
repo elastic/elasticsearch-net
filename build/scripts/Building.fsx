@@ -1,5 +1,5 @@
 ﻿#I @"../../packages/build/FAKE/tools"
-#I @"../../packages/build/FSharp.Data/lib/net40"
+#I @"../../packages/build/FSharp.Data/lib/net45"
 #I @"../../packages/build/Mono.Cecil/lib/net40"
 #r @"FakeLib.dll"
 #r @"Mono.Cecil.dll"
@@ -26,19 +26,18 @@ module Build =
 
     let private runningRelease = hasBuildParam "version" || hasBuildParam "apikey" || getBuildParam "target" = "canary" || getBuildParam "target" = "release"
 
-    type private GlobalJson = JsonProvider<"../../global.json">
+    type private GlobalJson = JsonProvider<"../../global.json", InferTypesFromValues=false>
     let private pinnedSdkVersion = GlobalJson.GetSample().Sdk.Version
     if isMono then setProcessEnvironVar "TRAVIS" "true"
-
     let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS" 
 
-    let private sln = sprintf "src/Elasticsearch%s.sln" (if buildingOnTravis then ".DotNetCoreOnly" else "")
+    let private sln = "src/Elasticsearch.sln"
     
     let private compileCore incremental =
         if not (DotNetCli.isInstalled()) then failwith  "You need to install the dotnet command line SDK to build for .NET Core"
         let runningSdkVersion = DotNetCli.getVersion()
         if (runningSdkVersion <> pinnedSdkVersion) then failwithf "Attempting to run with dotnet.exe with %s but global.json mandates %s" runningSdkVersion pinnedSdkVersion
-        let incrementalFramework = DotNetFramework.Net46
+        let incrementalFramework = DotNetFramework.NetStandard1_3
         let sourceLink = if not incremental && not isMono && runningRelease then "1" else ""
         let props = 
             [ 
@@ -46,7 +45,7 @@ module Build =
                 "CurrentAssemblyVersion", (Versioning.CurrentAssemblyVersion.ToString());
                 "CurrentAssemblyFileVersion", (Versioning.CurrentAssemblyFileVersion.ToString());
                 "DoSourceLink", sourceLink;
-                "DotNetCoreOnly", if buildingOnTravis then "1" else "";
+                "FakeBuild", "1";
                 "OutputPathBaseDir", Path.GetFullPath Paths.BuildOutput;
             ] 
             |> List.map (fun (p,v) -> sprintf "%s=%s" p v)
@@ -153,7 +152,7 @@ module Build =
         trace "Finished rewriting namespaces"
 
     let private ilRepackInternal() =
-        let fw = if isMono then [DotNetFramework.NetStandard1_3] else DotNetFramework.All
+        let fw = DotNetFramework.All
         for f in fw do 
             let nest = Project Project.Nest
             let folder = Paths.ProjectOutputFolder nest f

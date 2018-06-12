@@ -1,3 +1,5 @@
+@using RazorLight
+@inherits TemplatePage<RestApiSpec>
 @using System.Collections.Generic
 @using ApiGenerator.Domain
 @using ApiGenerator
@@ -15,14 +17,15 @@ namespace Elasticsearch.Net
 {
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
 	{
-	<text>
+<text>
 	///<summary>Request options for @method.FullName<pre>@method.Documentation</pre></summary>
 	public class @method.QueryStringParamName : RequestParameters<@method.QueryStringParamName> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.@method.HttpMethod;
 		@foreach (var param in method.Url.Params.Values)
 		{
-		<text>@Raw(param.InitializerGenerator(param.TypeLowLevel, param.ClsName, param.QueryStringKey, param.SetterLowLevel, param.Description))</text>
+<text>		@Raw(param.InitializerGenerator(param.TypeLowLevel, param.ClsName, param.QueryStringKey, param.SetterLowLevel, param.Description))
+</text>
 		}
 	}</text>
 	}

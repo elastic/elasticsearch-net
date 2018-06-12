@@ -30,6 +30,7 @@ namespace Tests.Search.Request
 
 		public static Faker<TRoyal> Generator { get; } =
 			new Faker<TRoyal>()
+				.UseSeed(TestClient.Configuration.Seed)
 				.RuleFor(p => p.Name, f => f.Person.Company.Name + IdState++);
 	}
 

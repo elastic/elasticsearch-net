@@ -14,11 +14,8 @@ namespace Elasticsearch.Net
 
 		}
 		// https://referencesource.microsoft.com/#mscorlib/system/security/util/hex.cs,1bfe838f662feef3
-
 		// converts number to hex digit. Does not do any range checks.
-		private static char HexDigit(int num) {
-			return (char)((num < 10) ? (num + '0') : (num + ('A' - 10)));
-		}
+		private static char HexDigit(int num) => (char)((num < 10) ? (num + '0') : (num + ('A' - 10)));
 
 		private static string EncodeHexString(byte[] sArray)
 		{
