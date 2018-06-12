@@ -54,7 +54,7 @@ Target "Profile" <| fun _ ->
     let url = getBuildParam "elasticsearch"
     Profiler.IndexResults url
 
-Target "Integrate" <| Tests.RunIntegrationTests
+Target "Integrate" Tests.RunIntegrationTests
 
 Target "Benchmark" <| fun _ ->
     let runInteractive = ((getBuildParam "nonInteractive") <> "1")

@@ -5,7 +5,6 @@
     <CurrentVersion>6.0.0</CurrentVersion>
     <CurrentAssemblyVersion>6.0.0</CurrentAssemblyVersion>
     <CurrentAssemblyFileVersion>6.0.0</CurrentAssemblyFileVersion>
-    
     <!-- Version and Informational reflect actual version -->
     <Version>$(CurrentVersion)</Version>
     <InformationalVersion>$(CurrentVersion)</InformationalVersion>
@@ -23,7 +22,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
-    
+
     <DoSourceLink></DoSourceLink>
     <SourceLink Condition="'$(DoSourceLink)'!=''">$(BaseIntermediateOutputPath)\sl-$(MsBuildProjectName)-$(TargetFramework).json</SourceLink>
     

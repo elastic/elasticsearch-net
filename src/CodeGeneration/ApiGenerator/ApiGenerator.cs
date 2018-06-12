@@ -5,15 +5,17 @@ using System.IO;
 using System.Linq;
 using ApiGenerator.Domain;
 using Newtonsoft.Json;
-using Xipton.Razor;
 using ShellProgressBar;
 using Newtonsoft.Json.Linq;
+using RazorLight;
 
 namespace ApiGenerator
 {
 	public class ApiGenerator
 	{
-		static readonly RazorMachine RazorHelper = new RazorMachine();
+		private static readonly RazorLightEngine Razor = new RazorLightEngineBuilder()
+			.UseMemoryCachingProvider()
+			.Build();
 
 		public static void Generate(string downloadBranch, params string[] folders)
 		{
@@ -34,7 +36,7 @@ namespace ApiGenerator
 			{
 				foreach(var kv in actions)
 				{
-					pbar.UpdateMessage("Generating " + kv.Value);
+					pbar.Message = "Generating " + kv.Value;
 					kv.Key(spec);
 					pbar.Tick("Generated " + kv.Value);
 				}
@@ -55,6 +57,7 @@ namespace ApiGenerator
 			"xpack.ml.delete_filter.json",
 			"xpack.ml.get_filters.json",
 			"xpack.ml.put_filter.json",
+			"rank_eval.json"
 		};
 
 		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)
@@ -151,52 +154,57 @@ namespace ApiGenerator
 			return PascalCase(apiEndpointKey);
 		}
 
+		private static string DoRazor(string name, string template, RestApiSpec model)
+		{
+			return Razor.CompileRenderAsync(name, template, model).GetAwaiter().GetResult();
+		}
+
 		private static void GenerateClientInterface(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.EsNetFolder + @"IElasticLowLevelClient.Generated.cs";
-			var source = RazorHelper.Execute(File.ReadAllText(CodeConfiguration.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model).ToString();
+			var source = DoRazor(nameof(GenerateClientInterface), File.ReadAllText(CodeConfiguration.ViewFolder + @"IElasticLowLevelClient.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRawDispatch(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.NestFolder + @"_Generated/_LowLevelDispatch.Generated.cs";
-			var source = RazorHelper.Execute(File.ReadAllText(CodeConfiguration.ViewFolder + @"_LowLevelDispatch.Generated.cshtml"), model).ToString();
+			var source = DoRazor(nameof(GenerateRawDispatch), File.ReadAllText(CodeConfiguration.ViewFolder + @"_LowLevelDispatch.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRawClient(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.EsNetFolder + @"ElasticLowLevelClient.Generated.cs";
-			var source = RazorHelper.Execute(File.ReadAllText(CodeConfiguration.ViewFolder + @"ElasticLowLevelClient.Generated.cshtml"), model).ToString();
+			var source = DoRazor(nameof(GenerateRawClient), File.ReadAllText(CodeConfiguration.ViewFolder + @"ElasticLowLevelClient.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateDescriptors(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Descriptors.Generated.cs";
-			var source = RazorHelper.Execute(File.ReadAllText(CodeConfiguration.ViewFolder + @"_Descriptors.Generated.cshtml"), model).ToString();
+			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Descriptors.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRequests(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Requests.Generated.cs";
-			var source = RazorHelper.Execute(File.ReadAllText(CodeConfiguration.ViewFolder + @"_Requests.Generated.cshtml"), model).ToString();
+			var source = DoRazor(nameof(GenerateRequests), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Requests.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRequestParameters(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.EsNetFolder + @"Domain\RequestParameters\RequestParameters.Generated.cs";
-			var source = RazorHelper.Execute(File.ReadAllText(CodeConfiguration.ViewFolder + @"RequestParameters.Generated.cshtml"), model).ToString();
+			var source = DoRazor(nameof(GenerateRequestParameters), File.ReadAllText(CodeConfiguration.ViewFolder + @"RequestParameters.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateEnums(RestApiSpec model)
 		{
 			var targetFile = CodeConfiguration.EsNetFolder + @"Domain\Enums.Generated.cs";
-			var source = RazorHelper.Execute(File.ReadAllText(CodeConfiguration.ViewFolder + @"Enums.Generated.cshtml"), model).ToString();
+			var source = DoRazor(nameof(GenerateEnums), File.ReadAllText(CodeConfiguration.ViewFolder + @"Enums.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 	}

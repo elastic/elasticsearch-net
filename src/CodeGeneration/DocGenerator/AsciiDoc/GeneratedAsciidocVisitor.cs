@@ -29,7 +29,7 @@ namespace DocGenerator.AsciiDoc
 	/// </summary>
 	public class GeneratedAsciidocVisitor : NoopVisitor
 	{
-		private static readonly Dictionary<string, string> Ids = new Dictionary<string, string>();
+		private static readonly Dictionary<string,string> Ids = new Dictionary<string, string>();
 
 		private readonly FileInfo _source;
 		private readonly FileInfo _destination;
@@ -158,8 +158,7 @@ namespace DocGenerator.AsciiDoc
 
 						// if there is a section title since the last source block, don't add one
 						var lastSourceBlock = _newDocument.LastOrDefault(e => e is Source);
-						var lastSectionTitle =
-							_newDocument.OfType<SectionTitle>().LastOrDefault(e => e.Level == _topSectionTitleLevel + 1);
+						var lastSectionTitle = _newDocument.OfType<SectionTitle>().LastOrDefault(e => e.Level == _topSectionTitleLevel + 1);
 						if (lastSourceBlock != null && lastSectionTitle != null)
 						{
 							var lastSectionTitleIndex = _newDocument.IndexOf(lastSectionTitle);
@@ -195,7 +194,6 @@ namespace DocGenerator.AsciiDoc
 								{
 									_newDocument.Add(CreateSubsectionTitle("Handling Responses"));
 								}
-
 								_newDocument.Add(source);
 								break;
 							default:
@@ -267,7 +265,7 @@ namespace DocGenerator.AsciiDoc
 			string configuration = null;
 			if (Program.BuildOutputPath.Contains("src"))
 			{
-				//bin/Debug|Release/netcoreapp2.0
+				//bin/Debug|Release/netcoreapp2.1
 				configuration = new DirectoryInfo(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)).Parent?.Name;
 				return;
 			}

@@ -1,3 +1,6 @@
+@using RazorLight
+@using ApiGenerator.Domain
+@inherits TemplatePage<RestApiSpec>
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -22,14 +25,16 @@ namespace Elasticsearch.Net
 			var endpoint = kv.Value;
 			foreach(var method in endpoint.GetCsharpMethods())
 			{
-		<text>///<summary>@method.HttpMethod on @method.Path <para>@method.Documentation</para></summary></text>
+<text>		///<summary>@method.HttpMethod on @method.Path <para>@method.Documentation</para></summary>
+</text>
 		foreach (var part in method.Parts)
 		{
-		<text>@Raw("///<param name=\""+part.Name+"\">")@part.Description@Raw("</param>")</text>
+<text>		@Raw("///<param name=\"" + part.Name + "\">")@part.Description@Raw("</param>")
+</text>
 		}
-		<text>@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")
+<text>		@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")
 		@Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments)) where @method.CallTypeGeneric : class, IElasticsearchResponse, new();
-		</text>
+</text>
 			}
 		}
 	}

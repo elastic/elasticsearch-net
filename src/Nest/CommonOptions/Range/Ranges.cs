@@ -73,7 +73,7 @@ namespace Nest
 		[JsonProperty("lt")]
 		public long? LessThan { get; set; }
 	}
-	public class IpRange
+	public class IpAddressRange
 	{
 		[JsonProperty("gte")]
 		public string GreaterThanOrEqualTo { get; set; }

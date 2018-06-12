@@ -12,7 +12,7 @@ namespace Tests.Framework.MockData
 		public FloatRange Floats { get; set; }
 		public IntegerRange Integers { get; set; }
 		public LongRange Longs { get; set; }
-		public IpRange Ips { get; set; }
+		public IpAddressRange Ips { get; set; }
 
 		//for deserialization
 		public Ranges() { }
@@ -92,7 +92,7 @@ namespace Tests.Framework.MockData
 
 				break;
 			}
-			var d = new IpRange();
+			var d = new IpAddressRange();
 			SwapAssign(r(), low, v => d.GreaterThan = v, v => d.GreaterThanOrEqualTo = v);
 			SwapAssign(r(), high, v => d.LessThan = v, v => d.LessThanOrEqualTo = v);
 			this.Ips = d;
@@ -106,6 +106,7 @@ namespace Tests.Framework.MockData
 
 		public static Faker<Ranges> Generator { get; } =
 			new Faker<Ranges>()
+				.UseSeed(TestClient.Configuration.Seed)
 				.CustomInstantiator((f) => new Ranges(f))
 			;
 	}

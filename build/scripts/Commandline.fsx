@@ -46,7 +46,7 @@ module Commandline =
     let private args = getBuildParamOrDefault "cmdline" "build" |> split ' '
     
     let skipTests = args |> List.exists (fun x -> x = "skiptests")
-    let skipDocs = args |> List.exists (fun x -> x = "skipdocs") 
+    let skipDocs = args |> List.exists (fun x -> x = "skipdocs") || isMono
     let seed = 
         match args |> List.tryFind (fun x -> x.StartsWith("seed:")) with
         | Some t -> t.Replace("seed:", "")

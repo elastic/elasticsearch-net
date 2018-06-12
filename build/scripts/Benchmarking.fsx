@@ -1,7 +1,7 @@
-﻿#r "../../packages/build/NEST/lib/net45/Nest.dll"
-#r "../../packages/build/Elasticsearch.Net/lib/net45/Elasticsearch.Net.dll"
+﻿#r "../../packages/build/NEST/lib/net46/Nest.dll"
+#r "../../packages/build/Elasticsearch.Net/lib/net46/Elasticsearch.Net.dll"
 #r "../../packages/build/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
-#r "../../packages/build/FSharp.Data/lib/net40/FSharp.Data.dll"
+#r "../../packages/build/FSharp.Data/lib/net45/FSharp.Data.dll"
 #I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 #nowarn "0044" //TODO sort out FAKE 5
@@ -143,12 +143,12 @@ module Benchmarker =
                 DotNetCli.RunCommand(fun p ->
                     { p with
                         WorkingDir = testsProjectDirectory
-                    }) "run -f netcoreapp2.0 -c Release Benchmark"
+                    }) "run -f netcoreapp2.1 -c Release Benchmark"
              else
                 DotNetCli.RunCommand(fun p ->
                     { p with
                         WorkingDir = testsProjectDirectory
-                    }) "run -f netcoreapp2.0 -c Release Benchmark non-interactive"
+                    }) "run -f netcoreapp2.1 -c Release Benchmark non-interactive"
         finally
             // running benchmarks can timeout so clean up any generated benchmark files
             let benchmarkOutputFiles =
@@ -223,7 +223,7 @@ module Benchmarker =
                 indexSettings.NumberOfShards <- Nullable 1
                 
                 let putIndexTemplateRequest = new PutIndexTemplateRequest(Name.op_Implicit("benchmarks"))
-                putIndexTemplateRequest.Template <- "benchmark-reports-*"
+                putIndexTemplateRequest.IndexPatterns <- ["benchmark-reports-*"]
                 putIndexTemplateRequest.Mappings <- mappings
                 putIndexTemplateRequest.Settings <- indexSettings
 
@@ -239,7 +239,7 @@ module Benchmarker =
             let dateIndexProcessor = new DateIndexNameProcessor();
             dateIndexProcessor.Field <- new Field("date")
             dateIndexProcessor.IndexNamePrefix <- "benchmark-reports-"
-            dateIndexProcessor.DateRounding <- DateRounding.Month
+            dateIndexProcessor.DateRounding <- new Nullable<DateRounding>(DateRounding.Month)
             dateIndexProcessor.DateFormats <- ["yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ"]
 
             let request = new PutPipelineRequest(Id.op_Implicit(pipelineName))

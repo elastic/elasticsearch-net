@@ -2,16 +2,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <NoWarn>NU1701</NoWarn>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
-    <PackageReference Include="RazorMachine" Version="2.6.1" />
-    <PackageReference Include="CsQuery" Version="1.3.4" />
-    <PackageReference Include="ShellProgressBar" Version="3.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="ShellProgressBar" Version="4.0.0" />
+    <PackageReference Include="CsQuery.Core" Version="2.0.1" />
+
+    <!-- https://github.com/toddams/RazorLight/issues/172 -->
+    <PackageReference Include="RazorLight.Unofficial" Version="2.0.0-beta1.1" />
+    <!--<PackageReference Include="RazorLight" Version="2.0.0-beta1" />-->
   </ItemGroup>
   <Import Project="..\..\outputpath.props" />
 </Project>

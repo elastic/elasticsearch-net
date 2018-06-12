@@ -1,5 +1,5 @@
 ﻿#I @"../../packages/build/FAKE/tools"
-#I @"../../packages/build/FSharp.Data/lib/net40"
+#I @"../../packages/build/FSharp.Data/lib/net45"
 #I @"../../packages/build/Mono.Cecil/lib/net40"
 #r @"FakeLib.dll"
 #r @"Mono.Cecil.dll"
@@ -26,7 +26,7 @@ module Build =
 
     let private runningRelease = hasBuildParam "version" || hasBuildParam "apikey" || getBuildParam "target" = "canary" || getBuildParam "target" = "release"
 
-    type private GlobalJson = JsonProvider<"../../global.json">
+    type private GlobalJson = JsonProvider<"../../global.json", InferTypesFromValues=false>
     let private pinnedSdkVersion = GlobalJson.GetSample().Sdk.Version
     if isMono then setProcessEnvironVar "TRAVIS" "true"
     let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS" 

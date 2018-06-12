@@ -1,5 +1,5 @@
 ﻿#I @"../../packages/build/FAKE/tools"
-#I @"../../packages/build/FSharp.Data/lib/net40"
+#I @"../../packages/build/FSharp.Data/lib/net45"
 #r @"FakeLib.dll"
 #r @"FSharp.Data.dll"
 #r @"System.Xml.Linq.dll"
