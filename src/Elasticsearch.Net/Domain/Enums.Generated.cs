@@ -199,7 +199,9 @@ namespace Elasticsearch.Net
 	[EnumMember(Value = "nodes")]
 		Nodes,
 		[EnumMember(Value = "parents")]
-		Parents
+		Parents,
+		[EnumMember(Value = "none")]
+		None
 	}
 	
 	[Flags]public enum ClusterStateMetric
@@ -579,6 +581,7 @@ namespace Elasticsearch.Net
 			{
 				case GroupBy.Nodes: return "nodes";
 				case GroupBy.Parents: return "parents";
+				case GroupBy.None: return "none";
 			}
 			throw new ArgumentException($"'{enumValue.ToString()}' is not a valid value for enum 'GroupBy'");		
 		}

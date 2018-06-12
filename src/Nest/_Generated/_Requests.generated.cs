@@ -24,7 +24,7 @@ namespace Nest
 		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
 		public string[] FilterPath { get => Q<string[]>("filter_path"); set => Q("filter_path", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IAcknowledgeWatchRequest : IRequest<AcknowledgeWatchRequestParameters>
 	{
@@ -53,7 +53,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IActivateWatchRequest : IRequest<ActivateWatchRequestParameters>
 	{
@@ -75,7 +75,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters>
 	{
@@ -113,7 +113,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters>
 	{
@@ -140,7 +140,7 @@ namespace Nest
 		///<summary>Format of the output</summary>
 		public Format? Format { get => Q<Format?>("format"); set => Q("format", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IAuthenticateRequest : IRequest<AuthenticateRequestParameters>
 	{
@@ -154,7 +154,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters>
 	{
@@ -172,7 +172,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IBulkRequest : IRequest<BulkRequestParameters>
 	{
@@ -234,7 +234,7 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICancelTasksRequest : IRequest<CancelTasksRequestParameters>
 	{
@@ -268,7 +268,7 @@ namespace Nest
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters>
 	{
@@ -305,7 +305,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatAllocationRequest : IRequest<CatAllocationRequestParameters>
 	{
@@ -344,7 +344,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatCountRequest : IRequest<CatCountRequestParameters>
 	{
@@ -381,7 +381,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters>
 	{
@@ -420,7 +420,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatHealthRequest : IRequest<CatHealthRequestParameters>
 	{
@@ -450,7 +450,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatHelpRequest : IRequest<CatHelpRequestParameters>
 	{
@@ -468,7 +468,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters>
 	{
@@ -511,7 +511,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatMasterRequest : IRequest<CatMasterRequestParameters>
 	{
@@ -539,7 +539,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters>
 	{
@@ -567,7 +567,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatNodesRequest : IRequest<CatNodesRequestParameters>
 	{
@@ -597,7 +597,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters>
 	{
@@ -625,7 +625,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters>
 	{
@@ -653,7 +653,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters>
 	{
@@ -690,7 +690,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatRepositoriesRequest : IRequest<CatRepositoriesRequestParameters>
 	{
@@ -718,7 +718,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters>
 	{
@@ -753,7 +753,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatShardsRequest : IRequest<CatShardsRequestParameters>
 	{
@@ -792,7 +792,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatSnapshotsRequest : IRequest<CatSnapshotsRequestParameters>
 	{
@@ -829,7 +829,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatTasksRequest : IRequest<CatTasksRequestParameters>
 	{
@@ -866,7 +866,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatTemplatesRequest : IRequest<CatTemplatesRequestParameters>
 	{
@@ -903,7 +903,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters>
 	{
@@ -942,7 +942,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequestParameters>
 	{
@@ -970,7 +970,7 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearCachedRealmsRequest : IRequest<ClearCachedRealmsRequestParameters>
 	{
@@ -992,7 +992,7 @@ namespace Nest
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public string[] Usernames { get => Q<string[]>("usernames"); set => Q("usernames", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearCachedRolesRequest : IRequest<ClearCachedRolesRequestParameters>
 	{
@@ -1012,7 +1012,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParameters>
 	{
@@ -1056,7 +1056,7 @@ namespace Nest
 		///<summary>Clear request cache</summary>
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearScrollRequest : IRequest<ClearScrollRequestParameters>
 	{
@@ -1070,7 +1070,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters>
 	{
@@ -1103,7 +1103,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICloseJobRequest : IRequest<CloseJobRequestParameters>
 	{
@@ -1129,7 +1129,7 @@ namespace Nest
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters>
 	{
@@ -1147,7 +1147,7 @@ namespace Nest
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
 	{
@@ -1169,7 +1169,7 @@ namespace Nest
 		///<summary>Whether to return all default clusters setting.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters>
 	{
@@ -1207,10 +1207,12 @@ namespace Nest
 		public WaitForEvents? WaitForEvents { get => Q<WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
 		///<summary>Whether to wait until there are no relocating shards in the cluster</summary>
 		public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
+		///<summary>Whether to wait until there are no initializing shards in the cluster</summary>
+		public bool? WaitForNoInitializingShards { get => Q<bool?>("wait_for_no_initializing_shards"); set => Q("wait_for_no_initializing_shards", value); }
 		///<summary>Wait until cluster is in a specific state</summary>
 		public WaitForStatus? WaitForStatus { get => Q<WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters>
 	{
@@ -1228,7 +1230,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterPutSettingsRequest : IRequest<ClusterPutSettingsRequestParameters>
 	{
@@ -1248,7 +1250,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
 	{
@@ -1274,7 +1276,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterStateRequest : IRequest<ClusterStateRequestParameters>
 	{
@@ -1319,7 +1321,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters>
 	{
@@ -1346,7 +1348,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICountRequest : IRequest<CountRequestParameters>
 	{
@@ -1470,7 +1472,7 @@ namespace Nest
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
 	{
@@ -1498,7 +1500,7 @@ namespace Nest
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
 	{
@@ -1524,7 +1526,7 @@ namespace Nest
 		///<summary>Whether to verify the repository after creation</summary>
 		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICreateRequest<TDocument> : IRequest<CreateRequestParameters>
 	{
@@ -1588,7 +1590,7 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeactivateWatchRequest : IRequest<DeactivateWatchRequestParameters>
 	{
@@ -1610,7 +1612,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters>
 	{
@@ -1637,7 +1639,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters>
 	{
@@ -1839,7 +1841,7 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteDatafeedRequest : IRequest<DeleteDatafeedRequestParameters>
 	{
@@ -1861,7 +1863,7 @@ namespace Nest
 		///<summary>True if the datafeed should be forcefully deleted</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteExpiredDataRequest : IRequest<DeleteExpiredDataRequestParameters>
 	{
@@ -1875,7 +1877,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
 	{
@@ -1905,7 +1907,7 @@ namespace Nest
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters>
 	{
@@ -1929,7 +1931,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteJobRequest : IRequest<DeleteJobRequestParameters>
 	{
@@ -1951,7 +1953,7 @@ namespace Nest
 		///<summary>True if the job should be forcefully deleted</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters>
 	{
@@ -1965,7 +1967,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteModelSnapshotRequest : IRequest<DeleteModelSnapshotRequestParameters>
 	{
@@ -1988,7 +1990,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeletePipelineRequest : IRequest<DeletePipelineRequestParameters>
 	{
@@ -2012,7 +2014,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters>
 	{
@@ -2036,7 +2038,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteRequest : IRequest<DeleteRequestParameters>
 	{
@@ -2145,7 +2147,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteRoleMappingRequest : IRequest<DeleteRoleMappingRequestParameters>
 	{
@@ -2170,7 +2172,7 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteRoleRequest : IRequest<DeleteRoleRequestParameters>
 	{
@@ -2195,7 +2197,7 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters>
 	{
@@ -2219,7 +2221,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequestParameters>
 	{
@@ -2244,7 +2246,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteUserRequest : IRequest<DeleteUserRequestParameters>
 	{
@@ -2269,7 +2271,7 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteWatchRequest : IRequest<DeleteWatchRequestParameters>
 	{
@@ -2291,7 +2293,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeprecationInfoRequest : IRequest<DeprecationInfoRequestParameters>
 	{
@@ -2314,7 +2316,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDisableUserRequest : IRequest<DisableUserRequestParameters>
 	{
@@ -2339,7 +2341,7 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters>
 	{
@@ -2450,7 +2452,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IEnableUserRequest : IRequest<EnableUserRequestParameters>
 	{
@@ -2475,7 +2477,7 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IExecuteWatchRequest : IRequest<ExecuteWatchRequestParameters>
 	{
@@ -2500,7 +2502,7 @@ namespace Nest
 		///<summary>indicates whether the watch should execute in debug mode</summary>
 		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IExplainRequest<TDocument> : IRequest<ExplainRequestParameters>
 	{
@@ -2566,7 +2568,7 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IFieldCapabilitiesRequest : IRequest<FieldCapabilitiesRequestParameters>
 	{
@@ -2600,7 +2602,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IFlushJobRequest : IRequest<FlushJobRequestParameters>
 	{
@@ -2622,7 +2624,7 @@ namespace Nest
 		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IFlushRequest : IRequest<FlushRequestParameters>
 	{
@@ -2664,7 +2666,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IForceMergeRequest : IRequest<ForceMergeRequestParameters>
 	{
@@ -2701,12 +2703,8 @@ namespace Nest
 		public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
-		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public bool? WaitForMerge { get => Q<bool?>("wait_for_merge"); set => Q("wait_for_merge", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IForecastJobRequest : IRequest<ForecastJobRequestParameters>
 	{
@@ -2726,7 +2724,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters>
 	{
@@ -2771,7 +2769,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAnomalyRecordsRequest : IRequest<GetAnomalyRecordsRequestParameters>
 	{
@@ -2791,7 +2789,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetBucketsRequest : IRequest<GetBucketsRequestParameters>
 	{
@@ -2811,7 +2809,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetCategoriesRequest : IRequest<GetCategoriesRequestParameters>
 	{
@@ -2838,7 +2836,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetDatafeedsRequest : IRequest<GetDatafeedsRequestParameters>
 	{
@@ -2863,7 +2861,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetDatafeedStatsRequest : IRequest<GetDatafeedStatsRequestParameters>
 	{
@@ -2888,7 +2886,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters>
 	{
@@ -2941,7 +2939,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
 	{
@@ -2973,7 +2971,7 @@ namespace Nest
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters>
 	{
@@ -3022,7 +3020,7 @@ namespace Nest
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters>
 	{
@@ -3051,7 +3049,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetInfluencersRequest : IRequest<GetInfluencersRequestParameters>
 	{
@@ -3071,7 +3069,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetJobsRequest : IRequest<GetJobsRequestParameters>
 	{
@@ -3096,7 +3094,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetJobStatsRequest : IRequest<GetJobStatsRequestParameters>
 	{
@@ -3121,7 +3119,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters>
 	{
@@ -3137,7 +3135,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
 	{
@@ -3182,7 +3180,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetModelSnapshotsRequest : IRequest<GetModelSnapshotsRequestParameters>
 	{
@@ -3209,7 +3207,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetOverallBucketsRequest : IRequest<GetOverallBucketsRequestParameters>
 	{
@@ -3229,7 +3227,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters>
 	{
@@ -3254,7 +3252,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters>
 	{
@@ -3281,7 +3279,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRequest : IRequest<GetRequestParameters>
 	{
@@ -3392,7 +3390,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRoleMappingRequest : IRequest<GetRoleMappingRequestParameters>
 	{
@@ -3415,7 +3413,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRoleRequest : IRequest<GetRoleRequestParameters>
 	{
@@ -3438,7 +3436,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters>
 	{
@@ -3458,7 +3456,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters>
 	{
@@ -3487,7 +3485,7 @@ namespace Nest
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetTaskRequest : IRequest<GetTaskRequestParameters>
 	{
@@ -3509,7 +3507,7 @@ namespace Nest
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetTrialLicenseStatusRequest : IRequest<GetTrialLicenseStatusRequestParameters>
 	{
@@ -3523,7 +3521,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetUserAccessTokenRequest : IRequest<GetUserAccessTokenRequestParameters>
 	{
@@ -3537,7 +3535,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters>
 	{
@@ -3560,7 +3558,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetWatchRequest : IRequest<GetWatchRequestParameters>
 	{
@@ -3580,7 +3578,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGraphExploreRequest : IRequest<GraphExploreRequestParameters>
 	{
@@ -3648,7 +3646,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGrokProcessorPatternsRequest : IRequest<GrokProcessorPatternsRequestParameters>
 	{
@@ -3662,7 +3660,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
 	{
@@ -3694,7 +3692,7 @@ namespace Nest
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexRequest<TDocument> : IRequest<IndexRequestParameters>
 	{
@@ -3766,7 +3764,7 @@ namespace Nest
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexTemplateExistsRequest : IRequest<IndexTemplateExistsRequestParameters>
 	{
@@ -3792,7 +3790,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters>
 	{
@@ -3825,10 +3823,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters>
 	{
@@ -3874,7 +3870,7 @@ namespace Nest
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IInvalidateUserAccessTokenRequest : IRequest<InvalidateUserAccessTokenRequestParameters>
 	{
@@ -3888,7 +3884,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IListTasksRequest : IRequest<ListTasksRequestParameters>
 	{
@@ -3919,7 +3915,7 @@ namespace Nest
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
 		public GroupBy? GroupBy { get => Q<GroupBy?>("group_by"); set => Q("group_by", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMigrationAssistanceRequest : IRequest<MigrationAssistanceRequestParameters>
 	{
@@ -3951,7 +3947,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMigrationUpgradeRequest : IRequest<MigrationUpgradeRequestParameters>
 	{
@@ -3973,7 +3969,7 @@ namespace Nest
 		///<summary>Should the request block until the upgrade operation is completed</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
 	{
@@ -4025,7 +4021,7 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public Fields SourceInclude { get => Q<Fields>("_source_include"); set => Q("_source_include", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiSearchRequest : IRequest<MultiSearchRequestParameters>
 	{
@@ -4068,7 +4064,7 @@ namespace Nest
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiSearchTemplateRequest : IRequest<MultiSearchTemplateRequestParameters>
 	{
@@ -4104,7 +4100,7 @@ namespace Nest
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters>
 	{
@@ -4175,7 +4171,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface INodesHotThreadsRequest : IRequest<NodesHotThreadsRequestParameters>
 	{
@@ -4210,7 +4206,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface INodesInfoRequest : IRequest<NodesInfoRequestParameters>
 	{
@@ -4248,7 +4244,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface INodesStatsRequest : IRequest<NodesStatsRequestParameters>
 	{
@@ -4311,7 +4307,7 @@ namespace Nest
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface INodesUsageRequest : IRequest<NodesUsageRequestParameters>
 	{
@@ -4347,7 +4343,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters>
 	{
@@ -4382,7 +4378,7 @@ namespace Nest
 		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IOpenJobRequest : IRequest<OpenJobRequestParameters>
 	{
@@ -4402,7 +4398,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPingRequest : IRequest<PingRequestParameters>
 	{
@@ -4416,7 +4412,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPostJobDataRequest : IRequest<PostJobDataRequestParameters>
 	{
@@ -4440,7 +4436,7 @@ namespace Nest
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
 		public DateTimeOffset? ResetEnd { get => Q<DateTimeOffset?>("reset_end"); set => Q("reset_end", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters>
 	{
@@ -4456,7 +4452,7 @@ namespace Nest
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPreviewDatafeedRequest : IRequest<PreviewDatafeedRequestParameters>
 	{
@@ -4476,7 +4472,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
 	{
@@ -4503,7 +4499,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutDatafeedRequest : IRequest<PutDatafeedRequestParameters>
 	{
@@ -4523,7 +4519,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters>
 	{
@@ -4551,7 +4547,7 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutJobRequest : IRequest<PutJobRequestParameters>
 	{
@@ -4571,7 +4567,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
 	{
@@ -4647,7 +4643,7 @@ namespace Nest
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutPipelineRequest : IRequest<PutPipelineRequestParameters>
 	{
@@ -4671,7 +4667,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutRoleMappingRequest : IRequest<PutRoleMappingRequestParameters>
 	{
@@ -4696,7 +4692,7 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters>
 	{
@@ -4721,7 +4717,7 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters>
 	{
@@ -4752,7 +4748,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutUserRequest : IRequest<PutUserRequestParameters>
 	{
@@ -4777,7 +4773,7 @@ namespace Nest
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutWatchRequest : IRequest<PutWatchRequestParameters>
 	{
@@ -4801,7 +4797,39 @@ namespace Nest
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
 	}
-	
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRankEvalRequest : IRequest<RankEvalRequestParameters>
+	{
+		Indices Index { get; }
+		Types Type { get; }
+	}
+
+	///<summary>Request parameters for RankEval <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</pre></summary>
+	public partial class RankEvalRequest : PlainRequestBase<RankEvalRequestParameters>, IRankEvalRequest
+	{
+		protected IRankEvalRequest Self => this;
+		/// <summary>/_rank_eval</summary>
+		public RankEvalRequest(){}
+
+		/// <summary>/{index}/_rank_eval</summary>
+		///<param name="index">Optional, accepts null</param>
+		public RankEvalRequest(Indices index) : base(r=>r.Optional("index", index)){}
+
+		/// <summary>/{index}/{type}/_rank_eval</summary>
+		///<param name="index">Optional, accepts null</param>
+		///<param name="type">Optional, accepts null</param>
+		public RankEvalRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
+
+		// values part of the url path
+		Indices IRankEvalRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IRankEvalRequest.Type => Self.RouteValues.Get<Types>("type");
+
+		// Request parameters
+		//TODO THIS METHOD IS UNMAPPED!
+
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
 	{
@@ -4828,7 +4856,7 @@ namespace Nest
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRefreshRequest : IRequest<RefreshRequestParameters>
 	{
@@ -4860,7 +4888,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IReindexOnServerRequest : IRequest<ReindexOnServerRequestParameters>
 	{
@@ -4890,7 +4918,7 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IReindexRethrottleRequest : IRequest<ReindexRethrottleRequestParameters>
 	{
@@ -4912,7 +4940,7 @@ namespace Nest
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRemoteInfoRequest : IRequest<RemoteInfoRequestParameters>
 	{
@@ -4926,7 +4954,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters>
 	{
@@ -4949,7 +4977,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRestartWatcherRequest : IRequest<RestartWatcherRequestParameters>
 	{
@@ -4963,7 +4991,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters>
 	{
@@ -4990,7 +5018,7 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRevertModelSnapshotRequest : IRequest<RevertModelSnapshotRequestParameters>
 	{
@@ -5013,7 +5041,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRolloverIndexRequest : IRequest<RolloverIndexRequestParameters>
 	{
@@ -5048,7 +5076,7 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>
 	{
@@ -5062,7 +5090,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IScrollRequest : IRequest<ScrollRequestParameters>
 	{
@@ -5076,7 +5104,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
 	{
@@ -5168,7 +5196,7 @@ namespace Nest
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
 		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
@@ -5257,14 +5285,14 @@ namespace Nest
 		///</summary>
 		public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 		///<summary>
-		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if theÂ number of shards the search
+		/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search
 		/// request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can
 		/// not match any documents based on it's rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are
 		/// disjoint.
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters>
 	{
@@ -5347,7 +5375,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchTemplateRequest : IRequest<SearchTemplateRequestParameters>
 	{
@@ -5407,7 +5435,7 @@ namespace Nest
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
 	{
@@ -5438,12 +5466,10 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IShrinkIndexRequest : IRequest<ShrinkIndexRequestParameters>
 	{
@@ -5472,7 +5498,7 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISimulatePipelineRequest : IRequest<SimulatePipelineRequestParameters>
 	{
@@ -5497,7 +5523,7 @@ namespace Nest
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISnapshotRequest : IRequest<SnapshotRequestParameters>
 	{
@@ -5524,7 +5550,7 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISnapshotStatusRequest : IRequest<SnapshotStatusRequestParameters>
 	{
@@ -5558,7 +5584,7 @@ namespace Nest
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISourceExistsRequest : IRequest<SourceExistsRequestParameters>
 	{
@@ -5665,7 +5691,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISourceRequest : IRequest<SourceRequestParameters>
 	{
@@ -5772,7 +5798,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISplitIndexRequest : IRequest<SplitIndexRequestParameters>
 	{
@@ -5801,7 +5827,7 @@ namespace Nest
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartDatafeedRequest : IRequest<StartDatafeedRequestParameters>
 	{
@@ -5821,7 +5847,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartTrialLicenseRequest : IRequest<StartTrialLicenseRequestParameters>
 	{
@@ -5835,7 +5861,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartWatcherRequest : IRequest<StartWatcherRequestParameters>
 	{
@@ -5849,7 +5875,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopDatafeedRequest : IRequest<StopDatafeedRequestParameters>
 	{
@@ -5871,7 +5897,7 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
 	{
@@ -5885,7 +5911,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters>
 	{
@@ -5917,7 +5943,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITermVectorsRequest<TDocument> : IRequest<TermVectorsRequestParameters>
 	{
@@ -5988,7 +6014,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters>
 	{
@@ -6022,7 +6048,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateByQueryRequest : IRequest<UpdateByQueryRequestParameters>
 	{
@@ -6232,7 +6258,7 @@ namespace Nest
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateDatafeedRequest : IRequest<UpdateDatafeedRequestParameters>
 	{
@@ -6252,7 +6278,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters>
 	{
@@ -6290,7 +6316,7 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateJobRequest : IRequest<UpdateJobRequestParameters>
 	{
@@ -6310,7 +6336,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateModelSnapshotRequest : IRequest<UpdateModelSnapshotRequestParameters>
 	{
@@ -6333,7 +6359,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IRequest<UpdateRequestParameters>
 	{
@@ -6401,7 +6427,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters>
 	{
@@ -6437,7 +6463,7 @@ namespace Nest
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
 		public bool? OnlyAncientSegments { get => Q<bool?>("only_ancient_segments"); set => Q("only_ancient_segments", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestParameters>
 	{
@@ -6469,7 +6495,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IValidateDetectorRequest : IRequest<ValidateDetectorRequestParameters>
 	{
@@ -6483,7 +6509,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IValidateJobRequest : IRequest<ValidateJobRequestParameters>
 	{
@@ -6497,7 +6523,7 @@ namespace Nest
 
 		// Request parameters
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
 	{
@@ -6537,8 +6563,6 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
 		///<summary>The analyzer to use for the query string</summary>
@@ -6588,8 +6612,6 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get => Q<string>("operation_threading"); set => Q("operation_threading", value); }
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string QueryOnQueryString { get => Q<string>("q"); set => Q("q", value); }
 		///<summary>The analyzer to use for the query string</summary>
@@ -6607,7 +6629,7 @@ namespace Nest
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IVerifyRepositoryRequest : IRequest<VerifyRepositoryRequestParameters>
 	{
@@ -6631,7 +6653,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IWatcherStatsRequest : IRequest<WatcherStatsRequestParameters>
 	{
@@ -6656,7 +6678,7 @@ namespace Nest
 		///<summary>Emits stack traces of currently running watches</summary>
 		public bool? EmitStacktraces { get => Q<bool?>("emit_stacktraces"); set => Q("emit_stacktraces", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IXPackInfoRequest : IRequest<XPackInfoRequestParameters>
 	{
@@ -6672,7 +6694,7 @@ namespace Nest
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
 	}
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IXPackUsageRequest : IRequest<XPackUsageRequestParameters>
 	{
@@ -6689,4 +6711,3 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 }
- 
