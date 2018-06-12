@@ -80,7 +80,7 @@ namespace Nest
 			if (!match.Success) throw new ArgumentException($"Expression '{timeUnit}' string is invalid", nameof(timeUnit));
 
 			var factor = match.Groups["factor"].Value;
-			if (!double.TryParse(factor, NumberStyles.Any ,CultureInfo.InvariantCulture, out double fraction))
+			if (!double.TryParse(factor, NumberStyles.Any ,CultureInfo.InvariantCulture, out var fraction))
 				throw new ArgumentException($"Expression '{timeUnit}' contains invalid factor: {factor}", nameof(timeUnit));
 
 			var intervalValue = match.Groups["interval"].Value;

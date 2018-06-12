@@ -45,8 +45,8 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			[U]
 			public void ExpressionEquality()
 			{
-				Field first = Field<Project>(p => p.Name);
-				Field second = Field<Project>(p => p.Name);
+				var first = Field<Project>(p => p.Name);
+				var second = Field<Project>(p => p.Name);
 
 				first.Should().Be(second);
 			}
@@ -54,8 +54,8 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			[U]
 			public void ExpressionEqualityWithDifferentParams()
 			{
-				Field first = Field<Project>(p => p.Name);
-				Field second = Field<Project>(project => project.Name);
+				var first = Field<Project>(p => p.Name);
+				var second = Field<Project>(project => project.Name);
 
 				first.Should().Be(second);
 			}
@@ -350,8 +350,8 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			[U]
 			public void ExpressionEquality()
 			{
-				PropertyName first = Property<Project>(p => p.Name);
-				PropertyName second = Property<Project>(p => p.Name);
+				var first = Property<Project>(p => p.Name);
+				var second = Property<Project>(p => p.Name);
 
 				first.Should().Be(second);
 			}
@@ -359,8 +359,8 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			[U]
 			public void ExpressionEqualityWithDifferentParameters()
 			{
-				PropertyName first = Property<Project>(p => p.Name);
-				PropertyName second = Property<Project>(project => project.Name);
+				var first = Property<Project>(p => p.Name);
+				var second = Property<Project>(project => project.Name);
 
 				first.Should().Be(second);
 			}

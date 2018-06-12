@@ -136,7 +136,7 @@ namespace DocGenerator.AsciiDoc
 			if (_topLevel)
 			{
 				_topLevel = false;
-				for (int index = 0; index < elements.Count; index++)
+				for (var index = 0; index < elements.Count; index++)
 				{
 					var element = elements[index];
 					var source = element as Source;

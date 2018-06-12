@@ -19,7 +19,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var r = new ShardStore();
-			JObject o = JObject.Load(reader);
+			var o = JObject.Load(reader);
 			var properties = o.Properties().ToListOrNullIfEmpty();
 			var id = properties.First();
 			properties.AddRange(id.Value.Value<JObject>().Properties());

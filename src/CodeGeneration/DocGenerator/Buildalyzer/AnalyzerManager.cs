@@ -74,7 +74,7 @@ namespace DocGenerator.Buildalyzer
             LoggerVerbosity = loggerVerbosity;
             if (logWriter != null)
             {
-                LoggerFactory loggerFactory = new LoggerFactory();
+                var loggerFactory = new LoggerFactory();
                 loggerFactory.AddProvider(new TextWriterLoggerProvider(logWriter));
                 ProjectLogger = loggerFactory.CreateLogger<ProjectAnalyzer>();
             }
@@ -96,8 +96,8 @@ namespace DocGenerator.Buildalyzer
                 SolutionProjectType.WebProject
             };
 
-            SolutionFile solution = SolutionFile.Parse(solutionFilePath);
-            foreach(ProjectInSolution project in solution.ProjectsInOrder)
+            var solution = SolutionFile.Parse(solutionFilePath);
+            foreach(var project in solution.ProjectsInOrder)
             {
                 if (!supportedType.Contains(project.ProjectType)) continue;
 	            if (projects.Length > 0 && !projects.Contains(project.ProjectName)) continue;
@@ -115,7 +115,7 @@ namespace DocGenerator.Buildalyzer
             // Normalize as .sln uses backslash regardless of OS the sln is created on
             projectFilePath = projectFilePath.Replace('\\', Path.DirectorySeparatorChar);
             projectFilePath = ValidatePath(projectFilePath, true);
-            if (_projects.TryGetValue(projectFilePath, out ProjectAnalyzer project))
+            if (_projects.TryGetValue(projectFilePath, out var project))
             {
                 return project;
             }
@@ -138,7 +138,7 @@ namespace DocGenerator.Buildalyzer
             // Normalize as .sln uses backslash regardless of OS the sln is created on
             projectFilePath = projectFilePath.Replace('\\', Path.DirectorySeparatorChar);
             projectFilePath = ValidatePath(projectFilePath, false);
-            if (_projects.TryGetValue(projectFilePath, out ProjectAnalyzer project))
+            if (_projects.TryGetValue(projectFilePath, out var project))
             {
                 return project;
             }

@@ -27,7 +27,7 @@ namespace Tests.QueryDsl
 
 		private void Assert(IQueryContainer c, Action<TQuery> when)
 		{
-			TQuery q = this._dispatch(c);
+			var q = this._dispatch(c);
 			when(q);
 			q.Conditionless.Should().BeFalse();
 			c.IsConditionless.Should().BeFalse();

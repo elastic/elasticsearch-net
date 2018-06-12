@@ -164,8 +164,8 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var jo = JObject.Load(reader);
-			QueryContainer filter = jo.Property("filter")?.Value.ToObject<QueryContainer>(serializer);
-			double? weight = jo.Property("weight")?.Value.ToObject<double?>(); ;
+			var filter = jo.Property("filter")?.Value.ToObject<QueryContainer>(serializer);
+			var weight = jo.Property("weight")?.Value.ToObject<double?>(); ;
 			IScoreFunction function = null;
 			foreach (var prop in jo.Properties())
 			{

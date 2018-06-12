@@ -49,7 +49,7 @@ namespace DocGenerator.Buildalyzer.Environment
 
 		public override Dictionary<string, string> GetGlobalProperties(string solutionDir)
 		{
-			Dictionary<string, string> globalProperties = base.GetGlobalProperties(solutionDir);
+			var globalProperties = base.GetGlobalProperties(solutionDir);
 			globalProperties.Add(MsBuildProperties.MSBuildExtensionsPath, ExtensionsPath);
 			globalProperties.Add(MsBuildProperties.MSBuildSDKsPath, SDKsPath);
 			globalProperties.Add(MsBuildProperties.RoslynTargetsPath, RoslynTargetsPath);
@@ -58,7 +58,7 @@ namespace DocGenerator.Buildalyzer.Environment
 
 		private static string LocateToolsPath()
 		{
-			string toolsPath = ToolLocationHelper.GetPathToBuildToolsFile("msbuild.exe", ToolLocationHelper.CurrentToolsVersion);
+			var toolsPath = ToolLocationHelper.GetPathToBuildToolsFile("msbuild.exe", ToolLocationHelper.CurrentToolsVersion);
 			if (string.IsNullOrEmpty(toolsPath))
 			{
 				// Could not find the tools path, possibly due to https://github.com/Microsoft/msbuild/issues/2369
@@ -75,7 +75,7 @@ namespace DocGenerator.Buildalyzer.Environment
 		// From https://github.com/KirillOsenkov/MSBuildStructuredLog/blob/4649f55f900a324421bad5a714a2584926a02138/src/StructuredLogViewer/MSBuildLocator.cs
 		private static string PollForToolsPath()
 		{
-			string programFilesX86 = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFilesX86);
+			var programFilesX86 = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFilesX86);
 			return new[]
 				{
 					Path.Combine(programFilesX86, @"Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe"),

@@ -17,11 +17,11 @@ namespace Nest
 			switch (propertyName)
 			{
 				case "all":
-					return TryReadArray(reader, objectType, existingValue, serializer, out IEnumerable<RoleMappingRuleBase> all)
+					return TryReadArray(reader, objectType, existingValue, serializer, out var all)
 						? reader.ExhaustTo(depth, new AllRoleMappingRule(all) )
 						: reader.ExhaustTo(depth);
 				case "any":
-					return TryReadArray(reader, objectType, existingValue, serializer, out IEnumerable<RoleMappingRuleBase> any)
+					return TryReadArray(reader, objectType, existingValue, serializer, out var any)
 						? reader.ExhaustTo(depth, new AnyRoleMappingRule(any))
 						: reader.ExhaustTo(depth);
 				case "field":

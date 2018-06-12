@@ -9,7 +9,7 @@ namespace Tests.Framework
 		public static IEnumerable<IEnumerable<T>> Partition<T>(this IEnumerable<T> source, int size)
 		{
 			T[] array = null;
-			int count = 0;
+			var count = 0;
 
 			foreach (var item in source)
 			{

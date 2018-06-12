@@ -30,8 +30,8 @@ namespace DocGenerator.Buildalyzer
 	{
 		public static AdhocWorkspace GetWorkspace(this AnalyzerManager manager)
 		{
-			AdhocWorkspace workspace = new AdhocWorkspace();
-			foreach (ProjectAnalyzer project in manager.Projects.Values)
+			var workspace = new AdhocWorkspace();
+			foreach (var project in manager.Projects.Values)
 			{
 				project.AddToWorkspace(workspace);
 			}

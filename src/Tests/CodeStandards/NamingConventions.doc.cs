@@ -209,10 +209,10 @@ namespace Tests.CodeStandards
 		/// implementation from System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(string value)
 		private static bool IsValidTypeNameOrIdentifier(string value, bool isTypeName)
 		{
-			bool nextMustBeStartChar = true;
+			var nextMustBeStartChar = true;
 			if (value.Length == 0)
 				return false;
-			for (int index = 0; index < value.Length; ++index)
+			for (var index = 0; index < value.Length; ++index)
 			{
 				var character = value[index];
 				var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);

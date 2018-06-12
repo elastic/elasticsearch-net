@@ -135,9 +135,9 @@ namespace System.Collections.Generic
 
 		int InternalIndexOf(T item)
 		{
-			int count = _items.Count;
+			var count = _items.Count;
 
-			for (int i = 0; i < count; i++)
+			for (var i = 0; i < count; i++)
 			{
 				if (object.Equals(_items[i], item))
 				{
@@ -151,7 +151,7 @@ namespace System.Collections.Generic
 		{
 			lock (this._sync)
 			{
-				int index = this.InternalIndexOf(item);
+				var index = this.InternalIndexOf(item);
 				if (index < 0)
 					return false;
 

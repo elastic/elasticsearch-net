@@ -109,7 +109,7 @@ namespace DocGenerator.XmlDocs
 
             var index = 0;
 
-            for (int i = 0; i < value.Length; i++)
+            for (var i = 0; i < value.Length; i++)
             {
                 if (value[i] == '.')
                     index = i + 1;

@@ -31,7 +31,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var dict = new DynamicTemplateContainer();
-			JArray o = JArray.Load(reader);
+			var o = JArray.Load(reader);
 			foreach (JObject p in o)
 			{
 				var prop = p.Properties().First();

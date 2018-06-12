@@ -19,8 +19,8 @@ namespace Nest
 
 		string IAction.Name
 		{
-			get { return this._name; }
-			set { this._name = value; }
+			get => this._name;
+			set => this._name = value;
 		}
 
 		ActionType IAction.ActionType => this.ActionType;

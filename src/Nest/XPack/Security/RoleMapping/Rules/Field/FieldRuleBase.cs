@@ -12,14 +12,14 @@ namespace Nest
 		[JsonIgnore]
 		protected string Username
 		{
-			get => (this.BackingDictionary.TryGetValue("username", out object o) ? (string) o : null);
+			get => (this.BackingDictionary.TryGetValue("username", out var o) ? (string) o : null);
 			set => this.BackingDictionary.Add("username", value);
 		}
 
 		[JsonIgnore]
 		protected string DistinguishedName
 		{
-			get => (this.BackingDictionary.TryGetValue("dn", out object o) ? (string) o : null);
+			get => (this.BackingDictionary.TryGetValue("dn", out var o) ? (string) o : null);
 			set => this.BackingDictionary.Add("dn", value);
 		}
 		[JsonIgnore]
@@ -35,13 +35,13 @@ namespace Nest
 		[JsonIgnore]
 		protected string Realm
 		{
-			get => (this.BackingDictionary.TryGetValue("realm.name", out object o) ? (string) o : null);
+			get => (this.BackingDictionary.TryGetValue("realm.name", out var o) ? (string) o : null);
 			set => this.BackingDictionary.Add("realm.name", value);
 		}
 		[JsonIgnore]
 		protected IEnumerable<string> Groups
 		{
-			get => (this.BackingDictionary.TryGetValue("groups", out object o) ? (IEnumerable<string>) o : null);
+			get => (this.BackingDictionary.TryGetValue("groups", out var o) ? (IEnumerable<string>) o : null);
 			set => this.BackingDictionary.Add("groups", value);
 		}
 

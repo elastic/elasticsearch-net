@@ -79,7 +79,7 @@ namespace Tests.Framework.MockData
 			var high = faker.Internet.Ip();
 			var lowBytes = IPAddress.Parse(low).GetAddressBytes();
 			var highBytes = IPAddress.Parse(high).GetAddressBytes();
-			for (int i = 0; i < lowBytes.Length; i++)
+			for (var i = 0; i < lowBytes.Length; i++)
 			{
 				var comparison = lowBytes[i].CompareTo(highBytes[i]);
 				if (comparison == 0) continue;

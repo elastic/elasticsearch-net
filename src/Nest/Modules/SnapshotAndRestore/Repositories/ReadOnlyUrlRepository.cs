@@ -7,10 +7,7 @@ namespace Nest
 
 	public class ReadOnlyUrlRepository : IReadOnlyUrlRepository
 	{
-		public ReadOnlyUrlRepository(ReadOnlyUrlRepositorySettings settings)
-		{
-			Settings = settings;
-		}
+		public ReadOnlyUrlRepository(ReadOnlyUrlRepositorySettings settings) => Settings = settings;
 
 		public IReadOnlyUrlRepositorySettings Settings { get; set; }
 		public string Type { get; } = "url";
@@ -29,10 +26,7 @@ namespace Nest
 	{
 		internal ReadOnlyUrlRepositorySettings() { }
 
-		public ReadOnlyUrlRepositorySettings(string location)
-		{
-			this.Location = location;
-		}
+		public ReadOnlyUrlRepositorySettings(string location) => this.Location = location;
 
 		public string Location { get; set; }
 		public int? ConcurrentStreams { get; set; }
@@ -61,7 +55,7 @@ namespace Nest
 	public class ReadOnlyUrlRepositoryDescriptor
 		: DescriptorBase<ReadOnlyUrlRepositoryDescriptor, IReadOnlyUrlRepository>, IReadOnlyUrlRepository
 	{
-		string ISnapshotRepository.Type { get { return "url"; } }
+		string ISnapshotRepository.Type => "url";
 		IReadOnlyUrlRepositorySettings IRepository<IReadOnlyUrlRepositorySettings>.Settings { get; set; }
 
 		public ReadOnlyUrlRepositoryDescriptor Settings(string location, Func<ReadOnlyUrlRepositorySettingsDescriptor, IReadOnlyUrlRepositorySettings> settingsSelector = null) =>

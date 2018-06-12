@@ -14,7 +14,7 @@ namespace DocGenerator.Walkers
         public async Task<IList<IDocumentationBlock>> ConvertAsync(Document document)
         {
             var node = await document.GetSyntaxRootAsync().ConfigureAwait(false);
-	        string fileName = document.Name;
+	        var fileName = document.Name;
 	        IList<IDocumentationBlock> blocks = new List<IDocumentationBlock>();
 
 	        // use different walking rules for different source files
@@ -44,7 +44,7 @@ namespace DocGenerator.Walkers
 	    private IList<IDocumentationBlock> CondenseCodeBlocks(IList<IDocumentationBlock> blocks)
         {
             var newBlocks = new List<IDocumentationBlock>(blocks.Count);
-            for (int i = 0; i < blocks.Count; i++)
+            for (var i = 0; i < blocks.Count; i++)
             {
                 var block = blocks[i];
                 var codeBlock = block as CodeBlock;
@@ -81,12 +81,12 @@ namespace DocGenerator.Walkers
             var newBlocks = new List<IDocumentationBlock>(blocks.Count);
             var seenFluentExample = false;
             var seenInitializerExample = false;
-            int index = -1;
+            var index = -1;
 
             CodeBlock javascriptBlock = null;
             CodeBlock initializerExample = null;
 
-            for (int i = 0; i < blocks.Count; i++)
+            for (var i = 0; i < blocks.Count; i++)
             {
                 if (seenFluentExample && seenInitializerExample && javascriptBlock != null)
                 {

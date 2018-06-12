@@ -110,7 +110,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			int bucketCount = 0;
+			var bucketCount = 0;
 			foreach (var item in projectsPerMonth.Buckets)
 			{
 				bucketCount++;

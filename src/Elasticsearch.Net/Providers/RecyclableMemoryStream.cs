@@ -62,7 +62,7 @@ namespace Elasticsearch.Net
 	/// </remarks>
 	internal class RecyclableMemoryStream : MemoryStream
 	{
-		private const long MaxStreamLength = Int32.MaxValue;
+		private const long MaxStreamLength = int.MaxValue;
 
 		private static readonly byte[] EmptyArray = new byte[0];
 
@@ -277,7 +277,7 @@ namespace Elasticsearch.Net
 					return this._largeBuffer.Length;
 				}
 
-				long size = (long)this._blocks.Count * this._memoryManager.BlockSize;
+				var size = (long)this._blocks.Count * this._memoryManager.BlockSize;
 				return (int)Math.Min(int.MaxValue, size);
 			}
 			set
@@ -463,7 +463,7 @@ namespace Elasticsearch.Net
 				throw new ArgumentException("buffer length must be at least offset + count");
 			}
 
-			int amountRead = this.InternalRead(buffer, offset, count, streamPosition);
+			var amountRead = this.InternalRead(buffer, offset, count, streamPosition);
 			streamPosition += amountRead;
 			return amountRead;
 		}
@@ -502,15 +502,15 @@ namespace Elasticsearch.Net
 				throw new ArgumentException("count must be greater than buffer.Length - offset");
 			}
 
-			int blockSize = this._memoryManager.BlockSize;
-			long end = (long)this.position + count;
+			var blockSize = this._memoryManager.BlockSize;
+			var end = (long)this.position + count;
 			// Check for overflow
 			if (end > MaxStreamLength)
 			{
 				throw new IOException("Maximum capacity exceeded");
 			}
 
-			long requiredBuffers = (end + blockSize - 1) / blockSize;
+			var requiredBuffers = (end + blockSize - 1) / blockSize;
 
 			if (requiredBuffers * blockSize > MaxStreamLength)
 			{
@@ -521,15 +521,15 @@ namespace Elasticsearch.Net
 
 			if (this._largeBuffer == null)
 			{
-				int bytesRemaining = count;
-				int bytesWritten = 0;
+				var bytesRemaining = count;
+				var bytesWritten = 0;
 				var blockAndOffset = this.GetBlockAndRelativeOffset(this.position);
 
 				while (bytesRemaining > 0)
 				{
-					byte[] currentBlock = this._blocks[blockAndOffset.Block];
-					int remainingInBlock = blockSize - blockAndOffset.Offset;
-					int amountToWriteInBlock = Math.Min(remainingInBlock, bytesRemaining);
+					var currentBlock = this._blocks[blockAndOffset.Block];
+					var remainingInBlock = blockSize - blockAndOffset.Offset;
+					var amountToWriteInBlock = Math.Min(remainingInBlock, bytesRemaining);
 
 					Buffer.BlockCopy(buffer, offset + bytesWritten, currentBlock, blockAndOffset.Offset,
 						amountToWriteInBlock);
@@ -565,7 +565,7 @@ namespace Elasticsearch.Net
 		public override void WriteByte(byte value)
 		{
 			this.CheckDisposed();
-			int end = this.position + 1;
+			var end = this.position + 1;
 
 			// Check for overflow
 			if (end > MaxStreamLength)
@@ -707,12 +707,12 @@ namespace Elasticsearch.Net
 
 			if (this._largeBuffer == null)
 			{
-				int currentBlock = 0;
-				int bytesRemaining = this.length;
+				var currentBlock = 0;
+				var bytesRemaining = this.length;
 
 				while (bytesRemaining > 0)
 				{
-					int amountToCopy = Math.Min(this._blocks[currentBlock].Length, bytesRemaining);
+					var amountToCopy = Math.Min(this._blocks[currentBlock].Length, bytesRemaining);
 					stream.Write(this._blocks[currentBlock], 0, amountToCopy);
 
 					bytesRemaining -= amountToCopy;
@@ -750,8 +750,8 @@ namespace Elasticsearch.Net
 			if (this._largeBuffer == null)
 			{
 				var blockAndOffset = this.GetBlockAndRelativeOffset(fromPosition);
-				int bytesWritten = 0;
-				int bytesRemaining = Math.Min(count, this.length - fromPosition);
+				var bytesWritten = 0;
+				var bytesRemaining = Math.Min(count, this.length - fromPosition);
 
 				while (bytesRemaining > 0)
 				{

@@ -138,7 +138,7 @@ namespace Nest
 			}
 			else if (IsLinqOperator(methodCall.Method))
 			{
-				for (int i = 1; i < methodCall.Arguments.Count; i++)
+				for (var i = 1; i < methodCall.Arguments.Count; i++)
 				{
 					Visit(methodCall.Arguments[i]);
 				}

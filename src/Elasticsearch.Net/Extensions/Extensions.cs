@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 			if (!char.IsUpper(s[0]))
 				return s;
 
-			string camelCase = char.ToLowerInvariant(s[0]).ToString();
+			var camelCase = char.ToLowerInvariant(s[0]).ToString();
 			if (s.Length > 1)
 				camelCase += s.Substring(1);
 

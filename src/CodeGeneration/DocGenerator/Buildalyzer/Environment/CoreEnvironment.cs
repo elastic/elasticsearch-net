@@ -38,7 +38,7 @@ namespace DocGenerator.Buildalyzer.Environment
 
 		public CoreEnvironment(string projectPath)
 		{
-			string dotnetPath = DotnetPathResolver.ResolvePath(projectPath);
+			var dotnetPath = DotnetPathResolver.ResolvePath(projectPath);
 			ToolsPath = dotnetPath;
 			ExtensionsPath = dotnetPath;
 			SDKsPath = Path.Combine(dotnetPath, "Sdks");
@@ -49,7 +49,7 @@ namespace DocGenerator.Buildalyzer.Environment
 
 		public override Dictionary<string, string> GetGlobalProperties(string solutionDir)
 		{
-			Dictionary<string, string> globalProperties = base.GetGlobalProperties(solutionDir);
+			var globalProperties = base.GetGlobalProperties(solutionDir);
 			globalProperties.Add(MsBuildProperties.MSBuildExtensionsPath, ExtensionsPath);
 			globalProperties.Add(MsBuildProperties.MSBuildSDKsPath, SDKsPath);
 			globalProperties.Add(MsBuildProperties.RoslynTargetsPath, RoslynTargetsPath);

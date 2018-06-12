@@ -92,7 +92,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			var container = new QueryContainer();
 			System.Action act = () =>
 			{
-				for (int i = 0; i < Iterations; i++) container |= q;
+				for (var i = 0; i < Iterations; i++) container |= q;
 			};
 			act.ShouldNotThrow();
 			LotsOfOrs(container);

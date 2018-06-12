@@ -96,7 +96,7 @@ namespace Tests.Framework.Profiling
 
 					using (BeginProfiling(resultsDirectory))
 					{
-						for (int i = 0; i < profiledMethod.Attribute.Iterations; i++)
+						for (var i = 0; i < profiledMethod.Attribute.Iterations; i++)
 						{
 							action();
 						}
@@ -131,7 +131,7 @@ namespace Tests.Framework.Profiling
 
 					using (BeginProfiling(resultsDirectory))
 					{
-						for (int i = 0; i < profiledMethod.Attribute.Iterations; i++)
+						for (var i = 0; i < profiledMethod.Attribute.Iterations; i++)
 						{
 							await thunk().ConfigureAwait(false);
 						}

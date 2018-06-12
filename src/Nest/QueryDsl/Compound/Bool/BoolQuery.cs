@@ -60,16 +60,16 @@ namespace Nest
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
 		public IEnumerable<QueryContainer> Must {
-			get { return _must; }
-			set { _must = value.AsInstanceOrToListOrNull(); }
+			get => _must;
+			set => _must = value.AsInstanceOrToListOrNull();
 		}
 
 		/// <summary>
 		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
 		/// </summary>
 		public IEnumerable<QueryContainer> MustNot {
-			get { return _mustNot; }
-			set { _mustNot = value.AsInstanceOrToListOrNull(); }
+			get => _mustNot;
+			set => _mustNot = value.AsInstanceOrToListOrNull();
 		}
 
 		/// <summary>
@@ -77,16 +77,16 @@ namespace Nest
 		/// The minimum number of should clauses to match can be set using <see cref="MinimumShouldMatch"/>.
 		/// </summary>
 		public IEnumerable<QueryContainer> Should {
-			get { return _should; }
-			set { _should = value.AsInstanceOrToListOrNull(); }
+			get => _should;
+			set => _should = value.AsInstanceOrToListOrNull();
 		}
 
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).
 		/// </summary>
 		public IEnumerable<QueryContainer> Filter {
-			get { return _filter; }
-			set { _filter = value.AsInstanceOrToListOrNull(); }
+			get => _filter;
+			set => _filter = value.AsInstanceOrToListOrNull();
 		}
 
 		/// <summary>

@@ -13,6 +13,7 @@ using Tests.Framework.MockData;
 using static Tests.Framework.RoundTripper;
 using static Nest.Infer;
 using Field = Nest.Field;
+// ReSharper disable ArrangeMethodOrOperatorBody
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
@@ -84,8 +85,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		public void NameCanSpecifyBoost()
 		{
 			Field fieldString = "name^2";
-			Field fieldStringConstructor = new Field("name^2");
-			Field fieldStringCreate = new Field("name^2", 3); //<1> NEST will take the boost from the name
+			var fieldStringConstructor = new Field("name^2");
+			var fieldStringCreate = new Field("name^2", 3); //<1> NEST will take the boost from the name
 
 			fieldString.Name.Should().Be("name");
 			fieldStringConstructor.Name.Should().Be("name");
@@ -407,7 +408,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*
 		* The following example class will demonstrate this precedence
 		*/
-		class Precedence
+		private class Precedence
 		{
 			[Text(Name = "renamedIgnoresNest")]
 			[PropertyName("renamedIgnoresJsonProperty"),JsonProperty("renamedIgnoresJsonProperty")]
@@ -432,7 +433,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		/**
 		* Here we create a custom serializer that renames any property named `AskSerializer` to `ask`
 		*/
-		class CustomPropertyMappingProvider : PropertyMappingProvider
+		private class CustomPropertyMappingProvider : PropertyMappingProvider
 		{
 			public override IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 			{

@@ -213,7 +213,7 @@ namespace Nest
 
 		internal static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> handler)
 		{
-			foreach (T item in enumerable) handler(item);
+			foreach (var item in enumerable) handler(item);
 		}
 
 		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable)
@@ -256,7 +256,7 @@ namespace Nest
 			try
 			{
 				var tasks = new List<Task>(maxDegreeOfParallelism);
-				int i = 0;
+				var i = 0;
 				foreach (var item in lazyList)
 				{
 					tasks.Add(ProcessAsync(item, taskSelector, resultProcessor, semaphore, additionalRateLimitter, page++));

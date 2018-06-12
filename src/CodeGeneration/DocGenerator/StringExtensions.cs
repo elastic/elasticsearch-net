@@ -93,10 +93,10 @@ namespace DocGenerator
                 }
             }
 
-            int count = 0;
-            char firstNonTabCharacter = char.MinValue;
+            var count = 0;
+            var firstNonTabCharacter = char.MinValue;
 
-            for (int i = leadingCharacterIndex; i < input.Length; i++)
+            for (var i = leadingCharacterIndex; i < input.Length; i++)
             {
                 if (input[i] != '\t' && input[i] != ' ')
                 {

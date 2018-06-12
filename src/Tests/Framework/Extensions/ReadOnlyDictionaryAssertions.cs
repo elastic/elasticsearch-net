@@ -78,7 +78,7 @@ namespace Tests.Framework.Extensions
 					.FailWith("Expected {0} item(s){reason}, but found {1}.", expected, Subject);
 			}
 
-			int actualCount = Subject.Count;
+			var actualCount = Subject.Count;
 
 			Execute.Assertion
 				.ForCondition((actualCount == expected))
@@ -114,9 +114,9 @@ namespace Tests.Framework.Extensions
 					.FailWith("Expected {context:dictionary} to have {0} items{reason}, but found {1}.", countPredicate.Body, Subject);
 			}
 
-			Func<int, bool> compiledPredicate = countPredicate.Compile();
+			var compiledPredicate = countPredicate.Compile();
 
-			int actualCount = Subject.Count;
+			var actualCount = Subject.Count;
 
 			if (!compiledPredicate(actualCount))
 			{
@@ -220,8 +220,8 @@ namespace Tests.Framework.Extensions
 				throw new ArgumentNullException("expected", "Cannot compare dictionary with <null>.");
 			}
 
-			IEnumerable<TKey> missingKeys = expected.Keys.Except(Subject.Keys);
-			IEnumerable<TKey> additionalKeys = Subject.Keys.Except(expected.Keys);
+			var missingKeys = expected.Keys.Except(Subject.Keys);
+			var additionalKeys = Subject.Keys.Except(expected.Keys);
 
 			if (missingKeys.Any())
 			{
@@ -279,10 +279,10 @@ namespace Tests.Framework.Extensions
 				throw new ArgumentNullException("unexpected", "Cannot compare dictionary with <null>.");
 			}
 
-			IEnumerable<TKey> missingKeys = unexpected.Keys.Except(Subject.Keys);
-			IEnumerable<TKey> additionalKeys = Subject.Keys.Except(unexpected.Keys);
+			var missingKeys = unexpected.Keys.Except(Subject.Keys);
+			var additionalKeys = Subject.Keys.Except(unexpected.Keys);
 
-			bool foundDifference = missingKeys.Any()
+			var foundDifference = missingKeys.Any()
 				|| additionalKeys.Any()
 					|| (Subject.Keys.Any(key => !Subject[key].IsSameOrEqualTo(unexpected[key])));
 
@@ -315,7 +315,7 @@ namespace Tests.Framework.Extensions
 		public WhichValueConstraint<TKey, TValue> ContainKey(TKey expected,
 			string because = "", params object[] becauseArgs)
 		{
-			AndConstraint<ReadOnlyDictionaryAssertions<TKey, TValue>> andConstraint = ContainKeys(new[] { expected }, because, becauseArgs);
+			var andConstraint = ContainKeys(new[] { expected }, because, becauseArgs);
 
 			return new WhichValueConstraint<TKey, TValue>(andConstraint.And, Subject[expected]);
 		}
@@ -327,7 +327,7 @@ namespace Tests.Framework.Extensions
 		/// <param name="expected">The expected keys</param>
 		public AndConstraint<ReadOnlyDictionaryAssertions<TKey, TValue>> ContainKeys(params TKey[] expected)
 		{
-			return ContainKeys(expected, String.Empty);
+			return ContainKeys(expected, string.Empty);
 		}
 
 		/// <summary>
@@ -350,7 +350,7 @@ namespace Tests.Framework.Extensions
 				throw new NullReferenceException("Cannot verify key containment against a <null> collection of keys");
 			}
 
-			TKey[] expectedKeys = expected.ToArray();
+			var expectedKeys = expected.ToArray();
 
 			if (!expectedKeys.Any())
 			{
@@ -430,7 +430,7 @@ namespace Tests.Framework.Extensions
 		/// <param name="unexpected">The unexpected keys</param>
 		public AndConstraint<ReadOnlyDictionaryAssertions<TKey, TValue>> NotContainKeys(params TKey[] unexpected)
 		{
-			return NotContainKeys(unexpected, String.Empty);
+			return NotContainKeys(unexpected, string.Empty);
 		}
 
 		/// <summary>
@@ -453,7 +453,7 @@ namespace Tests.Framework.Extensions
 				throw new NullReferenceException("Cannot verify key containment against a <null> collection of keys");
 			}
 
-			TKey[] unexpectedKeys = unexpected.ToArray();
+			var unexpectedKeys = unexpected.ToArray();
 
 			if (!unexpectedKeys.Any())
 			{
@@ -509,7 +509,7 @@ namespace Tests.Framework.Extensions
 		public AndWhichConstraint<ReadOnlyDictionaryAssertions<TKey, TValue>, TValue> ContainValue(TValue expected,
 			string because = "", params object[] becauseArgs)
 		{
-			AndWhichConstraint<ReadOnlyDictionaryAssertions<TKey, TValue>, IEnumerable<TValue>> innerConstraint =
+			var innerConstraint =
 					ContainValuesAndWhich(new[] { expected }, because, becauseArgs);
 
 			return
@@ -525,7 +525,7 @@ namespace Tests.Framework.Extensions
 		/// <param name="expected">The expected values</param>
 		public AndConstraint<ReadOnlyDictionaryAssertions<TKey, TValue>> ContainValues(params TValue[] expected)
 		{
-			return ContainValues(expected, String.Empty);
+			return ContainValues(expected, string.Empty);
 		}
 
 		/// <summary>
@@ -554,7 +554,7 @@ namespace Tests.Framework.Extensions
 				throw new NullReferenceException("Cannot verify value containment against a <null> collection of values");
 			}
 
-			TValue[] expectedValues = expected.ToArray();
+			var expectedValues = expected.ToArray();
 
 			if (!expectedValues.Any())
 			{
@@ -648,7 +648,7 @@ namespace Tests.Framework.Extensions
 		/// <param name="unexpected">The unexpected values</param>
 		public AndConstraint<ReadOnlyDictionaryAssertions<TKey, TValue>> NotContainValues(params TValue[] unexpected)
 		{
-			return NotContainValues(unexpected, String.Empty);
+			return NotContainValues(unexpected, string.Empty);
 		}
 
 		/// <summary>
@@ -731,7 +731,7 @@ namespace Tests.Framework.Extensions
 				throw new ArgumentNullException("expected", "Cannot compare dictionary with <null>.");
 			}
 
-			KeyValuePair<TKey, TValue>[] expectedKeyValuePairs = expected.ToArray();
+			var expectedKeyValuePairs = expected.ToArray();
 
 			if (!expectedKeyValuePairs.Any())
 			{
@@ -766,7 +766,7 @@ namespace Tests.Framework.Extensions
 				}
 			}
 
-			KeyValuePair<TKey, TValue>[] keyValuePairsNotSameOrEqualInSubject = expectedKeyValuePairs.Where(keyValuePair => !Subject[keyValuePair.Key].IsSameOrEqualTo(keyValuePair.Value)).ToArray();
+			var keyValuePairsNotSameOrEqualInSubject = expectedKeyValuePairs.Where(keyValuePair => !Subject[keyValuePair.Key].IsSameOrEqualTo(keyValuePair.Value)).ToArray();
 
 			if (keyValuePairsNotSameOrEqualInSubject.Any())
 			{
@@ -780,7 +780,7 @@ namespace Tests.Framework.Extensions
 				else
 				{
 					var expectedKeyValuePair = keyValuePairsNotSameOrEqualInSubject.First();
-					TValue actual = Subject[expectedKeyValuePair.Key];
+					var actual = Subject[expectedKeyValuePair.Key];
 
 					Execute.Assertion
 						.BecauseOf(because, becauseArgs)
@@ -835,7 +835,7 @@ namespace Tests.Framework.Extensions
 
 			if (Subject.ContainsKey(key))
 			{
-				TValue actual = Subject[key];
+				var actual = Subject[key];
 
 				Execute.Assertion
 					.ForCondition(actual.IsSameOrEqualTo(value))
@@ -877,7 +877,7 @@ namespace Tests.Framework.Extensions
 				throw new ArgumentNullException("items", "Cannot compare dictionary with <null>.");
 			}
 
-			KeyValuePair<TKey, TValue>[] keyValuePairs = items.ToArray();
+			var keyValuePairs = items.ToArray();
 
 			if (!keyValuePairs.Any())
 			{
@@ -963,7 +963,7 @@ namespace Tests.Framework.Extensions
 
 			if (Subject.ContainsKey(key))
 			{
-				TValue actual = Subject[key];
+				var actual = Subject[key];
 
 				Execute.Assertion
 					.ForCondition(!actual.IsSameOrEqualTo(value))

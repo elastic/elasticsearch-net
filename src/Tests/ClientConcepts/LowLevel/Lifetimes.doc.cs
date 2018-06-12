@@ -33,7 +33,7 @@ namespace Tests.ClientConcepts.LowLevel
 		*
 		* Let's demonstrate which components are disposed by creating our own derived `ConnectionSettings`, `IConnectionPool` and `IConnection` types
 		*/
-		class AConnectionSettings : ConnectionSettings
+		private class AConnectionSettings : ConnectionSettings
 		{
 			public AConnectionSettings(IConnectionPool pool, IConnection connection)
 				: base(pool, connection)
@@ -48,7 +48,7 @@ namespace Tests.ClientConcepts.LowLevel
 			}
 		}
 
-		class AConnectionPool : SingleNodeConnectionPool
+		private class AConnectionPool : SingleNodeConnectionPool
 		{
 			public AConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null) : base(uri, dateTimeProvider) { }
 
@@ -61,7 +61,7 @@ namespace Tests.ClientConcepts.LowLevel
 			}
 		}
 
-		class AConnection : InMemoryConnection
+		private class AConnection : InMemoryConnection
 		{
 			public bool IsDisposed { get; private set; }
 

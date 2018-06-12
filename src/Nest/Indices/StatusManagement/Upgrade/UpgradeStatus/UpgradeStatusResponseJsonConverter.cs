@@ -16,7 +16,7 @@ namespace Nest
 			reader.Read();
 			if (reader.TokenType == JsonToken.EndObject)
 				return response;
-			bool newResponse = false;
+			var newResponse = false;
 			if ((reader.Value as string) == "size_in_bytes")
 			{
 				newResponse = true;
