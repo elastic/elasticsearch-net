@@ -8,7 +8,7 @@
     <VersionSuffix>alpha</VersionSuffix>
     <StartupObject>Tests.BenchmarkProgram</StartupObject>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
-    <!--<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>-->
+    <DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
     <DefineConstants Condition="'$(TargetFramework)'=='net46'">$(DefineConstants);FEATURE_HTTPWEBREQUEST</DefineConstants>
     <DefineConstants Condition="Exists('..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll')">$(DefineConstants);FEATURE_PROFILING</DefineConstants>
   </PropertyGroup>
