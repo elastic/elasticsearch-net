@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netcoreapp2.1;net46</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.1</TargetFrameworks>
+    <!--<TargetFramework>net46</TargetFramework>-->
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <StartupObject>Tests.BenchmarkProgram</StartupObject>
