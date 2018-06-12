@@ -1,4 +1,3 @@
-#if !DOTNETCORE
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -65,10 +64,9 @@ namespace Tests.Framework.Profiling
 				}
 				else
 				{
-					throw new ApplicationException($"Could not attach profiler to process after {WaitTime}");
+					throw new Exception($"Could not attach profiler to process after {WaitTime}");
 				}
 			}
 		}
 	}
 }
-#endif

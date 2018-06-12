@@ -27,8 +27,8 @@ namespace ApiGenerator
 		private static readonly ProgressBarOptions MainProgressBarOptions = new ProgressBarOptions { BackgroundColor = ConsoleColor.DarkGray };
 		private static readonly ProgressBarOptions SubProgressBarOptions = new ProgressBarOptions
 		{
-			ForeGroundColor = ConsoleColor.Cyan,
-			ForeGroundColorDone = ConsoleColor.DarkGreen,
+			ForegroundColor = ConsoleColor.Cyan,
+			ForegroundColorDone = ConsoleColor.DarkGreen,
 			ProgressCharacter = '─',
 			BackgroundColor = ConsoleColor.DarkGray,
 		};
@@ -45,7 +45,7 @@ namespace ApiGenerator
 			{
 				foreach (var spec in specifications)
 				{
-					pbar.UpdateMessage($"Downloading rest-api-spec to {spec.FolderOnDisk} for branch {branch}");
+					pbar.Message = $"Downloading rest-api-spec to {spec.FolderOnDisk} for branch {branch}";
 					DownloadJsonDefinitions(spec, pbar);
 					pbar.Tick($"Downloaded rest-api-spec to {spec.FolderOnDisk} for branch {branch}");
 				}

@@ -1,4 +1,3 @@
-#if !DOTNETCORE
 using System.IO;
 using System.Threading;
 using JetBrains.Profiler.Windows.Api;
@@ -54,4 +53,3 @@ namespace Tests.Framework.Profiling.Performance
 		}
 	}
 }
-#endif

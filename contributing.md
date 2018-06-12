@@ -12,7 +12,7 @@ We do ask that you sign the [Elasticsearch CLA](http://www.elasticsearch.org/con
 
 ## Coding Styleguide
 
-Please install the [editorconfig vs extension](https://visualstudiogallery.msdn.microsoft.com/c8bccfe2-650c-4b42-bc5c-845e21f96328)
+Please install the [Editorconfig vs extension](https://visualstudiogallery.msdn.microsoft.com/c8bccfe2-650c-4b42-bc5c-845e21f96328)
 this will automatically switch to our indentation, whitespace, newlines settings while working on our project
 **while leaving your default settings intact**.
 

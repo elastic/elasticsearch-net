@@ -122,7 +122,7 @@ namespace Tests.ClientConcepts.Connection
         * If you are running on the Desktop CLR you can override specific properties for the current `ServicePoint` easily
         * by overriding `AlterServicePoint` on an `IConnection` implementation deriving from `HttpConnection`
         */
-#if !DOTNETCORE
+#if FEATURE_HTTPWEBREQUEST
         public class MyCustomHttpConnection : HttpConnection
         {
             protected override void AlterServicePoint(ServicePoint requestServicePoint, RequestData requestData)

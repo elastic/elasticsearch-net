@@ -4,8 +4,8 @@ GROUP build
 NUGET
   remote: https://www.nuget.org/api/v2
     Elasticsearch.Net (5.6.2) - restriction: == net45
-    FAKE (5.0.0-rc018.244)
-    FSharp.Core (4.3.4) - restriction: && (< net40) (< portable-net45+win8+wp8+wpa81)
+    FAKE (5.0)
+    FSharp.Core (4.5) - restriction: && (< net40) (< portable-net45+win8+wp8+wpa81)
     FSharp.Data (2.4.6)
       FSharp.Core (>= 4.0.0.1) - restriction: && (< net40) (< portable-net45+win8+wp8+wpa81)
       Zlib.Portable (>= 1.11) - restriction: || (&& (< net40) (>= portable-net45+win8)) (&& (< net40) (< portable-net45+win8) (>= portable-net45+win8+wp8+wpa81))

@@ -86,6 +86,7 @@ namespace Tests.Framework.MockData
 
 		public static Faker<SimpleGeoPoint> Generator { get; } =
 			new Faker<SimpleGeoPoint>()
+				.UseSeed(TestClient.Configuration.Seed)
 				.RuleFor(p => p.Lat, f => f.Address.Latitude())
 				.RuleFor(p => p.Lon, f => f.Address.Longitude())
 			;

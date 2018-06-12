@@ -3,6 +3,7 @@
 #nowarn "0044" //TODO sort out FAKE 5
 
 #load @"Paths.fsx"
+#load @"Commandline.fsx"
 
 open System
 open System.IO
@@ -11,17 +12,19 @@ open Fake
 
 open Paths
 open Projects
+open Commandline
 
 module Documentation = 
 
     let Generate() = 
         let docGenerator = PrivateProject(DocGenerator)
-        let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.Net46
-        let generator = sprintf "%s/%s.exe" path docGenerator.Name
-        ExecProcess (fun p ->
-            p.WorkingDirectory <- Paths.Source("CodeGeneration") @@ docGenerator.Name
-            p.FileName <- generator
-        ) (TimeSpan.FromMinutes 3.) |> ignore
+        let path = Paths.ProjectOutputFolder docGenerator DotNetFramework.NetCoreApp2_1
+        let generator = sprintf "%s.dll %s" docGenerator.Name Commandline.docsBranch
+        
+        DotNetCli.RunCommand(fun p ->
+            { p with
+                WorkingDir = path
+            }) generator
 
     // TODO: hook documentation validation into the process
     let Validate() = 

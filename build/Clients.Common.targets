@@ -5,7 +5,7 @@
     <CurrentVersion>5.0.0</CurrentVersion>
     <CurrentAssemblyVersion>5.0.0</CurrentAssemblyVersion>
     <CurrentAssemblyFileVersion>5.0.0</CurrentAssemblyFileVersion>
-    
+
     <!-- Version and Informational reflect actual version -->
     <Version>$(CurrentVersion)</Version>
     <InformationalVersion>$(CurrentVersion)</InformationalVersion>

@@ -11,6 +11,7 @@ namespace Tests.Framework.Configuration
 		public abstract string ClusterFilter { get; protected set; }
 		public abstract string TestFilter { get; protected set; }
 
+
 		public virtual bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
 		public virtual bool RunUnitTests => Mode == TestMode.Mixed || Mode == TestMode.Unit;
 

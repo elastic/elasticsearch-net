@@ -195,13 +195,26 @@ namespace DocGenerator
 
 			var syntaxTree = CSharpSyntaxTree.ParseText(text);
 			var assemblyName = Path.GetRandomFileName();
-			var references = new MetadataReference[]
+			var references = new List<MetadataReference>
 			{
 				MetadataReference.CreateFromFile(typeof(object).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(Enumerable).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(JsonConvert).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(ITypedList).GetTypeInfo().Assembly.Location),
 			};
+			var systemReferences = new string[]
+			{
+				"System.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+				"System.ObjectModel, Version=4.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+				"System.Dynamic.Runtime, Version=4.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+				"System.Linq.Expressions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+				"netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+			};
+			foreach (var r in systemReferences)
+			{
+				var location = Assembly.Load(r).Location;
+				references.Add(MetadataReference.CreateFromFile(location));
+			}
 
 			var compilation =
 				CSharpCompilation.Create(

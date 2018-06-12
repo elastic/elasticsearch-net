@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Bogus;
 using Elastic.Managed.Configuration;
+using Tests.Framework.MockData;
 
 namespace Tests.Framework.Configuration
 {
@@ -34,8 +35,7 @@ namespace Tests.Framework.Configuration
 			this.TestFilter = _config.ContainsKey("test_filter") ? _config["test_filter"] : null;
 
 			this.Seed = _config.TryGetValue("seed", out var seed) ? int.Parse(seed) : 1337;
-		    Randomizer.Seed = new Random(this.Seed);
-			var randomizer = new Randomizer();
+			var randomizer = new Randomizer(this.Seed);
 			this.Random = new RandomConfiguration
 			{
 				SourceSerializer = RandomBool("source_serializer", randomizer),

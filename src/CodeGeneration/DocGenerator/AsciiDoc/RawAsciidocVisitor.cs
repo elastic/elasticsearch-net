@@ -33,7 +33,7 @@ namespace DocGenerator.AsciiDoc
 			}
 
 			var github = "https://github.com/elastic/elasticsearch-net";
-			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)", $"{github}/tree/5.x/src/Tests/");
+			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)", $"{github}/tree/master/src/Tests/");
 			document.Insert(0, new Comment
 			{
 				Style = CommentStyle.MultiLine,

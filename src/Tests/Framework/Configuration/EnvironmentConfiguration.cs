@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bogus;
 using Elastic.Managed.Configuration;
+using Tests.Framework.MockData;
 
 namespace Tests.Framework.Configuration
 {
@@ -34,8 +35,7 @@ namespace Tests.Framework.Configuration
 			var newRandom = new Random().Next(1, 100000);
 
 			this.Seed = TryGetEnv("NEST_TEST_SEED", out var seed) ? int.Parse(seed) : newRandom;
-		    Randomizer.Seed = new Random(this.Seed);
-			var randomizer = new Randomizer();
+			var randomizer = new Randomizer(this.Seed);
 
 			this.Random = new RandomConfiguration
 			{
