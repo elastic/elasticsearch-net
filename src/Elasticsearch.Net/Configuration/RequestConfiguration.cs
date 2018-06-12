@@ -25,6 +25,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Associate an Id with this user-initiated task, such that it can be located in the cluster task list.
+		/// Valid only for Elasticsearch 6.2.0+
 		/// <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html#_identifying_running_tasks</pre>
 		/// </summary>
 		string OpaqueId { get; set; }
@@ -181,6 +182,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Associate an Id with this user-initiated task, such that it can be located in the cluster task list.
+		/// Valid only for Elasticsearch 6.2.0+
 		/// <pre>https://www.elastic.co/guide/en/elasticsearch/reference/6.2/tasks.html#_identifying_running_tasks</pre>
 		/// </summary>
 		public RequestConfigurationDescriptor OpaqueId(string opaqueId)

@@ -39,5 +39,8 @@ namespace Nest
 
 		[JsonProperty("headers")]
 		public IReadOnlyDictionary<string, string> Headers { get; internal set; } = EmptyReadOnly<string, string>.Dictionary;
+
+		[JsonProperty("children")]
+		public IReadOnlyCollection<TaskInfo> Children { get; internal set; } = EmptyReadOnly<TaskInfo>.Collection;
 	}
 }
