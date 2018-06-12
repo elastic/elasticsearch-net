@@ -28,8 +28,8 @@ namespace Tests
 
 		private static Uri CreateUri(Uri baseUri, Dictionary<string, string> newQueryString)
 		{
-			var newQs = FlattenQueryString(newQueryString);
-			var uriBuilder = new UriBuilder(baseUri) {Query = newQs };
+			var query = FlattenQueryString(newQueryString);
+			var uriBuilder = new UriBuilder(baseUri) {Query = query };
 			return uriBuilder.Uri;
 		}
 
