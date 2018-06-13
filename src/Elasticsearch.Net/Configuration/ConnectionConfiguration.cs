@@ -142,7 +142,7 @@ namespace Elasticsearch.Net
 		IMemoryStreamFactory IConnectionConfigurationValues.MemoryStreamFactory => _memoryStreamFactory;
 
 		private static void DefaultCompletedRequestHandler(IApiCallDetails response) { }
-		Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
+		private Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
 		Action<IApiCallDetails> IConnectionConfigurationValues.OnRequestCompleted => _completedRequestHandler;
 
 		private static void DefaultRequestDataCreated(RequestData response) { }
@@ -173,7 +173,7 @@ namespace Elasticsearch.Net
 		private readonly NameValueCollection _headers = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.Headers => _headers;
 
-		BasicAuthenticationCredentials _basicAuthCredentials;
+		private BasicAuthenticationCredentials _basicAuthCredentials;
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 
 		protected IElasticsearchSerializer UseThisRequestResponseSerializer { get; set; }
@@ -229,12 +229,9 @@ namespace Elasticsearch.Net
         /// <para>For Core CLR, this setting applies to the MaxConnectionsPerServer property on the HttpClientHandler instances used by the HttpClient inside the default <see cref="IConnection"/> implementation</para>
         /// </summary>
         /// <param name="connectionLimit">The connection limit, a value lower then 0 will cause the connection limit not to be set at all</param>
-        public T ConnectionLimit(int connectionLimit)
-		{
-			return Assign(a => a._connectionLimit = connectionLimit);
-		}
+        public T ConnectionLimit(int connectionLimit) => Assign(a => a._connectionLimit = connectionLimit);
 
-        /// <summary>
+		/// <summary>
         /// Enables resniffing of the cluster when a call fails, if the connection pool supports reseeding. Defaults to <c>true</c>
         /// </summary>
         public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true) => Assign(a => a._sniffOnConnectionFault = sniffsOnConnectionFault);

@@ -20,7 +20,7 @@ namespace Nest
 		/// </summary>
 		public int? MinReplicas
 		{
-			get { return _minReplicas; }
+			get => _minReplicas;
 			private set
 			{
 				if (value == null && _maxReplicas == null) Enabled = false;
@@ -34,7 +34,7 @@ namespace Nest
 		/// </summary>
 		public Union<int?, string> MaxReplicas
 		{
-			get { return _maxReplicas; }
+			get => _maxReplicas;
 			private set
 			{
 				if (value == null && _minReplicas == null) Enabled = false;
@@ -96,12 +96,9 @@ namespace Nest
 
 			var expandReplicaParts = value.Split('-');
 			if (expandReplicaParts.Length != 2)
-			{
 				throw new ArgumentException("must contain a 'from' and 'to' value", nameof(value));
-			}
 
-			int minReplicas;
-			if (!int.TryParse(expandReplicaParts[0], out minReplicas))
+			if (!int.TryParse(expandReplicaParts[0], out var minReplicas))
 				throw new FormatException("minReplicas must be an integer");
 
 			var maxReplicas = 0;

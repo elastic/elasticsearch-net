@@ -22,8 +22,8 @@ namespace Nest
 		private List<IMultiTermVectorOperation> _operations = new List<IMultiTermVectorOperation>();
 		IEnumerable<IMultiTermVectorOperation> IMultiTermVectorsRequest.Documents
 		{
-			get { return this._operations; }
-			set { this._operations = value?.ToList(); }
+			get => this._operations;
+			set => this._operations = value?.ToList();
 		}
 
 		public MultiTermVectorsDescriptor Get<T>(Func<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation> getSelector)

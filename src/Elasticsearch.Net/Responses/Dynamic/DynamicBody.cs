@@ -6,6 +6,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+// ReSharper disable ArrangeMethodOrOperatorBody
+// ReSharper disable RemoveRedundantBraces
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace Elasticsearch.Net
 {

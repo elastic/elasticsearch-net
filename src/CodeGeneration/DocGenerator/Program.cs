@@ -68,7 +68,7 @@ namespace DocGenerator
 
 		public static string DocVersion => "6.1";
 
-		static int Main(string[] args)
+		private static int Main(string[] args)
 		{
 		    try
 		    {

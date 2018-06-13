@@ -7,7 +7,7 @@ namespace ApiGenerator
 	{
 		private static readonly string DownloadBranch = "master";
 
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			var redownloadCoreSpecification = false;
 			var downloadBranch = DownloadBranch;
@@ -30,9 +30,7 @@ namespace ApiGenerator
 			{
 				// read last downloaded branch from file.
 				if (File.Exists(CodeConfiguration.LastDownloadedVersionFile))
-				{
 					downloadBranch = File.ReadAllText(CodeConfiguration.LastDownloadedVersionFile);
-				}
 			}
 
 			if (string.IsNullOrEmpty(downloadBranch))

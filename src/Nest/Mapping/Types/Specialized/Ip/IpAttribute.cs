@@ -10,9 +10,9 @@
 		bool? IIpProperty.Index { get; set; }
 		string IIpProperty.NullValue { get; set; }
 
-		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
-		public bool Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
-		public string NullValue { get { return Self.NullValue; } set { Self.NullValue = value; } }
+		public double Boost { get => Self.Boost.GetValueOrDefault(); set => Self.Boost = value; }
+		public bool Index { get => Self.Index.GetValueOrDefault(); set => Self.Index = value; }
+		public string NullValue { get => Self.NullValue; set => Self.NullValue = value; }
 
 	}
 }

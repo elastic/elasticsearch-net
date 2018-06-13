@@ -11,9 +11,9 @@
 		bool? IBooleanProperty.NullValue { get; set; }
 		INumericFielddata IBooleanProperty.Fielddata { get; set; }
 
-		public bool Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
-		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
-		public bool NullValue { get { return Self.NullValue.GetValueOrDefault(); } set { Self.NullValue = value; } }
+		public bool Index { get => Self.Index.GetValueOrDefault(); set => Self.Index = value; }
+		public double Boost { get => Self.Boost.GetValueOrDefault(); set => Self.Boost = value; }
+		public bool NullValue { get => Self.NullValue.GetValueOrDefault(); set => Self.NullValue = value; }
 
 	}
 }

@@ -9,6 +9,10 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.CSharp.RuntimeBinder;
 using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
+// ReSharper disable ArrangeConstructorOrDestructorBody
+// ReSharper disable ArrangeAccessorOwnerBody
+// ReSharper disable RemoveRedundantBraces
+// ReSharper disable ArrangeMethodOrOperatorBody
 
 namespace Elasticsearch.Net
 {
@@ -57,7 +61,7 @@ namespace Elasticsearch.Net
 			return true;
 		}
 
-		static object GetDynamicMember(object obj, string memberName)
+		private static object GetDynamicMember(object obj, string memberName)
 		{
 			var binder = Binder.GetMember(CSharpBinderFlags.None, memberName, null, new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) });
 			var callsite = CallSite<Func<CallSite, object, object>>.Create(binder);
