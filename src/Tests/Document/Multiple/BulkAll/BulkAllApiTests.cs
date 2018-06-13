@@ -33,10 +33,7 @@ namespace Tests.Document.Multiple.BulkAll
 				yield return new SmallObject() { Id = i };
 		}
 
-		public BulkAllApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
-		{
-			this._client = cluster.Client;
-		}
+		public BulkAllApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) => this._client = cluster.Client;
 
 		[I] public async Task BulkAllAndScrollAll()
 		{
