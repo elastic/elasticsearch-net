@@ -85,7 +85,7 @@ namespace Nest
 
 		public T Deserialize<T>(Stream stream)
 		{
-			if (stream == null || stream.Length == 0) return default(T);
+			if (stream == null || stream.CanSeek && stream.Length == 0) return default(T);
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 				return this.Serializer.Deserialize<T>(jsonTextReader);
@@ -93,7 +93,7 @@ namespace Nest
 
 		public object Deserialize(Type type, Stream stream)
 		{
-			if (stream == null || stream.Length == 0) return type.DefaultValue();
+			if (stream == null || stream.CanSeek && stream.Length == 0) return type.DefaultValue();
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 				return this.Serializer.Deserialize(jsonTextReader, type);
@@ -103,7 +103,7 @@ namespace Nest
 		public async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 #pragma warning restore 1998
 		{
-			if (stream == null || stream.Length == 0) return default(T);
+			if (stream == null || stream.CanSeek && stream.Length == 0) return default(T);
             using (var sr = new StreamReader(stream))
             using (var jtr = new JsonTextReader(sr))
 				return this.Serializer.Deserialize<T>(jtr);
@@ -113,7 +113,7 @@ namespace Nest
 		public async Task<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 #pragma warning restore 1998
 		{
-			if (stream == null || stream.Length == 0) return type.DefaultValue();
+			if (stream == null || stream.CanSeek && stream.Length == 0) return type.DefaultValue();
             using (var sr = new StreamReader(stream))
             using (var jtr = new JsonTextReader(sr))
 				return this.Serializer.Deserialize(jtr, type);
