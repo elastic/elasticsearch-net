@@ -24,7 +24,7 @@ namespace Nest
 	/// <inheritdoc/>
 	public class DelimitedPayloadTokenFilter : TokenFilterBase, IDelimitedPayloadTokenFilter
 	{
-		public DelimitedPayloadTokenFilter() : base("delimited_payload_filter") { }
+		public DelimitedPayloadTokenFilter() : base("delimited_payload") { }
 
 		/// <inheritdoc/>
 		public char? Delimiter { get; set; }
@@ -38,7 +38,7 @@ namespace Nest
 	public class DelimitedPayloadTokenFilterDescriptor
 		: TokenFilterDescriptorBase<DelimitedPayloadTokenFilterDescriptor, IDelimitedPayloadTokenFilter>, IDelimitedPayloadTokenFilter
 	{
-		protected override string Type => "delimited_payload_filter";
+		protected override string Type => "delimited_payload";
 
 		char? IDelimitedPayloadTokenFilter.Delimiter { get; set; }
 		DelimitedPayloadEncoding? IDelimitedPayloadTokenFilter.Encoding { get; set; }

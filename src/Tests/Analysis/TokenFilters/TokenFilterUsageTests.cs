@@ -29,7 +29,7 @@ namespace Tests.Analysis.TokenFilters
 					},
 					mydp = new
 					{
-						type = "delimited_payload_filter",
+						type = "delimited_payload",
 						delimiter = "-",
 						encoding = "identity"
 					},
