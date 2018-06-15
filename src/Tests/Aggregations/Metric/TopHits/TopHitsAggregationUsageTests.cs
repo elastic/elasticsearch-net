@@ -78,7 +78,8 @@ namespace Tests.Aggregations.Metric.TopHits
 										source = "doc['numberOfCommits'].value * 2",
 									}
 								}
-							}
+							},
+							docvalue_fields = new [] { "state" }
 						}
 					}
 				}
@@ -127,11 +128,15 @@ namespace Tests.Aggregations.Metric.TopHits
 								.ScriptField("commit_factor", sf => sf
 									.Source("doc['numberOfCommits'].value * 2")
 
+								)
+
+							)
+							.DocValueFields(d => d
+								.Field(p => p.State)
 							)
 						)
 					)
-				)
-			);
+				);
 
 		protected override AggregationDictionary InitializerAggs =>
 			new TermsAggregation("states")
@@ -166,15 +171,17 @@ namespace Tests.Aggregations.Metric.TopHits
 								{ Field<Project>(p => p.Description), new HighlightField() }
 							}
 						},
-						ScriptFields = new ScriptFields{
+						ScriptFields = new ScriptFields
 						{
-							"commit_factor", new ScriptField
 							{
-								Script = new InlineScript("doc['numberOfCommits'].value * 2")
-							}
-						}
+								"commit_factor", new ScriptField
+								{
+									Script = new InlineScript("doc['numberOfCommits'].value * 2")
+								}
+							},
+						},
+						DocValueFields = Infer.Fields<Project>(f => f.State)
 					}
-				}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
