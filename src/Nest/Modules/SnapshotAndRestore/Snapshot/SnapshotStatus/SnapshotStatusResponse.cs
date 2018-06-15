@@ -24,8 +24,12 @@ namespace Nest
 		public string Snapshot { get; internal set; }
 		[JsonProperty("repository")]
 		public string Repository { get; internal set; }
+		[JsonProperty("uuid")]
+		public string UUID { get; internal set; }
 		[JsonProperty("state")]
 		public string State { get; internal set; }
+		[JsonProperty("include_global_state")]
+		public bool? IncludeGlobalState { get; internal set; }
 		[JsonProperty("shards_stats")]
 		public SnapshotShardsStats ShardsStats { get; internal set; }
 		[JsonProperty("stats")]
