@@ -17,12 +17,14 @@ namespace Nest
 		/// Char filters to normalize the keyword
 		/// </summary>
 		[JsonProperty("char_filter")]
+		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> CharFilter { get; set; }
 
 		/// <summary>
 		/// An optional list of logical / registered name of token filters.
 		/// </summary>
 		[JsonProperty("filter")]
+		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> Filter { get; set; }
 	}
 
