@@ -4885,6 +4885,8 @@ namespace Nest
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public Time Scroll { get => Q<Time>("scroll"); set => Q("scroll", value); }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

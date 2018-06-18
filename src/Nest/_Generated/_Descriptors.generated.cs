@@ -3023,6 +3023,8 @@ namespace Nest
 		public ReindexOnServerDescriptor RequestsPerSecond(long? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public ReindexOnServerDescriptor Slices(long? slices) => Qs("slices", slices);
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public ReindexOnServerDescriptor Scroll(Time scroll) => Qs("scroll", scroll);
 	
 	}
 	
