@@ -12,6 +12,7 @@ namespace Elasticsearch.Net
 	{
 		public const string MimeType = "application/json";
 		public const string RunAsSecurityHeader = "es-security-runas-user";
+		public const string OpaqueIdHeader = "X-Opaque-Id";
 
 		public Uri Uri => this.Node != null ? new Uri(this.Node.Uri, this.PathAndQuery) : null;
 
@@ -77,6 +78,10 @@ namespace Elasticsearch.Net
 			this.RequestMimeType = local?.ContentType ?? MimeType;
 			this.Accept = local?.Accept ?? MimeType;
 			this.Headers = global.Headers != null ? new NameValueCollection(global.Headers) : new NameValueCollection();
+
+			if (!string.IsNullOrEmpty(local?.OpaqueId))
+				this.Headers.Add(OpaqueIdHeader, local.OpaqueId);
+
 			this.RunAs = local?.RunAs;
 			this.SkipDeserializationForStatusCodes = global?.SkipDeserializationForStatusCodes;
 			this.ThrowExceptions = local?.ThrowExceptions ?? global.ThrowExceptions;

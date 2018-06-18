@@ -73,6 +73,12 @@ namespace Nest
 
 		[JsonProperty("parent_task_id")]
 		public TaskId ParentTaskId { get; internal set; }
+
+		[JsonProperty("cancellable")]
+		public bool Cancellable { get; internal set; }
+
+		[JsonProperty("headers")]
+		public IReadOnlyDictionary<string, string> Headers { get; internal set; } = EmptyReadOnly<string, string>.Dictionary;
 	}
 
 	public class TaskStatus

@@ -24,6 +24,12 @@ namespace Elasticsearch.Net
 		string ContentType { get; set; }
 
 		/// <summary>
+		/// Associate an Id with this user-initiated task, such that it can be located in the cluster task list.
+		/// Valid only for Elasticsearch 6.2.0+
+		/// </summary>
+		string OpaqueId { get; set; }
+
+		/// <summary>
 		/// Force a different Accept header on the request
 		/// </summary>
 		string Accept { get; set; }
@@ -95,6 +101,7 @@ namespace Elasticsearch.Net
 		public TimeSpan? RequestTimeout { get; set; }
 		public TimeSpan? PingTimeout { get; set; }
 		public string ContentType { get; set; }
+		public string OpaqueId { get; set; }
 		public string Accept { get; set; }
 		public int? MaxRetries { get; set; }
 		public Uri ForceNode { get; set; }
@@ -121,6 +128,7 @@ namespace Elasticsearch.Net
 		TimeSpan? IRequestConfiguration.RequestTimeout { get; set; }
 		TimeSpan? IRequestConfiguration.PingTimeout { get; set; }
 		string IRequestConfiguration.ContentType { get; set; }
+		string IRequestConfiguration.OpaqueId { get; set; }
 		string IRequestConfiguration.Accept { get; set; }
 
 		int? IRequestConfiguration.MaxRetries { get; set; }
@@ -152,6 +160,7 @@ namespace Elasticsearch.Net
 			Self.RunAs = config?.RunAs;
 			Self.ClientCertificates = config?.ClientCertificates;
 			Self.ThrowExceptions = config?.ThrowExceptions;
+			Self.OpaqueId = config?.OpaqueId;
 		}
 
 		/// <summary>
@@ -167,6 +176,16 @@ namespace Elasticsearch.Net
 		public RequestConfigurationDescriptor RequestTimeout(TimeSpan requestTimeout)
 		{
 			Self.RequestTimeout = requestTimeout;
+			return this;
+		}
+
+		/// <summary>
+		/// Associate an Id with this user-initiated task, such that it can be located in the cluster task list.
+		/// Valid only for Elasticsearch 6.2.0+
+		/// </summary>
+		public RequestConfigurationDescriptor OpaqueId(string opaqueId)
+		{
+			Self.OpaqueId = opaqueId;
 			return this;
 		}
 

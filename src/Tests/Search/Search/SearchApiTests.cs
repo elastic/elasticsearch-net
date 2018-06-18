@@ -351,4 +351,57 @@ namespace Tests.Search.Search
 			response.ShouldBeValid();
 		}
 	}
+
+	public class OpaqueIdApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	{
+		private const string OpaqueId = "123456";
+
+		public OpaqueIdApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new { };
+
+		protected override int ExpectStatusCode => 200;
+		protected override bool ExpectIsValid => true;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => $"/project/doc/_search?scroll=10m";
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.RequestConfiguration(r => r.OpaqueId(OpaqueId))
+			.Query(q => q)
+			.Scroll("10m"); // Create a scroll in order to keep the task around.
+
+		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
+		{
+			RequestConfiguration = new RequestConfiguration
+			{
+				OpaqueId = OpaqueId
+			}
+		};
+
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (c, f) => c.Search(f),
+			fluentAsync: (c, f) => c.SearchAsync(f),
+			request: (c, r) => c.Search<Project>(r),
+			requestAsync: (c, r) => c.SearchAsync<Project>(r)
+		);
+
+		protected override void OnAfterCall(IElasticClient client)
+		{
+			var tasks = client.ListTasks(d => d.RequestConfiguration(r => r.OpaqueId(OpaqueId)));
+			tasks.Should().NotBeNull();
+			foreach (var node in tasks.Nodes)
+			{
+				foreach (var task in node.Value.Tasks)
+				{
+					task.Value.Headers[RequestData.OpaqueIdHeader].Should().Be(OpaqueId);
+				}
+			}
+			base.OnAfterCall(client);
+		}
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+		}
+	}
 }
