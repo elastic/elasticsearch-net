@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Bogus;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -20,17 +21,39 @@ namespace Tests.Search.Request
 		JoinField Join { get; set; }
 	}
 
-	[ElasticsearchType(IdProperty = "Name")]
+	[ElasticsearchType(IdProperty = nameof(Name))]
 	public abstract class RoyalBase<TRoyal> : IRoyal
 		where TRoyal : class, IRoyal
 	{
 		protected static int IdState = 0;
+
+		protected static int GenerationSeed()
+		{
+			unchecked
+			{
+				var seed = TestClient.Configuration.Seed;
+
+				if (typeof(TRoyal) == typeof(King))
+					return seed;
+				if (typeof(TRoyal) == typeof(Prince))
+					return seed * 2;
+				if (typeof(TRoyal) == typeof(Duke))
+					return seed * 3;
+				if (typeof(TRoyal) == typeof(Earl))
+					return seed * 4;
+				if (typeof(TRoyal) == typeof(Baron))
+					return seed * 5;
+
+				return seed;
+			}
+		}
+
 		public virtual JoinField Join { get; set; }
 		public string Name { get; set; }
 
 		public static Faker<TRoyal> Generator { get; } =
 			new Faker<TRoyal>()
-				.UseSeed(TestClient.Configuration.Seed)
+				.UseSeed(GenerationSeed())
 				.RuleFor(p => p.Name, f => f.Person.Company.Name + IdState++);
 	}
 
