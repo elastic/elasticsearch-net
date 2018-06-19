@@ -332,6 +332,9 @@ namespace Tests.Search.Request
 			response.Hits.Should().NotBeEmpty();
 			foreach (var hit in response.Hits)
 			{
+				hit.Id.Should().NotBeNullOrEmpty();
+				hit.Index.Should().NotBeNullOrEmpty();
+
 				var princes = hit.InnerHits["princes"].Documents<Prince>();
 				princes.Should().NotBeEmpty();
 				foreach (var princeHit in hit.InnerHits["princes"].Hits.Hits)
