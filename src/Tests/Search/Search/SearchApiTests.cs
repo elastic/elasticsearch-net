@@ -378,7 +378,8 @@ namespace Tests.Search.Search
 			RequestConfiguration = new RequestConfiguration
 			{
 				OpaqueId = OpaqueId
-			}
+			},
+			Scroll = "10m"
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
