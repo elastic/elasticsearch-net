@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -352,6 +353,8 @@ namespace Tests.Search.Search
 		}
 	}
 
+
+	[SkipVersion("<6.2.0", "OpaqueId introduced in 6.2.0")]
 	public class OpaqueIdApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		private const string OpaqueId = "123456";
