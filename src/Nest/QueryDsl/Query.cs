@@ -125,6 +125,9 @@ namespace Nest
 		public static QueryContainer Range(Func<NumericRangeQueryDescriptor<T>, INumericRangeQuery> selector) =>
 			new QueryContainerDescriptor<T>().Range(selector);
 
+		public static QueryContainer LongRange(Func<LongRangeQueryDescriptor<T>, ILongRangeQuery> selector) =>
+			new QueryContainerDescriptor<T>().LongRange(selector);
+
 		public static QueryContainer Regexp(Func<RegexpQueryDescriptor<T>, IRegexpQuery> selector) =>
 			new QueryContainerDescriptor<T>().Regexp(selector);
 
@@ -175,9 +178,6 @@ namespace Nest
 
 		public static QueryContainer Terms(Func<TermsQueryDescriptor<T>, ITermsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Terms(selector);
-
-		public static QueryContainer TermsSet(Func<TermsSetQueryDescriptor<T>, ITermsSetQuery> selector) =>
-			new QueryContainerDescriptor<T>().TermsSet(selector);
 
 		public static QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
 			new QueryContainerDescriptor<T>().Type(selector);
