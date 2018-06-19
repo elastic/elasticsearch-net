@@ -152,6 +152,9 @@ namespace Tests.Search.Request
 				)
 			);
 			this._client.Bulk(bulk);
+
+			// Index twice to bump the version
+			this._client.Bulk(bulk);
 			this._client.Refresh(this._index);
 		}
 
@@ -268,7 +271,8 @@ namespace Tests.Search.Request
 									{
 										fields = new { fullTextField = new { } }
 									},
-									ignore_unmapped = false
+									ignore_unmapped = false,
+									version = true
 								}
 							}
 						},
@@ -278,7 +282,7 @@ namespace Tests.Search.Request
 							{
 								query = new { match_all = new { } },
 								path = "foes",
-								inner_hits = new { }
+								inner_hits = new { version = true }
 							}
 						}
 					}
@@ -297,14 +301,16 @@ namespace Tests.Search.Request
 						.Name("princes")
 						.Highlight(h=>h.Fields(f=>f.Field(p=>p.FullTextField)))
 						.IgnoreUnmapped(false)
+						.Version()
 					)
 
 				) || q.Nested(n => n
 					.Path(p => p.Foes)
 					.Query(nq => nq.MatchAll())
-					.InnerHits()
+					.InnerHits(i => i.Version())
 				)
-			);
+			)
+			.Version();
 
 		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
 		{
@@ -317,14 +323,19 @@ namespace Tests.Search.Request
 					Name = "princes",
 					DocValueFields = Field<Prince>(p=>p.Name),
 					Highlight = Highlight.Field(Field<Prince>(p=>p.FullTextField)),
-					IgnoreUnmapped = false
+					IgnoreUnmapped = false,
+					Version = true
 				}
 			} || new NestedQuery
 			{
 				Path = Field<King>(p => p.Foes),
 				Query = new MatchAllQuery(),
 				InnerHits = new InnerHits()
-			}
+				{
+					Version = true
+				}
+			},
+			Version = true
 		};
 
 		protected override void ExpectResponse(ISearchResponse<King> response)
@@ -334,6 +345,8 @@ namespace Tests.Search.Request
 			{
 				hit.Id.Should().NotBeNullOrEmpty();
 				hit.Index.Should().NotBeNullOrEmpty();
+				hit.Version?.Should().BeGreaterThan(1);
+
 
 				var princes = hit.InnerHits["princes"].Documents<Prince>();
 				princes.Should().NotBeEmpty();
@@ -350,6 +363,7 @@ namespace Tests.Search.Request
 					var docValueName = princeHit.Fields.ValueOf<Prince, string>(p=>p.Name);
 					docValueName.Should().NotBeNullOrWhiteSpace("value of name on Fields");
 
+					princeHit.Version?.Should().BeGreaterThan(1);
 				}
 
 				var foes = hit.InnerHits["foes"].Documents<King>();
