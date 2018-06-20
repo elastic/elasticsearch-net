@@ -42,6 +42,7 @@ namespace Nest
 		}
 	}
 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class LongRangeQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<LongRangeQueryDescriptor<T>, ILongRangeQuery, T>
 			, ILongRangeQuery where T : class
