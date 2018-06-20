@@ -179,6 +179,9 @@ namespace Nest
 		public static QueryContainer Terms(Func<TermsQueryDescriptor<T>, ITermsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Terms(selector);
 
+		public static QueryContainer TermsSet(Func<TermsSetQueryDescriptor<T>, ITermsSetQuery> selector) =>
+			new QueryContainerDescriptor<T>().TermsSet(selector);
+
 		public static QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
 			new QueryContainerDescriptor<T>().Type(selector);
 
