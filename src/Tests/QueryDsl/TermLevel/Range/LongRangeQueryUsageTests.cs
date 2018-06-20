@@ -39,13 +39,13 @@ namespace Tests.QueryDsl.TermLevel.Range
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.Range(c => c
+			.LongRange(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.Description)
 				.GreaterThan(636634079999999999)
 				.GreaterThanOrEquals(636634080000000000)
-				.LessThan(636634079999999999)
+				.LessThan(636634080000000000)
 				.LessThanOrEquals(636634079999999999)
 				.Relation(RangeRelation.Within)
 			);
