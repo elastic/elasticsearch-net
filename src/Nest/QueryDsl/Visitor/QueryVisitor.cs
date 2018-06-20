@@ -61,6 +61,7 @@
 		void Visit(IExistsQuery query);
 		void Visit(IDateRangeQuery query);
 		void Visit(INumericRangeQuery query);
+		void Visit(ILongRangeQuery query);
 		void Visit(ITermRangeQuery query);
 		void Visit(ISpanFirstQuery query);
 		void Visit(ISpanNearQuery query);
@@ -123,7 +124,9 @@
 
 		public virtual void Visit(INumericRangeQuery query) { }
 
-        public virtual void Visit(ITermRangeQuery query) { }
+		public virtual void Visit(ILongRangeQuery query) { }
+
+		public virtual void Visit(ITermRangeQuery query) { }
 
 		public virtual void Visit(IFunctionScoreQuery query) { }
 

@@ -79,7 +79,9 @@ namespace Nest
 
 		public virtual void Visit(INumericRangeQuery query) => Write("numeric_range");
 
-        public virtual void Visit(ITermRangeQuery query) => Write("term_range");
+		public virtual void Visit(ILongRangeQuery query) => Write("numeric_range");
+
+		public virtual void Visit(ITermRangeQuery query) => Write("term_range");
 
 		public virtual void Visit(IFunctionScoreQuery query) => Write("function_core");
 
