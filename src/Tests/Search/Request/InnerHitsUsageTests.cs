@@ -152,9 +152,6 @@ namespace Tests.Search.Request
 				)
 			);
 			this._client.Bulk(bulk);
-
-			// Index twice to bump the version
-			this._client.Bulk(bulk);
 			this._client.Refresh(this._index);
 		}
 
@@ -345,7 +342,7 @@ namespace Tests.Search.Request
 			{
 				hit.Id.Should().NotBeNullOrEmpty();
 				hit.Index.Should().NotBeNullOrEmpty();
-				hit.Version?.Should().BeGreaterThan(1);
+				hit.Version?.Should().Be(1);
 
 
 				var princes = hit.InnerHits["princes"].Documents<Prince>();
@@ -363,7 +360,7 @@ namespace Tests.Search.Request
 					var docValueName = princeHit.Fields.ValueOf<Prince, string>(p=>p.Name);
 					docValueName.Should().NotBeNullOrWhiteSpace("value of name on Fields");
 
-					princeHit.Version?.Should().BeGreaterThan(1);
+					princeHit.Version?.Should().Be(1);
 				}
 
 				var foes = hit.InnerHits["foes"].Documents<King>();
