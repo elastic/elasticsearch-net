@@ -284,7 +284,8 @@ namespace Tests.Search.Request
 						}
 					}
 				}
-			}
+			},
+			version = true
 		};
 
 		protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
