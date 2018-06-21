@@ -17,19 +17,16 @@ namespace Tests.Reproduce
 	{
 		private readonly WritableCluster _cluster;
 
-		public GithubIssue2788(WritableCluster cluster)
-		{
-			_cluster = cluster;
-		}
+		public GithubIssue2788(WritableCluster cluster) => _cluster = cluster;
 
 		// sample mapping with nested objects with TimeSpan field
-		class Root
+		private class Root
 		{
 			[Nested]
 			public Child[] Children { get; set; }
 		}
 
-		class Child
+		private class Child
 		{
 			public TimeSpan StartTime { get; set; }
 

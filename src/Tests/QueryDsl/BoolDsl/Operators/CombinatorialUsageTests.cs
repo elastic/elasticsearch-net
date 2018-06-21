@@ -8,7 +8,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 {
 	public class CombinationUsageTests : OperatorUsageBase
 	{
-		[U] void DoesNotJoinTwoShouldsUsingAnd() => ReturnsBool(
+		[U] public void DoesNotJoinTwoShouldsUsingAnd() => ReturnsBool(
 			(Query || Query) && (Query || Query),
 			q => (q.Query() || q.Query()) && (q.Query() || q.Query()),
 			b =>
@@ -20,7 +20,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 
 			});
 
-		[U] void DoesJoinTwoShouldsUsingOr() => ReturnsBool(
+		[U] public void DoesJoinTwoShouldsUsingOr() => ReturnsBool(
 			(Query || Query) || (Query || Query),
 			q => (q.Query() || q.Query()) || (q.Query() || q.Query()),
 			b =>
@@ -31,7 +31,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				b.Filter.Should().BeNull();
 			});
 
-		[U] void DoesNotJoinTwoMustsUsingOr() => ReturnsBool(
+		[U] public void DoesNotJoinTwoMustsUsingOr() => ReturnsBool(
 			(Query && Query) || (Query && Query),
 			q => (q.Query() && q.Query()) || (q.Query() && q.Query()),
 			b =>
@@ -42,7 +42,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				b.Filter.Should().BeNull();
 			});
 
-		[U] void DoesJoinTwoMustsUsingAnd() => ReturnsBool(
+		[U] public void DoesJoinTwoMustsUsingAnd() => ReturnsBool(
 			(Query && Query) && (Query && Query),
 			q => (q.Query() && q.Query()) && (q.Query() && q.Query()),
 			b =>
@@ -53,7 +53,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				b.Filter.Should().BeNull();
 			});
 
-		[U] void AndJoinsMustNot() => ReturnsBool(
+		[U] public void AndJoinsMustNot() => ReturnsBool(
 			Query && !Query,
 			q => q.Query() && !q.Query(),
 			b =>
@@ -62,7 +62,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				b.MustNot.Should().NotBeEmpty().And.HaveCount(1);
 			});
 
-		[U] void OrDoesNotJoinMustNot() => ReturnsBool(
+		[U] public void OrDoesNotJoinMustNot() => ReturnsBool(
 			Query || !Query,
 			q => q.Query() || !q.Query(),
 			b =>
@@ -70,7 +70,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				b.Should.Should().NotBeEmpty().And.HaveCount(2);
 			});
 
-		[U] void OrDoesNotJoinFilter() => ReturnsBool(
+		[U] public void OrDoesNotJoinFilter() => ReturnsBool(
 			Query || !Query,
 			q => q.Query() || +q.Query(),
 			b =>
@@ -79,7 +79,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				b.Filter.Should().BeNull();
 			});
 
-		[U] void AndJoinsFilter() => ReturnsBool(
+		[U] public void AndJoinsFilter() => ReturnsBool(
 			Query && +Query,
 			q => q.Query() && +q.Query(),
 			b =>

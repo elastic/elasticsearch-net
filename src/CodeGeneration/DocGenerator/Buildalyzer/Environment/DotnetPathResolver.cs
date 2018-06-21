@@ -46,8 +46,8 @@ namespace DocGenerator.Buildalyzer.Environment
 				}
 
 				// Need to rety calling "dotnet --info" and do a hacky timeout for the process otherwise it occasionally locks up during testing (and possibly in the field)
-				List<string> lines = GetInfo(projectPath);
-				int retry = 0;
+				var lines = GetInfo(projectPath);
+				var retry = 0;
 				do
 				{
 					lines = GetInfo(projectPath);
@@ -63,13 +63,13 @@ namespace DocGenerator.Buildalyzer.Environment
 		{
 			// Ensure that we set the DOTNET_CLI_UI_LANGUAGE environment variable to "en-US" before
 			// running 'dotnet --info'. Otherwise, we may get localized results.
-			string originalCliLanguage = System.Environment.GetEnvironmentVariable(DOTNET_CLI_UI_LANGUAGE);
+			var originalCliLanguage = System.Environment.GetEnvironmentVariable(DOTNET_CLI_UI_LANGUAGE);
 			System.Environment.SetEnvironmentVariable(DOTNET_CLI_UI_LANGUAGE, "en-US");
 
 			try
 			{
 				// Create the process info
-				Process process = new Process();
+				var process = new Process();
 				process.StartInfo.FileName = "dotnet";
 				process.StartInfo.Arguments = "--info";
 				process.StartInfo.WorkingDirectory = Path.GetDirectoryName(projectPath); // global.json may change the version, so need to set working directory
@@ -77,14 +77,14 @@ namespace DocGenerator.Buildalyzer.Environment
 				process.StartInfo.UseShellExecute = false;
 
 				// Capture output
-				List<string> lines = new List<string>();
+				var lines = new List<string>();
 				process.StartInfo.RedirectStandardOutput = true;
 				process.OutputDataReceived += (s, e) => lines.Add(e.Data);
 
 				// Execute the process
 				process.Start();
 				process.BeginOutputReadLine();
-				Stopwatch sw = new Stopwatch();
+				var sw = new Stopwatch();
 				sw.Start();
 				while (!process.HasExited)
 				{
@@ -110,19 +110,19 @@ namespace DocGenerator.Buildalyzer.Environment
 				throw new InvalidOperationException("Could not get results from `dotnet --info` call");
 			}
 
-			foreach (string line in lines)
+			foreach (var line in lines)
 			{
-				int colonIndex = line.IndexOf(':');
+				var colonIndex = line.IndexOf(':');
 				if (colonIndex >= 0
 				    && line.Substring(0, colonIndex).Trim().Equals("Base Path", StringComparison.OrdinalIgnoreCase))
 				{
-					string basePath = line.Substring(colonIndex + 1).Trim();
+					var basePath = line.Substring(colonIndex + 1).Trim();
 
 					// Make sure the base path matches the runtime architecture if on Windows
 					// Note that this only works for the default installation locations under "Program Files"
 					if (basePath.Contains(@"\Program Files\") && !System.Environment.Is64BitProcess)
 					{
-						string newBasePath = basePath.Replace(@"\Program Files\", @"\Program Files (x86)\");
+						var newBasePath = basePath.Replace(@"\Program Files\", @"\Program Files (x86)\");
 						if (Directory.Exists(newBasePath))
 						{
 							basePath = newBasePath;
@@ -130,7 +130,7 @@ namespace DocGenerator.Buildalyzer.Environment
 					}
 					else if (basePath.Contains(@"\Program Files (x86)\") && System.Environment.Is64BitProcess)
 					{
-						string newBasePath = basePath.Replace(@"\Program Files (x86)\", @"\Program Files\");
+						var newBasePath = basePath.Replace(@"\Program Files (x86)\", @"\Program Files\");
 						if (Directory.Exists(newBasePath))
 						{
 							basePath = newBasePath;

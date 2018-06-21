@@ -40,7 +40,7 @@ namespace DocGenerator.Buildalyzer.Environment
 			}
 
 			// Look at the project file to determine
-			XElement projectElement = projectDocument.GetDescendants("Project").FirstOrDefault();
+			var projectElement = projectDocument.GetDescendants("Project").FirstOrDefault();
 			if (projectElement != null)
 			{
 				// Does this project use the SDK?
@@ -51,7 +51,7 @@ namespace DocGenerator.Buildalyzer.Environment
 				{
 					// Use the Framework tools if this project targets .NET Framework ("net" followed by a digit)
 					// https://docs.microsoft.com/en-us/dotnet/standard/frameworks
-					string targetFramework = projectElement.GetDescendants("TargetFramework").FirstOrDefault()?.Value;
+					var targetFramework = projectElement.GetDescendants("TargetFramework").FirstOrDefault()?.Value;
 					if(targetFramework != null
 					   && targetFramework.StartsWith("net", StringComparison.OrdinalIgnoreCase)
 					   && targetFramework.Length > 3

@@ -12,7 +12,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 {
 	public class ScriptedMetricAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
-		class Scripted
+		private class Scripted
 		{
 			public string Language { get; set; }
 			public string Combine { get; set; }
@@ -77,7 +77,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 	public class ScriptedMetricMultiAggregationTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		// hide
-		class Scripted
+		private class Scripted
 		{
 			public string Language { get; set; }
 			public string Combine { get; set; }

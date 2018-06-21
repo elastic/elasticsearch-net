@@ -28,13 +28,8 @@ namespace DocGenerator
 				, @"[-\s]+", "-", RegexOptions.Compiled).TrimEnd('-').ToLower();
 		}
 
-		public static string LowercaseHyphenToPascal(this string lowercaseHyphenatedInput)
-		{
-			return Regex.Replace(
-                lowercaseHyphenatedInput.Replace("-", " "),
-                @"\b([a-z])",
-                m => m.Captures[0].Value.ToUpper());
-		}
+		public static string LowercaseHyphenToPascal(this string lowercaseHyphenatedInput) =>
+			Regex.Replace(lowercaseHyphenatedInput.Replace("-", " "), @"\b([a-z])", m => m.Captures[0].Value.ToUpper());
 
 		public static string TrimEnd(this string input, string trim)
 		{
@@ -49,17 +44,11 @@ namespace DocGenerator
 		{
 			var match = LeadingMultiLineComment.Match(input);
 
-			if (match.Success)
-			{
-				input = input.Substring(match.Groups["value"].Value.Length);
-			}
+			if (match.Success) input = input.Substring(match.Groups["value"].Value.Length);
 
 			match = TrailingMultiLineComment.Match(input);
 
-			if (match.Success)
-			{
-				input = input.Substring(0, input.Length - match.Groups["value"].Value.Length);
-			}
+			if (match.Success) input = input.Substring(0, input.Length - match.Groups["value"].Value.Length);
 
 			return input;
 		}
@@ -67,10 +56,7 @@ namespace DocGenerator
 		public static string RemoveLeadingSpacesAndAsterisk(this string input)
 		{
 			var match = LeadingSpacesAndAsterisk.Match(input);
-			if (match.Success)
-			{
-				input = input.Substring(match.Groups["value"].Value.Length);
-			}
+			if (match.Success) input = input.Substring(match.Groups["value"].Value.Length);
 
 			return input;
 		}
@@ -87,31 +73,23 @@ namespace DocGenerator
             {
                 leadingCharacterIndex = input.IndexOf(" ", StringComparison.OrdinalIgnoreCase);
 
-                if (leadingCharacterIndex == -1)
-                {
-                    return input;
-                }
+                if (leadingCharacterIndex == -1) return input;
             }
 
-            int count = 0;
-            char firstNonTabCharacter = char.MinValue;
+            var count = 0;
+            var firstNonTabCharacter = char.MinValue;
 
-            for (int i = leadingCharacterIndex; i < input.Length; i++)
-            {
-                if (input[i] != '\t' && input[i] != ' ')
-                {
-                    firstNonTabCharacter = input[i];
-                    count = i - leadingCharacterIndex;
-                    break;
-                }
-            }
+            for (var i = leadingCharacterIndex; i < input.Length; i++)
+	            if (input[i] != '\t' && input[i] != ' ')
+	            {
+		            firstNonTabCharacter = input[i];
+		            count = i - leadingCharacterIndex;
+		            break;
+	            }
 
-            if (firstNonTabCharacter == '{' && numberOfTabs != count)
-            {
-                numberOfTabs = count;
-            }
+	        if (firstNonTabCharacter == '{' && numberOfTabs != count) numberOfTabs = count;
 
-            return Regex.Replace(
+	        return Regex.Replace(
                 Regex.Replace(
                     input,
                     $"(?<tabs>[\n|\r\n]+\t{{{numberOfTabs}}})",
@@ -122,10 +100,7 @@ namespace DocGenerator
                 );
         }
 
-        public static string[] SplitOnNewLines(this string input, StringSplitOptions options)
-		{
-			return input.Split(new[] { "\r\n", "\n" }, options);
-		}
+        public static string[] SplitOnNewLines(this string input, StringSplitOptions options) => input.Split(new[] { "\r\n", "\n" }, options);
 
 		// TODO: Total Hack of replacements in anonymous types that represent json. This can be resolved by referencing tests assembly when building the dynamic assembly,
 		// but might want to put doc generation at same directory level as Tests to reference project directly.
@@ -216,10 +191,7 @@ namespace DocGenerator
 		{
 			json = null;
 
-			foreach (var substitution in Substitutions)
-			{
-				anonymousTypeString = anonymousTypeString.Replace(substitution.Key, substitution.Value);
-			}
+			foreach (var substitution in Substitutions) anonymousTypeString = anonymousTypeString.Replace(substitution.Key, substitution.Value);
 
 			var text =
 				$@"
@@ -283,10 +255,7 @@ namespace DocGenerator
 						diagnostic.Severity == DiagnosticSeverity.Error);
 
 					var builder = new StringBuilder($"Unable to serialize the following C# anonymous type string to json: {anonymousTypeString}");
-					foreach (var diagnostic in failures)
-					{
-						builder.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
-					}
+					foreach (var diagnostic in failures) builder.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
 					builder.AppendLine(new string('-', 30));
 
 					Console.Error.WriteLine(builder.ToString());

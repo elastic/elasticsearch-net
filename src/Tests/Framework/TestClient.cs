@@ -60,7 +60,7 @@ namespace Tests.Framework
 		private static string Host => (RunningFiddler) ? "ipv4.fiddler" : DefaultHost;
 
 		private static int ConnectionLimitDefault =>
-			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out int x)
+			int.TryParse(Environment.GetEnvironmentVariable("NEST_NUMBER_OF_CONNECTIONS"), out var x)
 			? x
 			: ConnectionConfiguration.DefaultConnectionLimit;
 

@@ -109,7 +109,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 				var name = info.Name;
 
-				if (this._settings.PropertyMappings.TryGetValue(info, out IPropertyMapping propertyMapping))
+				if (this._settings.PropertyMappings.TryGetValue(info, out var propertyMapping))
 					return propertyMapping.Name;
 
 				var att = ElasticsearchPropertyAttributeBase.From(info);
@@ -156,7 +156,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				}
 				else if (IsLinqOperator(methodCall.Method))
 				{
-					for (int i = 1; i < methodCall.Arguments.Count; i++)
+					for (var i = 1; i < methodCall.Arguments.Count; i++)
 					{
 						Visit(methodCall.Arguments[i]);
 					}

@@ -10,12 +10,9 @@ namespace Nest
 	public class MemberInfoResolver : ExpressionVisitor
 	{
 		private readonly IList<MemberInfo> _members = new List<MemberInfo>();
-		public IList<MemberInfo> Members { get { return _members; } }
+		public IList<MemberInfo> Members => _members;
 
-		public MemberInfoResolver(Expression expression)
-		{
-			base.Visit(expression);
-		}
+		public MemberInfoResolver(Expression expression) => base.Visit(expression);
 
 		protected override Expression VisitMember(MemberExpression expression)
 		{

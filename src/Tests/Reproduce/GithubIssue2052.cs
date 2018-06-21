@@ -55,7 +55,7 @@ namespace Tests.Reproduce
 
 		private PostData CreatePostData(Exception e)
 		{
-			PostData postData = PostData.MultiJson(new List<object>
+			var postData = PostData.MultiJson(new List<object>
 			{
 				_bulkHeader,
 				new
@@ -69,8 +69,8 @@ namespace Tests.Reproduce
 
 		private IEnumerable<object> ExceptionJson(Exception e)
 		{
-			int depth = 0;
-			int maxExceptions = 20;
+			var depth = 0;
+			var maxExceptions = 20;
 			do
 			{
 				var helpUrl = e.HelpLink;
@@ -110,7 +110,7 @@ namespace Tests.Reproduce
 
 			if (args.Length != 5) return null;
 
-			var memberType = Int32.Parse(args[0], CultureInfo.InvariantCulture);
+			var memberType = int.Parse(args[0], CultureInfo.InvariantCulture);
 			var name = args[1];
 			var assemblyName = args[2];
 			var className = args[3];

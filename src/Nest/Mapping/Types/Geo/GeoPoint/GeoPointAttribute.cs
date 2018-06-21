@@ -8,6 +8,6 @@
 
 		bool? IGeoPointProperty.IgnoreMalformed { get; set; }
 
-		public bool IgnoreMalformed { get { return Self.IgnoreMalformed.GetValueOrDefault(); } set { Self.IgnoreMalformed = value; } }
+		public bool IgnoreMalformed { get => Self.IgnoreMalformed.GetValueOrDefault(); set => Self.IgnoreMalformed = value; }
 	}
 }

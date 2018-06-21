@@ -1,4 +1,7 @@
 ﻿using Nest;
+// ReSharper disable RemoveRedundantBraces
+// ReSharper disable ArrangeMethodOrOperatorBody
+// ReSharper disable ArrangeAccessorOwnerBody
 
 namespace System.Collections.Generic
 {
@@ -7,8 +10,8 @@ namespace System.Collections.Generic
 	[System.Runtime.InteropServices.ComVisible(false)]
 	public class SynchronizedCollection<T> : IList<T>, IList
 	{
-		readonly List<T> _items;
-		readonly object _sync;
+		private readonly List<T> _items;
+		private readonly object _sync;
 
 		public SynchronizedCollection()
 		{
@@ -133,11 +136,11 @@ namespace System.Collections.Generic
 			}
 		}
 
-		int InternalIndexOf(T item)
+		private int InternalIndexOf(T item)
 		{
-			int count = _items.Count;
+			var count = _items.Count;
 
-			for (int i = 0; i < count; i++)
+			for (var i = 0; i < count; i++)
 			{
 				if (object.Equals(_items[i], item))
 				{
@@ -151,7 +154,7 @@ namespace System.Collections.Generic
 		{
 			lock (this._sync)
 			{
-				int index = this.InternalIndexOf(item);
+				var index = this.InternalIndexOf(item);
 				if (index < 0)
 					return false;
 

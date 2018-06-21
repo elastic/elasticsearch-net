@@ -26,7 +26,7 @@ namespace Nest
 		{
 			if (reader.TokenType == JsonToken.String)
 			{
-				string types = reader.Value.ToString();
+				var types = reader.Value.ToString();
 				return (Types)types;
 			}
 			return null;

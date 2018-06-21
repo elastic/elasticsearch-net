@@ -5,6 +5,9 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
+// ReSharper disable SuggestVarOrType_Elsewhere
+// ReSharper disable SuggestVarOrType_BuiltInTypes
+// ReSharper disable SuggestVarOrType_SimpleTypes
 
 namespace Tests.ClientConcepts.Troubleshooting
 {

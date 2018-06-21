@@ -82,12 +82,12 @@ namespace Elasticsearch.Net
 			(this.RequestConfiguration?.DisablePing).GetValueOrDefault(false)
 				|| this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected;
 
-		TimeSpan PingTimeout =>
+		private TimeSpan PingTimeout =>
 			 this.RequestConfiguration?.PingTimeout
 			?? this._settings.PingTimeout
 			?? (this._connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
 
-		TimeSpan RequestTimeout => this.RequestConfiguration?.RequestTimeout ?? this._settings.RequestTimeout;
+		private TimeSpan RequestTimeout => this.RequestConfiguration?.RequestTimeout ?? this._settings.RequestTimeout;
 
 		public bool IsTakingTooLong
 		{
@@ -272,22 +272,20 @@ namespace Elasticsearch.Net
 			if (PingDisabled(node)) return;
 
 			using (var audit = this.Audit(PingSuccess))
+			try
 			{
-				try
-				{
-					var pingData = CreatePingRequestData(node, audit);
-					var response = this._connection.Request<VoidResponse>(pingData);
-					ThrowBadAuthPipelineExceptionWhenNeeded(response);
-					//ping should not silently accept bad but valid http responses
-					if (!response.Success) throw new PipelineException(pingData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
-				}
-				catch (Exception e)
-				{
-					var response = (e as PipelineException)?.ApiCall;
-					audit.Event = PingFailure;
-					audit.Exception = e;
-					throw new PipelineException(PipelineFailure.PingFailure, e) { ApiCall = response };
-				}
+				var pingData = this.CreatePingRequestData(node, audit);
+				var response = this._connection.Request<VoidResponse>(pingData);
+				ThrowBadAuthPipelineExceptionWhenNeeded(response);
+				//ping should not silently accept bad but valid http responses
+				if (!response.Success) throw new PipelineException(pingData.OnFailurePipelineFailure, response.OriginalException) {ApiCall = response};
+			}
+			catch (Exception e)
+			{
+				var response = (e as PipelineException)?.ApiCall;
+				audit.Event = PingFailure;
+				audit.Exception = e;
+				throw new PipelineException(PipelineFailure.PingFailure, e) {ApiCall = response};
 			}
 		}
 
@@ -296,22 +294,20 @@ namespace Elasticsearch.Net
 			if (PingDisabled(node)) return;
 
 			using (var audit = this.Audit(PingSuccess))
+			try
 			{
-				try
-				{
-					var pingData = CreatePingRequestData(node, audit);
-					var response = await this._connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
-					ThrowBadAuthPipelineExceptionWhenNeeded(response);
-					//ping should not silently accept bad but valid http responses
-					if (!response.Success) throw new PipelineException(pingData.OnFailurePipelineFailure, response.OriginalException) { ApiCall = response };
-				}
-				catch (Exception e)
-				{
-					var response = (e as PipelineException)?.ApiCall;
-					audit.Event = PingFailure;
-					audit.Exception = e;
-					throw new PipelineException(PipelineFailure.PingFailure, e) { ApiCall = response };
-				}
+				var pingData = this.CreatePingRequestData(node, audit);
+				var response = await this._connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
+				ThrowBadAuthPipelineExceptionWhenNeeded(response);
+				//ping should not silently accept bad but valid http responses
+				if (!response.Success) throw new PipelineException(pingData.OnFailurePipelineFailure, response.OriginalException) {ApiCall = response};
+			}
+			catch (Exception e)
+			{
+				var response = (e as PipelineException)?.ApiCall;
+				audit.Event = PingFailure;
+				audit.Exception = e;
+				throw new PipelineException(PipelineFailure.PingFailure, e) {ApiCall = response};
 			}
 		}
 
@@ -360,13 +356,12 @@ namespace Elasticsearch.Net
 		{
 			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
-			{
 				using (var audit = this.Audit(SniffSuccess))
 				{
 					audit.Node = node;
 					try
 					{
-						var requestData = CreateSniffRequestData(node);
+						var requestData = this.CreateSniffRequestData(node);
 						audit.Path = requestData.PathAndQuery;
 						var response = this._connection.Request<SniffResponse>(requestData);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
@@ -385,7 +380,7 @@ namespace Elasticsearch.Net
 						continue;
 					}
 				}
-			}
+
 			throw new PipelineException(PipelineFailure.SniffFailure, exceptions.AsAggregateOrFirst());
 		}
 
@@ -393,13 +388,12 @@ namespace Elasticsearch.Net
 		{
 			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
-			{
 				using (var audit = this.Audit(SniffSuccess))
 				{
 					audit.Node = node;
 					try
 					{
-						var requestData = CreateSniffRequestData(node);
+						var requestData = this.CreateSniffRequestData(node);
 						audit.Path = requestData.PathAndQuery;
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
@@ -417,7 +411,7 @@ namespace Elasticsearch.Net
 						continue;
 					}
 				}
-			}
+
 			throw new PipelineException(PipelineFailure.SniffFailure, exceptions.AsAggregateOrFirst());
 		}
 

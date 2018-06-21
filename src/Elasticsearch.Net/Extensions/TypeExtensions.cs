@@ -57,7 +57,7 @@ namespace Elasticsearch.Net
 
 			//pick each arg from the params array
 			//and create a typed expression of them
-			for (int i = 0; i < paramsInfo.Length; i++)
+			for (var i = 0; i < paramsInfo.Length; i++)
 			{
 				var index = Expression.Constant(i);
 				var paramType = paramsInfo[i].ParameterType;

@@ -9,6 +9,8 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
+// ReSharper disable SuggestVarOrType_Elsewhere
+// ReSharper disable SuggestVarOrType_BuiltInTypes
 
 namespace Tests.ClientConcepts.LowLevel
 {

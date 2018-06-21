@@ -35,7 +35,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var r = new ScriptQuery();
-			JObject o = JObject.Load(reader);
+			var o = JObject.Load(reader);
 			var properties = o.Properties().ToListOrNullIfEmpty();
 			var scriptProperty = properties.FirstOrDefault(p => p.Name == "script");
 			if (scriptProperty != null)

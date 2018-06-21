@@ -11,6 +11,6 @@ namespace Nest
 
 		string IDateRangeProperty.Format { get; set; }
 
-		public string Format { get { return Self.Format; } set { Self.Format = value; } }
+		public string Format { get => Self.Format; set => Self.Format = value; }
 	}
 }

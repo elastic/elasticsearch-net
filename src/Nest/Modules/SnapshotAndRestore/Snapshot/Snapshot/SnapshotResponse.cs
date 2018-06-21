@@ -18,11 +18,8 @@ namespace Nest
 		[JsonProperty("accepted")]
 		public bool Accepted
 		{
-			get
-			{
-				return  _accepted ? _accepted : this.Snapshot != null;
-			}
-			internal set { _accepted = value; }
+			get => _accepted ? _accepted : this.Snapshot != null;
+			internal set => _accepted = value;
 		}
 
 		[JsonProperty("snapshot")]

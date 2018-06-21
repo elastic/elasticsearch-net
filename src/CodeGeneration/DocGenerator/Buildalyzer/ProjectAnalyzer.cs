@@ -79,10 +79,10 @@ namespace DocGenerator.Buildalyzer
 			_buildEnvironment = EnvironmentFactory.GetBuildEnvironment(projectFilePath, _projectDocument);
 
 			// Preload/enforce referencing some required asemblies
-			Copy copy = new Copy();
+			var copy = new Copy();
 
 
-			string solutionDir = manager.SolutionDirectory ?? projectFolder;
+			var solutionDir = manager.SolutionDirectory ?? projectFolder;
 			_globalProperties = _buildEnvironment.GetGlobalProperties(solutionDir);
 
 			// Create the logger
@@ -100,13 +100,13 @@ namespace DocGenerator.Buildalyzer
 			}
 
 			// Create a project collection for each project since the toolset might change depending on the type of project
-			ProjectCollection projectCollection = CreateProjectCollection();
+			var projectCollection = CreateProjectCollection();
 
 			// Load the project
 			_buildEnvironment.SetEnvironmentVars(GlobalProperties);
 			try
 			{
-				using (XmlReader projectReader = _projectDocument.CreateReader())
+				using (var projectReader = _projectDocument.CreateReader())
 				{
 					_project = projectCollection.LoadProject(projectReader);
 					_project.FullPath = ProjectFilePath;
@@ -122,7 +122,7 @@ namespace DocGenerator.Buildalyzer
 		// Tweaks the project file a bit to ensure a succesfull build
 		private static XDocument TweakProjectDocument(XDocument projectDocument, string projectFolder)
 		{
-			foreach (XElement import in projectDocument.GetDescendants("Import").ToArray())
+			foreach (var import in projectDocument.GetDescendants("Import").ToArray())
 			{
 				var att = import.Attribute("Project");
 				if (att == null) continue;
@@ -134,13 +134,13 @@ namespace DocGenerator.Buildalyzer
 					att.Value = Path.GetFullPath(Path.Combine(projectFolder, att.Value));
 			}
 			// Add SkipGetTargetFrameworkProperties to every ProjectReference
-			foreach (XElement projectReference in projectDocument.GetDescendants("ProjectReference").ToArray())
+			foreach (var projectReference in projectDocument.GetDescendants("ProjectReference").ToArray())
 			{
 				projectReference.AddChildElement("SkipGetTargetFrameworkProperties", "true");
 			}
 
 			// Removes all EnsureNuGetPackageBuildImports
-			foreach (XElement ensureNuGetPackageBuildImports in
+			foreach (var ensureNuGetPackageBuildImports in
 				projectDocument.GetDescendants("Target").Where(x => x.GetAttributeValue("Name") == "EnsureNuGetPackageBuildImports").ToArray())
 			{
 				ensureNuGetPackageBuildImports.Remove();
@@ -151,7 +151,7 @@ namespace DocGenerator.Buildalyzer
 
 		private ProjectCollection CreateProjectCollection()
 		{
-			ProjectCollection projectCollection = new ProjectCollection(_globalProperties);
+			var projectCollection = new ProjectCollection(_globalProperties);
 			projectCollection.RemoveAllToolsets(); // Make sure we're only using the latest tools
 			projectCollection.AddToolset(
 				new Toolset(ToolLocationHelper.CurrentToolsVersion, _buildEnvironment.GetToolsPath(), projectCollection, string.Empty));
@@ -169,7 +169,7 @@ namespace DocGenerator.Buildalyzer
 			{
 				return _compiledProject;
 			}
-			Project project = Load();
+			var project = Load();
 			if (project == null)
 			{
 				return null;
@@ -179,7 +179,7 @@ namespace DocGenerator.Buildalyzer
 			_buildEnvironment.SetEnvironmentVars(GlobalProperties);
 			try
 			{
-				ProjectInstance projectInstance = project.CreateProjectInstance();
+				var projectInstance = project.CreateProjectInstance();
 				if (!projectInstance.Build("Clean", _logger == null ? null : new ILogger[] { _logger }))
 				{
 					return null;

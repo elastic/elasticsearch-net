@@ -86,7 +86,7 @@ namespace Nest
 			var match = ExpressionRegex.Match(timeUnit);
 			if (!match.Success) throw new ArgumentException($"Expression '{timeUnit}' is invalid", nameof(timeUnit));
 			var factor = match.Groups["factor"].Value;
-			if (!double.TryParse(factor, NumberStyles.Any ,CultureInfo.InvariantCulture, out double f))
+			if (!double.TryParse(factor, NumberStyles.Any ,CultureInfo.InvariantCulture, out var f))
 				throw new ArgumentException($"Expression '{timeUnit}' contains invalid factor: {factor}", nameof(timeUnit));
 
 			this.Factor = f;

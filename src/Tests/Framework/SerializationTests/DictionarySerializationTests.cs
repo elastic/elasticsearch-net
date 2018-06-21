@@ -151,8 +151,8 @@ namespace Tests.Framework
 
 			public object this[object key]
 			{
-				get { return _dictionary[key]; }
-				set { _dictionary[key] = value; }
+				get => _dictionary[key];
+				set => _dictionary[key] = value;
 			}
 
 			public ICollection Keys => _dictionary.Keys;
@@ -180,10 +180,7 @@ namespace Tests.Framework
 		{
 			private readonly IDictionary<object, object> _backingDictionary;
 
-			public MyGenericIReadOnlyDictionary(IDictionary<object, object> dictionary)
-			{
-				_backingDictionary = dictionary ?? new Dictionary<object, object>();
-			}
+			public MyGenericIReadOnlyDictionary(IDictionary<object, object> dictionary) => _backingDictionary = dictionary ?? new Dictionary<object, object>();
 
 			public IEnumerator<KeyValuePair<object, object>> GetEnumerator() => _backingDictionary.GetEnumerator();
 
@@ -234,8 +231,8 @@ namespace Tests.Framework
 
 			public object this[object key]
 			{
-				get { return _backingDictionary[key]; }
-				set { _backingDictionary[key] = value; }
+				get => _backingDictionary[key];
+				set => _backingDictionary[key] = value;
 			}
 
 			public ICollection<object> Keys => _backingDictionary.Keys;

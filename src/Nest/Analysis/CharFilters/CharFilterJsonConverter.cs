@@ -12,9 +12,9 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			JObject o = JObject.Load(reader);
+			var o = JObject.Load(reader);
 
-			JProperty typeProperty = o.Property("type");
+			var typeProperty = o.Property("type");
 			if (typeProperty == null) return null;
 
 			var typePropertyValue = typeProperty.Value.ToString();

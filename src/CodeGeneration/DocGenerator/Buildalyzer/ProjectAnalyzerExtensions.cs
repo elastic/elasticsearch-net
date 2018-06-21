@@ -47,7 +47,7 @@ namespace DocGenerator.Buildalyzer
 			{
 				throw new ArgumentNullException(nameof(analyzer));
 			}
-			AdhocWorkspace workspace = new AdhocWorkspace();
+			var workspace = new AdhocWorkspace();
 			AddToWorkspace(analyzer, workspace, addProjectReferences);
 			return workspace;
 		}
@@ -71,25 +71,25 @@ namespace DocGenerator.Buildalyzer
 			}
 
 			// Get or create an ID for this project
-			string projectGuid = analyzer.CompiledProject?.GetPropertyValue("ProjectGuid");
-			ProjectId projectId = !string.IsNullOrEmpty(projectGuid)
+			var projectGuid = analyzer.CompiledProject?.GetPropertyValue("ProjectGuid");
+			var projectId = !string.IsNullOrEmpty(projectGuid)
 			                      && Guid.TryParse(analyzer.CompiledProject?.GetPropertyValue("ProjectGuid"), out var projectIdGuid)
 				? ProjectId.CreateFromSerialized(projectIdGuid)
 				: ProjectId.CreateNewId();
 
 			// Create and add the project
-			ProjectInfo projectInfo = GetProjectInfo(analyzer, workspace, projectId);
-			Solution solution = workspace.CurrentSolution.AddProject(projectInfo);
+			var projectInfo = GetProjectInfo(analyzer, workspace, projectId);
+			var solution = workspace.CurrentSolution.AddProject(projectInfo);
 
 			// Check if this project is referenced by any other projects in the workspace
-			foreach (Project existingProject in solution.Projects.ToArray())
+			foreach (var existingProject in solution.Projects.ToArray())
 			{
 				if (!existingProject.Id.Equals(projectId)
-				    && analyzer.Manager.Projects.TryGetValue(existingProject.FilePath, out ProjectAnalyzer existingAnalyzer)
+				    && analyzer.Manager.Projects.TryGetValue(existingProject.FilePath, out var existingAnalyzer)
 				    && (existingAnalyzer.GetProjectReferences()?.Contains(analyzer.ProjectFilePath) ?? false))
 				{
 					// Add the reference to the existing project
-					ProjectReference projectReference = new ProjectReference(projectId);
+					var projectReference = new ProjectReference(projectId);
 					solution = solution.AddProjectReference(existingProject.Id, projectReference);
 				}
 			}
@@ -103,7 +103,7 @@ namespace DocGenerator.Buildalyzer
 			// Add any project references not already added
 			if(addProjectReferences)
 			{
-				foreach(ProjectAnalyzer referencedAnalyzer in GetReferencedAnalyzerProjects(analyzer))
+				foreach(var referencedAnalyzer in GetReferencedAnalyzerProjects(analyzer))
 				{
 					// Check if the workspace contains the project inside the loop since adding one might also add this one due to transitive references
 					if(!workspace.CurrentSolution.Projects.Any(x => x.FilePath == referencedAnalyzer.ProjectFilePath))
@@ -119,9 +119,9 @@ namespace DocGenerator.Buildalyzer
 
 		private static ProjectInfo GetProjectInfo(ProjectAnalyzer analyzer, AdhocWorkspace workspace, ProjectId projectId)
 		{
-			string projectName = Path.GetFileNameWithoutExtension(analyzer.ProjectFilePath);
-			string languageName = GetLanguageName(analyzer.ProjectFilePath);
-			ProjectInfo projectInfo = ProjectInfo.Create(
+			var projectName = Path.GetFileNameWithoutExtension(analyzer.ProjectFilePath);
+			var languageName = GetLanguageName(analyzer.ProjectFilePath);
+			var projectInfo = ProjectInfo.Create(
 				projectId,
 				VersionStamp.Create(),
 				projectName,
@@ -138,7 +138,7 @@ namespace DocGenerator.Buildalyzer
 
 		private static CompilationOptions CreateCompilationOptions(Microsoft.Build.Evaluation.Project project, string languageName)
 		{
-			string outputType = project.GetPropertyValue("OutputType");
+			var outputType = project.GetPropertyValue("OutputType");
 			OutputKind? kind = null;
 			switch (outputType)
 			{
@@ -180,7 +180,7 @@ namespace DocGenerator.Buildalyzer
 
 		private static IEnumerable<ProjectAnalyzer> GetReferencedAnalyzerProjects(ProjectAnalyzer analyzer) =>
 			analyzer.GetProjectReferences()
-				?.Select(x => analyzer.Manager.Projects.TryGetValue(x, out ProjectAnalyzer a) ? a : null)
+				?.Select(x => analyzer.Manager.Projects.TryGetValue(x, out var a) ? a : null)
 				.Where(x => x != null)
 			?? Array.Empty<ProjectAnalyzer>();
 

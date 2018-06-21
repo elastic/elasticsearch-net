@@ -59,6 +59,15 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+// ReSharper disable ArrangeMethodOrOperatorBody
+// ReSharper disable SuggestVarOrType_BuiltInTypes
+// ReSharper disable ArrangeAccessorOwnerBody
+// ReSharper disable ArrangeConstructorOrDestructorBody
+// ReSharper disable SuggestVarOrType_Elsewhere
+// ReSharper disable SuggestVarOrType_SimpleTypes
+// ReSharper disable ArrangeTypeMemberModifiers
+// ReSharper disable RemoveRedundantBraces
+// ReSharper disable BuiltInTypeReferenceStyle
 
 namespace Elasticsearch.Net
 {

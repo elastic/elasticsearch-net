@@ -35,7 +35,7 @@ namespace Nest
 		private string _type = "language";
 		public override string Type
 		{
-			get { return _type; }
+			get => _type;
 			protected set { this._type = value; this.Language = value.ToEnum<Language>(); }
 		}
 
@@ -48,8 +48,8 @@ namespace Nest
 		/// <inheritdoc/>
 		[JsonIgnore]
 		public Language? Language {
-			get { return _type.ToEnum<Language>(); }
-			set { _type = value.GetStringValue().ToLowerInvariant(); }
+			get => _type.ToEnum<Language>();
+			set => _type = value.GetStringValue().ToLowerInvariant();
 		}
 
 		/// <inheritdoc/>

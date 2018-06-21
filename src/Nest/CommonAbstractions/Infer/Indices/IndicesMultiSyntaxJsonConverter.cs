@@ -27,7 +27,7 @@ namespace Nest
 		{
 			if (reader.TokenType == JsonToken.String)
 			{
-				string indices = reader.Value.ToString();
+				var indices = reader.Value.ToString();
 				return (Indices)indices;
 			}
 			return null;
