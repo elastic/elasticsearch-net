@@ -29,15 +29,17 @@ the `.LowLevel` property on `ElasticClient`.
 
 There are a number of conventions that NEST uses for inference of
 
-* <<index-name-inference, Index Names>>
+* <<index-name-inference, Index names>>
 
-* <<indices-paths, Building a URI path to one or more indices>>
-
-* <<field-inference, Field names>> and <<property-inference, Property names>>
+* <<types-and-relations-inference, Type and Relation names>>
 
 * <<ids-inference, Document IDs>>
 
+* <<field-inference, Field names>> and <<property-inference, Property names>>
+
 * <<document-paths, Building a URI path to a document>>
+
+* <<indices-paths, Building a URI path to one or more indices>>
 
 As well as a number of types for working with
 

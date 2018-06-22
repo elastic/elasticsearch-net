@@ -34,7 +34,7 @@ Let's demonstrate which components are disposed by creating our own derived `Con
 
 [source,csharp]
 ----
-class AConnectionSettings : ConnectionSettings
+private class AConnectionSettings : ConnectionSettings
 {
     public AConnectionSettings(IConnectionPool pool, IConnection connection)
         : base(pool, connection)
@@ -49,7 +49,7 @@ class AConnectionSettings : ConnectionSettings
     }
 }
 
-class AConnectionPool : SingleNodeConnectionPool
+private class AConnectionPool : SingleNodeConnectionPool
 {
     public AConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null) : base(uri, dateTimeProvider) { }
 
@@ -62,7 +62,7 @@ class AConnectionPool : SingleNodeConnectionPool
     }
 }
 
-class AConnection : InMemoryConnection
+private class AConnection : InMemoryConnection
 {
     public bool IsDisposed { get; private set; }
 

@@ -97,7 +97,8 @@ var exceptions = new[] <1>
 {
     //TODO These are new API's should be removed, also add test that no request or response starts with Xpack
     //only XPack
-
+    //TODO MAP THIS
+    typeof(RankEvalRequest),
     //TODO add unit tests that we have no requests starting with Exists
     typeof(SourceExistsRequest),
     typeof(SourceExistsRequest<>),
@@ -190,10 +191,10 @@ var typesNotIElasticsearchNetNamespace = types
 
 typesNotIElasticsearchNetNamespace.Should().BeEmpty();
 
-bool nextMustBeStartChar = true;
+var nextMustBeStartChar = true;
 if (value.Length == 0)
     return false;
-for (int index = 0; index < value.Length; ++index)
+for (var index = 0; index < value.Length; ++index)
 {
     var character = value[index];
     var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);
