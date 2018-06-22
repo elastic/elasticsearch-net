@@ -57,6 +57,12 @@ namespace Nest
 		/// </remarks>
 		[JsonProperty("slice")]
 		ISlicedScroll Slice { get; set; }
+
+		/// <summary>
+		/// Individual fields from _source to reindex
+		/// </summary>
+		[JsonProperty("_source")]
+		Fields Source { get; set; }
     }
 
 	/// <inheritdoc />
@@ -82,6 +88,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public ISlicedScroll Slice { get; set; }
+
+		/// <inheritdoc />
+		public Fields Source { get; set; }
 	}
 
 	/// <inheritdoc cref="IReindexSource"/>
@@ -94,6 +103,7 @@ namespace Nest
         int? IReindexSource.Size { get; set; }
         IRemoteSource IReindexSource.Remote { get; set; }
 		ISlicedScroll IReindexSource.Slice { get; set; }
+		Fields IReindexSource.Source { get; set; }
 
 		/// <inheritdoc cref="IReindexSource.Query"/>
         public ReindexSourceDescriptor Query<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) where T : class =>
@@ -119,5 +129,9 @@ namespace Nest
 		/// <inheritdoc cref="IReindexSource.Slice"/>
 		public ReindexSourceDescriptor Slice<T>(Func<SlicedScrollDescriptor<T>, ISlicedScroll> selector) where T : class =>
 			Assign(a => a.Slice = selector?.Invoke(new SlicedScrollDescriptor<T>()));
+
+		/// <inheritdoc cref="IReindexSource.Source"/>
+		public ReindexSourceDescriptor Source<T>(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) where T : class =>
+			Assign(a => a.Source = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
     }
 }
