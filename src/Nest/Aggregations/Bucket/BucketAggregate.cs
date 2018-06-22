@@ -12,8 +12,15 @@ namespace Nest
 
 	public class SingleBucketAggregate : BucketAggregateBase
 	{
-		public SingleBucketAggregate(IReadOnlyDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+		public SingleBucketAggregate(IReadOnlyDictionary<string, IAggregate> aggregations) : base(aggregations)
+		{
+#pragma warning disable 618
+			// TODO: Remove in NEST 7.x.
+			Aggregations = this;
+#pragma warning restore 618
+		}
 
+		[Obsolete("Use methods on this instance to access sub aggregations. Will be removed in NEST 7.x")]
 		public AggregateDictionary Aggregations { get; protected internal set; }
 
 		public long DocCount { get; internal set; }
