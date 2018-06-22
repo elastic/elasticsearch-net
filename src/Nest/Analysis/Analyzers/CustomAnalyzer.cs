@@ -15,12 +15,14 @@ namespace Nest
 		/// The logical / registered name of the tokenizer to use.
 		/// </summary>
 		[JsonProperty("char_filter")]
+		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> CharFilter { get; set; }
 
 		/// <summary>
 		/// An optional list of logical / registered name of token filters.
 		/// </summary>
 		[JsonProperty("filter")]
+		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> Filter { get; set; }
 
 		/// <summary>
