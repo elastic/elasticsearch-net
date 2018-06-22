@@ -33,6 +33,9 @@ namespace Nest
 		[JsonProperty("stored_fields")]
 		Fields StoredFields { get; set; }
 
+		[JsonProperty("docvalue_fields")]
+		Fields DocValueFields { get; set; }
+
 		[JsonProperty("version")]
 		bool? Version { get; set; }
 
@@ -52,6 +55,7 @@ namespace Nest
 		public Fields StoredFields { get; set; }
 		public bool? Version { get; set; }
 		public bool? TrackScores { get; set; }
+		public Fields DocValueFields { get; set; }
 
 		internal TopHitsAggregation() { }
 
@@ -85,6 +89,8 @@ namespace Nest
 
 		bool? ITopHitsAggregation.TrackScores { get; set; }
 
+		Fields ITopHitsAggregation.DocValueFields { get; set; }
+
 		public TopHitsAggregationDescriptor<T> From(int? from) => Assign(a => a.From = from);
 
 		public TopHitsAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
@@ -112,5 +118,10 @@ namespace Nest
 		public TopHitsAggregationDescriptor<T> Version(bool? version = true) => Assign(a => a.Version = version);
 
 		public TopHitsAggregationDescriptor<T> TrackScores(bool? trackScores = true) => Assign(a => a.TrackScores = trackScores);
+
+		public TopHitsAggregationDescriptor<T> DocValueFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+			Assign(a => a.DocValueFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+
+		public TopHitsAggregationDescriptor<T> DocValueFields(Fields fields) => Assign(a => a.DocValueFields = fields);
 	}
 }
