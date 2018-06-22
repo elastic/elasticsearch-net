@@ -50,7 +50,7 @@ InitializerExample
         "query_mode": true
       },
       "mydp": {
-        "type": "delimited_payload_filter",
+        "type": "delimited_payload",
         "delimiter": "-",
         "encoding": "identity"
       },
