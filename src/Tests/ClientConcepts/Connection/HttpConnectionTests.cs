@@ -97,7 +97,7 @@ namespace Tests.ClientConcepts.Connection
 			bool disableAutomaticProxyDetection = false,
 			bool httpCompression = false)
 		{
-			if (requestTimeout == default(TimeSpan)) requestTimeout = TimeSpan.FromSeconds(1);
+			if (requestTimeout == default(TimeSpan)) requestTimeout = TimeSpan.FromSeconds(10);
 
 			var connectionSettings = new ConnectionSettings(new Uri("http://localhost:9200"))
 				.RequestTimeout(requestTimeout)
