@@ -112,7 +112,9 @@ var searchResponse = client.Search<Project>(s => s
 );
 ----
 <1> **Include** the following fields
+
 <2> **Exclude** the following fields
+
 <3> Fields can be included or excluded through patterns
 
 With source filtering specified on the request, `.Documents` will
