@@ -20,7 +20,7 @@ namespace Nest
 #pragma warning restore 618
 		}
 
-		[Obsolete("Use methods on instance itself. Will be removed in NEST 7.x")]
+		[Obsolete("Use methods on this instance to access sub aggregations. Will be removed in NEST 7.x")]
 		public AggregateDictionary Aggregations { get; protected internal set; }
 
 		public long DocCount { get; internal set; }
