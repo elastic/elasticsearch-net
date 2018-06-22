@@ -1,7 +1,5 @@
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
-
 :github: https://github.com/elastic/elasticsearch-net
 
 :nuget: https://www.nuget.org/packages
@@ -165,7 +163,9 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
             );
 ----
 <1> Use the stop analyzer on this sub field
+
 <2> Use a custom analyzer named "named_shingles" that is configured in the index
+
 <3> Index as not analyzed
 
 [source,javascript]

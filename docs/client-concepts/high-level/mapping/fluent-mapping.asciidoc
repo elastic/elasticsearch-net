@@ -1,7 +1,5 @@
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
-
 :github: https://github.com/elastic/elasticsearch-net
 
 :nuget: https://www.nuget.org/packages
@@ -287,8 +285,11 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
             );
 ----
 <1> Automap company
+
 <2> Override company inferred mappings
+
 <3> Auto map employee
+
 <4> Override employee inferred mappings
 
 [source,javascript]
@@ -423,8 +424,11 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
             );
 ----
 <1> Automap `Company`
+
 <2> Override specific `Company` mappings
+
 <3> Automap `Employees` property
+
 <4> Override specific `Employee` properties
 
 [source,javascript]

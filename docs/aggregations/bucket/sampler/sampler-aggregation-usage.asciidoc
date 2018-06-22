@@ -1,7 +1,5 @@
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
-
 :github: https://github.com/elastic/elasticsearch-net
 
 :nuget: https://www.nuget.org/packages
@@ -83,7 +81,7 @@ sample.Should().NotBeNull();
 var sigTags = sample.SignificantTerms("significant_names");
 sigTags.Should().NotBeNull();
 sigTags.DocCount.Should().BeGreaterThan(0);
-if (TestClient.VersionUnderTestSatisfiedBy(">=5.5.0"))
+if (TestingAgainst(">=5.5.0"))
     sigTags.BgCount.Should().BeGreaterThan(0);
 ----
 

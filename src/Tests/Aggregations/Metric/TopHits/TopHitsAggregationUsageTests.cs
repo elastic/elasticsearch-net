@@ -82,7 +82,8 @@ namespace Tests.Aggregations.Metric.TopHits
 											lang = "groovy"
 										}
 									}
-								}
+								},
+								docvalue_fields = new [] { "state" }
 							}
 						}
 					}
@@ -140,6 +141,9 @@ namespace Tests.Aggregations.Metric.TopHits
 									.Lang("groovy")
 								)
 							)
+							.DocValueFields(d => d
+								.Field(p => p.State)
+							)
 						)
 					)
 				)
@@ -186,10 +190,13 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						ScriptFields = new ScriptFields
 						{
-							{ "commit_factor", new ScriptField {
-								Script = new InlineScript("doc['numberOfCommits'].value * 2") { Lang = "groovy" }
-							} }
-						}
+							{ "commit_factor", new ScriptField
+								{
+									Script = new InlineScript("doc['numberOfCommits'].value * 2") { Lang = "groovy" }
+								}
+							}
+						},
+						DocValueFields = Infer.Fields<Project>(f => f.State)
 					}
 				}
 			};

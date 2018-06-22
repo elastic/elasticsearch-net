@@ -1,7 +1,5 @@
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
-
 :github: https://github.com/elastic/elasticsearch-net
 
 :nuget: https://www.nuget.org/packages
@@ -114,7 +112,9 @@ var searchResponse = client.Search<Project>(s => s
 );
 ----
 <1> **Include** the following fields
+
 <2> **Exclude** the following fields
+
 <3> Fields can be included or excluded through patterns
 
 With source filtering specified on the request, `.Documents` will

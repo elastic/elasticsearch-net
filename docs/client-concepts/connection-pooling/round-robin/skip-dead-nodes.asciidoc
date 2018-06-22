@@ -1,7 +1,5 @@
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
-
 :github: https://github.com/elastic/elasticsearch-net
 
 :nuget: https://www.nuget.org/packages
@@ -142,7 +140,9 @@ await audit.TraceCalls(
 );
 ----
 <1> The first call goes to 9200 which succeeds
+
 <2> The 2nd call does a ping on 9201 because its used for the first time. It fails so we wrap over to node 9202
+
 <3> The next call goes to 9203 which fails so we should wrap over
 
 A cluster with 2 nodes where the second node fails on ping 
@@ -192,5 +192,6 @@ await audit.TraceCalls(
 );
 ----
 <1> All the calls fail
+
 <2> After all our registered nodes are marked dead we want to sample a single dead node each time to quickly see if the cluster is back up. We do not want to retry all 4 nodes
 

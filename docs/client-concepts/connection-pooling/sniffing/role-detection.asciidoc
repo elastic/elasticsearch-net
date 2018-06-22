@@ -1,7 +1,5 @@
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
-
 :github: https://github.com/elastic/elasticsearch-net
 
 :nuget: https://www.nuget.org/packages
@@ -140,6 +138,7 @@ var audit = new Auditor(() => Framework.Cluster
 };
 ----
 <1> Before the sniff, assert we only see three master only nodes
+
 <2> After the sniff, assert we now know about the existence of 20 nodes.
 
 After the sniff has happened on 9200 before the first API call, assert that the subsequent API
@@ -220,7 +219,9 @@ var audit = new Auditor(() => Framework.Cluster
 };
 ----
 <1> for testing simplicity, disable pings
+
 <2> We only want to execute API calls to nodes in rack_one
+
 <3> After sniffing on startup, assert that the pool of nodes that the client will execute API calls against only contains the three nodes that are in `rack_one`
 
 With the cluster set up, assert that the sniff happens on 9200 before the first API call
@@ -297,6 +298,8 @@ await audit.TraceUnexpectedElasticsearchException(new ClientCall
 });
 ----
 <1> The audit trail indicates a sniff for the very first time on startup
+
 <2> The sniff succeeds because the node predicate is ignored when sniffing
+
 <3> when trying to do an actual API call however, the predicate prevents any nodes from being attempted
 

@@ -1,7 +1,5 @@
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
 
-:xpack_current: https://www.elastic.co/guide/en/x-pack/5.6
-
 :github: https://github.com/elastic/elasticsearch-net
 
 :nuget: https://www.nuget.org/packages
@@ -109,6 +107,7 @@ var indexResponse = client.Index(person); <1>
 var asyncIndexResponse = await client.IndexAsync(person); <2>
 ----
 <1> synchronous method that returns an `IIndexResponse`
+
 <2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 
 NOTE: All methods available within NEST are exposed as both synchronous and asynchronous versions,
