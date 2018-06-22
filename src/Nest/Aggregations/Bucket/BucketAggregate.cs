@@ -14,8 +14,6 @@ namespace Nest
 	{
 		public SingleBucketAggregate(IReadOnlyDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 
-		public AggregateDictionary Aggregations { get; protected internal set; }
-
 		public long DocCount { get; internal set; }
 	}
 
