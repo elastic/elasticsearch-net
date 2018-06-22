@@ -23,6 +23,12 @@ namespace Nest
 
         [JsonProperty("remote")]
         IRemoteSource Remote { get; set; }
+
+		/// <summary>
+		/// Individual fields from _source to reindex
+		/// </summary>
+		[JsonProperty("_source")]
+		Fields Source { get; set; }
     }
 
 	public class ReindexSource : IReindexSource
@@ -38,6 +44,9 @@ namespace Nest
         public int? Size { get; set; }
 
         public IRemoteSource Remote { get; set; }
+
+		/// <inheritdoc />
+		public Fields Source { get; set; }
     }
 
 	public class ReindexSourceDescriptor : DescriptorBase<ReindexSourceDescriptor, IReindexSource>, IReindexSource
@@ -48,6 +57,7 @@ namespace Nest
 		Types IReindexSource.Type { get; set; }
         int? IReindexSource.Size { get; set; }
         IRemoteSource IReindexSource.Remote { get; set; }
+		Fields IReindexSource.Source { get; set; }
 
         public ReindexSourceDescriptor Query<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) where T : class =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
@@ -63,5 +73,9 @@ namespace Nest
 		public ReindexSourceDescriptor Type(Types types) => Assign(a => a.Type = types);
 
         public ReindexSourceDescriptor Size(int? size) => Assign(a => a.Size = size);
+
+		/// <inheritdoc cref="IReindexSource.Source"/>
+		public ReindexSourceDescriptor Source<T>(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) where T : class =>
+			Assign(a => a.Source = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
     }
 }
