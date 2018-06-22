@@ -61,11 +61,15 @@ a => a
                     .ScriptField("commit_factor", sf => sf
                         .Source("doc['numberOfCommits'].value * 2")
 
+                    )
+
+                )
+                .DocValueFields(d => d
+                    .Field(p => p.State)
                 )
             )
         )
     )
-)
 ----
 
 ==== Object Initializer syntax example
@@ -104,15 +108,17 @@ new TermsAggregation("states")
                     { Field<Project>(p => p.Description), new HighlightField() }
                 }
             },
-            ScriptFields = new ScriptFields{
+            ScriptFields = new ScriptFields
             {
-                "commit_factor", new ScriptField
                 {
-                    Script = new InlineScript("doc['numberOfCommits'].value * 2")
-                }
-            }
+                    "commit_factor", new ScriptField
+                    {
+                        Script = new InlineScript("doc['numberOfCommits'].value * 2")
+                    }
+                },
+            },
+            DocValueFields = Infer.Fields<Project>(f => f.State)
         }
-    }
 }
 ----
 
@@ -170,7 +176,10 @@ new TermsAggregation("states")
                 "source": "doc['numberOfCommits'].value * 2"
               }
             }
-          }
+          },
+          "docvalue_fields": [
+            "state"
+          ]
         }
       }
     }

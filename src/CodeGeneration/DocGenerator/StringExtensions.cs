@@ -210,6 +210,10 @@ namespace DocGenerator
 									}" },
 			{ "LineStringCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
 			{ "PointCoordinates", "new[] { 38.897676, -77.03653 }" },
+			{ "this._polygonCoordinates", @"new[]{
+										new []{ new [] {10.0, -17.0}, new [] {15.0, 16.0}, new [] {0.0, 12.0}, new [] {-15.0, 16.0}, new [] {-10.0, -17.0},new [] {10.0, -17.0}},
+										new []{ new [] {8.2, 18.2}, new [] {8.2, -18.8}, new [] {-8.8, -10.8}, new [] {8.8, 18.2}}
+									}" },
 		};
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)
