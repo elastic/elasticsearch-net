@@ -42,7 +42,7 @@ index.Should().Be("doc");
 ----
 
 [[type-name-inferrer]]
-==== Override tye name inferer
+==== Override type name inferer
 
 You can provide a delegate to override the default type name inferrer for types
 
