@@ -11,40 +11,44 @@ using static Nest.Infer;
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
 	/**[[types-and-relations-inference]]
-	*=== Types and relations inference
+	*=== Type and Relation names inference
 	*
 	*/
 	public class TypesAndRelationsInference : DocumentationTestBase
 	{
 		/**
-		* ==== TypeName default
-		* Type names are resolved by lowercasing the type name
+		* Type names are resolved in NEST by lowercasing the CLR type name
 		*/
 
 		[U] public void DefaultTypeNameIsLowercase()
 		{
 			var settings = new ConnectionSettings();
 			var resolver = new TypeNameResolver(settings);
-			var index = resolver.Resolve<Project>();
-			index.Should().Be("project");
+			var type = resolver.Resolve<Project>();
+			type.Should().Be("project");
 		}
 		/**
 		* [[default-type-name]]
-		* ==== Default Type Name
-		* With Elasticsearch 6.x you can only have a single type per index and in the long run types will be phased out.
-		* The need to tag types is no longer necessary so in many cases it makes sense to use a single fixed type.
+		* ==== Default type name
+		* With Elasticsearch 6.x, you can only have a single type per index and in the long run types will be
+		* phased out entirely.
+		* The need to tag types is no longer necessary, so in many cases it makes sense to use a single fixed type,
+		* like `doc`
 		*/
 		[U] public void DefaultTypeName()
 		{
 			var settings = new ConnectionSettings().DefaultTypeName("doc");
 			var resolver = new TypeNameResolver(settings);
-			var index = resolver.Resolve<Project>();
-			index.Should().Be("doc");
+			var type = resolver.Resolve<Project>();
+			type.Should().Be("doc");
 		}
+		/**
+		 * With such a setting in place, all CLR types will resolve to `doc` as the type name to use in Elasticsearch.
+		 */
 
 		/**
 		* [[type-name-inferrer]]
-		* ==== Override tye name inferer
+		* ==== Override type name inferrer
 		* You can provide a delegate to override the default type name inferrer for types
 		*/
 		[U] public void OverridingDefaultTypeNameInferrer()
@@ -93,11 +97,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			relation.Should().Be("commits");
 		}
 
-		/***
+		/**
 		*
-		* `RelationName` use the `DefaultTypeNameInferrer` to translate CLR Type's to a string representation
+		* `RelationName` uses the `DefaultTypeNameInferrer` to translate CLR types to a string representation.
 		*
-		* Explicit `TypeName` configuration does not affect how the default relation for the CLR type is represented though
+		* Explicit `TypeName` configuration does not affect how the default relation for the CLR type
+		* is represented though
 		*/
 		[U] public void TypeNameExplicitConfigurationDoesNotAffectRelationName()
 		{

@@ -49,14 +49,16 @@ s => s
             .Name("princes")
             .Highlight(h=>h.Fields(f=>f.Field(p=>p.FullTextField)))
             .IgnoreUnmapped(false)
+            .Version()
         )
 
     ) || q.Nested(n => n
         .Path(p => p.Foes)
         .Query(nq => nq.MatchAll())
-        .InnerHits()
+        .InnerHits(i => i.Version())
     )
 )
+.Version()
 ----
 
 [float]
@@ -75,14 +77,19 @@ new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
             Name = "princes",
             DocValueFields = Field<Prince>(p=>p.Name),
             Highlight = Highlight.Field(Field<Prince>(p=>p.FullTextField)),
-            IgnoreUnmapped = false
+            IgnoreUnmapped = false,
+            Version = true
         }
     } || new NestedQuery
     {
         Path = Field<King>(p => p.Foes),
         Query = new MatchAllQuery(),
         InnerHits = new InnerHits()
-    }
+        {
+            Version = true
+        }
+    },
+    Version = true
 }
 ----
 
@@ -113,7 +120,8 @@ new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
                   "fullTextField": {}
                 }
               },
-              "ignore_unmapped": false
+              "ignore_unmapped": false,
+              "version": true
             }
           }
         },
@@ -123,12 +131,15 @@ new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
               "match_all": {}
             },
             "path": "foes",
-            "inner_hits": {}
+            "inner_hits": {
+              "version": true
+            }
           }
         }
       ]
     }
-  }
+  },
+  "version": true
 }
 ----
 
@@ -140,6 +151,11 @@ new SearchRequest<King>(Index, RoyalSeeder.RoyalType)
 response.Hits.Should().NotBeEmpty();
 foreach (var hit in response.Hits)
 {
+    hit.Id.Should().NotBeNullOrEmpty();
+    hit.Index.Should().NotBeNullOrEmpty();
+    hit.Version?.Should().Be(1);
+
+
     var princes = hit.InnerHits["princes"].Documents<Prince>();
     princes.Should().NotBeEmpty();
     foreach (var princeHit in hit.InnerHits["princes"].Hits.Hits)
@@ -155,6 +171,7 @@ foreach (var hit in response.Hits)
         var docValueName = princeHit.Fields.ValueOf<Prince, string>(p=>p.Name);
         docValueName.Should().NotBeNullOrWhiteSpace("value of name on Fields");
 
+        princeHit.Version?.Should().Be(1);
     }
 
     var foes = hit.InnerHits["foes"].Documents<King>();

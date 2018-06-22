@@ -100,8 +100,11 @@ var createIndexResponse = client.CreateIndex("index", c => c
 );
 ----
 <1> recommended to make the routing field mandatory so you can not accidentally forget
+
 <2> Map all of the `MyParent` properties
+
 <3> Map all of the `MyChild` properties
+
 <4> Additionally map the `JoinField` since it is not automatically mapped by `AutoMap()`
 
 We call `AutoMap()` for both types to discover properties of both .NET types. `AutoMap()` won't automatically setup the
@@ -177,6 +180,7 @@ parentDocument = new MyParent
 var indexParent = client.IndexDocument<MyDocument>(parentDocument);
 ----
 <1> this lets the join data type know this is a root document of type `myparent`
+
 <2> this lets the join data type know this is a root document of type `myparent`
 
 [source,javascript]
