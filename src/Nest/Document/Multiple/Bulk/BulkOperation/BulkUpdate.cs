@@ -89,7 +89,8 @@ namespace Nest
 			_PartialUpdate = this.Doc,
 			_Script = this.Script,
 			_Upsert = this.Upsert,
-			_DocAsUpsert = this.DocAsUpsert
+			_DocAsUpsert = this.DocAsUpsert,
+			_ScriptedUpsert = this.ScriptedUpsert
 		};
 
 		/// <summary>
