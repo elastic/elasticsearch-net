@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using System.Threading;
 using System;
 using System.Linq;
+#if FEATURE_HTTPWEBREQUEST
 using System.Net;
+#endif
 
 namespace Elasticsearch.Net
 {
