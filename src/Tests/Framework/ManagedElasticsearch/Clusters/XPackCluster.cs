@@ -1,4 +1,6 @@
-﻿using Elastic.Managed.Ephemeral;
+﻿using System;
+using System.IO;
+using Elastic.Managed.Ephemeral;
 using Elastic.Xunit;
 using Elasticsearch.Net;
 using Nest;
@@ -13,8 +15,15 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 
 		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features, 1)
 		{
-			this.ShowElasticsearchOutputAfterStarted = false;
+			// Get license file path from environment variable
+			var licenseFilePath = Environment.GetEnvironmentVariable("ES_LICENSE_FILE");
+			if (!string.IsNullOrEmpty(licenseFilePath) && File.Exists(licenseFilePath))
+			{
+				var licenseContents = File.ReadAllText(licenseFilePath);
+				this.XPackLicenseJson = licenseContents;
+			}
 
+			this.ShowElasticsearchOutputAfterStarted = false;
 			this.AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationInElasticsearchYaml());
 		}
 	}
