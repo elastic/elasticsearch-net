@@ -16,7 +16,7 @@ namespace Tests.Reproduce
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 
 		[I]
-		public void CanReadSingleOrMultipleCommonGramsCommonWordsItem()
+		public void BadRequestErrorShouldBeWrappedInElasticsearchClientException()
 		{
 			var client = _cluster.Client;
 			var index = $"gh2985-{RandomString()}";
@@ -31,8 +31,7 @@ namespace Tests.Reproduce
 			);
 			response.OriginalException.Should().NotBeNull().And.BeOfType<ElasticsearchClientException>();
 			response.OriginalException.Message.Should()
-				.StartWith("Request failed to execute")
-				.And.EndWith(
+				.Contain(
 					"Type: illegal_argument_exception Reason: \"Custom Analyzer [custom] failed to find filter under name [ascii_folding]\""
 				);
 
