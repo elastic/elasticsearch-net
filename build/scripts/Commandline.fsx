@@ -28,7 +28,7 @@ Targets:
 * canary [apikey] [feed]
   - create a canary nuget package based on the current version if [feed] and [apikey] are provided
     also pushes to upstream (myget)
-* diff <github|nuget|dir|assembly> <version|path 1> <version|path 2> [format]
+* diff <github|nuget|directories|assemblies> <version|path 1> <version|path 2> [format]
 
 NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to force the tests against all suported TFM's
 
