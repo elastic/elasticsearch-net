@@ -17,7 +17,7 @@ namespace Nest
 		private bool _found;
 		public bool Found
 		{
-			get { return _found; }
+			get => _found;
 			// This is only set to true once to prevent clobbering from subsequent node visits
 			private set { if (!_found) _found = value; }
 		}
@@ -36,11 +36,10 @@ namespace Nest
 
 		protected override Expression VisitMethodCall(MethodCallExpression node)
 		{
-			if (node.Method.Name == "Suffix" && node.Arguments.Any())
+			if (node.Method.Name == nameof(SuffixExtensions.Suffix) && node.Arguments.Any())
 			{
 				var lastArg = node.Arguments.Last();
-				var constantExpression = lastArg as ConstantExpression;
-				this.Found = constantExpression == null;
+				this.Found = !(lastArg is ConstantExpression);
 			}
 			else if (node.Method.Name == "get_Item" && node.Arguments.Any())
 			{
@@ -53,8 +52,7 @@ namespace Nest
 				if (!isDict)
 					return base.VisitMethodCall(node);
 				var lastArg = node.Arguments.Last();
-				var constantExpression = lastArg as ConstantExpression;
-				this.Found = constantExpression == null;
+				this.Found = !(lastArg is ConstantExpression);
 			}
 			return base.VisitMethodCall(node);
 		}
@@ -90,8 +88,7 @@ namespace Nest
 
 			var name = info.Name;
 
-			IPropertyMapping propertyMapping = null;
-			if (this._settings.PropertyMappings.TryGetValue(info, out propertyMapping))
+			if (this._settings.PropertyMappings.TryGetValue(info, out var propertyMapping))
 				return propertyMapping.Name;
 
 			var att = ElasticsearchPropertyAttributeBase.From(info);
@@ -111,7 +108,7 @@ namespace Nest
 
 		protected override Expression VisitMethodCall(MethodCallExpression methodCall)
 		{
-			if (methodCall.Method.Name == "Suffix" && methodCall.Arguments.Any())
+			if (methodCall.Method.Name == nameof(SuffixExtensions.Suffix) && methodCall.Arguments.Any())
 			{
 				VisitConstantOrVariable(methodCall, _stack);
 				var callingMember = new ReadOnlyCollection<Expression>(

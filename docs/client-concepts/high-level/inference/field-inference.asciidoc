@@ -116,7 +116,8 @@ Expect("name")
 To ease creating a `Field` instance from expressions, there is a static `Infer` class you can use
 
 [TIP]
-This example uses the https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import] `using static Nest.Infer;` in the using directives to shorthand `Nest.Infer.Field<T>()`
+This example uses the https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import] `using static Nest.Infer;`
+in the using directives to shorthand `Nest.Infer.Field<T>()`
 to simply `Field<T>()`. Be sure to include this static import if copying any of these examples.
 
 [source,csharp]
@@ -324,6 +325,7 @@ Expect("leadDeveloper.firstName.raw.evendeeper").WhenSerializing(multiSuffixFiel
 Expect("metadata.hardcoded.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[4]);
 ----
 
+[[field-name-attribute]]
 ==== Attribute based naming
 
 Using NEST's property attributes you can specify a new name for the properties
@@ -339,9 +341,29 @@ public class BuiltIn
 Expect("naam").WhenSerializing(Field<BuiltIn>(p => p.Name));
 ----
 
-Starting with NEST 2.x, we also ask the serializer if it can resolve a property to a name.
-Here we ask the default `JsonNetSerializer` to resolve a property name and it takes
-the `JsonPropertyAttribute` into account
+[[data-member-field-attribute]]
+==== DataMember attributes
+
+If a property has a `System.Runtime.Serialization.DataMemberAttribute` applied, this can be used to resolve
+a field value for a property
+
+[source,csharp]
+----
+public class DataMember
+{
+    [DataMember(Name = "nameFromDataMember")]
+    public string Name { get; set; }
+}
+
+Expect("nameFromDataMember").WhenSerializing(Field<DataMember>(p => p.Name));
+----
+
+[[serializer-specific-field-attribute]]
+==== Serializer specific attributes
+
+NEST can also use a serializer specific attribute to resolve a field value for a property.
+In this example, we use the `JsonPropertyAttribute` to resolve a field, which is understood
+by the default `JsonNetSerializer`
 
 [source,csharp]
 ----
@@ -441,13 +463,15 @@ fieldNameOnB.Should().Be("c.name");
 
 To wrap up, the precedence in which field names are inferred is:
 
-. A hard rename of the property on connection settings using `.Rename()`
+. A naming of the property on `ConnectionSettings` using `.Rename()`
 
 . A NEST property mapping
 
-. Ask the serializer if the property has a verbatim value e.g it has an explicit JsonProperty attribute.
+. Ask the serializer if the property has a verbatim value, e.g. it has a `JsonPropertyAttribute` when using the default `JsonNetSerializer`
 
-. Pass the MemberInfo's Name to the DefaultFieldNameInferrer, which by default camelCases
+. See if the `MemberInfo` has a `DataMemberAttribute` applied
+
+. Pass the `MemberInfo` to the `DefaultFieldNameInferrer`, which by default will camel case the `Name` property
 
 The following example class will demonstrate this precedence
 
@@ -469,6 +493,9 @@ class Precedence
     [JsonProperty("dontaskme")]
     public string AskSerializer { get; set; } <4>
 
+    [DataMember(Name = "data")]
+    public string DataMember { get; set; }
+
     public string DefaultFieldNameInferrer { get; set; } <5>
 }
 ----
@@ -489,7 +516,6 @@ Here we create a custom serializer that renames any property named `AskSerialize
 class CustomSerializer : JsonNetSerializer
 {
     public CustomSerializer(IConnectionSettingsValues settings) : base(settings) { }
-
     public override IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
     {
         return memberInfo.Name == nameof(Precedence.AskSerializer)
@@ -516,6 +542,7 @@ usingSettings.Expect("renamed").ForField(Field<Precedence>(p => p.RenamedOnConne
 usingSettings.Expect("nestAtt").ForField(Field<Precedence>(p => p.NestAttribute));
 usingSettings.Expect("jsonProp").ForField(Field<Precedence>(p => p.JsonProperty));
 usingSettings.Expect("ask").ForField(Field<Precedence>(p => p.AskSerializer));
+usingSettings.Expect("data").ForField(Field<Precedence>(p => p.DataMember));
 usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
 ----
 
@@ -529,14 +556,16 @@ usingSettings.Expect(new []
     "DEFAULTFIELDNAMEINFERRER",
     "jsonProp",
     "nestAtt",
-    "renamed"
+    "renamed",
+    "data"
 }).AsPropertiesOf(new Precedence
 {
     RenamedOnConnectionSettings = "renamed on connection settings",
     NestAttribute = "using a nest attribute",
     JsonProperty = "the default serializer resolves json property attributes",
     AskSerializer = "serializer fiddled with this one",
-    DefaultFieldNameInferrer = "shouting much?"
+    DefaultFieldNameInferrer = "shouting much?",
+    DataMember = "using a DataMember attribute"
 });
 
 public class Parent

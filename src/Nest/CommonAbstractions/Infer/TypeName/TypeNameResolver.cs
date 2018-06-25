@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -21,9 +23,8 @@ namespace Nest
 		private string ResolveType(Type type)
 		{
 			if (type == null) return null;
-			string typeName;
 
-			if (TypeNames.TryGetValue(type, out typeName))
+			if (TypeNames.TryGetValue(type, out var typeName))
 				return typeName;
 
 			if (_connectionSettings.DefaultTypeNames.TryGetValue(type, out typeName))
@@ -36,11 +37,16 @@ namespace Nest
 			if (att != null && !att.Name.IsNullOrEmpty())
 				typeName = att.Name;
 			else
-				typeName = _connectionSettings.DefaultTypeNameInferrer(type);
+			{
+				var dataContract = type.GetAttributes<DataContractAttribute>().FirstOrDefault();
+				typeName = dataContract != null
+					? dataContract.Name
+					: _connectionSettings.DefaultTypeNameInferrer(type);
+			}
+			if (typeName.IsNullOrEmpty()) throw new ArgumentNullException($"{type.FullName} resolved to an empty string or null");
 
 			TypeNames.TryAdd(type, typeName);
 			return typeName;
 		}
-
 	}
 }

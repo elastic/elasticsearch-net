@@ -1,0 +1,74 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.6
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/5.x/src/Tests/ClientConcepts/HighLevel/Inference/TypeNameInference.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[type-name-inference]]
+=== Type name inference
+
+Type names are resolved in NEST by default, by lowercasing the CLR type name
+
+[source,csharp]
+----
+var settings = new ConnectionSettings();
+var resolver = new TypeNameResolver(settings);
+var type = resolver.Resolve<Project>();
+type.Should().Be("project");
+----
+
+[[elasticsearchtype-attribute]]
+==== Applying a type name with `ElasticsearchTypeAttribute`
+
+A type name can be applied for a CLR type, using the Name property on `ElasticsearchTypeAttribute`
+
+[source,csharp]
+----
+[ElasticsearchType(Name = "attributed_project")]
+public class AttributedProject { }
+
+var settings = new ConnectionSettings();
+var resolver = new TypeNameResolver(settings);
+var type = resolver.Resolve<AttributedProject>();
+type.Should().Be("attributed_project");
+----
+
+[[datacontract-attribute]]
+==== Applying a type name with `DataContractAttribute`
+
+Similarly to <<elasticsearchtype-attribute, `ElasticsearchTypeAttribute`>>, a type name can be applied for a
+CLR type, using the Name property on `System.Runtime.Serialization.DataContractAttribute`
+
+[source,csharp]
+----
+[DataContract(Name = "data_contract_project")]
+public class DataContractProject { }
+
+var settings = new ConnectionSettings();
+var resolver = new TypeNameResolver(settings);
+var type = resolver.Resolve<DataContractProject>();
+type.Should().Be("data_contract_project");
+----
+
+[[type-name-inferrer]]
+==== Override type name inferrer
+
+You can provide a delegate to override the default type name inferrer for types
+
+[source,csharp]
+----
+var settings = new ConnectionSettings()
+    .DefaultTypeNameInferrer(t=>t.Name.ToLower() + "-suffix");
+var resolver = new TypeNameResolver(settings);
+var type = resolver.Resolve<Project>();
+type.Should().Be("project-suffix");
+----
+

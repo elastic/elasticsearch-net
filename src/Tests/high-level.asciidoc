@@ -21,10 +21,11 @@ the `.LowLevel` property on `ElasticClient`.
 
 There are a number of conventions that NEST uses for inference of
 
-- <<index-name-inference, Index Names>>
-- <<indices-paths, Building a URI path to one or more indices>>
-- <<field-inference, Field names>> and <<property-inference, Property names>>
+- <<index-name-inference, Index names>>
+- <<type-name-inference, Type names>>
 - <<ids-inference, Document IDs>>
+- <<field-inference, Field names>> 
+- <<property-inference, Property names>>
 - <<document-paths, Building a URI path to a document>>
 - <<features-inference, API features>>
 
@@ -89,8 +90,8 @@ will cause Elasticsearch to infer the mapping).
 There are several ways to control mapping in NEST
 
 - <<auto-map, Auto mapping (inferred from POCO property types)>>
-- <<attribute-mapping, Attribute mapping>>
 - <<fluent-mapping, Fluent mapping>>
+- <<attribute-mapping, Attribute mapping>>
 - <<visitor-pattern-mapping, through the Visitor Pattern>>
 
 and these can be combined to form an overall mapping approach. In addition, there are also ways to control
@@ -98,9 +99,10 @@ and these can be combined to form an overall mapping approach. In addition, ther
 - <<ignoring-properties, Ignoring properties>>
 - <<multi-fields, Multi fields>>
 
+
 include::{output-dir}/mapping/auto-map.asciidoc[]
-include::{output-dir}/mapping/attribute-mapping.asciidoc[]
 include::{output-dir}/mapping/fluent-mapping.asciidoc[]
+include::{output-dir}/mapping/attribute-mapping.asciidoc[]
 include::{output-dir}/mapping/visitor-pattern-mapping.asciidoc[]
 include::{output-dir}/mapping/ignoring-properties.asciidoc[]
 include::{output-dir}/mapping/multi-fields.asciidoc[]
@@ -154,15 +156,23 @@ include::aggregations/reserved-aggregation-names.asciidoc[]
 
 There are a number of conventions that NEST uses for inference of
 
-- <<document-paths, Document paths>>
-- <<features-inference, API features>>
-- <<field-inference, Fields>>
-- <<ids-inference, Ids>>
 - <<index-name-inference, Index names>>
+- <<type-name-inference, Type names>>
+- <<ids-inference, Document Ids>>
+- <<field-inference, Document field names>>
+- <<property-inference, Document properties>>
+- <<document-paths, Document paths>>	 
 - <<indices-paths, Index paths>>
-- <<property-inference, Properties>>
+- <<features-inference, API features>>
 
-:includes-from-dirs: client-concepts/high-level/inference
+include::{output-dir}/inference/index-name-inference.asciidoc[]
+include::{output-dir}/inference/type-name-inference.asciidoc[]
+include::{output-dir}/inference/ids-inference.asciidoc[]
+include::{output-dir}/inference/field-inference.asciidoc[]
+include::{output-dir}/inference/property-inference.asciidoc[]
+include::{output-dir}/inference/document-paths.asciidoc[]
+include::{output-dir}/inference/indices-paths.asciidoc[]
+include::{output-dir}/inference/features-inference.asciidoc[]
 
 [[common-types]]
 == Common Types
@@ -170,8 +180,8 @@ There are a number of conventions that NEST uses for inference of
 NEST has a number of types for working with Elasticsearch conventions for
 
 - <<time-units, Time units>>
-- <<distance-units, Distance units>>
-- <<date-math-expressions, Dat math expressions>>
+- <<distance-units, Distance Units>>
+- <<date-math-expressions, Date math expressions>>
 
 include::common-options/time-unit/time-units.asciidoc[]
 include::common-options/distance-unit/distance-units.asciidoc[]

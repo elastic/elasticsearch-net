@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -97,9 +98,8 @@ namespace Nest
 
 		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 		{
-			IPropertyMapping mapping;
 			var memberInfoString = $"{memberInfo.DeclaringType?.FullName}.{memberInfo.Name}";
-			if (Properties.TryGetValue(memberInfoString, out mapping))
+			if (Properties.TryGetValue(memberInfoString, out var mapping))
 				return mapping;
 			mapping =  PropertyMappingFromAttributes(memberInfo);
 			this.Properties.TryAdd(memberInfoString, mapping);
@@ -109,9 +109,10 @@ namespace Nest
 		private static IPropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
 		{
 			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
+			var dataMember = memberInfo.GetCustomAttribute<DataMemberAttribute>(true);
 			var ignoreProperty = memberInfo.GetCustomAttribute<JsonIgnoreAttribute>(true);
-			if (jsonProperty == null && ignoreProperty == null) return null;
-			return new PropertyMapping {Name = jsonProperty?.PropertyName, Ignore = ignoreProperty != null};
+			if (jsonProperty == null && ignoreProperty == null && dataMember == null) return null;
+			return new PropertyMapping {Name = jsonProperty?.PropertyName ?? dataMember?.Name, Ignore = ignoreProperty != null};
 		}
 
 		public virtual T Deserialize<T>(Stream stream)

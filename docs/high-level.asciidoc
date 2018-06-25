@@ -29,13 +29,15 @@ the `.LowLevel` property on `ElasticClient`.
 
 There are a number of conventions that NEST uses for inference of
 
-* <<index-name-inference, Index Names>>
+* <<index-name-inference, Index names>>
 
-* <<indices-paths, Building a URI path to one or more indices>>
-
-* <<field-inference, Field names>> and <<property-inference, Property names>>
+* <<type-name-inference, Type names>>
 
 * <<ids-inference, Document IDs>>
+
+* <<field-inference, Field names>> 
+
+* <<property-inference, Property names>>
 
 * <<document-paths, Building a URI path to a document>>
 
@@ -120,9 +122,9 @@ There are several ways to control mapping in NEST
 
 * <<auto-map, Auto mapping (inferred from POCO property types)>>
 
-* <<attribute-mapping, Attribute mapping>>
-
 * <<fluent-mapping, Fluent mapping>>
+
+* <<attribute-mapping, Attribute mapping>>
 
 * <<visitor-pattern-mapping, through the Visitor Pattern>>
 
@@ -134,9 +136,9 @@ and these can be combined to form an overall mapping approach. In addition, ther
 
 include::{output-dir}/mapping/auto-map.asciidoc[]
 
-include::{output-dir}/mapping/attribute-mapping.asciidoc[]
-
 include::{output-dir}/mapping/fluent-mapping.asciidoc[]
+
+include::{output-dir}/mapping/attribute-mapping.asciidoc[]
 
 include::{output-dir}/mapping/visitor-pattern-mapping.asciidoc[]
 
@@ -203,35 +205,37 @@ include::aggregations/reserved-aggregation-names.asciidoc[]
 
 There are a number of conventions that NEST uses for inference of
 
-* <<document-paths, Document paths>>
-
-* <<features-inference, API features>>
-
-* <<field-inference, Fields>>
-
-* <<ids-inference, Ids>>
-
 * <<index-name-inference, Index names>>
+
+* <<type-name-inference, Type names>>
+
+* <<ids-inference, Document Ids>>
+
+* <<field-inference, Document field names>>
+
+* <<property-inference, Document properties>>
+
+* <<document-paths, Document paths>>	 
 
 * <<indices-paths, Index paths>>
 
-* <<property-inference, Properties>>
+* <<features-inference, API features>>
 
-:includes-from-dirs: client-concepts/high-level/inference
+include::{output-dir}/inference/index-name-inference.asciidoc[]
 
-include::client-concepts/high-level/inference/document-paths.asciidoc[]
+include::{output-dir}/inference/type-name-inference.asciidoc[]
 
-include::client-concepts/high-level/inference/features-inference.asciidoc[]
+include::{output-dir}/inference/ids-inference.asciidoc[]
 
-include::client-concepts/high-level/inference/field-inference.asciidoc[]
+include::{output-dir}/inference/field-inference.asciidoc[]
 
-include::client-concepts/high-level/inference/ids-inference.asciidoc[]
+include::{output-dir}/inference/property-inference.asciidoc[]
 
-include::client-concepts/high-level/inference/index-name-inference.asciidoc[]
+include::{output-dir}/inference/document-paths.asciidoc[]
 
-include::client-concepts/high-level/inference/indices-paths.asciidoc[]
+include::{output-dir}/inference/indices-paths.asciidoc[]
 
-include::client-concepts/high-level/inference/property-inference.asciidoc[]
+include::{output-dir}/inference/features-inference.asciidoc[]
 
 [[common-types]]
 == Common Types
@@ -240,9 +244,9 @@ NEST has a number of types for working with Elasticsearch conventions for
 
 * <<time-units, Time units>>
 
-* <<distance-units, Distance units>>
+* <<distance-units, Distance Units>>
 
-* <<date-math-expressions, Dat math expressions>>
+* <<date-math-expressions, Date math expressions>>
 
 include::common-options/time-unit/time-units.asciidoc[]
 
