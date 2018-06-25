@@ -15,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [[types-and-relations-inference]]
 === Type and Relation names inference
 
-Type names are resolved in NEST by lowercasing the CLR type name
+Type names are resolved in NEST by default, by lowercasing the CLR type name
 
 [source,csharp]
 ----
@@ -23,6 +23,39 @@ var settings = new ConnectionSettings();
 var resolver = new TypeNameResolver(settings);
 var type = resolver.Resolve<Project>();
 type.Should().Be("project");
+----
+
+[[elasticsearchtype-attribute]]
+==== Applying a type name with `ElasticsearchTypeAttribute`
+
+A type name can be applied for a CLR type, using the Name property on `ElasticsearchTypeAttribute`
+
+[source,csharp]
+----
+[ElasticsearchType(Name = "attributed_project")]
+public class AttributedProject { }
+
+var settings = new ConnectionSettings();
+var resolver = new TypeNameResolver(settings);
+var type = resolver.Resolve<AttributedProject>();
+type.Should().Be("attributed_project");
+----
+
+[[datacontract-attribute]]
+==== Applying a type name with `DataContractAttribute`
+
+Similarly to <<elasticsearchtype-attribute, `ElasticsearchTypeAttribute`>>, a type name can be applied for a
+CLR type, using the Name property on `System.Runtime.Serialization.DataContractAttribute`
+
+[source,csharp]
+----
+[DataContract(Name = "data_contract_project")]
+public class DataContractProject { }
+
+var settings = new ConnectionSettings();
+var resolver = new TypeNameResolver(settings);
+var type = resolver.Resolve<DataContractProject>();
+type.Should().Be("data_contract_project");
 ----
 
 [[default-type-name]]
@@ -58,7 +91,8 @@ type.Should().Be("project-suffix");
 ----
 
 [[relation-names]]
-==== Relation names
+[float]
+=== Relation names
 
 Prior to Elasticsearch 6.x you could have multiple types per index. They acted as a discrimatory column but were often
 confused with tables. The fact that the mapping API's treated them as seperate entities did not help.

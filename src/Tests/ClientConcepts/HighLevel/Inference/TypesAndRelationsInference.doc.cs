@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Nest;
 using System;
+using System.Runtime.Serialization;
 using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework;
 using Tests.Framework.MockData;
@@ -17,9 +18,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	public class TypesAndRelationsInference : DocumentationTestBase
 	{
 		/**
-		* Type names are resolved in NEST by lowercasing the CLR type name
+		* Type names are resolved in NEST by default, by lowercasing the CLR type name
 		*/
-
 		[U] public void DefaultTypeNameIsLowercase()
 		{
 			var settings = new ConnectionSettings();
@@ -27,6 +27,42 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var type = resolver.Resolve<Project>();
 			type.Should().Be("project");
 		}
+
+		/**
+		 * [[elasticsearchtype-attribute]]
+		 * ==== Applying a type name with `ElasticsearchTypeAttribute`
+		 *
+		 * A type name can be applied for a CLR type, using the Name property on `ElasticsearchTypeAttribute`
+		 */
+		[ElasticsearchType(Name = "attributed_project")]
+		public class AttributedProject { }
+
+		[U] public void TypeNameFromElasticsearchTypeAttribute()
+		{
+			var settings = new ConnectionSettings();
+			var resolver = new TypeNameResolver(settings);
+			var type = resolver.Resolve<AttributedProject>();
+			type.Should().Be("attributed_project");
+		}
+
+		/**
+		 * [[datacontract-attribute]]
+		 * ==== Applying a type name with `DataContractAttribute`
+		 *
+		 * Similarly to <<elasticsearchtype-attribute, `ElasticsearchTypeAttribute`>>, a type name can be applied for a
+		 * CLR type, using the Name property on `System.Runtime.Serialization.DataContractAttribute`
+		 */
+		[DataContract(Name = "data_contract_project")]
+		public class DataContractProject { }
+
+		[U] public void TypeNameFromDataContractAttribute()
+		{
+			var settings = new ConnectionSettings();
+			var resolver = new TypeNameResolver(settings);
+			var type = resolver.Resolve<DataContractProject>();
+			type.Should().Be("data_contract_project");
+		}
+
 		/**
 		* [[default-type-name]]
 		* ==== Default type name
@@ -62,7 +98,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		/**
 		* [[relation-names]]
-		* ==== Relation names
+		* [float]
+		* === Relation names
 		*
 		* Prior to Elasticsearch 6.x you could have multiple types per index. They acted as a discrimatory column but were often
 		* confused with tables. The fact that the mapping API's treated them as seperate entities did not help.
@@ -98,7 +135,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		/**
-		*
 		* `RelationName` uses the `DefaultTypeNameInferrer` to translate CLR types to a string representation.
 		*
 		* Explicit `TypeName` configuration does not affect how the default relation for the CLR type

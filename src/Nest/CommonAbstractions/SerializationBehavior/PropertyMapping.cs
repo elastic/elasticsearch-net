@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -59,10 +60,11 @@ namespace Nest
 		private static IPropertyMapping PropertyMappingFromAttributes(MemberInfo memberInfo)
 		{
 			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
-			var rename = memberInfo.GetCustomAttribute<PropertyNameAttribute>(true);
+			var dataMemberProperty = memberInfo.GetCustomAttribute<DataMemberAttribute>(true);
+			var propertyName = memberInfo.GetCustomAttribute<PropertyNameAttribute>(true);
 			var ignore = memberInfo.GetCustomAttribute<IgnoreAttribute>(true);
-			if (jsonProperty == null && ignore == null && rename == null) return null;
-			return new PropertyMapping {Name = rename?.Name ?? jsonProperty?.PropertyName, Ignore = ignore != null};
+			if (jsonProperty == null && ignore == null && propertyName == null && dataMemberProperty == null) return null;
+			return new PropertyMapping {Name = propertyName?.Name ?? jsonProperty?.PropertyName ?? dataMemberProperty?.Name, Ignore = ignore != null};
 		}
 	}
 

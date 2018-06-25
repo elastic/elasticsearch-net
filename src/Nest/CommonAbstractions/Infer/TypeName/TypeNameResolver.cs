@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
@@ -35,8 +37,13 @@ namespace Nest
 				typeName = att.Name;
 			else
 			{
-				var inferredType =_connectionSettings.DefaultTypeNameInferrer(type);
-				typeName = !inferredType.IsNullOrEmpty() ? inferredType : _connectionSettings.DefaultTypeName;
+				var dataContract = type.GetAttributes<DataContractAttribute>().FirstOrDefault();
+				if (dataContract != null) typeName = dataContract.Name;
+				else
+				{
+					var inferredType =_connectionSettings.DefaultTypeNameInferrer(type);
+					typeName = !inferredType.IsNullOrEmpty() ? inferredType : _connectionSettings.DefaultTypeName;
+				}
 			}
 			if (typeName.IsNullOrEmpty()) throw new ArgumentNullException($"{type.FullName} resolved to an empty string or null");
 
