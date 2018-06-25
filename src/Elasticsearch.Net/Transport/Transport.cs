@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using System.Threading;
 using System;
 using System.Linq;
+#if FEATURE_HTTPWEBREQUEST
+using System.Net;
+#endif
 
 namespace Elasticsearch.Net
 {
@@ -190,8 +193,22 @@ namespace Elasticsearch.Net
 
 		private void HandleElasticsearchClientException(RequestData data, Exception clientException, IElasticsearchResponse response)
 		{
-			if (clientException != null && response.ApiCall.OriginalException == null && response.ApiCall is ApiCallDetails a)
-				a.OriginalException = clientException;
+			if (response.ApiCall is ApiCallDetails a)
+			{
+				//if original exception was not explicitly set during the pipeline
+				//set it to the ElasticsearchClientException we created for the bad response
+				if (clientException != null && a.OriginalException == null)
+					a.OriginalException = clientException;
+				//On .NET Core the IConnection implementation throws exceptions on bad responses
+				//This causes it to behave differently to .NET FULL. We already wrapped the WebExeption
+				//under ElasticsearchServerException and it exposes way more information as part of it's
+				//exception message e.g the the root cause of the server error body.
+#if FEATURE_HTTPWEBREQUEST
+				if (a.OriginalException is WebException)
+					a.OriginalException = clientException;
+#endif
+			}
+
 			this.Settings.OnRequestCompleted?.Invoke(response.ApiCall);
 			if (clientException != null && data.ThrowExceptions) throw clientException;
 		}
