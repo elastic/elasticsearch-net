@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.Serialization;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -124,7 +125,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*
 		* [TIP]
 		* ====
-		* This example uses the https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import] `using static Nest.Infer;` in the using directives to shorthand `Nest.Infer.Field<T>()`
+		* This example uses the https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import] `using static Nest.Infer;`
+		 * in the using directives to shorthand `Nest.Infer.Field<T>()`
 		* to simply `Field<T>()`. Be sure to include this static import if copying any of these examples.
 		* ====
 		*
@@ -286,7 +288,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("metadata.hardcoded.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[4]);
 		}
 
-		/**
+		/**[[field-name-attribute]]
 		* ==== Attribute based naming
 		*
 		* Using NEST's property attributes you can specify a new name for the properties
@@ -302,16 +304,37 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("naam").WhenSerializing(Field<BuiltIn>(p => p.Name));
 		}
 
-		/**
-		* Starting with NEST 2.x, we also ask the serializer if it can resolve a property to a name.
-		* Here we ask the default `JsonNetSerializer` to resolve a property name and it takes
-		* the `JsonPropertyAttribute` into account
+		/**[[data-member-field-attribute]]
+		 * ==== DataMember attributes
+		 *
+		 * If a property has a `System.Runtime.Serialization.DataMemberAttribute` applied, this can be used to resolve
+		 * a field value for a property
+		 */
+		public class DataMember
+		{
+			[DataMember(Name = "nameFromDataMember")]
+			public string Name { get; set; }
+		}
+
+		[U]
+		public void DataAnnotationAttribute()
+		{
+			Expect("nameFromDataMember").WhenSerializing(Field<DataMember>(p => p.Name));
+		}
+
+		/**[[serializer-specific-field-attribute]]
+		* ==== Serializer specific attributes
+		*
+		* NEST can also use a serializer specific attribute to resolve a field value for a property.
+		* In this example, the {nuget}/NEST.JsonNetSerializer[`JsonNetSerializer`] is hooked up as the
+		* <<custom-serialization, custom serializer>> for the client and we use the `JsonPropertyAttribute` to resolve a field
 		*/
 		public class SerializerSpecific
 		{
 			[PropertyName("nameInJson"), JsonProperty("nameInJson")]
 			public string Name { get; set; }
 		}
+
 		[U]
 		public void SerializerSpecificAnnotations()
 		{
@@ -400,10 +423,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		* ==== Inference Precedence
 		* To wrap up, the precedence in which field names are inferred is:
 		*
-		* 1) A hard rename of the property on connection settings using `.PropertyName()`
-		* 2) A NEST PropertyNameAttribute
-		* 3) Ask the serializer if the property has a verbatim value, e.g it has a JsonPropertyAttribute.
-		* 4) Pass the MemberInfo's Name to the DefaultFieldNameInferrer, which by default will camelCase
+		* 1) A naming of the property on `ConnectionSettings` using `.PropertyName()`
+		* 2) A NEST `PropertyNameAttribute`
+		* 3) Ask the serializer if the property has a verbatim value, e.g. it has a `JsonPropertyAttribute` if using {nuget}/NEST.JsonNetSerializer[`JsonNetSerializer`]
+		* 4) See if the `MemberInfo` has a `DataMemberAttribute` applied
+		* 5) Pass the `MemberInfo` to the `DefaultFieldNameInferrer`, which by default will camel case the `Name` property
 		*
 		* The following example class will demonstrate this precedence
 		*/
@@ -425,6 +449,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			[PropertyName("dontaskme"),JsonProperty("dontaskme")]
 			public string AskSerializer { get; set; } //<5> This property we are going to hard code in our custom serializer to resolve to ask.
+
+			[DataMember(Name = "data")]
+			public string DataMember { get; set; }
 
 			public string DefaultFieldNameInferrer { get; set; } //<6>  We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
 		}
@@ -462,6 +489,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			usingSettings.Expect("nestProp").ForField(Field<Precedence>(p => p.NestProperty));
 			usingSettings.Expect("jsonProp").ForField(Field<Precedence>(p => p.JsonProperty));
 			usingSettings.Expect("ask").ForField(Field<Precedence>(p => p.AskSerializer));
+			usingSettings.Expect("data").ForField(Field<Precedence>(p => p.DataMember));
 			usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
 
 
@@ -473,7 +501,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				"jsonProp",
 				"nestProp",
 				"nestAtt",
-				"renamed"
+				"renamed",
+				"data"
 			}).AsPropertiesOf(new Precedence
 			{
 				RenamedOnConnectionSettings = "renamed on connection settings",
@@ -481,7 +510,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				NestProperty = "using a nest property",
 				JsonProperty = "the default serializer resolves json property attributes",
 				AskSerializer = "serializer fiddled with this one",
-				DefaultFieldNameInferrer = "shouting much?"
+				DefaultFieldNameInferrer = "shouting much?",
+				DataMember = "using a DataMember attribute"
 			});
 		}
 
