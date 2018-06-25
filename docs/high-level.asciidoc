@@ -209,37 +209,37 @@ include::aggregations/reserved-aggregation-names.asciidoc[]
 
 There are a number of conventions that NEST uses for inference of
 
-* <<document-paths, Document paths>>
-
-* <<field-inference, Fields>>
-
-* <<ids-inference, Ids>>
-
 * <<index-name-inference, Index names>>
+
+* <<types-and-relations-inference, Type and Relation names>>
+
+* <<ids-inference, Document Ids>>
+
+* <<field-inference, Document field names>>
+
+* <<property-inference, Document properties>>
+
+* <<document-paths, Document paths>>
 
 * <<indices-paths, Index paths>>
 
-* <<property-inference, Properties>>
-
 * <<routing-inference, Routing>>
 
-:includes-from-dirs: client-concepts/high-level/inference
+include::{output-dir}/inference/index-name-inference.asciidoc[]
 
-include::client-concepts/high-level/inference/document-paths.asciidoc[]
+include::{output-dir}/inference/types-and-relations-inference.asciidoc[]
 
-include::client-concepts/high-level/inference/field-inference.asciidoc[]
+include::{output-dir}/inference/ids-inference.asciidoc[]
 
-include::client-concepts/high-level/inference/ids-inference.asciidoc[]
+include::{output-dir}/inference/field-inference.asciidoc[]
 
-include::client-concepts/high-level/inference/index-name-inference.asciidoc[]
+include::{output-dir}/inference/property-inference.asciidoc[]
 
-include::client-concepts/high-level/inference/indices-paths.asciidoc[]
+include::{output-dir}/inference/document-paths.asciidoc[]
 
-include::client-concepts/high-level/inference/property-inference.asciidoc[]
+include::{output-dir}/inference/indices-paths.asciidoc[]
 
-include::client-concepts/high-level/inference/routing-inference.asciidoc[]
-
-include::client-concepts/high-level/inference/types-and-relations-inference.asciidoc[]
+include::{output-dir}/inference/routing-inference.asciidoc[]
 
 [[common-types]]
 == Common Types

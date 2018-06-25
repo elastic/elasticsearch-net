@@ -186,7 +186,7 @@ namespace Tests.Framework
 			return settings;
 		}
 
-		public static IElasticClient GetInMemoryClient() => new ElasticClient(GlobalDefaultSettings);
+		public static IElasticClient GetInMemoryClient() => GetInMemoryClient(null);
 
 		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings, int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true).EnableDebugMode());
