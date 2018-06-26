@@ -69,7 +69,7 @@ namespace Tests.CommonOptions.Union
 			 * ==== Match
 			 *
 			 * The `Match` method can be used to operate on the value encapsulated by the instance of `Union<TFirst,TSecond>`.
-			 * Two delegates are passed; one to operate on a `TFirst` value and the other toe operate on a `TSecond` value.
+			 * Two delegates are passed; one to operate on a `TFirst` value and the other to operate on a `TSecond` value.
 			 */
 			sourceFilterTrue.Match(
 				b => b.Should().BeTrue(),

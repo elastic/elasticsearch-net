@@ -137,7 +137,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Field fieldString = "name";
 
 			/** but for expressions this is still rather involved */
-			var fieldExpression = Infer.Field<Project>(p => p.Name);
+			var fieldExpression = Field<Project>(p => p.Name);
 
 			/** this can be even shortened even further using a static import.
 			* Now that is much terser then our first example using the constructor!
@@ -174,12 +174,13 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			setup.Expect("NAME").WhenSerializing(Field<Project>(p => p.Name));
 
-			/** However `string` types are *always* passed along verbatim */
+			/** A `Field` constructed from a `string` however is *always* passed along verbatim */
 			setup.Expect("NaMe").WhenSerializing<Field>("NaMe");
 
-			/** Of you want the same behavior for expressions, simply pass a Func<string,string> to `DefaultFieldNameInferrer`
-			* to make no changes to the name
-			*/
+			/** If you'd like NEST to not change the casing of field names at all,
+			 * simply pass a Func<string,string> to `DefaultFieldNameInferrer` that simply returns the
+			 * input string
+			 */
 			setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p));
 			setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
 		}
@@ -200,7 +201,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("curatedTags.added").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Added));
 			Expect("curatedTags.name").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Name));
 
-			/** NOTE: Remember, these are _expressions_ and not actual code that will be executed
+			/** NOTE: Remember, these are _expressions_ to access members, and not actual code that will be executed
 			*
 			* An indexer on a dictionary is assumed to describe a property name */
 			Expect("metadata.hardcoded").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"]));
@@ -423,11 +424,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		* ==== Inference Precedence
 		* To wrap up, the precedence in which field names are inferred is:
 		*
-		* 1) A naming of the property on `ConnectionSettings` using `.PropertyName()`
-		* 2) A NEST `PropertyNameAttribute`
-		* 3) Ask the serializer if the property has a verbatim value, e.g. it has a `JsonPropertyAttribute` if using {nuget}/NEST.JsonNetSerializer[`JsonNetSerializer`]
-		* 4) See if the `MemberInfo` has a `DataMemberAttribute` applied
-		* 5) Pass the `MemberInfo` to the `DefaultFieldNameInferrer`, which by default will camel case the `Name` property
+		* . A naming of the property on `ConnectionSettings` using `.PropertyName()`
+		* . A NEST `PropertyNameAttribute`
+		* . Ask the serializer if the property has a verbatim value, e.g. it has a `JsonPropertyAttribute` if using {nuget}/NEST.JsonNetSerializer[`JsonNetSerializer`]
+		* . See if the `MemberInfo` has a `DataMemberAttribute` applied
+		* . Pass the `MemberInfo` to the `DefaultFieldNameInferrer`, which by default will camel case the `Name` property
 		*
 		* The following example class will demonstrate this precedence
 		*/
@@ -457,7 +458,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		/**
-		* Here we create a custom serializer that renames any property named `AskSerializer` to `ask`
+		* We'll create a custom `IPropertyMappingProvider` that renames any property named `AskSerializer` to `ask`.
+		* and hook it up when creating the Connection Settings in the following section.
 		*/
 		class CustomPropertyMappingProvider : PropertyMappingProvider
 		{
@@ -473,16 +475,18 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[ProjectReferenceOnly]
 		public void PrecedenceIsAsExpected()
 		{
-			/** Here we provide an explicit rename of a property on `ConnectionSettings` using `.PropertyName()`
-			* and all properties that are not mapped verbatim should be uppercased
+			/** Now, when we create the Connection Settings to use to configure the client, we'll add
+			 * - a default mapping for the `Precedence` type
+			 * - our `CustomPropertyMappingProvider`
+			 * - a delegate to perform default field name inference
 			*/
 			var usingSettings = WithConnectionSettings(s => s
 
 				.DefaultMappingFor<Precedence>(m => m
-					.PropertyName(p => p.RenamedOnConnectionSettings, "renamed")
+					.PropertyName(p => p.RenamedOnConnectionSettings, "renamed") // <1> Rename on the mapping for the `Precedence` type
 				)
-				.DefaultFieldNameInferrer(p => p.ToUpperInvariant())
-			).WithPropertyMappingProvider(new CustomPropertyMappingProvider());
+				.DefaultFieldNameInferrer(p => p.ToUpperInvariant()) // <2> Default inference for a field, if no other rules apply or are specified for a given field
+			).WithPropertyMappingProvider(new CustomPropertyMappingProvider()); // <3> Hook up the custom `IPropertyMappingProvider`
 
 			usingSettings.Expect("renamed").ForField(Field<Precedence>(p => p.RenamedOnConnectionSettings));
 			usingSettings.Expect("nestAtt").ForField(Field<Precedence>(p => p.NestAttribute));
@@ -515,6 +519,16 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			});
 		}
 
+		/**
+		 *[[inherited-field-inference]]
+		 * ==== Overriding inherited field inference
+		 *
+		 * Properties inherited from a base type can be ignored and renamed using `DefaultMappingFor<T>` for
+		 * a given type, on Connection Settings.
+		 *
+		 * To demonstrate, the `IgnoreMe` property on `Parent` can be ignored on the `Child` type, and the
+		 * `Description` property renamed, using `DefaultMappingFor<Child>(...)`
+		 */
 		public class Parent
 		{
 			public int Id { get; set; }
@@ -527,7 +541,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U]
 		public void CodeBasedConfigurationInherits()
 		{
-			/** Inherited properties can be ignored and renamed just as one would expect */
 			var usingSettings = WithConnectionSettings(s => s
 				.DefaultMappingFor<Child>(m => m
 					.PropertyName(p => p.Description, "desc")
@@ -541,8 +554,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			}).AsPropertiesOf(new Child
 			{
 				Id = 1,
-				Description = "using a nest attribute",
-				IgnoreMe = "the default serializer resolves json property attributes",
+				Description = "this property will be renamed for Child",
+				IgnoreMe = "this property will be ignored (won't be serialized) for Child",
 			});
 
 		}
