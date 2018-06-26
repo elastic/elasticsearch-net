@@ -34,6 +34,6 @@ namespace Nest
 			=> Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		[Obsolete("Removed in Elasticsearch 6.2. Will be removed in NEST 7.x. Calling this is a no-op.")]
-		public ValidateQueryDescriptor<T> OperationThreading(string operationThreading) => Assign(_ => { /* no-op */ });
+		public ValidateQueryDescriptor<T> OperationThreading(string operationThreading) => this;
 	}
 }

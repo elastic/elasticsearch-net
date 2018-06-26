@@ -10,6 +10,6 @@ namespace Nest
 	public partial class SegmentsDescriptor
 	{
 		[Obsolete("Removed in Elasticsearch 6.2. Will be removed in NEST 7.x. Calling this is a no-op.")]
-		public SegmentsDescriptor OperationThreading(string operationThreading) => Assign(_ => { /* no-op */ });
+		public SegmentsDescriptor OperationThreading(string operationThreading) => this;
 	}
 }

@@ -41,6 +41,6 @@ namespace Nest
 			Assign(a => a.Types = types);
 
 		[Obsolete("Removed in Elasticsearch 6.2. Will be removed in NEST 7.x. Calling this is a no-op.")]
-		public IndicesShardStoresDescriptor OperationThreading(string operationThreading) => Assign(_ => { /* no-op */ });
+		public IndicesShardStoresDescriptor OperationThreading(string operationThreading) => this;
 	}
 }
