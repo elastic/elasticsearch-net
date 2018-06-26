@@ -111,18 +111,31 @@ module Release =
         let labelHeaders =
            [("Feature", "Features & Enhancements");
             ("Bug", "Bug Fixes");
-            ("Deprecation", "Deprecations");]
+            ("Deprecation", "Deprecations");
+            ("Uncategorized", "Uncategorized");]
            |> Map.ofList
            
         let groupByLabel (issues:IReadOnlyList<Issue>) =
-            let dict = new Dictionary<string, Issue list>()         
+            let dict = new Dictionary<string, Issue list>()     
             for issue in issues do
+                let mutable categorized = false
                 for labelHeader in labelHeaders do
                     if issue.Labels.Any(fun l -> l.Name = labelHeader.Key) then
                         let exists,list = dict.TryGetValue(labelHeader.Key)
                         match exists with 
                         | true -> dict.[labelHeader.Key] <- issue :: list
                         | false -> dict.Add(labelHeader.Key, [issue])
+                        categorized <- true
+                        
+                if (categorized = false) then
+                    let label = "Uncategorized"
+                    let exists,list = dict.TryGetValue(label)
+                    match exists with 
+                    | true ->                  
+                        match List.tryFind(fun (i:Issue)-> i.Number = issue.Number) list with 
+                        | Some _ -> ()
+                        | None -> dict.[label] <- issue :: list                         
+                    | false -> dict.Add(label, [issue])
             dict
         
         let closedIssues = client.Issue.GetAllForRepository(Paths.OwnerName, Paths.RepositoryName, filter)
