@@ -19,7 +19,7 @@ namespace Elasticsearch.Net
 	{
 <text>
 	///<summary>Request options for @method.FullName<pre>@method.Documentation</pre></summary>
-	public class @method.QueryStringParamName : RequestParameters<@method.QueryStringParamName> 
+	public partial class @method.QueryStringParamName : RequestParameters<@method.QueryStringParamName> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.@method.HttpMethod;
 		@foreach (var param in method.Url.Params.Values)
