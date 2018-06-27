@@ -65,20 +65,20 @@ namespace Tests.ClientConcepts.Certificates
 
 		//hide
 		//[IntegrationOnly]
-		public class DenyAllSslCertificatesApiTests : ConnectionErrorTestBase<DenyAllCertificatesCluster>
-		{
-			public DenyAllSslCertificatesApiTests(DenyAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-			//[I]
-			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
-
-			protected override void AssertWebException(WebException e) =>
-				e.Message.Should().Contain("Could not establish trust relationship for the SSL/TLS secure channel.");
-
-			protected override void AssertHttpRequestException(HttpRequestException e)
-			{
-			}
-		}
+//		public class DenyAllSslCertificatesApiTests : ConnectionErrorTestBase<DenyAllCertificatesCluster>
+//		{
+//			public DenyAllSslCertificatesApiTests(DenyAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+//
+//			//[I]
+//			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
+//
+//			protected override void AssertWebException(WebException e) =>
+//				e.Message.Should().Contain("Could not establish trust relationship for the SSL/TLS secure channel.");
+//
+//			protected override void AssertHttpRequestException(HttpRequestException e)
+//			{
+//			}
+//		}
 
 		/**===== Allowing all certificate validation
 		 *
@@ -96,15 +96,15 @@ namespace Tests.ClientConcepts.Certificates
 
 		//hide
 		//[IntegrationOnly]
-		public class AllowAllSslCertificatesApiTests : CanConnectTestBase<AllowAllCertificatesCluster>
-		{
-			public AllowAllSslCertificatesApiTests(AllowAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage)
-			{
-			}
-
-			//[I]
-			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
-		}
+//		public class AllowAllSslCertificatesApiTests : CanConnectTestBase<AllowAllCertificatesCluster>
+//		{
+//			public AllowAllSslCertificatesApiTests(AllowAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage)
+//			{
+//			}
+//
+//			//[I]
+//			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
+//		}
 
 		/**===== Allowing certificates from a Certificate Authority
 		 *
@@ -128,15 +128,15 @@ namespace Tests.ClientConcepts.Certificates
 
 		//hide
 		//[IntegrationOnly]
-		public class CertgenCaApiTests : CanConnectTestBase<CertgenCaCluster>
-		{
-			public CertgenCaApiTests(CertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage)
-			{
-			}
-
-			//[I]
-			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
-		}
+//		public class CertgenCaApiTests : CanConnectTestBase<CertgenCaCluster>
+//		{
+//			public CertgenCaApiTests(CertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage)
+//			{
+//			}
+//
+//			//[I]
+//			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
+//		}
 
 		/**
 		 * If your local copy does not match the server's CA, the client will fail to connect
@@ -150,24 +150,24 @@ namespace Tests.ClientConcepts.Certificates
 		}
 
 		//[IntegrationOnly]
-		public class BadCertgenCaApiTests : ConnectionErrorTestBase<BadCertgenCaCluster>
-		{
-			public BadCertgenCaApiTests(BadCertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage)
-			{
-			}
-
-			// hide
-			[I]
-			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
-
-			protected override void AssertWebException(WebException e) =>
-				e.Message.Should().Contain("Could not establish trust relationship for the SSL/TLS secure channel."); // <1> Exception is thrown, indicating that a secure connection could not be established
-
-			// hide
-			protected override void AssertHttpRequestException(HttpRequestException e)
-			{
-			}
-		}
+//		public class BadCertgenCaApiTests : ConnectionErrorTestBase<BadCertgenCaCluster>
+//		{
+//			public BadCertgenCaApiTests(BadCertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage)
+//			{
+//			}
+//
+//			// hide
+//			//[I]
+//			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
+//
+//			protected override void AssertWebException(WebException e) =>
+//				e.Message.Should().Contain("Could not establish trust relationship for the SSL/TLS secure channel."); // <1> Exception is thrown, indicating that a secure connection could not be established
+//
+//			// hide
+//			protected override void AssertHttpRequestException(HttpRequestException e)
+//			{
+//			}
+//		}
 		/**
 		* If you go for a vendor generated SSL certificate, it's common practice for the certificate to include the CA _and_ any intermediary CAs
 		* in the certificate chain. When using such a certificate, use `CertificateValidations.AuthorityPartOfChain` which validates that
@@ -216,15 +216,15 @@ namespace Tests.ClientConcepts.Certificates
 
 		//hide
 		//[IntegrationOnly]
-		public class PkiApiTests : CanConnectTestBase<PkiCluster>
-		{
-			public PkiApiTests(PkiCluster cluster, EndpointUsage usage) : base(cluster, usage)
-			{
-			}
-
-			[I]
-			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
-		}
+//		public class PkiApiTests : CanConnectTestBase<PkiCluster>
+//		{
+//			public PkiApiTests(PkiCluster cluster, EndpointUsage usage) : base(cluster, usage)
+//			{
+//			}
+//
+//			//[I]
+//			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
+//		}
 #endif
 	}
 
@@ -244,7 +244,7 @@ namespace Tests.ClientConcepts.Certificates
 		}
 
 		// hide
-		[I]
+		//[I]
 		public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 
 		// a bad certificate
