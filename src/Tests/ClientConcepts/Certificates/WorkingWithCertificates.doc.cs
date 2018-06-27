@@ -64,12 +64,12 @@ namespace Tests.ClientConcepts.Certificates
 		}
 
 		//hide
-		[IntegrationOnly]
+		//[IntegrationOnly]
 		public class DenyAllSslCertificatesApiTests : ConnectionErrorTestBase<DenyAllCertificatesCluster>
 		{
 			public DenyAllSslCertificatesApiTests(DenyAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-			[I]
+			//[I]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 
 			protected override void AssertWebException(WebException e) =>
@@ -95,14 +95,14 @@ namespace Tests.ClientConcepts.Certificates
 		 */
 
 		//hide
-		[IntegrationOnly]
+		//[IntegrationOnly]
 		public class AllowAllSslCertificatesApiTests : CanConnectTestBase<AllowAllCertificatesCluster>
 		{
 			public AllowAllSslCertificatesApiTests(AllowAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage)
 			{
 			}
 
-			[I]
+			//[I]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 		}
 
@@ -127,14 +127,14 @@ namespace Tests.ClientConcepts.Certificates
 		}
 
 		//hide
-		[IntegrationOnly]
+		//[IntegrationOnly]
 		public class CertgenCaApiTests : CanConnectTestBase<CertgenCaCluster>
 		{
 			public CertgenCaApiTests(CertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage)
 			{
 			}
 
-			[I]
+			//[I]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 		}
 
@@ -149,7 +149,7 @@ namespace Tests.ClientConcepts.Certificates
 				);
 		}
 
-		[IntegrationOnly]
+		//[IntegrationOnly]
 		public class BadCertgenCaApiTests : ConnectionErrorTestBase<BadCertgenCaCluster>
 		{
 			public BadCertgenCaApiTests(BadCertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage)
@@ -215,7 +215,7 @@ namespace Tests.ClientConcepts.Certificates
 		}
 
 		//hide
-		[IntegrationOnly]
+		//[IntegrationOnly]
 		public class PkiApiTests : CanConnectTestBase<PkiCluster>
 		{
 			public PkiApiTests(PkiCluster cluster, EndpointUsage usage) : base(cluster, usage)

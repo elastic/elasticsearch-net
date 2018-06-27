@@ -27,9 +27,11 @@ namespace Tests.Framework
 		public override IElasticClient Client => this.Cluster.Client;
 		protected override RootNodeInfoRequest Initializer => new RootNodeInfoRequest();
 
-		[I] public async Task IsValidIsFalse() => await this.AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(false));
+		//[I]
+		public async Task IsValidIsFalse() => await this.AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(false));
 
-		[I] public async Task AssertException() => await this.AssertOnAllResponses(r =>
+		//[I]
+		public async Task AssertException() => await this.AssertOnAllResponses(r =>
 		{
 			var e = r.OriginalException;
 			e.Should().NotBeNull();
