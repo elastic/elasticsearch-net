@@ -236,7 +236,7 @@ namespace Tests.ClientConcepts.Certificates
 	{
 	}
 
-	[IntegrationOnly]
+	//[IntegrationOnly]
 	public class BadCustomCertificatePerRequestWinsApiTests : ConnectionErrorTestBase<BadPkiCluster>
 	{
 		public BadCustomCertificatePerRequestWinsApiTests(BadPkiCluster cluster, EndpointUsage usage) : base(cluster, usage)
