@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.1
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -23,6 +23,7 @@ There are two approaches that you can take to return only some of the fields fro
 document (we use this term _loosely_ here); using stored fields and source filtering. Both are quite different
 in how they work.
 
+[[stored-fields]]
 ==== Stored fields
 
 When indexing a document, by default, Elasticsearch stores the originally sent JSON document in a special
@@ -81,11 +82,12 @@ foreach (var fieldValues in searchResponse.Fields)
     };
 }
 ----
-<1> Construct a partial document from the stored fields requested
+<1> Construct a partial document as an anonymous type from the stored fields requested
 
 This works when storing fields separately. A much more common scenario however is to return
 only a selection of fields from the `_source`; this is where source filtering comes in.
 
+[[source-filtering]]
 ==== Source filtering
 
 Only some of the fields of a document can be returned from a search query
@@ -115,7 +117,7 @@ var searchResponse = client.Search<Project>(s => s
 
 <2> **Exclude** the following fields
 
-<3> Fields can be included or excluded through patterns
+<3> Fields can be included or excluded through wildcard patterns
 
 With source filtering specified on the request, `.Documents` will
 now contain _partial_ documents, materialized from the source fields specified to include

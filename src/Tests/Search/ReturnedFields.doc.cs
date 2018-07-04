@@ -29,7 +29,8 @@ namespace Tests.Search
     {
         private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
 
-        /**==== Stored fields
+        /** [[stored-fields]]
+         * ==== Stored fields
          *
          * When indexing a document, by default, Elasticsearch stores the originally sent JSON document in a special
          * field called {ref_current}/mapping-source-field.html[_source]. Documents returned from
@@ -78,7 +79,7 @@ namespace Tests.Search
              */
             foreach (var fieldValues in searchResponse.Fields)
             {
-                var document = new // <1> Construct a partial document from the stored fields requested
+                var document = new // <1> Construct a partial document as an anonymous type from the stored fields requested
                 {
                     Name = fieldValues.ValueOf<Project, string>(p => p.Name),
                     StartedOn = fieldValues.Value<DateTime>(Infer.Field<Project>(p => p.StartedOn)),
@@ -91,6 +92,7 @@ namespace Tests.Search
          * This works when storing fields separately. A much more common scenario however is to return
          * only a selection of fields from the `_source`; this is where source filtering comes in.
          *
+         * [[source-filtering]]
          * ==== Source filtering
          *
          * Only some of the fields of a document can be returned from a search query
@@ -109,7 +111,7 @@ namespace Tests.Search
                         )
                     )
                     .Excludes(e => e // <2> **Exclude** the following fields
-                        .Fields("num*") // <3> Fields can be included or excluded through patterns
+                        .Fields("num*") // <3> Fields can be included or excluded through wildcard patterns
                     )
                 )
                 .Query(q => q

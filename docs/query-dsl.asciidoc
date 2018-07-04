@@ -236,8 +236,6 @@ which support lat/lon pairs, and {ref_current}/geo-shape.html[geo_shape] fields,
 
 :anchor-list: query-dsl/geo
 
-* <<geo-shape-query-usage,Geo Shape Query Usage>>
-
 * <<geo-bounding-box-query-usage,Geo Bounding Box Query Usage>>
 
 * <<geo-distance-query-usage,Geo Distance Query Usage>>
@@ -267,8 +265,6 @@ which support lat/lon pairs, and {ref_current}/geo-shape.html[geo_shape] fields,
 See the Elasticsearch documentation on {ref_current}/geo-queries.html[Geo queries] for more details.
 
 :includes-from-dirs: query-dsl/geo
-
-include::query-dsl/geo/geo-shape-query-usage.asciidoc[]
 
 include::query-dsl/geo/bounding-box/geo-bounding-box-query-usage.asciidoc[]
 
