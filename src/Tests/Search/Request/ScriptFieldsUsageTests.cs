@@ -15,6 +15,8 @@ namespace Tests.Search.Request
      * Script fields can also access the actual `_source` document and extract specific elements to
      * be returned from it by using `params['_source']`.
      *
+     * Script fields can be accessed on the response using <<returned-fields,`.Fields`>>, similarly to stored fields.
+     *
      * See the Elasticsearch documentation on {ref_current}/search-request-script-fields.html[script fields]
      * for more detail.
      */
@@ -67,12 +69,13 @@ namespace Tests.Search.Request
 				{
 					{ "test1", new ScriptField { Script = new InlineScript("doc['my_field_name'].value * 2") } },
 					{ "test2", new InlineScript("doc['my_field_name'].value * params.factor")
-					{
-						Params = new FluentDictionary<string, object>
 						{
-							{ "factor", 2.0 }
+							Params = new FluentDictionary<string, object>
+							{
+								{ "factor", 2.0 }
+							}
 						}
-					} }
+					}
 				}
 			};
 	}

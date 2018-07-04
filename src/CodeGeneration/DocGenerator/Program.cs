@@ -64,9 +64,15 @@ namespace DocGenerator
 
 		public static string OutputDirPath { get; }
 
+		/// <summary>
+		/// The branch name to include in generated docs to link back to the original source file
+		/// </summary>
 		public static string BranchName { get; set; }
 
-		public static string DocVersion => "6.1";
+		/// <summary>
+		/// The Elasticsearch documentation version to link to
+		/// </summary>
+		public static string DocVersion => "6.2";
 
 		private static int Main(string[] args)
 		{
