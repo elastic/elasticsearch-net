@@ -23,6 +23,8 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 				this.XPackLicenseJson = licenseContents;
 			}
 
+			this.TrialMode = XPackTrialMode.Trial;
+
 			this.ShowElasticsearchOutputAfterStarted = true;
 			this.AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationInElasticsearchYaml());
 		}
