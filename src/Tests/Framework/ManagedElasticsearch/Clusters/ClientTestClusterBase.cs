@@ -15,9 +15,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 
 		public ClientTestClusterBase(params ElasticsearchPlugin[] plugins) : this(new ClientTestClusterConfiguration(plugins: plugins)) { }
 
-		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration)
-		{
-		}
+		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration) { }
 
 		public IElasticClient Client => this.GetOrAddClient(ConnectionSettings);
 
