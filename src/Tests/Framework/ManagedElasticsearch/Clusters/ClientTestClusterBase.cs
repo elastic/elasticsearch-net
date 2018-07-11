@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Plugins;
 using Elastic.Xunit;
@@ -20,6 +23,12 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		public IElasticClient Client => this.GetOrAddClient(ConnectionSettings);
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s;
+
+		public override ICollection<Uri> NodesUris(string hostName = "localhost")
+		{
+			var host = (EphemeralClusterExtensions.RunningFiddler) ? "ipv4.fiddler" : hostName;
+			return base.NodesUris(host);
+		}
 	}
 
 	public class ClientTestClusterConfiguration : XunitClusterConfiguration

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit;
@@ -22,7 +23,6 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 				var licenseContents = File.ReadAllText(licenseFilePath);
 				this.XPackLicenseJson = licenseContents;
 			}
-
 			this.TrialMode = XPackTrialMode.Trial;
 
 			this.ShowElasticsearchOutputAfterStarted = true;
@@ -44,5 +44,11 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		public virtual IElasticClient Client => this.GetOrAddClient(s=>Authenticate(ConnectionSettings(s)));
 
 		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
+
+		public override ICollection<Uri> NodesUris(string hostName = "localhost")
+		{
+			var host = (EphemeralClusterExtensions.RunningFiddler) ? "ipv4.fiddler" : hostName;
+			return base.NodesUris(host);
+		}
 	}
 }
