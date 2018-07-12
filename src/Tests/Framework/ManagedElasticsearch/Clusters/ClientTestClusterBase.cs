@@ -44,6 +44,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 			this.ShowElasticsearchOutputAfterStarted = false;
 
 			this.CacheEsHomeInstallation = true;
+			this.TrialMode = XPackTrialMode.Trial;
 
 			this.Add(this.AttributeKey("testingcluster"), "true");
 			this.Add(this.AttributeKey("gateway"), "true");
