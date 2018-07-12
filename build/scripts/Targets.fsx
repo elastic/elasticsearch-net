@@ -109,7 +109,7 @@ Target "Diff" <| fun _ ->
   =?> ("Test", (not Commandline.skipTests && Commandline.target <> "canary"))
   =?> ("InternalizeDependencies", (not isMono))
   ==> "InheritDoc"
-  =?> ("Documentation", (not Commandline.skipDocs))
+  =?> ("Documentation", (not Commandline.skipDocs && Commandline.target <> "target"))
   ==> "Build"
 
 "Start"
