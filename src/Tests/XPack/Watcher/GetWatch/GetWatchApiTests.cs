@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -10,6 +11,7 @@ using Tests.Framework.MockData;
 
 namespace Tests.XPack.Watcher.GetWatch
 {
+	[SkipVersion(">=6.3.0 <=6.3.1", "https://github.com/elastic/elasticsearch/pull/31721")]
 	public class GetWatchApiTests : ApiIntegrationTestBase<XPackCluster, IGetWatchResponse, IGetWatchRequest, GetWatchDescriptor, GetWatchRequest>
 	{
 		public GetWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
