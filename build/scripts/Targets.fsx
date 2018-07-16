@@ -16,6 +16,7 @@
 
 open System
 open Fake
+open System.IO
 
 open Paths
 open Building
@@ -31,6 +32,7 @@ open Signing
 open Commandline
 open Differ
 open Differ.Differ
+open Fake.IO
 
 Commandline.parse()
 
@@ -45,7 +47,7 @@ Target "Clean" Build.Clean
 
 Target "Restore" Build.Restore
 
-Target "FullBuild" <| fun _ -> Build.Compile false
+Target "FullBuild" <| fun _ -> Build.Compile Commandline.needsFullBuild
     
 Target "Test" Tests.RunUnitTests
 
@@ -100,6 +102,23 @@ Target "Diff" <| fun _ ->
     tracefn "Performing %s diff %s using %s with %s and %s" format project diffType first second
     Differ.Generate(diffType, project, first, second, format)
 
+Target "Cluster" <| fun _ -> 
+    let clusterName = getBuildParam "clusterName"
+    let clusterVersion = getBuildParam "clusterVersion"
+    let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests")), "netcoreapp2.1")
+    let tempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+    Shell.copyDir tempDir testsProjectDirectory (fun s -> true)
+    trace testsProjectDirectory
+    trace tempDir
+    let command = sprintf "cluster %s %s" clusterName clusterVersion
+    DotNetCli.RunCommand(fun p ->
+        { p with
+            WorkingDir = tempDir;
+            TimeOut = TimeSpan.FromMinutes(60.)
+        }) (sprintf "%s %s" (Path.Combine(tempDir, "Tests.dll")) command)
+    
+    Shell.deleteDir tempDir
+
 // Dependencies
 "Start"
   =?> ("Clean", Commandline.needsClean )
@@ -140,6 +159,11 @@ Target "Diff" <| fun _ ->
 "Start"
   ==> "Clean"
   ==> "Diff"
+  
+"Start"
+  ==> "Restore"
+  ==> "FullBuild"
+  ==> "Cluster"
   
 RunTargetOrListTargets()
 

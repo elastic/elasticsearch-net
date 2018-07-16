@@ -20,6 +20,7 @@ namespace Tests.Framework.Configuration
 		public sealed override string ClusterFilter { get; protected set; }
 		public sealed override string TestFilter { get; protected set; }
 		public sealed override int Seed { get; protected set; }
+		public sealed override bool ShowElasticsearchOutputAfterStarted { get; protected set; }
 
 		public EnvironmentConfiguration()
 		{
@@ -30,6 +31,7 @@ namespace Tests.Framework.Configuration
 
 			this.ElasticsearchVersion = ElasticsearchVersion.From(string.IsNullOrWhiteSpace(version) ? DefaultVersion : version);
 			this.ClusterFilter = Environment.GetEnvironmentVariable("NEST_INTEGRATION_CLUSTER");
+			this.ShowElasticsearchOutputAfterStarted = Environment.GetEnvironmentVariable("NEST_INTEGRATION_SHOW_OUTPUT_AFTER_START") == "1";
 			this.TestFilter = Environment.GetEnvironmentVariable("NEST_TEST_FILTER");
 
 			var newRandom = new Random().Next(1, 100000);
