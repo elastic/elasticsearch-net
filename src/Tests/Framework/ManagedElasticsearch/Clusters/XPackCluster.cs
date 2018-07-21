@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit;
