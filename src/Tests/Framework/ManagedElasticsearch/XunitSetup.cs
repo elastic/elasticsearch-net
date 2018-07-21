@@ -26,6 +26,7 @@ namespace Tests.Framework.ManagedElasticsearch
 			this.ClusterFilter = TestClient.Configuration.ClusterFilter;
 			this.TestFilter = TestClient.Configuration.TestFilter;
 			this.Version = TestClient.Configuration.ElasticsearchVersion;
+			this.IntegrationTestsMayUseAlreadyRunningNode = TestClient.Configuration.TestAgainstAlreadyRunningElasticsearch;
 
 			Generators.Initialize();
 		}

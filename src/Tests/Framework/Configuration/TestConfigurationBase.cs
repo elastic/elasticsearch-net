@@ -10,6 +10,7 @@ namespace Tests.Framework.Configuration
 		public abstract TestMode Mode { get; protected set; }
 		public abstract string ClusterFilter { get; protected set; }
 		public abstract string TestFilter { get; protected set; }
+		public abstract bool ShowElasticsearchOutputAfterStarted { get; protected set; }
 
 
 		public virtual bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
