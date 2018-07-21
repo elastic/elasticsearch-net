@@ -1,4 +1,7 @@
-﻿using Elastic.Managed.Ephemeral;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Elastic.Managed.Ephemeral;
 using Elastic.Xunit;
 using Elasticsearch.Net;
 using Nest;
@@ -13,8 +16,15 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 
 		public XPackClusterConfiguration(ClusterFeatures features) : base(ClusterFeatures.XPack | features, 1)
 		{
-			this.ShowElasticsearchOutputAfterStarted = false;
+			// Get license file path from environment variable
+			var licenseFilePath = Environment.GetEnvironmentVariable("ES_LICENSE_FILE");
+			if (!string.IsNullOrEmpty(licenseFilePath) && File.Exists(licenseFilePath))
+			{
+				var licenseContents = File.ReadAllText(licenseFilePath);
+				this.XPackLicenseJson = licenseContents;
+			}
 
+			this.ShowElasticsearchOutputAfterStarted = this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
 			this.AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationInElasticsearchYaml());
 		}
 	}
@@ -33,5 +43,11 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		public virtual IElasticClient Client => this.GetOrAddClient(s=>Authenticate(ConnectionSettings(s)));
 
 		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
+
+		public override ICollection<Uri> NodesUris(string hostName = "localhost")
+		{
+			var host = (EphemeralClusterExtensions.RunningFiddler) ? "ipv4.fiddler" : hostName;
+			return base.NodesUris(host);
+		}
 	}
 }

@@ -17,6 +17,7 @@ namespace Tests.Framework.Configuration
 		bool RunUnitTests { get; }
 
 		RandomConfiguration Random { get; }
+		bool ShowElasticsearchOutputAfterStarted { get; }
 	}
 
 	public class RandomConfiguration
