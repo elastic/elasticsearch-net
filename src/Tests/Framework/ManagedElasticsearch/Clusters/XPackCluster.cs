@@ -23,7 +23,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 				this.XPackLicenseJson = licenseContents;
 			}
 
-			this.ShowElasticsearchOutputAfterStarted = false;
+			this.ShowElasticsearchOutputAfterStarted = this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
 			this.AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationInElasticsearchYaml());
 		}
 	}
@@ -42,5 +42,11 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		public virtual IElasticClient Client => this.GetOrAddClient(s=>Authenticate(ConnectionSettings(s)));
 
 		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
+
+		public override ICollection<Uri> NodesUris(string hostName = "localhost")
+		{
+			var host = (EphemeralClusterExtensions.RunningFiddler) ? "ipv4.fiddler" : hostName;
+			return base.NodesUris(host);
+		}
 	}
 }

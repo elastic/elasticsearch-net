@@ -6,7 +6,7 @@
     <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.1</TargetFrameworks>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
-    <StartupObject>Tests.BenchmarkProgram</StartupObject>
+    <StartupObject>Tests.ProgramDispatcher</StartupObject>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
     <DefineConstants Condition="'$(TargetFramework)'=='net46'">$(DefineConstants);FEATURE_HTTPWEBREQUEST</DefineConstants>
     <DefineConstants Condition="Exists('..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll')">$(DefineConstants);FEATURE_PROFILING</DefineConstants>
@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bogus" Version="22.1.2" />
-    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180626T203229" />
+    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180716T123929" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />
     <PackageReference Include="DiffPlex" Version="1.4.1" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />

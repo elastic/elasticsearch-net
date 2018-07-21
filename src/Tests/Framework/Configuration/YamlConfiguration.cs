@@ -18,6 +18,7 @@ namespace Tests.Framework.Configuration
 		public sealed override string ClusterFilter { get; protected set; }
 		public sealed override string TestFilter { get; protected set; }
 		public sealed override int Seed { get; protected set; }
+		public sealed override bool ShowElasticsearchOutputAfterStarted { get; protected set; }
 
 		public YamlConfiguration(string configurationFile)
 		{
@@ -31,6 +32,7 @@ namespace Tests.Framework.Configuration
 			this.ElasticsearchVersion = ElasticsearchVersion.From(_config["elasticsearch_version"]);
 			this.ForceReseed = BoolConfig("force_reseed", false);
 			this.TestAgainstAlreadyRunningElasticsearch = BoolConfig("test_against_already_running_elasticsearch", false);
+			this.ShowElasticsearchOutputAfterStarted = BoolConfig("elasticsearch_out_after_started", false);
 			this.ClusterFilter = _config.ContainsKey("cluster_filter") ? _config["cluster_filter"] : null;
 			this.TestFilter = _config.ContainsKey("test_filter") ? _config["test_filter"] : null;
 

@@ -29,6 +29,7 @@ Targets:
   - create a canary nuget package based on the current version if [feed] and [apikey] are provided
     also pushes to upstream (myget)
 * diff <github|nuget|dir|assembly> <version|path 1> <version|path 2> [format]
+* cluster <cluster-name> [version]
 
 NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to force the tests against all suported TFM's
 
@@ -94,6 +95,7 @@ module Commandline =
         | (_, true) -> true
         //dotnet-xunit needs to a build of its own anyways
         | ("test", _)
+        | ("cluster", _)
         | ("integrate", _) -> false
         | _ -> true
         
@@ -102,6 +104,7 @@ module Commandline =
         | ("release", _) -> true
         //dotnet-xunit needs to a build of its own anyways
         | ("test", _)
+        | ("cluster", _)
         | ("integrate", _) 
         | ("build", _) -> false
         | _ -> true
@@ -213,6 +216,13 @@ module Commandline =
             setBuildParam "diffType" diffType
             setBuildParam "first" firstVersionOrPath
             setBuildParam "second" secondVersionOrPath         
+            
+        | ["cluster"; clusterName] ->
+            setBuildParam "clusterName" clusterName
+            setBuildParam "clusterVersion" ""
+        | ["cluster"; clusterName; clusterVersion] ->
+            setBuildParam "clusterName" clusterName
+            setBuildParam "clusterVersion" clusterVersion
 
         | ["touch"; ] -> ignore()
         | ["temp"; ] -> ignore()
