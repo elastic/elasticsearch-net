@@ -128,7 +128,7 @@ Target "Cluster" <| fun _ ->
   =?> ("Test", (not Commandline.skipTests && Commandline.target <> "canary"))
   =?> ("InternalizeDependencies", (not isMono))
   ==> "InheritDoc"
-  =?> ("Documentation", (not Commandline.skipDocs && Commandline.target <> "target"))
+  =?> ("Documentation", (not Commandline.skipDocs))
   ==> "Build"
 
 "Start"
