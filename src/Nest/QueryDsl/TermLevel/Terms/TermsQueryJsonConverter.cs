@@ -18,6 +18,7 @@ namespace Nest
 
 			var settings = serializer.GetConnectionSettings();
 			var field = settings.Inferrer.Field(t.Field);
+			var valueSerializer = settings.SourceSerializer;
 
 			writer.WriteStartObject();
 			{
@@ -31,7 +32,10 @@ namespace Nest
                     else if (t.Terms != null)
                     {
                         writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.Terms);
+	                    writer.WriteStartArray();
+	                    foreach(var o in t.Terms)
+							SourceValueWriteConverter.Write(writer, o, serializer);
+	                    writer.WriteEndArray();
                     }
 				}
 				else
@@ -39,7 +43,10 @@ namespace Nest
                     if (t.Terms.HasAny())
                     {
                         writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.Terms);
+	                    writer.WriteStartArray();
+	                    foreach(var o in t.Terms)
+							SourceValueWriteConverter.Write(writer, o, serializer);
+	                    writer.WriteEndArray();
                     }
                     else if (t.TermsLookup != null)
                     {
@@ -63,7 +70,7 @@ namespace Nest
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var filter = new TermsQueryDescriptor<object>();
+			var filter = new TermsQuery();
 			ITermsQuery f = filter;
 			if (reader.TokenType != JsonToken.StartObject)
 				return null;
