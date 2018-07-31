@@ -534,7 +534,7 @@ namespace Nest
 			if (valueMetric.Value == null && reader.ValueType == typeof(long))
 				valueMetric.Value = reader.Value as long?;
 
-			if (valueMetric.Value != null)
+			if (valueMetric.Value != null || reader.TokenType == JsonToken.Null)
 			{
 				reader.Read();
 				if (reader.TokenType != JsonToken.EndObject)
@@ -588,7 +588,6 @@ namespace Nest
 				var s = serializer.GetConnectionSettings().SourceSerializer;
 				return new ScriptedMetricAggregate(new LazyDocument(scriptedMetric, s));
 			}
-
 			return valueMetric;
 		}
 
@@ -734,7 +733,7 @@ namespace Nest
 				docCount = reader.Value as long?;
 				reader.Read();
 			}
-			
+
 			var nestedAggregates = this.GetSubAggregates(reader, serializer);
 			return new CompositeBucket(nestedAggregates, key) { DocCount = docCount };
 		}
