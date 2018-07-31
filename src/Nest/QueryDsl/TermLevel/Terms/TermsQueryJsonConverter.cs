@@ -18,7 +18,6 @@ namespace Nest
 
 			var settings = serializer.GetConnectionSettings();
 			var field = settings.Inferrer.Field(t.Field);
-			var valueSerializer = settings.SourceSerializer;
 
 			writer.WriteStartObject();
 			{
