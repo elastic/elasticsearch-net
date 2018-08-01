@@ -333,6 +333,8 @@ namespace Nest
 			reader.Read();
 			var count = (reader.Value as long?).GetValueOrDefault(0);
 			reader.Read();
+			if (reader.TokenType == JsonToken.EndObject)
+				return new SingleBucketAggregate {DocCount = count};
 			reader.Read();
 			var min = reader.Value as double?;
 			reader.Read();

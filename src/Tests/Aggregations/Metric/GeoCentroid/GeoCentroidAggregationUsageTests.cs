@@ -132,4 +132,44 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 			}
 		}
 	}
+
+	public class GeoCentroidNoResultsAggregationUsageTests : AggregationUsageTestBase
+	{
+		public GeoCentroidNoResultsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			query = new {term = new {name = new {value = "noresult"}}},
+			aggs = new
+			{
+				centroid = new
+				{
+					geo_centroid = new {field = "location"}
+				}
+			}
+		};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Query(q=>q.Term(p=>p.Name, "noresult"))
+			.Aggregations(a => a
+				.GeoCentroid("centroid", gb => gb
+					.Field(p => p.Location)
+				)
+			);
+
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>
+			{
+				Query = new TermQuery { Field = Infer.Field<Project>(p=>p.Name), Value = "noresult" },
+				Aggregations = new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+			var centroid = response.Aggs.GeoCentroid("centroid");
+			centroid.Should().NotBeNull();
+			centroid.Count.Should().Be(0);
+		}
+	}
 }
