@@ -106,7 +106,7 @@ namespace Tests.Framework.MockData
 
 		public static Faker<Ranges> Generator { get; } =
 			new Faker<Ranges>()
-				.UseSeed(TestClient.Configuration.Seed)
+				.UseSeed(TestConfiguration.Instance.Seed)
 				.CustomInstantiator((f) => new Ranges(f))
 			;
 	}

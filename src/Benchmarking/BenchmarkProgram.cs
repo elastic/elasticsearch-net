@@ -37,7 +37,7 @@ namespace Tests
 
 			try
 			{
-				types = typeof(Program).Assembly().GetTypes();
+				types = typeof(BenchmarkProgram).GetTypeInfo().Assembly.GetTypes();
 			}
 			catch (ReflectionTypeLoadException e)
 			{

@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="22.1.2" />
+    <ProjectReference Include="..\Nest\Nest.csproj" />
+    <ProjectReference Include="..\Tests.Configuration\Tests.Configuration.csproj" />
+  </ItemGroup>
+</Project>

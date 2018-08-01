@@ -18,7 +18,6 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net.Connections.HttpWebRequestConnection;
 #endif
 
-
 namespace Tests.Framework
 {
 	public class IntegrationOnlyAttribute : SkipTestAttributeBase
@@ -45,7 +44,9 @@ namespace Tests.Framework
 	public static class TestClient
 	{
 		public static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
-		public static readonly ITestConfiguration Configuration = ConfigurationLoader.LoadConfiguration();
+		public static readonly ITestConfiguration Configuration = TestConfiguration.Instance;
+
+		public static bool InRange(string range) => ElasticsearchVersion.From(TestConfiguration.Instance.ElasticsearchVersion).InRange(range);
 
 		public static readonly ConnectionSettings GlobalDefaultSettings = CreateSettings();
 		public static readonly IElasticClient Default = new ElasticClient(GlobalDefaultSettings);

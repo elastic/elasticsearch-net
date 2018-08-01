@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Tests.Benchmarking</AssemblyName>
+    <RootNamespace>Tests.Benchmarking</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BenchMarkDotNet" Version="0.10.8" />
+    <ProjectReference Include="..\Nest\Nest.csproj" />
+  </ItemGroup>
+</Project>

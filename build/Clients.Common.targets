@@ -13,7 +13,7 @@
     <!-- File version reflects actual version number without prelease since that not allowed in its struct -->
     <FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
 
-    <DefineConstants Condition="'$(TargetFramework)'=='netstandard1.3'">$(DefineConstants);DOTNETCORE</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)'=='netstandard2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
 
     <SignAssembly Condition="'$(OS)' == 'Windows_NT'">true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\keys\keypair.snk</AssemblyOriginatorKeyFile>

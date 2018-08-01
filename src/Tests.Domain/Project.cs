@@ -5,7 +5,6 @@ using Bogus;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Tests.Search;
 
 namespace Tests.Framework.MockData
 {
@@ -38,7 +37,7 @@ namespace Tests.Framework.MockData
 
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
-				.UseSeed(TestClient.Configuration.Seed)
+				.UseSeed(TestConfiguration.Instance.Seed)
 				.RuleFor(p => p.Name, f => f.Person.Company.Name + f.UniqueIndex.ToString())
 				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
 				.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
@@ -55,7 +54,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())
 				.RuleFor(p => p.Branches, f => Gimme.Random.ListItems(new List<string> { "master", "dev", "release", "qa", "test" }, 2))
 				.RuleFor(p => p.SourceOnly, f =>
-					TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
+					TestConfiguration.Instance.Random.SourceSerializer ? new SourceOnlyObject() : null
 				)
 				.RuleFor(p => p.Suggest, f => new CompletionField
 				{
@@ -78,12 +77,12 @@ namespace Tests.Framework.MockData
 			StartedOn = new DateTime(2015, 1, 1),
 			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 },
-			SourceOnly = TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
+			SourceOnly = TestConfiguration.Instance.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		public static readonly string Routing = Project.Instance.Name;
 
-		public static object InstanceAnonymous => TestClient.Configuration.Random.SourceSerializer
+		public static object InstanceAnonymous => TestConfiguration.Instance.Random.SourceSerializer
 			? InstanceAnonymousSourceSerializer
 			: InstanceAnonymousDefault;
 

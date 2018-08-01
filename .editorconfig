@@ -81,7 +81,7 @@ csharp_style_pattern_local_over_anonymous_function = true:error
 csharp_style_throw_expression = true:error
 csharp_style_conditional_delegate_call = true:error
 
-csharp_prefer_braces = false:error
+csharp_prefer_braces = false:warning
 csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
 
 # ---

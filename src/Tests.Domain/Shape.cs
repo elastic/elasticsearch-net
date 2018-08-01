@@ -18,7 +18,7 @@ namespace Tests.Framework.MockData
 
 		public static Faker<Shape> Generator { get; } =
 			new Faker<Shape>()
-				.UseSeed(TestClient.Configuration.Seed)
+				.UseSeed(TestConfiguration.Instance.Seed)
 				.RuleFor(p => p.Id, p => Interlocked.Increment(ref _idState))
 				.RuleFor(p => p.GeometryCollection, p =>
 					new GeometryCollection(new List<IGeoShape>

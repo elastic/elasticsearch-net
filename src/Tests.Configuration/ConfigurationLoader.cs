@@ -1,13 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using Tests.Framework.Configuration;
-using Tests.Framework.MockData;
 
 namespace Tests.Framework
 {
-	public static class ConfigurationLoader
+	public sealed class TestConfiguration
 	{
-		public static ITestConfiguration LoadConfiguration()
+		private static readonly Lazy<ITestConfiguration> Lazy
+			= new Lazy<ITestConfiguration>(LoadConfiguration, LazyThreadSafetyMode.ExecutionAndPublication);
+
+		public static ITestConfiguration Instance => Lazy.Value;
+
+		private static ITestConfiguration LoadConfiguration()
 		{
 			// The build script sets a FAKEBUILD env variable, so if it exists then
 			// we must be running tests from the build script
@@ -18,7 +23,7 @@ namespace Tests.Framework
 
 			// If running the classic .NET solution, tests run from bin/{config} directory,
 			// but when running DNX solution, tests run from the test project root
-			var yamlConfigurationPath = (directoryInfo.Name == "Tests"
+			var yamlConfigurationPath = (directoryInfo.Name == "Tests.Configuration"
 			                             && directoryInfo.Parent != null
 			                             && directoryInfo.Parent.Name == "src")
 				? "."
@@ -32,6 +37,7 @@ namespace Tests.Framework
 			if (File.Exists(defaultYamlFile))
 				return new YamlConfiguration(defaultYamlFile);
 
+			return new EnvironmentConfiguration();
 			throw new Exception($"Tried to load a yaml file from {yamlConfigurationPath} but it does not exist : pwd:{directoryInfo.FullName}");
 		}
 	}

@@ -49,7 +49,7 @@ namespace Tests.Framework.MockResponses
 				transport_address = $"127.0.0.1:{port + 1000}]",
 				host = Guid.NewGuid().ToString("N").Substring(0, 8),
 				ip = "127.0.0.1",
-				version = TestClient.Configuration.ElasticsearchVersion.Version,
+				version = TestConfiguration.Instance.ElasticsearchVersion,
 				build_hash = Guid.NewGuid().ToString("N").Substring(0, 8),
 				roles = new List<string>(),
 				http = node.HttpEnabled ? new

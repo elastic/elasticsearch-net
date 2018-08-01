@@ -17,10 +17,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 	{
 		private readonly IConnectionSettingsValues _settings;
 
-		public NoncachingFieldResolver(IConnectionSettingsValues settings)
-		{
-			this._settings = settings;
-		}
+		public NoncachingFieldResolver(IConnectionSettingsValues settings) => this._settings = settings;
 
 		public string Resolve(Field field)
 		{
@@ -29,24 +26,16 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			return name;
 		}
 
-		internal static bool IsConditionless(Field field)
-		{
-			return field == null || (string.IsNullOrEmpty(field.Name) && field.Expression == null && field.Property == null);
-		}
+		internal static bool IsConditionless(Field field) => field == null || (string.IsNullOrEmpty(field.Name) && field.Expression == null && field.Property == null);
 
-		internal static bool IsConditionless(PropertyName property)
-		{
-			return property == null || (string.IsNullOrEmpty(property.Name) && property.Expression == null && property.Property == null);
-		}
+		internal static bool IsConditionless(PropertyName property) =>
+			property == null || (string.IsNullOrEmpty(property.Name) && property.Expression == null && property.Property == null);
 
 		private string ResolveFieldName(Field field)
 		{
 			if (IsConditionless(field)) return null;
 			if (!string.IsNullOrEmpty(field.Name)) return field.Name;
-			if (field.Expression != null && !field.CachableExpression)
-			{
-				return this.Resolve(field.Expression, field.Property);
-			}
+			if (field.Expression != null && !field.CachableExpression) return this.Resolve(field.Expression, field.Property);
 
 			var fieldName = this.Resolve(field.Expression, field.Property);
 			return fieldName;
@@ -87,10 +76,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 			private readonly IConnectionSettingsValues _settings;
 
-			public FieldExpressionVisitor(IConnectionSettingsValues settings)
-			{
-				_settings = settings;
-			}
+			public FieldExpressionVisitor(IConnectionSettingsValues settings) => _settings = settings;
 
 			public string Resolve(Expression expression, bool toLastToken = false)
 			{

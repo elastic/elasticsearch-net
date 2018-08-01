@@ -1,11 +1,9 @@
-﻿using Elastic.Managed.Configuration;
-
-namespace Tests.Framework.Configuration
+﻿namespace Tests.Framework.Configuration
 {
 	public interface ITestConfiguration
 	{
 		TestMode Mode { get; }
-		ElasticsearchVersion ElasticsearchVersion { get; }
+		string ElasticsearchVersion { get; }
 		string ClusterFilter { get; }
 		string TestFilter { get; }
 		bool ForceReseed { get; }

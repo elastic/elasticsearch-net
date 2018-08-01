@@ -22,7 +22,6 @@ namespace Tests
 			switch (command)
 			{
 				case "profile": return ProfileProgram.Main(programArguments);
-				case "benchmark": return BenchmarkProgram.Main(programArguments);
 				case "cluster": return ClusterLaunchProgram.Main(programArguments);
 				default:
 					Console.Error.WriteLine($"Unknown command '{command}");

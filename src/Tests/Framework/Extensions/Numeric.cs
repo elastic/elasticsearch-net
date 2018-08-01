@@ -31,14 +31,4 @@ namespace Tests.Framework
 		}
 	}
 
-	internal static class AnonymizerExtensions
-	{
-		public static object ToAnonymousObject(this JoinField field) =>
-			field.Match<object>(p => TestClient.Default.Infer.RelationName(p.Name), c => new
-			{
-				parent = TestClient.Default.Infer.Id(c.Parent),
-				name = TestClient.Default.Infer.RelationName(c.Name)
-
-			});
-	}
 }

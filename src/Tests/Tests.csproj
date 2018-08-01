@@ -2,8 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netcoreapp2.1;net46</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <StartupObject>Tests.ProgramDispatcher</StartupObject>
@@ -23,7 +22,7 @@
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
     <ProjectReference Include="..\Nest\Nest.csproj" />
     <ProjectReference Include="..\Serializers\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
-    <ProjectReference Condition="'$(TargetFramework)'=='net46'" Include="..\Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj" />
+    <ProjectReference Include="..\Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
@@ -41,6 +40,9 @@
     <Compile Remove="Framework\Profiling\**" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Tests.Domain\Tests.Domain.csproj" />
+    <ProjectReference Include="..\Tests.Configuration\Tests.Configuration.csproj" />
+    
     <PackageReference Include="Bogus" Version="22.1.2" />
     <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180716T123929" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />
@@ -60,6 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Framework\Configuration" />
+    <Folder Include="Framework\MockData" />
   </ItemGroup>
   <Import Project="..\outputpath.props" />
 </Project>

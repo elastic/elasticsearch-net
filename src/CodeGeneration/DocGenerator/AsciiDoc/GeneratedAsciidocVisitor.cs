@@ -273,8 +273,8 @@ namespace DocGenerator.AsciiDoc
 			string XmlFile(string project)
 			{
 				if (configuration == null)
-					return Path.Combine(Program.BuildOutputPath, project, "netstandard1.3", $"{project}.XML");
-				return Path.Combine(Program.BuildOutputPath, project, "bin", configuration, "netstandard1.3",
+					return Path.Combine(Program.BuildOutputPath, project, "netstandard2.0", $"{project}.XML");
+				return Path.Combine(Program.BuildOutputPath, project, "bin", configuration, "netstandard2.0",
 					$"{project}.XML");
 			}
 

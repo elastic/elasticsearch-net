@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Bogus;
 using Nest;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Tests.Framework.MockData
 {
@@ -40,7 +38,7 @@ namespace Tests.Framework.MockData
 
 		public static Faker<CommitActivity> Generator { get; } =
 			new Faker<CommitActivity>()
-				.UseSeed(TestClient.Configuration.Seed)
+				.UseSeed(TestConfiguration.Instance.Seed)
 				.RuleFor(p => p.Id, p => Guid.NewGuid().ToString("N").Substring(0, 8))
 				.RuleFor(p => p.ProjectName, p => Project.Projects[Gimme.Random.Number(0, Project.Projects.Count -1)].Name)
 				.RuleFor(p => p.Committer, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count -1)])

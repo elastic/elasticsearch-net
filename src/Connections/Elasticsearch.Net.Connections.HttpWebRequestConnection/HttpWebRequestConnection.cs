@@ -216,7 +216,7 @@ namespace Elasticsearch.Net.Connections.HttpWebRequestConnection
 				{
 					if (data != null)
 					{
-						var apmGetRequestStreamTask = Task.Factory.FromAsync(request.BeginGetRequestStream, request.EndGetRequestStream, null);
+						var apmGetRequestStreamTask = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, r => request.EndGetRequestStream(r), null);
 						unregisterWaitHandle = RegisterApmTaskTimeout(apmGetRequestStreamTask, request, requestData);
 
 						using (var stream = await apmGetRequestStreamTask.ConfigureAwait(false))
@@ -235,7 +235,7 @@ namespace Elasticsearch.Net.Connections.HttpWebRequestConnection
 					//throw any errors if both are closed atleast one of them has to be Closed.
 					//Since we expose the stream we let closing the stream determining when to close the connection
 
-					var apmGetResponseTask = Task.Factory.FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
+					var apmGetResponseTask = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, r => request.EndGetResponse(r), null);
 					unregisterWaitHandle = RegisterApmTaskTimeout(apmGetResponseTask, request, requestData);
 
 					var response = (HttpWebResponse) (await apmGetResponseTask.ConfigureAwait(false));

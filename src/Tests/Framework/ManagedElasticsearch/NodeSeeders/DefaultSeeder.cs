@@ -165,7 +165,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 					)
 				);
 			//normalizers are a new feature since 5.2.0
-			if (TestClient.Configuration.ElasticsearchVersion.InRange(">=5.2.0"))
+			if (TestClient.InRange(">=5.2.0"))
 				analysis.Normalizers(analyzers => analyzers
 					.Custom("my_normalizer", n => n
 						.Filters("lowercase", "asciifolding")
