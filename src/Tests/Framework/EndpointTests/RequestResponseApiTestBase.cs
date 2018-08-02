@@ -47,7 +47,7 @@ namespace Tests.Framework
 
         public TCluster Cluster { get; }
 
-		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage) : base(usage)
+		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage)
 		{
 			this._usage = usage ?? throw new ArgumentNullException(nameof(usage));
 

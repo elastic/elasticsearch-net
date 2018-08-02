@@ -20,24 +20,20 @@ namespace Tests.Framework
 				return new EnvironmentConfiguration();
 
 			var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
+			Console.WriteLine(directoryInfo.FullName);
 
-			// If running the classic .NET solution, tests run from bin/{config} directory,
-			// but when running DNX solution, tests run from the test project root
-			var yamlConfigurationPath = (directoryInfo.Name == "Tests.Configuration"
-			                             && directoryInfo.Parent != null
-			                             && directoryInfo.Parent.Name == "src")
-				? "."
-				: @"../../../";
+			var yamlConfigurationPath = "../../../../Tests.Configuration";
+			var directory = Path.GetFullPath(yamlConfigurationPath);
 
-			var localYamlFile = Path.GetFullPath(Path.Combine(yamlConfigurationPath, "tests.yaml"));
+			var localYamlFile = Path.Combine(directory, "tests.yaml");
 			if (File.Exists(localYamlFile))
 				return new YamlConfiguration(localYamlFile);
 
-			var defaultYamlFile = Path.GetFullPath(Path.Combine(yamlConfigurationPath, "tests.default.yaml"));
+			var defaultYamlFile = Path.Combine(directory, "tests.default.yaml");
 			if (File.Exists(defaultYamlFile))
 				return new YamlConfiguration(defaultYamlFile);
 
-			throw new Exception($"Tried to load a yaml file from {yamlConfigurationPath} but it does not exist : pwd:{directoryInfo.FullName}");
+			throw new Exception($"Tried to load a yaml file from {directory} but it does not exist : pwd:{directoryInfo.FullName}");
 		}
 	}
 }

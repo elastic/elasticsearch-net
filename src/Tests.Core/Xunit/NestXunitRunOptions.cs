@@ -10,9 +10,6 @@ using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.MockData;
 using static System.Console;
 
-[assembly: Xunit.TestFrameworkAttribute("Elastic.Xunit.Sdk.ElasticTestFramework", "Elastic.Xunit")]
-[assembly: ElasticXunitConfiguration(typeof(NestXunitRunOptions))]
-
 namespace Tests.Framework.ManagedElasticsearch
 {
 	/// <summary> Feeding TestClient.Configuration options to the runner</summary>

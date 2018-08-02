@@ -9,7 +9,6 @@ using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch;
 
 namespace Tests.Framework
@@ -17,7 +16,6 @@ namespace Tests.Framework
 	public abstract class SerializationTestBase
 	{
 		protected SerializationTestBase() => SetupSerialization();
-		protected SerializationTestBase(EndpointUsage usage) { }
 
 		protected virtual object ExpectJson { get; } = null;
 		protected virtual bool SupportsDeserialization { get; set; } = true;

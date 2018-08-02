@@ -6,8 +6,6 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using Tests.Indices.MappingManagement.GetMapping;
-using Xunit;
 
 namespace Tests.Reproduce
 {

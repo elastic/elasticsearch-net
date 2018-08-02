@@ -15,6 +15,7 @@ namespace Tests.Reproduce
 
 			Action getScroll = () => { var scroll = searchRequest.Scroll; };
 
+			//getScroll.ShouldThrow<Exception>();
 			getScroll.ShouldNotThrow();
 		}
 	}

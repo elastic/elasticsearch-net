@@ -10,6 +10,7 @@ using Nest;
 using FluentAssertions;
 using System.Threading;
 using System.Reactive.Linq;
+using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
@@ -21,7 +22,7 @@ namespace Tests.Reproduce
 
 	public class ConnectionReuseAndBalancing : ClusterTestClassBase<ConnectionReuseCluster>
 	{
-		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
+		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).GetTypeInfo().Assembly.GetType("System.Net.Http.CurlHandler") != null;
 
 		public ConnectionReuseAndBalancing(ConnectionReuseCluster cluster) : base(cluster) { }
 
