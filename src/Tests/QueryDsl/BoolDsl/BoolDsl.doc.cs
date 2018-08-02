@@ -4,6 +4,7 @@ using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Core;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Tests.QueryDsl.BoolDsl.Operators;
@@ -18,8 +19,7 @@ namespace Tests.QueryDsl.BoolDsl
 	*/
     public class BoolDslTests : OperatorUsageBase
 	{
-		protected readonly IElasticClient Client =
-            TestClient.GetFixedReturnClient(new { }, modifySettings: c => c.DisableDirectStreaming());
+		protected readonly IElasticClient Client = FixedResponseClient.Create(new { }, modifySettings: c => c.DisableDirectStreaming());
 
 		/**
          * Writing `bool` queries can grow verbose rather quickly when using the query DSL. For example,

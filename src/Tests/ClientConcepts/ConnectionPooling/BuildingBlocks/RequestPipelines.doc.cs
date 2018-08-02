@@ -10,6 +10,7 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch;
 using Xunit;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
@@ -67,7 +68,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		private IRequestPipeline CreatePipeline(
 			Func<IEnumerable<Uri>, IConnectionPool> setupPool, Func<ConnectionSettings, ConnectionSettings> settingsSelector = null, IDateTimeProvider dateTimeProvider = null, InMemoryConnection connection = null)
 		{
-			var pool = setupPool(new[] { TestClient.CreateUri(), TestClient.CreateUri(9201) });
+			var pool = setupPool(new[] { TestConnectionSettings.CreateUri(), TestConnectionSettings.CreateUri(9201) });
 			var settings = new ConnectionSettings(pool, connection ?? new InMemoryConnection());
 			settings = settingsSelector?.Invoke(settings) ?? settings;
 			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default).Pipeline;

@@ -2,4 +2,26 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(TestPackageVersion)'!=''">
+    <RestoreSources>../../build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
+    <DefineConstants>$(DefineConstants);TESTINGNUGETPACKAGE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TestPackageVersion)'!=''">
+    <PackageReference Include="NEST" Version="$(TestPackageVersion)" />
+    <PackageReference Include="NEST.JsonNetSerializer" Version="$(TestPackageVersion)" />
+    <PackageReference Include="Elasticsearch.Net.Connections.HttpWebRequestConnection" Version="$(TestPackageVersion)" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TestPackageVersion)'==''">
+    <ProjectReference Include="..\Nest\Nest.csproj" />
+    <ProjectReference Include="..\Serializers\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
+    <ProjectReference Include="..\Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tests.Configuration\Tests.Configuration.csproj" />
+    <ProjectReference Include="..\Tests.Domain\Tests.Domain.csproj" />
+    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180716T123929" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
+  </ItemGroup>
 </Project>

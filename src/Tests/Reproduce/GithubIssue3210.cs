@@ -3,6 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 using FluentAssertions;
+using Tests.Core;
 
 namespace Tests.Reproduce
 {
@@ -39,7 +40,7 @@ namespace Tests.Reproduce
 
 		[U] public void MissingNodeDecisionOptionsInResponseThrowExceptionWhenAttemptingToDeserializeResponse()
 		{
-			var client = TestClient.GetFixedReturnClient(ClusterAllocationResponse);
+			var client = FixedResponseClient.Create(ClusterAllocationResponse);
 			var response = client.ClusterAllocationExplain();
 
 			var nodeAllocationDecisions = response.NodeAllocationDecisions;

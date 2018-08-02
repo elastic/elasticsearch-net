@@ -11,24 +11,27 @@ using Nest;
 
 namespace Tests.Framework.ManagedElasticsearch
 {
-	internal static class EphemeralClusterExtensions
+	public static class EphemeralClusterExtensions
 	{
-		public static bool RunningFiddler => Process.GetProcessesByName("fiddler").Any();
+		public static ConnectionSettings CreateConnectionSettings<TConfig>(
+			this IEphemeralCluster<TConfig> cluster
+			)
+			where TConfig : EphemeralClusterConfiguration
+		{
+			var clusterNodes = cluster.NodesUris(TestConnectionSettings.LocalOrProxyHost);
+			//we ignore the uri's that TestConnection provides and seed with the nodes the cluster dictates.
+			return new TestConnectionSettings(uris => new StaticConnectionPool(clusterNodes));
+		}
 
 		public static IElasticClient GetOrAddClient<TConfig>(
 			this IEphemeralCluster<TConfig> cluster,
-			Func<ConnectionSettings, ConnectionSettings> createSettings = null,
-			Func<ICollection<Uri>, IConnectionPool> createPool = null)
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null)
 			where TConfig : EphemeralClusterConfiguration
 		{
-			createSettings = createSettings ?? (s => s);
+			modifySettings = modifySettings ?? (s => s);
 			return cluster.GetOrAddClient(c =>
 			{
-				var host = (RunningFiddler) ? "ipv4.fiddler" : "localhost";
-				createPool = createPool ?? (uris => new StaticConnectionPool(uris));
-				var connectionPool = createPool(c.NodesUris(host));
-				var connection = TestClient.Configuration.RunIntegrationTests ? TestClient.CreateLiveConnection() : new InMemoryConnection();
-				var settings = TestClient.CreateSettings(createSettings, connection, connectionPool);
+				var settings = modifySettings(cluster.CreateConnectionSettings());
 
 				var current = (IConnectionConfigurationValues) settings;
 				var notAlreadyAuthenticated = current.BasicAuthenticationCredentials == null && current.ClientCertificates == null;
@@ -38,6 +41,7 @@ namespace Tests.Framework.ManagedElasticsearch
 					settings = settings.BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password);
 				if (cluster.ClusterConfiguration.EnableSsl && noCertValidation)
 				{
+					//todo use CA callback instead of allowall
 					var ca = new X509Certificate2(cluster.ClusterConfiguration.FileSystem.CaCertificate);
 					settings = settings.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 				}

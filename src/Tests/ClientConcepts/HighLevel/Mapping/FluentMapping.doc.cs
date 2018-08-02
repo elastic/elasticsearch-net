@@ -21,7 +21,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
     public class FluentMapping
     {
-	    private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+	    private readonly IElasticClient _client = TestClient.DisabledStreaming;
 
         /**
 		* To demonstrate, we'll define two POCOs
@@ -53,7 +53,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			 * To create a mapping for our Company type, we can use the fluent API
 			 * and map each property explicitly
 			 */
-            var createIndexResponse = client.CreateIndex("myindex", c => c
+            var createIndexResponse = _client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<Company>(m => m
                         .Properties(ps => ps
@@ -152,7 +152,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             * {ref_current}/nested.html[nested datatype], since by default `.AutoMap()` will infer the
             * `List<Employee>` property as an `object` datatype
 			*/
-            var createIndexResponse = client.CreateIndex("myindex", c => c
+            var createIndexResponse = _client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<Company>(m => m
                         .AutoMap()
@@ -203,7 +203,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
              * manually mapped properties will still yield the same result. The next example
              * generates the same mapping as the previous
 			 */
-            createIndexResponse = client.CreateIndex("myindex", c => c
+            createIndexResponse = _client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<Company>(m => m
                         .Properties(ps => ps
@@ -272,7 +272,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         [U]
         public void OverridingAutoMappedAttributes()
         {
-            var createIndexResponse = client.CreateIndex("myindex", c => c
+            var createIndexResponse = _client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<CompanyWithAttributes>(m => m
                         .AutoMap() // <1> Automap company

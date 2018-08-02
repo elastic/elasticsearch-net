@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Tests.Core;
 using Tests.Framework;
 
 namespace Tests.Ingest.Processor
@@ -19,7 +20,7 @@ namespace Tests.Ingest.Processor
 				}
 			};
 
-			var client = TestClient.GetFixedReturnClient(fixedResponse);
+			var client = FixedResponseClient.Create(fixedResponse);
 
 			//warmup
 			var response = client.GrokProcessorPatterns();

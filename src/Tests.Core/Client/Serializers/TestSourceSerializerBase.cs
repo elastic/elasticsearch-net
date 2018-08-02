@@ -3,7 +3,6 @@ using Elasticsearch.Net;
 using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Tests.Framework.MockData;
 

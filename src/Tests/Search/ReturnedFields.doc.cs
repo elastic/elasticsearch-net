@@ -27,7 +27,7 @@ namespace Tests.Search
      */
     public class ReturnedFields : SerializationTestBase
     {
-        private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+        private readonly IElasticClient _client = TestClient.DisabledStreaming;
 
         /** [[stored-fields]]
          * ==== Stored fields
@@ -61,7 +61,7 @@ namespace Tests.Search
              * When storing fields in this manner, the individual field values to return can be specified using
              * `.StoredFields` on the search request
              */
-            var searchResponse = client.Search<Project>(s => s
+            var searchResponse = _client.Search<Project>(s => s
                 .StoredFields(sf => sf
                     .Fields(
                         f => f.Name,
@@ -101,7 +101,7 @@ namespace Tests.Search
         [U]
         public void SourceFiltering()
         {
-            var searchResponse = client.Search<Project>(s => s
+            var searchResponse = _client.Search<Project>(s => s
                 .Source(sf => sf
                     .Includes(i => i // <1> **Include** the following fields
                         .Fields(
@@ -128,7 +128,7 @@ namespace Tests.Search
             /**
              * It's possible to exclude `_source` from being returned altogether from a query with
              */
-            searchResponse = client.Search<Project>(s => s
+            searchResponse = _client.Search<Project>(s => s
                 .Source(false)
                 .Query(q => q
                     .MatchAll()

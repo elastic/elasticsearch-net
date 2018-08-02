@@ -19,7 +19,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	**/
 	public class AutoMap
 	{
-		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+		private readonly IElasticClient _client = TestClient.DisabledStreaming;
 
 		/**
 		* We'll look at the features of auto mapping with a number of examples. For this,
@@ -58,7 +58,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             * for the base class and then call AutoMap foreach of the types we want it it the implement
 			*/
 
-			var createIndexResponse = client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<Document>(m => m
 						.AutoMap<Company>() // <1> Auto map `Company` using the generic method
@@ -303,7 +303,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void ControllingRecursionDepth()
 		{
 			/** By default, `.AutoMap()` only goes as far as depth 1 */
-			var createIndexResponse = client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<A>(m => m.AutoMap())
 				)
@@ -333,7 +333,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
 
 			/** Now let's specify a maxRecursion of `3` */
-			createIndexResponse = client.CreateIndex("myindex", c => c
+			createIndexResponse = _client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<A>(m => m.AutoMap(3))
 				)

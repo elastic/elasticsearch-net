@@ -2,6 +2,7 @@
 using Nest;
 using System;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Core;
 using Tests.Framework;
 using Tests.Framework.MockData;
 
@@ -19,7 +20,7 @@ namespace Tests.ClientConcepts.LowLevel
 				r.ApiCall.ResponseBodyInBytes.Should().NotBeNull();
 			};
 
-			var client = TestClient.GetFixedReturnClient(new { }, 404, s => s.DisableDirectStreaming());
+			var client = FixedResponseClient.Create(new { }, 404, s => s.DisableDirectStreaming());
 			var response = client.Search<object>(s => s);
 			assert(response);
 			response = client.SearchAsync<object>(s => s).Result;
@@ -36,7 +37,7 @@ namespace Tests.ClientConcepts.LowLevel
 				r.ApiCall.ResponseBodyInBytes.Should().BeNull();
 			};
 
-			var client = TestClient.GetFixedReturnClient(new { }, 404);
+			var client = FixedResponseClient.Create(new { }, 404);
 			var response = client.Search<object>(s => s);
 			assert(response);
 			response = client.SearchAsync<object>(s => s).Result;
@@ -53,7 +54,7 @@ namespace Tests.ClientConcepts.LowLevel
 				r.ApiCall.ResponseBodyInBytes.Should().NotBeNull();
 			};
 
-			var client = TestClient.GetFixedReturnClient(new { }, 200, s => s.DisableDirectStreaming());
+			var client = FixedResponseClient.Create(new { }, 200, s => s.DisableDirectStreaming());
 			var response = client.Search<object>(s => s);
 			assert(response);
 			response = client.SearchAsync<object>(s => s).Result;
@@ -70,7 +71,7 @@ namespace Tests.ClientConcepts.LowLevel
 				r.ApiCall.ResponseBodyInBytes.Should().BeNull();
 			};
 
-			var client = TestClient.GetFixedReturnClient(new { });
+			var client = FixedResponseClient.Create(new { });
 			var response = client.Search<object>(s => s);
 			assert(response);
 			response = client.SearchAsync<object>(s => s).Result;
@@ -87,7 +88,7 @@ namespace Tests.ClientConcepts.LowLevel
 				r.ApiCall.ResponseBodyInBytes.Should().NotBeNull();
 			};
 
-			var client = TestClient.GetFixedReturnClient(new { });
+			var client = FixedResponseClient.Create(new { });
 			var response = client.Search<object>(s => s.RequestConfiguration(r => r.DisableDirectStreaming()));
 			assert(response);
 			response = client.SearchAsync<object>(s => s.RequestConfiguration(r => r.DisableDirectStreaming())).Result;
@@ -104,7 +105,7 @@ namespace Tests.ClientConcepts.LowLevel
 				r.ApiCall.ResponseBodyInBytes.Should().BeNull();
 			};
 
-			var client = TestClient.GetFixedReturnClient(new { }, 200, c => c.DisableDirectStreaming());
+			var client = FixedResponseClient.Create(new { }, 200, c => c.DisableDirectStreaming());
 			var response = client.Search<object>(s => s.RequestConfiguration(r => r.DisableDirectStreaming(false)));
 			assert(response);
 			response = client.SearchAsync<object>(s => s.RequestConfiguration(r => r.DisableDirectStreaming(false))).Result;
@@ -116,7 +117,7 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			var global = 0;
 			var local = 0;
-			var client = TestClient.GetFixedReturnClient(new { }, 200, s => s
+			var client = FixedResponseClient.Create(new { }, 200, s => s
 				.EnableDebugMode(d => local++)
 				.OnRequestCompleted(d => global++)
 			);

@@ -6,6 +6,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
@@ -64,7 +65,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		);
 
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => TestClient.InRange("<5.5.0") ? 200 : 404;
+		protected override int ExpectStatusCode => TestConfiguration.Instance.InRange("<5.5.0") ? 200 : 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"_all/_alias/{DefaultSeeder.ProjectsAliasName}%2Cx%2Cy";
 		protected override void ExpectResponse(IGetAliasResponse response)

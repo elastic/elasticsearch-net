@@ -23,7 +23,7 @@ namespace Tests.ClientConcepts.Exceptions
 		//[I]
 		public void ServerTestWhenThrowExceptionsEnabled()
 		{
-			var settings = new ConnectionSettings(TestClient.CreateUri(_port))
+			var settings = new ConnectionSettings(TestConnectionSettings.CreateUri(_port))
 				.ThrowExceptions();
 			var client = new ElasticClient(settings);
 			var exception = Assert.Throws<ElasticsearchClientException>(() => client.GetMapping<Project>(s => s.Index("doesntexist")));
@@ -47,7 +47,7 @@ namespace Tests.ClientConcepts.Exceptions
 		//[I]
 		public void ServerTestWhenThrowExceptionsDisabled()
 		{
-			var settings = new ConnectionSettings(TestClient.CreateUri(_port));
+			var settings = new ConnectionSettings(TestConnectionSettings.CreateUri(_port));
 			var client = new ElasticClient(settings);
 			var response = client.GetMapping<Project>(s => s.Index("doesntexist"));
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set

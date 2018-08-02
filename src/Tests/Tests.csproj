@@ -10,20 +10,6 @@
     <DefineConstants Condition="'$(TargetFramework)'=='net46'">$(DefineConstants);FEATURE_HTTPWEBREQUEST</DefineConstants>
     <DefineConstants Condition="Exists('..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll')">$(DefineConstants);FEATURE_PROFILING</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TestPackageVersion)'!=''">
-    <RestoreSources>../../build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
-    <DefineConstants>$(DefineConstants);TESTINGNUGETPACKAGE</DefineConstants>
-  </PropertyGroup>
-  <ItemGroup Condition="'$(TestPackageVersion)'!=''">
-    <PackageReference Include="NEST" Version="$(TestPackageVersion)" />
-    <PackageReference Include="NEST.JsonNetSerializer" Version="$(TestPackageVersion)" />
-    <PackageReference Condition="'$(TargetFramework)'=='net46'" Include="Elasticsearch.Net.Connections.HttpWebRequestConnection" Version="$(TestPackageVersion)" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TestPackageVersion)'==''">
-    <ProjectReference Include="..\Nest\Nest.csproj" />
-    <ProjectReference Include="..\Serializers\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
-    <ProjectReference Include="..\Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj" />
-  </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
   </ItemGroup>
@@ -40,11 +26,8 @@
     <Compile Remove="Framework\Profiling\**" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tests.Domain\Tests.Domain.csproj" />
-    <ProjectReference Include="..\Tests.Configuration\Tests.Configuration.csproj" />
-    
+    <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
     <PackageReference Include="Bogus" Version="22.1.2" />
-    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180716T123929" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />
     <PackageReference Include="DiffPlex" Version="1.4.1" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
@@ -54,6 +37,7 @@
     <PackageReference Include="System.Net.Http" Version="4.3.2" />
     <PackageReference Include="System.Diagnostics.FileVersionInfo" Version="4.3.0" />
     <PackageReference Include="SemanticVersioning" Version="0.8.0" />
+    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180716T123929" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
@@ -62,10 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Framework\Configuration" />
-    <Folder Include="Framework\MockData" />
   </ItemGroup>
   <Import Project="..\outputpath.props" />
 </Project>

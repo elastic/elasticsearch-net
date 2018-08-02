@@ -10,6 +10,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using Xunit;
@@ -68,9 +69,9 @@ namespace Tests.Document.Multiple.MultiGet
 		}
 		[I] public void ThrowsExceptionOnConnectionError()
 		{
-			if (TestClient.RunningFiddler) return; //fiddler meddles here
+			if (TestConnectionSettings.RunningFiddler) return; //fiddler meddles here
 
-			var client = new ElasticClient(TestClient.CreateSettings(port: 9500));
+			var client = new ElasticClient(new TestConnectionSettings(port: 9500));
 			Action response = () => client.GetMany<Developer>(_ids.Select(i=>i*100));
 			response.ShouldThrow<ElasticsearchClientException>();
 		}

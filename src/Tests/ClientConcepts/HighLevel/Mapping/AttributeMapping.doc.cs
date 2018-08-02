@@ -31,7 +31,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	*/
     public class AttributeMapping
 	{
-		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+		private readonly IElasticClient _client = TestClient.DisabledStreaming;
 
         [ElasticsearchType(Name = "employee")]
         public class Employee
@@ -75,7 +75,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void UsingAutoMapWithAttributes()
 		{
-			var createIndexResponse = client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<Employee>(m => m.AutoMap())
 				)

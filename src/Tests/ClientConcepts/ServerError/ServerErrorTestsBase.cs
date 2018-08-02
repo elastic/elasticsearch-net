@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core;
 using Tests.Framework;
 using Tests.Framework.MockData;
 
@@ -13,7 +14,7 @@ namespace Tests.ClientConcepts.ServerError
 
 		protected ServerErrorTestsBase()
 		{
-			var settings = TestClient.GetFixedReturnSettings(ResponseJson, 500);
+			var settings = FixedResponseClient.CreateConnectionSettings(ResponseJson, 500);
 			this.LowLevelClient = new ElasticLowLevelClient(settings);
 			this.HighLevelClient = new ElasticClient(settings);
 		}

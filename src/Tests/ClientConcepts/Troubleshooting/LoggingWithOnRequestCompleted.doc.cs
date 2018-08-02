@@ -7,7 +7,9 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch;
 using Xunit;
 
 namespace Tests.ClientConcepts.Troubleshooting
@@ -30,8 +32,7 @@ namespace Tests.ClientConcepts.Troubleshooting
         public async Task OnRequestCompletedIsCalled()
         {
             var counter = 0;
-            var client = TestClient.GetInMemoryClient(connectionSettings =>
-                connectionSettings.OnRequestCompleted(r => counter++)); // <1> Construct a client
+            var client = new ElasticClient(new AlwaysInMemoryConnectionSettings().OnRequestCompleted(r => counter++)); // <1> Construct a client
 
             client.RootNodeInfo(); // <2> Make a synchronous call and assert the counter is incremented
             counter.Should().Be(1);
@@ -48,7 +49,7 @@ namespace Tests.ClientConcepts.Troubleshooting
         public async Task OnRequestCompletedIsCalledWhenExceptionIsThrown()
         {
             var counter = 0;
-            var client = TestClient.GetFixedReturnClient( // <1> Configure a client with a connection that **always returns a HTTP 500 response
+            var client = FixedResponseClient.Create( // <1> Configure a client with a connection that **always returns a HTTP 500 response
                 new { },
                 500,
                 connectionSettings => connectionSettings

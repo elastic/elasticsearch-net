@@ -10,6 +10,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Extensions;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using Xunit;
@@ -38,7 +39,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			 * We'll use a Sniffing connection pool here since it sniffs on startup and pings before
 			 * first usage, so we can get an audit trail with a few events out
 			 */
-			var pool = new SniffingConnectionPool(new []{ new Uri($"http://{TestClient.DefaultHost}:9200") });
+			var pool = new SniffingConnectionPool(new []{ TestConnectionSettings.CreateUri() });
 		    var connectionSettings = new ConnectionSettings(pool)
 				.DefaultMappingFor<Project>(i => i
 					.IndexName("project")

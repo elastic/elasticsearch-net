@@ -22,14 +22,9 @@ namespace Tests.Reproduce
 
 		public GithubIssue2052()
 		{
-
-			var pool = new StaticConnectionPool(new List<Uri> { new Uri("http://localhost:9200") });
-			var memoryConnection = new InMemoryConnection();
-			var connectionSettings = new ConnectionConfiguration(pool, memoryConnection)
-				.DisableDirectStreaming();
+			var connectionSettings = TestClient.DisabledStreaming.ConnectionSettings;
 			this._client = new ElasticLowLevelClient(connectionSettings);
 		}
-
 
 		[U] public void SingleThrownExceptionCanBeSerializedUsingSimpleJson()
 		{

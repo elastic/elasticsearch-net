@@ -10,6 +10,7 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.MockData;
 using static Tests.Framework.RoundTripper;
 using static Nest.Infer;
@@ -399,11 +400,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* now when we resolve the field path for property `C` on `A`, it will be different than
 			* for property `C` on `B`
 			*/
-			var newConnectionSettings = TestClient.CreateSettings(modifySettings: s => s
+			var newConnectionSettings = new TestConnectionSettings()
 				.DefaultMappingFor<A>(m => m
 					.PropertyName(p => p.C, "d")
-				)
-			);
+				);
+			
 			var newClient = new ElasticClient(newConnectionSettings);
 
 			fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));

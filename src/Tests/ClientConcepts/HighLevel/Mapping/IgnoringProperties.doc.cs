@@ -32,8 +32,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
     */
     public class IgnoringProperties
 	{
-		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
-
 		[ElasticsearchType(Name = "company")]
 		public class CompanyWithAttributesAndPropertiesToIgnore
 		{

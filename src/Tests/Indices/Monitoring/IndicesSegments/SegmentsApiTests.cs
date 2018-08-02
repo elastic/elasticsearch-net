@@ -5,6 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Indices.Monitoring.IndicesSegments
@@ -46,7 +47,7 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 					segmentValue.SizeInBytes.Should().BeGreaterThan(0);
 					segmentValue.Version.Should().NotBeNullOrEmpty();
 
-					if (TestClient.InRange(">=6.1.0"))
+					if (TestConfiguration.Instance.InRange(">=6.1.0"))
 						segmentValue.Attributes.Should().NotBeEmpty();
 				}
 			}

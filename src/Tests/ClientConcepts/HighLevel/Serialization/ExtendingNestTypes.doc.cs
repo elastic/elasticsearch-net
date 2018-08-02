@@ -20,7 +20,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
      */
     public class ExtendingNestTypes
 	{
-		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+		private readonly IElasticClient _client = TestClient.DisabledStreaming;
 
 		/* ==== Creating your own property mapping
 		 *
@@ -56,7 +56,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			 *
 			 * Now that we have our own `IProperty` implementation we can add it to our propertes mapping when creating an index
 			 */
-			var createIndexResponse = client.CreateIndex("myindex", c => c
+			var createIndexResponse = _client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<Project>(m => m
 						.Properties(props => props

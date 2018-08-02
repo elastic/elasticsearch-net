@@ -23,7 +23,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
      */
     public class VisitorPattern
 	{
-		private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+		private IElasticClient client = TestClient.DisabledStreaming;
 
         /**
 		* Using the following POCO

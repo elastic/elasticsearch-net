@@ -7,6 +7,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.ManagedElasticsearch.Tasks;
+using Tests.Framework.MockData;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
@@ -40,14 +41,8 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 
-		public virtual IElasticClient Client => this.GetOrAddClient(s=>Authenticate(ConnectionSettings(s)));
+		public virtual IElasticClient Client => this.GetOrAddClient(s=>Authenticate(ConnectionSettings(s.ApplyDomainSettings())));
 
 		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
-
-		public override ICollection<Uri> NodesUris(string hostName = "localhost")
-		{
-			var host = (EphemeralClusterExtensions.RunningFiddler) ? "ipv4.fiddler" : hostName;
-			return base.NodesUris(host);
-		}
 	}
 }

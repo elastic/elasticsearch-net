@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
-using FluentAssertions;
-using Newtonsoft.Json.Linq;
+using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
 
@@ -31,6 +30,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
      */
     public class WritingAnalyzers
     {
+	    private readonly IElasticClient _client = TestClient.DisabledStreaming;
         /**
          * ==== Specifying an analyzer on a field mapping
          *
@@ -53,10 +53,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
          */
         public void AddAnalyzerToFieldMapping()
         {
-            // hide
-            var client = TestClient.DefaultInMemoryClient;
-
-            var createIndexResponse = client.CreateIndex("my-index", c => c
+            var createIndexResponse = _client.CreateIndex("my-index", c => c
                 .Mappings(m => m
                     .Map<Project>(mm => mm
                         .Properties(p => p
@@ -83,10 +80,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
         [U]
         public void ChangingBuiltInAnalyzer()
         {
-            // hide
-	        var client = TestClient.DefaultInMemoryClient;
-
-            var createIndexResponse = client.CreateIndex("my-index", c => c
+            var createIndexResponse = _client.CreateIndex("my-index", c => c
                 .Settings(s => s
                     .Analysis(a => a
                         .Analyzers(aa => aa
@@ -177,10 +171,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
          */
         public void CustomAnalyzer()
         {
-            // hide
-            var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
-
-            var createIndexResponse = client.CreateIndex("questions", c => c
+            var createIndexResponse = _client.CreateIndex("questions", c => c
                 .Settings(s => s
                     .Analysis(a => a
                         .CharFilters(cf => cf
@@ -241,10 +232,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
          */
         public void CustomIndexAndSearchAnalyzers()
         {
-            // hide
-            var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
-
-            var createIndexResponse = client.CreateIndex("questions", c => c
+            var createIndexResponse = _client.CreateIndex("questions", c => c
                 .Settings(s => s
                     .Analysis(a => a
                         .CharFilters(cf => cf

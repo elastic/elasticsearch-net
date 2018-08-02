@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch;
 
 namespace Tests.Framework
 {
@@ -52,10 +53,15 @@ namespace Tests.Framework
 				lock (_clientLock)
 				{
 					if (_client != null) return _client;
-					_client = ConnectionSettingsModifier == null && SourceSerializerFactory == null && this.PropertyMappingProvider == null
-						? TestClient.DefaultInMemoryClient
-						: TestClient.GetInMemoryClientWithSourceSerializer(
-							ConnectionSettingsModifier, SourceSerializerFactory, PropertyMappingProvider);
+					if (ConnectionSettingsModifier == null && SourceSerializerFactory == null && this.PropertyMappingProvider == null)
+						_client = TestClient.DefaultInMemoryClient;
+					else
+					{
+						ConnectionSettings settings = new AlwaysInMemoryConnectionSettings(sourceSerializerFactory: SourceSerializerFactory, propertyMappingProvider: PropertyMappingProvider);
+						if (ConnectionSettingsModifier != null) settings = ConnectionSettingsModifier(settings);
+						// ReSharper disable once PossibleMultipleWriteAccessInDoubleCheckLocking
+						_client = new ElasticClient(settings);
+					}
 				}
 				return _client;
 			}

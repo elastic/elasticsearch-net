@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Tests.Core;
 using Tests.Framework;
 
 namespace Tests.XPack.DeprecationInfo
@@ -36,7 +37,7 @@ namespace Tests.XPack.DeprecationInfo
 				}
 			}};
 
-			var client = TestClient.GetFixedReturnClient(fixedResponse);
+			var client = FixedResponseClient.Create(fixedResponse);
 
 			//warmup
 			var response = client.NodesUsage();

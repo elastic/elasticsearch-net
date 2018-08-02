@@ -26,7 +26,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
     public class MultiFields
     {
-	    private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
+	    private readonly IElasticClient _client = TestClient.DisabledStreaming;
 
         public class Person
         {
@@ -42,7 +42,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         [U]
         public void DefaultMultiFields()
         {
-            var createIndexResponse = client.CreateIndex("myindex", c => c
+            var createIndexResponse = _client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<Person>(m => m
                         .AutoMap()
@@ -90,7 +90,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         [U]
         public void Searching()
         {
-            var searchResponse = client.Search<Person>(s => s
+            var searchResponse = _client.Search<Person>(s => s
                 .Query(q => q
                     .Match(m => m
                         .Field(f => f.Name)
@@ -162,7 +162,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         [U]
         public void CreatingMultiFields()
         {
-            var createIndexResponse = client.CreateIndex("myindex", c => c
+            var createIndexResponse = _client.CreateIndex("myindex", c => c
                 .Mappings(ms => ms
                     .Map<Person>(m => m
                         .Properties(p => p

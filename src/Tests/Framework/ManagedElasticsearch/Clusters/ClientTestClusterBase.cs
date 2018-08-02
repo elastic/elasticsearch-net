@@ -1,11 +1,14 @@
 ﻿using System;
 using System.IO;
+using Elastic.Managed.Configuration;
 using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Plugins;
 using Elastic.Xunit;
 using Nest;
 using Tests.Framework.Configuration;
+using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.ManagedElasticsearch.Tasks;
+using Tests.Framework.MockData;
 
 namespace Tests.Framework.ManagedElasticsearch.Clusters
 {
@@ -19,7 +22,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		{
 		}
 
-		public IElasticClient Client => this.GetOrAddClient(ConnectionSettings);
+		public IElasticClient Client => this.GetOrAddClient(s=> ConnectionSettings(s.ApplyDomainSettings()));
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s;
 	}

@@ -4,6 +4,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 using FluentAssertions;
+using Tests.Core;
 
 namespace Tests.Reproduce
 {
@@ -27,7 +28,7 @@ namespace Tests.Reproduce
 
 		[U] public async Task BadAuthResponseDoesNotThrowExceptionWhenAttemptingToDeserializeResponse()
 		{
-			var client = TestClient.GetFixedReturnClient(ProxyAuthResponse, 401,
+			var client = FixedResponseClient.Create(ProxyAuthResponse, 401,
 				modifySettings: s => s.SkipDeserializationForStatusCodes(401),
 				contentType: "text/html",
 				exception: new Exception("problem with the request as a result of 401")
@@ -38,7 +39,7 @@ namespace Tests.Reproduce
 
 		[U] public async Task BadAuthCarriesStatusCodeAndResponseBodyOverToResponse()
 		{
-			var client = TestClient.GetFixedReturnClient(ProxyAuthResponse, 401,
+			var client = FixedResponseClient.Create(ProxyAuthResponse, 401,
 				modifySettings: s => s.DisableDirectStreaming().SkipDeserializationForStatusCodes(401),
 				contentType: "text/html",
 				exception: new Exception("problem with the request as a result of 401")

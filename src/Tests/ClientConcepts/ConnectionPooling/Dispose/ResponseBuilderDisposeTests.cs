@@ -9,15 +9,14 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 {
 	public class ResponseBuilderDisposeTests
 	{
-		private IConnectionSettingsValues _settings =
-			TestClient.CreateSettings(modifySettings: s=>s.DisableDirectStreaming(false), forceInMemory: true);
-		private IConnectionSettingsValues _settingsDisableDirectStream =
-			TestClient.CreateSettings(modifySettings: s=>s.DisableDirectStreaming(true), forceInMemory: true);
+		private readonly IConnectionSettingsValues _settings = new AlwaysInMemoryConnectionSettings().DisableDirectStreaming(false);
+		private readonly IConnectionSettingsValues _settingsDisableDirectStream = new AlwaysInMemoryConnectionSettings().DisableDirectStreaming(true);
 
 		private class TrackDisposeStream : MemoryStream
 		{

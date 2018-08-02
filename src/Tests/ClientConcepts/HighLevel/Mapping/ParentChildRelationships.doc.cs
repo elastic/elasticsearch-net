@@ -158,7 +158,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U] public void Indexing()
 		{
 			// hide
-			var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
+			var client = TestClient.DisabledStreaming;
 			/**
 			* To mark a document with the relation name of the parent `MyParent` all of the following three ways are equivalent.
 			*
@@ -262,7 +262,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void Inference()
 		{
 			// hide
-			var client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming().PrettyJson());
+			var client = TestClient.DisabledStreaming;
 			var infer = client.Infer;
 			var parent = new MyParent {Id = 1337, MyJoinField = JoinField.Root<MyParent>()};
 			infer.Routing(parent).Should().Be("1337");

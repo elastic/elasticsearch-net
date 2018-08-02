@@ -11,6 +11,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch;
 using static Tests.Framework.TimesHelper;
 using static Elasticsearch.Net.AuditEvent;
 using Tests.Framework.ManagedElasticsearch.Clusters;
@@ -403,7 +404,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 		private RequestPipeline CreatePipeline()
 		{
-			var uri = TestClient.CreateUri(this._cluster.Nodes.First().Port ?? 9200);
+			var uri = TestConnectionSettings.CreateUri(this._cluster.Nodes.First().Port ?? 9200);
 			this._settings = new ConnectionSettings(new SniffingConnectionPool(new[] { uri }));
 			var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new MemoryStreamFactory(),
 				new SearchRequestParameters());

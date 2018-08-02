@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using Bogus;
 using Elastic.Xunit;
 using Tests.Framework.Configuration;
 using Tests.Framework.ManagedElasticsearch;
@@ -21,12 +20,12 @@ namespace Tests.Framework.ManagedElasticsearch
 	{
 		public NestXunitRunOptions()
 		{
-			this.RunIntegrationTests = TestClient.Configuration.RunIntegrationTests;
-			this.RunUnitTests = TestClient.Configuration.RunUnitTests;
-			this.ClusterFilter = TestClient.Configuration.ClusterFilter;
-			this.TestFilter = TestClient.Configuration.TestFilter;
-			this.Version = TestClient.Configuration.ElasticsearchVersion;
-			this.IntegrationTestsMayUseAlreadyRunningNode = TestClient.Configuration.TestAgainstAlreadyRunningElasticsearch;
+			this.RunIntegrationTests = TestConfiguration.Instance.RunIntegrationTests;
+			this.RunUnitTests = TestConfiguration.Instance.RunUnitTests;
+			this.ClusterFilter = TestConfiguration.Instance.ClusterFilter;
+			this.TestFilter = TestConfiguration.Instance.TestFilter;
+			this.Version = TestConfiguration.Instance.ElasticsearchVersion;
+			this.IntegrationTestsMayUseAlreadyRunningNode = TestConfiguration.Instance.TestAgainstAlreadyRunningElasticsearch;
 
 			Generators.Initialize();
 		}
@@ -35,7 +34,7 @@ namespace Tests.Framework.ManagedElasticsearch
 
 		private static void DumpConfiguration()
 		{
-			var config = TestClient.Configuration;
+			var config = TestConfiguration.Instance;
 
 			WriteLine(new string('-', 20));
 			WriteLine("Starting tests using config:");
@@ -77,10 +76,10 @@ namespace Tests.Framework.ManagedElasticsearch
 		}
 		private static void DumpSeenDeprecations()
 		{
-			if (TestClient.SeenDeprecations.Count == 0) return;
+			if (XunitRunState.SeenDeprecations.Count == 0) return;
 
 			WriteLine("-------- SEEN DEPRECATIONS");
-			foreach (var d in TestClient.SeenDeprecations.Distinct())
+			foreach (var d in XunitRunState.SeenDeprecations.Distinct())
 				WriteLine(d);
 			WriteLine("--------");
 		}
@@ -103,7 +102,7 @@ namespace Tests.Framework.ManagedElasticsearch
 
 		private static void DumpReproduceFilters(ConcurrentBag<Tuple<string, string>> failedCollections)
 		{
-			var config = TestClient.Configuration;
+			var config = TestConfiguration.Instance;
 			var runningIntegrations = config.RunIntegrationTests;
 			ForegroundColor = ConsoleColor.Yellow;
 			WriteLine("---Reproduce: -----");
@@ -118,7 +117,7 @@ namespace Tests.Framework.ManagedElasticsearch
 
 			if (runningIntegrations)
 				sb.Append("integrate ")
-					.Append(TestClient.Configuration.ElasticsearchVersion);
+					.Append(TestConfiguration.Instance.ElasticsearchVersion);
 
 			else sb.Append("test");
 

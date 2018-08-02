@@ -3,6 +3,7 @@ using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Core;
 using Tests.Framework;
 
 namespace Tests.XPack.Migration.DeprecationInfo
@@ -43,7 +44,7 @@ namespace Tests.XPack.Migration.DeprecationInfo
 				}
 			};
 
-			var client = TestClient.GetFixedReturnClient(fixedResponse);
+			var client = FixedResponseClient.Create(fixedResponse);
 
 			//warmup
 			var response = client.DeprecationInfo();

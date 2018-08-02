@@ -8,7 +8,6 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 	{
 		public const string TestsIndexTemplateName = "nest_tests";
 
-		public const string ProjectsIndex = "project";
 		public const string ProjectsAliasName = "projects-alias";
 		public const string ProjectsAliasFilter = "projects-only";
 		public const string CommitsAliasFilter = "commits-only";
@@ -165,7 +164,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 					)
 				);
 			//normalizers are a new feature since 5.2.0
-			if (TestClient.InRange(">=5.2.0"))
+			if (TestConfiguration.Instance.InRange(">=5.2.0"))
 				analysis.Normalizers(analyzers => analyzers
 					.Custom("my_normalizer", n => n
 						.Filters("lowercase", "asciifolding")

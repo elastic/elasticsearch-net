@@ -8,6 +8,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json.Linq;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using Xunit;
@@ -26,15 +27,11 @@ namespace Tests.Search
     public class WritingQueries : SerializationTestBase, IClusterFixture<ReadOnlyCluster>
     {
         private readonly ReadOnlyCluster _cluster;
+	    private readonly IElasticClient _client = TestClient.DisabledStreaming;
 
-        public WritingQueries(ReadOnlyCluster cluster)
-        {
-            _cluster = cluster;
-        }
+        public WritingQueries(ReadOnlyCluster cluster) => _cluster = cluster;
 
-        private IElasticClient client = TestClient.GetInMemoryClient(c => c.DisableDirectStreaming());
-
-        /**==== Match All query
+	    /**==== Match All query
          *
          * The simplest of queries is the {ref_current}/query-dsl-match-all-query.html[match_all] query;
          * this will return all documents, giving them all a `_score` of 1.0
@@ -48,7 +45,7 @@ namespace Tests.Search
         [U]
         public void MatchAllQuery()
         {
-            var searchResponse = client.Search<Project>(s => s
+            var searchResponse = _client.Search<Project>(s => s
                 .Query(q => q
                     .MatchAll()
                 )
@@ -74,7 +71,7 @@ namespace Tests.Search
             /**Since `match_all` queries are common, the previous example also has a shorthand which
              * serializes to the same query DSL JSON
              */
-            searchResponse = client.Search<Project>(s => s
+            searchResponse = _client.Search<Project>(s => s
                 .MatchAll()
             );
 
@@ -92,7 +89,7 @@ namespace Tests.Search
                 Query = new MatchAllQuery()
             };
 
-            searchResponse = client.Search<Project>(searchRequest);
+            searchResponse = _client.Search<Project>(searchRequest);
 
             //hide
             Expect(expected)
@@ -136,7 +133,7 @@ namespace Tests.Search
         [U]
         public void StructuredSearch()
         {
-            var searchResponse = client.Search<Project>(s => s
+            var searchResponse = _client.Search<Project>(s => s
                 .Query(q => q
                     .DateRange(r => r
                         .Field(f => f.StartedOn)
@@ -174,7 +171,7 @@ namespace Tests.Search
              * we can get the query to be __executed in a filter context__ by wrapping it in a `bool` query `filter`
              * clause
              */
-            searchResponse = client.Search<Project>(s => s
+            searchResponse = _client.Search<Project>(s => s
                .Query(q => q
                    .Bool(b => b
                        .Filter(bf => bf
@@ -248,7 +245,7 @@ namespace Tests.Search
         [U]
         public void UnstructuredSearch()
         {
-            var searchResponse = client.Search<Project>(s => s
+            var searchResponse = _client.Search<Project>(s => s
                 .Query(q => q
                     .Match(m => m
                         .Field(f => f.LeadDeveloper.FirstName)
@@ -306,7 +303,7 @@ namespace Tests.Search
         [U]
         public void BoolQuery()
         {
-            var searchResponse = client.Search<Project>(s => s
+            var searchResponse = _client.Search<Project>(s => s
                 .Query(q => q
                     .Bool(b => b
                         .Must(mu => mu
@@ -405,7 +402,7 @@ namespace Tests.Search
              * `bool` queries much more succinct. The previous `bool` query can be more concisely
              * expressed as
              */
-            searchResponse = client.Search<Project>(s => s
+            searchResponse = _client.Search<Project>(s => s
                 .Query(q => q
                     .Match(m => m
                         .Field(f => f.LeadDeveloper.FirstName)

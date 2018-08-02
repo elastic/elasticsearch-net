@@ -37,7 +37,6 @@ namespace Tests.Framework
 			if (File.Exists(defaultYamlFile))
 				return new YamlConfiguration(defaultYamlFile);
 
-			return new EnvironmentConfiguration();
 			throw new Exception($"Tried to load a yaml file from {yamlConfigurationPath} but it does not exist : pwd:{directoryInfo.FullName}");
 		}
 	}

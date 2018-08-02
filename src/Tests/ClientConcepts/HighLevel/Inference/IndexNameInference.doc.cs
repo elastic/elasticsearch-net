@@ -3,6 +3,7 @@ using Nest;
 using System;
 using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework;
+using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.MockData;
 using Xunit;
 using static Tests.Framework.RoundTripper;
@@ -89,10 +90,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*/
 		[U] public void ExplicitIndexOnRequest()
 		{
-			Uri requestUri = null;
-			var client = TestClient.GetInMemoryClient(s=>s.OnRequestCompleted(r => { requestUri = r.Uri; }));
-
+			var client = TestClient.Default;
 			var response = client.Search<Project>(s => s.Index("some-other-index")); //<1> Provide the index name on the request
+			var requestUri = response.ApiCall.Uri;
 
 			requestUri.Should().NotBeNull();
 			requestUri.LocalPath.Should().StartWith("/some-other-index/");
@@ -104,13 +104,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*/
 		[U] public void ExplicitIndexOnRequestTakesPrecedence()
 		{
-			var client = TestClient.GetInMemoryClient(s=>
-				new ConnectionSettings()
-					.DefaultIndex("defaultindex")
-					.DefaultMappingFor<Project>(m => m
-						.IndexName("projects")
-					)
-			);
+			var client = new ElasticClient(new AlwaysInMemoryConnectionSettings()
+				.DefaultIndex("defaultindex")
+				.DefaultMappingFor<Project>(m => m
+					.IndexName("projects")
+				));
 
 			var response = client.Search<Project>(s => s.Index("some-other-index")); //<1> Provide the index name on the request
 
@@ -137,7 +135,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		//hide
 		[U] public void ArgumentExceptionBubblesOut()
 		{
-			var client = TestClient.GetClient(s => new ConnectionSettings());
+			var client = new ElasticClient(new ConnectionSettings());
 			var e = Assert.Throws<ArgumentException>(() => client.Search<Project>());
 		}
 
