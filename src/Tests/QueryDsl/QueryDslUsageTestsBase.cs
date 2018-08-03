@@ -63,7 +63,7 @@ namespace Tests.QueryDsl
 
 		[U] public void SeenByVisitor()
 		{
-			var visitor = new DslPrettyPrintVisitor(TestClient.GlobalDefaultSettings);
+			var visitor = new DslPrettyPrintVisitor(TestClient.DefaultInMemoryClient.ConnectionSettings);
 			var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
 			query.Accept(visitor);
 			var pretty = visitor.PrettyPrint;

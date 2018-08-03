@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.MockData;
+using static Tests.Framework.RoundTripper;
 
 namespace Tests.XPack.MachineLearning
 {
-	public class DetectorSerializationTests : SerializationTestBase
+	public class DetectorSerializationTests
 	{
-		[U]
-		public void CanSerializeAndDeserializeAllDetectors()
+		[U] public void CanSerializeAndDeserializeAllDetectors()
 		{
 			var detectorTypes =
 				from t in typeof(IDetector).Assembly().Types()
@@ -26,8 +24,7 @@ namespace Tests.XPack.MachineLearning
 				.ToList();
 
 			var analysisConfig = new AnalysisConfig { Detectors = detectors };
-			var deserialized = this.Deserialize<AnalysisConfig>(this.Serialize(analysisConfig));
-
+			var deserialized = Object(analysisConfig).RoundTrips();
 			deserialized.Detectors.Select(d => d.Function).Distinct().Should().HaveCount(detectors.Count);
 		}
 	}

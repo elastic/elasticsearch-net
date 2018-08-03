@@ -18,7 +18,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Domain\Tests.Domain.csproj" />
-    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180716T123929" />
+    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180803T162924" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />

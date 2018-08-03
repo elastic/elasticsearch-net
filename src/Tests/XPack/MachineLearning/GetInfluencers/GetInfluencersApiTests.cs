@@ -34,7 +34,6 @@ namespace Tests.XPack.MachineLearning.GetInfluencers
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/influencers";
-		protected override bool SupportsDeserialization => true;
 		protected override object ExpectJson => null;
 		protected override Func<GetInfluencersDescriptor, IGetInfluencersRequest> Fluent => f => f;
 		protected override GetInfluencersRequest Initializer => new GetInfluencersRequest(CallIsolatedValue);

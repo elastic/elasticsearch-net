@@ -1,14 +1,18 @@
-﻿using Nest;
+﻿using Elasticsearch.Net;
+using Nest;
 
 namespace Tests.Framework.MockData
 {
 	public static class AnonymizerExtensions
 	{
+		private static readonly Inferrer Infer = new Inferrer(new ConnectionSettings(new InMemoryConnection()).ApplyDomainSettings());
+
 		public static object ToAnonymousObject(this JoinField field) =>
-			field.Match<object>(p => p.Name.Name, c => new
+			field.Match<object>(p => Infer.RelationName(p.Name), c => new
 			{
-				parent = c.Parent.ToString(),
-				name = c.Name.Name
+				parent = Infer.Id(c.Parent),
+				name = Infer.RelationName(c.Name)
+
 			});
 	}
 }

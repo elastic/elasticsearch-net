@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.ValidateDetector
 {
-	public class ValidateDetectorUrlTests : IUrlTests
+	public class ValidateDetectorUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/ml/anomaly_detectors/_validate/detector")
 				.Fluent(c => c.ValidateDetector<Project>(v => v))

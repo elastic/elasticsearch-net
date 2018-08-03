@@ -29,8 +29,6 @@ namespace Tests.XPack.License.GetLicense
 
 		protected override string UrlPath => $"/_xpack/license";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override GetLicenseRequest Initializer => new GetLicenseRequest();
 
 		protected override void ExpectResponse(IGetLicenseResponse response)

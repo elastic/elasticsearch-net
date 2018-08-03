@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.User.GetUser
 {
-	public class GetUserUrlTests : IUrlTests
+	public class GetUserUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_xpack/security/user")
 				.Fluent(c => c.GetUser())

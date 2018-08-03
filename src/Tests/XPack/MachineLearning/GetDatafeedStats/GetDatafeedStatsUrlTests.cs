@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.GetDatafeedStats
 {
-	public class GetDatafeedStatsUrlTests : IUrlTests
+	public class GetDatafeedStatsUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_xpack/ml/datafeeds/_stats")
 				.Fluent(c => c.GetDatafeedStats())

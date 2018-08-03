@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cat.CatIndices
 {
-	public class CatIndicesUrlTests : IUrlTests
+	public class CatIndicesUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_cat/indices")
 				.Fluent(c => c.CatIndices())

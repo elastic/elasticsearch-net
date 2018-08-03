@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.ClusterPendingTasks
 {
-	public class ClusterPendingTasksUrlTests : IUrlTests
+	public class ClusterPendingTasksUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_cluster/pending_tasks")
 				.Fluent(c => c.ClusterPendingTasks())

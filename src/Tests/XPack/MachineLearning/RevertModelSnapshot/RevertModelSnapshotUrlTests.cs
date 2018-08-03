@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.RevertModelSnapshot
 {
-	public class RevertModelSnapshotUrlTests : IUrlTests
+	public class RevertModelSnapshotUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/ml/anomaly_detectors/job_id/model_snapshots/snapshot_id/_revert")
 				.Fluent(c => c.RevertModelSnapshot("job_id", "snapshot_id"))

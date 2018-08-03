@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.UpdateModelSnapshot
 {
-	public class UpdateModelSnapshotUrlTests : IUrlTests
+	public class UpdateModelSnapshotUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/ml/anomaly_detectors/job_id/model_snapshots/snapshot_id/_update")
 				.Fluent(c => c.UpdateModelSnapshot("job_id", "snapshot_id", p => p))

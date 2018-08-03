@@ -34,7 +34,6 @@ namespace Tests.XPack.MachineLearning.GetAnomalyRecords
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/records";
-		protected override bool SupportsDeserialization => true;
 		protected override object ExpectJson => null;
 		protected override Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> Fluent => f => f;
 		protected override GetAnomalyRecordsRequest Initializer => new GetAnomalyRecordsRequest(CallIsolatedValue);

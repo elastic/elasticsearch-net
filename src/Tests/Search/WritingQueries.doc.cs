@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json.Linq;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
-using Xunit;
 using static Tests.Framework.RoundTripper;
 
 namespace Tests.Search
@@ -24,7 +19,7 @@ namespace Tests.Search
      * and is exposed in NEST in the form of both a Fluent API and an Object Initializer syntax
      *
      */
-    public class WritingQueries : SerializationTestBase, IClusterFixture<ReadOnlyCluster>
+    public class WritingQueries : IClusterFixture<ReadOnlyCluster>
     {
         private readonly ReadOnlyCluster _cluster;
 	    private readonly IElasticClient _client = TestClient.DisabledStreaming;
@@ -64,9 +59,7 @@ namespace Tests.Search
             };
 
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(searchResponse);
 
             /**Since `match_all` queries are common, the previous example also has a shorthand which
              * serializes to the same query DSL JSON
@@ -76,9 +69,7 @@ namespace Tests.Search
             );
 
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(searchResponse);
 
             /**
              * The two previous examples both used the Fluent API to express the query. NEST also exposes an
@@ -92,9 +83,7 @@ namespace Tests.Search
             searchResponse = _client.Search<Project>(searchRequest);
 
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(searchResponse);
         }
 
         /**==== Search request parameters
@@ -162,9 +151,7 @@ namespace Tests.Search
             };
 
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(searchResponse);
 
             /**
              * Since the answer to this query is always yes or no, we don't want to _score_ the query. To do this,
@@ -213,9 +200,7 @@ namespace Tests.Search
             };
 
             //hide
-            Expect(expected2)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes));
+	        Expect(expected2).FromRequest(searchResponse);
         }
 
          /**
@@ -275,9 +260,7 @@ namespace Tests.Search
             };
 
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(searchResponse);
         }
 
 
@@ -383,9 +366,7 @@ namespace Tests.Search
             };
 
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes));
+	        Expect(expected).FromRequest(searchResponse);
 
             /**
              * A document must
@@ -425,9 +406,7 @@ namespace Tests.Search
              * and further examples.
              */
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(searchResponse.ApiCall.RequestBodyInBytes));
+	        Expect(expected).FromRequest(searchResponse);
         }
 
         /**

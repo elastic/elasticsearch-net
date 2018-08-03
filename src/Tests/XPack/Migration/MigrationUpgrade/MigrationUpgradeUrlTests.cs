@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Migration.MigrationUpgrade
 {
-	public class MigrationUpgradeUrlTests : IUrlTests
+	public class MigrationUpgradeUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST($"/_xpack/migration/upgrade/index")
 				.Fluent(c => c.MigrationUpgrade("index"))

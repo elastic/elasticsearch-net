@@ -35,7 +35,6 @@ namespace Tests.XPack.MachineLearning.DeleteModelSnapshot
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/model_snapshots/1";
-		protected override bool SupportsDeserialization => true;
 		protected override DeleteModelSnapshotDescriptor NewDescriptor() =>	new DeleteModelSnapshotDescriptor(CallIsolatedValue, "1");
 		protected override object ExpectJson => null;
 		protected override Func<DeleteModelSnapshotDescriptor, IDeleteModelSnapshotRequest> Fluent => f => f;

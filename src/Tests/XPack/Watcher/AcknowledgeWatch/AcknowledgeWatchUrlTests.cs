@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Watcher.AcknowledgeWatch
 {
-	public class AcknowledgeWatchUrlTests : IUrlTests
+	public class AcknowledgeWatchUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await PUT("/_xpack/watcher/watch/watch_id/_ack")
 				.Fluent(c => c.AcknowledgeWatch("watch_id"))

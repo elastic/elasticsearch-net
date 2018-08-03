@@ -4,23 +4,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using static Tests.Framework.RoundTripper;
+
 
 namespace Tests.Framework
 {
-	public class IsADictionarySerializationTests : SerializationTestBase
+	public class IsADictionarySerializationTests
 	{
-		// This doesn't technically support deserialization as the keys
-		// get camel cased on serialization and remain cased this way on deserialization,
-		// not matching the original key cased form
-		protected override bool SupportsDeserialization => false;
-
-		protected override object ExpectJson => new
-			{
-				key1 = "value1",
-				key2 = "value2",
-			};
+		protected object ExpectJson => new { key1 = "value1", key2 = "value2", };
 
 		// IIsADictionary implementations do not use the VerbatimDictionaryKeysConverter
 		// so keys are camel cased on serialization, in line with NEST conventions
@@ -33,7 +24,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			});
 
-			this.AssertSerializesAndRoundTrips(isADictionary);
+			Object(isADictionary).RoundTrips(this.ExpectJson);
 		}
 
 		private class MyIsADictionary : IsADictionaryBase<object, object>
@@ -42,13 +33,9 @@ namespace Tests.Framework
 		}
 	}
 
-	public class DictionarySerializationTests : SerializationTestBase
+	public class DictionarySerializationTests
 	{
-		protected override object ExpectJson => new
-			{
-				Key1 = "value1",
-				Key2 ="value2",
-			};
+		protected object ExpectJson => new { Key1 = "value1", Key2 ="value2", };
 
 		[U]
 		public void CanSerializeCustomGenericDictionary()
@@ -59,7 +46,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			this.AssertSerializesAndRoundTrips(dictionary);
+			Object(dictionary).RoundTrips(this.ExpectJson);
 		}
 
 		[U]
@@ -71,7 +58,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			this.AssertSerializesAndRoundTrips(dictionary);
+			Object(dictionary).RoundTrips(this.ExpectJson);
 		}
 
 		[U]
@@ -84,7 +71,7 @@ namespace Tests.Framework
 					{ "Key2", "value2" },
 				});
 
-			this.AssertSerializesAndRoundTrips(dictionary);
+			Object(dictionary).RoundTrips(this.ExpectJson);
 		}
 
 		[U]
@@ -96,7 +83,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			this.AssertSerializesAndRoundTrips(dictionary);
+			Object(dictionary).RoundTrips(this.ExpectJson);
 		}
 
 		[U]
@@ -108,7 +95,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			});
 
-			this.AssertSerializesAndRoundTrips(dictionary);
+			Object(dictionary).RoundTrips(this.ExpectJson);
 		}
 
 		[U]
@@ -120,7 +107,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			this.AssertSerializesAndRoundTrips(hashTable);
+			Object(hashTable).RoundTrips(this.ExpectJson);
 		}
 
 		[U]
@@ -132,7 +119,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			this.AssertSerializesAndRoundTrips(hashTable);
+			Object(hashTable).RoundTrips(this.ExpectJson);
 		}
 
 		private class MyDictionary : IDictionary

@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Migration.MigrationAssistance
 {
-	public class MigrationAssistanceUrlTests : IUrlTests
+	public class MigrationAssistanceUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_xpack/migration/assistance")
 				.Fluent(c => c.MigrationAssistance())

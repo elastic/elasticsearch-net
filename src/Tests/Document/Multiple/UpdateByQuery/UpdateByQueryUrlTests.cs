@@ -8,9 +8,9 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.UpdateByQuery
 {
-	public class UpdateByQueryUrlTests : IUrlTests
+	public class UpdateByQueryUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/project/_update_by_query")
 				.Fluent(c => c.UpdateByQuery<Project>(d => d.AllTypes()))

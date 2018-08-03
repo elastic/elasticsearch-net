@@ -23,7 +23,7 @@ namespace Tests.Search
 	 * NEST exposes this role rules DSL in a strongy typed fashion
 	 *
 	 */
-	public class RoleMappingRulesTests : SerializationTestBase
+	public class RoleMappingRulesTests
 	{
         /**==== Rule Conjunction
          *

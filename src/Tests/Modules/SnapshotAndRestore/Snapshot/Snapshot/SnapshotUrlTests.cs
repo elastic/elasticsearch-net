@@ -21,6 +21,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.Snapshot
 				.RequestAsync(c => c.SnapshotAsync(new SnapshotRequest(repository, snapshot)))
 				;
 
+
 			await ExpectUrl(HttpMethod.PUT, $"/_snapshot/{repository}/{snapshot}?pretty=true", s=>s.PrettyJson())
 				.Fluent(c => c.Snapshot(repository, snapshot))
 				.Request(c => c.Snapshot(new SnapshotRequest(repository, snapshot)))

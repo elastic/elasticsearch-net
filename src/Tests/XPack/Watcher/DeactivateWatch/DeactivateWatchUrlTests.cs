@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Watcher.DeactivateWatch
 {
-	public class DeactivateWatchUrlTests : IUrlTests
+	public class DeactivateWatchUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await PUT("/_xpack/watcher/watch/watch_id/_deactivate")
 				.Fluent(c => c.DeactivateWatch("watch_id"))

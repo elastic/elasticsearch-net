@@ -94,9 +94,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			 * We plan to make this more pluggable in the future
 			 */
 			// hide
-		    Expect(expected)
-			    .NoRoundTrip()
-			    .WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+			Expect(expected).FromRequest(createIndexResponse);
 		}
 	}
 }

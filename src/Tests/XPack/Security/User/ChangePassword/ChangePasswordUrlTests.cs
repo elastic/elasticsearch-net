@@ -10,10 +10,10 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.User.ChangePassword
 {
-	public class DeleteUserUrlTests : IUrlTests
+	public class DeleteUserUrlTests : UrlTestsBase
 	{
 		[U]
-		public async Task Urls()
+		public override async Task Urls()
 		{
 			await PUT("/_xpack/security/user/forloop/_password")
 				.Fluent(c => c.ChangePassword(p => p.Username("forloop").Password("password")))

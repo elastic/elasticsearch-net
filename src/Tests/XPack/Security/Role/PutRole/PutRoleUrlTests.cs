@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.Role.PutRole
 {
-	public class PutRoleUrlTests : IUrlTests
+	public class PutRoleUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await PUT("/_xpack/security/role/mpdreamz")
 				.Fluent(c => c.PutRole("mpdreamz"))

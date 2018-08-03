@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.NodesStats
 {
-	public class NodesStatsUrlTests : IUrlTests
+	public class NodesStatsUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_nodes/stats")
 				.Fluent(c => c.NodesStats())

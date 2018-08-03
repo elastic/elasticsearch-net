@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.RemoteInfo
 {
-	public class RemoteInfoUrlTests : IUrlTests
+	public class RemoteInfoUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_remote/info")
 				.Fluent(c => c.RemoteInfo())

@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.ClearCachedRealms
 {
-	public class ClearCachedRealmsUrlTests : IUrlTests
+	public class ClearCachedRealmsUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/security/realm/mpdreamz/_clear_cache")
 				.Fluent(c => c.ClearCachedRealms("mpdreamz"))

@@ -29,8 +29,6 @@ namespace Tests.XPack.Security.Authenticate
 
 		protected override string UrlPath => $"/_xpack/security/_authenticate";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override void ExpectResponse(IAuthenticateResponse response)
 		{
 			response.Username.Should().Be(Admin.Username);

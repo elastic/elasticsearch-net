@@ -9,24 +9,21 @@ namespace Tests.Framework
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		private TInterface FluentInstance { get; set; }
+		private TInterface FluentInstance { get; }
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
 
 		protected virtual bool TestObjectInitializer => true;
 
-		protected UsageTestBase()
-		{
+		protected UsageTestBase() : base(TestClient.DefaultInMemoryClient) =>
 			this.FluentInstance = this.Fluent(new TDescriptor());
-		}
 
 		[U] protected void SerializesInitializer()
 		{
-			if (this.TestObjectInitializer) this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
+			if (this.TestObjectInitializer) this.RoundTripsOrSerializes<TInterface>(this.Initializer);
 		}
 
-		[U] protected void SerializesFluent() =>
-			this.AssertSerializesAndRoundTrips(this.FluentInstance);
+		[U] protected void SerializesFluent() => this.RoundTripsOrSerializes(this.FluentInstance);
 	}
 
 	public abstract class PromiseUsageTestBase<TInterface, TDescriptor, TInitializer> : SerializationTestBase
@@ -34,19 +31,15 @@ namespace Tests.Framework
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		private TInterface FluentInstance { get; set; }
+		private TInterface FluentInstance { get; }
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, IPromise<TInterface>> Fluent { get; }
 
-		protected PromiseUsageTestBase()
-		{
+		protected PromiseUsageTestBase() : base(TestClient.DefaultInMemoryClient) =>
 			this.FluentInstance = this.Fluent(new TDescriptor())?.Value;
-		}
 
-		[U] protected void SerializesInitializer() =>
-			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
+		[U] protected void SerializesInitializer() => this.Tester.RoundTrips<TInterface>(this.Initializer, this.ExpectJson);
 
-		[U] protected void SerializesFluent() =>
-			this.AssertSerializesAndRoundTrips(this.FluentInstance);
+		[U] protected void SerializesFluent() => this.Tester.RoundTrips(this.FluentInstance, this.ExpectJson);
 	}
 }

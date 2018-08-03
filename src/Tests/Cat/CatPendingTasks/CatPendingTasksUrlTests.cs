@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cat.CatPendingTasks
 {
-	public class CatPendingTasksUrlTests : IUrlTests
+	public class CatPendingTasksUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_cat/pending_tasks")
 				.Fluent(c => c.CatPendingTasks())

@@ -4,6 +4,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
+using static Tests.Framework.RoundTripper;
 
 namespace Tests.ClientConcepts.HighLevel.Analysis
 {
@@ -138,7 +139,7 @@ namespace Tests.ClientConcepts.HighLevel.Analysis
             };
 
             // hide
-            RoundTripper.Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(createIndexResponse);
         }
 
         /**

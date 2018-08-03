@@ -42,7 +42,6 @@ namespace Tests.XPack.MachineLearning.StartDatafeed
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_start";
-		protected override bool SupportsDeserialization => true;
 		protected override StartDatafeedDescriptor NewDescriptor() => new StartDatafeedDescriptor(CallIsolatedValue + "-datafeed");
 		protected override object ExpectJson => null;
 		protected override Func<StartDatafeedDescriptor, IStartDatafeedRequest> Fluent => f => f;

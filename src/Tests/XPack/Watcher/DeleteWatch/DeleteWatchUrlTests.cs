@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Watcher.DeleteWatch
 {
-	public class DeleteWatchUrlTests : IUrlTests
+	public class DeleteWatchUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await DELETE("/_xpack/watcher/watch/watch_id")
 				.Fluent(c => c.DeleteWatch("watch_id"))

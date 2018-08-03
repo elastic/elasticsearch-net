@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.UpdateDatafeed
 {
-	public class UpdateDatafeedUrlTests : IUrlTests
+	public class UpdateDatafeedUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/ml/datafeeds/datafeed_id/_update")
 				.Fluent(c => c.UpdateDatafeed<object>("datafeed_id", p => p))

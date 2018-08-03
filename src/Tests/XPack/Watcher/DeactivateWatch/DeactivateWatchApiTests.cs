@@ -68,8 +68,6 @@ namespace Tests.XPack.Watcher.DeactivateWatch
 
 		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_deactivate";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override DeactivateWatchDescriptor NewDescriptor() => new DeactivateWatchDescriptor(CallIsolatedValue);
 
 		protected override object ExpectJson => null;

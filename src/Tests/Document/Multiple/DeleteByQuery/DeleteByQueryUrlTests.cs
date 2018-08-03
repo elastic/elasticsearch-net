@@ -8,9 +8,9 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.DeleteByQuery
 {
-	public class DeleteByQueryUrlTests : IUrlTests
+	public class DeleteByQueryUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/project/_delete_by_query")
 				.Fluent(c => c.DeleteByQuery<Project>(d => d.AllTypes()))

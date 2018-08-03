@@ -7,13 +7,14 @@ using Nest;
 using Tests.Framework.Integration;
 using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Framework
 {
 	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
 		: SerializationTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
-		where TCluster : ICluster<EphemeralClusterConfiguration> , new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster , new()
 		where TResponse : class, IResponse
 		where TInterface : class
 		where TDescriptor : class, TInterface
@@ -47,7 +48,7 @@ namespace Tests.Framework
 
         public TCluster Cluster { get; }
 
-		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage)
+		protected RequestResponseApiTestBase(TCluster cluster, EndpointUsage usage) : base(cluster.Client)
 		{
 			this._usage = usage ?? throw new ArgumentNullException(nameof(usage));
 

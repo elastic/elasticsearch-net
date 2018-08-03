@@ -37,7 +37,7 @@ namespace Tests.Document.Multiple.Reindex
 		}
 	}
 
-	public class ReindexApiTests : SerializationTestBase, IClusterFixture<ManualReindexCluster>
+	public class ReindexApiTests : IClusterFixture<ManualReindexCluster>
 	{
 		private readonly IObservable<IBulkAllResponse> _reindexManyTypesResult;
 		private readonly IObservable<IBulkAllResponse> _reindexSingleTypeResult;

@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.FlushJob
 {
-	public class FlushJobUrlTests : IUrlTests
+	public class FlushJobUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/ml/anomaly_detectors/job_id/_flush")
 				.Fluent(c => c.FlushJob("job_id"))

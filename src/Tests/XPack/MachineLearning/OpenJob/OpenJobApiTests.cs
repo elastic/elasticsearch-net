@@ -40,7 +40,6 @@ namespace Tests.XPack.MachineLearning.OpenJob
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_open";
-		protected override bool SupportsDeserialization => true;
 		protected override OpenJobDescriptor NewDescriptor() => new OpenJobDescriptor(CallIsolatedValue);
 		protected override object ExpectJson => null;
 		protected override Func<OpenJobDescriptor, IOpenJobRequest> Fluent => f => f;

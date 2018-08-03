@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.License.StartTrialLicense
 {
-	public class StartTrialLicenseUrlTests : IUrlTests
+	public class StartTrialLicenseUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/license/start_trial")
 				.Fluent(c => c.StartTrialLicense())

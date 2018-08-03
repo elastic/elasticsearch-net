@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.RoleMapping.DeleteRoleMapping
 {
-	public class DeleteRoleMappingUrlTests : IUrlTests
+	public class DeleteRoleMappingUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			var role = "can_read";
 			await DELETE($"/_xpack/security/role_mapping/{role}")

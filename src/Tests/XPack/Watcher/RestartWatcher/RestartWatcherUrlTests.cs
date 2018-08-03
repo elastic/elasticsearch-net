@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Watcher.RestartWatcher
 {
-	public class RestartWatcherUrlTests : IUrlTests
+	public class RestartWatcherUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/watcher/_restart")
 				.Fluent(c => c.RestartWatcher())

@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.License.GetLicense
 {
-	public class GetLicenseUrlTests : IUrlTests
+	public class GetLicenseUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_xpack/license")
 				.Fluent(c => c.GetLicense())

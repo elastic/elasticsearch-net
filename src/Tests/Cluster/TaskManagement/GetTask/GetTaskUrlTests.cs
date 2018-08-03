@@ -5,9 +5,9 @@ using Tests.Framework;
 
 namespace Tests.Cluster.TaskManagement.GetTask
 {
-	public class GetTaskUrlTests : IUrlTests
+	public class GetTaskUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			var id = new TaskId("fakeid:1");
 

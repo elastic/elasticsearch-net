@@ -125,7 +125,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             };
 
             // hide
-            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(createIndexResponse);
         }
 
         /** Manual mapping in this way is powerful but can become verbose and unwieldy for
@@ -196,7 +196,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
             };
 
             //hide
-            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(createIndexResponse);
 
             /**
 			 * `.AutoMap()` __**is idempotent**__ therefore calling it _before_ or _after_
@@ -217,7 +217,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		    );
 
             //hide
-            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(createIndexResponse);
         }
 
         /**
@@ -434,7 +434,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	        * through manual mapping
 	        */
             // hide
-            Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(createIndexResponse);
         }
     }
 }

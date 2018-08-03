@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.Authenticate
 {
-	public class AuthenticateUrlTests : IUrlTests
+	public class AuthenticateUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_xpack/security/_authenticate")
 				.Fluent(c => c.Authenticate())

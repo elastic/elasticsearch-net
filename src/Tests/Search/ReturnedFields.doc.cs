@@ -25,7 +25,7 @@ namespace Tests.Search
      * document (we use this term _loosely_ here); using stored fields and source filtering. Both are quite different
      * in how they work.
      */
-    public class ReturnedFields : SerializationTestBase
+    public class ReturnedFields
     {
         private readonly IElasticClient _client = TestClient.DisabledStreaming;
 

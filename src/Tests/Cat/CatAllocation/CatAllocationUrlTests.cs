@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cat.CatAllocation
 {
-	public class CatAllocationUrlTests : IUrlTests
+	public class CatAllocationUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_cat/allocation")
 				.Fluent(c => c.CatAllocation())

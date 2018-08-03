@@ -7,10 +7,10 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.User.GetUserAccessToken
 {
-	public class GetUserAccessTokenUserUrlTests : IUrlTests
+	public class GetUserAccessTokenUserUrlTests : UrlTestsBase
 	{
 		[U]
-		public async Task Urls()
+		public override async Task Urls()
 		{
 			var u = ClusterAuthentication.Admin.Username;
 			var p = ClusterAuthentication.Admin.Password;

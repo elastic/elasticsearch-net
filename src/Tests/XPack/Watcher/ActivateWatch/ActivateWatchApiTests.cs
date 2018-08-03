@@ -67,8 +67,6 @@ namespace Tests.XPack.Watcher.ActivateWatch
 
 		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_activate";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override ActivateWatchDescriptor NewDescriptor() => new ActivateWatchDescriptor(CallIsolatedValue);
 
 		protected override object ExpectJson => null;

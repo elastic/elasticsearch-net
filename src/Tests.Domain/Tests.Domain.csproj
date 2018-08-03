@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bogus" Version="22.1.2" />
-    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20180716T123929" />
+    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20180803T162924" />
     <ProjectReference Include="..\Nest\Nest.csproj" />
     <ProjectReference Include="..\Tests.Configuration\Tests.Configuration.csproj" />
   </ItemGroup>

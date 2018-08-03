@@ -6,10 +6,10 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 {
-	public class InvalidateUserAccessTokenUserUrlTests : IUrlTests
+	public class InvalidateUserAccessTokenUserUrlTests : UrlTestsBase
 	{
 		[U]
-		public async Task Urls()
+		public override async Task Urls()
 		{
 			var token = "some_token";
 			await DELETE("/_xpack/security/oauth2/token")

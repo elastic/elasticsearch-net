@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Document.Multiple.MultiGet
 {
-	public class MultiGetUrlTests : IUrlTests
+	public class MultiGetUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_mget")
 				.Fluent(c => c.MultiGet())

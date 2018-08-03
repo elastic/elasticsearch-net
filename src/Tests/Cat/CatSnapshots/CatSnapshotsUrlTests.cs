@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cat.CatSnapshots
 {
-	public class CatSnapshotsUrlTests : IUrlTests
+	public class CatSnapshotsUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_cat/snapshots/foo")
 				.Fluent(c => c.CatSnapshots("foo"))

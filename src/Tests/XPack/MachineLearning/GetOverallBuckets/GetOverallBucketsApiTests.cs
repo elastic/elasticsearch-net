@@ -76,7 +76,6 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/overall_buckets";
-		protected override bool SupportsDeserialization => true;
 		protected override GetOverallBucketsDescriptor NewDescriptor() => new GetOverallBucketsDescriptor(CallIsolatedValue);
 		protected override object ExpectJson => null;
 		protected override Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> Fluent => f => f;

@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.TaskManagement.TasksCancel
 {
-	public class TasksCancelUrlTests : IUrlTests
+	public class TasksCancelUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_tasks/_cancel")
 				.Fluent(c => c.CancelTasks())

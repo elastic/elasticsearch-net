@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Document.Multiple.Bulk
 {
-	public class BulkUrlTests : IUrlTests
+	public class BulkUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_bulk")
 				.Fluent(c => c.Bulk(s => s))

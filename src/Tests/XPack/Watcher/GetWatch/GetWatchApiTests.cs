@@ -218,8 +218,6 @@ namespace Tests.XPack.Watcher.GetWatch
 
 		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override GetWatchDescriptor NewDescriptor() => new GetWatchDescriptor(CallIsolatedValue);
 
 		protected override object ExpectJson => null;
@@ -318,8 +316,6 @@ namespace Tests.XPack.Watcher.GetWatch
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
 		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue + "x"}";
-
-		protected override bool SupportsDeserialization => true;
 
 		protected override GetWatchDescriptor NewDescriptor() => new GetWatchDescriptor(CallIsolatedValue + "x");
 

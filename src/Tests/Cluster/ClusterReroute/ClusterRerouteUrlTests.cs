@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.ClusterReroute
 {
-	public class ClusterRerouteUrlTests : IUrlTests
+	public class ClusterRerouteUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_cluster/reroute")
 				.Fluent(c => c.ClusterReroute(r=>r))

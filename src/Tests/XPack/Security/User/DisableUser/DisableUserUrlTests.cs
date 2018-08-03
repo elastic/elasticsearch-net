@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.User.DisableUser
 {
-	public class DisableUserUrlTests : IUrlTests
+	public class DisableUserUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await PUT("/_xpack/security/user/ironman/_disable")
 				.Fluent(c => c.DisableUser("ironman"))

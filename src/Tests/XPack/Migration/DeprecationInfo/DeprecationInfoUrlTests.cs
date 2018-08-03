@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Migration.DeprecationInfo
 {
-	public class DeprecationInfoUrlTests : IUrlTests
+	public class DeprecationInfoUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_xpack/migration/deprecations")
 				.Fluent(c => c.DeprecationInfo())

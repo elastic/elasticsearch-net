@@ -96,7 +96,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
             //hide
-			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+			Expect(expected).FromRequest(createIndexResponse);
 		}
 
         /**==== Ignoring inherited properties
@@ -163,7 +163,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
             //hide
-			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+			Expect(expected).FromRequest(createIndexResponse);
 		}
 	}
 }

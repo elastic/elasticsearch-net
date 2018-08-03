@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.DeleteJob
 {
-	public class DeleteJobUrlTests : IUrlTests
+	public class DeleteJobUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await DELETE("/_xpack/ml/anomaly_detectors/job_id")
 				.Fluent(c => c.DeleteJob("job_id"))

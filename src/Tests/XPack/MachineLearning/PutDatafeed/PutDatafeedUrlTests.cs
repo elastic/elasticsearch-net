@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.PutDatafeed
 {
-	public class PutDatafeedUrlTests : IUrlTests
+	public class PutDatafeedUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await PUT("/_xpack/ml/datafeeds/datafeed_id")
 				.Fluent(c => c.PutDatafeed<object>("datafeed_id", p => p))

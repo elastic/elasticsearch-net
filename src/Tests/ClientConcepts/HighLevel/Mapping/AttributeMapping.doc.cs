@@ -150,7 +150,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
             // hide
-			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(createIndexResponse);
 		}
         /**
          * Attribute mapping can be a convenient way to control how POCOs are mapped with minimal code, however

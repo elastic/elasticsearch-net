@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.License.DeleteLicense
 {
-	public class DeleteLicenseUrlTests : IUrlTests
+	public class DeleteLicenseUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await DELETE("/_xpack/license")
 				.Fluent(c => c.DeleteLicense())

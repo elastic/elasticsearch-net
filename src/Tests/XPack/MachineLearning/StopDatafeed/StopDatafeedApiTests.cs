@@ -42,7 +42,6 @@ namespace Tests.XPack.MachineLearning.StopDatafeed
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_stop";
-		protected override bool SupportsDeserialization => true;
 		protected override StopDatafeedDescriptor NewDescriptor() => new StopDatafeedDescriptor(CallIsolatedValue + "-datafeed");
 		protected override object ExpectJson => null;
 		protected override Func<StopDatafeedDescriptor, IStopDatafeedRequest> Fluent => f => f;

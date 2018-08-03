@@ -32,6 +32,7 @@ namespace Tests.Framework
 		}
 
 		public static void ShouldBeTrue(this bool b, IUrlParameter p) =>
-			b.Should().BeTrue(p?.GetString(TestClient.GlobalDefaultSettings) ?? "NULL");
+			b.Should().BeTrue(p?.GetString(TestClient.DefaultInMemoryClient.ConnectionSettings) ?? "NULL");
+
 	}
 }

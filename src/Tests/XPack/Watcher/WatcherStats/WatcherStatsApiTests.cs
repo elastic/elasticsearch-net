@@ -74,8 +74,6 @@ namespace Tests.XPack.Watcher.WatcherStats
 
 		protected override string UrlPath => "/_xpack/watcher/stats/_all";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override object ExpectJson => null;
 
 		protected override Func<WatcherStatsDescriptor, IWatcherStatsRequest> Fluent => f => f

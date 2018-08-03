@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.NodesHotThreads
 {
-	public class NodesHotThreadsUrlTests : IUrlTests
+	public class NodesHotThreadsUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_cluster/nodes/hotthreads")
 				.Fluent(c => c.NodesHotThreads())

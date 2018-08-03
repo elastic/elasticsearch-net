@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.ClusterSettings.ClusterGetSettings
 {
-	public class ClusterGetSettingsUrlTests : IUrlTests
+	public class ClusterGetSettingsUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_cluster/settings")
 				.Fluent(c => c.ClusterGetSettings())

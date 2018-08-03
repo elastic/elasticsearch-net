@@ -57,8 +57,6 @@ namespace Tests.XPack.Watcher.DeleteWatch
 
 		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override DeleteWatchDescriptor NewDescriptor() => new DeleteWatchDescriptor(CallIsolatedValue);
 
 		protected override object ExpectJson => null;
@@ -91,8 +89,6 @@ namespace Tests.XPack.Watcher.DeleteWatch
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 
 		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
-
-		protected override bool SupportsDeserialization => true;
 
 		protected override DeleteWatchDescriptor NewDescriptor() => new DeleteWatchDescriptor(CallIsolatedValue);
 

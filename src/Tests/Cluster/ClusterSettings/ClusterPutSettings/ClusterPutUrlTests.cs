@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 {
-	public class ClusterPutUrlTests : IUrlTests
+	public class ClusterPutUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await PUT("/_cluster/settings")
 				.Fluent(c => c.ClusterPutSettings(s=>s))

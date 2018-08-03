@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
+using static Tests.Framework.RoundTripper;
 using Name = Bogus.DataSets.Name;
 
 namespace Tests.Search.Hits
 {
-	public class HitsSerializationTests : SerializationTestBase
+	public class HitsSerializationTests
 	{
 		public class Person
 		{
@@ -285,8 +281,7 @@ namespace Tests.Search.Hits
 				}
 			}
 			";
-
-			var response = this.Deserialize<SearchResponse<Person>>(json);
+			var response = Expect(json).NoRoundTrip().DeserializesTo<SearchResponse<Person>>();
 
 			var nestedChildrenAggregation = response.Aggregations.Nested("children");
 			nestedChildrenAggregation.Should().NotBeNull();

@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.DeleteExpiredData
 {
-	public class DeleteExpiredDataUrlTests : IUrlTests
+	public class DeleteExpiredDataUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await DELETE("/_xpack/ml/_delete_expired_data")
 				.Fluent(c => c.DeleteExpiredData())

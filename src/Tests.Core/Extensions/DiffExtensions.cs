@@ -28,18 +28,13 @@ namespace Tests.Framework
 				o?.DeepSort();
 			}
 		}
-
-		public static void Diff(this byte[] expected, byte[] actual, string message = null)
-		{
-			Encoding.UTF8.GetString(expected).Diff(Encoding.UTF8.GetString(actual), message);
-		}
-		public static void Diff(this string expected, string actual, string message = null)
+		public static string Diff(this string expected, string actual, string message = null)
 		{
 			var d = new Differ();
 			var inlineBuilder = new InlineDiffBuilder(d);
 			var result = inlineBuilder.BuildDiffModel(expected, actual);
 			var hasChanges = result.Lines.Any(l => l.Type != ChangeType.Unchanged);
-			if (!hasChanges) return;
+			if (!hasChanges) return string.Empty;
 
 			var diff = result.Lines.Aggregate(new StringBuilder().AppendLine(message), (sb, line) =>
 			{
@@ -77,8 +72,7 @@ namespace Tests.Framework
 			approx = Regex.Replace(approx, @"^\s*\],?.*$", s => s.Value.Replace("]", "}"), RegexOptions.Multiline);
 			diff += approx + ";";
 
-
-			throw new Exception(diff.Substring(0, diff.Length > 4896 ? 4896 : diff.Length));
+			return diff;
 		}
 
 	}

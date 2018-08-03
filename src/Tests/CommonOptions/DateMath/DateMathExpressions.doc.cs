@@ -48,8 +48,9 @@ namespace Tests.CommonOptions.DateMath
 			var nonsense = "now||*asdaqwe";
 
             /** the resulting date math will assume the whole string is the anchor */
-            Expect(nonsense).WhenSerializing<Nest.DateMath>(nonsense)
-				.Result(dateMath => ((IDateMath)dateMath)
+            Expect(nonsense)
+	            .WhenSerializing<Nest.DateMath>(nonsense)
+				.AssertSubject(dateMath => ((IDateMath)dateMath)
 					.Anchor.Match(
 						d => d.Should().NotBe(default(DateTime)),
 						s => s.Should().Be(nonsense)
@@ -60,8 +61,9 @@ namespace Tests.CommonOptions.DateMath
              * anchor will be an actual `DateTime`, even after a serialization/deserialization round trip
              */
             var date = new DateTime(2015, 05, 05);
-			Expect("2015-05-05T00:00:00").WhenSerializing<Nest.DateMath>(date)
-				.Result(dateMath => ((IDateMath)dateMath)
+			Expect("2015-05-05T00:00:00")
+				.WhenSerializing<Nest.DateMath>(date)
+				.AssertSubject(dateMath => ((IDateMath)dateMath)
 				    .Anchor.Match(
 						d => d.Should().Be(date),
 						s => s.Should().BeNull()

@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cat.CatThreadPool
 {
-	public class CatThreadPoolUrlTests : IUrlTests
+	public class CatThreadPoolUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_cat/thread_pool")
 				.Fluent(c => c.CatThreadPool())

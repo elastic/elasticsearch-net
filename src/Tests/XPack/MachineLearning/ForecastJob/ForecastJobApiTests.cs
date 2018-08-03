@@ -85,7 +85,6 @@ namespace Tests.XPack.MachineLearning.ForecastJob
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_forecast";
-		protected override bool SupportsDeserialization => true;
 		protected override object ExpectJson => null;
 		protected override Func<ForecastJobDescriptor, IForecastJobRequest> Fluent => f => f;
 		protected override ForecastJobRequest Initializer => new ForecastJobRequest(CallIsolatedValue);

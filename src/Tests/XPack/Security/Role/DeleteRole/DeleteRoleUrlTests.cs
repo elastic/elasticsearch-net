@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.Role.DeleteRole
 {
-	public class DeleteRoleUrlTests : IUrlTests
+	public class DeleteRoleUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await DELETE("/_xpack/security/role/mpdreamz")
 				.Fluent(c => c.DeleteRole("mpdreamz"))

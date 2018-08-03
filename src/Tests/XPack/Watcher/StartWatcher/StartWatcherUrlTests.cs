@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Watcher.StartWatcher
 {
-	public class StartWatcherUrlTests : IUrlTests
+	public class StartWatcherUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/watcher/_start")
 				.Fluent(c => c.StartWatcher())

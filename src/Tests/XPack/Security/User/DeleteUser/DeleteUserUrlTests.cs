@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.User.DeleteUser
 {
-	public class DeleteUserUrlTests : IUrlTests
+	public class DeleteUserUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await DELETE("/_xpack/security/user/mpdreamz")
 				.Fluent(c => c.DeleteUser("mpdreamz"))

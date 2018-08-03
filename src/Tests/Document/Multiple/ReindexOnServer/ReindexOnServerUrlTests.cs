@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Document.Multiple.ReindexOnServer
 {
-	public class ReindexOnServerUrlTests : IUrlTests
+	public class ReindexOnServerUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_reindex")
 				.Fluent(c => c.ReindexOnServer(f=>f))

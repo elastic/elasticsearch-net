@@ -196,13 +196,9 @@ namespace Tests.QueryDsl.BoolDsl
             };
 
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(firstSearchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(firstSearchResponse);
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(secondSearchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(secondSearchResponse);
         }
 
         /** A naive implementation of operator overloading would rewrite
@@ -300,13 +296,9 @@ namespace Tests.QueryDsl.BoolDsl
             };
 
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(firstSearchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(firstSearchResponse);
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(secondSearchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(secondSearchResponse);
         }
 
         // hide
@@ -378,13 +370,9 @@ namespace Tests.QueryDsl.BoolDsl
             };
 
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(firstSearchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(firstSearchResponse);
             //hide
-            Expect(expected)
-                .NoRoundTrip()
-                .WhenSerializing(Encoding.UTF8.GetString(secondSearchResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(secondSearchResponse);
         }
 
         //hide

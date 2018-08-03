@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.Role.GetRoleMapping
 {
-	public class GetRoleMappingUrlTests : IUrlTests
+	public class GetRoleMappingUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_xpack/security/role_mapping")
 				.Fluent(c => c.GetRoleMapping())

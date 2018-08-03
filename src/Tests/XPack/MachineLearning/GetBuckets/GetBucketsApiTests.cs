@@ -34,7 +34,6 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
-		protected override bool SupportsDeserialization => true;
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);
 		protected override object ExpectJson => null;
 		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent => f => f;
@@ -83,7 +82,6 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
-		protected override bool SupportsDeserialization => true;
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);
 		protected override object ExpectJson => null;
 		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent => f => f.Timestamp(new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero));

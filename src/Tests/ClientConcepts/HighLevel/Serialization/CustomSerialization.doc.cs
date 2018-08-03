@@ -240,9 +240,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			 */
 
 			// hide
-			Expect(expected)
-				.NoRoundTrip()
-				.WhenSerializing(Encoding.UTF8.GetString(indexResponse.ApiCall.RequestBodyInBytes));
+			Expect(expected, preserveNullInExpected: true).FromRequest(indexResponse);
 		}
 	}
 }

@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.OpenJob
 {
-	public class OpenJobUrlTests : IUrlTests
+	public class OpenJobUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/ml/anomaly_detectors/job_id/_open")
 				.Fluent(c => c.OpenJob("job_id"))

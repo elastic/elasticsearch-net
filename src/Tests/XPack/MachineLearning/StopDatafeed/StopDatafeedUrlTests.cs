@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.StopDatafeed
 {
-	public class StopDatafeedUrlTests : IUrlTests
+	public class StopDatafeedUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/ml/datafeeds/datafeed_id/_stop")
 				.Fluent(c => c.StopDatafeed("datafeed_id"))

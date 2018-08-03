@@ -32,7 +32,6 @@ namespace Tests.XPack.MachineLearning.CloseJob
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_close";
-		protected override bool SupportsDeserialization => true;
 		protected override CloseJobDescriptor NewDescriptor() => new CloseJobDescriptor(CallIsolatedValue);
 		protected override object ExpectJson => null;
 		protected override Func<CloseJobDescriptor, ICloseJobRequest> Fluent => f => f;

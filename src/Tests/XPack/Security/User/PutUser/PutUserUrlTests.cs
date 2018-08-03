@@ -5,9 +5,9 @@ using Tests.Framework;
 
 namespace Tests.XPack.Security.User.PutUser
 {
-	public class PutUserUrlTests : IUrlTests
+	public class PutUserUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await UrlTester.PUT("/_xpack/security/user/mpdreamz")
 				.Fluent(c => c.PutUser("mpdreamz"))

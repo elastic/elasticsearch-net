@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.GetJobs
 {
-	public class GetJobsUrlTests : IUrlTests
+	public class GetJobsUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_xpack/ml/anomaly_detectors")
 				.Fluent(c => c.GetJobs())

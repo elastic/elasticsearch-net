@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.Ping
 {
-	public class PingUrlTests : IUrlTests
+	public class PingUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await HEAD("/")
 				.Fluent(c => c.Ping())

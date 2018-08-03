@@ -25,8 +25,6 @@ namespace Tests.XPack.Watcher.StartWatcher
 
 		protected override string UrlPath => "/_xpack/watcher/_start";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override object ExpectJson => null;
 
 		protected override Func<StartWatcherDescriptor, IStartWatcherRequest> Fluent => f => f;

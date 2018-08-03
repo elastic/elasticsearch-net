@@ -6,10 +6,11 @@ using Nest;
 using Tests.Framework;
 using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
+using static Tests.Framework.RoundTripper;
 
 namespace Tests.Ingest
 {
-	public class ProcessorSerializationTests : SerializationTestBase
+	public class ProcessorSerializationTests
 	{
 		[U]
 		public void CanSerializeAndDeserializeAllProcessors()
@@ -24,8 +25,7 @@ namespace Tests.Ingest
 				.ToList();
 
 			var pipeline = new Pipeline { Processors = processors };
-			var deserializedPipeline = this.Deserialize<Pipeline>(this.Serialize(pipeline));
-
+			var deserializedPipeline = Object(pipeline).RoundTrips();
 			deserializedPipeline.Processors.Should().HaveCount(pipeline.Processors.Count());
 			deserializedPipeline.Processors.Select(p => p.Name).Distinct().Should().HaveCount(pipeline.Processors.Count());
 		}

@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.GetBuckets
 {
-	public class GetBucketsUrlTests : IUrlTests
+	public class GetBucketsUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_xpack/ml/anomaly_detectors/job_id/results/buckets")
 				.Fluent(c => c.GetBuckets("job_id"))

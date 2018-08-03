@@ -23,7 +23,6 @@ namespace Tests.XPack.MachineLearning.DeleteExpiredData
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"_xpack/ml/_delete_expired_data";
-		protected override bool SupportsDeserialization => true;
 		protected override DeleteExpiredDataDescriptor NewDescriptor() => new DeleteExpiredDataDescriptor();
 		protected override object ExpectJson => null;
 		protected override Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> Fluent => f => f;

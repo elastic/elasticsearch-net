@@ -151,7 +151,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 			// hide
-			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+			Expect(expected).FromRequest(createIndexResponse);
 		}
 
 		public class ParentWithStringId : IgnoringProperties.Parent
@@ -207,7 +207,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 			// hide
-			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+			Expect(expected).FromRequest(createIndexResponse);
 		}
 		/**
 		 * Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.
@@ -330,7 +330,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 			//hide
-			Expect(expected).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+            Expect(expected).FromRequest(createIndexResponse);
 
 			/** Now let's specify a maxRecursion of `3` */
 			createIndexResponse = _client.CreateIndex("myindex", c => c
@@ -381,7 +381,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 			//hide
-			Expect(expectedWithMaxRecursion).NoRoundTrip().WhenSerializing(Encoding.UTF8.GetString(createIndexResponse.ApiCall.RequestBodyInBytes));
+            Expect(expectedWithMaxRecursion).FromRequest(createIndexResponse);
 		}
 
 		//hide
@@ -439,7 +439,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expectedWithMaxRecursion).NoRoundTrip().WhenSerializing((IPutMappingRequest) withMaxRecursionDescriptor);
+            Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
 		}
 	}
 }

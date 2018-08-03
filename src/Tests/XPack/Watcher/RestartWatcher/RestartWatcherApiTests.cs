@@ -25,8 +25,6 @@ namespace Tests.XPack.Watcher.RestartWatcher
 
 		protected override string UrlPath => "/_xpack/watcher/_restart";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override object ExpectJson => null;
 
 		protected override Func<RestartWatcherDescriptor, IRestartWatcherRequest> Fluent => f => f;

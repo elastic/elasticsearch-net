@@ -46,8 +46,6 @@ namespace Tests.Document.Single.Create
 		protected override string UrlPath
 			=> $"/project/doc/{CallIsolatedValue}/_create?wait_for_active_shards=1&refresh=true&routing=route";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override object ExpectJson =>
 			new
 			{

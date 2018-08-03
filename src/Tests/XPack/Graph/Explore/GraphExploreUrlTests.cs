@@ -8,9 +8,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Graph.Explore
 {
-	public class GraphExploreUrlTests : IUrlTests
+	public class GraphExploreUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/project/doc/_xpack/graph/_explore")
 				.Fluent(c => c.GraphExplore<Project>(d => d))

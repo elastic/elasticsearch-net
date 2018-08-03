@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 using Xunit;
+using Xunit.Sdk;
+using static Tests.Framework.RoundTripper;
 
 namespace Tests.Search.Request
 {
@@ -92,7 +94,7 @@ namespace Tests.Search.Request
 	}
 
 	//hide
-	public class SourceFilteringSerializationTests : SerializationTestBase
+	public class SourceFilteringSerializationTests
 	{
 		internal class WithSourceFilterProperty
 		{
@@ -103,7 +105,7 @@ namespace Tests.Search.Request
 		[U]
 		public void CanDeserializeBoolean()
 		{
-			var falseCase = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": false }");
+			var falseCase = Expect("{ \"_source\": false }").DeserializesTo<WithSourceFilterProperty>();
 			falseCase.Should().NotBeNull();
 			falseCase.SourceFilter.Should().NotBeNull();
 			falseCase.SourceFilter.Match
@@ -111,7 +113,7 @@ namespace Tests.Search.Request
 				f => Assert.True(false, "Expected bool but found ISourceFilter")
 			);
 
-			var trueCase = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": true }");
+			var trueCase = Expect("{ \"_source\": true }").DeserializesTo<WithSourceFilterProperty>();
 			trueCase.Should().NotBeNull();
 			trueCase.SourceFilter.Should().NotBeNull();
 			trueCase.SourceFilter.Match
@@ -123,7 +125,7 @@ namespace Tests.Search.Request
 		[U]
 		public void CanDeserializeArray()
 		{
-			var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": [\"obj.*\"] }");
+			var o = Expect("{ \"_source\": [\"obj.*\"] }").DeserializesTo<WithSourceFilterProperty>();
 			o.Should().NotBeNull();
 			o.SourceFilter.Match(
 				b => Assert.True(false, "Expected ISourceFilter but found bool"),
@@ -139,7 +141,7 @@ namespace Tests.Search.Request
 		[U]
 		public void CanDeserializeString()
 		{
-			var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": \"obj.*\" }");
+			var o = Expect("{ \"_source\": \"obj.*\" }").DeserializesTo<WithSourceFilterProperty>();
 			o.Should().NotBeNull();
 			o.SourceFilter.Match(
 				b => Assert.True(false, "Expected ISourceFilter but found bool"),
@@ -154,7 +156,7 @@ namespace Tests.Search.Request
 		[U]
 		public void CanDeserializeObject()
 		{
-			var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": { \"includes\": [\"obj.*\"], \"excludes\": [\"foo.*\"] } }");
+			var o = Expect("{ \"_source\": { \"includes\": [\"obj.*\"], \"excludes\": [\"foo.*\"] } }").DeserializesTo<WithSourceFilterProperty>();
 			o.Should().NotBeNull();
 			o.SourceFilter.Match(
 				b => Assert.True(false, "Expected ISourceFilter but found bool"),
@@ -165,7 +167,6 @@ namespace Tests.Search.Request
 					f.Excludes.Should().Contain("foo.*");
 				}
 			);
-;
 		}
 	}
 }

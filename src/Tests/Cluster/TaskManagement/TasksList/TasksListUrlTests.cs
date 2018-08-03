@@ -5,9 +5,9 @@ using Tests.Framework;
 
 namespace Tests.Cluster.TaskManagement.TasksList
 {
-	public class TasksListUrlTests : IUrlTests
+	public class TasksListUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await UrlTester.GET("/_tasks")
 				.Fluent(c => c.ListTasks())

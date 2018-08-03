@@ -59,7 +59,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			Expect(usingDefaults).FromRequest(call);
 
 			WithSourceSerializer((s, c) => new CustomSettingsSerializerBase(s, c))
-				.Expect(withSourceSerializer)
+				.Expect(withSourceSerializer, preserveNullInExpected: true)
 				.FromRequest(call);
 		}
 
@@ -72,7 +72,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		private static void SerializesSourceSerializer<T>(T o, object withSourceSerializer)
 		{
 			WithSourceSerializer((s, c) => new CustomSettingsSerializerBase(s, c))
-				.Expect(withSourceSerializer)
+				.Expect(withSourceSerializer, preserveNullInExpected: true)
 				.WhenSerializing(o);
 		}
 

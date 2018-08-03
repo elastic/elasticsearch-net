@@ -25,8 +25,6 @@ namespace Tests.XPack.Watcher.StopWatcher
 
 		protected override string UrlPath => "/_xpack/watcher/_stop";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override object ExpectJson => null;
 
 		protected override Func<StopWatcherDescriptor, IStopWatcherRequest> Fluent => f => f;

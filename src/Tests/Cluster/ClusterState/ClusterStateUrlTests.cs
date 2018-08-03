@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.ClusterState
 {
-	public class ClusterStateUrlTests : IUrlTests
+	public class ClusterStateUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_cluster/state")
 				.Fluent(c => c.ClusterState())

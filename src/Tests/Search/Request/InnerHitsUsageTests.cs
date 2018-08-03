@@ -226,8 +226,6 @@ namespace Tests.Search.Request
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/{Index}/{RoyalSeeder.RoyalType}/_search";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override SearchDescriptor<TRoyal> NewDescriptor() => new SearchDescriptor<TRoyal>().Index(Index);
 	}
 

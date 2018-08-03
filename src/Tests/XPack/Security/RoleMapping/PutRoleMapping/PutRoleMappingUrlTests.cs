@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 {
-	public class PutRoleMappingUrlTests : IUrlTests
+	public class PutRoleMappingUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			var role = "can_read";
 			await PUT($"/_xpack/security/role_mapping/{role}")

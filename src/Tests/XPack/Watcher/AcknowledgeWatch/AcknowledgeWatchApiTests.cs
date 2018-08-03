@@ -83,8 +83,6 @@ namespace Tests.XPack.Watcher.AcknowledgeWatch
 
 		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_ack/test_index";
 
-		protected override bool SupportsDeserialization => true;
-
 		protected override AcknowledgeWatchDescriptor NewDescriptor() => new AcknowledgeWatchDescriptor(CallIsolatedValue);
 
 		protected override object ExpectJson => null;

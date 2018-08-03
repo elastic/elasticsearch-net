@@ -9,9 +9,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.NodesUsage
 {
-	public class NodesUsageUrlTests : IUrlTests
+	public class NodesUsageUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await GET("/_nodes/usage")
 				.Fluent(c => c.NodesUsage(d => d))

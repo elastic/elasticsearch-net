@@ -25,7 +25,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		public void RequestPipeline()
 		{
             // hide
-			var settings = TestClient.GlobalDefaultSettings;
+			var settings = TestClient.DefaultInMemoryClient.ConnectionSettings;
 
 			/** When calling `Request()` or `RequestAsync()` on an `ITransport`,
 			* the whole coordination of the request is deferred to a new instance in a `using` block.
@@ -55,7 +55,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			 * You can pass your own `IRequestPipeline` implementation to the transport when instantiating a client,
 			* allowing you to have requests executed in your own custom request pipeline
 			*/
-			var transport = new Transport<ConnectionSettings>(
+			var transport = new Transport<IConnectionSettingsValues>(
 				settings,
 				requestPipelineFactory,
 				DateTimeProvider.Default,

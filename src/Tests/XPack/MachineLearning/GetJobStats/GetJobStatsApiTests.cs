@@ -33,7 +33,6 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/_stats";
-		protected override bool SupportsDeserialization => true;
 		protected override object ExpectJson => null;
 		protected override Func<GetJobStatsDescriptor, IGetJobStatsRequest> Fluent => f => f;
 		protected override GetJobStatsRequest Initializer => new GetJobStatsRequest();
@@ -96,7 +95,6 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_stats";
-		protected override bool SupportsDeserialization => true;
 		protected override object ExpectJson => null;
 		protected override Func<GetJobStatsDescriptor, IGetJobStatsRequest> Fluent => f => f.JobId(CallIsolatedValue);
 		protected override GetJobStatsRequest Initializer => new GetJobStatsRequest(CallIsolatedValue);

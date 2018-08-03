@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.MachineLearning.DeleteModelSnapshot
 {
-	public class DeleteModelSnapshotUrlTests : IUrlTests
+	public class DeleteModelSnapshotUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await DELETE("/_xpack/ml/anomaly_detectors/job_id/model_snapshots/snapshot_id")
 				.Fluent(c => c.DeleteModelSnapshot("job_id", "snapshot_id"))

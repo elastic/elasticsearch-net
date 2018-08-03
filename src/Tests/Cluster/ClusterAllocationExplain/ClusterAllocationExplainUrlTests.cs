@@ -6,9 +6,9 @@ using Tests.Framework.MockData;
 
 namespace Tests.Cluster.ClusterAllocationExplain
 {
-	public class ClusterAllocationExplainUrlTests : IUrlTests
+	public class ClusterAllocationExplainUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await UrlTester.POST("/_cluster/allocation/explain?include_yes_decisions=true")
 				.Fluent(c => c.ClusterAllocationExplain(s => s.Index<Project>().Shard(0).Primary(true).IncludeYesDecisions()))

@@ -6,9 +6,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.Security.Role.ClearCachedRoles
 {
-	public class ClearCachedRolesUrlTests : IUrlTests
+	public class ClearCachedRolesUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			var role = "some_role";
 			await POST($"/_xpack/security/role/{role}/_clear_cache")

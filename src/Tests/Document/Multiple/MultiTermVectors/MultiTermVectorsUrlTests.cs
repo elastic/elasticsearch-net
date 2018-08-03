@@ -7,9 +7,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Document.Multiple.MultiTermVectors
 {
-	public class MultiTermVectorsUrlTests : IUrlTests
+	public class MultiTermVectorsUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await POST("/_mtermvectors")
 				.Fluent(c => c.MultiTermVectors())

@@ -33,7 +33,6 @@ namespace Tests.XPack.MachineLearning.DeleteJob
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}";
-		protected override bool SupportsDeserialization => true;
 		protected override DeleteJobDescriptor NewDescriptor() => new DeleteJobDescriptor(CallIsolatedValue);
 		protected override object ExpectJson => null;
 		protected override Func<DeleteJobDescriptor, IDeleteJobRequest> Fluent => f => f;
