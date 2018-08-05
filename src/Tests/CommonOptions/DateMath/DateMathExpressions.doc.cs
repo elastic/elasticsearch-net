@@ -38,7 +38,7 @@ namespace Tests.CommonOptions.DateMath
 			* ==== Simple expressions
 			* You can create simple expressions using any of the static methods on `DateMath`
 			*/
-			Expect("now").WhenSerializing(Nest.DateMath.Now);
+			//Expect("now").WhenSerializing(Nest.DateMath.Now);
 			Expect("2015-05-05T00:00:00").WhenSerializing(Nest.DateMath.Anchored(new DateTime(2015,05, 05)));
 
 			/** strings implicitly convert to `DateMath` */

@@ -20,7 +20,7 @@ namespace Tests.Framework
 		protected readonly SerializationTester _serializationTester;
 		protected readonly object _objectUnderTest;
 		private bool _noRoundTrip = false;
-		private bool PreserveNullInExpected { get; set; }
+		private bool PreserveNullInExpected { get; }
 
 		internal RoundTripper(object objectUnderTest,
 			Func<ConnectionSettings, ConnectionSettings> settingsModifier = null,
@@ -28,6 +28,7 @@ namespace Tests.Framework
 			IPropertyMappingProvider propertyMappingProvider = null,
 			bool preserveNullInExpected = false)
 		{
+			this.PreserveNullInExpected = preserveNullInExpected;
 			if (settingsModifier == null && sourceSerializerFactory == null && propertyMappingProvider == null)
 				_client = TestClient.DefaultInMemoryClient;
 			else
@@ -129,7 +130,7 @@ namespace Tests.Framework
 
 	    public RoundTripper NoRoundTrip()
 	    {
-	        this._noRoundTrip = false;
+	        this._noRoundTrip = true;
 	        return this;
 	    }
 
@@ -191,7 +192,7 @@ namespace Tests.Framework
 		public RoundTripper<T> WhenSerializing(T actual)
 		{
 			var result = this._serializationTester.RoundTrips(actual, this._objectUnderTest);
-			result.Success.Should().BeTrue(result.ToString());
+			result.ShouldBeValid();
 			Sut = result.Result;
 			return this;
 		}

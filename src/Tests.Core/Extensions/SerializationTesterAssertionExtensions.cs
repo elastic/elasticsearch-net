@@ -9,7 +9,7 @@ namespace Tests.Framework
 
 		public static T AssertRoundTrip<T>(this SerializationTester tester, T @object, string message = null, bool preserveNullInExpected = false)
 		{
-			var roundTripResult = tester.RoundTrips(@object, preserveNullInExpected);
+			var roundTripResult = tester.RoundTrips(@object, preserveNullInExpected: preserveNullInExpected);
 			roundTripResult.ShouldBeValid(message);
 			return roundTripResult.Result;
 		}

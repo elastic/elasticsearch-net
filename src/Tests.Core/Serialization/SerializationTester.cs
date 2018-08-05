@@ -51,7 +51,7 @@ namespace Tests.Framework
 
 		public override string ToString()
 		{
-			var s = $"RoundTrip: {Itterations} itterations";
+			var s = $"RoundTrip: {Itterations.ToOrdinal()} itteration";
 			s += Environment.NewLine;
 			s += base.ToString();
 			return s;
@@ -72,14 +72,12 @@ namespace Tests.Framework
 
 		public RoundTripResult<T> RoundTrips<T>(T @object, bool preserveNullInExpected = false)
 		{
-			var serialized = this.Serialize(@object);
+			var serialized = this.SerializeUsingClientDefault(@object);
 			return this.RoundTrips(@object, serialized);
 		}
 		public RoundTripResult<T> RoundTrips<T>(T @object, object expectedJson, bool preserveNullInExpected = false)
 		{
-			var expectedSerializerSettings = this.ExpectedJsonSerializerSettings(preserveNullInExpected);
-			var expectedJsonString = JsonConvert.SerializeObject(expectedJson, Formatting.None, expectedSerializerSettings);
-			var expectedJsonToken = JToken.Parse(expectedJsonString);
+            var expectedJsonToken = this.ExpectedJsonToJtoken(expectedJson, preserveNullInExpected);
 
 			var result = new RoundTripResult<T>() { Success = false };
 			if (expectedJsonToken == null)
@@ -92,7 +90,7 @@ namespace Tests.Framework
 				return result;
 
 			@object = this.Deserialize<T>(result.Serialized);
-			++result.Itterations;
+			result.Itterations += 1;
 
 			if (!this.SerializesAndMatches(@object, expectedJsonToken, result))
 				return result;
@@ -124,35 +122,37 @@ namespace Tests.Framework
 
 		private JToken ExpectedJsonToJtoken(object expectedJson, bool preserveNullInFromJson)
 		{
-			var expectedJsonString = this.ExpectedJsonString(expectedJson, preserveNullInFromJson);
-			var expectedJsonToken = JToken.Parse(expectedJsonString);
-			return expectedJsonToken;
+			switch (expectedJson)
+			{
+				case string s: return new JValue(s);
+				case byte[] utf8: return new JValue(Encoding.UTF8.GetString(utf8));
+				default:
+					var expectedJsonString = this.ExpectedJsonString(expectedJson, preserveNullInFromJson);
+					return JToken.Parse(expectedJsonString);
+			}
 		}
 
 		private string ExpectedJsonString(object expectedJson, bool preserveNullInFromJson)
 		{
-			var expectedSerializerSettings = this.ExpectedJsonSerializerSettings(preserveNullInFromJson);
-			string expectedJsonString = null;
 			switch (expectedJson)
 			{
-				case string s: expectedJsonString = s; break;
-				case byte[] utf8: expectedJsonString = Encoding.UTF8.GetString(utf8); break;
+				case string s: return s;
+				case byte[] utf8: return Encoding.UTF8.GetString(utf8);
 				default:
-					expectedJsonString = JsonConvert.SerializeObject(expectedJson, Formatting.None, expectedSerializerSettings);
-					break;
+					var expectedSerializerSettings = this.ExpectedJsonSerializerSettings(preserveNullInFromJson);
+					return JsonConvert.SerializeObject(expectedJson, Formatting.None, expectedSerializerSettings);
 			}
-			return expectedJsonString;
 		}
 
 		private bool SerializesAndMatches<T>(T @object, JToken expectedJsonToken, RoundTripResult<T> result)
 		{
-			result.Serialized = this.Serialize(@object);
+			result.Serialized = this.SerializeUsingClientDefault(@object);
 			return expectedJsonToken.Type == JTokenType.Array
 				? ArrayMatches((JArray)expectedJsonToken, result)
 				: TokenMatches(expectedJsonToken, result);
 		}
 
-		private string Serialize(object o)
+		private string SerializeUsingClientDefault(object o)
 		{
 			switch (o)
 			{
@@ -162,7 +162,6 @@ namespace Tests.Framework
 					return this.Serializer.SerializeToString(o);
 			}
 		}
-
 		private T Deserialize<T>(string json)
 		{
 			using(var ms = _client.ConnectionSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json)))
@@ -184,20 +183,39 @@ namespace Tests.Framework
 
 		private static bool TokenMatches<T>(JToken expectedJson, RoundTripResult<T> result, string itemJson = null, int item = -1)
 		{
-			var actualJson = JToken.Parse(itemJson ?? result.Serialized);
-			var matches = JToken.DeepEquals(expectedJson, actualJson);
-			if (matches) return true;
-
+			var actualJson = itemJson ?? result.Serialized;
 			var message = "This is the first time I am serializing";
 			if (result.Itterations > 0)
 				message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
 			if (item > -1) message += $". This is while comparing the {item.ToOrdinal()} item";
 
-			(actualJson as JObject)?.DeepSort();
+			if (expectedJson.Type == JTokenType.String)
+			{
+				return MatchString(expectedJson.Value<string>(), actualJson, result, message);
+			}
+			return MatchJson(expectedJson, actualJson, result, message);
+		}
+
+		private static bool MatchString<T>(string expected, string actual, RoundTripResult<T> result, string message)
+		{
+			//Serialize() returns quoted strings always.
+			var diff = expected.CreateCharacterDifference(actual, message);
+			if (string.IsNullOrWhiteSpace(diff)) return true;
+			result.DiffFromExpected = diff;
+			return false;
+		}
+
+		private static bool MatchJson<T>(JToken expectedJson, string actualJson, RoundTripResult<T> result, string message)
+		{
+			var actualJsonToken = JToken.Parse(actualJson);
+			var matches = JToken.DeepEquals(expectedJson, actualJsonToken);
+			if (matches) return true;
+
+			(actualJsonToken as JObject)?.DeepSort();
 			(expectedJson as JObject)?.DeepSort();
 
 			var sortedExpected = expectedJson.ToString();
-			var sortedActual = actualJson.ToString();
+			var sortedActual = actualJsonToken.ToString();
 			var diff = sortedExpected.Diff(sortedActual, message);
 			if (string.IsNullOrWhiteSpace(diff)) return true;
 			result.DiffFromExpected = diff;
