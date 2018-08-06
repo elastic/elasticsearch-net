@@ -2,7 +2,7 @@
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Tests.Framework;
+using Tests.Core.Client;
 
 namespace Tests.Reproduce
 {

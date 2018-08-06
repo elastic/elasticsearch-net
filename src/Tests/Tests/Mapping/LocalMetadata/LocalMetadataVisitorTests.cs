@@ -6,7 +6,6 @@ using Nest;
 using Tests.Mapping.Types.Core.Text;
 using Xunit;
 using Tests.Framework;
-using Tests.Framework.MockData;
 using Tests.Mapping.LocalMetadata.Extensions;
 
 namespace Tests.Mapping.LocalMetadata

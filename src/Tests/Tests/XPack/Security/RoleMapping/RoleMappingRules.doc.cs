@@ -10,9 +10,8 @@ using Nest;
 using Newtonsoft.Json.Linq;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 using Xunit;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.Search
 {

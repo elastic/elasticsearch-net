@@ -4,7 +4,7 @@ using Elastic.Managed.ConsoleWriters;
 using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Tasks;
 
-namespace Tests.Framework.ManagedElasticsearch.Tasks
+namespace Tests.Core.ManagedElasticsearch.Tasks
 {
 	public class EnsureWatcherActionConfigurationInElasticsearchYaml : ClusterComposeTask
 	{

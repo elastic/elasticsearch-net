@@ -4,13 +4,14 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
 using System.Threading.Tasks;
 using FluentAssertions;
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 

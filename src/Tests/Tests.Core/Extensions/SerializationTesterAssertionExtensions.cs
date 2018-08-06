@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
+using Tests.Core.Serialization;
 
-namespace Tests.Framework
+namespace Tests.Core.Extensions
 {
 	public static class SerializationTesterAssertionExtensions
 	{

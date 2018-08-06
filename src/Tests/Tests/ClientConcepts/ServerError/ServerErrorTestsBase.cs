@@ -2,9 +2,10 @@
 using FluentAssertions;
 using Nest;
 using Tests.Core;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.ServerError
 {

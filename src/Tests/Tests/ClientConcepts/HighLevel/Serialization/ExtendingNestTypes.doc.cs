@@ -6,10 +6,10 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json;
 using Tests.ClientConcepts.HighLevel.Mapping;
+using Tests.Core.Client;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {

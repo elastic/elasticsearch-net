@@ -1,9 +1,8 @@
 ﻿using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 
 namespace Tests.Reproduce
 {

@@ -8,7 +8,6 @@ using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Tests.Framework;
 
 namespace Tests.Reproduce
 {

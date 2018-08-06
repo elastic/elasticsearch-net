@@ -3,7 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 // ReSharper disable SuggestVarOrType_Elsewhere
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable SuggestVarOrType_SimpleTypes

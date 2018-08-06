@@ -2,11 +2,11 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 using Tests.QueryDsl.BoolDsl;
 
 namespace Tests.QueryDsl.Compound.Bool

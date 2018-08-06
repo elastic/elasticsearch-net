@@ -3,6 +3,7 @@ using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Framework;
 
 namespace Tests.Search.Request

@@ -4,11 +4,12 @@ using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json.Linq;
+using Tests.Core.Client;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.Search
 {

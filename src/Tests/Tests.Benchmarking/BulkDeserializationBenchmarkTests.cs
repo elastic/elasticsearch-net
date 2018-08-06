@@ -6,6 +6,7 @@ using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
 using System.Text;
+using Tests.Core.Client;
 using Tests.Framework.Benchmarks;
 
 

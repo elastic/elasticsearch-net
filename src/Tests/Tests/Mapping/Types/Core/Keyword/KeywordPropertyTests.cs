@@ -2,9 +2,9 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Tests.Framework.Promisify;

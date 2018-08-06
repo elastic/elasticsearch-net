@@ -1,8 +1,7 @@
 ﻿﻿using System.Threading.Tasks;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.MockData;
-using static Tests.Framework.UrlTester;
+ using static Tests.Framework.UrlTester;
 using System;
  using Elastic.Xunit.XunitPlumbing;
  using Tests.Domain;

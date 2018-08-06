@@ -4,12 +4,12 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Document.Multiple.Reindex;
 using Tests.Document.Multiple.ReindexOnServer;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
 

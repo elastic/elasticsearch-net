@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
 
-namespace Tests.Framework.ManagedElasticsearch
+namespace Tests.Core.Client.Settings
 {
 	/// <summary>
 	/// ConnectionSettings sub class that is always in memory no matter if we are running in integration or unit test mode.

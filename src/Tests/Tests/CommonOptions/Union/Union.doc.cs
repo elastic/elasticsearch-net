@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
+using Tests.Core.Client;
 using Tests.Framework;
 
 namespace Tests.CommonOptions.Union

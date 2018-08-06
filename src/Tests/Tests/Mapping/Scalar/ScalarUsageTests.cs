@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tests.Framework;
-using Tests.Framework.MockData;
 
 namespace Tests.Mapping.Scalar
 {

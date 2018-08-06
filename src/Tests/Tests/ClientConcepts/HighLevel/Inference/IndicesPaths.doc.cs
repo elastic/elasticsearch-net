@@ -2,9 +2,9 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
 using static Nest.Indices;
 
 namespace Tests.ClientConcepts.HighLevel.Inference

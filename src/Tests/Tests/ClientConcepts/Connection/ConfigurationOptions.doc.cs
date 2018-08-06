@@ -2,7 +2,6 @@
 using Elasticsearch.Net;
 using Nest;
 using Tests.Domain;
-using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.Connection
 {

@@ -4,9 +4,10 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
-using Tests.Framework.MockData;
 using FluentAssertions;
 using System.Linq;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 

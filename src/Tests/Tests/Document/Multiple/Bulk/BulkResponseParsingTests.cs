@@ -5,8 +5,8 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Framework;
-using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
 namespace Tests.Document.Multiple.Bulk

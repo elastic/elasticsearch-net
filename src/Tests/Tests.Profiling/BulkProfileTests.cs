@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Nest;
 using Tests.Domain;
-using Tests.Framework.MockData;
 using Tests.Framework.Profiling;
 using Tests.Framework.Profiling.Performance;
 

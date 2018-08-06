@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using Nest;
 using Tests.Configuration;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Domain;
-using Tests.Framework.MockData;
 
-namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
+namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 {
 	public class DefaultSeeder
 	{
@@ -34,7 +35,7 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		public void SeedNode()
 		{
-			if (!TestClient.Configuration.ForceReseed && AlreadySeeded()) return;
+			if (!TestClient.Configuration.ForceReseed && this.AlreadySeeded()) return;
 			// Ensure a clean slate by deleting everything regardless of whether they may already exist
 			this.DeleteIndicesAndTemplates();
 			// and now recreate everything
@@ -60,10 +61,10 @@ namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
 
 		public void CreateIndices()
 		{
-			CreateIndexTemplate();
-			CreateProjectIndex();
-			CreateDeveloperIndex();
-			CreatePercolatorIndex();
+			this.CreateIndexTemplate();
+			this.CreateProjectIndex();
+			this.CreateDeveloperIndex();
+			this.CreatePercolatorIndex();
 		}
 
 		private void SeedIndexData()

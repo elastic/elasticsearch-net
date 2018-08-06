@@ -5,12 +5,12 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core;
+using Tests.Core.Client;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
 using Tests.QueryDsl.BoolDsl.Operators;
 using static Nest.Infer;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.QueryDsl.BoolDsl
 {

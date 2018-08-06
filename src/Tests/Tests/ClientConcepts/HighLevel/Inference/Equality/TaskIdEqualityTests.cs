@@ -1,6 +1,7 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality

@@ -2,9 +2,9 @@ using System.IO;
 using Elastic.Managed.ConsoleWriters;
 using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Tasks;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.Clusters;
 
-namespace Tests.Framework.ManagedElasticsearch.Tasks
+namespace Tests.Core.ManagedElasticsearch.Tasks
 {
 	public class WriteAnalysisFiles : ClusterComposeTask
 	{

@@ -1,8 +1,8 @@
 using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.QueryDsl.TermLevel.Range

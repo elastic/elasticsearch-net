@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using Nest;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using System;
 using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework;
 using FluentAssertions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 

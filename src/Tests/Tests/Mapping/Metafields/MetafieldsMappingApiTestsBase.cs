@@ -1,8 +1,8 @@
 ﻿using Nest;
 using Tests.Framework;
-using Tests.Framework.MockData;
 using Tests.Framework.Integration;
 using Elasticsearch.Net;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 

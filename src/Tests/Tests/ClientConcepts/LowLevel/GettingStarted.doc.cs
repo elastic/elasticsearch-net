@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 // ReSharper disable SuggestVarOrType_Elsewhere

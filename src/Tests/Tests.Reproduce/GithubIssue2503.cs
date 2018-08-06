@@ -3,8 +3,7 @@ using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.Reproduce
 {

@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
-using Tests.Framework.MockData;
 using System.Threading;
 using Tests.Domain;
 

@@ -2,12 +2,13 @@
 using Nest;
 using System;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Core.Client;
+using Tests.Core.Client.Settings;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.MockData;
 using Xunit;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
 
 namespace Tests.ClientConcepts.HighLevel.Inference

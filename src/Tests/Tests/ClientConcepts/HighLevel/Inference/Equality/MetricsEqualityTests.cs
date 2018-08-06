@@ -2,6 +2,7 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality

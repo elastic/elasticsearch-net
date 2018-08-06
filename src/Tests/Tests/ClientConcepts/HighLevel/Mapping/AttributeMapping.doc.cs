@@ -5,8 +5,9 @@ using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json;
+using Tests.Core.Client;
 using Tests.Framework;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {

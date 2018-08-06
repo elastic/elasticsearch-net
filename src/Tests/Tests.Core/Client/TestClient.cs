@@ -1,13 +1,9 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using Elastic.Managed.Configuration;
-using Nest;
+﻿using Nest;
 using Tests.Configuration;
+using Tests.Core.Client.Settings;
 using Tests.Domain.Extensions;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.MockData;
 
-namespace Tests.Framework
+namespace Tests.Core.Client
 {
 	public static class TestClient
 	{

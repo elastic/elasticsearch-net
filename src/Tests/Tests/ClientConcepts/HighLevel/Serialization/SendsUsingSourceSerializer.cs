@@ -7,11 +7,10 @@ using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Tests.Core.Client.Serializers;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.SourceSerializers;
-using Tests.Framework.MockData;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {

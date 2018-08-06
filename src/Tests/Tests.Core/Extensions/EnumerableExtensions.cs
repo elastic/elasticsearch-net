@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Tests.Framework
+namespace Tests.Core.Extensions
 {
 	public static class EnumerableExtensions
 	{

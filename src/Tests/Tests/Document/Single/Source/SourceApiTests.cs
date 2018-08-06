@@ -2,11 +2,11 @@
 using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 using Xunit;
 
 namespace Tests.Document.Single.Source

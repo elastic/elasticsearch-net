@@ -1,9 +1,9 @@
 ﻿using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.Clusters;
 
-namespace Tests.Framework.ManagedElasticsearch
+namespace Tests.Core.ManagedElasticsearch
 {
 	public abstract class ClusterTestClassBase<TCluster> : IClusterFixture<TCluster>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()

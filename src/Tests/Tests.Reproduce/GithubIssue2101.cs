@@ -6,7 +6,6 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using FluentAssertions;
-using Tests.Framework;
 
 namespace Tests.Reproduce
 {

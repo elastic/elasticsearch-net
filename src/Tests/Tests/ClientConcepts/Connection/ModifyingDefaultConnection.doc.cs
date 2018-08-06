@@ -8,9 +8,9 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
+using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.Connection
 {

@@ -1,7 +1,7 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using Tests.Configuration;
 
-namespace Tests.Framework
+namespace Tests.Core.Xunit
 {
 	public class IntegrationOnlyAttribute : SkipTestAttributeBase
 	{

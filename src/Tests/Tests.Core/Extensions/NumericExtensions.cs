@@ -1,6 +1,4 @@
-﻿using Nest;
-
-namespace Tests.Framework
+﻿namespace Tests.Core.Extensions
 {
 	internal static class NumericExtensions
 	{

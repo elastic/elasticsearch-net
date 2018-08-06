@@ -3,10 +3,10 @@ using System.Linq.Expressions;
 using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 using Xunit;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 

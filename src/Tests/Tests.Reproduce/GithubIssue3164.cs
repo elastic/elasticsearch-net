@@ -6,7 +6,6 @@ using FluentAssertions;
 using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
-using Tests.Framework;
 
 namespace Tests.Reproduce
 {

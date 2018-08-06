@@ -8,8 +8,9 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Tests.Core.Client;
 using Tests.Framework;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping

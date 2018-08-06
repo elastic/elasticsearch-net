@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
+using Tests.Core.ManagedElasticsearch.Tasks;
 using Tests.Domain.Extensions;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Tests.Framework.ManagedElasticsearch.Tasks;
-using Tests.Framework.MockData;
 
-namespace Tests.Framework.ManagedElasticsearch.Clusters
+namespace Tests.Core.ManagedElasticsearch.Clusters
 {
 	public class XPackClusterConfiguration : ClientTestClusterConfiguration
 	{
@@ -42,7 +41,7 @@ namespace Tests.Framework.ManagedElasticsearch.Clusters
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 
-		public virtual IElasticClient Client => this.GetOrAddClient(s=>Authenticate(ConnectionSettings(s.ApplyDomainSettings())));
+		public virtual IElasticClient Client => this.GetOrAddClient(s=>this.Authenticate(this.ConnectionSettings(ConnectionSettingsExtensions.ApplyDomainSettings(s))));
 
 		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
 	}

@@ -8,6 +8,7 @@ using FluentAssertions;
 using FluentAssertions.Collections;
 using FluentAssertions.Execution;
 using Nest;
+using Tests.Core.Extensions;
 
 namespace Tests.Framework
 {

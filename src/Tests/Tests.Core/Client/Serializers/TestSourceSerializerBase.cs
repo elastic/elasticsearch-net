@@ -5,9 +5,8 @@ using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Tests.Domain;
-using Tests.Framework.MockData;
 
-namespace Tests.Framework.ManagedElasticsearch.SourceSerializers
+namespace Tests.Core.Client.Serializers
 {
 	public class TestSourceSerializerBase : ConnectionSettingsAwareSerializerBase
 	{

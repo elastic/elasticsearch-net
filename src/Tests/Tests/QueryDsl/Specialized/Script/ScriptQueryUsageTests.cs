@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 using Xunit;
 
 namespace Tests.QueryDsl.Specialized.Script

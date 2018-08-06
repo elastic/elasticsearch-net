@@ -5,13 +5,15 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Configuration;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
 

@@ -3,7 +3,6 @@ using BenchmarkDotNet.Attributes;
 using Nest;
 using Tests.Domain;
 using Tests.Framework.Benchmarks;
-using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.HighLevel.Caching
 {

@@ -2,7 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 using Tests.Framework.Integration;
 
 namespace Tests.Mapping.Types

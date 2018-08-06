@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
 
 namespace Tests.Mapping.LocalMetadata
 {

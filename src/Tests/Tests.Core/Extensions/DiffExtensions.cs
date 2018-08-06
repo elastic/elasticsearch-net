@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,7 +6,7 @@ using DiffPlex.DiffBuilder;
 using DiffPlex.DiffBuilder.Model;
 using Newtonsoft.Json.Linq;
 
-namespace Tests.Framework
+namespace Tests.Core.Extensions
 {
 	public static class DiffExtensions
 	{

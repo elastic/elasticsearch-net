@@ -9,11 +9,13 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
+using Tests.Core.Client;
+using Tests.Core.Client.Settings;
+using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.MockData;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
 using Field = Nest.Field;
 // ReSharper disable ArrangeMethodOrOperatorBody

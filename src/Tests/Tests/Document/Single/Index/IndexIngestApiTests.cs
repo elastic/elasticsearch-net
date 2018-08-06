@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Core.Client;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Domain.Extensions;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Document.Single.Index

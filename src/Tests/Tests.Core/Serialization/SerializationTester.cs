@@ -8,8 +8,9 @@ using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using Tests.Core.Client;
 
-namespace Tests.Framework
+namespace Tests.Core.Serialization
 {
 	public class SerializationResult
 	{
@@ -21,10 +22,10 @@ namespace Tests.Framework
 
 		public override string ToString()
 		{
-			var message = $"{this.GetType().Name} success: {(Success)}";
+			var message = $"{this.GetType().Name} success: {(this.Success)}";
 			if (this.Success) return message;
 			message += Environment.NewLine;
-			message += DiffFromExpectedExcerpt;
+			message += this.DiffFromExpectedExcerpt;
 			return message;
 		}
 		private string DiffFromExpectedExcerpt =>
@@ -38,7 +39,7 @@ namespace Tests.Framework
 
 		public override string ToString()
 		{
-			var s = $"Deserialization has result: {Result != null}";
+			var s = $"Deserialization has result: {this.Result != null}";
 			s += Environment.NewLine;
 			s += base.ToString();
 			return s;
@@ -51,7 +52,7 @@ namespace Tests.Framework
 
 		public override string ToString()
 		{
-			var s = $"RoundTrip: {Itterations.ToOrdinal()} itteration";
+			var s = $"RoundTrip: {this.Itterations.ToOrdinal()} itteration";
 			s += Environment.NewLine;
 			s += base.ToString();
 			return s;
@@ -62,11 +63,11 @@ namespace Tests.Framework
 	{
 		public static SerializationTester Default { get; } = new SerializationTester(TestClient.DefaultInMemoryClient);
 
-		public SerializationTester(IElasticClient client) => Client = client;
+		public SerializationTester(IElasticClient client) => this.Client = client;
 
 		public IElasticClient Client { get; }
 
-		protected IElasticsearchSerializer Serializer => Client.ConnectionSettings.RequestResponseSerializer;
+		protected IElasticsearchSerializer Serializer => this.Client.ConnectionSettings.RequestResponseSerializer;
 
 		public RoundTripResult<T> RoundTrips<T>(T @object, bool preserveNullInExpected = false)
 		{
@@ -163,7 +164,7 @@ namespace Tests.Framework
 		}
 		private T Deserialize<T>(string json)
 		{
-			using(var ms = Client.ConnectionSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json)))
+			using(var ms = this.Client.ConnectionSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json)))
 				return this.Serializer.Deserialize<T>(ms);
 		}
 

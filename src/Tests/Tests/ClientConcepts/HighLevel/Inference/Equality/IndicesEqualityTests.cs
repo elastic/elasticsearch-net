@@ -1,8 +1,8 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {

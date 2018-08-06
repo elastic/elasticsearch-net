@@ -1,6 +1,8 @@
 ﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;

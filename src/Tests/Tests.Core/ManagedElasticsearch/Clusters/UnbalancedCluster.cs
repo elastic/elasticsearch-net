@@ -1,7 +1,7 @@
 ﻿using Nest;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 
-namespace Tests.Framework.ManagedElasticsearch.Clusters
+namespace Tests.Core.ManagedElasticsearch.Clusters
 {
 	//TODO does this need a whole separate cluster?
 	public class UnbalancedCluster : ClientTestClusterBase

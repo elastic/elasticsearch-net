@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
 using Nest;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Benchmarks;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 
 namespace Tests.Document.Multiple.Bulk
 {

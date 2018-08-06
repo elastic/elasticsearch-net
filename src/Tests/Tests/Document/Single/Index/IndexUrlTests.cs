@@ -5,7 +5,6 @@ using FluentAssertions;
 using Nest;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
 namespace Tests.Document.Single.Index

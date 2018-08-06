@@ -1,8 +1,6 @@
-using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Plugins;
-using Elastic.Xunit;
 
-namespace Tests.Framework.ManagedElasticsearch.Clusters
+namespace Tests.Core.ManagedElasticsearch.Clusters
 {
 	/// <summary>
 	/// Use this cluster for heavy API's, either on ES's side or the client (intricate setup etc)

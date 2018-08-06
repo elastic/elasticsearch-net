@@ -1,6 +1,6 @@
 using Tests.Domain;
 
-namespace Tests.Framework.MockData
+namespace Tests.Core.Xunit
 {
 	/// <summary>
 	/// Class that materializes generators in static context.

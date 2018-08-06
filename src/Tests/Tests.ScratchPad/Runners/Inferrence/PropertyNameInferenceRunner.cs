@@ -1,7 +1,6 @@
 ﻿using System;
 using Nest;
 using Tests.Domain;
-using Tests.Framework.MockData;
 
 namespace ClientMasterScratch
 {

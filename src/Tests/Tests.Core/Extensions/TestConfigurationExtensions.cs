@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using Elastic.Managed.Configuration;
+﻿using Elastic.Managed.Configuration;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connections.HttpWebRequestConnection;
-using Nest;
 using Tests.Configuration;
 
-namespace Tests.Framework.ManagedElasticsearch
+namespace Tests.Core.Extensions
 {
 	public static class TestConfigurationExtensions
 	{

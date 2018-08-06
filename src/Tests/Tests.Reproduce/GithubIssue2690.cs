@@ -1,6 +1,7 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Tests.Framework;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
 
 namespace Tests.Reproduce
 {

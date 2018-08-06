@@ -2,9 +2,8 @@
 using System.Text;
 using Elasticsearch.Net;
 using Nest;
-using Tests.Framework;
 
-namespace Tests.Core
+namespace Tests.Core.Client
 {
 	public static class FixedResponseClient
 	{

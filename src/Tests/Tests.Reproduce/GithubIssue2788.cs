@@ -7,8 +7,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using FluentAssertions.Common;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Reproduce

@@ -2,9 +2,9 @@
 using System.Linq;
 using Nest;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using static Nest.Infer;
 using System.Collections.Generic;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 

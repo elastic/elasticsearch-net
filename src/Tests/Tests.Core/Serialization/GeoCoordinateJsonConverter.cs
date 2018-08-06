@@ -2,7 +2,7 @@
 using Nest;
 using Newtonsoft.Json;
 
-namespace Tests.Framework
+namespace Tests.Core.Serialization
 {
 	/// <summary>
 	/// Copied over because writing coordinates out manually in ExpectJson is tedious

@@ -4,8 +4,8 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
-using Tests.Framework.MockData;
 using System.Collections.Generic;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 

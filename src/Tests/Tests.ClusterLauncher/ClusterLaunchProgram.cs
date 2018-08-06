@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Elastic.Managed.Ephemeral;
 using FluentAssertions.Common;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests
 {

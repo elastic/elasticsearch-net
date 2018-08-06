@@ -3,8 +3,7 @@
  using Nest;
  using Tests.Domain;
  using Tests.Framework;
-using Tests.Framework.MockData;
-using static Nest.Indices;
+ using static Nest.Indices;
 using static Tests.Framework.UrlTester;
 
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex

@@ -4,6 +4,8 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.CovariantHits

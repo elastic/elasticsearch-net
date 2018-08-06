@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Tests.Framework;
-using Tests.Framework.MockData;
 using Elasticsearch.Net;
 using Nest;
 using FluentAssertions;
@@ -12,9 +10,9 @@ using System.Threading;
 using System.Reactive.Linq;
 using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Core.ManagedElasticsearch;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Reproduce

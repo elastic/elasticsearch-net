@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace Tests.Framework.ManagedElasticsearch
+namespace Tests.Core.Xunit
 {
 	internal static class XunitRunState
 	{

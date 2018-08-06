@@ -4,8 +4,8 @@ using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Reproduce
 {

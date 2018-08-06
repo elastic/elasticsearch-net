@@ -3,11 +3,13 @@ using FluentAssertions;
 using Nest;
 using System;
 using System.Linq;
+using Tests.Core.Client.Settings;
+using Tests.Core.ManagedElasticsearch;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 using Xunit;
 
 namespace Tests.ClientConcepts.Exceptions

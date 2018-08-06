@@ -4,7 +4,6 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {

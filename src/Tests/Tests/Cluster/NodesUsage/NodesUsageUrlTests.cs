@@ -3,7 +3,6 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.MockData;
 using static Nest.Infer;
 using static Tests.Framework.UrlTester;
 

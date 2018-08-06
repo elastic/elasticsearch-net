@@ -3,9 +3,9 @@ using Nest;
 using System;
 using Elastic.Xunit.XunitPlumbing;
 using Tests.Core;
+using Tests.Core.Client;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.LowLevel
 {

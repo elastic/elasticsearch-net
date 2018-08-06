@@ -3,6 +3,7 @@ using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
+using Tests.Core.Extensions;
 using Tests.Framework;
 
 namespace Tests.ClientConcepts.ServerError

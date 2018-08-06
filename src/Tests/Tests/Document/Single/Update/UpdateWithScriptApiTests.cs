@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Single.Update

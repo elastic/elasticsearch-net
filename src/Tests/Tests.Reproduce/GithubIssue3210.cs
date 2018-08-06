@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
 using FluentAssertions;
 using Tests.Core;
+using Tests.Core.Client;
 
 namespace Tests.Reproduce
 {

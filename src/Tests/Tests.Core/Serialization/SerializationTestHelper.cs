@@ -1,8 +1,7 @@
 ﻿using System;
 using Nest;
-using Tests.Framework;
 
-namespace Tests.Core
+namespace Tests.Core.Serialization
 {
 	public static class SerializationTestHelper
 	{

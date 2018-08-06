@@ -1,7 +1,6 @@
-﻿using System;
-using Nest;
+﻿using Nest;
 
-namespace Tests.Framework.ManagedElasticsearch.Clusters
+namespace Tests.Core.ManagedElasticsearch.Clusters
 {
 	public interface INestTestCluster
 	{

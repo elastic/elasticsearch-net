@@ -1,5 +1,5 @@
-﻿using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
+﻿using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Framework.Profiling
 {

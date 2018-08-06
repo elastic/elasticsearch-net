@@ -4,7 +4,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
+using Tests.Core.Extensions;
 
 namespace Tests.Reproduce
 {

@@ -5,10 +5,10 @@ using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Configuration;
-using Tests.Framework.ManagedElasticsearch.SourceSerializers;
-using Tests.Framework.MockData;
+using Tests.Core.Client.Serializers;
+using Tests.Core.Xunit;
 
-namespace Tests.Framework.ManagedElasticsearch
+namespace Tests.Core.Client.Settings
 {
 	public class TestConnectionSettings : ConnectionSettings
 	{

@@ -3,11 +3,11 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 
 namespace Tests.XPack.MachineLearning.UpdateJob
 {

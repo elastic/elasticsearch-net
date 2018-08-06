@@ -1,10 +1,10 @@
 ﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
 using Tests.Domain;
-using Tests.Framework.MockData;
 
-namespace Tests.Framework
+namespace Tests.Core.Extensions
 {
 	public static class ShouldExtensions
 	{

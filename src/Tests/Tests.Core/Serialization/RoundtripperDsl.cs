@@ -5,11 +5,11 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
+using Tests.Core.Client.Settings;
+using Tests.Core.Extensions;
 using Tests.Domain.Extensions;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.MockData;
 
-namespace Tests.Framework
+namespace Tests.Core.Serialization
 {
 	public abstract class RoundTripperBase
 	{
@@ -78,7 +78,7 @@ namespace Tests.Framework
 
 		public T DeserializesTo<T>(Action<string, T> assert = null)
 		{
-			var origin = $"{nameof(JsonRoundTripper)}.{nameof(DeserializesTo)}";
+			var origin = $"{nameof(JsonRoundTripper)}.{nameof(this.DeserializesTo)}";
 			var deserializationResult = this.Tester.Deserializes<T>(this._expectedJson, this.PreserveNullInExpected);
 			deserializationResult.ShouldBeValid($"{origin} did not deserialize into {typeof(T).Name}");
 			assert?.Invoke("first deserialization", deserializationResult.Result);
@@ -95,11 +95,11 @@ namespace Tests.Framework
 			return deserializationResult.Result;
 		}
 
-		public void FromRequest(IResponse response) => ToSerializeTo(response.ApiCall.RequestBodyInBytes);
-		public void FromRequest<T>(Func<IElasticClient, T> call) where T : IResponse => FromRequest(call(this.Tester.Client));
+		public void FromRequest(IResponse response) => this.ToSerializeTo(response.ApiCall.RequestBodyInBytes);
+		public void FromRequest<T>(Func<IElasticClient, T> call) where T : IResponse => this.FromRequest(call(this.Tester.Client));
 
-		public void FromResponse(IResponse response) => ToSerializeTo(response.ApiCall.ResponseBodyInBytes);
-		public void FromResponse<T>(Func<IElasticClient, T> call) where T : IResponse => FromResponse(call(this.Tester.Client));
+		public void FromResponse(IResponse response) => this.ToSerializeTo(response.ApiCall.ResponseBodyInBytes);
+		public void FromResponse<T>(Func<IElasticClient, T> call) where T : IResponse => this.FromResponse(call(this.Tester.Client));
 
 		private void ToSerializeTo(byte[] json)
 		{
@@ -111,8 +111,8 @@ namespace Tests.Framework
 		{
 			switch ((object)actual)
 			{
-				case string s: throw new Exception($"{nameof(WhenSerializing)} was passed a string but it only expects objects");
-				case byte[] b: throw new Exception($"{nameof(WhenSerializing)} was passed a byte[] but it only expects objects");
+				case string s: throw new Exception($"{nameof(this.WhenSerializing)} was passed a string but it only expects objects");
+				case byte[] b: throw new Exception($"{nameof(this.WhenSerializing)} was passed a byte[] but it only expects objects");
 			}
 			var result = this.Tester.RoundTrips(actual, this._expectedJson, this.PreserveNullInExpected);
 			result.Success.Should().BeTrue(result.ToString());

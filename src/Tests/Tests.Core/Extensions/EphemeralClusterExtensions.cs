@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Core.Client.Settings;
 
-namespace Tests.Framework.ManagedElasticsearch
+namespace Tests.Core.Extensions
 {
 	public static class EphemeralClusterExtensions
 	{

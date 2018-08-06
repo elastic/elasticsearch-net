@@ -1,11 +1,11 @@
 ﻿using System;
 using Nest;
 using Elasticsearch.Net;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 
 namespace Tests.Mapping.Types
 {

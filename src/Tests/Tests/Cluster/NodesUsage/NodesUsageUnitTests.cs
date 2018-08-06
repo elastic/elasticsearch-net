@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Tests.Core;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Framework;
 
 namespace Tests.XPack.DeprecationInfo

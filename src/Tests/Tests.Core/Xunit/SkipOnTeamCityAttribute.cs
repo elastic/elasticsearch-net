@@ -1,7 +1,7 @@
 ﻿using System;
 using Elastic.Xunit.XunitPlumbing;
 
-namespace Tests.Framework
+namespace Tests.Core.Xunit
 {
 	public class SkipOnTeamCityAttribute : SkipTestAttributeBase
 	{

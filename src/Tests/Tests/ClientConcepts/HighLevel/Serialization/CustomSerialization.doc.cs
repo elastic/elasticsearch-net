@@ -12,7 +12,7 @@ using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Tests.Framework;
-using static Tests.Core.SerializationTestHelper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {

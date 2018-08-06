@@ -3,7 +3,7 @@ using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Reproduce
 {

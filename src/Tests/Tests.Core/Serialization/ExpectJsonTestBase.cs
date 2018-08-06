@@ -1,6 +1,7 @@
 ﻿using Nest;
+using Tests.Core.Extensions;
 
-namespace Tests.Framework
+namespace Tests.Core.Serialization
 {
 	public abstract class ExpectJsonTestBase
 	{
@@ -19,8 +20,8 @@ namespace Tests.Framework
 			if (@object == null) return;
 			if (this.ExpectJson == null) return;
 
-			if (this.SupportsDeserialization) this.Tester.AssertRoundTrip<T>(@object, this.ExpectJson, preserveNullInExpected: IncludeNullInExpected);
-			else this.Tester.AssertSerialize(@object, this.ExpectJson, preserveNullInExpected: IncludeNullInExpected);
+			if (this.SupportsDeserialization) this.Tester.AssertRoundTrip<T>(@object, this.ExpectJson, preserveNullInExpected: this.IncludeNullInExpected);
+			else this.Tester.AssertSerialize(@object, this.ExpectJson, preserveNullInExpected: this.IncludeNullInExpected);
 		}
 
 	}

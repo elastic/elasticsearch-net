@@ -6,6 +6,7 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
+using Tests.Core.Xunit;
 using Tests.Framework;
 
 namespace Tests.CodeStandards
