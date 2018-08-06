@@ -7,9 +7,6 @@ using Tests.Framework;
 using Tests.Framework.Benchmarks;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
-using Tests.Framework.Profiling;
-using Tests.Framework.Profiling.Memory;
-using Tests.Framework.Profiling.Performance;
 
 namespace Tests.Document.Multiple.Bulk
 {
@@ -29,6 +26,7 @@ namespace Tests.Document.Multiple.Bulk
 					.NumberOfShards(6)
 					.NumberOfReplicas(0)
 					.RefreshInterval("30s")
+					// TODO explain why we are setting these
 					.Setting("index.store.type", "mmapfs")
 					.Setting("indices.memory.index_buffer_size", "10%")
 					.Setting("index.translog.flush_threshold_size", "4g")
@@ -43,15 +41,12 @@ namespace Tests.Document.Multiple.Bulk
 #pragma warning disable 618
 		[Setup]
 #pragma warning restore 618
-		[ProfilingSetup]
 		public void Setup()
 		{
 			_messages = Message.Generator.Generate(250000).Partition(1000).ToList();
 		}
 
 		[Benchmark]
-		[Performance]
-		[Memory]
 		public void IndexMessages()
 		{
 			foreach (var messages in _messages)

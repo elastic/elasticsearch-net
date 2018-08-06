@@ -1,5 +1,7 @@
 ﻿using System;
 
+// declares the profiling attrbutes in the event that the jetBrains self host dlls have not yet been bootstrapped by our fake build
+
 #if !FEATURE_PROFILING
 namespace Tests.Framework.Profiling.Performance
 {

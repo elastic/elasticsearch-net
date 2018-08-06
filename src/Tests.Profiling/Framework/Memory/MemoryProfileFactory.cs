@@ -1,8 +1,5 @@
 using System;
 using System.Reflection;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework.Profiling.Memory
 {

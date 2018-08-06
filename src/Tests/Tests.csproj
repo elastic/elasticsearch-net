@@ -1,29 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
-    <StartupObject>Tests.ProgramDispatcher</StartupObject>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
-    <DefineConstants Condition="'$(TargetFramework)'=='net46'">$(DefineConstants);FEATURE_HTTPWEBREQUEST</DefineConstants>
-    <DefineConstants Condition="Exists('..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll')">$(DefineConstants);FEATURE_PROFILING</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
-  </ItemGroup>
-  <ItemGroup Condition="Exists('..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll')">
-    <!-- 
-      These get placed into build\tools by FAKE from our command line build 
-      Missing dotTrace self host API on nuget.org for the moment
-    -->
-    <Reference Include="..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll" />
-    <Reference Include="..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.Api.dll" />
-    <Reference Include="..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.SelfApi.dll" />
-  </ItemGroup>
-  <ItemGroup Condition="!Exists('..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll')">
-    <Compile Remove="Framework\Profiling\**" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
@@ -42,9 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Reproduce" />
   </ItemGroup>
   <Import Project="..\outputpath.props" />
 </Project>

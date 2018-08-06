@@ -10,7 +10,7 @@ using Tests.Framework.Profiling.Timeline;
 
 namespace Tests
 {
-	public static class ProfileProgram
+	public static class Program
 	{
 		private const string SelfProfileSdkDirectory = "dottrace-selfprofile";
 
@@ -19,7 +19,7 @@ namespace Tests
 		private static string SdkPath { get; }
 		private static string OutputPath { get; }
 
-		static ProfileProgram()
+		static Program()
 		{
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
 			if ((currentDirectory.Name == "Debug" || currentDirectory.Name == "Release") && currentDirectory.Parent.Name == "bin")

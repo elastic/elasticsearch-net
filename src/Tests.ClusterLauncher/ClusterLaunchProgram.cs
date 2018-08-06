@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Elastic.Managed;
 using Elastic.Managed.Ephemeral;
 using FluentAssertions.Common;
-using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests
@@ -73,7 +71,7 @@ namespace Tests
 
 			try
 			{
-				types = typeof(Program).Assembly().GetTypes();
+				types = typeof(ClusterLaunchProgram).GetTypeInfo().Assembly.GetTypes();
 			}
 			catch (ReflectionTypeLoadException e)
 			{

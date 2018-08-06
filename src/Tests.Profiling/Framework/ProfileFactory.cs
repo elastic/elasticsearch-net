@@ -4,9 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework.Profiling
 {
@@ -46,7 +43,7 @@ namespace Tests.Framework.Profiling
 				{
 					_profiledClasses = Assembly
 						.GetTypes()
-						.Where(t => t.IsPublic() && t.IsClass())
+						.Where(t => t.GetTypeInfo().IsPublic && t.GetTypeInfo().IsClass)
 						.Where(t => t.GetMethods(BindingFlags.Instance | BindingFlags.Public)
 							.Any(m => m.GetCustomAttribute<TAttribute>() != null))
 						.Select(t =>

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using Tests.Framework;
 
 namespace Tests
 {
-	public static class BenchmarkProgram
+	public static class Program
 	{
 		public static int Main(string[] arguments)
 		{
@@ -37,7 +36,7 @@ namespace Tests
 
 			try
 			{
-				types = typeof(BenchmarkProgram).GetTypeInfo().Assembly.GetTypes();
+				types = typeof(Program).GetTypeInfo().Assembly.GetTypes();
 			}
 			catch (ReflectionTypeLoadException e)
 			{
