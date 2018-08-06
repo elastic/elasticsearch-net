@@ -6,7 +6,7 @@ using Elastic.Managed.Ephemeral;
 using FluentAssertions.Common;
 using Tests.Core.ManagedElasticsearch.Clusters;
 
-namespace Tests
+namespace Tests.ClusterLauncher
 {
 	public static class ClusterLaunchProgram
 	{
