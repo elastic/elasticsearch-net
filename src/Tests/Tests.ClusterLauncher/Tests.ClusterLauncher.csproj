@@ -6,4 +6,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
   </ItemGroup>
+  <Import Project="..\..\outputpath.props" />
 </Project>

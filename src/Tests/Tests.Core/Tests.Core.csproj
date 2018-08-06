@@ -7,14 +7,12 @@
     <DefineConstants>$(DefineConstants);TESTINGNUGETPACKAGE</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'!=''">
-    <PackageReference Include="NEST" Version="$(TestPackageVersion)" />
     <PackageReference Include="NEST.JsonNetSerializer" Version="$(TestPackageVersion)" />
     <PackageReference Include="Elasticsearch.Net.Connections.HttpWebRequestConnection" Version="$(TestPackageVersion)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TestPackageVersion)'==''">
-    <ProjectReference Include="..\Nest\Nest.csproj" />
-    <ProjectReference Include="..\Serializers\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
-    <ProjectReference Include="..\Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj" />
+    <ProjectReference Include="..\..\Serializers\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj" />
+    <ProjectReference Include="..\..\Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Domain\Tests.Domain.csproj" />

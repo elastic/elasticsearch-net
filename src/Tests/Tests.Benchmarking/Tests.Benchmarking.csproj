@@ -7,4 +7,5 @@
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
     <PackageReference Include="BenchMarkDotNet" Version="0.10.8" />
   </ItemGroup>
+  <Import Project="..\..\outputpath.props" />
 </Project>
