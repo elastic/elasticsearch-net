@@ -2,6 +2,7 @@
 using System.Linq;
 using Elastic.Managed.Configuration;
 using Nest;
+using Tests.Domain.Extensions;
 using Tests.Framework.Configuration;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.MockData;

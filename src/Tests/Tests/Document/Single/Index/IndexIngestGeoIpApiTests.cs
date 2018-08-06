@@ -5,6 +5,8 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
+using Tests.Domain;
+using Tests.Domain.Extensions;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;

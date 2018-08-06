@@ -2,6 +2,7 @@
 using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;

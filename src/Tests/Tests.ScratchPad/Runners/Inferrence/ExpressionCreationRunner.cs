@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Tests.Domain;
 using Tests.Framework.MockData;
 
 namespace ClientMasterScratch

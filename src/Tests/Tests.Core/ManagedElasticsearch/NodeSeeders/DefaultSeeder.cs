@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Nest;
+using Tests.Domain;
 using Tests.Framework.MockData;
 
 namespace Tests.Framework.ManagedElasticsearch.NodeSeeders

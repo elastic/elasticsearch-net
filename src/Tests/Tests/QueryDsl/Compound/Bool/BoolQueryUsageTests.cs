@@ -6,6 +6,7 @@ using System;
 using Elastic.Xunit.XunitPlumbing;
 using Tests.Framework;
 using FluentAssertions;
+using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Compound.Bool

@@ -6,6 +6,7 @@ using Nest;
 using FluentAssertions;
 using Tests.Framework;
 using Newtonsoft.Json;
+using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 using Xunit;

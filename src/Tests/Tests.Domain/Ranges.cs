@@ -2,8 +2,9 @@ using System;
 using System.Net;
 using Bogus;
 using Nest;
+using Tests.Framework;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain
 {
 	public class Ranges
 	{
@@ -20,12 +21,12 @@ namespace Tests.Framework.MockData
 		private Ranges(Faker faker)
 		{
 			Func<bool> r = () => faker.Random.Bool();
-			SetDates(faker, r);
-			SetDoubles(faker, r);
-			SetFloats(faker, r);
-			SetIntegers(faker, r);
-			SetLongs(faker, r);
-			SetIps(faker, r);
+			this.SetDates(faker, r);
+			this.SetDoubles(faker, r);
+			this.SetFloats(faker, r);
+			this.SetIntegers(faker, r);
+			this.SetLongs(faker, r);
+			this.SetIps(faker, r);
 		}
 
 		private void SetDates(Faker faker, Func<bool> r)

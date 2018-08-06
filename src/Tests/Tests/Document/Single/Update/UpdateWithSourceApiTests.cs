@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Single.Update

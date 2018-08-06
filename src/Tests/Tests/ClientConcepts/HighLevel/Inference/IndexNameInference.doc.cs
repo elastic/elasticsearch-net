@@ -2,6 +2,7 @@
 using Nest;
 using System;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.MockData;

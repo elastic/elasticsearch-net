@@ -5,6 +5,7 @@ using Elastic.Managed.Ephemeral;
 using Elastic.Managed.Ephemeral.Plugins;
 using Elastic.Xunit;
 using Nest;
+using Tests.Domain.Extensions;
 using Tests.Framework.Configuration;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.ManagedElasticsearch.Tasks;

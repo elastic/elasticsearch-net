@@ -3,6 +3,7 @@ using Nest;
 using System;
 using Elastic.Xunit.XunitPlumbing;
 using Tests.Core;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.MockData;
 

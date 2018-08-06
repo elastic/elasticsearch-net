@@ -1,10 +1,8 @@
 using System;
-using System.Runtime.Serialization;
 using Nest;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain
 {
 	public class SourceOnlyObject
 	{

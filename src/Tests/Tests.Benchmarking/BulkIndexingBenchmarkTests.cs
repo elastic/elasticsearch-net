@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
 using Nest;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Benchmarks;
 using Tests.Framework.ManagedElasticsearch.Clusters;

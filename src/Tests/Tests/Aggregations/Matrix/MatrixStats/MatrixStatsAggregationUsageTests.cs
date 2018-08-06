@@ -7,6 +7,7 @@ using static Nest.Infer;
 using System.Collections.Generic;
 using Tests.Framework;
 using System.Linq;
+using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Matrix.MatrixStats

@@ -3,6 +3,7 @@ using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;

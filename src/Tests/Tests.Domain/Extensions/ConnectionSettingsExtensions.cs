@@ -1,20 +1,20 @@
 ﻿using Nest;
-using static Tests.Domain.Helpers.TestValueHelper;
+using Tests.Domain.Helpers;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain.Extensions
 {
 	public static class ConnectionSettingsExtensions
 	{
 		public static ConnectionSettings ApplyDomainSettings(this ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
 			.DefaultMappingFor<Project>(map => map
-				.IndexName(ProjectsIndex)
+				.IndexName(TestValueHelper.ProjectsIndex)
 				.IdProperty(p => p.Name)
 				.RelationName("project")
 				.TypeName("doc")
 			)
 			.DefaultMappingFor<CommitActivity>(map => map
-				.IndexName(ProjectsIndex)
+				.IndexName(TestValueHelper.ProjectsIndex)
 				.RelationName("commits")
 				.TypeName("doc")
 			)
@@ -25,7 +25,7 @@ namespace Tests.Framework.MockData
 			)
 			.DefaultMappingFor<ProjectPercolation>(map => map
 				.IndexName("queries")
-				.TypeName(PercolatorType)
+				.TypeName(TestValueHelper.PercolatorType)
 			)
 			.DefaultMappingFor<Metric>(map => map
 				.IndexName("server-metrics")

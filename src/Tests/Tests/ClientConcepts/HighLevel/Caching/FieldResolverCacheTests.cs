@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit.Abstractions;

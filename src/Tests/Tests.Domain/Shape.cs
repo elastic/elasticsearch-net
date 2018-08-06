@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using Bogus;
 using Nest;
+using Tests.Framework;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain
 {
 	public class Shape
 	{

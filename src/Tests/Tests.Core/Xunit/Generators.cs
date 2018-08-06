@@ -1,3 +1,5 @@
+using Tests.Domain;
+
 namespace Tests.Framework.MockData
 {
 	/// <summary>

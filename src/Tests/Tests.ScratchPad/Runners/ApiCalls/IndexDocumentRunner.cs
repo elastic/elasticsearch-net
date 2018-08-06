@@ -1,4 +1,5 @@
 ﻿using System;
+using Tests.Domain;
 using Tests.Framework.MockData;
 
 namespace ClientMasterScratch

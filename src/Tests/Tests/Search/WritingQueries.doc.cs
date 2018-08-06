@@ -4,6 +4,7 @@ using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json.Linq;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;

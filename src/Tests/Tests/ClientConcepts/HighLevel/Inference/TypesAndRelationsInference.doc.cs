@@ -3,6 +3,7 @@ using Nest;
 using System;
 using System.Runtime.Serialization;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit;

@@ -2,6 +2,7 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Nest.Indices;

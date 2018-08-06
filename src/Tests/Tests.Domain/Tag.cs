@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
 using Bogus;
+using Tests.Framework;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain
 {
 	public class Tag
 	{

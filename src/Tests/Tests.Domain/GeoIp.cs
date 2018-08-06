@@ -1,6 +1,6 @@
 using Nest;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain
 {
 	public class GeoIp
 	{

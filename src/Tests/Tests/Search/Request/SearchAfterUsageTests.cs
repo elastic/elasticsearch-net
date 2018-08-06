@@ -5,6 +5,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 using System.Collections.Generic;
+using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Request

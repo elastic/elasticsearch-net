@@ -2,6 +2,7 @@
 using System.Threading;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;

@@ -1,6 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Tests.Framework.Integration;

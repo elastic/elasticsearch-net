@@ -3,6 +3,7 @@ using FluentAssertions;
 using Nest;
 using System;
 using System.Linq;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;

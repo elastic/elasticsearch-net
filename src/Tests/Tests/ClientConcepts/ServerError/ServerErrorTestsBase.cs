@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Nest;
 using Tests.Core;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.MockData;
 

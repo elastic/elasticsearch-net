@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Nest;
+using Tests.Domain;
 using Tests.Framework.MockData;
 
 namespace Tests.Mapping.Types.Core.Join

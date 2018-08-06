@@ -6,6 +6,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Document.Multiple.Reindex;
 using Tests.Document.Multiple.ReindexOnServer;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;

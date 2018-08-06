@@ -6,6 +6,7 @@ using Tests.Framework;
 using System;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 #pragma warning disable 618 //Testing an obsolete method

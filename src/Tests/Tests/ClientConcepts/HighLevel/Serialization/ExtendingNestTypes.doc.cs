@@ -6,6 +6,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Newtonsoft.Json;
 using Tests.ClientConcepts.HighLevel.Mapping;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Core.SerializationTestHelper;

@@ -1,6 +1,7 @@
 ﻿using Bogus;
+using Tests.Framework;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain
 {
 	public class SimpleGeoPoint
 	{

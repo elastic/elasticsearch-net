@@ -5,8 +5,11 @@ using Bogus;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Tests.Domain.Extensions;
+using Tests.Domain.Helpers;
+using Tests.Framework;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain
 {
 	public class Project
 	{
@@ -31,7 +34,7 @@ namespace Tests.Framework.MockData
 		public CompletionField Suggest { get; set; }
 		public IEnumerable<string> Branches { get; set; }
 		public Ranges Ranges { get; set; }
-		public int? RequiredBranches => Branches?.Count();
+		public int? RequiredBranches => this.Branches?.Count();
 
 		public SourceOnlyObject SourceOnly { get; set; }
 

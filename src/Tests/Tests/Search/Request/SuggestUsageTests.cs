@@ -7,6 +7,7 @@ using Tests.Framework.MockData;
 using static Nest.Infer;
 using FluentAssertions;
 using System.Linq;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 

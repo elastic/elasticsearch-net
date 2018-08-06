@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain
 {
 	[StringEnum, JsonConverter(typeof(StringEnumConverter))]
 	public enum Gender

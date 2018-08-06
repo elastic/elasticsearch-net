@@ -5,6 +5,7 @@ using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 using System;
  using Elastic.Xunit.XunitPlumbing;
+ using Tests.Domain;
 
 namespace Tests.Search.Search
 {

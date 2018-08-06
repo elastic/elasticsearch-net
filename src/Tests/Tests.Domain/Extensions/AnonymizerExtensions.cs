@@ -1,7 +1,7 @@
 ﻿using Elasticsearch.Net;
 using Nest;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain.Extensions
 {
 	public static class AnonymizerExtensions
 	{

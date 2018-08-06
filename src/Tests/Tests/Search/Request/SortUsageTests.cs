@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;

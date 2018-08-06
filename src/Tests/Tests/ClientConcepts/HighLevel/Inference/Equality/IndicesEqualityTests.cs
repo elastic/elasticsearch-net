@@ -1,5 +1,6 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.MockData;
 

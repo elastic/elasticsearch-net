@@ -3,7 +3,7 @@ using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain
 {
 	public class Metric
 	{

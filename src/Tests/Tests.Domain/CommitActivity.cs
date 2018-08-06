@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using Bogus;
 using Nest;
 using Newtonsoft.Json;
+using Tests.Domain.Helpers;
+using Tests.Domain.JsonConverters;
+using Tests.Framework;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain
 {
 	public class CommitActivity
 	{
@@ -32,8 +35,8 @@ namespace Tests.Framework.MockData
 		[StringTimeSpan, JsonConverter(typeof(StringTimeSpanConverter))]
 		public TimeSpan? StringDuration
 		{
-			get => Duration;
-			set => Duration = value;
+			get => this.Duration;
+			set => this.Duration = value;
 		}
 
 		public static Faker<CommitActivity> Generator { get; } =

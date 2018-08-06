@@ -7,6 +7,7 @@ using Xunit;
 using Tests.Framework.MockData;
 using FluentAssertions;
 using System.Linq;
+using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Ingest.SimulatePipeline

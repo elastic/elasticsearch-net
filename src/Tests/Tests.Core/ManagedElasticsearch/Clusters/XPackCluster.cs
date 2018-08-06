@@ -5,6 +5,7 @@ using Elastic.Managed.Ephemeral;
 using Elastic.Xunit;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Domain.Extensions;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.ManagedElasticsearch.Tasks;
 using Tests.Framework.MockData;

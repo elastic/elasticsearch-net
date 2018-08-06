@@ -2,7 +2,7 @@
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace Tests.Framework.MockData
+namespace Tests.Domain.JsonConverters
 {
 	internal class StringTimeSpanConverter : JsonConverter
 	{

@@ -7,6 +7,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
+using Tests.Domain;
 using Xunit;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;

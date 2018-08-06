@@ -3,6 +3,7 @@ using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.MockData;
 // ReSharper disable SuggestVarOrType_Elsewhere

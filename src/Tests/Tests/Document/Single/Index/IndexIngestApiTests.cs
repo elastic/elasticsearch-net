@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Domain;
+using Tests.Domain.Extensions;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;

@@ -7,6 +7,7 @@ using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.MockData;

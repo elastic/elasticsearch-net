@@ -6,6 +6,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
 using System.Collections.Generic;
+using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 
 namespace Tests.Aggregations.Metric.ScriptedMetric

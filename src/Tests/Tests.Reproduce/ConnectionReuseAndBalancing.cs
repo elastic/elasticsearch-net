@@ -12,6 +12,7 @@ using System.Threading;
 using System.Reactive.Linq;
 using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Domain;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;

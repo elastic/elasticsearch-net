@@ -6,6 +6,7 @@ using System.Text;
 using Elastic.Managed.FileSystem;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Domain;
 using Tests.Framework.MockData;
 
 namespace Tests.Framework.ManagedElasticsearch.NodeSeeders
