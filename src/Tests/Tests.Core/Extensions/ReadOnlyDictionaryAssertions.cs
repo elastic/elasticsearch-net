@@ -11,7 +11,7 @@ using FluentAssertions.Primitives;
 
 namespace Tests.Core.Extensions
 {
-	public static class ShouldExtensions
+	public static class ReadOnlyDictionaryShouldExtensions
 	{
 		public static ReadOnlyDictionaryAssertions<TKey, TValue> Should<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> actualValue)
 		{

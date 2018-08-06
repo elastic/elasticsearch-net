@@ -7,6 +7,7 @@ using Nest;
 using Tests.Configuration;
 using Tests.Core.Client.Serializers;
 using Tests.Core.Xunit;
+using Tests.Core.Extensions;
 
 namespace Tests.Core.Client.Settings
 {
