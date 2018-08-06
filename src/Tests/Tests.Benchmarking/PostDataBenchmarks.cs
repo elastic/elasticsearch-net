@@ -6,9 +6,9 @@ using BenchmarkDotNet.Attributes;
 using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json.Linq;
-using Tests.Framework.Benchmarks;
+using Tests.Benchmarking.Framework;
 
-namespace Tests.ClientConcepts.LowLevel
+namespace Tests.Benchmarking
 {
 	[BenchmarkConfig(1000)]
 	public class PostDataBenchmarks

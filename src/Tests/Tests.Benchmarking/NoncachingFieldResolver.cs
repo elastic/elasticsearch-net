@@ -8,10 +8,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Elasticsearch.Net;
 using Nest;
 
-namespace Tests.ClientConcepts.HighLevel.Caching
+namespace Tests.Benchmarking
 {
 	public class NoncachingFieldResolver
 	{
@@ -21,7 +20,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 		public string Resolve(Field field)
 		{
-			var name = ResolveFieldName(field);
+			var name = this.ResolveFieldName(field);
 			if (field.Boost.HasValue) name += $"^{field.Boost.Value.ToString(CultureInfo.InvariantCulture)}";
 			return name;
 		}
@@ -80,7 +79,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 			public string Resolve(Expression expression, bool toLastToken = false)
 			{
-				Visit(expression);
+				this.Visit(expression);
 				if (toLastToken) return Enumerable.Last<string>(_stack);
 				return Enumerable.Aggregate<string, StringBuilder>(_stack, new StringBuilder(),
 						(sb, name) =>
@@ -137,16 +136,16 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 						return base.VisitMethodCall(methodCall);
 					}
 					VisitConstantOrVariable(methodCall, _stack);
-					Visit(methodCall.Object);
+					this.Visit(methodCall.Object);
 					return methodCall;
 				}
 				else if (IsLinqOperator(methodCall.Method))
 				{
 					for (var i = 1; i < methodCall.Arguments.Count; i++)
 					{
-						Visit(methodCall.Arguments[i]);
+						this.Visit(methodCall.Arguments[i]);
 					}
-					Visit(methodCall.Arguments[0]);
+					this.Visit(methodCall.Arguments[0]);
 					return methodCall;
 				}
 				return base.VisitMethodCall(methodCall);

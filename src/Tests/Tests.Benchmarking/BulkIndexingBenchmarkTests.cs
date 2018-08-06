@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
 using Nest;
+using Tests.Benchmarking.Framework;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Benchmarks;
 
-namespace Tests.Document.Multiple.Bulk
+namespace Tests.Benchmarking
 {
 	[BenchmarkConfig]
 	public class BulkIndexingBenchmarkTests : IDisposable

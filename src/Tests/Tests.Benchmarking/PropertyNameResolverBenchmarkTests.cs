@@ -1,10 +1,9 @@
-using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using Nest;
+using Tests.Benchmarking.Framework;
 using Tests.Domain;
-using Tests.Framework.Benchmarks;
 
-namespace Tests.ClientConcepts.HighLevel.Caching
+namespace Tests.Benchmarking
 {
 	[BenchmarkConfig(100)]
 	public class PropertyNameResolverBenchmarkTests

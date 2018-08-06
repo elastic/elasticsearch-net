@@ -1,16 +1,14 @@
 using System.IO;
 using System.Linq;
+using System.Text;
 using BenchmarkDotNet.Attributes;
 using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
-using Tests.Framework;
-using System.Text;
+using Tests.Benchmarking.Framework;
 using Tests.Core.Client;
-using Tests.Framework.Benchmarks;
 
-
-namespace Tests.Document.Multiple.Bulk
+namespace Tests.Benchmarking
 {
 	[BenchmarkConfig]
 	public class BulkDeserializationBenchmarkTests

@@ -2,15 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Environments;
-using BenchmarkDotNet.Exporters.Json;
-using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Diagnosers;
+using BenchmarkDotNet.Environments;
+using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Loggers;
 using BenchmarkDotNet.Reports;
 using Newtonsoft.Json;
 
-namespace Tests.Framework.Benchmarks
+namespace Tests.Benchmarking.Framework
 {
 	public class CustomJsonExporter : BenchmarkDotNet.Exporters.ExporterBase
 	{
@@ -75,7 +74,7 @@ namespace Tests.Framework.Benchmarks
 				Job.Dry.With(Runtime.Clr).With(Jit.RyuJit).WithIterationCount(runCount),
 				Job.Dry.With(Runtime.Clr).With(Jit.LegacyJit).WithIterationCount(runCount)
 			};
-			Config = DefaultConfig.Instance
+			this.Config = DefaultConfig.Instance
 				.With(jobs)
 				.With(new CustomJsonExporter())
 				.With(MemoryDiagnoser.Default);

@@ -5,7 +5,7 @@ using System.Reflection;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 
-namespace Tests
+namespace Tests.Benchmarking
 {
 	public static class Program
 	{
