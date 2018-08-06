@@ -3,7 +3,7 @@ using JetBrains.Profiler.Windows.Api;
 using JetBrains.Profiler.Windows.SelfApi;
 using JetBrains.Profiler.Windows.SelfApi.Config;
 
-namespace Tests.Framework.Profiling.Timeline
+namespace Tests.Profiling.Framework.Timeline
 {
 	internal class TimelineProfile : Profile
 	{
@@ -16,12 +16,12 @@ namespace Tests.Framework.Profiling.Timeline
 				SaveDir = resultsDirectory,
 				RedistDir = sdkPath,
 				ProfilingType = ProfilingType.Timeline,
-				ListFile = ListFile,
+				ListFile = this.ListFile,
 				SnapshotFormat = SnapshotFormat.Uncompressed
 			};
 
 			SelfAttach.Attach(saveSnapshotProfilingConfig);
-			WaitForProfilerToAttachToProcess();
+			this.WaitForProfilerToAttachToProcess();
 
 			if (TimelineProfiler.IsActive)
 				TimelineProfiler.Begin();

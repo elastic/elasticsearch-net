@@ -4,7 +4,7 @@ using JetBrains.Profiler.Windows.Api;
 using JetBrains.Profiler.Windows.SelfApi;
 using JetBrains.Profiler.Windows.SelfApi.Config;
 
-namespace Tests.Framework.Profiling.Performance
+namespace Tests.Profiling.Framework.Performance
 {
 	internal class PerformanceProfile : Profile
 	{
@@ -17,7 +17,7 @@ namespace Tests.Framework.Profiling.Performance
 				SaveDir = resultsDirectory,
 				RedistDir = sdkPath,
 				ProfilingType = ProfilingType.Performance,
-				ListFile = ListFile,
+				ListFile = this.ListFile,
 				SnapshotFormat = SnapshotFormat.Uncompressed
 			};
 
@@ -27,7 +27,7 @@ namespace Tests.Framework.Profiling.Performance
 			}
 
 			SelfAttach.Attach(saveSnapshotProfilingConfig);
-			WaitForProfilerToAttachToProcess();
+			this.WaitForProfilerToAttachToProcess();
 
 			if (PerformanceProfiler.IsActive)
 			{

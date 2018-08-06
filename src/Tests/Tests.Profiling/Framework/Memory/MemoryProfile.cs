@@ -4,7 +4,7 @@ using JetBrains.Profiler.Windows.Api;
 using JetBrains.Profiler.Windows.SelfApi;
 using JetBrains.Profiler.Windows.SelfApi.Config;
 
-namespace Tests.Framework.Profiling.Memory
+namespace Tests.Profiling.Framework.Memory
 {
 	internal class MemoryProfile : Profile
 	{
@@ -17,7 +17,7 @@ namespace Tests.Framework.Profiling.Memory
 				SaveDir = resultsDirectory,
 				RedistDir = sdkPath,
 				ProfilingType = ProfilingType.Memory,
-				ListFile = ListFile
+				ListFile = this.ListFile
 			};
 
 			while (SelfAttach.State != SelfApiState.None)
@@ -26,7 +26,7 @@ namespace Tests.Framework.Profiling.Memory
 			}
 
 			SelfAttach.Attach(saveSnapshotProfilingConfig);
-			WaitForProfilerToAttachToProcess();
+			this.WaitForProfilerToAttachToProcess();
 
 			if (MemoryProfiler.IsActive && MemoryProfiler.CanControlAllocations)
 			{

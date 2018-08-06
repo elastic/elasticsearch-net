@@ -2,10 +2,10 @@ using System;
 using System.Threading.Tasks;
 using Nest;
 using Tests.Domain;
-using Tests.Framework.Profiling;
-using Tests.Framework.Profiling.Performance;
+using Tests.Profiling.Framework;
+using Tests.Profiling.Framework.Performance;
 
-namespace Tests.Document.Multiple.Bulk
+namespace Tests.Profiling
 {
     public class BulkProfileTests
     {

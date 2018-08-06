@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Tests.Framework.Profiling.Timeline
+namespace Tests.Profiling.Framework.Timeline
 {
 	internal class TimelineProfileFactory : ProfileFactory<TimelineAttribute>
 	{
@@ -9,6 +9,6 @@ namespace Tests.Framework.Profiling.Timeline
 			: base(sdkPath, outputPath, cluster, assembly, output)
 			{ }
 
-		protected override IDisposable BeginProfiling(string resultsDirectory) => new TimelineProfile(SdkPath, resultsDirectory);
+		protected override IDisposable BeginProfiling(string resultsDirectory) => new TimelineProfile(this.SdkPath, resultsDirectory);
 	}
 }

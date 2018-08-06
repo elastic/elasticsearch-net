@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Tests.Framework.Profiling.Memory
+namespace Tests.Profiling.Framework.Memory
 {
 	internal class MemoryProfileFactory : ProfileFactory<MemoryAttribute>
 	{
@@ -16,7 +16,7 @@ namespace Tests.Framework.Profiling.Memory
 
 		protected override IDisposable BeginProfiling(string resultsDirectory)
 		{
-			return new MemoryProfile(SdkPath, resultsDirectory);
+			return new MemoryProfile(this.SdkPath, resultsDirectory);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 
-namespace Tests.Framework.Profiling
+namespace Tests.Profiling.Framework
 {
 	public class ProfilingCluster : ClientTestClusterBase
 	{

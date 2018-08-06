@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Tests.Framework.Profiling;
-using Tests.Framework.Profiling.Memory;
-using Tests.Framework.Profiling.Performance;
-using Tests.Framework.Profiling.Timeline;
+using Tests.Profiling.Framework;
+using Tests.Profiling.Framework.Memory;
+using Tests.Profiling.Framework.Performance;
+using Tests.Profiling.Framework.Timeline;
 
-namespace Tests
+namespace Tests.Profiling
 {
 	public static class Program
 	{

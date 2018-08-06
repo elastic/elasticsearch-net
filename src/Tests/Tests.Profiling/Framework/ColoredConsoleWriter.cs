@@ -1,6 +1,6 @@
 using System;
 
-namespace Tests.Framework.Profiling
+namespace Tests.Profiling.Framework
 {
 	public class ColoredConsoleWriter  : IColoredWriter
 	{

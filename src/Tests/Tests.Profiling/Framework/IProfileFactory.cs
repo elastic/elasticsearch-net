@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Tests.Framework.Profiling
+namespace Tests.Profiling.Framework
 {
 	internal interface IProfileFactory
 	{

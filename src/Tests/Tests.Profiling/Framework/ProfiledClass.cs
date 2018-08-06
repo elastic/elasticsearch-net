@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Tests.Framework.Profiling
+namespace Tests.Profiling.Framework
 {
 	public class ProfiledClass
 	{
@@ -19,16 +19,16 @@ namespace Tests.Framework.Profiling
 
 		public ProfiledClass(Type type, ProfiledMethod setupMethod, IEnumerable<ProfiledMethod> methods)
 		{
-			Type = type;
-			Methods = methods;
-			SetupMethod = setupMethod;
+			this.Type = type;
+			this.Methods = methods;
+			this.SetupMethod = setupMethod;
 		}
 
 		public object CreateInstance(ProfilingCluster cluster)
 		{
 			if (_instance == null)
 			{
-				var constructors = Type.GetTypeInfo().GetConstructors();
+				var constructors = this.Type.GetTypeInfo().GetConstructors();
 
 				var clusterConstructor = constructors.FirstOrDefault(c =>
 				{
@@ -38,8 +38,8 @@ namespace Tests.Framework.Profiling
 				});
 
 				_instance = clusterConstructor != null
-					? Activator.CreateInstance(Type, cluster)
-					: Activator.CreateInstance(Type);
+					? Activator.CreateInstance(this.Type, cluster)
+					: Activator.CreateInstance(this.Type);
 			}
 
 			return _instance;

@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Tests.Framework.Profiling.Performance
+namespace Tests.Profiling.Framework.Performance
 {
 	internal class PerformanceProfileFactory : ProfileFactory<PerformanceAttribute>
 	{
@@ -10,6 +10,6 @@ namespace Tests.Framework.Profiling.Performance
 		{
 		}
 
-		protected override IDisposable BeginProfiling(string resultsDirectory) => new PerformanceProfile(SdkPath, resultsDirectory);
+		protected override IDisposable BeginProfiling(string resultsDirectory) => new PerformanceProfile(this.SdkPath, resultsDirectory);
 	}
 }

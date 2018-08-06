@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tests.Framework.Profiling
+namespace Tests.Profiling.Framework
 {
 	public class ProfileConfiguration
 	{

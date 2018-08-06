@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Tests.Framework.Profiling
+namespace Tests.Profiling.Framework
 {
 	internal abstract class ProfileFactory<TAttribute> : IProfileFactory where TAttribute : ProfilingAttribute
 	{
@@ -17,12 +17,12 @@ namespace Tests.Framework.Profiling
 			Assembly assembly,
 			IColoredWriter output)
 		{
-			Name = this.GetType().Name.Replace("ProfileFactory", string.Empty).ToLowerInvariant();
-			SdkPath = sdkPath;
-			OutputPath = Path.Combine(outputPath, Name);
-			Cluster = cluster;
-			Assembly = assembly;
-			Output = output;
+			this.Name = this.GetType().Name.Replace("ProfileFactory", string.Empty).ToLowerInvariant();
+			this.SdkPath = sdkPath;
+			this.OutputPath = Path.Combine(outputPath, this.Name);
+			this.Cluster = cluster;
+			this.Assembly = assembly;
+			this.Output = output;
 		}
 
 		private string Name { get; }
@@ -41,7 +41,7 @@ namespace Tests.Framework.Profiling
 			{
 				if (_profiledClasses == null)
 				{
-					_profiledClasses = Assembly
+					_profiledClasses = this.Assembly
 						.GetTypes()
 						.Where(t => t.GetTypeInfo().IsPublic && t.GetTypeInfo().IsClass)
 						.Where(t => t.GetMethods(BindingFlags.Instance | BindingFlags.Public)
@@ -69,29 +69,29 @@ namespace Tests.Framework.Profiling
 
 		public void Run(ProfileConfiguration configuration)
 		{
-			foreach (var profiledClass in ProfiledClasses
+			foreach (var profiledClass in this.ProfiledClasses
 				.Where(c => !configuration.ClassNames.Any() || configuration.ClassNames.Contains(c.Name))
 				.Where(c => c.Methods.Any(m => !m.IsAsync)))
 			{
-				var instance = profiledClass.CreateInstance(Cluster);
+				var instance = profiledClass.CreateInstance(this.Cluster);
 
 				if (profiledClass.SetupMethod != null)
 				{
 					var setup = profiledClass.SetupMethod.Compile(instance);
-					Output.WriteLine(ConsoleColor.Green, $"Running setup for {profiledClass.Type.Name}");
+					this.Output.WriteLine(ConsoleColor.Green, $"Running setup for {profiledClass.Type.Name}");
 					setup();
 				}
 
 				foreach (var profiledMethod in profiledClass.Methods.Where(m => !m.IsAsync))
 				{
-					var resultsDirectory = Path.Combine(OutputPath, profiledClass.Type.Name, profiledMethod.MethodInfo.Name);
+					var resultsDirectory = Path.Combine(this.OutputPath, profiledClass.Type.Name, profiledMethod.MethodInfo.Name);
 					var action = profiledMethod.Compile(instance);
 
-					Output.WriteLine(
+					this.Output.WriteLine(
 						ConsoleColor.Green,
-						$"{Name} profiling {profiledClass.Type.Name}.{profiledMethod.MethodInfo.Name}");
+						$"{this.Name} profiling {profiledClass.Type.Name}.{profiledMethod.MethodInfo.Name}");
 
-					using (BeginProfiling(resultsDirectory))
+					using (this.BeginProfiling(resultsDirectory))
 					{
 						for (var i = 0; i < profiledMethod.Attribute.Iterations; i++)
 						{
@@ -104,29 +104,29 @@ namespace Tests.Framework.Profiling
 
 		public async Task RunAsync(ProfileConfiguration configuration)
 		{
-			foreach (var profiledClass in ProfiledClasses
+			foreach (var profiledClass in this.ProfiledClasses
 				.Where(c => !configuration.ClassNames.Any() || configuration.ClassNames.Contains(c.Name))
 				.Where(c => c.Methods.Any(m => m.IsAsync)))
 			{
-				var instance = profiledClass.CreateInstance(Cluster);
+				var instance = profiledClass.CreateInstance(this.Cluster);
 
 				if (profiledClass.SetupMethod != null)
 				{
 					var setup = profiledClass.SetupMethod.Compile(instance);
-					Output.WriteLine(ConsoleColor.Green, $"Running setup for {profiledClass.Type.Name}");
+					this.Output.WriteLine(ConsoleColor.Green, $"Running setup for {profiledClass.Type.Name}");
 					setup();
 				}
 
 				foreach (var profiledMethod in profiledClass.Methods.Where(m => m.IsAsync))
 				{
-					var resultsDirectory = Path.Combine(OutputPath, profiledClass.Type.Name, profiledMethod.MethodInfo.Name);
+					var resultsDirectory = Path.Combine(this.OutputPath, profiledClass.Type.Name, profiledMethod.MethodInfo.Name);
 					var thunk = profiledMethod.CompileAsync(instance);
 
-					Output.WriteLine(
+					this.Output.WriteLine(
 						ConsoleColor.Green,
-						$"{Name} profiling {profiledClass.Type.Name}.{profiledMethod.MethodInfo.Name}");
+						$"{this.Name} profiling {profiledClass.Type.Name}.{profiledMethod.MethodInfo.Name}");
 
-					using (BeginProfiling(resultsDirectory))
+					using (this.BeginProfiling(resultsDirectory))
 					{
 						for (var i = 0; i < profiledMethod.Attribute.Iterations; i++)
 						{

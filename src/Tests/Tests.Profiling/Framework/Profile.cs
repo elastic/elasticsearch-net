@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using JetBrains.Profiler.Windows.SelfApi;
 
-namespace Tests.Framework.Profiling
+namespace Tests.Profiling.Framework
 {
 	internal abstract class Profile : IDisposable
 	{
@@ -15,12 +15,12 @@ namespace Tests.Framework.Profiling
 			if (!Directory.Exists(resultsDirectory))
 				Directory.CreateDirectory(resultsDirectory);
 
-			ListFile = Path.Combine(resultsDirectory, "snapshot_list.xml");
-			using (File.Create(ListFile)) { }
+			this.ListFile = Path.Combine(resultsDirectory, "snapshot_list.xml");
+			using (File.Create(this.ListFile)) { }
 
-			if (ProfileProcesses.Any())
+			if (this.ProfileProcesses.Any())
 			{
-				foreach (var profileProcess in ProfileProcesses)
+				foreach (var profileProcess in this.ProfileProcesses)
 				{
 					profileProcess.Kill();
 				}
@@ -42,7 +42,7 @@ namespace Tests.Framework.Profiling
 		public virtual void Dispose()
 		{
 			// ensure running profiler process has chance to finish before starting next one
-			while (SelfAttach.State == SelfApiState.Active || IsActive || ProfileProcesses.Any())
+			while (SelfAttach.State == SelfApiState.Active || this.IsActive || this.ProfileProcesses.Any())
 			{
 				Thread.Sleep(250);
 			}

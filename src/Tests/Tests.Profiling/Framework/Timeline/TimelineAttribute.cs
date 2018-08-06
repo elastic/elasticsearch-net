@@ -1,4 +1,4 @@
-namespace Tests.Framework.Profiling.Timeline
+namespace Tests.Profiling.Framework.Timeline
 {
 	/// <summary>
 	/// identifies a method that should be timeline profiled
