@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Running;
+using Tests.ScratchPad.Runners.Inferrence;
 
-namespace ClientMasterScratch
+namespace Tests.ScratchPad
 {
 	public class Program
 	{

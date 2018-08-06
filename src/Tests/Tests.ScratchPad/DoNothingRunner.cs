@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ClientMasterScratch
+﻿namespace Tests.ScratchPad
 {
 	public class DoNothingRunner : RunBase
 	{

@@ -1,8 +1,7 @@
-﻿using System;
-using Nest;
+﻿using Nest;
 using Tests.Domain;
 
-namespace ClientMasterScratch
+namespace Tests.ScratchPad.Runners.Inferrence
 {
 	public class IdInferenceRunner : RunBase
 	{

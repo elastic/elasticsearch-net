@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using Tests.Domain;
 
-namespace ClientMasterScratch
+namespace Tests.ScratchPad.Runners.Inferrence
 {
 	public class ExpressionCreationRunner : RunBase
 	{

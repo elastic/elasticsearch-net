@@ -1,7 +1,6 @@
-﻿using System;
-using Tests.Domain;
+﻿using Tests.Domain;
 
-namespace ClientMasterScratch
+namespace Tests.ScratchPad.Runners.ApiCalls
 {
 	public class IndexDocumentRunner : RunBase
 	{

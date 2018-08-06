@@ -1,14 +1,12 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Engines;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Client;
 
-namespace ClientMasterScratch
+namespace Tests.ScratchPad
 {
 	[SimpleJob(RunStrategy.Throughput, launchCount: 2, warmupCount: 2, targetCount: 5, id: "BenchmarkRun")]
 	[MemoryDiagnoser]
@@ -39,7 +37,7 @@ namespace ClientMasterScratch
 
 		protected LoopRoutine<T> Loop<T>(Func<T> create, Action<IElasticClient, T> act)
 		{
-			return new LoopRoutine<T>(create, act, LoopCount, IsNotBenchmark);
+			return new LoopRoutine<T>(create, act, this.LoopCount, this.IsNotBenchmark);
 		}
 
 		protected class LoopRoutine<T> : RunRoutine<T>
