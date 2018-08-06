@@ -21,7 +21,7 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\Elasticsearch.Net\letstandard2.0\Elasticsearch.Net.dll" target="lib\netstandard2.0"/>
+		<file src="output\Elasticsearch.Net\netstandard2.0\Elasticsearch.Net.dll" target="lib\netstandard2.0"/>
 		<file src="output\Elasticsearch.Net\netstandard2.0\Elasticsearch.Net.xml" target="lib\netstandard2.0"/>
 	</files>
 </package>
