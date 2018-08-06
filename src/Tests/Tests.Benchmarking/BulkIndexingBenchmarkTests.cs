@@ -38,9 +38,7 @@ namespace Tests.Document.Multiple.Bulk
 			);
 		}
 
-#pragma warning disable 618
-		[Setup]
-#pragma warning restore 618
+		[GlobalSetup]
 		public void Setup()
 		{
 			_messages = Message.Generator.Generate(250000).Partition(1000).ToList();

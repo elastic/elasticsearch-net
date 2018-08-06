@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TestPackageVersion)'!=''">
     <RestoreSources>../../build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>

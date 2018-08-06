@@ -19,21 +19,32 @@ namespace Tests.Framework
 			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("FAKEBUILD")))
 				return new EnvironmentConfiguration();
 
-			var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
-			Console.WriteLine(directoryInfo.FullName);
+			var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
+			var testsConfigurationFolder = FindTestsConfigurationFolder(directory);
+			if (testsConfigurationFolder == null)
+				throw new Exception($"Tried to locate a parent test folder starting from  pwd:{directory.FullName}");
 
-			var yamlConfigurationPath = "../../../../Tests.Configuration";
-			var directory = Path.GetFullPath(yamlConfigurationPath);
-
-			var localYamlFile = Path.Combine(directory, "tests.yaml");
+			var localYamlFile = Path.Combine(testsConfigurationFolder.FullName, "tests.yaml");
 			if (File.Exists(localYamlFile))
 				return new YamlConfiguration(localYamlFile);
 
-			var defaultYamlFile = Path.Combine(directory, "tests.default.yaml");
+			var defaultYamlFile = Path.Combine(testsConfigurationFolder.FullName, "tests.default.yaml");
 			if (File.Exists(defaultYamlFile))
 				return new YamlConfiguration(defaultYamlFile);
 
-			throw new Exception($"Tried to load a yaml file from {directory} but it does not exist : pwd:{directoryInfo.FullName}");
+			throw new Exception($"Tried to load a yaml file from {testsConfigurationFolder.FullName}");
+		}
+
+		private static DirectoryInfo FindTestsConfigurationFolder(DirectoryInfo directoryInfo)
+		{
+			do
+			{
+				var yamlConfigDir = Path.Combine(directoryInfo.FullName, "Tests.Configuration");
+				if (directoryInfo.Name == "Tests" && Directory.Exists(yamlConfigDir))
+					return new DirectoryInfo(yamlConfigDir);
+				directoryInfo = directoryInfo.Parent;
+			} while (directoryInfo != null);
+			return null;
 		}
 	}
 }

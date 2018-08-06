@@ -25,15 +25,15 @@ namespace Tests.Framework.Benchmarks
 				HostEnvironmentInfo.BenchmarkDotNetCaption,
 				summary.HostEnvironmentInfo.BenchmarkDotNetVersion,
 				OsVersion = summary.HostEnvironmentInfo.OsVersion.Value,
-				ProcessorName = summary.HostEnvironmentInfo.ProcessorName.Value,
-				summary.HostEnvironmentInfo.ProcessorCount,
+				summary.HostEnvironmentInfo.CpuInfo.Value.ProcessorName,
+				summary.HostEnvironmentInfo.CpuInfo.Value.PhysicalCoreCount,
 				summary.HostEnvironmentInfo.RuntimeVersion,
 				summary.HostEnvironmentInfo.Architecture,
 				summary.HostEnvironmentInfo.HasAttachedDebugger,
 				summary.HostEnvironmentInfo.HasRyuJit,
 				summary.HostEnvironmentInfo.Configuration,
 				summary.HostEnvironmentInfo.JitModules,
-				DotNetCliVersion = summary.HostEnvironmentInfo.DotNetCliVersion.Value,
+				DotNetCliVersion = summary.HostEnvironmentInfo.DotNetSdkVersion.Value,
 				summary.HostEnvironmentInfo.ChronometerFrequency,
 				HardwareTimerKind = summary.HostEnvironmentInfo.HardwareTimerKind.ToString()
 			};
@@ -42,12 +42,12 @@ namespace Tests.Framework.Benchmarks
 			{
 				var data = new Dictionary<string, object>
 				{
-                    { "DisplayInfo", r.Benchmark.DisplayInfo },
-					{ "Namespace", r.Benchmark.Target.Type.Namespace },
-					{ "Type", r.Benchmark.Target.Type.Name },
-					{ "Method", r.Benchmark.Target.Method.Name },
-					{ "MethodTitle", r.Benchmark.Target.MethodDisplayInfo },
-					{ "Parameters", r.Benchmark.Parameters.PrintInfo },
+                    { "DisplayInfo", r.BenchmarkCase.DisplayInfo },
+					{ "Namespace", r.BenchmarkCase.Descriptor.Type.Namespace },
+					{ "Type", r.BenchmarkCase.Descriptor.Type.Name },
+					{ "Method", r.BenchmarkCase.Descriptor.WorkloadMethod.Name },
+					{ "MethodTitle", r.BenchmarkCase.Descriptor.WorkloadMethod.Name },
+					{ "Parameters", r.BenchmarkCase.Parameters.PrintInfo },
                     { "Statistics", r.ResultStatistics },
 					{ "Memory", r.GcStats }
 				};
@@ -71,9 +71,9 @@ namespace Tests.Framework.Benchmarks
 		public BenchmarkConfigAttribute(int runCount = 1)
 		{
 			var jobs = new[] {
-				Job.Dry.With(Runtime.Core).With(Jit.RyuJit).WithTargetCount(runCount),
-				Job.Dry.With(Runtime.Clr).With(Jit.RyuJit).WithTargetCount(runCount),
-				Job.Dry.With(Runtime.Clr).With(Jit.LegacyJit).WithTargetCount(runCount)
+				Job.Dry.With(Runtime.Core).With(Jit.RyuJit).WithIterationCount(runCount),
+				Job.Dry.With(Runtime.Clr).With(Jit.RyuJit).WithIterationCount(runCount),
+				Job.Dry.With(Runtime.Clr).With(Jit.LegacyJit).WithIterationCount(runCount)
 			};
 			Config = DefaultConfig.Instance
 				.With(jobs)

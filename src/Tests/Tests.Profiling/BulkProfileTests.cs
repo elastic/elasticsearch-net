@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Nest;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
+using Tests.Framework.Profiling;
 using Tests.Framework.Profiling.Performance;
 
 namespace Tests.Document.Multiple.Bulk
@@ -12,7 +12,7 @@ namespace Tests.Document.Multiple.Bulk
         private readonly IElasticClient _client;
         private static readonly string IndexName = "bulk-profile";
 
-        public BulkProfileTests(ClientTestClusterBase cluster)
+        public BulkProfileTests(ProfilingCluster cluster)
         {
             _client = cluster.Client;
 

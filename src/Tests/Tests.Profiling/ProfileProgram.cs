@@ -12,40 +12,19 @@ namespace Tests
 {
 	public static class Program
 	{
-		private const string SelfProfileSdkDirectory = "dottrace-selfprofile";
 
-		public static string InputDirPath { get; }
-		public static string OutputDirPath { get; }
 		private static string SdkPath { get; }
 		private static string OutputPath { get; }
 
 		static Program()
 		{
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
-			if ((currentDirectory.Name == "Debug" || currentDirectory.Name == "Release") && currentDirectory.Parent.Name == "bin")
-			{
-				SdkPath = new DirectoryInfo(
-					Path.Combine(
-						Directory.GetCurrentDirectory(),
-						$@".\..\..\..\..\build\tools\{SelfProfileSdkDirectory}")).FullName;
+			var sdkDir = FindSelfProfileSdkDirectory(currentDirectory);
+			if (sdkDir == null)
+				throw new Exception($"Can not find {SelfProfileSdkDirectory} starting from {currentDirectory.FullName}");
 
-				OutputPath = new DirectoryInfo(
-					Path.Combine(
-						Directory.GetCurrentDirectory(),
-						$@".\..\..\..\..\build\output\profiling")).FullName;
-			}
-			else
-			{
-				SdkPath = new DirectoryInfo(
-					Path.Combine(
-						Directory.GetCurrentDirectory(),
-						$@".\build\tools\{SelfProfileSdkDirectory}")).FullName;
-
-				OutputPath = new DirectoryInfo(
-					Path.Combine(
-						Directory.GetCurrentDirectory(),
-						$@".\build\output\profiling")).FullName;
-			}
+			SdkPath = sdkDir.FullName;
+			OutputPath = Path.Combine(sdkDir.Parent.Parent.FullName, "profiling");
 		}
 
 		public static int Main(string[] arguments)
@@ -59,6 +38,7 @@ namespace Tests
 
 			using (var cluster = new ProfilingCluster())
 			{
+				cluster.Start();
 				foreach (var profilingFactory in CreateProfilingFactory(cluster))
 				{
 					profilingFactory.Run(configuration);
@@ -82,5 +62,17 @@ namespace Tests
 			yield return new MemoryProfileFactory(SdkPath, OutputPath, cluster, Assembly.GetEntryAssembly(), new ColoredConsoleWriter());
 		}
 #endif
+
+		private const string SelfProfileSdkDirectory = "dottrace-selfprofile";
+		private static DirectoryInfo FindSelfProfileSdkDirectory(DirectoryInfo directoryInfo)
+		{
+			do
+			{
+				var sdkDir = Path.Combine(directoryInfo.FullName, "build", "tools", SelfProfileSdkDirectory);
+				if (Directory.Exists(sdkDir)) return new DirectoryInfo(sdkDir);
+				directoryInfo = directoryInfo.Parent;
+			} while (directoryInfo != null);
+			return null;
+		}
 	}
 }
