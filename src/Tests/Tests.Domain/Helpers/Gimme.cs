@@ -1,5 +1,5 @@
 using Bogus;
-using Tests.Framework;
+using Tests.Configuration;
 
 namespace Tests.Domain.Helpers
 {

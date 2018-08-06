@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tests.Framework.Configuration
+namespace Tests.Configuration
 {
 	public class EnvironmentConfiguration : TestConfigurationBase
 	{
@@ -18,7 +18,7 @@ namespace Tests.Framework.Configuration
 			//if env var NEST_INTEGRATION_VERSION is set assume integration mode
 			//used by the build script FAKE
 			var version = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
-			if (!string.IsNullOrEmpty(version)) Mode = TestMode.Integration;
+			if (!string.IsNullOrEmpty(version)) this.Mode = TestMode.Integration;
 
 			this.ElasticsearchVersion = string.IsNullOrWhiteSpace(version) ? DefaultVersion : version;
 			this.ClusterFilter = Environment.GetEnvironmentVariable("NEST_INTEGRATION_CLUSTER");

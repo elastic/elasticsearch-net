@@ -2,7 +2,7 @@ using System;
 using System.Net;
 using Bogus;
 using Nest;
-using Tests.Framework;
+using Tests.Configuration;
 
 namespace Tests.Domain
 {

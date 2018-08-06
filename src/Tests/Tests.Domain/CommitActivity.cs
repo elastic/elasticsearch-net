@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Bogus;
 using Nest;
 using Newtonsoft.Json;
+using Tests.Configuration;
 using Tests.Domain.Helpers;
 using Tests.Domain.JsonConverters;
-using Tests.Framework;
 
 namespace Tests.Domain
 {

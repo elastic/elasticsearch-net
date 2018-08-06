@@ -6,7 +6,7 @@ using Elastic.Managed.Configuration;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connections.HttpWebRequestConnection;
 using Nest;
-using Tests.Framework.Configuration;
+using Tests.Configuration;
 
 namespace Tests.Framework.ManagedElasticsearch
 {

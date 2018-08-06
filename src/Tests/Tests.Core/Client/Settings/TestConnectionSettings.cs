@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Configuration;
 using Tests.Framework.ManagedElasticsearch.SourceSerializers;
 using Tests.Framework.MockData;
 

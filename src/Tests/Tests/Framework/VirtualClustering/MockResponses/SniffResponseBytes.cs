@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Elasticsearch.Net;
+using Tests.Configuration;
 
 namespace Tests.Framework.MockResponses
 {

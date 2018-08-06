@@ -5,9 +5,9 @@ using Bogus;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Tests.Configuration;
 using Tests.Domain.Extensions;
 using Tests.Domain.Helpers;
-using Tests.Framework;
 
 namespace Tests.Domain
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Bogus;
 using Nest;
-using Tests.Framework;
+using Tests.Configuration;
 
 namespace Tests.Domain
 {

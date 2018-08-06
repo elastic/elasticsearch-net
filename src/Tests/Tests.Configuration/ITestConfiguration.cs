@@ -1,4 +1,4 @@
-﻿namespace Tests.Framework.Configuration
+﻿namespace Tests.Configuration
 {
 	public interface ITestConfiguration
 	{

@@ -1,4 +1,4 @@
-﻿namespace Tests.Framework.Configuration
+﻿namespace Tests.Configuration
 {
 	public abstract class TestConfigurationBase : ITestConfiguration
 	{
@@ -12,8 +12,8 @@
 		public abstract bool ShowElasticsearchOutputAfterStarted { get; protected set; }
 
 
-		public virtual bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
-		public virtual bool RunUnitTests => Mode == TestMode.Mixed || Mode == TestMode.Unit;
+		public virtual bool RunIntegrationTests => this.Mode == TestMode.Mixed || this.Mode == TestMode.Integration;
+		public virtual bool RunUnitTests => this.Mode == TestMode.Mixed || this.Mode == TestMode.Unit;
 
 		public abstract int Seed { get; protected set; }
 		public RandomConfiguration Random { get; protected set; }

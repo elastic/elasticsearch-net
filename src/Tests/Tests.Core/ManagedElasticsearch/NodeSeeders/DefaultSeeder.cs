@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Nest;
+using Tests.Configuration;
 using Tests.Domain;
 using Tests.Framework.MockData;
 

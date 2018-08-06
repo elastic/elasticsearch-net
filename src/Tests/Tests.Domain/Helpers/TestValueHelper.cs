@@ -1,6 +1,6 @@
 ﻿using System;
 using Elastic.Managed.Configuration;
-using Tests.Framework;
+using Tests.Configuration;
 
 namespace Tests.Domain.Helpers
 {

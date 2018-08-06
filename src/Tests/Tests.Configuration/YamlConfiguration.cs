@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Tests.Framework.Configuration
+namespace Tests.Configuration
 {
 	public class YamlConfiguration : TestConfigurationBase
 	{
@@ -28,9 +28,9 @@ namespace Tests.Framework.Configuration
 			this.Mode = GetTestMode(_config["mode"]);
 			var version = _config["elasticsearch_version"];
 			this.ElasticsearchVersion = string.IsNullOrWhiteSpace(version) ? DefaultVersion : version;
-			this.ForceReseed = BoolConfig("force_reseed", false);
-			this.TestAgainstAlreadyRunningElasticsearch = BoolConfig("test_against_already_running_elasticsearch", false);
-			this.ShowElasticsearchOutputAfterStarted = BoolConfig("elasticsearch_out_after_started", false);
+			this.ForceReseed = this.BoolConfig("force_reseed", false);
+			this.TestAgainstAlreadyRunningElasticsearch = this.BoolConfig("test_against_already_running_elasticsearch", false);
+			this.ShowElasticsearchOutputAfterStarted = this.BoolConfig("elasticsearch_out_after_started", false);
 			this.ClusterFilter = _config.ContainsKey("cluster_filter") ? _config["cluster_filter"] : null;
 			this.TestFilter = _config.ContainsKey("test_filter") ? _config["test_filter"] : null;
 
@@ -39,9 +39,9 @@ namespace Tests.Framework.Configuration
 			var randomizer = new Random(this.Seed);
 			this.Random = new RandomConfiguration
 			{
-				SourceSerializer = RandomBool("source_serializer", randomizer),
-				TypedKeys = RandomBool("typed_keys", randomizer),
-				OldConnection = RandomBool("old_connection", randomizer)
+				SourceSerializer = this.RandomBool("source_serializer", randomizer),
+				TypedKeys = this.RandomBool("typed_keys", randomizer),
+				OldConnection = this.RandomBool("old_connection", randomizer)
 			};
 		}
 

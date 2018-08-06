@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using Tests.Framework.Configuration;
 
-namespace Tests.Framework
+namespace Tests.Configuration
 {
 	public sealed class TestConfiguration
 	{

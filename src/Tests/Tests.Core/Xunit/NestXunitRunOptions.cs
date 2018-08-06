@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Elastic.Xunit;
-using Tests.Framework.Configuration;
+using Tests.Configuration;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.MockData;
 using static System.Console;
