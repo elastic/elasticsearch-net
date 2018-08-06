@@ -10,7 +10,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 using Xunit;
 using Xunit.Sdk;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 
 namespace Tests.Search.Request
 {

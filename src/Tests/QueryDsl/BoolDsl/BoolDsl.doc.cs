@@ -9,7 +9,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using Tests.QueryDsl.BoolDsl.Operators;
 using static Nest.Infer;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 
 namespace Tests.QueryDsl.BoolDsl
 {

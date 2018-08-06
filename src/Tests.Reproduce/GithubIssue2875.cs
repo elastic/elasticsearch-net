@@ -2,7 +2,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 
 namespace Tests.Reproduce
 {

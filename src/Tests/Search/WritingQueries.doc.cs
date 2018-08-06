@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 
 namespace Tests.Search
 {

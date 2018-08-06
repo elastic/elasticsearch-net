@@ -2,7 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 using Name = Bogus.DataSets.Name;
 
 namespace Tests.Search.Hits

@@ -3,7 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {

@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.MockData;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 using static Nest.Infer;
 using Field = Nest.Field;
 // ReSharper disable ArrangeMethodOrOperatorBody
@@ -404,7 +404,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				.DefaultMappingFor<A>(m => m
 					.PropertyName(p => p.C, "d")
 				);
-			
+
 			var newClient = new ElasticClient(newConnectionSettings);
 
 			fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));

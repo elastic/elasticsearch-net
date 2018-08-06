@@ -6,7 +6,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.MockData;
-using Xunit;
+using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Document.Single.Index
 {

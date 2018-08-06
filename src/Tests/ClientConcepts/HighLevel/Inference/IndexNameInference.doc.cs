@@ -6,7 +6,7 @@ using Tests.Framework;
 using Tests.Framework.ManagedElasticsearch;
 using Tests.Framework.MockData;
 using Xunit;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 using static Nest.Infer;
 
 namespace Tests.ClientConcepts.HighLevel.Inference

@@ -4,7 +4,7 @@ using Nest;
 
 namespace Tests.Framework
 {
-	public abstract class UsageTestBase<TInterface, TDescriptor, TInitializer> : SerializationTestBase
+	public abstract class UsageTestBase<TInterface, TDescriptor, TInitializer> : ExpectJsonTestBase
 		where TDescriptor : TInterface, new()
 		where TInitializer : class, TInterface
 		where TInterface : class
@@ -26,7 +26,7 @@ namespace Tests.Framework
 		[U] protected void SerializesFluent() => this.RoundTripsOrSerializes(this.FluentInstance);
 	}
 
-	public abstract class PromiseUsageTestBase<TInterface, TDescriptor, TInitializer> : SerializationTestBase
+	public abstract class PromiseUsageTestBase<TInterface, TDescriptor, TInitializer> : ExpectJsonTestBase
 		where TDescriptor : IPromise<TInterface>, new()
 		where TInitializer : class, TInterface
 		where TInterface : class

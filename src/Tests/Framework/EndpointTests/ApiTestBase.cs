@@ -19,6 +19,7 @@ namespace Tests.Framework
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
+		protected override object ExpectJson { get; } = null;
 		protected abstract string UrlPath { get; }
 		protected abstract HttpMethod HttpMethod { get; }
 

@@ -13,7 +13,7 @@ using Xunit;
 namespace Tests.Framework
 {
 	public abstract class RequestResponseApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
-		: SerializationTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
+		: ExpectJsonTestBase, IClusterFixture<TCluster>, IClassFixture<EndpointUsage>
 		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster , new()
 		where TResponse : class, IResponse
 		where TInterface : class
@@ -42,7 +42,7 @@ namespace Tests.Framework
 		protected CallUniqueValues UniqueValues { get; }
 		protected LazyResponses Responses { get; }
 
-		public override IElasticClient Client => TestClient.DefaultInMemoryClient;
+		public virtual IElasticClient Client => TestClient.DefaultInMemoryClient;
 
 		protected abstract LazyResponses ClientUsage();
 

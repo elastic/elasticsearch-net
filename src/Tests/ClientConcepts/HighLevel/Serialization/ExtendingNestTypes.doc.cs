@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using Tests.ClientConcepts.HighLevel.Mapping;
 using Tests.Framework;
 using Tests.Framework.MockData;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {

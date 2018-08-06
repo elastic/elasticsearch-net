@@ -1,5 +1,5 @@
 ﻿using Nest;
-using Tests.Framework.ManagedElasticsearch;
+using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Framework.MockData
 {
@@ -8,13 +8,13 @@ namespace Tests.Framework.MockData
 		public static ConnectionSettings ApplyDomainSettings(this ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
 			.DefaultMappingFor<Project>(map => map
-				.IndexName(VersionDependentValues.ProjectsIndex)
+				.IndexName(ProjectsIndex)
 				.IdProperty(p => p.Name)
 				.RelationName("project")
 				.TypeName("doc")
 			)
 			.DefaultMappingFor<CommitActivity>(map => map
-				.IndexName(VersionDependentValues.ProjectsIndex)
+				.IndexName(ProjectsIndex)
 				.RelationName("commits")
 				.TypeName("doc")
 			)
@@ -25,7 +25,7 @@ namespace Tests.Framework.MockData
 			)
 			.DefaultMappingFor<ProjectPercolation>(map => map
 				.IndexName("queries")
-				.TypeName(VersionDependentValues.PercolatorType)
+				.TypeName(PercolatorType)
 			)
 			.DefaultMappingFor<Metric>(map => map
 				.IndexName("server-metrics")

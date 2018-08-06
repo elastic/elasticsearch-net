@@ -9,7 +9,7 @@ using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Tests.Framework;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 using static Nest.Infer;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping

@@ -6,7 +6,7 @@ using Nest;
 using Tests.Framework;
 using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.SerializationTestHelper;
 
 namespace Tests.Ingest
 {

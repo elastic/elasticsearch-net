@@ -62,19 +62,18 @@ namespace Tests.Framework
 	{
 		public static SerializationTester Default { get; } = new SerializationTester(TestClient.DefaultInMemoryClient);
 
-		private readonly IElasticClient _client;
-		protected IElasticsearchSerializer Serializer => _client.ConnectionSettings.RequestResponseSerializer;
+		public SerializationTester(IElasticClient client) => Client = client;
 
-		public SerializationTester(IElasticClient client)
-		{
-			_client = client;
-		}
+		public IElasticClient Client { get; }
+
+		protected IElasticsearchSerializer Serializer => Client.ConnectionSettings.RequestResponseSerializer;
 
 		public RoundTripResult<T> RoundTrips<T>(T @object, bool preserveNullInExpected = false)
 		{
 			var serialized = this.SerializeUsingClientDefault(@object);
 			return this.RoundTrips(@object, serialized);
 		}
+
 		public RoundTripResult<T> RoundTrips<T>(T @object, object expectedJson, bool preserveNullInExpected = false)
 		{
             var expectedJsonToken = this.ExpectedJsonToJtoken(expectedJson, preserveNullInExpected);
@@ -164,7 +163,7 @@ namespace Tests.Framework
 		}
 		private T Deserialize<T>(string json)
 		{
-			using(var ms = _client.ConnectionSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json)))
+			using(var ms = Client.ConnectionSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json)))
 				return this.Serializer.Deserialize<T>(ms);
 		}
 

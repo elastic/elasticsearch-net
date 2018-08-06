@@ -8,6 +8,7 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework.MockData;
 using static Nest.Infer;
+using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Aggregations.Bucket.DateHistogram
 {
