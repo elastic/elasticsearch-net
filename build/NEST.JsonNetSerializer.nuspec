@@ -16,10 +16,6 @@
 		<copyright>2017-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest,serializer,json</tags>
 		<dependencies>
-			<group targetFramework=".NETFramework4.5">
-				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
-				<dependency id="Newtonsoft.Json" version="$jsonDotNetCurrentVersion$" />
-			</group>
 			<group targetFramework=".NETFramework4.6">
 				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
 				<dependency id="Newtonsoft.Json" version="$jsonDotNetCurrentVersion$" />

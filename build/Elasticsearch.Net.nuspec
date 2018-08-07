@@ -16,7 +16,6 @@
 		<copyright>2014-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<dependencies>
-			<group targetFramework=".NETFramework4.5" />
 			<group targetFramework=".NETFramework4.6" />
 			<group targetFramework=".NETStandard1.3">
 				<dependency id="NETStandard.Library" version="[1.6.0, )" />

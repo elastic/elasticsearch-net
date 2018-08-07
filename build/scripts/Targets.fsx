@@ -105,7 +105,7 @@ Target "Diff" <| fun _ ->
 Target "Cluster" <| fun _ -> 
     let clusterName = getBuildParam "clusterName"
     let clusterVersion = getBuildParam "clusterVersion"
-    let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests")), "netcoreapp2.1")
+    let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests.ClusterLauncher")), "netcoreapp2.1")
     let tempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
     Shell.copyDir tempDir testsProjectDirectory (fun s -> true)
     trace testsProjectDirectory
@@ -115,7 +115,7 @@ Target "Cluster" <| fun _ ->
         { p with
             WorkingDir = tempDir;
             TimeOut = TimeSpan.FromMinutes(60.)
-        }) (sprintf "%s %s" (Path.Combine(tempDir, "Tests.dll")) command)
+        }) (sprintf "%s %s" (Path.Combine(tempDir, "Tests.ClusterLauncher.dll")) command)
     
     Shell.deleteDir tempDir
 
