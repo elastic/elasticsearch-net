@@ -28,6 +28,8 @@ namespace Nest
 
 		private string DebugDisplay => StringOrLongValue ?? "Id from instance typeof: " + Document?.GetType().Name;
 
+		public override string ToString() => StringOrLongValue;
+
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
 			var nestSettings = (IConnectionSettingsValues)settings;

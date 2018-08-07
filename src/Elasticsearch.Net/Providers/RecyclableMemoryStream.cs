@@ -250,11 +250,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Equivalent to Dispose
 		/// </summary>
-#if DOTNETCORE
-        public void Close()
-#else
 		public override void Close()
-#endif
 		{
 			this.Dispose(true);
 		}
@@ -364,11 +360,7 @@ namespace Elasticsearch.Net
 		/// <remarks>IMPORTANT: Doing a Write() after calling GetBuffer() invalidates the buffer. The old buffer is held onto
 		/// until Dispose is called, but the next time GetBuffer() is called, a new buffer from the pool will be required.</remarks>
 		/// <exception cref="ObjectDisposedException">Object has been disposed</exception>
-#if DOTNETCORE
-        public byte[] GetBuffer()
-#else
 		public override byte[] GetBuffer()
-#endif
 		{
 			this.CheckDisposed();
 

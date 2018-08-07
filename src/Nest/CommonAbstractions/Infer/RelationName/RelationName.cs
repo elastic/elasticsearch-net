@@ -9,7 +9,6 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class RelationName : IEquatable<RelationName>, IUrlParameter
 	{
-
 		public string Name { get; }
 		public Type Type { get; }
 

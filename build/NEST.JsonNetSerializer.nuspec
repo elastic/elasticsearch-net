@@ -16,26 +16,14 @@
 		<copyright>2017-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest,serializer,json</tags>
 		<dependencies>
-			<group targetFramework=".NETFramework4.5">
-				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
-				<dependency id="Newtonsoft.Json" version="$jsonDotNetCurrentVersion$" />
-			</group>
-			<group targetFramework=".NETFramework4.6">
-				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
-				<dependency id="Newtonsoft.Json" version="$jsonDotNetCurrentVersion$" />
-			</group>
-			<group targetFramework=".NETStandard1.3">
-				<dependency id="NETStandard.Library" version="[1.6.0, )" />
+			<group targetFramework=".NETStandard2.0">
 				<dependency id="NEST" version="[$version$, $nextMajorVersion$)" />
 				<dependency id="Newtonsoft.Json" version="$jsonDotNetCurrentVersion$" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\Nest.JsonNetSerializer\net46\Nest.JsonNetSerializer.dll" target="lib\net46"/>
-		<file src="output\Nest.JsonNetSerializer\net46\Nest.JsonNetSerializer.XML" target="lib\net46"/>
-
-		<file src="output\Nest.JsonNetSerializer\netstandard1.3\Nest.JsonNetSerializer.dll" target="lib\netstandard1.3"/>
-		<file src="output\Nest.JsonNetSerializer\netstandard1.3\Nest.JsonNetSerializer.xml" target="lib\netstandard1.3"/>
+		<file src="output\Nest.JsonNetSerializer\netstandard2.0\Nest.JsonNetSerializer.dll" target="lib\netstandard2.0"/>
+		<file src="output\Nest.JsonNetSerializer\netstandard2.0\Nest.JsonNetSerializer.xml" target="lib\netstandard2.0"/>
 	</files>
 </package>

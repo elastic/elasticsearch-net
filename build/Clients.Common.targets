@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <!-- Default Version numbers -->
-    <CurrentVersion>0.0.0-bad</CurrentVersion>
-    <CurrentAssemblyVersion>0.0.0</CurrentAssemblyVersion>
-    <CurrentAssemblyFileVersion>0.0.0.0</CurrentAssemblyFileVersion>
-
-    <!-- Version and Informational reflect actual version -->
-    <Version>$(CurrentVersion)</Version>
-    <InformationalVersion>$(CurrentVersion)</InformationalVersion>
-    <!-- Assembly version is sticky to MAJOR.0.0.0 to avoid binding redirects because we strong name our assemblies -->
-    <AssemblyVersion>$(CurrentAssemblyVersion)</AssemblyVersion>
-    <!-- File version reflects actual version number without prelease since that not allowed in its struct -->
-    <FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
-
-    <DefineConstants Condition="'$(TargetFramework)'=='netstandard1.3'">$(DefineConstants);DOTNETCORE</DefineConstants>
 
     <SignAssembly Condition="'$(OS)' == 'Windows_NT'">true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\keys\keypair.snk</AssemblyOriginatorKeyFile>
@@ -26,8 +12,11 @@
 
     <DoSourceLink></DoSourceLink>
     <SourceLink Condition="'$(DoSourceLink)'!=''">$(BaseIntermediateOutputPath)\sl-$(MsBuildProjectName)-$(TargetFramework).json</SourceLink>
+
+    <!-- we need to referenced assemblies during the command line build so that ILRepack can pick them up -->
+    <CopyLocalLockFileAssemblies Condition="'$(TargetFramework)'=='netstandard2.0'">true</CopyLocalLockFileAssemblies>
+    <DefineConstants Condition="'$(TargetFramework)'=='net461'">$(DefineConstants);FEATURE_HTTPWEBREQUEST</DefineConstants>
     
-    <RepoUri>https://raw.githubusercontent.com/elastic/elasticsearch-net</RepoUri>
   </PropertyGroup>
 
   <Target Name="GenerateSourceLink" BeforeTargets="CoreCompile" Condition="'$(DoSourceLink)'!=''">

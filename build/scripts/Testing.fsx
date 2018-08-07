@@ -41,7 +41,7 @@ module Tests =
     let private dotnetTest (target: Commandline.MultiTarget) =
         CreateDir Paths.BuildOutput
         let command = 
-            let p = ["xunit"; "-parallel"; "all"; "-xml"; "../.." @@ Paths.Output("TestResults-Desktop-Clr.xml")] 
+            let p = ["xunit"; "-parallel"; "all"; "-xml"; "../../.." @@ Paths.Output("TestResults-Desktop-Clr.xml")] 
             match (target, buildingOnTravis) with 
             //make sure we don't test against net46 on mono or travis systems
             | (_, true) 
@@ -49,7 +49,7 @@ module Tests =
             | _  -> p
 
         let dotnet = Tooling.BuildTooling("dotnet")
-        let exitCode = dotnet.ExecWithTimeoutIn "src/Tests" command (TimeSpan.FromMinutes 30.) 
+        let exitCode = dotnet.ExecWithTimeoutIn "src/Tests/Tests" command (TimeSpan.FromMinutes 30.) 
         if exitCode > 0 then raise (Exception <| (sprintf "test finished with exitCode %d" exitCode))
 
     let RunReleaseUnitTests() =
@@ -64,8 +64,8 @@ module Tests =
         //package and not one from cache...y
         setProcessEnvironVar "TestPackageVersion" (Versioning.CurrentVersion.ToString())
         let dotnet = Tooling.BuildTooling("dotnet")
-        dotnet.ExecIn "src/Tests" ["clean";] |> ignore
-        dotnet.ExecIn "src/Tests" ["restore";] |> ignore
+        dotnet.ExecIn "src/Tests/Tests" ["clean";] |> ignore
+        dotnet.ExecIn "src/Tests/Tests" ["restore";] |> ignore
         dotnetTest Commandline.MultiTarget.One
 
     let RunUnitTests() =

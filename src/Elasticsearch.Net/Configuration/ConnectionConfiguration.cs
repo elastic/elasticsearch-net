@@ -427,7 +427,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson()
-		/// so that the original request and response JSON can be inspected.
+		/// so that the original request and response JSON can be inspected. It also always asks the server for the full stack trace on errors
 		/// </summary>
 		/// <param name="onRequestCompleted">
 		/// An optional callback to be performed when the request completes. This will
