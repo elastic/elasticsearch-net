@@ -23,35 +23,35 @@ namespace Nest
 			{
 				if (t.IsVerbatim)
 				{
-                    if (t.TermsLookup != null)
-                    {
-                        writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.TermsLookup);
-                    }
-                    else if (t.Terms != null)
-                    {
-                        writer.WritePropertyName(field);
-	                    writer.WriteStartArray();
-	                    foreach(var o in t.Terms)
+					if (t.TermsLookup != null)
+					{
+						writer.WritePropertyName(field);
+						serializer.Serialize(writer, t.TermsLookup);
+					}
+					else if (t.Terms != null)
+					{
+						writer.WritePropertyName(field);
+						writer.WriteStartArray();
+						foreach (var o in t.Terms)
 							SourceValueWriteConverter.Write(writer, o, serializer);
-	                    writer.WriteEndArray();
-                    }
+						writer.WriteEndArray();
+					}
 				}
 				else
 				{
-                    if (t.Terms.HasAny())
-                    {
-                        writer.WritePropertyName(field);
-	                    writer.WriteStartArray();
-	                    foreach(var o in t.Terms)
+					if (t.Terms.HasAny())
+					{
+						writer.WritePropertyName(field);
+						writer.WriteStartArray();
+						foreach (var o in t.Terms)
 							SourceValueWriteConverter.Write(writer, o, serializer);
-	                    writer.WriteEndArray();
-                    }
-                    else if (t.TermsLookup != null)
-                    {
-                        writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.TermsLookup);
-                    }
+						writer.WriteEndArray();
+					}
+					else if (t.TermsLookup != null)
+					{
+						writer.WritePropertyName(field);
+						serializer.Serialize(writer, t.TermsLookup);
+					}
 				}
 
 				if (t.Boost.HasValue)
