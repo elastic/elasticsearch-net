@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using BenchmarkDotNet.Attributes;
 using Elasticsearch.Net;
@@ -17,7 +18,7 @@ namespace Tests.Benchmarking
 	[BenchmarkConfig]
 	public class BulkDeserializationBenchmarkTests
 	{
-		private static readonly IElasticClient Client = TestClient.GetInMemoryClient();
+		private static readonly IElasticClient Client = TestClient.DefaultInMemoryClient;
 		private byte[] _tinyResponse;
 		private byte[] _mediumResponse;
 		private byte[] _largeResponse;

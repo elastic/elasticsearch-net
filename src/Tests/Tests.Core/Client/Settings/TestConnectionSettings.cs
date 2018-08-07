@@ -5,7 +5,6 @@ using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Configuration;
-using Tests.Core.Client.Serializers;
 using Tests.Core.Xunit;
 using Tests.Core.Extensions;
 
@@ -18,17 +17,14 @@ namespace Tests.Core.Client.Settings
 		private static string LocalHost => "localhost";
 		public static string LocalOrProxyHost => (RunningFiddler) ? "ipv4.fiddler" : LocalHost;
 
-		public TestConnectionSettings(
-			Func<ICollection<Uri>, IConnectionPool> createPool = null,
-			SourceSerializerFactory sourceSerializerFactory = null,
-			IPropertyMappingProvider propertyMappingProvider = null,
+		public TestConnectionSettings(Func<ICollection<Uri>, IConnectionPool> createPool = null,
+			ISerializerFactory serializerFactory = null,
 			bool forceInMemory = false,
 			int port = 9200)
 			: base(
 				CreatePool(createPool, port),
 				TestConfiguration.Instance.CreateConnection(forceInMemory),
-				CreateSerializerFactory(sourceSerializerFactory),
-				propertyMappingProvider
+				serializerFactory
 			) =>
 			this.ApplyTestSettings();
 
@@ -52,13 +48,6 @@ namespace Tests.Core.Client.Settings
 				if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
 				foreach (var d in r.DeprecationWarnings) XunitRunState.SeenDeprecations.Add(d);
 			});
-
-		private static SourceSerializerFactory CreateSerializerFactory(SourceSerializerFactory provided)
-		{
-			if (provided != null) return provided;
-			if (!TestConfiguration.Instance.Random.SourceSerializer) return null;
-			return (builtin, values) => new TestSourceSerializerBase(builtin, values);
-		}
 
 		private static IConnectionPool CreatePool(Func<ICollection<Uri>, IConnectionPool> createPool = null, int port = 9200)
 		{

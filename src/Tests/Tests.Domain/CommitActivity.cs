@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Bogus;
-using Nest;
 using Newtonsoft.Json;
 using Tests.Configuration;
 using Tests.Domain.Helpers;
-using Tests.Domain.JsonConverters;
 
 namespace Tests.Domain
 {

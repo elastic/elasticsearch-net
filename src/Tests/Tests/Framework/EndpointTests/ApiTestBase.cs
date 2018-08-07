@@ -36,6 +36,7 @@ namespace Tests.Framework
 	    protected string UrlEncode(string s) => Uri.EscapeDataString(s);
 
         protected TCluster Cluster { get; }
+		protected virtual IElasticClient Client => TestClient.DefaultInMemoryClient;
 
 		protected string CallIsolatedValue => _uniqueValues.Value;
 		protected T ExtendedValue<T>(string key) where T : class => this._uniqueValues.ExtendedValue<T>(key);

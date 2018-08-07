@@ -3,11 +3,8 @@ using Nest;
 using System;
 using System.Runtime.Serialization;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.MockData;
-using Xunit;
-using static Tests.Framework.RoundTripper;
-using static Nest.Infer;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {

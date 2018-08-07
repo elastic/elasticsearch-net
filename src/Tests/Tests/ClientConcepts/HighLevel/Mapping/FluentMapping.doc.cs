@@ -451,7 +451,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
         [U]
         public void OverridingDescendingAutoMappedProperties()
         {
-            var createIndexResponse = client.CreateIndex("myindex", c => c
+            var createIndexResponse = _client.CreateIndex("myindex", c => c
                 .Mappings(m => m
                     .Map<Company>(mm => mm
                         .AutoMap() // <1> Automap `Company`

@@ -29,8 +29,9 @@ namespace Tests.Framework
 
 		protected ApiIntegrationTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override IElasticClient Client => this.Cluster.Client;
 		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
+
+		protected override IElasticClient Client => this.Cluster.Client;
 
 		[I] public async Task HandlesStatusCode() =>
 			await this.AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(this.ExpectStatusCode));

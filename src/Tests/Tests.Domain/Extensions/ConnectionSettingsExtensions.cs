@@ -21,7 +21,7 @@ namespace Tests.Domain.Extensions
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
-			.InferMappingFor<ProjectPercolation>(map => map
+			.InferMappingFor<PercolateQuery>(map => map
 				.IndexName("queries")
 				.TypeName(TestValueHelper.PercolatorType)
 			)

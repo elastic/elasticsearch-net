@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
-using Tests.Framework.MockData;
+using Tests.Domain;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {

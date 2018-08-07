@@ -4,6 +4,8 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
@@ -51,7 +53,7 @@ namespace Tests.Search.Search
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			//this asserts some 5.2.0 and over only properties
-			if (TestingAgainst("<=5.2.0")) return;
+			if (TestConfiguration.Instance.InRange("<=5.2.0")) return;
 			response.Hits.Count().Should().BeGreaterThan(0);
 			var profile = response.Profile;
 			profile.Should().NotBeNull();
@@ -72,7 +74,7 @@ namespace Tests.Search.Search
 						query.Type.Should().NotBeNullOrEmpty();
 						query.Description.Should().NotBeNullOrEmpty();
 						query.Time.Should().NotBeNull();
-						if (TestingAgainst(">=5.3.0"))
+						if (TestConfiguration.Instance.InRange(">=5.3.0"))
 							query.TimeInNanoseconds.Should().BeGreaterThan(0);
 						query.Breakdown.Should().NotBeNull();
 					}
@@ -85,7 +87,7 @@ namespace Tests.Search.Search
 #pragma warning disable 618
 						collector.Time.Should().NotBeNull();
 #pragma warning restore 618
-						if (TestingAgainst(">=5.3.0"))
+						if (TestConfiguration.Instance.InRange(">=5.3.0"))
 							collector.TimeInNanoseconds.Should().BeGreaterThan(0);
 						var children = collector.Children;
 						children.Should().NotBeNull();
@@ -97,7 +99,7 @@ namespace Tests.Search.Search
 #pragma warning disable 618
 							child.Time.Should().NotBeNull();
 #pragma warning restore 618
-							if (TestingAgainst(">=5.3.0"))
+							if (TestConfiguration.Instance.InRange(">=5.3.0"))
 								child.TimeInNanoseconds.Should().BeGreaterThan(0);
 							var grandchildren = child.Children;
 							grandchildren.Should().NotBeNull();
@@ -108,7 +110,7 @@ namespace Tests.Search.Search
 #pragma warning disable 618
 								grandchild.Time.Should().NotBeNull();
 #pragma warning restore 618
-								if (TestingAgainst(">=5.3.0"))
+								if (TestConfiguration.Instance.InRange(">=5.3.0"))
 									grandchild.TimeInNanoseconds.Should().BeGreaterThan(0);
 							}
 						}
@@ -122,7 +124,7 @@ namespace Tests.Search.Search
 					aggregation.Type.Should().NotBeNullOrEmpty();
 					aggregation.Description.Should().NotBeNullOrEmpty();
 					aggregation.Time.Should().NotBeNull();
-					if (TestingAgainst(">=5.3.0"))
+					if (TestConfiguration.Instance.InRange(">=5.3.0"))
 						aggregation.TimeInNanoseconds.Should().BeGreaterThan(0);
 					aggregation.Breakdown.Should().NotBeNull();
 				}

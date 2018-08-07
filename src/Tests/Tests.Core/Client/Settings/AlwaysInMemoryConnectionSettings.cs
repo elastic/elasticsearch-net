@@ -15,13 +15,11 @@ namespace Tests.Core.Client.Settings
 
 		public AlwaysInMemoryConnectionSettings(
 			Func<ICollection<Uri>, IConnectionPool> createPool = null,
-			SourceSerializerFactory sourceSerializerFactory = null,
-			IPropertyMappingProvider propertyMappingProvider = null,
+			ISerializerFactory serializerFactory = null,
 			int port = 9200)
 			: base(
 				createPool,
-				sourceSerializerFactory,
-				propertyMappingProvider,
+				serializerFactory,
 				forceInMemory: true,
 				port: port
 			) { }

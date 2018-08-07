@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
-using Tests.Framework;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Xunit;
 using Nest;
 using Newtonsoft.Json;
 using System.Text;
@@ -14,7 +9,7 @@ using Elastic.Xunit.XunitPlumbing;
 
 namespace Tests.ClientConcepts.Serializer
 {
-	public class FactorySettingsTests : SerializationTestBase
+	public class FactorySettingsTests
 	{
 		public class MyCustomJsonFactory : ISerializerFactory
 		{

@@ -269,10 +269,6 @@ namespace Tests.Ingest.PutPipeline
 				.Script(s => s
 					.Inline("ctx.numberOfCommits++")
 				)
-				.UrlDecode<Project>(ud => ud
-					.Field(p => p.Description)
-					.IgnoreMissing()
-				)
 			);
 
 		protected override PutPipelineRequest Initializer => new PutPipelineRequest(_id)

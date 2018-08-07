@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
-using Tests.Framework;
-using Elasticsearch.Net;
+﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Xunit;
+using Tests.Core.Serialization;
+using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.ServerError
 {
-	public class ServerErrorTests : SerializationTestBase
+	public class ServerErrorTests
 	{
 		[U]
 		public void CanDeserializeServerError()
@@ -34,7 +28,7 @@ namespace Tests.ClientConcepts.ServerError
 			   ""status"": 400
 			}";
 
-			var serverError = this.Deserialize<Elasticsearch.Net.ServerError>(serverErrorJson);
+			var serverError = Expect(serverErrorJson).DeserializesTo<Elasticsearch.Net.ServerError>();
 
 			serverError.Should().NotBeNull();
 			serverError.Status.Should().Be(400);

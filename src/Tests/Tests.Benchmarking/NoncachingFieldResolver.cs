@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Elasticsearch.Net;
 using Nest;
 
 namespace Tests.Benchmarking
@@ -94,7 +95,7 @@ namespace Tests.Benchmarking
 
 				var name = info.Name;
 
-				if (this._settings.PropertyMappings.TryGetValue(info, out IPropertyMapping propertyMapping))
+				if (this._settings.PropertyMappings.TryGetValue(info, out var propertyMapping))
 					return propertyMapping.Name;
 
 				var att = ElasticsearchPropertyAttributeBase.From(info);

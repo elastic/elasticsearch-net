@@ -27,10 +27,9 @@ namespace Tests.Framework
 			request: (client, r) => client.RootNodeInfo(r),
 			requestAsync: (client, r) => client.RootNodeInfoAsync(r)
 		);
-		
+
 		protected override object ExpectJson { get; } = null;
 
-		protected override IElasticClient Client => this.Cluster.Client;
 		protected override RootNodeInfoRequest Initializer => new RootNodeInfoRequest();
 
 		protected override string UrlPath => "";

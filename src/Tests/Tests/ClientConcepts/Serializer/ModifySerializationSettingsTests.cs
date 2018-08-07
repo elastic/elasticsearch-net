@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
-using Tests.Framework;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Xunit;
 using Nest;
 using Newtonsoft.Json;
 using System.Text;
@@ -18,7 +13,7 @@ namespace Tests.ClientConcepts.Serializer
 	/// <summary>
 	/// This is the happy flow for the now deprecated ModifyJsonSerializerSettings override
 	/// </summary>
-	public class ModifySerializationSettingsTests : SerializationTestBase
+	public class ModifySerializationSettingsTests
 	{
 
 		public class MyCustomResolver : ElasticContractResolver

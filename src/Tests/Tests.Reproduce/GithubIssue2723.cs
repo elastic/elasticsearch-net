@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using FluentAssertions;
-using Tests.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
 
 namespace Tests.Reproduce
 {
@@ -27,7 +28,8 @@ namespace Tests.Reproduce
 		{
 			var fixedResponse =
 				@"{""took"":147,""timed_out"":false,""_shards"":{""total"":10,""successful"":10,""failed"":0},""hits"":{""total"":0,""max_score"":null,""hits"":[]}}";
-			var client = TestClient.GetFixedStringResponseClient(fixedResponse);
+
+			var client = FixedResponseClient.Create(fixedResponse);
 
 			//warmup
 			var response = FixedSearch(client);

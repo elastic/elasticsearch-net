@@ -1,7 +1,7 @@
 ﻿using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.IndexedShape

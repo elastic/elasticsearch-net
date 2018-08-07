@@ -4,6 +4,8 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
@@ -12,10 +14,10 @@ namespace Tests.QueryDsl.Geo
 {
 	public class GeoShapeSerializationTests :
 		ApiIntegrationTestBase<IntrusiveOperationCluster,
-			ISearchResponse<Framework.MockData.Shape>,
+			ISearchResponse<Domain.Shape>,
 			ISearchRequest,
-			SearchDescriptor<Framework.MockData.Shape>,
-			SearchRequest<Framework.MockData.Shape>>
+			SearchDescriptor<Domain.Shape>,
+			SearchRequest<Domain.Shape>>
 	{
 		public GeoShapeSerializationTests(IntrusiveOperationCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
@@ -32,7 +34,7 @@ namespace Tests.QueryDsl.Geo
 					.NumberOfShards(1)
 				)
 				.Mappings(m => m
-					.Map<Framework.MockData.Shape>(mm => mm
+					.Map<Domain.Shape>(mm => mm
 						.AutoMap()
 						.Properties(p => p
 							.GeoShape(g => g
@@ -53,7 +55,7 @@ namespace Tests.QueryDsl.Geo
 				throw new Exception($"Error creating index for integration test: {createIndexResponse.DebugInformation}");
 
 			var bulkResponse = this.Client.Bulk(b => b
-				.IndexMany(Framework.MockData.Shape.Shapes)
+				.IndexMany(Domain.Shape.Shapes)
 				.Refresh(Refresh.WaitFor)
 			);
 
@@ -62,14 +64,13 @@ namespace Tests.QueryDsl.Geo
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Search<Framework.MockData.Shape>(f),
-			fluentAsync: (client, f) => client.SearchAsync<Framework.MockData.Shape>(f),
-			request: (client, r) => client.Search<Framework.MockData.Shape>(r),
-			requestAsync: (client, r) => client.SearchAsync<Framework.MockData.Shape>(r)
+			fluent: (client, f) => client.Search<Domain.Shape>(f),
+			fluentAsync: (client, f) => client.SearchAsync<Domain.Shape>(f),
+			request: (client, r) => client.Search<Domain.Shape>(r),
+			requestAsync: (client, r) => client.SearchAsync<Domain.Shape>(r)
 		);
 
-		private readonly IEnumerable<GeoCoordinate> _coordinates =
-			Framework.MockData.Shape.Shapes.First().Envelope.Coordinates;
+		private readonly IEnumerable<GeoCoordinate> _coordinates = Domain.Shape.Shapes.First().Envelope.Coordinates;
 
 		protected override object ExpectJson => new
 		{
@@ -98,20 +99,20 @@ namespace Tests.QueryDsl.Geo
 		protected override string UrlPath => $"/shapes/doc/_search";
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override SearchRequest<Framework.MockData.Shape> Initializer => new SearchRequest<Framework.MockData.Shape>
+		protected override SearchRequest<Domain.Shape> Initializer => new SearchRequest<Domain.Shape>
 		{
 			Query = new GeoShapeEnvelopeQuery
 			{
 				Name = "named_query",
 				Boost = 1.1,
-				Field = Infer.Field<Framework.MockData.Shape>(p => p.Envelope),
+				Field = Infer.Field<Domain.Shape>(p => p.Envelope),
 				Shape = new EnvelopeGeoShape(this._coordinates),
 				Relation = GeoShapeRelation.Intersects,
 				IgnoreUnmapped = true
 			}
 		};
 
-		protected override Func<SearchDescriptor<Framework.MockData.Shape>, ISearchRequest> Fluent => s => s
+		protected override Func<SearchDescriptor<Domain.Shape>, ISearchRequest> Fluent => s => s
 			.Query(q => q
 				.GeoShapeEnvelope(c => c
 					.Name("named_query")
@@ -123,7 +124,7 @@ namespace Tests.QueryDsl.Geo
 				)
 			);
 
-		protected override void ExpectResponse(ISearchResponse<Framework.MockData.Shape> response)
+		protected override void ExpectResponse(ISearchResponse<Domain.Shape> response)
 		{
 			response.ShouldBeValid();
 			response.Documents.Count.Should().Be(10);

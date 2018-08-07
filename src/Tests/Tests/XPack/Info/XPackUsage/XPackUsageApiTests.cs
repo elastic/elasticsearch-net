@@ -3,6 +3,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
@@ -44,7 +45,9 @@ namespace Tests.XPack.Info.XPackUsage
 			allJob.ModelSize.Should().NotBeNull("_all job model_size");
 
 			response.Monitoring.Should().NotBeNull("monitoring object");
-			response.Monitoring.EnabledExporters.Should().NotBeEmpty("monitoring exporters").And.ContainKey("local");
+			response.Monitoring.EnabledExporters.Should().NotBeEmpty("monitoring exporters");
+			response.Monitoring.EnabledExporters.Keys.Should().Contain("local");
+
 			response.Monitoring.EnabledExporters["local"].Should().Be(1);
 
 			response.Security.Should().NotBeNull("security object");
@@ -57,7 +60,8 @@ namespace Tests.XPack.Info.XPackUsage
 			response.Alerting.Should().NotBeNull("alerting object");
 			response.Alerting.Count.Should().NotBeNull("alerting exection count object");
 			response.Alerting.Execution.Should().NotBeNull("alerting exection object");
-			response.Alerting.Execution.Actions.Should().NotBeEmpty("alerting exection actions").And.ContainKey("_all");
+			response.Alerting.Execution.Actions.Should().NotBeEmpty("alerting exection actions");
+			response.Alerting.Execution.Actions.Keys.Should().Contain("_all");
 		}
 	}
 }

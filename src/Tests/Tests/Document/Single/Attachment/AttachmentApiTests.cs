@@ -5,6 +5,8 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
@@ -15,7 +17,7 @@ namespace Tests.Document.Single.Attachment
 	{
 		static Document()
 		{
-			using (var stream = typeof(Document).Assembly().GetManifestResourceStream("Tests.Document.Single.Attachment.Attachment_Test_Document.pdf"))
+			using (var stream = typeof(Document).Assembly().GetManifestResourceStream("Tests.Document.Single.Index.Attachment_Test_Document.pdf"))
 			{
 				using (var memoryStream = new MemoryStream())
 				{

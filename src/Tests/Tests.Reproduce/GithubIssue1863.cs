@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
-using Tests.Document.Multiple.Reindex;
-using Tests.Framework;
-using Xunit;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
+using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
 
 namespace Tests.Reproduce
 {

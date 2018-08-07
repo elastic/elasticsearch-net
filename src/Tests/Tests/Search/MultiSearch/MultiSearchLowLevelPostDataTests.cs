@@ -7,6 +7,7 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Newtonsoft.Json.Linq;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Integration;
 using Xunit;

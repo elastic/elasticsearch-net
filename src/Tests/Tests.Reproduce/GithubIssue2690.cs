@@ -9,7 +9,7 @@ namespace Tests.Reproduce
 	{
 		[U] public void EmptyPolicyCausesNullReferenceException()
 		{
-			var client = TestClient.GetInMemoryClient();
+			var client = TestClient.DefaultInMemoryClient;
 			var response = client.CreateIndex("foo", c => c
 				.Settings(s => s
 					.Merge(m => m

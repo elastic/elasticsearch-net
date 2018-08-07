@@ -6,20 +6,17 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Single.Update
 {
 	public class UpdateWithScriptApiTests : ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
 	{
-		protected override bool NoClientSerialize => true;
-
 		public UpdateWithScriptApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
-				this.Client.Index(Project.Instance, i=>i.Id(id));
+				this.Cluster.Client.Index(Project.Instance, i=>i.Id(id));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(

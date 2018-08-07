@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
@@ -68,7 +69,7 @@ namespace Tests.Core.Serialization
 
 		public IElasticClient Client { get; }
 
-		protected IElasticsearchSerializer Serializer => this.Client.ConnectionSettings.RequestResponseSerializer;
+		protected IElasticsearchSerializer Serializer => this.Client.ConnectionSettings.Serializer;
 
 		public RoundTripResult<T> RoundTrips<T>(T @object, bool preserveNullInExpected = false)
 		{
@@ -165,7 +166,7 @@ namespace Tests.Core.Serialization
 		}
 		private T Deserialize<T>(string json)
 		{
-			using(var ms = this.Client.ConnectionSettings.MemoryStreamFactory.Create(Encoding.UTF8.GetBytes(json)))
+			using(var ms = new MemoryStream(Encoding.UTF8.GetBytes(json)))
 				return this.Serializer.Deserialize<T>(ms);
 		}
 
@@ -228,8 +229,6 @@ namespace Tests.Core.Serialization
 			{
 				ContractResolver = new DefaultContractResolver {NamingStrategy = new DefaultNamingStrategy()},
 				NullValueHandling = preserveNullInExpected ? NullValueHandling.Include : NullValueHandling.Ignore,
-				//copied here because anonymyzing geocoordinates is too tedious
-				Converters = new List<JsonConverter> {new TestGeoCoordinateJsonConverter()}
 			};
 
 	}

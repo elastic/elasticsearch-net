@@ -1,5 +1,5 @@
-﻿using Elastic.Managed.Ephemeral.Plugins;
-using Tests.Core.ManagedElasticsearch.NodeSeeders;
+﻿using Tests.Core.ManagedElasticsearch.NodeSeeders;
+using static Elastic.Managed.Ephemeral.Plugins.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {

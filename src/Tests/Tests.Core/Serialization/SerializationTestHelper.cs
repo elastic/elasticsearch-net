@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net;
 using Nest;
 
 namespace Tests.Core.Serialization
@@ -12,37 +13,31 @@ namespace Tests.Core.Serialization
 		public static IntermediateChangedSettings WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>
 			new IntermediateChangedSettings(settings);
 
-		public static IntermediateChangedSettings WithSourceSerializer(ConnectionSettings.SourceSerializerFactory factory) =>
-			new IntermediateChangedSettings(s=>s.EnableDebugMode()).WithSourceSerializer(factory);
-
 		public class IntermediateChangedSettings
 		{
 			private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
-			private ConnectionSettings.SourceSerializerFactory _sourceSerializerFactory;
-			private IPropertyMappingProvider _propertyMappingProvider;
+			private ISerializerFactory _serializerFactory;
 
 			internal IntermediateChangedSettings(Func<ConnectionSettings, ConnectionSettings> settings)
 			{
 				this._connectionSettingsModifier = settings;
 			}
 
-			public IntermediateChangedSettings WithSourceSerializer(ConnectionSettings.SourceSerializerFactory factory)
+			public IntermediateChangedSettings WithSerializer(Func<IConnectionSettingsValues, IElasticsearchSerializer> serializerFactory)
 			{
-				this._sourceSerializerFactory = factory;
+				this._serializerFactory = new SerializerFactory(serializerFactory);
 				return this;
 			}
-
-			public IntermediateChangedSettings WithPropertyMappingProvider(IPropertyMappingProvider propertyMappingProvider)
+			public IntermediateChangedSettings WithSerializer(ISerializerFactory serializerFactory)
 			{
-				this._propertyMappingProvider = propertyMappingProvider;
+				this._serializerFactory = serializerFactory;
 				return this;
 			}
 
 			public JsonRoundTripper Expect(object expected, bool preserveNullInExpected = false) =>
-				new JsonRoundTripper(expected, _connectionSettingsModifier, this._sourceSerializerFactory, this._propertyMappingProvider, preserveNullInExpected);
+				new JsonRoundTripper(expected, _connectionSettingsModifier, _serializerFactory, preserveNullInExpected);
 
-			public ObjectRoundTripper<T> Object<T>(T expected) =>
-				new ObjectRoundTripper<T>(expected, _connectionSettingsModifier, this._sourceSerializerFactory, this._propertyMappingProvider);
+			public ObjectRoundTripper<T> Object<T>(T expected) => new ObjectRoundTripper<T>(expected, _connectionSettingsModifier, _serializerFactory);
 
 		}
 	}

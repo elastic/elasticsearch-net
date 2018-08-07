@@ -54,7 +54,7 @@ namespace Tests.Framework
 						this._cluster.SniffingRules,
 						requestData.RequestTimeout,
 						(r) => this.UpdateCluster(r.NewClusterState),
-						(r) => SniffResponse.Create(this._cluster.Nodes, this._cluster.PublishAddressOverride, this._cluster.SniffShouldReturnFqnd)
+						(r) => SniffResponseBytes.Create(this._cluster.Nodes, this._cluster.PublishAddressOverride, this._cluster.SniffShouldReturnFqnd)
 					);
 				}
 				if (IsPingRequest(requestData))

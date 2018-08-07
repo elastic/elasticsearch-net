@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using Nest;
 using FluentAssertions;
-using Newtonsoft.Json;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Reproduce
 {

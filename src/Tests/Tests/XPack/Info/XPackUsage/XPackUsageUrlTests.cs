@@ -5,9 +5,9 @@ using Tests.Framework;
 
 namespace Tests.XPack.Info.XPackUsage
 {
-	public class XPackUsageUrlTests : IUrlTests
+	public class XPackUsageUrlTests : UrlTestsBase
 	{
-		[U] public async Task Urls()
+		[U] public override async Task Urls()
 		{
 			await UrlTester.GET("/_xpack/usage")
 				.Fluent(c => c.XPackUsage())

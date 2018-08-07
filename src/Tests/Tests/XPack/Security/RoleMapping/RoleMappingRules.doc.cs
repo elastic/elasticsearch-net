@@ -24,10 +24,6 @@ namespace Tests.Search
 	 */
 	public class RoleMappingRulesTests
 	{
-		//this serializes the expected json in a way that preserves null values
-		protected override bool NoClientSerialize => true;
-
-
         /**==== Rule Conjunction
          *
          * You can create a conjuction of many rules using either `+` or `&` which are both overloaded to produce an `all` rule.

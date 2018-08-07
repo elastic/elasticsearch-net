@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
-using Tests.Framework;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Xunit;
 using Nest;
 using Newtonsoft.Json;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
+using Tests.Core.Serialization;
 
 namespace Tests.ClientConcepts.Serializer
 {
@@ -18,7 +14,7 @@ namespace Tests.ClientConcepts.Serializer
 	/// <summary>
 	/// Here we get into a bind because our constructor runs too late
 	/// </summary>
-	public class CustomConstructorSerializerSettingsTests : SerializationTestBase
+	public class CustomConstructorSerializerSettingsTests
 	{
 		public class MyCystomResolver : ElasticContractResolver
 		{

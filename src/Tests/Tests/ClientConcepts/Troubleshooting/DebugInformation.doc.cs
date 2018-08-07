@@ -65,7 +65,7 @@ namespace Tests.ClientConcepts.Troubleshooting
         [I] public void DisableDirectStreamingPerRequest()
         {
             // hide
-            var client = TestClient.GetInMemoryClient();
+            var client = TestClient.DefaultInMemoryClient;
 
             var response = client.Search<Project>(s => s
                 .RequestConfiguration(r => r

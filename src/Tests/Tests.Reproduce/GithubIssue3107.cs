@@ -10,7 +10,7 @@ namespace Tests.Reproduce
 	{
 		[U] public void FieldResolverRespectsDataMemberAttributes()
 		{
-			var client = TestClient.GetInMemoryClient(s => s.EnableDebugMode());
+			var client = TestClient.DefaultInMemoryClient;
 
 			var document = new SourceEntity
 			{

@@ -25,13 +25,13 @@ namespace Tests.Core.Client
 			string contentType = RequestData.MimeType,
 			Exception exception = null)
 		{
-			var serializer = TestClient.Default.RequestResponseSerializer;
+			var serializer = TestClient.Default.Serializer;
 			byte[] fixedResult = null;
 			if (response is string s) fixedResult = Encoding.UTF8.GetBytes(s);
 			else if (contentType == RequestData.MimeType) fixedResult = serializer.SerializeToBytes(response);
 			else fixedResult = Encoding.UTF8.GetBytes(response.ToString());
 
-			var connection = new InMemoryConnection(fixedResult, statusCode, exception, contentType);
+			var connection = new InMemoryConnection(fixedResult, statusCode, exception);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var defaultSettings = new ConnectionSettings(connectionPool, connection)
 				.DefaultIndex("default-index");

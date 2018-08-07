@@ -19,20 +19,19 @@ namespace Tests.Core.Serialization
 
 		internal RoundTripperBase(
 			Func<ConnectionSettings, ConnectionSettings> settingsModifier = null,
-			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
-			IPropertyMappingProvider propertyMappingProvider = null,
-			bool preserveNullInExpected = false)
+			ISerializerFactory serializerFactory = null,
+			bool preserveNullInExpected = false
+			)
 		{
 			this.PreserveNullInExpected = preserveNullInExpected;
-			if (settingsModifier == null && sourceSerializerFactory == null && propertyMappingProvider == null)
+			if (settingsModifier == null && serializerFactory == null)
 				this.Tester = SerializationTester.Default;
 			else
 			{
-				var settings =
-					new AlwaysInMemoryConnectionSettings(sourceSerializerFactory: sourceSerializerFactory, propertyMappingProvider: propertyMappingProvider)
-						.ApplyDomainSettings();
-
-				if (settingsModifier != null) settings = settingsModifier(settings);
+				var settings = settingsModifier(
+					new AlwaysInMemoryConnectionSettings(serializerFactory: serializerFactory)
+						.ApplyDomainSettings()
+				);
 				this.Tester = new SerializationTester(new ElasticClient(settings));
 			}
 		}
@@ -42,9 +41,9 @@ namespace Tests.Core.Serialization
 	{
 		internal ObjectRoundTripper(T @object,
 			Func<ConnectionSettings, ConnectionSettings> settingsModifier = null,
-			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
-			IPropertyMappingProvider propertyMappingProvider = null)
-			: base(settingsModifier, sourceSerializerFactory, propertyMappingProvider, preserveNullInExpected: false)
+			ISerializerFactory serializerFactory = null
+			)
+			: base(settingsModifier, serializerFactory, preserveNullInExpected: false)
 		{
 			_object = @object;
 		}
@@ -57,12 +56,12 @@ namespace Tests.Core.Serialization
 
 	public class JsonRoundTripper : RoundTripperBase
 	{
-		internal JsonRoundTripper(object expectedJson,
+		internal JsonRoundTripper(
+			object expectedJson,
 			Func<ConnectionSettings, ConnectionSettings> settingsModifier = null,
-			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
-			IPropertyMappingProvider propertyMappingProvider = null,
+			ISerializerFactory serializerFactory = null,
 			bool preserveNullInExpected = false)
-			: base(settingsModifier, sourceSerializerFactory, propertyMappingProvider, preserveNullInExpected)
+			: base(settingsModifier, serializerFactory, preserveNullInExpected)
 		{
 			this._expectedJson = expectedJson;
 		}
@@ -124,11 +123,6 @@ namespace Tests.Core.Serialization
 			this.Tester.Client.Infer.Id(project).Should().Be((string)this._expectedJson);
 			return this;
 		}
-		public JsonRoundTripper WhenInferringRoutingOn<T>(T project) where T : class
-		{
-			this.Tester.Client.Infer.Routing<T>(project).Should().Be((string)this._expectedJson);
-			return this;
-		}
 
 		public JsonRoundTripper ForField(Field field)
 		{
@@ -138,7 +132,7 @@ namespace Tests.Core.Serialization
 
 		public JsonRoundTripper AsPropertiesOf<T>(T document) where T : class
 		{
-			var jo = JObject.Parse(this.Tester.Client.RequestResponseSerializer.SerializeToString(document));
+			var jo = JObject.Parse(this.Tester.Client.Serializer.SerializeToString(document));
 			var serializedProperties = jo.Properties().Select(p => p.Name);
 			if (!(this._expectedJson is IEnumerable<string> sut))
 				throw new ArgumentException("Can not call AsPropertiesOf if sut is not IEnumerable<string>");

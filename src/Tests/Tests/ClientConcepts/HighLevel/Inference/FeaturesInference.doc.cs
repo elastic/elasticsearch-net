@@ -3,7 +3,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using static Nest.Indices;
-using static Tests.Framework.RoundTripper;
+using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {

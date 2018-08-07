@@ -3,6 +3,8 @@ using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Core.Client;
+using Tests.Core.Extensions;
 using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.CovariantHits
@@ -47,7 +49,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 		}
 
 
-		private readonly IElasticClient _client = TestClient.GetFixedReturnClient(CovariantSearchResultMock.Json);
+		private readonly IElasticClient _client = FixedResponseClient.Create(CovariantSearchResultMock.Json);
 
 		[U] public void UsingTypes()
 		{
