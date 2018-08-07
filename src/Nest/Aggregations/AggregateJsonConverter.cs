@@ -534,6 +534,8 @@ namespace Nest
 			if (valueMetric.Value == null && reader.ValueType == typeof(long))
 				valueMetric.Value = reader.Value as long?;
 
+			// https://github.com/elastic/elasticsearch-net/issues/3311
+			// above code just checks for long through reader.ValueType, this is not always the case
 			if (valueMetric.Value != null || reader.TokenType == JsonToken.Null)
 			{
 				reader.Read();
