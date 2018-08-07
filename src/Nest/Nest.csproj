@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\build\Clients.Common.targets" />
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.3</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <!-- we need to referenced assemblies during the command line build so that ILRepack can pick them up -->
     <CopyLocalLockFileAssemblies Condition="'$(FakeBuild)'=='1'">true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
@@ -10,11 +10,7 @@
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-    <PackageReference Include="System.Collections.Specialized" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
-    <PackageReference Include="System.Linq.Queryable" Version="4.0.1" />
   </ItemGroup>
   <Import Project="..\outputpath.props" />
 </Project>

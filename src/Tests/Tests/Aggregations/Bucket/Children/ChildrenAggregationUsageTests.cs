@@ -1,0 +1,61 @@
+﻿using System;
+using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
+using Tests.Framework.Integration;
+using Tests.Framework.ManagedElasticsearch.Clusters;
+
+namespace Tests.Aggregations.Bucket.Children
+{
+	/**
+	 * A special single bucket aggregation that enables aggregating from buckets on parent document types to
+	 * buckets on child documents.
+	 *
+	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-children-aggregation.html[Children Aggregation]
+	 */
+	public class ChildrenAggregationUsageTests : AggregationUsageTestBase
+	{
+		public ChildrenAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object AggregationJson => new
+		{
+			name_of_child_agg = new
+			{
+				children = new {type = "commits"},
+				aggs = new
+				{
+					average_per_child = new
+					{
+						avg = new {field = "confidenceFactor"}
+					},
+					max_per_child = new
+					{
+						max = new {field = "confidenceFactor"}
+					},
+					min_per_child = new
+					{
+						min = new {field = "confidenceFactor"}
+					}
+				}
+			}
+		};
+
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Children<CommitActivity>("name_of_child_agg", child => child
+				.Aggregations(childAggs => childAggs
+					.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+				)
+			);
+
+		protected override AggregationDictionary InitializerAggs =>
+			new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
+			{
+				Aggregations =
+					new AverageAggregation("average_per_child", "confidenceFactor")
+					&& new MaxAggregation("max_per_child", "confidenceFactor")
+					&& new MinAggregation("min_per_child", "confidenceFactor")
+			};
+	}
+}

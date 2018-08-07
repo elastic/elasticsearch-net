@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D6997ADC-E933-418E-831C-DE1A78897493}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>new_scripts</RootNamespace>
-    <AssemblyName>new_scripts</AssemblyName>
+    <RootNamespace>scripts</RootNamespace>
+    <AssemblyName>scripts</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

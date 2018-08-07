@@ -14,14 +14,12 @@ module Projects =
     type DotNetFrameworkIdentifier = { MSBuild: string; Nuget: string; DefineConstants: string; }
 
     type DotNetFramework = 
-        | Net46 
-        | NetStandard1_3
+        | NetStandard2_0
         | NetCoreApp2_1
-        static member All = [NetStandard1_3] 
+        static member All = [NetStandard2_0] 
         member this.Identifier = 
             match this with
-            | Net46 -> { MSBuild = "v4.6"; Nuget = "net46"; DefineConstants = ""; }
-            | NetStandard1_3 -> { MSBuild = "netstandard1.3"; Nuget = "netstandard1.3"; DefineConstants = ""; }
+            | NetStandard2_0 -> { MSBuild = "netstandard2.0"; Nuget = "netstandard2.0"; DefineConstants = ""; }
             | NetCoreApp2_1 -> { MSBuild = "netcoreapp2.1"; Nuget = "netcoreapp2.1"; DefineConstants = ""; }
 
     type Project =
