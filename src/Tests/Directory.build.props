@@ -1,0 +1,7 @@
+<Project>
+	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+	<PropertyGroup Condition="'$(TestPackageVersion)'!=''">
+		<RestoreSources>../../build/output/_packages;https://api.nuget.org/v3/index.json</RestoreSources>
+		<DefineConstants>$(DefineConstants);TESTINGNUGETPACKAGE</DefineConstants>
+	</PropertyGroup>
+</Project>

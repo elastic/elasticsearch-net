@@ -11,7 +11,7 @@ namespace Tests.ScratchPad
 			//Use Run<>() to execture the loop (handy for profilers), this will call create for each itteration
 			//Use RunCreateOnce<>() to do the same but call create once before the loop.
 
-			Bench<PropertyNameInferenceRunner>();
+			Run<PropertyNameInferenceRunner>();
 
 
 			//Run(ResolveSomeIds);

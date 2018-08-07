@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\readme.md = ..\readme.md
 		outputpath.props = outputpath.props
 		..\build\Elasticsearch.Net.Connections.HttpWebRequestConnection.nuspec = ..\build\Elasticsearch.Net.Connections.HttpWebRequestConnection.nuspec
+		Directory.build.props = Directory.build.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeGeneration", "CodeGeneration", "{93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}"
@@ -47,6 +48,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connections.HttpWebRequestConnection", "Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj", "{A44DBED2-D976-4CDE-8E26-DC60B49EF92F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6C4A2627-AF22-4388-9DF7-7A9AEACFD635}"
+ProjectSection(SolutionItems) = preProject
+	Tests\Directory.build.props = Tests\Directory.build.props
+EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests\Tests.csproj", "{5B393962-7586-49BA-BD99-3B1E35F48E94}"
 EndProject

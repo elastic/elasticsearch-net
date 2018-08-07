@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Tests.Configuration
 {
-	public sealed class TestConfiguration
+	public static class TestConfiguration
 	{
 		private static readonly Lazy<ITestConfiguration> Lazy
 			= new Lazy<ITestConfiguration>(LoadConfiguration, LazyThreadSafetyMode.ExecutionAndPublication);
