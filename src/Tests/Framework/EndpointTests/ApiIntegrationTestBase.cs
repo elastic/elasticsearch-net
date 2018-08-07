@@ -4,6 +4,7 @@ using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elastic.Managed.Ephemeral;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;

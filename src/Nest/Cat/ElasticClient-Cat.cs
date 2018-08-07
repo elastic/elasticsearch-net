@@ -13,8 +13,14 @@ namespace Nest
 		private CatResponse<TCatRecord> DeserializeCatResponse<TCatRecord>(IApiCallDetails response, Stream stream)
 			where TCatRecord : ICatRecord
 		{
+			var catResponse = new CatResponse<TCatRecord>();
+
+			if (!response.Success) return catResponse;
+
 			var records = this.Serializer.Deserialize<IReadOnlyCollection<TCatRecord>>(stream);
-			return new CatResponse<TCatRecord> { Records = records };
+			catResponse.Records = records;
+
+			return catResponse;
 		}
 
 		private ICatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(
