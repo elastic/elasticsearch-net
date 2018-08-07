@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using System.Text;
 using BenchmarkDotNet.Attributes;
 using Elasticsearch.Net;
 using Nest;

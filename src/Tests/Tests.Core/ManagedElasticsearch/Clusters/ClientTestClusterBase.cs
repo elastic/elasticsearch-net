@@ -9,6 +9,7 @@ using Elastic.Xunit;
 using Nest;
 using Tests.Configuration;
 using Tests.Core.Client;
+using Tests.Core.Client.Settings;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Tasks;
 using Tests.Domain.Extensions;
@@ -27,9 +28,10 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s;
 
+		// TODO don't think this override is needed anymore
 		public override ICollection<Uri> NodesUris(string hostName = "localhost")
 		{
-			var host = (EphemeralClusterExtensions.RunningFiddler) ? "ipv4.fiddler" : hostName;
+			var host = (TestConnectionSettings.RunningFiddler) ? "ipv4.fiddler" : hostName;
 			return base.NodesUris(host);
 		}
 	}

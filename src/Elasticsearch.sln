@@ -23,7 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\paket.dependencies = ..\paket.dependencies
 		..\readme.md = ..\readme.md
 		outputpath.props = outputpath.props
-		..\build\Elasticsearch.Net.Connections.HttpWebRequestConnection.nuspec = ..\build\Elasticsearch.Net.Connections.HttpWebRequestConnection.nuspec
 		Directory.build.props = Directory.build.props
 	EndProjectSection
 EndProject
@@ -42,10 +41,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocGenerator", "CodeGeneration\DocGenerator\DocGenerator.csproj", "{98400F59-4BA8-4534-9A78-9C7FA0B42901}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.JsonNetSerializer", "Serializers\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj", "{CDC8DEC8-3872-4337-9C40-9CDE5724BBDD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connections", "Connections", "{694887B9-6687-4AB1-BE30-2877656DF55D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connections.HttpWebRequestConnection", "Connections\Elasticsearch.Net.Connections.HttpWebRequestConnection\Elasticsearch.Net.Connections.HttpWebRequestConnection.csproj", "{A44DBED2-D976-4CDE-8E26-DC60B49EF92F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6C4A2627-AF22-4388-9DF7-7A9AEACFD635}"
 ProjectSection(SolutionItems) = preProject
@@ -84,7 +79,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{56A87048-9065-459B-826D-3DF68B409845} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{98400F59-4BA8-4534-9A78-9C7FA0B42901} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
-		{A44DBED2-D976-4CDE-8E26-DC60B49EF92F} = {694887B9-6687-4AB1-BE30-2877656DF55D}
 		{CDC8DEC8-3872-4337-9C40-9CDE5724BBDD} = {14241027-0A92-466D-B024-E0063F338915}
 		{D6997ADC-E933-418E-831C-DE1A78897493} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 		{5B393962-7586-49BA-BD99-3B1E35F48E94} = {6C4A2627-AF22-4388-9DF7-7A9AEACFD635}
@@ -134,5 +128,27 @@ Global
 		{CE7AC1D4-15AF-47FB-83FA-F7137DFD9076}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE7AC1D4-15AF-47FB-83FA-F7137DFD9076}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE7AC1D4-15AF-47FB-83FA-F7137DFD9076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98400F59-4BA8-4534-9A78-9C7FA0B42901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98400F59-4BA8-4534-9A78-9C7FA0B42901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98400F59-4BA8-4534-9A78-9C7FA0B42901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98400F59-4BA8-4534-9A78-9C7FA0B42901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC8DEC8-3872-4337-9C40-9CDE5724BBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC8DEC8-3872-4337-9C40-9CDE5724BBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC8DEC8-3872-4337-9C40-9CDE5724BBDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6997ADC-E933-418E-831C-DE1A78897493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6997ADC-E933-418E-831C-DE1A78897493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6997ADC-E933-418E-831C-DE1A78897493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 EndGlobal

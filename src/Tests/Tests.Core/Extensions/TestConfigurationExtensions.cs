@@ -1,14 +1,14 @@
 ﻿using Elastic.Managed.Configuration;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connections.HttpWebRequestConnection;
 using Tests.Configuration;
 
 namespace Tests.Core.Extensions
 {
 	public static class TestConfigurationExtensions
 	{
+		//on this branch HttpConnection is either webrequest or httpclient based depending on the TFM
 		private static IConnection CreateLiveConnection(this ITestConfiguration configuration) =>
-			configuration.Random.OldConnection ? (IConnection) new HttpWebRequestConnection() : new HttpConnection();
+			configuration.Random.OldConnection ? new HttpConnection() : new HttpConnection();
 
 		public static IConnection CreateConnection(this ITestConfiguration configuration, bool forceInMemory = false) =>
 			configuration.RunIntegrationTests && !forceInMemory ? configuration.CreateLiveConnection() : new InMemoryConnection();
