@@ -8,7 +8,7 @@ namespace Tests.Core.Extensions
 	{
 		//on this branch HttpConnection is either webrequest or httpclient based depending on the TFM
 		private static IConnection CreateLiveConnection(this ITestConfiguration configuration) =>
-			configuration.Random.OldConnection ? new HttpConnection() : new HttpConnection();
+			configuration.Random.OldConnection ? (IConnection) new HttpWebRequestConnection() : new HttpConnection();
 
 		public static IConnection CreateConnection(this ITestConfiguration configuration, bool forceInMemory = false) =>
 			configuration.RunIntegrationTests && !forceInMemory ? configuration.CreateLiveConnection() : new InMemoryConnection();

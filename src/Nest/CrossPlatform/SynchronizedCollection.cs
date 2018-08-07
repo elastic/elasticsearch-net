@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Diagnostics;
-using Nest;
+﻿using Nest;
 
 namespace System.Collections.Generic
 {
