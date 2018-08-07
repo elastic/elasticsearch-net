@@ -193,6 +193,12 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		[U] public void TermQuery() =>
 			SerializesEnumValue(new TermQuery { Field = Infer.Field<Project>(p=>p.Name), Value = SomeEnum.AnotherValue});
 
+		[U] public void TermsQuery() =>
+			Serializes(new TermsQuery { Field = Infer.Field<Project>(p=>p.Name), Terms = new object[] { SomeEnum.AnotherValue }},
+				usingDefaults: new {name =  new [] {1}},
+				withSourceSerializer: new {name = new [] {"different"}}
+			);
+
 		[U] public void WildcardQuery() =>
 			SerializesEnumValue(new WildcardQuery {Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue});
 
