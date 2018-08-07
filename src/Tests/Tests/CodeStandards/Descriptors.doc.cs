@@ -24,6 +24,7 @@ namespace Tests.CodeStandards
 				from t in typeof(DescriptorBase<,>).Assembly().Types()
 				where t.IsClass()
 				      && t.Name.Contains("Descriptor")
+				      && !t.Namespace.StartsWith("Nest.Json")
 				      && !notDescriptors.Contains(t.Name)
 #if __MonoCS__
 				      && !t.FullName.Contains("c__AnonStore") //compiler generated
@@ -45,6 +46,7 @@ namespace Tests.CodeStandards
 				from t in typeof(SelectorBase<>).Assembly().Types()
 				where t.IsClass()
 				      && t.Name.Contains("Selector")
+				      && !t.Namespace.StartsWith("Nest.Json")
 				      && !notSelectors.Contains(t.Name)
 #if __MonoCS__
 				      && !t.FullName.Contains("c__AnonStore") //compiler generated
