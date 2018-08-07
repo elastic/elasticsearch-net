@@ -16,29 +16,17 @@
 		<copyright>2014-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<dependencies>
-			<group targetFramework=".NETFramework4.6">
+			<group targetFramework=".NETStandard2.0">
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
-			</group>
-			<group targetFramework=".NETStandard1.3">
-				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
-				<dependency id="NETStandard.Library" version="[1.6.0, )" />
-				<dependency id="System.Collections.Specialized" version="[4.3.0, )" />
-				<dependency id="System.Reflection.TypeExtensions" version="[4.3.0, )" />
-				<dependency id="System.Linq.Queryable" version="[4.0.1, )" />
-
+				
 				<!-- since we no longer reference JSON.NET (internalized) we do need to ship with its System references -->
 				<dependency id="System.ComponentModel.TypeConverter" version="[4.3.0, )"/>
-				<dependency id="System.Runtime.Serialization.Formatters" version="[4.3.0, )"/>
 				<dependency id="System.Runtime.Serialization.Primitives" version="[4.3.0, )"/>
-				<dependency id="System.Xml.XmlDocument" version="[4.3.0, )"/>
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\Nest\net46\Nest.dll" target="lib\net46"/>
-		<file src="output\Nest\net46\Nest.XML" target="lib\net46"/>
-
-		<file src="output\Nest\netstandard1.3\Nest.dll" target="lib\netstandard1.3"/>
-		<file src="output\Nest\netstandard1.3\Nest.xml" target="lib\netstandard1.3"/>
+		<file src="output\Nest\netstandard2.0\Nest.dll" target="lib\netstandard2.0"/>
+		<file src="output\Nest\netstandard2.0\Nest.xml" target="lib\netstandard2.0"/>
 	</files>
 </package>

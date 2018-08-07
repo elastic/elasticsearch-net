@@ -16,23 +16,11 @@
 		<copyright>2014-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<dependencies>
-			<group targetFramework=".NETFramework4.6" />
-			<group targetFramework=".NETStandard1.3">
-				<dependency id="NETStandard.Library" version="[1.6.0, )" />
-				<dependency id="System.Collections.Specialized" version="[4.3.0, )" />
-				<dependency id="System.Runtime.Serialization.Primitives" version="[4.3.0, )" />
-				<dependency id="Microsoft.CSharp" version="[4.3.0, )" />
-				<dependency id="System.Dynamic.Runtime" version="[4.3.0, )" />
-				<dependency id="System.Reflection.TypeExtensions" version="[4.3.0, )" />
-				<dependency id="System.ComponentModel.TypeConverter" version="[4.3.0, )" />
-			</group>
+			<group targetFramework=".NETStandard2.0" />
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="output\Elasticsearch.Net\net46\Elasticsearch.Net.dll" target="lib\net46"/>
-		<file src="output\Elasticsearch.Net\net46\Elasticsearch.Net.XML" target="lib\net46"/>
-
-		<file src="output\Elasticsearch.Net\netstandard1.3\Elasticsearch.Net.dll" target="lib\netstandard1.3"/>
-		<file src="output\Elasticsearch.Net\netstandard1.3\Elasticsearch.Net.xml" target="lib\netstandard1.3"/>
+		<file src="output\Elasticsearch.Net\netstandard2.0\Elasticsearch.Net.dll" target="lib\netstandard2.0"/>
+		<file src="output\Elasticsearch.Net\netstandard2.0\Elasticsearch.Net.xml" target="lib\netstandard2.0"/>
 	</files>
 </package>
