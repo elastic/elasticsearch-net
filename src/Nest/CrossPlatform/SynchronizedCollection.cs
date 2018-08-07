@@ -1,12 +1,11 @@
-﻿#if DOTNETCORE
-using System;
+﻿using System;
 using System.Collections;
 using System.Diagnostics;
 using Nest;
 
 namespace System.Collections.Generic
 {
-
+	// TODO delete this, BulkRequest exposes this as IList preventing us to move to concurrentbag
 	[System.Runtime.InteropServices.ComVisible(false)]
 	public class SynchronizedCollection<T> : IList<T>, IList
 	{
@@ -310,4 +309,3 @@ namespace System.Collections.Generic
 		}
 	}
 }
-#endif
