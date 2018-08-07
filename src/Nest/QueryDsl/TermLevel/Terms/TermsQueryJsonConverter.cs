@@ -23,29 +23,35 @@ namespace Nest
 			{
 				if (t.IsVerbatim)
 				{
-                    if (t.TermsLookup != null)
-                    {
-                        writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.TermsLookup);
-                    }
-                    else if (t.Terms != null)
-                    {
-                        writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.Terms);
-                    }
+					if (t.TermsLookup != null)
+					{
+						writer.WritePropertyName(field);
+						serializer.Serialize(writer, t.TermsLookup);
+					}
+					else if (t.Terms != null)
+					{
+						writer.WritePropertyName(field);
+						writer.WriteStartArray();
+						foreach (var o in t.Terms)
+							SourceValueWriteConverter.Write(writer, o, serializer);
+						writer.WriteEndArray();
+					}
 				}
 				else
 				{
-                    if (t.Terms.HasAny())
-                    {
-                        writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.Terms);
-                    }
-                    else if (t.TermsLookup != null)
-                    {
-                        writer.WritePropertyName(field);
-                        serializer.Serialize(writer, t.TermsLookup);
-                    }
+					if (t.Terms.HasAny())
+					{
+						writer.WritePropertyName(field);
+						writer.WriteStartArray();
+						foreach (var o in t.Terms)
+							SourceValueWriteConverter.Write(writer, o, serializer);
+						writer.WriteEndArray();
+					}
+					else if (t.TermsLookup != null)
+					{
+						writer.WritePropertyName(field);
+						serializer.Serialize(writer, t.TermsLookup);
+					}
 				}
 
 				if (t.Boost.HasValue)
@@ -63,7 +69,7 @@ namespace Nest
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var filter = new TermsQueryDescriptor<object>();
+			var filter = new TermsQuery();
 			ITermsQuery f = filter;
 			if (reader.TokenType != JsonToken.StartObject)
 				return null;
