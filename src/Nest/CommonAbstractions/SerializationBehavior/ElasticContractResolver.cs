@@ -58,7 +58,7 @@ namespace Nest
 					contract.Converter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
 				else if (o == typeof(TimeSpan) ||
 						 o == typeof(TimeSpan?))
-					contract.Converter = new TimeSpanConverter();
+					contract.Converter = new TimeSpanToStringConverter();
 
 				if (this._contractConverters.HasAny())
 				{

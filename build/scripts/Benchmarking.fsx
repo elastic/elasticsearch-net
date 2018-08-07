@@ -130,7 +130,7 @@ module Benchmarker =
         member val HostEnvironmentInfo = host with get, set
         member val Benchmark = benchmark with get, set
 
-    let private testsProjectDirectory = Path.GetFullPath(Paths.Source("Tests"))
+    let private testsProjectDirectory = Path.GetFullPath(Paths.TestsSource("Tests.Benchmarking"))
     let private benchmarkOutput = Path.GetFullPath(Paths.Output("benchmarks")) |> directoryInfo
     let private copyToOutput file = CopyFile benchmarkOutput.FullName file
 
