@@ -21,6 +21,7 @@ module Tests =
     open System
 
     let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS"
+    let private buildingOnTeamCity = getEnvironmentVarAsBool "TEAMCITY_VERSION"
 
     let private setLocalEnvVars() = 
         let clusterFilter =  getBuildParamOrDefault "clusterfilter" ""
@@ -50,7 +51,7 @@ module Tests =
 
         let dotnet = Tooling.BuildTooling("dotnet")
         let exitCode = dotnet.ExecWithTimeoutIn "src/Tests/Tests" command (TimeSpan.FromMinutes 30.) 
-        if exitCode > 0 then raise (Exception <| (sprintf "test finished with exitCode %d" exitCode))
+        if exitCode > 0 && not buildingOnTeamCity then raise (Exception <| (sprintf "test finished with exitCode %d" exitCode))
 
     let RunReleaseUnitTests() =
         setLocalEnvVars()
