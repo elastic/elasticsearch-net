@@ -1,4 +1,4 @@
-﻿#if DOTNETCORE
+﻿#if !FEATURE_HTTPWEBREQUEST
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
