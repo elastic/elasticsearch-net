@@ -7,7 +7,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
-#if DOTNETCORE
+#if !FEATURE_HTTPWEBREQUEST
 using System.Net;
 using System.Net.Http;
 #endif
@@ -22,7 +22,7 @@ namespace Elasticsearch.Net
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
 		internal static bool IsCurlHandler { get; } =
-            #if DOTNETCORE
+            #if !FEATURE_HTTPWEBREQUEST
                 typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
             #else
                  false;
@@ -339,7 +339,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Forces all requests to have ?pretty=true querystring parameter appended, 
+		/// Forces all requests to have ?pretty=true querystring parameter appended,
 		/// causing Elasticsearch to return formatted JSON.
 		/// Also forces the client to send out formatted JSON. Defaults to <c>false</c>
 		/// </summary>
@@ -404,7 +404,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson()
-		/// so that the original request and response JSON can be inspected.
+		/// so that the original request and response JSON can be inspected. It also always asks the server for the full stack trace on errors
 		/// </summary>
 		/// <param name="onRequestCompleted">
 		/// An optional callback to be performed when the request completes. This will

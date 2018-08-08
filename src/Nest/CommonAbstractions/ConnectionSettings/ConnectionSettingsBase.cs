@@ -37,7 +37,7 @@ namespace Nest
 #pragma warning restore CS0618 // Type or member is obsolete
 
 		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, ISerializerFactory serializerFactory)
-			: base(connectionPool, connection, serializerFactory, s => serializerFactory.Create(s)) { }
+			: base(connectionPool, connection, serializerFactory, s => serializerFactory?.Create(s)) { }
 
 		[Obsolete("Please use the constructor taking ISerializerFactory instead of a Func")]
 		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory)
