@@ -30,6 +30,11 @@ Targets:
     also pushes to upstream (myget)
 * diff <github|nuget|dir|assembly> <version|path 1> <version|path 2> [format]
 * cluster <cluster-name> [version]
+  - Start a cluster defined in Tests.Core or Tests from the command line and leaves it running
+    untill a key is pressed. Handy if you want to run the integration tests numerous times while developing  
+* benchmark [url] [username] [password] [non-interactive]
+  - Runs a benchmark from Tests.Benchmarking and indexes the results to [url] when provided.
+    If non-interactive runs all benchmarks without prompting
 
 NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to force the tests against all suported TFM's
 
@@ -151,6 +156,13 @@ module Commandline =
             setBuildParam "nonInteractive" "1"
             setBuildParam "username" username
             setBuildParam "password" password
+            
+        | ["benchmark"; IsUrl elasticsearch; "non-interactive"] ->
+            setBuildParam "elasticsearch" elasticsearch
+            setBuildParam "nonInteractive" "1"
+            
+        | ["benchmark"; "non-interactive"] ->
+            setBuildParam "nonInteractive" "1"
 
         | ["benchmark"; IsUrl elasticsearch; username; password] ->
             setBuildParam "elasticsearch" elasticsearch
@@ -161,13 +173,6 @@ module Commandline =
         | ["benchmark"; IsUrl elasticsearch] ->
             setBuildParam "elasticsearch" elasticsearch
             setBuildParam "nonInteractive" "0"
-
-        | ["benchmark"; IsUrl elasticsearch; "non-interactive"] ->
-            setBuildParam "elasticsearch" elasticsearch
-            setBuildParam "nonInteractive" "1"
-            
-        | ["benchmark"; "non-interactive"] ->
-            setBuildParam "nonInteractive" "1"
 
         | ["profile"; IsUrl elasticsearch] ->
             setBuildParam "elasticsearch" elasticsearch
