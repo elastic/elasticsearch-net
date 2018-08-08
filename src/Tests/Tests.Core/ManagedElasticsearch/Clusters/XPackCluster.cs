@@ -41,7 +41,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 
-		public virtual IElasticClient Client => this.GetOrAddClient(s=>this.Authenticate(this.ConnectionSettings(ConnectionSettingsExtensions.ApplyDomainSettings(s))));
+		public virtual IElasticClient Client => this.GetOrAddClient(s=> this.Authenticate(this.ConnectionSettings(s.ApplyDomainSettings())));
 
 		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
 	}
