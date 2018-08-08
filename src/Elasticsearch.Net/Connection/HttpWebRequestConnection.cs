@@ -165,7 +165,8 @@ namespace Elasticsearch.Net
 				var response = (HttpWebResponse) request.GetResponse();
 				HandleResponse(response, out statusCode, out responseStream, out mimeType);
 
-				if (response.SupportsHeaders && response.Headers.HasKeys() && response.Headers.AllKeys.Contains("Warning"))
+				//response.Headers.HasKeys() can return false even if response.Headers.AllKeys has values.
+				if (response.SupportsHeaders && response.Headers.Count > 0 && response.Headers.AllKeys.Contains("Warning"))
 					warnings = response.Headers.GetValues("Warning");
 			}
 			catch (WebException e)
