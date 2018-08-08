@@ -110,7 +110,7 @@ Target "Cluster" <| fun _ ->
     Shell.copyDir tempDir testsProjectDirectory (fun s -> true)
     trace testsProjectDirectory
     trace tempDir
-    let command = sprintf "cluster %s %s" clusterName clusterVersion
+    let command = sprintf "%s %s" clusterName clusterVersion
     DotNetCli.RunCommand(fun p ->
         { p with
             WorkingDir = tempDir;
