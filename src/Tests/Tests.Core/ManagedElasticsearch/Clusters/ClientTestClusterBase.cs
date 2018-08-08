@@ -24,7 +24,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration) { }
 
-		public IElasticClient Client => this.GetOrAddClient(s=> this.ConnectionSettings(ConnectionSettingsExtensions.ApplyDomainSettings(s)));
+		public IElasticClient Client => this.GetOrAddClient(s=> this.ConnectionSettings(s.ApplyDomainSettings()));
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s;
 
