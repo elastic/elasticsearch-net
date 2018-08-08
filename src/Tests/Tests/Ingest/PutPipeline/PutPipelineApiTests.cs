@@ -5,12 +5,13 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
 using System.Collections.Generic;
+using Elastic.Xunit.XunitPlumbing;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Ingest.PutPipeline
 {
+	[SkipVersion("<6.1.0", "uses url decode which was introduced in 6.1.0")]
 	public class PutPipelineApiTests
 		: ApiIntegrationTestBase<ReadOnlyCluster, IPutPipelineResponse, IPutPipelineRequest, PutPipelineDescriptor, PutPipelineRequest>
 	{
