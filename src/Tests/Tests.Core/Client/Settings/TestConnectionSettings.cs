@@ -34,6 +34,7 @@ namespace Tests.Core.Client.Settings
 				: ConnectionConfiguration.DefaultConnectionLimit;
 
 		internal ConnectionSettings ApplyTestSettings() => this
+			.ApplyFiddlerProxyWhenNeeded()
 			//TODO make this random
 			//.EnableHttpCompression()
 #if DEBUG
@@ -48,6 +49,13 @@ namespace Tests.Core.Client.Settings
 				if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
 				foreach (var d in r.DeprecationWarnings) XunitRunState.SeenDeprecations.Add(d);
 			});
+
+		private ConnectionSettings ApplyFiddlerProxyWhenNeeded()
+		{
+			if (!TestConfiguration.Instance.Random.OldConnection) return this;
+			if (!RunningFiddler) return this;
+			return this.Proxy(new Uri("http://localhost:8888"), null, null);
+		}
 
 		private static IConnectionPool CreatePool(Func<ICollection<Uri>, IConnectionPool> createPool = null, int port = 9200)
 		{
