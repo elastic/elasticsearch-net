@@ -104,7 +104,7 @@ namespace Tests.Core.Xunit
 			var reproduceLine = ReproduceCommandLine(failedCollections, config, runningIntegrations);
 			Console.WriteLine(reproduceLine);
 			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION")))
-				Console.WriteLine($"##teamcity[buildProblem description='{reproduceLine}'");
+				Console.WriteLine($"##teamcity[buildProblem description='{reproduceLine}']");
 			Console.WriteLine("--------");
 		}
 
