@@ -99,7 +99,17 @@ namespace Tests.Core.Xunit
 			var config = TestConfiguration.Instance;
 			var runningIntegrations = config.RunIntegrationTests;
 			Console.ForegroundColor = ConsoleColor.Yellow;
+			///
 			Console.WriteLine("---Reproduce: -----");
+			var reproduceLine = ReproduceCommandLine(failedCollections, config, runningIntegrations);
+			Console.WriteLine(reproduceLine);
+			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION")))
+				Console.WriteLine($"##teamcity[buildProblem description='{reproduceLine}'");
+			Console.WriteLine("--------");
+		}
+
+		private static string ReproduceCommandLine(ConcurrentBag<Tuple<string, string>> failedCollections, ITestConfiguration config, bool runningIntegrations)
+		{
 			var sb = new StringBuilder("build ")
 				.Append($"seed:{config.Seed} ");
 
@@ -117,12 +127,13 @@ namespace Tests.Core.Xunit
 
 			if (runningIntegrations && failedCollections.Count > 0)
 			{
-                var clusters = string.Join(",", failedCollections
-                    .Select(c => c.Item1.ToLowerInvariant()).Distinct());
-                sb.Append(" \"");
+				var clusters = string.Join(",", failedCollections
+					.Select(c => c.Item1.ToLowerInvariant()).Distinct());
+				sb.Append(" \"");
 				sb.Append(clusters);
-                sb.Append("\"");
+				sb.Append("\"");
 			}
+
 			if ((!runningIntegrations || (failedCollections.Count < 30)) && failedCollections.Count > 0)
 			{
 				sb.Append(" \"");
@@ -136,8 +147,9 @@ namespace Tests.Core.Xunit
 				sb.Append(tests);
 				sb.Append("\"");
 			}
-			Console.WriteLine(sb.ToString());
-			Console.WriteLine("--------");
+
+			var reproduceLine = sb.ToString();
+			return reproduceLine;
 		}
 
 		/// <summary>
