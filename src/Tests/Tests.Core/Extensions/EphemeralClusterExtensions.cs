@@ -13,7 +13,9 @@ namespace Tests.Core.Extensions
 		public static ConnectionSettings CreateConnectionSettings<TConfig>(this IEphemeralCluster<TConfig> cluster)
 			where TConfig : EphemeralClusterConfiguration
 		{
-			return new TestConnectionSettings();
+			var clusterNodes = cluster.NodesUris(TestConnectionSettings.LocalOrProxyHost);
+			//we ignore the uri's that TestConnection provides and seed with the nodes the cluster dictates.
+			return new TestConnectionSettings(uris => new StaticConnectionPool(clusterNodes));
 		}
 
 		public static IElasticClient GetOrAddClient<TConfig>(
