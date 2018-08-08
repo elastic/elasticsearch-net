@@ -1,5 +1,6 @@
 ﻿using Nest;
-using Tests.Domain.Helpers;
+using Tests.Configuration;
+using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Domain.Extensions
 {
@@ -7,23 +8,20 @@ namespace Tests.Domain.Extensions
 	{
 		public static ConnectionSettings ApplyDomainSettings(this ConnectionSettings settings) => settings
 			.DefaultIndex("default-index")
-			.InferMappingFor<Project>(map => map
-				.IndexName(TestValueHelper.ProjectsIndex)
-				.IdProperty(p => p.Name)
-				.TypeName("doc")
-			)
+			.InferMappingFor<Project>(ProjectMapping)
+			.InferMappingFor<Ranges>(RangesMapping)
 			.InferMappingFor<CommitActivity>(map => map
-				.IndexName(TestValueHelper.ProjectsIndex)
-				.TypeName("doc")
+				.IndexName("project")
+				.TypeName("commits")
 			)
 			.InferMappingFor<Developer>(map => map
 				.IndexName("devs")
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
-			.InferMappingFor<PercolateQuery>(map => map
+			.InferMappingFor<PercolatedQuery>(map => map
 				.IndexName("queries")
-				.TypeName(TestValueHelper.PercolatorType)
+				.TypeName(PercolatorType)
 			)
 			.InferMappingFor<Metric>(map => map
 				.IndexName("server-metrics")
@@ -33,5 +31,21 @@ namespace Tests.Domain.Extensions
 				.IndexName("shapes")
 				.TypeName("doc")
 			);
+		private static IClrTypeMapping<Project> ProjectMapping(ClrTypeMappingDescriptor<Project> m)
+		{
+			m.IndexName("project").IdProperty(p => p.Name);
+			//*_range type only available since 5.2.0 so we ignore them when running integration tests
+			if (InRange("<5.2.0") && TestConfiguration.Instance.RunIntegrationTests)
+				m.Ignore(p => p.Ranges);
+			return m;
+		}
+
+		private static IClrTypeMapping<Ranges> RangesMapping(ClrTypeMappingDescriptor<Ranges> m)
+		{
+			//ip_range type only available since 5.5.0 so we ignore them when running integration tests
+			if (InRange("<5.5.0") && TestConfiguration.Instance.RunIntegrationTests)
+				m.Ignore(p => p.Ips);
+			return m;
+		}
 	}
 }

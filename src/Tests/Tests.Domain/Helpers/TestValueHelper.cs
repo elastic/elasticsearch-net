@@ -6,7 +6,8 @@ namespace Tests.Domain.Helpers
 {
 	public static class TestValueHelper
 	{
-		private static bool InRange(string range) => ElasticsearchVersion.From(TestConfiguration.Instance.ElasticsearchVersion).InRange(range);
+		// internal because other projects should offload to TestConfiguration.Instance.InRange instead
+		internal static bool InRange(string range) => ElasticsearchVersion.From(TestConfiguration.Instance.ElasticsearchVersion).InRange(range);
 
 		public const string ProjectsIndex = "project";
 

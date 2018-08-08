@@ -70,14 +70,14 @@ namespace Tests.Ingest.SimulatePipeline
 					_index = "project",
 					_type = "project",
 					_id = Project.Instance.Name,
-					_source = Project.Instance
+					_source = Project.InstanceAnonymous
 				},
 				new
 				{
 					_index = "otherindex",
 					_type = "othertype",
 					_id = "otherid",
-					_source = Project.Instance
+					_source = Project.InstanceAnonymous
 				},
 				new
 				{

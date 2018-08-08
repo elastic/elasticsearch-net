@@ -97,12 +97,10 @@ namespace Elasticsearch.Net
 			var error = new Error();
 			error.FillValues(dict);
 
-			object causedBy;
-			if (dict.TryGetValue("caused_by", out causedBy))
+			if (dict.TryGetValue("caused_by", out var causedBy))
 				error.CausedBy = (CausedBy) strategy.DeserializeObject(causedBy, typeof(CausedBy));
 
-			object rootCause;
-			if (!dict.TryGetValue("root_cause", out rootCause)) return error;
+			if (!dict.TryGetValue("root_cause", out var rootCause)) return error;
 
 			var os = rootCause as object[];
 			if (os == null) return error;

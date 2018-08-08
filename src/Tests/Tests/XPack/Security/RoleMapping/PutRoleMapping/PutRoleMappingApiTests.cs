@@ -43,6 +43,7 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
 		private string Role => $"role-{CallIsolatedValue}";
 
+		protected override bool IncludeNullInExpected => true;
 		protected override object ExpectJson => new
 		{
 			enabled = true,

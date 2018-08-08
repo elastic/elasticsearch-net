@@ -51,7 +51,7 @@ namespace Tests.Search.Percolator.RegisterPercolator
 			},
 			language = "c#",
 			commits = 5000,
-			project = Project.Instance
+			project = Project.InstanceAnonymous
 		};
 
 		protected override void ExpectResponse(IRegisterPercolatorResponse response)

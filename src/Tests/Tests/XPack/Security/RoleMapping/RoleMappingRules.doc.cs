@@ -144,7 +144,9 @@ namespace Tests.Search
 					x = "y",
 					z = (object) null
 				}
-			}).WhenSerializing(new PutRoleMappingRequest("x")
+			}, preserveNullInExpected: true)
+				.NoRoundTrip()
+				.WhenSerializing(new PutRoleMappingRequest("x")
 			{
 				Enabled = true,
 				Roles = new[] {"admin"},

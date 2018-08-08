@@ -6,7 +6,7 @@ namespace Tests.Core.Extensions
 	public static class SerializationTesterAssertionExtensions
 	{
 		public static void ShouldBeValid(this SerializationResult result, string message = null) =>
-			result.Success.Should().BeTrue("{0}", message + result);
+			result.Success.Should().BeTrue("{0}", (message ?? string.Empty) + result);
 
 		public static T AssertRoundTrip<T>(this SerializationTester tester, T @object, string message = null, bool preserveNullInExpected = false)
 		{

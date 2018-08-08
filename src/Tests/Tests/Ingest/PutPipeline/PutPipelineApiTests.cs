@@ -179,14 +179,6 @@ namespace Tests.Ingest.PutPipeline
 					{
 						inline = "ctx.numberOfCommits++"
 					}
-				},
-				new
-				{
-					urldecode = new
-					{
-						field = "description",
-						ignore_missing = true
-					}
 				}
 			}
 		};

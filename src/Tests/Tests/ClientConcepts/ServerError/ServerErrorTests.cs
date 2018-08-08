@@ -28,7 +28,7 @@ namespace Tests.ClientConcepts.ServerError
 			   ""status"": 400
 			}";
 
-			var serverError = Expect(serverErrorJson).DeserializesTo<Elasticsearch.Net.ServerError>();
+			var serverError = Expect(serverErrorJson).NoRoundTrip().DeserializesTo<Elasticsearch.Net.ServerError>();
 
 			serverError.Should().NotBeNull();
 			serverError.Status.Should().Be(400);
