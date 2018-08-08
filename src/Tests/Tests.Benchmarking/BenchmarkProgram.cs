@@ -12,7 +12,7 @@ namespace Tests.Benchmarking
 		public static int Main(string[] arguments)
 		{
 			Console.WriteLine("Running Benchmarking.");
-			if (arguments.Count() > 1 && arguments[0].Equals("non-interactive", StringComparison.OrdinalIgnoreCase))
+			if (arguments.Count() >= 1 && arguments[0].Equals("non-interactive", StringComparison.OrdinalIgnoreCase))
 			{
 				Console.WriteLine("Running in Non-Interactive mode.");
 				foreach (var benchmarkType in GetBenchmarkTypes())
