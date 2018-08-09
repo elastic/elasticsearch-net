@@ -21,7 +21,7 @@ module Tests =
     open System
 
     let private buildingOnTravis = getEnvironmentVarAsBool "TRAVIS"
-    let private buildingOnTeamCity = getEnvironmentVarAsBool "TEAMCITY_VERSION"
+    let private buildingOnTeamCity = match environVarOrNone "TEAMCITY_VERSION" with | Some x -> true | None -> false
 
     let private setLocalEnvVars() = 
         let clusterFilter =  getBuildParamOrDefault "clusterfilter" ""
