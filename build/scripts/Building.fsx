@@ -56,7 +56,7 @@ module Build =
                 { p with 
                     Configuration = "Release" 
                     Project = sln
-                    TimeOut = TimeSpan.FromMinutes(3.)
+                    TimeOut = TimeSpan.FromMinutes(5.)
                     AdditionalArgs = [props]
                 }
             ) |> ignore
@@ -66,7 +66,7 @@ module Build =
             (fun p -> 
                 { p with 
                     Project = sln
-                    TimeOut = TimeSpan.FromMinutes(3.)
+                    TimeOut = TimeSpan.FromMinutes(5.)
                 }
             ) |> ignore
         
@@ -76,7 +76,7 @@ module Build =
     let Clean() =
         tracefn "Cleaning known output folders"
         CleanDir Paths.BuildOutput
-        DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(3.) }) "clean src/Elasticsearch.sln -c Release" |> ignore
+        DotNetCli.RunCommand (fun p -> { p with TimeOut = TimeSpan.FromMinutes(5.) }) "clean src/Elasticsearch.sln -c Release" |> ignore
         DotNetProject.All |> Seq.iter(fun p -> CleanDir(Paths.BinFolder p.Name))
 
     type CustomResolver(folder) = 
