@@ -20,6 +20,36 @@ The suggest feature suggests similar looking terms based on a provided text by u
 See the Elasticsearch documentation on {ref_current}/search-suggesters.html[Suggesters] for more detail.
 
 [float]
+=== Indexing example
+
+[source,csharp]
+----
+public class Question
+{
+    public CompletionField TitleSuggest { get; set; }
+}
+
+var createIndexResponse = client.CreateIndex("my_index", c => c
+    .Mappings(m => m
+        .Map<Question>(u => u
+            .AutoMap()
+        )
+    )
+);
+
+var question = new Question
+{
+    TitleSuggest = new CompletionField
+    {
+        Input = new[] { "This is the title" },
+        Weight = 5
+    }
+};
+
+client.Index(question, i => i.Index("my_index").Refresh(Refresh.WaitFor));
+----
+
+[float]
 === Fluent DSL example
 
 [source,csharp]
