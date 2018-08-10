@@ -54,10 +54,38 @@ namespace ApiGenerator
 
 		private static string[] IgnoredApis { get; } =
 		{
+			// these API's are not ready for primetime yet
 			"xpack.ml.delete_filter.json",
 			"xpack.ml.get_filters.json",
 			"xpack.ml.put_filter.json",
-			"rank_eval.json"
+			"rank_eval.json",
+			// these API's are new and need to be mapped
+			"xpack.license.get_basic_status.json",
+			"xpack.license.post_start_basic.json",
+			"xpack.ml.delete_calendar.json",
+			"xpack.ml.delete_calendar_event.json",
+			"xpack.ml.delete_calendar_job.json",
+			"xpack.ml.get_calendar_events.json",
+			"xpack.ml.get_calendars.json",
+			"xpack.ml.info.json",
+			"xpack.ml.post_calendar_events.json",
+			"xpack.ml.put_calendar.json",
+			"xpack.ml.put_calendar_job.json",
+			"xpack.ml.get_calendar_job.json",
+
+			"xpack.rollup.delete_job.json",
+			"xpack.rollup.get_jobs.json",
+			"xpack.rollup.get_rollup_caps.json",
+			"xpack.rollup.put_job.json",
+			"xpack.rollup.rollup_search.json",
+			"xpack.rollup.start_job.json",
+			"xpack.rollup.stop_job.json",
+			"xpack.sql.clear_cursor.json",
+			"xpack.sql.query.json",
+			"xpack.sql.translate.json",
+			"xpack.ssl.certificates.json",
+
+			"scripts_painless_execute.json",
 		};
 
 		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)
