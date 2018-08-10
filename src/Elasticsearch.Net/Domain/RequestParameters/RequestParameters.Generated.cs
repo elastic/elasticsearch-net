@@ -387,8 +387,6 @@ namespace Elasticsearch.Net
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>Return detailed task information (default: false)</summary>
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
-		///<summary>Return tasks with specified parent node.</summary>
-		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
 		public long? ParentTask { get => Q<long?>("parent_task"); set => Q("parent_task", value); }
 		///<summary>Comma-separated list of column names to display</summary>
@@ -399,6 +397,9 @@ namespace Elasticsearch.Net
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
+		///<summary>Return tasks with the specified parent node</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
+		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
 	///<summary>Request options for CatTemplates<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
 	public partial class CatTemplatesRequestParameters : RequestParameters<CatTemplatesRequestParameters> 
@@ -674,7 +675,7 @@ namespace Elasticsearch.Net
 		/// been specified)
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		///<summary>What to do when the delete-by-query hits version conflicts?</summary>
+		///<summary>What to do when the delete by query hits version conflicts?</summary>
 		public Conflicts? Conflicts { get => Q<Conflicts?>("conflicts"); set => Q("conflicts", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -720,9 +721,9 @@ namespace Elasticsearch.Net
 		/// copies for the shard (number of replicas + 1)
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>Size on the scroll request powering the update_by_query</summary>
+		///<summary>Size on the scroll request powering the delete by query</summary>
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
-		///<summary>Should the request should block until the delete-by-query is complete.</summary>
+		///<summary>Should the request should block until the delete by query is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
@@ -947,7 +948,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Clear field data</summary>
 		public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
-		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
+		///<summary>A comma-separated list of fields to clear when using the `fielddata` parameter (default: all)</summary>
 		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
 		///<summary>Clear query caches</summary>
 		public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
@@ -962,12 +963,13 @@ namespace Elasticsearch.Net
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>A comma-separated list of index name to limit the operation</summary>
 		public string[] IndexQueryString { get => Q<string[]>("index"); set => Q("index", value); }
-		///<summary>Clear the recycler cache</summary>
-		public bool? Recycler { get => Q<bool?>("recycler"); set => Q("recycler", value); }
 		///<summary>Clear request cache</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>Clear request cache</summary>
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
+		///<summary>Clear the recycle cache</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28866")]
+		public bool? Recycler { get => Q<bool?>("recycler"); set => Q("recycler", value); }
 	}
 	///<summary>Request options for IndicesClose<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexRequestParameters : RequestParameters<CloseIndexRequestParameters> 
@@ -1318,6 +1320,8 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
 		public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1799,6 +1803,8 @@ namespace Elasticsearch.Net
 		public string SuggestText { get => Q<string>("suggest_text"); set => Q("suggest_text", value); }
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
 		public bool? TrackTotalHits { get => Q<bool?>("track_total_hits"); set => Q("track_total_hits", value); }
+		///<summary>Indicate if an error should be returned if there is a partial search failure or timeout</summary>
+		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
@@ -1963,8 +1969,6 @@ namespace Elasticsearch.Net
 		public string[] Nodes { get => Q<string[]>("nodes"); set => Q("nodes", value); }
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
-		///<summary>Cancel tasks with specified parent node.</summary>
-		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
 	}
@@ -1974,6 +1978,8 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
 	///<summary>Request options for TasksList<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
 	public partial class ListTasksRequestParameters : RequestParameters<ListTasksRequestParameters> 
@@ -1988,14 +1994,17 @@ namespace Elasticsearch.Net
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>Return detailed task information (default: false)</summary>
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
-		///<summary>Return tasks with specified parent node.</summary>
-		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
 		public GroupBy? GroupBy { get => Q<GroupBy?>("group_by"); set => Q("group_by", value); }
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+		///<summary>Return tasks with the specified parent node</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
+		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
 	///<summary>Request options for Termvectors<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsRequestParameters : RequestParameters<TermVectorsRequestParameters> 
@@ -2131,7 +2140,7 @@ namespace Elasticsearch.Net
 		/// copies for the shard (number of replicas + 1)
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>Size on the scroll request powering the update_by_query</summary>
+		///<summary>Size on the scroll request powering the update by query</summary>
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 		///<summary>Should the request should block until the update by query operation is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -2191,6 +2200,10 @@ namespace Elasticsearch.Net
 	public partial class StartTrialLicenseRequestParameters : RequestParameters<StartTrialLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>The type of trial license to generate (default: "trial")</summary>
+		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
+		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
 	///<summary>Request options for XpackMlCloseJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
 	public partial class CloseJobRequestParameters : RequestParameters<CloseJobRequestParameters> 
@@ -2574,6 +2587,8 @@ namespace Elasticsearch.Net
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
+		///<summary>Explicit version number for concurrency control</summary>
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 	}
 	///<summary>Request options for XpackWatcherRestart<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
 	public partial class RestartWatcherRequestParameters : RequestParameters<RestartWatcherRequestParameters> 
