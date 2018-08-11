@@ -45,7 +45,7 @@ namespace Nest.JsonNetSerializer.Converters
 			//even though we pass type JSON.NET won't try the registered converter for that type
 			//even if it can handle string tokens :(
 			if (objectType == typeof(JoinField) && token.Type == JTokenType.String)
-				return JoinField.Root(token.ToString(Formatting.None));
+				return JoinField.Root(token.Value<string>());
 
 			using (var ms = token.ToStream())
 				return _builtInSerializer.Deserialize(objectType, ms);
