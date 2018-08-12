@@ -17,6 +17,9 @@ namespace Nest
 		[JsonProperty("span_near")]
 		ISpanNearQuery SpanNear { get; set; }
 
+		[JsonProperty("span_gap")]
+		ISpanGapQuery SpanGap { get; set; }
+
 		[JsonProperty("span_or")]
 		ISpanOrQuery SpanOr { get; set; }
 
@@ -50,6 +53,7 @@ namespace Nest
 		public ISpanTermQuery SpanTerm { get; set; }
 		public ISpanFirstQuery SpanFirst { get; set; }
 		public ISpanNearQuery SpanNear { get; set; }
+		public ISpanGapQuery SpanGap { get; set; }
 		public ISpanOrQuery SpanOr { get; set; }
 		public ISpanNotQuery SpanNot { get; set; }
 		public ISpanMultiTermQuery SpanMultiTerm { get; set; }
@@ -67,6 +71,7 @@ namespace Nest
 			q.SpanOr ,
 			q.SpanNot,
 			q.SpanMultiTerm,
+			q.SpanGap,
 			q.SpanFieldMasking
 		}.All(sq => sq == null || sq.Conditionless);
 	}
@@ -78,6 +83,7 @@ namespace Nest
 		ISpanTermQuery ISpanQuery.SpanTerm { get; set; }
 		ISpanFirstQuery ISpanQuery.SpanFirst { get; set; }
 		ISpanNearQuery ISpanQuery.SpanNear { get; set; }
+		ISpanGapQuery ISpanQuery.SpanGap { get; set; }
 		ISpanOrQuery ISpanQuery.SpanOr { get; set; }
 		ISpanNotQuery ISpanQuery.SpanNot { get; set; }
 		ISpanMultiTermQuery ISpanQuery.SpanMultiTerm { get; set; }
@@ -93,6 +99,9 @@ namespace Nest
 
 		public SpanQueryDescriptor<T> SpanNear(Func<SpanNearQueryDescriptor<T>, ISpanNearQuery> selector) =>
 			Assign(a => a.SpanNear = selector?.Invoke(new SpanNearQueryDescriptor<T>()));
+
+		public SpanQueryDescriptor<T> SpanGap(Func<SpanGapQueryDescriptor<T>, ISpanGapQuery> selector) =>
+			Assign(a => a.SpanGap = selector?.Invoke(new SpanGapQueryDescriptor<T>()));
 
 		public SpanQueryDescriptor<T> SpanOr(Func<SpanOrQueryDescriptor<T>, ISpanOrQuery> selector) =>
 			Assign(a => a.SpanOr = selector?.Invoke(new SpanOrQueryDescriptor<T>()));
