@@ -18,6 +18,15 @@ namespace Nest
 
 		[JsonProperty("slop")]
 		int? Slop { get; set; }
+
+		/// <summary>
+		/// If the analyzer used removes all tokens in a query like a stop filter does, the default behavior is
+		/// to match no documents at all. In order to change that, <see cref="ZeroTermsQuery"/> can be used,
+		/// which accepts <see cref="ZeroTermsQuery.None"/> (default) and <see cref="ZeroTermsQuery.All"/>
+		/// which corresponds to a match_all query.
+		/// </summary>
+		[JsonProperty("zero_terms_query")]
+		ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
 	public class MatchPhrasePrefixQuery : FieldNameQueryBase, IMatchPhrasePrefixQuery
@@ -28,6 +37,8 @@ namespace Nest
 		public int? MaxExpansions { get; set; }
 		public string Query { get; set; }
 		public int? Slop { get; set; }
+		/// <inheritdoc />
+		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.MatchPhrasePrefix = this;
 
@@ -44,6 +55,7 @@ namespace Nest
 		string IMatchPhrasePrefixQuery.Analyzer { get; set; }
 		int? IMatchPhrasePrefixQuery.MaxExpansions { get; set; }
 		int? IMatchPhrasePrefixQuery.Slop { get; set; }
+		ZeroTermsQuery? IMatchPhrasePrefixQuery.ZeroTermsQuery { get; set; }
 
 		public MatchPhrasePrefixQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
@@ -52,5 +64,9 @@ namespace Nest
 		public MatchPhrasePrefixQueryDescriptor<T> MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
 
 		public MatchPhrasePrefixQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
+
+		/// <inheritdoc cref="IMatchQuery.ZeroTermsQuery" />
+		public MatchPhrasePrefixQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(a => a.ZeroTermsQuery = zeroTermsQuery);
+
 	}
 }
