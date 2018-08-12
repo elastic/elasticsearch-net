@@ -60,6 +60,11 @@ namespace Nest
 
 		[JsonProperty("http")]
 		public HttpStats Http { get; internal set; }
+
+		[JsonProperty("adaptive_selection")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, AdaptiveSelectionStats>))]
+		public IReadOnlyDictionary<string, AdaptiveSelectionStats> AdaptiveSelection { get; internal set; }
+			= EmptyReadOnly<string, AdaptiveSelectionStats>.Dictionary;
 	}
 
 	[JsonObject]
