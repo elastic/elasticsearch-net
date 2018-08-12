@@ -36,10 +36,10 @@ namespace Tests.Cluster.NodesStats
 			for (var i = 0; i < 5; i++)
 			{
 				var searchResult = client.MultiSearch(m => m
-					.Search<Project>(s => s.MatchAll())
-					.Search<Project>(s => s.MatchAll())
-					.Search<Project>(s => s.MatchAll())
-					.Search<Project>(s => s.MatchAll())
+					.Search<Project>(s => s.MatchAll().Size(0))
+					.Search<Project>(s => s.MatchAll().Size(0))
+					.Search<Project>(s => s.MatchAll().Size(0))
+					.Search<Project>(s => s.MatchAll().Size(0))
 				);
 				searchResult.ShouldBeValid();
 			}
@@ -65,6 +65,14 @@ namespace Tests.Cluster.NodesStats
 			Assert(node.ThreadPool);
 			Assert(node.Jvm);
 			Assert(node.AdaptiveSelection);
+			Assert(node.Ingest);
+		}
+
+		protected void Assert(NodeIngestStats nodeIngestStats)
+		{
+			nodeIngestStats.Should().NotBeNull();
+			nodeIngestStats.Total.Should().NotBeNull();
+			nodeIngestStats.Pipelines.Should().NotBeNull().And.NotBeEmpty();
 		}
 
 		protected void Assert(IReadOnlyDictionary<string, AdaptiveSelectionStats> adaptiveSelectionStats)
