@@ -34,6 +34,20 @@ namespace Nest
 		public IReadOnlyCollection<TBucket> Buckets { get; set; } = EmptyReadOnly<TBucket>.Collection;
 	}
 
+	public class CompositeBucketAggregate : IAggregate
+	{
+		public IReadOnlyDictionary<string, object> Meta { get; set; }
+
+		public IReadOnlyCollection<CompositeBucket> Buckets { get; set; } = EmptyReadOnly<CompositeBucket>.Collection;
+
+		/// <summary>
+		/// The after_key is equals to the last bucket returned in the response before any filtering that could be done by Pipeline aggregations.
+		/// If all buckets are filtered/removed by a pipeline aggregation, the after_key will contain the last bucket before filtering.
+		/// </summary>
+		/// <remarks> Valid for Elasticsearch 6.3.0+ </remarks>
+		public IReadOnlyDictionary<string, object> AfterKey { get; set; } = EmptyReadOnly<string, object>.Dictionary;
+	}
+
 
 	// Intermediate object used for deserialization
 	public class BucketAggregate : IAggregate
@@ -44,5 +58,6 @@ namespace Nest
 		public IReadOnlyDictionary<string, object> Meta { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 		public long DocCount { get; set; }
 		public long BgCount { get; set; }
+		public IReadOnlyDictionary<string, object> AfterKey { get; set; } = EmptyReadOnly<string, object>.Dictionary;
 	}
 }
