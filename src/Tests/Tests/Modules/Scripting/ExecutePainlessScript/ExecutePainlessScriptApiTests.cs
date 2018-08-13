@@ -16,17 +16,17 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 {
 	[SkipVersion("<6.3.0", "this API was introduced in 6.3.0")]
 	public class ExecutePainlessScriptApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IExecutePainlessScriptResponse, IExecutePainlessScriptRequest, ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest, ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
 	{
 		public ExecutePainlessScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static readonly string _painlessScript = "params.count / params.total";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ExecutePainlessScript(f),
-			fluentAsync: (client, f) => client.ExecutePainlessScriptAsync(f),
-			request: (client, r) => client.ExecutePainlessScript(r),
-			requestAsync: (client, r) => client.ExecutePainlessScriptAsync(r)
+			fluent: (client, f) => client.ExecutePainlessScript<string>(f),
+			fluentAsync: (client, f) => client.ExecutePainlessScriptAsync<string>(f),
+			request: (client, r) => client.ExecutePainlessScript<string>(r),
+			requestAsync: (client, r) => client.ExecutePainlessScriptAsync<string>(r)
 		);
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -63,7 +63,7 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			}
 		};
 
-		protected override void ExpectResponse(IExecutePainlessScriptResponse response)
+		protected override void ExpectResponse(IExecutePainlessScriptResponse<string> response)
 		{
 			response.ShouldBeValid();
 			response.Result.Should().NotBeNullOrWhiteSpace();

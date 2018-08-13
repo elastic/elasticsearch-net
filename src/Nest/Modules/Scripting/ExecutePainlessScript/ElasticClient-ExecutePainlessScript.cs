@@ -8,39 +8,39 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IExecutePainlessScriptResponse ExecutePainlessScript(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector);
+		IExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector);
 
 		/// <inheritdoc/>
-		IExecutePainlessScriptResponse ExecutePainlessScript(IExecutePainlessScriptRequest request);
+		IExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(IExecutePainlessScriptRequest request);
 
 		/// <inheritdoc/>
-		Task<IExecutePainlessScriptResponse> ExecutePainlessScriptAsync(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector,
+		Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector,
 			CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IExecutePainlessScriptResponse> ExecutePainlessScriptAsync(IExecutePainlessScriptRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 	public partial class ElasticClient
 	{
-		public IExecutePainlessScriptResponse ExecutePainlessScript(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector) =>
-			this.ExecutePainlessScript(selector?.Invoke(new ExecutePainlessScriptDescriptor()));
+		public IExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector) =>
+			this.ExecutePainlessScript<TResult>(selector?.Invoke(new ExecutePainlessScriptDescriptor()));
 
-		public IExecutePainlessScriptResponse ExecutePainlessScript(IExecutePainlessScriptRequest request) =>
-			this.Dispatcher.Dispatch<IExecutePainlessScriptRequest, ExecutePainlessScriptRequestParameters, ExecutePainlessScriptResponse>(
+		public IExecutePainlessScriptResponse<TResult> ExecutePainlessScript<TResult>(IExecutePainlessScriptRequest request) =>
+			this.Dispatcher.Dispatch<IExecutePainlessScriptRequest, ExecutePainlessScriptRequestParameters, ExecutePainlessScriptResponse<TResult>>(
 				request,
-				this.LowLevelDispatch.ScriptsPainlessExecuteDispatch<ExecutePainlessScriptResponse>
+				this.LowLevelDispatch.ScriptsPainlessExecuteDispatch<ExecutePainlessScriptResponse<TResult>>
 			);
 
-		public Task<IExecutePainlessScriptResponse> ExecutePainlessScriptAsync(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector,
+		public Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector,
 			CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.ExecutePainlessScriptAsync(selector?.Invoke(new ExecutePainlessScriptDescriptor()), cancellationToken);
+			this.ExecutePainlessScriptAsync<TResult>(selector?.Invoke(new ExecutePainlessScriptDescriptor()), cancellationToken);
 
-		public Task<IExecutePainlessScriptResponse> ExecutePainlessScriptAsync(IExecutePainlessScriptRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptRequestParameters, ExecutePainlessScriptResponse, IExecutePainlessScriptResponse>(
+		public Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.Dispatcher.DispatchAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptRequestParameters, ExecutePainlessScriptResponse<TResult>, IExecutePainlessScriptResponse<TResult>>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.ScriptsPainlessExecuteDispatchAsync<ExecutePainlessScriptResponse>
+				this.LowLevelDispatch.ScriptsPainlessExecuteDispatchAsync<ExecutePainlessScriptResponse<TResult>>
 			);
 	}
 }

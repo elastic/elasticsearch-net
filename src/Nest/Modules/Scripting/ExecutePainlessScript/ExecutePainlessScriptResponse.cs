@@ -2,14 +2,14 @@
 
 namespace Nest
 {
-	public interface IExecutePainlessScriptResponse : IResponse
+	public interface IExecutePainlessScriptResponse<TResult> : IResponse
 	{
 		[JsonProperty("result")]
-		string Result { get; }
+		TResult Result { get; }
 	}
 
-	public class ExecutePainlessScriptResponse : ResponseBase, IExecutePainlessScriptResponse
+	public class ExecutePainlessScriptResponse<TResult> : ResponseBase, IExecutePainlessScriptResponse<TResult>
 	{
-		public string Result { get; set; }
+		public TResult Result { get; set; }
 	}
 }

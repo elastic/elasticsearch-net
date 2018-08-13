@@ -17,10 +17,10 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			};
 
 			await POST("/_scripts/painless/_execute")
-				.Fluent(c => c.ExecutePainlessScript(f => f.Script(s => s.Source(painless))))
-				.Request(c => c.ExecutePainlessScript(request))
-				.FluentAsync(c => c.ExecutePainlessScriptAsync(f => f.Script(s => s.Source(painless))))
-				.RequestAsync(c => c.ExecutePainlessScriptAsync(request))
+				.Fluent(c => c.ExecutePainlessScript<string>(f => f.Script(s => s.Source(painless))))
+				.Request(c => c.ExecutePainlessScript<string>(request))
+				.FluentAsync(c => c.ExecutePainlessScriptAsync<string>(f => f.Script(s => s.Source(painless))))
+				.RequestAsync(c => c.ExecutePainlessScriptAsync<string>(request))
 				;
 		}
 	}
