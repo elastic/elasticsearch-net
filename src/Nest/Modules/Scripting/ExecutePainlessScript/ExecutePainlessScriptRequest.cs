@@ -6,22 +6,20 @@ namespace Nest
 	public partial interface IExecutePainlessScriptRequest
 	{
 		[JsonProperty("script")]
-		PainlessScript Script { get; set; }
+		IInlineScript Script { get; set; }
 	}
 
 	public partial class ExecutePainlessScriptRequest
 	{
-		public PainlessScript Script { get; set; }
+		public IInlineScript Script { get; set; }
 	}
 
 	[DescriptorFor("ScriptsPainlessExecute")]
 	public partial class ExecutePainlessScriptDescriptor
 	{
-		PainlessScript IExecutePainlessScriptRequest.Script { get; set; }
+		IInlineScript IExecutePainlessScriptRequest.Script { get; set; }
 
-		/// <summary>
-		/// A Painless language script
-		/// </summary>
-		public ExecutePainlessScriptDescriptor Painless(string source) => Assign(a => a.Script = new PainlessScript(source));
+		public ExecutePainlessScriptDescriptor Script(Func<InlineScriptDescriptor, IInlineScript> selector) =>
+			Assign(a => a.Script = selector?.Invoke(new InlineScriptDescriptor()));
 	}
 }

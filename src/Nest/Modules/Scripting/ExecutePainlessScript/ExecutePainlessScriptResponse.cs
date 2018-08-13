@@ -1,6 +1,15 @@
-﻿namespace Nest
-{
-	public interface IExecutePainlessScriptResponse : IResponse { }
+﻿using Newtonsoft.Json;
 
-	public class ExecutePainlessScriptResponse : ResponseBase, IExecutePainlessScriptResponse { }
+namespace Nest
+{
+	public interface IExecutePainlessScriptResponse : IResponse
+	{
+		[JsonProperty("result")]
+		string Result { get; }
+	}
+
+	public class ExecutePainlessScriptResponse : ResponseBase, IExecutePainlessScriptResponse
+	{
+		public string Result { get; set; }
+	}
 }

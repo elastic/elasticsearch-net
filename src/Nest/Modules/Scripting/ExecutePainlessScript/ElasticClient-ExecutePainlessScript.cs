@@ -8,13 +8,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IExecutePainlessScriptResponse ExecutePainlessScript(string source, Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector = null);
+		IExecutePainlessScriptResponse ExecutePainlessScript(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector);
 
 		/// <inheritdoc/>
 		IExecutePainlessScriptResponse ExecutePainlessScript(IExecutePainlessScriptRequest request);
 
 		/// <inheritdoc/>
-		Task<IExecutePainlessScriptResponse> ExecutePainlessScriptAsync(string source, Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector = null,
+		Task<IExecutePainlessScriptResponse> ExecutePainlessScriptAsync(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector,
 			CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
@@ -23,8 +23,8 @@ namespace Nest
 	}
 	public partial class ElasticClient
 	{
-		public IExecutePainlessScriptResponse ExecutePainlessScript(string source, Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector = null) =>
-			this.ExecutePainlessScript(selector?.Invoke(new ExecutePainlessScriptDescriptor().Painless(source)));
+		public IExecutePainlessScriptResponse ExecutePainlessScript(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector) =>
+			this.ExecutePainlessScript(selector?.Invoke(new ExecutePainlessScriptDescriptor()));
 
 		public IExecutePainlessScriptResponse ExecutePainlessScript(IExecutePainlessScriptRequest request) =>
 			this.Dispatcher.Dispatch<IExecutePainlessScriptRequest, ExecutePainlessScriptRequestParameters, ExecutePainlessScriptResponse>(
@@ -32,9 +32,9 @@ namespace Nest
 				this.LowLevelDispatch.ScriptsPainlessExecuteDispatch<ExecutePainlessScriptResponse>
 			);
 
-		public Task<IExecutePainlessScriptResponse> ExecutePainlessScriptAsync(string source, Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector = null,
+		public Task<IExecutePainlessScriptResponse> ExecutePainlessScriptAsync(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector,
 			CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.ExecutePainlessScriptAsync(selector?.Invoke(new ExecutePainlessScriptDescriptor().Painless(source)), cancellationToken);
+			this.ExecutePainlessScriptAsync(selector?.Invoke(new ExecutePainlessScriptDescriptor()), cancellationToken);
 
 		public Task<IExecutePainlessScriptResponse> ExecutePainlessScriptAsync(IExecutePainlessScriptRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptRequestParameters, ExecutePainlessScriptResponse, IExecutePainlessScriptResponse>(
