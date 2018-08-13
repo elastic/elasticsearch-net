@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ApiGenerator.Overrides.Descriptors;
 
@@ -10,6 +11,11 @@ namespace ApiGenerator.Overrides
 			"stored_fields",
 			"script_fields",
 			"docvalue_fields"
+		};
+		public IDictionary<string, Dictionary<string, string>> ObsoleteEnumMembers { get; set; } = new Dictionary<string, Dictionary<string, string>>
+		{
+			{ "NodesStatsIndexMetric", new Dictionary<string, string>{{"suggest", "As of 5.0 this option always returned an empty object in the response"}}},
+			{ "IndicesStatsMetric", new Dictionary<string, string>{{"suggest", "Suggest stats have folded under the search stats, this alias will be removed"}}}
 		};
 
 		public override IDictionary<string, string> RenameQueryStringParams { get; } = new Dictionary<string, string>

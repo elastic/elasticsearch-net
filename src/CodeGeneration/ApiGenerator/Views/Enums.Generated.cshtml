@@ -5,14 +5,21 @@
 @using System.Linq
 @using ApiGenerator.Domain
 @using ApiGenerator
+@using ApiGenerator.Overrides
 @functions {
 	private const string RawSize = "Raw";
 	private const string SizeEnum = "Size";
+	private static GlobalOverrides GlobalOverrides = new GlobalOverrides();
 
 	private string CreateEnum(string enumName, string value, int? i)
 	{
 		var enumValue = (enumName == SizeEnum && value == string.Empty) ? RawSize : value.ToPascalCase(true);
-		return string.Format("[EnumMember(Value = \"{0}\")] {1}{2}", value, enumValue, i.HasValue ? " = 1 << " + i.Value : null);
+		var enumCsharp = string.Format("[EnumMember(Value = \"{0}\")] {1}{2}", value, enumValue, i.HasValue ? " = 1 << " + i.Value : null);
+		if (GlobalOverrides.ObsoleteEnumMembers.TryGetValue(enumName, out var d) && d.TryGetValue(value, out var obsolete))
+		{
+			return string.Format("[Obsolete(\"{0}\")]\r\n\t\t{1}", obsolete, enumCsharp);
+		}
+		return enumCsharp;
 	}
 	private string CreateCase(string e, string o)
 	{
