@@ -1,11 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Nest.JsonNetSerializer;
+using Tests.Core.Extensions;
+using Tests.Core.Serialization;
 
 namespace Tests.Reproduce
 {
@@ -14,28 +12,20 @@ namespace Tests.Reproduce
 		[U]
 		public void JoinFieldDeserializedCorrectly()
 		{
-			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			var connectionSettings = new ConnectionSettings(pool, new InMemoryConnection(), JsonNetSerializer.Default)
-				.DisableDirectStreaming()
-				.DefaultIndex("docs");
-			var client = new ElasticClient(connectionSettings);
-
 			var doc = new MyDocument
 			{
 				Join = JoinField.Root("parent")
 			};
 
-			var response = client.IndexDocument(doc);
+			var tester = SerializationTester.DefaultWithJsonNetSerializer;
+			var response = tester.Client.IndexDocument(doc);
 
-			Encoding.UTF8.GetString(response.ApiCall.RequestBodyInBytes).Should().Be("{\"join\":\"parent\"}");
-			using (var stream = new MemoryStream(response.ApiCall.RequestBodyInBytes))
-			{
-				doc = client.SourceSerializer.Deserialize<MyDocument>(stream);
-				doc.Join.Match(p =>
-				{
-					p.Name.Should().Be("parent");
-				}, c => { });
-			}
+			tester.AssertSerialize(response.ApiCall.RequestBodyInBytes, new { join = "parent" });
+			doc = tester.AssertDeserialize<MyDocument>(response.ApiCall.RequestBodyInBytes);
+
+			doc.Join.Match(
+				p => { p.Name.Should().Be("parent"); },
+				c => throw new InvalidOperationException("should not be called"));
 		}
 
 		private class MyDocument
