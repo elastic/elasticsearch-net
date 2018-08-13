@@ -28,7 +28,8 @@ namespace ApiGenerator.Overrides
 
 		public override IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new Dictionary<string, string>
 		{
-			{ "parent", "the parent parameter has been deprecated from elasticsearch, please use routing instead directly."}
+			{ "parent", "the parent parameter has been deprecated from elasticsearch, please use routing instead directly."},
+			{ "update_all_types", "Elasticsearch 6.x only allows a single type per index so this parameter is now useless"}
 		};
 
 		public override IEnumerable<string> SkipQueryStringParams { get; } = new[]
