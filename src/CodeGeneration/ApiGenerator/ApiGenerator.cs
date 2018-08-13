@@ -84,8 +84,6 @@ namespace ApiGenerator
 			"xpack.sql.query.json",
 			"xpack.sql.translate.json",
 			"xpack.ssl.certificates.json",
-
-			"scripts_painless_execute.json",
 		};
 
 		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)
