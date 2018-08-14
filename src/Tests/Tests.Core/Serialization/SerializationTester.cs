@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -63,6 +64,8 @@ namespace Tests.Core.Serialization
 	public class SerializationTester
 	{
 		public static SerializationTester Default { get; } = new SerializationTester(TestClient.DefaultInMemoryClient);
+
+		public static SerializationTester DefaultWithJsonNetSerializer { get; } = new SerializationTester(TestClient.InMemoryWithJsonNetSerializer);
 
 		public SerializationTester(IElasticClient client) => this.Client = client;
 
