@@ -85,6 +85,15 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 					.IdProperty(p => p.OtherName)
 				)
 			).Expect("y").WhenInferringIdOn(dto);
+
+			/**
+			 * DefaultMappingFor also has a non generic overload for the more dynamic use-cases.
+			*/
+			WithConnectionSettings(x => x
+				.DefaultMappingFor(typeof(MyDTO), m => m
+					.IdProperty(typeof(MyDTO).GetProperty(nameof(MyDTO.Name)).Name)
+				)
+			).Expect("x").WhenInferringIdOn(dto);
 		}
 
 		/**
