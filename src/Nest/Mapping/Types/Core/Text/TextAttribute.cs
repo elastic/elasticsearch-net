@@ -17,6 +17,7 @@ namespace Nest
 		bool? ITextProperty.EagerGlobalOrdinals { get; set; }
 		bool? ITextProperty.Fielddata { get; set; }
 		IFielddataFrequencyFilter ITextProperty.FielddataFrequencyFilter { get; set; }
+		ITextIndexPrefixes ITextProperty.IndexPrefixes { get; set; }
 		bool? ITextProperty.Index { get; set; }
 		IndexOptions? ITextProperty.IndexOptions { get; set; }
 		bool? ITextProperty.Norms { get; set; }

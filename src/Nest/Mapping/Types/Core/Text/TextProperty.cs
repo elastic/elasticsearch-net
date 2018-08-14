@@ -28,6 +28,9 @@ namespace Nest
 		[JsonProperty("fielddata_frequency_filter")]
 		IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
 
+		[JsonProperty("index_prefixes")]
+		ITextIndexPrefixes IndexPrefixes { get; set; }
+
 		[JsonProperty("index")]
 		bool? Index { get; set; }
 
@@ -53,6 +56,7 @@ namespace Nest
 		public bool? EagerGlobalOrdinals { get; set; }
 		public bool? Fielddata { get; set; }
 		public IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
+		public ITextIndexPrefixes IndexPrefixes { get; set; }
 		public bool? Index { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
 		public bool? Norms { get; set; }
@@ -72,6 +76,7 @@ namespace Nest
 		bool? ITextProperty.EagerGlobalOrdinals { get; set; }
 		bool? ITextProperty.Fielddata { get; set; }
 		IFielddataFrequencyFilter ITextProperty.FielddataFrequencyFilter { get; set; }
+		ITextIndexPrefixes ITextProperty.IndexPrefixes { get; set; }
 		bool? ITextProperty.Index { get; set; }
 		IndexOptions? ITextProperty.IndexOptions { get; set; }
 		bool? ITextProperty.Norms { get; set; }
@@ -88,6 +93,8 @@ namespace Nest
  		public TextPropertyDescriptor<T> Fielddata(bool? fielddata = true) => Assign(a => a.Fielddata = fielddata);
 		public TextPropertyDescriptor<T> FielddataFrequencyFilter(Func<FielddataFrequencyFilterDescriptor, IFielddataFrequencyFilter> selector) =>
 			Assign(a => a.FielddataFrequencyFilter = selector?.Invoke(new FielddataFrequencyFilterDescriptor()));
+		public TextPropertyDescriptor<T> IndexPrefixes(Func<TextIndexPrefixesDescriptor, ITextIndexPrefixes> selector) =>
+			Assign(a => a.IndexPrefixes = selector?.Invoke(new TextIndexPrefixesDescriptor()));
 		public TextPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
 		public TextPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(a => a.IndexOptions = indexOptions);
 		public TextPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(a => a.Norms = enabled);
