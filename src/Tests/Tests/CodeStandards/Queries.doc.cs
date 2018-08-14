@@ -51,7 +51,13 @@ namespace Tests.CodeStandards
 
 		[U] public void VisitorVisitsAll()
 		{
-			var skipQueryImplementations = new[] { typeof(IFieldNameQuery), typeof(IFuzzyQuery<,>), typeof(IConditionlessQuery) };
+			var skipQueryImplementations = new[]
+			{
+				typeof(IFieldNameQuery),
+				typeof(IFuzzyQuery<,>),
+				typeof(IConditionlessQuery),
+				typeof(ISpanGapQuery)
+			};
 			var queries = typeof(IQuery).Assembly().ExportedTypes
 				.Where(t => t.IsInterface() && typeof(IQuery).IsAssignableFrom(t))
 				.Where(t => !skipQueryImplementations.Contains(t))

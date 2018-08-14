@@ -18,10 +18,11 @@ namespace Tests.QueryDsl.Joining.SpanNear
 		{
 			span_near = new
 			{
-				clauses = new[] {
+				clauses = new object[] {
 					new { span_term = new { field = new { value = "value1" } } },
 					new { span_term = new { field = new { value = "value2" } } },
-					new { span_term = new { field = new { value = "value3" } } }
+					new { span_term = new { field = new { value = "value3" } } },
+					new { span_gap = new { field = 2 } }
 				},
 				slop = 12,
 				in_order = false,
@@ -39,7 +40,8 @@ namespace Tests.QueryDsl.Joining.SpanNear
 			{
 				new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
 				new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value2" } },
-				new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } }
+				new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } },
+				new SpanQuery { SpanGap = new SpanGapQuery { Field = "field", Width = 2 } }
 			},
 			Slop = 12,
 			InOrder = false,
@@ -50,9 +52,10 @@ namespace Tests.QueryDsl.Joining.SpanNear
 				.Name("named_query")
 				.Boost(1.1)
 				.Clauses(
-					c=>c.SpanTerm(st=>st.Field("field").Value("value1")),
-					c=>c.SpanTerm(st=>st.Field("field").Value("value2")),
-					c=>c.SpanTerm(st=>st.Field("field").Value("value3"))
+					c => c.SpanTerm(st => st.Field("field").Value("value1")),
+					c => c.SpanTerm(st => st.Field("field").Value("value2")),
+					c => c.SpanTerm(st => st.Field("field").Value("value3")),
+					c => c.SpanGap(st => st.Field("field").Width(2))
 				)
 				.Slop(12)
 				.InOrder(false)
