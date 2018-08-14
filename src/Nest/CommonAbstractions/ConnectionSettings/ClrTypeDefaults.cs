@@ -29,7 +29,7 @@ namespace Nest
 		/// <summary>
 		/// The property for <see cref="ClrType"/> to resolve ids from.
 		/// </summary>
-		string IdPropertyVerbatim { get; set; }
+		string IdPropertyName { get; set; }
 
 	}
 
@@ -67,7 +67,7 @@ namespace Nest
 		public string RelationName { get; set; }
 
 		/// <inheritdoc />
-		public string IdPropertyVerbatim { get; set; }
+		public string IdPropertyName { get; set; }
 	}
 	public class ClrTypeMapping<TDocument> : ClrTypeMapping, IClrTypeMapping<TDocument> where TDocument : class
 	{
@@ -97,7 +97,7 @@ namespace Nest
 		string IClrTypeMapping.IndexName { get; set; }
 		string IClrTypeMapping.TypeName { get; set; }
 		string IClrTypeMapping.RelationName { get; set; }
-		string IClrTypeMapping.IdPropertyVerbatim { get; set; }
+		string IClrTypeMapping.IdPropertyName { get; set; }
 
 		/// <summary>
 		/// The default Elasticsearch index name for the CLR type
@@ -117,7 +117,7 @@ namespace Nest
 		/// <summary>
 		/// The name of the property on the CLR type to resolve an Id from.
 		/// </summary>
-		public ClrTypeMappingDescriptor IdProperty(string idProperty) => Assign(a => a.IdPropertyVerbatim = idProperty);
+		public ClrTypeMappingDescriptor IdProperty(string idProperty) => Assign(a => a.IdPropertyName = idProperty);
 	}
 
 	public class ClrTypeMappingDescriptor<TDocument>
@@ -128,7 +128,7 @@ namespace Nest
 		string IClrTypeMapping.IndexName { get; set; }
 		string IClrTypeMapping.TypeName { get; set; }
 		string IClrTypeMapping.RelationName { get; set; }
-		string IClrTypeMapping.IdPropertyVerbatim { get; set; }
+		string IClrTypeMapping.IdPropertyName { get; set; }
 		Expression<Func<TDocument, object>> IClrTypeMapping<TDocument>.IdProperty { get; set; }
 		Expression<Func<TDocument, object>> IClrTypeMapping<TDocument>.RoutingProperty { get; set; }
 		IList<IClrPropertyMapping<TDocument>> IClrTypeMapping<TDocument>.Properties { get; set; } = new List<IClrPropertyMapping<TDocument>>();
@@ -156,7 +156,7 @@ namespace Nest
 		/// <summary>
 		/// Set a default Id property on CLR type <typeparamref name="TDocument" /> that NEST will evaluate
 		/// </summary>
-		public ClrTypeMappingDescriptor<TDocument> IdProperty(string property) => Assign(a => a.IdPropertyVerbatim = property);
+		public ClrTypeMappingDescriptor<TDocument> IdProperty(string property) => Assign(a => a.IdPropertyName = property);
 
 		/// <summary> Provide a default routing parameter lookup based on <typeparamref name="TDocument" /> </summary>
 		public ClrTypeMappingDescriptor<TDocument> RoutingProperty(Expression<Func<TDocument, object>> property) => Assign(a => a.RoutingProperty = property);

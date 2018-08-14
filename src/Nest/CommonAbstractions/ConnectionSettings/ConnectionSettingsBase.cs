@@ -257,8 +257,8 @@ namespace Nest
 			if (!inferMapping.RelationName.IsNullOrEmpty())
 				this._defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
 
-			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyVerbatim))
-				this._idProperties[inferMapping.ClrType] = inferMapping.IdPropertyVerbatim;
+			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
+				this._idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
 			if (inferMapping.IdProperty != null)
 				this.MapIdPropertyFor<TDocument>(inferMapping.IdProperty);
@@ -289,8 +289,8 @@ namespace Nest
 			if (!inferMapping.RelationName.IsNullOrEmpty())
 				this._defaultRelationNames.Add(inferMapping.ClrType, inferMapping.RelationName);
 
-			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyVerbatim))
-				this._idProperties[inferMapping.ClrType] = inferMapping.IdPropertyVerbatim;
+			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
+				this._idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
 
 			return (TConnectionSettings) this;
 		}
