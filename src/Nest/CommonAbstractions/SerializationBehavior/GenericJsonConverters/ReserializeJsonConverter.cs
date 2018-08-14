@@ -26,7 +26,6 @@ namespace Nest
 
 		protected TReadAs ReadAs(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-
 			return this.Reader.ReadJson(reader, objectType, existingValue, serializer) as TReadAs;
 		}
 
