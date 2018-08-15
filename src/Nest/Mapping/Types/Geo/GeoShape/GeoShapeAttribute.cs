@@ -15,6 +15,7 @@
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
 		bool? IGeoShapeProperty.PointsOnly { get; set; }
 		bool? IGeoShapeProperty.IgnoreMalformed { get; set; }
+		bool? IGeoShapeProperty.IgnoreZValue { get; set; }
 
 		/// <inheritdoc cref="IGeoShapeProperty.Tree"/>
 		public GeoTree Tree { get => Self.Tree.GetValueOrDefault(GeoTree.Geohash); set => Self.Tree = value; }
@@ -36,5 +37,7 @@
 		public bool PointsOnly { get => Self.PointsOnly.GetValueOrDefault(false); set => Self.PointsOnly = value; }
 		/// <inheritdoc cref="IGeoShapeProperty.IgnoreMalformed"/>
 		public bool IgnoreMalformed { get => Self.IgnoreMalformed.GetValueOrDefault(false); set => Self.IgnoreMalformed = value; }
+		/// <inheritdoc cref="IGeoShapeProperty.IgnoreZValue"/>
+		public bool IgnoreZValue { get => Self.IgnoreZValue.GetValueOrDefault(false); set => Self.IgnoreZValue = value; }
 	}
 }
