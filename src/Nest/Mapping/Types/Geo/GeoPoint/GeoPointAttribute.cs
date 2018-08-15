@@ -8,6 +8,10 @@
 
 		bool? IGeoPointProperty.IgnoreMalformed { get; set; }
 
-		public bool IgnoreMalformed { get { return Self.IgnoreMalformed.GetValueOrDefault(); } set { Self.IgnoreMalformed = value; } }
+		bool? IGeoPointProperty.IgnoreZValue { get; set; }
+		GeoLocation IGeoPointProperty.NullValue { get; set; }
+
+		public bool IgnoreMalformed { get => Self.IgnoreMalformed.GetValueOrDefault(); set => Self.IgnoreMalformed = value; }
+		public bool IgnoreZValue { get => Self.IgnoreZValue.GetValueOrDefault(); set => Self.IgnoreZValue= value; }
 	}
 }
