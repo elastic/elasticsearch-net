@@ -126,8 +126,10 @@ namespace Nest
 
 		// Request parameters
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
 		public bool? PreferLocal { get => Q<bool?>("prefer_local"); set => Q("prefer_local", value); }
 		///<summary>Format of the output</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
 		public Format? Format { get => Q<Format?>("format"); set => Q("format", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -2699,6 +2701,8 @@ namespace Nest
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters>
@@ -2727,6 +2731,8 @@ namespace Nest
 		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -2877,6 +2883,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -3123,6 +3131,8 @@ namespace Nest
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters>
@@ -4920,6 +4930,8 @@ namespace Nest
 		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 
 		// Request parameters
+		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		public bool? CopySettings { get => Q<bool?>("copy_settings"); set => Q("copy_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -5222,6 +5234,8 @@ namespace Nest
 		IndexName ISplitIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 
 		// Request parameters
+		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		public bool? CopySettings { get => Q<bool?>("copy_settings"); set => Q("copy_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>

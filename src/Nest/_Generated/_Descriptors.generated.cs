@@ -1438,6 +1438,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Specify timeout for connection to master</summary>
+		public GetScriptDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<T>  : RequestDescriptorBase<SourceDescriptor<T>,SourceRequestParameters, ISourceRequest>, ISourceRequest
@@ -1584,8 +1586,10 @@ namespace Nest
 		// Request parameters
 
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
 		public AnalyzeDescriptor PreferLocal(bool? preferLocal = true) => Qs("prefer_local", preferLocal);
 		///<summary>Format of the output</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
 		public AnalyzeDescriptor Format(Format? format) => Qs("format", format);
 	}
 	///<summary>descriptor for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
@@ -2003,6 +2007,8 @@ namespace Nest
 		public GetIndexDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public GetIndexDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+		///<summary>Specify timeout for connection to master</summary>
+		public GetIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 	///<summary>descriptor for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasDescriptor  : RequestDescriptorBase<GetAliasDescriptor,GetAliasRequestParameters, IGetAliasRequest>, IGetAliasRequest
@@ -2113,6 +2119,8 @@ namespace Nest
 		public GetMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		///<summary>Specify timeout for connection to master</summary>
+		public GetMappingDescriptor<T> MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
 	}
@@ -2139,6 +2147,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Specify timeout for connection to master</summary>
+		public GetIndexSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetIndexSettingsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -2502,6 +2512,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		public ShrinkIndexDescriptor CopySettings(bool? copySettings = true) => Qs("copy_settings", copySettings);
 		///<summary>Explicit operation timeout</summary>
 		public ShrinkIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
@@ -2528,6 +2540,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		public SplitIndexDescriptor CopySettings(bool? copySettings = true) => Qs("copy_settings", copySettings);
 		///<summary>Explicit operation timeout</summary>
 		public SplitIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
