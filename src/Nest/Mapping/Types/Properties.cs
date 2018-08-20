@@ -49,7 +49,7 @@ namespace Nest
 		TReturnType Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector);
 		TReturnType Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector);
 		/// <summary>
-		/// Number introduces a numeric mapping that defaults to `float` use .Type() to set the right type if needed or use
+		/// Number introduces a numeric mapping that defaults to `float`. Use .Type() to set the right type if needed or use
 		/// Scalar instead of <see cref="Number"/>
 		/// </summary>
 		TReturnType Number(Func<NumberPropertyDescriptor<T>, INumberProperty> selector);
