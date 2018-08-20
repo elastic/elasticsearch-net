@@ -5,8 +5,7 @@ namespace Tests.Mapping.Types.Geo.GeoPoint
 {
 	public class GeoPointTest
 	{
-		[GeoPoint(
-			IgnoreMalformed = true)]
+		[GeoPoint(IgnoreMalformed = true, IgnoreZValue = true)]
 		public string Full { get; set; }
 
 		[GeoPoint]
@@ -24,7 +23,8 @@ namespace Tests.Mapping.Types.Geo.GeoPoint
 				full = new
 				{
 					type = "geo_point",
-					ignore_malformed = true
+					ignore_malformed = true,
+					ignore_z_value = true
 				},
 				minimal = new
 				{
