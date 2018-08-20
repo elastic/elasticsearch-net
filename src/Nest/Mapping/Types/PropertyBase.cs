@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// A mapping for a property type to a document field in Elasticsearch
+	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(PropertyJsonConverter))]
 	public interface IProperty : IFieldMapping
@@ -29,25 +32,32 @@ namespace Nest
 		IDictionary<string, object> LocalMetadata { get; set; }
 	}
 
+	/// <summary>
+	/// A mapping for a property from a CLR type
+	/// </summary>
 	public interface IPropertyWithClrOrigin
 	{
+		/// <summary>
+		/// The CLR property to which the mapping relates
+		/// </summary>
 		PropertyInfo ClrOrigin { get; set; }
 	}
 
+	/// <inheritdoc cref="IProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public abstract class PropertyBase : IProperty, IPropertyWithClrOrigin
 	{
 		private string _type;
-		protected string TypeOverride { get => _type; set => _type = value; }
 
 		string IProperty.Type { get => _type; set => _type = value; }
-
 		PropertyInfo IPropertyWithClrOrigin.ClrOrigin { get; set; }
 
-		protected PropertyBase(FieldType type)
-		{
-			((IProperty)this).Type = type.GetStringValue();
-		}
+		protected PropertyBase(FieldType type) => ((IProperty)this).Type = type.GetStringValue();
+
+		/// <summary>
+		/// Override for the property type, used for custom mappings
+		/// </summary>
+		protected string TypeOverride { get => _type; set => _type = value; }
 
 		protected string DebugDisplay => $"Type: {((IProperty)this).Type ?? "<empty>"}, Name: {Name.DebugDisplay} ";
 
