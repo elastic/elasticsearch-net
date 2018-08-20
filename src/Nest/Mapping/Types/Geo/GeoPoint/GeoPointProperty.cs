@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Data type mapping to map a property as a geopoint
+	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGeoPointProperty : IDocValuesProperty
 	{
