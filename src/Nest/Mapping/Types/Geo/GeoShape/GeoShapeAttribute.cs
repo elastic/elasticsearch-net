@@ -38,6 +38,6 @@
 		/// <inheritdoc cref="IGeoShapeProperty.IgnoreMalformed"/>
 		public bool IgnoreMalformed { get => Self.IgnoreMalformed.GetValueOrDefault(false); set => Self.IgnoreMalformed = value; }
 		/// <inheritdoc cref="IGeoShapeProperty.IgnoreZValue"/>
-		public bool IgnoreZValue { get => Self.IgnoreZValue.GetValueOrDefault(false); set => Self.IgnoreZValue = value; }
+		public bool IgnoreZValue { get => Self.IgnoreZValue.GetValueOrDefault(true); set => Self.IgnoreZValue = value; }
 	}
 }
