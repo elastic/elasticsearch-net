@@ -5,6 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
@@ -28,6 +29,22 @@ namespace Tests.Cluster.NodesStats
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_nodes/stats";
 
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			// performing a bunch of search actions to make sure some stats have been gathered
+			// even if this api is tested in isolation
+			for (var i = 0; i < 5; i++)
+			{
+				var searchResult = client.MultiSearch(m => m
+					.Search<Project>(s => s.MatchAll().Size(0))
+					.Search<Project>(s => s.MatchAll().Size(0))
+					.Search<Project>(s => s.MatchAll().Size(0))
+					.Search<Project>(s => s.MatchAll().Size(0))
+				);
+				searchResult.ShouldBeValid();
+			}
+		}
+
 		protected override void ExpectResponse(INodesStatsResponse response)
 		{
 			response.ClusterName.Should().NotBeNullOrWhiteSpace();
@@ -47,6 +64,25 @@ namespace Tests.Cluster.NodesStats
 			Assert(node.FileSystem);
 			Assert(node.ThreadPool);
 			Assert(node.Jvm);
+			Assert(node.AdaptiveSelection);
+			Assert(node.Ingest);
+		}
+
+		protected void Assert(NodeIngestStats nodeIngestStats)
+		{
+			nodeIngestStats.Should().NotBeNull();
+			nodeIngestStats.Total.Should().NotBeNull();
+			nodeIngestStats.Pipelines.Should().NotBeNull().And.NotBeEmpty();
+		}
+
+		protected void Assert(IReadOnlyDictionary<string, AdaptiveSelectionStats> adaptiveSelectionStats)
+		{
+			adaptiveSelectionStats.Should().NotBeNull(); //.And.NotBeEmpty();
+			// TODO: for the single node case, this is empty. Should it be?
+			//	var nodeSelectionStats = adaptiveSelectionStats.First().Value;
+			//	nodeSelectionStats.Rank.Should().NotBeNullOrWhiteSpace();
+			//	nodeSelectionStats.AverageResponseTimeInNanoseconds.Should().BeGreaterThan(0);
+			//	nodeSelectionStats.AverageServiceTimeInNanoseconds.Should().BeGreaterThan(0);
 		}
 
 		protected void Assert(NodeStats node)
