@@ -36,6 +36,7 @@ namespace Nest
 			public const string Hits = "hits";
 			public const string Location = "location";
 			public const string Fields = "fields";
+			public const string AfterKey = "after_key";
 
 			public const string Key = "key";
 			public const string From = "from";
@@ -125,6 +126,16 @@ namespace Nest
 					break;
 				case Parser.Value:
 					aggregate = GetValueAggregate(reader, serializer);
+					break;
+				case Parser.AfterKey:
+					reader.Read();
+					var afterKeys = serializer.Deserialize<Dictionary<string, object>>(reader);
+					reader.Read();
+					var bucketAggregate = reader.Value.ToString() == Parser.Buckets
+						? this.GetMultiBucketAggregate(reader, serializer) as BucketAggregate ?? new BucketAggregate()
+						: new BucketAggregate();
+					bucketAggregate.AfterKey = afterKeys;
+					aggregate = bucketAggregate;
 					break;
 				case Parser.Buckets:
 				case Parser.DocCountErrorUpperBound:
