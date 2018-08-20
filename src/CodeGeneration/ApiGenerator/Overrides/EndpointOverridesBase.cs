@@ -15,6 +15,7 @@ namespace ApiGenerator.Overrides
 
 		public virtual IDictionary<string, string> ObsoleteQueryStringParams { get; set; } = new Dictionary<string, string>();
 
+
 		public virtual CsharpMethod PatchMethod(CsharpMethod method) => method;
 	}
 }
