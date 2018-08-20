@@ -37,13 +37,10 @@ namespace Nest
 
 		private static IRangeQuery GetRangeQuery(JsonSerializer serializer, JObject jo)
 		{
-			var isLong = !jo.Properties().Any(p => p.Name == "format" || p.Name == "time_zone")
-			             && jo.Properties().Any(p => _rangeKeys.Contains(p.Name) && p.Value.Type == JTokenType.Integer);
+			var nameIsValid = !jo.Properties().Any(p => p.Name == "format" || p.Name == "time_zone");
 
-			var isNumeric = !jo.Properties().Any(p => p.Name == "format" || p.Name == "time_zone")
-			                && jo.Properties().Any(p =>
-				                _rangeKeys.Contains(p.Name) &&
-				                p.Value.Type == JTokenType.Float);
+			var isLong = nameIsValid && CheckType(jo, JTokenType.Integer);
+			var isNumeric = nameIsValid && CheckType(jo, JTokenType.Float);
 
 			IRangeQuery fq;
 
@@ -61,6 +58,13 @@ namespace Nest
 			}
 
 			return fq;
+		}
+
+		private static bool CheckType(JObject jo, JTokenType jTokenType)
+		{
+			return jo.Properties().Any(p =>
+				       _rangeKeys.Contains(p.Name) &&
+				       p.Value.Type == jTokenType);
 		}
 
 		private static TReturn GetPropValue<TReturn>(JObject jObject, string field)
