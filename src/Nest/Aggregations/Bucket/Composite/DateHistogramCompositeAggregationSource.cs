@@ -22,6 +22,13 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("time_zone")]
 		string Timezone { get; set; }
+
+		/// <summary>
+		/// Return a formatted date string as the key instead an epoch long
+		/// </summary>
+		/// <remarks> Valid for Elasticsearch 6.3.0+ </remarks>
+		[JsonProperty("format")]
+		string Format { get; set; }
 	}
 
 	/// <inheritdoc cref="IDateHistogramCompositeAggregationSource"/>
@@ -36,6 +43,9 @@ namespace Nest
 		public string Timezone { get; set; }
 
 		/// <inheritdoc />
+		public string Format { get; set; }
+
+		/// <inheritdoc />
 		protected override string SourceType => "date_histogram";
 	}
 
@@ -46,6 +56,7 @@ namespace Nest
 	{
 		Union<DateInterval?,Time> IDateHistogramCompositeAggregationSource.Interval { get; set; }
 		string IDateHistogramCompositeAggregationSource.Timezone { get; set; }
+		string IDateHistogramCompositeAggregationSource.Format { get; set; }
 
 		public DateHistogramCompositeAggregationSourceDescriptor(string name) : base(name, "date_histogram") {}
 
@@ -58,7 +69,9 @@ namespace Nest
 			Assign(a => a.Interval = interval);
 
 		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Timezone"/>
-		public DateHistogramCompositeAggregationSourceDescriptor<T> Timezone(string timezone) =>
-			Assign(a => a.Timezone = timezone);
+		public DateHistogramCompositeAggregationSourceDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
+
+		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Timezone"/>
+		public DateHistogramCompositeAggregationSourceDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 	}
 }
