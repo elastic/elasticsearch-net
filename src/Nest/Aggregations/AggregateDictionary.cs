@@ -179,11 +179,11 @@ namespace Nest
 		{
 			var bucket = this.TryGet<BucketAggregate>(key);
 			if (bucket == null) return null;
-			return new CompositeBucketAggregate()
+			return new CompositeBucketAggregate
 			{
 				Buckets = bucket.Items.OfType<CompositeBucket>().ToList(),
 				Meta = bucket.Meta,
-				AfterKey = bucket.AfterKey
+				AfterKey = new CompositeKey(bucket.AfterKey)
 			};
 		}
 

@@ -23,31 +23,42 @@ namespace Nest
 		[Obsolete("Use methods on this instance to access sub aggregations. Will be removed in NEST 7.x")]
 		public AggregateDictionary Aggregations { get; protected internal set; }
 
+		/// <summary>
+		/// Count of documents in the bucket
+		/// </summary>
 		public long DocCount { get; internal set; }
 	}
 
+	/// <summary>
+	/// Aggregation response for a bucket aggregation
+	/// </summary>
+	/// <typeparam name="TBucket"></typeparam>
 	public class MultiBucketAggregate<TBucket> : IAggregate
 		where TBucket : IBucket
 	{
+		/// <inheritdoc />
 		public IReadOnlyDictionary<string, object> Meta { get; set; }
 
+		/// <summary>
+		/// The buckets into which results are grouped
+		/// </summary>
 		public IReadOnlyCollection<TBucket> Buckets { get; set; } = EmptyReadOnly<TBucket>.Collection;
 	}
 
-	public class CompositeBucketAggregate : IAggregate
+	/// <summary>
+	/// Aggregation response of <see cref="CompositeAggregation"/>
+	/// </summary>
+	public class CompositeBucketAggregate : MultiBucketAggregate<CompositeBucket>
 	{
-		public IReadOnlyDictionary<string, object> Meta { get; set; }
-
-		public IReadOnlyCollection<CompositeBucket> Buckets { get; set; } = EmptyReadOnly<CompositeBucket>.Collection;
-
 		/// <summary>
-		/// The after_key is equals to the last bucket returned in the response before any filtering that could be done by Pipeline aggregations.
-		/// If all buckets are filtered/removed by a pipeline aggregation, the after_key will contain the last bucket before filtering.
+		/// The composite key of the last bucket returned
+		/// in the response before any filtering by pipeline aggregations.
+		/// If all buckets are filtered/removed by pipeline aggregations,
+		/// <see cref="AfterKey"/> will contain the composite key of the last bucket before filtering.
 		/// </summary>
 		/// <remarks> Valid for Elasticsearch 6.3.0+ </remarks>
-		public IReadOnlyDictionary<string, object> AfterKey { get; set; } = EmptyReadOnly<string, object>.Dictionary;
+		public CompositeKey AfterKey { get; set; }
 	}
-
 
 	// Intermediate object used for deserialization
 	public class BucketAggregate : IAggregate
