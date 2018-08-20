@@ -9,7 +9,7 @@ namespace Nest
 		public long Operations  { get; set; }
 
 		[JsonProperty("uncommitted_operations")]
-		public long UncommittedOperations  { get; set; }
+		public int UncommittedOperations  { get; set; }
 
 		[JsonProperty("size")]
 		public string Size { get; set; }
@@ -23,8 +23,10 @@ namespace Nest
 		[JsonProperty("uncommitted_size_in_bytes")]
 		public long UncommittedSizeInBytes  { get; set; }
 
+		/// <remarks>
+		/// Valid only for Elasticsearch 6.3.0+
+		/// </remarks>
 		[JsonProperty("earliest_last_modified_age")]
 		public long EarliestLastModifiedAge  { get; set; }
-
 	}
 }
