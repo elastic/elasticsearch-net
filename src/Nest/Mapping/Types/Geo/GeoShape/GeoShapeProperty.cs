@@ -85,6 +85,18 @@ namespace Nest
 		/// </remarks>
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
+
+		/// <summary>
+		/// If true (default) three dimension points will be accepted (stored in source) but
+		/// only latitude and longitude values will be indexed; the third dimension is ignored. If false,
+		/// geo-points containing any more than latitude and longitude (two dimensions) values throw
+		/// an exception and reject the whole document.
+		/// </summary>
+		/// <remarks>
+		/// Valid for Elasticsearch 6.3.0+
+		/// </remarks>
+		[JsonProperty("ignore_z_value")]
+		bool? IgnoreZValue { get; set; }
 	}
 
 	/// <inheritdoc cref="IGeoShapeProperty" />
@@ -116,6 +128,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public bool? IgnoreMalformed { get; set; }
+
+		/// <inheritdoc />
+		public bool? IgnoreZValue { get; set; }
 	}
 
 	/// <inheritdoc cref="IGeoShapeProperty"/>
@@ -132,6 +147,7 @@ namespace Nest
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
 		bool? IGeoShapeProperty.PointsOnly { get; set; }
 		bool? IGeoShapeProperty.IgnoreMalformed { get; set; }
+		bool? IGeoShapeProperty.IgnoreZValue { get; set; }
 
 		public GeoShapePropertyDescriptor() : base(FieldType.GeoShape) { }
 
@@ -161,5 +177,9 @@ namespace Nest
 		/// <inheritdoc cref="IGeoShapeProperty.IgnoreMalformed"/>
 		public GeoShapePropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) =>
 			Assign(a => a.IgnoreMalformed = ignoreMalformed);
+
+		/// <inheritdoc cref="IGeoShapeProperty.IgnoreZValue"/>
+		public GeoShapePropertyDescriptor<T> IgnoreZValue(bool? ignoreZValue = true) =>
+			Assign(a => a.IgnoreZValue = ignoreZValue);
 	}
 }
