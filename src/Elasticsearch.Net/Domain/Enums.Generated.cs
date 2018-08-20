@@ -152,6 +152,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "segments")] Segments = 1 << 11,
 		[EnumMember(Value = "store")] Store = 1 << 12,
 		[EnumMember(Value = "warmer")] Warmer = 1 << 13,
+		[Obsolete("Suggest stats have folded under the search stats, this alias will be removed")]
 		[EnumMember(Value = "suggest")] Suggest = 1 << 14,
 		[EnumMember(Value = "_all")] All = 1 << 15
 	}
@@ -197,6 +198,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "segments")] Segments = 1 << 11,
 		[EnumMember(Value = "store")] Store = 1 << 12,
 		[EnumMember(Value = "warmer")] Warmer = 1 << 13,
+		[Obsolete("As of 5.0 this option always returned an empty object in the response")]
 		[EnumMember(Value = "suggest")] Suggest = 1 << 14,
 		[EnumMember(Value = "_all")] All = 1 << 15
 	}
