@@ -1681,6 +1681,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public CreateIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.x only allows a single type per index so this parameter is now useless")]
 		public CreateIndexDescriptor UpdateAllTypes(bool? updateAllTypes = true) => Qs("update_all_types", updateAllTypes);
 	}
 	///<summary>descriptor for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
@@ -2291,6 +2292,7 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.x only allows a single type per index so this parameter is now useless")]
 		public PutMappingDescriptor<T> UpdateAllTypes(bool? updateAllTypes = true) => Qs("update_all_types", updateAllTypes);
 	}
 	///<summary>descriptor for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
