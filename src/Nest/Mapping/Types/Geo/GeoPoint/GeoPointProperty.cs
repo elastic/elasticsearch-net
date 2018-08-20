@@ -28,12 +28,11 @@ namespace Nest
 		bool? IgnoreZValue { get; set;  }
 
 		/// <summary>
-		/// Accepts an geopoint value which is substituted for any explicit null values.
+		/// Accepts a geo_point value which is substituted for any explicit null values.
 		/// Defaults to null, which means the field is treated as missing.
 		/// </summary>
 		[JsonProperty("null_value")]
 		GeoLocation NullValue { get; set; }
-
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
