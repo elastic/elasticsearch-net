@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Core properties of a mapping for a property type to a document field in Elasticsearch
+	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(PropertyJsonConverter))]
 	public interface ICoreProperty : IProperty
@@ -20,13 +23,14 @@ namespace Nest
 
 		/// <summary>
 		/// Configures multi-fields for this field. Allows one field to be indexed in different
-		/// ways to serve different purposes
+		/// ways to serve different search and analytics purposes
 		/// </summary>
 		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore)]
 		IProperties Fields { get; set; }
 
 		/// <summary>
-		/// Which relevancy scoring algorithm or similarity should be used. Defaults to BM25
+		/// Which relevancy scoring algorithm or similarity should be used.
+		/// Defaults to <see cref="SimilarityOption.BM25"/>
 		/// </summary>
 		[JsonProperty("similarity")]
 		Union<SimilarityOption, string> Similarity { get; set; }
@@ -40,6 +44,7 @@ namespace Nest
 		Fields CopyTo { get; set; }
 	}
 
+	/// <inheritdoc cref="ICoreProperty"/>
 	[DebuggerDisplay("{DebugDisplay}")]
 	public abstract class CorePropertyBase : PropertyBase, ICoreProperty
 	{
