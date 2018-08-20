@@ -37,6 +37,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		{
 			if (!TestClient.Configuration.ForceReseed && this.AlreadySeeded()) return;
 			// Ensure a clean slate by deleting everything regardless of whether they may already exist
+			this.ClusterSettings();
 			this.DeleteIndicesAndTemplates();
 			// and now recreate everything
 			this.CreateIndicesAndSeedIndexData();
@@ -46,6 +47,17 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		// writing tests to cut down on cluster startup times.
 		// If raw_fields exists assume this cluster is already seeded.
 		private bool AlreadySeeded() => this.Client.IndexTemplateExists(TestsIndexTemplateName).Exists;
+
+		public void ClusterSettings()
+		{
+			var putSettingsResponse = this.Client.ClusterPutSettings(s=>s
+				.Transient(t=>t
+					.Add("cluster.routing.use_adaptive_replica_selection", true)
+				)
+			);
+
+			putSettingsResponse.ShouldBeValid();
+		}
 
 		public void DeleteIndicesAndTemplates()
 		{
