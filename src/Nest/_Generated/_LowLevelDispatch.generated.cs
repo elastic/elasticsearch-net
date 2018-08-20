@@ -2685,6 +2685,30 @@ namespace Nest
 			throw InvalidDispatch("RenderSearchTemplate", p, new [] { GET, POST }, "/_render/template", "/_render/template/{id}");
 		}
 		
+		internal TResponse ScriptsPainlessExecuteDispatch<TResponse>(IRequest<ExecutePainlessScriptRequestParameters> p,SerializableData<IExecutePainlessScriptRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.ScriptsPainlessExecuteGet<TResponse>(p.RequestParameters);
+				case POST:
+						return _lowLevel.ScriptsPainlessExecute<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("ScriptsPainlessExecute", p, new [] { GET, POST }, "/_scripts/painless/_execute");
+		}
+		
+		internal Task<TResponse> ScriptsPainlessExecuteDispatchAsync<TResponse>(IRequest<ExecutePainlessScriptRequestParameters> p,SerializableData<IExecutePainlessScriptRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+						return _lowLevel.ScriptsPainlessExecuteGetAsync<TResponse>(p.RequestParameters,ct);
+				case POST:
+						return _lowLevel.ScriptsPainlessExecuteAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("ScriptsPainlessExecute", p, new [] { GET, POST }, "/_scripts/painless/_execute");
+		}
+		
 		internal TResponse ScrollDispatch<TResponse>(IRequest<ScrollRequestParameters> p,SerializableData<IScrollRequest> body) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

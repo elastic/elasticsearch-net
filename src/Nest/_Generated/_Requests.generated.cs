@@ -2480,6 +2480,18 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IExecutePainlessScriptRequest : IRequest<ExecutePainlessScriptRequestParameters>
+	{
+	}
+	///<summary>Request parameters for ScriptsPainlessExecute <pre>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</pre></summary>
+	public partial class ExecutePainlessScriptRequest : PlainRequestBase<ExecutePainlessScriptRequestParameters>, IExecutePainlessScriptRequest
+	{
+		protected IExecutePainlessScriptRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IExecuteWatchRequest : IRequest<ExecuteWatchRequestParameters>
 	{
 		Id Id { get; }
