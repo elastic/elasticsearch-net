@@ -37,34 +37,28 @@ namespace Nest
 
 		private static IRangeQuery GetRangeQuery(JsonSerializer serializer, JObject jo)
 		{
-			var nameIsValid = !jo.Properties().Any(p => p.Name == "format" || p.Name == "time_zone");
+			IRangeQuery fq = FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), serializer);
+			var isNumeric = false;
+			var isLong = false;
 
-			var isLong = nameIsValid && CheckType(jo, JTokenType.Integer);
-			var isNumeric = nameIsValid && CheckType(jo, JTokenType.Float);
-
-			IRangeQuery fq;
-
+			foreach (var property in jo.Properties())
+			{
+				if (property.Name == "format" || property.Name == "time_zone")
+					return fq;
+				if (_rangeKeys.Contains(property.Name))
+				{
+					if (property.Value.Type == JTokenType.Float)
+						isNumeric = true;
+					else if (property.Value.Type == JTokenType.Integer)
+						isLong = true;
+				}
+			}
 			if (isNumeric)
-			{
-				fq = FromJson.ReadAs<NumericRangeQuery>(jo.CreateReader(), serializer);
-			}
-			else if (isLong)
-			{
-				fq = FromJson.ReadAs<LongRangeQuery>(jo.CreateReader(), serializer);
-			}
-			else
-			{
-				fq = FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), serializer);
-			}
+				return FromJson.ReadAs<NumericRangeQuery>(jo.CreateReader(), serializer);
+			if (isLong)
+				return FromJson.ReadAs<LongRangeQuery>(jo.CreateReader(), serializer);
 
 			return fq;
-		}
-
-		private static bool CheckType(JObject jo, JTokenType jTokenType)
-		{
-			return jo.Properties().Any(p =>
-				       _rangeKeys.Contains(p.Name) &&
-				       p.Value.Type == jTokenType);
 		}
 
 		private static TReturn GetPropValue<TReturn>(JObject jObject, string field)
