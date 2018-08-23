@@ -39,6 +39,12 @@ namespace Nest
 		long Version { get; }
 
 		/// <summary>
+		/// The result of the bulk operation
+		/// </summary>
+		[JsonProperty("result")]
+		string Result { get; }
+
+		/// <summary>
 		/// The status of the bulk operation
 		/// </summary>
 		[JsonProperty("status")]
@@ -85,6 +91,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public long Version { get; internal set; }
+
+		/// <inheritdoc />
+		public string Result { get; internal set; }
 
 		/// <inheritdoc />
 		public int Status { get; internal set; }
