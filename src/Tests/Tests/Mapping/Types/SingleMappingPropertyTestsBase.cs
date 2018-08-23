@@ -43,6 +43,7 @@ namespace Tests.Mapping.Types
 							@base = new
 							{
 								match = "*",
+								match_pattern = "simple",
 								match_mapping_type = "*",
 								mapping = this.SingleMappingJson
 							}
@@ -65,6 +66,7 @@ namespace Tests.Mapping.Types
 					.DynamicTemplates(t => t
 						.DynamicTemplate("base", dt => dt
 							.Match("*")
+							.MatchPattern(MatchType.Simple)
 							.MatchMappingType("*")
 							.Mapping(FluentSingleMapping)
 						)
@@ -93,6 +95,7 @@ namespace Tests.Mapping.Types
 							{ "base", new DynamicTemplate
 								{
 									Match = "*",
+									MatchPattern = MatchType.Simple,
 									MatchMappingType = "*",
 									Mapping = InitializerSingleMapping
 								}
