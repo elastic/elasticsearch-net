@@ -43,6 +43,7 @@ namespace Nest
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
 
+		// TODO: remove in 7.x
 		public virtual T GetCoordinates<T>(JToken shape, JsonSerializer serializer)
 		{
 			var coordinates = shape["coordinates"];
@@ -104,27 +105,27 @@ namespace Nest
 		private static IGeoShapeQuery ParseShapeQuery(JToken shape, JsonSerializer serializer)
 		{
 			var type = shape["type"];
-			var typeName = type?.Value<string>();
+			var typeName = type?.Value<string>().ToUpperInvariant();
 			var geometry = GeoShapeConverter.ReadJToken(shape, serializer);
 			switch (typeName)
 			{
-				case "circle":
+				case GeoShapeType.Circle:
 					return new GeoShapeCircleQuery { Shape = geometry as ICircleGeoShape };
-				case "envelope":
+				case GeoShapeType.Envelope:
 					return new GeoShapeEnvelopeQuery { Shape = geometry as IEnvelopeGeoShape };
-				case "linestring":
+				case GeoShapeType.LineString:
 					return new GeoShapeLineStringQuery { Shape = geometry as ILineStringGeoShape };
-				case "multilinestring":
+				case GeoShapeType.MultiLineString:
 					return new GeoShapeMultiLineStringQuery { Shape = geometry as IMultiLineStringGeoShape };
-				case "point":
+				case GeoShapeType.Point:
 					return new GeoShapePointQuery { Shape = geometry as IPointGeoShape };
-				case "multipoint":
+				case GeoShapeType.MultiPoint:
 					return new GeoShapeMultiPointQuery { Shape = geometry as IMultiPointGeoShape };
-				case "polygon":
+				case GeoShapeType.Polygon:
 					return new GeoShapePolygonQuery { Shape = geometry as IPolygonGeoShape };
-				case "multipolygon":
+				case GeoShapeType.MultiPolygon:
 					return new GeoShapeMultiPolygonQuery { Shape = geometry as IMultiPolygonGeoShape };
-				case "geometrycollection":
+				case GeoShapeType.GeometryCollection:
 					return new GeoShapeGeometryCollectionQuery { Shape = geometry as IGeometryCollection };
 				default:
 					return null;
