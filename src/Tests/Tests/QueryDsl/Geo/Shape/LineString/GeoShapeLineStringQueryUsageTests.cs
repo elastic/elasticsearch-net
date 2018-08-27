@@ -1,39 +1,39 @@
 ﻿using System.Collections.Generic;
 using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 using static Nest.Infer;
 
-namespace Tests.QueryDsl.Geo.Shape.Envelope
+namespace Tests.QueryDsl.Geo.Shape.LineString
 {
-	public class GeoShapeEnvelopeQueryUsageTests : GeoShapeQueryUsageTestsBase
+	public class GeoShapeLineStringQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
-		public GeoShapeEnvelopeQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public GeoShapeLineStringQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		private readonly IEnumerable<GeoCoordinate> _coordinates = new GeoCoordinate[]
 		{
-			new [] { -45.0, 45.0 },
-			new [] { 45.0, -45.0 }
+			new [] {-77.03653, 38.897676},
+			new [] {-77.009051, 38.889939 }
 		};
 
 		protected override object ShapeJson => new
 		{
-			type ="envelope",
+			type ="linestring",
 			coordinates = this._coordinates
 		};
 
-		protected override QueryContainer QueryInitializer => new GeoShapeEnvelopeQuery
+		protected override QueryContainer QueryInitializer => new GeoShapeLineStringQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
-			Shape = new EnvelopeGeoShape(this._coordinates),
+			Shape = new LineStringGeoShape(this._coordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoShapeEnvelope(c => c
+			.GeoShapeLineString(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
@@ -41,7 +41,7 @@ namespace Tests.QueryDsl.Geo.Shape.Envelope
 				.Relation(GeoShapeRelation.Intersects)
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeEnvelopeQuery>(a => a.GeoShape as IGeoShapeEnvelopeQuery)
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeLineStringQuery>(a => a.GeoShape as IGeoShapeLineStringQuery)
 		{
 			q =>  q.Field = null,
 			q =>  q.Shape = null,

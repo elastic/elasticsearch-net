@@ -1,8 +1,7 @@
-﻿using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
+﻿using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Framework.Integration;
 
-namespace Tests.QueryDsl
+namespace Tests.QueryDsl.Geo.Shape
 {
 	public abstract class GeoShapeQueryUsageTestsBase : QueryDslUsageTestsBase
 	{

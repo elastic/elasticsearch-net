@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using Nest;
+using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.MockData;
 using static Nest.Infer;
 
-namespace Tests.QueryDsl.Geo.Shape.LineString
+namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 {
-	public class GeoShapeLineStringQueryUsageTests : GeoShapeQueryUsageTestsBase
+	public class GeoShapeMultiPointQueryUsageTests : GeoShapeQueryUsageTestsBase
 	{
-		public GeoShapeLineStringQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public GeoShapeMultiPointQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		private readonly IEnumerable<GeoCoordinate> _coordinates = new GeoCoordinate[]
 		{
@@ -19,21 +19,21 @@ namespace Tests.QueryDsl.Geo.Shape.LineString
 
 		protected override object ShapeJson => new
 		{
-			type ="linestring",
+			type ="multipoint",
 			coordinates = this._coordinates
 		};
 
-		protected override QueryContainer QueryInitializer => new GeoShapeLineStringQuery
+		protected override QueryContainer QueryInitializer => new GeoShapeMultiPointQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
-			Shape = new LineStringGeoShape(this._coordinates),
+			Shape = new MultiPointGeoShape(this._coordinates),
 			Relation = GeoShapeRelation.Intersects,
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoShapeLineString(c => c
+			.GeoShapeMultiPoint(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
@@ -41,7 +41,7 @@ namespace Tests.QueryDsl.Geo.Shape.LineString
 				.Relation(GeoShapeRelation.Intersects)
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeLineStringQuery>(a => a.GeoShape as IGeoShapeLineStringQuery)
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeMultiPointQuery>(a => a.GeoShape as IGeoShapeMultiPointQuery)
 		{
 			q =>  q.Field = null,
 			q =>  q.Shape = null,
