@@ -17,6 +17,8 @@ namespace Nest
 			writer.WriteStartArray();
 			serializer.Serialize(writer, p.Longitude);
 			serializer.Serialize(writer, p.Latitude);
+			if (p.Z.HasValue)
+				serializer.Serialize(writer, p.Z.Value);
 			writer.WriteEndArray();
 		}
 
@@ -24,8 +26,15 @@ namespace Nest
 		{
 			if (reader.TokenType != JsonToken.StartArray) return null;
 			var doubles = serializer.Deserialize<double[]>(reader);
-			if (doubles.Length != 2) return null;
-			return new GeoCoordinate(doubles[1], doubles[0]);
+			switch (doubles.Length)
+			{
+				case 2:
+					return new GeoCoordinate(doubles[1], doubles[0]);
+				case 3:
+					return new GeoCoordinate(doubles[1], doubles[0], doubles[2]);
+				default:
+					return null;
+			}
 		}
 	}
 }

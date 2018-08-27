@@ -29,7 +29,7 @@ namespace Nest
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoBoundingBox = this;
 
 		internal static bool IsConditionless(IGeoBoundingBoxQuery q) =>
-			q.Field.IsConditionless() || q.BoundingBox?.BottomRight == null || q.BoundingBox?.TopLeft == null;
+			q.Field.IsConditionless() || (q.BoundingBox?.BottomRight == null && q.BoundingBox?.TopLeft == null && q.BoundingBox?.WellKnownText == null);
 	}
 
 	public class GeoBoundingBoxQueryDescriptor<T>
@@ -46,6 +46,9 @@ namespace Nest
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(GeoLocation topLeft, GeoLocation bottomRight) =>
 			BoundingBox(f=>f.TopLeft(topLeft).BottomRight(bottomRight));
+
+		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(string wkt) =>
+			BoundingBox(f=>f.WellKnownText(wkt));
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(Func<BoundingBoxDescriptor, IBoundingBox> boundingBoxSelector) =>
 			Assign(a => a.BoundingBox = boundingBoxSelector?.Invoke(new BoundingBoxDescriptor()));
