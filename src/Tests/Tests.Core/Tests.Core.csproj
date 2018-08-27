@@ -10,7 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Domain\Tests.Domain.csproj" />
-    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180803T162924" />
+    <PackageReference Include="Elastic.Xunit" Version="0.1.0-ci20180827T133305" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />

@@ -16,6 +16,7 @@ elasticsearch_version: 6.3.0
 # do not spawn nodes as part of the test setup if we find a node is already running
 # this is opt in during development in CI we never want to see our tests running against an already running node
 test_against_already_running_elasticsearch: true
+# elasticsearch_out_after_started: true
 
 #random_source_serializer: true
 seed: 46221
