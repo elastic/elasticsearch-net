@@ -43,7 +43,7 @@ namespace Nest
 		public const string GeometryCollection = "GEOMETRYCOLLECTION";
 
 		// WKT uses BBOX for envelope geo shape
-		internal const string BoundingBox = "BBOX";
+		public const string BoundingBox = "BBOX";
 	}
 
 	public abstract class GeoShapeBase : IGeoShape
@@ -72,7 +72,7 @@ namespace Nest
 
 			// IGeometryCollection needs to be handled separately because it does not
 			// implement IGeoShape, and can't because it would be a binary breaking change.
-			// This is fixed in next major release.
+			// Fixed in 7.x
 			if (value is IGeometryCollection collection)
 			{
 				if (collection is GeometryCollection geometryCollection && geometryCollection.Format == GeoShapeFormat.WellKnownText)
