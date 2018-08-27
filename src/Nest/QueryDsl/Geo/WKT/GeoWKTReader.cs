@@ -367,12 +367,6 @@ namespace Nest
 		public WellKnownTextTokenizer(TextReader reader) =>
 			_reader = reader ?? throw new ArgumentNullException(nameof(reader));
 
-		private int Read()
-		{
-			Position++;
-			return _reader.Read();
-		}
-
 		/// <summary>
 		/// Gets the current position
 		/// </summary>
@@ -414,6 +408,12 @@ namespace Nest
 				default:
 					return $"\'{(char)_peekChar}\'";
 			}
+		}
+
+		private int Read()
+		{
+			Position++;
+			return _reader.Read();
 		}
 
 		/// <summary>

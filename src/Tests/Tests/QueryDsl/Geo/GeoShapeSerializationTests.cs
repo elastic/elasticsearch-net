@@ -28,7 +28,7 @@ namespace Tests.QueryDsl.Geo
 		protected GeoShapeSerializationTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
-		protected readonly string Index = RandomString();
+		protected abstract string Index { get; }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Domain.Shape>(f),
@@ -145,6 +145,8 @@ namespace Tests.QueryDsl.Geo
 			if (!bulkResponse.IsValid)
 				throw new Exception($"Error indexing shapes for integration test: {bulkResponse.DebugInformation}");
 		}
+
+		protected override string Index => "geoshapes";
 	}
 
 	[SkipVersion("<6.2.0", "Support for WKT in Elasticsearch 6.2.0+")]
@@ -208,6 +210,8 @@ namespace Tests.QueryDsl.Geo
 			if (!bulkResponse.IsValid)
 				throw new Exception($"Error indexing shapes for integration test: {bulkResponse.DebugInformation}");
 		}
+
+		protected override string Index => "wkt-geoshapes";
 
 		protected override void ExpectResponse(ISearchResponse<Domain.Shape> response)
 		{
