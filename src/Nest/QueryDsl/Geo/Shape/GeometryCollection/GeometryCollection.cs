@@ -27,6 +27,8 @@ namespace Nest
 	/// <inheritdoc cref="IGeometryCollection"/>
 	public class GeometryCollection : IGeometryCollection, IGeoShape
 	{
+		internal GeoShapeFormat Format { get; set; }
+
 		/// <inheritdoc />
 		public string Type => "geometrycollection";
 
