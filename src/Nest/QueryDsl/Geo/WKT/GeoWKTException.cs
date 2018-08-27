@@ -13,7 +13,7 @@ namespace Nest
 		}
 
 		public GeoWKTException(string message, int lineNumber, int position)
-			: base($"{message} at line: {lineNumber}, position: {position}")
+			: base($"{message} at line {lineNumber}, position {position}")
 		{
 		}
 	}

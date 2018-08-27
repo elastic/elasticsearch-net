@@ -131,15 +131,18 @@ namespace Nest
 		private static void WriteEnvelope(IEnvelopeGeoShape envelope, StringBuilder builder)
 		{
 			builder.Append(GeoShapeType.BoundingBox).Append(" (");
-			var first = envelope.Coordinates.ElementAt(0);
-			var last = envelope.Coordinates.ElementAt(1);
-			builder.Append(last.Longitude)
+			var topLeft = envelope.Coordinates.ElementAt(0);
+			var bottomRight = envelope.Coordinates.ElementAt(1);
+
+			// WKT specification expects the following order: minLon, maxLon, maxLat, minLat.
+			// envelope is top_left (minLon, maxLat), bottom_right (maxLon, minLat)
+			builder.Append(topLeft.Longitude)
 				.Append(", ")
-				.Append(first.Longitude)
+				.Append(bottomRight.Longitude)
 				.Append(", ")
-				.Append(last.Latitude)
+				.Append(topLeft.Latitude)
 				.Append(", ")
-				.Append(first.Latitude)
+				.Append(bottomRight.Latitude)
 				.Append(")");
 		}
 

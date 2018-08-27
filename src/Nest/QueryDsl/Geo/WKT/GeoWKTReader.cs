@@ -67,7 +67,7 @@ namespace Nest
 					geometryCollection.Format = GeoShapeFormat.WellKnownText;
 					return geometryCollection;
 				default:
-					throw new GeoWKTException($"Unknown geometry type: {shapeType}");
+					throw new GeoWKTException($"Unknown geometry type: {type}");
 			}
 		}
 
@@ -147,7 +147,7 @@ namespace Nest
 			NextComma(tokenizer);
 			var minLat = NextNumber(tokenizer);
 			NextCloser(tokenizer);
-			return new EnvelopeGeoShape(new [] { new GeoCoordinate(minLat, maxLon), new GeoCoordinate(maxLat, minLon) });
+			return new EnvelopeGeoShape(new [] { new GeoCoordinate(maxLat, minLon), new GeoCoordinate(minLat, maxLon) });
 		}
 
 		private static GeometryCollection ParseGeometryCollection(WellKnownTextTokenizer tokenizer)
@@ -437,6 +437,12 @@ namespace Nest
 			if (_pushed)
 			{
 				_pushed = false;
+
+				// Add the length of peeked token
+				Position += !string.IsNullOrEmpty(TokenValue)
+					? 1 + TokenValue.Length
+					: 1;
+
 				return TokenType;
 			}
 
