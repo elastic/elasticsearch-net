@@ -13,9 +13,9 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.Migration.MigrationUpgrade
 {
 	public class InvalidMigrationUpgradeApiTests :
-		ApiIntegrationTestBase<ReadOnlyCluster, IMigrationUpgradeResponse, IMigrationUpgradeRequest, MigrationUpgradeDescriptor, MigrationUpgradeRequest>
+		ApiIntegrationTestBase<XPackCluster, IMigrationUpgradeResponse, IMigrationUpgradeRequest, MigrationUpgradeDescriptor, MigrationUpgradeRequest>
 	{
-		public InvalidMigrationUpgradeApiTests(ReadOnlyCluster cluster, EndpointUsage usage)
+		public InvalidMigrationUpgradeApiTests(XPackCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
