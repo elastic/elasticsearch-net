@@ -123,7 +123,8 @@ namespace Nest
 	}
 
 	/// <summary>
-	/// Represents a Latitude/Longitude as a 2 dimensional point that gets serialized as new [] { lon, lat }
+	/// Represents a Latitude/Longitude and optional Z value as a 2 or 3 dimensional point
+	/// that gets serialized as new [] { lon, lat, [z] }
 	/// </summary>
 	[JsonConverter(typeof(GeoCoordinateJsonConverter))]
 	public class GeoCoordinate : GeoLocation
@@ -134,17 +135,35 @@ namespace Nest
 		public GeoCoordinate(double latitude, double longitude) : base(latitude, longitude) { }
 
 		/// <summary>
-		/// Creates a new instance of <see cref="GeoCoordinate"/> from a pair of coordinates
-		/// in the order Latitude then Longitude.
+		/// Creates a new instance of <see cref="GeoCoordinate"/>
+		/// </summary>
+		public GeoCoordinate(double latitude, double longitude, double z) : base(latitude, longitude) =>
+			Z = z;
+
+		/// <summary>
+		/// Gets or sets the Z value
+		/// </summary>
+		public double? Z { get; set; }
+
+		/// <summary>
+		/// Creates a new instance of <see cref="GeoCoordinate"/> from an array
+		/// of 2 or 3 doubles, in the order Latitude, Longitude, and optional Z value.
 		/// </summary>
 		public static implicit operator GeoCoordinate(double[] coordinates)
 		{
-			if (coordinates == null || coordinates.Length != 2)
-				throw new ArgumentOutOfRangeException(
-					nameof(coordinates),
-					$"Can not create a {nameof(GeoCoordinate)} from an array that does not have two doubles");
+			if (coordinates == null) return null;
 
-			return new GeoCoordinate(coordinates[0], coordinates[1]);
+			switch (coordinates.Length)
+			{
+				case 2:
+					return new GeoCoordinate(coordinates[0], coordinates[1]);
+				case 3:
+					return new GeoCoordinate(coordinates[0], coordinates[1], coordinates[2]);
+			}
+
+			throw new ArgumentOutOfRangeException(
+				nameof(coordinates),
+				$"Cannot create a {nameof(GeoCoordinate)} from an array that does not contain 2 or 3 values");
 		}
 	}
 }
