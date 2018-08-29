@@ -101,6 +101,12 @@ namespace ApiGenerator.Domain
 					case "_source":
 						yield return "Whether the _source should be included in the response.";
 						yield break;
+					case "filter_path":
+						yield return this.Description;
+						yield return "<para>Use of response filtering can result in a response from Elasticsearch ";
+						yield return "that cannot be correctly deserialized to the respective response type for the request. ";
+						yield return "In such situations, use the low level client to issue the request and handle response deserialization</para>";
+						yield break;
 					default:
 						yield return this.Description;
 						yield break;

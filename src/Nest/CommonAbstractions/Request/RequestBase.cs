@@ -81,6 +81,9 @@ namespace Nest
 		}
 	}
 
+	///<summary>
+	/// Base class for all Request descriptor types
+	///</summary>
 	public abstract partial class RequestDescriptorBase<TDescriptor, TParameters, TInterface> : RequestBase<TParameters>, IDescriptor
 		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters, TInterface>, TInterface
 		where TParameters : RequestParameters<TParameters>, new()
