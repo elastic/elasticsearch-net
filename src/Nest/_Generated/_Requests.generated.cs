@@ -21,7 +21,12 @@ namespace Nest
 		public bool? Human { get => Q<bool?>("human"); set => Q("human", value); }
 		///<summary>Include the stack trace of returned errors.</summary>
 		public bool? ErrorTrace { get => Q<bool?>("error_trace"); set => Q("error_trace", value); }
-		///<summary>A comma-separated list of filters used to reduce the respone.</summary>
+		///<summary>
+		/// A comma-separated list of filters used to reduce the response.
+		/// <para>Use of response filtering can result in a response from Elasticsearch
+		/// that cannot be correctly deserialized to the respective response type for the request.
+		/// In such situations, use the low level client to issue the request and handle response deserialization</para>
+		///</summary>
 		public string[] FilterPath { get => Q<string[]>("filter_path"); set => Q("filter_path", value); }
 	}
 	

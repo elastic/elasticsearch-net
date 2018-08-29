@@ -24,7 +24,9 @@ namespace Nest
 		var original = common.QueryStringKey;
 		var t = @common.TypeHighLevel;
 		var tSuffix = (t == "bool" || t == "bool?") ? " = true" : "";
-		<text>		public TDescriptor @(common.ClsName)(@common.TypeHighLevel @common.ClsArgumentName@tSuffix) => Qs("@original", @(common.ClsArgumentName));</text>
+<text>		///<summary>@(Raw(string.Join("", common.DescriptionHighLevel)))</summary>
+		public TDescriptor @(common.ClsName)(@common.TypeHighLevel @common.ClsArgumentName@tSuffix) => Qs("@original", @(common.ClsArgumentName));
+</text>
 	}
 	}
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
