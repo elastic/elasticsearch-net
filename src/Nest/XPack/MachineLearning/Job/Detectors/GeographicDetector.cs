@@ -44,7 +44,10 @@ namespace Nest
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
 		Field IFieldNameDetector.FieldName { get; set; }
 
+		[Obsolete("Use parameterless constructor")]
 		public LatLongDetectorDescriptor(string function) : base(function) {}
+
+		public LatLongDetectorDescriptor() : base(GeographicFunction.LatLong.GetStringValue()) {}
 
 		public LatLongDetectorDescriptor<T> FieldName(Field fieldName) => Assign(a => a.FieldName = fieldName);
 
