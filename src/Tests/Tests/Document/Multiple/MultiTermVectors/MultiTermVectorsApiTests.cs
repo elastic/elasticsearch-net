@@ -14,9 +14,9 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.MultiTermVectors
 {
-	public class MultiTermVectorsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
+	public class MultiTermVectorsDocsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
 	{
-		public MultiTermVectorsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public MultiTermVectorsDocsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.MultiTermVectors(f),
 			fluentAsync: (client, f) => client.MultiTermVectorsAsync(f),
@@ -121,6 +121,86 @@ namespace Tests.Document.Multiple.MultiTermVectors
 						MinimumDocumentFrequency = 1
 					}
 				})
+		};
+	}
+
+	public class MultiTermVectorsIdsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
+	{
+		public MultiTermVectorsIdsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.MultiTermVectors(f),
+			fluentAsync: (client, f) => client.MultiTermVectorsAsync(f),
+			request: (client, r) => client.MultiTermVectors(r),
+			requestAsync: (client, r) => client.MultiTermVectorsAsync(r)
+		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath =>
+			$"/devs/developer/_mtermvectors?field_statistics=true&payloads=true&term_statistics=true&positions=true&offsets=true";
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override object ExpectJson { get; } = new
+		{
+			ids = Developer.Developers.Select(p => (Id)p.Id).Take(2)
+		};
+
+		protected override void ExpectResponse(IMultiTermVectorsResponse response)
+		{
+			response.ShouldBeValid();
+			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);
+			var termvectorDoc = response.Documents.FirstOrDefault(d => d.TermVectors.Count > 0);
+
+			termvectorDoc.Should().NotBeNull();
+			termvectorDoc.Index.Should().NotBeNull();
+			termvectorDoc.Type.Should().NotBeNull();
+			termvectorDoc.Id.Should().NotBeNull();
+
+			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");
+			var vectors = termvectorDoc.TermVectors["firstName"];
+			AssertTermVectors(vectors);
+
+			vectors = termvectorDoc.TermVectors[Field<Developer>(p=>p.FirstName)];
+			AssertTermVectors(vectors);
+		}
+
+		private static void AssertTermVectors(TermVector vectors)
+		{
+			vectors.Terms.Should().NotBeEmpty();
+			foreach (var vectorTerm in vectors.Terms)
+			{
+				vectorTerm.Key.Should().NotBeNullOrWhiteSpace();
+				vectorTerm.Value.Should().NotBeNull();
+				vectorTerm.Value.TermFrequency.Should().BeGreaterThan(0);
+				vectorTerm.Value.TotalTermFrequency.Should().BeGreaterThan(0);
+				vectorTerm.Value.Tokens.Should().NotBeEmpty();
+
+				var token = vectorTerm.Value.Tokens.First();
+				token.EndOffset.Should().BeGreaterThan(0);
+			}
+		}
+
+		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
+			.Index<Developer>()
+			.Type<Developer>()
+			.Ids(Developer.Developers.Select(p => (Id)p.Id).Take(2))
+			.FieldStatistics()
+			.Payloads()
+			.TermStatistics()
+			.Positions()
+			.Offsets()
+		;
+
+		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>(), Type<Developer>())
+		{
+			Ids = Developer.Developers.Select(p => (Id)p.Id).Take(2),
+			FieldStatistics = true,
+			Payloads = true,
+			TermStatistics = true,
+			Positions = true,
+			Offsets = true
 		};
 	}
 }
