@@ -14,13 +14,13 @@ namespace Nest
 		/// <param name="selector">The descriptor describing the multi termvectors operation</param>
 		IMultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="MultiTermVectors(System.Func{Nest.MultiTermVectorsDescriptor,Nest.IMultiTermVectorsRequest})"/>
 		IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="MultiTermVectors(System.Func{Nest.MultiTermVectorsDescriptor,Nest.IMultiTermVectorsRequest})"/>
 		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="MultiTermVectors(System.Func{Nest.MultiTermVectorsDescriptor,Nest.IMultiTermVectorsRequest})"/>
 		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
