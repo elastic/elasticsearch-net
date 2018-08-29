@@ -285,5 +285,8 @@ namespace Nest
 
 		public DetectorsDescriptor<T> TimeOfWeek(Func<TimeDetectorDescriptor<T>, ITimeDetector> selector = null) =>
 			Assign(a => a.AddIfNotNull(selector.InvokeOrDefault(new TimeDetectorDescriptor<T>(TimeFunction.TimeOfWeek))));
+
+		public DetectorsDescriptor<T> LatLong(Func<LatLongDetectorDescriptor<T>, IGeographicDetector> selector = null) =>
+			Assign(a => a.AddIfNotNull(selector.InvokeOrDefault(new LatLongDetectorDescriptor<T>())));
 	}
 }
