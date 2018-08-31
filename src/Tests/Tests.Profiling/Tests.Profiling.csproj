@@ -12,9 +12,11 @@
     <Reference Include="..\..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll" />
     <Reference Include="..\..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.Api.dll" />
     <Reference Include="..\..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.SelfApi.dll" />
+    <Compile Remove="DummyProgram.cs" />
   </ItemGroup>
   <ItemGroup Condition="!Exists('..\..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll')">
-    <Compile Remove="Framework\**" />
+    <Compile Remove="**" />
+    <Compile Include="DummyProgram.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
