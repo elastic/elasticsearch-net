@@ -11,7 +11,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bogus" Version="22.1.2" />
-    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20180827T133305" />
+    <PackageReference Include="Elastic.Managed" Version="0.1.0-ci20180831T090241" />
     <ProjectReference Include="..\Tests.Configuration\Tests.Configuration.csproj" />
   </ItemGroup>
 </Project>
