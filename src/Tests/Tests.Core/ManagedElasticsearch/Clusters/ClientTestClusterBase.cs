@@ -27,13 +27,6 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		public IElasticClient Client => this.GetOrAddClient(s=> this.ConnectionSettings(s.ApplyDomainSettings()));
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s;
-
-		// TODO don't think this override is needed anymore
-		public override ICollection<Uri> NodesUris(string hostName = "localhost")
-		{
-			var host = (TestConnectionSettings.RunningFiddler) ? "ipv4.fiddler" : hostName;
-			return base.NodesUris(host);
-		}
 	}
 
 	public class ClientTestClusterConfiguration : XunitClusterConfiguration
@@ -46,7 +39,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			: base(TestClient.Configuration.ElasticsearchVersion, features, new ElasticsearchPlugins(plugins), numberOfNodes)
 		{
 			this.TestConfiguration = TestClient.Configuration;
-			this.ShowElasticsearchOutputAfterStarted = this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
+			this.ShowElasticsearchOutputAfterStarted = true; //this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
 
 			this.CacheEsHomeInstallation = true;
 			this.TrialMode = XPackTrialMode.Trial;
