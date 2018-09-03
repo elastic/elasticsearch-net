@@ -50,6 +50,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		public void ClusterSettings()
 		{
+			if (TestConfiguration.Instance.InRange("<6.1.0")) return;
 			var putSettingsResponse = this.Client.ClusterPutSettings(s=>s
 				.Transient(t=>t
 					.Add("cluster.routing.use_adaptive_replica_selection", true)
