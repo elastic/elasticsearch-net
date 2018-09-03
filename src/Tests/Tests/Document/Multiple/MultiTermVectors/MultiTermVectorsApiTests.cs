@@ -144,7 +144,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override object ExpectJson { get; } = new
 		{
-			ids = Developer.Developers.Select(p => (Id)p.Id).Take(2)
+			ids = Developer.Developers.Select(p => p.Id).Take(2)
 		};
 
 		protected override void ExpectResponse(IMultiTermVectorsResponse response)
