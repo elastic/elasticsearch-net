@@ -284,14 +284,9 @@ namespace Tests.QueryDsl.Geo
 		[U]
 		public void GeoWKTExceptionReturnsCorrectLineNumberAndPosition()
 		{
-			var wkt = @"POLYGON (
-								 (100, 5)
-								 (100, 10)
-								 (90, 10),
-								 (90, 5),
-								 (100, 5)";
+			var wkt = "POLYGON (\n(100, 5) (100, 10) (90, 10), (90, 5), (100, 5)";
 			Action action = () => GeoWKTReader.Read(wkt);
-			action.ShouldThrow<GeoWKTException>().Which.Message.Should().Be("Expected number but found: , at line 2, position 14");
+			action.ShouldThrow<GeoWKTException>().Which.Message.Should().Be("Expected number but found: , at line 2, position 5");
 		}
 
 	}
