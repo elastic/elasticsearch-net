@@ -1,14 +1,13 @@
 ﻿using System;
-using Elasticsearch.Net;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.Text
 {
+	[SkipVersion("<6.3.0", "index_prefixes is a new feature")]
 	public class TextPropertyTests : PropertyTestsBase
 	{
 		public TextPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
