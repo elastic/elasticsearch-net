@@ -72,7 +72,7 @@ namespace Tests.Cluster.NodesStats
 		{
 			nodeIngestStats.Should().NotBeNull();
 			nodeIngestStats.Total.Should().NotBeNull();
-			nodeIngestStats.Pipelines.Should().NotBeNull().And.NotBeEmpty();
+			nodeIngestStats.Pipelines.Should().NotBeNull();
 		}
 
 		protected void Assert(IReadOnlyDictionary<string, AdaptiveSelectionStats> adaptiveSelectionStats)
