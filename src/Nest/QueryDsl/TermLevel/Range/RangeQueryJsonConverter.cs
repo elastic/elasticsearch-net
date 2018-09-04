@@ -37,14 +37,13 @@ namespace Nest
 
 		private static IRangeQuery GetRangeQuery(JsonSerializer serializer, JObject jo)
 		{
-			IRangeQuery fq = FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), serializer);
 			var isNumeric = false;
 			var isLong = false;
 
 			foreach (var property in jo.Properties())
 			{
 				if (property.Name == "format" || property.Name == "time_zone")
-					return fq;
+					return FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), serializer);
 				if (_rangeKeys.Contains(property.Name))
 				{
 					if (property.Value.Type == JTokenType.Float)
@@ -58,7 +57,7 @@ namespace Nest
 			if (isLong)
 				return FromJson.ReadAs<LongRangeQuery>(jo.CreateReader(), serializer);
 
-			return fq;
+			return null;
 		}
 
 		private static TReturn GetPropValue<TReturn>(JObject jObject, string field)
