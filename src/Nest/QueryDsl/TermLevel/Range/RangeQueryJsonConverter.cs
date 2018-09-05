@@ -57,7 +57,7 @@ namespace Nest
 			if (isLong)
 				return FromJson.ReadAs<LongRangeQuery>(jo.CreateReader(), serializer);
 
-			return null;
+			return FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), serializer);
 		}
 
 		private static TReturn GetPropValue<TReturn>(JObject jObject, string field)
