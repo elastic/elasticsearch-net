@@ -34,7 +34,6 @@ namespace Tests.Configuration
 			{
 				SourceSerializer = RandomBoolConfig("SOURCESERIALIZER", randomizer),
 				TypedKeys = RandomBoolConfig("TYPEDKEYS", randomizer),
-				OldConnection = RandomBoolConfig("OLDCONNECTION", randomizer),
 			};
 		}
 
