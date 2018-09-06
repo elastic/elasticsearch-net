@@ -59,29 +59,17 @@ namespace Tests.ClientConcepts.Connection
 			connection.ClientCount.Should().Be(1);
 		}
 
-	    [U]
-		public async Task MultipleInstancesOfHttpClientWhenRequestTimeoutChanges()
-		{
-			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(TimeSpan.FromSeconds(30)));
-		}
+	    [I] public async Task MultipleInstancesOfHttpClientWhenRequestTimeoutChanges() =>
+		    await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(TimeSpan.FromSeconds(30)));
 
-		[U]
-		public async Task MultipleInstancesOfHttpClientWhenProxyChanges()
-		{
+	    [I] public async Task MultipleInstancesOfHttpClientWhenProxyChanges() =>
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(proxyAddress: new Uri("http://localhost:9400")));
-		}
 
-		[U]
-		public async Task MultipleInstancesOfHttpClientWhenAutomaticProxyDetectionChanges()
-		{
+	    [I] public async Task MultipleInstancesOfHttpClientWhenAutomaticProxyDetectionChanges() =>
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(disableAutomaticProxyDetection: true));
-		}
 
-		[U]
-		public async Task MultipleInstancesOfHttpClientWhenHttpCompressionChanges()
-		{
+	    [I] public async Task MultipleInstancesOfHttpClientWhenHttpCompressionChanges() =>
 			await MultipleInstancesOfHttpClientWhen(() => CreateRequestData(httpCompression: true));
-		}
 
 	    private static async Task MultipleInstancesOfHttpClientWhen(Func<RequestData> differentRequestData)
 	    {

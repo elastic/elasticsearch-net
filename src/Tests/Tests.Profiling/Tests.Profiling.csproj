@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -14,10 +15,10 @@
     <Reference Include="..\..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.SelfApi.dll" />
   </ItemGroup>
   <ItemGroup Condition="!Exists('..\..\..\build\tools\dottrace-selfprofile\JetBrains.Profiler.Windows.dll')">
-    <Compile Remove="Framework\**" />
+    <Compile Remove="**" />
+    <Compile Include="DummyProgram.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
   </ItemGroup>
-  <Import Project="..\..\outputpath.props" />
 </Project>

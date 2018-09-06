@@ -3,26 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D5575-2347-4D3C-BF8C-3E38410C46CA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RelatedFiles", "RelatedFiles", "{432D5575-2347-4D3C-BF8C-3E38410C46CA}"
 	ProjectSection(SolutionItems) = preProject
-		..\.editorconfig = ..\.editorconfig
-		..\.gitignore = ..\.gitignore
-		..\.travis.yml = ..\.travis.yml
-		..\appveyor.yml = ..\appveyor.yml
-		..\build.bat = ..\build.bat
-		..\build.sh = ..\build.sh
-		..\build\Clients.Common.targets = ..\build\Clients.Common.targets
-		..\contributing.md = ..\contributing.md
-		..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
-		..\global.json = ..\global.json
-		..\license.txt = ..\license.txt
-		..\build\NEST.JsonNetSerializer.nuspec = ..\build\NEST.JsonNetSerializer.nuspec
-		..\build\NEST.nuspec = ..\build\NEST.nuspec
-		..\NuGet.config = ..\NuGet.config
-		..\paket.bat = ..\paket.bat
-		..\paket.dependencies = ..\paket.dependencies
-		..\readme.md = ..\readme.md
-		outputpath.props = outputpath.props
+		..\src\PublishArtifacts.build.props = ..\src\PublishArtifacts.build.props
+		..\src\Artifacts.build.props = ..\src\Artifacts.build.props
+		..\src\Library.build.props = ..\src\Library.build.props
 		Directory.build.props = Directory.build.props
 	EndProjectSection
 EndProject
@@ -61,6 +46,30 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Reproduce", "Tests\Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.ScratchPad", "Tests\Tests.ScratchPad\Tests.ScratchPad.csproj", "{CE7AC1D4-15AF-47FB-83FA-F7137DFD9076}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{EAE89579-CCA9-45CE-AF83-3DCD98690EA8}"
+ProjectSection(SolutionItems) = preProject
+	..\.editorconfig = ..\.editorconfig
+	..\.gitignore = ..\.gitignore
+	..\.travis.yml = ..\.travis.yml
+	..\appveyor.yml = ..\appveyor.yml
+	..\global.json = ..\global.json
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{C7865979-1D1C-46AF-BDE8-1DA6F3ED81B3}"
+ProjectSection(SolutionItems) = preProject
+	..\build\NEST.JsonNetSerializer.nuspec = ..\build\NEST.JsonNetSerializer.nuspec
+	..\build\NEST.nuspec = ..\build\NEST.nuspec
+	..\NuGet.config = ..\NuGet.config
+	..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markdown", "Markdown", "{2FABB663-F4DB-499A-89F8-3A08828D1D91}"
+ProjectSection(SolutionItems) = preProject
+	..\contributing.md = ..\contributing.md
+	..\license.txt = ..\license.txt
+	..\readme.md = ..\readme.md
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +94,9 @@ Global
 		{8C119416-DB47-4971-A9EC-566217241D95} = {6C4A2627-AF22-4388-9DF7-7A9AEACFD635}
 		{30FB80AE-3B37-4FBB-8450-9666969EEE1A} = {6C4A2627-AF22-4388-9DF7-7A9AEACFD635}
 		{CE7AC1D4-15AF-47FB-83FA-F7137DFD9076} = {6C4A2627-AF22-4388-9DF7-7A9AEACFD635}
+		{EAE89579-CCA9-45CE-AF83-3DCD98690EA8} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
+		{C7865979-1D1C-46AF-BDE8-1DA6F3ED81B3} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
+		{2FABB663-F4DB-499A-89F8-3A08828D1D91} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5B393962-7586-49BA-BD99-3B1E35F48E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

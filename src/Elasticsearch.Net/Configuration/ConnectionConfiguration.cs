@@ -7,7 +7,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
-#if !FEATURE_HTTPWEBREQUEST
+#if DOTNETCORE
 using System.Net;
 using System.Net.Http;
 #endif
@@ -22,7 +22,7 @@ namespace Elasticsearch.Net
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
 		internal static bool IsCurlHandler { get; } =
-            #if !FEATURE_HTTPWEBREQUEST
+            #if DOTNETCORE
                 typeof(HttpClientHandler).Assembly().GetType("System.Net.Http.CurlHandler") != null;
             #else
                  false;

@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>
     <OutputType>Exe</OutputType>
@@ -11,5 +12,4 @@
     <PackageReference Include="BenchMarkDotNet" Version="0.11.0" />
     <PackageReference Include="System.Buffers" Version="4.3.0" />
   </ItemGroup>
-  <Import Project="..\..\outputpath.props" />
 </Project>

@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
+#if DOTNETCORE
+	[Obsolete("CoreFX HttpWebRequest uses HttpClient under the covers but does not reuse HttpClient instances, we'll therefor stop shipping with this class in the next major version")]
+#endif
 	public class HttpWebRequestConnection : IConnection
 	{
 		internal static bool IsMono { get; } = Type.GetType("Mono.Runtime") != null;
@@ -59,6 +62,7 @@ namespace Elasticsearch.Net
 			request.Accept = requestData.Accept;
 			request.ContentType = requestData.ContentType;
 #if !DOTNETCORE
+			// on netstandard/netcoreapp2.0 this throws argument exception
 			request.MaximumResponseHeadersLength = -1;
 #endif
 			request.Pipelined = requestData.Pipelined;
