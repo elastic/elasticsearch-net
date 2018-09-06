@@ -57,7 +57,7 @@ namespace Elasticsearch.Net
 
 			request.Accept = requestData.Accept;
 			request.ContentType = requestData.RequestMimeType;
-#if FEATURE_HTTPWEBREQUEST
+#if !DOTNETCORE
 			// on netstandard/netcoreapp2.0 this throws argument exception
 			request.MaximumResponseHeadersLength = -1;
 #endif

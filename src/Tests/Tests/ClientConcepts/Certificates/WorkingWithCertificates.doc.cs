@@ -34,11 +34,8 @@ namespace Tests.ClientConcepts.Certificates
 		* by setting
 		*/
 #if !DOTNETCORE
-		public void ServerValidationCallback()
-		{
-			ServicePointManager.ServerCertificateValidationCallback +=
-				(sender, cert, chain, errors) => true;
-		}
+		public void ServerValidationCallback() => ServicePointManager.ServerCertificateValidationCallback +=
+			(sender, cert, chain, errors) => true;
 #endif
 		/**
 		 * validation will not be performed for HTTPS connections to *both* Elasticsearch *and* that external web service.
@@ -175,7 +172,7 @@ namespace Tests.ClientConcepts.Certificates
 		* the local CA certificate is part of the chain that was used to generate the servers key.
 		*/
 
-#if FEATURE_HTTPWEBREQUEST
+#if !DOTNETCORE
 		/**
 		 * ==== Client Certificates
 		 *
@@ -207,7 +204,7 @@ namespace Tests.ClientConcepts.Certificates
 
 			protected override ConnectionSettings Authenticate(ConnectionSettings s) => s // <1> Set the client certificate on `ConnectionSettings`
 				.ClientCertificate(
-					ClientCertificate.LoadWithPrivateKey(
+					Elasticsearch.Net.ClientCertificate.LoadWithPrivateKey(
 						this.ClusterConfiguration.FileSystem.ClientCertificate, // <2> The path to the `.cer` file
 						this.ClusterConfiguration.FileSystem.ClientPrivateKey, // <3> The path to the `.key` file
 						"") // <4> The password for the private key
@@ -229,7 +226,7 @@ namespace Tests.ClientConcepts.Certificates
 #endif
 	}
 
-#if FEATURE_HTTPWEBREQUEST
+#if !DOTNETCORE
 	/**
 	 * Or per request on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`
 	 */

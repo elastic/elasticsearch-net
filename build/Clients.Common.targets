@@ -15,7 +15,6 @@
 
     <!-- we need to referenced assemblies during the command line build so that ILRepack can pick them up -->
     <CopyLocalLockFileAssemblies Condition="'$(TargetFramework)'=='netstandard2.0'">true</CopyLocalLockFileAssemblies>
-    <DefineConstants Condition="'$(TargetFramework)'=='net461'">$(DefineConstants);FEATURE_HTTPWEBREQUEST</DefineConstants>
     
   </PropertyGroup>
 

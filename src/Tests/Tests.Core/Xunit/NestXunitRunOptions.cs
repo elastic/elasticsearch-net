@@ -115,9 +115,7 @@ namespace Tests.Core.Xunit
 
 			AppendExplictConfig(nameof(RandomConfiguration.SourceSerializer), sb);
 			AppendExplictConfig(nameof(RandomConfiguration.TypedKeys), sb);
-#if FEATURE_HTTPWEBREQUEST
 			AppendExplictConfig(nameof(RandomConfiguration.OldConnection), sb);
-#endif
 
 			if (runningIntegrations)
 				sb.Append("integrate ")

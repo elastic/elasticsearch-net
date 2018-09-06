@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System;
 using System.Linq;
-#if FEATURE_HTTPWEBREQUEST
+#if !DOTNETCORE
 using System.Net;
 #endif
 
@@ -203,7 +203,7 @@ namespace Elasticsearch.Net
 				//This causes it to behave differently to .NET FULL. We already wrapped the WebExeption
 				//under ElasticsearchServerException and it exposes way more information as part of it's
 				//exception message e.g the the root cause of the server error body.
-#if FEATURE_HTTPWEBREQUEST
+#if !DOTNETCORE
 				if (a.OriginalException is WebException)
 					a.OriginalException = clientException;
 #endif
