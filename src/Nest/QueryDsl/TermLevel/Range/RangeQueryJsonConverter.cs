@@ -26,26 +26,38 @@ namespace Nest
 			var jo = firstProp.Value.Value<JObject>();
 			if (jo == null) return null;
 
-
-			var isNumeric = !jo.Properties().Any(p=>p.Name == "format" || p.Name == "time_zone")
-				&& jo.Properties().Any(p=> _rangeKeys.Contains(p.Name) && (p.Value.Type  == JTokenType.Integer || p.Value.Type == JTokenType.Float));
-
-
-			IRangeQuery fq;
-			if (isNumeric)
-			{
-				fq = FromJson.ReadAs<NumericRangeQuery>(jo.CreateReader(), serializer);
-			}
-			else
-			{
-				fq = FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), serializer);
-			}
+			var fq = GetRangeQuery(serializer, jo);
 
 			fq.Name = GetPropValue<string>(jo, "_name");
 			fq.Boost = GetPropValue<double?>(jo, "boost");
 			fq.Field = field;
 
 			return fq;
+		}
+
+		private static IRangeQuery GetRangeQuery(JsonSerializer serializer, JObject jo)
+		{
+			var isNumeric = false;
+			var isLong = false;
+
+			foreach (var property in jo.Properties())
+			{
+				if (property.Name == "format" || property.Name == "time_zone")
+					return FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), serializer);
+				if (_rangeKeys.Contains(property.Name))
+				{
+					if (property.Value.Type == JTokenType.Float)
+						isNumeric = true;
+					else if (property.Value.Type == JTokenType.Integer)
+						isLong = true;
+				}
+			}
+			if (isNumeric)
+				return FromJson.ReadAs<NumericRangeQuery>(jo.CreateReader(), serializer);
+			if (isLong)
+				return FromJson.ReadAs<LongRangeQuery>(jo.CreateReader(), serializer);
+
+			return FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), serializer);
 		}
 
 		private static TReturn GetPropValue<TReturn>(JObject jObject, string field)

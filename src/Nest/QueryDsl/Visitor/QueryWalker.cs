@@ -26,6 +26,7 @@ namespace Nest
 				v.Visit(d);
 				VisitQuery(d as IDateRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as INumericRangeQuery, visitor, (vv, dd) => v.Visit(dd));
+				VisitQuery(d as ILongRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as ITermRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 			});
 			VisitQuery(qd.GeoShape, visitor, (v, d) => v.Visit(d));
