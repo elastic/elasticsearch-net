@@ -27,9 +27,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.JsonNetSerializer", "Serializers\Nest.JsonNetSerializer\Nest.JsonNetSerializer.csproj", "{CDC8DEC8-3872-4337-9C40-9CDE5724BBDD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6C4A2627-AF22-4388-9DF7-7A9AEACFD635}"
-ProjectSection(SolutionItems) = preProject
-	Tests\Directory.build.props = Tests\Directory.build.props
-EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests\Tests.csproj", "{5B393962-7586-49BA-BD99-3B1E35F48E94}"
 EndProject
