@@ -52,6 +52,7 @@ namespace Nest
 		double? INumericRangeQuery.LessThanOrEqualTo { get; set; }
 		double? INumericRangeQuery.GreaterThan { get; set; }
 		double? INumericRangeQuery.LessThan { get; set; }
+
 		RangeRelation? INumericRangeQuery.Relation{ get; set; }
 
 		public NumericRangeQueryDescriptor<T> GreaterThan(double? from) => Assign(a => a.GreaterThan = from);

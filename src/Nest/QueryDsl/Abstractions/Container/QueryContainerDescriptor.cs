@@ -138,6 +138,9 @@ namespace Nest
 		public QueryContainer Range(Func<NumericRangeQueryDescriptor<T>, INumericRangeQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Range = query);
 
+		public QueryContainer LongRange(Func<LongRangeQueryDescriptor<T>, ILongRangeQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.Range = query);
+
 		/// <summary>
 		/// Matches documents with fields that have terms within a certain date range.
 		/// </summary>
