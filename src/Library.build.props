@@ -1,7 +1,5 @@
 <Project>
-  <!--
-  Sets up the common properties for all assemblies, Directory.build.props should work for this but Editor support seems flakey.
-  -->
+  <!-- Sets up the common properties for all Elastic assemblies -->
 	<PropertyGroup>
 		<!-- Default Version numbers -->
 		<CurrentVersion>6.0.0</CurrentVersion>

@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RelatedFiles", "RelatedFile
 		..\src\PublishArtifacts.build.props = ..\src\PublishArtifacts.build.props
 		..\src\Artifacts.build.props = ..\src\Artifacts.build.props
 		..\src\Library.build.props = ..\src\Library.build.props
+		Directory.build.props = Directory.build.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeGeneration", "CodeGeneration", "{93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}"
