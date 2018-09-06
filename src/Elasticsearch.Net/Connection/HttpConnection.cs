@@ -26,6 +26,8 @@ namespace Elasticsearch.Net
 		public bool IsBypassed(Uri host) => host.IsLoopback;
 	}
 
+
+	/// <summary> The default IConnection implementation. Uses <see cref="HttpClient"/>.</summary>
 	public class HttpConnection : IConnection
 	{
 		private readonly object _lock = new object();

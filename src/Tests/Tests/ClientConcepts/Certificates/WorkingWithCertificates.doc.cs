@@ -33,11 +33,10 @@ namespace Tests.ClientConcepts.Certificates
 		/** Imagine you deploy a web application that talks to Elasticsearch over HTTPS through NEST, and also uses some third party SOAP/WSDL endpoint;
 		* by setting
 		*/
-		public void ServerValidationCallback()
-		{
-			ServicePointManager.ServerCertificateValidationCallback +=
-				(sender, cert, chain, errors) => true;
-		}
+#if !DOTNETCORE
+		public void ServerValidationCallback() => ServicePointManager.ServerCertificateValidationCallback +=
+			(sender, cert, chain, errors) => true;
+#endif
 		/**
 		 * validation will not be performed for HTTPS connections to *both* Elasticsearch *and* that external web service.
 		 *
@@ -173,6 +172,7 @@ namespace Tests.ClientConcepts.Certificates
 		* the local CA certificate is part of the chain that was used to generate the servers key.
 		*/
 
+#if !DOTNETCORE
 		/**
 		 * ==== Client Certificates
 		 *
@@ -211,8 +211,10 @@ namespace Tests.ClientConcepts.Certificates
 
 			[I] public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 		}
+#endif
 	}
 
+#if !DOTNETCORE
 	/**
 	 * Or on a per request basis on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`
 	 */
@@ -261,4 +263,5 @@ namespace Tests.ClientConcepts.Certificates
 		{
 		}
 	}
+#endif
 }

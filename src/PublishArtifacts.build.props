@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+   Sets up the properties for assemblies we intent to push to a NuGet server 
+  -->
+
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
+  <PropertyGroup>
+
+    <SignAssembly Condition="'$(OS)' == 'Windows_NT'">true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+
+    <DoSourceLink></DoSourceLink>
+    <SourceLink Condition="'$(DoSourceLink)'!=''">$(BaseIntermediateOutputPath)\sl-$(MsBuildProjectName)-$(TargetFramework).json</SourceLink>
+    <!-- we need to referenced assemblies during the command line build so that ILRepack can pick them up -->
+    <CopyLocalLockFileAssemblies Condition="'$(TargetFramework)'=='netstandard2.0'">true</CopyLocalLockFileAssemblies>
+
+  </PropertyGroup>
+
+  <Target Name="GenerateSourceLink" BeforeTargets="CoreCompile" Condition="'$(DoSourceLink)'!=''">
+    <Delete Files="$(SourceLink)" Condition="Exists('$(SourceLink)')"/>
+    <Exec Command="git rev-parse HEAD" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="LatestCommit"/>
+    </Exec>
+    <Exec Command="git rev-parse --show-toplevel" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitRootFolder"/>
+    </Exec>
+    <WriteLinesToFile File="$(SourceLink)" Lines="{&quot;documents&quot;: { &quot;$([System.IO.Path]::GetFullPath('$(GitRootFolder)/').Replace('\','\\'))*&quot; : &quot;$(RepoUri)/$(LatestCommit)/*&quot; }}"/>
+  </Target>
+</Project>

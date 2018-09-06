@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -16,5 +17,4 @@
     <PackageReference Include="RazorLight.Unofficial" Version="2.0.0-beta1.1" />
     <!--<PackageReference Include="RazorLight" Version="2.0.0-beta1" />-->
   </ItemGroup>
-  <Import Project="..\..\outputpath.props" />
 </Project>

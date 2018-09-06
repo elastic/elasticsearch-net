@@ -22,7 +22,5 @@
 	{
 		public bool SourceSerializer { get; set; }
 		public bool TypedKeys { get; set; }
-		public bool OldConnection { get; set; }
 	}
-
 }

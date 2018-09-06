@@ -119,6 +119,8 @@ namespace DocGenerator.Buildalyzer
 			}
 		}
 
+
+
 		// Tweaks the project file a bit to ensure a succesfull build
 		private static XDocument TweakProjectDocument(XDocument projectDocument, string projectFolder)
 		{
@@ -128,10 +130,12 @@ namespace DocGenerator.Buildalyzer
 				if (att == null) continue;
 
 				var project = att.Value;
-				if (project.EndsWith("Clients.Common.targets"))
-					att.Value = Path.GetFullPath(Path.Combine(projectFolder, att.Value));
-				else if (project.EndsWith("outputpath.props"))
-					att.Value = Path.GetFullPath(Path.Combine(projectFolder, att.Value));
+
+				if (!ResolveKnownPropsPath(projectFolder, project, att, "PublishArtifacts.build.props"))
+				{
+					ResolveKnownPropsPath(projectFolder, project, att, "Artifacts.build.props");
+				}
+				ResolveKnownPropsPath(projectFolder, project, att, "Library.build.props");
 			}
 			// Add SkipGetTargetFrameworkProperties to every ProjectReference
 			foreach (var projectReference in projectDocument.GetDescendants("ProjectReference").ToArray())
@@ -147,6 +151,17 @@ namespace DocGenerator.Buildalyzer
 			}
 
 			return projectDocument;
+		}
+
+		private static bool ResolveKnownPropsPath(string projectFolder, string project, XAttribute att, string buildPropFile)
+		{
+			if (!project.Contains(buildPropFile)) return false;
+			var dir = new DirectoryInfo(projectFolder).Parent;
+			while (dir != null && dir.Name != "src")
+				dir = dir.Parent;
+			if (dir == null) return true;
+			att.Value = Path.GetFullPath(Path.Combine(dir.FullName, buildPropFile));
+			return false;
 		}
 
 		private ProjectCollection CreateProjectCollection()

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -17,5 +18,4 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.3.2" />
     <PackageReference Include="NuDoq" Version="1.2.5" />
   </ItemGroup>
-  <Import Project="..\..\outputpath.props" />
 </Project>

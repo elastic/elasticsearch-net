@@ -1,0 +1,28 @@
+<Project>
+  <!-- Sets up the common properties for all Elastic assemblies -->
+	<PropertyGroup>
+		<!-- Default Version numbers -->
+		<CurrentVersion>6.0.0</CurrentVersion>
+		<CurrentAssemblyVersion>6.0.0</CurrentAssemblyVersion>
+		<CurrentAssemblyFileVersion>6.0.0</CurrentAssemblyFileVersion>
+		<!-- Version and Informational reflect actual version -->
+		<Version>$(CurrentVersion)</Version>
+		<InformationalVersion>$(CurrentVersion)</InformationalVersion>
+		<!-- Assembly version is sticky to MAJOR.0.0.0 to avoid binding redirects because we strong name our assemblies -->
+		<AssemblyVersion>$(CurrentAssemblyVersion)</AssemblyVersion>
+		<!-- File version reflects actual version number without prelease since that not allowed in its struct -->
+		<FileVersion>$(CurrentAssemblyFileVersion)</FileVersion>
+
+		<DefineConstants Condition="'$(TargetFramework)'=='netstandard2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
+		<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.0'">$(DefineConstants);DOTNETCORE</DefineConstants>
+		<DefineConstants Condition="'$(TargetFramework)'=='netcoreapp2.1'">$(DefineConstants);DOTNETCORE</DefineConstants>
+
+		<RepoUri>https://raw.githubusercontent.com/elastic/elasticsearch-net</RepoUri>
+		<Authors>Elasticsearch BV</Authors>
+		<Copyright>Elasticsearch BV</Copyright>
+		<PackageProjectUrl>https://github.com/elastic/elasticsearch-net</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/elastic/elasticsearch-net/blob/master/license.txt</PackageLicenseUrl>
+		<ReleaseNotes>See https://github.com/elastic/elasticsearch-net/releases</ReleaseNotes>
+		<PackageIconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</PackageIconUrl>
+	</PropertyGroup>
+</Project>
