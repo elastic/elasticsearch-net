@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -10,5 +11,4 @@
     <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
     <PackageReference Include="BenchMarkDotNet" Version="0.11.0" />
   </ItemGroup>
-  <Import Project="..\..\outputpath.props" />
 </Project>
