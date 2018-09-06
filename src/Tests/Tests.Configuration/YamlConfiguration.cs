@@ -41,7 +41,6 @@ namespace Tests.Configuration
 			{
 				SourceSerializer = this.RandomBool("source_serializer", randomizer),
 				TypedKeys = this.RandomBool("typed_keys", randomizer),
-				OldConnection = this.RandomBool("old_connection", randomizer)
 			};
 		}
 

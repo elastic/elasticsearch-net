@@ -57,7 +57,7 @@ namespace Elasticsearch.Net
 
 		private static X509Certificate2 to2(X509Certificate certificate)
 		{
-			#if !FEATURE_HTTPWEBREQUEST
+			#if DOTNETCORE
 				return new X509Certificate2(certificate.Export(X509ContentType.Cert));
 			#else
 				return new X509Certificate2(certificate);

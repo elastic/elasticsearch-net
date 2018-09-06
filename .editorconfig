@@ -16,7 +16,7 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-[*.{md,markdown,json,js,csproj,fsproj,targets}]
+[*.{md,markdown,json,js,csproj,fsproj,targets,targets,props}]
 indent_style = space
 indent_size = 2
 
