@@ -39,9 +39,7 @@ namespace Nest
 			else
 			{
 				var dataContract = type.GetAttributes<DataContractAttribute>().FirstOrDefault();
-				typeName = dataContract != null
-					? dataContract.Name
-					: _connectionSettings.DefaultTypeNameInferrer(type);
+				typeName = dataContract?.Name ?? _connectionSettings.DefaultTypeNameInferrer(type);
 			}
 			if (typeName.IsNullOrEmpty()) throw new ArgumentNullException($"{type.FullName} resolved to an empty string or null");
 
