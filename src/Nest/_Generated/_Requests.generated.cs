@@ -242,6 +242,9 @@ namespace Nest
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
+		///<summary>Cancel tasks with specified parent node.</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
+		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters>
