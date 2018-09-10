@@ -62,7 +62,6 @@ module Projects =
             | Project p ->
                 match p with
                 | Nest -> "NEST"
-                | NestJsonNetSerializer -> "NEST.JsonNetSerializer"
                 | _ -> this.Name
             | _ -> this.Name
        
