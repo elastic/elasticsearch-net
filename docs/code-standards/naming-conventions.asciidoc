@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -147,8 +147,8 @@ var exceptions = new List<Type>
     nestAssembly.GetType("System.Runtime.Serialization.Formatters.FormatterAssemblyStyle", throwOnError: false),
     nestAssembly.GetType("Microsoft.CodeAnalysis.EmbeddedAttribute", throwOnError: false),
     nestAssembly.GetType("System.Runtime.CompilerServices.IsReadOnlyAttribute", throwOnError: false),
-#if DOTNETCORE
     typeof(SynchronizedCollection<>),
+#if DOTNETCORE
     nestAssembly.GetType("System.ComponentModel.Browsable", throwOnError: false)
 #endif
 };

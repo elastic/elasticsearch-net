@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -432,11 +432,11 @@ for property `C` on `B`
 
 [source,csharp]
 ----
-var newConnectionSettings = TestClient.CreateSettings(modifySettings: s => s
+var newConnectionSettings = new TestConnectionSettings()
     .DefaultMappingFor<A>(m => m
         .PropertyName(p => p.C, "d")
-    )
-);
+    );
+
 var newClient = new ElasticClient(newConnectionSettings);
 
 fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));
@@ -502,15 +502,10 @@ class Precedence
 }
 ----
 <1> Even though this property has various attributes applied we provide an override on ConnectionSettings later that takes precedence.
-
 <2> Has a `TextAttribute`, `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `TextAttribute` takes precedence.
-
 <3> Has both a `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `PropertyNameAttribute` takes precedence.
-
 <4> `JsonPropertyAttribute` takes precedence.
-
 <5> This property we are going to hard code in our custom serializer to resolve to ask.
-
 <6> We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
 
 We'll create a custom `IPropertyMappingProvider` that renames any property named `AskSerializer` to `ask`.
@@ -556,9 +551,7 @@ usingSettings.Expect("data").ForField(Field<Precedence>(p => p.DataMember));
 usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
 ----
 <1> Rename on the mapping for the `Precedence` type
-
 <2> Default inference for a field, if no other rules apply or are specified for a given field
-
 <3> Hook up the custom `IPropertyMappingProvider`
 
 The same naming rules also apply when indexing a document 

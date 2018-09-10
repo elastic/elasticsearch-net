@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -155,6 +155,12 @@ response.ShouldBeValid();
 var composite = response.Aggregations.Composite("my_buckets");
 composite.Should().NotBeNull();
 composite.Buckets.Should().NotBeNullOrEmpty();
+composite.AfterKey.Should().NotBeNull();
+if (TestConfiguration.Instance.InRange(">=6.3.0"))
+{
+    composite.AfterKey.Should().HaveCount(3)
+        .And.ContainKeys("branches", "started", "branch_count");
+}
 foreach (var item in composite.Buckets)
 {
     var key = item.Key;

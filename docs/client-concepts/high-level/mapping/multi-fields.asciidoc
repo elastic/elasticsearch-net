@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -38,7 +38,7 @@ POCO type is a `text` datatype with multi fields including a `keyword` sub field
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Person>(m => m
             .AutoMap()
@@ -75,7 +75,7 @@ as well as for structured search, sorting and aggregations
 
 [source,csharp]
 ----
-var searchResponse = client.Search<Person>(s => s
+var searchResponse = _client.Search<Person>(s => s
     .Query(q => q
         .Match(m => m
             .Field(f => f.Name)
@@ -136,7 +136,7 @@ Multi fields can be created on a mapping using the `.Fields()` method within a f
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Person>(m => m
             .Properties(p => p
@@ -163,9 +163,7 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
             );
 ----
 <1> Use the stop analyzer on this sub field
-
 <2> Use a custom analyzer named "named_shingles" that is configured in the index
-
 <3> Index as not analyzed
 
 [source,javascript]

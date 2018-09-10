@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -88,7 +88,6 @@ singleIndexFromIndexName.Match(
 );
 ----
 <1> `_all` will override any specific index names here
-
 <2> The `Project` type has been mapped to a specific index name using <<index-name-type-mapping,`.DefaultMappingFor<Project>`>>
 
 [[nest-indices]]
@@ -121,9 +120,7 @@ ISearchRequest singleTypedRequest = new SearchDescriptor<Project>().Index(single
 var invalidSingleString = Index("name1, name2"); <3>
 ----
 <1> specifying a single index using a string
-
 <2> specifying a single index using a type
-
 <3> an **invalid** single index name
 
 ===== Multiple indices
@@ -149,9 +146,7 @@ manyStringRequest = new SearchDescriptor<Project>().Type(new[] { "name1", "name2
 ((IUrlParameter)manyStringRequest.Type).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
 ----
 <1> specifying multiple indices using strings
-
 <2> specifying multiple indices using types
-
 <3> The index names here come from the Connection Settings passed to `TestClient`. See the documentation on <<index-name-inference, Index Name Inference>> for more details.
 
 ===== All Indices

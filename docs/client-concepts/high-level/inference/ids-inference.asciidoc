@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -99,6 +99,17 @@ WithConnectionSettings(x => x
         .IdProperty(p => p.OtherName)
     )
 ).Expect("y").WhenInferringIdOn(dto);
+----
+
+DefaultMappingFor also has a non generic overload for the more dynamic use-cases.
+
+[source,csharp]
+----
+WithConnectionSettings(x => x
+    .DefaultMappingFor(typeof(MyDTO), m => m
+        .IdProperty(typeof(MyDTO).GetProperty(nameof(MyDTO.Name)).Name)
+    )
+).Expect("x").WhenInferringIdOn(dto);
 ----
 
 ==== Using the ElasticsearchType attribute

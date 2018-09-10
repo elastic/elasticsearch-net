@@ -7,26 +7,28 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/QueryDsl/TermLevel/Regexp/RegexpQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/QueryDsl/TermLevel/Range/LongRangeQueryUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[regexp-query-usage]]
-=== Regexp Query Usage
+[[long-range-query-usage]]
+=== Long Range Query Usage
 
 ==== Fluent DSL example
 
 [source,csharp]
 ----
 q
-.Regexp(c => c
+.LongRange(c => c
     .Name("named_query")
     .Boost(1.1)
     .Field(p => p.Description)
-    .Value("s.*y")
-    .Flags("INTERSECTION|COMPLEMENT|EMPTY")
-    .MaximumDeterminizedStates(20000)
+    .GreaterThan(636634079999999999)
+    .GreaterThanOrEquals(636634080000000000)
+    .LessThan(636634080000000000)
+    .LessThanOrEquals(636634079999999999)
+    .Relation(RangeRelation.Within)
 )
 ----
 
@@ -34,14 +36,16 @@ q
 
 [source,csharp]
 ----
-new RegexpQuery
+new LongRangeQuery
 {
     Name = "named_query",
     Boost = 1.1,
     Field = "description",
-    Value = "s.*y",
-    Flags = "INTERSECTION|COMPLEMENT|EMPTY",
-    MaximumDeterminizedStates = 20000
+    GreaterThan = 636634079999999999,
+    GreaterThanOrEqualTo = 636634080000000000,
+    LessThan = 636634080000000000,
+    LessThanOrEqualTo = 636634079999999999,
+    Relation = RangeRelation.Within
 }
 ----
 
@@ -49,13 +53,15 @@ new RegexpQuery
 .Example json output
 ----
 {
-  "regexp": {
+  "range": {
     "description": {
       "_name": "named_query",
       "boost": 1.1,
-      "flags": "INTERSECTION|COMPLEMENT|EMPTY",
-      "max_determinized_states": 20000,
-      "value": "s.*y"
+      "gt": 636634079999999999,
+      "gte": 636634080000000000,
+      "lt": 636634080000000000,
+      "lte": 636634079999999999,
+      "relation": "within"
     }
   }
 }
