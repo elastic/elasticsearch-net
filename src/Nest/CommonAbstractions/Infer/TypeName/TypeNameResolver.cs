@@ -38,7 +38,7 @@ namespace Nest
 			else
 			{
 				var dataContract = type.GetAttributes<DataContractAttribute>().FirstOrDefault();
-				if (dataContract != null) typeName = dataContract.Name;
+				if (dataContract?.Name != null) typeName = dataContract.Name;
 				else
 				{
 					var inferredType =_connectionSettings.DefaultTypeNameInferrer(type);
