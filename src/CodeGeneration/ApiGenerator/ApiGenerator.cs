@@ -194,7 +194,7 @@ namespace ApiGenerator
 
 		private static void GenerateRawDispatch(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated/_LowLevelDispatch.Generated.cs";
+			var targetFile = CodeConfiguration.NestFolder + @"_Generated/_LowLevelDispatch.generated.cs";
 			var source = DoRazor(nameof(GenerateRawDispatch), File.ReadAllText(CodeConfiguration.ViewFolder + @"_LowLevelDispatch.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
@@ -208,14 +208,14 @@ namespace ApiGenerator
 
 		private static void GenerateDescriptors(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Descriptors.Generated.cs";
+			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Descriptors.generated.cs";
 			var source = DoRazor(nameof(GenerateDescriptors), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Descriptors.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
 
 		private static void GenerateRequests(RestApiSpec model)
 		{
-			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Requests.Generated.cs";
+			var targetFile = CodeConfiguration.NestFolder + @"_Generated\_Requests.generated.cs";
 			var source = DoRazor(nameof(GenerateRequests), File.ReadAllText(CodeConfiguration.ViewFolder + @"_Requests.Generated.cshtml"), model);
 			File.WriteAllText(targetFile, source);
 		}
