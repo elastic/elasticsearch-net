@@ -31,8 +31,8 @@ module Release =
         |> Seq.iter(fun p ->
             CreateDir Paths.NugetOutput
 
+            let nuspec = (sprintf @"build/%s.nuspec" p.Nuspec)
             let name = p.Name;
-            let nuspec = (sprintf @"build/%s.nuspec" name)
             let nugetOutFile =  Paths.Output(sprintf "%s.%s.nupkg" name (Versioning.CurrentVersion.ToString()))
 
             let nextMajorVersion = 
