@@ -16,16 +16,18 @@
 		<copyright>2014-$year$ Elasticsearch BV</copyright>
 		<tags>elasticsearch,elastic,search,lucene,nest</tags>
 		<dependencies>
-			<group targetFramework=".NETStandard2.0">
+			<group targetFramework="net461">
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
-				
-				<!-- since we no longer reference JSON.NET (internalized) we do need to ship with its System references -->
-				<dependency id="System.ComponentModel.TypeConverter" version="[4.3.0, )"/>
-				<dependency id="System.Runtime.Serialization.Primitives" version="[4.3.0, )"/>
+			</group>
+			<group targetFramework="netstandard2.0">
+				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
+		<file src="output\Nest\net461\Nest.dll" target="lib\net461"/>
+		<file src="output\Nest\net461\Nest.XML" target="lib\net461"/>
+
 		<file src="output\Nest\netstandard2.0\Nest.dll" target="lib\netstandard2.0"/>
 		<file src="output\Nest\netstandard2.0\Nest.xml" target="lib\netstandard2.0"/>
 	</files>

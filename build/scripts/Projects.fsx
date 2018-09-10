@@ -56,6 +56,15 @@ module Projects =
                 match p with
                 | Tests -> "Tests"
                 | DocGenerator -> "DocGenerator"
+                
+        member this.Nuspec =
+            match this with
+            | Project p ->
+                match p with
+                | Nest -> "NEST"
+                | NestJsonNetSerializer -> "NEST.JsonNetSerializer"
+                | _ -> this.Name
+            | _ -> this.Name
        
         static member TryFindName (name: string) =
             DotNetProject.All
