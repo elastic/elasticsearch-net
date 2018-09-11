@@ -236,7 +236,7 @@ From the package manager console:
 
 	PM> Install-Package Elasticsearch.Net
 
-or by searching for `Elastcsearch.Net` in the package manager UI.
+or by searching for `Elasticsearch.Net` in the package manager UI.
 
 ### Connecting
 
