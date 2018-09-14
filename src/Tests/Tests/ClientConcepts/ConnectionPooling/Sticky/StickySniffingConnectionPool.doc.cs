@@ -167,6 +167,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 					{ BadResponse, 9202},
 					{ BadResponse, 9203},
 					{ MaxRetriesReached },
+					{ FailedOverAllNodes },
 					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
 				},
 				/** After all our registered nodes are marked dead we want to sample a single dead node

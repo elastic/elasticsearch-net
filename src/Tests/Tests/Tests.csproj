@@ -2,7 +2,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\Artifacts.build.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>
+    <!--<TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>-->
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <VersionPrefix>6.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
