@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Nest;
 using Tests.Configuration;
 using Tests.Core.Client;
@@ -36,11 +39,18 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		public void SeedNode()
 		{
 			if (!TestClient.Configuration.ForceReseed && this.AlreadySeeded()) return;
-			// Ensure a clean slate by deleting everything regardless of whether they may already exist
-			this.ClusterSettings();
-			this.DeleteIndicesAndTemplates();
-			// and now recreate everything
-			this.CreateIndicesAndSeedIndexData();
+
+			var t = Task.Run(async () => await this.SeedNodeAsync());
+
+			t.Wait(TimeSpan.FromSeconds(40));
+		}
+		public void SeedNodeNoData()
+		{
+			if (!TestClient.Configuration.ForceReseed && this.AlreadySeeded()) return;
+
+			var t = Task.Run(async () => await this.SeedNodeNoDataAsync());
+
+			t.Wait(TimeSpan.FromSeconds(40));
 		}
 
 		// Sometimes we run against an manually started elasticsearch when
@@ -48,10 +58,27 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		// If raw_fields exists assume this cluster is already seeded.
 		private bool AlreadySeeded() => this.Client.IndexTemplateExists(TestsIndexTemplateName).Exists;
 
-		public void ClusterSettings()
+		private async Task SeedNodeAsync()
+		{
+			// Ensure a clean slate by deleting everything regardless of whether they may already exist
+			await this.DeleteIndicesAndTemplatesAsync();
+			await this.ClusterSettingsAsync();
+			// and now recreate everything
+			await this.CreateIndicesAndSeedIndexDataAsync();
+		}
+		private async Task SeedNodeNoDataAsync()
+		{
+			// Ensure a clean slate by deleting everything regardless of whether they may already exist
+			await this.DeleteIndicesAndTemplatesAsync();
+			await this.ClusterSettingsAsync();
+			// and now recreate everything
+			await this.CreateIndicesAsync();
+		}
+
+		public async Task ClusterSettingsAsync()
 		{
 			if (TestConfiguration.Instance.InRange("<6.1.0")) return;
-			var putSettingsResponse = this.Client.ClusterPutSettings(s=>s
+			var putSettingsResponse = await this.Client.ClusterPutSettingsAsync(s=>s
 				.Transient(t=>t
 					.Add("cluster.routing.use_adaptive_replica_selection", true)
 				)
@@ -60,109 +87,111 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			putSettingsResponse.ShouldBeValid();
 		}
 
-		public void DeleteIndicesAndTemplates()
+		public async Task DeleteIndicesAndTemplatesAsync()
 		{
-			if (this.Client.IndexTemplateExists(TestsIndexTemplateName).Exists)
-				this.Client.DeleteIndexTemplate(TestsIndexTemplateName);
-			if (this.Client.IndexExists(Infer.Indices<Project>()).Exists)
-				this.Client.DeleteIndex(typeof(Project));
-			if (this.Client.IndexExists(Infer.Indices<Developer>()).Exists)
-				this.Client.DeleteIndex(typeof(Developer));
-			if (this.Client.IndexExists(Infer.Indices<ProjectPercolation>()).Exists)
-				this.Client.DeleteIndex(typeof(ProjectPercolation));
-		}
-
-		public void CreateIndices()
-		{
-			this.CreateIndexTemplate();
-			this.CreateProjectIndex();
-			this.CreateDeveloperIndex();
-			this.CreatePercolatorIndex();
-		}
-
-		private void SeedIndexData()
-		{
-			this.Client.IndexMany(Project.Projects);
-			this.Client.IndexMany(Developer.Developers);
-			this.Client.IndexDocument(new ProjectPercolation
+			var tasks = new Task[]
 			{
-				Id = "1",
-				Query = new MatchAllQuery()
-			});
-			this.Client.Bulk(b => b
-				.IndexMany(
-					CommitActivity.CommitActivities,
-					(d, c) => d.Document(c).Routing(c.ProjectName)
-				)
-			);
-			this.Client.Refresh(Nest.Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
+				this.Client.DeleteIndexTemplateAsync(TestsIndexTemplateName),
+				this.Client.DeleteIndexAsync(typeof(Project)),
+				this.Client.DeleteIndexAsync(typeof(Developer)),
+				this.Client.DeleteIndexAsync(typeof(ProjectPercolation))
+			};
+			await Task.WhenAll(tasks);
 		}
 
-		private void CreateIndicesAndSeedIndexData()
+		private async Task CreateIndicesAndSeedIndexDataAsync()
 		{
-			this.CreateIndices();
-			this.SeedIndexData();
+			await this.CreateIndicesAsync();
+			await this.SeedIndexDataAsync();
 		}
 
-		private void CreateIndexTemplate()
+		public async Task CreateIndicesAsync()
 		{
-			var putTemplateResult = this.Client.PutIndexTemplate(new PutIndexTemplateRequest(TestsIndexTemplateName)
+			var indexTemplateResponse = await this.CreateIndexTemplateAsync();
+			indexTemplateResponse.ShouldBeValid();
+
+			var tasks = new []
 			{
-				IndexPatterns = new[] {"*"},
-				Settings = this.IndexSettings
+				this.CreateProjectIndexAsync(),
+				this.CreateDeveloperIndexAsync(),
+				this.CreatePercolatorIndexAsync(),
+			};
+			await Task.WhenAll(tasks).ContinueWith(t =>
+			{
+				foreach(var r in t.Result)
+					r.ShouldBeValid();
 			});
-			putTemplateResult.ShouldBeValid();
 		}
 
-		private void CreateDeveloperIndex()
+		private async Task SeedIndexDataAsync()
 		{
-			var createDeveloperIndex = this.Client.CreateIndex(Infer.Index<Developer>(), c => c
-				.Mappings(map => map
-					.Map<Developer>(m => m
-						.AutoMap()
-						.Properties(DeveloperProperties)
+			var tasks = new Task[]
+			{
+				this.Client.IndexManyAsync(Project.Projects),
+				this.Client.IndexManyAsync(Developer.Developers),
+				this.Client.IndexDocumentAsync(new ProjectPercolation
+				{
+					Id = "1",
+					Query = new MatchAllQuery()
+				}),
+				this.Client.BulkAsync(b => b
+					.IndexMany(
+						CommitActivity.CommitActivities,
+						(d, c) => d.Document(c).Routing(c.ProjectName)
 					)
 				)
-			);
-			createDeveloperIndex.ShouldBeValid();
+			};
+			await Task.WhenAll(tasks);
+			await this.Client.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
 		}
 
-		private void CreateProjectIndex()
+		private Task<IPutIndexTemplateResponse> CreateIndexTemplateAsync() => this.Client.PutIndexTemplateAsync(new PutIndexTemplateRequest(TestsIndexTemplateName)
 		{
-			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
-				.Settings(settings => settings
-					.Analysis(ProjectAnalysisSettings)
+			IndexPatterns = new[] {"*"},
+			Settings = this.IndexSettings
+		});
+
+		private Task<ICreateIndexResponse> CreateDeveloperIndexAsync() => this.Client.CreateIndexAsync(Infer.Index<Developer>(), c => c
+			.Mappings(map => map
+				.Map<Developer>(m => m
+					.AutoMap()
+					.Properties(DeveloperProperties)
 				)
-				.Aliases(aliases => aliases
-					.Alias(ProjectsAliasName)
-					.Alias(ProjectsAliasFilter, a => a
-						.Filter<Project>(f => f.Term(p => p.Join, Infer.Relation<Project>()))
-					)
-					.Alias(CommitsAliasFilter, a => a
-						.Filter<CommitActivity>(f => f.Term(p => p.Join, Infer.Relation<CommitActivity>()))
-					)
+			)
+		);
+
+		private Task<ICreateIndexResponse> CreateProjectIndexAsync() => this.Client.CreateIndexAsync(typeof(Project), c => c
+			.Settings(settings => settings
+				.Analysis(ProjectAnalysisSettings)
+			)
+			.Aliases(aliases => aliases
+				.Alias(ProjectsAliasName)
+				.Alias(ProjectsAliasFilter, a => a
+					.Filter<Project>(f => f.Term(p => p.Join, Infer.Relation<Project>()))
 				)
-				.Mappings(map => map
-					.Map<Project>(m => m
-						.RoutingField(r=>r.Required())
-						.AutoMap()
-						.Properties(ProjectProperties)
-						.Properties<CommitActivity>(props => props
-							.Object<Developer>(o => o
-								.AutoMap()
-								.Name(p => p.Committer)
-								.Properties(DeveloperProperties)
-							)
-							.Text(t => t
-								.Name(p => p.ProjectName)
-								.Index(false)
-							)
+				.Alias(CommitsAliasFilter, a => a
+					.Filter<CommitActivity>(f => f.Term(p => p.Join, Infer.Relation<CommitActivity>()))
+				)
+			)
+			.Mappings(map => map
+				.Map<Project>(m => m
+					.RoutingField(r=>r.Required())
+					.AutoMap()
+					.Properties(ProjectProperties)
+					.Properties<CommitActivity>(props => props
+						.Object<Developer>(o => o
+							.AutoMap()
+							.Name(p => p.Committer)
+							.Properties(DeveloperProperties)
+						)
+						.Text(t => t
+							.Name(p => p.ProjectName)
+							.Index(false)
 						)
 					)
 				)
-			);
-			createProjectIndex.ShouldBeValid();
-		}
+			)
+		);
 
 		public static IAnalysis ProjectAnalysisSettings(AnalysisDescriptor analysis)
 		{
@@ -190,23 +219,18 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 		}
 
 
-		private void CreatePercolatorIndex()
-		{
-			var createPercolatedIndex = this.Client.CreateIndex(typeof(ProjectPercolation), c => c
-				.Settings(s => s
-					.AutoExpandReplicas("0-all")
-					.Analysis(DefaultSeeder.ProjectAnalysisSettings)
+		private Task<ICreateIndexResponse> CreatePercolatorIndexAsync() => this.Client.CreateIndexAsync(typeof(ProjectPercolation), c => c
+			.Settings(s => s
+				.AutoExpandReplicas("0-all")
+				.Analysis(DefaultSeeder.ProjectAnalysisSettings)
+			)
+			.Mappings(map => map
+				.Map<ProjectPercolation>(m => m
+					.AutoMap()
+					.Properties(PercolatedQueryProperties)
 				)
-				.Mappings(map => map
-					.Map<ProjectPercolation>(m => m
-						.AutoMap()
-						.Properties(PercolatedQueryProperties)
-					)
-				)
-			);
-
-			createPercolatedIndex.ShouldBeValid();
-		}
+			)
+		);
 
 		public static PropertiesDescriptor<TProject> ProjectProperties<TProject>(PropertiesDescriptor<TProject> props)
 			where TProject : Project => props

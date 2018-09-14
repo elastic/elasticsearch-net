@@ -5,11 +5,6 @@ namespace Tests.Profiling.Framework
 {
 	public class ProfilingCluster : ClientTestClusterBase
 	{
-		protected override void SeedCluster()
-		{
-			var seeder = new DefaultSeeder(this.Client);
-			seeder.DeleteIndicesAndTemplates();
-			seeder.CreateIndices();
-		}
+		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNodeNoData();
 	}
 }

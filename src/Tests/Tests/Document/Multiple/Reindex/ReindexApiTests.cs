@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive.Linq;
 using System.Threading;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
@@ -11,33 +9,17 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
 
 namespace Tests.Document.Multiple.Reindex
 {
 	public class ReindexCluster : ClientTestClusterBase
 	{
-		protected override void SeedCluster()
-		{
-			var seeder = new DefaultSeeder(this.Client);
-			seeder.DeleteIndicesAndTemplates();
-			seeder.CreateIndices();
-		}
+		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNodeNoData();
 	}
 
 	public class ManualReindexCluster : ClientTestClusterBase
 	{
-		protected override void SeedCluster()
-		{
-			var seeder = new DefaultSeeder(this.Client);
-			seeder.DeleteIndicesAndTemplates();
-			seeder.CreateIndices();
-		}
+		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNodeNoData();
 	}
 
 	public class ReindexApiTests : IClusterFixture<ManualReindexCluster>
