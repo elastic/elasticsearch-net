@@ -19,6 +19,7 @@ namespace Tests.Document.Multiple.BulkAll
 		protected class SmallObject
 		{
 			public int Id { get; set; }
+			public string Number { get; set; }
 		}
 
 		protected IElasticClient Client { get; }
@@ -31,13 +32,14 @@ namespace Tests.Document.Multiple.BulkAll
 				yield return new SmallObject() { Id = i };
 		}
 
-		protected async Task CreateIndexAsync(string indexName, int numberOfShards)
+		protected async Task CreateIndexAsync(string indexName, int numberOfShards, Func<MappingsDescriptor, IPromise<IMappings>> mappings = null)
 		{
 			var result = await this.Client.CreateIndexAsync(indexName, s => s
 				.Settings(settings => settings
 					.NumberOfShards(numberOfShards)
 					.NumberOfReplicas(0)
 				)
+				.Mappings(mappings)
 			);
 			result.Should().NotBeNull();
 			result.ShouldBeValid();

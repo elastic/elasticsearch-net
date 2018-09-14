@@ -21,6 +21,7 @@ namespace Nest
 		private readonly CancellationToken _compositeCancelToken;
 		private readonly CancellationTokenSource _compositeCancelTokenSource;
 		private readonly Func<IBulkResponseItem, T, bool> _retryPredicate;
+		private Action<IBulkResponseItem, T> _droppedDocumentCallBack;
 
 		public BulkAllObservable(
 			IElasticClient client,
@@ -34,6 +35,7 @@ namespace Nest
 			this._backOffTime = (this._partionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? CoordinatedRequestDefaults.BulkAllBackOffTimeDefault);
 			this._bulkSize = this._partionedBulkRequest.Size ?? CoordinatedRequestDefaults.BulkAllSizeDefault;
 			this._retryPredicate = this._partionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
+			this._droppedDocumentCallBack = this._partionedBulkRequest.DroppedDocumentCallback ?? DroppedDocumentCallbackDefault;
 			this._maxDegreeOfParallelism = _partionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 			this._compositeCancelToken = this._compositeCancelTokenSource.Token;
@@ -116,10 +118,15 @@ namespace Nest
 
 			this._compositeCancelToken.ThrowIfCancellationRequested();
 
-			var retryDocuments = response.Items.Zip(buffer, (i, d) => new {i, d})
+			var documentsWithResponse = response.Items.Zip(buffer, (i, d) => new {i, d}).ToList();
+
+			this.HandleDroppedDocuments(documentsWithResponse, response);
+
+			var retryDocuments = documentsWithResponse
 				.Where(x=> !response.IsValid && this._retryPredicate(x.i, x.d))
 				.Select(x => x.d)
 				.ToList();
+
 
 			if (retryDocuments.Count > 0 && backOffRetries < this._backOffRetries)
 			{
@@ -134,10 +141,30 @@ namespace Nest
 				throw Throw($"Bulk indexing failed and after retrying {backOffRetries} times", response.ApiCall);
 			}
 			this._partionedBulkRequest.BackPressure?.Release();
-			return new BulkAllResponse {Retries = backOffRetries, Page = page};
+			return new BulkAllResponse { Retries = backOffRetries, Page = page };
+		}
+
+		private void HandleDroppedDocuments(List<> documentsWithResponse, IBulkResponse response)
+		{
+			var droppedDocuments = documentsWithResponse
+				.Where(x => !response.IsValid && !this._retryPredicate(x.i, x.d))
+				.ToList();
+			if (droppedDocuments.Count > 0 && !this._partionedBulkRequest.ContinueAfterDroppedDocuments)
+			{
+				this._incrementFailed();
+				this._partionedBulkRequest.BackPressure?.Release();
+				throw Throw($"BulkAll halted after receiving failures that can not be retried from _bulk", response.ApiCall);
+			}
+			else if (droppedDocuments.Count > 0 && this._partionedBulkRequest.ContinueAfterDroppedDocuments)
+			{
+				foreach (var dropped in droppedDocuments)
+					this._droppedDocumentCallBack(dropped.i, dropped.d);
+			}
 		}
 
 		private static bool RetryBulkActionPredicate(IBulkResponseItem bulkResponseItem, T d) => bulkResponseItem.Status == 429;
+
+		private static void DroppedDocumentCallbackDefault(IBulkResponseItem bulkResponseItem, T d) { }
 
 		public bool IsDisposed { get; private set; }
 

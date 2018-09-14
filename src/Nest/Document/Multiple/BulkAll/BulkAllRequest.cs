@@ -73,6 +73,20 @@ namespace Nest
 		/// A predicate which controls which documents should be retried, defaults to failed bulk items with status code 429
 		/// </summary>
 		Func<IBulkResponseItem, T, bool> RetryDocumentPredicate { get; set; }
+
+		/// <summary>
+		/// Halt the bulk all request if any of the documents returned is a failure that can not be retried.
+		/// When true, will feed dropped documents to <see cref="DroppedDocumentCallback"/>
+		/// </summary>
+		bool ContinueAfterDroppedDocuments { get; set; }
+
+		/// <summary>
+		/// If <see cref="ContinueAfterDroppedDocuments"/> is set to true dropped messages will be fed through
+		/// this callback. Use this if you don't expect many failures and want to feed these dropped messages in a dead letter queue
+		/// for instance.
+		/// </summary>
+		Action<IBulkResponseItem, T> DroppedDocumentCallback { get; set; }
+
 	}
 
 	public class BulkAllRequest<T>  : IBulkAllRequest<T>
@@ -108,9 +122,12 @@ namespace Nest
 		public Action<BulkDescriptor, IList<T>> BufferToBulk { get; set; }
 		/// <inheritdoc />
 		public ProducerConsumerBackPressure BackPressure { get; set; }
-
 		/// <inheritdoc />
 		public Func<IBulkResponseItem, T, bool> RetryDocumentPredicate { get; set; }
+		/// <inheritdoc />
+		public bool ContinueAfterDroppedDocuments { get; set; }
+		/// <inheritdoc />
+		public Action<IBulkResponseItem, T> DroppedDocumentCallback { get; set; }
 
 		public BulkAllRequest(IEnumerable<T> documents)
 		{
@@ -141,6 +158,8 @@ namespace Nest
 		Action<BulkDescriptor, IList<T>>  IBulkAllRequest<T>.BufferToBulk { get; set; }
 		ProducerConsumerBackPressure IBulkAllRequest<T>.BackPressure { get; set; }
 		Func<IBulkResponseItem, T, bool> IBulkAllRequest<T>.RetryDocumentPredicate { get; set; }
+		bool IBulkAllRequest<T>.ContinueAfterDroppedDocuments { get; set; }
+		Action<IBulkResponseItem, T> IBulkAllRequest<T>.DroppedDocumentCallback { get; set; }
 
 		public BulkAllDescriptor(IEnumerable<T> documents)
 		{
@@ -208,6 +227,17 @@ namespace Nest
 		/// <param name="backPressureFactor">The maximum amplification back pressure of the greedier part of the producer consumer pipeline</param>
 		public BulkAllDescriptor<T> BackPressure(int maxConcurrency, int? backPressureFactor = null) =>
 			Assign(a => a.BackPressure = new ProducerConsumerBackPressure(backPressureFactor, maxConcurrency));
+
+		/// <inheritdoc cref="IBulkAllRequest{T}.ContinueAfterDroppedDocuments" />
+		public BulkAllDescriptor<T> ContinueAfterDroppedDocuments(bool proceed = true) => Assign(p => p.ContinueAfterDroppedDocuments = proceed);
+
+		/// <summary>
+		/// If <see cref="ContinueAfterDroppedDocuments"/> is set to false (not the default) dropped messages will be fed through
+		/// this callback. Use this if you don't expect many failures and want to feed these dropped messages in a dead letter queue
+		/// for instance.
+		/// </summary>
+		public BulkAllDescriptor<T> DroppedDocumentCallback(Action<IBulkResponseItem, T> callback) =>
+			Assign(p => p.DroppedDocumentCallback = callback);
 
 	}
 }
