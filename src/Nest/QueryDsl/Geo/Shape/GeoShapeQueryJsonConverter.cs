@@ -95,7 +95,7 @@ namespace Nest
 		}
 
 		private static IGeoShapeQuery ParseIndexedShapeQuery(JToken indexedShape) =>
-			new GeoShapeQuery { IndexedShape = indexedShape.ToObject<FieldLookup>()};
+			new GeoShapeQuery { IndexedShape = indexedShape.ToObject<FieldLookup>() };
 
 		private static IGeoShapeQuery ParseShapeQuery(JToken shape, JsonSerializer serializer)
 		{
