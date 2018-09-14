@@ -15,7 +15,9 @@ namespace Tests.Document.Multiple.BulkAll
 {
 	public class BulkOnErrorApiTests : BulkAllApiTestsBase
 	{
-		private const int Size = 100, Pages = 3, NumberOfDocuments = Size * Pages, NumberOfShards = 1, FailAfterPage = 2;
+		private const int Size = 100, Pages = 3, NumberOfShards = 1, FailAfterPage = 2,
+			// last page will have some errors we don't need a 100 exceptions printed on console out though :)
+			NumberOfDocuments = (Size * (Pages - 1)) + 2;
 
 		public BulkOnErrorApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -66,7 +68,8 @@ namespace Tests.Document.Multiple.BulkAll
 			var index = CreateIndexName();
 			var documents = await this.CreateIndexAndReturnDocuments(index);
 			var seenPages = 0;
-			var badDocumentIds = new List<int>(Size);
+			var expectedBadDocuments = NumberOfDocuments - (Size * FailAfterPage);
+			var badDocumentIds = new List<int>(expectedBadDocuments);
 			var observableBulk = this.KickOff(index, documents, r => r
 				.ContinueAfterDroppedDocuments(true)
 				.DroppedDocumentCallback((i, d) =>
@@ -81,8 +84,43 @@ namespace Tests.Document.Multiple.BulkAll
 
 			seenPages.Should().Be(3);
 			badDocumentIds.Should().NotBeEmpty()
-				.And.HaveCount(Size)
+				.And.HaveCount(expectedBadDocuments)
 				.And.OnlyContain(id => id >= Size * FailAfterPage);
+		}
+
+		[I] public async Task BadBulkRequestFeedsToOnError()
+		{
+			var index = CreateIndexName();
+			var documents = await this.CreateIndexAndReturnDocuments(index);
+			var seenPages = 0;
+			var badUris = new[] {new Uri("http://test.example:9201"), new Uri("http://test.example:9202")};
+			var pool = new StaticConnectionPool(badUris);
+			var badClient = new ElasticClient(new ConnectionSettings(pool));
+			var observableBulk = badClient.BulkAll(documents, f => f
+				.MaxDegreeOfParallelism(8)
+				.BackOffTime(TimeSpan.FromSeconds(10))
+				.BackOffRetries(2)
+				.Size(Size)
+				.RefreshOnCompleted()
+				.Index(index)
+			);
+			Exception ex = null;
+			var handle = new ManualResetEvent(false);
+			using (observableBulk.Subscribe(
+				b => Interlocked.Increment(ref seenPages),
+				e =>
+				{
+					ex = e;
+					handle.Set();
+				},
+				() => handle.Set()
+			))
+			{
+				handle.WaitOne(TimeSpan.FromSeconds(60));
+				seenPages.Should().Be(0);
+				var clientException = ex.Should().NotBeNull().And.BeOfType<ElasticsearchClientException>().Subject;
+				clientException.Message.Should().StartWith("BulkAll halted after attempted bulk failed over all the active nodes");
+			}
 		}
 
 		private BulkAllObservable<SmallObject> KickOff(
