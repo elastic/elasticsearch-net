@@ -30,7 +30,7 @@ namespace Tests.Search
 			Value = Project.TypeName
 		};
 
-		protected object ProjectFilterExpectedJson = new {term = new {field = "name", value = Project.TypeName}};
+		protected object ProjectFilterExpectedJson = new {term = new {name = new {value = Project.TypeName}}};
 
 	}
 }

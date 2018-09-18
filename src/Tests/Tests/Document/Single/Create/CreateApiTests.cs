@@ -55,6 +55,7 @@ namespace Tests.Document.Single.Create
 			new
 			{
 				name = CallIsolatedValue,
+				type = Project.TypeName,
 				join = Document.Join.ToAnonymousObject(),
 				state = "Stable",
 				visibility = "Public",

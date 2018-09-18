@@ -94,6 +94,7 @@ namespace Tests.Domain
 		private static readonly object InstanceAnonymousDefault = new
 		{
 			name = Projects.First().Name,
+			type = Project.TypeName,
 			join = Instance.Join.ToAnonymousObject(),
 			state = "BellyUp",
 			visibility = "Public",
@@ -107,6 +108,7 @@ namespace Tests.Domain
 		private static readonly object InstanceAnonymousSourceSerializer = new
 		{
 			name = Projects.First().Name,
+			type = Project.TypeName,
 			join = Instance.Join.ToAnonymousObject(),
 			state = "BellyUp",
 			visibility = "Public",
