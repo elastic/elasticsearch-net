@@ -13,6 +13,8 @@ namespace Tests.Domain
 {
 	public class Project
 	{
+		public static string TypeName = "project";
+		public string Type => TypeName;
 		public JoinField Join => JoinField.Root<Project>();
 		public string Name { get; set; }
 		public string Description { get; set; }
@@ -116,6 +118,7 @@ namespace Tests.Domain
 			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon },
 			sourceOnly = new { notWrittenByDefaultSerializer = "written" }
 		};
+
 	}
 
 	//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer

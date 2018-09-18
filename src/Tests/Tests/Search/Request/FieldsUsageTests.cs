@@ -27,10 +27,12 @@ namespace Tests.Search.Request
 
 		protected override object ExpectJson => new
 		{
+			query = ProjectFilterExpectedJson,
 			stored_fields = new[] { "name", "startedOn", "numberOfCommits", "numberOfContributors", "dateString" }
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Query(q => ProjectFilter)
 			.StoredFields(fs => fs
 				.Field(p => p.Name)
 				.Field(p => p.StartedOn)
@@ -42,6 +44,7 @@ namespace Tests.Search.Request
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
+				Query = ProjectFilter,
 				StoredFields = Fields<Project>(
 					p => p.Name,
 					p => p.StartedOn,
@@ -56,6 +59,7 @@ namespace Tests.Search.Request
 			r.Fields.Count().Should().BeGreaterThan(0);
 			foreach (var fieldValues in r.Fields)
 			{
+				fieldValues.Should().NotBeNull("FieldValues on hits is null");
 				fieldValues.Count().Should().Be(5);
 				var name = fieldValues.Value<string>(Field<Project>(p => p.Name));
 				name.Should().NotBeNullOrWhiteSpace();

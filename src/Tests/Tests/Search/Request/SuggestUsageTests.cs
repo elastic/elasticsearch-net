@@ -26,6 +26,7 @@ namespace Tests.Search.Request
 		protected override object ExpectJson =>
 			new
 			{
+				query = ProjectFilterExpectedJson,
 				suggest = new Dictionary<string, object>{
 					{  "my-completion-suggest", new {
 					  completion = new {
@@ -92,6 +93,7 @@ namespace Tests.Search.Request
 			};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Query(q => ProjectFilter)
 			.Suggest(ss => ss
 				.Term("my-term-suggest", t => t
 					.MaxEdits(1)
@@ -150,6 +152,7 @@ namespace Tests.Search.Request
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
+				Query = ProjectFilter,
 				Suggest = new SuggestContainer
 				{
 					{ "my-term-suggest", new SuggestBucket
