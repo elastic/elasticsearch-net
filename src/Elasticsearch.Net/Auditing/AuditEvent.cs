@@ -21,5 +21,6 @@ namespace Elasticsearch.Net
 		BadRequest,
 		NoNodesAttempted,
 		CancellationRequested,
+		FailedOverAllNodes,
 	}
 }

@@ -41,6 +41,7 @@ namespace Elasticsearch.Net
 		public override string ToString()
 		{
 			var took = Ended - Started;
+			if (took < TimeSpan.Zero) took = TimeSpan.Zero;
 			return $"Node: {Node?.Uri}, Event: {Event.GetStringValue()} NodeAlive: {Node?.IsAlive}, Took: {took}";
 		}
 	}
