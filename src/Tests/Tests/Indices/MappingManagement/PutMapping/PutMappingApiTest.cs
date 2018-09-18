@@ -59,6 +59,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					},
 					type = "object"
 				},
+				type = new { type = "text" },
 				dateString = new { type = "text" },
 				description = new { type = "text" },
 				join = new
@@ -156,6 +157,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				)
 				.Text(t => t.Name(p => p.Description))
 				.Text(t => t.Name(p => p.DateString))
+				.Text(t => t.Name(p => p.Type))
 				.Text(s => s
 					.Name(p => p.Name)
 					.Index(false)
@@ -225,6 +227,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				},
 				{p => p.Description, new TextProperty()},
 				{p => p.DateString, new TextProperty { }},
+				{p => p.Type, new TextProperty { }},
 				{p => p.LastActivity, new DateProperty()},
 				{
 					p => p.LeadDeveloper, new ObjectProperty

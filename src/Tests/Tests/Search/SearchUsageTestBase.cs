@@ -24,5 +24,13 @@ namespace Tests.Search
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/doc/_search";
 
+		protected TermQuery ProjectFilter = new TermQuery
+		{
+			Field = Infer.Field<Project>(p => p.Type),
+			Value = Project.TypeName
+		};
+
+		protected object ProjectFilterExpectedJson = new {term = new {type = new {value = Project.TypeName}}};
+
 	}
 }

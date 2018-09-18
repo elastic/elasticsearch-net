@@ -240,6 +240,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 					.Join<Project, CommitActivity>()
 				)
 			)
+			.Keyword(d => d.Name(p => p.Type))
 			.Keyword(s => s
 				.Name(p => p.Name)
 				.Store()
