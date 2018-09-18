@@ -11,6 +11,9 @@ namespace Tests.Domain
 {
 	public class CommitActivity
 	{
+		public static string TypeName = "commit";
+		public string Type => TypeName;
+
 		private string _projectName;
 		public JoinField Join { get; set; }
 		public string Id { get; set; }
