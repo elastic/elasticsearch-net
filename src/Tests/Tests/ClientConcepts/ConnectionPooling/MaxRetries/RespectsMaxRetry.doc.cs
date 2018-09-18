@@ -157,7 +157,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
-					{ MaxRetriesReached }
+					{ MaxRetriesReached },
+					{ FailedOverAllNodes }
 				}
 			);
 		}

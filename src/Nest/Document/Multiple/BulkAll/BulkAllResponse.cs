@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -13,6 +14,7 @@ namespace Nest
 
 		/// <summary>The number of back off retries were needed to store this document.</summary>
 		int Retries { get; }
+
 	}
 
 	/// <inheritdoc />
