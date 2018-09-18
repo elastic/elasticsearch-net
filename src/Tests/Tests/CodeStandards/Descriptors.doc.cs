@@ -148,6 +148,7 @@ namespace Tests.CodeStandards
 		//		where !t.IsAbstract()
 		//		select t;
 
+				//skips
 		//	var breakingDescriptors = new List<string>();
 
 		//	foreach (var descriptor in descriptors)

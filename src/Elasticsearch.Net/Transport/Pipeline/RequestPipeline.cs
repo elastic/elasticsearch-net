@@ -465,6 +465,10 @@ namespace Elasticsearch.Net
 			where TReturn : class
 		{
 			var callDetails = response ?? pipelineExceptions.LastOrDefault()?.Response;
+			var statusCode = callDetails?.HttpStatusCode != null ? callDetails.HttpStatusCode.Value.ToString() : "unknown";
+			var resource = callDetails == null
+				? "unknown resource"
+				: $"Status code {statusCode} from: {callDetails.HttpMethod} {callDetails.Uri.PathAndQuery}";
 			var pipelineFailure = data.OnFailurePipelineFailure;
 			if (pipelineExceptions.HasAny())
 				pipelineFailure = pipelineExceptions.Last().FailureReason;
@@ -485,8 +489,22 @@ namespace Elasticsearch.Net
 			{
 				pipelineFailure = PipelineFailure.MaxRetriesReached;
 				this.Audit(MaxRetriesReached);
-				exceptionMessage = "Maximum number of retries reached.";
+				exceptionMessage = "Maximum number of retries reached";
+
+				var now = this._dateTimeProvider.Now();
+				// TODO make AliveNodes on IConnectionPool public in 7.0 (default interface C# 8 FTW)
+				var activeNodes = this._connectionPool.Nodes.Count(n => n.IsAlive || n.DeadUntil <= now);
+				if (this.Retried >= activeNodes)
+				{
+                    this.Audit(FailedOverAllNodes);
+                    exceptionMessage += ", failed over to all the known alive nodes before failing";
+				}
 			}
+
+			exceptionMessage += $". Call: {resource}";
+			var reason = response?.ServerError?.Error?.Reason;
+			if (!string.IsNullOrWhiteSpace(reason))
+				exceptionMessage += $". ServerError: {reason}";
 
 			var clientException = new ElasticsearchClientException(pipelineFailure, exceptionMessage, innerException)
 			{

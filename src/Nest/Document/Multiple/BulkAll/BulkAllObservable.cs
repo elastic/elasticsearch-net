@@ -20,6 +20,8 @@ namespace Nest
 
 		private readonly CancellationToken _compositeCancelToken;
 		private readonly CancellationTokenSource _compositeCancelTokenSource;
+		private readonly Func<BulkResponseItemBase, T, bool> _retryPredicate;
+		private Action<BulkResponseItemBase, T> _droppedDocumentCallBack;
 
 		public BulkAllObservable(
 			IElasticClient client,
@@ -32,6 +34,8 @@ namespace Nest
 			this._backOffRetries = this._partionedBulkRequest.BackOffRetries.GetValueOrDefault(CoordinatedRequestDefaults.BulkAllBackOffRetriesDefault);
 			this._backOffTime = (this._partionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? CoordinatedRequestDefaults.BulkAllBackOffTimeDefault);
 			this._bulkSize = this._partionedBulkRequest.Size ?? CoordinatedRequestDefaults.BulkAllSizeDefault;
+			this._retryPredicate = this._partionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
+			this._droppedDocumentCallBack = this._partionedBulkRequest.DroppedDocumentCallback ?? DroppedDocumentCallbackDefault;
 			this._maxDegreeOfParallelism = _partionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 
 			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -51,9 +55,6 @@ namespace Nest
 			this.BulkAll(observer);
 			return this;
 		}
-
-		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
-			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
 
 		private void BulkAll(IObserver<IBulkAllResponse> observer)
 		{
@@ -114,27 +115,85 @@ namespace Nest
 				.ConfigureAwait(false);
 
 			this._compositeCancelToken.ThrowIfCancellationRequested();
-			if (!response.IsValid && backOffRetries < this._backOffRetries)
-			{
-				this._incrementRetries();
-				//wait before or after fishing out retriable docs?
-				await Task.Delay(this._backOffTime, this._compositeCancelToken).ConfigureAwait(false);
-				var retryDocuments = response.Items.Zip(buffer, (i, d) => new {i, d})
-					.Where(x => x.i.Status == 429)
-					.Select(x => x.d)
-					.ToList();
 
-				return await this.BulkAsync(retryDocuments, page, ++backOffRetries).ConfigureAwait(false);
-			}
-			else if (!response.IsValid)
-			{
-				this._incrementFailed();
-				this._partionedBulkRequest.BackPressure?.Release();
-				throw Throw($"Bulk indexing failed and after retrying {backOffRetries} times", response.ApiCall);
-			}
+			if (!response.ApiCall.Success)
+				return await this.HandleBulkRequest(buffer, page, backOffRetries, response);
+
+			var documentsWithResponse = response.Items.Zip(buffer, Tuple.Create).ToList();
+
+			this.HandleDroppedDocuments(documentsWithResponse, response);
+
+			var retryDocuments = documentsWithResponse
+				.Where(x=> !response.IsValid && this._retryPredicate(x.Item1, x.Item2))
+				.Select(x => x.Item2)
+				.ToList();
+
+			if (retryDocuments.Count > 0 && backOffRetries < this._backOffRetries)
+				return await this.RetryDocuments(page, ++backOffRetries, retryDocuments);
+			else if (retryDocuments.Count > 0)
+				throw this.ThrowOnBadBulk(response, $"Bulk indexing failed and after retrying {backOffRetries} times");
+
 			this._partionedBulkRequest.BackPressure?.Release();
-			return new BulkAllResponse {Retries = backOffRetries, Page = page};
+			return new BulkAllResponse { Retries = backOffRetries, Page = page };
 		}
+
+		private void HandleDroppedDocuments(List<Tuple<BulkResponseItemBase, T>> documentsWithResponse, IBulkResponse response)
+		{
+			var droppedDocuments = documentsWithResponse
+				.Where(x => !response.IsValid && !this._retryPredicate(x.Item1, x.Item2))
+				.ToList();
+			if (droppedDocuments.Count > 0 && !this._partionedBulkRequest.ContinueAfterDroppedDocuments)
+				throw this.ThrowOnBadBulk(response, $"BulkAll halted after receiving failures that can not be retried from _bulk");
+			else if (droppedDocuments.Count > 0 && this._partionedBulkRequest.ContinueAfterDroppedDocuments)
+			{
+				foreach (var dropped in droppedDocuments) this._droppedDocumentCallBack(dropped.Item1, dropped.Item2);
+			}
+		}
+
+		private async Task<IBulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, IBulkResponse response)
+		{
+			var clientException = response.ApiCall.OriginalException as ElasticsearchClientException;
+			//TODO expose this on IAPiCallDetails as RetryLater in 7.0?
+			var failureReason = clientException?.FailureReason.GetValueOrDefault(PipelineFailure.Unexpected);
+			switch (failureReason)
+			{
+				case PipelineFailure.MaxRetriesReached:
+					//TODO move this to its own PipelineFailure classification in 7.0
+					if (response.ApiCall.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
+						throw this.ThrowOnBadBulk(response, $"BulkAll halted after attempted bulk failed over all the active nodes");
+					return await this.RetryDocuments(page, ++backOffRetries, buffer);
+				case PipelineFailure.CouldNotStartSniffOnStartup:
+				case PipelineFailure.BadAuthentication:
+				case PipelineFailure.NoNodesAttempted:
+				case PipelineFailure.SniffFailure:
+				case PipelineFailure.Unexpected:
+					throw this.ThrowOnBadBulk(response,
+						$"BulkAll halted after {nameof(PipelineFailure)}{failureReason.GetStringValue()} from _bulk");
+				default:
+					return await this.RetryDocuments(page, ++backOffRetries, buffer);
+			}
+		}
+
+		private async Task<IBulkAllResponse> RetryDocuments(long page, int backOffRetries, IList<T> retryDocuments)
+		{
+			this._incrementRetries();
+			await Task.Delay(this._backOffTime, this._compositeCancelToken).ConfigureAwait(false);
+			return await this.BulkAsync(retryDocuments, page, backOffRetries).ConfigureAwait(false);
+		}
+
+		private Exception ThrowOnBadBulk(IBodyWithApiCallDetails response, string message)
+		{
+			this._incrementFailed();
+			this._partionedBulkRequest.BackPressure?.Release();
+			return Throw(message, response.ApiCall);
+		}
+		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
+			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
+
+
+		private static bool RetryBulkActionPredicate(BulkResponseItemBase bulkResponseItem, T d) => bulkResponseItem.Status == 429;
+
+		private static void DroppedDocumentCallbackDefault(BulkResponseItemBase bulkResponseItem, T d) { }
 
 		public bool IsDisposed { get; private set; }
 
