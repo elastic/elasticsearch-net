@@ -4,7 +4,6 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {

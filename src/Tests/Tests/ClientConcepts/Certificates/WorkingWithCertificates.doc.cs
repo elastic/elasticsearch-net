@@ -67,7 +67,7 @@ namespace Tests.ClientConcepts.Certificates
 		{
 			public DenyAllSslCertificatesApiTests(DenyAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-			[I]
+			[I, SkipOnTeamCity]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 
 			protected override void AssertWebException(WebException e) =>
@@ -100,7 +100,7 @@ namespace Tests.ClientConcepts.Certificates
 			{
 			}
 
-			[I]
+			[I, SkipOnTeamCity]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 		}
 
@@ -132,7 +132,7 @@ namespace Tests.ClientConcepts.Certificates
 			{
 			}
 
-			[I]
+			[I, SkipOnTeamCity]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 		}
 
@@ -155,7 +155,7 @@ namespace Tests.ClientConcepts.Certificates
 			}
 
 			// hide
-			[I]
+			[I, SkipOnTeamCity]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 
 			protected override void AssertWebException(WebException e) =>
@@ -219,7 +219,7 @@ namespace Tests.ClientConcepts.Certificates
 			{
 			}
 
-			[I]
+			[I, SkipOnTeamCity]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 		}
 #endif
@@ -241,7 +241,7 @@ namespace Tests.ClientConcepts.Certificates
 		}
 
 		// hide
-		[I]
+		[I, SkipOnTeamCity]
 		public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 
 		// a bad certificate

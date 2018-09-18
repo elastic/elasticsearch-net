@@ -9,6 +9,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Core.Xunit;
 using Tests.Framework.Integration;
 using Tests.Framework.ManagedElasticsearch.Clusters;
 using HttpMethod = Elasticsearch.Net.HttpMethod;
@@ -35,9 +36,9 @@ namespace Tests.Framework
 		protected override string UrlPath => "";
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		[I] public async Task IsValidIsFalse() => await this.AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(false));
+		[I, SkipOnTeamCity] public async Task IsValidIsFalse() => await this.AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(false));
 
-		[I] public async Task AssertException() => await this.AssertOnAllResponses(r =>
+		[I, SkipOnTeamCity] public async Task AssertException() => await this.AssertOnAllResponses(r =>
 		{
 			var e = r.OriginalException;
 			e.Should().NotBeNull();
