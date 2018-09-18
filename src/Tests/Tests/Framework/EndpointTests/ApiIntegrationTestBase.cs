@@ -6,6 +6,7 @@ using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Nest;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
@@ -53,7 +54,20 @@ namespace Tests.Framework
 					return;
 				}
 
-				assert(r);
+				using (var scope = new AssertionScope())
+				{
+					assert(r);
+					var failures = scope.Discard();
+					if (failures.Length <= 0) return;
+					
+					var failure = failures[0];
+					scope.AddReportable("Failure", failure);
+					scope.AddReportable("DebugInformation", r.DebugInformation);
+					scope.FailWith( $@"{{Failure}}
+Response Under Test:
+{{DebugInformation}}");
+
+				}
 			});
 		}
 	}
