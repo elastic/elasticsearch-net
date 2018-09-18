@@ -56,11 +56,14 @@ namespace Tests.Document.Multiple.BulkAll
 		private void BulkAll(string index, IEnumerable<SmallObject> documents, int size,  int pages, int numberOfDocuments)
 		{
 			var seenPages = 0;
+
+			var droppedDocuments = new ConcurrentBag<Tuple<BulkResponseItemBase,SmallObject>>();
 			//first we setup our cold observable
 			var observableBulk = this.Client.BulkAll(documents, f => f
 				.MaxDegreeOfParallelism(8)
 				.BackOffTime(TimeSpan.FromSeconds(10))
 				.BackOffRetries(2)
+				.DroppedDocumentCallback((b, i) => droppedDocuments.Add(Tuple.Create(b, i)))
 				.Size(size)
 				.RefreshOnCompleted()
 				.Index(index)
@@ -68,10 +71,11 @@ namespace Tests.Document.Multiple.BulkAll
 			//we set up an observer
 			var bulkObserver = observableBulk.Wait(TimeSpan.FromMinutes(5), b => Interlocked.Increment(ref seenPages));
 
-			seenPages.Should().Be(pages);
+			droppedDocuments.Take(10).Should().BeEmpty();
+			bulkObserver.TotalNumberOfFailedBuffers.Should().Be(0, "All buffers are expected to be indexed");
+			seenPages.Should().Be(pages, "BulkAll() did not run to completion");
 			var count = this.Client.Count<SmallObject>(f => f.Index(index));
-			count.Count.Should().Be(numberOfDocuments);
-			bulkObserver.TotalNumberOfFailedBuffers.Should().Be(0);
+			count.Count.Should().Be(numberOfDocuments, "Target index should have the same document count as source index");
 		}
 	}
 }

@@ -34,7 +34,7 @@ namespace Nest
 				switch (this.Operation.ToLowerInvariant())
 				{
 					case "delete": return this.Status == 200 || this.Status == 404;
-					case "update": 
+					case "update":
 					case "index":
 					case "create":
 						return this.Status == 200 || this.Status == 201;
@@ -44,6 +44,7 @@ namespace Nest
 			}
 		}
 
-		public override string ToString() => $"{Operation} returned {Status} _index: {Index} _type: {Type} _id: {Id} _version: {Version} error: {Error}";
+		public override string ToString() =>
+			$"{Operation} returned {Status} _index: {Index} _type: {Type} _id: {Id} _version: {Version} error: {Error}";
 	}
 }

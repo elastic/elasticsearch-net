@@ -124,7 +124,7 @@ namespace Nest
 			this.HandleDroppedDocuments(documentsWithResponse, response);
 
 			var retryDocuments = documentsWithResponse
-				.Where(x=> !response.IsValid && this._retryPredicate(x.Item1, x.Item2))
+				.Where(x=> !x.Item1.IsValid && this._retryPredicate(x.Item1, x.Item2))
 				.Select(x => x.Item2)
 				.ToList();
 
@@ -140,14 +140,12 @@ namespace Nest
 		private void HandleDroppedDocuments(List<Tuple<BulkResponseItemBase, T>> documentsWithResponse, IBulkResponse response)
 		{
 			var droppedDocuments = documentsWithResponse
-				.Where(x => !response.IsValid && !this._retryPredicate(x.Item1, x.Item2))
+				.Where(x => !x.Item1.IsValid && !this._retryPredicate(x.Item1, x.Item2))
 				.ToList();
-			if (droppedDocuments.Count > 0 && !this._partionedBulkRequest.ContinueAfterDroppedDocuments)
+			if (droppedDocuments.Count <= 0) return;
+			foreach (var dropped in droppedDocuments) this._droppedDocumentCallBack(dropped.Item1, dropped.Item2);
+			if (!this._partionedBulkRequest.ContinueAfterDroppedDocuments)
 				throw this.ThrowOnBadBulk(response, $"BulkAll halted after receiving failures that can not be retried from _bulk");
-			else if (droppedDocuments.Count > 0 && this._partionedBulkRequest.ContinueAfterDroppedDocuments)
-			{
-				foreach (var dropped in droppedDocuments) this._droppedDocumentCallBack(dropped.Item1, dropped.Item2);
-			}
 		}
 
 		private async Task<IBulkAllResponse> HandleBulkRequest(IList<T> buffer, long page, int backOffRetries, IBulkResponse response)
