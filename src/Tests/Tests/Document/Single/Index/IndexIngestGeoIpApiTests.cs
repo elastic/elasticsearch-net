@@ -101,6 +101,7 @@ namespace Tests.Document.Single.Index
 			new
 			{
 				name = CallIsolatedValue,
+				type = Project.TypeName,
 				join = Document.Join.ToAnonymousObject(),
 				leadDeveloper = new { ipAddress = "193.4.250.122", gender = "Male", id = 1 },
 				state = "Stable",
