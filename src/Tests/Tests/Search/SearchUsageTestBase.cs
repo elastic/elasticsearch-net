@@ -26,7 +26,7 @@ namespace Tests.Search
 
 		protected TermQuery ProjectFilter = new TermQuery
 		{
-			Field = Infer.Field<Project>(p => p.Name),
+			Field = Infer.Field<Project>(p => p.Type),
 			Value = Project.TypeName
 		};
 

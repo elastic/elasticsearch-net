@@ -26,17 +26,18 @@ namespace Tests.Search.Request
 	{
 		public SourceFilteringUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson =>
-			new
+		protected override object ExpectJson => new
+		{
+			query = ProjectFilterExpectedJson,
+			_source = new
 			{
-				_source = new
-				{
-					includes = new[] { "*" },
-					excludes = new[] { "description" }
-				}
-			};
+				includes = new[] { "*" },
+				excludes = new[] { "description" }
+			}
+		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Query(q => ProjectFilter)
 			.Source(src => src
 				.IncludeAll()
 				.Excludes(e => e
@@ -49,6 +50,7 @@ namespace Tests.Search.Request
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
+				Query = ProjectFilter,
 				Source = new SourceFilter
 				{
 					Includes = "*",
