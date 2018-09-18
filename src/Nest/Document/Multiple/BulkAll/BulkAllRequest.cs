@@ -81,9 +81,9 @@ namespace Nest
 		bool ContinueAfterDroppedDocuments { get; set; }
 
 		/// <summary>
-		/// If <see cref="ContinueAfterDroppedDocuments"/> is set to true dropped messages will be fed through
-		/// this callback. Use this if you don't expect many failures and want to feed these dropped messages in a dead letter queue
-		/// for instance.
+		/// If a bulk operation fails because it receives documents it can not retry they will be fed to this callback.
+		/// If <see cref="ContinueAfterDroppedDocuments"/> is set to true processing will continue, so this callback can be used
+		/// to feed into a dead letter queue. Otherwise the bulk all indexation will be halted.
 		/// </summary>
 		Action<IBulkResponseItem, T> DroppedDocumentCallback { get; set; }
 
