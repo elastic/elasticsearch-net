@@ -60,7 +60,6 @@ namespace Tests.Search.Request
 				var name = fieldValues.Value<string>(Field<Project>(p => p.Name));
 				name.Should().NotBeNullOrWhiteSpace();
 
-
 				var commits = fieldValues.ValueOf<Project, float?>(p => p.NumberOfCommits);
 				commits.Should().BeGreaterThan(0);
 
