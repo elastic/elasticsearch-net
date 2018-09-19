@@ -20,12 +20,12 @@ namespace Tests.Framework
 		protected UsageTestBase() : base(TestClient.DefaultInMemoryClient) =>
 			this.FluentInstance = this.Fluent(new TDescriptor());
 
-		[U] protected void SerializesInitializer()
+		[U] protected virtual void SerializesInitializer()
 		{
 			if (this.TestObjectInitializer) this.RoundTripsOrSerializes<TInterface>(this.Initializer);
 		}
 
-		[U] protected void SerializesFluent() => this.RoundTripsOrSerializes(this.FluentInstance);
+		[U] protected virtual void SerializesFluent() => this.RoundTripsOrSerializes(this.FluentInstance);
 	}
 
 	public abstract class PromiseUsageTestBase<TInterface, TDescriptor, TInitializer> : ExpectJsonTestBase

@@ -34,13 +34,13 @@ namespace Tests.Framework
 
 		protected override IElasticClient Client => this.Cluster.Client;
 
-		[I] public async Task HandlesStatusCode() =>
+		[I] public async virtual Task HandlesStatusCode() =>
 			await this.AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(this.ExpectStatusCode));
 
-		[I] public async Task ReturnsExpectedIsValid() =>
+		[I] public async virtual Task ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(this.ExpectIsValid));
 
-		[I] public async Task ReturnsExpectedResponse() => await this.AssertOnAllResponses(ExpectResponse);
+		[I] public async virtual Task ReturnsExpectedResponse() => await this.AssertOnAllResponses(ExpectResponse);
 
 		protected override Task AssertOnAllResponses(Action<TResponse> assert)
 		{

@@ -1,4 +1,6 @@
-﻿using Elasticsearch.Net;
+﻿using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -23,6 +25,13 @@ namespace Tests.Search
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/project/_search";
+
+		// Fixes Rider live test discovery see: https://youtrack.jetbrains.com/issue/RIDER-19912
+		[I] public override Task HandlesStatusCode() => base.HandlesStatusCode();
+
+		[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
+
+		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
 	}
 }
