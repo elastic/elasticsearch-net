@@ -18,9 +18,11 @@
 		<dependencies>
 			<group targetFramework="net461">
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
+				<dependency id="Newtonsoft.Json" version="[$jsonDotNetCurrentVersion$, $jsonDotNetNextVersion$)" />
 			</group>
 			<group targetFramework="netstandard2.0">
 				<dependency id="Elasticsearch.Net" version="[$version$, $nextMajorVersion$)" />
+				<dependency id="Newtonsoft.Json" version="[$jsonDotNetCurrentVersion$, $jsonDotNetNextVersion$)" />
 			</group>
 		</dependencies>
 	</metadata>
