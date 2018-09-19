@@ -46,7 +46,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			: base(TestClient.Configuration.ElasticsearchVersion, features, new ElasticsearchPlugins(plugins), numberOfNodes)
 		{
 			this.TestConfiguration = TestClient.Configuration;
-			this.ShowElasticsearchOutputAfterStarted = this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
+			this.ShowElasticsearchOutputAfterStarted = true; //this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
 
 			this.CacheEsHomeInstallation = true;
 
