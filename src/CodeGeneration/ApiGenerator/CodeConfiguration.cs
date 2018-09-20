@@ -35,6 +35,15 @@ namespace ApiGenerator
 		public static string RestSpecificationFolder { get; } = $@"{Root}RestSpecification\";
 		public static string LastDownloadedVersionFile { get; } = Path.Combine(Root, "last_downloaded_version.txt");
 
+		public static readonly Dictionary<string, string> ApiNameMapping =
+			(from f in new DirectoryInfo(NestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
+				let contents = File.ReadAllText(f.FullName)
+				let c = Regex.Replace(contents, @"^.+\[MapsApi\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
+				where !c.Contains(" ") //filter results that did not match
+				select new { Value = f.Name.Replace("Request", ""), Key = c.Replace(".json", "") })
+				.DistinctBy(v => v.Key)
+				.ToDictionary(k => k.Key, v => v.Value.Replace(".cs", ""));
+
 		public static readonly Dictionary<string, string> MethodNameOverrides =
 			(from f in new DirectoryInfo(NestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
 				let contents = File.ReadAllText(f.FullName)
