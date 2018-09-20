@@ -84,8 +84,6 @@ namespace ApiGenerator
 			"xpack.sql.translate.json",
 			"xpack.ssl.certificates.json",
 
-			"scripts_painless_execute.json",
-
 			// 6.4 new  API's
 
 			"xpack.ml.update_filter.json",
