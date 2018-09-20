@@ -152,6 +152,7 @@ namespace ApiGenerator
 			{
 				var replaceSpec = JObject.Parse(File.ReadAllText(replaceFile));
 				var endpointReplaced = replaceSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
+				endpointReplaced.Value.RestSpecName = endpointReplaced.Key;
 				endpointReplaced.Value.CsharpMethodName = CreateMethodName(endpointReplaced.Key);
 				return endpointReplaced;
 			}
@@ -159,6 +160,7 @@ namespace ApiGenerator
 			var officialJsonSpec = JObject.Parse(File.ReadAllText(jsonFile));
 			PatchOfficialSpec(officialJsonSpec, jsonFile);
 			var endpoint = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
+			endpoint.Value.RestSpecName = endpoint.Key;
 			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
 			return endpoint;
 		}
