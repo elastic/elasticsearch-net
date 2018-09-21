@@ -42,7 +42,7 @@ ORDER BY numberOfContributors DESC";
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_xpack/sql";
+		protected override string UrlPath => $"/_xpack/sql/close";
 
 		protected override object ExpectJson => new { cursor = this._currentCursor };
 

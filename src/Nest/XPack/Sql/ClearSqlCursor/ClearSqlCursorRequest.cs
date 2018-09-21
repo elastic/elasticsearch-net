@@ -3,6 +3,7 @@
 namespace Nest
 {
 	[MapsApi("xpack.sql.clear_cursor.json")]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ClearSqlCursorRequest>))]
 	public partial interface IClearSqlCursorRequest
 	{
 		/// <summary>
