@@ -4605,6 +4605,32 @@ namespace Nest
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
 	}
+	///<summary>descriptor for XpackSqlClearCursor <pre>Clear SQL cursor</pre></summary>
+	public partial class ClearSqlCursorDescriptor  : RequestDescriptorBase<ClearSqlCursorDescriptor,ClearSqlCursorRequestParameters, IClearSqlCursorRequest>, IClearSqlCursorRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackSqlQuery <pre>Execute SQL</pre></summary>
+	public partial class QuerySqlDescriptor  : RequestDescriptorBase<QuerySqlDescriptor,QuerySqlRequestParameters, IQuerySqlRequest>, IQuerySqlRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public QuerySqlDescriptor Format(string format) => Qs("format", format);
+	}
+	///<summary>descriptor for XpackSqlTranslate <pre>Translate SQL into Elasticsearch queries</pre></summary>
+	public partial class TranslateSqlDescriptor  : RequestDescriptorBase<TranslateSqlDescriptor,TranslateSqlRequestParameters, ITranslateSqlRequest>, ITranslateSqlRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackWatcherAckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchDescriptor  : RequestDescriptorBase<AcknowledgeWatchDescriptor,AcknowledgeWatchRequestParameters, IAcknowledgeWatchRequest>, IAcknowledgeWatchRequest
 	{ 

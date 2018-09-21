@@ -2563,6 +2563,23 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
+	///<summary>Request options for XpackSqlClearCursor<pre>Clear SQL cursor</pre></summary>
+	public partial class ClearSqlCursorRequestParameters : RequestParameters<ClearSqlCursorRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for XpackSqlQuery<pre>Execute SQL</pre></summary>
+	public partial class QuerySqlRequestParameters : RequestParameters<QuerySqlRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
+	}
+	///<summary>Request options for XpackSqlTranslate<pre>Translate SQL into Elasticsearch queries</pre></summary>
+	public partial class TranslateSqlRequestParameters : RequestParameters<TranslateSqlRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
 	///<summary>Request options for XpackWatcherAckWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchRequestParameters : RequestParameters<AcknowledgeWatchRequestParameters> 
 	{
