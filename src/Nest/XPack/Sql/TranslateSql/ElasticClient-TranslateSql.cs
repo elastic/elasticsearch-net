@@ -51,7 +51,7 @@ namespace Nest
 
 		private TranslateSqlResponse ToTranslateSqlResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{
-			var result = this.SourceSerializer.Deserialize<ISearchRequest>(stream);
+			var result = this.RequestResponseSerializer.Deserialize<ISearchRequest>(stream);
 			return new TranslateSqlResponse { Result = result };
 		}
 	}
