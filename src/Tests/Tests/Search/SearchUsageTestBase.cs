@@ -1,4 +1,6 @@
-﻿using Elasticsearch.Net;
+﻿using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -31,6 +33,22 @@ namespace Tests.Search
 		};
 
 		protected object ProjectFilterExpectedJson = new {term = new {type = new {value = Project.TypeName}}};
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
+
+		[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
+
+		[U] protected override void SerializesInitializer() => base.SerializesInitializer();
+
+		[U] protected override void SerializesFluent() => base.SerializesFluent();
+
+		[I] public override Task ReturnsExpectedStatusCode() => base.ReturnsExpectedResponse();
+
+		[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
+
+		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
+
 
 	}
 }

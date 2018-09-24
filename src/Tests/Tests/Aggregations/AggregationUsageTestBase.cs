@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Client;
@@ -7,19 +9,29 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using static Nest.Infer;
-using Xunit;
 
 namespace Tests.Aggregations
 {
 	public abstract class AggregationUsageTestBase
 		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		protected AggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
+
+		[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
+
+		[U] protected override void SerializesInitializer() => base.SerializesInitializer();
+
+		[U] protected override void SerializesFluent() => base.SerializesFluent();
+
+		[I] public override Task ReturnsExpectedStatusCode() => base.ReturnsExpectedResponse();
+
+		[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
+
+		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f),
@@ -74,5 +86,20 @@ namespace Tests.Aggregations
 		protected ProjectsOnlyAggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override Nest.Indices AgainstIndex => DefaultSeeder.ProjectsAliasFilter;
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
+
+		[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
+
+		[U] protected override void SerializesInitializer() => base.SerializesInitializer();
+
+		[U] protected override void SerializesFluent() => base.SerializesFluent();
+
+		[I] public override Task ReturnsExpectedStatusCode() => base.ReturnsExpectedResponse();
+
+		[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
+
+		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 	}
 }

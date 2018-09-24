@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -32,5 +34,20 @@ namespace Tests.Framework
 			response.Tagline.Should().NotBeNullOrWhiteSpace();
 			response.Name.Should().NotBeNullOrWhiteSpace();
 		}
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
+
+		[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
+
+		[U] protected override void SerializesInitializer() => base.SerializesInitializer();
+
+		[U] protected override void SerializesFluent() => base.SerializesFluent();
+
+		[I] public override Task ReturnsExpectedStatusCode() => base.ReturnsExpectedResponse();
+
+		[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
+
+		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 	}
 }
