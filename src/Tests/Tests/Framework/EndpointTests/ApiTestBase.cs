@@ -26,17 +26,14 @@ namespace Tests.Framework
 
 		protected ApiTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		[U] protected async Task HitsTheCorrectUrl() =>
-			await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
+		[U] protected virtual async Task HitsTheCorrectUrl() => await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
 
-		[U] protected async Task UsesCorrectHttpMethod() =>
-			await this.AssertOnAllResponses(
-				r => r.ApiCall.HttpMethod.Should().Be(this.HttpMethod,
-					this.UniqueValues.CurrentView.GetStringValue()));
+		[U] protected virtual async Task UsesCorrectHttpMethod() =>
+			await this.AssertOnAllResponses(r => r.ApiCall.HttpMethod.Should().Be(this.HttpMethod, this.UniqueValues.CurrentView.GetStringValue()));
 
-		[U] protected void SerializesInitializer() => this.RoundTripsOrSerializes<TInterface>(this.Initializer);
+		[U] protected virtual void SerializesInitializer() => this.RoundTripsOrSerializes<TInterface>(this.Initializer);
 
-		[U] protected void SerializesFluent() => this.RoundTripsOrSerializes(this.Fluent?.Invoke(NewDescriptor()));
+		[U] protected virtual void SerializesFluent() => this.RoundTripsOrSerializes(this.Fluent?.Invoke(NewDescriptor()));
 
 		private void AssertUrl(Uri u) => u.PathEquals(this.UrlPath, this.UniqueValues.CurrentView.GetStringValue());
 	}

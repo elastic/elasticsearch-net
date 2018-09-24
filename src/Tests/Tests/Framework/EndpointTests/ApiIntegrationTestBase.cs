@@ -33,13 +33,22 @@ namespace Tests.Framework
 		public override IElasticClient Client => this.Cluster.Client;
 		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
 
-		[I] public async Task ReturnsExpectedStatusCode() =>
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
+
+		[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
+
+		[U] protected override void SerializesInitializer() => base.SerializesInitializer();
+
+		[U] protected override void SerializesFluent() => base.SerializesFluent();
+
+		[I] public virtual async Task ReturnsExpectedStatusCode() =>
 			await this.AssertOnAllResponses(r => r.ApiCall.HttpStatusCode.Should().Be(this.ExpectStatusCode));
 
-		[I] public async Task ReturnsExpectedIsValid() =>
+		[I] public virtual async Task ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r => r.ShouldHaveExpectedIsValid(this.ExpectIsValid));
 
-		[I] public async Task ReturnsExpectedResponse() => await this.AssertOnAllResponses(ExpectResponse);
+		[I] public virtual async Task ReturnsExpectedResponse() => await this.AssertOnAllResponses(ExpectResponse);
 
 		protected override Task AssertOnAllResponses(Action<TResponse> assert)
 		{
