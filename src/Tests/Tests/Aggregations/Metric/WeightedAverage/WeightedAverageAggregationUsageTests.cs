@@ -17,25 +17,21 @@ namespace Tests.Aggregations.Metric.WeightedAverage
 
 		protected override object AggregationJson => new
 		{
-			aggs = new
+			weighted_avg_commits = new
 			{
-				weighted_avg_commits = new
+				weighted_avg = new
 				{
-					weighted_avg = new
+					value = new
 					{
-						value = new
-						{
-							field = "numberOfCommits",
-							missing = 0.0
-						},
-						weight = new
-						{
-							field = "numberOfContributors"
-						}
+						field = "numberOfCommits",
+						missing = 0.0
+					},
+					weight = new
+					{
+						field = "numberOfContributors"
 					}
 				}
-			},
-			size = 0
+			}
 		};
 
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
@@ -51,7 +47,7 @@ namespace Tests.Aggregations.Metric.WeightedAverage
 				{
 					Missing = 0
 				},
-				Weight = new WeightedAverageValue(Field<Project>(p => p.NumberOfCommits))
+				Weight = new WeightedAverageValue(Field<Project>(p => p.NumberOfContributors))
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

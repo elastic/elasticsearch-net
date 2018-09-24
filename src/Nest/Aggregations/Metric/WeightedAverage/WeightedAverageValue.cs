@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<WeightedAverageAggregation>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<WeightedAverageValue>))]
 	public interface IWeightedAverageValue
 	{
 		[JsonProperty("field")]
@@ -20,6 +20,7 @@ namespace Nest
 
 	public class WeightedAverageValue : IWeightedAverageValue
 	{
+		internal WeightedAverageValue() { }
 		public WeightedAverageValue(Field field) => this.Field = field;
 		public WeightedAverageValue(IScript script) => this.Script = script;
 
