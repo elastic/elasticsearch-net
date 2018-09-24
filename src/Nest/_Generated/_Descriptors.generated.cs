@@ -2513,6 +2513,7 @@ namespace Nest
 		// Request parameters
 
 		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
 		public ShrinkIndexDescriptor CopySettings(bool? copySettings = true) => Qs("copy_settings", copySettings);
 		///<summary>Explicit operation timeout</summary>
 		public ShrinkIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
@@ -2541,6 +2542,7 @@ namespace Nest
 		// Request parameters
 
 		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
 		public SplitIndexDescriptor CopySettings(bool? copySettings = true) => Qs("copy_settings", copySettings);
 		///<summary>Explicit operation timeout</summary>
 		public SplitIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
