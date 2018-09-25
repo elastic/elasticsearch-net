@@ -37,6 +37,13 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("order")]
 		SortOrder? Order { get; set; }
+
+		/// <summary>
+		/// By default documents without a value for a given source are ignored. It is possible to include
+		/// them in the response as null by setting this to true
+		/// </summary>
+		[JsonProperty("missing_bucket")]
+		bool? MissingBucket { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -59,6 +66,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public SortOrder? Order { get; set; }
+
+		/// <inheritdoc cref="ICompositeAggregationSource.MissingBucket" />
+		public bool? MissingBucket { get; set; }
 	}
 
 	/// <inheritdoc cref="ICompositeAggregationSource"/>
@@ -93,6 +103,7 @@ namespace Nest
 		string ICompositeAggregationSource.SourceType => _sourceType;
 		Field ICompositeAggregationSource.Field { get; set; }
 		SortOrder? ICompositeAggregationSource.Order { get; set; }
+		bool? ICompositeAggregationSource.MissingBucket { get; set; }
 
 		protected CompositeAggregationSourceDescriptorBase(string name, string sourceType)
 		{
@@ -108,6 +119,9 @@ namespace Nest
 
 		/// <inheritdoc cref="ICompositeAggregationSource.Order"/>
 		public TDescriptor Order(SortOrder? order) => Assign(a => a.Order = order);
+
+		/// <inheritdoc cref="ICompositeAggregationSource.Order"/>
+		public TDescriptor MissingBucket(bool? includeMissing = true) => Assign(a => a.MissingBucket = includeMissing);
 	}
 
 	internal class CompositeAggregationSourceConverter : ReserializeJsonConverter<CompositeAggregationSourceBase, ICompositeAggregationSource>
