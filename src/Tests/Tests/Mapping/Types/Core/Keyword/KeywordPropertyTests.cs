@@ -2,6 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Analysis;
 using Tests.Analysis.Tokenizers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;

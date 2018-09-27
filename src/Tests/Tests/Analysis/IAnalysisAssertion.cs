@@ -1,4 +1,4 @@
-﻿namespace Tests.Analysis.Tokenizers
+﻿namespace Tests.Analysis
 {
 	public interface IAnalysisAssertion
 	{

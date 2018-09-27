@@ -4,9 +4,14 @@ using System.Linq;
 using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using Tests.Analysis.Analyzers;
+using Tests.Analysis.CharFilters;
+using Tests.Analysis.Normalizers;
+using Tests.Analysis.TokenFilters;
+using Tests.Analysis.Tokenizers;
 using Tests.Core.Client;
 
-namespace Tests.Analysis.Tokenizers
+namespace Tests.Analysis
 {
 	public static class AnalysisUsageTests
 	{

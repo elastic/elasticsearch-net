@@ -1,7 +1,7 @@
 ﻿using System;
 using Nest;
 
-namespace Tests.Analysis.Tokenizers
+namespace Tests.Analysis.CharFilters
 {
 
 	public interface ICharFilterAssertion : IAnalysisAssertion
