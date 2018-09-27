@@ -2,6 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Analysis.Tokenizers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
@@ -20,7 +21,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 			.Settings(s => s
 				.Analysis(a => a
 					.CharFilters(t => Promise(Analysis.CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
-					.TokenFilters(t => Promise(Analysis.TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
+					.TokenFilters(t => Promise(AnalysisUsageTests.TokenFiltersFluent.Analysis.TokenFilters))
 					.Normalizers(t => Promise(Analysis.Normalizers.NormalizerUsageTests.FluentExample(s).Value.Analysis.Normalizers))
 				)
 			);

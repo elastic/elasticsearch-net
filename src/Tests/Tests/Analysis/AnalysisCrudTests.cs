@@ -2,6 +2,7 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Analysis.Tokenizers;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
@@ -48,8 +49,8 @@ namespace Tests.Analysis
 				{
 					Analyzers = Analyzers.AnalyzerUsageTests.InitializerExample.Analysis.Analyzers,
 					CharFilters = CharFilters.CharFilterUsageTests.InitializerExample.Analysis.CharFilters,
-					Tokenizers = Tokenizers.TokenizerUsageTests.InitializerExample.Analysis.Tokenizers,
-					TokenFilters = TokenFilters.TokenFilterUsageTests.InitializerExample.Analysis.TokenFilters,
+					Tokenizers = AnalysisUsageTests.TokenizersInitializer.Analysis.Tokenizers,
+					TokenFilters = AnalysisUsageTests.TokenFiltersInitializer.Analysis.TokenFilters,
 				}
 			}
 		};
@@ -59,8 +60,8 @@ namespace Tests.Analysis
 				.Analysis(a => a
 					.Analyzers(t => Promise(Analyzers.AnalyzerUsageTests.FluentExample(s).Value.Analysis.Analyzers))
 					.CharFilters(t => Promise(CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
-					.Tokenizers(t => Promise(Tokenizers.TokenizerUsageTests.FluentExample(s).Value.Analysis.Tokenizers))
-					.TokenFilters(t => Promise(TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
+					.Tokenizers(t => Promise(AnalysisUsageTests.TokenizersFluent.Analysis.Tokenizers))
+					.TokenFilters(t => Promise(AnalysisUsageTests.TokenFiltersFluent.Analysis.TokenFilters))
 				)
 			);
 
