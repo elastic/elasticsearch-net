@@ -20,7 +20,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 		protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
 			.Settings(s => s
 				.Analysis(a => a
-					.CharFilters(t => Promise(Analysis.CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
+					.CharFilters(t => Promise(AnalysisUsageTests.CharFiltersFluent.Analysis.CharFilters))
 					.TokenFilters(t => Promise(AnalysisUsageTests.TokenFiltersFluent.Analysis.TokenFilters))
 					.Normalizers(t => Promise(Analysis.Normalizers.NormalizerUsageTests.FluentExample(s).Value.Analysis.Normalizers))
 				)

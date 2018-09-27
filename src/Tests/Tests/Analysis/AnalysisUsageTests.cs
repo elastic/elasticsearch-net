@@ -4,21 +4,27 @@ using System.Linq;
 using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Analysis.TokenFilters;
 using Tests.Core.Client;
-using Tests.Search;
 
 namespace Tests.Analysis.Tokenizers
 {
 	public static class AnalysisUsageTests
 	{
+		public static IndexSettings AnalyzersFluent => Fluent<AnalyzersDescriptor, IAnalyzerAssertion, IAnalyzers>(i => i.Fluent, (a, v) => a.Analyzers = v.Value);
+
 		public static IndexSettings TokenizersFluent => Fluent<TokenizersDescriptor, ITokenizerAssertion, ITokenizers>(i => i.Fluent, (a, v) => a.Tokenizers = v.Value);
 
 		public static IndexSettings TokenFiltersFluent => Fluent<TokenFiltersDescriptor, ITokenFilterAssertion, ITokenFilters>(i => i.Fluent, (a, v) => a.TokenFilters = v.Value);
 
+		public static IndexSettings CharFiltersFluent => Fluent<CharFiltersDescriptor, ICharFilterAssertion, ICharFilters>(i => i.Fluent, (a, v) => a.CharFilters = v.Value);
+
+		public static IndexSettings AnalyzersInitializer => Init<Nest.Analyzers, IAnalyzerAssertion, IAnalyzer>(i => i.Initializer, (a, v) => a.Analyzers = v);
+
 		public static IndexSettings TokenizersInitializer => Init<Nest.Tokenizers, ITokenizerAssertion, ITokenizer>(i => i.Initializer, (a, v) => a.Tokenizers = v);
 
 		public static IndexSettings TokenFiltersInitializer => Init<Nest.TokenFilters, ITokenFilterAssertion, ITokenFilter>(i => i.Initializer, (a, v) => a.TokenFilters = v);
+
+		public static IndexSettings CharFiltersInitializer => Init<Nest.CharFilters, ICharFilterAssertion, ICharFilter>(i => i.Initializer, (a, v) => a.CharFilters = v);
 
 		private static IndexSettings Fluent<TContainer, TAssertion, TValue>(Func<TAssertion, Func<string, TContainer, IPromise<TValue>>> fluent, Action<Nest.Analysis, IPromise<TValue>> set)
 			where TAssertion : IAnalysisAssertion

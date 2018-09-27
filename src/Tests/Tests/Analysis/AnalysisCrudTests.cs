@@ -47,8 +47,8 @@ namespace Tests.Analysis
 			{
 				Analysis = new Nest.Analysis
 				{
-					Analyzers = Analyzers.AnalyzerUsageTests.InitializerExample.Analysis.Analyzers,
-					CharFilters = CharFilters.CharFilterUsageTests.InitializerExample.Analysis.CharFilters,
+					Analyzers = AnalysisUsageTests.AnalyzersInitializer.Analysis.Analyzers,
+					CharFilters = AnalysisUsageTests.CharFiltersInitializer.Analysis.CharFilters,
 					Tokenizers = AnalysisUsageTests.TokenizersInitializer.Analysis.Tokenizers,
 					TokenFilters = AnalysisUsageTests.TokenFiltersInitializer.Analysis.TokenFilters,
 				}
@@ -58,8 +58,8 @@ namespace Tests.Analysis
 		protected virtual ICreateIndexRequest CreateFluent(string indexName, CreateIndexDescriptor c) =>
 			c.Settings(s => s
 				.Analysis(a => a
-					.Analyzers(t => Promise(Analyzers.AnalyzerUsageTests.FluentExample(s).Value.Analysis.Analyzers))
-					.CharFilters(t => Promise(CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
+					.Analyzers(t => Promise(AnalysisUsageTests.AnalyzersFluent.Analysis.Analyzers))
+					.CharFilters(t => Promise(AnalysisUsageTests.CharFiltersFluent.Analysis.CharFilters))
 					.Tokenizers(t => Promise(AnalysisUsageTests.TokenizersFluent.Analysis.Tokenizers))
 					.TokenFilters(t => Promise(AnalysisUsageTests.TokenFiltersFluent.Analysis.TokenFilters))
 				)
