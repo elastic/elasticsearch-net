@@ -10,6 +10,8 @@ namespace Tests.Analysis.Tokenizers
 {
 	public static class AnalysisUsageTests
 	{
+		public static IndexSettings NormalizersFluent => Fluent<NormalizersDescriptor, INormalizerAssertion, INormalizers>(i => i.Fluent, (a, v) => a.Normalizers = v.Value);
+
 		public static IndexSettings AnalyzersFluent => Fluent<AnalyzersDescriptor, IAnalyzerAssertion, IAnalyzers>(i => i.Fluent, (a, v) => a.Analyzers = v.Value);
 
 		public static IndexSettings TokenizersFluent => Fluent<TokenizersDescriptor, ITokenizerAssertion, ITokenizers>(i => i.Fluent, (a, v) => a.Tokenizers = v.Value);
@@ -17,6 +19,8 @@ namespace Tests.Analysis.Tokenizers
 		public static IndexSettings TokenFiltersFluent => Fluent<TokenFiltersDescriptor, ITokenFilterAssertion, ITokenFilters>(i => i.Fluent, (a, v) => a.TokenFilters = v.Value);
 
 		public static IndexSettings CharFiltersFluent => Fluent<CharFiltersDescriptor, ICharFilterAssertion, ICharFilters>(i => i.Fluent, (a, v) => a.CharFilters = v.Value);
+
+		public static IndexSettings NormalizersInitializer => Init<Nest.Normalizers, INormalizerAssertion, INormalizer>(i => i.Initializer, (a, v) => a.Normalizers = v);
 
 		public static IndexSettings AnalyzersInitializer => Init<Nest.Analyzers, IAnalyzerAssertion, IAnalyzer>(i => i.Initializer, (a, v) => a.Analyzers = v);
 

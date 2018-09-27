@@ -1,5 +1,4 @@
-﻿using Elastic.Xunit.XunitPlumbing;
-using Nest;
+﻿using Nest;
 using Tests.Analysis.Tokenizers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Integration;
@@ -21,7 +20,7 @@ namespace Tests.Analysis
 					CharFilters = AnalysisUsageTests.CharFiltersInitializer.Analysis.CharFilters,
 					Tokenizers = AnalysisUsageTests.TokenizersInitializer.Analysis.Tokenizers,
 					TokenFilters = AnalysisUsageTests.TokenFiltersInitializer.Analysis.TokenFilters,
-					Normalizers = Normalizers.NormalizerUsageTests.InitializerExample.Analysis.Normalizers,
+					Normalizers = AnalysisUsageTests.NormalizersInitializer.Analysis.Normalizers,
 				}
 			}
 		};
@@ -33,7 +32,7 @@ namespace Tests.Analysis
 					.CharFilters(t => Promise(AnalysisUsageTests.CharFiltersFluent.Analysis.CharFilters))
 					.Tokenizers(t => Promise(AnalysisUsageTests.TokenizersFluent.Analysis.Tokenizers))
 					.TokenFilters(t => Promise(AnalysisUsageTests.TokenFiltersFluent.Analysis.TokenFilters))
-					.Normalizers(t => Promise(Normalizers.NormalizerUsageTests.FluentExample(s).Value.Analysis.Normalizers))
+					.Normalizers(t => Promise(AnalysisUsageTests.NormalizersFluent.Analysis.Normalizers))
 				)
 			);
 	}

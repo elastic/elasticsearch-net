@@ -22,7 +22,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 				.Analysis(a => a
 					.CharFilters(t => Promise(AnalysisUsageTests.CharFiltersFluent.Analysis.CharFilters))
 					.TokenFilters(t => Promise(AnalysisUsageTests.TokenFiltersFluent.Analysis.TokenFilters))
-					.Normalizers(t => Promise(Analysis.Normalizers.NormalizerUsageTests.FluentExample(s).Value.Analysis.Normalizers))
+					.Normalizers(t => Promise(AnalysisUsageTests.NormalizersInitializer.Analysis.Normalizers))
 				)
 			);
 
