@@ -5,7 +5,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 {
 	public class ReadOnlyCluster : ClientTestClusterBase
 	{
-		public ReadOnlyCluster() : base(MapperMurmur3, AnalysisKuromoji, AnalysisIcu, AnalysisPhonetic) { }
+		public ReadOnlyCluster() : base(MapperMurmur3) { }
 
 		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
 	}

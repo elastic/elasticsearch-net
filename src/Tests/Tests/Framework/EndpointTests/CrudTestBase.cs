@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Framework

@@ -11,7 +11,7 @@ namespace Tests.Analysis.CharFilters
 		{
 			public override string Name => "mapping";
 			public override ICharFilter Initializer => new MappingCharFilter {Mappings = new[] {"a=>b"}};
-			public override FuncTokenizer Fluent => (n, cf) => cf.Mapping("mapped", c => c.Mappings("a=>b"));
+			public override FuncTokenizer Fluent => (n, cf) => cf.Mapping(n, c => c.Mappings("a=>b"));
 			public override object Json => new { mappings = new[] {"a=>b"}, type = "mapping" };
 		}
 
@@ -35,7 +35,7 @@ namespace Tests.Analysis.CharFilters
 				};
 
 			public override FuncTokenizer Fluent => (n, cf) => cf
-				.IcuNormalization("icun", c => c
+				.IcuNormalization(n, c => c
 					.Mode(IcuNormalizationMode.Compose)
 					.Name(IcuNormalizationType.CompatibilityCaseFold)
 				);

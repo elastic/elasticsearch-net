@@ -11,14 +11,12 @@ using Tests.Analysis.Normalizers;
 using Tests.Analysis.TokenFilters;
 using Tests.Analysis.Tokenizers;
 using Tests.Core.Client;
-using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Analysis
 {
-	[IntegrationTestCluster(typeof(ReadOnlyCluster))]
 	public class AnalysisUsageTestsTests
 	{
-		[I] public static void CollectionsShouldNotBeEmpty()
+		[U] public static void CollectionsShouldNotBeEmpty()
 		{
 			var analyzers = AnalysisUsageTests.AnalyzersInitializer.Analysis.Analyzers;
 			var charFilters = AnalysisUsageTests.CharFiltersInitializer.Analysis.CharFilters;

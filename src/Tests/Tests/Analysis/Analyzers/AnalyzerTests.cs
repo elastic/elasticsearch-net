@@ -56,8 +56,7 @@ namespace Tests.Analysis.Analyzers
 
 			public override IAnalyzer Initializer => new PatternAnalyzer {Pattern = @"\w"};
 
-			public override FuncTokenizer Fluent => (n, an) => an
-				.Pattern("myPattern", a => a.Pattern(@"\w"));
+			public override FuncTokenizer Fluent => (n, an) => an.Pattern(n, a => a.Pattern(@"\w"));
 
 			public override object Json => new { type = "pattern", pattern = "\\w" };
 
@@ -134,11 +133,11 @@ namespace Tests.Analysis.Analyzers
 		}
 		public class WhitespaceTests : AnalyzerAssertionBase<WhitespaceTests>
 		{
-			public override string Name => "myWhiteSpace ";
+			public override string Name => "myWhiteSpace";
 
 			public override IAnalyzer Initializer => new WhitespaceAnalyzer();
 
-			public override FuncTokenizer Fluent => (n, an) => an.Whitespace("myWhiteSpace");
+			public override FuncTokenizer Fluent => (n, an) => an.Whitespace(n);
 			public override object Json => new {type = "whitespace"};
 
 		}
