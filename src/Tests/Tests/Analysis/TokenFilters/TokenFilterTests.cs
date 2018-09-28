@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 
@@ -877,6 +878,29 @@ namespace Tests.Analysis.TokenFilters
 				languageset = new[] {"cyrillic", "english", "hebrew"}
 			};
 
+		}
+
+		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
+		public class MultiplexerTests : TokenFilterAssertionBase<PhoneticTests>
+		{
+			public override string Name => "multiplexer";
+			public override object Json => new
+			{
+				filters = new[]{"lowercase", "lowercase, porter_stem"},
+				preserve_original = true
+			};
+
+			public override ITokenFilter Initializer => new MultiplexerTokenFilter
+			{
+				Filters = new[] {"lowercase", "lowercase, porter_stem"},
+				PreserveOriginal = true
+			};
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.Multiplexer(n, t => t
+					.Filters("lowercase", "lowercase, porter_stem")
+					.PreserveOriginal()
+				);
 		}
 	}
 }
