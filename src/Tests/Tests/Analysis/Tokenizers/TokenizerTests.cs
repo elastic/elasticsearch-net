@@ -208,7 +208,7 @@ namespace Tests.Analysis.Tokenizers
 		[SkipVersion("<6.4.0", "analysis-nori plugin introduced in 6.4.0")]
 		public class NoriTests : TokenizerAssertionBase<NoriTests>
 		{
-			public override string Name => "stan";
+			public override string Name => "nori";
 			public override ITokenizer Initializer => new NoriTokenizer
 			{
 				DecompoundMode = NoriDecompoundMode.Mixed

@@ -1,5 +1,7 @@
 using System;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
+using Tests.Analysis.TokenFilters;
 
 namespace Tests.Analysis.Analyzers
 {
@@ -197,5 +199,28 @@ namespace Tests.Analysis.Analyzers
 			};
 		}
 
+		[SkipVersion("<6.4.0", "analysis-nori plugin introduced in 6.4.0")]
+		public class NoriTests : AnalyzerAssertionBase<NoriTests>
+		{
+			public override string Name => "nori";
+			private readonly string[] _stopTags = {"NR", "SP"};
+			public override IAnalyzer Initializer => new NoriAnalyzer
+			{
+				StopTags = _stopTags,
+				DecompoundMode = NoriDecompoundMode.Mixed
+			};
+
+			public override FuncTokenizer Fluent => (n, t) => t.Nori(n, e => e
+				.StopTags(_stopTags)
+				.DecompoundMode(NoriDecompoundMode.Mixed)
+			);
+
+			public override object Json => new
+			{
+				type = "nori",
+				decompound_mode = "mixed",
+				stoptags =_stopTags
+			};
+		}
 	}
 }

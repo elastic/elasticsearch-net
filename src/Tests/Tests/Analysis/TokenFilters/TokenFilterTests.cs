@@ -884,12 +884,13 @@ namespace Tests.Analysis.TokenFilters
 		public class NoriPartOfSpeechTests : TokenFilterAssertionBase<NoriPartOfSpeechTests>
 		{
 			public override string Name => "nori_pos";
+			private readonly string[] _stopTags = {"NR", "SP"};
 
-			public override ITokenFilter Initializer => new NoriPartOfSpeechTokenFilter {StopTags = new[] {"a", "b", "c"}};
+			public override ITokenFilter Initializer => new NoriPartOfSpeechTokenFilter {StopTags = _stopTags};
 
-			public override FuncTokenFilters Fluent => (n, tf) => tf.NoriPartOfSpeech(n, t => t.StopTags("a", "b", "c"));
+			public override FuncTokenFilters Fluent => (n, tf) => tf.NoriPartOfSpeech(n, t => t.StopTags(_stopTags));
 
-			public override object Json => new { type = "nori_part_of_speech", stoptags = new[] {"a", "b", "c"} };
+			public override object Json => new { type = "nori_part_of_speech", stoptags = _stopTags };
 		}
 	}
 }

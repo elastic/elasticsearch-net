@@ -97,5 +97,9 @@ namespace Nest
 		/// </summary>
 		public AnalyzersDescriptor Kuromoji(string name, Func<KuromojiAnalyzerDescriptor, IKuromojiAnalyzer> selector = null) =>
 			Assign(name, selector.InvokeOrDefault(new KuromojiAnalyzerDescriptor()));
+
+		/// <inheritdoc cref="INoriAnalyzer"/>
+		public AnalyzersDescriptor Nori(string name, Func<NoriAnalyzerDescriptor, INoriAnalyzer> selector) =>
+			Assign(name, selector?.Invoke(new NoriAnalyzerDescriptor()));
 	}
 }

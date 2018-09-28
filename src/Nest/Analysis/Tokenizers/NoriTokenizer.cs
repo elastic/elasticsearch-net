@@ -49,7 +49,7 @@ namespace Nest
 	public class NoriTokenizerDescriptor
 		: TokenizerDescriptorBase<NoriTokenizerDescriptor, INoriTokenizer>, INoriTokenizer
 	{
-		protected override string Type => "pattern";
+		protected override string Type => "nori_tokenizer";
 
 	    NoriDecompoundMode? INoriTokenizer.DecompoundMode { get; set; }
 	    string INoriTokenizer.UserDictionary { get; set; }
