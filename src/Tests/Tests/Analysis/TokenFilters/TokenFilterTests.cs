@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
 
@@ -877,6 +878,18 @@ namespace Tests.Analysis.TokenFilters
 				languageset = new[] {"cyrillic", "english", "hebrew"}
 			};
 
+		}
+
+		[SkipVersion("<6.4.0", "analysis-nori plugin introduced in 6.4.0")]
+		public class NoriPartOfSpeechTests : TokenFilterAssertionBase<NoriPartOfSpeechTests>
+		{
+			public override string Name => "nori_pos";
+
+			public override ITokenFilter Initializer => new NoriPartOfSpeechTokenFilter {StopTags = new[] {"a", "b", "c"}};
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf.NoriPartOfSpeech(n, t => t.StopTags("a", "b", "c"));
+
+			public override object Json => new { type = "nori_part_of_speech", stoptags = new[] {"a", "b", "c"} };
 		}
 	}
 }

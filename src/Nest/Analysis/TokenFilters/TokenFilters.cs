@@ -317,5 +317,10 @@ namespace Nest
 		/// </summary>
 		public TokenFiltersDescriptor IcuTransform(string name, Func<IcuTransformTokenFilterDescriptor, IIcuTransformTokenFilter> selector) =>
 			Assign(name, selector.Invoke(new IcuTransformTokenFilterDescriptor()));
+
+		/// <inheritdoc cref="INoriPartOfSpeechTokenFilter"/>
+		public TokenFiltersDescriptor NoriPartOfSpeech(string name, Func<NoriPartOfSpeechTokenFilterDescriptor, INoriPartOfSpeechTokenFilter> selector) =>
+			Assign(name, selector.Invoke(new NoriPartOfSpeechTokenFilterDescriptor()));
+
 	}
 }
