@@ -14,7 +14,8 @@ namespace Tests.Analysis.Normalizers
 {
 
 	[IntegrationTestCluster(typeof(ReadOnlyCluster))]
-	public abstract class NormalizerAssertionBase<TAssertion> where TAssertion : NormalizerAssertionBase<TAssertion>, new()
+	public abstract class NormalizerAssertionBase<TAssertion> : INormalizerAssertion
+		where TAssertion : NormalizerAssertionBase<TAssertion>, new()
 	{
 		private static readonly SingleEndpointUsage<ICreateIndexResponse> Usage = new SingleEndpointUsage<ICreateIndexResponse>
 		(
@@ -32,15 +33,15 @@ namespace Tests.Analysis.Normalizers
 		protected NormalizerAssertionBase()
 		{
 			this.Client = (ElasticXunitRunner.CurrentCluster as ReadOnlyCluster)?.Client ?? TestClient.DefaultInMemoryClient;
-			Usage.KickOffOnce(this.Client);
+			Usage.KickOffOnce(this.Client, oneRandomCall: true);
 		}
 
 		private IElasticClient Client { get; }
 
-		protected abstract string Name { get; }
-		protected abstract INormalizer Initializer { get; }
-		protected abstract Func<string, NormalizersDescriptor, IPromise<INormalizers>> Fluent { get; }
-		protected abstract object Json { get; }
+		public abstract string Name { get; }
+		public abstract INormalizer Initializer { get; }
+		public abstract Func<string, NormalizersDescriptor, IPromise<INormalizers>> Fluent { get; }
+		public abstract object Json { get; }
 
 		[U] public async Task TestPutSettingsRequest() => await Usage.AssertOnAllResponses(r =>
 		{
@@ -50,7 +51,7 @@ namespace Tests.Analysis.Normalizers
 				{
 					analysis = new
 					{
-						tokenizer = new Dictionary<string, object>
+						normalizer = new Dictionary<string, object>
 						{
 							{ AssertionSetup.Name, AssertionSetup.Json}
 						}

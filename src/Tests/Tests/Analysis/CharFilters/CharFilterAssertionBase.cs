@@ -14,7 +14,8 @@ namespace Tests.Analysis.CharFilters
 {
 
 	[IntegrationTestCluster(typeof(ReadOnlyCluster))]
-	public abstract class CharFilterAssertionBase<TAssertion> where TAssertion : CharFilterAssertionBase<TAssertion>, new()
+	public abstract class CharFilterAssertionBase<TAssertion> : ICharFilterAssertion
+		where TAssertion : CharFilterAssertionBase<TAssertion>, new()
 	{
 		private static readonly SingleEndpointUsage<ICreateIndexResponse> Usage = new SingleEndpointUsage<ICreateIndexResponse>
 		(
@@ -32,15 +33,15 @@ namespace Tests.Analysis.CharFilters
 		protected CharFilterAssertionBase()
 		{
 			this.Client = (ElasticXunitRunner.CurrentCluster as ReadOnlyCluster)?.Client ?? TestClient.DefaultInMemoryClient;
-			Usage.KickOffOnce(this.Client);
+			Usage.KickOffOnce(this.Client, oneRandomCall: true);
 		}
 
 		private IElasticClient Client { get; }
 
-		protected abstract string Name { get; }
-		protected abstract ICharFilter Initializer { get; }
-		protected abstract Func<string, CharFiltersDescriptor, IPromise<ICharFilters>> Fluent { get; }
-		protected abstract object Json { get; }
+		public abstract string Name { get; }
+		public abstract ICharFilter Initializer { get; }
+		public abstract Func<string, CharFiltersDescriptor, IPromise<ICharFilters>> Fluent { get; }
+		public abstract object Json { get; }
 
 		[U] public async Task TestPutSettingsRequest() => await Usage.AssertOnAllResponses(r =>
 		{
@@ -50,7 +51,7 @@ namespace Tests.Analysis.CharFilters
 				{
 					analysis = new
 					{
-						tokenizer = new Dictionary<string, object>
+						char_filter = new Dictionary<string, object>
 						{
 							{ AssertionSetup.Name, AssertionSetup.Json}
 						}

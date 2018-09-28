@@ -5,8 +5,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
+using Bogus;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Configuration;
 using Tests.Core.Client;
 
 namespace Tests.Framework.Integration
@@ -23,7 +25,7 @@ namespace Tests.Framework.Integration
 
 		public EndpointUsage() : this("nest") { }
 
-		public EndpointUsage(string prefix) => this.CallUniqueValues = new CallUniqueValues(prefix);
+		protected EndpointUsage(string prefix) => this.CallUniqueValues = new CallUniqueValues(prefix);
 
 		public LazyResponses CallOnce(Func<LazyResponses> clientUsage, int k = 0)
 		{
@@ -67,33 +69,42 @@ namespace Tests.Framework.Integration
 
 		private LazyResponses Responses { get; set; }
 
-		public void KickOffOnce(IElasticClient client) => this.Responses = this.CallOnce(()=> new LazyResponses(async () =>
-		{
-			if (TestClient.Configuration.RunIntegrationTests)
+		public static Randomizer Random { get; } = new Randomizer(TestConfiguration.Instance.Seed);
+
+		public void KickOffOnce(IElasticClient client, bool oneRandomCall = false) =>
+			this.Responses = this.CallOnce(()=> new LazyResponses(async () =>
 			{
-				this.IntegrationSetup?.Invoke(client, this.CallUniqueValues);
-				this.CalledSetup = true;
-			}
+				if (TestClient.Configuration.RunIntegrationTests)
+				{
+					this.IntegrationSetup?.Invoke(client, this.CallUniqueValues);
+					this.CalledSetup = true;
+				}
 
-			var dict = new Dictionary<ClientMethod, IResponse>();
+				var randomCall = Random.Number(0, 3);
 
-			this.Call(client, dict, ClientMethod.Fluent, v => _fluent(v, client));
+				var dict = new Dictionary<ClientMethod, IResponse>();
 
-			await this.CallAsync(client, dict, ClientMethod.FluentAsync, v => _fluentAsync(v, client));
+				if (!oneRandomCall || randomCall == 0)
+					this.Call(client, dict, ClientMethod.Fluent, v => _fluent(v, client));
 
-			this.Call(client, dict, ClientMethod.Initializer, v => _request(v, client));
+				if (!oneRandomCall || randomCall == 1)
+					await this.CallAsync(client, dict, ClientMethod.FluentAsync, v => _fluentAsync(v, client));
 
-			await this.CallAsync(client, dict, ClientMethod.InitializerAsync, v => _requestAsync(v, client));
+				if (!oneRandomCall || randomCall == 2)
+					this.Call(client, dict, ClientMethod.Initializer, v => _request(v, client));
 
-			if (TestClient.Configuration.RunIntegrationTests)
-			{
-				foreach(var v in this.CallUniqueValues.Values.SelectMany(d=> d))
-				this.IntegrationTeardown?.Invoke(client, this.CallUniqueValues);
-				this.CalledTeardown = true;
-			}
+				if (!oneRandomCall || randomCall == 3)
+					await this.CallAsync(client, dict, ClientMethod.InitializerAsync, v => _requestAsync(v, client));
 
-			return dict;
-		}));
+				if (TestClient.Configuration.RunIntegrationTests)
+				{
+					foreach (var v in this.CallUniqueValues.Values.SelectMany(d => d))
+						this.IntegrationTeardown?.Invoke(client, this.CallUniqueValues);
+					this.CalledTeardown = true;
+				}
+
+				return dict;
+			}));
 
 		private void Call(IElasticClient client, IDictionary<ClientMethod, IResponse> dict, ClientMethod method, Func<string, TResponse> call)
 		{

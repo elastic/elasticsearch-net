@@ -79,7 +79,7 @@ namespace Tests.Analysis
 
 		/**
 		* Here we assert over the response from `GetIndexSettings()` after the index creation to make sure our analysis chain did infact
-		* store our html char filter called `stripMe`
+		* store our html char filter called `htmls`
 		*/
 		protected override void ExpectAfterCreate(IGetIndexSettingsResponse response)
 		{
@@ -91,7 +91,7 @@ namespace Tests.Analysis
 			indexSettings.Analysis.Should().NotBeNull();
 			indexSettings.Analysis.CharFilters.Should().NotBeNull();
 
-			var firstHtmlCharFilter = indexSettings.Analysis.CharFilters["stripMe"];
+			var firstHtmlCharFilter = indexSettings.Analysis.CharFilters["htmls"];
 			firstHtmlCharFilter.Should().NotBeNull();
 		}
 

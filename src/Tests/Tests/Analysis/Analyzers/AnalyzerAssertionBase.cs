@@ -14,7 +14,8 @@ namespace Tests.Analysis.Analyzers
 {
 
 	[IntegrationTestCluster(typeof(ReadOnlyCluster))]
-	public abstract class AnalyzerAssertionBase<TAssertion> where TAssertion : AnalyzerAssertionBase<TAssertion>, new()
+	public abstract class AnalyzerAssertionBase<TAssertion> : IAnalyzerAssertion
+		where TAssertion : AnalyzerAssertionBase<TAssertion>, new()
 	{
 		private static readonly SingleEndpointUsage<ICreateIndexResponse> Usage = new SingleEndpointUsage<ICreateIndexResponse>
 		(
@@ -32,15 +33,15 @@ namespace Tests.Analysis.Analyzers
 		protected AnalyzerAssertionBase()
 		{
 			this.Client = (ElasticXunitRunner.CurrentCluster as ReadOnlyCluster)?.Client ?? TestClient.DefaultInMemoryClient;
-			Usage.KickOffOnce(this.Client);
+			Usage.KickOffOnce(this.Client, oneRandomCall: true);
 		}
 
 		private IElasticClient Client { get; }
 
-		protected abstract string Name { get; }
-		protected abstract IAnalyzer Initializer { get; }
-		protected abstract Func<string, AnalyzersDescriptor, IPromise<IAnalyzers>> Fluent { get; }
-		protected abstract object Json { get; }
+		public abstract string Name { get; }
+		public abstract IAnalyzer Initializer { get; }
+		public abstract Func<string, AnalyzersDescriptor, IPromise<IAnalyzers>> Fluent { get; }
+		public abstract object Json { get; }
 
 		[U] public async Task TestPutSettingsRequest() => await Usage.AssertOnAllResponses(r =>
 		{
@@ -50,7 +51,7 @@ namespace Tests.Analysis.Analyzers
 				{
 					analysis = new
 					{
-						tokenizer = new Dictionary<string, object>
+						analyzer = new Dictionary<string, object>
 						{
 							{ AssertionSetup.Name, AssertionSetup.Json}
 						}

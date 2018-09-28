@@ -14,7 +14,8 @@ namespace Tests.Analysis.TokenFilters
 {
 
 	[IntegrationTestCluster(typeof(ReadOnlyCluster))]
-	public abstract class TokenFilterAssertionBase<TAssertion> where TAssertion : TokenFilterAssertionBase<TAssertion>, new()
+	public abstract class TokenFilterAssertionBase<TAssertion> : ITokenFilterAssertion
+		where TAssertion : TokenFilterAssertionBase<TAssertion>, new()
 	{
 		private static readonly SingleEndpointUsage<ICreateIndexResponse> Usage = new SingleEndpointUsage<ICreateIndexResponse>
 		(
@@ -32,15 +33,15 @@ namespace Tests.Analysis.TokenFilters
 		protected TokenFilterAssertionBase()
 		{
 			this.Client = (ElasticXunitRunner.CurrentCluster as ReadOnlyCluster)?.Client ?? TestClient.DefaultInMemoryClient;
-			Usage.KickOffOnce(this.Client);
+			Usage.KickOffOnce(this.Client, oneRandomCall: true);
 		}
 
 		private IElasticClient Client { get; }
 
-		protected abstract string Name { get; }
-		protected abstract ITokenFilter Initializer { get; }
-		protected abstract Func<string, TokenFiltersDescriptor, IPromise<ITokenFilters>> Fluent { get; }
-		protected abstract object Json { get; }
+		public abstract string Name { get; }
+		public abstract ITokenFilter Initializer { get; }
+		public abstract Func<string, TokenFiltersDescriptor, IPromise<ITokenFilters>> Fluent { get; }
+		public abstract object Json { get; }
 
 		[U] public async Task TestPutSettingsRequest() => await Usage.AssertOnAllResponses(r =>
 		{
@@ -50,7 +51,7 @@ namespace Tests.Analysis.TokenFilters
 				{
 					analysis = new
 					{
-						tokenizer = new Dictionary<string, object>
+						filter = new Dictionary<string, object>
 						{
 							{ AssertionSetup.Name, AssertionSetup.Json}
 						}

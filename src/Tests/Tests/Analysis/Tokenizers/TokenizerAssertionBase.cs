@@ -14,7 +14,8 @@ namespace Tests.Analysis.Tokenizers
 {
 
 	[IntegrationTestCluster(typeof(ReadOnlyCluster))]
-	public abstract class TokenizerAssertionBase<TAssertion> where TAssertion : TokenizerAssertionBase<TAssertion>, new()
+	public abstract class TokenizerAssertionBase<TAssertion> : ITokenizerAssertion
+		where TAssertion : TokenizerAssertionBase<TAssertion>, new()
 	{
 		private static readonly SingleEndpointUsage<ICreateIndexResponse> Usage = new SingleEndpointUsage<ICreateIndexResponse>
 		(
@@ -32,15 +33,15 @@ namespace Tests.Analysis.Tokenizers
 		protected TokenizerAssertionBase()
 		{
 			this.Client = (ElasticXunitRunner.CurrentCluster as ReadOnlyCluster)?.Client ?? TestClient.DefaultInMemoryClient;
-			Usage.KickOffOnce(this.Client);
+			Usage.KickOffOnce(this.Client, oneRandomCall: true);
 		}
 
 		private IElasticClient Client { get; }
 
-		protected abstract string Name { get; }
-		protected abstract ITokenizer Initializer { get; }
-		protected abstract Func<string, TokenizersDescriptor, IPromise<ITokenizers>> Fluent { get; }
-		protected abstract object Json { get; }
+		public abstract string Name { get; }
+		public abstract ITokenizer Initializer { get; }
+		public abstract Func<string, TokenizersDescriptor, IPromise<ITokenizers>> Fluent { get; }
+		public abstract object Json { get; }
 
 		[U] public async Task TestPutSettingsRequest() => await Usage.AssertOnAllResponses(r =>
 		{
@@ -72,7 +73,6 @@ namespace Tests.Analysis.Tokenizers
 				Analysis = new Nest.Analysis
 				{
 					Tokenizers = new Nest.Tokenizers { { AssertionSetup.Name, AssertionSetup.Initializer } }
-
 				}
 			}
 		};

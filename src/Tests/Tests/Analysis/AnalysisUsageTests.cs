@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
 using Nest;
 using Tests.Analysis.Analyzers;
 using Tests.Analysis.CharFilters;
@@ -10,11 +11,30 @@ using Tests.Analysis.Normalizers;
 using Tests.Analysis.TokenFilters;
 using Tests.Analysis.Tokenizers;
 using Tests.Core.Client;
+using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Analysis
 {
+	[IntegrationTestCluster(typeof(ReadOnlyCluster))]
+	public class AnalysisUsageTestsTests
+	{
+		[I] public static void CollectionsShouldNotBeEmpty()
+		{
+			var analyzers = AnalysisUsageTests.AnalyzersInitializer.Analysis.Analyzers;
+			var charFilters = AnalysisUsageTests.CharFiltersInitializer.Analysis.CharFilters;
+			var tokenizers = AnalysisUsageTests.TokenizersInitializer.Analysis.Tokenizers;
+			var tokenFilters = AnalysisUsageTests.TokenFiltersInitializer.Analysis.TokenFilters;
+
+			analyzers.Should().NotBeNull().And.NotBeEmpty();
+			charFilters.Should().NotBeNull().And.NotBeEmpty();
+			tokenizers.Should().NotBeNull().And.NotBeEmpty();
+			tokenFilters.Should().NotBeNull().And.NotBeEmpty();
+		}
+	}
+
 	public static class AnalysisUsageTests
 	{
+
 		public static IndexSettings NormalizersFluent => Fluent<NormalizersDescriptor, INormalizerAssertion, INormalizers>(i => i.Fluent, (a, v) => a.Normalizers = v.Value);
 
 		public static IndexSettings AnalyzersFluent => Fluent<AnalyzersDescriptor, IAnalyzerAssertion, IAnalyzers>(i => i.Fluent, (a, v) => a.Analyzers = v.Value);
@@ -59,12 +79,25 @@ namespace Tests.Analysis
 		private static List<TAssertion> All<TAssertion>()
 			where TAssertion : IAnalysisAssertion
 		{
-			var types =
-				from t in typeof(TokenizerTests).GetNestedTypes()
-				where typeof(TAssertion).IsAssignableFrom(t) && t.IsClass
-				let a = t.GetCustomAttributes(typeof(SkipVersionAttribute)).FirstOrDefault() as SkipVersionAttribute
-				where a != null && !a.Ranges.Any(r=>r.IsSatisfied(TestClient.Configuration.ElasticsearchVersion))
-				select (TAssertion) Activator.CreateInstance(t);
+			var assertions = typeof(TokenizerTests).GetNestedTypes()
+				.Union(typeof(TokenFilterTests).GetNestedTypes())
+				.Union(typeof(NormalizerTests).GetNestedTypes())
+				.Union(typeof(AnalyzerTests).GetNestedTypes())
+				.Union(typeof(CharFilterTests).GetNestedTypes())
+				.ToList();
+
+			var nestedTypes = assertions
+				.Where(t => typeof(TAssertion).IsAssignableFrom(t) && t.IsClass)
+				.ToList();
+
+			var types = nestedTypes
+				.Select(t => new
+				{
+					t,
+					a = t.GetCustomAttributes(typeof(SkipVersionAttribute)).FirstOrDefault() as SkipVersionAttribute
+				})
+				.Where(@t1 => @t1.a == null || !@t1.a.Ranges.Any(r => r.IsSatisfied(TestClient.Configuration.ElasticsearchVersion)))
+				.Select(@t1 => (TAssertion) Activator.CreateInstance(@t1.t));
 			return types.ToList();
 		}
 

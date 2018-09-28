@@ -27,6 +27,17 @@ namespace Tests.Framework
 	    protected CrudWithNoDeleteTestBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsDeletes => false;
 		protected override bool SupportsExists => false;
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[I] protected override Task CreateCallIsValid() => base.CreateCallIsValid();
+		[I] protected override Task GetAfterCreateIsValid() => base.GetAfterCreateIsValid();
+		[I] protected override Task ExistsAfterCreateIsValid() => base.ExistsAfterCreateIsValid();
+		[I] protected override Task UpdateCallIsValid() => base.UpdateCallIsValid();
+		[I] protected override Task GetAfterUpdateIsValid() => base.GetAfterUpdateIsValid();
+		[I] protected override Task DeleteCallIsValid() => base.DeleteCallIsValid();
+		[I] protected override Task GetAfterDeleteIsValid() => base.GetAfterDeleteIsValid();
+		[I] protected override Task ExistsAfterDeleteIsValid() => base.ExistsAfterDeleteIsValid();
+		[I] protected override Task DeleteNotFoundIsNotValid() => base.DeleteNotFoundIsNotValid();
 	}
 
 	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
@@ -38,6 +49,16 @@ namespace Tests.Framework
 	{
 		protected CrudTestBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsExists => false;
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[I] protected override Task CreateCallIsValid() => base.CreateCallIsValid();
+		[I] protected override Task GetAfterCreateIsValid() => base.GetAfterCreateIsValid();
+		[I] protected override Task ExistsAfterCreateIsValid() => base.ExistsAfterCreateIsValid();
+		[I] protected override Task UpdateCallIsValid() => base.UpdateCallIsValid();
+		[I] protected override Task GetAfterUpdateIsValid() => base.GetAfterUpdateIsValid();
+		[I] protected override Task DeleteCallIsValid() => base.DeleteCallIsValid();
+		[I] protected override Task GetAfterDeleteIsValid() => base.GetAfterDeleteIsValid();
+		[I] protected override Task ExistsAfterDeleteIsValid() => base.ExistsAfterDeleteIsValid();
+		[I] protected override Task DeleteNotFoundIsNotValid() => base.DeleteNotFoundIsNotValid();
 	}
 	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
 		: CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse, ExistsResponse>
@@ -49,6 +70,16 @@ namespace Tests.Framework
 	{
 		protected CrudTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsExists => false;
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[I] protected override Task CreateCallIsValid() => base.CreateCallIsValid();
+		[I] protected override Task GetAfterCreateIsValid() => base.GetAfterCreateIsValid();
+		[I] protected override Task ExistsAfterCreateIsValid() => base.ExistsAfterCreateIsValid();
+		[I] protected override Task UpdateCallIsValid() => base.UpdateCallIsValid();
+		[I] protected override Task GetAfterUpdateIsValid() => base.GetAfterUpdateIsValid();
+		[I] protected override Task DeleteCallIsValid() => base.DeleteCallIsValid();
+		[I] protected override Task GetAfterDeleteIsValid() => base.GetAfterDeleteIsValid();
+		[I] protected override Task ExistsAfterDeleteIsValid() => base.ExistsAfterDeleteIsValid();
+		[I] protected override Task DeleteNotFoundIsNotValid() => base.DeleteNotFoundIsNotValid();
 	}
 
 	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse, TExistsResponse>
