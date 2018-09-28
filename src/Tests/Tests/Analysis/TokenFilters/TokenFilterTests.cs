@@ -902,5 +902,13 @@ namespace Tests.Analysis.TokenFilters
 					.PreserveOriginal()
 				);
 		}
+		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
+		public class RemoveDuplicatesTests : TokenFilterAssertionBase<PhoneticTests>
+		{
+			public override string Name => "dupes";
+			public override object Json => new { };
+			public override ITokenFilter Initializer => new RemoveDuplicatesTokenFilter { };
+			public override FuncTokenFilters Fluent => (n, tf) => tf.RemoveDuplicates(n);
+		}
 	}
 }
