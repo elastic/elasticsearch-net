@@ -91,5 +91,9 @@ namespace Nest
 		/// </summary>
 		public ITokenizer Icu(Func<IcuTokenizerDescriptor, IIcuTokenizer> selector) =>
 			(selector?.Invoke(new IcuTokenizerDescriptor()));
+
+		/// <inheritdoc cref="INoriTokenizer"/>
+		public ITokenizer Nori(Func<NoriTokenizerDescriptor, INoriTokenizer> selector) =>
+			selector.Invoke(new NoriTokenizerDescriptor());
 	}
 }
