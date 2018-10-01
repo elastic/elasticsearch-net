@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -71,6 +73,21 @@ namespace Tests.Indices.AliasManagement.Alias
 		protected override string UrlPath => $"/_aliases";
 		private string Index => this.CallIsolatedValue;
 		private string Alias(int i) => $"alias-{this.CallIsolatedValue}-{i}";
+
+		protected override void OnAfterCall(IElasticClient client)
+		{
+			var secondAlias = this.Alias(2);
+			var aliasResponse = this.Client.GetAlias(a => a.Name(secondAlias));
+			aliasResponse.ShouldBeValid();
+			aliasResponse.Indices.Should().NotBeEmpty().And.ContainKey(this.Index);
+			var indexAliases = aliasResponse.Indices[this.Index].Aliases;
+
+			indexAliases.Should().NotBeEmpty().And.ContainKey(secondAlias);
+			var alias = indexAliases[secondAlias];
+			alias.IsWriteIndex.Should().HaveValue().And
+				.BeTrue($"{secondAlias} was stored is is_write_index, so we need to be able to read it too");
+
+		}
 
 		protected override bool SupportsDeserialization => false;
 
