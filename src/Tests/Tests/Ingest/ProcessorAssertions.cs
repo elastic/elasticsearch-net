@@ -341,5 +341,35 @@ namespace Tests.Ingest
 					.IgnoreMissing()
 				);
 		}
+
+		[SkipVersion("<6.4.0", "")]
+		public class Attachment : ProcessorAssertion
+		{
+			public override string Key => "attachment";
+
+			public override object Json => new
+			{
+				field = "description",
+				ignore_missing = true,
+				properties = new [] {"title", "author"},
+				indexed_chars = 100_000,
+			};
+
+			public override IProcessor Initializer => new AttachmentProcessor
+			{
+				Field = "description",
+				Properties = new [] {"title", "author"},
+				IndexedCharacters = 100_000,
+				IgnoreMissing = true
+
+			};
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Attachment<Project>(ud => ud
+					.Field(p => p.Description)
+					.IndexedCharacters(100_000)
+					.Properties("title", "author")
+					.IgnoreMissing()
+				);
+		}
 	}
 }
