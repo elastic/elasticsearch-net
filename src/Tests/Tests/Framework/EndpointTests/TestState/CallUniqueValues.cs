@@ -3,9 +3,14 @@ using System.Collections.Generic;
 
 namespace Tests.Framework.Integration
 {
+	/// <summary>
+	/// Holds unique values for the the two DSL's and the exposed sync and async methods we expose
+	/// <see cref="ClientMethod"/>
+	/// </summary>
 	public class CallUniqueValues : Dictionary<ClientMethod, string>
 	{
 		private string UniqueValue => "nest-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+		public string FixedForAllCallsValue { get; }
 
 		private IDictionary<ClientMethod, IDictionary<string, object>> ExtendedValues { get; }
 			= new Dictionary<ClientMethod, IDictionary<string, object>>();
@@ -19,6 +24,7 @@ namespace Tests.Framework.Integration
 
 		public CallUniqueValues()
 		{
+			this.FixedForAllCallsValue = this.UniqueValue;
 			this.Add(ClientMethod.Fluent, this.UniqueValue);
 			this.Add(ClientMethod.FluentAsync, this.UniqueValue);
 			this.Add(ClientMethod.Initializer, this.UniqueValue);
