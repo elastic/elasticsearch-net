@@ -6,6 +6,12 @@ namespace Nest
 	[JsonObject]
 	public class IndicesStats
 	{
+		/// <summary>
+		/// Introduced in 6.4.0, returns the index UUID
+		/// </summary>
+		[JsonProperty("uuid")]
+		public string Uuid { get; }
+
 		[JsonProperty("primaries")]
 		public IndexStats Primaries { get; internal set; }
 
