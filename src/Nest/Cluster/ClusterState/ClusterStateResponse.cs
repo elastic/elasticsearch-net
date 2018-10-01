@@ -14,6 +14,10 @@ namespace Nest
 		[JsonProperty("state_uuid")]
 		string StateUUID { get; }
 
+		/// <summary> NOTE: While the cluster is still forming, it is possible for the `cluster_uuid` to be `_na_`.</summary>
+		[JsonProperty("cluster_uuid")]
+		string ClusterUUID { get; }
+
 		[JsonProperty("version")]
 		long Version { get; }
 
@@ -41,6 +45,9 @@ namespace Nest
 		public string MasterNode { get; internal set; }
 
 		public string StateUUID { get; internal set; }
+
+		/// <inheritdoc cref="IClusterStateResponse.ClusterUUID"/>
+		public string ClusterUUID { get; internal set; }
 
 		public long Version { get; internal set; }
 
