@@ -5,5 +5,5 @@ namespace Nest
 	[JsonObject]
 	public interface IDeleteRollupJobResponse : IAcknowledgedResponse {}
 
-	public class DeleteRollupJobResponse : AcknowledgedResponseBase, IDeleteJobResponse {}
+	public class DeleteRollupJobResponse : AcknowledgedResponseBase, IDeleteRollupJobResponse {}
 }

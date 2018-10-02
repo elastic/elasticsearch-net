@@ -41,7 +41,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="ICreateRollupJobRequest"/>
-	public partial class CreateRollupJobRequest : ICreateRollupJobRequest
+	public partial class CreateRollupJobRequest
 	{
 		/// <inheritdoc cref="ICreateRollupJobRequest.IndexPattern">
 		public string IndexPattern { get; set; }
@@ -58,8 +58,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc cref="ICreateRollupJobRequest"/>>
-	public partial class CreateRollupJobDescriptor<T> : ICreateRollupJobRequest
-		where T : class
+	public partial class CreateRollupJobDescriptor<T> where T : class
 	{
 		string ICreateRollupJobRequest.IndexPattern { get; set; }
 		IndexName ICreateRollupJobRequest.RollupIndex { get; set; }
