@@ -3542,6 +3542,66 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> XpackMigrationUpgradeAsync<TResponse>(string index, MigrationUpgradeRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/migration/upgrade/{index.NotNull("index")}"), ctx, null, _params(requestParameters));
+		///<summary>DELETE on /_xpack/rollup/job/{id} <para></para></summary>
+		///<param name="id">The ID of the job to delete</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackRollupDeleteJob<TResponse>(string id, DeleteRollupJobRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(DELETE, Url($"_xpack/rollup/job/{id.NotNull("id")}"), null, _params(requestParameters));
+		///<summary>DELETE on /_xpack/rollup/job/{id} <para></para></summary>
+		///<param name="id">The ID of the job to delete</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackRollupDeleteJobAsync<TResponse>(string id, DeleteRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(DELETE, Url($"_xpack/rollup/job/{id.NotNull("id")}"), ctx, null, _params(requestParameters));
+		///<summary>GET on /_xpack/rollup/job/{id} <para></para></summary>
+		///<param name="id">The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackRollupGetJobs<TResponse>(string id, GetRollupJobRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/rollup/job/{id.NotNull("id")}"), null, _params(requestParameters));
+		///<summary>GET on /_xpack/rollup/job/{id} <para></para></summary>
+		///<param name="id">The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackRollupGetJobsAsync<TResponse>(string id, GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/rollup/job/{id.NotNull("id")}"), ctx, null, _params(requestParameters));
+		///<summary>GET on /_xpack/rollup/job/ <para></para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackRollupGetJobs<TResponse>(GetRollupJobRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/rollup/job/"), null, _params(requestParameters));
+		///<summary>GET on /_xpack/rollup/job/ <para></para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackRollupGetJobsAsync<TResponse>(GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/rollup/job/"), ctx, null, _params(requestParameters));
+		///<summary>PUT on /_xpack/rollup/job/{id} <para></para></summary>
+		///<param name="id">The ID of the job to create</param>
+		///<param name="body">The job configuration</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackRollupPutJob<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(PUT, Url($"_xpack/rollup/job/{id.NotNull("id")}"), body, _params(requestParameters));
+		///<summary>PUT on /_xpack/rollup/job/{id} <para></para></summary>
+		///<param name="id">The ID of the job to create</param>
+		///<param name="body">The job configuration</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackRollupPutJobAsync<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(PUT, Url($"_xpack/rollup/job/{id.NotNull("id")}"), ctx, body, _params(requestParameters));
+		///<summary>POST on /_xpack/rollup/job/{id}/_start <para></para></summary>
+		///<param name="id">The ID of the job to start</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackRollupStartJob<TResponse>(string id, StartRollupJobRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/rollup/job/{id.NotNull("id")}/_start"), null, _params(requestParameters));
+		///<summary>POST on /_xpack/rollup/job/{id}/_start <para></para></summary>
+		///<param name="id">The ID of the job to start</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackRollupStartJobAsync<TResponse>(string id, StartRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/rollup/job/{id.NotNull("id")}/_start"), ctx, null, _params(requestParameters));
+		///<summary>POST on /_xpack/rollup/job/{id}/_stop <para></para></summary>
+		///<param name="id">The ID of the job to stop</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackRollupStopJob<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(POST, Url($"_xpack/rollup/job/{id.NotNull("id")}/_stop"), null, _params(requestParameters));
+		///<summary>POST on /_xpack/rollup/job/{id}/_stop <para></para></summary>
+		///<param name="id">The ID of the job to stop</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackRollupStopJobAsync<TResponse>(string id, StopRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(POST, Url($"_xpack/rollup/job/{id.NotNull("id")}/_stop"), ctx, null, _params(requestParameters));
 		///<summary>GET on /_xpack/security/_authenticate <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public TResponse XpackSecurityAuthenticate<TResponse>(AuthenticateRequestParameters requestParameters = null)

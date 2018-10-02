@@ -3838,6 +3838,116 @@ namespace Nest
 			throw InvalidDispatch("XpackMigrationUpgrade", p, new [] { POST }, "/_xpack/migration/upgrade/{index}");
 		}
 		
+		internal TResponse XpackRollupDeleteJobDispatch<TResponse>(IRequest<DeleteRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupDeleteJob<TResponse>(p.RouteValues.Id,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupDeleteJob", p, new [] { DELETE }, "/_xpack/rollup/job/{id}");
+		}
+		
+		internal Task<TResponse> XpackRollupDeleteJobDispatchAsync<TResponse>(IRequest<DeleteRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupDeleteJobAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupDeleteJob", p, new [] { DELETE }, "/_xpack/rollup/job/{id}");
+		}
+		
+		internal TResponse XpackRollupGetJobsDispatch<TResponse>(IRequest<GetRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackRollupGetJobs<TResponse>(p.RouteValues.Id,p.RequestParameters);
+						return _lowLevel.XpackRollupGetJobs<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackRollupGetJobs", p, new [] { GET }, "/_xpack/rollup/job/{id}", "/_xpack/rollup/job/");
+		}
+		
+		internal Task<TResponse> XpackRollupGetJobsDispatchAsync<TResponse>(IRequest<GetRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Id)) return _lowLevel.XpackRollupGetJobsAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+						return _lowLevel.XpackRollupGetJobsAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackRollupGetJobs", p, new [] { GET }, "/_xpack/rollup/job/{id}", "/_xpack/rollup/job/");
+		}
+		
+		internal TResponse XpackRollupPutJobDispatch<TResponse>(IRequest<CreateRollupJobRequestParameters> p,SerializableData<ICreateRollupJobRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupPutJob<TResponse>(p.RouteValues.Id,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupPutJob", p, new [] { PUT }, "/_xpack/rollup/job/{id}");
+		}
+		
+		internal Task<TResponse> XpackRollupPutJobDispatchAsync<TResponse>(IRequest<CreateRollupJobRequestParameters> p,SerializableData<ICreateRollupJobRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupPutJobAsync<TResponse>(p.RouteValues.Id,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupPutJob", p, new [] { PUT }, "/_xpack/rollup/job/{id}");
+		}
+		
+		internal TResponse XpackRollupStartJobDispatch<TResponse>(IRequest<StartRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupStartJob<TResponse>(p.RouteValues.Id,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupStartJob", p, new [] { POST }, "/_xpack/rollup/job/{id}/_start");
+		}
+		
+		internal Task<TResponse> XpackRollupStartJobDispatchAsync<TResponse>(IRequest<StartRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupStartJobAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupStartJob", p, new [] { POST }, "/_xpack/rollup/job/{id}/_start");
+		}
+		
+		internal TResponse XpackRollupStopJobDispatch<TResponse>(IRequest<StopRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupStopJob<TResponse>(p.RouteValues.Id,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupStopJob", p, new [] { POST }, "/_xpack/rollup/job/{id}/_stop");
+		}
+		
+		internal Task<TResponse> XpackRollupStopJobDispatchAsync<TResponse>(IRequest<StopRollupJobRequestParameters> p, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.XpackRollupStopJobAsync<TResponse>(p.RouteValues.Id,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupStopJob", p, new [] { POST }, "/_xpack/rollup/job/{id}/_stop");
+		}
+		
 		internal TResponse XpackSecurityAuthenticateDispatch<TResponse>(IRequest<AuthenticateRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)
