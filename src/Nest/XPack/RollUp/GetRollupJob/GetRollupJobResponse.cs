@@ -1,9 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
-	public interface IGetRollupJobResponse : IAcknowledgedResponse {}
+	public interface IGetRollupJobResponse : IResponse
+	{
+		[JsonProperty("jobs")]
+		IReadOnlyCollection<RollupJobInformation> Jobs { get; }
+	}
 
-	public class GetRollupJobResponse : AcknowledgedResponseBase, IGetRollupJobResponse {}
+	public class GetRollupJobResponse : ResponseBase, IGetRollupJobResponse
+	{
+		public IReadOnlyCollection<RollupJobInformation> Jobs { get; internal set; } = EmptyReadOnly<RollupJobInformation>.Collection;
+	}
 }
+

@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.Framework
@@ -27,6 +23,17 @@ namespace Tests.Framework
 	    protected CrudWithNoDeleteTestBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsDeletes => false;
 		protected override bool SupportsExists => false;
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[I] protected override Task CreateCallIsValid() => base.CreateCallIsValid();
+		[I] protected override Task GetAfterCreateIsValid() => base.GetAfterCreateIsValid();
+		[I] protected override Task ExistsAfterCreateIsValid() => base.ExistsAfterCreateIsValid();
+		[I] protected override Task UpdateCallIsValid() => base.UpdateCallIsValid();
+		[I] protected override Task GetAfterUpdateIsValid() => base.GetAfterUpdateIsValid();
+		[I] protected override Task DeleteCallIsValid() => base.DeleteCallIsValid();
+		[I] protected override Task GetAfterDeleteIsValid() => base.GetAfterDeleteIsValid();
+		[I] protected override Task ExistsAfterDeleteIsValid() => base.ExistsAfterDeleteIsValid();
+		[I] protected override Task DeleteNotFoundIsNotValid() => base.DeleteNotFoundIsNotValid();
 	}
 
 	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
@@ -38,6 +45,17 @@ namespace Tests.Framework
 	{
 		protected CrudTestBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsExists => false;
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[I] protected override Task CreateCallIsValid() => base.CreateCallIsValid();
+		[I] protected override Task GetAfterCreateIsValid() => base.GetAfterCreateIsValid();
+		[I] protected override Task ExistsAfterCreateIsValid() => base.ExistsAfterCreateIsValid();
+		[I] protected override Task UpdateCallIsValid() => base.UpdateCallIsValid();
+		[I] protected override Task GetAfterUpdateIsValid() => base.GetAfterUpdateIsValid();
+		[I] protected override Task DeleteCallIsValid() => base.DeleteCallIsValid();
+		[I] protected override Task GetAfterDeleteIsValid() => base.GetAfterDeleteIsValid();
+		[I] protected override Task ExistsAfterDeleteIsValid() => base.ExistsAfterDeleteIsValid();
+		[I] protected override Task DeleteNotFoundIsNotValid() => base.DeleteNotFoundIsNotValid();
 	}
 	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
 		: CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse, ExistsResponse>
@@ -49,6 +67,17 @@ namespace Tests.Framework
 	{
 		protected CrudTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsExists => false;
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[I] protected override Task CreateCallIsValid() => base.CreateCallIsValid();
+		[I] protected override Task GetAfterCreateIsValid() => base.GetAfterCreateIsValid();
+		[I] protected override Task ExistsAfterCreateIsValid() => base.ExistsAfterCreateIsValid();
+		[I] protected override Task UpdateCallIsValid() => base.UpdateCallIsValid();
+		[I] protected override Task GetAfterUpdateIsValid() => base.GetAfterUpdateIsValid();
+		[I] protected override Task DeleteCallIsValid() => base.DeleteCallIsValid();
+		[I] protected override Task GetAfterDeleteIsValid() => base.GetAfterDeleteIsValid();
+		[I] protected override Task ExistsAfterDeleteIsValid() => base.ExistsAfterDeleteIsValid();
+		[I] protected override Task DeleteNotFoundIsNotValid() => base.DeleteNotFoundIsNotValid();
 	}
 
 	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse, TExistsResponse>
@@ -99,6 +128,9 @@ namespace Tests.Framework
 
 		protected virtual bool SupportsDeletes => true;
 		protected virtual bool SupportsExists => true;
+		protected virtual bool SupportsUpdates => true;
+		/// <summary>Helpful if you want to capture a reproduce trace with e.g fiddler</summary>
+		protected virtual bool TestOnlyOneMethod => false;
 
 		protected virtual void IntegrationSetup(IElasticClient client) { }
 
@@ -128,6 +160,7 @@ namespace Tests.Framework
 
 				var sf = Sanitize(RandomFluent);
 				dict.Add(Integration.ClientMethod.Fluent, fluent(sf, client, f => fluentBody(sf, f)));
+				if (this.TestOnlyOneMethod) return dict;
 
 				var sfa = Sanitize(RandomFluentAsync);
 				dict.Add(Integration.ClientMethod.FluentAsync, await fluentAsync(sfa, client, f => fluentBody(sfa, f)));
@@ -156,8 +189,11 @@ namespace Tests.Framework
 			await this._createGetResponse;
 			if (this.SupportsExists)
 				await this._createExistsResponse;
-			await this._updateResponse;
-			await this._updateGetResponse;
+			if (this.SupportsUpdates)
+			{
+                await this._updateResponse;
+                await this._updateGetResponse;
+			}
 			if (this.SupportsDeletes)
 			{
 				await this._deleteResponse;
@@ -185,7 +221,12 @@ namespace Tests.Framework
 		}
 
 		protected async Task AssertOnCreate(Action<TCreateResponse> assert) => await this.AssertOnAllResponses(this._createResponse, assert);
-		protected async Task AssertOnUpdate(Action<TUpdateResponse> assert) => await this.AssertOnAllResponses(this._updateResponse, assert);
+		protected async Task AssertOnUpdate(Action<TUpdateResponse> assert)
+		{
+			if (!this.SupportsUpdates) return;
+			await this.AssertOnAllResponses(this._updateResponse, assert);
+		}
+
 		protected async Task AssertOnDelete(Action<TDeleteResponse> assert)
 		{
 			if (!this.SupportsDeletes) return;
@@ -193,7 +234,12 @@ namespace Tests.Framework
 		}
 
 		protected async Task AssertOnGetAfterCreate(Action<TReadResponse> assert) => await this.AssertOnAllResponses(this._createGetResponse, assert);
-		protected async Task AssertOnGetAfterUpdate(Action<TReadResponse> assert) => await this.AssertOnAllResponses(this._updateGetResponse, assert);
+		protected async Task AssertOnGetAfterUpdate(Action<TReadResponse> assert)
+		{
+			if (!this.SupportsUpdates) return;
+			await this.AssertOnAllResponses(this._updateGetResponse, assert);
+		}
+
 		protected async Task AssertOnGetAfterDelete(Action<TReadResponse> assert)
 		{
 			if (!this.SupportsDeletes) return;

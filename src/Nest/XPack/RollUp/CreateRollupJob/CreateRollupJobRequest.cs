@@ -84,7 +84,7 @@ namespace Nest
 			Assign(a => a.Groups = selector?.Invoke(new RollupGroupingsDescriptor<T>()));
 
 		/// <inheritdoc cref="ICreateRollupJobRequest.Metrics">
-		public CreateRollupJobDescriptor<T> Metrics(Func<RollupFieldMetricsDescriptor<T>, IPromise<List<IRollupFieldMetric> >> selector) =>
+		public CreateRollupJobDescriptor<T> Metrics(Func<RollupFieldMetricsDescriptor<T>, IPromise<IList<IRollupFieldMetric> >> selector) =>
 			Assign(a => a.Metrics = selector?.Invoke(new RollupFieldMetricsDescriptor<T>())?.Value);
 	}
 }

@@ -21,12 +21,13 @@ namespace Nest
 		/// The interval defines the minimum interval that can be aggregated only.
 		/// </summary>
 		[JsonProperty("interval")]
-		TimeSpan Interval { get; set; }
+		Time Interval { get; set; }
+
 		/// <summary>
 		/// How long to wait before rolling up new documents. By default, the indexer attempts to roll up all data that is available.
 		/// </summary>
 		[JsonProperty("delay")]
-		TimeSpan Delay { get; set; }
+		Time Delay { get; set; }
 		/// <summary>
 		/// Defines what time_zone the rollup documents are stored as. Unlike raw data, which can shift timezones on the fly, rolled
 		/// documents have to be stored with a specific timezone. By default, rollup documents are stored in UT
@@ -42,10 +43,10 @@ namespace Nest
 		public Field Field { get; set; }
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Interval"/>
-		public TimeSpan Interval { get; set; }
+		public Time Interval { get; set; }
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Delay"/>
-		public TimeSpan Delay { get; set; }
+		public Time Delay { get; set; }
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.TimeZone"/>
 		public string TimeZone { get; set; }
@@ -57,8 +58,8 @@ namespace Nest
 		where T : class
 	{
 		Field IDateHistogramRollupGrouping.Field { get; set; }
-		TimeSpan IDateHistogramRollupGrouping.Interval { get; set; }
-		TimeSpan IDateHistogramRollupGrouping.Delay { get; set; }
+		Time IDateHistogramRollupGrouping.Interval { get; set; }
+		Time IDateHistogramRollupGrouping.Delay { get; set; }
 		string IDateHistogramRollupGrouping.TimeZone { get; set; }
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Field"/>
@@ -68,10 +69,10 @@ namespace Nest
 		public DateHistogramRollupGroupingDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Interval"/>
-		public DateHistogramRollupGroupingDescriptor<T> Interval(TimeSpan interval) => Assign(a => a.Interval = interval);
+		public DateHistogramRollupGroupingDescriptor<T> Interval(Time interval) => Assign(a => a.Interval = interval);
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.Delay"/>
-		public DateHistogramRollupGroupingDescriptor<T> Delay(TimeSpan delay) => Assign(a => a.Delay = delay);
+		public DateHistogramRollupGroupingDescriptor<T> Delay(Time delay) => Assign(a => a.Delay = delay);
 
 		/// <inheritdoc cref="IDateHistogramRollupGrouping.TimeZone"/>
 		public DateHistogramRollupGroupingDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);

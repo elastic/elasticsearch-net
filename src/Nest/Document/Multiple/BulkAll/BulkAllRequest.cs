@@ -41,10 +41,16 @@ namespace Nest
 		int? WaitForActiveShards { get; set; }
 
 		///<summary>Refresh the index after performing each operation (elasticsearch will refresh locally)</summary>
+		[Obsolete("This option is scheduled for deletion in 7.0, refreshing on each _bulk makes little sense for BulkAll")]
 		Refresh? Refresh { get; set; }
 
-		///<summary>Refresh the index after performing ALL the bulk operations (NOTE this is an additional request)</summary>
+		///<summary>
+		/// Refresh the index after performing ALL the bulk operations (NOTE this is an additional request)
+		/// </summary>
 		bool RefreshOnCompleted { get; set; }
+
+		///<summary>The indices you wish to refresh after the bulk all completes, defaults to <see cref="Index"/> </summary>
+		Indices RefreshIndices { get; set; }
 
 		///<summary>Specific per bulk operation routing value</summary>
 		Routing Routing { get; set; }
@@ -111,6 +117,8 @@ namespace Nest
 		/// <inheritdoc />
 		public Refresh? Refresh { get; set; }
 		/// <inheritdoc />
+		public Indices RefreshIndices { get; set; }
+		/// <inheritdoc />
 		public bool RefreshOnCompleted { get; set; }
 		/// <inheritdoc />
 		public Routing Routing { get; set; }
@@ -151,6 +159,7 @@ namespace Nest
 		TypeName IBulkAllRequest<T>.Type { get; set; }
 		int? IBulkAllRequest<T>.WaitForActiveShards { get; set; }
 		Refresh? IBulkAllRequest<T>.Refresh { get; set; }
+		Indices IBulkAllRequest<T>.RefreshIndices { get; set; }
 		bool IBulkAllRequest<T>.RefreshOnCompleted { get; set; }
 		Routing IBulkAllRequest<T>.Routing { get; set; }
 		Time IBulkAllRequest<T>.Timeout { get; set; }
@@ -199,6 +208,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public BulkAllDescriptor<T> Refresh(Refresh? refresh) => Assign(p => p.Refresh = refresh);
+
+		/// <inheritdoc cref="IBulkAllRequest{T}.RefreshIndices"/>
+		public BulkAllDescriptor<T> RefreshIndices(Indices indicesToRefresh) => Assign(a => a.RefreshIndices = indicesToRefresh);
 
 		/// <inheritdoc />
 		public BulkAllDescriptor<T> Routing(Routing routing) => Assign(p => p.Routing = routing);

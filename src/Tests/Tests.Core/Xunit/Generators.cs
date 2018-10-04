@@ -10,7 +10,7 @@ namespace Tests.Core.Xunit
 		static Generators()
 		{
 			var tags = Tag.Generator;
-			var messages = Message.Generator;
+			var messages = Log.Generator;
 			var people = Person.People;
 			var developers = Developer.Developers;
 			var projects = Project.Projects;
