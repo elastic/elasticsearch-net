@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Managed.Ephemeral;
 using Elastic.Xunit.XunitPlumbing;
@@ -92,6 +93,7 @@ namespace Tests.Framework
 		private readonly EndpointUsage _usage;
 		private readonly LazyResponses _createResponse;
 		private readonly LazyResponses _createGetResponse;
+		private readonly Dictionary<string, LazyResponses> _afterCreateResponses = new Dictionary<string, LazyResponses>();
 		private readonly LazyResponses _createExistsResponse;
 		private readonly LazyResponses _updateResponse;
 		private readonly LazyResponses _updateGetResponse;
@@ -99,6 +101,7 @@ namespace Tests.Framework
 		private readonly LazyResponses _deleteGetResponse;
 		private readonly LazyResponses _deleteExistsResponse;
 		private readonly LazyResponses _deleteNotFoundResponse;
+
 
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "Expected behaviour")]
 		protected CrudTestBase(TCluster cluster, EndpointUsage usage)
@@ -108,6 +111,11 @@ namespace Tests.Framework
 			this._createResponse = usage.CallOnce(this.Create, 1);
 			this._createGetResponse = usage.CallOnce(this.Read, 2);
 			this._createExistsResponse = usage.CallOnce(this.Exists, 3);
+			var i = 1;
+			// ReSharper disable once VirtualMemberCallInConstructor
+			foreach (var kv in this.AfterCreateCalls())
+				this._afterCreateResponses[kv.Key] = usage.CallOnce(kv.Value, (3 * 10) + i++);
+
 			this._updateResponse = usage.CallOnce(this.Update, 4);
 			this._updateGetResponse = usage.CallOnce(this.Read, 5);
 			this._deleteResponse = usage.CallOnce(this.Delete, 6);
@@ -120,6 +128,7 @@ namespace Tests.Framework
 		protected abstract LazyResponses Update();
 		protected virtual LazyResponses Exists() => LazyResponses.Empty;
 		protected virtual LazyResponses Delete() => LazyResponses.Empty;
+		protected virtual IDictionary<string, Func<LazyResponses>> AfterCreateCalls() => new Dictionary<string, Func<LazyResponses>>();
 
 		private static string RandomFluent { get; } = $"fluent-{RandomString()}";
 		private static string RandomFluentAsync { get; } = $"fluentasync-{RandomString()}";
@@ -180,28 +189,19 @@ namespace Tests.Framework
 		protected TCluster Cluster { get; }
 		protected virtual IElasticClient Client => this.Cluster.Client;
 
+		protected async Task AssertOnAfterCreateResponse<TResponse>(string name, Action<TResponse> assert)
+			where TResponse : class, IResponse
+		{
+			await this.ExecuteOnceInOrder();
+			if (this._afterCreateResponses.ContainsKey(name))
+				await this.AssertOnAllResponses(this._afterCreateResponses[name], assert);
+			else throw new Exception($"{name} is not a keyed after create response");
+		}
+
 		protected async Task AssertOnAllResponses<TResponse>(LazyResponses responses, Action<TResponse> assert)
 			where TResponse : class, IResponse
 		{
-			//hack to make sure these are resolved in the right order, calling twice yields cached results so
-			//should be fast
-			await this._createResponse;
-			await this._createGetResponse;
-			if (this.SupportsExists)
-				await this._createExistsResponse;
-			if (this.SupportsUpdates)
-			{
-                await this._updateResponse;
-                await this._updateGetResponse;
-			}
-			if (this.SupportsDeletes)
-			{
-				await this._deleteResponse;
-				await this._deleteGetResponse;
-				if (this.SupportsExists)
-					await this._deleteExistsResponse;
-				await this._deleteNotFoundResponse;
-			}
+			await this.ExecuteOnceInOrder();
 
 			foreach (var kv in await responses)
 			{
@@ -220,6 +220,31 @@ namespace Tests.Framework
 			}
 		}
 
+		private async Task ExecuteOnceInOrder()
+		{
+			//hack to make sure these are resolved in the right order, calling twice yields cached results so  should be fast
+			await this._createResponse;
+			await this._createGetResponse;
+			if (this.SupportsExists)
+				await this._createExistsResponse;
+
+			foreach (var kv in this._afterCreateResponses) await kv.Value;
+			if (this.SupportsUpdates)
+			{
+				await this._updateResponse;
+				await this._updateGetResponse;
+			}
+
+			if (this.SupportsDeletes)
+			{
+				await this._deleteResponse;
+				await this._deleteGetResponse;
+				if (this.SupportsExists)
+					await this._deleteExistsResponse;
+				await this._deleteNotFoundResponse;
+			}
+		}
+
 		protected async Task AssertOnCreate(Action<TCreateResponse> assert) => await this.AssertOnAllResponses(this._createResponse, assert);
 		protected async Task AssertOnUpdate(Action<TUpdateResponse> assert)
 		{
@@ -233,7 +258,11 @@ namespace Tests.Framework
 			await this.AssertOnAllResponses(this._deleteResponse, assert);
 		}
 
-		protected async Task AssertOnGetAfterCreate(Action<TReadResponse> assert) => await this.AssertOnAllResponses(this._createGetResponse, assert);
+		protected async Task AssertOnGetAfterCreate(Action<TReadResponse> assert)
+		{
+			await this.AssertOnAllResponses(this._createGetResponse, assert);
+		}
+
 		protected async Task AssertOnGetAfterUpdate(Action<TReadResponse> assert)
 		{
 			if (!this.SupportsUpdates) return;

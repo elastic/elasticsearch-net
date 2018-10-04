@@ -3,7 +3,14 @@
 namespace Nest
 {
 	[JsonObject]
-	public interface IStartRollupJobResponse : IAcknowledgedResponse {}
+	public interface IStartRollupJobResponse : IResponse
+	{
+		[JsonProperty("started")]
+		bool Started { get; set; }
+	}
 
-	public class StartRollupJobResponse : AcknowledgedResponseBase, IStartRollupJobResponse {}
+	public class StartRollupJobResponse : ResponseBase, IStartRollupJobResponse
+	{
+		public bool Started { get; set; }
+	}
 }

@@ -3,7 +3,14 @@
 namespace Nest
 {
 	[JsonObject]
-	public interface IStopRollupJobResponse : IAcknowledgedResponse {}
+	public interface IStopRollupJobResponse : IResponse
+	{
+		[JsonProperty("stopped")]
+		bool Stopped { get; set; }
+	}
 
-	public class StopRollupJobResponse : AcknowledgedResponseBase, IStopRollupJobResponse {}
+	public class StopRollupJobResponse : ResponseBase, IStopRollupJobResponse
+	{
+		public bool Stopped { get; set; }
+	}
 }

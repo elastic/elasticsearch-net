@@ -20,7 +20,6 @@ namespace Tests.XPack.Rollup
 		private static string CreateRollupJobName(string s) => $"rollup-{s}";
 		private static readonly string CronPeriod = "*/30 * * * * ?";
 
-		protected override bool TestOnlyOneMethod => true;
 		protected override bool SupportsUpdates => false;
 
 		protected override LazyResponses Create() => this.Calls<CreateRollupJobDescriptor<Log>, CreateRollupJobRequest, ICreateRollupJobRequest, ICreateRollupJobResponse>(
@@ -84,18 +83,39 @@ namespace Tests.XPack.Rollup
 		protected GetRollupJobRequest ReadInitializer(string role) => new GetRollupJobRequest(CreateRollupJobName(role));
 		protected IGetRollupJobRequest ReadFluent(string role, GetRollupJobDescriptor d) => d.Id(CreateRollupJobName(role));
 
-		protected override LazyResponses Update() => this.Calls<CreateRollupJobDescriptor<Log>, CreateRollupJobRequest, ICreateRollupJobRequest, ICreateRollupJobResponse>(
-			this.UpdateInitializer,
-			this.UpdateFluent,
-			fluent: (s, c, f) => c.CreateRollupJob(CreateRollupJobName(s), f),
-			fluentAsync: (s, c, f) => c.CreateRollupJobAsync(CreateRollupJobName(s), f),
-			request: (s, c, r) => c.CreateRollupJob(r),
-			requestAsync: (s, c, r) => c.CreateRollupJobAsync(r)
-		);
+		protected override IDictionary<string, Func<LazyResponses>> AfterCreateCalls() => new Dictionary<string, Func<LazyResponses>>
+		{
+			{ "start", () => this.Calls<StartRollupJobDescriptor, StartRollupJobRequest, IStartRollupJobRequest, IStartRollupJobResponse>(
+				this.StartInitializer,
+				this.StartFluent,
+				fluent: (s, c, f) => c.StartRollupJob(CreateRollupJobName(s), f),
+				fluentAsync: (s, c, f) => c.StartRollupJobAsync(CreateRollupJobName(s), f),
+				request: (s, c, r) => c.StartRollupJob(r),
+				requestAsync: (s, c, r) => c.StartRollupJobAsync(r)
+			)},
+			{ "stop", () => this.Calls<StopRollupJobDescriptor, StopRollupJobRequest, IStopRollupJobRequest, IStopRollupJobResponse>(
+				this.StopInitializer,
+				this.StopFluent,
+				fluent: (s, c, f) => c.StopRollupJob(CreateRollupJobName(s), f),
+				fluentAsync: (s, c, f) => c.StopRollupJobAsync(CreateRollupJobName(s), f),
+				request: (s, c, r) => c.StopRollupJob(r),
+				requestAsync: (s, c, r) => c.StopRollupJobAsync(r)
+			)},
+		};
+		protected StartRollupJobRequest StartInitializer(string role) => new StartRollupJobRequest(CreateRollupJobName(role));
+		protected IStartRollupJobRequest StartFluent(string role, StartRollupJobDescriptor d) => d;
+
+		protected StopRollupJobRequest StopInitializer(string role) => new StopRollupJobRequest(CreateRollupJobName(role));
+		protected IStopRollupJobRequest StopFluent(string role, StopRollupJobDescriptor d) => d;
+
+		[I] public async Task StartsJob() =>
+			await this.AssertOnAfterCreateResponse<IStartRollupJobResponse>("start", r => r.Started.Should().BeTrue());
+
+		[I] public async Task StopsJob() =>
+			await this.AssertOnAfterCreateResponse<IStopRollupJobResponse>("stop", r => r.Stopped.Should().BeTrue());
 
 		// ignored because we mark SupportsUpdates => false
-		protected CreateRollupJobRequest UpdateInitializer(string role) => new CreateRollupJobRequest(CreateRollupJobName(role)) { };
-		protected ICreateRollupJobRequest UpdateFluent(string role, CreateRollupJobDescriptor<Log> d) => d;
+		protected override LazyResponses Update() => null;
 
 		protected override LazyResponses Delete() => this.Calls<DeleteRollupJobDescriptor, DeleteRollupJobRequest, IDeleteRollupJobRequest, IDeleteRollupJobResponse>(
 			this.DeleteInitializer,
