@@ -73,13 +73,9 @@ namespace ApiGenerator
 			"xpack.ml.put_calendar_job.json",
 			"xpack.ml.get_calendar_job.json",
 
-//			"xpack.rollup.delete_job.json",
-//			"xpack.rollup.get_jobs.json",
-//			"xpack.rollup.put_job.json",
-//			"xpack.rollup.start_job.json",
-//			"xpack.rollup.stop_job.json",
-			"xpack.rollup.rollup_search.json",
+			//"xpack.rollup.rollup_search.json",
 			"xpack.rollup.get_rollup_caps.json",
+			"xpack.rollup.get_rollup_index_caps.json",
 
 			"xpack.sql.clear_cursor.json",
 			"xpack.sql.query.json",
@@ -89,7 +85,6 @@ namespace ApiGenerator
 			// 6.4 new  API's
 
 			"xpack.ml.update_filter.json",
-			"xpack.rollup.get_rollup_index_caps.json",
 			"xpack.security.delete_privileges.json",
 			"xpack.security.get_privileges.json",
 			"xpack.security.has_privileges.json",

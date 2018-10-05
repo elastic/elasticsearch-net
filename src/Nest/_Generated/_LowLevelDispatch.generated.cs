@@ -3904,6 +3904,38 @@ namespace Nest
 			throw InvalidDispatch("XpackRollupPutJob", p, new [] { PUT }, "/_xpack/rollup/job/{id}");
 		}
 		
+		internal TResponse XpackRollupRollupSearchDispatch<TResponse>(IRequest<RollupSearchRequestParameters> p,SerializableData<IRollupSearchRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackRollupRollupSearchGet<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupRollupSearchGet<TResponse>(p.RouteValues.Index,p.RequestParameters);
+					break;
+				case POST:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackRollupRollupSearch<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupRollupSearch<TResponse>(p.RouteValues.Index,body,p.RequestParameters);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupRollupSearch", p, new [] { GET, POST }, "/{index}/_rollup_search", "/{index}/{type}/_rollup_search");
+		}
+		
+		internal Task<TResponse> XpackRollupRollupSearchDispatchAsync<TResponse>(IRequest<RollupSearchRequestParameters> p,SerializableData<IRollupSearchRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackRollupRollupSearchGetAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupRollupSearchGetAsync<TResponse>(p.RouteValues.Index,p.RequestParameters,ct);
+					break;
+				case POST:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.XpackRollupRollupSearchAsync<TResponse>(p.RouteValues.Index,p.RouteValues.Type,body,p.RequestParameters,ct);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.XpackRollupRollupSearchAsync<TResponse>(p.RouteValues.Index,body,p.RequestParameters,ct);
+					break;
+			}
+			throw InvalidDispatch("XpackRollupRollupSearch", p, new [] { GET, POST }, "/{index}/_rollup_search", "/{index}/{type}/_rollup_search");
+		}
+		
 		internal TResponse XpackRollupStartJobDispatch<TResponse>(IRequest<StartRollupJobRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

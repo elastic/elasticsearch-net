@@ -106,22 +106,22 @@ namespace Tests.Framework
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "Expected behaviour")]
 		protected CrudTestBase(TCluster cluster, EndpointUsage usage)
 		{
-			this._usage = usage;
+			_usage = usage;
 			this.Cluster = cluster;
-			this._createResponse = usage.CallOnce(this.Create, 1);
-			this._createGetResponse = usage.CallOnce(this.Read, 2);
-			this._createExistsResponse = usage.CallOnce(this.Exists, 3);
+			_createResponse = usage.CallOnce(this.Create, 1);
+			_createGetResponse = usage.CallOnce(this.Read, 2);
+			_createExistsResponse = usage.CallOnce(this.Exists, 3);
 			var i = 1;
 			// ReSharper disable once VirtualMemberCallInConstructor
 			foreach (var kv in this.AfterCreateCalls())
-				this._afterCreateResponses[kv.Key] = usage.CallOnce(kv.Value, (3 * 10) + i++);
+				_afterCreateResponses[kv.Key] = usage.CallOnce(kv.Value, (3 * 10) + i++);
 
-			this._updateResponse = usage.CallOnce(this.Update, 4);
-			this._updateGetResponse = usage.CallOnce(this.Read, 5);
-			this._deleteResponse = usage.CallOnce(this.Delete, 6);
-			this._deleteGetResponse = usage.CallOnce(this.Read, 7);
-			this._deleteExistsResponse = usage.CallOnce(this.Exists, 8);
-			this._deleteNotFoundResponse = usage.CallOnce(this.Delete, 9);
+			_updateResponse = usage.CallOnce(this.Update, 4);
+			_updateGetResponse = usage.CallOnce(this.Read, 5);
+			_deleteResponse = usage.CallOnce(this.Delete, 6);
+			_deleteGetResponse = usage.CallOnce(this.Read, 7);
+			_deleteExistsResponse = usage.CallOnce(this.Exists, 8);
+			_deleteNotFoundResponse = usage.CallOnce(this.Delete, 9);
 		}
 		protected abstract LazyResponses Create();
 		protected abstract LazyResponses Read();
@@ -164,21 +164,43 @@ namespace Tests.Framework
 				if (TestClient.Configuration.RunIntegrationTests)
 				{
 					this.IntegrationSetup(client);
-					this._usage.CalledSetup = true;
+					_usage.CalledSetup = true;
 				}
 
-				var sf = Sanitize(RandomFluent);
-				dict.Add(Integration.ClientMethod.Fluent, fluent(sf, client, f => fluentBody(sf, f)));
+				var sf = this.Sanitize(RandomFluent);
+				dict.Add(ClientMethod.Fluent, fluent(sf, client, f => fluentBody(sf, f)));
 				if (this.TestOnlyOneMethod) return dict;
 
-				var sfa = Sanitize(RandomFluentAsync);
-				dict.Add(Integration.ClientMethod.FluentAsync, await fluentAsync(sfa, client, f => fluentBody(sfa, f)));
+				var sfa = this.Sanitize(RandomFluentAsync);
+				dict.Add(ClientMethod.FluentAsync, await fluentAsync(sfa, client, f => fluentBody(sfa, f)));
 
-				var si = Sanitize(RandomInitializer);
-				dict.Add(Integration.ClientMethod.Initializer, request(si, client, initializerBody(si)));
+				var si = this.Sanitize(RandomInitializer);
+				dict.Add(ClientMethod.Initializer, request(si, client, initializerBody(si)));
 
-				var sia = Sanitize(RandomInitializerAsync);
-				dict.Add(Integration.ClientMethod.InitializerAsync, await requestAsync(sia, client, initializerBody(sia)));
+				var sia = this.Sanitize(RandomInitializerAsync);
+				dict.Add(ClientMethod.InitializerAsync, await requestAsync(sia, client, initializerBody(sia)));
+				return dict;
+			});
+		}
+		protected LazyResponses Call<TResponse>(
+			Func<List<string>, IElasticClient, Task<TResponse>> requestAsync
+		)
+			where TResponse : class, IResponse
+		{
+			var client = this.Client;
+			return new LazyResponses(async () =>
+			{
+				var dict = new Dictionary<ClientMethod, IResponse>();
+
+				var values = new List<string>() {
+					this.Sanitize(RandomFluent)};
+				if (!this.TestOnlyOneMethod)
+				{
+					values.Add(this.Sanitize(RandomFluentAsync));
+					values.Add(this.Sanitize(RandomInitializer));
+					values.Add(this.Sanitize(RandomInitializerAsync));
+				}
+				dict.Add(ClientMethod.InitializerAsync, await requestAsync(values, client));
 				return dict;
 			});
 		}
@@ -193,8 +215,8 @@ namespace Tests.Framework
 			where TResponse : class, IResponse
 		{
 			await this.ExecuteOnceInOrder();
-			if (this._afterCreateResponses.ContainsKey(name))
-				await this.AssertOnAllResponses(this._afterCreateResponses[name], assert);
+			if (_afterCreateResponses.ContainsKey(name))
+				await this.AssertOnAllResponses(_afterCreateResponses[name], assert);
 			else throw new Exception($"{name} is not a keyed after create response");
 		}
 
@@ -223,73 +245,73 @@ namespace Tests.Framework
 		private async Task ExecuteOnceInOrder()
 		{
 			//hack to make sure these are resolved in the right order, calling twice yields cached results so  should be fast
-			await this._createResponse;
-			await this._createGetResponse;
+			await _createResponse;
+			await _createGetResponse;
 			if (this.SupportsExists)
-				await this._createExistsResponse;
+				await _createExistsResponse;
 
-			foreach (var kv in this._afterCreateResponses) await kv.Value;
+			foreach (var kv in _afterCreateResponses) await kv.Value;
 			if (this.SupportsUpdates)
 			{
-				await this._updateResponse;
-				await this._updateGetResponse;
+				await _updateResponse;
+				await _updateGetResponse;
 			}
 
 			if (this.SupportsDeletes)
 			{
-				await this._deleteResponse;
-				await this._deleteGetResponse;
+				await _deleteResponse;
+				await _deleteGetResponse;
 				if (this.SupportsExists)
-					await this._deleteExistsResponse;
-				await this._deleteNotFoundResponse;
+					await _deleteExistsResponse;
+				await _deleteNotFoundResponse;
 			}
 		}
 
-		protected async Task AssertOnCreate(Action<TCreateResponse> assert) => await this.AssertOnAllResponses(this._createResponse, assert);
+		protected async Task AssertOnCreate(Action<TCreateResponse> assert) => await this.AssertOnAllResponses(_createResponse, assert);
 		protected async Task AssertOnUpdate(Action<TUpdateResponse> assert)
 		{
 			if (!this.SupportsUpdates) return;
-			await this.AssertOnAllResponses(this._updateResponse, assert);
+			await this.AssertOnAllResponses(_updateResponse, assert);
 		}
 
 		protected async Task AssertOnDelete(Action<TDeleteResponse> assert)
 		{
 			if (!this.SupportsDeletes) return;
-			await this.AssertOnAllResponses(this._deleteResponse, assert);
+			await this.AssertOnAllResponses(_deleteResponse, assert);
 		}
 
 		protected async Task AssertOnGetAfterCreate(Action<TReadResponse> assert)
 		{
-			await this.AssertOnAllResponses(this._createGetResponse, assert);
+			await this.AssertOnAllResponses(_createGetResponse, assert);
 		}
 
 		protected async Task AssertOnGetAfterUpdate(Action<TReadResponse> assert)
 		{
 			if (!this.SupportsUpdates) return;
-			await this.AssertOnAllResponses(this._updateGetResponse, assert);
+			await this.AssertOnAllResponses(_updateGetResponse, assert);
 		}
 
 		protected async Task AssertOnGetAfterDelete(Action<TReadResponse> assert)
 		{
 			if (!this.SupportsDeletes) return;
-			await this.AssertOnAllResponses(this._deleteGetResponse, assert);
+			await this.AssertOnAllResponses(_deleteGetResponse, assert);
 		}
 
 		protected async Task AssertOnExistsAfterCreate(Action<TExistsResponse> assert)
 		{
 			if (!this.SupportsExists) return;
-			await this.AssertOnAllResponses(this._createExistsResponse, assert);
+			await this.AssertOnAllResponses(_createExistsResponse, assert);
 		}
 		protected async Task AssertOnExistsAfterDelete(Action<TExistsResponse> assert)
 		{
 			if (!this.SupportsExists) return;
-			await this.AssertOnAllResponses(this._deleteExistsResponse, assert);
+			await this.AssertOnAllResponses(_deleteExistsResponse, assert);
 		}
 
 		protected async Task AssertOnDeleteNotFoundAfterDelete(Action<TDeleteResponse> assert)
 		{
 			if (!this.SupportsDeletes) return;
-			await this.AssertOnAllResponses(this._deleteNotFoundResponse, assert);
+			await this.AssertOnAllResponses(_deleteNotFoundResponse, assert);
 		}
 
 		protected virtual void ExpectAfterCreate(TReadResponse response) { }
@@ -301,19 +323,19 @@ namespace Tests.Framework
 		[I] protected virtual async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.ShouldBeValid());
 		[I] protected virtual async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => {
 			r.ShouldBeValid();
-			ExpectAfterCreate(r);
+			this.ExpectAfterCreate(r);
 		});
 		[I] protected virtual async Task ExistsAfterCreateIsValid() => await this.AssertOnExistsAfterCreate(r => {
 			r.ShouldBeValid();
 			r.Exists.Should().BeTrue();
-			ExpectExistsAfterCreate(r);
+			this.ExpectExistsAfterCreate(r);
 		});
 
 		[I] protected virtual async Task UpdateCallIsValid() => await this.AssertOnUpdate(r => r.ShouldBeValid());
 
 		[I] protected virtual async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => {
 			r.ShouldBeValid();
-			ExpectAfterUpdate(r);
+			this.ExpectAfterUpdate(r);
 		});
 
 		[I] protected virtual async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.ShouldBeValid());
@@ -321,12 +343,12 @@ namespace Tests.Framework
 		[I] protected virtual async Task ExistsAfterDeleteIsValid() => await this.AssertOnExistsAfterDelete(r => {
 			r.ShouldBeValid();
 			r.Exists.Should().BeFalse();
-			ExpectExistsAfterDelete(r);
+			this.ExpectExistsAfterDelete(r);
 		});
 		[I] protected virtual async Task DeleteNotFoundIsNotValid() => await this.AssertOnDeleteNotFoundAfterDelete(r =>
 		{
 			r.ShouldNotBeValid();
-			ExpectDeleteNotFoundResponse(r);
+			this.ExpectDeleteNotFoundResponse(r);
 		});
 	}
 }

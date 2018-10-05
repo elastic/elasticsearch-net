@@ -201,9 +201,7 @@ namespace Nest
 		public SearchDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> selector) =>
 			Assign(a => a.Source = new Union<bool, ISourceFilter>(selector?.Invoke(new SourceFilterDescriptor<T>())));
 
-		/// <summary>
-		/// The number of hits to return. Defaults to 10.
-		/// </summary>
+		/// <summary> The number of hits to return. Defaults to 10. </summary>
 		public SearchDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
 		/// <summary>

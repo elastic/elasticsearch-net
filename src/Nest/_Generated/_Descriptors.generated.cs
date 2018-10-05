@@ -4419,6 +4419,34 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackRollupRollupSearch <pre></pre></summary>
+	public partial class RollupSearchDescriptor<T>  : RequestDescriptorBase<RollupSearchDescriptor<T>,RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
+	{ 
+		/// <summary>/{index}/_rollup_search</summary>
+		///<param name="index"> this parameter is required</param>
+		public RollupSearchDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		///<summary>The index or index-pattern (containing rollup or regular data) that should be searched</summary>
+		public RollupSearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RollupSearchDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public RollupSearchDescriptor<T> AllIndices() => this.Index(Indices.All);
+
+		///<summary>The doc type inside the index</summary>
+		public RollupSearchDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+
+		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
+		public RollupSearchDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackRollupStartJob <pre></pre></summary>
 	public partial class StartRollupJobDescriptor  : RequestDescriptorBase<StartRollupJobDescriptor,StartRollupJobRequestParameters, IStartRollupJobRequest>, IStartRollupJobRequest
 	{ 

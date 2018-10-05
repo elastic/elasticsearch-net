@@ -2446,6 +2446,11 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
+	///<summary>Request options for XpackRollupRollupSearch<pre></pre></summary>
+	public partial class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
 	///<summary>Request options for XpackRollupStartJob<pre></pre></summary>
 	public partial class StartRollupJobRequestParameters : RequestParameters<StartRollupJobRequestParameters> 
 	{
