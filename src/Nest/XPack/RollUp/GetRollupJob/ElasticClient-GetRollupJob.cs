@@ -24,7 +24,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetRollupJobResponse GetRollupJob(Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector) =>
+		public IGetRollupJobResponse GetRollupJob(Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null) =>
 			this.GetRollupJob(selector.InvokeOrDefault(new GetRollupJobDescriptor()));
 
 		/// <inheritdoc/>
@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IGetRollupJobResponse> GetRollupJobAsync(
-			Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector, CancellationToken cancellationToken = default
+			Func<GetRollupJobDescriptor, IGetRollupJobRequest> selector = null, CancellationToken cancellationToken = default
 		)  =>
 			this.GetRollupJobAsync(selector.InvokeOrDefault(new GetRollupJobDescriptor()), cancellationToken);
 

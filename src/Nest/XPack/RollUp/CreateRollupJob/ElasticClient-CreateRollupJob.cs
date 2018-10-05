@@ -16,7 +16,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<ICreateRollupJobResponse> CreateRollupJobAsync<T>(Id id,
-			Func<CreateRollupJobDescriptor<T>, ICreateRollupJobRequest> selector = null, CancellationToken cancellationToken = default)
+			Func<CreateRollupJobDescriptor<T>, ICreateRollupJobRequest> selector, CancellationToken cancellationToken = default)
 			where T : class;
 
 		/// <inheritdoc/>
