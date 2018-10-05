@@ -221,9 +221,7 @@ namespace Tests.XPack.Rollup
 				var capabilities = job.Fields.Field<Log>(p => p.Temperature);
 				capabilities.Should().NotBeEmpty();
 				foreach (var c in capabilities)
-				{
 					c.Should().ContainKey("agg");
-				}
 			});
 
 
