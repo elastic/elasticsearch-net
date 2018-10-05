@@ -74,8 +74,8 @@ namespace ApiGenerator
 			"xpack.ml.get_calendar_job.json",
 
 			//"xpack.rollup.rollup_search.json",
-			"xpack.rollup.get_rollup_caps.json",
-			"xpack.rollup.get_rollup_index_caps.json",
+			//"xpack.rollup.get_rollup_caps.json",
+			//"xpack.rollup.get_rollup_index_caps.json",
 
 			"xpack.sql.clear_cursor.json",
 			"xpack.sql.query.json",
@@ -169,10 +169,20 @@ namespace ApiGenerator
 
 			var patchedJson = JObject.Parse(File.ReadAllText(patchFile));
 
+			var pathsOverride = patchedJson.SelectToken("*.url.paths");
+
 			original.Merge(patchedJson, new JsonMergeSettings
 			{
 				MergeArrayHandling = MergeArrayHandling.Union
 			});
+
+			if (pathsOverride != null)
+			{
+				original.SelectToken("*.url.paths").Replace(pathsOverride);
+			}
+
+
+
 		}
 
 		private static Dictionary<string, ApiQueryParameters> CreateCommonApiQueryParameters(string jsonFile)

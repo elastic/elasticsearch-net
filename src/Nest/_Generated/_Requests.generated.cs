@@ -3150,6 +3150,25 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetRollupCapabilitiesRequest : IRequest<GetRollupCapabilitiesRequestParameters>
+	{
+		Indices Index { get; }
+	}
+	///<summary>Request parameters for XpackRollupGetRollupCaps <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
+	{
+		protected IGetRollupCapabilitiesRequest Self => this;
+		///<summary>/_xpack/rollup/data/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public GetRollupCapabilitiesRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_xpack/rollup/data/</summary>
+		public GetRollupCapabilitiesRequest() : base(){}
+		// values part of the url path
+		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRollupJobRequest : IRequest<GetRollupJobRequestParameters>
 	{
 		Id Id { get; }
