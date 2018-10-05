@@ -50,7 +50,7 @@ namespace Nest
 		public PutAliasDescriptor SearchRouting(Routing routing) => Assign(a => a.SearchRouting = routing);
 
 		/// <inheritdoc cref="AliasAddOperation.IsWriteIndex"/>
-		public PutAliasDescriptor IsWriteIndex(bool isWriteIndex = true) => Assign(a => a.IsWriteIndex = isWriteIndex);
+		public PutAliasDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(a => a.IsWriteIndex = isWriteIndex);
 
 		public PutAliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) where T : class =>
 			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
