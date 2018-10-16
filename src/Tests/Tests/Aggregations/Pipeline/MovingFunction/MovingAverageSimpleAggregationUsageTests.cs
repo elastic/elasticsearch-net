@@ -8,14 +8,12 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
-namespace Tests.Aggregations.Pipeline.MovingAverage
+namespace Tests.Aggregations.Pipeline.MovingFunction
 {
-	[SkipVersion("5.0.0-alpha1", "https://github.com/elastic/elasticsearch/issues/17516")]
-	public class MovingAverageSimpleAggregationUsageTests : AggregationUsageTestBase
+	public class MovingFunctionAggregationUsageTests : AggregationUsageTestBase
 	{
-		public MovingAverageSimpleAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public MovingFunctionAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object AggregationJson => new
 		{
@@ -37,13 +35,11 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 					},
 					commits_moving_avg = new
 					{
-						moving_avg = new
+						moving_fn = new
 						{
 							buckets_path = "commits",
-							model = "simple",
 							window = 30,
-							predict = 10,
-							settings = new { }
+							script = "MovingFunctions.unweightedAvg(values)"
 						}
 					}
 				}
@@ -58,13 +54,10 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 					.Sum("commits", sm => sm
 						.Field(p => p.NumberOfCommits)
 					)
-					.MovingAverage("commits_moving_avg", mv => mv
+					.MovingFunction("commits_moving_avg", mv => mv
 						.BucketsPath("commits")
 						.Window(30)
-						.Predict(10)
-						.Model(m => m
-							.Simple()
-						)
+						.Script("MovingFunctions.unweightedAvg(values)")
 					)
 				)
 			);
@@ -76,11 +69,10 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 				Interval = DateInterval.Month,
 				Aggregations =
 					new SumAggregation("commits", "numberOfCommits")
-					&& new MovingAverageAggregation("commits_moving_avg", "commits")
+					&& new MovingFunctionAggregation("commits_moving_avg", "commits")
 					{
 						Window = 30,
-						Predict = 10,
-						Model = new SimpleModel()
+						Script = "MovingFunctions.unweightedAvg(values)"
 					}
 			};
 
@@ -93,7 +85,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			// average not calculated for the first bucket so movingAvg.Value is expected to be null there
+			// average not calculated for the first bucket
 			foreach(var item in projectsPerMonth.Buckets.Skip(1))
 			{
 				var movingAvg = item.Sum("commits_moving_avg");
