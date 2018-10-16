@@ -45,7 +45,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:white_check_mark:</td>
         <td><a href="https://ci.appveyor.com/project/Mpdreamz/elasticsearch-net/branch/5.x"><img src="https://ci.appveyor.com/api/projects/status/github/elastic/elasticsearch-net?branch=5.x&svg=true"></a></td>
         <td><a href="https://travis-ci.org/elastic/elasticsearch-net/branches"><img src="https://travis-ci.org/elastic/elasticsearch-net.svg?branch=5.x"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST/5.6.2"><img src="https://img.shields.io/badge/nuget-v5.6.2-blue.svg?style=flat-square"></a> </td>
+    	<td><a href="https://www.nuget.org/packages/NEST/5.6.4"><img src="https://img.shields.io/badge/nuget-v5.6.4-blue.svg?style=flat-square"></a> </td>
     	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://img.shields.io/myget/elasticsearch-net-legacy/vpre/NEST.svg?style=flat-square&label=myget&colorB=339900"></a></td>
     </tr>
     <tr>
