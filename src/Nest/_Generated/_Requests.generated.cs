@@ -1079,6 +1079,18 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IClearSqlCursorRequest : IRequest<ClearSqlCursorRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSqlClearCursor <pre>Clear SQL cursor</pre></summary>
+	public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
+	{
+		protected IClearSqlCursorRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters>
 	{
 		Indices Index { get; }
@@ -4861,6 +4873,20 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSqlQuery <pre>Execute SQL</pre></summary>
+	public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
+	{
+		protected IQuerySqlRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
 	{
 		Indices Index { get; }
@@ -6051,6 +6077,18 @@ namespace Nest
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
 	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ITranslateSqlRequest : IRequest<TranslateSqlRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSqlTranslate <pre>Translate SQL into Elasticsearch queries</pre></summary>
+	public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
+	{
+		protected ITranslateSqlRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters>
 	{

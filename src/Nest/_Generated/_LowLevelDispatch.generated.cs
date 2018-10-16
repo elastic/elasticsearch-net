@@ -4713,6 +4713,74 @@ namespace Nest
 			throw InvalidDispatch("XpackSecurityPutUser", p, new [] { PUT, POST }, "/_xpack/security/user/{username}");
 		}
 		
+		internal TResponse XpackSqlClearCursorDispatch<TResponse>(IRequest<ClearSqlCursorRequestParameters> p,SerializableData<IClearSqlCursorRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.XpackSqlClearCursor<TResponse>(body,p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSqlClearCursor", p, new [] { POST }, "/_xpack/sql/close");
+		}
+		
+		internal Task<TResponse> XpackSqlClearCursorDispatchAsync<TResponse>(IRequest<ClearSqlCursorRequestParameters> p,SerializableData<IClearSqlCursorRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.XpackSqlClearCursorAsync<TResponse>(body,p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSqlClearCursor", p, new [] { POST }, "/_xpack/sql/close");
+		}
+		
+		internal TResponse XpackSqlQueryDispatch<TResponse>(IRequest<QuerySqlRequestParameters> p,SerializableData<IQuerySqlRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.XpackSqlQuery<TResponse>(body,p.RequestParameters);
+				case GET:
+						return _lowLevel.XpackSqlQueryGet<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSqlQuery", p, new [] { POST, GET }, "/_xpack/sql");
+		}
+		
+		internal Task<TResponse> XpackSqlQueryDispatchAsync<TResponse>(IRequest<QuerySqlRequestParameters> p,SerializableData<IQuerySqlRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.XpackSqlQueryAsync<TResponse>(body,p.RequestParameters,ct);
+				case GET:
+						return _lowLevel.XpackSqlQueryGetAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSqlQuery", p, new [] { POST, GET }, "/_xpack/sql");
+		}
+		
+		internal TResponse XpackSqlTranslateDispatch<TResponse>(IRequest<TranslateSqlRequestParameters> p,SerializableData<ITranslateSqlRequest> body) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.XpackSqlTranslate<TResponse>(body,p.RequestParameters);
+				case GET:
+						return _lowLevel.XpackSqlTranslateGet<TResponse>(p.RequestParameters);
+			}
+			throw InvalidDispatch("XpackSqlTranslate", p, new [] { POST, GET }, "/_xpack/sql/translate");
+		}
+		
+		internal Task<TResponse> XpackSqlTranslateDispatchAsync<TResponse>(IRequest<TranslateSqlRequestParameters> p,SerializableData<ITranslateSqlRequest> body, CancellationToken ct) where TResponse : class, IElasticsearchResponse, new()
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+						return _lowLevel.XpackSqlTranslateAsync<TResponse>(body,p.RequestParameters,ct);
+				case GET:
+						return _lowLevel.XpackSqlTranslateGetAsync<TResponse>(p.RequestParameters,ct);
+			}
+			throw InvalidDispatch("XpackSqlTranslate", p, new [] { POST, GET }, "/_xpack/sql/translate");
+		}
+		
 		internal TResponse XpackWatcherAckWatchDispatch<TResponse>(IRequest<AcknowledgeWatchRequestParameters> p) where TResponse : class, IElasticsearchResponse, new()
 		{
 			switch(p.HttpMethod)

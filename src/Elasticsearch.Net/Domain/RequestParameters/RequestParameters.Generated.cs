@@ -12,7 +12,7 @@ namespace Elasticsearch.Net
 {
 
 	///<summary>Request options for Bulk<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
-	public class BulkRequestParameters : RequestParameters<BulkRequestParameters>
+	public partial class BulkRequestParameters : RequestParameters<BulkRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -43,9 +43,8 @@ namespace Elasticsearch.Net
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
-
 	///<summary>Request options for CatAliases<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
-	public class CatAliasesRequestParameters : RequestParameters<CatAliasesRequestParameters>
+	public partial class CatAliasesRequestParameters : RequestParameters<CatAliasesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -63,9 +62,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatAllocation<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
-	public class CatAllocationRequestParameters : RequestParameters<CatAllocationRequestParameters>
+	public partial class CatAllocationRequestParameters : RequestParameters<CatAllocationRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -85,9 +83,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatCount<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
-	public class CatCountRequestParameters : RequestParameters<CatCountRequestParameters>
+	public partial class CatCountRequestParameters : RequestParameters<CatCountRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -105,9 +102,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatFielddata<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
-	public class CatFielddataRequestParameters : RequestParameters<CatFielddataRequestParameters>
+	public partial class CatFielddataRequestParameters : RequestParameters<CatFielddataRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -129,9 +125,8 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of fields to return in the output</summary>
 		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
 	}
-
 	///<summary>Request options for CatHealth<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
-	public class CatHealthRequestParameters : RequestParameters<CatHealthRequestParameters>
+	public partial class CatHealthRequestParameters : RequestParameters<CatHealthRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -151,9 +146,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatHelp<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
-	public class CatHelpRequestParameters : RequestParameters<CatHelpRequestParameters>
+	public partial class CatHelpRequestParameters : RequestParameters<CatHelpRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return help information</summary>
@@ -161,9 +155,8 @@ namespace Elasticsearch.Net
 		///<summary>Comma-separated list of column names or column aliases to sort by</summary>
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 	}
-
 	///<summary>Request options for CatIndices<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
-	public class CatIndicesRequestParameters : RequestParameters<CatIndicesRequestParameters>
+	public partial class CatIndicesRequestParameters : RequestParameters<CatIndicesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -187,9 +180,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatMaster<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
-	public class CatMasterRequestParameters : RequestParameters<CatMasterRequestParameters>
+	public partial class CatMasterRequestParameters : RequestParameters<CatMasterRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -207,9 +199,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatNodeattrs<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
-	public class CatNodeAttributesRequestParameters : RequestParameters<CatNodeAttributesRequestParameters>
+	public partial class CatNodeAttributesRequestParameters : RequestParameters<CatNodeAttributesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -227,9 +218,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatNodes<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
-	public class CatNodesRequestParameters : RequestParameters<CatNodesRequestParameters>
+	public partial class CatNodesRequestParameters : RequestParameters<CatNodesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -249,9 +239,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatPendingTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
-	public class CatPendingTasksRequestParameters : RequestParameters<CatPendingTasksRequestParameters>
+	public partial class CatPendingTasksRequestParameters : RequestParameters<CatPendingTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -269,9 +258,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatPlugins<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
-	public class CatPluginsRequestParameters : RequestParameters<CatPluginsRequestParameters>
+	public partial class CatPluginsRequestParameters : RequestParameters<CatPluginsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -289,9 +277,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatRecovery<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
-	public class CatRecoveryRequestParameters : RequestParameters<CatRecoveryRequestParameters>
+	public partial class CatRecoveryRequestParameters : RequestParameters<CatRecoveryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -309,9 +296,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatRepositories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html</pre></summary>
-	public class CatRepositoriesRequestParameters : RequestParameters<CatRepositoriesRequestParameters>
+	public partial class CatRepositoriesRequestParameters : RequestParameters<CatRepositoriesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -329,9 +315,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatSegments<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
-	public class CatSegmentsRequestParameters : RequestParameters<CatSegmentsRequestParameters>
+	public partial class CatSegmentsRequestParameters : RequestParameters<CatSegmentsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -347,9 +332,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatShards<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
-	public class CatShardsRequestParameters : RequestParameters<CatShardsRequestParameters>
+	public partial class CatShardsRequestParameters : RequestParameters<CatShardsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -369,9 +353,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatSnapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html</pre></summary>
-	public class CatSnapshotsRequestParameters : RequestParameters<CatSnapshotsRequestParameters>
+	public partial class CatSnapshotsRequestParameters : RequestParameters<CatSnapshotsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -389,9 +372,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public class CatTasksRequestParameters : RequestParameters<CatTasksRequestParameters>
+	public partial class CatTasksRequestParameters : RequestParameters<CatTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -405,8 +387,6 @@ namespace Elasticsearch.Net
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>Return detailed task information (default: false)</summary>
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
-		///<summary>Return tasks with specified parent node.</summary>
-		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
 		public long? ParentTask { get => Q<long?>("parent_task"); set => Q("parent_task", value); }
 		///<summary>Comma-separated list of column names to display</summary>
@@ -417,10 +397,12 @@ namespace Elasticsearch.Net
 		public string[] SortByColumns { get => Q<string[]>("s"); set => Q("s", value); }
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
+		///<summary>Return tasks with the specified parent node</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
+		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
-
 	///<summary>Request options for CatTemplates<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html</pre></summary>
-	public class CatTemplatesRequestParameters : RequestParameters<CatTemplatesRequestParameters>
+	public partial class CatTemplatesRequestParameters : RequestParameters<CatTemplatesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -438,9 +420,8 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for CatThreadPool<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
-	public class CatThreadPoolRequestParameters : RequestParameters<CatThreadPoolRequestParameters>
+	public partial class CatThreadPoolRequestParameters : RequestParameters<CatThreadPoolRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -460,15 +441,13 @@ namespace Elasticsearch.Net
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool? Verbose { get => Q<bool?>("v"); set => Q("v", value); }
 	}
-
 	///<summary>Request options for ClearScroll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
-	public class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters>
+	public partial class ClearScrollRequestParameters : RequestParameters<ClearScrollRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
-
 	///<summary>Request options for ClusterAllocationExplain<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
-	public class ClusterAllocationExplainRequestParameters : RequestParameters<ClusterAllocationExplainRequestParameters>
+	public partial class ClusterAllocationExplainRequestParameters : RequestParameters<ClusterAllocationExplainRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Return 'YES' decisions in explanation (default: false)</summary>
@@ -476,9 +455,8 @@ namespace Elasticsearch.Net
 		///<summary>Return information about disk usage and shard sizes (default: false)</summary>
 		public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
 	}
-
 	///<summary>Request options for ClusterGetSettings<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-	public class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters>
+	public partial class ClusterGetSettingsRequestParameters : RequestParameters<ClusterGetSettingsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -490,9 +468,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to return all default clusters setting.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
-
 	///<summary>Request options for ClusterHealth<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
-	public class ClusterHealthRequestParameters : RequestParameters<ClusterHealthRequestParameters>
+	public partial class ClusterHealthRequestParameters : RequestParameters<ClusterHealthRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify the level of detail for returned information</summary>
@@ -516,9 +493,8 @@ namespace Elasticsearch.Net
 		///<summary>Wait until cluster is in a specific state</summary>
 		public WaitForStatus? WaitForStatus { get => Q<WaitForStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 	}
-
 	///<summary>Request options for ClusterPendingTasks<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
-	public class ClusterPendingTasksRequestParameters : RequestParameters<ClusterPendingTasksRequestParameters>
+	public partial class ClusterPendingTasksRequestParameters : RequestParameters<ClusterPendingTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -526,9 +502,8 @@ namespace Elasticsearch.Net
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for ClusterPutSettings<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-	public class ClusterPutSettingsRequestParameters : RequestParameters<ClusterPutSettingsRequestParameters>
+	public partial class ClusterPutSettingsRequestParameters : RequestParameters<ClusterPutSettingsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -538,15 +513,13 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for ClusterRemoteInfo<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html</pre></summary>
-	public class RemoteInfoRequestParameters : RequestParameters<RemoteInfoRequestParameters>
+	public partial class RemoteInfoRequestParameters : RequestParameters<RemoteInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for ClusterReroute<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
-	public class ClusterRerouteRequestParameters : RequestParameters<ClusterRerouteRequestParameters>
+	public partial class ClusterRerouteRequestParameters : RequestParameters<ClusterRerouteRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Simulate the operation only and return the resulting state</summary>
@@ -562,9 +535,8 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for ClusterState<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
-	public class ClusterStateRequestParameters : RequestParameters<ClusterStateRequestParameters>
+	public partial class ClusterStateRequestParameters : RequestParameters<ClusterStateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -583,9 +555,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-
 	///<summary>Request options for ClusterStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
-	public class ClusterStatsRequestParameters : RequestParameters<ClusterStatsRequestParameters>
+	public partial class ClusterStatsRequestParameters : RequestParameters<ClusterStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -593,9 +564,8 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for Count<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
-	public class CountRequestParameters : RequestParameters<CountRequestParameters>
+	public partial class CountRequestParameters : RequestParameters<CountRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -628,9 +598,8 @@ namespace Elasticsearch.Net
 		///<summary>The maximum count for each shard, upon reaching which the query execution will terminate early</summary>
 		public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 	}
-
 	///<summary>Request options for Create<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
-	public class CreateRequestParameters : RequestParameters<CreateRequestParameters>
+	public partial class CreateRequestParameters : RequestParameters<CreateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>
@@ -658,9 +627,8 @@ namespace Elasticsearch.Net
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
-
 	///<summary>Request options for Delete<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
-	public class DeleteRequestParameters : RequestParameters<DeleteRequestParameters>
+	public partial class DeleteRequestParameters : RequestParameters<DeleteRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>
@@ -686,9 +654,8 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-
 	///<summary>Request options for DeleteByQuery<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html</pre></summary>
-	public class DeleteByQueryRequestParameters : RequestParameters<DeleteByQueryRequestParameters>
+	public partial class DeleteByQueryRequestParameters : RequestParameters<DeleteByQueryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The analyzer to use for the query string</summary>
@@ -708,7 +675,7 @@ namespace Elasticsearch.Net
 		/// been specified)
 		///</summary>
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-		///<summary>What to do when the delete-by-query hits version conflicts?</summary>
+		///<summary>What to do when the delete by query hits version conflicts?</summary>
 		public Conflicts? Conflicts { get => Q<Conflicts?>("conflicts"); set => Q("conflicts", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -754,18 +721,17 @@ namespace Elasticsearch.Net
 		/// copies for the shard (number of replicas + 1)
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>Size on the scroll request powering the update_by_query</summary>
+		///<summary>Size on the scroll request powering the delete by query</summary>
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
-		///<summary>Should the request should block until the delete-by-query is complete.</summary>
+		///<summary>Should the request should block until the delete by query is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>The throttle for this request in sub-requests per second. -1 means no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
-
 	///<summary>Request options for DeleteScript<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
-	public class DeleteScriptRequestParameters : RequestParameters<DeleteScriptRequestParameters>
+	public partial class DeleteScriptRequestParameters : RequestParameters<DeleteScriptRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
@@ -773,9 +739,8 @@ namespace Elasticsearch.Net
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for Exists<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public class DocumentExistsRequestParameters : RequestParameters<DocumentExistsRequestParameters>
+	public partial class DocumentExistsRequestParameters : RequestParameters<DocumentExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
@@ -802,9 +767,8 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-
 	///<summary>Request options for ExistsSource<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public class SourceExistsRequestParameters : RequestParameters<SourceExistsRequestParameters>
+	public partial class SourceExistsRequestParameters : RequestParameters<SourceExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>The ID of the parent document</summary>
@@ -829,9 +793,8 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-
 	///<summary>Request options for Explain<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
-	public class ExplainRequestParameters : RequestParameters<ExplainRequestParameters>
+	public partial class ExplainRequestParameters : RequestParameters<ExplainRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
@@ -862,9 +825,8 @@ namespace Elasticsearch.Net
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 	}
-
 	///<summary>Request options for FieldCaps<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html</pre></summary>
-	public class FieldCapabilitiesRequestParameters : RequestParameters<FieldCapabilitiesRequestParameters>
+	public partial class FieldCapabilitiesRequestParameters : RequestParameters<FieldCapabilitiesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>A comma-separated list of field names</summary>
@@ -879,9 +841,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-
 	///<summary>Request options for Get<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public class GetRequestParameters : RequestParameters<GetRequestParameters>
+	public partial class GetRequestParameters : RequestParameters<GetRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
@@ -908,17 +869,15 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-
 	///<summary>Request options for GetScript<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
-	public class GetScriptRequestParameters : RequestParameters<GetScriptRequestParameters>
+	public partial class GetScriptRequestParameters : RequestParameters<GetScriptRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for GetSource<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
-	public class SourceRequestParameters : RequestParameters<SourceRequestParameters>
+	public partial class SourceRequestParameters : RequestParameters<SourceRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The ID of the parent document</summary>
@@ -943,9 +902,8 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-
 	///<summary>Request options for Index<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
-	public class IndexRequestParameters : RequestParameters<IndexRequestParameters>
+	public partial class IndexRequestParameters : RequestParameters<IndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -975,9 +933,8 @@ namespace Elasticsearch.Net
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
 	}
-
 	///<summary>Request options for IndicesAnalyzeForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
-	public class AnalyzeRequestParameters : RequestParameters<AnalyzeRequestParameters>
+	public partial class AnalyzeRequestParameters : RequestParameters<AnalyzeRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The name of the index to scope the operation</summary>
@@ -989,14 +946,13 @@ namespace Elasticsearch.Net
 		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
 		public Format? Format { get => Q<Format?>("format"); set => Q("format", value); }
 	}
-
 	///<summary>Request options for IndicesClearCacheForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
-	public class ClearCacheRequestParameters : RequestParameters<ClearCacheRequestParameters>
+	public partial class ClearCacheRequestParameters : RequestParameters<ClearCacheRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Clear field data</summary>
 		public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
-		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
+		///<summary>A comma-separated list of fields to clear when using the `fielddata` parameter (default: all)</summary>
 		public string[] Fields { get => Q<string[]>("fields"); set => Q("fields", value); }
 		///<summary>Clear query caches</summary>
 		public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
@@ -1011,16 +967,16 @@ namespace Elasticsearch.Net
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 		///<summary>A comma-separated list of index name to limit the operation</summary>
 		public string[] IndexQueryString { get => Q<string[]>("index"); set => Q("index", value); }
-		///<summary>Clear the recycler cache</summary>
-		public bool? Recycler { get => Q<bool?>("recycler"); set => Q("recycler", value); }
 		///<summary>Clear request cache</summary>
 		public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 		///<summary>Clear request cache</summary>
 		public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
+		///<summary>Clear the recycle cache</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28866")]
+		public bool? Recycler { get => Q<bool?>("recycler"); set => Q("recycler", value); }
 	}
-
 	///<summary>Request options for IndicesClose<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
-	public class CloseIndexRequestParameters : RequestParameters<CloseIndexRequestParameters>
+	public partial class CloseIndexRequestParameters : RequestParameters<CloseIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
@@ -1037,9 +993,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-
 	///<summary>Request options for IndicesCreate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
-	public class CreateIndexRequestParameters : RequestParameters<CreateIndexRequestParameters>
+	public partial class CreateIndexRequestParameters : RequestParameters<CreateIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Set the number of active shards to wait for before the operation returns.</summary>
@@ -1052,9 +1007,8 @@ namespace Elasticsearch.Net
 		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.x only allows a single type per index so this parameter is now useless")]
 		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
-
 	///<summary>Request options for IndicesDelete<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
-	public class DeleteIndexRequestParameters : RequestParameters<DeleteIndexRequestParameters>
+	public partial class DeleteIndexRequestParameters : RequestParameters<DeleteIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
@@ -1068,9 +1022,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-
 	///<summary>Request options for IndicesDeleteAlias<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public class DeleteAliasRequestParameters : RequestParameters<DeleteAliasRequestParameters>
+	public partial class DeleteAliasRequestParameters : RequestParameters<DeleteAliasRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit timestamp for the document</summary>
@@ -1078,9 +1031,8 @@ namespace Elasticsearch.Net
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for IndicesDeleteTemplateForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public class DeleteIndexTemplateRequestParameters : RequestParameters<DeleteIndexTemplateRequestParameters>
+	public partial class DeleteIndexTemplateRequestParameters : RequestParameters<DeleteIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
@@ -1088,9 +1040,8 @@ namespace Elasticsearch.Net
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for IndicesExists<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
-	public class IndexExistsRequestParameters : RequestParameters<IndexExistsRequestParameters>
+	public partial class IndexExistsRequestParameters : RequestParameters<IndexExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1106,9 +1057,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
-
 	///<summary>Request options for IndicesExistsAliasForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public class AliasExistsRequestParameters : RequestParameters<AliasExistsRequestParameters>
+	public partial class AliasExistsRequestParameters : RequestParameters<AliasExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1123,9 +1073,8 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-
 	///<summary>Request options for IndicesExistsTemplateForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public class IndexTemplateExistsRequestParameters : RequestParameters<IndexTemplateExistsRequestParameters>
+	public partial class IndexTemplateExistsRequestParameters : RequestParameters<IndexTemplateExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -1135,9 +1084,8 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-
 	///<summary>Request options for IndicesExistsType<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
-	public class TypeExistsRequestParameters : RequestParameters<TypeExistsRequestParameters>
+	public partial class TypeExistsRequestParameters : RequestParameters<TypeExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1152,9 +1100,8 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-
 	///<summary>Request options for IndicesFlushForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
-	public class FlushRequestParameters : RequestParameters<FlushRequestParameters>
+	public partial class FlushRequestParameters : RequestParameters<FlushRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -1177,9 +1124,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-
 	///<summary>Request options for IndicesFlushSyncedForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
-	public class SyncedFlushRequestParameters : RequestParameters<SyncedFlushRequestParameters>
+	public partial class SyncedFlushRequestParameters : RequestParameters<SyncedFlushRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1192,9 +1138,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-
 	///<summary>Request options for IndicesForcemergeForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
-	public class ForceMergeRequestParameters : RequestParameters<ForceMergeRequestParameters>
+	public partial class ForceMergeRequestParameters : RequestParameters<ForceMergeRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
@@ -1213,9 +1158,8 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
 	}
-
 	///<summary>Request options for IndicesGet<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
-	public class GetIndexRequestParameters : RequestParameters<GetIndexRequestParameters>
+	public partial class GetIndexRequestParameters : RequestParameters<GetIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1233,9 +1177,8 @@ namespace Elasticsearch.Net
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for IndicesGetAliasForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public class GetAliasRequestParameters : RequestParameters<GetAliasRequestParameters>
+	public partial class GetAliasRequestParameters : RequestParameters<GetAliasRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1250,9 +1193,8 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-
 	///<summary>Request options for IndicesGetFieldMappingForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
-	public class GetFieldMappingRequestParameters : RequestParameters<GetFieldMappingRequestParameters>
+	public partial class GetFieldMappingRequestParameters : RequestParameters<GetFieldMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether the default mapping values should be returned as well</summary>
@@ -1269,9 +1211,8 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-
 	///<summary>Request options for IndicesGetMappingForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
-	public class GetMappingRequestParameters : RequestParameters<GetMappingRequestParameters>
+	public partial class GetMappingRequestParameters : RequestParameters<GetMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1288,9 +1229,8 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-
 	///<summary>Request options for IndicesGetSettingsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
-	public class GetIndexSettingsRequestParameters : RequestParameters<GetIndexSettingsRequestParameters>
+	public partial class GetIndexSettingsRequestParameters : RequestParameters<GetIndexSettingsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify timeout for connection to master</summary>
@@ -1311,9 +1251,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	}
-
 	///<summary>Request options for IndicesGetTemplateForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public class GetIndexTemplateRequestParameters : RequestParameters<GetIndexTemplateRequestParameters>
+	public partial class GetIndexTemplateRequestParameters : RequestParameters<GetIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -1323,9 +1262,8 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-
 	///<summary>Request options for IndicesGetUpgradeForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
-	public class UpgradeStatusRequestParameters : RequestParameters<UpgradeStatusRequestParameters>
+	public partial class UpgradeStatusRequestParameters : RequestParameters<UpgradeStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1338,9 +1276,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-
 	///<summary>Request options for IndicesOpen<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
-	public class OpenIndexRequestParameters : RequestParameters<OpenIndexRequestParameters>
+	public partial class OpenIndexRequestParameters : RequestParameters<OpenIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
@@ -1359,9 +1296,8 @@ namespace Elasticsearch.Net
 		///<summary>Sets the number of active shards to wait for before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
-
 	///<summary>Request options for IndicesPutAlias<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public class PutAliasRequestParameters : RequestParameters<PutAliasRequestParameters>
+	public partial class PutAliasRequestParameters : RequestParameters<PutAliasRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit timestamp for the document</summary>
@@ -1369,9 +1305,8 @@ namespace Elasticsearch.Net
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for IndicesPutMapping<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
-	public class PutMappingRequestParameters : RequestParameters<PutMappingRequestParameters>
+	public partial class PutMappingRequestParameters : RequestParameters<PutMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
@@ -1391,13 +1326,14 @@ namespace Elasticsearch.Net
 		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.x only allows a single type per index so this parameter is now useless")]
 		public bool? UpdateAllTypes { get => Q<bool?>("update_all_types"); set => Q("update_all_types", value); }
 	}
-
 	///<summary>Request options for IndicesPutSettingsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
-	public class UpdateIndexSettingsRequestParameters : RequestParameters<UpdateIndexSettingsRequestParameters>
+	public partial class UpdateIndexSettingsRequestParameters : RequestParameters<UpdateIndexSettingsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
 		public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1412,9 +1348,8 @@ namespace Elasticsearch.Net
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 	}
-
 	///<summary>Request options for IndicesPutTemplateForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public class PutIndexTemplateRequestParameters : RequestParameters<PutIndexTemplateRequestParameters>
+	public partial class PutIndexTemplateRequestParameters : RequestParameters<PutIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
@@ -1426,9 +1361,8 @@ namespace Elasticsearch.Net
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 	}
-
 	///<summary>Request options for IndicesRecoveryForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
-	public class RecoveryStatusRequestParameters : RequestParameters<RecoveryStatusRequestParameters>
+	public partial class RecoveryStatusRequestParameters : RequestParameters<RecoveryStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to display detailed information about shard recovery</summary>
@@ -1436,9 +1370,8 @@ namespace Elasticsearch.Net
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
 	}
-
 	///<summary>Request options for IndicesRefreshForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
-	public class RefreshRequestParameters : RequestParameters<RefreshRequestParameters>
+	public partial class RefreshRequestParameters : RequestParameters<RefreshRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1451,9 +1384,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-
 	///<summary>Request options for IndicesRolloverForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html</pre></summary>
-	public class RolloverIndexRequestParameters : RequestParameters<RolloverIndexRequestParameters>
+	public partial class RolloverIndexRequestParameters : RequestParameters<RolloverIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
@@ -1465,9 +1397,8 @@ namespace Elasticsearch.Net
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
-
 	///<summary>Request options for IndicesSegmentsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
-	public class SegmentsRequestParameters : RequestParameters<SegmentsRequestParameters>
+	public partial class SegmentsRequestParameters : RequestParameters<SegmentsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1482,9 +1413,8 @@ namespace Elasticsearch.Net
 		///<summary>Includes detailed memory usage by Lucene.</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
-
 	///<summary>Request options for IndicesShardStoresForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
-	public class IndicesShardStoresRequestParameters : RequestParameters<IndicesShardStoresRequestParameters>
+	public partial class IndicesShardStoresRequestParameters : RequestParameters<IndicesShardStoresRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
@@ -1499,9 +1429,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-
 	///<summary>Request options for IndicesShrink<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html</pre></summary>
-	public class ShrinkIndexRequestParameters : RequestParameters<ShrinkIndexRequestParameters>
+	public partial class ShrinkIndexRequestParameters : RequestParameters<ShrinkIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
@@ -1513,9 +1442,8 @@ namespace Elasticsearch.Net
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
-
 	///<summary>Request options for IndicesSplit<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html</pre></summary>
-	public class SplitIndexRequestParameters : RequestParameters<SplitIndexRequestParameters>
+	public partial class SplitIndexRequestParameters : RequestParameters<SplitIndexRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
@@ -1527,9 +1455,8 @@ namespace Elasticsearch.Net
 		///<summary>Set the number of active shards to wait for on the shrunken index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	}
-
 	///<summary>Request options for IndicesStatsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
-	public class IndicesStatsRequestParameters : RequestParameters<IndicesStatsRequestParameters>
+	public partial class IndicesStatsRequestParameters : RequestParameters<IndicesStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
@@ -1545,9 +1472,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 	}
-
 	///<summary>Request options for IndicesUpdateAliasesForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public class BulkAliasRequestParameters : RequestParameters<BulkAliasRequestParameters>
+	public partial class BulkAliasRequestParameters : RequestParameters<BulkAliasRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Request timeout</summary>
@@ -1555,9 +1481,8 @@ namespace Elasticsearch.Net
 		///<summary>Specify timeout for connection to master</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for IndicesUpgradeForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
-	public class UpgradeRequestParameters : RequestParameters<UpgradeRequestParameters>
+	public partial class UpgradeRequestParameters : RequestParameters<UpgradeRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -1574,9 +1499,8 @@ namespace Elasticsearch.Net
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
 		public bool? OnlyAncientSegments { get => Q<bool?>("only_ancient_segments"); set => Q("only_ancient_segments", value); }
 	}
-
 	///<summary>Request options for IndicesValidateQueryForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
-	public class ValidateQueryRequestParameters : RequestParameters<ValidateQueryRequestParameters>
+	public partial class ValidateQueryRequestParameters : RequestParameters<ValidateQueryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Return detailed information about the error</summary>
@@ -1607,15 +1531,13 @@ namespace Elasticsearch.Net
 		///<summary>Execute validation on all shards instead of one random shard per index</summary>
 		public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
 	}
-
 	///<summary>Request options for Info<pre>http://www.elastic.co/guide/</pre></summary>
-	public class RootNodeInfoRequestParameters : RequestParameters<RootNodeInfoRequestParameters>
+	public partial class RootNodeInfoRequestParameters : RequestParameters<RootNodeInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for IngestDeletePipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public class DeletePipelineRequestParameters : RequestParameters<DeletePipelineRequestParameters>
+	public partial class DeletePipelineRequestParameters : RequestParameters<DeletePipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -1623,23 +1545,20 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for IngestGetPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public class GetPipelineRequestParameters : RequestParameters<GetPipelineRequestParameters>
+	public partial class GetPipelineRequestParameters : RequestParameters<GetPipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for IngestProcessorGrok<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public class GrokProcessorPatternsRequestParameters : RequestParameters<GrokProcessorPatternsRequestParameters>
+	public partial class GrokProcessorPatternsRequestParameters : RequestParameters<GrokProcessorPatternsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for IngestPutPipeline<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public class PutPipelineRequestParameters : RequestParameters<PutPipelineRequestParameters>
+	public partial class PutPipelineRequestParameters : RequestParameters<PutPipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -1647,17 +1566,15 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for IngestSimulate<pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public class SimulatePipelineRequestParameters : RequestParameters<SimulatePipelineRequestParameters>
+	public partial class SimulatePipelineRequestParameters : RequestParameters<SimulatePipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
-
 	///<summary>Request options for Mget<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
-	public class MultiGetRequestParameters : RequestParameters<MultiGetRequestParameters>
+	public partial class MultiGetRequestParameters : RequestParameters<MultiGetRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>A comma-separated list of stored fields to return in the response</summary>
@@ -1677,9 +1594,8 @@ namespace Elasticsearch.Net
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public string[] SourceInclude { get => Q<string[]>("_source_include"); set => Q("_source_include", value); }
 	}
-
 	///<summary>Request options for Msearch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
-	public class MultiSearchRequestParameters : RequestParameters<MultiSearchRequestParameters>
+	public partial class MultiSearchRequestParameters : RequestParameters<MultiSearchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Search operation type</summary>
@@ -1696,9 +1612,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 	}
-
 	///<summary>Request options for MsearchTemplate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html</pre></summary>
-	public class MultiSearchTemplateRequestParameters : RequestParameters<MultiSearchTemplateRequestParameters>
+	public partial class MultiSearchTemplateRequestParameters : RequestParameters<MultiSearchTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Search operation type</summary>
@@ -1708,9 +1623,8 @@ namespace Elasticsearch.Net
 		///<summary>Controls the maximum number of concurrent searches the multi search api will execute</summary>
 		public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 	}
-
 	///<summary>Request options for Mtermvectors<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
-	public class MultiTermVectorsRequestParameters : RequestParameters<MultiTermVectorsRequestParameters>
+	public partial class MultiTermVectorsRequestParameters : RequestParameters<MultiTermVectorsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -1748,9 +1662,8 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-
 	///<summary>Request options for NodesHotThreadsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
-	public class NodesHotThreadsRequestParameters : RequestParameters<NodesHotThreadsRequestParameters>
+	public partial class NodesHotThreadsRequestParameters : RequestParameters<NodesHotThreadsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The interval for the second sampling of threads</summary>
@@ -1766,9 +1679,8 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for NodesInfoForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
-	public class NodesInfoRequestParameters : RequestParameters<NodesInfoRequestParameters>
+	public partial class NodesInfoRequestParameters : RequestParameters<NodesInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -1776,9 +1688,8 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for NodesStatsForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
-	public class NodesStatsRequestParameters : RequestParameters<NodesStatsRequestParameters>
+	public partial class NodesStatsRequestParameters : RequestParameters<NodesStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
@@ -1798,23 +1709,20 @@ namespace Elasticsearch.Net
 		///<summary>Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)</summary>
 		public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 	}
-
 	///<summary>Request options for NodesUsageForAll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html</pre></summary>
-	public class NodesUsageRequestParameters : RequestParameters<NodesUsageRequestParameters>
+	public partial class NodesUsageRequestParameters : RequestParameters<NodesUsageRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for Ping<pre>http://www.elastic.co/guide/</pre></summary>
-	public class PingRequestParameters : RequestParameters<PingRequestParameters>
+	public partial class PingRequestParameters : RequestParameters<PingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 	}
-
 	///<summary>Request options for PutScript<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
-	public class PutScriptRequestParameters : RequestParameters<PutScriptRequestParameters>
+	public partial class PutScriptRequestParameters : RequestParameters<PutScriptRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
@@ -1824,15 +1732,8 @@ namespace Elasticsearch.Net
 		///<summary>Context name to compile script against</summary>
 		public string Context { get => Q<string>("context"); set => Q("context", value); }
 	}
-
-	///<summary>Request options for RankEval<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</pre></summary>
-	public class RankEvalRequestParameters : RequestParameters<RankEvalRequestParameters>
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-
 	///<summary>Request options for Reindex<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
-	public class ReindexOnServerRequestParameters : RequestParameters<ReindexOnServerRequestParameters>
+	public partial class ReindexOnServerRequestParameters : RequestParameters<ReindexOnServerRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Should the effected indexes be refreshed?</summary>
@@ -1854,34 +1755,30 @@ namespace Elasticsearch.Net
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public TimeSpan Scroll { get => Q<TimeSpan>("scroll"); set => Q("scroll", value); }
 	}
-
 	///<summary>Request options for ReindexRethrottle<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
-	public class ReindexRethrottleRequestParameters : RequestParameters<ReindexRethrottleRequestParameters>
+	public partial class ReindexRethrottleRequestParameters : RequestParameters<ReindexRethrottleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</summary>
 		public long? RequestsPerSecond { get => Q<long?>("requests_per_second"); set => Q("requests_per_second", value); }
 	}
-
 	///<summary>Request options for RenderSearchTemplate<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public class RenderSearchTemplateRequestParameters : RequestParameters<RenderSearchTemplateRequestParameters>
+	public partial class RenderSearchTemplateRequestParameters : RequestParameters<RenderSearchTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
 	///<summary>Request options for ScriptsPainlessExecute<pre>https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html</pre></summary>
-	public partial class ExecutePainlessScriptRequestParameters : RequestParameters<ExecutePainlessScriptRequestParameters>
+	public partial class ExecutePainlessScriptRequestParameters : RequestParameters<ExecutePainlessScriptRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for Scroll<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
-	public class ScrollRequestParameters : RequestParameters<ScrollRequestParameters>
+	public partial class ScrollRequestParameters : RequestParameters<ScrollRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for Search<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
-	public class SearchRequestParameters : RequestParameters<SearchRequestParameters>
+	public partial class SearchRequestParameters : RequestParameters<SearchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The analyzer to use for the query string</summary>
@@ -1927,6 +1824,8 @@ namespace Elasticsearch.Net
 		public string SuggestText { get => Q<string>("suggest_text"); set => Q("suggest_text", value); }
 		///<summary>Indicate if the number of documents that match the query should be tracked</summary>
 		public bool? TrackTotalHits { get => Q<bool?>("track_total_hits"); set => Q("track_total_hits", value); }
+		///<summary>Indicate if an error should be returned if there is a partial search failure or timeout</summary>
+		public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
@@ -1949,9 +1848,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 	}
-
 	///<summary>Request options for SearchShards<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
-	public class SearchShardsRequestParameters : RequestParameters<SearchShardsRequestParameters>
+	public partial class SearchShardsRequestParameters : RequestParameters<SearchShardsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1970,9 +1868,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 	}
-
 	///<summary>Request options for SearchTemplate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
-	public class SearchTemplateRequestParameters : RequestParameters<SearchTemplateRequestParameters>
+	public partial class SearchTemplateRequestParameters : RequestParameters<SearchTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1999,9 +1896,8 @@ namespace Elasticsearch.Net
 		///<summary>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</summary>
 		public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	}
-
 	///<summary>Request options for SnapshotCreate<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public class SnapshotRequestParameters : RequestParameters<SnapshotRequestParameters>
+	public partial class SnapshotRequestParameters : RequestParameters<SnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2009,9 +1905,8 @@ namespace Elasticsearch.Net
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
-
 	///<summary>Request options for SnapshotCreateRepository<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public class CreateRepositoryRequestParameters : RequestParameters<CreateRepositoryRequestParameters>
+	public partial class CreateRepositoryRequestParameters : RequestParameters<CreateRepositoryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2021,17 +1916,15 @@ namespace Elasticsearch.Net
 		///<summary>Whether to verify the repository after creation</summary>
 		public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 	}
-
 	///<summary>Request options for SnapshotDelete<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public class DeleteSnapshotRequestParameters : RequestParameters<DeleteSnapshotRequestParameters>
+	public partial class DeleteSnapshotRequestParameters : RequestParameters<DeleteSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for SnapshotDeleteRepository<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public class DeleteRepositoryRequestParameters : RequestParameters<DeleteRepositoryRequestParameters>
+	public partial class DeleteRepositoryRequestParameters : RequestParameters<DeleteRepositoryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2039,9 +1932,8 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for SnapshotGet<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public class GetSnapshotRequestParameters : RequestParameters<GetSnapshotRequestParameters>
+	public partial class GetSnapshotRequestParameters : RequestParameters<GetSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2051,9 +1943,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to show verbose snapshot info or only show the basic info found in the repository index blob</summary>
 		public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 	}
-
 	///<summary>Request options for SnapshotGetRepository<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public class GetRepositoryRequestParameters : RequestParameters<GetRepositoryRequestParameters>
+	public partial class GetRepositoryRequestParameters : RequestParameters<GetRepositoryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2061,9 +1952,8 @@ namespace Elasticsearch.Net
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-
 	///<summary>Request options for SnapshotRestore<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public class RestoreRequestParameters : RequestParameters<RestoreRequestParameters>
+	public partial class RestoreRequestParameters : RequestParameters<RestoreRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2071,9 +1961,8 @@ namespace Elasticsearch.Net
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
-
 	///<summary>Request options for SnapshotStatus<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public class SnapshotStatusRequestParameters : RequestParameters<SnapshotStatusRequestParameters>
+	public partial class SnapshotStatusRequestParameters : RequestParameters<SnapshotStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2081,9 +1970,8 @@ namespace Elasticsearch.Net
 		///<summary>Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
-
 	///<summary>Request options for SnapshotVerifyRepository<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
-	public class VerifyRepositoryRequestParameters : RequestParameters<VerifyRepositoryRequestParameters>
+	public partial class VerifyRepositoryRequestParameters : RequestParameters<VerifyRepositoryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2091,9 +1979,8 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for TasksCancel<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public class CancelTasksRequestParameters : RequestParameters<CancelTasksRequestParameters>
+	public partial class CancelTasksRequestParameters : RequestParameters<CancelTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -2103,22 +1990,23 @@ namespace Elasticsearch.Net
 		public string[] Nodes { get => Q<string[]>("nodes"); set => Q("nodes", value); }
 		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
-		///<summary>Cancel tasks with specified parent node.</summary>
-		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
+		///<summary>Cancel tasks with specified parent node.</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
+		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
-
 	///<summary>Request options for TasksGet<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public class GetTaskRequestParameters : RequestParameters<GetTaskRequestParameters>
+	public partial class GetTaskRequestParameters : RequestParameters<GetTaskRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for TasksList<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html</pre></summary>
-	public class ListTasksRequestParameters : RequestParameters<ListTasksRequestParameters>
+	public partial class ListTasksRequestParameters : RequestParameters<ListTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>
@@ -2130,18 +2018,20 @@ namespace Elasticsearch.Net
 		public string[] Actions { get => Q<string[]>("actions"); set => Q("actions", value); }
 		///<summary>Return detailed task information (default: false)</summary>
 		public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
-		///<summary>Return tasks with specified parent node.</summary>
-		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
 		public string ParentTaskId { get => Q<string>("parent_task_id"); set => Q("parent_task_id", value); }
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 		///<summary>Group tasks by nodes or parent/child relationships</summary>
 		public GroupBy? GroupBy { get => Q<GroupBy?>("group_by"); set => Q("group_by", value); }
+		///<summary>Explicit operation timeout</summary>
+		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
+		///<summary>Return tasks with the specified parent node</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Removed in 6.3.0 from the server see https://github.com/elastic/elasticsearch/pull/28841")]
+		public string ParentNode { get => Q<string>("parent_node"); set => Q("parent_node", value); }
 	}
-
 	///<summary>Request options for Termvectors<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
-	public class TermVectorsRequestParameters : RequestParameters<TermVectorsRequestParameters>
+	public partial class TermVectorsRequestParameters : RequestParameters<TermVectorsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
@@ -2170,9 +2060,8 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-
 	///<summary>Request options for Update<pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
-	public class UpdateRequestParameters : RequestParameters<UpdateRequestParameters>
+	public partial class UpdateRequestParameters : RequestParameters<UpdateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>
@@ -2204,9 +2093,8 @@ namespace Elasticsearch.Net
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 	}
-
 	///<summary>Request options for UpdateByQuery<pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html</pre></summary>
-	public class UpdateByQueryRequestParameters : RequestParameters<UpdateByQueryRequestParameters>
+	public partial class UpdateByQueryRequestParameters : RequestParameters<UpdateByQueryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The analyzer to use for the query string</summary>
@@ -2276,7 +2164,7 @@ namespace Elasticsearch.Net
 		/// copies for the shard (number of replicas + 1)
 		///</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-		///<summary>Size on the scroll request powering the update_by_query</summary>
+		///<summary>Size on the scroll request powering the update by query</summary>
 		public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 		///<summary>Should the request should block until the update by query operation is complete.</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -2285,9 +2173,8 @@ namespace Elasticsearch.Net
 		///<summary>The number of slices this task should be divided into. Defaults to 1 meaning the task isn't sliced into subtasks.</summary>
 		public long? Slices { get => Q<long?>("slices"); set => Q("slices", value); }
 	}
-
 	///<summary>Request options for XpackGraphExplore<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html</pre></summary>
-	public class GraphExploreRequestParameters : RequestParameters<GraphExploreRequestParameters>
+	public partial class GraphExploreRequestParameters : RequestParameters<GraphExploreRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specific routing value</summary>
@@ -2295,59 +2182,55 @@ namespace Elasticsearch.Net
 		///<summary>Explicit operation timeout</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for XpackInfo<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html</pre></summary>
-	public class XPackInfoRequestParameters : RequestParameters<XPackInfoRequestParameters>
+	public partial class XPackInfoRequestParameters : RequestParameters<XPackInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Comma-separated list of info categories. Can be any of: build, license, features</summary>
 		public string[] Categories { get => Q<string[]>("categories"); set => Q("categories", value); }
 	}
-
 	///<summary>Request options for XpackUsage<pre>Retrieve information about xpack features usage</pre></summary>
-	public class XPackUsageRequestParameters : RequestParameters<XPackUsageRequestParameters>
+	public partial class XPackUsageRequestParameters : RequestParameters<XPackUsageRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify timeout for watch write operation</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for XpackLicenseDelete<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class DeleteLicenseRequestParameters : RequestParameters<DeleteLicenseRequestParameters>
+	public partial class DeleteLicenseRequestParameters : RequestParameters<DeleteLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
-
 	///<summary>Request options for XpackLicenseGet<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class GetLicenseRequestParameters : RequestParameters<GetLicenseRequestParameters>
+	public partial class GetLicenseRequestParameters : RequestParameters<GetLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
-
 	///<summary>Request options for XpackLicenseGetTrialStatus<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class GetTrialLicenseStatusRequestParameters : RequestParameters<GetTrialLicenseStatusRequestParameters>
+	public partial class GetTrialLicenseStatusRequestParameters : RequestParameters<GetTrialLicenseStatusRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for XpackLicensePost<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class PostLicenseRequestParameters : RequestParameters<PostLicenseRequestParameters>
+	public partial class PostLicenseRequestParameters : RequestParameters<PostLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
 		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
-
 	///<summary>Request options for XpackLicensePostStartTrial<pre>https://www.elastic.co/guide/en/x-pack/current/license-management.html</pre></summary>
-	public class StartTrialLicenseRequestParameters : RequestParameters<StartTrialLicenseRequestParameters>
+	public partial class StartTrialLicenseRequestParameters : RequestParameters<StartTrialLicenseRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>The type of trial license to generate (default: "trial")</summary>
+		public string TypeQueryString { get => Q<string>("type"); set => Q("type", value); }
+		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+		public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 	}
-
 	///<summary>Request options for XpackMlCloseJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-close-job.html</pre></summary>
-	public class CloseJobRequestParameters : RequestParameters<CloseJobRequestParameters>
+	public partial class CloseJobRequestParameters : RequestParameters<CloseJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
@@ -2357,125 +2240,107 @@ namespace Elasticsearch.Net
 		///<summary>Controls the time to wait until a job has closed. Default to 30 minutes</summary>
 		public TimeSpan Timeout { get => Q<TimeSpan>("timeout"); set => Q("timeout", value); }
 	}
-
 	///<summary>Request options for XpackMlDeleteDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html</pre></summary>
-	public class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters>
+	public partial class DeleteDatafeedRequestParameters : RequestParameters<DeleteDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>True if the datafeed should be forcefully deleted</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
-
 	///<summary>Request options for XpackMlDeleteExpiredData<pre></pre></summary>
-	public class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters>
+	public partial class DeleteExpiredDataRequestParameters : RequestParameters<DeleteExpiredDataRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
-
 	///<summary>Request options for XpackMlDeleteJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html</pre></summary>
-	public class DeleteJobRequestParameters : RequestParameters<DeleteJobRequestParameters>
+	public partial class DeleteJobRequestParameters : RequestParameters<DeleteJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>True if the job should be forcefully deleted</summary>
 		public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 	}
-
 	///<summary>Request options for XpackMlDeleteModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html</pre></summary>
-	public class DeleteModelSnapshotRequestParameters : RequestParameters<DeleteModelSnapshotRequestParameters>
+	public partial class DeleteModelSnapshotRequestParameters : RequestParameters<DeleteModelSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
-
 	///<summary>Request options for XpackMlFlushJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html</pre></summary>
-	public class FlushJobRequestParameters : RequestParameters<FlushJobRequestParameters>
+	public partial class FlushJobRequestParameters : RequestParameters<FlushJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Skips time to the given value without generating results or updating the model for the skipped interval</summary>
 		public string SkipTime { get => Q<string>("skip_time"); set => Q("skip_time", value); }
 	}
-
 	///<summary>Request options for XpackMlForecast<pre></pre></summary>
-	public class ForecastJobRequestParameters : RequestParameters<ForecastJobRequestParameters>
+	public partial class ForecastJobRequestParameters : RequestParameters<ForecastJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlGetBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html</pre></summary>
-	public class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters>
+	public partial class GetBucketsRequestParameters : RequestParameters<GetBucketsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlGetCategories<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html</pre></summary>
-	public class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters>
+	public partial class GetCategoriesRequestParameters : RequestParameters<GetCategoriesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlGetDatafeeds<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html</pre></summary>
-	public class GetDatafeedsRequestParameters : RequestParameters<GetDatafeedsRequestParameters>
+	public partial class GetDatafeedsRequestParameters : RequestParameters<GetDatafeedsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
-
 	///<summary>Request options for XpackMlGetDatafeedStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html</pre></summary>
-	public class GetDatafeedStatsRequestParameters : RequestParameters<GetDatafeedStatsRequestParameters>
+	public partial class GetDatafeedStatsRequestParameters : RequestParameters<GetDatafeedStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
-
 	///<summary>Request options for XpackMlGetInfluencers<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html</pre></summary>
-	public class GetInfluencersRequestParameters : RequestParameters<GetInfluencersRequestParameters>
+	public partial class GetInfluencersRequestParameters : RequestParameters<GetInfluencersRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlGetJobs<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html</pre></summary>
-	public class GetJobsRequestParameters : RequestParameters<GetJobsRequestParameters>
+	public partial class GetJobsRequestParameters : RequestParameters<GetJobsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
-
 	///<summary>Request options for XpackMlGetJobStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html</pre></summary>
-	public class GetJobStatsRequestParameters : RequestParameters<GetJobStatsRequestParameters>
+	public partial class GetJobStatsRequestParameters : RequestParameters<GetJobStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to ignore if a wildcard expression matches no jobs. (This includes `_all` string or when no jobs have been specified)</summary>
 		public bool? AllowNoJobs { get => Q<bool?>("allow_no_jobs"); set => Q("allow_no_jobs", value); }
 	}
-
 	///<summary>Request options for XpackMlGetModelSnapshots<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html</pre></summary>
-	public class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters>
+	public partial class GetModelSnapshotsRequestParameters : RequestParameters<GetModelSnapshotsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlGetOverallBuckets<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html</pre></summary>
-	public class GetOverallBucketsRequestParameters : RequestParameters<GetOverallBucketsRequestParameters>
+	public partial class GetOverallBucketsRequestParameters : RequestParameters<GetOverallBucketsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlGetRecords<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html</pre></summary>
-	public class GetAnomalyRecordsRequestParameters : RequestParameters<GetAnomalyRecordsRequestParameters>
+	public partial class GetAnomalyRecordsRequestParameters : RequestParameters<GetAnomalyRecordsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlOpenJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html</pre></summary>
-	public class OpenJobRequestParameters : RequestParameters<OpenJobRequestParameters>
+	public partial class OpenJobRequestParameters : RequestParameters<OpenJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlPostData<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-data.html</pre></summary>
-	public class PostJobDataRequestParameters : RequestParameters<PostJobDataRequestParameters>
+	public partial class PostJobDataRequestParameters : RequestParameters<PostJobDataRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Optional parameter to specify the start of the bucket resetting range</summary>
@@ -2483,83 +2348,70 @@ namespace Elasticsearch.Net
 		///<summary>Optional parameter to specify the end of the bucket resetting range</summary>
 		public DateTimeOffset? ResetEnd { get => Q<DateTimeOffset?>("reset_end"); set => Q("reset_end", value); }
 	}
-
 	///<summary>Request options for XpackMlPreviewDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html</pre></summary>
-	public class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters>
+	public partial class PreviewDatafeedRequestParameters : RequestParameters<PreviewDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for XpackMlPutDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html</pre></summary>
-	public class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters>
+	public partial class PutDatafeedRequestParameters : RequestParameters<PutDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
-
 	///<summary>Request options for XpackMlPutJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html</pre></summary>
-	public class PutJobRequestParameters : RequestParameters<PutJobRequestParameters>
+	public partial class PutJobRequestParameters : RequestParameters<PutJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 	}
-
 	///<summary>Request options for XpackMlRevertModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html</pre></summary>
-	public class RevertModelSnapshotRequestParameters : RequestParameters<RevertModelSnapshotRequestParameters>
+	public partial class RevertModelSnapshotRequestParameters : RequestParameters<RevertModelSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlStartDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html</pre></summary>
-	public class StartDatafeedRequestParameters : RequestParameters<StartDatafeedRequestParameters>
+	public partial class StartDatafeedRequestParameters : RequestParameters<StartDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlStopDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html</pre></summary>
-	public class StopDatafeedRequestParameters : RequestParameters<StopDatafeedRequestParameters>
+	public partial class StopDatafeedRequestParameters : RequestParameters<StopDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
-
 	///<summary>Request options for XpackMlUpdateDatafeed<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html</pre></summary>
-	public class UpdateDatafeedRequestParameters : RequestParameters<UpdateDatafeedRequestParameters>
+	public partial class UpdateDatafeedRequestParameters : RequestParameters<UpdateDatafeedRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlUpdateJob<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html</pre></summary>
-	public class UpdateJobRequestParameters : RequestParameters<UpdateJobRequestParameters>
+	public partial class UpdateJobRequestParameters : RequestParameters<UpdateJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlUpdateModelSnapshot<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html</pre></summary>
-	public class UpdateModelSnapshotRequestParameters : RequestParameters<UpdateModelSnapshotRequestParameters>
+	public partial class UpdateModelSnapshotRequestParameters : RequestParameters<UpdateModelSnapshotRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlValidate<pre></pre></summary>
-	public class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters>
+	public partial class ValidateJobRequestParameters : RequestParameters<ValidateJobRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMlValidateDetector<pre></pre></summary>
-	public class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters>
+	public partial class ValidateDetectorRequestParameters : RequestParameters<ValidateDetectorRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackMigrationDeprecations<pre>http://www.elastic.co/guide/en/migration/current/migration-api-deprecation.html</pre></summary>
-	public class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters>
+	public partial class DeprecationInfoRequestParameters : RequestParameters<DeprecationInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for XpackMigrationGetAssistance<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-assistance.html</pre></summary>
-	public class MigrationAssistanceRequestParameters : RequestParameters<MigrationAssistanceRequestParameters>
+	public partial class MigrationAssistanceRequestParameters : RequestParameters<MigrationAssistanceRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>
@@ -2572,23 +2424,20 @@ namespace Elasticsearch.Net
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 	}
-
 	///<summary>Request options for XpackMigrationUpgrade<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/migration-api-upgrade.html</pre></summary>
-	public class MigrationUpgradeRequestParameters : RequestParameters<MigrationUpgradeRequestParameters>
+	public partial class MigrationUpgradeRequestParameters : RequestParameters<MigrationUpgradeRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Should the request block until the upgrade operation is completed</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
-
 	///<summary>Request options for XpackSecurityAuthenticate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
-	public class AuthenticateRequestParameters : RequestParameters<AuthenticateRequestParameters>
+	public partial class AuthenticateRequestParameters : RequestParameters<AuthenticateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for XpackSecurityChangePassword<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html</pre></summary>
-	public class ChangePasswordRequestParameters : RequestParameters<ChangePasswordRequestParameters>
+	public partial class ChangePasswordRequestParameters : RequestParameters<ChangePasswordRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>
@@ -2597,23 +2446,20 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-
 	///<summary>Request options for XpackSecurityClearCachedRealms<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html</pre></summary>
-	public class ClearCachedRealmsRequestParameters : RequestParameters<ClearCachedRealmsRequestParameters>
+	public partial class ClearCachedRealmsRequestParameters : RequestParameters<ClearCachedRealmsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
 		public string[] Usernames { get => Q<string[]>("usernames"); set => Q("usernames", value); }
 	}
-
 	///<summary>Request options for XpackSecurityClearCachedRoles<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-clear-role-cache</pre></summary>
-	public class ClearCachedRolesRequestParameters : RequestParameters<ClearCachedRolesRequestParameters>
+	public partial class ClearCachedRolesRequestParameters : RequestParameters<ClearCachedRolesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackSecurityDeleteRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-delete-role</pre></summary>
-	public class DeleteRoleRequestParameters : RequestParameters<DeleteRoleRequestParameters>
+	public partial class DeleteRoleRequestParameters : RequestParameters<DeleteRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>
@@ -2622,9 +2468,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-
 	///<summary>Request options for XpackSecurityDeleteRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-delete-role-mapping</pre></summary>
-	public class DeleteRoleMappingRequestParameters : RequestParameters<DeleteRoleMappingRequestParameters>
+	public partial class DeleteRoleMappingRequestParameters : RequestParameters<DeleteRoleMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>
@@ -2633,9 +2478,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-
 	///<summary>Request options for XpackSecurityDeleteUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-delete-user</pre></summary>
-	public class DeleteUserRequestParameters : RequestParameters<DeleteUserRequestParameters>
+	public partial class DeleteUserRequestParameters : RequestParameters<DeleteUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>
@@ -2644,9 +2488,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-
 	///<summary>Request options for XpackSecurityDisableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-disable-user</pre></summary>
-	public class DisableUserRequestParameters : RequestParameters<DisableUserRequestParameters>
+	public partial class DisableUserRequestParameters : RequestParameters<DisableUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>
@@ -2655,9 +2498,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-
 	///<summary>Request options for XpackSecurityEnableUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-enable-user</pre></summary>
-	public class EnableUserRequestParameters : RequestParameters<EnableUserRequestParameters>
+	public partial class EnableUserRequestParameters : RequestParameters<EnableUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>
@@ -2666,39 +2508,33 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-
 	///<summary>Request options for XpackSecurityGetRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-get-role</pre></summary>
-	public class GetRoleRequestParameters : RequestParameters<GetRoleRequestParameters>
+	public partial class GetRoleRequestParameters : RequestParameters<GetRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for XpackSecurityGetRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-get-role-mapping</pre></summary>
-	public class GetRoleMappingRequestParameters : RequestParameters<GetRoleMappingRequestParameters>
+	public partial class GetRoleMappingRequestParameters : RequestParameters<GetRoleMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for XpackSecurityGetToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-get-token</pre></summary>
-	public class GetUserAccessTokenRequestParameters : RequestParameters<GetUserAccessTokenRequestParameters>
+	public partial class GetUserAccessTokenRequestParameters : RequestParameters<GetUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackSecurityGetUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-get-user</pre></summary>
-	public class GetUserRequestParameters : RequestParameters<GetUserRequestParameters>
+	public partial class GetUserRequestParameters : RequestParameters<GetUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for XpackSecurityInvalidateToken<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-tokens.html#security-api-invalidate-token</pre></summary>
-	public class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters>
+	public partial class InvalidateUserAccessTokenRequestParameters : RequestParameters<InvalidateUserAccessTokenRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 	}
-
 	///<summary>Request options for XpackSecurityPutRole<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-roles.html#security-api-put-role</pre></summary>
-	public class PutRoleRequestParameters : RequestParameters<PutRoleRequestParameters>
+	public partial class PutRoleRequestParameters : RequestParameters<PutRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>
@@ -2707,9 +2543,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-
 	///<summary>Request options for XpackSecurityPutRoleMapping<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-role-mapping.html#security-api-put-role-mapping</pre></summary>
-	public class PutRoleMappingRequestParameters : RequestParameters<PutRoleMappingRequestParameters>
+	public partial class PutRoleMappingRequestParameters : RequestParameters<PutRoleMappingRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>
@@ -2718,9 +2553,8 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-
 	///<summary>Request options for XpackSecurityPutUser<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-users.html#security-api-put-user</pre></summary>
-	public class PutUserRequestParameters : RequestParameters<PutUserRequestParameters>
+	public partial class PutUserRequestParameters : RequestParameters<PutUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>
@@ -2729,86 +2563,93 @@ namespace Elasticsearch.Net
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
-
+	///<summary>Request options for XpackSqlClearCursor<pre>Clear SQL cursor</pre></summary>
+	public partial class ClearSqlCursorRequestParameters : RequestParameters<ClearSqlCursorRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for XpackSqlQuery<pre>Execute SQL</pre></summary>
+	public partial class QuerySqlRequestParameters : RequestParameters<QuerySqlRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
+	}
+	///<summary>Request options for XpackSqlTranslate<pre>Translate SQL into Elasticsearch queries</pre></summary>
+	public partial class TranslateSqlRequestParameters : RequestParameters<TranslateSqlRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
 	///<summary>Request options for XpackWatcherAckWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
-	public class AcknowledgeWatchRequestParameters : RequestParameters<AcknowledgeWatchRequestParameters>
+	public partial class AcknowledgeWatchRequestParameters : RequestParameters<AcknowledgeWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for XpackWatcherActivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html</pre></summary>
-	public class ActivateWatchRequestParameters : RequestParameters<ActivateWatchRequestParameters>
+	public partial class ActivateWatchRequestParameters : RequestParameters<ActivateWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for XpackWatcherDeactivateWatch<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html</pre></summary>
-	public class DeactivateWatchRequestParameters : RequestParameters<DeactivateWatchRequestParameters>
+	public partial class DeactivateWatchRequestParameters : RequestParameters<DeactivateWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for XpackWatcherDeleteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html</pre></summary>
-	public class DeleteWatchRequestParameters : RequestParameters<DeleteWatchRequestParameters>
+	public partial class DeleteWatchRequestParameters : RequestParameters<DeleteWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 	}
-
 	///<summary>Request options for XpackWatcherExecuteWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html</pre></summary>
-	public class ExecuteWatchRequestParameters : RequestParameters<ExecuteWatchRequestParameters>
+	public partial class ExecuteWatchRequestParameters : RequestParameters<ExecuteWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>indicates whether the watch should execute in debug mode</summary>
 		public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 	}
-
 	///<summary>Request options for XpackWatcherGetWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html</pre></summary>
-	public class GetWatchRequestParameters : RequestParameters<GetWatchRequestParameters>
+	public partial class GetWatchRequestParameters : RequestParameters<GetWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 	}
-
 	///<summary>Request options for XpackWatcherPutWatch<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html</pre></summary>
-	public class PutWatchRequestParameters : RequestParameters<PutWatchRequestParameters>
+	public partial class PutWatchRequestParameters : RequestParameters<PutWatchRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TimeSpan MasterTimeout { get => Q<TimeSpan>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Specify whether the watch is in/active by default</summary>
 		public bool? Active { get => Q<bool?>("active"); set => Q("active", value); }
+		///<summary>Explicit version number for concurrency control</summary>
+		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 	}
-
 	///<summary>Request options for XpackWatcherRestart<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-restart.html</pre></summary>
-	public class RestartWatcherRequestParameters : RequestParameters<RestartWatcherRequestParameters>
+	public partial class RestartWatcherRequestParameters : RequestParameters<RestartWatcherRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackWatcherStart<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html</pre></summary>
-	public class StartWatcherRequestParameters : RequestParameters<StartWatcherRequestParameters>
+	public partial class StartWatcherRequestParameters : RequestParameters<StartWatcherRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 	}
-
 	///<summary>Request options for XpackWatcherStats<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html</pre></summary>
-	public class WatcherStatsRequestParameters : RequestParameters<WatcherStatsRequestParameters>
+	public partial class WatcherStatsRequestParameters : RequestParameters<WatcherStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Emits stack traces of currently running watches</summary>
 		public bool? EmitStacktraces { get => Q<bool?>("emit_stacktraces"); set => Q("emit_stacktraces", value); }
 	}
-
 	///<summary>Request options for XpackWatcherStop<pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html</pre></summary>
-	public class StopWatcherRequestParameters : RequestParameters<StopWatcherRequestParameters>
+	public partial class StopWatcherRequestParameters : RequestParameters<StopWatcherRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-	}
-}
+	}}
