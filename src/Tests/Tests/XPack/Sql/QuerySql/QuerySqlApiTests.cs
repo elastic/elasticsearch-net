@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.Sql.QuerySql
 {
-	//[SkipVersion("<6.4.0", "")]
+	[SkipVersion("<6.4.0", "")]
 	public class QuerySqlApiTests : ApiIntegrationTestBase<XPackCluster, IQuerySqlResponse, IQuerySqlRequest, QuerySqlDescriptor, QuerySqlRequest>
 	{
 		public QuerySqlApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

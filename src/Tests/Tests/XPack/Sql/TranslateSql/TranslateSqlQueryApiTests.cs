@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.Sql.TranslateSql
 {
-	//[SkipVersion("<6.4.0", "")]
+	[SkipVersion("<6.4.0", "")]
 	public class TranslateSqlApiTests : ApiIntegrationTestBase<XPackCluster, ITranslateSqlResponse, ITranslateSqlRequest, TranslateSqlDescriptor, TranslateSqlRequest>
 	{
 		public TranslateSqlApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

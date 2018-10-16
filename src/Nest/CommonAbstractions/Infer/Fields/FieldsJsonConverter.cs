@@ -17,10 +17,13 @@ namespace Nest
 		{
 			var fields = value as Fields;
 			writer.WriteStartArray();
-			var infer = serializer.GetConnectionSettings().Inferrer;
-			foreach (var f in fields?.ListOfFields ?? Enumerable.Empty<Field>())
+			if (fields != null)
 			{
-				writer.WriteValue(infer.Field(f));
+				var infer = serializer.GetConnectionSettings().Inferrer;
+				foreach (var f in fields.ListOfFields)
+				{
+					writer.WriteValue(infer.Field(f));
+				}
 			}
 			writer.WriteEndArray();
 		}
@@ -33,17 +36,22 @@ namespace Nest
 			{
 				// as per https://github.com/elastic/elasticsearch/pull/29639 this can now be an array of objects
 				reader.Read();
-				if (reader.TokenType == JsonToken.String)
-					fields.And(reader.Value as string);
-				else if (reader.TokenType == JsonToken.StartObject)
+				switch (reader.TokenType)
 				{
-					/// TODO 6.4 this is temporary until we add proper support for doc_values format
-					reader.Read(); // "field";
-					var field = reader.ReadAsString();
-					fields.And(field);
-					reader.Read(); // "format";
-					reader.Read(); // "format value";
-					reader.Read(); // "}";
+					case JsonToken.String:
+						fields.And((string)reader.Value);
+						break;
+					case JsonToken.StartObject:
+						/// TODO 6.4 this is temporary until we add proper support for doc_values format
+						reader.Read(); // "field";
+						var field = reader.ReadAsString();
+						fields.And(field);
+						while (reader.TokenType != JsonToken.EndObject)
+						{
+							reader.Read();
+						}
+						reader.Read(); // "}";
+						break;
 				}
 			}
 			return fields;

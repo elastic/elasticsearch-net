@@ -11,7 +11,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.XPack.Sql.ClearSqlCursor
 {
-	//[SkipVersion("<6.4.0", "")]
+	[SkipVersion("<6.4.0", "")]
 	public class ClearSqlCursorApiTests : ApiIntegrationTestBase<XPackCluster, IClearSqlCursorResponse, IClearSqlCursorRequest, ClearSqlCursorDescriptor, ClearSqlCursorRequest>
 	{
 		public ClearSqlCursorApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
