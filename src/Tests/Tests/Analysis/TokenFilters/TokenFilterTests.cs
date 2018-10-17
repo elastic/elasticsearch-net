@@ -674,7 +674,33 @@ namespace Tests.Analysis.TokenFilters
 				expand = true,
 				tokenizer = "whitespace"
 			};
+		}
 
+		[SkipVersion("<6.4.0", "Lenient is an option introduced in 6.4.0")]
+		public class SynonymLenientTests : TokenFilterAssertionBase<SynonymTests>
+		{
+			public override string Name => "syn";
+			private readonly string[] _synonyms = {"foo", "bar => baz"};
+
+			public override ITokenFilter Initializer =>
+				new SynonymTokenFilter
+				{
+					Lenient = true,
+					Synonyms = _synonyms
+				};
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.Synonym(n, t => t
+					.Lenient()
+					.Synonyms(_synonyms)
+				);
+
+			public override object Json => new
+			{
+				type = "synonym",
+				synonyms = _synonyms,
+				lenient = true,
+			};
 		}
 
 		public class SynonymGraphTests : TokenFilterAssertionBase<SynonymGraphTests>
