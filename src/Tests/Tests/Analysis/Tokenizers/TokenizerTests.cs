@@ -203,7 +203,7 @@ namespace Tests.Analysis.Tokenizers
 
 			public override object Json => new {type = "standard"};
 		}
-    
+
 		public class CharGroupTests : TokenizerAssertionBase<CharGroupTests>
 		{
 			private readonly string[] _chars = {"whitespace", "-", "\n"};

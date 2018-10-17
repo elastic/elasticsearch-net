@@ -182,20 +182,33 @@ namespace Tests.Analysis.TokenFilters
 		{
 			public override string Name => "keeptypes";
 
-			public override ITokenFilter Initializer =>
-				new KeepTypesTokenFilter {Types = new[] {"<NUM>", "<SOMETHINGELSE>"}};
+			private readonly string[] _types = {"<NUM>", "<SOMETHINGELSE>"};
 
-			public override FuncTokenFilters Fluent => (n, tf) => tf
-				.KeepTypes(n, t => t
-					.Types("<NUM>", "<SOMETHINGELSE>")
-				);
+			public override ITokenFilter Initializer => new KeepTypesTokenFilter {Types = _types};
 
-			public override object Json => new
+			public override FuncTokenFilters Fluent => (n, tf) => tf.KeepTypes(n, t => t.Types(_types));
+
+			public override object Json => new { type = "keep_types", types = _types };
+		}
+
+		[SkipVersion("<6.4.0", "The mode option was introduced in https://github.com/elastic/elasticsearch/pull/32012")]
+		public class KeepTypesModeTests : TokenFilterAssertionBase<KeepTypesTests>
+		{
+			public override string Name => "keeptypes";
+			private readonly string[] _types = {"<NUM>", "<SOMETHINGELSE>"};
+
+			public override ITokenFilter Initializer => new KeepTypesTokenFilter
 			{
-				type = "keep_types",
-				types = new[] {"<NUM>", "<SOMETHINGELSE>"}
+				Mode = KeepTypesMode.Exclude,
+				Types = _types
 			};
 
+			public override FuncTokenFilters Fluent => (n, tf) => tf.KeepTypes(n, t => t
+				.Mode(KeepTypesMode.Exclude)
+				.Types(_types)
+			);
+
+			public override object Json => new { type = "keep_types", types = _types, mode = "exclude" };
 		}
 
 		public class IcuCollationTests : TokenFilterAssertionBase<IcuCollationTests>
