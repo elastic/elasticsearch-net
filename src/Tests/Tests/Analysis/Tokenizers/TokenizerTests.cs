@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 
 namespace Tests.Analysis.Tokenizers
@@ -203,6 +204,22 @@ namespace Tests.Analysis.Tokenizers
 
 			public override object Json => new {type = "standard"};
 		}
+
+		[SkipVersion("<6.4.0", "analysis-nori plugin introduced in 6.4.0")]
+		public class NoriTests : TokenizerAssertionBase<NoriTests>
+		{
+			public override string Name => "nori";
+			public override ITokenizer Initializer => new NoriTokenizer
+			{
+				DecompoundMode = NoriDecompoundMode.Mixed
+			};
+
+			public override FuncTokenizer Fluent => (n, t) => t.Nori(n, e => e
+				.DecompoundMode(NoriDecompoundMode.Mixed)
+			);
+
+			public override object Json => new {type = "nori_tokenizer", decompound_mode = "mixed"};
+    }
 
 		public class CharGroupTests : TokenizerAssertionBase<CharGroupTests>
 		{
