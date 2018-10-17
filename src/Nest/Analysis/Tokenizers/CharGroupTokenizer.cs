@@ -4,40 +4,44 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// The char_group tokenizer breaks text into terms whenever it encounters a character which is in a defined set. It is mostly useful
-	/// for cases where a simple custom tokenization is desired, and the overhead of use of the pattern tokenizer is not acceptable.
+	/// A tokenizer that breaks text into terms whenever it encounters a character which is in a defined set. It is mostly useful
+	/// for cases where a simple custom tokenization is desired, and the overhead of use of <see cref="PatternTokenizer"/> is not acceptable.
 	/// </summary>
 	public interface ICharGroupTokenizer : ITokenizer
 	{
 		/// <summary>
-		/// The maximum token length. If a token is seen that exceeds this length then it is discarded. Defaults to 255.
+		/// A list containing a list of characters to tokenize the string on. Whenever a character from this list is encountered, a
+		/// new token is started. This accepts either single characters like eg. -, or character groups: whitespace, letter, digit,
+		/// punctuation, symbol.
 		/// </summary>
 		[JsonProperty("tokenize_on_chars")]
 		IEnumerable<string> TokenizeOnCharacters { get; set; }
 	}
 
-	/// <inheritdoc cref="ICharGroupTokenizer"/>>
+	/// <inheritdoc cref="ICharGroupTokenizer"/>
 	public class CharGroupTokenizer : TokenizerBase, ICharGroupTokenizer
     {
-		public CharGroupTokenizer() => this.Type = "char_group";
+	    internal const string TokenizerType = "char_group";
 
-	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>>
+		public CharGroupTokenizer() => this.Type = TokenizerType;
+
+	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>
 		public IEnumerable<string> TokenizeOnCharacters { get; set; }
     }
 
-	/// <inheritdoc cref="ICharGroupTokenizer"/>>
+	/// <inheritdoc cref="ICharGroupTokenizer"/>
 	public class CharGroupTokenizerDescriptor
 		: TokenizerDescriptorBase<CharGroupTokenizerDescriptor, ICharGroupTokenizer>, ICharGroupTokenizer
 	{
-		protected override string Type => "char_group";
+		protected override string Type => CharGroupTokenizer.TokenizerType;
 
 		IEnumerable<string> ICharGroupTokenizer.TokenizeOnCharacters { get; set; }
 
-	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>>
+	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>
 		public CharGroupTokenizerDescriptor TokenizeOnCharacters(params string[] characters) =>
 		    Assign(a => a.TokenizeOnCharacters = characters);
 
-	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>>
+	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>
 		public CharGroupTokenizerDescriptor TokenizeOnCharacters(IEnumerable<string> characters) =>
 		    Assign(a => a.TokenizeOnCharacters = characters);
 	}
