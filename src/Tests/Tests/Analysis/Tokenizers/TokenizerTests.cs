@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 
@@ -219,6 +219,26 @@ namespace Tests.Analysis.Tokenizers
 			);
 
 			public override object Json => new {type = "nori_tokenizer", decompound_mode = "mixed"};
+    }
+
+		public class CharGroupTests : TokenizerAssertionBase<CharGroupTests>
+		{
+			private readonly string[] _chars = {"whitespace", "-", "\n"};
+			public override string Name => "uax";
+			public override ITokenizer Initializer => new CharGroupTokenizer
+			{
+				TokenizeOnCharacters = _chars
+			};
+
+			public override FuncTokenizer Fluent => (n, t) => t.CharGroup(n, e => e
+				.TokenizeOnCharacters(_chars)
+			);
+
+			public override object Json => new
+			{
+				tokenize_on_chars = _chars,
+				type = "char_group"
+			};
 		}
 	}
 }

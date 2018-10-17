@@ -322,5 +322,15 @@ namespace Nest
 		public TokenFiltersDescriptor NoriPartOfSpeech(string name, Func<NoriPartOfSpeechTokenFilterDescriptor, INoriPartOfSpeechTokenFilter> selector) =>
 			Assign(name, selector.Invoke(new NoriPartOfSpeechTokenFilterDescriptor()));
 
+		/// <summary>
+		///  A token filter of type multiplexer will emit multiple tokens at the same position, each version of the token
+		/// having been run through a different filter. Identical output tokens at the same position will be removed.
+		/// </summary>
+		public TokenFiltersDescriptor Multiplexer(string name, Func<MultiplexerTokenFilterDescriptor, IMultiplexerTokenFilter> selector) =>
+			Assign(name, selector.Invoke(new MultiplexerTokenFilterDescriptor()));
+
+		/// <summary> A token filter of type remove_duplicates that drops identical tokens at the same position. </summary>
+		public TokenFiltersDescriptor RemoveDuplicates(string name, Func<RemoveDuplicatesTokenFilterDescriptor, IRemoveDuplicatesTokenFilter> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new RemoveDuplicatesTokenFilterDescriptor()));
 	}
 }

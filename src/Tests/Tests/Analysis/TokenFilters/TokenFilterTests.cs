@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
@@ -182,20 +182,33 @@ namespace Tests.Analysis.TokenFilters
 		{
 			public override string Name => "keeptypes";
 
-			public override ITokenFilter Initializer =>
-				new KeepTypesTokenFilter {Types = new[] {"<NUM>", "<SOMETHINGELSE>"}};
+			private readonly string[] _types = {"<NUM>", "<SOMETHINGELSE>"};
 
-			public override FuncTokenFilters Fluent => (n, tf) => tf
-				.KeepTypes(n, t => t
-					.Types("<NUM>", "<SOMETHINGELSE>")
-				);
+			public override ITokenFilter Initializer => new KeepTypesTokenFilter {Types = _types};
 
-			public override object Json => new
+			public override FuncTokenFilters Fluent => (n, tf) => tf.KeepTypes(n, t => t.Types(_types));
+
+			public override object Json => new { type = "keep_types", types = _types };
+		}
+
+		[SkipVersion("<6.4.0", "The mode option was introduced in https://github.com/elastic/elasticsearch/pull/32012")]
+		public class KeepTypesModeTests : TokenFilterAssertionBase<KeepTypesTests>
+		{
+			public override string Name => "keeptypes";
+			private readonly string[] _types = {"<NUM>", "<SOMETHINGELSE>"};
+
+			public override ITokenFilter Initializer => new KeepTypesTokenFilter
 			{
-				type = "keep_types",
-				types = new[] {"<NUM>", "<SOMETHINGELSE>"}
+				Mode = KeepTypesMode.Exclude,
+				Types = _types
 			};
 
+			public override FuncTokenFilters Fluent => (n, tf) => tf.KeepTypes(n, t => t
+				.Mode(KeepTypesMode.Exclude)
+				.Types(_types)
+			);
+
+			public override object Json => new { type = "keep_types", types = _types, mode = "exclude" };
 		}
 
 		public class IcuCollationTests : TokenFilterAssertionBase<IcuCollationTests>
@@ -674,7 +687,33 @@ namespace Tests.Analysis.TokenFilters
 				expand = true,
 				tokenizer = "whitespace"
 			};
+		}
 
+		[SkipVersion("<6.4.0", "Lenient is an option introduced in 6.4.0")]
+		public class SynonymLenientTests : TokenFilterAssertionBase<SynonymTests>
+		{
+			public override string Name => "syn";
+			private readonly string[] _synonyms = {"foo", "bar => baz"};
+
+			public override ITokenFilter Initializer =>
+				new SynonymTokenFilter
+				{
+					Lenient = true,
+					Synonyms = _synonyms
+				};
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.Synonym(n, t => t
+					.Lenient()
+					.Synonyms(_synonyms)
+				);
+
+			public override object Json => new
+			{
+				type = "synonym",
+				synonyms = _synonyms,
+				lenient = true,
+			};
 		}
 
 		public class SynonymGraphTests : TokenFilterAssertionBase<SynonymGraphTests>
@@ -891,6 +930,38 @@ namespace Tests.Analysis.TokenFilters
 			public override FuncTokenFilters Fluent => (n, tf) => tf.NoriPartOfSpeech(n, t => t.StopTags(_stopTags));
 
 			public override object Json => new { type = "nori_part_of_speech", stoptags = _stopTags };
+    }
+
+		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
+		public class MultiplexerTests : TokenFilterAssertionBase<PhoneticTests>
+		{
+			public override string Name => "multiplexer";
+			public override object Json => new
+			{
+				filters = new[]{"lowercase", "lowercase, porter_stem"},
+				preserve_original = true
+			};
+
+			public override ITokenFilter Initializer => new MultiplexerTokenFilter
+			{
+				Filters = new[] {"lowercase", "lowercase, porter_stem"},
+				PreserveOriginal = true
+			};
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.Multiplexer(n, t => t
+					.Filters("lowercase", "lowercase, porter_stem")
+					.PreserveOriginal()
+				);
+		}
+
+		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
+		public class RemoveDuplicatesTests : TokenFilterAssertionBase<PhoneticTests>
+		{
+			public override string Name => "dupes";
+			public override object Json => new { };
+			public override ITokenFilter Initializer => new RemoveDuplicatesTokenFilter { };
+			public override FuncTokenFilters Fluent => (n, tf) => tf.RemoveDuplicates(n);
 		}
 	}
 }
