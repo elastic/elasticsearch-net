@@ -26,11 +26,11 @@ namespace Nest
 	/// <inheritdoc cref="IRollupGroupings"/>
 	public class RollupGroupings : IRollupGroupings
 	{
-		/// <inheritdoc cref="IDateHistogramRollupGrouping"/>
+		/// <inheritdoc />
 		public IDateHistogramRollupGrouping DateHistogram { get; set; }
-		/// <inheritdoc cref="IHistogramRollupGrouping"/>
+		/// <inheritdoc />
 		public IHistogramRollupGrouping Histogram { get; set; }
-		/// <inheritdoc cref="ITermsRollupGrouping"/>
+		/// <inheritdoc />
 		public ITermsRollupGrouping Terms { get; set; }
 	}
 

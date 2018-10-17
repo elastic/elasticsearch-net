@@ -19,10 +19,10 @@ namespace Nest
 		Fields Fields { get; set; }
 	}
 
-	/// <inheritdoc cref="ITermsRollupGrouping"/>
+	/// <inheritdoc />
 	public class TermsRollupGrouping : ITermsRollupGrouping
 	{
-		/// <inheritdoc cref="ITermsRollupGrouping.Fields"/>
+		/// <inheritdoc />
 		public Fields Fields { get; set; }
 	}
 

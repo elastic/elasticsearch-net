@@ -21,13 +21,13 @@ namespace Nest
 		long? Interval { get; set; }
 	}
 
-	/// <inheritdoc cref="IHistogramRollupGrouping"/>
+	/// <inheritdoc />
 	public class HistogramRollupGrouping : IHistogramRollupGrouping
 	{
-		/// <inheritdoc cref="IHistogramRollupGrouping.Fields"/>
+		/// <inheritdoc />
 		public Fields Fields { get; set; }
 
-		/// <inheritdoc cref="IHistogramRollupGrouping.Interval"/>
+		/// <inheritdoc />
 		public long? Interval { get; set; }
 	}
 
