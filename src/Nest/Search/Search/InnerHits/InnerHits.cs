@@ -41,6 +41,12 @@ namespace Nest
 
 		[JsonProperty("ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
+
+		/// <summary>
+		/// Provides a second level of collapsing, NOTE: Elasticsearch only supports collapsing up to two levels.
+		/// </summary>
+		[JsonProperty("collapse")]
+		IFieldCollapse Collapse { get; set; }
 	}
 
 	public class InnerHits : IInnerHits
@@ -66,6 +72,9 @@ namespace Nest
 		public Fields DocValueFields { get; set; }
 
 		public bool? IgnoreUnmapped { get; set; }
+
+		/// <inheritdoc cref="IInnerHits.Collapse"/>
+		public IFieldCollapse Collapse { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -82,6 +91,7 @@ namespace Nest
 		IScriptFields IInnerHits.ScriptFields { get; set; }
 		Fields IInnerHits.DocValueFields { get; set; }
 		bool? IInnerHits.IgnoreUnmapped { get; set; }
+		IFieldCollapse IInnerHits.Collapse { get; set; }
 
 		public InnerHitsDescriptor<T> From(int? from) => Assign(a => a.From = from);
 
@@ -115,5 +125,9 @@ namespace Nest
 		public InnerHitsDescriptor<T> DocValueFields(Fields fields) => Assign(a => a.DocValueFields = fields);
 
 		public InnerHitsDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+
+		/// <inheritdoc cref="IInnerHits.Collapse"/>
+		public InnerHitsDescriptor<T> Collapse(Func<FieldCollapseDescriptor<T>, IFieldCollapse> collapseSelector) =>
+			Assign(a => a.Collapse = collapseSelector?.Invoke(new FieldCollapseDescriptor<T>()));
 	}
 }
