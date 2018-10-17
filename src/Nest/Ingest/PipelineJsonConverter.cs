@@ -108,6 +108,9 @@ namespace Nest
 					case "urldecode":
 						processors.Add(jsonProcessor.ToObject<UrlDecodeProcessor>(serializer));
 						break;
+					case "bytes":
+						processors.Add(jsonProcessor.ToObject<BytesProcessor>(serializer));
+						break;
 				}
 			}
 			return processors;

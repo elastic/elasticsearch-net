@@ -342,6 +342,22 @@ namespace Tests.Ingest
 				);
 		}
 
+
+		[SkipVersion("<6.4.0", "")]
+		public class Bytes : ProcessorAssertion
+		{
+			public override string Key => "bytes";
+
+			public override object Json => new { field = "description", ignore_missing = true };
+
+			public override IProcessor Initializer => new BytesProcessor { Field = "description", IgnoreMissing = true };
+      
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Bytes<Project>(ud => ud
+					.Field(p => p.Description)
+        );
+    }
+
 		public class KeyValue : ProcessorAssertion
 		{
 			public override string Key => "kv";
