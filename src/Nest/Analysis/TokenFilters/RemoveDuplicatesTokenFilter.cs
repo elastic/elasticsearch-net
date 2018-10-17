@@ -5,8 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// A token filter of type multiplexer will emit multiple tokens at the same position, each version of the token having
-	/// been run through a different filter. Identical output tokens at the same position will be removed.
+	/// A token filter that drops identical tokens at the same position
 	/// </summary>
 	public interface IRemoveDuplicatesTokenFilter : ITokenFilter { }
 
@@ -23,5 +22,4 @@ namespace Nest
 	{
 		protected override string Type => RemoveDuplicatesTokenFilter.TokenType;
 	}
-
 }
