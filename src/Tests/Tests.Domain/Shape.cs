@@ -34,8 +34,8 @@ namespace Tests.Domain
 				)
 				.RuleFor(p => p.Envelope, p => new EnvelopeGeoShape(new []
 				{
-					new GeoCoordinate(0, 0),
-					new GeoCoordinate(45, 45)
+					new GeoCoordinate(45, 0),
+					new GeoCoordinate(0, 45)
 				}))
 				.RuleFor(p => p.Circle, p => new CircleGeoShape(GenerateGeoCoordinate(p), $"{p.Random.Int(1, 100)}km"))
 			;
