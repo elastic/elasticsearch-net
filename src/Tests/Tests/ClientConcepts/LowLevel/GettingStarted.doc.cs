@@ -66,7 +66,7 @@ namespace Tests.ClientConcepts.LowLevel
          * - whether HTTP compression support should be enabled on the client
 		 *
 		 * [float]
-		 * ==== Connecton pools
+		 * ==== Connection pools
 		 *
 		 * `ConnectionConfiguration` is not restricted to being passed a single address for Elasticsearch. There are several different
 		 * types of <<connection-pooling,Connection pool>> available, each with different characteristics that can be used to
