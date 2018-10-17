@@ -2,7 +2,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Analysis;
-using Tests.Analysis.Tokenizers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -107,16 +106,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 		public class KeywordPropertySplitQueriesOnWhitespaceTests : PropertyTestsBase
 		{
 			public KeywordPropertySplitQueriesOnWhitespaceTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-			protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
-				.Settings(s => s
-					.Analysis(a => a
-						.CharFilters(t => Promise(Analysis.CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
-						.TokenFilters(
-							t => Promise(Analysis.TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
-						.Normalizers(t => Promise(Analysis.Normalizers.NormalizerUsageTests.FluentExample(s).Value.Analysis.Normalizers))
-					)
-				);
 
 			protected override object ExpectJson => new
 			{
