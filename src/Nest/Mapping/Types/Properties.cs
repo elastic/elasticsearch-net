@@ -132,6 +132,8 @@ namespace Nest
 
 		public PropertiesDescriptor<T> Join(Func<JoinPropertyDescriptor<T>, IJoinProperty> selector) => SetProperty(selector);
 
+		public PropertiesDescriptor<T> FieldAlias(Func<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty> selector) => SetProperty(selector);
+
 		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);
 
 		private PropertiesDescriptor<T> SetProperty<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector)
@@ -152,6 +154,7 @@ namespace Nest
 
 			return this.Assign(a => a[type.Name] = type);
 		}
+
 	}
 
 	internal static class PropertiesExtensions

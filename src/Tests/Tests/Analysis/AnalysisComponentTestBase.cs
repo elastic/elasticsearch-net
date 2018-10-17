@@ -45,7 +45,7 @@ namespace Tests.Analysis
 
 		protected AnalysisComponentTestBase()
 		{
-			this.Client = (ElasticXunitRunner.CurrentCluster as ReadOnlyCluster)?.Client ?? TestClient.DefaultInMemoryClient;
+			this.Client = (ElasticXunitRunner.CurrentCluster as INestTestCluster)?.Client ?? TestClient.DefaultInMemoryClient;
 			Usage.KickOffOnce(this.Client, oneRandomCall: true);
 		}
 

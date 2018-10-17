@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
@@ -181,6 +181,7 @@ namespace Tests.Analysis.TokenFilters
 		public class KeepTypesTests : TokenFilterAssertionBase<KeepTypesTests>
 		{
 			public override string Name => "keeptypes";
+
 			private readonly string[] _types = {"<NUM>", "<SOMETHINGELSE>"};
 
 			public override ITokenFilter Initializer => new KeepTypesTokenFilter {Types = _types};
@@ -208,6 +209,20 @@ namespace Tests.Analysis.TokenFilters
 			);
 
 			public override object Json => new { type = "keep_types", types = _types, mode = "exclude" };
+
+			public override ITokenFilter Initializer =>
+				new KeepTypesTokenFilter {Types = new[] {"<NUM>", "<SOMETHINGELSE>"}};
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.KeepTypes(n, t => t
+					.Types("<NUM>", "<SOMETHINGELSE>")
+				);
+
+			public override object Json => new
+			{
+				type = "keep_types",
+				types = new[] {"<NUM>", "<SOMETHINGELSE>"}
+			};
 		}
 
 		public class IcuCollationTests : TokenFilterAssertionBase<IcuCollationTests>
@@ -686,7 +701,33 @@ namespace Tests.Analysis.TokenFilters
 				expand = true,
 				tokenizer = "whitespace"
 			};
+		}
 
+		[SkipVersion("<6.4.0", "Lenient is an option introduced in 6.4.0")]
+		public class SynonymLenientTests : TokenFilterAssertionBase<SynonymTests>
+		{
+			public override string Name => "syn";
+			private readonly string[] _synonyms = {"foo", "bar => baz"};
+
+			public override ITokenFilter Initializer =>
+				new SynonymTokenFilter
+				{
+					Lenient = true,
+					Synonyms = _synonyms
+				};
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.Synonym(n, t => t
+					.Lenient()
+					.Synonyms(_synonyms)
+				);
+
+			public override object Json => new
+			{
+				type = "synonym",
+				synonyms = _synonyms,
+				lenient = true,
+			};
 		}
 
 		public class SynonymGraphTests : TokenFilterAssertionBase<SynonymGraphTests>
@@ -890,6 +931,38 @@ namespace Tests.Analysis.TokenFilters
 				languageset = new[] {"cyrillic", "english", "hebrew"}
 			};
 
+		}
+
+		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
+		public class MultiplexerTests : TokenFilterAssertionBase<PhoneticTests>
+		{
+			public override string Name => "multiplexer";
+			public override object Json => new
+			{
+				filters = new[]{"lowercase", "lowercase, porter_stem"},
+				preserve_original = true
+			};
+
+			public override ITokenFilter Initializer => new MultiplexerTokenFilter
+			{
+				Filters = new[] {"lowercase", "lowercase, porter_stem"},
+				PreserveOriginal = true
+			};
+
+			public override FuncTokenFilters Fluent => (n, tf) => tf
+				.Multiplexer(n, t => t
+					.Filters("lowercase", "lowercase, porter_stem")
+					.PreserveOriginal()
+				);
+		}
+
+		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
+		public class RemoveDuplicatesTests : TokenFilterAssertionBase<PhoneticTests>
+		{
+			public override string Name => "dupes";
+			public override object Json => new { };
+			public override ITokenFilter Initializer => new RemoveDuplicatesTokenFilter { };
+			public override FuncTokenFilters Fluent => (n, tf) => tf.RemoveDuplicates(n);
 		}
 	}
 }
