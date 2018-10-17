@@ -106,11 +106,7 @@ namespace Tests.XPack.Rollup
 				request: (s, c, r) => c.RollupSearch<Log>(r),
 				requestAsync: (s, c, r) => c.RollupSearchAsync<Log>(r)
 			)},
-			{ "rollup_caps", () => this.Calls<
-                    GetRollupCapabilitiesDescriptor,
-                    GetRollupCapabilitiesRequest,
-					IGetRollupCapabilitiesRequest,
-					IGetRollupCapabilitiesResponse>(
+			{ "rollup_caps", () => this.Calls<GetRollupCapabilitiesDescriptor, GetRollupCapabilitiesRequest, IGetRollupCapabilitiesRequest, IGetRollupCapabilitiesResponse>(
 				this.CapsInitializer,
 				this.CapsFluent,
 				fluent: (s, c, f) => c.GetRollupCapabilities(f),
