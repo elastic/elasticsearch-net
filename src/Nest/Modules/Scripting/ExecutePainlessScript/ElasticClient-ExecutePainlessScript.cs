@@ -18,10 +18,10 @@ namespace Nest
 
 		/// <inheritdoc cref="ExecutePainlessScript{TResult}(System.Func{Nest.ExecutePainlessScriptDescriptor,Nest.IExecutePainlessScriptRequest})"/>
 		Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken));
+			CancellationToken cancellationToken = default);
 
 		/// <inheritdoc cref="ExecutePainlessScript{TResult}(System.Func{Nest.ExecutePainlessScriptDescriptor,Nest.IExecutePainlessScriptRequest})"/>
-		Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken cancellationToken = default);
 
 	}
 
@@ -40,11 +40,11 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> selector,
-			CancellationToken cancellationToken = default(CancellationToken)) =>
+			CancellationToken cancellationToken = default) =>
 			this.ExecutePainlessScriptAsync<TResult>(selector?.Invoke(new ExecutePainlessScriptDescriptor()), cancellationToken);
 
 		/// <inheritdoc />
-		public Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+		public Task<IExecutePainlessScriptResponse<TResult>> ExecutePainlessScriptAsync<TResult>(IExecutePainlessScriptRequest request, CancellationToken cancellationToken = default) =>
 			this.Dispatcher.DispatchAsync<IExecutePainlessScriptRequest, ExecutePainlessScriptRequestParameters, ExecutePainlessScriptResponse<TResult>, IExecutePainlessScriptResponse<TResult>>(
 				request,
 				cancellationToken,

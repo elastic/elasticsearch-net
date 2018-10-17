@@ -6,16 +6,16 @@ namespace Nest
 	/// <summary>
 	/// Sets up contextual scope for the painless script the execute under.
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<object>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PainlessContextSetup>))]
 	public interface IPainlessContextSetup
 	{
 		/// <summary>
-		/// Contains the document that will be temporarily indexed in-memory and is accessible from the script.jj
+		/// Contains the document that will be temporarily indexed in-memory and is accessible from the script.
 		/// </summary>
 		[JsonProperty("document")]
 		object Document { get; set; }
 		/// <summary>
-		/// The name of an index containing a mapping that is compatable with the document being indexed.
+		/// The name of an index containing a mapping that is compatible with the document being indexed.
 		/// </summary>
 		[JsonProperty("index")]
 		IndexName Index { get; set; }

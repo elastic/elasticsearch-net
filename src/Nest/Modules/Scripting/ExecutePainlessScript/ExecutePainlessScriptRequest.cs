@@ -46,7 +46,7 @@ namespace Nest
 		public ExecutePainlessScriptDescriptor ContextSetup(Func<PainlessContextSetupDescriptor, IPainlessContextSetup> selector) =>
 			Assign(a => a.ContextSetup = selector?.Invoke(new PainlessContextSetupDescriptor()));
 
-		/// <inheritdoc cref="IExecutePainlessScriptRequest.Conteext"/>
+		/// <inheritdoc cref="IExecutePainlessScriptRequest.Context"/>
 		public ExecutePainlessScriptDescriptor Context(string context) => Assign(a => a.Context = context);
 	}
 }
