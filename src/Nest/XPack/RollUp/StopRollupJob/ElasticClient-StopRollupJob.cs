@@ -7,17 +7,20 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <summary>
+		/// Stops an existing, started rollup job. If the job does not exist an exception will be thrown.
+		/// Stopping an already stopped job has no action.
+		/// </summary>
 		IStopRollupJobResponse StopRollupJob(Id id, Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="StopRollupJob(Nest.Id,System.Func{Nest.StopRollupJobDescriptor,Nest.IStopRollupJobRequest})"/>
 		IStopRollupJobResponse StopRollupJob(IStopRollupJobRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="StopRollupJob(Nest.Id,System.Func{Nest.StopRollupJobDescriptor,Nest.IStopRollupJobRequest})"/>
 		Task<IStopRollupJobResponse> StopRollupJobAsync(Id id,
 			Func<StopRollupJobDescriptor, IStopRollupJobRequest> selector = null, CancellationToken cancellationToken = default);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="StopRollupJob(Nest.Id,System.Func{Nest.StopRollupJobDescriptor,Nest.IStopRollupJobRequest})"/>
 		Task<IStopRollupJobResponse> StopRollupJobAsync(IStopRollupJobRequest request, CancellationToken cancellationToken = default);
 	}
 

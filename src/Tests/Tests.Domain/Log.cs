@@ -19,6 +19,9 @@ namespace Tests.Domain
 		[Keyword] public string Section { get; set; }
 		public long Temperature { get; set; }
 		public double Voltage { get; set; }
+		public double Load { get; set; }
+		public double NetIn { get; set; }
+		public double NetOut { get; set; }
 
 		public static Faker<Log> Generator { get; } =
 			new Faker<Log>()
@@ -32,6 +35,9 @@ namespace Tests.Domain
 				.RuleFor(m => m.Temperature, m => m.Random.Number(-10, 45))
 				.RuleFor(m => m.Voltage, m => m.Random.Double(0, 10.0))
 				.RuleFor(m => m.Section, m => m.PickRandom(Sections))
+				.RuleFor(m => m.Load, m => m.Random.Double(100, 500))
+				.RuleFor(m => m.NetIn, m => m.Random.Double(1000, 10000))
+				.RuleFor(m => m.NetOut, m => m.Random.Double(1000, 10000))
 			;
 
 		private static readonly Random Random = new Random(15842);

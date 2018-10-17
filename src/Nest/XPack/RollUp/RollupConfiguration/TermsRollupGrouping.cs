@@ -3,7 +3,11 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	/// <summary> The histogram group aggregates one or more numeric fields into numeric histogram intervals. </summary>
+	/// <summary>
+	/// The terms group can be used on keyword or numeric fields, to allow bucketing via the terms aggregation at a
+	/// later point. The terms group is optional. If defined, the indexer will enumerate and store all values of a field for
+	/// each time-period.
+	/// </summary>
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<TermsRollupGrouping>))]
 	public interface ITermsRollupGrouping
 	{

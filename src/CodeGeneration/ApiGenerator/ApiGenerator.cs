@@ -73,11 +73,6 @@ namespace ApiGenerator
 			"xpack.ml.put_calendar_job.json",
 			"xpack.ml.get_calendar_job.json",
 
-//			"xpack.rollup.delete_job.json",
-//			"xpack.rollup.get_jobs.json",
-//			"xpack.rollup.put_job.json",
-//			"xpack.rollup.start_job.json",
-//			"xpack.rollup.stop_job.json",
 			"xpack.rollup.rollup_search.json",
 			"xpack.rollup.get_rollup_caps.json",
 			"xpack.ssl.certificates.json",
