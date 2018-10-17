@@ -7,10 +7,13 @@ namespace Nest
 	public class IndicesStats
 	{
 		/// <summary>
-		/// Introduced in 6.4.0, returns the index UUID
+		/// Universal Unique Identifier for the index
 		/// </summary>
+		/// <remarks>
+		/// Introduced in Elasticsearch 6.4.0
+		/// </remarks>
 		[JsonProperty("uuid")]
-		public string Uuid { get; }
+		public string UUID { get; }
 
 		[JsonProperty("primaries")]
 		public IndexStats Primaries { get; internal set; }
