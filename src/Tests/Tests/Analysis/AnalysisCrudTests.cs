@@ -1,19 +1,16 @@
 ﻿using System.Linq;
-using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Analysis.Tokenizers;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Tests.Framework.Promisify;
 
 namespace Tests.Analysis
 {
 
-	[SkipVersion("<5.2.0", "This tests contains analyzers/tokenfilters not found in previous versions, need a clean way to seperate these out")]
 	public class AnalysisCrudTests
 		: CrudWithNoDeleteTestBase<ICreateIndexResponse, IGetIndexSettingsResponse, IUpdateIndexSettingsResponse>
 	{
@@ -46,10 +43,10 @@ namespace Tests.Analysis
 			{
 				Analysis = new Nest.Analysis
 				{
-					Analyzers = Analyzers.AnalyzerUsageTests.InitializerExample.Analysis.Analyzers,
-					CharFilters = CharFilters.CharFilterUsageTests.InitializerExample.Analysis.CharFilters,
-					Tokenizers = Tokenizers.TokenizerUsageTests.InitializerExample.Analysis.Tokenizers,
-					TokenFilters = TokenFilters.TokenFilterUsageTests.InitializerExample.Analysis.TokenFilters,
+					Analyzers = AnalysisUsageTests.AnalyzersInitializer.Analysis.Analyzers,
+					CharFilters = AnalysisUsageTests.CharFiltersInitializer.Analysis.CharFilters,
+					Tokenizers = AnalysisUsageTests.TokenizersInitializer.Analysis.Tokenizers,
+					TokenFilters = AnalysisUsageTests.TokenFiltersInitializer.Analysis.TokenFilters,
 				}
 			}
 		};
@@ -57,10 +54,10 @@ namespace Tests.Analysis
 		protected virtual ICreateIndexRequest CreateFluent(string indexName, CreateIndexDescriptor c) =>
 			c.Settings(s => s
 				.Analysis(a => a
-					.Analyzers(t => Promise(Analyzers.AnalyzerUsageTests.FluentExample(s).Value.Analysis.Analyzers))
-					.CharFilters(t => Promise(CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
-					.Tokenizers(t => Promise(Tokenizers.TokenizerUsageTests.FluentExample(s).Value.Analysis.Tokenizers))
-					.TokenFilters(t => Promise(TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
+					.Analyzers(t => Promise(AnalysisUsageTests.AnalyzersFluent.Analysis.Analyzers))
+					.CharFilters(t => Promise(AnalysisUsageTests.CharFiltersFluent.Analysis.CharFilters))
+					.Tokenizers(t => Promise(AnalysisUsageTests.TokenizersFluent.Analysis.Tokenizers))
+					.TokenFilters(t => Promise(AnalysisUsageTests.TokenFiltersFluent.Analysis.TokenFilters))
 				)
 			);
 
@@ -82,7 +79,7 @@ namespace Tests.Analysis
 
 		/**
 		* Here we assert over the response from `GetIndexSettings()` after the index creation to make sure our analysis chain did infact
-		* store our html char filter called `stripMe`
+		* store our html char filter called `htmls`
 		*/
 		protected override void ExpectAfterCreate(IGetIndexSettingsResponse response)
 		{
@@ -94,7 +91,7 @@ namespace Tests.Analysis
 			indexSettings.Analysis.Should().NotBeNull();
 			indexSettings.Analysis.CharFilters.Should().NotBeNull();
 
-			var firstHtmlCharFilter = indexSettings.Analysis.CharFilters["stripMe"];
+			var firstHtmlCharFilter = indexSettings.Analysis.CharFilters["htmls"];
 			firstHtmlCharFilter.Should().NotBeNull();
 		}
 

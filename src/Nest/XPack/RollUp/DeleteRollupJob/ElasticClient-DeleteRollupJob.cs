@@ -7,17 +7,20 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <summary>
+		/// Deletes an existing rollup job. The job can be started or stopped, in both cases it will be deleted.
+		/// Attempting to delete a non-existing job will throw an exception
+		/// </summary>
 		IDeleteRollupJobResponse DeleteRollupJob(Id id, Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DeleteRollupJob(Nest.Id,System.Func{Nest.DeleteRollupJobDescriptor,Nest.IDeleteRollupJobRequest})" />
 		IDeleteRollupJobResponse DeleteRollupJob(IDeleteRollupJobRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DeleteRollupJob(Nest.Id,System.Func{Nest.DeleteRollupJobDescriptor,Nest.IDeleteRollupJobRequest})" />
 		Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(Id id,
 			Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null, CancellationToken cancellationToken = default);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DeleteRollupJob(Nest.Id,System.Func{Nest.DeleteRollupJobDescriptor,Nest.IDeleteRollupJobRequest})" />
 		Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(IDeleteRollupJobRequest request, CancellationToken cancellationToken = default);
 	}
 

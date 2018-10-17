@@ -50,6 +50,11 @@ namespace Tests.XPack.Rollup
 				Terms = new TermsRollupGrouping
 				{
 					Fields = Infer.Field<Log>(p=>p.Section).And<Log>(p=>p.Tag)
+				},
+				Histogram = new HistogramRollupGrouping
+				{
+					Fields = Infer.Field<Log>(p => p.Load).And<Log>(p => p.NetIn).And<Log>(p => p.NetOut),
+					Interval = 5
 				}
 			},
 			Metrics = new List<IRollupFieldMetric>
@@ -69,6 +74,7 @@ namespace Tests.XPack.Rollup
 			.Groups(g => g
 				.DateHistogram(dh => dh.Field(p => p.Timestamp).Interval(TimeSpan.FromHours(1)))
 				.Terms(t => t.Fields(f => f.Field(p => p.Section).Field(p => p.Tag)))
+				.Histogram(h => h.Fields(f => f.Field(p => p.Load).Field(p => p.NetIn).Field(p => p.NetOut)).Interval(5))
 			)
 			.Metrics(m=>m
 				.Field(p => p.Temperature, RollupMetric.Average, RollupMetric.Min, RollupMetric.Max)
@@ -217,10 +223,15 @@ namespace Tests.XPack.Rollup
 				j.Config.RollupIndex.Should().NotBeNull();
 				j.Config.PageSize.Should().Be(1000);
 				j.Config.Groups.Should().NotBeNull();
+				j.Config.Groups.Terms.Should().NotBeNull();
+				j.Config.Groups.Terms.Fields.Should().NotBeNull();
 				j.Config.Groups.DateHistogram.Should().NotBeNull();
 				j.Config.Groups.DateHistogram.Field.Should().NotBeNull().And.Be("timestamp");
 				j.Config.Groups.DateHistogram.Interval.Should().NotBeNull().And.Be("1h");
 				j.Config.Groups.DateHistogram.Interval.Should().NotBeNull().And.Be(TimeSpan.FromHours(1));
+				j.Config.Groups.Histogram.Should().NotBeNull();
+				j.Config.Groups.Histogram.Fields.Should().NotBeNull();
+				j.Config.Groups.Histogram.Interval.Should().NotBeNull().And.Be(5);
 
 				j.Config.Metrics.Should().NotBeEmpty("config should have metrics");
 				foreach (var m in j.Config.Metrics)

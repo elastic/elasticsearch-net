@@ -75,7 +75,6 @@ namespace ApiGenerator
 
 			"xpack.rollup.get_rollup_caps.json",
 			"xpack.rollup.get_rollup_index_caps.json",
-
 			"xpack.sql.clear_cursor.json",
 			"xpack.sql.query.json",
 			"xpack.sql.translate.json",

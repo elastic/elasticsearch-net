@@ -7,19 +7,21 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <summary>
+		/// Creates a rollup job. The job will be created in a STOPPED state, and must be started with StartRollupJob API
+		/// </summary>
 		ICreateRollupJobResponse CreateRollupJob<T>(Id id, Func<CreateRollupJobDescriptor<T>, ICreateRollupJobRequest> selector)
 			where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="CreateRollupJob{T}"/>
 		ICreateRollupJobResponse CreateRollupJob(ICreateRollupJobRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="CreateRollupJob{T}"/>
 		Task<ICreateRollupJobResponse> CreateRollupJobAsync<T>(Id id,
 			Func<CreateRollupJobDescriptor<T>, ICreateRollupJobRequest> selector, CancellationToken cancellationToken = default)
 			where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="CreateRollupJob{T}"/>
 		Task<ICreateRollupJobResponse> CreateRollupJobAsync(ICreateRollupJobRequest request, CancellationToken cancellationToken = default);
 	}
 
