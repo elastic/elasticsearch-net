@@ -975,6 +975,18 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IClearSqlCursorRequest : IRequest<ClearSqlCursorRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSqlClearCursor <pre>Clear SQL cursor</pre></summary>
+	public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
+	{
+		protected IClearSqlCursorRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters>
 	{
 		Indices Index { get; }
@@ -4381,6 +4393,20 @@ namespace Nest
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSqlQuery <pre>Execute SQL</pre></summary>
+	public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
+	{
+		protected IQuerySqlRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
 	{
 		Indices Index { get; }
@@ -4984,6 +5010,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
 		public bool? CopySettings { get => Q<bool?>("copy_settings"); set => Q("copy_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
@@ -5288,6 +5315,7 @@ namespace Nest
 
 		// Request parameters
 		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
 		public bool? CopySettings { get => Q<bool?>("copy_settings"); set => Q("copy_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
@@ -5499,6 +5527,18 @@ namespace Nest
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ITranslateSqlRequest : IRequest<TranslateSqlRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSqlTranslate <pre>Translate SQL into Elasticsearch queries</pre></summary>
+	public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
+	{
+		protected ITranslateSqlRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters>

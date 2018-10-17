@@ -80,10 +80,6 @@ namespace ApiGenerator
 //			"xpack.rollup.stop_job.json",
 			"xpack.rollup.rollup_search.json",
 			"xpack.rollup.get_rollup_caps.json",
-
-			"xpack.sql.clear_cursor.json",
-			"xpack.sql.query.json",
-			"xpack.sql.translate.json",
 			"xpack.ssl.certificates.json",
 
 			// 6.4 new  API's

@@ -7,7 +7,84 @@ using Tests.Framework.Integration;
 
 namespace Tests.Mapping.Types.Core.Text
 {
+
+	[SkipVersion("<6.4.0", "index_phrases is a new feature")]
+	public class TextPropertyIndexPhrasesTests : PropertyTestsBase
+	{
+		public TextPropertyIndexPhrasesTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			properties = new
+			{
+				name = new
+				{
+					type = "text",
+					index_phrases = true
+				}
+			}
+		};
+
+
+		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
+				.Text(s => s
+					.Name(p => p.Name)
+					.IndexPhrases()
+				);
+
+
+		protected override IProperties InitializerProperties => new Properties
+		{
+			{ "name", new TextProperty { IndexPhrases = true } }
+		};
+	}
+
 	[SkipVersion("<6.3.0", "index_prefixes is a new feature")]
+	public class TextPropertyIndexPrefixesTests : PropertyTestsBase
+	{
+		public TextPropertyIndexPrefixesTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			properties = new
+			{
+				name = new
+				{
+					type = "text",
+					index_prefixes = new
+					{
+						min_chars = 1,
+						max_chars = 10
+					}
+				}
+			}
+		};
+
+
+		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
+				.Text(s => s
+					.Name(p => p.Name)
+					.IndexPrefixes(i => i
+						.MinCharacters(1)
+						.MaxCharacters(10)
+					)
+				);
+
+
+		protected override IProperties InitializerProperties => new Properties
+		{
+			{ "name", new TextProperty
+				{
+					IndexPrefixes = new TextIndexPrefixes
+					{
+						MinCharacters = 1,
+						MaxCharacters = 10
+					}
+				}
+			}
+		};
+	}
+
 	public class TextPropertyTests : PropertyTestsBase
 	{
 		public TextPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

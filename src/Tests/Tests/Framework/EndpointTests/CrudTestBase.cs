@@ -46,7 +46,7 @@ namespace Tests.Framework
 	{
 		protected CrudTestBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsExists => false;
-
+    
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[I] protected override Task CreateCallIsValid() => base.CreateCallIsValid();
 		[I] protected override Task GetAfterCreateIsValid() => base.GetAfterCreateIsValid();
@@ -58,6 +58,7 @@ namespace Tests.Framework
 		[I] protected override Task ExistsAfterDeleteIsValid() => base.ExistsAfterDeleteIsValid();
 		[I] protected override Task DeleteNotFoundIsNotValid() => base.DeleteNotFoundIsNotValid();
 	}
+  
 	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
 		: CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse, ExistsResponse>
 			where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, INestTestCluster, new()

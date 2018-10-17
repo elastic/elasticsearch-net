@@ -29,6 +29,7 @@ namespace Nest
 				case "simple": return o.ToObject<SimpleAnalyzer>(ElasticContractResolver.Empty);
 				case "fingerprint": return o.ToObject<FingerprintAnalyzer>(ElasticContractResolver.Empty);
 				case "kuromoji": return o.ToObject<KuromojiAnalyzer>(ElasticContractResolver.Empty);
+				case "nori": return o.ToObject<NoriAnalyzer>(ElasticContractResolver.Empty);
 				default:
 					if (o.Property("tokenizer") != null)
 						return o.ToObject<CustomAnalyzer>(ElasticContractResolver.Empty);

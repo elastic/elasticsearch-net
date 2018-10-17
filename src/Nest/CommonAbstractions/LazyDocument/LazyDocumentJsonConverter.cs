@@ -27,4 +27,5 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => true;
 	}
+
 }
