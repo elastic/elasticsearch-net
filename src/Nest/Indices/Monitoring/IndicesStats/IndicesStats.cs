@@ -6,6 +6,15 @@ namespace Nest
 	[JsonObject]
 	public class IndicesStats
 	{
+		/// <summary>
+		/// Universal Unique Identifier for the index
+		/// </summary>
+		/// <remarks>
+		/// Introduced in Elasticsearch 6.4.0
+		/// </remarks>
+		[JsonProperty("uuid")]
+		public string UUID { get; }
+
 		[JsonProperty("primaries")]
 		public IndexStats Primaries { get; internal set; }
 
