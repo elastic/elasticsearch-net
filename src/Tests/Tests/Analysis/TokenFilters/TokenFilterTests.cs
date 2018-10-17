@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Framework;
@@ -902,6 +902,7 @@ namespace Tests.Analysis.TokenFilters
 					.PreserveOriginal()
 				);
 		}
+
 		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
 		public class RemoveDuplicatesTests : TokenFilterAssertionBase<PhoneticTests>
 		{
