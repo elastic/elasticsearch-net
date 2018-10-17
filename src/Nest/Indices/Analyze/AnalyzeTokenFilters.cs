@@ -324,6 +324,10 @@ namespace Nest
 		public AnalyzeTokenFiltersDescriptor IcuTransform(Func<IcuTransformTokenFilterDescriptor, IIcuTransformTokenFilter> selector) =>
 			AssignIfNotNull(selector.Invoke(new IcuTransformTokenFilterDescriptor()));
 
+		/// <inheritdoc cref="INoriPartOfSpeechTokenFilter"/>
+		public AnalyzeTokenFiltersDescriptor NoriPartOfSpeech(Func<NoriPartOfSpeechTokenFilterDescriptor, INoriPartOfSpeechTokenFilter> selector) =>
+			AssignIfNotNull(selector.Invoke(new NoriPartOfSpeechTokenFilterDescriptor()));
+
 		///<inheritdoc cref="IMultiplexerTokenFilter"/>
 		public AnalyzeTokenFiltersDescriptor Multiplexer(Func<MultiplexerTokenFilterDescriptor, IMultiplexerTokenFilter> selector) =>
 			AssignIfNotNull(selector.Invoke(new MultiplexerTokenFilterDescriptor()));

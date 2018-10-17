@@ -318,6 +318,10 @@ namespace Nest
 		public TokenFiltersDescriptor IcuTransform(string name, Func<IcuTransformTokenFilterDescriptor, IIcuTransformTokenFilter> selector) =>
 			Assign(name, selector.Invoke(new IcuTransformTokenFilterDescriptor()));
 
+		/// <inheritdoc cref="INoriPartOfSpeechTokenFilter"/>
+		public TokenFiltersDescriptor NoriPartOfSpeech(string name, Func<NoriPartOfSpeechTokenFilterDescriptor, INoriPartOfSpeechTokenFilter> selector) =>
+			Assign(name, selector.Invoke(new NoriPartOfSpeechTokenFilterDescriptor()));
+
 		/// <summary>
 		///  A token filter of type multiplexer will emit multiple tokens at the same position, each version of the token
 		/// having been run through a different filter. Identical output tokens at the same position will be removed.

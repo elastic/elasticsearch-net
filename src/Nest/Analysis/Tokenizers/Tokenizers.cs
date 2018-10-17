@@ -113,6 +113,10 @@ namespace Nest
 		public TokenizersDescriptor Icu(string name, Func<IcuTokenizerDescriptor, IIcuTokenizer> selector) =>
 			Assign(name, selector?.Invoke(new IcuTokenizerDescriptor()));
 
+		/// <inheritdoc cref="INoriTokenizer"/>
+		public TokenizersDescriptor Nori(string name, Func<NoriTokenizerDescriptor, INoriTokenizer> selector) =>
+			Assign(name, selector?.Invoke(new NoriTokenizerDescriptor()));
+
 	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>>
 		public TokenizersDescriptor CharGroup(string name, Func<CharGroupTokenizerDescriptor, ICharGroupTokenizer> selector) =>
 			Assign(name, selector?.Invoke(new CharGroupTokenizerDescriptor()));
