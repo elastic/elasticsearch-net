@@ -6,10 +6,15 @@ using static Tests.Framework.Integration.ClientMethod;
 
 namespace Tests.Framework.Integration
 {
+	/// <summary>
+	/// Holds unique values for the the two DSL's and the exposed sync and async methods we expose
+	/// <see cref="ClientMethod"/>
+	/// </summary>
 	public class CallUniqueValues : Dictionary<ClientMethod, string>
 	{
 		private readonly string _prefix;
 		private string UniqueValue => $"{this._prefix}-{ViewName}-{Guid.NewGuid().ToString("N").Substring(0, 8)}";
+    public string FixedForAllCallsValue { get; }
 
 		private IDictionary<ClientMethod, ConcurrentDictionary<string, object>> ExtendedValues { get; }
 			= new Dictionary<ClientMethod, ConcurrentDictionary<string, object>>();
@@ -28,6 +33,7 @@ namespace Tests.Framework.Integration
 		public CallUniqueValues(string prefix = "nest")
 		{
 			this._prefix = prefix;
+      this.FixedForAllCallsValue = this.UniqueValue;
 			this.SetupClientMethod(Fluent);
 			this.SetupClientMethod(FluentAsync);
 			this.SetupClientMethod(Initializer);
