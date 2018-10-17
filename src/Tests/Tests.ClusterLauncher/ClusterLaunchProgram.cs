@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using Elastic.Managed;
 using Elastic.Managed.Ephemeral;
 using FluentAssertions.Common;
+using Tests.Configuration;
 using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.ClusterLauncher
@@ -23,12 +26,19 @@ namespace Tests.ClusterLauncher
 				Environment.SetEnvironmentVariable("NEST_INTEGRATION_VERSION", arguments[1], EnvironmentVariableTarget.Process);
 			Environment.SetEnvironmentVariable("NEST_INTEGRATION_SHOW_OUTPUT_AFTER_START", "1", EnvironmentVariableTarget.Process);
 
+
 			var cluster = GetClusters().FirstOrDefault(c => c.Name.StartsWith(clusterName, StringComparison.OrdinalIgnoreCase));
 			if (cluster == null)
 			{
 				Console.Error.WriteLine($"No cluster found that starts with '{clusterName}");
 				return 4;
 			}
+
+			//best effort, wont catch all the things
+			//https://github.com/dotnet/coreclr/issues/8565
+			//Don't want to make this windows only by registering a SetConsoleCtrlHandler  though P/Invoke.
+			AppDomain.CurrentDomain.ProcessExit += (s, ev) => Instance?.Dispose();
+			Console.CancelKeyPress += (s, ev) => Instance?.Dispose();
 
 			if (!TryStartClientTestClusterBaseImplementation(cluster) && !TryStartXPackClusterImplementation(cluster))
 			{
@@ -37,33 +47,40 @@ namespace Tests.ClusterLauncher
 			}
 			return 0;
 		}
+
+		private static ICluster<EphemeralClusterConfiguration> Instance { get; set; }
+
 		private static bool TryStartXPackClusterImplementation(Type cluster)
 		{
 			if (!(Activator.CreateInstance(cluster) is XPackCluster instance)) return false;
+			Instance = instance;
 			using (instance)
-			{
-				instance.Start();
-				Console.WriteLine("Press any key to shutdown the running cluster");
-				Console.ReadKey();
-				instance.Dispose();
-			}
-
-			return true;
+				return Run(instance);
 		}
+
 
 		private static bool TryStartClientTestClusterBaseImplementation(Type cluster)
 		{
 			if (!(Activator.CreateInstance(cluster) is ClientTestClusterBase instance)) return false;
+			Instance = instance;
 			using (instance)
-			{
-				instance.Start();
-				Console.WriteLine("Press any key to shutdown the running cluster");
-				Console.ReadKey();
-				instance.Dispose();
-			}
-			return true;
+				return Run(instance);
 		}
 
+		private static bool Run(ICluster<EphemeralClusterConfiguration> instance)
+		{
+			TestConfiguration.Instance.DumpConfiguration();
+			instance.Start();
+			if (!instance.Started)
+			{
+				Console.Error.WriteLine($"Failed to start cluster: '{instance.GetType().FullName}");
+				return false;
+			}
+			Console.WriteLine("Press any key to shutdown the running cluster");
+			var c = default(ConsoleKeyInfo);
+			while (c.Key != ConsoleKey.Q) c = Console.ReadKey();
+			return true;
+		}
 
 		private static Type[] GetClusters()
 		{

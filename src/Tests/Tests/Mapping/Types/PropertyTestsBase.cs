@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Elasticsearch.Net;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -39,5 +41,20 @@ namespace Tests.Mapping.Types
 		{
 			Properties = this.InitializerProperties
 		};
+
+		// https://youtrack.jetbrains.com/issue/RIDER-19912
+		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
+
+		[U] protected override Task UsesCorrectHttpMethod() => base.UsesCorrectHttpMethod();
+
+		[U] protected override void SerializesInitializer() => base.SerializesInitializer();
+
+		[U] protected override void SerializesFluent() => base.SerializesFluent();
+
+		[I] public override Task ReturnsExpectedStatusCode() => base.ReturnsExpectedResponse();
+
+		[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
+
+		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
 	}
 }
