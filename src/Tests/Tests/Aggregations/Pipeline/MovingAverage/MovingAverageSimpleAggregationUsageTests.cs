@@ -93,7 +93,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			// average not calculated for the first bucket
+			// average not calculated for the first bucket so movingAvg.Value is expected to be null there
 			foreach(var item in projectsPerMonth.Buckets.Skip(1))
 			{
 				var movingAvg = item.Sum("commits_moving_avg");

@@ -86,6 +86,8 @@ namespace Nest
 		DateRange,
 		[EnumMember(Value = "ip_range")]
 		IpRange,
+		[EnumMember(Value = "alias")]
+		Alias,
 		[EnumMember(Value = "join")]
 		Join,
 	}
