@@ -12,6 +12,5 @@ namespace Nest
 
 		[JsonProperty("stats")]
 		public RollupJobStats Stats { get; internal set; }
-
 	}
 }

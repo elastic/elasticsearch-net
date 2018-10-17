@@ -7,28 +7,35 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <summary>
+		/// Searches rolled-up data using the standard query DSL. The Rollup Search endpoint is needed because,
+		/// internally, rolled-up documents utilize a different document structure than the original data.
+		/// The Rollup Search endpoint rewrites standard query DSL into a format that matches the rollup documents,
+		/// then takes the response and rewrites it back to what a client would expect given the original query.
+		/// </summary>
 		IRollupSearchResponse<THit> RollupSearch<THit>(Indices indices, Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null)
 			where THit : class;
+
+		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})"/>
 		IRollupSearchResponse<THit> RollupSearch<T, THit>(Indices indices, Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null)
 			where THit : class
 			where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})"/>
 		IRollupSearchResponse<THit> RollupSearch<THit>(IRollupSearchRequest request) where THit : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})"/>
 		Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(Indices indices,
 			Func<RollupSearchDescriptor<THit>, IRollupSearchRequest> selector = null, CancellationToken cancellationToken = default)
 			where THit : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})"/>
 		Task<IRollupSearchResponse<THit>> RollupSearchAsync<T, THit>(Indices indices,
 			Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null, CancellationToken cancellationToken = default)
 			where THit : class
 			where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="RollupSearch{THit}(Nest.Indices,System.Func{Nest.RollupSearchDescriptor{THit},Nest.IRollupSearchRequest})"/>
 		Task<IRollupSearchResponse<THit>> RollupSearchAsync<THit>(IRollupSearchRequest request, CancellationToken cancellationToken = default)
 			where THit : class;
 	}
@@ -40,6 +47,7 @@ namespace Nest
 			where THit : class =>
 			this.RollupSearch<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<THit>(indices)));
 
+		/// <inheritdoc/>
 		public IRollupSearchResponse<THit> RollupSearch<T, THit>(Indices indices, Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null)
 			where T : class
 			where THit : class =>
@@ -58,6 +66,7 @@ namespace Nest
 		) where THit : class =>
 			this.RollupSearchAsync<THit>(selector.InvokeOrDefault(new RollupSearchDescriptor<THit>(indices)), cancellationToken);
 
+		/// <inheritdoc/>
 		public Task<IRollupSearchResponse<THit>> RollupSearchAsync<T, THit>(
 			Indices indices, Func<RollupSearchDescriptor<T>, IRollupSearchRequest> selector = null, CancellationToken cancellationToken = default
 		)

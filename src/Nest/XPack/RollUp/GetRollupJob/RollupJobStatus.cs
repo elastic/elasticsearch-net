@@ -9,7 +9,8 @@ namespace Nest
 		public IndexingJobState JobState { get; internal set; }
 
 		[JsonProperty("current_position")]
-		public IDictionary<string, object> CurrentPosition { get; internal set; }
+		public IReadOnlyDictionary<string, object> CurrentPosition { get; internal set; } =
+			EmptyReadOnly<string, object>.Dictionary;
 
 		[JsonProperty("upgraded_doc_id")]
 		public bool UpgradedDocId { get; internal set; }
