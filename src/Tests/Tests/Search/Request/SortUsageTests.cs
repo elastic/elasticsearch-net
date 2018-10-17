@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
@@ -267,6 +268,68 @@ namespace Tests.Search.Request
 							Filter = new MatchAllQuery()
 						}
 					}
+				}
+			};
+	}
+
+	//hide
+	[SkipVersion("<6.4.0", "IgnoreUnmapped introduced in 6.4.0 on geo distance sort")]
+	public class GeoDistanceIgnoreUnmappedUsageTests : SearchUsageTestBase
+	{
+		public GeoDistanceIgnoreUnmappedUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson =>
+			new
+			{
+				sort = new object[]
+				{
+					new
+					{
+						_geo_distance = new
+						{
+							location = new[]
+							{
+								new { lat = 70.0, lon = -70.0 },
+								new { lat = -12.0, lon = 12.0 }
+							},
+							order = "asc",
+							mode = "min",
+							distance_type = "arc",
+							ignore_unmapped = true,
+							unit = "cm"
+						}
+					}
+				}
+			};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Sort(ss => ss
+				.GeoDistance(g => g
+					.Field(p => p.Location)
+					.IgnoreUnmapped()
+					.DistanceType(GeoDistanceType.Arc)
+					.Order(SortOrder.Ascending)
+					.Unit(DistanceUnit.Centimeters)
+					.Mode(SortMode.Min)
+					.Points(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+				)
+			);
+
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>
+			{
+				Sort = new List<ISort>
+				{
+					new GeoDistanceSort
+					{
+						Field = "location",
+						IgnoreUnmapped = true,
+						Order = SortOrder.Ascending,
+						DistanceType = GeoDistanceType.Arc,
+						GeoUnit = DistanceUnit.Centimeters,
+						Mode = SortMode.Min,
+						Points = new[] {new GeoLocation(70, -70), new GeoLocation(-12, 12)}
+					},
 				}
 			};
 	}

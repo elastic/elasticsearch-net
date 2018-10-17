@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 
@@ -16,7 +17,18 @@ namespace Tests.Configuration
 			// The build script sets a FAKEBUILD env variable, so if it exists then
 			// we must be running tests from the build script
 			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("FAKEBUILD")))
+			{
+				var yamlFile = Environment.GetEnvironmentVariable("NEST_YAML_FILE");
+				if (!string.IsNullOrWhiteSpace(yamlFile) && File.Exists(yamlFile))
+				{
+					//load the test seed from the explicitly passed yaml file when running from FAKE
+					var tempYamlConfiguration = new YamlConfiguration(yamlFile);
+					Environment.SetEnvironmentVariable("NEST_TEST_SEED", tempYamlConfiguration.Seed.ToString(CultureInfo.InvariantCulture), EnvironmentVariableTarget.Process);
+					Console.WriteLine("--->" + tempYamlConfiguration.Seed);
+				}
 				return new EnvironmentConfiguration();
+			}
+
 
 			var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
 			var testsConfigurationFolder = FindTestsConfigurationFolder(directory);

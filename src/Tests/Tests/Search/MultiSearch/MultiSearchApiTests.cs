@@ -49,7 +49,7 @@ namespace Tests.Search.MultiSearch
 			new { index = "queries", type = PercolatorType },
 			new { query = new { percolate = new { document = Project.InstanceAnonymous, field = "query" , routing = Project.First.Name } } },
 			new { index = "queries", type = PercolatorType },
-			new { query = new { percolate = new { index = "project", type = "doc", id = Project.First.Name, version = 1, field = "query" } } },
+			new { query = new { percolate = new { index = "project", type = "doc", id = Project.First.Name, version = 1, field = "query", routing = Project.First.Name } } },
 		};
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
@@ -76,6 +76,7 @@ namespace Tests.Search.MultiSearch
 						.Type<Project>()
 						.Id(Project.First.Name)
 						.Version(1)
+						.Routing(Project.First.Name)
 						.Field(f => f.Query)
 					)
 				)
@@ -106,6 +107,7 @@ namespace Tests.Search.MultiSearch
 							Type = typeof(Project),
 							Id = Project.First.Name,
 							Version = 1,
+							Routing = Project.First.Name,
 							Field = Infer.Field<ProjectPercolation>(f => f.Query)
 						})
 					}

@@ -33,6 +33,7 @@ open Commandline
 open Differ
 open Differ.Differ
 open Fake.IO
+open Octokit
 
 Commandline.parse()
 
@@ -107,14 +108,22 @@ Target "Cluster" <| fun _ ->
     let clusterVersion = getBuildParam "clusterVersion"
     let testsProjectDirectory = Path.Combine(Path.GetFullPath(Paths.Output("Tests.ClusterLauncher")), "netcoreapp2.1")
     let tempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+    
+    let sourceDir = Paths.Source("Tests/Tests.Configuration");
+    let defaultYaml = Path.Combine(sourceDir, "tests.default.yaml");
+    let userYaml = Path.Combine(sourceDir, "tests.yaml");
+    let e f = File.Exists f;
+    match ((e userYaml), (e defaultYaml)) with
+    | (true, _) -> setProcessEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(userYaml))
+    | (_, true) -> setProcessEnvironVar "NEST_YAML_FILE" (Path.GetFullPath(defaultYaml))
+    | _ -> ignore()
+    
     Shell.copyDir tempDir testsProjectDirectory (fun s -> true)
-    trace testsProjectDirectory
-    trace tempDir
     let command = sprintf "%s %s" clusterName clusterVersion
     DotNetCli.RunCommand(fun p ->
         { p with
             WorkingDir = tempDir;
-            TimeOut = TimeSpan.FromMinutes(60.)
+            TimeOut = TimeSpan.FromMinutes(120.)
         }) (sprintf "%s %s" (Path.Combine(tempDir, "Tests.ClusterLauncher.dll")) command)
     
     Shell.deleteDir tempDir

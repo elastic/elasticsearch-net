@@ -14,7 +14,9 @@ namespace Nest
 	public abstract class DictionaryResponseBase<TKey, TValue> : ResponseBase, IDictionaryResponse<TKey, TValue>
 	{
 		protected IDictionaryResponse<TKey, TValue> Self => this;
-		IReadOnlyDictionary<TKey, TValue> IDictionaryResponse<TKey, TValue>.BackingDictionary { get; set; }
+
+		IReadOnlyDictionary<TKey, TValue> IDictionaryResponse<TKey, TValue>.BackingDictionary { get; set; } =
+			EmptyReadOnly<TKey, TValue>.Dictionary;
 	}
 
 	internal class DictionaryResponseJsonConverterHelpers

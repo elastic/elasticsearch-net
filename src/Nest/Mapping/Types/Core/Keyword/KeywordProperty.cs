@@ -29,6 +29,10 @@ namespace Nest
 		[JsonProperty("norms")]
 		bool? Norms { get; set; }
 
+		/// <summary> Whether full text queries should split the input on whitespace when building a query for this field. </summary>
+		[JsonProperty("split_queries_on_whitespace")]
+		bool? SplitQueriesOnWhitespace { get; set; }
+
 		[JsonProperty("null_value")]
 		string NullValue { get; set; }
 
@@ -47,6 +51,8 @@ namespace Nest
 		public bool? Index { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
 		public bool? Norms { get; set; }
+		/// <inheritdoc cref="IKeywordProperty.SplitQueriesOnWhitespace"/>
+		public bool? SplitQueriesOnWhitespace { get; set; }
 		public string NullValue { get; set; }
 		public string Normalizer { get; set; }
 	}
@@ -62,6 +68,7 @@ namespace Nest
 		bool? IKeywordProperty.Index{ get; set; }
 		IndexOptions? IKeywordProperty.IndexOptions{ get; set; }
 		bool? IKeywordProperty.Norms{ get; set; }
+		bool? IKeywordProperty.SplitQueriesOnWhitespace { get; set; }
 		string IKeywordProperty.NullValue{ get; set; }
 		string IKeywordProperty.Normalizer{ get; set; }
 
@@ -73,6 +80,8 @@ namespace Nest
 		public KeywordPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
 		public KeywordPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(a => a.IndexOptions = indexOptions);
 		public KeywordPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(a => a.Norms = enabled);
+		/// <inheritdoc cref="IKeywordProperty.SplitQueriesOnWhitespace"/>
+		public KeywordPropertyDescriptor<T> SplitQueriesOnWhitespace(bool? split = true) => Assign(a => a.SplitQueriesOnWhitespace = split);
 		public KeywordPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
 		public KeywordPropertyDescriptor<T> Normalizer(string normalizer) => Assign(a => a.Normalizer = normalizer);
 	}

@@ -341,6 +341,7 @@ namespace Tests.Ingest
 					.IgnoreMissing()
 				);
 		}
+
 		public class KeyValue : ProcessorAssertion
 		{
 			public override string Key => "kv";
