@@ -24,33 +24,7 @@ namespace Tests.Core.Xunit
 			Generators.Initialize();
 		}
 
-		public override void OnBeforeTestsRun() => DumpConfiguration();
-
-		private static void DumpConfiguration()
-		{
-			var config = TestConfiguration.Instance;
-
-			Console.WriteLine(new string('-', 20));
-			Console.WriteLine("Starting tests using config:");
-			Console.WriteLine($" - {nameof(config.TestAgainstAlreadyRunningElasticsearch)}: {config.TestAgainstAlreadyRunningElasticsearch}");
-			Console.WriteLine($" - {nameof(config.ElasticsearchVersion)}: {config.ElasticsearchVersion}");
-			Console.WriteLine($" - {nameof(config.ForceReseed)}: {config.ForceReseed}");
-			Console.WriteLine($" - {nameof(config.Mode)}: {config.Mode}");
-			Console.WriteLine($" - {nameof(config.Seed)}: {config.Seed}");
-			if (config.Mode == TestMode.Integration)
-			{
-				Console.WriteLine($" - {nameof(config.ClusterFilter)}: {config.ClusterFilter}");
-				Console.WriteLine($" - {nameof(config.TestFilter)}: {config.TestFilter}");
-
-			}
-			Console.WriteLine($" - {nameof(config.RunIntegrationTests)}: {config.RunIntegrationTests}");
-			Console.WriteLine($" - {nameof(config.RunUnitTests)}: {config.RunUnitTests}");
-			Console.WriteLine($" - Random:");
-			Console.WriteLine($" \t- {nameof(config.Random.SourceSerializer)}: {config.Random.SourceSerializer}");
-			Console.WriteLine($" \t- {nameof(config.Random.TypedKeys)}: {config.Random.TypedKeys}");
-			Console.WriteLine(new string('-', 20));
-
-		}
+		public override void OnBeforeTestsRun() => TestConfiguration.Instance.DumpConfiguration();
 
 		public override void OnTestsFinished(Dictionary<string, Stopwatch> clusterTotals, ConcurrentBag<Tuple<string, string>> failedCollections)
 		{
@@ -109,7 +83,7 @@ namespace Tests.Core.Xunit
 
 		private static string ReproduceCommandLine(ConcurrentBag<Tuple<string, string>> failedCollections, ITestConfiguration config, bool runningIntegrations)
 		{
-			var sb = new StringBuilder("build ")
+			var sb = new StringBuilder("build.bat ")
 				.Append($"seed:{config.Seed} ");
 
 			AppendExplictConfig(nameof(RandomConfiguration.SourceSerializer), sb);
