@@ -324,5 +324,9 @@ namespace Nest
 		/// </summary>
 		public TokenFiltersDescriptor Multiplexer(string name, Func<MultiplexerTokenFilterDescriptor, IMultiplexerTokenFilter> selector) =>
 			Assign(name, selector.Invoke(new MultiplexerTokenFilterDescriptor()));
+
+		/// <summary> A token filter of type remove_duplicates that drops identical tokens at the same position. </summary>
+		public TokenFiltersDescriptor RemoveDuplicates(string name, Func<RemoveDuplicatesTokenFilterDescriptor, IRemoveDuplicatesTokenFilter> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new RemoveDuplicatesTokenFilterDescriptor()));
 	}
 }
