@@ -1,14 +1,11 @@
 ﻿using System;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Analysis;
 using Tests.Analysis.Tokenizers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Tests.Framework.Promisify;
 
 namespace Tests.Mapping.Types.Core.Keyword
@@ -16,7 +13,9 @@ namespace Tests.Mapping.Types.Core.Keyword
 	[SkipVersion("<5.2.0", "This uses the normalizer feature introduced in 5.2.0")]
 	public class KeywordPropertyTests : PropertyTestsBase
 	{
-		public KeywordPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public KeywordPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		}
 
 		protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
 			.Settings(s => s
@@ -82,7 +81,8 @@ namespace Tests.Mapping.Types.Core.Keyword
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "state", new KeywordProperty
+			{
+				"state", new KeywordProperty
 				{
 					DocValues = false,
 					Boost = 1.2,
@@ -97,10 +97,50 @@ namespace Tests.Mapping.Types.Core.Keyword
 					Store = true,
 					Fields = new Properties
 					{
-						{ "foo", new KeywordProperty { IgnoreAbove = 10 } }
+						{"foo", new KeywordProperty {IgnoreAbove = 10}}
 					}
 				}
 			}
 		};
+
+		[SkipVersion("<6.4.0", "split_queries_on_whitespace is a new option https://github.com/elastic/elasticsearch/pull/30691")]
+		public class KeywordPropertySplitQueriesOnWhitespaceTests : PropertyTestsBase
+		{
+			public KeywordPropertySplitQueriesOnWhitespaceTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+			protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
+				.Settings(s => s
+					.Analysis(a => a
+						.CharFilters(t => Promise(Analysis.CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
+						.TokenFilters(
+							t => Promise(Analysis.TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
+						.Normalizers(t => Promise(Analysis.Normalizers.NormalizerUsageTests.FluentExample(s).Value.Analysis.Normalizers))
+					)
+				);
+
+			protected override object ExpectJson => new
+			{
+				properties = new
+				{
+					state = new
+					{
+						type = "keyword",
+						split_queries_on_whitespace = true
+					}
+				}
+			};
+
+			protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
+				.Keyword(b => b
+					.Name(p => p.State)
+					.SplitQueriesOnWhitespace()
+				);
+
+
+			protected override IProperties InitializerProperties => new Properties
+			{
+				{ "state", new KeywordProperty { SplitQueriesOnWhitespace = true } }
+			};
+		}
 	}
 }
