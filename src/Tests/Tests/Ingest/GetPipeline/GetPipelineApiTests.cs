@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Tests.Ingest.GetPipeline
 {
+	//integration test is part of PipelineCrudTests
 	public class GetPipelineApiTests : ApiTestBase<ReadOnlyCluster, IGetPipelineResponse, IGetPipelineRequest, GetPipelineDescriptor, GetPipelineRequest>
 	{
 		public GetPipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
