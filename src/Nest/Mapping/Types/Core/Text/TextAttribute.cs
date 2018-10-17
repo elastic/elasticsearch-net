@@ -19,6 +19,7 @@ namespace Nest
 		IFielddataFrequencyFilter ITextProperty.FielddataFrequencyFilter { get; set; }
 		ITextIndexPrefixes ITextProperty.IndexPrefixes { get; set; }
 		bool? ITextProperty.Index { get; set; }
+		bool? ITextProperty.IndexPhrases { get; set; }
 		IndexOptions? ITextProperty.IndexOptions { get; set; }
 		bool? ITextProperty.Norms { get; set; }
 		int? ITextProperty.PositionIncrementGap { get; set; }
@@ -32,6 +33,7 @@ namespace Nest
 		public bool Fielddata { get => Self.Fielddata.GetValueOrDefault(); set => Self.Fielddata = value; }
 		public bool Index { get => Self.Index.GetValueOrDefault(); set => Self.Index = value; }
 		public IndexOptions IndexOptions { get => Self.IndexOptions.GetValueOrDefault(); set => Self.IndexOptions = value; }
+		public bool IndexPhrases { get => Self.IndexPhrases.GetValueOrDefault(); set => Self.IndexPhrases = value; }
 		public int PositionIncrementGap { get => Self.PositionIncrementGap.GetValueOrDefault(); set => Self.PositionIncrementGap = value; }
 		public string SearchAnalyzer { get => Self.SearchAnalyzer; set => Self.SearchAnalyzer = value; }
 		public string SearchQuoteAnalyzer { get => Self.SearchQuoteAnalyzer; set => Self.SearchQuoteAnalyzer = value; }
