@@ -21,10 +21,7 @@ namespace Nest
 	{
 		internal MetricAggregationBase() { }
 
-		protected MetricAggregationBase(string name, Field field) : base(name)
-		{
-			this.Field = field;
-		}
+		protected MetricAggregationBase(string name, Field field) : base(name) => this.Field = field;
 
 		public Field Field { get; set; }
 		public virtual IScript Script { get; set; }

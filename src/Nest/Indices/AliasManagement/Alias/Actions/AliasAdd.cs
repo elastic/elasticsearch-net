@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IAliasAddAction : IAliasAction
 	{
@@ -58,6 +58,11 @@ namespace Nest
 		public AliasAddDescriptor SearchRouting(string searchRouting)
 		{
 			Self.Add.SearchRouting = searchRouting;
+			return this;
+		}
+		public AliasAddDescriptor IsWriteIndex(bool? isWriteIndex = true)
+		{
+			Self.Add.IsWriteIndex = isWriteIndex;
 			return this;
 		}
 		public AliasAddDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)

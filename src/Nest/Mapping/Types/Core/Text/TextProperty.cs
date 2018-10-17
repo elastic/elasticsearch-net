@@ -34,6 +34,9 @@ namespace Nest
 		[JsonProperty("index")]
 		bool? Index { get; set; }
 
+		[JsonProperty("index_phrases")]
+		bool? IndexPhrases { get; set; }
+
 		[JsonProperty("index_options")]
 		IndexOptions? IndexOptions { get; set; }
 
@@ -58,6 +61,7 @@ namespace Nest
 		public IFielddataFrequencyFilter FielddataFrequencyFilter { get; set; }
 		public ITextIndexPrefixes IndexPrefixes { get; set; }
 		public bool? Index { get; set; }
+		public bool? IndexPhrases { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
 		public bool? Norms { get; set; }
 		public int? PositionIncrementGap { get; set; }
@@ -78,6 +82,7 @@ namespace Nest
 		IFielddataFrequencyFilter ITextProperty.FielddataFrequencyFilter { get; set; }
 		ITextIndexPrefixes ITextProperty.IndexPrefixes { get; set; }
 		bool? ITextProperty.Index { get; set; }
+		bool? ITextProperty.IndexPhrases { get; set; }
 		IndexOptions? ITextProperty.IndexOptions { get; set; }
 		bool? ITextProperty.Norms { get; set; }
 		int? ITextProperty.PositionIncrementGap { get; set; }
@@ -96,6 +101,7 @@ namespace Nest
 		public TextPropertyDescriptor<T> IndexPrefixes(Func<TextIndexPrefixesDescriptor, ITextIndexPrefixes> selector) =>
 			Assign(a => a.IndexPrefixes = selector?.Invoke(new TextIndexPrefixesDescriptor()));
 		public TextPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+		public TextPropertyDescriptor<T> IndexPhrases(bool? indexPhrases = true) => Assign(a => a.IndexPhrases = indexPhrases);
 		public TextPropertyDescriptor<T> IndexOptions(IndexOptions? indexOptions) => Assign(a => a.IndexOptions = indexOptions);
 		public TextPropertyDescriptor<T> Norms(bool? enabled = true) => Assign(a => a.Norms = enabled);
 		public TextPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
