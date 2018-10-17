@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
+using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.IpRange
 {
-	[SkipVersion("5.0.0-alpha2", "broken in this release. error reason: Expected numeric type on field [leadDeveloper.iPAddress], but got [ip]")]
 	public class IpRangeAggregationUsageTests : AggregationUsageTestBase
 	{
 		public IpRangeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -62,7 +59,12 @@ namespace Tests.Aggregations.Bucket.IpRange
 			ipRanges.Buckets.Should().NotBeNull();
 			ipRanges.Buckets.Count.Should().BeGreaterThan(0);
 			foreach (var range in ipRanges.Buckets)
+			{
+				if (TestConfiguration.Instance.InRange("6.4.0"))
+					range.Key.Should().NotBeNullOrEmpty();
+
 				range.DocCount.Should().BeGreaterThan(0);
+			}
 		}
 	}
 }
