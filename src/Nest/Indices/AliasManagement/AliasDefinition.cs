@@ -15,5 +15,9 @@ namespace Nest
 
 		[JsonProperty("search_routing")]
 		public string SearchRouting { get; internal set; }
+
+		[JsonProperty("is_write_index")]
+		public bool? IsWriteIndex { get; internal set; }
+
 	}
 }

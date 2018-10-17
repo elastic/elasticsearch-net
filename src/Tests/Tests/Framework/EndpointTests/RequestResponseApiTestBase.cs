@@ -71,6 +71,11 @@ namespace Tests.Framework
 			return new LazyResponses(async () =>
 			{
 				var client = this.Client;
+				void IntegrateOnly(Action<IElasticClient> act)
+				{
+					if (!TestClient.Configuration.RunIntegrationTests) return;
+					act(client);
+				}
 				if (TestClient.Configuration.RunIntegrationTests)
 				{
 					this.IntegrationSetup(client, UniqueValues);
@@ -80,24 +85,24 @@ namespace Tests.Framework
 				var dict = new Dictionary<ClientMethod, IResponse>();
 				UniqueValues.CurrentView = ClientMethod.Fluent;
 
-				OnBeforeCall(client);
+				IntegrateOnly(this.OnBeforeCall);
 				dict.Add(ClientMethod.Fluent, fluent(client, this.Fluent));
-				OnAfterCall(client);
+				IntegrateOnly(this.OnAfterCall);
 
 				UniqueValues.CurrentView = ClientMethod.FluentAsync;
-				OnBeforeCall(client);
+				IntegrateOnly(this.OnBeforeCall);
 				dict.Add(ClientMethod.FluentAsync, await fluentAsync(client, this.Fluent));
-				OnAfterCall(client);
+				IntegrateOnly(this.OnAfterCall);
 
 				UniqueValues.CurrentView = ClientMethod.Initializer;
-				OnBeforeCall(client);
+				IntegrateOnly(this.OnBeforeCall);
 				dict.Add(ClientMethod.Initializer, request(client, this.Initializer));
-				OnAfterCall(client);
+				IntegrateOnly(this.OnAfterCall);
 
 				UniqueValues.CurrentView = ClientMethod.InitializerAsync;
-				OnBeforeCall(client);
+				IntegrateOnly(this.OnBeforeCall);
 				dict.Add(ClientMethod.InitializerAsync, await requestAsync(client, this.Initializer));
-				OnAfterCall(client);
+				IntegrateOnly(this.OnAfterCall);
 
 				if (TestClient.Configuration.RunIntegrationTests)
 				{
