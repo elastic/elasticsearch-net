@@ -209,20 +209,6 @@ namespace Tests.Analysis.TokenFilters
 			);
 
 			public override object Json => new { type = "keep_types", types = _types, mode = "exclude" };
-
-			public override ITokenFilter Initializer =>
-				new KeepTypesTokenFilter {Types = new[] {"<NUM>", "<SOMETHINGELSE>"}};
-
-			public override FuncTokenFilters Fluent => (n, tf) => tf
-				.KeepTypes(n, t => t
-					.Types("<NUM>", "<SOMETHINGELSE>")
-				);
-
-			public override object Json => new
-			{
-				type = "keep_types",
-				types = new[] {"<NUM>", "<SOMETHINGELSE>"}
-			};
 		}
 
 		public class IcuCollationTests : TokenFilterAssertionBase<IcuCollationTests>
