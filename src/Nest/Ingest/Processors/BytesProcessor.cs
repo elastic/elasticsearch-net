@@ -5,7 +5,9 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	/// <summary>
-	/// URL-decodes a string
+	/// Converts a human readable byte value (e.g. 1kb) to its value in bytes (e.g. 1024).
+	/// Supported human readable units are "b", "kb", "mb", "gb", "tb", "pb" case insensitive.
+	/// An error will occur if the field is not a supported format or resultant value exceeds 2^63.
 	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<BytesProcessor>))]
