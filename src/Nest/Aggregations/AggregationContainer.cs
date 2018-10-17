@@ -185,6 +185,9 @@ namespace Nest
 		[JsonProperty("moving_avg")]
 		IMovingAverageAggregation MovingAverage { get; set; }
 
+		[JsonProperty("moving_fn")]
+		IMovingFunctionAggregation MovingFunction { get; set; }
+
 		[JsonProperty("cumulative_sum")]
 		ICumulativeSumAggregation CumulativeSum { get; set; }
 
@@ -294,6 +297,8 @@ namespace Nest
 		public IPercentilesBucketAggregation PercentilesBucket { get; set; }
 
 		public IMovingAverageAggregation MovingAverage { get; set; }
+
+		public IMovingFunctionAggregation MovingFunction { get; set; }
 
 		public ICumulativeSumAggregation CumulativeSum { get; set; }
 
@@ -429,6 +434,8 @@ namespace Nest
 		IPercentilesBucketAggregation IAggregationContainer.PercentilesBucket { get; set; }
 
 		IMovingAverageAggregation IAggregationContainer.MovingAverage { get; set; }
+
+		IMovingFunctionAggregation IAggregationContainer.MovingFunction { get; set; }
 
 		ICumulativeSumAggregation IAggregationContainer.CumulativeSum { get; set; }
 
@@ -606,6 +613,10 @@ namespace Nest
 			Func<MovingAverageAggregationDescriptor, IMovingAverageAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.MovingAverage = d);
 
+		public AggregationContainerDescriptor<T> MovingFunction(string name,
+			Func<MovingFunctionAggregationDescriptor, IMovingFunctionAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.MovingFunction = d);
+
 		public AggregationContainerDescriptor<T> CumulativeSum(string name,
 			Func<CumulativeSumAggregationDescriptor, ICumulativeSumAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.CumulativeSum = d);
@@ -715,5 +726,6 @@ namespace Nest
 			((IAggregationContainer)d).Aggregations = ((IAggregationContainer)left).Aggregations;
 			return d;
 		}
+
 	}
 }
