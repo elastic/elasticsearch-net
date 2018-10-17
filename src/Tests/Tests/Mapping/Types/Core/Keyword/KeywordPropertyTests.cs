@@ -107,16 +107,6 @@ namespace Tests.Mapping.Types.Core.Keyword
 		{
 			public KeywordPropertySplitQueriesOnWhitespaceTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-			protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
-				.Settings(s => s
-					.Analysis(a => a
-						.CharFilters(t => Promise(Analysis.CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
-						.TokenFilters(
-							t => Promise(Analysis.TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
-						.Normalizers(t => Promise(Analysis.Normalizers.NormalizerUsageTests.FluentExample(s).Value.Analysis.Normalizers))
-					)
-				);
-
 			protected override object ExpectJson => new
 			{
 				properties = new
