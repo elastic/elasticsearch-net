@@ -218,6 +218,9 @@ namespace Nest
 		[JsonProperty("composite")]
 		ICompositeAggregation Composite { get; set; }
 
+		[JsonProperty("weighted_avg")]
+		IWeightedAverageAggregation WeightedAverage { get; set; }
+
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
@@ -319,6 +322,8 @@ namespace Nest
 		public IAdjacencyMatrixAggregation AdjacencyMatrix { get; set; }
 
 		public ICompositeAggregation Composite { get; set; }
+
+		public IWeightedAverageAggregation WeightedAverage { get; set; }
 
 		public AggregationDictionary Aggregations { get; set; }
 
@@ -456,6 +461,8 @@ namespace Nest
 		IAdjacencyMatrixAggregation IAggregationContainer.AdjacencyMatrix { get; set; }
 
 		ICompositeAggregation IAggregationContainer.Composite { get; set; }
+
+		IWeightedAverageAggregation IAggregationContainer.WeightedAverage { get; set; }
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
@@ -656,6 +663,10 @@ namespace Nest
 		public AggregationContainerDescriptor<T> Composite(string name,
 			Func<CompositeAggregationDescriptor<T>, ICompositeAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Composite = d);
+
+		public AggregationContainerDescriptor<T> WeightedAverage(string name,
+			Func<WeightedAverageAggregationDescriptor<T>, IWeightedAverageAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.WeightedAverage = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
