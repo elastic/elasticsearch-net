@@ -19,7 +19,7 @@ namespace Nest
 		public void Add(string name, ITokenizer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class TokenizersDescriptor :IsADictionaryDescriptorBase<TokenizersDescriptor, ITokenizers, string, ITokenizer>
+	public class TokenizersDescriptor : IsADictionaryDescriptorBase<TokenizersDescriptor, ITokenizers, string, ITokenizer>
 	{
 		public TokenizersDescriptor() : base(new Tokenizers()) { }
 
