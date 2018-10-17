@@ -36,7 +36,10 @@ namespace Tests.Aggregations.Metric.WeightedAverage
 					},
 					weight = new
 					{
-						script = "doc.numberOfContributors.value + 1"
+						script = new
+						{
+							source = "doc.numberOfContributors.value + 1"
+						}
 					},
 					value_type = "long"
 				}
