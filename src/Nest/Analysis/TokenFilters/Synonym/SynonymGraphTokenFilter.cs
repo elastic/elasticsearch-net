@@ -31,6 +31,10 @@ namespace Nest
 
 		[JsonProperty("tokenizer")]
 		string Tokenizer { get; set; }
+
+		/// <inheritdoc cref="ISynonymTokenFilter.Lenient"/>
+		[JsonProperty("lenient")]
+		bool? Lenient { get; set; }
 	}
 
 	/// <inheritdoc/>
@@ -54,6 +58,9 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? Expand { get; set; }
 
+		/// <inheritdoc cref="ISynonymTokenFilter.Lenient"/>
+		public bool? Lenient { get; set; }
+
 		/// <inheritdoc/>
 		public string Tokenizer { get; set; }
 	}
@@ -65,6 +72,7 @@ namespace Nest
 
 		bool? ISynonymGraphTokenFilter.IgnoreCase { get; set; }
 		bool? ISynonymGraphTokenFilter.Expand { get; set; }
+		bool? ISynonymGraphTokenFilter.Lenient { get; set; }
 		string ISynonymGraphTokenFilter.Tokenizer { get; set; }
 		string ISynonymGraphTokenFilter.SynonymsPath { get; set; }
 		SynonymFormat? ISynonymGraphTokenFilter.Format{ get; set; }
@@ -77,6 +85,10 @@ namespace Nest
 
 		///<inheritdoc/>
 		public SynonymGraphTokenFilterDescriptor Expand(bool? expand = true) => Assign(a => a.Expand = expand);
+
+		/// <inheritdoc cref="ISynonymTokenFilter.Lenient"/>
+		public SynonymGraphTokenFilterDescriptor Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
+
 
 		///<inheritdoc/>
 		public SynonymGraphTokenFilterDescriptor Tokenizer(string tokenizer) => Assign(a => a.Tokenizer = tokenizer);

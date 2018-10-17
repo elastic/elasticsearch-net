@@ -30,6 +30,13 @@ namespace Nest
 
 		[JsonProperty("tokenizer")]
 		string Tokenizer { get; set; }
+
+		/// <summary>
+		/// If `true` ignores exceptions while parsing the synonym configuration. It is important
+		// to note that only those synonym rules which cannot get parsed are ignored.
+		/// </summary>
+		[JsonProperty("lenient")]
+		bool? Lenient { get; set; }
 	}
 
 	/// <inheritdoc/>
@@ -53,6 +60,9 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? Expand { get; set; }
 
+		/// <inheritdoc cref="ISynonymTokenFilter.Lenient"/>
+		public bool? Lenient { get; set; }
+
 		/// <inheritdoc/>
 		public string Tokenizer { get; set; }
 	}
@@ -64,6 +74,7 @@ namespace Nest
 
 		bool? ISynonymTokenFilter.IgnoreCase { get; set; }
 		bool? ISynonymTokenFilter.Expand { get; set; }
+		bool? ISynonymTokenFilter.Lenient { get; set; }
 		string ISynonymTokenFilter.Tokenizer { get; set; }
 		string ISynonymTokenFilter.SynonymsPath { get; set; }
 		SynonymFormat? ISynonymTokenFilter.Format { get; set; }
@@ -75,6 +86,9 @@ namespace Nest
 
 		///<inheritdoc/>
 		public SynonymTokenFilterDescriptor Expand(bool? expand = true) => Assign(a => a.Expand = expand);
+
+		/// <inheritdoc cref="ISynonymTokenFilter.Lenient"/>
+		public SynonymTokenFilterDescriptor Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
 
 		///<inheritdoc/>
 		public SynonymTokenFilterDescriptor Tokenizer(string tokenizer) => Assign(a => a.Tokenizer = tokenizer);

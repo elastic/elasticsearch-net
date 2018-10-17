@@ -342,6 +342,7 @@ namespace Tests.Ingest
 				);
 		}
 
+
 		[SkipVersion("<6.4.0", "")]
 		public class Bytes : ProcessorAssertion
 		{
@@ -350,9 +351,76 @@ namespace Tests.Ingest
 			public override object Json => new { field = "description", ignore_missing = true };
 
 			public override IProcessor Initializer => new BytesProcessor { Field = "description", IgnoreMissing = true };
+      
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Bytes<Project>(ud => ud
 					.Field(p => p.Description)
+        );
+    }
+
+		public class KeyValue : ProcessorAssertion
+		{
+			public override string Key => "kv";
+
+			public override object Json => new
+			{
+				field = "description",
+				ignore_missing = true,
+				field_split = "_",
+				value_split = " "
+			};
+
+			public override IProcessor Initializer => new KeyValueProcessor
+			{
+				Field = "description",
+				FieldSplit = "_",
+				ValueSplit = " ",
+				IgnoreMissing = true
+			};
+
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Kv<Project>(ud => ud
+					.Field(p => p.Description)
+					.FieldSplit("_")
+					.ValueSplit(" ")
+					.IgnoreMissing()
+				);
+		}
+		[SkipVersion("<6.4.0", "trimming options were introduced later")]
+		public class KeyValueTrimming : ProcessorAssertion
+		{
+			public override string Key => "kv";
+
+			public override object Json => new
+			{
+				field = "description",
+				ignore_missing = true,
+				field_split = "_",
+				value_split = " ",
+				trim_key = "xyz",
+				trim_value = "abc",
+				strip_brackets = true
+			};
+
+			public override IProcessor Initializer => new KeyValueProcessor
+			{
+				Field = "description",
+				FieldSplit = "_",
+				ValueSplit = " ",
+				TrimKey = "xyz",
+				TrimValue = "abc",
+				StripBrackets = true,
+				IgnoreMissing = true
+			};
+
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
+				.Kv<Project>(ud => ud
+					.Field(p => p.Description)
+					.FieldSplit("_")
+					.ValueSplit(" ")
+					.TrimKey("xyz")
+					.TrimValue("abc")
+					.StripBrackets()
 					.IgnoreMissing()
 				);
 		}

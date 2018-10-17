@@ -20,7 +20,7 @@ namespace Nest
 
 		protected string DebugDisplay => $"Type: {Self.Type ?? "<empty>"}, Name: {Self.Name.DebugDisplay} ";
 
-		protected PropertyDescriptorBase(FieldType type) { Self.Type = type.GetStringValue(); }
+		protected PropertyDescriptorBase(FieldType type) => Self.Type = type.GetStringValue();
 
 		/// <inheritdoc cref="IProperty.Name"/>
 		public TDescriptor Name(PropertyName name) => Assign(a => a.Name = name);

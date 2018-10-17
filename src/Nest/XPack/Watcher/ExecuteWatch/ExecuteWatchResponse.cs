@@ -50,6 +50,9 @@ namespace Nest
 		[JsonProperty("watch_id")]
 		public string WatchId { get; set; }
 
+		[JsonProperty("user")]
+		public string User { get; set; }
+
 		[JsonProperty("messages")]
 		public IReadOnlyCollection<string> Messages { get; set; }
 
