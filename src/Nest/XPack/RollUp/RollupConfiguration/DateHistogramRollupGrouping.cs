@@ -16,6 +16,7 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("field")]
 		Field Field { get; set; }
+
 		/// <summary>
 		/// The interval of time buckets to be generated when rolling up. E.g. "60m" will produce 60 minute (hourly) rollups.
 		/// The interval defines the minimum interval that can be aggregated only.
@@ -28,6 +29,7 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("delay")]
 		Time Delay { get; set; }
+
 		/// <summary>
 		/// Defines what time_zone the rollup documents are stored as. Unlike raw data, which can shift timezones on the fly, rolled
 		/// documents have to be stored with a specific timezone. By default, rollup documents are stored in UT
@@ -36,19 +38,19 @@ namespace Nest
 		string TimeZone { get; set; }
 	}
 
-	/// <inheritdoc cref="IDateHistogramRollupGrouping"/>
+	/// <inheritdoc />
 	public class DateHistogramRollupGrouping : IDateHistogramRollupGrouping
 	{
-		/// <inheritdoc cref="IDateHistogramRollupGrouping.Field"/>
+		/// <inheritdoc />
 		public Field Field { get; set; }
 
-		/// <inheritdoc cref="IDateHistogramRollupGrouping.Interval"/>
+		/// <inheritdoc />
 		public Time Interval { get; set; }
 
-		/// <inheritdoc cref="IDateHistogramRollupGrouping.Delay"/>
+		/// <inheritdoc />
 		public Time Delay { get; set; }
 
-		/// <inheritdoc cref="IDateHistogramRollupGrouping.TimeZone"/>
+		/// <inheritdoc />
 		public string TimeZone { get; set; }
 	}
 

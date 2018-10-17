@@ -19,7 +19,7 @@ namespace Nest
 		public void Add(string name, ITokenizer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class TokenizersDescriptor :IsADictionaryDescriptorBase<TokenizersDescriptor, ITokenizers, string, ITokenizer>
+	public class TokenizersDescriptor : IsADictionaryDescriptorBase<TokenizersDescriptor, ITokenizers, string, ITokenizer>
 	{
 		public TokenizersDescriptor() : base(new Tokenizers()) { }
 
@@ -112,5 +112,13 @@ namespace Nest
 		/// </summary>
 		public TokenizersDescriptor Icu(string name, Func<IcuTokenizerDescriptor, IIcuTokenizer> selector) =>
 			Assign(name, selector?.Invoke(new IcuTokenizerDescriptor()));
+
+		/// <inheritdoc cref="INoriTokenizer"/>
+		public TokenizersDescriptor Nori(string name, Func<NoriTokenizerDescriptor, INoriTokenizer> selector) =>
+			Assign(name, selector?.Invoke(new NoriTokenizerDescriptor()));
+
+	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>>
+		public TokenizersDescriptor CharGroup(string name, Func<CharGroupTokenizerDescriptor, ICharGroupTokenizer> selector) =>
+			Assign(name, selector?.Invoke(new CharGroupTokenizerDescriptor()));
 	}
 }

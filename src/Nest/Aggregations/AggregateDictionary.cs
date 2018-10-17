@@ -56,6 +56,8 @@ namespace Nest
 
 		public ValueAggregate SerialDifferencing(string key) => this.TryGet<ValueAggregate>(key);
 
+		public ValueAggregate WeightedAverage(string key) => this.TryGet<ValueAggregate>(key);
+
 		public KeyedValueAggregate MaxBucket(string key) => this.TryGet<KeyedValueAggregate>(key);
 
 		public KeyedValueAggregate MinBucket(string key) => this.TryGet<KeyedValueAggregate>(key);

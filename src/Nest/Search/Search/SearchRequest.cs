@@ -397,6 +397,7 @@ namespace Nest
 		/// For instance the query below retrieves the best tweet for each user and sorts them by number of likes.
 		/// <para>
 		/// NOTE: The collapsing is applied to the top hits only and does not affect aggregations.
+		/// You can only collapse to a depth of 2.
 		/// </para>
 		/// </summary>
 		public SearchDescriptor<T> Collapse(Func<FieldCollapseDescriptor<T>, IFieldCollapse> collapseSelector) =>

@@ -1,5 +1,6 @@
-﻿using Elastic.Managed.Ephemeral.Plugins;
+using Elastic.Managed.Ephemeral.Plugins;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
+using static Elastic.Managed.Ephemeral.Plugins.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
@@ -7,7 +8,14 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	public class WritableCluster : ClientTestClusterBase
 	{
 		public WritableCluster() : base(new ClientTestClusterConfiguration(
-			ElasticsearchPlugin.IngestGeoIp, ElasticsearchPlugin.IngestAttachment, ElasticsearchPlugin.AnalysisKuromoji, ElasticsearchPlugin.AnalysisIcu, ElasticsearchPlugin.AnalysisPhonetic, ElasticsearchPlugin.MapperMurmur3
+			IngestGeoIp,
+			IngestAttachment,
+			AnalysisKuromoji,
+			AnalysisIcu,
+			AnalysisPhonetic,
+			MapperMurmur3,
+			//TODO move this to elasticsearch-net abstractions
+			new ElasticsearchPlugin("analysis-nori", v => v >= "6.4.0")
 		)
 		{
 			MaxConcurrency = 4
