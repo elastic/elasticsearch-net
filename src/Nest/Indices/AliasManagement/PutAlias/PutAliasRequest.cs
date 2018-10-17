@@ -11,13 +11,27 @@ namespace Nest
 
 		[JsonProperty("filter")]
 		QueryContainer Filter { get; set; }
+
+		[JsonProperty("index_routing")]
+		Routing IndexRouting { get; set; }
+
+		[JsonProperty("search_routing")]
+		Routing SearchRouting { get; set; }
+
+		/// <inheritdoc cref="AliasAddOperation.IsWriteIndex"/>
+		[JsonProperty("is_write_index")]
+		bool? IsWriteIndex { get; set; }
 	}
 
 	public partial class PutAliasRequest
 	{
-		public Routing Routing { get; set; }
-
 		public QueryContainer Filter { get; set; }
+		public Routing Routing { get; set; }
+		public Routing IndexRouting { get; set; }
+		public Routing SearchRouting { get; set; }
+		/// <inheritdoc cref="AliasAddOperation.IsWriteIndex"/>
+		public bool? IsWriteIndex { get; set; }
+
 	}
 
 	[DescriptorFor("IndicesPutAlias")]
@@ -25,11 +39,20 @@ namespace Nest
 	{
 		Routing IPutAliasRequest.Routing { get; set; }
 		QueryContainer IPutAliasRequest.Filter { get; set; }
+		Routing IPutAliasRequest.IndexRouting { get; set; }
+		Routing IPutAliasRequest.SearchRouting { get; set; }
+		bool? IPutAliasRequest.IsWriteIndex { get; set; }
 
 		public PutAliasDescriptor Routing(Routing routing) => Assign(a => a.Routing = routing);
 
-		public PutAliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
-			where T : class =>
+		public PutAliasDescriptor IndexRouting(Routing routing) => Assign(a => a.IndexRouting = routing);
+
+		public PutAliasDescriptor SearchRouting(Routing routing) => Assign(a => a.SearchRouting = routing);
+
+		/// <inheritdoc cref="AliasAddOperation.IsWriteIndex"/>
+		public PutAliasDescriptor IsWriteIndex(bool? isWriteIndex = true) => Assign(a => a.IsWriteIndex = isWriteIndex);
+
+		public PutAliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) where T : class =>
 			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

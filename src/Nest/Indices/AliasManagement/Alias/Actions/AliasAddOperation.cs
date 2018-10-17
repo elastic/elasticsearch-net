@@ -21,5 +21,12 @@ namespace Nest
 
 		[JsonProperty("search_routing")]
 		public string SearchRouting { get; set; }
+
+		/// <summary>
+		/// If an alias points to multiple indices elasticsearch will reject the write operations
+		/// unless one is explicitly marked with as the write alias using this property.
+		/// </summary>
+		[JsonProperty("is_write_index")]
+		public bool? IsWriteIndex { get; set; }
 	}
 }
