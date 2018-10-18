@@ -72,7 +72,7 @@ namespace DocGenerator
 		/// <summary>
 		/// The Elasticsearch documentation version to link to
 		/// </summary>
-		public static string DocVersion => "6.3";
+		public static string DocVersion => "6.4";
 
 		static int Main(string[] args)
 		{

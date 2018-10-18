@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.3
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
