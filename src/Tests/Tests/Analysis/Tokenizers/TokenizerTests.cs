@@ -219,8 +219,9 @@ namespace Tests.Analysis.Tokenizers
 			);
 
 			public override object Json => new {type = "nori_tokenizer", decompound_mode = "mixed"};
-    }
+		}
 
+		[SkipVersion("<6.4.0", "char_group introduced in 6.4.0")]
 		public class CharGroupTests : TokenizerAssertionBase<CharGroupTests>
 		{
 			private readonly string[] _chars = {"whitespace", "-", "\n"};
