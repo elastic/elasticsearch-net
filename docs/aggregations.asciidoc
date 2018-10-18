@@ -62,6 +62,8 @@ The values are typically extracted from the fields of the document (using the fi
 
 * <<value-count-aggregation-usage,Value Count Aggregation Usage>>
 
+* <<weighted-average-aggregation-usage,Weighted Average Aggregation Usage>>
+
 See the Elasticsearch documentation on {ref_current}/search-aggregations-metrics.html[Metric aggregations] for more details.
 
 :includes-from-dirs: aggregations/metric
@@ -93,6 +95,8 @@ include::aggregations/metric/sum/sum-aggregation-usage.asciidoc[]
 include::aggregations/metric/top-hits/top-hits-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/value-count/value-count-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/weighted-average/weighted-average-aggregation-usage.asciidoc[]
 
 [[bucket-aggregations]]
 == Bucket Aggregations
@@ -233,6 +237,8 @@ There are many different types of pipeline aggregation, each computing different
 
 * <<moving-average-simple-aggregation-usage,Moving Average Simple Aggregation Usage>>
 
+* <<moving-function-aggregation-usage,Moving Function Aggregation Usage>>
+
 * <<percentiles-bucket-aggregation-usage,Percentiles Bucket Aggregation Usage>>
 
 * <<serial-differencing-aggregation-usage,Serial Differencing Aggregation Usage>>
@@ -272,6 +278,8 @@ include::aggregations/pipeline/moving-average/moving-average-holt-winters-aggreg
 include::aggregations/pipeline/moving-average/moving-average-linear-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/moving-average/moving-average-simple-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-function/moving-function-aggregation-usage.asciidoc[]
 
 include::aggregations/pipeline/percentiles-bucket/percentiles-bucket-aggregation-usage.asciidoc[]
 

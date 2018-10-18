@@ -84,3 +84,105 @@ foreach (var hit in response.Hits)
 }
 ----
 
+==== Fluent DSL example
+
+[source,csharp]
+----
+s => s
+.Source(source=>source.ExcludeAll())
+.Index(DefaultSeeder.ProjectsAliasFilter)
+.Collapse(c => c
+    .Field(f => f.State)
+    .MaxConcurrentGroupSearches(1000)
+    .InnerHits(i => i
+        .Source(source=>source.ExcludeAll())
+        .Name(nameof(StateOfBeing).ToLowerInvariant())
+        .Size(5)
+        .From(1)
+        .Collapse(c2 => c2
+            .Field(p=>p.Name)
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new SearchRequest<Project>(DefaultSeeder.ProjectsAliasFilter)
+{
+    Source = SourceFilter.ExcludeAll,
+    Collapse = new FieldCollapse
+    {
+        Field = Field<Project>(p => p.State),
+        MaxConcurrentGroupSearches = 1000,
+        InnerHits = new InnerHits
+        {
+            Source = SourceFilter.ExcludeAll,
+            Name = nameof(StateOfBeing).ToLowerInvariant(),
+            Size = 5,
+            From = 1,
+            Collapse = new FieldCollapse
+            {
+                Field = Field<Project>(p=>p.Name)
+            }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "_source": {
+    "excludes": [
+      "*"
+    ]
+  },
+  "collapse": {
+    "field": "state",
+    "inner_hits": {
+      "_source": {
+        "excludes": [
+          "*"
+        ]
+      },
+      "collapse": {
+        "field": "name"
+      },
+      "from": 1,
+      "name": "stateofbeing",
+      "size": 5
+    },
+    "max_concurrent_group_searches": 1000
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+var numberOfStates = Enum.GetValues(typeof(StateOfBeing)).Length;
+response.HitsMetadata.Total.Should().BeGreaterThan(numberOfStates);
+response.Hits.Count.Should().Be(numberOfStates);
+foreach (var hit in response.Hits)
+{
+    var name = nameof(StateOfBeing).ToLowerInvariant();
+    hit.InnerHits.Should().NotBeNull().And.ContainKey(name);
+    var innerHits = hit.InnerHits[name];
+    innerHits.Hits.Total.Should().BeGreaterThan(0);
+    var i = 0;
+    foreach (var innerHit in innerHits.Hits.Hits)
+    {
+        i++;
+        innerHit.Fields.Should().NotBeEmpty()
+            .And.ContainKey("name");
+    }
+
+    i.Should().NotBe(0, "we expect to inspect 2nd level collapsed fields");
+}
+----
+

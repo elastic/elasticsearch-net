@@ -74,6 +74,11 @@ ipRanges.Should().NotBeNull();
 ipRanges.Buckets.Should().NotBeNull();
 ipRanges.Buckets.Count.Should().BeGreaterThan(0);
 foreach (var range in ipRanges.Buckets)
+{
+    if (TestConfiguration.Instance.InRange("6.4.0"))
+        range.Key.Should().NotBeNullOrEmpty();
+
     range.DocCount.Should().BeGreaterThan(0);
+}
 ----
 

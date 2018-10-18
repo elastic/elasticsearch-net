@@ -27,6 +27,7 @@ See the Elasticsearch documentation on {ref_current}/search-request-source-filte
 [source,csharp]
 ----
 s => s
+.Query(q => ProjectFilter)
 .Source(src => src
     .IncludeAll()
     .Excludes(e => e
@@ -44,6 +45,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
+    Query = ProjectFilter,
     Source = new SourceFilter
     {
         Includes = "*",
@@ -56,6 +58,13 @@ new SearchRequest<Project>
 .Example json output
 ----
 {
+  "query": {
+    "term": {
+      "type": {
+        "value": "project"
+      }
+    }
+  },
   "_source": {
     "includes": [
       "*"

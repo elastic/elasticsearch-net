@@ -163,6 +163,7 @@ await audit.TraceCalls(
         { BadResponse, 9202},
         { BadResponse, 9203},
         { MaxRetriesReached },
+        { FailedOverAllNodes },
         { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
     },
     new ClientCall {
