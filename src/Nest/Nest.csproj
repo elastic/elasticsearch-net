@@ -2,9 +2,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.bat))\src\PublishArtifacts.build.props" />
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <!-- we need to referenced assemblies during the command line build so that ILRepack can pick them up -->
-    <CopyLocalLockFileAssemblies Condition="'$(FakeBuild)'=='1'">true</CopyLocalLockFileAssemblies>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Elasticsearch.Net\Elasticsearch.Net.csproj" />

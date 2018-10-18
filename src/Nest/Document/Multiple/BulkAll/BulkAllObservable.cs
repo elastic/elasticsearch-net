@@ -89,8 +89,10 @@ namespace Nest
 
 		private void RefreshOnCompleted()
 		{
-			if (!this._partionedBulkRequest.RefreshOnCompleted) return;
-			var refresh = this._client.Refresh(this._partionedBulkRequest.Index);
+			if (!this._partionedBulkRequest.RefreshOnCompleted ) return;
+			var indices = this._partionedBulkRequest.RefreshIndices ?? this._partionedBulkRequest.Index;
+			if (indices == null) return;
+			var refresh = this._client.Refresh(indices);
 			if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 		}
 

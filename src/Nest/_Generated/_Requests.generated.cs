@@ -1612,6 +1612,23 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ICreateRollupJobRequest : IRequest<CreateRollupJobRequestParameters>
+	{
+		Id Id { get; }
+	}
+	///<summary>Request parameters for XpackRollupPutJob <pre></pre></summary>
+	public partial class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
+	{
+		protected ICreateRollupJobRequest Self => this;
+		///<summary>/_xpack/rollup/job/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public CreateRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id ICreateRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeactivateWatchRequest : IRequest<DeactivateWatchRequestParameters>
 	{
 		Id WatchId { get; }
@@ -2218,6 +2235,23 @@ namespace Nest
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
 	}
 	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteRollupJobRequest : IRequest<DeleteRollupJobRequestParameters>
+	{
+		Id Id { get; }
+	}
+	///<summary>Request parameters for XpackRollupDeleteJob <pre></pre></summary>
+	public partial class DeleteRollupJobRequest : PlainRequestBase<DeleteRollupJobRequestParameters>, IDeleteRollupJobRequest
+	{
+		protected IDeleteRollupJobRequest Self => this;
+		///<summary>/_xpack/rollup/job/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DeleteRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IDeleteRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters>
 	{
@@ -3475,6 +3509,44 @@ namespace Nest
 		// Request parameters
 	}
 	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetRollupCapabilitiesRequest : IRequest<GetRollupCapabilitiesRequestParameters>
+	{
+		Indices Index { get; }
+	}
+	///<summary>Request parameters for XpackRollupGetRollupCaps <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
+	{
+		protected IGetRollupCapabilitiesRequest Self => this;
+		///<summary>/_xpack/rollup/data/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public GetRollupCapabilitiesRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_xpack/rollup/data/</summary>
+		public GetRollupCapabilitiesRequest() : base(){}
+		// values part of the url path
+		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetRollupJobRequest : IRequest<GetRollupJobRequestParameters>
+	{
+		Id Id { get; }
+	}
+	///<summary>Request parameters for XpackRollupGetJobs <pre></pre></summary>
+	public partial class GetRollupJobRequest : PlainRequestBase<GetRollupJobRequestParameters>, IGetRollupJobRequest
+	{
+		protected IGetRollupJobRequest Self => this;
+		///<summary>/_xpack/rollup/job/{id}</summary>
+		///<param name="id">Optional, accepts null</param>
+		public GetRollupJobRequest(Id id) : base(r=>r.Optional("id", id)){}
+		///<summary>/_xpack/rollup/job/</summary>
+		public GetRollupJobRequest() : base(){}
+		// values part of the url path
+		Id IGetRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters>
 	{
@@ -5136,6 +5208,29 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRollupSearchRequest : IRequest<RollupSearchRequestParameters>
+	{
+		Indices Index { get; }
+		TypeName Type { get; }
+	}
+	///<summary>Request parameters for XpackRollupRollupSearch <pre></pre></summary>
+	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
+	{
+		protected IRollupSearchRequest Self => this;
+		///<summary>/{index}/_rollup_search</summary>
+		///<param name="index">this parameter is required</param>
+		public RollupSearchRequest(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/{type}/_rollup_search</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
+		public RollupSearchRequest(Indices index, TypeName type) : base(r=>r.Required("index", index).Optional("type", type)){}
+		// values part of the url path
+		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>
 	{
 	}
@@ -5913,6 +6008,23 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStartRollupJobRequest : IRequest<StartRollupJobRequestParameters>
+	{
+		Id Id { get; }
+	}
+	///<summary>Request parameters for XpackRollupStartJob <pre></pre></summary>
+	public partial class StartRollupJobRequest : PlainRequestBase<StartRollupJobRequestParameters>, IStartRollupJobRequest
+	{
+		protected IStartRollupJobRequest Self => this;
+		///<summary>/_xpack/rollup/job/{id}/_start</summary>
+		///<param name="id">this parameter is required</param>
+		public StartRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IStartRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStartTrialLicenseRequest : IRequest<StartTrialLicenseRequestParameters>
 	{
 	}
@@ -5962,6 +6074,23 @@ namespace Nest
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
 	}
 	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStopRollupJobRequest : IRequest<StopRollupJobRequestParameters>
+	{
+		Id Id { get; }
+	}
+	///<summary>Request parameters for XpackRollupStopJob <pre></pre></summary>
+	public partial class StopRollupJobRequest : PlainRequestBase<StopRollupJobRequestParameters>, IStopRollupJobRequest
+	{
+		protected IStopRollupJobRequest Self => this;
+		///<summary>/_xpack/rollup/job/{id}/_stop</summary>
+		///<param name="id">this parameter is required</param>
+		public StopRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IStopRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
 	{

@@ -4383,6 +4383,116 @@ namespace Nest
 		///<summary>Should the request block until the upgrade operation is completed</summary>
 		public MigrationUpgradeDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
+	///<summary>descriptor for XpackRollupDeleteJob <pre></pre></summary>
+	public partial class DeleteRollupJobDescriptor  : RequestDescriptorBase<DeleteRollupJobDescriptor,DeleteRollupJobRequestParameters, IDeleteRollupJobRequest>, IDeleteRollupJobRequest
+	{ 
+		/// <summary>/_xpack/rollup/job/{id}</summary>
+		///<param name="id"> this parameter is required</param>
+		public DeleteRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IDeleteRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupGetJobs <pre></pre></summary>
+	public partial class GetRollupJobDescriptor  : RequestDescriptorBase<GetRollupJobDescriptor,GetRollupJobRequestParameters, IGetRollupJobRequest>, IGetRollupJobRequest
+	{ 
+		/// <summary>/_xpack/rollup/job/{id}</summary>
+		public GetRollupJobDescriptor() : base(){}
+		// values part of the url path
+		Id IGetRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		///<summary>The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</summary>
+		public GetRollupJobDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupGetRollupCaps <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	public partial class GetRollupCapabilitiesDescriptor  : RequestDescriptorBase<GetRollupCapabilitiesDescriptor,GetRollupCapabilitiesRequestParameters, IGetRollupCapabilitiesRequest>, IGetRollupCapabilitiesRequest
+	{ 
+		/// <summary>/_xpack/rollup/data/{index}</summary>
+		public GetRollupCapabilitiesDescriptor() : base(){}
+		// values part of the url path
+		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		///<summary> Index, indices or index-pattern to return rollup capabilities for. _all may be used to fetch rollup capabilities from all job</summary>
+		public GetRollupCapabilitiesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public GetRollupCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public GetRollupCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupPutJob <pre></pre></summary>
+	public partial class CreateRollupJobDescriptor<T>  : RequestDescriptorBase<CreateRollupJobDescriptor<T>,CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
+	{ 
+		/// <summary>/_xpack/rollup/job/{id}</summary>
+		///<param name="id"> this parameter is required</param>
+		public CreateRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id ICreateRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupRollupSearch <pre></pre></summary>
+	public partial class RollupSearchDescriptor<T>  : RequestDescriptorBase<RollupSearchDescriptor<T>,RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
+	{ 
+		/// <summary>/{index}/_rollup_search</summary>
+		///<param name="index"> this parameter is required</param>
+		public RollupSearchDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		///<summary>The index or index-pattern (containing rollup or regular data) that should be searched</summary>
+		public RollupSearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RollupSearchDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public RollupSearchDescriptor<T> AllIndices() => this.Index(Indices.All);
+
+		///<summary>The doc type inside the index</summary>
+		public RollupSearchDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+
+		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
+		public RollupSearchDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupStartJob <pre></pre></summary>
+	public partial class StartRollupJobDescriptor  : RequestDescriptorBase<StartRollupJobDescriptor,StartRollupJobRequestParameters, IStartRollupJobRequest>, IStartRollupJobRequest
+	{ 
+		/// <summary>/_xpack/rollup/job/{id}/_start</summary>
+		///<param name="id"> this parameter is required</param>
+		public StartRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IStartRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupStopJob <pre></pre></summary>
+	public partial class StopRollupJobDescriptor  : RequestDescriptorBase<StopRollupJobDescriptor,StopRollupJobRequestParameters, IStopRollupJobRequest>, IStopRollupJobRequest
+	{ 
+		/// <summary>/_xpack/rollup/job/{id}/_stop</summary>
+		///<param name="id"> this parameter is required</param>
+		public StopRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IStopRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
 	{ 
