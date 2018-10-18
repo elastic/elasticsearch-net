@@ -32,7 +32,7 @@ namespace Tests.Aggregations.Bucket.Composite
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-composite-aggregation.html[Composite Aggregation].
 	*/
-	//[SkipVersion("<6.1.0", "Composite Aggregation is only available in Elasticsearch 6.1.0+")]
+	[SkipVersion("<6.1.0", "Composite Aggregation is only available in Elasticsearch 6.1.0+")]
 	public class CompositeAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public CompositeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -155,7 +155,7 @@ namespace Tests.Aggregations.Bucket.Composite
 			};
 
 		/**==== Handling Responses
-		 * Each Composite aggregation bucket key is an `CompositeKey`, a specialized
+		 * Each Composite aggregation bucket key is a `CompositeKey` type, a specialized
 		 * `IReadOnlyDictionary<string, object>` type with methods to convert values to supported types
 		 */
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -196,6 +196,14 @@ namespace Tests.Aggregations.Bucket.Composite
 		}
 	}
 
+	/**[float]
+	* == Missing buckets
+	* By default documents without a value for a given source are ignored.
+	* It is possible to include them in the response by setting missing_bucket to `true` (defaults to `false`):
+	*
+	* NOTE: Only available in Elasticsearch 6.4.0+
+	*/
+	[SkipVersion("<6.4.0", "Missing buckets added to Composite Aggregation Elasticsearch 6.4.0+")]
 	public class CompositeAggregationMissingBucketUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public CompositeAggregationMissingBucketUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -289,8 +297,10 @@ namespace Tests.Aggregations.Bucket.Composite
 			composite.Should().NotBeNull();
 			composite.Buckets.Should().NotBeNullOrEmpty();
 			composite.AfterKey.Should().NotBeNull();
+
 			if (TestConfiguration.Instance.InRange(">=6.3.0"))
 				composite.AfterKey.Should().HaveCount(1).And.ContainKeys("branches");
+
 			var i = 0;
 			foreach (var item in composite.Buckets)
 			{
@@ -312,7 +322,7 @@ namespace Tests.Aggregations.Bucket.Composite
 	}
 
 	//hide
-	//[SkipVersion("<6.3.0", "Date histogram source only supports format starting from Elasticsearch 6.3.0+")]
+	[SkipVersion("<6.3.0", "Date histogram source only supports format starting from Elasticsearch 6.3.0+")]
 	public class DateFormatCompositeAggregationUsageTests : ProjectsOnlyAggregationUsageTestBase
 	{
 		public DateFormatCompositeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -400,10 +410,6 @@ namespace Tests.Aggregations.Bucket.Composite
 				}
 			};
 
-		/**==== Handling Responses
-		 * Each Composite aggregation bucket key is an `CompositeKey`, a specialized
-		 * `IReadOnlyDictionary<string, object>` type with methods to convert values to supported types
-		 */
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.ShouldBeValid();

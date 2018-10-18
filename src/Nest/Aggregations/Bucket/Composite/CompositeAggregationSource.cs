@@ -67,7 +67,7 @@ namespace Nest
 		/// <inheritdoc />
 		public SortOrder? Order { get; set; }
 
-		/// <inheritdoc cref="ICompositeAggregationSource.MissingBucket" />
+		/// <inheritdoc />
 		public bool? MissingBucket { get; set; }
 	}
 
@@ -120,7 +120,7 @@ namespace Nest
 		/// <inheritdoc cref="ICompositeAggregationSource.Order"/>
 		public TDescriptor Order(SortOrder? order) => Assign(a => a.Order = order);
 
-		/// <inheritdoc cref="ICompositeAggregationSource.Order"/>
+		/// <inheritdoc cref="ICompositeAggregationSource.MissingBucket"/>
 		public TDescriptor MissingBucket(bool? includeMissing = true) => Assign(a => a.MissingBucket = includeMissing);
 	}
 
