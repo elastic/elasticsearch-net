@@ -70,7 +70,7 @@ namespace Nest
 		/// <inheritdoc cref="IFieldCollapse.Field"/>
 		public FieldCollapseDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 
-		/// <inheritdoc cref="IFieldCollapse.InnherHits"/>
+		/// <inheritdoc cref="IFieldCollapse.InnerHits"/>
 		public FieldCollapseDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
 			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
 

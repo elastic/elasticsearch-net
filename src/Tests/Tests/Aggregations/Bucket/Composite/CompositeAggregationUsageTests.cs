@@ -197,7 +197,7 @@ namespace Tests.Aggregations.Bucket.Composite
 	}
 
 	/**[float]
-	* == Missing buckets
+	* === Missing buckets
 	* By default documents without a value for a given source are ignored.
 	* It is possible to include them in the response by setting missing_bucket to `true` (defaults to `false`):
 	*
