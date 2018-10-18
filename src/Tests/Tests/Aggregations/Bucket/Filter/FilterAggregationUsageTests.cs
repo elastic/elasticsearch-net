@@ -62,7 +62,7 @@ namespace Tests.Aggregations.Bucket.Filter
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			/** === Handling Responses
+			/** ==== Handling Responses
 			* The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
 			* so we can fetch our aggregation results easily in the correct type.
 			 * <<handling-aggregate-response, Be sure to read more about these helper methods>>
@@ -79,7 +79,7 @@ namespace Tests.Aggregations.Bucket.Filter
 	}
 
 	/**[float]
-	* == Empty Filter
+	* === Empty Filter
 	* When the collection of filters is empty or all are conditionless, NEST will serialize them
 	* to an empty object.
 	*/
@@ -124,6 +124,7 @@ namespace Tests.Aggregations.Bucket.Filter
 	}
 
 	//reproduce of https://github.com/elastic/elasticsearch-net/issues/1931
+	// hide
 	public class InlineScriptFilterAggregationUsageTests : AggregationUsageTestBase
 	{
 		private string _ctxNumberofCommits = "doc['numberOfCommits'].value > 0";
