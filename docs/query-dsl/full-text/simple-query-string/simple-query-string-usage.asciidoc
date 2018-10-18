@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -31,10 +31,6 @@ q
     .Lenient()
     .AnalyzeWildcard()
     .MinimumShouldMatch("30%")
-    .FuzzyPrefixLength(0)
-    .FuzzyMaxExpansions(50)
-    .FuzzyTranspositions()
-    .AutoGenerateSynonymsPhraseQuery(false)
 )
 ----
 
@@ -53,11 +49,7 @@ new SimpleQueryStringQuery
     Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
     Lenient = true,
     AnalyzeWildcard = true,
-    MinimumShouldMatch = "30%",
-    FuzzyPrefixLength = 0,
-    FuzzyMaxExpansions = 50,
-    FuzzyTranspositions = true,
-    AutoGenerateSynonymsPhraseQuery = false
+    MinimumShouldMatch = "30%"
 }
 ----
 
@@ -78,11 +70,7 @@ new SimpleQueryStringQuery
     "flags": "AND|NEAR",
     "lenient": true,
     "analyze_wildcard": true,
-    "minimum_should_match": "30%",
-    "fuzzy_prefix_length": 0,
-    "fuzzy_max_expansions": 50,
-    "fuzzy_transpositions": true,
-    "auto_generate_synonyms_phrase_query": false
+    "minimum_should_match": "30%"
   }
 }
 ----

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -24,7 +24,7 @@ first usage, so we can get an audit trail with a few events out
 
 [source,csharp]
 ----
-var pool = new SniffingConnectionPool(new []{ new Uri($"http://{TestClient.DefaultHost}:9200") });
+var pool = new SniffingConnectionPool(new []{ TestConnectionSettings.CreateUri() });
 var connectionSettings = new ConnectionSettings(pool)
     .DefaultMappingFor<Project>(i => i
         .IndexName("project")

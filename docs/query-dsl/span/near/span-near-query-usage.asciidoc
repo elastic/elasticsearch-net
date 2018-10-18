@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -24,9 +24,10 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Clauses(
-        c=>c.SpanTerm(st=>st.Field("field").Value("value1")),
-        c=>c.SpanTerm(st=>st.Field("field").Value("value2")),
-        c=>c.SpanTerm(st=>st.Field("field").Value("value3"))
+        c => c.SpanTerm(st => st.Field("field").Value("value1")),
+        c => c.SpanTerm(st => st.Field("field").Value("value2")),
+        c => c.SpanTerm(st => st.Field("field").Value("value3")),
+        c => c.SpanGap(st => st.Field("field").Width(2))
     )
     .Slop(12)
     .InOrder(false)
@@ -45,7 +46,8 @@ new SpanNearQuery
     {
         new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
         new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value2" } },
-        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } }
+        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } },
+        new SpanQuery { SpanGap = new SpanGapQuery { Field = "field", Width = 2 } }
     },
     Slop = 12,
     InOrder = false,
@@ -77,6 +79,11 @@ new SpanNearQuery
           "field": {
             "value": "value3"
           }
+        }
+      },
+      {
+        "span_gap": {
+          "field": 2
         }
       }
     ],

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -54,7 +54,7 @@ allowing you to have requests executed in your own custom request pipeline
 
 [source,csharp]
 ----
-var transport = new Transport<ConnectionSettings>(
+var transport = new Transport<IConnectionSettingsValues>(
     settings,
     requestPipelineFactory,
     DateTimeProvider.Default,

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -58,7 +58,6 @@ s => s
         .Field(p => p.Suggest)
         .Size(8)
         .Prefix(Project.Instance.Name)
-        .SkipDuplicates()
     )
     .Phrase("my-phrase-suggest", ph => ph
         .Collate(c => c
@@ -129,8 +128,7 @@ new SearchRequest<Project>
                 },
                 Analyzer = "simple",
                 Field = Field<Project>(p=>p.Suggest),
-                Size = 8,
-                SkipDuplicates = true
+                Size = 8
             }
         } },
         { "my-phrase-suggest", new SuggestBucket
@@ -196,8 +194,7 @@ new SearchRequest<Project>
           "transpositions": true,
           "unicode_aware": false
         },
-        "size": 8,
-        "skip_duplicates": true
+        "size": 8
       },
       "prefix": "Durgan LLC"
     },

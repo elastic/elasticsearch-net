@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -70,7 +70,7 @@ When a node is used for the very first time or when it's used for the first time
 
 `EnableDebugMode`::
 
-Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson() so that the original request and response JSON can be inspected.
+Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson() so that the original request and response JSON can be inspected. It also always asks the server for the full stack trace on errors
 
 `EnableHttpCompression`::
 

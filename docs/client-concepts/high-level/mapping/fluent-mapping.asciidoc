@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -52,7 +52,7 @@ and map each property explicitly
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Company>(m => m
             .Properties(ps => ps
@@ -137,7 +137,7 @@ CLR property types, but then we're overriding the `Employees` property to make i
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Company>(m => m
             .AutoMap()
@@ -181,7 +181,7 @@ generates the same mapping as the previous
 
 [source,csharp]
 ----
-createIndexResponse = client.CreateIndex("myindex", c => c
+createIndexResponse = _client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Company>(m => m
             .Properties(ps => ps
@@ -247,7 +247,7 @@ attributes, and inferred mappings are overridden with fluent mapping
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<CompanyWithAttributes>(m => m
             .AutoMap() <1>

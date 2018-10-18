@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -23,7 +23,8 @@ NEST can use to issue client calls on.
 Despite the name, a connection pool in NEST is **not** like connection pooling that you may be familiar with from
 https://msdn.microsoft.com/en-us/library/bb399543(v=vs.110).aspx[interacting with a database using ADO.Net]; for example,
 a connection pool in NEST is **not** responsible for managing an underlying pool of TCP connections to Elasticsearch,
-this is https://blogs.msdn.microsoft.com/adarshk/2005/01/02/understanding-system-net-connection-management-and-servicepointmanager/[handled by the ServicePointManager in Desktop CLR].
+this is https://blogs.msdn.microsoft.com/adarshk/2005/01/02/understanding-system-net-connection-management-and-servicepointmanager/[handled by the ServicePointManager in Desktop CLR]
+and can be controlled by <<servicepoint-behaviour,changing the ServicePoint behaviour>> on `HttpConnection`.
 
 --
 

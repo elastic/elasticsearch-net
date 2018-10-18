@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -75,8 +75,8 @@ value that may also be passed as the second constructor argument
 [source,csharp]
 ----
 Field fieldString = "name^2";
-var fieldStringConstructor = new Field("name^2");
-var fieldStringCreate = new Field("name^2", 3); <1>
+Field fieldStringConstructor = new Field("name^2");
+Field fieldStringCreate = new Field("name^2", 3); <1>
 
 fieldString.Name.Should().Be("name");
 fieldStringConstructor.Name.Should().Be("name");
@@ -432,11 +432,11 @@ for property `C` on `B`
 
 [source,csharp]
 ----
-var newConnectionSettings = TestClient.CreateSettings(modifySettings: s => s
+var newConnectionSettings = new TestConnectionSettings()
     .DefaultMappingFor<A>(m => m
         .PropertyName(p => p.C, "d")
-    )
-);
+    );
+
 var newClient = new ElasticClient(newConnectionSettings);
 
 fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));
@@ -476,7 +476,7 @@ The following example class will demonstrate this precedence
 
 [source,csharp]
 ----
-private class Precedence
+class Precedence
 {
     [Text(Name = "renamedIgnoresNest")]
     [PropertyName("renamedIgnoresJsonProperty"),JsonProperty("renamedIgnoresJsonProperty")]
@@ -518,7 +518,7 @@ and hook it up when creating the Connection Settings in the following section.
 
 [source,csharp]
 ----
-private class CustomPropertyMappingProvider : PropertyMappingProvider
+class CustomPropertyMappingProvider : PropertyMappingProvider
 {
     public override IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
     {

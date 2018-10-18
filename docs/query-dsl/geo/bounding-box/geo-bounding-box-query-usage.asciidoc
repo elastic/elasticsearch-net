@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -70,6 +70,57 @@ new GeoBoundingBoxQuery
         "lat": -34.0,
         "lon": 34.0
       }
+    }
+  }
+}
+----
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.GeoBoundingBox(g=>g
+    .Boost(1.1)
+    .Name("named_query")
+    .Field(p=>p.Location)
+    .BoundingBox(b=>b
+        .WellKnownText("BBOX (34, -34, -34, 34)")
+    )
+    .ValidationMethod(GeoValidationMethod.Strict)
+    .Type(GeoExecution.Indexed)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new GeoBoundingBoxQuery
+{
+    Boost = 1.1,
+    Name = "named_query",
+    Field = Infer.Field<Project>(p => p.Location),
+    BoundingBox = new Nest.BoundingBox
+    {
+        WellKnownText = "BBOX (34, -34, -34, 34)"
+    },
+    Type = GeoExecution.Indexed,
+    ValidationMethod = GeoValidationMethod.Strict
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "geo_bounding_box": {
+    "type": "indexed",
+    "validation_method": "strict",
+    "_name": "named_query",
+    "boost": 1.1,
+    "location": {
+      "wkt": "BBOX (34, -34, -34, 34)"
     }
   }
 }

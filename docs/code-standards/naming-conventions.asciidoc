@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -97,8 +97,7 @@ var exceptions = new[] <1>
 {
     //TODO These are new API's should be removed, also add test that no request or response starts with Xpack
     //only XPack
-    //TODO MAP THIS
-    typeof(RankEvalRequest),
+
     //TODO add unit tests that we have no requests starting with Exists
     typeof(SourceExistsRequest),
     typeof(SourceExistsRequest<>),
@@ -146,10 +145,12 @@ var exceptions = new List<Type>
 {
     nestAssembly.GetType("System.AssemblyVersionInformation", throwOnError: false),
     nestAssembly.GetType("System.Runtime.Serialization.Formatters.FormatterAssemblyStyle", throwOnError: false),
-    typeof(SynchronizedCollection<>),
-    nestAssembly.GetType("System.ComponentModel.Browsable", throwOnError: false),
     nestAssembly.GetType("Microsoft.CodeAnalysis.EmbeddedAttribute", throwOnError: false),
     nestAssembly.GetType("System.Runtime.CompilerServices.IsReadOnlyAttribute", throwOnError: false),
+    typeof(SynchronizedCollection<>),
+#if DOTNETCORE
+    nestAssembly.GetType("System.ComponentModel.Browsable", throwOnError: false)
+#endif
 };
 
 var types = nestAssembly.GetTypes();
@@ -178,7 +179,9 @@ var exceptions = new List<Type>
     elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierDotNet"),
     elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierMono"),
     elasticsearchNetAssembly.GetType("Purify.Purifier+UriInfo"),
+#if DOTNETCORE
     elasticsearchNetAssembly.GetType("System.ComponentModel.Browsable")
+#endif
 };
 
 var types = elasticsearchNetAssembly.GetTypes();
@@ -191,13 +194,17 @@ var typesNotIElasticsearchNetNamespace = types
 
 typesNotIElasticsearchNetNamespace.Should().BeEmpty();
 
-var nextMustBeStartChar = true;
+bool nextMustBeStartChar = true;
 if (value.Length == 0)
     return false;
-for (var index = 0; index < value.Length; ++index)
+for (int index = 0; index < value.Length; ++index)
 {
     var character = value[index];
+#if DOTNETCORE
     var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);
+#else
+    var unicodeCategory = char.GetUnicodeCategory(character);
+#endif
     switch (unicodeCategory)
     {
         case UnicodeCategory.UppercaseLetter:

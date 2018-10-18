@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -37,7 +37,6 @@ q
     .Lenient()
     .ZeroTermsQuery(ZeroTermsQuery.All)
     .Name("named_query")
-    .AutoGenerateSynonymsPhraseQuery(false)
 )
 ----
 
@@ -62,8 +61,7 @@ new MultiMatchQuery
     CutoffFrequency = 0.001,
     Lenient = true,
     ZeroTermsQuery = ZeroTermsQuery.All,
-    Name = "named_query",
-    AutoGenerateSynonymsPhraseQuery = false
+    Name = "named_query"
 }
 ----
 
@@ -90,8 +88,7 @@ new MultiMatchQuery
       "description",
       "myOtherField"
     ],
-    "zero_terms_query": "all",
-    "auto_generate_synonyms_phrase_query": false
+    "zero_terms_query": "all"
   }
 }
 ----

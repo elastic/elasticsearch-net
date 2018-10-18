@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.4
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -28,8 +28,7 @@ it's called.
 [source,csharp]
 ----
 var counter = 0;
-var client = TestClient.GetInMemoryClient(connectionSettings =>
-    connectionSettings.OnRequestCompleted(r => counter++)); <1>
+var client = new ElasticClient(new AlwaysInMemoryConnectionSettings().OnRequestCompleted(r => counter++)); <1>
 
 client.RootNodeInfo(); <2>
 counter.Should().Be(1);
@@ -49,7 +48,7 @@ configured to throw exceptions
 [source,csharp]
 ----
 var counter = 0;
-var client = TestClient.GetFixedReturnClient( <1>
+var client = FixedResponseClient.Create( <1>
     new { },
     500,
     connectionSettings => connectionSettings
