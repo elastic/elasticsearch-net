@@ -2433,6 +2433,41 @@ namespace Elasticsearch.Net
 		///<summary>Should the request block until the upgrade operation is completed</summary>
 		public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	}
+	///<summary>Request options for XpackRollupDeleteJob<pre></pre></summary>
+	public partial class DeleteRollupJobRequestParameters : RequestParameters<DeleteRollupJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+	}
+	///<summary>Request options for XpackRollupGetJobs<pre></pre></summary>
+	public partial class GetRollupJobRequestParameters : RequestParameters<GetRollupJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for XpackRollupGetRollupCaps<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	public partial class GetRollupCapabilitiesRequestParameters : RequestParameters<GetRollupCapabilitiesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+	}
+	///<summary>Request options for XpackRollupPutJob<pre></pre></summary>
+	public partial class CreateRollupJobRequestParameters : RequestParameters<CreateRollupJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+	}
+	///<summary>Request options for XpackRollupRollupSearch<pre></pre></summary>
+	public partial class RollupSearchRequestParameters : RequestParameters<RollupSearchRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for XpackRollupStartJob<pre></pre></summary>
+	public partial class StartRollupJobRequestParameters : RequestParameters<StartRollupJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
+	///<summary>Request options for XpackRollupStopJob<pre></pre></summary>
+	public partial class StopRollupJobRequestParameters : RequestParameters<StopRollupJobRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+	}
 	///<summary>Request options for XpackSecurityAuthenticate<pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateRequestParameters : RequestParameters<AuthenticateRequestParameters> 
 	{
