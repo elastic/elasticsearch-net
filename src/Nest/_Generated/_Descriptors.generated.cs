@@ -4409,6 +4409,26 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackRollupGetRollupCaps <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	public partial class GetRollupCapabilitiesDescriptor  : RequestDescriptorBase<GetRollupCapabilitiesDescriptor,GetRollupCapabilitiesRequestParameters, IGetRollupCapabilitiesRequest>, IGetRollupCapabilitiesRequest
+	{ 
+		/// <summary>/_xpack/rollup/data/{index}</summary>
+		public GetRollupCapabilitiesDescriptor() : base(){}
+		// values part of the url path
+		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		///<summary> Index, indices or index-pattern to return rollup capabilities for. _all may be used to fetch rollup capabilities from all job</summary>
+		public GetRollupCapabilitiesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public GetRollupCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public GetRollupCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackRollupPutJob <pre></pre></summary>
 	public partial class CreateRollupJobDescriptor<T>  : RequestDescriptorBase<CreateRollupJobDescriptor<T>,CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
 	{ 

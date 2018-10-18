@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using Bogus.DataSets;
 using Elastic.Xunit.XunitPlumbing;
@@ -111,6 +112,14 @@ namespace Tests.XPack.Rollup
 				request: (s, c, r) => c.RollupSearch<Log>(r),
 				requestAsync: (s, c, r) => c.RollupSearchAsync<Log>(r)
 			)},
+			{ "rollup_caps", () => this.Calls<GetRollupCapabilitiesDescriptor, GetRollupCapabilitiesRequest, IGetRollupCapabilitiesRequest, IGetRollupCapabilitiesResponse>(
+				this.CapsInitializer,
+				this.CapsFluent,
+				fluent: (s, c, f) => c.GetRollupCapabilities(f),
+				fluentAsync: (s, c, f) => c.GetRollupCapabilitiesAsync(f),
+				request: (s, c, r) => c.GetRollupCapabilities(r),
+				requestAsync: (s, c, r) => c.GetRollupCapabilitiesAsync(r)
+			)},
 			{ "stop", () => this.Calls<StopRollupJobDescriptor, StopRollupJobRequest, IStopRollupJobRequest, IStopRollupJobResponse>(
 				this.StopInitializer,
 				this.StopFluent,
@@ -126,6 +135,9 @@ namespace Tests.XPack.Rollup
 
 		protected StopRollupJobRequest StopInitializer(string role) => new StopRollupJobRequest(CreateRollupName(role));
 		protected IStopRollupJobRequest StopFluent(string role, StopRollupJobDescriptor d) => d;
+
+		protected GetRollupCapabilitiesRequest CapsInitializer(string role) => new GetRollupCapabilitiesRequest(TimeSeriesSeeder.IndicesWildCard);
+		protected IGetRollupCapabilitiesRequest CapsFluent(string role, GetRollupCapabilitiesDescriptor d) => d.Index(TimeSeriesSeeder.IndicesWildCard);
 
 		[I] public async Task StartsJob() =>
 			await this.AssertOnAfterCreateResponse<IStartRollupJobResponse>("start", r => r.Started.Should().BeTrue());
@@ -194,6 +206,26 @@ namespace Tests.XPack.Rollup
 				max.Should().NotBeNull();
 				max.Value.Should().HaveValue().And.BeInRange(-10, 45);
 			});
+
+		[I] public async Task GetRollupCapabilities() =>
+			await this.AssertOnAfterCreateResponse<IGetRollupCapabilitiesResponse>("rollup_caps", r =>
+			{
+				r.IsValid.Should().BeTrue();
+				r.Indices.Should().NotBeEmpty().And.ContainKey(TimeSeriesSeeder.IndicesWildCard);
+
+				var indexCaps = r.Indices[TimeSeriesSeeder.IndicesWildCard];
+				indexCaps.RollupJobs.Should().NotBeEmpty();
+				var job = indexCaps.RollupJobs.First();
+				job.JobId.Should().NotBeNullOrWhiteSpace();
+				job.RollupIndex.Should().NotBeNullOrWhiteSpace();
+				job.IndexPattern.Should().Be(TimeSeriesSeeder.IndicesWildCard);
+				job.Fields.Should().NotBeEmpty();
+				var capabilities = job.Fields.Field<Log>(p => p.Temperature);
+				capabilities.Should().NotBeEmpty();
+				foreach (var c in capabilities)
+					c.Should().ContainKey("agg");
+			});
+
 
 		// ignored because we mark SupportsUpdates => false
 		protected override LazyResponses Update() => null;

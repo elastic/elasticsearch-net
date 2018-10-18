@@ -3570,6 +3570,24 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<TResponse> XpackRollupGetJobsAsync<TResponse>(GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
 			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/rollup/job/"), ctx, null, _params(requestParameters));
+		///<summary>GET on /_xpack/rollup/data/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</para></summary>
+		///<param name="index"> Index, indices or index-pattern to return rollup capabilities for. _all may be used to fetch rollup capabilities from all job</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackRollupGetRollupCaps<TResponse>(string index, GetRollupCapabilitiesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/rollup/data/{index.NotNull("index")}"), null, _params(requestParameters));
+		///<summary>GET on /_xpack/rollup/data/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</para></summary>
+		///<param name="index"> Index, indices or index-pattern to return rollup capabilities for. _all may be used to fetch rollup capabilities from all job</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackRollupGetRollupCapsAsync<TResponse>(string index, GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/rollup/data/{index.NotNull("index")}"), ctx, null, _params(requestParameters));
+		///<summary>GET on /_xpack/rollup/data/ <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public TResponse XpackRollupGetRollupCaps<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null)
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequest<TResponse>(GET, Url($"_xpack/rollup/data/"), null, _params(requestParameters));
+		///<summary>GET on /_xpack/rollup/data/ <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<TResponse> XpackRollupGetRollupCapsAsync<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken))
+			where TResponse : class, IElasticsearchResponse, new() => this.DoRequestAsync<TResponse>(GET, Url($"_xpack/rollup/data/"), ctx, null, _params(requestParameters));
 		///<summary>PUT on /_xpack/rollup/job/{id} <para></para></summary>
 		///<param name="id">The ID of the job to create</param>
 		///<param name="body">The job configuration</param>
