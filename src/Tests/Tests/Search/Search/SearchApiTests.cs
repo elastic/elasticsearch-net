@@ -359,8 +359,6 @@ namespace Tests.Search.Search
 	[SkipVersion("<6.2.0", "OpaqueId introduced in 6.2.0")]
 	public class OpaqueIdApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		private const string OpaqueId = "123456";
-
 		public OpaqueIdApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new { };
@@ -371,15 +369,14 @@ namespace Tests.Search.Search
 		protected override string UrlPath => $"/project/doc/_search?scroll=10m";
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.RequestConfiguration(r => r.OpaqueId(OpaqueId))
-			.Query(q => q)
+			.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue))
 			.Scroll("10m"); // Create a scroll in order to keep the task around.
 
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
 		{
 			RequestConfiguration = new RequestConfiguration
 			{
-				OpaqueId = OpaqueId
+				OpaqueId = CallIsolatedValue
 			},
 			Scroll = "10m"
 		};
@@ -393,16 +390,16 @@ namespace Tests.Search.Search
 
 		protected override void OnAfterCall(IElasticClient client)
 		{
-			var tasks = client.ListTasks(d => d.RequestConfiguration(r => r.OpaqueId(OpaqueId)));
+			var tasks = client.ListTasks(d => d.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue)));
 			tasks.Should().NotBeNull();
 			foreach (var node in tasks.Nodes)
 			{
 				foreach (var task in node.Value.Tasks)
 				{
-					task.Value.Headers[RequestData.OpaqueIdHeader].Should().Be(OpaqueId);
+					task.Value.Headers.Should().NotBeNull().And.NotBeEmpty();
+					task.Value.Headers[RequestData.OpaqueIdHeader].Should().Be(CallIsolatedValue, $"OpaqueId {CallIsolatedValue} not found for task id {task.Key}");
 				}
 			}
-			base.OnAfterCall(client);
 		}
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
