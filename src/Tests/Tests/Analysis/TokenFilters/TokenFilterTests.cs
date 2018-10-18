@@ -692,7 +692,7 @@ namespace Tests.Analysis.TokenFilters
 		[SkipVersion("<6.4.0", "Lenient is an option introduced in 6.4.0")]
 		public class SynonymLenientTests : TokenFilterAssertionBase<SynonymTests>
 		{
-			public override string Name => "syn";
+			public override string Name => "syn_lenient";
 			private readonly string[] _synonyms = {"foo", "bar => baz"};
 
 			public override ITokenFilter Initializer =>

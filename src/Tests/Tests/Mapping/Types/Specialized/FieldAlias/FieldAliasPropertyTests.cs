@@ -14,20 +14,7 @@ namespace Tests.Mapping.Types.Specialized.FieldAlias
 		protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
 			.Mappings(m => m
 				.Map<Project>(mm => mm
-					.RoutingField(r=>r.Required())
 					.AutoMap()
-					.Properties(DefaultSeeder.ProjectProperties)
-					.Properties<CommitActivity>(props => props
-						.Object<Developer>(o => o
-							.AutoMap()
-							.Name(p => p.Committer)
-							.Properties(DefaultSeeder.DeveloperProperties)
-						)
-						.Text(t => t
-							.Name(p => p.ProjectName)
-							.Index(false)
-						)
-					)
 				)
 			);
 
