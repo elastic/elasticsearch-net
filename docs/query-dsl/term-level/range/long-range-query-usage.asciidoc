@@ -1,0 +1,69 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.3
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/QueryDsl/TermLevel/Range/LongRangeQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[long-range-query-usage]]
+=== Long Range Query Usage
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+q
+.LongRange(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .GreaterThan(636634079999999999)
+    .GreaterThanOrEquals(636634080000000000)
+    .LessThan(636634080000000000)
+    .LessThanOrEquals(636634079999999999)
+    .Relation(RangeRelation.Within)
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new LongRangeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    GreaterThan = 636634079999999999,
+    GreaterThanOrEqualTo = 636634080000000000,
+    LessThan = 636634080000000000,
+    LessThanOrEqualTo = 636634079999999999,
+    Relation = RangeRelation.Within
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "range": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "gt": 636634079999999999,
+      "gte": 636634080000000000,
+      "lt": 636634080000000000,
+      "lte": 636634079999999999,
+      "relation": "within"
+    }
+  }
+}
+----
+

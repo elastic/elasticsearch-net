@@ -92,7 +92,7 @@ namespace DocGenerator.AsciiDoc
 			}
 
 			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)",
-				$"{github}/tree/{Program.BranchName}/src/Tests/");
+				$"{github}/tree/{Program.BranchName}/src/Tests/Tests/");
 
 			_newDocument.Insert(0, new Comment
 			{
