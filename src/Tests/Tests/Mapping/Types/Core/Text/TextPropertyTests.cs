@@ -107,11 +107,6 @@ namespace Tests.Mapping.Types.Core.Text
 						max = 100.00,
 						min_segment_size = 2
 					},
-					index_prefixes = new
-					{
-						min_chars = 1,
-						max_chars = 10
-					},
 					fields = new
 					{
 						raw = new
@@ -149,10 +144,6 @@ namespace Tests.Mapping.Types.Core.Text
 						.Max(100)
 						.MinSegmentSize(2)
 					)
-					.IndexPrefixes(i => i
-						.MinCharacters(1)
-						.MaxCharacters(10)
-					)
 					.Fields(fd => fd
 						.Keyword(k => k
 							.Name("raw")
@@ -185,11 +176,6 @@ namespace Tests.Mapping.Types.Core.Text
 						Min = 1,
 						Max = 100,
 						MinSegmentSize = 2
-					},
-					IndexPrefixes = new TextIndexPrefixes
-					{
-						MinCharacters = 1,
-						MaxCharacters = 10
 					},
 					Fields = new Properties
 					{
