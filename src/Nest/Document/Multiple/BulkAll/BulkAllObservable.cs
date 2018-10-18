@@ -200,6 +200,7 @@ namespace Nest
 		{
 			this.IsDisposed = true;
 			this._compositeCancelTokenSource?.Cancel();
+			this._compositeCancelTokenSource?.Dispose();
 		}
 	}
 }
