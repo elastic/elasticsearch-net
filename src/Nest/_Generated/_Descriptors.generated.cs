@@ -4409,6 +4409,26 @@ namespace Nest
 		// Request parameters
 
 	}
+	///<summary>descriptor for XpackRollupGetRollupCaps <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	public partial class GetRollupCapabilitiesDescriptor  : RequestDescriptorBase<GetRollupCapabilitiesDescriptor,GetRollupCapabilitiesRequestParameters, IGetRollupCapabilitiesRequest>, IGetRollupCapabilitiesRequest
+	{ 
+		/// <summary>/_xpack/rollup/data/{index}</summary>
+		public GetRollupCapabilitiesDescriptor() : base(){}
+		// values part of the url path
+		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		///<summary> Index, indices or index-pattern to return rollup capabilities for. _all may be used to fetch rollup capabilities from all job</summary>
+		public GetRollupCapabilitiesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public GetRollupCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public GetRollupCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackRollupPutJob <pre></pre></summary>
 	public partial class CreateRollupJobDescriptor<T>  : RequestDescriptorBase<CreateRollupJobDescriptor<T>,CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
 	{ 
@@ -4417,6 +4437,34 @@ namespace Nest
 		public CreateRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		// values part of the url path
 		Id ICreateRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupRollupSearch <pre></pre></summary>
+	public partial class RollupSearchDescriptor<T>  : RequestDescriptorBase<RollupSearchDescriptor<T>,RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
+	{ 
+		/// <summary>/{index}/_rollup_search</summary>
+		///<param name="index"> this parameter is required</param>
+		public RollupSearchDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		///<summary>The index or index-pattern (containing rollup or regular data) that should be searched</summary>
+		public RollupSearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RollupSearchDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public RollupSearchDescriptor<T> AllIndices() => this.Index(Indices.All);
+
+		///<summary>The doc type inside the index</summary>
+		public RollupSearchDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+
+		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
+		public RollupSearchDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		// Request parameters
 

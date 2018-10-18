@@ -7,6 +7,7 @@ namespace Nest
 	{
 		[JsonProperty("id")]
 		public string Id { get; internal set; }
+
 		[JsonProperty("timeout")]
 		public Time Timeout { get; internal set; }
 

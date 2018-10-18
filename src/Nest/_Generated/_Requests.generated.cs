@@ -3162,6 +3162,25 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetRollupCapabilitiesRequest : IRequest<GetRollupCapabilitiesRequestParameters>
+	{
+		Indices Index { get; }
+	}
+	///<summary>Request parameters for XpackRollupGetRollupCaps <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
+	{
+		protected IGetRollupCapabilitiesRequest Self => this;
+		///<summary>/_xpack/rollup/data/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public GetRollupCapabilitiesRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_xpack/rollup/data/</summary>
+		public GetRollupCapabilitiesRequest() : base(){}
+		// values part of the url path
+		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRollupJobRequest : IRequest<GetRollupJobRequestParameters>
 	{
 		Id Id { get; }
@@ -4623,6 +4642,29 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRollupSearchRequest : IRequest<RollupSearchRequestParameters>
+	{
+		Indices Index { get; }
+		TypeName Type { get; }
+	}
+	///<summary>Request parameters for XpackRollupRollupSearch <pre></pre></summary>
+	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
+	{
+		protected IRollupSearchRequest Self => this;
+		///<summary>/{index}/_rollup_search</summary>
+		///<param name="index">this parameter is required</param>
+		public RollupSearchRequest(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/{type}/_rollup_search</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
+		public RollupSearchRequest(Indices index, TypeName type) : base(r=>r.Required("index", index).Optional("type", type)){}
+		// values part of the url path
+		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>

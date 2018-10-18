@@ -2894,6 +2894,20 @@ namespace Elasticsearch.Net
 		///<summary>GET on /_xpack/rollup/job/ <para></para></summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackRollupGetJobsAsync<TResponse>(GetRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/rollup/data/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</para></summary>
+		///<param name="index"> Index, indices or index-pattern to return rollup capabilities for. _all may be used to fetch rollup capabilities from all job</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackRollupGetRollupCaps<TResponse>(string index, GetRollupCapabilitiesRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/rollup/data/{index} <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</para></summary>
+		///<param name="index"> Index, indices or index-pattern to return rollup capabilities for. _all may be used to fetch rollup capabilities from all job</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackRollupGetRollupCapsAsync<TResponse>(string index, GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/rollup/data/ <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackRollupGetRollupCaps<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /_xpack/rollup/data/ <para>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</para></summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackRollupGetRollupCapsAsync<TResponse>(GetRollupCapabilitiesRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>PUT on /_xpack/rollup/job/{id} <para></para></summary>
 		///<param name="id">The ID of the job to create</param>
 		///<param name="body">The job configuration</param>
@@ -2904,6 +2918,46 @@ namespace Elasticsearch.Net
 		///<param name="body">The job configuration</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<TResponse> XpackRollupPutJobAsync<TResponse>(string id, PostData body, CreateRollupJobRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /{index}/_rollup_search <para></para></summary>
+		///<param name="index">The index or index-pattern (containing rollup or regular data) that should be searched</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackRollupRollupSearchGet<TResponse>(string index, RollupSearchRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /{index}/_rollup_search <para></para></summary>
+		///<param name="index">The index or index-pattern (containing rollup or regular data) that should be searched</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackRollupRollupSearchGetAsync<TResponse>(string index, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /{index}/{type}/_rollup_search <para></para></summary>
+		///<param name="index">The index or index-pattern (containing rollup or regular data) that should be searched</param>
+		///<param name="type">The doc type inside the index</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackRollupRollupSearchGet<TResponse>(string index, string type, RollupSearchRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>GET on /{index}/{type}/_rollup_search <para></para></summary>
+		///<param name="index">The index or index-pattern (containing rollup or regular data) that should be searched</param>
+		///<param name="type">The doc type inside the index</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackRollupRollupSearchGetAsync<TResponse>(string index, string type, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_rollup_search <para></para></summary>
+		///<param name="index">The index or index-pattern (containing rollup or regular data) that should be searched</param>
+		///<param name="body">The search request body</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackRollupRollupSearch<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/_rollup_search <para></para></summary>
+		///<param name="index">The index or index-pattern (containing rollup or regular data) that should be searched</param>
+		///<param name="body">The search request body</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackRollupRollupSearchAsync<TResponse>(string index, PostData body, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/{type}/_rollup_search <para></para></summary>
+		///<param name="index">The index or index-pattern (containing rollup or regular data) that should be searched</param>
+		///<param name="type">The doc type inside the index</param>
+		///<param name="body">The search request body</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		TResponse XpackRollupRollupSearch<TResponse>(string index, string type, PostData body, RollupSearchRequestParameters requestParameters = null) where TResponse : class, IElasticsearchResponse, new();
+		///<summary>POST on /{index}/{type}/_rollup_search <para></para></summary>
+		///<param name="index">The index or index-pattern (containing rollup or regular data) that should be searched</param>
+		///<param name="type">The doc type inside the index</param>
+		///<param name="body">The search request body</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<TResponse> XpackRollupRollupSearchAsync<TResponse>(string index, string type, PostData body, RollupSearchRequestParameters requestParameters = null, CancellationToken ctx = default(CancellationToken)) where TResponse : class, IElasticsearchResponse, new();
 		///<summary>POST on /_xpack/rollup/job/{id}/_start <para></para></summary>
 		///<param name="id">The ID of the job to start</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
