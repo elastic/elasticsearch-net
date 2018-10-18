@@ -58,6 +58,7 @@ namespace ApiGenerator
 			"xpack.ml.get_filters.json",
 			"xpack.ml.put_filter.json",
 			"rank_eval.json",
+
 			// these API's are new and need to be mapped
 			"xpack.license.get_basic_status.json",
 			"xpack.license.post_start_basic.json",
@@ -71,20 +72,16 @@ namespace ApiGenerator
 			"xpack.ml.put_calendar.json",
 			"xpack.ml.put_calendar_job.json",
 			"xpack.ml.get_calendar_job.json",
-
-			"xpack.sql.clear_cursor.json",
-			"xpack.sql.query.json",
-			"xpack.sql.translate.json",
 			"xpack.ssl.certificates.json",
 
 			// 6.4 new  API's
-
 			"xpack.ml.update_filter.json",
 			"xpack.security.delete_privileges.json",
 			"xpack.security.get_privileges.json",
 			"xpack.security.has_privileges.json",
 			"xpack.security.put_privilege.json",
 			"xpack.security.put_privileges.json",
+			"nodes.reload_secure_settings.json"
 		};
 
 		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)
