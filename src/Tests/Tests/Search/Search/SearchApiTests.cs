@@ -374,10 +374,7 @@ namespace Tests.Search.Search
 
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
 		{
-			RequestConfiguration = new RequestConfiguration
-			{
-				OpaqueId = CallIsolatedValue
-			},
+			RequestConfiguration = new RequestConfiguration { OpaqueId = CallIsolatedValue },
 			Scroll = "10m"
 		};
 
@@ -388,23 +385,27 @@ namespace Tests.Search.Search
 			requestAsync: (c, r) => c.SearchAsync<Project>(r)
 		);
 
-		protected override void OnAfterCall(IElasticClient client)
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			var tasks = client.ListTasks(d => d.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue)));
+			response.ShouldBeValid();
+
+			var tasks = Client.ListTasks(d => d.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue)));
 			tasks.Should().NotBeNull();
 			foreach (var node in tasks.Nodes)
 			{
 				foreach (var task in node.Value.Tasks)
 				{
-					task.Value.Headers.Should().NotBeNull().And.NotBeEmpty();
-					task.Value.Headers[RequestData.OpaqueIdHeader].Should().Be(CallIsolatedValue, $"OpaqueId {CallIsolatedValue} not found for task id {task.Key}");
+					task.Value.Headers.Should().NotBeNull();
+					if (task.Value.Headers.TryGetValue(RequestData.OpaqueIdHeader, out var opaqueIdValue))
+					{
+						opaqueIdValue.Should().Be(CallIsolatedValue, $"OpaqueId header {opaqueIdValue} did not match {CallIsolatedValue}");
+					}
+					else
+					{
+						Assert.True(false, $"No OpaqueId header for task {task.Key} and OpaqueId value {CallIsolatedValue}");
+					}
 				}
 			}
-		}
-
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldBeValid();
 		}
 	}
 }
