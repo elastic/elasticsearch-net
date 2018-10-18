@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.2
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.3
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -7,13 +7,13 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Aggregations/Pipeline/MovingAverage/MovingAverageSimpleAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Aggregations/Pipeline/MovingFunction/MovingFunctionAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[moving-average-simple-aggregation-usage]]
-=== Moving Average Simple Aggregation Usage
+[[moving-function-aggregation-usage]]
+=== Moving Function Aggregation Usage
 
 ==== Fluent DSL example
 
@@ -27,13 +27,10 @@ a => a
         .Sum("commits", sm => sm
             .Field(p => p.NumberOfCommits)
         )
-        .MovingAverage("commits_moving_avg", mv => mv
+        .MovingFunction("commits_moving_avg", mv => mv
             .BucketsPath("commits")
             .Window(30)
-            .Predict(10)
-            .Model(m => m
-                .Simple()
-            )
+            .Script("MovingFunctions.unweightedAvg(values)")
         )
     )
 )
@@ -49,11 +46,10 @@ new DateHistogramAggregation("projects_started_per_month")
     Interval = DateInterval.Month,
     Aggregations =
         new SumAggregation("commits", "numberOfCommits")
-        && new MovingAverageAggregation("commits_moving_avg", "commits")
+        && new MovingFunctionAggregation("commits_moving_avg", "commits")
         {
             Window = 30,
-            Predict = 10,
-            Model = new SimpleModel()
+            Script = "MovingFunctions.unweightedAvg(values)"
         }
 }
 ----
@@ -74,12 +70,10 @@ new DateHistogramAggregation("projects_started_per_month")
         }
       },
       "commits_moving_avg": {
-        "moving_avg": {
+        "moving_fn": {
           "buckets_path": "commits",
-          "model": "simple",
           "window": 30,
-          "predict": 10,
-          "settings": {}
+          "script": "MovingFunctions.unweightedAvg(values)"
         }
       }
     }
@@ -98,7 +92,7 @@ projectsPerMonth.Should().NotBeNull();
 projectsPerMonth.Buckets.Should().NotBeNull();
 projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-// average not calculated for the first bucket so movingAvg.Value is expected to be null there
+// average not calculated for the first bucket
 foreach(var item in projectsPerMonth.Buckets.Skip(1))
 {
     var movingAvg = item.Sum("commits_moving_avg");

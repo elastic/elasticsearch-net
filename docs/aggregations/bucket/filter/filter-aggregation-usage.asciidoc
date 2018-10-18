@@ -68,13 +68,11 @@ new FilterAggregation("bethels_projects")
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
 so we can fetch our aggregation results easily in the correct type.
 <<handling-aggregate-response, Be sure to read more about these helper methods>>
-
-==== Handling Responses
 
 [source,csharp]
 ----
@@ -89,7 +87,7 @@ tags.Buckets.Should().NotBeEmpty();
 ----
 
 [float]
-== Empty Filter
+=== Empty Filter
 
 When the collection of filters is empty or all are conditionless, NEST will serialize them
 to an empty object.
@@ -136,56 +134,5 @@ new FilterAggregation("empty_filter")
 [source,csharp]
 ----
 response.ShouldNotBeValid();
-----
-
-==== Fluent DSL example
-
-[source,csharp]
-----
-a => a
-.Filter(_aggName, date => date
-    .Filter(f => f
-        .Script(b => b
-            .Source(_ctxNumberofCommits)
-        )
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new FilterAggregation(_aggName)
-{
-    Filter = new ScriptQuery
-    {
-        Source = _ctxNumberofCommits
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "script_filter": {
-    "filter": {
-      "script": {
-        "script": {
-          "source": "_source.numberOfCommits > 0"
-        }
-      }
-    }
-  }
-}
-----
-
-==== Handling Responses
-
-[source,csharp]
-----
-response.ShouldBeValid();
-response.Aggregations.Filter(_aggName).DocCount.Should().BeGreaterThan(0);
 ----
 

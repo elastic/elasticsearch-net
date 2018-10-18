@@ -25,6 +25,7 @@ See the Elasticsearch documentation on {ref_current}/search-suggesters.html[Sugg
 [source,csharp]
 ----
 s => s
+.Query(q => ProjectFilter)
 .Suggest(ss => ss
     .Term("my-term-suggest", t => t
         .MaxEdits(1)
@@ -88,6 +89,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
+    Query = ProjectFilter,
     Suggest = new SuggestContainer
     {
         { "my-term-suggest", new SuggestBucket
@@ -168,6 +170,13 @@ new SearchRequest<Project>
 .Example json output
 ----
 {
+  "query": {
+    "term": {
+      "type": {
+        "value": "project"
+      }
+    }
+  },
   "suggest": {
     "my-completion-suggest": {
       "completion": {

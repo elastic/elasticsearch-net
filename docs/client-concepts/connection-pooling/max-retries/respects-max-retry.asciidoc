@@ -158,7 +158,8 @@ audit = await audit.TraceCall(
     new ClientCall {
         { BadResponse, 9200 },
         { BadResponse, 9201 },
-        { MaxRetriesReached }
+        { MaxRetriesReached },
+        { FailedOverAllNodes }
     }
 );
 ----
