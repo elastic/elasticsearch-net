@@ -361,12 +361,12 @@ namespace Tests.Search.Search
 	{
 		public OpaqueIdApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new { };
-
+		protected override object ExpectJson => null;
+		protected override bool SupportsDeserialization => false;
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/doc/_search?scroll=10m";
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => $"/_tasks?pretty=true&error_trace=true";
 
 		protected override Func<ListTasksDescriptor, IListTasksRequest> Fluent => s => s
 			.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue));
