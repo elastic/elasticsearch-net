@@ -190,8 +190,11 @@ namespace Tests.Aggregations.Bucket.Composite
 				var nested = item.Nested("project_tags");
 				nested.Should().NotBeNull();
 
-				var nestedTerms = nested.Terms("tags");
-				nestedTerms.Buckets.Count.Should().BeGreaterThan(0);
+				if (nested.DocCount > 0)
+				{
+					var nestedTerms = nested.Terms("tags");
+					nestedTerms.Buckets.Count.Should().BeGreaterThan(0);
+				}
 			}
 		}
 	}

@@ -11,6 +11,18 @@ using Tests.Framework.Integration;
 
 namespace Tests.Aggregations.Pipeline.MovingFunction
 {
+	/**
+	 * Given an ordered series of data, the Moving Function aggregation will slide a window across the data and allow
+	 * the user to specify a custom script that is executed on each window of data. For convenience, a number of
+	 * common functions are predefined such as min/max, moving averages, etc.
+	 *
+     * This is conceptually very similar to the Moving Average pipeline aggregation, except it provides more functionality.
+	 *
+	 * NOTE: Only available in Elasticsearch 6.4.0+
+	 *
+	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-pipeline-movfn-aggregation.html[Moving Function Aggregation]
+	 */
+	[SkipVersion("<6.4.0", "Introduced in Elasticsearch 6.4.0+")]
 	public class MovingFunctionAggregationUsageTests : AggregationUsageTestBase
 	{
 		public MovingFunctionAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
