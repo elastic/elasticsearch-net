@@ -20,10 +20,7 @@ namespace Nest
 	{
 		internal PipelineAggregationBase() { }
 
-		public PipelineAggregationBase(string name, IBucketsPath bucketsPath) : base(name)
-		{
-			this.BucketsPath = bucketsPath;
-		}
+		public PipelineAggregationBase(string name, IBucketsPath bucketsPath) : base(name) => this.BucketsPath = bucketsPath;
 
 		public IBucketsPath BucketsPath { get; set; }
 		public string Format { get; set; }

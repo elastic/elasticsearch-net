@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Elasticsearch.Net;
 
@@ -7,20 +8,19 @@ namespace Nest
 {
 	public interface IBulkAllRequest<T> where T : class
 	{
-		/// <summary> In case of a 429 (too busy) how long should we wait before retrying</summary>
+		/// <summary> In case of a HTTP 429 (Too Many Requests) response status code, how long should we wait before retrying</summary>
 		Time BackOffTime { get; set; }
 
-		/// <summary> In case of a 429 (too busy) how many times should we automatically back off before failing</summary>
+		/// <summary> In case of a HTTP 429 (Too Many Requests) response status code, how many times should we automatically back off before failing</summary>
 		int? BackOffRetries { get; set; }
 
 		/// <summary> The number of documents to send per bulk</summary>
 		int? Size { get; set; }
 
 		///<summary>
-		/// The documents to send to elasticsearch, try to keep the IEnumerable lazy.
-		/// The bulk observable will ToList() each partitioned page in a lazy fashion, to keep memory consumption to a minimum.
-		/// It makes no sense to set this to an list of 1 million records because all of those million records need to be in memory
-		/// Make use of c#'s lazy generator!
+		/// The documents to send to Elasticsearch, ideally lazily evaluated by using <see langword="yield"/>
+		/// return to provide each document.
+		/// <see cref="BulkAllObservable{T}"/> will eager evaluate each partitioned page when operating on it, using <see cref="Enumerable.ToList{T}"/>.
 		///</summary>
 		IEnumerable<T> Documents { get; }
 
@@ -35,16 +35,22 @@ namespace Nest
 
 		///<summary>
 		///Sets the number of shard copies that must be active before proceeding with the bulk operation.
-		///Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any
+		///Defaults to <c>1</c>, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any
 		///non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
 		///</summary>
 		int? WaitForActiveShards { get; set; }
 
-		///<summary>Refresh the index after performing each operation (elasticsearch will refresh locally)</summary>
+		///<summary>Refresh the index after performing each operation (Elasticsearch will refresh locally)</summary>
+		[Obsolete("This option is scheduled for deletion in 7.0, refreshing on each _bulk makes little sense for BulkAll")]
 		Refresh? Refresh { get; set; }
 
-		///<summary>Refresh the index after performing ALL the bulk operations (NOTE this is an additional request)</summary>
+		///<summary>
+		/// Refresh the index after performing ALL the bulk operations (NOTE this is an additional request)
+		/// </summary>
 		bool RefreshOnCompleted { get; set; }
+
+		///<summary>The indices you wish to refresh after the bulk all completes, defaults to <see cref="Index"/> </summary>
+		Indices RefreshIndices { get; set; }
 
 		///<summary>Specific per bulk operation routing value</summary>
 		Routing Routing { get; set; }
@@ -56,8 +62,8 @@ namespace Nest
 		string Pipeline { get; set; }
 
 		/// <summary>
-		/// By default the bulkall helper simply calls BulkDescriptor.IndexMany on the buffer.
-		/// There might be case where you'd like more control over this. By setting this callback you are in complete control
+		/// By default, <see cref="BulkAllObservable{T}"/> calls <see cref="BulkDescriptor.IndexMany{T}"/> on the buffer.
+		/// There might be case where you'd like more control over the bulk operation. By setting this callback, you are in complete control
 		/// of describing how the buffer should be translated to a bulk operation.
 		/// </summary>
 		Action<BulkDescriptor, IList<T>> BufferToBulk { get; set; }
@@ -70,7 +76,8 @@ namespace Nest
 		ProducerConsumerBackPressure BackPressure { get; set; }
 
 		/// <summary>
-		/// A predicate which controls which documents should be retried, defaults to failed bulk items with status code 429
+		/// A predicate to control which documents should be retried.
+		/// Defaults to failed bulk items with a HTTP 429 (Too Many Requests) response status code.
 		/// </summary>
 		Func<IBulkResponseItem, T, bool> RetryDocumentPredicate { get; set; }
 
@@ -82,8 +89,8 @@ namespace Nest
 
 		/// <summary>
 		/// If a bulk operation fails because it receives documents it can not retry they will be fed to this callback.
-		/// If <see cref="ContinueAfterDroppedDocuments"/> is set to true processing will continue, so this callback can be used
-		/// to feed into a dead letter queue. Otherwise the bulk all indexation will be halted.
+		/// If <see cref="ContinueAfterDroppedDocuments"/> is set to <c>true</c> processing will continue, so this callback can be used
+		/// to feed into a dead letter queue. Otherwise bulk all indexing will be halted.
 		/// </summary>
 		Action<IBulkResponseItem, T> DroppedDocumentCallback { get; set; }
 
@@ -110,6 +117,8 @@ namespace Nest
 		public int? WaitForActiveShards { get; set; }
 		/// <inheritdoc />
 		public Refresh? Refresh { get; set; }
+		/// <inheritdoc />
+		public Indices RefreshIndices { get; set; }
 		/// <inheritdoc />
 		public bool RefreshOnCompleted { get; set; }
 		/// <inheritdoc />
@@ -151,6 +160,7 @@ namespace Nest
 		TypeName IBulkAllRequest<T>.Type { get; set; }
 		int? IBulkAllRequest<T>.WaitForActiveShards { get; set; }
 		Refresh? IBulkAllRequest<T>.Refresh { get; set; }
+		Indices IBulkAllRequest<T>.RefreshIndices { get; set; }
 		bool IBulkAllRequest<T>.RefreshOnCompleted { get; set; }
 		Routing IBulkAllRequest<T>.Routing { get; set; }
 		Time IBulkAllRequest<T>.Timeout { get; set; }
@@ -168,51 +178,56 @@ namespace Nest
 			((IBulkAllRequest<T>)this).Type = typeof(T);
 		}
 
-		/// <inheritdoc />
-		public BulkAllDescriptor<T> MaxDegreeOfParallelism(int? parallism) =>
-			Assign(a => a.MaxDegreeOfParallelism = parallism);
+		/// <inheritdoc cref="IBulkAllRequest{T}.MaxDegreeOfParallelism" />
+		public BulkAllDescriptor<T> MaxDegreeOfParallelism(int? parallelism) =>
+			Assign(a => a.MaxDegreeOfParallelism = parallelism);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.Size" />
 		public BulkAllDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.BackOffRetries" />
 		public BulkAllDescriptor<T> BackOffRetries(int? backoffs) =>
 			Assign(a => a.BackOffRetries = backoffs);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.BackOffTime" />
 		public BulkAllDescriptor<T> BackOffTime(Time time) => Assign(a => a.BackOffTime = time);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.Index" />
 		public BulkAllDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.Index" />
 		public BulkAllDescriptor<T> Index<TOther>() where TOther : class => Assign(a => a.Index = typeof(TOther));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.Type" />
 		public BulkAllDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.Type" />
 		public BulkAllDescriptor<T> Type<TOther>() where TOther : class => Assign(a => a.Type = typeof(TOther));
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.RefreshOnCompleted" />
 		public BulkAllDescriptor<T> RefreshOnCompleted(bool refresh = true) => Assign(p => p.RefreshOnCompleted = refresh);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.Refresh" />
+#pragma warning disable 618
 		public BulkAllDescriptor<T> Refresh(Refresh? refresh) => Assign(p => p.Refresh = refresh);
+#pragma warning restore 618
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.RefreshIndices"/>
+		public BulkAllDescriptor<T> RefreshIndices(Indices indicesToRefresh) => Assign(a => a.RefreshIndices = indicesToRefresh);
+
+		/// <inheritdoc cref="IBulkAllRequest{T}.Routing"/>
 		public BulkAllDescriptor<T> Routing(Routing routing) => Assign(p => p.Routing = routing);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.Timeout"/>
 		public BulkAllDescriptor<T> Timeout(Time timeout) => Assign(p => p.Timeout = timeout);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.Pipeline"/>
 		public BulkAllDescriptor<T> Pipeline(string pipeline) => Assign(p => p.Pipeline = pipeline);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.BufferToBulk"/>
 		public BulkAllDescriptor<T> BufferToBulk(Action<BulkDescriptor, IList<T>> modifier) => Assign(p => p.BufferToBulk = modifier);
 
-		/// <inheritdoc />
+		/// <inheritdoc cref="IBulkAllRequest{T}.RetryDocumentPredicate"/>
 		public BulkAllDescriptor<T> RetryDocumentPredicate(Func<IBulkResponseItem, T, bool> predicate) =>
 			Assign(p => p.RetryDocumentPredicate = predicate);
 
@@ -231,11 +246,7 @@ namespace Nest
 		/// <inheritdoc cref="IBulkAllRequest{T}.ContinueAfterDroppedDocuments" />
 		public BulkAllDescriptor<T> ContinueAfterDroppedDocuments(bool proceed = true) => Assign(p => p.ContinueAfterDroppedDocuments = proceed);
 
-		/// <summary>
-		/// If <see cref="ContinueAfterDroppedDocuments"/> is set to false (not the default) dropped messages will be fed through
-		/// this callback. Use this if you don't expect many failures and want to feed these dropped messages in a dead letter queue
-		/// for instance.
-		/// </summary>
+		/// <inheritdoc cref="IBulkAllRequest{T}.DroppedDocumentCallback"/>
 		public BulkAllDescriptor<T> DroppedDocumentCallback(Action<IBulkResponseItem, T> callback) =>
 			Assign(p => p.DroppedDocumentCallback = callback);
 

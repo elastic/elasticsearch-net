@@ -15,13 +15,13 @@ namespace ApiGenerator.Domain
 
 		public IEnumerable<string> Paths
 		{
-			get
-			{
-				return _paths?.Where(p => !BlackListRouteValues.Any(p.Contains))
-					.ToList() ?? _paths;
-			}
-			set { _paths = value; }
+			get => _paths?.Where(p => !BlackListRouteValues.Any(p.Contains))
+				       .ToList() ?? _paths;
+			set => _paths = this.EnsureBackslash(value);
 		}
+
+		public IList<string> EnsureBackslash(IEnumerable<string> paths) =>
+			paths?.Select(p => p.StartsWith("/") ? p : $"/{p}").ToList();
 
 		public IDictionary<string, ApiUrlPart> Parts { get; set; }
 		public IDictionary<string, ApiQueryParameters> Params { get; set; }

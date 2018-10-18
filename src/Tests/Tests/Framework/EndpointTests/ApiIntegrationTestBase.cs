@@ -59,25 +59,32 @@ namespace Tests.Framework
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
 				    && !(r.ApiCall.OriginalException is ElasticsearchClientException))
 				{
-					ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify()).Throw();
-					return;
+					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
+					throw new ResponseAssertionException(e.SourceException, r);
 				}
 
-				using (var scope = new AssertionScope())
+				try
 				{
 					assert(r);
-					var failures = scope.Discard();
-					if (failures.Length <= 0) return;
-					
-					var failure = failures[0];
-					scope.AddReportable("Failure", failure);
-					scope.AddReportable("DebugInformation", r.DebugInformation);
-					scope.FailWith( $@"{{Failure}}
-Response Under Test:
-{{DebugInformation}}");
-
+				}
+				catch (Exception e)
+				{
+					throw new ResponseAssertionException(e, r);
 				}
 			});
 		}
+	}
+
+	public class ResponseAssertionException : Exception
+	{
+		private readonly IResponse _response;
+
+		public ResponseAssertionException(Exception innerException, IResponse response)
+			: base(ResponseInMessage(innerException.Message, response), innerException) =>
+			_response = response;
+
+		private static string ResponseInMessage(string innerExceptionMessage, IResponse r) => $@"{innerExceptionMessage}
+Response Under Test:
+{r.DebugInformation}";
 	}
 }

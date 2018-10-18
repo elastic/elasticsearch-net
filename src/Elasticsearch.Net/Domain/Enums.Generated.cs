@@ -464,7 +464,9 @@ namespace Elasticsearch.Net
 			if ((enumValue & IndicesStatsMetric.Segments) != 0) list.Add("segments");
 			if ((enumValue & IndicesStatsMetric.Store) != 0) list.Add("store");
 			if ((enumValue & IndicesStatsMetric.Warmer) != 0) list.Add("warmer");
+#pragma warning disable 618
 			if ((enumValue & IndicesStatsMetric.Suggest) != 0) list.Add("suggest");
+#pragma warning restore 618
 			return string.Join(",", list);
 		}
 		public static string GetStringValue(this NodesInfoMetric enumValue)
@@ -515,7 +517,9 @@ namespace Elasticsearch.Net
 			if ((enumValue & NodesStatsIndexMetric.Segments) != 0) list.Add("segments");
 			if ((enumValue & NodesStatsIndexMetric.Store) != 0) list.Add("store");
 			if ((enumValue & NodesStatsIndexMetric.Warmer) != 0) list.Add("warmer");
+#pragma warning disable 618
 			if ((enumValue & NodesStatsIndexMetric.Suggest) != 0) list.Add("suggest");
+#pragma warning restore 618
 			return string.Join(",", list);
 		}
 		public static string GetStringValue(this NodesUsageMetric enumValue)

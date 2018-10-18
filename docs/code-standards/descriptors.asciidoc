@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/CodeStandards/Descriptors.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/CodeStandards/Descriptors.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -182,7 +182,8 @@ var methods = from d in YieldAllDescriptors()
     where !(m.Name == "Lang" && dt == typeof(ScriptDescriptorBase<,>))
     where !(m.Name == "Lang" && dt == typeof(StoredScriptDescriptor))
     where !(m.Name == "Lang" && dt == typeof(ScriptQueryDescriptor<>))
-    where !(m.Name == "RefreshOnCompleted" && dt == typeof(BulkAllDescriptor<>))
+    where !(m.Name == nameof(BulkAllDescriptor<object>.RefreshOnCompleted) && dt == typeof(BulkAllDescriptor<>))
+    where !(m.Name == nameof(BulkAllDescriptor<object>.ContinueAfterDroppedDocuments) && dt == typeof(BulkAllDescriptor<>))
     where !(m.Name == nameof(ReindexDescriptor<object, object>.OmitIndexCreation) && dt == typeof(ReindexDescriptor<,>))
     where !(m.Name == nameof(PutMappingDescriptor<object>.AutoMap))
     where !(m.Name == nameof(PutMappingDescriptor<object>.Dynamic))

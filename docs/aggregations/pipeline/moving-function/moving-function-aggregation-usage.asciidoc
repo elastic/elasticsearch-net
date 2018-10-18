@@ -1,0 +1,103 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/6.3
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Aggregations/Pipeline/MovingFunction/MovingFunctionAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
+[[moving-function-aggregation-usage]]
+=== Moving Function Aggregation Usage
+
+==== Fluent DSL example
+
+[source,csharp]
+----
+a => a
+.DateHistogram("projects_started_per_month", dh => dh
+    .Field(p => p.StartedOn)
+    .Interval(DateInterval.Month)
+    .Aggregations(aa => aa
+        .Sum("commits", sm => sm
+            .Field(p => p.NumberOfCommits)
+        )
+        .MovingFunction("commits_moving_avg", mv => mv
+            .BucketsPath("commits")
+            .Window(30)
+            .Script("MovingFunctions.unweightedAvg(values)")
+        )
+    )
+)
+----
+
+==== Object Initializer syntax example
+
+[source,csharp]
+----
+new DateHistogramAggregation("projects_started_per_month")
+{
+    Field = "startedOn",
+    Interval = DateInterval.Month,
+    Aggregations =
+        new SumAggregation("commits", "numberOfCommits")
+        && new MovingFunctionAggregation("commits_moving_avg", "commits")
+        {
+            Window = 30,
+            Script = "MovingFunctions.unweightedAvg(values)"
+        }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "projects_started_per_month": {
+    "date_histogram": {
+      "field": "startedOn",
+      "interval": "month"
+    },
+    "aggs": {
+      "commits": {
+        "sum": {
+          "field": "numberOfCommits"
+        }
+      },
+      "commits_moving_avg": {
+        "moving_fn": {
+          "buckets_path": "commits",
+          "window": 30,
+          "script": "MovingFunctions.unweightedAvg(values)"
+        }
+      }
+    }
+  }
+}
+----
+
+==== Handling Responses
+
+[source,csharp]
+----
+response.ShouldBeValid();
+
+var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+
+// average not calculated for the first bucket
+foreach(var item in projectsPerMonth.Buckets.Skip(1))
+{
+    var movingAvg = item.Sum("commits_moving_avg");
+    movingAvg.Should().NotBeNull();
+    movingAvg.Value.Should().BeGreaterThan(0);
+}
+----
+

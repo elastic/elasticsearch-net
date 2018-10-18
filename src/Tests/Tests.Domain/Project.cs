@@ -57,7 +57,7 @@ namespace Tests.Domain
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
 				.RuleFor(p => p.NumberOfContributors, f => Gimme.Random.Number(1, 200))
 				.RuleFor(p => p.Ranges, f => Ranges.Generator.Generate())
-				.RuleFor(p => p.Branches, f => Gimme.Random.ListItems(new List<string> { "master", "dev", "release", "qa", "test" }, 2))
+				.RuleFor(p => p.Branches, f => Gimme.Random.ListItems(new List<string> { "master", "dev", "release", "qa", "test" }))
 				.RuleFor(p => p.SourceOnly, f =>
 					TestConfiguration.Instance.Random.SourceSerializer ? new SourceOnlyObject() : null
 				)

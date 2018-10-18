@@ -58,6 +58,7 @@ namespace ApiGenerator.Domain
 	{
 		private List<CsharpMethod> _csharpMethods;
 
+		public string RestSpecName { get; set; }
 		public string CsharpMethodName { get; set; }
 		public string Documentation { get; set; }
 		public IEnumerable<string> Methods { get; set; }
@@ -221,10 +222,13 @@ namespace ApiGenerator.Domain
 			}
 		}
 
+
 		private IEndpointOverrides GetOverrides()
 		{
 			var method = this.CsharpMethodName;
-			if (CodeConfiguration.MethodNameOverrides.TryGetValue(method, out var manualOverride))
+			if (CodeConfiguration.ApiNameMapping.TryGetValue(this.RestSpecName, out var mapsApiMethodName))
+				method = mapsApiMethodName;
+			else if (CodeConfiguration.MethodNameOverrides.TryGetValue(method, out var manualOverride))
 				method = manualOverride;
 
 			var typeName = "ApiGenerator.Overrides.Endpoints." + method + "Overrides";
@@ -293,7 +297,9 @@ namespace ApiGenerator.Domain
 			method = this.GetOverrides()?.PatchMethod(method) ?? method;
 
 			var key = method.QueryStringParamName.Replace("RequestParameters", "");
-			if (CodeConfiguration.MethodNameOverrides.TryGetValue(key, out var manualOverride))
+			if (CodeConfiguration.ApiNameMapping.TryGetValue(this.RestSpecName, out var mapsApiMethodName))
+				method.QueryStringParamName = mapsApiMethodName + "RequestParameters";
+			else if (CodeConfiguration.MethodNameOverrides.TryGetValue(key, out var manualOverride))
 				method.QueryStringParamName = manualOverride + "RequestParameters";
 
 			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters", "Descriptor");

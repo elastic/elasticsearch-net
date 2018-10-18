@@ -124,13 +124,22 @@ namespace Nest
 		public ProcessorsDescriptor UserAgent<T>(Func<UserAgentProcessorDescriptor<T>, IUserAgentProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new UserAgentProcessorDescriptor<T>())));
 
+		[Obsolete("This method takes the wrong descriptor please use Kv")]
 		public ProcessorsDescriptor KeyValue<T>(Func<UserAgentProcessorDescriptor<T>, IUserAgentProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new UserAgentProcessorDescriptor<T>())));
+
+		/// <inheritdoc cref="IKeyValueProcessor"/>
+		public ProcessorsDescriptor Kv<T>(Func<KeyValueProcessorDescriptor<T>, IKeyValueProcessor> selector) where T : class  =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new KeyValueProcessorDescriptor<T>())));
 
 		/// <summary>
 		/// URL-decodes a string
 		/// </summary>
 		public ProcessorsDescriptor UrlDecode<T>(Func<UrlDecodeProcessorDescriptor<T>, IUrlDecodeProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new UrlDecodeProcessorDescriptor<T>())));
+
+		/// <inheritdoc cref="IBytesProcessor"/>
+		public ProcessorsDescriptor Bytes<T>(Func<BytesProcessorDescriptor<T>, IBytesProcessor> selector) where T : class  =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new BytesProcessorDescriptor<T>())));
 	}
 }

@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Nest
 {
@@ -9,14 +10,25 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IAggregation
 	{
+		/// <summary>
+		/// name of the aggregation
+		/// </summary>
 		string Name { get; set; }
+
+		/// <summary>
+		/// metadata to associate with the individual aggregation at request time that
+		/// will be returned in place at response time
+		/// </summary>
 		IDictionary<string, object> Meta { get; set; }
 	}
 
+	/// <inheritdoc />
 	public abstract class AggregationBase : IAggregation
 	{
+		/// <inheritdoc />
 		string IAggregation.Name { get; set; }
 
+		/// <inheritdoc />
 		public IDictionary<string, object> Meta { get; set; }
 
 		internal AggregationBase() { }
@@ -34,12 +46,13 @@ namespace Nest
 		//always evaluate to false so that each side of && equation is evaluated
 		public static bool operator true(AggregationBase a) => false;
 
-		public static AggregationBase operator &(AggregationBase left, AggregationBase right)
-		{
-			return new AggregationCombinator(null, left, right);
-		}
+		public static AggregationBase operator &(AggregationBase left, AggregationBase right) =>
+			new AggregationCombinator(null, left, right);
 	}
 
+	/// <summary>
+	/// Combines aggregations into a single list of aggregations
+	/// </summary>
 	internal class AggregationCombinator : AggregationBase, IAggregation
 	{
 		internal List<AggregationBase> Aggregations { get; } = new List<AggregationBase>();
@@ -54,13 +67,17 @@ namespace Nest
 
 		private void AddAggregation(AggregationBase agg)
 		{
-			if (agg == null) return;
-			var combinator = agg as AggregationCombinator;
-			if ((combinator?.Aggregations.HasAny()).GetValueOrDefault(false))
+			switch (agg)
 			{
-				this.Aggregations.AddRange(combinator.Aggregations);
+				case null:
+					return;
+				case AggregationCombinator combinator when combinator.Aggregations.Any():
+					this.Aggregations.AddRange(combinator.Aggregations);
+					break;
+				default:
+					this.Aggregations.Add(agg);
+					break;
 			}
-			else this.Aggregations.Add(agg);
 		}
 	}
 }

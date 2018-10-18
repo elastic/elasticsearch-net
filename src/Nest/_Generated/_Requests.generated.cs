@@ -126,8 +126,10 @@ namespace Nest
 
 		// Request parameters
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
 		public bool? PreferLocal { get => Q<bool?>("prefer_local"); set => Q("prefer_local", value); }
 		///<summary>Format of the output</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
 		public Format? Format { get => Q<Format?>("format"); set => Q("format", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -973,6 +975,18 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IClearSqlCursorRequest : IRequest<ClearSqlCursorRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSqlClearCursor <pre>Clear SQL cursor</pre></summary>
+	public partial class ClearSqlCursorRequest : PlainRequestBase<ClearSqlCursorRequestParameters>, IClearSqlCursorRequest
+	{
+		protected IClearSqlCursorRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters>
 	{
 		Indices Index { get; }
@@ -1444,6 +1458,23 @@ namespace Nest
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
 		///<summary>The pipeline id to preprocess incoming documents with</summary>
 		public string Pipeline { get => Q<string>("pipeline"); set => Q("pipeline", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ICreateRollupJobRequest : IRequest<CreateRollupJobRequestParameters>
+	{
+		Id Id { get; }
+	}
+	///<summary>Request parameters for XpackRollupPutJob <pre></pre></summary>
+	public partial class CreateRollupJobRequest : PlainRequestBase<CreateRollupJobRequestParameters>, ICreateRollupJobRequest
+	{
+		protected ICreateRollupJobRequest Self => this;
+		///<summary>/_xpack/rollup/job/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public CreateRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id ICreateRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeactivateWatchRequest : IRequest<DeactivateWatchRequestParameters>
@@ -2001,6 +2032,23 @@ namespace Nest
 		/// to make this operation visible to search, if `false` then do nothing with refreshes.
 		///</summary>
 		public Refresh? Refresh { get => Q<Refresh?>("refresh"); set => Q("refresh", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteRollupJobRequest : IRequest<DeleteRollupJobRequestParameters>
+	{
+		Id Id { get; }
+	}
+	///<summary>Request parameters for XpackRollupDeleteJob <pre></pre></summary>
+	public partial class DeleteRollupJobRequest : PlainRequestBase<DeleteRollupJobRequestParameters>, IDeleteRollupJobRequest
+	{
+		protected IDeleteRollupJobRequest Self => this;
+		///<summary>/_xpack/rollup/job/{id}</summary>
+		///<param name="id">this parameter is required</param>
+		public DeleteRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IDeleteRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters>
@@ -2699,6 +2747,8 @@ namespace Nest
 		public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters>
@@ -2727,6 +2777,8 @@ namespace Nest
 		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
 
 		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 		///<summary>
@@ -2877,6 +2929,8 @@ namespace Nest
 		public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards? ExpandWildcards { get => Q<ExpandWildcards?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 	}
@@ -3108,6 +3162,44 @@ namespace Nest
 		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetRollupCapabilitiesRequest : IRequest<GetRollupCapabilitiesRequestParameters>
+	{
+		Indices Index { get; }
+	}
+	///<summary>Request parameters for XpackRollupGetRollupCaps <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	public partial class GetRollupCapabilitiesRequest : PlainRequestBase<GetRollupCapabilitiesRequestParameters>, IGetRollupCapabilitiesRequest
+	{
+		protected IGetRollupCapabilitiesRequest Self => this;
+		///<summary>/_xpack/rollup/data/{index}</summary>
+		///<param name="index">Optional, accepts null</param>
+		public GetRollupCapabilitiesRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		///<summary>/_xpack/rollup/data/</summary>
+		public GetRollupCapabilitiesRequest() : base(){}
+		// values part of the url path
+		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetRollupJobRequest : IRequest<GetRollupJobRequestParameters>
+	{
+		Id Id { get; }
+	}
+	///<summary>Request parameters for XpackRollupGetJobs <pre></pre></summary>
+	public partial class GetRollupJobRequest : PlainRequestBase<GetRollupJobRequestParameters>, IGetRollupJobRequest
+	{
+		protected IGetRollupJobRequest Self => this;
+		///<summary>/_xpack/rollup/job/{id}</summary>
+		///<param name="id">Optional, accepts null</param>
+		public GetRollupJobRequest(Id id) : base(r=>r.Optional("id", id)){}
+		///<summary>/_xpack/rollup/job/</summary>
+		public GetRollupJobRequest() : base(){}
+		// values part of the url path
+		Id IGetRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters>
 	{
 		Id Id { get; }
@@ -3123,6 +3215,8 @@ namespace Nest
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
+		///<summary>Specify timeout for connection to master</summary>
+		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters>
@@ -4318,6 +4412,20 @@ namespace Nest
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IQuerySqlRequest : IRequest<QuerySqlRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSqlQuery <pre>Execute SQL</pre></summary>
+	public partial class QuerySqlRequest : PlainRequestBase<QuerySqlRequestParameters>, IQuerySqlRequest
+	{
+		protected IQuerySqlRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get => Q<string>("format"); set => Q("format", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
 	{
 		Indices Index { get; }
@@ -4534,6 +4642,29 @@ namespace Nest
 		public Time MasterTimeout { get => Q<Time>("master_timeout"); set => Q("master_timeout", value); }
 		///<summary>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</summary>
 		public string WaitForActiveShards { get => Q<string>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRollupSearchRequest : IRequest<RollupSearchRequestParameters>
+	{
+		Indices Index { get; }
+		TypeName Type { get; }
+	}
+	///<summary>Request parameters for XpackRollupRollupSearch <pre></pre></summary>
+	public partial class RollupSearchRequest : PlainRequestBase<RollupSearchRequestParameters>, IRollupSearchRequest
+	{
+		protected IRollupSearchRequest Self => this;
+		///<summary>/{index}/_rollup_search</summary>
+		///<param name="index">this parameter is required</param>
+		public RollupSearchRequest(Indices index) : base(r=>r.Required("index", index)){}
+		///<summary>/{index}/{type}/_rollup_search</summary>
+		///<param name="index">this parameter is required</param>
+		///<param name="type">Optional, accepts null</param>
+		public RollupSearchRequest(Indices index, TypeName type) : base(r=>r.Required("index", index).Optional("type", type)){}
+		// values part of the url path
+		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters>
@@ -4920,6 +5051,9 @@ namespace Nest
 		IndexName IShrinkIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 
 		// Request parameters
+		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
+		public bool? CopySettings { get => Q<bool?>("copy_settings"); set => Q("copy_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -5222,6 +5356,9 @@ namespace Nest
 		IndexName ISplitIndexRequest.Target => Self.RouteValues.Get<IndexName>("target");
 
 		// Request parameters
+		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
+		public bool? CopySettings { get => Q<bool?>("copy_settings"); set => Q("copy_settings", value); }
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get => Q<Time>("timeout"); set => Q("timeout", value); }
 		///<summary>Specify timeout for connection to master</summary>
@@ -5243,6 +5380,23 @@ namespace Nest
 		public StartDatafeedRequest(Id datafeed_id) : base(r=>r.Required("datafeed_id", datafeed_id)){}
 		// values part of the url path
 		Id IStartDatafeedRequest.DatafeedId => Self.RouteValues.Get<Id>("datafeed_id");
+
+		// Request parameters
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStartRollupJobRequest : IRequest<StartRollupJobRequestParameters>
+	{
+		Id Id { get; }
+	}
+	///<summary>Request parameters for XpackRollupStartJob <pre></pre></summary>
+	public partial class StartRollupJobRequest : PlainRequestBase<StartRollupJobRequestParameters>, IStartRollupJobRequest
+	{
+		protected IStartRollupJobRequest Self => this;
+		///<summary>/_xpack/rollup/job/{id}/_start</summary>
+		///<param name="id">this parameter is required</param>
+		public StartRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IStartRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		// Request parameters
 	}
@@ -5292,6 +5446,23 @@ namespace Nest
 		// Request parameters
 		///<summary>Whether to ignore if a wildcard expression matches no datafeeds. (This includes `_all` string or when no datafeeds have been specified)</summary>
 		public bool? AllowNoDatafeeds { get => Q<bool?>("allow_no_datafeeds"); set => Q("allow_no_datafeeds", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IStopRollupJobRequest : IRequest<StopRollupJobRequestParameters>
+	{
+		Id Id { get; }
+	}
+	///<summary>Request parameters for XpackRollupStopJob <pre></pre></summary>
+	public partial class StopRollupJobRequest : PlainRequestBase<StopRollupJobRequestParameters>, IStopRollupJobRequest
+	{
+		protected IStopRollupJobRequest Self => this;
+		///<summary>/_xpack/rollup/job/{id}/_stop</summary>
+		///<param name="id">this parameter is required</param>
+		public StopRollupJobRequest(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IStopRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IStopWatcherRequest : IRequest<StopWatcherRequestParameters>
@@ -5398,6 +5569,18 @@ namespace Nest
 		public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 		///<summary>Specific version type</summary>
 		public VersionType? VersionType { get => Q<VersionType?>("version_type"); set => Q("version_type", value); }
+	}
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ITranslateSqlRequest : IRequest<TranslateSqlRequestParameters>
+	{
+	}
+	///<summary>Request parameters for XpackSqlTranslate <pre>Translate SQL into Elasticsearch queries</pre></summary>
+	public partial class TranslateSqlRequest : PlainRequestBase<TranslateSqlRequestParameters>, ITranslateSqlRequest
+	{
+		protected ITranslateSqlRequest Self => this;
+		// values part of the url path
+
+		// Request parameters
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters>

@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/ClientConcepts/ConnectionPooling/MaxRetries/RespectsMaxRetry.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/ClientConcepts/ConnectionPooling/MaxRetries/RespectsMaxRetry.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -158,7 +158,8 @@ audit = await audit.TraceCall(
     new ClientCall {
         { BadResponse, 9200 },
         { BadResponse, 9201 },
-        { MaxRetriesReached }
+        { MaxRetriesReached },
+        { FailedOverAllNodes }
     }
 );
 ----

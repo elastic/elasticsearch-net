@@ -9,7 +9,7 @@ namespace Nest
 {
 	public class BulkAllObservable<T> : IDisposable, IObservable<IBulkAllResponse> where T : class
 	{
-		private readonly IBulkAllRequest<T> _partionedBulkRequest;
+		private readonly IBulkAllRequest<T> _partitionedBulkRequest;
 		private readonly IElasticClient _client;
 		private readonly TimeSpan _backOffTime;
 		private readonly int _backOffRetries;
@@ -21,22 +21,22 @@ namespace Nest
 		private readonly CancellationToken _compositeCancelToken;
 		private readonly CancellationTokenSource _compositeCancelTokenSource;
 		private readonly Func<IBulkResponseItem, T, bool> _retryPredicate;
-		private Action<IBulkResponseItem, T> _droppedDocumentCallBack;
+		private readonly Action<IBulkResponseItem, T> _droppedDocumentCallBack;
 
 		public BulkAllObservable(
 			IElasticClient client,
-			IBulkAllRequest<T> partionedBulkRequest,
+			IBulkAllRequest<T> partitionedBulkRequest,
 			CancellationToken cancellationToken = default(CancellationToken)
 		)
 		{
 			this._client = client;
-			this._partionedBulkRequest = partionedBulkRequest;
-			this._backOffRetries = this._partionedBulkRequest.BackOffRetries.GetValueOrDefault(CoordinatedRequestDefaults.BulkAllBackOffRetriesDefault);
-			this._backOffTime = (this._partionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? CoordinatedRequestDefaults.BulkAllBackOffTimeDefault);
-			this._bulkSize = this._partionedBulkRequest.Size ?? CoordinatedRequestDefaults.BulkAllSizeDefault;
-			this._retryPredicate = this._partionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
-			this._droppedDocumentCallBack = this._partionedBulkRequest.DroppedDocumentCallback ?? DroppedDocumentCallbackDefault;
-			this._maxDegreeOfParallelism = _partionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
+			this._partitionedBulkRequest = partitionedBulkRequest;
+			this._backOffRetries = this._partitionedBulkRequest.BackOffRetries.GetValueOrDefault(CoordinatedRequestDefaults.BulkAllBackOffRetriesDefault);
+			this._backOffTime = (this._partitionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? CoordinatedRequestDefaults.BulkAllBackOffTimeDefault);
+			this._bulkSize = this._partitionedBulkRequest.Size ?? CoordinatedRequestDefaults.BulkAllSizeDefault;
+			this._retryPredicate = this._partitionedBulkRequest.RetryDocumentPredicate ?? RetryBulkActionPredicate;
+			this._droppedDocumentCallBack = this._partitionedBulkRequest.DroppedDocumentCallback ?? DroppedDocumentCallbackDefault;
+			this._maxDegreeOfParallelism = _partitionedBulkRequest.MaxDegreeOfParallelism ?? CoordinatedRequestDefaults.BulkAllMaxDegreeOfParallelismDefault;
 			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 			this._compositeCancelToken = this._compositeCancelTokenSource.Token;
 		}
@@ -57,10 +57,10 @@ namespace Nest
 
 		private void BulkAll(IObserver<IBulkAllResponse> observer)
 		{
-			var documents = this._partionedBulkRequest.Documents;
-			var partioned = new PartitionHelper<T>(documents, this._bulkSize);
+			var documents = this._partitionedBulkRequest.Documents;
+			var partitioned = new PartitionHelper<T>(documents, this._bulkSize);
 #pragma warning disable 4014
-			partioned.ForEachAsync(
+			partitioned.ForEachAsync(
 #pragma warning restore 4014
 				(buffer, page) => this.BulkAsync(buffer, page, 0),
 				(buffer, response) => observer.OnNext(response),
@@ -89,8 +89,10 @@ namespace Nest
 
 		private void RefreshOnCompleted()
 		{
-			if (!this._partionedBulkRequest.RefreshOnCompleted) return;
-			var refresh = this._client.Refresh(this._partionedBulkRequest.Index);
+			if (!this._partitionedBulkRequest.RefreshOnCompleted) return;
+			var indices = this._partitionedBulkRequest.RefreshIndices ?? this._partitionedBulkRequest.Index;
+			if (indices == null) return;
+			var refresh = this._client.Refresh(indices);
 			if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 		}
 
@@ -98,14 +100,16 @@ namespace Nest
 		{
 			this._compositeCancelToken.ThrowIfCancellationRequested();
 
-			var r = this._partionedBulkRequest;
+			var r = this._partitionedBulkRequest;
 			var response = await this._client.BulkAsync(s =>
 				{
 					s.Index(r.Index).Type(r.Type);
 					if (r.BufferToBulk != null) r.BufferToBulk(s, buffer);
 					else s.IndexMany(buffer);
 					if (!string.IsNullOrEmpty(r.Pipeline)) s.Pipeline(r.Pipeline);
+#pragma warning disable 618
 					if (r.Refresh.HasValue) s.Refresh(r.Refresh.Value);
+#pragma warning restore 618
 					if (r.Routing != null) s.Routing(r.Routing);
 					if (r.WaitForActiveShards.HasValue) s.WaitForActiveShards(r.WaitForActiveShards.ToString());
 
@@ -132,7 +136,7 @@ namespace Nest
 			else if (retryDocuments.Count > 0)
 				throw this.ThrowOnBadBulk(response, $"Bulk indexing failed and after retrying {backOffRetries} times");
 
-			this._partionedBulkRequest.BackPressure?.Release();
+			this._partitionedBulkRequest.BackPressure?.Release();
 			return new BulkAllResponse { Retries = backOffRetries, Page = page };
 		}
 
@@ -143,7 +147,7 @@ namespace Nest
 				.ToList();
 			if (droppedDocuments.Count <= 0) return;
 			foreach (var dropped in droppedDocuments) this._droppedDocumentCallBack(dropped.Item1, dropped.Item2);
-			if (!this._partionedBulkRequest.ContinueAfterDroppedDocuments)
+			if (!this._partitionedBulkRequest.ContinueAfterDroppedDocuments)
 				throw this.ThrowOnBadBulk(response, $"BulkAll halted after receiving failures that can not be retried from _bulk");
 		}
 
@@ -181,7 +185,7 @@ namespace Nest
 		private Exception ThrowOnBadBulk(IElasticsearchResponse response, string message)
 		{
 			this._incrementFailed();
-			this._partionedBulkRequest.BackPressure?.Release();
+			this._partitionedBulkRequest.BackPressure?.Release();
 			return Throw(message, response.ApiCall);
 		}
 		private static ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
@@ -198,6 +202,7 @@ namespace Nest
 		{
 			this.IsDisposed = true;
 			this._compositeCancelTokenSource?.Cancel();
+			this._compositeCancelTokenSource?.Dispose();
 		}
 	}
 }

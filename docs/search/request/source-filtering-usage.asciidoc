@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Search/Request/SourceFilteringUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Search/Request/SourceFilteringUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -27,6 +27,7 @@ See the Elasticsearch documentation on {ref_current}/search-request-source-filte
 [source,csharp]
 ----
 s => s
+.Query(q => ProjectFilter)
 .Source(src => src
     .IncludeAll()
     .Excludes(e => e
@@ -44,6 +45,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
+    Query = ProjectFilter,
     Source = new SourceFilter
     {
         Includes = "*",
@@ -56,6 +58,13 @@ new SearchRequest<Project>
 .Example json output
 ----
 {
+  "query": {
+    "term": {
+      "type": {
+        "value": "project"
+      }
+    }
+  },
   "_source": {
     "includes": [
       "*"

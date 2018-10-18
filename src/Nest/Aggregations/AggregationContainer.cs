@@ -185,6 +185,9 @@ namespace Nest
 		[JsonProperty("moving_avg")]
 		IMovingAverageAggregation MovingAverage { get; set; }
 
+		[JsonProperty("moving_fn")]
+		IMovingFunctionAggregation MovingFunction { get; set; }
+
 		[JsonProperty("cumulative_sum")]
 		ICumulativeSumAggregation CumulativeSum { get; set; }
 
@@ -214,6 +217,9 @@ namespace Nest
 
 		[JsonProperty("composite")]
 		ICompositeAggregation Composite { get; set; }
+
+		[JsonProperty("weighted_avg")]
+		IWeightedAverageAggregation WeightedAverage { get; set; }
 
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
@@ -295,6 +301,8 @@ namespace Nest
 
 		public IMovingAverageAggregation MovingAverage { get; set; }
 
+		public IMovingFunctionAggregation MovingFunction { get; set; }
+
 		public ICumulativeSumAggregation CumulativeSum { get; set; }
 
 		public ISerialDifferencingAggregation SerialDifferencing { get; set; }
@@ -314,6 +322,8 @@ namespace Nest
 		public IAdjacencyMatrixAggregation AdjacencyMatrix { get; set; }
 
 		public ICompositeAggregation Composite { get; set; }
+
+		public IWeightedAverageAggregation WeightedAverage { get; set; }
 
 		public AggregationDictionary Aggregations { get; set; }
 
@@ -430,6 +440,8 @@ namespace Nest
 
 		IMovingAverageAggregation IAggregationContainer.MovingAverage { get; set; }
 
+		IMovingFunctionAggregation IAggregationContainer.MovingFunction { get; set; }
+
 		ICumulativeSumAggregation IAggregationContainer.CumulativeSum { get; set; }
 
 		ISerialDifferencingAggregation IAggregationContainer.SerialDifferencing { get; set; }
@@ -449,6 +461,8 @@ namespace Nest
 		IAdjacencyMatrixAggregation IAggregationContainer.AdjacencyMatrix { get; set; }
 
 		ICompositeAggregation IAggregationContainer.Composite { get; set; }
+
+		IWeightedAverageAggregation IAggregationContainer.WeightedAverage { get; set; }
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
@@ -606,6 +620,10 @@ namespace Nest
 			Func<MovingAverageAggregationDescriptor, IMovingAverageAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.MovingAverage = d);
 
+		public AggregationContainerDescriptor<T> MovingFunction(string name,
+			Func<MovingFunctionAggregationDescriptor, IMovingFunctionAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.MovingFunction = d);
+
 		public AggregationContainerDescriptor<T> CumulativeSum(string name,
 			Func<CumulativeSumAggregationDescriptor, ICumulativeSumAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.CumulativeSum = d);
@@ -645,6 +663,10 @@ namespace Nest
 		public AggregationContainerDescriptor<T> Composite(string name,
 			Func<CompositeAggregationDescriptor<T>, ICompositeAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Composite = d);
+
+		public AggregationContainerDescriptor<T> WeightedAverage(string name,
+			Func<WeightedAverageAggregationDescriptor<T>, IWeightedAverageAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.WeightedAverage = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
@@ -715,5 +737,6 @@ namespace Nest
 			((IAggregationContainer)d).Aggregations = ((IAggregationContainer)left).Aggregations;
 			return d;
 		}
+
 	}
 }

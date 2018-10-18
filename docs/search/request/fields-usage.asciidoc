@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Search/Request/FieldsUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Search/Request/FieldsUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -29,6 +29,7 @@ See the Elasticsearch documentation on {ref_current}/search-request-stored-field
 [source,csharp]
 ----
 s => s
+.Query(q => ProjectFilter)
 .StoredFields(fs => fs
     .Field(p => p.Name)
     .Field(p => p.StartedOn)
@@ -45,6 +46,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
+    Query = ProjectFilter,
     StoredFields = Fields<Project>(
         p => p.Name,
         p => p.StartedOn,
@@ -58,6 +60,13 @@ new SearchRequest<Project>
 .Example json output
 ----
 {
+  "query": {
+    "term": {
+      "type": {
+        "value": "project"
+      }
+    }
+  },
   "stored_fields": [
     "name",
     "startedOn",

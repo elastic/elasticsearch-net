@@ -59,6 +59,7 @@ namespace ApiGenerator
 			"xpack.ml.get_filters.json",
 			"xpack.ml.put_filter.json",
 			"rank_eval.json",
+
 			// these API's are new and need to be mapped
 			"xpack.license.get_basic_status.json",
 			"xpack.license.post_start_basic.json",
@@ -72,18 +73,16 @@ namespace ApiGenerator
 			"xpack.ml.put_calendar.json",
 			"xpack.ml.put_calendar_job.json",
 			"xpack.ml.get_calendar_job.json",
-
-			"xpack.rollup.delete_job.json",
-			"xpack.rollup.get_jobs.json",
-			"xpack.rollup.get_rollup_caps.json",
-			"xpack.rollup.put_job.json",
-			"xpack.rollup.rollup_search.json",
-			"xpack.rollup.start_job.json",
-			"xpack.rollup.stop_job.json",
-			"xpack.sql.clear_cursor.json",
-			"xpack.sql.query.json",
-			"xpack.sql.translate.json",
 			"xpack.ssl.certificates.json",
+
+			// 6.4 new  API's
+			"xpack.ml.update_filter.json",
+			"xpack.security.delete_privileges.json",
+			"xpack.security.get_privileges.json",
+			"xpack.security.has_privileges.json",
+			"xpack.security.put_privilege.json",
+			"xpack.security.put_privileges.json",
+			"nodes.reload_secure_settings.json"
 		};
 
 		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)
@@ -142,6 +141,7 @@ namespace ApiGenerator
 			{
 				var replaceSpec = JObject.Parse(File.ReadAllText(replaceFile));
 				var endpointReplaced = replaceSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
+				endpointReplaced.Value.RestSpecName = endpointReplaced.Key;
 				endpointReplaced.Value.CsharpMethodName = CreateMethodName(endpointReplaced.Key);
 				return endpointReplaced;
 			}
@@ -149,6 +149,7 @@ namespace ApiGenerator
 			var officialJsonSpec = JObject.Parse(File.ReadAllText(jsonFile));
 			PatchOfficialSpec(officialJsonSpec, jsonFile);
 			var endpoint = officialJsonSpec.ToObject<Dictionary<string, ApiEndpoint>>().First();
+			endpoint.Value.RestSpecName = endpoint.Key;
 			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
 			return endpoint;
 		}
@@ -161,10 +162,20 @@ namespace ApiGenerator
 
 			var patchedJson = JObject.Parse(File.ReadAllText(patchFile));
 
+			var pathsOverride = patchedJson.SelectToken("*.url.paths");
+
 			original.Merge(patchedJson, new JsonMergeSettings
 			{
 				MergeArrayHandling = MergeArrayHandling.Union
 			});
+
+			if (pathsOverride != null)
+			{
+				original.SelectToken("*.url.paths").Replace(pathsOverride);
+			}
+
+
+
 		}
 
 		private static Dictionary<string, ApiQueryParameters> CreateCommonApiQueryParameters(string jsonFile)

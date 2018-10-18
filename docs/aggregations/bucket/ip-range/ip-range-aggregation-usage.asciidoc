@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Aggregations/Bucket/IpRange/IpRangeAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Aggregations/Bucket/IpRange/IpRangeAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -74,6 +74,11 @@ ipRanges.Should().NotBeNull();
 ipRanges.Buckets.Should().NotBeNull();
 ipRanges.Buckets.Count.Should().BeGreaterThan(0);
 foreach (var range in ipRanges.Buckets)
+{
+    if (TestConfiguration.Instance.InRange("6.4.0"))
+        range.Key.Should().NotBeNullOrEmpty();
+
     range.DocCount.Should().BeGreaterThan(0);
+}
 ----
 

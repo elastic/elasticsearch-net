@@ -1438,6 +1438,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Specify timeout for connection to master</summary>
+		public GetScriptDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<T>  : RequestDescriptorBase<SourceDescriptor<T>,SourceRequestParameters, ISourceRequest>, ISourceRequest
@@ -1584,8 +1586,10 @@ namespace Nest
 		// Request parameters
 
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
 		public AnalyzeDescriptor PreferLocal(bool? preferLocal = true) => Qs("prefer_local", preferLocal);
 		///<summary>Format of the output</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Erroneously documented as a valid option, no longer document from 6.4 onwards as per https://github.com/elastic/elasticsearch/pull/31795")]
 		public AnalyzeDescriptor Format(Format? format) => Qs("format", format);
 	}
 	///<summary>descriptor for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
@@ -2003,6 +2007,8 @@ namespace Nest
 		public GetIndexDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 		///<summary>Whether to return all default setting for each of the indices.</summary>
 		public GetIndexDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+		///<summary>Specify timeout for connection to master</summary>
+		public GetIndexDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
 	///<summary>descriptor for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasDescriptor  : RequestDescriptorBase<GetAliasDescriptor,GetAliasRequestParameters, IGetAliasRequest>, IGetAliasRequest
@@ -2113,6 +2119,8 @@ namespace Nest
 		public GetMappingDescriptor<T> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		///<summary>Specify timeout for connection to master</summary>
+		public GetMappingDescriptor<T> MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetMappingDescriptor<T> Local(bool? local = true) => Qs("local", local);
 	}
@@ -2139,6 +2147,8 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>Specify timeout for connection to master</summary>
+		public GetIndexSettingsDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetIndexSettingsDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -2502,6 +2512,9 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
+		public ShrinkIndexDescriptor CopySettings(bool? copySettings = true) => Qs("copy_settings", copySettings);
 		///<summary>Explicit operation timeout</summary>
 		public ShrinkIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
@@ -2528,6 +2541,9 @@ namespace Nest
 
 		// Request parameters
 
+		///<summary>whether or not to copy settings from the source index (defaults to false)</summary>
+		[Obsolete("Scheduled to be removed in 7.0, Elasticsearch 6.4 will throw an exception if this is turned off see elastic/elasticsearch#30404")]
+		public SplitIndexDescriptor CopySettings(bool? copySettings = true) => Qs("copy_settings", copySettings);
 		///<summary>Explicit operation timeout</summary>
 		public SplitIndexDescriptor Timeout(Time timeout) => Qs("timeout", timeout);
 		///<summary>Specify timeout for connection to master</summary>
@@ -4367,6 +4383,116 @@ namespace Nest
 		///<summary>Should the request block until the upgrade operation is completed</summary>
 		public MigrationUpgradeDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 	}
+	///<summary>descriptor for XpackRollupDeleteJob <pre></pre></summary>
+	public partial class DeleteRollupJobDescriptor  : RequestDescriptorBase<DeleteRollupJobDescriptor,DeleteRollupJobRequestParameters, IDeleteRollupJobRequest>, IDeleteRollupJobRequest
+	{ 
+		/// <summary>/_xpack/rollup/job/{id}</summary>
+		///<param name="id"> this parameter is required</param>
+		public DeleteRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IDeleteRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupGetJobs <pre></pre></summary>
+	public partial class GetRollupJobDescriptor  : RequestDescriptorBase<GetRollupJobDescriptor,GetRollupJobRequestParameters, IGetRollupJobRequest>, IGetRollupJobRequest
+	{ 
+		/// <summary>/_xpack/rollup/job/{id}</summary>
+		public GetRollupJobDescriptor() : base(){}
+		// values part of the url path
+		Id IGetRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		///<summary>The ID of the job(s) to fetch. Accepts glob patterns, or left blank for all jobs</summary>
+		public GetRollupJobDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupGetRollupCaps <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/rollup-get-rollup-caps.html</pre></summary>
+	public partial class GetRollupCapabilitiesDescriptor  : RequestDescriptorBase<GetRollupCapabilitiesDescriptor,GetRollupCapabilitiesRequestParameters, IGetRollupCapabilitiesRequest>, IGetRollupCapabilitiesRequest
+	{ 
+		/// <summary>/_xpack/rollup/data/{index}</summary>
+		public GetRollupCapabilitiesDescriptor() : base(){}
+		// values part of the url path
+		Indices IGetRollupCapabilitiesRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		///<summary> Index, indices or index-pattern to return rollup capabilities for. _all may be used to fetch rollup capabilities from all job</summary>
+		public GetRollupCapabilitiesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public GetRollupCapabilitiesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public GetRollupCapabilitiesDescriptor AllIndices() => this.Index(Indices.All);
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupPutJob <pre></pre></summary>
+	public partial class CreateRollupJobDescriptor<T>  : RequestDescriptorBase<CreateRollupJobDescriptor<T>,CreateRollupJobRequestParameters, ICreateRollupJobRequest>, ICreateRollupJobRequest
+	{ 
+		/// <summary>/_xpack/rollup/job/{id}</summary>
+		///<param name="id"> this parameter is required</param>
+		public CreateRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id ICreateRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupRollupSearch <pre></pre></summary>
+	public partial class RollupSearchDescriptor<T>  : RequestDescriptorBase<RollupSearchDescriptor<T>,RollupSearchRequestParameters, IRollupSearchRequest>, IRollupSearchRequest
+	{ 
+		/// <summary>/{index}/_rollup_search</summary>
+		///<param name="index"> this parameter is required</param>
+		public RollupSearchDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		// values part of the url path
+		Indices IRollupSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IRollupSearchRequest.Type => Self.RouteValues.Get<TypeName>("type");
+
+		///<summary>The index or index-pattern (containing rollup or regular data) that should be searched</summary>
+		public RollupSearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RollupSearchDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public RollupSearchDescriptor<T> AllIndices() => this.Index(Indices.All);
+
+		///<summary>The doc type inside the index</summary>
+		public RollupSearchDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+
+		///<summary>a shortcut into calling Type(typeof(TOther))</summary>
+		public RollupSearchDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupStartJob <pre></pre></summary>
+	public partial class StartRollupJobDescriptor  : RequestDescriptorBase<StartRollupJobDescriptor,StartRollupJobRequestParameters, IStartRollupJobRequest>, IStartRollupJobRequest
+	{ 
+		/// <summary>/_xpack/rollup/job/{id}/_start</summary>
+		///<param name="id"> this parameter is required</param>
+		public StartRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IStartRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackRollupStopJob <pre></pre></summary>
+	public partial class StopRollupJobDescriptor  : RequestDescriptorBase<StopRollupJobDescriptor,StopRollupJobRequestParameters, IStopRollupJobRequest>, IStopRollupJobRequest
+	{ 
+		/// <summary>/_xpack/rollup/job/{id}/_stop</summary>
+		///<param name="id"> this parameter is required</param>
+		public StopRollupJobDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		// values part of the url path
+		Id IStopRollupJobRequest.Id => Self.RouteValues.Get<Id>("id");
+
+		// Request parameters
+
+	}
 	///<summary>descriptor for XpackSecurityAuthenticate <pre>https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html</pre></summary>
 	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
 	{ 
@@ -4590,6 +4716,32 @@ namespace Nest
 
 		///<summary>If `true` (the default) then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` then do nothing with refreshes.</summary>
 		public PutUserDescriptor Refresh(Refresh? refresh) => Qs("refresh", refresh);
+	}
+	///<summary>descriptor for XpackSqlClearCursor <pre>Clear SQL cursor</pre></summary>
+	public partial class ClearSqlCursorDescriptor  : RequestDescriptorBase<ClearSqlCursorDescriptor,ClearSqlCursorRequestParameters, IClearSqlCursorRequest>, IClearSqlCursorRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+	}
+	///<summary>descriptor for XpackSqlQuery <pre>Execute SQL</pre></summary>
+	public partial class QuerySqlDescriptor  : RequestDescriptorBase<QuerySqlDescriptor,QuerySqlRequestParameters, IQuerySqlRequest>, IQuerySqlRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public QuerySqlDescriptor Format(string format) => Qs("format", format);
+	}
+	///<summary>descriptor for XpackSqlTranslate <pre>Translate SQL into Elasticsearch queries</pre></summary>
+	public partial class TranslateSqlDescriptor  : RequestDescriptorBase<TranslateSqlDescriptor,TranslateSqlRequestParameters, ITranslateSqlRequest>, ITranslateSqlRequest
+	{ 
+		// values part of the url path
+
+		// Request parameters
+
 	}
 	///<summary>descriptor for XpackWatcherAckWatch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html</pre></summary>
 	public partial class AcknowledgeWatchDescriptor  : RequestDescriptorBase<AcknowledgeWatchDescriptor,AcknowledgeWatchRequestParameters, IAcknowledgeWatchRequest>, IAcknowledgeWatchRequest

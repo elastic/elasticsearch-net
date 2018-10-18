@@ -201,9 +201,7 @@ namespace Nest
 		public SearchDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> selector) =>
 			Assign(a => a.Source = new Union<bool, ISourceFilter>(selector?.Invoke(new SourceFilterDescriptor<T>())));
 
-		/// <summary>
-		/// The number of hits to return. Defaults to 10.
-		/// </summary>
+		/// <summary> The number of hits to return. Defaults to 10. </summary>
 		public SearchDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
 		/// <summary>
@@ -399,6 +397,7 @@ namespace Nest
 		/// For instance the query below retrieves the best tweet for each user and sorts them by number of likes.
 		/// <para>
 		/// NOTE: The collapsing is applied to the top hits only and does not affect aggregations.
+		/// You can only collapse to a depth of 2.
 		/// </para>
 		/// </summary>
 		public SearchDescriptor<T> Collapse(Func<FieldCollapseDescriptor<T>, IFieldCollapse> collapseSelector) =>

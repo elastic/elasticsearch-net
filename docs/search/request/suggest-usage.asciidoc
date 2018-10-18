@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Search/Request/SuggestUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Search/Request/SuggestUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -25,6 +25,7 @@ See the Elasticsearch documentation on {ref_current}/search-suggesters.html[Sugg
 [source,csharp]
 ----
 s => s
+.Query(q => ProjectFilter)
 .Suggest(ss => ss
     .Term("my-term-suggest", t => t
         .MaxEdits(1)
@@ -87,6 +88,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
+    Query = ProjectFilter,
     Suggest = new SuggestContainer
     {
         { "my-term-suggest", new SuggestBucket
@@ -166,6 +168,13 @@ new SearchRequest<Project>
 .Example json output
 ----
 {
+  "query": {
+    "term": {
+      "type": {
+        "value": "project"
+      }
+    }
+  },
   "suggest": {
     "my-completion-suggest": {
       "completion": {

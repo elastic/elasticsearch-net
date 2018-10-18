@@ -357,57 +357,61 @@ namespace Tests.Search.Search
 
 
 	[SkipVersion("<6.2.0", "OpaqueId introduced in 6.2.0")]
-	public class OpaqueIdApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public class OpaqueIdApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
-		private const string OpaqueId = "123456";
-
 		public OpaqueIdApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new { };
-
+		protected override object ExpectJson => null;
+		protected override bool SupportsDeserialization => false;
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/doc/_search?scroll=10m";
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => $"/_tasks?pretty=true&error_trace=true";
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.RequestConfiguration(r => r.OpaqueId(OpaqueId))
-			.Query(q => q)
-			.Scroll("10m"); // Create a scroll in order to keep the task around.
+		protected override Func<ListTasksDescriptor, IListTasksRequest> Fluent => s => s
+			.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue));
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
+		protected override ListTasksRequest Initializer => new ListTasksRequest()
 		{
-			RequestConfiguration = new RequestConfiguration
-			{
-				OpaqueId = OpaqueId
-			},
-			Scroll = "10m"
+			RequestConfiguration = new RequestConfiguration { OpaqueId = CallIsolatedValue },
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Search(f),
-			fluentAsync: (c, f) => c.SearchAsync(f),
-			request: (c, r) => c.Search<Project>(r),
-			requestAsync: (c, r) => c.SearchAsync<Project>(r)
+			fluent: (c, f) => c.ListTasks(f),
+			fluentAsync: (c, f) => c.ListTasksAsync(f),
+			request: (c, r) => c.ListTasks(r),
+			requestAsync: (c, r) => c.ListTasksAsync(r)
 		);
 
-		protected override void OnAfterCall(IElasticClient client)
+		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var tasks = client.ListTasks(d => d.RequestConfiguration(r => r.OpaqueId(OpaqueId)));
-			tasks.Should().NotBeNull();
-			foreach (var node in tasks.Nodes)
-			{
-				foreach (var task in node.Value.Tasks)
-				{
-					task.Value.Headers[RequestData.OpaqueIdHeader].Should().Be(OpaqueId);
-				}
-			}
-			base.OnAfterCall(client);
+			var searchResponse = client.Search<Project>(s => s
+				.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue))
+				.Scroll("10m") // Create a scroll in order to keep the task around.
+            );
+
+			searchResponse.ShouldBeValid();
 		}
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void ExpectResponse(IListTasksResponse response)
 		{
 			response.ShouldBeValid();
+			foreach (var node in response.Nodes)
+			foreach (var task in node.Value.Tasks)
+			{
+				task.Value.Headers.Should().NotBeNull();
+				if (task.Value.Headers.TryGetValue(RequestData.OpaqueIdHeader, out var opaqueIdValue))
+				{
+					opaqueIdValue.Should().Be(this.CallIsolatedValue,
+						$"OpaqueId header {opaqueIdValue} did not match {this.CallIsolatedValue}");
+				}
+				// TODO: Determine if this is a valid assertion i.e. should all tasks returned have an OpaqueId header?
+//				else
+//				{
+//					Assert.True(false,
+//						$"No OpaqueId header for task {task.Key} and OpaqueId value {this.CallIsolatedValue}");
+//				}
+			}
 		}
 	}
 }

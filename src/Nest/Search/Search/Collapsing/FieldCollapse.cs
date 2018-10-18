@@ -27,38 +27,52 @@ namespace Nest
 		[JsonProperty("inner_hits")]
 		IInnerHits InnerHits { get; set; }
 
+		/// <summary>
+		/// The expansion of the group is done by sending an additional query for each inner_hit request for each collapsed hit returned
+		/// in the response. This can significantly slow things down if you have too many groups and/or inner_hit requests.
+		/// The max_concurrent_group_searches request parameter can be used to control the maximum number of
+		/// concurrent searches allowed in this phase. The default is based on the number of data nodes and the
+		/// default search thread pool size.
+		/// </summary>
 		[JsonProperty("max_concurrent_group_searches")]
 		int? MaxConcurrentGroupSearches { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc cref="IFieldCollapse"/>
 	public class FieldCollapse : IFieldCollapse
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc cref="IFieldCollapse.Field"/>
 		public Field Field { get; set; }
 
+		/// <inheritdoc cref="IFieldCollapse.InnerHits"/>
 		public IInnerHits InnerHits { get; set; }
 
+		/// <inheritdoc cref="IFieldCollapse.MaxConcurrentGroupSearches"/>
 		public int? MaxConcurrentGroupSearches { get; set; }
+
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc cref="IFieldCollapse"/>
 	public class FieldCollapseDescriptor<T> : DescriptorBase<FieldCollapseDescriptor<T>, IFieldCollapse>, IFieldCollapse
 		where T : class
 	{
-		/// <inheritdoc/>
 		Field IFieldCollapse.Field { get; set; }
 		IInnerHits IFieldCollapse.InnerHits { get; set; }
 		int? IFieldCollapse.MaxConcurrentGroupSearches { get; set; }
 
+		/// <inheritdoc cref="IFieldCollapse.MaxConcurrentGroupSearches"/>
 		public FieldCollapseDescriptor<T> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) =>
 			Assign(a => a.MaxConcurrentGroupSearches = maxConcurrentGroupSearches);
 
+		/// <inheritdoc cref="IFieldCollapse.Field"/>
 		public FieldCollapseDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
+		/// <inheritdoc cref="IFieldCollapse.Field"/>
 		public FieldCollapseDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 
+		/// <inheritdoc cref="IFieldCollapse.InnerHits"/>
 		public FieldCollapseDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
 			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
+
 	}
 }

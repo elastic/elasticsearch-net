@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Aggregations/Bucket/DateRange/DateRangeAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Aggregations/Bucket/DateRange/DateRangeAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -93,13 +93,11 @@ new DateRangeAggregation("projects_date_ranges")
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 The `AggregateDictionary found on `.Aggregations` on `ISearchResponse<T>` has several helper methods
 so we can fetch our aggregation results easily in the correct type.
 <<handling-aggregate-response, Be sure to read more about these helper methods>>
-
-==== Handling Responses
 
 [source,csharp]
 ----
