@@ -322,7 +322,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 				)
 			);
 
-		private static PropertiesDescriptor<Developer> DeveloperProperties(PropertiesDescriptor<Developer> props) => props
+		public static PropertiesDescriptor<Developer> DeveloperProperties(PropertiesDescriptor<Developer> props) => props
 			.Keyword(s => s
 				.Name(p => p.OnlineHandle)
 			)

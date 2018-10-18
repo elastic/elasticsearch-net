@@ -224,7 +224,7 @@ namespace Tests.Analysis.Tokenizers
 		public class CharGroupTests : TokenizerAssertionBase<CharGroupTests>
 		{
 			private readonly string[] _chars = {"whitespace", "-", "\n"};
-			public override string Name => "uax";
+			public override string Name => "char_group";
 			public override ITokenizer Initializer => new CharGroupTokenizer
 			{
 				TokenizeOnCharacters = _chars

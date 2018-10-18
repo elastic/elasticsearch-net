@@ -194,7 +194,7 @@ namespace Tests.Analysis.TokenFilters
 		[SkipVersion("<6.4.0", "The mode option was introduced in https://github.com/elastic/elasticsearch/pull/32012")]
 		public class KeepTypesModeTests : TokenFilterAssertionBase<KeepTypesTests>
 		{
-			public override string Name => "keeptypes";
+			public override string Name => "keeptypes_mode";
 			private readonly string[] _types = {"<NUM>", "<SOMETHINGELSE>"};
 
 			public override ITokenFilter Initializer => new KeepTypesTokenFilter
