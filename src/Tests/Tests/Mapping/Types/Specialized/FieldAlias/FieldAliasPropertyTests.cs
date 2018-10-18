@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
@@ -7,6 +8,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.Mapping.Types.Specialized.FieldAlias
 {
+	[SkipVersion("<6.4.0", "field aliases introduced in 6.4.0")]
 	public class FieldAliasPropertyTests : PropertyTestsBase
 	{
 		public FieldAliasPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
