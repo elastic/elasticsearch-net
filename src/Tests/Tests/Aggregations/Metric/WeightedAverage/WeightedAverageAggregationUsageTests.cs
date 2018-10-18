@@ -1,4 +1,5 @@
 ﻿using System;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
@@ -17,8 +18,11 @@ namespace Tests.Aggregations.Metric.WeightedAverage
 	 * value. Weighted averages, on the other hand, weight each datapoint differently. The amount that each
 	 * datapoint contributes to the final value is extracted from the document, or provided by a script.
 	 *
+	 * NOTE: Only available in Elasticsearch 6.4.0+
+	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-weight-avg-aggregation.html[Weighted Avg Aggregation]
 	 */
+	[SkipVersion("<6.4.0", "Introduced in Elasticsearch 6.4.0+")]
 	public class WeightedAverageAggregationUsageTests : AggregationUsageTestBase
 	{
 		public WeightedAverageAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
