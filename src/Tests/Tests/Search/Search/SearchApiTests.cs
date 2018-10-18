@@ -357,7 +357,7 @@ namespace Tests.Search.Search
 
 
 	[SkipVersion("<6.2.0", "OpaqueId introduced in 6.2.0")]
-	public class OpaqueIdApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public class OpaqueIdApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		public OpaqueIdApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -368,42 +368,47 @@ namespace Tests.Search.Search
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/project/doc/_search?scroll=10m";
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue))
-			.Scroll("10m"); // Create a scroll in order to keep the task around.
+		protected override Func<ListTasksDescriptor, IListTasksRequest> Fluent => s => s
+			.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue));
 
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
+		protected override ListTasksRequest Initializer => new ListTasksRequest()
 		{
 			RequestConfiguration = new RequestConfiguration { OpaqueId = CallIsolatedValue },
-			Scroll = "10m"
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Search(f),
-			fluentAsync: (c, f) => c.SearchAsync(f),
-			request: (c, r) => c.Search<Project>(r),
-			requestAsync: (c, r) => c.SearchAsync<Project>(r)
+			fluent: (c, f) => c.ListTasks(f),
+			fluentAsync: (c, f) => c.ListTasksAsync(f),
+			request: (c, r) => c.ListTasks(r),
+			requestAsync: (c, r) => c.ListTasksAsync(r)
 		);
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var searchResponse = client.Search<Project>(s => s
+				.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue))
+				.Scroll("10m") // Create a scroll in order to keep the task around.
+            );
+
+			searchResponse.ShouldBeValid();
+		}
+
+		protected override void ExpectResponse(IListTasksResponse response)
 		{
 			response.ShouldBeValid();
-
-			var tasks = Client.ListTasks(d => d.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue)));
-			tasks.Should().NotBeNull();
-			foreach (var node in tasks.Nodes)
+			foreach (var node in response.Nodes)
+			foreach (var task in node.Value.Tasks)
 			{
-				foreach (var task in node.Value.Tasks)
+				task.Value.Headers.Should().NotBeNull();
+				if (task.Value.Headers.TryGetValue(RequestData.OpaqueIdHeader, out var opaqueIdValue))
 				{
-					task.Value.Headers.Should().NotBeNull();
-					if (task.Value.Headers.TryGetValue(RequestData.OpaqueIdHeader, out var opaqueIdValue))
-					{
-						opaqueIdValue.Should().Be(CallIsolatedValue, $"OpaqueId header {opaqueIdValue} did not match {CallIsolatedValue}");
-					}
-					else
-					{
-						Assert.True(false, $"No OpaqueId header for task {task.Key} and OpaqueId value {CallIsolatedValue}");
-					}
+					opaqueIdValue.Should().Be(this.CallIsolatedValue,
+						$"OpaqueId header {opaqueIdValue} did not match {this.CallIsolatedValue}");
+				}
+				else
+				{
+					Assert.True(false,
+						$"No OpaqueId header for task {task.Key} and OpaqueId value {this.CallIsolatedValue}");
 				}
 			}
 		}
