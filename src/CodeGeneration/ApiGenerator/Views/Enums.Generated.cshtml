@@ -103,10 +103,20 @@ namespace Elasticsearch.Net
 			}
 <text>			var list = new @(Raw("List<string>()"));
 </text>
+			var g = GlobalOverrides.ObsoleteEnumMembers.TryGetValue(e.Name, out var d);
 			foreach (var option in e.Options.Where(o => o != "_all"))
 			{
-<text>			if ((enumValue & @(e.Name).@(GetEnumValue(e.Name, option))) != 0) list.Add("@(option)");
+				var value = GetEnumValue(e.Name, option);
+				if (g && d.TryGetValue(option, out var obsolete)) {
+<text>#pragma warning disable 618
+			if ((enumValue & @(e.Name).@(value)) != 0) list.Add("@(option)");
+#pragma warning restore 618
+</text>									
+				}
+				else {
+<text>			if ((enumValue & @(e.Name).@(value)) != 0) list.Add("@(option)");
 </text>
+			    }                                                                                          
 			}
 <text>			return string.Join(",", list);
 		}</text>
