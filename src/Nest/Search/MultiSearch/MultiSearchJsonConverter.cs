@@ -20,6 +20,7 @@ namespace Nest
 
 			if (request.Operations == null) return;
 
+			var memoryStreamFactory = settings.MemoryStreamFactory;
 			foreach (var operation in request.Operations.Values)
 			{
 				var p = operation.RequestParameters;
@@ -47,16 +48,15 @@ namespace Nest
 					ignore_unavailable = GetString("ignore_unavailable")
 				};
 
-				var headerString = elasticsearchSerializer.SerializeToString(header, SerializationFormatting.None);
+				var headerString = elasticsearchSerializer.SerializeToString(header, memoryStreamFactory, SerializationFormatting.None);
 				writer.WriteRaw($"{headerString}\n");
-				var bodyString = elasticsearchSerializer.SerializeToString(operation, SerializationFormatting.None);
+				var bodyString = elasticsearchSerializer.SerializeToString(operation, memoryStreamFactory, SerializationFormatting.None);
 				writer.WriteRaw($"{bodyString}\n");
 			}
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			throw new NotSupportedException();
-		}
+
 	}
 }

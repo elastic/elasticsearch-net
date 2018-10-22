@@ -17,7 +17,7 @@ namespace Tests.Document.Multiple.Bulk
 		{
 			var client = TestClient.DefaultInMemoryClient;
 			var count = 100000;
-			var bytes = client.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(count));
+			var bytes = client.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(count), RecyclableMemoryStreamFactory.Default);
 			var x = Deserialize(bytes, client);
 			x.Items.Should().HaveCount(count).And.NotContain(i=>i == null);
 

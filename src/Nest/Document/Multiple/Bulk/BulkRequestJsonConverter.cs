@@ -18,6 +18,7 @@ namespace Nest
 			var sourceSerializer = settings?.SourceSerializer;
 			if (requestResponseSerializer == null|| bulk?.Operations == null) return ;
 
+			var memoryStreamFactory = settings?.MemoryStreamFactory;
 			foreach(var op in bulk.Operations)
 			{
 				op.Index = op.Index ?? bulk.Index ?? op.ClrType;
@@ -27,7 +28,7 @@ namespace Nest
 				op.Id = op.GetIdForOperation(settings.Inferrer);
 				op.Routing = op.GetRoutingForOperation(settings.Inferrer);
 
-				var opJson = requestResponseSerializer.SerializeToString(op, SerializationFormatting.None);
+				var opJson = requestResponseSerializer.SerializeToString(op, memoryStreamFactory, SerializationFormatting.None);
 				writer.WriteRaw($"{{\"{op.Operation}\":" + opJson + "}\n");
 				var body = op.GetBody();
 				if (body == null) continue;
@@ -36,7 +37,7 @@ namespace Nest
 						? requestResponseSerializer
 						: sourceSerializer
 					)
-					.SerializeToString(body, SerializationFormatting.None);
+					.SerializeToString(body, memoryStreamFactory, SerializationFormatting.None);
 
 				writer.WriteRaw(bodyJson + "\n");
 			}

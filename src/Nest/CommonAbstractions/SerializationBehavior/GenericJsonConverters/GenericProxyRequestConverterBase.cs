@@ -38,7 +38,8 @@ namespace Nest
 		{
 			var untypedDocumentRequest = (IProxyRequest)value;
 			var f = writer.Formatting == Formatting.Indented ? Indented : None;
-			using (var ms = new MemoryStream())
+			var memoryStreamFactory = serializer.GetConnectionSettings().MemoryStreamFactory;
+			using (var ms = memoryStreamFactory.Create())
 			{
 				untypedDocumentRequest.WriteJson(serializer.GetConnectionSettings().SourceSerializer, ms, f);
 				var v = Encoding.UTF8.GetString(ms.ToArray());

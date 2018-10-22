@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -14,7 +15,7 @@ namespace Nest.JsonNetSerializer
 		/// </summary>
 		public static MemoryStream ToStream(this JToken token)
 		{
-			var ms = new MemoryStream();
+			var ms = RecyclableMemoryStreamFactory.Default.Create();
 			using (var streamWriter = new StreamWriter(ms, ConnectionSettingsAwareSerializerBase.ExpectedEncoding, ConnectionSettingsAwareSerializerBase.DefaultBufferSize, leaveOpen: true))
 			using (var writer = new JsonTextWriter(streamWriter))
 			{
@@ -30,7 +31,7 @@ namespace Nest.JsonNetSerializer
 		/// </summary>
 		public static async Task<MemoryStream> ToStreamAsync(this JToken token, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			var ms = new MemoryStream();
+			var ms = RecyclableMemoryStreamFactory.Default.Create();
 			using (var streamWriter = new StreamWriter(ms, ConnectionSettingsAwareSerializerBase.ExpectedEncoding, ConnectionSettingsAwareSerializerBase.DefaultBufferSize, leaveOpen: true))
 			using (var writer = new JsonTextWriter(streamWriter))
 			{

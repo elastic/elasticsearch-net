@@ -63,9 +63,10 @@ namespace Nest
 
 			var settings = serializer.GetConnectionSettings();
 			var elasticsearchSerializer = settings.RequestResponseSerializer;
+			var memoryStreamFactory = settings.MemoryStreamFactory;
 			foreach (var data in request.Data)
 			{
-				var bodyJson = elasticsearchSerializer.SerializeToString(data, SerializationFormatting.None);
+				var bodyJson = elasticsearchSerializer.SerializeToString(data, memoryStreamFactory, SerializationFormatting.None);
 				writer.WriteRaw(bodyJson + "\n");
 			}
 		}

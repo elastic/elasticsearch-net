@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,7 +18,7 @@ namespace Elasticsearch.Net
 		{
 			if (stream == null) return Default(type);
 
-			using (var ms = new MemoryStream())
+			using (var ms = RecyclableMemoryStreamFactory.Default.Create())
 			using(stream)
 			{
 				stream.CopyTo(ms);
@@ -35,7 +34,7 @@ namespace Elasticsearch.Net
 		{
 			if (stream == null) return Default(type);
 
-			using (var ms = new MemoryStream())
+			using (var ms = RecyclableMemoryStreamFactory.Default.Create())
 			using (stream)
 			{
 				await stream.CopyToAsync(ms, BufferSize, cancellationToken).ConfigureAwait(false);
@@ -56,7 +55,7 @@ namespace Elasticsearch.Net
 		{
 			var serialized = SimpleJson.SerializeObject(data, Strategy);
 			if (formatting == SerializationFormatting.None) serialized = RemoveNewLinesAndTabs(serialized);
-			using (var ms = new MemoryStream(serialized.Utf8Bytes()))
+			using (var ms = RecyclableMemoryStreamFactory.Default.Create(serialized.Utf8Bytes()))
 			{
 				ms.CopyTo(writableStream);
 			}
@@ -67,17 +66,14 @@ namespace Elasticsearch.Net
 		{
 			var serialized = SimpleJson.SerializeObject(data, Strategy);
 			if (formatting == SerializationFormatting.None) serialized = RemoveNewLinesAndTabs(serialized);
-			using (var ms = new MemoryStream(serialized.Utf8Bytes()))
+			using (var ms = RecyclableMemoryStreamFactory.Default.Create(serialized.Utf8Bytes()))
 			{
 				await ms.CopyToAsync(writableStream).ConfigureAwait(false);
 			}
 		}
 
-		private static string RemoveNewLinesAndTabs(string input)
-		{
-			return new string(input
-				.Where(c => c != '\r' && c != '\n')
-				.ToArray());
-		}
+		private static string RemoveNewLinesAndTabs(string input) => new string(input
+			.Where(c => c != '\r' && c != '\n')
+			.ToArray());
 	}
 }

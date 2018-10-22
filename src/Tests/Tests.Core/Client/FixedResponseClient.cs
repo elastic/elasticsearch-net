@@ -28,7 +28,7 @@ namespace Tests.Core.Client
 			var serializer = TestClient.Default.RequestResponseSerializer;
 			byte[] fixedResult = null;
 			if (response is string s) fixedResult = Encoding.UTF8.GetBytes(s);
-			else if (contentType == RequestData.MimeType) fixedResult = serializer.SerializeToBytes(response);
+			else if (contentType == RequestData.MimeType) fixedResult = serializer.SerializeToBytes(response, RecyclableMemoryStreamFactory.Default);
 			else fixedResult = Encoding.UTF8.GetBytes(response.ToString());
 
 			var connection = new InMemoryConnection(fixedResult, statusCode, exception, contentType);

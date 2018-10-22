@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using System.Text;
+using Elasticsearch.Net;
+using FluentAssertions;
 using Tests.Core.Serialization;
 
 namespace Tests.Core.Extensions
@@ -32,6 +34,5 @@ namespace Tests.Core.Extensions
 			var roundTripResult = tester.Serializes(@object, expectedJson, preserveNullInExpected);
 			roundTripResult.ShouldBeValid(message);
 		}
-
 	}
 }

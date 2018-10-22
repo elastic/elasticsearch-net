@@ -22,7 +22,8 @@ namespace Nest
 			var settings = serializer.GetConnectionSettings();
 			var s = nativeType ? settings.RequestResponseSerializer : settings.SourceSerializer;
 			var f = writer.Formatting == Formatting.Indented ? SerializationFormatting.Indented : SerializationFormatting.None;
-			var v = s.SerializeToString(value, f);
+			var memoryStreamFactory = settings.MemoryStreamFactory;
+			var v = s.SerializeToString(value, memoryStreamFactory, f);
 			writer.WriteRawValue(v);
 		}
 

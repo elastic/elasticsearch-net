@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -16,10 +13,7 @@ namespace Nest.JsonNetSerializer.Converters
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
 
-		public HandleNestTypesOnSourceJsonConverter(IElasticsearchSerializer builtInSerializer)
-		{
-			_builtInSerializer = builtInSerializer;
-		}
+		public HandleNestTypesOnSourceJsonConverter(IElasticsearchSerializer builtInSerializer) => _builtInSerializer = builtInSerializer;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -27,7 +21,7 @@ namespace Nest.JsonNetSerializer.Converters
 				? SerializationFormatting.Indented
 				: SerializationFormatting.None;
 
-			using (var ms = new MemoryStream())
+			using (var ms = RecyclableMemoryStreamFactory.Default.Create())
 			using (var streamReader = new StreamReader(ms, ConnectionSettingsAwareSerializerBase.ExpectedEncoding))
 			using (var reader = new JsonTextReader(streamReader))
 			{

@@ -481,7 +481,7 @@ namespace Elasticsearch.Net
 			if (response == null)
 			{
 				//make sure we copy over the error body in case we disabled direct streaming.
-				var s = callDetails?.ResponseBodyInBytes == null ? Stream.Null : new MemoryStream(callDetails.ResponseBodyInBytes);
+				var s = callDetails?.ResponseBodyInBytes == null ? Stream.Null : this._settings.MemoryStreamFactory.Create(callDetails.ResponseBodyInBytes);
 				var m = callDetails?.ResponseMimeType ?? RequestData.MimeType;
 				response = ResponseBuilder.ToResponse<TResponse>(data, exception, callDetails?.HttpStatusCode, null, s, m);
 			}

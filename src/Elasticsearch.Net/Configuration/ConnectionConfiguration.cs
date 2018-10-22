@@ -138,7 +138,7 @@ namespace Elasticsearch.Net
 		private IReadOnlyCollection<int> _skipDeserializationForStatusCodes = new ReadOnlyCollection<int>(new int[] {});
 		IReadOnlyCollection<int> IConnectionConfigurationValues.SkipDeserializationForStatusCodes => _skipDeserializationForStatusCodes;
 
-		private IMemoryStreamFactory _memoryStreamFactory = new RecyclableMemoryStreamFactory();
+		private IMemoryStreamFactory _memoryStreamFactory = RecyclableMemoryStreamFactory.Default;
 		IMemoryStreamFactory IConnectionConfigurationValues.MemoryStreamFactory => _memoryStreamFactory;
 
 		private static void DefaultCompletedRequestHandler(IApiCallDetails response) { }

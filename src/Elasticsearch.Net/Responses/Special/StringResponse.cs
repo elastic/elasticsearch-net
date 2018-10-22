@@ -12,7 +12,7 @@ namespace Elasticsearch.Net
 		{
 			serverError = null;
 			if (string.IsNullOrEmpty(this.Body)) return false;
-			using(var stream = new MemoryStream(Encoding.UTF8.GetBytes(this.Body)))
+			using(var stream = RecyclableMemoryStreamFactory.Default.Create(Encoding.UTF8.GetBytes(this.Body)))
 				serverError = ServerError.Create(stream);
 			return true;
 		}

@@ -60,7 +60,8 @@ namespace Elasticsearch.Net
 			var boxedType = item.GetType();
 			if (typeof(byte[]).AssignableFrom(boxedType))
 			{
-				WrittenBytes = item as byte[]; Type = PostType.ByteArray;
+				this.WrittenBytes = item as byte[];
+				this.Type = PostType.ByteArray;
 			}
 			else if (typeof(string).AssignableFrom(boxedType))
 			{
@@ -84,24 +85,24 @@ namespace Elasticsearch.Net
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null;
-			Stream stream = null;
-			switch (Type)
+			Stream stream;
+			switch (this.Type)
 			{
 				case PostType.ByteArray:
-					ms = new MemoryStream(WrittenBytes);
+					ms = settings.MemoryStreamFactory.Create(this.WrittenBytes);
 					break;
 				case PostType.LiteralString:
-					ms = !string.IsNullOrEmpty(_literalString) ? new MemoryStream(_literalString?.Utf8Bytes()) : null;
+					ms = !string.IsNullOrEmpty(_literalString) ? settings.MemoryStreamFactory.Create(_literalString?.Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfString:
-					ms = _enumurableOfStrings.HasAny() ? new MemoryStream((string.Join(NewLineString, _enumurableOfStrings) + NewLineString).Utf8Bytes()) : null;
+					ms = _enumurableOfStrings.HasAny() ? settings.MemoryStreamFactory.Create((string.Join(NewLineString, _enumurableOfStrings) + NewLineString).Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 
 					if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
-						ms = new MemoryStream();
+						ms = settings.MemoryStreamFactory.Create();
 						stream = ms;
 					}
 					else stream = writableStream;
@@ -115,7 +116,7 @@ namespace Elasticsearch.Net
 					stream = writableStream;
 					if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
-						ms = new MemoryStream();
+						ms = settings.MemoryStreamFactory.Create();
 						stream = ms;
 					}
 					settings.RequestResponseSerializer.Serialize(this._serializable, stream, indent);
@@ -133,23 +134,24 @@ namespace Elasticsearch.Net
 		public override async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
-			MemoryStream ms = null; Stream stream = null;
-			switch (Type)
+			MemoryStream ms = null;
+			Stream stream;
+			switch (this.Type)
 			{
 				case PostType.ByteArray:
-					ms = new MemoryStream(WrittenBytes);
+					ms = new MemoryStream(this.WrittenBytes);
 					break;
 				case PostType.LiteralString:
-					ms = !string.IsNullOrEmpty(_literalString) ? new MemoryStream(_literalString.Utf8Bytes()) : null;
+					ms = !string.IsNullOrEmpty(_literalString) ? settings.MemoryStreamFactory.Create(_literalString.Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfString:
-					ms = _enumurableOfStrings.HasAny() ? new MemoryStream((string.Join(NewLineString, _enumurableOfStrings) + NewLineString).Utf8Bytes()) : null;
+					ms = _enumurableOfStrings.HasAny() ? settings.MemoryStreamFactory.Create((string.Join(NewLineString, _enumurableOfStrings) + NewLineString).Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 					if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
-						ms = new MemoryStream();
+						ms = settings.MemoryStreamFactory.Create();
 						stream = ms;
 					}
 					else stream = writableStream;
@@ -163,7 +165,7 @@ namespace Elasticsearch.Net
 					stream = writableStream;
 					if (this.DisableDirectStreaming ?? settings.DisableDirectStreaming)
 					{
-						ms = new MemoryStream();
+						ms = settings.MemoryStreamFactory.Create();
 						stream = ms;
 					}
 					await settings.RequestResponseSerializer.SerializeAsync(this._serializable, stream, indent, cancellationToken).ConfigureAwait(false);

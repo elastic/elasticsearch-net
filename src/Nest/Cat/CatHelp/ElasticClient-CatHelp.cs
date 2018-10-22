@@ -28,10 +28,10 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		private CatResponse<CatHelpRecord> DeserializeCatHelpResponse(IApiCallDetails response, Stream stream)
+		private CatResponse<CatHelpRecord> DeserializeCatHelpResponse(IApiCallDetails response, Stream stream, IMemoryStreamFactory memoryStreamFactory)
 		{
 			using (stream)
-			using (var ms = new MemoryStream())
+			using (var ms = memoryStreamFactory.Create())
 			{
 				stream.CopyTo(ms);
 				var body = ms.ToArray().Utf8String();
@@ -52,7 +52,7 @@ namespace Nest
 		public ICatResponse<CatHelpRecord> CatHelp(ICatHelpRequest request) =>
 			this.Dispatcher.Dispatch<ICatHelpRequest, CatHelpRequestParameters, CatResponse<CatHelpRecord>>(
 				request,
-				new Func<IApiCallDetails, Stream, CatResponse<CatHelpRecord>>(this.DeserializeCatHelpResponse),
+				new Func<IApiCallDetails, Stream, CatResponse<CatHelpRecord>>((response, stream) => this.DeserializeCatHelpResponse(response, stream, this.ConnectionSettings.MemoryStreamFactory)),
 				(p, d) => this.LowLevelDispatch.CatHelpDispatch<CatResponse<CatHelpRecord>>(p)
 			);
 
@@ -65,7 +65,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<ICatHelpRequest, CatHelpRequestParameters, CatResponse<CatHelpRecord>, ICatResponse<CatHelpRecord>>(
 				request,
 				cancellationToken,
-				new Func<IApiCallDetails, Stream, CatResponse<CatHelpRecord>>(this.DeserializeCatHelpResponse),
+				new Func<IApiCallDetails, Stream, CatResponse<CatHelpRecord>>((a, s) => this.DeserializeCatHelpResponse(a, s, this.ConnectionSettings.MemoryStreamFactory)),
 				(p, d, c) => this.LowLevelDispatch.CatHelpDispatchAsync<CatResponse<CatHelpRecord>>(p, c)
 			);
 

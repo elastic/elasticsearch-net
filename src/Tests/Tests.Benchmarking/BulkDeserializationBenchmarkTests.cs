@@ -24,10 +24,11 @@ namespace Tests.Benchmarking
 		public void Setup()
 		{
 			var serializer = Client.RequestResponseSerializer;
-			_tinyResponse = serializer.SerializeToBytes(ReturnBulkResponse(1));
-			_mediumResponse = serializer.SerializeToBytes(ReturnBulkResponse(100));
-			_largeResponse = serializer.SerializeToBytes(ReturnBulkResponse(1000));
-			_hugeResponse = serializer.SerializeToBytes(ReturnBulkResponse(100000));
+			var memoryStreamFactory = Client.ConnectionSettings.MemoryStreamFactory;
+			_tinyResponse = serializer.SerializeToBytes(ReturnBulkResponse(1), memoryStreamFactory);
+			_mediumResponse = serializer.SerializeToBytes(ReturnBulkResponse(100), memoryStreamFactory);
+			_largeResponse = serializer.SerializeToBytes(ReturnBulkResponse(1000), memoryStreamFactory);
+			_hugeResponse = serializer.SerializeToBytes(ReturnBulkResponse(100000), memoryStreamFactory);
 
 			_jsonSerializer = new JsonSerializer();
 		}

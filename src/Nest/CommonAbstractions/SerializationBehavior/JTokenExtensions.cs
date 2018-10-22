@@ -20,7 +20,7 @@ namespace Nest
 			this JToken token,
 			IMemoryStreamFactory memoryStreamFactory = null)
 		{
-			var ms = memoryStreamFactory?.Create() ?? new MemoryStream();
+			var ms = memoryStreamFactory?.Create() ?? RecyclableMemoryStreamFactory.Default.Create();
 			using (var streamWriter = new StreamWriter(ms, InternalSerializer.ExpectedEncoding, InternalSerializer.DefaultBufferSize, leaveOpen: true))
 			using (var writer = new JsonTextWriter(streamWriter))
 			{
@@ -40,7 +40,7 @@ namespace Nest
 			IMemoryStreamFactory memoryStreamFactory = null,
 			CancellationToken cancellationToken = default(CancellationToken))
 		{
-			var ms = memoryStreamFactory?.Create() ?? new MemoryStream();
+			var ms = memoryStreamFactory?.Create() ?? RecyclableMemoryStreamFactory.Default.Create();
 			using (var streamWriter = new StreamWriter(ms, InternalSerializer.ExpectedEncoding, InternalSerializer.DefaultBufferSize, leaveOpen: true))
 			using (var writer = new JsonTextWriter(streamWriter))
 			{

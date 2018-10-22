@@ -24,16 +24,24 @@ namespace Elasticsearch.Net
 
 	public static class ElasticsearchSerializerExtensions
 	{
-
-		public static byte[] SerializeToBytes<T>(this IElasticsearchSerializer serializer, T data, SerializationFormatting formatting = SerializationFormatting.Indented)
+		public static byte[] SerializeToBytes<T>(this IElasticsearchSerializer serializer, T data,
+			IMemoryStreamFactory memoryStreamFactory,
+			SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
-			using (var ms = new MemoryStream())
+			using (var ms = memoryStreamFactory.Create())
 			{
 				serializer.Serialize(data, ms, formatting);
+				//TODO this ToArray is problematic, needs to be GetBuffer but this can return a byte array with padding.
+				//Possible use case for span of t to slice
 				return ms.ToArray();
 			}
 		}
+		public static string SerializeToString<T>(this IElasticsearchSerializer serializer, T data,
+			IMemoryStreamFactory memoryStreamFactory,
+			SerializationFormatting formatting = SerializationFormatting.Indented
+		) => serializer.SerializeToBytes(data, memoryStreamFactory, formatting).Utf8String();
+
 		public static string SerializeToString<T>(this IElasticsearchSerializer serializer, T data, SerializationFormatting formatting = SerializationFormatting.Indented) =>
-			serializer.SerializeToBytes(data, formatting).Utf8String();
+			serializer.SerializeToBytes(data, RecyclableMemoryStreamFactory.Default, formatting).Utf8String();
 	}
 }
