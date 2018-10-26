@@ -22,9 +22,7 @@ namespace Tests.Aggregations.Bucket.Filter
 	*/
 	public class FilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		public FilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public FilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		public static string FirstNameToFind = Project.First.LeadDeveloper.FirstName.ToLowerInvariant();
 
@@ -72,7 +70,7 @@ namespace Tests.Aggregations.Bucket.Filter
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			/** === Handling Responses
+			/** ==== Handling Responses
 			* Using the `.Aggs` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
@@ -88,16 +86,14 @@ namespace Tests.Aggregations.Bucket.Filter
 	}
 
 	/**[float]
-	* == Empty Filter
+	* === Empty Filter
 	* When the collection of filters is empty or all are conditionless, NEST will serialize them
 	* to an empty object.
 	*/
 	[SkipVersion("5.0.0-alpha1", "https://github.com/elastic/elasticsearch/issues/17518")]
 	public class EmptyFilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		public EmptyFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
-		{
-		}
+		public EmptyFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -141,6 +137,7 @@ namespace Tests.Aggregations.Bucket.Filter
 	}
 
 	//reproduce of https://github.com/elastic/elasticsearch-net/issues/1931
+	// hide
 	public class InlineScriptFilterAggregationUsageTests : AggregationUsageTestBase
 	{
 		private string _ctxNumberofCommits = "_source.numberOfCommits > 0";

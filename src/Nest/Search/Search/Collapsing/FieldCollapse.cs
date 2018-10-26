@@ -37,27 +37,32 @@ namespace Nest
 		/// <inheritdoc/>
 		public Field Field { get; set; }
 
+		/// <inheritdoc/>
 		public IInnerHits InnerHits { get; set; }
 
+		/// <inheritdoc/>
 		public int? MaxConcurrentGroupSearches { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc cref="IFieldCollapse"/>
 	public class FieldCollapseDescriptor<T> : DescriptorBase<FieldCollapseDescriptor<T>, IFieldCollapse>, IFieldCollapse
 		where T : class
 	{
-		/// <inheritdoc/>
 		Field IFieldCollapse.Field { get; set; }
 		IInnerHits IFieldCollapse.InnerHits { get; set; }
 		int? IFieldCollapse.MaxConcurrentGroupSearches { get; set; }
 
+		/// <inheritdoc cref="IFieldCollapse.MaxConcurrentGroupSearches"/>
 		public FieldCollapseDescriptor<T> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) =>
 			Assign(a => a.MaxConcurrentGroupSearches = maxConcurrentGroupSearches);
 
+		/// <inheritdoc cref="IFieldCollapse.Field"/>
 		public FieldCollapseDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
+		/// <inheritdoc cref="IFieldCollapse.Field"/>
 		public FieldCollapseDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 
+		/// <inheritdoc cref="IFieldCollapse.InnerHits"/>
 		public FieldCollapseDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
 			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
 	}

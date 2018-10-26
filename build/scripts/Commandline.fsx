@@ -41,6 +41,7 @@ NOTE: both the `test` and `integrate` targets can be suffixed with `-all` to for
 Execution hints can be provided anywhere on the command line
 - skiptests : skip running tests as part of the target chain
 - skipdocs : skip generating documentation
+- docs:<B> : the branch name B to use when generating documentation
 - seed:<N> : provide a seed to run the tests with.
 - random:<K><:B> : sets random K to bool B if if B is omitted will default to true
   K can be: sourceserializer, typedkeys or oldconnection (only valid on windows)

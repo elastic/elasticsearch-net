@@ -123,7 +123,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			/** === Handling responses
+			/** ==== Handling responses
 			* Using the `.Aggs` aggregation helper on `ISearchResponse<T>`, we can fetch our aggregation results easily
 			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/

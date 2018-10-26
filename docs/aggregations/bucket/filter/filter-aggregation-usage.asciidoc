@@ -75,12 +75,10 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 Using the `.Aggs` aggregation helper we can fetch our aggregation results easily
 in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
-
-==== Handling Responses
 
 [source,csharp]
 ----
@@ -95,7 +93,7 @@ tags.Buckets.Should().NotBeEmpty();
 ----
 
 [float]
-== Empty Filter
+=== Empty Filter
 
 When the collection of filters is empty or all are conditionless, NEST will serialize them
 to an empty object.
@@ -150,66 +148,5 @@ new SearchRequest<Project>
 ----
 response.ShouldBeValid();
 response.Aggs.Filter("empty_filter").DocCount.Should().BeGreaterThan(0);
-----
-
-==== Fluent DSL example
-
-[source,csharp]
-----
-s => s
-.Aggregations(aggs => aggs
-    .Filter(_aggName, date => date
-        .Filter(f => f
-            .Script(b => b
-                .Inline(_ctxNumberofCommits)
-                .Lang("groovy")
-            )
-        )
-    )
-)
-----
-
-==== Object Initializer syntax example
-
-[source,csharp]
-----
-new SearchRequest<Project>
-{
-    Aggregations = new FilterAggregation(_aggName)
-    {
-        Filter = new ScriptQuery
-        {
-            Inline = _ctxNumberofCommits,
-            Lang = "groovy"
-    }
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "aggs": {
-    "script_filter": {
-      "filter": {
-        "script": {
-          "script": {
-            "inline": "_source.numberOfCommits > 0",
-            "lang": "groovy"
-          }
-        }
-      }
-    }
-  }
-}
-----
-
-==== Handling Responses
-
-[source,csharp]
-----
-response.ShouldBeValid();
-response.Aggs.Filter(_aggName).DocCount.Should().BeGreaterThan(0);
 ----
 

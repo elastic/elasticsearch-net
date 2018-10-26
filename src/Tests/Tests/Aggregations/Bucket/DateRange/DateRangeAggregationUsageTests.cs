@@ -87,7 +87,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			/** === Handling Responses
+			/** ==== Handling Responses
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
