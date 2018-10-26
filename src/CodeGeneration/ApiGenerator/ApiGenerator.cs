@@ -57,7 +57,7 @@ namespace ApiGenerator
 			"xpack.ml.delete_filter.json",
 			"xpack.ml.get_filters.json",
 			"xpack.ml.put_filter.json",
-			"rank_eval.json",
+			//"rank_eval.json",
 
 			// these API's are new and need to be mapped
 			"xpack.license.get_basic_status.json",

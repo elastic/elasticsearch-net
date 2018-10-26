@@ -3097,6 +3097,34 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public PutScriptDescriptor MasterTimeout(Time masterTimeout) => Qs("master_timeout", masterTimeout);
 	}
+	///<summary>descriptor for RankEval <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html</pre></summary>
+	public partial class RankEvalDescriptor  : RequestDescriptorBase<RankEvalDescriptor,RankEvalRequestParameters, IRankEvalRequest>, IRankEvalRequest
+	{ 
+		/// <summary>/_rank_eval</summary>
+		public RankEvalDescriptor() : base(){}
+		// values part of the url path
+		Indices IRankEvalRequest.Index => Self.RouteValues.Get<Indices>("index");
+
+		///<summary>A comma-separated list of index names to search; use the special string `_all` or Indices.All to perform the operation on all indices</summary>
+		public RankEvalDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+
+		///<summary>a shortcut into calling Index(typeof(TOther))</summary>
+		public RankEvalDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>A shortcut into calling Index(Indices.All)</summary>
+		public RankEvalDescriptor AllIndices() => this.Index(Indices.All);
+
+		// Request parameters
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public RankEvalDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public RankEvalDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public RankEvalDescriptor ExpandWildcards(ExpandWildcards? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	}
 	///<summary>descriptor for Reindex <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexOnServerDescriptor  : RequestDescriptorBase<ReindexOnServerDescriptor,ReindexOnServerRequestParameters, IReindexOnServerRequest>, IReindexOnServerRequest
 	{ 
