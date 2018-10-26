@@ -66,7 +66,7 @@ When a node is used for the very first time or when it's used for the first time
 
 `EnableDebugMode`::
 
-Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson() so that the original request and response JSON can be inspected.
+Turns on settings that aid in debugging like DisableDirectStreaming() and PrettyJson() so that the original request and response JSON can be inspected. It also always asks the server for the full stack trace on errors
 
 `EnableHttpCompression`::
 
@@ -128,7 +128,7 @@ Sets the default ping timeout in milliseconds for ping requests, which are used 
 
 `PrettyJson`::
 
-Forces all requests to have ?pretty=true querystring parameter appended,  causing Elasticsearch to return formatted JSON. Also forces the client to send out formatted JSON. Defaults to `false`
+Forces all requests to have ?pretty=true querystring parameter appended, causing Elasticsearch to return formatted JSON. Also forces the client to send out formatted JSON. Defaults to `false`
 
 `Proxy`::
 

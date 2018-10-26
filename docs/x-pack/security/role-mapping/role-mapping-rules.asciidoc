@@ -18,11 +18,6 @@ please modify the original csharp file found at the link and submit the PR with 
 X-Pack Security allows you to map role rules through the API as of 5.5
 NEST exposes this role rules DSL in a strongy typed fashion
 
-[source,csharp]
-----
-true
-----
-
 ==== Rule Conjunction
 
 You can create a conjuction of many rules using either `+` or `&` which are both overloaded to produce an `all` rule.
@@ -146,7 +141,9 @@ Expect(new
         x = "y",
         z = (object) null
     }
-}).WhenSerializing(new PutRoleMappingRequest("x")
+}, preserveNullInExpected: true)
+    .NoRoundTrip()
+    .WhenSerializing(new PutRoleMappingRequest("x")
 {
     Enabled = true,
     Roles = new[] {"admin"},

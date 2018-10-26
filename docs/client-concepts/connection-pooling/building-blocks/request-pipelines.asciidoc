@@ -54,7 +54,7 @@ allowing you to have requests executed in your own custom request pipeline
 
 [source,csharp]
 ----
-var transport = new Transport<ConnectionSettings>(
+var transport = new Transport<IConnectionSettingsValues>(
     settings,
     requestPipelineFactory,
     DateTimeProvider.Default,

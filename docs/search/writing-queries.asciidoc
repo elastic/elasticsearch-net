@@ -33,7 +33,7 @@ are returned. You can use `from` and `size` to paginate results.
 
 [source,csharp]
 ----
-var searchResponse = client.Search<Project>(s => s
+var searchResponse = _client.Search<Project>(s => s
     .Query(q => q
         .MatchAll()
     )
@@ -56,7 +56,7 @@ serializes to the same query DSL JSON
 
 [source,csharp]
 ----
-searchResponse = client.Search<Project>(s => s
+searchResponse = _client.Search<Project>(s => s
     .MatchAll()
 );
 ----
@@ -71,7 +71,7 @@ var searchRequest = new SearchRequest<Project>
     Query = new MatchAllQuery()
 };
 
-searchResponse = client.Search<Project>(searchRequest);
+searchResponse = _client.Search<Project>(searchRequest);
 ----
 
 ==== Search request parameters
@@ -111,7 +111,7 @@ example that looks for documents whose started on date falls within a specified 
 
 [source,csharp]
 ----
-var searchResponse = client.Search<Project>(s => s
+var searchResponse = _client.Search<Project>(s => s
     .Query(q => q
         .DateRange(r => r
             .Field(f => f.StartedOn)
@@ -145,7 +145,7 @@ clause
 
 [source,csharp]
 ----
-searchResponse = client.Search<Project>(s => s
+searchResponse = _client.Search<Project>(s => s
    .Query(q => q
        .Bool(b => b
            .Filter(bf => bf
@@ -207,7 +207,7 @@ to find all documents that contain `"Russ"` in the lead developer first name fie
 
 [source,csharp]
 ----
-var searchResponse = client.Search<Project>(s => s
+var searchResponse = _client.Search<Project>(s => s
     .Query(q => q
         .Match(m => m
             .Field(f => f.LeadDeveloper.FirstName)
@@ -252,7 +252,7 @@ An extremely common scenario is to combine separate queries together to form a
 
 [source,csharp]
 ----
-var searchResponse = client.Search<Project>(s => s
+var searchResponse = _client.Search<Project>(s => s
     .Query(q => q
         .Bool(b => b
             .Must(mu => mu
@@ -336,7 +336,7 @@ expressed as
 
 [source,csharp]
 ----
-searchResponse = client.Search<Project>(s => s
+searchResponse = _client.Search<Project>(s => s
     .Query(q => q
         .Match(m => m
             .Field(f => f.LeadDeveloper.FirstName)

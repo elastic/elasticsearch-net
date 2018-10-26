@@ -433,11 +433,11 @@ for property `C` on `B`
 
 [source,csharp]
 ----
-var newConnectionSettings = TestClient.CreateSettings(modifySettings: s => s
+var newConnectionSettings = new TestConnectionSettings()
     .InferMappingFor<A>(m => m
         .Rename(p => p.C, "d")
-    )
-);
+    );
+
 var newClient = new ElasticClient(newConnectionSettings);
 
 fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));

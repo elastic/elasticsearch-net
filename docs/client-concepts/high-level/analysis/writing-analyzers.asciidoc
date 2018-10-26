@@ -57,7 +57,7 @@ which maps to the `Name` POCO property on the `Project` type, uses the `whitespa
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("my-index", c => c
+var createIndexResponse = _client.CreateIndex("my-index", c => c
     .Mappings(m => m
         .Map<Project>(mm => mm
             .Properties(p => p
@@ -81,7 +81,7 @@ Configuring a built-in analyzer requires creating an analyzer based on the built
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("my-index", c => c
+var createIndexResponse = _client.CreateIndex("my-index", c => c
     .Settings(s => s
         .Analysis(a => a
             .Analyzers(aa => aa
@@ -166,7 +166,7 @@ We can solve our issue with a custom analyzer
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("questions", c => c
+var createIndexResponse = _client.CreateIndex("questions", c => c
     .Settings(s => s
         .Analysis(a => a
             .CharFilters(cf => cf
@@ -231,7 +231,7 @@ use at query time
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("questions", c => c
+var createIndexResponse = _client.CreateIndex("questions", c => c
     .Settings(s => s
         .Analysis(a => a
             .CharFilters(cf => cf

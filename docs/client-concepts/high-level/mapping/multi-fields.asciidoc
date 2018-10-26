@@ -38,7 +38,7 @@ POCO type is a `text` datatype with multi fields including a `keyword` sub field
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Person>(m => m
             .AutoMap()
@@ -75,7 +75,7 @@ as well as for structured search, sorting and aggregations
 
 [source,csharp]
 ----
-var searchResponse = client.Search<Person>(s => s
+var searchResponse = _client.Search<Person>(s => s
     .Query(q => q
         .Match(m => m
             .Field(f => f.Name)
@@ -136,7 +136,7 @@ Multi fields can be created on a mapping using the `.Fields()` method within a f
 
 [source,csharp]
 ----
-var createIndexResponse = client.CreateIndex("myindex", c => c
+var createIndexResponse = _client.CreateIndex("myindex", c => c
     .Mappings(ms => ms
         .Map<Person>(m => m
             .Properties(p => p

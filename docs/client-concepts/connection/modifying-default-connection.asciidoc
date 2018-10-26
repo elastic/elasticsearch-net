@@ -120,3 +120,60 @@ provides some examples
 If you are running on the Desktop CLR you can override specific properties for the current `ServicePoint` easily
 by overriding `AlterServicePoint` on an `IConnection` implementation deriving from `HttpConnection`
 
+[source,csharp]
+----
+public class MyCustomHttpConnection : HttpConnection
+{
+    protected override void AlterServicePoint(ServicePoint requestServicePoint, RequestData requestData)
+    {
+        base.AlterServicePoint(requestServicePoint, requestData);
+        requestServicePoint.ConnectionLimit = 10000;
+        requestServicePoint.UseNagleAlgorithm = true;
+    }
+}
+
+var connection = new MyCustomHttpConnection();
+var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var settings = new ConnectionSettings(connectionPool, connection);
+var client = new ElasticClient(settings);
+----
+
+The Connection limit has been increased from the default 80 to much higher and
+https://en.wikipedia.org/wiki/Nagle%27s_algorithm[nagling] has been enabled, which is disabled by default in the client.
+
+NOTE: The client reuses TCP connections through .NET's internal connection pooling,
+so changing the connection limit to something really high should only be done with careful
+consideration and testing. It's demonstrated here only as an example.
+
+[[x509-certificates]]
+===== X.509 Certificates
+
+It is possible to add X509 certificates to each request from the client by overriding the `CreateHttpWebRequest`
+method in an `IConnection` implementation deriving from `HttpConnection`
+
+[source,csharp]
+----
+public class X509CertificateHttpConnection : HttpConnection
+{
+    protected override HttpWebRequest CreateHttpWebRequest(RequestData requestData)
+    {
+        var request = base.CreateHttpWebRequest(requestData);
+        request.ClientCertificates.Add(new X509Certificate("file_path_to_cert"));
+        return request;
+    }
+}
+----
+
+As before, a new instance of the custom connection is passed to `ConnectionSettings` in order to
+use
+
+[source,csharp]
+----
+var connection = new X509CertificateHttpConnection();
+var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var settings = new ConnectionSettings(connectionPool, connection);
+var client = new ElasticClient(settings);
+----
+
+See <<working-with-certificates, Working with certificates>> for further details.
+

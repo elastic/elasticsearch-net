@@ -87,10 +87,9 @@ on the request
 
 [source,csharp]
 ----
-Uri requestUri = null;
-var client = TestClient.GetInMemoryClient(s=>s.OnRequestCompleted(r => { requestUri = r.Uri; }));
-
+var client = TestClient.Default;
 var response = client.Search<Project>(s => s.Index("some-other-index")); <1>
+var requestUri = response.ApiCall.Uri;
 
 requestUri.Should().NotBeNull();
 requestUri.LocalPath.Should().StartWith("/some-other-index/");
@@ -103,13 +102,11 @@ index name and any index name specified for the POCO type using `.MapDefaultType
 
 [source,csharp]
 ----
-var client = TestClient.GetInMemoryClient(s=>
-    new ConnectionSettings()
-        .DefaultIndex("defaultindex")
-        .MapDefaultTypeIndices(m => m
-            .Add(typeof(Project), "projects")
-        )
-);
+var client = new ElasticClient(new AlwaysInMemoryConnectionSettings()
+    .DefaultIndex("defaultindex")
+    .InferMappingFor<Project>(m => m
+        .IndexName("projects")
+    ));
 
 var response = client.Search<Project>(s => s.Index("some-other-index")); <1>
 

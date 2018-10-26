@@ -42,11 +42,11 @@ Here are some examples of how implicit conversions can be used to specify index 
 [source,csharp]
 ----
 Nest.Indices singleIndexFromString = "name";
-Nest.Indices multipleIndicesFromString = "name1, name2";
+Nest.Indices multipleIndicesFromString = "name1,name2";
 Nest.Indices multipleIndicesFromStringArray = new [] { "name1", "name2" };
 Nest.Indices allFromString = "_all";
 
-Nest.Indices allWithOthersFromString = "_all, name2"; <1>
+Nest.Indices allWithOthersFromString = "_all,name2"; <1>
 
 Nest.Indices singleIndexFromType = typeof(Project); <2>
 
@@ -118,7 +118,7 @@ ISearchRequest singleTypedRequest = new SearchDescriptor<Project>().Index(single
 ((IUrlParameter)singleStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1");
 ((IUrlParameter)singleTypedRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("project");
 
-var invalidSingleString = Index("name1, name2"); <3>
+var invalidSingleString = Index("name1,name2"); <3>
 ----
 <1> specifying a single index using a string
 
