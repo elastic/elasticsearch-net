@@ -36,7 +36,7 @@ namespace Tests.XPack.Security.Role.PutRole
 		protected override bool SupportsDeserialization => false;
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
-		private string Role => $"role-{CallIsolatedValue}";
+		protected string Role => $"role-{CallIsolatedValue}";
 
 		protected override object ExpectJson => new
 		{
@@ -134,6 +134,47 @@ namespace Tests.XPack.Security.Role.PutRole
 		protected override void ExpectResponse(IPutRoleResponse response)
 		{
 		}
+	}
+
+	[SkipVersion("<6.4.0", "Application privileges introduced in 6.4.0")]
+	public class PutRoleApplicationsTests : PutRoleApiTests
+	{
+		public PutRoleApplicationsTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			applications = new []
+			{
+				new
+				{
+					application = "myapp",
+					privileges = new[] { "admin", "read" },
+					resources = new[] { "*" }
+				}
+			}
+		};
+
+		protected override PutRoleRequest Initializer => new PutRoleRequest(this.Role)
+		{
+			Applications = new List<IApplicationPrivileges>
+			{
+				new ApplicationPrivileges
+				{
+					Application = "myapp",
+					Privileges = new [] { "admin", "read" },
+					Resources = new [] { "*"}
+				}
+			}
+		};
+
+		protected override Func<PutRoleDescriptor, IPutRoleRequest> Fluent => f => f
+			.Applications(a => a
+				.Add<Project>(ap => ap
+					.Application("myapp")
+					.Privileges("admin", "read")
+					.Resources("*")
+				)
+			);
 	}
 
 }

@@ -21,6 +21,7 @@ namespace Nest
 		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
 	}
+
 	public class IndicesPrivileges : IIndicesPrivileges
 	{
 		[JsonConverter(typeof(IndicesJsonConverter))]
