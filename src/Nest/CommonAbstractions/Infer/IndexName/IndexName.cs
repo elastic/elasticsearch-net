@@ -8,9 +8,10 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
+		private const char ClusterSeparator = ':';
+
 		private static int TypeHashCode { get; } = typeof(IndexName).GetHashCode();
 
-		private static readonly char[] ClusterSeparator = {':'};
 		internal string DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
 
 		public string Cluster { get; }
@@ -47,10 +48,17 @@ namespace Nest
 		private static IndexName Parse(string indexName)
 		{
 			if (string.IsNullOrWhiteSpace(indexName)) return null;
-			var tokens = indexName.Split(ClusterSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
-			return tokens.Length == 1
-				? new IndexName(tokens[0])
-				: new IndexName(tokens[1],tokens[0]);
+
+			var separatorIndex = indexName.IndexOf(ClusterSeparator);
+
+			if (separatorIndex > -1)
+			{
+				var cluster = indexName.Substring(0, separatorIndex);
+				var index = indexName.Substring(separatorIndex + 1);
+				return new IndexName(index, cluster);
+			}
+
+			return new IndexName(indexName);
 		}
 
 		public static implicit operator IndexName(string indexName) => Parse(indexName);
@@ -100,7 +108,7 @@ namespace Nest
 		public string GetString(IConnectionConfigurationValues settings)
 		{
 			if (!(settings is IConnectionSettingsValues nestSettings))
-				throw new Exception("Tried to pass index name on querysting but it could not be resolved because no nest settings are available");
+				throw new Exception("Tried to pass index name on querystring but it could not be resolved because no nest settings are available");
 
 			return nestSettings.Inferrer.IndexName(this);
 		}
