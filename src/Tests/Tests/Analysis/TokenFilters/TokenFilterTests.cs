@@ -46,7 +46,7 @@ namespace Tests.Analysis.TokenFilters
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.DelimitedPayload(n, t => t.Delimiter('-').Encoding(DelimitedPayloadEncoding.Identity));
 
-			public override object Json => new { type = "delimited_payload_filter", delimiter = "-", encoding = "identity" };
+			public override object Json => new { type = "delimited_payload", delimiter = "-", encoding = "identity" };
 		}
 
 		public class DictionaryDecompounderTests : TokenFilterAssertionBase<DictionaryDecompounderTests>
