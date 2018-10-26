@@ -1,17 +1,13 @@
 {
-  "xpack.license.post_start_trial": {
+  "xpack.license.post_start_basic": {
     "documentation": "https://www.elastic.co/guide/en/x-pack/current/license-management.html",
     "methods": ["POST"],
     "url": {
-      "path": "/_xpack/license/start_trial",
-      "paths": ["/_xpack/license/start_trial"],
+      "path": "/_xpack/license/start_basic",
+      "paths": ["/_xpack/license/start_basic"],
       "parts" : {
       },
       "params": {
-        "type": {
-          "type" : "string",
-          "description" : "The type of trial license to generate (default: \"trial\")"
-        },
         "acknowledge": {
           "type" : "boolean",
           "description" : "whether the user has acknowledged acknowledge messages (default: false)"
