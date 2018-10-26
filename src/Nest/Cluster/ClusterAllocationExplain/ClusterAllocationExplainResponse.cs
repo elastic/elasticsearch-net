@@ -376,6 +376,24 @@ namespace Nest
 		/// A better replica location is identified and causes the existing replica allocation to be cancelled.
 		///</summary>
 		[EnumMember(Value = "REALLOCATED_REPLICA")]
-		ReallocatedReplica
+		ReallocatedReplica,
+
+		///<summary>
+		/// Unassigned as a result of a failed primary while the replica was initializing.
+		///</summary>
+		[EnumMember(Value = "PRIMARY_FAILED")]
+		PrimaryFailed,
+
+		///<summary>
+		/// Unassigned after forcing an empty primary
+		///</summary>
+		[EnumMember(Value = "FORCED_EMPTY_PRIMARY")]
+		ForcedEmptyPrimary,
+
+		///<summary>
+		/// Forced manually to allocate
+		///</summary>
+		[EnumMember(Value = "MANUAL_ALLOCATION")]
+		ManualAllocation
 	}
 }
