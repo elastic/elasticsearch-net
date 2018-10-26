@@ -154,11 +154,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		//hide
 		[U] public void ImplicitConversionReadsCluster()
 		{
-			var i = (IndexName)"cluster_one  :  project  ";
-			i.Cluster.Should().Be("cluster_one");
-			i.Name.Should().Be("project");
-
-			i = (IndexName)"cluster_one:project";
+			var i = (IndexName)"cluster_one:project";
 			i.Cluster.Should().Be("cluster_one");
 			i.Name.Should().Be("project");
 

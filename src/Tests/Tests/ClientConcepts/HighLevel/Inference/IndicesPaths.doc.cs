@@ -36,11 +36,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U] public void ImplicitConversions()
 		{
 			Nest.Indices singleIndexFromString = "name";
-			Nest.Indices multipleIndicesFromString = "name1, name2";
+			Nest.Indices multipleIndicesFromString = "name1,name2";
 			Nest.Indices multipleIndicesFromStringArray = new [] { "name1", "name2" };
 			Nest.Indices allFromString = "_all";
 
-			Nest.Indices allWithOthersFromString = "_all, name2"; //<1> `_all` will override any specific index names here
+			Nest.Indices allWithOthersFromString = "_all,name2"; //<1> `_all` will override any specific index names here
 
 			Nest.Indices singleIndexFromType = typeof(Project); //<2> The `Project` type has been mapped to a specific index name using <<index-name-type-mapping,`.InferMappingFor<Project>`>>
 
@@ -112,7 +112,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			((IUrlParameter)singleStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1");
 			((IUrlParameter)singleTypedRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("project");
 
-			var invalidSingleString = Index("name1, name2"); //<3> an **invalid** single index name
+			var invalidSingleString = Index("name1,name2"); //<3> an **invalid** single index name
 		}
 
 		/**===== Multiple indices

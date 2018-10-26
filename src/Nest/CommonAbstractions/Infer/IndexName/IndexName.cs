@@ -8,10 +8,10 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
-		private static readonly char[] ClusterSeparator = {':'};
+		private const char ClusterSeparator = ':';
+
 		internal string DebugDisplay => Type == null ? Name : $"{nameof(IndexName)} for typeof: {Type?.Name}";
 
-		//TODO 6.0 make setters private and use constructor
 		public string Cluster { get; set; }
 		public string Name { get; set; }
 		public Type Type { get; set; }
@@ -27,10 +27,17 @@ namespace Nest
 		private static IndexName Parse(string indexName)
 		{
 			if (string.IsNullOrWhiteSpace(indexName)) return null;
-			var tokens = indexName.Split(ClusterSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
-			return tokens.Length == 1
-				? new IndexName { Name = tokens[0].Trim() }
-				: new IndexName { Name = tokens[1].Trim(), Cluster = tokens[0].Trim() };
+
+			var separatorIndex = indexName.IndexOf(ClusterSeparator);
+
+			if (separatorIndex > -1)
+			{
+				var cluster = indexName.Substring(0, separatorIndex);
+				var index = indexName.Substring(separatorIndex + 1);
+				return new IndexName { Name = index, Cluster = cluster };
+			}
+
+			return new IndexName { Name = indexName };
 		}
 
 		public static implicit operator IndexName(string indexName) => Parse(indexName);
@@ -83,12 +90,10 @@ namespace Nest
 
 		public string GetString(IConnectionConfigurationValues settings)
 		{
-			var nestSettings = settings as IConnectionSettingsValues;
-			if (nestSettings == null)
-				throw new Exception("Tried to pass index name on querysting but it could not be resolved because no nest settings are available");
+			if (!(settings is IConnectionSettingsValues nestSettings))
+				throw new Exception("Tried to pass index name on querystring but it could not be resolved because no nest settings are available");
 
 			return nestSettings.Inferrer.IndexName(this);
 		}
-
 	}
 }
