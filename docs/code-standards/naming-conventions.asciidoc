@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/CodeStandards/NamingConventions.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/CodeStandards/NamingConventions.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -97,7 +97,8 @@ var exceptions = new[] <1>
 {
     //TODO These are new API's should be removed, also add test that no request or response starts with Xpack
     //only XPack
-
+    //TODO MAP THIS
+    typeof(RankEvalRequest),
     //TODO add unit tests that we have no requests starting with Exists
     typeof(SourceExistsRequest),
     typeof(SourceExistsRequest<>),
@@ -145,12 +146,10 @@ var exceptions = new List<Type>
 {
     nestAssembly.GetType("System.AssemblyVersionInformation", throwOnError: false),
     nestAssembly.GetType("System.Runtime.Serialization.Formatters.FormatterAssemblyStyle", throwOnError: false),
+    typeof(SynchronizedCollection<>),
+    nestAssembly.GetType("System.ComponentModel.Browsable", throwOnError: false),
     nestAssembly.GetType("Microsoft.CodeAnalysis.EmbeddedAttribute", throwOnError: false),
     nestAssembly.GetType("System.Runtime.CompilerServices.IsReadOnlyAttribute", throwOnError: false),
-    typeof(SynchronizedCollection<>),
-#if DOTNETCORE
-    nestAssembly.GetType("System.ComponentModel.Browsable", throwOnError: false)
-#endif
 };
 
 var types = nestAssembly.GetTypes();
@@ -179,9 +178,7 @@ var exceptions = new List<Type>
     elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierDotNet"),
     elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierMono"),
     elasticsearchNetAssembly.GetType("Purify.Purifier+UriInfo"),
-#if DOTNETCORE
     elasticsearchNetAssembly.GetType("System.ComponentModel.Browsable")
-#endif
 };
 
 var types = elasticsearchNetAssembly.GetTypes();
@@ -194,17 +191,13 @@ var typesNotIElasticsearchNetNamespace = types
 
 typesNotIElasticsearchNetNamespace.Should().BeEmpty();
 
-bool nextMustBeStartChar = true;
+var nextMustBeStartChar = true;
 if (value.Length == 0)
     return false;
-for (int index = 0; index < value.Length; ++index)
+for (var index = 0; index < value.Length; ++index)
 {
     var character = value[index];
-#if DOTNETCORE
     var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);
-#else
-    var unicodeCategory = char.GetUnicodeCategory(character);
-#endif
     switch (unicodeCategory)
     {
         case UnicodeCategory.UppercaseLetter:

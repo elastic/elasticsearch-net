@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/ClientConcepts/HighLevel/Inference/FieldInference.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/HighLevel/Inference/FieldInference.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -75,8 +75,8 @@ value that may also be passed as the second constructor argument
 [source,csharp]
 ----
 Field fieldString = "name^2";
-Field fieldStringConstructor = new Field("name^2");
-Field fieldStringCreate = new Field("name^2", 3); <1>
+var fieldStringConstructor = new Field("name^2");
+var fieldStringCreate = new Field("name^2", 3); <1>
 
 fieldString.Name.Should().Be("name");
 fieldStringConstructor.Name.Should().Be("name");
@@ -476,7 +476,7 @@ The following example class will demonstrate this precedence
 
 [source,csharp]
 ----
-class Precedence
+private class Precedence
 {
     [Text(Name = "renamedIgnoresNest")]
     [PropertyName("renamedIgnoresJsonProperty"),JsonProperty("renamedIgnoresJsonProperty")]
@@ -518,7 +518,7 @@ and hook it up when creating the Connection Settings in the following section.
 
 [source,csharp]
 ----
-class CustomPropertyMappingProvider : PropertyMappingProvider
+private class CustomPropertyMappingProvider : PropertyMappingProvider
 {
     public override IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
     {

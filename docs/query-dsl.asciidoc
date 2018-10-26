@@ -104,6 +104,8 @@ NEST exposes all of the term queries available in Elasticsearch
 
 * <<date-range-query-usage,Date Range Query Usage>>
 
+* <<long-range-query-usage,Long Range Query Usage>>
+
 * <<numeric-range-query-usage,Numeric Range Query Usage>>
 
 * <<term-range-query-usage,Term Range Query Usage>>
@@ -141,6 +143,8 @@ include::query-dsl/term-level/ids/ids-query-usage.asciidoc[]
 include::query-dsl/term-level/prefix/prefix-query-usage.asciidoc[]
 
 include::query-dsl/term-level/range/date-range-query-usage.asciidoc[]
+
+include::query-dsl/term-level/range/long-range-query-usage.asciidoc[]
 
 include::query-dsl/term-level/range/numeric-range-query-usage.asciidoc[]
 

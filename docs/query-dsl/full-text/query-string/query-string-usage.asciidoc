@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/QueryDsl/FullText/QueryString/QueryStringUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/FullText/QueryString/QueryStringUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -42,6 +42,7 @@ q
     .MinimumShouldMatch(2)
     .QuoteFieldSuffix("'")
     .Lenient()
+    .AutoGenerateSynonymsPhraseQuery(false)
 )
 ----
 
@@ -71,7 +72,8 @@ new QueryStringQuery
     AnalyzeWildcard = true,
     MinimumShouldMatch = 2,
     QuoteFieldSuffix = "'",
-    Lenient = true
+    Lenient = true,
+    AutoGenerateSynonymsPhraseQuery = false
 }
 ----
 
@@ -103,7 +105,8 @@ new QueryStringQuery
     "rewrite": "constant_score",
     "fuzzy_rewrite": "constant_score",
     "quote_field_suffix": "'",
-    "escape": true
+    "escape": true,
+    "auto_generate_synonyms_phrase_query": false
   }
 }
 ----

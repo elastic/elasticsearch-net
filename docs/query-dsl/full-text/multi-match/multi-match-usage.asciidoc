@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/QueryDsl/FullText/MultiMatch/MultiMatchUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/FullText/MultiMatch/MultiMatchUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -37,6 +37,7 @@ q
     .Lenient()
     .ZeroTermsQuery(ZeroTermsQuery.All)
     .Name("named_query")
+    .AutoGenerateSynonymsPhraseQuery(false)
 )
 ----
 
@@ -61,7 +62,8 @@ new MultiMatchQuery
     CutoffFrequency = 0.001,
     Lenient = true,
     ZeroTermsQuery = ZeroTermsQuery.All,
-    Name = "named_query"
+    Name = "named_query",
+    AutoGenerateSynonymsPhraseQuery = false
 }
 ----
 
@@ -88,7 +90,8 @@ new MultiMatchQuery
       "description",
       "myOtherField"
     ],
-    "zero_terms_query": "all"
+    "zero_terms_query": "all",
+    "auto_generate_synonyms_phrase_query": false
   }
 }
 ----

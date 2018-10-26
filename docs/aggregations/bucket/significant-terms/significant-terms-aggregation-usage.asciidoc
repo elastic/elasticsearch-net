@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Aggregations/Bucket/SignificantTerms/SignificantTermsAggregationUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Aggregations/Bucket/SignificantTerms/SignificantTermsAggregationUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -120,7 +120,7 @@ new SignificantTermsAggregation("significant_names")
         BackgroundIsSuperSet = true,
         IncludeNegatives = true
     },
-    Include = new SignificantTermsIncludeExclude("pi*")
+    Include = new IncludeExclude("pi*")
 }
 ----
 
@@ -187,7 +187,7 @@ new SignificantTermsAggregation("significant_names")
         BackgroundIsSuperSet = true,
         IncludeNegatives = true
     },
-    Exclude = new SignificantTermsIncludeExclude(new[] {"pierce"})
+    Exclude = new IncludeExclude(new[] {"pierce"})
 }
 ----
 

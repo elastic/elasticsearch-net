@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/QueryDsl/FullText/Match/MatchUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/FullText/Match/MatchUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -33,6 +33,7 @@ q
     .Operator(Operator.Or)
     .FuzzyRewrite(MultiTermQueryRewrite.TopTermsBlendedFreqs(10))
     .Name("named_query")
+    .AutoGenerateSynonymsPhraseQuery(false)
 )
 ----
 
@@ -53,7 +54,8 @@ new MatchQuery
     MinimumShouldMatch = 2,
     FuzzyRewrite = MultiTermQueryRewrite.TopTermsBlendedFreqs(10),
     Lenient = true,
-    Operator = Operator.Or
+    Operator = Operator.Or,
+    AutoGenerateSynonymsPhraseQuery = false
 }
 ----
 
@@ -73,7 +75,8 @@ new MatchQuery
       "cutoff_frequency": 0.001,
       "lenient": true,
       "minimum_should_match": 2,
-      "operator": "or"
+      "operator": "or",
+      "auto_generate_synonyms_phrase_query": false
     }
   }
 }

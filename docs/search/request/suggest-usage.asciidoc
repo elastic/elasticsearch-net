@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Search/Request/SuggestUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/Request/SuggestUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -58,6 +58,7 @@ s => s
         .Field(p => p.Suggest)
         .Size(8)
         .Prefix(Project.Instance.Name)
+        .SkipDuplicates()
     )
     .Phrase("my-phrase-suggest", ph => ph
         .Collate(c => c
@@ -128,7 +129,8 @@ new SearchRequest<Project>
                 },
                 Analyzer = "simple",
                 Field = Field<Project>(p=>p.Suggest),
-                Size = 8
+                Size = 8,
+                SkipDuplicates = true
             }
         } },
         { "my-phrase-suggest", new SuggestBucket
@@ -194,7 +196,8 @@ new SearchRequest<Project>
           "transpositions": true,
           "unicode_aware": false
         },
-        "size": 8
+        "size": 8,
+        "skip_duplicates": true
       },
       "prefix": "Durgan LLC"
     },

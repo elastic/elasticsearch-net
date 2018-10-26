@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/QueryDsl/FullText/SimpleQueryString/SimpleQueryStringUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/QueryDsl/FullText/SimpleQueryString/SimpleQueryStringUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -31,6 +31,10 @@ q
     .Lenient()
     .AnalyzeWildcard()
     .MinimumShouldMatch("30%")
+    .FuzzyPrefixLength(0)
+    .FuzzyMaxExpansions(50)
+    .FuzzyTranspositions()
+    .AutoGenerateSynonymsPhraseQuery(false)
 )
 ----
 
@@ -49,7 +53,11 @@ new SimpleQueryStringQuery
     Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
     Lenient = true,
     AnalyzeWildcard = true,
-    MinimumShouldMatch = "30%"
+    MinimumShouldMatch = "30%",
+    FuzzyPrefixLength = 0,
+    FuzzyMaxExpansions = 50,
+    FuzzyTranspositions = true,
+    AutoGenerateSynonymsPhraseQuery = false
 }
 ----
 
@@ -70,7 +78,11 @@ new SimpleQueryStringQuery
     "flags": "AND|NEAR",
     "lenient": true,
     "analyze_wildcard": true,
-    "minimum_should_match": "30%"
+    "minimum_should_match": "30%",
+    "fuzzy_prefix_length": 0,
+    "fuzzy_max_expansions": 50,
+    "fuzzy_transpositions": true,
+    "auto_generate_synonyms_phrase_query": false
   }
 }
 ----

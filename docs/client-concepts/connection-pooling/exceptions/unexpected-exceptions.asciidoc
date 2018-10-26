@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/ClientConcepts/ConnectionPooling/Exceptions/UnexpectedExceptions.doc.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/ClientConcepts/ConnectionPooling/Exceptions/UnexpectedExceptions.doc.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -77,11 +77,7 @@ Finally, we assert that we can still see the audit trail for the whole coordinat
 ----
 var audit = new Auditor(() => Framework.Cluster
     .Nodes(10)
-#if DOTNETCORE
-    .ClientCalls(r => r.OnPort(9200).FailAlways(new System.Net.Http.HttpRequestException("recover")))
-#else
-    .ClientCalls(r => r.OnPort(9200).FailAlways(new WebException("recover"))) <1>
-#endif
+    .ClientCalls(r => r.OnPort(9200).FailAlways(new System.Net.Http.HttpRequestException("recover"))) <1>
     .ClientCalls(r => r.OnPort(9201).FailAlways(new Exception("boom!"))) <2>
     .StaticConnectionPool()
     .Settings(s => s.DisablePing())
@@ -100,7 +96,7 @@ audit = await audit.TraceUnexpectedException(
     }
 );
 ----
-<1> calls on 9200 set up to throw a `WebException`
+<1> calls on 9200 set up to throw a `HttpRequestException`
 
 <2> calls on 9201 set up to throw an `Exception`
 

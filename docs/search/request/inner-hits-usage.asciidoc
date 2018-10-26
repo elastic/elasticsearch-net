@@ -7,7 +7,7 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/6.x/src/Tests/Tests/Search/Request/InnerHitsUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/Tests/Search/Request/InnerHitsUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
@@ -154,6 +154,7 @@ foreach (var hit in response.Hits)
     hit.Id.Should().NotBeNullOrEmpty();
     hit.Index.Should().NotBeNullOrEmpty();
     hit.Version?.Should().Be(1);
+
 
     var princes = hit.InnerHits["princes"].Documents<Prince>();
     princes.Should().NotBeEmpty();
