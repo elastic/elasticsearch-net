@@ -4,6 +4,9 @@ using System.Diagnostics;
 
 namespace Elasticsearch.Net
 {
+	/// <summary>
+	/// Details about the API call
+	/// </summary>
 	public interface IApiCallDetails
 	{
 		/// <summary>
@@ -11,12 +14,12 @@ namespace Elasticsearch.Net
 		/// </summary>
 		bool Success { get; }
 
-		/// <summary>The response mime type </summary>
+		/// <summary>The response MIME type </summary>
 		string ResponseMimeType { get; }
 
 		/// <summary>
 		/// If <see cref="Success"/> is <c>false</c>, this will hold the original exception.
-		/// This will be the orginating CLR exception in most cases.
+		/// This will be the originating CLR exception in most cases.
 		/// </summary>
 		Exception OriginalException { get; }
 
@@ -55,7 +58,7 @@ namespace Elasticsearch.Net
         [DebuggerDisplay("{RequestBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(RequestBodyInBytes) : null,nq}")]
 		byte[] RequestBodyInBytes { get; }
 
-		//TODO Get rid of setter
+		//TODO: Get rid of setter
         /// <summary>
         /// An audit trail of requests made to nodes within the cluster
         /// </summary>

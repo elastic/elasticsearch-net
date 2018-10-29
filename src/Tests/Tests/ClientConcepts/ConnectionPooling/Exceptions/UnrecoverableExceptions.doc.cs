@@ -9,6 +9,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Domain;
 using Tests.Framework;
+using Tests.Framework.SerializationTests;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 {
@@ -99,14 +100,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			);
 		}
 
-		private static byte[] HtmlNginx401Response = Encoding.UTF8.GetBytes(@"<html>
-<head><title>401 Authorization Required</title></head>
-<body bgcolor=""white"">
-<center><h1>401 Authorization Required</h1></center>
-<hr><center>nginx/1.4.6 (Ubuntu)</center>
-</body>
-</html>
-");
+		private static byte[] HtmlNginx401Response = Encoding.UTF8.GetBytes(StubResponse.NginxHtml401Response);
 
 		/**
 		 * When a bad authentication response occurs, the client attempts to deserialize the response body returned;
