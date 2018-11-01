@@ -143,6 +143,11 @@
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="All other members" /&gt;&#xD;
   &lt;/TypePattern&gt;&#xD;
+  &lt;TypePattern DisplayName="Literate Doc Tests"&gt;&#xD;
+    &lt;TypePattern.Match&gt;&#xD;
+      &lt;Name Is="*.doc.cs" IgnoreCase="True" /&gt;&#xD;
+    &lt;/TypePattern.Match&gt;&#xD;
+  &lt;/TypePattern&gt;&#xD;
   &lt;TypePattern DisplayName="Default Pattern" RemoveRegions="All" Priority="0"&gt;&#xD;
     &lt;Entry DisplayName="Public Delegates" Priority="100"&gt;&#xD;
       &lt;Entry.Match&gt;&#xD;
@@ -213,7 +218,8 @@
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
         &lt;Access /&gt;&#xD;
-        &lt;Name Is="Enter Pattern Here" /&gt;&#xD;
+        &lt;Override /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Interface Implementations"&gt;&#xD;
@@ -232,7 +238,7 @@
     &lt;Entry DisplayName="All other members"&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
         &lt;Access /&gt;&#xD;
-        &lt;Name Is="Enter Pattern Here" /&gt;&#xD;
+        &lt;Override /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Nested Types"&gt;&#xD;
