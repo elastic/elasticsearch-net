@@ -14,43 +14,21 @@ namespace Tests.Benchmarking
 	public class BulkDeserializationBenchmarkTests
 	{
 		private static readonly IElasticClient Client = TestClient.DefaultInMemoryClient;
-		private byte[] _tinyResponse;
-		private byte[] _mediumResponse;
-		private byte[] _largeResponse;
 		private byte[] _hugeResponse;
 		private JsonSerializer _jsonSerializer;
+		private byte[] _largeResponse;
+		private byte[] _mediumResponse;
+		private byte[] _tinyResponse;
 
-		[GlobalSetup]
-		public void Setup()
+		[Benchmark(Description = "Baseline", Baseline = true)]
+		public BulkResponse Baseline()
 		{
-			var serializer = Client.RequestResponseSerializer;
-			_tinyResponse = serializer.SerializeToBytes(ReturnBulkResponse(1));
-			_mediumResponse = serializer.SerializeToBytes(ReturnBulkResponse(100));
-			_largeResponse = serializer.SerializeToBytes(ReturnBulkResponse(1000));
-			_hugeResponse = serializer.SerializeToBytes(ReturnBulkResponse(100000));
+			using (var reader = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
+			{
+				while (reader.Read()) { }
 
-			_jsonSerializer = new JsonSerializer();
-		}
-
-		[Benchmark(Description = "deserialize 1 item in bulk response")]
-		public BulkResponse TinyResponse()
-		{
-			using (var ms = new MemoryStream(_tinyResponse))
-				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
-		}
-
-		[Benchmark(Description = "deserialize 100 items in bulk response")]
-		public BulkResponse MediumResponse()
-		{
-			using (var ms = new MemoryStream(_mediumResponse))
-				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
-		}
-
-		[Benchmark(Description = "deserialize 1,000 items in bulk response")]
-		public BulkResponse LargeResponse()
-		{
-			using (var ms = new MemoryStream(_largeResponse))
-				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
+				return new BulkResponse();
+			}
 		}
 
 		[Benchmark(Description = "deserialize 100,000 items in bulk response")]
@@ -74,17 +52,37 @@ namespace Tests.Benchmarking
 				return _jsonSerializer.Deserialize<BulkResponse>(reader);
 		}
 
-		[Benchmark(Description = "Baseline", Baseline = true)]
-		public BulkResponse Baseline()
+		[Benchmark(Description = "deserialize 1,000 items in bulk response")]
+		public BulkResponse LargeResponse()
 		{
-			using (var reader = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
-			{
-				while (reader.Read())
-				{
-				}
+			using (var ms = new MemoryStream(_largeResponse))
+				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
+		}
 
-				return new BulkResponse();
-			}
+		[Benchmark(Description = "deserialize 100 items in bulk response")]
+		public BulkResponse MediumResponse()
+		{
+			using (var ms = new MemoryStream(_mediumResponse))
+				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
+		}
+
+		[GlobalSetup]
+		public void Setup()
+		{
+			var serializer = Client.RequestResponseSerializer;
+			_tinyResponse = serializer.SerializeToBytes(ReturnBulkResponse(1));
+			_mediumResponse = serializer.SerializeToBytes(ReturnBulkResponse(100));
+			_largeResponse = serializer.SerializeToBytes(ReturnBulkResponse(1000));
+			_hugeResponse = serializer.SerializeToBytes(ReturnBulkResponse(100000));
+
+			_jsonSerializer = new JsonSerializer();
+		}
+
+		[Benchmark(Description = "deserialize 1 item in bulk response")]
+		public BulkResponse TinyResponse()
+		{
+			using (var ms = new MemoryStream(_tinyResponse))
+				return Client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
 		}
 
 		private static object BulkItemResponse() => new
@@ -106,17 +104,13 @@ namespace Tests.Benchmarking
 			}
 		};
 
-		private static object ReturnBulkResponse(int numberOfItems)
+		private static object ReturnBulkResponse(int numberOfItems) => new
 		{
-			return new
-			{
-				took = 276,
-				errors = false,
-				items = Enumerable.Range(0, numberOfItems)
-					.Select(i => BulkItemResponse())
-					.ToArray()
-			};
-		}
-
+			took = 276,
+			errors = false,
+			items = Enumerable.Range(0, numberOfItems)
+				.Select(i => BulkItemResponse())
+				.ToArray()
+		};
 	}
 }
