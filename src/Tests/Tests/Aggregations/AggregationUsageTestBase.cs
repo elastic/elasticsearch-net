@@ -46,7 +46,7 @@ namespace Tests.Aggregations
 		protected override string UrlPath => $"/project/doc/_search";
 
 		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>(this.AgainstIndex, Type<Project>())
+			new SearchRequest<Project>(AgainstIndex, Type<Project>())
 			{
 				Query = QueryScope,
 				Size = 0,
@@ -67,16 +67,16 @@ namespace Tests.Aggregations
 			.Index(AgainstIndex)
 			.Type<Project>()
 			.TypedKeys(TestClient.Configuration.Random.TypedKeys)
-			.Query(q=> QueryScope)
-			.Aggregations(this.FluentAggs);
+			.Query(q => QueryScope)
+			.Aggregations(FluentAggs);
 
 		protected abstract Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs { get; }
 
-		protected sealed override object ExpectJson => this.QueryScopeJson == null  ?
-			 (object) new { size = 0, aggs = AggregationJson }
-			 : new { size = 0, aggs = AggregationJson, query = QueryScopeJson };
+		protected sealed override object ExpectJson => QueryScopeJson == null
+			? (object)new { size = 0, aggs = AggregationJson }
+			: new { size = 0, aggs = AggregationJson, query = QueryScopeJson };
 
-		protected abstract object AggregationJson { get;  }
+		protected abstract object AggregationJson { get; }
 	}
 
 	public abstract class ProjectsOnlyAggregationUsageTestBase : AggregationUsageTestBase

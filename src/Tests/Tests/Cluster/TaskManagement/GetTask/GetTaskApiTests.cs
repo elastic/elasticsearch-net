@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -8,14 +7,13 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.TaskManagement.GetTask
 {
 	public class GetTaskApiTests : ApiIntegrationTestBase<WritableCluster, IGetTaskResponse, IGetTaskRequest, GetTaskDescriptor, GetTaskRequest>
 	{
 		public GetTaskApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetTask(_taskId, f),
 			fluentAsync: (client, f) => client.GetTaskAsync(_taskId, f),

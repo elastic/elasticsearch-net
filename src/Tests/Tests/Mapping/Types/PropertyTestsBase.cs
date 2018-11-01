@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Nest;
 using Elasticsearch.Net;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types
 {
 	public abstract class PropertyTestsBase
-		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>,
+			PutMappingRequest<Project>>
 	{
 		protected PropertyTestsBase(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -34,12 +34,12 @@ namespace Tests.Mapping.Types
 
 		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => f => f
 			.Index(CallIsolatedValue)
-			.Properties(this.FluentProperties);
+			.Properties(FluentProperties);
 
 
 		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, typeof(Project))
 		{
-			Properties = this.InitializerProperties
+			Properties = InitializerProperties
 		};
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912

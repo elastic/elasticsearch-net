@@ -9,13 +9,11 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.QueryDsl
 {
-	public abstract class QueryDslUsageTestsBase : ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class QueryDslUsageTestsBase
+		: ApiTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected QueryDslUsageTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -32,14 +30,15 @@ namespace Tests.QueryDsl
 		protected abstract object QueryJson { get; }
 
 		protected abstract QueryContainer QueryInitializer { get; }
+
 		protected abstract QueryContainer QueryFluent(QueryContainerDescriptor<Project> q);
 
-		protected override object ExpectJson => new { query = this.QueryJson };
+		protected override object ExpectJson => new { query = QueryJson };
 
 		[U] public void FluentIsNotConditionless() =>
-			AssertIsNotConditionless(this.QueryFluent(new QueryContainerDescriptor<Project>()));
+			AssertIsNotConditionless(QueryFluent(new QueryContainerDescriptor<Project>()));
 
-		[U] public void InitializerIsNotConditionless() => AssertIsNotConditionless(this.QueryInitializer);
+		[U] public void InitializerIsNotConditionless() => AssertIsNotConditionless(QueryInitializer);
 
 		private void AssertIsNotConditionless(IQueryContainer c)
 		{
@@ -48,12 +47,12 @@ namespace Tests.QueryDsl
 		}
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Query(q => this.QueryFluent(q));
+			.Query(q => QueryFluent(q));
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Query = this.QueryInitializer
+				Query = QueryInitializer
 			};
 
 		protected virtual NotConditionlessWhen NotConditionlessWhen => null;
@@ -66,7 +65,7 @@ namespace Tests.QueryDsl
 		[U] public void SeenByVisitor()
 		{
 			var visitor = new DslPrettyPrintVisitor(TestClient.DefaultInMemoryClient.ConnectionSettings);
-			var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
+			var query = QueryFluent(new QueryContainerDescriptor<Project>());
 			query.Accept(visitor);
 			var pretty = visitor.PrettyPrint;
 			pretty.Should().NotBeNullOrWhiteSpace();
@@ -75,41 +74,40 @@ namespace Tests.QueryDsl
 		[U] public void ConditionlessWhenExpectedToBe()
 		{
 			if (ConditionlessWhen == null) return;
+
 			foreach (var when in ConditionlessWhen)
 			{
-				when(this.QueryFluent(new QueryContainerDescriptor<Project>()));
+				when(QueryFluent(new QueryContainerDescriptor<Project>()));
 				//this.JsonEquals(query, new { });
-				when(this.QueryInitializer);
+				when(QueryInitializer);
 				//this.JsonEquals(query, new { });
 			}
 
-			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
+			((IQueryContainer)QueryInitializer).IsConditionless.Should().BeFalse();
 		}
 
 		[U] public void NotConditionlessWhenExpectedToBe()
 		{
 			if (NotConditionlessWhen == null) return;
+
 			foreach (var when in NotConditionlessWhen)
 			{
-				var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
+				var query = QueryFluent(new QueryContainerDescriptor<Project>());
 				when(query);
 
-				query = this.QueryInitializer;
+				query = QueryInitializer;
 				when(query);
 			}
 		}
 
 		protected virtual bool KnownParseException => false;
 
-		[I] protected async Task AssertQueryResponse() => await this.AssertOnAllResponses(r =>
+		[I] protected async Task AssertQueryResponse() => await AssertOnAllResponses(r =>
 		{
 			var validOrNotParseExceptionOrKnownParseException = r.IsValid || r.ServerError?.Error.Type != "parsing_exception" || KnownParseException;
 			validOrNotParseExceptionOrKnownParseException.Should().BeTrue("query should be valid or when not valid not a parsing_exception.");
 
 			//TODO only assert IsValid == true and remove corner cases we don't have time to fix now.
 		});
-
-
-
 	}
 }

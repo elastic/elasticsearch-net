@@ -1,13 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Elasticsearch.Net;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using Elastic.Xunit.XunitPlumbing;
+using Tests.Framework;
 
 namespace Tests.CodeStandards.Serialization
 {
@@ -16,15 +13,14 @@ namespace Tests.CodeStandards.Serialization
 		[U]
 		public void CustomConvertersShouldBeInternal()
 		{
-			var converters = typeof(IElasticClient).Assembly().GetTypes()
+			var converters = typeof(IElasticClient).Assembly()
+				.GetTypes()
 				.Where(t => typeof(JsonConverter).IsAssignableFrom(t))
 				.ToList();
 			var visible = new List<string>();
 			foreach (var converter in converters)
-			{
 				if (converter.IsVisible())
 					visible.Add(converter.Name);
-			}
 			visible.Should().BeEmpty();
 		}
 	}

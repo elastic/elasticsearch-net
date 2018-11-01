@@ -6,11 +6,11 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Watcher.DeactivateWatch
 {
-	public class DeactivateWatchApiTests : ApiIntegrationTestBase<XPackCluster, IDeactivateWatchResponse, IDeactivateWatchRequest, DeactivateWatchDescriptor, DeactivateWatchRequest>
+	public class DeactivateWatchApiTests
+		: ApiIntegrationTestBase<XPackCluster, IDeactivateWatchResponse, IDeactivateWatchRequest, DeactivateWatchDescriptor, DeactivateWatchRequest>
 	{
 		public DeactivateWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

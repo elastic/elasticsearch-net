@@ -8,7 +8,8 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.DeleteDatafeed
 {
-	public class DeleteDatafeedApiTests : MachineLearningIntegrationTestBase<IDeleteDatafeedResponse, IDeleteDatafeedRequest, DeleteDatafeedDescriptor, DeleteDatafeedRequest>
+	public class DeleteDatafeedApiTests
+		: MachineLearningIntegrationTestBase<IDeleteDatafeedResponse, IDeleteDatafeedRequest, DeleteDatafeedDescriptor, DeleteDatafeedRequest>
 	{
 		public DeleteDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -32,14 +33,13 @@ namespace Tests.XPack.MachineLearning.DeleteDatafeed
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed";
+
 		protected override DeleteDatafeedDescriptor NewDescriptor() => new DeleteDatafeedDescriptor(CallIsolatedValue + "-datafeed");
+
 		protected override object ExpectJson => null;
 		protected override Func<DeleteDatafeedDescriptor, IDeleteDatafeedRequest> Fluent => f => f;
 		protected override DeleteDatafeedRequest Initializer => new DeleteDatafeedRequest(CallIsolatedValue + "-datafeed");
 
-		protected override void ExpectResponse(IDeleteDatafeedResponse response)
-		{
-			response.Acknowledged.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IDeleteDatafeedResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

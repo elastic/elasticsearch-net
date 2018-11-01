@@ -5,13 +5,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Cluster.ClusterStats
 {
-	public class ClusterStatsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClusterStatsResponse, IClusterStatsRequest, ClusterStatsDescriptor, ClusterStatsRequest>
+	public class ClusterStatsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterStatsResponse, IClusterStatsRequest, ClusterStatsDescriptor, ClusterStatsRequest>
 	{
 		public ClusterStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClusterStats(),
 			fluentAsync: (client, f) => client.ClusterStatsAsync(),

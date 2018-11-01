@@ -6,33 +6,32 @@ using System.Threading;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 {
 	public class RoundRobin
 	{
-        /**[[round-robin]]
-		 * == Round robin behaviour
-        *
+		/**[[round-robin]]
+		   * == Round robin behaviour
+		*
 		* <<sniffing-connection-pool, Sniffing>> and <<static-connection-pool, Static>> connection pools
 		* round robin over the `live` nodes to evenly distribute requests over all known nodes.
-        *
+		*
 		* [float]
-        * === CreateView
-        *
-        * This is the method on an `IConnectionPool` that creates a view of all the live nodes in the cluster that the client
-        * knows about. Different connection pool implementations can decide on the view to return, for example,
-        *
-        * - `SingleNodeConnectionPool` is only ever seeded with and hence only knows about one node
-        * - `StickyConnectionPool` can return a view of live nodes with the same starting position as the last live node a request was made against
-        * - `SniffingConnectionPool` returns a view with a changing starting position that wraps over on each call
+		* === CreateView
+		*
+		* This is the method on an `IConnectionPool` that creates a view of all the live nodes in the cluster that the client
+		* knows about. Different connection pool implementations can decide on the view to return, for example,
+		*
+		* - `SingleNodeConnectionPool` is only ever seeded with and hence only knows about one node
+		* - `StickyConnectionPool` can return a view of live nodes with the same starting position as the last live node a request was made against
+		* - `SniffingConnectionPool` returns a view with a changing starting position that wraps over on each call
 		*
 		* `CreateView` is implemented in a lock free thread safe fashion, meaning each callee gets returned
-        * its own cursor to advance over the internal list of nodes. This to guarantee each request that needs to
-        * fall over tries all the nodes without suffering from noisy neighbours advancing a global cursor.
+		* its own cursor to advance over the internal list of nodes. This to guarantee each request that needs to
+		* fall over tries all the nodes without suffering from noisy neighbours advancing a global cursor.
 		*/
-        protected int NumberOfNodes = 10;
+		protected int NumberOfNodes = 10;
 
 		/**
 		* Here we have setup a Static connection pool seeded with 10 nodes. We force randomization OnStartup to false
@@ -44,8 +43,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			var staticPool = new StaticConnectionPool(uris, randomize: false);
 			var sniffingPool = new SniffingConnectionPool(uris, randomize: false);
 
-			this.AssertCreateView(staticPool);
-			this.AssertCreateView(sniffingPool);
+			AssertCreateView(staticPool);
+			AssertCreateView(sniffingPool);
 		}
 
 		public void AssertCreateView(IConnectionPool pool)
@@ -101,14 +100,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			var startPosition = seenPorts.First();
 			startingPositions.Add(startPosition);
 			var i = (startPosition - 9200) % NumberOfNodes; // <1> first seenNode is e.g 9202 then start counting at 2
-            foreach (var port in seenPorts)
+			foreach (var port in seenPorts)
 				port.Should().Be(9200 + (i++ % NumberOfNodes));
 		});
 
 		//hide
 		private IEnumerable<int> CallCreateView(IConnectionPool pool)
 		{
-			foreach(var n in pool.CreateView()) yield return n.Uri.Port;
+			foreach (var n in pool.CreateView()) yield return n.Uri.Port;
 		}
 	}
 }

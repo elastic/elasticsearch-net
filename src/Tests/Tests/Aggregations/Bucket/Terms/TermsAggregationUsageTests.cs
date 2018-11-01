@@ -6,10 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Terms
@@ -45,8 +42,8 @@ namespace Tests.Aggregations.Bucket.Terms
 					},
 					order = new object[]
 					{
-						new {_key = "asc"},
-						new {_count = "desc"}
+						new { _key = "asc" },
+						new { _count = "desc" }
 					}
 				}
 			}
@@ -88,7 +85,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				},
 				Meta = new Dictionary<string, object>
 				{
-					{"foo", "bar"}
+					{ "foo", "bar" }
 				}
 			};
 
@@ -106,6 +103,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				item.Key.Should().NotBeNullOrEmpty();
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
 			}
+
 			states.Meta.Should().NotBeNull().And.HaveCount(1);
 			states.Meta["foo"].Should().Be("bar");
 		}
@@ -142,8 +140,8 @@ namespace Tests.Aggregations.Bucket.Terms
 					include = "(Stable|VeryActive)",
 					order = new object[]
 					{
-						new {_key = "asc"},
-						new {_count = "desc"}
+						new { _key = "asc" },
+						new { _count = "desc" }
 					}
 				}
 			}
@@ -184,7 +182,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				},
 				Meta = new Dictionary<string, object>
 				{
-					{"foo", "bar"}
+					{ "foo", "bar" }
 				}
 			};
 
@@ -202,6 +200,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				item.Key.Should().NotBeNullOrEmpty();
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
 			}
+
 			states.Meta.Should().NotBeNull().And.HaveCount(1);
 			states.Meta["foo"].Should().Be("bar");
 		}
@@ -235,11 +234,11 @@ namespace Tests.Aggregations.Bucket.Terms
 					shard_size = 100,
 					execution_hint = "map",
 					missing = "n/a",
-					include = new[] {"Stable", "VeryActive"},
+					include = new[] { "Stable", "VeryActive" },
 					order = new object[]
 					{
-						new {_key = "asc"},
-						new {_count = "desc"}
+						new { _key = "asc" },
+						new { _count = "desc" }
 					}
 				}
 			}
@@ -253,7 +252,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				.ShardSize(100)
 				.ExecutionHint(TermsAggregationExecutionHint.Map)
 				.Missing("n/a")
-				.Include(new[] {StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString()})
+				.Include(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() })
 				.Order(o => o
 					.KeyAscending()
 					.CountDescending()
@@ -272,7 +271,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				ShardSize = 100,
 				ExecutionHint = TermsAggregationExecutionHint.Map,
 				Missing = "n/a",
-				Include = new TermsInclude(new[] {StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString()}),
+				Include = new TermsInclude(new[] { StateOfBeing.Stable.ToString(), StateOfBeing.VeryActive.ToString() }),
 				Order = new List<TermsOrder>
 				{
 					TermsOrder.KeyAscending,
@@ -280,7 +279,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				},
 				Meta = new Dictionary<string, object>
 				{
-					{"foo", "bar"}
+					{ "foo", "bar" }
 				}
 			};
 
@@ -298,6 +297,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				item.Key.Should().NotBeNullOrEmpty();
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
 			}
+
 			states.Meta.Should().NotBeNull().And.HaveCount(1);
 			states.Meta["foo"].Should().Be("bar");
 		}
@@ -347,7 +347,7 @@ namespace Tests.Aggregations.Bucket.Terms
 		protected override AggregationDictionary InitializerAggs =>
 			new TermsAggregation("commits")
 			{
-				Field = Infer.Field<Project>(p => p.NumberOfCommits),
+				Field = Field<Project>(p => p.NumberOfCommits),
 				Include = new TermsInclude(0, 10),
 				Size = 5
 			};
@@ -421,6 +421,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				item.Key.Should().BeGreaterThan(0);
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
 			}
+
 			commits.Buckets.Should().Contain(b => b.DocCountErrorUpperBound.HasValue);
 		}
 	}
@@ -440,8 +441,8 @@ namespace Tests.Aggregations.Bucket.Terms
 			commits = new
 			{
 				terms = new { field = "numberOfCommits", },
-				 aggs = new
-				 {
+				aggs = new
+				{
 					state = new
 					{
 						meta = new { x = "y" },
@@ -468,7 +469,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				Field = Field<Project>(p => p.NumberOfCommits),
 				Aggregations = new TermsAggregation("state")
 				{
-					Meta = new Dictionary<string, object> {{"x", "y"}},
+					Meta = new Dictionary<string, object> { { "x", "y" } },
 					Field = Field<Project>(p => p.State),
 				}
 			};

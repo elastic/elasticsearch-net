@@ -13,7 +13,7 @@ namespace Tests.Framework
 		TimeSpan? Takes { get; set; }
 
 		/// <summary>
-		/// Either a hard exception or soft HTTP error code
+		///     Either a hard exception or soft HTTP error code
 		/// </summary>
 		Union<Exception, int> Return { get; set; }
 
@@ -57,6 +57,7 @@ namespace Tests.Framework
 				new LowLevelRequestResponseSerializer().Serialize(response, ms);
 				r = ms.ToArray();
 			}
+
 			Self.ReturnResponse = r;
 			Self.ReturnContentType = RequestData.MimeType;
 			return (TRule)this;

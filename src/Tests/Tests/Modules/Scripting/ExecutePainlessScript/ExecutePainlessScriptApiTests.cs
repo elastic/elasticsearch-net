@@ -13,7 +13,8 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 {
 	[SkipVersion("<6.3.0", "this API was introduced in 6.3.0")]
 	public class ExecutePainlessScriptApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest, ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest,
+			ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
 	{
 		public ExecutePainlessScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -43,7 +44,7 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 		};
 
 		protected override Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> Fluent => d => d
-			.Script(s=>s
+			.Script(s => s
 				.Source(_painlessScript)
 				.Params(p => p.Add("count", 100.0).Add("total", 1000.0))
 			);
@@ -69,7 +70,8 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 
 	[SkipVersion("<6.4.0", "Context only tested on 6.4.0 when they were introduced")]
 	public class ExecutePainlessScriptContextApiTests
-		: ApiIntegrationTestBase<WritableCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest, ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
+		: ApiIntegrationTestBase<WritableCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest,
+			ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
 	{
 		public ExecutePainlessScriptContextApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -91,12 +93,12 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 		private class ScriptDocument
 		{
 			public string Field { get; set; }
-			public long Rank  { get; set; }
+			public long Rank { get; set; }
 		}
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var create =client.CreateIndex(values.FixedForAllCallsValue, c => c.Mappings(map => map.Map<ScriptDocument>(m => m.AutoMap())));
+			var create = client.CreateIndex(values.FixedForAllCallsValue, c => c.Mappings(map => map.Map<ScriptDocument>(m => m.AutoMap())));
 			create.ShouldBeValid();
 		}
 
@@ -106,8 +108,8 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			context_setup = new
 			{
 				document = new { rank = 4 },
-				index = this.UniqueValues.FixedForAllCallsValue,
-				query = new { match_all = new {} }
+				index = UniqueValues.FixedForAllCallsValue,
+				query = new { match_all = new { } }
 			},
 			script = new
 			{
@@ -117,13 +119,13 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 		};
 
 		protected override Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> Fluent => d => d
-			.ContextSetup(cs=>cs
-				.Index(this.UniqueValues.FixedForAllCallsValue)
+			.ContextSetup(cs => cs
+				.Index(UniqueValues.FixedForAllCallsValue)
 				.Document(new ScriptDocument { Rank = 4 })
-				.Query<ScriptDocument>(q=>q.MatchAll())
+				.Query<ScriptDocument>(q => q.MatchAll())
 			)
 			.Context("score")
-			.Script(s=>s
+			.Script(s => s
 				.Source(_painlessScript)
 				.Params(p => p.Add("max_rank", 5.0))
 			);
@@ -132,8 +134,8 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 		{
 			ContextSetup = new PainlessContextSetup
 			{
-				Index = this.UniqueValues.FixedForAllCallsValue,
-				Document =  new ScriptDocument { Rank = 4 },
+				Index = UniqueValues.FixedForAllCallsValue,
+				Document = new ScriptDocument { Rank = 4 },
 				Query = new MatchAllQuery()
 			},
 			Context = "score",

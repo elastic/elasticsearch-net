@@ -37,8 +37,8 @@ namespace Tests.ClientConcepts.Connection
 				.DisableAutomaticProxyDetection()
 				.EnableHttpCompression()
 				.DisableDirectStreaming()
-                .PrettyJson()
-                .RequestTimeout(TimeSpan.FromMinutes(2));
+				.PrettyJson()
+				.RequestTimeout(TimeSpan.FromMinutes(2));
 
 			var lowLevelClient = new ElasticLowLevelClient(connectionConfiguration);
 
@@ -65,11 +65,12 @@ namespace Tests.ClientConcepts.Connection
 			var uri = new Uri("http://username:password@localhost:9200");
 			var settings = new ConnectionConfiguration(uri);
 		}
-        /**
-        * but this can be awkward when using connection pooling with multiple nodes, especially when the connection pool
+
+		/**
+		* but this can be awkward when using connection pooling with multiple nodes, especially when the connection pool
 		* used is one that is capable of reseeding iteslf. For this reason, we'd recommend specifying credentials
 		* on `ConnectionSettings`.
-        *====
-        */
+		*====
+		*/
 	}
 }

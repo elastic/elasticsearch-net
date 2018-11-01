@@ -2,13 +2,12 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Term
 {
 	public class TermQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public TermQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public TermQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -41,9 +40,9 @@ namespace Tests.QueryDsl.TermLevel.Term
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermQuery>(q => q.Term)
 		{
-			q=> q.Field = null,
-			q=> q.Value = "  ",
-			q=> q.Value = null
+			q => q.Field = null,
+			q => q.Value = "  ",
+			q => q.Value = null
 		};
 	}
 
@@ -59,6 +58,7 @@ namespace Tests.QueryDsl.TermLevel.Term
 		public VerbatimTermQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override ConditionlessWhen ConditionlessWhen => null;
+
 		//when reading back the json the notion of is conditionless is lost
 		protected override bool SupportsDeserialization => false;
 

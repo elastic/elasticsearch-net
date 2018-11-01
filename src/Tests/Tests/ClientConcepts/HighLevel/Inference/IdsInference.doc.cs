@@ -1,7 +1,6 @@
 ﻿using System;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
@@ -44,7 +43,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*
 		* Imagine your codebase has the following type that we want to index into Elasticsearch
 		*/
-		class MyDTO
+		private class MyDTO
 		{
 			public Guid Id { get; set; }
 			public string Name { get; set; }
@@ -70,10 +69,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* Here we instruct NEST to infer the Id for `MyDTO` based on its `Name` property
 			*/
 			WithConnectionSettings(x => x
-				.DefaultMappingFor<MyDTO>(m => m
-					.IdProperty(p => p.Name)
+					.DefaultMappingFor<MyDTO>(m => m
+						.IdProperty(p => p.Name)
+					)
 				)
-			).Expect("x").WhenInferringIdOn(dto);
+				.Expect("x")
+				.WhenInferringIdOn(dto);
 
 			/** IMPORTANT: Inference rules are cached __per__ `ConnectionSettings` instance.
 			*
@@ -81,19 +82,23 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* with different inference rules
 			*/
 			WithConnectionSettings(x => x
-				.DefaultMappingFor<MyDTO>(m => m
-					.IdProperty(p => p.OtherName)
+					.DefaultMappingFor<MyDTO>(m => m
+						.IdProperty(p => p.OtherName)
+					)
 				)
-			).Expect("y").WhenInferringIdOn(dto);
+				.Expect("y")
+				.WhenInferringIdOn(dto);
 
 			/**
 			 * DefaultMappingFor also has a non generic overload for the more dynamic use-cases.
 			*/
 			WithConnectionSettings(x => x
-				.DefaultMappingFor(typeof(MyDTO), m => m
-					.IdProperty(typeof(MyDTO).GetProperty(nameof(MyDTO.Name)).Name)
+					.DefaultMappingFor(typeof(MyDTO), m => m
+						.IdProperty(typeof(MyDTO).GetProperty(nameof(MyDTO.Name)).Name)
+					)
 				)
-			).Expect("x").WhenInferringIdOn(dto);
+				.Expect("x")
+				.WhenInferringIdOn(dto);
 		}
 
 		/**
@@ -103,7 +108,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		* to the name of the property that should be used for the document id
 		*/
 		[ElasticsearchType(IdProperty = nameof(Name))]
-		class MyOtherDTO
+		private class MyOtherDTO
 		{
 			public Guid Id { get; set; }
 			public string Name { get; set; }
@@ -130,10 +135,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* that will infer the document id from the property `OtherName`:
 			*/
 			WithConnectionSettings(x => x
-				.DefaultMappingFor<MyOtherDTO>(m => m
-					.IdProperty(p => p.OtherName)
+					.DefaultMappingFor<MyOtherDTO>(m => m
+						.IdProperty(p => p.OtherName)
+					)
 				)
-			).Expect("y").WhenInferringIdOn(dto);
+				.Expect("y")
+				.WhenInferringIdOn(dto);
 		}
 	}
 }

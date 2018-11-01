@@ -9,8 +9,6 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client.Settings;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 {
@@ -21,18 +19,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 
 		private class TrackDisposeStream : MemoryStream
 		{
-			public TrackDisposeStream()
-			{
-			}
+			public TrackDisposeStream() { }
 
-			public TrackDisposeStream(byte[] bytes) : base(bytes)
-			{
-			}
+			public TrackDisposeStream(byte[] bytes) : base(bytes) { }
 
 			public bool IsDisposed { get; private set; }
+
 			protected override void Dispose(bool disposing)
 			{
-				this.IsDisposed = true;
+				IsDisposed = true;
 				base.Dispose(disposing);
 			}
 		}
@@ -44,14 +39,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 			public MemoryStream Create()
 			{
 				var stream = new TrackDisposeStream();
-				this.Created.Add(stream);
+				Created.Add(stream);
 				return stream;
 			}
 
 			public MemoryStream Create(byte[] bytes)
 			{
 				var stream = new TrackDisposeStream(bytes);
-				this.Created.Add(stream);
+				Created.Add(stream);
 				return stream;
 			}
 		}
@@ -84,18 +79,21 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 				var memoryStream = memoryStreamFactory.Created[0];
 				memoryStream.IsDisposed.Should().BeTrue();
 			}
+
 			stream.IsDisposed.Should().BeTrue();
 
 
 			stream = new TrackDisposeStream();
 			var ct = new CancellationToken();
-			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, cancellationToken: ct);
+			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream,
+				cancellationToken: ct);
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
 			if (disableDirectStreaming)
 			{
 				var memoryStream = memoryStreamFactory.Created[1];
 				memoryStream.IsDisposed.Should().BeTrue();
 			}
+
 			stream.IsDisposed.Should().BeTrue();
 		}
 
@@ -127,12 +125,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 
 			stream = new TrackDisposeStream();
 			var ct = new CancellationToken();
-			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, cancellationToken: ct);
+			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream,
+				cancellationToken: ct);
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
 			stream.IsDisposed.Should().Be(true);
 		}
-
 	}
-
-
 }

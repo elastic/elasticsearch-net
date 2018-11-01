@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using System.Threading;
-using Elastic.Xunit.XunitPlumbing;
+
 // ReSharper disable SuggestVarOrType_Elsewhere
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable SuggestVarOrType_SimpleTypes
@@ -26,22 +26,22 @@ namespace Tests.ClientConcepts.LowLevel
 		 */
 		private readonly string @string = "fromString";
 		private readonly byte[] bytes = Utf8Bytes("fromByteArray");
-		private List<string> collectionOfStrings = Enumerable.Range(0, 5).Select(i => i.ToString()).ToList();
-		private List<object> collectionOfObjects;
-		private object @object;
+		private readonly List<string> collectionOfStrings = Enumerable.Range(0, 5).Select(i => i.ToString()).ToList();
+		private readonly List<object> collectionOfObjects;
+		private readonly object @object;
 
-		private byte[] utf8BytesOfListOfStrings;
-		private byte[] utf8BytesOfCollectionOfObjects;
-		private byte[] utf8ObjectBytes;
+		private readonly byte[] utf8BytesOfListOfStrings;
+		private readonly byte[] utf8BytesOfCollectionOfObjects;
+		private readonly byte[] utf8ObjectBytes;
 
 		public PostingData()
 		{
-			this.@object = new { my_object = "value" };
-			this.collectionOfObjects = Enumerable.Range(0, 5).Select(i => @object).Cast<object>().ToList();
+			@object = new { my_object = "value" };
+			collectionOfObjects = Enumerable.Range(0, 5).Select(i => @object).Cast<object>().ToList();
 			var json = "{\"my_object\":\"value\"}";
-			this.utf8ObjectBytes = Utf8Bytes(json);
-			this.utf8BytesOfListOfStrings = Utf8Bytes(string.Join("\n", collectionOfStrings) + "\n");
-			this.utf8BytesOfCollectionOfObjects = Utf8Bytes(string.Join("\n", collectionOfObjects.Select(o=> json)) + "\n");
+			utf8ObjectBytes = Utf8Bytes(json);
+			utf8BytesOfListOfStrings = Utf8Bytes(string.Join("\n", collectionOfStrings) + "\n");
+			utf8BytesOfCollectionOfObjects = Utf8Bytes(string.Join("\n", collectionOfObjects.Select(o => json)) + "\n");
 		}
 
 		[U] public void ImplicitConversions()
@@ -76,6 +76,7 @@ namespace Tests.ClientConcepts.LowLevel
 			fromString.Type.Should().Be(PostType.LiteralString);
 			fromByteArray.Type.Should().Be(PostType.ByteArray);
 		}
+
 		[U] public void ExplicitCreation()
 		{
 			/**[float]
@@ -108,11 +109,12 @@ namespace Tests.ClientConcepts.LowLevel
 			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 			fromObject.Type.Should().Be(PostType.Serializable);
 		}
+
 		//hide
 		[U] public async Task WritesCorrectlyUsingBothLowAndHighLevelSettings()
 		{
-			await this.AssertOn(new ConnectionSettings());
-			await this.AssertOn(new ConnectionConfiguration());
+			await AssertOn(new ConnectionSettings());
+			await AssertOn(new ConnectionConfiguration());
 		}
 
 		private async Task AssertOn(IConnectionConfigurationValues settings)
@@ -143,7 +145,8 @@ namespace Tests.ClientConcepts.LowLevel
 			* that needs to be serialized individually to json and joined with newline feeds. As with the collection of strings, the client ensures that
 			* there is a trailing linefeed.
 			*/
-			await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: false, settings: settings);
+			await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: false,
+				settings: settings);
 
 			/** In all other cases, Post data is serialized as is and `WrittenBytes` is not assigned */
 			await Post(() => PostData.Serializable(@object), writes: utf8ObjectBytes, writtenBytesIsSet: false, settings: settings);
@@ -156,7 +159,8 @@ namespace Tests.ClientConcepts.LowLevel
 			*/
 			settings = new ConnectionConfiguration().DisableDirectStreaming();
 
-			await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true, settings: settings);
+			await Post(() => PostData.MultiJson(collectionOfObjects), writes: utf8BytesOfCollectionOfObjects, writtenBytesIsSet: true,
+				settings: settings);
 
 			/** This behavior can also be observed when serializing a simple object using `DisableDirectStreaming` enabled
 			 */
@@ -205,6 +209,5 @@ namespace Tests.ClientConcepts.LowLevel
 
 		//hide
 		private static PostData MethodThatAcceptsPostData(PostData postData) => postData;
-
 	}
 }

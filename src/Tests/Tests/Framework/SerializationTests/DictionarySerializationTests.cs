@@ -24,7 +24,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			});
 
-			Object(isADictionary).RoundTrips(this.ExpectJson);
+			Object(isADictionary).RoundTrips(ExpectJson);
 		}
 
 		private class MyIsADictionary : IsADictionaryBase<object, object>
@@ -35,7 +35,7 @@ namespace Tests.Framework
 
 	public class DictionarySerializationTests
 	{
-		protected object ExpectJson => new { Key1 = "value1", Key2 ="value2", };
+		protected object ExpectJson => new { Key1 = "value1", Key2 = "value2", };
 
 		[U]
 		public void CanSerializeCustomGenericDictionary()
@@ -46,19 +46,19 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(dictionary).RoundTrips(this.ExpectJson);
+			Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
 		public void CanSerializeGenericDictionary()
 		{
-			var dictionary = new Dictionary<string,string>
+			var dictionary = new Dictionary<string, string>
 			{
 				{ "Key1", "value1" },
 				{ "Key2", "value2" },
 			};
 
-			Object(dictionary).RoundTrips(this.ExpectJson);
+			Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -71,7 +71,7 @@ namespace Tests.Framework
 					{ "Key2", "value2" },
 				});
 
-			Object(dictionary).RoundTrips(this.ExpectJson);
+			Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -83,7 +83,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(dictionary).RoundTrips(this.ExpectJson);
+			Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -95,7 +95,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			});
 
-			Object(dictionary).RoundTrips(this.ExpectJson);
+			Object(dictionary).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -107,7 +107,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(hashTable).RoundTrips(this.ExpectJson);
+			Object(hashTable).RoundTrips(ExpectJson);
 		}
 
 		[U]
@@ -119,7 +119,7 @@ namespace Tests.Framework
 				{ "Key2", "value2" },
 			};
 
-			Object(hashTable).RoundTrips(this.ExpectJson);
+			Object(hashTable).RoundTrips(ExpectJson);
 		}
 
 		private class MyDictionary : IDictionary
@@ -161,13 +161,14 @@ namespace Tests.Framework
 			public bool IsSynchronized => _dictionary.IsSynchronized;
 		}
 
-		private class MyGenericDictionary : Dictionary<string, string> {}
+		private class MyGenericDictionary : Dictionary<string, string> { }
 
 		private class MyGenericIReadOnlyDictionary : IReadOnlyDictionary<object, object>
 		{
 			private readonly IDictionary<object, object> _backingDictionary;
 
-			public MyGenericIReadOnlyDictionary(IDictionary<object, object> dictionary) => _backingDictionary = dictionary ?? new Dictionary<object, object>();
+			public MyGenericIReadOnlyDictionary(IDictionary<object, object> dictionary) =>
+				_backingDictionary = dictionary ?? new Dictionary<object, object>();
 
 			public IEnumerator<KeyValuePair<object, object>> GetEnumerator() => _backingDictionary.GetEnumerator();
 

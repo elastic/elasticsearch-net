@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.Search
 {
@@ -71,7 +67,6 @@ namespace Tests.Search.Search
 			serverError.Status.Should().Be(400);
 			serverError.Error.Reason.Should().Be("all shards failed");
 			serverError.Error.RootCause.First().Reason.Should().Contain("[-1m]");
-
 		}
 	}
 }

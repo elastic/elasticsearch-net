@@ -5,15 +5,14 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
 
 namespace Tests.Cat.CatAliases
 {
-	public class CatAliasesApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatAliasesRecord>, ICatAliasesRequest, CatAliasesDescriptor, CatAliasesRequest>
+	public class CatAliasesApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatAliasesRecord>, ICatAliasesRequest, CatAliasesDescriptor, CatAliasesRequest>
 	{
 		public CatAliasesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatAliases(),
 			fluentAsync: (client, f) => client.CatAliasesAsync(),
@@ -26,9 +25,7 @@ namespace Tests.Cat.CatAliases
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/aliases";
 
-		protected override void ExpectResponse(ICatResponse<CatAliasesRecord> response)
-		{
+		protected override void ExpectResponse(ICatResponse<CatAliasesRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => a.Alias == DefaultSeeder.ProjectsAliasName);
-		}
 	}
 }

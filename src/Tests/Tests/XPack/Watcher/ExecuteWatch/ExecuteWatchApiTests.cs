@@ -4,17 +4,16 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json.Linq;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.XPack.Watcher.ExecuteWatch
 {
-	public class ExecuteWatchApiTests : ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
+	public class ExecuteWatchApiTests
+		: ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{
 		private readonly DateTimeOffset _triggeredDateTime = new DateTimeOffset(2016, 11, 17, 13, 00, 00, TimeSpan.Zero);
 
@@ -31,15 +30,15 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 								.Indices("logstash")
 								.Body<object>(b => b
 									.Query(q => q
-										.Match(m => m
+											.Match(m => m
 												.Field("response")
 												.Query("404")
-										) && +q
-										.DateRange(ffrr => ffrr
-											.Field("@timestamp")
-											.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
-											.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
-										)
+											) && +q
+											.DateRange(ffrr => ffrr
+												.Field("@timestamp")
+												.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
+												.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
+											)
 									)
 								)
 							)
@@ -137,27 +136,27 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new
+		{
+			action_modes = new
 			{
-				action_modes = new
-				{
-					email_admin = "force_simulate",
-					webhook_action = "force_simulate",
-					slack_action = "force_simulate",
-					hipchat_action = "force_simulate",
-					pagerduty_action = "force_simulate",
-				},
-				alternative_input = new
-				{
-					foo = "bar"
-				},
-				ignore_condition = true,
-				record_execution = true,
-				trigger_data = new
-				{
-					scheduled_time = "2016-11-17T13:00:00+00:00",
-					triggered_time = "2016-11-17T13:00:00+00:00"
-				}
-			};
+				email_admin = "force_simulate",
+				webhook_action = "force_simulate",
+				slack_action = "force_simulate",
+				hipchat_action = "force_simulate",
+				pagerduty_action = "force_simulate",
+			},
+			alternative_input = new
+			{
+				foo = "bar"
+			},
+			ignore_condition = true,
+			record_execution = true,
+			trigger_data = new
+			{
+				scheduled_time = "2016-11-17T13:00:00+00:00",
+				triggered_time = "2016-11-17T13:00:00+00:00"
+			}
+		};
 
 		protected override Func<ExecuteWatchDescriptor, IExecuteWatchRequest> Fluent => f => f
 			.Id(CallIsolatedValue)
@@ -285,7 +284,8 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 		}
 	}
 
-	public class ExecuteInlineWatchApiTests : ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
+	public class ExecuteInlineWatchApiTests
+		: ApiIntegrationTestBase<XPackCluster, IExecuteWatchResponse, IExecuteWatchRequest, ExecuteWatchDescriptor, ExecuteWatchRequest>
 	{
 		private readonly DateTimeOffset _triggeredDateTime = new DateTimeOffset(2016, 11, 17, 13, 00, 00, TimeSpan.Zero);
 
@@ -302,15 +302,15 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 								.Indices("logstash")
 								.Body<object>(b => b
 									.Query(q => q
-										.Match(m => m
+											.Match(m => m
 												.Field("response")
 												.Query("404")
-										) && +q
-										.DateRange(ffrr => ffrr
-											.Field("@timestamp")
-											.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
-											.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
-										)
+											) && +q
+											.DateRange(ffrr => ffrr
+												.Field("@timestamp")
+												.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
+												.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
+											)
 									)
 								)
 							)
@@ -504,15 +504,15 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 							.Indices("logstash")
 							.Body<object>(b => b
 								.Query(q => q
-									.Match(m => m
-										.Field("response")
-										.Query("404")
-									) && +q
-									.DateRange(ffrr => ffrr
-										.Field("@timestamp")
-										.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
-										.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
-									)
+										.Match(m => m
+											.Field("response")
+											.Query("404")
+										) && +q
+										.DateRange(ffrr => ffrr
+											.Field("@timestamp")
+											.GreaterThanOrEquals("{{ctx.trigger.scheduled_time}}||-5m")
+											.LessThanOrEquals("{{ctx.trigger.triggered_time}}")
+										)
 								)
 							)
 						)
@@ -600,26 +600,26 @@ namespace Tests.XPack.Watcher.ExecuteWatch
 					},
 					Condition = new InlineScriptCondition("ctx.payload.hits.total > 1"),
 					Actions = new EmailAction("email_admin")
-					{
-						From = "nest-client@domain.example",
-						To = new [] {"someone@domain.host.example"},
-						Subject = "404 recently encountered"
-					} && new IndexAction("index_action")
-					{
-						Index = "test",
-						DocType = "doctype2"
-					} && new LoggingAction("logging_action")
-					{
-						Text = "404 recently encountered"
-					}
-					&& new WebhookAction("webhook_action")
-					{
-						Host = "foo.com",
-						Port = 80,
-						Path = "/bar",
-						Method = HttpInputMethod.Post,
-						Body = "{}"
-					}
+						{
+							From = "nest-client@domain.example",
+							To = new[] { "someone@domain.host.example" },
+							Subject = "404 recently encountered"
+						} && new IndexAction("index_action")
+						{
+							Index = "test",
+							DocType = "doctype2"
+						} && new LoggingAction("logging_action")
+						{
+							Text = "404 recently encountered"
+						}
+						&& new WebhookAction("webhook_action")
+						{
+							Host = "foo.com",
+							Port = 80,
+							Path = "/bar",
+							Method = HttpInputMethod.Post,
+							Body = "{}"
+						}
 				},
 				RequestConfiguration = new RequestConfiguration
 				{

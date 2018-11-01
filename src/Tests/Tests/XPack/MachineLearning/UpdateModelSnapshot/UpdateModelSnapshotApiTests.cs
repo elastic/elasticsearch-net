@@ -9,7 +9,9 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.UpdateModelSnapshot
 {
-	public class UpdateModelSnapshotApiTests : MachineLearningIntegrationTestBase<IUpdateModelSnapshotResponse, IUpdateModelSnapshotRequest, UpdateModelSnapshotDescriptor, UpdateModelSnapshotRequest>
+	public class UpdateModelSnapshotApiTests
+		: MachineLearningIntegrationTestBase<IUpdateModelSnapshotResponse, IUpdateModelSnapshotRequest, UpdateModelSnapshotDescriptor,
+			UpdateModelSnapshotRequest>
 	{
 		public UpdateModelSnapshotApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -22,10 +24,7 @@ namespace Tests.XPack.MachineLearning.UpdateModelSnapshot
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				IndexSnapshot(client, callUniqueValue.Value, callUniqueValue.Value + "-snapshot");
-			}
+			foreach (var callUniqueValue in values) IndexSnapshot(client, callUniqueValue.Value, callUniqueValue.Value + "-snapshot");
 		}
 
 		protected override bool ExpectIsValid => true;
@@ -33,12 +32,14 @@ namespace Tests.XPack.MachineLearning.UpdateModelSnapshot
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/model_snapshots/{CallIsolatedValue}-snapshot/_update";
 		protected override bool SupportsDeserialization => false;
-		protected override UpdateModelSnapshotDescriptor NewDescriptor() => new UpdateModelSnapshotDescriptor(CallIsolatedValue, CallIsolatedValue + "-snapshot");
+
+		protected override UpdateModelSnapshotDescriptor NewDescriptor() =>
+			new UpdateModelSnapshotDescriptor(CallIsolatedValue, CallIsolatedValue + "-snapshot");
 
 		protected override object ExpectJson => new
-			{
-				description = "Modified snapshot description"
-			};
+		{
+			description = "Modified snapshot description"
+		};
 
 		protected override Func<UpdateModelSnapshotDescriptor, IUpdateModelSnapshotRequest> Fluent => f => f
 			.Description("Modified snapshot description");

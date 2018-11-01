@@ -1,17 +1,13 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using System.Collections.Generic;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Indices.IndexManagement.RolloverIndex
 {
@@ -85,7 +81,7 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			},
 			aliases = new
 			{
-				new_projects = new {}
+				new_projects = new { }
 			}
 		};
 
@@ -103,7 +99,8 @@ namespace Tests.Indices.IndexManagement.RolloverIndex
 			},
 			Mappings = new Mappings
 			{
-				{ typeof(Project), new TypeMapping
+				{
+					typeof(Project), new TypeMapping
 					{
 						Properties = new Properties<Project>
 						{

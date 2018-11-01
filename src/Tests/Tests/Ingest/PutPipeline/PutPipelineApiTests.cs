@@ -2,10 +2,9 @@
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Core.ManagedElasticsearch.Clusters;
 
 namespace Tests.Ingest.PutPipeline
 {

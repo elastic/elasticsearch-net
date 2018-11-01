@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -7,11 +6,12 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Watcher.AcknowledgeWatch
 {
-	public class AcknowledgeWatchApiTests : ApiIntegrationTestBase<XPackCluster, IAcknowledgeWatchResponse, IAcknowledgeWatchRequest, AcknowledgeWatchDescriptor, AcknowledgeWatchRequest>
+	public class AcknowledgeWatchApiTests
+		: ApiIntegrationTestBase<XPackCluster, IAcknowledgeWatchResponse, IAcknowledgeWatchRequest, AcknowledgeWatchDescriptor,
+			AcknowledgeWatchRequest>
 	{
 		public AcknowledgeWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

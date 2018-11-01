@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.QueryString
@@ -42,11 +41,11 @@ namespace Tests.QueryDsl.FullText.QueryString
 
 		protected override QueryContainer QueryInitializer => new QueryStringQuery
 		{
-			Fields = Field<Project>(p=>p.Description).And("myOtherField"),
+			Fields = Field<Project>(p => p.Description).And("myOtherField"),
 			Boost = 1.1,
 			Name = "named_query",
 			Query = "hello world",
-			DefaultField = Field<Project>(p=>p.Description),
+			DefaultField = Field<Project>(p => p.Description),
 			DefaultOperator = Operator.Or,
 			Analyzer = "standard",
 			QuoteAnalyzer = "quote-an",
@@ -70,9 +69,9 @@ namespace Tests.QueryDsl.FullText.QueryString
 			.QueryString(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+				.Fields(f => f.Field(p => p.Description).Field("myOtherField"))
 				.Query("hello world")
-				.DefaultField(p=>p.Description)
+				.DefaultField(p => p.Description)
 				.DefaultOperator(Operator.Or)
 				.Analyzer("standard")
 				.QuoteAnalyzer("quote-an")

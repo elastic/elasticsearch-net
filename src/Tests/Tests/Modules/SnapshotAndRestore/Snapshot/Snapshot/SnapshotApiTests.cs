@@ -5,8 +5,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.Snapshot
@@ -41,8 +39,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.Snapshot
 		protected override Func<SnapshotDescriptor, ISnapshotRequest> Fluent => d => d
 			.Index<Project>()
 			.IncludeGlobalState()
-			.WaitForCompletion()
-		;
+			.WaitForCompletion();
 
 		protected override SnapshotRequest Initializer => new SnapshotRequest(_repos, _snapshot)
 		{

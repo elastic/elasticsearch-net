@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -12,16 +9,12 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
 
 namespace Tests.QueryDsl.Specialized.Percolate
 {
-
 	//hide
-	public abstract class PercolateQueryUsageTestsBase :
-		ApiIntegrationTestBase<
+	public abstract class PercolateQueryUsageTestsBase
+		: ApiIntegrationTestBase<
 			WritableCluster,
 			ISearchResponse<ProjectPercolation>,
 			ISearchRequest,
@@ -40,7 +33,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			requestAsync: (client, r) => client.SearchAsync<ProjectPercolation>(r)
 		);
 
-		protected override string UrlPath => $"{this.PercolationIndex}/_search";
+		protected override string UrlPath => $"{PercolationIndex}/_search";
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
@@ -49,12 +42,12 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		{
 			foreach (var index in values.Values)
 			{
-				this.Client.CreateIndex(index, c => c
-                    .Settings(settings=>settings
+				Client.CreateIndex(index, c => c
+					.Settings(settings => settings
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)
-                        .Analysis(DefaultSeeder.ProjectAnalysisSettings)
-                    )
+						.Analysis(DefaultSeeder.ProjectAnalysisSettings)
+					)
 					.Mappings(m => m
 						.Map<Project>(mm => mm.AutoMap()
 							.Properties(DefaultSeeder.ProjectProperties)
@@ -62,12 +55,12 @@ namespace Tests.QueryDsl.Specialized.Percolate
 					)
 				);
 				var percolationIndex = index + "-queries";
-				this.Client.CreateIndex(percolationIndex, c => c
-                    .Settings(settings=>settings
+				Client.CreateIndex(percolationIndex, c => c
+					.Settings(settings => settings
 						.NumberOfShards(1)
 						.NumberOfReplicas(0)
 						.Analysis(DefaultSeeder.ProjectAnalysisSettings)
-                    )
+					)
 					.Mappings(m => m
 						.Map<ProjectPercolation>(mm => mm.AutoMap()
 							.Properties(DefaultSeeder.PercolatedQueryProperties)
@@ -75,7 +68,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 					)
 				);
 
-				this.Client.Index(new ProjectPercolation
+				Client.Index(new ProjectPercolation
 				{
 					Id = PercolatorId,
 					Query = new MatchQuery
@@ -84,10 +77,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 						Query = "Martijn"
 					}
 				}, d => d.Index(percolationIndex));
-				this.Client.IndexDocument(Project.Instance);
-				this.Client.Refresh(Nest.Indices.Index(percolationIndex).And<Project>());
+				Client.IndexDocument(Project.Instance);
+				Client.Refresh(Nest.Indices.Index(percolationIndex).And<Project>());
 			}
 		}
+
 		protected string PercolationIndex => CallIsolatedValue + "-queries";
 	}
 
@@ -117,15 +111,15 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			}
 		};
 
-        //hide
+		//hide
 		protected override Func<SearchDescriptor<ProjectPercolation>, ISearchRequest> Fluent => f =>
 			f.Query(QueryFluent).Index(PercolationIndex).AllTypes();
 
-        //hide
+		//hide
 		protected override SearchRequest<ProjectPercolation> Initializer =>
 			new SearchRequest<ProjectPercolation>(PercolationIndex, Types.All)
 			{
-				Query = this.QueryInitializer
+				Query = QueryInitializer
 			};
 
 		protected QueryContainer QueryInitializer => new PercolateQuery
@@ -152,9 +146,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		protected ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IPercolateQuery>(a => a.Percolate)
 		{
-			q => {
-				q.Document = null;
-			}
+			q => { q.Document = null; }
 		};
 	}
 
@@ -197,7 +189,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		protected override SearchRequest<ProjectPercolation> Initializer =>
 			new SearchRequest<ProjectPercolation>(PercolationIndex, Types.All)
 			{
-				Query = this.QueryInitializer
+				Query = QueryInitializer
 			};
 
 		protected QueryContainer QueryInitializer => new PercolateQuery
@@ -246,7 +238,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		{
 			percolate = new
 			{
-				documents = new []
+				documents = new[]
 				{
 					Project.InstanceAnonymous,
 					Project.InstanceAnonymous,
@@ -264,12 +256,12 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		protected override SearchRequest<ProjectPercolation> Initializer =>
 			new SearchRequest<ProjectPercolation>(PercolationIndex, Types.All)
 			{
-				Query = this.QueryInitializer
+				Query = QueryInitializer
 			};
 
 		protected QueryContainer QueryInitializer => new PercolateQuery
 		{
-			Documents = new [] { Project.Instance, Project.Instance, Project.Instance },
+			Documents = new[] { Project.Instance, Project.Instance, Project.Instance },
 			Field = Infer.Field<ProjectPercolation>(f => f.Query)
 		};
 
@@ -288,7 +280,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 			var field = response.Fields.ElementAt(0);
 			var values = field.ValuesOf<int>("_percolator_document_slot");
-			values.Should().Contain(new[] {0, 1, 2});
+			values.Should().Contain(new[] { 0, 1, 2 });
 
 			var match = response.Documents.First();
 			match.Id.Should().Be(PercolatorId);

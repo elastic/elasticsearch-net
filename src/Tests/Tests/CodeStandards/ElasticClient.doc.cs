@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using FluentAssertions;
-using FluentAssertions.Common;
-using Nest;
-using Tests.Framework;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
+using Nest;
+using Tests.Framework;
+
 // ReSharper disable SuggestVarOrType_Elsewhere
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable SuggestVarOrType_SimpleTypes
@@ -28,7 +28,8 @@ namespace Tests.CodeStandards
 				from p in m.GetParameters()
 				where p.ParameterType.BaseType() == typeof(MulticastDelegate)
 				where !p.Name.Equals("selector") && !p.Name.Equals("mapper")
-				select $"method '{nameof(IElasticClient)}.{m.Name}' should have parameter name of 'selector' or 'mapper' but has a name of '{p.Name}'";
+				select
+					$"method '{nameof(IElasticClient)}.{m.Name}' should have parameter name of 'selector' or 'mapper' but has a name of '{p.Name}'";
 
 			fluentParametersNotNamedSelector.Should().BeEmpty();
 		}
@@ -57,9 +58,9 @@ namespace Tests.CodeStandards
 		{
 			var requestParameters =
 				(from m in typeof(IElasticClient).GetMethods()
-				 from p in m.GetParameters()
-				 where typeof(IRequest).IsAssignableFrom(p.ParameterType)
-				 select p).ToList();
+					from p in m.GetParameters()
+					where typeof(IRequest).IsAssignableFrom(p.ParameterType)
+					select p).ToList();
 
 			foreach (var requestParameter in requestParameters)
 				requestParameter.HasDefaultValue.Should().BeFalse();
@@ -90,9 +91,10 @@ namespace Tests.CodeStandards
 					var parameterInfo = concreteParameters[i];
 					var interfaceParameter = interfaceParameters[i];
 
-					parameterInfo.Name.Should().Be(
-						interfaceParameter.Name,
-						$"{nameof(ElasticClient)}.{interfaceMethodInfo.Name} should have parameter named {interfaceParameter.Name}");
+					parameterInfo.Name.Should()
+						.Be(
+							interfaceParameter.Name,
+							$"{nameof(ElasticClient)}.{interfaceMethodInfo.Name} should have parameter named {interfaceParameter.Name}");
 
 					if (parameterInfo.HasDefaultValue != interfaceParameter.HasDefaultValue)
 						concreteMethodParametersDoNotMatchInterface.Add(
@@ -115,30 +117,30 @@ namespace Tests.CodeStandards
 				where
 					typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType) ||
 					(methodInfo.ReturnType.IsGenericType()
-					 && typeof(Task<>) == methodInfo.ReturnType.GetGenericTypeDefinition()
-					 && typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType.GetGenericArguments()[0]))
+						&& typeof(Task<>) == methodInfo.ReturnType.GetGenericTypeDefinition()
+						&& typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType.GetGenericArguments()[0]))
 				where !methodInfo.Name.Contains("CreateDocument")
 				where !methodInfo.Name.Contains("IndexDocument")
 				let method = new MethodWithRequestParameter(methodInfo)
-				group method by method.Name into methodGroup
+				group method by method.Name
+				into methodGroup
 				select methodGroup;
 
 			foreach (var methodGroup in methodGroups)
+			foreach (var asyncMethod in methodGroup.Where(g => g.IsAsync))
 			{
-				foreach (var asyncMethod in methodGroup.Where(g => g.IsAsync))
-				{
-					var parameters = asyncMethod.MethodInfo.GetParameters().Where(p => p.ParameterType != typeof(CancellationToken)).ToArray();
+				var parameters = asyncMethod.MethodInfo.GetParameters().Where(p => p.ParameterType != typeof(CancellationToken)).ToArray();
 
-					var syncMethod = methodGroup.First(g =>
-						!g.IsAsync
-						&& g.MethodType == asyncMethod.MethodType
-						&& g.MethodInfo.GetParameters().Length == parameters.Length
-						&& (!asyncMethod.MethodInfo.IsGenericMethod ||
-							g.MethodInfo.GetGenericArguments().Length == asyncMethod.MethodInfo.GetGenericArguments().Length));
+				var syncMethod = methodGroup.First(g =>
+					!g.IsAsync
+					&& g.MethodType == asyncMethod.MethodType
+					&& g.MethodInfo.GetParameters().Length == parameters.Length
+					&& (!asyncMethod.MethodInfo.IsGenericMethod ||
+						g.MethodInfo.GetGenericArguments().Length == asyncMethod.MethodInfo.GetGenericArguments().Length));
 
-					asyncMethod.Parameter.HasDefaultValue.Should().Be(syncMethod.Parameter.HasDefaultValue,
+				asyncMethod.Parameter.HasDefaultValue.Should()
+					.Be(syncMethod.Parameter.HasDefaultValue,
 						$"sync and async versions of {asyncMethod.MethodType} '{nameof(ElasticClient)}{methodGroup.Key}' should match");
-				}
 			}
 		}
 
@@ -167,7 +169,7 @@ namespace Tests.CodeStandards
 					: methodInfo.Name;
 
 				IsAsync = methodInfo.ReturnType.IsGenericType() &&
-						  methodInfo.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
+					methodInfo.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
 
 				MethodInfo = methodInfo;
 

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -11,11 +9,6 @@ using Nest;
 using Tests.Core.Client.Settings;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Document.Multiple.MultiGet
 {
@@ -59,7 +52,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 		[I] public async Task CanHandleNotFoundResponses()
 		{
-			var response = await _client.GetManyAsync<Developer>(_ids.Select(i=>i*100));
+			var response = await _client.GetManyAsync<Developer>(_ids.Select(i => i * 100));
 			response.Count().Should().Be(10);
 			foreach (var hit in response)
 			{
@@ -69,12 +62,13 @@ namespace Tests.Document.Multiple.MultiGet
 				hit.Found.Should().BeFalse();
 			}
 		}
+
 		[I] public void ThrowsExceptionOnConnectionError()
 		{
 			if (TestConnectionSettings.RunningFiddler) return; //fiddler meddles here
 
 			var client = new ElasticClient(new TestConnectionSettings(port: 9500));
-			Action response = () => client.GetMany<Developer>(_ids.Select(i=>i*100));
+			Action response = () => client.GetMany<Developer>(_ids.Select(i => i * 100));
 			response.ShouldThrow<ElasticsearchClientException>();
 		}
 	}

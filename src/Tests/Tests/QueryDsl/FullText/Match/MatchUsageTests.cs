@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.Match
@@ -27,16 +26,15 @@ namespace Tests.QueryDsl.FullText.Match
 					cutoff_frequency = 0.001,
 					lenient = true,
 					minimum_should_match = 2,
-			        @operator = "or",
+					@operator = "or",
 					auto_generate_synonyms_phrase_query = false
 				}
 			}
-
 		};
 
 		protected override QueryContainer QueryInitializer => new MatchQuery
 		{
-			Field = Field<Project>(p=>p.Description),
+			Field = Field<Project>(p => p.Description),
 			Analyzer = "standard",
 			Boost = 1.1,
 			Name = "named_query",

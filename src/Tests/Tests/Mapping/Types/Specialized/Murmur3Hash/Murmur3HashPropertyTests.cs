@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Mapping.Types.Core.Murmur3Hash
 {
@@ -25,9 +22,9 @@ namespace Tests.Mapping.Types.Core.Murmur3Hash
 		};
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.Murmur3Hash(s => s
-					.Name(p => p.Name)
-				);
+			.Murmur3Hash(s => s
+				.Name(p => p.Name)
+			);
 
 
 		protected override IProperties InitializerProperties => new Properties

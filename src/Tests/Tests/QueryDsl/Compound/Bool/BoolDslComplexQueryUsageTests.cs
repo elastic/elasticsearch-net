@@ -4,9 +4,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Tests.QueryDsl.BoolDsl;
 
 namespace Tests.QueryDsl.Compound.Bool
@@ -22,36 +20,53 @@ namespace Tests.QueryDsl.Compound.Bool
 		{
 			@bool = new
 			{
-				should = new object[] {
+				should = new object[]
+				{
 					//first bool
-					new {
-						@bool = new {
-							must = new object[] {
+					new
+					{
+						@bool = new
+						{
+							must = new object[]
+							{
 								new { term = new { x = new { value = "y" } } },
 								new { term = new { x = new { value = "y" } } }
 							}
 						}
 					},
-					new {
-						@bool = new {
-							must = new object[] {
-								new {
-									@bool = new {
+					new
+					{
+						@bool = new
+						{
+							must = new object[]
+							{
+								new
+								{
+									@bool = new
+									{
 										//complex nested bool
-										should = new object[] {
-											new {
-												@bool = new {
+										should = new object[]
+										{
+											new
+											{
+												@bool = new
+												{
 													filter = new object[] { new { term = new { x = new { value = "y" } } } }
 												}
 											},
-											new {
-												@bool = new {
+											new
+											{
+												@bool = new
+												{
 													filter = new object[] { new { term = new { x = new { value = "y" } } } }
 												}
 											},
-											new {
-												@bool = new {
-													must_not = new object[] {
+											new
+											{
+												@bool = new
+												{
+													must_not = new object[]
+													{
 														new { term = new { x = new { value = "y" } } },
 														new { term = new { x = new { value = "y" } } }
 													}
@@ -61,9 +76,12 @@ namespace Tests.QueryDsl.Compound.Bool
 									}
 								},
 								//simple nested or
-								new {
-									@bool = new {
-										should = new object[] {
+								new
+								{
+									@bool = new
+									{
+										should = new object[]
+										{
 											new { term = new { x = new { value = "y" } } },
 											new { term = new { x = new { value = "y" } } },
 											new { term = new { x = new { value = "y" } } }
@@ -109,11 +127,7 @@ namespace Tests.QueryDsl.Compound.Bool
 
 		//hide
 		[U]
-		protected void AsssertShape()
-		{
-			this.AssertShape(this.QueryInitializer);
-			//this.AssertShape(this.QueryFluent(new QueryContainerDescriptor<Project>()));
-		}
+		protected void AsssertShape() => AssertShape(QueryInitializer);
 
 		//hide
 		private void AssertShape(IQueryContainer container)
@@ -151,6 +165,5 @@ namespace Tests.QueryDsl.Compound.Bool
 			mustNotsBool.Should().NotBeNull();
 			mustNotsBool.MustNot.Should().HaveCount(2); //one of the three must nots was conditionless
 		}
-
 	}
 }

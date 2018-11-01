@@ -8,12 +8,12 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 {
-	public class RenderSearchTemplateApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IRenderSearchTemplateResponse, IRenderSearchTemplateRequest, RenderSearchTemplateDescriptor, RenderSearchTemplateRequest>
+	public class RenderSearchTemplateApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IRenderSearchTemplateResponse, IRenderSearchTemplateRequest, RenderSearchTemplateDescriptor,
+			RenderSearchTemplateRequest>
 	{
 		public RenderSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -29,7 +29,7 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 
-		private static string inlineSearchTemplate = @"
+		private static readonly string inlineSearchTemplate = @"
 {
 	""query"": {
 	  ""terms"": {
@@ -41,11 +41,12 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 	  }
 	}
   }";
-		private string[] statusValues = new[] { "pending", "published" };
 
-		protected override Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> Fluent => s=>s
+		private readonly string[] statusValues = new[] { "pending", "published" };
+
+		protected override Func<RenderSearchTemplateDescriptor, IRenderSearchTemplateRequest> Fluent => s => s
 			.Source(inlineSearchTemplate)
-			.Params(p=>p
+			.Params(p => p
 				.Add("status", statusValues)
 			);
 
@@ -59,7 +60,7 @@ namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 			}
 		};
 
-		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
+		[I] public Task AssertResponse() => AssertOnAllResponses(r =>
 		{
 			r.TemplateOutput.Should().NotBeNull();
 			var searchRequest = r.TemplateOutput.As<ISearchRequest>();

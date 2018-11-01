@@ -5,10 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
 using static Nest.Infer;
 using static Tests.Domain.Helpers.TestValueHelper;
 
@@ -39,7 +36,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					interval = "month",
 					min_doc_count = 2,
 					format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", //<1> Note the inclusion of `date_optional_time` to `format`
-					order = new {_count = "asc"},
+					order = new { _count = "asc" },
 					extended_bounds = new
 					{
 						min = FixedDate.AddYears(-1),
@@ -59,7 +56,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 						{
 							tags = new
 							{
-								terms = new {field = "tags.name"}
+								terms = new { field = "tags.name" }
 							}
 						}
 					}

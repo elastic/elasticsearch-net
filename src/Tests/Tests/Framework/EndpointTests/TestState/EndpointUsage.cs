@@ -25,14 +25,16 @@ namespace Tests.Framework.Integration
 
 		public EndpointUsage() : this("nest") { }
 
-		protected EndpointUsage(string prefix) => this.CallUniqueValues = new CallUniqueValues(prefix);
+		protected EndpointUsage(string prefix) => CallUniqueValues = new CallUniqueValues(prefix);
 
 		public LazyResponses CallOnce(Func<LazyResponses> clientUsage, int k = 0)
 		{
 			if (_usages.TryGetValue(k, out var lazyResponses)) return lazyResponses;
+
 			lock (_lock)
 			{
 				if (_usages.TryGetValue(k, out lazyResponses)) return lazyResponses;
+
 				var response = clientUsage();
 				_usages.TryAdd(k, response);
 				return response;
@@ -49,7 +51,7 @@ namespace Tests.Framework.Integration
 			Func<string, IElasticClient, TResponse> request,
 			Func<string, IElasticClient, Task<TResponse>> requestAsync,
 			string valuePrefix = null
-			) : base(valuePrefix)
+		) : base(valuePrefix)
 		{
 			_fluent = fluent;
 			_fluentAsync = fluentAsync;
@@ -72,12 +74,12 @@ namespace Tests.Framework.Integration
 		public static Randomizer Random { get; } = new Randomizer(TestConfiguration.Instance.Seed);
 
 		public void KickOffOnce(IElasticClient client, bool oneRandomCall = false) =>
-			this.Responses = this.CallOnce(()=> new LazyResponses(async () =>
+			Responses = CallOnce(() => new LazyResponses(async () =>
 			{
 				if (TestClient.Configuration.RunIntegrationTests)
 				{
-					this.IntegrationSetup?.Invoke(client, this.CallUniqueValues);
-					this.CalledSetup = true;
+					IntegrationSetup?.Invoke(client, CallUniqueValues);
+					CalledSetup = true;
 				}
 
 				var randomCall = Random.Number(0, 3);
@@ -85,22 +87,22 @@ namespace Tests.Framework.Integration
 				var dict = new Dictionary<ClientMethod, IResponse>();
 
 				if (!oneRandomCall || randomCall == 0)
-					this.Call(client, dict, ClientMethod.Fluent, v => _fluent(v, client));
+					Call(client, dict, ClientMethod.Fluent, v => _fluent(v, client));
 
 				if (!oneRandomCall || randomCall == 1)
-					await this.CallAsync(client, dict, ClientMethod.FluentAsync, v => _fluentAsync(v, client));
+					await CallAsync(client, dict, ClientMethod.FluentAsync, v => _fluentAsync(v, client));
 
 				if (!oneRandomCall || randomCall == 2)
-					this.Call(client, dict, ClientMethod.Initializer, v => _request(v, client));
+					Call(client, dict, ClientMethod.Initializer, v => _request(v, client));
 
 				if (!oneRandomCall || randomCall == 3)
-					await this.CallAsync(client, dict, ClientMethod.InitializerAsync, v => _requestAsync(v, client));
+					await CallAsync(client, dict, ClientMethod.InitializerAsync, v => _requestAsync(v, client));
 
 				if (TestClient.Configuration.RunIntegrationTests)
 				{
-					foreach (var v in this.CallUniqueValues.Values.SelectMany(d => d))
-						this.IntegrationTeardown?.Invoke(client, this.CallUniqueValues);
-					this.CalledTeardown = true;
+					foreach (var v in CallUniqueValues.Values.SelectMany(d => d))
+						IntegrationTeardown?.Invoke(client, CallUniqueValues);
+					CalledTeardown = true;
 				}
 
 				return dict;
@@ -108,29 +110,32 @@ namespace Tests.Framework.Integration
 
 		private void Call(IElasticClient client, IDictionary<ClientMethod, IResponse> dict, ClientMethod method, Func<string, TResponse> call)
 		{
-			this.CallUniqueValues.CurrentView = method;
-			this.OnBeforeCall?.Invoke(client);
-			dict.Add(method, call(this.CallUniqueValues.Value));
-			this.OnAfterCall?.Invoke(client);
+			CallUniqueValues.CurrentView = method;
+			OnBeforeCall?.Invoke(client);
+			dict.Add(method, call(CallUniqueValues.Value));
+			OnAfterCall?.Invoke(client);
 		}
-		private async Task CallAsync(IElasticClient client, IDictionary<ClientMethod, IResponse> dict, ClientMethod method, Func<string,Task<TResponse>> call)
+
+		private async Task CallAsync(IElasticClient client, IDictionary<ClientMethod, IResponse> dict, ClientMethod method,
+			Func<string, Task<TResponse>> call
+		)
 		{
-			this.CallUniqueValues.CurrentView = method;
-			this.OnBeforeCall?.Invoke(client);
-			dict.Add(method, await call(this.CallUniqueValues.Value));
-			this.OnAfterCall?.Invoke(client);
+			CallUniqueValues.CurrentView = method;
+			OnBeforeCall?.Invoke(client);
+			dict.Add(method, await call(CallUniqueValues.Value));
+			OnAfterCall?.Invoke(client);
 		}
 
 		public async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
-			var responses = await this.Responses;
+			var responses = await Responses;
 			foreach (var kv in responses)
 			{
 				var r = kv.Value as TResponse;
 
 				//this is to make sure any unexpected exceptions on the response are rethrown and shown during testing
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.ApiCall.OriginalException != null
-				    && !(r.ApiCall.OriginalException is ElasticsearchClientException))
+					&& !(r.ApiCall.OriginalException is ElasticsearchClientException))
 				{
 					var e = ExceptionDispatchInfo.Capture(r.ApiCall.OriginalException.Demystify());
 					throw new ResponseAssertionException(e.SourceException, r);
@@ -147,5 +152,4 @@ namespace Tests.Framework.Integration
 			}
 		}
 	}
-
 }

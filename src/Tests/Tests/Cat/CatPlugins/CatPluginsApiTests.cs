@@ -4,14 +4,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatPlugins
 {
-	public class CatPluginsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatPluginsRecord>, ICatPluginsRequest, CatPluginsDescriptor, CatPluginsRequest>
+	public class CatPluginsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatPluginsRecord>, ICatPluginsRequest, CatPluginsDescriptor, CatPluginsRequest>
 	{
 		public CatPluginsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatPlugins(),
 			fluentAsync: (client, f) => client.CatPluginsAsync(),
@@ -24,9 +24,8 @@ namespace Tests.Cat.CatPlugins
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/plugins";
 
-		protected override void ExpectResponse(ICatResponse<CatPluginsRecord> response)
-		{
-			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Name) && a.Component == "mapper-murmur3");
-		}
+		protected override void ExpectResponse(ICatResponse<CatPluginsRecord> response) => response.Records.Should()
+			.NotBeEmpty()
+			.And.Contain(a => !string.IsNullOrEmpty(a.Name) && a.Component == "mapper-murmur3");
 	}
 }

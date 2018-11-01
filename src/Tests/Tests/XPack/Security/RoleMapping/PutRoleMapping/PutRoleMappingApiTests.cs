@@ -7,15 +7,13 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
-using static Nest.Infer;
 
 namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 {
 	[SkipVersion("<5.5.0", "")]
-	public class PutRoleMappingApiTests : ApiIntegrationTestBase<XPackCluster, IPutRoleMappingResponse, IPutRoleMappingRequest,
-		PutRoleMappingDescriptor, PutRoleMappingRequest>
+	public class PutRoleMappingApiTests
+		: ApiIntegrationTestBase<XPackCluster, IPutRoleMappingResponse, IPutRoleMappingRequest,
+			PutRoleMappingDescriptor, PutRoleMappingRequest>
 	{
 		public PutRoleMappingApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -23,11 +21,11 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 		private readonly string _username = "mpdreamz";
 		private readonly string _realm = "some_realm";
 		private readonly Tuple<string, string> _metadata = Tuple.Create("a", "b");
-		private readonly string[] _groups = {"group1", "group2"};
+		private readonly string[] _groups = { "group1", "group2" };
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.PutRoleMapping(this.Role, f),
-			fluentAsync: (client, f) => client.PutRoleMappingAsync(this.Role, f),
+			fluent: (client, f) => client.PutRoleMapping(Role, f),
+			fluentAsync: (client, f) => client.PutRoleMappingAsync(Role, f),
 			request: (client, r) => client.PutRoleMapping(r),
 			requestAsync: (client, r) => client.PutRoleMappingAsync(r)
 		);
@@ -36,7 +34,7 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
-		protected override string UrlPath => $"/_xpack/security/role_mapping/{this.Role}";
+		protected override string UrlPath => $"/_xpack/security/role_mapping/{Role}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -46,35 +44,39 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 		protected override object ExpectJson => new
 		{
 			enabled = true,
-			roles = new[] {"admin"},
+			roles = new[] { "admin" },
 			metadata = new
 			{
 				x = "y",
-				z = (object) null
+				z = (object)null
 			},
-			rules = new {
-				all = new object[] {
-					new {
-						any = new object[] {
+			rules = new
+			{
+				all = new object[]
+				{
+					new
+					{
+						any = new object[]
+						{
 							new { field = new { dn = "*,ou=admin,dc=example,dc=com" } },
 							new { field = new { username = "mpdreamz" } },
-							new { field = new Dictionary<string, object>(){ {"realm.name", "some_realm" } } }
+							new { field = new Dictionary<string, object>() { { "realm.name", "some_realm" } } }
 						}
 					},
-					new { field = new Dictionary<string, object>(){ {"metadata.a", "b" } } },
-					new { except = new { field = new { groups = new [] { "group1", "group2" } } } }
+					new { field = new Dictionary<string, object>() { { "metadata.a", "b" } } },
+					new { except = new { field = new { groups = new[] { "group1", "group2" } } } }
 				}
-            }
+			}
 		};
 
-		protected override PutRoleMappingRequest Initializer => new PutRoleMappingRequest(this.Role)
+		protected override PutRoleMappingRequest Initializer => new PutRoleMappingRequest(Role)
 		{
 			Enabled = true,
-			Roles = new [] { "admin"},
+			Roles = new[] { "admin" },
 			Metadata = new Dictionary<string, object>
 			{
-				{"x", "y"},
-				{"z", null}
+				{ "x", "y" },
+				{ "z", null }
 			},
 			Rules =
 				(new DistinguishedNameRule(_dn) | new UsernameRule(_username) | new RealmRule(_realm))
@@ -82,12 +84,12 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 				& !new GroupsRule(_groups)
 		};
 
-		protected override PutRoleMappingDescriptor NewDescriptor() => new PutRoleMappingDescriptor(this.Role);
+		protected override PutRoleMappingDescriptor NewDescriptor() => new PutRoleMappingDescriptor(Role);
 
 		protected override Func<PutRoleMappingDescriptor, IPutRoleMappingRequest> Fluent => d => d
 			.Enabled()
 			.Roles("admin")
-			.Metadata(f=>f.Add("x", "y").Add("z", null))
+			.Metadata(f => f.Add("x", "y").Add("z", null))
 			.Rules(r => r
 				.All(all => all
 					.Any(any => any
@@ -96,7 +98,7 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 						.Realm(_realm)
 					)
 					.Metadata(_metadata.Item1, _metadata.Item2)
-					.Except(e=>e.Groups(_groups))
+					.Except(e => e.Groups(_groups))
 				)
 			);
 
@@ -106,5 +108,4 @@ namespace Tests.XPack.Security.RoleMapping.PutRoleMapping
 			response.RoleMapping.Created.Should().BeTrue();
 		}
 	}
-
 }

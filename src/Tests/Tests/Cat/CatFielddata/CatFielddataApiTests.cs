@@ -8,15 +8,16 @@ using Tests.Core.Xunit;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatFielddata
 {
-	public class CatFielddataApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
+	public class CatFielddataApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
 	{
 		private ISearchResponse<Project> _initialSearchResponse;
+
 		public CatFielddataApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatFielddata(),
 			fluentAsync: (client, f) => client.CatFielddataAsync(),
@@ -27,17 +28,17 @@ namespace Tests.Cat.CatFielddata
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			// ensure some fielddata is loaded
-			this._initialSearchResponse = client.Search<Project>(s => s
+			_initialSearchResponse = client.Search<Project>(s => s
 				.Query(q => q
 					.Terms(t => t
 						.Field(p => p.CuratedTags.First().Name)
-						.Terms(Project.Projects.SelectMany(p=>p.CuratedTags).Take(50).ToList())
+						.Terms(Project.Projects.SelectMany(p => p.CuratedTags).Take(50).ToList())
 					)
 				)
 			);
 
-			if (!this._initialSearchResponse.IsValid)
-				throw new Exception($"Failure setting up integration test. {this._initialSearchResponse.DebugInformation}");
+			if (!_initialSearchResponse.IsValid)
+				throw new Exception($"Failure setting up integration test. {_initialSearchResponse.DebugInformation}");
 		}
 
 		protected override bool ExpectIsValid => true;
@@ -51,7 +52,7 @@ namespace Tests.Cat.CatFielddata
 			// TODO investigate flakiness
 			// build seed:64178 integrate 6.3.0 "readonly" "catfielddata"
 			// fails on TeamCity but not locally, assuming the different PC sizes come into play
-			if (SkipOnTeamCityAttribute.RunningOnTeamCity || this._initialSearchResponse == null || this._initialSearchResponse.Total <= 0)
+			if (SkipOnTeamCityAttribute.RunningOnTeamCity || _initialSearchResponse == null || _initialSearchResponse.Total <= 0)
 				return;
 
 			response.Records.Should().NotBeEmpty();
@@ -66,5 +67,4 @@ namespace Tests.Cat.CatFielddata
 			}
 		}
 	}
-
 }

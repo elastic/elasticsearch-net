@@ -1,7 +1,6 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -12,15 +11,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			//based on examples from http://www.ietf.org/rfc/rfc2732.txt
 			var testcases = new[,]
 			{
-				{"[::1]:9200", "[::1]", "9200"},
-				{"192.168.2.1:231", "192.168.2.1", "231"},
-				{"[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80", "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]", "80"},
-				{"[1080:0:0:0:8:800:200C:417A]:1234", "[1080:0:0:0:8:800:200C:417A]", "1234"},
-				{"[3ffe:2a00:100:7031::1]:1", "[3ffe:2a00:100:7031::1]", "1"},
-				{"[1080::8:800:200C:417A]:123", "[1080::8:800:200C:417A]", "123"},
-				{"[::192.9.5.5]:12", "[::192.9.5.5]", "12"},
-				{"[::FFFF:129.144.52.38]:80", "[::FFFF:129.144.52.38]", "80"},
-				{"[2010:836B:4179::836B:4179]:34533", "[2010:836B:4179::836B:4179]", "34533"}
+				{ "[::1]:9200", "[::1]", "9200" },
+				{ "192.168.2.1:231", "192.168.2.1", "231" },
+				{ "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80", "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]", "80" },
+				{ "[1080:0:0:0:8:800:200C:417A]:1234", "[1080:0:0:0:8:800:200C:417A]", "1234" },
+				{ "[3ffe:2a00:100:7031::1]:1", "[3ffe:2a00:100:7031::1]", "1" },
+				{ "[1080::8:800:200C:417A]:123", "[1080::8:800:200C:417A]", "123" },
+				{ "[::192.9.5.5]:12", "[::192.9.5.5]", "12" },
+				{ "[::FFFF:129.144.52.38]:80", "[::FFFF:129.144.52.38]", "80" },
+				{ "[2010:836B:4179::836B:4179]:34533", "[2010:836B:4179::836B:4179]", "34533" }
 			};
 
 			for (var i = 0; i < testcases.GetLength(0); i++)
@@ -43,8 +42,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			//based on examples from http://www.ietf.org/rfc/rfc2732.txt
 			var testcases = new[,]
 			{
-				{"helloworld/[::1]:9200", "helloworld", "[::1]", "9200"},
-				{"elastic.co/192.168.2.1:231", "elastic.co", "192.168.2.1", "231"}
+				{ "helloworld/[::1]:9200", "helloworld", "[::1]", "9200" },
+				{ "elastic.co/192.168.2.1:231", "elastic.co", "192.168.2.1", "231" }
 			};
 
 			for (var i = 0; i < testcases.GetLength(0); i++)

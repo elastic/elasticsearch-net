@@ -4,14 +4,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatSegments
 {
-	public class CatSegmentsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatSegmentsRecord>, ICatSegmentsRequest, CatSegmentsDescriptor, CatSegmentsRequest>
+	public class CatSegmentsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatSegmentsRecord>, ICatSegmentsRequest, CatSegmentsDescriptor, CatSegmentsRequest>
 	{
 		public CatSegmentsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatSegments(),
 			fluentAsync: (client, f) => client.CatSegmentsAsync(),
@@ -24,10 +24,7 @@ namespace Tests.Cat.CatSegments
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/segments";
 
-		protected override void ExpectResponse(ICatResponse<CatSegmentsRecord> response)
-		{
+		protected override void ExpectResponse(ICatResponse<CatSegmentsRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Index));
-		}
 	}
-
 }

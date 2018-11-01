@@ -4,7 +4,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.Specialized.MoreLikeThis
@@ -18,8 +17,10 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 			more_like_this = new
 			{
 				fields = new[] { "name" },
-				like = new object[] {
-					new {
+				like = new object[]
+				{
+					new
+					{
 						_index = "project",
 						_type = "doc",
 						_id = Project.Instance.Name,
@@ -33,7 +34,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 
 		protected override QueryContainer QueryInitializer => new MoreLikeThisQuery
 		{
-			Fields = Fields<Project>(p=>p.Name),
+			Fields = Fields<Project>(p => p.Name),
 			Like = new List<Like>
 			{
 				new LikeDocument<Project>(Project.Instance),
@@ -43,9 +44,9 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.MoreLikeThis(sn => sn
-				.Fields(f=>f.Field(p=>p.Name))
-				.Like(l=>l
-					.Document(d=>d.Document(Project.Instance))
+				.Fields(f => f.Field(p => p.Name))
+				.Like(l => l
+					.Document(d => d.Document(Project.Instance))
 					.Text("some long text")
 				)
 			);

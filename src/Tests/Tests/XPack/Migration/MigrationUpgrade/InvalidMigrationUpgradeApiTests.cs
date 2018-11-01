@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -8,12 +6,12 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Migration.MigrationUpgrade
 {
-	public class InvalidMigrationUpgradeApiTests :
-		ApiIntegrationTestBase<XPackCluster, IMigrationUpgradeResponse, IMigrationUpgradeRequest, MigrationUpgradeDescriptor, MigrationUpgradeRequest>
+	public class InvalidMigrationUpgradeApiTests
+		: ApiIntegrationTestBase<XPackCluster, IMigrationUpgradeResponse, IMigrationUpgradeRequest, MigrationUpgradeDescriptor,
+			MigrationUpgradeRequest>
 	{
 		public InvalidMigrationUpgradeApiTests(XPackCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }

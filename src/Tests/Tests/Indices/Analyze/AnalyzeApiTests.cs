@@ -6,14 +6,13 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.Analyze
 {
 	public class AnalyzeApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		public AnalyzeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Analyze(f),
 			fluentAsync: (client, f) => client.AnalyzeAsync(f),
@@ -49,7 +48,8 @@ namespace Tests.Indices.Analyze
 		};
 	}
 
-	public class AnalyzeInlineAnalyzerApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
+	public class AnalyzeInlineAnalyzerApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		protected const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
 
@@ -102,12 +102,12 @@ namespace Tests.Indices.Analyze
 			CharFilter = new AnalyzeCharFilters
 			{
 				"html_strip",
-				new MappingCharFilter { Mappings = new[] { "F# => fsharp"}}
+				new MappingCharFilter { Mappings = new[] { "F# => fsharp" } }
 			},
 			Filter = new AnalyzeTokenFilters
 			{
 				"lowercase",
-				new StopTokenFilter { StopWords = new [] {"_english_", "the" }}
+				new StopTokenFilter { StopWords = new[] { "_english_", "the" } }
 			}
 		};
 
@@ -120,7 +120,8 @@ namespace Tests.Indices.Analyze
 		}
 	}
 
-	public class AnalyzeInlineNormalizerApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
+	public class AnalyzeInlineNormalizerApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		private const string TextToAnalyze = "F# is <b>THE SUPERIOR</b> language :) :gandalf: ";
 
@@ -165,7 +166,7 @@ namespace Tests.Indices.Analyze
 			Text = new[] { TextToAnalyze },
 			CharFilter = new AnalyzeCharFilters
 			{
-				new MappingCharFilter { Mappings = new[] { "F# => fsharp"}}
+				new MappingCharFilter { Mappings = new[] { "F# => fsharp" } }
 			},
 			Filter = new AnalyzeTokenFilters
 			{
@@ -225,6 +226,7 @@ namespace Tests.Indices.Analyze
 				c.Name.Should().NotBeNullOrWhiteSpace();
 				c.FilteredText.Should().NotBeEmpty();
 			}
+
 			response.Detail.Filters.Should().NotBeEmpty();
 			foreach (var c in response.Detail.Filters)
 				AssertTokenDetail(c);
@@ -236,10 +238,7 @@ namespace Tests.Indices.Analyze
 		private static void AssertTokenDetail(TokenDetail c)
 		{
 			c.Name.Should().NotBeNullOrWhiteSpace();
-			foreach (var t in c.Tokens)
-			{
-				t.Token.Should().NotBeNullOrWhiteSpace();
-			}
+			foreach (var t in c.Tokens) t.Token.Should().NotBeNullOrWhiteSpace();
 		}
 	}
 }

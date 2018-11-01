@@ -1,15 +1,12 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using System.Linq;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using System;
-using System.Linq;
 using Tests.Core.Client.Settings;
 using Tests.Core.ManagedElasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.ClientConcepts.Exceptions
@@ -18,10 +15,7 @@ namespace Tests.ClientConcepts.Exceptions
 	{
 		private readonly int _port;
 
-		public ExceptionTests(WritableCluster cluster) : base(cluster)
-		{
-			_port = cluster.Nodes.First().Port ?? 9200;
-		}
+		public ExceptionTests(WritableCluster cluster) : base(cluster) => _port = cluster.Nodes.First().Port ?? 9200;
 
 		//[I]
 		public void ServerTestWhenThrowExceptionsEnabled()
@@ -74,7 +68,7 @@ namespace Tests.ClientConcepts.Exceptions
 			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"));
 			var client = new ElasticClient(settings);
 
-			System.Action dispatch = () => client.Index(new Project(), p=>p.Index(null));
+			Action dispatch = () => client.Index(new Project(), p => p.Index(null));
 			var ce = dispatch.ShouldThrow<ArgumentException>();
 			ce.Should().NotBeNull();
 			ce.Which.Message.Should().Contain("index=<NULL>");

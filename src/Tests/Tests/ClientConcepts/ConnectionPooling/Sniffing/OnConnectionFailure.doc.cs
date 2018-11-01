@@ -31,13 +31,16 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.Nodes(5)
 				.MasterEligible(9202, 9203, 9204)
 				.ClientCalls(r => r.SucceedAlways())
-				.ClientCalls(r => r.OnPort(9201).Fails(Once)) // <1> When the call fails on 9201, the following sniff succeeds and returns a new cluster state of healthy nodes. This cluster only has 3 nodes and the known masters are 9200 and 9202. A search on 9201 is setup to still fail once
-                .Sniff(p => p.SucceedAlways(Framework.Cluster
+				.ClientCalls(r =>
+					r.OnPort(9201)
+						.Fails(Once)) // <1> When the call fails on 9201, the following sniff succeeds and returns a new cluster state of healthy nodes. This cluster only has 3 nodes and the known masters are 9200 and 9202. A search on 9201 is setup to still fail once
+				.Sniff(p => p.SucceedAlways(Framework.Cluster
 					.Nodes(3)
 					.MasterEligible(9200, 9202)
 					.ClientCalls(r => r.OnPort(9201).Fails(Once))
-					.Sniff(s => s.SucceedAlways(Framework.Cluster // <2> After this second failure on 9201, another sniff will happen which returns a cluster state that no longer fails but looks completely different; It's now three nodes on ports 9210 - 9212, with 9210 and 9212 being master eligible.
-                        .Nodes(3, 9210)
+					.Sniff(s => s.SucceedAlways(Framework
+						.Cluster // <2> After this second failure on 9201, another sniff will happen which returns a cluster state that no longer fails but looks completely different; It's now three nodes on ports 9210 - 9212, with 9210 and 9212 being master eligible.
+						.Nodes(3, 9210)
 						.MasterEligible(9210, 9212)
 						.ClientCalls(r => r.SucceedAlways())
 						.Sniff(r => r.SucceedAlways())
@@ -48,24 +51,27 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 
 			audit = await audit.TraceCalls(
-			/** */
-				new ClientCall {
+				/** */
+				new ClientCall
+				{
 					{ HealthyResponse, 9200 },
-					{ pool =>  pool.Nodes.Count.Should().Be(5) }
+					{ pool => pool.Nodes.Count.Should().Be(5) }
 				},
-				new ClientCall {
-					{ BadResponse, 9201},
+				new ClientCall
+				{
+					{ BadResponse, 9201 },
 					{ SniffOnFail },
-					{ SniffSuccess, 9202}, // <3> We assert we do a sniff on our first known master node 9202 after the failed call on 9201
-					{ HealthyResponse, 9200},
-					{ pool =>  pool.Nodes.Count.Should().Be(3) } // <4> Our pool should now have three nodes
+					{ SniffSuccess, 9202 }, // <3> We assert we do a sniff on our first known master node 9202 after the failed call on 9201
+					{ HealthyResponse, 9200 },
+					{ pool => pool.Nodes.Count.Should().Be(3) } // <4> Our pool should now have three nodes
 				},
-				new ClientCall {
-					{ BadResponse, 9201},
+				new ClientCall
+				{
+					{ BadResponse, 9201 },
 					{ SniffOnFail }, // <5> We assert we do a sniff on the first master node in our updated cluster
-					{ SniffSuccess, 9200},
-					{ HealthyResponse, 9210},
-					{ pool =>  pool.Nodes.Count.Should().Be(3) }
+					{ SniffSuccess, 9200 },
+					{ HealthyResponse, 9210 },
+					{ pool => pool.Nodes.Count.Should().Be(3) }
 				},
 				new ClientCall { { HealthyResponse, 9211 } },
 				new ClientCall { { HealthyResponse, 9212 } },
@@ -79,9 +85,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 		}
 
-        /**==== Sniffing after ping failure
-         *
-         */
+		/**==== Sniffing after ping failure
+		 *
+		 */
 		[U] public async Task DoesASniffAfterConnectionFailureOnPing()
 		{
 			/** Here we set up our cluster exactly the same as the previous setup
@@ -107,58 +113,63 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 
 			audit = await audit.TraceCalls(
-				new ClientCall {
+				new ClientCall
+				{
 					{ PingSuccess, 9200 },
 					{ HealthyResponse, 9200 },
-					{ pool =>  pool.Nodes.Count.Should().Be(5) }
+					{ pool => pool.Nodes.Count.Should().Be(5) }
 				},
-				new ClientCall {
-					{ PingFailure, 9201},
+				new ClientCall
+				{
+					{ PingFailure, 9201 },
 					{ SniffOnFail }, // <1> We assert we do a sniff on our first known master node 9202
-					{ SniffSuccess, 9202},
-					{ PingSuccess, 9200},
-					{ HealthyResponse, 9200},
-					{ pool =>  pool.Nodes.Count.Should().Be(3) } // <2> Our pool should now have three nodes
+					{ SniffSuccess, 9202 },
+					{ PingSuccess, 9200 },
+					{ HealthyResponse, 9200 },
+					{ pool => pool.Nodes.Count.Should().Be(3) } // <2> Our pool should now have three nodes
 				},
-				new ClientCall {
-					{ PingFailure, 9201},
+				new ClientCall
+				{
+					{ PingFailure, 9201 },
 					{ SniffOnFail }, // <3> We assert we do a sniff on the first master node in our updated cluster
-					{ SniffSuccess, 9200},
-					{ PingSuccess, 9210},
-					{ HealthyResponse, 9210},
-					{ pool =>  pool.Nodes.Count.Should().Be(3) }
+					{ SniffSuccess, 9200 },
+					{ PingSuccess, 9210 },
+					{ HealthyResponse, 9210 },
+					{ pool => pool.Nodes.Count.Should().Be(3) }
 				},
-				new ClientCall {
+				new ClientCall
+				{
 					{ PingSuccess, 9211 },
 					{ HealthyResponse, 9211 }
 				},
-				new ClientCall {
+				new ClientCall
+				{
 					{ PingSuccess, 9212 },
 					{ HealthyResponse, 9212 }
 				},
 				new ClientCall { { HealthyResponse, 9210 } }, // <4> 9210 was already pinged after the sniff returned the new nodes
-                new ClientCall { { HealthyResponse, 9211 } },
+				new ClientCall { { HealthyResponse, 9211 } },
 				new ClientCall { { HealthyResponse, 9212 } },
 				new ClientCall { { HealthyResponse, 9210 } }
 			);
 		}
 
-        /**==== Client uses publish address
-         *
-         */
+		/**==== Client uses publish address
+		 *
+		 */
 		[U] public async Task UsesPublishAddress()
 		{
 			var audit = new Auditor(() => Framework.Cluster
-					.Nodes(2)
-					.MasterEligible(9200)
-					.Ping(r => r.OnPort(9200).Fails(Once))
-					.Sniff(p => p.SucceedAlways(Framework.Cluster
-							.Nodes(10)
-							.MasterEligible(9200, 9202, 9201)
-							.PublishAddress("10.0.12.1")
-					))
-					.SniffingConnectionPool()
-					.Settings(s => s.SniffOnStartup(false))
+				.Nodes(2)
+				.MasterEligible(9200)
+				.Ping(r => r.OnPort(9200).Fails(Once))
+				.Sniff(p => p.SucceedAlways(Framework.Cluster
+					.Nodes(10)
+					.MasterEligible(9200, 9202, 9201)
+					.PublishAddress("10.0.12.1")
+				))
+				.SniffingConnectionPool()
+				.Settings(s => s.SniffOnStartup(false))
 			);
 
 			void HostAssert(Audit a, string host, int expectedPort)
@@ -166,6 +177,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				a.Node.Uri.Host.Should().Be(host);
 				a.Node.Uri.Port.Should().Be(expectedPort);
 			}
+
 			void SniffUrlAssert(Audit a, string host, int expectedPort)
 			{
 				HostAssert(a, host, expectedPort);
@@ -178,13 +190,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			}
 
 			audit = await audit.TraceCalls(
-				new ClientCall {
-					{ PingFailure, a => HostAssert(a, "localhost", 9200)},
+				new ClientCall
+				{
+					{ PingFailure, a => HostAssert(a, "localhost", 9200) },
 					{ SniffOnFail },
-					{ SniffSuccess, a => SniffUrlAssert(a, "localhost", 9200)},
-					{ PingSuccess, a => HostAssert(a, "10.0.12.1", 9200)},
-					{ HealthyResponse,  a => HostAssert(a, "10.0.12.1", 9200)},
-					{ pool =>  pool.Nodes.Count.Should().Be(10) } // <1> Our pool should now have 10 nodes
+					{ SniffSuccess, a => SniffUrlAssert(a, "localhost", 9200) },
+					{ PingSuccess, a => HostAssert(a, "10.0.12.1", 9200) },
+					{ HealthyResponse, a => HostAssert(a, "10.0.12.1", 9200) },
+					{ pool => pool.Nodes.Count.Should().Be(10) } // <1> Our pool should now have 10 nodes
 				}
 			);
 		}

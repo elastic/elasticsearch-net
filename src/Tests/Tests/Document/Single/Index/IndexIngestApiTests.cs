@@ -8,25 +8,21 @@ using Tests.Domain;
 using Tests.Domain.Extensions;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Document.Single.Index
 {
-	public class IndexIngestApiTests :
-		ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+	public class IndexIngestApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		protected override bool IncludeNullInExpected => false;
 
 		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
 
-		public IndexIngestApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public IndexIngestApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			client.PutPipeline(new PutPipelineRequest(PipelineId)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => client.PutPipeline(
+			new PutPipelineRequest(PipelineId)
 			{
 				Description = "Index pipeline test",
 				Processors = new List<IProcessor>
@@ -38,7 +34,6 @@ namespace Tests.Document.Single.Index
 					}
 				}
 			});
-		}
 
 		private Project Document => new Project
 		{
@@ -46,16 +41,16 @@ namespace Tests.Document.Single.Index
 			Name = CallIsolatedValue,
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
-			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
+			CuratedTags = new List<Tag> { new Tag { Name = "x", Added = FixedDate } },
 			SourceOnly = TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Index<Project>(this.Document, f),
-			fluentAsync: (client, f) => client.IndexAsync<Project>(this.Document, f),
+			fluent: (client, f) => client.Index<Project>(Document, f),
+			fluentAsync: (client, f) => client.IndexAsync<Project>(Document, f),
 			request: (client, r) => client.Index(r),
 			requestAsync: (client, r) => client.IndexAsync(r)
-			);
+		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 201;
@@ -78,10 +73,10 @@ namespace Tests.Document.Single.Index
 				lastActivity = FixedDate,
 				numberOfContributors = 0,
 				sourceOnly = Dependant(null, new { notWrittenByDefaultSerializer = "written" }),
-				curatedTags = new[] {new {name = "x", added = FixedDate}},
+				curatedTags = new[] { new { name = "x", added = FixedDate } },
 			};
 
-		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
+		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(Document);
 
 		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
 			.WaitForActiveShards("1")
@@ -91,7 +86,7 @@ namespace Tests.Document.Single.Index
 			.Routing("route");
 
 		protected override IndexRequest<Project> Initializer =>
-			new IndexRequest<Project>(this.Document)
+			new IndexRequest<Project>(Document)
 			{
 				Refresh = Refresh.True,
 				OpType = OpType.Index,
@@ -99,6 +94,5 @@ namespace Tests.Document.Single.Index
 				Routing = "route",
 				Pipeline = PipelineId
 			};
-
 	}
 }

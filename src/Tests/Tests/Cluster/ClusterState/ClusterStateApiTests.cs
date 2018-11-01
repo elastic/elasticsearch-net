@@ -9,16 +9,15 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Cluster.ClusterState
 {
-	public class ClusterStateApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClusterStateResponse, IClusterStateRequest, ClusterStateDescriptor, ClusterStateRequest>
+	public class ClusterStateApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterStateResponse, IClusterStateRequest, ClusterStateDescriptor, ClusterStateRequest>
 	{
 		public ClusterStateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClusterState(),
 			fluentAsync: (client, f) => client.ClusterStateAsync(),
@@ -61,13 +60,12 @@ namespace Tests.Cluster.ClusterState
 			rawFieldsTemplate.Settings.Should().NotBeNull();
 			rawFieldsTemplate.Settings.NumberOfShards.Should().Be(2);
 
-			var i = this.Client.Infer.IndexName(Index<Project>());
+			var i = Client.Infer.IndexName(Index<Project>());
 
 			meta.Indices.Should().NotBeEmpty().And.ContainKey(i);
 
 			var index = meta.Indices[i];
 			index.Aliases.Should().NotBeEmpty().And.Contain(DefaultSeeder.ProjectsAliasName);
-
 		}
 
 		protected void Assert(RoutingTableState routingTable)

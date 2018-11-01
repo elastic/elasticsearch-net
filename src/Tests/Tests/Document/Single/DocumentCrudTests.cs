@@ -7,8 +7,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Document.Single
 {
@@ -19,14 +17,15 @@ namespace Tests.Document.Single
 
 		protected override bool SupportsDeletes => true;
 
-		protected override LazyResponses Exists() => Calls<DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>, IDocumentExistsRequest, IExistsResponse>(
-			id => new DocumentExistsRequest<Project>(Project.Instance, id: id),
-			(id, d) => d.Routing(Project.Instance.Name),
-			fluent: (s, c, f) => c.DocumentExists<Project>(s, f),
-			fluentAsync: (s, c, f) => c.DocumentExistsAsync<Project>(s, f),
-			request: (s, c, r) => c.DocumentExists(r),
-			requestAsync: (s, c, r) => c.DocumentExistsAsync(r)
-		);
+		protected override LazyResponses Exists() =>
+			Calls<DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>, IDocumentExistsRequest, IExistsResponse>(
+				id => new DocumentExistsRequest<Project>(Project.Instance, id: id),
+				(id, d) => d.Routing(Project.Instance.Name),
+				fluent: (s, c, f) => c.DocumentExists<Project>(s, f),
+				fluentAsync: (s, c, f) => c.DocumentExistsAsync<Project>(s, f),
+				request: (s, c, r) => c.DocumentExists(r),
+				requestAsync: (s, c, r) => c.DocumentExistsAsync(r)
+			);
 
 		protected override LazyResponses Create() => Calls<IndexDescriptor<Project>, IndexRequest<Project>, IIndexRequest<Project>, IIndexResponse>(
 			id => new IndexRequest<Project>(Project.Instance, id: id),
@@ -51,20 +50,20 @@ namespace Tests.Document.Single
 			UpdateRequest<Project, Project>,
 			IUpdateRequest<Project, Project>,
 			IUpdateResponse<Project>
-			>(
-				id => new UpdateRequest<Project, Project>(id)
-				{
-					Routing = Project.Instance.Name,
-					Doc = new Project { Description = id + " updated" }
-				},
-				(id, d) => d
-					.Routing(Project.Instance.Name)
-					.Doc(new Project { Description = id + " updated"} ),
-				fluent: (s, c, f) => c.Update<Project, Project>(s, f),
-				fluentAsync: (s, c, f) => c.UpdateAsync<Project, Project>(s, f),
-				request: (s, c, r) => c.Update<Project, Project>(r),
-				requestAsync: (s, c, r) => c.UpdateAsync<Project, Project>(r)
-			);
+		>(
+			id => new UpdateRequest<Project, Project>(id)
+			{
+				Routing = Project.Instance.Name,
+				Doc = new Project { Description = id + " updated" }
+			},
+			(id, d) => d
+				.Routing(Project.Instance.Name)
+				.Doc(new Project { Description = id + " updated" }),
+			fluent: (s, c, f) => c.Update<Project, Project>(s, f),
+			fluentAsync: (s, c, f) => c.UpdateAsync<Project, Project>(s, f),
+			request: (s, c, r) => c.Update<Project, Project>(r),
+			requestAsync: (s, c, r) => c.UpdateAsync<Project, Project>(r)
+		);
 
 		protected override LazyResponses Delete() => Calls<DeleteDescriptor<Project>, DeleteRequest<Project>, IDeleteRequest, IDeleteResponse>(
 			id => new DeleteRequest<Project>(id) { Routing = Project.Instance.Name },
@@ -75,19 +74,19 @@ namespace Tests.Document.Single
 			requestAsync: (s, c, r) => c.DeleteAsync(r)
 		);
 
-		[I] protected async Task DocumentIsUpdated() => await this.AssertOnGetAfterUpdate(r =>
+		[I] protected async Task DocumentIsUpdated() => await AssertOnGetAfterUpdate(r =>
 		{
 			r.Source.Should().NotBeNull();
 			r.Version.Should().BeGreaterThan(1);
 			r.Source.Description.Should().EndWith("updated");
 		});
 
-		[I] protected async Task DocumentIsDeleted() => await this.AssertOnGetAfterDelete(r =>
+		[I] protected async Task DocumentIsDeleted() => await AssertOnGetAfterDelete(r =>
 			r.Found.Should().BeFalse()
 		);
 
 		[I]
-		protected override async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r =>
+		protected override async Task GetAfterDeleteIsValid() => await AssertOnGetAfterDelete(r =>
 		{
 			r.ShouldNotBeValid();
 			r.Index.Should().NotBeNullOrEmpty();
@@ -103,7 +102,6 @@ namespace Tests.Document.Single
 			response.Version.Should().BeGreaterThan(0);
 			response.SequenceNumber.Should().BeGreaterThan(0);
 			response.Result.Should().Be(Result.NotFound);
-
 		}
 	}
 }

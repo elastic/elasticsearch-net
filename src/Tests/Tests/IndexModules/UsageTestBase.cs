@@ -18,14 +18,14 @@ namespace Tests.Framework
 		protected virtual bool TestObjectInitializer => true;
 
 		protected UsageTestBase() : base(TestClient.DefaultInMemoryClient) =>
-			this.FluentInstance = this.Fluent(new TDescriptor());
+			FluentInstance = Fluent(new TDescriptor());
 
 		[U] protected void SerializesInitializer()
 		{
-			if (this.TestObjectInitializer) this.RoundTripsOrSerializes<TInterface>(this.Initializer);
+			if (TestObjectInitializer) RoundTripsOrSerializes<TInterface>(Initializer);
 		}
 
-		[U] protected void SerializesFluent() => this.RoundTripsOrSerializes(this.FluentInstance);
+		[U] protected void SerializesFluent() => RoundTripsOrSerializes(FluentInstance);
 	}
 
 	public abstract class PromiseUsageTestBase<TInterface, TDescriptor, TInitializer> : ExpectJsonTestBase
@@ -38,10 +38,10 @@ namespace Tests.Framework
 		protected abstract Func<TDescriptor, IPromise<TInterface>> Fluent { get; }
 
 		protected PromiseUsageTestBase() : base(TestClient.DefaultInMemoryClient) =>
-			this.FluentInstance = this.Fluent(new TDescriptor())?.Value;
+			FluentInstance = Fluent(new TDescriptor())?.Value;
 
-		[U] protected void SerializesInitializer() => this.Tester.RoundTrips<TInterface>(this.Initializer, this.ExpectJson);
+		[U] protected void SerializesInitializer() => Tester.RoundTrips<TInterface>(Initializer, ExpectJson);
 
-		[U] protected void SerializesFluent() => this.Tester.RoundTrips(this.FluentInstance, this.ExpectJson);
+		[U] protected void SerializesFluent() => Tester.RoundTrips(FluentInstance, ExpectJson);
 	}
 }

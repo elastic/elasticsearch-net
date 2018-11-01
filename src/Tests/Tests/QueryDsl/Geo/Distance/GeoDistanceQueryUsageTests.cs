@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Geo.Distance
 {
@@ -33,16 +32,16 @@ namespace Tests.QueryDsl.Geo.Distance
 			Name = "named_query",
 			Field = Infer.Field<Project>(p => p.Location),
 			DistanceType = GeoDistanceType.Arc,
-			Location = new GeoLocation(34,-34),
+			Location = new GeoLocation(34, -34),
 			Distance = "200.0m",
 			ValidationMethod = GeoValidationMethod.IgnoreMalformed
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoDistance(g=>g
+			.GeoDistance(g => g
 				.Boost(1.1)
 				.Name("named_query")
-				.Field(p=>p.Location)
+				.Field(p => p.Location)
 				.DistanceType(GeoDistanceType.Arc)
 				.Location(34, -34)
 				.Distance("200.0m")
@@ -52,8 +51,8 @@ namespace Tests.QueryDsl.Geo.Distance
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoDistanceQuery>(a => a.GeoDistance)
 		{
 			q => q.Distance = null,
-			q =>  q.Field = null,
-			q =>  q.Location = null
+			q => q.Field = null,
+			q => q.Location = null
 		};
 	}
 }

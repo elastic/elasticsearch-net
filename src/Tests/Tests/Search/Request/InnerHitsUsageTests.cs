@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Bogus;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -11,7 +10,6 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Search.Request
@@ -61,9 +59,7 @@ namespace Tests.Search.Request
 
 	public abstract class RoyalBase<TRoyal, TSubject> : RoyalBase<TRoyal>
 		where TRoyal : class, IRoyal
-		where TSubject : class, IRoyal
-	{
-	}
+		where TSubject : class, IRoyal { }
 
 	public class King : RoyalBase<King>
 	{
@@ -75,8 +71,11 @@ namespace Tests.Search.Request
 	{
 		public string FullTextField { get; set; } = "default full text field text";
 	}
+
 	public class Duke : RoyalBase<Duke> { }
+
 	public class Earl : RoyalBase<Earl> { }
+
 	public class Baron : RoyalBase<Baron> { }
 
 	//hide
@@ -87,20 +86,20 @@ namespace Tests.Search.Request
 
 		public RoyalSeeder(IElasticClient client, IndexName index)
 		{
-			this._client = client;
-			this._index = index;
+			_client = client;
+			_index = index;
 		}
 
 		public static readonly string RoyalType = "royal";
 
-		private string AliasFor<TRoyal>() where TRoyal : IRoyal => $"{this._index}-{typeof(TRoyal).Name.ToLowerInvariant()}";
+		private string AliasFor<TRoyal>() where TRoyal : IRoyal => $"{_index}-{typeof(TRoyal).Name.ToLowerInvariant()}";
 
 		private IAlias AliasFilterFor<TRoyal>(AliasDescriptor a) where TRoyal : class, IRoyal =>
-			a.Filter<TRoyal>(f => f.Term(p => p.Join, Infer.Relation<TRoyal>()));
+			a.Filter<TRoyal>(f => f.Term(p => p.Join, Relation<TRoyal>()));
 
 		public void Seed()
 		{
-			var create = this._client.CreateIndex(_index, c => c
+			var create = _client.CreateIndex(_index, c => c
 				.Settings(s => s
 					.NumberOfReplicas(0)
 					.NumberOfShards(1)
@@ -134,11 +133,13 @@ namespace Tests.Search.Request
 			var kings = King.Generator.Generate(2)
 				.Select(k =>
 				{
-					var foes = King.Generator.Generate(2).Select(f =>
-					{
-						f.Join = null;
-						return f;
-					}).ToList();
+					var foes = King.Generator.Generate(2)
+						.Select(f =>
+						{
+							f.Join = null;
+							return f;
+						})
+						.ToList();
 					k.Foes = foes;
 					return k;
 				});
@@ -153,8 +154,8 @@ namespace Tests.Search.Request
 					)
 				)
 			);
-			this._client.Bulk(bulk);
-			this._client.Refresh(this._index);
+			_client.Bulk(bulk);
+			_client.Refresh(_index);
 		}
 
 
@@ -166,7 +167,8 @@ namespace Tests.Search.Request
 			IndexAll<TRoyal, TRoyal>(bulk, create, null, indexChildren);
 
 		private void IndexAll<TRoyal, TParent>(BulkDescriptor bulk, Func<IEnumerable<TRoyal>> create, TParent parent = null,
-			Action<TRoyal> indexChildren = null)
+			Action<TRoyal> indexChildren = null
+		)
 			where TRoyal : class, IRoyal
 			where TParent : class, IRoyal
 		{
@@ -180,7 +182,9 @@ namespace Tests.Search.Request
 				if (royal.Join == null) royal.Join = JoinField.Link<TRoyal, TParent>(parent);
 				bulk.Index<TRoyal>(i => i.Document(royal1).Index(_index).Type(RoyalType).Routing(parent == null ? royal.Name : parent.Name));
 			}
+
 			if (indexChildren == null) return;
+
 			foreach (var royal in royals)
 				indexChildren(royal);
 		}
@@ -205,16 +209,16 @@ namespace Tests.Search.Request
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 	*/
-	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>,
-		ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
+	public abstract class InnerHitsApiTestsBase<TRoyal>
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>,
+			ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
 	{
-		protected InnerHitsApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		protected InnerHitsApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected abstract IndexName Index { get; }
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(this.Client, Index).Seed();
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(Client, Index).Seed();
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<TRoyal>(f),
@@ -236,12 +240,10 @@ namespace Tests.Search.Request
 	*/
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
-		public QueryInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public QueryInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static IndexName IndexName { get; } = RandomString();
-		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
+		protected override IndexName Index => IndexName;
 
 		protected override object ExpectJson { get; } = new
 		{
@@ -263,7 +265,7 @@ namespace Tests.Search.Request
 								inner_hits = new
 								{
 									name = "princes",
-									docvalue_fields = new []{"name"},
+									docvalue_fields = new[] { "name" },
 									highlight = new
 									{
 										fields = new { fullTextField = new { } }
@@ -295,13 +297,12 @@ namespace Tests.Search.Request
 				q.HasChild<Prince>(hc => hc
 					.Query(hcq => hcq.Match(m => m.Field(p => p.FullTextField).Query("default")))
 					.InnerHits(ih => ih
-						.DocValueFields(f=>f.Field(p=>p.Name))
+						.DocValueFields(f => f.Field(p => p.Name))
 						.Name("princes")
-						.Highlight(h=>h.Fields(f=>f.Field(p=>p.FullTextField)))
+						.Highlight(h => h.Fields(f => f.Field(p => p.FullTextField)))
 						.IgnoreUnmapped(false)
 						.Version()
 					)
-
 				) || q.Nested(n => n
 					.Path(p => p.Foes)
 					.Query(nq => nq.MatchAll())
@@ -315,12 +316,12 @@ namespace Tests.Search.Request
 			Query = new HasChildQuery
 			{
 				Type = typeof(Prince),
-				Query = new MatchQuery { Field = Field<Prince>(p=>p.FullTextField), Query = "default" },
+				Query = new MatchQuery { Field = Field<Prince>(p => p.FullTextField), Query = "default" },
 				InnerHits = new InnerHits
 				{
 					Name = "princes",
-					DocValueFields = Field<Prince>(p=>p.Name),
-					Highlight = Highlight.Field(Field<Prince>(p=>p.FullTextField)),
+					DocValueFields = Field<Prince>(p => p.Name),
+					Highlight = Highlight.Field(Field<Prince>(p => p.FullTextField)),
 					IgnoreUnmapped = false,
 					Version = true
 				}
@@ -354,11 +355,12 @@ namespace Tests.Search.Request
 					highlights.Should().NotBeNull("princes should have highlights");
 					highlights.Should().ContainKey("fullTextField", "we are highlighting this field");
 					var hl = highlights["fullTextField"];
-					hl.Highlights.Should().NotBeEmpty("all docs have the same text so should all highlight")
+					hl.Highlights.Should()
+						.NotBeEmpty("all docs have the same text so should all highlight")
 						.And.Contain(s => s.Contains("<em>default</em>"), "default to be highlighted as its part of the query");
 
 					princeHit.Fields.Should().NotBeNull("all princes have a keyword name so fields should be returned");
-					var docValueName = princeHit.Fields.ValueOf<Prince, string>(p=>p.Name);
+					var docValueName = princeHit.Fields.ValueOf<Prince, string>(p => p.Name);
 					docValueName.Should().NotBeNullOrWhiteSpace("value of name on Fields");
 
 					princeHit.Version?.Should().Be(1);

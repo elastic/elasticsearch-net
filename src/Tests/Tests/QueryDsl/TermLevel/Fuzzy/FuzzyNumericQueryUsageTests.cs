@@ -2,13 +2,12 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Fuzzy
 {
 	public class FuzzyNumericQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public FuzzyNumericQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public FuzzyNumericQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -26,7 +25,6 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 					value = 12.0
 				}
 			}
-
 		};
 
 		protected override QueryContainer QueryInitializer => new FuzzyNumericQuery

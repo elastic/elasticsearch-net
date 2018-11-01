@@ -1,7 +1,6 @@
 using System;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Analysis.TokenFilters;
 
 namespace Tests.Analysis.Analyzers
 {
@@ -22,7 +21,6 @@ namespace Tests.Analysis.Analyzers
 			{
 				type = "keyword"
 			};
-
 		}
 
 		public class CustomTests : AnalyzerAssertionBase<CustomTests>
@@ -31,9 +29,9 @@ namespace Tests.Analysis.Analyzers
 
 			public override IAnalyzer Initializer => new CustomAnalyzer
 			{
-				CharFilter = new[] {"html_strip"},
+				CharFilter = new[] { "html_strip" },
 				Tokenizer = "standard",
-				Filter = new []{"lowercase", "asciifolding" }
+				Filter = new[] { "lowercase", "asciifolding" }
 			};
 
 			public override FuncTokenizer Fluent => (n, an) => an
@@ -47,22 +45,22 @@ namespace Tests.Analysis.Analyzers
 			{
 				type = "custom",
 				tokenizer = "standard",
-				filter = new[] {"lowercase", "asciifolding"},
-				char_filter = new[] {"html_strip"}
+				filter = new[] { "lowercase", "asciifolding" },
+				char_filter = new[] { "html_strip" }
 			};
-
 		}
+
 		public class PatternTests : AnalyzerAssertionBase<PatternTests>
 		{
 			public override string Name => "myPattern ";
 
-			public override IAnalyzer Initializer => new PatternAnalyzer {Pattern = @"\w"};
+			public override IAnalyzer Initializer => new PatternAnalyzer { Pattern = @"\w" };
 
 			public override FuncTokenizer Fluent => (n, an) => an.Pattern(n, a => a.Pattern(@"\w"));
 
 			public override object Json => new { type = "pattern", pattern = "\\w" };
-
 		}
+
 		public class SimpleTests : AnalyzerAssertionBase<SimpleTests>
 		{
 			public override string Name => "mySimple";
@@ -70,26 +68,26 @@ namespace Tests.Analysis.Analyzers
 			public override IAnalyzer Initializer => new SimpleAnalyzer();
 
 			public override FuncTokenizer Fluent => (n, an) => an.Simple("mySimple");
-			public override object Json => new {type = "simple"};
-
+			public override object Json => new { type = "simple" };
 		}
+
 		public class LanguageTests : AnalyzerAssertionBase<SimpleTests>
 		{
 			public override string Name => "myLanguage";
 
-			public override IAnalyzer Initializer => new LanguageAnalyzer {Language = Language.Dutch};
+			public override IAnalyzer Initializer => new LanguageAnalyzer { Language = Language.Dutch };
 
 			public override FuncTokenizer Fluent => (n, an) => an
 				.Language("myLanguage", a => a.Language(Language.Dutch));
 
-			public override object Json => new {type = "dutch"};
-
+			public override object Json => new { type = "dutch" };
 		}
+
 		public class SnowballTests : AnalyzerAssertionBase<SnowballTests>
 		{
 			public override string Name => "mySnow";
 
-			public override IAnalyzer Initializer => new SnowballAnalyzer {Language = SnowballLanguage.Dutch};
+			public override IAnalyzer Initializer => new SnowballAnalyzer { Language = SnowballLanguage.Dutch };
 
 			public override FuncTokenizer Fluent => (n, an) => an
 				.Snowball("mySnow", a => a.Language(SnowballLanguage.Dutch));
@@ -99,13 +97,13 @@ namespace Tests.Analysis.Analyzers
 				type = "snowball",
 				language = "Dutch"
 			};
-
 		}
+
 		public class StandardTests : AnalyzerAssertionBase<StandardTests>
 		{
 			public override string Name => "myStandard";
 
-			public override IAnalyzer Initializer => new StandardAnalyzer {MaxTokenLength = 2};
+			public override IAnalyzer Initializer => new StandardAnalyzer { MaxTokenLength = 2 };
 
 			public override FuncTokenizer Fluent => (n, an) => an
 				.Standard("myStandard", a => a.MaxTokenLength(2));
@@ -115,13 +113,13 @@ namespace Tests.Analysis.Analyzers
 				type = "standard",
 				max_token_length = 2
 			};
-
 		}
+
 		public class StopTests : AnalyzerAssertionBase<StopTests>
 		{
 			public override string Name => "myStop";
 
-			public override IAnalyzer Initializer => new StopAnalyzer {StopwordsPath = "analysis/stopwords.txt"};
+			public override IAnalyzer Initializer => new StopAnalyzer { StopwordsPath = "analysis/stopwords.txt" };
 
 			public override FuncTokenizer Fluent => (n, an) => an
 				.Stop("myStop", a => a.StopwordsPath("analysis/stopwords.txt"));
@@ -131,8 +129,8 @@ namespace Tests.Analysis.Analyzers
 				type = "stop",
 				stopwords_path = "analysis/stopwords.txt"
 			};
-
 		}
+
 		public class WhitespaceTests : AnalyzerAssertionBase<WhitespaceTests>
 		{
 			public override string Name => "myWhiteSpace";
@@ -140,8 +138,7 @@ namespace Tests.Analysis.Analyzers
 			public override IAnalyzer Initializer => new WhitespaceAnalyzer();
 
 			public override FuncTokenizer Fluent => (n, an) => an.Whitespace(n);
-			public override object Json => new {type = "whitespace"};
-
+			public override object Json => new { type = "whitespace" };
 		}
 
 		public class FingerprintTests : AnalyzerAssertionBase<FingerprintTests>
@@ -154,7 +151,7 @@ namespace Tests.Analysis.Analyzers
 					PreserveOriginal = true,
 					Separator = ",",
 					MaxOutputSize = 100,
-					StopWords = new[] {"a", "he", "the"}
+					StopWords = new[] { "a", "he", "the" }
 				};
 
 			public override FuncTokenizer Fluent => (n, an) => an
@@ -171,9 +168,8 @@ namespace Tests.Analysis.Analyzers
 				preserve_original = true,
 				separator = ",",
 				max_output_size = 100,
-				stopwords = new[] {"a", "he", "the"}
+				stopwords = new[] { "a", "he", "the" }
 			};
-
 		}
 
 
@@ -203,7 +199,8 @@ namespace Tests.Analysis.Analyzers
 		public class NoriTests : AnalyzerAssertionBase<NoriTests>
 		{
 			public override string Name => "nori";
-			private readonly string[] _stopTags = {"NR", "SP"};
+			private readonly string[] _stopTags = { "NR", "SP" };
+
 			public override IAnalyzer Initializer => new NoriAnalyzer
 			{
 				StopTags = _stopTags,
@@ -219,7 +216,7 @@ namespace Tests.Analysis.Analyzers
 			{
 				type = "nori",
 				decompound_mode = "mixed",
-				stoptags =_stopTags
+				stoptags = _stopTags
 			};
 		}
 	}

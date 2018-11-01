@@ -1,7 +1,6 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.ServerError
 {
@@ -24,7 +23,8 @@ namespace Tests.ClientConcepts.ServerError
 	{
 		[U] protected override void AssertServerError() => base.AssertServerError();
 
-		protected override string Json => @"{""root_cause"":[{""type"":""index_not_found_exception"",""reason"":""no such index"",""index_uuid"":""_na_"",""index"":""non-existent-index""}],""type"":""index_not_found_exception"",""reason"":""no such index"",""index_uuid"":""_na_"",""index"":""non-existent-index""}";
+		protected override string Json =>
+			@"{""root_cause"":[{""type"":""index_not_found_exception"",""reason"":""no such index"",""index_uuid"":""_na_"",""index"":""non-existent-index""}],""type"":""index_not_found_exception"",""reason"":""no such index"",""index_uuid"":""_na_"",""index"":""non-existent-index""}";
 
 		protected override void AssertResponseError(string origin, Error error)
 		{

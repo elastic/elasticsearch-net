@@ -3,7 +3,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Request
 {
@@ -29,7 +28,7 @@ namespace Tests.Search.Request
 			};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-				.From(10)
-				.Size(12);
+			.From(10)
+			.Size(12);
 	}
 }

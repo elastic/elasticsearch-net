@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.DeleteIndex
 {
-	public class DeleteIndexApiTests : ApiIntegrationAgainstNewIndexTestBase
-		<WritableCluster, IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+	public class DeleteIndexApiTests
+		: ApiIntegrationAgainstNewIndexTestBase
+			<WritableCluster, IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
 		public DeleteIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -32,14 +28,12 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 
 		protected override DeleteIndexRequest Initializer => new DeleteIndexRequest(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteIndexResponse response)
-		{
-			response.Acknowledged.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IDeleteIndexResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 
-	public class DeleteNonExistentIndexApiTests : ApiIntegrationTestBase
-		<WritableCluster, IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+	public class DeleteNonExistentIndexApiTests
+		: ApiIntegrationTestBase
+			<WritableCluster, IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
 		public DeleteNonExistentIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

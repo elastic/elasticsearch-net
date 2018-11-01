@@ -13,10 +13,10 @@ namespace Tests.Indices.IndexManagement.SplitIndex
 			var source = "source";
 			var target = "target";
 			await PUT($"/{source}/_split/{target}")
-				.Fluent(c => c.SplitIndex(source, target))
-				.Request(c => c.SplitIndex(new SplitIndexRequest(source, target)))
-				.FluentAsync(c => c.SplitIndexAsync(source, target))
-				.RequestAsync(c => c.SplitIndexAsync(new SplitIndexRequest(source, target)))
+					.Fluent(c => c.SplitIndex(source, target))
+					.Request(c => c.SplitIndex(new SplitIndexRequest(source, target)))
+					.FluentAsync(c => c.SplitIndexAsync(source, target))
+					.RequestAsync(c => c.SplitIndexAsync(new SplitIndexRequest(source, target)))
 				;
 		}
 	}

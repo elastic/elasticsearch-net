@@ -7,14 +7,14 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.IndexManagement.CreateIndex
 {
-	public class CreateIndexApiTests : ApiIntegrationTestBase<WritableCluster, ICreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	public class CreateIndexApiTests
+		: ApiIntegrationTestBase<WritableCluster, ICreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
 		public CreateIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CreateIndex(CallIsolatedValue, f),
 			fluentAsync: (client, f) => client.CreateIndexAsync(CallIsolatedValue, f),
@@ -34,7 +34,8 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 				{ "index.number_of_replicas", 1 },
 				{ "index.number_of_shards", 1 },
 				{ "index.queries.cache.enabled", true },
-				{ "similarity", new
+				{
+					"similarity", new
 					{
 						bm25 = new
 						{
@@ -53,14 +54,16 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 							independence_measure = "chisquared",
 							type = "DFI"
 						},
-						dfr = new Dictionary<string, object>{
+						dfr = new Dictionary<string, object>
+						{
 							{ "basic_model", "d" },
 							{ "after_effect", "b" },
 							{ "normalization", "h1" },
 							{ "normalization.h1.c", 1.1 },
 							{ "type", "DFR" }
 						},
-						ib = new Dictionary<string, object> {
+						ib = new Dictionary<string, object>
+						{
 							{ "distribution", "ll" },
 							{ "lambda", "df" },
 							{ "normalization", "h1" },
@@ -82,7 +85,8 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 							type = "scripted",
 							script = new
 							{
-								source = "double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;"
+								source =
+									"double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;"
 							}
 						}
 					}
@@ -131,7 +135,8 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 					)
 					.Scripted("scripted_tfidf", sc => sc
 						.Script(ssc => ssc
-							.Source("double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
+							.Source(
+								"double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
 						)
 					)
 				)
@@ -152,24 +157,28 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 				},
 				Similarity = new Similarities
 				{
-					{ "bm25", new BM25Similarity
+					{
+						"bm25", new BM25Similarity
 						{
 							B = 1.0,
 							K1 = 1.1,
 							DiscountOverlaps = true
 						}
 					},
-					{ "tfidf", new ClassicSimilarity
+					{
+						"tfidf", new ClassicSimilarity
 						{
 							DiscountOverlaps = true
 						}
 					},
-					{ "dfi", new DFISimilarity
+					{
+						"dfi", new DFISimilarity
 						{
 							IndependenceMeasure = DFIIndependenceMeasure.ChiSquared
 						}
 					},
-					{ "dfr", new DFRSimilarity
+					{
+						"dfr", new DFRSimilarity
 						{
 							AfterEffect = DFRAfterEffect.B,
 							BasicModel = DFRBasicModel.D,
@@ -177,7 +186,8 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 							NormalizationH1C = 1.1
 						}
 					},
-					{ "ib", new IBSimilarity
+					{
+						"ib", new IBSimilarity
 						{
 							Distribution = IBDistribution.LogLogistic,
 							Lambda = IBLambda.DocumentFrequency,
@@ -185,19 +195,23 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 							NormalizationH1C = 1.2
 						}
 					},
-					{ "lmd", new LMDirichletSimilarity
+					{
+						"lmd", new LMDirichletSimilarity
 						{
 							Mu = 2
 						}
 					},
-					{ "lmj", new LMJelinekMercerSimilarity
+					{
+						"lmj", new LMJelinekMercerSimilarity
 						{
 							Lambda = 2.0
 						}
 					},
-					{ "scripted_tfidf", new ScriptedSimilarity
+					{
+						"scripted_tfidf", new ScriptedSimilarity
 						{
-							Script = new InlineScript("double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
+							Script = new InlineScript(
+								"double tf = Math.sqrt(doc.freq); double idf = Math.log((field.docCount+1.0)/(term.docFreq+1.0)) + 1.0; double norm = 1/Math.sqrt(doc.length); return query.boost * tf * idf * norm;")
 						}
 					}
 				}
@@ -210,7 +224,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			response.Acknowledged.Should().BeTrue();
 			response.ShardsAcknowledged.Should().BeTrue();
 
-			var indexSettings = this.Client.GetIndexSettings(g => g.Index(CallIsolatedValue));
+			var indexSettings = Client.GetIndexSettings(g => g.Index(CallIsolatedValue));
 
 			indexSettings.ShouldBeValid();
 			indexSettings.Indices.Should().NotBeEmpty().And.ContainKey(CallIsolatedValue);
@@ -233,9 +247,9 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			similarities.Should().ContainKey("lmj").WhichValue.Should().BeOfType<LMJelinekMercerSimilarity>();
 			similarities.Should().ContainKey("scripted_tfidf").WhichValue.Should().BeOfType<ScriptedSimilarity>();
 
-			var scriptedSimilarity = (ScriptedSimilarity) similarities["scripted_tfidf"];
+			var scriptedSimilarity = (ScriptedSimilarity)similarities["scripted_tfidf"];
 			scriptedSimilarity.Script.Should().NotBeNull();
-			((InlineScript) scriptedSimilarity.Script).Source.Should().NotBeNullOrEmpty();
+			((InlineScript)scriptedSimilarity.Script).Source.Should().NotBeNullOrEmpty();
 		}
 	}
 }

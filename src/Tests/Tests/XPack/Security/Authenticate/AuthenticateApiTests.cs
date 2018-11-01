@@ -7,13 +7,13 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Elastic.Managed.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.Authenticate
 {
 	[SkipVersion("<2.3.0", "")]
-	public class AuthenticateApiTests : ApiIntegrationTestBase<XPackCluster, IAuthenticateResponse, IAuthenticateRequest, AuthenticateDescriptor, AuthenticateRequest>
+	public class AuthenticateApiTests
+		: ApiIntegrationTestBase<XPackCluster, IAuthenticateResponse, IAuthenticateRequest, AuthenticateDescriptor, AuthenticateRequest>
 	{
 		public AuthenticateApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -55,7 +55,7 @@ namespace Tests.XPack.Security.Authenticate
 		};
 
 		protected override Func<AuthenticateDescriptor, IAuthenticateRequest> Fluent => f => f
-			.RequestConfiguration(c=>c
+			.RequestConfiguration(c => c
 				.BasicAuthentication(ClusterAuthentication.User.Username, ClusterAuthentication.User.Password)
 			);
 
@@ -65,5 +65,4 @@ namespace Tests.XPack.Security.Authenticate
 			response.Roles.Should().Contain(ClusterAuthentication.User.Role);
 		}
 	}
-
 }

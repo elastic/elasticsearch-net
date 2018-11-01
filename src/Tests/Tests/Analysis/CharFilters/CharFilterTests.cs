@@ -10,17 +10,17 @@ namespace Tests.Analysis.CharFilters
 		public class MappingTests : CharFilterAssertionBase<MappingTests>
 		{
 			public override string Name => "mapping";
-			public override ICharFilter Initializer => new MappingCharFilter {Mappings = new[] {"a=>b"}};
+			public override ICharFilter Initializer => new MappingCharFilter { Mappings = new[] { "a=>b" } };
 			public override FuncTokenizer Fluent => (n, cf) => cf.Mapping(n, c => c.Mappings("a=>b"));
-			public override object Json => new { mappings = new[] {"a=>b"}, type = "mapping" };
+			public override object Json => new { mappings = new[] { "a=>b" }, type = "mapping" };
 		}
 
 		public class PatternReplaceTests : CharFilterAssertionBase<PatternReplaceTests>
 		{
 			public override string Name => "pr";
-			public override ICharFilter Initializer => new PatternReplaceCharFilter {Pattern = "x", Replacement = "y"};
+			public override ICharFilter Initializer => new PatternReplaceCharFilter { Pattern = "x", Replacement = "y" };
 			public override FuncTokenizer Fluent => (n, cf) => cf.PatternReplace(n, c => c.Pattern("x").Replacement("y"));
-			public override object Json => new {pattern = "x", replacement = "y", type = "pattern_replace"};
+			public override object Json => new { pattern = "x", replacement = "y", type = "pattern_replace" };
 		}
 
 		public class IcuNormalizerTests : CharFilterAssertionBase<IcuNormalizerTests>
@@ -40,8 +40,7 @@ namespace Tests.Analysis.CharFilters
 					.Name(IcuNormalizationType.CompatibilityCaseFold)
 				);
 
-			public override object Json => new {mode = "compose", name = "nfkc_cf", type = "icu_normalizer"};
-
+			public override object Json => new { mode = "compose", name = "nfkc_cf", type = "icu_normalizer" };
 		}
 
 		public class KuromojiIterationMarkTests : CharFilterAssertionBase<KuromojiIterationMarkTests>
@@ -67,8 +66,7 @@ namespace Tests.Analysis.CharFilters
 			public override string Name => "htmls";
 			public override ICharFilter Initializer => new HtmlStripCharFilter { };
 			public override FuncTokenizer Fluent => (n, cf) => cf.HtmlStrip(n);
-			public override object Json => new {type = "html_strip"};
+			public override object Json => new { type = "html_strip" };
 		}
-
 	}
 }

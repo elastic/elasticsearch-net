@@ -7,15 +7,15 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Cluster.ClusterHealth
 {
-	public class ClusterHealthApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
+	public class ClusterHealthApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
 	{
 		public ClusterHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClusterHealth(),
 			fluentAsync: (client, f) => client.ClusterHealthAsync(),
@@ -39,9 +39,12 @@ namespace Tests.Cluster.ClusterHealth
 			response.ActiveShards.Should().BeGreaterOrEqualTo(1);
 		}
 	}
-	public class ClusterHealthShardsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
+
+	public class ClusterHealthShardsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
 	{
 		public ClusterHealthShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClusterHealth(f),
 			fluentAsync: (client, f) => client.ClusterHealthAsync(f),
@@ -66,7 +69,8 @@ namespace Tests.Cluster.ClusterHealth
 			response.NumberOfDataNodes.Should().BeGreaterOrEqualTo(1);
 			response.ActivePrimaryShards.Should().BeGreaterOrEqualTo(1);
 			response.ActiveShards.Should().BeGreaterOrEqualTo(1);
-			response.Indices.Should().NotBeEmpty()
+			response.Indices.Should()
+				.NotBeEmpty()
 				.And.ContainKey(Index<Developer>());
 
 			var indexHealth = response.Indices[Index<Developer>()];
@@ -75,5 +79,4 @@ namespace Tests.Cluster.ClusterHealth
 			indexHealth.Shards["0"].Status.Should().Be(Health.Green);
 		}
 	}
-
 }

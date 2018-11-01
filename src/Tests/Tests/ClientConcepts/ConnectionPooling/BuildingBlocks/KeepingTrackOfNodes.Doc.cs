@@ -2,13 +2,11 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class KeepingTrackOfNodes
 	{
-
 		/**=== Keeping track of nodes
 		 */
 		[U] public void Creating()
@@ -31,6 +29,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			* a known cluster topology.
 			*/
 		}
+
 		[U] public void BuildingPaths()
 		{
 			/** ==== Building a Node path
@@ -61,7 +60,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			* every time a node is marked dead, the number of attempts should increase
 			* and the passed datetime should be exposed.
 			*/
-			for(var i = 0; i<10;i++)
+			for (var i = 0; i < 10; i++)
 			{
 				var deadUntil = DateTime.Now.AddMinutes(1);
 				node.MarkDead(deadUntil);
@@ -69,6 +68,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				node.IsAlive.Should().BeFalse();
 				node.DeadUntil.Should().Be(deadUntil);
 			}
+
 			/** however when marking a node alive, the `DeadUntil` property should be reset and `FailedAttempts` reset to 0*/
 			node.MarkAlive();
 			node.FailedAttempts.Should().Be(0);

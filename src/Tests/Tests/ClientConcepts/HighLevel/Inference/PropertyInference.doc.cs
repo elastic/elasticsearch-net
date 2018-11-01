@@ -1,21 +1,18 @@
 using System;
 using System.Linq.Expressions;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
-using Xunit;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
 	/**[[property-inference]]
 	* === Property name inference
 	*/
-	public class PropertyNames : IntegrationDocumentationTestBase , IClusterFixture<WritableCluster>
+	public class PropertyNames : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		public PropertyNames(WritableCluster cluster) : base(cluster) { }
 
@@ -47,6 +44,5 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			expression = expression.AppendSuffix("raw");
 			Expect("raw").WhenSerializing<PropertyName>(expression);
 		}
-
 	}
 }

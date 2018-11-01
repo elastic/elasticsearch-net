@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.XPack.License.PostLicense
 {
@@ -15,6 +12,7 @@ namespace Tests.XPack.License.PostLicense
 	public class PostLicenseApiTests : ApiTestBase<XPackCluster, IPostLicenseResponse, IPostLicenseRequest, PostLicenseDescriptor, PostLicenseRequest>
 	{
 		public PostLicenseApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.PostLicense(f),
 			fluentAsync: (client, f) => client.PostLicenseAsync(f),
@@ -56,12 +54,12 @@ namespace Tests.XPack.License.PostLicense
 
 		protected override Func<PostLicenseDescriptor, IPostLicenseRequest> Fluent => d => d
 			.Acknowledge()
-			.License(this.FakeLicense);
+			.License(FakeLicense);
 
 		protected override PostLicenseRequest Initializer => new PostLicenseRequest
 		{
 			Acknowledge = true,
-			License= this.FakeLicense
+			License = FakeLicense
 		};
 	}
 }

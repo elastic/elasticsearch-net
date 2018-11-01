@@ -12,10 +12,10 @@ namespace Tests.Cat.CatRecovery
 		[U] public override async Task Urls()
 		{
 			await GET("/_cat/recovery")
-				.Fluent(c => c.CatRecovery())
-				.Request(c => c.CatRecovery(new CatRecoveryRequest()))
-				.FluentAsync(c => c.CatRecoveryAsync())
-				.RequestAsync(c => c.CatRecoveryAsync(new CatRecoveryRequest()))
+					.Fluent(c => c.CatRecovery())
+					.Request(c => c.CatRecovery(new CatRecoveryRequest()))
+					.FluentAsync(c => c.CatRecoveryAsync())
+					.RequestAsync(c => c.CatRecoveryAsync(new CatRecoveryRequest()))
 				;
 
 			await GET("/_cat/recovery/project")

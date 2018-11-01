@@ -5,14 +5,13 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.Scroll.ClearScroll
 {
 	// ReadOnlyCluster because eventhough its technically a write action it does not hinder
 	// on going reads
-	public class ClearScrollApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IClearScrollResponse, IClearScrollRequest, ClearScrollDescriptor, ClearScrollRequest>
+	public class ClearScrollApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IClearScrollResponse, IClearScrollRequest, ClearScrollDescriptor, ClearScrollRequest>
 	{
 		public ClearScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -27,7 +26,7 @@ namespace Tests.Search.Scroll.ClearScroll
 
 		protected override object ExpectJson => new
 		{
-			scroll_id = new []
+			scroll_id = new[]
 			{
 				_scrollId
 			}
@@ -47,9 +46,10 @@ namespace Tests.Search.Scroll.ClearScroll
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var scroll = this.Client.Search<Project>(s => s.MatchAll().Scroll(TimeSpan.FromMinutes((1))));
+			var scroll = Client.Search<Project>(s => s.MatchAll().Scroll(TimeSpan.FromMinutes((1))));
 			if (!scroll.IsValid)
 				throw new Exception("Setup: Initial scroll failed.");
+
 			_scrollId = scroll.ScrollId ?? _scrollId;
 		}
 	}

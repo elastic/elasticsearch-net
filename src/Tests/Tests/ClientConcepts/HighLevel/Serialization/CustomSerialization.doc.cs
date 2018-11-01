@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
@@ -11,7 +10,6 @@ using Nest;
 using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
@@ -73,7 +71,8 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				throw new NotImplementedException();
 
 			public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
-				CancellationToken cancellationToken = default(CancellationToken)) =>
+				CancellationToken cancellationToken = default(CancellationToken)
+			) =>
 				throw new NotImplementedException();
 		}
 
@@ -176,6 +175,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver) =>
 				resolver.NamingStrategy = new SnakeCaseNamingStrategy();
 		}
+
 		/**
 		 * Using `MyCustomJsonNetSerializer`, we can serialize using
 		 *
@@ -206,9 +206,9 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		{
 			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var connectionSettings = new ConnectionSettings(
-				pool,
-				connection: new InMemoryConnection(), // <1> an _in-memory_ connection is used here for example purposes. In your production application, you would use an `IConnection` implementation that actually sends a request.
-				sourceSerializer: (builtin, settings) => new MyCustomJsonNetSerializer(builtin, settings))
+					pool,
+					connection: new InMemoryConnection(), // <1> an _in-memory_ connection is used here for example purposes. In your production application, you would use an `IConnection` implementation that actually sends a request.
+					sourceSerializer: (builtin, settings) => new MyCustomJsonNetSerializer(builtin, settings))
 				.DefaultIndex("my-index");
 
 			//hide
@@ -232,7 +232,7 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			{
 				id = 1,
 				name = "My first document",
-				file_path = (string) null,
+				file_path = (string)null,
 				owner_id = 2
 			};
 			/**

@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.MatchPhrase
@@ -24,12 +23,11 @@ namespace Tests.QueryDsl.FullText.MatchPhrase
 					slop = 2,
 				}
 			}
-
 		};
 
 		protected override QueryContainer QueryInitializer => new MatchPhraseQuery
 		{
-			Field = Field<Project>(p=>p.Description),
+			Field = Field<Project>(p => p.Description),
 			Analyzer = "standard",
 			Boost = 1.1,
 			Name = "named_query",

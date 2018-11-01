@@ -12,11 +12,12 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Sql.TranslateSql
 {
 	[SkipVersion("<6.4.0", "")]
-	public class TranslateSqlApiTests : ApiIntegrationTestBase<XPackCluster, ITranslateSqlResponse, ITranslateSqlRequest, TranslateSqlDescriptor, TranslateSqlRequest>
+	public class TranslateSqlApiTests
+		: ApiIntegrationTestBase<XPackCluster, ITranslateSqlResponse, ITranslateSqlRequest, TranslateSqlDescriptor, TranslateSqlRequest>
 	{
 		public TranslateSqlApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => this.Calls(
+		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.TranslateSql(f),
 			fluentAsync: (client, f) => client.TranslateSqlAsync(f),
 			request: (client, r) => client.TranslateSql(r),
@@ -35,15 +36,15 @@ FROM {TestValueHelper.ProjectsIndex}
 WHERE type = '{Project.TypeName}'
 ORDER BY numberOfContributors DESC";
 
-		protected override object ExpectJson { get; } = new {
+		protected override object ExpectJson { get; } = new
+		{
 			query = SqlQuery,
 			fetch_size = 5
 		};
 
 		protected override Func<TranslateSqlDescriptor, ITranslateSqlRequest> Fluent => d => d
 			.Query(SqlQuery)
-			.FetchSize(5)
-		;
+			.FetchSize(5);
 
 		protected override TranslateSqlRequest Initializer => new TranslateSqlRequest()
 		{
@@ -58,7 +59,9 @@ ORDER BY numberOfContributors DESC";
 			search.Size.Should().HaveValue().And.Be(5);
 			search.Source.Should().NotBeNull();
 			search.Source.Match(b => b.Should().BeFalse(), f => f.Should().BeNull());
-			search.DocValueFields.Should().NotBeNullOrEmpty().And.HaveCount(4)
+			search.DocValueFields.Should()
+				.NotBeNullOrEmpty()
+				.And.HaveCount(4)
 				.And.Contain("type")
 				.And.Contain("name")
 				.And.Contain("startedOn")

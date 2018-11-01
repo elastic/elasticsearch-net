@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
@@ -40,7 +39,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		{
 			var failures = Enum.GetValues(typeof(PipelineFailure)).Cast<PipelineFailure>();
 			foreach (var failure in failures)
-			{
 				switch (failure)
 				{
 					/** The followinig pipeline failures are recoverable and will be retried */
@@ -65,7 +63,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 					default:
 						throw new ArgumentOutOfRangeException(failure.GetStringValue());
 				}
-			}
 		}
 
 		/**
@@ -87,19 +84,21 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			* followed by a bad response as a result of the 401 bad authentication response
 			*/
 			audit = await audit.TraceElasticsearchException(
-				new ClientCall {
+				new ClientCall
+				{
 					{ AuditEvent.PingSuccess, 9200 }, // <1> First call results in a successful ping
 					{ AuditEvent.BadResponse, 9200 }, // <2> Second call results in a bad response
 				},
 				exception =>
 				{
 					exception.FailureReason
-						.Should().Be(PipelineFailure.BadAuthentication); // <3> The reason for the bad response is Bad Authentication
+						.Should()
+						.Be(PipelineFailure.BadAuthentication); // <3> The reason for the bad response is Bad Authentication
 				}
 			);
 		}
 
-		private static byte[] HtmlNginx401Response = Encoding.UTF8.GetBytes(@"<html>
+		private static readonly byte[] HtmlNginx401Response = Encoding.UTF8.GetBytes(@"<html>
 <head><title>401 Authorization Required</title></head>
 <body bgcolor=""white"">
 <center><h1>401 Authorization Required</h1></center>
@@ -121,13 +120,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Ping(r => r.SucceedAlways())
-				.ClientCalls(r => r.FailAlways(401).ReturnByteResponse(HtmlNginx401Response, "application/json")) // <1> Always return a 401 bad response with a HTML response on client calls
+				.ClientCalls(r =>
+					r.FailAlways(401)
+						.ReturnByteResponse(HtmlNginx401Response,
+							"application/json")) // <1> Always return a 401 bad response with a HTML response on client calls
 				.StaticConnectionPool()
-				.Settings(s=>s.SkipDeserializationForStatusCodes(401))
+				.Settings(s => s.SkipDeserializationForStatusCodes(401))
 			);
 
 			audit = await audit.TraceElasticsearchException(
-				new ClientCall {
+				new ClientCall
+				{
 					{ AuditEvent.PingSuccess, 9200 },
 					{ AuditEvent.BadResponse, 9200 },
 				},
@@ -157,7 +160,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			);
 
 			audit = await audit.TraceElasticsearchException(
-				new ClientCall {
+				new ClientCall
+				{
 					{ AuditEvent.PingSuccess, 9200 },
 					{ AuditEvent.BadResponse, 9200 },
 				},
@@ -183,13 +187,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				.StaticConnectionPool()
 				.Settings(s => s.DisableDirectStreaming().DefaultIndex("default-index").SkipDeserializationForStatusCodes(401))
 				.ClientProxiesTo(
-					(c, r) => c.Get<Project>("1", s=>s.RequestConfiguration(r)),
-					async (c, r) => await c.GetAsync<Project>("1", s=>s.RequestConfiguration(r)) as IResponse
+					(c, r) => c.Get<Project>("1", s => s.RequestConfiguration(r)),
+					async (c, r) => await c.GetAsync<Project>("1", s => s.RequestConfiguration(r)) as IResponse
 				)
 			);
 
 			audit = await audit.TraceElasticsearchException(
-				new ClientCall {
+				new ClientCall
+				{
 					{ AuditEvent.PingSuccess, 9200 },
 					{ AuditEvent.BadResponse, 9200 },
 				},

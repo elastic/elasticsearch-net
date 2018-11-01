@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -10,7 +10,7 @@ using Tests.Framework;
 namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 {
 	public class UnexpectedExceptions
-    {
+	{
 		/**=== Unexpected exceptions
         *
 		* When a client call throws an exception that the `IConnection` cannot handle, the exception will bubble
@@ -37,13 +37,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ AuditEvent.HealthyResponse, 9200 }, // <3> The first call to 9200 returns a healthy response
 				}
 			);
 
 			audit = await audit.TraceUnexpectedException(
-				new ClientCall {
+				new ClientCall
+				{
 					{ AuditEvent.BadResponse, 9201 }, // <4> ...but the second call, to 9201, returns a bad response
 				},
 				(e) =>
@@ -69,16 +71,20 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
-				.ClientCalls(r => r.OnPort(9200).FailAlways(new System.Net.Http.HttpRequestException("recover"))) // <1> calls on 9200 set up to throw a `HttpRequestException`
+				.ClientCalls(r =>
+					r.OnPort(9200).FailAlways(new HttpRequestException("recover"))) // <1> calls on 9200 set up to throw a `HttpRequestException`
 				.ClientCalls(r => r.OnPort(9201).FailAlways(new Exception("boom!"))) // <2> calls on 9201 set up to throw an `Exception`
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())
 			);
 
 			audit = await audit.TraceUnexpectedException(
-				new ClientCall {
+				new ClientCall
+				{
 					{ AuditEvent.BadResponse, 9200 },
-					{ AuditEvent.BadResponse, 9201 }, // <3> Assert that the audit trail for the client call includes the bad response from 9200 and 9201
+					{
+						AuditEvent.BadResponse, 9201
+					}, // <3> Assert that the audit trail for the client call includes the bad response from 9200 and 9201
 				},
 				(e) =>
 				{
@@ -108,7 +114,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			);
 
 			audit = await audit.TraceUnexpectedException(
-				new ClientCall {
+				new ClientCall
+				{
 					{ AuditEvent.PingFailure, 9200 },
 					{ AuditEvent.PingSuccess, 9201 },
 					{ AuditEvent.BadResponse, 9201 },
@@ -125,7 +132,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 					pipelineException.FailureReason.Should().Be(PipelineFailure.PingFailure);
 					pipelineException.InnerException.Message.Should().Be("ping exception");
 
-					var pingException = e.AuditTrail.First(a => a.Event == AuditEvent.PingFailure).Exception; // <3> An exception can be hard to relate back to a point in time, so the exception is also available on the audit trail
+					var pingException =
+						e.AuditTrail.First(a => a.Event == AuditEvent.PingFailure)
+							.Exception; // <3> An exception can be hard to relate back to a point in time, so the exception is also available on the audit trail
 					pingException.Should().NotBeNull();
 					pingException.Message.Should().Be("ping exception");
 				}

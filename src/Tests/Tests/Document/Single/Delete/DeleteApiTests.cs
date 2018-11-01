@@ -1,26 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
-using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Xunit;
 using FluentAssertions;
+using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework;
+using Tests.Framework.Integration;
 
 namespace Tests.Document.Single.Delete
 {
-	public class DeleteApiTests : ApiIntegrationTestBase<WritableCluster, IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
+	public class DeleteApiTests
+		: ApiIntegrationTestBase<WritableCluster, IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
 		public DeleteApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
-				this.Client.Index(Project.Instance, i=>i.Id(id));
+				Client.Index(Project.Instance, i => i.Id(id));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -38,7 +36,9 @@ namespace Tests.Document.Single.Delete
 		protected override bool SupportsDeserialization => false;
 
 		protected override DeleteDescriptor<Project> NewDescriptor() => new DeleteDescriptor<Project>(CallIsolatedValue);
+
 		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => d => d.Routing(Project.Instance.Name);
+
 		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue)
 		{
 			Routing = Project.Instance.Name
@@ -56,12 +56,11 @@ namespace Tests.Document.Single.Delete
 		}
 	}
 
-	public class DeleteNonExistentDocumentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IDeleteResponse, IDeleteRequest,
-		DeleteDescriptor<Project>, DeleteRequest<Project>>
+	public class DeleteNonExistentDocumentApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IDeleteResponse, IDeleteRequest,
+			DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
-		public DeleteNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public DeleteNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Delete<Project>(CallIsolatedValue, f),
@@ -78,7 +77,9 @@ namespace Tests.Document.Single.Delete
 		protected override bool SupportsDeserialization => false;
 
 		protected override DeleteDescriptor<Project> NewDescriptor() => new DeleteDescriptor<Project>(CallIsolatedValue);
+
 		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => d => d.Routing(CallIsolatedValue);
+
 		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(CallIsolatedValue)
 		{
 			Routing = CallIsolatedValue
@@ -90,7 +91,7 @@ namespace Tests.Document.Single.Delete
 			response.Result.Should().Be(Result.NotFound);
 			response.Index.Should().Be("project");
 			response.Type.Should().Be("doc");
-			response.Id.Should().Be(this.CallIsolatedValue);
+			response.Id.Should().Be(CallIsolatedValue);
 			response.Shards.Total.Should().BeGreaterOrEqualTo(1);
 			response.Shards.Successful.Should().BeGreaterOrEqualTo(1);
 			response.PrimaryTerm.Should().BeGreaterThan(0);
@@ -98,7 +99,8 @@ namespace Tests.Document.Single.Delete
 		}
 	}
 
-	public class DeleteNonExistentIndexDocumentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
+	public class DeleteNonExistentIndexDocumentApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
 		public DeleteNonExistentIndexDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

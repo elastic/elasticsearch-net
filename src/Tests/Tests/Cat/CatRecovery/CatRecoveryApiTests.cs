@@ -3,14 +3,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatRecovery
 {
-	public class CatRecoveryApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatRecoveryRecord>, ICatRecoveryRequest, CatRecoveryDescriptor, CatRecoveryRequest>
+	public class CatRecoveryApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatRecoveryRecord>, ICatRecoveryRequest, CatRecoveryDescriptor, CatRecoveryRequest>
 	{
 		public CatRecoveryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatRecovery(),
 			fluentAsync: (client, f) => client.CatRecoveryAsync(),
@@ -22,7 +22,5 @@ namespace Tests.Cat.CatRecovery
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/recovery";
-
 	}
-
 }

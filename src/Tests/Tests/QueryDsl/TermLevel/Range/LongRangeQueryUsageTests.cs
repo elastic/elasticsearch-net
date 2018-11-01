@@ -7,7 +7,7 @@ namespace Tests.QueryDsl.TermLevel.Range
 {
 	public class LongRangeQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public LongRangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public LongRangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -52,8 +52,8 @@ namespace Tests.QueryDsl.TermLevel.Range
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ILongRangeQuery>(q => q.Range as ILongRangeQuery)
 		{
-			q=> q.Field = null,
-			q=>
+			q => q.Field = null,
+			q =>
 			{
 				q.GreaterThan = null;
 				q.GreaterThanOrEqualTo = null;

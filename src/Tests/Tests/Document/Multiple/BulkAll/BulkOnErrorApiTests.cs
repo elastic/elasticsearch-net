@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -15,7 +14,10 @@ namespace Tests.Document.Multiple.BulkAll
 {
 	public class BulkOnErrorApiTests : BulkAllApiTestsBase
 	{
-		private const int Size = 100, Pages = 3, NumberOfShards = 1, FailAfterPage = 2,
+		private const int Size = 100,
+			Pages = 3,
+			NumberOfShards = 1,
+			FailAfterPage = 2,
 			// last page will have some errors we don't need a 100 exceptions printed on console out though :)
 			NumberOfDocuments = (Size * (Pages - 1)) + 2;
 
@@ -24,12 +26,13 @@ namespace Tests.Document.Multiple.BulkAll
 		[I] public async Task WaitThrowsExceptionAndHalts()
 		{
 			var index = CreateIndexName();
-			var documents = await this.CreateIndexAndReturnDocuments(index);
+			var documents = await CreateIndexAndReturnDocuments(index);
 			var seenPages = 0;
-			var observableBulk = this.KickOff(index, documents);
+			var observableBulk = KickOff(index, documents);
 			Action bulkObserver = () => observableBulk.Wait(TimeSpan.FromMinutes(5), b => Interlocked.Increment(ref seenPages));
 			bulkObserver.ShouldThrow<ElasticsearchClientException>()
-				.And.Message.Should().StartWith("BulkAll halted after receiving failures that can not");
+				.And.Message.Should()
+				.StartWith("BulkAll halted after receiving failures that can not");
 
 			seenPages.Should().Be(2);
 		}
@@ -37,9 +40,9 @@ namespace Tests.Document.Multiple.BulkAll
 		[I] public async Task SubscribeHitsOnError()
 		{
 			var index = CreateIndexName();
-			var documents = await this.CreateIndexAndReturnDocuments(index);
+			var documents = await CreateIndexAndReturnDocuments(index);
 			var seenPages = 0;
-			var observableBulk = this.KickOff(index, documents);
+			var observableBulk = KickOff(index, documents);
 			Exception ex = null;
 			var handle = new ManualResetEvent(false);
 			using (observableBulk.Subscribe(
@@ -66,11 +69,11 @@ namespace Tests.Document.Multiple.BulkAll
 		[I] public async Task ContinueAfterDroppedCallsCallback()
 		{
 			var index = CreateIndexName();
-			var documents = await this.CreateIndexAndReturnDocuments(index);
+			var documents = await CreateIndexAndReturnDocuments(index);
 			var seenPages = 0;
 			var expectedBadDocuments = NumberOfDocuments - (Size * FailAfterPage);
 			var badDocumentIds = new List<int>(expectedBadDocuments);
-			var observableBulk = this.KickOff(index, documents, r => r
+			var observableBulk = KickOff(index, documents, r => r
 				.ContinueAfterDroppedDocuments(true)
 				.DroppedDocumentCallback((i, d) =>
 				{
@@ -78,12 +81,12 @@ namespace Tests.Document.Multiple.BulkAll
 					badDocumentIds.Add(d.Id);
 					i.IsValid.Should().BeFalse();
 				})
-
 			);
 			observableBulk.Wait(TimeSpan.FromMinutes(5), b => Interlocked.Increment(ref seenPages));
 
 			seenPages.Should().Be(3);
-			badDocumentIds.Should().NotBeEmpty()
+			badDocumentIds.Should()
+				.NotBeEmpty()
 				.And.HaveCount(expectedBadDocuments)
 				.And.OnlyContain(id => id >= Size * FailAfterPage);
 		}
@@ -91,9 +94,9 @@ namespace Tests.Document.Multiple.BulkAll
 		[I] public async Task BadBulkRequestFeedsToOnError()
 		{
 			var index = CreateIndexName();
-			var documents = await this.CreateIndexAndReturnDocuments(index);
+			var documents = await CreateIndexAndReturnDocuments(index);
 			var seenPages = 0;
-			var badUris = new[] {new Uri("http://test.example:9201"), new Uri("http://test.example:9202")};
+			var badUris = new[] { new Uri("http://test.example:9201"), new Uri("http://test.example:9202") };
 			var pool = new StaticConnectionPool(badUris);
 			var badClient = new ElasticClient(new ConnectionSettings(pool));
 			var observableBulk = badClient.BulkAll(documents, f => f
@@ -126,10 +129,11 @@ namespace Tests.Document.Multiple.BulkAll
 		private BulkAllObservable<SmallObject> KickOff(
 			string index,
 			IEnumerable<SmallObject> documents,
-			Func<BulkAllDescriptor<SmallObject>, BulkAllDescriptor<SmallObject>> selector = null)
+			Func<BulkAllDescriptor<SmallObject>, BulkAllDescriptor<SmallObject>> selector = null
+		)
 		{
 			selector = selector ?? (s => s);
-			var observableBulk = this.Client.BulkAll(documents, f => selector(f
+			var observableBulk = Client.BulkAll(documents, f => selector(f
 				.MaxDegreeOfParallelism(8)
 				.BackOffTime(TimeSpan.FromSeconds(10))
 				.BackOffRetries(2)
@@ -142,19 +146,19 @@ namespace Tests.Document.Multiple.BulkAll
 
 		private async Task<IEnumerable<SmallObject>> CreateIndexAndReturnDocuments(string index)
 		{
-			await this.CreateIndexAsync(index, NumberOfShards, m => m
+			await CreateIndexAsync(index, NumberOfShards, m => m
 				.Map<SmallObject>(mm => mm.Properties(p => p.Number(n => n.Name(pp => pp.Number).Coerce(false).IgnoreMalformed(false)))
 				));
 
-			var documents = this.CreateLazyStreamOfDocuments(NumberOfDocuments)
+			var documents = CreateLazyStreamOfDocuments(NumberOfDocuments)
 				.Select(s =>
 				{
 					if (s.Id < FailAfterPage * Size) return s;
+
 					s.Number = "Not excepted";
 					return s;
 				});
 			return documents;
-
 		}
 	}
 }

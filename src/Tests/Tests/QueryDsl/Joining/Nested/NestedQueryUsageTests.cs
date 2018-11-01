@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Nest;
-using Newtonsoft.Json.Linq;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.Joining.Nested
@@ -31,7 +29,7 @@ namespace Tests.QueryDsl.Joining.Nested
 				{
 					terms = new Dictionary<string, object>
 					{
-						{ "curatedTags.name", new [] {"lorem", "ipsum"} }
+						{ "curatedTags.name", new[] { "lorem", "ipsum" } }
 					}
 				},
 				ignore_unmapped = true,
@@ -61,8 +59,8 @@ namespace Tests.QueryDsl.Joining.Nested
 			.Nested(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.InnerHits(i=>i.Explain())
-				.Path(p=>p.CuratedTags)
+				.InnerHits(i => i.Explain())
+				.Path(p => p.CuratedTags)
 				.Query(nq => nq
 					.Terms(t => t
 						.Field(f => f.CuratedTags.First().Name)
@@ -74,9 +72,9 @@ namespace Tests.QueryDsl.Joining.Nested
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INestedQuery>(a => a.Nested)
 		{
-			q =>  q.Query = null,
-			q =>  q.Query = ConditionlessQuery,
-			q =>  q.Path = null,
+			q => q.Query = null,
+			q => q.Query = ConditionlessQuery,
+			q => q.Path = null,
 		};
 	}
 }

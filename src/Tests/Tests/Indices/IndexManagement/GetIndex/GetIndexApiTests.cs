@@ -6,8 +6,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.GetIndex
@@ -18,6 +16,7 @@ namespace Tests.Indices.IndexManagement.GetIndex
 		private static readonly IndexName ProjectIndex = Index<Project>();
 
 		public GetIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetIndex(typeof(Project)),
 			fluentAsync: (client, f) => client.GetIndexAsync(typeof(Project)),
@@ -32,20 +31,21 @@ namespace Tests.Indices.IndexManagement.GetIndex
 
 		protected override GetIndexRequest Initializer => new GetIndexRequest(ProjectIndex);
 
-	    protected override void ExpectResponse(IGetIndexResponse response)
-	    {
-	        response.Indices.Should().NotBeNull();
-	        response.Indices.Count.Should().BeGreaterThan(0);
-	        var projectIndex = response.Indices[ProjectIndex];
-	        projectIndex.Should().NotBeNull();
-	    }
+		protected override void ExpectResponse(IGetIndexResponse response)
+		{
+			response.Indices.Should().NotBeNull();
+			response.Indices.Count.Should().BeGreaterThan(0);
+			var projectIndex = response.Indices[ProjectIndex];
+			projectIndex.Should().NotBeNull();
+		}
 	}
 
 
 	public class GetAllIndicesApiTests
-		: ApiTestBase<ReadOnlyCluster,IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
+		: ApiTestBase<ReadOnlyCluster, IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
 	{
 		public GetAllIndicesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetIndex(AllIndices),
 			fluentAsync: (client, f) => client.GetIndexAsync(AllIndices),

@@ -6,9 +6,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Request
 {
@@ -31,7 +29,7 @@ namespace Tests.Search.Request
 			new SearchRequest<Project> { Explain = true };
 
 		[I]
-		protected async Task ExplanationIsSetOnHits() => await this.AssertOnAllResponses(r =>
+		protected async Task ExplanationIsSetOnHits() => await AssertOnAllResponses(r =>
 		{
 			r.Hits.Should().NotBeEmpty();
 			r.Hits.Should().NotContain(hit => hit.Explanation == null);

@@ -9,12 +9,12 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.MultiSearch.MultiSearchTemplate
 {
 	public class MultiSearchTemplateApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchTemplateRequest, MultiSearchTemplateDescriptor, MultiSearchTemplateRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiSearchResponse, IMultiSearchTemplateRequest, MultiSearchTemplateDescriptor,
+			MultiSearchTemplateRequest>
 	{
 		public MultiSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -34,11 +34,11 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 
 		protected override object ExpectJson => new object[]
 		{
-			new {},
+			new { },
 			new { @params = new { state = "Stable" }, source = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}" },
 			new { index = "devs" },
-			new { id = "template-id"},
-			new { index = "devs"},
+			new { id = "template-id" },
+			new { index = "devs" },
 		};
 
 		protected override Func<MultiSearchTemplateDescriptor, IMultiSearchTemplateRequest> Fluent => ms => ms
@@ -56,7 +56,8 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 		{
 			Operations = new Dictionary<string, ISearchTemplateRequest>
 			{
-				{ "inline", new SearchTemplateRequest<Project>(typeof(Project))
+				{
+					"inline", new SearchTemplateRequest<Project>(typeof(Project))
 					{
 						Source = "{\"query\": {\"match\":  {\"state\" : \"{{state}}\" }}}",
 						Params = new Dictionary<string, object>

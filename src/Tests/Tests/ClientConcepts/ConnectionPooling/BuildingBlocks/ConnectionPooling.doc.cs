@@ -4,7 +4,6 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
@@ -65,19 +64,22 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			*/
 			var client = new ElasticClient(uri);
 			client.ConnectionSettings.ConnectionPool
-				.Should().BeOfType<SingleNodeConnectionPool>();
+				.Should()
+				.BeOfType<SingleNodeConnectionPool>();
 
 			/** However we urge that you always pass your connection settings explicitly
 			 */
 			client = new ElasticClient(new ConnectionSettings(uri));
 			client.ConnectionSettings.ConnectionPool
-				.Should().BeOfType<SingleNodeConnectionPool>();
+				.Should()
+				.BeOfType<SingleNodeConnectionPool>();
 
 			/** or even better pass the connection pool explicitly
 			 */
 			client = new ElasticClient(new ConnectionSettings(pool));
 			client.ConnectionSettings.ConnectionPool
-				.Should().BeOfType<SingleNodeConnectionPool>();
+				.Should()
+				.BeOfType<SingleNodeConnectionPool>();
 		}
 
 		/**[[static-connection-pool]]
@@ -109,7 +111,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			*/
 			var client = new ElasticClient(new ConnectionSettings(pool));
 			client.ConnectionSettings.ConnectionPool
-				.Should().BeOfType<StaticConnectionPool>();
+				.Should()
+				.BeOfType<StaticConnectionPool>();
 		}
 
 		/**[[sniffing-connection-pool]]
@@ -131,7 +134,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			* NEST can use to favour sniffing on master eligible nodes first,
 			* and take master only nodes out of rotation for issuing client calls on.
 			*/
-			var nodes = uris.Select(u=>new Node(u));
+			var nodes = uris.Select(u => new Node(u));
 			pool = new SniffingConnectionPool(nodes);
 
 			/** This type of pool is hardwired to opt in to reseeding (and hence sniffing), and pinging */
@@ -143,7 +146,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			*/
 			var client = new ElasticClient(new ConnectionSettings(pool));
 			client.ConnectionSettings.ConnectionPool
-				.Should().BeOfType<SniffingConnectionPool>();
+				.Should()
+				.BeOfType<SniffingConnectionPool>();
 		}
 
 		/**[[sticky-connection-pool]]
@@ -166,7 +170,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			* NEST can use this information to favour sniffing on master eligible nodes first
 			* and take master only nodes out of rotation for issuing client calls on.
 			*/
-			var nodes = uris.Select(u=>new Node(u));
+			var nodes = uris.Select(u => new Node(u));
 			pool = new StickyConnectionPool(nodes);
 
 			/** This type of pool is hardwired to opt out of reseeding (and hence sniffing), but does support sniffing*/
@@ -178,7 +182,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			*/
 			var client = new ElasticClient(new ConnectionSettings(pool));
 			client.ConnectionSettings.ConnectionPool
-				.Should().BeOfType<StickyConnectionPool>();
+				.Should()
+				.BeOfType<StickyConnectionPool>();
 		}
 
 		/**[[sticky-sniffing-connection-pool]]
@@ -201,7 +206,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var pool = new StickySniffingConnectionPool(uris, n =>
 				(n.ClientNode ? 10 : 0)
 				+ (n.Settings.TryGetValue("node.attr.rack_id", out var rackId)
-				   		&& rackId.ToString() == "rack_one" ? 10 : 0));
+					&& rackId.ToString() == "rack_one"
+						? 10
+						: 0));
 
 			pool.SupportsReseeding.Should().BeTrue();
 			pool.SupportsPinging.Should().BeTrue();
@@ -211,7 +218,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			*/
 			var client = new ElasticClient(new ConnectionSettings(pool));
 			client.ConnectionSettings.ConnectionPool
-				.Should().BeOfType<StickySniffingConnectionPool>();
+				.Should()
+				.BeOfType<StickySniffingConnectionPool>();
 		}
 	}
 }

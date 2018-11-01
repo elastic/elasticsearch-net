@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using System.Reflection;
-using Elastic.Xunit.XunitPlumbing;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.Ingest

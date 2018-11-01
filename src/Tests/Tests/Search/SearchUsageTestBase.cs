@@ -6,14 +6,14 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search
 {
-	public abstract class SearchUsageTestBase : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class SearchUsageTestBase
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected SearchUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
@@ -32,7 +32,7 @@ namespace Tests.Search
 			Value = Project.TypeName
 		};
 
-		protected object ProjectFilterExpectedJson = new {term = new {type = new {value = Project.TypeName}}};
+		protected object ProjectFilterExpectedJson = new { term = new { type = new { value = Project.TypeName } } };
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] protected override Task HitsTheCorrectUrl() => base.HitsTheCorrectUrl();
@@ -48,7 +48,5 @@ namespace Tests.Search
 		[I] public override Task ReturnsExpectedIsValid() => base.ReturnsExpectedIsValid();
 
 		[I] public override Task ReturnsExpectedResponse() => base.ReturnsExpectedResponse();
-
-
 	}
 }

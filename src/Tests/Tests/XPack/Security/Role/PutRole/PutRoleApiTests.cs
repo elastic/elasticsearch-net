@@ -9,8 +9,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.XPack.Security.Role.PutRole
@@ -21,8 +19,8 @@ namespace Tests.XPack.Security.Role.PutRole
 		public PutRoleApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.PutRole(this.Role, f),
-			fluentAsync: (client, f) => client.PutRoleAsync(this.Role, f),
+			fluent: (client, f) => client.PutRole(Role, f),
+			fluentAsync: (client, f) => client.PutRoleAsync(Role, f),
 			request: (client, r) => client.PutRole(r),
 			requestAsync: (client, r) => client.PutRoleAsync(r)
 		);
@@ -31,7 +29,7 @@ namespace Tests.XPack.Security.Role.PutRole
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
-		protected override string UrlPath => $"/_xpack/security/role/{this.Role}";
+		protected override string UrlPath => $"/_xpack/security/role/{Role}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -40,14 +38,16 @@ namespace Tests.XPack.Security.Role.PutRole
 
 		protected override object ExpectJson => new
 		{
-			cluster = new [] { "all" },
-			run_as = new [] { "user" },
-			indices = new [] {
-				new {
-					names = new [] { "project" },
-					privileges = new [] { "all" },
-					field_security = new { grant = new [] { "name", "description" } },
-					query = new { match_all = new {} }
+			cluster = new[] { "all" },
+			run_as = new[] { "user" },
+			indices = new[]
+			{
+				new
+				{
+					names = new[] { "project" },
+					privileges = new[] { "all" },
+					field_security = new { grant = new[] { "name", "description" } },
+					query = new { match_all = new { } }
 				}
 			},
 			metadata = new
@@ -56,7 +56,7 @@ namespace Tests.XPack.Security.Role.PutRole
 			}
 		};
 
-		protected override PutRoleRequest Initializer => new PutRoleRequest(this.Role)
+		protected override PutRoleRequest Initializer => new PutRoleRequest(Role)
 		{
 			Cluster = new[] { "all" },
 			RunAs = new[] { "user" },
@@ -66,10 +66,10 @@ namespace Tests.XPack.Security.Role.PutRole
 				{
 					FieldSecurity = new FieldSecurity
 					{
-						Grant = Fields<Project>(p=>p.Name).And<Project>(p=>p.Description)
+						Grant = Fields<Project>(p => p.Name).And<Project>(p => p.Description)
 					},
 					Names = Indices<Project>(),
-					Privileges = new [] { "all" },
+					Privileges = new[] { "all" },
 					Query = new MatchAllQuery()
 				}
 			},
@@ -79,7 +79,7 @@ namespace Tests.XPack.Security.Role.PutRole
 			}
 		};
 
-		protected override PutRoleDescriptor NewDescriptor() => new PutRoleDescriptor(this.Role);
+		protected override PutRoleDescriptor NewDescriptor() => new PutRoleDescriptor(Role);
 
 		protected override Func<PutRoleDescriptor, IPutRoleRequest> Fluent => d => d
 			.RunAs("user")
@@ -97,7 +97,7 @@ namespace Tests.XPack.Security.Role.PutRole
 					.Query(q => q.MatchAll())
 				)
 			)
-			.Metadata( m => m.Add("internal", true));
+			.Metadata(m => m.Add("internal", true));
 
 		protected override void ExpectResponse(IPutRoleResponse response)
 		{
@@ -131,9 +131,7 @@ namespace Tests.XPack.Security.Role.PutRole
 				.RunAs(ClusterAuthentication.User.Username)
 			));
 
-		protected override void ExpectResponse(IPutRoleResponse response)
-		{
-		}
+		protected override void ExpectResponse(IPutRoleResponse response) { }
 	}
 
 	[SkipVersion("<6.4.0", "Application privileges introduced in 6.4.0")]
@@ -143,7 +141,7 @@ namespace Tests.XPack.Security.Role.PutRole
 
 		protected override object ExpectJson => new
 		{
-			applications = new []
+			applications = new[]
 			{
 				new
 				{
@@ -154,15 +152,15 @@ namespace Tests.XPack.Security.Role.PutRole
 			}
 		};
 
-		protected override PutRoleRequest Initializer => new PutRoleRequest(this.Role)
+		protected override PutRoleRequest Initializer => new PutRoleRequest(Role)
 		{
 			Applications = new List<IApplicationPrivileges>
 			{
 				new ApplicationPrivileges
 				{
 					Application = "myapp",
-					Privileges = new [] { "admin", "read" },
-					Resources = new [] { "*"}
+					Privileges = new[] { "admin", "read" },
+					Resources = new[] { "*" }
 				}
 			}
 		};
@@ -176,5 +174,4 @@ namespace Tests.XPack.Security.Role.PutRole
 				)
 			);
 	}
-
 }

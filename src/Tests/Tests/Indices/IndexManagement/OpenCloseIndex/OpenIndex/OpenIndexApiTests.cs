@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 {
@@ -30,7 +27,7 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 			fluentAsync: (client, f) => client.OpenIndexAsync(CallIsolatedValue, f),
 			request: (client, r) => client.OpenIndex(r),
 			requestAsync: (client, r) => client.OpenIndexAsync(r)
-			);
+		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;

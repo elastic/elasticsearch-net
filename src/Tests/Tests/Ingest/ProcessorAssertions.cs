@@ -10,6 +10,7 @@ using Tests.Domain;
 namespace Tests.Ingest
 {
 	using ProcFunc = Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>>;
+
 	public interface IProcessorAssertion
 	{
 		object Json { get; }
@@ -17,6 +18,7 @@ namespace Tests.Ingest
 		IProcessor Initializer { get; }
 		ProcFunc Fluent { get; }
 	}
+
 	public abstract class ProcessorAssertion : IProcessorAssertion
 	{
 		public abstract string Key { get; }
@@ -33,13 +35,14 @@ namespace Tests.Ingest
 			where typeof(IProcessorAssertion).IsAssignableFrom(t) && t.IsClass
 			let a = t.GetCustomAttributes(typeof(SkipVersionAttribute)).FirstOrDefault() as SkipVersionAttribute
 			where a == null || !a.Ranges.Any(r => r.IsSatisfied(TestClient.Configuration.ElasticsearchVersion))
-			select (IProcessorAssertion) (Activator.CreateInstance(t));
+			select (IProcessorAssertion)(Activator.CreateInstance(t));
 
 		public static Dictionary<string, object>[] Json =>
 			All.Select(a => new Dictionary<string, object>
-			{
-				{a.Key, a.Json}
-			}).ToArray();
+				{
+					{ a.Key, a.Json }
+				})
+				.ToArray();
 
 		public static IPromise<IList<IProcessor>> Fluent(ProcessorsDescriptor d)
 		{
@@ -52,24 +55,25 @@ namespace Tests.Ingest
 		public class Append : ProcessorAssertion
 		{
 			public override string Key => "append";
-			public override object Json => new {field = "state", value = new[] {"Stable", "VeryActive"}};
+			public override object Json => new { field = "state", value = new[] { "Stable", "VeryActive" } };
 
 			public override IProcessor Initializer => new AppendProcessor
 			{
 				Field = "state",
-				Value = new object[] {StateOfBeing.Stable, StateOfBeing.VeryActive}
+				Value = new object[] { StateOfBeing.Stable, StateOfBeing.VeryActive }
 			};
+
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Append<Project>(a => a
 					.Field(p => p.State)
 					.Value(StateOfBeing.Stable, StateOfBeing.VeryActive)
 				);
-
 		}
 
 		public class Convert : ProcessorAssertion
 		{
 			public override string Key => "convert";
+
 			public override object Json => new
 			{
 				field = "numberOfCommits",
@@ -83,6 +87,7 @@ namespace Tests.Ingest
 				TargetField = "targetField",
 				Type = ConvertProcessorType.String
 			};
+
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Convert<Project>(c => c
 					.Field(p => p.NumberOfCommits)
@@ -94,11 +99,12 @@ namespace Tests.Ingest
 		public class Date : ProcessorAssertion
 		{
 			public override string Key => "date";
+
 			public override object Json => new
 			{
 				field = "startedOn",
 				target_field = "timestamp",
-				formats = new[] {"dd/MM/yyyy hh:mm:ss"},
+				formats = new[] { "dd/MM/yyyy hh:mm:ss" },
 				timezone = "Europe/Amsterdam"
 			};
 
@@ -106,9 +112,10 @@ namespace Tests.Ingest
 			{
 				Field = "startedOn",
 				TargetField = "timestamp",
-				Formats = new string[] {"dd/MM/yyyy hh:mm:ss"},
+				Formats = new string[] { "dd/MM/yyyy hh:mm:ss" },
 				Timezone = "Europe/Amsterdam"
 			};
+
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Date<Project>(dt => dt
 					.Field(p => p.StartedOn)
@@ -124,7 +131,7 @@ namespace Tests.Ingest
 
 			public override object Json => new { message = "an error message" };
 
-			public override IProcessor Initializer => new FailProcessor {Message = "an error message"};
+			public override IProcessor Initializer => new FailProcessor { Message = "an error message" };
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Fail(f => f.Message("an error message"));
 		}
 
@@ -152,6 +159,7 @@ namespace Tests.Ingest
 					Field = "_value.name"
 				}
 			};
+
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Foreach<Project>(fe => fe
 					.Field(p => p.Tags)
@@ -170,24 +178,25 @@ namespace Tests.Ingest
 			public override object Json => new
 			{
 				field = "description",
-				patterns = new[] {"my %{FAVORITE_DOG:dog} is colored %{RGB:color}"},
+				patterns = new[] { "my %{FAVORITE_DOG:dog} is colored %{RGB:color}" },
 				pattern_definitions = new Dictionary<string, string>
 				{
-					{"FAVORITE_DOG", "border collie"},
-					{"RGB", "RED|BLUE|GREEN"},
+					{ "FAVORITE_DOG", "border collie" },
+					{ "RGB", "RED|BLUE|GREEN" },
 				}
 			};
 
 			public override IProcessor Initializer => new GrokProcessor
 			{
 				Field = "description",
-				Patterns = new[] {"my %{FAVORITE_DOG:dog} is colored %{RGB:color}"},
+				Patterns = new[] { "my %{FAVORITE_DOG:dog} is colored %{RGB:color}" },
 				PatternDefinitions = new Dictionary<string, string>
 				{
-					{"FAVORITE_DOG", "border collie"},
-					{"RGB", "RED|BLUE|GREEN"},
+					{ "FAVORITE_DOG", "border collie" },
+					{ "RGB", "RED|BLUE|GREEN" },
 				}
 			};
+
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Grok<Project>(gk => gk
 					.Field(p => p.Description)
@@ -211,6 +220,7 @@ namespace Tests.Ingest
 				Pattern = "-",
 				Replacement = "_"
 			};
+
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Gsub<Project>(gs => gs
 					.Field(p => p.Name)
@@ -230,7 +240,9 @@ namespace Tests.Ingest
 				Field = "branches",
 				Separator = ","
 			};
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Join<Project>(j => j.Field(p => p.Branches).Separator(","));
+
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
+				d => d.Join<Project>(j => j.Field(p => p.Branches).Separator(","));
 		}
 
 		public class Lowercase : ProcessorAssertion
@@ -249,7 +261,7 @@ namespace Tests.Ingest
 
 			public override object Json => new { field = "suggest" };
 
-			public override IProcessor Initializer => new RemoveProcessor {Field = "suggest"};
+			public override IProcessor Initializer => new RemoveProcessor { Field = "suggest" };
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Remove<Project>(r => r.Field(p => p.Suggest));
 		}
 
@@ -264,7 +276,9 @@ namespace Tests.Ingest
 				Field = "leadDeveloper",
 				TargetField = "projectLead"
 			};
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Rename<Project>(rn => rn.Field(p => p.LeadDeveloper).TargetField("projectLead"));
+
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
+				d => d.Rename<Project>(rn => rn.Field(p => p.LeadDeveloper).TargetField("projectLead"));
 		}
 
 		public class Set : ProcessorAssertion
@@ -274,7 +288,9 @@ namespace Tests.Ingest
 			public override object Json => new { field = "name", value = "foo" };
 
 			public override IProcessor Initializer => new SetProcessor { Field = Infer.Field<Project>(p => p.Name), Value = "foo" };
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Set<Project>(s => s.Field(p => p.Name).Value("foo"));
+
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
+				d => d.Set<Project>(s => s.Field(p => p.Name).Value("foo"));
 		}
 
 		public class Split : ProcessorAssertion
@@ -283,8 +299,10 @@ namespace Tests.Ingest
 
 			public override object Json => new { field = "description", separator = "." };
 
-			public override IProcessor Initializer => new SplitProcessor {Field = "description", Separator = "."};
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Split<Project>(sp => sp.Field(p => p.Description).Separator("."));
+			public override IProcessor Initializer => new SplitProcessor { Field = "description", Separator = "." };
+
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
+				d => d.Split<Project>(sp => sp.Field(p => p.Description).Separator("."));
 		}
 
 		public class Trim : ProcessorAssertion
@@ -293,7 +311,7 @@ namespace Tests.Ingest
 
 			public override object Json => new { field = "name" };
 
-			public override IProcessor Initializer => new TrimProcessor {Field = "name"};
+			public override IProcessor Initializer => new TrimProcessor { Field = "name" };
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Trim<Project>(t => t.Field(p => p.Name));
 		}
 
@@ -303,7 +321,7 @@ namespace Tests.Ingest
 
 			public override object Json => new { field = "name" };
 
-			public override IProcessor Initializer => new UppercaseProcessor {Field = "name"};
+			public override IProcessor Initializer => new UppercaseProcessor { Field = "name" };
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Uppercase<Project>(u => u.Field(p => p.Name));
 		}
 
@@ -313,8 +331,10 @@ namespace Tests.Ingest
 
 			public override object Json => new { field = "field.withDots" };
 
-			public override IProcessor Initializer => new DotExpanderProcessor {Field = "field.withDots"};
-			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.DotExpander<Project>(de => de.Field("field.withDots"));
+			public override IProcessor Initializer => new DotExpanderProcessor { Field = "field.withDots" };
+
+			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent =>
+				d => d.DotExpander<Project>(de => de.Field("field.withDots"));
 		}
 
 		public class Script : ProcessorAssertion
@@ -323,7 +343,7 @@ namespace Tests.Ingest
 
 			public override object Json => new { source = "ctx.numberOfCommits++" };
 
-			public override IProcessor Initializer => new ScriptProcessor {Source = "ctx.numberOfCommits++"};
+			public override IProcessor Initializer => new ScriptProcessor { Source = "ctx.numberOfCommits++" };
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d.Script(s => s.Source("ctx.numberOfCommits++"));
 		}
 
@@ -335,6 +355,7 @@ namespace Tests.Ingest
 			public override object Json => new { field = "description", ignore_missing = true };
 
 			public override IProcessor Initializer => new UrlDecodeProcessor { Field = "description", IgnoreMissing = true };
+
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.UrlDecode<Project>(ud => ud
 					.Field(p => p.Description)
@@ -351,18 +372,18 @@ namespace Tests.Ingest
 			{
 				field = "description",
 				ignore_missing = true,
-				properties = new [] {"title", "author"},
+				properties = new[] { "title", "author" },
 				indexed_chars = 100_000,
 			};
 
 			public override IProcessor Initializer => new AttachmentProcessor
 			{
 				Field = "description",
-				Properties = new [] {"title", "author"},
+				Properties = new[] { "title", "author" },
 				IndexedCharacters = 100_000,
 				IgnoreMissing = true
-
 			};
+
 			public override Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> Fluent => d => d
 				.Attachment<Project>(ud => ud
 					.Field(p => p.Description)
@@ -416,7 +437,7 @@ namespace Tests.Ingest
 					.IgnoreMissing()
 				);
 		}
-		
+
 		[SkipVersion("<6.4.0", "trimming options were introduced later")]
 		public class KeyValueTrimming : ProcessorAssertion
 		{

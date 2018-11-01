@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
@@ -13,11 +12,9 @@ using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
-using Field = Nest.Field;
+
 // ReSharper disable ArrangeMethodOrOperatorBody
 
 namespace Tests.ClientConcepts.HighLevel.Inference
@@ -75,7 +72,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldExpression.GetHashCode().Should().NotBe(0);
 			fieldProperty.GetHashCode().Should().NotBe(0);
 
-			fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostTwo); //<1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
+			fieldStringWithBoostTwo.Should()
+				.Be(fieldStringWithBoostTwo); //<1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
 		}
 
 		/**
@@ -223,37 +221,46 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* do not always map back on to your POCO. By calling `.Suffix()` on expressions, you describe the sub fields that
 			* should be mapped and <<auto-map, how they are mapped>>
 			*/
-			Expect("leadDeveloper.firstName.raw").WhenSerializing(
-				Field<Project>(p => p.LeadDeveloper.FirstName.Suffix("raw")));
+			Expect("leadDeveloper.firstName.raw")
+				.WhenSerializing(
+					Field<Project>(p => p.LeadDeveloper.FirstName.Suffix("raw")));
 
-			Expect("curatedTags.raw").WhenSerializing(
-				Field<Project>(p => p.CuratedTags[0].Suffix("raw")));
+			Expect("curatedTags.raw")
+				.WhenSerializing(
+					Field<Project>(p => p.CuratedTags[0].Suffix("raw")));
 
-			Expect("curatedTags.raw").WhenSerializing(
-				Field<Project>(p => p.CuratedTags.First().Suffix("raw")));
+			Expect("curatedTags.raw")
+				.WhenSerializing(
+					Field<Project>(p => p.CuratedTags.First().Suffix("raw")));
 
-			Expect("curatedTags.added.raw").WhenSerializing(
-				Field<Project>(p => p.CuratedTags[0].Added.Suffix("raw")));
+			Expect("curatedTags.added.raw")
+				.WhenSerializing(
+					Field<Project>(p => p.CuratedTags[0].Added.Suffix("raw")));
 
-			Expect("metadata.hardcoded.raw").WhenSerializing(
-				Field<Project>(p => p.Metadata["hardcoded"].Suffix("raw")));
+			Expect("metadata.hardcoded.raw")
+				.WhenSerializing(
+					Field<Project>(p => p.Metadata["hardcoded"].Suffix("raw")));
 
-			Expect("metadata.hardcoded.created.raw").WhenSerializing(
-				Field<Project>(p => p.Metadata["hardcoded"].Created.Suffix("raw")));
+			Expect("metadata.hardcoded.created.raw")
+				.WhenSerializing(
+					Field<Project>(p => p.Metadata["hardcoded"].Created.Suffix("raw")));
 
 			/**
 			* You can even chain `.Suffix()` calls to any depth!
 			*/
-			Expect("curatedTags.name.raw.evendeeper").WhenSerializing(
-				Field<Project>(p => p.CuratedTags.First().Name.Suffix("raw").Suffix("evendeeper")));
+			Expect("curatedTags.name.raw.evendeeper")
+				.WhenSerializing(
+					Field<Project>(p => p.CuratedTags.First().Name.Suffix("raw").Suffix("evendeeper")));
 
 			/** Variables passed to suffix will be evaluated as well */
 			var suffix = "unanalyzed";
-			Expect("metadata.var.unanalyzed").WhenSerializing(
-				Field<Project>(p => p.Metadata[variable].Suffix(suffix)));
+			Expect("metadata.var.unanalyzed")
+				.WhenSerializing(
+					Field<Project>(p => p.Metadata[variable].Suffix(suffix)));
 
-			Expect("metadata.var.created.unanalyzed").WhenSerializing(
-				Field<Project>(p => p.Metadata[variable].Created.Suffix(suffix)));
+			Expect("metadata.var.created.unanalyzed")
+				.WhenSerializing(
+					Field<Project>(p => p.Metadata[variable].Created.Suffix(suffix)));
 		}
 
 		/**
@@ -304,6 +311,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			[Text(Name = "naam")]
 			public string Name { get; set; }
 		}
+
 		[U]
 		public void BuiltInAnnotiatons()
 		{
@@ -357,14 +365,16 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			[PropertyName("nameInJson"), JsonProperty("nameInJson")]
 			public string Name { get; set; }
 		}
+
 		[U]
 		public void NestAttributeTakesPrecedence()
 		{
 			Expect("naam").WhenSerializing(Field<Both>(p => p.Name));
 			Expect(new
-			{
-				naam = "Martijn Laarman"
-			}).WhenSerializing(new Both { Name = "Martijn Laarman" });
+				{
+					naam = "Martijn Laarman"
+				})
+				.WhenSerializing(new Both { Name = "Martijn Laarman" });
 		}
 
 
@@ -375,9 +385,17 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		* Resolution of field names is cached _per_ `ConnectionSettings` instance. To demonstrate,
 		* take the following simple POCOs
 		*/
-		class A { public C C { get; set; } }
-		class B { public C C { get; set; } }
-		class C
+		private class A
+		{
+			public C C { get; set; }
+		}
+
+		private class B
+		{
+			public C C { get; set; }
+		}
+
+		private class C
 		{
 			public string Name { get; set; }
 		}
@@ -440,26 +458,46 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		private class Precedence
 		{
 			[Text(Name = "renamedIgnoresNest")]
-			[PropertyName("renamedIgnoresJsonProperty"),JsonProperty("renamedIgnoresJsonProperty")]
-			public string RenamedOnConnectionSettings { get; set; } //<1> Even though this property has various attributes applied we provide an override on ConnectionSettings later that takes precedence.
+			[PropertyName("renamedIgnoresJsonProperty"), JsonProperty("renamedIgnoresJsonProperty")]
+			public string
+				RenamedOnConnectionSettings
+			{
+				get;
+				set;
+			} //<1> Even though this property has various attributes applied we provide an override on ConnectionSettings later that takes precedence.
 
 			[Text(Name = "nestAtt")]
-			[PropertyName("nestProp"),JsonProperty("jsonProp")]
-			public string NestAttribute { get; set; } //<2> Has a `TextAttribute`, `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `TextAttribute` takes precedence.
+			[PropertyName("nestProp"), JsonProperty("jsonProp")]
+			public string
+				NestAttribute
+			{
+				get;
+				set;
+			} //<2> Has a `TextAttribute`, `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `TextAttribute` takes precedence.
 
-			[PropertyName("nestProp"),JsonProperty("jsonProp")]
-			public string NestProperty { get; set; } //<3> Has both a `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `PropertyNameAttribute` takes precedence.
+			[PropertyName("nestProp"), JsonProperty("jsonProp")]
+			public string
+				NestProperty
+			{
+				get;
+				set;
+			} //<3> Has both a `PropertyNameAttribute` and a `JsonPropertyAttribute` - the `PropertyNameAttribute` takes precedence.
 
 			[JsonProperty("jsonProp")]
 			public string JsonProperty { get; set; } //<4> `JsonPropertyAttribute` takes precedence.
 
-			[PropertyName("dontaskme"),JsonProperty("dontaskme")]
+			[PropertyName("dontaskme"), JsonProperty("dontaskme")]
 			public string AskSerializer { get; set; } //<5> This property we are going to hard code in our custom serializer to resolve to ask.
 
 			[DataMember(Name = "data")]
 			public string DataMember { get; set; }
 
-			public string DefaultFieldNameInferrer { get; set; } //<6>  We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
+			public string
+				DefaultFieldNameInferrer
+			{
+				get;
+				set;
+			} //<6>  We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
 		}
 
 		/**
@@ -486,12 +524,13 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			 * - a delegate to perform default field name inference
 			*/
 			var usingSettings = WithConnectionSettings(s => s
-
-				.DefaultMappingFor<Precedence>(m => m
-					.PropertyName(p => p.RenamedOnConnectionSettings, "renamed") // <1> Rename on the mapping for the `Precedence` type
+						.DefaultMappingFor<Precedence>(m => m
+								.PropertyName(p => p.RenamedOnConnectionSettings, "renamed") // <1> Rename on the mapping for the `Precedence` type
+						)
+						.DefaultFieldNameInferrer(p =>
+							p.ToUpperInvariant()) // <2> Default inference for a field, if no other rules apply or are specified for a given field
 				)
-				.DefaultFieldNameInferrer(p => p.ToUpperInvariant()) // <2> Default inference for a field, if no other rules apply or are specified for a given field
-			).WithPropertyMappingProvider(new CustomPropertyMappingProvider()); // <3> Hook up the custom `IPropertyMappingProvider`
+				.WithPropertyMappingProvider(new CustomPropertyMappingProvider()); // <3> Hook up the custom `IPropertyMappingProvider`
 
 			usingSettings.Expect("renamed").ForField(Field<Precedence>(p => p.RenamedOnConnectionSettings));
 			usingSettings.Expect("nestAtt").ForField(Field<Precedence>(p => p.NestAttribute));
@@ -503,25 +542,26 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 
 			/** The same naming rules also apply when indexing a document */
-			usingSettings.Expect(new []
-			{
-				"ask",
-				"DEFAULTFIELDNAMEINFERRER",
-				"jsonProp",
-				"nestProp",
-				"nestAtt",
-				"renamed",
-				"data"
-			}).AsPropertiesOf(new Precedence
-			{
-				RenamedOnConnectionSettings = "renamed on connection settings",
-				NestAttribute = "using a nest attribute",
-				NestProperty = "using a nest property",
-				JsonProperty = "the default serializer resolves json property attributes",
-				AskSerializer = "serializer fiddled with this one",
-				DefaultFieldNameInferrer = "shouting much?",
-				DataMember = "using a DataMember attribute"
-			});
+			usingSettings.Expect(new[]
+				{
+					"ask",
+					"DEFAULTFIELDNAMEINFERRER",
+					"jsonProp",
+					"nestProp",
+					"nestAtt",
+					"renamed",
+					"data"
+				})
+				.AsPropertiesOf(new Precedence
+				{
+					RenamedOnConnectionSettings = "renamed on connection settings",
+					NestAttribute = "using a nest attribute",
+					NestProperty = "using a nest property",
+					JsonProperty = "the default serializer resolves json property attributes",
+					AskSerializer = "serializer fiddled with this one",
+					DefaultFieldNameInferrer = "shouting much?",
+					DataMember = "using a DataMember attribute"
+				});
 		}
 
 		/**
@@ -552,17 +592,17 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 					.Ignore(p => p.IgnoreMe)
 				)
 			);
-			usingSettings.Expect(new []
-			{
-				"id",
-				"desc",
-			}).AsPropertiesOf(new Child
-			{
-				Id = 1,
-				Description = "this property will be renamed for Child",
-				IgnoreMe = "this property will be ignored (won't be serialized) for Child",
-			});
-
+			usingSettings.Expect(new[]
+				{
+					"id",
+					"desc",
+				})
+				.AsPropertiesOf(new Child
+				{
+					Id = 1,
+					Description = "this property will be renamed for Child",
+					IgnoreMe = "this property will be ignored (won't be serialized) for Child",
+				});
 		}
 	}
 }

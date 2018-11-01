@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.SpanMultiTerm
 {
@@ -34,8 +33,8 @@ namespace Tests.QueryDsl.Joining.SpanMultiTerm
 			.SpanMultiTerm(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Match(sq=>sq
-					.Prefix(pr=>pr.Field(p=>p.Name).Value("pre-*"))
+				.Match(sq => sq
+					.Prefix(pr => pr.Field(p => p.Name).Value("pre-*"))
 				)
 			);
 

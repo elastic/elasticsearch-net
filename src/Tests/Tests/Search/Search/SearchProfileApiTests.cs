@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -8,16 +7,14 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Search
 {
-	public class SearchProfileApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest,
-		SearchDescriptor<Project>, SearchRequest<Project>>
+	public class SearchProfileApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest,
+			SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		public SearchProfileApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public SearchProfileApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (c, f) => c.Search(f),
@@ -74,6 +71,7 @@ namespace Tests.Search.Search
 						query.TimeInNanoseconds.Should().BeGreaterThan(0);
 						query.Breakdown.Should().NotBeNull();
 					}
+
 					search.RewriteTime.Should().BeGreaterThan(0);
 					var collectors = search.Collector;
 					foreach (var collector in collectors)
@@ -100,6 +98,7 @@ namespace Tests.Search.Search
 						}
 					}
 				}
+
 				var aggregations = shardProfile.Aggregations;
 				aggregations.Should().NotBeNull();
 				foreach (var aggregation in aggregations)

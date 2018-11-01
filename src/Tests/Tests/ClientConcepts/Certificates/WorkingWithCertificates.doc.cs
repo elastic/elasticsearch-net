@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -73,9 +71,7 @@ namespace Tests.ClientConcepts.Certificates
 			protected override void AssertWebException(WebException e) =>
 				e.Message.Should().Contain("Could not establish trust relationship for the SSL/TLS secure channel.");
 
-			protected override void AssertHttpRequestException(HttpRequestException e)
-			{
-			}
+			protected override void AssertHttpRequestException(HttpRequestException e) { }
 		}
 
 		/**===== Allowing all certificate validation
@@ -96,9 +92,7 @@ namespace Tests.ClientConcepts.Certificates
 		[IntegrationOnly]
 		public class AllowAllSslCertificatesApiTests : CanConnectTestBase<AllowAllCertificatesCluster>
 		{
-			public AllowAllSslCertificatesApiTests(AllowAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage)
-			{
-			}
+			public AllowAllSslCertificatesApiTests(AllowAllCertificatesCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 			[I]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
@@ -116,11 +110,13 @@ namespace Tests.ClientConcepts.Certificates
 		 */
 		public class CertgenCaCluster : SslAndKpiXPackCluster
 		{
-            public CertgenCaCluster() : this(new SslAndKpiClusterConfiguration()) { }
-            public CertgenCaCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
+			public CertgenCaCluster() : this(new SslAndKpiClusterConfiguration()) { }
+
+			public CertgenCaCluster(SslAndKpiClusterConfiguration configuration) : base(configuration) { }
+
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 				.ServerCertificateValidationCallback(
-					CertificateValidations.AuthorityIsRoot(new X509Certificate(this.ClusterConfiguration.FileSystem.CaCertificate))
+					CertificateValidations.AuthorityIsRoot(new X509Certificate(ClusterConfiguration.FileSystem.CaCertificate))
 				);
 		}
 
@@ -128,9 +124,7 @@ namespace Tests.ClientConcepts.Certificates
 		[IntegrationOnly]
 		public class CertgenCaApiTests : CanConnectTestBase<CertgenCaCluster>
 		{
-			public CertgenCaApiTests(CertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage)
-			{
-			}
+			public CertgenCaApiTests(CertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 			[I]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
@@ -143,28 +137,26 @@ namespace Tests.ClientConcepts.Certificates
 		{
 			protected override ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 				.ServerCertificateValidationCallback(
-					CertificateValidations.AuthorityPartOfChain(new X509Certificate(this.ClusterConfiguration.FileSystem.UnusedCaCertificate))
+					CertificateValidations.AuthorityPartOfChain(new X509Certificate(ClusterConfiguration.FileSystem.UnusedCaCertificate))
 				);
 		}
 
 		[IntegrationOnly]
 		public class BadCertgenCaApiTests : ConnectionErrorTestBase<BadCertgenCaCluster>
 		{
-			public BadCertgenCaApiTests(BadCertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage)
-			{
-			}
+			public BadCertgenCaApiTests(BadCertgenCaCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 			// hide
 			[I]
 			public async Task UsedHttps() => await AssertOnAllResponses(r => r.ApiCall.Uri.Scheme.Should().Be("https"));
 
 			protected override void AssertWebException(WebException e) =>
-				e.Message.Should().Contain("Could not establish trust relationship for the SSL/TLS secure channel."); // <1> Exception is thrown, indicating that a secure connection could not be established
+				e.Message.Should()
+					.Contain(
+						"Could not establish trust relationship for the SSL/TLS secure channel."); // <1> Exception is thrown, indicating that a secure connection could not be established
 
 			// hide
-			protected override void AssertHttpRequestException(HttpRequestException e)
-			{
-			}
+			protected override void AssertHttpRequestException(HttpRequestException e) { }
 		}
 		/**
 		* If you go for a vendor generated SSL certificate, it's common practice for the certificate to include the CA _and_ any intermediary CAs
@@ -173,21 +165,21 @@ namespace Tests.ClientConcepts.Certificates
 		*/
 
 #if !DOTNETCORE
-		/**
-		 * ==== Client Certificates
-		 *
-		 * X-Pack also allows you to configure a {xpack_current}/pki-realm.html[PKI realm] to enable user authentication
-		 * through client certificates. The {ref_current}/certutil.html[+elasticsearch-certutil+ tool] included with X-Pack allows you to
-		 * generate client certificates as well and assign the distinguished name (DN) of the
-		 * certificate to a user with a certain role.
-		 *
-		 * By default, the `elasticsearch-certutil` tool only generates a public certificate (`.cer`) and a private key `.key`. To authenticate with client certificates, you need to present both
-		 * as one certificate. The easiest way to do this is to generate a `pfx` or `p12` file from the `.cer` and `.key`
-		 * and attach these to requests using `new X509Certificate(pathToPfx)`.
-		 *
-		 * You can pass a client certificate on `ConnectionSettings` for *all* requests.
-		 *
-		 */
+/**
+ * ==== Client Certificates
+ *
+ * X-Pack also allows you to configure a {xpack_current}/pki-realm.html[PKI realm] to enable user authentication
+ * through client certificates. The {ref_current}/certutil.html[+elasticsearch-certutil+ tool] included with X-Pack allows you to
+ * generate client certificates as well and assign the distinguished name (DN) of the
+ * certificate to a user with a certain role.
+ *
+ * By default, the `elasticsearch-certutil` tool only generates a public certificate (`.cer`) and a private key `.key`. To authenticate with client certificates, you need to present both
+ * as one certificate. The easiest way to do this is to generate a `pfx` or `p12` file from the `.cer` and `.key`
+ * and attach these to requests using `new X509Certificate(pathToPfx)`.
+ *
+ * You can pass a client certificate on `ConnectionSettings` for *all* requests.
+ *
+ */
 		public class PkiCluster : CertgenCaCluster
 		{
 			public PkiCluster() : base(new SslAndKpiClusterConfiguration
@@ -215,9 +207,9 @@ namespace Tests.ClientConcepts.Certificates
 	}
 
 #if !DOTNETCORE
-	/**
-	 * Or on a per request basis on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`
-	 */
+/**
+ * Or on a per request basis on `RequestConfiguration` which will take precedence over the ones defined on `ConnectionConfiguration`
+ */
 	public class BadPkiCluster : WorkingWithCertificates.PkiCluster { }
 
 	[IntegrationOnly]

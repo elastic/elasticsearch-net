@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Elastic.Xunit.Sdk;
+﻿using System.Collections.Generic;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.ClientConcepts.Troubleshooting
@@ -31,7 +26,7 @@ namespace Tests.ClientConcepts.Troubleshooting
 			var request = new SearchRequest<Project>
 			{
 				Size = 0,
-				Routing = new [] { "ignoredefaultcompletedhandler" },
+				Routing = new[] { "ignoredefaultcompletedhandler" },
 				Aggregations = new TermsAggregation("states")
 				{
 					Field = Field<Project>(p => p.State.Suffix("keyword")),
@@ -45,15 +40,16 @@ namespace Tests.ClientConcepts.Troubleshooting
 					Query = new MatchAllQuery { },
 					Functions = new List<IScoreFunction>
 					{
-						new RandomScoreFunction {Seed = 1337},
+						new RandomScoreFunction { Seed = 1337 },
 					}
 				}
 			};
-			var response = this.Client.Search<Project>(request);
+			var response = Client.Search<Project>(request);
 
 			response.ApiCall.DeprecationWarnings.Should().NotBeNullOrEmpty();
 			response.ApiCall.DeprecationWarnings.Should().HaveCount(2);
-			response.DebugInformation.Should().Contain("Deprecated aggregation order key"); // <1> `DebugInformation` also contains the deprecation warnings
-        }
+			response.DebugInformation.Should()
+				.Contain("Deprecated aggregation order key"); // <1> `DebugInformation` also contains the deprecation warnings
+		}
 	}
 }

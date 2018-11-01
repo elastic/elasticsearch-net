@@ -5,9 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Request
 {
@@ -29,9 +27,6 @@ namespace Tests.Search.Request
 			.PostFilter(f => f.MatchAll());
 
 		[I]
-		public async Task ShouldHaveHits() => await AssertOnAllResponses((r) =>
-		{
-			r.Hits.Should().NotBeNull();
-		});
+		public async Task ShouldHaveHits() => await AssertOnAllResponses((r) => { r.Hits.Should().NotBeNull(); });
 	}
 }

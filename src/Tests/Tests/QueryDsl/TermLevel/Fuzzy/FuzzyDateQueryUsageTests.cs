@@ -3,13 +3,12 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Fuzzy
 {
 	public class FuzzyDateQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public FuzzyDateQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public FuzzyDateQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -27,7 +26,6 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 					value = "2015-01-01T00:00:00"
 				}
 			}
-
 		};
 
 		protected override QueryContainer QueryInitializer => new FuzzyDateQuery

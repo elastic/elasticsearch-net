@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -11,7 +10,8 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.GetCategories
 {
-	public class GetCategoriesApiTests : MachineLearningIntegrationTestBase<IGetCategoriesResponse, IGetCategoriesRequest, GetCategoriesDescriptor, GetCategoriesRequest>
+	public class GetCategoriesApiTests
+		: MachineLearningIntegrationTestBase<IGetCategoriesResponse, IGetCategoriesRequest, GetCategoriesDescriptor, GetCategoriesRequest>
 	{
 		public GetCategoriesApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -35,7 +35,9 @@ namespace Tests.XPack.MachineLearning.GetCategories
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/categories/";
+
 		protected override GetCategoriesDescriptor NewDescriptor() => new GetCategoriesDescriptor(CallIsolatedValue);
+
 		protected override object ExpectJson => null;
 		protected override Func<GetCategoriesDescriptor, IGetCategoriesRequest> Fluent => f => f.Page(p => p.From(0).Size(10));
 
@@ -63,7 +65,8 @@ namespace Tests.XPack.MachineLearning.GetCategories
 		}
 	}
 
-	public class GetCategoriesWithCategoriesApiTests : MachineLearningIntegrationTestBase<IGetCategoriesResponse, IGetCategoriesRequest, GetCategoriesDescriptor, GetCategoriesRequest>
+	public class GetCategoriesWithCategoriesApiTests
+		: MachineLearningIntegrationTestBase<IGetCategoriesResponse, IGetCategoriesRequest, GetCategoriesDescriptor, GetCategoriesRequest>
 	{
 		public GetCategoriesWithCategoriesApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -87,7 +90,9 @@ namespace Tests.XPack.MachineLearning.GetCategories
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/categories/1";
+
 		protected override GetCategoriesDescriptor NewDescriptor() => new GetCategoriesDescriptor(CallIsolatedValue);
+
 		protected override object ExpectJson => null;
 		protected override Func<GetCategoriesDescriptor, IGetCategoriesRequest> Fluent => f => f.CategoryId(1);
 		protected override GetCategoriesRequest Initializer => new GetCategoriesRequest(CallIsolatedValue, 1);

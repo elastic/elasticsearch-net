@@ -7,23 +7,25 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Elastic.Managed.Ephemeral.ClusterAuthentication;
 
 namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 {
 	[SkipVersion("<5.5.0", "")]
-	public class InvalidateUserAccessTokenApiTests : ApiIntegrationTestBase<XPackCluster, IInvalidateUserAccessTokenResponse, IInvalidateUserAccessTokenRequest,
-		InvalidateUserAccessTokenDescriptor, InvalidateUserAccessTokenRequest>
+	public class InvalidateUserAccessTokenApiTests
+		: ApiIntegrationTestBase<XPackCluster, IInvalidateUserAccessTokenResponse, IInvalidateUserAccessTokenRequest,
+			InvalidateUserAccessTokenDescriptor, InvalidateUserAccessTokenRequest>
 	{
 		protected const string AccessTokenValueKey = "accesstoken";
+
 		protected override void OnBeforeCall(IElasticClient client)
 		{
 			var r = client.GetUserAccessToken(Admin.Username, Admin.Password);
 			r.ShouldBeValid();
-			this.ExtendedValue(AccessTokenValueKey, r.AccessToken);
+			ExtendedValue(AccessTokenValueKey, r.AccessToken);
 		}
-		protected virtual string CurrentAccessToken => this.RanIntegrationSetup ? this.ExtendedValue<string>(AccessTokenValueKey) : "foo";
+
+		protected virtual string CurrentAccessToken => RanIntegrationSetup ? ExtendedValue<string>(AccessTokenValueKey) : "foo";
 
 		public InvalidateUserAccessTokenApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -48,16 +50,13 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 		};
 
 		protected override InvalidateUserAccessTokenDescriptor NewDescriptor() => new InvalidateUserAccessTokenDescriptor(CurrentAccessToken);
+
 		protected override InvalidateUserAccessTokenRequest Initializer => new InvalidateUserAccessTokenRequest(CurrentAccessToken)
-		{
-		};
+			{ };
 
 		protected override Func<InvalidateUserAccessTokenDescriptor, IInvalidateUserAccessTokenRequest> Fluent => d => d;
 
-		protected override void ExpectResponse(IInvalidateUserAccessTokenResponse response)
-		{
-			response.Created.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IInvalidateUserAccessTokenResponse response) => response.Created.Should().BeTrue();
 	}
 
 	public class InvalidateUserAccessTokenBadPasswordApiTests : InvalidateUserAccessTokenApiTests
@@ -68,10 +67,6 @@ namespace Tests.XPack.Security.User.InvalidateUserAccessToken
 		protected override int ExpectStatusCode => 401;
 		protected override string CurrentAccessToken => "bad_password";
 
-		protected override void ExpectResponse(IInvalidateUserAccessTokenResponse response)
-		{
-			response.ServerError.Should().NotBeNull();
-		}
+		protected override void ExpectResponse(IInvalidateUserAccessTokenResponse response) => response.ServerError.Should().NotBeNull();
 	}
-
 }

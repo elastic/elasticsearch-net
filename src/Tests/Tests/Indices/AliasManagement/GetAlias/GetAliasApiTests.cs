@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -11,10 +9,6 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Indices.AliasManagement.GetAlias
@@ -46,18 +40,20 @@ namespace Tests.Indices.AliasManagement.GetAlias
 			var alias = indexAliases.Aliases[DefaultSeeder.ProjectsAliasName];
 			alias.Should().NotBeNull();
 		}
+
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d=>d
+		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d => d
 			.AllIndices()
-			.Name(Names)
-		;
+			.Name(Names);
+
 		protected override GetAliasRequest Initializer => new GetAliasRequest(Nest.Indices.All, Names);
 	}
 
-	public class GetAliasPartialMatchApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
+	public class GetAliasPartialMatchApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
-		private static readonly Names Names = Names(DefaultSeeder.ProjectsAliasName,"x", "y");
+		private static readonly Names Names = Names(DefaultSeeder.ProjectsAliasName, "x", "y");
 
 		public GetAliasPartialMatchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -72,21 +68,24 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override int ExpectStatusCode => TestConfiguration.Instance.InRange("<5.5.0") ? 200 : 404;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"_all/_alias/{DefaultSeeder.ProjectsAliasName}%2Cx%2Cy";
+
 		protected override void ExpectResponse(IGetAliasResponse response)
 		{
 			response.Indices.Should().NotBeNull();
 			response.Indices.Count.Should().BeGreaterThan(0);
 		}
+
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d=>d
+		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d => d
 			.AllIndices()
-			.Name(Names)
-		;
+			.Name(Names);
+
 		protected override GetAliasRequest Initializer => new GetAliasRequest(Nest.Indices.All, Names);
 	}
 
-	public class GetAliasNotFoundApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
+	public class GetAliasNotFoundApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
 		private static readonly Names Names = Names("bad-alias");
 
@@ -105,9 +104,9 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override string UrlPath => $"/_alias/bad-alias";
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d=>d
-			.Name(Names)
-		;
+		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d => d
+			.Name(Names);
+
 		protected override GetAliasRequest Initializer => new GetAliasRequest(Names);
 
 		protected override void ExpectResponse(IGetAliasResponse response)
@@ -116,6 +115,5 @@ namespace Tests.Indices.AliasManagement.GetAlias
 			response.ServerError.Error.Reason.Should().Contain("missing");
 			response.Indices.Should().NotBeNull();
 		}
-
 	}
 }

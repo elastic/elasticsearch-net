@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,17 +8,14 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
-using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Domain;
 
 namespace Tests.QueryDsl.Geo
 {
-	public abstract class GeoShapeSerializationTestsBase :
-		ApiIntegrationTestBase<IntrusiveOperationCluster,
+	public abstract class GeoShapeSerializationTestsBase
+		: ApiIntegrationTestBase<IntrusiveOperationCluster,
 			ISearchResponse<Domain.Shape>,
 			ISearchRequest,
 			SearchDescriptor<Domain.Shape>,
@@ -46,7 +42,7 @@ namespace Tests.QueryDsl.Geo
 			{
 				geo_shape = new
 				{
-					_name="named_query",
+					_name = "named_query",
 					boost = 1.1,
 					ignore_unmapped = true,
 					envelope = new
@@ -55,7 +51,7 @@ namespace Tests.QueryDsl.Geo
 						shape = new
 						{
 							type = "envelope",
-							coordinates = this._coordinates
+							coordinates = _coordinates
 						}
 					}
 				}
@@ -74,7 +70,7 @@ namespace Tests.QueryDsl.Geo
 				Name = "named_query",
 				Boost = 1.1,
 				Field = Infer.Field<Domain.Shape>(p => p.Envelope),
-				Shape = new EnvelopeGeoShape(this._coordinates),
+				Shape = new EnvelopeGeoShape(_coordinates),
 				Relation = GeoShapeRelation.Intersects,
 				IgnoreUnmapped = true,
 			}
@@ -88,7 +84,7 @@ namespace Tests.QueryDsl.Geo
 					.Boost(1.1)
 					.Field(p => p.Envelope)
 					.Shape(sh => sh
-						.Envelope(this._coordinates)
+						.Envelope(_coordinates)
 					)
 					.Relation(GeoShapeRelation.Intersects)
 					.IgnoreUnmapped()
@@ -138,7 +134,7 @@ namespace Tests.QueryDsl.Geo
 			if (!createIndexResponse.IsValid)
 				throw new Exception($"Error creating index for integration test: {createIndexResponse.DebugInformation}");
 
-			var bulkResponse = this.Client.Bulk(b => b
+			var bulkResponse = Client.Bulk(b => b
 				.Index(Index)
 				.IndexMany(Domain.Shape.Shapes)
 				.Refresh(Refresh.WaitFor)
@@ -191,7 +187,7 @@ namespace Tests.QueryDsl.Geo
 			var bulk = new List<object>();
 
 			// use the low level client to force WKT
-			var typeName = this.Client.Infer.TypeName<Domain.Shape>();
+			var typeName = Client.Infer.TypeName<Domain.Shape>();
 			foreach (var shape in Domain.Shape.Shapes)
 			{
 				bulk.Add(new { index = new { _index = Index, _type = typeName, _id = shape.Id } });
@@ -204,9 +200,9 @@ namespace Tests.QueryDsl.Geo
 				});
 			}
 
-			var bulkResponse = this.Client.LowLevel.Bulk<BulkResponse>(
+			var bulkResponse = Client.LowLevel.Bulk<BulkResponse>(
 				PostData.MultiJson(bulk),
-				new BulkRequestParameters{ Refresh = Refresh.WaitFor }
+				new BulkRequestParameters { Refresh = Refresh.WaitFor }
 			);
 
 			if (!bulkResponse.IsValid)
@@ -220,7 +216,7 @@ namespace Tests.QueryDsl.Geo
 			base.ExpectResponse(response);
 
 			// index shapes again
-			var bulkResponse = this.Client.Bulk(b => b
+			var bulkResponse = Client.Bulk(b => b
 				.Index(Index)
 				.IndexMany(response.Documents)
 				.Refresh(Refresh.WaitFor)

@@ -4,12 +4,11 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.DeleteSnapshot
 {
-	public class DeleteSnapshotApiTests : ApiTestBase<WritableCluster, IDeleteSnapshotResponse, IDeleteSnapshotRequest, DeleteSnapshotDescriptor, DeleteSnapshotRequest>
+	public class DeleteSnapshotApiTests
+		: ApiTestBase<WritableCluster, IDeleteSnapshotResponse, IDeleteSnapshotRequest, DeleteSnapshotDescriptor, DeleteSnapshotRequest>
 	{
 		public DeleteSnapshotApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

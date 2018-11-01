@@ -5,14 +5,14 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatCount
 {
-	public class CatCountApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
+	public class CatCountApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
 	{
 		public CatCountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatCount(),
 			fluentAsync: (client, f) => client.CatCountAsync(),
@@ -25,18 +25,18 @@ namespace Tests.Cat.CatCount
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/count";
 
-		protected override void ExpectResponse(ICatResponse<CatCountRecord> response)
-		{
+		protected override void ExpectResponse(ICatResponse<CatCountRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => a.Count != "0" && !string.IsNullOrEmpty(a.Count));
-		}
 	}
 
-	public class CatCountSingleIndexApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
+	public class CatCountSingleIndexApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
 	{
 		public CatCountSingleIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CatCount(c=>c.Index<Project>()),
-			fluentAsync: (client, f) => client.CatCountAsync(c=>c.Index<Project>()),
+			fluent: (client, f) => client.CatCount(c => c.Index<Project>()),
+			fluentAsync: (client, f) => client.CatCountAsync(c => c.Index<Project>()),
 			request: (client, r) => client.CatCount(new CatCountRequest(typeof(Project))),
 			requestAsync: (client, r) => client.CatCountAsync(new CatCountRequest(typeof(Project)))
 		);
@@ -46,9 +46,7 @@ namespace Tests.Cat.CatCount
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/count/project";
 
-		protected override void ExpectResponse(ICatResponse<CatCountRecord> response)
-		{
+		protected override void ExpectResponse(ICatResponse<CatCountRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => a.Count != "0" && !string.IsNullOrEmpty(a.Count));
-		}
 	}
 }

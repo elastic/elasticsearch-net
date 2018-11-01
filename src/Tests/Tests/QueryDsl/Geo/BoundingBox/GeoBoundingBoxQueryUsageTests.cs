@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Geo.BoundingBox
 {
@@ -41,19 +40,19 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 			Field = Infer.Field<Project>(p => p.Location),
 			BoundingBox = new Nest.BoundingBox
 			{
-				TopLeft = new GeoLocation(34,-34),
-				BottomRight = new GeoLocation(-34,34),
+				TopLeft = new GeoLocation(34, -34),
+				BottomRight = new GeoLocation(-34, 34),
 			},
 			Type = GeoExecution.Indexed,
 			ValidationMethod = GeoValidationMethod.Strict
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoBoundingBox(g=>g
+			.GeoBoundingBox(g => g
 				.Boost(1.1)
 				.Name("named_query")
-				.Field(p=>p.Location)
-				.BoundingBox(b=>b
+				.Field(p => p.Location)
+				.BoundingBox(b => b
 					.TopLeft(34, -34)
 					.BottomRight(-34, 34)
 				)
@@ -64,8 +63,8 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoBoundingBoxQuery>(a => a.GeoBoundingBox)
 		{
 			q => q.BoundingBox = null,
-			q => q.BoundingBox = new Nest.BoundingBox { } ,
-			q =>  q.Field = null
+			q => q.BoundingBox = new Nest.BoundingBox { },
+			q => q.Field = null
 		};
 	}
 
@@ -102,11 +101,11 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.GeoBoundingBox(g=>g
+			.GeoBoundingBox(g => g
 				.Boost(1.1)
 				.Name("named_query")
-				.Field(p=>p.Location)
-				.BoundingBox(b=>b
+				.Field(p => p.Location)
+				.BoundingBox(b => b
 					.WellKnownText("BBOX (34, -34, -34, 34)")
 				)
 				.ValidationMethod(GeoValidationMethod.Strict)
@@ -116,7 +115,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoBoundingBoxQuery>(a => a.GeoBoundingBox)
 		{
 			q => q.BoundingBox = null,
-			q => q.BoundingBox = new Nest.BoundingBox { } ,
+			q => q.BoundingBox = new Nest.BoundingBox { },
 			q => q.Field = null
 		};
 	}

@@ -7,12 +7,11 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.IndexManagement.ShrinkIndex
 {
-	public class ShrinkIndexApiTests : ApiIntegrationTestBase<WritableCluster, IShrinkIndexResponse, IShrinkIndexRequest, ShrinkIndexDescriptor, ShrinkIndexRequest>
+	public class ShrinkIndexApiTests
+		: ApiIntegrationTestBase<WritableCluster, IShrinkIndexResponse, IShrinkIndexRequest, ShrinkIndexDescriptor, ShrinkIndexRequest>
 	{
 		public ShrinkIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

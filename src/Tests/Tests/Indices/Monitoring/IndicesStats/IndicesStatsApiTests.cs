@@ -4,12 +4,11 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.Monitoring.IndicesStats
 {
-	public class IndicesStatsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IIndicesStatsResponse, IIndicesStatsRequest, IndicesStatsDescriptor, IndicesStatsRequest>
+	public class IndicesStatsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IIndicesStatsResponse, IIndicesStatsRequest, IndicesStatsDescriptor, IndicesStatsRequest>
 	{
 		public IndicesStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

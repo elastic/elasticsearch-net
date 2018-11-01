@@ -4,12 +4,11 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.VerifyRepository
 {
-	public class VerifyRepositoryApiTests : ApiTestBase<ReadOnlyCluster, IVerifyRepositoryResponse, IVerifyRepositoryRequest, VerifyRepositoryDescriptor, VerifyRepositoryRequest>
+	public class VerifyRepositoryApiTests
+		: ApiTestBase<ReadOnlyCluster, IVerifyRepositoryResponse, IVerifyRepositoryRequest, VerifyRepositoryDescriptor, VerifyRepositoryRequest>
 	{
 		public VerifyRepositoryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

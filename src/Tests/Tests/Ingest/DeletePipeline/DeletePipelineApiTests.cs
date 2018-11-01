@@ -8,7 +8,8 @@ using Tests.Framework.Integration;
 namespace Tests.Ingest.DeletePipeline
 {
 	//integration test is part of PipelineCrudTests
-	public class DeletePipelineApiTests : ApiTestBase<ReadOnlyCluster, IDeletePipelineResponse, IDeletePipelineRequest, DeletePipelineDescriptor, DeletePipelineRequest>
+	public class DeletePipelineApiTests
+		: ApiTestBase<ReadOnlyCluster, IDeletePipelineResponse, IDeletePipelineRequest, DeletePipelineDescriptor, DeletePipelineRequest>
 	{
 		public DeletePipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

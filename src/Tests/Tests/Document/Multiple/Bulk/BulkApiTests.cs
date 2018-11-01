@@ -7,14 +7,13 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Document.Multiple.Bulk
 {
 	public class BulkApiTests : ApiIntegrationTestBase<WritableCluster, IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
 		public BulkApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Bulk(f),
 			fluentAsync: (client, f) => client.BulkAsync(f),
@@ -54,22 +53,32 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override object ExpectJson => new object[]
 		{
-			new Dictionary<string, object>{ { "index", new {  _type = "doc", _id = Project.Instance.Name, pipeline="pipeline", routing = Project.Instance.Name } } },
+			new Dictionary<string, object>
+				{ { "index", new { _type = "doc", _id = Project.Instance.Name, pipeline = "pipeline", routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "update", new { _type="doc", _id = Project.Instance.Name } } },
-			new { doc = new { leadDeveloper = new { firstName = "martijn" } } } ,
-			new Dictionary<string, object>{ { "create", new { _type="doc", _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
+			new Dictionary<string, object> { { "update", new { _type = "doc", _id = Project.Instance.Name } } },
+			new { doc = new { leadDeveloper = new { firstName = "martijn" } } },
+			new Dictionary<string, object>
+				{ { "create", new { _type = "doc", _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "delete", new { _type="doc", _id = Project.Instance.Name + "1", routing = Project.Instance.Name  } } },
-			new Dictionary<string, object>{ { "create", new { _type="doc", _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
+			new Dictionary<string, object>
+				{ { "delete", new { _type = "doc", _id = Project.Instance.Name + "1", routing = Project.Instance.Name } } },
+			new Dictionary<string, object>
+				{ { "create", new { _type = "doc", _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "update", new { _type="doc", _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
-			new Dictionary<string, object>{ { "script", new
+			new Dictionary<string, object>
+				{ { "update", new { _type = "doc", _id = Project.Instance.Name + "2", routing = Project.Instance.Name } } },
+			new Dictionary<string, object>
 			{
-				source = "ctx._source.numberOfCommits = params.commits",
-				@params = new { commits = 30 },
-				lang = "painless"
-			} } },
+				{
+					"script", new
+					{
+						source = "ctx._source.numberOfCommits = params.commits",
+						@params = new { commits = 30 },
+						lang = "painless"
+					}
+				}
+			},
 		};
 
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
@@ -78,7 +87,7 @@ namespace Tests.Document.Multiple.Bulk
 			.Index<Project>(b => b.Document(Project.Instance).Pipeline("pipeline"))
 			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
 			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "1"))
-			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1").Routing(Project.Instance.Name))
+			.Delete<Project>(b => b.Id(Project.Instance.Name + "1").Routing(Project.Instance.Name))
 			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "2"))
 			.Update<Project>(b => b
 				.Id(Project.Instance.Name + "2")
@@ -147,11 +156,11 @@ namespace Tests.Document.Multiple.Bulk
 				item.Result.Should().NotBeNullOrEmpty();
 			}
 
-			var project1 = this.Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));
+			var project1 = Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));
 			project1.LeadDeveloper.FirstName.Should().Be("martijn");
 			project1.Description.Should().Be("Overridden");
 
-			var project2 = this.Client.Source<Project>(Project.Instance.Name + "2", p => p
+			var project2 = Client.Source<Project>(Project.Instance.Name + "2", p => p
 				.Index(CallIsolatedValue)
 				.Routing(Project.Instance.Name)
 			);

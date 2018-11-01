@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using System.Collections.Generic;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.QueryDsl.Specialized.Script
 {
@@ -54,16 +47,18 @@ namespace Tests.QueryDsl.Specialized.Script
 				.Name("named_query")
 				.Boost(1.1)
 				.Source(_templateString)
-				.Params(p=>p.Add("param1", 50))
+				.Params(p => p.Add("param1", 50))
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IScriptQuery>(a => a.Script)
 		{
-			q => {
+			q =>
+			{
 				q.Source = "";
 				q.Id = null;
 			},
-			q => {
+			q =>
+			{
 				q.Source = null;
 				q.Id = null;
 			}

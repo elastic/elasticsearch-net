@@ -2,14 +2,13 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.TermLevel.Terms
 {
 	public class TermsLookupQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public TermsLookupQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public TermsLookupQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -38,7 +37,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				Id = 12,
 				Index = Index<Developer>(),
 				Type = Type<Developer>(),
-				Path = Field<Developer>(p=>p.LastName),
+				Path = Field<Developer>(p => p.LastName),
 				Routing = "myroutingvalue"
 			}
 		};

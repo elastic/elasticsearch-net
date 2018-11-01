@@ -1,14 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using System.Collections.Generic;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
+using Tests.Framework.Integration;
 
 namespace Tests.Aggregations.Metric.ScriptedMetric
 {
@@ -22,9 +19,10 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			public string Map { get; set; }
 			public string Init { get; set; }
 		}
+
 		public ScriptedMetricAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private Scripted Script = new Scripted
+		private readonly Scripted Script = new Scripted
 		{
 			Language = "painless",
 			Init = "params._agg.commits = []",
@@ -39,10 +37,10 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			{
 				scripted_metric = new
 				{
-					init_script = new {source = Script.Init},
-					map_script = new {source = Script.Map},
-					combine_script = new {source = Script.Combine},
-					reduce_script = new {source = Script.Reduce}
+					init_script = new { source = Script.Init },
+					map_script = new { source = Script.Map },
+					combine_script = new { source = Script.Combine },
+					reduce_script = new { source = Script.Reduce }
 				}
 			}
 		};
@@ -74,7 +72,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 	}
 
 	/// <summary>
-	/// Multiple scripted metric with dictionary result
+	///     Multiple scripted metric with dictionary result
 	/// </summary>
 	public class ScriptedMetricMultiAggregationTests : ProjectsOnlyAggregationUsageTestBase
 	{
@@ -88,7 +86,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			public string Init { get; set; }
 		}
 
-		private Scripted First = new Scripted
+		private readonly Scripted First = new Scripted
 		{
 			Language = "painless",
 			Init = "params._agg.map = [:]",
@@ -113,7 +111,7 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 				"return reduce;"
 		};
 
-		private Scripted Second = new Scripted
+		private readonly Scripted Second = new Scripted
 		{
 			Language = "painless",
 			Combine = "def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum",
@@ -189,19 +187,18 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			);
 
 		protected override AggregationDictionary InitializerAggs =>
-
 			new ScriptedMetricAggregation("by_state_total")
 			{
-				InitScript = new InlineScript(First.Init) {Lang = First.Language},
-				MapScript = new InlineScript(First.Map) {Lang = First.Language},
-				ReduceScript = new InlineScript(First.Reduce) {Lang = First.Language}
+				InitScript = new InlineScript(First.Init) { Lang = First.Language },
+				MapScript = new InlineScript(First.Map) { Lang = First.Language },
+				ReduceScript = new InlineScript(First.Reduce) { Lang = First.Language }
 			}
 			&& new ScriptedMetricAggregation("total_commits")
 			{
-				InitScript = new InlineScript(Second.Init) {Lang = Second.Language},
-				MapScript = new InlineScript(Second.Map) {Lang = Second.Language},
-				CombineScript = new InlineScript(Second.Combine) {Lang = Second.Language},
-				ReduceScript = new InlineScript(Second.Reduce) {Lang = Second.Language}
+				InitScript = new InlineScript(Second.Init) { Lang = Second.Language },
+				MapScript = new InlineScript(Second.Map) { Lang = Second.Language },
+				CombineScript = new InlineScript(Second.Combine) { Lang = Second.Language },
+				ReduceScript = new InlineScript(Second.Reduce) { Lang = Second.Language }
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

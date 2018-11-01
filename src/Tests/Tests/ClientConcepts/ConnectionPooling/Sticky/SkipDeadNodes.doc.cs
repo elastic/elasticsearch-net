@@ -45,6 +45,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				node = pool.CreateView().First();
 				node.Uri.Port.Should().Be(9201);
 			}
+
 			/** After we mark the first node alive again we expect it to be hit again*/
 			seeds.First().MarkAlive();
 			for (var i = 0; i < 20; i++)
@@ -71,6 +72,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				node = pool.CreateView().First();
 				node.Uri.Port.Should().Be(9201);
 			}
+
 			/** If we forward our clock 2 days the node that was marked dead until tomorrow (or yesterday!) should be resurrected */
 			dateTimeProvider.ChangeTime(d => d.AddDays(2));
 			var n = pool.CreateView().First();
@@ -97,22 +99,25 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 
 			await audit.TraceCalls(
 				/** The first call goes to 9200 which succeeds */
-				new ClientCall {
-					{ BadResponse, 9200},
-					{ BadResponse, 9201},
-					{ HealthyResponse, 9202},
-					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+				new ClientCall
+				{
+					{ BadResponse, 9200 },
+					{ BadResponse, 9201 },
+					{ HealthyResponse, 9202 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(2) }
 				},
 				/** The 2nd call does a ping on 9201 because its used for the first time.
 				* It fails so we wrap over to node 9202 */
-				new ClientCall {
-					{ HealthyResponse, 9202},
+				new ClientCall
+				{
+					{ HealthyResponse, 9202 },
 					/** Finally we assert that the connectionpool has one node that is marked as dead */
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(2) }
 				},
-				new ClientCall {
-					{ HealthyResponse, 9202},
-					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+				new ClientCall
+				{
+					{ HealthyResponse, 9202 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(2) }
 				}
 			);
 		}
@@ -130,42 +135,47 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 
 			await audit.TraceCalls(
 				/** All the calls fail */
-				new ClientCall {
-					{ BadResponse, 9200},
-					{ BadResponse, 9201},
-					{ BadResponse, 9202},
-					{ BadResponse, 9203},
+				new ClientCall
+				{
+					{ BadResponse, 9200 },
+					{ BadResponse, 9201 },
+					{ BadResponse, 9202 },
+					{ BadResponse, 9203 },
 					{ MaxRetriesReached },
 					{ FailedOverAllNodes },
-					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(4) }
 				},
 				/** After all our registered nodes are marked dead we want to sample a single dead node
 				* each time to quickly see if the cluster is back up. We do not want to retry all 4
 				* nodes
 				*/
-				new ClientCall {
+				new ClientCall
+				{
 					{ AllNodesDead },
-					{ Resurrection, 9200},
-					{ BadResponse, 9200},
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+					{ Resurrection, 9200 },
+					{ BadResponse, 9200 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(4) }
 				},
-				new ClientCall {
+				new ClientCall
+				{
 					{ AllNodesDead },
-					{ Resurrection, 9201},
-					{ BadResponse, 9201},
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+					{ Resurrection, 9201 },
+					{ BadResponse, 9201 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(4) }
 				},
-				new ClientCall {
+				new ClientCall
+				{
 					{ AllNodesDead },
-					{ Resurrection, 9202},
-					{ BadResponse, 9202},
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+					{ Resurrection, 9202 },
+					{ BadResponse, 9202 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(4) }
 				},
-				new ClientCall {
+				new ClientCall
+				{
 					{ AllNodesDead },
-					{ Resurrection, 9203},
-					{ BadResponse, 9203},
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+					{ Resurrection, 9203 },
+					{ BadResponse, 9203 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(4) }
 				}
 			);
 		}

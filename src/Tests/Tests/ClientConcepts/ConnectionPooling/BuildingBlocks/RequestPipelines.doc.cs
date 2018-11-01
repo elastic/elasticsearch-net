@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 using Xunit;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
@@ -26,7 +25,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		[U]
 		public void RequestPipeline()
 		{
-            // hide
+			// hide
 			var settings = TestClient.DefaultInMemoryClient.ConnectionSettings;
 
 			/** When calling `Request()` or `RequestAsync()` on an `ITransport`,
@@ -66,9 +65,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var client = new ElasticClient(transport);
 		}
 
-        // hide
+		// hide
 		private IRequestPipeline CreatePipeline(
-			Func<IEnumerable<Uri>, IConnectionPool> setupPool, Func<ConnectionSettings, ConnectionSettings> settingsSelector = null, IDateTimeProvider dateTimeProvider = null, InMemoryConnection connection = null)
+			Func<IEnumerable<Uri>, IConnectionPool> setupPool, Func<ConnectionSettings, ConnectionSettings> settingsSelector = null,
+			IDateTimeProvider dateTimeProvider = null, InMemoryConnection connection = null
+		)
 		{
 			var pool = setupPool(new[] { TestConnectionSettings.CreateUri(), TestConnectionSettings.CreateUri(9201) });
 			var settings = new ConnectionSettings(pool, connection ?? new InMemoryConnection());
@@ -100,8 +101,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			 * connection pool
 			*/
 			sniffingPipeline = CreatePipeline(
-                uris => new SniffingConnectionPool(uris),
-                s => s.SniffOnStartup(false)); //<1> Disable sniffing on startup
+				uris => new SniffingConnectionPool(uris),
+				s => s.SniffOnStartup(false)); //<1> Disable sniffing on startup
 
 			sniffingPipeline.FirstPoolUsageNeedsSniffing.Should().BeFalse();
 		}
@@ -115,7 +116,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		[U]
 		public void FirstUsageCheckConcurrentThreads()
 		{
-            //hide
+			//hide
 			var response = new
 			{
 				cluster_name = "elasticsearch",
@@ -143,44 +144,44 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 				}
 			};
 
-            //hide
+			//hide
 			var responseBody = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(response));
 
-            /** We can demonstrate this with the following example. First, let's configure
-             * a custom `IConnection` implementation that's simply going to return a known
-             * 200 response after one second
-             */
-            var inMemoryConnection = new WaitingInMemoryConnection(
+			/** We can demonstrate this with the following example. First, let's configure
+			 * a custom `IConnection` implementation that's simply going to return a known
+			 * 200 response after one second
+			 */
+			var inMemoryConnection = new WaitingInMemoryConnection(
 				TimeSpan.FromSeconds(1),
 				responseBody);
 
-            /**
-             * Next, we create a <<sniffing-connection-pool, Sniffing connection pool>> using our
-             * custom connection and a timeout for how long a request can take before the client
-             * times out
-             */
-            var sniffingPipeline = CreatePipeline(
+			/**
+			 * Next, we create a <<sniffing-connection-pool, Sniffing connection pool>> using our
+			 * custom connection and a timeout for how long a request can take before the client
+			 * times out
+			 */
+			var sniffingPipeline = CreatePipeline(
 				uris => new SniffingConnectionPool(uris),
 				connection: inMemoryConnection,
 				settingsSelector: s => s.RequestTimeout(TimeSpan.FromSeconds(2)));
 
-            /**Now, with a `SemaphoreSlim` in place that allows only one thread to enter at a time,
-			 * start three tasks that will initiate a sniff on startup.
-             *
-             * The first task will successfully sniff on startup with the remaining two waiting
-             * tasks exiting without exception. The `SemaphoreSlim` is also released, ready for
-			 * when sniffing needs to take place again
-			 */
-            var semaphoreSlim = new SemaphoreSlim(1, 1);
+			/**Now, with a `SemaphoreSlim` in place that allows only one thread to enter at a time,
+			   * start three tasks that will initiate a sniff on startup.
+			 *
+			 * The first task will successfully sniff on startup with the remaining two waiting
+			 * tasks exiting without exception. The `SemaphoreSlim` is also released, ready for
+			   * when sniffing needs to take place again
+			   */
+			var semaphoreSlim = new SemaphoreSlim(1, 1);
 
-            var task1 = Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
+			var task1 = Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
 			var task2 = Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
 			var task3 = Task.Run(() => sniffingPipeline.FirstPoolUsage(semaphoreSlim));
 
 			var exception = Record.Exception(() => Task.WaitAll(task1, task2, task3));
 
-            exception.Should().BeNull();
-		    semaphoreSlim.CurrentCount.Should().Be(1);
+			exception.Should().BeNull();
+			semaphoreSlim.CurrentCount.Should().Be(1);
 		}
 
 		/**==== Sniff on connection failure */
@@ -254,7 +255,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			 * signals that its understanding of the cluster state is out of date
 			 */
 			sniffingPipeline.StaleClusterState.Should().BeTrue();
-
 		}
 
 

@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
 using static Tests.Framework.TimesHelper;
@@ -39,22 +38,21 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			* Finally we assert that the connectionpool has one node that is marked as dead
 			*/
 			await audit.TraceCalls(
-
-				new ClientCall {
-					{ PingSuccess, 9200},
-					{ HealthyResponse, 9200},
-					{ pool =>
-					{
-						pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0);
-					} }
+				new ClientCall
+				{
+					{ PingSuccess, 9200 },
+					{ HealthyResponse, 9200 },
+					{ pool => { pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(0); } }
 				},
-				new ClientCall {
-					{ PingFailure, 9201},
-					{ HealthyResponse, 9200},
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
+				new ClientCall
+				{
+					{ PingFailure, 9201 },
+					{ HealthyResponse, 9200 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(1) }
 				}
 			);
 		}
+
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task PingFailsFallsOverMultipleTimesToHealthyNode()
 		{
@@ -69,20 +67,26 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			);
 
 			await audit.TraceCalls(
-				new ClientCall {
-					{ PingSuccess, 9200}, // <1> The first call goes to 9200, which succeeds
-					{ HealthyResponse, 9200},
-					{ pool =>
-						pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0)
+				new ClientCall
+				{
+					{ PingSuccess, 9200 }, // <1> The first call goes to 9200, which succeeds
+					{ HealthyResponse, 9200 },
+					{
+						pool =>
+							pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(0)
 					}
 				},
-				new ClientCall {
-					{ PingFailure, 9201}, // <2> The 2nd call does a ping on 9201 because its used for the first time. This fails
-					{ PingFailure, 9202}, // <3> So we ping 9202. This _also_ fails
-					{ PingSuccess, 9203}, // <4> We then ping 9203 because we haven't used it before and it succeeds
-					{ HealthyResponse, 9203},
-					{ pool =>
-						pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) // <5> Finally, we assert that the connection pool has two nodes that are marked as dead
+				new ClientCall
+				{
+					{ PingFailure, 9201 }, // <2> The 2nd call does a ping on 9201 because its used for the first time. This fails
+					{ PingFailure, 9202 }, // <3> So we ping 9202. This _also_ fails
+					{ PingSuccess, 9203 }, // <4> We then ping 9203 because we haven't used it before and it succeeds
+					{ HealthyResponse, 9203 },
+					{
+						pool =>
+							pool.Nodes.Where(n => !n.IsAlive)
+								.Should()
+								.HaveCount(2) // <5> Finally, we assert that the connection pool has two nodes that are marked as dead
 					}
 				}
 			);
@@ -102,15 +106,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			);
 
 			await audit.TraceCalls(
-				new ClientCall { { PingSuccess, 9200}, { HealthyResponse, 9200} }, // <2> A successful ping on each node
-				new ClientCall { { PingSuccess, 9201}, { HealthyResponse, 9201} },
-				new ClientCall { { PingSuccess, 9202}, { HealthyResponse, 9202} },
-				new ClientCall { { PingSuccess, 9203}, { HealthyResponse, 9203} },
-				new ClientCall { { HealthyResponse, 9200} },
-				new ClientCall { { HealthyResponse, 9201} },
-				new ClientCall { { HealthyResponse, 9202} },
-				new ClientCall { { HealthyResponse, 9203} },
-				new ClientCall { { HealthyResponse, 9200} }
+				new ClientCall { { PingSuccess, 9200 }, { HealthyResponse, 9200 } }, // <2> A successful ping on each node
+				new ClientCall { { PingSuccess, 9201 }, { HealthyResponse, 9201 } },
+				new ClientCall { { PingSuccess, 9202 }, { HealthyResponse, 9202 } },
+				new ClientCall { { PingSuccess, 9203 }, { HealthyResponse, 9203 } },
+				new ClientCall { { HealthyResponse, 9200 } },
+				new ClientCall { { HealthyResponse, 9201 } },
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall { { HealthyResponse, 9203 } },
+				new ClientCall { { HealthyResponse, 9200 } }
 			);
 		}
 	}

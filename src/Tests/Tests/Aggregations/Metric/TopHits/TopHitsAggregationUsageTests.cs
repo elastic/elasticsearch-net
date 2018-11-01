@@ -6,9 +6,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.TopHits
@@ -56,13 +54,13 @@ namespace Tests.Aggregations.Metric.TopHits
 							},
 							_source = new
 							{
-								includes = new[] {"name", "lastActivity", "sourceOnly"}
+								includes = new[] { "name", "lastActivity", "sourceOnly" }
 							},
 							size = 1,
 							version = true,
 							track_scores = true,
 							explain = true,
-							stored_fields = new[] {"startedOn"},
+							stored_fields = new[] { "startedOn" },
 							highlight = new
 							{
 								fields = new
@@ -81,109 +79,107 @@ namespace Tests.Aggregations.Metric.TopHits
 									}
 								}
 							},
-							docvalue_fields = new [] { "state" }
+							docvalue_fields = new[] { "state" }
 						}
 					}
 				}
 			}
 		};
 
-		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs =>a => a
-				.Terms("states", t => t
-					.Field(p => p.State)
-					.Aggregations(aa => aa
-						.TopHits("top_state_hits", th => th
-							.Sort(srt => srt
-								.Field(sf => sf
-									.Field(p => p.StartedOn)
-								.Order(SortOrder.Descending))
-								.Script(ss => ss
-									.Type("number")
-									.Script(sss => sss
-										.Source("Math.sin(34*(double)doc['numberOfCommits'].value)")
-										.Lang("painless")
-									)
-									.Order(SortOrder.Descending)
-								)
-							)
-							.Source(src => src
-								.Includes(fs => fs
-									.Field(p => p.Name)
-									.Field(p => p.LastActivity)
-									.Field(p => p.SourceOnly)
-								)
-							)
-							.Size(1)
-							.Version()
-							.TrackScores()
-							.Explain()
-							.StoredFields(f => f
+		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
+			.Terms("states", t => t
+				.Field(p => p.State)
+				.Aggregations(aa => aa
+					.TopHits("top_state_hits", th => th
+						.Sort(srt => srt
+							.Field(sf => sf
 								.Field(p => p.StartedOn)
-							)
-							.Highlight(h => h
-								.Fields(
-									hf => hf.Field(p => p.Tags),
-									hf => hf.Field(p => p.Description)
+								.Order(SortOrder.Descending))
+							.Script(ss => ss
+								.Type("number")
+								.Script(sss => sss
+									.Source("Math.sin(34*(double)doc['numberOfCommits'].value)")
+									.Lang("painless")
 								)
-							)
-							.ScriptFields(sfs => sfs
-								.ScriptField("commit_factor", sf => sf
-									.Source("doc['numberOfCommits'].value * 2")
-
-								)
-
-							)
-							.DocValueFields(d => d
-								.Field(p => p.State)
+								.Order(SortOrder.Descending)
 							)
 						)
+						.Source(src => src
+							.Includes(fs => fs
+								.Field(p => p.Name)
+								.Field(p => p.LastActivity)
+								.Field(p => p.SourceOnly)
+							)
+						)
+						.Size(1)
+						.Version()
+						.TrackScores()
+						.Explain()
+						.StoredFields(f => f
+							.Field(p => p.StartedOn)
+						)
+						.Highlight(h => h
+							.Fields(
+								hf => hf.Field(p => p.Tags),
+								hf => hf.Field(p => p.Description)
+							)
+						)
+						.ScriptFields(sfs => sfs
+							.ScriptField("commit_factor", sf => sf
+								.Source("doc['numberOfCommits'].value * 2")
+							)
+						)
+						.DocValueFields(d => d
+							.Field(p => p.State)
+						)
 					)
-				);
+				)
+			);
 
 		protected override AggregationDictionary InitializerAggs =>
 			new TermsAggregation("states")
 			{
-
-					Field = Field<Project>(p => p.State),
-					Aggregations = new TopHitsAggregation("top_state_hits")
+				Field = Field<Project>(p => p.State),
+				Aggregations = new TopHitsAggregation("top_state_hits")
+				{
+					Sort = new List<ISort>
 					{
-						Sort = new List<ISort>
-						{
-							new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending },
+						new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending },
 						new ScriptSort
-							{
-								Type = "number",
-								Script = new InlineScript("Math.sin(34*(double)doc['numberOfCommits'].value)") { Lang = "painless" },
-								Order = SortOrder.Descending
-							},},
-						Source = new SourceFilter
 						{
-							Includes = new [] { "name", "lastActivity", "sourceOnly" }
+							Type = "number",
+							Script = new InlineScript("Math.sin(34*(double)doc['numberOfCommits'].value)") { Lang = "painless" },
+							Order = SortOrder.Descending
 						},
-						Size = 1,
-						Version = true,
-						TrackScores = true,
-						Explain = true,
-						StoredFields = new[] { "startedOn" },
-						Highlight = new Highlight
+					},
+					Source = new SourceFilter
+					{
+						Includes = new[] { "name", "lastActivity", "sourceOnly" }
+					},
+					Size = 1,
+					Version = true,
+					TrackScores = true,
+					Explain = true,
+					StoredFields = new[] { "startedOn" },
+					Highlight = new Highlight
+					{
+						Fields = new Dictionary<Field, IHighlightField>
 						{
-							Fields = new Dictionary<Field, IHighlightField>
+							{ Field<Project>(p => p.Tags), new HighlightField() },
+							{ Field<Project>(p => p.Description), new HighlightField() }
+						}
+					},
+					ScriptFields = new ScriptFields
+					{
+						{
+							"commit_factor", new ScriptField
 							{
-								{ Field<Project>(p => p.Tags), new HighlightField() },
-								{ Field<Project>(p => p.Description), new HighlightField() }
+								Script = new InlineScript("doc['numberOfCommits'].value * 2")
 							}
 						},
-						ScriptFields = new ScriptFields
-						{
-							{
-								"commit_factor", new ScriptField
-								{
-									Script = new InlineScript("doc['numberOfCommits'].value * 2")
-								}
-							},
-						},
-						DocValueFields = Infer.Fields<Project>(f => f.State)
-					}
+					},
+					DocValueFields = Fields<Project>(f => f.State)
+				}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
@@ -192,7 +188,7 @@ namespace Tests.Aggregations.Metric.TopHits
 			var states = response.Aggregations.Terms("states");
 			states.Should().NotBeNull();
 			states.Buckets.Should().NotBeNullOrEmpty();
-			foreach(var state in states.Buckets)
+			foreach (var state in states.Buckets)
 			{
 				state.Key.Should().NotBeNullOrEmpty();
 				state.DocCount.Should().BeGreaterThan(0);
@@ -207,8 +203,8 @@ namespace Tests.Aggregations.Metric.TopHits
 				hits.All(h => h.Fields.ValuesOf<DateTime>("startedOn").Any()).Should().BeTrue();
 				var projects = topStateHits.Documents<Project>();
 				projects.Should().NotBeEmpty();
-				projects.Should().OnlyContain(p=>!string.IsNullOrWhiteSpace(p.Name), "source filter included name");
-				projects.Should().OnlyContain(p=>string.IsNullOrWhiteSpace(p.Description), "source filter does NOT include description");
+				projects.Should().OnlyContain(p => !string.IsNullOrWhiteSpace(p.Name), "source filter included name");
+				projects.Should().OnlyContain(p => string.IsNullOrWhiteSpace(p.Description), "source filter does NOT include description");
 				foreach (var project in projects)
 					project.ShouldAdhereToSourceSerializerWhenSet();
 			}

@@ -4,7 +4,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.SpanOr
 {
@@ -18,7 +17,8 @@ namespace Tests.QueryDsl.Joining.SpanOr
 			{
 				_name = "named_query",
 				boost = 1.1,
-				clauses = new[] {
+				clauses = new[]
+				{
 					new { span_term = new { field = new { value = "value1" } } },
 					new { span_term = new { field = new { value = "value2" } } },
 					new { span_term = new { field = new { value = "value3" } } }
@@ -53,7 +53,7 @@ namespace Tests.QueryDsl.Joining.SpanOr
 		{
 			q => q.Clauses = null,
 			q => q.Clauses = Enumerable.Empty<ISpanQuery>(),
-			q => q.Clauses = new [] { new SpanQuery() },
+			q => q.Clauses = new[] { new SpanQuery() },
 		};
 	}
 }

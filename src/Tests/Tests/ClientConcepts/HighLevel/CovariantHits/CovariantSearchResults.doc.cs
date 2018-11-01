@@ -1,12 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Core;
 using Tests.Core.Client;
 using Tests.Core.Extensions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.CovariantHits
 {
@@ -27,12 +24,13 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			public int Id { get; set; }
 			public string Name { get; set; }
 		}
+
 		private readonly IElasticClient _client = FixedResponseClient.Create(SearchResultMock.Json);
 
 		//hide
 		[U] public void CanDeserializeHits()
 		{
-			var result = this._client.Search<C>(s => s
+			var result = _client.Search<C>(s => s
 				.Size(100)
 			);
 			result.ApiCall.Should().NotBeNull();
@@ -51,8 +49,6 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			result.Documents.Count.Should().Be(100);
 			result.Documents.Should().OnlyContain(d => d.Id > 0, "id on _source");
 			result.Documents.Should().OnlyContain(d => !string.IsNullOrEmpty(d.Name), "name on _source");
-
-
 		}
 	}
 
@@ -62,36 +58,44 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 		{
 			took = 1,
 			timed_out = false,
-			_shards = new {
+			_shards = new
+			{
 				total = 2,
 				successful = 2,
 				failed = 0
 			},
-			hits = new {
+			hits = new
+			{
 				total = 100,
 				max_score = 1.1,
-				hits = Enumerable.Range(1, 25).Select(i => (object)new
-				{
-					_index = "project",
-					_type = "a",
-					_id = i,
-					_score = 1.0,
-					_source= new { name= "A object", id = i }
-				}).Concat(Enumerable.Range(26, 25).Select(i => (object)new
-				{
-					_index = "project",
-					_type = "b",
-					_id = i,
-					_score = 1.0,
-					_source= new { name= "B object", id = i }
-				})).Concat(Enumerable.Range(51, 50).Select(i => new
-				{
-					_index = "project",
-					_type = "c",
-					_id = i,
-					_score = 1.0,
-					_source= new { name= "C object", id = i }
-				})).ToArray()
+				hits = Enumerable.Range(1, 25)
+					.Select(i => (object)new
+					{
+						_index = "project",
+						_type = "a",
+						_id = i,
+						_score = 1.0,
+						_source = new { name = "A object", id = i }
+					})
+					.Concat(Enumerable.Range(26, 25)
+						.Select(i => (object)new
+						{
+							_index = "project",
+							_type = "b",
+							_id = i,
+							_score = 1.0,
+							_source = new { name = "B object", id = i }
+						}))
+					.Concat(Enumerable.Range(51, 50)
+						.Select(i => new
+						{
+							_index = "project",
+							_type = "c",
+							_id = i,
+							_score = 1.0,
+							_source = new { name = "C object", id = i }
+						}))
+					.ToArray()
 			}
 		};
 	}

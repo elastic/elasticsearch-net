@@ -1,10 +1,9 @@
-﻿using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework;
+using Tests.Framework.Integration;
 
 namespace Tests.Mapping.Metafields
 {
@@ -22,6 +21,5 @@ namespace Tests.Mapping.Metafields
 
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override string UrlPath => $"/{CallIsolatedValue}/project/_mapping";
-
 	}
 }

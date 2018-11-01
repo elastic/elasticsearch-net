@@ -8,13 +8,13 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Search.FieldCapabilities
 {
 	public class FieldCapabilitiesApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IFieldCapabilitiesResponse, IFieldCapabilitiesRequest, FieldCapabilitiesDescriptor, FieldCapabilitiesRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IFieldCapabilitiesResponse, IFieldCapabilitiesRequest, FieldCapabilitiesDescriptor,
+			FieldCapabilitiesRequest>
 	{
 		public FieldCapabilitiesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -31,11 +31,11 @@ namespace Tests.Search.FieldCapabilities
 		protected override string UrlPath => "/project%2Cdevs/_field_caps?fields=name%2C%2A";
 
 		protected override Func<FieldCapabilitiesDescriptor, IFieldCapabilitiesRequest> Fluent => d => d
-			.Fields(Fields<Project>(p=>p.Name).And("*"));
+			.Fields(Fields<Project>(p => p.Name).And("*"));
 
 		protected override FieldCapabilitiesRequest Initializer => new FieldCapabilitiesRequest(Index<Project>().And<Developer>())
 		{
-			Fields = Fields<Project>(p=>p.Name).And("*"),
+			Fields = Fields<Project>(p => p.Name).And("*"),
 		};
 
 		protected override void ExpectResponse(IFieldCapabilitiesResponse response)
@@ -57,7 +57,7 @@ namespace Tests.Search.FieldCapabilities
 			stateCapabilities.Aggregatable.Should().BeTrue();
 			stateCapabilities.Searchable.Should().BeTrue();
 
-			stateCapabilities = response.Fields[Field<Project>(p=>p.State)].Keyword;
+			stateCapabilities = response.Fields[Field<Project>(p => p.State)].Keyword;
 			stateCapabilities.Aggregatable.Should().BeTrue();
 			stateCapabilities.Searchable.Should().BeTrue();
 		}

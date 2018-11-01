@@ -11,7 +11,9 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.GetOverallBuckets
 {
-	public class GetOverallBucketsApiTests : MachineLearningIntegrationTestBase<IGetOverallBucketsResponse, IGetOverallBucketsRequest, GetOverallBucketsDescriptor, GetOverallBucketsRequest>
+	public class GetOverallBucketsApiTests
+		: MachineLearningIntegrationTestBase<IGetOverallBucketsResponse, IGetOverallBucketsRequest, GetOverallBucketsDescriptor,
+			GetOverallBucketsRequest>
 	{
 		private const int BucketSpanSeconds = 3600;
 		private const int OverallBucketCount = 3000;
@@ -46,14 +48,12 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 				{
 					data.Add(new { time = timestamp });
 					if (i % 1000 == 0)
-					{
-						data.AddRange(new []
+						data.AddRange(new[]
 						{
 							new { time = timestamp },
 							new { time = timestamp },
 							new { time = timestamp }
 						});
-					}
 					timestamp += BucketSpanSeconds * 1000;
 				}
 
@@ -77,7 +77,9 @@ namespace Tests.XPack.MachineLearning.GetOverallBuckets
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/overall_buckets";
+
 		protected override GetOverallBucketsDescriptor NewDescriptor() => new GetOverallBucketsDescriptor(CallIsolatedValue);
+
 		protected override object ExpectJson => null;
 		protected override Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> Fluent => f => f;
 		protected override GetOverallBucketsRequest Initializer => new GetOverallBucketsRequest(CallIsolatedValue);

@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 #pragma warning disable 618 //Testing an obsolete method
 
@@ -44,9 +43,10 @@ namespace Tests.QueryDsl.Compound.ConstantScore
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IConstantScoreQuery>(a => a.ConstantScore)
 		{
-			q => q.Filter = null ,
-			q => q.Filter =  ConditionlessQuery,
+			q => q.Filter = null,
+			q => q.Filter = ConditionlessQuery,
 		};
+
 		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IConstantScoreQuery>(a => a.ConstantScore)
 		{
 			q => q.Filter = VerbatimQuery

@@ -4,12 +4,11 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.SnapshotStatus
 {
-	public class SnapshotStatusApiTests : ApiTestBase<ReadOnlyCluster, ISnapshotStatusResponse, ISnapshotStatusRequest, SnapshotStatusDescriptor, SnapshotStatusRequest>
+	public class SnapshotStatusApiTests
+		: ApiTestBase<ReadOnlyCluster, ISnapshotStatusResponse, ISnapshotStatusRequest, SnapshotStatusDescriptor, SnapshotStatusRequest>
 	{
 		public SnapshotStatusApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -30,8 +29,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot.SnapshotStatus
 
 		protected override Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> Fluent => d => d
 			.RepositoryName(_repos)
-			.Snapshot(_snapshot)
-		;
+			.Snapshot(_snapshot);
 
 		protected override SnapshotStatusRequest Initializer => new SnapshotStatusRequest(_repos, _snapshot);
 	}

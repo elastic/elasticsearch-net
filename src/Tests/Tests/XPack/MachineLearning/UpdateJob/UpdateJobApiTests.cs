@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Domain;
@@ -11,7 +9,8 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.UpdateJob
 {
-	public class UpdateJobApiTests : MachineLearningIntegrationTestBase<IUpdateJobResponse, IUpdateJobRequest, UpdateJobDescriptor<Metric>, UpdateJobRequest>
+	public class UpdateJobApiTests
+		: MachineLearningIntegrationTestBase<IUpdateJobResponse, IUpdateJobRequest, UpdateJobDescriptor<Metric>, UpdateJobRequest>
 	{
 		public UpdateJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -39,13 +38,14 @@ namespace Tests.XPack.MachineLearning.UpdateJob
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_update";
 		protected override bool SupportsDeserialization => false;
+
 		protected override UpdateJobDescriptor<Metric> NewDescriptor() => new UpdateJobDescriptor<Metric>(CallIsolatedValue);
 
 		protected override object ExpectJson => new
-			{
-				description = "Lab 1 - Simple example modified",
-				background_persist_interval = "6h"
-			};
+		{
+			description = "Lab 1 - Simple example modified",
+			background_persist_interval = "6h"
+		};
 
 		protected override Func<UpdateJobDescriptor<Metric>, IUpdateJobRequest> Fluent => f => f
 			.Description("Lab 1 - Simple example modified")
@@ -58,9 +58,6 @@ namespace Tests.XPack.MachineLearning.UpdateJob
 				BackgroundPersistInterval = "6h"
 			};
 
-		protected override void ExpectResponse(IUpdateJobResponse response)
-		{
-			response.ShouldBeValid();
-		}
+		protected override void ExpectResponse(IUpdateJobResponse response) => response.ShouldBeValid();
 	}
 }

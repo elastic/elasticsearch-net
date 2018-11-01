@@ -4,7 +4,6 @@ using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
@@ -13,7 +12,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 	{
 		private static QueryContainer ATermQuery(QueryContainerDescriptor<Project> must) => must.Term(p => p.Name, "foo");
 
-		private static int Iterations = 10000;
+		private static readonly int Iterations = 10000;
 
 		private void AssertBoolQuery(QueryContainer q, Action<IBoolQuery> assert) =>
 			assert(((IQueryContainer)q).Bool);
@@ -50,9 +49,11 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			var q = Query<Project>.Bool(b => b.Should(ATermQuery).Must(ATermQuery));
 			var container = AndAssignManyBoolQueries(q);
 			DefaultMustAssert(container);
-			container.Bool.Must.Cast<IQueryContainer>().Should()
+			container.Bool.Must.Cast<IQueryContainer>()
+				.Should()
 				.OnlyContain(s => s.Bool != null && s.Bool.Should != null && s.Bool.Must != null);
-			AssertBoolQuery(q, b => {
+			AssertBoolQuery(q, b =>
+			{
 				b.Should.Should().NotBeNullOrEmpty();
 				b.Must.Should().NotBeNullOrEmpty();
 			});
@@ -63,9 +64,11 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			var q = Query<Project>.Bool(b => b.Should(ATermQuery).MustNot(ATermQuery));
 			var container = AndAssignManyBoolQueries(q);
 			DefaultMustAssert(container);
-			container.Bool.Must.Cast<IQueryContainer>().Should()
+			container.Bool.Must.Cast<IQueryContainer>()
+				.Should()
 				.OnlyContain(s => s.Bool != null && s.Bool.Should != null && s.Bool.MustNot != null);
-			AssertBoolQuery(q, b => {
+			AssertBoolQuery(q, b =>
+			{
 				b.Should.Should().NotBeNullOrEmpty();
 				b.MustNot.Should().NotBeNullOrEmpty();
 			});
@@ -78,7 +81,8 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			DefaultMustAssert(container);
 			container.Bool.MustNot.Should().NotBeEmpty().And.HaveCount(Iterations);
 			container.Bool.Must.Cast<IQueryContainer>().Should().OnlyContain(s => s.Term != null);
-			AssertBoolQuery(q, b => {
+			AssertBoolQuery(q, b =>
+			{
 				b.Must.Should().NotBeNullOrEmpty();
 				b.MustNot.Should().NotBeNullOrEmpty();
 			});
@@ -89,9 +93,11 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			var q = Query<Project>.Bool(b => b.Must(ATermQuery).Name("name"));
 			var container = AndAssignManyBoolQueries(q);
 			DefaultMustAssert(container);
-			container.Bool.Must.Cast<IQueryContainer>().Should()
+			container.Bool.Must.Cast<IQueryContainer>()
+				.Should()
 				.OnlyContain(s => s.Bool != null && s.Bool.Must != null && s.Bool.Name == "name");
-			AssertBoolQuery(q, b => {
+			AssertBoolQuery(q, b =>
+			{
 				b.Must.Should().NotBeNullOrEmpty();
 				b.Name.Should().NotBeNullOrEmpty();
 			});
@@ -100,19 +106,19 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		private IQueryContainer AndAssignManyBoolQueries(QueryContainer q)
 		{
 			var container = new QueryContainer();
-			System.Action act = () =>
+			Action act = () =>
 			{
 				for (var i = 0; i < Iterations; i++) container &= q;
 			};
 			act.ShouldNotThrow();
 			return container;
 		}
+
 		private void DefaultMustAssert(IQueryContainer lotsOfAnds)
 		{
 			lotsOfAnds.Should().NotBeNull();
 			lotsOfAnds.Bool.Should().NotBeNull();
 			lotsOfAnds.Bool.Must.Should().NotBeEmpty().And.HaveCount(Iterations);
 		}
-
 	}
 }

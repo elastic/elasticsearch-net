@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -14,14 +13,12 @@ using Tests.Domain;
 using Tests.Domain.Extensions;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Document.Single.Index
 {
-	public class IndexApiTests :
-		ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+	public class IndexApiTests
+		: ApiIntegrationTestBase<WritableCluster, IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		protected override bool IncludeNullInExpected => false;
 
@@ -31,15 +28,15 @@ namespace Tests.Document.Single.Index
 			Name = CallIsolatedValue,
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
-			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
+			CuratedTags = new List<Tag> { new Tag { Name = "x", Added = FixedDate } },
 			SourceOnly = TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		public IndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Index<Project>(this.Document, f),
-			fluentAsync: (client, f) => client.IndexAsync<Project>(this.Document, f),
+			fluent: (client, f) => client.Index<Project>(Document, f),
+			fluentAsync: (client, f) => client.IndexAsync<Project>(Document, f),
 			request: (client, r) => client.Index(r),
 			requestAsync: (client, r) => client.IndexAsync(r)
 		);
@@ -63,10 +60,10 @@ namespace Tests.Document.Single.Index
 				lastActivity = FixedDate,
 				numberOfContributors = 0,
 				sourceOnly = Dependant(null, new { notWrittenByDefaultSerializer = "written" }),
-				curatedTags = new[] {new {name = "x", added = FixedDate}},
+				curatedTags = new[] { new { name = "x", added = FixedDate } },
 			};
 
-		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
+		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(Document);
 
 		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
 			.WaitForActiveShards("1")
@@ -75,7 +72,7 @@ namespace Tests.Document.Single.Index
 			.Routing("route");
 
 		protected override IndexRequest<Project> Initializer =>
-			new IndexRequest<Project>(this.Document)
+			new IndexRequest<Project>(Document)
 			{
 				Refresh = Refresh.True,
 				OpType = OpType.Index,
@@ -92,7 +89,7 @@ namespace Tests.Document.Single.Index
 		{
 			var indexName = RandomString();
 			var project = Project.Generator.Generate(1).First();
-			var indexResult = this.Client.Index(project, f => f
+			var indexResult = Client.Index(project, f => f
 				.Index(indexName)
 				.OpType(OpType.Create)
 			);
@@ -100,10 +97,10 @@ namespace Tests.Document.Single.Index
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(indexName);
-			indexResult.Type.Should().Be(this.Client.Infer.TypeName<Project>());
+			indexResult.Type.Should().Be(Client.Infer.TypeName<Project>());
 			indexResult.Id.Should().Be(project.Name);
 
-			indexResult = this.Client.Index(project, f => f
+			indexResult = Client.Index(project, f => f
 				.Index(indexName)
 				.OpType(OpType.Create)
 			);
@@ -120,12 +117,12 @@ namespace Tests.Document.Single.Index
 		{
 			var indexName = RandomString();
 			var commitActivity = CommitActivity.CommitActivities.First();
-			var indexResult = this.Client.Index(commitActivity, f => f.Index(indexName));
+			var indexResult = Client.Index(commitActivity, f => f.Index(indexName));
 			indexResult.ShouldBeValid();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Result.Should().Be(Result.Created);
 			indexResult.Index.Should().Be(indexName);
-			indexResult.Type.Should().Be(this.Client.Infer.TypeName<CommitActivity>());
+			indexResult.Type.Should().Be(Client.Infer.TypeName<CommitActivity>());
 			indexResult.Id.Should().Be(commitActivity.Id);
 			indexResult.Version.Should().Be(1);
 			indexResult.Shards.Should().NotBeNull();
@@ -134,7 +131,7 @@ namespace Tests.Document.Single.Index
 			indexResult.SequenceNumber.Should().BeGreaterOrEqualTo(0);
 			indexResult.PrimaryTerm.Should().BeGreaterThan(0);
 
-			indexResult = this.Client.Index(commitActivity, f => f.Index(indexName));
+			indexResult = Client.Index(commitActivity, f => f.Index(indexName));
 
 			indexResult.ShouldBeValid();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(200);
@@ -145,9 +142,7 @@ namespace Tests.Document.Single.Index
 
 	public class IndexJObjectIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
-		public IndexJObjectIntegrationTests(WritableCluster cluster) : base(cluster)
-		{
-		}
+		public IndexJObjectIntegrationTests(WritableCluster cluster) : base(cluster) { }
 
 		[I]
 		public void Index()
@@ -157,22 +152,22 @@ namespace Tests.Document.Single.Index
 				.Select(i =>
 					new JObject
 					{
-						{"id", i},
-						{"name", $"name {i}"},
-						{"value", Math.Pow(i, 2)},
-						{"date", new DateTime(2016, 1, 1)},
+						{ "id", i },
+						{ "name", $"name {i}" },
+						{ "value", Math.Pow(i, 2) },
+						{ "date", new DateTime(2016, 1, 1) },
 						{
 							"child", new JObject
 							{
-								{"child_name", $"child_name {i}{i}"},
-								{"child_value", 3}
+								{ "child_name", $"child_name {i}{i}" },
+								{ "child_value", 3 }
 							}
 						}
 					});
 
 			var jObject = jObjects.First();
 
-			var indexResult = this.Client.Index(jObject, f => f
+			var indexResult = Client.Index(jObject, f => f
 				.Index(index)
 				.Id(jObject["id"].Value<int>())
 			);
@@ -188,7 +183,7 @@ namespace Tests.Document.Single.Index
 			indexResult.SequenceNumber.Should().BeGreaterOrEqualTo(0);
 			indexResult.PrimaryTerm.Should().BeGreaterThan(0);
 
-			var bulkResponse = this.Client.Bulk(b => b
+			var bulkResponse = Client.Bulk(b => b
 				.Index(index)
 				.IndexMany(jObjects.Skip(1), (bi, d) => bi
 					.Document(d)
@@ -211,9 +206,7 @@ namespace Tests.Document.Single.Index
 
 	public class IndexAnonymousTypesIntegrationTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
-		public IndexAnonymousTypesIntegrationTests(WritableCluster cluster) : base(cluster)
-		{
-		}
+		public IndexAnonymousTypesIntegrationTests(WritableCluster cluster) : base(cluster) { }
 
 		[I]
 		public void Index()
@@ -231,7 +224,7 @@ namespace Tests.Document.Single.Index
 				}
 			};
 
-			var indexResult = this.Client.Index(anonymousType, f => f
+			var indexResult = Client.Index(anonymousType, f => f
 				.Index(index)
 				.Id(anonymousType.name)
 			);

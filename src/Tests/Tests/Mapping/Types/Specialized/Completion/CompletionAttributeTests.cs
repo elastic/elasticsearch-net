@@ -1,5 +1,4 @@
-﻿using System;
-using Nest;
+﻿using Nest;
 
 namespace Tests.Mapping.Types.Specialized.Completion
 {
@@ -16,7 +15,7 @@ namespace Tests.Mapping.Types.Specialized.Completion
 		[Completion]
 		public CompletionField Minimal { get; set; }
 
-        public CompletionField Inferred { get; set; }
+		public CompletionField Inferred { get; set; }
 	}
 
 	public class CompletionAttributeTests : AttributeTestsBase<CompletionTest>
@@ -38,11 +37,11 @@ namespace Tests.Mapping.Types.Specialized.Completion
 				{
 					type = "completion"
 				},
-                inferred = new
-                {
-                    type = "completion"
-                }
-            }
+				inferred = new
+				{
+					type = "completion"
+				}
+			}
 		};
 	}
 }

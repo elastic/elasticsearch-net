@@ -5,14 +5,15 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatThreadPool
 {
-	public class CatThreadPoolApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatThreadPoolRecord>, ICatThreadPoolRequest, CatThreadPoolDescriptor, CatThreadPoolRequest>
+	public class CatThreadPoolApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatThreadPoolRecord>, ICatThreadPoolRequest, CatThreadPoolDescriptor,
+			CatThreadPoolRequest>
 	{
 		public CatThreadPoolApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatThreadPool(),
 			fluentAsync: (client, f) => client.CatThreadPoolAsync(),
@@ -24,12 +25,14 @@ namespace Tests.Cat.CatThreadPool
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/thread_pool";
-
 	}
 
-	public class CatThreadPoolFullApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatThreadPoolRecord>, ICatThreadPoolRequest, CatThreadPoolDescriptor, CatThreadPoolRequest>
+	public class CatThreadPoolFullApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatThreadPoolRecord>, ICatThreadPoolRequest, CatThreadPoolDescriptor,
+			CatThreadPoolRequest>
 	{
 		public CatThreadPoolFullApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatThreadPool(f),
 			fluentAsync: (client, f) => client.CatThreadPoolAsync(f),
@@ -71,6 +74,5 @@ namespace Tests.Cat.CatThreadPool
 
 			response.Records.Should().Contain(r => r.KeepAlive != null);
 		}
-
 	}
 }

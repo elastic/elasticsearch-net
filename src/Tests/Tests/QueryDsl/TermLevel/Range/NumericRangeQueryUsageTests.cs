@@ -2,13 +2,12 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Range
 {
 	public class RangeQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public RangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public RangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -53,8 +52,8 @@ namespace Tests.QueryDsl.TermLevel.Range
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INumericRangeQuery>(q => q.Range as INumericRangeQuery)
 		{
-			q=> q.Field = null,
-			q=>
+			q => q.Field = null,
+			q =>
 			{
 				q.GreaterThan = null;
 				q.GreaterThanOrEqualTo = null;

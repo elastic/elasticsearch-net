@@ -8,7 +8,9 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.DeleteExpiredData
 {
-	public class DeleteExpiredDataApiTests : MachineLearningIntegrationTestBase<IDeleteExpiredDataResponse, IDeleteExpiredDataRequest, DeleteExpiredDataDescriptor, DeleteExpiredDataRequest>
+	public class DeleteExpiredDataApiTests
+		: MachineLearningIntegrationTestBase<IDeleteExpiredDataResponse, IDeleteExpiredDataRequest, DeleteExpiredDataDescriptor,
+			DeleteExpiredDataRequest>
 	{
 		public DeleteExpiredDataApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -23,14 +25,13 @@ namespace Tests.XPack.MachineLearning.DeleteExpiredData
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"_xpack/ml/_delete_expired_data";
+
 		protected override DeleteExpiredDataDescriptor NewDescriptor() => new DeleteExpiredDataDescriptor();
+
 		protected override object ExpectJson => null;
 		protected override Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> Fluent => f => f;
 		protected override DeleteExpiredDataRequest Initializer => new DeleteExpiredDataRequest();
 
-		protected override void ExpectResponse(IDeleteExpiredDataResponse response)
-		{
-			response.Deleted.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IDeleteExpiredDataResponse response) => response.Deleted.Should().BeTrue();
 	}
 }

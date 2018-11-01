@@ -1,20 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Terms
 {
 	public class TermsListQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public TermsListQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public TermsListQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -47,7 +44,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 	{
 		public TermsListOfListIntegrationTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private List<List<string>> _terms = new List<List<string>> { new List<string> { "term1", "term2" } };
+		private readonly List<List<string>> _terms = new List<List<string>> { new List<string> { "term1", "term2" } };
 
 		protected override int ExpectStatusCode => 400;
 		protected override bool ExpectIsValid => false;
@@ -58,7 +55,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			{
 				_name = "named_query",
 				boost = 1.1,
-				description = new[] { new [] { "term1", "term2" } },
+				description = new[] { new[] { "term1", "term2" } },
 			}
 		};
 
@@ -96,7 +93,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 	{
 		public TermsListOfListStringAgainstNumericFieldIntegrationTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private List<List<string>> _terms = new List<List<string>> { new List<string> { "term1", "term2" } };
+		private readonly List<List<string>> _terms = new List<List<string>> { new List<string> { "term1", "term2" } };
 
 
 		protected override int ExpectStatusCode => 400;
@@ -108,7 +105,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			{
 				_name = "named_query",
 				boost = 1.1,
-				numberOfCommits = new[] { new [] { "term1", "term2" } }
+				numberOfCommits = new[] { new[] { "term1", "term2" } }
 			}
 		};
 
@@ -138,7 +135,5 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			var rootCause = rootCauses.First();
 			rootCause.Type.Should().Be("parsing_exception");
 		}
-
 	}
-
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json.Linq;
 using Tests.Core.Extensions;
 using Tests.Domain;
 using Tests.Framework;
@@ -12,7 +11,8 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.PostJobData
 {
-	public class PostJobDataApiTests : MachineLearningIntegrationTestBase<IPostJobDataResponse, IPostJobDataRequest, PostJobDataDescriptor, PostJobDataRequest>
+	public class PostJobDataApiTests
+		: MachineLearningIntegrationTestBase<IPostJobDataResponse, IPostJobDataRequest, PostJobDataDescriptor, PostJobDataRequest>
 	{
 		public PostJobDataApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -43,6 +43,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_data";
 		protected override bool SupportsDeserialization => false;
+
 		protected override PostJobDataDescriptor NewDescriptor() => new PostJobDataDescriptor(CallIsolatedValue);
 
 		protected override object ExpectJson => new Dictionary<string, object>
@@ -64,7 +65,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 			Host = "server_2",
 			Response = 2.455821f,
 			Service = "app_3",
-			Total  = 40476
+			Total = 40476
 		});
 
 		protected override PostJobDataRequest Initializer => new PostJobDataRequest(CallIsolatedValue)
@@ -79,7 +80,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 					Host = "server_2",
 					Response = 2.4558210155f,
 					Service = "app_3",
-					Total  = 40476
+					Total = 40476
 				}
 			}
 		};
@@ -103,7 +104,8 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		}
 	}
 
-	public class PostJobDataWithResetStartAndResetEndApiTests : MachineLearningIntegrationTestBase<IPostJobDataResponse, IPostJobDataRequest, PostJobDataDescriptor, PostJobDataRequest>
+	public class PostJobDataWithResetStartAndResetEndApiTests
+		: MachineLearningIntegrationTestBase<IPostJobDataResponse, IPostJobDataRequest, PostJobDataDescriptor, PostJobDataRequest>
 	{
 		public PostJobDataWithResetStartAndResetEndApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -118,10 +120,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 
 		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				CloseJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) CloseJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -134,15 +133,17 @@ namespace Tests.XPack.MachineLearning.PostJobData
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 202;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
 		protected override string UrlPath =>
-			$"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_data"+
-			$"?reset_start={Uri.EscapeDataString(new DateTimeOffset(2017, 1, 1, 0, 0, 0, TimeSpan.Zero).ToString("o"))}"+
+			$"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_data" +
+			$"?reset_start={Uri.EscapeDataString(new DateTimeOffset(2017, 1, 1, 0, 0, 0, TimeSpan.Zero).ToString("o"))}" +
 			$"&reset_end={Uri.EscapeDataString(new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero).ToString("o"))}";
 
 		protected override bool SupportsDeserialization => false;
+
 		protected override PostJobDataDescriptor NewDescriptor() => new PostJobDataDescriptor(CallIsolatedValue);
 
-		protected override object ExpectJson => new Dictionary<string,object>
+		protected override object ExpectJson => new Dictionary<string, object>
 		{
 			{ "@timestamp", new DateTime(2017, 9, 1) },
 			{ "accept", 36320 },
@@ -162,7 +163,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 				Host = "server_2",
 				Response = 2.455821f,
 				Service = "app_3",
-				Total  = 40476
+				Total = 40476
 			})
 			.ResetStart(new DateTimeOffset(2017, 1, 1, 0, 0, 0, TimeSpan.Zero))
 			.ResetEnd(new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero));
@@ -179,7 +180,7 @@ namespace Tests.XPack.MachineLearning.PostJobData
 					Host = "server_2",
 					Response = 2.4558210155f,
 					Service = "app_3",
-					Total  = 40476
+					Total = 40476
 				}
 			},
 			ResetStart = new DateTimeOffset(2017, 1, 1, 0, 0, 0, TimeSpan.Zero),

@@ -1,7 +1,6 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.ServerError
 {
@@ -9,7 +8,7 @@ namespace Tests.ClientConcepts.ServerError
 	{
 		[U] protected override void AssertServerError() => base.AssertServerError();
 
-		protected override string Json  => @"{
+		protected override string Json => @"{
 			""root_cause"": [
 			{
 				""type"": ""parse_exception1"",
@@ -44,6 +43,7 @@ namespace Tests.ClientConcepts.ServerError
 				rootCause.Reason.Should().NotBeNullOrWhiteSpace(origin);
 				rootCause.StackTrace.Should().NotBeNullOrWhiteSpace(origin);
 			}
+
 			var causedBy = error.CausedBy;
 			causedBy.Should().NotBeNull(origin);
 			causedBy.Type.Should().NotBeNullOrWhiteSpace(origin);

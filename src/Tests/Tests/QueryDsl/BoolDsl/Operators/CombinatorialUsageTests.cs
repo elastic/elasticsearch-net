@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Nest;
-using Tests.Framework;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
@@ -17,7 +14,6 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				b.Should.Should().BeNull();
 				b.MustNot.Should().BeNull();
 				b.Filter.Should().BeNull();
-
 			});
 
 		[U] public void DoesJoinTwoShouldsUsingOr() => ReturnsBool(
@@ -65,10 +61,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		[U] public void OrDoesNotJoinMustNot() => ReturnsBool(
 			Query || !Query,
 			q => q.Query() || !q.Query(),
-			b =>
-			{
-				b.Should.Should().NotBeEmpty().And.HaveCount(2);
-			});
+			b => { b.Should.Should().NotBeEmpty().And.HaveCount(2); });
 
 		[U] public void OrDoesNotJoinFilter() => ReturnsBool(
 			Query || !Query,

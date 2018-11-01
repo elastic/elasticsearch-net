@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.SpanNot
 {
@@ -72,11 +71,13 @@ namespace Tests.QueryDsl.Joining.SpanNot
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanNotQuery>(a => a.SpanNot)
 		{
-			q => {
+			q =>
+			{
 				q.Include = null;
 				q.Exclude = null;
 			},
-			q => {
+			q =>
+			{
 				q.Include = new SpanQuery();
 				q.Exclude = new SpanQuery();
 			},

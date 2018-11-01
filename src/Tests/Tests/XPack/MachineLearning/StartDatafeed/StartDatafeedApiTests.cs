@@ -8,7 +8,8 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.StartDatafeed
 {
-	public class StartDatafeedApiTests : MachineLearningIntegrationTestBase<IStartDatafeedResponse, IStartDatafeedRequest, StartDatafeedDescriptor, StartDatafeedRequest>
+	public class StartDatafeedApiTests
+		: MachineLearningIntegrationTestBase<IStartDatafeedResponse, IStartDatafeedRequest, StartDatafeedDescriptor, StartDatafeedRequest>
 	{
 		public StartDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -42,14 +43,13 @@ namespace Tests.XPack.MachineLearning.StartDatafeed
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_start";
+
 		protected override StartDatafeedDescriptor NewDescriptor() => new StartDatafeedDescriptor(CallIsolatedValue + "-datafeed");
+
 		protected override object ExpectJson => null;
 		protected override Func<StartDatafeedDescriptor, IStartDatafeedRequest> Fluent => f => f;
 		protected override StartDatafeedRequest Initializer => new StartDatafeedRequest(CallIsolatedValue + "-datafeed");
 
-		protected override void ExpectResponse(IStartDatafeedResponse response)
-		{
-			response.Started.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IStartDatafeedResponse response) => response.Started.Should().BeTrue();
 	}
 }

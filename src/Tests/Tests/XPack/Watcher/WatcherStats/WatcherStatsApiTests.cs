@@ -6,11 +6,11 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Watcher.WatcherStats
 {
-	public class WatcherStatsApiTests : ApiIntegrationTestBase<XPackCluster, IWatcherStatsResponse, IWatcherStatsRequest, WatcherStatsDescriptor, WatcherStatsRequest>
+	public class WatcherStatsApiTests
+		: ApiIntegrationTestBase<XPackCluster, IWatcherStatsResponse, IWatcherStatsRequest, WatcherStatsDescriptor, WatcherStatsRequest>
 	{
 		public WatcherStatsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

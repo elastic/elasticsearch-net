@@ -2,8 +2,8 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
+
 // ReSharper disable SuggestVarOrType_Elsewhere
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable SuggestVarOrType_SimpleTypes
@@ -39,7 +39,7 @@ namespace Tests.CommonOptions.DateMath
 			* You can create simple expressions using any of the static methods on `DateMath`
 			*/
 			//Expect("now").WhenSerializing(Nest.DateMath.Now);
-			Expect("2015-05-05T00:00:00").WhenSerializing(Nest.DateMath.Anchored(new DateTime(2015,05, 05)));
+			Expect("2015-05-05T00:00:00").WhenSerializing(Nest.DateMath.Anchored(new DateTime(2015, 05, 05)));
 
 			/** strings implicitly convert to `DateMath` */
 			Expect("now").WhenSerializing<Nest.DateMath>("now");
@@ -47,9 +47,9 @@ namespace Tests.CommonOptions.DateMath
 			/** but are lenient to bad math expressions */
 			var nonsense = "now||*asdaqwe";
 
-            /** the resulting date math will assume the whole string is the anchor */
-            Expect(nonsense)
-	            .WhenSerializing<Nest.DateMath>(nonsense)
+			/** the resulting date math will assume the whole string is the anchor */
+			Expect(nonsense)
+				.WhenSerializing<Nest.DateMath>(nonsense)
 				.AssertSubject(dateMath => ((IDateMath)dateMath)
 					.Anchor.Match(
 						d => d.Should().NotBe(default(DateTime)),
@@ -57,14 +57,14 @@ namespace Tests.CommonOptions.DateMath
 					)
 				);
 
-            /**`DateTime` also implicitly convert to simple date math expressions; the resulting
-             * anchor will be an actual `DateTime`, even after a serialization/deserialization round trip
-             */
-            var date = new DateTime(2015, 05, 05);
+			/**`DateTime` also implicitly convert to simple date math expressions; the resulting
+			 * anchor will be an actual `DateTime`, even after a serialization/deserialization round trip
+			 */
+			var date = new DateTime(2015, 05, 05);
 			Expect("2015-05-05T00:00:00")
 				.WhenSerializing<Nest.DateMath>(date)
 				.AssertSubject(dateMath => ((IDateMath)dateMath)
-				    .Anchor.Match(
+					.Anchor.Match(
 						d => d.Should().Be(date),
 						s => s.Should().BeNull()
 					)
@@ -77,26 +77,30 @@ namespace Tests.CommonOptions.DateMath
 			 * ==== Complex expressions
 			* Ranges can be chained on to simple expressions
 			*/
-			Expect("now+1d").WhenSerializing(
-				Nest.DateMath.Now.Add("1d"));
+			Expect("now+1d")
+				.WhenSerializing(
+					Nest.DateMath.Now.Add("1d"));
 
 			/** Including multiple operations */
-			Expect("now+1d-1m").WhenSerializing(
-				Nest.DateMath.Now.Add("1d").Subtract(TimeSpan.FromMinutes(1)));
+			Expect("now+1d-1m")
+				.WhenSerializing(
+					Nest.DateMath.Now.Add("1d").Subtract(TimeSpan.FromMinutes(1)));
 
 			/** A rounding value can be chained to the end of the expression, after which no more ranges can be appended */
-			Expect("now+1d-1m/d").WhenSerializing(
-				Nest.DateMath.Now.Add("1d")
-					.Subtract(TimeSpan.FromMinutes(1))
-					.RoundTo(DateMathTimeUnit.Day));
+			Expect("now+1d-1m/d")
+				.WhenSerializing(
+					Nest.DateMath.Now.Add("1d")
+						.Subtract(TimeSpan.FromMinutes(1))
+						.RoundTo(DateMathTimeUnit.Day));
 
 			/** When anchoring dates, a `||` needs to be appended as clear separator between the anchor and ranges.
 			* Again, multiple ranges can be chained
 			*/
-			Expect("2015-05-05T00:00:00||+1d-1m").WhenSerializing(
-				Nest.DateMath.Anchored(new DateTime(2015,05,05))
-					.Add("1d")
-					.Subtract(TimeSpan.FromMinutes(1)));
+			Expect("2015-05-05T00:00:00||+1d-1m")
+				.WhenSerializing(
+					Nest.DateMath.Anchored(new DateTime(2015, 05, 05))
+						.Add("1d")
+						.Subtract(TimeSpan.FromMinutes(1)));
 		}
 
 		[U] public void FractionalsUnitsAreDroppedToNearestInteger()
@@ -120,11 +124,13 @@ namespace Tests.CommonOptions.DateMath
 
 			Expect("now+30h").WhenSerializing(Nest.DateMath.Now.Add("1.25d"));
 
-			Expect("now+90001s").WhenSerializing(
-				Nest.DateMath.Now.Add(TimeSpan.FromHours(25).Add(TimeSpan.FromSeconds(1))));
+			Expect("now+90001s")
+				.WhenSerializing(
+					Nest.DateMath.Now.Add(TimeSpan.FromHours(25).Add(TimeSpan.FromSeconds(1))));
 
-			Expect("now+90000s").WhenSerializing(
-				Nest.DateMath.Now.Add(TimeSpan.FromHours(25).Add(TimeSpan.FromMilliseconds(1))));
+			Expect("now+90000s")
+				.WhenSerializing(
+					Nest.DateMath.Now.Add(TimeSpan.FromHours(25).Add(TimeSpan.FromMilliseconds(1))));
 
 			Expect("now+1y").WhenSerializing(Nest.DateMath.Now.Add("1y"));
 
@@ -141,17 +147,21 @@ namespace Tests.CommonOptions.DateMath
 			 * ==== Rounding
 			 * Rounding can be controlled using the constructor, and passing a value for rounding
 			 */
-			Expect("now+2s").WhenSerializing(
-				Nest.DateMath.Now.Add(new DateMathTime("2.5s", MidpointRounding.ToEven)));
+			Expect("now+2s")
+				.WhenSerializing(
+					Nest.DateMath.Now.Add(new DateMathTime("2.5s", MidpointRounding.ToEven)));
 
-			Expect("now+3s").WhenSerializing(
-				Nest.DateMath.Now.Add(new DateMathTime("2.5s", MidpointRounding.AwayFromZero)));
+			Expect("now+3s")
+				.WhenSerializing(
+					Nest.DateMath.Now.Add(new DateMathTime("2.5s", MidpointRounding.AwayFromZero)));
 
-			Expect("now+0s").WhenSerializing(
-				Nest.DateMath.Now.Add(new DateMathTime(500, MidpointRounding.ToEven)));
+			Expect("now+0s")
+				.WhenSerializing(
+					Nest.DateMath.Now.Add(new DateMathTime(500, MidpointRounding.ToEven)));
 
-			Expect("now+1s").WhenSerializing(
-				Nest.DateMath.Now.Add(new DateMathTime(500, MidpointRounding.AwayFromZero)));
+			Expect("now+1s")
+				.WhenSerializing(
+					Nest.DateMath.Now.Add(new DateMathTime(500, MidpointRounding.AwayFromZero)));
 		}
 
 		[U] public void EqualityAndComparison()

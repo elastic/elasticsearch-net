@@ -29,7 +29,9 @@ namespace Tests.Framework
 			Self.Return = 200;
 			return this;
 		}
-		public SniffRule SucceedAlways(VirtualCluster cluster = null) => this.Succeeds(TimesHelper.Always, cluster);
-		public SniffRule FailAlways(Union<Exception, int> errorState = null) => this.Fails(TimesHelper.Always, errorState);
+
+		public SniffRule SucceedAlways(VirtualCluster cluster = null) => Succeeds(TimesHelper.Always, cluster);
+
+		public SniffRule FailAlways(Union<Exception, int> errorState = null) => Fails(TimesHelper.Always, errorState);
 	}
 }

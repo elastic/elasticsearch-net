@@ -8,13 +8,13 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.XPack.Graph.Explore
 {
 	[SkipVersion("<2.3.0", "")]
-	public class GraphExploreApiTests : ApiIntegrationTestBase<XPackCluster, IGraphExploreResponse, IGraphExploreRequest, GraphExploreDescriptor<Project>, GraphExploreRequest>
+	public class GraphExploreApiTests
+		: ApiIntegrationTestBase<XPackCluster, IGraphExploreResponse, IGraphExploreRequest, GraphExploreDescriptor<Project>, GraphExploreRequest>
 	{
 		public GraphExploreApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -33,69 +33,76 @@ namespace Tests.XPack.Graph.Explore
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override object ExpectJson { get; } = new {
+		protected override object ExpectJson { get; } = new
+		{
 			query = new { term = new { state = new { value = "VeryActive" } } },
-			vertices = new [] {
+			vertices = new[]
+			{
 				new { field = "name" },
 				new { field = "description" }
 			},
-			connections = new {
-				query = new { match_all = new {} },
-				vertices = new [] {
+			connections = new
+			{
+				query = new { match_all = new { } },
+				vertices = new[]
+				{
 					new { field = "description" }
 				},
-				connections = new {
-					query = new { match_all = new {} },
-					vertices = new [] {
+				connections = new
+				{
+					query = new { match_all = new { } },
+					vertices = new[]
+					{
 						new
 						{
 							field = "name",
 							size = 500,
 							min_doc_count = 20,
 							shard_min_doc_count = 1,
-							include = new [] {
+							include = new[]
+							{
 								new { term = "0", boost = 1.1 }
 							}
 						}
 					}
 				}
 			},
-			controls = new {
+			controls = new
+			{
 				use_significance = true,
 				sample_size = 5
 			}
 		};
 
 		protected override Func<GraphExploreDescriptor<Project>, IGraphExploreRequest> Fluent => d => d
-			.Query(q=>q.Term(p=>p.State, StateOfBeing.VeryActive))
-			.Vertices(v=>v
-				.Vertex(p=>p.Name)
-				.Vertex(p=>p.Description)
+			.Query(q => q.Term(p => p.State, StateOfBeing.VeryActive))
+			.Vertices(v => v
+				.Vertex(p => p.Name)
+				.Vertex(p => p.Description)
 			)
-			.Connections(c=>c
-				.Query(q=>q.MatchAll())
-				.Vertices(v=>v
-					.Vertex(p=>p.Description)
+			.Connections(c => c
+				.Query(q => q.MatchAll())
+				.Vertices(v => v
+					.Vertex(p => p.Description)
 				)
-				.Connections(cc=>cc
-					.Query(q=>q.MatchAll())
-					.Vertices(v=>v
-						.Vertex(p=>p.Name, gv=>gv
+				.Connections(cc => cc
+					.Query(q => q.MatchAll())
+					.Vertices(v => v
+						.Vertex(p => p.Name, gv => gv
 							.MinimumDocumentCount(20)
 							.ShardMinimumDocumentCount(1)
 							.Size(500)
-							.Include(i=>i
+							.Include(i => i
 								.Include("0", 1.1)
 							)
 						)
 					)
 				)
 			)
-			.Controls(c=>c
+			.Controls(c => c
 				.UseSignificance()
 				.SampleSize(5)
-			)
-		;
+			);
 
 		protected override GraphExploreRequest Initializer => new GraphExploreRequest(Index<Project>(), Type<Project>())
 		{
@@ -103,14 +110,14 @@ namespace Tests.XPack.Graph.Explore
 			Vertices = new List<IGraphVertexDefinition>
 			{
 				new GraphVertexDefinition { Field = "name" },
-				new GraphVertexDefinition { Field = Field<Project>(p=>p.Description) }
+				new GraphVertexDefinition { Field = Field<Project>(p => p.Description) }
 			},
 			Connections = new Hop
 			{
 				Query = new MatchAllQuery(),
 				Vertices = new List<GraphVertexDefinition>
 				{
-					new GraphVertexDefinition { Field = Field<Project>(p=>p.Description) }
+					new GraphVertexDefinition { Field = Field<Project>(p => p.Description) }
 				},
 				Connections = new Hop
 				{
@@ -119,16 +126,14 @@ namespace Tests.XPack.Graph.Explore
 					{
 						new GraphVertexDefinition
 						{
-							Field = Field<Project>(p=>p.Name),
+							Field = Field<Project>(p => p.Name),
 							MinimumDocumentCount = 20,
 							ShardMinimumDocumentCount = 1,
 							Size = 500,
-							Include = new [] { new GraphVertexInclude { Term = "0", Boost = 1.1 } }
+							Include = new[] { new GraphVertexInclude { Term = "0", Boost = 1.1 } }
 						}
 					}
-
 				}
-
 			},
 			Controls = new GraphExploreControls
 			{
@@ -147,8 +152,8 @@ namespace Tests.XPack.Graph.Explore
 			response.Connections.Should().OnlyContain(c => c.Weight > 0);
 
 			response.Vertices.Should().NotBeEmpty();
-			response.Vertices.Should().OnlyContain(c=>c.Field != null);
-			response.Vertices.Should().OnlyContain(c => c.Term !=  null);
+			response.Vertices.Should().OnlyContain(c => c.Field != null);
+			response.Vertices.Should().OnlyContain(c => c.Term != null);
 			response.Vertices.Should().Contain(c => c.Depth > 0);
 			response.Vertices.Should().OnlyContain(c => c.Weight > 0);
 		}

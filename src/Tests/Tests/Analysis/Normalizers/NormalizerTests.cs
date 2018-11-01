@@ -13,7 +13,7 @@ namespace Tests.Analysis.Normalizers
 
 			public override INormalizer Initializer => new CustomNormalizer
 			{
-				Filter = new[] {"lowercase", "asciifolding"},
+				Filter = new[] { "lowercase", "asciifolding" },
 			};
 
 			public override FuncTokenizer Fluent => (n, an) => an
@@ -24,9 +24,8 @@ namespace Tests.Analysis.Normalizers
 			public override object Json => new
 			{
 				type = "custom",
-				filter = new[] {"lowercase", "asciifolding"},
+				filter = new[] { "lowercase", "asciifolding" },
 			};
 		}
-
 	}
 }

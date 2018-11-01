@@ -4,16 +4,12 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
-using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.Flush
 {
 	public class FlushApiTests
 		: ApiIntegrationAgainstNewIndexTestBase<IntrusiveOperationCluster, IFlushResponse, IFlushRequest, FlushDescriptor, FlushRequest>
 	{
-
 		public FlushApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(

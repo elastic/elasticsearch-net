@@ -1,5 +1,4 @@
-﻿using System;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -7,12 +6,13 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.License.GetTrialLicenseStatus
 {
 	[SkipVersion("<6.1.0", "Only exists in Elasticsearch 6.1.0+")]
-	public class GetTrialLicenseStatusApiTests : ApiIntegrationTestBase<XPackCluster, IGetTrialLicenseStatusResponse, IGetTrialLicenseStatusRequest, GetTrialLicenseStatusDescriptor, GetTrialLicenseStatusRequest>
+	public class GetTrialLicenseStatusApiTests
+		: ApiIntegrationTestBase<XPackCluster, IGetTrialLicenseStatusResponse, IGetTrialLicenseStatusRequest, GetTrialLicenseStatusDescriptor,
+			GetTrialLicenseStatusRequest>
 	{
 		public GetTrialLicenseStatusApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

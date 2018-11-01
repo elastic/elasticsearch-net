@@ -2,7 +2,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Analysis;
-using Tests.Analysis.Tokenizers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -13,9 +12,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 	[SkipVersion("<5.2.0", "This uses the normalizer feature introduced in 5.2.0")]
 	public class KeywordPropertyTests : PropertyTestsBase
 	{
-		public KeywordPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public KeywordPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
 			.Settings(s => s
@@ -97,7 +94,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 					Store = true,
 					Fields = new Properties
 					{
-						{"foo", new KeywordProperty {IgnoreAbove = 10}}
+						{ "foo", new KeywordProperty { IgnoreAbove = 10 } }
 					}
 				}
 			}

@@ -4,14 +4,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatNodes
 {
-	public class CatNodesApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatNodesRecord>, ICatNodesRequest, CatNodesDescriptor, CatNodesRequest>
+	public class CatNodesApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatNodesRecord>, ICatNodesRequest, CatNodesDescriptor, CatNodesRequest>
 	{
 		public CatNodesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatNodes(f),
 			fluentAsync: (client, f) => client.CatNodesAsync(f),
@@ -24,9 +24,7 @@ namespace Tests.Cat.CatNodes
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/nodes";
 
-		protected override void ExpectResponse(ICatResponse<CatNodesRecord> response)
-		{
+		protected override void ExpectResponse(ICatResponse<CatNodesRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Name));
-		}
 	}
 }

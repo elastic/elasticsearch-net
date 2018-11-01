@@ -10,7 +10,9 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.GetAnomalyRecords
 {
-	public class GetAnomalyRecordsApiTests : MachineLearningIntegrationTestBase<IGetAnomalyRecordsResponse, IGetAnomalyRecordsRequest, GetAnomalyRecordsDescriptor, GetAnomalyRecordsRequest>
+	public class GetAnomalyRecordsApiTests
+		: MachineLearningIntegrationTestBase<IGetAnomalyRecordsResponse, IGetAnomalyRecordsRequest, GetAnomalyRecordsDescriptor,
+			GetAnomalyRecordsRequest>
 	{
 		public GetAnomalyRecordsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

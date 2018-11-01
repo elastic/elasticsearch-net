@@ -5,12 +5,11 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.Scroll.Scroll
 {
-	public class ScrollApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
+	public class ScrollApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
 	{
 		public ScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -44,12 +43,10 @@ namespace Tests.Search.Scroll.Scroll
 			var response = client.Search<Project>(s => s.MatchAll().Scroll(TimeSpan.FromMinutes((1))));
 			if (!response.IsValid)
 				throw new Exception("Scroll setup failed");
+
 			_scrollId = response.ScrollId ?? _scrollId;
 		}
 
-		protected override void OnAfterCall(IElasticClient client)
-		{
-			client.ClearScroll(cs => cs.ScrollId(_scrollId));
-		}
+		protected override void OnAfterCall(IElasticClient client) => client.ClearScroll(cs => cs.ScrollId(_scrollId));
 	}
 }

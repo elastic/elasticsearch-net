@@ -2,14 +2,13 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.QueryDsl.TermLevel.Range
 {
 	public class DateRangeQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public DateRangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public DateRangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -57,8 +56,8 @@ namespace Tests.QueryDsl.TermLevel.Range
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IDateRangeQuery>(q => q.Range as IDateRangeQuery)
 		{
-			q=> q.Field = null,
-			q=>
+			q => q.Field = null,
+			q =>
 			{
 				q.GreaterThan = null;
 				q.GreaterThanOrEqualTo = null;

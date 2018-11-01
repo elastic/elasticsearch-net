@@ -16,10 +16,7 @@ namespace Tests.XPack.MachineLearning.GetJobs
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				PutJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) PutJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -77,10 +74,7 @@ namespace Tests.XPack.MachineLearning.GetJobs
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				PutJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) PutJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(

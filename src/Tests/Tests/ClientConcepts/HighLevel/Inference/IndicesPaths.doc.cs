@@ -37,12 +37,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			Nest.Indices singleIndexFromString = "name";
 			Nest.Indices multipleIndicesFromString = "name1, name2";
-			Nest.Indices multipleIndicesFromStringArray = new [] { "name1", "name2" };
+			Nest.Indices multipleIndicesFromStringArray = new[] { "name1", "name2" };
 			Nest.Indices allFromString = "_all";
 
 			Nest.Indices allWithOthersFromString = "_all, name2"; //<1> `_all` will override any specific index names here
 
-			Nest.Indices singleIndexFromType = typeof(Project); //<2> The `Project` type has been mapped to a specific index name using <<index-name-type-mapping,`.DefaultMappingFor<Project>`>>
+			Nest.Indices
+				singleIndexFromType =
+					typeof(Project); //<2> The `Project` type has been mapped to a specific index name using <<index-name-type-mapping,`.DefaultMappingFor<Project>`>>
 
 			Nest.Indices singleIndexFromIndexName = IndexName.From<Project>();
 
@@ -100,7 +102,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*/
 		[U] public void UsingStaticPropertyField()
 		{
-
 			var client = TestClient.Default;
 
 			var singleString = Index("name1"); // <1> specifying a single index using a string
@@ -109,8 +110,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			ISearchRequest singleStringRequest = new SearchDescriptor<Project>().Index(singleString);
 			ISearchRequest singleTypedRequest = new SearchDescriptor<Project>().Index(singleTyped);
 
-			((IUrlParameter)singleStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1");
-			((IUrlParameter)singleTypedRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("project");
+			((IUrlParameter)singleStringRequest.Index).GetString(Client.ConnectionSettings).Should().Be("name1");
+			((IUrlParameter)singleTypedRequest.Index).GetString(Client.ConnectionSettings).Should().Be("project");
 
 			var invalidSingleString = Index("name1, name2"); //<3> an **invalid** single index name
 		}
@@ -128,14 +129,16 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			ISearchRequest manyStringRequest = new SearchDescriptor<Project>().Index(manyStrings);
 			ISearchRequest manyTypedRequest = new SearchDescriptor<Project>().Index(manyTypes);
 
-			((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
-			((IUrlParameter)manyTypedRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("project,devs"); // <3> The index names here come from the Connection Settings passed to `TestClient`. See the documentation on <<index-name-inference, Index Name Inference>> for more details.
+			((IUrlParameter)manyStringRequest.Index).GetString(Client.ConnectionSettings).Should().Be("name1,name2");
+			((IUrlParameter)manyTypedRequest.Index).GetString(Client.ConnectionSettings)
+				.Should()
+				.Be("project,devs"); // <3> The index names here come from the Connection Settings passed to `TestClient`. See the documentation on <<index-name-inference, Index Name Inference>> for more details.
 
 			manyStringRequest = new SearchDescriptor<Project>().Index(new[] { "name1", "name2" });
-			((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
+			((IUrlParameter)manyStringRequest.Index).GetString(Client.ConnectionSettings).Should().Be("name1,name2");
 
 			manyStringRequest = new SearchDescriptor<Project>().Type(new[] { "name1", "name2" });
-			((IUrlParameter)manyStringRequest.Type).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
+			((IUrlParameter)manyStringRequest.Type).GetString(Client.ConnectionSettings).Should().Be("name1,name2");
 		}
 
 		/**===== All Indices
@@ -156,8 +159,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			ISearchRequest indicesAllRequest = new SearchDescriptor<Project>().Index(indicesAll);
 			ISearchRequest allIndicesRequest = new SearchDescriptor<Project>().Index(allIndices);
 
-			((IUrlParameter)indicesAllRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("_all");
-			((IUrlParameter)allIndicesRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("_all");
+			((IUrlParameter)indicesAllRequest.Index).GetString(Client.ConnectionSettings).Should().Be("_all");
+			((IUrlParameter)allIndicesRequest.Index).GetString(Client.ConnectionSettings).Should().Be("_all");
 		}
 	}
 }

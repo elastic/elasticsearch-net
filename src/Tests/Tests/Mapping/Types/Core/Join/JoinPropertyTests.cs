@@ -1,11 +1,8 @@
 ﻿using System;
-using Elasticsearch.Net;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Mapping.Types.Core.Join
@@ -21,7 +18,8 @@ namespace Tests.Mapping.Types.Core.Join
 				name = new
 				{
 					type = "join",
-					relations = new {
+					relations = new
+					{
 						project = "commits"
 					}
 				}
@@ -37,16 +35,18 @@ namespace Tests.Mapping.Types.Core.Join
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-
-			{"name", new JoinProperty
 			{
-				Relations = new Relations
+				"name", new JoinProperty
 				{
-					{Relation<Project>(), Relation<CommitActivity>()}
+					Relations = new Relations
+					{
+						{ Relation<Project>(), Relation<CommitActivity>() }
+					}
 				}
-			}}
+			}
 		};
 	}
+
 	public class JoinPropertyComplexTests : PropertyTestsBase
 	{
 		public JoinPropertyComplexTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -58,9 +58,10 @@ namespace Tests.Mapping.Types.Core.Join
 				name = new
 				{
 					type = "join",
-					relations = new {
+					relations = new
+					{
 						project = "commits",
-						parent2 = new [] { "child2", "child3" }
+						parent2 = new[] { "child2", "child3" }
 					}
 				}
 			}
@@ -78,14 +79,16 @@ namespace Tests.Mapping.Types.Core.Join
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "name", new JoinProperty
 			{
-				Relations = new Relations
+				"name", new JoinProperty
 				{
-					{ Relation<Project>(), typeof(CommitActivity) },
-					{ "parent2", "child2", "child3" }
+					Relations = new Relations
+					{
+						{ Relation<Project>(), typeof(CommitActivity) },
+						{ "parent2", "child2", "child3" }
+					}
 				}
-			} }
+			}
 		};
 	}
 }

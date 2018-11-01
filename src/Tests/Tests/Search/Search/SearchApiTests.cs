@@ -10,12 +10,11 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.Search
 {
-	public class SearchApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public class SearchApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		public SearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -57,7 +56,6 @@ namespace Tests.Search.Search
 					{
 						value = "Stable"
 					}
-
 				}
 			}
 		};
@@ -72,10 +70,7 @@ namespace Tests.Search.Search
 			var startDates = response.Aggregations.Terms("startDates");
 			startDates.Should().NotBeNull();
 
-			foreach (var document in response.Documents)
-			{
-				document.ShouldAdhereToSourceSerializerWhenSet();
-			}
+			foreach (var document in response.Documents) document.ShouldAdhereToSourceSerializerWhenSet();
 		}
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
@@ -140,30 +135,29 @@ namespace Tests.Search.Search
 					{
 						value = "Stable"
 					}
-
 				}
 			},
 			stored_fields = new[] { "name", "numberOfCommits" }
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-		.From(10)
-		.Size(20)
-		.Query(q => q
-			.MatchAll()
-		)
-		.Aggregations(a => a
-			.Terms("startDates", t => t
-				.Field(p => p.StartedOn)
+			.From(10)
+			.Size(20)
+			.Query(q => q
+				.MatchAll()
 			)
-		)
-		.PostFilter(f => f
-			.Term(p => p.State, StateOfBeing.Stable)
-		)
-		.StoredFields(fs => fs
-			.Field(p => p.Name)
-			.Field(p => p.NumberOfCommits)
-		);
+			.Aggregations(a => a
+				.Terms("startDates", t => t
+					.Field(p => p.StartedOn)
+				)
+			)
+			.PostFilter(f => f
+				.Term(p => p.State, StateOfBeing.Stable)
+			)
+			.StoredFields(fs => fs
+				.Field(p => p.Name)
+				.Field(p => p.NumberOfCommits)
+			);
 
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
 		{
@@ -244,35 +238,32 @@ namespace Tests.Search.Search
 			{
 				Must = new List<QueryContainer>
 				{
-					new QueryStringQuery{ Query = "query" },
-					new QueryStringQuery{ Query = string.Empty },
-					new QueryStringQuery{ Query =  null },
+					new QueryStringQuery { Query = "query" },
+					new QueryStringQuery { Query = string.Empty },
+					new QueryStringQuery { Query = null },
 					new QueryContainer(),
 					null
 				},
 				Should = new List<QueryContainer>
 				{
-					new QueryStringQuery{ Query = "query" },
-					new QueryStringQuery{ Query = string.Empty },
-					new QueryStringQuery{ Query =  null },
+					new QueryStringQuery { Query = "query" },
+					new QueryStringQuery { Query = string.Empty },
+					new QueryStringQuery { Query = null },
 					new QueryContainer(),
 					null
 				},
 				MustNot = new List<QueryContainer>
 				{
-					new QueryStringQuery{ Query = "query" },
-					new QueryStringQuery{ Query = string.Empty },
-					new QueryStringQuery{ Query =  null },
+					new QueryStringQuery { Query = "query" },
+					new QueryStringQuery { Query = string.Empty },
+					new QueryStringQuery { Query = null },
 					new QueryContainer(),
 					null
 				}
 			}
 		};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldBeValid();
-		}
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	}
 
 	public class SearchApiNullQueryContainerTests : SearchApiTests
@@ -300,10 +291,7 @@ namespace Tests.Search.Search
 			}
 		};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldBeValid();
-		}
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	}
 
 	public class SearchApiNullQueriesInQueryContainerTests : SearchApiTests
@@ -349,15 +337,13 @@ namespace Tests.Search.Search
 			}
 		};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldBeValid();
-		}
+		protected override void ExpectResponse(ISearchResponse<Project> response) => response.ShouldBeValid();
 	}
 
 
 	[SkipVersion("<6.2.0", "OpaqueId introduced in 6.2.0")]
-	public class OpaqueIdApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
+	public class OpaqueIdApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		public OpaqueIdApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -386,9 +372,9 @@ namespace Tests.Search.Search
 		protected override void OnBeforeCall(IElasticClient client)
 		{
 			var searchResponse = client.Search<Project>(s => s
-				.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue))
-				.Scroll("10m") // Create a scroll in order to keep the task around.
-            );
+					.RequestConfiguration(r => r.OpaqueId(CallIsolatedValue))
+					.Scroll("10m") // Create a scroll in order to keep the task around.
+			);
 
 			searchResponse.ShouldBeValid();
 		}
@@ -401,10 +387,9 @@ namespace Tests.Search.Search
 			{
 				task.Value.Headers.Should().NotBeNull();
 				if (task.Value.Headers.TryGetValue(RequestData.OpaqueIdHeader, out var opaqueIdValue))
-				{
-					opaqueIdValue.Should().Be(this.CallIsolatedValue,
-						$"OpaqueId header {opaqueIdValue} did not match {this.CallIsolatedValue}");
-				}
+					opaqueIdValue.Should()
+						.Be(CallIsolatedValue,
+							$"OpaqueId header {opaqueIdValue} did not match {CallIsolatedValue}");
 				// TODO: Determine if this is a valid assertion i.e. should all tasks returned have an OpaqueId header?
 //				else
 //				{

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Indices.AliasManagement.AliasExists
@@ -45,10 +42,7 @@ namespace Tests.Indices.AliasManagement.AliasExists
 
 		protected override AliasExistsRequest Initializer => new AliasExistsRequest(Names(CallIsolatedValue + "-alias"));
 
-		protected override void ExpectResponse(IExistsResponse response)
-		{
-			response.Exists.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IExistsResponse response) => response.Exists.Should().BeTrue();
 	}
 
 	public class AliasExistsNotFoundApiTests

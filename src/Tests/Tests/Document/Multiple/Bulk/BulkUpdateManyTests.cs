@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Document.Multiple.Bulk
 {
 	public class BulkUpdateManyTests : ApiTestBase<ReadOnlyCluster, IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
-		private List<Project> Updates = Project.Projects.Take(10).ToList();
+		private readonly List<Project> Updates = Project.Projects.Take(10).ToList();
 
 		public BulkUpdateManyTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Bulk(f),
 			fluentAsync: (client, f) => client.BulkAsync(f),
@@ -46,7 +44,7 @@ namespace Tests.Document.Multiple.Bulk
 		protected override BulkRequest Initializer => new BulkRequest(CallIsolatedValue)
 		{
 			Operations = Updates
-				.Select(u=> new BulkUpdateOperation<Project, Project>(u) { Script = new InlineScript("_source.counter++") })
+				.Select(u => new BulkUpdateOperation<Project, Project>(u) { Script = new InlineScript("_source.counter++") })
 				.ToList<IBulkOperation>()
 		};
 	}

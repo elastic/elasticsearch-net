@@ -6,18 +6,19 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.GetFieldMapping
 {
 	public class GetFieldMappingApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>, GetFieldMappingRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>,
+			GetFieldMappingRequest>
 	{
 		private static readonly Fields Fields = Fields<Project>(p => p.Name, p => p.LeadDeveloper.IpAddress);
 		private static readonly Field NameField = Field<Project>(p => p.Name);
 
 		public GetFieldMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetFieldMapping<Project>(Fields),
 			fluentAsync: (client, f) => client.GetFieldMappingAsync<Project>(Fields),
@@ -69,7 +70,7 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 			fieldMapping = response.MappingFor<Project>(NameField);
 			AssertNameFieldMapping(fieldMapping);
 
-			fieldMapping = response.MappingFor<Project>(p=>p.Name);
+			fieldMapping = response.MappingFor<Project>(p => p.Name);
 			AssertNameFieldMapping(fieldMapping);
 		}
 

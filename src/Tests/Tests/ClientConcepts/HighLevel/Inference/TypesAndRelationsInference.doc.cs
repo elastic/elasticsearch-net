@@ -1,11 +1,9 @@
-﻿using FluentAssertions;
-using Nest;
-using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
+using Nest;
 using Tests.Domain;
 using Tests.Framework;
-using Xunit;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
 
@@ -90,7 +88,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U] public void OverridingDefaultTypeNameInferrer()
 		{
 			var settings = new ConnectionSettings()
-				.DefaultTypeNameInferrer(t=>t.Name.ToLower() + "-suffix");
+				.DefaultTypeNameInferrer(t => t.Name.ToLower() + "-suffix");
 			var resolver = new TypeNameResolver(settings);
 			var type = resolver.Resolve<Project>();
 			type.Should().Be("project-suffix");
@@ -154,10 +152,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		//hide
-		[U] public void RoundTripSerializationPreservesCluster()
-		{
-			Expect("project").WhenSerializing(Relation<Project>());
-		}
+		[U] public void RoundTripSerializationPreservesCluster() => Expect("project").WhenSerializing(Relation<Project>());
 
 		//hide
 		[U] public void EqualsValidation()
@@ -173,8 +168,8 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Relation<Project>().Should().NotBe(Relation<Developer>());
 
 
-			Nest.Types types1 = "foo,bar";
-			Nest.Types types2 = "bar,foo";
+			Types types1 = "foo,bar";
+			Types types2 = "bar,foo";
 			types1.Should().Be(types2);
 			(types1 == types2).Should().BeTrue();
 		}
@@ -189,7 +184,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			Relation<Project>().GetHashCode().Should().Be(Relation<Project>().GetHashCode()).And.NotBe(0);
 			Relation<Project>().GetHashCode().Should().NotBe(Relation<Developer>().GetHashCode()).And.NotBe(0);
-
 		}
 	}
 }

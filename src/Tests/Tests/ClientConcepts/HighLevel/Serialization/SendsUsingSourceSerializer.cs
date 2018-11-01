@@ -9,27 +9,25 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Tests.Core.Client.Serializers;
 using Tests.Domain;
-using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Serialization
 {
 	public class SendsUsingSourceSerializer
 	{
-
 		public class ADocument
 		{
 			public int Id { get; set; } = 1;
 			public string Name { get; set; }
 		}
 
-		private readonly object DefaultSerialized = new {id = 1};
+		private readonly object DefaultSerialized = new { id = 1 };
 
 		private readonly Dictionary<string, object> IncludesNullAndType = new Dictionary<string, object>
 		{
-			{"$type", $"{typeof(ADocument).FullName}, Tests"},
-			{"name", null},
-			{"id", 1},
+			{ "$type", $"{typeof(ADocument).FullName}, Tests" },
+			{ "name", null },
+			{ "id", 1 },
 		};
 
 		private class CustomSettingsSerializerBase : TestSourceSerializerBase
@@ -37,18 +35,16 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			public CustomSettingsSerializerBase(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
 				: base(builtinSerializer, connectionSettings) { }
 
-			protected override JsonSerializerSettings CreateJsonSerializerSettings()
+			protected override JsonSerializerSettings CreateJsonSerializerSettings() => new JsonSerializerSettings
 			{
-				return new JsonSerializerSettings
-				{
-					TypeNameHandling = TypeNameHandling.All,
-					NullValueHandling = NullValueHandling.Include
-				};
-			}
+				TypeNameHandling = TypeNameHandling.All,
+				NullValueHandling = NullValueHandling.Include
+			};
 
 			protected override IEnumerable<JsonConverter> CreateJsonConverters()
 			{
 				foreach (var c in base.CreateJsonConverters()) yield return c;
+
 				yield return new StringEnumConverter();
 			}
 		}
@@ -69,35 +65,24 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			SerializesSourceSerializer(o, withSourceSerializer);
 		}
 
-		private static void SerializesSourceSerializer<T>(T o, object withSourceSerializer)
-		{
+		private static void SerializesSourceSerializer<T>(T o, object withSourceSerializer) =>
 			WithSourceSerializer((s, c) => new CustomSettingsSerializerBase(s, c))
 				.Expect(withSourceSerializer, preserveNullInExpected: true)
 				.WhenSerializing(o);
-		}
 
-		private static void SerializesDefault<T>(T o, object usingDefaults)
-		{
-			Expect(usingDefaults).WhenSerializing(o);
-		}
+		private static void SerializesDefault<T>(T o, object usingDefaults) => Expect(usingDefaults).WhenSerializing(o);
 
-		[U] public void IndexRequest()
-		{
-			CanAlterSource(
-				r => r.IndexDocument(new ADocument()),
-				usingDefaults: DefaultSerialized,
-				withSourceSerializer: IncludesNullAndType
-			);
-		}
+		[U] public void IndexRequest() => CanAlterSource(
+			r => r.IndexDocument(new ADocument()),
+			usingDefaults: DefaultSerialized,
+			withSourceSerializer: IncludesNullAndType
+		);
 
-		[U] public void CreateRequest()
-		{
-			CanAlterSource(
-				r => r.CreateDocument(new ADocument()),
-				usingDefaults: DefaultSerialized,
-				withSourceSerializer: IncludesNullAndType
-			);
-		}
+		[U] public void CreateRequest() => CanAlterSource(
+			r => r.CreateDocument(new ADocument()),
+			usingDefaults: DefaultSerialized,
+			withSourceSerializer: IncludesNullAndType
+		);
 
 		[U] public void UpdateRequest()
 		{
@@ -127,20 +112,20 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 				r => r.TermVectors<ADocument>(t => t
 					.Document(doc)
 				),
-				usingDefaults: new {doc = DefaultSerialized},
-				withSourceSerializer: new {doc = IncludesNullAndType}
+				usingDefaults: new { doc = DefaultSerialized },
+				withSourceSerializer: new { doc = IncludesNullAndType }
 			);
 		}
 
 		private static IEnumerable<object> ExpectBulk(object document)
 		{
-			yield return new {delete = new {_index = "default-index", _type = "adocument", _id = "1"}};
-			yield return new {index = new {_index = "default-index", _type = "adocument", _id = "1"}};
+			yield return new { delete = new { _index = "default-index", _type = "adocument", _id = "1" } };
+			yield return new { index = new { _index = "default-index", _type = "adocument", _id = "1" } };
 			yield return document;
-			yield return new {create = new {_index = "default-index", _type = "adocument", _id = "1"}};
+			yield return new { create = new { _index = "default-index", _type = "adocument", _id = "1" } };
 			yield return document;
-			yield return new {update = new {_index = "default-index", _type = "adocument", _id = "1"}};
-			yield return new {doc = document, upsert = document};
+			yield return new { update = new { _index = "default-index", _type = "adocument", _id = "1" } };
+			yield return new { doc = document, upsert = document };
 		}
 
 		[U] public void BulkRequest()
@@ -158,17 +143,14 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 			);
 		}
 
-		public object ExpectMultiTermVectors(object document)
+		public object ExpectMultiTermVectors(object document) => new
 		{
-			return new
+			docs = new object[]
 			{
-				docs = new object[]
-				{
-					new {_index = "default-index", _type = "adocument", doc = document},
-					new {_index = "default-index", _type = "adocument", doc = document}
-				}
-			};
-		}
+				new { _index = "default-index", _type = "adocument", doc = document },
+				new { _index = "default-index", _type = "adocument", doc = document }
+			}
+		};
 
 		[U] public void MultiTermVectorsRequest()
 		{
@@ -186,37 +168,35 @@ namespace Tests.ClientConcepts.HighLevel.Serialization
 		public enum SomeEnum
 		{
 			Value,
+
 			[EnumMember(Value = "different")]
 			AnotherValue
 		}
 
 		[U] public void TermQuery() =>
-			SerializesEnumValue(new TermQuery { Field = Infer.Field<Project>(p=>p.Name), Value = SomeEnum.AnotherValue});
+			SerializesEnumValue(new TermQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void TermsQuery() =>
-			Serializes(new TermsQuery { Field = Infer.Field<Project>(p=>p.Name), Terms = new object[] { SomeEnum.AnotherValue }},
-				usingDefaults: new {name =  new [] {1}},
-				withSourceSerializer: new {name = new [] {"different"}}
+			Serializes(new TermsQuery { Field = Infer.Field<Project>(p => p.Name), Terms = new object[] { SomeEnum.AnotherValue } },
+				usingDefaults: new { name = new[] { 1 } },
+				withSourceSerializer: new { name = new[] { "different" } }
 			);
 
 		[U] public void WildcardQuery() =>
-			SerializesEnumValue(new WildcardQuery {Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue});
+			SerializesEnumValue(new WildcardQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void PrefixQuery() =>
-			SerializesEnumValue(new PrefixQuery { Field = Infer.Field<Project>(p=>p.Name), Value = SomeEnum.AnotherValue});
+			SerializesEnumValue(new PrefixQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void SpanTermQueryInitializer() =>
-			SerializesEnumValue(new SpanTermQuery { Field = Infer.Field<Project>(p=>p.Name), Value = SomeEnum.AnotherValue});
+			SerializesEnumValue(new SpanTermQuery { Field = Infer.Field<Project>(p => p.Name), Value = SomeEnum.AnotherValue });
 
 		[U] public void SpanTermQueryFluent() =>
-			SerializesEnumValue<ISpanTermQuery>(new SpanTermQueryDescriptor<Project>().Field(p=>p.Name).Value(SomeEnum.AnotherValue));
+			SerializesEnumValue<ISpanTermQuery>(new SpanTermQueryDescriptor<Project>().Field(p => p.Name).Value(SomeEnum.AnotherValue));
 
-		private static void SerializesEnumValue<T>(T query)
-		{
-			Serializes(query,
-				usingDefaults: new {name = new {value = 1}},
-				withSourceSerializer: new {name = new {value = "different"}}
-			);
-		}
+		private static void SerializesEnumValue<T>(T query) => Serializes(query,
+			usingDefaults: new { name = new { value = 1 } },
+			withSourceSerializer: new { name = new { value = "different" } }
+		);
 	}
 }

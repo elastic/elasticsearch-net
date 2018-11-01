@@ -6,14 +6,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatIndices
 {
-	public class CatIndicesApiTests : ApiIntegrationTestBase<ReadOnlyCluster,ICatResponse<CatIndicesRecord>, ICatIndicesRequest, CatIndicesDescriptor, CatIndicesRequest>
+	public class CatIndicesApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatIndicesRecord>, ICatIndicesRequest, CatIndicesDescriptor, CatIndicesRequest>
 	{
 		public CatIndicesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatIndices(),
 			fluentAsync: (client, f) => client.CatIndicesAsync(),
@@ -26,15 +26,15 @@ namespace Tests.Cat.CatIndices
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/indices";
 
-		protected override void ExpectResponse(ICatResponse<CatIndicesRecord> response)
-		{
+		protected override void ExpectResponse(ICatResponse<CatIndicesRecord> response) =>
 			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Status));
-		}
 	}
 
-	public class CatIndicesApiNotFoundWithSecurityTests : ApiIntegrationTestBase<XPackCluster,ICatResponse<CatIndicesRecord>, ICatIndicesRequest, CatIndicesDescriptor, CatIndicesRequest>
+	public class CatIndicesApiNotFoundWithSecurityTests
+		: ApiIntegrationTestBase<XPackCluster, ICatResponse<CatIndicesRecord>, ICatIndicesRequest, CatIndicesDescriptor, CatIndicesRequest>
 	{
 		public CatIndicesApiNotFoundWithSecurityTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatIndices(f),
 			fluentAsync: (client, f) => client.CatIndicesAsync(f),
@@ -49,7 +49,7 @@ namespace Tests.Cat.CatIndices
 
 		protected override Func<CatIndicesDescriptor, ICatIndicesRequest> Fluent => f => f
 			.Index("doesnot-exist-*")
-			.RequestConfiguration(r=>r.BasicAuthentication(ClusterAuthentication.User.Username, ClusterAuthentication.User.Password));
+			.RequestConfiguration(r => r.BasicAuthentication(ClusterAuthentication.User.Username, ClusterAuthentication.User.Password));
 
 		protected override CatIndicesRequest Initializer => new CatIndicesRequest("doesnot-exist-*")
 		{

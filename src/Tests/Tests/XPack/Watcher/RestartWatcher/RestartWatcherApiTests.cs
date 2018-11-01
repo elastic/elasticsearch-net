@@ -5,11 +5,12 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Watcher.RestartWatcher
 {
-	public class RestartWatcherApiTests : ApiIntegrationTestBase<WatcherStateCluster, IRestartWatcherResponse, IRestartWatcherRequest, RestartWatcherDescriptor, RestartWatcherRequest>
+	public class RestartWatcherApiTests
+		: ApiIntegrationTestBase<WatcherStateCluster, IRestartWatcherResponse, IRestartWatcherRequest, RestartWatcherDescriptor, RestartWatcherRequest
+		>
 	{
 		public RestartWatcherApiTests(WatcherStateCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -32,9 +33,6 @@ namespace Tests.XPack.Watcher.RestartWatcher
 
 		protected override RestartWatcherRequest Initializer => new RestartWatcherRequest();
 
-		protected override void ExpectResponse(IRestartWatcherResponse response)
-		{
-			response.Acknowledged.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IRestartWatcherResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

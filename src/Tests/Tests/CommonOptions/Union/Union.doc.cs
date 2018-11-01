@@ -1,9 +1,7 @@
 ﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
 using Tests.Core.Client;
-using Tests.Framework;
 
 namespace Tests.CommonOptions.Union
 {
@@ -23,7 +21,7 @@ namespace Tests.CommonOptions.Union
 	 */
 	public class Union
 	{
-		private IElasticsearchSerializer serializer = TestClient.DefaultInMemoryClient.RequestResponseSerializer;
+		private readonly IElasticsearchSerializer serializer = TestClient.DefaultInMemoryClient.RequestResponseSerializer;
 
 		/**
 		 * ==== Implicit conversion
@@ -37,7 +35,7 @@ namespace Tests.CommonOptions.Union
 
 			Union<bool, ISourceFilter> sourceFilterInterface = new SourceFilter
 			{
-				Includes = new [] { "foo.*" }
+				Includes = new[] { "foo.*" }
 			};
 
 			// hide
@@ -63,7 +61,7 @@ namespace Tests.CommonOptions.Union
 
 			var sourceFilterInterface = new Union<bool, ISourceFilter>(new SourceFilter
 			{
-				Includes = new [] { "foo.*" }
+				Includes = new[] { "foo.*" }
 			});
 
 			/**

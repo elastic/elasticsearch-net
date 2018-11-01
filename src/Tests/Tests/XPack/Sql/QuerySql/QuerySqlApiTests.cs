@@ -16,7 +16,7 @@ namespace Tests.XPack.Sql.QuerySql
 	{
 		public QuerySqlApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => this.Calls(
+		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.QuerySql(f),
 			fluentAsync: (client, f) => client.QuerySqlAsync(f),
 			request: (client, r) => client.QuerySql(r),
@@ -35,15 +35,15 @@ FROM {TestValueHelper.ProjectsIndex}
 WHERE type = '{Project.TypeName}'
 ORDER BY numberOfContributors DESC";
 
-		protected override object ExpectJson { get; } = new {
+		protected override object ExpectJson { get; } = new
+		{
 			query = SqlQuery,
 			fetch_size = 5
 		};
 
 		protected override Func<QuerySqlDescriptor, IQuerySqlRequest> Fluent => d => d
 			.Query(SqlQuery)
-			.FetchSize(5)
-		;
+			.FetchSize(5);
 
 		protected override QuerySqlRequest Initializer => new QuerySqlRequest()
 		{
@@ -61,6 +61,7 @@ ORDER BY numberOfContributors DESC";
 				c.Name.Should().NotBeNullOrWhiteSpace("column name");
 				c.Type.Should().NotBeNullOrWhiteSpace("column type");
 			}
+
 			foreach (var r in response.Rows)
 			{
 				r.Should().NotBeNull().And.HaveCount(4);

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using static Elasticsearch.Net.AuditEvent;
 using Tests.Framework;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 {
@@ -17,7 +17,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		[U]
 		public async Task RespectsRequestTimeoutOverride()
 		{
-
 			/** we set up a 10 node cluster with a global time out of 20 seconds.
 			* Each call on a node takes 10 seconds. So we can only try this call on 2 nodes
 			* before the max request time out kills the client call.
@@ -31,7 +30,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			);
 
 			audit = await audit.TraceCalls(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ MaxTimeoutReached }
@@ -51,7 +51,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 					{ HealthyResponse, 9209 },
 				}
 			);
-
 		}
 
 		/**[float]
@@ -84,7 +83,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 				* The first call uses the configured global settings, request times out after 10 seconds and ping
 				* calls always take 20, so we should see a single ping failure
 				*/
-				new ClientCall {
+				new ClientCall
+				{
 					{ PingFailure, 9200 },
 					{ MaxTimeoutReached }
 				},
@@ -102,7 +102,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 					{ MaxTimeoutReached }
 				}
 			);
-
 		}
 	}
 }

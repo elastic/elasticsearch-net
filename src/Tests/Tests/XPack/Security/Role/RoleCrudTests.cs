@@ -8,8 +8,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.XPack.Security.Role
 {
@@ -40,19 +38,20 @@ namespace Tests.XPack.Security.Role
 				{
 					FieldSecurity = new FieldSecurity
 					{
-						Grant = Infer.Fields<Project>(p=>p.Name).And<Project>(p=>p.Description),
+						Grant = Infer.Fields<Project>(p => p.Name).And<Project>(p => p.Description),
 					},
 					Names = Infer.Indices<Project>(),
-					Privileges = new [] { "all" },
+					Privileges = new[] { "all" },
 					Query = new MatchAllQuery()
 				}
 			}
 		};
+
 		protected IPutRoleRequest CreateFluent(string role, PutRoleDescriptor d) => d
 			.Cluster("all")
 			.Indices(i => i
 				.Add<Project>(ii => ii
-					.FieldSecurity(fs=>fs
+					.FieldSecurity(fs => fs
 						.Grant(f => f
 							.Field(p => p.Name)
 							.Field(p => p.Description)
@@ -74,6 +73,7 @@ namespace Tests.XPack.Security.Role
 		);
 
 		protected GetRoleRequest ReadInitializer(string role) => new GetRoleRequest(CreateRoleName(role));
+
 		protected IGetRoleRequest ReadFluent(string role, GetRoleDescriptor d) => d.Name(CreateRoleName(role));
 
 		protected override LazyResponses Update() => Calls<PutRoleDescriptor, PutRoleRequest, IPutRoleRequest, IPutRoleResponse>(
@@ -95,20 +95,21 @@ namespace Tests.XPack.Security.Role
 				{
 					FieldSecurity = new FieldSecurity
 					{
-						Grant =Infer.Fields<Project>(p=>p.Name).And<Project>(p=>p.Description)
+						Grant = Infer.Fields<Project>(p => p.Name).And<Project>(p => p.Description)
 					},
 					Names = Infer.Indices<Project>(),
-					Privileges = new [] { "all" },
+					Privileges = new[] { "all" },
 					Query = new MatchAllQuery()
 				}
 			}
 		};
+
 		protected IPutRoleRequest UpdateFluent(string role, PutRoleDescriptor d) => d
 			.RunAs("user")
 			.Cluster("all")
 			.Indices(i => i
 				.Add<Project>(ii => ii
-					.FieldSecurity(fs=>fs
+					.FieldSecurity(fs => fs
 						.Grant(f => f
 							.Field(p => p.Name)
 							.Field(p => p.Description)
@@ -130,6 +131,7 @@ namespace Tests.XPack.Security.Role
 		);
 
 		protected DeleteRoleRequest DeleteInitializer(string role) => new DeleteRoleRequest(CreateRoleName(role));
+
 		protected IDeleteRoleRequest DeleteFluent(string role, DeleteRoleDescriptor d) => d;
 
 		protected override void ExpectAfterCreate(IGetRoleResponse response)
@@ -149,6 +151,7 @@ namespace Tests.XPack.Security.Role
 			var q = indexPrivilege.Query as IQueryContainer;
 			q.MatchAll.Should().NotBeNull();
 		}
+
 		protected override void ExpectAfterUpdate(IGetRoleResponse response)
 		{
 			response.Roles.Should().NotBeEmpty();

@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.ReverseNested
@@ -87,7 +85,7 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 			tags.Should().NotBeNull();
 			var tagNames = tags.Terms("tag_names");
 			tagNames.Should().NotBeNull();
-			foreach(var tagName in tagNames.Buckets)
+			foreach (var tagName in tagNames.Buckets)
 			{
 				tagName.Key.Should().NotBeNullOrEmpty();
 				tagName.DocCount.Should().BeGreaterThan(0);
@@ -95,7 +93,7 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 				tagsToProjects.Should().NotBeNull();
 				var topProjectsPerTag = tagsToProjects.Terms("top_projects_per_tag");
 				topProjectsPerTag.Should().NotBeNull();
-				foreach(var topProject in topProjectsPerTag.Buckets)
+				foreach (var topProject in topProjectsPerTag.Buckets)
 				{
 					topProject.Key.Should().NotBeNullOrEmpty();
 					topProject.DocCount.Should().BeGreaterThan(0);

@@ -11,17 +11,17 @@ namespace Tests.Cat.CatAliases
 		[U] public override async Task Urls()
 		{
 			await GET("/_cat/aliases")
-				.Fluent(c => c.CatAliases())
-				.Request(c => c.CatAliases(new CatAliasesRequest()))
-				.FluentAsync(c => c.CatAliasesAsync())
-				.RequestAsync(c => c.CatAliasesAsync(new CatAliasesRequest()))
+					.Fluent(c => c.CatAliases())
+					.Request(c => c.CatAliases(new CatAliasesRequest()))
+					.FluentAsync(c => c.CatAliasesAsync())
+					.RequestAsync(c => c.CatAliasesAsync(new CatAliasesRequest()))
 				;
 
 			await GET("/_cat/aliases/foo")
-				.Fluent(c => c.CatAliases(a => a.Name("foo")))
-				.Request(c => c.CatAliases(new CatAliasesRequest("foo")))
-				.FluentAsync(c => c.CatAliasesAsync(a => a.Name("foo")))
-				.RequestAsync(c => c.CatAliasesAsync(new CatAliasesRequest("foo")))
+					.Fluent(c => c.CatAliases(a => a.Name("foo")))
+					.Request(c => c.CatAliases(new CatAliasesRequest("foo")))
+					.FluentAsync(c => c.CatAliasesAsync(a => a.Name("foo")))
+					.RequestAsync(c => c.CatAliasesAsync(new CatAliasesRequest("foo")))
 				;
 		}
 	}

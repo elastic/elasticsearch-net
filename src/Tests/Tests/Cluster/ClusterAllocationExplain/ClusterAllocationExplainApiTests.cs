@@ -6,11 +6,12 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Cluster.ClusterAllocationExplain
 {
-	public class ClusterAllocationExplainApiTests : ApiIntegrationTestBase<UnbalancedCluster, IClusterAllocationExplainResponse, IClusterAllocationExplainRequest, ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequest>
+	public class ClusterAllocationExplainApiTests
+		: ApiIntegrationTestBase<UnbalancedCluster, IClusterAllocationExplainResponse, IClusterAllocationExplainRequest,
+			ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequest>
 	{
 		public ClusterAllocationExplainApiTests(UnbalancedCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -60,7 +61,7 @@ namespace Tests.Cluster.ClusterAllocationExplain
 			response.CanRebalanceCluster.Should().NotBeNull();
 			response.CanRebalanceClusterDecisions.Should().NotBeNullOrEmpty();
 
-			foreach( var decision in response.CanRebalanceClusterDecisions)
+			foreach (var decision in response.CanRebalanceClusterDecisions)
 			{
 				decision.Decider.Should().NotBeNullOrEmpty();
 				decision.Explanation.Should().NotBeNullOrEmpty();

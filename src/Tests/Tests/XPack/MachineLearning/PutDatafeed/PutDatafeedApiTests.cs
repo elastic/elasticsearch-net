@@ -10,10 +10,11 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.PutDatafeed
 {
-	public class PutDatafeedApiTests : MachineLearningIntegrationTestBase<IPutDatafeedResponse,
-		IPutDatafeedRequest, PutDatafeedDescriptor<Metric>, PutDatafeedRequest>
+	public class PutDatafeedApiTests
+		: MachineLearningIntegrationTestBase<IPutDatafeedResponse,
+			IPutDatafeedRequest, PutDatafeedDescriptor<Metric>, PutDatafeedRequest>
 	{
-		public PutDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public PutDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.PutDatafeed(CallIsolatedValue, f),
@@ -24,10 +25,7 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				PutJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) PutJob(client, callUniqueValue.Value);
 		}
 
 		protected override bool ExpectIsValid => true;
@@ -35,6 +33,7 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}";
 		protected override bool SupportsDeserialization => false;
+
 		protected override PutDatafeedDescriptor<Metric> NewDescriptor() => new PutDatafeedDescriptor<Metric>(CallIsolatedValue);
 
 		protected override object ExpectJson => new
@@ -43,9 +42,9 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 			job_id = CallIsolatedValue,
 			query = new
 			{
-				match_all = new {}
+				match_all = new { }
 			},
-			types = new [] { "metric" }
+			types = new[] { "metric" }
 		};
 
 		protected override Func<PutDatafeedDescriptor<Metric>, IPutDatafeedRequest> Fluent => f => f

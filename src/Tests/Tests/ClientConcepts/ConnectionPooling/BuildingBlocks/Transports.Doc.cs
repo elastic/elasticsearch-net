@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
-using System.Threading;
 using Tests.Domain;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
@@ -33,7 +32,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var inMemoryTransport = new Transport<ConnectionSettings>(
-                new ConnectionSettings(connectionPool, new InMemoryConnection()));
+				new ConnectionSettings(connectionPool, new InMemoryConnection()));
 
 			/**
 			* The only two methods on `ITransport` are `Request()` and `RequestAsync()`; the default `ITransport` implementation is responsible for introducing

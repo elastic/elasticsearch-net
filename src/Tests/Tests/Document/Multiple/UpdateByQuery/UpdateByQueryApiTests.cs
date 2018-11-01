@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -8,14 +7,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.UpdateByQuery
 {
 	[SkipVersion("<2.3.0", "")]
-	public class UpdateByQueryApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IUpdateByQueryResponse, IUpdateByQueryRequest, UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
+	public class UpdateByQueryApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IUpdateByQueryResponse, IUpdateByQueryRequest,
+			UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
 	{
 		public class Test
 		{
@@ -29,7 +28,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				this.Client.CreateIndex(index, c => c
+				Client.CreateIndex(index, c => c
 					.Mappings(m => m
 						.Map<Test>(map => map
 							.Dynamic(false)
@@ -39,9 +38,9 @@ namespace Tests.Document.Multiple.UpdateByQuery
 						)
 					)
 				);
-				this.Client.Index(new Test { Text = "words words", Flag = "bar" }, i => i.Index(index).Refresh(Refresh.True));
-				this.Client.Index(new Test { Text = "words words", Flag = "foo" }, i => i.Index(index).Refresh(Refresh.True));
-				this.Client.Map<Test>(m => m
+				Client.Index(new Test { Text = "words words", Flag = "bar" }, i => i.Index(index).Refresh(Refresh.True));
+				Client.Index(new Test { Text = "words words", Flag = "foo" }, i => i.Index(index).Refresh(Refresh.True));
+				Client.Map<Test>(m => m
 					.Index(index)
 					.Properties(props => props
 						.Text(s => s.Name(p => p.Text))
@@ -49,16 +48,18 @@ namespace Tests.Document.Multiple.UpdateByQuery
 					)
 				);
 
-				var searchResults = this.SearchFlags(index);
+				var searchResults = SearchFlags(index);
 				searchResults.Total.Should().Be(0);
 			}
 		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.UpdateByQuery(f),
 			fluentAsync: (client, f) => client.UpdateByQueryAsync(f),
 			request: (client, r) => client.UpdateByQuery(r),
 			requestAsync: (client, r) => client.UpdateByQueryAsync(r)
 		);
+
 		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
 
 		protected override bool ExpectIsValid => true;
@@ -75,7 +76,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
-			.Query(q=>q.MatchAll())
+			.Query(q => q.MatchAll())
 			.Refresh()
 			.Conflicts(Conflicts.Proceed);
 
@@ -87,7 +88,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		};
 
 		private ISearchResponse<Test> SearchFlags(string index) =>
-			this.Client.Search<Test>(s => s
+			Client.Search<Test>(s => s
 				.Index(index)
 				.Query(q => q.Match(m => m.Field(p => p.Flag).Query("foo")))
 			);
@@ -100,7 +101,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			response.Updated.Should().Be(2);
 			response.Batches.Should().Be(1);
 
-			var searchResponse = this.SearchFlags(CallIsolatedValue);
+			var searchResponse = SearchFlags(CallIsolatedValue);
 			searchResponse.Total.Should().Be(1);
 		}
 	}
@@ -113,7 +114,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?wait_for_completion=false&conflicts=proceed";
 
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
-			.Query(q=>q.MatchAll())
+			.Query(q => q.MatchAll())
 			.Index(CallIsolatedValue)
 			.WaitForCompletion(false)
 			.Conflicts(Conflicts.Proceed);
@@ -143,21 +144,23 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		{
 			foreach (var index in values.Values)
 			{
-				this.Client.CreateIndex(index, c => c
+				Client.CreateIndex(index, c => c
 					.Settings(s => s
 						.RefreshInterval(-1)
 					)
 				);
-				this.Client.Index(new Test { Text = "test1", Flag = "bar" }, i => i.Index(index).Id(1).Refresh(Refresh.True));
-				this.Client.Index(new Test { Text = "test2", Flag = "bar" }, i => i.Index(index).Id(1));
+				Client.Index(new Test { Text = "test1", Flag = "bar" }, i => i.Index(index).Id(1).Refresh(Refresh.True));
+				Client.Index(new Test { Text = "test2", Flag = "bar" }, i => i.Index(index).Id(1));
 			}
 		}
-		private static string _script = "ctx._source.text = 'x'";
+
+		private static readonly string _script = "ctx._source.text = 'x'";
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 409;
 
 		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query";
+
 		protected override object ExpectJson { get; } =
 			new
 			{
@@ -168,8 +171,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Query(q => q.Match(m => m.Field(p => p.Flag).Query("bar")))
-			.Script(ss => ss.Source(_script))
-			;
+			.Script(ss => ss.Source(_script));
 
 		protected override UpdateByQueryRequest Initializer => new UpdateByQueryRequest(CallIsolatedValue, Type<Test>())
 		{

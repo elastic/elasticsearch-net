@@ -5,12 +5,12 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.SearchShards
 {
-	public class SearchShardsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchShardsResponse, ISearchShardsRequest, SearchShardsDescriptor<Project>, SearchShardsRequest<Project>>
+	public class SearchShardsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchShardsResponse, ISearchShardsRequest, SearchShardsDescriptor<Project>,
+			SearchShardsRequest<Project>>
 	{
 		public SearchShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

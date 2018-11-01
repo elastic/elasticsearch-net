@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Tests.Core.Extensions;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
@@ -11,7 +10,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void Eq()
 		{
 			Nest.Indices types = "foo,bar";
-			Nest.Indices[] equal = {"foo,bar", "bar,foo", "foo,  bar", "bar,  foo   "};
+			Nest.Indices[] equal = { "foo,bar", "bar,foo", "foo,  bar", "bar,  foo   " };
 			foreach (var t in equal)
 			{
 				(t == types).ShouldBeTrue(t);
@@ -25,7 +24,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void NotEq()
 		{
 			Nest.Indices types = "foo,bar";
-			Nest.Indices[] notEqual = {"foo,bar,x", "foo", typeof(Project)};
+			Nest.Indices[] notEqual = { "foo,bar,x", "foo", typeof(Project) };
 			foreach (var t in notEqual)
 			{
 				(t != types).ShouldBeTrue(t);
@@ -44,6 +43,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			Nest.Indices t1 = typeof(Project), t2 = typeof(CommitActivity);
 			(t1 != t2).ShouldBeTrue(t2);
 		}
+
 		[U] public void Null()
 		{
 			Nest.Indices value = typeof(Project);

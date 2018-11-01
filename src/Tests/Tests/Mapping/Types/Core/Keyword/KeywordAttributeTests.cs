@@ -19,9 +19,9 @@ namespace Tests.Mapping.Types.Core.Keyword
 		[Keyword]
 		public string Minimal { get; set; }
 
-        public char Char { get; set; }
+		public char Char { get; set; }
 
-        public Guid Guid { get; set; }
+		public Guid Guid { get; set; }
 	}
 
 	public class KeywordAttributeTests : AttributeTestsBase<KeywordTest>

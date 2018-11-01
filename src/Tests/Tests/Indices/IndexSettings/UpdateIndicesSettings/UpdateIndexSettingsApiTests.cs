@@ -5,11 +5,12 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 {
-	public class UpdateIndexSettingsApiTests : ApiIntegrationTestBase<WritableCluster, IUpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest>
+	public class UpdateIndexSettingsApiTests
+		: ApiIntegrationTestBase<WritableCluster, IUpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor,
+			UpdateIndexSettingsRequest>
 	{
 		public UpdateIndexSettingsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -21,7 +22,7 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 				var createIndexResponse = client.CreateIndex(index);
 
 				if (!createIndexResponse.IsValid)
-					throw new Exception($"Invalid response when setting up index for integration test {this.GetType().Name}");
+					throw new Exception($"Invalid response when setting up index for integration test {GetType().Name}");
 			}
 		}
 
@@ -66,7 +67,9 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 		};
 	}
 
-	public class UpdateIndexSettingsRefreshIntervalNullApiTests : ApiIntegrationTestBase<WritableCluster, IUpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest>
+	public class UpdateIndexSettingsRefreshIntervalNullApiTests
+		: ApiIntegrationTestBase<WritableCluster, IUpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor,
+			UpdateIndexSettingsRequest>
 	{
 		public UpdateIndexSettingsRefreshIntervalNullApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -78,7 +81,7 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 				var createIndexResponse = client.CreateIndex(index);
 
 				if (!createIndexResponse.IsValid)
-					throw new Exception($"Invalid response when setting up index for integration test {this.GetType().Name}");
+					throw new Exception($"Invalid response when setting up index for integration test {GetType().Name}");
 			}
 		}
 

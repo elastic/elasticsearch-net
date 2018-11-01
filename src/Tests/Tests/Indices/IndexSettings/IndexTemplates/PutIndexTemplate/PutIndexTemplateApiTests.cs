@@ -7,23 +7,21 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 {
 	public class PutIndexTemplateApiTests
-		: ApiIntegrationTestBase<WritableCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
+		: ApiIntegrationTestBase<WritableCluster, IPutIndexTemplateResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor,
+			PutIndexTemplateRequest>
 	{
-		public PutIndexTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public PutIndexTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.PutIndexTemplate(CallIsolatedValue, f),
 			fluentAsync: (client, f) => client.PutIndexTemplateAsync(CallIsolatedValue, f),
 			request: (client, r) => client.PutIndexTemplate(r),
 			requestAsync: (client, r) => client.PutIndexTemplateAsync(r)
-			);
+		);
 
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}?create=false";
@@ -35,7 +33,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 		{
 			order = 1,
 			version = 2,
-			index_patterns = new [] {"nestx-*" },
+			index_patterns = new[] { "nestx-*" },
 			settings = new Dictionary<string, object> { { "index.number_of_shards", 1 } },
 			mappings = new
 			{
@@ -67,7 +65,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			.Version(2)
 			.IndexPatterns("nestx-*")
 			.Create(false)
-			.Settings(p=>p.NumberOfShards(1))
+			.Settings(p => p.NumberOfShards(1))
 			.Mappings(m => m
 				.Map("doc", tm => tm
 					.DynamicTemplates(t => t
@@ -85,7 +83,6 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			);
 
 
-
 		protected override PutIndexTemplateRequest Initializer => new PutIndexTemplateRequest(CallIsolatedValue)
 		{
 			Order = 1,
@@ -98,11 +95,13 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			},
 			Mappings = new Mappings
 			{
-				{ "doc", new TypeMapping
+				{
+					"doc", new TypeMapping
 					{
 						DynamicTemplates = new DynamicTemplateContainer
 						{
-							{ "base", new DynamicTemplate
+							{
+								"base", new DynamicTemplate
 								{
 									Match = "*",
 									MatchMappingType = "*",

@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using Nest;
+﻿using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.ParentId
 {
@@ -42,8 +40,8 @@ namespace Tests.QueryDsl.Joining.ParentId
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IParentIdQuery>(a => a.ParentId)
 		{
-			q =>  q.Id = null,
-			q =>  q.Type = null,
+			q => q.Id = null,
+			q => q.Type = null,
 		};
 	}
 }

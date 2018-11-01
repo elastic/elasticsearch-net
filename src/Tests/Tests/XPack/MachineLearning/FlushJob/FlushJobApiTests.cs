@@ -23,10 +23,7 @@ namespace Tests.XPack.MachineLearning.FlushJob
 
 		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				CloseJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) CloseJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -41,6 +38,7 @@ namespace Tests.XPack.MachineLearning.FlushJob
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_flush";
 		protected override bool SupportsDeserialization => false;
+
 		protected override FlushJobDescriptor NewDescriptor() => new FlushJobDescriptor(CallIsolatedValue);
 
 		protected override object ExpectJson => new
@@ -50,18 +48,15 @@ namespace Tests.XPack.MachineLearning.FlushJob
 		};
 
 		protected override Func<FlushJobDescriptor, IFlushJobRequest> Fluent => f => f
-			.AdvanceTime(new DateTimeOffset(2015, 1 , 1, 0, 0, 0, TimeSpan.Zero))
+			.AdvanceTime(new DateTimeOffset(2015, 1, 1, 0, 0, 0, TimeSpan.Zero))
 			.CalculateInterim();
 
 		protected override FlushJobRequest Initializer => new FlushJobRequest(CallIsolatedValue)
 		{
-			AdvanceTime = new DateTimeOffset(2015, 1 , 1, 0, 0, 0, TimeSpan.Zero),
+			AdvanceTime = new DateTimeOffset(2015, 1, 1, 0, 0, 0, TimeSpan.Zero),
 			CalculateInterim = true
 		};
 
-		protected override void ExpectResponse(IFlushJobResponse response)
-		{
-			response.Flushed.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IFlushJobResponse response) => response.Flushed.Should().BeTrue();
 	}
 }

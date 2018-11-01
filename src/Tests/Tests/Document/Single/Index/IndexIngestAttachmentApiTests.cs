@@ -8,8 +8,6 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Document.Single.Index
 {
@@ -18,20 +16,19 @@ namespace Tests.Document.Single.Index
 		static TestDocument()
 		{
 			using (var stream = typeof(TestDocument).Assembly().GetManifestResourceStream("Tests.Document.Single.Index.Attachment_Test_Document.pdf"))
+			using (var memoryStream = new MemoryStream())
 			{
-				using (var memoryStream = new MemoryStream())
-				{
-					stream.CopyTo(memoryStream);
-					TestPdfDocument = Convert.ToBase64String(memoryStream.ToArray());
-				}
+				stream.CopyTo(memoryStream);
+				TestPdfDocument = Convert.ToBase64String(memoryStream.ToArray());
 			}
 		}
 
 		// Base 64 encoded version of Attachment_Test_Document.pdf
 		public static string TestPdfDocument { get; }
 	}
-	public class IndexIngestAttachmentApiTests :
-		ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse,
+
+	public class IndexIngestAttachmentApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IIndexResponse,
 			IIndexRequest<IndexIngestAttachmentApiTests.IngestedAttachment>,
 			IndexDescriptor<IndexIngestAttachmentApiTests.IngestedAttachment>,
 			IndexRequest<IndexIngestAttachmentApiTests.IngestedAttachment>>
@@ -92,8 +89,8 @@ namespace Tests.Document.Single.Index
 		};
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Index<IngestedAttachment>(this.Document, f),
-			fluentAsync: (client, f) => client.IndexAsync<IngestedAttachment>(this.Document, f),
+			fluent: (client, f) => client.Index<IngestedAttachment>(Document, f),
+			fluentAsync: (client, f) => client.IndexAsync<IngestedAttachment>(Document, f),
 			request: (client, r) => client.Index(r),
 			requestAsync: (client, r) => client.IndexAsync(r)
 		);
@@ -107,9 +104,9 @@ namespace Tests.Document.Single.Index
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override object ExpectJson => new {id = 1, content = Content};
+		protected override object ExpectJson => new { id = 1, content = Content };
 
-		protected override IndexDescriptor<IngestedAttachment> NewDescriptor() => new IndexDescriptor<IngestedAttachment>(this.Document);
+		protected override IndexDescriptor<IngestedAttachment> NewDescriptor() => new IndexDescriptor<IngestedAttachment>(Document);
 
 		protected override Func<IndexDescriptor<IngestedAttachment>, IIndexRequest<IngestedAttachment>> Fluent => s => s
 			.Index(CallIsolatedValue)
@@ -117,7 +114,7 @@ namespace Tests.Document.Single.Index
 			.Pipeline(PipelineId);
 
 		protected override IndexRequest<IngestedAttachment> Initializer =>
-			new IndexRequest<IngestedAttachment>(this.Document, CallIsolatedValue)
+			new IndexRequest<IngestedAttachment>(Document, CallIsolatedValue)
 			{
 				Refresh = Refresh.True,
 				Pipeline = PipelineId
@@ -127,7 +124,7 @@ namespace Tests.Document.Single.Index
 		{
 			response.ShouldBeValid();
 
-			var getResponse = this.Client.Get<IngestedAttachment>(response.Id, g => g.Index(CallIsolatedValue));
+			var getResponse = Client.Get<IngestedAttachment>(response.Id, g => g.Index(CallIsolatedValue));
 
 			getResponse.ShouldBeValid();
 			getResponse.Source.Should().NotBeNull();

@@ -16,7 +16,7 @@ namespace Tests.Analysis.Tokenizers
 			{
 				MaxGram = 2,
 				MinGram = 1,
-				TokenChars = new[] {TokenChar.Digit, TokenChar.Letter}
+				TokenChars = new[] { TokenChar.Digit, TokenChar.Letter }
 			};
 
 			public override FuncTokenizer Fluent => (n, t) => t.EdgeNGram(n, e => e
@@ -29,7 +29,7 @@ namespace Tests.Analysis.Tokenizers
 			{
 				min_gram = 1,
 				max_gram = 2,
-				token_chars = new[] {"digit", "letter"},
+				token_chars = new[] { "digit", "letter" },
 				type = "edge_ngram"
 			};
 		}
@@ -42,7 +42,7 @@ namespace Tests.Analysis.Tokenizers
 			{
 				MaxGram = 2,
 				MinGram = 1,
-				TokenChars = new[] {TokenChar.Digit, TokenChar.Letter}
+				TokenChars = new[] { TokenChar.Digit, TokenChar.Letter }
 			};
 
 			public override FuncTokenizer Fluent => (n, t) => t.NGram(n, e => e
@@ -55,7 +55,7 @@ namespace Tests.Analysis.Tokenizers
 			{
 				min_gram = 1,
 				max_gram = 2,
-				token_chars = new[] {"digit", "letter"},
+				token_chars = new[] { "digit", "letter" },
 				type = "ngram"
 			};
 		}
@@ -146,7 +146,7 @@ namespace Tests.Analysis.Tokenizers
 		public class UaxTests : TokenizerAssertionBase<UaxTests>
 		{
 			public override string Name => "uax";
-			public override ITokenizer Initializer => new UaxEmailUrlTokenizer {MaxTokenLength = 12};
+			public override ITokenizer Initializer => new UaxEmailUrlTokenizer { MaxTokenLength = 12 };
 
 			public override FuncTokenizer Fluent => (n, t) => t.UaxEmailUrl(n, e => e
 				.MaxTokenLength(12)
@@ -192,7 +192,7 @@ namespace Tests.Analysis.Tokenizers
 
 			public override FuncTokenizer Fluent => (n, t) => t.Whitespace(n);
 
-			public override object Json => new {type = "whitespace"};
+			public override object Json => new { type = "whitespace" };
 		}
 
 		public class StandardTests : TokenizerAssertionBase<StandardTests>
@@ -202,13 +202,14 @@ namespace Tests.Analysis.Tokenizers
 
 			public override FuncTokenizer Fluent => (n, t) => t.Standard(n);
 
-			public override object Json => new {type = "standard"};
+			public override object Json => new { type = "standard" };
 		}
 
 		[SkipVersion("<6.4.0", "analysis-nori plugin introduced in 6.4.0")]
 		public class NoriTests : TokenizerAssertionBase<NoriTests>
 		{
 			public override string Name => "nori";
+
 			public override ITokenizer Initializer => new NoriTokenizer
 			{
 				DecompoundMode = NoriDecompoundMode.Mixed
@@ -218,14 +219,15 @@ namespace Tests.Analysis.Tokenizers
 				.DecompoundMode(NoriDecompoundMode.Mixed)
 			);
 
-			public override object Json => new {type = "nori_tokenizer", decompound_mode = "mixed"};
+			public override object Json => new { type = "nori_tokenizer", decompound_mode = "mixed" };
 		}
 
 		[SkipVersion("<6.4.0", "char_group introduced in 6.4.0")]
 		public class CharGroupTests : TokenizerAssertionBase<CharGroupTests>
 		{
-			private readonly string[] _chars = {"whitespace", "-", "\n"};
+			private readonly string[] _chars = { "whitespace", "-", "\n" };
 			public override string Name => "char_group";
+
 			public override ITokenizer Initializer => new CharGroupTokenizer
 			{
 				TokenizeOnCharacters = _chars

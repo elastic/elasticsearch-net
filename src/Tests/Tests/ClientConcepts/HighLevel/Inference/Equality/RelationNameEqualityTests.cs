@@ -3,7 +3,6 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
@@ -12,7 +11,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void Eq()
 		{
 			RelationName name = "foo";
-			RelationName[] equal = {"foo"};
+			RelationName[] equal = { "foo" };
 			foreach (var t in equal)
 			{
 				(t == name).ShouldBeTrue(t);
@@ -23,7 +22,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void NotEq()
 		{
 			RelationName name = "foo";
-			RelationName[] notEqual = {"bar", "foo  ", "  foo   ", "x", "", "   ", typeof(Project)};
+			RelationName[] notEqual = { "bar", "foo  ", "  foo   ", "x", "", "   ", typeof(Project) };
 			foreach (var t in notEqual)
 			{
 				(t != name).ShouldBeTrue(t);
@@ -42,6 +41,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			RelationName t1 = typeof(Project), t2 = typeof(CommitActivity);
 			(t1 != t2).ShouldBeTrue(t2);
 		}
+
 		[U] public void Null()
 		{
 			RelationName value = "foo";

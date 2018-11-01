@@ -6,12 +6,11 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.Scroll.Scroll
 {
-	public class SlicedScrollSearchApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
+	public class SlicedScrollSearchApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
 	{
 		public SlicedScrollSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -41,24 +40,23 @@ namespace Tests.Search.Scroll.Scroll
 		protected override ScrollRequest Initializer => new ScrollRequest(_scrollId, "1m");
 
 		protected int _slice = 0;
+
 		protected override void OnBeforeCall(IElasticClient client)
 		{
 			var maxSlices = 2; // number of shards we use by default for test indices
-			var currentSlice = Interlocked.Increment(ref this._slice) % maxSlices;
+			var currentSlice = Interlocked.Increment(ref _slice) % maxSlices;
 			var scrollTimeout = TimeSpan.FromMinutes(1);
 			var response = client.Search<Project>(s => s
 				.Scroll(scrollTimeout)
-				.Slice(ss=>ss.Max(maxSlices).Id(currentSlice))
-				.Sort(ss=>ss.Field("_doc", SortOrder.Ascending))
+				.Slice(ss => ss.Max(maxSlices).Id(currentSlice))
+				.Sort(ss => ss.Field("_doc", SortOrder.Ascending))
 			);
 			if (!response.IsValid)
 				throw new Exception("Scroll setup failed");
+
 			_scrollId = response.ScrollId ?? _scrollId;
 		}
 
-		protected override void OnAfterCall(IElasticClient client)
-		{
-			client.ClearScroll(cs => cs.ScrollId(_scrollId));
-		}
+		protected override void OnAfterCall(IElasticClient client) => client.ClearScroll(cs => cs.ScrollId(_scrollId));
 	}
 }

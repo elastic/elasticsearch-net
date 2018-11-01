@@ -16,14 +16,16 @@ namespace Tests.Analysis.CharFilters
 			an.CharFilters(d => AssertionSetup.Fluent(AssertionSetup.Name, d));
 
 		protected override Nest.Analysis InitializerAnalysis() =>
-			new Nest.Analysis {CharFilters = new Nest.CharFilters {{AssertionSetup.Name, AssertionSetup.Initializer}}};
+			new Nest.Analysis { CharFilters = new Nest.CharFilters { { AssertionSetup.Name, AssertionSetup.Initializer } } };
 
 		protected override object AnalysisJson => new
 		{
-			char_filter = new Dictionary<string, object> { {AssertionSetup.Name, AssertionSetup.Json} }
+			char_filter = new Dictionary<string, object> { { AssertionSetup.Name, AssertionSetup.Json } }
 		};
+
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] public override Task TestPutSettingsRequest() => base.TestPutSettingsRequest();
+
 		[I] public override Task TestPutSettingsResponse() => base.TestPutSettingsResponse();
 	}
 }

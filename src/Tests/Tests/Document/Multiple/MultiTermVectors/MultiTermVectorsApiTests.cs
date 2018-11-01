@@ -8,15 +8,16 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.MultiTermVectors
 {
-	public class MultiTermVectorsDocsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
+	public class MultiTermVectorsDocsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor,
+			MultiTermVectorsRequest>
 	{
 		public MultiTermVectorsDocsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.MultiTermVectors(f),
 			fluentAsync: (client, f) => client.MultiTermVectorsAsync(f),
@@ -34,22 +35,23 @@ namespace Tests.Document.Multiple.MultiTermVectors
 		protected override object ExpectJson { get; } = new
 		{
 			docs = Developer.Developers.Select(p => new
-			{
-				_index = "devs",
-				_type = "developer",
-				_id = p.Id,
-				payloads = true,
-				field_statistics = true,
-				term_statistics = true,
-				positions = true,
-				offsets = true,
-				filter = new
 				{
-					max_num_terms = 3,
-					min_term_freq = 1,
-					min_doc_freq = 1
-				}
-			}).Take(2)
+					_index = "devs",
+					_type = "developer",
+					_id = p.Id,
+					payloads = true,
+					field_statistics = true,
+					term_statistics = true,
+					positions = true,
+					offsets = true,
+					filter = new
+					{
+						max_num_terms = 3,
+						min_term_freq = 1,
+						min_doc_freq = 1
+					}
+				})
+				.Take(2)
 		};
 
 		protected override void ExpectResponse(IMultiTermVectorsResponse response)
@@ -67,7 +69,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			var vectors = termvectorDoc.TermVectors["firstName"];
 			AssertTermVectors(vectors);
 
-			vectors = termvectorDoc.TermVectors[Field<Developer>(p=>p.FirstName)];
+			vectors = termvectorDoc.TermVectors[Field<Developer>(p => p.FirstName)];
 			AssertTermVectors(vectors);
 		}
 
@@ -101,12 +103,12 @@ namespace Tests.Document.Multiple.MultiTermVectors
 					.MinimumTermFrequency(1)
 					.MinimumDocumentFrequency(1)
 				)
-			)
-		;
+			);
 
 		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>())
 		{
-			Documents = Developer.Developers.Select(p => p.Id).Take(2)
+			Documents = Developer.Developers.Select(p => p.Id)
+				.Take(2)
 				.Select(n => new MultiTermVectorOperation<Developer>(n)
 				{
 					FieldStatistics = true,
@@ -124,9 +126,12 @@ namespace Tests.Document.Multiple.MultiTermVectors
 		};
 	}
 
-	public class MultiTermVectorsIdsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
+	public class MultiTermVectorsIdsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor,
+			MultiTermVectorsRequest>
 	{
 		public MultiTermVectorsIdsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.MultiTermVectors(f),
 			fluentAsync: (client, f) => client.MultiTermVectorsAsync(f),
@@ -137,6 +142,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
 		protected override string UrlPath =>
 			$"/devs/developer/_mtermvectors?field_statistics=true&payloads=true&term_statistics=true&positions=true&offsets=true";
 
@@ -162,7 +168,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			var vectors = termvectorDoc.TermVectors["firstName"];
 			AssertTermVectors(vectors);
 
-			vectors = termvectorDoc.TermVectors[Field<Developer>(p=>p.FirstName)];
+			vectors = termvectorDoc.TermVectors[Field<Developer>(p => p.FirstName)];
 			AssertTermVectors(vectors);
 		}
 
@@ -190,8 +196,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			.Payloads()
 			.TermStatistics()
 			.Positions()
-			.Offsets()
-		;
+			.Offsets();
 
 		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>(), Type<Developer>())
 		{

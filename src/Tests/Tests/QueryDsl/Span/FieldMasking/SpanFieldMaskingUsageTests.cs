@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Span.FieldMasking
 {
@@ -44,15 +43,15 @@ namespace Tests.QueryDsl.Span.FieldMasking
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.Name)
-				.Query(sq=>sq
-					.SpanTerm(st=>st.Field(p=>p.Description).Value("dolorem"))
+				.Query(sq => sq
+					.SpanTerm(st => st.Field(p => p.Description).Value("dolorem"))
 				)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanFieldMaskingQuery>(a => a.SpanFieldMasking)
 		{
 			q => q.Query = null,
-			q => q.Field = null ,
+			q => q.Field = null,
 		};
 	}
 }

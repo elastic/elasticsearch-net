@@ -4,12 +4,11 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 {
-	public class CreateAzureRepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	public class CreateAzureRepositoryApiTests
+		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
 		public CreateAzureRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -66,7 +65,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		};
 	}
 
-	public class CreateHdfsRepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	public class CreateHdfsRepositoryApiTests
+		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
 		public CreateHdfsRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -88,7 +88,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override object ExpectJson { get; } = new
 		{
 			type = "hdfs",
-			settings = new {
+			settings = new
+			{
 				uri = "foouri",
 				path = "some/path",
 				load_defaults = true,
@@ -149,7 +150,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override object ExpectJson { get; } = new
 		{
 			type = "fs",
-			settings = new {
+			settings = new
+			{
 				location = "some/location",
 				compress = true,
 				concurrent_streams = 5,
@@ -185,7 +187,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		};
 	}
 
-	public class CreateReadOnlyUrlRepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	public class CreateReadOnlyUrlRepositoryApiTests
+		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
 		public CreateReadOnlyUrlRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -206,7 +209,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override object ExpectJson { get; } = new
 		{
 			type = "url",
-			settings = new {
+			settings = new
+			{
 				location = "http://some/location",
 				concurrent_streams = 5
 			}
@@ -230,7 +234,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		};
 	}
 
-	public class CreateS3RepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	public class CreateS3RepositoryApiTests
+		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
 		public CreateS3RepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -251,7 +256,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		protected override object ExpectJson { get; } = new
 		{
 			type = "s3",
-			settings = new {
+			settings = new
+			{
 				bucket = "foobucket",
 				client = "default",
 				base_path = "some/path",

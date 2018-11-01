@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -11,16 +10,14 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.GetJobStats
 {
-	public class GetJobStatsApiTests : MachineLearningIntegrationTestBase<IGetJobStatsResponse, IGetJobStatsRequest, GetJobStatsDescriptor, GetJobStatsRequest>
+	public class GetJobStatsApiTests
+		: MachineLearningIntegrationTestBase<IGetJobStatsResponse, IGetJobStatsRequest, GetJobStatsDescriptor, GetJobStatsRequest>
 	{
 		public GetJobStatsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				PutJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) PutJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -73,16 +70,14 @@ namespace Tests.XPack.MachineLearning.GetJobStats
 		}
 	}
 
-	public class GetJobStatsWithJobIdApiTests : MachineLearningIntegrationTestBase<IGetJobStatsResponse, IGetJobStatsRequest, GetJobStatsDescriptor, GetJobStatsRequest>
+	public class GetJobStatsWithJobIdApiTests
+		: MachineLearningIntegrationTestBase<IGetJobStatsResponse, IGetJobStatsRequest, GetJobStatsDescriptor, GetJobStatsRequest>
 	{
 		public GetJobStatsWithJobIdApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				PutJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) PutJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(

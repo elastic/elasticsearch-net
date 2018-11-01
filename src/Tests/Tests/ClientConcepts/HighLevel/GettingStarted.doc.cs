@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
@@ -21,7 +17,8 @@ namespace Tests.ClientConcepts.HighLevel
 	 */
 	public class GettingStarted
 	{
-		private IElasticClient client = new ElasticClient(new ConnectionSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), new InMemoryConnection()));
+		private readonly IElasticClient client =
+			new ElasticClient(new ConnectionSettings(new SingleNodeConnectionPool(new Uri("http://localhost:9200")), new InMemoryConnection()));
 
 		/**[float]
 		 * === Connecting
@@ -105,7 +102,8 @@ namespace Tests.ClientConcepts.HighLevel
 
 			var indexResponse = client.IndexDocument(person); //<1> synchronous method that returns an `IIndexResponse`
 
-			var asyncIndexResponse = await client.IndexDocumentAsync(person); //<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
+			var asyncIndexResponse =
+				await client.IndexDocumentAsync(person); //<2> asynchronous method that returns a `Task<IIndexResponse>` that can be awaited
 		}
 
 		/**
@@ -131,10 +129,10 @@ namespace Tests.ClientConcepts.HighLevel
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					 .Match(m => m
+					.Match(m => m
 						.Field(f => f.FirstName)
 						.Query("Martijn")
-					 )
+					)
 				)
 			);
 
@@ -157,10 +155,10 @@ namespace Tests.ClientConcepts.HighLevel
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					 .Match(m => m
+					.Match(m => m
 						.Field(f => f.FirstName)
 						.Query("Martijn")
-					 )
+					)
 				)
 			);
 		}
@@ -178,10 +176,10 @@ namespace Tests.ClientConcepts.HighLevel
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					 .Match(m => m
+					.Match(m => m
 						.Field(f => f.FirstName)
 						.Query("Martijn")
-					 )
+					)
 				)
 			);
 		}
@@ -200,10 +198,10 @@ namespace Tests.ClientConcepts.HighLevel
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					 .Match(m => m
+					.Match(m => m
 						.Field(f => f.FirstName)
 						.Query("Martijn")
-					 )
+					)
 				)
 			);
 		}
@@ -236,45 +234,45 @@ namespace Tests.ClientConcepts.HighLevel
 			var searchResponse = await client.SearchAsync<Person>(searchRequest);
 		}
 
-        /** [NOTE]
-         * --
-         * As indicated at the start of this section, the high level client still exposes the low level client from Elasticsearch.Net
-         * through the `.LowLevel` property on the client. The low level client can be useful in scenarios where you may already have
-         * the JSON that represents the request that you wish to send and don't wish to translate it over to the Fluent API or Object Initializer syntax
-         * at this point in time, or perhaps there is a bug in the client that can be worked around by sending a request as a string or anonymous type.
-         *
-         * Using the low level client via the `.LowLevel` property means you can get with the best of both worlds:
-         *
-         * . Use the high level client
-         * . Use the low level client where it makes sense, taking advantage of all the strong types within NEST and using the JSON.Net based
-         * serializer for deserialization.
-         *
-         * Here's an example
-         */
+		/** [NOTE]
+		 * --
+		 * As indicated at the start of this section, the high level client still exposes the low level client from Elasticsearch.Net
+		 * through the `.LowLevel` property on the client. The low level client can be useful in scenarios where you may already have
+		 * the JSON that represents the request that you wish to send and don't wish to translate it over to the Fluent API or Object Initializer syntax
+		 * at this point in time, or perhaps there is a bug in the client that can be worked around by sending a request as a string or anonymous type.
+		 *
+		 * Using the low level client via the `.LowLevel` property means you can get with the best of both worlds:
+		 *
+		 * . Use the high level client
+		 * . Use the low level client where it makes sense, taking advantage of all the strong types within NEST and using the JSON.Net based
+		 * serializer for deserialization.
+		 *
+		 * Here's an example
+		 */
 
-	    public void SearchingWithTheLowLevelClient()
-	    {
-            var searchResponse = client.LowLevel.Search<SearchResponse<Person>>("people", "person", PostData.Serializable(new
-            {
-                from = 0,
-                size = 10,
-                query = new
-                {
-                    match = new
-                    {
-                        field = "firstName",
-                        query = "Martijn"
-                    }
-                }
-            }));
+		public void SearchingWithTheLowLevelClient()
+		{
+			var searchResponse = client.LowLevel.Search<SearchResponse<Person>>("people", "person", PostData.Serializable(new
+			{
+				from = 0,
+				size = 10,
+				query = new
+				{
+					match = new
+					{
+						field = "firstName",
+						query = "Martijn"
+					}
+				}
+			}));
 
-            var responseJson = searchResponse;
-        }
-        /**
-         * Here, the query is represented as an anonymous type, but the body of the response is a concrete
-         * implementation of the same response type returned from NEST.
-         * --
-         */
+			var responseJson = searchResponse;
+		}
+		/**
+		 * Here, the query is represented as an anonymous type, but the body of the response is a concrete
+		 * implementation of the same response type returned from NEST.
+		 * --
+		 */
 
 
 		/**[float]
@@ -287,10 +285,10 @@ namespace Tests.ClientConcepts.HighLevel
 			var searchResponse = await client.SearchAsync<Person>(s => s
 				.Size(0)
 				.Query(q => q
-					 .Match(m => m
+					.Match(m => m
 						.Field(f => f.FirstName)
 						.Query("Martijn")
-					 )
+					)
 				)
 				.Aggregations(a => a
 					.Terms("last_names", ta => ta

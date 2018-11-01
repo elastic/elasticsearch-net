@@ -5,9 +5,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Pipeline.MovingAverage
 {
@@ -126,9 +124,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 				// Moving Average specifies a window of 4 so
 				// moving average values should exist from 5th bucketr onwards
 				if (bucketCount <= 4)
-				{
 					movingAverage.Should().BeNull();
-				}
 				else
 				{
 					movingAverage.Should().NotBeNull();

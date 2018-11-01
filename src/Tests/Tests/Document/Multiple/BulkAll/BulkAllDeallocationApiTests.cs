@@ -17,22 +17,23 @@ namespace Tests.Document.Multiple.BulkAll
 			WeakReference<SmallObject> deallocReference = null;
 			SmallObject obj = null;
 
-			var lazyCollection = this.GetLazyCollection(
+			var lazyCollection = GetLazyCollection(
 				weakRef => deallocReference = weakRef,
-				delegate { },//...
-				delegate { },//Making sure that all of the objects have gone through pipeline
-				delegate { },//so that the first one can be deallocated
-				delegate { },//Various GC roots prevent several of previous (2 or 3)
-				delegate { },//items in the lazy Enumerable from deallocation during forced GC
-				delegate { },//...
-				delegate {
+				delegate { }, //...
+				delegate { }, //Making sure that all of the objects have gone through pipeline
+				delegate { }, //so that the first one can be deallocated
+				delegate { }, //Various GC roots prevent several of previous (2 or 3)
+				delegate { }, //items in the lazy Enumerable from deallocation during forced GC
+				delegate { }, //...
+				delegate
+				{
 					GC.Collect(2, GCCollectionMode.Forced, true);
 					deallocReference.TryGetTarget(out obj);
 				}
 			);
 
 			var index = CreateIndexName();
-			var observableBulk = this.Client.BulkAll(lazyCollection, f => f
+			var observableBulk = Client.BulkAll(lazyCollection, f => f
 				.MaxDegreeOfParallelism(1)
 				.Size(1)
 				.Index(index)

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using Tests.Framework;
 using static Elasticsearch.Net.AuditEvent;
 
@@ -28,7 +27,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall(r => r.MaxRetries(2)) {
+				new ClientCall(r => r.MaxRetries(2))
+				{
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
@@ -54,7 +54,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall(r => r.MaxRetries(2)) {
+				new ClientCall(r => r.MaxRetries(2))
+				{
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
@@ -80,11 +81,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall(r => r.MaxRetries(10)) {
+				new ClientCall(r => r.MaxRetries(10))
+				{
 					{ BadResponse, 9200 }
 				}
 			);
-
 		}
 	}
 }

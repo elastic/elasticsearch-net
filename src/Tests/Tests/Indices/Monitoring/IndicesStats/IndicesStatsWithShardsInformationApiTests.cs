@@ -7,20 +7,18 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Indices.Monitoring.IndicesStats
 {
-	public class IndicesStatsWithShardsInformationApiTests : ApiIntegrationTestBase<WritableCluster, IIndicesStatsResponse,
-		IIndicesStatsRequest, IndicesStatsDescriptor, IndicesStatsRequest>
+	public class IndicesStatsWithShardsInformationApiTests
+		: ApiIntegrationTestBase<WritableCluster, IIndicesStatsResponse,
+			IIndicesStatsRequest, IndicesStatsDescriptor, IndicesStatsRequest>
 	{
-		public IndicesStatsWithShardsInformationApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public IndicesStatsWithShardsInformationApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var createShardedIndex = this.Client.CreateIndex(RandomString(), c => c
+			var createShardedIndex = Client.CreateIndex(RandomString(), c => c
 				.Settings(settings => settings
 					.NumberOfShards(3)
 				)

@@ -6,8 +6,6 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.XPack.Security.User
 {
@@ -15,7 +13,8 @@ namespace Tests.XPack.Security.User
 	public class UserCrudTests
 		: CrudTestBase<XPackCluster, IPutUserResponse, IGetUserResponse, IPutUserResponse, IDeleteUserResponse>
 	{
-		private string[] _roles = { "user" };
+		private readonly string[] _roles = { "user" };
+
 		public UserCrudTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		//Since we basically take the first 8 characters of a guid we have no way
@@ -35,6 +34,7 @@ namespace Tests.XPack.Security.User
 		{
 			Password = username, Roles = _roles
 		};
+
 		protected IPutUserRequest CreateFluent(string username, PutUserDescriptor d) => d
 			.Password(username)
 			.Roles(_roles);
@@ -49,6 +49,7 @@ namespace Tests.XPack.Security.User
 		);
 
 		protected GetUserRequest ReadInitializer(string username) => new GetUserRequest(username);
+
 		protected IGetUserRequest ReadFluent(string username, GetUserDescriptor d) => d.Username(username);
 
 		protected override LazyResponses Update() => Calls<PutUserDescriptor, PutUserRequest, IPutUserRequest, IPutUserResponse>(
@@ -65,6 +66,7 @@ namespace Tests.XPack.Security.User
 			FullName = username,
 			Roles = _roles
 		};
+
 		protected IPutUserRequest UpdateFluent(string username, PutUserDescriptor d) => d
 			.FullName(username)
 			.Roles(_roles);
@@ -79,6 +81,7 @@ namespace Tests.XPack.Security.User
 		);
 
 		protected DeleteUserRequest DeleteInitializer(string username) => new DeleteUserRequest(username);
+
 		protected IDeleteUserRequest DeleteFluent(string username, DeleteUserDescriptor d) => d;
 
 		protected override void ExpectAfterCreate(IGetUserResponse response)
@@ -89,6 +92,7 @@ namespace Tests.XPack.Security.User
 			user.Roles.Should().NotBeNullOrEmpty();
 			user.FullName.Should().BeNullOrEmpty();
 		}
+
 		protected override void ExpectAfterUpdate(IGetUserResponse response)
 		{
 			response.Users.Should().NotBeEmpty();

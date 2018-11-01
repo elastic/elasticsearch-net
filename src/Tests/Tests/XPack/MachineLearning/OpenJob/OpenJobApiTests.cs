@@ -14,18 +14,12 @@ namespace Tests.XPack.MachineLearning.OpenJob
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				PutJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) PutJob(client, callUniqueValue.Value);
 		}
 
 		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				CloseJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) CloseJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -39,14 +33,13 @@ namespace Tests.XPack.MachineLearning.OpenJob
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/_open";
+
 		protected override OpenJobDescriptor NewDescriptor() => new OpenJobDescriptor(CallIsolatedValue);
+
 		protected override object ExpectJson => null;
 		protected override Func<OpenJobDescriptor, IOpenJobRequest> Fluent => f => f;
 		protected override OpenJobRequest Initializer => new OpenJobRequest(CallIsolatedValue);
 
-		protected override void ExpectResponse(IOpenJobResponse response)
-		{
-			response.Opened.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IOpenJobResponse response) => response.Opened.Should().BeTrue();
 	}
 }

@@ -2,7 +2,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
-using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework.Integration;
 
@@ -33,16 +32,17 @@ namespace Tests.Mapping.Types.Specialized.FieldAlias
 		};
 
 		protected override Func<PropertiesDescriptor<Project>, IPromise<IProperties>> FluentProperties => f => f
-				.FieldAlias(s => s
-					.Name("leadDevFirstName")
-					.Path(p=>p.LeadDeveloper.FirstName)
-				);
+			.FieldAlias(s => s
+				.Name("leadDevFirstName")
+				.Path(p => p.LeadDeveloper.FirstName)
+			);
 
 		protected override IProperties InitializerProperties => new Properties
 		{
-			{ "leadDevFirstName", new FieldAliasProperty
+			{
+				"leadDevFirstName", new FieldAliasProperty
 				{
-					Path = Infer.Field<Project>(p=>p.LeadDeveloper.FirstName)
+					Path = Infer.Field<Project>(p => p.LeadDeveloper.FirstName)
 				}
 			}
 		};

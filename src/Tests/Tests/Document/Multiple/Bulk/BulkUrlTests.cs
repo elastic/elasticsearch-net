@@ -12,24 +12,24 @@ namespace Tests.Document.Multiple.Bulk
 		[U] public override async Task Urls()
 		{
 			await POST("/_bulk")
-				.Fluent(c => c.Bulk(s => s))
-				.Request(c => c.Bulk(new BulkRequest()))
-				.FluentAsync(c => c.BulkAsync(s => s))
-				.RequestAsync(c => c.BulkAsync(new BulkRequest()))
+					.Fluent(c => c.Bulk(s => s))
+					.Request(c => c.Bulk(new BulkRequest()))
+					.FluentAsync(c => c.BulkAsync(s => s))
+					.RequestAsync(c => c.BulkAsync(new BulkRequest()))
 				;
 
 			await POST("/project/_bulk")
-				.Fluent(c => c.Bulk(b => b.Index<Project>()))
-				.Request(c => c.Bulk(new BulkRequest(typeof(Project))))
-				.FluentAsync(c => c.BulkAsync(b => b.Index<Project>()))
-				.RequestAsync(c => c.BulkAsync(new BulkRequest(typeof(Project))))
+					.Fluent(c => c.Bulk(b => b.Index<Project>()))
+					.Request(c => c.Bulk(new BulkRequest(typeof(Project))))
+					.FluentAsync(c => c.BulkAsync(b => b.Index<Project>()))
+					.RequestAsync(c => c.BulkAsync(new BulkRequest(typeof(Project))))
 				;
 
 			await POST("/project/doc/_bulk")
-				.Fluent(c => c.Bulk(b => b.Index(typeof(Project)).Type(typeof(Project))))
-				.Request(c => c.Bulk(new BulkRequest(typeof(Project), typeof(Project))))
-				.FluentAsync(c => c.BulkAsync(b => b.Index(typeof(Project)).Type(typeof(Project))))
-				.RequestAsync(c => c.BulkAsync(new BulkRequest(typeof(Project), typeof(Project))))
+					.Fluent(c => c.Bulk(b => b.Index(typeof(Project)).Type(typeof(Project))))
+					.Request(c => c.Bulk(new BulkRequest(typeof(Project), typeof(Project))))
+					.FluentAsync(c => c.BulkAsync(b => b.Index(typeof(Project)).Type(typeof(Project))))
+					.RequestAsync(c => c.BulkAsync(new BulkRequest(typeof(Project), typeof(Project))))
 				;
 		}
 	}

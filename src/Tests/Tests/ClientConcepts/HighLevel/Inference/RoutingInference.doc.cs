@@ -2,7 +2,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
@@ -43,7 +42,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		* The real power of the `Routing` is in the inference rules (the default inferred routing for an object will be null).
 		* Lets look at an example of this given the following POCO:
 		*/
-		class MyDTO
+		private class MyDTO
 		{
 			public Guid Routing { get; set; }
 			public string Name { get; set; }
@@ -68,10 +67,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* Here we instruct NEST to infer the Routing for `MyDTO` based on its `Name` property
 			*/
 			WithConnectionSettings(x => x
-				.DefaultMappingFor<MyDTO>(m => m
-					.RoutingProperty(p => p.Name)
+					.DefaultMappingFor<MyDTO>(m => m
+						.RoutingProperty(p => p.Name)
+					)
 				)
-			).Expect("x").WhenInferringRoutingOn(dto);
+				.Expect("x")
+				.WhenInferringRoutingOn(dto);
 
 			/** IMPORTANT: Inference rules are cached __per__ `ConnectionSettings` instance.
 			*
@@ -79,10 +80,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* with different inference rules
 			*/
 			WithConnectionSettings(x => x
-				.DefaultMappingFor<MyDTO>(m => m
-					.RoutingProperty(p => p.OtherName)
+					.DefaultMappingFor<MyDTO>(m => m
+						.RoutingProperty(p => p.OtherName)
+					)
 				)
-			).Expect("y").WhenInferringRoutingOn(dto);
+				.Expect("y")
+				.WhenInferringRoutingOn(dto);
 		}
 
 		/**
@@ -93,7 +96,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		* The name of this property can be anything. Be sure the read the <<parent-child-relationships, section on Parent/Child relationships>> to get a complete
 		 * walkthrough on using Parent Child joins with NEST.
 		*/
-		class MyOtherDTO
+		private class MyOtherDTO
 		{
 			public JoinField SomeJoinField { get; set; }
 			public Guid Id { get; set; }
@@ -133,17 +136,21 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			*
 			*/
 			WithConnectionSettings(x => x
-				.DefaultMappingFor<MyOtherDTO>(m => m
-					.RoutingProperty(p => p.OtherName)
+					.DefaultMappingFor<MyOtherDTO>(m => m
+						.RoutingProperty(p => p.OtherName)
+					)
 				)
-			).Expect("y").WhenInferringRoutingOn(dto);
+				.Expect("y")
+				.WhenInferringRoutingOn(dto);
 		}
-		class BadDTO
+
+		private class BadDTO
 		{
 			public JoinField SomeJoinField { get; set; }
 			public JoinField AnotherJoinField { get; set; }
 			public string ParentName { get; set; }
 		}
+
 		[U] public void DuplicateJoinField()
 		{
 			/**
@@ -160,10 +167,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			/** unless you configure the ConnectionSettings to use an alternate property: */
 			WithConnectionSettings(x => x
-				.DefaultMappingFor<BadDTO>(m => m
-					.RoutingProperty(p => p.ParentName)
+					.DefaultMappingFor<BadDTO>(m => m
+						.RoutingProperty(p => p.ParentName)
+					)
 				)
-			).Expect("my-parent").WhenInferringRoutingOn(dto);
+				.Expect("my-parent")
+				.WhenInferringRoutingOn(dto);
 		}
 	}
 }

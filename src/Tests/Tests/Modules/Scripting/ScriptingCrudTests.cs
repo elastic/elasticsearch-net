@@ -3,8 +3,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Modules.Scripting
 {
@@ -23,6 +21,7 @@ namespace Tests.Modules.Scripting
 		);
 
 		private PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(id) { Script = new PainlessScript("1+1") };
+
 		private IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Painless("1+1");
 
 		protected override LazyResponses Read() => Calls<GetScriptDescriptor, GetScriptRequest, IGetScriptRequest, IGetScriptResponse>(
@@ -43,9 +42,10 @@ namespace Tests.Modules.Scripting
 			requestAsync: (s, c, r) => c.PutScriptAsync(r)
 		);
 
-		private string _updatedScript = "2+2";
+		private readonly string _updatedScript = "2+2";
 
 		private PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(id) { Script = new PainlessScript(_updatedScript) };
+
 		private IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Painless(_updatedScript);
 
 		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IDeleteScriptResponse>(

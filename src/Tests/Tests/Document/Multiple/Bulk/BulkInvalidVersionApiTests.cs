@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -9,14 +8,13 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Document.Multiple.Bulk
 {
 	public class BulkInvalidVersionApiTests : ApiIntegrationTestBase<WritableCluster, IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
 		public BulkInvalidVersionApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Bulk(f),
 			fluentAsync: (client, f) => client.BulkAsync(f),
@@ -33,9 +31,10 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override object ExpectJson { get; } = new object[]
 		{
-			new Dictionary<string, object>{ { "index", new { _type="doc", _id = Project.Instance.Name, routing = Project.Instance.Name } } },
+			new Dictionary<string, object> { { "index", new { _type = "doc", _id = Project.Instance.Name, routing = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "index", new { _type="doc", _id = Project.Instance.Name, routing = Project.Instance.Name, version = 0 } } },
+			new Dictionary<string, object>
+				{ { "index", new { _type = "doc", _id = Project.Instance.Name, routing = Project.Instance.Name, version = 0 } } },
 			Project.InstanceAnonymous,
 		};
 

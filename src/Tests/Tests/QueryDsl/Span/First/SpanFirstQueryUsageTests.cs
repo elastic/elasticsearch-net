@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.SpanFirst
 {
@@ -39,8 +38,8 @@ namespace Tests.QueryDsl.Joining.SpanFirst
 			.SpanFirst(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Match(sq=>sq
-					.SpanTerm(st=>st.Field(p=>p.Name).Value("value"))
+				.Match(sq => sq
+					.SpanTerm(st => st.Field(p => p.Name).Value("value"))
 				)
 				.End(3)
 			);
@@ -48,7 +47,7 @@ namespace Tests.QueryDsl.Joining.SpanFirst
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanFirstQuery>(a => a.SpanFirst)
 		{
 			q => q.Match = null,
-			q => q.Match = new SpanQuery { SpanTerm = new SpanTermQuery() } ,
+			q => q.Match = new SpanQuery { SpanTerm = new SpanTermQuery() },
 		};
 	}
 }

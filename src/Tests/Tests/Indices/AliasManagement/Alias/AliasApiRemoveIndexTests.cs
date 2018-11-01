@@ -5,11 +5,11 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Indices.AliasManagement.Alias
 {
-	public class AliasApiRemoveIndexTests : ApiIntegrationAgainstNewIndexTestBase<WritableCluster, IBulkAliasResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
+	public class AliasApiRemoveIndexTests
+		: ApiIntegrationAgainstNewIndexTestBase<WritableCluster, IBulkAliasResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
 	{
 		public AliasApiRemoveIndexTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -45,22 +45,21 @@ namespace Tests.Indices.AliasManagement.Alias
 		{
 			actions = new object[]
 			{
-				new Dictionary<string, object> { { "remove_index", new { index = CallIsolatedValue + "-1"} } },
+				new Dictionary<string, object> { { "remove_index", new { index = CallIsolatedValue + "-1" } } },
 				new Dictionary<string, object> { { "add", new { alias = CallIsolatedValue + "-1", index = CallIsolatedValue + "-2" } } },
 			}
 		};
 
 		protected override Func<BulkAliasDescriptor, IBulkAliasRequest> Fluent => d => d
 			.RemoveIndex(a => a.Index(CallIsolatedValue + "-1"))
-			.Add(a=>a.Alias(CallIsolatedValue + "-1").Index(CallIsolatedValue + "-2"))
-		;
+			.Add(a => a.Alias(CallIsolatedValue + "-1").Index(CallIsolatedValue + "-2"));
 
 		protected override BulkAliasRequest Initializer => new BulkAliasRequest
 		{
 			Actions = new List<IAliasAction>
 			{
 				new AliasRemoveIndexAction { RemoveIndex = new AliasRemoveIndexOperation { Index = Infer.Index(CallIsolatedValue + "-1") } },
-				new AliasAddAction { Add = new AliasAddOperation {Alias = CallIsolatedValue + "-1", Index = CallIsolatedValue + "-2"} },
+				new AliasAddAction { Add = new AliasAddOperation { Alias = CallIsolatedValue + "-1", Index = CallIsolatedValue + "-2" } },
 			}
 		};
 	}

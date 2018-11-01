@@ -3,7 +3,6 @@ using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
@@ -20,9 +19,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		[U] public void DefaultNowBehaviour()
 		{
 			var dateTimeProvider = DateTimeProvider.Default;
-			
+
 			dateTimeProvider.Now().Should().BeCloseTo(DateTime.UtcNow);
-        }
+		}
 
 		/**
          * As you can see, dates are always returned in UTC from the default implementation.
@@ -46,7 +45,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var timeout = TimeSpan.FromMinutes(1);
 			var maxTimeout = TimeSpan.FromMinutes(30);
 
-            /**
+			/**
 			* Plotting these defaults looks as follows
 			*
 			*.Default formula, x-axis number of attempts to revive, y-axis time in minutes
@@ -55,15 +54,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			* The goal here is that whenever a node is resurrected and is found to still be offline, we send it
 			* __back to the doghouse__ for an ever increasingly long period, until we hit a bounded maximum.
 			*/
-            var dateTimeProvider = DateTimeProvider.Default;
+			var dateTimeProvider = DateTimeProvider.Default;
 
-            var timeouts = Enumerable.Range(0, 30)
+			var timeouts = Enumerable.Range(0, 30)
 				.Select(attempt => dateTimeProvider.DeadTime(attempt, timeout, maxTimeout))
 				.ToList();
 
 			foreach (var increasedTimeout in timeouts.Take(10))
 				increasedTimeout.Should().BeWithin(maxTimeout);
 		}
-
 	}
 }

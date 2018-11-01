@@ -1,26 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
-using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Xunit;
 using FluentAssertions;
+using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework;
+using Tests.Framework.Integration;
 
 namespace Tests.Document.Single.Update
 {
-	public class UpdateApiTests : ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
+	public class UpdateApiTests
+		: ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>,
+			UpdateRequest<Project, Project>>
 	{
 		public UpdateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
-				this.Client.Index(Project.Instance, i=>i.Id(id));
+				Client.Index(Project.Instance, i => i.Id(id));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -44,7 +43,8 @@ namespace Tests.Document.Single.Update
 			detect_noop = true
 		};
 
-		protected override UpdateDescriptor<Project, Project> NewDescriptor() => new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
+		protected override UpdateDescriptor<Project, Project> NewDescriptor() =>
+			new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
 
 		protected override Func<UpdateDescriptor<Project, Project>, IUpdateRequest<Project, Project>> Fluent => u => u
 			.Doc(Project.Instance)

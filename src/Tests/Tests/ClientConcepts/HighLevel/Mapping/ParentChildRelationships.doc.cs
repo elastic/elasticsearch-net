@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Tests.Core.Client;
 using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
@@ -75,10 +70,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void SimpleParentChildMapping()
 		{
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			var connectionSettings = new ConnectionSettings(connectionPool, new InMemoryConnection()) // <1> for the purposes of this example, an in memory connection is used which doesn't actually send a request. In your application, you'd use the default connection or your own implementation that actually sends a request.
-				.DefaultMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
-				.DefaultMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
-				.DefaultMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
+			var connectionSettings =
+				new ConnectionSettings(connectionPool,
+						new InMemoryConnection()) // <1> for the purposes of this example, an in memory connection is used which doesn't actually send a request. In your application, you'd use the default connection or your own implementation that actually sends a request.
+					.DefaultMappingFor<MyDocument>(m => m.IndexName("index").TypeName("doc"))
+					.DefaultMappingFor<MyChild>(m => m.IndexName("index").TypeName("doc"))
+					.DefaultMappingFor<MyParent>(m => m.IndexName("index").TypeName("doc").RelationName("parent"));
 
 			var client = new ElasticClient(connectionSettings);
 
@@ -126,9 +123,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						_routing = new { required = true },
 						properties = new
 						{
-							parentProperty = new {type = "text"},
-							childProperty = new {type = "text"},
-							id = new {type = "integer"},
+							parentProperty = new { type = "text" },
+							childProperty = new { type = "text" },
+							id = new { type = "integer" },
 							myJoinField = new
 							{
 								type = "join",
@@ -146,9 +143,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			* Note how `MyParent`'s relation name is `parent` because of the mapping on connection settings. This also comes in handy
 			* later when doing strongly typed `has_child` and `has_parent` queries.
 			*/
-  			//hide
+			//hide
 			WithConnectionSettings(s => connectionSettings)
-				.Expect(expected).FromRequest(createIndexResponse);
+				.Expect(expected)
+				.FromRequest(createIndexResponse);
 		}
 
 		/**
@@ -265,13 +263,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			// hide
 			var client = TestClient.DisabledStreaming;
 			var infer = client.Infer;
-			var parent = new MyParent {Id = 1337, MyJoinField = JoinField.Root<MyParent>()};
+			var parent = new MyParent { Id = 1337, MyJoinField = JoinField.Root<MyParent>() };
 			infer.Routing(parent).Should().Be("1337");
 
-			var child = new MyChild {Id = 1338, MyJoinField = JoinField.Link<MyChild>(parentId: "1337")};
+			var child = new MyChild { Id = 1338, MyJoinField = JoinField.Link<MyChild>(parentId: "1337") };
 			infer.Routing(child).Should().Be("1337");
 
-			child = new MyChild {Id = 1339, MyJoinField = JoinField.Link<MyChild, MyParent>(parent)};
+			child = new MyChild { Id = 1339, MyJoinField = JoinField.Link<MyChild, MyParent>(parent) };
 			infer.Routing(child).Should().Be("1337");
 
 			/**
@@ -315,6 +313,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			indexResponse = client.Index(indexRequest);
 			indexResponse.ApiCall.Uri.Query.Should().Contain("routing=something-else");
 		}
+
 		/** [NOTE]
 		 * --
 		 * If you use multiple levels of parent and child relations e.g `A => B => C`, when you index `C`, you

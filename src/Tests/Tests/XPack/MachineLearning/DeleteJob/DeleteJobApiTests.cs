@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -15,10 +14,7 @@ namespace Tests.XPack.MachineLearning.DeleteJob
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				PutJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) PutJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -32,14 +28,13 @@ namespace Tests.XPack.MachineLearning.DeleteJob
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}";
+
 		protected override DeleteJobDescriptor NewDescriptor() => new DeleteJobDescriptor(CallIsolatedValue);
+
 		protected override object ExpectJson => null;
 		protected override Func<DeleteJobDescriptor, IDeleteJobRequest> Fluent => f => f;
 		protected override DeleteJobRequest Initializer => new DeleteJobRequest(CallIsolatedValue);
 
-		protected override void ExpectResponse(IDeleteJobResponse response)
-		{
-			response.Acknowledged.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IDeleteJobResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

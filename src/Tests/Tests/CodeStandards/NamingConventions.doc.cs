@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -28,7 +27,8 @@ namespace Tests.CodeStandards
 				typeof(DateMath)
 			};
 
-			var abstractClassesNotEndingInBase = typeof(IRequest).Assembly().GetTypes()
+			var abstractClassesNotEndingInBase = typeof(IRequest).Assembly()
+				.GetTypes()
 				.Where(t => t.IsClass() && t.IsAbstract() && !t.IsSealed() && !exceptions.Contains(t))
 				//when testing nuget package against merged internalize json.net skip its types.
 				.Where(t => !t.Namespace.StartsWith("Nest.Json"))
@@ -46,7 +46,8 @@ namespace Tests.CodeStandards
 		{
 			var exceptions = new[] { typeof(DateMath) };
 
-			var baseClassesNotAbstract = typeof(IRequest).Assembly().GetTypes()
+			var baseClassesNotAbstract = typeof(IRequest).Assembly()
+				.GetTypes()
 				.Where(t => t.IsClass() && !exceptions.Contains(t))
 				.Where(t => t.Name.Split('`')[0].EndsWith("Base"))
 				.Where(t => !t.IsAbstract())
@@ -212,6 +213,7 @@ namespace Tests.CodeStandards
 			var nextMustBeStartChar = true;
 			if (value.Length == 0)
 				return false;
+
 			for (var index = 0; index < value.Length; ++index)
 			{
 				var character = value[index];
@@ -232,21 +234,23 @@ namespace Tests.CodeStandards
 					case UnicodeCategory.ConnectorPunctuation:
 						if (nextMustBeStartChar && (int)character != 95)
 							return false;
+
 						nextMustBeStartChar = false;
 						break;
 					default:
 						if (!isTypeName || !IsSpecialTypeChar(character, ref nextMustBeStartChar))
 							return false;
+
 						break;
 				}
 			}
+
 			return true;
 		}
 
 		private static bool IsSpecialTypeChar(char ch, ref bool nextMustBeStartChar)
 		{
 			if ((uint)ch <= 62U)
-			{
 				switch (ch)
 				{
 					case '$':
@@ -263,19 +267,19 @@ namespace Tests.CodeStandards
 					default:
 						goto label_6;
 				}
-			}
 			else if ((int)ch != 91 && (int)ch != 93)
 			{
 				if ((int)ch == 96)
 					return true;
+
 				goto label_6;
 			}
+
 			nextMustBeStartChar = true;
 			return true;
+
 			label_6:
 			return false;
 		}
 	}
 }
-
-

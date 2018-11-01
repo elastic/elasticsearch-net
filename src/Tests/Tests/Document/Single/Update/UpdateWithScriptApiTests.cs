@@ -6,18 +6,19 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Single.Update
 {
-	public class UpdateWithScriptApiTests : ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
+	public class UpdateWithScriptApiTests
+		: ApiIntegrationTestBase<WritableCluster, IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>,
+			UpdateRequest<Project, Project>>
 	{
 		public UpdateWithScriptApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
-				this.Client.Index(Project.Instance, i=>i.Id(id));
+				Client.Index(Project.Instance, i => i.Id(id));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -41,7 +42,8 @@ namespace Tests.Document.Single.Update
 			{
 				source = "ctx._source.name = \"params.name\"",
 				lang = "painless",
-				@params = new {
+				@params = new
+				{
 					name = "foo",
 					other = (object)null
 				}
@@ -61,7 +63,7 @@ namespace Tests.Document.Single.Update
 					.Add("name", "foo")
 					.Add("other", null)
 				)
-			 );
+			);
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
 		{
@@ -76,9 +78,6 @@ namespace Tests.Document.Single.Update
 					{ "other", null }
 				}
 			}
-
 		};
 	}
 }
-
-

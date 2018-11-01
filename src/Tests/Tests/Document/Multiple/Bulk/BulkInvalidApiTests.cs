@@ -8,14 +8,13 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Document.Multiple.Bulk
 {
 	public class BulkInvalidApiTests : ApiIntegrationTestBase<WritableCluster, IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
 		public BulkInvalidApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Bulk(f),
 			fluentAsync: (client, f) => client.BulkAsync(f),
@@ -32,9 +31,9 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override object ExpectJson { get; } = new object[]
 		{
-			new Dictionary<string, object>{ { "update", new { _type="doc", _id = Project.Instance.Name } } },
+			new Dictionary<string, object> { { "update", new { _type = "doc", _id = Project.Instance.Name } } },
 			new { doc = new { leadDeveloper = new { firstName = "martijn" } } },
-			new Dictionary<string, object>{ { "delete", new { _type="doc", _id = Project.Instance.Name + "1" } } },
+			new Dictionary<string, object> { { "delete", new { _type = "doc", _id = Project.Instance.Name + "1" } } },
 		};
 
 		protected override void ExpectResponse(IBulkResponse response)
@@ -62,7 +61,7 @@ namespace Tests.Document.Multiple.Bulk
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
-			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"));
+			.Delete<Project>(b => b.Id(Project.Instance.Name + "1"));
 
 
 		protected override BulkRequest Initializer => new BulkRequest(CallIsolatedValue)

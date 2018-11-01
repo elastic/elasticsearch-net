@@ -24,7 +24,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 					{ HealthyResponse, 9201 },
 				}
@@ -48,7 +49,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 					{ HealthyResponse, 9201 },
 				}
@@ -72,7 +74,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 					{ HealthyResponse, 9201 },
 				}
@@ -96,7 +99,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 					{ HealthyResponse, 9201 },
 				}
@@ -121,7 +125,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 				}
 			);

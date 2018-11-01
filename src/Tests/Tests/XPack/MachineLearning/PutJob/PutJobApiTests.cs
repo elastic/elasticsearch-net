@@ -28,30 +28,31 @@ namespace Tests.XPack.MachineLearning.PutJob
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}";
 		protected override bool SupportsDeserialization => false;
+
 		protected override PutJobDescriptor<Metric> NewDescriptor() => new PutJobDescriptor<Metric>(CallIsolatedValue);
 
 		protected override object ExpectJson => new
+		{
+			analysis_config = new
 			{
-				analysis_config = new
+				bucket_span = "30m",
+				detectors = new[]
 				{
-					bucket_span = "30m",
-					detectors = new[]
+					new
 					{
-						new
-						{
-							function = "sum",
-							field_name = "total"
-						}
-					},
-					latency = "0s",
+						function = "sum",
+						field_name = "total"
+					}
 				},
-				data_description = new
-				{
-					time_field = "@timestamp"
-				},
-				description = "Lab 1 - Simple example",
-				results_index_name = "server-metrics"
-			};
+				latency = "0s",
+			},
+			data_description = new
+			{
+				time_field = "@timestamp"
+			},
+			description = "Lab 1 - Simple example",
+			results_index_name = "server-metrics"
+		};
 
 		protected override Func<PutJobDescriptor<Metric>, IPutJobRequest> Fluent => f => f
 			.Description("Lab 1 - Simple example")
@@ -72,7 +73,7 @@ namespace Tests.XPack.MachineLearning.PutJob
 				{
 					BucketSpan = "30m",
 					Latency = "0s",
-					Detectors = new []
+					Detectors = new[]
 					{
 						new SumDetector
 						{

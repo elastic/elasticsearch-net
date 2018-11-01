@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Core.Client;
-using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
@@ -62,8 +60,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			var createIndexResponse = _client.CreateIndex("myindex", c => c
 				.Mappings(ms => ms
 					.Map<Document>(m => m
-						.AutoMap<Company>() // <1> Auto map `Company` using the generic method
-						.AutoMap(typeof(Employee)) // <2> Auto map `Employee` using the non-generic method
+							.AutoMap<Company>() // <1> Auto map `Company` using the generic method
+							.AutoMap(typeof(Employee)) // <2> Auto map `Employee` using the non-generic method
 					)
 				)
 			);
@@ -80,19 +78,19 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					{
 						properties = new
 						{
-							birthday = new {type = "date"},
+							birthday = new { type = "date" },
 							employees = new
 							{
 								properties = new
 								{
-									birthday = new {type = "date"},
+									birthday = new { type = "date" },
 									employees = new
 									{
 										properties = new { },
 										type = "object"
 									},
-									hours = new {type = "long"},
-									isManager = new {type = "boolean"},
+									hours = new { type = "long" },
+									isManager = new { type = "boolean" },
 									join = new
 									{
 										properties = new { },
@@ -110,12 +108,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										},
 										type = "text"
 									},
-									salary = new {type = "integer"}
+									salary = new { type = "integer" }
 								},
 								type = "object"
 							},
-							hours = new {type = "long"},
-							isManager = new {type = "boolean"},
+							hours = new { type = "long" },
+							isManager = new { type = "boolean" },
 							join = new
 							{
 								properties = new { },
@@ -145,7 +143,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								},
 								type = "text"
 							},
-							salary = new {type = "integer"}
+							salary = new { type = "integer" }
 						}
 					}
 				}
@@ -163,13 +161,15 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void OverridingInheritedProperties()
 		{
-			var connectionSettings = new ConnectionSettings(new InMemoryConnection()) // <1> we're using an _in memory_ connection for this example. In your production application though, you'll want to use an `IConnection` that actually sends a request.
-				.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In your production application however, you'll likely not want to do this, since it causes the request and response bytes to be buffered in memory.
-				.DefaultMappingFor<ParentWithStringId>(m => m
-					.TypeName("parent")
-					.Ignore(p => p.Description)
-					.Ignore(p => p.IgnoreMe)
-				);
+			var connectionSettings =
+				new ConnectionSettings(
+						new InMemoryConnection()) // <1> we're using an _in memory_ connection for this example. In your production application though, you'll want to use an `IConnection` that actually sends a request.
+					.DisableDirectStreaming() // <2> we disable direct streaming here to capture the request and response bytes. In your production application however, you'll likely not want to do this, since it causes the request and response bytes to be buffered in memory.
+					.DefaultMappingFor<ParentWithStringId>(m => m
+						.TypeName("parent")
+						.Ignore(p => p.Description)
+						.Ignore(p => p.IgnoreMe)
+					);
 
 			var client = new ElasticClient(connectionSettings);
 
@@ -331,7 +331,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 			//hide
-            Expect(expected).FromRequest(createIndexResponse);
+			Expect(expected).FromRequest(createIndexResponse);
 
 			/** Now let's specify a maxRecursion of `3` */
 			createIndexResponse = _client.CreateIndex("myindex", c => c
@@ -382,7 +382,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 
 			//hide
-            Expect(expectedWithMaxRecursion).FromRequest(createIndexResponse);
+			Expect(expectedWithMaxRecursion).FromRequest(createIndexResponse);
 		}
 
 		//hide
@@ -403,7 +403,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((IPutMappingRequest) descriptor);
+			Expect(expected).WhenSerializing((IPutMappingRequest)descriptor);
 
 			var withMaxRecursionDescriptor = new PutMappingDescriptor<A>().AutoMap(3);
 
@@ -440,7 +440,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-            Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
+			Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
 		}
 	}
 }

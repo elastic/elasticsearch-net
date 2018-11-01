@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexOnServer
 {
-	public class ReindexOnServerSliceApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
+	public class ReindexOnServerSliceApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor,
+			ReindexOnServerRequest>
 	{
 		public class Test
 		{
@@ -26,18 +25,17 @@ namespace Tests.Document.Multiple.ReindexOnServer
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
-			{
-				this.Client.Bulk(b => b
+				Client.Bulk(b => b
 					.Index(index)
-					.IndexMany(new []
+					.IndexMany(new[]
 					{
 						new Test { Id = 1, Flag = "bar" },
 						new Test { Id = 2, Flag = "bar" }
 					})
 					.Refresh(Refresh.WaitFor)
 				);
-			}
 		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ReindexOnServer(f),
 			fluentAsync: (client, f) => client.ReindexOnServerAsync(f),
@@ -103,10 +101,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			Refresh = true,
 		};
 
-		protected override void ExpectResponse(IReindexOnServerResponse response)
-		{
-			response.SliceId.Should().Be(0);
-		}
+		protected override void ExpectResponse(IReindexOnServerResponse response) => response.SliceId.Should().Be(0);
 
 		protected override object ExpectJson =>
 			new

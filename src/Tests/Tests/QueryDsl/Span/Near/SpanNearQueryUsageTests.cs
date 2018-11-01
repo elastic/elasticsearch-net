@@ -4,7 +4,6 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 #pragma warning disable 618 // Uses CollectPayloads
 
@@ -18,7 +17,8 @@ namespace Tests.QueryDsl.Joining.SpanNear
 		{
 			span_near = new
 			{
-				clauses = new object[] {
+				clauses = new object[]
+				{
 					new { span_term = new { field = new { value = "value1" } } },
 					new { span_term = new { field = new { value = "value2" } } },
 					new { span_term = new { field = new { value = "value3" } } },
@@ -29,7 +29,6 @@ namespace Tests.QueryDsl.Joining.SpanNear
 				_name = "named_query",
 				boost = 1.1
 			}
-
 		};
 
 		protected override QueryContainer QueryInitializer => new SpanNearQuery
@@ -65,7 +64,7 @@ namespace Tests.QueryDsl.Joining.SpanNear
 		{
 			q => q.Clauses = null,
 			q => q.Clauses = Enumerable.Empty<ISpanQuery>(),
-			q => q.Clauses = new [] { new SpanQuery() },
+			q => q.Clauses = new[] { new SpanQuery() },
 		};
 	}
 }

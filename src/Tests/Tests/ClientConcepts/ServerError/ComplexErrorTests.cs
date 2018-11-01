@@ -4,7 +4,6 @@ using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Core.Extensions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.ServerError
 {
@@ -12,7 +11,7 @@ namespace Tests.ClientConcepts.ServerError
 	{
 		[U] protected override void AssertServerError() => base.AssertServerError();
 
-		protected override string Json  =>@"{
+		protected override string Json => @"{
 	""root_cause"" : [
 	{
 		""type"" : ""parse_exception"",

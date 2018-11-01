@@ -10,16 +10,14 @@ using Tests.Core.ManagedElasticsearch.NodeSeeders;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Tests.Framework.ManagedElasticsearch.NodeSeeders;
-using Xunit;
-
 
 namespace Tests.Cluster.TaskManagement.TasksList
 {
-	public class TasksListApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
+	public class TasksListApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		public TasksListApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ListTasks(f),
 			fluentAsync: (client, f) => client.ListTasksAsync(f),
@@ -67,11 +65,13 @@ namespace Tests.Cluster.TaskManagement.TasksList
 	}
 
 	[SkipVersion("<2.3.0", "")]
-	public class TasksListDetailedApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
+	public class TasksListDetailedApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IListTasksResponse, IListTasksRequest, ListTasksDescriptor, ListTasksRequest>
 	{
 		private static TaskId _taskId = new TaskId("fakeid:1");
 
 		public TasksListDetailedApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ListTasks(f),
 			fluentAsync: (client, f) => client.ListTasksAsync(f),
@@ -81,7 +81,7 @@ namespace Tests.Cluster.TaskManagement.TasksList
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			var seeder = new DefaultSeeder(this.Cluster.Client);
+			var seeder = new DefaultSeeder(Cluster.Client);
 			seeder.SeedNode();
 
 			// get a suitable load of projects in order to get a decent task status out

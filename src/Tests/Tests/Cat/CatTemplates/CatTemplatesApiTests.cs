@@ -5,15 +5,15 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatTemplates
 {
 	[SkipVersion("<5.1.0", "CatTemplates is an API introduced in 5.1")]
-	public class CatTemplatesApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatTemplatesRecord>, ICatTemplatesRequest, CatTemplatesDescriptor, CatTemplatesRequest>
+	public class CatTemplatesApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatTemplatesRecord>, ICatTemplatesRequest, CatTemplatesDescriptor, CatTemplatesRequest>
 	{
 		public CatTemplatesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatTemplates(),
 			fluentAsync: (client, f) => client.CatTemplatesAsync(),
@@ -33,5 +33,4 @@ namespace Tests.Cat.CatTemplates
 #pragma warning restore CS0618 // Type or member is obsolete
 		}
 	}
-
 }

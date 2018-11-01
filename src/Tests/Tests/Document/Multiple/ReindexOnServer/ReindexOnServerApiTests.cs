@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -8,14 +7,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexOnServer
 {
 	[SkipVersion("<2.3.0", "")]
-	public class ReindexOnServerApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
+	public class ReindexOnServerApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor,
+			ReindexOnServerRequest>
 	{
 		public class Test
 		{
@@ -29,16 +28,18 @@ namespace Tests.Document.Multiple.ReindexOnServer
 		{
 			foreach (var index in values.Values)
 			{
-				this.Client.Index(new Test { Id = 1, Flag = "bar" }, i => i.Index(index).Refresh(Refresh.True));
-				this.Client.Index(new Test { Id = 2, Flag = "bar" }, i => i.Index(index).Refresh(Refresh.True));
+				Client.Index(new Test { Id = 1, Flag = "bar" }, i => i.Index(index).Refresh(Refresh.True));
+				Client.Index(new Test { Id = 2, Flag = "bar" }, i => i.Index(index).Refresh(Refresh.True));
 			}
 		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ReindexOnServer(f),
 			fluentAsync: (client, f) => client.ReindexOnServerAsync(f),
 			request: (client, r) => client.ReindexOnServer(r),
 			requestAsync: (client, r) => client.ReindexOnServerAsync(r)
 		);
+
 		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
 
 		protected override bool ExpectIsValid => true;
@@ -86,7 +87,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				Query = new MatchQuery { Field = Field<Test>(p => p.Flag), Query = "bar" },
 				Sort = new List<ISort> { new SortField { Field = "id", Order = SortOrder.Ascending } },
 				Size = 100
-
 			},
 			Destination = new ReindexDestination
 			{
@@ -110,7 +110,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			response.Created.Should().Be(2);
 			response.Batches.Should().Be(1);
 
-			var search = this.Client.Search<Test>(s => s
+			var search = Client.Search<Test>(s => s
 				.Index(CallIsolatedValue + "-clone")
 			);
 			search.Total.Should().BeGreaterThan(0);
@@ -130,7 +130,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				},
 				script = new
 				{
-					source = this.PainlessScript,
+					source = PainlessScript,
 				},
 				source = new
 				{

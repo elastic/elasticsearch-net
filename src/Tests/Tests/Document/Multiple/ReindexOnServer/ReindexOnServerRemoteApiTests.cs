@@ -5,14 +5,15 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Multiple.ReindexOnServer
 {
 	[SkipVersion("<2.3.0", "")]
-	public class ReindexOnServerRemoteApiTests : ApiTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
+	public class ReindexOnServerRemoteApiTests
+		: ApiTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
 	{
 		private readonly Uri _host = new Uri("http://myremoteserver.example:9200");
+
 		public ReindexOnServerRemoteApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -21,13 +22,14 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			request: (client, r) => client.ReindexOnServer(r),
 			requestAsync: (client, r) => client.ReindexOnServerAsync(r)
 		);
+
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/_reindex";
 		protected override bool SupportsDeserialization => false;
 
 		protected override Func<ReindexOnServerDescriptor, IReindexOnServerRequest> Fluent => d => d
 			.Source(s => s
-				.Remote(r=>r.Host(_host).Username("user").Password("changeme"))
+				.Remote(r => r.Host(_host).Username("user").Password("changeme"))
 				.Index(CallIsolatedValue)
 				.Type("test")
 				.Size(100)
@@ -50,7 +52,6 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				Index = CallIsolatedValue,
 				Type = "test",
 				Size = 100
-
 			},
 			Destination = new ReindexDestination
 			{

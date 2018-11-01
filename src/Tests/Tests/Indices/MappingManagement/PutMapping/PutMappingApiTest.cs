@@ -2,13 +2,10 @@
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using Nest;
-using Tests.ClientConcepts.HighLevel.Inference;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.PutMapping
@@ -18,9 +15,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 		: ApiIntegrationAgainstNewIndexTestBase
 			<WritableCluster, IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
-		public PutMappingApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public PutMappingApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Map(f),
@@ -101,8 +96,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				},
 				numberOfCommits = new { type = "integer" },
 				numberOfContributors = new { type = "integer" },
-				sourceOnly = new {properties = new { }, type = "object"},
-				startedOn = new {type = "date"},
+				sourceOnly = new { properties = new { }, type = "object" },
+				startedOn = new { type = "date" },
 				state = new { type = "keyword" },
 				visibility = new { type = "keyword" },
 				suggest = new { type = "completion" },
@@ -197,7 +192,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					{
 						Relations = new Relations
 						{
-							{typeof(Project), typeof(CommitActivity)}
+							{ typeof(Project), typeof(CommitActivity) }
 						}
 					}
 				},
@@ -220,29 +215,29 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					{
 						Properties = new Properties<Tag>
 						{
-							{p => p.Added, new DateProperty()},
-							{p => p.Name, new TextProperty()},
+							{ p => p.Added, new DateProperty() },
+							{ p => p.Name, new TextProperty() },
 						}
 					}
 				},
-				{p => p.Description, new TextProperty()},
-				{p => p.DateString, new TextProperty { }},
-				{p => p.Type, new TextProperty { }},
-				{p => p.LastActivity, new DateProperty()},
+				{ p => p.Description, new TextProperty() },
+				{ p => p.DateString, new TextProperty { } },
+				{ p => p.Type, new TextProperty { } },
+				{ p => p.LastActivity, new DateProperty() },
 				{
 					p => p.LeadDeveloper, new ObjectProperty
 					{
 						Properties = new Properties<Developer>
 						{
-							{p => p.FirstName, new TextProperty()},
-							{p => p.Gender, new KeywordProperty()},
-							{p => p.Id, new NumberProperty(NumberType.Long)},
-							{p => p.IpAddress, new TextProperty()},
-							{p => p.JobTitle, new TextProperty()},
-							{p => p.LastName, new TextProperty()},
-							{p => p.Location, new GeoPointProperty()},
-							{p => p.OnlineHandle, new TextProperty()},
-							{p => p.GeoIp, new ObjectProperty()},
+							{ p => p.FirstName, new TextProperty() },
+							{ p => p.Gender, new KeywordProperty() },
+							{ p => p.Id, new NumberProperty(NumberType.Long) },
+							{ p => p.IpAddress, new TextProperty() },
+							{ p => p.JobTitle, new TextProperty() },
+							{ p => p.LastName, new TextProperty() },
+							{ p => p.Location, new GeoPointProperty() },
+							{ p => p.OnlineHandle, new TextProperty() },
+							{ p => p.GeoIp, new ObjectProperty() },
 						}
 					}
 				},
@@ -251,47 +246,47 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					{
 						Properties = new Properties<SimpleGeoPoint>
 						{
-							{p => p.Lat, new NumberProperty(NumberType.Double)},
-							{p => p.Lon, new NumberProperty(NumberType.Double)},
+							{ p => p.Lat, new NumberProperty(NumberType.Double) },
+							{ p => p.Lon, new NumberProperty(NumberType.Double) },
 						}
 					}
 				},
-				{p => p.Metadata, new ObjectProperty()},
-				{p => p.Name, new TextProperty {Index = false}},
-				{p => p.NumberOfCommits, new NumberProperty(NumberType.Integer)},
-				{p => p.NumberOfContributors, new NumberProperty(NumberType.Integer)},
+				{ p => p.Metadata, new ObjectProperty() },
+				{ p => p.Name, new TextProperty { Index = false } },
+				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) },
+				{ p => p.NumberOfContributors, new NumberProperty(NumberType.Integer) },
 				{
 					p => p.SourceOnly, new ObjectProperty()
 					{
 						Properties = new Properties()
 					}
 				},
-				{p => p.StartedOn, new DateProperty()},
-				{p => p.State, new KeywordProperty()},
-				{p => p.Visibility, new KeywordProperty()},
-				{p => p.Suggest, new CompletionProperty()},
+				{ p => p.StartedOn, new DateProperty() },
+				{ p => p.State, new KeywordProperty() },
+				{ p => p.Visibility, new KeywordProperty() },
+				{ p => p.Suggest, new CompletionProperty() },
 				{
 					p => p.Ranges, new ObjectProperty
 					{
 						Properties = new Properties<Ranges>
 						{
-							{p => p.Dates, new DateRangeProperty()},
-							{p => p.Doubles, new DoubleRangeProperty()},
-							{p => p.Floats, new FloatRangeProperty()},
-							{p => p.Integers, new IntegerRangeProperty()},
-							{p => p.Longs, new LongRangeProperty()},
-							{p => p.Ips, new IpRangeProperty()},
+							{ p => p.Dates, new DateRangeProperty() },
+							{ p => p.Doubles, new DoubleRangeProperty() },
+							{ p => p.Floats, new FloatRangeProperty() },
+							{ p => p.Integers, new IntegerRangeProperty() },
+							{ p => p.Longs, new LongRangeProperty() },
+							{ p => p.Ips, new IpRangeProperty() },
 						}
 					}
 				},
-				{p => p.RequiredBranches, new NumberProperty(NumberType.Integer)},
+				{ p => p.RequiredBranches, new NumberProperty(NumberType.Integer) },
 				{
 					p => p.Tags, new ObjectProperty
 					{
 						Properties = new Properties<Tag>
 						{
-							{p => p.Added, new DateProperty()},
-							{p => p.Name, new TextProperty()},
+							{ p => p.Added, new DateProperty() },
+							{ p => p.Name, new TextProperty() },
 						}
 					}
 				},

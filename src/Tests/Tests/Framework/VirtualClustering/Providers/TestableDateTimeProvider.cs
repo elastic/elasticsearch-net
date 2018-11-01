@@ -9,6 +9,6 @@ namespace Tests.Framework
 
 		public override DateTime Now() => MutableNow;
 
-		public void ChangeTime(Func<DateTime, DateTime> change) => this.MutableNow = change(this.MutableNow);
+		public void ChangeTime(Func<DateTime, DateTime> change) => MutableNow = change(MutableNow);
 	}
 }

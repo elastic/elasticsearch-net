@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
@@ -11,7 +10,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void Eq()
 		{
 			Routing types = "foo";
-			Routing[] equal = {"foo"};
+			Routing[] equal = { "foo" };
 			foreach (var t in equal)
 			{
 				(t == types).ShouldBeTrue(t);
@@ -26,21 +25,22 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			l1.Should().Be("2");
 			l1.Should().Be(2);
 
-			l1 = "foo, bar"; l2 = "bar,   foo";
+			l1 = "foo, bar";
+			l2 = "bar,   foo";
 			(l1 == l2).ShouldBeTrue(l2);
 			l1.Should().Be(l2);
-
 		}
 
 		[U] public void NotEq()
 		{
 			Routing types = "foo";
-			Routing[] notEqual = {"bar", "" , "foo  "};
+			Routing[] notEqual = { "bar", "", "foo  " };
 			foreach (var t in notEqual)
 			{
 				(t != types).ShouldBeTrue(t);
 				t.Should().NotBe(types);
 			}
+
 			Routing l1 = 2, l2 = 3;
 			(l1 != l2).ShouldBeTrue(l2);
 			(l1 != 3).ShouldBeTrue(l1);
@@ -49,11 +49,13 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			l1.Should().NotBe(3);
 			l1.Should().NotBe("3");
 
-			l1 = "foo, bar"; l2 = "bar,   foo, x";
+			l1 = "foo, bar";
+			l2 = "bar,   foo, x";
 			(l1 != l2).ShouldBeTrue(l2);
 			l1.Should().NotBe(l2);
 
-			l1 = "foo, bar"; l2 = "bar";
+			l1 = "foo, bar";
+			l2 = "bar";
 			(l1 != l2).ShouldBeTrue(l2);
 			l1.Should().NotBe(l2);
 		}

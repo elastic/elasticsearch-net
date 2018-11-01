@@ -1,17 +1,16 @@
-﻿using Tests.Framework;
-using Tests.Framework.Integration;
-using Xunit;
-using Nest;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework;
+using Tests.Framework.Integration;
 
 namespace Tests.Search.Validate
 {
 	public class ValidateQueryApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>,
+			ValidateQueryRequest<Project>>
 	{
 		public ValidateQueryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -29,7 +28,8 @@ namespace Tests.Search.Validate
 	}
 
 	public class ValidateInvalidQueryApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>,
+			ValidateQueryRequest<Project>>
 	{
 		public ValidateInvalidQueryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -40,7 +40,7 @@ namespace Tests.Search.Validate
 			requestAsync: (c, r) => c.ValidateQueryAsync(_request)
 		);
 
-		private ValidateQueryDescriptor<Project> _descriptor = new ValidateQueryDescriptor<Project>()
+		private readonly ValidateQueryDescriptor<Project> _descriptor = new ValidateQueryDescriptor<Project>()
 			.Query(q => q
 				.Match(m => m
 					.Field(p => p.StartedOn)
@@ -48,7 +48,7 @@ namespace Tests.Search.Validate
 				)
 			);
 
-		private ValidateQueryRequest<Project> _request = new ValidateQueryRequest<Project>
+		private readonly ValidateQueryRequest<Project> _request = new ValidateQueryRequest<Project>
 		{
 			Query = new QueryContainer(
 				new MatchQuery
@@ -64,9 +64,6 @@ namespace Tests.Search.Validate
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/doc/_validate/query";
 
-		protected override void ExpectResponse(IValidateQueryResponse response)
-		{
-			response.Valid.Should().BeFalse();
-		}
+		protected override void ExpectResponse(IValidateQueryResponse response) => response.Valid.Should().BeFalse();
 	}
 }

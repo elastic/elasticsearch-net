@@ -1,12 +1,11 @@
-﻿using FluentAssertions;
-using Nest;
-using System;
+﻿using System;
 using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
+using Nest;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
 using Tests.Domain;
 using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 using Xunit;
 using static Tests.Core.Serialization.SerializationTestHelper;
 using static Nest.Infer;
@@ -205,7 +204,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Index<Project>("cluster_one").Should().NotBe("cluster_one:project").And.NotBe(0);
 			Index<Project>().GetHashCode().Should().NotBe(Index<Developer>().GetHashCode()).And.NotBe(0);
 			Index<Project>("cluster_one").GetHashCode().Should().NotBe(Index<Developer>("cluster_one").GetHashCode()).And.NotBe(0);
-
 		}
 	}
 }

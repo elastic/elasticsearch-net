@@ -9,7 +9,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations
@@ -102,14 +101,15 @@ namespace Tests.Aggregations
 						{
 							Aggregations = new AggregationDictionary
 							{
-								{"average_per_child", new AverageAggregation("average_per_child", "confidenceFactor")},
-								{"max_per_child", new MaxAggregation("max_per_child", "confidenceFactor")},
-								{"min_per_child", new MinAggregation("min_per_child", "confidenceFactor")},
+								{ "average_per_child", new AverageAggregation("average_per_child", "confidenceFactor") },
+								{ "max_per_child", new MaxAggregation("max_per_child", "confidenceFactor") },
+								{ "min_per_child", new MinAggregation("min_per_child", "confidenceFactor") },
 							}
 						}
 					}
 				}
 			};
+
 		/**
 		 * As you can see, the key in the dictionary is repeated as the name passed to the aggregation constructor.
 		 * This starts to get hard to read and a little error prone, wouldn't you agree?
@@ -181,7 +181,7 @@ namespace Tests.Aggregations
 			);
 
 		protected IAggregationContainer Combine(AggregationContainerDescriptor<CommitActivity> aggs) => aggs
-			.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+				.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 			&& MaxPerChild(aggs)
 			&& MinPerChild(aggs)
 			&& null;
@@ -214,7 +214,6 @@ namespace Tests.Aggregations
 			&& new MaxAggregation("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
 			&& new MinAggregation("min_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
 			&& null;
-
 	}
 
 	public class AdvancedAggregationDslUsage : Usage
@@ -231,12 +230,13 @@ namespace Tests.Aggregations
 			get
 			{
 				var aggregations =
-					new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>> //<1> a list of aggregation functions to apply
-					{
-						a => a.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
-						a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
-						a => a.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-					};
+					new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>
+						> //<1> a list of aggregation functions to apply
+						{
+							a => a.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
+							a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
+							a => a.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+						};
 
 				return s => s
 					.Aggregations(aggs => aggs
@@ -296,5 +296,4 @@ namespace Tests.Aggregations
 			maxPerChild.Should().NotBeNull(); //<2> Do something with the max per child. Here we just assert it's not null
 		}
 	}
-
 }

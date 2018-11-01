@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
@@ -10,16 +9,16 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.Monitoring.IndicesShardStores
 {
-	public class IndicesShardStoresApiTests : ApiIntegrationTestBase<WritableCluster, IIndicesShardStoresResponse, IIndicesShardStoresRequest, IndicesShardStoresDescriptor, IndicesShardStoresRequest>
+	public class IndicesShardStoresApiTests
+		: ApiIntegrationTestBase<WritableCluster, IIndicesShardStoresResponse, IIndicesShardStoresRequest, IndicesShardStoresDescriptor,
+			IndicesShardStoresRequest>
 	{
 		public IndicesShardStoresApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private static string IndexWithUnassignedShards = "nest-" + RandomString();
+		private static readonly string IndexWithUnassignedShards = "nest-" + RandomString();
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -42,14 +41,16 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 			request: (client, r) => client.IndicesShardStores(r),
 			requestAsync: (client, r) => client.IndicesShardStoresAsync(r)
 		);
+
 		protected override IndicesShardStoresRequest Initializer =>
 			new IndicesShardStoresRequest(IndexWithUnassignedShards)
 			{
 				Status = new[] { "all" }
 			};
+
 		protected override Func<IndicesShardStoresDescriptor, IIndicesShardStoresRequest> Fluent => s =>
 			s.Index(IndexWithUnassignedShards)
-			.Status("all");
+				.Status("all");
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;

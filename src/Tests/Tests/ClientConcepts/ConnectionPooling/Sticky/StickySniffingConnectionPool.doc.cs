@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -25,17 +23,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 		{
 			var numberOfNodes = 10;
 			var uris = Enumerable.Range(9200, numberOfNodes).Select(p => new Uri("http://localhost:" + p));
-			var pool = new Elasticsearch.Net.StickySniffingConnectionPool(uris, (n)=>0f);
+			var pool = new Elasticsearch.Net.StickySniffingConnectionPool(uris, (n) => 0f);
 
-            /**
+			/**
 			* Here we have setup a sticky connection pool seeded with 10 nodes all weighted the same.
 			* So what order we expect? Imagine the following:
 			*
 			* Thread A calls `.CreateView()` and gets returned the first live node
 			* Thread B calls `.CreateView()` and gets returned the same node, since the first
-            * node is still good
+			* node is still good
 			*/
-            var startingPositions = Enumerable.Range(0, numberOfNodes)
+			var startingPositions = Enumerable.Range(0, numberOfNodes)
 				.Select(i => pool.CreateView().First())
 				.Select(n => n.Uri.Port)
 				.ToList();
@@ -47,12 +45,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task FavorsNodeWithGreatestWeightAndFallsOver()
 		{
-			IEnumerable<Node> Nodes(int start) => Enumerable.Range(start, 4)
-				.Select(i => new Uri($"http://localhost:{9200 + i}"))
-				.Select((u, i) => new Node(u)
-				{
-					Settings = new Dictionary<string, object> {{"rack", $"rack_{u.Port - 9200}"}}
-				});
+			IEnumerable<Node> Nodes(int start)
+			{
+				return Enumerable.Range(start, 4)
+					.Select(i => new Uri($"http://localhost:{9200 + i}"))
+					.Select((u, i) => new Node(u)
+					{
+						Settings = new Dictionary<string, object> { { "rack", $"rack_{u.Port - 9200}" } }
+					});
+			}
 
 			/** We set up a cluster with 4 nodes all having a different rack id
 				our Sticky Sniffing Connection Pool gives the most weight to rack_2 and rack_11.
@@ -64,13 +65,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				.Nodes(Nodes(0))
 				.ClientCalls(p => p.OnPort(9202).Succeeds(Twice).ThrowsAfterSucceeds())
 				.ClientCalls(p => p.FailAlways())
-				.Sniff(s=>s.SucceedAlways(Framework.Cluster
+				.Sniff(s => s.SucceedAlways(Framework.Cluster
 					.Nodes(Nodes(10))
 					.ClientCalls(p => p.SucceedAlways()))
 				)
-				.StickySniffingConnectionPool(n=>
+				.StickySniffingConnectionPool(n =>
 					(n.Settings.TryGetValue("rack", out var v) && v.ToString() == "rack_2" ? 10 : 0)
-					+(n.Settings.TryGetValue("rack", out var r) && r.ToString() == "rack_11" ? 10 : 0)
+					+ (n.Settings.TryGetValue("rack", out var r) && r.ToString() == "rack_11" ? 10 : 0)
 				)
 				.Settings(p => p.DisablePing().SniffOnStartup(false))
 			);
@@ -81,13 +82,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 			* 9210 to 9213. We should now be stick on 9211 as its on rack_11
 			*/
 			await audit.TraceCalls(
-				new ClientCall { { HealthyResponse, 9202} },
-				new ClientCall { { HealthyResponse, 9202} },
-				new ClientCall {
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall
+				{
 					{ BadResponse, 9202 },
 					{ SniffOnFail },
 					{ SniffSuccess, 9200 },
-					{ HealthyResponse, 9211},
+					{ HealthyResponse, 9211 },
 				},
 				/** Now we are sticky on 9211 onwards */
 				new ClientCall { { HealthyResponse, 9211 } },
@@ -99,15 +101,19 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				new ClientCall { { HealthyResponse, 9211 } }
 			);
 		}
+
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffOnStartupReseedsPutsMostWeightedNodeToFront()
 		{
-			IEnumerable<Node> Nodes(int start) => Enumerable.Range(start, 4)
-				.Select(i => new Uri($"http://localhost:{9200 + i}"))
-				.Select((u, i) => new Node(u)
-				{
-					Settings = new Dictionary<string, object> {{"rack", $"rack_{u.Port - 9200}"}}
-				});
+			IEnumerable<Node> Nodes(int start)
+			{
+				return Enumerable.Range(start, 4)
+					.Select(i => new Uri($"http://localhost:{9200 + i}"))
+					.Select((u, i) => new Node(u)
+					{
+						Settings = new Dictionary<string, object> { { "rack", $"rack_{u.Port - 9200}" } }
+					});
+			}
 
 			/** We seed a cluster with an array of 4 Uri's starting at port 9200.
 			* Our sniffing sorted connection pool is set up to favor nodes in rack_2
@@ -115,11 +121,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(4)
 				.ClientCalls(p => p.SucceedAlways())
-				.Sniff(s=>s.SucceedAlways(Framework.Cluster
+				.Sniff(s => s.SucceedAlways(Framework.Cluster
 					.Nodes(Nodes(0))
 					.ClientCalls(p => p.SucceedAlways()))
 				)
-				.StickySniffingConnectionPool(n=>
+				.StickySniffingConnectionPool(n =>
 					(n.Settings.TryGetValue("rack", out var v) && v.ToString() == "rack_2" ? 10 : 0)
 				)
 				.Settings(p => p.DisablePing())
@@ -134,17 +140,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				{
 					{ SniffOnStartup },
 					{ SniffSuccess, 9200 },
-					{ HealthyResponse, 9202},
+					{ HealthyResponse, 9202 },
 				},
 				/** We are sticky on 9202 for as long as it keeps returning valid responses */
-				new ClientCall { { HealthyResponse, 9202} },
-				new ClientCall { { HealthyResponse, 9202} },
-				new ClientCall { { HealthyResponse, 9202} },
-				new ClientCall { { HealthyResponse, 9202} },
-				new ClientCall { { HealthyResponse, 9202} },
-				new ClientCall { { HealthyResponse, 9202} },
-				new ClientCall { { HealthyResponse, 9202} },
-				new ClientCall { { HealthyResponse, 9202} }
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall { { HealthyResponse, 9202 } }
 			);
 		}
 
@@ -161,45 +167,49 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 
 			await audit.TraceCalls(
 				/** All the calls fail */
-				new ClientCall {
-					{ BadResponse, 9200},
-					{ BadResponse, 9201},
-					{ BadResponse, 9202},
-					{ BadResponse, 9203},
+				new ClientCall
+				{
+					{ BadResponse, 9200 },
+					{ BadResponse, 9201 },
+					{ BadResponse, 9202 },
+					{ BadResponse, 9203 },
 					{ MaxRetriesReached },
 					{ FailedOverAllNodes },
-					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(4) }
 				},
 				/** After all our registered nodes are marked dead we want to sample a single dead node
 				* each time to quickly see if the cluster is back up. We do not want to retry all 4
 				* nodes
 				*/
-				new ClientCall {
+				new ClientCall
+				{
 					{ AllNodesDead },
-					{ Resurrection, 9200},
-					{ BadResponse, 9200},
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+					{ Resurrection, 9200 },
+					{ BadResponse, 9200 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(4) }
 				},
-				new ClientCall {
+				new ClientCall
+				{
 					{ AllNodesDead },
-					{ Resurrection, 9201},
-					{ BadResponse, 9201},
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+					{ Resurrection, 9201 },
+					{ BadResponse, 9201 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(4) }
 				},
-				new ClientCall {
+				new ClientCall
+				{
 					{ AllNodesDead },
-					{ Resurrection, 9202},
-					{ BadResponse, 9202},
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+					{ Resurrection, 9202 },
+					{ BadResponse, 9202 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(4) }
 				},
-				new ClientCall {
+				new ClientCall
+				{
 					{ AllNodesDead },
-					{ Resurrection, 9203},
-					{ BadResponse, 9203},
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+					{ Resurrection, 9203 },
+					{ BadResponse, 9203 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(4) }
 				}
 			);
 		}
-
 	}
 }

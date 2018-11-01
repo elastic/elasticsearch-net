@@ -5,7 +5,6 @@ using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.CommonOptions.TimeUnit
@@ -47,11 +46,12 @@ namespace Tests.CommonOptions.TimeUnit
 			/**
 			* The `Milliseconds` property on `Time` is calculated even when not using the constructor that takes a `double`
 			*/
-			unitMilliseconds.Milliseconds.Should().Be(1000*60*60*24*2);
-			unitComposed.Milliseconds.Should().Be(1000*60*60*24*2);
-			unitTimeSpan.Milliseconds.Should().Be(1000*60*60*24*2);
-			unitString.Milliseconds.Should().Be(1000*60*60*24*2);
+			unitMilliseconds.Milliseconds.Should().Be(1000 * 60 * 60 * 24 * 2);
+			unitComposed.Milliseconds.Should().Be(1000 * 60 * 60 * 24 * 2);
+			unitTimeSpan.Milliseconds.Should().Be(1000 * 60 * 60 * 24 * 2);
+			unitString.Milliseconds.Should().Be(1000 * 60 * 60 * 24 * 2);
 		}
+
 		/**
 		* ==== Implicit conversion
 		* There are implicit conversions from `string`, `TimeSpan` and `double` to an instance of `Time`, making them
@@ -61,7 +61,7 @@ namespace Tests.CommonOptions.TimeUnit
 		{
 			Time oneMinute = "1m";
 			Time fourteenDays = TimeSpan.FromDays(14);
-			Time twoDays = 1000*60*60*24*2;
+			Time twoDays = 1000 * 60 * 60 * 24 * 2;
 
 			Expect("1m").WhenSerializing(oneMinute);
 			Expect("14d").WhenSerializing(fourteenDays);
@@ -81,12 +81,12 @@ namespace Tests.CommonOptions.TimeUnit
 			Time fourteenDays = TimeSpan.FromDays(14);
 			fourteenDays.Milliseconds.Should().Be(1209600000);
 
-			Time twoDays = 1000*60*60*24*2;
+			Time twoDays = 1000 * 60 * 60 * 24 * 2;
 
 			fourteenDays.Should().BeGreaterThan(twoDays);
 			(fourteenDays > twoDays).Should().BeTrue();
-		    (twoDays != null).Should().BeTrue();
-            (twoDays >= new Time("2d")).Should().BeTrue();
+			(twoDays != null).Should().BeTrue();
+			(twoDays >= new Time("2d")).Should().BeTrue();
 
 			twoDays.Should().BeLessThan(fourteenDays);
 			(twoDays < fourteenDays).Should().BeTrue();
@@ -127,9 +127,9 @@ namespace Tests.CommonOptions.TimeUnit
 			Time.MinusOne.Should().Be(Time.MinusOne);
 			new Time("-1").Should().Be(Time.MinusOne);
 			new Time(-1).Should().Be(Time.MinusOne);
-			((Time) (-1)).Should().Be(Time.MinusOne);
-			((Time) "-1").Should().Be(Time.MinusOne);
-			((Time) (-1)).Should().Be((Time) "-1");
+			((Time)(-1)).Should().Be(Time.MinusOne);
+			((Time)"-1").Should().Be(Time.MinusOne);
+			((Time)(-1)).Should().Be((Time)"-1");
 
 			/**
 			 * Similarly, the following are all equal to `Time.Zero`
@@ -137,9 +137,9 @@ namespace Tests.CommonOptions.TimeUnit
 			Time.Zero.Should().Be(Time.Zero);
 			new Time("0").Should().Be(Time.Zero);
 			new Time(0).Should().Be(Time.Zero);
-			((Time) 0).Should().Be(Time.Zero);
-			((Time) "0").Should().Be(Time.Zero);
-			((Time) 0).Should().Be((Time) "0");
+			((Time)0).Should().Be(Time.Zero);
+			((Time)"0").Should().Be(Time.Zero);
+			((Time)0).Should().Be((Time)"0");
 
 			/** Special Time values `0` and `-1` can be compared against other Time values
 			 * although admittedly, this is a tad nonsensical.
@@ -158,25 +158,25 @@ namespace Tests.CommonOptions.TimeUnit
 			(new Time(0, Nest.TimeUnit.Millisecond) == new Time("0ms")).Should().BeTrue();
 		}
 
-        // hide
-        private class StringParsingTestCases : List<Tuple<string, TimeSpan, string>>
+		// hide
+		private class StringParsingTestCases : List<Tuple<string, TimeSpan, string>>
 		{
 			public void Add(string original, TimeSpan expect, string toString) =>
-				this.Add(Tuple.Create(original, expect, toString));
+				Add(Tuple.Create(original, expect, toString));
 
 			public void Add(string bad, string argumentExceptionContains) =>
-				this.Add(Tuple.Create(bad, TimeSpan.FromDays(1), argumentExceptionContains));
+				Add(Tuple.Create(bad, TimeSpan.FromDays(1), argumentExceptionContains));
 		}
 
-        // hide
-		[U]public void StringImplicitConversionParsing()
+		// hide
+		[U] public void StringImplicitConversionParsing()
 		{
 			var testCases = new StringParsingTestCases
 			{
-				{ "2.000000000e-06ms", TimeSpan.FromMilliseconds(2.000000000e-06), "0.000002ms"},
-				{ "3.1e-11ms", TimeSpan.FromMilliseconds(3.1e-11), "0.000000000031ms"},
-				{ "1000 nanos", new TimeSpan(10) , "1000nanos"},
-				{ "1000nanos", new TimeSpan(10), "1000nanos"},
+				{ "2.000000000e-06ms", TimeSpan.FromMilliseconds(2.000000000e-06), "0.000002ms" },
+				{ "3.1e-11ms", TimeSpan.FromMilliseconds(3.1e-11), "0.000000000031ms" },
+				{ "1000 nanos", new TimeSpan(10), "1000nanos" },
+				{ "1000nanos", new TimeSpan(10), "1000nanos" },
 				{ "1000 NANOS", new TimeSpan(10), "1000nanos" },
 				{ "1000NANOS", new TimeSpan(10), "1000nanos" },
 				{ "10micros", new TimeSpan(100), "10micros" },
@@ -186,11 +186,11 @@ namespace Tests.CommonOptions.TimeUnit
 				{ "10s", new TimeSpan(0, 0, 10), "10s" },
 				{ "-10s", new TimeSpan(0, 0, -10), "-10s" },
 				{ "-10S", new TimeSpan(0, 0, -10), "-10s" },
-				{ "10m", new TimeSpan(0, 10, 0) , "10m"},
+				{ "10m", new TimeSpan(0, 10, 0), "10m" },
 				{ "10M", new TimeSpan(0, 10, 0), "10m" }, // 300 days not minutes
 				{ "10h", new TimeSpan(10, 0, 0), "10h" },
-				{ "10H", new TimeSpan(10, 0, 0) , "10h"},
-				{ "10d", new TimeSpan(10, 0, 0, 0) , "10d"},
+				{ "10H", new TimeSpan(10, 0, 0), "10h" },
+				{ "10d", new TimeSpan(10, 0, 0, 0), "10d" },
 			};
 			foreach (var testCase in testCases)
 			{
@@ -200,13 +200,13 @@ namespace Tests.CommonOptions.TimeUnit
 			}
 		}
 
-        // hide
-        [U]public void StringParseExceptions()
+		// hide
+		[U] public void StringParseExceptions()
 		{
 			var testCases = new StringParsingTestCases
 			{
-				{ "1000", "cannot be parsed to an interval"},
-				{ "1000x", "is invalid"},
+				{ "1000", "cannot be parsed to an interval" },
+				{ "1000x", "is invalid" },
 			};
 			foreach (var testCase in testCases)
 			{
@@ -220,11 +220,11 @@ namespace Tests.CommonOptions.TimeUnit
 		private class DoubleParsingTestCases : List<Tuple<double, TimeSpan, string>>
 		{
 			public void Add(double original, TimeSpan expect, string toString) =>
-				this.Add(Tuple.Create(original, expect, toString));
+				Add(Tuple.Create(original, expect, toString));
 		}
 
 		// hide
-		[U]public void DoubleImplicitConversionParsing()
+		[U] public void DoubleImplicitConversionParsing()
 		{
 			// from: https://msdn.microsoft.com/en-us/library/system.timespan.frommilliseconds.aspx
 			// The value parameter is converted to ticks, and that number of ticks is used to initialize the new TimeSpan.
@@ -232,13 +232,13 @@ namespace Tests.CommonOptions.TimeUnit
 			// fractional millisecond values with TimeSpan.FromMilliseconds(fraction) will be rounded.
 			var testCases = new DoubleParsingTestCases
 			{
-				{ 1e-4, new TimeSpan(1) , "100nanos"}, // smallest value that can be represented with ticks
-				{ 1e-3, new TimeSpan(10), "1micros"},
-				{ 0.1, TimeSpan.FromTicks(1000), "100micros"},
-				{ 1, TimeSpan.FromMilliseconds(1), "1ms"},
-				{ 1.2, TimeSpan.FromTicks(12000), "1200micros"},
-				{ 10, TimeSpan.FromMilliseconds(10), "10ms"},
-				{ 100, TimeSpan.FromMilliseconds(100), "100ms"},
+				{ 1e-4, new TimeSpan(1), "100nanos" }, // smallest value that can be represented with ticks
+				{ 1e-3, new TimeSpan(10), "1micros" },
+				{ 0.1, TimeSpan.FromTicks(1000), "100micros" },
+				{ 1, TimeSpan.FromMilliseconds(1), "1ms" },
+				{ 1.2, TimeSpan.FromTicks(12000), "1200micros" },
+				{ 10, TimeSpan.FromMilliseconds(10), "10ms" },
+				{ 100, TimeSpan.FromMilliseconds(100), "100ms" },
 				{ 1000, TimeSpan.FromSeconds(1), "1s" },
 				{ 60000, TimeSpan.FromMinutes(1), "1m" },
 				{ 3.6e+6, TimeSpan.FromHours(1), "1h" },
@@ -337,7 +337,9 @@ namespace Tests.CommonOptions.TimeUnit
 		}
 
 		//hide
-		private void Assert(double expectedFactor, Nest.TimeUnit expectedInterval, double expectedMilliseconds, string expectedSerialized, params Time[] times)
+		private void Assert(double expectedFactor, Nest.TimeUnit expectedInterval, double expectedMilliseconds, string expectedSerialized,
+			params Time[] times
+		)
 		{
 			foreach (var time in times)
 			{

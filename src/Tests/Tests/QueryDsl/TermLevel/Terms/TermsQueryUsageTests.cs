@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Terms
 {
@@ -15,9 +13,9 @@ namespace Tests.QueryDsl.TermLevel.Terms
 	*/
 	public class TermsQueryUsageTests : QueryDslUsageTestsBase
 	{
-		protected virtual string[] ExpectedTerms => new [] { "term1", "term2" };
+		protected virtual string[] ExpectedTerms => new[] { "term1", "term2" };
 
-		public TermsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public TermsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -50,7 +48,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			q => q.Field = null,
 			q => q.Terms = null,
 			q => q.Terms = Enumerable.Empty<object>(),
-			q => q.Terms = new [] { "" }
+			q => q.Terms = new[] { "" }
 		};
 	}
 
@@ -59,7 +57,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 	*/
 	public class SingleTermTermsQueryUsageTests : TermsQueryUsageTests
 	{
-		protected override string[] ExpectedTerms => new [] { "term1"  };
+		protected override string[] ExpectedTerms => new[] { "term1" };
 
 		public SingleTermTermsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -84,6 +82,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 		public VerbatimTermsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override ConditionlessWhen ConditionlessWhen => null;
+
 		//when reading back the json the notion of is conditionless is lost
 		protected override bool SupportsDeserialization => false;
 
@@ -91,7 +90,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 		{
 			terms = new
 			{
-				description = new string[] {}
+				description = new string[] { }
 			}
 		};
 
@@ -99,16 +98,14 @@ namespace Tests.QueryDsl.TermLevel.Terms
 		{
 			IsVerbatim = true,
 			Field = "description",
-			Terms = new string[] {},
+			Terms = new string[] { },
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Terms(c => c
 				.Verbatim()
 				.Field(p => p.Description)
-				.Terms(new string[] {})
+				.Terms(new string[] { })
 			);
 	}
-
-
 }

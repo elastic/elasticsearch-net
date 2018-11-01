@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
 using static Elasticsearch.Net.AuditEvent;
@@ -57,7 +56,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				new ClientCall { { HealthyResponse, 9207 } },
 				new ClientCall { { HealthyResponse, 9208 } },
 				new ClientCall { { HealthyResponse, 9209 } },
-				new ClientCall {
+				new ClientCall
+				{
 					{ HealthyResponse, 9200 },
 					{ pool => pool.Nodes.Count.Should().Be(10) }
 				}
@@ -68,7 +68,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			audit.ChangeTime(d => d.AddMinutes(31));
 
 			audit = await audit.TraceCalls(
-				new ClientCall {
+				new ClientCall
+				{
 					{ SniffOnStaleCluster },
 					{ SniffSuccess, 9202 },
 					{ HealthyResponse, 9201 },
@@ -79,11 +80,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			/** If we move the clock forward again by another 31 minutes, we now discover that we've scaled back
 			 * down to 10 nodes
 			 */
-            audit.ChangeTime(d => d.AddMinutes(31));
+			audit.ChangeTime(d => d.AddMinutes(31));
 
 			audit = await audit.TraceCalls(
-				new ClientCall {
-
+				new ClientCall
+				{
 					{ SniffOnStaleCluster },
 					{ SniffSuccess, 9202 },
 					{ HealthyResponse, 9200 },
@@ -91,6 +92,5 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				}
 			);
 		}
-
 	}
 }

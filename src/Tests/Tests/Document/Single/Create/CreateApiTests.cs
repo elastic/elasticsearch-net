@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -14,14 +13,12 @@ using Tests.Domain;
 using Tests.Domain.Extensions;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Tests.Domain.Helpers.TestValueHelper;
 
 namespace Tests.Document.Single.Create
 {
-	public class CreateApiTests :
-		ApiIntegrationTestBase<WritableCluster, ICreateResponse, ICreateRequest<Project>, CreateDescriptor<Project>, CreateRequest<Project>>
+	public class CreateApiTests
+		: ApiIntegrationTestBase<WritableCluster, ICreateResponse, ICreateRequest<Project>, CreateDescriptor<Project>, CreateRequest<Project>>
 	{
 		protected override bool IncludeNullInExpected => false;
 
@@ -31,15 +28,15 @@ namespace Tests.Document.Single.Create
 			Name = CallIsolatedValue,
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
-			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
+			CuratedTags = new List<Tag> { new Tag { Name = "x", Added = FixedDate } },
 			SourceOnly = TestClient.Configuration.Random.SourceSerializer ? new SourceOnlyObject() : null
 		};
 
 		public CreateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Create(this.Document, f),
-			fluentAsync: (client, f) => client.CreateAsync(this.Document, f),
+			fluent: (client, f) => client.Create(Document, f),
+			fluentAsync: (client, f) => client.CreateAsync(Document, f),
 			request: (client, r) => client.Create(r),
 			requestAsync: (client, r) => client.CreateAsync(r)
 		);
@@ -63,10 +60,10 @@ namespace Tests.Document.Single.Create
 				lastActivity = FixedDate,
 				numberOfContributors = 0,
 				sourceOnly = Dependant(null, new { notWrittenByDefaultSerializer = "written" }),
-				curatedTags = new[] {new {name = "x", added = FixedDate}},
+				curatedTags = new[] { new { name = "x", added = FixedDate } },
 			};
 
-		protected override CreateDescriptor<Project> NewDescriptor() => new CreateDescriptor<Project>(this.Document);
+		protected override CreateDescriptor<Project> NewDescriptor() => new CreateDescriptor<Project>(Document);
 
 		protected override Func<CreateDescriptor<Project>, ICreateRequest<Project>> Fluent => s => s
 			.WaitForActiveShards("1")
@@ -74,7 +71,7 @@ namespace Tests.Document.Single.Create
 			.Routing("route");
 
 		protected override CreateRequest<Project> Initializer =>
-			new CreateRequest<Project>(this.Document)
+			new CreateRequest<Project>(Document)
 			{
 				Refresh = Refresh.True,
 				WaitForActiveShards = "1",
@@ -91,14 +88,14 @@ namespace Tests.Document.Single.Create
 		{
 			var index = RandomString();
 			var project = Project.Generator.Generate(1).First();
-			var createResponse = this.Client.Create(project, f => f
+			var createResponse = Client.Create(project, f => f
 				.Index(index)
 			);
 			createResponse.ShouldBeValid();
 			createResponse.ApiCall.HttpStatusCode.Should().Be(201);
 			createResponse.Result.Should().Be(Result.Created);
 			createResponse.Index.Should().Be(index);
-			createResponse.Type.Should().Be(this.Client.Infer.TypeName<Project>());
+			createResponse.Type.Should().Be(Client.Infer.TypeName<Project>());
 			createResponse.Id.Should().Be(project.Name);
 
 			createResponse.Shards.Should().NotBeNull();
@@ -107,7 +104,7 @@ namespace Tests.Document.Single.Create
 			createResponse.PrimaryTerm.Should().BeGreaterThan(0);
 			createResponse.SequenceNumber.Should().BeGreaterOrEqualTo(0);
 
-			createResponse = this.Client.Create(project, f => f
+			createResponse = Client.Create(project, f => f
 				.Index(index)
 			);
 
@@ -128,22 +125,22 @@ namespace Tests.Document.Single.Create
 				.Select(i =>
 					new JObject
 					{
-						{"id", i},
-						{"name", $"name {i}"},
-						{"value", Math.Pow(i, 2)},
-						{"date", new DateTime(2016, 1, 1)},
+						{ "id", i },
+						{ "name", $"name {i}" },
+						{ "value", Math.Pow(i, 2) },
+						{ "date", new DateTime(2016, 1, 1) },
 						{
 							"child", new JObject
 							{
-								{"child_name", $"child_name {i}{i}"},
-								{"child_value", 3}
+								{ "child_name", $"child_name {i}{i}" },
+								{ "child_value", 3 }
 							}
 						}
 					});
 
 			var jObject = jObjects.First();
 
-			var createResponse = this.Client.Create(jObject, f => f
+			var createResponse = Client.Create(jObject, f => f
 				.Index(index)
 				.Id(jObject["id"].Value<int>())
 			);
@@ -154,7 +151,7 @@ namespace Tests.Document.Single.Create
 			createResponse.Index.Should().Be(index);
 			createResponse.Type.Should().Be("jobject");
 
-			var bulkResponse = this.Client.Bulk(b => b
+			var bulkResponse = Client.Bulk(b => b
 				.Index(index)
 				.CreateMany(jObjects.Skip(1), (bi, d) => bi
 					.Document(d)
@@ -190,7 +187,7 @@ namespace Tests.Document.Single.Create
 				}
 			};
 
-			var createResponse = this.Client.Create(anonymousType, f => f
+			var createResponse = Client.Create(anonymousType, f => f
 				.Index(index)
 				.Id(anonymousType.name)
 			);

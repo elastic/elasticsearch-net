@@ -5,8 +5,6 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.TypesExists
@@ -15,6 +13,7 @@ namespace Tests.Indices.IndexManagement.TypesExists
 		: ApiIntegrationTestBase<ReadOnlyCluster, IExistsResponse, ITypeExistsRequest, TypeExistsDescriptor, TypeExistsRequest>
 	{
 		public TypeExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.TypeExists(Index<Project>(), Type<Project>(), f),
 			fluentAsync: (client, f) => client.TypeExistsAsync(Index<Project>(), Type<Project>(), f),

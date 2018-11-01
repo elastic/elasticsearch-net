@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
-using System.Reflection;
-using Elastic.Xunit.XunitPlumbing;
 
 namespace Tests.CodeStandards
 {
@@ -18,18 +17,18 @@ namespace Tests.CodeStandards
 		[U]
 		public void DescriptorsHaveToBeMarkedWithIDescriptor()
 		{
-			var notDescriptors = new[] {typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute"};
+			var notDescriptors = new[] { typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute" };
 
 			var descriptors =
 				from t in typeof(DescriptorBase<,>).Assembly().Types()
 				where t.IsClass()
-				      && t.Name.Contains("Descriptor")
-				      && !t.Namespace.StartsWith("Nest.Json")
-				      && !notDescriptors.Contains(t.Name)
+					&& t.Name.Contains("Descriptor")
+					&& !t.Namespace.StartsWith("Nest.Json")
+					&& !notDescriptors.Contains(t.Name)
 #if __MonoCS__
 				      && !t.FullName.Contains("c__AnonStore") //compiler generated
 #endif
-				      && t.GetInterfaces().All(i => i != typeof(IDescriptor))
+					&& t.GetInterfaces().All(i => i != typeof(IDescriptor))
 				select t.FullName;
 			descriptors.Should().BeEmpty();
 		}
@@ -41,17 +40,17 @@ namespace Tests.CodeStandards
 		[U]
 		public void SelectorsHaveToBeMarkedWithISelector()
 		{
-			var notSelectors = new[] {typeof(BucketSelectorAggregationDescriptor).Name, typeof(BucketSelectorAggregation).Name};
+			var notSelectors = new[] { typeof(BucketSelectorAggregationDescriptor).Name, typeof(BucketSelectorAggregation).Name };
 			var selectors =
 				from t in typeof(SelectorBase<>).Assembly().Types()
 				where t.IsClass()
-				      && t.Name.Contains("Selector")
-				      && !t.Namespace.StartsWith("Nest.Json")
-				      && !notSelectors.Contains(t.Name)
+					&& t.Name.Contains("Selector")
+					&& !t.Namespace.StartsWith("Nest.Json")
+					&& !notSelectors.Contains(t.Name)
 #if __MonoCS__
 				      && !t.FullName.Contains("c__AnonStore") //compiler generated
 #endif
-				      && t.GetInterfaces().All(i => i != typeof(ISelector))
+					&& t.GetInterfaces().All(i => i != typeof(ISelector))
 				select t.FullName;
 			selectors.Should().BeEmpty();
 		}
@@ -70,14 +69,14 @@ namespace Tests.CodeStandards
 
 			var exclusions = new Dictionary<Type, Type>
 			{
-				{typeof(QueryContainerDescriptor<>), typeof(QueryContainer)},
-				{typeof(ConditionDescriptor), typeof(ConditionContainer)},
-				{typeof(TriggerDescriptor), typeof(TriggerContainer)},
-				{typeof(TransformDescriptor), typeof(TransformContainer)},
-				{typeof(SmoothingModelContainerDescriptor), typeof(SmoothingModelContainer)},
-				{typeof(InputDescriptor), typeof(InputContainer)},
-				{typeof(RoleMappingRuleDescriptor), typeof(RoleMappingRuleBase)},
-				{typeof(FluentDictionary<,>), typeof(FluentDictionary<,>)}
+				{ typeof(QueryContainerDescriptor<>), typeof(QueryContainer) },
+				{ typeof(ConditionDescriptor), typeof(ConditionContainer) },
+				{ typeof(TriggerDescriptor), typeof(TriggerContainer) },
+				{ typeof(TransformDescriptor), typeof(TransformContainer) },
+				{ typeof(SmoothingModelContainerDescriptor), typeof(SmoothingModelContainer) },
+				{ typeof(InputDescriptor), typeof(InputContainer) },
+				{ typeof(RoleMappingRuleDescriptor), typeof(RoleMappingRuleBase) },
+				{ typeof(FluentDictionary<,>), typeof(FluentDictionary<,>) }
 			};
 
 			Func<Type, Type, bool> exclude = (first, second) =>
@@ -166,7 +165,6 @@ namespace Tests.CodeStandards
 
 		[U] public void ProcessorImplementationsNeedProcessorInTheirNames()
 		{
-
 			var processors = (
 				from t in typeof(IProcessor).Assembly().Types()
 				where typeof(IProcessor).IsAssignableFrom(t)
@@ -189,7 +187,7 @@ namespace Tests.CodeStandards
 				let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
 
 				//skips
-				where !(new[] {"metric", "indexMetric", "watcherStatsMetric"}.Contains(p.Name))
+				where !(new[] { "metric", "indexMetric", "watcherStatsMetric" }.Contains(p.Name))
 				where !(m.Name == "Interval" && d == typeof(DateHistogramAggregationDescriptor<>))
 				where !(m.Name == "Lang" && dt == typeof(ScriptDescriptorBase<,>))
 				where !(m.Name == "Lang" && dt == typeof(StoredScriptDescriptor))
@@ -209,9 +207,7 @@ namespace Tests.CodeStandards
 				where !(m.Name == nameof(ScoreFunctionsDescriptor<object>.Weight) && dt == typeof(ScoreFunctionsDescriptor<>))
 				where !(m.Name == nameof(SortDescriptor<object>.Ascending) && dt == typeof(SortDescriptor<>))
 				where !(m.Name == nameof(SortDescriptor<object>.Descending) && dt == typeof(SortDescriptor<>))
-
-
-				select new {m, d, p};
+				select new { m, d, p };
 
 			var breakingDescriptors = new List<string>();
 
@@ -238,7 +234,7 @@ namespace Tests.CodeStandards
 				where pt == typeof(bool?)
 				let dt = m.DeclaringType.IsGenericType() ? m.DeclaringType.GetGenericTypeDefinition() : m.DeclaringType
 				where !(m.Name == nameof(BooleanPropertyDescriptor<object>.NullValue) && dt == typeof(BooleanPropertyDescriptor<>))
-				select new {m, d, p};
+				select new { m, d, p };
 
 			var nullableBools = new List<string>();
 			foreach (var info in methods)
@@ -251,8 +247,7 @@ namespace Tests.CodeStandards
 
 				try
 				{
-
-					var b = ((bool?) p.RawDefaultValue);
+					var b = ((bool?)p.RawDefaultValue);
 					if (!b.HasValue)
 						nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} defaults to null");
 					else if (!b.Value)
@@ -263,8 +258,8 @@ namespace Tests.CodeStandards
 					nullableBools.Add($"bool {p.Name} on method {m.Name} of {d.FullName} defaults to unknown");
 				}
 			}
-			nullableBools.Should().BeEmpty();
 
+			nullableBools.Should().BeEmpty();
 		}
 
 		private static IEnumerable<Type> YieldAllDescriptors()

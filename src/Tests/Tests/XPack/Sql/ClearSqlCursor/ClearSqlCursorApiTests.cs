@@ -12,11 +12,12 @@ using Tests.Framework.Integration;
 namespace Tests.XPack.Sql.ClearSqlCursor
 {
 	[SkipVersion("<6.4.0", "")]
-	public class ClearSqlCursorApiTests : ApiIntegrationTestBase<XPackCluster, IClearSqlCursorResponse, IClearSqlCursorRequest, ClearSqlCursorDescriptor, ClearSqlCursorRequest>
+	public class ClearSqlCursorApiTests
+		: ApiIntegrationTestBase<XPackCluster, IClearSqlCursorResponse, IClearSqlCursorRequest, ClearSqlCursorDescriptor, ClearSqlCursorRequest>
 	{
 		public ClearSqlCursorApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => this.Calls(
+		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClearSqlCursor(f),
 			fluentAsync: (client, f) => client.ClearSqlCursorAsync(f),
 			request: (client, r) => client.ClearSqlCursor(r),
@@ -33,9 +34,10 @@ ORDER BY numberOfContributors DESC";
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var sqlQueryResponse = this.Client.QuerySql(q => q.Query(SqlQuery).FetchSize(5));
+			var sqlQueryResponse = Client.QuerySql(q => q.Query(SqlQuery).FetchSize(5));
 			if (!sqlQueryResponse.IsValid)
 				throw new Exception("Setup: Initial scroll failed.");
+
 			_currentCursor = sqlQueryResponse.Cursor ?? _currentCursor;
 		}
 
@@ -44,11 +46,10 @@ ORDER BY numberOfContributors DESC";
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/_xpack/sql/close";
 
-		protected override object ExpectJson => new { cursor = this._currentCursor };
+		protected override object ExpectJson => new { cursor = _currentCursor };
 
 		protected override Func<ClearSqlCursorDescriptor, IClearSqlCursorRequest> Fluent => d => d
-			.Cursor(_currentCursor)
-		;
+			.Cursor(_currentCursor);
 
 		protected override ClearSqlCursorRequest Initializer => new ClearSqlCursorRequest()
 		{

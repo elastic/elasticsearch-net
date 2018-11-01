@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using Tests.Framework;
 using static Elasticsearch.Net.AuditEvent;
 
@@ -37,7 +36,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			 * finally returning a healthy response from the node on port 9209
 			 */
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
@@ -64,23 +64,27 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		public async Task FixedMaximumNumberOfRetries()
 		{
 			var audit = new Auditor(() => Framework.Cluster
-				.Nodes(10)
-				.ClientCalls(r => r.FailAlways())
-				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
-				.StaticConnectionPool()
-				.Settings(s => s.DisablePing().MaximumRetries(3)) // <1> Set the maximum number of retries to 3
+					.Nodes(10)
+					.ClientCalls(r => r.FailAlways())
+					.ClientCalls(r => r.OnPort(9209).SucceedAlways())
+					.StaticConnectionPool()
+					.Settings(s => s.DisablePing().MaximumRetries(3)) // <1> Set the maximum number of retries to 3
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
 					{ BadResponse, 9203 },
-					{ MaxRetriesReached } // <2> The client call trace returns an `MaxRetriesReached` audit after the initial attempt and the number of retries allowed
+					{
+						MaxRetriesReached
+					} // <2> The client call trace returns an `MaxRetriesReached` audit after the initial attempt and the number of retries allowed
 				}
 			);
 		}
+
 		/**
 		* In our previous example we simulated very fast failures, but in the real world, a call might take upwards of a second.
 		*
@@ -100,7 +104,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ MaxTimeoutReached }
@@ -128,7 +133,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
@@ -137,8 +143,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 					{ MaxTimeoutReached }
 				}
 			);
-
 		}
+
 		/**
 		* If your retry policy expands beyond the number of available nodes, the client **won't** retry the same node twice
 		*/
@@ -154,7 +160,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ MaxRetriesReached },
@@ -180,7 +187,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall {
+				new ClientCall
+				{
 					{ BadResponse, 9200 }
 				}
 			);

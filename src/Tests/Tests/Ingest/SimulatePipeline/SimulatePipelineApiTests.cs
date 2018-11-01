@@ -1,20 +1,19 @@
 ﻿using System;
-using Elasticsearch.Net;
-using Nest;
-using Tests.Framework;
-using Tests.Framework.Integration;
-using Xunit;
-using FluentAssertions;
 using System.Linq;
+using Elasticsearch.Net;
+using FluentAssertions;
+using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework;
+using Tests.Framework.Integration;
 
 namespace Tests.Ingest.SimulatePipeline
 {
 	public class SimulatePipelineApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, ISimulatePipelineResponse, ISimulatePipelineRequest, SimulatePipelineDescriptor, SimulatePipelineRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISimulatePipelineResponse, ISimulatePipelineRequest, SimulatePipelineDescriptor,
+			SimulatePipelineRequest>
 	{
 		public SimulatePipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -36,7 +35,7 @@ namespace Tests.Ingest.SimulatePipeline
 			pipeline = new
 			{
 				description = "pipeline simulation",
-				processors = new object []
+				processors = new object[]
 				{
 					new
 					{
@@ -51,7 +50,7 @@ namespace Tests.Ingest.SimulatePipeline
 						append = new
 						{
 							field = "colors",
-							value = new [] { "blue", "black" }
+							value = new[] { "blue", "black" }
 						}
 					},
 					new
@@ -63,7 +62,7 @@ namespace Tests.Ingest.SimulatePipeline
 					}
 				}
 			},
-			docs = new object []
+			docs = new object[]
 			{
 				new
 				{
@@ -84,7 +83,7 @@ namespace Tests.Ingest.SimulatePipeline
 					_index = "otherindex",
 					_type = "anotherType",
 					_id = "2",
-					_source = new { id = "2", colors = new [] { "red" } }
+					_source = new { id = "2", colors = new[] { "red" } }
 				}
 			}
 		};
@@ -173,7 +172,7 @@ namespace Tests.Ingest.SimulatePipeline
 					new AppendProcessor
 					{
 						Field = "colors",
-						Value = new [] { "blue", "black"}
+						Value = new[] { "blue", "black" }
 					},
 					new UppercaseProcessor
 					{
@@ -198,7 +197,7 @@ namespace Tests.Ingest.SimulatePipeline
 				{
 					Index = "otherindex",
 					Type = "anotherType",
-					Source = new AnotherType { Id = "2", Colors = new [] { "red" } }
+					Source = new AnotherType { Id = "2", Colors = new[] { "red" } }
 				}
 			}
 		};

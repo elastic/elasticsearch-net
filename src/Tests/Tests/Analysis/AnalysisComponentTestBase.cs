@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elastic.Xunit;
 using Elastic.Xunit.XunitPlumbing;
@@ -17,6 +16,7 @@ namespace Tests.Analysis
 		string Name { get; }
 		object Json { get; }
 	}
+
 	public interface IAnalysisAssertion<out TComponent, out TContainer, in TDescriptor> : IAnalysisAssertion
 		where TContainer : class
 	{
@@ -39,14 +39,15 @@ namespace Tests.Analysis
 			valuePrefix: $"test-{typeof(TAssertion).Name.ToLowerInvariant()}"
 		)
 		{
-			OnAfterCall = c=> c.DeleteIndex(Usage.CallUniqueValues.Value)
+			OnAfterCall = c => c.DeleteIndex(Usage.CallUniqueValues.Value)
 		};
+
 		protected static TAssertion AssertionSetup { get; } = new TAssertion();
 
 		protected AnalysisComponentTestBase()
 		{
-			this.Client = (ElasticXunitRunner.CurrentCluster as INestTestCluster)?.Client ?? TestClient.DefaultInMemoryClient;
-			Usage.KickOffOnce(this.Client, oneRandomCall: true);
+			Client = (ElasticXunitRunner.CurrentCluster as INestTestCluster)?.Client ?? TestClient.DefaultInMemoryClient;
+			Usage.KickOffOnce(Client, oneRandomCall: true);
 		}
 
 		private IElasticClient Client { get; }
@@ -56,18 +57,20 @@ namespace Tests.Analysis
 		public abstract Func<string, TDescriptor, IPromise<TContainer>> Fluent { get; }
 		public abstract object Json { get; }
 
-		private Func<CreateIndexDescriptor, ICreateIndexRequest> FluentCall => i =>i.Settings(s => s.Analysis(this.FluentAnalysis));
+		private Func<CreateIndexDescriptor, ICreateIndexRequest> FluentCall => i => i.Settings(s => s.Analysis(FluentAnalysis));
+
 		protected abstract IAnalysis FluentAnalysis(AnalysisDescriptor an);
 
 		private CreateIndexRequest InitializerCall(string index) => new CreateIndexRequest(index)
 		{
-			Settings = new IndexSettings { Analysis = this.InitializerAnalysis() }
+			Settings = new IndexSettings { Analysis = InitializerAnalysis() }
 		};
+
 		protected abstract Nest.Analysis InitializerAnalysis();
 
 		[U] public virtual async Task TestPutSettingsRequest() => await Usage.AssertOnAllResponses(r =>
 		{
-			var json = new { settings = new { analysis = this.AnalysisJson } };
+			var json = new { settings = new { analysis = AnalysisJson } };
 			SerializationTestHelper.Expect(json).FromRequest(r);
 		});
 
@@ -77,6 +80,5 @@ namespace Tests.Analysis
 		{
 			r.ApiCall.HttpStatusCode.Should().Be(200);
 		});
-
 	}
 }

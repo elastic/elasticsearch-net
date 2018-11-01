@@ -1,32 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Newtonsoft.Json;
 using Tests.Core.Client;
-using Tests.Framework;
 using static Tests.Core.Serialization.SerializationTestHelper;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {
-    /**[[visitor-pattern-mapping]]
-     * === Applying conventions through the Visitor pattern
-     * It is also possible to apply a transformation on all or specific properties.
-     *
-     * `.AutoMap()` internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern].
-     * The default visitor, `NoopPropertyVisitor`, does nothing and acts as a blank canvas for you
-     * to implement your own visiting methods.
-     *
-     * For instance, let's create a custom visitor that disables doc values for numeric and boolean types -
-     * __This is not really a good idea in practice, but let's do it anyway for the sake of a clear example.__
-     */
-    public class VisitorPattern
+	/**[[visitor-pattern-mapping]]
+	 * === Applying conventions through the Visitor pattern
+	 * It is also possible to apply a transformation on all or specific properties.
+	 *
+	 * `.AutoMap()` internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern].
+	 * The default visitor, `NoopPropertyVisitor`, does nothing and acts as a blank canvas for you
+	 * to implement your own visiting methods.
+	 *
+	 * For instance, let's create a custom visitor that disables doc values for numeric and boolean types -
+	 * __This is not really a good idea in practice, but let's do it anyway for the sake of a clear example.__
+	 */
+	public class VisitorPattern
 	{
-		private IElasticClient client = TestClient.DisabledStreaming;
+		private readonly IElasticClient client = TestClient.DisabledStreaming;
 
-        /**
+		/**
 		* Using the following POCO
 		*/
 		public class Employee
@@ -40,27 +37,25 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public TimeSpan Hours { get; set; }
 		}
 
-        /**
-         * We first define a visitor; it's easiest to inherit from `NoopPropertyVisitor` and override
-         * the `Visit` methods to implement your conventions
-         */
-        public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
+		/**
+		 * We first define a visitor; it's easiest to inherit from `NoopPropertyVisitor` and override
+		 * the `Visit` methods to implement your conventions
+		 */
+		public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
 		{
 			public override void Visit(
 				INumberProperty type,
 				PropertyInfo propertyInfo,
-				ElasticsearchPropertyAttributeBase attribute) //<1> Override the `Visit` method on `INumberProperty` and set `DocValues = false`
-			{
-				type.DocValues = false;
-			}
+				ElasticsearchPropertyAttributeBase attribute
+			) //<1> Override the `Visit` method on `INumberProperty` and set `DocValues = false`
+				=> type.DocValues = false;
 
 			public override void Visit(
 				IBooleanProperty type,
 				PropertyInfo propertyInfo,
-				ElasticsearchPropertyAttributeBase attribute) //<2> Similarily, override the `Visit` method on `IBooleanProperty` and set `DocValues = false`
-			{
-				type.DocValues = false;
-			}
+				ElasticsearchPropertyAttributeBase attribute
+			) //<2> Similarily, override the `Visit` method on `IBooleanProperty` and set `DocValues = false`
+				=> type.DocValues = false;
 		}
 
 		[U]
@@ -143,14 +138,14 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).FromRequest(createIndexResponse);
 		}
 
-        /**
-		 * ==== Visiting on PropertyInfo
-		 * You can even take the visitor approach a step further, and instead of visiting on `IProperty` types, visit
-		 * directly on your POCO reflected `PropertyInfo` properties.
-         *
-         * As an example, let's create a visitor that maps all CLR types to an Elasticsearch text datatype (`ITextProperty`).
-		 */
-        public class EverythingIsATextPropertyVisitor : NoopPropertyVisitor
+		/**
+		   * ==== Visiting on PropertyInfo
+		   * You can even take the visitor approach a step further, and instead of visiting on `IProperty` types, visit
+		   * directly on your POCO reflected `PropertyInfo` properties.
+		 *
+		 * As an example, let's create a visitor that maps all CLR types to an Elasticsearch text datatype (`ITextProperty`).
+		   */
+		public class EverythingIsATextPropertyVisitor : NoopPropertyVisitor
 		{
 			public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => new TextProperty();
 		}
@@ -164,9 +159,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				)
 			);
 
-            /**
-             */
-            // json
+			/**
+			 */
+			// json
 			var expected = new
 			{
 				mappings = new
@@ -199,7 +194,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							{
 								type = "text"
 							},
-                            hours = new
+							hours = new
 							{
 								type = "text"
 							}
@@ -211,25 +206,24 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			// hide
 			Expect(expected).FromRequest(createIndexResponse);
 		}
-        /**
-		 * ==== Skip properties
-         *
-         * Through implementing `SkipProperty` on the visitor, you can prevent certain properties from being mapped.
-         *
-         * In this example, we skip the inherited properties of the type from which `DictionaryDocument` is derived
-         *
-		 */
+
+		/**
+		   * ==== Skip properties
+		 *
+		 * Through implementing `SkipProperty` on the visitor, you can prevent certain properties from being mapped.
+		 *
+		 * In this example, we skip the inherited properties of the type from which `DictionaryDocument` is derived
+		 *
+		   */
 		public class DictionaryDocument : SortedDictionary<string, dynamic>
 		{
 			public int Id { get; set; }
 		}
 
-        public class IgnoreInheritedPropertiesVisitor<T>  : NoopPropertyVisitor
+		public class IgnoreInheritedPropertiesVisitor<T> : NoopPropertyVisitor
 		{
-			public override bool SkipProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
-			{
-				return propertyInfo?.DeclaringType != typeof(T);
-			}
+			public override bool SkipProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) =>
+				propertyInfo?.DeclaringType != typeof(T);
 		}
 
 		[U] public void HidesInheritedMembers()
@@ -240,9 +234,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				)
 			);
 
-            /**
-             */
-            // json
+			/**
+			 */
+			// json
 			var expected = new
 			{
 				mappings = new

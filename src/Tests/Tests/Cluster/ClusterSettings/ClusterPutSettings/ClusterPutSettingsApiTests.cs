@@ -7,14 +7,15 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 {
-	public class ClusterPutSettingsApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor, ClusterPutSettingsRequest>
+	public class ClusterPutSettingsApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor,
+			ClusterPutSettingsRequest>
 	{
 		public ClusterPutSettingsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClusterPutSettings(f),
 			fluentAsync: (client, f) => client.ClusterPutSettingsAsync(f),
@@ -37,7 +38,7 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 		{
 			Transient = new Dictionary<string, object>
 			{
-				{"indices.recovery.max_bytes_per_sec" , "41mb"}
+				{ "indices.recovery.max_bytes_per_sec", "41mb" }
 			}
 		};
 
@@ -49,9 +50,12 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 		}
 	}
 
-	public class ClusterPutSettingsNoopApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor, ClusterPutSettingsRequest>
+	public class ClusterPutSettingsNoopApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor,
+			ClusterPutSettingsRequest>
 	{
 		public ClusterPutSettingsNoopApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ClusterPutSettings(f),
 			fluentAsync: (client, f) => client.ClusterPutSettingsAsync(f),
@@ -66,8 +70,7 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 		protected override bool ExpectIsValid => false;
 
 		protected override ClusterPutSettingsRequest Initializer => new ClusterPutSettingsRequest
-		{
-		};
+			{ };
 
 		protected override void ExpectResponse(IClusterPutSettingsResponse response)
 		{

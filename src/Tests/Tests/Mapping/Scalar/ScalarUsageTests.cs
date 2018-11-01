@@ -1,9 +1,6 @@
-﻿using Nest;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Nest;
 using Tests.Framework;
 
 namespace Tests.Mapping.Scalar
@@ -13,7 +10,10 @@ namespace Tests.Mapping.Scalar
 		protected override bool SupportsDeserialization => false;
 		protected override bool TestObjectInitializer => false;
 
-		public enum ScalarEnum { X }
+		public enum ScalarEnum
+		{
+			X
+		}
 
 		public class ScalarPoco
 		{
@@ -63,7 +63,7 @@ namespace Tests.Mapping.Scalar
 			public IEnumerable<TimeSpan?> TimeSpanNullables { get; set; }
 
 			public decimal Decimal { get; set; }
-			public IEnumerable<decimal> Decimals {get;set; }
+			public IEnumerable<decimal> Decimals { get; set; }
 			public decimal? DecimalNullable { get; set; }
 			public IEnumerable<decimal?> DecimalNullables { get; set; }
 

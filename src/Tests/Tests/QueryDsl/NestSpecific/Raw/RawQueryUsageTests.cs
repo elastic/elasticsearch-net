@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Nest;
+﻿using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.NestSpecific.Raw
 {
@@ -29,6 +26,5 @@ namespace Tests.QueryDsl.NestSpecific.Raw
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Raw(RawTermQuery);
-
 	}
 }

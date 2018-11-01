@@ -1,7 +1,6 @@
 using System;
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.Analysis.TokenFilters
 {
@@ -12,9 +11,9 @@ namespace Tests.Analysis.TokenFilters
 		public class AsciiFoldingTests : TokenFilterAssertionBase<AsciiFoldingTests>
 		{
 			public override string Name => "ascii";
-			public override ITokenFilter Initializer => new AsciiFoldingTokenFilter {PreserveOriginal = true};
+			public override ITokenFilter Initializer => new AsciiFoldingTokenFilter { PreserveOriginal = true };
 			public override FuncTokenFilters Fluent => (n, tf) => tf.AsciiFolding(n, t => t.PreserveOriginal());
-			public override object Json => new {type = "asciifolding", preserve_original = true};
+			public override object Json => new { type = "asciifolding", preserve_original = true };
 		}
 
 		public class CommonGramsTests : TokenFilterAssertionBase<CommonGramsTests>
@@ -22,7 +21,7 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "mycomgram";
 
 			public override ITokenFilter Initializer =>
-				new CommonGramsTokenFilter {QueryMode = true, IgnoreCase = true, CommonWords = new[] {"x", "y", "z"}};
+				new CommonGramsTokenFilter { QueryMode = true, IgnoreCase = true, CommonWords = new[] { "x", "y", "z" } };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.CommonGrams(n, t => t.CommonWords("x", "y", "z").IgnoreCase().QueryMode());
@@ -30,7 +29,7 @@ namespace Tests.Analysis.TokenFilters
 			public override object Json => new
 			{
 				type = "common_grams",
-				common_words = new[] {"x", "y", "z"},
+				common_words = new[] { "x", "y", "z" },
 				ignore_case = true,
 				query_mode = true
 			};
@@ -41,7 +40,7 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "mydp";
 
 			public override ITokenFilter Initializer =>
-				new DelimitedPayloadTokenFilter {Delimiter = '-', Encoding = DelimitedPayloadEncoding.Identity};
+				new DelimitedPayloadTokenFilter { Delimiter = '-', Encoding = DelimitedPayloadEncoding.Identity };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.DelimitedPayload(n, t => t.Delimiter('-').Encoding(DelimitedPayloadEncoding.Identity));
@@ -60,7 +59,7 @@ namespace Tests.Analysis.TokenFilters
 					MinSubwordSize = 2,
 					MaxSubwordSize = 2,
 					OnlyLongestMatch = true,
-					WordList = new[] {"x", "y", "z"}
+					WordList = new[] { "x", "y", "z" }
 				};
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
@@ -75,37 +74,35 @@ namespace Tests.Analysis.TokenFilters
 			public override object Json => new
 			{
 				type = "dictionary_decompounder",
-				word_list = new[] {"x", "y", "z"},
+				word_list = new[] { "x", "y", "z" },
 				min_word_size = 2,
 				min_subword_size = 2,
 				max_subword_size = 2,
 				only_longest_match = true
 			};
-
 		}
 
 		public class EdgeNgramTests : TokenFilterAssertionBase<EdgeNgramTests>
 		{
 			public override string Name => "etf";
 
-			public override ITokenFilter Initializer => new EdgeNGramTokenFilter {MaxGram = 2, MinGram = 1};
+			public override ITokenFilter Initializer => new EdgeNGramTokenFilter { MaxGram = 2, MinGram = 1 };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.EdgeNGram(n, t => t.MaxGram(2).MinGram(1));
 
 			public override object Json => new { type = "edge_ngram", min_gram = 1, max_gram = 2 };
-
 		}
 
 		public class ElisionTests : TokenFilterAssertionBase<ElisionTests>
 		{
 			public override string Name => "el";
 
-			public override ITokenFilter Initializer => new ElisionTokenFilter {Articles = new[] {"a", "b", "c"}};
+			public override ITokenFilter Initializer => new ElisionTokenFilter { Articles = new[] { "a", "b", "c" } };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Elision(n, t => t.Articles("a", "b", "c"));
 
-			public override object Json => new { type = "elision", articles = new[] {"a", "b", "c"} };
+			public override object Json => new { type = "elision", articles = new[] { "a", "b", "c" } };
 		}
 
 		public class HunspellTests : TokenFilterAssertionBase<HunspellTests>
@@ -137,7 +134,6 @@ namespace Tests.Analysis.TokenFilters
 				dedup = true,
 				longest_only = true
 			};
-
 		}
 
 		public class HyphenationDecompounderTests : TokenFilterAssertionBase<HyphenationDecompounderTests>
@@ -151,7 +147,7 @@ namespace Tests.Analysis.TokenFilters
 					MinSubwordSize = 2,
 					MinWordSize = 2,
 					OnlyLongestMatch = true,
-					WordList = new[] {"x", "y", "z"},
+					WordList = new[] { "x", "y", "z" },
 					HyphenationPatternsPath = "analysis/fop.xml"
 				};
 
@@ -168,23 +164,22 @@ namespace Tests.Analysis.TokenFilters
 			public override object Json => new
 			{
 				type = "hyphenation_decompounder",
-				word_list = new[] {"x", "y", "z"},
+				word_list = new[] { "x", "y", "z" },
 				min_word_size = 2,
 				min_subword_size = 2,
 				max_subword_size = 2,
 				only_longest_match = true,
 				hyphenation_patterns_path = "analysis/fop.xml"
 			};
-
 		}
 
 		public class KeepTypesTests : TokenFilterAssertionBase<KeepTypesTests>
 		{
 			public override string Name => "keeptypes";
 
-			private readonly string[] _types = {"<NUM>", "<SOMETHINGELSE>"};
+			private readonly string[] _types = { "<NUM>", "<SOMETHINGELSE>" };
 
-			public override ITokenFilter Initializer => new KeepTypesTokenFilter {Types = _types};
+			public override ITokenFilter Initializer => new KeepTypesTokenFilter { Types = _types };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.KeepTypes(n, t => t.Types(_types));
 
@@ -195,7 +190,7 @@ namespace Tests.Analysis.TokenFilters
 		public class KeepTypesModeTests : TokenFilterAssertionBase<KeepTypesTests>
 		{
 			public override string Name => "keeptypes_mode";
-			private readonly string[] _types = {"<NUM>", "<SOMETHINGELSE>"};
+			private readonly string[] _types = { "<NUM>", "<SOMETHINGELSE>" };
 
 			public override ITokenFilter Initializer => new KeepTypesTokenFilter
 			{
@@ -258,7 +253,6 @@ namespace Tests.Analysis.TokenFilters
 				type = "icu_collation",
 				variant = "@collation=phonebook"
 			};
-
 		}
 
 		public class IcuFoldingTests : TokenFilterAssertionBase<IcuFoldingTests>
@@ -275,7 +269,6 @@ namespace Tests.Analysis.TokenFilters
 				type = "icu_folding",
 				unicodeSetFilter = "[^åäöÅÄÖ]"
 			};
-
 		}
 
 		public class IcuNormalizerTests : TokenFilterAssertionBase<IcuNormalizerTests>
@@ -284,14 +277,13 @@ namespace Tests.Analysis.TokenFilters
 
 			public override ITokenFilter Initializer => new IcuNormalizationTokenFilter { Name = IcuNormalizationType.Canonical };
 
-			public override FuncTokenFilters Fluent => (n, tf) => tf .IcuNormalization(n, t => t.Name(IcuNormalizationType.Canonical));
+			public override FuncTokenFilters Fluent => (n, tf) => tf.IcuNormalization(n, t => t.Name(IcuNormalizationType.Canonical));
 
 			public override object Json => new
 			{
 				name = "nfc",
 				type = "icu_normalizer"
 			};
-
 		}
 
 		public class IcuTransformTests : TokenFilterAssertionBase<IcuTransformTests>
@@ -317,7 +309,6 @@ namespace Tests.Analysis.TokenFilters
 				id = "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC",
 				type = "icu_transform"
 			};
-
 		}
 
 		public class KeepwordsTests : TokenFilterAssertionBase<KeepwordsTests>
@@ -325,7 +316,7 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "keepwords";
 
 			public override ITokenFilter Initializer =>
-				new KeepWordsTokenFilter {KeepWordsCase = true, KeepWords = new[] {"a", "b", "c"}};
+				new KeepWordsTokenFilter { KeepWordsCase = true, KeepWords = new[] { "a", "b", "c" } };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.KeepWords(n, t => t
@@ -336,17 +327,16 @@ namespace Tests.Analysis.TokenFilters
 			public override object Json => new
 			{
 				type = "keep",
-				keep_words = new[] {"a", "b", "c"},
+				keep_words = new[] { "a", "b", "c" },
 				keep_words_case = true
 			};
-
 		}
 
 		public class MarkerTests : TokenFilterAssertionBase<MarkerTests>
 		{
 			public override string Name => "marker";
 
-			public override ITokenFilter Initializer => new KeywordMarkerTokenFilter {IgnoreCase = true, Keywords = new[] {"a", "b"}};
+			public override ITokenFilter Initializer => new KeywordMarkerTokenFilter { IgnoreCase = true, Keywords = new[] { "a", "b" } };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.KeywordMarker("marker", t => t
@@ -357,18 +347,16 @@ namespace Tests.Analysis.TokenFilters
 			public override object Json => new
 			{
 				type = "keyword_marker",
-				keywords = new[] {"a", "b"},
+				keywords = new[] { "a", "b" },
 				ignore_case = true
 			};
-
-
 		}
 
 		public class KuromojiReadingFormTests : TokenFilterAssertionBase<KuromojiReadingFormTests>
 		{
 			public override string Name => "kfr";
 
-			public override ITokenFilter Initializer => new KuromojiReadingFormTokenFilter {UseRomaji = true};
+			public override ITokenFilter Initializer => new KuromojiReadingFormTokenFilter { UseRomaji = true };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.KuromojiReadingForm(n, t => t.UseRomaji());
 
@@ -377,7 +365,6 @@ namespace Tests.Analysis.TokenFilters
 				type = "kuromoji_readingform",
 				use_romaji = true
 			};
-
 		}
 
 		public class KuromojiPartOfSpeechTests : TokenFilterAssertionBase<KuromojiPartOfSpeechTests>
@@ -385,7 +372,7 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "kpos";
 
 			public override ITokenFilter Initializer =>
-				new KuromojiPartOfSpeechTokenFilter {StopTags = new[] {"#  verb-main:", "動詞-自立"}};
+				new KuromojiPartOfSpeechTokenFilter { StopTags = new[] { "#  verb-main:", "動詞-自立" } };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.KuromojiPartOfSpeech(n, t => t.StopTags("#  verb-main:", "動詞-自立"));
@@ -399,14 +386,13 @@ namespace Tests.Analysis.TokenFilters
 				},
 				type = "kuromoji_part_of_speech"
 			};
-
 		}
 
 		public class KuromojiStemmerTests : TokenFilterAssertionBase<KuromojiStemmerTests>
 		{
 			public override string Name => "ks";
 
-			public override ITokenFilter Initializer => new KuromojiStemmerTokenFilter {MinimumLength = 4};
+			public override ITokenFilter Initializer => new KuromojiStemmerTokenFilter { MinimumLength = 4 };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.KuromojiStemmer(n, t => t.MinimumLength(4));
 
@@ -415,7 +401,6 @@ namespace Tests.Analysis.TokenFilters
 				minimum_length = 4,
 				type = "kuromoji_stemmer"
 			};
-
 		}
 
 		public class KStemTests : TokenFilterAssertionBase<KStemTests>
@@ -423,24 +408,23 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "kstem";
 			public override ITokenFilter Initializer => new KStemTokenFilter { };
 			public override FuncTokenFilters Fluent => (n, tf) => tf.KStem(n);
-			public override object Json => new {type = "kstem"};
+			public override object Json => new { type = "kstem" };
 		}
 
 		public class LengthTests : TokenFilterAssertionBase<LengthTests>
 		{
 			public override string Name => "length";
-			public override ITokenFilter Initializer => new LengthTokenFilter {Min = 10, Max = 200};
+			public override ITokenFilter Initializer => new LengthTokenFilter { Min = 10, Max = 200 };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Length(n, t => t.Max(200).Min(10));
-			public override object Json => new {type = "length", min = 10, max = 200};
-
+			public override object Json => new { type = "length", min = 10, max = 200 };
 		}
 
 		public class LimitTests : TokenFilterAssertionBase<LimitTests>
 		{
 			public override string Name => "limit";
 
-			public override ITokenFilter Initializer => new LimitTokenCountTokenFilter {ConsumeAllTokens = true, MaxTokenCount = 12};
+			public override ITokenFilter Initializer => new LimitTokenCountTokenFilter { ConsumeAllTokens = true, MaxTokenCount = 12 };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.LimitTokenCount(n, t => t.ConsumeAllToken().MaxTokenCount(12));
 
@@ -450,7 +434,6 @@ namespace Tests.Analysis.TokenFilters
 				max_token_count = 12,
 				consume_all_tokens = true
 			};
-
 		}
 
 		public class LowercaseTests : TokenFilterAssertionBase<LowercaseTests>
@@ -461,20 +444,18 @@ namespace Tests.Analysis.TokenFilters
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Lowercase(n);
 
-			public override object Json => new {type = "lowercase"};
-
+			public override object Json => new { type = "lowercase" };
 		}
 
 		public class NGramTests : TokenFilterAssertionBase<NGramTests>
 		{
 			public override string Name => "ngram";
 
-			public override ITokenFilter Initializer => new NGramTokenFilter {MinGram = 3, MaxGram = 4};
+			public override ITokenFilter Initializer => new NGramTokenFilter { MinGram = 3, MaxGram = 4 };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.NGram(n, t => t.MinGram(3).MaxGram(4));
 
-			public override object Json => new {type = "ngram", min_gram = 3, max_gram = 4};
-
+			public override object Json => new { type = "ngram", min_gram = 3, max_gram = 4 };
 		}
 
 		public class PatternCaptureTests : TokenFilterAssertionBase<PatternCaptureTests>
@@ -482,7 +463,7 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "pc";
 
 			public override ITokenFilter Initializer =>
-				new PatternCaptureTokenFilter {Patterns = new[] {@"\d", @"\w"}, PreserveOriginal = true};
+				new PatternCaptureTokenFilter { Patterns = new[] { @"\d", @"\w" }, PreserveOriginal = true };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.PatternCapture(n, t => t.Patterns(@"\d", @"\w").PreserveOriginal());
@@ -490,7 +471,7 @@ namespace Tests.Analysis.TokenFilters
 			public override object Json => new
 			{
 				type = "pattern_capture",
-				patterns = new[] {"\\d", "\\w"},
+				patterns = new[] { "\\d", "\\w" },
 				preserve_original = true
 			};
 		}
@@ -500,7 +481,7 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "pr";
 
 			public override ITokenFilter Initializer =>
-				new PatternReplaceTokenFilter {Pattern = @"(\d|\w)", Replacement = "replacement"};
+				new PatternReplaceTokenFilter { Pattern = @"(\d|\w)", Replacement = "replacement" };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.PatternReplace(n, t => t
@@ -514,7 +495,6 @@ namespace Tests.Analysis.TokenFilters
 				pattern = "(\\d|\\w)",
 				replacement = "replacement"
 			};
-
 		}
 
 		public class PorterStemTests : TokenFilterAssertionBase<PorterStemTests>
@@ -530,8 +510,7 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "rev";
 			public override ITokenFilter Initializer => new ReverseTokenFilter();
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Reverse(n);
-			public override object Json => new {type = "reverse"};
-
+			public override object Json => new { type = "reverse" };
 		}
 
 		public class ShingleTests : TokenFilterAssertionBase<ShingleTests>
@@ -568,14 +547,13 @@ namespace Tests.Analysis.TokenFilters
 				token_separator = "|",
 				filler_token = "x"
 			};
-
 		}
 
 		public class SnowballTests : TokenFilterAssertionBase<SnowballTests>
 		{
 			public override string Name => "snow";
 
-			public override ITokenFilter Initializer => new SnowballTokenFilter {Language = SnowballLanguage.Dutch};
+			public override ITokenFilter Initializer => new SnowballTokenFilter { Language = SnowballLanguage.Dutch };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Snowball(n, t => t.Language(SnowballLanguage.Dutch));
 
@@ -584,7 +562,6 @@ namespace Tests.Analysis.TokenFilters
 				type = "snowball",
 				language = "Dutch"
 			};
-
 		}
 
 		public class StandardTests : TokenFilterAssertionBase<StandardTests>
@@ -596,14 +573,13 @@ namespace Tests.Analysis.TokenFilters
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Standard(n);
 
 			public override object Json => new { type = "standard" };
-
 		}
 
 		public class StemmerTests : TokenFilterAssertionBase<StemmerTests>
 		{
 			public override string Name => "stem";
 
-			public override ITokenFilter Initializer => new StemmerTokenFilter {Language = "arabic"};
+			public override ITokenFilter Initializer => new StemmerTokenFilter { Language = "arabic" };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Stemmer(n, t => t.Language("arabic"));
 
@@ -612,14 +588,13 @@ namespace Tests.Analysis.TokenFilters
 				type = "stemmer",
 				language = "arabic"
 			};
-
 		}
 
 		public class StemmerOverrideTests : TokenFilterAssertionBase<StemmerOverrideTests>
 		{
 			public override string Name => "stemo";
 
-			public override ITokenFilter Initializer => new StemmerOverrideTokenFilter {RulesPath = "analysis/custom_stems.txt"};
+			public override ITokenFilter Initializer => new StemmerOverrideTokenFilter { RulesPath = "analysis/custom_stems.txt" };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.StemmerOverride(n, t => t.RulesPath("analysis/custom_stems.txt"));
 
@@ -628,7 +603,6 @@ namespace Tests.Analysis.TokenFilters
 				type = "stemmer_override",
 				rules_path = "analysis/custom_stems.txt"
 			};
-
 		}
 
 		public class StopTests : TokenFilterAssertionBase<StopTests>
@@ -636,7 +610,7 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "stop";
 
 			public override ITokenFilter Initializer =>
-				new StopTokenFilter {IgnoreCase = true, RemoveTrailing = true, StopWords = new[] {"x", "y", "z"}};
+				new StopTokenFilter { IgnoreCase = true, RemoveTrailing = true, StopWords = new[] { "x", "y", "z" } };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
 				.Stop(n, t => t
@@ -648,11 +622,10 @@ namespace Tests.Analysis.TokenFilters
 			public override object Json => new
 			{
 				type = "stop",
-				stopwords = new[] {"x", "y", "z"},
+				stopwords = new[] { "x", "y", "z" },
 				ignore_case = true,
 				remove_trailing = true
 			};
-
 		}
 
 		public class SynonymTests : TokenFilterAssertionBase<SynonymTests>
@@ -665,7 +638,7 @@ namespace Tests.Analysis.TokenFilters
 					Expand = true,
 					Format = SynonymFormat.WordNet,
 					SynonymsPath = "analysis/stopwords.txt",
-					Synonyms = new[] {"x=>y", "z=>s"},
+					Synonyms = new[] { "x=>y", "z=>s" },
 					Tokenizer = "whitespace"
 				};
 
@@ -683,7 +656,7 @@ namespace Tests.Analysis.TokenFilters
 				type = "synonym",
 				synonyms_path = "analysis/stopwords.txt",
 				format = "wordnet",
-				synonyms = new[] {"x=>y", "z=>s"},
+				synonyms = new[] { "x=>y", "z=>s" },
 				expand = true,
 				tokenizer = "whitespace"
 			};
@@ -693,7 +666,7 @@ namespace Tests.Analysis.TokenFilters
 		public class SynonymLenientTests : TokenFilterAssertionBase<SynonymTests>
 		{
 			public override string Name => "syn_lenient";
-			private readonly string[] _synonyms = {"foo", "bar => baz"};
+			private readonly string[] _synonyms = { "foo", "bar => baz" };
 
 			public override ITokenFilter Initializer =>
 				new SynonymTokenFilter
@@ -726,7 +699,7 @@ namespace Tests.Analysis.TokenFilters
 					Expand = true,
 					Format = SynonymFormat.WordNet,
 					SynonymsPath = "analysis/stopwords.txt",
-					Synonyms = new[] {"x=>y", "z=>s"},
+					Synonyms = new[] { "x=>y", "z=>s" },
 					Tokenizer = "whitespace"
 				};
 
@@ -744,11 +717,10 @@ namespace Tests.Analysis.TokenFilters
 				type = "synonym_graph",
 				synonyms_path = "analysis/stopwords.txt",
 				format = "wordnet",
-				synonyms = new[] {"x=>y", "z=>s"},
+				synonyms = new[] { "x=>y", "z=>s" },
 				expand = true,
 				tokenizer = "whitespace"
 			};
-
 		}
 
 		public class TrimTests : TokenFilterAssertionBase<TrimTests>
@@ -756,33 +728,33 @@ namespace Tests.Analysis.TokenFilters
 			public override string Name => "trimmer";
 			public override ITokenFilter Initializer => new TrimTokenFilter();
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Trim(n);
-			public override object Json => new {type = "trim"};
+			public override object Json => new { type = "trim" };
 		}
 
 		public class TruncateTests : TokenFilterAssertionBase<TruncateTests>
 		{
 			public override string Name => "truncer";
-			public override ITokenFilter Initializer => new TruncateTokenFilter {Length = 100};
+			public override ITokenFilter Initializer => new TruncateTokenFilter { Length = 100 };
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Truncate(n, t => t.Length(100));
-			public override object Json => new {type = "truncate", length = 100};
+			public override object Json => new { type = "truncate", length = 100 };
 		}
 
 		public class UniqueTests : TokenFilterAssertionBase<UniqueTests>
 		{
 			public override string Name => "uq";
-			public override ITokenFilter Initializer => new UniqueTokenFilter {OnlyOnSamePosition = true,};
+			public override ITokenFilter Initializer => new UniqueTokenFilter { OnlyOnSamePosition = true, };
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Unique(n, t => t.OnlyOnSamePosition());
-			public override object Json => new {type = "unique", only_on_same_position = true};
-
+			public override object Json => new { type = "unique", only_on_same_position = true };
 		}
+
 		public class UppercaseTests : TokenFilterAssertionBase<UppercaseTests>
 		{
 			public override string Name => "upper";
 			public override ITokenFilter Initializer => new UppercaseTokenFilter();
 			public override FuncTokenFilters Fluent => (n, tf) => tf.Uppercase(n);
-			public override object Json => new {type = "uppercase"};
-
+			public override object Json => new { type = "uppercase" };
 		}
+
 		public class WordDelimiterTests : TokenFilterAssertionBase<WordDelimiterTests>
 		{
 			public override string Name => "wd";
@@ -796,7 +768,7 @@ namespace Tests.Analysis.TokenFilters
 					GenerateNumberParts = true,
 					GenerateWordParts = true,
 					PreserveOriginal = true,
-					ProtectedWords = new[] {"x", "y", "z"},
+					ProtectedWords = new[] { "x", "y", "z" },
 					SplitOnCaseChange = true,
 					SplitOnNumerics = true,
 					StemEnglishPossessive = true
@@ -828,9 +800,8 @@ namespace Tests.Analysis.TokenFilters
 				preserve_original = true,
 				split_on_numerics = true,
 				stem_english_possessive = true,
-				protected_words = new[] {"x", "y", "z"}
+				protected_words = new[] { "x", "y", "z" }
 			};
-
 		}
 
 		public class WordDelimiterGraphTests : TokenFilterAssertionBase<WordDelimiterGraphTests>
@@ -846,7 +817,7 @@ namespace Tests.Analysis.TokenFilters
 					GenerateNumberParts = true,
 					GenerateWordParts = true,
 					PreserveOriginal = true,
-					ProtectedWords = new[] {"x", "y", "z"},
+					ProtectedWords = new[] { "x", "y", "z" },
 					SplitOnCaseChange = true,
 					SplitOnNumerics = true,
 					StemEnglishPossessive = true
@@ -878,9 +849,8 @@ namespace Tests.Analysis.TokenFilters
 				preserve_original = true,
 				split_on_numerics = true,
 				stem_english_possessive = true,
-				protected_words = new[] {"x", "y", "z"}
+				protected_words = new[] { "x", "y", "z" }
 			};
-
 		}
 
 		public class PhoneticTests : TokenFilterAssertionBase<PhoneticTests>
@@ -893,7 +863,7 @@ namespace Tests.Analysis.TokenFilters
 					Encoder = PhoneticEncoder.Beidermorse,
 					RuleType = PhoneticRuleType.Exact,
 					NameType = PhoneticNameType.Sephardic,
-					LanguageSet = new[] {PhoneticLanguage.Cyrillic, PhoneticLanguage.English, PhoneticLanguage.Hebrew}
+					LanguageSet = new[] { PhoneticLanguage.Cyrillic, PhoneticLanguage.English, PhoneticLanguage.Hebrew }
 				};
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf
@@ -914,37 +884,37 @@ namespace Tests.Analysis.TokenFilters
 				encoder = "beider_morse",
 				rule_type = "exact",
 				name_type = "sephardic",
-				languageset = new[] {"cyrillic", "english", "hebrew"}
+				languageset = new[] { "cyrillic", "english", "hebrew" }
 			};
-
 		}
 
 		[SkipVersion("<6.4.0", "analysis-nori plugin introduced in 6.4.0")]
 		public class NoriPartOfSpeechTests : TokenFilterAssertionBase<NoriPartOfSpeechTests>
 		{
 			public override string Name => "nori_pos";
-			private readonly string[] _stopTags = {"NR", "SP"};
+			private readonly string[] _stopTags = { "NR", "SP" };
 
-			public override ITokenFilter Initializer => new NoriPartOfSpeechTokenFilter {StopTags = _stopTags};
+			public override ITokenFilter Initializer => new NoriPartOfSpeechTokenFilter { StopTags = _stopTags };
 
 			public override FuncTokenFilters Fluent => (n, tf) => tf.NoriPartOfSpeech(n, t => t.StopTags(_stopTags));
 
 			public override object Json => new { type = "nori_part_of_speech", stoptags = _stopTags };
-    }
+		}
 
 		[SkipVersion("<6.4.0", "Introduced in 6.4.0")]
 		public class MultiplexerTests : TokenFilterAssertionBase<PhoneticTests>
 		{
 			public override string Name => "multiplexer";
+
 			public override object Json => new
 			{
-				filters = new[]{"lowercase", "lowercase, porter_stem"},
+				filters = new[] { "lowercase", "lowercase, porter_stem" },
 				preserve_original = true
 			};
 
 			public override ITokenFilter Initializer => new MultiplexerTokenFilter
 			{
-				Filters = new[] {"lowercase", "lowercase, porter_stem"},
+				Filters = new[] { "lowercase", "lowercase, porter_stem" },
 				PreserveOriginal = true
 			};
 

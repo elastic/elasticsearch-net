@@ -1,16 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Elastic.Xunit.Sdk;
+﻿using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.AliasManagement.GetIndicesPointingToAlias
 {
@@ -18,11 +12,12 @@ namespace Tests.Indices.AliasManagement.GetIndicesPointingToAlias
 	{
 		private readonly WritableCluster _cluster;
 		private readonly IElasticClient _client;
-		private static string Unique = RandomString();
+		private static readonly string Unique = RandomString();
 
 		private static readonly string Alias = "alias-" + Unique;
 
-		private static readonly string[] Indices = {
+		private static readonly string[] Indices =
+		{
 			$"alias-index-{Unique}-1",
 			$"alias-index-{Unique}-2",
 			$"alias-index-{Unique}-3"

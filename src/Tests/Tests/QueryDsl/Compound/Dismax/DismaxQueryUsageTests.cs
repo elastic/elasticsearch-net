@@ -1,13 +1,11 @@
-﻿using System.Linq;
-using Nest;
-using Tests.Framework.Integration;
-using Tests.Framework;
-using System;
+﻿using System;
+using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.Integration;
 
 #pragma warning disable 618 //Testing an obsolete method
 
@@ -23,7 +21,8 @@ namespace Tests.QueryDsl.Compound.Dismax
 			{
 				_name = "named_query",
 				boost = 1.1,
-				queries = new[] {
+				queries = new[]
+				{
 					new { match_all = new { _name = "query1" } },
 					new { match_all = new { _name = "query2" } }
 				},
@@ -36,7 +35,8 @@ namespace Tests.QueryDsl.Compound.Dismax
 			Name = "named_query",
 			Boost = 1.1,
 			TieBreaker = 1.11,
-			Queries = new QueryContainer[] {
+			Queries = new QueryContainer[]
+			{
 				new MatchAllQuery() { Name = "query1" },
 				new MatchAllQuery() { Name = "query2" },
 			}
@@ -57,19 +57,19 @@ namespace Tests.QueryDsl.Compound.Dismax
 		{
 			q => q.Queries = null,
 			q => q.Queries = Enumerable.Empty<QueryContainer>(),
-			q => q.Queries = new [] { ConditionlessQuery },
+			q => q.Queries = new[] { ConditionlessQuery },
 		};
 
 		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IDisMaxQuery>(a => a.DisMax)
 		{
-			q => q.Queries = new [] { VerbatimQuery },
-			q => q.Queries = new [] { VerbatimQuery, ConditionlessQuery },
+			q => q.Queries = new[] { VerbatimQuery },
+			q => q.Queries = new[] { VerbatimQuery, ConditionlessQuery },
 		};
 
 		[U]
 		public void NullQueryDoesNotCauseANullReferenceException()
 		{
-			Action query = () => this.Client.Search<Project>(s => s
+			Action query = () => Client.Search<Project>(s => s
 				.Query(q => q
 					.DisMax(dm => dm
 						.Queries(

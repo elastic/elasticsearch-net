@@ -8,15 +8,15 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.NodesStats
 {
 	//TODO: re-evaluate which numerics are safe to assert greater then 0 and add better error messages so we can see which numeric assertion fails on CI.
-	public class NodesStatsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, INodesStatsResponse, INodesStatsRequest, NodesStatsDescriptor, NodesStatsRequest>
+	public class NodesStatsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, INodesStatsResponse, INodesStatsRequest, NodesStatsDescriptor, NodesStatsRequest>
 	{
 		public NodesStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.NodesStats(),
 			fluentAsync: (client, f) => client.NodesStatsAsync(),
@@ -75,15 +75,8 @@ namespace Tests.Cluster.NodesStats
 			nodeIngestStats.Pipelines.Should().NotBeNull();
 		}
 
-		protected void Assert(IReadOnlyDictionary<string, AdaptiveSelectionStats> adaptiveSelectionStats)
-		{
-			adaptiveSelectionStats.Should().NotBeNull(); //.And.NotBeEmpty();
-			// TODO: for the single node case, this is empty. Should it be?
-			//	var nodeSelectionStats = adaptiveSelectionStats.First().Value;
-			//	nodeSelectionStats.Rank.Should().NotBeNullOrWhiteSpace();
-			//	nodeSelectionStats.AverageResponseTimeInNanoseconds.Should().BeGreaterThan(0);
-			//	nodeSelectionStats.AverageServiceTimeInNanoseconds.Should().BeGreaterThan(0);
-		}
+		protected void Assert(IReadOnlyDictionary<string, AdaptiveSelectionStats> adaptiveSelectionStats) =>
+			adaptiveSelectionStats.Should().NotBeNull();
 
 		protected void Assert(NodeStats node)
 		{
@@ -168,25 +161,11 @@ namespace Tests.Cluster.NodesStats
 			//process.Memory.TotalVirtualInBytes.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(ScriptStats script)
-		{
-			script.Should().NotBeNull();
-		}
+		protected void Assert(ScriptStats script) => script.Should().NotBeNull();
 
-		protected void Assert(TransportStats transport)
-		{
-			transport.Should().NotBeNull();
-			//transport.RXCount.Should().BeGreaterThan(0);
-			//transport.RXSizeInBytes.Should().BeGreaterThan(0);
-			//transport.TXCount.Should().BeGreaterThan(0);
-			//transport.TXSizeInBytes.Should().BeGreaterThan(0);
-		}
+		protected void Assert(TransportStats transport) => transport.Should().NotBeNull();
 
-		protected void Assert(HttpStats http)
-		{
-			http.Should().NotBeNull();
-			//http.TotalOpened.Should().BeGreaterThan(0);
-		}
+		protected void Assert(HttpStats http) => http.Should().NotBeNull();
 
 		protected void Assert(Dictionary<string, BreakerStats> breakers)
 		{
@@ -242,7 +221,7 @@ namespace Tests.Cluster.NodesStats
 
 			jvm.GarbageCollection.Should().NotBeNull();
 			jvm.GarbageCollection.Collectors.Should().NotBeEmpty().And.ContainKey("young");
-			var youngGc=  jvm.GarbageCollection.Collectors["young"];
+			var youngGc = jvm.GarbageCollection.Collectors["young"];
 			youngGc.Should().NotBeNull();
 			//youngGc.CollectionCount.Should().BeGreaterThan(0);
 			//youngGc.CollectionTimeInMilliseconds.Should().BeGreaterThan(0);

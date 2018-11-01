@@ -1,13 +1,11 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
 using Tests.Framework;
-using static Tests.Framework.UrlTester;
 
 namespace Tests.Document.Multiple.Bulk
 {
@@ -19,9 +17,9 @@ namespace Tests.Document.Multiple.Bulk
 			var count = 100000;
 			var bytes = client.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(count));
 			var x = Deserialize(bytes, client);
-			x.Items.Should().HaveCount(count).And.NotContain(i=>i == null);
-
+			x.Items.Should().HaveCount(count).And.NotContain(i => i == null);
 		}
+
 		private BulkResponse Deserialize(byte[] response, IElasticClient client)
 		{
 			using (var ms = new MemoryStream(response))
@@ -48,17 +46,13 @@ namespace Tests.Document.Multiple.Bulk
 		};
 
 
-		private static object ReturnBulkResponse(int numberOfItems)
+		private static object ReturnBulkResponse(int numberOfItems) => new
 		{
-			return new
-			{
-				took = 276,
-				errors = false,
-				items = Enumerable.Range(0, numberOfItems)
-					.Select(i => BulkItemResponse())
-					.ToArray()
-			};
-		}
-
+			took = 276,
+			errors = false,
+			items = Enumerable.Range(0, numberOfItems)
+				.Select(i => BulkItemResponse())
+				.ToArray()
+		};
 	}
 }

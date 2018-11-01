@@ -12,7 +12,8 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.ForecastJob
 {
 	[SkipVersion("<6.1.0", "Only exists in Elasticsearch 6.1.0+")]
-	public class ForecastJobApiTests : MachineLearningIntegrationTestBase<IForecastJobResponse, IForecastJobRequest, ForecastJobDescriptor, ForecastJobRequest>
+	public class ForecastJobApiTests
+		: MachineLearningIntegrationTestBase<IForecastJobResponse, IForecastJobRequest, ForecastJobDescriptor, ForecastJobRequest>
 	{
 		private const int BucketSpanSeconds = 3600;
 
@@ -48,7 +49,7 @@ namespace Tests.XPack.MachineLearning.ForecastJob
 				var data = new List<object>(50);
 				while (timestamp < now)
 				{
-					data.AddRange(new []
+					data.AddRange(new[]
 					{
 						new { time = timestamp, value = 10d },
 						new { time = timestamp, value = 30d }

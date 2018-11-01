@@ -16,16 +16,16 @@ namespace Tests.Analysis.Tokenizers
 			an.Tokenizers(d => AssertionSetup.Fluent(AssertionSetup.Name, d));
 
 		protected override Nest.Analysis InitializerAnalysis() =>
-			new Nest.Analysis {Tokenizers = new Nest.Tokenizers {{AssertionSetup.Name, AssertionSetup.Initializer}}};
+			new Nest.Analysis { Tokenizers = new Nest.Tokenizers { { AssertionSetup.Name, AssertionSetup.Initializer } } };
 
 		protected override object AnalysisJson => new
 		{
-			tokenizer = new Dictionary<string, object> { {AssertionSetup.Name, AssertionSetup.Json} }
+			tokenizer = new Dictionary<string, object> { { AssertionSetup.Name, AssertionSetup.Json } }
 		};
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] public override Task TestPutSettingsRequest() => base.TestPutSettingsRequest();
+
 		[I] public override Task TestPutSettingsResponse() => base.TestPutSettingsResponse();
 	}
-
 }

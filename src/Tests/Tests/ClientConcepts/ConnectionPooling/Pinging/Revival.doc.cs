@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
 using static Tests.Framework.TimesHelper;
@@ -35,18 +34,20 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			audit = await audit.TraceCalls(
 				new ClientCall { { PingSuccess, 9200 }, { HealthyResponse, 9200 } },
 				new ClientCall { { PingSuccess, 9201 }, { HealthyResponse, 9201 } },
-				new ClientCall {
-					{ PingSuccess, 9202},
-					{ BadResponse, 9202},
-					{ HealthyResponse, 9200},
-					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
+				new ClientCall
+				{
+					{ PingSuccess, 9202 },
+					{ BadResponse, 9202 },
+					{ HealthyResponse, 9200 },
+					{ pool => pool.Nodes.Where(n => !n.IsAlive).Should().HaveCount(1) }
 				},
 				new ClientCall { { HealthyResponse, 9201 } },
 				new ClientCall { { HealthyResponse, 9200 } },
 				new ClientCall { { HealthyResponse, 9201 } },
-				new ClientCall {
+				new ClientCall
+				{
 					{ HealthyResponse, 9200 },
-					{ pool => pool.Nodes.First(n=>!n.IsAlive).DeadUntil.Should().BeAfter(DateTime.UtcNow) }
+					{ pool => pool.Nodes.First(n => !n.IsAlive).DeadUntil.Should().BeAfter(DateTime.UtcNow) }
 				}
 			);
 
@@ -60,7 +61,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 
 			audit = await audit.TraceCalls(
 				new ClientCall { { HealthyResponse, 9201 } },
-				new ClientCall {
+				new ClientCall
+				{
 					{ Resurrection, 9202 },
 					{ PingSuccess, 9202 },
 					{ HealthyResponse, 9202 }

@@ -7,15 +7,15 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 {
 	public class GetIndexTemplateApiTests
-		: ApiIntegrationTestBase<WritableCluster, IGetIndexTemplateResponse, IGetIndexTemplateRequest, GetIndexTemplateDescriptor, GetIndexTemplateRequest>
+		: ApiIntegrationTestBase<WritableCluster, IGetIndexTemplateResponse, IGetIndexTemplateRequest, GetIndexTemplateDescriptor,
+			GetIndexTemplateRequest>
 	{
 		public GetIndexTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetIndexTemplate(f),
 			fluentAsync: (client, f) => client.GetIndexTemplateAsync(f),
@@ -43,9 +43,9 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 			{
 				var putTemplateResponse = client.PutIndexTemplate(callUniqueValue.Value, d =>
 					d.IndexPatterns("startingwiththis-*")
-				     .Settings(s => s.NumberOfShards(2))
-					 .Version(1)
-					);
+						.Settings(s => s.NumberOfShards(2))
+						.Version(1)
+				);
 
 				if (!putTemplateResponse.IsValid)
 					throw new Exception($"Problem putting index template for integration test: {putTemplateResponse.DebugInformation}");

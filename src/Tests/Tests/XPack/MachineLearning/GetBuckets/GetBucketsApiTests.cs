@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -11,7 +10,8 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.GetBuckets
 {
-	public class GetBucketsApiTests : MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
+	public class GetBucketsApiTests
+		: MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
 	{
 		public GetBucketsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -35,7 +35,9 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
+
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);
+
 		protected override object ExpectJson => null;
 		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent => f => f;
 		protected override GetBucketsRequest Initializer => new GetBucketsRequest(CallIsolatedValue);
@@ -59,7 +61,8 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		}
 	}
 
-	public class GetBucketsWithTimestampApiTests : MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
+	public class GetBucketsWithTimestampApiTests
+		: MachineLearningIntegrationTestBase<IGetBucketsResponse, IGetBucketsRequest, GetBucketsDescriptor, GetBucketsRequest>
 	{
 		public GetBucketsWithTimestampApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -83,9 +86,14 @@ namespace Tests.XPack.MachineLearning.GetBuckets
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/{CallIsolatedValue}/results/buckets";
+
 		protected override GetBucketsDescriptor NewDescriptor() => new GetBucketsDescriptor(CallIsolatedValue);
+
 		protected override object ExpectJson => null;
-		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent => f => f.Timestamp(new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero));
+
+		protected override Func<GetBucketsDescriptor, IGetBucketsRequest> Fluent =>
+			f => f.Timestamp(new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero));
+
 		protected override GetBucketsRequest Initializer => new GetBucketsRequest(CallIsolatedValue)
 		{
 			Timestamp = new DateTimeOffset(2016, 6, 2, 00, 00, 00, TimeSpan.Zero)

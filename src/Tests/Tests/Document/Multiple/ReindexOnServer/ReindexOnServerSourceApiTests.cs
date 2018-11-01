@@ -5,12 +5,13 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexOnServer
 {
-	public class ReindexOnServerSourceApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
+	public class ReindexOnServerSourceApiTests
+		: ApiIntegrationTestBase<IntrusiveOperationCluster, IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor,
+			ReindexOnServerRequest>
 	{
 		public class Test
 		{
@@ -23,18 +24,17 @@ namespace Tests.Document.Multiple.ReindexOnServer
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
-			{
-				this.Client.Bulk(b => b
+				Client.Bulk(b => b
 					.Index(index)
-					.IndexMany(new []
+					.IndexMany(new[]
 					{
 						new Test { Id = 1, Flag = "bar" },
 						new Test { Id = 2, Flag = "bar" }
 					})
 					.Refresh(Refresh.WaitFor)
 				);
-			}
 		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ReindexOnServer(f),
 			fluentAsync: (client, f) => client.ReindexOnServerAsync(f),
@@ -72,7 +72,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			{
 				Index = CallIsolatedValue,
 				Type = "test",
-				Source = Infer.Fields<Test>(
+				Source = Fields<Test>(
 					ff => ff.Id,
 					ff => ff.Flag
 				)
@@ -86,10 +86,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			Refresh = true,
 		};
 
-		protected override void ExpectResponse(IReindexOnServerResponse response)
-		{
-			response.ShouldBeValid();
-		}
+		protected override void ExpectResponse(IReindexOnServerResponse response) => response.ShouldBeValid();
 
 		protected override object ExpectJson =>
 			new
@@ -102,7 +99,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				source = new
 				{
 					index = CallIsolatedValue,
-					_source = new [] { "id", "flag" },
+					_source = new[] { "id", "flag" },
 					type = new[] { "test" },
 				},
 				conflicts = "proceed"

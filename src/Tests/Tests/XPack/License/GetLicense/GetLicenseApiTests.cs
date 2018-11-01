@@ -6,14 +6,13 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Elasticsearch.Net.HttpMethod;
 
 namespace Tests.XPack.License.GetLicense
 {
 	[SkipVersion("<2.3.0", "")]
-	public class GetLicenseApiTests : ApiIntegrationTestBase<XPackCluster, IGetLicenseResponse, IGetLicenseRequest, GetLicenseDescriptor, GetLicenseRequest>
+	public class GetLicenseApiTests
+		: ApiIntegrationTestBase<XPackCluster, IGetLicenseResponse, IGetLicenseRequest, GetLicenseDescriptor, GetLicenseRequest>
 	{
 		public GetLicenseApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

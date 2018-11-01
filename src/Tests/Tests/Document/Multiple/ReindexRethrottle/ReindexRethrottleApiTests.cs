@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Document.Multiple.Reindex;
-using Tests.Document.Multiple.ReindexOnServer;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexRethrottle
@@ -35,7 +32,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 			);
 
 			reindex.ShouldBeValid();
-			this.ExtendedValue(TaskIdKey, reindex.Task);
+			ExtendedValue(TaskIdKey, reindex.Task);
 		}
 	}
 
@@ -55,14 +52,15 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 			);
 
 			reindex.ShouldBeValid();
-			this.ExtendedValue(TaskIdKey, reindex.Task);
+			ExtendedValue(TaskIdKey, reindex.Task);
 		}
 	}
 
 	public abstract class ReindexRethrottleApiTests
-		: ApiIntegrationTestBase<ReindexCluster, IReindexRethrottleResponse, IReindexRethrottleRequest, ReindexRethrottleDescriptor, ReindexRethrottleRequest>
+		: ApiIntegrationTestBase<ReindexCluster, IReindexRethrottleResponse, IReindexRethrottleRequest, ReindexRethrottleDescriptor,
+			ReindexRethrottleRequest>
 	{
-		protected TaskId TaskId => this.RanIntegrationSetup ? this.ExtendedValue<TaskId>(TaskIdKey) : "foo:1";
+		protected TaskId TaskId => RanIntegrationSetup ? ExtendedValue<TaskId>(TaskIdKey) : "foo:1";
 
 		protected const string TaskIdKey = "taskId";
 

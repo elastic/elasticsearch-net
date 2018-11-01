@@ -1,6 +1,6 @@
-﻿using Nest;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Nest;
 using Tests.Domain;
 using Tests.Framework;
 

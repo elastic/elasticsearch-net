@@ -7,8 +7,6 @@ using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Restore
 {
@@ -18,7 +16,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 		{
 			if (!TestClient.Configuration.RunIntegrationTests) return;
 
-			var createRepository = this.Client.CreateRepository(RepositoryName, r => r
+			var createRepository = Client.CreateRepository(RepositoryName, r => r
 				.FileSystem(fs => fs
 					.Settings(Path.Combine(cluster.FileSystem.RepositoryPath, RepositoryName))
 				)
@@ -26,12 +24,12 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 			if (!createRepository.IsValid)
 				throw new Exception("Setup: failed to create snapshot repository");
 
-			var getSnapshotResponse = this.Client.GetSnapshot(RepositoryName, SnapshotName);
+			var getSnapshotResponse = Client.GetSnapshot(RepositoryName, SnapshotName);
 
 			if ((!getSnapshotResponse.IsValid && getSnapshotResponse.ApiCall.HttpStatusCode == 404) ||
 				!getSnapshotResponse.Snapshots.Any())
 			{
-				var snapshot = this.Client.Snapshot(RepositoryName, SnapshotName, s => s
+				var snapshot = Client.Snapshot(RepositoryName, SnapshotName, s => s
 					.WaitForCompletion()
 				);
 

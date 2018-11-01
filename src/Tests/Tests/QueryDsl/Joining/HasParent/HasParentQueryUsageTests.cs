@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.HasParent
 {
@@ -45,17 +44,17 @@ namespace Tests.QueryDsl.Joining.HasParent
 			.HasParent<Developer>(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.InnerHits(i=>i.Explain())
+				.InnerHits(i => i.Explain())
 				.Score(true)
-				.Query(qq=>qq.MatchAll())
+				.Query(qq => qq.MatchAll())
 				.IgnoreUnmapped(true)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IHasParentQuery>(a => a.HasParent)
 		{
-			q =>  q.Query = null,
-			q =>  q.Query = ConditionlessQuery,
-			q =>  q.ParentType = null,
+			q => q.Query = null,
+			q => q.Query = ConditionlessQuery,
+			q => q.ParentType = null,
 		};
 	}
 }

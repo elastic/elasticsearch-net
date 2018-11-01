@@ -4,14 +4,14 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cat.CatHelp
 {
-	public class CatHelpApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatHelpRecord>, ICatHelpRequest, CatHelpDescriptor, CatHelpRequest>
+	public class CatHelpApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatHelpRecord>, ICatHelpRequest, CatHelpDescriptor, CatHelpRequest>
 	{
 		public CatHelpApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatHelp(),
 			fluentAsync: (client, f) => client.CatHelpAsync(),
@@ -24,11 +24,9 @@ namespace Tests.Cat.CatHelp
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat";
 
-		protected override void ExpectResponse(ICatResponse<CatHelpRecord> response)
-		{
-			response.Records.Should().NotBeEmpty()
-				.And.Contain(a => a.Endpoint == "/_cat/shards/{index}")
-				.And.NotContain(a=>a.Endpoint == "=^.^=");
-		}
+		protected override void ExpectResponse(ICatResponse<CatHelpRecord> response) => response.Records.Should()
+			.NotBeEmpty()
+			.And.Contain(a => a.Endpoint == "/_cat/shards/{index}")
+			.And.NotContain(a => a.Endpoint == "=^.^=");
 	}
 }

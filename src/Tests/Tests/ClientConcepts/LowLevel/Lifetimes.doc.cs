@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Net;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -36,14 +30,13 @@ namespace Tests.ClientConcepts.LowLevel
 		private class AConnectionSettings : ConnectionSettings
 		{
 			public AConnectionSettings(IConnectionPool pool, IConnection connection)
-				: base(pool, connection)
-			{ }
+				: base(pool, connection) { }
 
 			public bool IsDisposed { get; private set; }
 
 			protected override void DisposeManagedResources()
 			{
-				this.IsDisposed = true;
+				IsDisposed = true;
 				base.DisposeManagedResources();
 			}
 		}
@@ -56,7 +49,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			protected override void DisposeManagedResources()
 			{
-				this.IsDisposed = true;
+				IsDisposed = true;
 				base.DisposeManagedResources();
 			}
 		}
@@ -67,7 +60,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			protected override void DisposeManagedResources()
 			{
-				this.IsDisposed = true;
+				IsDisposed = true;
 				base.DisposeManagedResources();
 			}
 		}
@@ -94,6 +87,7 @@ namespace Tests.ClientConcepts.LowLevel
 			var connectionPool = new AConnectionPool(new Uri("http://localhost:9200"));
 			var settings = new AConnectionSettings(connectionPool, connection);
 			using (settings) { } // <1> force the settings to be disposed
+
 			settings.IsDisposed.Should().BeTrue();
 			connectionPool.IsDisposed.Should().BeTrue();
 			connection.IsDisposed.Should().BeTrue();

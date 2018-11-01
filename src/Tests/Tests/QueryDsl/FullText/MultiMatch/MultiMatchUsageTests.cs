@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.MultiMatch
@@ -29,7 +28,8 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 				tie_breaker = 1.1,
 				minimum_should_match = 2,
 				@operator = "or",
-				fields = new[] {
+				fields = new[]
+				{
 					"description",
 					"myOtherField"
 				},
@@ -40,7 +40,7 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 
 		protected override QueryContainer QueryInitializer => new MultiMatchQuery
 		{
-			Fields = Field<Project>(p=>p.Description).And("myOtherField"),
+			Fields = Field<Project>(p => p.Description).And("myOtherField"),
 			Query = "hello world",
 			Analyzer = "standard",
 			Boost = 1.1,
@@ -61,7 +61,7 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.MultiMatch(c => c
-				.Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+				.Fields(f => f.Field(p => p.Description).Field("myOtherField"))
 				.Query("hello world")
 				.Analyzer("standard")
 				.Boost(1.1)
@@ -87,9 +87,9 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 		};
 	}
 
-    /**[float]
-     * === Multi match with boost usage
-     */
+	/**[float]
+	 * === Multi match with boost usage
+	 */
 	public class MultiMatchWithBoostUsageTests : QueryDslUsageTestsBase
 	{
 		public MultiMatchWithBoostUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -99,7 +99,8 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 			multi_match = new
 			{
 				query = "hello world",
-				fields = new[] {
+				fields = new[]
+				{
 					"description^2.2",
 					"myOtherField^0.3"
 				}
@@ -108,13 +109,13 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 
 		protected override QueryContainer QueryInitializer => new MultiMatchQuery
 		{
-			Fields = Field<Project>(p=>p.Description, 2.2).And("myOtherField^0.3"),
+			Fields = Field<Project>(p => p.Description, 2.2).And("myOtherField^0.3"),
 			Query = "hello world",
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.MultiMatch(c => c
-				.Fields(Field<Project>(p=>p.Description, 2.2).And("myOtherField^0.3"))
+				.Fields(Field<Project>(p => p.Description, 2.2).And("myOtherField^0.3"))
 				.Query("hello world")
 			);
 	}

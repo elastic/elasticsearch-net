@@ -5,14 +5,15 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.NodesHotThreads
 {
-	public class NodesHotThreadsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, INodesHotThreadsResponse, INodesHotThreadsRequest, NodesHotThreadsDescriptor, NodesHotThreadsRequest>
+	public class NodesHotThreadsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, INodesHotThreadsResponse, INodesHotThreadsRequest, NodesHotThreadsDescriptor, NodesHotThreadsRequest
+		>
 	{
 		public NodesHotThreadsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.NodesHotThreads(),
 			fluentAsync: (client, f) => client.NodesHotThreadsAsync(),
@@ -34,5 +35,4 @@ namespace Tests.Cluster.NodesHotThreads
 			t.Hosts.Should().NotBeEmpty();
 		}
 	}
-
 }

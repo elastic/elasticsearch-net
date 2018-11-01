@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -8,15 +7,16 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 using static Nest.Infer;
 
 namespace Tests.Document.Single.TermVectors
 {
-	public class TermVectorsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ITermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>, TermVectorsRequest<Project>>
+	public class TermVectorsApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ITermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>,
+			TermVectorsRequest<Project>>
 	{
 		public TermVectorsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.TermVectors(f),
 			fluentAsync: (client, f) => client.TermVectorsAsync(f),
@@ -45,9 +45,9 @@ namespace Tests.Document.Single.TermVectors
 			}
 		};
 
-		protected override TermVectorsDescriptor<Project> NewDescriptor() => new TermVectorsDescriptor<Project>(typeof (Project), typeof (Project));
+		protected override TermVectorsDescriptor<Project> NewDescriptor() => new TermVectorsDescriptor<Project>(typeof(Project), typeof(Project));
 
-		protected override Func<TermVectorsDescriptor<Project>, ITermVectorsRequest<Project>> Fluent => d=>d
+		protected override Func<TermVectorsDescriptor<Project>, ITermVectorsRequest<Project>> Fluent => d => d
 			.Id(Id(Project.Instance))
 			.Routing(Project.Routing)
 			.Offsets()
@@ -59,8 +59,7 @@ namespace Tests.Document.Single.TermVectors
 				.MaximumDocumentFrequency(int.MaxValue)
 				.MinimumWordLength(0)
 				.MaximumWordLength(200)
-			)
-		;
+			);
 
 		protected override TermVectorsRequest<Project> Initializer => new TermVectorsRequest<Project>(Project.Instance.Name)
 		{

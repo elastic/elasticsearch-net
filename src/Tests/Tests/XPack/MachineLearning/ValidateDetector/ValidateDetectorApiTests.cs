@@ -10,7 +10,9 @@ using static Nest.Infer;
 
 namespace Tests.XPack.MachineLearning.ValidateDetector
 {
-	public class ValidateDetectorApiTests : MachineLearningIntegrationTestBase<IValidateDetectorResponse, IValidateDetectorRequest, ValidateDetectorDescriptor<Project>, ValidateDetectorRequest>
+	public class ValidateDetectorApiTests
+		: MachineLearningIntegrationTestBase<IValidateDetectorResponse, IValidateDetectorRequest, ValidateDetectorDescriptor<Project>,
+			ValidateDetectorRequest>
 	{
 		public ValidateDetectorApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -30,16 +32,16 @@ namespace Tests.XPack.MachineLearning.ValidateDetector
 		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new
-			{
-				detector_description = "detector description",
-				function = "count",
-				by_field_name = "numberOfCommits",
-				over_field_name = "branches",
-				partition_field_name = "leadDeveloper",
-				exclude_frequent = "none",
-				use_null = true,
-				detector_index = 0
-			};
+		{
+			detector_description = "detector description",
+			function = "count",
+			by_field_name = "numberOfCommits",
+			over_field_name = "branches",
+			partition_field_name = "leadDeveloper",
+			exclude_frequent = "none",
+			use_null = true,
+			detector_index = 0
+		};
 
 		protected override Func<ValidateDetectorDescriptor<Project>, IValidateDetectorRequest> Fluent => f => f
 			.Count(c => c
@@ -67,9 +69,6 @@ namespace Tests.XPack.MachineLearning.ValidateDetector
 				}
 			};
 
-		protected override void ExpectResponse(IValidateDetectorResponse response)
-		{
-			response.Acknowledged.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IValidateDetectorResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }
