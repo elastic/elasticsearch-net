@@ -5,54 +5,75 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	/// <summary>
-	/// Snowball compatible languages 
+	///     Snowball compatible languages
 	/// </summary>
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum SnowballLanguage
 	{
-		[EnumMember(Value="Armenian")]
+		[EnumMember(Value = "Armenian")]
 		Armenian,
-		[EnumMember(Value="Basque")]
+
+		[EnumMember(Value = "Basque")]
 		Basque,
-		[EnumMember(Value="Catalan")]
+
+		[EnumMember(Value = "Catalan")]
 		Catalan,
-		[EnumMember(Value="Danish")]
+
+		[EnumMember(Value = "Danish")]
 		Danish,
-		[EnumMember(Value="Dutch")]
+
+		[EnumMember(Value = "Dutch")]
 		Dutch,
-		[EnumMember(Value="English")]
+
+		[EnumMember(Value = "English")]
 		English,
-		[EnumMember(Value="Finnish")]
+
+		[EnumMember(Value = "Finnish")]
 		Finnish,
-		[EnumMember(Value="French")]
+
+		[EnumMember(Value = "French")]
 		French,
-		[EnumMember(Value="German")]
+
+		[EnumMember(Value = "German")]
 		German,
-		[EnumMember(Value="German2")]
+
+		[EnumMember(Value = "German2")]
 		German2,
-		[EnumMember(Value="Hungarian")]
+
+		[EnumMember(Value = "Hungarian")]
 		Hungarian,
-		[EnumMember(Value="Italian")]
+
+		[EnumMember(Value = "Italian")]
 		Italian,
-		[EnumMember(Value="Kp")]
+
+		[EnumMember(Value = "Kp")]
 		Kp,
-		[EnumMember(Value="Lovins")]
+
+		[EnumMember(Value = "Lovins")]
 		Lovins,
-		[EnumMember(Value="Norwegian")]
+
+		[EnumMember(Value = "Norwegian")]
 		Norwegian,
-		[EnumMember(Value="Porter")]
+
+		[EnumMember(Value = "Porter")]
 		Porter,
-		[EnumMember(Value="Portuguese")]
+
+		[EnumMember(Value = "Portuguese")]
 		Portuguese,
-		[EnumMember(Value="Romanian")]
+
+		[EnumMember(Value = "Romanian")]
 		Romanian,
-		[EnumMember(Value="Russian")]
+
+		[EnumMember(Value = "Russian")]
 		Russian,
-		[EnumMember(Value="Spanish")]
+
+		[EnumMember(Value = "Spanish")]
 		Spanish,
-		[EnumMember(Value="Swedish")]
+
+		[EnumMember(Value = "Swedish")]
 		Swedish,
-		[EnumMember(Value="Turkish")]
+
+		[EnumMember(Value = "Turkish")]
 		Turkish
 	}
 }

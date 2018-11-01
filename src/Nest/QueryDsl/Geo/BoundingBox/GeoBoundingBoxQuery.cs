@@ -20,21 +20,22 @@ namespace Nest
 
 	public class GeoBoundingBoxQuery : FieldNameQueryBase, IGeoBoundingBoxQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
 		public IBoundingBox BoundingBox { get; set; }
 		public GeoExecution? Type { get; set; }
 
 		public GeoValidationMethod? ValidationMethod { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoBoundingBox = this;
 
 		internal static bool IsConditionless(IGeoBoundingBoxQuery q) =>
-			q.Field.IsConditionless() || (q.BoundingBox?.BottomRight == null && q.BoundingBox?.TopLeft == null && q.BoundingBox?.WellKnownText == null);
+			q.Field.IsConditionless()
+			|| (q.BoundingBox?.BottomRight == null && q.BoundingBox?.TopLeft == null && q.BoundingBox?.WellKnownText == null);
 	}
 
 	public class GeoBoundingBoxQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery, T>
-		, IGeoBoundingBoxQuery where T : class
+			, IGeoBoundingBoxQuery where T : class
 	{
 		protected override bool Conditionless => GeoBoundingBoxQuery.IsConditionless(this);
 		IBoundingBox IGeoBoundingBoxQuery.BoundingBox { get; set; }
@@ -42,13 +43,13 @@ namespace Nest
 		GeoValidationMethod? IGeoBoundingBoxQuery.ValidationMethod { get; set; }
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(double topLeftLat, double topLeftLon, double bottomRightLat, double bottomRightLon) =>
-			BoundingBox(f=>f.TopLeft(topLeftLat, topLeftLon).BottomRight(bottomRightLat, bottomRightLon));
+			BoundingBox(f => f.TopLeft(topLeftLat, topLeftLon).BottomRight(bottomRightLat, bottomRightLon));
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(GeoLocation topLeft, GeoLocation bottomRight) =>
-			BoundingBox(f=>f.TopLeft(topLeft).BottomRight(bottomRight));
+			BoundingBox(f => f.TopLeft(topLeft).BottomRight(bottomRight));
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(string wkt) =>
-			BoundingBox(f=>f.WellKnownText(wkt));
+			BoundingBox(f => f.WellKnownText(wkt));
 
 		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(Func<BoundingBoxDescriptor, IBoundingBox> boundingBoxSelector) =>
 			Assign(a => a.BoundingBox = boundingBoxSelector?.Invoke(new BoundingBoxDescriptor()));

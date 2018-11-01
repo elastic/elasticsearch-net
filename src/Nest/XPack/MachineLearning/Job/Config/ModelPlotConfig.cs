@@ -4,18 +4,18 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Stores model information along with the results.
-	/// It provides a more detailed view into anomaly detection.
+	///     Stores model information along with the results.
+	///     It provides a more detailed view into anomaly detection.
 	/// </summary>
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ModelPlotConfig>))]
 	public interface IModelPlotConfig : IModelPlotConfigEnabled
 	{
 		/// <summary>
-		/// Limits data collection to this list of partition or by field values.
-		/// If terms are not specified, no filtering is applied.
+		///     Limits data collection to this list of partition or by field values.
+		///     If terms are not specified, no filtering is applied.
 		/// </summary>
 		/// <remarks>
-		/// This is experimental. Only the specified terms can be viewed when using the Single Metric Viewer.
+		///     This is experimental. Only the specified terms can be viewed when using the Single Metric Viewer.
 		/// </remarks>
 		[JsonProperty("terms")]
 		Fields Terms { get; set; }
@@ -26,6 +26,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public bool? Enabled { get; set; }
+
 		/// <inheritdoc />
 		public Fields Terms { get; set; }
 	}
@@ -48,15 +49,15 @@ namespace Nest
 	}
 
 	/// <summary>
-	/// Stores model information along with the results.
-	/// It provides a more detailed view into anomaly detection.
+	///     Stores model information along with the results.
+	///     It provides a more detailed view into anomaly detection.
 	/// </summary>
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ModelPlotConfigEnabled>))]
 	public interface IModelPlotConfigEnabled
 	{
 		/// <summary>
-		/// Enables calculation and storage of the model bounds for each entity that is being analyzed.
-		/// By default, this is not enabled.
+		///     Enables calculation and storage of the model bounds for each entity that is being analyzed.
+		///     By default, this is not enabled.
 		/// </summary>
 		[JsonProperty("enabled")]
 		bool? Enabled { get; set; }
@@ -70,7 +71,8 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	public class ModelPlotConfigEnabledDescriptor<T> : DescriptorBase<ModelPlotConfigEnabledDescriptor<T>, IModelPlotConfigEnabled>, IModelPlotConfigEnabled where T : class
+	public class ModelPlotConfigEnabledDescriptor<T>
+		: DescriptorBase<ModelPlotConfigEnabledDescriptor<T>, IModelPlotConfigEnabled>, IModelPlotConfigEnabled where T : class
 	{
 		bool? IModelPlotConfigEnabled.Enabled { get; set; }
 

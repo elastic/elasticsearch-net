@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "solr")]
 		Solr,
+
 		[EnumMember(Value = "wordnet")]
 		WordNet
 	}

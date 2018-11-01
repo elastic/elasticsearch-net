@@ -5,14 +5,14 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	/// <summary>
-	/// Sorts highlighted fragments
+	///     Sorts highlighted fragments
 	/// </summary>
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum HighlighterOrder
 	{
 		/// <summary>
-		/// Sorts highlighted fragments by score. Only valid for the <see cref="HighlighterType.Unified"/> highligher
-		/// </remarks>
+		///     Sorts highlighted fragments by score. Only valid for the <see cref="HighlighterType.Unified" /> highligher
+		///     </remarks>
 		[EnumMember(Value = "score")]
 		Score
 	}

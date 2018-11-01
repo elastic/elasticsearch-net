@@ -11,8 +11,9 @@ namespace Nest
 		private static readonly ConcurrentDictionary<Type, ElasticsearchTypeAttribute> CachedTypeLookups =
 			new ConcurrentDictionary<Type, ElasticsearchTypeAttribute>();
 
-		public string Name { get; set; }
 		public string IdProperty { get; set; }
+
+		public string Name { get; set; }
 
 		public static ElasticsearchTypeAttribute From(Type type)
 		{

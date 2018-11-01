@@ -7,7 +7,7 @@ namespace Nest
 	public partial interface IFlushJobRequest
 	{
 		/// <summary>
-		/// Specifies that no data prior to this date is expected.
+		///     Specifies that no data prior to this date is expected.
 		/// </summary>
 		[JsonProperty("advance_time")]
 		// Forced to prevent override, ML API always expects ISO8601 format
@@ -15,14 +15,14 @@ namespace Nest
 		DateTimeOffset? AdvanceTime { get; set; }
 
 		/// <summary>
-		/// Calculates the interim results for the most recent bucket or all buckets within the latency period.
+		///     Calculates the interim results for the most recent bucket or all buckets within the latency period.
 		/// </summary>
 		[JsonProperty("calc_interim")]
 		bool? CalculateInterim { get; set; }
 
 		/// <summary>
-		///  When used in conjunction with <see cref="CalculateInterim"/>, specifies the range of buckets on
-		/// which to calculate interim results.
+		///     When used in conjunction with <see cref="CalculateInterim" />, specifies the range of buckets on
+		///     which to calculate interim results.
 		/// </summary>
 		[JsonProperty("end")]
 		// Forced to prevent override, ML API always expects ISO8601 format
@@ -30,8 +30,8 @@ namespace Nest
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
-		/// When used in conjunction with <see cref="CalculateInterim"/>, specifies the range of buckets
-		/// on which to calculate interim results.
+		///     When used in conjunction with <see cref="CalculateInterim" />, specifies the range of buckets
+		///     on which to calculate interim results.
 		/// </summary>
 		[JsonProperty("start")]
 		// Forced to prevent override, ML API always expects ISO8601 format
@@ -43,10 +43,13 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public DateTimeOffset? AdvanceTime { get; set; }
+
 		/// <inheritdoc />
 		public bool? CalculateInterim { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? End { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? Start { get; set; }
 	}

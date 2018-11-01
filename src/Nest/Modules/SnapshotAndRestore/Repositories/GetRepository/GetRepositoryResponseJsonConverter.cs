@@ -9,24 +9,24 @@ namespace Nest
 	internal class GetRepositoryResponseJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			serializer.Serialize(writer, value);
-		}
+
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var response = new GetRepositoryResponse();
-			var repositories = JObject.Load(reader).Properties()
+			var repositories = JObject.Load(reader)
+				.Properties()
 				.Where(p => p.Name != "error" && p.Name != "status")
 				.ToDictionary(p => p.Name, p => p.Value);
 			if (!repositories.HasAny())
 				return response;
+
 			var d = new Dictionary<string, ISnapshotRepository>();
 			foreach (var kv in repositories)
 			{
 				var repository = JObject.FromObject(kv.Value);
 				var type = repository.Properties().Where(p => p.Name == "type").SingleOrDefault();
 				if (type == null) continue;
+
 				var typeName = type.Value.ToString();
 				var settings = GetSetingsJObject(repository);
 				if (typeName == "fs")
@@ -55,9 +55,12 @@ namespace Nest
 					d.Add(kv.Key, hdfs);
 				}
 			}
+
 			response.Repositories = d;
 			return response;
 		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => serializer.Serialize(writer, value);
 
 		private TRepository GetRepository<TRepository, TSettings>(JObject settings)
 			where TRepository : ISnapshotRepository
@@ -65,17 +68,19 @@ namespace Nest
 		{
 			if (settings == null)
 				return (TRepository)typeof(TRepository).CreateInstance();
+
 			return (TRepository)typeof(TRepository).CreateInstance(settings.ToObject<TSettings>());
 		}
 
 		private JObject GetSetingsJObject(JObject repository)
 		{
-			var settings = JObject.FromObject(repository).Properties()
+			var settings = JObject.FromObject(repository)
+				.Properties()
 				.Where(p => p.Name == "settings")
 				.SingleOrDefault();
 			if (settings == null) return null;
+
 			return JObject.FromObject(settings.Value);
 		}
 	}
 }
-

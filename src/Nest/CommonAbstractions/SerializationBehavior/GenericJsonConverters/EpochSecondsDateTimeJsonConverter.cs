@@ -8,6 +8,26 @@ namespace Nest
 	{
 		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
 
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType != JsonToken.String)
+			{
+				if (objectType == typeof(DateTimeOffset?) || objectType == typeof(DateTime?))
+					return null;
+
+				return objectType == typeof(DateTimeOffset)
+					? default(DateTimeOffset)
+					: default(DateTime);
+			}
+
+			var secondsSinceEpoch = Convert.ToDouble(reader.Value);
+			var dateTimeOffset = Epoch.AddSeconds(secondsSinceEpoch);
+
+			return objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?)
+				? dateTimeOffset
+				: dateTimeOffset.DateTime;
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var dateTimeOffset = value as DateTimeOffset?;
@@ -29,10 +49,15 @@ namespace Nest
 			var dateTimeOffsetDifference = (dateTimeOffset.Value - Epoch).TotalSeconds;
 			writer.WriteValue(dateTimeOffsetDifference.ToString());
 		}
+	}
+
+	internal class EpochSecondsDateTimeJsonConverter : DateTimeConverterBase
+	{
+		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			if (reader.TokenType != JsonToken.String)
+			if (reader.TokenType != JsonToken.Float && reader.TokenType != JsonToken.Integer)
 			{
 				if (objectType == typeof(DateTimeOffset?) || objectType == typeof(DateTime?))
 					return null;
@@ -42,18 +67,14 @@ namespace Nest
 					: default(DateTime);
 			}
 
-			var secondsSinceEpoch = Convert.ToDouble(reader.Value);
+			var secondsSinceEpoch = (double)reader.Value;
 			var dateTimeOffset = Epoch.AddSeconds(secondsSinceEpoch);
 
-			return objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?)
-				? dateTimeOffset
-				: dateTimeOffset.DateTime;
-		}
-	}
+			if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
+				return dateTimeOffset;
 
-	internal class EpochSecondsDateTimeJsonConverter : DateTimeConverterBase
-	{
-		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
+			return dateTimeOffset.DateTime;
+		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -75,27 +96,6 @@ namespace Nest
 
 			var dateTimeOffsetDifference = (dateTimeOffset.Value - Epoch).TotalSeconds;
 			writer.WriteValue(dateTimeOffsetDifference);
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.Float && reader.TokenType != JsonToken.Integer)
-			{
-				if (objectType == typeof(DateTimeOffset?) || objectType == typeof(DateTime?))
-					return null;
-
-				return objectType == typeof(DateTimeOffset)
-					? default(DateTimeOffset)
-					: default(DateTime);
-			}
-
-			var secondsSinceEpoch = (double)reader.Value;
-			var dateTimeOffset = Epoch.AddSeconds(secondsSinceEpoch);
-
-			if (objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?))
-				return dateTimeOffset;
-
-			return dateTimeOffset.DateTime;
 		}
 	}
 }

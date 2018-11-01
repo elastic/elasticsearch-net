@@ -9,19 +9,13 @@ namespace Nest
 	[JsonConverter(typeof(CompareConditionConverter))]
 	public interface ICompareCondition : ICondition
 	{
-		string Path { get; set; }
 		string Comparison { get; }
+		string Path { get; set; }
 		object Value { get; set; }
 	}
 
 	public abstract class CompareConditionBase : ConditionBase, ICompareCondition
 	{
-		private ICompareCondition Self => this;
-
-		string ICompareCondition.Path { get; set; }
-		object ICompareCondition.Value { get; set; }
-		string ICompareCondition.Comparison => this.Comparison;
-
 		protected CompareConditionBase(string path, object value)
 		{
 			Self.Path = path;
@@ -29,6 +23,11 @@ namespace Nest
 		}
 
 		protected abstract string Comparison { get; }
+		string ICompareCondition.Comparison => Comparison;
+
+		string ICompareCondition.Path { get; set; }
+		private ICompareCondition Self => this;
+		object ICompareCondition.Value { get; set; }
 
 		internal override void WrapInContainer(IConditionContainer container) => container.Compare = this;
 	}
@@ -37,9 +36,6 @@ namespace Nest
 	{
 		public ICompareCondition EqualTo(string path, object value) =>
 			new EqualCondition(path, value);
-
-		public ICompareCondition NotEqualTo(string path, object value) =>
-			new NotEqualCondition(path, value);
 
 		public ICompareCondition GreaterThan(string path, object value) =>
 			new GreaterThanCondition(path, value);
@@ -52,57 +48,60 @@ namespace Nest
 
 		public ICompareCondition LowerThanOrEqualTo(string path, object value) =>
 			new LowerThanOrEqualCondition(path, value);
+
+		public ICompareCondition NotEqualTo(string path, object value) =>
+			new NotEqualCondition(path, value);
 	}
 
 	public class EqualCondition : CompareConditionBase
 	{
-		protected override string Comparison => "eq";
-
 		public EqualCondition(string path, object value) : base(path, value) { }
+
+		protected override string Comparison => "eq";
 	}
 
 	public class NotEqualCondition : CompareConditionBase
 	{
-		protected override string Comparison => "not_eq";
-
 		public NotEqualCondition(string path, object value) : base(path, value) { }
+
+		protected override string Comparison => "not_eq";
 	}
 
 	public class GreaterThanCondition : CompareConditionBase
 	{
-		protected override string Comparison => "gt";
-
 		public GreaterThanCondition(string path, object value) : base(path, value) { }
+
+		protected override string Comparison => "gt";
 	}
 
 	public class GreaterThanOrEqualCondition : CompareConditionBase
 	{
-		protected override string Comparison => "gte";
-
 		public GreaterThanOrEqualCondition(string path, object value) : base(path, value) { }
+
+		protected override string Comparison => "gte";
 	}
 
 	public class LowerThanCondition : CompareConditionBase
 	{
-		protected override string Comparison => "lt";
-
 		public LowerThanCondition(string path, object value) : base(path, value) { }
+
+		protected override string Comparison => "lt";
 	}
 
 	public class LowerThanOrEqualCondition : CompareConditionBase
 	{
-		protected override string Comparison => "lte";
-
 		public LowerThanOrEqualCondition(string path, object value) : base(path, value) { }
+
+		protected override string Comparison => "lte";
 	}
 
 	internal class CompareConditionConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => true;
-
 		public override bool CanRead => true;
 
 		public override bool CanWrite => true;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -113,10 +112,12 @@ namespace Nest
 
 			var pathProperty = compare.Children<JProperty>().First();
 			if (pathProperty.Count == 0) return null;
+
 			var path = pathProperty.Name;
 
 			var conditionProperty = pathProperty.Value.Children<JProperty>().First();
 			if (conditionProperty.Count == 0) return null;
+
 			var condition = conditionProperty.Name;
 			var value = serializer.Deserialize<object>(conditionProperty.Value.CreateReader());
 
@@ -146,5 +147,4 @@ namespace Nest
 			writer.WriteEndObject();
 		}
 	}
-
 }

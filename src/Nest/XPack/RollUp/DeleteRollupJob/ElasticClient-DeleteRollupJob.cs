@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Deletes an existing rollup job. The job can be started or stopped, in both cases it will be deleted.
-		/// Attempting to delete a non-existing job will throw an exception
+		///     Deletes an existing rollup job. The job can be started or stopped, in both cases it will be deleted.
+		///     Attempting to delete a non-existing job will throw an exception
 		/// </summary>
 		IDeleteRollupJobResponse DeleteRollupJob(Id id, Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null);
 
@@ -18,7 +18,8 @@ namespace Nest
 
 		/// <inheritdoc cref="DeleteRollupJob(Nest.Id,System.Func{Nest.DeleteRollupJobDescriptor,Nest.IDeleteRollupJobRequest})" />
 		Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(Id id,
-			Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null, CancellationToken cancellationToken = default);
+			Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null, CancellationToken cancellationToken = default
+		);
 
 		/// <inheritdoc cref="DeleteRollupJob(Nest.Id,System.Func{Nest.DeleteRollupJobDescriptor,Nest.IDeleteRollupJobRequest})" />
 		Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(IDeleteRollupJobRequest request, CancellationToken cancellationToken = default);
@@ -26,29 +27,29 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IDeleteRollupJobResponse DeleteRollupJob(Id id, Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null) =>
-			this.DeleteRollupJob(selector.InvokeOrDefault(new DeleteRollupJobDescriptor(id)));
+			DeleteRollupJob(selector.InvokeOrDefault(new DeleteRollupJobDescriptor(id)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IDeleteRollupJobResponse DeleteRollupJob(IDeleteRollupJobRequest request) =>
-			this.Dispatcher.Dispatch<IDeleteRollupJobRequest, DeleteRollupJobRequestParameters, DeleteRollupJobResponse>(
+			Dispatcher.Dispatch<IDeleteRollupJobRequest, DeleteRollupJobRequestParameters, DeleteRollupJobResponse>(
 				request,
-				(p, d) =>this.LowLevelDispatch.XpackRollupDeleteJobDispatch<DeleteRollupJobResponse>(p)
+				(p, d) => LowLevelDispatch.XpackRollupDeleteJobDispatch<DeleteRollupJobResponse>(p)
 			);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(
 			Id id, Func<DeleteRollupJobDescriptor, IDeleteRollupJobRequest> selector = null, CancellationToken cancellationToken = default
-		)  =>
-			this.DeleteRollupJobAsync(selector.InvokeOrDefault(new DeleteRollupJobDescriptor(id)), cancellationToken);
+		) =>
+			DeleteRollupJobAsync(selector.InvokeOrDefault(new DeleteRollupJobDescriptor(id)), cancellationToken);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<IDeleteRollupJobResponse> DeleteRollupJobAsync(IDeleteRollupJobRequest request, CancellationToken cancellationToken = default) =>
-			this.Dispatcher.DispatchAsync<IDeleteRollupJobRequest, DeleteRollupJobRequestParameters, DeleteRollupJobResponse, IDeleteRollupJobResponse>(
+			Dispatcher.DispatchAsync<IDeleteRollupJobRequest, DeleteRollupJobRequestParameters, DeleteRollupJobResponse, IDeleteRollupJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.XpackRollupDeleteJobDispatchAsync<DeleteRollupJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.XpackRollupDeleteJobDispatchAsync<DeleteRollupJobResponse>(p, c)
 			);
 	}
 }

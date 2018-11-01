@@ -1,47 +1,51 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICatResponse<CatHealthRecord> CatHealth(Func<CatHealthDescriptor, ICatHealthRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICatResponse<CatHealthRecord> CatHealth(ICatHealthRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(
 			Func<CatHealthDescriptor, ICatHealthRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		);
 
-		/// <inheritdoc/>
-		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request, CancellationToken cancellationToken = default(CancellationToken));
-
+		/// <inheritdoc />
+		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request, CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICatResponse<CatHealthRecord> CatHealth(Func<CatHealthDescriptor, ICatHealthRequest> selector = null) =>
-			this.CatHealth(selector.InvokeOrDefault(new CatHealthDescriptor()));
+			CatHealth(selector.InvokeOrDefault(new CatHealthDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICatResponse<CatHealthRecord> CatHealth(ICatHealthRequest request) =>
-			DoCat<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, LowLevelDispatch.CatHealthDispatch<CatResponse<CatHealthRecord>>);
+			DoCat<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request,
+				LowLevelDispatch.CatHealthDispatch<CatResponse<CatHealthRecord>>);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(
 			Func<CatHealthDescriptor, ICatHealthRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) => this.CatHealthAsync(selector.InvokeOrDefault(new CatHealthDescriptor()), cancellationToken);
+		) => CatHealthAsync(selector.InvokeOrDefault(new CatHealthDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			DoCatAsync<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, cancellationToken, LowLevelDispatch.CatHealthDispatchAsync<CatResponse<CatHealthRecord>>);
+		/// <inheritdoc />
+		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			DoCatAsync<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, cancellationToken,
+				LowLevelDispatch.CatHealthDispatchAsync<CatResponse<CatHealthRecord>>);
 	}
 }

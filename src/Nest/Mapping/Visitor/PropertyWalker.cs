@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Reflection;
-using System.Collections;
 
 namespace Nest
 {
 	public class PropertyWalker
 	{
-		private readonly Type _type;
-		private readonly IPropertyVisitor _visitor;
 		private readonly int _maxRecursion;
 		private readonly ConcurrentDictionary<Type, int> _seenTypes;
+		private readonly Type _type;
+		private readonly IPropertyVisitor _visitor;
 
 		public PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion = 0)
 		{
@@ -75,6 +75,19 @@ namespace Nest
 			return property;
 		}
 
+		private static Type GetUnderlyingType(Type type)
+		{
+			if (type.IsArray)
+				return type.GetElementType();
+
+			var typeInfo = type.GetTypeInfo();
+			if (typeInfo.IsGenericType && type.GetGenericArguments().Length == 1
+				&& (typeInfo.ImplementedInterfaces.HasAny(t => t == typeof(IEnumerable)) || Nullable.GetUnderlyingType(type) != null))
+				return type.GetGenericArguments()[0];
+
+			return type;
+		}
+
 		private static IProperty InferProperty(PropertyInfo propertyInfo)
 		{
 			var type = GetUnderlyingType(propertyInfo.PropertyType);
@@ -84,7 +97,8 @@ namespace Nest
 				{
 					Fields = new Properties
 					{
-						{ "keyword", new KeywordProperty
+						{
+							"keyword", new KeywordProperty
 							{
 								IgnoreAbove = 256
 							}
@@ -95,14 +109,13 @@ namespace Nest
 			if (type.IsEnumType())
 			{
 				if (type.GetTypeInfo().GetCustomAttribute<StringEnumAttribute>() != null
-				    || propertyInfo.GetCustomAttribute<StringEnumAttribute>() != null)
+					|| propertyInfo.GetCustomAttribute<StringEnumAttribute>() != null)
 					return new KeywordProperty();
 
 				return new NumberProperty(NumberType.Integer);
 			}
 
 			if (type.IsValue())
-			{
 				switch (type.Name)
 				{
 					case "Int32":
@@ -132,7 +145,6 @@ namespace Nest
 					case "Guid":
 						return new KeywordProperty();
 				}
-			}
 
 			if (type == typeof(GeoLocation))
 				return new GeoPointProperty();
@@ -162,19 +174,6 @@ namespace Nest
 				return new PercolatorProperty();
 
 			return new ObjectProperty();
-		}
-
-		private static Type GetUnderlyingType(Type type)
-		{
-			if (type.IsArray)
-				return type.GetElementType();
-
-			var typeInfo = type.GetTypeInfo();
-			if (typeInfo.IsGenericType && type.GetGenericArguments().Length == 1
-				&& (typeInfo.ImplementedInterfaces.HasAny(t => t == typeof(IEnumerable)) || Nullable.GetUnderlyingType(type) != null))
-				return type.GetGenericArguments()[0];
-
-			return type;
 		}
 	}
 }

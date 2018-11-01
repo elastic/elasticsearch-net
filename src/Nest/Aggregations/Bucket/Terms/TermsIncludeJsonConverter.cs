@@ -16,7 +16,7 @@ namespace Nest
 			switch (reader.TokenType)
 			{
 				case JsonToken.StartArray:
-					termsInclude =new TermsInclude(serializer.Deserialize<IEnumerable<string>>(reader));
+					termsInclude = new TermsInclude(serializer.Deserialize<IEnumerable<string>>(reader));
 					break;
 				case JsonToken.StartObject:
 					long partition = 0;
@@ -38,6 +38,7 @@ namespace Nest
 							}
 						}
 					}
+
 					termsInclude = new TermsInclude(partition, numberOfPartitions);
 					break;
 				case JsonToken.String:

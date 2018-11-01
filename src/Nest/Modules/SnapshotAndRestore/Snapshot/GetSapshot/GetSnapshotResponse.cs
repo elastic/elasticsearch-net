@@ -12,9 +12,7 @@ namespace Nest
 	[JsonObject]
 	public class GetSnapshotResponse : ResponseBase, IGetSnapshotResponse
 	{
-
 		[JsonProperty("snapshots")]
 		public IReadOnlyCollection<Snapshot> Snapshots { get; internal set; } = EmptyReadOnly<Snapshot>.Collection;
-
 	}
 }

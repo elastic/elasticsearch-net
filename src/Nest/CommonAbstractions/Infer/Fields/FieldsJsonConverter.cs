@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -13,24 +11,10 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => true;
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			var fields = value as Fields;
-			writer.WriteStartArray();
-			if (fields != null)
-			{
-				var infer = serializer.GetConnectionSettings().Inferrer;
-				foreach (var f in fields.ListOfFields)
-				{
-					writer.WriteValue(infer.Field(f));
-				}
-			}
-			writer.WriteEndArray();
-		}
-
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartArray) return null;
+
 			var fields = new Fields();
 			while (reader.TokenType != JsonToken.EndArray)
 			{
@@ -46,16 +30,26 @@ namespace Nest
 						reader.Read(); // "field";
 						var field = reader.ReadAsString();
 						fields.And(field);
-						while (reader.TokenType != JsonToken.EndObject)
-						{
-							reader.Read();
-						}
+						while (reader.TokenType != JsonToken.EndObject) reader.Read();
 						reader.Read(); // "}";
 						break;
 				}
 			}
+
 			return fields;
+		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			var fields = value as Fields;
+			writer.WriteStartArray();
+			if (fields != null)
+			{
+				var infer = serializer.GetConnectionSettings().Inferrer;
+				foreach (var f in fields.ListOfFields) writer.WriteValue(infer.Field(f));
+			}
+
+			writer.WriteEndArray();
 		}
 	}
 }
-

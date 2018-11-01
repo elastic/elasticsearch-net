@@ -13,8 +13,10 @@ namespace Nest
 		protected override FieldMappingProperties Create(IConnectionSettingsValues s, Dictionary<Field, FieldMapping> d) =>
 			new FieldMappingProperties(s, d);
 	}
+
 	[JsonConverter(typeof(FieldMappingPropertiesJsonConverter))]
-	public class FieldMappingProperties : ResolvableDictionaryProxy<Field, FieldMapping> {
+	public class FieldMappingProperties : ResolvableDictionaryProxy<Field, FieldMapping>
+	{
 		internal FieldMappingProperties(IConnectionConfigurationValues connectionSettings, IReadOnlyDictionary<Field, FieldMapping> backingDictionary)
 			: base(connectionSettings, backingDictionary) { }
 	}
@@ -23,7 +25,8 @@ namespace Nest
 	{
 		[JsonProperty("mappings")]
 		[JsonConverter(typeof(ResolvableDictionaryJsonConverter<TypeName, FieldMappingProperties>))]
-		public IReadOnlyDictionary<TypeName, FieldMappingProperties> Mappings { get; internal set; } = EmptyReadOnly<TypeName, FieldMappingProperties>.Dictionary;
+		public IReadOnlyDictionary<TypeName, FieldMappingProperties> Mappings { get; internal set; } =
+			EmptyReadOnly<TypeName, FieldMappingProperties>.Dictionary;
 	}
 
 	public class FieldMapping
@@ -54,30 +57,32 @@ namespace Nest
 		public IReadOnlyDictionary<IndexName, TypeFieldMappings> Indices => Self.BackingDictionary;
 
 		//if you call get mapping on an existing type and index but no fields match you still get back a 200.
-		public override bool IsValid => base.IsValid && this.Indices.HasAny();
-
-		private FieldMappingProperties MappingsFor(IndexName index, TypeName type)
-		{
-			if (!this.Indices.TryGetValue(index, out var indexMapping) || indexMapping.Mappings == null) return null;
-			return !indexMapping.Mappings.TryGetValue(type, out var typeFieldMapping) ? null : typeFieldMapping;
-		}
+		public override bool IsValid => base.IsValid && Indices.HasAny();
 
 		public IFieldMapping GetMapping(IndexName index, TypeName type, Field property)
 		{
 			if (property == null) return null;
 
-			var mappings = this.MappingsFor(index, type);
+			var mappings = MappingsFor(index, type);
 			if (mappings == null) return null;
 
 			if (!mappings.TryGetValue(property, out var fieldMapping) || fieldMapping.Mapping == null) return null;
+
 			return fieldMapping.Mapping.TryGetValue(property, out var field) ? field : null;
 		}
 
 		public IFieldMapping MappingFor<T>(Field property, IndexName index, TypeName type) =>
-			this.GetMapping(index ?? Index<T>(), type ?? Type<T>(), property);
+			GetMapping(index ?? Index<T>(), type ?? Type<T>(), property);
 
 		public IFieldMapping MappingFor<T>(Expression<Func<T, object>> objectPath, IndexName index = null, TypeName type = null)
 			where T : class =>
-			this.GetMapping(index ?? Index<T>(), type ?? Type<T>(), Field(objectPath));
+			GetMapping(index ?? Index<T>(), type ?? Type<T>(), Field(objectPath));
+
+		private FieldMappingProperties MappingsFor(IndexName index, TypeName type)
+		{
+			if (!Indices.TryGetValue(index, out var indexMapping) || indexMapping.Mappings == null) return null;
+
+			return !indexMapping.Mappings.TryGetValue(type, out var typeFieldMapping) ? null : typeFieldMapping;
+		}
 	}
 }

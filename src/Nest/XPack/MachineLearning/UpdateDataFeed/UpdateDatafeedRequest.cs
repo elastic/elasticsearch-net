@@ -4,26 +4,26 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Updates a datafeed for a machine learning job.
+	///     Updates a datafeed for a machine learning job.
 	/// </summary>
 	public partial interface IUpdateDatafeedRequest
 	{
 		/// <summary>
-		/// If set, the datafeed performs aggregation searches.
+		///     If set, the datafeed performs aggregation searches.
 		/// </summary>
 		[JsonProperty("aggregations")]
 		AggregationDictionary Aggregations { get; set; }
 
 		/// <summary>
-		/// Specifies how data searches are split into time chunks.
+		///     Specifies how data searches are split into time chunks.
 		/// </summary>
 		[JsonProperty("chunking_config")]
 		IChunkingConfig ChunkingConfig { get; set; }
 
 		/// <summary>
-		/// The interval at which scheduled queries are made while the datafeed runs in real time.
-		/// The default value is either the bucket span for short bucket spans, or, for longer bucket spans,
-		/// a sensible fraction of the bucket span.
+		///     The interval at which scheduled queries are made while the datafeed runs in real time.
+		///     The default value is either the bucket span for short bucket spans, or, for longer bucket spans,
+		///     a sensible fraction of the bucket span.
 		/// </summary>
 		[JsonProperty("frequency")]
 		Time Frequency { get; set; }
@@ -34,40 +34,40 @@ namespace Nest
 		Indices Indices { get; set; }
 
 		/// <summary>
-		/// A numerical character string that uniquely identifies the job.
+		///     A numerical character string that uniquely identifies the job.
 		/// </summary>
 		[JsonProperty("job_id")]
 		Id JobId { get; set; }
 
 		/// <summary>
-		/// Describe the query to perform using a query descriptor lambda.
+		///     Describe the query to perform using a query descriptor lambda.
 		/// </summary>
 		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
 
 		/// <summary>
-		/// The number of seconds behind real time that data is queried.
-		/// For example, if data from 10:04 a.m. might not be searchable until 10:06 a.m.,
-		/// set this property to 120 seconds. The default value is 60s.
+		///     The number of seconds behind real time that data is queried.
+		///     For example, if data from 10:04 a.m. might not be searchable until 10:06 a.m.,
+		///     set this property to 120 seconds. The default value is 60s.
 		/// </summary>
 		[JsonProperty("query_delay")]
 		Time QueryDelay { get; set; }
 
 		/// <summary>
-		/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
-		/// The detector configuration in a job can contain functions that use these script fields.
+		///     Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+		///     The detector configuration in a job can contain functions that use these script fields.
 		/// </summary>
 		[JsonProperty("script_fields")]
 		IScriptFields ScriptFields { get; set; }
 
 		/// <summary>
-		/// The size parameter used in searches.
+		///     The size parameter used in searches.
 		/// </summary>
 		[JsonProperty("scroll_size")]
 		int? ScrollSize { get; set; }
 
 		/// <summary>
-		/// A list of types to search for within the specified indices.
+		///     A list of types to search for within the specified indices.
 		/// </summary>
 		[JsonProperty("types")]
 		[JsonConverter(typeof(TypesJsonConverter))]
@@ -126,6 +126,12 @@ namespace Nest
 		public UpdateDatafeedDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
 			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
 
+		///<summary>A shortcut into calling Indices(Indices.All)</summary>
+		public UpdateDatafeedDescriptor<T> AllIndices() => Indices(Nest.Indices.All);
+
+		///<summary>a shortcut into calling Types(Types.All)</summary>
+		public UpdateDatafeedDescriptor<T> AllTypes() => Types(Nest.Types.All);
+
 		/// <inheritdoc />
 		public UpdateDatafeedDescriptor<T> ChunkingConfig(Func<ChunkingConfigDescriptor, IChunkingConfig> selector) =>
 			Assign(a => a.ChunkingConfig = selector.InvokeOrDefault(new ChunkingConfigDescriptor()));
@@ -138,9 +144,6 @@ namespace Nest
 
 		///<summary>a shortcut into calling Indices(typeof(TOther))</summary>
 		public UpdateDatafeedDescriptor<T> Indices<TOther>() => Assign(a => a.Indices = typeof(TOther));
-
-		///<summary>A shortcut into calling Indices(Indices.All)</summary>
-		public UpdateDatafeedDescriptor<T> AllIndices() => this.Indices(Nest.Indices.All);
 
 		/// <inheritdoc />
 		public UpdateDatafeedDescriptor<T> JobId(Id jobId) => Assign(a => a.JobId = jobId);
@@ -164,8 +167,5 @@ namespace Nest
 
 		///<summary>a shortcut into calling Types(typeof(TOther))</summary>
 		public UpdateDatafeedDescriptor<T> Types<TOther>() => Assign(a => a.Types = typeof(TOther));
-
-		///<summary>a shortcut into calling Types(Types.All)</summary>
-		public UpdateDatafeedDescriptor<T> AllTypes() => this.Types(Nest.Types.All);
 	}
 }

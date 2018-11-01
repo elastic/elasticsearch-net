@@ -11,16 +11,6 @@ namespace Nest
 	{
 		protected ElasticsearchCorePropertyAttributeBase(FieldType type) : base(type) { }
 
-		private ICoreProperty Self => this;
-
-		bool? ICoreProperty.Store { get; set; }
-
-		IProperties ICoreProperty.Fields { get; set; }
-
-		Fields ICoreProperty.CopyTo { get; set; }
-
-		Union<SimilarityOption, string> ICoreProperty.Similarity { get; set; }
-
 		/// <inheritdoc cref="ICoreProperty" />
 		public string Similarity
 		{
@@ -35,7 +25,17 @@ namespace Nest
 			set => Self.Store = value;
 		}
 
-		public new static ElasticsearchCorePropertyAttributeBase From(MemberInfo memberInfo) =>
+		Fields ICoreProperty.CopyTo { get; set; }
+
+		IProperties ICoreProperty.Fields { get; set; }
+
+		private ICoreProperty Self => this;
+
+		Union<SimilarityOption, string> ICoreProperty.Similarity { get; set; }
+
+		bool? ICoreProperty.Store { get; set; }
+
+		public static new ElasticsearchCorePropertyAttributeBase From(MemberInfo memberInfo) =>
 			memberInfo.GetCustomAttribute<ElasticsearchCorePropertyAttributeBase>(true);
 	}
 }

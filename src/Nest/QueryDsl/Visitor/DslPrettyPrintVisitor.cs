@@ -8,9 +8,21 @@ namespace Nest
 {
 	public class DslPrettyPrintVisitor : IQueryVisitor
 	{
+		private readonly Inferrer _infer;
 		private readonly StringBuilder _sb;
 		private string _final;
-		private readonly Inferrer _infer;
+
+		public DslPrettyPrintVisitor(IConnectionSettingsValues settings)
+		{
+			_sb = new StringBuilder();
+			_infer = settings.Inferrer;
+		}
+
+		public virtual int Depth { get; set; }
+		public bool IsConditionless { get; set; }
+		public bool IsStrict { get; set; }
+
+		public bool IsVerbatim { get; set; }
 
 		public string PrettyPrint
 		{
@@ -22,42 +34,16 @@ namespace Nest
 			}
 		}
 
-		public DslPrettyPrintVisitor(IConnectionSettingsValues settings)
-		{
-			this._sb = new StringBuilder();
-			this._infer = settings.Inferrer;
-		}
-
-		public virtual int Depth { get; set; }
 		public virtual VisitorScope Scope { get; set; }
-
-		public bool IsVerbatim { get; set; }
-		public bool IsConditionless { get; set; }
-		public bool IsStrict { get; set; }
 
 		public virtual void Visit(IQueryContainer baseQuery)
 		{
-			this.IsConditionless = baseQuery.IsConditionless;
-			this.IsStrict = baseQuery.IsStrict;
-			this.IsVerbatim = baseQuery.IsVerbatim;
+			IsConditionless = baseQuery.IsConditionless;
+			IsStrict = baseQuery.IsStrict;
+			IsVerbatim = baseQuery.IsVerbatim;
 		}
 
 		public virtual void Visit(IQuery query) { }
-
-		private void Write(string queryType, Dictionary<string, string> properties)
-		{
-			properties = properties ?? new Dictionary<string, string>();
-			var props = string.Join(", ", properties.Select(kv => $"{kv.Key}: {kv.Value}"));
-			var indent = new string('-',(Depth -1) * 2);
-			var scope = this.Scope.GetStringValue().ToLowerInvariant();
-			_sb.AppendFormat("{0}{1}: {2} ({3}){4}", indent, scope, queryType, props, Environment.NewLine);
-		}
-		private void Write(string queryType, Field field = null)
-		{
-			this.Write(queryType, field == null
-				? null
-				: new Dictionary<string, string> {{"field", this._infer.Field(field)}});
-		}
 
 		public virtual void Visit(IBoolQuery query) => Write("bool");
 
@@ -129,7 +115,6 @@ namespace Nest
 					Write("geo_shape", query.Field);
 					break;
 			}
-
 		}
 
 		public virtual void Visit(IHasChildQuery query) => Write("has_child");
@@ -190,11 +175,9 @@ namespace Nest
 
 		public virtual void Visit(ISpanMultiTermQuery query) => Write("span_multi_term");
 
-		public virtual void Visit(ISpanSubQuery query)=> Write("span_sub");
+		public virtual void Visit(ISpanSubQuery query) => Write("span_sub");
 
-		public virtual void Visit(IConditionlessQuery query)=> Write("conditonless_query");
-
-		public virtual void Visit(ISpanQuery query)=> Write("span");
+		public virtual void Visit(ISpanQuery query) => Write("span");
 
 		public virtual void Visit(IGeoBoundingBoxQuery query) => Write("geo_bounding_box");
 
@@ -209,5 +192,20 @@ namespace Nest
 		public virtual void Visit(IParentIdQuery query) => Write("parent_id");
 
 		public virtual void Visit(ITermsSetQuery query) => Write("terms_set");
+
+		public virtual void Visit(IConditionlessQuery query) => Write("conditonless_query");
+
+		private void Write(string queryType, Dictionary<string, string> properties)
+		{
+			properties = properties ?? new Dictionary<string, string>();
+			var props = string.Join(", ", properties.Select(kv => $"{kv.Key}: {kv.Value}"));
+			var indent = new string('-', (Depth - 1) * 2);
+			var scope = Scope.GetStringValue().ToLowerInvariant();
+			_sb.AppendFormat("{0}{1}: {2} ({3}){4}", indent, scope, queryType, props, Environment.NewLine);
+		}
+
+		private void Write(string queryType, Field field = null) => Write(queryType, field == null
+			? null
+			: new Dictionary<string, string> { { "field", _infer.Field(field) } });
 	}
 }

@@ -9,7 +9,7 @@ namespace Nest
 	public class CumulativeSumAggregation
 		: PipelineAggregationBase, ICumulativeSumAggregation
 	{
-		internal CumulativeSumAggregation () { }
+		internal CumulativeSumAggregation() { }
 
 		public CumulativeSumAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
@@ -19,7 +19,5 @@ namespace Nest
 
 	public class CumulativeSumAggregationDescriptor
 		: PipelineAggregationDescriptorBase<CumulativeSumAggregationDescriptor, ICumulativeSumAggregation, SingleBucketsPath>
-		, ICumulativeSumAggregation
-	{
-	}
+			, ICumulativeSumAggregation { }
 }

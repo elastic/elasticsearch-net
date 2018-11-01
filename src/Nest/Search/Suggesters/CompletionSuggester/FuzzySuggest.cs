@@ -6,8 +6,8 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<FuzzySuggester>))]
 	public interface IFuzzySuggester
 	{
-		[JsonProperty("transpositions")]
-		bool? Transpositions { get; set; }
+		[JsonProperty("fuzziness")]
+		IFuzziness Fuzziness { get; set; }
 
 		[JsonProperty("min_length")]
 		int? MinLength { get; set; }
@@ -15,8 +15,8 @@ namespace Nest
 		[JsonProperty("prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[JsonProperty("fuzziness")]
-		IFuzziness Fuzziness { get; set; }
+		[JsonProperty("transpositions")]
+		bool? Transpositions { get; set; }
 
 		[JsonProperty("unicode_aware")]
 		bool? UnicodeAware { get; set; }
@@ -24,30 +24,30 @@ namespace Nest
 
 	public class FuzzySuggester : IFuzzySuggester
 	{
-		public bool? Transpositions { get; set; }
+		public IFuzziness Fuzziness { get; set; }
 		public int? MinLength { get; set; }
 		public int? PrefixLength { get; set; }
-		public IFuzziness Fuzziness { get; set; }
+		public bool? Transpositions { get; set; }
 		public bool? UnicodeAware { get; set; }
 	}
 
-	public class FuzzySuggestDescriptor<T> : DescriptorBase<FuzzySuggestDescriptor<T>, IFuzzySuggester>,  IFuzzySuggester
+	public class FuzzySuggestDescriptor<T> : DescriptorBase<FuzzySuggestDescriptor<T>, IFuzzySuggester>, IFuzzySuggester
 		where T : class
 	{
-		bool? IFuzzySuggester.Transpositions { get; set; }
+		IFuzziness IFuzzySuggester.Fuzziness { get; set; }
 		int? IFuzzySuggester.MinLength { get; set; }
 		int? IFuzzySuggester.PrefixLength { get; set; }
-		IFuzziness IFuzzySuggester.Fuzziness { get; set; }
+		bool? IFuzzySuggester.Transpositions { get; set; }
 		bool? IFuzzySuggester.UnicodeAware { get; set; }
 
 		public FuzzySuggestDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 
-		public FuzzySuggestDescriptor<T> UnicodeAware(bool? aware = true) => Assign(a => a.UnicodeAware = aware);
-
-		public FuzzySuggestDescriptor<T> Transpositions(bool? transpositions = true) => Assign(a => a.Transpositions = transpositions);
-
 		public FuzzySuggestDescriptor<T> MinLength(int? length) => Assign(a => a.MinLength = length);
 
 		public FuzzySuggestDescriptor<T> PrefixLength(int? length) => Assign(a => a.PrefixLength = length);
+
+		public FuzzySuggestDescriptor<T> Transpositions(bool? transpositions = true) => Assign(a => a.Transpositions = transpositions);
+
+		public FuzzySuggestDescriptor<T> UnicodeAware(bool? aware = true) => Assign(a => a.UnicodeAware = aware);
 	}
 }

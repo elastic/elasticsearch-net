@@ -1,54 +1,60 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster.
-		/// /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		///     A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster.
+		///     ///
+		///     <para> </para>
+		///     http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
 		/// </summary>
 		/// <param name="repository">The name of the repository we want to create a snapshot in</param>
 		/// <param name="snapshotName">The name of the snapshot</param>
 		/// <param name="selector">Optionally provide more details about the snapshot operation</param>
 		ISnapshotResponse Snapshot(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ISnapshotResponse Snapshot(ISnapshotRequest request);
 
-		/// <inheritdoc/>
-		Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken cancellationToken = default(CancellationToken));
-
 	}
+
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ISnapshotResponse Snapshot(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null) =>
-			this.Snapshot(selector.InvokeOrDefault(new SnapshotDescriptor(repository, snapshotName)));
+			Snapshot(selector.InvokeOrDefault(new SnapshotDescriptor(repository, snapshotName)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ISnapshotResponse Snapshot(ISnapshotRequest request) =>
-			this.Dispatcher.Dispatch<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse>(
+			Dispatcher.Dispatch<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse>(
 				request,
-				this.LowLevelDispatch.SnapshotCreateDispatch<SnapshotResponse>
+				LowLevelDispatch.SnapshotCreateDispatch<SnapshotResponse>
 			);
 
-		/// <inheritdoc/>
-		public Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.SnapshotAsync(selector.InvokeOrDefault(new SnapshotDescriptor(repository, snapshotName)), cancellationToken);
+		/// <inheritdoc />
+		public Task<ISnapshotResponse> SnapshotAsync(Name repository, Name snapshotName, Func<SnapshotDescriptor, ISnapshotRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			SnapshotAsync(selector.InvokeOrDefault(new SnapshotDescriptor(repository, snapshotName)), cancellationToken);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse, ISnapshotResponse>(
+			Dispatcher.DispatchAsync<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse, ISnapshotResponse>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.SnapshotCreateDispatchAsync<SnapshotResponse>
+				LowLevelDispatch.SnapshotCreateDispatchAsync<SnapshotResponse>
 			);
 	}
 }

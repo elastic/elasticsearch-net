@@ -6,9 +6,10 @@ namespace Nest
 {
 	internal class AnalyzerJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => true;
-		public override bool CanWrite => false;
 		public override bool CanRead => true;
+		public override bool CanWrite => false;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -18,7 +19,7 @@ namespace Nest
 			if (typeProperty == null) return null;
 
 			var typePropertyValue = typeProperty.Value.ToString();
-			switch(typePropertyValue)
+			switch (typePropertyValue)
 			{
 				case "stop": return o.ToObject<StopAnalyzer>(ElasticContractResolver.Empty);
 				case "standard": return o.ToObject<StandardAnalyzer>(ElasticContractResolver.Empty);
@@ -33,13 +34,11 @@ namespace Nest
 				default:
 					if (o.Property("tokenizer") != null)
 						return o.ToObject<CustomAnalyzer>(ElasticContractResolver.Empty);
+
 					return o.ToObject<LanguageAnalyzer>(ElasticContractResolver.Empty);
 			}
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 	}
 }

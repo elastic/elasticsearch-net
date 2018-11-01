@@ -7,6 +7,18 @@ namespace Nest
 {
 	internal class DistanceJsonConverter : JsonConverter
 	{
+		public override bool CanConvert(Type objectType) => true;
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType != JsonToken.String) return null;
+
+			var v = reader.Value as string;
+			if (v == null) return null;
+
+			return new Distance(v);
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var p = value as Distance;
@@ -24,20 +36,6 @@ namespace Nest
 				var s = sw.ToString();
 				writer.WriteValue(s);
 			}
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.String) return null;
-			var v = reader.Value as string;
-			if (v == null) return null;
-
-			return new Distance(v);
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return true;
 		}
 	}
 }

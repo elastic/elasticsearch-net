@@ -1,12 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
 	public class RealmRule : FieldRuleBase
 	{
-		public RealmRule(string realm)
-		{
-			this.Realm = realm;
-		}
+		public RealmRule(string realm) => Realm = realm;
 	}
 }

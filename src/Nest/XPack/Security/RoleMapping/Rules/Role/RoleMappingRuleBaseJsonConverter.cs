@@ -5,20 +5,22 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class RoleMappingRuleBaseJsonConverter: ReserializeJsonConverter<RoleMappingRuleBase, RoleMappingRuleBase>
+	internal class RoleMappingRuleBaseJsonConverter : ReserializeJsonConverter<RoleMappingRuleBase, RoleMappingRuleBase>
 	{
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var depth = reader.Depth;
 			if (reader.TokenType != JsonToken.StartObject) return reader.ReadToEnd<object>(depth);
+
 			reader.Read();
 			if (reader.TokenType != JsonToken.PropertyName) return reader.ExhaustTo(depth);
-			var propertyName = (string) reader.Value;
+
+			var propertyName = (string)reader.Value;
 			switch (propertyName)
 			{
 				case "all":
 					return TryReadArray(reader, objectType, existingValue, serializer, out var all)
-						? reader.ExhaustTo(depth, new AllRoleMappingRule(all) )
+						? reader.ExhaustTo(depth, new AllRoleMappingRule(all))
 						: reader.ExhaustTo(depth);
 				case "any":
 					return TryReadArray(reader, objectType, existingValue, serializer, out var any)
@@ -50,10 +52,13 @@ namespace Nest
 			{
 				reader.Read();
 				if (reader.Depth == anyDepth && reader.TokenType == JsonToken.EndArray) break;
+
 				var subRule = ReadJson(reader, t, v, s) as RoleMappingRuleBase;
 				if (subRule == null) break;
+
 				l.Add(subRule);
 			}
+
 			rules = l;
 			return true;
 		}

@@ -1,48 +1,52 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICatResponse<CatRepositoriesRecord> CatRepositories(Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICatResponse<CatRepositoriesRecord> CatRepositories(ICatRepositoriesRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(
 			Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		);
 
-		/// <inheritdoc/>
-		Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request, CancellationToken cancellationToken = default(CancellationToken));
-
+		/// <inheritdoc />
+		Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICatResponse<CatRepositoriesRecord> CatRepositories(Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null) =>
-			this.CatRepositories(selector.InvokeOrDefault(new CatRepositoriesDescriptor()));
+			CatRepositories(selector.InvokeOrDefault(new CatRepositoriesDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICatResponse<CatRepositoriesRecord> CatRepositories(ICatRepositoriesRequest request) =>
-			this.DoCat<ICatRepositoriesRequest, CatRepositoriesRequestParameters, CatRepositoriesRecord>(request, this.LowLevelDispatch.CatRepositoriesDispatch<CatResponse<CatRepositoriesRecord>>);
+			DoCat<ICatRepositoriesRequest, CatRepositoriesRequestParameters, CatRepositoriesRecord>(request,
+				LowLevelDispatch.CatRepositoriesDispatch<CatResponse<CatRepositoriesRecord>>);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(
 			Func<CatRepositoriesDescriptor, ICatRepositoriesRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) => this.CatRepositoriesAsync(selector.InvokeOrDefault(new CatRepositoriesDescriptor()), cancellationToken);
+		) => CatRepositoriesAsync(selector.InvokeOrDefault(new CatRepositoriesDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.DoCatAsync<ICatRepositoriesRequest, CatRepositoriesRequestParameters, CatRepositoriesRecord>(request, cancellationToken, this.LowLevelDispatch.CatRepositoriesDispatchAsync<CatResponse<CatRepositoriesRecord>>);
-
+		/// <inheritdoc />
+		public Task<ICatResponse<CatRepositoriesRecord>> CatRepositoriesAsync(ICatRepositoriesRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			DoCatAsync<ICatRepositoriesRequest, CatRepositoriesRequestParameters, CatRepositoriesRecord>(request, cancellationToken,
+				LowLevelDispatch.CatRepositoriesDispatchAsync<CatResponse<CatRepositoriesRecord>>);
 	}
 }

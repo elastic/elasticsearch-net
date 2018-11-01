@@ -5,16 +5,17 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	/// <summary>
-	/// Forward (default) for LTR and reverse for RTL
+	///     Forward (default) for LTR and reverse for RTL
 	/// </summary>
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum IcuTransformDirection
 	{
 		/// <summary>LTR</summary>
-		[EnumMember(Value="forward")]
+		[EnumMember(Value = "forward")]
 		Forward,
+
 		/// <summary> RTL</summary>
-		[EnumMember(Value="reverse")]
+		[EnumMember(Value = "reverse")]
 		Reverse,
 	}
 }

@@ -11,12 +11,6 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => objectType == typeof(IProperty);
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
-			throw new NotSupportedException();
-
-		private TProperty ReadProperty<TProperty>(JObject j, JsonSerializer s) where TProperty : IProperty =>
-			FromJson.ReadAs<TProperty>(j.CreateReader(), s);
-
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var jObject = JObject.Load(reader);
@@ -70,5 +64,11 @@ namespace Nest
 
 			return null;
 		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
+			throw new NotSupportedException();
+
+		private TProperty ReadProperty<TProperty>(JObject j, JsonSerializer s) where TProperty : IProperty =>
+			FromJson.ReadAs<TProperty>(j.CreateReader(), s);
 	}
 }

@@ -1,24 +1,22 @@
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
 
 namespace Nest
 {
 	/// <summary>
-	/// A time representation for use within <see cref="DateMath"/> expressions.
+	///     A time representation for use within <see cref="DateMath" /> expressions.
 	/// </summary>
 	public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 	{
-		private const int MonthsInAYear = 12;
-		private const double MillisecondsInAYearApproximate = MillisecondsInADay * 365;
-		private const double MillisecondsInAMonthApproximate = MillisecondsInAYearApproximate / MonthsInAYear;
-		private const double MillisecondsInAWeek = MillisecondsInADay * 7;
 		private const double MillisecondsInADay = MillisecondsInAnHour * 24;
-		private const double MillisecondsInAnHour = MillisecondsInAMinute * 60;
 		private const double MillisecondsInAMinute = MillisecondsInASecond * 60;
+		private const double MillisecondsInAMonthApproximate = MillisecondsInAYearApproximate / MonthsInAYear;
+		private const double MillisecondsInAnHour = MillisecondsInAMinute * 60;
 		private const double MillisecondsInASecond = 1000;
+		private const double MillisecondsInAWeek = MillisecondsInADay * 7;
+		private const double MillisecondsInAYearApproximate = MillisecondsInADay * 365;
+		private const int MonthsInAYear = 12;
 
 		private static readonly Regex ExpressionRegex =
 			new Regex(@"^
@@ -34,42 +32,28 @@ namespace Nest
 		private double _approximateSeconds;
 
 		/// <summary>
-		/// The numeric time factor
-		/// </summary>
-		public int Factor { get; private set; }
-
-		/// <summary>
-		/// The time units
-		/// </summary>
-		public DateMathTimeUnit Interval { get; private set; }
-
-		public static implicit operator DateMathTime(TimeSpan span) => new DateMathTime(span);
-		public static implicit operator DateMathTime(double milliseconds) => new DateMathTime(milliseconds);
-		public static implicit operator DateMathTime(string expression) => new DateMathTime(expression);
-
-		/// <summary>
-		/// Instantiates a new instance of <see cref="DateMathTime"/> from a TimeSpan.
-		/// Rounding can be specified to determine how fractional second values should be rounded.
+		///     Instantiates a new instance of <see cref="DateMathTime" /> from a TimeSpan.
+		///     Rounding can be specified to determine how fractional second values should be rounded.
 		/// </summary>
 		public DateMathTime(TimeSpan timeSpan, MidpointRounding rounding = MidpointRounding.AwayFromZero)
 			: this(timeSpan.TotalMilliseconds, rounding) { }
 
 		/// <summary>
-		/// Instantiates a new instance of <see cref="DateMathTime"/> from a milliseconds value.
-		/// Rounding can be specified to determine how fractional second values should be rounded.
+		///     Instantiates a new instance of <see cref="DateMathTime" /> from a milliseconds value.
+		///     Rounding can be specified to determine how fractional second values should be rounded.
 		/// </summary>
 		public DateMathTime(double milliseconds, MidpointRounding rounding = MidpointRounding.AwayFromZero) =>
 			SetWholeFactorIntervalAndSeconds(milliseconds, rounding);
 
 		/// <summary>
-		/// Instantiates a new instance of <see cref="DateMathTime"/> from a factor and interval.
+		///     Instantiates a new instance of <see cref="DateMathTime" /> from a factor and interval.
 		/// </summary>
 		public DateMathTime(int factor, DateMathTimeUnit interval) =>
 			SetWholeFactorIntervalAndSeconds(factor, interval, MidpointRounding.AwayFromZero);
 
 		/// <summary>
-		/// Instantiates a new instance of <see cref="DateMathTime"/> from the timeUnit string expression.
-		/// Rounding can be specified to determine how fractional second values should be rounded.
+		///     Instantiates a new instance of <see cref="DateMathTime" /> from the timeUnit string expression.
+		///     Rounding can be specified to determine how fractional second values should be rounded.
 		/// </summary>
 		public DateMathTime(string timeUnit, MidpointRounding rounding = MidpointRounding.AwayFromZero)
 		{
@@ -80,7 +64,7 @@ namespace Nest
 			if (!match.Success) throw new ArgumentException($"Expression '{timeUnit}' string is invalid", nameof(timeUnit));
 
 			var factor = match.Groups["factor"].Value;
-			if (!double.TryParse(factor, NumberStyles.Any ,CultureInfo.InvariantCulture, out var fraction))
+			if (!double.TryParse(factor, NumberStyles.Any, CultureInfo.InvariantCulture, out var fraction))
 				throw new ArgumentException($"Expression '{timeUnit}' contains invalid factor: {factor}", nameof(timeUnit));
 
 			var intervalValue = match.Groups["interval"].Value;
@@ -89,7 +73,7 @@ namespace Nest
 			switch (intervalValue)
 			{
 				case "M":
-					interval= DateMathTimeUnit.Month;
+					interval = DateMathTimeUnit.Month;
 					break;
 				case "m":
 					interval = DateMathTimeUnit.Minute;
@@ -102,6 +86,65 @@ namespace Nest
 			SetWholeFactorIntervalAndSeconds(fraction, interval, rounding);
 		}
 
+		/// <summary>
+		///     The numeric time factor
+		/// </summary>
+		public int Factor { get; private set; }
+
+		/// <summary>
+		///     The time units
+		/// </summary>
+		public DateMathTimeUnit Interval { get; private set; }
+
+		public int CompareTo(DateMathTime other)
+		{
+			if (other == null) return 1;
+			if (_approximateSeconds == other._approximateSeconds) return 0;
+			if (_approximateSeconds < other._approximateSeconds) return -1;
+
+			return 1;
+		}
+
+		public bool Equals(DateMathTime other)
+		{
+			if (ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+
+			return _approximateSeconds == other._approximateSeconds;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != GetType()) return false;
+
+			return Equals((DateMathTime)obj);
+		}
+
+		public override int GetHashCode() => _approximateSeconds.GetHashCode();
+
+		public static bool operator ==(DateMathTime left, DateMathTime right) =>
+			ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
+
+		public static bool operator >(DateMathTime left, DateMathTime right) => left.CompareTo(right) > 0;
+
+		public static bool operator >=(DateMathTime left, DateMathTime right) => left.CompareTo(right) > 0 || left.Equals(right);
+
+		public static implicit operator DateMathTime(TimeSpan span) => new DateMathTime(span);
+
+		public static implicit operator DateMathTime(double milliseconds) => new DateMathTime(milliseconds);
+
+		public static implicit operator DateMathTime(string expression) => new DateMathTime(expression);
+
+		public static bool operator !=(DateMathTime left, DateMathTime right) => !(left == right);
+
+		public static bool operator <(DateMathTime left, DateMathTime right) => left.CompareTo(right) < 0;
+
+		public static bool operator <=(DateMathTime left, DateMathTime right) => left.CompareTo(right) < 0 || left.Equals(right);
+
+		public override string ToString() => Factor + Interval.GetStringValue();
+
 		private void SetWholeFactorIntervalAndSeconds(double factor, DateMathTimeUnit interval, MidpointRounding rounding)
 		{
 			var fraction = factor;
@@ -110,34 +153,35 @@ namespace Nest
 			// if the factor is already a whole number then use it
 			if (TryGetIntegerGreaterThanZero(fraction, out var whole))
 			{
-				this.Factor = whole;
-				this.Interval = interval;
+				Factor = whole;
+				Interval = interval;
 				switch (interval)
 				{
 					case DateMathTimeUnit.Second:
-						this._approximateSeconds = whole;
+						_approximateSeconds = whole;
 						break;
 					case DateMathTimeUnit.Minute:
-						this._approximateSeconds = whole * (MillisecondsInAMinute / MillisecondsInASecond);
+						_approximateSeconds = whole * (MillisecondsInAMinute / MillisecondsInASecond);
 						break;
 					case DateMathTimeUnit.Hour:
-						this._approximateSeconds = whole * (MillisecondsInAnHour / MillisecondsInASecond);
+						_approximateSeconds = whole * (MillisecondsInAnHour / MillisecondsInASecond);
 						break;
 					case DateMathTimeUnit.Day:
-						this._approximateSeconds = whole * (MillisecondsInADay / MillisecondsInASecond);
+						_approximateSeconds = whole * (MillisecondsInADay / MillisecondsInASecond);
 						break;
 					case DateMathTimeUnit.Week:
-						this._approximateSeconds = whole * (MillisecondsInAWeek / MillisecondsInASecond);
+						_approximateSeconds = whole * (MillisecondsInAWeek / MillisecondsInASecond);
 						break;
 					case DateMathTimeUnit.Month:
-						this._approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
+						_approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
 						break;
 					case DateMathTimeUnit.Year:
-						this._approximateSeconds = whole * (MillisecondsInAYearApproximate / MillisecondsInASecond);
+						_approximateSeconds = whole * (MillisecondsInAYearApproximate / MillisecondsInASecond);
 						break;
 					default:
 						throw new ArgumentOutOfRangeException(nameof(interval), interval, null);
 				}
+
 				return;
 			}
 
@@ -161,9 +205,9 @@ namespace Nest
 				case DateMathTimeUnit.Month:
 					if (TryGetIntegerGreaterThanZero(fraction, out whole))
 					{
-						this.Factor = whole;
-						this.Interval = interval;
-						this._approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
+						Factor = whole;
+						Interval = interval;
+						_approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
 						return;
 					}
 
@@ -172,20 +216,21 @@ namespace Nest
 				case DateMathTimeUnit.Year:
 					if (TryGetIntegerGreaterThanZero(fraction, out whole))
 					{
-						this.Factor = whole;
-						this.Interval = interval;
-						this._approximateSeconds = whole * (MillisecondsInAYearApproximate / MillisecondsInASecond);
+						Factor = whole;
+						Interval = interval;
+						_approximateSeconds = whole * (MillisecondsInAYearApproximate / MillisecondsInASecond);
 						return;
 					}
 
 					fraction = fraction * MonthsInAYear;
 					if (TryGetIntegerGreaterThanZero(fraction, out whole))
 					{
-						this.Factor = whole;
-						this.Interval = DateMathTimeUnit.Month;
-						this._approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
+						Factor = whole;
+						Interval = DateMathTimeUnit.Month;
+						_approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
 						return;
 					}
+
 					milliseconds = factor * MillisecondsInAYearApproximate;
 					break;
 				default:
@@ -205,69 +250,65 @@ namespace Nest
 				fraction = milliseconds / MillisecondsInAWeek;
 				if (TryGetIntegerGreaterThanZero(fraction, out whole))
 				{
-					this.Factor = whole;
-					this.Interval = DateMathTimeUnit.Week;
-					this._approximateSeconds = Factor * (MillisecondsInAWeek / MillisecondsInASecond);
+					Factor = whole;
+					Interval = DateMathTimeUnit.Week;
+					_approximateSeconds = Factor * (MillisecondsInAWeek / MillisecondsInASecond);
 					return;
 				}
 			}
+
 			if (milliseconds >= MillisecondsInADay)
 			{
 				fraction = milliseconds / MillisecondsInADay;
 				if (TryGetIntegerGreaterThanZero(fraction, out whole))
 				{
-					this.Factor = whole;
-					this.Interval = DateMathTimeUnit.Day;
-					this._approximateSeconds = Factor * (MillisecondsInADay / MillisecondsInASecond);
+					Factor = whole;
+					Interval = DateMathTimeUnit.Day;
+					_approximateSeconds = Factor * (MillisecondsInADay / MillisecondsInASecond);
 					return;
 				}
 			}
+
 			if (milliseconds >= MillisecondsInAnHour)
 			{
 				fraction = milliseconds / MillisecondsInAnHour;
 				if (TryGetIntegerGreaterThanZero(fraction, out whole))
 				{
-					this.Factor = whole;
-					this.Interval = DateMathTimeUnit.Hour;
-					this._approximateSeconds = Factor * (MillisecondsInAnHour / MillisecondsInASecond);
+					Factor = whole;
+					Interval = DateMathTimeUnit.Hour;
+					_approximateSeconds = Factor * (MillisecondsInAnHour / MillisecondsInASecond);
 					return;
 				}
 			}
+
 			if (milliseconds >= MillisecondsInAMinute)
 			{
 				fraction = milliseconds / MillisecondsInAMinute;
 				if (TryGetIntegerGreaterThanZero(fraction, out whole))
 				{
-					this.Factor = whole;
-					this.Interval = DateMathTimeUnit.Minute;
-					this._approximateSeconds = Factor * (MillisecondsInAMinute / MillisecondsInASecond);
+					Factor = whole;
+					Interval = DateMathTimeUnit.Minute;
+					_approximateSeconds = Factor * (MillisecondsInAMinute / MillisecondsInASecond);
 					return;
 				}
 			}
+
 			if (milliseconds >= MillisecondsInASecond)
 			{
 				fraction = milliseconds / MillisecondsInASecond;
 				if (TryGetIntegerGreaterThanZero(fraction, out whole))
 				{
-					this.Factor = whole;
-					this.Interval = DateMathTimeUnit.Second;
-					this._approximateSeconds = Factor;
+					Factor = whole;
+					Interval = DateMathTimeUnit.Second;
+					_approximateSeconds = Factor;
 					return;
 				}
 			}
 
 			// round to nearest second, using specified rounding
-			this.Factor = Convert.ToInt32(Math.Round(milliseconds / MillisecondsInASecond, rounding));
-			this.Interval = DateMathTimeUnit.Second;
-			this._approximateSeconds = Factor;
-		}
-
-		public int CompareTo(DateMathTime other)
-		{
-			if (other == null) return 1;
-			if (this._approximateSeconds == other._approximateSeconds) return 0;
-			if (this._approximateSeconds < other._approximateSeconds) return -1;
-			return 1;
+			Factor = Convert.ToInt32(Math.Round(milliseconds / MillisecondsInASecond, rounding));
+			Interval = DateMathTimeUnit.Second;
+			_approximateSeconds = Factor;
 		}
 
 		private static bool TryGetIntegerGreaterThanZero(double d, out int value)
@@ -281,35 +322,5 @@ namespace Nest
 			value = 0;
 			return false;
 		}
-
-		public static bool operator <(DateMathTime left, DateMathTime right) => left.CompareTo(right) < 0;
-		public static bool operator <=(DateMathTime left, DateMathTime right) => left.CompareTo(right) < 0 || left.Equals(right);
-
-		public static bool operator >(DateMathTime left, DateMathTime right) => left.CompareTo(right) > 0;
-		public static bool operator >=(DateMathTime left, DateMathTime right) => left.CompareTo(right) > 0 || left.Equals(right);
-
-		public static bool operator ==(DateMathTime left, DateMathTime right) =>
-			ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
-
-		public static bool operator !=(DateMathTime left, DateMathTime right) => !(left == right);
-
-		public override string ToString() => this.Factor + this.Interval.GetStringValue();
-
-		public bool Equals(DateMathTime other)
-		{
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return this._approximateSeconds == other._approximateSeconds;
-		}
-
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != this.GetType()) return false;
-			return Equals((DateMathTime) obj);
-		}
-
-		public override int GetHashCode() => this._approximateSeconds.GetHashCode();
 	}
 }

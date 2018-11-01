@@ -8,21 +8,18 @@ namespace Nest
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
-		public override bool CanConvert(Type objectType) => true;
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-		}
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType == JsonToken.Null) return null;
 
-			var filter =  new SourceFilter();
+			var filter = new SourceFilter();
 			switch (reader.TokenType)
 			{
 				case JsonToken.String:
-					filter.Includes = new [] { (string)reader.Value };
+					filter.Includes = new[] { (string)reader.Value };
 					break;
 				case JsonToken.StartArray:
 					var include = new List<string>();
@@ -37,5 +34,7 @@ namespace Nest
 
 			return filter;
 		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
 	}
 }

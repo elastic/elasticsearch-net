@@ -1,35 +1,34 @@
-using System;
 using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	/// <summary>
-	/// Data type mapping to map a property as a geopoint
+	///     Data type mapping to map a property as a geopoint
 	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGeoPointProperty : IDocValuesProperty
 	{
 		/// <summary>
-		/// If true, malformed geo-points are ignored. If false (default), malformed
-		/// geo-points throw an exception and reject the whole document.
+		///     If true, malformed geo-points are ignored. If false (default), malformed
+		///     geo-points throw an exception and reject the whole document.
 		/// </summary>
 		[JsonProperty("ignore_malformed")]
-		bool? IgnoreMalformed { get; set;  }
+		bool? IgnoreMalformed { get; set; }
 
 
 		/// <summary>
-		/// If true (default) three dimension points will be accepted (stored in source) but only
-		/// latitude and longitude values will be indexed; the third dimension is ignored. If false, geo-points
-		/// containing any more than latitude and longitude (two dimensions) values
-		/// throw an exception and reject the whole document.
+		///     If true (default) three dimension points will be accepted (stored in source) but only
+		///     latitude and longitude values will be indexed; the third dimension is ignored. If false, geo-points
+		///     containing any more than latitude and longitude (two dimensions) values
+		///     throw an exception and reject the whole document.
 		/// </summary>
 		[JsonProperty("ignore_z_value")]
-		bool? IgnoreZValue { get; set;  }
+		bool? IgnoreZValue { get; set; }
 
 		/// <summary>
-		/// Accepts a geo_point value which is substituted for any explicit null values.
-		/// Defaults to null, which means the field is treated as missing.
+		///     Accepts a geo_point value which is substituted for any explicit null values.
+		///     Defaults to null, which means the field is treated as missing.
 		/// </summary>
 		[JsonProperty("null_value")]
 		GeoLocation NullValue { get; set; }
@@ -55,11 +54,11 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<GeoPointPropertyDescriptor<T>, IGeoPointProperty, T>, IGeoPointProperty
 		where T : class
 	{
+		public GeoPointPropertyDescriptor() : base(FieldType.GeoPoint) { }
+
 		bool? IGeoPointProperty.IgnoreMalformed { get; set; }
 		bool? IGeoPointProperty.IgnoreZValue { get; set; }
 		GeoLocation IGeoPointProperty.NullValue { get; set; }
-
-		public GeoPointPropertyDescriptor() : base(FieldType.GeoPoint) { }
 
 		/// <inheritdoc cref="IGeoPointProperty.IgnoreMalformed" />
 		public GeoPointPropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);

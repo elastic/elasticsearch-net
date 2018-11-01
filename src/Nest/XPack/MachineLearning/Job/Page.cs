@@ -5,13 +5,13 @@ namespace Nest
 	public interface IPage
 	{
 		/// <summary>
-		/// Skips the specified number of buckets.
+		///     Skips the specified number of buckets.
 		/// </summary>
 		[JsonProperty("from")]
 		int? From { get; set; }
 
 		/// <summary>
-		/// Specifies the maximum number of buckets to obtain.
+		///     Specifies the maximum number of buckets to obtain.
 		/// </summary>
 		[JsonProperty("size")]
 		int? Size { get; set; }

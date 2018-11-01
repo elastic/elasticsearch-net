@@ -33,11 +33,11 @@ namespace Nest
 		bool? IHttpAttachment.Inline { get; set; }
 		IHttpInputRequest IHttpAttachment.Request { get; set; }
 
-		public HttpAttachmentDescriptor Request(Func<HttpInputRequestDescriptor, IHttpInputRequest> selector) =>
-			Assign(a => a.Request = selector.InvokeOrDefault(new HttpInputRequestDescriptor()));
+		public HttpAttachmentDescriptor ContentType(string contentType) => Assign(a => a.ContentType = contentType);
 
 		public HttpAttachmentDescriptor Inline(bool? inline = true) => Assign(a => a.Inline = inline);
 
-		public HttpAttachmentDescriptor ContentType(string contentType) => Assign(a => a.ContentType = contentType);
+		public HttpAttachmentDescriptor Request(Func<HttpInputRequestDescriptor, IHttpInputRequest> selector) =>
+			Assign(a => a.Request = selector.InvokeOrDefault(new HttpInputRequestDescriptor()));
 	}
 }

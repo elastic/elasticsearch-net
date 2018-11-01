@@ -9,12 +9,8 @@ namespace Nest
 	internal class ShardStoreJsonConverter : JsonConverter
 	{
 		public override bool CanWrite => false;
-		public override bool CanConvert(Type objectType) => true;
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -27,8 +23,7 @@ namespace Nest
 			r.Id = id.Name;
 
 			foreach (var p in properties)
-			{
-				switch(p.Name)
+				switch (p.Name)
 				{
 					case "name":
 						r.Name = p.Value.Value<string>();
@@ -52,8 +47,9 @@ namespace Nest
 						r.Attributes = p.Value.ToObject<Dictionary<string, object>>();
 						break;
 				}
-			}
 			return r;
 		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 	}
 }

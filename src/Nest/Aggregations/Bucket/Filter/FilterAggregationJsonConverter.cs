@@ -11,6 +11,17 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => true;
 
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType != JsonToken.StartObject) return null;
+
+			var container = new QueryContainer();
+			serializer.Populate(reader, container);
+			var agg = new FilterAggregation();
+			agg.Filter = container;
+			return agg;
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var f = value as IFilterAggregation;
@@ -19,20 +30,11 @@ namespace Nest
 				writer.WriteStartObject();
 				writer.WriteEndObject();
 				return;
-			};
+			}
+
+			;
 
 			serializer.Serialize(writer, f.Filter);
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
-			var container = new QueryContainer();
-			serializer.Populate(reader, container);
-			var agg = new FilterAggregation();
-			agg.Filter = container;
-			return agg;
-		}
 	}
-
 }

@@ -5,14 +5,14 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	///  input to load data from multiple sources into the watch execution context when the watch is triggered.
+	///     input to load data from multiple sources into the watch execution context when the watch is triggered.
 	/// </summary>
 	[JsonObject]
 	[JsonConverter(typeof(ChainInputJsonConverter))]
 	public interface IChainInput : IInput
 	{
 		/// <summary>
-		/// The input sources
+		///     The input sources
 		/// </summary>
 		IDictionary<string, InputContainer> Inputs { get; set; }
 	}
@@ -20,12 +20,9 @@ namespace Nest
 	/// <inheritdoc />
 	public class ChainInput : InputBase, IChainInput
 	{
-		public ChainInput() {}
+		public ChainInput() { }
 
-		public ChainInput(IDictionary<string, InputContainer> inputs)
-		{
-			this.Inputs = inputs;
-		}
+		public ChainInput(IDictionary<string, InputContainer> inputs) => Inputs = inputs;
 
 		/// <inheritdoc />
 		public IDictionary<string, InputContainer> Inputs { get; set; }
@@ -36,12 +33,9 @@ namespace Nest
 	/// <inheritdoc />
 	public class ChainInputDescriptor : DescriptorBase<ChainInputDescriptor, IChainInput>, IChainInput
 	{
-		public ChainInputDescriptor() {}
+		public ChainInputDescriptor() { }
 
-		public ChainInputDescriptor(IDictionary<string, InputContainer> inputs)
-		{
-			Self.Inputs = inputs;
-		}
+		public ChainInputDescriptor(IDictionary<string, InputContainer> inputs) => Self.Inputs = inputs;
 
 		IDictionary<string, InputContainer> IChainInput.Inputs { get; set; }
 
@@ -60,24 +54,7 @@ namespace Nest
 
 	internal class ChainInputJsonConverter : JsonConverter
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			var chainInput = value as IChainInput;
-			if (chainInput?.Inputs == null) return;
-
-			writer.WriteStartObject();
-			writer.WritePropertyName("inputs");
-			writer.WriteStartArray();
-			foreach (var input in chainInput.Inputs)
-			{
-				writer.WriteStartObject();
-				writer.WritePropertyName(input.Key);
-				serializer.Serialize(writer, input.Value);
-				writer.WriteEndObject();
-			}
-			writer.WriteEndArray();
-			writer.WriteEndObject();
-		}
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -91,7 +68,6 @@ namespace Nest
 
 			var inputs = new Dictionary<string, InputContainer>();
 			while (reader.Read())
-			{
 				if (reader.TokenType == JsonToken.StartObject)
 				{
 					reader.Read();
@@ -107,11 +83,28 @@ namespace Nest
 					reader.Read();
 					break;
 				}
-			}
 
 			return new ChainInput(inputs);
 		}
 
-		public override bool CanConvert(Type objectType) => true;
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			var chainInput = value as IChainInput;
+			if (chainInput?.Inputs == null) return;
+
+			writer.WriteStartObject();
+			writer.WritePropertyName("inputs");
+			writer.WriteStartArray();
+			foreach (var input in chainInput.Inputs)
+			{
+				writer.WriteStartObject();
+				writer.WritePropertyName(input.Key);
+				serializer.Serialize(writer, input.Value);
+				writer.WriteEndObject();
+			}
+
+			writer.WriteEndArray();
+			writer.WriteEndObject();
+		}
 	}
 }

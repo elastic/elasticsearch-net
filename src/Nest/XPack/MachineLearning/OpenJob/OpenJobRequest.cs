@@ -3,12 +3,12 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Open a machine learning job.
+	///     Open a machine learning job.
 	/// </summary>
 	public partial interface IOpenJobRequest
 	{
 		/// <summary>
-		/// Controls the time to wait until a job has opened. The default value is 30 minutes.
+		///     Controls the time to wait until a job has opened. The default value is 30 minutes.
 		/// </summary>
 		[JsonProperty("timeout")]
 		Time Timeout { get; set; }

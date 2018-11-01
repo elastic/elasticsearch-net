@@ -15,50 +15,53 @@ namespace Nest
 
 	public interface IReadOnlyUrlRepositorySettings : IRepositorySettings
 	{
-		[JsonProperty("location")]
-		string Location { get; set; }
-
 		[JsonProperty("concurrent_streams")]
 		int? ConcurrentStreams { get; set; }
+
+		[JsonProperty("location")]
+		string Location { get; set; }
 	}
 
 	public class ReadOnlyUrlRepositorySettings : IReadOnlyUrlRepositorySettings
 	{
 		internal ReadOnlyUrlRepositorySettings() { }
 
-		public ReadOnlyUrlRepositorySettings(string location) => this.Location = location;
+		public ReadOnlyUrlRepositorySettings(string location) => Location = location;
+
+		public int? ConcurrentStreams { get; set; }
 
 		public string Location { get; set; }
-		public int? ConcurrentStreams { get; set; }
 	}
 
 	public class ReadOnlyUrlRepositorySettingsDescriptor
 		: DescriptorBase<ReadOnlyUrlRepositorySettingsDescriptor, IReadOnlyUrlRepositorySettings>, IReadOnlyUrlRepositorySettings
 	{
 		int? IReadOnlyUrlRepositorySettings.ConcurrentStreams { get; set; }
-		string IReadOnlyUrlRepositorySettings.Location { get;set; }
+		string IReadOnlyUrlRepositorySettings.Location { get; set; }
 
 		/// <summary>
-		/// Location of the snapshots. Mandatory.
-		/// </summary>
-		/// <param name="location"></param>
-		public ReadOnlyUrlRepositorySettingsDescriptor Location(string location) => Assign(a => a.Location = location);
-
-		/// <summary>
-		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
+		///     Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
 		public ReadOnlyUrlRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) =>
 			Assign(a => a.ConcurrentStreams = concurrentStreams);
+
+		/// <summary>
+		///     Location of the snapshots. Mandatory.
+		/// </summary>
+		/// <param name="location"></param>
+		public ReadOnlyUrlRepositorySettingsDescriptor Location(string location) => Assign(a => a.Location = location);
 	}
 
 	public class ReadOnlyUrlRepositoryDescriptor
 		: DescriptorBase<ReadOnlyUrlRepositoryDescriptor, IReadOnlyUrlRepository>, IReadOnlyUrlRepository
 	{
-		string ISnapshotRepository.Type => "url";
 		IReadOnlyUrlRepositorySettings IRepository<IReadOnlyUrlRepositorySettings>.Settings { get; set; }
+		string ISnapshotRepository.Type => "url";
 
-		public ReadOnlyUrlRepositoryDescriptor Settings(string location, Func<ReadOnlyUrlRepositorySettingsDescriptor, IReadOnlyUrlRepositorySettings> settingsSelector = null) =>
+		public ReadOnlyUrlRepositoryDescriptor Settings(string location,
+			Func<ReadOnlyUrlRepositorySettingsDescriptor, IReadOnlyUrlRepositorySettings> settingsSelector = null
+		) =>
 			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new ReadOnlyUrlRepositorySettingsDescriptor().Location(location)));
 	}
 }

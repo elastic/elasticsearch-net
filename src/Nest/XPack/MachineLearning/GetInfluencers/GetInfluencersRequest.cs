@@ -4,48 +4,49 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Retrieve results for machine learning job influencers.
+	///     Retrieve results for machine learning job influencers.
 	/// </summary>
 	public partial interface IGetInfluencersRequest
 	{
 		/// <summary>
-		/// If true, the results are sorted in descending order.
+		///     If true, the results are sorted in descending order.
 		/// </summary>
 		bool? Descending { get; set; }
 
 		/// <summary>
-		/// Returns influencers with timestamps earlier than this time.
+		///     Returns influencers with timestamps earlier than this time.
 		/// </summary>
 		[JsonProperty("end")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
-		/// If true, the output excludes interim results. By default, interim results are included.
+		///     If true, the output excludes interim results. By default, interim results are included.
 		/// </summary>
 		[JsonProperty("exclude_interim")]
 		bool? ExcludeInterim { get; set; }
 
 		/// <summary>
-		/// Returns influencers with anomaly scores higher than this value.
+		///     Returns influencers with anomaly scores higher than this value.
 		/// </summary>
 		[JsonProperty("influencer_score")]
 		double? InfluencerScore { get; set; }
 
 		/// <summary>
-		/// Specifies pagination for the influencers.
+		///     Specifies pagination for the influencers.
 		/// </summary>
 		[JsonProperty("page")]
 		IPage Page { get; set; }
 
 		/// <summary>
-		/// Specifies the sort field for the requested influencers. By default, the influencers are sorted by the <see cref="InfluencerScore"/> value.
+		///     Specifies the sort field for the requested influencers. By default, the influencers are sorted by the <see cref="InfluencerScore" />
+		///     value.
 		/// </summary>
 		[JsonProperty("sort")]
 		Field Sort { get; set; }
 
 		/// <summary>
-		/// Returns influencers with timestamps after this time.
+		///     Returns influencers with timestamps after this time.
 		/// </summary>
 		[JsonProperty("start")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
@@ -81,7 +82,7 @@ namespace Nest
 	[DescriptorFor("XpackMlGetInfluencers")]
 	public partial class GetInfluencersDescriptor
 	{
-		public GetInfluencersDescriptor() {}
+		public GetInfluencersDescriptor() { }
 
 		bool? IGetInfluencersRequest.Descending { get; set; }
 		DateTimeOffset? IGetInfluencersRequest.End { get; set; }
@@ -92,9 +93,6 @@ namespace Nest
 		DateTimeOffset? IGetInfluencersRequest.Start { get; set; }
 
 		/// <inheritdoc />
-		public GetInfluencersDescriptor InfluencerScore(double? influencerScore) => Assign(a => a.InfluencerScore = influencerScore);
-
-		/// <inheritdoc />
 		public GetInfluencersDescriptor Desc(bool? descending = true) => Assign(a => a.Descending = descending);
 
 		/// <inheritdoc />
@@ -102,6 +100,9 @@ namespace Nest
 
 		/// <inheritdoc />
 		public GetInfluencersDescriptor ExcludeInterim(bool? excludeInterim = true) => Assign(a => a.ExcludeInterim = excludeInterim);
+
+		/// <inheritdoc />
+		public GetInfluencersDescriptor InfluencerScore(double? influencerScore) => Assign(a => a.InfluencerScore = influencerScore);
 
 		/// <inheritdoc />
 		public GetInfluencersDescriptor Page(Func<PageDescriptor, IPage> selector) => Assign(a => a.Page = selector?.Invoke(new PageDescriptor()));

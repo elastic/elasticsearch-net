@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
-	public partial interface IGetWatchRequest {}
+	public partial interface IGetWatchRequest { }
 
-	public partial class GetWatchRequest {}
+	public partial class GetWatchRequest { }
 
 	[DescriptorFor("XpackWatcherGetWatch")]
-	public partial class GetWatchDescriptor {}
+	public partial class GetWatchDescriptor { }
 }

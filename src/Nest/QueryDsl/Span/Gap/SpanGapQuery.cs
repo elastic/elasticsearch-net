@@ -14,16 +14,14 @@ namespace Nest
 
 	public class SpanGapQuery : QueryBase, ISpanGapQuery
 	{
-		protected override bool Conditionless => SpanGapQuery.IsConditionless(this);
-
-		internal static bool IsConditionless(ISpanGapQuery q) => q?.Width == null || q.Field.IsConditionless();
-
 		public Field Field { get; set; }
 		public int? Width { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) =>
 			throw new Exception("span_gap may only appear as a span near clause");
 
+		internal static bool IsConditionless(ISpanGapQuery q) => q?.Width == null || q.Field.IsConditionless();
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -47,7 +45,19 @@ namespace Nest
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => typeof(ISpanGapQuery).IsAssignableFrom(objectType);
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType != JsonToken.StartObject) return null;
+
+			reader.Read();
+			var field = (Field)reader.Value.ToString(); // field
+			var width = reader.ReadAsInt32();
+			reader.Read();
+			return new SpanGapQuery { Field = field, Width = width };
+		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -57,6 +67,7 @@ namespace Nest
 				writer.WriteNull();
 				return;
 			}
+
 			var settings = serializer.GetConnectionSettings();
 			var fieldName = settings.Inferrer.Field(gapQuery.Field);
 			writer.WriteStartObject();
@@ -64,16 +75,5 @@ namespace Nest
 			writer.WriteValue(gapQuery.Width);
 			writer.WriteEndObject();
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
-			reader.Read();
-			var field = (Field)reader.Value.ToString(); // field
-			var width = reader.ReadAsInt32();
-			reader.Read();
-			return new SpanGapQuery {Field = field, Width = width};
-		}
-
 	}
 }

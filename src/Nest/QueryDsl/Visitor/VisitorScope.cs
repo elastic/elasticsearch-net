@@ -11,6 +11,5 @@
 		PositiveQuery,
 		NegativeQuery,
 		Span,
-
 	}
 }

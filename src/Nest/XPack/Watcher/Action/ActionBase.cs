@@ -11,62 +11,60 @@ namespace Nest
 	public interface IAction
 	{
 		[JsonIgnore]
+		ActionType ActionType { get; }
+
+		[JsonIgnore]
 		string Name { get; set; }
 
 		[JsonIgnore]
-		ActionType ActionType { get; }
+		Time ThrottlePeriod { get; set; }
 
 		[JsonProperty("transform")]
 		TransformContainer Transform { get; set; }
-
-		[JsonIgnore]
-		Time ThrottlePeriod { get; set; }
 	}
 
 	public abstract class ActionBase : IAction
 	{
-		internal ActionBase() {}
+		internal ActionBase() { }
 
-		protected ActionBase(string name) => this.Name = name;
-
-		public string Name { get; set; }
+		protected ActionBase(string name) => Name = name;
 
 		public abstract ActionType ActionType { get; }
 
-		public TransformContainer Transform { get; set; }
+		public string Name { get; set; }
 
 		public Time ThrottlePeriod { get; set; }
+
+		public TransformContainer Transform { get; set; }
+
+		public static ActionBase operator &(ActionBase left, ActionBase right) =>
+			new ActionCombinator(left, right);
 
 		public static bool operator false(ActionBase a) => false;
 
 		public static bool operator true(ActionBase a) => false;
-
-		public static ActionBase operator &(ActionBase left, ActionBase right) =>
-			new ActionCombinator(left, right);
 	}
 
 	internal class ActionCombinator : ActionBase, IAction
 	{
-		internal List<ActionBase> Actions { get; } = new List<ActionBase>();
-
 		public ActionCombinator(ActionBase left, ActionBase right) : base(null)
 		{
-			this.AddAction(left);
-			this.AddAction(right);
+			AddAction(left);
+			AddAction(right);
 		}
+
+		public override ActionType ActionType => (ActionType)10;
+		internal List<ActionBase> Actions { get; } = new List<ActionBase>();
 
 		private void AddAction(ActionBase agg)
 		{
 			if (agg == null) return;
+
 			var combinator = agg as ActionCombinator;
 			if ((combinator?.Actions.HasAny()).GetValueOrDefault(false))
-			{
-				this.Actions.AddRange(combinator.Actions);
-			}
-			else this.Actions.Add(agg);
+				Actions.AddRange(combinator.Actions);
+			else Actions.Add(agg);
 		}
-
-		public override ActionType ActionType => (ActionType)10;
 	}
 
 	internal class ActionsJsonConverter : JsonConverter
@@ -81,6 +79,7 @@ namespace Nest
 			{
 				var property = child as JProperty;
 				if (property == null) continue;
+
 				var name = property.Name;
 
 				var actionJson = property.Value as JObject;
@@ -90,7 +89,6 @@ namespace Nest
 				IAction action = null;
 
 				foreach (var prop in actionJson.Properties())
-				{
 					if (prop.Name == "throttle_period")
 						throttlePeriod = prop.Value.ToObject<Time>();
 					else
@@ -130,7 +128,6 @@ namespace Nest
 							dictionary.Add(name, action);
 						}
 					}
-				}
 			}
 
 			return new Actions(dictionary);
@@ -141,7 +138,6 @@ namespace Nest
 			writer.WriteStartObject();
 			var actions = value as IDictionary<string, IAction>;
 			if (actions != null)
-			{
 				foreach (var kvp in actions.Where(kv => kv.Value != null))
 				{
 					var action = kvp.Value;
@@ -152,11 +148,12 @@ namespace Nest
 						writer.WritePropertyName("throttle_period");
 						serializer.Serialize(writer, action.ThrottlePeriod);
 					}
+
 					writer.WritePropertyName(kvp.Value.ActionType.GetStringValue());
 					serializer.Serialize(writer, action);
 					writer.WriteEndObject();
 				}
-			}
+
 			writer.WriteEndObject();
 		}
 	}

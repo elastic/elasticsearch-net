@@ -10,6 +10,21 @@ namespace Nest
 	{
 		public override bool CanConvert(Type objectType) => typeof(Indices) == objectType;
 
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType != JsonToken.StartArray) return null;
+
+			var indices = new List<IndexName>();
+			while (reader.TokenType != JsonToken.EndArray)
+			{
+				var index = reader.ReadAsString();
+				if (reader.TokenType == JsonToken.String)
+					indices.Add(index);
+			}
+
+			return new Indices(indices);
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			if (!(value is Indices marker))
@@ -17,6 +32,7 @@ namespace Nest
 				writer.WriteNull();
 				return;
 			}
+
 			marker.Match(
 				all =>
 				{
@@ -34,19 +50,5 @@ namespace Nest
 				}
 			);
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.StartArray) return null;
-			var indices = new List<IndexName>();
-			while (reader.TokenType != JsonToken.EndArray)
-			{
-				var index = reader.ReadAsString();
-				if (reader.TokenType == JsonToken.String)
-					indices.Add(index);
-			}
-			return new Indices(indices);
-		}
-
 	}
 }

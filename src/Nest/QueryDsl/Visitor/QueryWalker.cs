@@ -152,12 +152,14 @@ namespace Nest
 		private static void Accept(IQueryVisitor visitor, IEnumerable<IQueryContainer> queries, VisitorScope scope = VisitorScope.Query)
 		{
 			if (queries == null) return;
+
 			foreach (var f in queries) Accept(visitor, f, scope);
 		}
 
 		private static void Accept(IQueryVisitor visitor, IQueryContainer query, VisitorScope scope = VisitorScope.Query)
 		{
 			if (query == null) return;
+
 			visitor.Scope = scope;
 			query.Accept(visitor);
 		}
@@ -165,8 +167,20 @@ namespace Nest
 		private static void Accept(IQueryVisitor visitor, ISpanQuery query, VisitorScope scope = VisitorScope.Span)
 		{
 			if (query == null) return;
+
 			visitor.Scope = scope;
 			query.Accept(visitor);
+		}
+
+		private static void VisitQuery<T>(T qd, IQueryVisitor visitor, Action<IQueryVisitor, T> scoped)
+			where T : class, IQuery
+		{
+			if (qd == null) return;
+
+			visitor.Depth = visitor.Depth + 1;
+			visitor.Visit(qd);
+			scoped(visitor, qd);
+			visitor.Depth = visitor.Depth - 1;
 		}
 
 		private static void VisitSpan<T>(T qd, IQueryVisitor visitor) where T : class, IQueryContainer
@@ -221,21 +235,11 @@ namespace Nest
 			});
 		}
 
-		private static void VisitQuery<T>(T qd, IQueryVisitor visitor, Action<IQueryVisitor, T> scoped)
-			where T : class, IQuery
-		{
-			if (qd == null) return;
-
-			visitor.Depth = visitor.Depth + 1;
-			visitor.Visit(qd);
-			scoped(visitor, qd);
-			visitor.Depth = visitor.Depth - 1;
-		}
-
 		private static void VisitSpanSubQuery<T>(T qd, IQueryVisitor visitor, Action<IQueryVisitor, T> scoped)
 			where T : class, ISpanSubQuery
 		{
 			if (qd == null) return;
+
 			VisitQuery(qd, visitor, (v, d) =>
 			{
 				visitor.Visit(qd);

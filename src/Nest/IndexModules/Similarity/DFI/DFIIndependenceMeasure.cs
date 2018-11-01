@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	/// <summary>
-	/// <see cref="IDFISimilarity"/> independence measure
+	///     <see cref="IDFISimilarity" /> independence measure
 	/// </summary>
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum DFIIndependenceMeasure

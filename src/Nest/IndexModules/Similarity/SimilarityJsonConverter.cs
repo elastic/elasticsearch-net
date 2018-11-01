@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Reflection;
-using System.Collections.Generic;
 
 namespace Nest
 {
 	internal class SimilarityJsonConverter : JsonConverter
 	{
+		public override bool CanRead => true;
+		public override bool CanWrite => false;
+
 		public override bool CanConvert(Type objectType) =>
 			typeof(ISimilarity).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
-		public override bool CanWrite => false;
-		public override bool CanRead => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -21,10 +17,7 @@ namespace Nest
 	{
 		internal MatrixAggregationBase() { }
 
-		protected MatrixAggregationBase(string name, Fields field) : base(name)
-		{
-			this.Fields = field;
-		}
+		protected MatrixAggregationBase(string name, Fields field) : base(name) => Fields = field;
 
 		public Fields Fields { get; set; }
 
@@ -51,10 +44,10 @@ namespace Nest
 		public TMatrixAggregation Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public TMatrixAggregation Missing(Func<FluentDictionary<Field, double>, FluentDictionary<Field, double>> selector) =>
-			Assign(a => a.Missing = selector?.Invoke(new FluentDictionary<Field, double>()));
-
 		public TMatrixAggregation Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
 			Assign(a => a.Meta = selector?.Invoke(new FluentDictionary<string, object>()));
+
+		public TMatrixAggregation Missing(Func<FluentDictionary<Field, double>, FluentDictionary<Field, double>> selector) =>
+			Assign(a => a.Missing = selector?.Invoke(new FluentDictionary<Field, double>()));
 	}
 }

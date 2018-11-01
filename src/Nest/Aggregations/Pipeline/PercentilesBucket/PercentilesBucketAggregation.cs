@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -16,20 +15,19 @@ namespace Nest
 	public class PercentilesBucketAggregation
 		: PipelineAggregationBase, IPercentilesBucketAggregation
 	{
-		public IEnumerable<double> Percents { get; set; }
-
 		internal PercentilesBucketAggregation() { }
 
 		public PercentilesBucketAggregation(string name, SingleBucketsPath bucketsPath)
-			: base(name, bucketsPath)
-		{ }
+			: base(name, bucketsPath) { }
+
+		public IEnumerable<double> Percents { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.PercentilesBucket = this;
 	}
 
 	public class PercentilesBucketAggregationDescriptor
 		: PipelineAggregationDescriptorBase<PercentilesBucketAggregationDescriptor, IPercentilesBucketAggregation, SingleBucketsPath>
-		, IPercentilesBucketAggregation
+			, IPercentilesBucketAggregation
 	{
 		IEnumerable<double> IPercentilesBucketAggregation.Percents { get; set; }
 
@@ -38,6 +36,5 @@ namespace Nest
 
 		public PercentilesBucketAggregationDescriptor Percents(params double[] percentages) =>
 			Assign(a => a.Percents = percentages?.ToList());
-
 	}
 }

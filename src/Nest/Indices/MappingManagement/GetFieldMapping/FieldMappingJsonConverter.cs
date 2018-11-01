@@ -14,11 +14,6 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => objectType == typeof(IDictionary<string, IFieldMapping>);
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			_dictionaryConverter.WriteJson(writer, value, serializer);
-		}
-
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var r = new Dictionary<Field, IFieldMapping>();
@@ -42,14 +37,18 @@ namespace Nest
 					if (name == "_size") mapping = po.ToObject<SizeField>();
 					//TODO _field_names does not seem to have a special mapping (just returns like _uid) needs CONFIRMATION
 				}
+
 				if (mapping == null) continue;
 
 				if (mapping is IProperty esType) esType.Name = name;
 				r.Add(name, mapping);
-
 			}
+
 			var settings = serializer.GetConnectionSettings();
 			return new ResolvableDictionaryProxy<Field, IFieldMapping>(settings, r);
 		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
+			_dictionaryConverter.WriteJson(writer, value, serializer);
 	}
 }

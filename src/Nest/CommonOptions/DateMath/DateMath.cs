@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -14,17 +13,11 @@ namespace Nest
 		DateMathTimeUnit? Round { get; }
 	}
 
-	[JsonConverter(typeof(DateMath.Json))]
+	[JsonConverter(typeof(Json))]
 	public abstract class DateMath : IDateMath
 	{
 		private static readonly Regex DateMathRegex =
 			new Regex(@"^(?<anchor>now|.+(?:\|\||$))(?<ranges>(?:(?:\+|\-)[^\/]*))?(?<rounding>\/(?:y|M|w|d|h|m|s))?$");
-
-		Union<DateTime, string> IDateMath.Anchor => Anchor;
-		DateMathTimeUnit? IDateMath.Round => Round;
-		IList<Tuple<DateMathOperation, DateMathTime>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, DateMathTime>>();
-
-		protected IDateMath Self => this;
 
 		protected Union<DateTime, string> Anchor;
 
@@ -32,12 +25,15 @@ namespace Nest
 
 		public static DateMathExpression Now => new DateMathExpression("now");
 
+		protected IDateMath Self => this;
+
+		Union<DateTime, string> IDateMath.Anchor => Anchor;
+		IList<Tuple<DateMathOperation, DateMathTime>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, DateMathTime>>();
+		DateMathTimeUnit? IDateMath.Round => Round;
+
 		public static DateMathExpression Anchored(DateTime anchor) => new DateMathExpression(anchor);
 
 		public static DateMathExpression Anchored(string dateAnchor) => new DateMathExpression(dateAnchor);
-
-		public static implicit operator DateMath(DateTime dateTime) => DateMath.Anchored(dateTime);
-		public static implicit operator DateMath(string dateMath) => DateMath.FromString(dateMath);
 
 		public static DateMath FromString(string dateMath)
 		{
@@ -76,8 +72,13 @@ namespace Nest
 				if (rounding.HasValue)
 					return math.RoundTo(rounding.Value);
 			}
+
 			return math;
 		}
+
+		public static implicit operator DateMath(DateTime dateTime) => Anchored(dateTime);
+
+		public static implicit operator DateMath(string dateMath) => FromString(dateMath);
 
 		public override string ToString()
 		{
@@ -98,6 +99,7 @@ namespace Nest
 				//date math does not support fractional time units so e.g TimeSpan.FromHours(25) should not yield 1.04d
 				sb.Append(r.Item2);
 			}
+
 			if (Self.Round.HasValue)
 				sb.Append("/" + Self.Round.Value.GetStringValue());
 
@@ -106,20 +108,22 @@ namespace Nest
 
 		private class Json : JsonConverterBase<DateMath>
 		{
-			public override void WriteJson(JsonWriter writer, DateMath value, JsonSerializer serializer) =>
-				writer.WriteValue(value.ToString());
-
 			public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 			{
 				if (reader.TokenType == JsonToken.String)
-					return DateMath.FromString(reader.Value as string);
+					return FromString(reader.Value as string);
+
 				if (reader.TokenType == JsonToken.Date)
 				{
 					var d = reader.Value as DateTime?;
-					return d.HasValue ? DateMath.Anchored(d.Value) : null;
+					return d.HasValue ? Anchored(d.Value) : null;
 				}
+
 				return null;
 			}
+
+			public override void WriteJson(JsonWriter writer, DateMath value, JsonSerializer serializer) =>
+				writer.WriteValue(value.ToString());
 		}
 	}
 }

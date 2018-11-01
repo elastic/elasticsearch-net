@@ -14,28 +14,28 @@ namespace Nest
 	public class BucketSelectorAggregation
 		: PipelineAggregationBase, IBucketSelectorAggregation
 	{
-		public IScript Script { get; set; }
-
-		internal BucketSelectorAggregation () { }
+		internal BucketSelectorAggregation() { }
 
 		public BucketSelectorAggregation(string name, MultiBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
+
+		public IScript Script { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.BucketSelector = this;
 	}
 
 	public class BucketSelectorAggregationDescriptor
 		: PipelineAggregationDescriptorBase<BucketSelectorAggregationDescriptor, IBucketSelectorAggregation, MultiBucketsPath>
-		, IBucketSelectorAggregation
+			, IBucketSelectorAggregation
 	{
 		IScript IBucketSelectorAggregation.Script { get; set; }
+
+		public BucketSelectorAggregationDescriptor BucketsPath(Func<MultiBucketsPathDescriptor, IPromise<IBucketsPath>> selector) =>
+			Assign(a => a.BucketsPath = selector?.Invoke(new MultiBucketsPathDescriptor())?.Value);
 
 		public BucketSelectorAggregationDescriptor Script(string script) => Assign(a => a.Script = (InlineScript)script);
 
 		public BucketSelectorAggregationDescriptor Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
-
-		public BucketSelectorAggregationDescriptor BucketsPath(Func<MultiBucketsPathDescriptor, IPromise<IBucketsPath>> selector) =>
-			Assign(a => a.BucketsPath = selector?.Invoke(new MultiBucketsPathDescriptor())?.Value);
 	}
 }

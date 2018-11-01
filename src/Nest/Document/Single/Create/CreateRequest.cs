@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -14,12 +13,12 @@ namespace Nest
 	{
 		public TDocument Document { get; set; }
 
-		partial void DocumentFromPath(TDocument document) => this.Document = document;
-		private TDocument AutoRouteDocument() => this.Document;
-
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
-			sourceSerializer.Serialize(this.Document, stream, formatting);
+			sourceSerializer.Serialize(Document, stream, formatting);
 
+		private TDocument AutoRouteDocument() => Document;
+
+		partial void DocumentFromPath(TDocument document) => Document = document;
 	}
 
 	[DescriptorFor("Create")]
@@ -27,15 +26,16 @@ namespace Nest
 	{
 		TDocument ICreateRequest<TDocument>.Document { get; set; }
 
-		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
-		private TDocument AutoRouteDocument() => Self.Document;
-
 		void IProxyRequest.WriteJson(IElasticsearchSerializer sourceSerializer, Stream stream, SerializationFormatting formatting) =>
 			sourceSerializer.Serialize(Self.Document, stream, formatting);
 
 		/// <summary>
-		/// Sets the id for the document. Overrides the id that may be inferred from the document.
+		///     Sets the id for the document. Overrides the id that may be inferred from the document.
 		/// </summary>
 		public CreateDescriptor<TDocument> Id(Id id) => Assign(a => a.RouteValues.Required("id", id));
+
+		private TDocument AutoRouteDocument() => Self.Document;
+
+		partial void DocumentFromPath(TDocument document) => Assign(a => a.Document = document);
 	}
 }

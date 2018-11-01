@@ -4,9 +4,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MatchNoneQuery>))]
-	public interface IMatchNoneQuery : IQuery
-	{
-	}
+	public interface IMatchNoneQuery : IQuery { }
 
 	public class MatchNoneQuery : QueryBase, IMatchNoneQuery
 	{
@@ -16,8 +14,8 @@ namespace Nest
 	}
 
 	public class MatchNoneQueryDescriptor
-	: QueryDescriptorBase<MatchNoneQueryDescriptor, IMatchNoneQuery>
-	, IMatchNoneQuery
+		: QueryDescriptorBase<MatchNoneQueryDescriptor, IMatchNoneQuery>
+			, IMatchNoneQuery
 	{
 		protected override bool Conditionless => false;
 	}

@@ -29,14 +29,15 @@ namespace Nest
 			if (errorProperty?.Value?.Type == JTokenType.String)
 			{
 				var reason = errorProperty.Value.Value<string>();
-				error = new Error {Reason = reason};
+				error = new Error { Reason = reason };
 				errorProperty.Remove();
 			}
-			else if (errorProperty?.Value?.Type == JTokenType.Object && ((JObject) errorProperty.Value)["reason"] != null)
+			else if (errorProperty?.Value?.Type == JTokenType.Object && ((JObject)errorProperty.Value)["reason"] != null)
 			{
 				error = errorProperty.Value.ToObject<Error>();
 				errorProperty.Remove();
 			}
+
 			var statusProperty = j.Property("status");
 			statusCode = null;
 			if (statusProperty?.Value?.Type == JTokenType.Integer)
@@ -44,6 +45,7 @@ namespace Nest
 				statusCode = statusProperty.Value.Value<int>();
 				statusProperty.Remove();
 			}
+
 			return j;
 		}
 	}
@@ -51,9 +53,10 @@ namespace Nest
 	internal class DictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
 		where TResponse : ResponseBase, IDictionaryResponse<TKey, TValue>, new()
 	{
-		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -68,6 +71,5 @@ namespace Nest
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
-
 	}
 }

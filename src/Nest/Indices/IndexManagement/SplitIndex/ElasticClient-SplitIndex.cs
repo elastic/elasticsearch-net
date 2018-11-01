@@ -1,27 +1,24 @@
-﻿using Elasticsearch.Net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Split an existing index into a new index, where each original primary shard is split into two or more primary shards in the new index.
+		///     Split an existing index into a new index, where each original primary shard is split into two or more primary shards in the new index.
 		/// </summary>
 		ISplitIndexResponse SplitIndex(IndexName source, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector = null);
 
 		/// <summary>
-		/// Split an existing index into a new index, where each original primary shard is split into two or more primary shards in the new index.
+		///     Split an existing index into a new index, where each original primary shard is split into two or more primary shards in the new index.
 		/// </summary>
 		ISplitIndexResponse SplitIndex(ISplitIndexRequest request);
 
 		/// <summary>
-		/// Split an existing index into a new index, where each original primary shard is split into two or more primary shards in the new index.
+		///     Split an existing index into a new index, where each original primary shard is split into two or more primary shards in the new index.
 		/// </summary>
 		Task<ISplitIndexResponse> SplitIndexAsync(
 			IndexName source,
@@ -31,7 +28,7 @@ namespace Nest
 		);
 
 		/// <summary>
-		/// Split an existing index into a new index, where each original primary shard is split into two or more primary shards in the new index.
+		///     Split an existing index into a new index, where each original primary shard is split into two or more primary shards in the new index.
 		/// </summary>
 		Task<ISplitIndexResponse> SplitIndexAsync(ISplitIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
@@ -40,13 +37,13 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public ISplitIndexResponse SplitIndex(IndexName source, IndexName target, Func<SplitIndexDescriptor, ISplitIndexRequest> selector = null) =>
-			this.SplitIndex(selector.InvokeOrDefault(new SplitIndexDescriptor(source, target)));
+			SplitIndex(selector.InvokeOrDefault(new SplitIndexDescriptor(source, target)));
 
 		/// <inheritdoc />
 		public ISplitIndexResponse SplitIndex(ISplitIndexRequest request) =>
-			this.Dispatcher.Dispatch<ISplitIndexRequest, SplitIndexRequestParameters, SplitIndexResponse>(
+			Dispatcher.Dispatch<ISplitIndexRequest, SplitIndexRequestParameters, SplitIndexResponse>(
 				request,
-				this.LowLevelDispatch.IndicesSplitDispatch<SplitIndexResponse>
+				LowLevelDispatch.IndicesSplitDispatch<SplitIndexResponse>
 			);
 
 		/// <inheritdoc />
@@ -54,15 +51,17 @@ namespace Nest
 			IndexName source,
 			IndexName target,
 			Func<SplitIndexDescriptor, ISplitIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken)) =>
-				this.SplitIndexAsync(selector.InvokeOrDefault(new SplitIndexDescriptor(source, target)));
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			SplitIndexAsync(selector.InvokeOrDefault(new SplitIndexDescriptor(source, target)));
 
 		/// <inheritdoc />
-		public Task<ISplitIndexResponse> SplitIndexAsync(ISplitIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<ISplitIndexRequest, SplitIndexRequestParameters, SplitIndexResponse, ISplitIndexResponse>(
+		public Task<ISplitIndexResponse> SplitIndexAsync(ISplitIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<ISplitIndexRequest, SplitIndexRequestParameters, SplitIndexResponse, ISplitIndexResponse>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.IndicesSplitDispatchAsync<SplitIndexResponse>
+				LowLevelDispatch.IndicesSplitDispatchAsync<SplitIndexResponse>
 			);
 	}
 }

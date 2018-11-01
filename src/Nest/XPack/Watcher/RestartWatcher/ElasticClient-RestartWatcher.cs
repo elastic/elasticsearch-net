@@ -8,43 +8,51 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Stops then restarts the Watcher/Alerting service
+		///     Stops then restarts the Watcher/Alerting service
 		/// </summary>
 		IRestartWatcherResponse RestartWatcher(Func<RestartWatcherDescriptor, IRestartWatcherRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IRestartWatcherResponse RestartWatcher(IRestartWatcherRequest request);
 
-		/// <inheritdoc/>
-		Task<IRestartWatcherResponse> RestartWatcherAsync(Func<RestartWatcherDescriptor, IRestartWatcherRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IRestartWatcherResponse> RestartWatcherAsync(Func<RestartWatcherDescriptor, IRestartWatcherRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
-		Task<IRestartWatcherResponse> RestartWatcherAsync(IRestartWatcherRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IRestartWatcherResponse> RestartWatcherAsync(IRestartWatcherRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IRestartWatcherResponse RestartWatcher(Func<RestartWatcherDescriptor, IRestartWatcherRequest> selector = null) =>
-			this.RestartWatcher(selector.InvokeOrDefault(new RestartWatcherDescriptor()));
+			RestartWatcher(selector.InvokeOrDefault(new RestartWatcherDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IRestartWatcherResponse RestartWatcher(IRestartWatcherRequest request) =>
-			this.Dispatcher.Dispatch<IRestartWatcherRequest, RestartWatcherRequestParameters, RestartWatcherResponse>(
+			Dispatcher.Dispatch<IRestartWatcherRequest, RestartWatcherRequestParameters, RestartWatcherResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.XpackWatcherRestartDispatch<RestartWatcherResponse>(p)
+				(p, d) => LowLevelDispatch.XpackWatcherRestartDispatch<RestartWatcherResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IRestartWatcherResponse> RestartWatcherAsync(Func<RestartWatcherDescriptor, IRestartWatcherRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.RestartWatcherAsync(selector.InvokeOrDefault(new RestartWatcherDescriptor()), cancellationToken);
+		/// <inheritdoc />
+		public Task<IRestartWatcherResponse> RestartWatcherAsync(Func<RestartWatcherDescriptor, IRestartWatcherRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			RestartWatcherAsync(selector.InvokeOrDefault(new RestartWatcherDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IRestartWatcherResponse> RestartWatcherAsync(IRestartWatcherRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IRestartWatcherRequest, RestartWatcherRequestParameters, RestartWatcherResponse, IRestartWatcherResponse>(
+		/// <inheritdoc />
+		public Task<IRestartWatcherResponse> RestartWatcherAsync(IRestartWatcherRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IRestartWatcherRequest, RestartWatcherRequestParameters, RestartWatcherResponse, IRestartWatcherResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.XpackWatcherRestartDispatchAsync<RestartWatcherResponse>(p,c)
+				(p, d, c) => LowLevelDispatch.XpackWatcherRestartDispatchAsync<RestartWatcherResponse>(p, c)
 			);
 	}
 }

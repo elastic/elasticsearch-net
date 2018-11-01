@@ -8,48 +8,52 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Deletes a machine learning job.
-		/// Before you can delete a job, you must delete the datafeeds that are associated with it, see DeleteDatafeed.
-		/// Unless the force parameter is used, the job must be closed before it can be deleted.
+		///     Deletes a machine learning job.
+		///     Before you can delete a job, you must delete the datafeeds that are associated with it, see DeleteDatafeed.
+		///     Unless the force parameter is used, the job must be closed before it can be deleted.
 		/// </summary>
 		/// <remarks>
-		/// It is not currently possible to delete multiple jobs, either using wildcards or a comma separated list.
+		///     It is not currently possible to delete multiple jobs, either using wildcards or a comma separated list.
 		/// </remarks>
 		IDeleteJobResponse DeleteJob(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IDeleteJobResponse DeleteJob(IDeleteJobRequest request);
 
-		/// <inheritdoc/>
-		Task<IDeleteJobResponse> DeleteJobAsync(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IDeleteJobResponse> DeleteJobAsync(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IDeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IDeleteJobResponse DeleteJob(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null) =>
-			this.DeleteJob(selector.InvokeOrDefault(new DeleteJobDescriptor(jobId)));
+			DeleteJob(selector.InvokeOrDefault(new DeleteJobDescriptor(jobId)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IDeleteJobResponse DeleteJob(IDeleteJobRequest request) =>
-			this.Dispatcher.Dispatch<IDeleteJobRequest, DeleteJobRequestParameters, DeleteJobResponse>(
+			Dispatcher.Dispatch<IDeleteJobRequest, DeleteJobRequestParameters, DeleteJobResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.XpackMlDeleteJobDispatch<DeleteJobResponse>(p)
+				(p, d) => LowLevelDispatch.XpackMlDeleteJobDispatch<DeleteJobResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IDeleteJobResponse> DeleteJobAsync(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.DeleteJobAsync(selector.InvokeOrDefault(new DeleteJobDescriptor(jobId)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IDeleteJobResponse> DeleteJobAsync(Id jobId, Func<DeleteJobDescriptor, IDeleteJobRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			DeleteJobAsync(selector.InvokeOrDefault(new DeleteJobDescriptor(jobId)), cancellationToken);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<IDeleteJobResponse> DeleteJobAsync(IDeleteJobRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IDeleteJobRequest, DeleteJobRequestParameters, DeleteJobResponse, IDeleteJobResponse>(
+			Dispatcher.DispatchAsync<IDeleteJobRequest, DeleteJobRequestParameters, DeleteJobResponse, IDeleteJobResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.XpackMlDeleteJobDispatchAsync<DeleteJobResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.XpackMlDeleteJobDispatchAsync<DeleteJobResponse>(p, c)
 			);
 	}
 }

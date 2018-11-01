@@ -1,28 +1,24 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest
 {
 	internal class MultiSearchTemplateJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => false;
 		public override bool CanWrite => true;
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
+		public override bool CanConvert(Type objectType) => true;
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			throw new NotSupportedException();
-		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var request = (IMultiSearchTemplateRequest)value;
 			if (request == null) return;
+
 			var settings = serializer.GetConnectionSettings();
 			var elasticsearchSerializer = settings.RequestResponseSerializer;
 			if (elasticsearchSerializer == null) return;
@@ -32,7 +28,11 @@ namespace Nest
 			foreach (var operation in request.Operations.Values)
 			{
 				var p = operation.RequestParameters;
-				string GetString(string key) => p.GetResolvedQueryStringValue(key, settings);
+
+				string GetString(string key)
+				{
+					return p.GetResolvedQueryStringValue(key, settings);
+				}
 
 				IUrlParameter indices = request.Index == null || !request.Index.Equals(operation.Index)
 					? operation.Index
@@ -60,7 +60,9 @@ namespace Nest
 				writer.WriteRaw($"{headerString}\n");
 				var bodyString = elasticsearchSerializer.SerializeToString(operation, SerializationFormatting.None);
 				writer.WriteRaw($"{bodyString}\n");
-			};
+			}
+
+			;
 		}
 	}
 }

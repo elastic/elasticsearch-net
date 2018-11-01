@@ -18,10 +18,11 @@ namespace Nest
 
 		public CircleGeoShape(GeoCoordinate coordinates, string radius) : this()
 		{
-			this.Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
+			Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
 			if (radius == null) throw new ArgumentNullException(nameof(radius));
 			if (radius.Length == 0) throw new ArgumentException("cannot be empty", nameof(radius));
-			this.Radius = radius;
+
+			Radius = radius;
 		}
 
 		public GeoCoordinate Coordinates { get; set; }

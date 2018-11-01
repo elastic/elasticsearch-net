@@ -10,6 +10,7 @@ namespace Nest
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => typeof(ISort).IsAssignableFrom(objectType);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -28,7 +29,7 @@ namespace Nest
 					var s = FromJson.ReadAs<GeoDistanceSort>(r, serializer);
 					s.Field = geoLocationProp.Name;
 					using (var rr = geoLocationProp.Value.CreateReader())
-						s.Points =FromJson.ReadAs<List<GeoLocation>>(rr, serializer);
+						s.Points = FromJson.ReadAs<List<GeoLocation>>(rr, serializer);
 					sort = s;
 				}
 			}
@@ -45,6 +46,7 @@ namespace Nest
 				s.Field = field;
 				sort = s;
 			}
+
 			reader.Read();
 			return sort;
 		}
@@ -61,12 +63,12 @@ namespace Nest
 			{
 				case "_script":
 					writer.WritePropertyName("_script");
-					base.Reserialize(writer, s, serializer);
+					Reserialize(writer, s, serializer);
 					break;
 				case "_geo_distance":
 					var geo = s as IGeoDistanceSort;
 					writer.WritePropertyName(geo.SortKey.Name);
-					base.Reserialize(writer, s, serializer, w =>
+					Reserialize(writer, s, serializer, w =>
 					{
 						writer.WritePropertyName(settings.Inferrer.Field(geo.Field));
 						serializer.Serialize(writer, geo.Points);
@@ -74,9 +76,10 @@ namespace Nest
 					break;
 				default:
 					writer.WritePropertyName(settings.Inferrer.Field(s.SortKey));
-					base.Reserialize(writer, s, serializer);
+					Reserialize(writer, s, serializer);
 					break;
 			}
+
 			writer.WriteEndObject();
 		}
 	}

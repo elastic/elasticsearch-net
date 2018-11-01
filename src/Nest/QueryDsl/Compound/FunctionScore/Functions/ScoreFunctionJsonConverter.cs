@@ -8,9 +8,65 @@ namespace Nest
 {
 	internal class ScoreFunctionJsonConverter : JsonConverter
 	{
+		private static readonly IDictionary<string, Type> DecayTypeMapping = new Dictionary<string, Type>
+		{
+			{ "exp_numeric", typeof(ExponentialDecayFunction) },
+			{ "exp_date", typeof(ExponentialDateDecayFunction) },
+			{ "exp_geo", typeof(ExponentialGeoDecayFunction) },
+			{ "gauss_numeric", typeof(GaussDecayFunction) },
+			{ "gauss_date", typeof(GaussDateDecayFunction) },
+			{ "gauss_geo", typeof(GaussGeoDecayFunction) },
+			{ "linear_numeric", typeof(LinearDecayFunction) },
+			{ "linear_date", typeof(LinearDateDecayFunction) },
+			{ "linear_geo", typeof(LinearGeoDecayFunction) },
+		};
+
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => true;
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var jo = JObject.Load(reader);
+			var filter = jo.Property("filter")?.Value.ToObject<QueryContainer>(serializer);
+			var weight = jo.Property("weight")?.Value.ToObject<double?>();
+			;
+			IScoreFunction function = null;
+			foreach (var prop in jo.Properties())
+				switch (prop.Name)
+				{
+					case "exp":
+					case "gauss":
+					case "linear":
+						var properties = prop.Value.Value<JObject>().Properties().ToList();
+						var fieldProp = properties.First(p => p.Name != "multi_value_mode");
+						var field = fieldProp.Name;
+						var f = ReadDecayFunction(prop.Name, fieldProp.Value.Value<JObject>(), serializer);
+						f.Field = field;
+						var mv = properties.FirstOrDefault(p => p.Name == "multi_value_mode")?.Value;
+						if (mv != null)
+							f.MultiValueMode = serializer.Deserialize<MultiValueMode>(mv.CreateReader());
+						function = f;
+
+						break;
+					case "random_score":
+						function = FromJson.ReadAs<RandomScoreFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
+						break;
+					case "field_value_factor":
+						function = FromJson.ReadAs<FieldValueFactorFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
+						break;
+					case "script_score":
+						function = FromJson.ReadAs<ScriptScoreFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
+						break;
+				}
+			if (function == null && weight.HasValue) function = new WeightFunction { Weight = weight };
+			else if (function == null) return null; //throw new Exception("error deserializing function score function");
+
+			function.Weight = weight;
+			function.Filter = filter;
+			return function;
+		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -37,48 +93,51 @@ namespace Nest
 					writer.WritePropertyName("weight");
 					serializer.Serialize(writer, function.Weight.Value);
 				}
-
 			}
 			writer.WriteEndObject();
 		}
 
-		//rely on weight getting written later
-		private bool WriteWeightFunction(JsonWriter writer, IWeightFunction value, JsonSerializer serializer) => value != null;
-
-		private bool WriteScriptScore(JsonWriter writer, IScriptScoreFunction value, JsonSerializer serializer)
+		private IDecayFunction ReadDecayFunction(string type, JObject o, JsonSerializer serializer)
 		{
-			if (value == null) return false;
-			writer.WritePropertyName("script_score");
-			serializer.Serialize(writer, value.Script);
-			return true;
-		}
+			var origin = o.Property("origin")?.Value.Type;
+			if (origin == null) return null;
 
-		private bool WriteRandomScore(JsonWriter writer, IRandomScoreFunction value, JsonSerializer serializer)
-		{
-			if (value == null) return false;
-			writer.WritePropertyName("random_score");
-			writer.WriteStartObject();
+			var subType = "numeric";
+			switch (origin)
 			{
-				writer.WriteProperty(serializer, "seed", value.Seed);
-				writer.WriteProperty(serializer, "field", value.Field);
+				case JTokenType.String:
+					subType = "date";
+					break;
+				case JTokenType.Object:
+					subType = "geo";
+					break;
 			}
-			writer.WriteEndObject();
-			return true;
+
+			var t = DecayTypeMapping[$"{type}_{subType}"];
+			return FromJson.Read(o.CreateReader(), t, serializer) as IDecayFunction;
 		}
-		private bool WriteFieldValueFactor(JsonWriter writer, IFieldValueFactorFunction value, JsonSerializer serializer)
+
+		private bool WriteDateDecay(JsonWriter writer, IDecayFunction<DateMath, Time> value, JsonSerializer serializer)
 		{
-			if (value == null) return false;
-			writer.WritePropertyName("field_value_factor");
-			writer.WriteStartObject();
+			if (value == null || value.Field.IsConditionless()) return false;
+
+			if (value.Origin != null)
 			{
-				writer.WriteProperty(serializer, "field", value.Field);
-				writer.WriteProperty(serializer, "factor", value.Factor);
-				writer.WriteProperty(serializer, "missing", value.Missing);
-				writer.WriteProperty(serializer, "modifier", value.Modifier);
+				writer.WritePropertyName("origin");
+				serializer.Serialize(writer, value.Origin);
 			}
-			writer.WriteEndObject();
+
+			writer.WritePropertyName("scale");
+			serializer.Serialize(writer, value.Scale);
+			if (value.Offset != null)
+			{
+				writer.WritePropertyName("offset");
+				serializer.Serialize(writer, value.Offset);
+			}
+
 			return true;
 		}
+
 		private bool WriteDecay(JsonWriter writer, IDecayFunction decay, JsonSerializer serializer)
 		{
 			if (decay == null) return false;
@@ -90,8 +149,8 @@ namespace Nest
 				writer.WriteStartObject();
 				{
 					var write = WriteNumericDecay(writer, decay as IDecayFunction<double?, double?>, serializer)
-								|| WriteDateDecay(writer, decay as IDecayFunction<DateMath, Time>, serializer)
-								|| WriteGeoDecay(writer, decay as IDecayFunction<GeoLocation, Distance>, serializer);
+						|| WriteDateDecay(writer, decay as IDecayFunction<DateMath, Time>, serializer)
+						|| WriteGeoDecay(writer, decay as IDecayFunction<GeoLocation, Distance>, serializer);
 					if (!write) throw new Exception($"Can not write decay function json for {decay.GetType().Name}");
 
 					if (decay.Decay.HasValue)
@@ -109,46 +168,28 @@ namespace Nest
 			}
 			writer.WriteEndObject();
 			return true;
-
 		}
 
-		private bool WriteNumericDecay(JsonWriter writer, IDecayFunction<double?, double?> value, JsonSerializer serializer)
+		private bool WriteFieldValueFactor(JsonWriter writer, IFieldValueFactorFunction value, JsonSerializer serializer)
 		{
 			if (value == null) return false;
-			writer.WritePropertyName("origin");
-			serializer.Serialize(writer, value.Origin);
-			writer.WritePropertyName("scale");
-			serializer.Serialize(writer, value.Scale);
-			if (value.Offset != null)
-			{
-				writer.WritePropertyName("offset");
-				serializer.Serialize(writer, value.Offset);
-			}
-			return true;
-		}
 
-		private bool WriteDateDecay(JsonWriter writer, IDecayFunction<DateMath, Time> value, JsonSerializer serializer)
-		{
-			if (value == null || value.Field.IsConditionless()) return false;
-			if (value.Origin != null)
+			writer.WritePropertyName("field_value_factor");
+			writer.WriteStartObject();
 			{
-				writer.WritePropertyName("origin");
-				serializer.Serialize(writer, value.Origin);
+				writer.WriteProperty(serializer, "field", value.Field);
+				writer.WriteProperty(serializer, "factor", value.Factor);
+				writer.WriteProperty(serializer, "missing", value.Missing);
+				writer.WriteProperty(serializer, "modifier", value.Modifier);
 			}
-			writer.WritePropertyName("scale");
-			serializer.Serialize(writer, value.Scale);
-			if (value.Offset != null)
-			{
-				writer.WritePropertyName("offset");
-				serializer.Serialize(writer, value.Offset);
-			}
+			writer.WriteEndObject();
 			return true;
-
 		}
 
 		private bool WriteGeoDecay(JsonWriter writer, IDecayFunction<GeoLocation, Distance> value, JsonSerializer serializer)
 		{
 			if (value == null || value.Field.IsConditionless()) return false;
+
 			writer.WritePropertyName("origin");
 			serializer.Serialize(writer, value.Origin);
 			writer.WritePropertyName("scale");
@@ -158,81 +199,51 @@ namespace Nest
 				writer.WritePropertyName("offset");
 				serializer.Serialize(writer, value.Offset);
 			}
+
 			return true;
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		private bool WriteNumericDecay(JsonWriter writer, IDecayFunction<double?, double?> value, JsonSerializer serializer)
 		{
-			var jo = JObject.Load(reader);
-			var filter = jo.Property("filter")?.Value.ToObject<QueryContainer>(serializer);
-			var weight = jo.Property("weight")?.Value.ToObject<double?>(); ;
-			IScoreFunction function = null;
-			foreach (var prop in jo.Properties())
-			{
-				switch (prop.Name)
-				{
-					case "exp":
-					case "gauss":
-					case "linear":
-						var properties = prop.Value.Value<JObject>().Properties().ToList();
-						var fieldProp = properties.First(p => p.Name != "multi_value_mode");
-						var field = fieldProp.Name;
-						var f = this.ReadDecayFunction(prop.Name, fieldProp.Value.Value<JObject>(), serializer);
-						f.Field = field;
-						var mv = properties.FirstOrDefault(p => p.Name == "multi_value_mode")?.Value;
-						if (mv != null)
-							f.MultiValueMode = serializer.Deserialize<MultiValueMode>(mv.CreateReader());
-						function = f;
+			if (value == null) return false;
 
-						break;
-					case "random_score":
-						function = FromJson.ReadAs<RandomScoreFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
-						break;
-					case "field_value_factor":
-						function = FromJson.ReadAs<FieldValueFactorFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
-						break;
-					case "script_score":
-						function = FromJson.ReadAs<ScriptScoreFunction>(prop.Value.Value<JObject>().CreateReader(), serializer);
-						break;
-				}
+			writer.WritePropertyName("origin");
+			serializer.Serialize(writer, value.Origin);
+			writer.WritePropertyName("scale");
+			serializer.Serialize(writer, value.Scale);
+			if (value.Offset != null)
+			{
+				writer.WritePropertyName("offset");
+				serializer.Serialize(writer, value.Offset);
 			}
-			if (function == null && weight.HasValue) function = new WeightFunction { Weight = weight };
-			else if (function == null) return null; //throw new Exception("error deserializing function score function");
-			function.Weight = weight;
-			function.Filter = filter;
-			return function;
+
+			return true;
 		}
 
-		private static IDictionary<string, Type> DecayTypeMapping = new Dictionary<string, Type>
+		private bool WriteRandomScore(JsonWriter writer, IRandomScoreFunction value, JsonSerializer serializer)
 		{
-			{ "exp_numeric", typeof(ExponentialDecayFunction) },
-			{ "exp_date", typeof(ExponentialDateDecayFunction) },
-			{ "exp_geo", typeof(ExponentialGeoDecayFunction) },
-			{ "gauss_numeric", typeof(GaussDecayFunction) },
-			{ "gauss_date", typeof(GaussDateDecayFunction) },
-			{ "gauss_geo", typeof(GaussGeoDecayFunction) },
-			{ "linear_numeric", typeof(LinearDecayFunction) },
-			{ "linear_date", typeof(LinearDateDecayFunction) },
-			{ "linear_geo", typeof(LinearGeoDecayFunction) },
-		};
+			if (value == null) return false;
 
-		private IDecayFunction ReadDecayFunction(string type, JObject o, JsonSerializer serializer)
-		{
-			var origin = o.Property("origin")?.Value.Type;
-			if (origin == null) return null;
-			var subType = "numeric";
-			switch (origin)
+			writer.WritePropertyName("random_score");
+			writer.WriteStartObject();
 			{
-				case JTokenType.String:
-					subType = "date";
-					break;
-				case JTokenType.Object:
-					subType = "geo";
-					break;
+				writer.WriteProperty(serializer, "seed", value.Seed);
+				writer.WriteProperty(serializer, "field", value.Field);
 			}
-			var t = DecayTypeMapping[$"{type}_{subType}"];
-			return FromJson.Read(o.CreateReader(), t, serializer) as IDecayFunction;
+			writer.WriteEndObject();
+			return true;
 		}
 
+		private bool WriteScriptScore(JsonWriter writer, IScriptScoreFunction value, JsonSerializer serializer)
+		{
+			if (value == null) return false;
+
+			writer.WritePropertyName("script_score");
+			serializer.Serialize(writer, value.Script);
+			return true;
+		}
+
+		//rely on weight getting written later
+		private bool WriteWeightFunction(JsonWriter writer, IWeightFunction value, JsonSerializer serializer) => value != null;
 	}
 }

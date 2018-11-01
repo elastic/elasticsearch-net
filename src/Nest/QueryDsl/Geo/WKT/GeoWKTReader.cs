@@ -6,17 +6,227 @@ using System.IO;
 namespace Nest
 {
 	/// <summary>
-	/// Reads Well-Known Text (WKT) into <see cref="IGeoShape"/> types
+	///     Reads Well-Known Text (WKT) into <see cref="IGeoShape" /> types
 	/// </summary>
 	public class GeoWKTReader
 	{
 		/// <summary>
-		/// Reads Well-Known Text (WKT) into a new instance of <see cref="IGeoShape"/>
+		///     Reads Well-Known Text (WKT) into a new instance of <see cref="IGeoShape" />
 		/// </summary>
 		public static IGeoShape Read(string wellKnownText)
 		{
 			using (var tokenizer = new WellKnownTextTokenizer(new StringReader(wellKnownText)))
 				return Read(tokenizer, null);
+		}
+
+		private static bool IsNumberNext(WellKnownTextTokenizer tokenizer)
+		{
+			var token = tokenizer.PeekToken();
+			return token == TokenType.Number;
+		}
+
+		private static void NextCloser(WellKnownTextTokenizer tokenizer)
+		{
+			if (tokenizer.NextToken() != TokenType.RParen)
+				throw new GeoWKTException(
+					$"Expected {(char)WellKnownTextTokenizer.RParen} " +
+					$"but found: {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
+		}
+
+		private static TokenType NextCloserOrComma(WellKnownTextTokenizer tokenizer)
+		{
+			var token = tokenizer.NextToken();
+			if (token == TokenType.Comma || token == TokenType.RParen)
+				return token;
+
+			throw new GeoWKTException(
+				$"Expected {(char)WellKnownTextTokenizer.Comma} or {(char)WellKnownTextTokenizer.RParen} " +
+				$"but found: {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
+		}
+
+		private static void NextComma(WellKnownTextTokenizer tokenizer)
+		{
+			if (tokenizer.NextToken() != TokenType.Comma)
+				throw new GeoWKTException(
+					$"Expected {(char)WellKnownTextTokenizer.Comma} but found: {tokenizer.TokenString()}",
+					tokenizer.LineNumber,
+					tokenizer.Position);
+		}
+
+		private static TokenType NextEmptyOrOpen(WellKnownTextTokenizer tokenizer)
+		{
+			var token = tokenizer.NextToken();
+			if (token == TokenType.LParen ||
+				token == TokenType.Word && tokenizer.TokenValue.Equals(WellKnownTextTokenizer.Empty, StringComparison.OrdinalIgnoreCase))
+				return token;
+
+			throw new GeoWKTException(
+				$"Expected {WellKnownTextTokenizer.Empty} or {(char)WellKnownTextTokenizer.LParen} " +
+				$"but found: {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
+		}
+
+		private static double NextNumber(WellKnownTextTokenizer tokenizer)
+		{
+			if (tokenizer.NextToken() == TokenType.Number)
+			{
+				if (string.Equals(tokenizer.TokenValue, WellKnownTextTokenizer.NaN, StringComparison.OrdinalIgnoreCase))
+					return double.NaN;
+
+				if (double.TryParse(
+					tokenizer.TokenValue,
+					NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
+					CultureInfo.InvariantCulture, out var d))
+					return d;
+			}
+
+			throw new GeoWKTException(
+				$"Expected number but found: {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
+		}
+
+		private static EnvelopeGeoShape ParseBoundingBox(WellKnownTextTokenizer tokenizer)
+		{
+			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
+				return null;
+
+			var minLon = NextNumber(tokenizer);
+			NextComma(tokenizer);
+			var maxLon = NextNumber(tokenizer);
+			NextComma(tokenizer);
+			var maxLat = NextNumber(tokenizer);
+			NextComma(tokenizer);
+			var minLat = NextNumber(tokenizer);
+			NextCloser(tokenizer);
+			return new EnvelopeGeoShape(new[] { new GeoCoordinate(maxLat, minLon), new GeoCoordinate(minLat, maxLon) });
+		}
+
+		private static GeoCoordinate ParseCoordinate(WellKnownTextTokenizer tokenizer)
+		{
+			var lon = NextNumber(tokenizer);
+			var lat = NextNumber(tokenizer);
+			double? z = null;
+
+			if (IsNumberNext(tokenizer))
+				z = NextNumber(tokenizer);
+
+			return z == null
+				? new GeoCoordinate(lat, lon)
+				: new GeoCoordinate(lat, lon, z.Value);
+		}
+
+		private static List<IEnumerable<GeoCoordinate>> ParseCoordinateLists(WellKnownTextTokenizer tokenizer)
+		{
+			var coordinates = new List<IEnumerable<GeoCoordinate>>();
+
+			NextEmptyOrOpen(tokenizer);
+			coordinates.Add(ParseCoordinates(tokenizer));
+
+			while (NextCloserOrComma(tokenizer) == TokenType.Comma)
+			{
+				NextEmptyOrOpen(tokenizer);
+				coordinates.Add(ParseCoordinates(tokenizer));
+			}
+
+			return coordinates;
+		}
+
+		private static List<GeoCoordinate> ParseCoordinates(WellKnownTextTokenizer tokenizer)
+		{
+			var coordinates = new List<GeoCoordinate>();
+
+			if (IsNumberNext(tokenizer) || (tokenizer.NextToken() == TokenType.LParen))
+				coordinates.Add(ParseCoordinate(tokenizer));
+
+			while (NextCloserOrComma(tokenizer) == TokenType.Comma)
+			{
+				var isOpenParen = false;
+
+				if (IsNumberNext(tokenizer) || (isOpenParen = tokenizer.NextToken() == TokenType.LParen))
+					coordinates.Add(ParseCoordinate(tokenizer));
+
+				if (isOpenParen)
+					NextCloser(tokenizer);
+			}
+
+			return coordinates;
+		}
+
+		private static GeometryCollection ParseGeometryCollection(WellKnownTextTokenizer tokenizer)
+		{
+			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
+				return null;
+
+			var geometries = new List<IGeoShape>
+			{
+				Read(tokenizer, GeoShapeType.GeometryCollection)
+			};
+
+			while (NextCloserOrComma(tokenizer) == TokenType.Comma)
+				geometries.Add(Read(tokenizer, null));
+
+			return new GeometryCollection { Geometries = geometries };
+		}
+
+		private static LineStringGeoShape ParseLineString(WellKnownTextTokenizer tokenizer)
+		{
+			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
+				return null;
+
+			var coordinates = ParseCoordinates(tokenizer);
+			return new LineStringGeoShape(coordinates);
+		}
+
+		private static MultiLineStringGeoShape ParseMultiLineString(WellKnownTextTokenizer tokenizer)
+		{
+			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
+				return null;
+
+			var coordinates = ParseCoordinateLists(tokenizer);
+			return new MultiLineStringGeoShape(coordinates);
+		}
+
+		private static MultiPointGeoShape ParseMultiPoint(WellKnownTextTokenizer tokenizer)
+		{
+			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
+				return null;
+
+			var coordinates = ParseCoordinates(tokenizer);
+			return new MultiPointGeoShape(coordinates);
+		}
+
+		private static MultiPolygonGeoShape ParseMultiPolygon(WellKnownTextTokenizer tokenizer)
+		{
+			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
+				return null;
+
+			var coordinates = new List<IEnumerable<IEnumerable<GeoCoordinate>>>
+			{
+				ParseCoordinateLists(tokenizer)
+			};
+
+			while (NextCloserOrComma(tokenizer) == TokenType.Comma)
+				coordinates.Add(ParseCoordinateLists(tokenizer));
+
+			return new MultiPolygonGeoShape(coordinates);
+		}
+
+		private static PointGeoShape ParsePoint(WellKnownTextTokenizer tokenizer)
+		{
+			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
+				return null;
+
+			var point = new PointGeoShape(ParseCoordinate(tokenizer));
+			NextCloser(tokenizer);
+
+			return point;
+		}
+
+		private static PolygonGeoShape ParsePolygon(WellKnownTextTokenizer tokenizer)
+		{
+			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
+				return null;
+
+			var coordinates = ParseCoordinateLists(tokenizer);
+			return new PolygonGeoShape(coordinates);
 		}
 
 		private static IGeoShape Read(WellKnownTextTokenizer tokenizer, string shapeType)
@@ -70,220 +280,10 @@ namespace Nest
 					throw new GeoWKTException($"Unknown geometry type: {type}");
 			}
 		}
-
-		private static PointGeoShape ParsePoint(WellKnownTextTokenizer tokenizer)
-		{
-			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
-				return null;
-
-			var point = new PointGeoShape(ParseCoordinate(tokenizer));
-			NextCloser(tokenizer);
-
-			return point;
-		}
-
-		private static MultiPointGeoShape ParseMultiPoint(WellKnownTextTokenizer tokenizer)
-		{
-			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
-				return null;
-
-			var coordinates = ParseCoordinates(tokenizer);
-			return new MultiPointGeoShape(coordinates);
-		}
-
-		private static LineStringGeoShape ParseLineString(WellKnownTextTokenizer tokenizer)
-		{
-			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
-				return null;
-
-			var coordinates = ParseCoordinates(tokenizer);
-			return new LineStringGeoShape(coordinates);
-		}
-
-		private static MultiLineStringGeoShape ParseMultiLineString(WellKnownTextTokenizer tokenizer)
-		{
-			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
-				return null;
-
-			var coordinates = ParseCoordinateLists(tokenizer);
-			return new MultiLineStringGeoShape(coordinates);
-		}
-
-		private static PolygonGeoShape ParsePolygon(WellKnownTextTokenizer tokenizer)
-		{
-			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
-				return null;
-
-			var coordinates = ParseCoordinateLists(tokenizer);
-			return new PolygonGeoShape(coordinates);
-		}
-
-		private static MultiPolygonGeoShape ParseMultiPolygon(WellKnownTextTokenizer tokenizer)
-		{
-			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
-				return null;
-
-			var coordinates = new List<IEnumerable<IEnumerable<GeoCoordinate>>>
-			{
-				ParseCoordinateLists(tokenizer)
-			};
-
-			while (NextCloserOrComma(tokenizer) == TokenType.Comma)
-				coordinates.Add(ParseCoordinateLists(tokenizer));
-
-			return new MultiPolygonGeoShape(coordinates);
-		}
-
-		private static EnvelopeGeoShape ParseBoundingBox(WellKnownTextTokenizer tokenizer)
-		{
-			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
-				return null;
-
-			var minLon = NextNumber(tokenizer);
-			NextComma(tokenizer);
-			var maxLon = NextNumber(tokenizer);
-			NextComma(tokenizer);
-			var maxLat = NextNumber(tokenizer);
-			NextComma(tokenizer);
-			var minLat = NextNumber(tokenizer);
-			NextCloser(tokenizer);
-			return new EnvelopeGeoShape(new [] { new GeoCoordinate(maxLat, minLon), new GeoCoordinate(minLat, maxLon) });
-		}
-
-		private static GeometryCollection ParseGeometryCollection(WellKnownTextTokenizer tokenizer)
-		{
-			if (NextEmptyOrOpen(tokenizer) == TokenType.Word)
-				return null;
-
-			var geometries = new List<IGeoShape>
-			{
-				Read(tokenizer, GeoShapeType.GeometryCollection)
-			};
-
-			while (NextCloserOrComma(tokenizer) == TokenType.Comma)
-				geometries.Add(Read(tokenizer, null));
-
-			return new GeometryCollection { Geometries = geometries };
-		}
-
-		private static List<IEnumerable<GeoCoordinate>> ParseCoordinateLists(WellKnownTextTokenizer tokenizer)
-		{
-			var coordinates = new List<IEnumerable<GeoCoordinate>>();
-
-			NextEmptyOrOpen(tokenizer);
-			coordinates.Add(ParseCoordinates(tokenizer));
-
-			while (NextCloserOrComma(tokenizer) == TokenType.Comma)
-			{
-				NextEmptyOrOpen(tokenizer);
-				coordinates.Add(ParseCoordinates(tokenizer));
-			}
-
-			return coordinates;
-		}
-
-		private static List<GeoCoordinate> ParseCoordinates(WellKnownTextTokenizer tokenizer)
-		{
-			var coordinates = new List<GeoCoordinate>();
-
-			if (IsNumberNext(tokenizer) || (tokenizer.NextToken() == TokenType.LParen))
-				coordinates.Add(ParseCoordinate(tokenizer));
-
-			while (NextCloserOrComma(tokenizer) == TokenType.Comma)
-			{
-				var isOpenParen = false;
-
-				if (IsNumberNext(tokenizer) || (isOpenParen = tokenizer.NextToken() == TokenType.LParen))
-					coordinates.Add(ParseCoordinate(tokenizer));
-
-				if (isOpenParen)
-					NextCloser(tokenizer);
-			}
-
-			return coordinates;
-		}
-
-		private static GeoCoordinate ParseCoordinate(WellKnownTextTokenizer tokenizer)
-		{
-			var lon = NextNumber(tokenizer);
-			var lat = NextNumber(tokenizer);
-			double? z = null;
-
-			if (IsNumberNext(tokenizer))
-				z = NextNumber(tokenizer);
-
-			return z == null
-				? new GeoCoordinate(lat, lon)
-				: new GeoCoordinate(lat, lon, z.Value);
-		}
-
-		private static void NextCloser(WellKnownTextTokenizer tokenizer)
-		{
-			if (tokenizer.NextToken() != TokenType.RParen)
-				throw new GeoWKTException(
-					$"Expected {(char)WellKnownTextTokenizer.RParen} " +
-					$"but found: {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
-		}
-
-		private static void NextComma(WellKnownTextTokenizer tokenizer)
-		{
-			if (tokenizer.NextToken() != TokenType.Comma)
-				throw new GeoWKTException(
-					$"Expected {(char)WellKnownTextTokenizer.Comma} but found: {tokenizer.TokenString()}",
-					tokenizer.LineNumber,
-					tokenizer.Position);
-		}
-
-		private static TokenType NextEmptyOrOpen(WellKnownTextTokenizer tokenizer)
-		{
-			var token = tokenizer.NextToken();
-			if (token == TokenType.LParen ||
-			    token == TokenType.Word && tokenizer.TokenValue.Equals(WellKnownTextTokenizer.Empty, StringComparison.OrdinalIgnoreCase))
-				return token;
-
-			throw new GeoWKTException(
-				$"Expected {WellKnownTextTokenizer.Empty} or {(char)WellKnownTextTokenizer.LParen} " +
-				$"but found: {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
-		}
-
-		private static TokenType NextCloserOrComma(WellKnownTextTokenizer tokenizer)
-		{
-			var token = tokenizer.NextToken();
-			if (token == TokenType.Comma || token == TokenType.RParen)
-				return token;
-
-			throw new GeoWKTException(
-				$"Expected {(char)WellKnownTextTokenizer.Comma} or {(char)WellKnownTextTokenizer.RParen} " +
-				$"but found: {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
-		}
-
-		private static double NextNumber(WellKnownTextTokenizer tokenizer)
-		{
-			if (tokenizer.NextToken() == TokenType.Number)
-			{
-				if (string.Equals(tokenizer.TokenValue, WellKnownTextTokenizer.NaN, StringComparison.OrdinalIgnoreCase))
-					return double.NaN;
-
-				if (double.TryParse(
-						tokenizer.TokenValue,
-						NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
-						CultureInfo.InvariantCulture, out var d))
-					return d;
-			}
-
-			throw new GeoWKTException(
-				$"Expected number but found: {tokenizer.TokenString()}", tokenizer.LineNumber, tokenizer.Position);
-		}
-
-		private static bool IsNumberNext(WellKnownTextTokenizer tokenizer)
-		{
-			var token = tokenizer.PeekToken();
-			return token == TokenType.Number;
-		}
 	}
 
 	/// <summary>
-	/// Character types when parsing Well-Known Text
+	///     Character types when parsing Well-Known Text
 	/// </summary>
 	internal enum CharacterType : byte
 	{
@@ -294,7 +294,7 @@ namespace Nest
 	}
 
 	/// <summary>
-	/// Well-Known Text token types
+	///     Well-Known Text token types
 	/// </summary>
 	internal enum TokenType : byte
 	{
@@ -307,39 +307,32 @@ namespace Nest
 	}
 
 	/// <summary>
-	/// Tokenizes a sequence of characters into Well-Known Text
-	/// (WKT) <see cref="TokenType"/>
+	///     Tokenizes a sequence of characters into Well-Known Text
+	///     (WKT) <see cref="TokenType" />
 	/// </summary>
 	internal class WellKnownTextTokenizer : IDisposable
 	{
-		private const int NeedChar = int.MaxValue;
-		private const int CharacterTypesLength = 256;
-
-		public const int Linefeed = '\n';
 		public const int CarriageReturn = '\r';
-		public const int LParen = '(';
-		public const int RParen = ')';
+		private const int CharacterTypesLength = 256;
 		public const int Comma = ',';
 		public const int Comment = '#';
 		public const int Dot = '.';
-		public const int Plus = '+';
-		public const int Minus = '-';
-		public const string NaN = "NAN";
 		public const string Empty = "EMPTY";
 
+		public const int Linefeed = '\n';
+		public const int LParen = '(';
+		public const int Minus = '-';
+		public const string NaN = "NAN";
+		private const int NeedChar = int.MaxValue;
+		public const int Plus = '+';
+		public const int RParen = ')';
+
 		private static readonly CharacterType[] CharacterTypes = new CharacterType[CharacterTypesLength];
+		private readonly List<char> _buffer = new List<char>();
 
-		private static void Chars(int low, int high, CharacterType type)
-		{
-			if (low < 0)
-				low = 0;
-
-			if (high >= CharacterTypesLength)
-				high = CharacterTypesLength - 1;
-
-			while (low <= high)
-				CharacterTypes[low++] = type;
-		}
+		private readonly TextReader _reader;
+		private int _peekChar = NeedChar;
+		private bool _pushed;
 
 		static WellKnownTextTokenizer()
 		{
@@ -358,79 +351,37 @@ namespace Nest
 			Chars(Comment, Comment, CharacterType.Comment);
 		}
 
-		private readonly TextReader _reader;
-		private readonly List<char> _buffer = new List<char>();
-		private bool _pushed;
-		private int _peekChar = NeedChar;
-
 		// TODO: use ReadOnlySpan<char> in future
 		public WellKnownTextTokenizer(TextReader reader) =>
 			_reader = reader ?? throw new ArgumentNullException(nameof(reader));
 
 		/// <summary>
-		/// Gets the current position
-		/// </summary>
-		public int Position { get; private set; }
-
-		/// <summary>
-		/// Gets the current line number
+		///     Gets the current line number
 		/// </summary>
 		public int LineNumber { get; private set; } = 1;
 
 		/// <summary>
-		/// Gets the current token value
+		///     Gets the current position
 		/// </summary>
-		public string TokenValue { get; private set; }
+		public int Position { get; private set; }
 
 		/// <summary>
-		/// Gets the current token type
+		///     Gets the current token type
 		/// </summary>
 		public TokenType TokenType { get; private set; } = TokenType.None;
 
 		/// <summary>
-		/// A user friendly string for the current token
+		///     Gets the current token value
 		/// </summary>
-		public string TokenString()
-		{
-			switch (TokenType)
-			{
-				case TokenType.Word:
-				case TokenType.Number:
-					return TokenValue;
-				case TokenType.None:
-					return "END-OF-STREAM";
-				case TokenType.LParen:
-					return "(";
-				case TokenType.RParen:
-					return ")";
-				case TokenType.Comma:
-					return ",";
-				default:
-					return $"\'{(char)_peekChar}\'";
-			}
-		}
-
-		private int Read()
-		{
-			Position++;
-			return _reader.Read();
-		}
+		public string TokenValue { get; private set; }
 
 		/// <summary>
-		/// Peeks at the next token without changing the state
-		/// of the reader
+		///     Disposes of the reader from which characters are read
 		/// </summary>
-		public TokenType PeekToken()
-		{
-			var position = Position;
-			var token = NextToken();
-			Position = position;
-			_pushed = true;
-			return token;
-		}
+		public void Dispose() => _reader?.Dispose();
 
 		/// <summary>
-		/// Gets the next token, advancing the position
+		///     Gets the next token, advancing the position
 		/// </summary>
 		public TokenType NextToken()
 		{
@@ -521,7 +472,6 @@ namespace Nest
 						characterType = CharacterTypes[c];
 					else
 						characterType = CharacterType.Alpha;
-
 				} while (characterType == CharacterType.Alpha);
 
 				_peekChar = c;
@@ -566,9 +516,7 @@ namespace Nest
 			if (characterType == CharacterType.Comment)
 			{
 				// consume all characters on comment line
-				while ((c = Read()) != Linefeed && c != CarriageReturn && c >= 0)
-				{
-				}
+				while ((c = Read()) != Linefeed && c != CarriageReturn && c >= 0) { }
 
 				_peekChar = c;
 				return NextToken();
@@ -578,8 +526,57 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Disposes of the reader from which characters are read
+		///     Peeks at the next token without changing the state
+		///     of the reader
 		/// </summary>
-		public void Dispose() => _reader?.Dispose();
+		public TokenType PeekToken()
+		{
+			var position = Position;
+			var token = NextToken();
+			Position = position;
+			_pushed = true;
+			return token;
+		}
+
+		/// <summary>
+		///     A user friendly string for the current token
+		/// </summary>
+		public string TokenString()
+		{
+			switch (TokenType)
+			{
+				case TokenType.Word:
+				case TokenType.Number:
+					return TokenValue;
+				case TokenType.None:
+					return "END-OF-STREAM";
+				case TokenType.LParen:
+					return "(";
+				case TokenType.RParen:
+					return ")";
+				case TokenType.Comma:
+					return ",";
+				default:
+					return $"\'{(char)_peekChar}\'";
+			}
+		}
+
+		private static void Chars(int low, int high, CharacterType type)
+		{
+			if (low < 0)
+				low = 0;
+
+			if (high >= CharacterTypesLength)
+				high = CharacterTypesLength - 1;
+
+			while (low <= high)
+				CharacterTypes[low++] = type;
+		}
+
+		private int Read()
+		{
+			Position++;
+			return _reader.Read();
+		}
 	}
 }

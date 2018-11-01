@@ -19,13 +19,16 @@ namespace Nest
 			percentileRanks.Method = ReadMethodProperty(properties);
 			if (properties.ContainsKey("values"))
 				percentileRanks.Values = properties["values"].ToObject<List<double>>();
-			return percentileRanks;;
+			return percentileRanks;
+
+			;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var percentileRanks = value as IPercentileRanksAggregation;
 			if (percentileRanks == null) return;
+
 			writer.WriteStartObject();
 			WriteMetricProperties(percentileRanks, writer, serializer);
 			if (percentileRanks.Values != null)
@@ -33,6 +36,7 @@ namespace Nest
 				writer.WritePropertyName("values");
 				serializer.Serialize(writer, percentileRanks.Values);
 			}
+
 			WriteMethodProperty(percentileRanks.Method, writer, serializer);
 			writer.WriteEndObject();
 		}

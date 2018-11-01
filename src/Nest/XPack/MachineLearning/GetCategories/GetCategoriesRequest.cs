@@ -4,12 +4,12 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Retrieve job results for one or more categories.
+	///     Retrieve job results for one or more categories.
 	/// </summary>
 	public partial interface IGetCategoriesRequest
 	{
 		/// <summary>
-		/// Specifies pagination for the categories
+		///     Specifies pagination for the categories
 		/// </summary>
 		[JsonProperty("page")]
 		IPage Page { get; set; }

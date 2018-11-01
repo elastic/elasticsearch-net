@@ -7,15 +7,15 @@ namespace Nest
 	[JsonConverter(typeof(IncludeExcludeJsonConverter))]
 	public class IncludeExclude
 	{
+		public IncludeExclude(string pattern) => Pattern = pattern;
+
+		public IncludeExclude(IEnumerable<string> values) => Values = values;
+
 		[JsonIgnore]
 		public string Pattern { get; set; }
 
 		[JsonIgnore]
 		public IEnumerable<string> Values { get; set; }
-
-		public IncludeExclude(string pattern) => Pattern = pattern;
-
-		public IncludeExclude(IEnumerable<string> values) => Values = values;
 	}
 
 	internal class IncludeExcludeJsonConverter : JsonConverter

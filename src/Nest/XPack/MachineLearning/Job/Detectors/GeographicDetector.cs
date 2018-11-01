@@ -22,40 +22,40 @@ namespace Nest
 		}
 	}
 
-	public interface IGeographicDetector : IDetector, IByFieldNameDetector, IOverFieldNameDetector,
-		IPartitionFieldNameDetector, IFieldNameDetector
-	{
-	}
+	public interface IGeographicDetector
+		: IDetector, IByFieldNameDetector, IOverFieldNameDetector,
+			IPartitionFieldNameDetector, IFieldNameDetector { }
 
 	public class LatLongDetector : DetectorBase, IGeographicDetector
 	{
-		public LatLongDetector() : base(GeographicFunction.LatLong.GetStringValue()) {}
+		public LatLongDetector() : base(GeographicFunction.LatLong.GetStringValue()) { }
 
 		public Field ByFieldName { get; set; }
+		public Field FieldName { get; set; }
 		public Field OverFieldName { get; set; }
 		public Field PartitionFieldName { get; set; }
-		public Field FieldName { get; set; }
 	}
 
-	public class LatLongDetectorDescriptor<T> : DetectorDescriptorBase<LatLongDetectorDescriptor<T>, IGeographicDetector>, IGeographicDetector where T : class
+	public class LatLongDetectorDescriptor<T> : DetectorDescriptorBase<LatLongDetectorDescriptor<T>, IGeographicDetector>, IGeographicDetector
+		where T : class
 	{
+		[Obsolete("Use parameterless constructor")]
+		public LatLongDetectorDescriptor(string function) : base(function) { }
+
+		public LatLongDetectorDescriptor() : base(GeographicFunction.LatLong.GetStringValue()) { }
+
 		Field IByFieldNameDetector.ByFieldName { get; set; }
+		Field IFieldNameDetector.FieldName { get; set; }
 		Field IOverFieldNameDetector.OverFieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
-		Field IFieldNameDetector.FieldName { get; set; }
-
-		[Obsolete("Use parameterless constructor")]
-		public LatLongDetectorDescriptor(string function) : base(function) {}
-
-		public LatLongDetectorDescriptor() : base(GeographicFunction.LatLong.GetStringValue()) {}
-
-		public LatLongDetectorDescriptor<T> FieldName(Field fieldName) => Assign(a => a.FieldName = fieldName);
-
-		public LatLongDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.FieldName = objectPath);
 
 		public LatLongDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(a => a.ByFieldName = byFieldName);
 
 		public LatLongDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.ByFieldName = objectPath);
+
+		public LatLongDetectorDescriptor<T> FieldName(Field fieldName) => Assign(a => a.FieldName = fieldName);
+
+		public LatLongDetectorDescriptor<T> FieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.FieldName = objectPath);
 
 		public LatLongDetectorDescriptor<T> OverFieldName(Field overFieldName) => Assign(a => a.OverFieldName = overFieldName);
 
@@ -63,6 +63,7 @@ namespace Nest
 
 		public LatLongDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(a => a.PartitionFieldName = partitionFieldName);
 
-		public LatLongDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.PartitionFieldName = objectPath);
+		public LatLongDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+			Assign(a => a.PartitionFieldName = objectPath);
 	}
 }

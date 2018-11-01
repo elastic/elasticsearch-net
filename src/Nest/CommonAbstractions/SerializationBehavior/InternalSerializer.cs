@@ -11,45 +11,59 @@ namespace Nest
 	/// <summary>The built in internal serializer that the high level client NEST uses.</summary>
 	internal class InternalSerializer : IElasticsearchSerializer
 	{
-		// Default buffer size of StreamWriter, which is private :(
 		internal const int DefaultBufferSize = 1024;
-
-		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
-
 		private static readonly Task CompletedTask = Task.CompletedTask;
-
+		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 		private readonly JsonSerializer _indentedSerializer;
-		internal JsonSerializer Serializer { get; }
 
-		protected IConnectionSettingsValues Settings { get; }
-
-		/// <summary> Resolves JsonContracts for types </summary>
-		private ElasticContractResolver ContractResolver { get; }
+		public InternalSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
 
 		/// <summary>
-		/// The size of the buffer to use when writing the serialized request
-		/// to the request stream
+		///     this constructor is only here for stateful (de)serialization
+		/// </summary>
+		protected internal InternalSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter)
+		{
+			Settings = settings;
+			var piggyBackState = statefulConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = statefulConverter };
+			ContractResolver = new ElasticContractResolver(Settings) { PiggyBackState = piggyBackState };
+
+			var collapsed = CreateSettings(SerializationFormatting.None);
+			var indented = CreateSettings(SerializationFormatting.Indented);
+
+			Serializer = JsonSerializer.Create(collapsed);
+			_indentedSerializer = JsonSerializer.Create(indented);
+		}
+
+		/// <summary>
+		///     The size of the buffer to use when writing the serialized request
+		///     to the request stream
 		/// </summary>
 		// Performance tests as part of https://github.com/elastic/elasticsearch-net/issues/1899 indicate this
 		// to be a good compromise buffer size for performance throughput and bytes allocated.
 		protected virtual int BufferSize => DefaultBufferSize;
 
-		public InternalSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
+		protected IConnectionSettingsValues Settings { get; }
+		internal JsonSerializer Serializer { get; }
 
-		/// <summary>
-		/// this constructor is only here for stateful (de)serialization
-		/// </summary>
-		protected internal InternalSerializer(IConnectionSettingsValues settings, JsonConverter statefulConverter)
+		/// <summary> Resolves JsonContracts for types </summary>
+		private ElasticContractResolver ContractResolver { get; }
+
+		public T Deserialize<T>(Stream stream)
 		{
-			this.Settings = settings;
-			var piggyBackState = statefulConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = statefulConverter };
-			this.ContractResolver = new ElasticContractResolver(this.Settings) { PiggyBackState = piggyBackState };
+			if (stream == null || stream.CanSeek && stream.Length == 0) return default(T);
 
-			var collapsed = this.CreateSettings(SerializationFormatting.None);
-			var indented = this.CreateSettings(SerializationFormatting.Indented);
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+				return Serializer.Deserialize<T>(jsonTextReader);
+		}
 
-			this.Serializer = JsonSerializer.Create(collapsed);
-			this._indentedSerializer = JsonSerializer.Create(indented);
+		public object Deserialize(Type type, Stream stream)
+		{
+			if (stream == null || stream.CanSeek && stream.Length == 0) return type.DefaultValue();
+
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+				return Serializer.Deserialize(jsonTextReader, type);
 		}
 
 		public virtual void Serialize<T>(T data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
@@ -71,42 +85,28 @@ namespace Nest
 		}
 
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
-			CancellationToken cancellationToken = default(CancellationToken))
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 		{
 			//This makes no sense now but we need the async method on the interface in 6.x so we can start swapping this out
 			//for an implementation that does make sense without having to wait for 7.x
-			this.Serialize(data, stream, formatting);
+			Serialize(data, stream, formatting);
 			return CompletedTask;
 		}
 
-		public T Deserialize<T>(JsonReader reader) => this.Serializer.Deserialize<T>(reader);
+		public T Deserialize<T>(JsonReader reader) => Serializer.Deserialize<T>(reader);
 
-		public object Deserialize(JsonReader reader, Type objectType) => this.Serializer.Deserialize(reader, objectType);
-
-		public T Deserialize<T>(Stream stream)
-		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return default(T);
-			using (var streamReader = new StreamReader(stream))
-			using (var jsonTextReader = new JsonTextReader(streamReader))
-				return this.Serializer.Deserialize<T>(jsonTextReader);
-		}
-
-		public object Deserialize(Type type, Stream stream)
-		{
-			if (stream == null || stream.CanSeek && stream.Length == 0) return type.DefaultValue();
-			using (var streamReader = new StreamReader(stream))
-			using (var jsonTextReader = new JsonTextReader(streamReader))
-				return this.Serializer.Deserialize(jsonTextReader, type);
-		}
-
+		public object Deserialize(JsonReader reader, Type objectType) => Serializer.Deserialize(reader, objectType);
+		// Default buffer size of StreamWriter, which is private :(
 #pragma warning disable 1998 // we know this is not an async operation
 		public async Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 #pragma warning restore 1998
 		{
 			if (stream == null || stream.CanSeek && stream.Length == 0) return default(T);
-            using (var sr = new StreamReader(stream))
-            using (var jtr = new JsonTextReader(sr))
-				return this.Serializer.Deserialize<T>(jtr);
+
+			using (var sr = new StreamReader(stream))
+			using (var jtr = new JsonTextReader(sr))
+				return Serializer.Deserialize<T>(jtr);
 		}
 
 #pragma warning disable 1998 // we know this is not an async operation
@@ -114,9 +114,10 @@ namespace Nest
 #pragma warning restore 1998
 		{
 			if (stream == null || stream.CanSeek && stream.Length == 0) return type.DefaultValue();
-            using (var sr = new StreamReader(stream))
-            using (var jtr = new JsonTextReader(sr))
-				return this.Serializer.Deserialize(jtr, type);
+
+			using (var sr = new StreamReader(stream))
+			using (var jtr = new JsonTextReader(sr))
+				return Serializer.Deserialize(jtr, type);
 		}
 
 		private JsonSerializerSettings CreateSettings(SerializationFormatting formatting)
@@ -124,7 +125,7 @@ namespace Nest
 			var settings = new JsonSerializerSettings
 			{
 				Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None,
-				ContractResolver = this.ContractResolver,
+				ContractResolver = ContractResolver,
 				DefaultValueHandling = DefaultValueHandling.Include,
 				NullValueHandling = NullValueHandling.Ignore
 			};

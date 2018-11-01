@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Nest
 {
-	using Containers = System.Collections.Generic.List<QueryContainer>;
+	using Containers = List<QueryContainer>;
+
 	internal static class BoolQueryOrExtensions
 	{
 		internal static QueryContainer CombineAsShould(this QueryContainer leftContainer, QueryContainer rightContainer)
@@ -27,8 +26,21 @@ namespace Nest
 			var shouldClauses = lq.EagerConcat(rq);
 			return CreateShouldContainer(shouldClauses);
 		}
+
+		private static bool CanMergeShould(this IQueryContainer container) => container.Bool.CanMergeShould();
+
+		private static bool CanMergeShould(this IBoolQuery boolQuery) =>
+			boolQuery != null && boolQuery.IsWritable && !boolQuery.Locked && boolQuery.HasOnlyShouldClauses();
+
+		private static QueryContainer CreateShouldContainer(List<QueryContainer> shouldClauses) =>
+			new BoolQuery
+			{
+				Should = shouldClauses.ToListOrNullIfEmpty()
+			};
+
 		private static bool TryFlattenShould(
-			QueryContainer leftContainer, QueryContainer rightContainer, IBoolQuery leftBool, IBoolQuery rightBool, out QueryContainer c)
+			QueryContainer leftContainer, QueryContainer rightContainer, IBoolQuery leftBool, IBoolQuery rightBool, out QueryContainer c
+		)
 		{
 			c = null;
 			var leftCanMerge = leftContainer.CanMergeShould();
@@ -46,20 +58,8 @@ namespace Nest
 				rightBool.Should = rightBool.Should.AddIfNotNull(leftContainer);
 				c = rightContainer;
 			}
+
 			return c != null;
-
 		}
-
-		private static bool CanMergeShould(this IQueryContainer container) => container.Bool.CanMergeShould();
-
-		private static bool CanMergeShould(this IBoolQuery boolQuery) =>
-			boolQuery != null && boolQuery.IsWritable && !boolQuery.Locked && boolQuery.HasOnlyShouldClauses();
-
-		private static QueryContainer CreateShouldContainer(List<QueryContainer> shouldClauses) =>
-			new BoolQuery
-			{
-				Should = shouldClauses.ToListOrNullIfEmpty()
-			};
-
 	}
 }

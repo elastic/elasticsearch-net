@@ -23,8 +23,10 @@ namespace Nest
 			reader.Read();
 			if (reader.TokenType != JsonToken.StartObject)
 				return false;
+
 			var dict = serializer.Deserialize<Dictionary<string, string>>(reader);
 			if (dict == null) return false;
+
 			error.Headers = new ReadOnlyDictionary<string, string>(dict);
 			return true;
 		}
@@ -44,6 +46,7 @@ namespace Nest
 				if (rootCause != null)
 					rootCauses.Add(rootCause);
 			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndArray);
+
 			error.RootCause = rootCauses;
 			return true;
 		}

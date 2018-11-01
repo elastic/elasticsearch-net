@@ -5,24 +5,24 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	/// <summary>
-	/// Retrieve job results for one or more buckets.
+	///     Retrieve job results for one or more buckets.
 	/// </summary>
 	public partial interface IGetBucketsRequest
 	{
 		/// <summary>
-		/// Returns buckets with anomaly scores higher than this value.
+		///     Returns buckets with anomaly scores higher than this value.
 		/// </summary>
 		[JsonProperty("anomaly_score")]
 		double? AnomalyScore { get; set; }
 
 		/// <summary>
-		/// If true, the buckets are sorted in descending order.
+		///     If true, the buckets are sorted in descending order.
 		/// </summary>
 		[JsonProperty("desc")]
 		bool? Descending { get; set; }
 
 		/// <summary>
-		/// Returns buckets with timestamps earlier than this time.
+		///     Returns buckets with timestamps earlier than this time.
 		/// </summary>
 		[JsonProperty("end")]
 		// Forced to prevent override, ML API always expects ISO8601 format
@@ -30,31 +30,31 @@ namespace Nest
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
-		/// If true, the output excludes interim results. By default, interim results are included.
+		///     If true, the output excludes interim results. By default, interim results are included.
 		/// </summary>
 		[JsonProperty("exclude_interim")]
 		bool? ExcludeInterim { get; set; }
 
 		/// <summary>
-		/// If true, the output includes anomaly records.
+		///     If true, the output includes anomaly records.
 		/// </summary>
 		[JsonProperty("expand")]
 		bool? Expand { get; set; }
 
 		/// <summary>
-		/// Specifies pagination for the buckets
+		///     Specifies pagination for the buckets
 		/// </summary>
 		[JsonProperty("page")]
 		IPage Page { get; set; }
 
 		/// <summary>
-		/// Specifies the sort field for the requested buckets. By default, the buckets are sorted by the timestamp field.
+		///     Specifies the sort field for the requested buckets. By default, the buckets are sorted by the timestamp field.
 		/// </summary>
 		[JsonProperty("sort")]
 		Field Sort { get; set; }
 
 		/// <summary>
-		/// Returns buckets with timestamps after this time.
+		///     Returns buckets with timestamps after this time.
 		/// </summary>
 		[JsonProperty("start")]
 		// Forced to prevent override, ML API always expects ISO8601 format
@@ -62,7 +62,7 @@ namespace Nest
 		DateTimeOffset? Start { get; set; }
 
 		/// <summary>
-		/// Returns buckets with matching timestamps.
+		///     Returns buckets with matching timestamps.
 		/// </summary>
 		[JsonProperty("timestamp")]
 		// Forced to prevent override, ML API always expects ISO8601 format
@@ -75,20 +75,28 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public double? AnomalyScore { get; set; }
+
 		/// <inheritdoc />
 		public bool? Descending { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? End { get; set; }
+
 		/// <inheritdoc />
 		public bool? ExcludeInterim { get; set; }
+
 		/// <inheritdoc />
 		public bool? Expand { get; set; }
+
 		/// <inheritdoc />
 		public IPage Page { get; set; }
+
 		/// <inheritdoc />
 		public Field Sort { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? Start { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? Timestamp { get; set; }
 	}

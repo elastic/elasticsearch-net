@@ -38,6 +38,7 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			if (!(value is IMovingAverageAggregation movingAvg)) return;
+
 			writer.WriteStartObject();
 			writer.WritePropertyName("buckets_path");
 			serializer.Serialize(writer, movingAvg.BucketsPath);
@@ -46,26 +47,31 @@ namespace Nest
 				writer.WritePropertyName("gap_policy");
 				writer.WriteValue(movingAvg.GapPolicy.GetStringValue());
 			}
+
 			if (!movingAvg.Format.IsNullOrEmpty())
 			{
 				writer.WritePropertyName(movingAvg.Format);
 				writer.WriteValue(movingAvg.Format);
 			}
+
 			if (movingAvg.Window != null)
 			{
 				writer.WritePropertyName("window");
 				writer.WriteValue(movingAvg.Window);
 			}
+
 			if (movingAvg.Minimize != null)
 			{
 				writer.WritePropertyName("minimize");
 				writer.WriteValue(movingAvg.Minimize);
 			}
+
 			if (movingAvg.Predict != null)
 			{
 				writer.WritePropertyName("predict");
 				writer.WriteValue(movingAvg.Predict);
 			}
+
 			if (movingAvg.Model != null)
 			{
 				writer.WritePropertyName("model");
@@ -73,15 +79,8 @@ namespace Nest
 				writer.WritePropertyName("settings");
 				serializer.Serialize(writer, movingAvg.Model);
 			}
-			writer.WriteEndObject();
-		}
 
-		private T GetOrDefault<T>(string key, Dictionary<string, JToken> properties)
-		{
-			if (!properties.ContainsKey(key)) return default(T);
-			return properties[key].ToObject<T>();
-			//TODO decide if this works too for .NET core, looks like it
-			//return (T)Convert.ChangeType(properties[key], typeof(T));
+			writer.WriteEndObject();
 		}
 
 		private GapPolicy? GetGapPolicy(Dictionary<string, JToken> properties)
@@ -90,6 +89,7 @@ namespace Nest
 			if (value.IsNullOrEmpty()) return null;
 			if (value == "insert_zeros") return GapPolicy.InsertZeros;
 			if (value == "skip") return GapPolicy.Skip;
+
 			return null;
 		}
 
@@ -111,7 +111,18 @@ namespace Nest
 				return settings.ToObject<HoltLinearModel>();
 			else if (name == "holt_winters")
 				return settings.ToObject<HoltWintersModel>();
+
 			return null;
+		}
+
+		private T GetOrDefault<T>(string key, Dictionary<string, JToken> properties)
+		{
+			if (!properties.ContainsKey(key)) return default(T);
+
+			return properties[key].ToObject<T>();
+
+			//TODO decide if this works too for .NET core, looks like it
+			//return (T)Convert.ChangeType(properties[key], typeof(T));
 		}
 	}
 }

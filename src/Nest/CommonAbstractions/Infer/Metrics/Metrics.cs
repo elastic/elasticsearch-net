@@ -5,32 +5,43 @@ namespace Nest
 {
 	public class Metrics : IEquatable<Metrics>, IUrlParameter
 	{
-		private readonly Enum _enumValue;
-		internal Enum Value => _enumValue;
+		internal Metrics(IndicesStatsMetric metric) => Value = metric;
 
-		public string GetString(IConnectionConfigurationValues settings) => this._enumValue.GetStringValue();
-		internal Metrics(IndicesStatsMetric metric) { _enumValue = metric; }
-		internal Metrics(NodesStatsMetric metric){ _enumValue = metric; }
-		internal Metrics(NodesInfoMetric metric){ _enumValue = metric; }
-		internal Metrics(ClusterStateMetric metric){ _enumValue = metric; }
-		internal Metrics(WatcherStatsMetric metric){ _enumValue = metric; }
-		internal Metrics(NodesUsageMetric metric){ _enumValue = metric; }
+		internal Metrics(NodesStatsMetric metric) => Value = metric;
 
-		public static implicit operator Metrics(IndicesStatsMetric metric) => new Metrics(metric);
-		public static implicit operator Metrics(NodesStatsMetric metric) => new Metrics(metric);
-		public static implicit operator Metrics(NodesInfoMetric metric) => new Metrics(metric);
-		public static implicit operator Metrics(ClusterStateMetric metric) => new Metrics(metric);
-		public static implicit operator Metrics(WatcherStatsMetric metric) => new Metrics(metric);
-		public static implicit operator Metrics(NodesUsageMetric metric) => new Metrics(metric);
+		internal Metrics(NodesInfoMetric metric) => Value = metric;
 
-		public bool Equals(Enum other) => this.Value.Equals(other);
-		public bool Equals(Metrics other) => this.Value.Equals(other.Value);
+		internal Metrics(ClusterStateMetric metric) => Value = metric;
+
+		internal Metrics(WatcherStatsMetric metric) => Value = metric;
+
+		internal Metrics(NodesUsageMetric metric) => Value = metric;
+
+		internal Enum Value { get; }
+
+		public bool Equals(Metrics other) => Value.Equals(other.Value);
+
+		public string GetString(IConnectionConfigurationValues settings) => Value.GetStringValue();
+
+		public bool Equals(Enum other) => Value.Equals(other);
 
 		public override bool Equals(object obj) => obj is Enum e ? Equals(e) : obj is Metrics m && Equals(m.Value);
 
-		public override int GetHashCode() => (_enumValue != null ? _enumValue.GetHashCode() : 0);
+		public override int GetHashCode() => (Value != null ? Value.GetHashCode() : 0);
 
 		public static bool operator ==(Metrics left, Metrics right) => Equals(left, right);
+
+		public static implicit operator Metrics(IndicesStatsMetric metric) => new Metrics(metric);
+
+		public static implicit operator Metrics(NodesStatsMetric metric) => new Metrics(metric);
+
+		public static implicit operator Metrics(NodesInfoMetric metric) => new Metrics(metric);
+
+		public static implicit operator Metrics(ClusterStateMetric metric) => new Metrics(metric);
+
+		public static implicit operator Metrics(WatcherStatsMetric metric) => new Metrics(metric);
+
+		public static implicit operator Metrics(NodesUsageMetric metric) => new Metrics(metric);
 
 		public static bool operator !=(Metrics left, Metrics right) => !Equals(left, right);
 	}

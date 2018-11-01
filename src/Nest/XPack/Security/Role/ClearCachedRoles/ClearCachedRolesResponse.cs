@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -11,7 +9,7 @@ namespace Nest
 		string ClusterName { get; }
 
 		[JsonProperty("nodes")]
-		IReadOnlyDictionary<string, SecurityNode>  Nodes { get; }
+		IReadOnlyDictionary<string, SecurityNode> Nodes { get; }
 	}
 
 	public class ClearCachedRolesResponse : ResponseBase, IClearCachedRolesResponse

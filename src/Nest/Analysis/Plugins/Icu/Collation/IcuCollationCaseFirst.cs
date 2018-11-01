@@ -5,13 +5,13 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	/// <summary>
-	/// Sets the alternate handling for strength quaternary to be either shifted or non-ignorable.
-	/// Which boils down to ignoring punctuation and whitespace.
+	///     Sets the alternate handling for strength quaternary to be either shifted or non-ignorable.
+	///     Which boils down to ignoring punctuation and whitespace.
 	/// </summary>
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum IcuCollationCaseFirst
 	{
-		[EnumMember(Value="lower")] Lower,
-		[EnumMember(Value="upper")] Upper
+		[EnumMember(Value = "lower")] Lower,
+		[EnumMember(Value = "upper")] Upper
 	}
 }

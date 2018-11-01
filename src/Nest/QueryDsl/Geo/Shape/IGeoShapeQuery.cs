@@ -5,50 +5,52 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof (CompositeJsonConverter<GeoShapeQueryJsonConverter, GeoShapeQueryFieldNameConverter>))]
+	[JsonConverter(typeof(CompositeJsonConverter<GeoShapeQueryJsonConverter, GeoShapeQueryFieldNameConverter>))]
 	public interface IGeoShapeQuery : IFieldNameQuery
 	{
 		/// <summary>
-		/// Controls the spatial relation operator to use at search time.
-		/// </summary>
-		[JsonProperty("relation")]
-		GeoShapeRelation? Relation { get; set; }
-
-		/// <summary>
-		/// Will ignore an unmapped field and will not match any documents for this query.
-		/// This can be useful when querying multiple indexes which might have different mappings.
+		///     Will ignore an unmapped field and will not match any documents for this query.
+		///     This can be useful when querying multiple indexes which might have different mappings.
 		/// </summary>
 		[JsonProperty("ignore_unmapped")]
 		bool? IgnoreUnmapped { get; set; }
 
 		/// <summary>
-		/// The geo shape to search with
-		/// </summary>
-		[JsonProperty("shape")]
-		IGeoShape Shape { get; set; }
-
-		/// <summary>
-		/// Indexed geo shape to search with
+		///     Indexed geo shape to search with
 		/// </summary>
 		[JsonProperty("indexed_shape")]
 		IFieldLookup IndexedShape { get; set; }
+
+		/// <summary>
+		///     Controls the spatial relation operator to use at search time.
+		/// </summary>
+		[JsonProperty("relation")]
+		GeoShapeRelation? Relation { get; set; }
+
+		/// <summary>
+		///     The geo shape to search with
+		/// </summary>
+		[JsonProperty("shape")]
+		IGeoShape Shape { get; set; }
 	}
 
 	public class GeoShapeQuery : FieldNameQueryBase, IGeoShapeQuery
 	{
 		/// <inheritdoc />
-		public GeoShapeRelation? Relation { get; set; }
-
-		/// <inheritdoc />
 		public bool? IgnoreUnmapped { get; set; }
-
-		/// <inheritdoc />
-		public IGeoShape Shape { get; set; }
 
 		/// <inheritdoc />
 		public IFieldLookup IndexedShape { get; set; }
 
+		/// <inheritdoc />
+		public GeoShapeRelation? Relation { get; set; }
+
+		/// <inheritdoc />
+		public IGeoShape Shape { get; set; }
+
 		protected override bool Conditionless => IsConditionless(this);
+
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.GeoShape = this;
 
 		internal static bool IsConditionless(IGeoShapeQuery q)
 		{
@@ -81,38 +83,35 @@ namespace Nest
 					return true;
 			}
 		}
-
-		internal override void InternalWrapInContainer(IQueryContainer container) => container.GeoShape = this;
 	}
 
 	public class GeoShapeQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<GeoShapeQueryDescriptor<T>, IGeoShapeQuery, T>, IGeoShapeQuery
 		where T : class
 	{
-		GeoShapeRelation? IGeoShapeQuery.Relation { get; set; }
-		bool? IGeoShapeQuery.IgnoreUnmapped { get; set; }
-		IGeoShape IGeoShapeQuery.Shape { get; set; }
-		IFieldLookup IGeoShapeQuery.IndexedShape { get; set; }
-
 		protected override bool Conditionless => GeoShapeQuery.IsConditionless(this);
+		bool? IGeoShapeQuery.IgnoreUnmapped { get; set; }
+		IFieldLookup IGeoShapeQuery.IndexedShape { get; set; }
+		GeoShapeRelation? IGeoShapeQuery.Relation { get; set; }
+		IGeoShape IGeoShapeQuery.Shape { get; set; }
 
-		/// <inheritdoc cref="IGeoShapeQuery.Relation"/>
-		public GeoShapeQueryDescriptor<T> Relation(GeoShapeRelation? relation) => Assign(a => a.Relation = relation);
-
-		/// <inheritdoc cref="IGeoShapeQuery.IgnoreUnmapped"/>
+		/// <inheritdoc cref="IGeoShapeQuery.IgnoreUnmapped" />
 		public GeoShapeQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = true) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 
-		/// <inheritdoc cref="IGeoShapeQuery.Shape"/>
-		public GeoShapeQueryDescriptor<T> Shape(Func<GeoShapeDescriptor, IGeoShape> selector) =>
-			Assign(a => a.Shape = selector?.Invoke(new GeoShapeDescriptor()));
-
-		/// <inheritdoc cref="IGeoShapeQuery.IndexedShape"/>
+		/// <inheritdoc cref="IGeoShapeQuery.IndexedShape" />
 		public GeoShapeQueryDescriptor<T> IndexedShape(Func<FieldLookupDescriptor<T>, IFieldLookup> selector) =>
 			Assign(a => a.IndexedShape = selector?.Invoke(new FieldLookupDescriptor<T>()));
+
+		/// <inheritdoc cref="IGeoShapeQuery.Relation" />
+		public GeoShapeQueryDescriptor<T> Relation(GeoShapeRelation? relation) => Assign(a => a.Relation = relation);
+
+		/// <inheritdoc cref="IGeoShapeQuery.Shape" />
+		public GeoShapeQueryDescriptor<T> Shape(Func<GeoShapeDescriptor, IGeoShape> selector) =>
+			Assign(a => a.Shape = selector?.Invoke(new GeoShapeDescriptor()));
 	}
 
 	/// <summary>
-	/// Descriptor for building a <see cref="IGeoShape"/>
+	///     Descriptor for building a <see cref="IGeoShape" />
 	/// </summary>
 	public class GeoShapeDescriptor : DescriptorBase<GeoShapeDescriptor, IDescriptor>
 	{
@@ -120,7 +119,7 @@ namespace Nest
 			new CircleGeoShape(coordinate, radius);
 
 		public IGeoShape Envelope(GeoCoordinate topLeftCoordinate, GeoCoordinate bottomRightCoordinate) =>
-			new EnvelopeGeoShape(new [] { topLeftCoordinate, bottomRightCoordinate });
+			new EnvelopeGeoShape(new[] { topLeftCoordinate, bottomRightCoordinate });
 
 		public IGeoShape Envelope(IEnumerable<GeoCoordinate> coordinates) =>
 			new EnvelopeGeoShape(coordinates);
@@ -143,24 +142,24 @@ namespace Nest
 		public IGeoShape MultiLineString(params IEnumerable<GeoCoordinate>[] coordinates) =>
 			new MultiLineStringGeoShape(coordinates);
 
-		public IGeoShape Point(GeoCoordinate coordinates) => new PointGeoShape(coordinates);
-
 		public IGeoShape MultiPoint(IEnumerable<GeoCoordinate> coordinates) =>
 			new MultiPointGeoShape(coordinates);
 
 		public IGeoShape MultiPoint(params GeoCoordinate[] coordinates) =>
 			new MultiPointGeoShape(coordinates);
 
-		public IGeoShape Polygon(IEnumerable<IEnumerable<GeoCoordinate>> coordinates) =>
-			new PolygonGeoShape(coordinates);
-
-		public IGeoShape Polygon(params IEnumerable<GeoCoordinate>[] coordinates) =>
-			new PolygonGeoShape(coordinates);
-
 		public IGeoShape MultiPolygon(IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> coordinates) =>
 			new MultiPolygonGeoShape(coordinates);
 
 		public IGeoShape MultiPolygon(params IEnumerable<IEnumerable<GeoCoordinate>>[] coordinates) =>
 			new MultiPolygonGeoShape(coordinates);
+
+		public IGeoShape Point(GeoCoordinate coordinates) => new PointGeoShape(coordinates);
+
+		public IGeoShape Polygon(IEnumerable<IEnumerable<GeoCoordinate>> coordinates) =>
+			new PolygonGeoShape(coordinates);
+
+		public IGeoShape Polygon(params IEnumerable<GeoCoordinate>[] coordinates) =>
+			new PolygonGeoShape(coordinates);
 	}
 }

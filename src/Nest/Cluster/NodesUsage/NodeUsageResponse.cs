@@ -16,6 +16,7 @@ namespace Nest
 		public string ClusterName { get; internal set; }
 
 		[JsonProperty("nodes")]
-		public IReadOnlyDictionary<string, NodeUsageInformation> Nodes { get; internal set; } = EmptyReadOnly<string, NodeUsageInformation>.Dictionary;
+		public IReadOnlyDictionary<string, NodeUsageInformation> Nodes { get; internal set; } =
+			EmptyReadOnly<string, NodeUsageInformation>.Dictionary;
 	}
 }

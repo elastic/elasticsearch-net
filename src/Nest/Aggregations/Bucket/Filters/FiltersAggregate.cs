@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Nest
@@ -25,13 +24,13 @@ namespace Nest
 	public class FiltersAggregate : BucketAggregateBase
 	{
 		public FiltersAggregate() : base(EmptyReadOnly<string, IAggregate>.Dictionary) { }
+
 		public FiltersAggregate(IReadOnlyDictionary<string, IAggregate> aggregations) : base(aggregations) { }
-
-		public SingleBucketAggregate NamedBucket(string key) => this.Global(key);
-
-		public IList<FiltersBucketItem> AnonymousBuckets() => this.Buckets?.ToList();
 
 		public IReadOnlyCollection<FiltersBucketItem> Buckets { get; set; } = EmptyReadOnly<FiltersBucketItem>.Collection;
 
+		public IList<FiltersBucketItem> AnonymousBuckets() => Buckets?.ToList();
+
+		public SingleBucketAggregate NamedBucket(string key) => Global(key);
 	}
 }

@@ -5,22 +5,22 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Sorts the elements of an array ascending or descending. Homogeneous arrays of numbers
-	/// will be sorted numerically, while arrays of strings or heterogeneous arrays
-	///  of strings and numbers will be sorted lexicographically.
+	///     Sorts the elements of an array ascending or descending. Homogeneous arrays of numbers
+	///     will be sorted numerically, while arrays of strings or heterogeneous arrays
+	///     of strings and numbers will be sorted lexicographically.
 	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ProcessorJsonConverter<SortProcessor>))]
 	public interface ISortProcessor : IProcessor
 	{
 		/// <summary>
-		/// The field to be sorted
+		///     The field to be sorted
 		/// </summary>
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
 		/// <summary>
-		/// The sort order to use. Default is ascending.
+		///     The sort order to use. Default is ascending.
 		/// </summary>
 		[JsonProperty("order")]
 		SortOrder? Order { get; set; }
@@ -28,16 +28,15 @@ namespace Nest
 
 	public class SortProcessor : ProcessorBase, ISortProcessor
 	{
-		protected override string Name => "sort";
-
 		public Field Field { get; set; }
 
 		public SortOrder? Order { get; set; }
+		protected override string Name => "sort";
 	}
 
 	public class SortProcessorDescriptor<T>
-	: ProcessorDescriptorBase<SortProcessorDescriptor<T>, ISortProcessor>, ISortProcessor
-	where T : class
+		: ProcessorDescriptorBase<SortProcessorDescriptor<T>, ISortProcessor>, ISortProcessor
+		where T : class
 	{
 		protected override string Name => "sort";
 

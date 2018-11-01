@@ -6,9 +6,10 @@ namespace Nest
 {
 	internal class CharFilterJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => true;
-		public override bool CanWrite => false;
 		public override bool CanRead => true;
+		public override bool CanWrite => false;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -18,7 +19,7 @@ namespace Nest
 			if (typeProperty == null) return null;
 
 			var typePropertyValue = typeProperty.Value.ToString();
-			switch(typePropertyValue)
+			switch (typePropertyValue)
 			{
 				case "html_strip": return o.ToObject<HtmlStripCharFilter>(ElasticContractResolver.Empty);
 				case "mapping": return o.ToObject<MappingCharFilter>(ElasticContractResolver.Empty);
@@ -26,12 +27,10 @@ namespace Nest
 				case "kuromoji_iteration_mark": return o.ToObject<KuromojiIterationMarkCharFilter>(ElasticContractResolver.Empty);
 				case "icu_normalizer": return o.ToObject<IcuNormalizationCharFilter>(ElasticContractResolver.Empty);
 			}
+
 			return null;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 	}
 }

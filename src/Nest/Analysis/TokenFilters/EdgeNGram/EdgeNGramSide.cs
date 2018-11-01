@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "front")]
 		Front,
+
 		[EnumMember(Value = "back")]
 		Back,
 	}

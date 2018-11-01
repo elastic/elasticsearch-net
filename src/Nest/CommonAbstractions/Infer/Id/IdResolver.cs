@@ -6,30 +6,15 @@ namespace Nest
 {
 	public class IdResolver
 	{
+		private static readonly ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+
+		private static readonly MethodInfo MakeDelegateMethodInfo =
+			typeof(IdResolver).GetMethod(nameof(MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
+
 		private readonly IConnectionSettingsValues _connectionSettings;
 		private readonly ConcurrentDictionary<Type, Func<object, string>> LocalIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
-		private static readonly ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
-		private static readonly MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod(nameof(IdResolver.MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
 
-		PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName)
-			=> type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-
-		public IdResolver(IConnectionSettingsValues connectionSettings)
-		{
-			_connectionSettings = connectionSettings;
-		}
-
-		internal Func<T, string> CreateIdSelector<T>() where T : class
-		{
-			Func<T, string> idSelector = this.Resolve;
-			return idSelector;
-		}
-
-		internal static Func<object, object> MakeDelegate<T, TReturn>(MethodInfo @get)
-		{
-			var f = (Func<T, TReturn>)@get.CreateDelegate(typeof(Func<T, TReturn>));
-			return t => f((T)t);
-		}
+		public IdResolver(IConnectionSettingsValues connectionSettings) => _connectionSettings = connectionSettings;
 
 		public string Resolve<T>(T @object) => @object == null ? null : Resolve(@object.GetType(), @object);
 
@@ -37,7 +22,7 @@ namespace Nest
 		{
 			if (type == null || @object == null) return null;
 
-			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out _);
+			var preferLocal = _connectionSettings.IdProperties.TryGetValue(type, out _);
 
 			if (LocalIdDelegates.TryGetValue(type, out var cachedLookup))
 				return cachedLookup(@object);
@@ -46,10 +31,8 @@ namespace Nest
 				return cachedLookup(@object);
 
 			var idProperty = GetInferredId(type);
-			if (idProperty == null)
-			{
-				return null;
-			}
+			if (idProperty == null) return null;
+
 			var getMethod = idProperty.GetGetMethod();
 			var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
 			var func = (Func<object, object>)generic.Invoke(null, new object[] { getMethod });
@@ -65,13 +48,25 @@ namespace Nest
 			return cachedLookup(@object);
 		}
 
+		internal Func<T, string> CreateIdSelector<T>() where T : class
+		{
+			Func<T, string> idSelector = Resolve;
+			return idSelector;
+		}
+
+		internal static Func<object, object> MakeDelegate<T, TReturn>(MethodInfo @get)
+		{
+			var f = (Func<T, TReturn>)@get.CreateDelegate(typeof(Func<T, TReturn>));
+			return t => f((T)t);
+		}
+
 
 		private PropertyInfo GetInferredId(Type type)
 		{
 			// if the type specifies through ElasticAttribute what the id prop is
 			// use that no matter what
 
-			this._connectionSettings.IdProperties.TryGetValue(type, out var propertyName);
+			_connectionSettings.IdProperties.TryGetValue(type, out var propertyName);
 			if (!propertyName.IsNullOrEmpty())
 				return GetPropertyCaseInsensitive(type, propertyName);
 
@@ -80,5 +75,8 @@ namespace Nest
 
 			return GetPropertyCaseInsensitive(type, propertyName);
 		}
+
+		private PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName)
+			=> type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
 	}
 }

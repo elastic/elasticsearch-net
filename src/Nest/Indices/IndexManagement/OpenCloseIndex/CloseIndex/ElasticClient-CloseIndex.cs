@@ -1,62 +1,64 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// The open and close index APIs allow to close an index, and later on opening it.
-		/// A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked
-		/// for read/write operations.
-		/// A closed index can be opened which will then go through the normal recovery process.
-		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html</a>
+		///     The open and close index APIs allow to close an index, and later on opening it.
+		///     A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked
+		///     for read/write operations.
+		///     A closed index can be opened which will then go through the normal recovery process.
+		///     <para> </para>
+		///     <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor thata describes the close index operation</param>
 		ICloseIndexResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICloseIndexResponse CloseIndex(ICloseIndexRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<ICloseIndexResponse> CloseIndexAsync(
 			Indices indices,
 			Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null,
-			CancellationToken cancellationToken = default(CancellationToken));
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICloseIndexResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null) =>
-			this.CloseIndex(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)));
+			CloseIndex(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICloseIndexResponse CloseIndex(ICloseIndexRequest request) =>
-			this.Dispatcher.Dispatch<ICloseIndexRequest, CloseIndexRequestParameters, CloseIndexResponse>(
+			Dispatcher.Dispatch<ICloseIndexRequest, CloseIndexRequestParameters, CloseIndexResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesCloseDispatch<CloseIndexResponse>(p)
+				(p, d) => LowLevelDispatch.IndicesCloseDispatch<CloseIndexResponse>(p)
 			);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<ICloseIndexResponse> CloseIndexAsync(
 			Indices indices,
 			Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) => this.CloseIndexAsync(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)), cancellationToken);
+		) => CloseIndexAsync(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<ICloseIndexRequest, CloseIndexRequestParameters, CloseIndexResponse, ICloseIndexResponse>(
+		/// <inheritdoc />
+		public Task<ICloseIndexResponse> CloseIndexAsync(ICloseIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<ICloseIndexRequest, CloseIndexRequestParameters, CloseIndexResponse, ICloseIndexResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.IndicesCloseDispatchAsync<CloseIndexResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.IndicesCloseDispatchAsync<CloseIndexResponse>(p, c)
 			);
 	}
 }

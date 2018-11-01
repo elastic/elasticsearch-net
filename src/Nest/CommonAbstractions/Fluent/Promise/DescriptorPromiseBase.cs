@@ -8,40 +8,41 @@ namespace Nest
 		TValue Value { get; }
 	}
 
-	public abstract class DescriptorPromiseBase<TDescriptor, TValue> : IDescriptor, IPromise<TValue> 
+	public abstract class DescriptorPromiseBase<TDescriptor, TValue> : IDescriptor, IPromise<TValue>
 		where TDescriptor : DescriptorPromiseBase<TDescriptor, TValue>
 		where TValue : class
 	{
 		internal readonly TValue PromisedValue;
+
+		protected DescriptorPromiseBase(TValue instance) => PromisedValue = instance;
+
 		TValue IPromise<TValue>.Value => PromisedValue;
 
-		protected DescriptorPromiseBase(TValue instance) { this.PromisedValue = instance; }
-
-		protected TDescriptor Assign(Action<TValue> assigner)
-		{
-			assigner(this.PromisedValue);
-			return (TDescriptor) this;
-		}
-
 		/// <summary>
-		/// Hides the <see cref="Equals"/> method.
+		///     Hides the <see cref="Equals" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public override bool Equals(object obj) => base.Equals(obj);
 
 		/// <summary>
-		/// Hides the <see cref="GetHashCode"/> method.
+		///     Hides the <see cref="GetHashCode" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public override int GetHashCode() => base.GetHashCode();
 
 		/// <summary>
-		/// Hides the <see cref="ToString"/> method.
+		///     Hides the <see cref="ToString" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public override string ToString() => base.ToString();
+
+		protected TDescriptor Assign(Action<TValue> assigner)
+		{
+			assigner(PromisedValue);
+			return (TDescriptor)this;
+		}
 	}
 }

@@ -10,6 +10,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "+")]
 		Add,
+
 		[EnumMember(Value = "-")]
 		Subtract
 	}
@@ -27,7 +28,6 @@ namespace Nest
 				default:
 					throw new ArgumentOutOfRangeException(nameof(value), value, null);
 			}
-
 		}
 	}
 }

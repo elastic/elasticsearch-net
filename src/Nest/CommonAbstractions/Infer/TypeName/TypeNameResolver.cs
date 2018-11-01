@@ -13,12 +13,12 @@ namespace Nest
 		public TypeNameResolver(IConnectionSettingsValues connectionSettings)
 		{
 			connectionSettings.ThrowIfNull(nameof(connectionSettings));
-			this._connectionSettings = connectionSettings;
+			_connectionSettings = connectionSettings;
 		}
 
-		public string Resolve<T>() where T : class => this.Resolve(typeof(T));
+		public string Resolve<T>() where T : class => Resolve(typeof(T));
 
-		public string Resolve(TypeName t) => t?.Name ?? this.ResolveType(t?.Type);
+		public string Resolve(TypeName t) => t?.Name ?? ResolveType(t?.Type);
 
 		private string ResolveType(Type type)
 		{
@@ -41,10 +41,11 @@ namespace Nest
 				if (dataContract?.Name != null) typeName = dataContract.Name;
 				else
 				{
-					var inferredType =_connectionSettings.DefaultTypeNameInferrer(type);
+					var inferredType = _connectionSettings.DefaultTypeNameInferrer(type);
 					typeName = !inferredType.IsNullOrEmpty() ? inferredType : _connectionSettings.DefaultTypeName;
 				}
 			}
+
 			if (typeName.IsNullOrEmpty()) throw new ArgumentNullException($"{type.FullName} resolved to an empty string or null");
 
 			_typeNames.TryAdd(type, typeName);

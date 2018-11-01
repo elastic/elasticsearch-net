@@ -1,7 +1,7 @@
 ﻿namespace Nest
 {
 	public partial interface IClearCacheRequest { }
-	
+
 	public partial class ClearCacheRequest { }
 
 	[DescriptorFor("IndicesClearCache")]

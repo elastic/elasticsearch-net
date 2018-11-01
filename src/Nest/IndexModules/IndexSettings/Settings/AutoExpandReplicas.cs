@@ -10,13 +10,29 @@ namespace Nest
 		private Union<int?, string> _maxReplicas;
 		private int? _minReplicas;
 
+		public static AutoExpandReplicas Disabled { get; } = new AutoExpandReplicas();
+
 		/// <summary>
-		/// Whether auto expand replicas is enabled
+		///     Whether auto expand replicas is enabled
 		/// </summary>
 		public bool Enabled { get; private set; }
 
 		/// <summary>
-		/// The lower bound of replicas
+		///     The upper bound of replicas. Can be an integer value or a string value of "all"
+		/// </summary>
+		public Union<int?, string> MaxReplicas
+		{
+			get => _maxReplicas;
+			private set
+			{
+				if (value == null && _minReplicas == null) Enabled = false;
+				else Enabled = true;
+				_maxReplicas = value;
+			}
+		}
+
+		/// <summary>
+		///     The lower bound of replicas
 		/// </summary>
 		public int? MinReplicas
 		{
@@ -30,23 +46,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The upper bound of replicas. Can be an integer value or a string value of "all"
-		/// </summary>
-		public Union<int?, string> MaxReplicas
-		{
-			get => _maxReplicas;
-			private set
-			{
-				if (value == null && _minReplicas == null) Enabled = false;
-				else Enabled = true;
-				_maxReplicas = value;
-			}
-		}
-
-		public static AutoExpandReplicas Disabled { get; } = new AutoExpandReplicas();
-
-		/// <summary>
-		/// Creates an <see cref="AutoExpandReplicas"/> with the specified lower and upper bounds of replicas
+		///     Creates an <see cref="AutoExpandReplicas" /> with the specified lower and upper bounds of replicas
 		/// </summary>
 		public static AutoExpandReplicas Create(int minReplicas, int maxReplicas)
 		{
@@ -68,8 +68,8 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Creates an <see cref="AutoExpandReplicas"/> with the specified lower bound of replicas and an
-		/// "all" upper bound of replicas
+		///     Creates an <see cref="AutoExpandReplicas" /> with the specified lower bound of replicas and an
+		///     "all" upper bound of replicas
 		/// </summary>
 		public static AutoExpandReplicas Create(int minReplicas)
 		{
@@ -85,7 +85,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Creates an <see cref="AutoExpandReplicas"/> with the specified lower and upper bounds of replicas
+		///     Creates an <see cref="AutoExpandReplicas" /> with the specified lower and upper bounds of replicas
 		/// </summary>
 		/// <example>0-5</example>
 		/// <example>0-all</example>
@@ -122,6 +122,7 @@ namespace Nest
 		public override string ToString()
 		{
 			if (!Enabled) return "false";
+
 			var maxReplicas = MaxReplicas.Match(i => i.ToString(), s => s);
 			return string.Join("-", MinReplicas, maxReplicas);
 		}
@@ -129,6 +130,18 @@ namespace Nest
 
 	internal class AutoExpandReplicasJsonConverter : JsonConverter
 	{
+		public override bool CanConvert(Type objectType) => true;
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType == JsonToken.Boolean)
+				return AutoExpandReplicas.Disabled;
+			if (reader.TokenType == JsonToken.String)
+				return AutoExpandReplicas.Create((string)reader.Value);
+
+			throw new JsonSerializationException($"Cannot deserialize {typeof(AutoExpandReplicas)} from {reader.TokenType}");
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var autoExpandReplicas = (AutoExpandReplicas)value;
@@ -141,17 +154,5 @@ namespace Nest
 
 			writer.WriteValue(autoExpandReplicas.ToString());
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType == JsonToken.Boolean)
-				return AutoExpandReplicas.Disabled;
-			if (reader.TokenType == JsonToken.String)
-				return AutoExpandReplicas.Create((string)reader.Value);
-
-			throw new JsonSerializationException($"Cannot deserialize {typeof(AutoExpandReplicas)} from {reader.TokenType}");
-		}
-
-		public override bool CanConvert(Type objectType) => true;
 	}
 }

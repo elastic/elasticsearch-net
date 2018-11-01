@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -14,12 +14,9 @@ namespace Nest
 
 	public class ChainTransform : TransformBase, IChainTransform
 	{
-		public ChainTransform() {}
+		public ChainTransform() { }
 
-		public ChainTransform(IEnumerable<TransformContainer> transforms)
-		{
-			this.Transforms = transforms?.ToList();
-		}
+		public ChainTransform(IEnumerable<TransformContainer> transforms) => Transforms = transforms?.ToList();
 
 		public ICollection<TransformContainer> Transforms { get; set; }
 
@@ -30,10 +27,7 @@ namespace Nest
 	{
 		public ChainTransformDescriptor() { }
 
-		public ChainTransformDescriptor(ICollection<TransformContainer> transforms)
-		{
-			Self.Transforms = transforms;
-		}
+		public ChainTransformDescriptor(ICollection<TransformContainer> transforms) => Self.Transforms = transforms;
 
 		ICollection<TransformContainer> IChainTransform.Transforms { get; set; }
 
@@ -48,29 +42,26 @@ namespace Nest
 
 	internal class ChainTransformJsonConverter : JsonConverter
 	{
+		public override bool CanConvert(Type objectType) => true;
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType != JsonToken.StartArray) return null;
+
+			var transforms = serializer.Deserialize<ICollection<TransformContainer>>(reader);
+			return new ChainTransform(transforms);
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			writer.WriteStartArray();
 			var chainTransform = (IChainTransform)value;
 
 			if (chainTransform != null)
-			{
 				foreach (var transform in chainTransform.Transforms)
-				{
 					serializer.Serialize(writer, transform);
-				}
-			}
 
 			writer.WriteEndArray();
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.StartArray) return null;
-			var transforms = serializer.Deserialize<ICollection<TransformContainer>>(reader);
-			return new ChainTransform(transforms);
-		}
-
-		public override bool CanConvert(Type objectType) => true;
 	}
 }

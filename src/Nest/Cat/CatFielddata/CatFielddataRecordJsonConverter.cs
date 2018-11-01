@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -8,13 +7,11 @@ namespace Nest
 	{
 		public override bool CanWrite => false;
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
+		public override bool CanConvert(Type objectType) => objectType == typeof(CatFielddataRecord);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-										JsonSerializer serializer)
+			JsonSerializer serializer
+		)
 		{
 			var record = new CatFielddataRecord();
 			while (reader.Read())
@@ -45,9 +42,10 @@ namespace Nest
 						continue;
 				}
 			}
+
 			return record;
 		}
 
-		public override bool CanConvert(Type objectType) => objectType == typeof(CatFielddataRecord);
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 	}
 }

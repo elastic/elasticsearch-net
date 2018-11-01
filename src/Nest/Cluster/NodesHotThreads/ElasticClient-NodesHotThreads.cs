@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -14,57 +14,64 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// An API allowing to get the current hot threads on each node in the cluster.
+		///     An API allowing to get the current hot threads on each node in the cluster.
 		/// </summary>
 		/// <param name="selector"></param>
 		/// <returns>An optional descriptor to further describe the nodes hot threads operation</returns>
 		INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request);
 
-		/// <inheritdoc/>
-		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
-		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
-		public INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null) =>
-			this.NodesHotThreads(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
+		//::: {Dragonfly}{lvtIV72sRIWBGik7ulbuaw}{127.0.0.1}{127.0.0.1:9300}
+		private static readonly Regex NodeRegex = new Regex(@"^\s\{(?<name>.+?)\}\{(?<id>.+?)\}(?<hosts>.+)\n");
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
+		public INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null) =>
+			NodesHotThreads(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
+
+		/// <inheritdoc />
 		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request) =>
-			this.Dispatcher.Dispatch<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
+			Dispatcher.Dispatch<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
 				request,
 				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
-				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(p)
+				(p, d) => LowLevelDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.NodesHotThreadsAsync(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()), cancellationToken);
+		/// <inheritdoc />
+		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			NodesHotThreadsAsync(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
+		/// <inheritdoc />
+		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
 				request,
 				cancellationToken,
 				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
-				(p, d, c) => this.LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(p, c)
 			);
 
 
-		//::: {Dragonfly}{lvtIV72sRIWBGik7ulbuaw}{127.0.0.1}{127.0.0.1:9300}
-		private static Regex NodeRegex = new Regex(@"^\s\{(?<name>.+?)\}\{(?<id>.+?)\}(?<hosts>.+)\n");
-
-
 		/// <summary>
-		/// Because the nodes.hot_threads endpoint returns plain text instead of JSON, we have to
-		/// manually parse the response text into a typed response object.
+		///     Because the nodes.hot_threads endpoint returns plain text instead of JSON, we have to
+		///     manually parse the response text into a typed response object.
 		/// </summary>
 		private NodesHotThreadsResponse DeserializeNodesHotThreadResponse(IApiCallDetails response, Stream stream)
 		{
@@ -104,6 +111,5 @@ namespace Nest
 				return new NodesHotThreadsResponse(info.ToList());
 			}
 		}
-
 	}
 }

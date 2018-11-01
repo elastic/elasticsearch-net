@@ -1,29 +1,21 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Elasticsearch.Net;
 
 namespace Nest
 {
 	public class FieldResolver
 	{
-		private readonly IConnectionSettingsValues _settings;
-
 		protected readonly ConcurrentDictionary<Field, string> Fields = new ConcurrentDictionary<Field, string>();
 		protected readonly ConcurrentDictionary<PropertyName, string> Properties = new ConcurrentDictionary<PropertyName, string>();
+		private readonly IConnectionSettingsValues _settings;
 
 		public FieldResolver(IConnectionSettingsValues settings)
 		{
 			settings.ThrowIfNull(nameof(settings));
-			this._settings = settings;
+			_settings = settings;
 		}
 
 		public string Resolve(Field field)
@@ -33,38 +25,18 @@ namespace Nest
 			return name;
 		}
 
-		private string ResolveFieldName(Field field)
-		{
-			if (field.IsConditionless()) return null;
-			if (!field.Name.IsNullOrEmpty()) return field.Name;
-			if (field.Expression != null && !field.CachableExpression)
-			{
-				return this.Resolve(field.Expression, field.Property);
-			}
-
-			if (this.Fields.TryGetValue(field, out var fieldName))
-				return fieldName;
-
-			fieldName = this.Resolve(field.Expression, field.Property);
-			this.Fields.TryAdd(field, fieldName);
-			return fieldName;
-		}
-
 		public string Resolve(PropertyName property)
 		{
 			if (property.IsConditionless()) return null;
 			if (!property.Name.IsNullOrEmpty()) return property.Name;
 
-			if (property.Expression != null && !property.CacheableExpression)
-			{
-				return this.Resolve(property.Expression, property.Property);
-			}
+			if (property.Expression != null && !property.CacheableExpression) return Resolve(property.Expression, property.Property);
 
-			if (this.Properties.TryGetValue(property, out var propertyName))
+			if (Properties.TryGetValue(property, out var propertyName))
 				return propertyName;
 
-			propertyName = this.Resolve(property.Expression, property.Property, true);
-			this.Properties.TryAdd(property, propertyName);
+			propertyName = Resolve(property.Expression, property.Property, true);
+			Properties.TryAdd(property, propertyName);
 			return propertyName;
 		}
 
@@ -81,6 +53,20 @@ namespace Nest
 				throw new ArgumentException("Name resolved to null for the given Expression or MemberInfo.");
 
 			return name;
+		}
+
+		private string ResolveFieldName(Field field)
+		{
+			if (field.IsConditionless()) return null;
+			if (!field.Name.IsNullOrEmpty()) return field.Name;
+			if (field.Expression != null && !field.CachableExpression) return Resolve(field.Expression, field.Property);
+
+			if (Fields.TryGetValue(field, out var fieldName))
+				return fieldName;
+
+			fieldName = Resolve(field.Expression, field.Property);
+			Fields.TryAdd(field, fieldName);
+			return fieldName;
 		}
 	}
 }

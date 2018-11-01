@@ -4,37 +4,37 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Retrieve usage information for machine learning jobs.
+	///     Retrieve usage information for machine learning jobs.
 	/// </summary>
 	public partial interface IGetModelSnapshotsRequest
 	{
 		/// <summary>
-		/// If true, the results are sorted in descending order.
+		///     If true, the results are sorted in descending order.
 		/// </summary>
 		[JsonProperty("desc")]
 		bool? Descending { get; set; }
 
 		/// <summary>
-		/// Returns snapshots with timestamps earlier than this time.
+		///     Returns snapshots with timestamps earlier than this time.
 		/// </summary>
 		[JsonProperty("end")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		DateTimeOffset? End { get; set; }
 
 		/// <summary>
-		/// Specifies pagination for the snapshots.
+		///     Specifies pagination for the snapshots.
 		/// </summary>
 		[JsonProperty("page")]
 		IPage Page { get; set; }
 
 		/// <summary>
-		/// Specifies the sort field for the requested snapshots. By default, snapshots are sorted by their timestamp.
+		///     Specifies the sort field for the requested snapshots. By default, snapshots are sorted by their timestamp.
 		/// </summary>
 		[JsonProperty("sort")]
 		Field Sort { get; set; }
 
 		/// <summary>
-		/// Returns snapshots with timestamps after this time.
+		///     Returns snapshots with timestamps after this time.
 		/// </summary>
 		[JsonProperty("start")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]

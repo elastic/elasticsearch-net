@@ -3,35 +3,37 @@
 namespace Nest
 {
 	/// <summary>
-	/// The pattern_replace token filter allows to easily handle string replacements based on a regular expression. 
+	///     The pattern_replace token filter allows to easily handle string replacements based on a regular expression.
 	/// </summary>
 	public interface IPatternReplaceTokenFilter : ITokenFilter
 	{
 		/// <summary>
-		/// The regular expression
+		///     The regular expression
 		/// </summary>
 		[JsonProperty("pattern")]
 		string Pattern { get; set; }
 
 		/// <summary>
-		/// Replacement string
+		///     Replacement string
 		/// </summary>
 		[JsonProperty("replacement")]
 		string Replacement { get; set; }
 	}
-	/// <inheritdoc/>
+
+	/// <inheritdoc />
 	public class PatternReplaceTokenFilter : TokenFilterBase, IPatternReplaceTokenFilter
 	{
 		public PatternReplaceTokenFilter() : base("pattern_replace") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string Pattern { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string Replacement { get; set; }
 	}
-	///<inheritdoc/>
-	public class PatternReplaceTokenFilterDescriptor 
+
+	/// <inheritdoc />
+	public class PatternReplaceTokenFilterDescriptor
 		: TokenFilterDescriptorBase<PatternReplaceTokenFilterDescriptor, IPatternReplaceTokenFilter>, IPatternReplaceTokenFilter
 	{
 		protected override string Type => "pattern_replace";
@@ -40,12 +42,10 @@ namespace Nest
 
 		string IPatternReplaceTokenFilter.Replacement { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public PatternReplaceTokenFilterDescriptor Pattern(string pattern) => Assign(a => a.Pattern = pattern);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public PatternReplaceTokenFilterDescriptor Replacement(string replacement) => Assign(a => a.Replacement = replacement);
-
 	}
-
 }

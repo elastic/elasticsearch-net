@@ -13,22 +13,22 @@ namespace Nest
 
 	public class TriggerContainer : ITriggerContainer, IDescriptor
 	{
-		IScheduleContainer ITriggerContainer.Schedule { get; set; }
-
-		public TriggerContainer() {}
+		public TriggerContainer() { }
 
 		public TriggerContainer(TriggerBase trigger)
 		{
 			trigger.ThrowIfNull(nameof(trigger));
 			trigger.WrapInContainer(this);
 		}
+
+		IScheduleContainer ITriggerContainer.Schedule { get; set; }
 	}
 
 	public class TriggerDescriptor : TriggerContainer
 	{
-		private TriggerDescriptor Assign(Action<ITriggerContainer> assigner) => Fluent.Assign(this, assigner);
-
 		public TriggerDescriptor Schedule(Func<ScheduleDescriptor, IScheduleContainer> selector) =>
 			Assign(a => a.Schedule = selector?.InvokeOrDefault(new ScheduleDescriptor()));
+
+		private TriggerDescriptor Assign(Action<ITriggerContainer> assigner) => Fluent.Assign(this, assigner);
 	}
 }

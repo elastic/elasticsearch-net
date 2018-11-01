@@ -1,54 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	using System.Threading;
 	using GetIndexResponseConverter = Func<IApiCallDetails, Stream, GetIndexResponse>;
 
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IGetIndexResponse GetIndex(IGetIndexRequest request);
 
-		/// <inheritdoc/>
-		Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null) =>
-			this.GetIndex(selector.InvokeOrDefault(new GetIndexDescriptor(indices)));
+			GetIndex(selector.InvokeOrDefault(new GetIndexDescriptor(indices)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IGetIndexResponse GetIndex(IGetIndexRequest request) =>
-			this.Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
+			Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesGetDispatch<GetIndexResponse>(p)
+				(p, d) => LowLevelDispatch.IndicesGetDispatch<GetIndexResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.GetIndexAsync(selector.InvokeOrDefault(new GetIndexDescriptor(indices)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			GetIndexAsync(selector.InvokeOrDefault(new GetIndexDescriptor(indices)), cancellationToken);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
+			Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(p, c)
 			);
-
 	}
 }

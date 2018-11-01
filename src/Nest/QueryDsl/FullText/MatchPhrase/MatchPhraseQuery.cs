@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -7,11 +6,11 @@ namespace Nest
 	[JsonConverter(typeof(FieldNameQueryJsonConverter<MatchPhraseQuery>))]
 	public interface IMatchPhraseQuery : IFieldNameQuery
 	{
-		[JsonProperty("query")]
-		string Query { get; set; }
-
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
+
+		[JsonProperty("query")]
+		string Query { get; set; }
 
 		[JsonProperty("slop")]
 		int? Slop { get; set; }
@@ -19,11 +18,10 @@ namespace Nest
 
 	public class MatchPhraseQuery : FieldNameQueryBase, IMatchPhraseQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
-
 		public string Analyzer { get; set; }
 		public string Query { get; set; }
 		public int? Slop { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.MatchPhrase = this;
 
@@ -40,9 +38,9 @@ namespace Nest
 		string IMatchPhraseQuery.Query { get; set; }
 		int? IMatchPhraseQuery.Slop { get; set; }
 
-		public MatchPhraseQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
-
 		public MatchPhraseQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+
+		public MatchPhraseQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
 		public MatchPhraseQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
 	}

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -11,55 +10,54 @@ namespace Nest
 		where TKey : IUrlParameter
 	{
 		private readonly IConnectionConfigurationValues _connectionSettings;
-		private IReadOnlyDictionary<TKey, TValue> Original { get; } = EmptyReadOnly<TKey, TValue>.Dictionary;
-		protected internal IReadOnlyDictionary<string, TValue> BackingDictionary { get; } = EmptyReadOnly<string, TValue>.Dictionary;
 
 		internal ResolvableDictionaryProxy(IConnectionConfigurationValues connectionSettings, IReadOnlyDictionary<TKey, TValue> backingDictionary)
 		{
-			this._connectionSettings = connectionSettings;
+			_connectionSettings = connectionSettings;
 			if (backingDictionary == null) return;
 
-			this.Original = backingDictionary;
+			Original = backingDictionary;
 
 			var dictionary = new Dictionary<string, TValue>();
 			foreach (var key in backingDictionary.Keys)
 				dictionary[Sanitize(key)] = backingDictionary[key];
 
-			this.BackingDictionary = dictionary;
+			BackingDictionary = dictionary;
 		}
 
-		private string Sanitize(TKey key) => key?.GetString(_connectionSettings);
+		public int Count => BackingDictionary.Count;
+
+		public TValue this[TKey key] => BackingDictionary.TryGetValue(Sanitize(key), out var v) ? v : default(TValue);
+		public TValue this[string key] => BackingDictionary.TryGetValue(key, out var v) ? v : default(TValue);
+
+		public IEnumerable<TKey> Keys => Original.Keys;
+		public IEnumerable<string> ResolvedKeys => BackingDictionary.Keys;
+
+		public IEnumerable<TValue> Values => BackingDictionary.Values;
+		protected internal IReadOnlyDictionary<string, TValue> BackingDictionary { get; } = EmptyReadOnly<string, TValue>.Dictionary;
+		private IReadOnlyDictionary<TKey, TValue> Original { get; } = EmptyReadOnly<TKey, TValue>.Dictionary;
+
+		IEnumerator IEnumerable.GetEnumerator() => Original.GetEnumerator();
 
 		IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() =>
-			this.Original.GetEnumerator();
+			Original.GetEnumerator();
 
-		IEnumerator IEnumerable.GetEnumerator() => this.Original.GetEnumerator();
-
-		public int Count => this.BackingDictionary.Count;
-
-		public bool ContainsKey(TKey key) => this.BackingDictionary.ContainsKey(Sanitize(key));
+		public bool ContainsKey(TKey key) => BackingDictionary.ContainsKey(Sanitize(key));
 
 		public bool TryGetValue(TKey key, out TValue value) =>
-			this.BackingDictionary.TryGetValue(Sanitize(key), out value);
+			BackingDictionary.TryGetValue(Sanitize(key), out value);
 
-		public TValue this[TKey key] => this.BackingDictionary.TryGetValue(Sanitize(key), out var v) ? v : default(TValue);
-		public TValue this[string key] => this.BackingDictionary.TryGetValue(key, out var v) ? v : default(TValue);
-
-		public IEnumerable<TKey> Keys => this.Original.Keys;
-		public IEnumerable<string> ResolvedKeys => this.BackingDictionary.Keys;
-
-		public IEnumerable<TValue> Values => this.BackingDictionary.Values;
+		private string Sanitize(TKey key) => key?.GetString(_connectionSettings);
 	}
 
 	internal abstract class ResolvableDictionaryJsonConverterBase<TDictionary, TKey, TValue> : JsonConverter
 		where TDictionary : ResolvableDictionaryProxy<TKey, TValue>
 		where TKey : IUrlParameter
 	{
-		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -70,12 +68,13 @@ namespace Nest
 			return dict;
 		}
 
-		protected abstract TDictionary Create(IConnectionSettingsValues settings, Dictionary<TKey, TValue> dictionary);
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
 
+		protected abstract TDictionary Create(IConnectionSettingsValues settings, Dictionary<TKey, TValue> dictionary);
 	}
 
 	internal class ResolvableDictionaryJsonConverter<TKey, TValue>
-		: ResolvableDictionaryJsonConverterBase<ResolvableDictionaryProxy<TKey, TValue>,TKey, TValue>
+		: ResolvableDictionaryJsonConverterBase<ResolvableDictionaryProxy<TKey, TValue>, TKey, TValue>
 		where TKey : IUrlParameter
 	{
 		protected override ResolvableDictionaryProxy<TKey, TValue> Create(IConnectionSettingsValues s, Dictionary<TKey, TValue> d) =>
@@ -83,11 +82,12 @@ namespace Nest
 	}
 
 	internal class ResolvableDictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
-		where TResponse : ResponseBase, IDictionaryResponse<TKey, TValue> , new() where TKey : IUrlParameter
+		where TResponse : ResponseBase, IDictionaryResponse<TKey, TValue>, new() where TKey : IUrlParameter
 	{
-		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

@@ -5,54 +5,53 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Allows to collapse search results based on field values.
-	/// The collapsing is done by selecting only the top sorted document per collapse key.
-	/// For instance the query below retrieves the best tweet for each user and sorts them by number of likes.
-	/// <para>
-	/// NOTE: The collapsing is applied to the top hits only and does not affect aggregations.
-	/// </para>
+	///     Allows to collapse search results based on field values.
+	///     The collapsing is done by selecting only the top sorted document per collapse key.
+	///     For instance the query below retrieves the best tweet for each user and sorts them by number of likes.
+	///     <para>
+	///         NOTE: The collapsing is applied to the top hits only and does not affect aggregations.
+	///     </para>
 	/// </summary>
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<FieldCollapse>))]
 	public interface IFieldCollapse
 	{
 		/// <summary>
-		/// The field used for collapsing must be a single valued keyword or number field with doc-values activated
+		///     The field used for collapsing must be a single valued keyword or number field with doc-values activated
 		/// </summary>
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
 		/// <summary>
-		/// It is also possible to expand each collapsed top hits with the `inner_hits` option.
+		///     It is also possible to expand each collapsed top hits with the `inner_hits` option.
 		/// </summary>
 		[JsonProperty("inner_hits")]
 		IInnerHits InnerHits { get; set; }
 
 		/// <summary>
-		/// The expansion of the group is done by sending an additional query for each inner_hit request for each collapsed hit returned
-		/// in the response. This can significantly slow things down if you have too many groups and/or inner_hit requests.
-		/// The max_concurrent_group_searches request parameter can be used to control the maximum number of
-		/// concurrent searches allowed in this phase. The default is based on the number of data nodes and the
-		/// default search thread pool size.
+		///     The expansion of the group is done by sending an additional query for each inner_hit request for each collapsed hit returned
+		///     in the response. This can significantly slow things down if you have too many groups and/or inner_hit requests.
+		///     The max_concurrent_group_searches request parameter can be used to control the maximum number of
+		///     concurrent searches allowed in this phase. The default is based on the number of data nodes and the
+		///     default search thread pool size.
 		/// </summary>
 		[JsonProperty("max_concurrent_group_searches")]
 		int? MaxConcurrentGroupSearches { get; set; }
 	}
 
-	/// <inheritdoc cref="IFieldCollapse"/>
+	/// <inheritdoc cref="IFieldCollapse" />
 	public class FieldCollapse : IFieldCollapse
 	{
-		/// <inheritdoc cref="IFieldCollapse.Field"/>
+		/// <inheritdoc cref="IFieldCollapse.Field" />
 		public Field Field { get; set; }
 
-		/// <inheritdoc cref="IFieldCollapse.InnerHits"/>
+		/// <inheritdoc cref="IFieldCollapse.InnerHits" />
 		public IInnerHits InnerHits { get; set; }
 
-		/// <inheritdoc cref="IFieldCollapse.MaxConcurrentGroupSearches"/>
+		/// <inheritdoc cref="IFieldCollapse.MaxConcurrentGroupSearches" />
 		public int? MaxConcurrentGroupSearches { get; set; }
-
 	}
 
-	/// <inheritdoc cref="IFieldCollapse"/>
+	/// <inheritdoc cref="IFieldCollapse" />
 	public class FieldCollapseDescriptor<T> : DescriptorBase<FieldCollapseDescriptor<T>, IFieldCollapse>, IFieldCollapse
 		where T : class
 	{
@@ -60,19 +59,18 @@ namespace Nest
 		IInnerHits IFieldCollapse.InnerHits { get; set; }
 		int? IFieldCollapse.MaxConcurrentGroupSearches { get; set; }
 
-		/// <inheritdoc cref="IFieldCollapse.MaxConcurrentGroupSearches"/>
-		public FieldCollapseDescriptor<T> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) =>
-			Assign(a => a.MaxConcurrentGroupSearches = maxConcurrentGroupSearches);
-
-		/// <inheritdoc cref="IFieldCollapse.Field"/>
+		/// <inheritdoc cref="IFieldCollapse.Field" />
 		public FieldCollapseDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
-		/// <inheritdoc cref="IFieldCollapse.Field"/>
+		/// <inheritdoc cref="IFieldCollapse.Field" />
 		public FieldCollapseDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 
-		/// <inheritdoc cref="IFieldCollapse.InnerHits"/>
+		/// <inheritdoc cref="IFieldCollapse.InnerHits" />
 		public FieldCollapseDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
 			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
 
+		/// <inheritdoc cref="IFieldCollapse.MaxConcurrentGroupSearches" />
+		public FieldCollapseDescriptor<T> MaxConcurrentGroupSearches(int? maxConcurrentGroupSearches) =>
+			Assign(a => a.MaxConcurrentGroupSearches = maxConcurrentGroupSearches);
 	}
 }

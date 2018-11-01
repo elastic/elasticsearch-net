@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IAliasRemoveAction : IAliasAction
 	{
@@ -18,11 +17,14 @@ namespace Nest
 
 	public class AliasRemoveDescriptor : DescriptorBase<AliasRemoveDescriptor, IAliasRemoveAction>, IAliasRemoveAction
 	{
+		public AliasRemoveDescriptor() => Self.Remove = new AliasRemoveOperation();
+
 		AliasRemoveOperation IAliasRemoveAction.Remove { get; set; }
 
-		public AliasRemoveDescriptor()
+		public AliasRemoveDescriptor Alias(string alias)
 		{
-			Self.Remove = new AliasRemoveOperation();
+			Self.Remove.Alias = alias;
+			return this;
 		}
 
 		public AliasRemoveDescriptor Index(string index)
@@ -30,19 +32,16 @@ namespace Nest
 			Self.Remove.Index = index;
 			return this;
 		}
+
 		public AliasRemoveDescriptor Index(Type index)
 		{
 			Self.Remove.Index = index;
 			return this;
 		}
+
 		public AliasRemoveDescriptor Index<T>() where T : class
 		{
 			Self.Remove.Index = typeof(T);
-			return this;
-		}
-		public AliasRemoveDescriptor Alias(string alias)
-		{
-			Self.Remove.Alias = alias;
 			return this;
 		}
 	}

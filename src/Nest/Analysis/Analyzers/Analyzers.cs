@@ -10,11 +10,12 @@ namespace Nest
 
 	public class Analyzers : IsADictionaryBase<string, IAnalyzer>, IAnalyzers
 	{
-		public Analyzers() {}
+		public Analyzers() { }
+
 		public Analyzers(IDictionary<string, IAnalyzer> container) : base(container) { }
+
 		public Analyzers(Dictionary<string, IAnalyzer> container)
-			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value)) { }
 
 		public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
@@ -23,83 +24,90 @@ namespace Nest
 	{
 		public AnalyzersDescriptor() : base(new Analyzers()) { }
 
-		public AnalyzersDescriptor UserDefined(string name, IAnalyzer analyzer) => Assign(name, analyzer);
-
 		/// <summary>
-		/// An analyzer of type custom that allows to combine a Tokenizer with zero or more Token Filters,
-		/// and zero or more Char Filters.
-		/// <para>The custom analyzer accepts a logical/registered name of the tokenizer to use, and a list of
-		/// logical/registered names of token filters.</para>
+		///     An analyzer of type custom that allows to combine a Tokenizer with zero or more Token Filters,
+		///     and zero or more Char Filters.
+		///     <para>
+		///         The custom analyzer accepts a logical/registered name of the tokenizer to use, and a list of
+		///         logical/registered names of token filters.
+		///     </para>
 		/// </summary>
 		public AnalyzersDescriptor Custom(string name, Func<CustomAnalyzerDescriptor, ICustomAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new CustomAnalyzerDescriptor()));
 
 		/// <summary>
-		/// An analyzer of type keyword that “tokenizes” an entire stream as a single token. This is useful for data like zip codes, ids and so on.
-		/// <para>Note, when using mapping definitions, it make more sense to simply mark the field as not_analyzed.</para>
-		/// </summary>
-		public AnalyzersDescriptor Keyword(string name, Func<KeywordAnalyzerDescriptor, IKeywordAnalyzer> selector = null) =>
-			Assign(name, selector.InvokeOrDefault(new KeywordAnalyzerDescriptor()));
-
-		/// <summary>
-		/// A set of analyzers aimed at analyzing specific language text.
-		/// </summary>
-		public AnalyzersDescriptor Language(string name, Func<LanguageAnalyzerDescriptor, ILanguageAnalyzer> selector) =>
-			Assign(name, selector?.Invoke(new LanguageAnalyzerDescriptor()));
-
-		/// <summary>
-		/// An analyzer of type pattern that can flexibly separate text into terms via a regular expression.
-		/// </summary>
-		public AnalyzersDescriptor Pattern(string name, Func<PatternAnalyzerDescriptor, IPatternAnalyzer> selector) =>
-			Assign(name, selector?.Invoke(new PatternAnalyzerDescriptor()));
-
-		/// <summary>
-		/// An analyzer of type simple that is built using a Lower Case Tokenizer.
-		/// </summary>
-		public AnalyzersDescriptor Simple(string name, Func<SimpleAnalyzerDescriptor, ISimpleAnalyzer> selector = null) =>
-			Assign(name, selector.InvokeOrDefault(new SimpleAnalyzerDescriptor()));
-
-		/// <summary>
-		/// An analyzer of type snowball that uses the standard tokenizer, with standard filter, lowercase filter, stop filter, and snowball filter.
-		/// <para> The Snowball Analyzer is a stemming analyzer from Lucene that is originally based on the snowball project from snowball.tartarus.org.</para>
-		/// </summary>
-		public AnalyzersDescriptor Snowball(string name, Func<SnowballAnalyzerDescriptor, ISnowballAnalyzer> selector) =>
-			Assign(name, selector?.Invoke(new SnowballAnalyzerDescriptor()));
-
-		/// <summary>
-		/// An analyzer of type standard that is built of using Standard Tokenizer, with Standard Token Filter, Lower Case Token Filter, and Stop Token Filter.
-		/// </summary>
-		public AnalyzersDescriptor Standard(string name, Func<StandardAnalyzerDescriptor, IStandardAnalyzer> selector) =>
-			Assign(name, selector?.Invoke(new StandardAnalyzerDescriptor()));
-
-		/// <summary>
-		/// An analyzer of type stop that is built using a Lower Case Tokenizer, with Stop Token Filter.
-		/// </summary>
-		public AnalyzersDescriptor Stop(string name, Func<StopAnalyzerDescriptor, IStopAnalyzer> selector) =>
-			Assign(name, selector?.Invoke(new StopAnalyzerDescriptor()));
-
-		/// <summary>
-		/// An analyzer of type whitespace that is built using a Whitespace Tokenizer.
-		/// </summary>
-		public AnalyzersDescriptor Whitespace(string name, Func<WhitespaceAnalyzerDescriptor, IWhitespaceAnalyzer> selector = null) =>
-			Assign(name, selector.InvokeOrDefault(new WhitespaceAnalyzerDescriptor()));
-
-		/// <summary>
-		/// An analyzer of type fingerprint that implements a fingerprinting algorithm which
-		/// is used by the OpenRefine project to assist in clustering.
+		///     An analyzer of type fingerprint that implements a fingerprinting algorithm which
+		///     is used by the OpenRefine project to assist in clustering.
 		/// </summary>
 		public AnalyzersDescriptor Fingerprint(string name, Func<FingerprintAnalyzerDescriptor, IFingerprintAnalyzer> selector = null) =>
 			Assign(name, selector.InvokeOrDefault(new FingerprintAnalyzerDescriptor()));
 
 		/// <summary>
-		/// An analyzer tailored for japanese that is bootstrapped with defaults.
-		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
+		///     An analyzer of type keyword that “tokenizes” an entire stream as a single token. This is useful for data like zip codes, ids and so on.
+		///     <para>Note, when using mapping definitions, it make more sense to simply mark the field as not_analyzed.</para>
+		/// </summary>
+		public AnalyzersDescriptor Keyword(string name, Func<KeywordAnalyzerDescriptor, IKeywordAnalyzer> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new KeywordAnalyzerDescriptor()));
+
+		/// <summary>
+		///     An analyzer tailored for japanese that is bootstrapped with defaults.
+		///     Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
 		public AnalyzersDescriptor Kuromoji(string name, Func<KuromojiAnalyzerDescriptor, IKuromojiAnalyzer> selector = null) =>
 			Assign(name, selector.InvokeOrDefault(new KuromojiAnalyzerDescriptor()));
 
-		/// <inheritdoc cref="INoriAnalyzer"/>
+		/// <summary>
+		///     A set of analyzers aimed at analyzing specific language text.
+		/// </summary>
+		public AnalyzersDescriptor Language(string name, Func<LanguageAnalyzerDescriptor, ILanguageAnalyzer> selector) =>
+			Assign(name, selector?.Invoke(new LanguageAnalyzerDescriptor()));
+
+		/// <inheritdoc cref="INoriAnalyzer" />
 		public AnalyzersDescriptor Nori(string name, Func<NoriAnalyzerDescriptor, INoriAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new NoriAnalyzerDescriptor()));
+
+		/// <summary>
+		///     An analyzer of type pattern that can flexibly separate text into terms via a regular expression.
+		/// </summary>
+		public AnalyzersDescriptor Pattern(string name, Func<PatternAnalyzerDescriptor, IPatternAnalyzer> selector) =>
+			Assign(name, selector?.Invoke(new PatternAnalyzerDescriptor()));
+
+		/// <summary>
+		///     An analyzer of type simple that is built using a Lower Case Tokenizer.
+		/// </summary>
+		public AnalyzersDescriptor Simple(string name, Func<SimpleAnalyzerDescriptor, ISimpleAnalyzer> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new SimpleAnalyzerDescriptor()));
+
+		/// <summary>
+		///     An analyzer of type snowball that uses the standard tokenizer, with standard filter, lowercase filter, stop filter, and snowball
+		///     filter.
+		///     <para>
+		///         The Snowball Analyzer is a stemming analyzer from Lucene that is originally based on the snowball project from
+		///         snowball.tartarus.org.
+		///     </para>
+		/// </summary>
+		public AnalyzersDescriptor Snowball(string name, Func<SnowballAnalyzerDescriptor, ISnowballAnalyzer> selector) =>
+			Assign(name, selector?.Invoke(new SnowballAnalyzerDescriptor()));
+
+		/// <summary>
+		///     An analyzer of type standard that is built of using Standard Tokenizer, with Standard Token Filter, Lower Case Token Filter, and Stop
+		///     Token Filter.
+		/// </summary>
+		public AnalyzersDescriptor Standard(string name, Func<StandardAnalyzerDescriptor, IStandardAnalyzer> selector) =>
+			Assign(name, selector?.Invoke(new StandardAnalyzerDescriptor()));
+
+		/// <summary>
+		///     An analyzer of type stop that is built using a Lower Case Tokenizer, with Stop Token Filter.
+		/// </summary>
+		public AnalyzersDescriptor Stop(string name, Func<StopAnalyzerDescriptor, IStopAnalyzer> selector) =>
+			Assign(name, selector?.Invoke(new StopAnalyzerDescriptor()));
+
+		public AnalyzersDescriptor UserDefined(string name, IAnalyzer analyzer) => Assign(name, analyzer);
+
+		/// <summary>
+		///     An analyzer of type whitespace that is built using a Whitespace Tokenizer.
+		/// </summary>
+		public AnalyzersDescriptor Whitespace(string name, Func<WhitespaceAnalyzerDescriptor, IWhitespaceAnalyzer> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new WhitespaceAnalyzerDescriptor()));
 	}
 }

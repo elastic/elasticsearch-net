@@ -6,11 +6,11 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[ContractJsonConverterAttribute(typeof(GeoShapeConverter))]
+	[ContractJsonConverter(typeof(GeoShapeConverter))]
 	public interface IGeoShape
 	{
 		/// <summary>
-		/// The type of geo shape
+		///     The type of geo shape
 		/// </summary>
 		[JsonProperty("type")]
 		string Type { get; }
@@ -24,34 +24,50 @@ namespace Nest
 
 	internal static class GeoShapeType
 	{
-		public const string Point = "POINT";
-		public const string MultiPoint = "MULTIPOINT";
-		public const string LineString = "LINESTRING";
-		public const string MultiLineString = "MULTILINESTRING";
-		public const string Polygon = "POLYGON";
-		public const string MultiPolygon = "MULTIPOLYGON";
+		// WKT uses BBOX for envelope geo shape
+		public const string BoundingBox = "BBOX";
 		public const string Circle = "CIRCLE";
 		public const string Envelope = "ENVELOPE";
 		public const string GeometryCollection = "GEOMETRYCOLLECTION";
-
-		// WKT uses BBOX for envelope geo shape
-		public const string BoundingBox = "BBOX";
+		public const string LineString = "LINESTRING";
+		public const string MultiLineString = "MULTILINESTRING";
+		public const string MultiPoint = "MULTIPOINT";
+		public const string MultiPolygon = "MULTIPOLYGON";
+		public const string Point = "POINT";
+		public const string Polygon = "POLYGON";
 	}
 
 	/// <summary>
-	/// Base type for geo shapes
+	///     Base type for geo shapes
 	/// </summary>
 	public abstract class GeoShapeBase : IGeoShape
 	{
-		internal GeoShapeFormat Format { get; set; }
-	    protected GeoShapeBase(string type) => this.Type = type;
+		protected GeoShapeBase(string type) => Type = type;
 
 		/// <inheritdoc />
 		public string Type { get; protected set; }
+
+		internal GeoShapeFormat Format { get; set; }
 	}
 
 	internal class GeoShapeConverter : JsonConverter
 	{
+		public override bool CanConvert(Type objectType) => typeof(IGeoShape).IsAssignableFrom(objectType);
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			switch (reader.TokenType)
+			{
+				case JsonToken.Null:
+					return null;
+				case JsonToken.String:
+					return GeoWKTReader.Read((string)reader.Value);
+				default:
+					var shape = JObject.Load(reader);
+					return ReadJToken(shape, serializer);
+			}
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			if (value == null)
@@ -117,23 +133,7 @@ namespace Nest
 				writer.WriteEndObject();
 			}
 			else
-			{
 				throw new NotSupportedException($"{value.GetType()} is not a supported {nameof(IGeoShape)}");
-			}
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			switch (reader.TokenType)
-			{
-				case JsonToken.Null:
-					return null;
-				case JsonToken.String:
-					return GeoWKTReader.Read((string)reader.Value);
-				default:
-					var shape = JObject.Load(reader);
-					return ReadJToken(shape, serializer);
-			}
 		}
 
 		internal static IGeoShape ReadJToken(JToken shape, JsonSerializer serializer)
@@ -164,7 +164,23 @@ namespace Nest
 			}
 		}
 
-		public override bool CanConvert(Type objectType) => typeof(IGeoShape).IsAssignableFrom(objectType);
+		private static T GetCoordinates<T>(JToken shape, JsonSerializer serializer)
+		{
+			var coordinates = shape["coordinates"];
+			return coordinates != null
+				? coordinates.ToObject<T>(serializer)
+				: default(T);
+		}
+
+		private static CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer) =>
+			new CircleGeoShape
+			{
+				Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer),
+				Radius = shape["radius"]?.Value<string>()
+			};
+
+		private static EnvelopeGeoShape ParseEnvelopeGeoShape(JToken shape, JsonSerializer serializer) =>
+			new EnvelopeGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static GeometryCollection ParseGeometryCollection(JToken shape, JsonSerializer serializer)
 		{
@@ -182,20 +198,8 @@ namespace Nest
 			return new GeometryCollection { Geometries = geoShapes };
 		}
 
-		private static MultiPolygonGeoShape ParseMultiPolygonGeoShape(JToken shape, JsonSerializer serializer) =>
-			new MultiPolygonGeoShape
-			{
-				Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>>>(shape, serializer)
-			};
-
-		private static PolygonGeoShape ParsePolygonGeoShape(JToken shape, JsonSerializer serializer) =>
-			new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)};
-
-		private static MultiPointGeoShape ParseMultiPointGeoShape(JToken shape, JsonSerializer serializer) =>
-			new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
-
-		private static PointGeoShape ParsePointGeoShape(JToken shape, JsonSerializer serializer) =>
-			new PointGeoShape {Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer)};
+		private static LineStringGeoShape ParseLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
+			new LineStringGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static MultiLineStringGeoShape ParseMultiLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
 			new MultiLineStringGeoShape
@@ -203,25 +207,19 @@ namespace Nest
 				Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)
 			};
 
-		private static LineStringGeoShape ParseLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
-			new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+		private static MultiPointGeoShape ParseMultiPointGeoShape(JToken shape, JsonSerializer serializer) =>
+			new MultiPointGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
-		private static EnvelopeGeoShape ParseEnvelopeGeoShape(JToken shape, JsonSerializer serializer) =>
-			new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
-
-		private static CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer) =>
-			new CircleGeoShape
+		private static MultiPolygonGeoShape ParseMultiPolygonGeoShape(JToken shape, JsonSerializer serializer) =>
+			new MultiPolygonGeoShape
 			{
-				Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer),
-				Radius = shape["radius"]?.Value<string>()
+				Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>>>(shape, serializer)
 			};
 
-		private static T GetCoordinates<T>(JToken shape, JsonSerializer serializer)
-		{
-			var coordinates = shape["coordinates"];
-			return coordinates != null
-				? coordinates.ToObject<T>(serializer)
-				: default(T);
-		}
+		private static PointGeoShape ParsePointGeoShape(JToken shape, JsonSerializer serializer) =>
+			new PointGeoShape { Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer) };
+
+		private static PolygonGeoShape ParsePolygonGeoShape(JToken shape, JsonSerializer serializer) =>
+			new PolygonGeoShape { Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer) };
 	}
 }

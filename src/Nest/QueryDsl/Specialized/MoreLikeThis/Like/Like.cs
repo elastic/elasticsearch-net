@@ -8,9 +8,11 @@ namespace Nest
 	public class Like : Union<string, ILikeDocument>
 	{
 		public Like(string item) : base(item) { }
+
 		public Like(ILikeDocument item) : base(item) { }
 
 		public static implicit operator Like(string likeText) => new Like(likeText);
+
 		public static implicit operator Like(LikeDocumentBase like) => new Like(like);
 
 		internal static bool IsConditionless(Like like) =>
@@ -22,22 +24,22 @@ namespace Nest
 	{
 		public LikeDescriptor() : base(new List<Like>()) { }
 
-		public LikeDescriptor<T> Text(string likeText) => Assign(a => a.Add(likeText));
-
 		public LikeDescriptor<T> Document(Func<LikeDocumentDescriptor<T>, ILikeDocument> selector)
 		{
 			var l = selector?.Invoke(new LikeDocumentDescriptor<T>());
 			return l == null ? this : Assign(a => a.Add(new Like(l)));
 		}
 
+		public LikeDescriptor<T> Text(string likeText) => Assign(a => a.Add(likeText));
 	}
 
-	internal class LikeJsonConverter :JsonConverter
+	internal class LikeJsonConverter : JsonConverter
 	{
+		public static UnionJsonConverter<string, ILikeDocument> Unionconverter = new UnionJsonConverter<string, ILikeDocument>();
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
 
-		public static UnionJsonConverter<string, ILikeDocument> Unionconverter = new UnionJsonConverter<string, ILikeDocument>();
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -46,12 +48,7 @@ namespace Nest
 			return union.Item1 != null ? new Like(union.Item1) : new Like(union.Item2);
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) =>
 			Unionconverter.WriteJson(writer, value, serializer);
-		}
-
-		public override bool CanConvert(Type objectType) => true;
 	}
-
 }

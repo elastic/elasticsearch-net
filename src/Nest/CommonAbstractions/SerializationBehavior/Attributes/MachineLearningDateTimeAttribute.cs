@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	/// <summary>
-	/// Signals that this date time property is used in Machine learning API's some of which will always return the date as epoch.
+	///     Signals that this date time property is used in Machine learning API's some of which will always return the date as epoch.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property)]
 	public class MachineLearningDateTimeAttribute : Attribute { }
@@ -15,8 +15,6 @@ namespace Nest
 		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
 
 		public override bool CanWrite => false;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -30,5 +28,7 @@ namespace Nest
 
 			return dateTimeOffset.DateTime;
 		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 	}
 }

@@ -19,22 +19,22 @@ namespace Nest
 	{
 		IStoredScript IPutScriptRequest.Script { get; set; }
 
-		public PutScriptDescriptor Script(Func<StoredScriptDescriptor, IStoredScript> selector) =>
-			Assign(a => a.Script = selector?.Invoke(new StoredScriptDescriptor()));
-
 		/// <summary>
-		/// A Painless language script
-		/// </summary>
-		public PutScriptDescriptor Painless(string source) => Assign(a => a.Script = new PainlessScript(source));
-
-		/// <summary>
-		/// A Lucene expression language script
+		///     A Lucene expression language script
 		/// </summary>
 		public PutScriptDescriptor LuceneExpression(string source) => Assign(a => a.Script = new LuceneExpressionScript(source));
 
 		/// <summary>
-		/// A Mustache template language script
+		///     A Mustache template language script
 		/// </summary>
 		public PutScriptDescriptor Mustache(string source) => Assign(a => a.Script = new MustacheScript(source));
+
+		/// <summary>
+		///     A Painless language script
+		/// </summary>
+		public PutScriptDescriptor Painless(string source) => Assign(a => a.Script = new PainlessScript(source));
+
+		public PutScriptDescriptor Script(Func<StoredScriptDescriptor, IStoredScript> selector) =>
+			Assign(a => a.Script = selector?.Invoke(new StoredScriptDescriptor()));
 	}
 }

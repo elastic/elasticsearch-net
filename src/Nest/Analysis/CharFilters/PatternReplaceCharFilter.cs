@@ -3,7 +3,7 @@
 namespace Nest
 {
 	/// <summary>
-	/// The pattern_replace char filter allows the use of a regex to manipulate the characters in a string before analysis. 
+	///     The pattern_replace char filter allows the use of a regex to manipulate the characters in a string before analysis.
 	/// </summary>
 	public interface IPatternReplaceCharFilter : ICharFilter
 	{
@@ -13,33 +13,33 @@ namespace Nest
 		[JsonProperty("replacement")]
 		string Replacement { get; set; }
 	}
-	
-	/// <inheritdoc/>
+
+	/// <inheritdoc />
 	public class PatternReplaceCharFilter : CharFilterBase, IPatternReplaceCharFilter
 	{
 		public PatternReplaceCharFilter() : base("pattern_replace") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string Pattern { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string Replacement { get; set; }
 	}
-	/// <inheritdoc/>
-	public class PatternReplaceCharFilterDescriptor 
+
+	/// <inheritdoc />
+	public class PatternReplaceCharFilterDescriptor
 		: CharFilterDescriptorBase<PatternReplaceCharFilterDescriptor, IPatternReplaceCharFilter>, IPatternReplaceCharFilter
 	{
 		protected override string Type => "pattern_replace";
 		string IPatternReplaceCharFilter.Pattern { get; set; }
 		string IPatternReplaceCharFilter.Replacement { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public PatternReplaceCharFilterDescriptor Pattern(string pattern) =>
 			Assign(a => a.Pattern = pattern);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public PatternReplaceCharFilterDescriptor Replacement(string replacement) =>
 			Assign(a => a.Replacement = replacement);
-
 	}
 }

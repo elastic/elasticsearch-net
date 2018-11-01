@@ -22,6 +22,23 @@ namespace Nest
 			return percentiles;
 		}
 
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			var percentiles = value as IPercentilesAggregation;
+			if (percentiles == null) return;
+
+			writer.WriteStartObject();
+			WriteMetricProperties(percentiles, writer, serializer);
+			if (percentiles.Percents != null)
+			{
+				writer.WritePropertyName("percents");
+				serializer.Serialize(writer, percentiles.Percents);
+			}
+
+			WriteMethodProperty(percentiles.Method, writer, serializer);
+			writer.WriteEndObject();
+		}
+
 		protected IPercentilesMethod ReadMethodProperty(Dictionary<string, JToken> properties)
 		{
 			IPercentilesMethod method = null;
@@ -50,21 +67,6 @@ namespace Nest
 				metric.Missing = double.Parse(properties["missing"].ToString());
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			var percentiles = value as IPercentilesAggregation;
-			if (percentiles == null) return;
-			writer.WriteStartObject();
-			WriteMetricProperties(percentiles, writer, serializer);
-			if (percentiles.Percents != null)
-			{
-				writer.WritePropertyName("percents");
-				serializer.Serialize(writer, percentiles.Percents);
-			}
-			WriteMethodProperty(percentiles.Method, writer, serializer);
-			writer.WriteEndObject();
-		}
-
 		protected void WriteMethodProperty(IPercentilesMethod method, JsonWriter writer, JsonSerializer serializer)
 		{
 			var tdigest = method as ITDigestMethod;
@@ -77,6 +79,7 @@ namespace Nest
 					writer.WritePropertyName("compression");
 					writer.WriteValue(tdigest.Compression);
 				}
+
 				writer.WriteEndObject();
 				return;
 			}
@@ -91,6 +94,7 @@ namespace Nest
 					writer.WritePropertyName("number_of_significant_value_digits");
 					writer.WriteValue(hdr.NumberOfSignificantValueDigits);
 				}
+
 				writer.WriteEndObject();
 				return;
 			}
@@ -98,7 +102,6 @@ namespace Nest
 
 		protected void WriteMetricProperties(IMetricAggregation metric, JsonWriter writer, JsonSerializer serializer)
 		{
-
 			if (metric.Field != null)
 			{
 				var settings = serializer.GetConnectionSettings();

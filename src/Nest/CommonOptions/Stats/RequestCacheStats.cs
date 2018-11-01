@@ -12,13 +12,12 @@ namespace Nest
 		public long HitCount { get; set; }
 
 		[JsonProperty("memory_size")]
-		public string MemorySize{ get; set; }
+		public string MemorySize { get; set; }
 
 		[JsonProperty("memory_size_in_bytes")]
 		public long MemorySizeInBytes { get; set; }
 
 		[JsonProperty("miss_count")]
 		public long MissCount { get; set; }
-
 	}
 }

@@ -11,16 +11,15 @@ namespace Nest
 
 	public class EwmaModel : IEwmaModel
 	{
-		string IMovingAverageModel.Name { get; } = "ewma";
-
 		public float? Alpha { get; set; }
+		string IMovingAverageModel.Name { get; } = "ewma";
 	}
 
 	public class EwmaModelDescriptor
 		: DescriptorBase<EwmaModelDescriptor, IEwmaModel>, IEwmaModel
 	{
-		string IMovingAverageModel.Name { get; } = "ewma";
 		float? IEwmaModel.Alpha { get; set; }
+		string IMovingAverageModel.Name { get; } = "ewma";
 
 		public EwmaModelDescriptor Alpha(float? alpha) => Assign(a => a.Alpha = alpha);
 	}

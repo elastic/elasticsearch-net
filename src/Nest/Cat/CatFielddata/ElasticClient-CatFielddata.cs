@@ -1,48 +1,52 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICatResponse<CatFielddataRecord> CatFielddata(Func<CatFielddataDescriptor, ICatFielddataRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICatResponse<CatFielddataRecord> CatFielddata(ICatFielddataRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(
 			Func<CatFielddataDescriptor, ICatFielddataRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		);
 
-		/// <inheritdoc/>
-		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request, CancellationToken cancellationToken = default(CancellationToken));
-
+		/// <inheritdoc />
+		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICatResponse<CatFielddataRecord> CatFielddata(Func<CatFielddataDescriptor, ICatFielddataRequest> selector = null) =>
-			this.CatFielddata(selector.InvokeOrDefault(new CatFielddataDescriptor()));
+			CatFielddata(selector.InvokeOrDefault(new CatFielddataDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICatResponse<CatFielddataRecord> CatFielddata(ICatFielddataRequest request) =>
-			this.DoCat<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request, this.LowLevelDispatch.CatFielddataDispatch<CatResponse<CatFielddataRecord>>);
+			DoCat<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request,
+				LowLevelDispatch.CatFielddataDispatch<CatResponse<CatFielddataRecord>>);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(
 			Func<CatFielddataDescriptor, ICatFielddataRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) => this.CatFielddataAsync(selector.InvokeOrDefault(new CatFielddataDescriptor()), cancellationToken);
+		) => CatFielddataAsync(selector.InvokeOrDefault(new CatFielddataDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.DoCatAsync<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request, cancellationToken, this.LowLevelDispatch.CatFielddataDispatchAsync<CatResponse<CatFielddataRecord>>);
-
+		/// <inheritdoc />
+		public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			DoCatAsync<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request, cancellationToken,
+				LowLevelDispatch.CatFielddataDispatchAsync<CatResponse<CatFielddataRecord>>);
 	}
 }

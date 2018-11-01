@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -12,7 +8,7 @@ namespace Nest
 	public interface IJoinProperty : IProperty
 	{
 		/// <summary>
-		/// Should the field be searchable? Accepts true (default) and false.
+		///     Should the field be searchable? Accepts true (default) and false.
 		/// </summary>
 		[JsonProperty("relations")]
 		IRelations Relations { get; set; }

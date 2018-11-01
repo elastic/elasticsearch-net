@@ -12,6 +12,38 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => true;
 
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var filter = new TermsQuery();
+			ITermsQuery f = filter;
+			if (reader.TokenType != JsonToken.StartObject)
+				return null;
+
+			var depth = reader.Depth;
+			while (reader.Read() && reader.Depth >= depth && reader.Value != null)
+			{
+				var property = reader.Value as string;
+				switch (property)
+				{
+					case "boost":
+						reader.Read();
+						f.Boost = reader.Value as double?;
+						break;
+					case "_name":
+						f.Name = reader.ReadAsString();
+						break;
+					default:
+						f.Field = property;
+						//reader.Read();
+						ReadTerms(f, reader, serializer);
+						//reader.Read();
+						break;
+				}
+			}
+
+			return filter;
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			if (!(value is ITermsQuery t)) return;
@@ -59,6 +91,7 @@ namespace Nest
 					writer.WritePropertyName("boost");
 					writer.WriteValue(t.Boost.Value);
 				}
+
 				if (!t.Name.IsNullOrEmpty())
 				{
 					writer.WritePropertyName("_name");
@@ -66,37 +99,6 @@ namespace Nest
 				}
 			}
 			writer.WriteEndObject();
-		}
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			var filter = new TermsQuery();
-			ITermsQuery f = filter;
-			if (reader.TokenType != JsonToken.StartObject)
-				return null;
-
-			var depth = reader.Depth;
-			while (reader.Read() && reader.Depth >= depth && reader.Value != null)
-			{
-				var property = reader.Value as string;
-				switch (property)
-				{
-					case "boost":
-						reader.Read();
-						f.Boost = reader.Value as double?;
-						break;
-					case "_name":
-						f.Name = reader.ReadAsString();
-						break;
-					default:
-						f.Field = property;
-						//reader.Read();
-						ReadTerms(f, reader, serializer);
-						//reader.Read();
-						break;
-				}
-			}
-			return filter;
-
 		}
 
 		private void ReadTerms(ITermsQuery termsQuery, JsonReader reader, JsonSerializer serializer)
@@ -134,6 +136,7 @@ namespace Nest
 							break;
 					}
 				}
+
 				termsQuery.TermsLookup = ef;
 			}
 			else if (reader.TokenType == JsonToken.StartArray)
@@ -143,5 +146,4 @@ namespace Nest
 			}
 		}
 	}
-
 }

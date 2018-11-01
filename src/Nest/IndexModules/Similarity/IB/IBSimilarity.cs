@@ -3,88 +3,87 @@
 namespace Nest
 {
 	/// <summary>
-	/// Information based model similarity.
-	/// The algorithm is based on the concept that the information content in any symbolic distribution sequence
-	/// is primarily determined by the repetitive usage of its basic elements.
-	/// For written texts this challenge would correspond to comparing the writing styles of different authors.
+	///     Information based model similarity.
+	///     The algorithm is based on the concept that the information content in any symbolic distribution sequence
+	///     is primarily determined by the repetitive usage of its basic elements.
+	///     For written texts this challenge would correspond to comparing the writing styles of different authors.
 	/// </summary>
 	public interface IIBSimilarity : ISimilarity
 	{
 		/// <summary>
-		/// The distribution
+		///     The distribution
 		/// </summary>
 		[JsonProperty("distribution")]
 		IBDistribution? Distribution { get; set; }
 
 		/// <summary>
-		/// The lambda
+		///     The lambda
 		/// </summary>
 		[JsonProperty("lambda")]
 		IBLambda? Lambda { get; set; }
 
 		/// <summary>
-		/// The normalization
+		///     The normalization
 		/// </summary>
 		[JsonProperty("normalization")]
 		Normalization? Normalization { get; set; }
 
 		/// <summary>
-		/// Normalization model that assumes a uniform distribution of the term frequency.
+		///     Normalization model that assumes a uniform distribution of the term frequency.
 		/// </summary>
 		[JsonProperty("normalization.h1.c")]
 		double? NormalizationH1C { get; set; }
 
 		/// <summary>
-		///  Normalization model in which the term frequency is inversely related to the length.
+		///     Normalization model in which the term frequency is inversely related to the length.
 		/// </summary>
 		[JsonProperty("normalization.h2.c")]
 		double? NormalizationH2C { get; set; }
 
 		/// <summary>
-		///  Dirichlet Priors normalization
+		///     Dirichlet Priors normalization
 		/// </summary>
 		[JsonProperty("normalization.h3.c")]
 		double? NormalizationH3C { get; set; }
 
 		/// <summary>
-		/// Pareto-Zipf Normalization
+		///     Pareto-Zipf Normalization
 		/// </summary>
 		[JsonProperty("normalization.z.z")]
 		double? NormalizationZZ { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class IBSimilarity : IIBSimilarity
 	{
-		public string Type => "IB";
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IBDistribution? Distribution { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IBLambda? Lambda { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Normalization? Normalization { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationH1C { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationH2C { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationH3C { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationZZ { get; set; }
+
+		public string Type => "IB";
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class IBSimilarityDescriptor
 		: DescriptorBase<IBSimilarityDescriptor, IIBSimilarity>, IIBSimilarity
 	{
-		string ISimilarity.Type => "IB";
 		IBDistribution? IIBSimilarity.Distribution { get; set; }
 		IBLambda? IIBSimilarity.Lambda { get; set; }
 		Normalization? IIBSimilarity.Normalization { get; set; }
@@ -92,18 +91,19 @@ namespace Nest
 		double? IIBSimilarity.NormalizationH2C { get; set; }
 		double? IIBSimilarity.NormalizationH3C { get; set; }
 		double? IIBSimilarity.NormalizationZZ { get; set; }
+		string ISimilarity.Type => "IB";
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IBSimilarityDescriptor Distribution(IBDistribution? distribution) => Assign(a => a.Distribution = distribution);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IBSimilarityDescriptor Lambda(IBLambda? lambda) => Assign(a => a.Lambda = lambda);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IBSimilarityDescriptor NoNormalization() => Assign(a => a.Normalization = Normalization.No);
 
 		/// <summary>
-		/// Normalization model that assumes a uniform distribution of the term frequency.
+		///     Normalization model that assumes a uniform distribution of the term frequency.
 		/// </summary>
 		/// <param name="c">hyper-parameter that controls the term frequency normalization with respect to the document length.</param>
 		public IBSimilarityDescriptor NormalizationH1(double? c) => Assign(a =>
@@ -113,7 +113,7 @@ namespace Nest
 		});
 
 		/// <summary>
-		/// Normalization model in which the term frequency is inversely related to the length.
+		///     Normalization model in which the term frequency is inversely related to the length.
 		/// </summary>
 		/// <param name="c">hyper-parameter that controls the term frequency normalization with respect to the document length.</param>
 		public IBSimilarityDescriptor NormalizationH2(double? c) => Assign(a =>
@@ -123,7 +123,7 @@ namespace Nest
 		});
 
 		/// <summary>
-		/// Dirichlet Priors normalization
+		///     Dirichlet Priors normalization
 		/// </summary>
 		/// <param name="mu">smoothing parameter μ.</param>
 		public IBSimilarityDescriptor NormalizationH3(double? mu) => Assign(a =>
@@ -133,7 +133,7 @@ namespace Nest
 		});
 
 		/// <summary>
-		/// Pareto-Zipf Normalization
+		///     Pareto-Zipf Normalization
 		/// </summary>
 		/// <param name="z">represents A/(A+1) where A measures the specificity of the language..</param>
 		public IBSimilarityDescriptor NormalizationZ(double? z) => Assign(a =>
@@ -142,5 +142,4 @@ namespace Nest
 			a.NormalizationH1C = z;
 		});
 	}
-
 }

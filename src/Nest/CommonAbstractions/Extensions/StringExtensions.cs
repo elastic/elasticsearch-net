@@ -1,10 +1,24 @@
 ﻿using System.Collections.Specialized;
-using System.Globalization;
 
 namespace Nest
 {
 	internal static class StringExtensions
 	{
+		internal static string ToCamelCase(this string s)
+		{
+			if (string.IsNullOrEmpty(s))
+				return s;
+
+			if (!char.IsUpper(s[0]))
+				return s;
+
+			var camelCase = char.ToLowerInvariant(s[0]).ToString();
+			if (s.Length > 1)
+				camelCase += s.Substring(1);
+
+			return camelCase;
+		}
+
 		internal static NameValueCollection ToNameValueCollection(this string queryString)
 		{
 			if (string.IsNullOrWhiteSpace(queryString)) return new NameValueCollection();
@@ -26,21 +40,5 @@ namespace Nest
 
 			return queryParameters;
 		}
-		internal static string ToCamelCase(this string s)
-		{
-			if (string.IsNullOrEmpty(s))
-				return s;
-
-			if (!char.IsUpper(s[0]))
-				return s;
-
-			var camelCase = char.ToLowerInvariant(s[0]).ToString();
-			if (s.Length > 1)
-				camelCase += s.Substring(1);
-
-			return camelCase;
-		}
-
-
 	}
 }

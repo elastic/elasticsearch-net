@@ -8,43 +8,49 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Sends data to a machine learning job for analysis.
+		///     Sends data to a machine learning job for analysis.
 		/// </summary>
 		IPostJobDataResponse PostJobData(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IPostJobDataResponse PostJobData(IPostJobDataRequest request);
 
-		/// <inheritdoc/>
-		Task<IPostJobDataResponse> PostJobDataAsync(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IPostJobDataResponse> PostJobDataAsync(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IPostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IPostJobDataResponse PostJobData(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector) =>
-			this.PostJobData(selector.InvokeOrDefault(new PostJobDataDescriptor(jobId)));
+			PostJobData(selector.InvokeOrDefault(new PostJobDataDescriptor(jobId)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IPostJobDataResponse PostJobData(IPostJobDataRequest request) =>
-			this.Dispatcher.Dispatch<IPostJobDataRequest, PostJobDataRequestParameters, PostJobDataResponse>(
+			Dispatcher.Dispatch<IPostJobDataRequest, PostJobDataRequestParameters, PostJobDataResponse>(
 				request,
-				this.LowLevelDispatch.XpackMlPostDataDispatch<PostJobDataResponse>
+				LowLevelDispatch.XpackMlPostDataDispatch<PostJobDataResponse>
 			);
 
-		/// <inheritdoc/>
-		public Task<IPostJobDataResponse> PostJobDataAsync(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.PostJobDataAsync(selector.InvokeOrDefault(new PostJobDataDescriptor(jobId)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IPostJobDataResponse> PostJobDataAsync(Id jobId, Func<PostJobDataDescriptor, IPostJobDataRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			PostJobDataAsync(selector.InvokeOrDefault(new PostJobDataDescriptor(jobId)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IPostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IPostJobDataRequest, PostJobDataRequestParameters, PostJobDataResponse, IPostJobDataResponse>(
+		/// <inheritdoc />
+		public Task<IPostJobDataResponse> PostJobDataAsync(IPostJobDataRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IPostJobDataRequest, PostJobDataRequestParameters, PostJobDataResponse, IPostJobDataResponse>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.XpackMlPostDataDispatchAsync<PostJobDataResponse>
+				LowLevelDispatch.XpackMlPostDataDispatchAsync<PostJobDataResponse>
 			);
 	}
 }

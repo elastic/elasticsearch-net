@@ -4,39 +4,38 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// An analyzer of type stop that is built using a Lower Case Tokenizer, with Stop Token Filter.
+	///     An analyzer of type stop that is built using a Lower Case Tokenizer, with Stop Token Filter.
 	/// </summary>
 	public interface IStopAnalyzer : IAnalyzer
 	{
 		/// <summary>
-		/// A list of stopword to initialize the stop filter with. Defaults to the english stop words.
+		///     A list of stopword to initialize the stop filter with. Defaults to the english stop words.
 		/// </summary>
 		[JsonProperty("stopwords")]
 		[JsonConverter(typeof(StopWordsJsonConverter))]
 		StopWords StopWords { get; set; }
 
 		/// <summary>
-		/// A path (either relative to config location, or absolute) to a stopwords file configuration.
+		///     A path (either relative to config location, or absolute) to a stopwords file configuration.
 		/// </summary>
 		[JsonProperty("stopwords_path")]
 		string StopwordsPath { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class StopAnalyzer : AnalyzerBase, IStopAnalyzer
 	{
-		public StopAnalyzer() : base("stop") {}
+		public StopAnalyzer() : base("stop") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public StopWords StopWords { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string StopwordsPath { get; set; }
 	}
 
-	/// <inheritdoc/>
-	public class StopAnalyzerDescriptor :
-		AnalyzerDescriptorBase<StopAnalyzerDescriptor, IStopAnalyzer>, IStopAnalyzer
+	/// <inheritdoc />
+	public class StopAnalyzerDescriptor : AnalyzerDescriptorBase<StopAnalyzerDescriptor, IStopAnalyzer>, IStopAnalyzer
 	{
 		protected override string Type => "stop";
 
@@ -51,6 +50,5 @@ namespace Nest
 		public StopAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
 
 		public StopAnalyzerDescriptor StopwordsPath(string path) => Assign(a => a.StopwordsPath = path);
-
 	}
 }

@@ -2,8 +2,7 @@
 
 namespace Nest
 {
-
-	public interface IMoveClusterRerouteCommand: IClusterRerouteCommand
+	public interface IMoveClusterRerouteCommand : IClusterRerouteCommand
 	{
 		[JsonProperty("from_node")]
 		string FromNode { get; set; }
@@ -17,15 +16,15 @@ namespace Nest
 		[JsonProperty("to_node")]
 		string ToNode { get; set; }
 	}
+
 	public class MoveClusterRerouteCommand : IMoveClusterRerouteCommand
 	{
-		public string Name => "move";
+		public string FromNode { get; set; }
 
 		public IndexName Index { get; set; }
+		public string Name => "move";
 
 		public int? Shard { get; set; }
-
-		public string FromNode { get; set; }
 
 		public string ToNode { get; set; }
 	}
@@ -33,23 +32,22 @@ namespace Nest
 	public class MoveClusterRerouteCommandDescriptor
 		: DescriptorBase<MoveClusterRerouteCommandDescriptor, IMoveClusterRerouteCommand>, IMoveClusterRerouteCommand
 	{
-		string IClusterRerouteCommand.Name => "move";
+		string IMoveClusterRerouteCommand.FromNode { get; set; }
 
 		IndexName IMoveClusterRerouteCommand.Index { get; set; }
+		string IClusterRerouteCommand.Name => "move";
 
 		int? IMoveClusterRerouteCommand.Shard { get; set; }
 
-		string IMoveClusterRerouteCommand.FromNode { get; set; }
-
 		string IMoveClusterRerouteCommand.ToNode { get; set; }
+
+		public MoveClusterRerouteCommandDescriptor FromNode(string fromNode) => Assign(a => a.FromNode = fromNode);
 
 		public MoveClusterRerouteCommandDescriptor Index(IndexName index) => Assign(a => a.Index = index);
 
 		public MoveClusterRerouteCommandDescriptor Index<T>() where T : class => Assign(a => a.Index = typeof(T));
 
 		public MoveClusterRerouteCommandDescriptor Shard(int? shard) => Assign(a => a.Shard = shard);
-
-		public MoveClusterRerouteCommandDescriptor FromNode(string fromNode) => Assign(a => a.FromNode = fromNode);
 
 		public MoveClusterRerouteCommandDescriptor ToNode(string toNode) => Assign(a => a.ToNode = toNode);
 	}

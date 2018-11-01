@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Nest
 {
 	/// <summary>
-	/// Writes <see cref="IGeoShape"/> types to Well-Known Text (WKT)
+	///     Writes <see cref="IGeoShape" /> types to Well-Known Text (WKT)
 	/// </summary>
 	public class GeoWKTWriter
 	{
 		/// <summary>
-		/// Writes a <see cref="IGeoShape"/> to Well-Known Text (WKT)
+		///     Writes a <see cref="IGeoShape" /> to Well-Known Text (WKT)
 		/// </summary>
 		public static string Write(IGeoShape shape) =>
 			shape == null ? null : Write(shape, new StringBuilder());
@@ -51,66 +50,43 @@ namespace Nest
 			return builder.ToString();
 		}
 
-		private static void WritePoint(IPointGeoShape point, StringBuilder builder)
+		private static void WriteCoordinate(GeoCoordinate coordinate, StringBuilder builder)
 		{
-			builder.Append(GeoShapeType.Point).Append(" (");
-			WriteCoordinate(point.Coordinates, builder);
-			builder.Append(")");
+			builder.Append(coordinate.Longitude)
+				.Append(" ")
+				.Append(coordinate.Latitude);
+
+			if (coordinate.Z.HasValue)
+				builder.Append(" ").Append(coordinate.Z.Value);
 		}
 
-		private static void WriteMultiPoint(IMultiPointGeoShape multiPoint, StringBuilder builder)
+		private static void WriteCoordinates(IEnumerable<GeoCoordinate> coordinates, StringBuilder builder)
 		{
-			builder.Append(GeoShapeType.MultiPoint).Append(" (");
-			WriteCoordinates(multiPoint.Coordinates, builder);
-			builder.Append(")");
-		}
-
-		private static void WriteLineString(ILineStringGeoShape lineString, StringBuilder builder)
-		{
-			builder.Append(GeoShapeType.LineString).Append(" (");
-			WriteCoordinates(lineString.Coordinates, builder);
-			builder.Append(")");
-		}
-
-		private static void WriteMultiLineString(IMultiLineStringGeoShape multiLineString, StringBuilder builder)
-		{
-			builder.Append(GeoShapeType.MultiLineString).Append(" ");
-			WriteCoordinatesList(multiLineString.Coordinates, builder);
-		}
-
-		private static void WritePolygon(IPolygonGeoShape polygon, StringBuilder builder)
-		{
-			builder.Append(GeoShapeType.Polygon).Append(" ");
-			WriteCoordinatesList(polygon.Coordinates, builder);
-		}
-
-		private static void WriteMultiPolygon(IMultiPolygonGeoShape multiPolygon, StringBuilder builder)
-		{
-			builder.Append(GeoShapeType.MultiPolygon).Append(" (");
 			var i = 0;
-			foreach (var polygon in multiPolygon.Coordinates)
+			foreach (var coordinate in coordinates)
+			{
+				if (i > 0)
+					builder.Append(", ");
+				WriteCoordinate(coordinate, builder);
+				i++;
+			}
+		}
+
+		private static void WriteCoordinatesList(IEnumerable<IEnumerable<GeoCoordinate>> coordinates, StringBuilder builder)
+		{
+			builder.Append("(");
+			var i = 0;
+			foreach (var coordinateGroup in coordinates)
 			{
 				if (i > 0)
 					builder.Append(", ");
 
-				WriteCoordinatesList(polygon, builder);
+				builder.Append("(");
+				WriteCoordinates(coordinateGroup, builder);
+				builder.Append(")");
 				i++;
 			}
-			builder.Append(")");
-		}
 
-		private static void WriteGeometryCollection(IGeometryCollection geometryCollection, StringBuilder builder)
-		{
-			builder.Append(GeoShapeType.GeometryCollection).Append(" (");
-			var i = 0;
-			foreach (var shape in geometryCollection.Geometries)
-			{
-				if (i > 0)
-					builder.Append(", ");
-
-				Write(shape, builder);
-				i++;
-			}
 			builder.Append(")");
 		}
 
@@ -132,43 +108,69 @@ namespace Nest
 				.Append(")");
 		}
 
-		private static void WriteCoordinatesList(IEnumerable<IEnumerable<GeoCoordinate>> coordinates, StringBuilder builder)
+		private static void WriteGeometryCollection(IGeometryCollection geometryCollection, StringBuilder builder)
 		{
-			builder.Append("(");
+			builder.Append(GeoShapeType.GeometryCollection).Append(" (");
 			var i = 0;
-			foreach (var coordinateGroup in coordinates)
+			foreach (var shape in geometryCollection.Geometries)
 			{
 				if (i > 0)
 					builder.Append(", ");
 
-				builder.Append("(");
-				WriteCoordinates(coordinateGroup, builder);
-				builder.Append(")");
+				Write(shape, builder);
 				i++;
 			}
+
 			builder.Append(")");
 		}
 
-		private static void WriteCoordinates(IEnumerable<GeoCoordinate> coordinates, StringBuilder builder)
+		private static void WriteLineString(ILineStringGeoShape lineString, StringBuilder builder)
 		{
+			builder.Append(GeoShapeType.LineString).Append(" (");
+			WriteCoordinates(lineString.Coordinates, builder);
+			builder.Append(")");
+		}
+
+		private static void WriteMultiLineString(IMultiLineStringGeoShape multiLineString, StringBuilder builder)
+		{
+			builder.Append(GeoShapeType.MultiLineString).Append(" ");
+			WriteCoordinatesList(multiLineString.Coordinates, builder);
+		}
+
+		private static void WriteMultiPoint(IMultiPointGeoShape multiPoint, StringBuilder builder)
+		{
+			builder.Append(GeoShapeType.MultiPoint).Append(" (");
+			WriteCoordinates(multiPoint.Coordinates, builder);
+			builder.Append(")");
+		}
+
+		private static void WriteMultiPolygon(IMultiPolygonGeoShape multiPolygon, StringBuilder builder)
+		{
+			builder.Append(GeoShapeType.MultiPolygon).Append(" (");
 			var i = 0;
-			foreach (var coordinate in coordinates)
+			foreach (var polygon in multiPolygon.Coordinates)
 			{
 				if (i > 0)
 					builder.Append(", ");
-				WriteCoordinate(coordinate, builder);
+
+				WriteCoordinatesList(polygon, builder);
 				i++;
 			}
+
+			builder.Append(")");
 		}
 
-		private static void WriteCoordinate(GeoCoordinate coordinate, StringBuilder builder)
+		private static void WritePoint(IPointGeoShape point, StringBuilder builder)
 		{
-			builder.Append(coordinate.Longitude)
-				.Append(" ")
-				.Append(coordinate.Latitude);
+			builder.Append(GeoShapeType.Point).Append(" (");
+			WriteCoordinate(point.Coordinates, builder);
+			builder.Append(")");
+		}
 
-			if (coordinate.Z.HasValue)
-				builder.Append(" ").Append(coordinate.Z.Value);
+		private static void WritePolygon(IPolygonGeoShape polygon, StringBuilder builder)
+		{
+			builder.Append(GeoShapeType.Polygon).Append(" ");
+			WriteCoordinatesList(polygon.Coordinates, builder);
 		}
 	}
 }

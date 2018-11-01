@@ -25,6 +25,7 @@ namespace Nest
 				reader.Read();
 				var typedProperty = reader.Value as string;
 				if (typedProperty.IsNullOrEmpty()) break;
+
 				var tokens = AggregateDictionary.TypedKeyTokens(typedProperty);
 				if (tokens.Length == 1)
 					ParseAggregate(reader, serializer, tokens[0], dictionary);
@@ -33,6 +34,13 @@ namespace Nest
 			}
 
 			return new AggregateDictionary(dictionary);
+		}
+
+		private static void ParseAggregate(JsonReader reader, JsonSerializer serializer, string name, Dictionary<string, IAggregate> dictionary)
+		{
+			reader.Read();
+			var aggregate = OldSchoolHeuristicsParser.ReadJson(reader, typeof(IAggregate), null, serializer) as IAggregate;
+			dictionary.Add(name, aggregate);
 		}
 
 		private static void ReadAggregate(JsonReader r, JsonSerializer s, string[] tokens, Dictionary<string, IAggregate> d)
@@ -51,18 +59,13 @@ namespace Nest
 			}
 		}
 
-		private static void ReadAggregate<TAggregate>(JsonReader reader, JsonSerializer serializer, Dictionary<string, IAggregate> dictionary, string name)
+		private static void ReadAggregate<TAggregate>(JsonReader reader, JsonSerializer serializer, Dictionary<string, IAggregate> dictionary,
+			string name
+		)
 			where TAggregate : IAggregate
 		{
 			reader.Read();
 			var aggregate = serializer.Deserialize<TAggregate>(reader);
-			dictionary.Add(name, aggregate);
-		}
-
-		private static void ParseAggregate(JsonReader reader, JsonSerializer serializer, string name, Dictionary<string, IAggregate> dictionary)
-		{
-			reader.Read();
-			var aggregate = OldSchoolHeuristicsParser.ReadJson(reader, typeof(IAggregate), null, serializer) as IAggregate;
 			dictionary.Add(name, aggregate);
 		}
 	}

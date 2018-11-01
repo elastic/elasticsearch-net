@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Linq.Expressions;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -12,8 +12,8 @@ namespace Nest
 		Field Field { get; set; }
 
 		/// <summary>
-		/// If <c>true</c> and <see cref="Field"/> does not exist or is null,
-		/// the processor quietly exits without modifying the document. Default is <c>false</c>
+		///     If <c>true</c> and <see cref="Field" /> does not exist or is null,
+		///     the processor quietly exits without modifying the document. Default is <c>false</c>
 		/// </summary>
 		[JsonProperty("ignore_missing")]
 		bool? IgnoreMissing { get; set; }
@@ -22,11 +22,13 @@ namespace Nest
 	/// <inheritdoc cref="IRemoveProcessor" />
 	public class RemoveProcessor : ProcessorBase, IRemoveProcessor
 	{
-		protected override string Name => "remove";
 		/// <inheritdoc cref="IRemoveProcessor.Field" />
 		public Field Field { get; set; }
+
 		/// <inheritdoc cref="IRemoveProcessor.IgnoreMissing" />
 		public bool? IgnoreMissing { get; set; }
+
+		protected override string Name => "remove";
 	}
 
 	/// <inheritdoc cref="IRemoveProcessor" />

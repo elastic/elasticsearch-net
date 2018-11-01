@@ -3,7 +3,7 @@ namespace Nest
 	public interface IQueriesCacheSettings
 	{
 		/// <summary>
-		/// Whether the query cache is enabled. <c>True</c> by default.
+		///     Whether the query cache is enabled. <c>True</c> by default.
 		/// </summary>
 		bool? Enabled { get; set; }
 	}
@@ -17,7 +17,7 @@ namespace Nest
 	{
 		bool? IQueriesCacheSettings.Enabled { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public QueriesCacheSettingsDescriptor Enabled(bool? enabled = true) =>
 			Assign(a => a.Enabled = enabled);
 	}

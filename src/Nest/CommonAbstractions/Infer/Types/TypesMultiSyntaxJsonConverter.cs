@@ -8,6 +8,17 @@ namespace Nest
 	{
 		public override bool CanConvert(Type objectType) => typeof(Types) == objectType;
 
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType == JsonToken.String)
+			{
+				var types = reader.Value.ToString();
+				return (Types)types;
+			}
+
+			return null;
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var marker = value as Types;
@@ -16,21 +27,11 @@ namespace Nest
 				writer.WriteNull();
 				return;
 			}
+
 			marker.Match(
-				all=> writer.WriteNull(),
+				all => writer.WriteNull(),
 				many => writer.WriteValue(((IUrlParameter)marker).GetString(serializer.GetConnectionSettings()))
 			);
 		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType == JsonToken.String)
-			{
-				var types = reader.Value.ToString();
-				return (Types)types;
-			}
-			return null;
-		}
-
 	}
 }

@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using System.Reflection;
 
 namespace Nest
 {
 	/// <summary>
-	/// A Json converter that can serialize enums to strings where the string values
-	/// are specified using <see cref="EnumMemberAttribute.Value"/> and where values
-	/// differ in casing.
+	///     A Json converter that can serialize enums to strings where the string values
+	///     are specified using <see cref="EnumMemberAttribute.Value" /> and where values
+	///     differ in casing.
 	/// </summary>
 	/// <remarks>
-	/// See https://github.com/JamesNK/Newtonsoft.Json/issues/1067
+	///     See https://github.com/JamesNK/Newtonsoft.Json/issues/1067
 	/// </remarks>
 	/// <typeparam name="TEnum">the type of enum</typeparam>
 	internal class EnumMemberValueCasingJsonConverter<TEnum> : JsonConverter where TEnum : struct
@@ -51,15 +51,7 @@ namespace Nest
 			}
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			var enumValue = (TEnum)value;
-			string stringValue;
-			if (!EnumToString.TryGetValue(enumValue, out stringValue))
-				throw new InvalidOperationException($"'{value}' is not a valid value for '{typeof(TEnum).Name}'");
-
-			writer.WriteValue(stringValue);
-		}
+		public override bool CanConvert(Type objectType) => objectType == typeof(TEnum);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -75,9 +67,14 @@ namespace Nest
 			return Enum.TryParse(value, true, out enumValue) ? enumValue : default(TEnum);
 		}
 
-		public override bool CanConvert(Type objectType)
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			return objectType == typeof(TEnum);
+			var enumValue = (TEnum)value;
+			string stringValue;
+			if (!EnumToString.TryGetValue(enumValue, out stringValue))
+				throw new InvalidOperationException($"'{value}' is not a valid value for '{typeof(TEnum).Name}'");
+
+			writer.WriteValue(stringValue);
 		}
 	}
 }

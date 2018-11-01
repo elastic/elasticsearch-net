@@ -8,9 +8,10 @@ namespace Nest
 {
 	internal class ScriptJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => typeof(IScript).IsAssignableFrom(objectType);
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
+
+		public override bool CanConvert(Type objectType) => typeof(IScript).IsAssignableFrom(objectType);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -24,11 +25,13 @@ namespace Nest
 				var inline = dict["inline"].ToString();
 				script = new InlineScript(inline);
 			}
+
 			if (dict.ContainsKey("source"))
 			{
 				var inline = dict["source"].ToString();
 				script = new InlineScript(inline);
 			}
+
 			if (dict.ContainsKey("id"))
 			{
 				var id = dict["id"].ToString();

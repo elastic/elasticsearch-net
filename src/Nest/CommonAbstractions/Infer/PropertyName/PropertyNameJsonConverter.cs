@@ -11,6 +11,14 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => objectType == typeof(PropertyName);
 
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType != JsonToken.String) return null;
+
+			var property = reader.Value.ToString();
+			return (PropertyName)property;
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var property = value as PropertyName;
@@ -19,15 +27,9 @@ namespace Nest
 				writer.WriteNull();
 				return;
 			}
+
 			var infer = serializer.GetConnectionSettings().Inferrer;
 			writer.WriteValue(infer.PropertyName(property));
 		}
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType != JsonToken.String) return null;
-			var property = reader.Value.ToString();
-			return (PropertyName)property;
-		}
 	}
 }
-
