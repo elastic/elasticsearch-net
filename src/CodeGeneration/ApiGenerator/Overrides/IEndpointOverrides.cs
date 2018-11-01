@@ -1,38 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ApiGenerator.Domain;
 
 namespace ApiGenerator.Overrides.Descriptors
 {
 	/// <summary>
-	/// Tweaks the generated descriptors
+	///     Tweaks the generated descriptors
 	/// </summary>
 	public interface IEndpointOverrides
 	{
 		/// <summary>
-		/// Sometimes params can be defined on the body as well as on the querystring
-		/// We favor specifying params on the body so here we can specify params we don't want on the querystring.
+		///     A map of key -> obsolete message for properties in the spec that should not be used any longer
 		/// </summary>
-		IEnumerable<string> SkipQueryStringParams { get; }
+		IDictionary<string, string> ObsoleteQueryStringParams { get; set; }
 
 		/// <summary>
-		/// Force these be rendered as interface properties only, so that they'd have to be implemented manually
-		/// and become part of the body. This only takes affect on requests that take a body (e.g not GET or HEAD).
-		/// </summary>
-		IEnumerable<string> RenderPartial { get; }
-
-		/// <summary>
-		/// Override how the query param name is exposed to the client.
+		///     Override how the query param name is exposed to the client.
 		/// </summary>
 		IDictionary<string, string> RenameQueryStringParams { get; }
 
 		/// <summary>
-		/// A map of key -> obsolete message for properties in the spec that should not be used any longer
+		///     Force these be rendered as interface properties only, so that they'd have to be implemented manually
+		///     and become part of the body. This only takes affect on requests that take a body (e.g not GET or HEAD).
 		/// </summary>
-		IDictionary<string, string>  ObsoleteQueryStringParams { get; set; }
+		IEnumerable<string> RenderPartial { get; }
 
 		/// <summary>
-		/// Patch the CSharp method
+		///     Sometimes params can be defined on the body as well as on the querystring
+		///     We favor specifying params on the body so here we can specify params we don't want on the querystring.
+		/// </summary>
+		IEnumerable<string> SkipQueryStringParams { get; }
+
+		/// <summary>
+		///     Patch the CSharp method
 		/// </summary>
 		/// <param name="method"></param>
 		/// <returns></returns>

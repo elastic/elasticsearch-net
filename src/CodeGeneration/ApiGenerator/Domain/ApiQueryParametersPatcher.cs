@@ -8,7 +8,6 @@ namespace ApiGenerator.Domain
 {
 	public static class ApiQueryParametersPatcher
 	{
-
 		public static Dictionary<string, ApiQueryParameters> Patch(
 			string urlPath,
 			IDictionary<string, ApiQueryParameters> source,
@@ -54,14 +53,13 @@ namespace ApiGenerator.Domain
 			}
 
 			return patchedParams;
-
 		}
 
 		private static string CreateCSharpName(string queryStringKey)
 		{
 			if (string.IsNullOrWhiteSpace(queryStringKey)) return "UNKNOWN";
 
-            var cased = queryStringKey.ToPascalCase();
+			var cased = queryStringKey.ToPascalCase();
 			switch (cased)
 			{
 				case "Type":
@@ -74,11 +72,22 @@ namespace ApiGenerator.Domain
 			}
 		}
 
-		private static IList<string> CreateSkipList(IEndpointOverrides global, IEndpointOverrides local, ICollection<string> declaredKeys) =>
-			CreateList(global, local, "skip", e => e.SkipQueryStringParams, declaredKeys);
+		private static IList<string> CreateList(IEndpointOverrides global, IEndpointOverrides local, string type,
+			Func<IEndpointOverrides, IEnumerable<string>> @from, ICollection<string> declaredKeys)
+		{
+			var list = new List<string>();
+			if (global != null) list.AddRange(from(global));
+			if (local != null)
+			{
+				var localList = from(local).ToList();
+				list.AddRange(localList);
+				var name = local.GetType().Name;
+				foreach (var p in localList.Except(declaredKeys))
+					ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
+			}
 
-		private static IList<string> CreatePartialList(IEndpointOverrides global, IEndpointOverrides local, ICollection<string> declaredKeys) =>
-			CreateList(global, local, "partial", e => e.RenderPartial, declaredKeys);
+			return list.Distinct().ToList();
+		}
 
 		private static IDictionary<string, string> CreateLookup(IEndpointOverrides global, IEndpointOverrides local, string type,
 			Func<IEndpointOverrides, IDictionary<string, string>> @from, ICollection<string> declaredKeys)
@@ -98,29 +107,18 @@ namespace ApiGenerator.Domain
 			return d;
 		}
 
-		private static IList<string> CreateList(IEndpointOverrides global, IEndpointOverrides local, string type,
-			Func<IEndpointOverrides, IEnumerable<string>> @from, ICollection<string> declaredKeys)
-		{
-			var list = new List<string>();
-			if (global != null) list.AddRange(from(global));
-			if (local != null)
-			{
-				var localList = from(local).ToList();
-				list.AddRange(localList);
-				var name = local.GetType().Name;
-				foreach (var p in localList.Except(declaredKeys))
-					ApiGenerator.Warnings.Add($"On {name} {type} key '{p}' is not found in spec");
-			}
-			return list.Distinct().ToList();
-		}
+		private static IDictionary<string, string> CreateObsoleteLookup(IEndpointOverrides global, IEndpointOverrides local,
+			ICollection<string> declaredKeys) =>
+			CreateLookup(global, local, "obsolete", e => e.ObsoleteQueryStringParams, declaredKeys);
+
+		private static IList<string> CreatePartialList(IEndpointOverrides global, IEndpointOverrides local, ICollection<string> declaredKeys) =>
+			CreateList(global, local, "partial", e => e.RenderPartial, declaredKeys);
 
 		private static IDictionary<string, string> CreateRenameLookup(IEndpointOverrides global, IEndpointOverrides local,
 			ICollection<string> declaredKeys) =>
 			CreateLookup(global, local, "rename", e => e.RenameQueryStringParams, declaredKeys);
 
-		private static IDictionary<string, string> CreateObsoleteLookup(IEndpointOverrides global, IEndpointOverrides local,
-			ICollection<string> declaredKeys) =>
-			CreateLookup(global, local, "obsolete", e => e.ObsoleteQueryStringParams, declaredKeys);
-
+		private static IList<string> CreateSkipList(IEndpointOverrides global, IEndpointOverrides local, ICollection<string> declaredKeys) =>
+			CreateList(global, local, "skip", e => e.SkipQueryStringParams, declaredKeys);
 	}
 }

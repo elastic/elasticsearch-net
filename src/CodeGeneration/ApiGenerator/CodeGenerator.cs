@@ -7,21 +7,6 @@ namespace ApiGenerator.Domain
 {
 	public static class CodeGenerator
 	{
-		public static string PropertyGenerator(string type, string name, string key, string setter) =>
-			$"public {type} {name} {{ get => Q<{type}>(\"{key}\"); set => Q(\"{key}\", {setter}); }}";
-
-		public static string Property(string type, string name, string key, string setter, string obsolete, params string[] doc)
-		{
-			var components = new List<string>();
-			foreach (var d in RenderDocumentation(doc)) A(d);
-			if (!string.IsNullOrWhiteSpace(obsolete)) A($"[Obsolete(\"Scheduled to be removed in 7.0, {obsolete}\")]");
-
-			A(PropertyGenerator(type, name, key, setter));
-			return string.Join("\r\n\t\t", components);
-
-			void A(string s) => components.Add(s);
-		}
-
 		public static string Constructor(Constructor c)
 		{
 			var components = new List<string>();
@@ -32,9 +17,30 @@ namespace ApiGenerator.Domain
 			if (!c.Body.IsNullOrEmpty()) A(c.Body);
 			if (!c.AdditionalCode.IsNullOrEmpty()) A(c.AdditionalCode);
 			return string.Join("\r\n\t\t", components);
-			void A(string s) => components.Add(s);
+
+			void A(string s)
+			{
+				components.Add(s);
+			}
 		}
 
+		public static string Property(string type, string name, string key, string setter, string obsolete, params string[] doc)
+		{
+			var components = new List<string>();
+			foreach (var d in RenderDocumentation(doc)) A(d);
+			if (!string.IsNullOrWhiteSpace(obsolete)) A($"[Obsolete(\"Scheduled to be removed in 7.0, {obsolete}\")]");
+
+			A(PropertyGenerator(type, name, key, setter));
+			return string.Join("\r\n\t\t", components);
+
+			void A(string s)
+			{
+				components.Add(s);
+			}
+		}
+
+		public static string PropertyGenerator(string type, string name, string key, string setter) =>
+			$"public {type} {name} {{ get => Q<{type}>(\"{key}\"); set => Q(\"{key}\", {setter}); }}";
 
 
 		private static IEnumerable<string> RenderDocumentation(params string[] doc)
@@ -53,12 +59,14 @@ namespace ApiGenerator.Domain
 					yield break;
 			}
 		}
+
 		private static string[] WrapDocumentation(string documentation)
 		{
 			const int max = 140;
-			var lines = documentation.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+			var lines = documentation.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 			var charCount = 0;
 			return lines.GroupBy(Wrap).Select(l => string.Join(" ", l.ToArray())).ToArray();
+
 			int Wrap(string w)
 			{
 				var increase = (charCount % max + w.Length + 1 >= max ? max - (charCount % max) : 0);
