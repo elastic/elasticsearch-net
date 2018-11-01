@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Nest.JsonNetSerializer
 {
@@ -15,11 +13,14 @@ namespace Nest.JsonNetSerializer
 		// Default buffer size of StreamWriter, which is private :(
 		internal const int DefaultBufferSize = 1024;
 
+		private static readonly Task CompletedTask = Task.CompletedTask;
+
 		internal static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
-		protected virtual int BufferSize => DefaultBufferSize;
+		private readonly JsonSerializer _collapsedSerializer;
 
 		private readonly JsonSerializer _serializer;
-		private readonly JsonSerializer _collapsedSerializer;
+
+		protected virtual int BufferSize => DefaultBufferSize;
 
 		public T Deserialize<T>(Stream stream)
 		{
@@ -41,7 +42,7 @@ namespace Nest.JsonNetSerializer
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
 				var token = await jsonTextReader.ReadTokenWithDateParseHandlingNoneAsync(cancellationToken).ConfigureAwait(false);
-				return token.ToObject<T>(this._serializer);
+				return token.ToObject<T>(_serializer);
 			}
 		}
 
@@ -51,7 +52,7 @@ namespace Nest.JsonNetSerializer
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
 				var token = await jsonTextReader.ReadTokenWithDateParseHandlingNoneAsync(cancellationToken).ConfigureAwait(false);
-				return token.ToObject(type, this._serializer);
+				return token.ToObject(type, _serializer);
 			}
 		}
 
@@ -65,14 +66,12 @@ namespace Nest.JsonNetSerializer
 			}
 		}
 
-		private static readonly Task CompletedTask = Task.CompletedTask;
-
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
 			CancellationToken cancellationToken = default(CancellationToken))
 		{
 			//This makes no sense now but we need the async method on the interface in 6.x so we can start swapping this out
 			//for an implementation that does make sense without having to wait for 7.x
-			this.Serialize(data, stream, formatting);
+			Serialize(data, stream, formatting);
 			return CompletedTask;
 		}
 	}
