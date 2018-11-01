@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
@@ -102,7 +101,7 @@ namespace Tests.Reproduce
 			ShouldDeserialize(se.Error.CausedBy.CausedBy.CausedBy);
 		}
 
-		private static void ShouldDeserialize(ErrorCause error,  bool nullReason = false)
+		private static void ShouldDeserialize(ErrorCause error, bool nullReason = false)
 		{
 			error.Should().NotBeNull();
 			error.Type.Should().NotBeNullOrEmpty();

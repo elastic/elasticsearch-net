@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -16,50 +15,82 @@ namespace Tests.Reproduce
 	public class GithubIssue2052
 	{
 		private const string _objectMessage = "My message";
-		private static object _bulkHeader =
-			 new { index = new { _index = "myIndex", _type = "myDocumentType" } };
+
+		private static readonly object _bulkHeader =
+			new { index = new { _index = "myIndex", _type = "myDocumentType" } };
+
 		private readonly ElasticLowLevelClient _client;
 
 		public GithubIssue2052()
 		{
 			var connectionSettings = TestClient.DisabledStreaming.ConnectionSettings;
-			this._client = new ElasticLowLevelClient(connectionSettings);
-		}
-
-		[U] public void SingleThrownExceptionCanBeSerializedUsingSimpleJson()
-		{
-
-			var ex = this.GimmeACaughtException();
-
-			var request = this.CreateRequest(ex);
-			var postData = this.CreatePostData(ex);
-
-			this.AssertRequestEquals(request, postData);
+			_client = new ElasticLowLevelClient(connectionSettings);
 		}
 
 		[U] public void MultipleThrownExceptionCanBeSerializedUsingSimpleJson()
 		{
+			var ex = GimmeAnExceptionWithInnerException();
 
-			var ex = this.GimmeAnExceptionWithInnerException();
+			var request = CreateRequest(ex);
+			var postData = CreatePostData(ex);
 
-			var request = this.CreateRequest(ex);
-			var postData = this.CreatePostData(ex);
+			AssertRequestEquals(request, postData);
+		}
 
-			this.AssertRequestEquals(request, postData);
+		[U] public void SingleThrownExceptionCanBeSerializedUsingSimpleJson()
+		{
+			var ex = GimmeACaughtException();
+
+			var request = CreateRequest(ex);
+			var postData = CreatePostData(ex);
+
+			AssertRequestEquals(request, postData);
+		}
+
+		private void AssertRequestEquals(string request, PostData postData)
+		{
+			using (var ms = new MemoryStream())
+			{
+				postData.Write(ms, _client.Settings);
+				var expectedString = Encoding.UTF8.GetString(ms.ToArray());
+				request.Should().Be(expectedString);
+			}
 		}
 
 		private PostData CreatePostData(Exception e)
 		{
 			var postData = PostData.MultiJson(new List<object>
+				{
+					_bulkHeader,
+					new
+					{
+						message = "My message",
+						exception = ExceptionJson(e).ToArray(),
+					}
+				}
+			);
+			return postData;
+		}
+
+		private string CreateRequest(Exception ex)
+		{
+			var document = new Dictionary<string, object>
+			{
+				{ "message", _objectMessage },
+				{ "exception", ex }
+			};
+
+
+			var payload = new List<object>
 			{
 				_bulkHeader,
-				new
-				{
-					message = "My message",
-					exception = this.ExceptionJson(e).ToArray(),
-				}
-			});
-			return postData;
+				document
+			};
+			var response = _client.Bulk<BytesResponse>(PostData.MultiJson(payload));
+
+
+			var request = Encoding.UTF8.GetString(response.RequestBodyInBytes);
+			return request;
 		}
 
 		private IEnumerable<object> ExceptionJson(Exception e)
@@ -92,9 +123,33 @@ namespace Tests.Reproduce
 				};
 				depth++;
 				e = e.InnerException;
+			} while (depth < maxExceptions && e != null);
+		}
 
+		private Exception GimmeACaughtException()
+		{
+			try
+			{
+				throw new Exception("Some exception");
 			}
-			while (depth < maxExceptions && e != null);
+			catch (Exception e)
+			{
+				return e;
+			}
+		}
+
+
+		private Exception GimmeAnExceptionWithInnerException()
+		{
+			try
+			{
+				var e = GimmeACaughtException();
+				throw new Exception("Some exception", e);
+			}
+			catch (Exception e)
+			{
+				return e;
+			}
 		}
 
 		private object WriteStructuredExceptionMethod(string exceptionMethodString)
@@ -121,61 +176,6 @@ namespace Tests.Reproduce
 				Signature = signature,
 				MemberType = memberType,
 			};
-		}
-
-		private string CreateRequest(Exception ex)
-		{
-			var document = new Dictionary<string, object>{
-				{ "message", _objectMessage},
-				{ "exception", ex }
-			};
-
-
-			var payload = new List<object>{
-				_bulkHeader,
-				document
-			};
-			var response = this._client.Bulk<BytesResponse>(PostData.MultiJson(payload));
-
-
-			var request = Encoding.UTF8.GetString(response.RequestBodyInBytes);
-			return request;
-		}
-
-		private void AssertRequestEquals(string request, PostData postData)
-		{
-			using (var ms = new MemoryStream())
-			{
-				postData.Write(ms, this._client.Settings);
-				var expectedString = Encoding.UTF8.GetString(ms.ToArray());
-				request.Should().Be(expectedString);
-			}
-		}
-
-		private Exception GimmeACaughtException()
-		{
-			try
-			{
-				throw new Exception("Some exception");
-			}
-			catch (Exception e)
-			{
-				return e;
-			}
-		}
-
-
-		private Exception GimmeAnExceptionWithInnerException()
-		{
-			try
-			{
-				var e = this.GimmeACaughtException();
-				throw new Exception("Some exception", e);
-			}
-			catch (Exception e)
-			{
-				return e;
-			}
 		}
 	}
 }

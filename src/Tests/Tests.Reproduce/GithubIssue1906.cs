@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using Nest;
 using FluentAssertions;
+using Nest;
 
 namespace Tests.Reproduce
 {
 	public class GithubIssue1906
 	{
-		private class ESLogEvent { }
-
 		[U] public void SearchDoesNotTakeDefaultIndexIntoAccount()
 		{
 			var node = new Uri("http://localhost:9200");
@@ -27,16 +22,17 @@ namespace Tests.Reproduce
 				});
 
 			var client = new ElasticClient(connectionSettings);
-			var response = client.Search<ESLogEvent>(s=>s);
+			var response = client.Search<ESLogEvent>(s => s);
 
 			response.ApiCall.Uri.AbsolutePath.Should().Be("/logstash-%2A/eslogevent/_search");
 
-			response = client.Search<ESLogEvent>(new SearchRequest<ESLogEvent>{ });
+			response = client.Search<ESLogEvent>(new SearchRequest<ESLogEvent> { });
 			response.ApiCall.Uri.AbsolutePath.Should().Be("/logstash-%2A/eslogevent/_search");
 
 			response = client.Search<ESLogEvent>(new SearchRequest { });
 			response.ApiCall.Uri.AbsolutePath.Should().Be("/_search");
-
 		}
+
+		private class ESLogEvent { }
 	}
 }

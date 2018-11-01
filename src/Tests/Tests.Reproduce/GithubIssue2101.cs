@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Elastic.Xunit.XunitPlumbing;
-using Elasticsearch.Net;
-using Nest;
+﻿using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
+using Nest;
 
 namespace Tests.Reproduce
 {
 	public class GithubIssue2101
 	{
-
 		[U]
 		public void BoolClausesShouldEvaluateOnlyOnce()
 		{
@@ -22,25 +16,29 @@ namespace Tests.Reproduce
 
 			new BoolQueryDescriptor<object>()
 				.Must(m =>
-				{
-					must++;
-					return m;
-				})
+					{
+						must++;
+						return m;
+					}
+				)
 				.MustNot(mn =>
-				{
-					mustNot++;
-					return mn;
-				})
+					{
+						mustNot++;
+						return mn;
+					}
+				)
 				.Should(sh =>
-				{
-					should++;
-					return sh;
-				})
+					{
+						should++;
+						return sh;
+					}
+				)
 				.Filter(f =>
-				{
-					filter++;
-					return f;
-				});
+					{
+						filter++;
+						return f;
+					}
+				);
 
 			filter.Should().Be(1);
 			should.Should().Be(1);

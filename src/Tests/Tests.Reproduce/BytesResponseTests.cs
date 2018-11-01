@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -14,22 +13,22 @@ namespace Tests.Reproduce
 
 		public BytesResponseTests(ReadOnlyCluster cluster) => _cluster = cluster;
 
-		[I] public void NonNullBytesResponse()
+		[I] public void NonNullBytesLowLevelResponse()
 		{
-			var client = _cluster.Client;
+			var settings = new ConnectionConfiguration(new Uri($"http://localhost:{_cluster.Nodes.First().Port ?? 9200}"));
+			var lowLevelClient = new ElasticLowLevelClient(settings);
 
-			var bytesResponse = client.LowLevel.Search<BytesResponse>("project", "project", PostData.Serializable(new { }));
+			var bytesResponse = lowLevelClient.Search<BytesResponse>("project", "project", PostData.Serializable(new { }));
 
 			bytesResponse.Body.Should().NotBeNull();
 			bytesResponse.Body.Should().BeEquivalentTo(bytesResponse.ResponseBodyInBytes);
 		}
 
-		[I] public void NonNullBytesLowLevelResponse()
+		[I] public void NonNullBytesResponse()
 		{
-			var settings  = new ConnectionConfiguration(new Uri($"http://localhost:{_cluster.Nodes.First().Port ?? 9200}"));
-			var lowLevelClient = new ElasticLowLevelClient(settings);
+			var client = _cluster.Client;
 
-			var bytesResponse = lowLevelClient.Search<BytesResponse>("project", "project", PostData.Serializable(new { }));
+			var bytesResponse = client.LowLevel.Search<BytesResponse>("project", "project", PostData.Serializable(new { }));
 
 			bytesResponse.Body.Should().NotBeNull();
 			bytesResponse.Body.Should().BeEquivalentTo(bytesResponse.ResponseBodyInBytes);

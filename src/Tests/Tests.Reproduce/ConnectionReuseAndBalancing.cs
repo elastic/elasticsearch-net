@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
-using Nest;
-using FluentAssertions;
-using System.Threading;
 using System.Reactive.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
+using Elasticsearch.Net;
+using FluentAssertions;
+using Nest;
 using Tests.Core.ManagedElasticsearch;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
@@ -21,20 +21,14 @@ namespace Tests.Reproduce
 
 	public class ConnectionReuseAndBalancing : ClusterTestClassBase<ConnectionReuseCluster>
 	{
-		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).GetTypeInfo().Assembly.GetType("System.Net.Http.CurlHandler") != null;
-
 		public ConnectionReuseAndBalancing(ConnectionReuseCluster cluster) : base(cluster) { }
 
-		public IEnumerable<Project> MockDataGenerator(int numDocuments)
-		{
-			foreach (var i in Enumerable.Range(0, numDocuments))
-				yield return new Project {Name = $"project-{i}"};
-		}
+		private static bool IsCurlHandler { get; } = typeof(HttpClientHandler).GetTypeInfo().Assembly.GetType("System.Net.Http.CurlHandler") != null;
 
 		[I] public async Task IndexAndSearchABunch()
 		{
 			const int requestsPerIteration = 1000;
-			var client = this.Client;
+			var client = Client;
 
 			await IndexMockData(client, requestsPerIteration);
 
@@ -49,6 +43,12 @@ namespace Tests.Reproduce
 				var nodeStats = await client.NodesStatsAsync(statsRequest);
 				AssertHttpStats(client, nodeStats, i, requestsPerIteration);
 			}
+		}
+
+		public IEnumerable<Project> MockDataGenerator(int numDocuments)
+		{
+			foreach (var i in Enumerable.Range(0, numDocuments))
+				yield return new Project { Name = $"project-{i}" };
 		}
 
 		private static void AssertHttpStats(IElasticClient c, INodesStatsResponse r, int i, int requestsPerIteration)
@@ -82,11 +82,13 @@ namespace Tests.Reproduce
 					errorMessage =
 						$"Expected some socket bleeding but iteration {i} exceeded iteration specific max {iterationMax} = (({maxCurrent} * {m}) / 2) + {leeWay}";
 				}
+
 				node.Http.TotalOpened.Should().BeLessOrEqualTo(iterationMax, errorMessage);
 				if (i == -1) return;
 
 				Console.WriteLine(
-					$"Current Open: {h.CurrentOpen}, Total Opened: {h.TotalOpened}, Iteration Max = {iterationMax}, Iteration: {i}, Total Searches {(i + 1) * requestsPerIteration}");
+					$"Current Open: {h.CurrentOpen}, Total Opened: {h.TotalOpened}, Iteration Max = {iterationMax}, Iteration: {i}, Total Searches {(i + 1) * requestsPerIteration}"
+				);
 			}
 		}
 
@@ -94,13 +96,14 @@ namespace Tests.Reproduce
 		{
 			var tokenSource = new CancellationTokenSource();
 			await c.DeleteIndexAsync(Index<Project>(), cancellationToken: tokenSource.Token);
-			var observableBulk = c.BulkAll(this.MockDataGenerator(100000), f => f
+			var observableBulk = c.BulkAll(MockDataGenerator(100000), f => f
 					.MaxDegreeOfParallelism(10)
 					.BackOffTime(TimeSpan.FromSeconds(10))
 					.BackOffRetries(2)
 					.Size(1000)
 					.RefreshOnCompleted()
-				, tokenSource.Token);
+				, tokenSource.Token
+			);
 			await observableBulk.ForEachAsync(x => { }, tokenSource.Token);
 			var statsRequest = new NodesStatsRequest(NodesStatsMetric.Http);
 			var nodeStats = await c.NodesStatsAsync(statsRequest, tokenSource.Token);

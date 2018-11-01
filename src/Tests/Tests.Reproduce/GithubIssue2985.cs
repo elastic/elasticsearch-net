@@ -1,5 +1,4 @@
 using System;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -13,18 +12,16 @@ namespace Tests.Reproduce
 
 		public GithubIssue2985(WritableCluster cluster) => _cluster = cluster;
 
-		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
-
 		[I]
 		public void BadRequestErrorShouldBeWrappedInElasticsearchClientException()
 		{
 			var client = _cluster.Client;
 			var index = $"gh2985-{RandomString()}";
-			var response = client.CreateIndex(index, i=> i
-				.Settings(s=>s
-					.Analysis(a=>a
-						.Analyzers(an=>an
-							.Custom("custom", c=>c.Filters("ascii_folding").Tokenizer("standard"))
+			var response = client.CreateIndex(index, i => i
+				.Settings(s => s
+					.Analysis(a => a
+						.Analyzers(an => an
+							.Custom("custom", c => c.Filters("ascii_folding").Tokenizer("standard"))
 						)
 					)
 				)
@@ -37,5 +34,7 @@ namespace Tests.Reproduce
 
 			client.DeleteIndex(index);
 		}
+
+		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 	}
 }

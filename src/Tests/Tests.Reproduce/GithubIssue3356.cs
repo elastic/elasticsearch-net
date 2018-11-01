@@ -25,7 +25,8 @@ namespace Tests.Reproduce
 
 			doc.Join.Match(
 				p => { p.Name.Should().Be("parent"); },
-				c => throw new InvalidOperationException("should not be called"));
+				c => throw new InvalidOperationException("should not be called")
+			);
 		}
 
 		private class MyDocument
