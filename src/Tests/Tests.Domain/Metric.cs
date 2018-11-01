@@ -7,10 +7,6 @@ namespace Tests.Domain
 {
 	public class Metric
 	{
-		[Date(Name="@timestamp")]
-		[MachineLearningDateTime, JsonConverter(typeof(MachineLearningDateTimeConverter))]
-		public DateTime Timestamp { get; set; }
-
 		public long Accept { get; set; }
 
 		public long Deny { get; set; }
@@ -20,6 +16,10 @@ namespace Tests.Domain
 		public float Response { get; set; }
 
 		public string Service { get; set; }
+
+		[Date(Name = "@timestamp")]
+		[MachineLearningDateTime, JsonConverter(typeof(MachineLearningDateTimeConverter))]
+		public DateTime Timestamp { get; set; }
 
 		public long Total { get; set; }
 	}
@@ -31,8 +31,6 @@ namespace Tests.Domain
 		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
 
 		public override bool CanWrite => false;
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -46,5 +44,7 @@ namespace Tests.Domain
 
 			return dateTimeOffset.DateTime;
 		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 	}
 }

@@ -6,8 +6,6 @@ namespace Tests.Domain.Helpers
 {
 	public static class TestValueHelper
 	{
-		private static bool InRange(string range) => ElasticsearchVersion.From(TestConfiguration.Instance.ElasticsearchVersion).InRange(range);
-
 		public const string ProjectsIndex = "project";
 
 		public static DateTime FixedDate { get; } = new DateTime(2015, 06, 06, 12, 01, 02, 123);
@@ -16,5 +14,6 @@ namespace Tests.Domain.Helpers
 
 		public static object Dependant(object builtin, object source) => TestConfiguration.Instance.Random.SourceSerializer ? source : builtin;
 
+		private static bool InRange(string range) => ElasticsearchVersion.From(TestConfiguration.Instance.ElasticsearchVersion).InRange(range);
 	}
 }

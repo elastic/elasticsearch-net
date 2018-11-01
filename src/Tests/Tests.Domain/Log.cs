@@ -9,38 +9,8 @@ namespace Tests.Domain
 {
 	public class Log
 	{
-		public DateTime Timestamp { get; set; }
-
-		public string Body { get; set; }
-		[Keyword] public string Tag { get; set; }
-		[Keyword] public string UserAgent { get; set; }
-		[Keyword] public string User { get; set; }
-		[Keyword] public string Url { get; set; }
-		[Keyword] public string Section { get; set; }
-		public long Temperature { get; set; }
-		public double Voltage { get; set; }
-		public double Load { get; set; }
-		public double NetIn { get; set; }
-		public double NetOut { get; set; }
-
-		public static Faker<Log> Generator { get; } =
-			new Faker<Log>()
-				.UseSeed(TestConfiguration.Instance.Seed)
-				.RuleFor(m => m.Timestamp, m => m.Date.Between(DateTime.UtcNow.AddDays(-7), DateTime.UtcNow))
-				.RuleFor(m => m.Body, m => GetMessageText())
-				.RuleFor(m => m.Tag, m => m.Hacker.Abbreviation())
-				.RuleFor(m => m.UserAgent, m => m.Internet.UserAgent())
-				.RuleFor(m => m.User, m => m.Internet.UserName())
-				.RuleFor(m => m.Url, m => m.Internet.UrlWithPath())
-				.RuleFor(m => m.Temperature, m => m.Random.Number(-10, 45))
-				.RuleFor(m => m.Voltage, m => m.Random.Double(0, 10.0))
-				.RuleFor(m => m.Section, m => m.PickRandom(Sections))
-				.RuleFor(m => m.Load, m => m.Random.Double(100, 500))
-				.RuleFor(m => m.NetIn, m => m.Random.Double(1000, 10000))
-				.RuleFor(m => m.NetOut, m => m.Random.Double(1000, 10000))
-			;
-
 		private static readonly Random Random = new Random(15842);
+
 		public static readonly string[] Words =
 		{
 			"molestie", "vel", "metus", "neque", "dui", "volutpat", "sollicitudin", "sociis", "ac", "imperdiet", "tristique", "et",
@@ -61,7 +31,48 @@ namespace Tests.Domain
 			"dictum", "elit", "sed"
 		};
 
-		public static readonly string[] Sections = Words.Where(w=>w.Length > 3).Take(10).ToArray();
+		public static readonly string[] Sections = Words.Where(w => w.Length > 3).Take(10).ToArray();
+
+
+		public string Body { get; set; }
+
+		public static Faker<Log> Generator { get; } =
+			new Faker<Log>()
+				.UseSeed(TestConfiguration.Instance.Seed)
+				.RuleFor(m => m.Timestamp, m => m.Date.Between(DateTime.UtcNow.AddDays(-7), DateTime.UtcNow))
+				.RuleFor(m => m.Body, m => GetMessageText())
+				.RuleFor(m => m.Tag, m => m.Hacker.Abbreviation())
+				.RuleFor(m => m.UserAgent, m => m.Internet.UserAgent())
+				.RuleFor(m => m.User, m => m.Internet.UserName())
+				.RuleFor(m => m.Url, m => m.Internet.UrlWithPath())
+				.RuleFor(m => m.Temperature, m => m.Random.Number(-10, 45))
+				.RuleFor(m => m.Voltage, m => m.Random.Double(0, 10.0))
+				.RuleFor(m => m.Section, m => m.PickRandom(Sections))
+				.RuleFor(m => m.Load, m => m.Random.Double(100, 500))
+				.RuleFor(m => m.NetIn, m => m.Random.Double(1000, 10000))
+				.RuleFor(m => m.NetOut, m => m.Random.Double(1000, 10000));
+
+		public double Load { get; set; }
+
+		public double NetIn { get; set; }
+
+		public double NetOut { get; set; }
+
+		[Keyword] public string Section { get; set; }
+
+		[Keyword] public string Tag { get; set; }
+
+		public long Temperature { get; set; }
+
+		public DateTime Timestamp { get; set; }
+
+		[Keyword] public string Url { get; set; }
+
+		[Keyword] public string User { get; set; }
+
+		[Keyword] public string UserAgent { get; set; }
+
+		public double Voltage { get; set; }
 
 		private static string GetMessageText()
 		{
@@ -69,10 +80,7 @@ namespace Tests.Domain
 
 			var sb = new StringBuilder();
 
-			for (var i = 0; i < numWords; i++)
-			{
-				sb.Append(Words[Random.Next(0, Words.Length)]).Append(" ");
-			}
+			for (var i = 0; i < numWords; i++) sb.Append(Words[Random.Next(0, Words.Length)]).Append(" ");
 
 			return sb.ToString().TrimEnd();
 		}
