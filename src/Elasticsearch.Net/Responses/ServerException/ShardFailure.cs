@@ -5,10 +5,10 @@ namespace Elasticsearch.Net
 {
 	public class ShardFailure
 	{
-		public ErrorCause Reason { get; set; }
-		public int? Shard { get; set; }
 		public string Index { get; set; }
 		public string Node { get; set; }
+		public ErrorCause Reason { get; set; }
+		public int? Shard { get; set; }
 		public string Status { get; set; }
 
 		internal static ShardFailure CreateShardFailure(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
@@ -20,9 +20,10 @@ namespace Elasticsearch.Net
 			if (dict.TryGetValue("status", out var status)) f.Status = Convert.ToString(status);
 			if (dict.TryGetValue("reason", out var reason))
 			{
-				var cause = (ErrorCause) strategy.DeserializeObject(reason, typeof(ErrorCause));
+				var cause = (ErrorCause)strategy.DeserializeObject(reason, typeof(ErrorCause));
 				f.Reason = cause;
 			}
+
 			return f;
 		}
 	}

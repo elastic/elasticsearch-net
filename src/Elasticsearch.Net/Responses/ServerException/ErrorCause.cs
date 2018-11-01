@@ -6,11 +6,15 @@ namespace Elasticsearch.Net
 {
 	public class ErrorCause
 	{
-		public string Reason { get; set; }
-		public string Type { get; set; }
 		public ErrorCause CausedBy { get; set; }
-		public string StackTrace { get; set; }
 		public ErrorCauseMetadata Metadata { get; set; }
+		public string Reason { get; set; }
+		public string StackTrace { get; set; }
+		public string Type { get; set; }
+
+		public override string ToString() => CausedBy == null
+			? $"Type: {Type} Reason: \"{Reason}\""
+			: $"Type: {Type} Reason: \"{Reason}\" CausedBy: \"{CausedBy}\"";
 
 		internal static ErrorCause CreateErrorCause(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
 		{
@@ -24,10 +28,6 @@ namespace Elasticsearch.Net
 			return causedBy;
 		}
 
-		public override string ToString() => this.CausedBy == null
-			? $"Type: {this.Type} Reason: \"{this.Reason}\""
-			: $"Type: {this.Type} Reason: \"{this.Reason}\" CausedBy: \"{this.CausedBy}\"";
-
 		public class ErrorCauseMetadata
 		{
 			private static readonly IReadOnlyCollection<string> DefaultCollection =
@@ -36,31 +36,32 @@ namespace Elasticsearch.Net
 			private static readonly IReadOnlyCollection<ShardFailure> DefaultFailedShards =
 				new ReadOnlyCollection<ShardFailure>(new ShardFailure[0] { });
 
-			public string LicensedExpiredFeature { get; set; }
-			public string Index { get; set; }
-			public string IndexUUID { get; set; }
-			public string ResourceType { get; set; }
-			public IReadOnlyCollection<string> ResourceId { get; set; } = DefaultCollection;
-			public int? Shard { get; set; }
-
-			public IReadOnlyCollection<ShardFailure> FailedShards { get; set; } = DefaultFailedShards;
-
-			public int? Line { get; set; }
-			public int? Column { get; set; }
-
-			public long? BytesWanted { get; set; }
 			public long? BytesLimit { get; set; }
 
-			public string Phase { get; set; }
-			public bool? Grouped { get; set; }
+			public long? BytesWanted { get; set; }
+			public int? Column { get; set; }
 
-			public IReadOnlyCollection<string> ScriptStack { get; set; } = DefaultCollection;
-			public string Script { get; set; }
+			public IReadOnlyCollection<ShardFailure> FailedShards { get; set; } = DefaultFailedShards;
+			public bool? Grouped { get; set; }
+			public string Index { get; set; }
+			public string IndexUUID { get; set; }
 			public string Language { get; set; }
 
-            internal static ErrorCauseMetadata CreateCauseMetadata(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
-            {
-                var m = new ErrorCauseMetadata();
+			public string LicensedExpiredFeature { get; set; }
+
+			public int? Line { get; set; }
+
+			public string Phase { get; set; }
+			public IReadOnlyCollection<string> ResourceId { get; set; } = DefaultCollection;
+			public string ResourceType { get; set; }
+			public string Script { get; set; }
+
+			public IReadOnlyCollection<string> ScriptStack { get; set; } = DefaultCollection;
+			public int? Shard { get; set; }
+
+			internal static ErrorCauseMetadata CreateCauseMetadata(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
+			{
+				var m = new ErrorCauseMetadata();
 				if (dict.TryGetValue("license.expired.feature", out var feature)) m.LicensedExpiredFeature = Convert.ToString(feature);
 				if (dict.TryGetValue("index", out var index)) m.Index = Convert.ToString(index);
 				if (dict.TryGetValue("index_uuid", out var indexUUID)) m.IndexUUID = Convert.ToString(indexUUID);
@@ -80,10 +81,10 @@ namespace Elasticsearch.Net
 				if (dict.TryGetValue("lang", out var language)) m.Language = Convert.ToString(language);
 				if (dict.TryGetValue("failed_shards", out var failedShards))
 					m.FailedShards = GetShardFailures(failedShards, strategy);
-                return m;
-            }
+				return m;
+			}
 
-			private static IReadOnlyCollection<ShardFailure> GetShardFailures(object value,IJsonSerializerStrategy strategy)
+			private static IReadOnlyCollection<ShardFailure> GetShardFailures(object value, IJsonSerializerStrategy strategy)
 			{
 				if (!(value is object[] objects))
 					return DefaultFailedShards;
@@ -91,26 +92,27 @@ namespace Elasticsearch.Net
 				var values = new List<ShardFailure>();
 				foreach (var v in objects)
 				{
-					var cause = (ShardFailure) strategy.DeserializeObject(v, typeof(ShardFailure));
+					var cause = (ShardFailure)strategy.DeserializeObject(v, typeof(ShardFailure));
 					if (cause != null) values.Add(cause);
 				}
+
 				return new ReadOnlyCollection<ShardFailure>(values.ToArray());
 			}
 
-			private static IReadOnlyCollection<string> GetStringArray(object value,IJsonSerializerStrategy strategy)
+			private static IReadOnlyCollection<string> GetStringArray(object value, IJsonSerializerStrategy strategy)
 			{
-				if (value is string s) return new ReadOnlyCollection<string>(new [] {s});
+				if (value is string s) return new ReadOnlyCollection<string>(new[] { s });
+
 				if (value is object[] objects)
 				{
 					var values = new List<string>();
 					foreach (var v in objects)
-					{
-						if (v is string vs) values.Add(vs);
-					}
+						if (v is string vs)
+							values.Add(vs);
 					return new ReadOnlyCollection<string>(values.ToArray());
 				}
-				return DefaultCollection;
 
+				return DefaultCollection;
 			}
 		}
 	}

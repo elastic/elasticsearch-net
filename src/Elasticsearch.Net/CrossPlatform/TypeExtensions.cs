@@ -1,32 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
 	internal static class DotNetCoreTypeExtensions
 	{
-		internal static bool IsGeneric(this Type type)
-		{
-			return type.GetTypeInfo().IsGenericType;
-		}
+		internal static Assembly Assembly(this Type type) => type.GetTypeInfo().Assembly;
 
-		internal static bool AssignableFrom(this Type type, Type from)
-		{
-			return type.GetTypeInfo().IsAssignableFrom(from.GetTypeInfo());
-		}
-
-		internal static Assembly Assembly(this Type type)
-		{
-			return type.GetTypeInfo().Assembly;
-		}
-
-		internal static bool IsValue(this Type type)
-		{
-			return type.GetTypeInfo().IsValueType;
-		}
+		internal static bool AssignableFrom(this Type type, Type from) => type.GetTypeInfo().IsAssignableFrom(from.GetTypeInfo());
 
 		internal static TypeCode GetTypeCode(this Type type)
 		{
@@ -58,7 +39,7 @@ namespace Elasticsearch.Net
 				return TypeCode.Double;
 			else if (type == typeof(decimal))
 				return TypeCode.Decimal;
-			else if (type == typeof(System.DateTime))
+			else if (type == typeof(DateTime))
 				return TypeCode.DateTime;
 			else if (type == typeof(string))
 				return TypeCode.String;
@@ -67,5 +48,9 @@ namespace Elasticsearch.Net
 			else
 				return TypeCode.Object;
 		}
+
+		internal static bool IsGeneric(this Type type) => type.GetTypeInfo().IsGenericType;
+
+		internal static bool IsValue(this Type type) => type.GetTypeInfo().IsValueType;
 	}
 }

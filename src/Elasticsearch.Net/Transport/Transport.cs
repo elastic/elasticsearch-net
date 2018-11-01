@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
 #if !DOTNETCORE
 using System.Net;
 #endif
@@ -12,20 +13,14 @@ namespace Elasticsearch.Net
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
 		where TConnectionSettings : IConnectionConfigurationValues
 	{
-		public TConnectionSettings Settings { get; }
-
-		private IDateTimeProvider DateTimeProvider { get; }
-		private IMemoryStreamFactory MemoryStreamFactory { get; }
-		private IRequestPipelineFactory PipelineProvider { get; }
-
 		/// <summary>
-		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
+		///     Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
 		public Transport(TConnectionSettings configurationValues) : this(configurationValues, null, null, null) { }
 
 		/// <summary>
-		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
+		///     Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
 		/// <param name="pipelineProvider">In charge of create a new pipeline, safe to pass null to use the default</param>
@@ -36,28 +31,34 @@ namespace Elasticsearch.Net
 			IRequestPipelineFactory pipelineProvider,
 			IDateTimeProvider dateTimeProvider,
 			IMemoryStreamFactory memoryStreamFactory
-			)
+		)
 		{
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));
 			configurationValues.Connection.ThrowIfNull(nameof(configurationValues.Connection));
 			configurationValues.RequestResponseSerializer.ThrowIfNull(nameof(configurationValues.RequestResponseSerializer));
 
-			this.Settings = configurationValues;
-			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
-			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net.DateTimeProvider.Default;
-			this.MemoryStreamFactory = memoryStreamFactory ?? configurationValues.MemoryStreamFactory;
+			Settings = configurationValues;
+			PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
+			DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
+			MemoryStreamFactory = memoryStreamFactory ?? configurationValues.MemoryStreamFactory;
 		}
+
+		public TConnectionSettings Settings { get; }
+
+		private IDateTimeProvider DateTimeProvider { get; }
+		private IMemoryStreamFactory MemoryStreamFactory { get; }
+		private IRequestPipelineFactory PipelineProvider { get; }
 
 		public TResponse Request<TResponse>(HttpMethod method, string path, PostData data = null, IRequestParameters requestParameters = null)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
+			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
 			{
-				pipeline.FirstPoolUsage(this.Settings.BootstrapLock);
+				pipeline.FirstPoolUsage(Settings.BootstrapLock);
 
-				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
-				this.Settings.OnRequestDataCreated?.Invoke(requestData);
+				var requestData = new RequestData(method, path, data, Settings, requestParameters, MemoryStreamFactory);
+				Settings.OnRequestDataCreated?.Invoke(requestData);
 				TResponse response = null;
 
 				var seenExceptions = new List<PipelineException>();
@@ -93,23 +94,28 @@ namespace Elasticsearch.Net
 							AuditTrail = pipeline?.AuditTrail
 						};
 					}
+
 					if (response == null || !response.ApiCall.SuccessOrKnownError) continue;
+
 					pipeline.MarkAlive(node);
 					break;
 				}
+
 				return FinalizeResponse(requestData, pipeline, seenExceptions, response);
 			}
 		}
 
-		public async Task<TResponse> RequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken, PostData data = null, IRequestParameters requestParameters = null)
+		public async Task<TResponse> RequestAsync<TResponse>(HttpMethod method, string path, CancellationToken cancellationToken,
+			PostData data = null, IRequestParameters requestParameters = null
+		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
+			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
 			{
-				await pipeline.FirstPoolUsageAsync(this.Settings.BootstrapLock, cancellationToken).ConfigureAwait(false);
+				await pipeline.FirstPoolUsageAsync(Settings.BootstrapLock, cancellationToken).ConfigureAwait(false);
 
-				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
-				this.Settings.OnRequestDataCreated?.Invoke(requestData);
+				var requestData = new RequestData(method, path, data, Settings, requestParameters, MemoryStreamFactory);
+				Settings.OnRequestDataCreated?.Invoke(requestData);
 				TResponse response = null;
 
 				var seenExceptions = new List<PipelineException>();
@@ -145,30 +151,26 @@ namespace Elasticsearch.Net
 							AuditTrail = pipeline.AuditTrail
 						};
 					}
+
 					if (cancellationToken.IsCancellationRequested)
 					{
 						pipeline.AuditCancellationRequested();
 						break;
 					}
+
 					if (response == null || !response.ApiCall.SuccessOrKnownError) continue;
+
 					pipeline.MarkAlive(node);
 					break;
 				}
+
 				return FinalizeResponse(requestData, pipeline, seenExceptions, response);
 			}
 		}
 
-		private static void HandlePipelineException<TResponse>(
-			ref TResponse response, PipelineException ex, IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions)
-			where TResponse : class, IElasticsearchResponse, new()
-		{
-			if (response == null) response = ex.Response as TResponse;
-			pipeline.MarkDead(node);
-			seenExceptions.Add(ex);
-		}
-
 		private TResponse FinalizeResponse<TResponse>(RequestData requestData, IRequestPipeline pipeline, List<PipelineException> seenExceptions,
-			TResponse response) where TResponse : class, IElasticsearchResponse, new()
+			TResponse response
+		) where TResponse : class, IElasticsearchResponse, new()
 		{
 			if (requestData.Node == null) //foreach never ran
 				pipeline.ThrowNoNodesAttempted(requestData, seenExceptions);
@@ -186,7 +188,7 @@ namespace Elasticsearch.Net
 		private static IApiCallDetails GetMostRecentCallDetails<TResponse>(TResponse response, IEnumerable<PipelineException> seenExceptions)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
-			var callDetails = response?.ApiCall ?? seenExceptions.LastOrDefault(e=>e.ApiCall != null)?.ApiCall;
+			var callDetails = response?.ApiCall ?? seenExceptions.LastOrDefault(e => e.ApiCall != null)?.ApiCall;
 			return callDetails;
 		}
 
@@ -209,8 +211,18 @@ namespace Elasticsearch.Net
 #endif
 			}
 
-			this.Settings.OnRequestCompleted?.Invoke(response.ApiCall);
+			Settings.OnRequestCompleted?.Invoke(response.ApiCall);
 			if (clientException != null && data.ThrowExceptions) throw clientException;
+		}
+
+		private static void HandlePipelineException<TResponse>(
+			ref TResponse response, PipelineException ex, IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions
+		)
+			where TResponse : class, IElasticsearchResponse, new()
+		{
+			if (response == null) response = ex.Response as TResponse;
+			pipeline.MarkDead(node);
+			seenExceptions.Add(ex);
 		}
 
 		private static void Ping(IRequestPipeline pipeline, Node node)
@@ -238,6 +250,5 @@ namespace Elasticsearch.Net
 				throw;
 			}
 		}
-
 	}
 }

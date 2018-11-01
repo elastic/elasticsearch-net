@@ -8,11 +8,54 @@ namespace Elasticsearch.Net
 {
 	internal static class Extensions
 	{
-		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+		private static readonly long _day = (long)TimeSpan.FromDays(1).TotalMilliseconds;
+		private static readonly long _hour = (long)TimeSpan.FromHours(1).TotalMilliseconds;
+		private static readonly long _minute = (long)TimeSpan.FromMinutes(1).TotalMilliseconds;
+		private static readonly long _second = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
 
-		internal static byte[] Utf8Bytes(this string s)
+		private static readonly long _week = (long)TimeSpan.FromDays(7).TotalMilliseconds;
+
+		internal static Exception AsAggregateOrFirst(this IEnumerable<Exception> exceptions)
 		{
-			return s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
+			var es = exceptions as Exception[] ?? exceptions?.ToArray();
+			if (es == null || es.Length == 0) return null;
+
+			return es.Length == 1 ? es[0] : new AggregateException(es);
+		}
+
+		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property) =>
+			items.GroupBy(property).Select(x => x.First());
+
+		internal static bool HasAny<T>(this IEnumerable<T> list) => list != null && list.Any();
+
+		internal static bool IsNullOrEmpty(this string value) => string.IsNullOrEmpty(value);
+
+		internal static string NotNull(this string @object, string parameterName)
+		{
+			@object.ThrowIfNull(parameterName);
+			if (string.IsNullOrWhiteSpace(@object))
+				throw new ArgumentException("String argument is empty", parameterName);
+
+			return @object;
+		}
+
+		internal static string NotNull(this Enum @object, string parameterName)
+		{
+			@object.ThrowIfNull(parameterName);
+			return @object.GetStringValue();
+		}
+
+		internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
+		{
+			@object.ThrowIfNull(parameterName);
+			if (!@object.Any())
+				throw new ArgumentException("Argument can not be an empty collection", parameterName);
+		}
+
+		internal static void ThrowIfNull<T>(this T value, string name)
+		{
+			if (value == null)
+				throw new ArgumentNullException(name);
 		}
 
 		internal static string ToCamelCase(this string s)
@@ -29,59 +72,6 @@ namespace Elasticsearch.Net
 
 			return camelCase;
 		}
-
-		internal static string NotNull(this string @object, string parameterName)
-		{
-			@object.ThrowIfNull(parameterName);
-			if (string.IsNullOrWhiteSpace(@object))
-				throw new ArgumentException("String argument is empty", parameterName);
-			return @object;
-		}
-
-		internal static string NotNull(this Enum @object, string parameterName)
-		{
-			@object.ThrowIfNull(parameterName);
-			return @object.GetStringValue();
-		}
-
-		internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
-		{
-			@object.ThrowIfNull(parameterName);
-			if (!@object.Any())
-				throw new ArgumentException("Argument can not be an empty collection", parameterName);
-		}
-		internal static bool HasAny<T>(this IEnumerable<T> list)
-		{
-			return list != null && list.Any();
-		}
-
-		internal static Exception AsAggregateOrFirst(this IEnumerable<Exception> exceptions)
-		{
-			var es= exceptions as Exception[] ?? exceptions?.ToArray();
-			if (es == null || es.Length == 0) return null;
-			return es.Length == 1 ? es[0] : new AggregateException(es);
-		}
-
-		internal static void ThrowIfNull<T>(this T value, string name)
-		{
-			if (value == null)
-				throw new ArgumentNullException(name);
-		}
-		internal static bool IsNullOrEmpty(this string value)
-		{
-			return string.IsNullOrEmpty(value);
-		}
-
-		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property)
-		{
-			return items.GroupBy(property).Select(x => x.First());
-		}
-
-		private static readonly long _week = (long)TimeSpan.FromDays(7).TotalMilliseconds;
-		private static readonly long _day = (long)TimeSpan.FromDays(1).TotalMilliseconds;
-		private static readonly long _hour = (long)TimeSpan.FromHours(1).TotalMilliseconds;
-		private static readonly long _minute = (long)TimeSpan.FromMinutes(1).TotalMilliseconds;
-		private static readonly long _second = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
 
 		internal static string ToTimeUnit(this TimeSpan timeSpan)
 		{
@@ -123,5 +113,8 @@ namespace Elasticsearch.Net
 			return factor.ToString("0.##", CultureInfo.InvariantCulture) + interval;
 		}
 
+		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
+
+		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 	}
 }

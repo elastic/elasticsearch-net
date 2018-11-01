@@ -3,19 +3,59 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace Elasticsearch.Net
 {
 	internal class ElasticsearchNetJsonStrategy : PocoJsonSerializerStrategy
 	{
+		public override object DeserializeObject(object value, Type type)
+		{
+			if (type == typeof(DynamicBody))
+			{
+				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
+				return dict == null ? null : DynamicBody.Create(dict);
+			}
+
+			if (type == typeof(ServerError))
+			{
+				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
+				return ServerError.Create(dict, this);
+			}
+
+			if (type == typeof(ShardFailure))
+			{
+				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
+				return ShardFailure.CreateShardFailure(dict, this);
+			}
+
+			if (type == typeof(Error))
+			{
+				if (value is string s)
+					return new Error { Reason = s };
+
+				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
+				return Error.CreateError(dict, this);
+			}
+
+			if (type == typeof(ErrorCause))
+			{
+				if (value is string s)
+					return new ErrorCause { Reason = s };
+
+				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
+				return ErrorCause.CreateErrorCause(dict, this);
+			}
+
+			return base.DeserializeObject(value, type);
+		}
+
 		public override bool TrySerializeNonPrimitiveObject(object input, out object output)
 		{
 			if (!(input is Exception))
 				return base.TrySerializeNonPrimitiveObject(input, out output);
 
 			var e = input as Exception;
-			var exceptionsJson = this.FlattenExceptions(e).ToList();
+			var exceptionsJson = FlattenExceptions(e).ToList();
 			var array = new JsonArray(exceptionsJson.Count);
 			array.AddRange(exceptionsJson);
 			output = array;
@@ -31,9 +71,9 @@ namespace Elasticsearch.Net
 				var o = ToExceptionJsonObject(e, depth);
 				depth++;
 				yield return o;
+
 				e = e.InnerException;
-			}
-			while (depth < maxExceptions && e != null);
+			} while (depth < maxExceptions && e != null);
 		}
 
 		private JsonObject ToExceptionJsonObject(Exception e, int depth)
@@ -86,41 +126,6 @@ namespace Elasticsearch.Net
 			exceptionMethod.Add("Signature", signature);
 			exceptionMethod.Add("MemberType", memberType);
 			o.Add("ExceptionMethod", exceptionMethod);
-		}
-
-		public override object DeserializeObject(object value, Type type)
-		{
-			if (type == typeof(DynamicBody))
-			{
-				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
-				return dict == null ? null : DynamicBody.Create(dict);
-			}
-			if (type == typeof(ServerError))
-			{
-				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
-				return ServerError.Create(dict, this);
-			}
-			if (type == typeof(ShardFailure))
-			{
-				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
-				return ShardFailure.CreateShardFailure(dict, this);
-			}
-			if (type == typeof(Error))
-			{
-                if (value is string s)
-                    return new Error {Reason = s};
-
-				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
-				return Error.CreateError(dict, this);
-			}
-			if (type == typeof(ErrorCause))
-			{
-                if (value is string s)
-                    return new ErrorCause {Reason = s};
-				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
-				return ErrorCause.CreateErrorCause(dict, this);
-			}
-			return base.DeserializeObject(value, type);
 		}
 	}
 }
