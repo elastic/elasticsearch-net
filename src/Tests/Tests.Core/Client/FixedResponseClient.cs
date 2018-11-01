@@ -12,7 +12,8 @@ namespace Tests.Core.Client
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			string contentType = RequestData.MimeType,
-			Exception exception = null)
+			Exception exception = null
+		)
 		{
 			var settings = CreateConnectionSettings(response, statusCode, modifySettings, contentType, exception);
 			return new ElasticClient(settings);
@@ -23,7 +24,8 @@ namespace Tests.Core.Client
 			int statusCode = 200,
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			string contentType = RequestData.MimeType,
-			Exception exception = null)
+			Exception exception = null
+		)
 		{
 			var serializer = TestClient.Default.RequestResponseSerializer;
 			byte[] fixedResult = null;
@@ -38,6 +40,5 @@ namespace Tests.Core.Client
 			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
-
 	}
 }

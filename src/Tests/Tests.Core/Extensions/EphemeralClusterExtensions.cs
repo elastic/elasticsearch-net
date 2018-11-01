@@ -20,7 +20,8 @@ namespace Tests.Core.Extensions
 
 		public static IElasticClient GetOrAddClient<TConfig>(
 			this IEphemeralCluster<TConfig> cluster,
-			Func<ConnectionSettings, ConnectionSettings> modifySettings = null)
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null
+		)
 			where TConfig : EphemeralClusterConfiguration
 		{
 			modifySettings = modifySettings ?? (s => s);
@@ -28,7 +29,7 @@ namespace Tests.Core.Extensions
 			{
 				var settings = modifySettings(cluster.CreateConnectionSettings());
 
-				var current = (IConnectionConfigurationValues) settings;
+				var current = (IConnectionConfigurationValues)settings;
 				var notAlreadyAuthenticated = current.BasicAuthenticationCredentials == null && current.ClientCertificates == null;
 				var noCertValidation = current.ServerCertificateValidationCallback == null;
 
@@ -40,6 +41,7 @@ namespace Tests.Core.Extensions
 					var ca = new X509Certificate2(cluster.ClusterConfiguration.FileSystem.CaCertificate);
 					settings = settings.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 				}
+
 				var client = new ElasticClient(settings);
 				return client;
 			});

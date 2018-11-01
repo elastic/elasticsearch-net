@@ -3,7 +3,7 @@ using Tests.Domain;
 namespace Tests.Core.Xunit
 {
 	/// <summary>
-	/// Class that materializes generators in static context.
+	///     Class that materializes generators in static context.
 	/// </summary>
 	public static class Generators
 	{

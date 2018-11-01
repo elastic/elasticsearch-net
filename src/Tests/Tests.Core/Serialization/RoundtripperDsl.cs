@@ -13,172 +13,177 @@ namespace Tests.Core.Serialization
 {
 	public abstract class RoundTripperBase
 	{
-		protected SerializationTester Tester { get; }
-
-		protected bool PreserveNullInExpected { get; }
-
 		internal RoundTripperBase(
 			Func<ConnectionSettings, ConnectionSettings> settingsModifier = null,
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null,
-			bool preserveNullInExpected = false)
+			bool preserveNullInExpected = false
+		)
 		{
-			this.PreserveNullInExpected = preserveNullInExpected;
+			PreserveNullInExpected = preserveNullInExpected;
 			if (settingsModifier == null && sourceSerializerFactory == null && propertyMappingProvider == null)
-				this.Tester = SerializationTester.Default;
+				Tester = SerializationTester.Default;
 			else
 			{
 				var settings =
-					new AlwaysInMemoryConnectionSettings(sourceSerializerFactory: sourceSerializerFactory, propertyMappingProvider: propertyMappingProvider)
+					new AlwaysInMemoryConnectionSettings(sourceSerializerFactory: sourceSerializerFactory,
+							propertyMappingProvider: propertyMappingProvider)
 						.ApplyDomainSettings();
 
 				if (settingsModifier != null) settings = settingsModifier(settings);
-				this.Tester = new SerializationTester(new ElasticClient(settings));
+				Tester = new SerializationTester(new ElasticClient(settings));
 			}
 		}
+
+		protected bool PreserveNullInExpected { get; }
+
+		protected SerializationTester Tester { get; }
 	}
 
 	public class ObjectRoundTripper<T> : RoundTripperBase
 	{
+		private readonly T _object;
+
 		internal ObjectRoundTripper(T @object,
 			Func<ConnectionSettings, ConnectionSettings> settingsModifier = null,
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
-			IPropertyMappingProvider propertyMappingProvider = null)
-			: base(settingsModifier, sourceSerializerFactory, propertyMappingProvider, preserveNullInExpected: false)
-		{
-			_object = @object;
-		}
+			IPropertyMappingProvider propertyMappingProvider = null
+		)
+			: base(settingsModifier, sourceSerializerFactory, propertyMappingProvider, preserveNullInExpected: false) => _object = @object;
 
-		private readonly T _object;
+		public T RoundTrips() => Tester.AssertRoundTrip(_object);
 
-		public T RoundTrips() => this.Tester.AssertRoundTrip(_object);
-		public T RoundTrips(object expectedJson) => this.Tester.AssertRoundTrip(_object, expectedJson);
+		public T RoundTrips(object expectedJson) => Tester.AssertRoundTrip(_object, expectedJson);
 	}
 
 	public class JsonRoundTripper : RoundTripperBase
 	{
+		private readonly object _expectedJson;
+		private bool _noRoundTrip;
+
 		internal JsonRoundTripper(object expectedJson,
 			Func<ConnectionSettings, ConnectionSettings> settingsModifier = null,
 			ConnectionSettings.SourceSerializerFactory sourceSerializerFactory = null,
 			IPropertyMappingProvider propertyMappingProvider = null,
-			bool preserveNullInExpected = false)
-			: base(settingsModifier, sourceSerializerFactory, propertyMappingProvider, preserveNullInExpected)
-		{
-			this._expectedJson = expectedJson;
-		}
-
-		private readonly object _expectedJson;
-		private bool _noRoundTrip;
-
-	    public JsonRoundTripper NoRoundTrip()
-	    {
-	        this._noRoundTrip = true;
-	        return this;
-	    }
-
-		public T DeserializesTo<T>(Action<string, T> assert = null)
-		{
-			var origin = $"{nameof(JsonRoundTripper)}.{nameof(this.DeserializesTo)}";
-			var deserializationResult = this.Tester.Deserializes<T>(this._expectedJson, this.PreserveNullInExpected);
-			deserializationResult.ShouldBeValid($"{origin} did not deserialize into {typeof(T).Name}");
-			assert?.Invoke("first deserialization", deserializationResult.Result);
-			if (this._noRoundTrip)
-				return deserializationResult.Result;
-
-			var serializationResult = this.Tester.Serializes(deserializationResult.Result, this._expectedJson, this.PreserveNullInExpected);
-			deserializationResult.ShouldBeValid($"{origin} first serialization");
-			assert?.Invoke("first deserialization", deserializationResult.Result);
-
-			deserializationResult = this.Tester.Deserializes<T>(serializationResult.Serialized, this.PreserveNullInExpected);
-			deserializationResult.ShouldBeValid($"{origin} did not deserialize into {typeof(T).Name} a 2nd time");
-			assert?.Invoke("seond deserialization", deserializationResult.Result);
-			return deserializationResult.Result;
-		}
-
-		public void FromRequest(IResponse response) => this.ToSerializeTo(response.ApiCall.RequestBodyInBytes);
-		public void FromRequest<T>(Func<IElasticClient, T> call) where T : IResponse => this.FromRequest(call(this.Tester.Client));
-
-		public void FromResponse(IResponse response) => this.ToSerializeTo(response.ApiCall.ResponseBodyInBytes);
-		public void FromResponse<T>(Func<IElasticClient, T> call) where T : IResponse => this.FromResponse(call(this.Tester.Client));
-
-		private void ToSerializeTo(byte[] json)
-		{
-			var result = this.Tester.Serializes(json, this._expectedJson, this.PreserveNullInExpected);
-			result.ShouldBeValid();
-		}
-
-		public JsonRoundTripperContinuation<T> WhenSerializing<T>(T actual)
-		{
-			switch ((object)actual)
-			{
-				case string s: throw new Exception($"{nameof(this.WhenSerializing)} was passed a string but it only expects objects");
-				case byte[] b: throw new Exception($"{nameof(this.WhenSerializing)} was passed a byte[] but it only expects objects");
-			}
-			var result = this.Tester.RoundTrips(actual, this._expectedJson, this.PreserveNullInExpected);
-			result.Success.Should().BeTrue(result.ToString());
-			return new JsonRoundTripperContinuation<T>(result.Serialized, result.Result, this.Tester);
-		}
-
-		public JsonRoundTripper WhenInferringIdOn<T>(T project) where T : class
-		{
-			this.Tester.Client.Infer.Id(project).Should().Be((string)this._expectedJson);
-			return this;
-		}
-		public JsonRoundTripper WhenInferringRoutingOn<T>(T project) where T : class
-		{
-			this.Tester.Client.Infer.Routing<T>(project).Should().Be((string)this._expectedJson);
-			return this;
-		}
-
-		public JsonRoundTripper ForField(Field field)
-		{
-			this.Tester.Client.Infer.Field(field).Should().Be((string)this._expectedJson);
-			return this;
-		}
+			bool preserveNullInExpected = false
+		)
+			: base(settingsModifier, sourceSerializerFactory, propertyMappingProvider, preserveNullInExpected) => _expectedJson = expectedJson;
 
 		public JsonRoundTripper AsPropertiesOf<T>(T document) where T : class
 		{
-			var jo = JObject.Parse(this.Tester.Client.RequestResponseSerializer.SerializeToString(document));
+			var jo = JObject.Parse(Tester.Client.RequestResponseSerializer.SerializeToString(document));
 			var serializedProperties = jo.Properties().Select(p => p.Name);
-			if (!(this._expectedJson is IEnumerable<string> sut))
+			if (!(_expectedJson is IEnumerable<string> sut))
 				throw new ArgumentException("Can not call AsPropertiesOf if sut is not IEnumerable<string>");
 
 			sut.Should().BeEquivalentTo(serializedProperties);
 			return this;
 		}
 
-		public class JsonRoundTripperContinuation<T>
+		public T DeserializesTo<T>(Action<string, T> assert = null)
 		{
-			internal JsonRoundTripperContinuation(object expectedJson, T result, SerializationTester tester)
+			var origin = $"{nameof(JsonRoundTripper)}.{nameof(DeserializesTo)}";
+			var deserializationResult = Tester.Deserializes<T>(_expectedJson, PreserveNullInExpected);
+			deserializationResult.ShouldBeValid($"{origin} did not deserialize into {typeof(T).Name}");
+			assert?.Invoke("first deserialization", deserializationResult.Result);
+			if (_noRoundTrip)
+				return deserializationResult.Result;
+
+			var serializationResult = Tester.Serializes(deserializationResult.Result, _expectedJson, PreserveNullInExpected);
+			deserializationResult.ShouldBeValid($"{origin} first serialization");
+			assert?.Invoke("first deserialization", deserializationResult.Result);
+
+			deserializationResult = Tester.Deserializes<T>(serializationResult.Serialized, PreserveNullInExpected);
+			deserializationResult.ShouldBeValid($"{origin} did not deserialize into {typeof(T).Name} a 2nd time");
+			assert?.Invoke("seond deserialization", deserializationResult.Result);
+			return deserializationResult.Result;
+		}
+
+		public JsonRoundTripper ForField(Field field)
+		{
+			Tester.Client.Infer.Field(field).Should().Be((string)_expectedJson);
+			return this;
+		}
+
+		public void FromRequest(IResponse response) => ToSerializeTo(response.ApiCall.RequestBodyInBytes);
+
+		public void FromRequest<T>(Func<IElasticClient, T> call) where T : IResponse => FromRequest(call(Tester.Client));
+
+		public void FromResponse(IResponse response) => ToSerializeTo(response.ApiCall.ResponseBodyInBytes);
+
+		public void FromResponse<T>(Func<IElasticClient, T> call) where T : IResponse => FromResponse(call(Tester.Client));
+
+		public JsonRoundTripper NoRoundTrip()
+		{
+			_noRoundTrip = true;
+			return this;
+		}
+
+		public JsonRoundTripper WhenInferringIdOn<T>(T project) where T : class
+		{
+			Tester.Client.Infer.Id(project).Should().Be((string)_expectedJson);
+			return this;
+		}
+
+		public JsonRoundTripper WhenInferringRoutingOn<T>(T project) where T : class
+		{
+			Tester.Client.Infer.Routing<T>(project).Should().Be((string)_expectedJson);
+			return this;
+		}
+
+		public JsonRoundTripperContinuation<T> WhenSerializing<T>(T actual)
+		{
+			switch ((object)actual)
 			{
-				this.Tester = tester;
-				this.Result = result;
-				this._expectedJson = expectedJson;
+				case string s: throw new Exception($"{nameof(WhenSerializing)} was passed a string but it only expects objects");
+				case byte[] b: throw new Exception($"{nameof(WhenSerializing)} was passed a byte[] but it only expects objects");
 			}
 
+			var result = Tester.RoundTrips(actual, _expectedJson, PreserveNullInExpected);
+			result.Success.Should().BeTrue(result.ToString());
+			return new JsonRoundTripperContinuation<T>(result.Serialized, result.Result, Tester);
+		}
+
+		private void ToSerializeTo(byte[] json)
+		{
+			var result = Tester.Serializes(json, _expectedJson, PreserveNullInExpected);
+			result.ShouldBeValid();
+		}
+
+		public class JsonRoundTripperContinuation<T>
+		{
 			private readonly object _expectedJson;
+
+			internal JsonRoundTripperContinuation(object expectedJson, T result, SerializationTester tester)
+			{
+				Tester = tester;
+				Result = result;
+				_expectedJson = expectedJson;
+			}
+
 			private T Result { get; set; }
+
 			private SerializationTester Tester { get; }
+
+			public JsonRoundTripperContinuation<T> AssertSubject(Action<T> assert)
+			{
+				assert(Result);
+				return this;
+			}
 
 			public JsonRoundTripperContinuation<T> WhenSerializing(T actual)
 			{
-				var result = this.Tester.RoundTrips(actual, this._expectedJson);
+				var result = Tester.RoundTrips(actual, _expectedJson);
 				result.ShouldBeValid();
-				this.Result = result.Result;
+				Result = result.Result;
 				return this;
 			}
 
 			public JsonRoundTripperContinuation<TDifferent> WhenSerializing<TDifferent>(TDifferent actual)
 			{
-				var result = this.Tester.RoundTrips<TDifferent>(actual, expectedJson: this._expectedJson);
+				var result = Tester.RoundTrips<TDifferent>(actual, expectedJson: _expectedJson);
 				result.ShouldBeValid();
-				return new JsonRoundTripperContinuation<TDifferent>(result.Serialized, result.Result, this.Tester);
-			}
-
-			public JsonRoundTripperContinuation<T> AssertSubject(Action<T> assert)
-			{
-				assert(this.Result);
-				return this;
+				return new JsonRoundTripperContinuation<TDifferent>(result.Serialized, result.Result, Tester);
 			}
 		}
 	}

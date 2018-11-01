@@ -8,16 +8,6 @@ namespace Tests.Core.Extensions
 {
 	public static class ShouldExtensions
 	{
-		public static void ShouldHaveExpectedIsValid(this IResponse response, bool expectedIsValid) =>
-			response.IsValid.Should().Be(expectedIsValid, "{0}", response.DebugInformation);
-
-		public static void ShouldBeValid(this IResponse response) =>
-			response.IsValid.Should().BeTrue("{0}", response.DebugInformation);
-
-		public static void ShouldNotBeValid(this IResponse response) =>
-			response.IsValid.Should().BeFalse("{0}", response.DebugInformation);
-
-
 		public static void ShouldAdhereToSourceSerializerWhenSet(this Project project)
 		{
 			var usingSourceSerializer = TestClient.Configuration.Random.SourceSerializer;
@@ -27,6 +17,7 @@ namespace Tests.Core.Extensions
 				project.SourceOnly.Should().BeNull();
 				return;
 			}
+
 			project.SourceOnly.Should().NotBeNull();
 			project.SourceOnly.NotWrittenByDefaultSerializer.Should().Be("written");
 			project.SourceOnly.NotReadByDefaultSerializer.Should().Be("read");
@@ -35,5 +26,13 @@ namespace Tests.Core.Extensions
 		public static void ShouldBeTrue(this bool b, IUrlParameter p) =>
 			b.Should().BeTrue(p?.GetString(TestClient.DefaultInMemoryClient.ConnectionSettings) ?? "NULL");
 
+		public static void ShouldBeValid(this IResponse response) =>
+			response.IsValid.Should().BeTrue("{0}", response.DebugInformation);
+
+		public static void ShouldHaveExpectedIsValid(this IResponse response, bool expectedIsValid) =>
+			response.IsValid.Should().Be(expectedIsValid, "{0}", response.DebugInformation);
+
+		public static void ShouldNotBeValid(this IResponse response) =>
+			response.IsValid.Should().BeFalse("{0}", response.DebugInformation);
 	}
 }

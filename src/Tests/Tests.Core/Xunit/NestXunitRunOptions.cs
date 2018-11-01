@@ -14,12 +14,12 @@ namespace Tests.Core.Xunit
 	{
 		public NestXunitRunOptions()
 		{
-			this.RunIntegrationTests = TestConfiguration.Instance.RunIntegrationTests;
-			this.RunUnitTests = TestConfiguration.Instance.RunUnitTests;
-			this.ClusterFilter = TestConfiguration.Instance.ClusterFilter;
-			this.TestFilter = TestConfiguration.Instance.TestFilter;
-			this.Version = TestConfiguration.Instance.ElasticsearchVersion;
-			this.IntegrationTestsMayUseAlreadyRunningNode = TestConfiguration.Instance.TestAgainstAlreadyRunningElasticsearch;
+			RunIntegrationTests = TestConfiguration.Instance.RunIntegrationTests;
+			RunUnitTests = TestConfiguration.Instance.RunUnitTests;
+			ClusterFilter = TestConfiguration.Instance.ClusterFilter;
+			TestFilter = TestConfiguration.Instance.TestFilter;
+			Version = TestConfiguration.Instance.ElasticsearchVersion;
+			IntegrationTestsMayUseAlreadyRunningNode = TestConfiguration.Instance.TestAgainstAlreadyRunningElasticsearch;
 
 			Generators.Initialize();
 		}
@@ -34,20 +34,20 @@ namespace Tests.Core.Xunit
 			DumpFailedCollections(failedCollections);
 		}
 
+		/// <summary>
+		///     Append random overwrite to reproduce line only if one was provided explicitly
+		/// </summary>
+		private static void AppendExplictConfig(string key, StringBuilder sb)
+		{
+			if (!TryGetExplicitRandomConfig(key, out var b)) return;
+			sb.Append($"random:{key}{(b ? "" : ":false")} ");
+		}
+
 		private static void DumpClusterTotals(Dictionary<string, Stopwatch> clusterTotals)
 		{
 			Console.WriteLine("--------");
 			Console.WriteLine("Individual cluster running times:");
 			foreach (var kv in clusterTotals) Console.WriteLine($"- {kv.Key}: {kv.Value.Elapsed}");
-			Console.WriteLine("--------");
-		}
-		private static void DumpSeenDeprecations()
-		{
-			if (XunitRunState.SeenDeprecations.Count == 0) return;
-
-			Console.WriteLine("-------- SEEN DEPRECATIONS");
-			foreach (var d in XunitRunState.SeenDeprecations.Distinct())
-				Console.WriteLine(d);
 			Console.WriteLine("--------");
 		}
 
@@ -63,6 +63,7 @@ namespace Tests.Core.Xunit
 				var cluster = t.Item1;
 				Console.WriteLine($" - {cluster}: {t.Item2}");
 			}
+
 			DumpReproduceFilters(failedCollections);
 			Console.ResetColor();
 		}
@@ -81,7 +82,19 @@ namespace Tests.Core.Xunit
 			Console.WriteLine("--------");
 		}
 
-		private static string ReproduceCommandLine(ConcurrentBag<Tuple<string, string>> failedCollections, ITestConfiguration config, bool runningIntegrations)
+		private static void DumpSeenDeprecations()
+		{
+			if (XunitRunState.SeenDeprecations.Count == 0) return;
+
+			Console.WriteLine("-------- SEEN DEPRECATIONS");
+			foreach (var d in XunitRunState.SeenDeprecations.Distinct())
+				Console.WriteLine(d);
+			Console.WriteLine("--------");
+		}
+
+		private static string ReproduceCommandLine(ConcurrentBag<Tuple<string, string>> failedCollections, ITestConfiguration config,
+			bool runningIntegrations
+		)
 		{
 			var sb = new StringBuilder("build.bat ")
 				.Append($"seed:{config.Seed} ");
@@ -98,7 +111,8 @@ namespace Tests.Core.Xunit
 			if (runningIntegrations && failedCollections.Count > 0)
 			{
 				var clusters = string.Join(",", failedCollections
-					.Select(c => c.Item1.ToLowerInvariant()).Distinct());
+					.Select(c => c.Item1.ToLowerInvariant())
+					.Distinct());
 				sb.Append(" \"");
 				sb.Append(clusters);
 				sb.Append("\"");
@@ -109,7 +123,9 @@ namespace Tests.Core.Xunit
 				sb.Append(" \"");
 				var tests = string.Join(",", failedCollections
 					.OrderBy(t => t.Item2)
-					.Select(c => c.Item2.ToLowerInvariant().Split('.').Last()
+					.Select(c => c.Item2.ToLowerInvariant()
+						.Split('.')
+						.Last()
 						.Replace("apitests", "")
 						.Replace("usagetests", "")
 						.Replace("tests", "")
@@ -122,21 +138,11 @@ namespace Tests.Core.Xunit
 			return reproduceLine;
 		}
 
-		/// <summary>
-		/// Append random overwrite to reproduce line only if one was provided explicitly
-		/// </summary>
-		private static void AppendExplictConfig(string key, StringBuilder sb)
-		{
-			if (!TryGetExplicitRandomConfig(key, out var b)) return;
-			sb.Append($"random:{key}{(b ? "" : ":false")} ");
-		}
-
 		private static bool TryGetExplicitRandomConfig(string key, out bool value)
 		{
 			value = false;
 			var v = Environment.GetEnvironmentVariable($"NEST_RANDOM_{key.ToUpper()}");
 			return !string.IsNullOrWhiteSpace(v) && bool.TryParse(v, out value);
 		}
-
 	}
 }

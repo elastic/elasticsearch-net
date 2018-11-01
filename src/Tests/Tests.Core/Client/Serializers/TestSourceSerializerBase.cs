@@ -13,6 +13,11 @@ namespace Tests.Core.Client.Serializers
 		public TestSourceSerializerBase(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
 			: base(builtinSerializer, connectionSettings) { }
 
+		protected override IEnumerable<JsonConverter> CreateJsonConverters()
+		{
+			yield return new SourceOnlyUsingBuiltInConverter();
+		}
+
 		protected override JsonSerializerSettings CreateJsonSerializerSettings() =>
 			new JsonSerializerSettings
 			{
@@ -20,15 +25,7 @@ namespace Tests.Core.Client.Serializers
 				DefaultValueHandling = DefaultValueHandling.Include
 			};
 
-		protected override IEnumerable<JsonConverter> CreateJsonConverters()
-		{
-			yield return new SourceOnlyUsingBuiltInConverter();
-		}
-
-		protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver)
-		{
+		protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver) =>
 			resolver.NamingStrategy = new CamelCaseNamingStrategy();
-		}
-
 	}
 }

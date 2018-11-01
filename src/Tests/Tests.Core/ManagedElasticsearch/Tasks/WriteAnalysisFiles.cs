@@ -22,14 +22,11 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 			SetupStopwordsFile(analysisPath);
 		}
 
-		private static void SetupStopwordsFile(string analysisPath) =>
-			WriteFileIfNotExist(Path.Combine(analysisPath, "stopwords") + ".txt", "");
+		private static void SetupCompoundTokenFilterFopFile(string analysisPath) =>
+			WriteFileIfNotExist(Path.Combine(analysisPath, "fop") + ".xml", "<languages-info />");
 
 		private static void SetupCustomStemming(string analysisPath) =>
 			WriteFileIfNotExist(Path.Combine(analysisPath, "custom_stems") + ".txt", "");
-
-		private static void SetupCompoundTokenFilterFopFile(string analysisPath) =>
-			WriteFileIfNotExist(Path.Combine(analysisPath, "fop") + ".xml", "<languages-info />");
 
 		private static void SetupHunspellFiles(string configPath)
 		{
@@ -50,5 +47,7 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 			if (!File.Exists(icuFile)) File.WriteAllText(icuFile, ".+ {200};");
 		}
 
+		private static void SetupStopwordsFile(string analysisPath) =>
+			WriteFileIfNotExist(Path.Combine(analysisPath, "stopwords") + ".txt", "");
 	}
 }

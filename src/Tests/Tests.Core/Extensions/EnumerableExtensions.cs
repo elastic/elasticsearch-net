@@ -13,10 +13,7 @@ namespace Tests.Core.Extensions
 
 			foreach (var item in source)
 			{
-				if (array == null)
-				{
-					array = new T[size];
-				}
+				if (array == null) array = new T[size];
 				array[count] = item;
 				count++;
 				if (count == size)
