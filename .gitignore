@@ -28,7 +28,7 @@ test-results
 test-results/*
 *.lib
 *.sbr
-*.DotSettings
+*.DotSettings.user
 obj/
 [Rr]elease*/
 _ReSharper*/
