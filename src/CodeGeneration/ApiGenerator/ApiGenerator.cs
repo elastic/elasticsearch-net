@@ -135,6 +135,7 @@ namespace ApiGenerator
 				);
 				var commonFile = Path.Combine(CodeConfiguration.RestSpecificationFolder, "Core", "_common.json");
 				if (!File.Exists(commonFile)) throw new Exception($"Expected to find {commonFile}");
+
 				RestApiSpec.CommonApiQueryParameters = CreateCommonApiQueryParameters(commonFile);
 
 				foreach (var jsonFiles in folderFiles)

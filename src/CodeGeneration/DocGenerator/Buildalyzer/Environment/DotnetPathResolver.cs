@@ -90,6 +90,7 @@ namespace DocGenerator.Buildalyzer.Environment
 				while (!process.HasExited)
 					if (sw.ElapsedMilliseconds > 4000)
 						break;
+
 				sw.Stop();
 				process.Close();
 				return lines;

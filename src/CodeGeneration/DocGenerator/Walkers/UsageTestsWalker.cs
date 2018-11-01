@@ -29,9 +29,7 @@ namespace DocGenerator.Walkers
 			"InitializerAggs"
 		};
 
-		public UsageTestsWalker(IList<IDocumentationBlock> blocks) : base(blocks)
-		{
-		}
+		public UsageTestsWalker(IList<IDocumentationBlock> blocks) : base(blocks) { }
 
 		public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
 		{

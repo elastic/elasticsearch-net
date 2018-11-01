@@ -100,6 +100,7 @@ namespace DocGenerator.Buildalyzer
 		public static AdhocWorkspace GetWorkspace(this ProjectAnalyzer analyzer, bool addProjectReferences = false)
 		{
 			if (analyzer == null) throw new ArgumentNullException(nameof(analyzer));
+
 			var workspace = new AdhocWorkspace();
 			AddToWorkspace(analyzer, workspace, addProjectReferences);
 			return workspace;

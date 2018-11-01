@@ -111,6 +111,7 @@ namespace ApiGenerator.Domain
 		private string CleanUpDescription(string value)
 		{
 			if (string.IsNullOrWhiteSpace(value)) return value;
+
 			return value.Replace("use `_all` or empty string", "use the special string `_all` or Indices.All");
 		}
 	}

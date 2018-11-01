@@ -37,7 +37,8 @@ namespace DocGenerator.Buildalyzer.Environment
 		{
 			// If we're running on .NET Core, use the .NET Core SDK regardless of the project file
 			if (RuntimeInformation.FrameworkDescription
-				.Replace(" ", "").StartsWith(".NETCore", StringComparison.OrdinalIgnoreCase))
+				.Replace(" ", "")
+				.StartsWith(".NETCore", StringComparison.OrdinalIgnoreCase))
 				return new CoreEnvironment(projectPath);
 
 			// Look at the project file to determine

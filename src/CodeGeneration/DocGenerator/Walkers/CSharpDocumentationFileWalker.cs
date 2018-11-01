@@ -29,9 +29,10 @@ namespace DocGenerator.Walkers
 			++ClassDepth;
 			if (ClassDepth == 1)
 				base.VisitClassDeclaration(node);
-			else if (node.ChildNodes().All(childNode => childNode.IsKind(SyntaxKind.PropertyDeclaration) ||
-				childNode.IsKind(SyntaxKind.AttributeList)
-			))
+			else if (node.ChildNodes()
+				.All(childNode => childNode.IsKind(SyntaxKind.PropertyDeclaration) ||
+					childNode.IsKind(SyntaxKind.AttributeList)
+				))
 				AddNestedType(node);
 			else
 			{
@@ -46,9 +47,10 @@ namespace DocGenerator.Walkers
 		{
 			if (node.ShouldBeHidden()) return;
 
-			if (node.ChildNodes().All(childNode => childNode.IsKind(SyntaxKind.PropertyDeclaration) ||
-				childNode.IsKind(SyntaxKind.AttributeList)
-			))
+			if (node.ChildNodes()
+				.All(childNode => childNode.IsKind(SyntaxKind.PropertyDeclaration) ||
+					childNode.IsKind(SyntaxKind.AttributeList)
+				))
 				AddNestedType(node);
 		}
 

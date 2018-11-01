@@ -40,6 +40,7 @@ namespace Tests.Core.Xunit
 		private static void AppendExplictConfig(string key, StringBuilder sb)
 		{
 			if (!TryGetExplicitRandomConfig(key, out var b)) return;
+
 			sb.Append($"random:{key}{(b ? "" : ":false")} ");
 		}
 

@@ -55,6 +55,7 @@ namespace Nest.JsonNetSerializer
 		{
 			if (o == null) return false;
 			if (!(prop.ValueProvider.GetValue(o) is IQueryContainer q)) return false;
+
 			return q.IsWritable;
 		}
 
@@ -62,6 +63,7 @@ namespace Nest.JsonNetSerializer
 		{
 			if (o == null) return false;
 			if (!(prop.ValueProvider.GetValue(o) is IEnumerable<QueryContainer> q)) return false;
+
 			var queryContainers = q as QueryContainer[] ?? q.ToArray();
 			return queryContainers.Any(qq => qq != null && ((IQueryContainer)qq).IsWritable);
 		}

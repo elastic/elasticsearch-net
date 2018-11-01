@@ -66,6 +66,7 @@ namespace DocGenerator.Buildalyzer.Environment
 			var toolsPath = ToolLocationHelper.GetPathToBuildToolsFile("msbuild.exe", ToolLocationHelper.CurrentToolsVersion);
 			if (string.IsNullOrEmpty(toolsPath)) toolsPath = PollForToolsPath();
 			if (string.IsNullOrEmpty(toolsPath)) throw new InvalidOperationException("Could not locate the tools (msbuild.exe) path");
+
 			return Path.GetDirectoryName(toolsPath);
 		}
 

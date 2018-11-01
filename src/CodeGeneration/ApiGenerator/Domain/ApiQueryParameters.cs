@@ -27,18 +27,22 @@ namespace ApiGenerator.Domain
 						yield return "<para>For requests that are constructed from/for a document NEST will automatically infer the routing key";
 						yield return
 							"if that document has a <see cref=\"Nest.JoinField\" /> or a routing mapping on for its type exists on <see cref=\"Nest.ConnectionSettings\" /></para> ";
+
 						yield break;
 					case "_source":
 						yield return "Whether the _source should be included in the response.";
+
 						yield break;
 					case "filter_path":
 						yield return Description;
 						yield return "<para>Use of response filtering can result in a response from Elasticsearch ";
 						yield return "that cannot be correctly deserialized to the respective response type for the request. ";
 						yield return "In such situations, use the low level client to issue the request and handle response deserialization</para>";
+
 						yield break;
 					default:
 						yield return Description;
+
 						yield break;
 				}
 			}
@@ -72,6 +76,7 @@ namespace ApiGenerator.Domain
 			get
 			{
 				if (QueryStringKey == "routing") return "Routing";
+
 				var isFields = FieldsParams.Contains(QueryStringKey) || QueryStringKey.EndsWith("_fields");
 
 				var csharpType = TypeLowLevel;

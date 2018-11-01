@@ -17,7 +17,8 @@ namespace Nest.JsonNetSerializer
 		}
 
 		public static async Task<JToken> ReadTokenWithDateParseHandlingNoneAsync(this JsonReader reader,
-			CancellationToken cancellationToken = default(CancellationToken))
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 		{
 			var dateParseHandling = reader.DateParseHandling;
 			reader.DateParseHandling = DateParseHandling.None;

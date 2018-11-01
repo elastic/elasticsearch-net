@@ -15,6 +15,7 @@ namespace Tests.Core.Extensions
 			var d = new Differ();
 			var result = d.CreateCharacterDiffs(expected.Trim('"'), actual.Trim('"'), ignoreWhitespace: false);
 			if (!result.DiffBlocks.Any()) return string.Empty;
+
 			var builder = new StringBuilder()
 				.AppendLine(message)
 				.AppendLine($"expect: \"{expected}\"")

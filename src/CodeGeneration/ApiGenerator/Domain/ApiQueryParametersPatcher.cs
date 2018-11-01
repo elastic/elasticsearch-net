@@ -12,7 +12,8 @@ namespace ApiGenerator.Domain
 			string urlPath,
 			IDictionary<string, ApiQueryParameters> source,
 			IEndpointOverrides overrides,
-			bool checkCommon = true)
+			bool checkCommon = true
+		)
 		{
 			if (source == null) return null;
 
@@ -73,7 +74,8 @@ namespace ApiGenerator.Domain
 		}
 
 		private static IList<string> CreateList(IEndpointOverrides global, IEndpointOverrides local, string type,
-			Func<IEndpointOverrides, IEnumerable<string>> @from, ICollection<string> declaredKeys)
+			Func<IEndpointOverrides, IEnumerable<string>> @from, ICollection<string> declaredKeys
+		)
 		{
 			var list = new List<string>();
 			if (global != null) list.AddRange(from(global));
@@ -90,7 +92,8 @@ namespace ApiGenerator.Domain
 		}
 
 		private static IDictionary<string, string> CreateLookup(IEndpointOverrides global, IEndpointOverrides local, string type,
-			Func<IEndpointOverrides, IDictionary<string, string>> @from, ICollection<string> declaredKeys)
+			Func<IEndpointOverrides, IDictionary<string, string>> @from, ICollection<string> declaredKeys
+		)
 		{
 			var d = new Dictionary<string, string>();
 			foreach (var kv in from(global)) d[kv.Key] = kv.Value;
@@ -108,14 +111,16 @@ namespace ApiGenerator.Domain
 		}
 
 		private static IDictionary<string, string> CreateObsoleteLookup(IEndpointOverrides global, IEndpointOverrides local,
-			ICollection<string> declaredKeys) =>
+			ICollection<string> declaredKeys
+		) =>
 			CreateLookup(global, local, "obsolete", e => e.ObsoleteQueryStringParams, declaredKeys);
 
 		private static IList<string> CreatePartialList(IEndpointOverrides global, IEndpointOverrides local, ICollection<string> declaredKeys) =>
 			CreateList(global, local, "partial", e => e.RenderPartial, declaredKeys);
 
 		private static IDictionary<string, string> CreateRenameLookup(IEndpointOverrides global, IEndpointOverrides local,
-			ICollection<string> declaredKeys) =>
+			ICollection<string> declaredKeys
+		) =>
 			CreateLookup(global, local, "rename", e => e.RenameQueryStringParams, declaredKeys);
 
 		private static IList<string> CreateSkipList(IEndpointOverrides global, IEndpointOverrides local, ICollection<string> declaredKeys) =>

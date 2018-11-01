@@ -50,6 +50,7 @@ namespace DocGenerator.AsciiDoc
 		public override void VisitAttributeEntry(AttributeEntry attributeEntry)
 		{
 			if (attributeEntry.Name != "xml-docs") return;
+
 			//true when running from the IDE, build/output might have not been created
 			string configuration = null;
 			if (Program.BuildOutputPath.Contains("src"))
@@ -63,6 +64,7 @@ namespace DocGenerator.AsciiDoc
 			{
 				if (configuration == null)
 					return Path.Combine(Program.BuildOutputPath, project, "netstandard2.0", $"{project}.XML");
+
 				return Path.Combine(Program.BuildOutputPath, project, "bin", configuration, "netstandard2.0",
 					$"{project}.XML"
 				);

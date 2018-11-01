@@ -65,6 +65,7 @@ namespace ApiGenerator
 			get
 			{
 				if (_root != null) return _root;
+
 				var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
 
 				var runningAsDnx =

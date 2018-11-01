@@ -30,8 +30,6 @@ namespace DocGenerator.Buildalyzer.Logging
 {
 	public class EmptyDisposable : IDisposable
 	{
-		public void Dispose()
-		{
-		}
+		public void Dispose() { }
 	}
 }

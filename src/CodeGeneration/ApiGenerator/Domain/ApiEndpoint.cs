@@ -69,6 +69,7 @@ namespace ApiGenerator.Domain
 				{
 					foreach (var csharpMethod in _csharpMethods)
 						yield return csharpMethod;
+
 					yield break;
 				}
 
@@ -212,6 +213,7 @@ namespace ApiGenerator.Domain
 		public void PatchMethod(CsharpMethod method)
 		{
 			if (method == null) return;
+
 			Func<string, bool> ms = s => method.FullName.StartsWith(s);
 			Func<string, bool> pc = s => method.Path.Contains(s);
 
@@ -258,6 +260,7 @@ namespace ApiGenerator.Domain
 			var type = CodeConfiguration.Assembly.GetType(typeName);
 			if (type != null && Activator.CreateInstance(type) is IEndpointOverrides overrides)
 				return overrides;
+
 			return null;
 		}
 

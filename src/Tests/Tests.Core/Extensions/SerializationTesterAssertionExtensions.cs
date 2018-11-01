@@ -39,6 +39,7 @@ namespace Tests.Core.Extensions
 		public static void ShouldBeValid(this SerializationResult result, string message = null)
 		{
 			if (result.Success) return;
+
 			throw new Exception($@"Expected serialization to succeed but failed.
 {(message ?? string.Empty) + result}
 ");

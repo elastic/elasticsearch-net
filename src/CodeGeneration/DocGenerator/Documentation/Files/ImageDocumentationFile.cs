@@ -6,9 +6,7 @@ namespace DocGenerator.Documentation.Files
 {
 	public class ImageDocumentationFile : DocumentationFile
 	{
-		public ImageDocumentationFile(FileInfo fileLocation) : base(fileLocation)
-		{
-		}
+		public ImageDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
 
 		public override async Task SaveToDocumentationFolderAsync()
 		{

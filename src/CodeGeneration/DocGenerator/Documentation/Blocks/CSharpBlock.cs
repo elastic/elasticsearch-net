@@ -18,9 +18,7 @@ namespace DocGenerator.Documentation.Blocks
 				node.IsKind(SyntaxKind.ClassDeclaration) ? depth : depth + 2,
 				"csharp",
 				memberName
-			)
-		{
-		}
+			) { }
 
 		private List<string> Callouts { get; } = new List<string>();
 

@@ -22,18 +22,21 @@ namespace ApiGenerator.Domain
 		public IEnumerable<CsharpMethod> CsharpMethodsWithQueryStringInfo =>
 			(from u in Endpoints.Values.SelectMany(v => v.CsharpMethods)
 				where u.QueryStringParamName != "FluentQueryString"
-				select u).GroupBy(m => m.QueryStringParamName).Select(g =>
+				select u).GroupBy(m => m.QueryStringParamName)
+			.Select(g =>
 				{
 					if (g.Count() == 1) return g.First();
+
 					return g.OrderBy(v =>
-						{
-							switch (v.HttpMethod.ToUpper())
 							{
-								case "GET": return 1;
-								default: return 0;
+								switch (v.HttpMethod.ToUpper())
+								{
+									case "GET": return 1;
+									default: return 0;
+								}
 							}
-						}
-					).First();
+						)
+						.First();
 				}
 			);
 
@@ -44,6 +47,7 @@ namespace ApiGenerator.Domain
 			get
 			{
 				if (_enumDescriptions != null) return _enumDescriptions;
+
 				var queryParamEnums = from m in CsharpMethodsWithQueryStringInfo.SelectMany(m => m.Url.Params)
 					where m.Value.Type == "enum"
 					select new EnumDescription

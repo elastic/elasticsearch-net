@@ -35,9 +35,7 @@ namespace DocGenerator.Buildalyzer.Logging
 
 		public TextWriterLoggerProvider(TextWriter textWriter) => _textWriter = textWriter;
 
-		public void Dispose()
-		{
-		}
+		public void Dispose() { }
 
 		public ILogger CreateLogger(string categoryName) => new TextWriterLogger(_textWriter);
 	}

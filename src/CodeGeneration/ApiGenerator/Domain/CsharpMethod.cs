@@ -95,6 +95,7 @@ namespace ApiGenerator.Domain
 		{
 			var ctors = new List<Constructor>();
 			if (IsPartless) return ctors;
+
 			var m = DescriptorType;
 			foreach (var url in Url.Paths)
 			{
@@ -198,6 +199,7 @@ namespace ApiGenerator.Domain
 		{
 			var setters = new List<FluentRouteSetter>();
 			if (IsPartless) return setters;
+
 			var alwaysGenerate = new[] { "index", "type" };
 			var parts = Url.Parts
 				.Where(p => !ApiUrl.BlackListRouteValues.Contains(p.Key))

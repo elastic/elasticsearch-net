@@ -11,16 +11,15 @@ namespace Nest.JsonNetSerializer
 	public abstract partial class ConnectionSettingsAwareSerializerBase
 	{
 		protected ConnectionSettingsAwareSerializerBase(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
-			: this(builtinSerializer, connectionSettings, null, null, null)
-		{
-		}
+			: this(builtinSerializer, connectionSettings, null, null, null) { }
 
 		internal ConnectionSettingsAwareSerializerBase(
 			IElasticsearchSerializer builtinSerializer,
 			IConnectionSettingsValues connectionSettings,
 			Func<JsonSerializerSettings> jsonSerializerSettingsFactory,
 			Action<ConnectionSettingsAwareContractResolver> modifyContractResolver,
-			IEnumerable<JsonConverter> contractJsonConverters)
+			IEnumerable<JsonConverter> contractJsonConverters
+		)
 		{
 			JsonSerializerSettingsFactory = jsonSerializerSettingsFactory;
 			ModifyContractResolverCallback = modifyContractResolver;

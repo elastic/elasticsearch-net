@@ -8,9 +8,7 @@ namespace DocGenerator.Documentation.Files
 {
 	public class RawDocumentationFile : DocumentationFile
 	{
-		public RawDocumentationFile(FileInfo fileLocation) : base(fileLocation)
-		{
-		}
+		public RawDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
 
 		public override Task SaveToDocumentationFolderAsync()
 		{

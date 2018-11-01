@@ -29,6 +29,7 @@ namespace DocGenerator
 			yield return InputFiles("*.png");
 			yield return InputFiles("*.gif");
 			yield return InputFiles("*.jpg");
+
 			// process asciidocs last as they may have generated
 			// includes to other output asciidocs
 			yield return InputFiles("*.asciidoc");

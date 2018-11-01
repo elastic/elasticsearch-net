@@ -20,14 +20,17 @@ namespace ApiGenerator
 		public static string ToCamelCase(this string s)
 		{
 			if (string.IsNullOrEmpty(s)) return s;
+
 			var pascal = s.ToPascalCase(true);
 			if (pascal.Length <= 1) return pascal;
+
 			return pascal[0].ToLower() + s.Substring(1);
 		}
 
 		public static string ToPascalCase(this string s, bool removeLeadingUnderscore = false)
 		{
 			if (string.IsNullOrEmpty(s)) return s;
+
 			var textInfo = new CultureInfo("en-US").TextInfo;
 			var titleCased = textInfo.ToTitleCase(s.ToLowerInvariant());
 			var result = RemovePunctuationExceptFirstUnderScore.Replace(titleCased, "");

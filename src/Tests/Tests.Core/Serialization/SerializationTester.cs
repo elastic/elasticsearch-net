@@ -30,6 +30,7 @@ namespace Tests.Core.Serialization
 		{
 			var message = $"{GetType().Name} success: {(Success)}";
 			if (Success) return message;
+
 			message += Environment.NewLine;
 			message += DiffFromExpectedExcerpt;
 			return message;
@@ -191,6 +192,7 @@ namespace Tests.Core.Serialization
 			var sortedActual = actualJsonToken.ToString();
 			var diff = sortedExpected.Diff(sortedActual, message);
 			if (string.IsNullOrWhiteSpace(diff)) return true;
+
 			result.DiffFromExpected = diff;
 			return false;
 		}
@@ -200,6 +202,7 @@ namespace Tests.Core.Serialization
 			//Serialize() returns quoted strings always.
 			var diff = expected.CreateCharacterDifference(actual, message);
 			if (string.IsNullOrWhiteSpace(diff)) return true;
+
 			result.DiffFromExpected = diff;
 			return false;
 		}
@@ -232,6 +235,7 @@ namespace Tests.Core.Serialization
 			if (item > -1) message += $". This is while comparing the {item.ToOrdinal()} item";
 
 			if (expectedJson.Type == JTokenType.String) return MatchString(expectedJson.Value<string>(), actualJson, result, message);
+
 			return MatchJson(expectedJson, actualJson, result, message);
 		}
 	}

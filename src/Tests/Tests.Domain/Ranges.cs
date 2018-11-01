@@ -89,6 +89,7 @@ namespace Tests.Domain
 			{
 				var comparison = lowBytes[i].CompareTo(highBytes[i]);
 				if (comparison == 0) continue;
+
 				if (comparison > 0)
 				{
 					var s = low;

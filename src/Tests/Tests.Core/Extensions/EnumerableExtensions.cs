@@ -19,6 +19,7 @@ namespace Tests.Core.Extensions
 				if (count == size)
 				{
 					yield return new ReadOnlyCollection<T>(array);
+
 					array = null;
 					count = 0;
 				}

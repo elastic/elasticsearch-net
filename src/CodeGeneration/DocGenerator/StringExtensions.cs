@@ -136,11 +136,13 @@ namespace DocGenerator
 			if (string.IsNullOrEmpty(input)) return string.Empty;
 
 			return Regex.Replace(
-				Regex.Replace(
-					Regex.Replace(input, @"([A-Z]+)([A-Z][a-z])", "$1-$2"), @"([a-z\d])([A-Z])", "$1-$2"
+					Regex.Replace(
+						Regex.Replace(input, @"([A-Z]+)([A-Z][a-z])", "$1-$2"), @"([a-z\d])([A-Z])", "$1-$2"
+					)
+					, @"[-\s]+", "-", RegexOptions.Compiled
 				)
-				, @"[-\s]+", "-", RegexOptions.Compiled
-			).TrimEnd('-').ToLower();
+				.TrimEnd('-')
+				.ToLower();
 		}
 
 		public static string RemoveLeadingAndTrailingMultiLineComments(this string input)

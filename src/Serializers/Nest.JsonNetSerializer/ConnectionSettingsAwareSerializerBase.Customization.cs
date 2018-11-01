@@ -67,7 +67,8 @@ namespace Nest.JsonNetSerializer
 		}
 
 		public Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
-			CancellationToken cancellationToken = default(CancellationToken))
+			CancellationToken cancellationToken = default(CancellationToken)
+		)
 		{
 			//This makes no sense now but we need the async method on the interface in 6.x so we can start swapping this out
 			//for an implementation that does make sense without having to wait for 7.x

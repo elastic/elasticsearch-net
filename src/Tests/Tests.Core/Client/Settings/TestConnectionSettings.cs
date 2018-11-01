@@ -47,9 +47,11 @@ namespace Tests.Core.Client.Settings
 			.OnRequestCompleted(r =>
 			{
 				if (!r.DeprecationWarnings.Any()) return;
+
 				var q = r.Uri.Query;
 				//hack to prevent the deprecation warnings from the deprecation response test to be reported
 				if (!string.IsNullOrWhiteSpace(q) && q.Contains("routing=ignoredefaultcompletedhandler")) return;
+
 				foreach (var d in r.DeprecationWarnings) XunitRunState.SeenDeprecations.Add(d);
 			});
 
@@ -64,6 +66,7 @@ namespace Tests.Core.Client.Settings
 		{
 			if (provided != null) return provided;
 			if (!TestConfiguration.Instance.Random.SourceSerializer) return null;
+
 			return (builtin, values) => new TestSourceSerializerBase(builtin, values);
 		}
 	}

@@ -41,17 +41,14 @@ namespace DocGenerator.Buildalyzer
 		private readonly Dictionary<string, ProjectAnalyzer> _projects = new Dictionary<string, ProjectAnalyzer>();
 
 		public AnalyzerManager(ILoggerFactory loggerFactory = null, LoggerVerbosity loggerVerbosity = LoggerVerbosity.Normal)
-			: this(null, null, loggerFactory, loggerVerbosity)
-		{
-		}
+			: this(null, null, loggerFactory, loggerVerbosity) { }
 
 		public AnalyzerManager(TextWriter logWriter, LoggerVerbosity loggerVerbosity = LoggerVerbosity.Normal)
-			: this(null, logWriter, loggerVerbosity)
-		{
-		}
+			: this(null, logWriter, loggerVerbosity) { }
 
 		public AnalyzerManager(string solutionFilePath, string[] projects, ILoggerFactory loggerFactory = null,
-			LoggerVerbosity loggerVerbosity = LoggerVerbosity.Normal)
+			LoggerVerbosity loggerVerbosity = LoggerVerbosity.Normal
+		)
 		{
 			LoggerVerbosity = loggerVerbosity;
 			ProjectLogger = loggerFactory?.CreateLogger<ProjectAnalyzer>();
@@ -98,6 +95,7 @@ namespace DocGenerator.Buildalyzer
 			projectFilePath = projectFilePath.Replace('\\', Path.DirectorySeparatorChar);
 			projectFilePath = ValidatePath(projectFilePath, true);
 			if (_projects.TryGetValue(projectFilePath, out var project)) return project;
+
 			project = new ProjectAnalyzer(this, projectFilePath);
 			_projects.Add(projectFilePath, project);
 			return project;
@@ -112,6 +110,7 @@ namespace DocGenerator.Buildalyzer
 			projectFilePath = projectFilePath.Replace('\\', Path.DirectorySeparatorChar);
 			projectFilePath = ValidatePath(projectFilePath, false);
 			if (_projects.TryGetValue(projectFilePath, out var project)) return project;
+
 			project = new ProjectAnalyzer(this, projectFilePath, projectDocument);
 			_projects.Add(projectFilePath, project);
 			return project;
@@ -131,6 +130,7 @@ namespace DocGenerator.Buildalyzer
 			{
 				if (!supportedType.Contains(project.ProjectType)) continue;
 				if (projects.Length > 0 && !projects.Contains(project.ProjectName)) continue;
+
 				GetProject(project.AbsolutePath);
 			}
 		}
@@ -138,8 +138,10 @@ namespace DocGenerator.Buildalyzer
 		private static string ValidatePath(string path, bool checkExists)
 		{
 			if (path == null) throw new ArgumentNullException(nameof(path));
+
 			path = Path.GetFullPath(path); // Normalize the path
 			if (checkExists && !File.Exists(path)) throw new ArgumentException($"The path {path} could not be found.");
+
 			return path;
 		}
 	}

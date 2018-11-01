@@ -121,6 +121,7 @@ namespace Tests.Reproduce
 					HelpURL = helpUrl,
 					//ExceptionMethod = this.WriteStructuredExceptionMethod(exceptionMethod)
 				};
+
 				depth++;
 				e = e.InnerException;
 			} while (depth < maxExceptions && e != null);

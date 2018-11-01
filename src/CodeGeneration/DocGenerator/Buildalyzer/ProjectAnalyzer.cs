@@ -51,9 +51,7 @@ namespace DocGenerator.Buildalyzer
 		private Project _project = null;
 
 		internal ProjectAnalyzer(AnalyzerManager manager, string projectFilePath)
-			: this(manager, projectFilePath, XDocument.Load(projectFilePath))
-		{
-		}
+			: this(manager, projectFilePath, XDocument.Load(projectFilePath)) { }
 
 		internal ProjectAnalyzer(AnalyzerManager manager, string projectFilePath, XDocument projectDocument)
 		{
@@ -94,6 +92,7 @@ namespace DocGenerator.Buildalyzer
 		public ProjectInstance Compile()
 		{
 			if (_compiledProject != null) return _compiledProject;
+
 			var project = Load();
 			if (project == null) return null;
 
@@ -104,6 +103,7 @@ namespace DocGenerator.Buildalyzer
 				var projectInstance = project.CreateProjectInstance();
 				if (!projectInstance.Build("Clean", _logger == null ? null : new ILogger[] { _logger })) return null;
 				if (!projectInstance.Build("Compile", _logger == null ? null : new ILogger[] { _logger })) return null;
+
 				_compiledProject = projectInstance;
 				return _compiledProject;
 			}
@@ -114,19 +114,22 @@ namespace DocGenerator.Buildalyzer
 		}
 
 		public IReadOnlyList<string> GetProjectReferences() =>
-			Compile()?.Items
+			Compile()
+				?.Items
 				.Where(x => x.ItemType == "ProjectReference")
 				.Select(x => Path.GetFullPath(Path.Combine(Path.GetDirectoryName(ProjectFilePath), x.EvaluatedInclude)))
 				.ToList();
 
 		public IReadOnlyList<string> GetReferences() =>
-			Compile()?.Items
+			Compile()
+				?.Items
 				.Where(x => x.ItemType == "CscCommandLineArgs" && x.EvaluatedInclude.StartsWith("/reference:"))
 				.Select(x => x.EvaluatedInclude.Substring(11).Trim('"'))
 				.ToList();
 
 		public IReadOnlyList<string> GetSourceFiles() =>
-			Compile()?.Items
+			Compile()
+				?.Items
 				.Where(x => x.ItemType == "CscCommandLineArgs" && !x.EvaluatedInclude.StartsWith("/"))
 				.Select(x => Path.GetFullPath(Path.Combine(Path.GetDirectoryName(ProjectFilePath), x.EvaluatedInclude)))
 				.ToList();
@@ -159,12 +162,14 @@ namespace DocGenerator.Buildalyzer
 		public bool RemoveGlobalProperty(string key)
 		{
 			if (_project != null) throw new InvalidOperationException("Can not change global properties once project has been loaded");
+
 			return _globalProperties.Remove(key);
 		}
 
 		public void SetGlobalProperty(string key, string value)
 		{
 			if (_project != null) throw new InvalidOperationException("Can not change global properties once project has been loaded");
+
 			_globalProperties[key] = value;
 		}
 
@@ -183,10 +188,12 @@ namespace DocGenerator.Buildalyzer
 		private static bool ResolveKnownPropsPath(string projectFolder, string project, XAttribute att, string buildPropFile)
 		{
 			if (!project.Contains(buildPropFile)) return false;
+
 			var dir = new DirectoryInfo(projectFolder).Parent;
 			while (dir != null && dir.Name != "src")
 				dir = dir.Parent;
 			if (dir == null) return true;
+
 			att.Value = Path.GetFullPath(Path.Combine(dir.FullName, buildPropFile));
 			return false;
 		}
