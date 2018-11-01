@@ -28,7 +28,6 @@ indent_size = 2
 # currently not supported in Rider/Resharper so not using these for now
 # ---
 
-
 # ---
 # langugage conventions https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#language-conventions
 
@@ -36,10 +35,13 @@ indent_size = 2
 dotnet_sort_system_directives_first = true
 
 # Prefer this.X except for _fields
-dotnet_style_qualification_for_field = false:none
-dotnet_style_qualification_for_property = true:warning
-dotnet_style_qualification_for_method = true:warning
-dotnet_style_qualification_for_event = true:warning
+# TODO can we force _ for private fields?
+# TODO elevate severity after code cleanup to warning minimum
+# TODO use language latest
+dotnet_style_qualification_for_field = false:error
+dotnet_style_qualification_for_property = false:error
+dotnet_style_qualification_for_method = false:error
+dotnet_style_qualification_for_event = false:error
 
 # Use language keywords instead of framework type names for type references
 dotnet_style_predefined_type_for_locals_parameters_members = true:error
@@ -49,13 +51,13 @@ dotnet_style_predefined_type_for_member_access = true:error
 dotnet_style_object_initializer = true:error
 dotnet_style_collection_initializer = true:error
 dotnet_style_explicit_tuple_names = true:error
-dotnet_style_prefer_inferred_anonymous_type_member_names = true
-dotnet_style_prefer_inferred_tuple_names = true
+dotnet_style_prefer_inferred_anonymous_type_member_names = true:error
+dotnet_style_prefer_inferred_tuple_names = true:error
 dotnet_style_coalesce_expression = true:error
 dotnet_style_null_propagation = true:error
 
 dotnet_style_require_accessibility_modifiers = for_non_interface_members:error
-dotnet_style_readonly_field = true
+dotnet_style_readonly_field = true:error
 
 # CSharp code style settings:
 [*.cs]
@@ -63,7 +65,6 @@ dotnet_style_readonly_field = true
 csharp_style_var_for_built_in_types = true:error
 csharp_style_var_when_type_is_apparent = true:error
 csharp_style_var_elsewhere = true:error
-
 
 csharp_style_expression_bodied_methods = true:error
 csharp_style_expression_bodied_constructors = true:error
@@ -82,7 +83,7 @@ csharp_style_throw_expression = true:error
 csharp_style_conditional_delegate_call = true:error
 
 csharp_prefer_braces = false:warning
-csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
+csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:error
 
 # ---
 # formatting conventions https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#formatting-conventions
@@ -93,6 +94,8 @@ csharp_new_line_before_else = true:error
 csharp_new_line_before_catch = true:error
 csharp_new_line_before_finally = true:error
 csharp_new_line_before_members_in_object_initializers = true
+# just a suggestion do to our JSON tests that use anonymous types to 
+# represent json quite a bit (makes copy paste easier).
 csharp_new_line_before_members_in_anonymous_types = true:suggestion
 csharp_new_line_between_query_expression_clauses = true:error
 
@@ -105,9 +108,10 @@ csharp_space_between_method_declaration_parameter_list_parentheses = false:error
 csharp_space_between_method_call_parameter_list_parentheses = false:error
 
 #Wrap
-csharp_preserve_single_line_statements = true
+csharp_preserve_single_line_statements = false:error
 csharp_preserve_single_line_blocks = true:error
 
+# Override source included files
 [{SimpleJson|SynchronizedCollection}.cs]
 csharp_style_var_for_built_in_types = false:none
 csharp_style_var_when_type_is_apparent = false:none
