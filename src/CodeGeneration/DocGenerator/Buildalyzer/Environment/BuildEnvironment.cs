@@ -1,4 +1,5 @@
 ﻿#region License
+
 //MIT License
 //
 //Copyright (c) 2017 Dave Glick
@@ -20,6 +21,7 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
+
 #endregion
 
 using System.Collections.Generic;
@@ -30,8 +32,6 @@ namespace DocGenerator.Buildalyzer.Environment
 	{
 		private string _oldMsBuildExtensionsPath = null;
 		private string _oldMsBuildSdksPath = null;
-
-		public abstract string GetToolsPath();
 
 		public virtual Dictionary<string, string> GetGlobalProperties(string solutionDir) =>
 			new Dictionary<string, string>
@@ -45,6 +45,8 @@ namespace DocGenerator.Buildalyzer.Environment
 				{ MsBuildProperties.GenerateResourceMSBuildArchitecture, "CurrentArchitecture" }
 			};
 
+		public abstract string GetToolsPath();
+
 		public virtual void SetEnvironmentVars(IReadOnlyDictionary<string, string> globalProperties)
 		{
 			if (globalProperties.TryGetValue(MsBuildProperties.MSBuildExtensionsPath, out var msBuildExtensionsPath))
@@ -52,6 +54,7 @@ namespace DocGenerator.Buildalyzer.Environment
 				_oldMsBuildExtensionsPath = System.Environment.GetEnvironmentVariable(MsBuildProperties.MSBuildExtensionsPath);
 				System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildExtensionsPath, msBuildExtensionsPath);
 			}
+
 			if (globalProperties.TryGetValue(MsBuildProperties.MSBuildSDKsPath, out var msBuildSDKsPath))
 			{
 				_oldMsBuildSdksPath = System.Environment.GetEnvironmentVariable(MsBuildProperties.MSBuildSDKsPath);
@@ -62,13 +65,8 @@ namespace DocGenerator.Buildalyzer.Environment
 		public virtual void UnsetEnvironmentVars()
 		{
 			if (_oldMsBuildExtensionsPath != null)
-			{
 				System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildExtensionsPath, _oldMsBuildExtensionsPath);
-			}
-			if (_oldMsBuildSdksPath != null)
-			{
-				System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildSDKsPath, _oldMsBuildSdksPath);
-			}
+			if (_oldMsBuildSdksPath != null) System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildSDKsPath, _oldMsBuildSdksPath);
 		}
 	}
 }

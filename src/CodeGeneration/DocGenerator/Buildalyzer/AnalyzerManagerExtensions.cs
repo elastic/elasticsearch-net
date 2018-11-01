@@ -1,4 +1,5 @@
 ﻿#region License
+
 //MIT License
 //
 //Copyright (c) 2017 Dave Glick
@@ -20,6 +21,7 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
+
 #endregion
 
 using Microsoft.CodeAnalysis;
@@ -31,10 +33,7 @@ namespace DocGenerator.Buildalyzer
 		public static AdhocWorkspace GetWorkspace(this AnalyzerManager manager)
 		{
 			var workspace = new AdhocWorkspace();
-			foreach (var project in manager.Projects.Values)
-			{
-				project.AddToWorkspace(workspace);
-			}
+			foreach (var project in manager.Projects.Values) project.AddToWorkspace(workspace);
 			return workspace;
 		}
 	}

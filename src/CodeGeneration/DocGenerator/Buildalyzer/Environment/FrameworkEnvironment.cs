@@ -1,4 +1,5 @@
 ﻿#region License
+
 //MIT License
 //
 //Copyright (c) 2017 Dave Glick
@@ -20,6 +21,7 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
+
 #endregion
 
 using System;
@@ -32,11 +34,6 @@ namespace DocGenerator.Buildalyzer.Environment
 {
 	internal class FrameworkEnvironment : BuildEnvironment
 	{
-		public string ToolsPath { get; }
-		public string ExtensionsPath { get; }
-		public string SDKsPath { get; }
-		public string RoslynTargetsPath { get; }
-
 		public FrameworkEnvironment(string projectPath, bool sdkProject)
 		{
 			ToolsPath = LocateToolsPath();
@@ -45,7 +42,13 @@ namespace DocGenerator.Buildalyzer.Environment
 			RoslynTargetsPath = Path.Combine(ToolsPath, "Roslyn");
 		}
 
-		public override string GetToolsPath() => ToolsPath;
+		public string ExtensionsPath { get; }
+
+		public string RoslynTargetsPath { get; }
+
+		public string SDKsPath { get; }
+
+		public string ToolsPath { get; }
 
 		public override Dictionary<string, string> GetGlobalProperties(string solutionDir)
 		{
@@ -56,19 +59,13 @@ namespace DocGenerator.Buildalyzer.Environment
 			return globalProperties;
 		}
 
+		public override string GetToolsPath() => ToolsPath;
+
 		private static string LocateToolsPath()
 		{
 			var toolsPath = ToolLocationHelper.GetPathToBuildToolsFile("msbuild.exe", ToolLocationHelper.CurrentToolsVersion);
-			if (string.IsNullOrEmpty(toolsPath))
-			{
-				// Could not find the tools path, possibly due to https://github.com/Microsoft/msbuild/issues/2369
-				// Try to poll for it
-				toolsPath = PollForToolsPath();
-			}
-			if (string.IsNullOrEmpty(toolsPath))
-			{
-				throw new InvalidOperationException("Could not locate the tools (msbuild.exe) path");
-			}
+			if (string.IsNullOrEmpty(toolsPath)) toolsPath = PollForToolsPath();
+			if (string.IsNullOrEmpty(toolsPath)) throw new InvalidOperationException("Could not locate the tools (msbuild.exe) path");
 			return Path.GetDirectoryName(toolsPath);
 		}
 

@@ -7,143 +7,131 @@ using NuDoq;
 
 namespace DocGenerator.XmlDocs
 {
-    /// <summary>
-    /// Visits XML Documentation file to build an AsciiDoc
-    /// collection of labeled list items to include in documentation
-    /// </summary>
-    /// <seealso cref="NuDoq.Visitor" />
-    public class XmlDocsVisitor : Visitor
-    {
-        private LabeledListItem _labeledListItem;
-        private readonly Type _type;
+	/// <summary>
+	///     Visits XML Documentation file to build an AsciiDoc
+	///     collection of labeled list items to include in documentation
+	/// </summary>
+	/// <seealso cref="NuDoq.Visitor" />
+	public class XmlDocsVisitor : Visitor
+	{
+		// AsciiDocNet does not currently have a type for list item continuations, so mimic here
+		// for the moment
+		private const string ListItemContinuation = "\r\n+\r\n";
+		private readonly Type _type;
+		private LabeledListItem _labeledListItem;
 
-        // AsciiDocNet does not currently have a type for list item continuations, so mimic here
-        // for the moment
-        private const string ListItemContinuation = "\r\n+\r\n";
+		public XmlDocsVisitor(Type type) => _type = type;
 
-        public List<LabeledListItem> LabeledListItems { get; } = new List<LabeledListItem>();
+		public List<LabeledListItem> LabeledListItems { get; } = new List<LabeledListItem>();
 
-        public XmlDocsVisitor(Type type)
-        {
-            _type = type;
-        }
+		public override void VisitC(C code)
+		{
+			var content = EncloseInMarks(code.Content.Trim());
+			if (!_labeledListItem.Any())
+				_labeledListItem.Add(new Paragraph(content));
+			else
+			{
+				var paragraph = _labeledListItem.Last() as Paragraph;
+				if (paragraph == null)
+					_labeledListItem.Add(new Paragraph(content));
+				else
+					paragraph.Add(new TextLiteral(" " + content));
+			}
+		}
 
-        public override void VisitText(Text text)
-        {
-            var content = text.Content.Trim();
-            if (!_labeledListItem.Any())
-                _labeledListItem.Add(new Paragraph(content));
-            else
-            {
-                var paragraph = _labeledListItem.Last() as Paragraph;
+		public override void VisitMember(Member member)
+		{
+			if (member.Info != null)
+				if (member.Info.DeclaringType == _type &&
+					member.Info.MemberType.HasFlag(MemberTypes.Method))
+				{
+					var methodInfo = member.Info as MethodInfo;
 
-                if (paragraph == null)
-                    _labeledListItem.Add(new Paragraph(content));
-                else
-                {
-                    var literal = paragraph.Last() as TextLiteral;
+					if (methodInfo != null && methodInfo.IsPublic)
+					{
+						if (_labeledListItem != null)
+							LabeledListItems.Add(_labeledListItem);
 
-                    if (literal != null && literal.Text == ListItemContinuation)
-                        paragraph.Add(new TextLiteral(content));
-                    else
-                        paragraph.Add(new TextLiteral(" " + content));
-                }
-            }
-        }
+						_labeledListItem = new LabeledListItem(EncloseInMarks(methodInfo.Name), 0);
+						base.VisitMember(member);
+					}
+				}
+		}
 
-        public override void VisitParam(Param param)
-        {
-            // TODO: add to docs. Omit for moment.
-        }
+		public override void VisitPara(Para para)
+		{
+			var paragraph = _labeledListItem.LastOrDefault() as Paragraph;
+			paragraph?.Add(new TextLiteral(ListItemContinuation));
+			base.VisitPara(para);
+		}
 
-        public override void VisitPara(Para para)
-        {
-            var paragraph = _labeledListItem.LastOrDefault() as Paragraph;
-            paragraph?.Add(new TextLiteral(ListItemContinuation));
-            base.VisitPara(para);
-        }
+		public override void VisitParam(Param param)
+		{
+			// TODO: add to docs. Omit for moment.
+		}
 
-        public override void VisitC(C code)
-        {
-            var content = EncloseInMarks(code.Content.Trim());
-            if (!_labeledListItem.Any())
-            {
-                _labeledListItem.Add(new Paragraph(content));
-            }
-            else
-            {
-                var paragraph = _labeledListItem.Last() as Paragraph;
-                if (paragraph == null)
-                    _labeledListItem.Add(new Paragraph(content));
-                else
-                    paragraph.Add(new TextLiteral(" " + content));
-            }
-        }
+		public override void VisitSee(See see)
+		{
+			var content = EncloseInMarks(ExtractLastTokenAndFillGenericParameters((see.Cref ?? see.Content).Trim()));
+			if (!_labeledListItem.Any())
+				_labeledListItem.Add(new Paragraph(content));
+			else
+			{
+				var paragraph = _labeledListItem.Last() as Paragraph;
 
-        public override void VisitSee(See see)
-        {
-            var content = EncloseInMarks(ExtractLastTokenAndFillGenericParameters((see.Cref ?? see.Content).Trim()));
-            if (!_labeledListItem.Any())
-            {
-                _labeledListItem.Add(new Paragraph(content));
-            }
-            else
-            {
-                var paragraph = _labeledListItem.Last() as Paragraph;
+				if (paragraph == null)
+					_labeledListItem.Add(new Paragraph(content));
+				else
+					paragraph.Add(new TextLiteral(" " + content));
+			}
+		}
 
-                if (paragraph == null)
-                    _labeledListItem.Add(new Paragraph(content));
-                else
-                    paragraph.Add(new TextLiteral(" " + content));
-            }
-        }
+		public override void VisitText(Text text)
+		{
+			var content = text.Content.Trim();
+			if (!_labeledListItem.Any())
+				_labeledListItem.Add(new Paragraph(content));
+			else
+			{
+				var paragraph = _labeledListItem.Last() as Paragraph;
 
-        private string ExtractLastTokenAndFillGenericParameters(string value)
-        {
-            if (value == null)
-                return string.Empty;
+				if (paragraph == null)
+					_labeledListItem.Add(new Paragraph(content));
+				else
+				{
+					var literal = paragraph.Last() as TextLiteral;
 
-            var endOfToken = value.IndexOf("(", StringComparison.Ordinal);
-            if (endOfToken == -1)
-                endOfToken = value.Length;
+					if (literal != null && literal.Text == ListItemContinuation)
+						paragraph.Add(new TextLiteral(content));
+					else
+						paragraph.Add(new TextLiteral(" " + content));
+				}
+			}
+		}
 
-            var index = 0;
+		private string EncloseInMarks(string value) => $"`{value}`";
 
-            for (var i = 0; i < value.Length; i++)
-            {
-                if (value[i] == '.')
-                    index = i + 1;
-                else if (value[i] == '(')
-                    break;
-            }
+		private string ExtractLastTokenAndFillGenericParameters(string value)
+		{
+			if (value == null)
+				return string.Empty;
 
-            var length = endOfToken - index;
-            var lastToken = value.Substring(index, length);
+			var endOfToken = value.IndexOf("(", StringComparison.Ordinal);
+			if (endOfToken == -1)
+				endOfToken = value.Length;
 
-            return lastToken.ReplaceArityWithGenericSignature();
-        }
+			var index = 0;
 
-        private string EncloseInMarks(string value) => $"`{value}`";
+			for (var i = 0; i < value.Length; i++)
+				if (value[i] == '.')
+					index = i + 1;
+				else if (value[i] == '(')
+					break;
 
-        public override void VisitMember(Member member)
-        {
-            if (member.Info != null)
-            {
-                if (member.Info.DeclaringType == _type &&
-                    member.Info.MemberType.HasFlag(MemberTypes.Method))
-                {
-                    var methodInfo = member.Info as MethodInfo;
+			var length = endOfToken - index;
+			var lastToken = value.Substring(index, length);
 
-                    if (methodInfo != null && methodInfo.IsPublic)
-                    {
-                        if (_labeledListItem != null)
-                            LabeledListItems.Add(_labeledListItem);
-
-                        _labeledListItem = new LabeledListItem(EncloseInMarks(methodInfo.Name), 0);
-                        base.VisitMember(member);
-                    }
-                }
-            }
-        }
-    }
+			return lastToken.ReplaceArityWithGenericSignature();
+		}
+	}
 }
