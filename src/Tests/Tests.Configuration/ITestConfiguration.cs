@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Tests.Configuration
 {
 	public interface ITestConfiguration
 	{
-		TestMode Mode { get; }
-		string ElasticsearchVersion { get; }
 		string ClusterFilter { get; }
-		string TestFilter { get; }
+		string ElasticsearchVersion { get; }
 		bool ForceReseed { get; }
-		bool TestAgainstAlreadyRunningElasticsearch { get; }
+		TestMode Mode { get; }
 
-		int Seed { get; }
+		RandomConfiguration Random { get; }
 
 		bool RunIntegrationTests { get; }
 		bool RunUnitTests { get; }
 
-		RandomConfiguration Random { get; }
+		int Seed { get; }
 		bool ShowElasticsearchOutputAfterStarted { get; }
+		bool TestAgainstAlreadyRunningElasticsearch { get; }
+		string TestFilter { get; }
 	}
 
 	public class RandomConfiguration
@@ -42,8 +41,8 @@ namespace Tests.Configuration
 			{
 				Console.WriteLine($" - {nameof(config.ClusterFilter)}: {config.ClusterFilter}");
 				Console.WriteLine($" - {nameof(config.TestFilter)}: {config.TestFilter}");
-
 			}
+
 			Console.WriteLine($" - {nameof(config.RunIntegrationTests)}: {config.RunIntegrationTests}");
 			Console.WriteLine($" - {nameof(config.RunUnitTests)}: {config.RunUnitTests}");
 			Console.WriteLine($" - Random:");

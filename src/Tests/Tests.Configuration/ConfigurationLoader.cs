@@ -12,6 +12,20 @@ namespace Tests.Configuration
 
 		public static ITestConfiguration Instance => Lazy.Value;
 
+		private static DirectoryInfo FindTestsConfigurationFolder(DirectoryInfo directoryInfo)
+		{
+			do
+			{
+				var yamlConfigDir = Path.Combine(directoryInfo.FullName, "Tests.Configuration");
+				if (directoryInfo.Name == "Tests" && Directory.Exists(yamlConfigDir))
+					return new DirectoryInfo(yamlConfigDir);
+
+				directoryInfo = directoryInfo.Parent;
+			} while (directoryInfo != null);
+
+			return null;
+		}
+
 		private static ITestConfiguration LoadConfiguration()
 		{
 			// The build script sets a FAKEBUILD env variable, so if it exists then
@@ -23,9 +37,11 @@ namespace Tests.Configuration
 				{
 					//load the test seed from the explicitly passed yaml file when running from FAKE
 					var tempYamlConfiguration = new YamlConfiguration(yamlFile);
-					Environment.SetEnvironmentVariable("NEST_TEST_SEED", tempYamlConfiguration.Seed.ToString(CultureInfo.InvariantCulture), EnvironmentVariableTarget.Process);
+					Environment.SetEnvironmentVariable("NEST_TEST_SEED", tempYamlConfiguration.Seed.ToString(CultureInfo.InvariantCulture),
+						EnvironmentVariableTarget.Process);
 					Console.WriteLine("--->" + tempYamlConfiguration.Seed);
 				}
+
 				return new EnvironmentConfiguration();
 			}
 
@@ -44,18 +60,6 @@ namespace Tests.Configuration
 				return new YamlConfiguration(defaultYamlFile);
 
 			throw new Exception($"Tried to load a yaml file from {testsConfigurationFolder.FullName}");
-		}
-
-		private static DirectoryInfo FindTestsConfigurationFolder(DirectoryInfo directoryInfo)
-		{
-			do
-			{
-				var yamlConfigDir = Path.Combine(directoryInfo.FullName, "Tests.Configuration");
-				if (directoryInfo.Name == "Tests" && Directory.Exists(yamlConfigDir))
-					return new DirectoryInfo(yamlConfigDir);
-				directoryInfo = directoryInfo.Parent;
-			} while (directoryInfo != null);
-			return null;
 		}
 	}
 }
