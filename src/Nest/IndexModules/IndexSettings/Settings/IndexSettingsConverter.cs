@@ -14,6 +14,9 @@ namespace Nest
 		public override bool CanWrite => true;
 		public override bool CanConvert(Type objectType) => true;
 
+		protected override bool SkipValue(JsonSerializer serializer, KeyValuePair<string, object> entry) =>
+			entry.Key != RefreshInterval && base.SkipValue(serializer, entry);
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var ds = value as IDynamicIndexSettings ?? (value as IUpdateIndexSettingsRequest)?.IndexSettings;

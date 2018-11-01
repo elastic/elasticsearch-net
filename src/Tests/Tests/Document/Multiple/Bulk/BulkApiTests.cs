@@ -38,7 +38,7 @@ namespace Tests.Document.Multiple.Bulk
 			);
 
 			if (!pipelineResponse.IsValid)
-				throw new Exception("Failed to set up pipeline required for bulk");
+				throw new Exception("Failed to set up pipeline named 'default-pipeline' required for bulk");
 
 			pipelineResponse = client.PutPipeline("pipeline", p => p
 				.Processors(pr => pr
@@ -47,7 +47,7 @@ namespace Tests.Document.Multiple.Bulk
 			);
 
 			if (!pipelineResponse.IsValid)
-				throw new Exception("Failed to set up pipeline required for bulk");
+				throw new Exception($"Failed to set up pipeline named 'pipeline' required for bulk");
 
 			base.IntegrationSetup(client, values);
 		}
