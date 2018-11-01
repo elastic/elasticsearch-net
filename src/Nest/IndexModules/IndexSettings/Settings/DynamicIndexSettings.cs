@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Dynamic index settings
+	/// </summary>
 	[ContractJsonConverter(typeof(IndexSettingsConverter))]
 	public interface IDynamicIndexSettings : IIsADictionary<string, object>
 	{
@@ -98,8 +101,10 @@ namespace Nest
 		ISimilarities Similarity { get; set; }
 	}
 
+	/// <inheritdoc />
 	public class DynamicIndexSettings : IsADictionaryBase<string, object>, IDynamicIndexSettings
 	{
+		private Time _refreshInterval;
 		public DynamicIndexSettings() { }
 
 		public DynamicIndexSettings(IDictionary<string, object> container) : base(container) { }
@@ -135,7 +140,15 @@ namespace Nest
 		public Union<int, RecoveryInitialShards> RecoveryInitialShards { get; set; }
 
 		/// <inheritdoc/>
-		public Time RefreshInterval { get; set; }
+		public Time RefreshInterval
+		{
+			get => _refreshInterval;
+			set
+			{
+				this.BackingDictionary[UpdatableIndexSettings.RefreshInterval] = value;
+				_refreshInterval = value;
+			}
+		}
 
 		/// <inheritdoc/>
 		public int? RoutingAllocationTotalShardsPerNode { get; set; }
@@ -158,88 +171,89 @@ namespace Nest
 		/// <summary>
 		/// Add any setting to the index
 		/// </summary>
-		public void Add(string setting, object value) => this.BackingDictionary.Add(setting, value);
+		public void Add(string setting, object value) => this.BackingDictionary[setting] = value;
 
 	}
 
+	/// <inheritdoc cref="DynamicIndexSettings"/>
 	public class DynamicIndexSettingsDescriptor :
 		DynamicIndexSettingsDescriptorBase<DynamicIndexSettingsDescriptor, DynamicIndexSettings>
 	{
 		public DynamicIndexSettingsDescriptor() : base(new DynamicIndexSettings()) { }
 	}
 
+	/// <summary>Base descriptor implementation for dynamic index settings</summary>
 	public abstract class DynamicIndexSettingsDescriptorBase<TDescriptor, TIndexSettings> : IsADictionaryDescriptorBase<TDescriptor, TIndexSettings, string, object>
 		where TDescriptor : DynamicIndexSettingsDescriptorBase<TDescriptor, TIndexSettings>
 		where TIndexSettings : class, IDynamicIndexSettings
 	{
 		protected DynamicIndexSettingsDescriptorBase(TIndexSettings instance) : base(instance) { }
 
-		/// <summary>
-		/// Add any setting to the index
-		/// </summary>
+		/// <inheritdoc cref="DynamicIndexSettings.Add"/>
 		public TDescriptor Setting(string setting, object value)
 		{
-			this.PromisedValue.Add(setting, value);
+			this.PromisedValue[setting] = value;
 			return (TDescriptor)this;
 		}
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.NumberOfReplicas"/>
 		public TDescriptor NumberOfReplicas(int? numberOfReplicas) => Assign(a => a.NumberOfReplicas = numberOfReplicas);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.AutoExpandReplicas"/>
 		public TDescriptor AutoExpandReplicas(AutoExpandReplicas autoExpandReplicas) => Assign(a => a.AutoExpandReplicas = autoExpandReplicas);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.BlocksMetadata"/>
 		public TDescriptor BlocksMetadata(bool? blocksMetadata = true) => Assign(a => a.BlocksMetadata = blocksMetadata);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.BlocksRead"/>
 		public TDescriptor BlocksRead(bool? blocksRead = true) => Assign(a => a.BlocksRead = blocksRead);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.BlocksReadOnly"/>
 		public TDescriptor BlocksReadOnly(bool? blocksReadOnly = true) => Assign(a => a.BlocksReadOnly = blocksReadOnly);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.BlocksWrite"/>
 		public TDescriptor BlocksWrite(bool? blocksWrite = true) => Assign(a => a.BlocksWrite = blocksWrite);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.Priority"/>
 		public TDescriptor Priority(int? priority) => Assign(a => a.Priority = priority);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.Merge"/>
 		public TDescriptor Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>
 			Assign(a => a.Merge = merge?.Invoke(new MergeSettingsDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.RecoveryInitialShards"/>
 		public TDescriptor RecoveryInitialShards(Union<int, RecoveryInitialShards> initialShards) =>
 			Assign(a => a.RecoveryInitialShards = initialShards);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.RequestsCacheEnabled"/>
 		public TDescriptor RequestsCacheEnabled(bool? enable = true) =>
 			Assign(a => a.RequestsCacheEnabled = enable);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.RefreshInterval"/>
 		public TDescriptor RefreshInterval(Time time) => Assign(a => a.RefreshInterval = time);
 
-		/// <inheritdoc/>
+		// TODO: align name for 7.x
+		/// <inheritdoc cref="DynamicIndexSettings.RoutingAllocationTotalShardsPerNode"/>
 		public TDescriptor TotalShardsPerNode(int? totalShardsPerNode) =>
 			Assign(a => a.RoutingAllocationTotalShardsPerNode = totalShardsPerNode);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.SlowLog"/>
 		public TDescriptor SlowLog(Func<SlowLogDescriptor, ISlowLog> slowLogSelector) =>
 			Assign(a => a.SlowLog = slowLogSelector?.Invoke(new SlowLogDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.Translog"/>
 		public TDescriptor Translog(Func<TranslogSettingsDescriptor, ITranslogSettings> translogSelector) =>
 			Assign(a => a.Translog = translogSelector?.Invoke(new TranslogSettingsDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.UnassignedNodeLeftDelayedTimeout"/>
 		public TDescriptor UnassignedNodeLeftDelayedTimeout(Time time) =>
 			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.Analysis"/>
 		public TDescriptor Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
 			Assign(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc cref="DynamicIndexSettings.Similarity"/>
 		public TDescriptor Similarity(Func<SimilaritiesDescriptor, IPromise<ISimilarities>> selector) =>
 			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor())?.Value);
 	}
