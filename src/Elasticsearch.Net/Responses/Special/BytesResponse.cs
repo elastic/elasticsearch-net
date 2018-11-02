@@ -12,17 +12,11 @@ namespace Elasticsearch.Net
 		public bool TryGetServerError(out ServerError serverError)
 		{
 			serverError = null;
-			if (this.Body == null || this.Body.Length == 0) return false;
-			try
-			{
-				using(var stream = new MemoryStream(this.Body))
-					serverError = ServerError.Create(stream);
-				return true;
-			}
-			catch
-			{
+			if (this.Body == null || this.Body.Length == 0)
 				return false;
-			}
+
+			using(var stream = new MemoryStream(this.Body))
+				return ServerError.TryCreate(stream, out serverError);
 		}
 
 		protected override bool TryGetServerErrorReason(out string reason)

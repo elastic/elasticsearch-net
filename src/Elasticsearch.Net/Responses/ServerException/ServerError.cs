@@ -18,9 +18,24 @@ namespace Elasticsearch.Net
 		public Error Error { get; }
 		public int Status { get; }
 
+		public static bool TryCreate(Stream stream, out ServerError serverError)
+		{
+			try
+			{
+				serverError = Create(stream);
+				return true;
+			}
+			catch
+			{
+				serverError = null;
+				return false;
+			}
+		}
+
 		public static ServerError Create(Stream stream) =>
 			LowLevelRequestResponseSerializer.Instance.Deserialize<ServerError>(stream);
 
+		// TODO: make token default parameter in 7.x
 		public static Task<ServerError> CreateAsync(Stream stream, CancellationToken token) =>
 			LowLevelRequestResponseSerializer.Instance.DeserializeAsync<ServerError>(stream, token);
 
