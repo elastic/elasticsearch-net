@@ -42,6 +42,8 @@ namespace Tests.Core.Client.Settings
 		public static Uri CreateUri(int port = 9200) => new UriBuilder("http://", LocalOrProxyHost, port).Uri;
 
 		internal ConnectionSettings ApplyTestSettings() => EnableDebugMode()
+#if DEBUG
+			.EnableDebugMode()
 #endif
 			.ConnectionLimit(ConnectionLimitDefault)
 			.OnRequestCompleted(r =>
