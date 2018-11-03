@@ -6,6 +6,7 @@ namespace Elasticsearch.Net
 	{
 		[Obsolete("Removed in Elasticsearch 6.2. Will be removed in NEST 7.x. Calling this is a no-op.")]
 		public string OperationThreading { get; set; }
+
 		[Obsolete("Removed in Elasticsearch 6.2. Will be removed in NEST 7.x. Calling this is a no-op.")]
 		public bool? WaitForMerge { get; set; }
 	}

@@ -7,7 +7,7 @@ namespace Elasticsearch.Net
 	public interface IElasticsearchResponse
 	{
 		/// <summary>
-		/// Sets and returns the <see cref="IApiCallDetails"/> diagnostic information
+		/// Sets and returns the <see cref="IApiCallDetails" /> diagnostic information
 		/// </summary>
 		IApiCallDetails ApiCall { get; set; }
 

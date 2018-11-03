@@ -13,6 +13,7 @@ namespace Elasticsearch.Net
 		public static Uri ParseToUri(string boundAddress, bool forceHttp)
 		{
 			if (boundAddress == null) throw new ArgumentNullException(nameof(boundAddress));
+
 			var suffix = forceHttp ? "s" : string.Empty;
 			var match = AddressRegex.Match(boundAddress);
 			if (!match.Success) throw new Exception($"Can not parse bound_address: {boundAddress} to Uri");
@@ -62,29 +63,31 @@ namespace Elasticsearch.Net
 
 	internal class NodeInfo
 	{
-		public string name { get; set; }
-		public string transport_address { get; set; }
-		public string host { get; set; }
-		public string ip { get; set; }
-		public string version { get; set; }
 		public string build_hash { get; set; }
-		public IList<string> roles { get; set; }
+		public string host { get; set; }
 		public NodeInfoHttp http { get; set; }
+		public string ip { get; set; }
+		public string name { get; set; }
+		public IList<string> roles { get; set; }
 		public IDictionary<string, object> settings { get; set; }
-
-		internal bool MasterEligible => this.roles?.Contains("master") ?? false;
-		internal bool HoldsData => this.roles?.Contains("data") ?? false;
-		internal bool IngestEnabled => this.roles?.Contains("ingest") ?? false;
+		public string transport_address { get; set; }
+		public string version { get; set; }
+		internal bool HoldsData => roles?.Contains("data") ?? false;
 
 		internal bool HttpEnabled
 		{
 			get
 			{
-				if (this.settings != null && this.settings.ContainsKey("http.enabled"))
-					return Convert.ToBoolean(this.settings["http.enabled"]);
+				if (settings != null && settings.ContainsKey("http.enabled"))
+					return Convert.ToBoolean(settings["http.enabled"]);
+
 				return http != null;
 			}
 		}
+
+		internal bool IngestEnabled => roles?.Contains("ingest") ?? false;
+
+		internal bool MasterEligible => roles?.Contains("master") ?? false;
 	}
 
 	internal class NodeInfoHttp

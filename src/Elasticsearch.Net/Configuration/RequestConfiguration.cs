@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
@@ -9,57 +8,9 @@ namespace Elasticsearch.Net
 	public interface IRequestConfiguration
 	{
 		/// <summary>
-		/// The timeout for this specific request, takes precedence over the global timeout settings
-		/// </summary>
-		TimeSpan? RequestTimeout { get; set; }
-
-		/// <summary>
-		/// The ping timeout for this specific request
-		/// </summary>
-		TimeSpan? PingTimeout { get; set;  }
-
-		/// <summary>
-		/// Force a different Content-Type header on the request
-		/// </summary>
-		string ContentType { get; set; }
-
-		/// <summary>
-		/// Associate an Id with this user-initiated task, such that it can be located in the cluster task list.
-		/// Valid only for Elasticsearch 6.2.0+
-		/// </summary>
-		string OpaqueId { get; set; }
-
-		/// <summary>
 		/// Force a different Accept header on the request
 		/// </summary>
 		string Accept { get; set; }
-
-		/// <summary>
-		/// This will override whatever is set on the connection configuration or whatever default the connectionpool has.
-		/// </summary>
-		int? MaxRetries { get; set; }
-
-		/// <summary>
-		/// This will force the operation on the specified node, this will bypass any configured connection pool and will no retry.
-		/// </summary>
-		Uri ForceNode { get; set; }
-
-		/// <summary>
-		/// Forces no sniffing to occur on the request no matter what configuration is in place
-		/// globally
-		/// </summary>
-		bool? DisableSniff { get; set; }
-
-		/// <summary>
-		/// Under no circumstance do a ping before the actual call. If a node was previously dead a small ping with
-		/// low connect timeout will be tried first in normal circumstances
-		/// </summary>
-		bool? DisablePing { get; set; }
-
-		/// <summary>
-		/// Whether to buffer the request and response bytes for the call
-		/// </summary>
-		bool? DisableDirectStreaming { get; set; }
 
 		/// <summary>
 		/// Treat the following statuses (on top of the 200 range) NOT as error.
@@ -73,20 +24,68 @@ namespace Elasticsearch.Net
 		BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
 
 		/// <summary>
+		/// Use the following client certificates to authenticate this single request
+		/// </summary>
+		X509CertificateCollection ClientCertificates { get; set; }
+
+		/// <summary>
+		/// Force a different Content-Type header on the request
+		/// </summary>
+		string ContentType { get; set; }
+
+		/// <summary>
+		/// Whether to buffer the request and response bytes for the call
+		/// </summary>
+		bool? DisableDirectStreaming { get; set; }
+
+		/// <summary>
+		/// Under no circumstance do a ping before the actual call. If a node was previously dead a small ping with
+		/// low connect timeout will be tried first in normal circumstances
+		/// </summary>
+		bool? DisablePing { get; set; }
+
+		/// <summary>
+		/// Forces no sniffing to occur on the request no matter what configuration is in place
+		/// globally
+		/// </summary>
+		bool? DisableSniff { get; set; }
+
+		/// <summary>
 		/// Whether or not this request should be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining defaults to true
 		/// </summary>
 		bool EnableHttpPipelining { get; set; }
 
 		/// <summary>
-		/// Submit the request on behalf in the context of a different shield user
-		/// <pre/>https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
+		/// This will force the operation on the specified node, this will bypass any configured connection pool and will no retry.
 		/// </summary>
-		string RunAs { get; set; }
+		Uri ForceNode { get; set; }
 
 		/// <summary>
-		/// Use the following client certificates to authenticate this single request
+		/// This will override whatever is set on the connection configuration or whatever default the connectionpool has.
 		/// </summary>
-		X509CertificateCollection ClientCertificates { get; set; }
+		int? MaxRetries { get; set; }
+
+		/// <summary>
+		/// Associate an Id with this user-initiated task, such that it can be located in the cluster task list.
+		/// Valid only for Elasticsearch 6.2.0+
+		/// </summary>
+		string OpaqueId { get; set; }
+
+		/// <summary>
+		/// The ping timeout for this specific request
+		/// </summary>
+		TimeSpan? PingTimeout { get; set; }
+
+		/// <summary>
+		/// The timeout for this specific request, takes precedence over the global timeout settings
+		/// </summary>
+		TimeSpan? RequestTimeout { get; set; }
+
+		/// <summary>
+		/// Submit the request on behalf in the context of a different shield user
+		/// <pre />https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
+		/// </summary>
+		string RunAs { get; set; }
 
 		/// <summary>
 		/// Instead of following a c/go like error checking on response.IsValid always throw an exception
@@ -98,51 +97,34 @@ namespace Elasticsearch.Net
 
 	public class RequestConfiguration : IRequestConfiguration
 	{
-		public TimeSpan? RequestTimeout { get; set; }
-		public TimeSpan? PingTimeout { get; set; }
-		public string ContentType { get; set; }
-		public string OpaqueId { get; set; }
 		public string Accept { get; set; }
-		public int? MaxRetries { get; set; }
-		public Uri ForceNode { get; set; }
-		public bool? DisableSniff { get; set; }
-		public bool? DisablePing { get; set; }
-		public bool? DisableDirectStreaming { get; set; }
 		public IEnumerable<int> AllowedStatusCodes { get; set; }
 		public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
-		public bool EnableHttpPipelining { get; set; } = true;
 		public CancellationToken CancellationToken { get; set; }
+
+		public X509CertificateCollection ClientCertificates { get; set; }
+		public string ContentType { get; set; }
+		public bool? DisableDirectStreaming { get; set; }
+		public bool? DisablePing { get; set; }
+		public bool? DisableSniff { get; set; }
+		public bool EnableHttpPipelining { get; set; } = true;
+		public Uri ForceNode { get; set; }
+		public int? MaxRetries { get; set; }
+		public string OpaqueId { get; set; }
+		public TimeSpan? PingTimeout { get; set; }
+		public TimeSpan? RequestTimeout { get; set; }
+
 		/// <summary>
 		/// Submit the request on behalf in the context of a different user
 		/// https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
 		/// </summary>
 		public string RunAs { get; set; }
 
-		public X509CertificateCollection ClientCertificates { get; set; }
 		public bool ThrowExceptions { get; set; }
 	}
 
 	public class RequestConfigurationDescriptor : IRequestConfiguration
 	{
-		private IRequestConfiguration Self => this;
-		TimeSpan? IRequestConfiguration.RequestTimeout { get; set; }
-		TimeSpan? IRequestConfiguration.PingTimeout { get; set; }
-		string IRequestConfiguration.ContentType { get; set; }
-		string IRequestConfiguration.OpaqueId { get; set; }
-		string IRequestConfiguration.Accept { get; set; }
-
-		int? IRequestConfiguration.MaxRetries { get; set; }
-		Uri IRequestConfiguration.ForceNode { get; set; }
-		bool? IRequestConfiguration.DisableSniff { get; set; }
-		bool? IRequestConfiguration.DisablePing { get; set; }
-		bool? IRequestConfiguration.DisableDirectStreaming { get; set; }
-		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
-		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
-		bool IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
-		string IRequestConfiguration.RunAs { get; set; }
-		X509CertificateCollection IRequestConfiguration.ClientCertificates { get; set; }
-		bool IRequestConfiguration.ThrowExceptions { get; set; }
-
 		public RequestConfigurationDescriptor(IRequestConfiguration config)
 		{
 			Self.RequestTimeout = config?.RequestTimeout;
@@ -162,9 +144,28 @@ namespace Elasticsearch.Net
 			Self.OpaqueId = config?.OpaqueId;
 		}
 
+		string IRequestConfiguration.Accept { get; set; }
+		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
+		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
+		X509CertificateCollection IRequestConfiguration.ClientCertificates { get; set; }
+		string IRequestConfiguration.ContentType { get; set; }
+		bool? IRequestConfiguration.DisableDirectStreaming { get; set; }
+		bool? IRequestConfiguration.DisablePing { get; set; }
+		bool? IRequestConfiguration.DisableSniff { get; set; }
+		bool IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
+		Uri IRequestConfiguration.ForceNode { get; set; }
+
+		int? IRequestConfiguration.MaxRetries { get; set; }
+		string IRequestConfiguration.OpaqueId { get; set; }
+		TimeSpan? IRequestConfiguration.PingTimeout { get; set; }
+		TimeSpan? IRequestConfiguration.RequestTimeout { get; set; }
+		string IRequestConfiguration.RunAs { get; set; }
+		private IRequestConfiguration Self => this;
+		bool IRequestConfiguration.ThrowExceptions { get; set; }
+
 		/// <summary>
 		/// Submit the request on behalf in the context of a different shield user
-		/// <pre/>https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
+		/// <pre />https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
 		/// </summary>
 		public RequestConfigurationDescriptor RunAs(string username)
 		{
@@ -278,11 +279,10 @@ namespace Elasticsearch.Net
 
 		/// <summary> Use the following client certificate to authenticate this request to Elasticsearch </summary>
 		public RequestConfigurationDescriptor ClientCertificate(X509Certificate certificate) =>
-			this.ClientCertificates(new X509Certificate2Collection { certificate });
+			ClientCertificates(new X509Certificate2Collection { certificate });
 
 		/// <summary> Use the following client certificate to authenticate this request to Elasticsearch </summary>
 		public RequestConfigurationDescriptor ClientCertificate(string certificatePath) =>
-			this.ClientCertificates(new X509Certificate2Collection {new X509Certificate(certificatePath)});
-
+			ClientCertificates(new X509Certificate2Collection { new X509Certificate(certificatePath) });
 	}
 }

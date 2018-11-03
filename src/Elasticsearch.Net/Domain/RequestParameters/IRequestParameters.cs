@@ -9,24 +9,24 @@ namespace Elasticsearch.Net
 		HttpMethod DefaultHttpMethod { get; }
 
 		/// <summary>
-		/// The querystring that should be appended to the path of the request
-		/// </summary>
-		Dictionary<string, object> QueryString { get; set; }
-
-		/// <summary>
 		/// A method that can be set on the request to take ownership of creating the response object.
 		/// When set this will be called instead of the internal .Deserialize();
 		/// </summary>
-		Func<IApiCallDetails, Stream, object> DeserializationOverride { get; set;  }
+		Func<IApiCallDetails, Stream, object> DeserializationOverride { get; set; }
+
+		/// <summary>
+		/// The querystring that should be appended to the path of the request
+		/// </summary>
+		Dictionary<string, object> QueryString { get; set; }
 
 		/// <summary>
 		/// Configuration for this specific request, i.e disable sniffing, custom timeouts etcetera.
 		/// </summary>
 		IRequestConfiguration RequestConfiguration { get; set; }
 
-		/// <summary> Sets a query string param. If <paramref name="value"/> is null and the parameter exists it will be removed </summary>
+		/// <summary> Sets a query string param. If <paramref name="value" /> is null and the parameter exists it will be removed </summary>
 		/// <param name="name">The query string parameter to add</param>
-		/// <param name="value">The value to set, if null removes <paramref name="name"/> from the query string if it exists</param>
+		/// <param name="value">The value to set, if null removes <paramref name="name" /> from the query string if it exists</param>
 		void SetQueryString(string name, object value);
 
 		bool ContainsQueryString(string name);

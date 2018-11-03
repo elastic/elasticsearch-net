@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,6 +11,11 @@ namespace Elasticsearch.Net
 	{
 		public const int BufferSize = 81920;
 
+		private static readonly Type[] SpecialTypes =
+			{ typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(DynamicResponse) };
+
+		private static readonly VoidResponse StaticVoid = new VoidResponse { Body = new VoidResponse.VoidBody() };
+
 		public static TResponse ToResponse<TResponse>(
 			RequestData requestData,
 			Exception ex,
@@ -19,7 +23,7 @@ namespace Elasticsearch.Net
 			IEnumerable<string> warnings,
 			Stream responseStream,
 			string mimeType = RequestData.MimeType
-			)
+		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
@@ -37,7 +41,7 @@ namespace Elasticsearch.Net
 			Stream responseStream,
 			string mimeType = RequestData.MimeType,
 			CancellationToken cancellationToken = default(CancellationToken)
-			)
+		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			responseStream.ThrowIfNull(nameof(responseStream));
@@ -49,17 +53,16 @@ namespace Elasticsearch.Net
 		}
 
 		private static ApiCallDetails Initialize(
-			RequestData requestData, Exception exception, int? statusCode, IEnumerable<string> warnings, string mimeType)
+			RequestData requestData, Exception exception, int? statusCode, IEnumerable<string> warnings, string mimeType
+		)
 		{
 			var success = false;
 			var allowedStatusCodes = requestData.AllowedStatusCodes.ToList();
 			if (statusCode.HasValue)
-			{
 				success = statusCode >= 200 && statusCode < 300
-				          || (requestData.Method == HttpMethod.HEAD && statusCode == 404)
-				          || allowedStatusCodes.Contains(statusCode.Value)
-				          || allowedStatusCodes.Contains(-1);
-			}
+					|| requestData.Method == HttpMethod.HEAD && statusCode == 404
+					|| allowedStatusCodes.Contains(statusCode.Value)
+					|| allowedStatusCodes.Contains(-1);
 			var details = new ApiCallDetails
 			{
 				Success = success,
@@ -96,14 +99,16 @@ namespace Elasticsearch.Net
 					return null;
 
 				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, responseStream) as TResponse;
+
 				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
-						? null
-					 	: requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TResponse>(responseStream);
+					? null
+					: requestData.ConnectionSettings.RequestResponseSerializer.Deserialize<TResponse>(responseStream);
 			}
 		}
 
 		private static async Task<TResponse> SetBodyAsync<TResponse>(
-			ApiCallDetails details, RequestData requestData, Stream responseStream, string mimeType, CancellationToken cancellationToken)
+			ApiCallDetails details, RequestData requestData, Stream responseStream, string mimeType, CancellationToken cancellationToken
+		)
 			where TResponse : class, IElasticsearchResponse, new()
 		{
 			byte[] bytes = null;
@@ -124,17 +129,14 @@ namespace Elasticsearch.Net
 					return null;
 
 				if (requestData.CustomConverter != null) return requestData.CustomConverter(details, responseStream) as TResponse;
+
 				return mimeType == null || !mimeType.StartsWith(requestData.RequestMimeType, StringComparison.Ordinal)
-						? null
-					 	: await requestData.ConnectionSettings.RequestResponseSerializer
-							.DeserializeAsync<TResponse>(responseStream, cancellationToken)
-							.ConfigureAwait(false);
+					? null
+					: await requestData.ConnectionSettings.RequestResponseSerializer
+						.DeserializeAsync<TResponse>(responseStream, cancellationToken)
+						.ConfigureAwait(false);
 			}
 		}
-
-		private static readonly VoidResponse StaticVoid = new VoidResponse { Body = new VoidResponse.VoidBody() };
-		private static readonly Type[] SpecialTypes =
-			{typeof(StringResponse), typeof(BytesResponse), typeof(VoidResponse), typeof(DynamicResponse)};
 
 		private static bool SetSpecialTypes<TResponse>(byte[] bytes, out TResponse cs)
 			where TResponse : class, IElasticsearchResponse, new()
