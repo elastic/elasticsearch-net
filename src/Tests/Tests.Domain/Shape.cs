@@ -10,12 +10,8 @@ namespace Tests.Domain
 	public class Shape
 	{
 		private static int _idState = 0;
-
-		public int Id { get; set; }
-
-		public IGeometryCollection GeometryCollection { get; set; }
-		public IEnvelopeGeoShape Envelope { get; set; }
 		public ICircleGeoShape Circle { get; set; }
+		public IEnvelopeGeoShape Envelope { get; set; }
 
 		public static Faker<Shape> Generator { get; } =
 			new Faker<Shape>()
@@ -32,21 +28,24 @@ namespace Tests.Domain
 						GenerateMultiPolygon(p)
 					})
 				)
-				.RuleFor(p => p.Envelope, p => new EnvelopeGeoShape(new []
+				.RuleFor(p => p.Envelope, p => new EnvelopeGeoShape(new[]
 				{
 					new GeoCoordinate(45, 0),
 					new GeoCoordinate(0, 45)
 				}))
-				.RuleFor(p => p.Circle, p => new CircleGeoShape(GenerateGeoCoordinate(p), $"{p.Random.Int(1, 100)}km"))
-			;
+				.RuleFor(p => p.Circle, p => new CircleGeoShape(GenerateGeoCoordinate(p), $"{p.Random.Int(1, 100)}km"));
 
-		public static IList<Shape> Shapes { get; } = Shape.Generator.Clone().Generate(10);
+		public IGeometryCollection GeometryCollection { get; set; }
+
+		public int Id { get; set; }
+
+		public static IList<Shape> Shapes { get; } = Generator.Clone().Generate(10);
 
 		private static IPointGeoShape GenerateRandomPoint(Faker p) =>
 			new PointGeoShape(GenerateGeoCoordinate(p));
 
 		private static IMultiPointGeoShape GenerateRandomMultiPoint(Faker p) =>
-			new MultiPointGeoShape(GenerateGeoCoordinates(p,  p.Random.Int(1, 5)));
+			new MultiPointGeoShape(GenerateGeoCoordinates(p, p.Random.Int(1, 5)));
 
 		private static ILineStringGeoShape GenerateLineString(Faker p) =>
 			new LineStringGeoShape(GenerateGeoCoordinates(p, 3));
@@ -60,21 +59,16 @@ namespace Tests.Domain
 			return new MultiLineStringGeoShape(coordinates);
 		}
 
-		private static IPolygonGeoShape GeneratePolygon(Faker p)
+		private static IPolygonGeoShape GeneratePolygon(Faker p) => new PolygonGeoShape(new List<IEnumerable<GeoCoordinate>>
 		{
-			return new PolygonGeoShape(new List<IEnumerable<GeoCoordinate>>
-			{
-				GeneratePolygonCoordinates(p, GenerateGeoCoordinate(p))
-			});
-		}
+			GeneratePolygonCoordinates(p, GenerateGeoCoordinate(p))
+		});
 
-		private static IMultiPolygonGeoShape GenerateMultiPolygon(Faker p)
-		{
-			return new MultiPolygonGeoShape(new List<IEnumerable<IEnumerable<GeoCoordinate>>>
+		private static IMultiPolygonGeoShape GenerateMultiPolygon(Faker p) => new MultiPolygonGeoShape(
+			new List<IEnumerable<IEnumerable<GeoCoordinate>>>
 			{
-				new [] { GeneratePolygonCoordinates(p, GenerateGeoCoordinate(p)) }
+				new[] { GeneratePolygonCoordinates(p, GenerateGeoCoordinate(p)) }
 			});
-		}
 
 		private static GeoCoordinate GenerateGeoCoordinate(Faker p) =>
 			new GeoCoordinate(p.Address.Latitude(), p.Address.Longitude());
@@ -99,7 +93,7 @@ namespace Tests.Domain
 			for (var i = 0; i < maxPoints; i++)
 			{
 				var distance = p.Random.Double() * maxDistance;
-				points.Add(new GeoCoordinate(centroid.Latitude + Math.Sin(angle)*distance, centroid.Longitude + Math.Cos(angle)*distance));
+				points.Add(new GeoCoordinate(centroid.Latitude + Math.Sin(angle) * distance, centroid.Longitude + Math.Cos(angle) * distance));
 				angle = angle + p.Random.Double() * (2d / 3) * Math.PI;
 				if (angle > 2 * Math.PI) break;
 			}

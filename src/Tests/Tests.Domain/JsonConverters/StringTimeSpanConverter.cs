@@ -26,10 +26,7 @@ namespace Tests.Domain.JsonConverters
 
 				return null;
 			}
-			if (reader.TokenType == JsonToken.String)
-			{
-				return TimeSpan.Parse((string)reader.Value);
-			}
+			if (reader.TokenType == JsonToken.String) return TimeSpan.Parse((string)reader.Value);
 
 			throw new JsonSerializationException($"Cannot convert token of type {reader.TokenType} to {objectType}.");
 		}

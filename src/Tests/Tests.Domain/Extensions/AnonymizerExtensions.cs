@@ -12,7 +12,6 @@ namespace Tests.Domain.Extensions
 			{
 				parent = Infer.Id(c.Parent),
 				name = Infer.RelationName(c.Name)
-
 			});
 	}
 }
