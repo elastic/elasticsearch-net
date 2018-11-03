@@ -14,20 +14,21 @@ namespace Nest
 			if (name == null) throw new ArgumentNullException(nameof(name));
 			if (name.Length == 0) throw new ArgumentException("cannot be empty");
 
-			this._name = name;
+			_name = name;
 		}
+
+		protected abstract ActionType ActionType { get; }
+
+		ActionType IAction.ActionType => ActionType;
 
 		string IAction.Name
 		{
-			get => this._name;
-			set => this._name = value;
+			get => _name;
+			set => _name = value;
 		}
 
-		ActionType IAction.ActionType => this.ActionType;
-		TransformContainer IAction.Transform { get; set; }
 		Time IAction.ThrottlePeriod { get; set; }
-
-		protected abstract ActionType ActionType { get; }
+		TransformContainer IAction.Transform { get; set; }
 
 		public TDescriptor Transform(Func<TransformDescriptor, TransformContainer> selector) =>
 			Assign(a => a.Transform = selector.InvokeOrDefault(new TransformDescriptor()));

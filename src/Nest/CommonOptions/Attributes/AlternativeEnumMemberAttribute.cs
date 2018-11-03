@@ -3,7 +3,7 @@
 namespace Nest
 {
 	/// <summary>
-	/// Similar to <see cref="System.Runtime.Serialization.EnumMemberAttribute"/>, but allows an alternative string
+	/// Similar to <see cref="System.Runtime.Serialization.EnumMemberAttribute" />, but allows an alternative string
 	/// value to be specified for an enum field value.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]

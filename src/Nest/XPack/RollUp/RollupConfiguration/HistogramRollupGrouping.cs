@@ -31,7 +31,7 @@ namespace Nest
 		public long? Interval { get; set; }
 	}
 
-	/// <inheritdoc cref="IHistogramRollupGrouping"/>
+	/// <inheritdoc cref="IHistogramRollupGrouping" />
 	public class HistogramRollupGroupingDescriptor<T>
 		: DescriptorBase<HistogramRollupGroupingDescriptor<T>, IHistogramRollupGrouping>, IHistogramRollupGrouping
 		where T : class
@@ -39,14 +39,14 @@ namespace Nest
 		Fields IHistogramRollupGrouping.Fields { get; set; }
 		long? IHistogramRollupGrouping.Interval { get; set; }
 
-		/// <inheritdoc cref="IHistogramRollupGrouping.Fields"/>
+		/// <inheritdoc cref="IHistogramRollupGrouping.Fields" />
 		public HistogramRollupGroupingDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		/// <inheritdoc cref="IHistogramRollupGrouping.Fields"/>
+		/// <inheritdoc cref="IHistogramRollupGrouping.Fields" />
 		public HistogramRollupGroupingDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
 
-		/// <inheritdoc cref="IHistogramRollupGrouping.Interval"/>
+		/// <inheritdoc cref="IHistogramRollupGrouping.Interval" />
 		public HistogramRollupGroupingDescriptor<T> Interval(long? interval) => Assign(a => a.Interval = interval);
 	}
 }

@@ -14,54 +14,38 @@ namespace Nest
 
 	public class SimpleInput : InputBase, ISimpleInput, IEnumerable<KeyValuePair<string, object>>
 	{
-		private IDictionary<string, object> _payload;
-
-		public IDictionary<string, object> Payload => _payload;
-
-		public SimpleInput() {}
+		public SimpleInput() { }
 
 		public SimpleInput(IDictionary<string, object> payload)
-			: this()
-		{
-			this._payload = payload;
-		}
+			: this() => Payload = payload;
+
+		public IDictionary<string, object> Payload { get; private set; }
+
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+		public IEnumerator<KeyValuePair<string, object>> GetEnumerator() =>
+			Payload?.GetEnumerator() ?? Enumerable.Empty<KeyValuePair<string, object>>().GetEnumerator();
 
 		public void Add(string key, object value)
 		{
-			if (_payload == null) _payload = new Dictionary<string, object>();
-			_payload.Add(key, value);
+			if (Payload == null) Payload = new Dictionary<string, object>();
+			Payload.Add(key, value);
 		}
 
-		public void Remove(string key)
-		{
-			_payload?.Remove(key);
-		}
+		public void Remove(string key) => Payload?.Remove(key);
 
 		internal override void WrapInContainer(IInputContainer container) => container.Simple = this;
-
-		public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
-		{
-			return _payload?.GetEnumerator() ?? Enumerable.Empty<KeyValuePair<string, object>>().GetEnumerator();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
 	}
 
 	public class SimpleInputDescriptor : ISimpleInput, IDescriptor
 	{
 		private IDictionary<string, object> _payload;
 
+		public SimpleInputDescriptor() { }
+
+		public SimpleInputDescriptor(IDictionary<string, object> payload) => _payload = payload;
+
 		IDictionary<string, object> ISimpleInput.Payload => _payload;
-
-		public SimpleInputDescriptor() {}
-
-		public SimpleInputDescriptor(IDictionary<string, object> payload)
-		{
-			this._payload = payload;
-		}
 
 		public SimpleInputDescriptor Add(string key, object value)
 		{
@@ -73,6 +57,7 @@ namespace Nest
 		public SimpleInputDescriptor Remove(string key)
 		{
 			if (_payload == null) return this;
+
 			_payload.Remove(key);
 			return this;
 		}
@@ -80,15 +65,16 @@ namespace Nest
 
 	internal class SimpleInputJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => true;
-
 		public override bool CanRead => true;
 
 		public override bool CanWrite => true;
 
+		public override bool CanConvert(Type objectType) => true;
+
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartObject) return null;
+
 			var dictionary = serializer.Deserialize<IDictionary<string, object>>(reader);
 			return new SimpleInput(dictionary);
 		}
@@ -97,6 +83,7 @@ namespace Nest
 		{
 			var s = value as ISimpleInput;
 			if (s?.Payload == null) return;
+
 			serializer.Serialize(writer, s.Payload);
 		}
 	}

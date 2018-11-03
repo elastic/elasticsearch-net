@@ -8,58 +8,58 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanQueryDescriptor<object>>))]
 	public interface ISpanQuery : IQuery
 	{
-		[JsonProperty("span_term")]
-		ISpanTermQuery SpanTerm { get; set; }
+		[JsonProperty("span_containing")]
+		ISpanContainingQuery SpanContaining { get; set; }
+
+		[JsonProperty("field_masking_span")]
+		ISpanFieldMaskingQuery SpanFieldMasking { get; set; }
 
 		[JsonProperty("span_first")]
 		ISpanFirstQuery SpanFirst { get; set; }
 
-		[JsonProperty("span_near")]
-		ISpanNearQuery SpanNear { get; set; }
-
 		[JsonProperty("span_gap")]
 		ISpanGapQuery SpanGap { get; set; }
-
-		[JsonProperty("span_or")]
-		ISpanOrQuery SpanOr { get; set; }
-
-		[JsonProperty("span_not")]
-		ISpanNotQuery SpanNot { get; set; }
-
-		[JsonProperty("span_containing")]
-		ISpanContainingQuery SpanContaining { get; set; }
-
-		[JsonProperty("span_within")]
-		ISpanWithinQuery SpanWithin { get; set; }
 
 		[JsonProperty("span_multi")]
 		ISpanMultiTermQuery SpanMultiTerm { get; set; }
 
-		[JsonProperty("field_masking_span")]
-		ISpanFieldMaskingQuery SpanFieldMasking { get; set; }
+		[JsonProperty("span_near")]
+		ISpanNearQuery SpanNear { get; set; }
+
+		[JsonProperty("span_not")]
+		ISpanNotQuery SpanNot { get; set; }
+
+		[JsonProperty("span_or")]
+		ISpanOrQuery SpanOr { get; set; }
+
+		[JsonProperty("span_term")]
+		ISpanTermQuery SpanTerm { get; set; }
+
+		[JsonProperty("span_within")]
+		ISpanWithinQuery SpanWithin { get; set; }
 
 		void Accept(IQueryVisitor visitor);
 	}
 
 	public class SpanQuery : ISpanQuery
 	{
-		string IQuery.Name { get; set; }
-		double? IQuery.Boost { get; set; }
-		bool IQuery.IsWritable { get; }
-		public bool IsVerbatim { get; set; }
 		public bool IsStrict { get; set; }
-		public bool IsWritable => this.IsVerbatim || !IsConditionless(this);
-		bool IQuery.Conditionless => IsConditionless(this);
-		public ISpanTermQuery SpanTerm { get; set; }
-		public ISpanFirstQuery SpanFirst { get; set; }
-		public ISpanNearQuery SpanNear { get; set; }
-		public ISpanGapQuery SpanGap { get; set; }
-		public ISpanOrQuery SpanOr { get; set; }
-		public ISpanNotQuery SpanNot { get; set; }
-		public ISpanMultiTermQuery SpanMultiTerm { get; set; }
-		public ISpanContainingQuery SpanContaining{ get; set; }
-		public ISpanWithinQuery SpanWithin { get; set; }
+		public bool IsVerbatim { get; set; }
+		public bool IsWritable => IsVerbatim || !IsConditionless(this);
+		public ISpanContainingQuery SpanContaining { get; set; }
 		public ISpanFieldMaskingQuery SpanFieldMasking { get; set; }
+		public ISpanFirstQuery SpanFirst { get; set; }
+		public ISpanGapQuery SpanGap { get; set; }
+		public ISpanMultiTermQuery SpanMultiTerm { get; set; }
+		public ISpanNearQuery SpanNear { get; set; }
+		public ISpanNotQuery SpanNot { get; set; }
+		public ISpanOrQuery SpanOr { get; set; }
+		public ISpanTermQuery SpanTerm { get; set; }
+		public ISpanWithinQuery SpanWithin { get; set; }
+		double? IQuery.Boost { get; set; }
+		bool IQuery.Conditionless => IsConditionless(this);
+		bool IQuery.IsWritable { get; }
+		string IQuery.Name { get; set; }
 
 		public void Accept(IQueryVisitor visitor) => new QueryWalker().Walk(this, visitor);
 
@@ -68,7 +68,7 @@ namespace Nest
 			q.SpanTerm as IQuery,
 			q.SpanFirst,
 			q.SpanNear,
-			q.SpanOr ,
+			q.SpanOr,
 			q.SpanNot,
 			q.SpanMultiTerm,
 			q.SpanGap,
@@ -76,20 +76,23 @@ namespace Nest
 		}.All(sq => sq == null || sq.Conditionless);
 	}
 
-	public class SpanQueryDescriptor<T> : QueryDescriptorBase<SpanQueryDescriptor<T>, ISpanQuery>
-		, ISpanQuery where T : class
+	public class SpanQueryDescriptor<T>
+		: QueryDescriptorBase<SpanQueryDescriptor<T>, ISpanQuery>
+			, ISpanQuery where T : class
 	{
 		protected override bool Conditionless => SpanQuery.IsConditionless(this);
-		ISpanTermQuery ISpanQuery.SpanTerm { get; set; }
-		ISpanFirstQuery ISpanQuery.SpanFirst { get; set; }
-		ISpanNearQuery ISpanQuery.SpanNear { get; set; }
-		ISpanGapQuery ISpanQuery.SpanGap { get; set; }
-		ISpanOrQuery ISpanQuery.SpanOr { get; set; }
-		ISpanNotQuery ISpanQuery.SpanNot { get; set; }
-		ISpanMultiTermQuery ISpanQuery.SpanMultiTerm { get; set; }
-		ISpanContainingQuery ISpanQuery.SpanContaining{ get; set; }
-		ISpanWithinQuery ISpanQuery.SpanWithin { get; set; }
+		ISpanContainingQuery ISpanQuery.SpanContaining { get; set; }
 		ISpanFieldMaskingQuery ISpanQuery.SpanFieldMasking { get; set; }
+		ISpanFirstQuery ISpanQuery.SpanFirst { get; set; }
+		ISpanGapQuery ISpanQuery.SpanGap { get; set; }
+		ISpanMultiTermQuery ISpanQuery.SpanMultiTerm { get; set; }
+		ISpanNearQuery ISpanQuery.SpanNear { get; set; }
+		ISpanNotQuery ISpanQuery.SpanNot { get; set; }
+		ISpanOrQuery ISpanQuery.SpanOr { get; set; }
+		ISpanTermQuery ISpanQuery.SpanTerm { get; set; }
+		ISpanWithinQuery ISpanQuery.SpanWithin { get; set; }
+
+		void ISpanQuery.Accept(IQueryVisitor visitor) => new QueryWalker().Walk(this, visitor);
 
 		public SpanQueryDescriptor<T> SpanTerm(Func<SpanTermQueryDescriptor<T>, ISpanTermQuery> selector) =>
 			Assign(a => a.SpanTerm = selector?.Invoke(new SpanTermQueryDescriptor<T>()));
@@ -120,8 +123,5 @@ namespace Nest
 
 		public SpanQueryDescriptor<T> SpanFieldMasking(Func<SpanFieldMaskingQueryDescriptor<T>, ISpanFieldMaskingQuery> selector) =>
 			Assign(a => a.SpanFieldMasking = selector?.Invoke(new SpanFieldMaskingQueryDescriptor<T>()));
-
-		void ISpanQuery.Accept(IQueryVisitor visitor) => new QueryWalker().Walk(this, visitor);
-
 	}
 }

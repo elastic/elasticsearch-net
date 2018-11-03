@@ -7,10 +7,7 @@ namespace Nest
 
 	public class FileSystemRepository : IFileSystemRepository
 	{
-		public FileSystemRepository(FileSystemRepositorySettings settings)
-		{
-			Settings = settings;
-		}
+		public FileSystemRepository(FileSystemRepositorySettings settings) => Settings = settings;
 
 		public IFileSystemRepositorySettings Settings { get; set; }
 		public string Type { get; } = "fs";
@@ -18,8 +15,8 @@ namespace Nest
 
 	public interface IFileSystemRepositorySettings : IRepositorySettings
 	{
-		[JsonProperty("location")]
-		string Location { get; set; }
+		[JsonProperty("chunk_size")]
+		string ChunkSize { get; set; }
 
 		[JsonProperty("compress")]
 		bool? Compress { get; set; }
@@ -27,8 +24,8 @@ namespace Nest
 		[JsonProperty("concurrent_streams")]
 		int? ConcurrentStreams { get; set; }
 
-		[JsonProperty("chunk_size")]
-		string ChunkSize { get; set; }
+		[JsonProperty("location")]
+		string Location { get; set; }
 
 		[JsonProperty("max_restore_bytes_per_second")]
 		string RestoreBytesPerSecondMaximum { get; set; }
@@ -40,18 +37,16 @@ namespace Nest
 	public class FileSystemRepositorySettings : IFileSystemRepositorySettings
 	{
 		internal FileSystemRepositorySettings() { }
-		public FileSystemRepositorySettings(string location)
-		{
-			this.Location = location;
-		}
 
-		public string Location { get; set; }
+		public FileSystemRepositorySettings(string location) => Location = location;
+
+		public string ChunkSize { get; set; }
 
 		public bool? Compress { get; set; }
 
 		public int? ConcurrentStreams { get; set; }
 
-		public string ChunkSize { get; set; }
+		public string Location { get; set; }
 
 		public string RestoreBytesPerSecondMaximum { get; set; }
 
@@ -61,10 +56,10 @@ namespace Nest
 	public class FileSystemRepositorySettingsDescriptor
 		: DescriptorBase<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings>, IFileSystemRepositorySettings
 	{
-		string IFileSystemRepositorySettings.Location { get; set; }
-		bool? IFileSystemRepositorySettings.Compress  { get; set; }
-		int? IFileSystemRepositorySettings.ConcurrentStreams { get; set; }
 		string IFileSystemRepositorySettings.ChunkSize { get; set; }
+		bool? IFileSystemRepositorySettings.Compress { get; set; }
+		int? IFileSystemRepositorySettings.ConcurrentStreams { get; set; }
+		string IFileSystemRepositorySettings.Location { get; set; }
 		string IFileSystemRepositorySettings.RestoreBytesPerSecondMaximum { get; set; }
 		string IFileSystemRepositorySettings.SnapshotBytesPerSecondMaximum { get; set; }
 
@@ -84,7 +79,8 @@ namespace Nest
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
-		public FileSystemRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+		public FileSystemRepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) =>
+			Assign(a => a.ConcurrentStreams = concurrentStreams);
 
 		/// <summary>
 		/// Big files can be broken down into chunks during snapshotting if needed.
@@ -115,7 +111,9 @@ namespace Nest
 		IFileSystemRepositorySettings IRepository<IFileSystemRepositorySettings>.Settings { get; set; }
 		string ISnapshotRepository.Type { get; } = "fs";
 
-		public FileSystemRepositoryDescriptor Settings(string location, Func<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings> settingsSelector = null) =>
+		public FileSystemRepositoryDescriptor Settings(string location,
+			Func<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings> settingsSelector = null
+		) =>
 			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new FileSystemRepositorySettingsDescriptor().Location(location)));
 	}
 }

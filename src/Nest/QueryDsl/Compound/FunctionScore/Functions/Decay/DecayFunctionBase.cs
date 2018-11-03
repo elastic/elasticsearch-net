@@ -6,50 +6,46 @@ namespace Nest
 {
 	public interface IDecayFunction : IScoreFunction
 	{
+		[JsonProperty("decay")]
+		double? Decay { get; set; }
+
 		string DecayType { get; }
 
 		Field Field { get; set; }
 
-		[JsonProperty("decay")]
-		double? Decay { get; set; }
-
 		[JsonProperty("multi_value_mode")]
 		MultiValueMode? MultiValueMode { get; set; }
-
-
 	}
+
 	public interface IDecayFunction<TOrigin, TScale> : IDecayFunction
 	{
+		[JsonProperty("offset")]
+		TScale Offset { get; set; }
 
 		[JsonProperty("origin")]
 		TOrigin Origin { get; set; }
 
 		[JsonProperty("scale")]
 		TScale Scale { get; set; }
-
-		[JsonProperty("offset")]
-		TScale Offset { get; set; }
-
 	}
 
 
 	public abstract class DecayFunctionBase<TOrigin, TScale> : FunctionScoreFunctionBase, IDecayFunction<TOrigin, TScale>
 	{
-		protected abstract string DecayType { get; }
-
-		string IDecayFunction.DecayType => this.DecayType;
+		public double? Decay { get; set; }
 
 		public Field Field { get; set; }
+
+		public MultiValueMode? MultiValueMode { get; set; }
+
+		public TScale Offset { get; set; }
 
 		public TOrigin Origin { get; set; }
 
 		public TScale Scale { get; set; }
+		protected abstract string DecayType { get; }
 
-		public TScale Offset { get; set; }
-
-		public double? Decay { get; set; }
-
-		public MultiValueMode? MultiValueMode { get; set; }
+		string IDecayFunction.DecayType => DecayType;
 	}
 
 	public abstract class DecayFunctionDescriptorBase<TDescriptor, TOrigin, TScale, T>
@@ -59,19 +55,19 @@ namespace Nest
 	{
 		protected abstract string DecayType { get; }
 
-		string IDecayFunction.DecayType => this.DecayType;
+		double? IDecayFunction.Decay { get; set; }
+
+		string IDecayFunction.DecayType => DecayType;
 
 		Field IDecayFunction.Field { get; set; }
+
+		MultiValueMode? IDecayFunction.MultiValueMode { get; set; }
+
+		TScale IDecayFunction<TOrigin, TScale>.Offset { get; set; }
 
 		TOrigin IDecayFunction<TOrigin, TScale>.Origin { get; set; }
 
 		TScale IDecayFunction<TOrigin, TScale>.Scale { get; set; }
-
-		TScale IDecayFunction<TOrigin, TScale>.Offset { get; set; }
-
-		double? IDecayFunction.Decay { get; set; }
-
-		MultiValueMode? IDecayFunction.MultiValueMode { get; set; }
 
 		public TDescriptor Origin(TOrigin origin) => Assign(a => a.Origin = origin);
 

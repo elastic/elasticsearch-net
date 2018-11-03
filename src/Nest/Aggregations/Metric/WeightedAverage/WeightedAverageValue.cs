@@ -8,7 +8,7 @@ namespace Nest
 {
 	/// <summary>
 	/// The configuration for a field or scrip that provides a value or weight
-	/// for <see cref="WeightedAverageAggregation"/>
+	/// for <see cref="WeightedAverageAggregation" />
 	/// </summary>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<WeightedAverageValue>))]
@@ -21,12 +21,6 @@ namespace Nest
 		Field Field { get; set; }
 
 		/// <summary>
-		/// A script to derive the value and the weight from
-		/// </summary>
-		[JsonProperty("script")]
-		IScript Script { get; set; }
-
-		/// <summary>
 		///  defines how documents that are missing a value should be treated.
 		/// The default behavior is different for value and weight:
 		/// By default, if the value field is missing the document is ignored and the aggregation
@@ -35,31 +29,42 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("missing")]
 		double? Missing { get; set; }
+
+		/// <summary>
+		/// A script to derive the value and the weight from
+		/// </summary>
+		[JsonProperty("script")]
+		IScript Script { get; set; }
 	}
 
 	/// <inheritdoc />
 	public class WeightedAverageValue : IWeightedAverageValue
 	{
 		internal WeightedAverageValue() { }
-		public WeightedAverageValue(Field field) => this.Field = field;
-		public WeightedAverageValue(IScript script) => this.Script = script;
+
+		public WeightedAverageValue(Field field) => Field = field;
+
+		public WeightedAverageValue(IScript script) => Script = script;
 
 		/// <inheritdoc />
 		public Field Field { get; set; }
-		/// <inheritdoc />
-		public IScript Script { get; set; }
+
 		/// <inheritdoc />
 		public double? Missing { get; set; }
+
+		/// <inheritdoc />
+		public IScript Script { get; set; }
 	}
 
 	/// <inheritdoc cref="IWeightedAverageAggregation" />
-	public class WeightedAverageValueDescriptor<T> : DescriptorBase<WeightedAverageValueDescriptor<T>, IWeightedAverageValue>
+	public class WeightedAverageValueDescriptor<T>
+		: DescriptorBase<WeightedAverageValueDescriptor<T>, IWeightedAverageValue>
 			, IWeightedAverageValue
 		where T : class
 	{
 		Field IWeightedAverageValue.Field { get; set; }
-		IScript IWeightedAverageValue.Script { get; set; }
 		double? IWeightedAverageValue.Missing { get; set; }
+		IScript IWeightedAverageValue.Script { get; set; }
 
 		/// <inheritdoc cref="IWeightedAverageValue.Field" />
 		public WeightedAverageValueDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
@@ -86,20 +91,28 @@ namespace Nest
 	{
 		/// <summary>A string value</summary>
 		[EnumMember(Value = "string")] String,
+
 		/// <summary>A long value that can be used to represent byte, short, integer and long</summary>
 		[EnumMember(Value = "long")] Long,
+
 		/// <summary>A double value that can be used to represent float and double</summary>
 		[EnumMember(Value = "double")] Double,
+
 		/// <summary>A number value</summary>
 		[EnumMember(Value = "number")] Number,
+
 		/// <summary>A date value</summary>
 		[EnumMember(Value = "date")] Date,
+
 		/// <summary>An IP value</summary>
 		[EnumMember(Value = "ip")] Ip,
+
 		/// <summary>A numeric value</summary>
 		[EnumMember(Value = "numeric")] Numeric,
+
 		/// <summary>A geo_point value</summary>
 		[EnumMember(Value = "geo_point")] GeoPoint,
+
 		/// <summary>A boolean value</summary>
 		[EnumMember(Value = "boolean")] Boolean,
 	}

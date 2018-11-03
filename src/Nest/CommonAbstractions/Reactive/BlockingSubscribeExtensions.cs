@@ -10,7 +10,9 @@ namespace Nest
 			WaitOnObservable<BulkAllObservable<T>, IBulkAllResponse, BulkAllObserver>(
 				observable, maximumRunTime, (e, c) => new BulkAllObserver(onNext, e, c));
 
-		public static ScrollAllObserver<T> Wait<T>(this IObservable<IScrollAllResponse<T>> observable, TimeSpan maximumRunTime, Action<IScrollAllResponse<T>> onNext)
+		public static ScrollAllObserver<T> Wait<T>(this IObservable<IScrollAllResponse<T>> observable, TimeSpan maximumRunTime,
+			Action<IScrollAllResponse<T>> onNext
+		)
 			where T : class =>
 			WaitOnObservable<IObservable<IScrollAllResponse<T>>, IScrollAllResponse<T>, ScrollAllObserver<T>>(
 				observable, maximumRunTime, (e, c) => new ScrollAllObserver<T>(onNext, e, c));
@@ -42,6 +44,7 @@ namespace Nest
 			observable.Subscribe(observer);
 			handle.WaitOne(maximumRunTime);
 			if (ex != null) throw ex;
+
 			return observer;
 		}
 	}

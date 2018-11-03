@@ -53,28 +53,34 @@ namespace Nest
 
 		/// <summary>
 		/// The number of top job bucket scores to be used in the
-		/// <see cref="OverallBucket.OverallScore"/> calculation on the response.
+		/// <see cref="OverallBucket.OverallScore" /> calculation on the response.
 		/// The default value is <c>1</c>.
 		/// </summary>
 		[JsonProperty("top_n")]
 		int? TopN { get; set; }
 	}
 
-	/// <inheritdoc cref="IGetOverallBucketsRequest"/>
+	/// <inheritdoc cref="IGetOverallBucketsRequest" />
 	public partial class GetOverallBucketsRequest : IGetOverallBucketsRequest
 	{
 		/// <inheritdoc />
 		public bool? AllowNoJobs { get; set; }
+
 		/// <inheritdoc />
 		public Time BucketSpan { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? End { get; set; }
+
 		/// <inheritdoc />
 		public bool? ExcludeInterim { get; set; }
+
 		/// <inheritdoc />
 		public double? OverallScore { get; set; }
+
 		/// <inheritdoc />
 		public DateTimeOffset? Start { get; set; }
+
 		/// <inheritdoc />
 		public int? TopN { get; set; }
 	}

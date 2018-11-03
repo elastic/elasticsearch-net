@@ -24,6 +24,5 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "indices_all_active")]
 		Replicas,
-
 	}
 }

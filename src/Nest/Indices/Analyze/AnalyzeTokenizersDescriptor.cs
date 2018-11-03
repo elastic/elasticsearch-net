@@ -14,20 +14,23 @@ namespace Nest
 		/// A tokenizer of type nGram.
 		/// </summary>
 		public ITokenizer NGram(Func<NGramTokenizerDescriptor, INGramTokenizer> selector) =>
-			(selector?.Invoke(new NGramTokenizerDescriptor()));
+			selector?.Invoke(new NGramTokenizerDescriptor());
 
 		/// <summary>
 		/// A tokenizer of type keyword that emits the entire input as a single input.
 		/// </summary>
 		public ITokenizer Keyword(Func<KeywordTokenizerDescriptor, IKeywordTokenizer> selector) =>
-			(selector?.Invoke(new KeywordTokenizerDescriptor()));
+			selector?.Invoke(new KeywordTokenizerDescriptor());
 
 		/// <summary>
 		/// A tokenizer of type letter that divides text at non-letters. That’s to say, it defines tokens as maximal strings of adjacent letters.
-		/// <para>Note, this does a decent job for most European languages, but does a terrible job for some Asian languages, where words are not separated by spaces.</para>
+		/// <para>
+		/// Note, this does a decent job for most European languages, but does a terrible job for some Asian languages, where words are not
+		/// separated by spaces.
+		/// </para>
 		/// </summary>
 		public ITokenizer Letter(Func<LetterTokenizerDescriptor, ILetterTokenizer> selector) =>
-			(selector?.Invoke(new LetterTokenizerDescriptor()));
+			selector?.Invoke(new LetterTokenizerDescriptor());
 
 		/// <summary>
 		/// A tokenizer of type lowercase that performs the function of Letter Tokenizer and Lower Case Token Filter together.
@@ -36,51 +39,51 @@ namespace Nest
 		/// <para>there is a performance advantage to doing the two tasks at once, hence this (redundant) implementation.</para>
 		/// </summary>
 		public ITokenizer Lowercase(Func<LowercaseTokenizerDescriptor, ILowercaseTokenizer> selector) =>
-			(selector?.Invoke(new LowercaseTokenizerDescriptor()));
+			selector?.Invoke(new LowercaseTokenizerDescriptor());
 
 		/// <summary>
-		/// The path_hierarchy tokenizer takes something like this:
-		///<para>/something/something/else</para>
-		///<para>And produces tokens:</para>
-		///<para></para>
-		///<para>/something</para>
-		///<para>/something/something</para>
-		///<para>/something/something/else</para>
+		///  The path_hierarchy tokenizer takes something like this:
+		/// <para>/something/something/else</para>
+		/// <para>And produces tokens:</para>
+		/// <para></para>
+		/// <para>/something</para>
+		/// <para>/something/something</para>
+		/// <para>/something/something/else</para>
 		/// </summary>
 		public ITokenizer PathHierarchy(Func<PathHierarchyTokenizerDescriptor, IPathHierarchyTokenizer> selector) =>
-			(selector?.Invoke(new PathHierarchyTokenizerDescriptor()));
+			selector?.Invoke(new PathHierarchyTokenizerDescriptor());
 
 		/// <summary>
 		/// A tokenizer of type pattern that can flexibly separate text into terms via a regular expression.
 		/// </summary>
 		public ITokenizer Pattern(Func<PatternTokenizerDescriptor, IPatternTokenizer> selector) =>
-			(selector?.Invoke(new PatternTokenizerDescriptor()));
+			selector?.Invoke(new PatternTokenizerDescriptor());
 
 		/// <summary>
 		/// A tokenizer of type standard providing grammar based tokenizer that is a good tokenizer for most European language documents.
 		/// <para>The tokenizer implements the Unicode Text Segmentation algorithm, as specified in Unicode Standard Annex #29.</para>
 		/// </summary>
 		public ITokenizer Standard(Func<StandardTokenizerDescriptor, IStandardTokenizer> selector = null) =>
-			(selector.InvokeOrDefault(new StandardTokenizerDescriptor()));
+			selector.InvokeOrDefault(new StandardTokenizerDescriptor());
 
 		/// <summary>
 		/// A tokenizer of type uax_url_email which works exactly like the standard tokenizer, but tokenizes emails and urls as single tokens
 		/// </summary>
 		public ITokenizer UaxEmailUrl(Func<UaxEmailUrlTokenizerDescriptor, IUaxEmailUrlTokenizer> selector) =>
-			(selector?.Invoke(new UaxEmailUrlTokenizerDescriptor()));
+			selector?.Invoke(new UaxEmailUrlTokenizerDescriptor());
 
 		/// <summary>
 		/// A tokenizer of type whitespace that divides text at whitespace.
 		/// </summary>
 		public ITokenizer Whitespace(Func<WhitespaceTokenizerDescriptor, IWhitespaceTokenizer> selector = null) =>
-			(selector.InvokeOrDefault(new WhitespaceTokenizerDescriptor()));
+			selector.InvokeOrDefault(new WhitespaceTokenizerDescriptor());
 
 		/// <summary>
 		/// A tokenizer of type pattern that can flexibly separate text into terms via a regular expression.
 		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
 		public ITokenizer Kuromoji(Func<KuromojiTokenizerDescriptor, IKuromojiTokenizer> selector) =>
-			(selector?.Invoke(new KuromojiTokenizerDescriptor()));
+			selector?.Invoke(new KuromojiTokenizerDescriptor());
 
 		/// <summary>
 		/// Tokenizes text into words on word boundaries, as defined in UAX #29: Unicode Text Segmentation. It behaves much
@@ -90,13 +93,15 @@ namespace Nest
 		/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
 		/// </summary>
 		public ITokenizer Icu(Func<IcuTokenizerDescriptor, IIcuTokenizer> selector) =>
-			(selector?.Invoke(new IcuTokenizerDescriptor()));
+			selector?.Invoke(new IcuTokenizerDescriptor());
 
-		/// <inheritdoc cref="INoriTokenizer"/>
+		/// <inheritdoc cref="INoriTokenizer" />
 		public ITokenizer Nori(Func<NoriTokenizerDescriptor, INoriTokenizer> selector) =>
 			selector.Invoke(new NoriTokenizerDescriptor());
-      
-	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>>
-		public ITokenizer CharGroup(Func<CharGroupTokenizerDescriptor, ICharGroupTokenizer> selector) => selector?.Invoke(new CharGroupTokenizerDescriptor());
+
+		/// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters" />
+		/// >
+		public ITokenizer CharGroup(Func<CharGroupTokenizerDescriptor, ICharGroupTokenizer> selector) =>
+			selector?.Invoke(new CharGroupTokenizerDescriptor());
 	}
 }

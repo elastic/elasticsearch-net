@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -22,41 +22,53 @@ namespace Nest
 		/// </summary>
 		IGetRollupCapabilitiesResponse GetRollupCapabilities(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null);
 
-		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})"/>
+		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
 		IGetRollupCapabilitiesResponse GetRollupCapabilities(IGetRollupCapabilitiesRequest request);
 
-		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})"/>
+		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
 		Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(
-			Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+			Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})"/>
-		Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc cref="GetRollupCapabilities(System.Func{Nest.GetRollupCapabilitiesDescriptor,Nest.IGetRollupCapabilitiesRequest})" />
+		Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
-		public IGetRollupCapabilitiesResponse GetRollupCapabilities(Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null) =>
-			this.GetRollupCapabilities(selector.InvokeOrDefault(new GetRollupCapabilitiesDescriptor()));
+		/// <inheritdoc />
+		public IGetRollupCapabilitiesResponse GetRollupCapabilities(
+			Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null
+		) =>
+			GetRollupCapabilities(selector.InvokeOrDefault(new GetRollupCapabilitiesDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IGetRollupCapabilitiesResponse GetRollupCapabilities(IGetRollupCapabilitiesRequest request) =>
-			this.Dispatcher.Dispatch<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesRequestParameters, GetRollupCapabilitiesResponse>(
+			Dispatcher.Dispatch<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesRequestParameters, GetRollupCapabilitiesResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.XpackRollupGetRollupCapsDispatch<GetRollupCapabilitiesResponse>(p)
+				(p, d) => LowLevelDispatch.XpackRollupGetRollupCapsDispatch<GetRollupCapabilitiesResponse>(p)
 			);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(
-			Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken))  =>
-			this.GetRollupCapabilitiesAsync(selector.InvokeOrDefault(new GetRollupCapabilitiesDescriptor()), cancellationToken);
+			Func<GetRollupCapabilitiesDescriptor, IGetRollupCapabilitiesRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			GetRollupCapabilitiesAsync(selector.InvokeOrDefault(new GetRollupCapabilitiesDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesRequestParameters, GetRollupCapabilitiesResponse, IGetRollupCapabilitiesResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.XpackRollupGetRollupCapsDispatchAsync<GetRollupCapabilitiesResponse>(p, c)
-			);
+		/// <inheritdoc />
+		public Task<IGetRollupCapabilitiesResponse> GetRollupCapabilitiesAsync(IGetRollupCapabilitiesRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher
+				.DispatchAsync<IGetRollupCapabilitiesRequest, GetRollupCapabilitiesRequestParameters, GetRollupCapabilitiesResponse,
+					IGetRollupCapabilitiesResponse>(
+					request,
+					cancellationToken,
+					(p, d, c) => LowLevelDispatch.XpackRollupGetRollupCapsDispatchAsync<GetRollupCapabilitiesResponse>(p, c)
+				);
 	}
 }

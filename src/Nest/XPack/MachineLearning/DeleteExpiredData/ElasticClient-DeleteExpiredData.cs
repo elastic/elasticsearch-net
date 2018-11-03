@@ -12,39 +12,48 @@ namespace Nest
 		/// </summary>
 		IDeleteExpiredDataResponse DeleteExpiredData(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IDeleteExpiredDataResponse DeleteExpiredData(IDeleteExpiredDataRequest request);
 
-		/// <inheritdoc/>
-		Task<IDeleteExpiredDataResponse> DeleteExpiredDataAsync(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IDeleteExpiredDataResponse> DeleteExpiredDataAsync(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
-		Task<IDeleteExpiredDataResponse> DeleteExpiredDataAsync(IDeleteExpiredDataRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IDeleteExpiredDataResponse> DeleteExpiredDataAsync(IDeleteExpiredDataRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IDeleteExpiredDataResponse DeleteExpiredData(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null) =>
-			this.DeleteExpiredData(selector.InvokeOrDefault(new DeleteExpiredDataDescriptor()));
+			DeleteExpiredData(selector.InvokeOrDefault(new DeleteExpiredDataDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IDeleteExpiredDataResponse DeleteExpiredData(IDeleteExpiredDataRequest request) =>
-			this.Dispatcher.Dispatch<IDeleteExpiredDataRequest, DeleteExpiredDataRequestParameters, DeleteExpiredDataResponse>(
+			Dispatcher.Dispatch<IDeleteExpiredDataRequest, DeleteExpiredDataRequestParameters, DeleteExpiredDataResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.XpackMlDeleteExpiredDataDispatch<DeleteExpiredDataResponse>(p)
+				(p, d) => LowLevelDispatch.XpackMlDeleteExpiredDataDispatch<DeleteExpiredDataResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IDeleteExpiredDataResponse> DeleteExpiredDataAsync(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.DeleteExpiredDataAsync(selector.InvokeOrDefault(new DeleteExpiredDataDescriptor()), cancellationToken);
+		/// <inheritdoc />
+		public Task<IDeleteExpiredDataResponse> DeleteExpiredDataAsync(Func<DeleteExpiredDataDescriptor, IDeleteExpiredDataRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			DeleteExpiredDataAsync(selector.InvokeOrDefault(new DeleteExpiredDataDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IDeleteExpiredDataResponse> DeleteExpiredDataAsync(IDeleteExpiredDataRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IDeleteExpiredDataRequest, DeleteExpiredDataRequestParameters, DeleteExpiredDataResponse, IDeleteExpiredDataResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.XpackMlDeleteExpiredDataDispatchAsync<DeleteExpiredDataResponse>(p, c)
-			);
+		/// <inheritdoc />
+		public Task<IDeleteExpiredDataResponse> DeleteExpiredDataAsync(IDeleteExpiredDataRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher
+				.DispatchAsync<IDeleteExpiredDataRequest, DeleteExpiredDataRequestParameters, DeleteExpiredDataResponse, IDeleteExpiredDataResponse>(
+					request,
+					cancellationToken,
+					(p, d, c) => LowLevelDispatch.XpackMlDeleteExpiredDataDispatchAsync<DeleteExpiredDataResponse>(p, c)
+				);
 	}
 }

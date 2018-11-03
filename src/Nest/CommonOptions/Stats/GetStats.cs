@@ -10,6 +10,7 @@ namespace Nest
 
 		[JsonProperty("exists_time")]
 		public string ExistsTime { get; set; }
+
 		[JsonProperty("exists_time_in_millis")]
 		public long ExistsTimeInMilliseconds { get; set; }
 
@@ -18,6 +19,7 @@ namespace Nest
 
 		[JsonProperty("missing_time")]
 		public string MissingTime { get; set; }
+
 		[JsonProperty("missing_time_in_millis")]
 		public long MissingTimeInMilliseconds { get; set; }
 
@@ -26,11 +28,11 @@ namespace Nest
 
 		[JsonProperty("time")]
 		public string Time { get; set; }
+
 		[JsonProperty("time_in_millis")]
 		public long TimeInMilliseconds { get; set; }
 
 		[JsonProperty("total")]
 		public long Total { get; set; }
-
 	}
 }

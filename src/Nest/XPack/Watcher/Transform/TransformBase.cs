@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject]
-	public interface ITransform {}
+	public interface ITransform { }
 
 	public abstract class TransformBase
 	{

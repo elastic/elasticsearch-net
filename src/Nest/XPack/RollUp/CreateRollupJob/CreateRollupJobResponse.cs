@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject]
-	public interface ICreateRollupJobResponse : IAcknowledgedResponse {}
+	public interface ICreateRollupJobResponse : IAcknowledgedResponse { }
 
-	public class CreateRollupJobResponse : AcknowledgedResponseBase, ICreateRollupJobResponse {}
+	public class CreateRollupJobResponse : AcknowledgedResponseBase, ICreateRollupJobResponse { }
 }

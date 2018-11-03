@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public interface IDeleteJobResponse : IAcknowledgedResponse {}
+	public interface IDeleteJobResponse : IAcknowledgedResponse { }
 
-	public class DeleteJobResponse : AcknowledgedResponseBase, IDeleteJobResponse {}
+	public class DeleteJobResponse : AcknowledgedResponseBase, IDeleteJobResponse { }
 }

@@ -5,7 +5,7 @@ namespace Nest
 {
 	/// <summary>
 	/// A tokenizer that breaks text into terms whenever it encounters a character which is in a defined set. It is mostly useful
-	/// for cases where a simple custom tokenization is desired, and the overhead of use of <see cref="PatternTokenizer"/> is not acceptable.
+	/// for cases where a simple custom tokenization is desired, and the overhead of use of <see cref="PatternTokenizer" /> is not acceptable.
 	/// </summary>
 	public interface ICharGroupTokenizer : ITokenizer
 	{
@@ -18,18 +18,18 @@ namespace Nest
 		IEnumerable<string> TokenizeOnCharacters { get; set; }
 	}
 
-	/// <inheritdoc cref="ICharGroupTokenizer"/>
+	/// <inheritdoc cref="ICharGroupTokenizer" />
 	public class CharGroupTokenizer : TokenizerBase, ICharGroupTokenizer
-    {
-	    internal const string TokenizerType = "char_group";
+	{
+		internal const string TokenizerType = "char_group";
 
-		public CharGroupTokenizer() => this.Type = TokenizerType;
+		public CharGroupTokenizer() => Type = TokenizerType;
 
-	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>
+		/// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters" />
 		public IEnumerable<string> TokenizeOnCharacters { get; set; }
-    }
+	}
 
-	/// <inheritdoc cref="ICharGroupTokenizer"/>
+	/// <inheritdoc cref="ICharGroupTokenizer" />
 	public class CharGroupTokenizerDescriptor
 		: TokenizerDescriptorBase<CharGroupTokenizerDescriptor, ICharGroupTokenizer>, ICharGroupTokenizer
 	{
@@ -37,12 +37,12 @@ namespace Nest
 
 		IEnumerable<string> ICharGroupTokenizer.TokenizeOnCharacters { get; set; }
 
-	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>
+		/// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters" />
 		public CharGroupTokenizerDescriptor TokenizeOnCharacters(params string[] characters) =>
-		    Assign(a => a.TokenizeOnCharacters = characters);
+			Assign(a => a.TokenizeOnCharacters = characters);
 
-	    /// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters"/>
+		/// <inheritdoc cref="ICharGroupTokenizer.TokenizeOnCharacters" />
 		public CharGroupTokenizerDescriptor TokenizeOnCharacters(IEnumerable<string> characters) =>
-		    Assign(a => a.TokenizeOnCharacters = characters);
+			Assign(a => a.TokenizeOnCharacters = characters);
 	}
 }

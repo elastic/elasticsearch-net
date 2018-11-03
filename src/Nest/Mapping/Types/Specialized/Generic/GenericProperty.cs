@@ -11,38 +11,38 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGenericProperty : IDocValuesProperty
 	{
-		[JsonProperty("index")]
-		bool? Index { get; set; }
-
-		[JsonProperty("term_vector")]
-		TermVectorOption? TermVector { get; set; }
+		[JsonProperty("analyzer")]
+		string Analyzer { get; set; }
 
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("null_value")]
-		string NullValue { get; set; }
-
-		[JsonProperty("norms")]
-		bool? Norms { get; set; }
-
-		[JsonProperty("index_options")]
-		IndexOptions? IndexOptions { get; set; }
-
-		[JsonProperty("analyzer")]
-		string Analyzer { get; set; }
-
-		[JsonProperty("search_analyzer")]
-		string SearchAnalyzer { get; set; }
+		[JsonProperty("fielddata")]
+		IStringFielddata Fielddata { get; set; }
 
 		[JsonProperty("ignore_above")]
 		int? IgnoreAbove { get; set; }
 
+		[JsonProperty("index")]
+		bool? Index { get; set; }
+
+		[JsonProperty("index_options")]
+		IndexOptions? IndexOptions { get; set; }
+
+		[JsonProperty("norms")]
+		bool? Norms { get; set; }
+
+		[JsonProperty("null_value")]
+		string NullValue { get; set; }
+
 		[JsonProperty("position_increment_gap")]
 		int? PositionIncrementGap { get; set; }
 
-		[JsonProperty("fielddata")]
-		IStringFielddata Fielddata { get; set; }
+		[JsonProperty("search_analyzer")]
+		string SearchAnalyzer { get; set; }
+
+		[JsonProperty("term_vector")]
+		TermVectorOption? TermVector { get; set; }
 	}
 
 	/// <summary>
@@ -52,23 +52,25 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class GenericProperty : DocValuesPropertyBase, IGenericProperty
 	{
-		public GenericProperty() : base(FieldType.Object) => this.TypeOverride = null;
+		public GenericProperty() : base(FieldType.Object) => TypeOverride = null;
+
+		public string Analyzer { get; set; }
+		public double? Boost { get; set; }
+		public IStringFielddata Fielddata { get; set; }
+		public int? IgnoreAbove { get; set; }
+		public bool? Index { get; set; }
+		public IndexOptions? IndexOptions { get; set; }
+		public bool? Norms { get; set; }
+		public string NullValue { get; set; }
+		public int? PositionIncrementGap { get; set; }
+		public string SearchAnalyzer { get; set; }
 
 		public TermVectorOption? TermVector { get; set; }
-		public double? Boost { get; set; }
-		public string SearchAnalyzer { get; set; }
-		public int? IgnoreAbove { get; set; }
-		public int? PositionIncrementGap { get; set; }
-		public IStringFielddata Fielddata { get; set; }
-		public bool? Index { get; set; }
-		public string NullValue { get; set; }
-		public bool? Norms { get; set; }
-		public IndexOptions? IndexOptions { get; set; }
-		public string Analyzer { get; set; }
+
 		public string Type
 		{
-			get => this.TypeOverride;
-			set => this.TypeOverride = value;
+			get => TypeOverride;
+			set => TypeOverride = value;
 		}
 	}
 
@@ -82,21 +84,21 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<GenericPropertyDescriptor<T>, IGenericProperty, T>, IGenericProperty
 		where T : class
 	{
-		bool? IGenericProperty.Index { get; set; }
-		TermVectorOption? IGenericProperty.TermVector { get; set; }
-		double? IGenericProperty.Boost { get; set; }
-		string IGenericProperty.NullValue { get; set; }
-		bool? IGenericProperty.Norms { get; set; }
-		IndexOptions? IGenericProperty.IndexOptions { get; set; }
+		public GenericPropertyDescriptor() : base(FieldType.Object) => TypeOverride = null;
+
 		string IGenericProperty.Analyzer { get; set; }
-		string IGenericProperty.SearchAnalyzer { get; set; }
-		int? IGenericProperty.IgnoreAbove { get; set; }
-		int? IGenericProperty.PositionIncrementGap { get; set; }
+		double? IGenericProperty.Boost { get; set; }
 		IStringFielddata IGenericProperty.Fielddata { get; set; }
+		int? IGenericProperty.IgnoreAbove { get; set; }
+		bool? IGenericProperty.Index { get; set; }
+		IndexOptions? IGenericProperty.IndexOptions { get; set; }
+		bool? IGenericProperty.Norms { get; set; }
+		string IGenericProperty.NullValue { get; set; }
+		int? IGenericProperty.PositionIncrementGap { get; set; }
+		string IGenericProperty.SearchAnalyzer { get; set; }
+		TermVectorOption? IGenericProperty.TermVector { get; set; }
 
-		public GenericPropertyDescriptor() : base(FieldType.Object) => this.TypeOverride = null;
-
-		public GenericPropertyDescriptor<T> Type(string type) => Assign(a => this.TypeOverride = type);
+		public GenericPropertyDescriptor<T> Type(string type) => Assign(a => TypeOverride = type);
 
 		public GenericPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
 
@@ -116,7 +118,8 @@ namespace Nest
 
 		public GenericPropertyDescriptor<T> IgnoreAbove(int? ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
 
-		public GenericPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
+		public GenericPropertyDescriptor<T> PositionIncrementGap(int? positionIncrementGap) =>
+			Assign(a => a.PositionIncrementGap = positionIncrementGap);
 
 		public GenericPropertyDescriptor<T> Fielddata(Func<StringFielddataDescriptor, IStringFielddata> selector) =>
 			Assign(a => a.Fielddata = selector?.Invoke(new StringFielddataDescriptor()));

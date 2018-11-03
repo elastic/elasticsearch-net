@@ -22,12 +22,13 @@ namespace Nest
 			var settings = serializer.GetConnectionSettings();
 			writer.WriteValue(settings.Inferrer.Field(field));
 		}
+
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.String) return null;
+
 			var field = reader.Value.ToString();
 			return (Field)field;
 		}
 	}
 }
-

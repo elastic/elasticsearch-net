@@ -6,10 +6,12 @@ using Newtonsoft.Json.Serialization;
 
 namespace Nest
 {
-
 	internal class KeyValueConversion
 	{
 		private static readonly ConcurrentDictionary<Type, KeyValueConversion> KnownTypes = new ConcurrentDictionary<Type, KeyValueConversion>();
+
+		public JsonProperty KeyProperty { get; set; }
+		public JsonProperty ValueProperty { get; set; }
 
 		public static KeyValueConversion Create<TContainer, TValue>() where TContainer : class, new()
 		{
@@ -22,22 +24,20 @@ namespace Nest
 			var valueProp = properties.FirstOrDefault(p => p.PropertyType == typeof(TValue));
 			if (keyProp == null) throw new Exception($"No key property found on type {t.Name}");
 			if (valueProp == null) throw new Exception($"No value property found on type {t.Name}");
-			conversion = new KeyValueConversion { KeyProperty = keyProp, ValueProperty = valueProp};
+
+			conversion = new KeyValueConversion { KeyProperty = keyProp, ValueProperty = valueProp };
 			KnownTypes.TryAdd(t, conversion);
 			return conversion;
 		}
-
-		public JsonProperty KeyProperty { get; set; }
-		public JsonProperty ValueProperty { get; set; }
 	}
 
 	internal class KeyValueJsonConverter<TContainer, TValue> : JsonConverter
 		where TContainer : class, new()
 	{
-
-		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override void WriteJson(JsonWriter writer, object v, JsonSerializer serializer)
 		{
@@ -46,7 +46,8 @@ namespace Nest
 			{
 				writer.WriteNull();
 				return;
-			};
+			}
+			;
 
 			var key = conversion.KeyProperty.ValueProvider.GetValue(v).ToString();
 			var value = conversion.ValueProperty.ValueProvider.GetValue(v);
@@ -54,7 +55,8 @@ namespace Nest
 			{
 				writer.WriteNull();
 				return;
-			};
+			}
+			;
 
 			writer.WriteStartObject();
 			writer.WritePropertyName(key);
@@ -66,6 +68,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartObject) return null;
+
 			var depth = reader.Depth;
 
 			reader.Read(); //property name
@@ -76,9 +79,8 @@ namespace Nest
 			if (reader.Depth > depth)
 			{
 				do
-				{
 					reader.Read();
-				} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
+				while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
 			}
 
 			var conversion = KeyValueConversion.Create<TContainer, TValue>();
@@ -89,6 +91,5 @@ namespace Nest
 			conversion.ValueProperty.ValueProvider.SetValue(o, value);
 			return o;
 		}
-
 	}
 }

@@ -6,24 +6,24 @@ namespace Nest
 	public abstract class ClrPropertyMappingBase<TDocument> : IClrPropertyMapping<TDocument>
 		where TDocument : class
 	{
-		Expression<Func<TDocument, object>> IClrPropertyMapping<TDocument>.Property { get; set; }
-		bool IClrPropertyMapping<TDocument>.Ignore { get; set; }
-		string IClrPropertyMapping<TDocument>.NewName { get; set; }
+		protected ClrPropertyMappingBase(Expression<Func<TDocument, object>> property) => Self.Property = property;
 
 		protected IClrPropertyMapping<TDocument> Self => this;
-
-		protected ClrPropertyMappingBase(Expression<Func<TDocument, object>> property) => Self.Property = property;
+		bool IClrPropertyMapping<TDocument>.Ignore { get; set; }
+		string IClrPropertyMapping<TDocument>.NewName { get; set; }
+		Expression<Func<TDocument, object>> IClrPropertyMapping<TDocument>.Property { get; set; }
 
 		IPropertyMapping IClrPropertyMapping<TDocument>.ToPropertyMapping() => Self.Ignore
 			? PropertyMapping.Ignored
-			: new PropertyMapping {Name = Self.NewName};
+			: new PropertyMapping { Name = Self.NewName };
 	}
 
 	public interface IClrPropertyMapping<TDocument> where TDocument : class
 	{
-		Expression<Func<TDocument, object>> Property { get; set; }
 		bool Ignore { get; set; }
 		string NewName { get; set; }
+		Expression<Func<TDocument, object>> Property { get; set; }
+
 		IPropertyMapping ToPropertyMapping();
 	}
 

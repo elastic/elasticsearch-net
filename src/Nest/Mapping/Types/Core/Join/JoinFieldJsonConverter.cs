@@ -6,10 +6,11 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class JoinFieldJsonConverter :JsonConverter
+	internal class JoinFieldJsonConverter : JsonConverter
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -20,11 +21,11 @@ namespace Nest
 				return new JoinField(new JoinField.Parent(parent));
 			}
 			var jObject = JObject.Load(reader);
-			if (jObject.Properties().Any(p=>p.Name == "parent"))
-				using(var childReader =  jObject.CreateReader())
+			if (jObject.Properties().Any(p => p.Name == "parent"))
+				using (var childReader = jObject.CreateReader())
 					return (JoinField)serializer.Deserialize<JoinField.Child>(childReader);
 
-			using(var parentReader = jObject.CreateReader())
+			using (var parentReader = jObject.CreateReader())
 				return (JoinField)serializer.Deserialize<JoinField.Parent>(parentReader);
 		}
 
@@ -47,6 +48,5 @@ namespace Nest
 				}
 			);
 		}
-
 	}
 }

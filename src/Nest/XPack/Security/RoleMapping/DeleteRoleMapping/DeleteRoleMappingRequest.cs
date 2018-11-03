@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
-	public partial interface IDeleteRoleMappingRequest
-	{
+	public partial interface IDeleteRoleMappingRequest { }
 
-	}
-
-	public partial class DeleteRoleMappingRequest
-	{
-	}
+	public partial class DeleteRoleMappingRequest { }
 
 	[DescriptorFor("XpackSecurityDeleteRoleMapping")]
-	public partial class DeleteRoleMappingDescriptor
-	{
-	}
+	public partial class DeleteRoleMappingDescriptor { }
 }

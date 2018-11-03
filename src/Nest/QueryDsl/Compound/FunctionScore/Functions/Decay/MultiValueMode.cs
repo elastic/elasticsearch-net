@@ -8,11 +8,14 @@ namespace Nest
 	public enum MultiValueMode
 	{
 		[EnumMember(Value = "min")]
-		Min, 
+		Min,
+
 		[EnumMember(Value = "max")]
 		Max,
+
 		[EnumMember(Value = "avg")]
 		Average,
+
 		[EnumMember(Value = "sum")]
 		Sum
 	}

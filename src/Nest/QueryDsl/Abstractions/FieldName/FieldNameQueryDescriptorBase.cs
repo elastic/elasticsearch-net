@@ -11,9 +11,9 @@ namespace Nest
 	{
 		Field IFieldNameQuery.Field { get; set; }
 
-		bool IQuery.IsVerbatim { get; set; }
-
 		bool IQuery.IsStrict { get; set; }
+
+		bool IQuery.IsVerbatim { get; set; }
 
 		public TDescriptor Field(Field field) => Assign(a => a.Field = field);
 

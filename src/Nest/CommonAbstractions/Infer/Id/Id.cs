@@ -10,46 +10,65 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class Id : IEquatable<Id>, IUrlParameter
 	{
-		internal string StringValue { get; }
-		internal long? LongValue { get; }
-		internal string StringOrLongValue => this.StringValue ?? this.LongValue?.ToString(CultureInfo.InvariantCulture);
+		public Id(string id)
+		{
+			Tag = 0;
+			StringValue = id;
+		}
+
+		public Id(long id)
+		{
+			Tag = 1;
+			LongValue = id;
+		}
+
+		public Id(object document)
+		{
+			Tag = 2;
+			Document = document;
+		}
+
 		internal object Document { get; }
+		internal long? LongValue { get; }
+		internal string StringOrLongValue => StringValue ?? LongValue?.ToString(CultureInfo.InvariantCulture);
+		internal string StringValue { get; }
 		internal int Tag { get; }
-
-		public Id(string id) { Tag = 0; StringValue = id; }
-		public Id(long id) { Tag = 1; LongValue = id; }
-		public Id(object document) { Tag = 2; Document = document; }
-
-		public static implicit operator Id(string id) => id.IsNullOrEmpty() ? null : new Id(id);
-		public static implicit operator Id(long id) => new Id(id);
-		public static implicit operator Id(Guid id) => new Id(id.ToString("D"));
-
-		public static Id From<T>(T document) where T : class => new Id(document);
 
 		private string DebugDisplay => StringOrLongValue ?? "Id from instance typeof: " + Document?.GetType().Name;
 
-		public override string ToString() => StringOrLongValue;
+		private static int TypeHashCode { get; } = typeof(Id).GetHashCode();
+
+		public bool Equals(Id other)
+		{
+			if (Tag + other.Tag == 1)
+				return StringOrLongValue == other.StringOrLongValue;
+			else if (Tag != other.Tag) return false;
+
+			switch (Tag)
+			{
+				case 0:
+				case 1:
+					return StringOrLongValue == other.StringOrLongValue;
+				default:
+					return Document?.Equals(other.Document) ?? false;
+			}
+		}
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
 			var nestSettings = (IConnectionSettingsValues)settings;
-			return nestSettings.Inferrer.Id(this.Document) ?? this.StringOrLongValue;
+			return nestSettings.Inferrer.Id(Document) ?? StringOrLongValue;
 		}
 
-		public bool Equals(Id other)
-		{
-			if (this.Tag + other.Tag == 1)
-				return this.StringOrLongValue == other.StringOrLongValue;
-			else if (this.Tag != other.Tag) return false;
-			switch (this.Tag)
-			{
-				case 0:
-				case 1:
-					return this.StringOrLongValue == other.StringOrLongValue;
-				default:
-					return this.Document?.Equals(other.Document) ?? false;
-			}
-		}
+		public static implicit operator Id(string id) => id.IsNullOrEmpty() ? null : new Id(id);
+
+		public static implicit operator Id(long id) => new Id(id);
+
+		public static implicit operator Id(Guid id) => new Id(id.ToString("D"));
+
+		public static Id From<T>(T document) where T : class => new Id(document);
+
+		public override string ToString() => StringOrLongValue;
 
 		public override bool Equals(object obj)
 		{
@@ -64,15 +83,14 @@ namespace Nest
 			return Equals(new Id(obj));
 		}
 
-		private static int TypeHashCode { get; } = typeof(Id).GetHashCode();
 		public override int GetHashCode()
 		{
 			unchecked
 			{
 				var result = TypeHashCode;
-				result = (result * 397) ^ (this.StringValue?.GetHashCode() ?? 0);
-				result = (result * 397) ^ (this.LongValue?.GetHashCode() ?? 0);
-				result = (result * 397) ^ (this.Document?.GetHashCode() ?? 0);
+				result = (result * 397) ^ (StringValue?.GetHashCode() ?? 0);
+				result = (result * 397) ^ (LongValue?.GetHashCode() ?? 0);
+				result = (result * 397) ^ (Document?.GetHashCode() ?? 0);
 				return result;
 			}
 		}

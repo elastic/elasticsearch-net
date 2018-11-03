@@ -6,17 +6,17 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ChiSquareHeuristic>))]
 	public interface IChiSquareHeuristic
 	{
-		[JsonProperty("include_negatives")]
-		bool? IncludeNegatives { get; set; }
-
 		[JsonProperty("background_is_superset")]
 		bool? BackgroundIsSuperSet { get; set; }
+
+		[JsonProperty("include_negatives")]
+		bool? IncludeNegatives { get; set; }
 	}
 
 	public class ChiSquareHeuristic : IChiSquareHeuristic
 	{
-		public bool? IncludeNegatives { get; set; }
 		public bool? BackgroundIsSuperSet { get; set; }
+		public bool? IncludeNegatives { get; set; }
 	}
 
 	public class ChiSquareHeuristicDescriptor

@@ -9,22 +9,23 @@ namespace Nest
 	public interface IPostJobDataResponse : IResponse
 	{
 		/// <summary>
-		/// The unique identifier for the job.
+		/// The count of buckets.
 		/// </summary>
-		[JsonProperty("job_id")]
-		string JobId { get; }
+		[JsonProperty("bucket_count")]
+		long BucketCount { get; }
 
 		/// <summary>
-		/// The count of processed records.
+		/// The earliest record timestamp
 		/// </summary>
-		[JsonProperty("processed_record_count")]
-		long ProcessedRecordCount { get; }
+		[JsonProperty("earliest_record_timestamp")]
+		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		DateTimeOffset? EarliestRecordTimestamp { get; }
 
 		/// <summary>
-		/// The count of processed fields.
+		/// The count of empty buckets.
 		/// </summary>
-		[JsonProperty("processed_field_count")]
-		long ProcessedFieldCount { get; }
+		[JsonProperty("empty_bucket_count")]
+		long EmptyBucketCount { get; }
 
 		/// <summary>
 		/// Total input bytes.
@@ -39,10 +40,36 @@ namespace Nest
 		long InputFieldCount { get; }
 
 		/// <summary>
+		/// The count of input records.
+		/// </summary>
+		[JsonProperty("input_record_count")]
+		long InputRecordCount { get; }
+
+		/// <summary>
 		/// The count of invalid dates.
 		/// </summary>
 		[JsonProperty("invalid_date_count")]
 		long InvalidDateCount { get; }
+
+		/// <summary>
+		/// The unique identifier for the job.
+		/// </summary>
+		[JsonProperty("job_id")]
+		string JobId { get; }
+
+		/// <summary>
+		/// The time of the last data item.
+		/// </summary>
+		[JsonProperty("last_data_time")]
+		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		DateTimeOffset LastDataTime { get; }
+
+		/// <summary>
+		/// The latest record timestamp
+		/// </summary>
+		[JsonProperty("latest_record_timestamp")]
+		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
+		DateTimeOffset? LatestRecordTimestamp { get; }
 
 		/// <summary>
 		/// The count of missing fields.
@@ -57,62 +84,35 @@ namespace Nest
 		long OutOfOrderTimestampCount { get; }
 
 		/// <summary>
-		/// The count of empty buckets.
+		/// The count of processed fields.
 		/// </summary>
-		[JsonProperty("empty_bucket_count")]
-		long EmptyBucketCount { get; }
+		[JsonProperty("processed_field_count")]
+		long ProcessedFieldCount { get; }
+
+		/// <summary>
+		/// The count of processed records.
+		/// </summary>
+		[JsonProperty("processed_record_count")]
+		long ProcessedRecordCount { get; }
 
 		/// <summary>
 		/// The count of sparse buckets.
 		/// </summary>
 		[JsonProperty("sparse_bucket_count")]
 		long SparseBucketCount { get; }
-
-		/// <summary>
-		/// The count of buckets.
-		/// </summary>
-		[JsonProperty("bucket_count")]
-		long BucketCount { get; }
-
-		/// <summary>
-		/// The time of the last data item.
-		/// </summary>
-		[JsonProperty("last_data_time")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
-		DateTimeOffset LastDataTime { get; }
-
-		/// <summary>
-		/// The count of input records.
-		/// </summary>
-		[JsonProperty("input_record_count")]
-		long InputRecordCount { get; }
-
-		/// <summary>
-		/// The earliest record timestamp
-		/// </summary>
-		[JsonProperty("earliest_record_timestamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
-		DateTimeOffset? EarliestRecordTimestamp { get; }
-
-		/// <summary>
-		/// The latest record timestamp
-		/// </summary>
-		[JsonProperty("latest_record_timestamp")]
-		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
-		DateTimeOffset? LatestRecordTimestamp { get; }
 	}
 
 	/// <inheritdoc cref="IPostJobDataResponse" />
 	public class PostJobDataResponse : ResponseBase, IPostJobDataResponse
 	{
 		/// <inheritdoc />
-		public string JobId { get; internal set; }
+		public long BucketCount { get; internal set; }
 
 		/// <inheritdoc />
-		public long ProcessedRecordCount { get; internal set; }
+		public DateTimeOffset? EarliestRecordTimestamp { get; internal set; }
 
 		/// <inheritdoc />
-		public long ProcessedFieldCount { get; internal set; }
+		public long EmptyBucketCount { get; internal set; }
 
 		/// <inheritdoc />
 		public long InputBytes { get; internal set; }
@@ -121,7 +121,19 @@ namespace Nest
 		public long InputFieldCount { get; internal set; }
 
 		/// <inheritdoc />
+		public long InputRecordCount { get; internal set; }
+
+		/// <inheritdoc />
 		public long InvalidDateCount { get; internal set; }
+
+		/// <inheritdoc />
+		public string JobId { get; internal set; }
+
+		/// <inheritdoc />
+		public DateTimeOffset LastDataTime { get; internal set; }
+
+		/// <inheritdoc />
+		public DateTimeOffset? LatestRecordTimestamp { get; internal set; }
 
 		/// <inheritdoc />
 		public long MissingFieldCount { get; internal set; }
@@ -130,24 +142,12 @@ namespace Nest
 		public long OutOfOrderTimestampCount { get; internal set; }
 
 		/// <inheritdoc />
-		public long EmptyBucketCount { get; internal set; }
+		public long ProcessedFieldCount { get; internal set; }
+
+		/// <inheritdoc />
+		public long ProcessedRecordCount { get; internal set; }
 
 		/// <inheritdoc />
 		public long SparseBucketCount { get; internal set; }
-
-		/// <inheritdoc />
-		public long BucketCount { get; internal set; }
-
-		/// <inheritdoc />
-		public DateTimeOffset LastDataTime { get; internal set; }
-
-		/// <inheritdoc />
-		public long InputRecordCount { get; internal set; }
-
-		/// <inheritdoc />
-		public DateTimeOffset? EarliestRecordTimestamp { get; internal set;}
-
-		/// <inheritdoc />
-		public DateTimeOffset? LatestRecordTimestamp { get; internal set; }
 	}
 }

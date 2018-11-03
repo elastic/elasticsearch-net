@@ -20,5 +20,4 @@ namespace Nest
 			return new SqlValue(token, sourceSerializer);
 		}
 	}
-
 }

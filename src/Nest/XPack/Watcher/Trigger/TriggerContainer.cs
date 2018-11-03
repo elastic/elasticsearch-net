@@ -13,15 +13,15 @@ namespace Nest
 
 	public class TriggerContainer : ITriggerContainer, IDescriptor
 	{
-		IScheduleContainer ITriggerContainer.Schedule { get; set; }
-
-		public TriggerContainer() {}
+		public TriggerContainer() { }
 
 		public TriggerContainer(TriggerBase trigger)
 		{
 			trigger.ThrowIfNull(nameof(trigger));
 			trigger.WrapInContainer(this);
 		}
+
+		IScheduleContainer ITriggerContainer.Schedule { get; set; }
 	}
 
 	public class TriggerDescriptor : TriggerContainer

@@ -6,11 +6,11 @@
 		private int? _editDistance;
 		private double? _ratio;
 
-		bool IFuzziness.Auto => this._auto;
-		int? IFuzziness.EditDistance => this._editDistance;
-		double? IFuzziness.Ratio => this._ratio;
-
 		public static Fuzziness Auto => new Fuzziness { _auto = true };
+
+		bool IFuzziness.Auto => _auto;
+		int? IFuzziness.EditDistance => _editDistance;
+		double? IFuzziness.Ratio => _ratio;
 
 		public static Fuzziness EditDistance(int distance) => new Fuzziness { _editDistance = distance };
 

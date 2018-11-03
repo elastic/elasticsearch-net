@@ -1,7 +1,4 @@
-﻿using System;
-using Elasticsearch.Net;
-
-namespace Nest
+﻿namespace Nest
 {
 	public class LongRangeAttribute : RangePropertyAttributeBase, ILongRangeProperty
 	{

@@ -6,22 +6,30 @@ namespace Nest
 	public class AnalyzeCharFilters : List<Union<string, ICharFilter>>
 	{
 		public AnalyzeCharFilters() { }
+
 		public AnalyzeCharFilters(List<Union<string, ICharFilter>> tokenFilters)
 		{
 			if (tokenFilters == null) return;
+
 			foreach (var v in tokenFilters) this.AddIfNotNull(v);
 		}
+
 		public AnalyzeCharFilters(string[] tokenFilters)
 		{
 			if (tokenFilters == null) return;
+
 			foreach (var v in tokenFilters) this.AddIfNotNull(v);
 		}
 
-		public void Add(ICharFilter filter) => this.Add(new Union<string, ICharFilter>(filter));
+		public void Add(ICharFilter filter) => Add(new Union<string, ICharFilter>(filter));
 
-		public static implicit operator AnalyzeCharFilters(CharFilterBase tokenFilter) => tokenFilter == null ? null : new AnalyzeCharFilters { tokenFilter };
+		public static implicit operator AnalyzeCharFilters(CharFilterBase tokenFilter) =>
+			tokenFilter == null ? null : new AnalyzeCharFilters { tokenFilter };
+
 		public static implicit operator AnalyzeCharFilters(string tokenFilter) => tokenFilter == null ? null : new AnalyzeCharFilters { tokenFilter };
-		public static implicit operator AnalyzeCharFilters(string[] tokenFilters) => tokenFilters == null ? null : new AnalyzeCharFilters(tokenFilters);
+
+		public static implicit operator AnalyzeCharFilters(string[] tokenFilters) =>
+			tokenFilters == null ? null : new AnalyzeCharFilters(tokenFilters);
 	}
 
 	public class AnalyzeCharFiltersDescriptor : DescriptorPromiseBase<AnalyzeCharFiltersDescriptor, AnalyzeCharFilters>
@@ -61,7 +69,9 @@ namespace Nest
 		/// The kuromoji_iteration_mark normalizes Japanese horizontal iteration marks (odoriji) to their expanded form.
 		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
-		public AnalyzeCharFiltersDescriptor KuromojiIterationMark(Func<KuromojiIterationMarkCharFilterDescriptor, IKuromojiIterationMarkCharFilter> selector = null) =>
+		public AnalyzeCharFiltersDescriptor KuromojiIterationMark(
+			Func<KuromojiIterationMarkCharFilterDescriptor, IKuromojiIterationMarkCharFilter> selector = null
+		) =>
 			AssignIfNotNull(selector?.InvokeOrDefault(new KuromojiIterationMarkCharFilterDescriptor()));
 
 		/// <summary>

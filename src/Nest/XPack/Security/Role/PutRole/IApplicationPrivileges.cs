@@ -34,8 +34,10 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public string Application { get; set; }
+
 		/// <inheritdoc />
 		public IEnumerable<string> Privileges { get; set; }
+
 		/// <inheritdoc />
 		public IEnumerable<string> Resources { get; set; }
 	}
@@ -47,18 +49,21 @@ namespace Nest
 		/// <summary>
 		/// Adds an application privilege
 		/// </summary>
-		public ApplicationPrivilegesDescriptor Add<T>(Func<ApplicationPrivilegesDescriptor<T>, IApplicationPrivileges> selector) where T : class  =>
+		public ApplicationPrivilegesDescriptor Add<T>(Func<ApplicationPrivilegesDescriptor<T>, IApplicationPrivileges> selector) where T : class =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new ApplicationPrivilegesDescriptor<T>())));
 	}
 
 	/// <inheritdoc cref="IApplicationPrivileges" />
-	public class ApplicationPrivilegesDescriptor<T>: DescriptorBase<ApplicationPrivilegesDescriptor<T>, IApplicationPrivileges>, IApplicationPrivileges
-		where T :class
+	public class ApplicationPrivilegesDescriptor<T>
+		: DescriptorBase<ApplicationPrivilegesDescriptor<T>, IApplicationPrivileges>, IApplicationPrivileges
+		where T : class
 	{
 		/// <inheritdoc />
 		string IApplicationPrivileges.Application { get; set; }
+
 		/// <inheritdoc />
 		IEnumerable<string> IApplicationPrivileges.Privileges { get; set; }
+
 		/// <inheritdoc />
 		IEnumerable<string> IApplicationPrivileges.Resources { get; set; }
 
@@ -67,11 +72,13 @@ namespace Nest
 
 		/// <inheritdoc cref="IApplicationPrivileges.Privileges" />
 		public ApplicationPrivilegesDescriptor<T> Privileges(params string[] privileges) => Assign(a => a.Privileges = privileges);
+
 		/// <inheritdoc cref="IApplicationPrivileges.Privileges" />
 		public ApplicationPrivilegesDescriptor<T> Privileges(IEnumerable<string> privileges) => Assign(a => a.Privileges = privileges);
 
 		/// <inheritdoc cref="IApplicationPrivileges.Resources" />
 		public ApplicationPrivilegesDescriptor<T> Resources(params string[] resources) => Assign(a => a.Resources = resources);
+
 		/// <inheritdoc cref="IApplicationPrivileges.Resources" />
 		public ApplicationPrivilegesDescriptor<T> Resources(IEnumerable<string> resources) => Assign(a => a.Resources = resources);
 	}

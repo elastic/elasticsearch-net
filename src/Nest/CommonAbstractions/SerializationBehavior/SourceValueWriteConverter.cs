@@ -8,12 +8,10 @@ namespace Nest
 	{
 		public override bool CanRead => false;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => true;
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			Write(writer, value, serializer);
-		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => Write(writer, value, serializer);
 
 		public static void Write(JsonWriter writer, object value, JsonSerializer serializer)
 		{

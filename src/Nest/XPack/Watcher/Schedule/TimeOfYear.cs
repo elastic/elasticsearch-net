@@ -7,6 +7,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<TimeOfYear>))]
 	public interface ITimeOfYear
 	{
+		[JsonProperty("at")]
+		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
+		IEnumerable<string> At { get; set; }
+
 		[JsonProperty("int")]
 		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<Month>))]
 		IEnumerable<Month> In { get; set; }
@@ -14,26 +18,21 @@ namespace Nest
 		[JsonProperty("on")]
 		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<int>))]
 		IEnumerable<int> On { get; set; }
-
-		[JsonProperty("at")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
-		IEnumerable<string> At { get; set; }
 	}
 
 	public class TimeOfYear : ITimeOfYear
 	{
+		public IEnumerable<string> At { get; set; }
 		public IEnumerable<Month> In { get; set; }
 
 		public IEnumerable<int> On { get; set; }
-
-		public IEnumerable<string> At { get; set; }
 	}
 
 	public class TimeOfYearDescriptor : DescriptorBase<TimeOfYearDescriptor, ITimeOfYear>, ITimeOfYear
 	{
+		IEnumerable<string> ITimeOfYear.At { get; set; }
 		IEnumerable<Month> ITimeOfYear.In { get; set; }
 		IEnumerable<int> ITimeOfYear.On { get; set; }
-		IEnumerable<string> ITimeOfYear.At { get; set; }
 
 		public TimeOfYearDescriptor In(IEnumerable<Month> @in) => Assign(a => a.In = @in);
 

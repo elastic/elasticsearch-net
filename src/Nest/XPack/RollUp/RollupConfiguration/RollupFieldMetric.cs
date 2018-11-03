@@ -10,6 +10,7 @@ namespace Nest
 	{
 		[JsonProperty("field")]
 		Field Field { get; set; }
+
 		[JsonProperty("metrics")]
 		IEnumerable<RollupMetric> Metrics { get; set; }
 	}
@@ -26,15 +27,15 @@ namespace Nest
 		public RollupFieldMetricsDescriptor() : base(new List<IRollupFieldMetric>()) { }
 
 		public RollupFieldMetricsDescriptor<T> Field(Expression<Func<T, object>> field, params RollupMetric[] metrics) =>
-			Assign(a => a.Add(new RollupFieldMetric{ Field = field, Metrics = metrics}));
+			Assign(a => a.Add(new RollupFieldMetric { Field = field, Metrics = metrics }));
 
 		public RollupFieldMetricsDescriptor<T> Field(Field field, params RollupMetric[] metrics) =>
-			Assign(a => a.Add(new RollupFieldMetric{ Field = field, Metrics = metrics}));
+			Assign(a => a.Add(new RollupFieldMetric { Field = field, Metrics = metrics }));
 
 		public RollupFieldMetricsDescriptor<T> Field(Expression<Func<T, object>> field, IEnumerable<RollupMetric> metrics) =>
-			Assign(a => a.Add(new RollupFieldMetric{ Field = field, Metrics = metrics}));
+			Assign(a => a.Add(new RollupFieldMetric { Field = field, Metrics = metrics }));
 
 		public RollupFieldMetricsDescriptor<T> Field(Field field, IEnumerable<RollupMetric> metrics) =>
-			Assign(a => a.Add(new RollupFieldMetric{ Field = field, Metrics = metrics}));
+			Assign(a => a.Add(new RollupFieldMetric { Field = field, Metrics = metrics }));
 	}
 }

@@ -14,12 +14,14 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "chars")]
 		Characters,
+
 		/// <summary>
 		/// sentence and word: use Java’s BreakIterator to break the highlighted fragments at the next sentence or word boundary.
 		/// You can further specify boundary_scanner_locale to control which Locale is used to search the text for these boundaries.
 		/// </summary>
 		[EnumMember(Value = "sentence")]
 		Sentence,
+
 		/// <summary>
 		/// sentence and word: use Java’s BreakIterator to break the highlighted fragments at the next sentence or word boundary.
 		/// You can further specify boundary_scanner_locale to control which Locale is used to search the text for these boundaries.

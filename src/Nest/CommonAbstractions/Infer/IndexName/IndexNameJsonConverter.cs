@@ -23,9 +23,9 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.String) return null;
+
 			var typeName = reader.Value.ToString();
 			return (IndexName)typeName;
 		}
-
 	}
 }

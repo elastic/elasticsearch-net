@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -20,6 +19,4 @@ namespace Nest
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, NodeInfo>))]
 		public IReadOnlyDictionary<string, NodeInfo> Nodes { get; internal set; } = EmptyReadOnly<string, NodeInfo>.Dictionary;
 	}
-
-
 }

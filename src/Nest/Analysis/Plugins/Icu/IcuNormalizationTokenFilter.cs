@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -17,16 +15,16 @@ namespace Nest
 		IcuNormalizationType? Name { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class IcuNormalizationTokenFilter : TokenFilterBase, IIcuNormalizationTokenFilter
 	{
 		public IcuNormalizationTokenFilter() : base("icu_normalizer") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IcuNormalizationType? Name { get; set; }
 	}
 
-	///<inheritdoc/>
+	/// <inheritdoc />
 	public class IcuNormalizationTokenFilterDescriptor
 		: TokenFilterDescriptorBase<IcuNormalizationTokenFilterDescriptor, IIcuNormalizationTokenFilter>, IIcuNormalizationTokenFilter
 	{
@@ -34,7 +32,7 @@ namespace Nest
 
 		IcuNormalizationType? IIcuNormalizationTokenFilter.Name { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public IcuNormalizationTokenFilterDescriptor Name(IcuNormalizationType? name) => Assign(a => a.Name = name);
 	}
 }

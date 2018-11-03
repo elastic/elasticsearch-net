@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using System.Linq;
 
 namespace Nest
 {
@@ -9,6 +8,18 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<CompletionSuggester>))]
 	public interface ICompletionSuggester : ISuggester
 	{
+		/// <summary>
+		/// Context mappings used to filter and/or boost suggestions
+		/// </summary>
+		[JsonProperty("contexts")]
+		IDictionary<string, IList<ISuggestContextQuery>> Contexts { get; set; }
+
+		/// <summary>
+		/// Support fuzziness for the suggestions
+		/// </summary>
+		[JsonProperty("fuzzy")]
+		IFuzzySuggester Fuzzy { get; set; }
+
 		/// <summary>
 		/// Prefix used to search for suggestions
 		/// </summary>
@@ -22,18 +33,6 @@ namespace Nest
 		string Regex { get; set; }
 
 		/// <summary>
-		/// Support fuzziness for the suggestions
-		/// </summary>
-		[JsonProperty("fuzzy")]
-		IFuzzySuggester Fuzzy { get; set; }
-
-		/// <summary>
-		/// Context mappings used to filter and/or boost suggestions
-		/// </summary>
-		[JsonProperty("contexts")]
-		IDictionary<string, IList<ISuggestContextQuery>> Contexts { get; set; }
-
-		/// <summary>
 		/// Whether duplicate suggestions should be filtered out. Defaults to <c>false</c>
 		/// </summary>
 		[JsonProperty("skip_duplicates")]
@@ -43,10 +42,10 @@ namespace Nest
 	public class CompletionSuggester : SuggesterBase, ICompletionSuggester
 	{
 		/// <inheritdoc />
-		public IFuzzySuggester Fuzzy { get; set; }
+		public IDictionary<string, IList<ISuggestContextQuery>> Contexts { get; set; }
 
 		/// <inheritdoc />
-		public IDictionary<string, IList<ISuggestContextQuery>> Contexts { get; set; }
+		public IFuzzySuggester Fuzzy { get; set; }
 
 		/// <inheritdoc />
 		public string Prefix { get; set; }
@@ -58,11 +57,12 @@ namespace Nest
 		public bool? SkipDuplicates { get; set; }
 	}
 
-	public class CompletionSuggesterDescriptor<T> : SuggestDescriptorBase<CompletionSuggesterDescriptor<T>, ICompletionSuggester, T>, ICompletionSuggester
+	public class CompletionSuggesterDescriptor<T>
+		: SuggestDescriptorBase<CompletionSuggesterDescriptor<T>, ICompletionSuggester, T>, ICompletionSuggester
 		where T : class
 	{
-		IFuzzySuggester ICompletionSuggester.Fuzzy { get; set; }
 		IDictionary<string, IList<ISuggestContextQuery>> ICompletionSuggester.Contexts { get; set; }
+		IFuzzySuggester ICompletionSuggester.Fuzzy { get; set; }
 		string ICompletionSuggester.Prefix { get; set; }
 		string ICompletionSuggester.Regex { get; set; }
 		bool? ICompletionSuggester.SkipDuplicates { get; set; }
@@ -86,7 +86,9 @@ namespace Nest
 		/// <summary>
 		/// Context mappings used to filter and/or boost suggestions
 		/// </summary>
-		public CompletionSuggesterDescriptor<T> Contexts(Func<SuggestContextQueriesDescriptor<T>, IPromise<IDictionary<string, IList<ISuggestContextQuery>>>> contexts) =>
+		public CompletionSuggesterDescriptor<T> Contexts(
+			Func<SuggestContextQueriesDescriptor<T>, IPromise<IDictionary<string, IList<ISuggestContextQuery>>>> contexts
+		) =>
 			Assign(a => a.Contexts = contexts?.Invoke(new SuggestContextQueriesDescriptor<T>()).Value);
 
 		/// <summary>

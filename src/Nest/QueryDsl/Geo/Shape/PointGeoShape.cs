@@ -14,7 +14,7 @@ namespace Nest
 		internal PointGeoShape() : base("point") { }
 
 		public PointGeoShape(GeoCoordinate coordinates) : this() =>
-			this.Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
+			Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
 
 		public GeoCoordinate Coordinates { get; set; }
 	}

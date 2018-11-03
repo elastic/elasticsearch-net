@@ -14,8 +14,8 @@ namespace Nest
 	{
 		internal MultiLineStringGeoShape() : base("multilinestring") { }
 
-		public MultiLineStringGeoShape(IEnumerable<IEnumerable<GeoCoordinate>> coordinates): this() =>
-			this.Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
+		public MultiLineStringGeoShape(IEnumerable<IEnumerable<GeoCoordinate>> coordinates) : this() =>
+			Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
 
 		public IEnumerable<IEnumerable<GeoCoordinate>> Coordinates { get; set; }
 	}

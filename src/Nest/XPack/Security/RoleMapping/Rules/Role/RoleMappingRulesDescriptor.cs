@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public class RoleMappingRulesDescriptor :
-		DescriptorPromiseBase<RoleMappingRulesDescriptor, List<RoleMappingRuleBase>>, IPromise<List<RoleMappingRuleBase>>
+	public class RoleMappingRulesDescriptor
+		: DescriptorPromiseBase<RoleMappingRulesDescriptor, List<RoleMappingRuleBase>>, IPromise<List<RoleMappingRuleBase>>
 	{
-		List<RoleMappingRuleBase> IPromise<List<RoleMappingRuleBase>>.Value { get; } = new List<RoleMappingRuleBase>();
-
 		public RoleMappingRulesDescriptor() : base(new List<RoleMappingRuleBase>()) { }
 
 		private IPromise<List<RoleMappingRuleBase>> Self => this;
+		List<RoleMappingRuleBase> IPromise<List<RoleMappingRuleBase>>.Value { get; } = new List<RoleMappingRuleBase>();
 
 		private RoleMappingRulesDescriptor Add(RoleMappingRuleBase m)
 		{
@@ -28,7 +27,7 @@ namespace Nest
 
 		public RoleMappingRulesDescriptor Realm(string realm) => Add(new RealmRule(realm));
 
-		public RoleMappingRulesDescriptor Metadata(string key, object value) => Add(new MetadataRule(key,value));
+		public RoleMappingRulesDescriptor Metadata(string key, object value) => Add(new MetadataRule(key, value));
 
 		public RoleMappingRulesDescriptor Any(Func<RoleMappingRulesDescriptor, IPromise<List<RoleMappingRuleBase>>> selector) =>
 			Add(new AnyRoleMappingRule(selector?.Invoke(new RoleMappingRulesDescriptor())?.Value));
@@ -38,6 +37,5 @@ namespace Nest
 
 		public RoleMappingRulesDescriptor Except(Func<RoleMappingRuleDescriptor, RoleMappingRuleBase> selector) =>
 			Add(new ExceptRoleMappingRole(selector?.Invoke(new RoleMappingRuleDescriptor())));
-
 	}
 }

@@ -9,11 +9,6 @@ namespace Nest
 	public interface ISort
 	{
 		/// <summary>
-		/// The field on which to sort
-		/// </summary>
-		Field SortKey { get; }
-
-		/// <summary>
 		/// Specifies how documents which are missing the sort field should
 		/// be treated.
 		/// </summary>
@@ -21,17 +16,20 @@ namespace Nest
 		object Missing { get; set; }
 
 		/// <summary>
-		/// Controls the order of sorting
-		/// </summary>
-		[JsonProperty("order")]
-		SortOrder? Order { get; set; }
-
-		/// <summary>
 		/// Controls what collection value is picked for sorting a document
 		/// when the field is a collection
 		/// </summary>
 		[JsonProperty("mode")]
 		SortMode? Mode { get; set; }
+
+		/// <summary>
+		/// Specifies the path and filter to apply when sorting on a nested field
+		/// </summary>
+		/// <remarks>
+		/// Valid in Elasticsearch 6.1.0+
+		/// </remarks>
+		[JsonProperty("nested")]
+		INestedSort Nested { get; set; }
 
 		/// <summary>
 		/// Specifies the filter to apply when sorting on a nested field
@@ -48,37 +46,46 @@ namespace Nest
 		Field NestedPath { get; set; }
 
 		/// <summary>
-		/// Specifies the path and filter to apply when sorting on a nested field
+		/// Controls the order of sorting
 		/// </summary>
-		/// <remarks>
-		/// Valid in Elasticsearch 6.1.0+
-		/// </remarks>
-		[JsonProperty("nested")]
-		INestedSort Nested { get; set; }
+		[JsonProperty("order")]
+		SortOrder? Order { get; set; }
+
+		/// <summary>
+		/// The field on which to sort
+		/// </summary>
+		Field SortKey { get; }
 	}
 
 	public abstract class SortBase : ISort
 	{
 		/// <inheritdoc />
-		Field ISort.SortKey => this.SortKey;
+		public object Missing { get; set; }
+
+		/// <inheritdoc />
+		public SortMode? Mode { get; set; }
+
+		/// <inheritdoc />
+		public INestedSort Nested { get; set; }
+
+		/// <inheritdoc />
+		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
+		public QueryContainer NestedFilter { get; set; }
+
+		/// <inheritdoc />
+		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
+		public Field NestedPath { get; set; }
+
+		/// <inheritdoc />
+		public SortOrder? Order { get; set; }
+
 		/// <summary>
 		/// The field on which to sort
 		/// </summary>
 		protected abstract Field SortKey { get; }
+
 		/// <inheritdoc />
-		public object Missing { get; set; }
-		/// <inheritdoc />
-		public SortOrder? Order { get; set; }
-		/// <inheritdoc />
-		public SortMode? Mode { get; set; }
-		/// <inheritdoc />
-		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		public QueryContainer NestedFilter { get; set; }
-		/// <inheritdoc />
-		[Obsolete("Deprecated in 6.1.0. Use Nested. Will be removed in 7.x")]
-		public Field NestedPath { get; set; }
-		/// <inheritdoc />
-		public INestedSort Nested { get; set; }
+		Field ISort.SortKey => SortKey;
 	}
 
 	public abstract class SortDescriptorBase<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, ISort
@@ -86,18 +93,18 @@ namespace Nest
 		where TDescriptor : SortDescriptorBase<TDescriptor, TInterface, T>, TInterface, ISort
 		where TInterface : class, ISort
 	{
-		Field ISort.SortKey => this.SortKey;
-		object ISort.Missing { get; set; }
-		SortOrder? ISort.Order { get; set; }
-		SortMode? ISort.Mode { get; set; }
-		QueryContainer ISort.NestedFilter { get; set; }
-		Field ISort.NestedPath { get; set; }
-		INestedSort ISort.Nested { get; set; }
-
 		/// <summary>
 		/// The field on which to sort
 		/// </summary>
 		protected abstract Field SortKey { get; }
+
+		object ISort.Missing { get; set; }
+		SortMode? ISort.Mode { get; set; }
+		INestedSort ISort.Nested { get; set; }
+		QueryContainer ISort.NestedFilter { get; set; }
+		Field ISort.NestedPath { get; set; }
+		SortOrder? ISort.Order { get; set; }
+		Field ISort.SortKey => SortKey;
 
 		/// <summary>
 		/// Sorts by ascending sort order

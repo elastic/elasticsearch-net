@@ -1,15 +1,17 @@
 namespace Nest
 {
 	public interface IDictionaryDecompounderTokenFilter : ICompoundWordTokenFilter { }
-	/// <inheritdoc/>
+
+	/// <inheritdoc />
 	public class DictionaryDecompounderTokenFilter : CompoundWordTokenFilterBase, IDictionaryDecompounderTokenFilter
 	{
 		public DictionaryDecompounderTokenFilter() : base("dictionary_decompounder") { }
 	}
-	///<inheritdoc/>
+
+	/// <inheritdoc />
 	public class DictionaryDecompounderTokenFilterDescriptor
 		: CompoundWordTokenFilterDescriptorBase<DictionaryDecompounderTokenFilterDescriptor, IDictionaryDecompounderTokenFilter>
-		, IDictionaryDecompounderTokenFilter
+			, IDictionaryDecompounderTokenFilter
 	{
 		protected override string Type => "dictionary_decompounder";
 	}

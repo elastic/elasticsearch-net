@@ -1,17 +1,9 @@
-﻿using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
-	public partial interface IGetAliasRequest
-	{
-	}
+	public partial interface IGetAliasRequest { }
 
-	public partial class GetAliasRequest
-	{
-	}
+	public partial class GetAliasRequest { }
 
 	[DescriptorFor("IndicesGetAlias")]
-	public partial class GetAliasDescriptor
-	{
-	}
+	public partial class GetAliasDescriptor { }
 }

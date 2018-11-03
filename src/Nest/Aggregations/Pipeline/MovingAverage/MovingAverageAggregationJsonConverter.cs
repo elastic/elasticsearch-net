@@ -38,6 +38,7 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			if (!(value is IMovingAverageAggregation movingAvg)) return;
+
 			writer.WriteStartObject();
 			writer.WritePropertyName("buckets_path");
 			serializer.Serialize(writer, movingAvg.BucketsPath);
@@ -79,7 +80,9 @@ namespace Nest
 		private T GetOrDefault<T>(string key, Dictionary<string, JToken> properties)
 		{
 			if (!properties.ContainsKey(key)) return default(T);
+
 			return properties[key].ToObject<T>();
+
 			//TODO decide if this works too for .NET core, looks like it
 			//return (T)Convert.ChangeType(properties[key], typeof(T));
 		}
@@ -90,6 +93,7 @@ namespace Nest
 			if (value.IsNullOrEmpty()) return null;
 			if (value == "insert_zeros") return GapPolicy.InsertZeros;
 			if (value == "skip") return GapPolicy.Skip;
+
 			return null;
 		}
 
@@ -111,6 +115,7 @@ namespace Nest
 				return settings.ToObject<HoltLinearModel>();
 			else if (name == "holt_winters")
 				return settings.ToObject<HoltWintersModel>();
+
 			return null;
 		}
 	}

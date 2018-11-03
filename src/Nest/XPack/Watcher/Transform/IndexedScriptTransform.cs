@@ -11,10 +11,7 @@ namespace Nest
 
 	public class IndexedScriptTransform : ScriptTransformBase, IIndexedScriptTransform
 	{
-		public IndexedScriptTransform(string id)
-		{
-			this.Id = id;
-		}
+		public IndexedScriptTransform(string id) => Id = id;
 
 		public string Id { get; set; }
 	}
@@ -22,12 +19,9 @@ namespace Nest
 	public class IndexedScriptTransformDescriptor
 		: ScriptTransformDescriptorBase<IndexedScriptTransformDescriptor, IIndexedScriptTransform>, IIndexedScriptTransform
 	{
-		public IndexedScriptTransformDescriptor(string id)
-		{
-			Self.Id = id;
-		}
+		public IndexedScriptTransformDescriptor(string id) => Self.Id = id;
 
-		public IndexedScriptTransformDescriptor() {}
+		public IndexedScriptTransformDescriptor() { }
 
 		string IIndexedScriptTransform.Id { get; set; }
 	}

@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject]
-	public interface ICondition {}
+	public interface ICondition { }
 
 	public abstract class ConditionBase : ICondition
 	{

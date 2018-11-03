@@ -72,60 +72,50 @@ namespace Nest
 		}
 	}
 
-	public interface ICountDetector : IDetector, IByFieldNameDetector, IOverFieldNameDetector,
-		IPartitionFieldNameDetector
-	{
-	}
+	public interface ICountDetector
+		: IDetector, IByFieldNameDetector, IOverFieldNameDetector,
+			IPartitionFieldNameDetector { }
 
-	public interface INonZeroCountDetector : IDetector, IByFieldNameDetector, IPartitionFieldNameDetector
-	{
-	}
+	public interface INonZeroCountDetector : IDetector, IByFieldNameDetector, IPartitionFieldNameDetector { }
 
-	public interface IDistinctCountDetector : IDetector, IByFieldNameDetector, IOverFieldNameDetector,
-		IPartitionFieldNameDetector, IFieldNameDetector
-	{
-	}
+	public interface IDistinctCountDetector
+		: IDetector, IByFieldNameDetector, IOverFieldNameDetector,
+			IPartitionFieldNameDetector, IFieldNameDetector { }
 
 	public abstract class CountDetectorBase : DetectorBase, ICountDetector
 	{
+		protected CountDetectorBase(CountFunction function) : base(function.GetStringValue()) { }
+
 		public Field ByFieldName { get; set; }
 		public Field OverFieldName { get; set; }
 		public Field PartitionFieldName { get; set; }
-
-		protected CountDetectorBase(CountFunction function) : base(function.GetStringValue())
-		{
-		}
 	}
 
 	public abstract class NonZeroCountDetectorBase : DetectorBase, INonZeroCountDetector
 	{
+		protected NonZeroCountDetectorBase(NonZeroCountFunction function) : base(function.GetStringValue()) { }
+
 		public Field ByFieldName { get; set; }
 		public Field PartitionFieldName { get; set; }
-
-		protected NonZeroCountDetectorBase(NonZeroCountFunction function) : base(function.GetStringValue())
-		{
-		}
 	}
 
 	public abstract class DistinctCountDetectorBase : DetectorBase, IDistinctCountDetector
 	{
-		public Field ByFieldName { get; set; }
-		public Field PartitionFieldName { get; set; }
-		public Field OverFieldName { get; set; }
-		public Field FieldName { get; set; }
+		protected DistinctCountDetectorBase(DistinctCountFunction function) : base(function.GetStringValue()) { }
 
-		protected DistinctCountDetectorBase(DistinctCountFunction function) : base(function.GetStringValue())
-		{
-		}
+		public Field ByFieldName { get; set; }
+		public Field FieldName { get; set; }
+		public Field OverFieldName { get; set; }
+		public Field PartitionFieldName { get; set; }
 	}
 
 	public class CountDetectorDescriptor<T> : DetectorDescriptorBase<CountDetectorDescriptor<T>, ICountDetector>, ICountDetector where T : class
 	{
+		public CountDetectorDescriptor(CountFunction function) : base(function.GetStringValue()) { }
+
 		Field IByFieldNameDetector.ByFieldName { get; set; }
 		Field IOverFieldNameDetector.OverFieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
-
-		public CountDetectorDescriptor(CountFunction function) : base(function.GetStringValue()) {}
 
 		public CountDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(a => a.ByFieldName = byFieldName);
 
@@ -137,33 +127,38 @@ namespace Nest
 
 		public CountDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(a => a.PartitionFieldName = partitionFieldName);
 
-		public CountDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.PartitionFieldName = objectPath);
+		public CountDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+			Assign(a => a.PartitionFieldName = objectPath);
 	}
 
-	public class NonZeroCountDetectorDescriptor<T> : DetectorDescriptorBase<NonZeroCountDetectorDescriptor<T>, INonZeroCountDetector>, INonZeroCountDetector where T : class
+	public class NonZeroCountDetectorDescriptor<T>
+		: DetectorDescriptorBase<NonZeroCountDetectorDescriptor<T>, INonZeroCountDetector>, INonZeroCountDetector where T : class
 	{
+		public NonZeroCountDetectorDescriptor(NonZeroCountFunction function) : base(function.GetStringValue()) { }
+
 		Field IByFieldNameDetector.ByFieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
-
-		public NonZeroCountDetectorDescriptor(NonZeroCountFunction function) : base(function.GetStringValue()) {}
 
 		public NonZeroCountDetectorDescriptor<T> ByFieldName(Field byFieldName) => Assign(a => a.ByFieldName = byFieldName);
 
 		public NonZeroCountDetectorDescriptor<T> ByFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.ByFieldName = objectPath);
 
-		public NonZeroCountDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(a => a.PartitionFieldName = partitionFieldName);
+		public NonZeroCountDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) =>
+			Assign(a => a.PartitionFieldName = partitionFieldName);
 
-		public NonZeroCountDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.PartitionFieldName = objectPath);
+		public NonZeroCountDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+			Assign(a => a.PartitionFieldName = objectPath);
 	}
 
-	public class DistinctCountDetectorDescriptor<T> : DetectorDescriptorBase<DistinctCountDetectorDescriptor<T>, IDistinctCountDetector>, IDistinctCountDetector where T : class
+	public class DistinctCountDetectorDescriptor<T>
+		: DetectorDescriptorBase<DistinctCountDetectorDescriptor<T>, IDistinctCountDetector>, IDistinctCountDetector where T : class
 	{
+		public DistinctCountDetectorDescriptor(DistinctCountFunction function) : base(function.GetStringValue()) { }
+
 		Field IByFieldNameDetector.ByFieldName { get; set; }
+		Field IFieldNameDetector.FieldName { get; set; }
 		Field IOverFieldNameDetector.OverFieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
-		Field IFieldNameDetector.FieldName { get; set; }
-
-		public DistinctCountDetectorDescriptor(DistinctCountFunction function) : base(function.GetStringValue()) {}
 
 		public DistinctCountDetectorDescriptor<T> FieldName(Field fieldName) => Assign(a => a.FieldName = fieldName);
 
@@ -177,24 +172,26 @@ namespace Nest
 
 		public DistinctCountDetectorDescriptor<T> OverFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.OverFieldName = objectPath);
 
-		public DistinctCountDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(a => a.PartitionFieldName = partitionFieldName);
+		public DistinctCountDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) =>
+			Assign(a => a.PartitionFieldName = partitionFieldName);
 
-		public DistinctCountDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.PartitionFieldName = objectPath);
+		public DistinctCountDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+			Assign(a => a.PartitionFieldName = objectPath);
 	}
 
 	public class CountDetector : CountDetectorBase
 	{
-		public CountDetector() : base(CountFunction.Count) {}
+		public CountDetector() : base(CountFunction.Count) { }
 	}
 
 	public class HighCountDetector : CountDetectorBase
 	{
-		public HighCountDetector() : base(CountFunction.HighCount) {}
+		public HighCountDetector() : base(CountFunction.HighCount) { }
 	}
 
 	public class LowCountDetector : CountDetectorBase
 	{
-		public LowCountDetector() : base(CountFunction.LowCount) {}
+		public LowCountDetector() : base(CountFunction.LowCount) { }
 	}
 
 	/// <summary>
@@ -203,7 +200,7 @@ namespace Nest
 	/// </summary>
 	public class NonZeroCountDetector : NonZeroCountDetectorBase
 	{
-		public NonZeroCountDetector() : base(NonZeroCountFunction.NonZeroCount) {}
+		public NonZeroCountDetector() : base(NonZeroCountFunction.NonZeroCount) { }
 	}
 
 	/// <summary>
@@ -211,22 +208,22 @@ namespace Nest
 	/// </summary>
 	public class HighNonZeroCountDetector : NonZeroCountDetectorBase
 	{
-		public HighNonZeroCountDetector() : base(NonZeroCountFunction.HighNonZeroCount) {}
+		public HighNonZeroCountDetector() : base(NonZeroCountFunction.HighNonZeroCount) { }
 	}
 
 	public class DistinctCountDetector : DistinctCountDetectorBase
 	{
-		public DistinctCountDetector() : base(DistinctCountFunction.DistinctCount) {}
+		public DistinctCountDetector() : base(DistinctCountFunction.DistinctCount) { }
 	}
 
 	public class HighDistinctCountDetector : DistinctCountDetectorBase
 	{
-		public HighDistinctCountDetector() : base(DistinctCountFunction.HighDistinctCount) {}
+		public HighDistinctCountDetector() : base(DistinctCountFunction.HighDistinctCount) { }
 	}
 
 	public class LowDistinctCountDetector : DistinctCountDetectorBase
 	{
-		public LowDistinctCountDetector() : base(DistinctCountFunction.LowDistinctCount) {}
+		public LowDistinctCountDetector() : base(DistinctCountFunction.LowDistinctCount) { }
 	}
 
 	/// <summary>
@@ -234,6 +231,6 @@ namespace Nest
 	/// </summary>
 	public class LowNonZeroCountDetector : NonZeroCountDetectorBase
 	{
-		public LowNonZeroCountDetector() : base(NonZeroCountFunction.LowNonZeroCount) {}
+		public LowNonZeroCountDetector() : base(NonZeroCountFunction.LowNonZeroCount) { }
 	}
 }

@@ -6,24 +6,24 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MutualInformationHeuristic>))]
 	public interface IMutualInformationHeuristic
 	{
-		[JsonProperty("include_negatives")]
-		bool? IncludeNegatives { get; set; }
-
 		[JsonProperty("background_is_superset")]
 		bool? BackgroundIsSuperSet { get; set; }
+
+		[JsonProperty("include_negatives")]
+		bool? IncludeNegatives { get; set; }
 	}
 
 	public class MutualInformationHeuristic : IMutualInformationHeuristic
 	{
-		public bool? IncludeNegatives { get; set; }
 		public bool? BackgroundIsSuperSet { get; set; }
+		public bool? IncludeNegatives { get; set; }
 	}
 
 	public class MutualInformationHeuristicDescriptor
 		: DescriptorBase<MutualInformationHeuristicDescriptor, IMutualInformationHeuristic>, IMutualInformationHeuristic
 	{
-		bool? IMutualInformationHeuristic.IncludeNegatives { get; set; }
 		bool? IMutualInformationHeuristic.BackgroundIsSuperSet { get; set; }
+		bool? IMutualInformationHeuristic.IncludeNegatives { get; set; }
 
 		public MutualInformationHeuristicDescriptor IncludeNegatives(bool? includeNegatives = true) =>
 			Assign(a => a.IncludeNegatives = includeNegatives);

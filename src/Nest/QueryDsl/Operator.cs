@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "and")]
 		And,
+
 		[EnumMember(Value = "or")]
 		Or
 	}

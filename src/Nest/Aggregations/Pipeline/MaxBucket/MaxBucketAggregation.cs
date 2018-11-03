@@ -9,7 +9,7 @@ namespace Nest
 	public class MaxBucketAggregation
 		: PipelineAggregationBase, IMaxBucketAggregation
 	{
-		internal MaxBucketAggregation () { }
+		internal MaxBucketAggregation() { }
 
 		public MaxBucketAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
@@ -19,7 +19,5 @@ namespace Nest
 
 	public class MaxBucketAggregationDescriptor
 		: PipelineAggregationDescriptorBase<MaxBucketAggregationDescriptor, IMaxBucketAggregation, SingleBucketsPath>
-		, IMaxBucketAggregation
-	{
-	}
+			, IMaxBucketAggregation { }
 }

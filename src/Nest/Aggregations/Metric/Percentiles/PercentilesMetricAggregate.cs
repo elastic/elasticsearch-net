@@ -2,7 +2,6 @@
 
 namespace Nest
 {
-
 	public class PercentileItem
 	{
 		public double Percentile { get; internal set; }

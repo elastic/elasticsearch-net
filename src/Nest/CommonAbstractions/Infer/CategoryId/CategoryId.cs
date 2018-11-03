@@ -10,26 +10,27 @@ namespace Nest
 
 		public CategoryId(long value) => Value = value;
 
-		public static implicit operator CategoryId(long categoryId) => new CategoryId(categoryId);
-		public static implicit operator long(CategoryId categoryId) => categoryId.Value;
+		public bool Equals(CategoryId other) => Value == other.Value;
 
 		// ReSharper disable once ImpureMethodCallOnReadonlyValueField
 		public string GetString(IConnectionConfigurationValues settings) => Value.ToString(CultureInfo.InvariantCulture);
 
-		public bool Equals(CategoryId other) => this.Value == other.Value;
+		public static implicit operator CategoryId(long categoryId) => new CategoryId(categoryId);
+
+		public static implicit operator long(CategoryId categoryId) => categoryId.Value;
 
 		public override bool Equals(object obj)
 		{
 			switch (obj)
 			{
-				case int l: return this.Value == l;
-				case long l: return this.Value == l;
-				case CategoryId i: return this.Value == i.Value;
+				case int l: return Value == l;
+				case long l: return Value == l;
+				case CategoryId i: return Value == i.Value;
 				default: return false;
 			}
 		}
 
-		public override int GetHashCode() => this.Value.GetHashCode();
+		public override int GetHashCode() => Value.GetHashCode();
 
 		public static bool operator ==(CategoryId left, CategoryId right) => Equals(left, right);
 

@@ -8,7 +8,6 @@ namespace Nest
 
 	public class PercentageScoreHeuristic { }
 
-	public class PercentageScoreHeuristicDescriptor 
-		: DescriptorBase<PercentageScoreHeuristicDescriptor, IPercentageScoreHeuristic>, IPercentageScoreHeuristic
-	{ }
+	public class PercentageScoreHeuristicDescriptor
+		: DescriptorBase<PercentageScoreHeuristicDescriptor, IPercentageScoreHeuristic>, IPercentageScoreHeuristic { }
 }

@@ -10,31 +10,33 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<RollupGroupings>))]
 	public interface IRollupGroupings
 	{
-		/// <inheritdoc cref="IDateHistogramRollupGrouping"/>
+		/// <inheritdoc cref="IDateHistogramRollupGrouping" />
 		[JsonProperty("date_histogram")]
 		IDateHistogramRollupGrouping DateHistogram { get; set; }
 
-		/// <inheritdoc cref="IHistogramRollupGrouping"/>
+		/// <inheritdoc cref="IHistogramRollupGrouping" />
 		[JsonProperty("histogram")]
 		IHistogramRollupGrouping Histogram { get; set; }
 
-		/// <inheritdoc cref="ITermsRollupGrouping"/>
+		/// <inheritdoc cref="ITermsRollupGrouping" />
 		[JsonProperty("terms")]
 		ITermsRollupGrouping Terms { get; set; }
 	}
 
-	/// <inheritdoc cref="IRollupGroupings"/>
+	/// <inheritdoc cref="IRollupGroupings" />
 	public class RollupGroupings : IRollupGroupings
 	{
 		/// <inheritdoc />
 		public IDateHistogramRollupGrouping DateHistogram { get; set; }
+
 		/// <inheritdoc />
 		public IHistogramRollupGrouping Histogram { get; set; }
+
 		/// <inheritdoc />
 		public ITermsRollupGrouping Terms { get; set; }
 	}
 
-	/// <inheritdoc cref="IRollupGroupings"/>
+	/// <inheritdoc cref="IRollupGroupings" />
 	public class RollupGroupingsDescriptor<T> : DescriptorBase<RollupGroupingsDescriptor<T>, IRollupGroupings>, IRollupGroupings
 		where T : class
 	{
@@ -42,16 +44,17 @@ namespace Nest
 		IHistogramRollupGrouping IRollupGroupings.Histogram { get; set; }
 		ITermsRollupGrouping IRollupGroupings.Terms { get; set; }
 
-		/// <inheritdoc cref="IDateHistogramRollupGrouping"/>
+		/// <inheritdoc cref="IDateHistogramRollupGrouping" />
 		public RollupGroupingsDescriptor<T> DateHistogram(
-			Func<DateHistogramRollupGroupingDescriptor<T>, IDateHistogramRollupGrouping> selector) =>
+			Func<DateHistogramRollupGroupingDescriptor<T>, IDateHistogramRollupGrouping> selector
+		) =>
 			Assign(a => a.DateHistogram = selector?.Invoke(new DateHistogramRollupGroupingDescriptor<T>()));
 
-		/// <inheritdoc cref="IHistogramRollupGrouping"/>
+		/// <inheritdoc cref="IHistogramRollupGrouping" />
 		public RollupGroupingsDescriptor<T> Histogram(Func<HistogramRollupGroupingDescriptor<T>, IHistogramRollupGrouping> selector) =>
 			Assign(a => a.Histogram = selector?.Invoke(new HistogramRollupGroupingDescriptor<T>()));
 
-		/// <inheritdoc cref="ITermsRollupGrouping"/>
+		/// <inheritdoc cref="ITermsRollupGrouping" />
 		public RollupGroupingsDescriptor<T> Terms(Func<TermsRollupGroupingDescriptor<T>, ITermsRollupGrouping> selector) =>
 			Assign(a => a.Terms = selector?.Invoke(new TermsRollupGroupingDescriptor<T>()));
 	}

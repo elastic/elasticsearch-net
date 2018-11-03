@@ -35,8 +35,6 @@ namespace Nest
 	/// </summary>
 	public class DotExpanderProcessor : ProcessorBase, IDotExpanderProcessor
 	{
-		protected override string Name => "dot_expander";
-
 		/// <summary>
 		/// The field to expand into an object field
 		/// </summary>
@@ -50,6 +48,8 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("path")]
 		public string Path { get; set; }
+
+		protected override string Name => "dot_expander";
 	}
 
 	/// <summary>

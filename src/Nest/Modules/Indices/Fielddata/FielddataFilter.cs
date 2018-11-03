@@ -27,11 +27,13 @@ namespace Nest
 		IFielddataRegexFilter IFielddataFilter.Regex { get; set; }
 
 		public FielddataFilterDescriptor Frequency(
-			Func<FielddataFrequencyFilterDescriptor, IFielddataFrequencyFilter> frequencyFilterSelector) =>
+			Func<FielddataFrequencyFilterDescriptor, IFielddataFrequencyFilter> frequencyFilterSelector
+		) =>
 			Assign(a => a.Frequency = frequencyFilterSelector(new FielddataFrequencyFilterDescriptor()));
 
 		public FielddataFilterDescriptor Regex(
-			Func<FielddataRegexFilterDescriptor, IFielddataRegexFilter> regexFilterSelector) =>
+			Func<FielddataRegexFilterDescriptor, IFielddataRegexFilter> regexFilterSelector
+		) =>
 			Assign(a => a.Regex = regexFilterSelector(new FielddataRegexFilterDescriptor()));
 	}
 }

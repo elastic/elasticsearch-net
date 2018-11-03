@@ -13,21 +13,29 @@ namespace Nest
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		///<summary>The name of the normalizer to use</summary>
-		[JsonProperty("normalizer")]
-		string Normalizer { get; set; }
+		///<summary>Filter only certain token attributes to be returned</summary>
+		[JsonProperty("attributes")]
+		IEnumerable<string> Attributes { get; set; }
 
 		///<summary>A collection of character filters to use for the analysis</summary>
 		[JsonProperty("char_filter")]
 		AnalyzeCharFilters CharFilter { get; set; }
 
-		///<summary>A collection of filters to use for the analysis</summary>
-		[JsonProperty("filter")]
-		AnalyzeTokenFilters Filter { get; set; }
+		///<summary>Return more details, and output the analyzer chain per step in the process</summary>
+		[JsonProperty("explain")]
+		bool? Explain { get; set; }
 
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
 		[JsonProperty("field")]
 		Field Field { get; set; }
+
+		///<summary>A collection of filters to use for the analysis</summary>
+		[JsonProperty("filter")]
+		AnalyzeTokenFilters Filter { get; set; }
+
+		///<summary>The name of the normalizer to use</summary>
+		[JsonProperty("normalizer")]
+		string Normalizer { get; set; }
 
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
 		[JsonProperty("text")]
@@ -36,64 +44,53 @@ namespace Nest
 		///<summary>The name of the tokenizer to use for the analysis</summary>
 		[JsonProperty("tokenizer")]
 		Union<string, ITokenizer> Tokenizer { get; set; }
-
-		///<summary>Return more details, and output the analyzer chain per step in the process</summary>
-		[JsonProperty("explain")]
-		bool? Explain { get; set; }
-
-		///<summary>Filter only certain token attributes to be returned</summary>
-		[JsonProperty("attributes")]
-		IEnumerable<string> Attributes { get; set; }
 	}
 
 	public partial class AnalyzeRequest
 	{
 		public AnalyzeRequest(IndexName indices, string textToAnalyze)
-			: this(indices)
-		{
-			this.Text = new[] { textToAnalyze };
-		}
-
-		/// <inheritdoc />
-		public Union<string, ITokenizer> Tokenizer { get; set; }
+			: this(indices) => Text = new[] { textToAnalyze };
 
 		/// <inheritdoc />
 		public string Analyzer { get; set; }
 
 		/// <inheritdoc />
+		public IEnumerable<string> Attributes { get; set; }
+
+		/// <inheritdoc />
+		public AnalyzeCharFilters CharFilter { get; set; }
+
+		/// <inheritdoc />
 		public bool? Explain { get; set; }
 
 		/// <inheritdoc />
-		public IEnumerable<string> Attributes { get; set; }
+		public Field Field { get; set; }
 
-	    /// <inheritdoc />
-		public AnalyzeCharFilters CharFilter { get; set; }
-
-	    /// <inheritdoc />
+		/// <inheritdoc />
 		public AnalyzeTokenFilters Filter { get; set; }
 
 		/// <inheritdoc />
 		public string Normalizer { get; set; }
 
 		/// <inheritdoc />
-		public Field Field { get; set; }
+		public IEnumerable<string> Text { get; set; }
 
 		/// <inheritdoc />
-		public IEnumerable<string> Text { get; set; }
+		public Union<string, ITokenizer> Tokenizer { get; set; }
 	}
 
 	[DescriptorFor("IndicesAnalyze")]
 	public partial class AnalyzeDescriptor
 	{
 		string IAnalyzeRequest.Analyzer { get; set; }
+		IEnumerable<string> IAnalyzeRequest.Attributes { get; set; }
 		AnalyzeCharFilters IAnalyzeRequest.CharFilter { get; set; }
+		bool? IAnalyzeRequest.Explain { get; set; }
+		Field IAnalyzeRequest.Field { get; set; }
 		AnalyzeTokenFilters IAnalyzeRequest.Filter { get; set; }
 		string IAnalyzeRequest.Normalizer { get; set; }
-		Field IAnalyzeRequest.Field { get; set; }
 		IEnumerable<string> IAnalyzeRequest.Text { get; set; }
 		Union<string, ITokenizer> IAnalyzeRequest.Tokenizer { get; set; }
-		bool? IAnalyzeRequest.Explain { get; set; }
-		IEnumerable<string> IAnalyzeRequest.Attributes { get; set; }
 
 		///<summary>The name of the tokenizer to use for the analysis</summary>
 		public AnalyzeDescriptor Tokenizer(string tokenizer) => Assign(a => a.Tokenizer = tokenizer);

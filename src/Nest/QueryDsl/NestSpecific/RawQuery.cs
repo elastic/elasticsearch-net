@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace Nest
+﻿namespace Nest
 {
 	public interface IRawQuery : IQuery
 	{
@@ -11,28 +8,24 @@ namespace Nest
 	public class RawQuery : QueryBase, IRawQuery
 	{
 		public RawQuery() { }
-		public RawQuery(string rawQuery)
-		{
-			this.Raw = rawQuery;
-		}
+
+		public RawQuery(string rawQuery) => Raw = rawQuery;
+
 		public string Raw { get; set; }
 
-		protected override bool Conditionless => this.Raw.IsNullOrEmpty();
+		protected override bool Conditionless => Raw.IsNullOrEmpty();
+
 		internal override void InternalWrapInContainer(IQueryContainer container) => container.RawQuery = this;
 	}
 
-	public class RawQueryDescriptor : QueryDescriptorBase<RawQueryDescriptor, IRawQuery> , IRawQuery
+	public class RawQueryDescriptor : QueryDescriptorBase<RawQueryDescriptor, IRawQuery>, IRawQuery
 	{
-		string IRawQuery.Raw { get; set; }
+		public RawQueryDescriptor() { }
 
-		public RawQueryDescriptor() {}
-
-		public RawQueryDescriptor(string rawQuery)
-		{
-			Self.Raw = rawQuery;
-		}
+		public RawQueryDescriptor(string rawQuery) => Self.Raw = rawQuery;
 
 		protected override bool Conditionless => Self.Raw.IsNullOrEmpty();
+		string IRawQuery.Raw { get; set; }
 
 		public RawQueryDescriptor Raw(string rawQuery) =>
 			Assign(a => a.Raw = rawQuery);

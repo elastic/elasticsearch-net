@@ -6,9 +6,10 @@ namespace Nest
 {
 	internal class TokenizerJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => true;
-		public override bool CanWrite => false;
 		public override bool CanRead => true;
+		public override bool CanWrite => false;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -18,7 +19,7 @@ namespace Nest
 			if (typeProperty == null) return null;
 
 			var typePropertyValue = typeProperty.Value.ToString();
-			switch(typePropertyValue.ToLowerInvariant())
+			switch (typePropertyValue.ToLowerInvariant())
 			{
 				case "edgengram":
 				case "edge_ngram": return o.ToObject<EdgeNGramTokenizer>(ElasticContractResolver.Empty);
@@ -34,9 +35,6 @@ namespace Nest
 			return null;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 	}
 }

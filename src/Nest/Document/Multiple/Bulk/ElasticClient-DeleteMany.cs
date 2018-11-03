@@ -12,14 +12,16 @@ namespace Nest
 	{
 		/// <summary>
 		/// Shortcut into the Bulk call that deletes the specified objects
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// <para> </para>
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <param name="client"></param>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="objects">List of objects to delete</param>
 		/// <param name="index">Override the inferred indexname for T</param>
 		/// <param name="type">Override the inferred typename for T</param>
-		public static IBulkResponse DeleteMany<T>(this IElasticClient client, IEnumerable<T> @objects, IndexName index = null, TypeName type = null) where T : class
+		public static IBulkResponse DeleteMany<T>(this IElasticClient client, IEnumerable<T> @objects, IndexName index = null, TypeName type = null)
+			where T : class
 		{
 			var bulkRequest = CreateDeleteBulkRequest(objects, index, type);
 			return client.Bulk(bulkRequest);
@@ -28,14 +30,17 @@ namespace Nest
 
 		/// <summary>
 		/// Shortcut into the Bulk call that deletes the specified objects
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// <para> </para>
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <param name="client"></param>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="objects">List of objects to delete</param>
 		/// <param name="index">Override the inferred indexname for T</param>
 		/// <param name="type">Override the inferred typename for T</param>
-		public static Task<IBulkResponse> DeleteManyAsync<T>(this IElasticClient client, IEnumerable<T> objects, IndexName index = null, TypeName type = null, CancellationToken cancellationToken = default(CancellationToken))
+		public static Task<IBulkResponse> DeleteManyAsync<T>(this IElasticClient client, IEnumerable<T> objects, IndexName index = null,
+			TypeName type = null, CancellationToken cancellationToken = default(CancellationToken)
+		)
 			where T : class
 		{
 			var bulkRequest = CreateDeleteBulkRequest(objects, index, type);

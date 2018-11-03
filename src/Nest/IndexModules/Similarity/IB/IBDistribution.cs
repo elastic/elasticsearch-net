@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "ll")]
 		LogLogistic,
+
 		[EnumMember(Value = "spl")]
 		SmoothPowerLaw,
 	}

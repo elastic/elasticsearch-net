@@ -13,39 +13,46 @@ namespace Nest
 		/// </summary>
 		IPutDatafeedResponse PutDatafeed<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null) where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IPutDatafeedResponse PutDatafeed(IPutDatafeedRequest request);
 
-		/// <inheritdoc/>
-		Task<IPutDatafeedResponse> PutDatafeedAsync<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		/// <inheritdoc />
+		Task<IPutDatafeedResponse> PutDatafeedAsync<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IPutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
-		public IPutDatafeedResponse PutDatafeed<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null) where T : class =>
-			this.PutDatafeed(selector.InvokeOrDefault(new PutDatafeedDescriptor<T>(datafeedId)));
+		/// <inheritdoc />
+		public IPutDatafeedResponse PutDatafeed<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null)
+			where T : class =>
+			PutDatafeed(selector.InvokeOrDefault(new PutDatafeedDescriptor<T>(datafeedId)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IPutDatafeedResponse PutDatafeed(IPutDatafeedRequest request) =>
-			this.Dispatcher.Dispatch<IPutDatafeedRequest, PutDatafeedRequestParameters, PutDatafeedResponse>(
+			Dispatcher.Dispatch<IPutDatafeedRequest, PutDatafeedRequestParameters, PutDatafeedResponse>(
 				request,
-				this.LowLevelDispatch.XpackMlPutDatafeedDispatch<PutDatafeedResponse>
+				LowLevelDispatch.XpackMlPutDatafeedDispatch<PutDatafeedResponse>
 			);
 
-		/// <inheritdoc/>
-		public Task<IPutDatafeedResponse> PutDatafeedAsync<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
-			this.PutDatafeedAsync(selector.InvokeOrDefault(new PutDatafeedDescriptor<T>(datafeedId)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IPutDatafeedResponse> PutDatafeedAsync<T>(Id datafeedId, Func<PutDatafeedDescriptor<T>, IPutDatafeedRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class =>
+			PutDatafeedAsync(selector.InvokeOrDefault(new PutDatafeedDescriptor<T>(datafeedId)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IPutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IPutDatafeedRequest, PutDatafeedRequestParameters, PutDatafeedResponse, IPutDatafeedResponse>(
+		/// <inheritdoc />
+		public Task<IPutDatafeedResponse> PutDatafeedAsync(IPutDatafeedRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IPutDatafeedRequest, PutDatafeedRequestParameters, PutDatafeedResponse, IPutDatafeedResponse>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.XpackMlPutDatafeedDispatchAsync<PutDatafeedResponse>
+				LowLevelDispatch.XpackMlPutDatafeedDispatchAsync<PutDatafeedResponse>
 			);
 	}
 }

@@ -7,20 +7,18 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<TimeOfMonth>))]
 	public interface ITimeOfMonth
 	{
-		[JsonProperty("on")]
-		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<int>))]
-		IEnumerable<int> On { get; set; }
-
 		[JsonProperty("at")]
 		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<string>))]
 		IEnumerable<string> At { get; set; }
+
+		[JsonProperty("on")]
+		[JsonConverter(typeof(ReadSingleOrEnumerableJsonConverter<int>))]
+		IEnumerable<int> On { get; set; }
 	}
 
 	public class TimeOfMonth : ITimeOfMonth
 	{
-		public TimeOfMonth()
-		{
-		}
+		public TimeOfMonth() { }
 
 		public TimeOfMonth(int on, string at)
 		{
@@ -28,15 +26,15 @@ namespace Nest
 			At = new[] { at };
 		}
 
-		public IEnumerable<int> On { get; set; }
-
 		public IEnumerable<string> At { get; set; }
+
+		public IEnumerable<int> On { get; set; }
 	}
 
 	public class TimeOfMonthDescriptor : DescriptorBase<TimeOfMonthDescriptor, ITimeOfMonth>, ITimeOfMonth
 	{
-		IEnumerable<int> ITimeOfMonth.On { get; set; }
 		IEnumerable<string> ITimeOfMonth.At { get; set; }
+		IEnumerable<int> ITimeOfMonth.On { get; set; }
 
 		public TimeOfMonthDescriptor On(IEnumerable<int> dates) => Assign(a => a.On = dates);
 

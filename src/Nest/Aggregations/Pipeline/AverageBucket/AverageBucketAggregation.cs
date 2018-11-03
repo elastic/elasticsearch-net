@@ -9,7 +9,7 @@ namespace Nest
 	public class AverageBucketAggregation
 		: PipelineAggregationBase, IAverageBucketAggregation
 	{
-		internal AverageBucketAggregation () { }
+		internal AverageBucketAggregation() { }
 
 		public AverageBucketAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
@@ -19,7 +19,5 @@ namespace Nest
 
 	public class AverageBucketAggregationDescriptor
 		: PipelineAggregationDescriptorBase<AverageBucketAggregationDescriptor, IAverageBucketAggregation, SingleBucketsPath>
-		, IAverageBucketAggregation
-	{
-	}
+			, IAverageBucketAggregation { }
 }

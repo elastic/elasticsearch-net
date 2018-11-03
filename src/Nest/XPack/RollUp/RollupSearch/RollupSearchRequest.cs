@@ -6,33 +6,35 @@ namespace Nest
 	[MapsApi("xpack.rollup.rollup_search.json")]
 	public partial interface IRollupSearchRequest
 	{
-		/// <summary>When doing rollup searches against rolled up and live indices size needs to be set to 0 explicitly </summary>
-		[JsonProperty("size")]
-		int? Size { get; set; }
+		/// <summary> Describe the aggregations to perform</summary>
+		[JsonProperty("aggs")]
+		AggregationDictionary Aggregations { get; set; }
 
 		/// <summary> Describe the query to perform using a query descriptor lambda</summary>
 		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
 
-		/// <summary> Describe the aggregations to perform</summary>
-		[JsonProperty("aggs")]
-		AggregationDictionary Aggregations { get; set; }
+		/// <summary>When doing rollup searches against rolled up and live indices size needs to be set to 0 explicitly </summary>
+		[JsonProperty("size")]
+		int? Size { get; set; }
 	}
 
 	public partial class RollupSearchRequest
 	{
 		/// <inheritdoc />
-		public int? Size { get; set; }
+		public AggregationDictionary Aggregations { get; set; }
+
 		/// <inheritdoc />
 		public QueryContainer Query { get; set; }
+
 		/// <inheritdoc />
-		public AggregationDictionary Aggregations { get; set; }
+		public int? Size { get; set; }
 	}
 
 	public partial class RollupSearchDescriptor<T> where T : class
 	{
-		QueryContainer IRollupSearchRequest.Query { get; set; }
 		AggregationDictionary IRollupSearchRequest.Aggregations { get; set; }
+		QueryContainer IRollupSearchRequest.Query { get; set; }
 		int? IRollupSearchRequest.Size { get; set; }
 
 		/// <inheritdoc cref="IRollupSearchRequest.Size" />

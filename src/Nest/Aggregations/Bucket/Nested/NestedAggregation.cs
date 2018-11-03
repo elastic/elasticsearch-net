@@ -9,16 +9,16 @@ namespace Nest
 	public interface INestedAggregation : IBucketAggregation
 	{
 		[JsonProperty("path")]
-		Field Path { get; set;}
+		Field Path { get; set; }
 	}
 
 	public class NestedAggregation : BucketAggregationBase, INestedAggregation
 	{
-		public Field Path { get; set; }
-
 		internal NestedAggregation() { }
 
 		public NestedAggregation(string name) : base(name) { }
+
+		public Field Path { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Nested = this;
 	}

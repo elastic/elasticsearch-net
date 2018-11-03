@@ -10,47 +10,41 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MoreLikeThisQueryDescriptor<object>>))]
 	public interface IMoreLikeThisQuery : IQuery
 	{
-		[JsonProperty("fields")]
-		Fields Fields { get; set; }
-
-		[JsonProperty("like")]
-		IEnumerable<Like> Like { get; set; }
-
-		[JsonProperty("unlike")]
-		IEnumerable<Like> Unlike { get; set; }
-
-		[JsonProperty("max_query_terms")]
-		int? MaxQueryTerms { get; set; }
-
-		[JsonProperty("min_term_freq")]
-		int? MinTermFrequency { get; set; }
-
-		[JsonProperty("min_doc_freq")]
-		int? MinDocumentFrequency { get; set; }
-
-		[JsonProperty("max_doc_freq")]
-		int? MaxDocumentFrequency { get; set; }
-
-		[JsonProperty("min_word_length")]
-		int? MinWordLength { get; set; }
-
-		[JsonProperty("max_word_length")]
-		int? MaxWordLength { get; set; }
-
-		[JsonProperty("stop_words")]
-		StopWords StopWords { get; set; }
-
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
-
-		[JsonProperty("minimum_should_match")]
-		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		[JsonProperty("boost_terms")]
 		double? BoostTerms { get; set; }
 
+		[JsonProperty("fields")]
+		Fields Fields { get; set; }
+
 		[JsonProperty("include")]
 		bool? Include { get; set; }
+
+		[JsonProperty("like")]
+		IEnumerable<Like> Like { get; set; }
+
+		[JsonProperty("max_doc_freq")]
+		int? MaxDocumentFrequency { get; set; }
+
+		[JsonProperty("max_query_terms")]
+		int? MaxQueryTerms { get; set; }
+
+		[JsonProperty("max_word_length")]
+		int? MaxWordLength { get; set; }
+
+		[JsonProperty("min_doc_freq")]
+		int? MinDocumentFrequency { get; set; }
+
+		[JsonProperty("minimum_should_match")]
+		MinimumShouldMatch MinimumShouldMatch { get; set; }
+
+		[JsonProperty("min_term_freq")]
+		int? MinTermFrequency { get; set; }
+
+		[JsonProperty("min_word_length")]
+		int? MinWordLength { get; set; }
 
 		/// <summary>
 		/// Provide a different analyzer than the one at the field.
@@ -59,68 +53,78 @@ namespace Nest
 		[JsonProperty("per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
+		[JsonProperty("routing")]
+		Routing Routing { get; set; }
+
+		[JsonProperty("stop_words")]
+		StopWords StopWords { get; set; }
+
+		[JsonProperty("unlike")]
+		IEnumerable<Like> Unlike { get; set; }
+
 		[JsonProperty("version")]
 		long? Version { get; set; }
 
 		[JsonProperty("version_type")]
 		VersionType? VersionType { get; set; }
-
-		[JsonProperty("routing")]
-		Routing Routing { get; set; }
 	}
 
 	public class MoreLikeThisQuery : QueryBase, IMoreLikeThisQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
-		public Fields Fields { get; set; }
-		public double? TermMatchPercentage { get; set; }
-		public MinimumShouldMatch MinimumShouldMatch { get; set; }
-		public StopWords StopWords { get; set; }
-		public int? MinTermFrequency { get; set; }
-		public int? MaxQueryTerms { get; set; }
-		public int? MinDocumentFrequency { get; set; }
-		public int? MaxDocumentFrequency { get; set; }
-		public int? MinWordLength { get; set; }
-		public int? MaxWordLength { get; set; }
-		public double? BoostTerms { get; set; }
 		public string Analyzer { get; set; }
+		public double? BoostTerms { get; set; }
+		public Fields Fields { get; set; }
 		public bool? Include { get; set; }
 		public IEnumerable<Like> Like { get; set; }
-		public IEnumerable<Like> Unlike { get; set; }
-		/// <inheritdoc/>
+		public int? MaxDocumentFrequency { get; set; }
+		public int? MaxQueryTerms { get; set; }
+		public int? MaxWordLength { get; set; }
+		public int? MinDocumentFrequency { get; set; }
+		public MinimumShouldMatch MinimumShouldMatch { get; set; }
+		public int? MinTermFrequency { get; set; }
+		public int? MinWordLength { get; set; }
+
+		/// <inheritdoc />
 		public IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
+
+		public Routing Routing { get; set; }
+		public StopWords StopWords { get; set; }
+		public double? TermMatchPercentage { get; set; }
+		public IEnumerable<Like> Unlike { get; set; }
 
 		public long? Version { get; set; }
 		public VersionType? VersionType { get; set; }
-		public Routing Routing { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.MoreLikeThis = this;
-		internal static bool IsConditionless(IMoreLikeThisQuery q) => q.Fields.IsConditionless() || (!q.Like.HasAny() || q.Like.All(Nest.Like.IsConditionless));
+
+		internal static bool IsConditionless(IMoreLikeThisQuery q) =>
+			q.Fields.IsConditionless() || !q.Like.HasAny() || q.Like.All(Nest.Like.IsConditionless);
 	}
 
 	public class MoreLikeThisQueryDescriptor<T>
 		: QueryDescriptorBase<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery>
-		, IMoreLikeThisQuery where T : class
+			, IMoreLikeThisQuery where T : class
 	{
 		protected override bool Conditionless => MoreLikeThisQuery.IsConditionless(this);
-		Fields IMoreLikeThisQuery.Fields { get; set; }
-		MinimumShouldMatch IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
-		StopWords IMoreLikeThisQuery.StopWords { get; set; }
-		int? IMoreLikeThisQuery.MinTermFrequency { get; set; }
-		int? IMoreLikeThisQuery.MaxQueryTerms { get; set; }
-		int? IMoreLikeThisQuery.MinDocumentFrequency { get; set; }
-		int? IMoreLikeThisQuery.MaxDocumentFrequency { get; set; }
-		int? IMoreLikeThisQuery.MinWordLength { get; set; }
-		int? IMoreLikeThisQuery.MaxWordLength { get; set; }
-		double? IMoreLikeThisQuery.BoostTerms { get; set; }
 		string IMoreLikeThisQuery.Analyzer { get; set; }
+		double? IMoreLikeThisQuery.BoostTerms { get; set; }
+		Fields IMoreLikeThisQuery.Fields { get; set; }
 		bool? IMoreLikeThisQuery.Include { get; set; }
+		IEnumerable<Like> IMoreLikeThisQuery.Like { get; set; }
+		int? IMoreLikeThisQuery.MaxDocumentFrequency { get; set; }
+		int? IMoreLikeThisQuery.MaxQueryTerms { get; set; }
+		int? IMoreLikeThisQuery.MaxWordLength { get; set; }
+		int? IMoreLikeThisQuery.MinDocumentFrequency { get; set; }
+		MinimumShouldMatch IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
+		int? IMoreLikeThisQuery.MinTermFrequency { get; set; }
+		int? IMoreLikeThisQuery.MinWordLength { get; set; }
 		IPerFieldAnalyzer IMoreLikeThisQuery.PerFieldAnalyzer { get; set; }
+		Routing IMoreLikeThisQuery.Routing { get; set; }
+		StopWords IMoreLikeThisQuery.StopWords { get; set; }
+		IEnumerable<Like> IMoreLikeThisQuery.Unlike { get; set; }
 		long? IMoreLikeThisQuery.Version { get; set; }
 		VersionType? IMoreLikeThisQuery.VersionType { get; set; }
-		Routing IMoreLikeThisQuery.Routing { get; set; }
-		IEnumerable<Like> IMoreLikeThisQuery.Like { get; set; }
-		IEnumerable<Like> IMoreLikeThisQuery.Unlike { get; set; }
 
 		public MoreLikeThisQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
@@ -140,9 +144,11 @@ namespace Nest
 
 		public MoreLikeThisQueryDescriptor<T> MinTermFrequency(int? minTermFrequency) => Assign(a => a.MinTermFrequency = minTermFrequency);
 
-		public MoreLikeThisQueryDescriptor<T> MinDocumentFrequency(int? minDocumentFrequency) => Assign(a => a.MinDocumentFrequency = minDocumentFrequency);
+		public MoreLikeThisQueryDescriptor<T> MinDocumentFrequency(int? minDocumentFrequency) =>
+			Assign(a => a.MinDocumentFrequency = minDocumentFrequency);
 
-		public MoreLikeThisQueryDescriptor<T> MaxDocumentFrequency(int? maxDocumentFrequency) => Assign(a => a.MaxDocumentFrequency = maxDocumentFrequency);
+		public MoreLikeThisQueryDescriptor<T> MaxDocumentFrequency(int? maxDocumentFrequency) =>
+			Assign(a => a.MaxDocumentFrequency = maxDocumentFrequency);
 
 		public MoreLikeThisQueryDescriptor<T> MinWordLength(int? minWordLength) => Assign(a => a.MinWordLength = minWordLength);
 

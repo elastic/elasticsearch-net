@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "cw")]
 		ClockWise,
+
 		[EnumMember(Value = "ccw")]
 		CounterClockWise
 	}

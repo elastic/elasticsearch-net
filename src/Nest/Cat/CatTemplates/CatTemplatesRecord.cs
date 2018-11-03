@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject]
 	public class CatTemplatesRecord : ICatRecord
 	{
-		[JsonProperty("name")]
-		public string Name { get; set; }
-
 		[JsonProperty("index_patterns")]
 		public string IndexPatterns { get; set; }
+
+		[JsonProperty("name")]
+		public string Name { get; set; }
 
 		[JsonProperty("order")]
 		public long Order { get; set; }

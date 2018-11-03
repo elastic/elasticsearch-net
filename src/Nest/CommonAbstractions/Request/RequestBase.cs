@@ -33,42 +33,40 @@ namespace Nest
 
 	public abstract class RequestBase<TParameters> : IRequest<TParameters> where TParameters : IRequestParameters, new()
 	{
-		[JsonIgnore]
-		protected IRequest<TParameters> RequestState => this;
+		protected RequestBase() => Initialize();
 
-		protected RequestBase()
-		{
-			Initialize();
-		}
 		protected RequestBase(Func<RouteValues, RouteValues> pathSelector)
 		{
 			pathSelector(RequestState.RouteValues);
 			Initialize();
 		}
 
-		protected virtual void Initialize() { }
-
 		protected virtual HttpMethod HttpMethod => RequestState.RequestParameters.DefaultHttpMethod;
 
 		[JsonIgnore]
-		HttpMethod IRequest.HttpMethod => this.HttpMethod;
+		protected IRequest<TParameters> RequestState => this;
 
 		[JsonIgnore]
-		RouteValues IRequest.RouteValues { get; } = new RouteValues();
+		HttpMethod IRequest.HttpMethod => HttpMethod;
 
 		[JsonIgnore]
 		TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
 
+		[JsonIgnore]
+		RouteValues IRequest.RouteValues { get; } = new RouteValues();
+
+		protected virtual void Initialize() { }
+
 		protected TOut Q<TOut>(string name) => RequestState.RequestParameters.GetQueryStringValue<TOut>(name);
 
 		protected void Q(string name, object value) => RequestState.RequestParameters.SetQueryString(name, value);
-
 	}
 
 	public abstract partial class PlainRequestBase<TParameters> : RequestBase<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		protected PlainRequestBase() { }
+
 		protected PlainRequestBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) { }
 
 		/// <summary>
@@ -81,31 +79,34 @@ namespace Nest
 		}
 	}
 
-	///<summary>
-	/// Base class for all Request descriptor types
-	///</summary>
+	/// <summary>
+	///  Base class for all Request descriptor types
+	/// </summary>
 	public abstract partial class RequestDescriptorBase<TDescriptor, TParameters, TInterface> : RequestBase<TParameters>, IDescriptor
 		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters, TInterface>, TInterface
 		where TParameters : RequestParameters<TParameters>, new()
 	{
 		private readonly TDescriptor _descriptor;
 
-		protected RequestDescriptorBase() { _descriptor = (TDescriptor)this; }
-		protected RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) { _descriptor = (TDescriptor)this;  }
+		protected RequestDescriptorBase() => _descriptor = (TDescriptor)this;
+
+		protected RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) => _descriptor = (TDescriptor)this;
+
+		protected IRequestConfiguration RequestConfig => ((IRequestParameters)RequestState.RequestParameters).RequestConfiguration;
 
 		protected TInterface Self => _descriptor;
-		protected IRequestConfiguration RequestConfig => ((IRequestParameters)RequestState.RequestParameters).RequestConfiguration;
 
 		protected TDescriptor Assign(Action<TInterface> assign) => Fluent.Assign(_descriptor, assign);
 
 		protected TDescriptor AssignParam(Action<TParameters> assigner)
 		{
-			assigner?.Invoke(this.RequestState.RequestParameters);
+			assigner?.Invoke(RequestState.RequestParameters);
 			return _descriptor;
 		}
+
 		protected TDescriptor Qs(Action<TParameters> assigner)
 		{
-			assigner?.Invoke(this.RequestState.RequestParameters);
+			assigner?.Invoke(RequestState.RequestParameters);
 			return _descriptor;
 		}
 
@@ -126,21 +127,21 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Hides the <see cref="Equals"/> method.
+		/// Hides the <see cref="Equals" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public override bool Equals(object obj) => base.Equals(obj);
 
 		/// <summary>
-		/// Hides the <see cref="GetHashCode"/> method.
+		/// Hides the <see cref="GetHashCode" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public override int GetHashCode() => base.GetHashCode();
 
 		/// <summary>
-		/// Hides the <see cref="ToString"/> method.
+		/// Hides the <see cref="ToString" /> method.
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]

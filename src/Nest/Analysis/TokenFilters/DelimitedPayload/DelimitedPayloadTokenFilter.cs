@@ -18,23 +18,21 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("encoding")]
 		DelimitedPayloadEncoding? Encoding { get; set; }
-
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class DelimitedPayloadTokenFilter : TokenFilterBase, IDelimitedPayloadTokenFilter
 	{
 		public DelimitedPayloadTokenFilter() : base("delimited_payload") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public char? Delimiter { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public DelimitedPayloadEncoding? Encoding { get; set; }
-
 	}
 
-	///<inheritdoc/>
+	/// <inheritdoc />
 	public class DelimitedPayloadTokenFilterDescriptor
 		: TokenFilterDescriptorBase<DelimitedPayloadTokenFilterDescriptor, IDelimitedPayloadTokenFilter>, IDelimitedPayloadTokenFilter
 	{
@@ -43,12 +41,10 @@ namespace Nest
 		char? IDelimitedPayloadTokenFilter.Delimiter { get; set; }
 		DelimitedPayloadEncoding? IDelimitedPayloadTokenFilter.Encoding { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public DelimitedPayloadTokenFilterDescriptor Delimiter(char? delimiter) => Assign(a => a.Delimiter = delimiter);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public DelimitedPayloadTokenFilterDescriptor Encoding(DelimitedPayloadEncoding? encoding) => Assign(a => a.Encoding = encoding);
-
 	}
-
 }

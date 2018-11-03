@@ -19,7 +19,8 @@ namespace Nest
 				writer.WriteStartObject();
 				writer.WriteEndObject();
 				return;
-			};
+			}
+			;
 
 			serializer.Serialize(writer, f.Filter);
 		}
@@ -27,6 +28,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartObject) return null;
+
 			var container = new QueryContainer();
 			serializer.Populate(reader, container);
 			var agg = new FilterAggregation();
@@ -34,5 +36,4 @@ namespace Nest
 			return agg;
 		}
 	}
-
 }

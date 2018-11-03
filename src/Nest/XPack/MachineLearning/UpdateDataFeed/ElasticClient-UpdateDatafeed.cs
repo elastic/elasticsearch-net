@@ -10,41 +10,52 @@ namespace Nest
 		/// <summary>
 		/// Update a machine learning datafeed.
 		/// </summary>
-		IUpdateDatafeedResponse UpdateDatafeed<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null) where T : class;
+		IUpdateDatafeedResponse UpdateDatafeed<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null)
+			where T : class;
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IUpdateDatafeedResponse UpdateDatafeed(IUpdateDatafeedRequest request);
 
-		/// <inheritdoc/>
-		Task<IUpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
+		/// <inheritdoc />
+		Task<IUpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class;
 
-		/// <inheritdoc/>
-		Task<IUpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IUpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
-		public IUpdateDatafeedResponse UpdateDatafeed<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null) where T : class =>
-			this.UpdateDatafeed(selector.InvokeOrDefault(new UpdateDatafeedDescriptor<T>(datafeedId)));
+		/// <inheritdoc />
+		public IUpdateDatafeedResponse UpdateDatafeed<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null)
+			where T : class =>
+			UpdateDatafeed(selector.InvokeOrDefault(new UpdateDatafeedDescriptor<T>(datafeedId)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IUpdateDatafeedResponse UpdateDatafeed(IUpdateDatafeedRequest request) =>
-			this.Dispatcher.Dispatch<IUpdateDatafeedRequest, UpdateDatafeedRequestParameters, UpdateDatafeedResponse>(
+			Dispatcher.Dispatch<IUpdateDatafeedRequest, UpdateDatafeedRequestParameters, UpdateDatafeedResponse>(
 				request,
-				this.LowLevelDispatch.XpackMlUpdateDatafeedDispatch<UpdateDatafeedResponse>
+				LowLevelDispatch.XpackMlUpdateDatafeedDispatch<UpdateDatafeedResponse>
 			);
 
-		/// <inheritdoc/>
-		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId, Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
-			this.UpdateDatafeedAsync(selector.InvokeOrDefault(new UpdateDatafeedDescriptor<T>(datafeedId)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync<T>(Id datafeedId,
+			Func<UpdateDatafeedDescriptor<T>, IUpdateDatafeedRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class =>
+			UpdateDatafeedAsync(selector.InvokeOrDefault(new UpdateDatafeedDescriptor<T>(datafeedId)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IUpdateDatafeedRequest, UpdateDatafeedRequestParameters, UpdateDatafeedResponse, IUpdateDatafeedResponse>(
+		/// <inheritdoc />
+		public Task<IUpdateDatafeedResponse> UpdateDatafeedAsync(IUpdateDatafeedRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IUpdateDatafeedRequest, UpdateDatafeedRequestParameters, UpdateDatafeedResponse, IUpdateDatafeedResponse>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.XpackMlUpdateDatafeedDispatchAsync<UpdateDatafeedResponse>
+				LowLevelDispatch.XpackMlUpdateDatafeedDispatchAsync<UpdateDatafeedResponse>
 			);
 	}
 }

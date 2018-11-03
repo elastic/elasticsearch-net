@@ -25,6 +25,7 @@ namespace Nest
 				reader.Read();
 				var typedProperty = reader.Value as string;
 				if (typedProperty.IsNullOrEmpty()) break;
+
 				var tokens = AggregateDictionary.TypedKeyTokens(typedProperty);
 				if (tokens.Length == 1)
 					ParseAggregate(reader, serializer, tokens[0], dictionary);
@@ -51,7 +52,9 @@ namespace Nest
 			}
 		}
 
-		private static void ReadAggregate<TAggregate>(JsonReader reader, JsonSerializer serializer, Dictionary<string, IAggregate> dictionary, string name)
+		private static void ReadAggregate<TAggregate>(JsonReader reader, JsonSerializer serializer, Dictionary<string, IAggregate> dictionary,
+			string name
+		)
 			where TAggregate : IAggregate
 		{
 			reader.Read();

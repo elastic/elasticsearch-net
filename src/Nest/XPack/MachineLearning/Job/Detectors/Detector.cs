@@ -11,6 +11,9 @@ namespace Nest
 		[JsonProperty("detector_description")]
 		string DetectorDescription { get; set; }
 
+		[JsonProperty("detector_index")]
+		int? DetectorIndex { get; set; }
+
 		[JsonProperty("exclude_frequent")]
 		ExcludeFrequent? ExcludeFrequent { get; set; }
 
@@ -19,9 +22,6 @@ namespace Nest
 
 		[JsonProperty("use_null")]
 		bool? UseNull { get; set; }
-
-		[JsonProperty("detector_index")]
-		int? DetectorIndex { get; set; }
 	}
 
 	internal class DetectorConverter : JsonConverter
@@ -96,7 +96,7 @@ namespace Nest
 				case "freq_rare":
 					return jObject.ToObject<FreqRareDetector>(ElasticContractResolver.Empty);
 				case "sum":
-					 return jObject.ToObject<SumDetector>(ElasticContractResolver.Empty);
+					return jObject.ToObject<SumDetector>(ElasticContractResolver.Empty);
 				case "high_sum":
 					return jObject.ToObject<HighSumDetector>(ElasticContractResolver.Empty);
 				case "low_sum":
@@ -145,31 +145,29 @@ namespace Nest
 
 	public abstract class DetectorBase : IDetector
 	{
-		protected DetectorBase(string function)
-		{
-			Function = function;
-		}
+		protected DetectorBase(string function) => Function = function;
 
 		public string DetectorDescription { get; set; }
+		public int? DetectorIndex { get; set; }
 		public ExcludeFrequent? ExcludeFrequent { get; set; }
 		public string Function { get; }
 		public bool? UseNull { get; set; }
-		public int? DetectorIndex { get; set; }
 	}
 
-	public abstract class DetectorDescriptorBase<TDetectorDescriptor, TDetectorInterface> : DescriptorBase<TDetectorDescriptor, TDetectorInterface>, IDetector
+	public abstract class DetectorDescriptorBase<TDetectorDescriptor, TDetectorInterface>
+		: DescriptorBase<TDetectorDescriptor, TDetectorInterface>, IDetector
 		where TDetectorDescriptor : DetectorDescriptorBase<TDetectorDescriptor, TDetectorInterface>, TDetectorInterface
 		where TDetectorInterface : class, IDetector
 	{
 		private readonly string _function;
 
+		protected DetectorDescriptorBase(string function) => _function = function;
+
 		string IDetector.DetectorDescription { get; set; }
+		int? IDetector.DetectorIndex { get; set; }
 		ExcludeFrequent? IDetector.ExcludeFrequent { get; set; }
 		string IDetector.Function => _function;
 		bool? IDetector.UseNull { get; set; }
-		int? IDetector.DetectorIndex { get; set; }
-
-		protected DetectorDescriptorBase(string function) => _function = function;
 
 		public TDetectorDescriptor DetectorDescription(string description) => Assign(a => a.DetectorDescription = description);
 
@@ -182,7 +180,7 @@ namespace Nest
 
 	public class DetectorsDescriptor<T> : DescriptorPromiseBase<DetectorsDescriptor<T>, IList<IDetector>> where T : class
 	{
-		public DetectorsDescriptor() : base(new List<IDetector>()) {}
+		public DetectorsDescriptor() : base(new List<IDetector>()) { }
 
 		public DetectorsDescriptor<T> Count(Func<CountDetectorDescriptor<T>, ICountDetector> selector = null) =>
 			Assign(a => a.AddIfNotNull(selector.InvokeOrDefault(new CountDetectorDescriptor<T>(CountFunction.Count))));

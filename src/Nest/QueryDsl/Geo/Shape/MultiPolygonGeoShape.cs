@@ -12,10 +12,10 @@ namespace Nest
 
 	public class MultiPolygonGeoShape : GeoShapeBase, IMultiPolygonGeoShape
 	{
-		internal MultiPolygonGeoShape() : base("multipolygon")  { }
+		internal MultiPolygonGeoShape() : base("multipolygon") { }
 
 		public MultiPolygonGeoShape(IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> coordinates) : this() =>
-			this.Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
+			Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
 
 		public IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> Coordinates { get; set; }
 	}

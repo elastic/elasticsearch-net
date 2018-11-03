@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -22,27 +19,27 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class PipelineSimulation
 	{
+		[JsonProperty("doc")]
+		public DocumentSimulation Document { get; internal set; }
+
 		[JsonProperty("processor_results")]
 		public IReadOnlyCollection<PipelineSimulation> ProcessorResults { get; internal set; } = EmptyReadOnly<PipelineSimulation>.Collection;
 
 		[JsonProperty("tag")]
 		public string Tag { get; internal set; }
-
-		[JsonProperty("doc")]
-		public DocumentSimulation Document { get; internal set; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
 	public class DocumentSimulation
 	{
+		[JsonProperty("_id")]
+		public string Id { get; internal set; }
+
 		[JsonProperty("_index")]
 		public string Index { get; internal set; }
 
-		[JsonProperty("_type")]
-		public string Type { get; internal set; }
-
-		[JsonProperty("_id")]
-		public string Id { get; internal set; }
+		[JsonProperty("_ingest")]
+		public Ingest Ingest { get; internal set; }
 
 		[JsonProperty("_parent")]
 		public string Parent { get; internal set; }
@@ -53,8 +50,8 @@ namespace Nest
 		[JsonProperty("_source")]
 		public ILazyDocument Source { get; internal set; }
 
-		[JsonProperty("_ingest")]
-		public Ingest Ingest { get; internal set; }
+		[JsonProperty("_type")]
+		public string Type { get; internal set; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
