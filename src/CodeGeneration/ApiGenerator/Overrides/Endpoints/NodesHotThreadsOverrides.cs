@@ -7,7 +7,7 @@ namespace ApiGenerator.Overrides.Endpoints
 	{
 		public override IDictionary<string, string> RenameQueryStringParams => new Dictionary<string, string>
 		{
-			{ "type", "thread_type"}
+			{ "type", "thread_type" }
 		};
 	}
 }
