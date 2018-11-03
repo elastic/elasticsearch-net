@@ -1,9 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -11,20 +9,20 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SuggestContextQuery>))]
 	public interface ISuggestContextQuery
 	{
-		[JsonProperty("context")]
-		Context Context { get; set; }
-
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
 
-		[JsonProperty("prefix")]
-		bool? Prefix { get; set; }
+		[JsonProperty("context")]
+		Context Context { get; set; }
+
+		[JsonProperty("neighbours")]
+		Union<Distance[], int[]> Neighbours { get; set; }
 
 		[JsonProperty("precision")]
 		Union<Distance, int> Precision { get; set; }
 
-		[JsonProperty("neighbours")]
-		Union<Distance[], int[]> Neighbours { get; set; }
+		[JsonProperty("prefix")]
+		bool? Prefix { get; set; }
 	}
 
 	public class SuggestContextQuery : ISuggestContextQuery
@@ -71,10 +69,12 @@ namespace Nest
 	{
 		public SuggestContextQueriesDescriptor() : base(new Dictionary<string, IList<ISuggestContextQuery>>()) { }
 
-		public SuggestContextQueriesDescriptor<T> Context(string name, params Func<SuggestContextQueryDescriptor<T>, ISuggestContextQuery>[] categoryDescriptors) =>
+		public SuggestContextQueriesDescriptor<T> Context(string name,
+			params Func<SuggestContextQueryDescriptor<T>, ISuggestContextQuery>[] categoryDescriptors
+		) =>
 			AddContextQueries(name, categoryDescriptors?.Select(d => d?.Invoke(new SuggestContextQueryDescriptor<T>())).ToList());
 
 		private SuggestContextQueriesDescriptor<T> AddContextQueries(string name, List<ISuggestContextQuery> contextQueries) =>
-			contextQueries == null ? this : this.Assign(a => a.Add(name, contextQueries));
+			contextQueries == null ? this : Assign(a => a.Add(name, contextQueries));
 	}
 }

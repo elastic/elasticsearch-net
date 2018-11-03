@@ -8,12 +8,6 @@ namespace Nest
 	public partial interface IUpdateDatafeedResponse : IResponse
 	{
 		/// <summary>
-		/// The datafeed id.
-		/// </summary>
-		[JsonProperty("datafeed_id")]
-		string DatafeedId { get; }
-
-		/// <summary>
 		/// The aggregation searches to perform for the datafeed.
 		/// </summary>
 		[JsonProperty("aggregations")]
@@ -24,6 +18,12 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("chunking_config")]
 		IChunkingConfig ChunkingConfig { get; }
+
+		/// <summary>
+		/// The datafeed id.
+		/// </summary>
+		[JsonProperty("datafeed_id")]
+		string DatafeedId { get; }
 
 		/// <summary>
 		/// The interval at which scheduled queries are made while the datafeed runs in real time.
@@ -42,7 +42,7 @@ namespace Nest
 		/// A numerical character string that uniquely identifies the job.
 		/// </summary>
 		[JsonProperty("job_id")]
-		string JobId { get;  }
+		string JobId { get; }
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
@@ -74,14 +74,14 @@ namespace Nest
 		///<summary>A list of types to search for within the specified indices</summary>
 		[JsonProperty("types")]
 		[JsonConverter(typeof(TypesJsonConverter))]
-		Types Types { get;  }
+		Types Types { get; }
 	}
 
 	public class UpdateDatafeedResponse : ResponseBase, IUpdateDatafeedResponse
 	{
-		public string DatafeedId { get; internal set; }
 		public AggregationDictionary Aggregations { get; internal set; }
 		public IChunkingConfig ChunkingConfig { get; internal set; }
+		public string DatafeedId { get; internal set; }
 		public Time Frequency { get; internal set; }
 		public Indices Indices { get; internal set; }
 		public string JobId { get; internal set; }

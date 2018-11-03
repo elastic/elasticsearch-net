@@ -14,6 +14,7 @@ namespace Nest
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
+
 		public override bool CanConvert(Type objectType) => objectType == typeof(Error);
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
@@ -21,7 +22,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			ReadError<TErrorCause>(reader, serializer, (e, prop) =>
 			{
-				if (!this.ReadProperty(e, prop, reader, serializer))
+				if (!ReadProperty(e, prop, reader, serializer))
 					reader.Skip();
 			});
 
@@ -35,7 +36,7 @@ namespace Nest
 		{
 			if (reader.TokenType == JsonToken.String)
 			{
-				var reason = (string) reader.Value;
+				var reason = (string)reader.Value;
 				return new TInnerError { Reason = reason };
 			}
 			if (reader.TokenType != JsonToken.StartObject)
@@ -49,7 +50,7 @@ namespace Nest
 			reader.Read();
 			do
 			{
-				var propertyName = (string) reader.Value;
+				var propertyName = (string)reader.Value;
 				switch (propertyName)
 				{
 					case "type":
@@ -139,6 +140,7 @@ namespace Nest
 		{
 			reader.Read();
 			if (reader.TokenType != JsonToken.StartArray) return EmptyReadOnly<ShardFailure>.Collection;
+
 			var shardFailures = serializer.Deserialize<List<ShardFailure>>(reader);
 			return new ReadOnlyCollection<ShardFailure>(shardFailures);
 		}
@@ -148,7 +150,7 @@ namespace Nest
 			var a = new string[0] { };
 			reader.Read();
 			if (reader.TokenType == JsonToken.String)
-				a = new[] {(reader.Value as string)};
+				a = new[] { reader.Value as string };
 			else if (reader.TokenType == JsonToken.StartArray)
 				a = JArray.Load(reader).ToObject<List<string>>().ToArray();
 			return new ReadOnlyCollection<string>(a);

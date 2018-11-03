@@ -18,10 +18,10 @@ namespace Nest
 	[JsonObject]
 	public class ActivationStatus
 	{
-		[JsonProperty("state")]
-		public ActivationState State { get; internal set; }
-
 		[JsonProperty("actions")]
 		public IReadOnlyDictionary<string, ActionStatus> Actions { get; set; }
+
+		[JsonProperty("state")]
+		public ActivationState State { get; internal set; }
 	}
 }

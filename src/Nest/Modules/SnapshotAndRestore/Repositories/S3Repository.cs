@@ -19,26 +19,6 @@ namespace Nest
 		[JsonProperty("access_key")]
 		string AccessKey { get; set; }
 
-		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore.")]
-		[JsonProperty("secret_key")]
-		string SecretKey { get; set; }
-
-		[Obsolete("Removed in Elasticsearch 6.0")]
-		[JsonProperty("concurrent_streams")]
-		int? ConcurrentStreams { get; set; }
-
-		/// <summary>
-		/// The name of the bucket to be used for snapshots. This field is required
-		/// </summary>
-		[JsonProperty("bucket")]
-		string Bucket { get; set; }
-
-		/// <summary>
-		/// The name of the s3 client to use to connect to S3. Defaults to default.
-		/// </summary>
-		[JsonProperty("client")]
-		string Client { get; set; }
-
 		/// <summary>
 		/// Specifies the path within bucket to repository data.
 		/// Defaults to value of repositories.s3.base_path or to root directory if not set.
@@ -47,27 +27,10 @@ namespace Nest
 		string BasePath { get; set; }
 
 		/// <summary>
-		/// Big files can be broken down into chunks during snapshotting if needed.
-		/// The chunk size can be specified in bytes or by using size value notation,
-		/// i.e. 1gb, 10mb, 5kb. Defaults to 1gb.
+		/// The name of the bucket to be used for snapshots. This field is required
 		/// </summary>
-		[JsonProperty("chunk_size")]
-		string ChunkSize { get; set; }
-
-		/// <summary>
-		/// When set to true metadata files are stored in compressed format.
-		/// This setting doesn't affect index files that are already compressed by default.
-		/// Defaults to false.
-		/// </summary>
-		[JsonProperty("compress")]
-		bool? Compress { get; set; }
-
-		/// <summary>
-		/// When set to true files are encrypted on server side using AES256 algorithm.
-		/// Defaults to false.
-		/// </summary>
-		[JsonProperty("server_side_encryption")]
-		bool? ServerSideEncryption { get; set; }
+		[JsonProperty("bucket")]
+		string Bucket { get; set; }
 
 		/// <summary>
 		/// Minimum threshold below which the chunk is uploaded using a single request.
@@ -89,6 +52,43 @@ namespace Nest
 		string CannedAcl { get; set; }
 
 		/// <summary>
+		/// Big files can be broken down into chunks during snapshotting if needed.
+		/// The chunk size can be specified in bytes or by using size value notation,
+		/// i.e. 1gb, 10mb, 5kb. Defaults to 1gb.
+		/// </summary>
+		[JsonProperty("chunk_size")]
+		string ChunkSize { get; set; }
+
+		/// <summary>
+		/// The name of the s3 client to use to connect to S3. Defaults to default.
+		/// </summary>
+		[JsonProperty("client")]
+		string Client { get; set; }
+
+		/// <summary>
+		/// When set to true metadata files are stored in compressed format.
+		/// This setting doesn't affect index files that are already compressed by default.
+		/// Defaults to false.
+		/// </summary>
+		[JsonProperty("compress")]
+		bool? Compress { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.0")]
+		[JsonProperty("concurrent_streams")]
+		int? ConcurrentStreams { get; set; }
+
+		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore.")]
+		[JsonProperty("secret_key")]
+		string SecretKey { get; set; }
+
+		/// <summary>
+		/// When set to true files are encrypted on server side using AES256 algorithm.
+		/// Defaults to false.
+		/// </summary>
+		[JsonProperty("server_side_encryption")]
+		bool? ServerSideEncryption { get; set; }
+
+		/// <summary>
 		/// Sets the S3 storage class type for the backup files. Values may be standard, reduced_redundancy, standard_ia.
 		/// Defaults to standard.
 		/// </summary>
@@ -100,30 +100,41 @@ namespace Nest
 	{
 		internal S3RepositorySettings() { }
 
-		public S3RepositorySettings(string bucket) => this.Bucket = bucket;
+		public S3RepositorySettings(string bucket) => Bucket = bucket;
 
 		/// <inheritdoc />
 		public string AccessKey { get; set; }
-		/// <inheritdoc />
-		public string SecretKey { get; set; }
-		/// <inheritdoc />
-		public int? ConcurrentStreams { get; set; }
-		/// <inheritdoc />
-		public string Bucket { get; set; }
-		/// <inheritdoc />
-		public string Client { get; set; }
+
 		/// <inheritdoc />
 		public string BasePath { get; set; }
+
 		/// <inheritdoc />
-		public string ChunkSize { get; set; }
-		/// <inheritdoc />
-		public bool? Compress { get; set; }
-		/// <inheritdoc />
-		public bool? ServerSideEncryption { get; set; }
+		public string Bucket { get; set; }
+
 		/// <inheritdoc />
 		public string BufferSize { get; set; }
+
 		/// <inheritdoc />
 		public string CannedAcl { get; set; }
+
+		/// <inheritdoc />
+		public string ChunkSize { get; set; }
+
+		/// <inheritdoc />
+		public string Client { get; set; }
+
+		/// <inheritdoc />
+		public bool? Compress { get; set; }
+
+		/// <inheritdoc />
+		public int? ConcurrentStreams { get; set; }
+
+		/// <inheritdoc />
+		public string SecretKey { get; set; }
+
+		/// <inheritdoc />
+		public bool? ServerSideEncryption { get; set; }
+
 		/// <inheritdoc />
 		public string StorageClass { get; set; }
 	}
@@ -131,70 +142,70 @@ namespace Nest
 	public class S3RepositorySettingsDescriptor
 		: DescriptorBase<S3RepositorySettingsDescriptor, IS3RepositorySettings>, IS3RepositorySettings
 	{
-		string IS3RepositorySettings.AccessKey { get; set; }
-		string IS3RepositorySettings.SecretKey { get; set; }
-		int? IS3RepositorySettings.ConcurrentStreams { get; set; }
-
-		string IS3RepositorySettings.Bucket { get; set; }
-		string IS3RepositorySettings.Client { get; set; }
-		string IS3RepositorySettings.BasePath { get; set; }
-		bool? IS3RepositorySettings.Compress { get; set; }
-		string IS3RepositorySettings.ChunkSize { get; set; }
-		bool? IS3RepositorySettings.ServerSideEncryption { get; set; }
-		string IS3RepositorySettings.BufferSize { get; set; }
-		string IS3RepositorySettings.CannedAcl { get; set; }
-		string IS3RepositorySettings.StorageClass { get; set; }
-
 		public S3RepositorySettingsDescriptor() { }
 
 		public S3RepositorySettingsDescriptor(string bucket) => Self.Bucket = bucket;
 
-		/// <inheritdoc cref="IS3RepositorySettings.AccessKey"/>
+		string IS3RepositorySettings.AccessKey { get; set; }
+		string IS3RepositorySettings.BasePath { get; set; }
+
+		string IS3RepositorySettings.Bucket { get; set; }
+		string IS3RepositorySettings.BufferSize { get; set; }
+		string IS3RepositorySettings.CannedAcl { get; set; }
+		string IS3RepositorySettings.ChunkSize { get; set; }
+		string IS3RepositorySettings.Client { get; set; }
+		bool? IS3RepositorySettings.Compress { get; set; }
+		int? IS3RepositorySettings.ConcurrentStreams { get; set; }
+		string IS3RepositorySettings.SecretKey { get; set; }
+		bool? IS3RepositorySettings.ServerSideEncryption { get; set; }
+		string IS3RepositorySettings.StorageClass { get; set; }
+
+		/// <inheritdoc cref="IS3RepositorySettings.AccessKey" />
 		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore.")]
 		public S3RepositorySettingsDescriptor AccessKey(string accessKey) => Assign(a => a.AccessKey = accessKey);
 
-		/// <inheritdoc cref="IS3RepositorySettings.SecretKey"/>
+		/// <inheritdoc cref="IS3RepositorySettings.SecretKey" />
 		[Obsolete("Removed in Elasticsearch 6.0, please specify secure settings in the keystore.")]
 		public S3RepositorySettingsDescriptor SecretKey(string secretKey) => Assign(a => a.SecretKey = secretKey);
 
-		/// <inheritdoc cref="IS3RepositorySettings.ConcurrentStreams"/>
+		/// <inheritdoc cref="IS3RepositorySettings.ConcurrentStreams" />
 		[Obsolete("Removed in Elasticsearch 6.0")]
 		public S3RepositorySettingsDescriptor ConcurrentStreams(int? concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 
-		/// <inheritdoc cref="IS3RepositorySettings.Bucket"/>
+		/// <inheritdoc cref="IS3RepositorySettings.Bucket" />
 		public S3RepositorySettingsDescriptor Bucket(string bucket) => Assign(a => a.Bucket = bucket);
 
-		/// <inheritdoc cref="IS3RepositorySettings.Client"/>
+		/// <inheritdoc cref="IS3RepositorySettings.Client" />
 		public S3RepositorySettingsDescriptor Client(string client) => Assign(a => a.Client = client);
 
-		/// <inheritdoc cref="IS3RepositorySettings.BasePath"/>
+		/// <inheritdoc cref="IS3RepositorySettings.BasePath" />
 		public S3RepositorySettingsDescriptor BasePath(string basePath) => Assign(a => a.BasePath = basePath);
 
-		/// <inheritdoc cref="IS3RepositorySettings.Compress"/>
+		/// <inheritdoc cref="IS3RepositorySettings.Compress" />
 		public S3RepositorySettingsDescriptor Compress(bool? compress = true) => Assign(a => a.Compress = compress);
 
-		/// <inheritdoc cref="IS3RepositorySettings.ChunkSize"/>
+		/// <inheritdoc cref="IS3RepositorySettings.ChunkSize" />
 		public S3RepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
 
-		/// <inheritdoc cref="IS3RepositorySettings.ServerSideEncryption"/>
+		/// <inheritdoc cref="IS3RepositorySettings.ServerSideEncryption" />
 		public S3RepositorySettingsDescriptor ServerSideEncryption(bool? serverSideEncryption = true) =>
 			Assign(a => a.ServerSideEncryption = serverSideEncryption);
 
-		/// <inheritdoc cref="IS3RepositorySettings.BufferSize"/>
+		/// <inheritdoc cref="IS3RepositorySettings.BufferSize" />
 		public S3RepositorySettingsDescriptor BufferSize(string bufferSize) => Assign(a => a.BufferSize = bufferSize);
 
-		/// <inheritdoc cref="IS3RepositorySettings.CannedAcl"/>
+		/// <inheritdoc cref="IS3RepositorySettings.CannedAcl" />
 		public S3RepositorySettingsDescriptor CannedAcl(string cannedAcl) => Assign(a => a.CannedAcl = cannedAcl);
 
-		/// <inheritdoc cref="IS3RepositorySettings.StorageClass"/>
+		/// <inheritdoc cref="IS3RepositorySettings.StorageClass" />
 		public S3RepositorySettingsDescriptor StorageClass(string storageClass) => Assign(a => a.StorageClass = storageClass);
 	}
 
 	public class S3RepositoryDescriptor
 		: DescriptorBase<S3RepositoryDescriptor, IS3Repository>, IS3Repository
 	{
-		string ISnapshotRepository.Type { get; } = "s3";
 		IS3RepositorySettings IRepository<IS3RepositorySettings>.Settings { get; set; }
+		string ISnapshotRepository.Type { get; } = "s3";
 
 		public S3RepositoryDescriptor Settings(string bucket, Func<S3RepositorySettingsDescriptor, IS3RepositorySettings> settingsSelector = null) =>
 			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new S3RepositorySettingsDescriptor(bucket)));

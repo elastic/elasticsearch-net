@@ -17,7 +17,7 @@ namespace Nest
 				return;
 			}
 			marker.Match(
-				all=> writer.WriteNull(),
+				all => writer.WriteNull(),
 				many => writer.WriteValue(((IUrlParameter)marker).GetString(serializer.GetConnectionSettings()))
 			);
 		}
@@ -26,11 +26,10 @@ namespace Nest
 		{
 			if (reader.TokenType == JsonToken.String)
 			{
-				string types = reader.Value.ToString();
+				var types = reader.Value.ToString();
 				return (Types)types;
 			}
 			return null;
 		}
-
 	}
 }

@@ -12,17 +12,27 @@ namespace Nest
 	public interface IQueryStringQuery : IQuery
 	{
 		/// <summary>
-		/// How the fields should be combined to build the text query.
-		/// Default is <see cref="TextQueryType.BestFields"/>
+		/// When set, <c>*</c> or <c>?</c> are allowed as the first character. Defaults to <c>true</c>.
 		/// </summary>
-		[JsonProperty("type")]
-		TextQueryType? Type { get; set; }
+		[JsonProperty("allow_leading_wildcard")]
+		bool? AllowLeadingWildcard { get; set; }
 
 		/// <summary>
-		/// The query to be parsed
+		/// The analyzer name used to analyze the query
 		/// </summary>
-		[JsonProperty("query")]
-		string Query { get; set; }
+		[JsonProperty("analyzer")]
+		string Analyzer { get; set; }
+
+		/// <summary>
+		/// By default, wildcards terms in a query are not analyzed.
+		/// By setting this value to <c>true</c>, a best effort will be made to analyze those as well.
+		/// </summary>
+		[JsonProperty("analyze_wildcard")]
+		bool? AnalyzeWildcard { get; set; }
+
+		/// <summary></summary>
+		[JsonProperty("auto_generate_synonyms_phrase_query")]
+		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
 		/// <summary>
 		/// The default field for query terms if no prefix field is specified.
@@ -35,30 +45,36 @@ namespace Nest
 
 		/// <summary>
 		/// The default operator used if no explicit operator is specified.
-		/// The default operator is <see cref="Operator.Or"/>
+		/// The default operator is <see cref="Operator.Or" />
 		/// </summary>
 		[JsonProperty("default_operator")]
 		Operator? DefaultOperator { get; set; }
 
 		/// <summary>
-		/// The analyzer name used to analyze the query
+		/// Set to <c>true<c> to enable position increments in result queries. Defaults to <c>true<c>.
 		/// </summary>
-		[JsonProperty("analyzer")]
-		string Analyzer { get; set; }
+		[JsonProperty("enable_position_increments")]
+		bool? EnablePositionIncrements { get; set; }
 
 		/// <summary>
-		/// The name of the analyzer that is used to analyze quoted phrases in the query string.
-		/// For those parts, it overrides other analyzers that are set using the analyzer parameter
-		/// or the search_quote_analyzer setting.
+		/// Enables escaping of the query
 		/// </summary>
-		[JsonProperty("quote_analyzer")]
-		string QuoteAnalyzer { get; set; }
+		[JsonProperty("escape")]
+		bool? Escape { get; set; }
 
 		/// <summary>
-		/// When set, <c>*</c> or <c>?</c> are allowed as the first character. Defaults to <c>true</c>.
+		/// The fields to perform the parsed query against.
+		/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
+		/// <c>*</c> extracts all fields in the mapping that are eligible to term queries and filters the metadata fields.
 		/// </summary>
-		[JsonProperty("allow_leading_wildcard")]
-		bool? AllowLeadingWildcard { get; set; }
+		[JsonProperty("fields")]
+		Fields Fields { get; set; }
+
+		/// <summary>
+		/// Set the fuzziness for fuzzy queries. Defaults to <see cref="Fuzziness.Auto" />
+		/// </summary>
+		[JsonProperty("fuzziness")]
+		Fuzziness Fuzziness { get; set; }
 
 		/// <summary>
 		/// Controls the number of terms fuzzy queries will expand to. Defaults to <c>50</c>
@@ -67,16 +83,17 @@ namespace Nest
 		int? FuzzyMaxExpansions { get; set; }
 
 		/// <summary>
-		/// Set the fuzziness for fuzzy queries. Defaults to <see cref="Fuzziness.Auto"/>
-		/// </summary>
-		[JsonProperty("fuzziness")]
-		Fuzziness Fuzziness { get; set; }
-
-		/// <summary>
 		/// Set the prefix length for fuzzy queries. Default is <c>0</c>.
 		/// </summary>
 		[JsonProperty("fuzzy_prefix_length")]
 		int? FuzzyPrefixLength { get; set; }
+
+		/// <summary>
+		/// Controls how the query is rewritten if <see cref="Fuzziness" /> is set.
+		/// In this scenario, the default is <see cref="MultiTermQueryRewrite.TopTermsBlendedFreqs" />.
+		/// </summary>
+		[JsonProperty("fuzzy_rewrite")]
+		MultiTermQueryRewrite FuzzyRewrite { get; set; }
 
 		/// <summary>
 		/// Sets whether transpositions are supported in fuzzy queries.
@@ -90,18 +107,11 @@ namespace Nest
 		bool? FuzzyTranspositions { get; set; }
 
 		/// <summary>
-		/// Sets the default slop for phrases. If zero, then exact phrase matches are required.
-		/// Default value is <c>0</c>.
+		/// If set to <c>true</c> will cause format based failures (like providing text to a numeric field)
+		/// to be ignored
 		/// </summary>
-		[JsonProperty("phrase_slop")]
-		double? PhraseSlop { get; set; }
-
-		/// <summary>
-		/// By default, wildcards terms in a query are not analyzed.
-		/// By setting this value to <c>true</c>, a best effort will be made to analyze those as well.
-		/// </summary>
-		[JsonProperty("analyze_wildcard")]
-		bool? AnalyzeWildcard { get; set; }
+		[JsonProperty("lenient")]
+		bool? Lenient { get; set; }
 
 		/// <summary>
 		/// Limit on how many automaton states regexp queries are allowed to create.
@@ -119,38 +129,25 @@ namespace Nest
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		/// <summary>
-		/// If set to <c>true</c> will cause format based failures (like providing text to a numeric field)
-		/// to be ignored
+		/// Sets the default slop for phrases. If zero, then exact phrase matches are required.
+		/// Default value is <c>0</c>.
 		/// </summary>
-		[JsonProperty("lenient")]
-		bool? Lenient { get; set; }
+		[JsonProperty("phrase_slop")]
+		double? PhraseSlop { get; set; }
 
 		/// <summary>
-		/// The fields to perform the parsed query against.
-		/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
-		/// <c>*</c> extracts all fields in the mapping that are eligible to term queries and filters the metadata fields.
+		/// The query to be parsed
 		/// </summary>
-		[JsonProperty("fields")]
-		Fields Fields { get; set; }
+		[JsonProperty("query")]
+		string Query { get; set; }
 
 		/// <summary>
-		/// The disjunction max tie breaker for multi fields. Defaults to <c>0</c>
+		/// The name of the analyzer that is used to analyze quoted phrases in the query string.
+		/// For those parts, it overrides other analyzers that are set using the analyzer parameter
+		/// or the search_quote_analyzer setting.
 		/// </summary>
-		[JsonProperty("tie_breaker")]
-		double? TieBreaker { get; set; }
-
-		/// <summary>
-		/// Controls how a multi term query such as a wildcard or prefix query, is rewritten.
-		/// </summary>
-		[JsonProperty("rewrite")]
-		MultiTermQueryRewrite Rewrite { get; set; }
-
-		/// <summary>
-		/// Controls how the query is rewritten if <see cref="Fuzziness"/> is set.
-		/// In this scenario, the default is <see cref="MultiTermQueryRewrite.TopTermsBlendedFreqs"/>.
-		/// </summary>
-		[JsonProperty("fuzzy_rewrite")]
-		MultiTermQueryRewrite FuzzyRewrite { get; set; }
+		[JsonProperty("quote_analyzer")]
+		string QuoteAnalyzer { get; set; }
 
 		/// <summary>
 		/// A suffix to append to fields for quoted parts of the query string.
@@ -160,10 +157,16 @@ namespace Nest
 		string QuoteFieldSuffix { get; set; }
 
 		/// <summary>
-		/// Enables escaping of the query
+		/// Controls how a multi term query such as a wildcard or prefix query, is rewritten.
 		/// </summary>
-		[JsonProperty("escape")]
-		bool? Escape { get; set; }
+		[JsonProperty("rewrite")]
+		MultiTermQueryRewrite Rewrite { get; set; }
+
+		/// <summary>
+		/// The disjunction max tie breaker for multi fields. Defaults to <c>0</c>
+		/// </summary>
+		[JsonProperty("tie_breaker")]
+		double? TieBreaker { get; set; }
 
 		/// <summary>
 		/// Time Zone to be applied to any range query related to dates.
@@ -172,193 +175,218 @@ namespace Nest
 		string Timezone { get; set; }
 
 		/// <summary>
-		/// Set to <c>true<c> to enable position increments in result queries. Defaults to <c>true<c>.
+		/// How the fields should be combined to build the text query.
+		/// Default is <see cref="TextQueryType.BestFields" />
 		/// </summary>
-		[JsonProperty("enable_position_increments")]
-		bool? EnablePositionIncrements { get; set; }
-
-    /// <summary></summary>
-		[JsonProperty("auto_generate_synonyms_phrase_query")]
-		bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+		[JsonProperty("type")]
+		TextQueryType? Type { get; set; }
 	}
 
-	/// <inheritdoc cref="IQueryStringQuery"/>
+	/// <inheritdoc cref="IQueryStringQuery" />
 	public class QueryStringQuery : QueryBase, IQueryStringQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
-		/// <inheritdoc />
-		public TextQueryType? Type { get; set; }
-		/// <inheritdoc />
-		public int? FuzzyMaxExpansions { get; set; }
-		/// <inheritdoc />
-		public Fuzziness Fuzziness { get; set; }
-		/// <inheritdoc />
-		public MinimumShouldMatch MinimumShouldMatch { get; set; }
-		/// <inheritdoc />
-		public MultiTermQueryRewrite Rewrite { get; set; }
-		/// <inheritdoc />
-		public MultiTermQueryRewrite FuzzyRewrite { get; set; }
-		/// <inheritdoc />
-		public string QuoteFieldSuffix { get; set; }
-		/// <inheritdoc />
-		public bool? Escape { get; set; }
-		/// <inheritdoc />
-		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
-    /// <inheritdoc />
-		public string Query { get; set; }
-		/// <inheritdoc />
-		public string Timezone { get; set; }
-		/// <inheritdoc />
-		public Field DefaultField { get; set; }
-		/// <inheritdoc />
-		public Fields Fields { get; set; }
-		/// <inheritdoc />
-		public Operator? DefaultOperator { get; set; }
-		/// <inheritdoc />
-		public string Analyzer { get; set; }
-		/// <inheritdoc />
-		public string QuoteAnalyzer { get; set; }
 		/// <inheritdoc />
 		public bool? AllowLeadingWildcard { get; set; }
+
 		/// <inheritdoc />
-		public bool? EnablePositionIncrements { get; set; }
-		/// <inheritdoc />
-		public int? FuzzyPrefixLength { get; set; }
-		/// <inheritdoc />
-		public bool? FuzzyTranspositions { get; set; }
-		/// <inheritdoc />
-		public double? PhraseSlop { get; set; }
-		/// <inheritdoc />
-		public bool? Lenient { get; set; }
+		public string Analyzer { get; set; }
+
 		/// <inheritdoc />
 		public bool? AnalyzeWildcard { get; set; }
+
 		/// <inheritdoc />
-		public double? TieBreaker { get; set; }
+		public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+		/// <inheritdoc />
+		public Field DefaultField { get; set; }
+
+		/// <inheritdoc />
+		public Operator? DefaultOperator { get; set; }
+
+		/// <inheritdoc />
+		public bool? EnablePositionIncrements { get; set; }
+
+		/// <inheritdoc />
+		public bool? Escape { get; set; }
+
+		/// <inheritdoc />
+		public Fields Fields { get; set; }
+
+		/// <inheritdoc />
+		public Fuzziness Fuzziness { get; set; }
+
+		/// <inheritdoc />
+		public int? FuzzyMaxExpansions { get; set; }
+
+		/// <inheritdoc />
+		public int? FuzzyPrefixLength { get; set; }
+
+		/// <inheritdoc />
+		public MultiTermQueryRewrite FuzzyRewrite { get; set; }
+
+		/// <inheritdoc />
+		public bool? FuzzyTranspositions { get; set; }
+
+		/// <inheritdoc />
+		public bool? Lenient { get; set; }
+
 		/// <inheritdoc />
 		public int? MaximumDeterminizedStates { get; set; }
 
+		/// <inheritdoc />
+		public MinimumShouldMatch MinimumShouldMatch { get; set; }
+
+		/// <inheritdoc />
+		public double? PhraseSlop { get; set; }
+
+		/// <inheritdoc />
+		public string Query { get; set; }
+
+		/// <inheritdoc />
+		public string QuoteAnalyzer { get; set; }
+
+		/// <inheritdoc />
+		public string QuoteFieldSuffix { get; set; }
+
+		/// <inheritdoc />
+		public MultiTermQueryRewrite Rewrite { get; set; }
+
+		/// <inheritdoc />
+		public double? TieBreaker { get; set; }
+
+		/// <inheritdoc />
+		public string Timezone { get; set; }
+
+		/// <inheritdoc />
+		public TextQueryType? Type { get; set; }
+
+		protected override bool Conditionless => IsConditionless(this);
+
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.QueryString = this;
+
 		internal static bool IsConditionless(IQueryStringQuery q) => q.Query.IsNullOrEmpty();
 	}
 
-	/// <inheritdoc cref="IQueryStringQuery"/>
+	/// <inheritdoc cref="IQueryStringQuery" />
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class QueryStringQueryDescriptor<T>
 		: QueryDescriptorBase<QueryStringQueryDescriptor<T>, IQueryStringQuery>
-		, IQueryStringQuery where T : class
+			, IQueryStringQuery where T : class
 	{
 		protected override bool Conditionless => QueryStringQuery.IsConditionless(this);
+		bool? IQueryStringQuery.AllowLeadingWildcard { get; set; }
+		string IQueryStringQuery.Analyzer { get; set; }
+		bool? IQueryStringQuery.AnalyzeWildcard { get; set; }
+		bool? IQueryStringQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
+		Field IQueryStringQuery.DefaultField { get; set; }
+		Operator? IQueryStringQuery.DefaultOperator { get; set; }
+		bool? IQueryStringQuery.EnablePositionIncrements { get; set; }
+		bool? IQueryStringQuery.Escape { get; set; }
+		Fields IQueryStringQuery.Fields { get; set; }
+		Fuzziness IQueryStringQuery.Fuzziness { get; set; }
+		int? IQueryStringQuery.FuzzyMaxExpansions { get; set; }
+		int? IQueryStringQuery.FuzzyPrefixLength { get; set; }
+		MultiTermQueryRewrite IQueryStringQuery.FuzzyRewrite { get; set; }
+		bool? IQueryStringQuery.FuzzyTranspositions { get; set; }
+		bool? IQueryStringQuery.Lenient { get; set; }
+		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
+		MinimumShouldMatch IQueryStringQuery.MinimumShouldMatch { get; set; }
+		double? IQueryStringQuery.PhraseSlop { get; set; }
+		string IQueryStringQuery.Query { get; set; }
+		string IQueryStringQuery.QuoteAnalyzer { get; set; }
+		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
+		MultiTermQueryRewrite IQueryStringQuery.Rewrite { get; set; }
+		double? IQueryStringQuery.TieBreaker { get; set; }
+		string IQueryStringQuery.Timezone { get; set; }
 
 		TextQueryType? IQueryStringQuery.Type { get; set; }
-		string IQueryStringQuery.Query { get; set; }
-		Field IQueryStringQuery.DefaultField { get; set; }
-		Fields IQueryStringQuery.Fields { get; set; }
-		Operator? IQueryStringQuery.DefaultOperator { get; set; }
-		string IQueryStringQuery.Analyzer { get; set; }
-		string IQueryStringQuery.QuoteAnalyzer { get; set; }
-		bool? IQueryStringQuery.AllowLeadingWildcard { get; set; }
-		int? IQueryStringQuery.FuzzyMaxExpansions { get; set; }
-		Fuzziness IQueryStringQuery.Fuzziness { get; set; }
-		int? IQueryStringQuery.FuzzyPrefixLength { get; set; }
-		bool? IQueryStringQuery.FuzzyTranspositions { get; set; }
-		double? IQueryStringQuery.PhraseSlop { get; set; }
-		MinimumShouldMatch IQueryStringQuery.MinimumShouldMatch { get; set; }
-		bool? IQueryStringQuery.Lenient { get; set; }
-		bool? IQueryStringQuery.AnalyzeWildcard { get; set; }
-		double? IQueryStringQuery.TieBreaker { get; set; }
-		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
-		MultiTermQueryRewrite IQueryStringQuery.FuzzyRewrite { get; set; }
-		MultiTermQueryRewrite IQueryStringQuery.Rewrite { get; set; }
-		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
-		bool? IQueryStringQuery.Escape { get; set; }
-		bool? IQueryStringQuery.EnablePositionIncrements { get; set; }
-		string IQueryStringQuery.Timezone { get; set; }
-		bool? IQueryStringQuery.AutoGenerateSynonymsPhraseQuery { get; set; }
 
-		/// <inheritdoc cref="IQueryStringQuery.DefaultField"/>
+		/// <inheritdoc cref="IQueryStringQuery.DefaultField" />
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(a => a.DefaultField = field);
 
-		/// <inheritdoc cref="IQueryStringQuery.DefaultField"/>
+		/// <inheritdoc cref="IQueryStringQuery.DefaultField" />
 		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(a => a.DefaultField = field);
 
-		/// <inheritdoc cref="IQueryStringQuery.Fields"/>
+		/// <inheritdoc cref="IQueryStringQuery.Fields" />
 		public QueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		/// <inheritdoc cref="IQueryStringQuery.Fields"/>
+		/// <inheritdoc cref="IQueryStringQuery.Fields" />
 		public QueryStringQueryDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
 
-		/// <inheritdoc cref="IQueryStringQuery.Type"/>
+		/// <inheritdoc cref="IQueryStringQuery.Type" />
 		public QueryStringQueryDescriptor<T> Type(TextQueryType? type) => Assign(a => a.Type = type);
 
-		/// <inheritdoc cref="IQueryStringQuery.Query"/>
+		/// <inheritdoc cref="IQueryStringQuery.Query" />
 		public QueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
-		/// <inheritdoc cref="IQueryStringQuery.DefaultOperator"/>
+		/// <inheritdoc cref="IQueryStringQuery.DefaultOperator" />
 		public QueryStringQueryDescriptor<T> DefaultOperator(Operator? op) => Assign(a => a.DefaultOperator = op);
 
-		/// <inheritdoc cref="IQueryStringQuery.Analyzer"/>
+		/// <inheritdoc cref="IQueryStringQuery.Analyzer" />
 		public QueryStringQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
-		/// <inheritdoc cref="IQueryStringQuery.QuoteAnalyzer"/>
+		/// <inheritdoc cref="IQueryStringQuery.QuoteAnalyzer" />
 		public QueryStringQueryDescriptor<T> QuoteAnalyzer(string analyzer) => Assign(a => a.QuoteAnalyzer = analyzer);
 
-		/// <inheritdoc cref="IQueryStringQuery.AllowLeadingWildcard"/>
+		/// <inheritdoc cref="IQueryStringQuery.AllowLeadingWildcard" />
 		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool? allowLeadingWildcard = true) =>
 			Assign(a => a.AllowLeadingWildcard = allowLeadingWildcard);
 
-		/// <inheritdoc cref="IQueryStringQuery.Fuzziness"/>
+		/// <inheritdoc cref="IQueryStringQuery.Fuzziness" />
 		public QueryStringQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 
-		/// <inheritdoc cref="IQueryStringQuery.FuzzyPrefixLength"/>
+		/// <inheritdoc cref="IQueryStringQuery.FuzzyPrefixLength" />
 		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(a => a.FuzzyPrefixLength = fuzzyPrefixLength);
 
-		/// <inheritdoc cref="IQueryStringQuery.FuzzyMaxExpansions"/>
+		/// <inheritdoc cref="IQueryStringQuery.FuzzyMaxExpansions" />
 		public QueryStringQueryDescriptor<T> FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(a => a.FuzzyMaxExpansions = fuzzyMaxExpansions);
 
-		/// <inheritdoc cref="IQueryStringQuery.FuzzyTranspositions"/>
+		/// <inheritdoc cref="IQueryStringQuery.FuzzyTranspositions" />
 		public QueryStringQueryDescriptor<T> FuzzyTranspositions(bool? fuzzyTranspositions = true) =>
 			Assign(a => a.FuzzyTranspositions = fuzzyTranspositions);
 
-		/// <inheritdoc cref="IQueryStringQuery.PhraseSlop"/>
+		/// <inheritdoc cref="IQueryStringQuery.PhraseSlop" />
 		public QueryStringQueryDescriptor<T> PhraseSlop(double? phraseSlop) => Assign(a => a.PhraseSlop = phraseSlop);
 
-		/// <inheritdoc cref="IQueryStringQuery.MinimumShouldMatch"/>
-		public QueryStringQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) => Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+		/// <inheritdoc cref="IQueryStringQuery.MinimumShouldMatch" />
+		public QueryStringQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
+			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
-		/// <inheritdoc cref="IQueryStringQuery.Lenient"/>
+		/// <inheritdoc cref="IQueryStringQuery.Lenient" />
 		public QueryStringQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
 
-		/// <inheritdoc cref="IQueryStringQuery.AnalyzeWildcard"/>
+		/// <inheritdoc cref="IQueryStringQuery.AnalyzeWildcard" />
 		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) => Assign(a => a.AnalyzeWildcard = analyzeWildcard);
 
-		/// <inheritdoc cref="IQueryStringQuery.TieBreaker"/>
+		/// <inheritdoc cref="IQueryStringQuery.TieBreaker" />
 		public QueryStringQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
 
-		/// <inheritdoc cref="IQueryStringQuery.MaximumDeterminizedStates"/>
-		public QueryStringQueryDescriptor<T> MaximumDeterminizedStates(int? maxDeterminizedStates) => Assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
+		/// <inheritdoc cref="IQueryStringQuery.MaximumDeterminizedStates" />
+		public QueryStringQueryDescriptor<T> MaximumDeterminizedStates(int? maxDeterminizedStates) =>
+			Assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
 
-		/// <inheritdoc cref="IQueryStringQuery.FuzzyRewrite"/>
+		/// <inheritdoc cref="IQueryStringQuery.FuzzyRewrite" />
 		public QueryStringQueryDescriptor<T> FuzzyRewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.FuzzyRewrite = rewrite);
 
-		/// <inheritdoc cref="IQueryStringQuery.Rewrite"/>
+		/// <inheritdoc cref="IQueryStringQuery.Rewrite" />
 		public QueryStringQueryDescriptor<T> Rewrite(MultiTermQueryRewrite rewrite) => Assign(a => Self.Rewrite = rewrite);
 
-		/// <inheritdoc cref="IQueryStringQuery.QuoteFieldSuffix"/>
+		/// <inheritdoc cref="IQueryStringQuery.QuoteFieldSuffix" />
 		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) =>
 			Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
 
-		/// <inheritdoc cref="IQueryStringQuery.Escape"/>
+		/// <inheritdoc cref="IQueryStringQuery.Escape" />
 		public QueryStringQueryDescriptor<T> Escape(bool? escape = true) => Assign(a => a.Escape = escape);
 
-		/// <inheritdoc cref="IQueryStringQuery.EnablePositionIncrements"/>
+		/// <inheritdoc cref="IQueryStringQuery.EnablePositionIncrements" />
 		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) =>
 			Assign(a => a.EnablePositionIncrements = enablePositionIncrements);
 
-		/// <inheritdoc cref="IQueryStringQuery.Timezone"/>
+		/// <inheritdoc cref="IQueryStringQuery.Timezone" />
 		public QueryStringQueryDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
-      
-    /// <inheritdoc cref="IQueryStringQuery.AutoGenerateSynonymsPhraseQuery"/>
+
+		/// <inheritdoc cref="IQueryStringQuery.AutoGenerateSynonymsPhraseQuery" />
 		public QueryStringQueryDescriptor<T> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true) =>
 			Assign(a => a.AutoGenerateSynonymsPhraseQuery = autoGenerateSynonymsPhraseQuery);
 	}

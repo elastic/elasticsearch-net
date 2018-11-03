@@ -10,48 +10,45 @@ namespace Nest
 	[ContractJsonConverter(typeof(MultiSearchResponseJsonConverter))]
 	public class MultiSearchResponse : ResponseBase, IMultiSearchResponse
 	{
-		public MultiSearchResponse()
-		{
-			this.Responses = new Dictionary<string, object>();
-		}
+		public MultiSearchResponse() => Responses = new Dictionary<string, object>();
 
-		public override bool IsValid => base.IsValid && this.AllResponses.All(b => b.IsValid);
+		public IEnumerable<IResponse> AllResponses => _allResponses<IResponse>();
 
-		protected override void DebugIsValid(StringBuilder sb)
-		{
-			sb.AppendLine($"# Invalid searches (inspect individual response.DebugInformation for more detail):");
-			foreach(var i in AllResponses.Select((item, i) => new { item, i}).Where(i=>!i.item.IsValid))
-				sb.AppendLine($"  search[{i.i}]: {i.item}");
-		}
+		public override bool IsValid => base.IsValid && AllResponses.All(b => b.IsValid);
+
+		public int TotalResponses => Responses.HasAny() ? Responses.Count() : 0;
 
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<string, object>))]
 		internal IDictionary<string, object> Responses { get; set; }
 
-		public int TotalResponses => this.Responses.HasAny() ? this.Responses.Count() : 0;
-
-		private IEnumerable<T> _allResponses<T>() where T : class, IResponse, IElasticsearchResponse
-		{
-			foreach (var r in this.Responses.Values.OfType<T>())
-			{
-				((IElasticsearchResponse)r).ApiCall = this.ApiCall;
-				yield return r;
-			}
-		}
-
-		public IEnumerable<IResponse> AllResponses => this._allResponses<IResponse>();
-
-		public IEnumerable<IResponse> GetInvalidResponses() => this._allResponses<IResponse>().Where(r => !r.IsValid);
-
-		public IEnumerable<ISearchResponse<T>> GetResponses<T>() where T : class => this._allResponses<SearchResponse<T>>();
+		public IEnumerable<IResponse> GetInvalidResponses() => _allResponses<IResponse>().Where(r => !r.IsValid);
 
 		public ISearchResponse<T> GetResponse<T>(string name) where T : class
 		{
 			object response;
-			this.Responses.TryGetValue(name, out response);
+			Responses.TryGetValue(name, out response);
 			var r = response as IElasticsearchResponse;
 			if (r != null)
-				r.ApiCall = this.ApiCall;
+				r.ApiCall = ApiCall;
 			return response as SearchResponse<T>;
+		}
+
+		public IEnumerable<ISearchResponse<T>> GetResponses<T>() where T : class => _allResponses<SearchResponse<T>>();
+
+		protected override void DebugIsValid(StringBuilder sb)
+		{
+			sb.AppendLine($"# Invalid searches (inspect individual response.DebugInformation for more detail):");
+			foreach (var i in AllResponses.Select((item, i) => new { item, i }).Where(i => !i.item.IsValid))
+				sb.AppendLine($"  search[{i.i}]: {i.item}");
+		}
+
+		private IEnumerable<T> _allResponses<T>() where T : class, IResponse, IElasticsearchResponse
+		{
+			foreach (var r in Responses.Values.OfType<T>())
+			{
+				((IElasticsearchResponse)r).ApiCall = ApiCall;
+				yield return r;
+			}
 		}
 	}
 }

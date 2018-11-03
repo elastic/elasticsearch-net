@@ -12,26 +12,24 @@ namespace Nest
 			Key = key;
 
 		/// <summary>
-		/// The bucket key
-		/// </summary>
-		public CompositeKey Key { get; }
-
-		/// <summary>
 		/// The count of documents
 		/// </summary>
 		public long? DocCount { get; set; }
+
+		/// <summary>
+		/// The bucket key
+		/// </summary>
+		public CompositeKey Key { get; }
 	}
 
 	/// <summary>
-	/// A key for a <see cref="CompositeBucket"/>
+	/// A key for a <see cref="CompositeBucket" />
 	/// </summary>
 	public class CompositeKey : IsAReadOnlyDictionaryBase<string, object>
 	{
 		private static readonly DateTimeOffset Epoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
 
-		public CompositeKey(IReadOnlyDictionary<string, object> backingDictionary) : base(backingDictionary)
-		{
-		}
+		public CompositeKey(IReadOnlyDictionary<string, object> backingDictionary) : base(backingDictionary) { }
 
 		/// <summary>
 		/// Tries to get a value with the given key as a string. Returns <c>false</c> if the key does
@@ -92,7 +90,7 @@ namespace Nest
 
 		private bool TryGetValue<TValue>(string key, out TValue value)
 		{
-			if (!this.BackingDictionary.TryGetValue(key, out var obj))
+			if (!BackingDictionary.TryGetValue(key, out var obj))
 			{
 				value = default(TValue);
 				return false;
@@ -100,7 +98,7 @@ namespace Nest
 
 			try
 			{
-				value = (TValue) Convert.ChangeType(obj, typeof(TValue));
+				value = (TValue)Convert.ChangeType(obj, typeof(TValue));
 				return true;
 			}
 			catch

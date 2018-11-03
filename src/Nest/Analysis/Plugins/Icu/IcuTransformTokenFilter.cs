@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -21,18 +19,18 @@ namespace Nest
 		string Id { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class IcuTransformTokenFilter : TokenFilterBase, IIcuTransformTokenFilter
 	{
 		public IcuTransformTokenFilter() : base("icu_transform") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IcuTransformDirection? Direction { get; set; }
 
 		public string Id { get; set; }
 	}
 
-	///<inheritdoc/>
+	/// <inheritdoc />
 	public class IcuTransformTokenFilterDescriptor
 		: TokenFilterDescriptorBase<IcuTransformTokenFilterDescriptor, IIcuTransformTokenFilter>, IIcuTransformTokenFilter
 	{
@@ -41,10 +39,10 @@ namespace Nest
 		IcuTransformDirection? IIcuTransformTokenFilter.Direction { get; set; }
 		string IIcuTransformTokenFilter.Id { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public IcuTransformTokenFilterDescriptor Direction(IcuTransformDirection? direction) => Assign(a => a.Direction = direction);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public IcuTransformTokenFilterDescriptor Id(string id) => Assign(a => a.Id = id);
 	}
 }

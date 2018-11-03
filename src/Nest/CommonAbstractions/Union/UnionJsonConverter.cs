@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
 	internal class UnionJsonConverter : JsonConverter
 	{
-		private static readonly ConcurrentDictionary<Type, UnionJsonConverterBase> KnownTypes = new ConcurrentDictionary<Type, UnionJsonConverterBase>();
+		private static readonly ConcurrentDictionary<Type, UnionJsonConverterBase> KnownTypes =
+			new ConcurrentDictionary<Type, UnionJsonConverterBase>();
 
 		public override bool CanConvert(Type objectType) => true;
 
@@ -22,11 +21,10 @@ namespace Nest
 			switch (genericArguments.Length)
 			{
 				case 2:
-					conversion = typeof (UnionJsonConverter<,>).CreateGenericInstance(genericArguments) as UnionJsonConverterBase;
+					conversion = typeof(UnionJsonConverter<,>).CreateGenericInstance(genericArguments) as UnionJsonConverterBase;
 					break;
 				default:
 					throw new Exception($"No union converter registered that takes {genericArguments.Length} type arguments for {t.Name}");
-
 			}
 			KnownTypes.TryAdd(t, conversion);
 			return conversion;
@@ -62,6 +60,7 @@ namespace Nest
 		}
 
 		public abstract void WriteJson(JsonWriter writer, object v, JsonSerializer serializer);
+
 		public abstract object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer);
 	}
 
@@ -86,11 +85,10 @@ namespace Nest
 			Union<TFirst, TSecond> u = null;
 			using (var r = reader.ReadTokenWithDateParseHandlingNone().CreateReader())
 			{
-				if (this.TryRead(r, serializer, out TFirst first)) u = first;
-				else if (this.TryRead(r, serializer, out TSecond second)) u = second;
+				if (TryRead(r, serializer, out TFirst first)) u = first;
+				else if (TryRead(r, serializer, out TSecond second)) u = second;
 			}
 			return u;
 		}
-
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -20,19 +18,19 @@ namespace Nest
 
 	public class XPackUser
 	{
-		[JsonProperty("username")]
-		public string Username { get; internal set; }
-
-		[JsonProperty("roles")]
-		public IReadOnlyCollection<string> Roles { get; internal set; } = EmptyReadOnly<string>.Collection;
+		[JsonProperty("email")]
+		public string Email { get; internal set; }
 
 		[JsonProperty("full_name")]
 		public string FullName { get; internal set; }
 
-		[JsonProperty("email")]
-		public string Email { get; internal set; }
-
 		[JsonProperty("metadata")]
 		public IReadOnlyDictionary<string, object> Metadata { get; internal set; } = EmptyReadOnly<string, object>.Dictionary;
+
+		[JsonProperty("roles")]
+		public IReadOnlyCollection<string> Roles { get; internal set; } = EmptyReadOnly<string>.Collection;
+
+		[JsonProperty("username")]
+		public string Username { get; internal set; }
 	}
 }

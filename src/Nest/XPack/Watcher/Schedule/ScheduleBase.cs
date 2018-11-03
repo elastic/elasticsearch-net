@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject]
-	public interface ISchedule {}
+	public interface ISchedule { }
 
 	public abstract class ScheduleBase : ISchedule
 	{

@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -44,7 +44,7 @@ namespace Nest
 
 	public class DailySchedule : ScheduleBase, IDailySchedule
 	{
-		public Union<IEnumerable<string>,ITimeOfDay> At { get; set; }
+		public Union<IEnumerable<string>, ITimeOfDay> At { get; set; }
 
 		internal override void WrapInContainer(IScheduleContainer container) => container.Daily = this;
 	}

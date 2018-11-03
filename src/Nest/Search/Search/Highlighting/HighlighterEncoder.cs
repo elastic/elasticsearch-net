@@ -15,6 +15,7 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "default")]
 		Default,
+
 		/// <summary>
 		/// Escapes HTML highlighting tags
 		/// </summary>

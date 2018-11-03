@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -11,17 +11,11 @@ namespace Nest
 
 	public partial class ClearScrollRequest
 	{
+		public ClearScrollRequest(IEnumerable<string> scrollIds) => ScrollIds = scrollIds;
+
+		public ClearScrollRequest(string scrollId) => ScrollIds = new string[] { scrollId };
+
 		public IEnumerable<string> ScrollIds { get; set; }
-
-		public ClearScrollRequest(IEnumerable<string> scrollIds)
-		{
-			this.ScrollIds = scrollIds;
-		}
-
-		public ClearScrollRequest(string scrollId)
-		{
-			this.ScrollIds = new string[] { scrollId };
-		}
 	}
 
 	[DescriptorFor("ClearScroll")]

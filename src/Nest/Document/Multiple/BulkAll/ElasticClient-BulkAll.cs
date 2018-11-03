@@ -14,7 +14,7 @@ namespace Nest
 			IEnumerable<T> documents,
 			Func<BulkAllDescriptor<T>, IBulkAllRequest<T>> selector,
 			CancellationToken cancellationToken = default(CancellationToken)
-			)
+		)
 			where T : class;
 
 		/// <summary>
@@ -26,16 +26,16 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		///<inheritdoc />
-		public BulkAllObservable<T>  BulkAll<T>(
+		public BulkAllObservable<T> BulkAll<T>(
 			IEnumerable<T> documents,
 			Func<BulkAllDescriptor<T>, IBulkAllRequest<T>> selector,
 			CancellationToken cancellationToken = default(CancellationToken)
-			)
+		)
 			where T : class =>
-			this.BulkAll<T>(selector.InvokeOrDefault(new BulkAllDescriptor<T>(documents)), cancellationToken);
+			BulkAll<T>(selector.InvokeOrDefault(new BulkAllDescriptor<T>(documents)), cancellationToken);
 
 		///<inheritdoc />
-		public BulkAllObservable<T>  BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
+		public BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class =>
 			new BulkAllObservable<T>(this, request, cancellationToken);
 	}

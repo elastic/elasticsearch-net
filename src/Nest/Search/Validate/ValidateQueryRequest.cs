@@ -11,8 +11,7 @@ namespace Nest
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IValidateQueryRequest<T> : IValidateQueryRequest
-		where T : class
-	{ }
+		where T : class { }
 
 	public partial class ValidateQueryRequest
 	{

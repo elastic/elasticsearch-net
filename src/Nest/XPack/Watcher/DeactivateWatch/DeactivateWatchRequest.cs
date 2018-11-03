@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
-	public partial interface IDeactivateWatchRequest {}
+	public partial interface IDeactivateWatchRequest { }
 
-	public partial class DeactivateWatchRequest {}
+	public partial class DeactivateWatchRequest { }
 
 	[DescriptorFor("XpackWatcherDeactivateWatch")]
-	public partial class DeactivateWatchDescriptor {}
+	public partial class DeactivateWatchDescriptor { }
 }

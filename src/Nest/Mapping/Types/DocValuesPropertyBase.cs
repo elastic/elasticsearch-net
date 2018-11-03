@@ -1,6 +1,4 @@
-﻿using System;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -19,7 +17,7 @@ namespace Nest
 		bool? DocValues { get; set; }
 	}
 
-	/// <inheritdoc cref="IDocValuesProperty"/>
+	/// <inheritdoc cref="IDocValuesProperty" />
 	public abstract class DocValuesPropertyBase : CorePropertyBase, IDocValuesProperty
 	{
 		protected DocValuesPropertyBase(FieldType type) : base(type) { }

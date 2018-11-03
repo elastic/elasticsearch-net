@@ -8,6 +8,7 @@ namespace Nest
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
+
 		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -15,7 +16,8 @@ namespace Nest
 			var jo = JObject.Load(reader);
 			var prop = jo.Property("type");
 			if (prop == null) return null;
-			switch(prop.Value.Value<string>())
+
+			switch (prop.Value.Value<string>())
 			{
 				case "geo":
 					var g = new GeoSuggestContext();

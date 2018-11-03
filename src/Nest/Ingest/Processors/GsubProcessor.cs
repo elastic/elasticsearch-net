@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -24,13 +20,12 @@ namespace Nest
 
 	public class GsubProcessor : ProcessorBase, IGsubProcessor
 	{
-		protected override string Name => "gsub";
-
 		public Field Field { get; set; }
 
 		public string Pattern { get; set; }
 
 		public string Replacement { get; set; }
+		protected override string Name => "gsub";
 	}
 
 	public class GsubProcessorDescriptor<T>

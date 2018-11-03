@@ -19,7 +19,7 @@ namespace Nest
 	public class MatchAllQuery : QueryBase, IMatchAllQuery
 	{
 		/// <inheritdoc />
-		public string NormField { get;  set; }
+		public string NormField { get; set; }
 
 		protected override bool Conditionless => false;
 
@@ -28,7 +28,7 @@ namespace Nest
 
 	public class MatchAllQueryDescriptor
 		: QueryDescriptorBase<MatchAllQueryDescriptor, IMatchAllQuery>
-		, IMatchAllQuery
+			, IMatchAllQuery
 	{
 		protected override bool Conditionless => false;
 

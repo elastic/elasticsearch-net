@@ -25,70 +25,133 @@
 		void Visit(IQuery query);
 
 		void Visit(IBoolQuery query);
+
 		void Visit(IBoostingQuery query);
+
 		void Visit(ICommonTermsQuery query);
+
 		void Visit(IConstantScoreQuery query);
+
 		void Visit(IDisMaxQuery query);
+
 		void Visit(IFunctionScoreQuery query);
+
 		void Visit(IFuzzyQuery query);
+
 		void Visit(IFuzzyNumericQuery query);
+
 		void Visit(IFuzzyDateQuery query);
+
 		void Visit(IFuzzyStringQuery query);
+
 		void Visit(IHasChildQuery query);
+
 		void Visit(IHasParentQuery query);
+
 		void Visit(IIdsQuery query);
+
 		void Visit(IMatchQuery query);
+
 		void Visit(IMatchPhraseQuery query);
+
 		void Visit(IMatchPhrasePrefixQuery query);
+
 		void Visit(IMatchAllQuery query);
+
 		void Visit(IMatchNoneQuery query);
+
 		void Visit(IMoreLikeThisQuery query);
+
 		void Visit(IMultiMatchQuery query);
+
 		void Visit(INestedQuery query);
+
 		void Visit(IPrefixQuery query);
+
 		void Visit(IQueryStringQuery query);
+
 		void Visit(IRangeQuery query);
+
 		void Visit(IRegexpQuery query);
+
 		void Visit(ISimpleQueryStringQuery query);
+
 		void Visit(ITermQuery query);
+
 		void Visit(IWildcardQuery query);
+
 		void Visit(ITermsQuery query);
+
 		void Visit(ITypeQuery query);
+
 		void Visit(IScriptQuery query);
+
 		void Visit(IGeoPolygonQuery query);
+
 		void Visit(IGeoDistanceQuery query);
+
 		void Visit(IGeoBoundingBoxQuery query);
+
 		void Visit(IExistsQuery query);
+
 		void Visit(IDateRangeQuery query);
+
 		void Visit(INumericRangeQuery query);
+
 		void Visit(ILongRangeQuery query);
+
 		void Visit(ITermRangeQuery query);
+
 		void Visit(ISpanFirstQuery query);
+
 		void Visit(ISpanNearQuery query);
+
 		void Visit(ISpanNotQuery query);
+
 		void Visit(ISpanOrQuery query);
+
 		void Visit(ISpanTermQuery query);
+
 		void Visit(ISpanQuery query);
+
 		void Visit(ISpanSubQuery query);
+
 		void Visit(ISpanContainingQuery query);
+
 		void Visit(ISpanWithinQuery query);
+
 		void Visit(ISpanMultiTermQuery query);
+
 		void Visit(ISpanFieldMaskingQuery query);
 
 		void Visit(IGeoIndexedShapeQuery query);
+
 		void Visit(IGeoShapeQuery query);
+
 		void Visit(IGeoShapeMultiPointQuery query);
+
 		void Visit(IGeoShapeMultiPolygonQuery query);
+
 		void Visit(IGeoShapePolygonQuery query);
+
 		void Visit(IGeoShapePointQuery query);
+
 		void Visit(IGeoShapeMultiLineStringQuery query);
+
 		void Visit(IGeoShapeLineStringQuery query);
+
 		void Visit(IGeoShapeEnvelopeQuery query);
+
 		void Visit(IGeoShapeCircleQuery query);
+
 		void Visit(IGeoShapeGeometryCollectionQuery query);
+
 		void Visit(IRawQuery query);
+
 		void Visit(IPercolateQuery query);
+
 		void Visit(IParentIdQuery query);
+
 		void Visit(ITermsSetQuery query);
 	}
 
@@ -97,8 +160,6 @@
 		public int Depth { get; set; }
 
 		public VisitorScope Scope { get; set; }
-
-		public virtual void Visit(IQueryVisitor visitor) { }
 
 		public virtual void Visit(IQueryContainer query) { }
 
@@ -233,5 +294,7 @@
 		public virtual void Visit(IParentIdQuery query) { }
 
 		public virtual void Visit(ITermsSetQuery query) { }
+
+		public virtual void Visit(IQueryVisitor visitor) { }
 	}
 }

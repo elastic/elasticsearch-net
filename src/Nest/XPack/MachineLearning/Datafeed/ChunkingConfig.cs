@@ -21,7 +21,7 @@ namespace Nest
 
 		/// <summary>
 		/// The time span that each search will be querying.
-		/// This setting is only applicable when <see cref="Mode"/> is set to <see cref="ChunkingMode.Manual"/>.
+		/// This setting is only applicable when <see cref="Mode" /> is set to <see cref="ChunkingMode.Manual" />.
 		/// </summary>
 		[JsonProperty("time_span")]
 		Time TimeSpan { get; set; }

@@ -9,19 +9,18 @@ namespace Nest
 		IDynamicIndexSettings IndexSettings { get; set; }
 	}
 
-	public partial class UpdateIndexSettingsRequest 
+	public partial class UpdateIndexSettingsRequest
 	{
 		public IDynamicIndexSettings IndexSettings { get; set; }
 	}
 
 	[DescriptorFor("IndicesPutSettings")]
-	public partial class UpdateIndexSettingsDescriptor 
+	public partial class UpdateIndexSettingsDescriptor
 	{
 		IDynamicIndexSettings IUpdateIndexSettingsRequest.IndexSettings { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public UpdateIndexSettingsDescriptor IndexSettings(Func<DynamicIndexSettingsDescriptor, IPromise<IDynamicIndexSettings>> settings) =>
 			Assign(a => a.IndexSettings = settings?.Invoke(new DynamicIndexSettingsDescriptor())?.Value);
-
 	}
 }

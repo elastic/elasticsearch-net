@@ -1,5 +1,4 @@
 ﻿using System.Collections.Specialized;
-using System.Globalization;
 
 namespace Nest
 {
@@ -26,6 +25,7 @@ namespace Nest
 
 			return queryParameters;
 		}
+
 		internal static string ToCamelCase(this string s)
 		{
 			if (string.IsNullOrEmpty(s))
@@ -34,13 +34,11 @@ namespace Nest
 			if (!char.IsUpper(s[0]))
 				return s;
 
-			string camelCase = char.ToLowerInvariant(s[0]).ToString();
+			var camelCase = char.ToLowerInvariant(s[0]).ToString();
 			if (s.Length > 1)
 				camelCase += s.Substring(1);
 
 			return camelCase;
 		}
-
-
 	}
 }

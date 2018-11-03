@@ -5,13 +5,14 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 #if DOTNETCORE
 using System.Reflection;
+
 #endif
 
 namespace Nest
 {
 	/// <summary>
 	/// A Json converter that can serialize enums to strings where the string values
-	/// are specified using <see cref="EnumMemberAttribute.Value"/> and where values
+	/// are specified using <see cref="EnumMemberAttribute.Value" /> and where values
 	/// differ in casing.
 	/// </summary>
 	/// <remarks>
@@ -81,9 +82,6 @@ namespace Nest
 			return Enum.TryParse(value, true, out enumValue) ? enumValue : default(TEnum);
 		}
 
-		public override bool CanConvert(Type objectType)
-		{
-			return objectType == typeof(TEnum);
-		}
+		public override bool CanConvert(Type objectType) => objectType == typeof(TEnum);
 	}
 }

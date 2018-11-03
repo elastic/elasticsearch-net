@@ -7,6 +7,5 @@ namespace Nest
 	{
 		[JsonProperty("endpoint")]
 		public string Endpoint { get; set; }
-
 	}
 }

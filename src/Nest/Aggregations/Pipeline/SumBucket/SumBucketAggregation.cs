@@ -9,7 +9,7 @@ namespace Nest
 	public class SumBucketAggregation
 		: PipelineAggregationBase, ISumBucketAggregation
 	{
-		internal SumBucketAggregation () { }
+		internal SumBucketAggregation() { }
 
 		public SumBucketAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
@@ -19,7 +19,5 @@ namespace Nest
 
 	public class SumBucketAggregationDescriptor
 		: PipelineAggregationDescriptorBase<SumBucketAggregationDescriptor, ISumBucketAggregation, SingleBucketsPath>
-		, ISumBucketAggregation
-	{
-	}
+			, ISumBucketAggregation { }
 }

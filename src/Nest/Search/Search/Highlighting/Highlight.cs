@@ -13,20 +13,54 @@ namespace Nest
 	public interface IHighlight
 	{
 		/// <summary>
-		/// Controls the pre tag in which to wrap highights.
-		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
-		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
+		/// Defines what constitutes a boundary for highlighting when using the fast vector highlighter.
+		/// It's a single string with each boundary character defined in it. It defaults to .,!? \t\n.
 		/// </summary>
-		[JsonProperty("pre_tags")]
-		IEnumerable<string> PreTags { get; set; }
+		[JsonProperty("boundary_chars")]
+		string BoundaryChars { get; set; }
 
 		/// <summary>
-		/// Controls the post tag in which to wrap highights.
-		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
-		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
+		/// Controls how far to look for boundary characters. Defaults to 20.
 		/// </summary>
-		[JsonProperty("post_tags")]
-		IEnumerable<string> PostTags { get; set; }
+		[JsonProperty("boundary_max_scan")]
+		int? BoundaryMaxScan { get; set; }
+
+		/// <summary>
+		/// When highlighting a field using the unified highlighter or the fast vector highlighter, you can specify how to break the highlighted
+		/// fragments using boundary_scanner
+		/// </summary>
+		[JsonProperty("boundary_scanner")]
+		BoundaryScanner? BoundaryScanner { get; set; }
+
+		/// <summary>
+		/// You can further specify boundary_scanner_locale to control which Locale is used to search the text for these boundaries.
+		/// </summary>
+		[JsonProperty("boundary_scanner_locale")]
+		string BoundaryScannerLocale { get; set; }
+
+		/// <summary>
+		/// Define how highlighted text will be encoded.
+		/// It can be either default (no encoding) or html (will escape html, if you use html highlighting tags).
+		/// </summary>
+		[JsonProperty("encoder")]
+		HighlighterEncoder? Encoder { get; set; }
+
+		[JsonProperty("fields")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Field, IHighlightField>))]
+		Dictionary<Field, IHighlightField> Fields { get; set; }
+
+		/// <summary>
+		/// Fragmenter can control how text should be broken up in highlight snippets. However, this option is
+		/// applicable only for the Plain Highlighter
+		/// </summary>
+		[JsonProperty("fragmenter")]
+		HighlighterFragmenter? Fragmenter { get; set; }
+
+		/// <summary>
+		/// Controls the margin to start highlighting from when using the fast vector highlighter
+		/// </summary>
+		[JsonProperty("fragment_offset")]
+		int? FragmentOffset { get; set; }
 
 		/// <summary>
 		/// The size of the highlighted fragment, in characters. Defaults to 100
@@ -34,8 +68,12 @@ namespace Nest
 		[JsonProperty("fragment_size")]
 		int? FragmentSize { get; set; }
 
+		[JsonProperty("max_fragment_length")]
+		int? MaxFragmentLength { get; set; }
+
 		/// <summary>
-		/// In the case where there is no matching fragment to highlight, the default is to not return anything. Instead, we can return a snippet of text from
+		/// In the case where there is no matching fragment to highlight, the default is to not return anything. Instead, we can return a snippet of
+		/// text from
 		/// the beginning of the field by setting no_match_size (default 0) to the length of the text that you want returned. The actual length may be
 		/// shorter or longer than specified as it tries to break on a word boundary.
 		/// </summary>
@@ -49,46 +87,26 @@ namespace Nest
 		int? NumberOfFragments { get; set; }
 
 		/// <summary>
-		/// Controls the margin to start highlighting from when using the fast vector highlighter
-		/// </summary>
-		[JsonProperty("fragment_offset")]
-		int? FragmentOffset { get; set; }
-
-		/// <summary>
-		/// Controls how far to look for boundary characters. Defaults to 20.
-		/// </summary>
-		[JsonProperty("boundary_max_scan")]
-		int? BoundaryMaxScan { get; set; }
-
-		/// <summary>
-		/// Define how highlighted text will be encoded.
-		/// It can be either default (no encoding) or html (will escape html, if you use html highlighting tags).
-		/// </summary>
-		[JsonProperty("encoder")]
-		HighlighterEncoder? Encoder { get; set; }
-
-		/// <summary>
 		/// The order in which highlighted fragments are sorted
 		/// </summary>
 		[JsonProperty("order")]
 		HighlighterOrder? Order { get; set; }
 
 		/// <summary>
-		/// Use a specific "tag" schemas.
+		/// Controls the post tag in which to wrap highights.
+		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
+		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
 		/// </summary>
-		/// <remarks>
-		/// Currently a single schema called "styled" with the following pre_tags:
-		/// &lt;em class="hlt1"&gt;, &lt;em class="hlt2"&gt;, &lt;em class="hlt3"&gt;,
-		/// &lt;em class="hlt4"&gt;, &lt;em class="hlt5"&gt;, &lt;em class="hlt6"&gt;,
-		/// &lt;em class="hlt7"&gt;, &lt;em class="hlt8"&gt;, &lt;em class="hlt9"&gt;,
-		/// &lt;em class="hlt10"&gt;
-		/// </remarks>
-		[JsonProperty("tags_schema")]
-		HighlighterTagsSchema? TagsSchema { get; set; }
+		[JsonProperty("post_tags")]
+		IEnumerable<string> PostTags { get; set; }
 
-		[JsonProperty("fields")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Field, IHighlightField>))]
-		Dictionary<Field, IHighlightField> Fields { get; set; }
+		/// <summary>
+		/// Controls the pre tag in which to wrap highights.
+		/// By default, the highlighting will wrap highlighted text in &lt;em&gt; and &lt;/em&gt;.
+		/// Using the fast vector highlighter, there can be more tags, and the importance is ordered.
+		/// </summary>
+		[JsonProperty("pre_tags")]
+		IEnumerable<string> PreTags { get; set; }
 
 		/// <summary>
 		/// Use a specific "tag" schemas.
@@ -104,104 +122,102 @@ namespace Nest
 		bool? RequireFieldMatch { get; set; }
 
 		/// <summary>
-		/// Defines what constitutes a boundary for highlighting when using the fast vector highlighter.
-		/// It's a single string with each boundary character defined in it. It defaults to .,!? \t\n.
+		/// Use a specific "tag" schemas.
 		/// </summary>
-		[JsonProperty("boundary_chars")]
-		string BoundaryChars { get; set; }
-
-		[JsonProperty("max_fragment_length")]
-		int? MaxFragmentLength { get; set; }
-
-		/// <summary>
-		/// When highlighting a field using the unified highlighter or the fast vector highlighter, you can specify how to break the highlighted
-		/// fragments using boundary_scanner
-		/// </summary>
-		[JsonProperty("boundary_scanner")]
-		BoundaryScanner? BoundaryScanner { get; set; }
-
-		/// <summary>
-		///You can further specify boundary_scanner_locale to control which Locale is used to search the text for these boundaries.
-		/// </summary>
-		[JsonProperty("boundary_scanner_locale")]
-		string BoundaryScannerLocale { get; set; }
-
-		/// <summary>
-		/// Fragmenter can control how text should be broken up in highlight snippets. However, this option is
-		/// applicable only for the Plain Highlighter
-		/// </summary>
-		[JsonProperty("fragmenter")]
-		HighlighterFragmenter? Fragmenter { get; set; }
+		/// <remarks>
+		/// Currently a single schema called "styled" with the following pre_tags:
+		/// &lt;em class="hlt1"&gt;, &lt;em class="hlt2"&gt;, &lt;em class="hlt3"&gt;,
+		/// &lt;em class="hlt4"&gt;, &lt;em class="hlt5"&gt;, &lt;em class="hlt6"&gt;,
+		/// &lt;em class="hlt7"&gt;, &lt;em class="hlt8"&gt;, &lt;em class="hlt9"&gt;,
+		/// &lt;em class="hlt10"&gt;
+		/// </remarks>
+		[JsonProperty("tags_schema")]
+		HighlighterTagsSchema? TagsSchema { get; set; }
 	}
 
 	public class Highlight : IHighlight
 	{
 		// <inheritdoc/>
-		public IEnumerable<string> PreTags { get; set; }
-		// <inheritdoc/>
-		public IEnumerable<string> PostTags { get; set; }
-		// <inheritdoc/>
-		public int? FragmentSize { get; set; }
-		// <inheritdoc/>
-		public HighlighterTagsSchema? TagsSchema { get; set; }
-		// <inheritdoc/>
-		public int? NumberOfFragments { get; set; }
-		// <inheritdoc/>
-		public int? FragmentOffset { get; set; }
+		public string BoundaryChars { get; set; }
+
 		// <inheritdoc/>
 		public int? BoundaryMaxScan { get; set; }
-		// <inheritdoc/>
-		public HighlighterEncoder? Encoder { get; set; }
-		// <inheritdoc/>
-		public HighlighterOrder? Order { get; set; }
-		// <inheritdoc/>
-		public Dictionary<Field, IHighlightField> Fields { get; set; }
-		// <inheritdoc/>
-		public bool? RequireFieldMatch { get; set; }
-		// <inheritdoc/>
-		public string BoundaryChars { get; set; }
-		// <inheritdoc/>
-		public int? MaxFragmentLength { get; set; }
-		// <inheritdoc/>
-		public int? NoMatchSize { get; set; }
+
 		// <inheritdoc/>
 		public BoundaryScanner? BoundaryScanner { get; set; }
+
 		// <inheritdoc/>
 		public string BoundaryScannerLocale { get; set; }
+
+		// <inheritdoc/>
+		public HighlighterEncoder? Encoder { get; set; }
+
+		// <inheritdoc/>
+		public Dictionary<Field, IHighlightField> Fields { get; set; }
+
 		// <inheritdoc/>
 		public HighlighterFragmenter? Fragmenter { get; set; }
+
+		// <inheritdoc/>
+		public int? FragmentOffset { get; set; }
+
+		// <inheritdoc/>
+		public int? FragmentSize { get; set; }
+
+		// <inheritdoc/>
+		public int? MaxFragmentLength { get; set; }
+
+		// <inheritdoc/>
+		public int? NoMatchSize { get; set; }
+
+		// <inheritdoc/>
+		public int? NumberOfFragments { get; set; }
+
+		// <inheritdoc/>
+		public HighlighterOrder? Order { get; set; }
+
+		// <inheritdoc/>
+		public IEnumerable<string> PostTags { get; set; }
+
+		// <inheritdoc/>
+		public IEnumerable<string> PreTags { get; set; }
+
+		// <inheritdoc/>
+		public bool? RequireFieldMatch { get; set; }
+
+		// <inheritdoc/>
+		public HighlighterTagsSchema? TagsSchema { get; set; }
 
 		public static Highlight Field(Field field) => new Highlight
 		{
 			Fields = new Dictionary<Field, IHighlightField>
 			{
-				{field, new HighlightField()}
+				{ field, new HighlightField() }
 			}
 		};
-
 	}
 
-	public class HighlightDescriptor<T> : DescriptorBase<HighlightDescriptor<T> ,IHighlight>, IHighlight
+	public class HighlightDescriptor<T> : DescriptorBase<HighlightDescriptor<T>, IHighlight>, IHighlight
 		where T : class
 	{
-
-		IEnumerable<string> IHighlight.PreTags { get; set; }
-		IEnumerable<string> IHighlight.PostTags { get; set; }
-		int? IHighlight.FragmentSize { get; set; }
-		HighlighterTagsSchema? IHighlight.TagsSchema { get; set; }
-		int? IHighlight.NumberOfFragments { get; set; }
-		int? IHighlight.FragmentOffset { get; set; }
-		int? IHighlight.BoundaryMaxScan { get; set; }
-		HighlighterEncoder? IHighlight.Encoder { get; set; }
-		HighlighterOrder? IHighlight.Order { get; set; }
-		Dictionary<Field, IHighlightField> IHighlight.Fields { get; set; }
-		bool? IHighlight.RequireFieldMatch { get; set; }
 		string IHighlight.BoundaryChars { get; set; }
-		int? IHighlight.MaxFragmentLength { get; set; }
-		int? IHighlight.NoMatchSize { get; set; }
+		int? IHighlight.BoundaryMaxScan { get; set; }
 		BoundaryScanner? IHighlight.BoundaryScanner { get; set; }
 		string IHighlight.BoundaryScannerLocale { get; set; }
+		HighlighterEncoder? IHighlight.Encoder { get; set; }
+		Dictionary<Field, IHighlightField> IHighlight.Fields { get; set; }
 		HighlighterFragmenter? IHighlight.Fragmenter { get; set; }
+		int? IHighlight.FragmentOffset { get; set; }
+		int? IHighlight.FragmentSize { get; set; }
+		int? IHighlight.MaxFragmentLength { get; set; }
+		int? IHighlight.NoMatchSize { get; set; }
+		int? IHighlight.NumberOfFragments { get; set; }
+		HighlighterOrder? IHighlight.Order { get; set; }
+		IEnumerable<string> IHighlight.PostTags { get; set; }
+
+		IEnumerable<string> IHighlight.PreTags { get; set; }
+		bool? IHighlight.RequireFieldMatch { get; set; }
+		HighlighterTagsSchema? IHighlight.TagsSchema { get; set; }
 
 		// <inheritdoc/>
 		public HighlightDescriptor<T> Fields(params Func<HighlightFieldDescriptor<T>, IHighlightField>[] fieldHighlighters) =>
@@ -218,10 +234,10 @@ namespace Nest
 		public HighlightDescriptor<T> TagsSchema(HighlighterTagsSchema? schema) => Assign(a => a.TagsSchema = schema);
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> PreTags(string preTags) => this.PreTags(new[] {preTags});
+		public HighlightDescriptor<T> PreTags(string preTags) => PreTags(new[] { preTags });
 
 		// <inheritdoc/>
-		public HighlightDescriptor<T> PostTags(string postTags) => this.PostTags(new[] {postTags});
+		public HighlightDescriptor<T> PostTags(string postTags) => PostTags(new[] { postTags });
 
 		// <inheritdoc/>
 		public HighlightDescriptor<T> PreTags(IEnumerable<string> preTags) => Assign(a => a.PreTags = preTags.ToListOrNullIfEmpty());

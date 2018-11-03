@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
-	public partial interface IDeleteLicenseRequest
-	{
-	}
+	public partial interface IDeleteLicenseRequest { }
 
-	public partial class DeleteLicenseRequest
-	{
-	}
+	public partial class DeleteLicenseRequest { }
 
 	[DescriptorFor("XpackLicenseDelete")]
-	public partial class DeleteLicenseDescriptor : IDeleteLicenseRequest
-	{
-
-	}
+	public partial class DeleteLicenseDescriptor : IDeleteLicenseRequest { }
 }

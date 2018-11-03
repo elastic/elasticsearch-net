@@ -5,15 +5,15 @@ namespace Nest
 {
 	public class SearchProfile
 	{
-		[JsonProperty("rewrite_time")]
-		public long RewriteTime { get; internal set; }
+		[JsonProperty("collector")]
+		public IReadOnlyCollection<Collector> Collector { get; internal set; } =
+			EmptyReadOnly<Collector>.Collection;
 
 		[JsonProperty("query")]
 		public IReadOnlyCollection<QueryProfile> Query { get; internal set; } =
 			EmptyReadOnly<QueryProfile>.Collection;
 
-		[JsonProperty("collector")]
-		public IReadOnlyCollection<Collector> Collector { get; internal set; } =
-			EmptyReadOnly<Collector>.Collection;
+		[JsonProperty("rewrite_time")]
+		public long RewriteTime { get; internal set; }
 	}
 }

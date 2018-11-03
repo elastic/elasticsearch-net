@@ -20,37 +20,48 @@ namespace Nest
 		/// <summary>
 		/// Retrieves machine learning job results for one or more buckets.
 		/// </summary>
-		Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId,
+			Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
 		/// <summary>
 		/// Retrieves machine learning job results for one or more buckets.
 		/// </summary>
-		Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IGetOverallBucketsResponse GetOverallBuckets(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null) =>
-			this.GetOverallBuckets(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(jobId)));
+			GetOverallBuckets(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(jobId)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IGetOverallBucketsResponse GetOverallBuckets(IGetOverallBucketsRequest request) =>
-			this.Dispatcher.Dispatch<IGetOverallBucketsRequest, GetOverallBucketsRequestParameters, GetOverallBucketsResponse>(
+			Dispatcher.Dispatch<IGetOverallBucketsRequest, GetOverallBucketsRequestParameters, GetOverallBucketsResponse>(
 				request,
-				this.LowLevelDispatch.XpackMlGetOverallBucketsDispatch<GetOverallBucketsResponse>
+				LowLevelDispatch.XpackMlGetOverallBucketsDispatch<GetOverallBucketsResponse>
 			);
 
-		/// <inheritdoc/>
-		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId, Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.GetOverallBucketsAsync(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(jobId)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(Id jobId,
+			Func<GetOverallBucketsDescriptor, IGetOverallBucketsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			GetOverallBucketsAsync(selector.InvokeOrDefault(new GetOverallBucketsDescriptor(jobId)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IGetOverallBucketsRequest, GetOverallBucketsRequestParameters, GetOverallBucketsResponse, IGetOverallBucketsResponse>(
-				request,
-				cancellationToken,
-				this.LowLevelDispatch.XpackMlGetOverallBucketsDispatchAsync<GetOverallBucketsResponse>
-			);
+		/// <inheritdoc />
+		public Task<IGetOverallBucketsResponse> GetOverallBucketsAsync(IGetOverallBucketsRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher
+				.DispatchAsync<IGetOverallBucketsRequest, GetOverallBucketsRequestParameters, GetOverallBucketsResponse, IGetOverallBucketsResponse>(
+					request,
+					cancellationToken,
+					LowLevelDispatch.XpackMlGetOverallBucketsDispatchAsync<GetOverallBucketsResponse>
+				);
 	}
 }

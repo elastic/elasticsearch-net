@@ -1,9 +1,9 @@
 namespace Nest
 {
-	public partial interface ICloseJobRequest {}
+	public partial interface ICloseJobRequest { }
 
-	public partial class CloseJobRequest {}
+	public partial class CloseJobRequest { }
 
 	[DescriptorFor("XpackMlCloseJob")]
-	public partial class CloseJobDescriptor {}
+	public partial class CloseJobDescriptor { }
 }

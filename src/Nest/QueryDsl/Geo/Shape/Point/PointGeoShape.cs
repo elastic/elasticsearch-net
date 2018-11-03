@@ -12,11 +12,8 @@ namespace Nest
 	{
 		public PointGeoShape() : this(null) { }
 
-		public PointGeoShape(GeoCoordinate coordinates) 
-			: base("point") 
-		{
-			this.Coordinates = coordinates;
-		}
+		public PointGeoShape(GeoCoordinate coordinates)
+			: base("point") => Coordinates = coordinates;
 
 		public GeoCoordinate Coordinates { get; set; }
 	}

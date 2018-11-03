@@ -6,6 +6,7 @@ namespace Nest
 	internal class GeoCoordinateJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var p = (GeoCoordinate)value;
@@ -25,6 +26,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartArray) return null;
+
 			var doubles = serializer.Deserialize<double[]>(reader);
 			switch (doubles.Length)
 			{

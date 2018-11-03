@@ -14,16 +14,14 @@ namespace Nest
 
 	public class SpanGapQuery : QueryBase, ISpanGapQuery
 	{
-		protected override bool Conditionless => SpanGapQuery.IsConditionless(this);
+		public Field Field { get; set; }
+		public int? Width { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal static bool IsConditionless(ISpanGapQuery q) => q?.Width == null || q.Field.IsConditionless();
 
-		public Field Field { get; set; }
-		public int? Width { get; set; }
-
 		internal override void InternalWrapInContainer(IQueryContainer c) =>
 			throw new Exception("span_gap may only appear as a span near clause");
-
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -47,6 +45,7 @@ namespace Nest
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
+
 		public override bool CanConvert(Type objectType) => typeof(ISpanGapQuery).IsAssignableFrom(objectType);
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -68,12 +67,12 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartObject) return null;
+
 			reader.Read();
 			var field = (Field)reader.Value.ToString(); // field
 			var width = reader.ReadAsInt32();
 			reader.Read();
-			return new SpanGapQuery {Field = field, Width = width};
+			return new SpanGapQuery { Field = field, Width = width };
 		}
-
 	}
 }

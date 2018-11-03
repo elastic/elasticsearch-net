@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -18,16 +16,16 @@ namespace Nest
 		int? MinimumLength { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class KuromojiStemmerTokenFilter : TokenFilterBase, IKuromojiStemmerTokenFilter
 	{
 		public KuromojiStemmerTokenFilter() : base("kuromoji_stemmer") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public int? MinimumLength { get; set; }
 	}
 
-	///<inheritdoc/>
+	/// <inheritdoc />
 	public class KuromojiStemmerTokenFilterDescriptor
 		: TokenFilterDescriptorBase<KuromojiStemmerTokenFilterDescriptor, IKuromojiStemmerTokenFilter>, IKuromojiStemmerTokenFilter
 	{
@@ -35,7 +33,7 @@ namespace Nest
 
 		int? IKuromojiStemmerTokenFilter.MinimumLength { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public KuromojiStemmerTokenFilterDescriptor MinimumLength(int? minimumLength) => Assign(a => a.MinimumLength = minimumLength);
 	}
 }

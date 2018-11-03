@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -26,20 +25,19 @@ namespace Nest
 #endif
 		}
 
-		internal static bool IsGenericDictionary(this Type type)
-		{
-			return type.GetInterfaces().Any(t =>
+		internal static bool IsGenericDictionary(this Type type) => type.GetInterfaces()
+			.Any(t =>
 				t.IsGeneric() && (
-				t.GetGenericTypeDefinition() == typeof(IDictionary<,>) ||
-				t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>)));
-		}
+					t.GetGenericTypeDefinition() == typeof(IDictionary<,>) ||
+					t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>)));
 
 		internal static bool TryGetGenericDictionaryArguments(this Type type, out Type[] genericArguments)
 		{
-			var genericDictionary = type.GetInterfaces().FirstOrDefault(t =>
-				t.IsGeneric() && (
-				t.GetGenericTypeDefinition() == typeof(IDictionary<,>) ||
-				t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>)));
+			var genericDictionary = type.GetInterfaces()
+				.FirstOrDefault(t =>
+					t.IsGeneric() && (
+						t.GetGenericTypeDefinition() == typeof(IDictionary<,>) ||
+						t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>)));
 
 			if (genericDictionary == null)
 			{
@@ -102,7 +100,7 @@ namespace Nest
 				return TypeCode.Double;
 			else if (type == typeof(decimal))
 				return TypeCode.Decimal;
-			else if (type == typeof(System.DateTime))
+			else if (type == typeof(DateTime))
 				return TypeCode.DateTime;
 			else if (type == typeof(string))
 				return TypeCode.String;
@@ -127,10 +125,7 @@ namespace Nest
 		}
 
 #if DOTNETCORE
-		internal static IEnumerable<Type> GetInterfaces(this Type type)
-		{
-			return type.GetTypeInfo().ImplementedInterfaces;
-		}
+		internal static IEnumerable<Type> GetInterfaces(this Type type) => type.GetTypeInfo().ImplementedInterfaces;
 #endif
 
 		internal static IEnumerable<TAttribute> GetAttributes<TAttribute>(this Type t)
@@ -139,7 +134,7 @@ namespace Nest
 #if !DOTNETCORE
 			var attributes = Attribute.GetCustomAttributes(t, typeof(TAttribute), true);
 #else
-			var attributes =  t.GetTypeInfo().GetCustomAttributes(typeof(TAttribute), true);
+			var attributes = t.GetTypeInfo().GetCustomAttributes(typeof(TAttribute), true);
 #endif
 			return attributes.Cast<TAttribute>();
 		}

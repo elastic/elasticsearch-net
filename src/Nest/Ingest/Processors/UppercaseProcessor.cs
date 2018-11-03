@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -18,9 +14,10 @@ namespace Nest
 
 	public class UppercaseProcessor : ProcessorBase, IUppercaseProcessor
 	{
-		protected override string Name => "uppercase";
 		[JsonProperty("field")]
 		public Field Field { get; set; }
+
+		protected override string Name => "uppercase";
 	}
 
 	public class UppercaseProcessorDescriptor<T>

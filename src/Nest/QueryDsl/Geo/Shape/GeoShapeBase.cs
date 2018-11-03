@@ -6,15 +6,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[ContractJsonConverterAttribute(typeof(GeoShapeConverter))]
+	[ContractJsonConverter(typeof(GeoShapeConverter))]
 	public interface IGeoShape
 	{
-		/// <summary>
-		/// The type of geo shape
-		/// </summary>
-		[JsonProperty("type")]
-		string Type { get; }
-
 		/// <summary>
 		/// Will ignore an unmapped field and will not match any documents for this query.
 		/// This can be useful when querying multiple indexes which might have different mappings.
@@ -22,6 +16,12 @@ namespace Nest
 		[JsonProperty("ignore_unmapped")]
 		[Obsolete("Removed in NEST 7.x. Use IgnoreUnmapped on IGeoShapeQuery")]
 		bool? IgnoreUnmapped { get; set; }
+
+		/// <summary>
+		/// The type of geo shape
+		/// </summary>
+		[JsonProperty("type")]
+		string Type { get; }
 	}
 
 	internal enum GeoShapeFormat
@@ -32,32 +32,31 @@ namespace Nest
 
 	internal static class GeoShapeType
 	{
-		public const string Point = "POINT";
-		public const string MultiPoint = "MULTIPOINT";
-		public const string LineString = "LINESTRING";
-		public const string MultiLineString = "MULTILINESTRING";
-		public const string Polygon = "POLYGON";
-		public const string MultiPolygon = "MULTIPOLYGON";
+		// WKT uses BBOX for envelope geo shape
+		public const string BoundingBox = "BBOX";
 		public const string Circle = "CIRCLE";
 		public const string Envelope = "ENVELOPE";
 		public const string GeometryCollection = "GEOMETRYCOLLECTION";
-
-		// WKT uses BBOX for envelope geo shape
-		public const string BoundingBox = "BBOX";
+		public const string LineString = "LINESTRING";
+		public const string MultiLineString = "MULTILINESTRING";
+		public const string MultiPoint = "MULTIPOINT";
+		public const string MultiPolygon = "MULTIPOLYGON";
+		public const string Point = "POINT";
+		public const string Polygon = "POLYGON";
 	}
 
 	public abstract class GeoShapeBase : IGeoShape
 	{
-		internal GeoShapeFormat Format { get; set; }
-
-	    protected GeoShapeBase(string type) => this.Type = type;
-
-		/// <inheritdoc />
-		public string Type { get; protected set; }
+		protected GeoShapeBase(string type) => Type = type;
 
 		/// <inheritdoc />
 		[Obsolete("Removed in NEST 7.x. Use IgnoreUnmapped on IGeoShapeQuery")]
 		public bool? IgnoreUnmapped { get; set; }
+
+		/// <inheritdoc />
+		public string Type { get; protected set; }
+
+		internal GeoShapeFormat Format { get; set; }
 	}
 
 	internal class GeoShapeConverter : JsonConverter
@@ -201,13 +200,13 @@ namespace Nest
 			};
 
 		private static PolygonGeoShape ParsePolygonGeoShape(JToken shape, JsonSerializer serializer) =>
-			new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)};
+			new PolygonGeoShape { Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer) };
 
 		private static MultiPointGeoShape ParseMultiPointGeoShape(JToken shape, JsonSerializer serializer) =>
-			new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+			new MultiPointGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static PointGeoShape ParsePointGeoShape(JToken shape, JsonSerializer serializer) =>
-			new PointGeoShape {Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer)};
+			new PointGeoShape { Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer) };
 
 		private static MultiLineStringGeoShape ParseMultiLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
 			new MultiLineStringGeoShape
@@ -216,10 +215,10 @@ namespace Nest
 			};
 
 		private static LineStringGeoShape ParseLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
-			new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+			new LineStringGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static EnvelopeGeoShape ParseEnvelopeGeoShape(JToken shape, JsonSerializer serializer) =>
-			new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+			new EnvelopeGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer) =>
 			new CircleGeoShape

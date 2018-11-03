@@ -15,11 +15,11 @@ namespace Nest
 		private static readonly MethodInfo GetActivatorMethodInfo =
 			typeof(TypeExtensions).GetMethod(nameof(GetActivator), BindingFlags.Static | BindingFlags.NonPublic);
 
-		private static readonly ConcurrentDictionary<Type, Func<object>> CachedDefaultValues =
-			new ConcurrentDictionary<Type, Func<object>>();
-
 		private static readonly ConcurrentDictionary<string, ObjectActivator<object>> CachedActivators =
 			new ConcurrentDictionary<string, ObjectActivator<object>>();
+
+		private static readonly ConcurrentDictionary<Type, Func<object>> CachedDefaultValues =
+			new ConcurrentDictionary<Type, Func<object>>();
 
 		private static readonly ConcurrentDictionary<string, Type> CachedGenericClosedTypes =
 			new ConcurrentDictionary<string, Type>();
@@ -30,10 +30,13 @@ namespace Nest
 		private static readonly ConcurrentDictionary<Type, IList<PropertyInfo>> CachedTypePropertyInfos =
 			new ConcurrentDictionary<Type, IList<PropertyInfo>>();
 
-		private delegate T ObjectActivator<out T>(params object[] args);
+
+		//this contract is only used to resolve properties in class WE OWN.
+		//these are not subject to change depending on what the user passes as connectionsettings
+		private static readonly ElasticContractResolver JsonContract = new ElasticContractResolver(new ConnectionSettings());
 
 		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args) =>
-			t.CreateGenericInstance(new[] {closeOver}, args);
+			t.CreateGenericInstance(new[] { closeOver }, args);
 
 		internal static object CreateGenericInstance(this Type t, Type[] closeOver, params object[] args)
 		{
@@ -47,7 +50,7 @@ namespace Nest
 			return closedType.CreateInstance(args);
 		}
 
-		internal static T CreateInstance<T>(this Type t, params object[] args) => (T) t.CreateInstance(args);
+		internal static T CreateInstance<T>(this Type t, params object[] args) => (T)t.CreateInstance(args);
 
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
@@ -58,15 +61,16 @@ namespace Nest
 
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-							   let p = c.GetParameters()
-							   let k = string.Join(",", p.Select(a => a.ParameterType.Name))
-							   where p.Length == args.Length
-							   select c;
+				let p = c.GetParameters()
+				let k = string.Join(",", p.Select(a => a.ParameterType.Name))
+				where p.Length == args.Length
+				select c;
 
 			var ctor = constructors.FirstOrDefault();
 			if (ctor == null)
 				throw new Exception($"Cannot create an instance of {t.FullName} because it has no constructor taking {args.Length} arguments");
-			activator = (ObjectActivator<object>) generic.Invoke(null, new object[] {ctor});
+
+			activator = (ObjectActivator<object>)generic.Invoke(null, new object[] { ctor });
 			CachedActivators.TryAdd(key, activator);
 			return activator(args);
 		}
@@ -74,10 +78,12 @@ namespace Nest
 		internal static object DefaultValue(this Type type) =>
 			type.IsValueType()
 				? CachedDefaultValues.GetOrAdd(type, t =>
-					Expression.Lambda<Func<object>>(
-						Expression.Convert(Expression.Default(type), typeof(object))
-					).Compile()
-				).Invoke()
+						Expression.Lambda<Func<object>>(
+								Expression.Convert(Expression.Default(type), typeof(object))
+							)
+							.Compile()
+					)
+					.Invoke()
 				: null;
 
 		//do not remove this is referenced through GetActivatorMethod
@@ -111,19 +117,17 @@ namespace Nest
 			var lambda = Expression.Lambda(typeof(ObjectActivator<T>), newExp, param);
 
 			//compile it
-			var compiled = (ObjectActivator<T>) lambda.Compile();
+			var compiled = (ObjectActivator<T>)lambda.Compile();
 			return compiled;
 		}
 
-		//this contract is only used to resolve properties in class WE OWN.
-		//these are not subject to change depending on what the user passes as connectionsettings
-		private static readonly ElasticContractResolver JsonContract = new ElasticContractResolver(new ConnectionSettings());
-
 		internal static IList<JsonProperty> GetCachedObjectProperties(this Type t,
-			MemberSerialization memberSerialization = MemberSerialization.OptIn)
+			MemberSerialization memberSerialization = MemberSerialization.OptIn
+		)
 		{
 			if (CachedTypeProperties.TryGetValue(t, out var propertyDictionary))
 				return propertyDictionary;
+
 			propertyDictionary = JsonContract.PropertiesOfAll(t, memberSerialization);
 			CachedTypeProperties.TryAdd(t, propertyDictionary);
 			return propertyDictionary;
@@ -133,6 +137,7 @@ namespace Nest
 		{
 			if (CachedTypePropertyInfos.TryGetValue(t, out var propertyInfos))
 				return propertyInfos;
+
 			propertyInfos = t.AllPropertiesNotCached().ToList();
 			CachedTypePropertyInfos.TryAdd(t, propertyInfos);
 			return propertyInfos;
@@ -150,15 +155,10 @@ namespace Nest
 				{
 					if (propertiesByName.ContainsKey(propertyInfo.Name))
 					{
-						if (IsHidingMember(propertyInfo))
-						{
-							propertiesByName[propertyInfo.Name] = propertyInfo;
-						}
+						if (IsHidingMember(propertyInfo)) propertiesByName[propertyInfo.Name] = propertyInfo;
 					}
 					else
-					{
 						propertiesByName.Add(propertyInfo.Name, propertyInfo);
-					}
 				}
 #if DOTNETCORE
 				type = type.GetTypeInfo()?.BaseType;
@@ -182,9 +182,11 @@ namespace Nest
 #endif
 			var baseProperty = baseType?.GetProperty(propertyInfo.Name);
 			if (baseProperty == null) return false;
+
 			var derivedGetMethod = propertyInfo.GetGetMethod().GetBaseDefinition();
 			return derivedGetMethod?.ReturnType != propertyInfo.PropertyType;
 		}
+
+		private delegate T ObjectActivator<out T>(params object[] args);
 	}
 }
-

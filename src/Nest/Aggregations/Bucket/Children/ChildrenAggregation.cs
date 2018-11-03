@@ -14,14 +14,11 @@ namespace Nest
 
 	public class ChildrenAggregation : BucketAggregationBase, IChildrenAggregation
 	{
-		public RelationName Type { get; set; }
-
 		internal ChildrenAggregation() { }
 
-		public ChildrenAggregation(string name, RelationName type) : base(name)
-		{
-			this.Type = type;
-		}
+		public ChildrenAggregation(string name, RelationName type) : base(name) => Type = type;
+
+		public RelationName Type { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Children = this;
 	}

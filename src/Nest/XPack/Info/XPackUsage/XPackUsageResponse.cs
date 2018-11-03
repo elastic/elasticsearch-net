@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface IXPackUsageResponse : IResponse
 	{
+		[JsonProperty("watcher")]
+		AlertingUsage Alerting { get; }
+
 		[JsonProperty("graph")]
 		XPackUsage Graph { get; }
-
-		[JsonProperty("monitoring")]
-		MonitoringUsage Monitoring { get; }
 
 		[JsonProperty("ml")]
 		MachineLearningUsage MachineLearning { get; }
 
-		[JsonProperty("watcher")]
-		AlertingUsage Alerting { get; }
+		[JsonProperty("monitoring")]
+		MonitoringUsage Monitoring { get; }
 
 		[JsonProperty("security")]
 		SecurityUsage Security { get; }
@@ -25,17 +23,17 @@ namespace Nest
 
 	public class XPackUsageResponse : ResponseBase, IXPackUsageResponse
 	{
+		[JsonProperty("watcher")]
+		public AlertingUsage Alerting { get; internal set; }
+
 		[JsonProperty("graph")]
 		public XPackUsage Graph { get; internal set; }
-
-		[JsonProperty("monitoring")]
-		public MonitoringUsage Monitoring { get; internal set; }
 
 		[JsonProperty("ml")]
 		public MachineLearningUsage MachineLearning { get; internal set; }
 
-		[JsonProperty("watcher")]
-		public AlertingUsage Alerting { get; internal set; }
+		[JsonProperty("monitoring")]
+		public MonitoringUsage Monitoring { get; internal set; }
 
 		[JsonProperty("security")]
 		public SecurityUsage Security { get; internal set; }
@@ -49,26 +47,26 @@ namespace Nest
 
 	public class SecurityUsage : XPackUsage
 	{
-		[JsonProperty("system_key")]
-		public SecurityFeatureToggle SystemKey { get; internal set; }
-
 		[JsonProperty("anonymous")]
 		public SecurityFeatureToggle Anonymous { get; internal set; }
-
-		[JsonProperty("ssl")]
-		public SslUsage Ssl { get; internal set; }
-
-		[JsonProperty("ipfilter")]
-		public IpFilterUsage IpFilter { get; internal set; }
 
 		[JsonProperty("audit")]
 		public AuditUsage Audit { get; internal set; }
 
-		[JsonProperty("roles")]
-		public IReadOnlyDictionary<string, RoleUsage> Roles { get; internal set; } = EmptyReadOnly<string, RoleUsage>.Dictionary;
+		[JsonProperty("ipfilter")]
+		public IpFilterUsage IpFilter { get; internal set; }
 
 		[JsonProperty("realms")]
 		public IReadOnlyDictionary<string, RealmUsage> Realms { get; internal set; } = EmptyReadOnly<string, RealmUsage>.Dictionary;
+
+		[JsonProperty("roles")]
+		public IReadOnlyDictionary<string, RoleUsage> Roles { get; internal set; } = EmptyReadOnly<string, RoleUsage>.Dictionary;
+
+		[JsonProperty("ssl")]
+		public SslUsage Ssl { get; internal set; }
+
+		[JsonProperty("system_key")]
+		public SecurityFeatureToggle SystemKey { get; internal set; }
 
 		public class AuditUsage : SecurityFeatureToggle
 		{
@@ -90,11 +88,11 @@ namespace Nest
 			[JsonProperty("name")]
 			public IReadOnlyCollection<string> Name { get; internal set; } = EmptyReadOnly<string>.Collection;
 
-			[JsonProperty("size")]
-			public IReadOnlyCollection<long> Size { get; internal set; } = EmptyReadOnly<long>.Collection;
-
 			[JsonProperty("order")]
 			public IReadOnlyCollection<long> Order { get; internal set; } = EmptyReadOnly<long>.Collection;
+
+			[JsonProperty("size")]
+			public IReadOnlyCollection<long> Size { get; internal set; } = EmptyReadOnly<long>.Collection;
 		}
 
 		public class RoleUsage
@@ -127,11 +125,11 @@ namespace Nest
 
 	public class AlertingUsage : XPackUsage
 	{
-		[JsonProperty("execution")]
-		public AlertingExecution Execution { get; internal set; }
-
 		[JsonProperty("count")]
 		public AlertingCount Count { get; internal set; }
+
+		[JsonProperty("execution")]
+		public AlertingExecution Execution { get; internal set; }
 
 		public class AlertingExecution
 		{
@@ -150,11 +148,11 @@ namespace Nest
 
 		public class AlertingCount
 		{
-			[JsonProperty("total")]
-			public long Total { get; internal set; }
-
 			[JsonProperty("active")]
 			public long Active { get; internal set; }
+
+			[JsonProperty("total")]
+			public long Total { get; internal set; }
 		}
 	}
 
@@ -166,11 +164,11 @@ namespace Nest
 
 	public class MachineLearningUsage : XPackUsage
 	{
-		[JsonProperty("jobs")]
-		public IReadOnlyDictionary<string, Job> Jobs { get; set; } = EmptyReadOnly<string, Job>.Dictionary;
-
 		[JsonProperty("datafeeds")]
 		public IReadOnlyDictionary<string, DataFeed> Datafeeds { get; set; } = EmptyReadOnly<string, DataFeed>.Dictionary;
+
+		[JsonProperty("jobs")]
+		public IReadOnlyDictionary<string, Job> Jobs { get; set; } = EmptyReadOnly<string, Job>.Dictionary;
 
 		public class DataFeed
 		{
@@ -192,17 +190,17 @@ namespace Nest
 
 		public class JobStatistics
 		{
-			[JsonProperty("total")]
-			public double Total { get; internal set; }
-
-			[JsonProperty("min")]
-			public double Minimum { get; internal set; }
+			[JsonProperty("avg")]
+			public double Average { get; internal set; }
 
 			[JsonProperty("max")]
 			public double Maximum { get; internal set; }
 
-			[JsonProperty("avg")]
-			public double Average { get; internal set; }
+			[JsonProperty("min")]
+			public double Minimum { get; internal set; }
+
+			[JsonProperty("total")]
+			public double Total { get; internal set; }
 		}
 	}
 }

@@ -1,6 +1,5 @@
 using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -27,5 +26,4 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType) => true;
 	}
-
 }

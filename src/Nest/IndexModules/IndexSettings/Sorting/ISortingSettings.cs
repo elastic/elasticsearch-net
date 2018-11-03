@@ -8,9 +8,9 @@ namespace Nest
 	public static class IndexSortSettings
 	{
 		public const string Fields = "index.sort.field";
-		public const string Order = "index.sort.order";
-		public const string Mode = "index.sort.mode";
 		public const string Missing = "index.sort.missing";
+		public const string Mode = "index.sort.mode";
+		public const string Order = "index.sort.order";
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]
@@ -18,6 +18,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "min")]
 		Minimum,
+
 		[EnumMember(Value = "max")]
 		Maximum
 	}
@@ -27,6 +28,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "_first")]
 		First,
+
 		[EnumMember(Value = "_last")]
 		Last
 	}
@@ -36,6 +38,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "asc")]
 		Ascending,
+
 		[EnumMember(Value = "desc")]
 		Descending
 	}
@@ -48,9 +51,11 @@ namespace Nest
 		Fields Fields { get; set; }
 
 		/// <summary>
-		/// The sort order to use for each field. The order option can have the following values: <see cref="IndexSortOrder.Ascending"/> and <see cref="IndexSortOrder.Descending"/>.
+		/// The missing parameter specifies how docs which are missing the field should be treated. The missing value can have the following values:
+		/// <see cref="IndexSortMissing.Last" />: Documents without value for the field are sorted last.
+		/// <see cref="IndexSortMissing.First" />: Documents without value for the field are sorted first.
 		/// </summary>
-		IndexSortOrder[] Order { get; set; }
+		IndexSortMissing[] Missing { get; set; }
 
 		/// <summary>
 		/// The mode option controls what value, from a multi-value field, is picked to sort the document.
@@ -61,36 +66,36 @@ namespace Nest
 		IndexSortMode[] Mode { get; set; }
 
 		/// <summary>
-		/// The missing parameter specifies how docs which are missing the field should be treated. The missing value can have the following values:
-		/// <see cref="IndexSortMissing.Last"/>: Documents without value for the field are sorted last.
-		/// <see cref="IndexSortMissing.First"/>: Documents without value for the field are sorted first.
+		/// The sort order to use for each field. The order option can have the following values: <see cref="IndexSortOrder.Ascending" /> and
+		/// <see cref="IndexSortOrder.Descending" />.
 		/// </summary>
-		IndexSortMissing[] Missing { get; set; }
+		IndexSortOrder[] Order { get; set; }
 	}
 
 	public class SortingSettings : ISortingSettings
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Fields Fields { get; set; }
 
-		/// <inheritdoc/>
-		public IndexSortOrder[] Order { get; set; }
+		/// <inheritdoc />
+		public IndexSortMissing[] Missing { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IndexSortMode[] Mode { get; set; }
 
-		/// <inheritdoc/>
-		public IndexSortMissing[] Missing { get; set; }
+		/// <inheritdoc />
+		public IndexSortOrder[] Order { get; set; }
 	}
 
 	public class SortingSettingsDescriptor<T> : DescriptorBase<SortingSettingsDescriptor<T>, ISortingSettings>, ISortingSettings where T : class
 	{
 		Fields ISortingSettings.Fields { get; set; }
-		IndexSortOrder[] ISortingSettings.Order { get; set; }
-		IndexSortMode[] ISortingSettings.Mode { get; set; }
 		IndexSortMissing[] ISortingSettings.Missing { get; set; }
+		IndexSortMode[] ISortingSettings.Mode { get; set; }
+		IndexSortOrder[] ISortingSettings.Order { get; set; }
 
-		public SortingSettingsDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+		public SortingSettingsDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public SortingSettingsDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
 

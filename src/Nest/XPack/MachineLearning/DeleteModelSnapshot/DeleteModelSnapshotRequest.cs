@@ -1,9 +1,9 @@
 namespace Nest
 {
-	public partial interface IDeleteModelSnapshotRequest {}
+	public partial interface IDeleteModelSnapshotRequest { }
 
-	public partial class DeleteModelSnapshotRequest {}
+	public partial class DeleteModelSnapshotRequest { }
 
 	[DescriptorFor("XpackMlDeleteModelSnapshot")]
-	public partial class DeleteModelSnapshotDescriptor {}
+	public partial class DeleteModelSnapshotDescriptor { }
 }

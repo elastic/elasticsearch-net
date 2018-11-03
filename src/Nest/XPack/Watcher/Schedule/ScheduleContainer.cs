@@ -7,31 +7,31 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScheduleContainer>))]
 	public interface IScheduleContainer
 	{
-		[JsonProperty("hourly")]
-		IHourlySchedule Hourly { get; set; }
+		[JsonProperty("cron")]
+		CronExpression Cron { get; set; }
 
 		[JsonProperty("daily")]
 		IDailySchedule Daily { get; set; }
 
-		[JsonProperty("weekly")]
-		IWeeklySchedule Weekly { get; set; }
+		[JsonProperty("hourly")]
+		IHourlySchedule Hourly { get; set; }
+
+		[JsonProperty("interval")]
+		Interval Interval { get; set; }
 
 		[JsonProperty("monthly")]
 		IMonthlySchedule Monthly { get; set; }
 
+		[JsonProperty("weekly")]
+		IWeeklySchedule Weekly { get; set; }
+
 		[JsonProperty("yearly")]
 		IYearlySchedule Yearly { get; set; }
-
-		[JsonProperty("cron")]
-		CronExpression Cron { get; set; }
-
-		[JsonProperty("interval")]
-		Interval Interval { get; set; }
 	}
 
 	public class ScheduleContainer : TriggerBase, IScheduleContainer
 	{
-		public ScheduleContainer() {}
+		public ScheduleContainer() { }
 
 		public ScheduleContainer(ScheduleBase schedule)
 		{
@@ -39,13 +39,14 @@ namespace Nest
 			schedule.WrapInContainer(this);
 		}
 
+		public CronExpression Cron { get; set; }
+
 		public IDailySchedule Daily { get; set; }
-		public IMonthlySchedule Monthly { get; set; }
 		public IHourlySchedule Hourly { get; set; }
+		public Interval Interval { get; set; }
+		public IMonthlySchedule Monthly { get; set; }
 		public IWeeklySchedule Weekly { get; set; }
 		public IYearlySchedule Yearly { get; set; }
-		public CronExpression Cron { get; set; }
-		public Interval Interval { get; set; }
 
 		internal override void WrapInContainer(ITriggerContainer container) => container.Schedule = this;
 
@@ -54,16 +55,15 @@ namespace Nest
 			: new ScheduleContainer(scheduleBase);
 	}
 
-	public class ScheduleDescriptor :
-		DescriptorBase<ScheduleDescriptor, IScheduleContainer>, IScheduleContainer
+	public class ScheduleDescriptor : DescriptorBase<ScheduleDescriptor, IScheduleContainer>, IScheduleContainer
 	{
+		CronExpression IScheduleContainer.Cron { get; set; }
 		IDailySchedule IScheduleContainer.Daily { get; set; }
-		IMonthlySchedule IScheduleContainer.Monthly { get; set; }
 		IHourlySchedule IScheduleContainer.Hourly { get; set; }
+		Interval IScheduleContainer.Interval { get; set; }
+		IMonthlySchedule IScheduleContainer.Monthly { get; set; }
 		IWeeklySchedule IScheduleContainer.Weekly { get; set; }
 		IYearlySchedule IScheduleContainer.Yearly { get; set; }
-		CronExpression IScheduleContainer.Cron { get; set; }
-		Interval IScheduleContainer.Interval { get; set; }
 
 		public ScheduleDescriptor Daily(Func<DailyScheduleDescriptor, IDailySchedule> selector) =>
 			Assign(a => a.Daily = selector.Invoke(new DailyScheduleDescriptor()));

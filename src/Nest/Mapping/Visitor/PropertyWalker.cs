@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Reflection;
-using System.Collections;
 
 namespace Nest
 {
 	public class PropertyWalker
 	{
-		private readonly Type _type;
-		private readonly IPropertyVisitor _visitor;
 		private readonly int _maxRecursion;
 		private readonly ConcurrentDictionary<Type, int> _seenTypes;
+		private readonly Type _type;
+		private readonly IPropertyVisitor _visitor;
 
 		public PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion = 0)
 		{
@@ -84,7 +84,8 @@ namespace Nest
 				{
 					Fields = new Properties
 					{
-						{ "keyword", new KeywordProperty
+						{
+							"keyword", new KeywordProperty
 							{
 								IgnoreAbove = 256
 							}
@@ -95,7 +96,7 @@ namespace Nest
 			if (type.IsEnumType())
 			{
 				if (type.GetTypeInfo().GetCustomAttribute<StringEnumAttribute>() != null
-				    || propertyInfo.GetCustomAttribute<StringEnumAttribute>() != null)
+					|| propertyInfo.GetCustomAttribute<StringEnumAttribute>() != null)
 					return new KeywordProperty();
 
 				return new NumberProperty(NumberType.Integer);

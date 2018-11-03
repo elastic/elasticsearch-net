@@ -13,7 +13,7 @@ namespace Nest
 
 		public ReindexRethrottleDescriptor TaskId(TaskId id)
 		{
-			this.RequestState.RouteValues.Required("task_id", id);
+			RequestState.RouteValues.Required("task_id", id);
 			return this;
 		}
 	}

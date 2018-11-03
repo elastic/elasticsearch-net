@@ -6,11 +6,11 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IIpProperty : IDocValuesProperty
 	{
-		[JsonProperty("index")]
-		bool? Index { get; set; }
-
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
+
+		[JsonProperty("index")]
+		bool? Index { get; set; }
 
 		[JsonProperty("null_value")]
 		string NullValue { get; set; }
@@ -31,11 +31,11 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<IpPropertyDescriptor<T>, IIpProperty, T>, IIpProperty
 		where T : class
 	{
-		bool? IIpProperty.Index { get; set; }
-		double? IIpProperty.Boost { get; set; }
-		string IIpProperty.NullValue { get; set; }
-
 		public IpPropertyDescriptor() : base(FieldType.Ip) { }
+
+		double? IIpProperty.Boost { get; set; }
+		bool? IIpProperty.Index { get; set; }
+		string IIpProperty.NullValue { get; set; }
 
 		public IpPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
 

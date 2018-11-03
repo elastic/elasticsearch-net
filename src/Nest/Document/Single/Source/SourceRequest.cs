@@ -1,6 +1,4 @@
-﻿using Elasticsearch.Net;
-
-namespace Nest
+﻿namespace Nest
 {
 	public partial interface ISourceRequest { }
 
@@ -20,16 +18,9 @@ namespace Nest
 	public partial class SourceDescriptor<T> where T : class
 	{
 		private object AutoRouteDocument() => null;
-		
-		public SourceDescriptor<T> ExecuteOnPrimary()
-		{
-			return this.Preference("_primary");
-		}
 
-		public SourceDescriptor<T> ExecuteOnLocalShard()
-		{
-			return this.Preference("_local");
-		}
+		public SourceDescriptor<T> ExecuteOnPrimary() => Preference("_primary");
+
+		public SourceDescriptor<T> ExecuteOnLocalShard() => Preference("_local");
 	}
-
 }

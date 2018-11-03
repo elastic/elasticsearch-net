@@ -14,17 +14,17 @@ namespace Nest
 
 	public class MissingAggregation : BucketAggregationBase, IMissingAggregation
 	{
-		public Field Field { get; set; }
-
 		internal MissingAggregation() { }
 
 		public MissingAggregation(string name) : base(name) { }
+
+		public Field Field { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Missing = this;
 	}
 
 	public class MissingAggregationDescriptor<T>
-		: BucketAggregationDescriptorBase<MissingAggregationDescriptor<T>,IMissingAggregation, T>
+		: BucketAggregationDescriptorBase<MissingAggregationDescriptor<T>, IMissingAggregation, T>
 			, IMissingAggregation
 		where T : class
 	{

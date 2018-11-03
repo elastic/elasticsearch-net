@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using Newtonsoft.Json;
 
@@ -15,7 +14,7 @@ namespace Nest
 		/// geo-points throw an exception and reject the whole document.
 		/// </summary>
 		[JsonProperty("ignore_malformed")]
-		bool? IgnoreMalformed { get; set;  }
+		bool? IgnoreMalformed { get; set; }
 
 
 		/// <summary>
@@ -25,7 +24,7 @@ namespace Nest
 		/// throw an exception and reject the whole document.
 		/// </summary>
 		[JsonProperty("ignore_z_value")]
-		bool? IgnoreZValue { get; set;  }
+		bool? IgnoreZValue { get; set; }
 
 		/// <summary>
 		/// Accepts a geo_point value which is substituted for any explicit null values.
@@ -55,11 +54,11 @@ namespace Nest
 		: DocValuesPropertyDescriptorBase<GeoPointPropertyDescriptor<T>, IGeoPointProperty, T>, IGeoPointProperty
 		where T : class
 	{
+		public GeoPointPropertyDescriptor() : base(FieldType.GeoPoint) { }
+
 		bool? IGeoPointProperty.IgnoreMalformed { get; set; }
 		bool? IGeoPointProperty.IgnoreZValue { get; set; }
 		GeoLocation IGeoPointProperty.NullValue { get; set; }
-
-		public GeoPointPropertyDescriptor() : base(FieldType.GeoPoint) { }
 
 		/// <inheritdoc cref="IGeoPointProperty.IgnoreMalformed" />
 		public GeoPointPropertyDescriptor<T> IgnoreMalformed(bool? ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);

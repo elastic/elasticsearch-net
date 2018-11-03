@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "array")]
 		Array,
+
 		[EnumMember(Value = "disabled")]
 		Disabled
 	}

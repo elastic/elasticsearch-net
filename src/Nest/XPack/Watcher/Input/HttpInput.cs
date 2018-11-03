@@ -27,7 +27,7 @@ namespace Nest
 
 		/// <summary>
 		/// The expected content type the response body will contain.
-		/// If the format is text, <see cref="HttpInput.Extract"/> cannot exist.
+		/// If the format is text, <see cref="HttpInput.Extract" /> cannot exist.
 		/// Note that this overrides the header that is returned in the HTTP response.
 		/// </summary>
 		[JsonProperty("response_content_type")]

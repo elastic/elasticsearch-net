@@ -14,8 +14,7 @@ namespace Nest
 	{
 		public IDictionary<string, ISearchRequest> Operations { get; set; }
 
-		protected sealed override void Initialize() => this.TypedKeys = true;
-
+		protected sealed override void Initialize() => TypedKeys = true;
 	}
 
 	[DescriptorFor("Msearch")]
@@ -25,11 +24,11 @@ namespace Nest
 
 		IDictionary<string, ISearchRequest> IMultiSearchRequest.Operations
 		{
-			get { return _operations; }
-			set { _operations = value; }
+			get => _operations;
+			set => _operations = value;
 		}
 
-		protected sealed override void Initialize() => this.TypedKeys();
+		protected sealed override void Initialize() => TypedKeys();
 
 		public MultiSearchDescriptor Search<T>(string name, Func<SearchDescriptor<T>, ISearchRequest> searchSelector) where T : class
 		{
@@ -38,13 +37,12 @@ namespace Nest
 			var descriptor = searchSelector(new SearchDescriptor<T>());
 			if (descriptor == null)
 				return this;
-			this._operations.Add(name, descriptor);
+
+			_operations.Add(name, descriptor);
 			return this;
 		}
 
-		public MultiSearchDescriptor Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector) where T : class
-		{
-			return this.Search(Guid.NewGuid().ToString(), searchSelector);
-		}
+		public MultiSearchDescriptor Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector) where T : class =>
+			Search(Guid.NewGuid().ToString(), searchSelector);
 	}
 }

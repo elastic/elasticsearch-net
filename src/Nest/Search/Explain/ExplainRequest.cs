@@ -13,11 +13,15 @@ namespace Nest
 	public partial class ExplainRequest<TDocument> : IExplainRequest<TDocument>
 		where TDocument : class
 	{
-		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q")  == true? HttpMethod.GET : HttpMethod.POST;
+		public QueryContainer Query { get; set; }
 
 		public Fields StoredFields { get; set; }
-		public QueryContainer Query { get; set; }
+
+		protected override HttpMethod HttpMethod =>
+			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true
+				? HttpMethod.GET
+				: HttpMethod.POST;
+
 		private object AutoRouteDocument() => null;
 	}
 
@@ -26,12 +30,15 @@ namespace Nest
 		where TDocument : class
 	{
 		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q")  == true? HttpMethod.GET : HttpMethod.POST;
+			RequestState.RequestParameters?.ContainsQueryString("source") == true || RequestState.RequestParameters?.ContainsQueryString("q") == true
+				? HttpMethod.GET
+				: HttpMethod.POST;
 
-		private object AutoRouteDocument() => null;
+		QueryContainer IExplainRequest<TDocument>.Query { get; set; }
 
 		Fields IExplainRequest<TDocument>.StoredFields { get; set; }
-		QueryContainer IExplainRequest<TDocument>.Query { get; set; }
+
+		private object AutoRouteDocument() => null;
 
 		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<TDocument>()));

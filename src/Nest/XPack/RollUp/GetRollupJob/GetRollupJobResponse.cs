@@ -14,4 +14,3 @@ namespace Nest
 		public IReadOnlyCollection<RollupJobInformation> Jobs { get; internal set; } = EmptyReadOnly<RollupJobInformation>.Collection;
 	}
 }
-

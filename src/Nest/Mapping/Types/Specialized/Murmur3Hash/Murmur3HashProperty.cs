@@ -3,11 +3,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IMurmur3HashProperty : IDocValuesProperty
-	{
-	}
+	public interface IMurmur3HashProperty : IDocValuesProperty { }
 
 	[DebuggerDisplay("{DebugDisplay}")]
 	public class Murmur3HashProperty : DocValuesPropertyBase, IMurmur3HashProperty

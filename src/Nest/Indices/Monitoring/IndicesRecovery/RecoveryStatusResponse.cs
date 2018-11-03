@@ -14,6 +14,5 @@ namespace Nest
 	{
 		[JsonIgnore]
 		public IReadOnlyDictionary<IndexName, RecoveryStatus> Indices => Self.BackingDictionary;
-
 	}
 }

@@ -6,10 +6,16 @@ namespace Nest
 	public class QueryProfile
 	{
 		/// <summary>
-		/// The lucene class name for the type of query
+		/// Detailed stats about how the time was spent
 		/// </summary>
-		[JsonProperty("type")]
-		public string Type { get; internal set; }
+		[JsonProperty("breakdown")]
+		public QueryBreakdown Breakdown { get; internal set; }
+
+		/// <summary>
+		/// Sub-queries of this query
+		/// </summary>
+		[JsonProperty("children")]
+		public IEnumerable<QueryProfile> Children { get; internal set; }
 
 		/// <summary>
 		/// The lucene explanation text for the query
@@ -24,15 +30,9 @@ namespace Nest
 		public long TimeInNanoseconds { get; internal set; }
 
 		/// <summary>
-		/// Detailed stats about how the time was spent
+		/// The lucene class name for the type of query
 		/// </summary>
-		[JsonProperty("breakdown")]
-		public QueryBreakdown Breakdown { get; internal set; }
-
-		/// <summary>
-		/// Sub-queries of this query
-		/// </summary>
-		[JsonProperty("children")]
-		public IEnumerable<QueryProfile> Children { get; internal set; }
+		[JsonProperty("type")]
+		public string Type { get; internal set; }
 	}
 }
