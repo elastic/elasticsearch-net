@@ -1,4 +1,5 @@
 ﻿#region License
+
 //MIT License
 //
 //Copyright (c) 2017 Dave Glick
@@ -20,6 +21,7 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
+
 #endregion
 
 using System;
@@ -39,14 +41,15 @@ namespace DocGenerator.Buildalyzer
 		/// Gets a Roslyn workspace for the analyzed project.
 		/// </summary>
 		/// <param name="analyzer">The Buildalyzer project analyzer.</param>
-		/// <param name="addProjectReferences"><c>true</c> to add projects to the workspace for project references that exist in the same <see cref="AnalyzerManager"/>.</param>
+		/// <param name="addProjectReferences">
+		/// <c>true</c> to add projects to the workspace for project references that exist in the same
+		/// <see cref="AnalyzerManager" />.
+		/// </param>
 		/// <returns>A Roslyn workspace.</returns>
 		public static AdhocWorkspace GetWorkspace(this ProjectAnalyzer analyzer, bool addProjectReferences = false)
 		{
-			if (analyzer == null)
-			{
-				throw new ArgumentNullException(nameof(analyzer));
-			}
+			if (analyzer == null) throw new ArgumentNullException(nameof(analyzer));
+
 			var workspace = new AdhocWorkspace();
 			AddToWorkspace(analyzer, workspace, addProjectReferences);
 			return workspace;
@@ -57,25 +60,23 @@ namespace DocGenerator.Buildalyzer
 		/// </summary>
 		/// <param name="analyzer">The Buildalyzer project analyzer.</param>
 		/// <param name="workspace">A Roslyn workspace.</param>
-		/// <param name="addProjectReferences"><c>true</c> to add projects to the workspace for project references that exist in the same <see cref="AnalyzerManager"/>.</param>
+		/// <param name="addProjectReferences">
+		/// <c>true</c> to add projects to the workspace for project references that exist in the same
+		/// <see cref="AnalyzerManager" />.
+		/// </param>
 		/// <returns>The newly added Roslyn project.</returns>
 		public static Project AddToWorkspace(this ProjectAnalyzer analyzer, AdhocWorkspace workspace, bool addProjectReferences = false)
 		{
-			if (analyzer == null)
-			{
-				throw new ArgumentNullException(nameof(analyzer));
-			}
-			if (workspace == null)
-			{
-				throw new ArgumentNullException(nameof(workspace));
-			}
+			if (analyzer == null) throw new ArgumentNullException(nameof(analyzer));
+
+			if (workspace == null) throw new ArgumentNullException(nameof(workspace));
 
 			// Get or create an ID for this project
 			var projectGuid = analyzer.CompiledProject?.GetPropertyValue("ProjectGuid");
 			var projectId = !string.IsNullOrEmpty(projectGuid)
-			                      && Guid.TryParse(analyzer.CompiledProject?.GetPropertyValue("ProjectGuid"), out var projectIdGuid)
-				? ProjectId.CreateFromSerialized(projectIdGuid)
-				: ProjectId.CreateNewId();
+				&& Guid.TryParse(analyzer.CompiledProject?.GetPropertyValue("ProjectGuid"), out var projectIdGuid)
+					? ProjectId.CreateFromSerialized(projectIdGuid)
+					: ProjectId.CreateNewId();
 
 			// Create and add the project
 			var projectInfo = GetProjectInfo(analyzer, workspace, projectId);
@@ -85,8 +86,8 @@ namespace DocGenerator.Buildalyzer
 			foreach (var existingProject in solution.Projects.ToArray())
 			{
 				if (!existingProject.Id.Equals(projectId)
-				    && analyzer.Manager.Projects.TryGetValue(existingProject.FilePath, out var existingAnalyzer)
-				    && (existingAnalyzer.GetProjectReferences()?.Contains(analyzer.ProjectFilePath) ?? false))
+					&& analyzer.Manager.Projects.TryGetValue(existingProject.FilePath, out var existingAnalyzer)
+					&& (existingAnalyzer.GetProjectReferences()?.Contains(analyzer.ProjectFilePath) ?? false))
 				{
 					// Add the reference to the existing project
 					var projectReference = new ProjectReference(projectId);
@@ -95,21 +96,16 @@ namespace DocGenerator.Buildalyzer
 			}
 
 			// Apply solution changes
-			if (!workspace.TryApplyChanges(solution))
-			{
-				throw new InvalidOperationException("Could not apply workspace solution changes");
-			}
+			if (!workspace.TryApplyChanges(solution)) throw new InvalidOperationException("Could not apply workspace solution changes");
 
 			// Add any project references not already added
-			if(addProjectReferences)
+			if (addProjectReferences)
 			{
-				foreach(var referencedAnalyzer in GetReferencedAnalyzerProjects(analyzer))
+				foreach (var referencedAnalyzer in GetReferencedAnalyzerProjects(analyzer))
 				{
 					// Check if the workspace contains the project inside the loop since adding one might also add this one due to transitive references
-					if(!workspace.CurrentSolution.Projects.Any(x => x.FilePath == referencedAnalyzer.ProjectFilePath))
-					{
+					if (!workspace.CurrentSolution.Projects.Any(x => x.FilePath == referencedAnalyzer.ProjectFilePath))
 						AddToWorkspace(referencedAnalyzer, workspace, addProjectReferences);
-					}
 				}
 			}
 
@@ -127,8 +123,8 @@ namespace DocGenerator.Buildalyzer
 				projectName,
 				projectName,
 				languageName,
-				filePath: analyzer.ProjectFilePath,
-				outputFilePath: analyzer.CompiledProject?.GetPropertyValue("TargetPath"),
+				analyzer.ProjectFilePath,
+				analyzer.CompiledProject?.GetPropertyValue("TargetPath"),
 				documents: GetDocuments(analyzer, projectId),
 				projectReferences: GetExistingProjectReferences(analyzer, workspace),
 				metadataReferences: GetMetadataReferences(analyzer),
@@ -158,14 +154,9 @@ namespace DocGenerator.Buildalyzer
 
 			if (kind.HasValue)
 			{
-				if (languageName == LanguageNames.CSharp)
-				{
-					return new CSharpCompilationOptions(kind.Value);
-				}
-				if (languageName == LanguageNames.VisualBasic)
-				{
-					return new VisualBasicCompilationOptions(kind.Value);
-				}
+				if (languageName == LanguageNames.CSharp) return new CSharpCompilationOptions(kind.Value);
+
+				if (languageName == LanguageNames.VisualBasic) return new VisualBasicCompilationOptions(kind.Value);
 			}
 
 			return null;

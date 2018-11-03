@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -12,8 +11,8 @@ namespace DocGenerator.AsciiDoc
 	/// </summary>
 	public class RawAsciidocVisitor : NoopVisitor
 	{
-		private readonly FileInfo _source;
 		private readonly FileInfo _destination;
+		private readonly FileInfo _source;
 		private Document _document;
 
 		public RawAsciidocVisitor(FileInfo source, FileInfo destination)
@@ -27,10 +26,7 @@ namespace DocGenerator.AsciiDoc
 			_document = document;
 
 			var directoryAttribute = document.Attributes.FirstOrDefault(a => a.Name == "docdir");
-			if (directoryAttribute != null)
-			{
-				document.Attributes.Remove(directoryAttribute);
-			}
+			if (directoryAttribute != null) document.Attributes.Remove(directoryAttribute);
 
 			var github = "https://github.com/elastic/elasticsearch-net";
 			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)", $"{github}/tree/master/src/Tests/Tests/");
@@ -38,8 +34,8 @@ namespace DocGenerator.AsciiDoc
 			{
 				Style = CommentStyle.MultiLine,
 				Text = $"IMPORTANT NOTE\r\n==============\r\nThis file has been generated from {originalFile}. \r\n" +
-					   "If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,\r\n" +
-					   "please modify the original csharp file found at the link and submit the PR with that change. Thanks!"
+					"If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,\r\n" +
+					"please modify the original csharp file found at the link and submit the PR with that change. Thanks!"
 			});
 
 			base.VisitDocument(document);
@@ -56,7 +52,8 @@ namespace DocGenerator.AsciiDoc
 
 				foreach (var directory in directories)
 				{
-					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*.asciidoc", SearchOption.AllDirectories))
+					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*.asciidoc",
+						SearchOption.AllDirectories))
 					{
 						var fileInfo = new FileInfo(file);
 						var referencedFileUri = new Uri(fileInfo.FullName);
@@ -69,12 +66,9 @@ namespace DocGenerator.AsciiDoc
 							++counter;
 						}
 						else
-						{
 							_document.Add(include);
-						}
 					}
 				}
-
 			}
 			else if (attributeEntry.Name == "anchor-list")
 			{
@@ -84,7 +78,8 @@ namespace DocGenerator.AsciiDoc
 
 				foreach (var directory in directories)
 				{
-					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*.asciidoc", SearchOption.AllDirectories))
+					foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*.asciidoc",
+						SearchOption.AllDirectories))
 					{
 						var fileInfo = new FileInfo(file);
 						var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.Name);
@@ -97,13 +92,9 @@ namespace DocGenerator.AsciiDoc
 				}
 
 				if (attributeEntry.Parent != null)
-				{
 					attributeEntry.Parent.Insert(attributeEntry.Parent.IndexOf(attributeEntry) + 1, list);
-				}
 				else
-				{
 					_document.Add(list);
-				}
 			}
 
 			base.VisitAttributeEntry(attributeEntry);

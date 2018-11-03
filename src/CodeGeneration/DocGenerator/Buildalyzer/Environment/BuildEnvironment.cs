@@ -1,4 +1,5 @@
 ﻿#region License
+
 //MIT License
 //
 //Copyright (c) 2017 Dave Glick
@@ -20,6 +21,7 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
+
 #endregion
 
 using System.Collections.Generic;
@@ -62,13 +64,8 @@ namespace DocGenerator.Buildalyzer.Environment
 		public virtual void UnsetEnvironmentVars()
 		{
 			if (_oldMsBuildExtensionsPath != null)
-			{
 				System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildExtensionsPath, _oldMsBuildExtensionsPath);
-			}
-			if (_oldMsBuildSdksPath != null)
-			{
-				System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildSDKsPath, _oldMsBuildSdksPath);
-			}
+			if (_oldMsBuildSdksPath != null) System.Environment.SetEnvironmentVariable(MsBuildProperties.MSBuildSDKsPath, _oldMsBuildSdksPath);
 		}
 	}
 }
