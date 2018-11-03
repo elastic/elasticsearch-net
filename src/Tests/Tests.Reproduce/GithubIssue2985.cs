@@ -1,5 +1,4 @@
 using System;
-using Elastic.Xunit.Sdk;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -20,11 +19,11 @@ namespace Tests.Reproduce
 		{
 			var client = _cluster.Client;
 			var index = $"gh2985-{RandomString()}";
-			var response = client.CreateIndex(index, i=> i
-				.Settings(s=>s
-					.Analysis(a=>a
-						.Analyzers(an=>an
-							.Custom("custom", c=>c.Filters("ascii_folding").Tokenizer("standard"))
+			var response = client.CreateIndex(index, i => i
+				.Settings(s => s
+					.Analysis(a => a
+						.Analyzers(an => an
+							.Custom("custom", c => c.Filters("ascii_folding").Tokenizer("standard"))
 						)
 					)
 				)
