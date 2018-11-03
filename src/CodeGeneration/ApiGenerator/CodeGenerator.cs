@@ -19,7 +19,10 @@ namespace ApiGenerator.Domain
 			A(PropertyGenerator(type, name, key, setter));
 			return string.Join("\r\n\t\t", components);
 
-			void A(string s) => components.Add(s);
+			void A(string s)
+			{
+				components.Add(s);
+			}
 		}
 
 		public static string Constructor(Constructor c)
@@ -32,9 +35,12 @@ namespace ApiGenerator.Domain
 			if (!c.Body.IsNullOrEmpty()) A(c.Body);
 			if (!c.AdditionalCode.IsNullOrEmpty()) A(c.AdditionalCode);
 			return string.Join("\r\n\t\t", components);
-			void A(string s) => components.Add(s);
-		}
 
+			void A(string s)
+			{
+				components.Add(s);
+			}
+		}
 
 
 		private static IEnumerable<string> RenderDocumentation(params string[] doc)
@@ -44,24 +50,30 @@ namespace ApiGenerator.Domain
 			{
 				case 0: yield break;
 				case 1:
-					yield return ($"///<summary>{doc[0]}</summary>");
+					yield return $"///<summary>{doc[0]}</summary>";
+
 					yield break;
 				default:
 					yield return "///<summary>";
+
 					foreach (var d in doc) yield return $"/// {d}";
+
 					yield return "///</summary>";
+
 					yield break;
 			}
 		}
+
 		private static string[] WrapDocumentation(string documentation)
 		{
 			const int max = 140;
-			var lines = documentation.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+			var lines = documentation.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 			var charCount = 0;
 			return lines.GroupBy(Wrap).Select(l => string.Join(" ", l.ToArray())).ToArray();
+
 			int Wrap(string w)
 			{
-				var increase = (charCount % max + w.Length + 1 >= max ? max - (charCount % max) : 0);
+				var increase = charCount % max + w.Length + 1 >= max ? max - charCount % max : 0;
 				return (charCount += increase + w.Length + 1) / max;
 			}
 		}
