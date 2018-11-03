@@ -15,50 +15,6 @@ namespace Tests.Domain
 	{
 		public static string TypeName = "project";
 
-		public static readonly Project Instance = new Project
-		{
-			Name = Projects.First().Name,
-			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
-			StartedOn = new DateTime(2015, 1, 1),
-			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 },
-			SourceOnly = TestConfiguration.Instance.Random.SourceSerializer ? new SourceOnlyObject() : null
-		};
-
-		public static readonly string Routing = Instance.Name;
-
-		private static readonly object InstanceAnonymousDefault = new
-		{
-			name = Projects.First().Name,
-			type = TypeName,
-			join = Instance.Join.ToAnonymousObject(),
-			state = "BellyUp",
-			visibility = "Public",
-			startedOn = "2015-01-01T00:00:00",
-			lastActivity = "0001-01-01T00:00:00",
-			numberOfContributors = 0,
-			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
-			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
-		};
-
-		private static readonly object InstanceAnonymousSourceSerializer = new
-		{
-			name = Projects.First().Name,
-			type = TypeName,
-			join = Instance.Join.ToAnonymousObject(),
-			state = "BellyUp",
-			visibility = "Public",
-			startedOn = "2015-01-01T00:00:00",
-			lastActivity = "0001-01-01T00:00:00",
-			numberOfContributors = 0,
-			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
-			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon },
-			sourceOnly = new { notWrittenByDefaultSerializer = "written" }
-		};
-
-
 		public IEnumerable<string> Branches { get; set; }
 		public IList<Tag> CuratedTags { get; set; }
 		public string DateString { get; set; }
@@ -121,8 +77,55 @@ namespace Tests.Domain
 						{ "color", new[] { "red", "blue", "green", "violet", "yellow" }.Take(Gimme.Random.Number(1, 4)) }
 					}
 				});
+
 		public static IList<Project> Projects { get; } = Generator.Clone().Generate(100);
+
 		public static Project First { get; } = Projects.First();
+
+		public static readonly Project Instance = new Project
+		{
+			Name = Projects.First().Name,
+			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
+			StartedOn = new DateTime(2015, 1, 1),
+			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 },
+			SourceOnly = TestConfiguration.Instance.Random.SourceSerializer ? new SourceOnlyObject() : null
+		};
+
+		public static readonly string Routing = Instance.Name;
+
+		private static readonly object InstanceAnonymousDefault = new
+		{
+			name = Projects.First().Name,
+			type = TypeName,
+			join = Instance.Join.ToAnonymousObject(),
+			state = "BellyUp",
+			visibility = "Public",
+			startedOn = "2015-01-01T00:00:00",
+			lastActivity = "0001-01-01T00:00:00",
+			numberOfContributors = 0,
+			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
+			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
+		};
+
+		private static readonly object InstanceAnonymousSourceSerializer = new
+		{
+			name = Projects.First().Name,
+			type = TypeName,
+			join = Instance.Join.ToAnonymousObject(),
+			state = "BellyUp",
+			visibility = "Public",
+			startedOn = "2015-01-01T00:00:00",
+			lastActivity = "0001-01-01T00:00:00",
+			numberOfContributors = 0,
+			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
+			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon },
+			sourceOnly = new { notWrittenByDefaultSerializer = "written" }
+		};
+
+
 		// @formatter:on — enable formatter after this line
 	}
 
