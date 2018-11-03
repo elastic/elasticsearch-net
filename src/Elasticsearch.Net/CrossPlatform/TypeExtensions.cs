@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
@@ -25,7 +22,7 @@ namespace Elasticsearch.Net
 			return type.IsAssignableFrom(from);
 #endif
 		}
-		
+
 		internal static Assembly Assembly(this Type type)
 		{
 #if DOTNETCORE

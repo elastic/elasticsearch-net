@@ -1,10 +1,9 @@
 ﻿using System.IO;
-using System.Linq;
 
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	/// A factory for creating memory streams using a recyclable pool of <see cref="MemoryStream"/> instances
+	/// A factory for creating memory streams using a recyclable pool of <see cref="MemoryStream" /> instances
 	/// </summary>
 	public class RecyclableMemoryStreamFactory : IMemoryStreamFactory
 	{

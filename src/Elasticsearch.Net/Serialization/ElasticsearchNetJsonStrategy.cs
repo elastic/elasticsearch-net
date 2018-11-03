@@ -15,7 +15,7 @@ namespace Elasticsearch.Net
 				return base.TrySerializeNonPrimitiveObject(input, out output);
 
 			var e = input as Exception;
-			var exceptionsJson = this.FlattenExceptions(e).ToList();
+			var exceptionsJson = FlattenExceptions(e).ToList();
 			var array = new JsonArray(exceptionsJson.Count);
 			array.AddRange(exceptionsJson);
 			output = array;
@@ -31,9 +31,9 @@ namespace Elasticsearch.Net
 				var o = ToExceptionJsonObject(e, depth);
 				depth++;
 				yield return o;
+
 				e = e.InnerException;
-			}
-			while (depth < maxExceptions && e != null);
+			} while (depth < maxExceptions && e != null);
 		}
 
 		private JsonObject ToExceptionJsonObject(Exception e, int depth)
@@ -124,16 +124,17 @@ namespace Elasticsearch.Net
 			}
 			if (type == typeof(Error))
 			{
-                if (value is string s)
-                    return new Error {Reason = s};
+				if (value is string s)
+					return new Error { Reason = s };
 
 				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
 				return Error.CreateError(dict, this);
 			}
 			if (type == typeof(ErrorCause))
 			{
-                if (value is string s)
-                    return new ErrorCause {Reason = s};
+				if (value is string s)
+					return new ErrorCause { Reason = s };
+
 				var dict = base.DeserializeObject(value, typeof(IDictionary<string, object>)) as IDictionary<string, object>;
 				return ErrorCause.CreateErrorCause(dict, this);
 			}
