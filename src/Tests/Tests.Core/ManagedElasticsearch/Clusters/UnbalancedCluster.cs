@@ -7,7 +7,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	public class UnbalancedCluster : ClientTestClusterBase
 	{
 		protected override void SeedCluster() =>
-			new DefaultSeeder(this.Client, new IndexSettings { NumberOfShards = 3, NumberOfReplicas = 2 })
+			new DefaultSeeder(Client, new IndexSettings { NumberOfShards = 3, NumberOfReplicas = 2 })
 				.SeedNode();
 	}
 }

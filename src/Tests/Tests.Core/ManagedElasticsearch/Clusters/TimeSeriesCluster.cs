@@ -9,16 +9,15 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	public class TimeSeriesCluster : XPackCluster
 	{
 		protected override void SeedCluster() =>
-			new TimeSeriesSeeder(this.Client).SeedNode();
+			new TimeSeriesSeeder(Client).SeedNode();
 	}
 
 	public class TimeSeriesSeeder
 	{
+		public static readonly string IndicesWildCard = "logs-*";
 		private readonly IElasticClient _client;
 
-		public TimeSeriesSeeder(IElasticClient client) => this._client = client;
-
-		public static readonly string IndicesWildCard = "logs-*";
+		public TimeSeriesSeeder(IElasticClient client) => _client = client;
 
 		public void SeedNode()
 		{
@@ -51,8 +50,6 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 			var countResult = _client.Count<Log>(s => s.Index(IndicesWildCard));
 			Console.WriteLine($"Stored {countResult.Count} in {IndicesWildCard} indices");
-
-
 		}
 	}
 }

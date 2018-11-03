@@ -15,46 +15,45 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	{
 		public ClientTestClusterBase() : this(new ClientTestClusterConfiguration()) { }
 
-		public ClientTestClusterBase(params ElasticsearchPlugin[] plugins) : this(new ClientTestClusterConfiguration(plugins: plugins)) { }
+		public ClientTestClusterBase(params ElasticsearchPlugin[] plugins) : this(new ClientTestClusterConfiguration(plugins)) { }
 
-		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration)
-		{
-		}
+		public ClientTestClusterBase(ClientTestClusterConfiguration configuration) : base(configuration) { }
 
-		public IElasticClient Client => this.GetOrAddClient(s=> this.ConnectionSettings(s.ApplyDomainSettings()));
+		public IElasticClient Client => this.GetOrAddClient(s => ConnectionSettings(s.ApplyDomainSettings()));
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s;
 	}
 
 	public class ClientTestClusterConfiguration : XunitClusterConfiguration
 	{
-		public ITestConfiguration TestConfiguration { get; }
-
 		public ClientTestClusterConfiguration(params ElasticsearchPlugin[] plugins) : this(numberOfNodes: 1, plugins: plugins) { }
 
-		public ClientTestClusterConfiguration(ClusterFeatures features = ClusterFeatures.None, int numberOfNodes = 1, params ElasticsearchPlugin[] plugins)
+		public ClientTestClusterConfiguration(ClusterFeatures features = ClusterFeatures.None, int numberOfNodes = 1,
+			params ElasticsearchPlugin[] plugins
+		)
 			: base(TestClient.Configuration.ElasticsearchVersion, features, new ElasticsearchPlugins(plugins), numberOfNodes)
 		{
-			this.TestConfiguration = TestClient.Configuration;
-			this.ShowElasticsearchOutputAfterStarted = true; //this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
+			TestConfiguration = TestClient.Configuration;
+			ShowElasticsearchOutputAfterStarted = true; //this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
 
-			this.CacheEsHomeInstallation = true;
+			CacheEsHomeInstallation = true;
 
-			this.Add(this.AttributeKey("testingcluster"), "true");
-			this.Add(this.AttributeKey("gateway"), "true");
-			this.Add("search.remote.connect", "true");
+			Add(AttributeKey("testingcluster"), "true");
+			Add(AttributeKey("gateway"), "true");
+			Add("search.remote.connect", "true");
 
-			this.Add($"script.max_compilations_per_minute", "10000", "<6.0.0-rc1");
-			this.Add($"script.max_compilations_rate", "10000/1m", ">=6.0.0-rc1");
+			Add($"script.max_compilations_per_minute", "10000", "<6.0.0-rc1");
+			Add($"script.max_compilations_rate", "10000/1m", ">=6.0.0-rc1");
 
-			this.Add($"script.inline", "true", "<5.5.0");
-			this.Add($"script.stored", "true", ">5.0.0-alpha1 <5.5.0");
-			this.Add($"script.indexed", "true", "<5.0.0-alpha1");
-			this.Add($"script.allowed_types", "inline,stored", ">=5.5.0");
+			Add($"script.inline", "true", "<5.5.0");
+			Add($"script.stored", "true", ">5.0.0-alpha1 <5.5.0");
+			Add($"script.indexed", "true", "<5.0.0-alpha1");
+			Add($"script.allowed_types", "inline,stored", ">=5.5.0");
 
-			this.AdditionalBeforeNodeStartedTasks.Add(new WriteAnalysisFiles());
+			AdditionalBeforeNodeStartedTasks.Add(new WriteAnalysisFiles());
 		}
 
-		public string AnalysisFolder => Path.Combine(this.FileSystem.ConfigPath, "analysis");
+		public string AnalysisFolder => Path.Combine(FileSystem.ConfigPath, "analysis");
+		public ITestConfiguration TestConfiguration { get; }
 	}
 }

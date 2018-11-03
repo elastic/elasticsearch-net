@@ -7,7 +7,10 @@ using static Elastic.Managed.Ephemeral.Plugins.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
-	/// <summary> Use this cluster for APIs that do writes. If they are however intrusive or long running consider IntrusiveOperationCluster instead. </summary>
+	/// <summary>
+	/// Use this cluster for APIs that do writes. If they are however intrusive or long running consider IntrusiveOperationCluster
+	/// instead.
+	/// </summary>
 	public class WritableCluster : ClientTestClusterBase
 	{
 		public WritableCluster() : base(CreateConfiguration()) { }
@@ -26,10 +29,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 			// TODO: temporary until https://github.com/elastic/elasticsearch-net-abstractions/commit/3977ccb6449870fb4f1e6059be960e12ec5e5125 is released
 			if (ElasticsearchVersion.From(TestClient.Configuration.ElasticsearchVersion) >= "6.4.0")
-			{
-				//TODO move this to elasticsearch-net abstractions
 				plugins.Add(new ElasticsearchPlugin("analysis-nori", v => v >= "6.4.0"));
-			}
 
 			return new ClientTestClusterConfiguration(plugins.ToArray())
 			{
@@ -39,7 +39,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		protected override void SeedCluster()
 		{
-			var seeder = new DefaultSeeder(this.Client);
+			var seeder = new DefaultSeeder(Client);
 			seeder.SeedNode();
 		}
 	}
