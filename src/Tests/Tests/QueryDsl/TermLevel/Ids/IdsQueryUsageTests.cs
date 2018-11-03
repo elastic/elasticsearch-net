@@ -4,14 +4,27 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.TermLevel.Ids
 {
 	public class IdsQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public IdsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public IdsQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IIdsQuery>(a => a.Ids)
+		{
+			q => q.Values = null,
+			q => q.Values = Enumerable.Empty<Id>()
+		};
+
+		protected override QueryContainer QueryInitializer => new IdsQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Values = new List<Id> { 1, 2, 3, 4 },
+			Types = Type<Project>().And<Developer>()
+		};
 
 		protected override object QueryJson => new
 		{
@@ -22,15 +35,6 @@ namespace Tests.QueryDsl.TermLevel.Ids
 				type = new[] { "doc", "developer" },
 				values = new[] { 1, 2, 3, 4 }
 			}
-
-		};
-
-		protected override QueryContainer QueryInitializer => new IdsQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Values = new List<Id> { 1, 2,3,4 },
-			Types = Type<Project>().And<Developer>()
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -40,11 +44,5 @@ namespace Tests.QueryDsl.TermLevel.Ids
 				.Values(1, 2, 3, 4)
 				.Types(typeof(Project), typeof(Developer))
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IIdsQuery>(a => a.Ids)
-		{
-			q => q.Values = null,
-			q => q.Values = Enumerable.Empty<Id>()
-		};
 	}
 }

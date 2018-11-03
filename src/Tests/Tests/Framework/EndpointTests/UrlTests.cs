@@ -6,7 +6,6 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Client;
 using Tests.Core.Client.Settings;
-using Tests.Framework.ManagedElasticsearch;
 
 namespace Tests.Framework
 {
@@ -26,33 +25,43 @@ namespace Tests.Framework
 
 	public class UrlTester
 	{
-		protected string ExpectedUrl { get; set; }
-		protected HttpMethod ExpectedHttpMethod { get; set; }
-		private IElasticClient Client { get; }
-
 		internal UrlTester(HttpMethod method, string expectedUrl, Func<ConnectionSettings, ConnectionSettings> settings = null)
 		{
-			this.ExpectedHttpMethod = method;
-			this.ExpectedUrl = expectedUrl;
-			this.Client = settings == null
+			ExpectedHttpMethod = method;
+			ExpectedUrl = expectedUrl;
+			Client = settings == null
 				? TestClient.DefaultInMemoryClient
 				: new ElasticClient(settings(new AlwaysInMemoryConnectionSettings()));
 		}
 
+		protected HttpMethod ExpectedHttpMethod { get; set; }
+		protected string ExpectedUrl { get; set; }
+		private IElasticClient Client { get; }
+
 		public static UrlTester ExpectUrl(HttpMethod method, string url, Func<ConnectionSettings, ConnectionSettings> settings = null) =>
 			new UrlTester(method, url, settings);
-		public static UrlTester POST(string url) =>  new UrlTester(HttpMethod.POST, url);
-		public static UrlTester PUT(string url) =>  new UrlTester(HttpMethod.PUT, url);
-		public static UrlTester GET(string url) =>  new UrlTester(HttpMethod.GET, url);
-		public static UrlTester HEAD(string url) =>  new UrlTester(HttpMethod.HEAD, url);
-		public static UrlTester DELETE(string url) =>  new UrlTester(HttpMethod.DELETE, url);
+
+		public static UrlTester POST(string url) => new UrlTester(HttpMethod.POST, url);
+
+		public static UrlTester PUT(string url) => new UrlTester(HttpMethod.PUT, url);
+
+		public static UrlTester GET(string url) => new UrlTester(HttpMethod.GET, url);
+
+		public static UrlTester HEAD(string url) => new UrlTester(HttpMethod.HEAD, url);
+
+		public static UrlTester DELETE(string url) => new UrlTester(HttpMethod.DELETE, url);
+
 		public static string EscapeUriString(string s) => Uri.EscapeDataString(s);
 
 		public UrlTester Fluent<TResponse>(Func<IElasticClient, TResponse> call) where TResponse : IResponse => WhenCalling(call, "fluent");
+
 		public UrlTester Request<TResponse>(Func<IElasticClient, TResponse> call) where TResponse : IResponse => WhenCalling(call, "request");
 
-		public Task<UrlTester> FluentAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) where TResponse : IResponse => WhenCallingAsync(call, "fluent async");
-		public Task<UrlTester> RequestAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) where TResponse : IResponse => WhenCallingAsync(call, "request async");
+		public Task<UrlTester> FluentAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) where TResponse : IResponse =>
+			WhenCallingAsync(call, "fluent async");
+
+		public Task<UrlTester> RequestAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) where TResponse : IResponse =>
+			WhenCallingAsync(call, "request async");
 
 		public UrlTester LowLevel(Func<IElasticLowLevelClient, IApiCallDetails> call)
 		{
@@ -77,8 +86,8 @@ namespace Tests.Framework
 		private UrlTester Assert(string typeOfCall, IApiCallDetails callDetails)
 		{
 			var url = callDetails.Uri.PathAndQuery;
-			callDetails.Uri.PathEquals(this.ExpectedUrl, typeOfCall);
-			callDetails.HttpMethod.Should().Be(this.ExpectedHttpMethod, $"{typeOfCall} to {url}");
+			callDetails.Uri.PathEquals(ExpectedUrl, typeOfCall);
+			callDetails.HttpMethod.Should().Be(ExpectedHttpMethod, $"{typeOfCall} to {url}");
 			return this;
 		}
 	}

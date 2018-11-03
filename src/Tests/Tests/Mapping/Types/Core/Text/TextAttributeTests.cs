@@ -1,5 +1,4 @@
-﻿using System;
-using Nest;
+﻿using Nest;
 
 namespace Tests.Mapping.Types.Core.Text
 {
@@ -21,10 +20,10 @@ namespace Tests.Mapping.Types.Core.Text
 			TermVector = TermVectorOption.WithPositionsOffsets)]
 		public string Full { get; set; }
 
+		public string Inferred { get; set; }
+
 		[Text]
 		public string Minimal { get; set; }
-
-		public string Inferred { get; set; }
 	}
 
 	public class TextAttributeTests : AttributeTestsBase<TextTest>

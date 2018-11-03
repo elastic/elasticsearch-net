@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -7,13 +6,29 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Watcher.AcknowledgeWatch
 {
-	public class AcknowledgeWatchApiTests : ApiIntegrationTestBase<XPackCluster, IAcknowledgeWatchResponse, IAcknowledgeWatchRequest, AcknowledgeWatchDescriptor, AcknowledgeWatchRequest>
+	public class AcknowledgeWatchApiTests
+		: ApiIntegrationTestBase<XPackCluster, IAcknowledgeWatchResponse, IAcknowledgeWatchRequest, AcknowledgeWatchDescriptor,
+			AcknowledgeWatchRequest>
 	{
 		public AcknowledgeWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> Fluent => f => f
+			.ActionId("test_index");
+
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override AcknowledgeWatchRequest Initializer =>
+			new AcknowledgeWatchRequest(CallIsolatedValue, "test_index");
+
+		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_ack/test_index";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -73,27 +88,13 @@ namespace Tests.XPack.Watcher.AcknowledgeWatch
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.AcknowledgeWatch(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.AcknowledgeWatchAsync(CallIsolatedValue, f),
-			request: (client, r) => client.AcknowledgeWatch(r),
-			requestAsync: (client, r) => client.AcknowledgeWatchAsync(r)
+			(client, f) => client.AcknowledgeWatch(CallIsolatedValue, f),
+			(client, f) => client.AcknowledgeWatchAsync(CallIsolatedValue, f),
+			(client, r) => client.AcknowledgeWatch(r),
+			(client, r) => client.AcknowledgeWatchAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}/_ack/test_index";
-
 		protected override AcknowledgeWatchDescriptor NewDescriptor() => new AcknowledgeWatchDescriptor(CallIsolatedValue);
-
-		protected override object ExpectJson => null;
-
-		protected override Func<AcknowledgeWatchDescriptor, IAcknowledgeWatchRequest> Fluent => f => f
-			.ActionId("test_index");
-
-		protected override AcknowledgeWatchRequest Initializer =>
-			new AcknowledgeWatchRequest(CallIsolatedValue, "test_index");
 
 		protected override void ExpectResponse(IAcknowledgeWatchResponse response)
 		{

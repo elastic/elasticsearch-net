@@ -2,7 +2,6 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.CommonTerms
@@ -10,6 +9,26 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 	public class CommonTermsUsageTests : QueryDslUsageTestsBase
 	{
 		public CommonTermsUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ICommonTermsQuery>(a => a.CommonTerms)
+		{
+			q => q.Query = null,
+			q => q.Query = string.Empty,
+			q => q.Field = null
+		};
+
+		protected override QueryContainer QueryInitializer => new CommonTermsQuery()
+		{
+			Field = Field<Project>(p => p.Description),
+			Analyzer = "standard",
+			Boost = 1.1,
+			CutoffFrequency = 0.001,
+			HighFrequencyOperator = Operator.And,
+			LowFrequencyOperator = Operator.Or,
+			MinimumShouldMatch = 1,
+			Name = "named_query",
+			Query = "nelly the elephant not as a"
+		};
 
 		protected override object QueryJson => new
 		{
@@ -29,19 +48,6 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new CommonTermsQuery()
-		{
-			Field = Field<Project>(p => p.Description),
-			Analyzer = "standard",
-			Boost = 1.1,
-			CutoffFrequency = 0.001,
-			HighFrequencyOperator = Operator.And,
-			LowFrequencyOperator = Operator.Or,
-			MinimumShouldMatch = 1,
-			Name = "named_query",
-			Query = "nelly the elephant not as a"
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.CommonTerms(c => c
 				.Field(p => p.Description)
@@ -54,12 +60,5 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 				.Name("named_query")
 				.Query("nelly the elephant not as a")
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ICommonTermsQuery>(a => a.CommonTerms)
-		{
-			q => q.Query = null,
-			q => q.Query = string.Empty,
-			q => q.Field = null
-		};
 	}
 }

@@ -1,15 +1,12 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
-using Tests.Framework;
 using FluentAssertions;
 
 namespace Tests.ClientConcepts.ServerError
 {
 	public class ErrorWithNullRootCausesTests : ServerErrorTestsBase
 	{
-		[U] protected override void AssertServerError() => base.AssertServerError();
-
-		protected override string Json  =>@"{
+		protected override string Json => @"{
 			""root_cause"": null,
 			""type"": ""parse_exception"",
 			""reason"": ""failed to parse source for create index"",
@@ -18,6 +15,8 @@ namespace Tests.ClientConcepts.ServerError
 				""reason"": ""Unexpected character ('\""' (code 34)): was expecting a colon to separate field name and value\n at [Source: [B@1231dcb3; line: 6, column: 10]""
 			}
 		}";
+
+		[U] protected override void AssertServerError() => base.AssertServerError();
 
 		protected override void AssertResponseError(string origin, Error error)
 		{

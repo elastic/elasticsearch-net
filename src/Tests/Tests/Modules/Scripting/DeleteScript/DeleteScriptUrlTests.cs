@@ -13,10 +13,10 @@ namespace Tests.Modules.Scripting.DeleteScript
 			var id = "id";
 
 			await DELETE($"/_scripts/{id}")
-				.Fluent(c => c.DeleteScript(id))
-				.Request(c => c.DeleteScript(new DeleteScriptRequest(id)))
-				.FluentAsync(c => c.DeleteScriptAsync(id))
-				.RequestAsync(c => c.DeleteScriptAsync(new DeleteScriptRequest(id)))
+					.Fluent(c => c.DeleteScript(id))
+					.Request(c => c.DeleteScript(new DeleteScriptRequest(id)))
+					.FluentAsync(c => c.DeleteScriptAsync(id))
+					.RequestAsync(c => c.DeleteScriptAsync(new DeleteScriptRequest(id)))
 				;
 		}
 	}

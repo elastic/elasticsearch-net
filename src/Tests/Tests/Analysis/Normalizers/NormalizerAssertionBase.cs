@@ -12,19 +12,20 @@ namespace Tests.Analysis.Normalizers
 			, INormalizerAssertion
 		where TAssertion : NormalizerAssertionBase<TAssertion>, new()
 	{
+		protected override object AnalysisJson => new
+		{
+			normalizer = new Dictionary<string, object> { { AssertionSetup.Name, AssertionSetup.Json } }
+		};
+
 		protected override IAnalysis FluentAnalysis(AnalysisDescriptor an) =>
 			an.Normalizers(d => AssertionSetup.Fluent(AssertionSetup.Name, d));
 
 		protected override Nest.Analysis InitializerAnalysis() =>
-			new Nest.Analysis {Normalizers = new Nest.Normalizers {{AssertionSetup.Name, AssertionSetup.Initializer}}};
-
-		protected override object AnalysisJson => new
-		{
-			normalizer = new Dictionary<string, object> { {AssertionSetup.Name, AssertionSetup.Json} }
-		};
+			new Nest.Analysis { Normalizers = new Nest.Normalizers { { AssertionSetup.Name, AssertionSetup.Initializer } } };
 
 		// https://youtrack.jetbrains.com/issue/RIDER-19912
 		[U] public override Task TestPutSettingsRequest() => base.TestPutSettingsRequest();
+
 		[I] public override Task TestPutSettingsResponse() => base.TestPutSettingsResponse();
 	}
 }

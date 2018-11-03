@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Pipeline.BucketScript
 {
@@ -120,8 +118,8 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 					}
 					&& new BucketScriptAggregation("stable_percentage", new MultiBucketsPath
 					{
-						{"totalCommits", "commits"},
-						{"stableCommits", "stable_state>commits"}
+						{ "totalCommits", "commits" },
+						{ "stableCommits", "stable_state>commits" }
 					})
 					{
 						Script = new InlineScript("params.stableCommits / params.totalCommits * 100")
@@ -137,7 +135,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-			foreach(var item in projectsPerMonth.Buckets)
+			foreach (var item in projectsPerMonth.Buckets)
 			{
 				var stablePercentage = item.BucketScript("stable_percentage");
 				stablePercentage.Should().NotBeNull();

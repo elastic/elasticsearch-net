@@ -19,10 +19,9 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				.RequestAsync(c => c.MapAsync(new PutMappingRequest<Project>()));
 
 			await PUT($"/project/project/_mapping")
-				.Request(c => c.Map(new PutMappingRequest("project", "project")))
-				.RequestAsync(c => c.MapAsync(new PutMappingRequest("project", "project")))
+					.Request(c => c.Map(new PutMappingRequest("project", "project")))
+					.RequestAsync(c => c.MapAsync(new PutMappingRequest("project", "project")))
 				;
-
 		}
 	}
 }

@@ -3,7 +3,6 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.Extensions;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
@@ -12,7 +11,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void Eq()
 		{
 			PropertyName name = "foo";
-			PropertyName[] equal = {"foo"};
+			PropertyName[] equal = { "foo" };
 			foreach (var t in equal)
 			{
 				(t == name).ShouldBeTrue(t);
@@ -23,7 +22,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 		[U] public void NotEq()
 		{
 			PropertyName name = "foo";
-			PropertyName[] notEqual = {"bar", "foo  ", "  foo   ", "x", "", "   ", Infer.Property<Project>(p=>p.Name)};
+			PropertyName[] notEqual = { "bar", "foo  ", "  foo   ", "x", "", "   ", Infer.Property<Project>(p => p.Name) };
 			foreach (var t in notEqual)
 			{
 				(t != name).ShouldBeTrue(t);

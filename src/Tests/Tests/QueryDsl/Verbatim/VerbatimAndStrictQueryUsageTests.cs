@@ -1,16 +1,10 @@
-﻿using FluentAssertions;
-using Nest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using Xunit;
 
 namespace Tests.QueryDsl.Verbatim
@@ -26,9 +20,20 @@ namespace Tests.QueryDsl.Verbatim
 	 */
 	public class CompoundVerbatimQueryUsageTests : QueryDslUsageTestsBase
 	{
-		protected override bool SupportsDeserialization => false;
-
 		public CompoundVerbatimQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override QueryContainer QueryInitializer =>
+			new TermQuery
+			{
+				IsVerbatim = true,
+				Field = "description",
+				Value = ""
+			}
+			&& new TermQuery
+			{
+				Field = "name",
+				Value = "foo"
+			};
 
 		protected override object QueryJson => new
 		{
@@ -60,31 +65,20 @@ namespace Tests.QueryDsl.Verbatim
 			}
 		};
 
-		protected override QueryContainer QueryInitializer =>
-			new TermQuery
-			{
-				IsVerbatim = true,
-				Field = "description",
-				Value = ""
-			}
-			&& new TermQuery
-			{
-				Field = "name",
-				Value = "foo"
-			};
+		protected override bool SupportsDeserialization => false;
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Bool(b => b
 				.Must(qt => qt
-					.Term(t => t
-						.Verbatim()
-						.Field(p => p.Description)
-						.Value("")
-					), qt => qt
-					.Term(t => t
-						.Field(p => p.Name)
-						.Value("foo")
-					)
+						.Term(t => t
+							.Verbatim()
+							.Field(p => p.Description)
+							.Value("")
+						), qt => qt
+						.Term(t => t
+							.Field(p => p.Name)
+							.Value("foo")
+						)
 				)
 			);
 	}
@@ -92,21 +86,20 @@ namespace Tests.QueryDsl.Verbatim
 	/** A compound query can also be marked as verbatim, demonstrated here with a `bool` query. */
 	public class QueryContainerVerbatimSupportedUsageTests : QueryDslUsageTestsBase
 	{
-		protected override bool SupportsDeserialization => false;
-
 		public QueryContainerVerbatimSupportedUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override object QueryJson => new
-		{
-			@bool = new
-			{
-			}
-		};
 
 		protected override QueryContainer QueryInitializer => new BoolQuery
 		{
 			IsVerbatim = true,
 		};
+
+		protected override object QueryJson => new
+		{
+			@bool = new
+				{ }
+		};
+
+		protected override bool SupportsDeserialization => false;
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Bool(b => b
@@ -114,12 +107,17 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
-    /** A single verbatim query will be serialized as-is */
-    public class SingleVerbatimQueryUsageTests : QueryDslUsageTestsBase
+	/** A single verbatim query will be serialized as-is */
+	public class SingleVerbatimQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public SingleVerbatimQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool SupportsDeserialization => false;
+		protected override QueryContainer QueryInitializer => new TermQuery
+		{
+			IsVerbatim = true,
+			Field = "description",
+			Value = ""
+		};
 
 		protected override object QueryJson => new
 		{
@@ -130,15 +128,9 @@ namespace Tests.QueryDsl.Verbatim
 					value = ""
 				}
 			}
-
 		};
 
-		protected override QueryContainer QueryInitializer => new TermQuery
-		{
-			IsVerbatim = true,
-			Field = "description",
-			Value = ""
-		};
+		protected override bool SupportsDeserialization => false;
 
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -149,26 +141,42 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
-    /**
-     * Leaf queries within a compound query marked as verbatim will also be serialized as-is
-     */
+	/**
+	 * Leaf queries within a compound query marked as verbatim will also be serialized as-is
+	 */
 	public class CompoundVerbatimInnerQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public CompoundVerbatimInnerQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool SupportsDeserialization => false;
+
+		protected override QueryContainer QueryInitializer => new BoolQuery
+		{
+			Filter = new QueryContainer[]
+			{
+				!new TermQuery
+				{
+					IsVerbatim = true,
+					Field = "name",
+					Value = ""
+				} &&
+				new ExistsQuery
+				{
+					Field = "numberOfCommits"
+				}
+			}
+		};
 
 		protected override object QueryJson => new
 		{
 			@bool = new
 			{
-				filter = new []
+				filter = new[]
 				{
 					new
 					{
 						@bool = new
 						{
-							must = new []
+							must = new[]
 							{
 								new
 								{
@@ -178,7 +186,7 @@ namespace Tests.QueryDsl.Verbatim
 									}
 								}
 							},
-							must_not = new []
+							must_not = new[]
 							{
 								new
 								{
@@ -197,36 +205,20 @@ namespace Tests.QueryDsl.Verbatim
 			}
 		};
 
-
-
-		protected override QueryContainer QueryInitializer => new BoolQuery
-		{
-			Filter = new QueryContainer[] {
-				!new TermQuery
-				{
-					IsVerbatim = true,
-					Field = "name",
-					Value = ""
-				} &&
-				new ExistsQuery
-				{
-					Field = "numberOfCommits"
-				}
-			}
-		};
+		protected override bool SupportsDeserialization => false;
 
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Bool(b => b
 				.Filter(f => !f
-					.Term(t => t
-						.Verbatim()
-						.Field(p => p.Name)
-						.Value("")
-					) && f
-					.Exists(e => e
-						.Field(p => p.NumberOfCommits)
-					)
+						.Term(t => t
+							.Verbatim()
+							.Field(p => p.Name)
+							.Value("")
+						) && f
+						.Exists(e => e
+							.Field(p => p.NumberOfCommits)
+						)
 				)
 			);
 	}

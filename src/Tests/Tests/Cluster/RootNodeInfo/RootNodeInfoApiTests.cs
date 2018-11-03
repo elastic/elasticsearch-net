@@ -4,25 +4,25 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.RootNodeInfo
 {
-	public class RootNodeInfoApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
+	public class RootNodeInfoApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IRootNodeInfoResponse, IRootNodeInfoRequest, RootNodeInfoDescriptor, RootNodeInfoRequest>
 	{
 		public RootNodeInfoApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.RootNodeInfo(),
-			fluentAsync: (client, f) => client.RootNodeInfoAsync(),
-			request: (client, r) => client.RootNodeInfo(r),
-			requestAsync: (client, r) => client.RootNodeInfoAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.RootNodeInfo(),
+			(client, f) => client.RootNodeInfoAsync(),
+			(client, r) => client.RootNodeInfo(r),
+			(client, r) => client.RootNodeInfoAsync(r)
+		);
 
 		protected override void ExpectResponse(IRootNodeInfoResponse response)
 		{

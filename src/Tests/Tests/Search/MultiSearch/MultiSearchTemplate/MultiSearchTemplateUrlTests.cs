@@ -14,24 +14,24 @@ namespace Tests.Search.MultiSearch.MultiSearchTemplate
 			var index = "indexx";
 
 			await POST($"/_msearch/template")
-				.Fluent(c=>c.MultiSearchTemplate(s=>s))
-				.Request(c=>c.MultiSearchTemplate(new MultiSearchTemplateRequest()))
-				.FluentAsync(c=>c.MultiSearchTemplateAsync(s=> s))
-				.RequestAsync(c=>c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest()))
+					.Fluent(c => c.MultiSearchTemplate(s => s))
+					.Request(c => c.MultiSearchTemplate(new MultiSearchTemplateRequest()))
+					.FluentAsync(c => c.MultiSearchTemplateAsync(s => s))
+					.RequestAsync(c => c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest()))
 				;
 
 			await POST($"/{index}/_msearch/template")
-				.Fluent(c=>c.MultiSearchTemplate(s=>s.Index(index)))
-				.Request(c=>c.MultiSearchTemplate(new MultiSearchTemplateRequest(index)))
-				.FluentAsync(c=>c.MultiSearchTemplateAsync(s=> s.Index(index)))
-				.RequestAsync(c=>c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest(index)))
+					.Fluent(c => c.MultiSearchTemplate(s => s.Index(index)))
+					.Request(c => c.MultiSearchTemplate(new MultiSearchTemplateRequest(index)))
+					.FluentAsync(c => c.MultiSearchTemplateAsync(s => s.Index(index)))
+					.RequestAsync(c => c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest(index)))
 				;
 
 			await POST($"/{index}/doc/_msearch/template")
-				.Fluent(c=>c.MultiSearchTemplate(s=>s.Index(index).Type<CommitActivity>()))
-				.Request(c=>c.MultiSearchTemplate(new MultiSearchTemplateRequest(index, TypeName.From<CommitActivity>())))
-				.FluentAsync(c=>c.MultiSearchTemplateAsync(s=> s.Index(index).Type(typeof(CommitActivity))))
-				.RequestAsync(c=>c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest(index, typeof(CommitActivity))))
+					.Fluent(c => c.MultiSearchTemplate(s => s.Index(index).Type<CommitActivity>()))
+					.Request(c => c.MultiSearchTemplate(new MultiSearchTemplateRequest(index, TypeName.From<CommitActivity>())))
+					.FluentAsync(c => c.MultiSearchTemplateAsync(s => s.Index(index).Type(typeof(CommitActivity))))
+					.RequestAsync(c => c.MultiSearchTemplateAsync(new MultiSearchTemplateRequest(index, typeof(CommitActivity))))
 				;
 		}
 	}

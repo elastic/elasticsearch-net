@@ -5,10 +5,7 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Xunit;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Aggregations.Metric.GeoCentroid
 {
@@ -135,9 +132,6 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 			}
 		};
 
-		protected override QueryContainer QueryScope => new TermQuery { Field = Infer.Field<Project>(p=>p.Name), Value = "noresult" };
-		protected override object QueryScopeJson { get; } = new {term = new {name = new {value = "noresult"}}};
-
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.GeoCentroid("centroid", gb => gb
 				.Field(p => p.Location)
@@ -145,6 +139,9 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 
 		protected override AggregationDictionary InitializerAggs =>
 			new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location));
+
+		protected override QueryContainer QueryScope => new TermQuery { Field = Infer.Field<Project>(p => p.Name), Value = "noresult" };
+		protected override object QueryScopeJson { get; } = new { term = new { name = new { value = "noresult" } } };
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{

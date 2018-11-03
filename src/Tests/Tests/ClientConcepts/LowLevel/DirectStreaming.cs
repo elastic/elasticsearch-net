@@ -1,11 +1,9 @@
-﻿using FluentAssertions;
-using Nest;
-using System;
+﻿using System;
 using Elastic.Xunit.XunitPlumbing;
-using Tests.Core;
+using FluentAssertions;
+using Nest;
 using Tests.Core.Client;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.LowLevel
 {

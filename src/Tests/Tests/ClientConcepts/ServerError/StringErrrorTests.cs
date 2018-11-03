@@ -1,15 +1,14 @@
 ﻿using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.ServerError
 {
 	public class StringErrrorTests : ServerErrorTestsBase
 	{
-		[U] protected override void AssertServerError() => base.AssertServerError();
-
 		protected override string Json => @"""alias [x] is missing""";
+
+		[U] protected override void AssertServerError() => base.AssertServerError();
 
 		protected override void AssertResponseError(string origin, Error error)
 		{
@@ -22,9 +21,10 @@ namespace Tests.ClientConcepts.ServerError
 
 	public class TempErrrorTests : ServerErrorTestsBase
 	{
-		[U] protected override void AssertServerError() => base.AssertServerError();
+		protected override string Json =>
+			@"{""root_cause"":[{""type"":""index_not_found_exception"",""reason"":""no such index"",""index_uuid"":""_na_"",""index"":""non-existent-index""}],""type"":""index_not_found_exception"",""reason"":""no such index"",""index_uuid"":""_na_"",""index"":""non-existent-index""}";
 
-		protected override string Json => @"{""root_cause"":[{""type"":""index_not_found_exception"",""reason"":""no such index"",""index_uuid"":""_na_"",""index"":""non-existent-index""}],""type"":""index_not_found_exception"",""reason"":""no such index"",""index_uuid"":""_na_"",""index"":""non-existent-index""}";
+		[U] protected override void AssertServerError() => base.AssertServerError();
 
 		protected override void AssertResponseError(string origin, Error error)
 		{

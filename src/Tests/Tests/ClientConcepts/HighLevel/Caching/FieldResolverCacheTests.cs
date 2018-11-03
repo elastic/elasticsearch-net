@@ -1,14 +1,12 @@
-﻿using FluentAssertions;
-using Nest;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
+using FluentAssertions;
+using Nest;
 using Tests.Domain;
-using Tests.Framework;
 using Xunit.Abstractions;
 using static Nest.Infer;
 
@@ -382,6 +380,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 				first.Should().NotBe(second);
 			}
+
 			[U]
 			public void StringEquality()
 			{
@@ -473,26 +472,12 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 		public class CachePerformance
 		{
-			private readonly ITestOutputHelper output;
-
-			public CachePerformance(ITestOutputHelper output)
-			{
-				this.output = output;
-			}
-
-			public class HitTiming
-			{
-				public string Name { get; set; }
-				public Func<Field> Field { get; set; }
-				public double FirstHit { get; set; }
-				public double CachedHit { get; set; }
-
-				public override string ToString() => $"First hit for {Name} took {FirstHit}ms, Cached hit took {CachedHit}ms ({FirstHit / CachedHit}x faster).";
-			}
-
 			private readonly List<HitTiming> _timings = new List<HitTiming>();
-			private Stopwatch _stopwatch;
+			private readonly ITestOutputHelper output;
 			private FieldResolver _resolver;
+			private Stopwatch _stopwatch;
+
+			public CachePerformance(ITestOutputHelper output) => this.output = output;
 
 			[U]
 			public void CachedVsNonCached()
@@ -535,6 +520,17 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				timing.CachedHit = _stopwatch.Elapsed.TotalMilliseconds;
 
 				_stopwatch.Stop();
+			}
+
+			public class HitTiming
+			{
+				public double CachedHit { get; set; }
+				public Func<Field> Field { get; set; }
+				public double FirstHit { get; set; }
+				public string Name { get; set; }
+
+				public override string ToString() =>
+					$"First hit for {Name} took {FirstHit}ms, Cached hit took {CachedHit}ms ({FirstHit / CachedHit}x faster).";
 			}
 		}
 	}

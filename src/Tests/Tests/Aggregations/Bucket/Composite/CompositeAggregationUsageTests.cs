@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json;
 using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Composite
@@ -91,7 +87,7 @@ namespace Tests.Aggregations.Bucket.Composite
 						{
 							tags = new
 							{
-								terms = new {field = "tags.name"}
+								terms = new { field = "tags.name" }
 							}
 						}
 					}
@@ -131,16 +127,16 @@ namespace Tests.Aggregations.Bucket.Composite
 				{
 					new TermsCompositeAggregationSource("branches")
 					{
-						Field = Infer.Field<Project>(f => f.Branches.Suffix("keyword"))
+						Field = Field<Project>(f => f.Branches.Suffix("keyword"))
 					},
 					new DateHistogramCompositeAggregationSource("started")
 					{
-						Field = Infer.Field<Project>(f => f.StartedOn),
+						Field = Field<Project>(f => f.StartedOn),
 						Interval = DateInterval.Month
 					},
 					new HistogramCompositeAggregationSource("branch_count")
 					{
-						Field = Infer.Field<Project>(f => f.RequiredBranches),
+						Field = Field<Project>(f => f.RequiredBranches),
 						Interval = 1
 					}
 				},
@@ -167,10 +163,9 @@ namespace Tests.Aggregations.Bucket.Composite
 			composite.Buckets.Should().NotBeNullOrEmpty();
 			composite.AfterKey.Should().NotBeNull();
 			if (TestConfiguration.Instance.InRange(">=6.3.0"))
-			{
-				composite.AfterKey.Should().HaveCount(3)
+				composite.AfterKey.Should()
+					.HaveCount(3)
 					.And.ContainKeys("branches", "started", "branch_count");
-			}
 			foreach (var item in composite.Buckets)
 			{
 				var key = item.Key;
@@ -240,7 +235,7 @@ namespace Tests.Aggregations.Bucket.Composite
 						nested = new { path = "tags" },
 						aggs = new
 						{
-							tags = new { terms = new {field = "tags.name"} }
+							tags = new { terms = new { field = "tags.name" } }
 						}
 					}
 				}
@@ -273,7 +268,7 @@ namespace Tests.Aggregations.Bucket.Composite
 				{
 					new TermsCompositeAggregationSource("branches")
 					{
-						Field = Infer.Field<Project>(f => f.Branches.Suffix("keyword")),
+						Field = Field<Project>(f => f.Branches.Suffix("keyword")),
 						MissingBucket = true,
 						Order = SortOrder.Ascending
 					}
@@ -364,7 +359,7 @@ namespace Tests.Aggregations.Bucket.Composite
 						{
 							tags = new
 							{
-								terms = new {field = "tags.name"}
+								terms = new { field = "tags.name" }
 							}
 						}
 					}
@@ -398,7 +393,7 @@ namespace Tests.Aggregations.Bucket.Composite
 				{
 					new DateHistogramCompositeAggregationSource("started")
 					{
-						Field = Infer.Field<Project>(f => f.StartedOn),
+						Field = Field<Project>(f => f.StartedOn),
 						Interval = DateInterval.Month,
 						Format = "yyyy-MM-dd"
 					},

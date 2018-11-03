@@ -4,12 +4,10 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json.Linq;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Watcher.PutWatch
 {
@@ -17,22 +15,7 @@ namespace Tests.XPack.Watcher.PutWatch
 	{
 		public PutWatchApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.PutWatch(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.PutWatchAsync(CallIsolatedValue, f),
-			request: (client, r) => client.PutWatch(r),
-			requestAsync: (client, r) => client.PutWatchAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 201;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-
-		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override PutWatchDescriptor NewDescriptor() => new PutWatchDescriptor(CallIsolatedValue);
 
 		protected override object ExpectJson =>
 			new
@@ -84,7 +67,8 @@ namespace Tests.XPack.Watcher.PutWatch
 													password = "Password123"
 												}
 											},
-											body = "{\"query\" : {\"range\": {\"@timestamp\" : {\"from\": \"{{ctx.trigger.triggered_time}}||-5m\",\"to\": \"{{ctx.trigger.triggered_time}}\"}}}}",
+											body =
+												"{\"query\" : {\"range\": {\"@timestamp\" : {\"from\": \"{{ctx.trigger.triggered_time}}||-5m\",\"to\": \"{{ctx.trigger.triggered_time}}\"}}}}",
 											headers = new
 											{
 												header1 = "value1"
@@ -152,7 +136,7 @@ namespace Tests.XPack.Watcher.PutWatch
 							{
 								request = new
 								{
-									indices = new [] { "project" },
+									indices = new[] { "project" },
 									indices_options = new
 									{
 										expand_wildcards = "open",
@@ -189,7 +173,8 @@ namespace Tests.XPack.Watcher.PutWatch
 				{
 					array_compare = new Dictionary<string, object>
 					{
-						{ "ctx.payload.search.aggregations.top_project_tags.buckets", new Dictionary<string, object>
+						{
+							"ctx.payload.search.aggregations.top_project_tags.buckets", new Dictionary<string, object>
 							{
 								{ "path", "doc_count" },
 								{ "gte", new Dictionary<string, object> { { "value", 1 } } }
@@ -262,16 +247,17 @@ namespace Tests.XPack.Watcher.PutWatch
 							attach_payload = true,
 							event_type = "trigger",
 							incident_key = "incident_key",
-							context = new object[] {
+							context = new object[]
+							{
 								new
 								{
-								  type = "image",
-								  src = "http://example.com/image"
+									type = "image",
+									src = "http://example.com/image"
 								},
 								new
 								{
-								  type = "link",
-								  href = "http://example.com/link"
+									type = "link",
+									href = "http://example.com/link"
 								}
 							}
 						}
@@ -334,6 +320,8 @@ namespace Tests.XPack.Watcher.PutWatch
 				}
 			};
 
+		protected override int ExpectStatusCode => 201;
+
 		protected override Func<PutWatchDescriptor, IPutWatchRequest> Fluent => p => p
 			.Input(i => i
 				.Chain(c => c
@@ -362,7 +350,8 @@ namespace Tests.XPack.Watcher.PutWatch
 										.Password("Password123")
 									)
 								)
-								.Body("{\"query\" : {\"range\": {\"@timestamp\" : {\"from\": \"{{ctx.trigger.triggered_time}}||-5m\",\"to\": \"{{ctx.trigger.triggered_time}}\"}}}}")
+								.Body(
+									"{\"query\" : {\"range\": {\"@timestamp\" : {\"from\": \"{{ctx.trigger.triggered_time}}||-5m\",\"to\": \"{{ctx.trigger.triggered_time}}\"}}}}")
 								.Headers(he => he
 									.Add("header1", "value1")
 								)
@@ -527,6 +516,8 @@ namespace Tests.XPack.Watcher.PutWatch
 				)
 			);
 
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
 		protected override PutWatchRequest Initializer =>
 			new PutWatchRequest(CallIsolatedValue)
 			{
@@ -565,7 +556,8 @@ namespace Tests.XPack.Watcher.PutWatch
 											Password = "Password123"
 										}
 									},
-									Body = "{\"query\" : {\"range\": {\"@timestamp\" : {\"from\": \"{{ctx.trigger.triggered_time}}||-5m\",\"to\": \"{{ctx.trigger.triggered_time}}\"}}}}",
+									Body =
+										"{\"query\" : {\"range\": {\"@timestamp\" : {\"from\": \"{{ctx.trigger.triggered_time}}||-5m\",\"to\": \"{{ctx.trigger.triggered_time}}\"}}}}",
 									Headers = new Dictionary<string, string>
 									{
 										{ "header1", "value1" }
@@ -644,95 +636,108 @@ namespace Tests.XPack.Watcher.PutWatch
 					}
 				},
 				Actions = new EmailAction("reminder_email")
+				{
+					To = new[] { "me@example.com" },
+					Subject = "Something's strange in the neighbourhood",
+					Body = new EmailBody
 					{
-						To = new [] { "me@example.com" },
-						Subject = "Something's strange in the neighbourhood",
-						Body = new EmailBody
+						Text = "Dear {{ctx.payload.name}}, by the time you read these lines, I'll be gone"
+					},
+					Attachments = new EmailAttachments
+					{
 						{
-							Text = "Dear {{ctx.payload.name}}, by the time you read these lines, I'll be gone"
-						},
-						Attachments = new EmailAttachments
-						{
+							"http_attachment", new HttpAttachment
 							{
-								"http_attachment", new HttpAttachment
+								Inline = true,
+								ContentType = RequestData.MimeType,
+								Request = new HttpInputRequest
 								{
-									Inline = true,
-									ContentType = RequestData.MimeType,
-									Request = new HttpInputRequest
-									{
-										Url = "http://localhost:8080/http_attachment"
-									}
+									Url = "http://localhost:8080/http_attachment"
 								}
-							},
-							{
-								"data_attachment", new DataAttachment
-								{
-									Format = DataAttachmentFormat.Json
-								}
-							}
-						}
-					} && new IndexAction("reminder_index")
-					{
-					    Index = "put-watch-test-index",
-						DocType = "reminder",
-						ExecutionTimeField = "execution_time"
-					} && new PagerDutyAction("reminder_pagerduty")
-					{
-						Account = "my_pagerduty_account",
-						Description = "pager duty description",
-						AttachPayload = true,
-						EventType = PagerDutyEventType.Trigger,
-						IncidentKey = "incident_key",
-						Context = new[]
-						{
-							new PagerDutyContext(PagerDutyContextType.Image) { Src = "http://example.com/image" },
-							new PagerDutyContext(PagerDutyContextType.Link) { Href = "http://example.com/link" },
-						}
-					} && new SlackAction("reminder_slack")
-					{
-						Account = "monitoring",
-						Message = new SlackMessage
-						{
-							From = "nest integration test",
-							To = new [] { "#nest" },
-							Text = "slack message",
-							Attachments = new []
-							{
-								new SlackAttachment
-								{
-									Title = "Attachment 1",
-									AuthorName = "Russ Cam"
-								}
-							}
-						}
-					} && new HipChatAction("reminder_hipchat")
-				    {
-					    Account = "notify-monitoring",
-						Message = new HipChatMessage
-						{
-							Body = "hipchat message",
-							Color = HipChatMessageColor.Purple,
-							Room = new [] { "nest" },
-							Notify = true
-						}
-				    } && new WebhookAction("webhook")
-					{
-						Scheme = ConnectionScheme.Https,
-						Host = "localhost",
-						Port = 9200,
-						Method = HttpInputMethod.Post,
-						Path = "/_bulk",
-						Authentication = new HttpInputAuthentication
-						{
-							Basic = new HttpInputBasicAuthentication
-							{
-								Username = "username",
-								Password = "password"
 							}
 						},
-						Body = "{{ctx.payload._value}}"
+						{
+							"data_attachment", new DataAttachment
+							{
+								Format = DataAttachmentFormat.Json
+							}
+						}
 					}
+				} && new IndexAction("reminder_index")
+				{
+					Index = "put-watch-test-index",
+					DocType = "reminder",
+					ExecutionTimeField = "execution_time"
+				} && new PagerDutyAction("reminder_pagerduty")
+				{
+					Account = "my_pagerduty_account",
+					Description = "pager duty description",
+					AttachPayload = true,
+					EventType = PagerDutyEventType.Trigger,
+					IncidentKey = "incident_key",
+					Context = new[]
+					{
+						new PagerDutyContext(PagerDutyContextType.Image) { Src = "http://example.com/image" },
+						new PagerDutyContext(PagerDutyContextType.Link) { Href = "http://example.com/link" },
+					}
+				} && new SlackAction("reminder_slack")
+				{
+					Account = "monitoring",
+					Message = new SlackMessage
+					{
+						From = "nest integration test",
+						To = new[] { "#nest" },
+						Text = "slack message",
+						Attachments = new[]
+						{
+							new SlackAttachment
+							{
+								Title = "Attachment 1",
+								AuthorName = "Russ Cam"
+							}
+						}
+					}
+				} && new HipChatAction("reminder_hipchat")
+				{
+					Account = "notify-monitoring",
+					Message = new HipChatMessage
+					{
+						Body = "hipchat message",
+						Color = HipChatMessageColor.Purple,
+						Room = new[] { "nest" },
+						Notify = true
+					}
+				} && new WebhookAction("webhook")
+				{
+					Scheme = ConnectionScheme.Https,
+					Host = "localhost",
+					Port = 9200,
+					Method = HttpInputMethod.Post,
+					Path = "/_bulk",
+					Authentication = new HttpInputAuthentication
+					{
+						Basic = new HttpInputBasicAuthentication
+						{
+							Username = "username",
+							Password = "password"
+						}
+					},
+					Body = "{{ctx.payload._value}}"
+				}
 			};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath => $"/_xpack/watcher/watch/{CallIsolatedValue}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.PutWatch(CallIsolatedValue, f),
+			(client, f) => client.PutWatchAsync(CallIsolatedValue, f),
+			(client, r) => client.PutWatch(r),
+			(client, r) => client.PutWatchAsync(r)
+		);
+
+		protected override PutWatchDescriptor NewDescriptor() => new PutWatchDescriptor(CallIsolatedValue);
 
 		protected override void ExpectResponse(IPutWatchResponse response)
 		{

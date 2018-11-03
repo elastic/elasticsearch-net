@@ -3,7 +3,6 @@ using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.QueryDsl.Geo
 {
@@ -88,23 +87,23 @@ namespace Tests.QueryDsl.Geo
 		[U]
 		public void WriteMultiLineString()
 		{
-			var multLineString = new MultiLineStringGeoShape(new []
+			var multLineString = new MultiLineStringGeoShape(new[]
+			{
+				new[]
 				{
-					new []
-					{
-						new GeoCoordinate(2, 102),
-						new GeoCoordinate(2, 103),
-						new GeoCoordinate(3, 103),
-						new GeoCoordinate(3, 102),
-					},
-					new []
-					{
-						new GeoCoordinate(0, 100),
-						new GeoCoordinate(0, 101),
-						new GeoCoordinate(1, 101),
-						new GeoCoordinate(1, 100),
-					}
-				});
+					new GeoCoordinate(2, 102),
+					new GeoCoordinate(2, 103),
+					new GeoCoordinate(3, 103),
+					new GeoCoordinate(3, 102),
+				},
+				new[]
+				{
+					new GeoCoordinate(0, 100),
+					new GeoCoordinate(0, 101),
+					new GeoCoordinate(1, 101),
+					new GeoCoordinate(1, 100),
+				}
+			});
 
 			var wkt = GeoWKTWriter.Write(multLineString);
 			wkt.Should().Be("MULTILINESTRING ((102 2, 103 2, 103 3, 102 3), (100 0, 101 0, 101 1, 100 1))");
@@ -133,16 +132,16 @@ namespace Tests.QueryDsl.Geo
 		[U]
 		public void WritePolygon()
 		{
-			var polygon = new PolygonGeoShape(new []
+			var polygon = new PolygonGeoShape(new[]
 			{
-				new []
+				new[]
 				{
 					new GeoCoordinate(2, 102),
 					new GeoCoordinate(2, 103),
 					new GeoCoordinate(3, 103),
 					new GeoCoordinate(3, 102),
 				},
-				new []
+				new[]
 				{
 					new GeoCoordinate(0, 100),
 					new GeoCoordinate(0, 101),
@@ -185,11 +184,11 @@ namespace Tests.QueryDsl.Geo
 		[U]
 		public void WriteMultiPolygon()
 		{
-			var multiPolygon = new MultiPolygonGeoShape(new []
+			var multiPolygon = new MultiPolygonGeoShape(new[]
 			{
-				new []
+				new[]
 				{
-					new []
+					new[]
 					{
 						new GeoCoordinate(2, 102),
 						new GeoCoordinate(2, 103),
@@ -198,9 +197,9 @@ namespace Tests.QueryDsl.Geo
 						new GeoCoordinate(2, 102),
 					}
 				},
-				new []
+				new[]
 				{
-					new []
+					new[]
 					{
 						new GeoCoordinate(0, 100),
 						new GeoCoordinate(0, 101),
@@ -208,7 +207,7 @@ namespace Tests.QueryDsl.Geo
 						new GeoCoordinate(1, 100),
 						new GeoCoordinate(0, 100),
 					},
-					new []
+					new[]
 					{
 						new GeoCoordinate(0.2, 100.2),
 						new GeoCoordinate(0.2, 100.8),
@@ -219,7 +218,10 @@ namespace Tests.QueryDsl.Geo
 				}
 			});
 
-			GeoWKTWriter.Write(multiPolygon).Should().Be("MULTIPOLYGON (((102 2, 103 2, 103 3, 102 3, 102 2)), ((100 0, 101 0, 101 1, 100 1, 100 0), (100.2 0.2, 100.8 0.2, 100.8 0.8, 100.2 0.8, 100.2 0.2)))");
+			GeoWKTWriter.Write(multiPolygon)
+				.Should()
+				.Be(
+					"MULTIPOLYGON (((102 2, 103 2, 103 3, 102 3, 102 2)), ((100 0, 101 0, 101 1, 100 1, 100 0), (100.2 0.2, 100.8 0.2, 100.8 0.8, 100.2 0.8, 100.2 0.2)))");
 		}
 
 		[U]
@@ -241,7 +243,7 @@ namespace Tests.QueryDsl.Geo
 		[U]
 		public void WriteEnvelopeIgnoresZValues()
 		{
-			var envelope = new EnvelopeGeoShape(new []
+			var envelope = new EnvelopeGeoShape(new[]
 			{
 				new GeoCoordinate(40.73, -74.1, 3),
 				new GeoCoordinate(40.01, -71.12, 2)
@@ -288,6 +290,5 @@ namespace Tests.QueryDsl.Geo
 			Action action = () => GeoWKTReader.Read(wkt);
 			action.ShouldThrow<GeoWKTException>().Which.Message.Should().Be("Expected number but found: , at line 2, position 5");
 		}
-
 	}
 }

@@ -8,25 +8,25 @@ using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Cluster.NodesInfo
 {
-	public class NodesInfoApiTests : ApiIntegrationTestBase<ReadOnlyCluster, INodesInfoResponse, INodesInfoRequest, NodesInfoDescriptor, NodesInfoRequest>
+	public class NodesInfoApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, INodesInfoResponse, INodesInfoRequest, NodesInfoDescriptor, NodesInfoRequest>
 	{
 		public NodesInfoApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.NodesInfo(),
-			fluentAsync: (client, f) => client.NodesInfoAsync(),
-			request: (client, r) => client.NodesInfo(r),
-			requestAsync: (client, r) => client.NodesInfoAsync(r)
-		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_nodes";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.NodesInfo(),
+			(client, f) => client.NodesInfoAsync(),
+			(client, r) => client.NodesInfo(r),
+			(client, r) => client.NodesInfoAsync(r)
+		);
 
 		protected override void ExpectResponse(INodesInfoResponse response)
 		{
@@ -53,7 +53,7 @@ namespace Tests.Cluster.NodesInfo
 			nodesMetada.Successful.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(Nest.NodeInfo node)
+		protected void Assert(NodeInfo node)
 		{
 			node.Should().NotBeNull();
 			node.Name.Should().NotBeNullOrWhiteSpace();
@@ -129,7 +129,7 @@ namespace Tests.Cluster.NodesInfo
 			transport.PublishAddress.Should().NotBeNullOrWhiteSpace();
 		}
 
-		protected void Assert(Nest.NodeInfoHttp http)
+		protected void Assert(NodeInfoHttp http)
 		{
 			http.Should().NotBeNull();
 			http.BoundAddress.Should().NotBeEmpty();
@@ -139,24 +139,24 @@ namespace Tests.Cluster.NodesInfo
 
 	public class NodesInfoMissingNodeApiTests : NodesInfoApiTests
 	{
-		public NodesInfoMissingNodeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
 		private static readonly NodeIds Nodes = NodeIds.Parse("_local,x");
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.NodesInfo(f),
-			fluentAsync: (client, f) => client.NodesInfoAsync(f),
-			request: (client, r) => client.NodesInfo(r),
-			requestAsync: (client, r) => client.NodesInfoAsync(r)
-		);
+		public NodesInfoMissingNodeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
+		protected override Func<NodesInfoDescriptor, INodesInfoRequest> Fluent => n => n.NodeId(Nodes);
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => "/_nodes/_local%2Cx";
 
 		protected override NodesInfoRequest Initializer => new NodesInfoRequest(Nodes);
-		protected override Func<NodesInfoDescriptor, INodesInfoRequest> Fluent => n => n.NodeId(Nodes);
+		protected override string UrlPath => "/_nodes/_local%2Cx";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.NodesInfo(f),
+			(client, f) => client.NodesInfoAsync(f),
+			(client, r) => client.NodesInfo(r),
+			(client, r) => client.NodesInfoAsync(r)
+		);
 
 		protected override void ExpectResponse(INodesInfoResponse response)
 		{

@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Nest;
-using Newtonsoft.Json.Linq;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.Joining.Nested
@@ -21,26 +19,11 @@ namespace Tests.QueryDsl.Joining.Nested
 	{
 		public NestedUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		protected override object QueryJson => new
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INestedQuery>(a => a.Nested)
 		{
-			nested = new
-			{
-				_name = "named_query",
-				boost = 1.1,
-				query = new
-				{
-					terms = new Dictionary<string, object>
-					{
-						{ "curatedTags.name", new [] {"lorem", "ipsum"} }
-					}
-				},
-				ignore_unmapped = true,
-				path = "curatedTags",
-				inner_hits = new
-				{
-					explain = true
-				}
-			}
+			q => q.Query = null,
+			q => q.Query = ConditionlessQuery,
+			q => q.Path = null,
 		};
 
 		protected override QueryContainer QueryInitializer => new NestedQuery
@@ -57,12 +40,34 @@ namespace Tests.QueryDsl.Joining.Nested
 			IgnoreUnmapped = true
 		};
 
+		protected override object QueryJson => new
+		{
+			nested = new
+			{
+				_name = "named_query",
+				boost = 1.1,
+				query = new
+				{
+					terms = new Dictionary<string, object>
+					{
+						{ "curatedTags.name", new[] { "lorem", "ipsum" } }
+					}
+				},
+				ignore_unmapped = true,
+				path = "curatedTags",
+				inner_hits = new
+				{
+					explain = true
+				}
+			}
+		};
+
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Nested(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.InnerHits(i=>i.Explain())
-				.Path(p=>p.CuratedTags)
+				.InnerHits(i => i.Explain())
+				.Path(p => p.CuratedTags)
 				.Query(nq => nq
 					.Terms(t => t
 						.Field(f => f.CuratedTags.First().Name)
@@ -71,12 +76,5 @@ namespace Tests.QueryDsl.Joining.Nested
 				)
 				.IgnoreUnmapped()
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INestedQuery>(a => a.Nested)
-		{
-			q =>  q.Query = null,
-			q =>  q.Query = ConditionlessQuery,
-			q =>  q.Path = null,
-		};
 	}
 }

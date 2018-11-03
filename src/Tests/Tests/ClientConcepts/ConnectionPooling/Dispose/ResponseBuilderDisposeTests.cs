@@ -9,8 +9,6 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Core.Client.Settings;
-using Tests.Framework;
-using Tests.Framework.ManagedElasticsearch;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 {
@@ -19,49 +17,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 		private readonly IConnectionSettingsValues _settings = new AlwaysInMemoryConnectionSettings().DisableDirectStreaming(false);
 		private readonly IConnectionSettingsValues _settingsDisableDirectStream = new AlwaysInMemoryConnectionSettings().DisableDirectStreaming(true);
 
-		private class TrackDisposeStream : MemoryStream
-		{
-			public TrackDisposeStream()
-			{
-			}
-
-			public TrackDisposeStream(byte[] bytes) : base(bytes)
-			{
-			}
-
-			public bool IsDisposed { get; private set; }
-			protected override void Dispose(bool disposing)
-			{
-				this.IsDisposed = true;
-				base.Dispose(disposing);
-			}
-		}
-
-		private class TrackMemoryStreamFactory : IMemoryStreamFactory
-		{
-			public IList<TrackDisposeStream> Created { get; } = new List<TrackDisposeStream>();
-
-			public MemoryStream Create()
-			{
-				var stream = new TrackDisposeStream();
-				this.Created.Add(stream);
-				return stream;
-			}
-
-			public MemoryStream Create(byte[] bytes)
-			{
-				var stream = new TrackDisposeStream(bytes);
-				this.Created.Add(stream);
-				return stream;
-			}
-		}
-
-		[U] public async Task ResponseWithHttpStatusCode() => await AssertRegularResponse(false, statusCode: 1);
+		[U] public async Task ResponseWithHttpStatusCode() => await AssertRegularResponse(false, 1);
 
 		[U] public async Task ResponseBuilderWithNoHttpStatusCode() => await AssertRegularResponse(false);
 
 		[U] public async Task ResponseWithHttpStatusCodeDisableDirectStreaming() =>
-			await AssertRegularResponse(true, statusCode: 1);
+			await AssertRegularResponse(true, 1);
 
 		[U] public async Task ResponseBuilderWithNoHttpStatusCodeDisableDirectStreaming() =>
 			await AssertRegularResponse(true);
@@ -89,7 +50,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 
 			stream = new TrackDisposeStream();
 			var ct = new CancellationToken();
-			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, cancellationToken: ct);
+			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream,
+				cancellationToken: ct);
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
 			if (disableDirectStreaming)
 			{
@@ -99,12 +61,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 			stream.IsDisposed.Should().BeTrue();
 		}
 
-		[U] public async Task StreamResponseWithHttpStatusCode() => await AssertStreamResponse(false, statusCode: 200);
+		[U] public async Task StreamResponseWithHttpStatusCode() => await AssertStreamResponse(false, 200);
 
 		[U] public async Task StreamResponseBuilderWithNoHttpStatusCode() => await AssertStreamResponse(false);
 
 		[U] public async Task StreamResponseWithHttpStatusCodeDisableDirectStreaming() =>
-			await AssertStreamResponse(true, statusCode: 1);
+			await AssertStreamResponse(true, 1);
 
 		[U] public async Task StreamResponseBuilderWithNoHttpStatusCodeDisableDirectStreaming() =>
 			await AssertStreamResponse(true);
@@ -127,12 +89,44 @@ namespace Tests.ClientConcepts.ConnectionPooling.Dispose
 
 			stream = new TrackDisposeStream();
 			var ct = new CancellationToken();
-			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream, cancellationToken: ct);
+			response = await ResponseBuilder.ToResponseAsync<RootNodeInfoResponse>(requestData, null, statusCode, null, stream,
+				cancellationToken: ct);
 			memoryStreamFactory.Created.Count().Should().Be(disableDirectStreaming ? 2 : 0);
 			stream.IsDisposed.Should().Be(true);
 		}
 
+		private class TrackDisposeStream : MemoryStream
+		{
+			public TrackDisposeStream() { }
+
+			public TrackDisposeStream(byte[] bytes) : base(bytes) { }
+
+			public bool IsDisposed { get; private set; }
+
+			protected override void Dispose(bool disposing)
+			{
+				IsDisposed = true;
+				base.Dispose(disposing);
+			}
+		}
+
+		private class TrackMemoryStreamFactory : IMemoryStreamFactory
+		{
+			public IList<TrackDisposeStream> Created { get; } = new List<TrackDisposeStream>();
+
+			public MemoryStream Create()
+			{
+				var stream = new TrackDisposeStream();
+				Created.Add(stream);
+				return stream;
+			}
+
+			public MemoryStream Create(byte[] bytes)
+			{
+				var stream = new TrackDisposeStream(bytes);
+				Created.Add(stream);
+				return stream;
+			}
+		}
 	}
-
-
 }

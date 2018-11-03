@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -11,9 +10,17 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.GetDatafeedStats
 {
-	public class GetDatafeedStatsApiTests : MachineLearningIntegrationTestBase<IGetDatafeedStatsResponse, IGetDatafeedStatsRequest, GetDatafeedStatsDescriptor, GetDatafeedStatsRequest>
+	public class GetDatafeedStatsApiTests
+		: MachineLearningIntegrationTestBase<IGetDatafeedStatsResponse, IGetDatafeedStatsRequest, GetDatafeedStatsDescriptor, GetDatafeedStatsRequest>
 	{
 		public GetDatafeedStatsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+		protected override Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> Fluent => f => f;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => $"_xpack/ml/datafeeds/_stats";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -25,18 +32,11 @@ namespace Tests.XPack.MachineLearning.GetDatafeedStats
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetDatafeedStats(f),
-			fluentAsync: (client, f) => client.GetDatafeedStatsAsync(f),
-			request: (client, r) => client.GetDatafeedStats(r),
-			requestAsync: (client, r) => client.GetDatafeedStatsAsync(r)
+			(client, f) => client.GetDatafeedStats(f),
+			(client, f) => client.GetDatafeedStatsAsync(f),
+			(client, r) => client.GetDatafeedStats(r),
+			(client, r) => client.GetDatafeedStatsAsync(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"_xpack/ml/datafeeds/_stats";
-		protected override object ExpectJson => null;
-		protected override Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> Fluent => f => f;
 
 		protected override void ExpectResponse(IGetDatafeedStatsResponse response)
 		{
@@ -46,9 +46,18 @@ namespace Tests.XPack.MachineLearning.GetDatafeedStats
 		}
 	}
 
-	public class GetDatafeedStatsWithDatafeedIdApiTests : MachineLearningIntegrationTestBase<IGetDatafeedStatsResponse, IGetDatafeedStatsRequest, GetDatafeedStatsDescriptor, GetDatafeedStatsRequest>
+	public class GetDatafeedStatsWithDatafeedIdApiTests
+		: MachineLearningIntegrationTestBase<IGetDatafeedStatsResponse, IGetDatafeedStatsRequest, GetDatafeedStatsDescriptor, GetDatafeedStatsRequest>
 	{
 		public GetDatafeedStatsWithDatafeedIdApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+		protected override Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> Fluent => f => f.DatafeedId(CallIsolatedValue + "-datafeed");
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override GetDatafeedStatsRequest Initializer => new GetDatafeedStatsRequest(CallIsolatedValue + "-datafeed");
+		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_stats";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -60,19 +69,11 @@ namespace Tests.XPack.MachineLearning.GetDatafeedStats
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetDatafeedStats(f),
-			fluentAsync: (client, f) => client.GetDatafeedStatsAsync(f),
-			request: (client, r) => client.GetDatafeedStats(r),
-			requestAsync: (client, r) => client.GetDatafeedStatsAsync(r)
+			(client, f) => client.GetDatafeedStats(f),
+			(client, f) => client.GetDatafeedStatsAsync(f),
+			(client, r) => client.GetDatafeedStats(r),
+			(client, r) => client.GetDatafeedStatsAsync(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_stats";
-		protected override object ExpectJson => null;
-		protected override Func<GetDatafeedStatsDescriptor, IGetDatafeedStatsRequest> Fluent => f => f.DatafeedId(CallIsolatedValue + "-datafeed");
-		protected override GetDatafeedStatsRequest Initializer => new GetDatafeedStatsRequest(CallIsolatedValue + "-datafeed");
 
 		protected override void ExpectResponse(IGetDatafeedStatsResponse response)
 		{
