@@ -4,6 +4,7 @@ using System.Linq;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Environments;
+using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Loggers;
 using BenchmarkDotNet.Reports;
@@ -11,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace Tests.Benchmarking.Framework
 {
-	public class CustomJsonExporter : BenchmarkDotNet.Exporters.ExporterBase
+	public class CustomJsonExporter : ExporterBase
 	{
 		protected override string FileExtension => "json";
 
@@ -41,13 +42,13 @@ namespace Tests.Benchmarking.Framework
 			{
 				var data = new Dictionary<string, object>
 				{
-                    { "DisplayInfo", r.BenchmarkCase.DisplayInfo },
+					{ "DisplayInfo", r.BenchmarkCase.DisplayInfo },
 					{ "Namespace", r.BenchmarkCase.Descriptor.Type.Namespace },
 					{ "Type", r.BenchmarkCase.Descriptor.Type.Name },
 					{ "Method", r.BenchmarkCase.Descriptor.WorkloadMethod.Name },
 					{ "MethodTitle", r.BenchmarkCase.Descriptor.WorkloadMethod.Name },
 					{ "Parameters", r.BenchmarkCase.Parameters.PrintInfo },
-                    { "Statistics", r.ResultStatistics },
+					{ "Statistics", r.ResultStatistics },
 					{ "Memory", r.GcStats }
 				};
 
@@ -63,21 +64,23 @@ namespace Tests.Benchmarking.Framework
 			}));
 		}
 	}
+
 	public class BenchmarkConfigAttribute : Attribute, IConfigSource
 	{
-		public IConfig Config { get; }
-
 		public BenchmarkConfigAttribute(int runCount = 1)
 		{
-			var jobs = new[] {
+			var jobs = new[]
+			{
 				Job.Dry.With(Runtime.Core).With(Jit.RyuJit).WithIterationCount(runCount),
 				Job.Dry.With(Runtime.Clr).With(Jit.RyuJit).WithIterationCount(runCount),
 				Job.Dry.With(Runtime.Clr).With(Jit.LegacyJit).WithIterationCount(runCount)
 			};
-			this.Config = DefaultConfig.Instance
+			Config = DefaultConfig.Instance
 				.With(jobs)
 				.With(new CustomJsonExporter())
 				.With(MemoryDiagnoser.Default);
 		}
+
+		public IConfig Config { get; }
 	}
 }
