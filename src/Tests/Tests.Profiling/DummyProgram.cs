@@ -5,8 +5,5 @@
 	/// by the build.bat or build.sh root. You are probably seeing this file because you did a fresh checkout and
 	/// are building this project in the IDE.
 	/// </summary>
-	public static void Main()
-	{
-
-	}
+	public static void Main() { }
 }
