@@ -14,18 +14,130 @@ namespace DocGenerator
 {
 	public static class StringExtensions
 	{
-        private static readonly Regex LeadingSpacesAndAsterisk = new Regex(@"^(?<value>[ \t]*\*\s?).*", RegexOptions.Compiled);
-        private static readonly Regex LeadingMultiLineComment = new Regex(@"^(?<value>[ \t]*\/\*)", RegexOptions.Compiled);
-        private static readonly Regex TrailingMultiLineComment = new Regex(@"(?<value>\*\/[ \t]*)$", RegexOptions.Compiled);
+		private static readonly Regex LeadingMultiLineComment = new Regex(@"^(?<value>[ \t]*\/\*)", RegexOptions.Compiled);
+		private static readonly Regex LeadingSpacesAndAsterisk = new Regex(@"^(?<value>[ \t]*\*\s?).*", RegexOptions.Compiled);
+
+		// TODO: Total Hack of replacements in anonymous types that represent json. This can be resolved by referencing tests assembly when building the dynamic assembly,
+		// but might want to put doc generation at same directory level as Tests to reference project directly.
+		private static readonly Dictionary<string, string> Substitutions = new Dictionary<string, string>
+		{
+			{ "FixedDate", "new DateTime(2015, 06, 06, 12, 01, 02, 123)" },
+			{ "FirstNameToFind", "\"pierce\"" },
+			{ "Project.First.Suggest.Context.Values.SelectMany(v => v).First()", "\"red\"" },
+			{ "Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()", "\"red\"" },
+			{ "Project.Instance.Name", "\"Durgan LLC\"" },
+			{
+				"Project.InstanceAnonymous", "new {name = \"Koch, Collier and Mohr\", state = \"BellyUp\",startedOn = " +
+				"\"2015-01-01T00:00:00\",lastActivity = \"0001-01-01T00:00:00\",leadDeveloper = " +
+				"new { gender = \"Male\", id = 0, firstName = \"Martijn\", lastName = \"Laarman\" }," +
+				"location = new { lat = 42.1523, lon = -80.321 }}"
+			},
+			{ "_templateString", "\"{ \\\"match\\\": { \\\"text\\\": \\\"{{query_string}}\\\" } }\"" },
+			{
+				"base.QueryJson",
+				"new{ @bool = new { must = new[] { new { match_all = new { } } }, must_not = new[] { new { match_all = new { } } }, should = new[] { new { match_all = new { } } }, filter = new[] { new { match_all = new { } } }, minimum_should_match = 1, boost = 2.0, } }"
+			},
+			{ "ExpectedTerms", "new [] { \"term1\", \"term2\" }" },
+			{ "_ctxNumberofCommits", "\"_source.numberOfCommits > 0\"" },
+			{ "Project.First.Name", "\"Lesch Group\"" },
+			{ "Project.First.NumberOfCommits", "775" },
+			{ "LastNameSearch", "\"Stokes\"" },
+			{ "First.Language", "\"painless\"" },
+			{ "First.Init", "\"params._agg.map = [:]\"" },
+			{
+				"First.Map",
+				"\"if (params._agg.map.containsKey(doc['state'].value)) params._agg.map[doc['state'].value] += 1 else params._agg.map[doc['state'].value] = 1;\""
+			},
+			{
+				"First.Reduce",
+				"\"def reduce = [:]; for (agg in params._aggs) { for (entry in agg.map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); } } return reduce;\""
+			},
+			{ "Second.Language", "\"painless\"" },
+			{ "Second.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
+			{ "Second.Init", "\"params._agg.commits = []\"" },
+			{ "Second.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
+			{ "Second.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
+			{ "Script.Lang", "\"painless\"" },
+			{ "Script.Init", "\"params._agg.commits = []\"" },
+			{ "Script.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
+			{ "Script.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
+			{ "Script.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
+			{ "EnvelopeCoordinates", @"new [] { new [] { 45.0, -45.0 }, new [] { -45.0, 45.0 }}" },
+			{ "CircleCoordinates", @"new [] { 45.0, -45.0 }" },
+			{ "MultiPointCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
+			{
+				"MultiLineStringCoordinates", @"new[]
+											{
+												new [] { new [] { 2.0, 12.0 }, new [] { 2.0, 13.0 },new [] { 3.0, 13.0 }, new []{ 3.0, 12.0 } },
+												new [] { new [] { 0.0, 10.0 }, new [] { 0.0, 11.0 },new [] { 1.0, 11.0 }, new []{ 1.0, 10.0 } },
+												new [] { new [] { 0.2, 10.2 }, new [] { 0.2, 10.8 },new [] { 0.8, 10.8 }, new []{ 0.8, 12.0 } },
+											}"
+			},
+			{
+				"MultiPolygonCoordinates", @"new[]
+											{
+												new []
+												{
+													new []
+													{
+														new [] { 10.0, -17.0},
+														new [] {15.0, 16.0},
+														new [] {0.0, 12.0},
+														new [] {-15.0, 16.0},
+														new [] { -10.0, -17.0},
+														new [] { 10.0, -17.0}
+													},
+													new []
+													{
+														new [] {8.2  , 18.2},
+														new [] { 8.2 , -18.8},
+														new [] { -8.8, -10.8},
+														new [] {8.8  , 18.2}
+													}
+												},
+												new []
+												{
+													new []
+													{
+														new [] { 8.0, -15.0},
+														new [] {15.0, 16.0},
+														new [] {0.0, 12.0},
+														new [] {-15.0, 16.0},
+														new [] { -10.0, -17.0},
+														new [] { 8.0, -15.0}
+													}
+												}
+											}"
+			},
+			{
+				"PolygonCoordinates", @"new[]{
+										new []{ new [] {10.0, -17.0}, new [] {15.0, 16.0}, new [] {0.0, 12.0}, new [] {-15.0, 16.0}, new [] {-10.0, -17.0},new [] {10.0, -17.0}},
+										new []{ new [] {8.2, 18.2}, new [] {8.2, -18.8}, new [] {-8.8, -10.8}, new [] {8.8, 18.2}}
+									}"
+			},
+			{ "LineStringCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
+			{ "PointCoordinates", "new[] { 38.897676, -77.03653 }" },
+			{
+				"this._polygonCoordinates", @"new[]{
+										new []{ new [] {10.0, -17.0}, new [] {15.0, 16.0}, new [] {0.0, 12.0}, new [] {-15.0, 16.0}, new [] {-10.0, -17.0},new [] {10.0, -17.0}},
+										new []{ new [] {8.2, 18.2}, new [] {8.2, -18.8}, new [] {-8.8, -10.8}, new [] {8.8, 18.2}}
+									}"
+			},
+			{ "ProjectFilterExpectedJson", "new {term = new {type = new {value = \"project\"}}}" }
+		};
+
+		private static readonly Regex TrailingMultiLineComment = new Regex(@"(?<value>\*\/[ \t]*)$", RegexOptions.Compiled);
 
 		public static string PascalToHyphen(this string input)
 		{
 			if (string.IsNullOrEmpty(input)) return string.Empty;
 
 			return Regex.Replace(
-				Regex.Replace(
-					Regex.Replace(input, @"([A-Z]+)([A-Z][a-z])", "$1-$2"), @"([a-z\d])([A-Z])", "$1-$2")
-				, @"[-\s]+", "-", RegexOptions.Compiled).TrimEnd('-').ToLower();
+					Regex.Replace(
+						Regex.Replace(input, @"([A-Z]+)([A-Z][a-z])", "$1-$2"), @"([a-z\d])([A-Z])", "$1-$2")
+					, @"[-\s]+", "-", RegexOptions.Compiled)
+				.TrimEnd('-')
+				.ToLower();
 		}
 
 		public static string LowercaseHyphenToPascal(this string lowercaseHyphenatedInput) =>
@@ -61,136 +173,48 @@ namespace DocGenerator
 			return input;
 		}
 
-        ///<summary>
-        /// Removes the specified number of tabs (or spaces, assuming 4 spaces = 1 tab)
-        /// from each line of the input
-        /// </summary>
-        public static string RemoveNumberOfLeadingTabsOrSpacesAfterNewline(this string input, int numberOfTabs)
-        {
-            var leadingCharacterIndex = input.IndexOf("\t", StringComparison.OrdinalIgnoreCase);
-
-            if (leadingCharacterIndex == -1)
-            {
-                leadingCharacterIndex = input.IndexOf(" ", StringComparison.OrdinalIgnoreCase);
-
-                if (leadingCharacterIndex == -1) return input;
-            }
-
-            var count = 0;
-            var firstNonTabCharacter = char.MinValue;
-
-            for (var i = leadingCharacterIndex; i < input.Length; i++)
-	            if (input[i] != '\t' && input[i] != ' ')
-	            {
-		            firstNonTabCharacter = input[i];
-		            count = i - leadingCharacterIndex;
-		            break;
-	            }
-
-	        if (firstNonTabCharacter == '{' && numberOfTabs != count) numberOfTabs = count;
-
-	        return Regex.Replace(
-                Regex.Replace(
-                    input,
-                    $"(?<tabs>[\n|\r\n]+\t{{{numberOfTabs}}})",
-                    m => m.Value.Replace("\t", string.Empty)
-                    ),
-                $"(?<spaces>[\n|\r\n]+\\s{{{numberOfTabs * 4}}})",
-                m => m.Value.Replace(" ", string.Empty)
-                );
-        }
-
-        public static string[] SplitOnNewLines(this string input, StringSplitOptions options) => input.Split(new[] { "\r\n", "\n" }, options);
-
-		// TODO: Total Hack of replacements in anonymous types that represent json. This can be resolved by referencing tests assembly when building the dynamic assembly,
-		// but might want to put doc generation at same directory level as Tests to reference project directly.
-		private static Dictionary<string, string> Substitutions = new Dictionary<string, string>
+		/// <summary>
+		///  Removes the specified number of tabs (or spaces, assuming 4 spaces = 1 tab)
+		///  from each line of the input
+		/// </summary>
+		public static string RemoveNumberOfLeadingTabsOrSpacesAfterNewline(this string input, int numberOfTabs)
 		{
-			{ "FixedDate", "new DateTime(2015, 06, 06, 12, 01, 02, 123)" },
-			{ "FirstNameToFind", "\"pierce\"" },
-			{ "Project.First.Suggest.Context.Values.SelectMany(v => v).First()", "\"red\"" },
-			{ "Project.First.Suggest.Contexts.Values.SelectMany(v => v).First()", "\"red\"" },
-			{ "Project.Instance.Name", "\"Durgan LLC\"" },
-			{ "Project.InstanceAnonymous", "new {name = \"Koch, Collier and Mohr\", state = \"BellyUp\",startedOn = " +
-			                               "\"2015-01-01T00:00:00\",lastActivity = \"0001-01-01T00:00:00\",leadDeveloper = " +
-			                               "new { gender = \"Male\", id = 0, firstName = \"Martijn\", lastName = \"Laarman\" }," +
-										   "location = new { lat = 42.1523, lon = -80.321 }}" },
-			{ "_templateString", "\"{ \\\"match\\\": { \\\"text\\\": \\\"{{query_string}}\\\" } }\"" },
-			{ "base.QueryJson", "new{ @bool = new { must = new[] { new { match_all = new { } } }, must_not = new[] { new { match_all = new { } } }, should = new[] { new { match_all = new { } } }, filter = new[] { new { match_all = new { } } }, minimum_should_match = 1, boost = 2.0, } }" },
-			{ "ExpectedTerms", "new [] { \"term1\", \"term2\" }" },
-			{ "_ctxNumberofCommits", "\"_source.numberOfCommits > 0\"" },
-			{ "Project.First.Name", "\"Lesch Group\"" },
-			{ "Project.First.NumberOfCommits", "775" },
-			{ "LastNameSearch", "\"Stokes\"" },
-			{ "First.Language", "\"painless\"" },
-			{ "First.Init", "\"params._agg.map = [:]\"" },
-			{ "First.Map", "\"if (params._agg.map.containsKey(doc['state'].value)) params._agg.map[doc['state'].value] += 1 else params._agg.map[doc['state'].value] = 1;\"" },
-			{ "First.Reduce", "\"def reduce = [:]; for (agg in params._aggs) { for (entry in agg.map.entrySet()) { if (reduce.containsKey(entry.getKey())) reduce[entry.getKey()] += entry.getValue(); else reduce[entry.getKey()] = entry.getValue(); } } return reduce;\"" },
-			{ "Second.Language", "\"painless\"" },
-			{ "Second.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
-			{ "Second.Init", "\"params._agg.commits = []\"" },
-			{ "Second.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
-			{ "Second.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
-			{ "Script.Lang", "\"painless\"" },
-			{ "Script.Init", "\"params._agg.commits = []\"" },
-			{ "Script.Map", "\"if (doc['state'].value == \\\"Stable\\\") { params._agg.commits.add(doc['numberOfCommits'].value) }\"" },
-			{ "Script.Combine", "\"def sum = 0.0; for (c in params._agg.commits) { sum += c } return sum\"" },
-			{ "Script.Reduce", "\"def sum = 0.0; for (a in params._aggs) { sum += a } return sum\"" },
-			{ "EnvelopeCoordinates", @"new [] { new [] { 45.0, -45.0 }, new [] { -45.0, 45.0 }}" },
-			{ "CircleCoordinates", @"new [] { 45.0, -45.0 }" },
-			{ "MultiPointCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
-			{ "MultiLineStringCoordinates", @"new[]
-											{
-												new [] { new [] { 2.0, 12.0 }, new [] { 2.0, 13.0 },new [] { 3.0, 13.0 }, new []{ 3.0, 12.0 } },
-												new [] { new [] { 0.0, 10.0 }, new [] { 0.0, 11.0 },new [] { 1.0, 11.0 }, new []{ 1.0, 10.0 } },
-												new [] { new [] { 0.2, 10.2 }, new [] { 0.2, 10.8 },new [] { 0.8, 10.8 }, new []{ 0.8, 12.0 } },
-											}" },
-			{ "MultiPolygonCoordinates", @"new[]
-											{
-												new []
-												{
-													new []
-													{
-														new [] { 10.0, -17.0},
-														new [] {15.0, 16.0},
-														new [] {0.0, 12.0},
-														new [] {-15.0, 16.0},
-														new [] { -10.0, -17.0},
-														new [] { 10.0, -17.0}
-													},
-													new []
-													{
-														new [] {8.2  , 18.2},
-														new [] { 8.2 , -18.8},
-														new [] { -8.8, -10.8},
-														new [] {8.8  , 18.2}
-													}
-												},
-												new []
-												{
-													new []
-													{
-														new [] { 8.0, -15.0},
-														new [] {15.0, 16.0},
-														new [] {0.0, 12.0},
-														new [] {-15.0, 16.0},
-														new [] { -10.0, -17.0},
-														new [] { 8.0, -15.0}
-													}
-												}
-											}" },
-			{ "PolygonCoordinates", @"new[]{
-										new []{ new [] {10.0, -17.0}, new [] {15.0, 16.0}, new [] {0.0, 12.0}, new [] {-15.0, 16.0}, new [] {-10.0, -17.0},new [] {10.0, -17.0}},
-										new []{ new [] {8.2, 18.2}, new [] {8.2, -18.8}, new [] {-8.8, -10.8}, new [] {8.8, 18.2}}
-									}" },
-			{ "LineStringCoordinates", @"new [] { new [] {38.897676, -77.03653}, new [] {38.889939, -77.009051} }" },
-			{ "PointCoordinates", "new[] { 38.897676, -77.03653 }" },
-			{ "this._polygonCoordinates", @"new[]{
-										new []{ new [] {10.0, -17.0}, new [] {15.0, 16.0}, new [] {0.0, 12.0}, new [] {-15.0, 16.0}, new [] {-10.0, -17.0},new [] {10.0, -17.0}},
-										new []{ new [] {8.2, 18.2}, new [] {8.2, -18.8}, new [] {-8.8, -10.8}, new [] {8.8, 18.2}}
-									}" },
-			{ "ProjectFilterExpectedJson", "new {term = new {type = new {value = \"project\"}}}"  }
-		};
+			var leadingCharacterIndex = input.IndexOf("\t", StringComparison.OrdinalIgnoreCase);
+
+			if (leadingCharacterIndex == -1)
+			{
+				leadingCharacterIndex = input.IndexOf(" ", StringComparison.OrdinalIgnoreCase);
+
+				if (leadingCharacterIndex == -1) return input;
+			}
+
+			var count = 0;
+			var firstNonTabCharacter = char.MinValue;
+
+			for (var i = leadingCharacterIndex; i < input.Length; i++)
+			{
+				if (input[i] != '\t' && input[i] != ' ')
+				{
+					firstNonTabCharacter = input[i];
+					count = i - leadingCharacterIndex;
+					break;
+				}
+			}
+
+			if (firstNonTabCharacter == '{' && numberOfTabs != count) numberOfTabs = count;
+
+			return Regex.Replace(
+				Regex.Replace(
+					input,
+					$"(?<tabs>[\n|\r\n]+\t{{{numberOfTabs}}})",
+					m => m.Value.Replace("\t", string.Empty)
+				),
+				$"(?<spaces>[\n|\r\n]+\\s{{{numberOfTabs * 4}}})",
+				m => m.Value.Replace(" ", string.Empty)
+			);
+		}
+
+		public static string[] SplitOnNewLines(this string input, StringSplitOptions options) => input.Split(new[] { "\r\n", "\n" }, options);
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)
 		{
@@ -284,18 +308,18 @@ namespace DocGenerator
 			}
 		}
 
-	    public static string ReplaceArityWithGenericSignature(this string value)
-	    {
-            var indexOfBackTick = value.IndexOf("`");
+		public static string ReplaceArityWithGenericSignature(this string value)
+		{
+			var indexOfBackTick = value.IndexOf("`");
 
-            if (indexOfBackTick == -1)
-                return value;
+			if (indexOfBackTick == -1)
+				return value;
 
-            var arity = value[indexOfBackTick + 1];
-            value = value.Substring(0, indexOfBackTick);
+			var arity = value[indexOfBackTick + 1];
+			value = value.Substring(0, indexOfBackTick);
 
-            return Enumerable.Range(1, int.Parse(arity.ToString()))
-                .Aggregate(value + "<", (l, i) => l = l + (i == 1 ? "T" : $"T{i}")) + ">";
-	    }
+			return Enumerable.Range(1, int.Parse(arity.ToString()))
+				.Aggregate(value + "<", (l, i) => l = l + (i == 1 ? "T" : $"T{i}")) + ">";
+		}
 	}
 }
