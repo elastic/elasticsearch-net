@@ -6,13 +6,15 @@ namespace Elasticsearch.Net
 	public class StringResponse : ElasticsearchResponse<string>
 	{
 		public StringResponse() { }
-		public StringResponse(string body) => this.Body = body;
+
+		public StringResponse(string body) => Body = body;
 
 		public bool TryGetServerError(out ServerError serverError)
 		{
 			serverError = null;
-			if (string.IsNullOrEmpty(this.Body)) return false;
-			using(var stream = new MemoryStream(Encoding.UTF8.GetBytes(this.Body)))
+			if (string.IsNullOrEmpty(Body)) return false;
+
+			using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(Body)))
 				serverError = ServerError.Create(stream);
 			return true;
 		}
@@ -20,7 +22,8 @@ namespace Elasticsearch.Net
 		protected override bool TryGetServerErrorReason(out string reason)
 		{
 			reason = null;
-			if (!this.TryGetServerError(out var serverError)) return false;
+			if (!TryGetServerError(out var serverError)) return false;
+
 			reason = serverError?.Error?.ToString();
 			return !reason.IsNullOrEmpty();
 		}

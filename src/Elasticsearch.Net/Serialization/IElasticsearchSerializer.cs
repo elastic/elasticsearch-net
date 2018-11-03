@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,13 +18,15 @@ namespace Elasticsearch.Net
 		void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented);
 
 		Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.Indented,
-			CancellationToken cancellationToken = default(CancellationToken));
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public static class ElasticsearchSerializerExtensions
 	{
-
-		public static byte[] SerializeToBytes<T>(this IElasticsearchSerializer serializer, T data, SerializationFormatting formatting = SerializationFormatting.Indented)
+		public static byte[] SerializeToBytes<T>(this IElasticsearchSerializer serializer, T data,
+			SerializationFormatting formatting = SerializationFormatting.Indented
+		)
 		{
 			using (var ms = new MemoryStream())
 			{
@@ -33,7 +34,10 @@ namespace Elasticsearch.Net
 				return ms.ToArray();
 			}
 		}
-		public static string SerializeToString<T>(this IElasticsearchSerializer serializer, T data, SerializationFormatting formatting = SerializationFormatting.Indented) =>
+
+		public static string SerializeToString<T>(this IElasticsearchSerializer serializer, T data,
+			SerializationFormatting formatting = SerializationFormatting.Indented
+		) =>
 			serializer.SerializeToBytes(data, formatting).Utf8String();
 	}
 }

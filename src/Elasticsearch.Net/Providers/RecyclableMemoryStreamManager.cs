@@ -38,10 +38,8 @@ namespace Elasticsearch.Net
 		public const int DefaultLargeBufferMultiple = 1024 * 1024;
 		public const int DefaultMaximumBufferSize = 128 * 1024 * 1024;
 
-		private readonly int _blockSize;
 		private readonly long[] _largeBufferFreeSize;
 		private readonly long[] _largeBufferInUseSize;
-		private readonly int _largeBufferMultiple;
 
 		/// <summary>
 		/// pools[0] = 1x largeBufferMultiple buffers
@@ -50,7 +48,6 @@ namespace Elasticsearch.Net
 		/// </summary>
 		private readonly ConcurrentStack<byte[]>[] largePools;
 
-		private readonly int _maximumBufferSize;
 		private readonly ConcurrentStack<byte[]> smallPool;
 
 		private long _smallPoolFreeSize;
@@ -68,78 +65,75 @@ namespace Elasticsearch.Net
 		/// <param name="blockSize">Size of each block that is pooled. Must be > 0.</param>
 		/// <param name="largeBufferMultiple">Each large buffer will be a multiple of this value.</param>
 		/// <param name="maximumBufferSize">Buffers larger than this are not pooled</param>
-		/// <exception cref="ArgumentOutOfRangeException">blockSize is not a positive number, or largeBufferMultiple is not a positive number, or maximumBufferSize is less than blockSize.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// blockSize is not a positive number, or largeBufferMultiple is not a positive number, or
+		/// maximumBufferSize is less than blockSize.
+		/// </exception>
 		/// <exception cref="ArgumentException">maximumBufferSize is not a multiple of largeBufferMultiple</exception>
 		public RecyclableMemoryStreamManager(int blockSize, int largeBufferMultiple, int maximumBufferSize)
 		{
-			if (blockSize <= 0)
-			{
-				throw new ArgumentOutOfRangeException(nameof(blockSize), blockSize, "blockSize must be a positive number");
-			}
+			if (blockSize <= 0) throw new ArgumentOutOfRangeException(nameof(blockSize), blockSize, "blockSize must be a positive number");
 
 			if (largeBufferMultiple <= 0)
-			{
 				throw new ArgumentOutOfRangeException(nameof(largeBufferMultiple),
 					"largeBufferMultiple must be a positive number");
-			}
 
 			if (maximumBufferSize < blockSize)
-			{
 				throw new ArgumentOutOfRangeException(nameof(maximumBufferSize),
 					"maximumBufferSize must be at least blockSize");
-			}
 
-			this._blockSize = blockSize;
-			this._largeBufferMultiple = largeBufferMultiple;
-			this._maximumBufferSize = maximumBufferSize;
+			BlockSize = blockSize;
+			LargeBufferMultiple = largeBufferMultiple;
+			MaximumBufferSize = maximumBufferSize;
 
-			if (!this.IsLargeBufferMultiple(maximumBufferSize))
-			{
+			if (!IsLargeBufferMultiple(maximumBufferSize))
 				throw new ArgumentException("maximumBufferSize is not a multiple of largeBufferMultiple",
 					nameof(maximumBufferSize));
-			}
 
-			this.smallPool = new ConcurrentStack<byte[]>();
+			smallPool = new ConcurrentStack<byte[]>();
 			var numLargePools = maximumBufferSize / largeBufferMultiple;
 
 			// +1 to store size of bytes in use that are too large to be pooled
-			this._largeBufferInUseSize = new long[numLargePools + 1];
-			this._largeBufferFreeSize = new long[numLargePools];
+			_largeBufferInUseSize = new long[numLargePools + 1];
+			_largeBufferFreeSize = new long[numLargePools];
 
-			this.largePools = new ConcurrentStack<byte[]>[numLargePools];
+			largePools = new ConcurrentStack<byte[]>[numLargePools];
 
-			for (var i = 0; i < this.largePools.Length; ++i)
-			{
-				this.largePools[i] = new ConcurrentStack<byte[]>();
-			}
+			for (var i = 0; i < largePools.Length; ++i) largePools[i] = new ConcurrentStack<byte[]>();
 		}
+
+		/// <summary>
+		/// Whether dirty buffers can be immediately returned to the buffer pool. E.g. when GetBuffer() is called on
+		/// a stream and creates a single large buffer, if this setting is enabled, the other blocks will be returned
+		/// to the buffer pool immediately.
+		/// Note when enabling this setting that the user is responsible for ensuring that any buffer previously
+		/// retrieved from a stream which is subsequently modified is not used after modification (as it may no longer
+		/// be valid).
+		/// </summary>
+		public bool AggressiveBufferReturn { get; set; }
 
 		/// <summary>
 		/// The size of each block. It must be set at creation and cannot be changed.
 		/// </summary>
-		public int BlockSize => this._blockSize;
+		public int BlockSize { get; }
 
 		/// <summary>
 		/// All buffers are multiples of this number. It must be set at creation and cannot be changed.
 		/// </summary>
-		public int LargeBufferMultiple => this._largeBufferMultiple;
+		public int LargeBufferMultiple { get; }
 
 		/// <summary>
-		/// Gets or sets the maximum buffer size.
+		/// How many buffers are in the large pool
 		/// </summary>
-		/// <remarks>Any buffer that is returned to the pool that is larger than this will be
-		/// discarded and garbage collected.</remarks>
-		public int MaximumBufferSize => this._maximumBufferSize;
-
-		/// <summary>
-		/// Number of bytes in small pool not currently in use
-		/// </summary>
-		public long SmallPoolFreeSize => this._smallPoolFreeSize;
-
-		/// <summary>
-		/// Number of bytes currently in use by stream from the small pool
-		/// </summary>
-		public long SmallPoolInUseSize => this._smallPoolInUseSize;
+		public long LargeBuffersFree
+		{
+			get
+			{
+				long free = 0;
+				foreach (var pool in largePools) free += pool.Count;
+				return free;
+			}
+		}
 
 		/// <summary>
 		/// Number of bytes in large pool not currently in use
@@ -149,9 +143,9 @@ namespace Elasticsearch.Net
 			get
 			{
 				long sum = 0;
-				for (var index = 0; index < this._largeBufferFreeSize.Length; index++)
+				for (var index = 0; index < _largeBufferFreeSize.Length; index++)
 				{
-					var freeSize = this._largeBufferFreeSize[index];
+					var freeSize = _largeBufferFreeSize[index];
 					sum += freeSize;
 				}
 
@@ -167,9 +161,9 @@ namespace Elasticsearch.Net
 			get
 			{
 				long sum = 0;
-				for (var index = 0; index < this._largeBufferInUseSize.Length; index++)
+				for (var index = 0; index < _largeBufferInUseSize.Length; index++)
 				{
-					var inUseSize = this._largeBufferInUseSize[index];
+					var inUseSize = _largeBufferInUseSize[index];
 					sum += inUseSize;
 				}
 
@@ -178,37 +172,25 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// How many blocks are in the small pool
+		/// Gets or sets the maximum buffer size.
 		/// </summary>
-		public long SmallBlocksFree => this.smallPool.Count;
-
-		/// <summary>
-		/// How many buffers are in the large pool
-		/// </summary>
-		public long LargeBuffersFree
-		{
-			get
-			{
-				long free = 0;
-				foreach (var pool in this.largePools)
-				{
-					free += pool.Count;
-				}
-				return free;
-			}
-		}
-
-		/// <summary>
-		/// How many bytes of small free blocks to allow before we start dropping
-		/// those returned to us.
-		/// </summary>
-		public long MaximumFreeSmallPoolBytes { get; set; }
+		/// <remarks>
+		/// Any buffer that is returned to the pool that is larger than this will be
+		/// discarded and garbage collected.
+		/// </remarks>
+		public int MaximumBufferSize { get; }
 
 		/// <summary>
 		/// How many bytes of large free buffers to allow before we start dropping
 		/// those returned to us.
 		/// </summary>
 		public long MaximumFreeLargePoolBytes { get; set; }
+
+		/// <summary>
+		/// How many bytes of small free blocks to allow before we start dropping
+		/// those returned to us.
+		/// </summary>
+		public long MaximumFreeSmallPoolBytes { get; set; }
 
 		/// <summary>
 		/// Maximum stream capacity in bytes. Attempts to set a larger capacity will
@@ -218,14 +200,19 @@ namespace Elasticsearch.Net
 		public long MaximumStreamCapacity { get; set; }
 
 		/// <summary>
-		/// Whether dirty buffers can be immediately returned to the buffer pool. E.g. when GetBuffer() is called on
-		/// a stream and creates a single large buffer, if this setting is enabled, the other blocks will be returned
-		/// to the buffer pool immediately.
-		/// Note when enabling this setting that the user is responsible for ensuring that any buffer previously
-		/// retrieved from a stream which is subsequently modified is not used after modification (as it may no longer
-		/// be valid).
+		/// How many blocks are in the small pool
 		/// </summary>
-		public bool AggressiveBufferReturn { get; set; }
+		public long SmallBlocksFree => smallPool.Count;
+
+		/// <summary>
+		/// Number of bytes in small pool not currently in use
+		/// </summary>
+		public long SmallPoolFreeSize => _smallPoolFreeSize;
+
+		/// <summary>
+		/// Number of bytes currently in use by stream from the small pool
+		/// </summary>
+		public long SmallPoolInUseSize => _smallPoolInUseSize;
 
 		/// <summary>
 		/// Removes and returns a single block from the pool.
@@ -233,18 +220,12 @@ namespace Elasticsearch.Net
 		/// <returns>A byte[] array</returns>
 		internal byte[] GetBlock()
 		{
-			if (!this.smallPool.TryPop(out var block))
-			{
-				// We'll add this back to the pool when the stream is disposed
-				// (unless our free pool is too large)
-				block = new byte[this.BlockSize];
-			}
+			if (!smallPool.TryPop(out var block))
+				block = new byte[BlockSize];
 			else
-			{
-				Interlocked.Add(ref this._smallPoolFreeSize, -this.BlockSize);
-			}
+				Interlocked.Add(ref _smallPoolFreeSize, -BlockSize);
 
-			Interlocked.Add(ref this._smallPoolInUseSize, this.BlockSize);
+			Interlocked.Add(ref _smallPoolInUseSize, BlockSize);
 			return block;
 		}
 
@@ -257,21 +238,17 @@ namespace Elasticsearch.Net
 		/// <returns>A buffer of at least the required size.</returns>
 		internal byte[] GetLargeBuffer(int requiredSize, string tag)
 		{
-			requiredSize = this.RoundToLargeBufferMultiple(requiredSize);
+			requiredSize = RoundToLargeBufferMultiple(requiredSize);
 
-			var poolIndex = requiredSize / this._largeBufferMultiple - 1;
+			var poolIndex = requiredSize / LargeBufferMultiple - 1;
 
 			byte[] buffer;
-			if (poolIndex < this.largePools.Length)
+			if (poolIndex < largePools.Length)
 			{
-				if (!this.largePools[poolIndex].TryPop(out buffer))
-				{
+				if (!largePools[poolIndex].TryPop(out buffer))
 					buffer = new byte[requiredSize];
-				}
 				else
-				{
-					Interlocked.Add(ref this._largeBufferFreeSize[poolIndex], -buffer.Length);
-				}
+					Interlocked.Add(ref _largeBufferFreeSize[poolIndex], -buffer.Length);
 			}
 			else
 			{
@@ -279,26 +256,21 @@ namespace Elasticsearch.Net
 
 				// We still want to track the size, though, and we've reserved a slot
 				// in the end of the inuse array for nonpooled bytes in use.
-				poolIndex = this._largeBufferInUseSize.Length - 1;
+				poolIndex = _largeBufferInUseSize.Length - 1;
 
 				// We still want to round up to reduce heap fragmentation.
 				buffer = new byte[requiredSize];
 			}
 
-			Interlocked.Add(ref this._largeBufferInUseSize[poolIndex], buffer.Length);
+			Interlocked.Add(ref _largeBufferInUseSize[poolIndex], buffer.Length);
 
 			return buffer;
 		}
 
-		private int RoundToLargeBufferMultiple(int requiredSize)
-		{
-			return ((requiredSize + this.LargeBufferMultiple - 1) / this.LargeBufferMultiple) * this.LargeBufferMultiple;
-		}
+		private int RoundToLargeBufferMultiple(int requiredSize) =>
+			(requiredSize + LargeBufferMultiple - 1) / LargeBufferMultiple * LargeBufferMultiple;
 
-		private bool IsLargeBufferMultiple(int value)
-		{
-			return (value != 0) && (value % this.LargeBufferMultiple) == 0;
-		}
+		private bool IsLargeBufferMultiple(int value) => value != 0 && value % LargeBufferMultiple == 0;
 
 		/// <summary>
 		/// Returns the buffer to the large pool
@@ -309,37 +281,28 @@ namespace Elasticsearch.Net
 		/// <exception cref="ArgumentException">buffer.Length is not a multiple of LargeBufferMultiple (it did not originate from this pool)</exception>
 		internal void ReturnLargeBuffer(byte[] buffer, string tag)
 		{
-			if (buffer == null)
-			{
-				throw new ArgumentNullException(nameof(buffer));
-			}
+			if (buffer == null) throw new ArgumentNullException(nameof(buffer));
 
-			if (!this.IsLargeBufferMultiple(buffer.Length))
-			{
+			if (!IsLargeBufferMultiple(buffer.Length))
 				throw new ArgumentException(
 					"buffer did not originate from this memory manager. The size is not a multiple of " +
-					this.LargeBufferMultiple);
-			}
+					LargeBufferMultiple);
 
-			var poolIndex = buffer.Length / this._largeBufferMultiple - 1;
+			var poolIndex = buffer.Length / LargeBufferMultiple - 1;
 
-			if (poolIndex < this.largePools.Length)
+			if (poolIndex < largePools.Length)
 			{
-				if ((this.largePools[poolIndex].Count + 1) * buffer.Length <= this.MaximumFreeLargePoolBytes ||
-				    this.MaximumFreeLargePoolBytes == 0)
+				if ((largePools[poolIndex].Count + 1) * buffer.Length <= MaximumFreeLargePoolBytes ||
+					MaximumFreeLargePoolBytes == 0)
 				{
-					this.largePools[poolIndex].Push(buffer);
-					Interlocked.Add(ref this._largeBufferFreeSize[poolIndex], buffer.Length);
+					largePools[poolIndex].Push(buffer);
+					Interlocked.Add(ref _largeBufferFreeSize[poolIndex], buffer.Length);
 				}
 			}
 			else
-			{
-				// This is a non-poolable buffer, but we still want to track its size for inuse
-				// analysis. We have space in the inuse array for this.
-				poolIndex = this._largeBufferInUseSize.Length - 1;
-			}
+				poolIndex = _largeBufferInUseSize.Length - 1;
 
-			Interlocked.Add(ref this._largeBufferInUseSize[poolIndex], -buffer.Length);
+			Interlocked.Add(ref _largeBufferInUseSize[poolIndex], -buffer.Length);
 		}
 
 		/// <summary>
@@ -351,33 +314,26 @@ namespace Elasticsearch.Net
 		/// <exception cref="ArgumentException">blocks contains buffers that are the wrong size (or null) for this memory manager</exception>
 		internal void ReturnBlocks(ICollection<byte[]> blocks, string tag)
 		{
-			if (blocks == null)
-			{
-				throw new ArgumentNullException(nameof(blocks));
-			}
+			if (blocks == null) throw new ArgumentNullException(nameof(blocks));
 
-			var bytesToReturn = blocks.Count * this.BlockSize;
-			Interlocked.Add(ref this._smallPoolInUseSize, -bytesToReturn);
+			var bytesToReturn = blocks.Count * BlockSize;
+			Interlocked.Add(ref _smallPoolInUseSize, -bytesToReturn);
 
 			foreach (var block in blocks)
 			{
-				if (block == null || block.Length != this.BlockSize)
-				{
+				if (block == null || block.Length != BlockSize)
 					throw new ArgumentException("blocks contains buffers that are not BlockSize in length");
-				}
 			}
 
 			foreach (var block in blocks)
 			{
-				if (this.MaximumFreeSmallPoolBytes == 0 || this.SmallPoolFreeSize < this.MaximumFreeSmallPoolBytes)
+				if (MaximumFreeSmallPoolBytes == 0 || SmallPoolFreeSize < MaximumFreeSmallPoolBytes)
 				{
-					Interlocked.Add(ref this._smallPoolFreeSize, this.BlockSize);
-					this.smallPool.Push(block);
+					Interlocked.Add(ref _smallPoolFreeSize, BlockSize);
+					smallPool.Push(block);
 				}
 				else
-				{
 					break;
-				}
 			}
 		}
 
@@ -386,20 +342,14 @@ namespace Elasticsearch.Net
 		/// Retrieve a new MemoryStream object with no tag and a default initial capacity.
 		/// </summary>
 		/// <returns>A MemoryStream.</returns>
-		public MemoryStream GetStream()
-		{
-			return new RecyclableMemoryStream(this);
-		}
+		public MemoryStream GetStream() => new RecyclableMemoryStream(this);
 
 		/// <summary>
 		/// Retrieve a new MemoryStream object with the given tag and a default initial capacity.
 		/// </summary>
 		/// <param name="tag">A tag which can be used to track the source of the stream.</param>
 		/// <returns>A MemoryStream.</returns>
-		public MemoryStream GetStream(string tag)
-		{
-			return new RecyclableMemoryStream(this, tag);
-		}
+		public MemoryStream GetStream(string tag) => new RecyclableMemoryStream(this, tag);
 
 		/// <summary>
 		/// Retrieve a new MemoryStream object with the given tag and at least the given capacity.
@@ -407,31 +357,27 @@ namespace Elasticsearch.Net
 		/// <param name="tag">A tag which can be used to track the source of the stream.</param>
 		/// <param name="requiredSize">The minimum desired capacity for the stream.</param>
 		/// <returns>A MemoryStream.</returns>
-		public MemoryStream GetStream(string tag, int requiredSize)
-		{
-			return new RecyclableMemoryStream(this, tag, requiredSize);
-		}
+		public MemoryStream GetStream(string tag, int requiredSize) => new RecyclableMemoryStream(this, tag, requiredSize);
 
 		/// <summary>
 		/// Retrieve a new MemoryStream object with the given tag and at least the given capacity, possibly using
 		/// a single continugous underlying buffer.
 		/// </summary>
-		/// <remarks>Retrieving a MemoryStream which provides a single contiguous buffer can be useful in situations
+		/// <remarks>
+		/// Retrieving a MemoryStream which provides a single contiguous buffer can be useful in situations
 		/// where the initial size is known and it is desirable to avoid copying data between the smaller underlying
 		/// buffers to a single large one. This is most helpful when you know that you will always call GetBuffer
-		/// on the underlying stream.</remarks>
+		/// on the underlying stream.
+		/// </remarks>
 		/// <param name="tag">A tag which can be used to track the source of the stream.</param>
 		/// <param name="requiredSize">The minimum desired capacity for the stream.</param>
 		/// <param name="asContiguousBuffer">Whether to attempt to use a single contiguous buffer.</param>
 		/// <returns>A MemoryStream.</returns>
 		public MemoryStream GetStream(string tag, int requiredSize, bool asContiguousBuffer)
 		{
-			if (!asContiguousBuffer || requiredSize <= this.BlockSize)
-			{
-				return this.GetStream(tag, requiredSize);
-			}
+			if (!asContiguousBuffer || requiredSize <= BlockSize) return GetStream(tag, requiredSize);
 
-			return new RecyclableMemoryStream(this, tag, requiredSize, this.GetLargeBuffer(requiredSize, tag));
+			return new RecyclableMemoryStream(this, tag, requiredSize, GetLargeBuffer(requiredSize, tag));
 		}
 
 		/// <summary>
