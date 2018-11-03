@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -9,53 +9,61 @@ namespace Nest
 	{
 		/// <summary>
 		/// Deletes an index template
-		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#delete">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#delete</a>
+		/// <para> </para>
+		/// <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#delete">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#delete</a>
 		/// </summary>
 		/// <param name="name">The name of the template to delete</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the delete template operation</param>
 		IDeleteIndexTemplateResponse DeleteIndexTemplate(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IDeleteIndexTemplateResponse DeleteIndexTemplate(IDeleteIndexTemplateRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(
 			Name name,
 			Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		);
 
-		/// <inheritdoc/>
-		Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken));
-
+		/// <inheritdoc />
+		Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
-		public IDeleteIndexTemplateResponse DeleteIndexTemplate(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null) =>
-			this.DeleteIndexTemplate(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name)));
+		/// <inheritdoc />
+		public IDeleteIndexTemplateResponse DeleteIndexTemplate(Name name,
+			Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null
+		) =>
+			DeleteIndexTemplate(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IDeleteIndexTemplateResponse DeleteIndexTemplate(IDeleteIndexTemplateRequest request) =>
-			this.Dispatcher.Dispatch<IDeleteIndexTemplateRequest, DeleteIndexTemplateRequestParameters, DeleteIndexTemplateResponse>(
+			Dispatcher.Dispatch<IDeleteIndexTemplateRequest, DeleteIndexTemplateRequestParameters, DeleteIndexTemplateResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatch<DeleteIndexTemplateResponse>(p)
+				(p, d) => LowLevelDispatch.IndicesDeleteTemplateDispatch<DeleteIndexTemplateResponse>(p)
 			);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(
 			Name name, Func<DeleteIndexTemplateDescriptor,
-			IDeleteIndexTemplateRequest> selector = null,
+				IDeleteIndexTemplateRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) => this.DeleteIndexTemplateAsync(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name)), cancellationToken);
+		) => DeleteIndexTemplateAsync(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IDeleteIndexTemplateRequest, DeleteIndexTemplateRequestParameters, DeleteIndexTemplateResponse, IDeleteIndexTemplateResponse>(
-				request,
-				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.IndicesDeleteTemplateDispatchAsync<DeleteIndexTemplateResponse>(p, c)
-			);
+		/// <inheritdoc />
+		public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher
+				.DispatchAsync<IDeleteIndexTemplateRequest, DeleteIndexTemplateRequestParameters, DeleteIndexTemplateResponse,
+					IDeleteIndexTemplateResponse>(
+					request,
+					cancellationToken,
+					(p, d, c) => LowLevelDispatch.IndicesDeleteTemplateDispatchAsync<DeleteIndexTemplateResponse>(p, c)
+				);
 	}
 }

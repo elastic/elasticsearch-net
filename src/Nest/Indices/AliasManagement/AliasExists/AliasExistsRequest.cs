@@ -14,7 +14,7 @@ namespace Nest
 
 		public AliasExistsDescriptor Name(Names name)
 		{
-			this.RequestState.RouteValues.Required("name", name);
+			RequestState.RouteValues.Required("name", name);
 			return this;
 		}
 	}

@@ -35,8 +35,10 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public string Format { get; set; }
+
 		/// <inheritdoc />
 		public Field TimeField { get; set; }
+
 		/// <inheritdoc />
 		public string TimeFormat { get; set; }
 	}

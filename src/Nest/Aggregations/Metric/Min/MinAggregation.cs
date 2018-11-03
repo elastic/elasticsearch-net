@@ -15,8 +15,8 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Min = this;
 	}
 
-	public class MinAggregationDescriptor<T> 
+	public class MinAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<MinAggregationDescriptor<T>, IMinAggregation, T>
-			, IMinAggregation 
+			, IMinAggregation
 		where T : class { }
 }

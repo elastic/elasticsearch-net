@@ -15,10 +15,7 @@ namespace Nest
 	{
 		public CircleGeoShape() : this(null) { }
 
-		public CircleGeoShape(GeoCoordinate location) : base("circle")
-		{
-			this.Coordinates = location;
-		}
+		public CircleGeoShape(GeoCoordinate location) : base("circle") => Coordinates = location;
 
 		public GeoCoordinate Coordinates { get; set; }
 

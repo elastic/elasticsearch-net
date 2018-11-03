@@ -1,5 +1,4 @@
-﻿using Elasticsearch.Net;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -11,6 +10,6 @@ namespace Nest
 	[JsonObject]
 	public class ExistsResponse : ResponseBase, IExistsResponse
 	{
-		public bool Exists => this.ApiCall != null && this.ApiCall.Success && this.ApiCall.HttpStatusCode == 200;
+		public bool Exists => ApiCall != null && ApiCall.Success && ApiCall.HttpStatusCode == 200;
 	}
 }

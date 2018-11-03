@@ -5,30 +5,35 @@ namespace Nest
 {
 	public abstract class BulkOperationBase : IBulkOperation
 	{
-		public IndexName Index { get; set; }
-		public TypeName Type { get; set; }
 		public Id Id { get; set; }
-		public long? Version { get; set; }
-		public VersionType? VersionType { get; set; }
-		public Routing Routing { get; set; }
+		public IndexName Index { get; set; }
+
 		[Obsolete("This property is no longer available in indices created in Elasticsearch 6.x and up")]
 		public Id Parent { get; set; }
-		public int? RetriesOnConflict { get; set; }
 
-		string IBulkOperation.Operation => this.Operation;
+		public int? RetriesOnConflict { get; set; }
+		public Routing Routing { get; set; }
+		public TypeName Type { get; set; }
+		public long? Version { get; set; }
+		public VersionType? VersionType { get; set; }
+		protected abstract Type ClrType { get; }
 		protected abstract string Operation { get; }
 
-		Type IBulkOperation.ClrType => this.ClrType;
-		protected abstract Type ClrType { get; }
+		Type IBulkOperation.ClrType => ClrType;
 
-		object IBulkOperation.GetBody() => this.GetBody();
+		string IBulkOperation.Operation => Operation;
+
+		object IBulkOperation.GetBody() => GetBody();
+
+		Id IBulkOperation.GetIdForOperation(Inferrer inferrer) => GetIdForOperation(inferrer);
+
+		Routing IBulkOperation.GetRoutingForOperation(Inferrer inferrer) => GetRoutingForOperation(inferrer);
+
 		protected abstract object GetBody();
 
-		Id IBulkOperation.GetIdForOperation(Inferrer inferrer) => this.GetIdForOperation(inferrer);
-		Routing IBulkOperation.GetRoutingForOperation(Inferrer inferrer) => this.GetRoutingForOperation(inferrer);
+		protected virtual Id GetIdForOperation(Inferrer inferrer) => Id ?? new Id(GetBody());
 
-		protected virtual Id GetIdForOperation(Inferrer inferrer) => this.Id ?? new Id(this.GetBody());
-		protected virtual Routing GetRoutingForOperation(Inferrer inferrer) => this.Routing ?? new Routing(this.GetBody());
+		protected virtual Routing GetRoutingForOperation(Inferrer inferrer) => Routing ?? new Routing(GetBody());
 	}
 
 	public abstract class BulkOperationDescriptorBase<TDescriptor, TInterface>
@@ -36,40 +41,45 @@ namespace Nest
 		where TDescriptor : BulkOperationDescriptorBase<TDescriptor, TInterface>, TInterface, IBulkOperation
 		where TInterface : class, IBulkOperation
 	{
-		string IBulkOperation.Operation => this.BulkOperationType;
+		protected abstract Type BulkOperationClrType { get; }
 		protected abstract string BulkOperationType { get; }
 
-		Type IBulkOperation.ClrType => this.BulkOperationClrType;
-		protected abstract Type BulkOperationClrType { get; }
+		Type IBulkOperation.ClrType => BulkOperationClrType;
+		Id IBulkOperation.Id { get; set; }
 
-		protected abstract object GetBulkOperationBody();
+		IndexName IBulkOperation.Index { get; set; }
+		string IBulkOperation.Operation => BulkOperationType;
+
+		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 6.x and up")]
+		Id IBulkOperation.Parent { get; set; }
+
+		int? IBulkOperation.RetriesOnConflict { get; set; }
+		Routing IBulkOperation.Routing { get; set; }
+		TypeName IBulkOperation.Type { get; set; }
+		long? IBulkOperation.Version { get; set; }
+		VersionType? IBulkOperation.VersionType { get; set; }
 
 		/// <summary>
 		/// Only used for bulk update operations but in the future might come in handy for other complex bulk ops.
 		/// </summary>
 		/// <returns></returns>
-		object IBulkOperation.GetBody() => this.GetBulkOperationBody();
+		object IBulkOperation.GetBody() => GetBulkOperationBody();
 
-		Id IBulkOperation.GetIdForOperation(Inferrer inferrer) => this.GetIdForOperation(inferrer);
-		Routing IBulkOperation.GetRoutingForOperation(Inferrer inferrer) => this.GetRoutingForOperation(inferrer);
+		Id IBulkOperation.GetIdForOperation(Inferrer inferrer) => GetIdForOperation(inferrer);
 
-		protected virtual Id GetIdForOperation(Inferrer inferrer) => Self.Id ?? new Id(this.GetBulkOperationBody());
-		protected virtual Routing GetRoutingForOperation(Inferrer inferrer) => Self.Routing ?? new Routing(this.GetBulkOperationBody());
+		Routing IBulkOperation.GetRoutingForOperation(Inferrer inferrer) => GetRoutingForOperation(inferrer);
 
-		IndexName IBulkOperation.Index { get; set; }
-		TypeName IBulkOperation.Type { get; set; }
-		Id IBulkOperation.Id { get; set; }
-		long? IBulkOperation.Version { get; set; }
-		VersionType? IBulkOperation.VersionType { get; set; }
-		Routing IBulkOperation.Routing { get; set; }
-		[Obsolete("This feature is no longer supported on indices created in Elasticsearch 6.x and up")]
-		Id IBulkOperation.Parent { get; set; }
-		int? IBulkOperation.RetriesOnConflict { get; set; }
+		protected abstract object GetBulkOperationBody();
+
+		protected virtual Id GetIdForOperation(Inferrer inferrer) => Self.Id ?? new Id(GetBulkOperationBody());
+
+		protected virtual Routing GetRoutingForOperation(Inferrer inferrer) => Self.Routing ?? new Routing(GetBulkOperationBody());
 
 		/// <summary>
 		/// Manually set the index, default to the default index or the fixed index set on the bulk operation
 		/// </summary>
 		public TDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+
 		public TDescriptor Index<T>() => Assign(a => a.Index = typeof(T));
 
 		/// <summary>
@@ -77,6 +87,7 @@ namespace Nest
 		/// T will be inferred to if not passed or the fixed type set on the parent bulk operation
 		/// </summary>
 		public TDescriptor Type(TypeName type) => Assign(a => a.Type = type);
+
 		public TDescriptor Type<T>() => Assign(a => a.Type = typeof(T));
 
 		/// <summary>

@@ -13,11 +13,8 @@ namespace Nest
 	{
 		public MultiPointGeoShape() : this(null) { }
 
-		public MultiPointGeoShape(IEnumerable<GeoCoordinate> coordinates) 
-			: base("multipoint")
-		{
-			this.Coordinates = coordinates;
-		}
+		public MultiPointGeoShape(IEnumerable<GeoCoordinate> coordinates)
+			: base("multipoint") => Coordinates = coordinates;
 
 		public IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}

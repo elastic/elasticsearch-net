@@ -5,18 +5,20 @@ namespace Nest
 {
 	public interface IAllocationAttributes : IIsADictionary<string, IList<string>>
 	{
-		IDictionary<string, IList<string>> Attributes { get; } 
+		IDictionary<string, IList<string>> Attributes { get; }
 	}
 
 	public class AllocationAttributes : IsADictionaryBase<string, IList<string>>, IAllocationAttributes
 	{
-		IDictionary<string, IList<string>> IAllocationAttributes.Attributes => this.BackingDictionary;
+		IDictionary<string, IList<string>> IAllocationAttributes.Attributes => BackingDictionary;
 
-		public void Add(string attribute, params string[] values) => this.BackingDictionary.Add(attribute, values.ToList());
-		public void Add(string attribute, IEnumerable<string> values) => this.BackingDictionary.Add(attribute, values.ToList());
+		public void Add(string attribute, params string[] values) => BackingDictionary.Add(attribute, values.ToList());
+
+		public void Add(string attribute, IEnumerable<string> values) => BackingDictionary.Add(attribute, values.ToList());
 	}
 
-	public class AllocationAttributesDescriptor : IsADictionaryDescriptorBase<AllocationAttributesDescriptor, IAllocationAttributes, string, IList<string>>
+	public class AllocationAttributesDescriptor
+		: IsADictionaryDescriptorBase<AllocationAttributesDescriptor, IAllocationAttributes, string, IList<string>>
 	{
 		public AllocationAttributesDescriptor() : base(new AllocationAttributes()) { }
 	}

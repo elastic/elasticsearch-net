@@ -10,14 +10,14 @@ namespace Nest
 	public class RestoreObservable : IDisposable, IObservable<IRecoveryStatusResponse>
 	{
 		private readonly IElasticClient _elasticClient;
-		private readonly IRestoreRequest _restoreRequest;
 		private readonly TimeSpan _interval = TimeSpan.FromSeconds(2);
-		private Timer _timer;
-		private bool _disposed;
+		private readonly IRestoreRequest _restoreRequest;
 		private readonly RestoreStatusHumbleObject _restoreStatusHumbleObject;
-		private EventHandler<RestoreNextEventArgs> _nextEventHandlers;
 		private EventHandler<RestoreCompletedEventArgs> _completedEentHandlers;
+		private bool _disposed;
 		private EventHandler<RestoreErrorEventArgs> _errorEventHandlers;
+		private EventHandler<RestoreNextEventArgs> _nextEventHandlers;
+		private Timer _timer;
 
 		public RestoreObservable(IElasticClient elasticClient, IRestoreRequest restoreRequest)
 		{
@@ -41,6 +41,8 @@ namespace Nest
 			_interval = interval;
 		}
 
+		public void Dispose() => Dispose(true);
+
 		public IDisposable Subscribe(IObserver<IRecoveryStatusResponse> observer)
 		{
 			observer.ThrowIfNull(nameof(observer));
@@ -48,7 +50,7 @@ namespace Nest
 			try
 			{
 				_restoreRequest.RequestParameters.WaitForCompletion = false;
-				var restoreResponse = this._elasticClient.Restore(_restoreRequest);
+				var restoreResponse = _elasticClient.Restore(_restoreRequest);
 
 				if (!restoreResponse.IsValid)
 					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to restore snapshot.", restoreResponse.ApiCall);
@@ -65,7 +67,7 @@ namespace Nest
 				_restoreStatusHumbleObject.Completed += onCompleted;
 				_restoreStatusHumbleObject.Error += onError;
 
-				_timer = new Timer(Restore, observer, _interval, System.Threading.Timeout.InfiniteTimeSpan);
+				_timer = new Timer(Restore, observer, _interval, Timeout.InfiniteTimeSpan);
 			}
 			catch (Exception exception)
 			{
@@ -88,7 +90,8 @@ namespace Nest
 
 				_restoreStatusHumbleObject.CheckStatus();
 
-				_timer.Change(TimeSpan.FromMilliseconds(Math.Max(0, _interval.TotalMilliseconds - watch.ElapsedMilliseconds)), System.Threading.Timeout.InfiniteTimeSpan);
+				_timer.Change(TimeSpan.FromMilliseconds(Math.Max(0, _interval.TotalMilliseconds - watch.ElapsedMilliseconds)),
+					Timeout.InfiniteTimeSpan);
 			}
 			catch (Exception exception)
 			{
@@ -96,19 +99,12 @@ namespace Nest
 			}
 		}
 
-		private void StopTimer(object sender, EventArgs restoreCompletedEventArgs)
-		{
-			_timer.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
-		}
-
-		public void Dispose()
-		{
-			Dispose(true);
-		}
+		private void StopTimer(object sender, EventArgs restoreCompletedEventArgs) => _timer.Change(Timeout.Infinite, Timeout.Infinite);
 
 		protected virtual void Dispose(bool disposing)
 		{
 			if (_disposed) return;
+
 			_timer?.Dispose();
 
 			if (_restoreStatusHumbleObject != null)
@@ -124,52 +120,36 @@ namespace Nest
 			_disposed = true;
 		}
 
-		~RestoreObservable()
-		{
-			Dispose(false);
-		}
+		~RestoreObservable() => Dispose(false);
 	}
 
 	public class RestoreNextEventArgs : EventArgs
 	{
-		public IRecoveryStatusResponse RecoveryStatusResponse { get; }
+		public RestoreNextEventArgs(IRecoveryStatusResponse recoveryStatusResponse) => RecoveryStatusResponse = recoveryStatusResponse;
 
-		public RestoreNextEventArgs(IRecoveryStatusResponse recoveryStatusResponse)
-		{
-			RecoveryStatusResponse = recoveryStatusResponse;
-		}
+		public IRecoveryStatusResponse RecoveryStatusResponse { get; }
 	}
 
 	public class RestoreCompletedEventArgs : EventArgs
 	{
-		public IRecoveryStatusResponse RecoveryStatusResponse { get; }
+		public RestoreCompletedEventArgs(IRecoveryStatusResponse recoveryStatusResponse) => RecoveryStatusResponse = recoveryStatusResponse;
 
-		public RestoreCompletedEventArgs(IRecoveryStatusResponse recoveryStatusResponse)
-		{
-			RecoveryStatusResponse = recoveryStatusResponse;
-		}
+		public IRecoveryStatusResponse RecoveryStatusResponse { get; }
 	}
 
 	public class RestoreErrorEventArgs : EventArgs
 	{
-		public Exception Exception { get; }
+		public RestoreErrorEventArgs(Exception exception) => Exception = exception;
 
-		public RestoreErrorEventArgs(Exception exception)
-		{
-			Exception = exception;
-		}
+		public Exception Exception { get; }
 	}
 
 	public class RestoreStatusHumbleObject
 	{
 		private readonly IElasticClient _elasticClient;
-		private readonly IRestoreRequest _restoreRequest;
 		private readonly string _renamePattern;
 		private readonly string _renameReplacement;
-
-		public event EventHandler<RestoreCompletedEventArgs> Completed;
-		public event EventHandler<RestoreErrorEventArgs> Error;
-		public event EventHandler<RestoreNextEventArgs> Next;
+		private readonly IRestoreRequest _restoreRequest;
 
 		public RestoreStatusHumbleObject(IElasticClient elasticClient, IRestoreRequest restoreRequest)
 		{
@@ -183,16 +163,20 @@ namespace Nest
 			_renameReplacement = string.IsNullOrEmpty(_restoreRequest.RenameReplacement) ? string.Empty : _restoreRequest.RenameReplacement;
 		}
 
+		public event EventHandler<RestoreCompletedEventArgs> Completed;
+		public event EventHandler<RestoreErrorEventArgs> Error;
+		public event EventHandler<RestoreNextEventArgs> Next;
+
 		public void CheckStatus()
 		{
 			try
 			{
 				var indices =
 					_restoreRequest.Indices.Item2.Indices.Select(
-						x => IndexName.Rebuild(
-							Regex.Replace(x.Name, _renamePattern, _renameReplacement),
-							x.Type
-						))
+							x => IndexName.Rebuild(
+								Regex.Replace(x.Name, _renamePattern, _renameReplacement),
+								x.Type
+							))
 						.ToArray();
 
 				var recoveryStatus = _elasticClient.RecoveryStatus(new RecoveryStatusRequest(indices)

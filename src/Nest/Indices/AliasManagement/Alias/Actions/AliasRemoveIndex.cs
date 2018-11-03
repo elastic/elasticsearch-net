@@ -17,12 +17,9 @@ namespace Nest
 
 	public class AliasRemoveIndexDescriptor : DescriptorBase<AliasRemoveIndexDescriptor, IAliasRemoveIndexAction>, IAliasRemoveIndexAction
 	{
-		AliasRemoveIndexOperation IAliasRemoveIndexAction.RemoveIndex { get; set; }
+		public AliasRemoveIndexDescriptor() => Self.RemoveIndex = new AliasRemoveIndexOperation();
 
-		public AliasRemoveIndexDescriptor()
-		{
-			Self.RemoveIndex = new AliasRemoveIndexOperation();
-		}
+		AliasRemoveIndexOperation IAliasRemoveIndexAction.RemoveIndex { get; set; }
 
 		public AliasRemoveIndexDescriptor Index(IndexName index)
 		{

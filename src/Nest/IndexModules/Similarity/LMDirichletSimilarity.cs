@@ -17,18 +17,18 @@ namespace Nest
 	/// <inheritdoc />
 	public class LMDirichletSimilarity : ILMDirichletSimilarity
 	{
-		public string Type => "LMDirichlet";
-
 		/// <inheritdoc />
 		public int? Mu { get; set; }
+
+		public string Type => "LMDirichlet";
 	}
 
 	/// <inheritdoc />
 	public class LMDirichletSimilarityDescriptor
 		: DescriptorBase<LMDirichletSimilarityDescriptor, ILMDirichletSimilarity>, ILMDirichletSimilarity
 	{
-		string ISimilarity.Type => "LMDirichlet";
 		int? ILMDirichletSimilarity.Mu { get; set; }
+		string ISimilarity.Type => "LMDirichlet";
 
 		/// <inheritdoc />
 		public LMDirichletSimilarityDescriptor Mu(int? mu) => Assign(a => a.Mu = mu);

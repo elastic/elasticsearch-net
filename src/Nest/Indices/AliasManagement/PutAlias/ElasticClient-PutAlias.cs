@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -14,13 +14,13 @@ namespace Nest
 		/// <param name="request">A descriptor that describes the put alias request</param>
 		IPutAliasResponse PutAlias(IPutAliasRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IPutAliasResponse> PutAliasAsync(
 			Indices indices,
 			Name alias,
@@ -31,31 +31,31 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IPutAliasResponse PutAlias(IPutAliasRequest request) =>
-			this.Dispatcher.Dispatch<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse>(
+			Dispatcher.Dispatch<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse>(
 				request,
-				this.LowLevelDispatch.IndicesPutAliasDispatch<PutAliasResponse>
+				LowLevelDispatch.IndicesPutAliasDispatch<PutAliasResponse>
 			);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
+		public IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null) =>
+			PutAlias(selector.InvokeOrDefault(new PutAliasDescriptor(indices, alias)));
+
+		/// <inheritdoc />
 		public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse, IPutAliasResponse>(
+			Dispatcher.DispatchAsync<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse, IPutAliasResponse>(
 				request,
 				cancellationToken,
-				this.LowLevelDispatch.IndicesPutAliasDispatchAsync<PutAliasResponse>
+				LowLevelDispatch.IndicesPutAliasDispatchAsync<PutAliasResponse>
 			);
 
-		/// <inheritdoc/>
-		public IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null) =>
-			this.PutAlias(selector.InvokeOrDefault(new PutAliasDescriptor(indices, alias)));
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<IPutAliasResponse> PutAliasAsync(
 			Indices indices,
 			Name alias,
 			Func<PutAliasDescriptor, IPutAliasRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) => this.PutAliasAsync(selector.InvokeOrDefault(new PutAliasDescriptor(indices, alias)), cancellationToken);
+		) => PutAliasAsync(selector.InvokeOrDefault(new PutAliasDescriptor(indices, alias)), cancellationToken);
 	}
 }

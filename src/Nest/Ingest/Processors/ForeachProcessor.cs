@@ -1,10 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -21,9 +19,9 @@ namespace Nest
 
 	public class ForeachProcessor : ProcessorBase, IForeachProcessor
 	{
-		protected override string Name => "foreach";
 		public Field Field { get; set; }
 		public IProcessor Processor { get; set; }
+		protected override string Name => "foreach";
 	}
 
 	public class ForeachProcessorDescriptor<T>

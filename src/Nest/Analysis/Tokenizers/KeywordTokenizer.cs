@@ -13,23 +13,25 @@ namespace Nest
 		[JsonProperty("buffer_size")]
 		int? BufferSize { get; set; }
 	}
-	/// <inheritdoc/>
-	public class KeywordTokenizer : TokenizerBase, IKeywordTokenizer
-    {
-		public KeywordTokenizer() { Type = "keyword"; }
 
-		/// <inheritdoc/>
+	/// <inheritdoc />
+	public class KeywordTokenizer : TokenizerBase, IKeywordTokenizer
+	{
+		public KeywordTokenizer() => Type = "keyword";
+
+		/// <inheritdoc />
 		public int? BufferSize { get; set; }
-    }
-	/// <inheritdoc/>
-	public class KeywordTokenizerDescriptor 
+	}
+
+	/// <inheritdoc />
+	public class KeywordTokenizerDescriptor
 		: TokenizerDescriptorBase<KeywordTokenizerDescriptor, IKeywordTokenizer>, IKeywordTokenizer
 	{
 		protected override string Type => "keyword";
 
 		int? IKeywordTokenizer.BufferSize { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public KeywordTokenizerDescriptor BufferSize(int? size) => Assign(a => a.BufferSize = size);
 	}
 }

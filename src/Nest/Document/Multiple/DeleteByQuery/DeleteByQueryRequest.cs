@@ -25,7 +25,7 @@ namespace Nest
 	/// <inheritdoc />
 	public interface IDeleteByQueryRequest<T> : IDeleteByQueryRequest where T : class { }
 
-	/// <inheritdoc cref="IDeleteByQueryRequest"/>
+	/// <inheritdoc cref="IDeleteByQueryRequest" />
 	public partial class DeleteByQueryRequest
 	{
 		/// <inheritdoc />
@@ -35,11 +35,11 @@ namespace Nest
 		public ISlicedScroll Slice { get; set; }
 	}
 
-	/// <inheritdoc cref="IDeleteByQueryRequest"/>
+	/// <inheritdoc cref="IDeleteByQueryRequest" />
 	public partial class DeleteByQueryRequest<T> : IDeleteByQueryRequest<T>
 		where T : class
 	{
-		public DeleteByQueryRequest() : this(typeof(T), typeof(T)){ }
+		public DeleteByQueryRequest() : this(typeof(T), typeof(T)) { }
 
 		/// <inheritdoc />
 		public QueryContainer Query { get; set; }
@@ -48,7 +48,7 @@ namespace Nest
 		public ISlicedScroll Slice { get; set; }
 	}
 
-	/// <inheritdoc cref="IDeleteByQueryRequest"/>
+	/// <inheritdoc cref="IDeleteByQueryRequest" />
 	public partial class DeleteByQueryDescriptor<T> : IDeleteByQueryRequest<T>
 		where T : class
 	{
@@ -57,7 +57,7 @@ namespace Nest
 
 		/// <summary>
 		/// A match_all query to select all documents. Convenient shorthand for specifying
-		/// a match_all query using <see cref="Query"/>
+		/// a match_all query using <see cref="Query" />
 		/// </summary>
 		public DeleteByQueryDescriptor<T> MatchAll() => Assign(a => a.Query = new QueryContainerDescriptor<T>().MatchAll());
 

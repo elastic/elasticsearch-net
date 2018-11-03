@@ -2,9 +2,19 @@
 
 namespace Nest
 {
-	/// <summary> Shared properties of <see cref="IQuerySqlRequest"/> and <see cref="ITranslateSqlRequest"/> </summary>
+	/// <summary> Shared properties of <see cref="IQuerySqlRequest" /> and <see cref="ITranslateSqlRequest" /> </summary>
 	public interface ISqlRequest
 	{
+		/// <summary>
+		/// fetch_size is a hint for how many results to return in each page. SQL might chose to return more or fewer results though.
+		/// </summary>
+		[JsonProperty("fetch_size")]
+		int? FetchSize { get; set; }
+
+		/// <summary> Further filter the results returned by the SQL query provided on <see cref="Query" /> </summary>
+		[JsonProperty("filter")]
+		QueryContainer Filter { get; set; }
+
 		/// <summary> The SQL query you want Elasticsearch to execute </summary>
 		[JsonProperty("query")]
 		string Query { get; set; }
@@ -15,15 +25,5 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
-
-		/// <summary>
-		/// fetch_size is a hint for how many results to return in each page. SQL might chose to return more or fewer results though.
-		/// </summary>
-		[JsonProperty("fetch_size")]
-		int? FetchSize { get; set; }
-
-		/// <summary> Further filter the results returned by the SQL query provided on <see cref="Query" /> </summary>
-		[JsonProperty("filter")]
-		QueryContainer Filter { get; set; }
 	}
 }

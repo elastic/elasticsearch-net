@@ -30,7 +30,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="objects">the objects to create</param>
 		/// <param name="bulkCreateSelector">A func called on each object to describe the individual create operation</param>
-		public BulkDescriptor CreateMany<T>(IEnumerable<T> @objects, Func<BulkCreateDescriptor<T>, T, IBulkCreateOperation<T>> bulkCreateSelector = null) where T : class =>
+		public BulkDescriptor CreateMany<T>(IEnumerable<T> @objects,
+			Func<BulkCreateDescriptor<T>, T, IBulkCreateOperation<T>> bulkCreateSelector = null
+		) where T : class =>
 			Assign(a => @objects.ForEach(o => AddOperation(bulkCreateSelector.InvokeOrDefault(new BulkCreateDescriptor<T>().Document(o), o))));
 
 		public BulkDescriptor Index<T>(Func<BulkIndexDescriptor<T>, IBulkIndexOperation<T>> bulkIndexSelector) where T : class =>
@@ -41,7 +43,8 @@ namespace Nest
 		/// </summary>
 		/// <param name="objects">the objects to index</param>
 		/// <param name="bulkIndexSelector">A func called on each object to describe the individual index operation</param>
-		public BulkDescriptor IndexMany<T>(IEnumerable<T> @objects, Func<BulkIndexDescriptor<T>, T, IBulkIndexOperation<T>> bulkIndexSelector = null) where T : class =>
+		public BulkDescriptor IndexMany<T>(IEnumerable<T> @objects, Func<BulkIndexDescriptor<T>, T, IBulkIndexOperation<T>> bulkIndexSelector = null)
+			where T : class =>
 			Assign(a => @objects.ForEach(o => AddOperation(bulkIndexSelector.InvokeOrDefault(new BulkIndexDescriptor<T>().Document(o), o))));
 
 		public BulkDescriptor Delete<T>(T obj, Func<BulkDeleteDescriptor<T>, IBulkDeleteOperation<T>> bulkDeleteSelector = null) where T : class =>
@@ -55,7 +58,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="objects">the objects to delete</param>
 		/// <param name="bulkDeleteSelector">A func called on each object to describe the individual delete operation</param>
-		public BulkDescriptor DeleteMany<T>(IEnumerable<T> @objects, Func<BulkDeleteDescriptor<T>, T, IBulkDeleteOperation<T>> bulkDeleteSelector = null) where T : class =>
+		public BulkDescriptor DeleteMany<T>(IEnumerable<T> @objects,
+			Func<BulkDeleteDescriptor<T>, T, IBulkDeleteOperation<T>> bulkDeleteSelector = null
+		) where T : class =>
 			Assign(a => @objects.ForEach(o => AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Document(o), o))));
 
 		/// <summary>
@@ -63,7 +68,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="ids">Enumerable of string ids to delete</param>
 		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
-		public BulkDescriptor DeleteMany<T>(IEnumerable<string> ids, Func<BulkDeleteDescriptor<T>, string, IBulkDeleteOperation<T>> bulkDeleteSelector = null) where T : class =>
+		public BulkDescriptor DeleteMany<T>(IEnumerable<string> ids,
+			Func<BulkDeleteDescriptor<T>, string, IBulkDeleteOperation<T>> bulkDeleteSelector = null
+		) where T : class =>
 			Assign(a => ids.ForEach(o => AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Id(o), o))));
 
 		/// <summary>
@@ -71,7 +78,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="ids">Enumerable of int ids to delete</param>
 		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
-		public BulkDescriptor DeleteMany<T>(IEnumerable<long> ids, Func<BulkDeleteDescriptor<T>, long, IBulkDeleteOperation<T>> bulkDeleteSelector = null) where T : class =>
+		public BulkDescriptor DeleteMany<T>(IEnumerable<long> ids,
+			Func<BulkDeleteDescriptor<T>, long, IBulkDeleteOperation<T>> bulkDeleteSelector = null
+		) where T : class =>
 			Assign(a => ids.ForEach(o => AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Id(o), o))));
 
 		/// <summary>
@@ -79,7 +88,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="objects">the objects to update</param>
 		/// <param name="bulkUpdateSelector">An func called on each object to describe the individual update operation</param>
-		public BulkDescriptor UpdateMany<T>(IEnumerable<T> @objects, Func<BulkUpdateDescriptor<T, T>, T, IBulkUpdateOperation<T, T>> bulkUpdateSelector) where T : class =>
+		public BulkDescriptor UpdateMany<T>(IEnumerable<T> @objects,
+			Func<BulkUpdateDescriptor<T, T>, T, IBulkUpdateOperation<T, T>> bulkUpdateSelector
+		) where T : class =>
 			Assign(a => @objects.ForEach(o => AddOperation(bulkUpdateSelector.InvokeOrDefault(new BulkUpdateDescriptor<T, T>().IdFrom(o), o))));
 
 		/// <summary>
@@ -87,15 +98,20 @@ namespace Nest
 		/// </summary>
 		/// <param name="objects">the objects to update</param>
 		/// <param name="bulkUpdateSelector">An func called on each object to describe the individual update operation</param>
-		public BulkDescriptor UpdateMany<T, TPartialDocument>(IEnumerable<T> @objects, Func<BulkUpdateDescriptor<T, TPartialDocument>, T, IBulkUpdateOperation<T, TPartialDocument>> bulkUpdateSelector)
+		public BulkDescriptor UpdateMany<T, TPartialDocument>(IEnumerable<T> @objects,
+			Func<BulkUpdateDescriptor<T, TPartialDocument>, T, IBulkUpdateOperation<T, TPartialDocument>> bulkUpdateSelector
+		)
 			where T : class
 			where TPartialDocument : class =>
-			Assign(a => @objects.ForEach(o => AddOperation(bulkUpdateSelector.InvokeOrDefault(new BulkUpdateDescriptor<T, TPartialDocument>().IdFrom(o), o))));
+			Assign(a => @objects.ForEach(o =>
+				AddOperation(bulkUpdateSelector.InvokeOrDefault(new BulkUpdateDescriptor<T, TPartialDocument>().IdFrom(o), o))));
 
 		public BulkDescriptor Update<T>(Func<BulkUpdateDescriptor<T, T>, IBulkUpdateOperation<T, T>> bulkUpdateSelector) where T : class =>
-			this.Update<T, T>(bulkUpdateSelector);
+			Update<T, T>(bulkUpdateSelector);
 
-		public BulkDescriptor Update<T, TPartialDocument>(Func<BulkUpdateDescriptor<T, TPartialDocument>, IBulkUpdateOperation<T, TPartialDocument>> bulkUpdateSelector)
+		public BulkDescriptor Update<T, TPartialDocument>(
+			Func<BulkUpdateDescriptor<T, TPartialDocument>, IBulkUpdateOperation<T, TPartialDocument>> bulkUpdateSelector
+		)
 			where T : class
 			where TPartialDocument : class =>
 			Assign(a => AddOperation(bulkUpdateSelector?.Invoke(new BulkUpdateDescriptor<T, TPartialDocument>())));

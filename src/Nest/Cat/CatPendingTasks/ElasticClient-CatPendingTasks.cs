@@ -1,46 +1,52 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICatResponse<CatPendingTasksRecord> CatPendingTasks(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICatResponse<CatPendingTasksRecord> CatPendingTasks(ICatPendingTasksRequest request);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(
 			Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
 		);
 
-		/// <inheritdoc/>
-		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICatResponse<CatPendingTasksRecord> CatPendingTasks(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null) =>
-			this.CatPendingTasks(selector.InvokeOrDefault(new CatPendingTasksDescriptor()));
+			CatPendingTasks(selector.InvokeOrDefault(new CatPendingTasksDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICatResponse<CatPendingTasksRecord> CatPendingTasks(ICatPendingTasksRequest request) =>
-			this.DoCat<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request, this.LowLevelDispatch.CatPendingTasksDispatch<CatResponse<CatPendingTasksRecord>>);
+			DoCat<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request,
+				LowLevelDispatch.CatPendingTasksDispatch<CatResponse<CatPendingTasksRecord>>);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(
 			Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null,
 			CancellationToken cancellationToken = default(CancellationToken)
-		) => this.CatPendingTasksAsync(selector.InvokeOrDefault(new CatPendingTasksDescriptor()), cancellationToken);
+		) => CatPendingTasksAsync(selector.InvokeOrDefault(new CatPendingTasksDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.DoCatAsync<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request, cancellationToken, this.LowLevelDispatch.CatPendingTasksDispatchAsync<CatResponse<CatPendingTasksRecord>>);
+		/// <inheritdoc />
+		public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			DoCatAsync<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request, cancellationToken,
+				LowLevelDispatch.CatPendingTasksDispatchAsync<CatResponse<CatPendingTasksRecord>>);
 	}
 }

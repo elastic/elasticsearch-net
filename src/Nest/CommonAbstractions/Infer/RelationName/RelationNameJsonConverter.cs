@@ -5,10 +5,7 @@ namespace Nest
 {
 	internal class RelationNameJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(RelationName) == objectType;
-		}
+		public override bool CanConvert(Type objectType) => typeof(RelationName) == objectType;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -28,8 +25,8 @@ namespace Nest
 		{
 			if (reader.TokenType == JsonToken.String)
 			{
-				string typeName = reader.Value.ToString();
-				return (RelationName) typeName;
+				var typeName = reader.Value.ToString();
+				return (RelationName)typeName;
 			}
 			return null;
 		}

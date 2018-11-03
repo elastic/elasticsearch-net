@@ -16,8 +16,9 @@ namespace Nest
 			reader.Read();
 			if (reader.TokenType == JsonToken.EndObject)
 				return response;
-			bool newResponse = false;
-			if ((reader.Value as string) == "size_in_bytes")
+
+			var newResponse = false;
+			if (reader.Value as string == "size_in_bytes")
 			{
 				newResponse = true;
 				reader.Read();
@@ -36,7 +37,7 @@ namespace Nest
 				}
 			}
 			var upgrades = new Dictionary<string, UpgradeStatus>();
-			while(true)
+			while (true)
 			{
 				var status = new UpgradeStatus();
 				var index = reader.Value as string;
@@ -64,9 +65,6 @@ namespace Nest
 			return response;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotSupportedException();
-		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 	}
 }

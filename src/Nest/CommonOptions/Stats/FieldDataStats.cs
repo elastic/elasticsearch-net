@@ -10,8 +10,8 @@ namespace Nest
 
 		[JsonProperty("memory_size")]
 		public string MemorySize { get; set; }
+
 		[JsonProperty("memory_size_in_bytes")]
 		public long MemorySizeInBytes { get; set; }
-
 	}
 }

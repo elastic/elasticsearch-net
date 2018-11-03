@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "request")]
 		Request,
+
 		[EnumMember(Value = "async")]
 		Async
 	}

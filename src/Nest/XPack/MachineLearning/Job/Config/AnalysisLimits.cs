@@ -34,6 +34,7 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public long? CategorizationExamplesLimit { get; set; }
+
 		/// <inheritdoc />
 		public string ModelMemoryLimit { get; set; }
 	}

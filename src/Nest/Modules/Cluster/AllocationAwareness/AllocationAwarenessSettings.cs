@@ -14,36 +14,33 @@ namespace Nest
 
 	public class AllocationAwarenessSettings : IAllocationAwarenessSettings
 	{
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public IEnumerable<string> Attributes { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public IAllocationAttributes Forced { get; set; }
-
 	}
 
 	public class AllocationAwarenessSettingsDescriptor
 		: DescriptorBase<AllocationAwarenessSettingsDescriptor, IAllocationAwarenessSettings>, IAllocationAwarenessSettings
 	{
-
-		///<inheritdoc/>
+		/// <inheritdoc />
 		IEnumerable<string> IAllocationAwarenessSettings.Attributes { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		IAllocationAttributes IAllocationAwarenessSettings.Forced { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public AllocationAwarenessSettingsDescriptor Attributes(IEnumerable<string> attributes) => Assign(a => a.Attributes = attributes);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public AllocationAwarenessSettingsDescriptor Attributes(params string[] attributes) => Assign(a => a.Attributes = attributes);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public AllocationAwarenessSettingsDescriptor Force(IAllocationAttributes forceValues) => Assign(a => a.Forced = forceValues);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public AllocationAwarenessSettingsDescriptor Force(Func<AllocationAttributesDescriptor, IAllocationAttributes> selector) =>
 			Assign(a => a.Forced = selector?.Invoke(new AllocationAttributesDescriptor()));
-
 	}
 }

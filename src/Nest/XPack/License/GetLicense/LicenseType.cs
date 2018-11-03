@@ -7,21 +7,28 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum LicenseType
 	{
-		[EnumMember(Value="missing")]
+		[EnumMember(Value = "missing")]
 		Missing,
-		[EnumMember(Value="trial")]
+
+		[EnumMember(Value = "trial")]
 		Trial,
-		[EnumMember(Value="basic")]
+
+		[EnumMember(Value = "basic")]
 		Basic,
-		[EnumMember(Value="standard")]
+
+		[EnumMember(Value = "standard")]
 		Standard,
-		[EnumMember(Value="dev")]//bwc
+
+		[EnumMember(Value = "dev")] //bwc
 		Dev,
-		[EnumMember(Value="silver")] //bwc
+
+		[EnumMember(Value = "silver")] //bwc
 		Silver,
-		[EnumMember(Value="gold")]
+
+		[EnumMember(Value = "gold")]
 		Gold,
-		[EnumMember(Value="platinum")]
+
+		[EnumMember(Value = "platinum")]
 		Platinum
 	}
 }

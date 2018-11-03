@@ -11,7 +11,7 @@ namespace Nest
 		IEnumerable<string> StopTags { get; set; }
 	}
 
-	/// <inheritdoc cref="INoriPartOfSpeechTokenFilter"/>
+	/// <inheritdoc cref="INoriPartOfSpeechTokenFilter" />
 	public class NoriPartOfSpeechTokenFilter : TokenFilterBase, INoriPartOfSpeechTokenFilter
 	{
 		public NoriPartOfSpeechTokenFilter() : base("nori_part_of_speech") { }
@@ -19,7 +19,8 @@ namespace Nest
 		///<inheritdoc cref="INoriPartOfSpeechTokenFilter.StopTags" />
 		public IEnumerable<string> StopTags { get; set; }
 	}
-	/// <inheritdoc cref="INoriPartOfSpeechTokenFilter"/>
+
+	/// <inheritdoc cref="INoriPartOfSpeechTokenFilter" />
 	public class NoriPartOfSpeechTokenFilterDescriptor
 		: TokenFilterDescriptorBase<NoriPartOfSpeechTokenFilterDescriptor, INoriPartOfSpeechTokenFilter>, INoriPartOfSpeechTokenFilter
 	{
@@ -32,7 +33,5 @@ namespace Nest
 
 		///<inheritdoc cref="INoriPartOfSpeechTokenFilter.StopTags" />
 		public NoriPartOfSpeechTokenFilterDescriptor StopTags(params string[] stopTags) => Assign(a => a.StopTags = stopTags);
-
 	}
-
 }

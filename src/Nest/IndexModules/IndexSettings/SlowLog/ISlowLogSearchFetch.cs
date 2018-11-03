@@ -2,10 +2,10 @@ namespace Nest
 {
 	public interface ISlowLogSearchFetch
 	{
-		Time ThresholdWarn { get; set; }
-		Time ThresholdInfo { get; set; }
 		Time ThresholdDebug { get; set; }
+		Time ThresholdInfo { get; set; }
 		Time ThresholdTrace { get; set; }
+		Time ThresholdWarn { get; set; }
 	}
 
 	public class SlowLogSearchFetch : ISlowLogSearchFetch
@@ -16,25 +16,23 @@ namespace Nest
 		public Time ThresholdWarn { get; set; }
 	}
 
-	public class SlowLogSearchFetchDescriptor: DescriptorBase<SlowLogSearchFetchDescriptor, ISlowLogSearchFetch>, ISlowLogSearchFetch
+	public class SlowLogSearchFetchDescriptor : DescriptorBase<SlowLogSearchFetchDescriptor, ISlowLogSearchFetch>, ISlowLogSearchFetch
 	{
 		Time ISlowLogSearchFetch.ThresholdDebug { get; set; }
 		Time ISlowLogSearchFetch.ThresholdInfo { get; set; }
 		Time ISlowLogSearchFetch.ThresholdTrace { get; set; }
 		Time ISlowLogSearchFetch.ThresholdWarn { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public SlowLogSearchFetchDescriptor ThresholdDebug(Time time) => Assign(a => a.ThresholdDebug = time);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public SlowLogSearchFetchDescriptor ThresholdInfo(Time time) => Assign(a => a.ThresholdInfo = time);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public SlowLogSearchFetchDescriptor ThresholdTrace(Time time) => Assign(a => a.ThresholdTrace = time);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public SlowLogSearchFetchDescriptor ThresholdWarn(Time time) => Assign(a => a.ThresholdWarn = time);
-
-
 	}
 }

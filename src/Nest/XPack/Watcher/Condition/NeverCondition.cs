@@ -4,7 +4,7 @@ namespace Nest
 {
 	[JsonObject]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<NeverCondition>))]
-	public interface INeverCondition : ICondition {}
+	public interface INeverCondition : ICondition { }
 
 	public class NeverCondition : ConditionBase, INeverCondition
 	{

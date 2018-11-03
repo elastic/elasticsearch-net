@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -9,35 +7,36 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<BoostingQueryDescriptor<object>>))]
 	public interface IBoostingQuery : IQuery
 	{
-		[JsonProperty("positive")]
-		QueryContainer PositiveQuery { get; set; }
+		[JsonProperty("negative_boost")]
+		double? NegativeBoost { get; set; }
 
 		[JsonProperty("negative")]
 		QueryContainer NegativeQuery { get; set; }
 
-		[JsonProperty("negative_boost")]
-		double? NegativeBoost { get; set; }
+		[JsonProperty("positive")]
+		QueryContainer PositiveQuery { get; set; }
 	}
 
 	public class BoostingQuery : QueryBase, IBoostingQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
-		public QueryContainer PositiveQuery { get; set; }
-		public QueryContainer NegativeQuery { get; set; }
 		public double? NegativeBoost { get; set; }
+		public QueryContainer NegativeQuery { get; set; }
+		public QueryContainer PositiveQuery { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Boosting = this;
+
 		internal static bool IsConditionless(IBoostingQuery q) => q.NegativeQuery.NotWritable() && q.PositiveQuery.NotWritable();
 	}
 
 	public class BoostingQueryDescriptor<T>
 		: QueryDescriptorBase<BoostingQueryDescriptor<T>, IBoostingQuery>
-		, IBoostingQuery where T : class
+			, IBoostingQuery where T : class
 	{
 		protected override bool Conditionless => BoostingQuery.IsConditionless(this);
-		QueryContainer IBoostingQuery.PositiveQuery { get; set; }
-		QueryContainer IBoostingQuery.NegativeQuery { get; set; }
 		double? IBoostingQuery.NegativeBoost { get; set; }
+		QueryContainer IBoostingQuery.NegativeQuery { get; set; }
+		QueryContainer IBoostingQuery.PositiveQuery { get; set; }
 
 		public BoostingQueryDescriptor<T> NegativeBoost(double? boost) => Assign(a => a.NegativeBoost = boost);
 

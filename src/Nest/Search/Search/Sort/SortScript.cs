@@ -5,21 +5,20 @@ namespace Nest
 {
 	public interface IScriptSort : ISort
 	{
-		[JsonProperty("type")]
-		string Type { get; set; }
-
 		[JsonProperty("script")]
 		IScript Script { get; set; }
 
+		[JsonProperty("type")]
+		string Type { get; set; }
 	}
 
 	public class ScriptSort : SortBase, IScriptSort
 	{
-		protected override Field SortKey => "_script";
+		public string Language { get; set; }
+		public IScript Script { get; set; }
 
 		public string Type { get; set; }
-		public IScript Script { get; set; }
-		public string Language { get; set; }
+		protected override Field SortKey => "_script";
 	}
 
 	public class SortScriptDescriptor<T> : SortDescriptorBase<SortScriptDescriptor<T>, IScriptSort, T>, IScriptSort
@@ -27,14 +26,13 @@ namespace Nest
 	{
 		protected override Field SortKey => "_script";
 
-		string IScriptSort.Type { get; set; }
-
 		IScript IScriptSort.Script { get; set; }
+
+		string IScriptSort.Type { get; set; }
 
 		public virtual SortScriptDescriptor<T> Type(string type) => Assign(a => a.Type = type);
 
 		public SortScriptDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
-
 	}
 }

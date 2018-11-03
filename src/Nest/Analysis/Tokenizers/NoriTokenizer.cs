@@ -9,13 +9,15 @@ namespace Nest
 	public enum NoriDecompoundMode
 	{
 		/// <summary> Decomposes compounds and discards the original form (default). </summary>
-		[EnumMember(Value="discard")]
+		[EnumMember(Value = "discard")]
 		Discard,
+
 		/// <summary> No decomposition for compounds </summary>
-		[EnumMember(Value="none")]
+		[EnumMember(Value = "none")]
 		None,
+
 		/// <summary> Decomposes compounds and keeps the original form </summary>
-		[EnumMember(Value="mixed")]
+		[EnumMember(Value = "mixed")]
 		Mixed
 	}
 
@@ -36,28 +38,31 @@ namespace Nest
 		string UserDictionary { get; set; }
 	}
 
-	/// <inheritdoc cref="INoriTokenizer"/>
+	/// <inheritdoc cref="INoriTokenizer" />
 	public class NoriTokenizer : TokenizerBase, INoriTokenizer
-    {
-		public NoriTokenizer() => this.Type = "nori_tokenizer";
-		/// <inheritdoc cref="INoriTokenizer.DecompoundMode"/>
-	    public NoriDecompoundMode? DecompoundMode { get; set; }
-		/// <inheritdoc cref="INoriTokenizer.UserDictionary"/>
-	    public string UserDictionary { get; set; }
-    }
-	/// <inheritdoc cref="INoriTokenizer"/>
+	{
+		public NoriTokenizer() => Type = "nori_tokenizer";
+
+		/// <inheritdoc cref="INoriTokenizer.DecompoundMode" />
+		public NoriDecompoundMode? DecompoundMode { get; set; }
+
+		/// <inheritdoc cref="INoriTokenizer.UserDictionary" />
+		public string UserDictionary { get; set; }
+	}
+
+	/// <inheritdoc cref="INoriTokenizer" />
 	public class NoriTokenizerDescriptor
 		: TokenizerDescriptorBase<NoriTokenizerDescriptor, INoriTokenizer>, INoriTokenizer
 	{
 		protected override string Type => "nori_tokenizer";
 
-	    NoriDecompoundMode? INoriTokenizer.DecompoundMode { get; set; }
-	    string INoriTokenizer.UserDictionary { get; set; }
+		NoriDecompoundMode? INoriTokenizer.DecompoundMode { get; set; }
+		string INoriTokenizer.UserDictionary { get; set; }
 
-		/// <inheritdoc cref="INoriTokenizer.DecompoundMode"/>
+		/// <inheritdoc cref="INoriTokenizer.DecompoundMode" />
 		public NoriTokenizerDescriptor DecompoundMode(NoriDecompoundMode? mode) => Assign(a => a.DecompoundMode = mode);
 
-		/// <inheritdoc cref="INoriTokenizer.UserDictionary"/>
+		/// <inheritdoc cref="INoriTokenizer.UserDictionary" />
 		public NoriTokenizerDescriptor UserDictionary(string path) => Assign(a => a.UserDictionary = path);
 	}
 }

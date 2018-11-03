@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -13,39 +13,45 @@ namespace Nest
 		/// <param name="selector">A descriptor to further describe the root operation</param>
 		IRootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request);
 
-		/// <inheritdoc/>
-		Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IRootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null) =>
-			this.RootNodeInfo(selector.InvokeOrDefault(new RootNodeInfoDescriptor()));
+			RootNodeInfo(selector.InvokeOrDefault(new RootNodeInfoDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request) =>
-			this.Dispatcher.Dispatch<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse>(
+			Dispatcher.Dispatch<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.InfoDispatch<RootNodeInfoResponse>(p)
+				(p, d) => LowLevelDispatch.InfoDispatch<RootNodeInfoResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.RootNodeInfoAsync(selector.InvokeOrDefault(new RootNodeInfoDescriptor()), cancellationToken);
+		/// <inheritdoc />
+		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			RootNodeInfoAsync(selector.InvokeOrDefault(new RootNodeInfoDescriptor()), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse, IRootNodeInfoResponse>(
+		/// <inheritdoc />
+		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse, IRootNodeInfoResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.InfoDispatchAsync<RootNodeInfoResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.InfoDispatchAsync<RootNodeInfoResponse>(p, c)
 			);
 	}
 }

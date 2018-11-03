@@ -14,18 +14,18 @@ namespace Nest
 
 	public class ReverseNestedAggregation : BucketAggregationBase, IReverseNestedAggregation
 	{
-		[JsonProperty("path")]
-		public Field Path { get; set; }
-
 		internal ReverseNestedAggregation() { }
 
 		public ReverseNestedAggregation(string name) : base(name) { }
+
+		[JsonProperty("path")]
+		public Field Path { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ReverseNested = this;
 	}
 
 	public class ReverseNestedAggregationDescriptor<T>
-		: BucketAggregationDescriptorBase<ReverseNestedAggregationDescriptor<T>,IReverseNestedAggregation, T>
+		: BucketAggregationDescriptorBase<ReverseNestedAggregationDescriptor<T>, IReverseNestedAggregation, T>
 			, IReverseNestedAggregation
 		where T : class
 	{

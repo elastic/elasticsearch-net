@@ -1,5 +1,4 @@
 using System;
-using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -8,8 +7,8 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<SamplerAggregation>))]
 	public interface ISamplerAggregation : IBucketAggregation
 	{
-		[JsonProperty("shard_size")]
-		int? ShardSize { get; set; }
+		[JsonProperty("execution_hint")]
+		SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 
 		[JsonProperty("max_docs_per_value")]
 		int? MaxDocsPerValue { get; set; }
@@ -17,20 +16,20 @@ namespace Nest
 		[JsonProperty("script")]
 		IScript Script { get; set; }
 
-		[JsonProperty("execution_hint")]
-		SamplerAggregationExecutionHint? ExecutionHint { get; set; }
+		[JsonProperty("shard_size")]
+		int? ShardSize { get; set; }
 	}
 
 	public class SamplerAggregation : BucketAggregationBase, ISamplerAggregation
 	{
+		internal SamplerAggregation() { }
+
+		public SamplerAggregation(string name) : base(name) { }
+
 		public SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 		public int? MaxDocsPerValue { get; set; }
 		public IScript Script { get; set; }
 		public int? ShardSize { get; set; }
-
-		internal SamplerAggregation() { }
-
-		public SamplerAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Sampler = this;
 	}

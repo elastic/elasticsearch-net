@@ -10,12 +10,9 @@ namespace Nest
 
 	public class SingleBucketsPath : IBucketsPath
 	{
-		public string BucketsPath { get; }
+		public SingleBucketsPath(string bucketsPath) => BucketsPath = bucketsPath;
 
-		public SingleBucketsPath(string bucketsPath)
-		{
-			this.BucketsPath = bucketsPath;
-		}
+		public string BucketsPath { get; }
 
 		public static implicit operator SingleBucketsPath(string bucketsPath) => new SingleBucketsPath(bucketsPath);
 	}
@@ -24,13 +21,14 @@ namespace Nest
 
 	public class MultiBucketsPath : IsADictionaryBase<string, string>, IMultiBucketsPath
 	{
-		public MultiBucketsPath() {}
-		public MultiBucketsPath(IDictionary<string, string> container) : base(container) { }
-		public MultiBucketsPath(Dictionary<string, string> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+		public MultiBucketsPath() { }
 
-		public void Add(string name, string bucketsPath) => this.BackingDictionary.Add(name, bucketsPath);
+		public MultiBucketsPath(IDictionary<string, string> container) : base(container) { }
+
+		public MultiBucketsPath(Dictionary<string, string> container)
+			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value)) { }
+
+		public void Add(string name, string bucketsPath) => BackingDictionary.Add(name, bucketsPath);
 
 		public static implicit operator MultiBucketsPath(Dictionary<string, string> bucketsPath) => new MultiBucketsPath(bucketsPath);
 	}
@@ -83,7 +81,7 @@ namespace Nest
 			if (multi != null)
 			{
 				writer.WriteStartObject();
-				foreach(var kv in multi)
+				foreach (var kv in multi)
 				{
 					writer.WritePropertyName(kv.Key);
 					writer.WriteValue(kv.Value);

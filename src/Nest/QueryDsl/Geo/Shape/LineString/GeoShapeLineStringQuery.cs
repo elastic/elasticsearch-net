@@ -13,7 +13,6 @@ namespace Nest
 	public class GeoShapeLineStringQuery : GeoShapeQueryBase, IGeoShapeLineStringQuery
 	{
 		private ILineStringGeoShape _shape;
-		protected override bool Conditionless => IsConditionless(this);
 
 		public ILineStringGeoShape Shape
 		{
@@ -31,13 +30,17 @@ namespace Nest
 			}
 		}
 
+		protected override bool Conditionless => IsConditionless(this);
+
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
-		internal static bool IsConditionless(IGeoShapeLineStringQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
+
+		internal static bool IsConditionless(IGeoShapeLineStringQuery q) =>
+			q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
 	public class GeoShapeLineStringQueryDescriptor<T>
 		: GeoShapeQueryDescriptorBase<GeoShapeLineStringQueryDescriptor<T>, IGeoShapeLineStringQuery, T>
-		, IGeoShapeLineStringQuery where T : class
+			, IGeoShapeLineStringQuery where T : class
 	{
 		protected override bool Conditionless => GeoShapeLineStringQuery.IsConditionless(this);
 		ILineStringGeoShape IGeoShapeLineStringQuery.Shape { get; set; }

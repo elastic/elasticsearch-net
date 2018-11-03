@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
@@ -14,30 +13,6 @@ namespace Nest
 	{
 		private readonly object _comparisonValue;
 		private readonly Type _type;
-
-		public string Name { get; }
-
-		public Expression Expression { get; }
-
-		public PropertyInfo Property { get; }
-
-		public double? Boost { get; set; }
-
-		public bool CachableExpression { get; }
-
-		internal string DebugDisplay =>
-			$"{Expression?.ToString() ?? PropertyDebug ?? Name}{(Boost.HasValue ? "^" + Boost.Value: "")}{(_type == null ? "" : " typeof: " + _type.Name)}";
-
-		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
-
-		public Fields And(Field field) => new Fields(new [] { this, field });
-
-		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null) where T : class =>
-			new Fields(new [] { this, new Field(field, boost) });
-
-		public Fields And(string field, double? boost = null) => new Fields(new [] { this, new Field(field, boost) });
-
-		public Fields And(PropertyInfo property, double? boost = null) => new Fields(new [] { this, new Field(property, boost) });
 
 		public Field(string name, double? boost = null)
 		{
@@ -65,13 +40,51 @@ namespace Nest
 			_type = property.DeclaringType;
 		}
 
+		public double? Boost { get; set; }
+
+		public bool CachableExpression { get; }
+
+		public Expression Expression { get; }
+
+		public string Name { get; }
+
+		public PropertyInfo Property { get; }
+
+		internal string DebugDisplay =>
+			$"{Expression?.ToString() ?? PropertyDebug ?? Name}{(Boost.HasValue ? "^" + Boost.Value : "")}{(_type == null ? "" : " typeof: " + _type.Name)}";
+
+		private string PropertyDebug => Property == null ? null : $"PropertyInfo: {Property.Name}";
+
+		public bool Equals(Field other) => _type != null
+			? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
+			: other != null && _comparisonValue.Equals(other._comparisonValue);
+
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
+		{
+			if (!(settings is IConnectionSettingsValues nestSettings))
+				throw new ArgumentNullException(nameof(settings),
+					$"Can not resolve {nameof(Field)} if no {nameof(IConnectionSettingsValues)} is provided");
+
+			return nestSettings.Inferrer.Field(this);
+		}
+
+		public Fields And(Field field) => new Fields(new[] { this, field });
+
+		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null) where T : class =>
+			new Fields(new[] { this, new Field(field, boost) });
+
+		public Fields And(string field, double? boost = null) => new Fields(new[] { this, new Field(field, boost) });
+
+		public Fields And(PropertyInfo property, double? boost = null) => new Fields(new[] { this, new Field(property, boost) });
+
 		private static string ParseFieldName(string name, out double? boost)
 		{
 			boost = null;
 			if (name == null) return null;
 
-			var parts = name.Split(new [] { '^' }, StringSplitOptions.RemoveEmptyEntries);
+			var parts = name.Split(new[] { '^' }, StringSplitOptions.RemoveEmptyEntries);
 			if (parts.Length <= 1) return name;
+
 			name = parts[0];
 			boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
 			return name;
@@ -93,35 +106,19 @@ namespace Nest
 			}
 		}
 
-		public bool Equals(Field other)
-		{
-			return _type != null
-				? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
-				: other != null && _comparisonValue.Equals(other._comparisonValue);
-		}
-
 		public override bool Equals(object obj)
 		{
 			switch (obj)
 			{
-				case string s: return this.Equals(s);
-				case PropertyInfo p: return this.Equals(p);
-				case Field f: return this.Equals(f);
+				case string s: return Equals(s);
+				case PropertyInfo p: return Equals(p);
+				case Field f: return Equals(f);
 				default: return false;
 			}
 		}
 
 		public static bool operator ==(Field x, Field y) => Equals(x, y);
 
-		public static bool operator !=(Field x, Field y)=> !Equals(x, y);
-
-		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
-		{
-			if (!(settings is IConnectionSettingsValues nestSettings))
-				throw new ArgumentNullException(nameof(settings), $"Can not resolve {nameof(Field)} if no {nameof(IConnectionSettingsValues)} is provided");
-
-			return nestSettings.Inferrer.Field(this);
-		}
-
+		public static bool operator !=(Field x, Field y) => !Equals(x, y);
 	}
 }

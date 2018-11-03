@@ -6,33 +6,34 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<MovingFunctionAggregation>))]
 	public interface IMovingFunctionAggregation : IPipelineAggregation
 	{
-		[JsonProperty("window")]
-		int? Window { get; set; }
-
 		[JsonProperty("script")]
 		string Script { get; set; }
+
+		[JsonProperty("window")]
+		int? Window { get; set; }
 	}
 
 	public class MovingFunctionAggregation
 		: PipelineAggregationBase, IMovingFunctionAggregation
 	{
-		internal MovingFunctionAggregation () { }
+		internal MovingFunctionAggregation() { }
 
 		public MovingFunctionAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
 
-		internal override void WrapInContainer(AggregationContainer c) => c.MovingFunction = this;
+		public string Script { get; set; }
 
 		public int? Window { get; set; }
-		public string Script { get; set; }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.MovingFunction = this;
 	}
 
 	public class MovingFunctionAggregationDescriptor
 		: PipelineAggregationDescriptorBase<MovingFunctionAggregationDescriptor, IMovingFunctionAggregation, SingleBucketsPath>
-		, IMovingFunctionAggregation
+			, IMovingFunctionAggregation
 	{
-		int? IMovingFunctionAggregation.Window { get; set; }
 		string IMovingFunctionAggregation.Script { get; set; }
+		int? IMovingFunctionAggregation.Window { get; set; }
 
 		public MovingFunctionAggregationDescriptor Window(int? windowSize) => Assign(a => a.Window = windowSize);
 

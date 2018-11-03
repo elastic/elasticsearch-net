@@ -1,9 +1,6 @@
 using System;
-using System.IO;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using static Elasticsearch.Net.SerializationFormatting;
 
 namespace Nest
@@ -12,9 +9,10 @@ namespace Nest
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
-		public override bool CanConvert(Type objectType) => true;
 
 		public virtual SerializationFormatting? ForceFormatting { get; } = null;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{

@@ -8,21 +8,27 @@ namespace Nest
 	public enum DateInterval
 	{
 		[EnumMember(Value = "second")]
-		Second, 
+		Second,
+
 		[EnumMember(Value = "minute")]
-		Minute, 
+		Minute,
+
 		[EnumMember(Value = "hour")]
-		Hour, 
+		Hour,
+
 		[EnumMember(Value = "day")]
 		Day,
+
 		[EnumMember(Value = "week")]
-		Week, 
+		Week,
+
 		[EnumMember(Value = "month")]
-		Month, 
+		Month,
+
 		[EnumMember(Value = "quarter")]
-		Quarter, 
+		Quarter,
+
 		[EnumMember(Value = "year")]
 		Year
 	}
-
 }

@@ -4,9 +4,7 @@ namespace Nest
 {
 	public class FluentDictionary<TKey, TValue> : Dictionary<TKey, TValue>
 	{
-		public FluentDictionary()
-		{
-		}
+		public FluentDictionary() { }
 
 		public FluentDictionary(IDictionary<TKey, TValue> copy)
 		{

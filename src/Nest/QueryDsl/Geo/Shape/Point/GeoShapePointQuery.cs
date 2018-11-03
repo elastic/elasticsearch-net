@@ -12,7 +12,6 @@ namespace Nest
 	public class GeoShapePointQuery : GeoShapeQueryBase, IGeoShapePointQuery
 	{
 		private IPointGeoShape _shape;
-		protected override bool Conditionless => IsConditionless(this);
 
 		public IPointGeoShape Shape
 		{
@@ -30,13 +29,16 @@ namespace Nest
 			}
 		}
 
+		protected override bool Conditionless => IsConditionless(this);
+
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
+
 		internal static bool IsConditionless(IGeoShapePointQuery q) => q.Field.IsConditionless() || q.Shape?.Coordinates == null;
 	}
 
 	public class GeoShapePointQueryDescriptor<T>
 		: GeoShapeQueryDescriptorBase<GeoShapePointQueryDescriptor<T>, IGeoShapePointQuery, T>
-		, IGeoShapePointQuery where T : class
+			, IGeoShapePointQuery where T : class
 	{
 		protected override bool Conditionless => GeoShapePointQuery.IsConditionless(this);
 		IPointGeoShape IGeoShapePointQuery.Shape { get; set; }

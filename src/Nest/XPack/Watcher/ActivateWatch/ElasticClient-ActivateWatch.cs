@@ -12,39 +12,47 @@ namespace Nest
 		/// </summary>
 		IActivateWatchResponse ActivateWatch(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IActivateWatchResponse ActivateWatch(IActivateWatchRequest request);
 
-		/// <inheritdoc/>
-		Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
-		Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IActivateWatchResponse ActivateWatch(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null) =>
-			this.ActivateWatch(selector.InvokeOrDefault(new ActivateWatchDescriptor(id)));
+			ActivateWatch(selector.InvokeOrDefault(new ActivateWatchDescriptor(id)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IActivateWatchResponse ActivateWatch(IActivateWatchRequest request) =>
-			this.Dispatcher.Dispatch<IActivateWatchRequest, ActivateWatchRequestParameters, ActivateWatchResponse>(
+			Dispatcher.Dispatch<IActivateWatchRequest, ActivateWatchRequestParameters, ActivateWatchResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.XpackWatcherActivateWatchDispatch<ActivateWatchResponse>(p)
+				(p, d) => LowLevelDispatch.XpackWatcherActivateWatchDispatch<ActivateWatchResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.ActivateWatchAsync(selector.InvokeOrDefault(new ActivateWatchDescriptor(id)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IActivateWatchResponse> ActivateWatchAsync(Id id, Func<ActivateWatchDescriptor, IActivateWatchRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			ActivateWatchAsync(selector.InvokeOrDefault(new ActivateWatchDescriptor(id)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IActivateWatchRequest, ActivateWatchRequestParameters, ActivateWatchResponse, IActivateWatchResponse>(
+		/// <inheritdoc />
+		public Task<IActivateWatchResponse> ActivateWatchAsync(IActivateWatchRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IActivateWatchRequest, ActivateWatchRequestParameters, ActivateWatchResponse, IActivateWatchResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.XpackWatcherActivateWatchDispatchAsync<ActivateWatchResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.XpackWatcherActivateWatchDispatchAsync<ActivateWatchResponse>(p, c)
 			);
 	}
 }

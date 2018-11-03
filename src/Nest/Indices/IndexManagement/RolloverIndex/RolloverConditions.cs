@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -34,7 +29,7 @@ namespace Nest
 		/// Valid in Elasticsearch 6.1.0+
 		/// </remarks>
 		[JsonProperty("max_size")]
-		string MaxSize{ get; set; }
+		string MaxSize { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -50,7 +45,7 @@ namespace Nest
 		public string MaxSize { get; set; }
 	}
 
-	/// <inheritdoc cref="IRolloverConditions"/>
+	/// <inheritdoc cref="IRolloverConditions" />
 	public class RolloverConditionsDescriptor
 		: DescriptorBase<RolloverConditionsDescriptor, IRolloverConditions>, IRolloverConditions
 	{
@@ -58,13 +53,13 @@ namespace Nest
 		long? IRolloverConditions.MaxDocs { get; set; }
 		string IRolloverConditions.MaxSize { get; set; }
 
-		/// <inheritdoc cref="IRolloverConditions.MaxAge"/>
+		/// <inheritdoc cref="IRolloverConditions.MaxAge" />
 		public RolloverConditionsDescriptor MaxAge(Time maxAge) => Assign(a => a.MaxAge = maxAge);
 
-		/// <inheritdoc cref="IRolloverConditions.MaxDocs"/>
+		/// <inheritdoc cref="IRolloverConditions.MaxDocs" />
 		public RolloverConditionsDescriptor MaxDocs(long? maxDocs) => Assign(a => a.MaxDocs = maxDocs);
 
-		/// <inheritdoc cref="IRolloverConditions.MaxSize"/>
+		/// <inheritdoc cref="IRolloverConditions.MaxSize" />
 		public RolloverConditionsDescriptor MaxSize(string maxSize) => Assign(a => a.MaxSize = maxSize);
 	}
 }

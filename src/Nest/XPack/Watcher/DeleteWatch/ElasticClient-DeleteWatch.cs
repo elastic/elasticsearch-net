@@ -16,39 +16,45 @@ namespace Nest
 		/// </remarks>
 		IDeleteWatchResponse DeleteWatch(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IDeleteWatchResponse DeleteWatch(IDeleteWatchRequest request);
 
-		/// <inheritdoc/>
-		Task<IDeleteWatchResponse> DeleteWatchAsync(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IDeleteWatchResponse> DeleteWatchAsync(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IDeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IDeleteWatchResponse DeleteWatch(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null) =>
-			this.DeleteWatch(selector.InvokeOrDefault(new DeleteWatchDescriptor(watchId)));
+			DeleteWatch(selector.InvokeOrDefault(new DeleteWatchDescriptor(watchId)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IDeleteWatchResponse DeleteWatch(IDeleteWatchRequest request) =>
-			this.Dispatcher.Dispatch<IDeleteWatchRequest, DeleteWatchRequestParameters, DeleteWatchResponse>(
+			Dispatcher.Dispatch<IDeleteWatchRequest, DeleteWatchRequestParameters, DeleteWatchResponse>(
 				request,
-				(p,d) => this.LowLevelDispatch.XpackWatcherDeleteWatchDispatch<DeleteWatchResponse>(p)
+				(p, d) => LowLevelDispatch.XpackWatcherDeleteWatchDispatch<DeleteWatchResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IDeleteWatchResponse> DeleteWatchAsync(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.DeleteWatchAsync(selector.InvokeOrDefault(new DeleteWatchDescriptor(watchId)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IDeleteWatchResponse> DeleteWatchAsync(Id watchId, Func<DeleteWatchDescriptor, IDeleteWatchRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			DeleteWatchAsync(selector.InvokeOrDefault(new DeleteWatchDescriptor(watchId)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IDeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IDeleteWatchRequest, DeleteWatchRequestParameters, DeleteWatchResponse, IDeleteWatchResponse>(
+		/// <inheritdoc />
+		public Task<IDeleteWatchResponse> DeleteWatchAsync(IDeleteWatchRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IDeleteWatchRequest, DeleteWatchRequestParameters, DeleteWatchResponse, IDeleteWatchResponse>(
 				request,
 				cancellationToken,
-				(p,d,c) => this.LowLevelDispatch.XpackWatcherDeleteWatchDispatchAsync<DeleteWatchResponse>(p,c)
+				(p, d, c) => LowLevelDispatch.XpackWatcherDeleteWatchDispatchAsync<DeleteWatchResponse>(p, c)
 			);
 	}
 }

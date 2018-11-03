@@ -38,6 +38,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartArray) return null;
+
 			var indices = new List<IndexName>();
 			while (reader.TokenType != JsonToken.EndArray)
 			{
@@ -47,6 +48,5 @@ namespace Nest
 			}
 			return new Indices(indices);
 		}
-
 	}
 }

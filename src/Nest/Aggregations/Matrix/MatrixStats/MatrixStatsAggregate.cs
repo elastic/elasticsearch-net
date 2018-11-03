@@ -1,40 +1,34 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-
 	[JsonObject]
 	public class MatrixStatsField
 	{
-		[JsonProperty("name")]
-		public string Name { get; set; }
+		[JsonProperty("correlation")]
+		public Dictionary<string, double> Correlation { get; set; }
 
 		[JsonProperty("count")]
 		public int Count { get; set; }
 
-		[JsonProperty("mean")]
-		public double Mean { get; set; }
-
-		[JsonProperty("variance")]
-		public double Variance { get; set; }
-
-		[JsonProperty("skewness")]
-		public double Skewness { get; set; }
+		[JsonProperty("covariance")]
+		public Dictionary<string, double> Covariance { get; set; }
 
 		[JsonProperty("kurtosis")]
 		public double Kurtosis { get; set; }
 
-		[JsonProperty("covariance")]
-		public Dictionary<string, double> Covariance { get; set; }
+		[JsonProperty("mean")]
+		public double Mean { get; set; }
 
-		[JsonProperty("correlation")]
-		public Dictionary<string, double> Correlation { get; set; }
+		[JsonProperty("name")]
+		public string Name { get; set; }
 
+		[JsonProperty("skewness")]
+		public double Skewness { get; set; }
+
+		[JsonProperty("variance")]
+		public double Variance { get; set; }
 	}
 
 	[JsonObject]

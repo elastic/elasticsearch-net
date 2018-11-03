@@ -14,33 +14,34 @@ namespace Nest
 
 	public partial class GraphExploreRequest
 	{
-		public QueryContainer Query { get; set; }
-		public IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
 		public IHop Connections { get; set; }
 		public IGraphExploreControls Controls { get; set; }
+		public QueryContainer Query { get; set; }
+		public IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
 	}
 
 	public partial class GraphExploreRequest<T> : IGraphExploreRequest<T>
 		where T : class
 	{
-		public GraphExploreRequest() : this(typeof(T), typeof(T)){}
+		public GraphExploreRequest() : this(typeof(T), typeof(T)) { }
+
+		public IHop Connections { get; set; }
+		public IGraphExploreControls Controls { get; set; }
 
 		public QueryContainer Query { get; set; }
 		public IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
-		public IHop Connections { get; set; }
-		public IGraphExploreControls Controls { get; set; }
 	}
 
 	[DescriptorFor("XpackGraphExplore")]
 	public partial class GraphExploreDescriptor<T> : IGraphExploreRequest<T>
 		where T : class
 	{
-		QueryContainer IHop.Query { get; set; }
-		IEnumerable<IGraphVertexDefinition> IHop.Vertices { get; set; }
+		public GraphExploreDescriptor() : base(r => r.Optional("index", (Indices)typeof(T)).Optional("type", (Types)typeof(T))) { }
+
 		IHop IHop.Connections { get; set; }
 		IGraphExploreControls IGraphExploreRequest.Controls { get; set; }
-
-		public GraphExploreDescriptor() : base(r=> r.Optional("index", (Indices)typeof(T)).Optional("type", (Types)typeof(T))){ }
+		QueryContainer IHop.Query { get; set; }
+		IEnumerable<IGraphVertexDefinition> IHop.Vertices { get; set; }
 
 		public GraphExploreDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
@@ -53,6 +54,5 @@ namespace Nest
 
 		public GraphExploreDescriptor<T> Controls(Func<GraphExploreControlsDescriptor<T>, IGraphExploreControls> selector) =>
 			Assign(a => a.Controls = selector?.Invoke(new GraphExploreControlsDescriptor<T>()));
-
 	}
 }

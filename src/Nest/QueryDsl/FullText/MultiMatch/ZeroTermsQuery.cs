@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "all")]
 		All,
+
 		[EnumMember(Value = "none")]
 		None
 	}

@@ -6,11 +6,12 @@ namespace Nest
 	{
 		public RangeBucket(IReadOnlyDictionary<string, IAggregate> dict) : base(dict) { }
 
-		public string Key { get; set; }
+		public long DocCount { get; set; }
 		public double? From { get; set; }
 		public string FromAsString { get; set; }
+
+		public string Key { get; set; }
 		public double? To { get; set; }
 		public string ToAsString { get; set; }
-		public long DocCount { get; set; }
 	}
 }

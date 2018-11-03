@@ -21,18 +21,18 @@ namespace Nest
 	/// <inheritdoc />
 	public class ScriptedSimilarity : IScriptedSimilarity
 	{
-		public string Type => "scripted";
-
 		/// <inheritdoc />
 		public IScript Script { get; set; }
+
+		public string Type => "scripted";
 	}
 
 	/// <inheritdoc cref="IScriptedSimilarity" />
 	public class ScriptedSimilarityDescriptor
 		: DescriptorBase<ScriptedSimilarityDescriptor, IScriptedSimilarity>, IScriptedSimilarity
 	{
-		string ISimilarity.Type => "scripted";
 		IScript IScriptedSimilarity.Script { get; set; }
+		string ISimilarity.Type => "scripted";
 
 		/// <inheritdoc cref="IScriptedSimilarity.Script" />
 		public ScriptedSimilarityDescriptor Script(Func<ScriptDescriptor, IScript> selector) =>

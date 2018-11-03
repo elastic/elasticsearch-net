@@ -14,19 +14,19 @@ namespace Nest
 	public class BucketSelectorAggregation
 		: PipelineAggregationBase, IBucketSelectorAggregation
 	{
-		public IScript Script { get; set; }
-
-		internal BucketSelectorAggregation () { }
+		internal BucketSelectorAggregation() { }
 
 		public BucketSelectorAggregation(string name, MultiBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
+
+		public IScript Script { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.BucketSelector = this;
 	}
 
 	public class BucketSelectorAggregationDescriptor
 		: PipelineAggregationDescriptorBase<BucketSelectorAggregationDescriptor, IBucketSelectorAggregation, MultiBucketsPath>
-		, IBucketSelectorAggregation
+			, IBucketSelectorAggregation
 	{
 		IScript IBucketSelectorAggregation.Script { get; set; }
 

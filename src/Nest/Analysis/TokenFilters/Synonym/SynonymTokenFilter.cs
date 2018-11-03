@@ -9,27 +9,15 @@ namespace Nest
 	/// </summary>
 	public interface ISynonymTokenFilter : ITokenFilter
 	{
-		/// <summary>
-		///  a path a synonyms file relative to the node's `config` location.
-		/// </summary>
-		[JsonProperty("synonyms_path")]
-		string SynonymsPath { get; set; }
+		[JsonProperty("expand")]
+		bool? Expand { get; set; }
 
 		[JsonProperty("format")]
 		SynonymFormat? Format { get; set; }
 
-		[JsonProperty("synonyms")]
-		IEnumerable<string> Synonyms { get; set; }
-
 		[JsonProperty("ignore_case")]
 		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
 		bool? IgnoreCase { get; set; }
-
-		[JsonProperty("expand")]
-		bool? Expand { get; set; }
-
-		[JsonProperty("tokenizer")]
-		string Tokenizer { get; set; }
 
 		/// <summary>
 		/// If `true` ignores exceptions while parsing the synonym configuration. It is important
@@ -37,74 +25,85 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("lenient")]
 		bool? Lenient { get; set; }
+
+		[JsonProperty("synonyms")]
+		IEnumerable<string> Synonyms { get; set; }
+
+		/// <summary>
+		///  a path a synonyms file relative to the node's `config` location.
+		/// </summary>
+		[JsonProperty("synonyms_path")]
+		string SynonymsPath { get; set; }
+
+		[JsonProperty("tokenizer")]
+		string Tokenizer { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class SynonymTokenFilter : TokenFilterBase, ISynonymTokenFilter
 	{
 		public SynonymTokenFilter() : base("synonym") { }
 
-		/// <inheritdoc/>
-		public string SynonymsPath { get; set; }
+		/// <inheritdoc />
+		public bool? Expand { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public SynonymFormat? Format { get; set; }
 
-		/// <inheritdoc/>
-		public IEnumerable<string> Synonyms { get; set; }
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
 		public bool? IgnoreCase { get; set; }
 
-		/// <inheritdoc/>
-		public bool? Expand { get; set; }
-
-		/// <inheritdoc cref="ISynonymTokenFilter.Lenient"/>
+		/// <inheritdoc cref="ISynonymTokenFilter.Lenient" />
 		public bool? Lenient { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
+		public IEnumerable<string> Synonyms { get; set; }
+
+		/// <inheritdoc />
+		public string SynonymsPath { get; set; }
+
+		/// <inheritdoc />
 		public string Tokenizer { get; set; }
 	}
-	///<inheritdoc/>
+
+	/// <inheritdoc />
 	public class SynonymTokenFilterDescriptor
 		: TokenFilterDescriptorBase<SynonymTokenFilterDescriptor, ISynonymTokenFilter>, ISynonymTokenFilter
 	{
 		protected override string Type => "synonym";
+		bool? ISynonymTokenFilter.Expand { get; set; }
+		SynonymFormat? ISynonymTokenFilter.Format { get; set; }
 
 		bool? ISynonymTokenFilter.IgnoreCase { get; set; }
-		bool? ISynonymTokenFilter.Expand { get; set; }
 		bool? ISynonymTokenFilter.Lenient { get; set; }
-		string ISynonymTokenFilter.Tokenizer { get; set; }
-		string ISynonymTokenFilter.SynonymsPath { get; set; }
-		SynonymFormat? ISynonymTokenFilter.Format { get; set; }
 		IEnumerable<string> ISynonymTokenFilter.Synonyms { get; set; }
+		string ISynonymTokenFilter.SynonymsPath { get; set; }
+		string ISynonymTokenFilter.Tokenizer { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		[Obsolete("Will be removed in Elasticsearch 7.x, if you need to ignore case add a lowercase filter before this synonym filter")]
 		public SynonymTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public SynonymTokenFilterDescriptor Expand(bool? expand = true) => Assign(a => a.Expand = expand);
 
-		/// <inheritdoc cref="ISynonymTokenFilter.Lenient"/>
+		/// <inheritdoc cref="ISynonymTokenFilter.Lenient" />
 		public SynonymTokenFilterDescriptor Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public SynonymTokenFilterDescriptor Tokenizer(string tokenizer) => Assign(a => a.Tokenizer = tokenizer);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public SynonymTokenFilterDescriptor SynonymsPath(string path) => Assign(a => a.SynonymsPath = path);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public SynonymTokenFilterDescriptor Format(SynonymFormat? format) => Assign(a => a.Format = format);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public SynonymTokenFilterDescriptor Synonyms(IEnumerable<string> synonyms) => Assign(a => a.Synonyms = synonyms);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public SynonymTokenFilterDescriptor Synonyms(params string[] synonyms) => Assign(a => a.Synonyms = synonyms);
-
 	}
-
 }

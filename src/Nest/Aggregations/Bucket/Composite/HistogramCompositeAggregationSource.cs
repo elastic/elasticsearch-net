@@ -12,47 +12,48 @@ namespace Nest
 	public interface IHistogramCompositeAggregationSource : ICompositeAggregationSource
 	{
 		/// <summary>
-		/// A script to create the values for the composite buckets
-		/// </summary>
-		[JsonProperty("script")]
-		IScript Script { get; set; }
-
-		/// <summary>
 		/// The interval to use when bucketing documents
 		/// </summary>
 		[JsonProperty("interval")]
 		double? Interval { get; set; }
+
+		/// <summary>
+		/// A script to create the values for the composite buckets
+		/// </summary>
+		[JsonProperty("script")]
+		IScript Script { get; set; }
 	}
 
-	/// <inheritdoc cref="IHistogramCompositeAggregationSource"/>
+	/// <inheritdoc cref="IHistogramCompositeAggregationSource" />
 	public class HistogramCompositeAggregationSource : CompositeAggregationSourceBase, IHistogramCompositeAggregationSource
 	{
-		public HistogramCompositeAggregationSource(string name) : base(name) {}
-
-		/// <inheritdoc />
-		public IScript Script { get; set; }
+		public HistogramCompositeAggregationSource(string name) : base(name) { }
 
 		/// <inheritdoc />
 		public double? Interval { get; set; }
 
 		/// <inheritdoc />
+		public IScript Script { get; set; }
+
+		/// <inheritdoc />
 		protected override string SourceType => "histogram";
 	}
 
-	/// <inheritdoc cref="IHistogramCompositeAggregationSource"/>
+	/// <inheritdoc cref="IHistogramCompositeAggregationSource" />
 	public class HistogramCompositeAggregationSourceDescriptor<T>
-		: CompositeAggregationSourceDescriptorBase<HistogramCompositeAggregationSourceDescriptor<T>, IHistogramCompositeAggregationSource, T>, IHistogramCompositeAggregationSource
+		: CompositeAggregationSourceDescriptorBase<HistogramCompositeAggregationSourceDescriptor<T>, IHistogramCompositeAggregationSource, T>,
+			IHistogramCompositeAggregationSource
 	{
+		public HistogramCompositeAggregationSourceDescriptor(string name) : base(name, "histogram") { }
+
 		double? IHistogramCompositeAggregationSource.Interval { get; set; }
 		IScript IHistogramCompositeAggregationSource.Script { get; set; }
 
-		public HistogramCompositeAggregationSourceDescriptor(string name) : base(name, "histogram") {}
-
-		/// <inheritdoc cref="IHistogramCompositeAggregationSource.Interval"/>
+		/// <inheritdoc cref="IHistogramCompositeAggregationSource.Interval" />
 		public HistogramCompositeAggregationSourceDescriptor<T> Interval(double? interval) =>
 			Assign(a => a.Interval = interval);
 
-		/// <inheritdoc cref="IHistogramCompositeAggregationSource.Script"/>
+		/// <inheritdoc cref="IHistogramCompositeAggregationSource.Script" />
 		public HistogramCompositeAggregationSourceDescriptor<T> Script(Func<ScriptDescriptor, IScript> selector) =>
 			Assign(a => a.Script = selector?.Invoke(new ScriptDescriptor()));
 	}

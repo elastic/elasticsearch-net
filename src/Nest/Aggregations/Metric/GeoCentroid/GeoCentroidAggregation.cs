@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -23,7 +18,5 @@ namespace Nest
 	public class GeoCentroidAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<GeoCentroidAggregationDescriptor<T>, IGeoCentroidAggregation, T>
 			, IGeoCentroidAggregation
-		where T : class
-	{
-	}
+		where T : class { }
 }
