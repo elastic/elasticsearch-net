@@ -22,17 +22,20 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 			if (!string.IsNullOrEmpty(licenseFilePath) && File.Exists(licenseFilePath))
 			{
 				var licenseContents = File.ReadAllText(licenseFilePath);
-				this.XPackLicenseJson = licenseContents;
+				XPackLicenseJson = licenseContents;
 			}
-			this.AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationInElasticsearchYaml());
-			this.ShowElasticsearchOutputAfterStarted = true; //this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
+			AdditionalBeforeNodeStartedTasks.Add(new EnsureWatcherActionConfigurationInElasticsearchYaml());
+			ShowElasticsearchOutputAfterStarted = true; //this.TestConfiguration.ShowElasticsearchOutputAfterStarted;
 		}
 	}
 
 	public class XPackCluster : XunitClusterBase<XPackClusterConfiguration>, INestTestCluster
 	{
 		public XPackCluster() : this(new XPackClusterConfiguration()) { }
+
 		public XPackCluster(XPackClusterConfiguration configuration) : base(configuration) { }
+
+		public virtual IElasticClient Client => this.GetOrAddClient(s => Authenticate(ConnectionSettings(s.ApplyDomainSettings())));
 
 		protected virtual ConnectionSettings Authenticate(ConnectionSettings s) => s
 			.BasicAuthentication(ClusterAuthentication.Admin.Username, ClusterAuthentication.Admin.Password);
@@ -40,8 +43,6 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings s) => s
 			.ServerCertificateValidationCallback(CertificateValidations.AllowAll);
 
-		public virtual IElasticClient Client => this.GetOrAddClient(s=> this.Authenticate(this.ConnectionSettings(s.ApplyDomainSettings())));
-
-		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
+		protected override void SeedCluster() => new DefaultSeeder(Client).SeedNode();
 	}
 }

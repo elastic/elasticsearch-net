@@ -25,10 +25,7 @@ namespace Tests.Core.Client.Serializers
 			yield return new SourceOnlyUsingBuiltInConverter();
 		}
 
-		protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver)
-		{
+		protected override void ModifyContractResolver(ConnectionSettingsAwareContractResolver resolver) =>
 			resolver.NamingStrategy = new CamelCaseNamingStrategy();
-		}
-
 	}
 }
