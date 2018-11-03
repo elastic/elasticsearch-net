@@ -7,24 +7,23 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SlackDynamicAttachment>))]
 	public interface ISlackDynamicAttachment
 	{
-		[JsonProperty("list_path")]
-		string ListPath { get; set; }
-
 		[JsonProperty("attachment_template")]
 		ISlackAttachment AttachmentTemplate { get; set; }
+
+		[JsonProperty("list_path")]
+		string ListPath { get; set; }
 	}
 
 	public class SlackDynamicAttachment : ISlackDynamicAttachment
 	{
-		public string ListPath { get; set; }
-
 		public ISlackAttachment AttachmentTemplate { get; set; }
+		public string ListPath { get; set; }
 	}
 
 	public class SlackDynamicAttachmentDescriptor : DescriptorBase<SlackDynamicAttachmentDescriptor, ISlackDynamicAttachment>, ISlackDynamicAttachment
 	{
-		string ISlackDynamicAttachment.ListPath { get; set; }
 		ISlackAttachment ISlackDynamicAttachment.AttachmentTemplate { get; set; }
+		string ISlackDynamicAttachment.ListPath { get; set; }
 
 		public SlackDynamicAttachmentDescriptor ListPath(string listPath) => Assign(a => a.ListPath = listPath);
 

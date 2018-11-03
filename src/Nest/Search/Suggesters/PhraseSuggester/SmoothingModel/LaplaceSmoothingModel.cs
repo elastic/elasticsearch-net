@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace Nest
 {
@@ -20,7 +19,7 @@ namespace Nest
 
 	public class LaplaceSmoothingModelDescriptor : DescriptorBase<LaplaceSmoothingModelDescriptor, ILaplaceSmoothingModel>, ILaplaceSmoothingModel
 	{
-		double? ILaplaceSmoothingModel.Alpha{ get; set; }
+		double? ILaplaceSmoothingModel.Alpha { get; set; }
 
 		public LaplaceSmoothingModelDescriptor Alpha(double? alpha) => Assign(a => a.Alpha = alpha);
 	}

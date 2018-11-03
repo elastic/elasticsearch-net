@@ -6,26 +6,26 @@ namespace Nest
 {
 	public interface ISuggester
 	{
+		[JsonProperty("analyzer")]
+		string Analyzer { get; set; }
+
 		/// <summary>
 		/// The name of the field on which to run the query
 		/// </summary>
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
-		[JsonProperty("analyzer")]
-		string Analyzer { get; set; }
-
 		/// <summary>
 		/// The number of suggestions to return. Defaults to 5
 		/// </summary>
 		[JsonProperty("size")]
 		int? Size { get; set; }
-}
+	}
 
 	public abstract class SuggesterBase : ISuggester
 	{
-		public Field Field { get; set; }
 		public string Analyzer { get; set; }
+		public Field Field { get; set; }
 		public int? Size { get; set; }
 	}
 
@@ -34,9 +34,8 @@ namespace Nest
 		where TDescriptor : SuggestDescriptorBase<TDescriptor, TInterface, T>, TInterface, ISuggester
 		where TInterface : class, ISuggester
 	{
-		Field ISuggester.Field { get; set; }
-
 		string ISuggester.Analyzer { get; set; }
+		Field ISuggester.Field { get; set; }
 
 		int? ISuggester.Size { get; set; }
 

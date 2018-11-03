@@ -15,6 +15,7 @@ namespace Nest
 	}
 
 	public class FunctionScoreFunction : FunctionScoreFunctionBase { }
+
 	public abstract class FunctionScoreFunctionBase : IScoreFunction
 	{
 		public QueryContainer Filter { get; set; }
@@ -22,10 +23,9 @@ namespace Nest
 	}
 
 	public class FunctionScoreFunctionDescriptor<T> : FunctionScoreFunctionDescriptorBase<FunctionScoreFunctionDescriptor<T>, IScoreFunction, T>
-		where T : class { } 
+		where T : class { }
 
-	public abstract class FunctionScoreFunctionDescriptorBase<TDescriptor, TInterface, T> : 
-		DescriptorBase<TDescriptor, TInterface>, IScoreFunction
+	public abstract class FunctionScoreFunctionDescriptorBase<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, IScoreFunction
 		where TDescriptor : FunctionScoreFunctionDescriptorBase<TDescriptor, TInterface, T>, TInterface, IScoreFunction
 		where TInterface : class, IScoreFunction
 		where T : class

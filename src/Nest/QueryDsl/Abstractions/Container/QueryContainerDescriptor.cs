@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
@@ -8,11 +7,10 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class QueryContainerDescriptor<T> : QueryContainer where T : class
 	{
-
 		private QueryContainer WrapInContainer<TQuery, TQueryInterface>(
 			Func<TQuery, TQueryInterface> create,
 			Action<TQueryInterface, IQueryContainer> assign
-			)
+		)
 			where TQuery : class, TQueryInterface, IQuery, new()
 			where TQueryInterface : class, IQuery
 		{
@@ -21,7 +19,7 @@ namespace Nest
 			// contains a query. See https://github.com/elastic/elasticsearch-net/issues/2875
 			var query = create.InvokeOrDefault(new TQuery());
 
-			var container = this.ContainedQuery == null
+			var container = ContainedQuery == null
 				? this
 				: new QueryContainerDescriptor<T>();
 
@@ -256,24 +254,24 @@ namespace Nest
 		/// The term query maps to Lucene TermQuery.
 		/// </summary>
 		public QueryContainer Term(Expression<Func<T, object>> field, object value, double? boost = null, string name = null) =>
-			this.Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
+			Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
 
 		/// <summary>
 		/// Helper method to easily filter on join relations
 		/// </summary>
 		public QueryContainer HasRelationName(Expression<Func<T, JoinField>> field, RelationName value) =>
-			this.Term(t => t.Field(field).Value(value));
+			Term(t => t.Field(field).Value(value));
 
 		/// <summary>Helper method to easily filter on join relations</summary>
 		public QueryContainer HasRelationName<TRelation>(Expression<Func<T, JoinField>> field) =>
-			this.Term(t => t.Field(field).Value(Infer.Relation<TRelation>()));
+			Term(t => t.Field(field).Value(Infer.Relation<TRelation>()));
 
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed).
 		/// The term query maps to Lucene TermQuery.
 		/// </summary>
 		public QueryContainer Term(Field field, object value, double? boost = null, string name = null) =>
-			this.Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
+			Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed).
@@ -289,8 +287,10 @@ namespace Nest
 		/// over many terms. In order to prevent extremely slow wildcard queries, a wildcard term should
 		/// not start with one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public QueryContainer Wildcard(Expression<Func<T, object>> field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
-			this.Wildcard(t => t.Field(field).Value(value).Rewrite(rewrite).Boost(boost).Name(name));
+		public QueryContainer Wildcard(Expression<Func<T, object>> field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null,
+			string name = null
+		) =>
+			Wildcard(t => t.Field(field).Value(value).Rewrite(rewrite).Boost(boost).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed).
@@ -300,7 +300,7 @@ namespace Nest
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
 		public QueryContainer Wildcard(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
-			this.Wildcard(t => t.Field(field).Value(value).Rewrite(rewrite).Boost(boost).Name(name));
+			Wildcard(t => t.Field(field).Value(value).Rewrite(rewrite).Boost(boost).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed).
@@ -316,15 +316,17 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed).
 		/// The prefix query maps to Lucene PrefixQuery.
 		/// </summary>
-		public QueryContainer Prefix(Expression<Func<T, object>> field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
-			this.Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
+		public QueryContainer Prefix(Expression<Func<T, object>> field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null,
+			string name = null
+		) =>
+			Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed).
 		/// The prefix query maps to Lucene PrefixQuery.
 		/// </summary>
 		public QueryContainer Prefix(Field field, string value, double? boost = null, MultiTermQueryRewrite rewrite = null, string name = null) =>
-			this.Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
+			Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed).
@@ -431,7 +433,7 @@ namespace Nest
 		public QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Type = query);
 
-		public QueryContainer Type<TOther>() => this.Type(q => q.Value<TOther>());
+		public QueryContainer Type<TOther>() => Type(q => q.Value<TOther>());
 
 		/// <summary>
 		/// Used to match queries stored in an index.

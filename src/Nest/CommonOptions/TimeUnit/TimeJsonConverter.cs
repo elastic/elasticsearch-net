@@ -25,6 +25,7 @@ namespace Nest
 					var milliseconds = Convert.ToInt64(reader.Value);
 					if (milliseconds == -1) return Time.MinusOne;
 					if (milliseconds == 0) return Time.Zero;
+
 					return new Time(milliseconds);
 			}
 			return null;

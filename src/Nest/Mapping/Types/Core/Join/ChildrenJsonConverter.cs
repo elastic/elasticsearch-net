@@ -26,7 +26,7 @@ namespace Nest
 				return;
 			}
 			writer.WriteStartArray();
-			foreach(var r in resolved)
+			foreach (var r in resolved)
 				writer.WriteValue(r.GetString(settings));
 			writer.WriteEndArray();
 		}
@@ -41,6 +41,7 @@ namespace Nest
 				return c;
 			}
 			if (reader.TokenType != JsonToken.StartArray) return null;
+
 			var types = new List<RelationName> { };
 			while (reader.TokenType != JsonToken.EndArray)
 			{
@@ -51,6 +52,5 @@ namespace Nest
 			c.AddRange(types);
 			return c;
 		}
-
 	}
 }

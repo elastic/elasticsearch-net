@@ -18,18 +18,18 @@ namespace Nest
 	/// <inheritdoc />
 	public class ClassicSimilarity : IClassicSimilarity
 	{
-		public string Type => "classic";
-
 		/// <inheritdoc />
 		public bool? DiscountOverlaps { get; set; }
+
+		public string Type => "classic";
 	}
 
 	/// <inheritdoc />
 	public class ClassicSimilarityDescriptor
 		: DescriptorBase<ClassicSimilarityDescriptor, IClassicSimilarity>, IClassicSimilarity
 	{
-		string ISimilarity.Type => "classic";
 		bool? IClassicSimilarity.DiscountOverlaps { get; set; }
+		string ISimilarity.Type => "classic";
 
 		/// <inheritdoc />
 		public ClassicSimilarityDescriptor DiscountOverlaps(bool? discount = true) => Assign(a => a.DiscountOverlaps = discount);

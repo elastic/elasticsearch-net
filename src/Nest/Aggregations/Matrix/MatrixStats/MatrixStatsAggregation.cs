@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -28,7 +23,7 @@ namespace Nest
 
 	public class MatrixStatsAggregationDescriptor<T>
 		: MatrixAggregationDescriptorBase<MatrixStatsAggregationDescriptor<T>, IMatrixStatsAggregation, T>
-		, IMatrixStatsAggregation
+			, IMatrixStatsAggregation
 		where T : class
 	{
 		MatrixStatsMode? IMatrixStatsAggregation.Mode { get; set; }

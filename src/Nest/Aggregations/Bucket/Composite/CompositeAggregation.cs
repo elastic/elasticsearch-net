@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -13,10 +12,11 @@ namespace Nest
 	public interface ICompositeAggregation : IBucketAggregation
 	{
 		/// <summary>
-		/// Controls the sources that should be used to build the composite buckets
+		/// Used to retrieve the composite buckets that are after the
+		/// last composite buckets returned in a previous round
 		/// </summary>
-		[JsonProperty("sources")]
-		IEnumerable<ICompositeAggregationSource> Sources { get; set; }
+		[JsonProperty("after")]
+		object After { get; set; }
 
 		/// <summary>
 		/// Defines how many composite buckets should be returned.
@@ -28,50 +28,51 @@ namespace Nest
 		int? Size { get; set; }
 
 		/// <summary>
-		/// Used to retrieve the composite buckets that are after the
-		/// last composite buckets returned in a previous round
+		/// Controls the sources that should be used to build the composite buckets
 		/// </summary>
-		[JsonProperty("after")]
-		object After { get; set; }
+		[JsonProperty("sources")]
+		IEnumerable<ICompositeAggregationSource> Sources { get; set; }
 	}
 
-	/// <inheritdoc cref="ICompositeAggregation"/>
+	/// <inheritdoc cref="ICompositeAggregation" />
 	public class CompositeAggregation : BucketAggregationBase, ICompositeAggregation
 	{
 		internal CompositeAggregation() { }
 
 		public CompositeAggregation(string name) : base(name) { }
 
-		internal override void WrapInContainer(AggregationContainer c) => c.Composite = this;
-
 		/// <inheritdoc />
-		public IEnumerable<ICompositeAggregationSource> Sources { get; set; }
+		public object After { get; set; }
 
 		/// <inheritdoc />
 		public int? Size { get; set; }
 
 		/// <inheritdoc />
-		public object After { get; set; }
+		public IEnumerable<ICompositeAggregationSource> Sources { get; set; }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Composite = this;
 	}
 
-	/// <inheritdoc cref="ICompositeAggregation"/>
+	/// <inheritdoc cref="ICompositeAggregation" />
 	public class CompositeAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<CompositeAggregationDescriptor<T>, ICompositeAggregation, T>
 			, ICompositeAggregation
 		where T : class
 	{
-		IEnumerable<ICompositeAggregationSource> ICompositeAggregation.Sources { get; set; }
-		int? ICompositeAggregation.Size { get; set; }
 		object ICompositeAggregation.After { get; set; }
+		int? ICompositeAggregation.Size { get; set; }
+		IEnumerable<ICompositeAggregationSource> ICompositeAggregation.Sources { get; set; }
 
-		/// <inheritdoc cref="ICompositeAggregation.Sources"/>
-		public CompositeAggregationDescriptor<T> Sources(Func<CompositeAggregationSourcesDescriptor<T>, IPromise<IList<ICompositeAggregationSource>>> selector) =>
+		/// <inheritdoc cref="ICompositeAggregation.Sources" />
+		public CompositeAggregationDescriptor<T> Sources(
+			Func<CompositeAggregationSourcesDescriptor<T>, IPromise<IList<ICompositeAggregationSource>>> selector
+		) =>
 			Assign(a => a.Sources = selector?.Invoke(new CompositeAggregationSourcesDescriptor<T>())?.Value);
 
-		/// <inheritdoc cref="ICompositeAggregation.Size"/>
+		/// <inheritdoc cref="ICompositeAggregation.Size" />
 		public CompositeAggregationDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
-		/// <inheritdoc cref="ICompositeAggregation.After"/>
+		/// <inheritdoc cref="ICompositeAggregation.After" />
 		public CompositeAggregationDescriptor<T> After(object after) => Assign(a => a.After = after);
 	}
 }

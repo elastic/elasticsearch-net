@@ -5,13 +5,14 @@
 	/// <para>Note, when using mapping definitions, it make more sense to simply mark the field as not_analyzed.</para>
 	/// </summary>
 	public interface IKeywordAnalyzer : IAnalyzer { }
-	/// <inheritdoc/>
+
+	/// <inheritdoc />
 	public class KeywordAnalyzer : AnalyzerBase, IKeywordAnalyzer
 	{
-		public KeywordAnalyzer() : base("keyword") {}
+		public KeywordAnalyzer() : base("keyword") { }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class KeywordAnalyzerDescriptor
 		: AnalyzerDescriptorBase<KeywordAnalyzerDescriptor, IKeywordAnalyzer>, IKeywordAnalyzer
 	{

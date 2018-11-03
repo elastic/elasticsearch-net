@@ -16,6 +16,7 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "simple")]
 		Simple,
+
 		/// <summary>
 		/// Same as the simple fragmenter, but tries not to break up text between highlighted terms (this is applicable
 		/// when using phrase like queries). This is the default.

@@ -2,12 +2,8 @@
 
 namespace Nest
 {
-	public interface IPingResponse : IResponse
-	{
-	}
+	public interface IPingResponse : IResponse { }
 
 	[JsonObject]
-	public class PingResponse : ResponseBase, IPingResponse
-	{
-	}
+	public class PingResponse : ResponseBase, IPingResponse { }
 }

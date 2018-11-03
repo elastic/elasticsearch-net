@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -17,6 +16,7 @@ namespace Nest
 			//Some API's return the stored queries as escaped string, e.g the get shield role API
 			var escapedJson = reader.Value as string;
 			if (string.IsNullOrWhiteSpace(escapedJson)) return null;
+
 			using (var sr = new StringReader(escapedJson))
 			using (var escapedReader = new JsonTextReader(sr))
 			{
@@ -40,12 +40,12 @@ namespace Nest
 
 	internal class QueryContainerCollectionJsonConverter : JsonConverter
 	{
-		public override bool CanWrite => true;
 		public override bool CanRead => false;
+		public override bool CanWrite => true;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var collection = (IEnumerable<QueryContainer>) value;
+			var collection = (IEnumerable<QueryContainer>)value;
 
 			if (collection == null)
 			{

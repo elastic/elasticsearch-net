@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -9,40 +9,44 @@ namespace Nest
 	{
 		IForceMergeResponse ForceMerge(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IForceMergeResponse ForceMerge(IForceMergeRequest request);
 
-		/// <inheritdoc/>
-		Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken cancellationToken = default(CancellationToken));
-
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IForceMergeResponse ForceMerge(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null) =>
-			this.ForceMerge(selector.InvokeOrDefault(new ForceMergeDescriptor().Index(indices)));
+			ForceMerge(selector.InvokeOrDefault(new ForceMergeDescriptor().Index(indices)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IForceMergeResponse ForceMerge(IForceMergeRequest request) =>
-			this.Dispatcher.Dispatch<IForceMergeRequest, ForceMergeRequestParameters, ForceMergeResponse>(
+			Dispatcher.Dispatch<IForceMergeRequest, ForceMergeRequestParameters, ForceMergeResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesForcemergeDispatch<ForceMergeResponse>(p)
+				(p, d) => LowLevelDispatch.IndicesForcemergeDispatch<ForceMergeResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.ForceMergeAsync(selector.InvokeOrDefault(new ForceMergeDescriptor().Index(indices)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			ForceMergeAsync(selector.InvokeOrDefault(new ForceMergeDescriptor().Index(indices)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IForceMergeRequest, ForceMergeRequestParameters, ForceMergeResponse, IForceMergeResponse>(
+		/// <inheritdoc />
+		public Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<IForceMergeRequest, ForceMergeRequestParameters, ForceMergeResponse, IForceMergeResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.IndicesForcemergeDispatchAsync<ForceMergeResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.IndicesForcemergeDispatchAsync<ForceMergeResponse>(p, c)
 			);
 	}
 }

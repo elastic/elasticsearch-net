@@ -9,22 +9,31 @@ namespace Nest
 	public class AnalyzeTokenFilters : List<Union<string, ITokenFilter>>
 	{
 		public AnalyzeTokenFilters() { }
+
 		public AnalyzeTokenFilters(List<Union<string, ITokenFilter>> tokenFilters)
 		{
 			if (tokenFilters == null) return;
+
 			foreach (var v in tokenFilters) this.AddIfNotNull(v);
 		}
+
 		public AnalyzeTokenFilters(string[] tokenFilters)
 		{
 			if (tokenFilters == null) return;
+
 			foreach (var v in tokenFilters) this.AddIfNotNull(v);
 		}
 
-		public void Add(ITokenFilter filter) => this.Add(new Union<string, ITokenFilter>(filter));
+		public void Add(ITokenFilter filter) => Add(new Union<string, ITokenFilter>(filter));
 
-		public static implicit operator AnalyzeTokenFilters(TokenFilterBase tokenFilter) => tokenFilter == null ? null : new AnalyzeTokenFilters { tokenFilter };
-		public static implicit operator AnalyzeTokenFilters(string tokenFilter) => tokenFilter == null ? null : new AnalyzeTokenFilters { tokenFilter };
-		public static implicit operator AnalyzeTokenFilters(string[] tokenFilters) => tokenFilters == null ? null : new AnalyzeTokenFilters(tokenFilters);
+		public static implicit operator AnalyzeTokenFilters(TokenFilterBase tokenFilter) =>
+			tokenFilter == null ? null : new AnalyzeTokenFilters { tokenFilter };
+
+		public static implicit operator AnalyzeTokenFilters(string tokenFilter) =>
+			tokenFilter == null ? null : new AnalyzeTokenFilters { tokenFilter };
+
+		public static implicit operator AnalyzeTokenFilters(string[] tokenFilters) =>
+			tokenFilters == null ? null : new AnalyzeTokenFilters(tokenFilters);
 	}
 
 	public class AnalyzeTokenFiltersDescriptor : DescriptorPromiseBase<AnalyzeTokenFiltersDescriptor, AnalyzeTokenFilters>
@@ -46,14 +55,16 @@ namespace Nest
 		/// Token filters that allow to decompose compound words using a dictionary
 		/// </summary>
 		public AnalyzeTokenFiltersDescriptor DictionaryDecompounder(
-			Func<DictionaryDecompounderTokenFilterDescriptor, IDictionaryDecompounderTokenFilter> selector) =>
+			Func<DictionaryDecompounderTokenFilterDescriptor, IDictionaryDecompounderTokenFilter> selector
+		) =>
 			AssignIfNotNull(selector?.Invoke(new DictionaryDecompounderTokenFilterDescriptor()));
 
 		/// <summary>
 		/// Token filters that allow to decompose compound words using FOP XML
 		/// </summary>
 		public AnalyzeTokenFiltersDescriptor HyphenationDecompounder(
-			Func<HyphenationDecompounderTokenFilterDescriptor, IHyphenationDecompounderTokenFilter> selector) =>
+			Func<HyphenationDecompounderTokenFilterDescriptor, IHyphenationDecompounderTokenFilter> selector
+		) =>
 			AssignIfNotNull(selector?.Invoke(new HyphenationDecompounderTokenFilterDescriptor()));
 
 		/// <summary>
@@ -105,7 +116,8 @@ namespace Nest
 		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are
 		/// <para> not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one exists.</para>
 		/// </summary>
-		public AnalyzeTokenFiltersDescriptor WordDelimiterGraph(Func<WordDelimiterGraphTokenFilterDescriptor, IWordDelimiterGraphTokenFilter> selector) =>
+		public AnalyzeTokenFiltersDescriptor WordDelimiterGraph(Func<WordDelimiterGraphTokenFilterDescriptor, IWordDelimiterGraphTokenFilter> selector
+		) =>
 			AssignIfNotNull(selector?.Invoke(new WordDelimiterGraphTokenFilterDescriptor()));
 
 		/// <summary>
@@ -116,8 +128,8 @@ namespace Nest
 			AssignIfNotNull(selector?.Invoke(new AsciiFoldingTokenFilterDescriptor()));
 
 		/// <summary>
-		/// Token filter that generates bigrams for frequently occuring terms. Single terms are still indexed.
-		///<para>Note, common_words or common_words_path field is required.</para>
+		///  Token filter that generates bigrams for frequently occuring terms. Single terms are still indexed.
+		/// <para>Note, common_words or common_words_path field is required.</para>
 		/// </summary>
 		public AnalyzeTokenFiltersDescriptor CommonGrams(Func<CommonGramsTokenFilterDescriptor, ICommonGramsTokenFilter> selector) =>
 			AssignIfNotNull(selector?.Invoke(new CommonGramsTokenFilterDescriptor()));
@@ -135,8 +147,8 @@ namespace Nest
 			AssignIfNotNull(selector?.Invoke(new ElisionTokenFilterDescriptor()));
 
 		/// <summary>
-		/// Basic support for hunspell stemming.
-		///<para> Hunspell dictionaries will be picked up from a dedicated hunspell directory on the filesystem.</para>
+		///  Basic support for hunspell stemming.
+		/// <para> Hunspell dictionaries will be picked up from a dedicated hunspell directory on the filesystem.</para>
 		/// </summary>
 		public AnalyzeTokenFiltersDescriptor Hunspell(Func<HunspellTokenFilterDescriptor, IHunspellTokenFilter> selector) =>
 			AssignIfNotNull(selector?.Invoke(new HunspellTokenFilterDescriptor()));
@@ -160,8 +172,8 @@ namespace Nest
 			AssignIfNotNull(selector?.Invoke(new KeywordMarkerTokenFilterDescriptor()));
 
 		/// <summary>
-		///The kstem token filter is a high performance filter for english.
-		///<para> All terms must already be lowercased (use lowercase filter) for this filter to work correctly.</para>
+		/// The kstem token filter is a high performance filter for english.
+		/// <para> All terms must already be lowercased (use lowercase filter) for this filter to work correctly.</para>
 		/// </summary>
 		public AnalyzeTokenFiltersDescriptor KStem(Func<KStemTokenFilterDescriptor, IKStemTokenFilter> selector = null) =>
 			AssignIfNotNull(selector.InvokeOrDefault(new KStemTokenFilterDescriptor()));
@@ -179,8 +191,8 @@ namespace Nest
 			AssignIfNotNull(selector?.Invoke(new LimitTokenCountTokenFilterDescriptor()));
 
 		/// <summary>
-		/// A token filter of type lowercase that normalizes token text to lower case.
-		///<para> Lowercase token filter supports Greek and Turkish lowercase token filters through the language parameter.</para>
+		///  A token filter of type lowercase that normalizes token text to lower case.
+		/// <para> Lowercase token filter supports Greek and Turkish lowercase token filters through the language parameter.</para>
 		/// </summary>
 		public AnalyzeTokenFiltersDescriptor Lowercase(Func<LowercaseTokenFilterDescriptor, ILowercaseTokenFilter> selector = null) =>
 			AssignIfNotNull(selector.InvokeOrDefault(new LowercaseTokenFilterDescriptor()));
@@ -234,7 +246,8 @@ namespace Nest
 			AssignIfNotNull(selector?.Invoke(new StemmerTokenFilterDescriptor()));
 
 		/// <summary>
-		/// Overrides stemming algorithms, by applying a custom mapping, then protecting these terms from being modified by stemmers. Must be placed before any stemming filters.
+		/// Overrides stemming algorithms, by applying a custom mapping, then protecting these terms from being modified by stemmers. Must be placed
+		/// before any stemming filters.
 		/// </summary>
 		public AnalyzeTokenFiltersDescriptor StemmerOverride(Func<StemmerOverrideTokenFilterDescriptor, IStemmerOverrideTokenFilter> selector) =>
 			AssignIfNotNull(selector?.Invoke(new StemmerOverrideTokenFilterDescriptor()));
@@ -277,26 +290,32 @@ namespace Nest
 		/// long sound character by removing this character (U+30FC). Only full-width katakana characters are supported.
 		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
-		public AnalyzeTokenFiltersDescriptor KuromojiStemmer(Func<KuromojiStemmerTokenFilterDescriptor, IKuromojiStemmerTokenFilter> selector = null) =>
+		public AnalyzeTokenFiltersDescriptor
+			KuromojiStemmer(Func<KuromojiStemmerTokenFilterDescriptor, IKuromojiStemmerTokenFilter> selector = null) =>
 			AssignIfNotNull(selector.InvokeOrDefault(new KuromojiStemmerTokenFilterDescriptor()));
 
 		/// <summary>
 		/// The kuromoji_readingform token filter replaces the token with its reading form in either katakana or romaji.
 		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
-		public AnalyzeTokenFiltersDescriptor KuromojiReadingForm(Func<KuromojiReadingFormTokenFilterDescriptor, IKuromojiReadingFormTokenFilter> selector) =>
+		public AnalyzeTokenFiltersDescriptor KuromojiReadingForm(
+			Func<KuromojiReadingFormTokenFilterDescriptor, IKuromojiReadingFormTokenFilter> selector
+		) =>
 			AssignIfNotNull(selector.Invoke(new KuromojiReadingFormTokenFilterDescriptor()));
 
 		/// <summary>
 		/// The kuromoji_part_of_speech token filter removes tokens that match a set of part-of-speech tags.
 		/// Part of the `analysis-kuromoji` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-kuromoji.html
 		/// </summary>
-		public AnalyzeTokenFiltersDescriptor KuromojiPartOfSpeech(Func<KuromojiPartOfSpeechTokenFilterDescriptor, IKuromojiPartOfSpeechTokenFilter> selector) =>
+		public AnalyzeTokenFiltersDescriptor KuromojiPartOfSpeech(
+			Func<KuromojiPartOfSpeechTokenFilterDescriptor, IKuromojiPartOfSpeechTokenFilter> selector
+		) =>
 			AssignIfNotNull(selector.Invoke(new KuromojiPartOfSpeechTokenFilterDescriptor()));
 
 
 		/// <summary>
-		/// Collations are used for sorting documents in a language-specific word order. The icu_collation token filter is available to all indices and defaults to using the DUCET collation, which is a best-effort attempt at language-neutral sorting.
+		/// Collations are used for sorting documents in a language-specific word order. The icu_collation token filter is available to all indices and
+		/// defaults to using the DUCET collation, which is a best-effort attempt at language-neutral sorting.
 		/// Part of the `analysis-icu` plugin: https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html
 		/// </summary>
 		public AnalyzeTokenFiltersDescriptor IcuCollation(Func<IcuCollationTokenFilterDescriptor, IIcuCollationTokenFilter> selector) =>
@@ -324,17 +343,16 @@ namespace Nest
 		public AnalyzeTokenFiltersDescriptor IcuTransform(Func<IcuTransformTokenFilterDescriptor, IIcuTransformTokenFilter> selector) =>
 			AssignIfNotNull(selector.Invoke(new IcuTransformTokenFilterDescriptor()));
 
-		/// <inheritdoc cref="INoriPartOfSpeechTokenFilter"/>
+		/// <inheritdoc cref="INoriPartOfSpeechTokenFilter" />
 		public AnalyzeTokenFiltersDescriptor NoriPartOfSpeech(Func<NoriPartOfSpeechTokenFilterDescriptor, INoriPartOfSpeechTokenFilter> selector) =>
 			AssignIfNotNull(selector.Invoke(new NoriPartOfSpeechTokenFilterDescriptor()));
 
-		///<inheritdoc cref="IMultiplexerTokenFilter"/>
+		/// <inheritdoc cref="IMultiplexerTokenFilter" />
 		public AnalyzeTokenFiltersDescriptor Multiplexer(Func<MultiplexerTokenFilterDescriptor, IMultiplexerTokenFilter> selector) =>
 			AssignIfNotNull(selector.Invoke(new MultiplexerTokenFilterDescriptor()));
 
-		///<inheritdoc cref="IRemoveDuplicatesTokenFilter"/>
+		/// <inheritdoc cref="IRemoveDuplicatesTokenFilter" />
 		public AnalyzeTokenFiltersDescriptor RemoveDuplicates(Func<RemoveDuplicatesTokenFilterDescriptor, IRemoveDuplicatesTokenFilter> selector) =>
 			AssignIfNotNull(selector.Invoke(new RemoveDuplicatesTokenFilterDescriptor()));
 	}
-
 }

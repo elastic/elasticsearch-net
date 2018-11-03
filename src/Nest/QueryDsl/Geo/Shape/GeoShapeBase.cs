@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	[ContractJsonConverterAttribute(typeof(GeoShapeConverter))]
+	[ContractJsonConverter(typeof(GeoShapeConverter))]
 	public interface IGeoShape
 	{
 		/// <summary>
@@ -24,18 +24,17 @@ namespace Nest
 
 	internal static class GeoShapeType
 	{
-		public const string Point = "POINT";
-		public const string MultiPoint = "MULTIPOINT";
-		public const string LineString = "LINESTRING";
-		public const string MultiLineString = "MULTILINESTRING";
-		public const string Polygon = "POLYGON";
-		public const string MultiPolygon = "MULTIPOLYGON";
+		// WKT uses BBOX for envelope geo shape
+		public const string BoundingBox = "BBOX";
 		public const string Circle = "CIRCLE";
 		public const string Envelope = "ENVELOPE";
 		public const string GeometryCollection = "GEOMETRYCOLLECTION";
-
-		// WKT uses BBOX for envelope geo shape
-		public const string BoundingBox = "BBOX";
+		public const string LineString = "LINESTRING";
+		public const string MultiLineString = "MULTILINESTRING";
+		public const string MultiPoint = "MULTIPOINT";
+		public const string MultiPolygon = "MULTIPOLYGON";
+		public const string Point = "POINT";
+		public const string Polygon = "POLYGON";
 	}
 
 	/// <summary>
@@ -43,11 +42,12 @@ namespace Nest
 	/// </summary>
 	public abstract class GeoShapeBase : IGeoShape
 	{
-		internal GeoShapeFormat Format { get; set; }
-	    protected GeoShapeBase(string type) => this.Type = type;
+		protected GeoShapeBase(string type) => Type = type;
 
 		/// <inheritdoc />
 		public string Type { get; protected set; }
+
+		internal GeoShapeFormat Format { get; set; }
 	}
 
 	internal class GeoShapeConverter : JsonConverter
@@ -117,9 +117,7 @@ namespace Nest
 				writer.WriteEndObject();
 			}
 			else
-			{
 				throw new NotSupportedException($"{value.GetType()} is not a supported {nameof(IGeoShape)}");
-			}
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -189,13 +187,13 @@ namespace Nest
 			};
 
 		private static PolygonGeoShape ParsePolygonGeoShape(JToken shape, JsonSerializer serializer) =>
-			new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)};
+			new PolygonGeoShape { Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer) };
 
 		private static MultiPointGeoShape ParseMultiPointGeoShape(JToken shape, JsonSerializer serializer) =>
-			new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+			new MultiPointGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static PointGeoShape ParsePointGeoShape(JToken shape, JsonSerializer serializer) =>
-			new PointGeoShape {Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer)};
+			new PointGeoShape { Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer) };
 
 		private static MultiLineStringGeoShape ParseMultiLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
 			new MultiLineStringGeoShape
@@ -204,10 +202,10 @@ namespace Nest
 			};
 
 		private static LineStringGeoShape ParseLineStringGeoShape(JToken shape, JsonSerializer serializer) =>
-			new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+			new LineStringGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static EnvelopeGeoShape ParseEnvelopeGeoShape(JToken shape, JsonSerializer serializer) =>
-			new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)};
+			new EnvelopeGeoShape { Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer) };
 
 		private static CircleGeoShape ParseCircleGeoShape(JToken shape, JsonSerializer serializer) =>
 			new CircleGeoShape

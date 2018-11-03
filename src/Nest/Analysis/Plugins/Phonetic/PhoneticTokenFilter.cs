@@ -19,47 +19,47 @@ namespace Nest
 		PhoneticEncoder? Encoder { get; set; }
 
 		/// <summary>
-		///The replace parameter (defaults to true) controls if the token processed should be replaced
-		/// with the encoded one (set it to true), or added (set it to false).
+		/// An array of languages to check. If not specified, then the language will be guessed
 		/// </summary>
-		[JsonProperty("replace")]
-		bool? Replace { get; set; }
+		/// <remarks>
+		/// Valid for <see cref="PhoneticEncoder.Beidermorse" /> only
+		/// </remarks>
+		[JsonProperty("languageset")]
+		IEnumerable<PhoneticLanguage> LanguageSet { get; set; }
 
 		/// <summary>
 		/// The maximum length of the emitted metaphone token. Defaults to <c>4</c>
 		/// </summary>
 		/// <remarks>
-		/// Valid for <see cref="PhoneticEncoder.DoubleMetaphone"/> only
+		/// Valid for <see cref="PhoneticEncoder.DoubleMetaphone" /> only
 		/// </remarks>
 		[JsonProperty("max_code_len")]
 		int? MaxCodeLength { get; set; }
 
 		/// <summary>
-		/// Whether matching should be exact or approximate. Defaults to approximate
-		/// </summary>
-		/// <remarks>
-		/// Valid for <see cref="PhoneticEncoder.Beidermorse"/> only
-		/// </remarks>
-		[JsonProperty("rule_type")]
-		PhoneticRuleType? RuleType { get; set; }
-
-		/// <summary>
 		/// Whether names are ashkenazi, sephardic, or generic. Defaults to generic
 		/// </summary>
 		/// <remarks>
-		/// Valid for <see cref="PhoneticEncoder.Beidermorse"/> only
+		/// Valid for <see cref="PhoneticEncoder.Beidermorse" /> only
 		/// </remarks>
 		[JsonProperty("name_type")]
 		PhoneticNameType? NameType { get; set; }
 
 		/// <summary>
-		/// An array of languages to check. If not specified, then the language will be guessed
+		/// The replace parameter (defaults to true) controls if the token processed should be replaced
+		///  with the encoded one (set it to true), or added (set it to false).
+		/// </summary>
+		[JsonProperty("replace")]
+		bool? Replace { get; set; }
+
+		/// <summary>
+		/// Whether matching should be exact or approximate. Defaults to approximate
 		/// </summary>
 		/// <remarks>
-		/// Valid for <see cref="PhoneticEncoder.Beidermorse"/> only
+		/// Valid for <see cref="PhoneticEncoder.Beidermorse" /> only
 		/// </remarks>
-		[JsonProperty("languageset")]
-		IEnumerable<PhoneticLanguage> LanguageSet { get; set; }
+		[JsonProperty("rule_type")]
+		PhoneticRuleType? RuleType { get; set; }
 	}
 
 	/// <inheritdoc cref="IPhoneticTokenFilter" />
@@ -67,23 +67,23 @@ namespace Nest
 	{
 		public PhoneticTokenFilter() : base("phonetic") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public PhoneticEncoder? Encoder { get; set; }
 
-		/// <inheritdoc/>
-		public bool? Replace { get; set; }
+		/// <inheritdoc />
+		public IEnumerable<PhoneticLanguage> LanguageSet { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public int? MaxCodeLength { get; set; }
 
-		/// <inheritdoc/>
-		public PhoneticRuleType? RuleType { get; set; }
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public PhoneticNameType? NameType { get; set; }
 
-		/// <inheritdoc/>
-		public IEnumerable<PhoneticLanguage> LanguageSet { get; set; }
+		/// <inheritdoc />
+		public bool? Replace { get; set; }
+
+		/// <inheritdoc />
+		public PhoneticRuleType? RuleType { get; set; }
 	}
 
 	/// <inheritdoc cref="IPhoneticTokenFilter" />
@@ -91,13 +91,13 @@ namespace Nest
 		: TokenFilterDescriptorBase<PhoneticTokenFilterDescriptor, IPhoneticTokenFilter>, IPhoneticTokenFilter
 	{
 		protected override string Type => "phonetic";
+		PhoneticEncoder? IPhoneticTokenFilter.Encoder { get; set; }
+		IEnumerable<PhoneticLanguage> IPhoneticTokenFilter.LanguageSet { get; set; }
+		int? IPhoneticTokenFilter.MaxCodeLength { get; set; }
+		PhoneticNameType? IPhoneticTokenFilter.NameType { get; set; }
 
 		bool? IPhoneticTokenFilter.Replace { get; set; }
-		PhoneticEncoder? IPhoneticTokenFilter.Encoder { get; set; }
-		int? IPhoneticTokenFilter.MaxCodeLength { get; set; }
 		PhoneticRuleType? IPhoneticTokenFilter.RuleType { get; set; }
-		PhoneticNameType? IPhoneticTokenFilter.NameType { get; set; }
-		IEnumerable<PhoneticLanguage> IPhoneticTokenFilter.LanguageSet { get; set; }
 
 		/// <inheritdoc cref="IPhoneticTokenFilter.Replace" />
 		public PhoneticTokenFilterDescriptor Replace(bool? replace = true) => Assign(a => a.Replace = replace);

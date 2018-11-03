@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
 	internal class IndicesMultiSyntaxJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => typeof(Indices) == objectType;
@@ -18,7 +17,7 @@ namespace Nest
 				return;
 			}
 			marker.Match(
-				all=> writer.WriteValue("_all"),
+				all => writer.WriteValue("_all"),
 				many => writer.WriteValue(((IUrlParameter)marker).GetString(serializer.GetConnectionSettings()))
 			);
 		}
@@ -32,6 +31,5 @@ namespace Nest
 			}
 			return null;
 		}
-
 	}
 }

@@ -10,11 +10,12 @@ namespace Nest
 
 	public class Analyzers : IsADictionaryBase<string, IAnalyzer>, IAnalyzers
 	{
-		public Analyzers() {}
+		public Analyzers() { }
+
 		public Analyzers(IDictionary<string, IAnalyzer> container) : base(container) { }
+
 		public Analyzers(Dictionary<string, IAnalyzer> container)
-			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value)) { }
 
 		public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
@@ -28,8 +29,10 @@ namespace Nest
 		/// <summary>
 		/// An analyzer of type custom that allows to combine a Tokenizer with zero or more Token Filters,
 		/// and zero or more Char Filters.
-		/// <para>The custom analyzer accepts a logical/registered name of the tokenizer to use, and a list of
-		/// logical/registered names of token filters.</para>
+		/// <para>
+		/// The custom analyzer accepts a logical/registered name of the tokenizer to use, and a list of
+		/// logical/registered names of token filters.
+		/// </para>
 		/// </summary>
 		public AnalyzersDescriptor Custom(string name, Func<CustomAnalyzerDescriptor, ICustomAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new CustomAnalyzerDescriptor()));
@@ -61,13 +64,17 @@ namespace Nest
 
 		/// <summary>
 		/// An analyzer of type snowball that uses the standard tokenizer, with standard filter, lowercase filter, stop filter, and snowball filter.
-		/// <para> The Snowball Analyzer is a stemming analyzer from Lucene that is originally based on the snowball project from snowball.tartarus.org.</para>
+		/// <para>
+		/// The Snowball Analyzer is a stemming analyzer from Lucene that is originally based on the snowball project from
+		/// snowball.tartarus.org.
+		/// </para>
 		/// </summary>
 		public AnalyzersDescriptor Snowball(string name, Func<SnowballAnalyzerDescriptor, ISnowballAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new SnowballAnalyzerDescriptor()));
 
 		/// <summary>
-		/// An analyzer of type standard that is built of using Standard Tokenizer, with Standard Token Filter, Lower Case Token Filter, and Stop Token Filter.
+		/// An analyzer of type standard that is built of using Standard Tokenizer, with Standard Token Filter, Lower Case Token Filter, and Stop Token
+		/// Filter.
 		/// </summary>
 		public AnalyzersDescriptor Standard(string name, Func<StandardAnalyzerDescriptor, IStandardAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new StandardAnalyzerDescriptor()));
@@ -98,7 +105,7 @@ namespace Nest
 		public AnalyzersDescriptor Kuromoji(string name, Func<KuromojiAnalyzerDescriptor, IKuromojiAnalyzer> selector = null) =>
 			Assign(name, selector.InvokeOrDefault(new KuromojiAnalyzerDescriptor()));
 
-		/// <inheritdoc cref="INoriAnalyzer"/>
+		/// <inheritdoc cref="INoriAnalyzer" />
 		public AnalyzersDescriptor Nori(string name, Func<NoriAnalyzerDescriptor, INoriAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new NoriAnalyzerDescriptor()));
 	}

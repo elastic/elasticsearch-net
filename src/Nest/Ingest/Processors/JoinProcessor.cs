@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -21,11 +17,10 @@ namespace Nest
 
 	public class JoinProcessor : ProcessorBase, IJoinProcessor
 	{
-		protected override string Name => "join";
-
 		public Field Field { get; set; }
 
 		public string Separator { get; set; }
+		protected override string Name => "join";
 	}
 
 	public class JoinProcessorDescriptor<T>

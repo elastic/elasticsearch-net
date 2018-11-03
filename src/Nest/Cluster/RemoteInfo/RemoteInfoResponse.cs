@@ -5,7 +5,7 @@ namespace Nest
 {
 	public interface IRemoteInfoResponse : IResponse
 	{
-		IReadOnlyDictionary<string, RemoteInfo> Remotes	{ get; }
+		IReadOnlyDictionary<string, RemoteInfo> Remotes { get; }
 	}
 
 	[JsonObject]
@@ -20,17 +20,20 @@ namespace Nest
 	{
 		[JsonProperty("connected")]
 		public bool Connected { get; internal set; }
-		[JsonProperty("num_nodes_connected")]
-		public long NumNodesConnected { get; internal set; }
-		[JsonProperty("max_connections_per_cluster")]
-		public int MaxConnectionsPerCluster { get; internal set; }
+
+		[JsonProperty("http_addresses")]
+		public IReadOnlyCollection<string> HttpAddresses { get; internal set; } = EmptyReadOnly<string>.Collection;
+
 		[JsonProperty("initial_connect_timeout")]
 		public Time InitialConnectTimeout { get; internal set; }
 
-		[JsonProperty("seeds")]
-		public IReadOnlyCollection<string> Seeds { get; internal set; }= EmptyReadOnly<string>.Collection;
+		[JsonProperty("max_connections_per_cluster")]
+		public int MaxConnectionsPerCluster { get; internal set; }
 
-		[JsonProperty("http_addresses")]
-		public IReadOnlyCollection<string> HttpAddresses { get; internal set; }= EmptyReadOnly<string>.Collection;
+		[JsonProperty("num_nodes_connected")]
+		public long NumNodesConnected { get; internal set; }
+
+		[JsonProperty("seeds")]
+		public IReadOnlyCollection<string> Seeds { get; internal set; } = EmptyReadOnly<string>.Collection;
 	}
 }

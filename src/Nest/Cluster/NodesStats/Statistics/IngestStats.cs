@@ -12,12 +12,6 @@ namespace Nest
 		public long Count { get; set; }
 
 		/// <summary>
-		/// The total time spent on ingest preprocessing documents during the lifetime of this node
-		/// </summary>
-		[JsonProperty("time_in_millis")]
-		public long TimeInMilliseconds { get; set; }
-
-		/// <summary>
 		/// The total number of documents currently being ingested.
 		/// </summary>
 		[JsonProperty("current")]
@@ -28,5 +22,11 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("failed")]
 		public long Failed { get; set; }
+
+		/// <summary>
+		/// The total time spent on ingest preprocessing documents during the lifetime of this node
+		/// </summary>
+		[JsonProperty("time_in_millis")]
+		public long TimeInMilliseconds { get; set; }
 	}
 }

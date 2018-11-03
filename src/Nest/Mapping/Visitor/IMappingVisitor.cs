@@ -1,32 +1,53 @@
-﻿using System;
-
-namespace Nest
+﻿namespace Nest
 {
 	public interface IMappingVisitor
 	{
 		int Depth { get; set; }
+
 		void Visit(ITypeMapping mapping);
+
 		void Visit(ITextProperty property);
+
 		void Visit(IKeywordProperty property);
+
 		void Visit(IDateProperty property);
+
 		void Visit(IBooleanProperty property);
+
 		void Visit(IBinaryProperty property);
+
 		void Visit(IObjectProperty property);
+
 		void Visit(INestedProperty property);
+
 		void Visit(IIpProperty property);
+
 		void Visit(IGeoPointProperty property);
+
 		void Visit(IGeoShapeProperty property);
+
 		void Visit(INumberProperty property);
+
 		void Visit(ICompletionProperty property);
+
 		void Visit(IMurmur3HashProperty property);
+
 		void Visit(ITokenCountProperty property);
+
 		void Visit(IPercolatorProperty property);
+
 		void Visit(IIntegerRangeProperty property);
+
 		void Visit(IFloatRangeProperty property);
+
 		void Visit(ILongRangeProperty property);
+
 		void Visit(IDoubleRangeProperty property);
+
 		void Visit(IDateRangeProperty property);
+
 		void Visit(IIpRangeProperty property);
+
 		void Visit(IJoinProperty property);
 	}
 

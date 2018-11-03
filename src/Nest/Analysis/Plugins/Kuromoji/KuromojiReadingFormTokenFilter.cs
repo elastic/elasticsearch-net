@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -16,16 +15,16 @@ namespace Nest
 		bool? UseRomaji { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class KuromojiReadingFormTokenFilter : TokenFilterBase, IKuromojiReadingFormTokenFilter
 	{
 		public KuromojiReadingFormTokenFilter() : base("kuromoji_readingform") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public bool? UseRomaji { get; set; }
 	}
 
-	///<inheritdoc/>
+	/// <inheritdoc />
 	public class KuromojiReadingFormTokenFilterDescriptor
 		: TokenFilterDescriptorBase<KuromojiReadingFormTokenFilterDescriptor, IKuromojiReadingFormTokenFilter>, IKuromojiReadingFormTokenFilter
 	{
@@ -33,10 +32,7 @@ namespace Nest
 
 		bool? IKuromojiReadingFormTokenFilter.UseRomaji { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public KuromojiReadingFormTokenFilterDescriptor UseRomaji(bool? useRomaji = true) => Assign(a => a.UseRomaji = useRomaji);
-
-
 	}
-
 }

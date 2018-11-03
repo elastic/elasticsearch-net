@@ -24,13 +24,12 @@ namespace Nest
 
 	public class AdjacencyMatrixAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<AdjacencyMatrixAggregationDescriptor<T>, IAdjacencyMatrixAggregation, T>
-		, IAdjacencyMatrixAggregation
+			, IAdjacencyMatrixAggregation
 		where T : class
 	{
 		INamedFiltersContainer IAdjacencyMatrixAggregation.Filters { get; set; }
 
 		public AdjacencyMatrixAggregationDescriptor<T> Filters(Func<NamedFiltersContainerDescriptor<T>, IPromise<INamedFiltersContainer>> selector) =>
 			Assign(a => a.Filters = selector?.Invoke(new NamedFiltersContainerDescriptor<T>())?.Value);
-
 	}
 }

@@ -1,43 +1,49 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICatResponse<CatPluginsRecord> CatPlugins(Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ICatResponse<CatPluginsRecord> CatPlugins(ICatPluginsRequest request);
 
-		/// <inheritdoc/>
-		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
-		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request, CancellationToken cancellationToken = default(CancellationToken));
-
+		/// <inheritdoc />
+		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICatResponse<CatPluginsRecord> CatPlugins(Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null) =>
-			this.CatPlugins(selector.InvokeOrDefault(new CatPluginsDescriptor()));
+			CatPlugins(selector.InvokeOrDefault(new CatPluginsDescriptor()));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ICatResponse<CatPluginsRecord> CatPlugins(ICatPluginsRequest request) =>
-			this.DoCat<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request, this.LowLevelDispatch.CatPluginsDispatch<CatResponse<CatPluginsRecord>>);
+			DoCat<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request,
+				LowLevelDispatch.CatPluginsDispatch<CatResponse<CatPluginsRecord>>);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(
 			Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
-		) => this.CatPluginsAsync(selector.InvokeOrDefault(new CatPluginsDescriptor()), cancellationToken);
+		) => CatPluginsAsync(selector.InvokeOrDefault(new CatPluginsDescriptor()), cancellationToken);
 
-		public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.DoCatAsync<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request, cancellationToken, this.LowLevelDispatch.CatPluginsDispatchAsync<CatResponse<CatPluginsRecord>>);
-
+		public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			DoCatAsync<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request, cancellationToken,
+				LowLevelDispatch.CatPluginsDispatchAsync<CatResponse<CatPluginsRecord>>);
 	}
 }

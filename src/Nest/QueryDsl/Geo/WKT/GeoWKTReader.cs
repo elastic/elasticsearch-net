@@ -6,12 +6,12 @@ using System.IO;
 namespace Nest
 {
 	/// <summary>
-	/// Reads Well-Known Text (WKT) into <see cref="IGeoShape"/> types
+	/// Reads Well-Known Text (WKT) into <see cref="IGeoShape" /> types
 	/// </summary>
 	public class GeoWKTReader
 	{
 		/// <summary>
-		/// Reads Well-Known Text (WKT) into a new instance of <see cref="IGeoShape"/>
+		/// Reads Well-Known Text (WKT) into a new instance of <see cref="IGeoShape" />
 		/// </summary>
 		public static IGeoShape Read(string wellKnownText)
 		{
@@ -147,7 +147,7 @@ namespace Nest
 			NextComma(tokenizer);
 			var minLat = NextNumber(tokenizer);
 			NextCloser(tokenizer);
-			return new EnvelopeGeoShape(new [] { new GeoCoordinate(maxLat, minLon), new GeoCoordinate(minLat, maxLon) });
+			return new EnvelopeGeoShape(new[] { new GeoCoordinate(maxLat, minLon), new GeoCoordinate(minLat, maxLon) });
 		}
 
 		private static GeometryCollection ParseGeometryCollection(WellKnownTextTokenizer tokenizer)
@@ -186,7 +186,7 @@ namespace Nest
 		{
 			var coordinates = new List<GeoCoordinate>();
 
-			if (IsNumberNext(tokenizer) || (tokenizer.NextToken() == TokenType.LParen))
+			if (IsNumberNext(tokenizer) || tokenizer.NextToken() == TokenType.LParen)
 				coordinates.Add(ParseCoordinate(tokenizer));
 
 			while (NextCloserOrComma(tokenizer) == TokenType.Comma)
@@ -238,7 +238,7 @@ namespace Nest
 		{
 			var token = tokenizer.NextToken();
 			if (token == TokenType.LParen ||
-			    token == TokenType.Word && tokenizer.TokenValue.Equals(WellKnownTextTokenizer.Empty, StringComparison.OrdinalIgnoreCase))
+				token == TokenType.Word && tokenizer.TokenValue.Equals(WellKnownTextTokenizer.Empty, StringComparison.OrdinalIgnoreCase))
 				return token;
 
 			throw new GeoWKTException(
@@ -265,9 +265,9 @@ namespace Nest
 					return double.NaN;
 
 				if (double.TryParse(
-						tokenizer.TokenValue,
-						NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
-						CultureInfo.InvariantCulture, out var d))
+					tokenizer.TokenValue,
+					NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
+					CultureInfo.InvariantCulture, out var d))
 					return d;
 			}
 
@@ -308,38 +308,31 @@ namespace Nest
 
 	/// <summary>
 	/// Tokenizes a sequence of characters into Well-Known Text
-	/// (WKT) <see cref="TokenType"/>
+	/// (WKT) <see cref="TokenType" />
 	/// </summary>
 	internal class WellKnownTextTokenizer : IDisposable
 	{
-		private const int NeedChar = int.MaxValue;
-		private const int CharacterTypesLength = 256;
-
-		public const int Linefeed = '\n';
 		public const int CarriageReturn = '\r';
-		public const int LParen = '(';
-		public const int RParen = ')';
+		private const int CharacterTypesLength = 256;
 		public const int Comma = ',';
 		public const int Comment = '#';
 		public const int Dot = '.';
-		public const int Plus = '+';
-		public const int Minus = '-';
-		public const string NaN = "NAN";
 		public const string Empty = "EMPTY";
 
+		public const int Linefeed = '\n';
+		public const int LParen = '(';
+		public const int Minus = '-';
+		public const string NaN = "NAN";
+		private const int NeedChar = int.MaxValue;
+		public const int Plus = '+';
+		public const int RParen = ')';
+
 		private static readonly CharacterType[] CharacterTypes = new CharacterType[CharacterTypesLength];
+		private readonly List<char> _buffer = new List<char>();
 
-		private static void Chars(int low, int high, CharacterType type)
-		{
-			if (low < 0)
-				low = 0;
-
-			if (high >= CharacterTypesLength)
-				high = CharacterTypesLength - 1;
-
-			while (low <= high)
-				CharacterTypes[low++] = type;
-		}
+		private readonly TextReader _reader;
+		private int _peekChar = NeedChar;
+		private bool _pushed;
 
 		static WellKnownTextTokenizer()
 		{
@@ -358,19 +351,9 @@ namespace Nest
 			Chars(Comment, Comment, CharacterType.Comment);
 		}
 
-		private readonly TextReader _reader;
-		private readonly List<char> _buffer = new List<char>();
-		private bool _pushed;
-		private int _peekChar = NeedChar;
-
 		// TODO: use ReadOnlySpan<char> in future
 		public WellKnownTextTokenizer(TextReader reader) =>
 			_reader = reader ?? throw new ArgumentNullException(nameof(reader));
-
-		/// <summary>
-		/// Gets the current position
-		/// </summary>
-		public int Position { get; private set; }
 
 		/// <summary>
 		/// Gets the current line number
@@ -378,14 +361,36 @@ namespace Nest
 		public int LineNumber { get; private set; } = 1;
 
 		/// <summary>
-		/// Gets the current token value
+		/// Gets the current position
 		/// </summary>
-		public string TokenValue { get; private set; }
+		public int Position { get; private set; }
 
 		/// <summary>
 		/// Gets the current token type
 		/// </summary>
 		public TokenType TokenType { get; private set; } = TokenType.None;
+
+		/// <summary>
+		/// Gets the current token value
+		/// </summary>
+		public string TokenValue { get; private set; }
+
+		/// <summary>
+		/// Disposes of the reader from which characters are read
+		/// </summary>
+		public void Dispose() => _reader?.Dispose();
+
+		private static void Chars(int low, int high, CharacterType type)
+		{
+			if (low < 0)
+				low = 0;
+
+			if (high >= CharacterTypesLength)
+				high = CharacterTypesLength - 1;
+
+			while (low <= high)
+				CharacterTypes[low++] = type;
+		}
 
 		/// <summary>
 		/// A user friendly string for the current token
@@ -521,7 +526,6 @@ namespace Nest
 						characterType = CharacterTypes[c];
 					else
 						characterType = CharacterType.Alpha;
-
 				} while (characterType == CharacterType.Alpha);
 
 				_peekChar = c;
@@ -566,9 +570,7 @@ namespace Nest
 			if (characterType == CharacterType.Comment)
 			{
 				// consume all characters on comment line
-				while ((c = Read()) != Linefeed && c != CarriageReturn && c >= 0)
-				{
-				}
+				while ((c = Read()) != Linefeed && c != CarriageReturn && c >= 0) { }
 
 				_peekChar = c;
 				return NextToken();
@@ -576,10 +578,5 @@ namespace Nest
 
 			return TokenType = TokenType.None;
 		}
-
-		/// <summary>
-		/// Disposes of the reader from which characters are read
-		/// </summary>
-		public void Dispose() => _reader?.Dispose();
 	}
 }

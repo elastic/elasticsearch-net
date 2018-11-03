@@ -29,15 +29,13 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.String) return null;
+
 			var v = reader.Value as string;
 			if (v == null) return null;
 
 			return new Distance(v);
 		}
 
-		public override bool CanConvert(Type objectType)
-		{
-			return true;
-		}
+		public override bool CanConvert(Type objectType) => true;
 	}
 }

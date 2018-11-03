@@ -15,7 +15,7 @@ namespace Nest
 		internal MultiPointGeoShape() : base("multipoint") { }
 
 		public MultiPointGeoShape(IEnumerable<GeoCoordinate> coordinates) : this() =>
-			this.Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
+			Coordinates = coordinates ?? throw new ArgumentNullException(nameof(coordinates));
 
 		public IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}

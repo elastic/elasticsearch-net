@@ -152,12 +152,14 @@ namespace Nest
 		private static void Accept(IQueryVisitor visitor, IEnumerable<IQueryContainer> queries, VisitorScope scope = VisitorScope.Query)
 		{
 			if (queries == null) return;
+
 			foreach (var f in queries) Accept(visitor, f, scope);
 		}
 
 		private static void Accept(IQueryVisitor visitor, IQueryContainer query, VisitorScope scope = VisitorScope.Query)
 		{
 			if (query == null) return;
+
 			visitor.Scope = scope;
 			query.Accept(visitor);
 		}
@@ -165,6 +167,7 @@ namespace Nest
 		private static void Accept(IQueryVisitor visitor, ISpanQuery query, VisitorScope scope = VisitorScope.Span)
 		{
 			if (query == null) return;
+
 			visitor.Scope = scope;
 			query.Accept(visitor);
 		}
@@ -236,6 +239,7 @@ namespace Nest
 			where T : class, ISpanSubQuery
 		{
 			if (qd == null) return;
+
 			VisitQuery(qd, visitor, (v, d) =>
 			{
 				visitor.Visit(qd);

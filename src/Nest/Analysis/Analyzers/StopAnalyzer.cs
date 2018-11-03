@@ -22,21 +22,20 @@ namespace Nest
 		string StopwordsPath { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class StopAnalyzer : AnalyzerBase, IStopAnalyzer
 	{
-		public StopAnalyzer() : base("stop") {}
+		public StopAnalyzer() : base("stop") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public StopWords StopWords { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string StopwordsPath { get; set; }
 	}
 
-	/// <inheritdoc/>
-	public class StopAnalyzerDescriptor :
-		AnalyzerDescriptorBase<StopAnalyzerDescriptor, IStopAnalyzer>, IStopAnalyzer
+	/// <inheritdoc />
+	public class StopAnalyzerDescriptor : AnalyzerDescriptorBase<StopAnalyzerDescriptor, IStopAnalyzer>, IStopAnalyzer
 	{
 		protected override string Type => "stop";
 
@@ -51,6 +50,5 @@ namespace Nest
 		public StopAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
 
 		public StopAnalyzerDescriptor StopwordsPath(string path) => Assign(a => a.StopwordsPath = path);
-
 	}
 }

@@ -20,12 +20,9 @@ namespace Nest
 	/// <inheritdoc />
 	public class ChainInput : InputBase, IChainInput
 	{
-		public ChainInput() {}
+		public ChainInput() { }
 
-		public ChainInput(IDictionary<string, InputContainer> inputs)
-		{
-			this.Inputs = inputs;
-		}
+		public ChainInput(IDictionary<string, InputContainer> inputs) => Inputs = inputs;
 
 		/// <inheritdoc />
 		public IDictionary<string, InputContainer> Inputs { get; set; }
@@ -36,12 +33,9 @@ namespace Nest
 	/// <inheritdoc />
 	public class ChainInputDescriptor : DescriptorBase<ChainInputDescriptor, IChainInput>, IChainInput
 	{
-		public ChainInputDescriptor() {}
+		public ChainInputDescriptor() { }
 
-		public ChainInputDescriptor(IDictionary<string, InputContainer> inputs)
-		{
-			Self.Inputs = inputs;
-		}
+		public ChainInputDescriptor(IDictionary<string, InputContainer> inputs) => Self.Inputs = inputs;
 
 		IDictionary<string, InputContainer> IChainInput.Inputs { get; set; }
 

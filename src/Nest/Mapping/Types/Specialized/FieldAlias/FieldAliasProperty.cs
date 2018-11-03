@@ -33,15 +33,14 @@ namespace Nest
 		: PropertyDescriptorBase<FieldAliasPropertyDescriptor<T>, IFieldAliasProperty, T>, IFieldAliasProperty
 		where T : class
 	{
-		Field IFieldAliasProperty.Path { get; set; }
-
 		public FieldAliasPropertyDescriptor() : base(FieldType.Alias) { }
+
+		Field IFieldAliasProperty.Path { get; set; }
 
 		/// <inheritdoc cref="IFieldAliasProperty.Path" />
 		public FieldAliasPropertyDescriptor<T> Path(Expression<Func<T, object>> field) => Assign(a => a.Path = field);
 
 		/// <inheritdoc cref="IFieldAliasProperty.Path" />
 		public FieldAliasPropertyDescriptor<T> Path(Field field) => Assign(a => a.Path = field);
-
 	}
 }

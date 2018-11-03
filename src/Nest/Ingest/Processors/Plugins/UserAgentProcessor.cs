@@ -21,81 +21,80 @@ namespace Nest
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
-		[JsonProperty("target_field")]
-		Field TargetField { get; set; }
-
-		[JsonProperty("regex_file")]
-		string RegexFile { get; set; }
-
-		[JsonProperty("options")]
-		IEnumerable<UserAgentProperty> Properties { get; set; }
-
 		/// <summary>
 		/// If `true` and `field` does not exist, the processor quietly exits without modifying the document
 		/// </summary>
 		[JsonProperty("ignore_missing")]
 		bool? IgnoreMissing { get; set; }
 
+		[JsonProperty("options")]
+		IEnumerable<UserAgentProperty> Properties { get; set; }
+
+		[JsonProperty("regex_file")]
+		string RegexFile { get; set; }
+
+		[JsonProperty("target_field")]
+		Field TargetField { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class UserAgentProcessor : ProcessorBase, IUserAgentProcessor
 	{
-		protected override string Name => "user_agent";
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Field Field { get; set; }
 
-		/// <inheritdoc/>
-		public Field TargetField { get; set; }
+		/// <inheritdoc />
+		public bool? IgnoreMissing { get; set; }
 
-		/// <inheritdoc/>
-		public string RegexFile { get; set; }
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IEnumerable<UserAgentProperty> Properties { get; set; }
 
-		/// <inheritdoc/>
-		public bool? IgnoreMissing { get; set; }
+		/// <inheritdoc />
+		public string RegexFile { get; set; }
+
+		/// <inheritdoc />
+		public Field TargetField { get; set; }
+
+		protected override string Name => "user_agent";
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class UserAgentProcessorDescriptor<T>
-	: ProcessorDescriptorBase<UserAgentProcessorDescriptor<T>, IUserAgentProcessor>, IUserAgentProcessor
-	where T : class
+		: ProcessorDescriptorBase<UserAgentProcessorDescriptor<T>, IUserAgentProcessor>, IUserAgentProcessor
+		where T : class
 	{
 		protected override string Name => "user_agent";
 
 		Field IUserAgentProcessor.Field { get; set; }
-		Field IUserAgentProcessor.TargetField { get; set; }
-		string IUserAgentProcessor.RegexFile { get; set; }
 		bool? IUserAgentProcessor.IgnoreMissing { get; set; }
 		IEnumerable<UserAgentProperty> IUserAgentProcessor.Properties { get; set; }
+		string IUserAgentProcessor.RegexFile { get; set; }
+		Field IUserAgentProcessor.TargetField { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> TargetField(Field field) => Assign(a => a.TargetField = field);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.TargetField = objectPath);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> RegexFile(string file) => Assign(a => a.RegexFile = file);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> IgnoreMissing(bool? ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> Properties(IEnumerable<UserAgentProperty> properties) => Assign(a => a.Properties = properties);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public UserAgentProcessorDescriptor<T> Properties(params UserAgentProperty[] properties) => Assign(a => a.Properties = properties);
 	}
 }

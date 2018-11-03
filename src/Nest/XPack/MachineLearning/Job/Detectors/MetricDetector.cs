@@ -60,89 +60,88 @@ namespace Nest
 		}
 	}
 
-	public interface IMetricDetector : IDetector, IByFieldNameDetector, IOverFieldNameDetector,
-		IPartitionFieldNameDetector, IFieldNameDetector
-	{
-	}
+	public interface IMetricDetector
+		: IDetector, IByFieldNameDetector, IOverFieldNameDetector,
+			IPartitionFieldNameDetector, IFieldNameDetector { }
 
 	public abstract class MetricDetectorBase : DetectorBase, IGeographicDetector
 	{
-		protected MetricDetectorBase(MetricFunction function) : base(function.GetStringValue()) {}
+		protected MetricDetectorBase(MetricFunction function) : base(function.GetStringValue()) { }
 
 		public Field ByFieldName { get; set; }
+		public Field FieldName { get; set; }
 		public Field OverFieldName { get; set; }
 		public Field PartitionFieldName { get; set; }
-		public Field FieldName { get; set; }
 	}
 
 	public class MinDetector : MetricDetectorBase
 	{
-		public MinDetector() : base(MetricFunction.Min) {}
+		public MinDetector() : base(MetricFunction.Min) { }
 	}
 
 	public class MaxDetector : MetricDetectorBase
 	{
-		public MaxDetector() : base(MetricFunction.Max) {}
+		public MaxDetector() : base(MetricFunction.Max) { }
 	}
 
 	public class MedianDetector : MetricDetectorBase
 	{
-		public MedianDetector() : base(MetricFunction.Median) {}
+		public MedianDetector() : base(MetricFunction.Median) { }
 	}
 
 	public class HighMedianDetector : MetricDetectorBase
 	{
-		public HighMedianDetector() : base(MetricFunction.HighMedian) {}
+		public HighMedianDetector() : base(MetricFunction.HighMedian) { }
 	}
 
 	public class LowMedianDetector : MetricDetectorBase
 	{
-		public LowMedianDetector() : base(MetricFunction.LowMedian) {}
+		public LowMedianDetector() : base(MetricFunction.LowMedian) { }
 	}
 
 	public class MeanDetector : MetricDetectorBase
 	{
-		public MeanDetector() : base(MetricFunction.Mean) {}
+		public MeanDetector() : base(MetricFunction.Mean) { }
 	}
 
 	public class HighMeanDetector : MetricDetectorBase
 	{
-		public HighMeanDetector() : base(MetricFunction.HighMean) {}
+		public HighMeanDetector() : base(MetricFunction.HighMean) { }
 	}
 
 	public class LowMeanDetector : MetricDetectorBase
 	{
-		public LowMeanDetector() : base(MetricFunction.LowMean) {}
+		public LowMeanDetector() : base(MetricFunction.LowMean) { }
 	}
 
 	public class MetricDetector : MetricDetectorBase
 	{
-		public MetricDetector() : base(MetricFunction.Metric) {}
+		public MetricDetector() : base(MetricFunction.Metric) { }
 	}
 
 	public class VarpDetector : MetricDetectorBase
 	{
-		public VarpDetector() : base(MetricFunction.Varp) {}
+		public VarpDetector() : base(MetricFunction.Varp) { }
 	}
 
 	public class HighVarpDetector : MetricDetectorBase
 	{
-		public HighVarpDetector() : base(MetricFunction.HighVarp) {}
+		public HighVarpDetector() : base(MetricFunction.HighVarp) { }
 	}
 
 	public class LowVarpDetector : MetricDetectorBase
 	{
-		public LowVarpDetector() : base(MetricFunction.LowVarp) {}
+		public LowVarpDetector() : base(MetricFunction.LowVarp) { }
 	}
 
 	public class MetricDetectorDescriptor<T> : DetectorDescriptorBase<MetricDetectorDescriptor<T>, IMetricDetector>, IMetricDetector where T : class
 	{
+		public MetricDetectorDescriptor(MetricFunction function) : base(function.GetStringValue()) { }
+
 		Field IByFieldNameDetector.ByFieldName { get; set; }
+		Field IFieldNameDetector.FieldName { get; set; }
 		Field IOverFieldNameDetector.OverFieldName { get; set; }
 		Field IPartitionFieldNameDetector.PartitionFieldName { get; set; }
-		Field IFieldNameDetector.FieldName { get; set; }
-
-		public MetricDetectorDescriptor(MetricFunction function) : base(function.GetStringValue()) {}
 
 		public MetricDetectorDescriptor<T> FieldName(Field fieldName) => Assign(a => a.FieldName = fieldName);
 
@@ -158,6 +157,7 @@ namespace Nest
 
 		public MetricDetectorDescriptor<T> PartitionFieldName(Field partitionFieldName) => Assign(a => a.PartitionFieldName = partitionFieldName);
 
-		public MetricDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) => Assign(a => a.PartitionFieldName = objectPath);
+		public MetricDetectorDescriptor<T> PartitionFieldName(Expression<Func<T, object>> objectPath) =>
+			Assign(a => a.PartitionFieldName = objectPath);
 	}
 }

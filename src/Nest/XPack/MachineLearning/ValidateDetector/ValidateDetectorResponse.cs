@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
-	public interface IValidateDetectorResponse : IAcknowledgedResponse {}
+	public interface IValidateDetectorResponse : IAcknowledgedResponse { }
 
-	public class ValidateDetectorResponse : AcknowledgedResponseBase, IValidateDetectorResponse {}
+	public class ValidateDetectorResponse : AcknowledgedResponseBase, IValidateDetectorResponse { }
 }

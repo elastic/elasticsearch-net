@@ -11,7 +11,7 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum IcuCollationCaseFirst
 	{
-		[EnumMember(Value="lower")] Lower,
-		[EnumMember(Value="upper")] Upper
+		[EnumMember(Value = "lower")] Lower,
+		[EnumMember(Value = "upper")] Upper
 	}
 }

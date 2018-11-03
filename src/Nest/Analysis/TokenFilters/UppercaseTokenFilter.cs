@@ -5,17 +5,16 @@
 	/// </summary>
 	public interface IUppercaseTokenFilter : ITokenFilter { }
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class UppercaseTokenFilter : TokenFilterBase, IUppercaseTokenFilter
 	{
 		public UppercaseTokenFilter() : base("uppercase") { }
 	}
 
-	///<inheritdoc/>
-	public class UppercaseTokenFilterDescriptor 
+	/// <inheritdoc />
+	public class UppercaseTokenFilterDescriptor
 		: TokenFilterDescriptorBase<UppercaseTokenFilterDescriptor, IUppercaseTokenFilter>, IUppercaseTokenFilter
 	{
 		protected override string Type => "uppercase";
 	}
-
 }

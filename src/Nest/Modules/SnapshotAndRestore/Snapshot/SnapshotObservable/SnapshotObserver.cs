@@ -7,10 +7,8 @@ namespace Nest
 		public SnapshotObserver(
 			Action<ISnapshotStatusResponse> onNext = null,
 			Action<Exception> onError = null,
-			Action completed = null)
-			: base(onNext, onError, completed)
-		{
-
-		}
+			Action completed = null
+		)
+			: base(onNext, onError, completed) { }
 	}
 }

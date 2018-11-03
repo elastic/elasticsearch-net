@@ -7,13 +7,18 @@ namespace Nest
 {
 	public class RoutingResolver
 	{
-		private static readonly ConcurrentDictionary<Type, Func<object, JoinField>> PropertyGetDelegates = new ConcurrentDictionary<Type, Func<object, JoinField>>();
-		private readonly ConcurrentDictionary<Type, Func<object, string>> LocalRouteDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private static readonly ConcurrentDictionary<Type, Func<object, JoinField>> PropertyGetDelegates =
+			new ConcurrentDictionary<Type, Func<object, JoinField>>();
+
 		private static readonly MethodInfo MakeDelegateMethodInfo =
 			typeof(RoutingResolver).GetMethod(nameof(MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
 
+
 		private readonly IConnectionSettingsValues _connectionSettings;
 		private readonly IdResolver _idResolver;
+
+		private readonly ConcurrentDictionary<Type, Func<object, string>>
+			LocalRouteDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 
 		public RoutingResolver(IConnectionSettingsValues connectionSettings, IdResolver idResolver)
 		{
@@ -21,7 +26,7 @@ namespace Nest
 			_idResolver = idResolver;
 		}
 
-		PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName) =>
+		private PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName) =>
 			type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
 
 		internal static Func<object, object> MakeDelegate<T, TReturn>(MethodInfo @get)
@@ -35,6 +40,7 @@ namespace Nest
 		public string Resolve(Type type, object @object)
 		{
 			if (TryConnectionSettingsRoute(type, @object, out var route)) return route;
+
 			var joinField = GetJoinFieldFromObject(type, @object);
 			return joinField?.Match(p => _idResolver.Resolve(@object), c => ResolveId(c.Parent, _connectionSettings));
 		}
@@ -42,7 +48,7 @@ namespace Nest
 		private bool TryConnectionSettingsRoute(Type type, object @object, out string route)
 		{
 			route = null;
-			if (!this._connectionSettings.RouteProperties.TryGetValue(type, out var propertyName))
+			if (!_connectionSettings.RouteProperties.TryGetValue(type, out var propertyName))
 				return false;
 
 			if (LocalRouteDelegates.TryGetValue(type, out var cachedLookup))
@@ -92,7 +98,7 @@ namespace Nest
 		{
 			var getMethod = joinProperty.GetGetMethod();
 			var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
-			var func = (Func<object, object>) generic.Invoke(null, new object[] {getMethod});
+			var func = (Func<object, object>)generic.Invoke(null, new object[] { getMethod });
 			return func;
 		}
 
@@ -101,8 +107,8 @@ namespace Nest
 			var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
 			try
 			{
-                var joinField = properties.SingleOrDefault(p => p.PropertyType == typeof(JoinField));
-                return joinField;
+				var joinField = properties.SingleOrDefault(p => p.PropertyType == typeof(JoinField));
+				return joinField;
 			}
 			catch (InvalidOperationException e)
 			{

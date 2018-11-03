@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -10,11 +9,11 @@ namespace Nest
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("index")]
-		bool? Index { get; set; }
-
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
+
+		[JsonProperty("index")]
+		bool? Index { get; set; }
 
 		[JsonProperty("null_value")]
 		double? NullValue { get; set; }
@@ -27,12 +26,11 @@ namespace Nest
 
 		public string Analyzer { get; set; }
 
-		public bool? Index { get; set; }
-
 		public double? Boost { get; set; }
 
-		public double? NullValue { get; set; }
+		public bool? Index { get; set; }
 
+		public double? NullValue { get; set; }
 	}
 
 	[DebuggerDisplay("{DebugDisplay}")]
@@ -48,8 +46,11 @@ namespace Nest
 		double? ITokenCountProperty.NullValue { get; set; }
 
 		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+
 		public TokenCountPropertyDescriptor<T> Boost(double? boost) => Assign(a => a.Boost = boost);
+
 		public TokenCountPropertyDescriptor<T> Index(bool? index = true) => Assign(a => a.Index = index);
+
 		public TokenCountPropertyDescriptor<T> NullValue(double? nullValue) => Assign(a => a.NullValue = nullValue);
 	}
 }

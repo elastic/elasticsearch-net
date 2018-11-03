@@ -9,8 +9,10 @@ namespace Nest
 	{
 		[EnumMember(Value = "json")]
 		Json,
+
 		[EnumMember(Value = "yaml")]
 		Yaml,
+
 		[EnumMember(Value = "text")]
 		Text
 	}

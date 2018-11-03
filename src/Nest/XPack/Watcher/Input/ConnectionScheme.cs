@@ -9,6 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "http")]
 		Http,
+
 		[EnumMember(Value = "https")]
 		Https
 	}

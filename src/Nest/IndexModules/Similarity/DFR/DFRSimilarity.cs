@@ -2,26 +2,28 @@
 
 namespace Nest
 {
-
 	/// <summary>
 	/// Implements the divergence from randomness (DFR) framework introduced in Gianni Amati and Cornelis Joost Van Rijsbergen. 2002.
-	/// Probabilistic models of information retrieval based on measuring the divergence from randomness. ACM Trans. Inf. Syst. 20, 4 (October 2002), 357-389.
-	/// The DFR scoring formula is composed of three separate components: the basic model, the aftereffect and an additional normalization component,
-	/// represented by the classes BasicModel, AfterEffect and Normalization, respectively.The names of these classes were chosen to match the names of their counterparts in the Terrier IR engine.
+	/// Probabilistic models of information retrieval based on measuring the divergence from randomness. ACM Trans. Inf. Syst. 20, 4 (October
+	/// 2002), 357-389.
+	/// The DFR scoring formula is composed of three separate components: the basic model, the aftereffect and an additional normalization
+	/// component,
+	/// represented by the classes BasicModel, AfterEffect and Normalization, respectively.The names of these classes were chosen to match the
+	/// names of their counterparts in the Terrier IR engine.
 	/// </summary>
 	public interface IDFRSimilarity : ISimilarity
 	{
-		/// <summary>
-		/// The basic model
-		/// </summary>
-		[JsonProperty("basic_model")]
-		DFRBasicModel? BasicModel { get; set; }
-
 		/// <summary>
 		/// The after effect
 		/// </summary>
 		[JsonProperty("after_effect")]
 		DFRAfterEffect? AfterEffect { get; set; }
+
+		/// <summary>
+		/// The basic model
+		/// </summary>
+		[JsonProperty("basic_model")]
+		DFRBasicModel? BasicModel { get; set; }
 
 		/// <summary>
 		/// The normalization
@@ -54,53 +56,53 @@ namespace Nest
 		double? NormalizationZZ { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class DFRSimilarity : IDFRSimilarity
 	{
-		public string Type => "DFR";
-
-		/// <inheritdoc/>
-		public DFRBasicModel? BasicModel { get; set; }
-
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public DFRAfterEffect? AfterEffect { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
+		public DFRBasicModel? BasicModel { get; set; }
+
+		/// <inheritdoc />
 		public Normalization? Normalization { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationH1C { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationH2C { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationH3C { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public double? NormalizationZZ { get; set; }
+
+		public string Type => "DFR";
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class DFRSimilarityDescriptor
 		: DescriptorBase<DFRSimilarityDescriptor, IDFRSimilarity>, IDFRSimilarity
 	{
-		string ISimilarity.Type => "DFR";
-		DFRBasicModel? IDFRSimilarity.BasicModel { get; set; }
 		DFRAfterEffect? IDFRSimilarity.AfterEffect { get; set; }
+		DFRBasicModel? IDFRSimilarity.BasicModel { get; set; }
 		Normalization? IDFRSimilarity.Normalization { get; set; }
 		double? IDFRSimilarity.NormalizationH1C { get; set; }
 		double? IDFRSimilarity.NormalizationH2C { get; set; }
 		double? IDFRSimilarity.NormalizationH3C { get; set; }
 		double? IDFRSimilarity.NormalizationZZ { get; set; }
+		string ISimilarity.Type => "DFR";
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public DFRSimilarityDescriptor BasicModel(DFRBasicModel? model) => Assign(a => a.BasicModel = model);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public DFRSimilarityDescriptor AfterEffect(DFRAfterEffect? afterEffect) => Assign(a => a.AfterEffect = afterEffect);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public DFRSimilarityDescriptor NoNormalization() => Assign(a => a.Normalization = Normalization.No);
 
 		/// <summary>
@@ -109,7 +111,7 @@ namespace Nest
 		/// <param name="c">hyper-parameter that controls the term frequency normalization with respect to the document length.</param>
 		public DFRSimilarityDescriptor NormalizationH1(double? c) => Assign(a =>
 		{
-			a.Normalization = c == null ? (Normalization?) null : Normalization.H1;
+			a.Normalization = c == null ? (Normalization?)null : Normalization.H1;
 			a.NormalizationH1C = c;
 		});
 
@@ -119,7 +121,7 @@ namespace Nest
 		/// <param name="c">hyper-parameter that controls the term frequency normalization with respect to the document length.</param>
 		public DFRSimilarityDescriptor NormalizationH2(double? c) => Assign(a =>
 		{
-			a.Normalization = c == null ? (Normalization?) null : Normalization.H2;
+			a.Normalization = c == null ? (Normalization?)null : Normalization.H2;
 			a.NormalizationH1C = c;
 		});
 
@@ -129,7 +131,7 @@ namespace Nest
 		/// <param name="mu">smoothing parameter μ.</param>
 		public DFRSimilarityDescriptor NormalizationH3(double? mu) => Assign(a =>
 		{
-			a.Normalization = mu == null ? (Normalization?) null : Normalization.H3;
+			a.Normalization = mu == null ? (Normalization?)null : Normalization.H3;
 			a.NormalizationH1C = mu;
 		});
 
@@ -137,9 +139,8 @@ namespace Nest
 		/// <param name="z">represents A/(A+1) where A measures the specificity of the language..</param>
 		public DFRSimilarityDescriptor NormalizationZ(double? z) => Assign(a =>
 		{
-			a.Normalization = z == null ? (Normalization?) null : Normalization.Z;
+			a.Normalization = z == null ? (Normalization?)null : Normalization.Z;
 			a.NormalizationH1C = z;
 		});
 	}
-
 }

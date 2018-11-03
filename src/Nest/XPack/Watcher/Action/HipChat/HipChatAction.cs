@@ -15,23 +15,21 @@ namespace Nest
 
 	public class HipChatAction : ActionBase, IHipChatAction
 	{
-		public override ActionType ActionType => ActionType.HipChat;
-
-		public HipChatAction(string name) : base(name) {}
+		public HipChatAction(string name) : base(name) { }
 
 		public string Account { get; set; }
+		public override ActionType ActionType => ActionType.HipChat;
 
 		public IHipChatMessage Message { get; set; }
 	}
 
 	public class HipChatActionDescriptor : ActionsDescriptorBase<HipChatActionDescriptor, IHipChatAction>, IHipChatAction
 	{
-		string IHipChatAction.Account { get; set; }
-		IHipChatMessage IHipChatAction.Message { get; set; }
+		public HipChatActionDescriptor(string name) : base(name) { }
 
 		protected override ActionType ActionType => ActionType.HipChat;
-
-		public HipChatActionDescriptor(string name) : base(name) {}
+		string IHipChatAction.Account { get; set; }
+		IHipChatMessage IHipChatAction.Message { get; set; }
 
 		public HipChatActionDescriptor Account(string account) => Assign(a => a.Account = account);
 

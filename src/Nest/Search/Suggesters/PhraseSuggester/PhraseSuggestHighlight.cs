@@ -5,25 +5,23 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPhraseSuggestHighlight
 	{
-		[JsonProperty("pre_tag")]
-		string PreTag { get; set; }
-
 		[JsonProperty("post_tag")]
 		string PostTag { get; set; }
+
+		[JsonProperty("pre_tag")]
+		string PreTag { get; set; }
 	}
 
 	public class PhraseSuggestHighlight : IPhraseSuggestHighlight
 	{
-		public string PreTag { get; set; }
-
 		public string PostTag { get; set; }
+		public string PreTag { get; set; }
 	}
 
 	public class PhraseSuggestHighlightDescriptor : DescriptorBase<PhraseSuggestHighlightDescriptor, IPhraseSuggestHighlight>, IPhraseSuggestHighlight
 	{
-		string IPhraseSuggestHighlight.PreTag { get; set; }
-
 		string IPhraseSuggestHighlight.PostTag { get; set; }
+		string IPhraseSuggestHighlight.PreTag { get; set; }
 
 		public PhraseSuggestHighlightDescriptor PreTag(string preTag) => Assign(a => a.PreTag = preTag);
 

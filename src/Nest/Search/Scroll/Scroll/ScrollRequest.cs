@@ -14,20 +14,19 @@ namespace Nest
 
 	public partial class ScrollRequest
 	{
-		private Type _clrType { get; set; }
-		Type ICovariantSearchRequest.ClrType => this._clrType;
-
-		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
+		public ScrollRequest(string scrollId, Time scroll)
+		{
+			Scroll = scroll;
+			ScrollId = scrollId;
+		}
 
 		public Time Scroll { get; set; }
 
 		public string ScrollId { get; set; }
 
-		public ScrollRequest(string scrollId, Time scroll)
-		{
-			this.Scroll = scroll;
-			this.ScrollId = scrollId;
-		}
+		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
+		private Type _clrType { get; set; }
+		Type ICovariantSearchRequest.ClrType => _clrType;
 	}
 
 	public partial class ScrollDescriptor<T> where T : class

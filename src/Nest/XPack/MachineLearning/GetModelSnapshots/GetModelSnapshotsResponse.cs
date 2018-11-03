@@ -14,7 +14,7 @@ namespace Nest
 
 	public class GetModelSnapshotsResponse : ResponseBase, IGetModelSnapshotsResponse
 	{
-		public long Count { get; internal set;  }
+		public long Count { get; internal set; }
 
 		public IReadOnlyCollection<ModelSnapshot> ModelSnapshots { get; internal set; } = EmptyReadOnly<ModelSnapshot>.Collection;
 	}

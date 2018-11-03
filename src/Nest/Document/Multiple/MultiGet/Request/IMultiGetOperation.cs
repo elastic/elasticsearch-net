@@ -8,17 +8,15 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MultiGetOperationDescriptor<object>>))]
 	public interface IMultiGetOperation
 	{
-		[JsonProperty("_index")]
-		IndexName Index { get; set; }
+		bool CanBeFlattened { get; }
 
-		[JsonProperty("_type")]
-		TypeName Type { get; set; }
+		Type ClrType { get; }
 
 		[JsonProperty("_id")]
 		Id Id { get; set; }
 
-		[JsonProperty("stored_fields")]
-		Fields StoredFields { get; set; }
+		[JsonProperty("_index")]
+		IndexName Index { get; set; }
 
 		[JsonProperty("routing")]
 		string Routing { get; set; }
@@ -26,14 +24,16 @@ namespace Nest
 		[JsonProperty("_source")]
 		Union<bool, ISourceFilter> Source { get; set; }
 
+		[JsonProperty("stored_fields")]
+		Fields StoredFields { get; set; }
+
+		[JsonProperty("_type")]
+		TypeName Type { get; set; }
+
 		[JsonProperty("version")]
 		long? Version { get; set; }
 
 		[JsonProperty("version_type")]
 		VersionType? VersionType { get; set; }
-
-		Type ClrType { get; }
-
-		bool CanBeFlattened { get; }
 	}
 }

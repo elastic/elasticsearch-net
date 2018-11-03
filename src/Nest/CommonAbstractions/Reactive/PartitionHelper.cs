@@ -16,7 +16,8 @@ namespace Nest
 			_partitionSize = ps;
 		}
 
-		IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
 		public IEnumerator<IList<TDocument>> GetEnumerator()
 		{
 			using (var enumerator = _items.GetEnumerator())
@@ -32,6 +33,7 @@ namespace Nest
 			for (var i = 0; i < _partitionSize; ++i)
 			{
 				yield return enumerator.Current;
+
 				_hasMoreItems = enumerator.MoveNext();
 				if (!_hasMoreItems) yield break;
 			}

@@ -14,19 +14,20 @@ namespace Nest
 
 	public class ConstantScoreQuery : QueryBase, IConstantScoreQuery
 	{
-		protected override bool Conditionless => IsConditionless(this);
-		public string Lang { get; set; }
-		public string Script { get; set; }
-		public Dictionary<string, object> Params { get; set; }
 		public QueryContainer Filter { get; set; }
+		public string Lang { get; set; }
+		public Dictionary<string, object> Params { get; set; }
+		public string Script { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.ConstantScore = this;
+
 		internal static bool IsConditionless(IConstantScoreQuery q) => q.Filter.NotWritable();
 	}
 
 	public class ConstantScoreQueryDescriptor<T>
 		: QueryDescriptorBase<ConstantScoreQueryDescriptor<T>, IConstantScoreQuery>
-		, IConstantScoreQuery where T : class
+			, IConstantScoreQuery where T : class
 	{
 		protected override bool Conditionless => ConstantScoreQuery.IsConditionless(this);
 		QueryContainer IConstantScoreQuery.Filter { get; set; }

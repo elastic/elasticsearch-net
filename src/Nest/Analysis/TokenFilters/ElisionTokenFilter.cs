@@ -15,28 +15,27 @@ namespace Nest
 		IEnumerable<string> Articles { get; set; }
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc />
 	public class ElisionTokenFilter : TokenFilterBase, IElisionTokenFilter
 	{
 		public ElisionTokenFilter() : base("elision") { }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IEnumerable<string> Articles { get; set; }
 	}
-	///<inheritdoc/>
-	public class ElisionTokenFilterDescriptor 
+
+	/// <inheritdoc />
+	public class ElisionTokenFilterDescriptor
 		: TokenFilterDescriptorBase<ElisionTokenFilterDescriptor, IElisionTokenFilter>, IElisionTokenFilter
 	{
 		protected override string Type => "elision";
 
 		IEnumerable<string> IElisionTokenFilter.Articles { get; set; }
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public ElisionTokenFilterDescriptor Articles(IEnumerable<string> articles) => Assign(a => a.Articles = articles);
 
-		///<inheritdoc/>
+		/// <inheritdoc />
 		public ElisionTokenFilterDescriptor Articles(params string[] articles) => Assign(a => a.Articles = articles);
-
 	}
-
 }

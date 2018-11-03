@@ -9,10 +9,13 @@ namespace Nest
 	{
 		[EnumMember(Value = "started")]
 		Started,
+
 		[EnumMember(Value = "stopped")]
 		Stopped,
+
 		[EnumMember(Value = "starting")]
 		Starting,
+
 		[EnumMember(Value = "stopping")]
 		Stopping
 	}

@@ -8,12 +8,11 @@ namespace Nest
 {
 	internal class GetEnumerator<TSource> : IEnumerator<TSource>, IObserver<TSource>
 	{
+		private readonly SemaphoreSlim _gate;
 		private readonly ConcurrentQueue<TSource> _queue;
 		private TSource _current;
-		private Exception _error;
 		private bool _disposed;
-
-		private readonly SemaphoreSlim _gate;
+		private Exception _error;
 		private IDisposable _subscription;
 
 		public GetEnumerator()
@@ -22,33 +21,15 @@ namespace Nest
 			_gate = new SemaphoreSlim(0);
 		}
 
-		private IEnumerator<TSource> Run(IObservable<TSource> source)
-		{
-			//
-			// [OK] Use of unsafe Subscribe: non-pretentious exact mirror with the dual GetEnumerator method.
-			//
-			_subscription = source.Subscribe/*Unsafe*/(this);
-			return this;
-		}
-		public IEnumerable<TSource> ToEnumerable(IObservable<TSource> source) =>
-			new AnonymousEnumerable<TSource>(() => this.Run(source));
+		public TSource Current => _current;
 
-		public virtual void OnNext(TSource value)
-		{
-			_queue.Enqueue(value);
-			_gate.Release();
-		}
+		object IEnumerator.Current => _current;
 
-		public void OnError(Exception error)
-		{
-			_error = error;
-			_subscription.Dispose();
-			_gate.Release();
-		}
-
-		public void OnCompleted()
+		public void Dispose()
 		{
 			_subscription.Dispose();
+
+			_disposed = true;
 			_gate.Release();
 		}
 
@@ -68,41 +49,48 @@ namespace Nest
 			return false;
 		}
 
-		public TSource Current => _current;
+		public void Reset() => throw new NotSupportedException();
 
-		object IEnumerator.Current => _current;
-
-		public void Dispose()
+		public void OnCompleted()
 		{
 			_subscription.Dispose();
-
-			_disposed = true;
 			_gate.Release();
 		}
 
-		public void Reset()
+		public void OnError(Exception error)
 		{
-			throw new NotSupportedException();
+			_error = error;
+			_subscription.Dispose();
+			_gate.Release();
 		}
+
+		public virtual void OnNext(TSource value)
+		{
+			_queue.Enqueue(value);
+			_gate.Release();
+		}
+
+		private IEnumerator<TSource> Run(IObservable<TSource> source)
+		{
+			//
+			// [OK] Use of unsafe Subscribe: non-pretentious exact mirror with the dual GetEnumerator method.
+			//
+			_subscription = source.Subscribe /*Unsafe*/(this);
+			return this;
+		}
+
+		public IEnumerable<TSource> ToEnumerable(IObservable<TSource> source) =>
+			new AnonymousEnumerable<TSource>(() => Run(source));
 
 		internal sealed class AnonymousEnumerable<T> : IEnumerable<T>
 		{
 			private readonly Func<IEnumerator<T>> _getEnumerator;
 
-			public AnonymousEnumerable(Func<IEnumerator<T>> getEnumerator)
-			{
-				this._getEnumerator = getEnumerator;
-			}
+			public AnonymousEnumerable(Func<IEnumerator<T>> getEnumerator) => _getEnumerator = getEnumerator;
 
-			public IEnumerator<T> GetEnumerator()
-			{
-				return _getEnumerator();
-			}
+			IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-			{
-				return this.GetEnumerator();
-			}
+			public IEnumerator<T> GetEnumerator() => _getEnumerator();
 		}
 	}
 }

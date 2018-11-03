@@ -8,12 +8,6 @@ namespace Nest
 	[DebuggerDisplay("{DebugDisplay,nq}")]
 	public class TaskId : IUrlParameter, IEquatable<TaskId>
 	{
-		public string NodeId { get; }
-		public long TaskNumber { get; }
-		public string FullyQualifiedId { get; }
-
-		private string DebugDisplay => FullyQualifiedId;
-
 		/// <summary>
 		/// A task id exists in the form [node_id]:[task_id]
 		/// </summary>
@@ -27,18 +21,26 @@ namespace Nest
 			if (tokens.Length != 2)
 				throw new ArgumentException($"TaskId:{taskId} not in expected format of <node_id>:<task_id>", nameof(taskId));
 
-			this.NodeId = tokens[0];
-			this.FullyQualifiedId = taskId;
+			NodeId = tokens[0];
+			FullyQualifiedId = taskId;
 
 			if (!long.TryParse(tokens[1].Trim(), NumberStyles.Any, CultureInfo.InvariantCulture, out var t) || t < -1 || t == 0)
 				throw new ArgumentException($"TaskId task component:{tokens[1]} could not be parsed to long or is out of range", nameof(taskId));
 
-			this.TaskNumber = t;
+			TaskNumber = t;
 		}
 
-		public override string ToString() => FullyQualifiedId;
+		public string FullyQualifiedId { get; }
+		public string NodeId { get; }
+		public long TaskNumber { get; }
+
+		private string DebugDisplay => FullyQualifiedId;
+
+		public bool Equals(TaskId other) => EqualsString(other?.FullyQualifiedId);
 
 		public string GetString(IConnectionConfigurationValues settings) => FullyQualifiedId;
+
+		public override string ToString() => FullyQualifiedId;
 
 		public static implicit operator TaskId(string taskId) => taskId.IsNullOrEmpty() ? null : new TaskId(taskId);
 
@@ -46,18 +48,16 @@ namespace Nest
 
 		public static bool operator !=(TaskId left, TaskId right) => !Equals(left, right);
 
-		public bool Equals(TaskId other) => EqualsString(other?.FullyQualifiedId);
-
 		public override bool Equals(object obj) =>
-			obj != null && obj is string s ? this.EqualsString(s) : (obj is TaskId i) && this.EqualsString(i.FullyQualifiedId);
+			obj != null && obj is string s ? EqualsString(s) : obj is TaskId i && EqualsString(i.FullyQualifiedId);
 
-		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == this.FullyQualifiedId;
+		private bool EqualsString(string other) => !other.IsNullOrEmpty() && other == FullyQualifiedId;
 
 		public override int GetHashCode()
 		{
 			unchecked
 			{
-				return (NodeId.GetHashCode()*397) ^ TaskNumber.GetHashCode();
+				return (NodeId.GetHashCode() * 397) ^ TaskNumber.GetHashCode();
 			}
 		}
 	}

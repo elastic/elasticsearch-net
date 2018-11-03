@@ -10,7 +10,14 @@ namespace Nest
 	public interface IDateHistogramCompositeAggregationSource : ICompositeAggregationSource
 	{
 		/// <summary>
-		///	The interval to use when bucketing documents
+		/// Return a formatted date string as the key instead an epoch long
+		/// </summary>
+		/// <remarks> Valid for Elasticsearch 6.3.0+ </remarks>
+		[JsonProperty("format")]
+		string Format { get; set; }
+
+		/// <summary>
+		/// 	The interval to use when bucketing documents
 		/// </summary>
 		[JsonProperty("interval")]
 		Union<DateInterval?, Time> Interval { get; set; }
@@ -22,56 +29,49 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("time_zone")]
 		string Timezone { get; set; }
-
-		/// <summary>
-		/// Return a formatted date string as the key instead an epoch long
-		/// </summary>
-		/// <remarks> Valid for Elasticsearch 6.3.0+ </remarks>
-		[JsonProperty("format")]
-		string Format { get; set; }
 	}
 
-	/// <inheritdoc cref="IDateHistogramCompositeAggregationSource"/>
+	/// <inheritdoc cref="IDateHistogramCompositeAggregationSource" />
 	public class DateHistogramCompositeAggregationSource : CompositeAggregationSourceBase, IDateHistogramCompositeAggregationSource
 	{
-		public DateHistogramCompositeAggregationSource(string name) : base(name) {}
-
-		/// <inheritdoc />
-		public Union<DateInterval?,Time> Interval { get; set; }
-
-		/// <inheritdoc />
-		public string Timezone { get; set; }
+		public DateHistogramCompositeAggregationSource(string name) : base(name) { }
 
 		/// <inheritdoc />
 		public string Format { get; set; }
 
 		/// <inheritdoc />
+		public Union<DateInterval?, Time> Interval { get; set; }
+
+		/// <inheritdoc />
+		public string Timezone { get; set; }
+
+		/// <inheritdoc />
 		protected override string SourceType => "date_histogram";
 	}
 
-	/// <inheritdoc cref="IDateHistogramCompositeAggregationSource"/>
+	/// <inheritdoc cref="IDateHistogramCompositeAggregationSource" />
 	public class DateHistogramCompositeAggregationSourceDescriptor<T>
 		: CompositeAggregationSourceDescriptorBase<DateHistogramCompositeAggregationSourceDescriptor<T>, IDateHistogramCompositeAggregationSource, T>,
 			IDateHistogramCompositeAggregationSource
 	{
-		Union<DateInterval?,Time> IDateHistogramCompositeAggregationSource.Interval { get; set; }
-		string IDateHistogramCompositeAggregationSource.Timezone { get; set; }
+		public DateHistogramCompositeAggregationSourceDescriptor(string name) : base(name, "date_histogram") { }
+
 		string IDateHistogramCompositeAggregationSource.Format { get; set; }
+		Union<DateInterval?, Time> IDateHistogramCompositeAggregationSource.Interval { get; set; }
+		string IDateHistogramCompositeAggregationSource.Timezone { get; set; }
 
-		public DateHistogramCompositeAggregationSourceDescriptor(string name) : base(name, "date_histogram") {}
-
-		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Interval"/>
+		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Interval" />
 		public DateHistogramCompositeAggregationSourceDescriptor<T> Interval(DateInterval? interval) =>
 			Assign(a => a.Interval = interval);
 
-		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Interval"/>
+		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Interval" />
 		public DateHistogramCompositeAggregationSourceDescriptor<T> Interval(Time interval) =>
 			Assign(a => a.Interval = interval);
 
-		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Timezone"/>
+		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Timezone" />
 		public DateHistogramCompositeAggregationSourceDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
 
-		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Timezone"/>
+		/// <inheritdoc cref="IDateHistogramCompositeAggregationSource.Timezone" />
 		public DateHistogramCompositeAggregationSourceDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 	}
 }

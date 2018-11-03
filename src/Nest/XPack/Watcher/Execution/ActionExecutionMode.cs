@@ -8,8 +8,8 @@ namespace Nest
 	public enum ActionExecutionMode
 	{
 		/// <summary>
-		///The action will be simulated (not actually executed)
-		/// and it will be throttled if needed.
+		/// The action will be simulated (not actually executed)
+		///  and it will be throttled if needed.
 		/// </summary>
 		[EnumMember(Value = "simulate")]
 		Simulate,

@@ -15,17 +15,17 @@ namespace Nest
 		bool? Descending { get; set; }
 
 		/// <summary>
-		/// If true, the output excludes interim results. By default, interim results are included.
-		/// </summary>
-		[JsonProperty("exclude_interim")]
-		bool? ExcludeInterim { get; set; }
-
-		/// <summary>
 		/// Returns records with timestamps earlier than this time.
 		/// </summary>
 		[JsonProperty("end")]
 		[JsonConverter(typeof(EpochMillisecondsDateTimeJsonConverter))]
 		DateTimeOffset? End { get; set; }
+
+		/// <summary>
+		/// If true, the output excludes interim results. By default, interim results are included.
+		/// </summary>
+		[JsonProperty("exclude_interim")]
+		bool? ExcludeInterim { get; set; }
 
 		/// <summary>
 		/// Specifies pagination for the records
@@ -60,10 +60,10 @@ namespace Nest
 		public bool? Descending { get; set; }
 
 		/// <inheritdoc />
-		public bool? ExcludeInterim { get; set; }
+		public DateTimeOffset? End { get; set; }
 
 		/// <inheritdoc />
-		public DateTimeOffset? End { get; set; }
+		public bool? ExcludeInterim { get; set; }
 
 		/// <inheritdoc />
 		public IPage Page { get; set; }
@@ -86,11 +86,11 @@ namespace Nest
 
 		bool? IGetAnomalyRecordsRequest.Descending { get; set; }
 		DateTimeOffset? IGetAnomalyRecordsRequest.End { get; set; }
+		bool? IGetAnomalyRecordsRequest.ExcludeInterim { get; set; }
 		IPage IGetAnomalyRecordsRequest.Page { get; set; }
+		double? IGetAnomalyRecordsRequest.RecordScore { get; set; }
 		Field IGetAnomalyRecordsRequest.Sort { get; set; }
 		DateTimeOffset? IGetAnomalyRecordsRequest.Start { get; set; }
-		bool? IGetAnomalyRecordsRequest.ExcludeInterim { get; set; }
-		double? IGetAnomalyRecordsRequest.RecordScore { get; set; }
 
 		/// <inheritdoc />
 		public GetAnomalyRecordsDescriptor Descending(bool? descending = true) => Assign(a => a.Descending = descending);

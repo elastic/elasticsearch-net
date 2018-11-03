@@ -12,39 +12,50 @@ namespace Nest
 		/// </summary>
 		IGetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		IGetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request);
 
-		/// <inheritdoc/>
-		Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId,
+			Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
-		Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IGetAnomalyRecordsResponse GetAnomalyRecords(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null) =>
-			this.GetAnomalyRecords(selector.InvokeOrDefault(new GetAnomalyRecordsDescriptor(jobId)));
+			GetAnomalyRecords(selector.InvokeOrDefault(new GetAnomalyRecordsDescriptor(jobId)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IGetAnomalyRecordsResponse GetAnomalyRecords(IGetAnomalyRecordsRequest request) =>
-			this.Dispatcher.Dispatch<IGetAnomalyRecordsRequest, GetAnomalyRecordsRequestParameters, GetAnomalyRecordsResponse>(
+			Dispatcher.Dispatch<IGetAnomalyRecordsRequest, GetAnomalyRecordsRequestParameters, GetAnomalyRecordsResponse>(
 				request,
-				this.LowLevelDispatch.XpackMlGetRecordsDispatch<GetAnomalyRecordsResponse>
+				LowLevelDispatch.XpackMlGetRecordsDispatch<GetAnomalyRecordsResponse>
 			);
 
-		/// <inheritdoc/>
-		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId, Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.GetAnomalyRecordsAsync(selector.InvokeOrDefault(new GetAnomalyRecordsDescriptor(jobId)), cancellationToken);
+		/// <inheritdoc />
+		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(Id jobId,
+			Func<GetAnomalyRecordsDescriptor, IGetAnomalyRecordsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			GetAnomalyRecordsAsync(selector.InvokeOrDefault(new GetAnomalyRecordsDescriptor(jobId)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<IGetAnomalyRecordsRequest, GetAnomalyRecordsRequestParameters, GetAnomalyRecordsResponse, IGetAnomalyRecordsResponse>(
-				request,
-				cancellationToken,
-				this.LowLevelDispatch.XpackMlGetRecordsDispatchAsync<GetAnomalyRecordsResponse>
-			);
+		/// <inheritdoc />
+		public Task<IGetAnomalyRecordsResponse> GetAnomalyRecordsAsync(IGetAnomalyRecordsRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher
+				.DispatchAsync<IGetAnomalyRecordsRequest, GetAnomalyRecordsRequestParameters, GetAnomalyRecordsResponse, IGetAnomalyRecordsResponse>(
+					request,
+					cancellationToken,
+					LowLevelDispatch.XpackMlGetRecordsDispatchAsync<GetAnomalyRecordsResponse>
+				);
 	}
 }

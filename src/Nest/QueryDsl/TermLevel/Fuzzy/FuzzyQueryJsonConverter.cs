@@ -5,13 +5,13 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class FuzzyQueryJsonConverter: FieldNameQueryJsonConverter<FuzzyQuery>
+	internal class FuzzyQueryJsonConverter : FieldNameQueryJsonConverter<FuzzyQuery>
 	{
-		public override bool CanConvert(Type objectType) => true;
-
 		public override bool CanRead => true;
 
 		public override bool CanWrite => true;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -30,29 +30,23 @@ namespace Nest
 
 			IFuzzyQuery fq;
 			if (v.Type == JTokenType.String)
-			{
 				fq = new FuzzyQuery
 				{
 					Value = GetPropValue<string>(jo, "value"),
 					Fuzziness = GetPropObject<Fuzziness>(jo, "fuzziness")
 				};
-			}
 			else if (v.Type == JTokenType.Date)
-			{
 				fq = new FuzzyDateQuery
 				{
 					Value = GetPropValue<DateTime?>(jo, "value"),
 					Fuzziness = GetPropObject<Time>(jo, "fuzziness")
 				};
-			}
 			else if (v.Type == JTokenType.Integer || v.Type == JTokenType.Float)
-			{
 				fq = new FuzzyNumericQuery
 				{
 					Value = GetPropValue<double?>(jo, "value"),
 					Fuzziness = GetPropValue<double?>(jo, "fuzziness")
 				};
-			}
 			else return null;
 
 			fq.PrefixLength = GetPropValue<int?>(jo, "prefix_length");

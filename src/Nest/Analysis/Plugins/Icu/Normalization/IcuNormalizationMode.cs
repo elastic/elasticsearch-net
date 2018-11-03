@@ -13,13 +13,14 @@ namespace Nest
 		/// <summary>
 		/// Switch normalization type to decompose
 		/// </summary>
-		[EnumMember(Value="decompose")]
+		[EnumMember(Value = "decompose")]
 		Decompose,
+
 		/// <summary>
 		/// Switch normalization type to compose, which is the default so you'd never need to set this
 		/// Included here for completeness sake because the Java API has it.
 		/// </summary>
-		[EnumMember(Value="compose")]
+		[EnumMember(Value = "compose")]
 		Compose
 	}
 }

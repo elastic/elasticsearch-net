@@ -1,4 +1,4 @@
 namespace Nest
 {
-	public interface ISpanSubQuery : IQuery {}
+	public interface ISpanSubQuery : IQuery { }
 }

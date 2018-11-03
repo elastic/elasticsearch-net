@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IValidateQueryRequest 
+	public partial interface IValidateQueryRequest
 	{
 		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
@@ -11,15 +11,14 @@ namespace Nest
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IValidateQueryRequest<T> : IValidateQueryRequest
-		where T : class
-	{ }
+		where T : class { }
 
-	public partial class ValidateQueryRequest 
+	public partial class ValidateQueryRequest
 	{
 		public QueryContainer Query { get; set; }
 	}
 
-	public partial class ValidateQueryRequest<T> 
+	public partial class ValidateQueryRequest<T>
 		where T : class
 	{
 		public QueryContainer Query { get; set; }
@@ -30,6 +29,7 @@ namespace Nest
 	{
 		QueryContainer IValidateQueryRequest.Query { get; set; }
 
-		public ValidateQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+		public ValidateQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

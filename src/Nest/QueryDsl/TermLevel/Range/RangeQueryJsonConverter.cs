@@ -5,14 +5,15 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class RangeQueryJsonConverter: FieldNameQueryJsonConverter<NumericRangeQuery>
+	internal class RangeQueryJsonConverter : FieldNameQueryJsonConverter<NumericRangeQuery>
 	{
 		private static readonly string[] _rangeKeys = new[] { "gt", "gte", "lte", "lt" };
-		public override bool CanConvert(Type objectType) => true;
 
 		public override bool CanRead => true;
 
 		public override bool CanWrite => true;
+
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -44,6 +45,7 @@ namespace Nest
 			{
 				if (property.Name == "format" || property.Name == "time_zone")
 					return FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), serializer);
+
 				if (_rangeKeys.Contains(property.Name))
 				{
 					if (property.Value.Type == JTokenType.Float)

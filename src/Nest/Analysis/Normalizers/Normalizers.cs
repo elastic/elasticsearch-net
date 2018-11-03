@@ -10,11 +10,12 @@ namespace Nest
 
 	public class Normalizers : IsADictionaryBase<string, INormalizer>, INormalizers
 	{
-		public Normalizers() {}
+		public Normalizers() { }
+
 		public Normalizers(IDictionary<string, INormalizer> container) : base(container) { }
+
 		public Normalizers(Dictionary<string, INormalizer> container)
-			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
+			: base(container.ToDictionary(kv => kv.Key, kv => kv.Value)) { }
 
 		public void Add(string name, INormalizer analyzer) => BackingDictionary.Add(name, analyzer);
 	}

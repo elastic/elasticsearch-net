@@ -18,6 +18,7 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "constant_score")]
 		ConstantScore,
+
 		/// <summary>
 		/// A rewrite method that first translates each term into a should clause in a boolean query, and keeps the scores
 		///  as computed by the query. Note that typically such scores are meaningless to the user, and require non-trivial
@@ -26,6 +27,7 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "scoring_boolean")]
 		ScoringBoolean,
+
 		/// <summary>
 		/// Similar to scoring_boolean except scores are not computed. Instead, each matching document receives a constant
 		///  score equal to the query’s boost. This rewrite method will hit too many clauses failure if it exceeds the
@@ -33,6 +35,7 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "constant_score_boolean")]
 		ConstantScoreBoolean,
+
 		/// <summary>
 		/// A rewrite method that first translates each term into should clause in boolean query, and keeps the scores
 		/// as computed by the query. This rewrite method only uses the top scoring terms so it will not overflow boolean
@@ -40,6 +43,7 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "top_terms_N")]
 		TopTermsN,
+
 		/// <summary>
 		/// A rewrite method that first translates each term into should clause in boolean query, but the scores are only
 		/// computed as the boost. This rewrite method only uses the top scoring terms so it will not overflow the boolean
@@ -47,6 +51,7 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "top_terms_boost_N")]
 		TopTermsBoostN,
+
 		/// <summary>
 		/// A rewrite method that first translates each term into should clause in boolean query, but all term queries compute
 		///  scores as if they had the same frequency. In practice the frequency which is used is the maximum frequency of all
@@ -66,16 +71,6 @@ namespace Nest
 		private static readonly char[] DigitCharacters = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 		private readonly string _value;
-
-		/// <summary>
-		/// The type of multi term rewrite to perform
-		/// </summary>
-		public RewriteMultiTerm Rewrite { get; }
-
-		/// <summary>
-		/// The size of the top scoring terms to use
-		/// </summary>
-		public int? Size { get; }
 
 		internal MultiTermQueryRewrite(RewriteMultiTerm rewrite, int? size = null)
 		{
@@ -112,6 +107,18 @@ namespace Nest
 		public static MultiTermQueryRewrite ConstantScore { get; } = new MultiTermQueryRewrite(RewriteMultiTerm.ConstantScore);
 
 		/// <summary>
+		/// Similar to scoring_boolean except scores are not computed. Instead, each matching document receives a constant
+		///  score equal to the query’s boost. This rewrite method will hit too many clauses failure if it exceeds the
+		/// boolean query limit (defaults to 1024).
+		/// </summary>
+		public static MultiTermQueryRewrite ConstantScoreBoolean { get; } = new MultiTermQueryRewrite(RewriteMultiTerm.ConstantScoreBoolean);
+
+		/// <summary>
+		/// The type of multi term rewrite to perform
+		/// </summary>
+		public RewriteMultiTerm Rewrite { get; }
+
+		/// <summary>
 		/// A rewrite method that first translates each term into a should clause in a boolean query, and keeps the scores
 		///  as computed by the query. Note that typically such scores are meaningless to the user, and require non-trivial
 		///  CPU to compute. This rewrite method will hit too many
@@ -120,23 +127,33 @@ namespace Nest
 		public static MultiTermQueryRewrite ScoringBoolean { get; } = new MultiTermQueryRewrite(RewriteMultiTerm.ScoringBoolean);
 
 		/// <summary>
-		/// Similar to scoring_boolean except scores are not computed. Instead, each matching document receives a constant
-		///  score equal to the query’s boost. This rewrite method will hit too many clauses failure if it exceeds the
-		/// boolean query limit (defaults to 1024).
+		/// The size of the top scoring terms to use
 		/// </summary>
-		public static MultiTermQueryRewrite ConstantScoreBoolean { get; } = new MultiTermQueryRewrite(RewriteMultiTerm.ConstantScoreBoolean);
+		public int? Size { get; }
+
+		public bool Equals(MultiTermQueryRewrite other)
+		{
+			if (ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+
+			return Rewrite == other.Rewrite && Size == other.Size;
+		}
 
 		/// <summary>
 		/// A rewrite method that first translates each term into should clause in boolean query, and keeps the scores
 		/// as computed by the query. This rewrite method only uses the top scoring terms so it will not overflow boolean
-		///  max clause count. <param name="size" /> controls the size of the top scoring terms to use.
+		///  max clause count.
+		/// <param name="size" />
+		/// controls the size of the top scoring terms to use.
 		/// </summary>
 		public static MultiTermQueryRewrite TopTerms(int size) => new MultiTermQueryRewrite(RewriteMultiTerm.TopTermsN, size);
 
 		/// <summary>
 		/// A rewrite method that first translates each term into should clause in boolean query, but the scores are only
 		/// computed as the boost. This rewrite method only uses the top scoring terms so it will not overflow the boolean
-		///  max clause count. <param name="size" /> controls the size of the top scoring terms to use.
+		///  max clause count.
+		/// <param name="size" />
+		/// controls the size of the top scoring terms to use.
 		/// </summary>
 		public static MultiTermQueryRewrite TopTermsBoost(int size) => new MultiTermQueryRewrite(RewriteMultiTerm.TopTermsBoostN, size);
 
@@ -144,7 +161,8 @@ namespace Nest
 		/// A rewrite method that first translates each term into should clause in boolean query, but all term queries compute
 		///  scores as if they had the same frequency. In practice the frequency which is used is the maximum frequency of all
 		///  matching terms. This rewrite method only uses the top scoring terms so it will not overflow boolean max clause count.
-		/// <param name="size" /> controls the size of the top scoring terms to use.
+		/// <param name="size" />
+		/// controls the size of the top scoring terms to use.
 		/// </summary>
 		public static MultiTermQueryRewrite TopTermsBlendedFreqs(int size) => new MultiTermQueryRewrite(RewriteMultiTerm.TopTermsBlendedFreqsN, size);
 
@@ -185,14 +203,7 @@ namespace Nest
 			}
 		}
 
-		public override string ToString() => this._value;
-
-		public bool Equals(MultiTermQueryRewrite other)
-		{
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return Rewrite == other.Rewrite && Size == other.Size;
-		}
+		public override string ToString() => _value;
 
 		public override bool Equals(object obj)
 		{
@@ -203,7 +214,7 @@ namespace Nest
 			if (value != null)
 				return string.Equals(value, _value);
 
-			return obj.GetType() == this.GetType() && Equals((MultiTermQueryRewrite)obj);
+			return obj.GetType() == GetType() && Equals((MultiTermQueryRewrite)obj);
 		}
 
 		public override int GetHashCode()

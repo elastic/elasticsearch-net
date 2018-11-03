@@ -14,24 +14,24 @@ namespace Nest
 
 	public abstract class ProcessorBase : IProcessor
 	{
-		string IProcessor.Name => this.Name;
-		protected abstract string Name { get; }
-
 		public IEnumerable<IProcessor> OnFailure { get; set; }
+		protected abstract string Name { get; }
+		string IProcessor.Name => Name;
 	}
 
-	public abstract class ProcessorDescriptorBase<TProcessorDescriptor, TProcessorInterface> : DescriptorBase<TProcessorDescriptor, TProcessorInterface>, IProcessor
+	public abstract class ProcessorDescriptorBase<TProcessorDescriptor, TProcessorInterface>
+		: DescriptorBase<TProcessorDescriptor, TProcessorInterface>, IProcessor
 		where TProcessorDescriptor : ProcessorDescriptorBase<TProcessorDescriptor, TProcessorInterface>, TProcessorInterface
 		where TProcessorInterface : class, IProcessor
 	{
-		IEnumerable<IProcessor> IProcessor.OnFailure { get; set; }
-		string IProcessor.Name => this.Name;
 		protected abstract string Name { get; }
+		string IProcessor.Name => Name;
+		IEnumerable<IProcessor> IProcessor.OnFailure { get; set; }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public TProcessorDescriptor OnFailure(IEnumerable<IProcessor> processors) => Assign(a => a.OnFailure = processors.ToListOrNullIfEmpty());
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public TProcessorDescriptor OnFailure(Func<ProcessorsDescriptor, IPromise<IList<IProcessor>>> selector) =>
 			Assign(a => a.OnFailure = selector?.Invoke(new ProcessorsDescriptor())?.Value);
 	}

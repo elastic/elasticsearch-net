@@ -7,10 +7,8 @@ namespace Nest
 		public ScrollAllObserver(
 			Action<IScrollAllResponse<T>> onNext = null,
 			Action<Exception> onError = null,
-			Action onCompleted = null)
+			Action onCompleted = null
+		)
 			: base(onNext, onError, onCompleted) { }
-
 	}
-
-
 }

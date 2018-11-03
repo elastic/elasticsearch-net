@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using System.Threading;
 
 namespace Nest
 {
@@ -17,39 +17,45 @@ namespace Nest
 		/// <returns></returns>
 		ISyncedFlushResponse SyncedFlush(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		ISyncedFlushResponse SyncedFlush(ISyncedFlushRequest request);
 
-		/// <inheritdoc/>
-		Task<ISyncedFlushResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+		/// <inheritdoc />
+		Task<ISyncedFlushResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ISyncedFlushResponse SyncedFlush(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null) =>
-			this.SyncedFlush(selector.InvokeOrDefault(new SyncedFlushDescriptor().Index(indices)));
+			SyncedFlush(selector.InvokeOrDefault(new SyncedFlushDescriptor().Index(indices)));
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ISyncedFlushResponse SyncedFlush(ISyncedFlushRequest request) =>
-			this.Dispatcher.Dispatch<ISyncedFlushRequest, SyncedFlushRequestParameters, SyncedFlushResponse>(
+			Dispatcher.Dispatch<ISyncedFlushRequest, SyncedFlushRequestParameters, SyncedFlushResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesFlushSyncedDispatch<SyncedFlushResponse>(p)
+				(p, d) => LowLevelDispatch.IndicesFlushSyncedDispatch<SyncedFlushResponse>(p)
 			);
 
-		/// <inheritdoc/>
-		public Task<ISyncedFlushResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.SyncedFlushAsync(selector.InvokeOrDefault(new SyncedFlushDescriptor().Index(indices)), cancellationToken);
+		/// <inheritdoc />
+		public Task<ISyncedFlushResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			SyncedFlushAsync(selector.InvokeOrDefault(new SyncedFlushDescriptor().Index(indices)), cancellationToken);
 
-		/// <inheritdoc/>
-		public Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
-			this.Dispatcher.DispatchAsync<ISyncedFlushRequest, SyncedFlushRequestParameters, SyncedFlushResponse, ISyncedFlushResponse>(
+		/// <inheritdoc />
+		public Task<ISyncedFlushResponse> SyncedFlushAsync(ISyncedFlushRequest request,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) =>
+			Dispatcher.DispatchAsync<ISyncedFlushRequest, SyncedFlushRequestParameters, SyncedFlushResponse, ISyncedFlushResponse>(
 				request,
 				cancellationToken,
-				(p, d, c) => this.LowLevelDispatch.IndicesFlushSyncedDispatchAsync<SyncedFlushResponse>(p, c)
+				(p, d, c) => LowLevelDispatch.IndicesFlushSyncedDispatchAsync<SyncedFlushResponse>(p, c)
 			);
 	}
 }
