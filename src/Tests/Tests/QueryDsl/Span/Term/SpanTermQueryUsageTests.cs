@@ -2,13 +2,27 @@
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.Joining.SpanTerm
 {
 	public class SpanTermUsageTests : QueryDslUsageTestsBase
 	{
 		public SpanTermUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanTermQuery>(a => a.SpanTerm)
+		{
+			q => q.Value = null,
+			q => q.Value = string.Empty,
+			q => q.Field = null,
+		};
+
+		protected override QueryContainer QueryInitializer => new SpanTermQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Value = "kimchy",
+			Field = "user"
+		};
 
 		protected override object QueryJson => new
 		{
@@ -23,14 +37,6 @@ namespace Tests.QueryDsl.Joining.SpanTerm
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new SpanTermQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Value = "kimchy",
-			Field = "user"
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.SpanTerm(c => c
 				.Name("named_query")
@@ -38,12 +44,5 @@ namespace Tests.QueryDsl.Joining.SpanTerm
 				.Field("user")
 				.Value("kimchy")
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanTermQuery>(a => a.SpanTerm)
-		{
-			q => q.Value = null,
-			q => q.Value = string.Empty,
-			q => q.Field = null,
-		};
 	}
 }

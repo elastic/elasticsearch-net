@@ -2,7 +2,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
@@ -58,14 +57,13 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			ReturnsNull(
 				!ConditionlessQuery || !ConditionlessQuery || !ConditionlessQuery || !ConditionlessQuery,
 				q => !q.ConditionlessQuery() || !q.ConditionlessQuery() || !q.ConditionlessQuery() || !q.ConditionlessQuery()
-
 			);
 			ReturnsNull(
 				!NullQuery || !ConditionlessQuery || !ConditionlessQuery || !ConditionlessQuery,
 				q => !q.NullQuery() || !q.ConditionlessQuery() || !q.ConditionlessQuery() || !q.ConditionlessQuery()
 			);
-
 		}
+
 		[U]
 		public void CombiningManyUsingAggregate()
 		{
@@ -97,6 +95,5 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			lotsOfNots.Bool.Should().NotBeNull();
 			lotsOfNots.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
 		}
-
 	}
 }

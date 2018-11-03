@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -8,28 +7,16 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Search
 {
-	public class SearchProfileApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest,
-		SearchDescriptor<Project>, SearchRequest<Project>>
+	public class SearchProfileApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISearchResponse<Project>, ISearchRequest,
+			SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		public SearchProfileApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public SearchProfileApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Search(f),
-			fluentAsync: (c, f) => c.SearchAsync(f),
-			request: (c, r) => c.Search<Project>(r),
-			requestAsync: (c, r) => c.SearchAsync<Project>(r)
-		);
-
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/doc/_search";
 
 		protected override object ExpectJson => new
 		{
@@ -49,6 +36,40 @@ namespace Tests.Search.Search
 				}
 			}
 		};
+
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Profile()
+			.Query(q => q
+				.MatchAll()
+			)
+			.Aggregations(aggs => aggs
+				.Terms("startDates", t => t
+					.Field(p => p.StartedOn)
+				)
+			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
+		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
+		{
+			Profile = true,
+			Query = new QueryContainer(new MatchAllQuery()),
+			Aggregations = new TermsAggregation("startDates")
+			{
+				Field = "startedOn"
+			}
+		};
+
+		protected override string UrlPath => $"/project/doc/_search";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.Search(f),
+			(c, f) => c.SearchAsync(f),
+			(c, r) => c.Search<Project>(r),
+			(c, r) => c.SearchAsync<Project>(r)
+		);
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
@@ -112,26 +133,5 @@ namespace Tests.Search.Search
 				}
 			}
 		}
-
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Profile()
-			.Query(q => q
-				.MatchAll()
-			)
-			.Aggregations(aggs => aggs
-				.Terms("startDates", t => t
-					.Field(p => p.StartedOn)
-				)
-			);
-
-		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
-		{
-			Profile = true,
-			Query = new QueryContainer(new MatchAllQuery()),
-			Aggregations = new TermsAggregation("startDates")
-			{
-				Field = "startedOn"
-			}
-		};
 	}
 }

@@ -13,25 +13,14 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 {
 	[SkipVersion("<6.3.0", "this API was introduced in 6.3.0")]
 	public class ExecutePainlessScriptApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest, ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest,
+			ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
 	{
-		public ExecutePainlessScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
 		private static readonly string _painlessScript = "params.count / params.total";
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ExecutePainlessScript<string>(f),
-			fluentAsync: (client, f) => client.ExecutePainlessScriptAsync<string>(f),
-			request: (client, r) => client.ExecutePainlessScript<string>(r),
-			requestAsync: (client, r) => client.ExecutePainlessScriptAsync<string>(r)
-		);
+		public ExecutePainlessScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/_scripts/painless/_execute";
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new
 		{
@@ -42,11 +31,15 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			},
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> Fluent => d => d
-			.Script(s=>s
+			.Script(s => s
 				.Source(_painlessScript)
 				.Params(p => p.Add("count", 100.0).Add("total", 1000.0))
 			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override ExecutePainlessScriptRequest Initializer => new ExecutePainlessScriptRequest
 		{
@@ -60,6 +53,16 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			}
 		};
 
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => "/_scripts/painless/_execute";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ExecutePainlessScript<string>(f),
+			(client, f) => client.ExecutePainlessScriptAsync<string>(f),
+			(client, r) => client.ExecutePainlessScript<string>(r),
+			(client, r) => client.ExecutePainlessScriptAsync<string>(r)
+		);
+
 		protected override void ExpectResponse(IExecutePainlessScriptResponse<string> response)
 		{
 			response.ShouldBeValid();
@@ -69,36 +72,14 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 
 	[SkipVersion("<6.4.0", "Context only tested on 6.4.0 when they were introduced")]
 	public class ExecutePainlessScriptContextApiTests
-		: ApiIntegrationTestBase<WritableCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest, ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
+		: ApiIntegrationTestBase<WritableCluster, IExecutePainlessScriptResponse<string>, IExecutePainlessScriptRequest,
+			ExecutePainlessScriptDescriptor, ExecutePainlessScriptRequest>
 	{
-		public ExecutePainlessScriptContextApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
 		private static readonly string _painlessScript = "doc['rank'].value / params.max_rank";
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ExecutePainlessScript<string>(f),
-			fluentAsync: (client, f) => client.ExecutePainlessScriptAsync<string>(f),
-			request: (client, r) => client.ExecutePainlessScript<string>(r),
-			requestAsync: (client, r) => client.ExecutePainlessScriptAsync<string>(r)
-		);
+		public ExecutePainlessScriptContextApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/_scripts/painless/_execute";
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override bool SupportsDeserialization => false;
-
-		private class ScriptDocument
-		{
-			public string Field { get; set; }
-			public long Rank  { get; set; }
-		}
-
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			var create =client.CreateIndex(values.FixedForAllCallsValue, c => c.Mappings(map => map.Map<ScriptDocument>(m => m.AutoMap())));
-			create.ShouldBeValid();
-		}
 
 		protected override object ExpectJson => new
 		{
@@ -106,8 +87,8 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			context_setup = new
 			{
 				document = new { rank = 4 },
-				index = this.UniqueValues.FixedForAllCallsValue,
-				query = new { match_all = new {} }
+				index = UniqueValues.FixedForAllCallsValue,
+				query = new { match_all = new { } }
 			},
 			script = new
 			{
@@ -116,24 +97,28 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			},
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<ExecutePainlessScriptDescriptor, IExecutePainlessScriptRequest> Fluent => d => d
-			.ContextSetup(cs=>cs
-				.Index(this.UniqueValues.FixedForAllCallsValue)
+			.ContextSetup(cs => cs
+				.Index(UniqueValues.FixedForAllCallsValue)
 				.Document(new ScriptDocument { Rank = 4 })
-				.Query<ScriptDocument>(q=>q.MatchAll())
+				.Query<ScriptDocument>(q => q.MatchAll())
 			)
 			.Context("score")
-			.Script(s=>s
+			.Script(s => s
 				.Source(_painlessScript)
 				.Params(p => p.Add("max_rank", 5.0))
 			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override ExecutePainlessScriptRequest Initializer => new ExecutePainlessScriptRequest
 		{
 			ContextSetup = new PainlessContextSetup
 			{
-				Index = this.UniqueValues.FixedForAllCallsValue,
-				Document =  new ScriptDocument { Rank = 4 },
+				Index = UniqueValues.FixedForAllCallsValue,
+				Document = new ScriptDocument { Rank = 4 },
 				Query = new MatchAllQuery()
 			},
 			Context = "score",
@@ -146,10 +131,32 @@ namespace Tests.Modules.Scripting.ExecutePainlessScript
 			}
 		};
 
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => "/_scripts/painless/_execute";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ExecutePainlessScript<string>(f),
+			(client, f) => client.ExecutePainlessScriptAsync<string>(f),
+			(client, r) => client.ExecutePainlessScript<string>(r),
+			(client, r) => client.ExecutePainlessScriptAsync<string>(r)
+		);
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			var create = client.CreateIndex(values.FixedForAllCallsValue, c => c.Mappings(map => map.Map<ScriptDocument>(m => m.AutoMap())));
+			create.ShouldBeValid();
+		}
+
 		protected override void ExpectResponse(IExecutePainlessScriptResponse<string> response)
 		{
 			response.ShouldBeValid();
 			response.Result.Should().NotBeNullOrWhiteSpace();
+		}
+
+		private class ScriptDocument
+		{
+			public string Field { get; set; }
+			public long Rank { get; set; }
 		}
 	}
 }

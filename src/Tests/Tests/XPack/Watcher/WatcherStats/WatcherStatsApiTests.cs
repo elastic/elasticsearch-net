@@ -6,13 +6,27 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.Watcher.WatcherStats
 {
-	public class WatcherStatsApiTests : ApiIntegrationTestBase<XPackCluster, IWatcherStatsResponse, IWatcherStatsRequest, WatcherStatsDescriptor, WatcherStatsRequest>
+	public class WatcherStatsApiTests
+		: ApiIntegrationTestBase<XPackCluster, IWatcherStatsResponse, IWatcherStatsRequest, WatcherStatsDescriptor, WatcherStatsRequest>
 	{
 		public WatcherStatsApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+
+		protected override Func<WatcherStatsDescriptor, IWatcherStatsRequest> Fluent => f => f
+			.WatcherStatsMetric(WatcherStatsMetric.All);
+
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+
+		protected override WatcherStatsRequest Initializer => new WatcherStatsRequest(WatcherStatsMetric.All);
+
+		protected override string UrlPath => "/_xpack/watcher/stats/_all";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -63,24 +77,11 @@ namespace Tests.XPack.Watcher.WatcherStats
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.WatcherStats(f),
-			fluentAsync: (client, f) => client.WatcherStatsAsync(f),
-			request: (client, r) => client.WatcherStats(r),
-			requestAsync: (client, r) => client.WatcherStatsAsync(r)
+			(client, f) => client.WatcherStats(f),
+			(client, f) => client.WatcherStatsAsync(f),
+			(client, r) => client.WatcherStats(r),
+			(client, r) => client.WatcherStatsAsync(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-
-		protected override string UrlPath => "/_xpack/watcher/stats/_all";
-
-		protected override object ExpectJson => null;
-
-		protected override Func<WatcherStatsDescriptor, IWatcherStatsRequest> Fluent => f => f
-			.WatcherStatsMetric(WatcherStatsMetric.All);
-
-		protected override WatcherStatsRequest Initializer => new WatcherStatsRequest(WatcherStatsMetric.All);
 
 		protected override void ExpectResponse(IWatcherStatsResponse response)
 		{

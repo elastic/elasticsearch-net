@@ -2,7 +2,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.CodeStandards.Parity
 {
@@ -15,6 +14,5 @@ namespace Tests.CodeStandards.Parity
 
 			fieldTypes.Should().Contain(numberTypes);
 		}
-
 	}
 }

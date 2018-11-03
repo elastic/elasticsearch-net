@@ -14,22 +14,23 @@ namespace Tests.IndexModules.IndexSettings.SlowLog
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
-				{"index.search.slowlog.threshold.query.warn", "10s"},
-				{"index.search.slowlog.threshold.query.info", "5s"},
-				{"index.search.slowlog.threshold.query.debug", "2s"},
-				{"index.search.slowlog.threshold.query.trace", "500ms"},
-				{"index.search.slowlog.threshold.fetch.warn", "1s"},
-				{"index.search.slowlog.threshold.fetch.info", "800ms"},
-				{"index.search.slowlog.threshold.fetch.debug", "500ms"},
-				{"index.search.slowlog.threshold.fetch.trace", "200ms"},
-				{"index.search.slowlog.level", "info"},
-				{"index.indexing.slowlog.threshold.index.warn", "10s"},
-				{"index.indexing.slowlog.threshold.index.info", "5s"},
-				{"index.indexing.slowlog.threshold.index.debug", "2s"},
-				{"index.indexing.slowlog.threshold.index.trace", "500ms"},
-				{"index.indexing.slowlog.level", "debug"},
-				{"index.indexing.slowlog.source", 100},
+				{ "index.search.slowlog.threshold.query.warn", "10s" },
+				{ "index.search.slowlog.threshold.query.info", "5s" },
+				{ "index.search.slowlog.threshold.query.debug", "2s" },
+				{ "index.search.slowlog.threshold.query.trace", "500ms" },
+				{ "index.search.slowlog.threshold.fetch.warn", "1s" },
+				{ "index.search.slowlog.threshold.fetch.info", "800ms" },
+				{ "index.search.slowlog.threshold.fetch.debug", "500ms" },
+				{ "index.search.slowlog.threshold.fetch.trace", "200ms" },
+				{ "index.search.slowlog.level", "info" },
+				{ "index.indexing.slowlog.threshold.index.warn", "10s" },
+				{ "index.indexing.slowlog.threshold.index.info", "5s" },
+				{ "index.indexing.slowlog.threshold.index.debug", "2s" },
+				{ "index.indexing.slowlog.threshold.index.trace", "500ms" },
+				{ "index.indexing.slowlog.level", "debug" },
+				{ "index.indexing.slowlog.source", 100 },
 			};
+
 			/**
 			 *
 			 */
@@ -81,7 +82,6 @@ namespace Tests.IndexModules.IndexSettings.SlowLog
 							LogLevel = LogLevel.Info,
 							Fetch = new SlowLogSearchFetch
 							{
-
 								ThresholdInfo = TimeSpan.FromMilliseconds(800),
 								ThresholdDebug = "500ms",
 								ThresholdTrace = "200ms",
@@ -94,7 +94,6 @@ namespace Tests.IndexModules.IndexSettings.SlowLog
 								ThresholdTrace = "500ms",
 								ThresholdWarn = TimeSpan.FromSeconds(10)
 							}
-
 						}
 					},
 				};

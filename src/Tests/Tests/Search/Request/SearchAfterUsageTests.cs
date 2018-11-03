@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
-using Nest;
-using Tests.Framework.Integration;
-using static Nest.Infer;
 using System.Collections.Generic;
+using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework.ManagedElasticsearch.Clusters;
+using Tests.Framework.Integration;
+using static Nest.Infer;
 
 namespace Tests.Search.Request
 {
@@ -22,7 +20,7 @@ namespace Tests.Search.Request
 					new { numberOfCommits = new { order = "desc" } },
 					new { name = new { order = "desc" } }
 				},
-				search_after = new object []
+				search_after = new object[]
 				{
 					Project.First.NumberOfCommits,
 					Project.First.Name

@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Nest;
 using Tests.Domain;
-using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 {
@@ -10,7 +9,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 	{
 		[U] public void Eq()
 		{
-			var project = new Project {Name = "x"};
+			var project = new Project { Name = "x" };
 			DocumentPath<Project> path = project;
 			DocumentPath<Project> pathOther = project;
 			(pathOther == path).Should().BeTrue();
@@ -24,9 +23,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 
 		[U] public void NotEq()
 		{
-			var project = new Project {Name = "x"};
+			var project = new Project { Name = "x" };
 			DocumentPath<Project> path = project;
-			DocumentPath<Project> pathOther = new Project {Name = "x"};
+			DocumentPath<Project> pathOther = new Project { Name = "x" };
 			(pathOther != path).Should().BeTrue();
 			pathOther.Should().NotBe(path);
 
@@ -40,6 +39,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			(pathOther != path).Should().BeTrue();
 			pathOther.Should().NotBe(path);
 		}
+
 		[U] public void Null()
 		{
 			var value = new DocumentPath<Project>(2);

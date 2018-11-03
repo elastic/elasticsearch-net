@@ -10,9 +10,20 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 namespace Tests.XPack.MachineLearning.PreviewDatafeed
 {
 	//TODO what does an invalid request return here? this API returns a json array for the happy path
-	public class PreviewDatafeedApiTests : MachineLearningIntegrationTestBase<IPreviewDatafeedResponse<Metric>, IPreviewDatafeedRequest, PreviewDatafeedDescriptor, PreviewDatafeedRequest>
+	public class PreviewDatafeedApiTests
+		: MachineLearningIntegrationTestBase<IPreviewDatafeedResponse<Metric>, IPreviewDatafeedRequest, PreviewDatafeedDescriptor,
+			PreviewDatafeedRequest>
 	{
 		public PreviewDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+		protected override Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> Fluent => f => f;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override PreviewDatafeedRequest Initializer => new PreviewDatafeedRequest(CallIsolatedValue + "-datafeed");
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_preview";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -24,21 +35,13 @@ namespace Tests.XPack.MachineLearning.PreviewDatafeed
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.PreviewDatafeed<Metric>(CallIsolatedValue + "-datafeed", f),
-			fluentAsync: (client, f) => client.PreviewDatafeedAsync<Metric>(CallIsolatedValue + "-datafeed", f),
-			request: (client, r) => client.PreviewDatafeed<Metric>(r),
-			requestAsync: (client, r) => client.PreviewDatafeedAsync<Metric>(r)
+			(client, f) => client.PreviewDatafeed<Metric>(CallIsolatedValue + "-datafeed", f),
+			(client, f) => client.PreviewDatafeedAsync<Metric>(CallIsolatedValue + "-datafeed", f),
+			(client, r) => client.PreviewDatafeed<Metric>(r),
+			(client, r) => client.PreviewDatafeedAsync<Metric>(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_preview";
-		protected override bool SupportsDeserialization => false;
 		protected override PreviewDatafeedDescriptor NewDescriptor() => new PreviewDatafeedDescriptor(CallIsolatedValue + "-datafeed");
-		protected override object ExpectJson => null;
-		protected override Func<PreviewDatafeedDescriptor, IPreviewDatafeedRequest> Fluent => f => f;
-		protected override PreviewDatafeedRequest Initializer => new PreviewDatafeedRequest(CallIsolatedValue + "-datafeed");
 
 		protected override void ExpectResponse(IPreviewDatafeedResponse<Metric> response)
 		{

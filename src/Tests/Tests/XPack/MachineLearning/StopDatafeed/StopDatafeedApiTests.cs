@@ -8,9 +8,18 @@ using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.XPack.MachineLearning.StopDatafeed
 {
-	public class StopDatafeedApiTests : MachineLearningIntegrationTestBase<IStopDatafeedResponse, IStopDatafeedRequest, StopDatafeedDescriptor, StopDatafeedRequest>
+	public class StopDatafeedApiTests
+		: MachineLearningIntegrationTestBase<IStopDatafeedResponse, IStopDatafeedRequest, StopDatafeedDescriptor, StopDatafeedRequest>
 	{
 		public StopDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+		protected override Func<StopDatafeedDescriptor, IStopDatafeedRequest> Fluent => f => f;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override StopDatafeedRequest Initializer => new StopDatafeedRequest(CallIsolatedValue + "-datafeed");
+		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_stop";
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -25,31 +34,18 @@ namespace Tests.XPack.MachineLearning.StopDatafeed
 
 		protected override void IntegrationTeardown(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				CloseJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) CloseJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.StopDatafeed(CallIsolatedValue + "-datafeed", f),
-			fluentAsync: (client, f) => client.StopDatafeedAsync(CallIsolatedValue + "-datafeed", f),
-			request: (client, r) => client.StopDatafeed(r),
-			requestAsync: (client, r) => client.StopDatafeedAsync(r)
+			(client, f) => client.StopDatafeed(CallIsolatedValue + "-datafeed", f),
+			(client, f) => client.StopDatafeedAsync(CallIsolatedValue + "-datafeed", f),
+			(client, r) => client.StopDatafeed(r),
+			(client, r) => client.StopDatafeedAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"_xpack/ml/datafeeds/{CallIsolatedValue}-datafeed/_stop";
 		protected override StopDatafeedDescriptor NewDescriptor() => new StopDatafeedDescriptor(CallIsolatedValue + "-datafeed");
-		protected override object ExpectJson => null;
-		protected override Func<StopDatafeedDescriptor, IStopDatafeedRequest> Fluent => f => f;
-		protected override StopDatafeedRequest Initializer => new StopDatafeedRequest(CallIsolatedValue + "-datafeed");
 
-		protected override void ExpectResponse(IStopDatafeedResponse response)
-		{
-			response.Stopped.Should().BeTrue();
-		}
+		protected override void ExpectResponse(IStopDatafeedResponse response) => response.Stopped.Should().BeTrue();
 	}
 }

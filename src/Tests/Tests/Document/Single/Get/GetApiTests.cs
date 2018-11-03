@@ -1,44 +1,44 @@
-﻿﻿using System;
+﻿using System;
 using System.Linq;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
+using Tests.Core.Extensions;
+using Tests.Core.ManagedElasticsearch.Clusters;
+using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
- using Xunit;
-using FluentAssertions;
- using Tests.Core.Extensions;
- using Tests.Core.ManagedElasticsearch.Clusters;
- using Tests.Domain;
- using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Document.Single.Get
 {
-	public class GetApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
+	public class GetApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
 	{
-		protected string ProjectId => Project.First.Name;
-
-	    public GetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Get<Project>(this.ProjectId, f),
-			fluentAsync: (client, f) => client.GetAsync<Project>(this.ProjectId, f),
-			request: (client, r) => client.Get<Project>(r),
-			requestAsync: (client, r) => client.GetAsync<Project>(r)
-		);
+		public GetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
+		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g.Routing(ProjectId);
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/doc/{U(this.ProjectId)}?routing={U(this.ProjectId)}";
+
+		protected override GetRequest<Project> Initializer => new GetRequest<Project>(ProjectId)
+		{
+			Routing = ProjectId
+		};
+
+		protected string ProjectId => Project.First.Name;
 
 		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/project/doc/{U(ProjectId)}?routing={U(ProjectId)}";
 
-		protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(this.ProjectId);
-		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g=>g.Routing(this.ProjectId);
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Get<Project>(ProjectId, f),
+			(client, f) => client.GetAsync<Project>(ProjectId, f),
+			(client, r) => client.Get<Project>(r),
+			(client, r) => client.GetAsync<Project>(r)
+		);
 
-		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId)
-		{
-			Routing = this.ProjectId
-		};
+		protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(ProjectId);
 
 		protected override void ExpectResponse(IGetResponse<Project> response)
 		{
@@ -48,67 +48,72 @@ namespace Tests.Document.Single.Get
 		}
 	}
 
-	public class GetNonExistentDocumentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
+	public class GetNonExistentDocumentApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
 	{
-		protected string ProjectId => this.CallIsolatedValue;
-
-	    public GetNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Get<Project>(this.ProjectId, f),
-			fluentAsync: (client, f) => client.GetAsync<Project>(this.ProjectId, f),
-			request: (client, r) => client.Get<Project>(r),
-			requestAsync: (client, r) => client.GetAsync<Project>(r)
-		);
+		public GetNonExistentDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
+		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g.Routing(ProjectId);
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/doc/{U(this.ProjectId)}?routing={U(this.ProjectId)}";
+
+		protected override GetRequest<Project> Initializer => new GetRequest<Project>(ProjectId)
+		{
+			Routing = ProjectId
+		};
+
+		protected string ProjectId => CallIsolatedValue;
 
 		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/project/doc/{U(ProjectId)}?routing={U(ProjectId)}";
 
-		protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(this.ProjectId);
-		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g.Routing(this.ProjectId);
-		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId)
-		{
-			Routing = this.ProjectId
-		};
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Get<Project>(ProjectId, f),
+			(client, f) => client.GetAsync<Project>(ProjectId, f),
+			(client, r) => client.Get<Project>(r),
+			(client, r) => client.GetAsync<Project>(r)
+		);
+
+		protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(ProjectId);
 
 		protected override void ExpectResponse(IGetResponse<Project> response)
 		{
 			response.Found.Should().BeFalse();
 			response.Index.Should().Be("project");
 			response.Type.Should().Be("doc");
-			response.Id.Should().Be(this.CallIsolatedValue);
+			response.Id.Should().Be(CallIsolatedValue);
 		}
 	}
 
-	public class GetNonExistentIndexDocumentApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
+	public class GetNonExistentIndexDocumentApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
 	{
-		protected string ProjectId => this.CallIsolatedValue;
-		protected string BadIndex => this.CallIsolatedValue + "-index";
+		public GetNonExistentIndexDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	    public GetNonExistentIndexDocumentApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Get<Project>(this.ProjectId, f),
-			fluentAsync: (client, f) => client.GetAsync<Project>(this.ProjectId, f),
-			request: (client, r) => client.Get<Project>(r),
-			requestAsync: (client, r) => client.GetAsync<Project>(r)
-		);
+		protected string BadIndex => CallIsolatedValue + "-index";
 
 		protected override bool ExpectIsValid => false;
 		protected override int ExpectStatusCode => 404;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/{BadIndex}/doc/{U(this.ProjectId)}";
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override GetDescriptor<Project> NewDescriptor() =>
-			new GetDescriptor<Project>(DocumentPath<Project>.Id(this.ProjectId).Index(BadIndex));
 
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => (g) => g.Index(BadIndex);
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId, index: BadIndex);
+		protected override GetRequest<Project> Initializer => new GetRequest<Project>(ProjectId, BadIndex);
+		protected string ProjectId => CallIsolatedValue;
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/{BadIndex}/doc/{U(ProjectId)}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Get<Project>(ProjectId, f),
+			(client, f) => client.GetAsync<Project>(ProjectId, f),
+			(client, r) => client.Get<Project>(r),
+			(client, r) => client.GetAsync<Project>(r)
+		);
+
+		protected override GetDescriptor<Project> NewDescriptor() =>
+			new GetDescriptor<Project>(DocumentPath<Project>.Id(ProjectId).Index(BadIndex));
 
 		protected override void ExpectResponse(IGetResponse<Project> response)
 		{
@@ -118,37 +123,40 @@ namespace Tests.Document.Single.Get
 		}
 	}
 
-	public class GetApiParentTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<CommitActivity>, IGetRequest, GetDescriptor<CommitActivity>, GetRequest<CommitActivity>>
+	public class GetApiParentTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<CommitActivity>, IGetRequest, GetDescriptor<CommitActivity>, GetRequest<CommitActivity>
+		>
 	{
+		public GetApiParentTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected CommitActivity CommitActivity => CommitActivity.CommitActivities.First();
 
 		protected string CommitActivityId => CommitActivity.Id;
 
-	    public GetApiParentTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Get<CommitActivity>(this.CommitActivityId, f),
-			fluentAsync: (client, f) => client.GetAsync<CommitActivity>(this.CommitActivityId, f),
-			request: (client, r) => client.Get<CommitActivity>(r),
-			requestAsync: (client, r) => client.GetAsync<CommitActivity>(r)
-		);
-
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/doc/{U(this.CommitActivityId)}?routing={U(this.CommitActivity.ProjectName)}";
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override GetDescriptor<CommitActivity> NewDescriptor() => new GetDescriptor<CommitActivity>(CommitActivity);
 
 		protected override Func<GetDescriptor<CommitActivity>, IGetRequest> Fluent => g => g
-			.Routing(this.CommitActivity.ProjectName)
-			;
+			.Routing(CommitActivity.ProjectName);
 
-		protected override GetRequest<CommitActivity> Initializer => new GetRequest<CommitActivity>(this.CommitActivityId)
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+
+		protected override GetRequest<CommitActivity> Initializer => new GetRequest<CommitActivity>(CommitActivityId)
 		{
-			Routing = this.CommitActivity.ProjectName
+			Routing = CommitActivity.ProjectName
 		};
+
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"/project/doc/{U(CommitActivityId)}?routing={U(CommitActivity.ProjectName)}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.Get<CommitActivity>(CommitActivityId, f),
+			(client, f) => client.GetAsync<CommitActivity>(CommitActivityId, f),
+			(client, r) => client.Get<CommitActivity>(r),
+			(client, r) => client.GetAsync<CommitActivity>(r)
+		);
+
+		protected override GetDescriptor<CommitActivity> NewDescriptor() => new GetDescriptor<CommitActivity>(CommitActivity);
 
 		protected override void ExpectResponse(IGetResponse<CommitActivity> response)
 		{
@@ -158,7 +166,6 @@ namespace Tests.Document.Single.Get
 #pragma warning disable 618
 			response.Parent.Should().BeNullOrEmpty();
 #pragma warning restore 618
-
 		}
 	}
 
@@ -166,10 +173,8 @@ namespace Tests.Document.Single.Get
 	{
 		public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override string UrlPath => $"/project/doc/{U(this.ProjectId)}?stored_fields=name%2CnumberOfCommits&routing={U(this.ProjectId)}";
-
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g
-			.Routing(this.ProjectId)
+			.Routing(ProjectId)
 			.StoredFields(
 				p => p.Name,
 				p => p.NumberOfCommits
@@ -180,6 +185,8 @@ namespace Tests.Document.Single.Get
 			Routing = ProjectId,
 			StoredFields = Infer.Fields<Project>(p => p.Name, p => p.NumberOfCommits)
 		};
+
+		protected override string UrlPath => $"/project/doc/{U(ProjectId)}?stored_fields=name%2CnumberOfCommits&routing={U(ProjectId)}";
 
 		protected override void ExpectResponse(IGetResponse<Project> response)
 		{

@@ -11,7 +11,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 	{
 		protected override object ExpectJson => new Dictionary<string, object>
 		{
-			{FixedIndexSettings.RoutingPartitionSize, 6},
+			{ FixedIndexSettings.RoutingPartitionSize, 6 },
 		};
 
 		/**

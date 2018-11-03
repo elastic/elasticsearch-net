@@ -1,13 +1,11 @@
-﻿using System.Reflection;
-using Elastic.Xunit.XunitPlumbing;
+﻿using Elastic.Xunit.XunitPlumbing;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.Mapping.Types.Core.Range.DateRange
 {
 	public class DateRangeTest
 	{
-		[DateRange(Boost=1.2, Coerce = false, Format = "yyyy-MM")]
+		[DateRange(Boost = 1.2, Coerce = false, Format = "yyyy-MM")]
 		public Nest.DateRange Range { get; set; }
 	}
 

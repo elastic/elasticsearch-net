@@ -9,293 +9,6 @@ namespace Tests.Analysis.TokenFilters
 
 	public class TokenFilterUsageTests : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
 	{
-		protected override object ExpectJson => new
-		{
-			analysis = new
-			{
-				filter = new
-				{
-					myAscii = new
-					{
-						type = "asciifolding",
-						preserve_original = true
-					},
-					myCommonGrams = new
-					{
-						type = "common_grams",
-						common_words = new[] {"x", "y", "z"},
-						ignore_case = true,
-						query_mode = true
-					},
-					mydp = new
-					{
-						type = "delimited_payload",
-						delimiter = "-",
-						encoding = "identity"
-					},
-					dcc = new
-					{
-						type = "dictionary_decompounder",
-						word_list = new[] {"x", "y", "z"},
-						min_word_size = 2,
-						min_subword_size = 2,
-						max_subword_size = 2,
-						only_longest_match = true
-					},
-					etf = new
-					{
-						type = "edge_ngram",
-						min_gram = 1,
-						max_gram = 2
-					},
-					elision = new
-					{
-						type = "elision",
-						articles = new[] {"a", "b", "c"}
-					},
-					hunspell = new
-					{
-						type = "hunspell",
-						locale = "en_US",
-						dictionary = "path_to_dict",
-						dedup = true,
-						longest_only = true
-					},
-					hypdecomp = new
-					{
-						type = "hyphenation_decompounder",
-						word_list = new[] {"x", "y", "z"},
-						min_word_size = 2,
-						min_subword_size = 2,
-						max_subword_size = 2,
-						only_longest_match = true,
-						hyphenation_patterns_path = "analysis/fop.xml"
-					},
-					keeptypes = new
-					{
-						type = "keep_types",
-						types = new[] {"<NUM>", "<SOMETHINGELSE>"}
-					},
-					icuc = new {
-						alternate = "non-ignorable",
-						caseFirst = "lower",
-						caseLevel = true,
-						country = "DE",
-						decomposition = "no",
-						hiraganaQuaternaryMode = true,
-						language = "de",
-						numeric = true,
-						strength = "tertiary",
-						type = "icu_collation",
-						variant = "@collation=phonebook"
-					},
-					icuf = new {
-						type = "icu_folding",
-						unicodeSetFilter = "[^åäöÅÄÖ]"
-					},
-					icun = new {
-						name = "nfc",
-						type = "icu_normalizer"
-					},
-					icut = new {
-						dir = "forward",
-						id = "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC",
-						type = "icu_transform"
-					},
-					keepwords = new
-					{
-						type = "keep",
-						keep_words = new[] {"a", "b", "c"},
-						keep_words_case = true
-					},
-					marker = new
-					{
-						type = "keyword_marker",
-						keywords = new[] {"a", "b"},
-						ignore_case = true
-					},
-					kfr = new
-					{
-						type = "kuromoji_readingform",
-						use_romaji = true
-					},
-					kpos = new
-					{
-						stoptags = new[]
-						{
-							"#  verb-main:",
-							"動詞-自立"
-						},
-						type = "kuromoji_part_of_speech"
-					},
-					ks = new
-					{
-						minimum_length = 4,
-						type = "kuromoji_stemmer"
-					},
-					kstem = new
-					{
-						type = "kstem"
-					},
-					length = new
-					{
-						type = "length",
-						min = 10,
-						max = 200
-					},
-					limit = new
-					{
-						type = "limit",
-						max_token_count = 12,
-						consume_all_tokens = true
-					},
-					lc = new
-					{
-						type = "lowercase"
-					},
-					ngram = new
-					{
-						type = "ngram",
-						min_gram = 3,
-						max_gram = 4
-					},
-					pc = new
-					{
-						type = "pattern_capture",
-						patterns = new[] {"\\d", "\\w"},
-						preserve_original = true
-					},
-					pr = new
-					{
-						type = "pattern_replace",
-						pattern = "(\\d|\\w)",
-						replacement = "replacement"
-					},
-					porter = new
-					{
-						type = "porter_stem"
-					},
-					rev = new
-					{
-						type = "reverse"
-					},
-					shing = new
-					{
-						type = "shingle",
-						min_shingle_size = 8,
-						max_shingle_size = 10,
-						output_unigrams = true,
-						output_unigrams_if_no_shingles = true,
-						token_separator = "|",
-						filler_token = "x"
-					},
-					snow = new
-					{
-						type = "snowball",
-						language = "Dutch"
-					},
-					standard = new
-					{
-						type = "standard"
-					},
-					stem = new
-					{
-						type = "stemmer",
-						language = "arabic"
-					},
-					stemo = new
-					{
-						type = "stemmer_override",
-						rules_path = "analysis/custom_stems.txt"
-					},
-					stop = new
-					{
-						type = "stop",
-						stopwords = new[] {"x", "y", "z"},
-						ignore_case = true,
-						remove_trailing = true
-					},
-					syn = new
-					{
-						type = "synonym",
-						synonyms_path = "analysis/stopwords.txt",
-						format = "wordnet",
-						synonyms = new[] {"x=>y", "z=>s"},
-						expand = true,
-						tokenizer = "whitespace"
-					},
-					syn_graph = new
-					{
-						type = "synonym_graph",
-						synonyms_path = "analysis/stopwords.txt",
-						format = "wordnet",
-						synonyms = new[] {"x=>y", "z=>s"},
-						expand = true,
-						tokenizer = "whitespace"
-					},
-					trimmer = new
-					{
-						type = "trim"
-					},
-					truncer = new
-					{
-						type = "truncate",
-						length = 100
-					},
-					uq = new
-					{
-						type = "unique",
-						only_on_same_position = true
-					},
-					upper = new
-					{
-						type = "uppercase"
-					},
-					wd = new
-					{
-						type = "word_delimiter",
-						generate_word_parts = true,
-						generate_number_parts = true,
-						catenate_words = true,
-						catenate_numbers = true,
-						catenate_all = true,
-						split_on_case_change = true,
-						preserve_original = true,
-						split_on_numerics = true,
-						stem_english_possessive = true,
-						protected_words = new[] {"x", "y", "z"}
-					},
-					wdg = new
-					{
-						type = "word_delimiter_graph",
-						generate_word_parts = true,
-						generate_number_parts = true,
-						catenate_words = true,
-						catenate_numbers = true,
-						catenate_all = true,
-						split_on_case_change = true,
-						preserve_original = true,
-						split_on_numerics = true,
-						stem_english_possessive = true,
-						protected_words = new[] {"x", "y", "z"}
-					},
-					phonetic = new
-					{
-						type = "phonetic",
-						encoder = "beider_morse",
-						rule_type = "exact",
-						name_type = "sephardic",
-						languageset = new [] { "cyrillic", "english", "hebrew" }
-					}
-				}
-			}
-		};
-
-		/**
-		 *
-		 */
-		protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => FluentExample;
-
 		public static Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> FluentExample => s => s
 			.Analysis(analysis => analysis
 				.TokenFilters(tf => tf
@@ -452,9 +165,9 @@ namespace Tests.Analysis.TokenFilters
 						.Strength(IcuCollationStrength.Tertiary)
 						.Variant("@collation=phonebook")
 					)
-					.IcuFolding("icuf", t=>t.UnicodeSetFilter("[^åäöÅÄÖ]"))
-					.IcuNormalization("icun", t=>t.Name(IcuNormalizationType.Canonical))
-					.IcuTransform("icut", t=>t
+					.IcuFolding("icuf", t => t.UnicodeSetFilter("[^åäöÅÄÖ]"))
+					.IcuNormalization("icun", t => t.Name(IcuNormalizationType.Canonical))
+					.IcuTransform("icut", t => t
 						.Direction(IcuTransformDirection.Forward)
 						.Id("Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC")
 					)
@@ -467,10 +180,6 @@ namespace Tests.Analysis.TokenFilters
 				)
 			);
 
-		/**
-		 */
-		protected override IndexSettings Initializer => InitializerExample;
-
 		public static IndexSettings InitializerExample =>
 			new IndexSettings
 			{
@@ -478,9 +187,11 @@ namespace Tests.Analysis.TokenFilters
 				{
 					TokenFilters = new Nest.TokenFilters
 					{
-						{"myAscii", new AsciiFoldingTokenFilter {PreserveOriginal = true}},
-						{"myCommonGrams", new CommonGramsTokenFilter {QueryMode = true, IgnoreCase = true, CommonWords = new[] {"x", "y", "z"}}},
-						{"mydp", new DelimitedPayloadTokenFilter {Delimiter = '-', Encoding = DelimitedPayloadEncoding.Identity}},
+						{ "myAscii", new AsciiFoldingTokenFilter { PreserveOriginal = true } },
+						{
+							"myCommonGrams", new CommonGramsTokenFilter { QueryMode = true, IgnoreCase = true, CommonWords = new[] { "x", "y", "z" } }
+						},
+						{ "mydp", new DelimitedPayloadTokenFilter { Delimiter = '-', Encoding = DelimitedPayloadEncoding.Identity } },
 						{
 							"dcc", new DictionaryDecompounderTokenFilter
 							{
@@ -488,11 +199,11 @@ namespace Tests.Analysis.TokenFilters
 								MinSubwordSize = 2,
 								MaxSubwordSize = 2,
 								OnlyLongestMatch = true,
-								WordList = new[] {"x", "y", "z"}
+								WordList = new[] { "x", "y", "z" }
 							}
 						},
-						{"etf", new EdgeNGramTokenFilter {MaxGram = 2, MinGram = 1}},
-						{"elision", new ElisionTokenFilter {Articles = new[] {"a", "b", "c"}}},
+						{ "etf", new EdgeNGramTokenFilter { MaxGram = 2, MinGram = 1 } },
+						{ "elision", new ElisionTokenFilter { Articles = new[] { "a", "b", "c" } } },
 						{
 							"hunspell", new HunspellTokenFilter
 							{
@@ -509,22 +220,22 @@ namespace Tests.Analysis.TokenFilters
 								MinSubwordSize = 2,
 								MinWordSize = 2,
 								OnlyLongestMatch = true,
-								WordList = new[] {"x", "y", "z"},
+								WordList = new[] { "x", "y", "z" },
 								HyphenationPatternsPath = "analysis/fop.xml"
 							}
 						},
-						{"keeptypes", new KeepTypesTokenFilter {Types = new[] {"<NUM>", "<SOMETHINGELSE>"}}},
-						{"keepwords", new KeepWordsTokenFilter {KeepWordsCase = true, KeepWords = new[] {"a", "b", "c"}}},
-						{"marker", new KeywordMarkerTokenFilter {IgnoreCase = true, Keywords = new[] {"a", "b"}}},
-						{"kstem", new KStemTokenFilter { }},
-						{"length", new LengthTokenFilter {Min = 10, Max = 200}},
-						{"limit", new LimitTokenCountTokenFilter {ConsumeAllTokens = true, MaxTokenCount = 12}},
-						{"lc", new LowercaseTokenFilter()},
-						{"ngram", new NGramTokenFilter {MinGram = 3, MaxGram = 4}},
-						{"pc", new PatternCaptureTokenFilter {Patterns = new[] {@"\d", @"\w"}, PreserveOriginal = true}},
-						{"pr", new PatternReplaceTokenFilter {Pattern = @"(\d|\w)", Replacement = "replacement"}},
-						{"porter", new PorterStemTokenFilter()},
-						{"rev", new ReverseTokenFilter()},
+						{ "keeptypes", new KeepTypesTokenFilter { Types = new[] { "<NUM>", "<SOMETHINGELSE>" } } },
+						{ "keepwords", new KeepWordsTokenFilter { KeepWordsCase = true, KeepWords = new[] { "a", "b", "c" } } },
+						{ "marker", new KeywordMarkerTokenFilter { IgnoreCase = true, Keywords = new[] { "a", "b" } } },
+						{ "kstem", new KStemTokenFilter { } },
+						{ "length", new LengthTokenFilter { Min = 10, Max = 200 } },
+						{ "limit", new LimitTokenCountTokenFilter { ConsumeAllTokens = true, MaxTokenCount = 12 } },
+						{ "lc", new LowercaseTokenFilter() },
+						{ "ngram", new NGramTokenFilter { MinGram = 3, MaxGram = 4 } },
+						{ "pc", new PatternCaptureTokenFilter { Patterns = new[] { @"\d", @"\w" }, PreserveOriginal = true } },
+						{ "pr", new PatternReplaceTokenFilter { Pattern = @"(\d|\w)", Replacement = "replacement" } },
+						{ "porter", new PorterStemTokenFilter() },
+						{ "rev", new ReverseTokenFilter() },
 						{
 							"shing", new ShingleTokenFilter
 							{
@@ -536,18 +247,18 @@ namespace Tests.Analysis.TokenFilters
 								TokenSeparator = "|"
 							}
 						},
-						{"snow", new SnowballTokenFilter {Language = SnowballLanguage.Dutch}},
-						{"standard", new StandardTokenFilter()},
-						{"stem", new StemmerTokenFilter {Language = "arabic"}},
-						{"stemo", new StemmerOverrideTokenFilter {RulesPath = "analysis/custom_stems.txt"}},
-						{"stop", new StopTokenFilter {IgnoreCase = true, RemoveTrailing = true, StopWords = new[] {"x", "y", "z"}}},
+						{ "snow", new SnowballTokenFilter { Language = SnowballLanguage.Dutch } },
+						{ "standard", new StandardTokenFilter() },
+						{ "stem", new StemmerTokenFilter { Language = "arabic" } },
+						{ "stemo", new StemmerOverrideTokenFilter { RulesPath = "analysis/custom_stems.txt" } },
+						{ "stop", new StopTokenFilter { IgnoreCase = true, RemoveTrailing = true, StopWords = new[] { "x", "y", "z" } } },
 						{
 							"syn", new SynonymTokenFilter
 							{
 								Expand = true,
 								Format = SynonymFormat.WordNet,
 								SynonymsPath = "analysis/stopwords.txt",
-								Synonyms = new[] {"x=>y", "z=>s"},
+								Synonyms = new[] { "x=>y", "z=>s" },
 								Tokenizer = "whitespace"
 							}
 						},
@@ -557,14 +268,14 @@ namespace Tests.Analysis.TokenFilters
 								Expand = true,
 								Format = SynonymFormat.WordNet,
 								SynonymsPath = "analysis/stopwords.txt",
-								Synonyms = new[] {"x=>y", "z=>s"},
+								Synonyms = new[] { "x=>y", "z=>s" },
 								Tokenizer = "whitespace"
 							}
 						},
-						{"trimmer", new TrimTokenFilter()},
-						{"truncer", new TruncateTokenFilter {Length = 100}},
-						{"uq", new UniqueTokenFilter {OnlyOnSamePosition = true,}},
-						{"upper", new UppercaseTokenFilter()},
+						{ "trimmer", new TrimTokenFilter() },
+						{ "truncer", new TruncateTokenFilter { Length = 100 } },
+						{ "uq", new UniqueTokenFilter { OnlyOnSamePosition = true, } },
+						{ "upper", new UppercaseTokenFilter() },
 						{
 							"wd", new WordDelimiterTokenFilter
 							{
@@ -574,7 +285,7 @@ namespace Tests.Analysis.TokenFilters
 								GenerateNumberParts = true,
 								GenerateWordParts = true,
 								PreserveOriginal = true,
-								ProtectedWords = new[] {"x", "y", "z"},
+								ProtectedWords = new[] { "x", "y", "z" },
 								SplitOnCaseChange = true,
 								SplitOnNumerics = true,
 								StemEnglishPossessive = true
@@ -589,15 +300,15 @@ namespace Tests.Analysis.TokenFilters
 								GenerateNumberParts = true,
 								GenerateWordParts = true,
 								PreserveOriginal = true,
-								ProtectedWords = new[] {"x", "y", "z"},
+								ProtectedWords = new[] { "x", "y", "z" },
 								SplitOnCaseChange = true,
 								SplitOnNumerics = true,
 								StemEnglishPossessive = true
 							}
 						},
-						{"kpos", new KuromojiPartOfSpeechTokenFilter {StopTags = new[] {"#  verb-main:", "動詞-自立"}}},
-						{"kfr", new KuromojiReadingFormTokenFilter {UseRomaji = true}},
-						{"ks", new KuromojiStemmerTokenFilter {MinimumLength = 4}},
+						{ "kpos", new KuromojiPartOfSpeechTokenFilter { StopTags = new[] { "#  verb-main:", "動詞-自立" } } },
+						{ "kfr", new KuromojiReadingFormTokenFilter { UseRomaji = true } },
+						{ "ks", new KuromojiStemmerTokenFilter { MinimumLength = 4 } },
 
 						{
 							"icuc", new IcuCollationTokenFilter
@@ -614,28 +325,331 @@ namespace Tests.Analysis.TokenFilters
 								Variant = "@collation=phonebook"
 							}
 						},
-						{"icuf", new IcuFoldingTokenFilter
 						{
-							UnicodeSetFilter = "[^åäöÅÄÖ]"
-						}},
-						{"icun", new IcuNormalizationTokenFilter
+							"icuf", new IcuFoldingTokenFilter
+							{
+								UnicodeSetFilter = "[^åäöÅÄÖ]"
+							}
+						},
 						{
-							Name = IcuNormalizationType.Canonical
-						}},
-						{"icut", new IcuTransformTokenFilter
+							"icun", new IcuNormalizationTokenFilter
+							{
+								Name = IcuNormalizationType.Canonical
+							}
+						},
 						{
-							Direction = IcuTransformDirection.Forward,
-							Id = "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC"
-						}},
-						{ "phonetic", new PhoneticTokenFilter
+							"icut", new IcuTransformTokenFilter
+							{
+								Direction = IcuTransformDirection.Forward,
+								Id = "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC"
+							}
+						},
 						{
-							Encoder = PhoneticEncoder.Beidermorse,
-							RuleType = PhoneticRuleType.Exact,
-							NameType = PhoneticNameType.Sephardic,
-							LanguageSet = new [] { PhoneticLanguage.Cyrillic, PhoneticLanguage.English, PhoneticLanguage.Hebrew }
-						}},
+							"phonetic", new PhoneticTokenFilter
+							{
+								Encoder = PhoneticEncoder.Beidermorse,
+								RuleType = PhoneticRuleType.Exact,
+								NameType = PhoneticNameType.Sephardic,
+								LanguageSet = new[] { PhoneticLanguage.Cyrillic, PhoneticLanguage.English, PhoneticLanguage.Hebrew }
+							}
+						},
 					}
 				}
 			};
+
+		protected override object ExpectJson => new
+		{
+			analysis = new
+			{
+				filter = new
+				{
+					myAscii = new
+					{
+						type = "asciifolding",
+						preserve_original = true
+					},
+					myCommonGrams = new
+					{
+						type = "common_grams",
+						common_words = new[] { "x", "y", "z" },
+						ignore_case = true,
+						query_mode = true
+					},
+					mydp = new
+					{
+						type = "delimited_payload",
+						delimiter = "-",
+						encoding = "identity"
+					},
+					dcc = new
+					{
+						type = "dictionary_decompounder",
+						word_list = new[] { "x", "y", "z" },
+						min_word_size = 2,
+						min_subword_size = 2,
+						max_subword_size = 2,
+						only_longest_match = true
+					},
+					etf = new
+					{
+						type = "edge_ngram",
+						min_gram = 1,
+						max_gram = 2
+					},
+					elision = new
+					{
+						type = "elision",
+						articles = new[] { "a", "b", "c" }
+					},
+					hunspell = new
+					{
+						type = "hunspell",
+						locale = "en_US",
+						dictionary = "path_to_dict",
+						dedup = true,
+						longest_only = true
+					},
+					hypdecomp = new
+					{
+						type = "hyphenation_decompounder",
+						word_list = new[] { "x", "y", "z" },
+						min_word_size = 2,
+						min_subword_size = 2,
+						max_subword_size = 2,
+						only_longest_match = true,
+						hyphenation_patterns_path = "analysis/fop.xml"
+					},
+					keeptypes = new
+					{
+						type = "keep_types",
+						types = new[] { "<NUM>", "<SOMETHINGELSE>" }
+					},
+					icuc = new
+					{
+						alternate = "non-ignorable",
+						caseFirst = "lower",
+						caseLevel = true,
+						country = "DE",
+						decomposition = "no",
+						hiraganaQuaternaryMode = true,
+						language = "de",
+						numeric = true,
+						strength = "tertiary",
+						type = "icu_collation",
+						variant = "@collation=phonebook"
+					},
+					icuf = new
+					{
+						type = "icu_folding",
+						unicodeSetFilter = "[^åäöÅÄÖ]"
+					},
+					icun = new
+					{
+						name = "nfc",
+						type = "icu_normalizer"
+					},
+					icut = new
+					{
+						dir = "forward",
+						id = "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC",
+						type = "icu_transform"
+					},
+					keepwords = new
+					{
+						type = "keep",
+						keep_words = new[] { "a", "b", "c" },
+						keep_words_case = true
+					},
+					marker = new
+					{
+						type = "keyword_marker",
+						keywords = new[] { "a", "b" },
+						ignore_case = true
+					},
+					kfr = new
+					{
+						type = "kuromoji_readingform",
+						use_romaji = true
+					},
+					kpos = new
+					{
+						stoptags = new[]
+						{
+							"#  verb-main:",
+							"動詞-自立"
+						},
+						type = "kuromoji_part_of_speech"
+					},
+					ks = new
+					{
+						minimum_length = 4,
+						type = "kuromoji_stemmer"
+					},
+					kstem = new
+					{
+						type = "kstem"
+					},
+					length = new
+					{
+						type = "length",
+						min = 10,
+						max = 200
+					},
+					limit = new
+					{
+						type = "limit",
+						max_token_count = 12,
+						consume_all_tokens = true
+					},
+					lc = new
+					{
+						type = "lowercase"
+					},
+					ngram = new
+					{
+						type = "ngram",
+						min_gram = 3,
+						max_gram = 4
+					},
+					pc = new
+					{
+						type = "pattern_capture",
+						patterns = new[] { "\\d", "\\w" },
+						preserve_original = true
+					},
+					pr = new
+					{
+						type = "pattern_replace",
+						pattern = "(\\d|\\w)",
+						replacement = "replacement"
+					},
+					porter = new
+					{
+						type = "porter_stem"
+					},
+					rev = new
+					{
+						type = "reverse"
+					},
+					shing = new
+					{
+						type = "shingle",
+						min_shingle_size = 8,
+						max_shingle_size = 10,
+						output_unigrams = true,
+						output_unigrams_if_no_shingles = true,
+						token_separator = "|",
+						filler_token = "x"
+					},
+					snow = new
+					{
+						type = "snowball",
+						language = "Dutch"
+					},
+					standard = new
+					{
+						type = "standard"
+					},
+					stem = new
+					{
+						type = "stemmer",
+						language = "arabic"
+					},
+					stemo = new
+					{
+						type = "stemmer_override",
+						rules_path = "analysis/custom_stems.txt"
+					},
+					stop = new
+					{
+						type = "stop",
+						stopwords = new[] { "x", "y", "z" },
+						ignore_case = true,
+						remove_trailing = true
+					},
+					syn = new
+					{
+						type = "synonym",
+						synonyms_path = "analysis/stopwords.txt",
+						format = "wordnet",
+						synonyms = new[] { "x=>y", "z=>s" },
+						expand = true,
+						tokenizer = "whitespace"
+					},
+					syn_graph = new
+					{
+						type = "synonym_graph",
+						synonyms_path = "analysis/stopwords.txt",
+						format = "wordnet",
+						synonyms = new[] { "x=>y", "z=>s" },
+						expand = true,
+						tokenizer = "whitespace"
+					},
+					trimmer = new
+					{
+						type = "trim"
+					},
+					truncer = new
+					{
+						type = "truncate",
+						length = 100
+					},
+					uq = new
+					{
+						type = "unique",
+						only_on_same_position = true
+					},
+					upper = new
+					{
+						type = "uppercase"
+					},
+					wd = new
+					{
+						type = "word_delimiter",
+						generate_word_parts = true,
+						generate_number_parts = true,
+						catenate_words = true,
+						catenate_numbers = true,
+						catenate_all = true,
+						split_on_case_change = true,
+						preserve_original = true,
+						split_on_numerics = true,
+						stem_english_possessive = true,
+						protected_words = new[] { "x", "y", "z" }
+					},
+					wdg = new
+					{
+						type = "word_delimiter_graph",
+						generate_word_parts = true,
+						generate_number_parts = true,
+						catenate_words = true,
+						catenate_numbers = true,
+						catenate_all = true,
+						split_on_case_change = true,
+						preserve_original = true,
+						split_on_numerics = true,
+						stem_english_possessive = true,
+						protected_words = new[] { "x", "y", "z" }
+					},
+					phonetic = new
+					{
+						type = "phonetic",
+						encoder = "beider_morse",
+						rule_type = "exact",
+						name_type = "sephardic",
+						languageset = new[] { "cyrillic", "english", "hebrew" }
+					}
+				}
+			}
+		};
+
+		/**
+		 *
+		 */
+		protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => FluentExample;
+
+		/**
+		 */
+		protected override IndexSettings Initializer => InitializerExample;
 	}
 }

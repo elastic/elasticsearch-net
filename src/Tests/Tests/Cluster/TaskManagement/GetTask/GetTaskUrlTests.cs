@@ -12,10 +12,10 @@ namespace Tests.Cluster.TaskManagement.GetTask
 			var id = new TaskId("fakeid:1");
 
 			await UrlTester.GET($"/_tasks/fakeid%3A1")
-				.Fluent(c => c.GetTask(id))
-				.Request(c => c.GetTask(new GetTaskRequest(id)))
-				.FluentAsync(c => c.GetTaskAsync(id))
-				.RequestAsync(c => c.GetTaskAsync(new GetTaskRequest(id)))
+					.Fluent(c => c.GetTask(id))
+					.Request(c => c.GetTask(new GetTaskRequest(id)))
+					.FluentAsync(c => c.GetTaskAsync(id))
+					.RequestAsync(c => c.GetTaskAsync(new GetTaskRequest(id)))
 				;
 		}
 	}

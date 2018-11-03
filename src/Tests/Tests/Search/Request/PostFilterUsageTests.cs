@@ -5,9 +5,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Search.Request
 {
@@ -18,6 +16,9 @@ namespace Tests.Search.Request
 		protected override object ExpectJson =>
 			new { post_filter = new { match_all = new { } } };
 
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.PostFilter(f => f.MatchAll());
+
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>()
@@ -25,13 +26,7 @@ namespace Tests.Search.Request
 				PostFilter = new QueryContainer(new MatchAllQuery())
 			};
 
-		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.PostFilter(f => f.MatchAll());
-
 		[I]
-		public async Task ShouldHaveHits() => await AssertOnAllResponses((r) =>
-		{
-			r.Hits.Should().NotBeNull();
-		});
+		public async Task ShouldHaveHits() => await AssertOnAllResponses((r) => { r.Hits.Should().NotBeNull(); });
 	}
 }

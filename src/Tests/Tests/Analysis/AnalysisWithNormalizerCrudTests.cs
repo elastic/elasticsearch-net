@@ -1,5 +1,4 @@
 ﻿using Nest;
-using Tests.Analysis.Tokenizers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Integration;
 using static Tests.Framework.Promisify;

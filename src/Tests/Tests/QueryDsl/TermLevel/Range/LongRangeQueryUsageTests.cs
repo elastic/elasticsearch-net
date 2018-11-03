@@ -7,7 +7,31 @@ namespace Tests.QueryDsl.TermLevel.Range
 {
 	public class LongRangeQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public LongRangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public LongRangeQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ILongRangeQuery>(q => q.Range as ILongRangeQuery)
+		{
+			q => q.Field = null,
+			q =>
+			{
+				q.GreaterThan = null;
+				q.GreaterThanOrEqualTo = null;
+				q.LessThan = null;
+				q.LessThanOrEqualTo = null;
+			}
+		};
+
+		protected override QueryContainer QueryInitializer => new LongRangeQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			GreaterThan = 636634079999999999,
+			GreaterThanOrEqualTo = 636634080000000000,
+			LessThan = 636634080000000000,
+			LessThanOrEqualTo = 636634079999999999,
+			Relation = RangeRelation.Within
+		};
 
 		protected override object QueryJson => new
 		{
@@ -26,18 +50,6 @@ namespace Tests.QueryDsl.TermLevel.Range
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new LongRangeQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = "description",
-			GreaterThan = 636634079999999999,
-			GreaterThanOrEqualTo = 636634080000000000,
-			LessThan = 636634080000000000,
-			LessThanOrEqualTo = 636634079999999999,
-			Relation = RangeRelation.Within
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.LongRange(c => c
 				.Name("named_query")
@@ -49,17 +61,5 @@ namespace Tests.QueryDsl.TermLevel.Range
 				.LessThanOrEquals(636634079999999999)
 				.Relation(RangeRelation.Within)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ILongRangeQuery>(q => q.Range as ILongRangeQuery)
-		{
-			q=> q.Field = null,
-			q=>
-			{
-				q.GreaterThan = null;
-				q.GreaterThanOrEqualTo = null;
-				q.LessThan = null;
-				q.LessThanOrEqualTo = null;
-			}
-		};
 	}
 }

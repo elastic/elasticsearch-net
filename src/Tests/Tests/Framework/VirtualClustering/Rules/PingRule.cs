@@ -23,7 +23,8 @@ namespace Tests.Framework
 			return this;
 		}
 
-		public PingRule SucceedAlways(int? validResponseCode = 200) => this.Succeeds(TimesHelper.Always, validResponseCode);
-		public PingRule FailAlways(Union<Exception, int> errorState = null) => this.Fails(TimesHelper.Always, errorState);
+		public PingRule SucceedAlways(int? validResponseCode = 200) => Succeeds(TimesHelper.Always, validResponseCode);
+
+		public PingRule FailAlways(Union<Exception, int> errorState = null) => Fails(TimesHelper.Always, errorState);
 	}
 }

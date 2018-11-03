@@ -1,17 +1,11 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
 using Nest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Ingest
 {
@@ -24,10 +18,10 @@ namespace Tests.Ingest
 		protected override LazyResponses Create() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, IPutPipelineResponse>(
 			CreateInitializer,
 			CreateFluent,
-			fluent: (s, c, f) => c.PutPipeline(s, f),
-			fluentAsync: (s, c, f) => c.PutPipelineAsync(s, f),
-			request: (s, c, r) => c.PutPipeline(r),
-			requestAsync: (s, c, r) => c.PutPipelineAsync(r)
+			(s, c, f) => c.PutPipeline(s, f),
+			(s, c, f) => c.PutPipelineAsync(s, f),
+			(s, c, r) => c.PutPipeline(r),
+			(s, c, r) => c.PutPipelineAsync(r)
 		);
 
 		protected override void ExpectAfterCreate(IGetPipelineResponse response)
@@ -86,19 +80,19 @@ namespace Tests.Ingest
 		protected override LazyResponses Read() => Calls<GetPipelineDescriptor, GetPipelineRequest, IGetPipelineRequest, IGetPipelineResponse>(
 			id => new GetPipelineRequest(id),
 			(id, d) => d.Id(id),
-			fluent: (s, c, f) => c.GetPipeline(f),
-			fluentAsync: (s, c, f) => c.GetPipelineAsync(f),
-			request: (s, c, r) => c.GetPipeline(r),
-			requestAsync: (s, c, r) => c.GetPipelineAsync(r)
+			(s, c, f) => c.GetPipeline(f),
+			(s, c, f) => c.GetPipelineAsync(f),
+			(s, c, r) => c.GetPipeline(r),
+			(s, c, r) => c.GetPipelineAsync(r)
 		);
 
 		protected override LazyResponses Update() => Calls<PutPipelineDescriptor, PutPipelineRequest, IPutPipelineRequest, IPutPipelineResponse>(
 			UpdateInitializer,
 			UpdateFluent,
-			fluent: (s, c, f) => c.PutPipeline(s, f),
-			fluentAsync: (s, c, f) => c.PutPipelineAsync(s, f),
-			request: (s, c, r) => c.PutPipeline(r),
-			requestAsync: (s, c, r) => c.PutPipelineAsync(r)
+			(s, c, f) => c.PutPipeline(s, f),
+			(s, c, f) => c.PutPipelineAsync(s, f),
+			(s, c, r) => c.PutPipeline(r),
+			(s, c, r) => c.PutPipelineAsync(r)
 		);
 
 		private PutPipelineRequest UpdateInitializer(string pipelineId) => new PutPipelineRequest(pipelineId)
@@ -168,14 +162,14 @@ namespace Tests.Ingest
 			rename.TargetField.Should().NotBeNull();
 		}
 
-		protected override LazyResponses Delete() => Calls<DeletePipelineDescriptor, DeletePipelineRequest, IDeletePipelineRequest, IDeletePipelineResponse>(
-			id => new DeletePipelineRequest(id),
-			(id, d) => d,
-			fluent: (s, c, f) => c.DeletePipeline(s, f),
-			fluentAsync: (s, c, f) => c.DeletePipelineAsync(s, f),
-			request: (s, c, r) => c.DeletePipeline(r),
-			requestAsync: (s, c, r) => c.DeletePipelineAsync(r)
-		);
-
+		protected override LazyResponses Delete() =>
+			Calls<DeletePipelineDescriptor, DeletePipelineRequest, IDeletePipelineRequest, IDeletePipelineResponse>(
+				id => new DeletePipelineRequest(id),
+				(id, d) => d,
+				(s, c, f) => c.DeletePipeline(s, f),
+				(s, c, f) => c.DeletePipelineAsync(s, f),
+				(s, c, r) => c.DeletePipeline(r),
+				(s, c, r) => c.DeletePipelineAsync(r)
+			);
 	}
 }

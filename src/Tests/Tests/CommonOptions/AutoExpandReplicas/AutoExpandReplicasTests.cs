@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
-using Tests.Framework;
-using Nest;
 using Xunit;
 
 namespace Tests.CommonOptions.AutoExpandReplicas
@@ -30,8 +24,8 @@ namespace Tests.CommonOptions.AutoExpandReplicas
 			autoExpandReplicas.Enabled.Should().BeTrue();
 			autoExpandReplicas.MinReplicas.Should().Be(0);
 			autoExpandReplicas.MaxReplicas.Match(
-                i => i.Should().Be(5),
-                s => Assert.True(false, "expecting a match on integer"));
+				i => i.Should().Be(5),
+				s => Assert.True(false, "expecting a match on integer"));
 
 			autoExpandReplicas.ToString().Should().Be(minAndMax);
 		}
@@ -59,8 +53,8 @@ namespace Tests.CommonOptions.AutoExpandReplicas
 			autoExpandReplicas.Enabled.Should().BeTrue();
 			autoExpandReplicas.MinReplicas.Should().Be(2);
 			autoExpandReplicas.MaxReplicas.Match(
-                i => i.Should().Be(3),
-                s => Assert.True(false, "expecting a match on integer"));
+				i => i.Should().Be(3),
+				s => Assert.True(false, "expecting a match on integer"));
 
 			autoExpandReplicas.ToString().Should().Be("2-3");
 		}
@@ -93,18 +87,18 @@ namespace Tests.CommonOptions.AutoExpandReplicas
 
 		[U]
 		public void MinMustBeEqualOrLessThanMax() =>
-            Assert.Throws<ArgumentException>(() => Nest.AutoExpandReplicas.Create(2,1));
+			Assert.Throws<ArgumentException>(() => Nest.AutoExpandReplicas.Create(2, 1));
 
 		[U]
 		public void MinMustBeGreaterThanOrEqualToZero() =>
-            Assert.Throws<ArgumentException>(() => Nest.AutoExpandReplicas.Create(-1));
+			Assert.Throws<ArgumentException>(() => Nest.AutoExpandReplicas.Create(-1));
 
 		[U]
 		public void MinMustBeAnInteger() =>
-            Assert.Throws<FormatException>(() => Nest.AutoExpandReplicas.Create("all-all"));
+			Assert.Throws<FormatException>(() => Nest.AutoExpandReplicas.Create("all-all"));
 
 		[U]
 		public void MaxMustBeAllOrAnInteger() =>
-            Assert.Throws<FormatException>(() => Nest.AutoExpandReplicas.Create("2-boo"));
+			Assert.Throws<FormatException>(() => Nest.AutoExpandReplicas.Create("2-boo"));
 	}
 }

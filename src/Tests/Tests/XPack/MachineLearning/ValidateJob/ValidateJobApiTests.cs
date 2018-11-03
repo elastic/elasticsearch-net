@@ -10,22 +10,12 @@ using static Nest.Infer;
 
 namespace Tests.XPack.MachineLearning.ValidateJob
 {
-	public class ValidateJobApiTests : MachineLearningIntegrationTestBase<IValidateJobResponse, IValidateJobRequest, ValidateJobDescriptor<Metric>, ValidateJobRequest>
+	public class ValidateJobApiTests
+		: MachineLearningIntegrationTestBase<IValidateJobResponse, IValidateJobRequest, ValidateJobDescriptor<Metric>, ValidateJobRequest>
 	{
 		public ValidateJobApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ValidateJob(f),
-			fluentAsync: (client, f) => client.ValidateJobAsync(f),
-			request: (client, r) => client.ValidateJob(r),
-			requestAsync: (client, r) => client.ValidateJobAsync(r)
-		);
-
 		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/_validate";
-		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson => new
 		{
@@ -50,6 +40,8 @@ namespace Tests.XPack.MachineLearning.ValidateJob
 			results_index_name = "server-metrics"
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<ValidateJobDescriptor<Metric>, IValidateJobRequest> Fluent => f => f
 			.Description("Lab 1 - Simple example")
 			.ResultsIndexName("server-metrics")
@@ -60,6 +52,8 @@ namespace Tests.XPack.MachineLearning.ValidateJob
 			)
 			.DataDescription(d => d.TimeField(r => r.Timestamp));
 
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+
 		protected override ValidateJobRequest Initializer =>
 			new ValidateJobRequest()
 			{
@@ -69,7 +63,7 @@ namespace Tests.XPack.MachineLearning.ValidateJob
 				{
 					BucketSpan = new Time("30m"),
 					Latency = "0s",
-					Detectors = new []
+					Detectors = new[]
 					{
 						new SumDetector
 						{
@@ -83,9 +77,16 @@ namespace Tests.XPack.MachineLearning.ValidateJob
 				}
 			};
 
-		protected override void ExpectResponse(IValidateJobResponse response)
-		{
-			response.Acknowledged.Should().BeTrue();
-		}
+		protected override bool SupportsDeserialization => false;
+		protected override string UrlPath => $"_xpack/ml/anomaly_detectors/_validate";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.ValidateJob(f),
+			(client, f) => client.ValidateJobAsync(f),
+			(client, r) => client.ValidateJob(r),
+			(client, r) => client.ValidateJobAsync(r)
+		);
+
+		protected override void ExpectResponse(IValidateJobResponse response) => response.Acknowledged.Should().BeTrue();
 	}
 }

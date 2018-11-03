@@ -7,16 +7,19 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 {
 	public abstract class OperatorUsageBase
 	{
-		protected static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
 		protected static readonly TermQuery ConditionlessQuery = new TermQuery { };
 		protected static readonly TermQuery NullQuery = null;
+		protected static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
 
 		protected void ReturnsNull(QueryContainer combined, Func<QueryContainerDescriptor<Project>, QueryContainer> selector)
 		{
-			combined.Should().BeNull(); selector.Invoke(new QueryContainerDescriptor<Project>()).Should().BeNull();
+			combined.Should().BeNull();
+			selector.Invoke(new QueryContainerDescriptor<Project>()).Should().BeNull();
 		}
 
-		protected void ReturnsBool(QueryContainer combined, Func<QueryContainerDescriptor<Project>, QueryContainer> selector, Action<IBoolQuery> boolQueryAssert)
+		protected void ReturnsBool(QueryContainer combined, Func<QueryContainerDescriptor<Project>, QueryContainer> selector,
+			Action<IBoolQuery> boolQueryAssert
+		)
 		{
 			ReturnsBool(combined, boolQueryAssert);
 			ReturnsBool(selector.Invoke(new QueryContainerDescriptor<Project>()), boolQueryAssert);
@@ -30,7 +33,9 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			boolQueryAssert(c.Bool);
 		}
 
-		protected void ReturnsSingleQuery(QueryContainer combined, Func<QueryContainerDescriptor<Project>, QueryContainer> selector, Action<IQueryContainer> containerAssert)
+		protected void ReturnsSingleQuery(QueryContainer combined, Func<QueryContainerDescriptor<Project>, QueryContainer> selector,
+			Action<IQueryContainer> containerAssert
+		)
 		{
 			ReturnsSingleQuery(combined, containerAssert);
 			ReturnsSingleQuery(selector.Invoke(new QueryContainerDescriptor<Project>()), containerAssert);
@@ -42,9 +47,5 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			IQueryContainer c = combined;
 			containerAssert(c);
 		}
-
-
-
-
 	}
 }

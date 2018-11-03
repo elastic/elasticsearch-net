@@ -14,16 +14,16 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 			var index = "index1,index2";
 			Nest.Indices indices = index;
 			await PUT($"/index1%2Cindex2/_settings")
-				.Fluent(c => c.UpdateIndexSettings(indices, s=>s))
-				.Request(c => c.UpdateIndexSettings(new UpdateIndexSettingsRequest(index)))
-				.FluentAsync(c => c.UpdateIndexSettingsAsync(indices, s=>s))
-				.RequestAsync(c => c.UpdateIndexSettingsAsync(new UpdateIndexSettingsRequest(index)))
+					.Fluent(c => c.UpdateIndexSettings(indices, s => s))
+					.Request(c => c.UpdateIndexSettings(new UpdateIndexSettingsRequest(index)))
+					.FluentAsync(c => c.UpdateIndexSettingsAsync(indices, s => s))
+					.RequestAsync(c => c.UpdateIndexSettingsAsync(new UpdateIndexSettingsRequest(index)))
 				;
 			await PUT($"/_settings")
-				.Fluent(c => c.UpdateIndexSettings(AllIndices, s=>s))
-				.Request(c => c.UpdateIndexSettings(new UpdateIndexSettingsRequest()))
-				.FluentAsync(c => c.UpdateIndexSettingsAsync(AllIndices, s=>s))
-				.RequestAsync(c => c.UpdateIndexSettingsAsync(new UpdateIndexSettingsRequest()))
+					.Fluent(c => c.UpdateIndexSettings(AllIndices, s => s))
+					.Request(c => c.UpdateIndexSettings(new UpdateIndexSettingsRequest()))
+					.FluentAsync(c => c.UpdateIndexSettingsAsync(AllIndices, s => s))
+					.RequestAsync(c => c.UpdateIndexSettingsAsync(new UpdateIndexSettingsRequest()))
 				;
 		}
 	}

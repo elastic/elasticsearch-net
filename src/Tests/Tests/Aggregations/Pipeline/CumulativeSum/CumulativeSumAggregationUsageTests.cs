@@ -4,9 +4,7 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
-using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Aggregations.Pipeline.CumulativeSum
 {
@@ -43,23 +41,6 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 			}
 		};
 
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			response.ShouldBeValid();
-
-			var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
-			projectsPerMonth.Should().NotBeNull();
-			projectsPerMonth.Buckets.Should().NotBeNull();
-			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
-
-			foreach (var item in projectsPerMonth.Buckets)
-			{
-				var commitsDerivative = item.Derivative("cumulative_commits");
-				commitsDerivative.Should().NotBeNull();
-				commitsDerivative.Value.Should().NotBe(null);
-			}
-		}
-
 		protected override Func<AggregationContainerDescriptor<Project>, IAggregationContainer> FluentAggs => a => a
 			.DateHistogram("projects_started_per_month", dh => dh
 				.Field(p => p.StartedOn)
@@ -83,5 +64,22 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 					new SumAggregation("commits", "numberOfCommits") &&
 					new CumulativeSumAggregation("cumulative_commits", "commits")
 			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.ShouldBeValid();
+
+			var projectsPerMonth = response.Aggregations.DateHistogram("projects_started_per_month");
+			projectsPerMonth.Should().NotBeNull();
+			projectsPerMonth.Buckets.Should().NotBeNull();
+			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+
+			foreach (var item in projectsPerMonth.Buckets)
+			{
+				var commitsDerivative = item.Derivative("cumulative_commits");
+				commitsDerivative.Should().NotBeNull();
+				commitsDerivative.Value.Should().NotBe(null);
+			}
+		}
 	}
 }

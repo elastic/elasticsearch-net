@@ -15,8 +15,8 @@ namespace Tests.XPack.MachineLearning
 			var detectorTypes =
 				from t in typeof(IDetector).Assembly().Types()
 				where typeof(IDetector).IsAssignableFrom(t) &&
-				      !t.IsAbstract() &&
-				      !typeof(IDescriptor).IsAssignableFrom(t)
+					!t.IsAbstract() &&
+					!typeof(IDescriptor).IsAssignableFrom(t)
 				select t;
 
 			var detectors = detectorTypes

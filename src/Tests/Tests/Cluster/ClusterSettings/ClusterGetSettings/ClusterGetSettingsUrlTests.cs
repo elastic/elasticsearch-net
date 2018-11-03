@@ -8,14 +8,10 @@ namespace Tests.Cluster.ClusterSettings.ClusterGetSettings
 {
 	public class ClusterGetSettingsUrlTests : UrlTestsBase
 	{
-		[U] public override async Task Urls()
-		{
-			await GET("/_cluster/settings")
-				.Fluent(c => c.ClusterGetSettings())
-				.Request(c => c.ClusterGetSettings(new ClusterGetSettingsRequest()))
-				.FluentAsync(c => c.ClusterGetSettingsAsync())
-				.RequestAsync(c => c.ClusterGetSettingsAsync(new ClusterGetSettingsRequest()))
-				;
-		}
+		[U] public override async Task Urls() => await GET("/_cluster/settings")
+			.Fluent(c => c.ClusterGetSettings())
+			.Request(c => c.ClusterGetSettings(new ClusterGetSettingsRequest()))
+			.FluentAsync(c => c.ClusterGetSettingsAsync())
+			.RequestAsync(c => c.ClusterGetSettingsAsync(new ClusterGetSettingsRequest()));
 	}
 }

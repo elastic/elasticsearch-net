@@ -12,10 +12,10 @@ namespace Tests.Cat.CatShards
 		[U] public override async Task Urls()
 		{
 			await GET("/_cat/shards")
-				.Fluent(c => c.CatShards())
-				.Request(c => c.CatShards(new CatShardsRequest()))
-				.FluentAsync(c => c.CatShardsAsync())
-				.RequestAsync(c => c.CatShardsAsync(new CatShardsRequest()))
+					.Fluent(c => c.CatShards())
+					.Request(c => c.CatShards(new CatShardsRequest()))
+					.FluentAsync(c => c.CatShardsAsync())
+					.RequestAsync(c => c.CatShardsAsync(new CatShardsRequest()))
 				;
 
 			await GET("/_cat/shards/project")

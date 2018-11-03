@@ -2,13 +2,11 @@
 using Elastic.Xunit.XunitPlumbing;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 
 namespace Tests.QueryDsl.BoolDsl.Operators
 {
 	public class UnaryAddOperatorUsageTests : OperatorUsageBase
 	{
-
 		[U] public void UnaryAdd()
 		{
 			ReturnsBool(+Query && +Query, q => +q.Query() && +q.Query(), b =>
@@ -59,14 +57,13 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			ReturnsNull(
 				+ConditionlessQuery || +ConditionlessQuery || +ConditionlessQuery || +ConditionlessQuery,
 				q => +q.ConditionlessQuery() || +q.ConditionlessQuery() || +q.ConditionlessQuery() || +q.ConditionlessQuery()
-
 			);
 			ReturnsNull(
 				+NullQuery || +ConditionlessQuery || +ConditionlessQuery || +ConditionlessQuery,
 				q => +q.NullQuery() || +q.ConditionlessQuery() || +q.ConditionlessQuery() || +q.ConditionlessQuery()
 			);
-
 		}
+
 		[U]
 		public void CombiningManyUsingAggregate()
 		{
@@ -106,9 +103,8 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			foreach (var i in Enumerable.Range(0, 100))
 				container |= +Query;
 			var c = container as IQueryContainer;
-		
+
 			c.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
 		}
-
 	}
 }

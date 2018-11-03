@@ -14,28 +14,25 @@ namespace Tests.XPack.MachineLearning.GetJobs
 	{
 		public GetJobsApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+		protected override Func<GetJobsDescriptor, IGetJobsRequest> Fluent => f => f;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override GetJobsRequest Initializer => new GetJobsRequest();
+		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors";
+
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				PutJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) PutJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetJobs(f),
-			fluentAsync: (client, f) => client.GetJobsAsync(f),
-			request: (client, r) => client.GetJobs(r),
-			requestAsync: (client, r) => client.GetJobsAsync(r)
+			(client, f) => client.GetJobs(f),
+			(client, f) => client.GetJobsAsync(f),
+			(client, r) => client.GetJobs(r),
+			(client, r) => client.GetJobsAsync(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors";
-		protected override object ExpectJson => null;
-		protected override Func<GetJobsDescriptor, IGetJobsRequest> Fluent => f => f;
-		protected override GetJobsRequest Initializer => new GetJobsRequest();
 
 		protected override void ExpectResponse(IGetJobsResponse response)
 		{
@@ -75,28 +72,25 @@ namespace Tests.XPack.MachineLearning.GetJobs
 	{
 		public GetJobsWithJobIdApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override bool ExpectIsValid => true;
+		protected override object ExpectJson => null;
+		protected override int ExpectStatusCode => 200;
+		protected override Func<GetJobsDescriptor, IGetJobsRequest> Fluent => f => f.JobId(CallIsolatedValue);
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override GetJobsRequest Initializer => new GetJobsRequest(CallIsolatedValue);
+		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}";
+
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var callUniqueValue in values)
-			{
-				PutJob(client, callUniqueValue.Value);
-			}
+			foreach (var callUniqueValue in values) PutJob(client, callUniqueValue.Value);
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetJobs(f),
-			fluentAsync: (client, f) => client.GetJobsAsync(f),
-			request: (client, r) => client.GetJobs(r),
-			requestAsync: (client, r) => client.GetJobsAsync(r)
+			(client, f) => client.GetJobs(f),
+			(client, f) => client.GetJobsAsync(f),
+			(client, r) => client.GetJobs(r),
+			(client, r) => client.GetJobsAsync(r)
 		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_xpack/ml/anomaly_detectors/{CallIsolatedValue}";
-		protected override object ExpectJson => null;
-		protected override Func<GetJobsDescriptor, IGetJobsRequest> Fluent => f => f.JobId(CallIsolatedValue);
-		protected override GetJobsRequest Initializer => new GetJobsRequest(CallIsolatedValue);
 
 		protected override void ExpectResponse(IGetJobsResponse response)
 		{

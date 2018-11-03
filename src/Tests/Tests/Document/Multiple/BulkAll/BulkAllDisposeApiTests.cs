@@ -14,7 +14,7 @@ namespace Tests.Document.Multiple.BulkAll
 	{
 		public BulkAllDisposeApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		[I, SkipOnTeamCity]
+		[I] [SkipOnTeamCity]
 		public void DisposingObservableCancelsBulkAll()
 		{
 			var index = CreateIndexName();
@@ -24,10 +24,10 @@ namespace Tests.Document.Multiple.BulkAll
 			var pages = 1000;
 			var seenPages = 0;
 			var numberOfDocuments = size * pages;
-			var documents = this.CreateLazyStreamOfDocuments(numberOfDocuments);
+			var documents = CreateLazyStreamOfDocuments(numberOfDocuments);
 
 			//first we setup our cold observable
-			var observableBulk = this.Client.BulkAll(documents, f => f
+			var observableBulk = Client.BulkAll(documents, f => f
 				.MaxDegreeOfParallelism(8)
 				.BackOffTime(TimeSpan.FromSeconds(10))
 				.BackOffRetries(2)
@@ -54,7 +54,7 @@ namespace Tests.Document.Multiple.BulkAll
 			if (ex != null && !(ex is TaskCanceledException) && !(ex is OperationCanceledException)) throw ex;
 
 			seenPages.Should().BeLessThan(pages).And.BeGreaterThan(0);
-			var count = this.Client.Count<SmallObject>(f => f.Index(index));
+			var count = Client.Count<SmallObject>(f => f.Index(index));
 			count.Count.Should().BeLessThan(numberOfDocuments).And.BeGreaterThan(0);
 			bulkObserver.TotalNumberOfFailedBuffers.Should().Be(0);
 		}

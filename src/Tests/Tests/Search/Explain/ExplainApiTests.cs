@@ -7,34 +7,18 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
-using Xunit;
 
 namespace Tests.Search.Explain
 {
 	public class ExplainApiTests
-		: ApiIntegrationTestBase<ReadOnlyCluster, IExplainResponse<Project>, IExplainRequest<Project>, ExplainDescriptor<Project>, ExplainRequest<Project>>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IExplainResponse<Project>, IExplainRequest<Project>, ExplainDescriptor<Project>,
+			ExplainRequest<Project>>
 	{
+		private readonly Project _project = new Project { Name = Project.Instance.Name };
+
 		public ExplainApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Explain(_project, f),
-			fluentAsync: (c, f) => c.ExplainAsync(_project, f),
-			request: (c, r) => c.Explain(r),
-			requestAsync: (c, r) => c.ExplainAsync(r)
-		);
-
-		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath =>
-			$"/project/doc/{U(Project.Instance.Name)}/_explain?_source=true&routing={U(Project.Instance.Name)}";
-
-		protected override bool SupportsDeserialization => false;
-
-		protected override ExplainDescriptor<Project> NewDescriptor() => new ExplainDescriptor<Project>(_project);
-
-		private readonly Project _project = new Project { Name = Project.Instance.Name };
 
 		protected override object ExpectJson => new
 		{
@@ -50,6 +34,8 @@ namespace Tests.Search.Explain
 			}
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<ExplainDescriptor<Project>, IExplainRequest<Project>> Fluent => e => e
 			.SourceEnabled()
 			.Query(q => q
@@ -58,6 +44,8 @@ namespace Tests.Search.Explain
 					.Query(Project.Instance.Name)
 				)
 			);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override ExplainRequest<Project> Initializer => new ExplainRequest<Project>(_project)
 		{
@@ -68,6 +56,20 @@ namespace Tests.Search.Explain
 				Query = Project.Instance.Name
 			})
 		};
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override string UrlPath =>
+			$"/project/doc/{U(Project.Instance.Name)}/_explain?_source=true&routing={U(Project.Instance.Name)}";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(c, f) => c.Explain(_project, f),
+			(c, f) => c.ExplainAsync(_project, f),
+			(c, r) => c.Explain(r),
+			(c, r) => c.ExplainAsync(r)
+		);
+
+		protected override ExplainDescriptor<Project> NewDescriptor() => new ExplainDescriptor<Project>(_project);
 
 		protected override void ExpectResponse(IExplainResponse<Project> response)
 		{

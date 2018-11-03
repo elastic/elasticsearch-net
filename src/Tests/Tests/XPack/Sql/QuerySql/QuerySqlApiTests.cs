@@ -14,42 +14,44 @@ namespace Tests.XPack.Sql.QuerySql
 	[SkipVersion("<6.4.0", "")]
 	public class QuerySqlApiTests : ApiIntegrationTestBase<XPackCluster, IQuerySqlResponse, IQuerySqlRequest, QuerySqlDescriptor, QuerySqlRequest>
 	{
-		public QuerySqlApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override LazyResponses ClientUsage() => this.Calls(
-			fluent: (client, f) => client.QuerySql(f),
-			fluentAsync: (client, f) => client.QuerySqlAsync(f),
-			request: (client, r) => client.QuerySql(r),
-			requestAsync: (client, r) => client.QuerySqlAsync(r)
-		);
-
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
-		protected override string UrlPath => $"/_xpack/sql";
-
 		private static readonly string SqlQuery =
 			$@"SELECT type, name, startedOn, numberOfCommits
 FROM {TestValueHelper.ProjectsIndex}
 WHERE type = '{Project.TypeName}'
 ORDER BY numberOfContributors DESC";
 
-		protected override object ExpectJson { get; } = new {
+		public QuerySqlApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool ExpectIsValid => true;
+
+		protected override object ExpectJson { get; } = new
+		{
 			query = SqlQuery,
 			fetch_size = 5
 		};
 
+		protected override int ExpectStatusCode => 200;
+
 		protected override Func<QuerySqlDescriptor, IQuerySqlRequest> Fluent => d => d
 			.Query(SqlQuery)
-			.FetchSize(5)
-		;
+			.FetchSize(5);
+
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
 		protected override QuerySqlRequest Initializer => new QuerySqlRequest()
 		{
 			Query = SqlQuery,
 			FetchSize = 5
 		};
+
+		protected override string UrlPath => $"/_xpack/sql";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			(client, f) => client.QuerySql(f),
+			(client, f) => client.QuerySqlAsync(f),
+			(client, r) => client.QuerySql(r),
+			(client, r) => client.QuerySqlAsync(r)
+		);
 
 		protected override void ExpectResponse(IQuerySqlResponse response)
 		{

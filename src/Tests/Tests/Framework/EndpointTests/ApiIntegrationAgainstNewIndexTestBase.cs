@@ -7,7 +7,6 @@ using Nest;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.Framework
 {
@@ -23,7 +22,7 @@ namespace Tests.Framework
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			foreach (var index in values.Values) client.CreateIndex(index, this.CreateIndexSettings).ShouldBeValid();
+			foreach (var index in values.Values) client.CreateIndex(index, CreateIndexSettings).ShouldBeValid();
 			var indices = Infer.Indices(values.Values.Select(i => (IndexName)i));
 			client.ClusterHealth(f => f.WaitForStatus(WaitForStatus.Yellow).Index(indices))
 				.ShouldBeValid();

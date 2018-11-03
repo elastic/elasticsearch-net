@@ -2,13 +2,29 @@ using Nest;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
-using Tests.Framework.ManagedElasticsearch.Clusters;
 
 namespace Tests.QueryDsl.TermLevel.Regexp
 {
 	public class RegexpQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public RegexpQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public RegexpQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IRegexpQuery>(a => a.Regexp)
+		{
+			q => q.Field = null,
+			q => q.Value = null,
+			q => q.Value = string.Empty
+		};
+
+		protected override QueryContainer QueryInitializer => new RegexpQuery
+		{
+			Name = "named_query",
+			Boost = 1.1,
+			Field = "description",
+			Value = "s.*y",
+			Flags = "INTERSECTION|COMPLEMENT|EMPTY",
+			MaximumDeterminizedStates = 20000
+		};
 
 		protected override object QueryJson => new
 		{
@@ -25,16 +41,6 @@ namespace Tests.QueryDsl.TermLevel.Regexp
 			}
 		};
 
-		protected override QueryContainer QueryInitializer => new RegexpQuery
-		{
-			Name = "named_query",
-			Boost = 1.1,
-			Field = "description",
-			Value = "s.*y",
-			Flags = "INTERSECTION|COMPLEMENT|EMPTY",
-			MaximumDeterminizedStates = 20000
-		};
-
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Regexp(c => c
 				.Name("named_query")
@@ -44,12 +50,5 @@ namespace Tests.QueryDsl.TermLevel.Regexp
 				.Flags("INTERSECTION|COMPLEMENT|EMPTY")
 				.MaximumDeterminizedStates(20000)
 			);
-
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IRegexpQuery>(a => a.Regexp)
-		{
-			q => q.Field = null,
-			q => q.Value = null,
-			q => q.Value = string.Empty
-		};
 	}
 }

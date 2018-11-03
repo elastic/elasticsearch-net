@@ -2,7 +2,6 @@
 using Elastic.Xunit.XunitPlumbing;
 using Nest;
 using Tests.Analysis;
-using Tests.Analysis.Tokenizers;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.Integration;
@@ -13,18 +12,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 	[SkipVersion("<5.2.0", "This uses the normalizer feature introduced in 5.2.0")]
 	public class KeywordPropertyTests : PropertyTestsBase
 	{
-		public KeywordPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
-
-		protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
-			.Settings(s => s
-				.Analysis(a => a
-					.CharFilters(t => Promise(AnalysisUsageTests.CharFiltersFluent.Analysis.CharFilters))
-					.TokenFilters(t => Promise(AnalysisUsageTests.TokenFiltersFluent.Analysis.TokenFilters))
-					.Normalizers(t => Promise(AnalysisUsageTests.NormalizersInitializer.Analysis.Normalizers))
-				)
-			);
+		public KeywordPropertyTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -97,11 +85,20 @@ namespace Tests.Mapping.Types.Core.Keyword
 					Store = true,
 					Fields = new Properties
 					{
-						{"foo", new KeywordProperty {IgnoreAbove = 10}}
+						{ "foo", new KeywordProperty { IgnoreAbove = 10 } }
 					}
 				}
 			}
 		};
+
+		protected override ICreateIndexRequest CreateIndexSettings(CreateIndexDescriptor create) => create
+			.Settings(s => s
+				.Analysis(a => a
+					.CharFilters(t => Promise(AnalysisUsageTests.CharFiltersFluent.Analysis.CharFilters))
+					.TokenFilters(t => Promise(AnalysisUsageTests.TokenFiltersFluent.Analysis.TokenFilters))
+					.Normalizers(t => Promise(AnalysisUsageTests.NormalizersInitializer.Analysis.Normalizers))
+				)
+			);
 
 		[SkipVersion("<6.4.0", "split_queries_on_whitespace is a new option https://github.com/elastic/elasticsearch/pull/30691")]
 		public class KeywordPropertySplitQueriesOnWhitespaceTests : PropertyTestsBase
