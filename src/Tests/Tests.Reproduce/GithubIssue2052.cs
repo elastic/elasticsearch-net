@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Text;
 using Elastic.Xunit.XunitPlumbing;
 using Elasticsearch.Net;
@@ -16,36 +15,36 @@ namespace Tests.Reproduce
 	public class GithubIssue2052
 	{
 		private const string _objectMessage = "My message";
-		private static object _bulkHeader =
-			 new { index = new { _index = "myIndex", _type = "myDocumentType" } };
+
+		private static readonly object _bulkHeader =
+			new { index = new { _index = "myIndex", _type = "myDocumentType" } };
+
 		private readonly ElasticLowLevelClient _client;
 
 		public GithubIssue2052()
 		{
 			var connectionSettings = TestClient.DisabledStreaming.ConnectionSettings;
-			this._client = new ElasticLowLevelClient(connectionSettings);
+			_client = new ElasticLowLevelClient(connectionSettings);
 		}
 
 		[U] public void SingleThrownExceptionCanBeSerializedUsingSimpleJson()
 		{
+			var ex = GimmeACaughtException();
 
-			var ex = this.GimmeACaughtException();
+			var request = CreateRequest(ex);
+			var postData = CreatePostData(ex);
 
-			var request = this.CreateRequest(ex);
-			var postData = this.CreatePostData(ex);
-
-			this.AssertRequestEquals(request, postData);
+			AssertRequestEquals(request, postData);
 		}
 
 		[U] public void MultipleThrownExceptionCanBeSerializedUsingSimpleJson()
 		{
+			var ex = GimmeAnExceptionWithInnerException();
 
-			var ex = this.GimmeAnExceptionWithInnerException();
+			var request = CreateRequest(ex);
+			var postData = CreatePostData(ex);
 
-			var request = this.CreateRequest(ex);
-			var postData = this.CreatePostData(ex);
-
-			this.AssertRequestEquals(request, postData);
+			AssertRequestEquals(request, postData);
 		}
 
 		private PostData CreatePostData(Exception e)
@@ -56,7 +55,7 @@ namespace Tests.Reproduce
 				new
 				{
 					message = "My message",
-					exception = this.ExceptionJson(e).ToArray(),
+					exception = ExceptionJson(e).ToArray(),
 				}
 			});
 			return postData;
@@ -90,11 +89,10 @@ namespace Tests.Reproduce
 					HelpURL = helpUrl,
 					//ExceptionMethod = this.WriteStructuredExceptionMethod(exceptionMethod)
 				};
+
 				depth++;
 				e = e.InnerException;
-
-			}
-			while (depth < maxExceptions && e != null);
+			} while (depth < maxExceptions && e != null);
 		}
 
 		private object WriteStructuredExceptionMethod(string exceptionMethodString)
@@ -125,17 +123,19 @@ namespace Tests.Reproduce
 
 		private string CreateRequest(Exception ex)
 		{
-			var document = new Dictionary<string, object>{
-				{ "message", _objectMessage},
+			var document = new Dictionary<string, object>
+			{
+				{ "message", _objectMessage },
 				{ "exception", ex }
 			};
 
 
-			var payload = new List<object>{
+			var payload = new List<object>
+			{
 				_bulkHeader,
 				document
 			};
-			var response = this._client.Bulk<BytesResponse>(PostData.MultiJson(payload));
+			var response = _client.Bulk<BytesResponse>(PostData.MultiJson(payload));
 
 
 			var request = Encoding.UTF8.GetString(response.RequestBodyInBytes);
@@ -146,7 +146,7 @@ namespace Tests.Reproduce
 		{
 			using (var ms = new MemoryStream())
 			{
-				postData.Write(ms, this._client.Settings);
+				postData.Write(ms, _client.Settings);
 				var expectedString = Encoding.UTF8.GetString(ms.ToArray());
 				request.Should().Be(expectedString);
 			}
@@ -169,7 +169,7 @@ namespace Tests.Reproduce
 		{
 			try
 			{
-				var e = this.GimmeACaughtException();
+				var e = GimmeACaughtException();
 				throw new Exception("Some exception", e);
 			}
 			catch (Exception e)

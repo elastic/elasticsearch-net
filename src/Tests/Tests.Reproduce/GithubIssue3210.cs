@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using Elastic.Xunit.XunitPlumbing;
-using Nest;
 using FluentAssertions;
-using Tests.Core;
+using Nest;
 using Tests.Core.Client;
 
 namespace Tests.Reproduce

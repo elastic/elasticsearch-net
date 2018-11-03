@@ -53,29 +53,24 @@ namespace Tests.Reproduce
 		public sealed class CustomSerializer : ConnectionSettingsAwareSerializerBase
 		{
 			public CustomSerializer(IElasticsearchSerializer builtinSerializer, IConnectionSettingsValues connectionSettings)
-				: base(builtinSerializer, connectionSettings)
-			{
-			}
+				: base(builtinSerializer, connectionSettings) { }
 
-			protected override JsonSerializerSettings CreateJsonSerializerSettings()
+			protected override JsonSerializerSettings CreateJsonSerializerSettings() => new JsonSerializerSettings
 			{
-				return new JsonSerializerSettings
-				{
-					DateFormatHandling = DateFormatHandling.IsoDateFormat,
-					DateParseHandling = DateParseHandling.DateTimeOffset,
-					DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind,
-					Formatting = Formatting.Indented
-				};
-			}
+				DateFormatHandling = DateFormatHandling.IsoDateFormat,
+				DateParseHandling = DateParseHandling.DateTimeOffset,
+				DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind,
+				Formatting = Formatting.Indented
+			};
 		}
 
 		private class Dates
 		{
 			public DateTime DateTimeLocal { get; set; }
-			public DateTime DateTimeUnspecified { get; set; }
-			public DateTime DateTimeUtc { get; set; }
 			public DateTimeOffset DateTimeOffset { get; set; }
 			public DateTimeOffset DateTimeOffsetUtc { get; set; }
+			public DateTime DateTimeUnspecified { get; set; }
+			public DateTime DateTimeUtc { get; set; }
 		}
 	}
 }
