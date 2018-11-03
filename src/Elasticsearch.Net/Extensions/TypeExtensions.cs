@@ -16,7 +16,8 @@ namespace Elasticsearch.Net
 		private static readonly ConcurrentDictionary<string, ObjectActivator<object>> CachedActivators =
 			new ConcurrentDictionary<string, ObjectActivator<object>>();
 
-		internal static T CreateInstance<T>(this Type t, params object[] args) => (T) t.CreateInstance(args);
+
+		internal static T CreateInstance<T>(this Type t, params object[] args) => (T)t.CreateInstance(args);
 
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
@@ -27,22 +28,21 @@ namespace Elasticsearch.Net
 
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-							   let p = c.GetParameters()
-							   let k = string.Join(",", p.Select(a => a.ParameterType.Name))
-							   where p.Length == args.Length
-							   select c;
+				let p = c.GetParameters()
+				let k = string.Join(",", p.Select(a => a.ParameterType.Name))
+				where p.Length == args.Length
+				select c;
 
 			var ctor = constructors.FirstOrDefault();
 			if (ctor == null)
 				throw new Exception($"Cannot create an instance of {t.FullName} because it has no constructor taking {args.Length} arguments");
-			activator = (ObjectActivator<object>) generic.Invoke(null, new[] {ctor});
+
+			activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
 			CachedActivators.TryAdd(key, activator);
 			return activator(args);
 		}
-		internal static bool IsValueType(this Type type)
-		{
-			return type.GetTypeInfo().IsValueType;
-		}
+
+		internal static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;
 
 		//do not remove this is referenced through GetActivatorMethod
 		private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
@@ -78,7 +78,7 @@ namespace Elasticsearch.Net
 			var lambda = Expression.Lambda(typeof(ObjectActivator<T>), newExp, param);
 
 			//compile it
-			var compiled = (ObjectActivator<T>) lambda.Compile();
+			var compiled = (ObjectActivator<T>)lambda.Compile();
 			return compiled;
 		}
 	}

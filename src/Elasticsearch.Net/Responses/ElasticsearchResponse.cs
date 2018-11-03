@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Elasticsearch.Net
 {
@@ -11,8 +9,30 @@ namespace Elasticsearch.Net
 	public abstract class ElasticsearchResponseBase : IApiCallDetails, IElasticsearchResponse
 	{
 		public IApiCallDetails ApiCall { get; set; }
+		public List<Audit> AuditTrail => ApiCall.AuditTrail;
 
-		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => this.TryGetServerErrorReason(out reason);
+		public string DebugInformation => ApiCall.DebugInformation;
+		public IEnumerable<string> DeprecationWarnings => ApiCall.DeprecationWarnings;
+		public HttpMethod HttpMethod => ApiCall.HttpMethod;
+		public int? HttpStatusCode => ApiCall.HttpStatusCode;
+		public Exception OriginalException => ApiCall.OriginalException;
+
+		/// <summary>The raw byte request message body, only set when DisableDirectStreaming() is set on Connection configuration</summary>
+		public byte[] RequestBodyInBytes => ApiCall.RequestBodyInBytes;
+
+		/// <summary>The raw byte response message body, only set when DisableDirectStreaming() is set on Connection configuration</summary>
+		public byte[] ResponseBodyInBytes => ApiCall.ResponseBodyInBytes;
+
+		public string ResponseMimeType => ApiCall.ResponseMimeType;
+
+		public bool Success => ApiCall.Success;
+		public bool SuccessOrKnownError => ApiCall.SuccessOrKnownError;
+		public Uri Uri => ApiCall.Uri;
+
+		//ignored
+		List<Audit> IApiCallDetails.AuditTrail { get; set; }
+
+		bool IElasticsearchResponse.TryGetServerErrorReason(out string reason) => TryGetServerErrorReason(out reason);
 
 		protected virtual bool TryGetServerErrorReason(out string reason)
 		{
@@ -20,35 +40,12 @@ namespace Elasticsearch.Net
 			return false;
 		}
 
-		//ignored
-		List<Audit> IApiCallDetails.AuditTrail { get; set; }
-
-		public bool Success => this.ApiCall.Success;
-		public string ResponseMimeType => this.ApiCall.ResponseMimeType;
-		public HttpMethod HttpMethod => this.ApiCall.HttpMethod;
-		public Uri Uri => this.ApiCall.Uri;
-		public int? HttpStatusCode => this.ApiCall.HttpStatusCode;
-		public List<Audit> AuditTrail => this.ApiCall.AuditTrail;
-		public IEnumerable<string> DeprecationWarnings => this.ApiCall.DeprecationWarnings;
-		public bool SuccessOrKnownError => this.ApiCall.SuccessOrKnownError;
-		public Exception OriginalException => this.ApiCall.OriginalException;
-
-		/// <summary>The raw byte request message body, only set when DisableDirectStreaming() is set on Connection configuration</summary>
-		public byte[] RequestBodyInBytes => this.ApiCall.RequestBodyInBytes;
-
-		/// <summary>The raw byte response message body, only set when DisableDirectStreaming() is set on Connection configuration</summary>
-		public byte[] ResponseBodyInBytes => this.ApiCall.ResponseBodyInBytes;
-
-		public string DebugInformation => this.ApiCall.DebugInformation;
-
-		public override string ToString() => this.ApiCall.ToString();
-
-
+		public override string ToString() => ApiCall.ToString();
 	}
 
 	/// <summary>
 	/// A response from Elasticsearch including details about the request/response life cycle. Base class for the built in low level response
-	/// types: <see cref="StringResponse"/> <see cref="BytesResponse"/> and <see cref="DynamicResponse"/>
+	/// types: <see cref="StringResponse" /> <see cref="BytesResponse" /> and <see cref="DynamicResponse" />
 	/// </summary>
 	public abstract class ElasticsearchResponse<T> : ElasticsearchResponseBase
 	{
