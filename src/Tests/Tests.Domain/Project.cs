@@ -64,8 +64,34 @@ namespace Tests.Domain
 		public string DateString { get; set; }
 		public string Description { get; set; }
 
-		public static Project First { get; } = Projects.First();
+		public static object InstanceAnonymous => TestConfiguration.Instance.Random.SourceSerializer
+			? InstanceAnonymousSourceSerializer
+			: InstanceAnonymousDefault;
 
+		public JoinField Join => JoinField.Root<Project>();
+		public DateTime LastActivity { get; set; }
+		public Developer LeadDeveloper { get; set; }
+		public SimpleGeoPoint Location { get; set; }
+		public Dictionary<string, Metadata> Metadata { get; set; }
+		public string Name { get; set; }
+		public int? NumberOfCommits { get; set; }
+		public int NumberOfContributors { get; set; }
+
+		public Ranges Ranges { get; set; }
+		public int? RequiredBranches => Branches?.Count();
+
+		public SourceOnlyObject SourceOnly { get; set; }
+		public DateTime StartedOn { get; set; }
+		public StateOfBeing State { get; set; }
+		public CompletionField Suggest { get; set; }
+		public IEnumerable<Tag> Tags { get; set; }
+		public string Type => TypeName;
+
+		//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
+		[StringEnum] [JsonConverter(typeof(StringEnumConverter))]
+		public Visibility Visibility { get; set; }
+
+		// @formatter:off — enable formatter after this line
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
 				.UseSeed(TestConfiguration.Instance.Seed)
@@ -95,34 +121,9 @@ namespace Tests.Domain
 						{ "color", new[] { "red", "blue", "green", "violet", "yellow" }.Take(Gimme.Random.Number(1, 4)) }
 					}
 				});
-
-		public static object InstanceAnonymous => TestConfiguration.Instance.Random.SourceSerializer
-			? InstanceAnonymousSourceSerializer
-			: InstanceAnonymousDefault;
-
-		public JoinField Join => JoinField.Root<Project>();
-		public DateTime LastActivity { get; set; }
-		public Developer LeadDeveloper { get; set; }
-		public SimpleGeoPoint Location { get; set; }
-		public Dictionary<string, Metadata> Metadata { get; set; }
-		public string Name { get; set; }
-		public int? NumberOfCommits { get; set; }
-		public int NumberOfContributors { get; set; }
-
 		public static IList<Project> Projects { get; } = Generator.Clone().Generate(100);
-		public Ranges Ranges { get; set; }
-		public int? RequiredBranches => Branches?.Count();
-
-		public SourceOnlyObject SourceOnly { get; set; }
-		public DateTime StartedOn { get; set; }
-		public StateOfBeing State { get; set; }
-		public CompletionField Suggest { get; set; }
-		public IEnumerable<Tag> Tags { get; set; }
-		public string Type => TypeName;
-
-		//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer
-		[StringEnum] [JsonConverter(typeof(StringEnumConverter))]
-		public Visibility Visibility { get; set; }
+		public static Project First { get; } = Projects.First();
+		// @formatter:on — enable formatter after this line
 	}
 
 	//the first applies when using internal source serializer the latter when using JsonNetSourceSerializer

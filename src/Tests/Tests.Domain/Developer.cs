@@ -9,9 +9,15 @@ namespace Tests.Domain
 {
 	public class Developer : Person
 	{
-		public static IList<Developer> Developers { get; } = Generator.Clone().Generate(1000);
 		public Gender Gender { get; set; }
 
+		// not populated by generator. Used by ingest geoip test
+		public GeoIp GeoIp { get; set; }
+		public string IpAddress { get; set; }
+		public string OnlineHandle { get; set; }
+		public string PrivateValue { get; set; }
+
+		// @formatter:off — enable formatter after this line
 		public static new Faker<Developer> Generator { get; } =
 			new Faker<Developer>()
 				.UseSeed(TestConfiguration.Instance.Seed)
@@ -25,10 +31,7 @@ namespace Tests.Domain
 				.RuleFor(p => p.PrivateValue, p => "THIS SHOULD NEVER BE INDEXED")
 				.RuleFor(p => p.IpAddress, p => p.Internet.Ip());
 
-		// not populated by generator. Used by ingest geoip test
-		public GeoIp GeoIp { get; set; }
-		public string IpAddress { get; set; }
-		public string OnlineHandle { get; set; }
-		public string PrivateValue { get; set; }
+		public static IList<Developer> Developers { get; } = Generator.Clone().Generate(1000);
+		// @formatter:on — enable formatter after this line
 	}
 }
