@@ -17,10 +17,11 @@
 // <website>https://github.com/facebook-csharp-sdk/simple-json</website>
 //-----------------------------------------------------------------------
 
+// @formatter:on — enable formatter after this line
+
 // VERSION: 0.32.0
 
 // NOTE: uncomment the following line to make SimpleJson class internal.
-
 #define SIMPLE_JSON_INTERNAL
 
 // NOTE: uncomment the following line to make JsonArray and JsonObject class internal.
@@ -60,7 +61,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-
 // ReSharper disable ArrangeMethodOrOperatorBody
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -90,12 +90,12 @@ namespace Elasticsearch.Net
 		class JsonArray : List<object>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="JsonArray" /> class.
+		/// Initializes a new instance of the <see cref="JsonArray"/> class.
 		/// </summary>
 		public JsonArray() { }
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="JsonArray" /> class.
+		/// Initializes a new instance of the <see cref="JsonArray"/> class.
 		/// </summary>
 		/// <param name="capacity">The capacity of the json array.</param>
 		public JsonArray(int capacity) : base(capacity) { }
@@ -121,8 +121,7 @@ namespace Elasticsearch.Net
 #else
     public
 #endif
-		class JsonObject
-		:
+		class JsonObject :
 #if SIMPLE_JSON_DYNAMIC
 			DynamicObject,
 #endif
@@ -134,7 +133,7 @@ namespace Elasticsearch.Net
 		private readonly Dictionary<string, object> _members;
 
 		/// <summary>
-		/// Initializes a new instance of <see cref="JsonObject" />.
+		/// Initializes a new instance of <see cref="JsonObject"/>.
 		/// </summary>
 		public JsonObject()
 		{
@@ -142,19 +141,16 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Initializes a new instance of <see cref="JsonObject" />.
+		/// Initializes a new instance of <see cref="JsonObject"/>.
 		/// </summary>
-		/// <param name="comparer">
-		/// The <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> implementation to use when comparing keys, or
-		/// null to use the default <see cref="T:System.Collections.Generic.EqualityComparer`1" /> for the type of the key.
-		/// </param>
+		/// <param name="comparer">The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation to use when comparing keys, or null to use the default <see cref="T:System.Collections.Generic.EqualityComparer`1"/> for the type of the key.</param>
 		public JsonObject(IEqualityComparer<string> comparer)
 		{
 			_members = new Dictionary<string, object>(comparer);
 		}
 
 		/// <summary>
-		/// Gets the <see cref="System.Object" /> at the specified index.
+		/// Gets the <see cref="System.Object"/> at the specified index.
 		/// </summary>
 		/// <value></value>
 		public object this[int index]
@@ -168,12 +164,9 @@ namespace Elasticsearch.Net
 				throw new ArgumentNullException("obj");
 			if (index >= obj.Count)
 				throw new ArgumentOutOfRangeException("index");
-
 			int i = 0;
 			foreach (KeyValuePair<string, object> o in obj)
-			{
 				if (i++ == index) return o.Value;
-			}
 			return null;
 		}
 
@@ -239,7 +232,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Gets or sets the <see cref="System.Object" /> with the specified key.
+		/// Gets or sets the <see cref="System.Object"/> with the specified key.
 		/// </summary>
 		/// <value></value>
 		public object this[string key]
@@ -285,7 +278,6 @@ namespace Elasticsearch.Net
 		public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
 		{
 			if (array == null) throw new ArgumentNullException("array");
-
 			int num = Count;
 			foreach (KeyValuePair<string, object> kvp in this)
 			{
@@ -338,7 +330,7 @@ namespace Elasticsearch.Net
 		/// Returns an enumerator that iterates through a collection.
 		/// </summary>
 		/// <returns>
-		/// An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.
+		/// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
 		/// </returns>
 		IEnumerator IEnumerable.GetEnumerator()
 		{
@@ -346,10 +338,10 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Returns a json <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.
+		/// Returns a json <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
 		/// </summary>
 		/// <returns>
-		/// A json <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.
+		/// A json <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
 		/// </returns>
 		public override string ToString()
 		{
@@ -358,16 +350,9 @@ namespace Elasticsearch.Net
 
 #if SIMPLE_JSON_DYNAMIC
 		/// <summary>
-		/// Provides implementation for type conversion operations. Classes derived from the <see cref="T:System.Dynamic.DynamicObject" /> class can
-		/// override this method to specify dynamic behavior for operations that convert an object from one type to another.
+		/// Provides implementation for type conversion operations. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations that convert an object from one type to another.
 		/// </summary>
-		/// <param name="binder">
-		/// Provides information about the conversion operation. The binder.Type property provides the type to which the object
-		/// must be converted. For example, for the statement (String)sampleObject in C# (CType(sampleObject, Type) in Visual Basic), where
-		/// sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject" /> class, binder.Type returns the
-		/// <see cref="T:System.String" /> type. The binder.Explicit property provides information about the kind of conversion that occurs. It returns
-		/// true for explicit conversion and false for implicit conversion.
-		/// </param>
+		/// <param name="binder">Provides information about the conversion operation. The binder.Type property provides the type to which the object must be converted. For example, for the statement (String)sampleObject in C# (CType(sampleObject, Type) in Visual Basic), where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Type returns the <see cref="T:System.String"/> type. The binder.Explicit property provides information about the kind of conversion that occurs. It returns true for explicit conversion and false for implicit conversion.</param>
 		/// <param name="result">The result of the type conversion operation.</param>
 		/// <returns>
 		/// Alwasy returns true.
@@ -377,14 +362,13 @@ namespace Elasticsearch.Net
 			// <pex>
 			if (binder == null)
 				throw new ArgumentNullException("binder");
-
 			// </pex>
 			Type targetType = binder.Type;
 
-			if (targetType == typeof(IEnumerable) ||
-				targetType == typeof(IEnumerable<KeyValuePair<string, object>>) ||
-				targetType == typeof(IDictionary<string, object>) ||
-				targetType == typeof(IDictionary))
+			if ((targetType == typeof(IEnumerable)) ||
+			    (targetType == typeof(IEnumerable<KeyValuePair<string, object>>)) ||
+			    (targetType == typeof(IDictionary<string, object>)) ||
+			    (targetType == typeof(IDictionary)))
 			{
 				result = this;
 				return true;
@@ -405,20 +389,15 @@ namespace Elasticsearch.Net
 			// <pex>
 			if (binder == null)
 				throw new ArgumentNullException("binder");
-
 			// </pex>
 			return _members.Remove(binder.Name);
 		}
 
 		/// <summary>
-		/// Provides the implementation for operations that get a value by index. Classes derived from the
-		/// <see cref="T:System.Dynamic.DynamicObject" /> class can override this method to specify dynamic behavior for indexing operations.
+		/// Provides the implementation for operations that get a value by index. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for indexing operations.
 		/// </summary>
 		/// <param name="binder">Provides information about the operation.</param>
-		/// <param name="indexes">
-		/// The indexes that are used in the operation. For example, for the sampleObject[3] operation in C# (sampleObject(3) in
-		/// Visual Basic), where sampleObject is derived from the DynamicObject class, <paramref name="indexes" /> is equal to 3.
-		/// </param>
+		/// <param name="indexes">The indexes that are used in the operation. For example, for the sampleObject[3] operation in C# (sampleObject(3) in Visual Basic), where sampleObject is derived from the DynamicObject class, <paramref name="indexes"/> is equal to 3.</param>
 		/// <param name="result">The result of the index operation.</param>
 		/// <returns>
 		/// Alwasy returns true.
@@ -426,7 +405,6 @@ namespace Elasticsearch.Net
 		public override bool TryGetIndex(GetIndexBinder binder, object[] indexes, out object result)
 		{
 			if (indexes == null) throw new ArgumentNullException("indexes");
-
 			if (indexes.Length == 1)
 			{
 				result = ((IDictionary<string, object>)this)[(string)indexes[0]];
@@ -437,19 +415,10 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Provides the implementation for operations that get member values. Classes derived from the <see cref="T:System.Dynamic.DynamicObject" />
-		/// class can override this method to specify dynamic behavior for operations such as getting a value for a property.
+		/// Provides the implementation for operations that get member values. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations such as getting a value for a property.
 		/// </summary>
-		/// <param name="binder">
-		/// Provides information about the object that called the dynamic operation. The binder.Name property provides the name of
-		/// the member on which the dynamic operation is performed. For example, for the Console.WriteLine(sampleObject.SampleProperty) statement,
-		/// where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject" /> class, binder.Name returns
-		/// "SampleProperty". The binder.IgnoreCase property specifies whether the member name is case-sensitive.
-		/// </param>
-		/// <param name="result">
-		/// The result of the get operation. For example, if the method is called for a property, you can assign the property
-		/// value to <paramref name="result" />.
-		/// </param>
+		/// <param name="binder">Provides information about the object that called the dynamic operation. The binder.Name property provides the name of the member on which the dynamic operation is performed. For example, for the Console.WriteLine(sampleObject.SampleProperty) statement, where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleProperty". The binder.IgnoreCase property specifies whether the member name is case-sensitive.</param>
+		/// <param name="result">The result of the get operation. For example, if the method is called for a property, you can assign the property value to <paramref name="result"/>.</param>
 		/// <returns>
 		/// Alwasy returns true.
 		/// </returns>
@@ -466,29 +435,17 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Provides the implementation for operations that set a value by index. Classes derived from the
-		/// <see cref="T:System.Dynamic.DynamicObject" /> class can override this method to specify dynamic behavior for operations that access objects
-		/// by a specified index.
+		/// Provides the implementation for operations that set a value by index. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations that access objects by a specified index.
 		/// </summary>
 		/// <param name="binder">Provides information about the operation.</param>
-		/// <param name="indexes">
-		/// The indexes that are used in the operation. For example, for the sampleObject[3] = 10 operation in C#
-		/// (sampleObject(3) = 10 in Visual Basic), where sampleObject is derived from the <see cref="T:System.Dynamic.DynamicObject" /> class,
-		/// <paramref name="indexes" /> is equal to 3.
-		/// </param>
-		/// <param name="value">
-		/// The value to set to the object that has the specified index. For example, for the sampleObject[3] = 10 operation in C#
-		/// (sampleObject(3) = 10 in Visual Basic), where sampleObject is derived from the <see cref="T:System.Dynamic.DynamicObject" /> class,
-		/// <paramref name="value" /> is equal to 10.
-		/// </param>
+		/// <param name="indexes">The indexes that are used in the operation. For example, for the sampleObject[3] = 10 operation in C# (sampleObject(3) = 10 in Visual Basic), where sampleObject is derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, <paramref name="indexes"/> is equal to 3.</param>
+		/// <param name="value">The value to set to the object that has the specified index. For example, for the sampleObject[3] = 10 operation in C# (sampleObject(3) = 10 in Visual Basic), where sampleObject is derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, <paramref name="value"/> is equal to 10.</param>
 		/// <returns>
-		/// true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the
-		/// behavior. (In most cases, a language-specific run-time exception is thrown.
+		/// true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.
 		/// </returns>
 		public override bool TrySetIndex(SetIndexBinder binder, object[] indexes, object value)
 		{
 			if (indexes == null) throw new ArgumentNullException("indexes");
-
 			if (indexes.Length == 1)
 			{
 				((IDictionary<string, object>)this)[(string)indexes[0]] = value;
@@ -498,29 +455,18 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Provides the implementation for operations that set member values. Classes derived from the <see cref="T:System.Dynamic.DynamicObject" />
-		/// class can override this method to specify dynamic behavior for operations such as setting a value for a property.
+		/// Provides the implementation for operations that set member values. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can override this method to specify dynamic behavior for operations such as setting a value for a property.
 		/// </summary>
-		/// <param name="binder">
-		/// Provides information about the object that called the dynamic operation. The binder.Name property provides the name of
-		/// the member to which the value is being assigned. For example, for the statement sampleObject.SampleProperty = "Test", where sampleObject is
-		/// an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject" /> class, binder.Name returns "SampleProperty". The
-		/// binder.IgnoreCase property specifies whether the member name is case-sensitive.
-		/// </param>
-		/// <param name="value">
-		/// The value to set to the member. For example, for sampleObject.SampleProperty = "Test", where sampleObject is an
-		/// instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject" /> class, the <paramref name="value" /> is "Test".
-		/// </param>
+		/// <param name="binder">Provides information about the object that called the dynamic operation. The binder.Name property provides the name of the member to which the value is being assigned. For example, for the statement sampleObject.SampleProperty = "Test", where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleProperty". The binder.IgnoreCase property specifies whether the member name is case-sensitive.</param>
+		/// <param name="value">The value to set to the member. For example, for sampleObject.SampleProperty = "Test", where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, the <paramref name="value"/> is "Test".</param>
 		/// <returns>
-		/// true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the
-		/// behavior. (In most cases, a language-specific run-time exception is thrown.)
+		/// true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)
 		/// </returns>
 		public override bool TrySetMember(SetMemberBinder binder, object value)
 		{
 			// <pex>
 			if (binder == null)
 				throw new ArgumentNullException("binder");
-
 			// </pex>
 			_members[binder.Name] = value;
 			return true;
@@ -541,11 +487,11 @@ namespace Elasticsearch.Net
 	}
 
 	/// <summary>
-	///  This class encodes and decodes JSON strings.
-	///  Spec. details, see http://www.json.org/
-	///  JSON uses Arrays and Objects. These correspond here to the datatypes JsonArray(IList&lt;object>) and JsonObject(IDictionary&lt;
-	/// string,object>).
-	///  All numbers are parsed to doubles.
+	/// This class encodes and decodes JSON strings.
+	/// Spec. details, see http://www.json.org/
+	///
+	/// JSON uses Arrays and Objects. These correspond here to the datatypes JsonArray(IList&lt;object>) and JsonObject(IDictionary&lt;string,object>).
+	/// All numbers are parsed to doubles.
 	/// </summary>
 	[GeneratedCode("simple-json", "1.0.0")]
 #if SIMPLE_JSON_INTERNAL
@@ -579,7 +525,6 @@ namespace Elasticsearch.Net
 			object obj;
 			if (TryDeserializeObject(json, out obj))
 				return obj;
-
 			throw new SerializationException("Invalid JSON string");
 		}
 
@@ -595,7 +540,7 @@ namespace Elasticsearch.Net
 		/// <returns>
 		/// Returns true if successfull otherwise false.
 		/// </returns>
-		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
+		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		public static bool TryDeserializeObject(string json, out object obj)
 		{
 			bool success = true;
@@ -644,7 +589,7 @@ namespace Elasticsearch.Net
 		{
 			StringBuilder builder = new StringBuilder(BUILDER_CAPACITY);
 			bool success = SerializeValue(jsonSerializerStrategy, json, builder);
-			return success ? builder.ToString() : null;
+			return (success ? builder.ToString() : null);
 		}
 
 		public static string SerializeObject(object json)
@@ -660,7 +605,7 @@ namespace Elasticsearch.Net
 			StringBuilder sb = new StringBuilder();
 			char c;
 
-			for (int i = 0; i < jsonString.Length;)
+			for (int i = 0; i < jsonString.Length; )
 			{
 				c = jsonString[i++];
 
@@ -791,7 +736,6 @@ namespace Elasticsearch.Net
 					object value = ParseValue(json, ref index, ref success);
 					if (!success)
 						return null;
-
 					array.Add(value);
 				}
 			}
@@ -851,7 +795,6 @@ namespace Elasticsearch.Net
 				{
 					if (index == json.Length)
 						break;
-
 					c = json[index++];
 					if (c == '"')
 						s.Append('"');
@@ -876,22 +819,20 @@ namespace Elasticsearch.Net
 						{
 							// parse the 32 bit hex into an integer codepoint
 							uint codePoint;
-							if (!(success = UInt32.TryParse(new string(json, index, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture,
-								out codePoint)))
+							if (!(success = UInt32.TryParse(new string(json, index, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out codePoint)))
 								return "";
 
 							// convert the integer codepoint to a unicode char and add to string
-							if (0xD800 <= codePoint && codePoint <= 0xDBFF) // if high surrogate
+							if (0xD800 <= codePoint && codePoint <= 0xDBFF)  // if high surrogate
 							{
 								index += 4; // skip 4 chars
 								remainingLength = json.Length - index;
 								if (remainingLength >= 6)
 								{
 									uint lowCodePoint;
-									if (new string(json, index, 2) == "\\u" && UInt32.TryParse(new string(json, index + 2, 4), NumberStyles.HexNumber,
-										CultureInfo.InvariantCulture, out lowCodePoint))
+									if (new string(json, index, 2) == "\\u" && UInt32.TryParse(new string(json, index + 2, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out lowCodePoint))
 									{
-										if (0xDC00 <= lowCodePoint && lowCodePoint <= 0xDFFF) // if low surrogate
+										if (0xDC00 <= lowCodePoint && lowCodePoint <= 0xDFFF)    // if low surrogate
 										{
 											s.Append((char)codePoint);
 											s.Append((char)lowCodePoint);
@@ -900,7 +841,7 @@ namespace Elasticsearch.Net
 										}
 									}
 								}
-								success = false; // invalid surrogate pair
+								success = false;    // invalid surrogate pair
 								return "";
 							}
 							s.Append(ConvertFromUtf32((int)codePoint));
@@ -929,10 +870,8 @@ namespace Elasticsearch.Net
 				throw new ArgumentOutOfRangeException("utf32", "The argument must be from 0 to 0x10FFFF.");
 			if (0xD800 <= utf32 && utf32 <= 0xDFFF)
 				throw new ArgumentOutOfRangeException("utf32", "The argument must not be in surrogate pair range.");
-
 			if (utf32 < 0x10000)
 				return new string((char)utf32, 1);
-
 			utf32 -= 0x10000;
 			return new string(new char[] { (char)((utf32 >> 10) + 0xD800), (char)(utf32 % 0x0400 + 0xDC00) });
 		}
@@ -941,7 +880,7 @@ namespace Elasticsearch.Net
 		{
 			EatWhitespace(json, ref index);
 			int lastIndex = GetLastIndexOfNumber(json, index);
-			int charLength = lastIndex - index + 1;
+			int charLength = (lastIndex - index) + 1;
 			object returnNumber;
 			string str = new string(json, index, charLength);
 			if (str.IndexOf(".", StringComparison.OrdinalIgnoreCase) != -1 || str.IndexOf("e", StringComparison.OrdinalIgnoreCase) != -1)
@@ -964,18 +903,14 @@ namespace Elasticsearch.Net
 		{
 			int lastIndex;
 			for (lastIndex = index; lastIndex < json.Length; lastIndex++)
-			{
 				if ("0123456789+-.eE".IndexOf(json[lastIndex]) == -1) break;
-			}
 			return lastIndex - 1;
 		}
 
 		static void EatWhitespace(char[] json, ref int index)
 		{
 			for (; index < json.Length; index++)
-			{
 				if (" \t\n\r\b\f".IndexOf(json[index]) == -1) break;
-			}
 		}
 
 		static int LookAhead(char[] json, int index)
@@ -990,7 +925,6 @@ namespace Elasticsearch.Net
 			EatWhitespace(json, ref index);
 			if (index == json.Length)
 				return TOKEN_NONE;
-
 			char c = json[index];
 			index++;
 			switch (c)
@@ -1113,12 +1047,11 @@ namespace Elasticsearch.Net
 				string stringKey = key as string;
 				if (stringKey != null)
 					SerializeString(stringKey, builder);
-				else if (!SerializeValue(jsonSerializerStrategy, value, builder)) return false;
-
+				else
+					if (!SerializeValue(jsonSerializerStrategy, value, builder)) return false;
 				builder.Append(":");
 				if (!SerializeValue(jsonSerializerStrategy, value, builder))
 					return false;
-
 				first = false;
 			}
 			builder.Append("}");
@@ -1135,7 +1068,6 @@ namespace Elasticsearch.Net
 					builder.Append(",");
 				if (!SerializeValue(jsonSerializerStrategy, value, builder))
 					return false;
-
 				first = false;
 			}
 			builder.Append("]");
@@ -1206,37 +1138,41 @@ namespace Elasticsearch.Net
 			if (value is float) return true;
 			if (value is double) return true;
 			if (value is decimal) return true;
-
 			return false;
 		}
 
 		private static IJsonSerializerStrategy _currentJsonSerializerStrategy;
-
 		public static IJsonSerializerStrategy CurrentJsonSerializerStrategy
 		{
 			get
 			{
 				return _currentJsonSerializerStrategy ??
-					(_currentJsonSerializerStrategy =
+				       (_currentJsonSerializerStrategy =
 #if SIMPLE_JSON_DATACONTRACT
  DataContractJsonSerializerStrategy
 #else
-							PocoJsonSerializerStrategy
+					       PocoJsonSerializerStrategy
 #endif
-					);
+					       );
 			}
-			set { _currentJsonSerializerStrategy = value; }
+			set
+			{
+				_currentJsonSerializerStrategy = value;
+			}
 		}
 
 		private static PocoJsonSerializerStrategy _pocoJsonSerializerStrategy;
-
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public static PocoJsonSerializerStrategy PocoJsonSerializerStrategy
 		{
-			get { return _pocoJsonSerializerStrategy ?? (_pocoJsonSerializerStrategy = new PocoJsonSerializerStrategy()); }
+			get
+			{
+				return _pocoJsonSerializerStrategy ?? (_pocoJsonSerializerStrategy = new PocoJsonSerializerStrategy());
+			}
 		}
 
 #if SIMPLE_JSON_DATACONTRACT
+
         private static DataContractJsonSerializerStrategy _dataContractJsonSerializerStrategy;
         [System.ComponentModel.EditorBrowsable(EditorBrowsableState.Advanced)]
         public static DataContractJsonSerializerStrategy DataContractJsonSerializerStrategy
@@ -1258,9 +1194,8 @@ namespace Elasticsearch.Net
 #endif
 		interface IJsonSerializerStrategy
 	{
-		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
+		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		bool TrySerializeNonPrimitiveObject(object input, out object output);
-
 		object DeserializeObject(object value, Type type);
 	}
 
@@ -1290,9 +1225,7 @@ namespace Elasticsearch.Net
 		{
 			ConstructorCache = new ReflectionUtils.ThreadSafeDictionary<Type, ReflectionUtils.ConstructorDelegate>(ContructorDelegateFactory);
 			GetCache = new ReflectionUtils.ThreadSafeDictionary<Type, IDictionary<string, ReflectionUtils.GetDelegate>>(GetterValueFactory);
-			SetCache =
-				new ReflectionUtils.ThreadSafeDictionary<Type, IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>>(
-					SetterValueFactory);
+			SetCache = new ReflectionUtils.ThreadSafeDictionary<Type, IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>>(SetterValueFactory);
 		}
 
 		protected virtual string MapClrMemberNameToJsonFieldName(string clrFieldName)
@@ -1315,7 +1248,6 @@ namespace Elasticsearch.Net
 					MethodInfo getMethod = ReflectionUtils.GetGetterMethodInfo(propertyInfo);
 					if (getMethod.IsStatic || !getMethod.IsPublic)
 						continue;
-
 					result[MapClrMemberNameToJsonFieldName(propertyInfo.Name)] = ReflectionUtils.GetGetMethod(propertyInfo);
 				}
 			}
@@ -1323,7 +1255,6 @@ namespace Elasticsearch.Net
 			{
 				if (fieldInfo.IsStatic || !fieldInfo.IsPublic)
 					continue;
-
 				result[MapClrMemberNameToJsonFieldName(fieldInfo.Name)] = ReflectionUtils.GetGetMethod(fieldInfo);
 			}
 			return result;
@@ -1331,8 +1262,7 @@ namespace Elasticsearch.Net
 
 		internal virtual IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>> SetterValueFactory(Type type)
 		{
-			IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>> result =
-				new Dictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>();
+			IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>> result = new Dictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>();
 			foreach (PropertyInfo propertyInfo in ReflectionUtils.GetProperties(type))
 			{
 				if (propertyInfo.CanWrite)
@@ -1340,18 +1270,14 @@ namespace Elasticsearch.Net
 					MethodInfo setMethod = ReflectionUtils.GetSetterMethodInfo(propertyInfo);
 					if (setMethod.IsStatic || !setMethod.IsPublic)
 						continue;
-
-					result[MapClrMemberNameToJsonFieldName(propertyInfo.Name)] =
-						new KeyValuePair<Type, ReflectionUtils.SetDelegate>(propertyInfo.PropertyType, ReflectionUtils.GetSetMethod(propertyInfo));
+					result[MapClrMemberNameToJsonFieldName(propertyInfo.Name)] = new KeyValuePair<Type, ReflectionUtils.SetDelegate>(propertyInfo.PropertyType, ReflectionUtils.GetSetMethod(propertyInfo));
 				}
 			}
 			foreach (FieldInfo fieldInfo in ReflectionUtils.GetFields(type))
 			{
 				if (fieldInfo.IsInitOnly || fieldInfo.IsStatic || !fieldInfo.IsPublic)
 					continue;
-
-				result[MapClrMemberNameToJsonFieldName(fieldInfo.Name)] =
-					new KeyValuePair<Type, ReflectionUtils.SetDelegate>(fieldInfo.FieldType, ReflectionUtils.GetSetMethod(fieldInfo));
+				result[MapClrMemberNameToJsonFieldName(fieldInfo.Name)] = new KeyValuePair<Type, ReflectionUtils.SetDelegate>(fieldInfo.FieldType, ReflectionUtils.GetSetMethod(fieldInfo));
 			}
 			return result;
 		}
@@ -1365,10 +1291,9 @@ namespace Elasticsearch.Net
 		public virtual object DeserializeObject(object value, Type type)
 		{
 			if (type == null) throw new ArgumentNullException("type");
-
 			string str = value as string;
 
-			if (type == typeof(Guid) && string.IsNullOrEmpty(str))
+			if (type == typeof (Guid) && string.IsNullOrEmpty(str))
 				return default(Guid);
 
 			if (value == null)
@@ -1380,19 +1305,15 @@ namespace Elasticsearch.Net
 			{
 				if (str.Length != 0) // We know it can't be null now.
 				{
-					if (type == typeof(DateTime) || ReflectionUtils.IsNullableType(type) && Nullable.GetUnderlyingType(type) == typeof(DateTime))
-						return DateTime.ParseExact(str, Iso8601Format, CultureInfo.InvariantCulture,
-							DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
-					if (type == typeof(DateTimeOffset)
-						|| ReflectionUtils.IsNullableType(type) && Nullable.GetUnderlyingType(type) == typeof(DateTimeOffset))
-						return DateTimeOffset.ParseExact(str, Iso8601Format, CultureInfo.InvariantCulture,
-							DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
-					if (type == typeof(Guid) || ReflectionUtils.IsNullableType(type) && Nullable.GetUnderlyingType(type) == typeof(Guid))
+					if (type == typeof(DateTime) || (ReflectionUtils.IsNullableType(type) && Nullable.GetUnderlyingType(type) == typeof(DateTime)))
+						return DateTime.ParseExact(str, Iso8601Format, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+					if (type == typeof(DateTimeOffset) || (ReflectionUtils.IsNullableType(type) && Nullable.GetUnderlyingType(type) == typeof(DateTimeOffset)))
+						return DateTimeOffset.ParseExact(str, Iso8601Format, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+					if (type == typeof(Guid) || (ReflectionUtils.IsNullableType(type) && Nullable.GetUnderlyingType(type) == typeof(Guid)))
 						return new Guid(str);
-
 					if (type == typeof(Uri))
 					{
-						bool isValid = Uri.IsWellFormedUriString(str, UriKind.RelativeOrAbsolute);
+						bool isValid =  Uri.IsWellFormedUriString(str, UriKind.RelativeOrAbsolute);
 
 						Uri result;
 						if (isValid && Uri.TryCreate(str, UriKind.RelativeOrAbsolute, out result))
@@ -1418,15 +1339,13 @@ namespace Elasticsearch.Net
 
 			bool valueIsLong = value is long;
 			bool valueIsDouble = value is double;
-			if (valueIsLong && type == typeof(long) || valueIsDouble && type == typeof(double))
+			if ((valueIsLong && type == typeof(long)) || (valueIsDouble && type == typeof(double)))
 				return value;
-
-			if (valueIsDouble && type != typeof(double) || valueIsLong && type != typeof(long))
+			if ((valueIsDouble && type != typeof(double)) || (valueIsLong && type != typeof(long)))
 			{
-				obj = type == typeof(int) || type == typeof(long) || type == typeof(double) || type == typeof(float) || type == typeof(bool)
-					|| type == typeof(decimal) || type == typeof(byte) || type == typeof(short)
-						? Convert.ChangeType(value, type, CultureInfo.InvariantCulture)
-						: value;
+				obj = type == typeof(int) || type == typeof(long) || type == typeof(double) || type == typeof(float) || type == typeof(bool) || type == typeof(decimal) || type == typeof(byte) || type == typeof(short)
+					? Convert.ChangeType(value, type, CultureInfo.InvariantCulture)
+					: value;
 			}
 			else
 			{
@@ -1507,7 +1426,6 @@ namespace Elasticsearch.Net
 			}
 			if (ReflectionUtils.IsNullableType(type))
 				return ReflectionUtils.ToNullableType(obj, type);
-
 			return obj;
 		}
 
@@ -1516,7 +1434,7 @@ namespace Elasticsearch.Net
 			return Convert.ToDouble(p, CultureInfo.InvariantCulture);
 		}
 
-		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
+		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		protected virtual bool TrySerializeKnownTypes(object input, out object output)
 		{
 			bool returnValue = true;
@@ -1541,17 +1459,14 @@ namespace Elasticsearch.Net
 			}
 			return returnValue;
 		}
-
-		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
+		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		protected virtual bool TrySerializeUnknownTypes(object input, out object output)
 		{
 			if (input == null) throw new ArgumentNullException(nameof(input));
-
 			output = null;
 			Type type = input.GetType();
 			if (type.FullName == null)
 				return false;
-
 			IDictionary<string, object> obj = new JsonObject();
 			IDictionary<string, ReflectionUtils.GetDelegate> getters = GetCache[type];
 			foreach (KeyValuePair<string, ReflectionUtils.GetDelegate> getter in getters)
@@ -1576,8 +1491,7 @@ namespace Elasticsearch.Net
         public DataContractJsonSerializerStrategy()
         {
             GetCache = new ReflectionUtils.ThreadSafeDictionary<Type, IDictionary<string, ReflectionUtils.GetDelegate>>(GetterValueFactory);
-            SetCache =
- new ReflectionUtils.ThreadSafeDictionary<Type, IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>>(SetterValueFactory);
+            SetCache = new ReflectionUtils.ThreadSafeDictionary<Type, IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>>(SetterValueFactory);
         }
 
         internal override IDictionary<string, ReflectionUtils.GetDelegate> GetterValueFactory(Type type)
@@ -1610,23 +1524,20 @@ namespace Elasticsearch.Net
             if (!hasDataContract)
                 return base.SetterValueFactory(type);
             string jsonKey;
-            IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>> result =
- new Dictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>();
+            IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>> result = new Dictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>();
             foreach (PropertyInfo propertyInfo in ReflectionUtils.GetProperties(type))
             {
                 if (propertyInfo.CanWrite)
                 {
                     MethodInfo setMethod = ReflectionUtils.GetSetterMethodInfo(propertyInfo);
                     if (!setMethod.IsStatic && CanAdd(propertyInfo, out jsonKey))
-                        result[jsonKey] =
- new KeyValuePair<Type, ReflectionUtils.SetDelegate>(propertyInfo.PropertyType, ReflectionUtils.GetSetMethod(propertyInfo));
+                        result[jsonKey] = new KeyValuePair<Type, ReflectionUtils.SetDelegate>(propertyInfo.PropertyType, ReflectionUtils.GetSetMethod(propertyInfo));
                 }
             }
             foreach (FieldInfo fieldInfo in ReflectionUtils.GetFields(type))
             {
                 if (!fieldInfo.IsInitOnly && !fieldInfo.IsStatic && CanAdd(fieldInfo, out jsonKey))
-                    result[jsonKey] =
- new KeyValuePair<Type, ReflectionUtils.SetDelegate>(fieldInfo.FieldType, ReflectionUtils.GetSetMethod(fieldInfo));
+                    result[jsonKey] = new KeyValuePair<Type, ReflectionUtils.SetDelegate>(fieldInfo.FieldType, ReflectionUtils.GetSetMethod(fieldInfo));
             }
             // todo implement sorting for DATACONTRACT.
             return result;
@@ -1660,18 +1571,16 @@ namespace Elasticsearch.Net
 		private static readonly object[] EmptyObjects = new object[] { };
 
 		public delegate object GetDelegate(object source);
-
 		public delegate void SetDelegate(object source, object value);
-
 		public delegate object ConstructorDelegate(params object[] args);
 
 		public delegate TValue ThreadSafeDictionaryValueFactory<TKey, TValue>(TKey key);
 
 #if SIMPLE_JSON_TYPEINFO
-		public static TypeInfo GetTypeInfo(Type type)
-		{
-			return type.GetTypeInfo();
-		}
+        public static TypeInfo GetTypeInfo(Type type)
+        {
+            return type.GetTypeInfo();
+        }
 #else
 		public static Type GetTypeInfo(Type type)
 		{
@@ -1682,10 +1591,9 @@ namespace Elasticsearch.Net
 		public static Attribute GetAttribute(MemberInfo info, Type type)
 		{
 #if SIMPLE_JSON_TYPEINFO
-			if (info == null || type == null || !info.IsDefined(type))
-				return null;
-
-			return info.GetCustomAttribute(type);
+                if (info == null || type == null || !info.IsDefined(type))
+                    return null;
+                return info.GetCustomAttribute(type);
 #else
 			if (info == null || type == null || !Attribute.IsDefined(info, type))
 				return null;
@@ -1697,14 +1605,14 @@ namespace Elasticsearch.Net
 		{
 			IEnumerable<Type> interfaces;
 #if SIMPLE_JSON_TYPEINFO
-			interfaces = type.GetTypeInfo().ImplementedInterfaces;
+                interfaces = type.GetTypeInfo().ImplementedInterfaces;
 #else
 			interfaces = type.GetInterfaces();
 #endif
 			foreach (Type implementedInterface in interfaces)
 			{
 				if (IsTypeGeneric(implementedInterface) &&
-					implementedInterface.GetGenericTypeDefinition() == typeof(IList<>))
+				    implementedInterface.GetGenericTypeDefinition() == typeof (IList<>))
 				{
 					return GetGenericTypeArguments(implementedInterface)[0];
 				}
@@ -1714,11 +1622,11 @@ namespace Elasticsearch.Net
 
 		public static Attribute GetAttribute(Type objectType, Type attributeType)
 		{
-#if SIMPLE_JSON_TYPEINFO
-			if (objectType == null || attributeType == null || !objectType.GetTypeInfo().IsDefined(attributeType))
-				return null;
 
-			return objectType.GetTypeInfo().GetCustomAttribute(attributeType);
+#if SIMPLE_JSON_TYPEINFO
+                if (objectType == null || attributeType == null || !objectType.GetTypeInfo().IsDefined(attributeType))
+                    return null;
+                return objectType.GetTypeInfo().GetCustomAttribute(attributeType);
 #else
 			if (objectType == null || attributeType == null || !Attribute.IsDefined(objectType, attributeType))
 				return null;
@@ -1729,7 +1637,7 @@ namespace Elasticsearch.Net
 		public static Type[] GetGenericTypeArguments(Type type)
 		{
 #if SIMPLE_JSON_TYPEINFO
-			return type.GetTypeInfo().GenericTypeArguments;
+                return type.GetTypeInfo().GenericTypeArguments;
 #else
 			return type.GetGenericArguments();
 #endif
@@ -1747,12 +1655,14 @@ namespace Elasticsearch.Net
 
 			Type genericDefinition = type.GetGenericTypeDefinition();
 
-			return genericDefinition == typeof(IList<>)
-				|| genericDefinition == typeof(ICollection<>)
-				|| genericDefinition == typeof(IEnumerable<>)
+			return (genericDefinition == typeof(IList<>)
+			        || genericDefinition == typeof(ICollection<>)
+			        || genericDefinition == typeof(IEnumerable<>)
 #if SIMPLE_JSON_READONLY_COLLECTIONS
-				|| genericDefinition == typeof(IReadOnlyCollection<>)
-				|| genericDefinition == typeof(IReadOnlyList<>);
+                    || genericDefinition == typeof(IReadOnlyCollection<>)
+                    || genericDefinition == typeof(IReadOnlyList<>)
+#endif
+				);
 		}
 
 		public static bool IsAssignableFrom(Type type1, Type type2)
@@ -1763,8 +1673,8 @@ namespace Elasticsearch.Net
 		public static bool IsTypeDictionary(Type type)
 		{
 #if SIMPLE_JSON_TYPEINFO
-			if (typeof(IDictionary<,>).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
-				return true;
+                if (typeof(IDictionary<,>).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
+                    return true;
 #else
 			if (typeof(System.Collections.IDictionary).IsAssignableFrom(type))
 				return true;
@@ -1794,7 +1704,7 @@ namespace Elasticsearch.Net
 		public static IEnumerable<ConstructorInfo> GetConstructors(Type type)
 		{
 #if SIMPLE_JSON_TYPEINFO
-			return type.GetTypeInfo().DeclaredConstructors;
+                return type.GetTypeInfo().DeclaredConstructors;
 #else
 			return type.GetConstructors();
 #endif
@@ -1832,7 +1742,7 @@ namespace Elasticsearch.Net
 		public static IEnumerable<PropertyInfo> GetProperties(Type type)
 		{
 #if SIMPLE_JSON_TYPEINFO
-			return type.GetTypeInfo().DeclaredProperties;
+            return type.GetTypeInfo().DeclaredProperties;
 #else
 			return type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
 #endif
@@ -1841,7 +1751,7 @@ namespace Elasticsearch.Net
 		public static IEnumerable<FieldInfo> GetFields(Type type)
 		{
 #if SIMPLE_JSON_TYPEINFO
-			return type.GetTypeInfo().DeclaredFields;
+            return type.GetTypeInfo().DeclaredFields;
 #else
 			return type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
 #endif
@@ -1850,7 +1760,7 @@ namespace Elasticsearch.Net
 		public static MethodInfo GetGetterMethodInfo(PropertyInfo propertyInfo)
 		{
 #if SIMPLE_JSON_TYPEINFO
-			return propertyInfo.GetGetMethod(true);
+            return propertyInfo.GetGetMethod(true);
 #else
 			return propertyInfo.GetGetMethod(true);
 #endif
@@ -1859,7 +1769,7 @@ namespace Elasticsearch.Net
 		public static MethodInfo GetSetterMethodInfo(PropertyInfo propertyInfo)
 		{
 #if SIMPLE_JSON_TYPEINFO
-			return propertyInfo.GetSetMethod(true);
+            return propertyInfo.GetSetMethod(true);
 #else
 			return propertyInfo.GetSetMethod(true);
 #endif
@@ -1958,12 +1868,8 @@ namespace Elasticsearch.Net
 		{
 			MethodInfo getMethodInfo = GetGetterMethodInfo(propertyInfo);
 			ParameterExpression instance = Expression.Parameter(typeof(object), "instance");
-			UnaryExpression instanceCast = !IsValueType(propertyInfo.DeclaringType)
-				? Expression.TypeAs(instance, propertyInfo.DeclaringType)
-				: Expression.Convert(instance, propertyInfo.DeclaringType);
-			Func<object, object> compiled = Expression
-				.Lambda<Func<object, object>>(Expression.TypeAs(Expression.Call(instanceCast, getMethodInfo), typeof(object)), instance)
-				.Compile();
+			UnaryExpression instanceCast = (!IsValueType(propertyInfo.DeclaringType)) ? Expression.TypeAs(instance, propertyInfo.DeclaringType) : Expression.Convert(instance, propertyInfo.DeclaringType);
+			Func<object, object> compiled = Expression.Lambda<Func<object, object>>(Expression.TypeAs(Expression.Call(instanceCast, getMethodInfo), typeof(object)), instance).Compile();
 			return delegate(object source) { return compiled(source); };
 		}
 
@@ -2013,12 +1919,8 @@ namespace Elasticsearch.Net
 			MethodInfo setMethodInfo = GetSetterMethodInfo(propertyInfo);
 			ParameterExpression instance = Expression.Parameter(typeof(object), "instance");
 			ParameterExpression value = Expression.Parameter(typeof(object), "value");
-			UnaryExpression instanceCast = !IsValueType(propertyInfo.DeclaringType)
-				? Expression.TypeAs(instance, propertyInfo.DeclaringType)
-				: Expression.Convert(instance, propertyInfo.DeclaringType);
-			UnaryExpression valueCast = !IsValueType(propertyInfo.PropertyType)
-				? Expression.TypeAs(value, propertyInfo.PropertyType)
-				: Expression.Convert(value, propertyInfo.PropertyType);
+			UnaryExpression instanceCast = (!IsValueType(propertyInfo.DeclaringType)) ? Expression.TypeAs(instance, propertyInfo.DeclaringType) : Expression.Convert(instance, propertyInfo.DeclaringType);
+			UnaryExpression valueCast = (!IsValueType(propertyInfo.PropertyType)) ? Expression.TypeAs(value, propertyInfo.PropertyType) : Expression.Convert(value, propertyInfo.PropertyType);
 			MethodCallExpression callExpression = Expression.Call(instanceCast, setMethodInfo, valueCast);
 			var parameterExpressions = new ParameterExpression[] { instance, value };
 			Action<object, object> compiled = Expression.Lambda<Action<object, object>>(callExpression, parameterExpressions).Compile();
@@ -2030,16 +1932,14 @@ namespace Elasticsearch.Net
 			ParameterExpression instance = Expression.Parameter(typeof(object), "instance");
 			ParameterExpression value = Expression.Parameter(typeof(object), "value");
 			Action<object, object> compiled = Expression.Lambda<Action<object, object>>(
-					Assign(Expression.Field(Expression.Convert(instance, fieldInfo.DeclaringType), fieldInfo),
-						Expression.Convert(value, fieldInfo.FieldType)), instance, value)
-				.Compile();
+				Assign(Expression.Field(Expression.Convert(instance, fieldInfo.DeclaringType), fieldInfo), Expression.Convert(value, fieldInfo.FieldType)), instance, value).Compile();
 			return delegate(object source, object val) { compiled(source, val); };
 		}
 
 		public static BinaryExpression Assign(Expression left, Expression right)
 		{
 #if SIMPLE_JSON_TYPEINFO
-			return Expression.Assign(left, right);
+                return Expression.Assign(left, right);
 #else
 			MethodInfo assign = typeof(Assigner<>).MakeGenericType(left.Type).GetMethod("Assign");
 			BinaryExpression assignExpr = Expression.Add(left, right, assign);
@@ -2051,7 +1951,7 @@ namespace Elasticsearch.Net
 		{
 			public static T Assign(ref T left, T right)
 			{
-				return left = right;
+				return (left = right);
 			}
 		}
 
@@ -2068,20 +1968,47 @@ namespace Elasticsearch.Net
 				_valueFactory = valueFactory;
 			}
 
-			public int Count
+			private TValue Get(TKey key)
 			{
-				get { return _dictionary.Count; }
+				if (_dictionary == null)
+					return AddValue(key);
+				TValue value;
+				if (!_dictionary.TryGetValue(key, out value))
+					return AddValue(key);
+				return value;
 			}
 
-			public bool IsReadOnly
+			private TValue AddValue(TKey key)
 			{
-				get { throw new NotImplementedException(); }
+				TValue value = _valueFactory(key);
+				lock (_lock)
+				{
+					if (_dictionary == null)
+					{
+						_dictionary = new Dictionary<TKey, TValue>();
+						_dictionary[key] = value;
+					}
+					else
+					{
+						TValue val;
+						if (_dictionary.TryGetValue(key, out val))
+							return val;
+						Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>(_dictionary);
+						dict[key] = value;
+						_dictionary = dict;
+					}
+				}
+				return value;
 			}
 
-			public TValue this[TKey key]
+			public void Add(TKey key, TValue value)
 			{
-				get { return Get(key); }
-				set { throw new NotImplementedException(); }
+				throw new NotImplementedException();
+			}
+
+			public bool ContainsKey(TKey key)
+			{
+				return _dictionary.ContainsKey(key);
 			}
 
 			public ICollection<TKey> Keys
@@ -2089,9 +2016,26 @@ namespace Elasticsearch.Net
 				get { return _dictionary.Keys; }
 			}
 
+			public bool Remove(TKey key)
+			{
+				throw new NotImplementedException();
+			}
+
+			public bool TryGetValue(TKey key, out TValue value)
+			{
+				value = this[key];
+				return true;
+			}
+
 			public ICollection<TValue> Values
 			{
 				get { return _dictionary.Values; }
+			}
+
+			public TValue this[TKey key]
+			{
+				get { return Get(key); }
+				set { throw new NotImplementedException(); }
 			}
 
 			public void Add(KeyValuePair<TKey, TValue> item)
@@ -2114,35 +2058,19 @@ namespace Elasticsearch.Net
 				throw new NotImplementedException();
 			}
 
+			public int Count
+			{
+				get { return _dictionary.Count; }
+			}
+
+			public bool IsReadOnly
+			{
+				get { throw new NotImplementedException(); }
+			}
+
 			public bool Remove(KeyValuePair<TKey, TValue> item)
 			{
 				throw new NotImplementedException();
-			}
-
-			public void Add(TKey key, TValue value)
-			{
-				throw new NotImplementedException();
-			}
-
-			public bool ContainsKey(TKey key)
-			{
-				return _dictionary.ContainsKey(key);
-			}
-
-			public bool Remove(TKey key)
-			{
-				throw new NotImplementedException();
-			}
-
-			public bool TryGetValue(TKey key, out TValue value)
-			{
-				value = this[key];
-				return true;
-			}
-
-			IEnumerator IEnumerable.GetEnumerator()
-			{
-				return _dictionary.GetEnumerator();
 			}
 
 			public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
@@ -2150,45 +2078,16 @@ namespace Elasticsearch.Net
 				return _dictionary.GetEnumerator();
 			}
 
-			private TValue Get(TKey key)
+			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 			{
-				if (_dictionary == null)
-					return AddValue(key);
-
-				TValue value;
-				if (!_dictionary.TryGetValue(key, out value))
-					return AddValue(key);
-
-				return value;
-			}
-
-			private TValue AddValue(TKey key)
-			{
-				TValue value = _valueFactory(key);
-				lock (_lock)
-				{
-					if (_dictionary == null)
-					{
-						_dictionary = new Dictionary<TKey, TValue>();
-						_dictionary[key] = value;
-					}
-					else
-					{
-						TValue val;
-						if (_dictionary.TryGetValue(key, out val))
-							return val;
-
-						Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>(_dictionary);
-						dict[key] = value;
-						_dictionary = dict;
-					}
-				}
-				return value;
+				return _dictionary.GetEnumerator();
 			}
 		}
+
 	}
 
 // ReSharper restore LoopCanBeConvertedToQuery
 // ReSharper restore RedundantExplicitArrayCreation
 // ReSharper restore SuggestUseVarKeywordEvident
 }
+// @formatter:on — enable formatter after this line
