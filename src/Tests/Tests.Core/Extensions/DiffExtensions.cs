@@ -15,10 +15,7 @@ namespace Tests.Core.Extensions
 			if (jObj == null) return;
 
 			var props = jObj.Properties().ToList();
-			foreach (var prop in props)
-			{
-				prop.Remove();
-			}
+			foreach (var prop in props) prop.Remove();
 
 			foreach (var prop in props.OrderBy(p => p.Name))
 			{
@@ -31,8 +28,9 @@ namespace Tests.Core.Extensions
 		public static string CreateCharacterDifference(this string expected, string actual, string message = null)
 		{
 			var d = new Differ();
-			var result = d.CreateCharacterDiffs(expected.Trim('"'), actual.Trim('"'), ignoreWhitespace: false);
+			var result = d.CreateCharacterDiffs(expected.Trim('"'), actual.Trim('"'), false);
 			if (!result.DiffBlocks.Any()) return string.Empty;
+
 			var builder = new StringBuilder()
 				.AppendLine(message)
 				.AppendLine($"expect: \"{expected}\"")
@@ -44,7 +42,8 @@ namespace Tests.Core.Extensions
 			return builder.ToString();
 		}
 
-		public static string DiffNoApproximation(this string expected, string actual, string message = null) => CreateDiff(expected, actual, message, new Differ());
+		public static string DiffNoApproximation(this string expected, string actual, string message = null) =>
+			CreateDiff(expected, actual, message, new Differ());
 
 		public static string Diff(this string expected, string actual, string message = null)
 		{

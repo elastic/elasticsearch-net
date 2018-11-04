@@ -3,7 +3,10 @@ using static Elastic.Managed.Ephemeral.Plugins.ElasticsearchPlugin;
 
 namespace Tests.Core.ManagedElasticsearch.Clusters
 {
-	/// <summary> Use this cluster for api's that do writes. If they are however intrusive or long running consider IntrusiveOperationCluster instead. </summary>
+	/// <summary>
+	/// Use this cluster for api's that do writes. If they are however intrusive or long running consider IntrusiveOperationCluster
+	/// instead.
+	/// </summary>
 	public class WritableCluster : ClientTestClusterBase
 	{
 		public WritableCluster() : base(new ClientTestClusterConfiguration(
@@ -15,7 +18,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 
 		protected override void SeedCluster()
 		{
-			var seeder = new DefaultSeeder(this.Client);
+			var seeder = new DefaultSeeder(Client);
 			seeder.SeedNode();
 		}
 	}

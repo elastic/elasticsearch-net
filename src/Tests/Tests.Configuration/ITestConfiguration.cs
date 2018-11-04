@@ -2,20 +2,20 @@
 {
 	public interface ITestConfiguration
 	{
-		TestMode Mode { get; }
-		string ElasticsearchVersion { get; }
 		string ClusterFilter { get; }
-		string TestFilter { get; }
+		string ElasticsearchVersion { get; }
 		bool ForceReseed { get; }
-		bool TestAgainstAlreadyRunningElasticsearch { get; }
+		TestMode Mode { get; }
 
-		int Seed { get; }
+		RandomConfiguration Random { get; }
 
 		bool RunIntegrationTests { get; }
 		bool RunUnitTests { get; }
 
-		RandomConfiguration Random { get; }
+		int Seed { get; }
 		bool ShowElasticsearchOutputAfterStarted { get; }
+		bool TestAgainstAlreadyRunningElasticsearch { get; }
+		string TestFilter { get; }
 	}
 
 	public class RandomConfiguration
