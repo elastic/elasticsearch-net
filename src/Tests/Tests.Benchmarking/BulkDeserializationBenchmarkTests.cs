@@ -7,9 +7,9 @@ using Nest;
 using Newtonsoft.Json;
 using Tests.Benchmarking.Framework;
 using Tests.Core.Client;
-
 #if !DOTNETCORE
 using System.Buffers;
+
 #endif
 
 namespace Tests.Benchmarking
@@ -18,11 +18,11 @@ namespace Tests.Benchmarking
 	public class BulkDeserializationBenchmarkTests
 	{
 		private static readonly IElasticClient Client = TestClient.DefaultInMemoryClient;
-		private byte[] _tinyResponse;
-		private byte[] _mediumResponse;
-		private byte[] _largeResponse;
 		private byte[] _hugeResponse;
 		private JsonSerializer _jsonSerializer;
+		private byte[] _largeResponse;
+		private byte[] _mediumResponse;
+		private byte[] _tinyResponse;
 
 		[GlobalSetup]
 		public void Setup()
@@ -95,9 +95,7 @@ namespace Tests.Benchmarking
 		{
 			using (var reader = new JsonTextReader(new StreamReader(new MemoryStream(_hugeResponse))))
 			{
-				while (reader.Read())
-				{
-				}
+				while (reader.Read()) { }
 
 				return new BulkResponse();
 			}
@@ -122,34 +120,23 @@ namespace Tests.Benchmarking
 			}
 		};
 
-		private static object ReturnBulkResponse(int numberOfItems)
+		private static object ReturnBulkResponse(int numberOfItems) => new
 		{
-			return new
-			{
-				took = 276,
-				errors = false,
-				items = Enumerable.Range(0, numberOfItems)
-					.Select(i => BulkItemResponse())
-					.ToArray()
-			};
-		}
+			took = 276,
+			errors = false,
+			items = Enumerable.Range(0, numberOfItems)
+				.Select(i => BulkItemResponse())
+				.ToArray()
+		};
 
 #if !DOTNETCORE
 		public class JsonArrayPool : IArrayPool<char>
 		{
 			public static readonly JsonArrayPool Instance = new JsonArrayPool();
 
-			public char[] Rent(int minimumLength)
-			{
-				// get char array from System.Buffers shared pool
-				return ArrayPool<char>.Shared.Rent(minimumLength);
-			}
+			public char[] Rent(int minimumLength) => ArrayPool<char>.Shared.Rent(minimumLength);
 
-			public void Return(char[] array)
-			{
-				// return char array to System.Buffers shared pool
-				ArrayPool<char>.Shared.Return(array);
-			}
+			public void Return(char[] array) => ArrayPool<char>.Shared.Return(array);
 		}
 #endif
 	}

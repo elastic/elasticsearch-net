@@ -15,10 +15,7 @@ namespace Tests.Benchmarking
 			if (arguments.Count() >= 1 && arguments[0].Equals("non-interactive", StringComparison.OrdinalIgnoreCase))
 			{
 				Console.WriteLine("Running in Non-Interactive mode.");
-				foreach (var benchmarkType in GetBenchmarkTypes())
-				{
-					BenchmarkRunner.Run(benchmarkType);
-				}
+				foreach (var benchmarkType in GetBenchmarkTypes()) BenchmarkRunner.Run(benchmarkType);
 
 				return 0;
 			}
