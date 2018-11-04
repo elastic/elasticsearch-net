@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Elastic.Managed;
 using Nest;
 using Tests.Configuration;
 using Tests.Core.Client;
@@ -10,11 +9,8 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 {
 	public class DefaultSeeder
 	{
-		public const string TestsIndexTemplateName = "nest_tests";
-
 		public const string ProjectsAliasName = "projects-alias";
-
-		private IElasticClient Client { get; }
+		public const string TestsIndexTemplateName = "nest_tests";
 
 		private readonly IIndexSettings _defaultIndexSettings = new IndexSettings
 		{
@@ -22,89 +18,92 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 			NumberOfReplicas = 0
 		};
 
-		private IIndexSettings IndexSettings { get; }
-
 		public DefaultSeeder(IElasticClient client, IIndexSettings indexSettings)
 		{
-			this.Client = client;
-			this.IndexSettings = indexSettings ?? _defaultIndexSettings;
+			Client = client;
+			IndexSettings = indexSettings ?? _defaultIndexSettings;
 		}
 
 		public DefaultSeeder(IElasticClient client) : this(client, null) { }
 
+		private IElasticClient Client { get; }
+
+		private IIndexSettings IndexSettings { get; }
+
 		public void SeedNode()
 		{
-			if (!TestClient.Configuration.ForceReseed && this.AlreadySeeded()) return;
+			if (!TestClient.Configuration.ForceReseed && AlreadySeeded()) return;
+
 			// Ensure a clean slate by deleting everything regardless of whether they may already exist
-			this.DeleteIndicesAndTemplates();
+			DeleteIndicesAndTemplates();
 			// and now recreate everything
-			this.CreateIndicesAndSeedIndexData();
+			CreateIndicesAndSeedIndexData();
 		}
 
 		// Sometimes we run against an manually started elasticsearch when
 		// writing tests to cut down on cluster startup times.
 		// If raw_fields exists assume this cluster is already seeded.
-		private bool AlreadySeeded() => this.Client.IndexTemplateExists(TestsIndexTemplateName).Exists;
+		private bool AlreadySeeded() => Client.IndexTemplateExists(TestsIndexTemplateName).Exists;
 
 		public void DeleteIndicesAndTemplates()
 		{
-			if (this.Client.IndexTemplateExists(TestsIndexTemplateName).Exists)
-				this.Client.DeleteIndexTemplate(TestsIndexTemplateName);
-			if (this.Client.IndexExists(Infer.Indices<Project>()).Exists)
-				this.Client.DeleteIndex(typeof(Project));
-			if (this.Client.IndexExists(Infer.Indices<Developer>()).Exists)
-				this.Client.DeleteIndex(typeof(Developer));
-			if (this.Client.IndexExists(Infer.Indices<PercolatedQuery>()).Exists)
-				this.Client.DeleteIndex(typeof(PercolatedQuery));
+			if (Client.IndexTemplateExists(TestsIndexTemplateName).Exists)
+				Client.DeleteIndexTemplate(TestsIndexTemplateName);
+			if (Client.IndexExists(Infer.Indices<Project>()).Exists)
+				Client.DeleteIndex(typeof(Project));
+			if (Client.IndexExists(Infer.Indices<Developer>()).Exists)
+				Client.DeleteIndex(typeof(Developer));
+			if (Client.IndexExists(Infer.Indices<PercolatedQuery>()).Exists)
+				Client.DeleteIndex(typeof(PercolatedQuery));
 		}
 
 		public void CreateIndices()
 		{
-			this.CreateIndexTemplate();
-			this.CreateProjectIndex();
-			this.CreateDeveloperIndex();
-			this.CreatePercolatorIndex();
+			CreateIndexTemplate();
+			CreateProjectIndex();
+			CreateDeveloperIndex();
+			CreatePercolatorIndex();
 		}
 
 		private void SeedIndexData()
 		{
-			this.Client.IndexMany(Project.Projects);
-			this.Client.IndexMany(Developer.Developers);
-			this.Client.Index(new PercolatedQuery
+			Client.IndexMany(Project.Projects);
+			Client.IndexMany(Developer.Developers);
+			Client.Index(new PercolatedQuery
 			{
 				Id = "1",
 				Query = new MatchAllQuery()
 			});
-			this.Client.Bulk(b => b
+			Client.Bulk(b => b
 				.IndexMany(
 					CommitActivity.CommitActivities,
 					(d, c) => d.Document(c).Parent(c.ProjectName)
 				)
 			);
-			this.Client.Refresh(Nest.Indices.Index(typeof(Project), typeof(Developer), typeof(PercolatedQuery)));
+			Client.Refresh(Indices.Index(typeof(Project), typeof(Developer), typeof(PercolatedQuery)));
 		}
 
 		private void CreateIndicesAndSeedIndexData()
 		{
-			this.CreateIndices();
-			this.SeedIndexData();
+			CreateIndices();
+			SeedIndexData();
 		}
 
 		private void CreateIndexTemplate()
 		{
-			var putTemplateResult = this.Client.PutIndexTemplate(new PutIndexTemplateRequest(TestsIndexTemplateName)
+			var putTemplateResult = Client.PutIndexTemplate(new PutIndexTemplateRequest(TestsIndexTemplateName)
 			{
 #pragma warning disable 618
 				Template = "*",
 #pragma warning restore 618
-				Settings = this.IndexSettings
+				Settings = IndexSettings
 			});
 			putTemplateResult.ShouldBeValid();
 		}
 
 		private void CreateDeveloperIndex()
 		{
-			var createDeveloperIndex = this.Client.CreateIndex(Infer.Index<Developer>(), c => c
+			var createDeveloperIndex = Client.CreateIndex(Infer.Index<Developer>(), c => c
 				.Mappings(map => map
 					.Map<Developer>(m => m
 						.AutoMap()
@@ -117,7 +116,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		private void CreateProjectIndex()
 		{
-			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
+			var createProjectIndex = Client.CreateIndex(typeof(Project), c => c
 				.Settings(settings => settings
 					.Analysis(ProjectAnalysisSettings)
 				)
@@ -180,7 +179,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 		private void CreatePercolatorIndex()
 		{
-			var createPercolatedIndex = this.Client.CreateIndex(typeof(PercolatedQuery), c => c
+			var createPercolatedIndex = Client.CreateIndex(typeof(PercolatedQuery), c => c
 				.Settings(s => s
 					.AutoExpandReplicas("0-all")
 				)

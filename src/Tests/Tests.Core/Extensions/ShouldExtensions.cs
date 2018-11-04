@@ -1,7 +1,5 @@
 ﻿using FluentAssertions;
 using Nest;
-using Tests.Core.Client;
-using Tests.Domain;
 
 namespace Tests.Core.Extensions
 {

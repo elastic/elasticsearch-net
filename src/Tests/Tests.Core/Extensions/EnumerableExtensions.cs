@@ -9,19 +9,17 @@ namespace Tests.Core.Extensions
 		public static IEnumerable<IEnumerable<T>> Partition<T>(this IEnumerable<T> source, int size)
 		{
 			T[] array = null;
-			int count = 0;
+			var count = 0;
 
 			foreach (var item in source)
 			{
-				if (array == null)
-				{
-					array = new T[size];
-				}
+				if (array == null) array = new T[size];
 				array[count] = item;
 				count++;
 				if (count == size)
 				{
 					yield return new ReadOnlyCollection<T>(array);
+
 					array = null;
 					count = 0;
 				}

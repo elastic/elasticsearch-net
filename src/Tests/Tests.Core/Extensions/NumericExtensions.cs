@@ -25,8 +25,6 @@
 				default:
 					return num + "th";
 			}
-
 		}
 	}
-
 }

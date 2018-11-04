@@ -7,6 +7,6 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 	{
 		public ReadOnlyCluster() : base(ElasticsearchPlugin.MapperMurmur3) { }
 
-		protected override void SeedCluster() => new DefaultSeeder(this.Client).SeedNode();
+		protected override void SeedCluster() => new DefaultSeeder(Client).SeedNode();
 	}
 }

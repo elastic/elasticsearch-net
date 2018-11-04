@@ -41,6 +41,7 @@ namespace Tests.Configuration
 				var yamlConfigDir = Path.Combine(directoryInfo.FullName, "Tests.Configuration");
 				if (directoryInfo.Name == "Tests" && Directory.Exists(yamlConfigDir))
 					return new DirectoryInfo(yamlConfigDir);
+
 				directoryInfo = directoryInfo.Parent;
 			} while (directoryInfo != null);
 			return null;

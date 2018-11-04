@@ -68,7 +68,8 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 			}
 
 			if (saveFile) File.WriteAllLines(configFile, lines);
-			cluster.Writer.WriteDiagnostic($"{{{nameof(EnsureWatcherActionConfigurationInElasticsearchYaml)}}} {(saveFile ? "saved" : "skipped saving")} watcher config [{configFile}]");
+			cluster.Writer.WriteDiagnostic(
+				$"{{{nameof(EnsureWatcherActionConfigurationInElasticsearchYaml)}}} {(saveFile ? "saved" : "skipped saving")} watcher config [{configFile}]");
 		}
 	}
 }

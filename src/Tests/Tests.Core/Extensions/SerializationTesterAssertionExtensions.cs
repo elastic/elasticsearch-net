@@ -10,11 +10,14 @@ namespace Tests.Core.Extensions
 
 		public static T AssertRoundTrip<T>(this SerializationTester tester, T @object, string message = null, bool preserveNullInExpected = false)
 		{
-			var roundTripResult = tester.RoundTrips(@object, preserveNullInExpected: preserveNullInExpected);
+			var roundTripResult = tester.RoundTrips(@object, preserveNullInExpected);
 			roundTripResult.ShouldBeValid(message);
 			return roundTripResult.Result;
 		}
-		public static T AssertRoundTrip<T>(this SerializationTester tester, T @object, object expectedJson,  string message = null, bool preserveNullInExpected = false)
+
+		public static T AssertRoundTrip<T>(this SerializationTester tester, T @object, object expectedJson, string message = null,
+			bool preserveNullInExpected = false
+		)
 		{
 			var roundTripResult = tester.RoundTrips(@object, expectedJson, preserveNullInExpected);
 			roundTripResult.ShouldBeValid(message);
@@ -27,11 +30,13 @@ namespace Tests.Core.Extensions
 			roundTripResult.ShouldBeValid(message);
 			return roundTripResult.Result;
 		}
-		public static void AssertSerialize<T>(this SerializationTester tester, T @object, object expectedJson, string message = null, bool preserveNullInExpected = false)
+
+		public static void AssertSerialize<T>(this SerializationTester tester, T @object, object expectedJson, string message = null,
+			bool preserveNullInExpected = false
+		)
 		{
 			var roundTripResult = tester.Serializes(@object, expectedJson, preserveNullInExpected);
 			roundTripResult.ShouldBeValid(message);
 		}
-
 	}
 }
