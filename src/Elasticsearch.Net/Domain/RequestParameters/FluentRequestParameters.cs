@@ -12,22 +12,31 @@ namespace Elasticsearch.Net
 	public abstract class FluentRequestParameters<T> : IRequestParameters
 		where T : FluentRequestParameters<T>
 	{
-		private IRequestParameters Self => this;
+		protected FluentRequestParameters() => Self.QueryString = new Dictionary<string, object>();
 
 		public abstract HttpMethod DefaultHttpMethod { get; }
+		Func<IApiCallDetails, Stream, object> IRequestParameters.DeserializationOverride { get; set; }
 
 		IDictionary<string, object> IRequestParameters.QueryString { get; set; }
-		Func<IApiCallDetails, Stream, object> IRequestParameters.DeserializationOverride { get; set; }
 		IRequestConfiguration IRequestParameters.RequestConfiguration { get; set; }
+		private IRequestParameters Self => this;
 
-		protected FluentRequestParameters()
+		public TOut GetQueryStringValue<TOut>(string name)
 		{
-			Self.QueryString = new Dictionary<string, object>();
+			if (!ContainsKey(name))
+				return default(TOut);
+
+			var value = Self.QueryString[name];
+			if (value == null)
+				return default(TOut);
+
+			return (TOut)value;
 		}
 
 		void IRequestParameters.AddQueryStringValue(string name, object value)
 		{
 			if (value == null || name.IsNullOrEmpty()) return;
+
 			Self.QueryString[name] = value;
 		}
 
@@ -55,21 +64,6 @@ namespace Elasticsearch.Net
 			return (T)this;
 		}
 
-		public bool ContainsKey(string name)
-		{
-			return Self.QueryString != null && Self.QueryString.ContainsKey(name);
-		}
-
-		public TOut GetQueryStringValue<TOut>(string name)
-		{
-			if (!this.ContainsKey(name))
-				return default(TOut);
-			var value = Self.QueryString[name];
-			if (value == null)
-				return default(TOut);
-			return (TOut)value;
-		}
-
+		public bool ContainsKey(string name) => Self.QueryString != null && Self.QueryString.ContainsKey(name);
 	}
-
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,18 +12,14 @@ namespace Elasticsearch.Net
 	{
 		private readonly UrlFormatProvider _formatter;
 
-		public IConnectionConfigurationValues Settings => this.Transport.Settings;
-		public IElasticsearchSerializer Serializer => this.Transport.Settings.Serializer;
-
-		protected ITransport<IConnectionConfigurationValues> Transport { get; set; }
-
 		/// <summary>Instantiate a new low level elasticsearch client to http://localhost:9200</summary>
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ElasticLowLevelClient() : this(new Transport<IConnectionConfigurationValues>(new ConnectionConfiguration())) { }
 
 		/// <summary>Instantiate a new low level elasticsearch client using the specified settings</summary>
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		public ElasticLowLevelClient(IConnectionConfigurationValues settings) : this(new Transport<IConnectionConfigurationValues>(settings ?? new ConnectionConfiguration())) { }
+		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+		public ElasticLowLevelClient(IConnectionConfigurationValues settings) : this(
+			new Transport<IConnectionConfigurationValues>(settings ?? new ConnectionConfiguration())) { }
 
 		/// <summary>
 		/// Instantiate a new low level elasticsearch client explicitly specifying a custom transport setup
@@ -33,13 +30,33 @@ namespace Elasticsearch.Net
 			transport.Settings.ThrowIfNull(nameof(transport.Settings));
 			transport.Settings.Serializer.ThrowIfNull(nameof(transport.Settings.Serializer));
 
-			this.Transport = transport;
-			this._formatter = new UrlFormatProvider(this.Transport.Settings);
+			Transport = transport;
+			_formatter = new UrlFormatProvider(Transport.Settings);
 		}
 
-		string Url(FormattableString formattable) => formattable.ToString(_formatter);
+		public IElasticsearchSerializer Serializer => Transport.Settings.Serializer;
 
-		private TRequestParams _params<TRequestParams>(Func<TRequestParams, TRequestParams> requestParameters, bool allow404 = false, string contentType = null, string accept = null)
+		public IConnectionConfigurationValues Settings => Transport.Settings;
+
+		protected ITransport<IConnectionConfigurationValues> Transport { get; set; }
+
+		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null,
+			IRequestParameters requestParameters = null
+		)
+			where T : class =>
+			Transport.Request<T>(method, path, data, requestParameters);
+
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken,
+			PostData<object> data = null, IRequestParameters requestParameters = null
+		)
+			where T : class =>
+			Transport.RequestAsync<T>(method, path, cancellationToken, data, requestParameters);
+
+		private string Url(FormattableString formattable) => formattable.ToString(_formatter);
+
+		private TRequestParams _params<TRequestParams>(Func<TRequestParams, TRequestParams> requestParameters, bool allow404 = false,
+			string contentType = null, string accept = null
+		)
 			where TRequestParams : class, IRequestParameters, new()
 		{
 			var requestParams = requestParameters?.Invoke(new TRequestParams());
@@ -55,13 +72,5 @@ namespace Elasticsearch.Net
 				requestParams.RequestConfiguration.Accept = accept;
 			return requestParams;
 		}
-
-		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
-			where T : class =>
-			this.Transport.Request<T>(method, path, data, requestParameters);
-
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData<object> data = null, IRequestParameters requestParameters = null)
-			where T : class =>
-			this.Transport.RequestAsync<T>(method, path, cancellationToken, data, requestParameters);
 	}
 }

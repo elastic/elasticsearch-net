@@ -1,26 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
-using System;
+using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
 		where TConnectionSettings : IConnectionConfigurationValues
 	{
-		public TConnectionSettings Settings { get; }
-
-		private IDateTimeProvider DateTimeProvider { get; }
-		private IMemoryStreamFactory MemoryStreamFactory { get; }
-		private IRequestPipelineFactory PipelineProvider { get; }
-
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
 		public Transport(TConnectionSettings configurationValues)
-			: this(configurationValues, null, null, null)
-		{ }
+			: this(configurationValues, null, null, null) { }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
@@ -34,28 +27,36 @@ namespace Elasticsearch.Net
 			IRequestPipelineFactory pipelineProvider,
 			IDateTimeProvider dateTimeProvider,
 			IMemoryStreamFactory memoryStreamFactory
-			)
+		)
 		{
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));
 			configurationValues.Connection.ThrowIfNull(nameof(configurationValues.Connection));
 			configurationValues.Serializer.ThrowIfNull(nameof(configurationValues.Serializer));
 
-			this.Settings = configurationValues;
-			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
-			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net.DateTimeProvider.Default;
-			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
+			Settings = configurationValues;
+			PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
+			DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
+			MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 		}
 
-		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public TConnectionSettings Settings { get; }
+
+		private IDateTimeProvider DateTimeProvider { get; }
+		private IMemoryStreamFactory MemoryStreamFactory { get; }
+		private IRequestPipelineFactory PipelineProvider { get; }
+
+		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null,
+			IRequestParameters requestParameters = null
+		)
 			where TReturn : class
 		{
-			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
+			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
 			{
-				pipeline.FirstPoolUsage(this.Settings.BootstrapLock);
+				pipeline.FirstPoolUsage(Settings.BootstrapLock);
 
-				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
-				this.Settings.OnRequestDataCreated?.Invoke(requestData);
+				var requestData = new RequestData(method, path, data, Settings, requestParameters, MemoryStreamFactory);
+				Settings.OnRequestDataCreated?.Invoke(requestData);
 				ElasticsearchResponse<TReturn> response = null;
 
 				var seenExceptions = new List<PipelineException>();
@@ -94,6 +95,7 @@ namespace Elasticsearch.Net
 						};
 					}
 					if (response == null || !response.SuccessOrKnownError) continue;
+
 					pipeline.MarkAlive(node);
 					break;
 				}
@@ -103,21 +105,23 @@ namespace Elasticsearch.Net
 				if (response == null || !response.Success)
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
 
-				this.Settings.OnRequestCompleted?.Invoke(response);
+				Settings.OnRequestCompleted?.Invoke(response);
 
 				return response;
 			}
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, CancellationToken cancellationToken, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, CancellationToken cancellationToken,
+			PostData<object> data = null, IRequestParameters requestParameters = null
+		)
 			where TReturn : class
 		{
-			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
+			using (var pipeline = PipelineProvider.Create(Settings, DateTimeProvider, MemoryStreamFactory, requestParameters))
 			{
-				await pipeline.FirstPoolUsageAsync(this.Settings.BootstrapLock, cancellationToken).ConfigureAwait(false);
+				await pipeline.FirstPoolUsageAsync(Settings.BootstrapLock, cancellationToken).ConfigureAwait(false);
 
-				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
-				this.Settings.OnRequestDataCreated?.Invoke(requestData);
+				var requestData = new RequestData(method, path, data, Settings, requestParameters, MemoryStreamFactory);
+				Settings.OnRequestDataCreated?.Invoke(requestData);
 				ElasticsearchResponse<TReturn> response = null;
 
 				var seenExceptions = new List<PipelineException>();
@@ -161,6 +165,7 @@ namespace Elasticsearch.Net
 						break;
 					}
 					if (response == null || !response.SuccessOrKnownError) continue;
+
 					pipeline.MarkAlive(node);
 					break;
 				}
@@ -170,7 +175,7 @@ namespace Elasticsearch.Net
 				if (response == null || !response.Success)
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
 
-				this.Settings.OnRequestCompleted?.Invoke(response);
+				Settings.OnRequestCompleted?.Invoke(response);
 
 				return response;
 			}
@@ -201,6 +206,5 @@ namespace Elasticsearch.Net
 				throw;
 			}
 		}
-
 	}
 }

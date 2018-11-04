@@ -7,24 +7,10 @@ namespace Elasticsearch.Net
 {
 	public class ElasticsearchClientException : Exception
 	{
-		public PipelineFailure? FailureReason { get;  }
-
-		public RequestData Request { get; internal set; }
-
-		public IApiCallDetails Response { get; internal set; }
-
-		public List<Audit> AuditTrail { get; internal set; }
-
-		public ElasticsearchClientException(string message) : base(message)
-		{
-			this.FailureReason = PipelineFailure.Unexpected;
-		}
+		public ElasticsearchClientException(string message) : base(message) => FailureReason = PipelineFailure.Unexpected;
 
 		public ElasticsearchClientException(PipelineFailure failure, string message, Exception innerException)
-			: base(message, innerException)
-		{
-			FailureReason = failure;
-		}
+			: base(message, innerException) => FailureReason = failure;
 
 		public ElasticsearchClientException(PipelineFailure failure, string message, IApiCallDetails apiCall)
 			: this(message)
@@ -34,25 +20,27 @@ namespace Elasticsearch.Net
 			AuditTrail = apiCall?.AuditTrail;
 		}
 
+		public List<Audit> AuditTrail { get; internal set; }
+
 		public string DebugInformation
 		{
 			get
 			{
 				var sb = new StringBuilder();
 				var failureReason = FailureReason.GetStringValue();
-				if (this.FailureReason == PipelineFailure.Unexpected && (this.AuditTrail.HasAny()))
-				{
-					failureReason = "Unrecoverable/Unexpected " + this.AuditTrail.Last().Event.GetStringValue();
-				}
-				var path = Request.Uri != null ? Request.Uri.ToString() : Request.Path + " on an empty node, likely a node predicate on ConnectionSettings not matching ANY nodes";
+				if (FailureReason == PipelineFailure.Unexpected && AuditTrail.HasAny())
+					failureReason = "Unrecoverable/Unexpected " + AuditTrail.Last().Event.GetStringValue();
+				var path = Request.Uri != null
+					? Request.Uri.ToString()
+					: Request.Path + " on an empty node, likely a node predicate on ConnectionSettings not matching ANY nodes";
 
 				sb.AppendLine($"# FailureReason: {failureReason} while attempting {Request.Method.GetStringValue()} on {path}");
-				if (this.Response != null)
-					ResponseStatics.DebugInformationBuilder(this.Response, sb);
+				if (Response != null)
+					ResponseStatics.DebugInformationBuilder(Response, sb);
 				else
 				{
-					ResponseStatics.DebugAuditTrail(this.AuditTrail, sb);
-					ResponseStatics.DebugAuditTrailExceptions(this.AuditTrail, sb);
+					ResponseStatics.DebugAuditTrail(AuditTrail, sb);
+					ResponseStatics.DebugAuditTrailExceptions(AuditTrail, sb);
 				}
 				if (InnerException != null)
 				{
@@ -60,11 +48,16 @@ namespace Elasticsearch.Net
 					sb.AppendLine(InnerException.ToString());
 				}
 				sb.AppendLine($"# Exception:");
-				sb.AppendLine(this.ToString());
+				sb.AppendLine(ToString());
 
 				return sb.ToString();
 			}
 		}
 
+		public PipelineFailure? FailureReason { get; }
+
+		public RequestData Request { get; internal set; }
+
+		public IApiCallDetails Response { get; internal set; }
 	}
 }

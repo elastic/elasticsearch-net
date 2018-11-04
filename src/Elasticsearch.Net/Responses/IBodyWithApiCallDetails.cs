@@ -2,12 +2,12 @@ namespace Elasticsearch.Net
 {
 	/// <summary>
 	/// Implementing this interface on your response objects will cause the low level client to
-	/// automatically set <see cref="IApiCallDetails"/> diagnostic information on the object.
+	/// automatically set <see cref="IApiCallDetails" /> diagnostic information on the object.
 	/// </summary>
 	public interface IBodyWithApiCallDetails
 	{
 		/// <summary>
-		/// Sets and returns the <see cref="IApiCallDetails"/> diagnostic information
+		/// Sets and returns the <see cref="IApiCallDetails" /> diagnostic information
 		/// </summary>
 		IApiCallDetails ApiCall { get; set; }
 	}

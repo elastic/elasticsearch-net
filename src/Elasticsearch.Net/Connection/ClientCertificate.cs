@@ -29,7 +29,6 @@ THE SOFTWARE.
 */
 
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -62,6 +61,7 @@ namespace Elasticsearch.Net
 
 				twobytes = binr.ReadUInt16();
 				if (twobytes != 0x0102) return null; //version number
+
 				var bt = binr.ReadByte();
 				if (bt != 0x00) return null;
 
@@ -109,7 +109,7 @@ namespace Elasticsearch.Net
 				case 0x82:
 					var highbyte = br.ReadByte();
 					var lowbyte = br.ReadByte();
-					byte[] modint = {lowbyte, highbyte, 0x00, 0x00};
+					byte[] modint = { lowbyte, highbyte, 0x00, 0x00 };
 					count = BitConverter.ToInt32(modint, 0);
 					break;
 				default:

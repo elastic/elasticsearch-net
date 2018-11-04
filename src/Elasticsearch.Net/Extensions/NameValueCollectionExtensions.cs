@@ -16,13 +16,14 @@ namespace Elasticsearch.Net
 				dest.Add(key, source[key]);
 			}
 		}
+
 		internal static string ToQueryString(this NameValueCollection self, string prefix = "?")
 		{
 			if (self == null)
 				return null;
 
 			if (self.AllKeys.Length == 0) return string.Empty;
-			
+
 			return prefix + string.Join("&", self.AllKeys.Select(key => $"{Encode(key)}={Encode(self[key])}"));
 		}
 
@@ -33,12 +34,9 @@ namespace Elasticsearch.Net
 		{
 			if (dict == null || dict.Count < 0)
 				return null;
-			
+
 			var nv = new NameValueCollection();
-			foreach (var kv in dict.Where(kv => !kv.Key.IsNullOrEmpty()))
-			{
-				nv.Add(kv.Key, string.Format(provider, "{0}", kv.Value));
-			}
+			foreach (var kv in dict.Where(kv => !kv.Key.IsNullOrEmpty())) nv.Add(kv.Key, string.Format(provider, "{0}", kv.Value));
 			return nv;
 		}
 	}
