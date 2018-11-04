@@ -10,13 +10,23 @@ namespace Tests.Domain
 {
 	public class CommitActivity
 	{
-		public static IList<CommitActivity> CommitActivities { get; } =
-			Generator.Clone().Generate(1000);
-
 		public Developer Committer { get; set; }
 		public double ConfidenceFactor { get; set; }
 		public TimeSpan? Duration { get; set; }
 
+		public string Id { get; set; }
+		public string Message { get; set; }
+		public string ProjectName { get; set; }
+		public long SizeInBytes { get; set; }
+
+		[JsonConverter(typeof(StringTimeSpanConverter))]
+		public TimeSpan? StringDuration
+		{
+			get => Duration;
+			set => Duration = value;
+		}
+
+		// @formatter:off — enable formatter after this line
 		public static Faker<CommitActivity> Generator { get; } =
 			new Faker<CommitActivity>()
 				.UseSeed(TestConfiguration.Instance.Seed)
@@ -37,17 +47,8 @@ namespace Tests.Domain
 					TimeSpan.FromDays(5),
 				}));
 
-		public string Id { get; set; }
-		public string Message { get; set; }
-		public string ProjectName { get; set; }
-		public long SizeInBytes { get; set; }
-
-		[JsonConverter(typeof(StringTimeSpanConverter))]
-		public TimeSpan? StringDuration
-		{
-			get => Duration;
-			set => Duration = value;
-		}
+		public static IList<CommitActivity> CommitActivities { get; } = Generator.Clone().Generate(1000);
+		// @formatter:on — enable formatter after this line
 	}
 
 	internal class StringTimeSpanConverter : JsonConverter
