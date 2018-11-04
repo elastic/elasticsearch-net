@@ -9,37 +9,37 @@ namespace Tests.Profiling.Framework
 	{
 		private object _instance;
 
-		public string Name => this.Type.Name;
-
-		public Type Type { get; set; }
-
-		public ProfiledMethod SetupMethod { get; set; }
+		public ProfiledClass(Type type, ProfiledMethod setupMethod, IEnumerable<ProfiledMethod> methods)
+		{
+			Type = type;
+			Methods = methods;
+			SetupMethod = setupMethod;
+		}
 
 		public IEnumerable<ProfiledMethod> Methods { get; set; }
 
-		public ProfiledClass(Type type, ProfiledMethod setupMethod, IEnumerable<ProfiledMethod> methods)
-		{
-			this.Type = type;
-			this.Methods = methods;
-			this.SetupMethod = setupMethod;
-		}
+		public string Name => Type.Name;
+
+		public ProfiledMethod SetupMethod { get; set; }
+
+		public Type Type { get; set; }
 
 		public object CreateInstance(ProfilingCluster cluster)
 		{
 			if (_instance == null)
 			{
-				var constructors = this.Type.GetTypeInfo().GetConstructors();
+				var constructors = Type.GetTypeInfo().GetConstructors();
 
 				var clusterConstructor = constructors.FirstOrDefault(c =>
 				{
 					var parameters = c.GetParameters();
 					return parameters.Length == 1 &&
-						   typeof(ProfilingCluster).IsAssignableFrom(parameters[0].ParameterType);
+						typeof(ProfilingCluster).IsAssignableFrom(parameters[0].ParameterType);
 				});
 
 				_instance = clusterConstructor != null
-					? Activator.CreateInstance(this.Type, cluster)
-					: Activator.CreateInstance(this.Type);
+					? Activator.CreateInstance(Type, cluster)
+					: Activator.CreateInstance(Type);
 			}
 
 			return _instance;

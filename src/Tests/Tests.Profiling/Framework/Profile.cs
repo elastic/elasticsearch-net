@@ -15,37 +15,33 @@ namespace Tests.Profiling.Framework
 			if (!Directory.Exists(resultsDirectory))
 				Directory.CreateDirectory(resultsDirectory);
 
-			this.ListFile = Path.Combine(resultsDirectory, "snapshot_list.xml");
-			using (File.Create(this.ListFile)) { }
+			ListFile = Path.Combine(resultsDirectory, "snapshot_list.xml");
+			using (File.Create(ListFile)) { }
 
-			if (this.ProfileProcesses.Any())
+			if (ProfileProcesses.Any())
 			{
-				foreach (var profileProcess in this.ProfileProcesses)
-				{
-					profileProcess.Kill();
-				}
+				foreach (var profileProcess in ProfileProcesses) profileProcess.Kill();
 
 				Thread.Sleep(1000);
 			}
 		}
 
-		protected string ListFile { get; }
-
 		public abstract bool IsActive { get; }
 
+		protected string ListFile { get; }
+
 		private IEnumerable<Process> ProfileProcesses =>
-			Process.GetProcessesByName("ExternalLauncherProfiler.x64").Concat(
-			Process.GetProcessesByName("ExternalLauncherProfiler.x86")).ToArray();
+			Process.GetProcessesByName("ExternalLauncherProfiler.x64")
+				.Concat(
+					Process.GetProcessesByName("ExternalLauncherProfiler.x86"))
+				.ToArray();
 
 		private static TimeSpan WaitTime => TimeSpan.FromSeconds(60);
 
 		public virtual void Dispose()
 		{
 			// ensure running profiler process has chance to finish before starting next one
-			while (SelfAttach.State == SelfApiState.Active || this.IsActive || this.ProfileProcesses.Any())
-			{
-				Thread.Sleep(250);
-			}
+			while (SelfAttach.State == SelfApiState.Active || IsActive || ProfileProcesses.Any()) Thread.Sleep(250);
 		}
 
 		protected void WaitForProfilerToAttachToProcess()
@@ -59,13 +55,9 @@ namespace Tests.Profiling.Framework
 				Thread.Sleep(timeout);
 
 				if (waitTime <= WaitTime)
-				{
 					waitTime = waitTime.Add(timeout);
-				}
 				else
-				{
 					throw new Exception($"Could not attach profiler to process after {WaitTime}");
-				}
 			}
 		}
 	}

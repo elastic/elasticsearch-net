@@ -17,31 +17,22 @@ namespace Tests.Profiling.Framework.Memory
 				SaveDir = resultsDirectory,
 				RedistDir = sdkPath,
 				ProfilingType = ProfilingType.Memory,
-				ListFile = this.ListFile
+				ListFile = ListFile
 			};
 
-			while (SelfAttach.State != SelfApiState.None)
-			{
-				Thread.Sleep(250);
-			}
+			while (SelfAttach.State != SelfApiState.None) Thread.Sleep(250);
 
 			SelfAttach.Attach(saveSnapshotProfilingConfig);
-			this.WaitForProfilerToAttachToProcess();
+			WaitForProfilerToAttachToProcess();
 
-			if (MemoryProfiler.IsActive && MemoryProfiler.CanControlAllocations)
-			{
-				MemoryProfiler.EnableAllocations();
-			}
+			if (MemoryProfiler.IsActive && MemoryProfiler.CanControlAllocations) MemoryProfiler.EnableAllocations();
 		}
 
 		public override bool IsActive => MemoryProfiler.IsActive;
 
 		public override void Dispose()
 		{
-			if (MemoryProfiler.IsActive)
-			{
-				MemoryProfiler.Dump();
-			}
+			if (MemoryProfiler.IsActive) MemoryProfiler.Dump();
 
 			if (MemoryProfiler.CanDetach)
 				MemoryProfiler.Detach();

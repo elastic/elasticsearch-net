@@ -7,10 +7,6 @@ namespace Tests.Domain
 {
 	public class Metric
 	{
-		[Date(Name="@timestamp")]
-		[JsonConverter(typeof(TimestampJsonConverter))]
-		public DateTime Timestamp { get; set; }
-
 		public long Accept { get; set; }
 
 		public long Deny { get; set; }
@@ -20,6 +16,10 @@ namespace Tests.Domain
 		public float Response { get; set; }
 
 		public string Service { get; set; }
+
+		[Date(Name = "@timestamp")]
+		[JsonConverter(typeof(TimestampJsonConverter))]
+		public DateTime Timestamp { get; set; }
 
 		public long Total { get; set; }
 	}
