@@ -4,25 +4,24 @@ using System.Linq;
 
 namespace Elasticsearch.Net
 {
-	class UrlFormatProvider : IFormatProvider, ICustomFormatter
+	internal class UrlFormatProvider : IFormatProvider, ICustomFormatter
 	{
 		private readonly IConnectionConfigurationValues _settings;
 
-		public UrlFormatProvider(IConnectionConfigurationValues settings)
-		{
-			_settings = settings;
-		}
-
-		public object GetFormat(Type formatType) => formatType == typeof(ICustomFormatter) ? this : null;
+		public UrlFormatProvider(IConnectionConfigurationValues settings) => _settings = settings;
 
 		public string Format(string format, object arg, IFormatProvider formatProvider)
 		{
 			if (arg == null)
 				throw new ArgumentNullException();
+
 			if (format == "r")
 				return arg.ToString();
-			return Uri.EscapeDataString(this.GetStringValue(arg));
+
+			return Uri.EscapeDataString(GetStringValue(arg));
 		}
+
+		public object GetFormat(Type formatType) => formatType == typeof(ICustomFormatter) ? this : null;
 
 		public string GetStringValue(object valueType)
 		{
@@ -44,12 +43,13 @@ namespace Elasticsearch.Net
 
 		public string AttemptTheRightToString(object value)
 		{
-			var explicitImplementation = this.QueryStringValueType(value as IUrlParameter);
+			var explicitImplementation = QueryStringValueType(value as IUrlParameter);
 			if (explicitImplementation != null) return explicitImplementation;
+
 			return value.ToString();
 		}
 
 		public string QueryStringValueType(IUrlParameter value) =>
-			value?.GetString(this._settings);
+			value?.GetString(_settings);
 	}
 }

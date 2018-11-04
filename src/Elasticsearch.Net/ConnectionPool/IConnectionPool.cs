@@ -5,11 +5,7 @@ namespace Elasticsearch.Net
 {
 	public interface IConnectionPool : IDisposable
 	{
-		/// <summary>
-		/// Returns a readonly constant view of all the nodes in the cluster, this might involve creating copies of the nodes e.g
-		/// if you are using the sniffing connectionpool. If you do not need an isolated copy of the nodes please read <see cref="CreateView"/> to completion
-		/// </summary>
-		IReadOnlyCollection<Node> Nodes { get; }
+		DateTime LastUpdate { get; }
 
 		/// <summary>
 		/// Returns the default maximum retries for the connection pool implementation.
@@ -19,23 +15,28 @@ namespace Elasticsearch.Net
 		int MaxRetries { get; }
 
 		/// <summary>
-		/// Signals that this implemenation can accept new nodes
+		/// Returns a readonly constant view of all the nodes in the cluster, this might involve creating copies of the nodes e.g
+		/// if you are using the sniffing connectionpool. If you do not need an isolated copy of the nodes please read <see cref="CreateView" /> to
+		/// completion
 		/// </summary>
-		bool SupportsReseeding { get; }
-
-		bool SupportsPinging { get; }
-
-		DateTime LastUpdate { get; }
-
-		/// <summary>
-		/// Whether or not SSL is being using
-		/// </summary>
-		bool UsingSsl { get; }
+		IReadOnlyCollection<Node> Nodes { get; }
 
 		/// <summary>
 		/// Bookkeeps wheter this connectionpool has seen a sniff on startup. its up to to the callee to set this in a threadsafe fashion
 		/// </summary>
 		bool SniffedOnStartup { get; set; }
+
+		bool SupportsPinging { get; }
+
+		/// <summary>
+		/// Signals that this implemenation can accept new nodes
+		/// </summary>
+		bool SupportsReseeding { get; }
+
+		/// <summary>
+		/// Whether or not SSL is being using
+		/// </summary>
+		bool UsingSsl { get; }
 
 		/// <summary>
 		/// Creates a view with changing starting positions that wraps over on each call
@@ -48,6 +49,5 @@ namespace Elasticsearch.Net
 		/// Update the node list, it's the IConnectionPool's responsibility to do so in a threadsafe fashion
 		/// </summary>
 		void Reseed(IEnumerable<Node> nodes);
-
 	}
 }

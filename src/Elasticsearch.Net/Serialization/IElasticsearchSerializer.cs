@@ -18,7 +18,9 @@ namespace Elasticsearch.Net
 
 	public static class ElasticsearchSerializerExtensions
 	{
-		public static byte[] SerializeToBytes(this IElasticsearchSerializer serializer, object data, SerializationFormatting formatting = SerializationFormatting.Indented)
+		public static byte[] SerializeToBytes(this IElasticsearchSerializer serializer, object data,
+			SerializationFormatting formatting = SerializationFormatting.Indented
+		)
 		{
 			using (var ms = new MemoryStream())
 			{
@@ -26,7 +28,10 @@ namespace Elasticsearch.Net
 				return ms.ToArray();
 			}
 		}
-		public static string SerializeToString(this IElasticsearchSerializer serializer, object data, SerializationFormatting formatting = SerializationFormatting.Indented) =>
+
+		public static string SerializeToString(this IElasticsearchSerializer serializer, object data,
+			SerializationFormatting formatting = SerializationFormatting.Indented
+		) =>
 			serializer.SerializeToBytes(data, formatting).Utf8String();
 	}
 }

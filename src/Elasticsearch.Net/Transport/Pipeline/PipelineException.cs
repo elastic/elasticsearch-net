@@ -4,37 +4,29 @@ namespace Elasticsearch.Net
 {
 	public class PipelineException : Exception
 	{
-		public PipelineFailure FailureReason { get; }
+		//|| FailureReason == FailureReason.Unexpected;
 
-		public IApiCallDetails Response { get; internal set; }
+		public PipelineException(PipelineFailure failure)
+			: base(GetMessage(failure)) => FailureReason = failure;
+
+		public PipelineException(string message)
+			: base(message) => FailureReason = PipelineFailure.BadResponse;
+
+		public PipelineException(PipelineFailure failure, Exception innerException)
+			: base(GetMessage(failure), innerException) => FailureReason = failure;
+
+		public PipelineFailure FailureReason { get; }
 
 		public bool Recoverable =>
 			FailureReason == PipelineFailure.BadRequest
 			|| FailureReason == PipelineFailure.BadResponse
 			|| FailureReason == PipelineFailure.PingFailure;
-			//|| FailureReason == FailureReason.Unexpected;
 
-		public PipelineException(PipelineFailure failure)
-			: base(GetMessage(failure))
-		{
-			this.FailureReason = failure;
-		}
-
-		public PipelineException(string message)
-			: base(message)
-		{
-			this.FailureReason = PipelineFailure.BadResponse;
-		}
-
-		public PipelineException(PipelineFailure failure, Exception innerException)
-			: base(GetMessage(failure), innerException)
-		{
-			this.FailureReason = failure;
-		}
+		public IApiCallDetails Response { get; internal set; }
 
 		private static string GetMessage(PipelineFailure failure)
 		{
-			switch(failure)
+			switch (failure)
 			{
 				case PipelineFailure.BadRequest:
 					return "An error occurred trying to write the request data to the specified node.";

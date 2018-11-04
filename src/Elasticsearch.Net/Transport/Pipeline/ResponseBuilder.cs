@@ -12,42 +12,42 @@ namespace Elasticsearch.Net
 
 	{
 		private const int BufferSize = 81920;
-		private static readonly VoidResponse Void = new VoidResponse();
 		private static readonly IDisposable EmptyDisposable = new MemoryStream();
-
-		private readonly RequestData _requestData;
+		private static readonly VoidResponse Void = new VoidResponse();
 		private readonly CancellationToken _cancellationToken;
 		private readonly bool _disableDirectStreaming;
 
-		public Exception Exception { get; set; }
-		public int? StatusCode { get; set; }
-		public Stream Stream { get; set; }
-		public string ResponseMimeType { get; set; } = RequestData.MimeType;
-
-		public IEnumerable<string> DeprecationWarnings { get; set; }
+		private readonly RequestData _requestData;
 
 		public ResponseBuilder(RequestData requestData, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			_requestData = requestData;
 			_cancellationToken = cancellationToken;
 			_disableDirectStreaming =
-				this._requestData.PostData?.DisableDirectStreaming ?? this._requestData.ConnectionSettings.DisableDirectStreaming;
+				_requestData.PostData?.DisableDirectStreaming ?? _requestData.ConnectionSettings.DisableDirectStreaming;
 		}
+
+		public IEnumerable<string> DeprecationWarnings { get; set; }
+
+		public Exception Exception { get; set; }
+		public string ResponseMimeType { get; set; } = RequestData.MimeType;
+		public int? StatusCode { get; set; }
+		public Stream Stream { get; set; }
 
 		public ElasticsearchResponse<TReturn> ToResponse()
 		{
-			var response = Initialize(this.StatusCode, this.Exception);
-			if (this.Stream != null)
-				SetBody(response, this.Stream);
+			var response = Initialize(StatusCode, Exception);
+			if (Stream != null)
+				SetBody(response, Stream);
 			Finalize(response);
 			return response;
 		}
 
 		public async Task<ElasticsearchResponse<TReturn>> ToResponseAsync()
 		{
-			var response = Initialize(this.StatusCode, this.Exception);
-			if (this.Stream != null)
-				await SetBodyAsync(response, this.Stream).ConfigureAwait(false);
+			var response = Initialize(StatusCode, Exception);
+			if (Stream != null)
+				await SetBodyAsync(response, Stream).ConfigureAwait(false);
 			Finalize(response);
 			return response;
 		}
@@ -55,14 +55,14 @@ namespace Elasticsearch.Net
 		private ElasticsearchResponse<TReturn> Initialize(int? statusCode, Exception exception)
 		{
 			var response = statusCode.HasValue
-				? new ElasticsearchResponse<TReturn>(statusCode.Value, this._requestData.AllowedStatusCodes)
+				? new ElasticsearchResponse<TReturn>(statusCode.Value, _requestData.AllowedStatusCodes)
 				: new ElasticsearchResponse<TReturn>(exception);
-			response.RequestBodyInBytes = this._requestData.PostData?.WrittenBytes;
-			response.Uri = this._requestData.Uri;
-			response.HttpMethod = this._requestData.Method;
+			response.RequestBodyInBytes = _requestData.PostData?.WrittenBytes;
+			response.Uri = _requestData.Uri;
+			response.HttpMethod = _requestData.Method;
 			response.OriginalException = exception;
-			response.DeprecationWarnings = this.DeprecationWarnings ?? Enumerable.Empty<string>();
-			response.ResponseMimeType = this.ResponseMimeType;
+			response.DeprecationWarnings = DeprecationWarnings ?? Enumerable.Empty<string>();
+			response.ResponseMimeType = ResponseMimeType;
 			return response;
 		}
 
@@ -71,9 +71,9 @@ namespace Elasticsearch.Net
 			byte[] bytes = null;
 			if (NeedsToEagerReadStream(response))
 			{
-				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
+				var inMemoryStream = _requestData.MemoryStreamFactory.Create();
 				stream.CopyTo(inMemoryStream, BufferSize);
-				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
+				bytes = SwapStreams(ref stream, ref inMemoryStream);
 			}
 
 			var needsDispose = typeof(TReturn) != typeof(Stream);
@@ -83,8 +83,8 @@ namespace Elasticsearch.Net
 				{
 					if (!SetSpecialTypes(stream, response, bytes))
 					{
-						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
-						else response.Body = this._requestData.ConnectionSettings.Serializer.Deserialize<TReturn>(stream);
+						if (_requestData.CustomConverter != null) response.Body = _requestData.CustomConverter(response, stream) as TReturn;
+						else response.Body = _requestData.ConnectionSettings.Serializer.Deserialize<TReturn>(stream);
 					}
 					if (response.AllowAllStatusCodes)
 						ReadServerError(response, new MemoryStream(bytes), bytes);
@@ -99,9 +99,9 @@ namespace Elasticsearch.Net
 			byte[] bytes = null;
 			if (NeedsToEagerReadStream(response))
 			{
-				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
-				await stream.CopyToAsync(inMemoryStream, BufferSize, this._cancellationToken).ConfigureAwait(false);
-				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
+				var inMemoryStream = _requestData.MemoryStreamFactory.Create();
+				await stream.CopyToAsync(inMemoryStream, BufferSize, _cancellationToken).ConfigureAwait(false);
+				bytes = SwapStreams(ref stream, ref inMemoryStream);
 			}
 
 			var needsDispose = typeof(TReturn) != typeof(Stream);
@@ -111,8 +111,10 @@ namespace Elasticsearch.Net
 				{
 					if (!SetSpecialTypes(stream, response, bytes))
 					{
-						if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
-						else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._cancellationToken).ConfigureAwait(false);
+						if (_requestData.CustomConverter != null) response.Body = _requestData.CustomConverter(response, stream) as TReturn;
+						else
+							response.Body = await _requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, _cancellationToken)
+								.ConfigureAwait(false);
 					}
 					if (response.AllowAllStatusCodes)
 						await ReadServerErrorAsync(response, new MemoryStream(bytes), bytes).ConfigureAwait(false);
@@ -133,7 +135,7 @@ namespace Elasticsearch.Net
 
 		private async Task ReadServerErrorAsync(ElasticsearchResponse<TReturn> response, Stream stream, byte[] bytes)
 		{
-			response.ServerError = await ServerError.TryCreateAsync(stream, this._cancellationToken).ConfigureAwait(false);
+			response.ServerError = await ServerError.TryCreateAsync(stream, _cancellationToken).ConfigureAwait(false);
 			if (_disableDirectStreaming)
 				response.ResponseBodyInBytes = bytes;
 		}
@@ -141,10 +143,7 @@ namespace Elasticsearch.Net
 		private void Finalize(ElasticsearchResponse<TReturn> response)
 		{
 			var passAlongConnectionStatus = response.Body as IBodyWithApiCallDetails;
-			if (passAlongConnectionStatus != null)
-			{
-				passAlongConnectionStatus.ApiCall = response;
-			}
+			if (passAlongConnectionStatus != null) passAlongConnectionStatus.ApiCall = response;
 		}
 
 		private bool NeedsToEagerReadStream(ElasticsearchResponse<TReturn> response) =>
@@ -167,13 +166,13 @@ namespace Elasticsearch.Net
 				cs.ResponseBodyInBytes = bytes;
 			var returnType = typeof(TReturn);
 			if (returnType == typeof(string))
-				this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
+				SetStringResult(cs as ElasticsearchResponse<string>, bytes);
 			else if (returnType == typeof(byte[]))
-				this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
+				SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
 			else if (returnType == typeof(VoidResponse))
-				this.SetVoidResult(cs as ElasticsearchResponse<VoidResponse>, responseStream);
+				SetVoidResult(cs as ElasticsearchResponse<VoidResponse>, responseStream);
 			else if (returnType == typeof(Stream))
-				this.SetStreamResult(cs as ElasticsearchResponse<Stream>, responseStream);
+				SetStreamResult(cs as ElasticsearchResponse<Stream>, responseStream);
 			else
 				setSpecial = false;
 			return setSpecial;

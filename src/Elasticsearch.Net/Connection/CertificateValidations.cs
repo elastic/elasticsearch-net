@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
@@ -28,12 +26,14 @@ namespace Elasticsearch.Net
 		/// generate the nodes certificates with. This callback expects the CA to be part of the chain as intermediate CA.
 		/// </summary>
 		/// <param name="caCertificate">The ca certificate used to generate the nodes certificate </param>
-		/// <param name="trustRoot">Custom CA are never trusted by default unless they are in the machines trusted store, set this to true
+		/// <param name="trustRoot">
+		/// Custom CA are never trusted by default unless they are in the machines trusted store, set this to true
 		/// if you've added the CA to the machines trusted store. In which case UntrustedRoot should not be accepted.
 		/// </param>
 		/// <param name="revocationMode">By default we do not check revocation, it is however recommended to check this (either offline or online).</param>
 		public static Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> AuthorityPartOfChain(
-			X509Certificate caCertificate, bool trustRoot = true, X509RevocationMode revocationMode = X509RevocationMode.NoCheck) =>
+			X509Certificate caCertificate, bool trustRoot = true, X509RevocationMode revocationMode = X509RevocationMode.NoCheck
+		) =>
 			(sender, cert, chain, errors) =>
 				errors == SslPolicyErrors.None
 				|| ValidIntermediateCa(caCertificate, cert, chain, trustRoot, revocationMode);
@@ -45,30 +45,33 @@ namespace Elasticsearch.Net
 		/// the CA in the certificate chain.
 		/// </summary>
 		/// <param name="caCertificate">The ca certificate used to generate the nodes certificate </param>
-		/// <param name="trustRoot">Custom CA are never trusted by default unless they are in the machines trusted store, set this to true
+		/// <param name="trustRoot">
+		/// Custom CA are never trusted by default unless they are in the machines trusted store, set this to true
 		/// if you've added the CA to the machines trusted store. In which case UntrustedRoot should not be accepted.
 		/// </param>
 		/// <param name="revocationMode">By default we do not check revocation, it is however recommended to check this (either offline or online).</param>
 		public static Func<object, X509Certificate, X509Chain, SslPolicyErrors, bool> AuthorityIsRoot(
-			X509Certificate caCertificate, bool trustRoot = true, X509RevocationMode revocationMode = X509RevocationMode.NoCheck) =>
+			X509Certificate caCertificate, bool trustRoot = true, X509RevocationMode revocationMode = X509RevocationMode.NoCheck
+		) =>
 			(sender, cert, chain, errors) =>
 				errors == SslPolicyErrors.None
 				|| ValidRootCa(caCertificate, cert, chain, trustRoot, revocationMode);
 
 		private static X509Certificate2 to2(X509Certificate certificate)
 		{
-			#if DOTNETCORE
+#if DOTNETCORE
 				return new X509Certificate2(certificate.Export(X509ContentType.Cert));
 			#else
-				return new X509Certificate2(certificate);
-			#endif
+			return new X509Certificate2(certificate);
+#endif
 		}
 
 		private static bool ValidRootCa(X509Certificate caCertificate, X509Certificate certificate, X509Chain chain, bool trustRoot,
-			X509RevocationMode revocationMode)
+			X509RevocationMode revocationMode
+		)
 		{
 			var ca = to2(caCertificate);
-			var privateChain = new X509Chain {ChainPolicy = {RevocationMode = revocationMode}};
+			var privateChain = new X509Chain { ChainPolicy = { RevocationMode = revocationMode } };
 			privateChain.ChainPolicy.ExtraStore.Add(ca);
 			privateChain.Build(to2(certificate));
 
@@ -78,20 +81,22 @@ namespace Elasticsearch.Net
 				//custom CA's that are not in the machine trusted store will always have this status
 				//by setting trustRoot = true (default) we skip this error
 				if (chainStatus.Status == X509ChainStatusFlags.UntrustedRoot && trustRoot) continue;
+
 				//trustRoot is false so we expected our CA to be in the machines trusted store
 				if (chainStatus.Status == X509ChainStatusFlags.UntrustedRoot) return false;
+
 				//otherwise if the chain has any error of any sort return false
 				if (chainStatus.Status != X509ChainStatusFlags.NoError) return false;
 			}
 			return true;
-
 		}
 
 		private static bool ValidIntermediateCa(X509Certificate caCertificate, X509Certificate certificate, X509Chain chain, bool trustRoot,
-			X509RevocationMode revocationMode)
+			X509RevocationMode revocationMode
+		)
 		{
 			var ca = to2(caCertificate);
-			var privateChain = new X509Chain {ChainPolicy = {RevocationMode = revocationMode}};
+			var privateChain = new X509Chain { ChainPolicy = { RevocationMode = revocationMode } };
 			privateChain.ChainPolicy.ExtraStore.Add(ca);
 			privateChain.Build(to2(certificate));
 
@@ -104,8 +109,10 @@ namespace Elasticsearch.Net
 				//custom CA's that are not in the machine trusted store will always have this status
 				//by setting trustRoot = true (default) we skip this error
 				if (chainStatus.Status == X509ChainStatusFlags.UntrustedRoot && trustRoot) continue;
+
 				//trustRoot is false so we expected our CA to be in the machines trusted store
 				if (chainStatus.Status == X509ChainStatusFlags.UntrustedRoot) return false;
+
 				//otherwise if the chain has any error of any sort return false
 				if (chainStatus.Status != X509ChainStatusFlags.NoError) return false;
 			}
@@ -121,6 +128,7 @@ namespace Elasticsearch.Net
 
 				//mis aligned certificate chain, return false so we do not accept this certificate
 				if (c != cPrivate) return false;
+
 				i++;
 			}
 			return found;

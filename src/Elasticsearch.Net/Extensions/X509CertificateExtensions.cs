@@ -1,12 +1,10 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace Elasticsearch.Net
+﻿namespace Elasticsearch.Net
 {
 	internal static class X509CertificateExtensions
 	{
 #if DOTNETCORE
 
-		// https://referencesource.microsoft.com/#mscorlib/system/security/cryptography/x509certificates/x509certificate.cs,318
+// https://referencesource.microsoft.com/#mscorlib/system/security/cryptography/x509certificates/x509certificate.cs,318
 		internal static string GetCertHashString(this X509Certificate certificate)
 		{
 			var bytes = certificate.GetCertHash();
@@ -38,6 +36,5 @@ namespace Elasticsearch.Net
 		}
 
 #endif
-
 	}
 }
